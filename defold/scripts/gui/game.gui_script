@@ -1,0 +1,192 @@
+-- VARS
+local timer_max = 11
+local current_time = 11
+local countdown_timer = 0
+local grid_lenght = 9
+local grid = {}
+local touch = hash("touch")
+local is_game_started = false
+
+-- NODES
+local waiting_txt_node
+local turn_txt_node
+local timer_node
+local waiting_box_node
+local retry_btn_node
+local result_box_node
+local result_txt_node
+local replay_btn_node
+
+-- URLS
+local game_controller = msg.url("game", hash("/script"), "game_controller")
+local proxy_controller = msg.url("container", hash("/proxy"), "proxy_controller")
+
+function init(self)
+	waiting_txt_node = gui.get_node("waiting_txt")
+	waiting_box_node = gui.get_node("waiting_box")
+	timer_node = gui.get_node("timer_txt")
+	turn_txt_node = gui.get_node("turn_txt")
+	retry_btn_node = gui.get_node("retry_btn")
+	result_box_node = gui.get_node("result_box")
+	result_txt_node = gui.get_node("result_txt")
+	replay_btn_node = gui.get_node("replay_btn")
+
+	gui.set_enabled(retry_btn_node, false)
+	gui.set_enabled(timer_node, false)
+	gui.set_enabled(result_box_node, false)
+	gui.set_enabled(replay_btn_node, false)
+
+	gui.animate(waiting_box_node, "color.w", 0.7, gui.EASING_OUTSINE, 0.5)
+	gui.animate(waiting_txt_node, "color.w", 1, gui.EASING_OUTSINE, 0.3, 0.2)
+	gui.animate(waiting_txt_node, "scale", vmath.vector3(1, 1, 1), gui.EASING_OUTSINE, 0.3, 0.2)
+
+	local grid_node
+	local text_node
+	local tile = {}
+
+	-- clear grid
+	grid = {}
+
+	-- 3x3 Grid
+	local i = 1
+	for y = 0, 2 do
+		for x = 0, 2 do
+			grid_node = gui.get_node("box-" .. i)
+			text_node = gui.get_node("text-" .. i)
+			gui.set_enabled(text_node, false)
+			tile = {
+				tile_node = grid_node,
+				text_node = text_node,
+				tile_state = false,
+				x = x,
+				y = y
+			}
+			table.insert(grid, i, tile)
+			i = i + 1
+		end
+	end
+end
+
+local function change_turn(turn)
+	current_time = timer_max
+	if turn == 1 then
+		msg.post(".", "acquire_input_focus")
+		gui.set_text(turn_txt_node, "Your move!")
+	else
+		msg.post(".", "release_input_focus")
+		gui.set_text(turn_txt_node, "Opponent's turn...")
+	end
+end
+
+local function start_game()
+	gui.set_enabled(waiting_box_node, false)
+	gui.set_enabled(waiting_txt_node, false)
+	gui.set_text(turn_txt_node, "")
+	is_game_started = true
+	gui.set_enabled(timer_node, true)
+end
+
+local function restart_game()
+	msg.post(proxy_controller, "reload_game")
+end
+
+local function connection_failed()
+	msg.post(".", "acquire_input_focus")
+	gui.set_text(waiting_txt_node, "Couldn't connect.")
+	gui.set_enabled(retry_btn_node, true)
+end
+
+function update(self, dt)
+	if is_game_started == false then
+		return
+	end
+	current_time = current_time - 1 * dt
+	countdown_timer = math.floor(current_time)
+	gui.set_text(timer_node, countdown_timer)
+
+	if countdown_timer == 0 then
+		change_turn(nil)
+	end
+end
+
+local function set_tile(id, value)
+	local tile = grid[id]
+
+	local text;
+	if value == 0 then
+		text = " "
+		tile["tile_state"] = false
+	elseif value == 1 then
+		text = "x"
+		tile["tile_state"] = true
+	elseif value == 2 then
+		text = "o"
+		tile["tile_state"] = true
+	end
+	
+	gui.set_enabled(tile["text_node"], true)
+	gui.set_text(tile["text_node"], text)
+end
+
+local function change_tile(change)
+	for i, v in ipairs(grid) do
+		if v["x"] == change["x"] and v["y"] == change["y"] then
+			set_tile(i, change["value"])
+		end
+	end
+end
+
+local function show_result(won, draw)
+	is_game_started = false
+
+	local grid_node = gui.get_node("grid")
+	local time_node = gui.get_node("time")
+	gui.set_enabled(grid_node, false)
+	gui.set_enabled(turn_txt_node, false)
+	gui.set_enabled(timer_node, false)
+	gui.set_enabled(time_node, false)
+
+	local result = ""
+	if draw then
+		result = "Draw Game!"
+	else
+		result = won and "You win!" or "You Lose!"
+	end
+	msg.post(".", "acquire_input_focus")
+	gui.set_text(result_txt_node, result)
+	gui.set_enabled(result_box_node, true)
+	gui.set_enabled(replay_btn_node, true)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("start_game") then
+		start_game()
+	elseif message_id == hash("connection_fail") then
+		connection_failed()
+	elseif message_id == hash("ChangeTurn") then
+		change_turn(message.turn)
+	elseif message_id == hash("ChangeTile") then
+		change_tile(message.change)
+	elseif message_id == hash("Winners") then
+		show_result(message.won, false)
+	elseif message_id == hash("Draw") then
+		show_result(nil, true)
+	end
+end
+
+function on_input(self, action_id, action)
+	for i, v in ipairs(grid) do
+		local current_node = gui.pick_node(v["tile_node"], action.x, action.y)
+		if action_id == touch and current_node and action.pressed and v["tile_state"] == false then
+			msg.post(game_controller, "SetTile", {x = v["x"], y = v["y"]})
+		end
+	end
+
+	if action_id == touch and gui.is_enabled(replay_btn_node) and gui.pick_node(replay_btn_node, action.x, action.y) then
+		restart_game()
+	end
+
+	if action_id == touch and gui.is_enabled(retry_btn_node) and gui.pick_node(retry_btn_node, action.x, action.y) then
+		restart_game()
+	end
+end

@@ -1,0 +1,48 @@
+-- NODES
+local start_btn_node
+local game_logo_node
+local coly_logo_node
+
+-- VARS
+local touch = hash("touch")
+local proxy_controller = msg.url("container", hash("/proxy"), "proxy_controller")
+
+local function on_fade_out()
+	msg.post(proxy_controller, "load_game")
+end
+
+local function enable_gui()
+	msg.post(".", "acquire_input_focus")
+end
+
+local function disable_gui()
+	msg.post(".", "release_input_focus")
+	
+	gui.animate(start_btn_node, "color.w", 0, gui.EASING_OUTSINE, 0.2, 0.1)
+	gui.animate(start_btn_node, "scale", vmath.vector3(1.2, 1.2, 1), gui.EASING_OUTSINE, 0.2)	
+	gui.animate(game_logo_node, "color.w", 0, gui.EASING_OUTSINE, 0.3, 0.1)
+	gui.animate(coly_logo_node, "color.w", 0, gui.EASING_OUTSINE, 0.3, 0.1, on_fade_out)
+end
+
+function init(self)
+	start_btn_node = gui.get_node("start_btn")
+	game_logo_node  = gui.get_node("game_logo")
+	coly_logo_node = gui.get_node("coly_logo")
+
+	gui.animate(game_logo_node, "color.w", 1, gui.EASING_OUTSINE, 0.2)
+	gui.animate(coly_logo_node, "color.w", 1, gui.EASING_OUTSINE, 0.2)
+	gui.animate(start_btn_node, "color.w", 1, gui.EASING_OUTSINE, 0.2, 0.5)
+	gui.animate(start_btn_node, "scale", vmath.vector3(1, 1, 1), gui.EASING_OUTSINE, 0.2, 0.5, enable_gui)	
+end
+
+function final(self)
+	msg.post(".", "release_input_focus")
+end
+
+function on_input(self, action_id, action)
+	if action_id == touch and gui.pick_node(start_btn_node, action.x, action.y) and action.pressed then
+		gui.set_enabled(start_btn_node, false)
+		disable_gui()
+	end
+end
+

@@ -1,0 +1,8 @@
+node_modules
+bundle.js
+.DS_Store
+package-lock.json
+
+/defold/.internal
+/defold/build
+/defold/.externalToolBuilders

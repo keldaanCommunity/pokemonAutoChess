@@ -1,0 +1,18 @@
+images {
+  image: "/assets/gfx/background.jpg"
+}
+images {
+  image: "/assets/gfx/board.png"
+}
+images {
+  image: "/assets/gfx/clock-icon.png"
+}
+images {
+  image: "/assets/gfx/colyseus.png"
+}
+images {
+  image: "/assets/gfx/logo.png"
+}
+margin: 0
+extrude_borders: 1
+inner_padding: 0
