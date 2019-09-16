@@ -1,18 +1,28 @@
 {
-  "name": "tictactoe-colyseus",
+  "name": "my-app",
   "version": "1.0.0",
-  "description": "HTML5 Tic-Tac-Toe Game powered by Colyseus",
+  "description": "npm init template for bootstraping an empty Colyseus project",
+  "main": "index.js",
   "scripts": {
-    "install": "npm install --prefix ./server && npm install --prefix ./frontend && npm run build --prefix ./frontend",
-    "start": "npm start --prefix ./server"
+    "start": "node index.js",
+    "loadtest": "colyseus-loadtest loadtest/example.js --room my_room --numClients 2",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Endel Dreyer",
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/colyseus/create-colyseus/issues"
+  },
+  "homepage": "https://github.com/colyseus/create-colyseus#readme",
+  "devDependencies": {
+    "@colyseus/loadtest": "^0.11.0"
+  },
   "dependencies": {
-    "css-loader": "^0.28.11",
-    "json-loader": "^0.5.7",
-    "style-loader": "^0.20.3",
-    "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14",
-    "webpack-dev-server": "^3.1.3"
+    "@colyseus/monitor": "^0.11.0",
+    "@colyseus/social": "^0.10.2",
+    "colyseus": "^0.11.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1"
   }
 }
