@@ -5,7 +5,7 @@ const colyseus = require('colyseus');
 const monitor = require("@colyseus/monitor").monitor;
 //const socialRoutes = require("@colyseus/social/express").default;
 
-const MyRoom = require('./MyRoom').MyRoom;
+const MyRoom = require('./MyRoom');
 
 const port = process.env.PORT || 2567;
 const app = express()
