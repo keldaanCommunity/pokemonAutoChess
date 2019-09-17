@@ -2,7 +2,9 @@ const colyseus = require('colyseus');
 
 class MyRoom extends colyseus.Room {
     // When room is initialized
-    onCreate (options) { }
+    onCreate (options) {
+      
+    }
 
     // Authorize client based on provided options before WebSocket handshake is complete
     onAuth (client, options, request) {
