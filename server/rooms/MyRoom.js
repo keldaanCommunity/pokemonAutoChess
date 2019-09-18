@@ -1,9 +1,46 @@
 const colyseus = require('colyseus');
+const schema = require('@colyseus/schema');
+const Schema = schema.Schema;
+const Simulation = require('../simulation/Simulation');
+
+class World extends Schema {
+  constructor()
+  {
+    super();
+    this.time = 0;
+  }
+}
+schema.defineTypes(World, {
+  time: "number"
+});
+
+class MyState extends Schema {
+    constructor () {
+        super();
+
+        this.world = new World();
+        this.simulation = new Simulation();
+    }
+}
+schema.defineTypes(MyState, {
+  world: World
+});
 
 class MyRoom extends colyseus.Room {
+
     // When room is initialized
-    onCreate (options) {
+    onCreate () {
+      this.setState(new MyState());
+      this.setSimulationInterval((deltaTime) => this.update(deltaTime));
+    }
+    
+    update (deltaTime) {
+      this.state.world.time += deltaTime;
+      console.log(this.state.world.time);
+      this.state.simulation.scheduler.update();
       
+        // implement your physics or world updates here!
+        // this is a good place to update the room state
     }
 
     // Authorize client based on provided options before WebSocket handshake is complete

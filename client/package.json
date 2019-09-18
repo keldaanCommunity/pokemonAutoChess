@@ -19,6 +19,7 @@
   "dependencies": {
     "colyseus.js": "^0.11.0",
     "lodash": "^4.17.15",
+    "phaser": "^3.19.0",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.8",
     "webpack-dev-server": "^3.8.1"
