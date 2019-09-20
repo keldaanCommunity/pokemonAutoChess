@@ -6,6 +6,8 @@ class Simulation{
     {
         this.scheduler = new jssim.Scheduler();
         this.space = new jssim.Space2D();
+        this.space.width = 1000;
+        this.space.height = 1000;
         this.initialize();
     }
 

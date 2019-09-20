@@ -1,13 +1,14 @@
-import _ from 'lodash';
 import * as Colyseus from "colyseus.js";
+import Gameview from './GameView';
 
 var client = new Colyseus.Client('ws://localhost:2567');
 
 client.joinOrCreate("my_room", {/* options */}).then(room => {
     console.log("joined successfully", room);
-
+    client.gameview = new Gameview();
+    
     room.onStateChange((state) => {
-      document.getElementById("timer").textContent = state.world.time;
+      //console.log(state.locations);
     });
 
     room.onMessage((message) => {
@@ -24,3 +25,6 @@ client.joinOrCreate("my_room", {/* options */}).then(room => {
   }).catch(e => {
     console.error("join error", e);
   });
+
+
+

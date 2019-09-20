@@ -24,7 +24,7 @@ class Boid extends jssim.SimEvent{
 
 
     update(deltaTime) {
-        console.log(this.space);
+        //console.log(this.space);
         
         var boids = this.space.findAllAgents();
         var pos = this.space.getLocation(this.id);
@@ -113,7 +113,7 @@ class Boid extends jssim.SimEvent{
     if (pos.y > val) pos.y = this.border;
 
 
-    console.log("boid [ " + this.id + "] is at (" + pos.x + ", " + pos.y + ") at time " + this.time);
+    //console.log("boid [ " + this.id + "] is at (" + pos.x + ", " + pos.y + ") at time " + this.time);
     };
 }
 
