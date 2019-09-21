@@ -5,10 +5,13 @@ var client = new Colyseus.Client('ws://localhost:2567');
 
 client.joinOrCreate("my_room", {/* options */}).then(room => {
     console.log("joined successfully", room);
-    client.gameview = new Gameview();
+    client.gameView = new Gameview();
     
     room.onStateChange((state) => {
-      //console.log(state.locations);
+      if(client.gameView)
+      {
+        client.gameView.game.scene.getScene("gameScene").updateEntitiesLocation(state.locations);
+      }
     });
 
     room.onMessage((message) => {
