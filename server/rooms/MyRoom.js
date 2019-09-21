@@ -29,7 +29,7 @@ class MyRoom extends colyseus.Room {
     onCreate () {
       this.setState(new MyState());
       this.setSimulationInterval((deltaTime) => this.update(deltaTime));
-      for(var i = 0; i < 10; ++i) 
+      for(var i = 0; i < 20; ++i) 
       {
         this.state.locations.push(new Vector2D(0,0));
       }
@@ -42,7 +42,7 @@ class MyRoom extends colyseus.Room {
         this.state.locations[i].x = this.state.simulation.space.locations[i].x;
         this.state.locations[i].y = this.state.simulation.space.locations[i].y;
       }
-        // implement your physics or world updates here!
+        // implement your physics or world updates here
         // this is a good place to update the room state
     }
 

@@ -6,16 +6,14 @@ class Simulation{
     {
         this.scheduler = new jssim.Scheduler();
         this.space = new jssim.Space2D();
-        this.space.width = 1000;
-        this.space.height = 1000;
         this.initialize();
     }
 
     initialize()
     {
-        for(var i = 0; i < 10; ++i) 
+        for(var i = 0; i < 20; ++i) 
         {
-            let is_predator = i > 7;
+            let is_predator = i > 15;
             let boid = new Boid(i, 0, 0, this.space, is_predator);
             this.scheduler.scheduleRepeatingIn(boid, 1);
         }

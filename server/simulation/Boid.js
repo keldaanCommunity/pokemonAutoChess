@@ -10,12 +10,12 @@ class Boid extends jssim.SimEvent{
         this.space = space;
         this.space.updateAgent(this, initial_x, initial_y);
         this.sight = 75;
-        this.speed = 12;
-        this.separation_space = 30;
+        this.speed = 5;
+        this.separation_space = 50;
         this.velocity = new jssim.Vector2D(Math.random(), Math.random());
         this.isPredator = isPredator;
         this.border = 30;
-        this.boundary = 640;
+        this.boundary = 1200;
         this.size = new jssim.Vector2D(8, 8);
         if(isPredator){
             this.size = new jssim.Vector2D(10, 10);
