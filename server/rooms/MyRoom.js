@@ -16,11 +16,13 @@ class MyState extends Schema {
         super();
 
         this.locations = new ArraySchema();
+        this.velocities = new ArraySchema();
         this.simulation = new Simulation();
     }
 }
 schema.defineTypes(MyState, {
   locations: [ Vector2D ],
+  velocities: [ Vector2D ]
 });
 
 class MyRoom extends colyseus.Room {
@@ -32,6 +34,7 @@ class MyRoom extends colyseus.Room {
       for(var i = 0; i < 20; ++i) 
       {
         this.state.locations.push(new Vector2D(0,0));
+        this.state.velocities.push(new Vector2D(0,0));
       }
     }
     
@@ -41,6 +44,8 @@ class MyRoom extends colyseus.Room {
       for (let i = 0; i < this.state.simulation.space.locations.length; i++) {
         this.state.locations[i].x = this.state.simulation.space.locations[i].x;
         this.state.locations[i].y = this.state.simulation.space.locations[i].y;
+        this.state.velocities[i].x = this.state.simulation.space.agents[i].velocity.x;
+        this.state.velocities[i].y = this.state.simulation.space.agents[i].velocity.y;
       }
         // implement your physics or world updates here
         // this is a good place to update the room state
