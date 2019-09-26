@@ -11,6 +11,7 @@ client.joinOrCreate("my_room", {/* options */}).then(room => {
       if(client.gameView)
       {
         client.gameView.game.scene.getScene("gameScene").updateEntitiesLocation(state.locations);
+        client.gameView.game.scene.getScene("gameScene").updateEntitiesVelocity(state.velocities);
       }
     });
 
