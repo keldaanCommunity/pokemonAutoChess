@@ -11,9 +11,9 @@ class Simulation{
 
     initialize()
     {
-        for(var i = 0; i < 20; ++i) 
+        for(var i = 0; i < 10; ++i) 
         {
-            let is_predator = i > 15;
+            let is_predator = i > 7;
             let boid = new Boid(i, 0, 0, this.space, is_predator);
             this.scheduler.scheduleRepeatingIn(boid, 1);
         }

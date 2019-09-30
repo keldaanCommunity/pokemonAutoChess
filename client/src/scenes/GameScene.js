@@ -23,13 +23,11 @@ export default class GameScene extends Phaser.Scene{
         this.animationManager = new AnimationManager(this);
         this.animationManager.createAnimations(13);
         this.animationManager.createAnimations(16);
-        console.log(this.anims.exists('13_0_0_0'));
-        console.log(this.anims);
         
-        for(let i = 0; i < 20; i++)
+        for(let i = 0; i < 10; i++)
         {
             let entity;
-            if(i > 15){
+            if(i > 7){
                 entity = this.add.sprite(100,100).setScale(3,3);
                 entity.gameIndex = 16;
             }
@@ -44,6 +42,7 @@ export default class GameScene extends Phaser.Scene{
             }
             this.entities.add(entity);
         }
+        window.initialized = true;
     }
 
     updateEntitiesLocation(locations)
@@ -70,13 +69,14 @@ export default class GameScene extends Phaser.Scene{
     displayEntity(entity)
     {
         let orientation = this.getOrientation(entity.velocity.x, entity.velocity.y);
-        let key = this.getSpriteKey(entity, orientation);
-        
-        if(!this.anims.exists(key))
+        if(entity.orientation != orientation)
         {
-            
+            entity.orientation = orientation;
+            let key = this.getSpriteKey(entity);
+            this.playAnimation(entity, key);
         }
-        this.playAnimation(entity, key);
+
+
     }
 
 
@@ -88,7 +88,7 @@ export default class GameScene extends Phaser.Scene{
     }
 
 
-    getSpriteKey(entity, orientation)
+    getSpriteKey(entity)
     {
         let orientationTable = 
         {
@@ -106,51 +106,56 @@ export default class GameScene extends Phaser.Scene{
         key += "_";
         key += "0";
         key += "_";
-        key += orientationTable[orientation];
+        key += orientationTable[entity.orientation];
         return key;
     }
 
     getOrientation(vx, vy) 
     {
-        let angle = Math.atan(vx/vy);
+        let angle = Math.atan2(vy, vx);
+        if(angle < 0){
+            angle += 2 * Math.PI;
+        }
         let angleSeparation = Math.PI / 8;
+        let orientation;
 
         if(angle < angleSeparation)
         {
-            return "right";
+            orientation = "right";
         }
         else if(angle < angleSeparation * 3)
         {
-            return "upright";
+            orientation = "downright";
         }
         else if(angle < angleSeparation * 5)
         {
-            return "up";
+            orientation = "down";
         }
         else if(angle < angleSeparation * 7)
         {
-            return "upleft";
+            orientation = "downleft";
         }
         else if(angle < angleSeparation * 9)
         {
-            return "left";
+            orientation = "left";
         }
         else if(angle < angleSeparation * 11)
         {
-            return "downleft";
+            orientation = "upleft";
         }
         else if(angle < angleSeparation * 13)
         {
-            return "down";
+            orientation = "up";
         }
         else if(angle < angleSeparation * 15)
         {
-            return "downright";
+            orientation = "upright";
         }
-        else
-        {
-            return "right";
+        else{
+            orientation = "right";
         }
+        
+        return orientation;
     }
 
     update ()

@@ -8,7 +8,7 @@ client.joinOrCreate("my_room", {/* options */}).then(room => {
     client.gameView = new Gameview();
     
     room.onStateChange((state) => {
-      if(client.gameView)
+      if(client.gameView && window.initialized)
       {
         client.gameView.game.scene.getScene("gameScene").updateEntitiesLocation(state.locations);
         client.gameView.game.scene.getScene("gameScene").updateEntitiesVelocity(state.velocities);

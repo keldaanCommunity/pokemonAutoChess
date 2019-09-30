@@ -31,7 +31,7 @@ class MyRoom extends colyseus.Room {
     onCreate () {
       this.setState(new MyState());
       this.setSimulationInterval((deltaTime) => this.update(deltaTime));
-      for(var i = 0; i < 20; ++i) 
+      for(var i = 0; i < 10; ++i) 
       {
         this.state.locations.push(new Vector2D(0,0));
         this.state.velocities.push(new Vector2D(0,0));
