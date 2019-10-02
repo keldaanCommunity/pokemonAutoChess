@@ -23,7 +23,20 @@ export default class GameScene extends Phaser.Scene{
         this.animationManager = new AnimationManager(this);
         this.animationManager.createAnimations(13);
         this.animationManager.createAnimations(16);
-        
+
+        this.textStyle = 
+        {
+          fontSize: "30px",
+          fontFamily: "Verdana",
+          color: "white",
+          align: "center"
+        };
+
+        this.timeText = this.add.text(500,50,window.state.time, this.textStyle);
+        window.initialized = true;
+    }
+
+    createEntities(){
         for(let i = 0; i < 10; i++)
         {
             let entity;
@@ -42,7 +55,6 @@ export default class GameScene extends Phaser.Scene{
             }
             this.entities.add(entity);
         }
-        window.initialized = true;
     }
 
     updateEntitiesLocation(locations)
@@ -75,8 +87,6 @@ export default class GameScene extends Phaser.Scene{
             let key = this.getSpriteKey(entity);
             this.playAnimation(entity, key);
         }
-
-
     }
 
 

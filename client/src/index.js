@@ -5,15 +5,32 @@ var client = new Colyseus.Client('ws://localhost:2567');
 
 client.joinOrCreate("my_room", {/* options */}).then(room => {
     console.log("joined successfully", room);
-    client.gameView = new Gameview();
     
-    room.onStateChange((state) => {
+
+    room.onStateChange.once((state) => {
+      console.log(state);
+      client.gameView = new Gameview(state);
+      window.state = state;
+    });
+    
+
+    room.state.onChange = (changes) => {     
       if(client.gameView && window.initialized)
       {
-        client.gameView.game.scene.getScene("gameScene").updateEntitiesLocation(state.locations);
-        client.gameView.game.scene.getScene("gameScene").updateEntitiesVelocity(state.velocities);
+        changes.forEach(change => {
+          switch (change.field) {
+            case 'time':
+              client.gameView.game.scene.getScene("gameScene").timeText.setText(change.value);
+              break;
+          
+            default:
+              break;
+          }
+      });
+        //client.gameView.game.scene.getScene("gameScene").updateEntitiesLocation(state.locations);
+        //client.gameView.game.scene.getScene("gameScene").updateEntitiesVelocity(state.velocities);
       }
-    });
+  };
 
     room.onMessage((message) => {
       console.log(client.id, "received on", room.name, message);
@@ -26,6 +43,7 @@ client.joinOrCreate("my_room", {/* options */}).then(room => {
     room.onLeave(() => {
       console.log(client.id, "left", room.name);
     });
+
   }).catch(e => {
     console.error("join error", e);
   });

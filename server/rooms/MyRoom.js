@@ -11,44 +11,70 @@ schema.defineTypes(Vector2D, {
   y: "number"
 });
 
-class MyState extends Schema {
+class FightState extends Schema {
     constructor () {
         super();
 
         this.locations = new ArraySchema();
         this.velocities = new ArraySchema();
         this.simulation = new Simulation();
+        this.typeState = "FightState";
     }
 }
-schema.defineTypes(MyState, {
-  locations: [ Vector2D ],
-  velocities: [ Vector2D ]
+
+
+class PickState extends Schema {
+  constructor () {
+      super();
+      this.time = 30000;
+      this.typeState = "PickState";
+  }
+}
+
+schema.defineTypes(PickState,{
+  time: "number",
+  typeState: "string"
 });
+
+schema.defineTypes(FightState, {
+  locations: [ Vector2D ],
+  velocities: [ Vector2D ],
+  typeState: "string",
+  time: "number"
+});
+
 
 class MyRoom extends colyseus.Room {
 
     // When room is initialized
     onCreate () {
-      this.setState(new MyState());
+      this.setState(new PickState());
       this.setSimulationInterval((deltaTime) => this.update(deltaTime));
+      /*
       for(var i = 0; i < 10; ++i) 
       {
         this.state.locations.push(new Vector2D(0,0));
         this.state.velocities.push(new Vector2D(0,0));
       }
+       */
     }
     
-    update (deltaTime) {
-      this.state.simulation.scheduler.update();
-
-      for (let i = 0; i < this.state.simulation.space.locations.length; i++) {
-        this.state.locations[i].x = this.state.simulation.space.locations[i].x;
-        this.state.locations[i].y = this.state.simulation.space.locations[i].y;
-        this.state.velocities[i].x = this.state.simulation.space.agents[i].velocity.x;
-        this.state.velocities[i].y = this.state.simulation.space.agents[i].velocity.y;
+    update (deltaTime)
+    {
+      if(this.state.typeState == "FightState")
+      {
+        this.state.simulation.scheduler.update();
+        for (let i = 0; i < this.state.simulation.space.locations.length; i++) {
+          this.state.locations[i].x = this.state.simulation.space.locations[i].x;
+          this.state.locations[i].y = this.state.simulation.space.locations[i].y;
+          this.state.velocities[i].x = this.state.simulation.space.agents[i].velocity.x;
+          this.state.velocities[i].y = this.state.simulation.space.agents[i].velocity.y;
+        }
       }
-        // implement your physics or world updates here
-        // this is a good place to update the room state
+      else if(this.state.typeState == "PickState")
+      {
+        this.state.time -= deltaTime;
+      }
     }
 
     // Authorize client based on provided options before WebSocket handshake is complete
