@@ -3,12 +3,11 @@ import Gameview from './GameView';
 
 var client = new Colyseus.Client('ws://localhost:2567');
 
-client.joinOrCreate("my_room", {/* options */}).then(room => {
+client.joinOrCreate("game_room", {/* options */}).then(room => {
     console.log("joined successfully", room);
     
 
     room.onStateChange.once((state) => {
-      console.log(state);
       client.gameView = new Gameview(state);
       window.state = state;
     });

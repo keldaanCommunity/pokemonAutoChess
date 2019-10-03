@@ -3,6 +3,7 @@ const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 const ArraySchema = schema.ArraySchema;
 const Simulation = require('../simulation/Simulation');
+const Player = require('./Player');
 
 class Vector2D extends Schema {
 }
@@ -28,6 +29,7 @@ class PickState extends Schema {
       super();
       this.time = 30000;
       this.typeState = "PickState";
+      this.players = [];
   }
 }
 
@@ -44,7 +46,7 @@ schema.defineTypes(FightState, {
 });
 
 
-class MyRoom extends colyseus.Room {
+class GameRoom extends colyseus.Room {
 
     // When room is initialized
     onCreate () {
@@ -83,7 +85,9 @@ class MyRoom extends colyseus.Room {
      }
 
     // When client successfully join the room
-    onJoin (client, options, auth) { }
+    onJoin (client, options, auth) {
+      this.state.players.push(new Player(client.socketId));
+    }
 
     // When a client sends a message
     onMessage (client, message) { }
@@ -95,4 +99,4 @@ class MyRoom extends colyseus.Room {
     onDispose () { }
 }
 
-module.exports = MyRoom;
+module.exports = GameRoom;

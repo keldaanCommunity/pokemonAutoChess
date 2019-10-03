@@ -5,7 +5,7 @@ const colyseus = require('colyseus');
 const monitor = require("@colyseus/monitor").monitor;
 //const socialRoutes = require("@colyseus/social/express").default;
 
-const MyRoom = require('./rooms/MyRoom');
+const GameRoom = require('./rooms/GameRoom');
 
 const port = process.env.PORT || 2567;
 const app = express()
@@ -20,7 +20,7 @@ const gameServer = new colyseus.Server({
 });
 
 // register your room handlers
-gameServer.define('my_room', MyRoom);
+gameServer.define('game_room', GameRoom);
 
 // register @colyseus/social routes
 //app.use("/", socialRoutes);
