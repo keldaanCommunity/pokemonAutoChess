@@ -4,6 +4,8 @@ class Player
         this.socketId = socketId;
         this.board = [];
         this.team = [];
+        this.shop = [];
+        this.level = 2;
     }
 }
 

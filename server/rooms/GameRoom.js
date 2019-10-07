@@ -3,14 +3,16 @@ const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 const ArraySchema = schema.ArraySchema;
 const Simulation = require('../simulation/Simulation');
-const Player = require('./Player');
+const Player = require('../type/Player');
+const Shop = require('../type/Shop');
 
-class Vector2D extends Schema {
-}
+class Vector2D extends Schema {}
 schema.defineTypes(Vector2D, {
   x: "number",
   y: "number"
 });
+
+
 
 class FightState extends Schema {
     constructor () {
@@ -30,6 +32,7 @@ class PickState extends Schema {
       this.time = 30000;
       this.typeState = "PickState";
       this.players = [];
+      this.shop = new Shop();
   }
 }
 
@@ -76,17 +79,35 @@ class GameRoom extends colyseus.Room {
       else if(this.state.typeState == "PickState")
       {
         this.state.time -= deltaTime;
+        if(this.state.time < 0)
+        {
+          this.initializePickingPhase();
+        }
+      }
+    }
+
+    initializePickingPhase()
+    {
+      this.state.time = 30000;
+      if(this.state.players != [])
+      {
+        this.state.players.forEach(player=>{
+          this.state.shop.detachShop(player);
+          this.state.shop.assignShop(player);
+        })
       }
     }
 
     // Authorize client based on provided options before WebSocket handshake is complete
-    onAuth (client, options, request) {
+    onAuth (client, options, request) 
+    {
       return true;
-     }
+    }
 
     // When client successfully join the room
-    onJoin (client, options, auth) {
-      this.state.players.push(new Player(client.socketId));
+    onJoin (client, options, auth) 
+    {
+      this.state.players.push(new Player(client.id));
     }
 
     // When a client sends a message
