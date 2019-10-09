@@ -7,8 +7,8 @@ export default class Gameview
     {
         var config = {
             type: Phaser.AUTO,
-            width: 1200,
-            height: 1200,
+            width: 2000,
+            height: 1000,
             scene: [GameScene],
             scale:{
                 mode:Phaser.Scale.FIT

@@ -1,28 +1,30 @@
 "use strict";
-const path = require('path');
 import AnimationManager from '../AnimationManager';
+import ShopContainer from './component/shopContainer';
 
+export default class GameScene extends Phaser.Scene
+{
 
-export default class GameScene extends Phaser.Scene{
-
-    constructor(){
+    constructor()
+    {
         super({ key: "gameScene", active: true });
     }
      
-    preload ()
+    preload()
     {   
       this.load.multiatlas("13","assets/sprites/13/13.json");
       this.load.multiatlas("16","assets/sprites/16/16.json");
       this.load.image("map","assets/map.png");
     }
     
-    create ()
+    create()
     {   
-        const map = this.add.image(600,600,"map");
+        const map = this.add.image(1000,600,"map");
         this.entities = this.add.group();
         this.animationManager = new AnimationManager(this);
         this.animationManager.createAnimations(13);
         this.animationManager.createAnimations(16);
+        this.shopContainer = new ShopContainer(this,100,100);
 
         this.textStyle = 
         {
@@ -32,11 +34,12 @@ export default class GameScene extends Phaser.Scene{
           align: "center"
         };
 
-        this.timeText = this.add.text(500,50,window.state.time, this.textStyle);
+        this.timeText = this.add.text(1000,50,window.state.time, this.textStyle);
         window.initialized = true;
     }
 
-    createEntities(){
+    createEntities()
+    {
         for(let i = 0; i < 10; i++)
         {
             let entity;
