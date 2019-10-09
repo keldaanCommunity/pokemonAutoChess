@@ -2,6 +2,7 @@ const colyseus = require('colyseus');
 const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 const ArraySchema = schema.ArraySchema;
+const MapSchema = schema.MapSchema;
 const Simulation = require('../simulation/Simulation');
 const Player = require('../type/Player');
 const Shop = require('../type/Shop');
@@ -31,14 +32,15 @@ class PickState extends Schema {
       super();
       this.time = 30000;
       this.typeState = "PickState";
-      this.players = [];
+      this.players = new MapSchema();
       this.shop = new Shop();
   }
 }
 
 schema.defineTypes(PickState,{
   time: "number",
-  typeState: "string"
+  typeState: "string",
+  players: {map: Player}
 });
 
 schema.defineTypes(FightState, {
@@ -88,13 +90,15 @@ class GameRoom extends colyseus.Room {
 
     initializePickingPhase()
     {
+      
       this.state.time = 30000;
-      if(this.state.players != [])
+      if(this.state.players.size != 0)
       {
-        this.state.players.forEach(player=>{
+        for (let id in this.state.players) {
+          let player = this.state.players[id];
           this.state.shop.detachShop(player);
           this.state.shop.assignShop(player);
-        })
+        }
       }
     }
 
@@ -107,7 +111,7 @@ class GameRoom extends colyseus.Room {
     // When client successfully join the room
     onJoin (client, options, auth) 
     {
-      this.state.players.push(new Player(client.id));
+      this.state.players[client.sessionId] = new Player(client.sessionId);
     }
 
     // When a client sends a message

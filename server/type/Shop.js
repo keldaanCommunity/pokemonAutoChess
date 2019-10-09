@@ -4,28 +4,43 @@ class Shop
 {
     constructor()
     {
-        this.pool = [];
+        this.pool = new Map();
         for (let i = 0; i < 20; i++) 
         {
-            this.pool.push(PokemonFactory.createPokemonFromName('bulbasaur'));
+            let pokemon = PokemonFactory.createPokemonFromName('bulbasaur');
+            this.pool.set(pokemon.id, pokemon);
         }
     }
 
     detachShop(player)
     {
-        if(player.shop != [])
-        {
-            this.pool = this.pool.concat(player.shop);
-            player.shop = [];
+        for (let id in player.shop) {
+            this.pool.set(id, player.shop[id]);
+        }
+
+        for (let id in player.shop) {
+            delete player.shop[id];
         }
     }
 
     assignShop(player)
-    { 
+    {
         for (let i = 0; i < 5; i++) 
         {
-            player.shop.push(this.pool.pop());
-        }
+            let index = Math.round(Math.random() * (this.pool.size - 1));
+            
+            let entries = this.pool.entries();
+            let element;
+            
+            while(index >= 0)
+            {
+                element = entries.next();
+                index-= 1;
+            }
+
+            player.shop[element.value[0]] = element.value[1];
+            this.pool.delete(element[0]);
+        }   
     }
 }
 

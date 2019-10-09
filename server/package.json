@@ -25,6 +25,7 @@
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
     "js-simulator": "^1.0.17",
-    "nodemon": "^1.19.2"
+    "nodemon": "^1.19.2",
+    "uniqid": "^5.0.3"
   }
 }
