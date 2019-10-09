@@ -9,6 +9,7 @@ client.joinOrCreate("game_room", {/* options */}).then(room => {
 
     room.onStateChange.once((state) => {
       client.gameView = new Gameview(state);
+      console.log(state);
       window.state = state;
     });
     
@@ -21,7 +22,9 @@ client.joinOrCreate("game_room", {/* options */}).then(room => {
             case 'time':
               client.gameView.game.scene.getScene("gameScene").timeText.setText(change.value);
               break;
-          
+            
+            case 'players':
+              console.log(change.value);
             default:
               break;
           }

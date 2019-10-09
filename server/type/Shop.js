@@ -14,11 +14,13 @@ class Shop
 
     detachShop(player)
     {
-        for (let id in player.shop) {
+        for (let id in player.shop) 
+        {
             this.pool.set(id, player.shop[id]);
         }
 
-        for (let id in player.shop) {
+        for (let id in player.shop) 
+        {
             delete player.shop[id];
         }
     }
@@ -37,9 +39,8 @@ class Shop
                 element = entries.next();
                 index-= 1;
             }
-
             player.shop[element.value[0]] = element.value[1];
-            this.pool.delete(element[0]);
+            this.pool.delete(element.value[0]);
         }   
     }
 }
