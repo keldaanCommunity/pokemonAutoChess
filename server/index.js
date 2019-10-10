@@ -2,7 +2,7 @@ const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const colyseus = require('colyseus');
-const monitor = require("@colyseus/monitor").monitor;
+const Monitor = require("@colyseus/monitor");
 //const socialRoutes = require("@colyseus/social/express").default;
 
 const GameRoom = require('./rooms/GameRoom');
@@ -25,8 +25,8 @@ gameServer.define('game_room', GameRoom);
 // register @colyseus/social routes
 //app.use("/", socialRoutes);
 
-// register colyseus monitor AFTER registering your room handlers
-app.use("/colyseus", monitor(gameServer));
+//colyseus game server monitor panel
+app.use("/colyseus", Monitor.monitor(gameServer));
 
 gameServer.listen(port);
 console.log(`Listening on ws://localhost:${ port }`)

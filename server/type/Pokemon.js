@@ -44,6 +44,54 @@ class Venusaur extends Pokemon
     }
 }
 
+class Charmander extends Pokemon
+{
+    constructor()
+    {
+        super('charmander',[TYPE.FIRE], RARITY.UNCOMMON, 1, 'charmeleon');
+    }
+}
+
+class Charmeleon extends Pokemon
+{
+    constructor()
+    {
+        super('charmeleon',[TYPE.FIRE], RARITY.UNCOMMON, 2, 'charizard');
+    }
+}
+
+class Charizard extends Pokemon
+{
+    constructor()
+    {
+        super('charizard',[TYPE.FIRE], RARITY.UNCOMMON, 3, '');
+    }
+}
+
+class Squirtle extends Pokemon
+{
+    constructor()
+    {
+        super('squirtle',[TYPE.WATER], RARITY.UNCOMMON, 1, 'wartortle');
+    }
+}
+
+class Wartortle  extends Pokemon
+{
+    constructor()
+    {
+        super('charmeleon',[TYPE.WATER], RARITY.UNCOMMON, 2, 'blastoise');
+    }
+}
+
+class Blastoise  extends Pokemon
+{
+    constructor()
+    {
+        super('charizard',[TYPE.WATER], RARITY.UNCOMMON, 3, '');
+    }
+}
+
 schema.defineTypes(Pokemon,{
     id: "string",
     name: "string",
@@ -53,4 +101,4 @@ schema.defineTypes(Pokemon,{
     evolution: "string"
 });
 
-module.exports = {Bulbasaur, Ivysaur, Venusaur, Pokemon};
+module.exports = {Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Pokemon};

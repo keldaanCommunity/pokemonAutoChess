@@ -12,6 +12,24 @@ class PokemonFactory{
             case 'venusaur':
                 return new Pokemon.Venusaur();
 
+            case 'charmander':
+                return new Pokemon.Charmander();
+            
+            case 'charmeleon':
+                return new Pokemon.Charmeleon();
+            
+            case 'charizard':
+                return new Pokemon.Charizard();
+
+            case 'squirtle':
+                return new Pokemon.Squirtle();
+            
+            case 'wartortle':
+                return new Pokemon.Wartortle();
+            
+            case 'blastoise':
+                return new Pokemon.Blastoise();
+
             default:
                 break;
         }

@@ -3,14 +3,16 @@ import Gameview from './GameView';
 
 var client = new Colyseus.Client('ws://localhost:2567');
 
+
 client.joinOrCreate("game_room", {/* options */}).then(room => {
     console.log("joined successfully", room);
+    window.sessionId = room.sessionId;
     
 
     room.onStateChange.once((state) => {
-      client.gameView = new Gameview(state);
-      console.log(state);
       window.state = state;
+
+      client.gameView = new Gameview();
     });
     
 
@@ -20,11 +22,11 @@ client.joinOrCreate("game_room", {/* options */}).then(room => {
         changes.forEach(change => {
           switch (change.field) {
             case 'time':
-              client.gameView.game.scene.getScene("gameScene").timeText.setText(change.value);
+              client.gameView.game.scene.getScene("gameScene").updateTimeText(state.time);
               break;
             
             case 'players':
-              console.log(change.value);
+              client.gameView.game.scene.getScene("gameScene").shopContainer.updatePortraits();
             default:
               break;
           }

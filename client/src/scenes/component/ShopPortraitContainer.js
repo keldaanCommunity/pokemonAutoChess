@@ -1,6 +1,6 @@
 export default class ShopPortraitContainer extends Phaser.GameObjects.Container
 {
-    constructor(scene, x, y)
+    constructor(scene, x, y, pokemon)
     {
         super(scene,x ,y);
 
@@ -11,7 +11,7 @@ export default class ShopPortraitContainer extends Phaser.GameObjects.Container
           color: "white",
           align: "center"
         };
-
-        this.add(new Phaser.GameObjects.Text(scene,0,0,'test', this.textStyle));
+        
+        this.add(new Phaser.GameObjects.Text(scene,0,0, pokemon.name, this.textStyle));
     }
 }

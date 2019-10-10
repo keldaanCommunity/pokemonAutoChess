@@ -174,4 +174,9 @@ export default class GameScene extends Phaser.Scene
     update ()
     {
     }
+
+    updateTimeText(time)
+    {
+        this.timeText.setText(time);
+    }
 }
