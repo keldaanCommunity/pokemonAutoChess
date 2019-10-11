@@ -11,9 +11,10 @@ export default class GameScene extends Phaser.Scene
     }
      
     preload()
-    {   
-      this.load.multiatlas("13","assets/sprites/13/13.json");
-      this.load.multiatlas("16","assets/sprites/16/16.json");
+    {
+    ["1","2","3","4","5","6","7","8","9"].forEach(num=>{
+        this.load.multiatlas(num, "assets/sprites/" + num + "/" + num + ".json");
+    })   
       this.load.image("map","assets/map.png");
     }
     
@@ -22,8 +23,9 @@ export default class GameScene extends Phaser.Scene
         const map = this.add.image(1000,600,"map");
         this.entities = this.add.group();
         this.animationManager = new AnimationManager(this);
-        this.animationManager.createAnimations(13);
-        this.animationManager.createAnimations(16);
+        [1,2,3,4,5,6,7,8,9].forEach(num=>{
+            this.animationManager.createAnimations(num);
+        })
         this.shopContainer = new ShopContainer(this,100,100);
 
         this.textStyle = 
