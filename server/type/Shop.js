@@ -6,7 +6,7 @@ class Shop
     {
         this.pool = new Map();
         let potentialPokemons = ['bulbasaur', 'charmander', 'squirtle'];
-        for (let i = 0; i < 20; i++) 
+        for (let i = 0; i < 80; i++) 
         {
             let pokemon = PokemonFactory.createPokemonFromName(potentialPokemons[Math.round(Math.random() * (potentialPokemons.length -1))]);
             this.pool.set(pokemon.id, pokemon);
@@ -26,7 +26,7 @@ class Shop
         }
     }
 
-    assignShop(player)
+    assignShop(player)  
     {
         for (let i = 0; i < 5; i++) 
         {

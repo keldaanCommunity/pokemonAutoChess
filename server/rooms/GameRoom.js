@@ -92,7 +92,7 @@ class GameRoom extends colyseus.Room {
     {
       
       this.state.time = 30000;
-
+      
       for (let id in this.state.players) {
         let player = this.state.players[id];
         this.state.shop.detachShop(player);

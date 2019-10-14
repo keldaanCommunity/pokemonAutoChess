@@ -1,6 +1,7 @@
 "use strict";
 import AnimationManager from '../AnimationManager';
 import ShopContainer from './component/shopContainer';
+import PlayerContainer from './component/PlayerContainer';
 
 export default class GameScene extends Phaser.Scene
 {
@@ -16,6 +17,7 @@ export default class GameScene extends Phaser.Scene
         this.load.multiatlas(num, "assets/sprites/" + num + "/" + num + ".json");
     })   
       this.load.image("map","assets/map.png");
+      this.load.image("user","assets/user.png");
     }
     
     create()
@@ -26,7 +28,8 @@ export default class GameScene extends Phaser.Scene
         [1,2,3,4,5,6,7,8,9].forEach(num=>{
             this.animationManager.createAnimations(num);
         })
-        this.shopContainer = new ShopContainer(this,100,100);
+        this.shopContainer = new ShopContainer(this,100,900);
+        this.playerContainer = new PlayerContainer(this,1600,100);
 
         this.textStyle = 
         {

@@ -12,10 +12,11 @@ export default class ShopContainer extends Phaser.GameObjects.Container
     buildShopPortraits(){
         let firstPlayer = window.state.players[Object.keys(window.state.players)[0]];
         let  i = 0;
+        
         for (let id in firstPlayer.shop) 
         {
             let pokemon = firstPlayer.shop[id];
-            this.add(new ShopPortraitContainer(this.scene,i * 300, 800, pokemon));
+            this.add(new ShopPortraitContainer(this.scene,i * 300, 0, pokemon));
             i += 1;
         }
     }

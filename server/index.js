@@ -20,7 +20,7 @@ const gameServer = new colyseus.Server({
 });
 
 // register your room handlers
-gameServer.define('game_room', GameRoom);
+gameServer.define('gameRoom', GameRoom);
 
 // register @colyseus/social routes
 //app.use("/", socialRoutes);

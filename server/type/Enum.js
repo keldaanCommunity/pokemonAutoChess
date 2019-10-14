@@ -1,25 +1,23 @@
 const TYPE = Object.freeze(
     {
-        NORMAL:'normal',
-        FIGHTING:'fighting',
-        FLYING:'flying',
-        POISON:'poison',
-        GROUND:'ground',
-        ROCK:'rock',
-        BUG:'bug',
-        GHOST:'ghost',
-        STEEL:'steel',
-        FIRE:'fire',
-        WATER:'water',
-        GRASS:'grass',
-        ELECTRIC:'electric',
-        PSYCHIC:'psychic',
-        ICE:'ice',
-        DRAGON:'dragon',
-        DARK:'dark',
-        FAIRY:'fairy',
-        UNKNOWN:'unknown',
-        SHADOW:'shadow'
+        NORMAL:'NORMAL',
+        FIGHTING:'FIGHTING',
+        FLYING:'FLYING',
+        POISON:'POISON',
+        GROUND:'GROUND',
+        ROCK:'ROCK',
+        BUG:'BUG',
+        GHOST:'GHOST',
+        STEEL:'STEEL',
+        FIRE:'FIRE',
+        WATER:'WATER',
+        GRASS:'GRASS',
+        ELECTRIC:'ELECTRIC',
+        PSYCHIC:'PSYCHIC',
+        ICE:'ICE',
+        DRAGON:'DRAGON',
+        DARK:'DARK',
+        FAIRY:'FAIRY'
     }
 );
 

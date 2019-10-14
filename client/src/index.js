@@ -4,7 +4,7 @@ import Gameview from './GameView';
 var client = new Colyseus.Client('ws://localhost:2567');
 
 
-client.joinOrCreate("game_room", {/* options */}).then(room => {
+client.joinOrCreate("gameRoom", {/* options */}).then(room => {
     console.log("joined successfully", room);
     window.sessionId = room.sessionId;
     
@@ -27,6 +27,7 @@ client.joinOrCreate("game_room", {/* options */}).then(room => {
             
             case 'players':
               client.gameView.game.scene.getScene("gameScene").shopContainer.updatePortraits();
+              client.gameView.game.scene.getScene("gameScene").playerContainer.updatePortraits();
             default:
               break;
           }
@@ -45,7 +46,7 @@ client.joinOrCreate("game_room", {/* options */}).then(room => {
     });
 
     room.onLeave(() => {
-      client.reconnect(room.id, client.sessionId).then(room => {
+      client.reconnect(room.id, room.sessionId).then(room => {
         console.log("reconnected successfully", room);
       }).catch(e => {
         console.error("join error", e);
