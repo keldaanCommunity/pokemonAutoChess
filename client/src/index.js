@@ -46,11 +46,6 @@ client.joinOrCreate("gameRoom", {/* options */}).then(room => {
     });
 
     room.onLeave(() => {
-      client.reconnect(room.id, room.sessionId).then(room => {
-        console.log("reconnected successfully", room);
-      }).catch(e => {
-        console.error("join error", e);
-      });
       console.log(client.id, "left", room.name);
     });
 

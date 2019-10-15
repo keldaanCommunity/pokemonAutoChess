@@ -14,7 +14,6 @@ schema.defineTypes(Vector2D, {
 });
 
 
-
 class FightState extends Schema {
     constructor () {
         super();
@@ -116,26 +115,9 @@ class GameRoom extends colyseus.Room {
     // When a client sends a message
     onMessage (client, message) { }
 
-    async onLeave (client, consented) {
-      // flag client as inactive for other users
-      this.state.players[client.sessionId].connected = false;
-    
-      try {
-        if (consented) {
-            throw new Error("consented leave");
-        }
-    
-        // allow disconnected client to reconnect into this room until 20 seconds
-        await this.allowReconnection(client, 20);
-    
-        // client returned! let's re-activate it.
-        this.state.players[client.sessionId].connected = true;
-    
-      } catch (e) {
-    
-        // 20 seconds expired. let's remove the client.
-        delete this.state.players[client.sessionId];
-      }
+    onLeave (client, consented) {
+      this.state.shop.detachShop(this.state.players[client.sessionId]);
+      delete this.state.players[client.sessionId];
     }
 
     // Cleanup callback, called after there are no more clients in the room. (see `autoDispose`)
