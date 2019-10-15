@@ -18,18 +18,20 @@ export default class GameScene extends Phaser.Scene
     })   
       this.load.image("map","assets/map.png");
       this.load.image("user","assets/user.png");
+      this.load.image("dashboard","assets/dashboard.png");
     }
     
     create()
     {   
         const map = this.add.image(1000,600,"map");
+        this.dashboard = this.add.image(800,900,"dashboard");
         this.entities = this.add.group();
         this.animationManager = new AnimationManager(this);
         [1,2,3,4,5,6,7,8,9].forEach(num=>{
             this.animationManager.createAnimations(num);
         })
-        this.shopContainer = new ShopContainer(this,100,900);
-        this.playerContainer = new PlayerContainer(this,1600,100);
+        this.shopContainer = new ShopContainer(this,200,900);
+        this.playerContainer = new PlayerContainer(this,1700,100);
 
         this.textStyle = 
         {
