@@ -16,10 +16,10 @@ export default class GameScene extends Phaser.Scene
     ["1","2","3","4","5","6","7","8","9"].forEach(num=>{
         this.load.multiatlas(num, "assets/sprites/" + num + "/" + num + ".json");
     })   
-      this.load.image("tiles","assets/tileset.png");
-      this.load.tilemapTiledJSON("map","assets/tilemap.json")
-      this.load.image("user","assets/user.png");
-      this.load.image("dashboard","assets/dashboard.png");
+      this.load.image("tiles","assets/tiles/tileset.png");
+      this.load.tilemapTiledJSON("map","assets/tiles/tilemap.json")
+      this.load.image("user","assets/ui/user.png");
+      this.load.image("dashboard","assets/ui/dashboard.png");
     }
     
     create()
