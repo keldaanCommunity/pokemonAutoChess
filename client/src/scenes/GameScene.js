@@ -28,14 +28,14 @@ export default class GameScene extends Phaser.Scene
         const tileset = map.addTilesetImage("tileset","tiles");
         map.createStaticLayer("World",tileset,0,0);
 
-        this.dashboard = this.add.image(800,900,"dashboard");
+        this.dashboard = this.add.image(850,940,"dashboard");
         this.entities = this.add.group();
         this.animationManager = new AnimationManager(this);
         [1,2,3,4,5,6,7,8,9].forEach(num=>{
             this.animationManager.createAnimations(num);
         })
-        this.shopContainer = new ShopContainer(this,200,900);
-        this.playerContainer = new PlayerContainer(this,1700,100);
+        this.shopContainer = new ShopContainer(this,200,950);
+        this.playerContainer = new PlayerContainer(this,1750,100);
 
         this.textStyle = 
         {
@@ -45,7 +45,7 @@ export default class GameScene extends Phaser.Scene
           align: "center"
         };
 
-        this.timeText = this.add.text(1000,50,window.state.time, this.textStyle);
+        this.timeText = this.add.text(850,20,window.state.time, this.textStyle);
         window.initialized = true;
     }
 

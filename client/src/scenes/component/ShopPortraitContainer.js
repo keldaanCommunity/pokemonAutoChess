@@ -28,14 +28,14 @@ export default class ShopPortraitContainer extends Phaser.GameObjects.Container
         super(scene,x ,y);
         this.textStyle = 
         {
-          fontSize: "30px",
+          fontSize: "20px",
           fontFamily: "Verdana",
           color: "white",
           align: "center"
         };
 
-        this.add( new Phaser.GameObjects.Rectangle(scene, 60, 20, 250, 150,  COLOR_TYPE[pokemon.type]));
-        this.add(new Phaser.GameObjects.Image(scene,0,0, pokemon.index,"portrait").setScale(3,3));
-        this.add(new Phaser.GameObjects.Text(scene,-60,60, pokemon.name, this.textStyle));
+        this.add( new Phaser.GameObjects.Rectangle(scene, 80, 0, 160, 80,  COLOR_TYPE[pokemon.type]));
+        this.add(new Phaser.GameObjects.Image(scene,0,0, pokemon.index,"portrait").setScale(2,2));
+        this.add(new Phaser.GameObjects.Text(scene,40,0, pokemon.name, this.textStyle));
     }
 }
