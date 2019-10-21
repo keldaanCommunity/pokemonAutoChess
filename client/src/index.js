@@ -11,11 +11,9 @@ client.joinOrCreate("gameRoom", {/* options */}).then(room => {
 
     room.onStateChange.once((state) => {
       window.state = state;
-
       client.gameView = new Gameview();
     });
     
-
     room.state.onChange = (changes) => {     
       if(client.gameView && window.initialized)
       {
@@ -28,6 +26,7 @@ client.joinOrCreate("gameRoom", {/* options */}).then(room => {
             case 'players':
               client.gameView.game.scene.getScene("gameScene").shopContainer.updatePortraits();
               client.gameView.game.scene.getScene("gameScene").playerContainer.updatePortraits();
+              client.gameView.game.scene.getScene("gameScene").boardManager.updatePokemons();
               break;
 
             default:
@@ -49,6 +48,10 @@ client.joinOrCreate("gameRoom", {/* options */}).then(room => {
 
     room.onLeave(() => {
       console.log(client.id, "left", room.name);
+    });
+
+    window.addEventListener('shopClick',e=>{
+      room.send({'event':'shopClick','id':e.detail.id});
     });
 
   }).catch(e => {

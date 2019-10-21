@@ -11,7 +11,9 @@ export default class PlayerPortraitContainer extends Phaser.GameObjects.Containe
           color: "white",
           align: "center"
         };
-        this.add(new Phaser.GameObjects.Image(scene,70,0,'user'));
+        this.background = new Phaser.GameObjects.Image(scene,70,0,'user');
+        this.background.setInteractive().on('pointerdown', ()=>{console.log(player.id)});
+        this.add(this.background);
         this.add(new Phaser.GameObjects.Text(scene,0,0, player.id, this.textStyle));
     }
 }

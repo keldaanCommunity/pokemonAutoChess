@@ -33,8 +33,14 @@ export default class ShopPortraitContainer extends Phaser.GameObjects.Container
           color: "white",
           align: "center"
         };
-
-        this.add( new Phaser.GameObjects.Rectangle(scene, 80, 0, 160, 80,  COLOR_TYPE[pokemon.type]));
+        this.background = new Phaser.GameObjects.Rectangle(scene, 80, 0, 160, 80,  COLOR_TYPE[pokemon.type]);
+        this.background.setInteractive().on('pointerdown', ()=>{
+          window.dispatchEvent(new CustomEvent('shopClick',
+          {
+            detail: {'id': pokemon.id}
+          }));
+        });
+        this.add(this.background);
         this.add(new Phaser.GameObjects.Image(scene,0,0, pokemon.index,"portrait").setScale(2,2));
         this.add(new Phaser.GameObjects.Text(scene,40,0, pokemon.name, this.textStyle));
     }

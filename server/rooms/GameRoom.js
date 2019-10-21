@@ -89,10 +89,9 @@ class GameRoom extends colyseus.Room {
 
     initializePickingPhase()
     {
-      
       this.state.time = 30000;
-      
-      for (let id in this.state.players) {
+      for (let id in this.state.players) 
+      {
         let player = this.state.players[id];
         this.state.shop.detachShop(player);
         this.state.shop.assignShop(player);
@@ -113,9 +112,35 @@ class GameRoom extends colyseus.Room {
     }
 
     // When a client sends a message
-    onMessage (client, message) { }
+    onMessage (client, message) 
+    {
+      switch (message.event) 
+      {
+        case 'shopClick':
+          this.onShopClick(client.sessionId, message.id);
+          break;
+      
+        default:
+          break;
+      } 
+    }
 
-    onLeave (client, consented) {
+    onShopClick(sessionId, pokemonId)
+    {
+      if(sessionId in this.state.players)
+      {
+        if(pokemonId in this.state.players[sessionId].shop)
+        {
+         this.state.shop.pool.set(pokemonId, this.state.players[sessionId].shop[pokemonId]);
+         delete this.state.players[sessionId].shop[pokemonId];
+         this.state.players[sessionId].board[pokemonId] = this.state.shop.pool.get(pokemonId);
+         this.state.shop.pool.delete(pokemonId);
+        }
+      }
+    }
+
+    onLeave (client, consented) 
+    {
       this.state.shop.detachShop(this.state.players[client.sessionId]);
       delete this.state.players[client.sessionId];
     }
