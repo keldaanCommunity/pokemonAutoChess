@@ -29,7 +29,7 @@ class FightState extends Schema {
 class PickState extends Schema {
   constructor () {
       super();
-      this.time = 30000;
+      this.time = 5000;
       this.typeState = "PickState";
       this.players = new MapSchema();
       this.shop = new Shop();
@@ -89,7 +89,7 @@ class GameRoom extends colyseus.Room {
 
     initializePickingPhase()
     {
-      this.state.time = 30000;
+      this.state.time = 5000;
       for (let id in this.state.players) 
       {
         let player = this.state.players[id];

@@ -12,7 +12,8 @@ export default class Gameview
             scene: [GameScene],
             scale:{
                 mode:Phaser.Scale.FIT
-            }
+            },
+            pixelArt: true
           };
           
           this.game = new Phaser.Game(config);

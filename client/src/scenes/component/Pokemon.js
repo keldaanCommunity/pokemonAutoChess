@@ -1,11 +1,10 @@
-export default class Pokemon extends Phaser.GameObjects.Container
+export default class Pokemon extends Phaser.GameObjects.Sprite
 {
     constructor(scene, x, y, pokemon)
     {
-        super(scene,x ,y);
-        this.sprite = new Phaser.GameObjects.Sprite(scene, x, y);
-        this.sprite.setScale(3,3);
-        this.sprite.index = pokemon.index;
-        this.add(this.sprite);
+        super(scene,x ,y,pokemon.index, pokemon.index + "_0_1_0");
+        this.setScale(3,3);
+        this.index = pokemon.index;
+        this.id = pokemon.id;
     }
 }

@@ -26,7 +26,7 @@ client.joinOrCreate("gameRoom", {/* options */}).then(room => {
             case 'players':
               client.gameView.game.scene.getScene("gameScene").shopContainer.updatePortraits();
               client.gameView.game.scene.getScene("gameScene").playerContainer.updatePortraits();
-              client.gameView.game.scene.getScene("gameScene").boardManager.updatePokemons();
+              client.gameView.game.scene.getScene("gameScene").boardManager.update();
               break;
 
             default:
