@@ -65,23 +65,61 @@ export default class GameScene extends Phaser.Scene
 
     initilizeDragAndDrop()
     {
-        this.input.on('dragstart', function (pointer, gameObject) {
+        let self = this;
+        self.dropZones = [];
+        self.graphics = [];
+        for (let i = 0; i < 9; i++) 
+        {
+            self.dropZones.push(self.add.zone(150 + 170 * i,790,100,100).setRectangleDropZone(100,100).setName(i));
+            self.graphics.push(self.add.graphics().lineStyle(2,0xffff00).strokeRect(
+                self.dropZones[i].x - self.dropZones[i].input.hitArea.width / 2,
+                self.dropZones[i].y - self.dropZones[i].input.hitArea.height / 2,
+                self.dropZones[i].input.hitArea.width,
+                self.dropZones[i].input.hitArea.height));
+        }
 
-            gameObject.setTint(0xff0000);
+        self.input.on('dragstart', function (pointer, gameObject) {
+
+            self.children.bringToTop(gameObject);
     
-        });
+        }, self);
     
-        this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+        self.input.on('drag', function (pointer, gameObject, dragX, dragY) {
     
             gameObject.x = dragX;
             gameObject.y = dragY;
     
         });
     
-        this.input.on('dragend', function (pointer, gameObject) {
+        self.input.on('dragenter', function (pointer, gameObject, dropZone) {
+
+            self.graphics[dropZone.name].clear();
+            self.graphics[dropZone.name].lineStyle(2, 0x00ffff);
+            self.graphics[dropZone.name].strokeRect(dropZone.x - dropZone.input.hitArea.width / 2, dropZone.y - dropZone.input.hitArea.height / 2, dropZone.input.hitArea.width, dropZone.input.hitArea.height);
     
-            gameObject.clearTint();
+        });
     
+        self.input.on('dragleave', function (pointer, gameObject, dropZone) {
+            self.graphics[dropZone.name].clear();
+            self.graphics[dropZone.name].lineStyle(2, 0xffff00);
+            self.graphics[dropZone.name].strokeRect(dropZone.x - dropZone.input.hitArea.width / 2, dropZone.y - dropZone.input.hitArea.height / 2, dropZone.input.hitArea.width, dropZone.input.hitArea.height);
+        });
+    
+        self.input.on('drop', function (pointer, gameObject, dropZone) {
+    
+            gameObject.x = dropZone.x;
+            gameObject.y = dropZone.y;
+    
+        });
+    
+        self.input.on('dragend', function (pointer, gameObject, dropped) {
+    
+            if (!dropped)
+            {
+                gameObject.x = gameObject.input.dragStartX;
+                gameObject.y = gameObject.input.dragStartY;
+            }
+
         });
     }
 }

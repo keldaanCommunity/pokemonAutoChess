@@ -17,7 +17,6 @@ export default class BoardManager
         this.scene.add.existing(pokemonUI);
         pokemonUI.setInteractive();
         this.scene.input.setDraggable(pokemonUI);
-        
         window.animationManager.displayEntity(pokemonUI);
         this.group.add(pokemonUI);
     }
