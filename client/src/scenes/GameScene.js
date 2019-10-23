@@ -66,60 +66,77 @@ export default class GameScene extends Phaser.Scene
     initilizeDragAndDrop()
     {
         let self = this;
-        self.dropZones = [];
-        self.graphics = [];
+        self.boardZones = [];
+        self.teamZones = [];
+        self.boardGraphics = [];
+        self.teamGraphics = [];
         for (let i = 0; i < 9; i++) 
         {
-            self.dropZones.push(self.add.zone(150 + 170 * i,790,100,100).setRectangleDropZone(100,100).setName(i));
-            self.graphics.push(self.add.graphics().lineStyle(2,0xffff00).strokeRect(
-                self.dropZones[i].x - self.dropZones[i].input.hitArea.width / 2,
-                self.dropZones[i].y - self.dropZones[i].input.hitArea.height / 2,
-                self.dropZones[i].input.hitArea.width,
-                self.dropZones[i].input.hitArea.height));
+            self.boardZones.push(self.add.zone(330 + 100 * i,790,60,60).setRectangleDropZone(60,60).setName(i));
+            self.boardGraphics.push(self.add.graphics().lineStyle(2,0xffff00).strokeRect(
+                self.boardZones[i].x - self.boardZones[i].input.hitArea.width / 2,
+                self.boardZones[i].y - self.boardZones[i].input.hitArea.height / 2,
+                self.boardZones[i].input.hitArea.width,
+                self.boardZones[i].input.hitArea.height));
         }
 
-        self.input.on('dragstart', function (pointer, gameObject) {
+        for (let i = 0; i < 3; i++) 
+        {
+            for (let j = 0; j < 9; j++) 
+            {
+                self.teamZones.push(self.add.zone(330 + 100 * j,530+ 65 * i,60,60).setRectangleDropZone(60,60).setName(i * 9 + j));
+                self.boardGraphics.push(self.add.graphics().lineStyle(2,0xffff00).strokeRect(
+                    self.teamZones[i * 9 + j].x - self.teamZones[i * 9 + j].input.hitArea.width / 2,
+                    self.teamZones[i * 9 + j].y - self.teamZones[i * 9 + j].input.hitArea.height / 2,
+                    self.teamZones[i * 9 + j].input.hitArea.width,
+                    self.teamZones[i * 9 + j].input.hitArea.height));
+            }
+        }
 
+
+        self.input.on('dragstart', function (pointer, gameObject) 
+        {
             self.children.bringToTop(gameObject);
-    
         }, self);
     
-        self.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-    
+        self.input.on('drag', function (pointer, gameObject, dragX, dragY) 
+        {
             gameObject.x = dragX;
             gameObject.y = dragY;
-    
         });
     
-        self.input.on('dragenter', function (pointer, gameObject, dropZone) {
-
-            self.graphics[dropZone.name].clear();
-            self.graphics[dropZone.name].lineStyle(2, 0x00ffff);
-            self.graphics[dropZone.name].strokeRect(dropZone.x - dropZone.input.hitArea.width / 2, dropZone.y - dropZone.input.hitArea.height / 2, dropZone.input.hitArea.width, dropZone.input.hitArea.height);
-    
+        self.input.on('dragenter', function (pointer, gameObject, dropZone) 
+        {
+            /**
+             *             
+            self.boardGraphics[dropZone.name].clear();
+            self.boardGraphics[dropZone.name].lineStyle(2, 0x00ffff);
+            self.boardGraphics[dropZone.name].strokeRect(dropZone.x - dropZone.input.hitArea.width / 2, dropZone.y - dropZone.input.hitArea.height / 2, dropZone.input.hitArea.width, dropZone.input.hitArea.height);
+             */
         });
     
-        self.input.on('dragleave', function (pointer, gameObject, dropZone) {
-            self.graphics[dropZone.name].clear();
-            self.graphics[dropZone.name].lineStyle(2, 0xffff00);
-            self.graphics[dropZone.name].strokeRect(dropZone.x - dropZone.input.hitArea.width / 2, dropZone.y - dropZone.input.hitArea.height / 2, dropZone.input.hitArea.width, dropZone.input.hitArea.height);
-        });
+        self.input.on('dragleave', function (pointer, gameObject, dropZone) 
+        {
+            /**
+            self.boardGraphics[dropZone.name].clear();
+            self.boardGraphics[dropZone.name].lineStyle(2, 0xffff00);
+            self.boardGraphics[dropZone.name].strokeRect(dropZone.x - dropZone.input.hitArea.width / 2, dropZone.y - dropZone.input.hitArea.height / 2, dropZone.input.hitArea.width, dropZone.input.hitArea.height);
+             */
+       });
     
-        self.input.on('drop', function (pointer, gameObject, dropZone) {
-    
+        self.input.on('drop', function (pointer, gameObject, dropZone) 
+        {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
-    
         });
     
-        self.input.on('dragend', function (pointer, gameObject, dropped) {
-    
+        self.input.on('dragend', function (pointer, gameObject, dropped) 
+        {
             if (!dropped)
             {
                 gameObject.x = gameObject.input.dragStartX;
                 gameObject.y = gameObject.input.dragStartY;
             }
-
         });
     }
 }
