@@ -1,6 +1,6 @@
 import Pokemon from './Pokemon';
 
-export default class BoardManager
+export default class TeamManager
 {
     constructor(scene, group, player)
     {
@@ -11,7 +11,7 @@ export default class BoardManager
 
     addPokemon(pokemon)
     {
-        let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 +330, 790, pokemon);
+        let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 + 330, 680 - 65 * pokemon.positionY, pokemon);
         pokemonUI.setScale(3,3);
         this.scene.add.existing(pokemonUI);
         pokemonUI.setInteractive();
@@ -22,7 +22,7 @@ export default class BoardManager
 
     removePokemon(id)
     {
-        this.group.getChildren().forEach(pokemon => {
+        this.group.getChildren().forEach(pokemon =>{
             if(pokemon.id == id)
             {
                 pokemon.destroy();
@@ -32,9 +32,9 @@ export default class BoardManager
 
     buildPokemons()
     {   
-        for (let id in this.player.board) 
+        for (let id in this.player.team) 
         {
-            let pokemon = this.player.board[id];
+            let pokemon = this.player.team[id];
             this.addPokemon(pokemon);
         }
     }
@@ -51,9 +51,9 @@ export default class BoardManager
 
     update()
     {
-        for (let id in this.player.board) 
+        for (let id in this.player.team) 
         {
-          let pokemon = this.player.board[id];
+          let pokemon = this.player.team[id];
           let found = false;
           this.group.getChildren().forEach(pokemonUI=>{
               if(pokemon.id == pokemonUI.id){
@@ -62,8 +62,9 @@ export default class BoardManager
                 if(pokemonUI.positionX != pokemon.positionX)
                 {
                     pokemonUI.positionX = pokemon.positionX;
+                    pokemonUI.positionY = pokemon.positionY;
                     pokemonUI.x = pokemon.positionX * 100 +330;
-                    pokemonUI.y = 790;
+                    pokemonUI.y = 680 - 65 * pokemon.positionY;
                 }
               }
           });
@@ -74,7 +75,7 @@ export default class BoardManager
         }
 
         this.group.getChildren().forEach(pokemonUI=>{
-            if (!(pokemonUI.id in this.player.board))
+            if (!(pokemonUI.id in this.player.team))
             {
                 this.removePokemon(pokemonUI.id);
             }

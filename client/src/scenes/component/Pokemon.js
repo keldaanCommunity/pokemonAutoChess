@@ -6,5 +6,7 @@ export default class Pokemon extends Phaser.GameObjects.Sprite
         this.setScale(3,3);
         this.index = pokemon.index;
         this.id = pokemon.id;
+        this.positionX = pokemon.positionX;
+        this.positionY = pokemon.positionY;
     }
 }

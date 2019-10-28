@@ -15,6 +15,8 @@ class Pokemon extends Schema
         this.rarity = rarity;
         this.index = index;
         this.evolution = evolution;
+        this.positionX = 0;
+        this.positionY = 0;
     }    
 }
 
@@ -96,7 +98,9 @@ schema.defineTypes(Pokemon,{
     type: "string",
     rarity: "string",
     index: "number",
-    evolution: "string"
+    evolution: "string",
+    positionX:"number",
+    positionY:"number"
 });
 
 module.exports = {Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Pokemon};

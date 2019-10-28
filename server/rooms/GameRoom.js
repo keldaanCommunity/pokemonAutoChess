@@ -120,10 +120,106 @@ class GameRoom extends colyseus.Room {
           this.onShopClick(client.sessionId, message.id);
           break;
       
+        case 'dragDrop':
+          this.onDragDrop(client.sessionId, message.detail);
         default:
           break;
       } 
     }
+
+    onDragDrop(sessionId, detail)
+    {
+      let pokemonId = detail.pokemonId;
+      let x = parseInt(detail.x);
+      let y;
+      if(detail.y)
+      {
+        y = parseInt(detail.y);
+      }
+      if(sessionId in this.state.players)
+      {
+        switch (detail.zone) {
+          case 'boardZone':
+            if(this.isBoardPlaceAvailable(this.state.players[sessionId].board, x))
+            {
+              if(pokemonId in this.state.players[sessionId].board)
+              {
+                this.state.players[sessionId].board[pokemonId].positionX = x;
+              }
+              else if(pokemonId in this.state.players[sessionId].team)
+              {
+                this.state.shop.pool.set(pokemonId, this.state.players[sessionId].team[pokemonId]);
+                delete this.state.players[sessionId].team[pokemonId];
+                this.state.shop.pool.get(pokemonId).positionX = x;
+                this.state.players[sessionId].board[pokemonId] = this.state.shop.pool.get(pokemonId);
+                this.state.shop.pool.delete(pokemonId);
+              }
+            }
+            else
+            {
+              return new Error('no pokemon found in board or team');
+            }
+            break;
+          
+          case 'teamZone':
+            if(this.isTeamPlaceAvailable(this.state.players[sessionId].board, x, y))
+            {
+              if(pokemonId in this.state.players[sessionId].board)
+              {
+                this.state.shop.pool.set(pokemonId, this.state.players[sessionId].board[pokemonId]);
+                delete this.state.players[sessionId].board[pokemonId];
+                this.state.shop.pool.get(pokemonId).positionX = x;
+                this.state.shop.pool.get(pokemonId).positionY = y;
+                this.state.players[sessionId].team[pokemonId] = this.state.shop.pool.get(pokemonId);
+                this.state.shop.pool.delete(pokemonId);
+
+              }
+              else if(pokemonId in this.state.players[sessionId].team)
+              {
+                this.state.players[sessionId].team[pokemonId].positionX = x;
+                this.state.players[sessionId].team[pokemonId].positionY = y;
+              }
+            }
+            else
+            {
+
+            }
+            break;
+        
+          default:
+           return new Error('bad drop zone name');
+        }
+      }
+    }
+
+    isBoardPlaceAvailable(board, x)
+    {
+      let empty = true;
+      for (let id in board)
+      {
+        let pokemon = board[id];
+        if(pokemon.positionX == x)
+        {
+          empty = false;
+        }
+      }
+      return empty;
+    }
+
+    isTeamPlaceAvailable(team, x, y)
+    {
+      let empty = true;
+      for (let id in team)
+      {
+        let pokemon = team[id];
+        if(pokemon.positionX == x && pokemon.positionY == y)
+        {
+          empty = false;
+        }
+      }
+      return empty;
+    }
+
 
     onShopClick(sessionId, pokemonId)
     {
@@ -133,10 +229,32 @@ class GameRoom extends colyseus.Room {
         {
          this.state.shop.pool.set(pokemonId, this.state.players[sessionId].shop[pokemonId]);
          delete this.state.players[sessionId].shop[pokemonId];
+         this.state.shop.pool.get(pokemonId).positionX = this.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
          this.state.players[sessionId].board[pokemonId] = this.state.shop.pool.get(pokemonId);
          this.state.shop.pool.delete(pokemonId);
         }
       }
+    }
+
+    getFirstAvailablePositionInBoard(board)
+    {
+      for (let i = 0; i < 9; i++) 
+      { 
+        let occupation = false;
+        for (let id in board)
+        {
+          let pokemon = board[id];
+          if(pokemon.positionX == i)
+          {
+            occupation = true;
+          }
+        }
+        if(!occupation)
+        {
+          return i;
+        }
+      }
+      return new Error('no place found, board full');
     }
 
     onLeave (client, consented) 

@@ -27,6 +27,7 @@ client.joinOrCreate("gameRoom", {/* options */}).then(room => {
               client.gameView.game.scene.getScene("gameScene").shopContainer.updatePortraits();
               client.gameView.game.scene.getScene("gameScene").playerContainer.updatePortraits();
               client.gameView.game.scene.getScene("gameScene").boardManager.update();
+              client.gameView.game.scene.getScene("gameScene").teamManager.update();
               break;
 
             default:
@@ -52,6 +53,10 @@ client.joinOrCreate("gameRoom", {/* options */}).then(room => {
 
     window.addEventListener('shopClick',e=>{
       room.send({'event':'shopClick','id':e.detail.id});
+    });
+
+    window.addEventListener('dragDrop',e=>{
+      room.send({'event':'dragDrop','detail':e.detail});
     });
 
   }).catch(e => {
