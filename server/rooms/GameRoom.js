@@ -6,6 +6,7 @@ const MapSchema = schema.MapSchema;
 const Simulation = require('../simulation/Simulation');
 const Player = require('../type/Player');
 const Shop = require('../type/Shop');
+const PokemonFactory = require('../type/PokemonFactory');
 
 class Vector2D extends Schema {}
 schema.defineTypes(Vector2D, {
@@ -70,7 +71,8 @@ class GameRoom extends colyseus.Room {
       if(this.state.typeState == "FightState")
       {
         this.state.simulation.scheduler.update();
-        for (let i = 0; i < this.state.simulation.space.locations.length; i++) {
+        for (let i = 0; i < this.state.simulation.space.locations.length; i++) 
+        {
           this.state.locations[i].x = this.state.simulation.space.locations[i].x;
           this.state.locations[i].y = this.state.simulation.space.locations[i].y;
           this.state.velocities[i].x = this.state.simulation.space.agents[i].velocity.x;
@@ -129,89 +131,86 @@ class GameRoom extends colyseus.Room {
 
     onDragDrop(sessionId, detail)
     {
-      let pokemonId = detail.pokemonId;
-      let x = parseInt(detail.x);
-      let y;
-      if(detail.y)
-      {
-        y = parseInt(detail.y);
-      }
+     
       if(sessionId in this.state.players)
       {
-        switch (detail.zone) {
-          case 'boardZone':
-            if(this.isBoardPlaceAvailable(this.state.players[sessionId].board, x))
-            {
-              if(pokemonId in this.state.players[sessionId].board)
-              {
-                this.state.players[sessionId].board[pokemonId].positionX = x;
-              }
-              else if(pokemonId in this.state.players[sessionId].team)
-              {
-                this.state.shop.pool.set(pokemonId, this.state.players[sessionId].team[pokemonId]);
-                delete this.state.players[sessionId].team[pokemonId];
-                this.state.shop.pool.get(pokemonId).positionX = x;
-                this.state.players[sessionId].board[pokemonId] = this.state.shop.pool.get(pokemonId);
-                this.state.shop.pool.delete(pokemonId);
-              }
-            }
-            else
-            {
-              return new Error('no pokemon found in board or team');
-            }
-            break;
-          
-          case 'teamZone':
-            if(this.isTeamPlaceAvailable(this.state.players[sessionId].board, x, y))
-            {
-              if(pokemonId in this.state.players[sessionId].board)
-              {
-                this.state.shop.pool.set(pokemonId, this.state.players[sessionId].board[pokemonId]);
-                delete this.state.players[sessionId].board[pokemonId];
-                this.state.shop.pool.get(pokemonId).positionX = x;
-                this.state.shop.pool.get(pokemonId).positionY = y;
-                this.state.players[sessionId].team[pokemonId] = this.state.shop.pool.get(pokemonId);
-                this.state.shop.pool.delete(pokemonId);
-
-              }
-              else if(pokemonId in this.state.players[sessionId].team)
-              {
-                this.state.players[sessionId].team[pokemonId].positionX = x;
-                this.state.players[sessionId].team[pokemonId].positionY = y;
-              }
-            }
-            else
-            {
-
-            }
-            break;
-        
-          default:
-           return new Error('bad drop zone name');
+        if(detail.pokemonId in this.state.players[sessionId].board)
+        {
+          let pokemon = this.state.players[sessionId].board[detail.pokemonId];
+          let x = parseInt(detail.x);
+          let y = parseInt(detail.y);
+          if(!this.isPositionEmpty(this.state.players[sessionId].board, x, y))
+          {
+            let pokemonToSwap = this.getPokemonByPosition(this.state.players[sessionId].board, x, y);      
+            pokemonToSwap.positionX = pokemon.positionX;
+            pokemonToSwap.positionY = pokemon.positionY;
+          }
+          pokemon.positionX = x;
+          pokemon.positionY = y;
         }
       }
     }
 
-    isBoardPlaceAvailable(board, x)
+
+    computeEvolutions(board)
+    {
+      let evolve = false;
+      for (let id in board)
+      {
+        let pokemon = board[id];
+        let count = 0;
+        let pokemonEvolutionName = pokemon.evolution;
+        
+        if(pokemonEvolutionName != '')
+        {
+          for (let id in board)
+          {
+            if(board[id].index == pokemon.index)
+            {
+              count += 1;
+            }
+          }
+          
+          if(count == 3)
+          {
+            for (let id in board)
+            {
+              if( board[id].index == pokemon.index && count >= 0)
+              {
+                delete board[id];
+                count -= 1;
+              }
+            }
+            let x = this.getFirstAvailablePositionInBoard(board);
+            let pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName);
+            pokemonEvolved.positionX = x;
+            board[pokemonEvolved.id] = pokemonEvolved;
+            evolve = true;
+          }
+        }
+      }
+      
+      return evolve;
+    }
+
+    getPokemonByPosition(board, x, y)
+    {
+      for (let id in board)
+      {
+        let pokemon = board[id];
+        if(pokemon.positionX == x && pokemon.positionY == y)
+        {
+          return pokemon;
+        }
+      }
+    }
+
+    isPositionEmpty(board, x, y)
     {
       let empty = true;
       for (let id in board)
       {
         let pokemon = board[id];
-        if(pokemon.positionX == x)
-        {
-          empty = false;
-        }
-      }
-      return empty;
-    }
-
-    isTeamPlaceAvailable(team, x, y)
-    {
-      let empty = true;
-      for (let id in team)
-      {
-        let pokemon = team[id];
         if(pokemon.positionX == x && pokemon.positionY == y)
         {
           empty = false;
@@ -227,11 +226,15 @@ class GameRoom extends colyseus.Room {
       {
         if(pokemonId in this.state.players[sessionId].shop)
         {
-         this.state.shop.pool.set(pokemonId, this.state.players[sessionId].shop[pokemonId]);
-         delete this.state.players[sessionId].shop[pokemonId];
-         this.state.shop.pool.get(pokemonId).positionX = this.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
-         this.state.players[sessionId].board[pokemonId] = this.state.shop.pool.get(pokemonId);
-         this.state.shop.pool.delete(pokemonId);
+          this.state.shop.pool.set(pokemonId, this.state.players[sessionId].shop[pokemonId]);
+          delete this.state.players[sessionId].shop[pokemonId];
+          this.state.shop.pool.get(pokemonId).positionX = this.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
+          this.state.shop.pool.get(pokemonId).positionY = 0;
+          this.state.players[sessionId].board[pokemonId] = this.state.shop.pool.get(pokemonId);
+          this.state.shop.pool.delete(pokemonId);
+          
+          this.computeEvolutions(this.state.players[sessionId].board);
+          this.computeEvolutions(this.state.players[sessionId].board);
         }
       }
     }
@@ -239,12 +242,12 @@ class GameRoom extends colyseus.Room {
     getFirstAvailablePositionInBoard(board)
     {
       for (let i = 0; i < 9; i++) 
-      { 
+      {  
         let occupation = false;
         for (let id in board)
         {
           let pokemon = board[id];
-          if(pokemon.positionX == i)
+          if(pokemon.positionX == i && pokemon.positionY == 0)
           {
             occupation = true;
           }

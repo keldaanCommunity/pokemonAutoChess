@@ -27,7 +27,6 @@ client.joinOrCreate("gameRoom", {/* options */}).then(room => {
               client.gameView.game.scene.getScene("gameScene").shopContainer.updatePortraits();
               client.gameView.game.scene.getScene("gameScene").playerContainer.updatePortraits();
               client.gameView.game.scene.getScene("gameScene").boardManager.update();
-              client.gameView.game.scene.getScene("gameScene").teamManager.update();
               break;
 
             default:

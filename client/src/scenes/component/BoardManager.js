@@ -11,7 +11,7 @@ export default class BoardManager
 
     addPokemon(pokemon)
     {
-        let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 +330, 790, pokemon);
+        let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 +330, 790 - 80 * pokemon.positionY, pokemon);
         pokemonUI.setScale(3,3);
         this.scene.add.existing(pokemonUI);
         pokemonUI.setInteractive();
@@ -50,20 +50,21 @@ export default class BoardManager
     }
 
     update()
-    {
+    {   
         for (let id in this.player.board) 
         {
           let pokemon = this.player.board[id];
+          
           let found = false;
           this.group.getChildren().forEach(pokemonUI=>{
               if(pokemon.id == pokemonUI.id){
                 found = true;
 
-                if(pokemonUI.positionX != pokemon.positionX)
+                if(pokemonUI.positionX != pokemon.positionX || pokemonUI.positionY != pokemon.positionY)
                 {
                     pokemonUI.positionX = pokemon.positionX;
-                    pokemonUI.x = pokemon.positionX * 100 +330;
-                    pokemonUI.y = 790;
+                    pokemonUI.x = pokemon.positionX * 100 + 330;
+                    pokemonUI.y = 790 - 80 * pokemon.positionY;
                 }
               }
           });
@@ -72,12 +73,16 @@ export default class BoardManager
             this.addPokemon(pokemon);
           }
         }
-
+        let ids = [];
         this.group.getChildren().forEach(pokemonUI=>{
             if (!(pokemonUI.id in this.player.board))
             {
-                this.removePokemon(pokemonUI.id);
+                ids.push(pokemonUI.id);
+                
             }
+        })
+        ids.forEach(id=>{
+            this.removePokemon(id);
         })
     }
 }

@@ -4,7 +4,6 @@ import ShopContainer from './component/shopContainer';
 import PlayerContainer from './component/PlayerContainer';
 import BoardContainer from './component/BoardManager';
 import BoardManager from './component/BoardManager';
-import TeamManager from './component/TeamManager';
 
 export default class GameScene extends Phaser.Scene
 {
@@ -33,7 +32,6 @@ export default class GameScene extends Phaser.Scene
         map.createStaticLayer("World",tileset,0,0);
         this.dashboard = this.add.image(850,940,"dashboard");
         this.board = this.add.group();
-        this.team = this.add.group();
         window.animationManager = new AnimationManager(this);
         [1,2,3,4,5,6,7,8,9].forEach(num=>{
             window.animationManager.createAnimations(num);
@@ -42,7 +40,6 @@ export default class GameScene extends Phaser.Scene
         this.playerContainer = new PlayerContainer(this, 1750, 100);
         this.boardContainer = new BoardContainer(this, 275, 775);
         this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
-        this.teamManager = new TeamManager(this,this.team, window.state.players[window.sessionId]);
         this.textStyle = 
         {
           fontSize: "30px",
@@ -69,30 +66,19 @@ export default class GameScene extends Phaser.Scene
     initilizeDragAndDrop()
     {
         let self = this;
-        self.boardZones = [];
-        self.teamZones = [];
-        self.boardGraphics = [];
-        self.teamGraphics = [];
-        for (let i = 0; i < 9; i++) 
-        {
-            self.boardZones.push(self.add.zone(330 + 100 * i,790,60,60).setRectangleDropZone(60,60).setName('boardZone-' + i));
-            self.boardGraphics.push(self.add.graphics().lineStyle(2,0xffff00).strokeRect(
-                self.boardZones[i].x - self.boardZones[i].input.hitArea.width / 2,
-                self.boardZones[i].y - self.boardZones[i].input.hitArea.height / 2,
-                self.boardZones[i].input.hitArea.width,
-                self.boardZones[i].input.hitArea.height));
-        }
+        self.zones = [];
+        self.graphics = [];
 
-        for (let i = 0; i < 3; i++) 
+        for (let i = 0; i < 4; i++) 
         {
             for (let j = 0; j < 9; j++) 
             {
-                self.teamZones.push(self.add.zone(330 + 100 * j,680 - 65 * i,60,60).setRectangleDropZone(60,60).setName('teamZone-' + j + '-' + i));
-                self.boardGraphics.push(self.add.graphics().lineStyle(2,0xffff00).strokeRect(
-                    self.teamZones[i * 9 + j].x - self.teamZones[i * 9 + j].input.hitArea.width / 2,
-                    self.teamZones[i * 9 + j].y - self.teamZones[i * 9 + j].input.hitArea.height / 2,
-                    self.teamZones[i * 9 + j].input.hitArea.width,
-                    self.teamZones[i * 9 + j].input.hitArea.height));
+                self.zones.push(self.add.zone(330 + 100 * j,790 - 80 * i,60,60).setRectangleDropZone(60,60).setName('zone-' + j + '-' + i));
+                self.graphics.push(self.add.graphics().lineStyle(2,0xffff00).strokeRect(
+                    self.zones[i * 9 + j].x - self.zones[i * 9 + j].input.hitArea.width / 2,
+                    self.zones[i * 9 + j].y - self.zones[i * 9 + j].input.hitArea.height / 2,
+                    self.zones[i * 9 + j].input.hitArea.width,
+                    self.zones[i * 9 + j].input.hitArea.height));
             }
         }
 
@@ -129,32 +115,16 @@ export default class GameScene extends Phaser.Scene
     
         self.input.on('drop', function (pointer, gameObject, dropZone) 
         {
-            //gameObject.x = dropZone.x;
-            //gameObject.y = dropZone.y;
             
-            if(dropZone.name.includes('boardZone'))
+            window.dispatchEvent(new CustomEvent('dragDrop',
             {
-                window.dispatchEvent(new CustomEvent('dragDrop',
-                {
-                  detail: {
-                      'zone': 'boardZone',
-                      'x':dropZone.name.substr(10, 1),
-                      'pokemonId':gameObject.id
-                    }
-                }));
-            }
-            else
-            {
-                window.dispatchEvent(new CustomEvent('dragDrop',
-                {
-                  detail: {
-                      'zone': 'teamZone',
-                      'x':dropZone.name.substr(9,1),
-                      'y':dropZone.name.substr(11,1),
-                      'pokemonId':gameObject.id
-                    }
-                }));
-            }
+                detail: {
+                    'x':dropZone.name.substr(5, 1),
+                    'y':dropZone.name.substr(7, 1),
+                    'pokemonId':gameObject.id
+                }
+            }));
+           
         });
     
         self.input.on('dragend', function (pointer, gameObject, dropped) 

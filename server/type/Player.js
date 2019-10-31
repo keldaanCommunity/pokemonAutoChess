@@ -9,7 +9,6 @@ class Player extends Schema
         super();
         this.id = id;
         this.board = new MapSchema();
-        this.team = new MapSchema();
         this.shop = new MapSchema();
         this.level = 2;
     }
@@ -18,7 +17,6 @@ class Player extends Schema
 schema.defineTypes(Player,{
     id:"string",
     board: {map: Pokemon},
-    team: {map: Pokemon},
     shop: {map: Pokemon},
     level: "number"
 })
