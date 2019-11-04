@@ -22,14 +22,15 @@ export default class GameScene extends Phaser.Scene
       this.load.tilemapTiledJSON("map","assets/tiles/tilemap.json")
       this.load.image("user","assets/ui/user.png");
       this.load.image("dashboard","assets/ui/dashboard.png");
+      this.load.image("transition","assets/ui/favicon.png");
     }
     
     create()
     {   
         this.input.dragDistanceThreshold = 16;
-        const map = this.make.tilemap({ key:"map"});
-        const tileset = map.addTilesetImage("tileset","tiles");
-        map.createStaticLayer("World",tileset,0,0);
+        this.map = this.make.tilemap({ key:"map"});
+        const tileset = this.map.addTilesetImage("tileset","tiles");
+        this.map.createStaticLayer("World",tileset,0,0);
         this.dashboard = this.add.image(850,940,"dashboard");
         this.board = this.add.group();
         window.animationManager = new AnimationManager(this);
@@ -47,8 +48,10 @@ export default class GameScene extends Phaser.Scene
           color: "white",
           align: "center"
         };
-
+        this.nameText = this.add.text(50,50, window.sessionId, this.textStyle);
         this.timeText = this.add.text(850,20,window.state.time, this.textStyle);
+        this.transitionImage = new Phaser.GameObjects.Image(this, 750, 450, 'transition').setScale(1.5,1.5);
+
         this.initilizeDragAndDrop();
         window.initialized = true;
     }
@@ -57,6 +60,20 @@ export default class GameScene extends Phaser.Scene
     update ()
     {
     }
+
+    fade()
+    {
+        this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(Number.MAX_VALUE);
+        this.transitionScreen.alpha = 0;
+        this.tweens.add({
+            targets: this.transitionScreen,
+            duration: 150,
+            alpha: 1,
+            yoyo:true,
+            repeat:0
+        });
+    }
+
 
     updateTimeText(time)
     {

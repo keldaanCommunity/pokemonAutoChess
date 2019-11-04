@@ -1,5 +1,6 @@
 import * as Colyseus from "colyseus.js";
 import Gameview from './GameView';
+import BoardManager from "./scenes/component/BoardManager";
 
 var client = new Colyseus.Client('ws://localhost:2567');
 
@@ -54,6 +55,12 @@ client.joinOrCreate("gameRoom", {/* options */}).then(room => {
       room.send({'event':'shopClick','id':e.detail.id});
     });
 
+    window.addEventListener('playerClick',e=>{
+      client.gameView.game.scene.getScene("gameScene").fade();
+      client.gameView.game.scene.getScene("gameScene").boardManager.clear();
+      client.gameView.game.scene.getScene("gameScene").boardManager.player = window.state.players[e.detail.id];
+      client.gameView.game.scene.getScene("gameScene").boardManager.buildPokemons();
+    });
     window.addEventListener('dragDrop',e=>{
       room.send({'event':'dragDrop','detail':e.detail});
     });

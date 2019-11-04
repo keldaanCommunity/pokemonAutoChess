@@ -14,10 +14,19 @@ export default class BoardManager
         let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 +330, 790 - 80 * pokemon.positionY, pokemon);
         pokemonUI.setScale(3,3);
         this.scene.add.existing(pokemonUI);
-        pokemonUI.setInteractive();
-        this.scene.input.setDraggable(pokemonUI);
+        console.log(this.player);
+        
+        if(window.sessionId == this.player.id)
+        {
+            pokemonUI.setInteractive();
+            this.scene.input.setDraggable(pokemonUI);
+        }
         window.animationManager.displayEntity(pokemonUI);
         this.group.add(pokemonUI);
+    }
+
+    clear(){
+        this.group.clear(false,true);
     }
 
     removePokemon(id)
@@ -78,7 +87,6 @@ export default class BoardManager
             if (!(pokemonUI.id in this.player.board))
             {
                 ids.push(pokemonUI.id);
-                
             }
         })
         ids.forEach(id=>{
