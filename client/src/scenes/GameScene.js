@@ -22,7 +22,7 @@ export default class GameScene extends Phaser.Scene
       this.load.tilemapTiledJSON("map","assets/tiles/tilemap.json")
       this.load.image("user","assets/ui/user.png");
       this.load.image("dashboard","assets/ui/dashboard.png");
-      this.load.image("transition","assets/ui/favicon.png");
+      this.load.image("transition","assets/ui/transition.png");
     }
     
     create()
@@ -49,8 +49,10 @@ export default class GameScene extends Phaser.Scene
           align: "center"
         };
         this.nameText = this.add.text(50,50, window.sessionId, this.textStyle);
-        this.timeText = this.add.text(850,20,window.state.time, this.textStyle);
-        this.transitionImage = new Phaser.GameObjects.Image(this, 750, 450, 'transition').setScale(1.5,1.5);
+        this.timeText = this.add.text(700,20,window.state.time, this.textStyle);
+        this.transitionImage = new Phaser.GameObjects.Image(this, 720, 450, 'transition').setScale(1.5,1.5);
+        this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(Number.MAX_VALUE);
+        this.transitionScreen.alpha = 0;
 
         this.initilizeDragAndDrop();
         window.initialized = true;
@@ -63,8 +65,6 @@ export default class GameScene extends Phaser.Scene
 
     fade()
     {
-        this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(Number.MAX_VALUE);
-        this.transitionScreen.alpha = 0;
         this.tweens.add({
             targets: this.transitionScreen,
             duration: 150,
@@ -90,7 +90,7 @@ export default class GameScene extends Phaser.Scene
         {
             for (let j = 0; j < 9; j++) 
             {
-                self.zones.push(self.add.zone(330 + 100 * j,790 - 80 * i,60,60).setRectangleDropZone(60,60).setName('zone-' + j + '-' + i));
+                self.zones.push(self.add.zone(330 + 100 * j,790 - 80 * i,90,70).setRectangleDropZone(90,70).setName('zone-' + j + '-' + i));
                 self.graphics.push(self.add.graphics().lineStyle(2,0xffff00).strokeRect(
                     self.zones[i * 9 + j].x - self.zones[i * 9 + j].input.hitArea.width / 2,
                     self.zones[i * 9 + j].y - self.zones[i * 9 + j].input.hitArea.height / 2,
