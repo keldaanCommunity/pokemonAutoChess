@@ -1,5 +1,7 @@
 const colyseus = require('colyseus');
 const schema = require('@colyseus/schema');
+const User = require('@colyseus/social').User;
+const FriendRequest = require('@colyseus/social').FriendRequest;
 const Schema = schema.Schema;
 const ArraySchema = schema.ArraySchema;
 const MapSchema = schema.MapSchema;
@@ -7,6 +9,7 @@ const Simulation = require('../simulation/Simulation');
 const Player = require('../type/Player');
 const Shop = require('../type/Shop');
 const PokemonFactory = require('../type/PokemonFactory');
+const superagent = require('superagent');
 
 class Vector2D extends Schema {}
 schema.defineTypes(Vector2D, {
@@ -57,13 +60,6 @@ class GameRoom extends colyseus.Room {
     onCreate () {
       this.setState(new PickState());
       this.setSimulationInterval((deltaTime) => this.update(deltaTime));
-      /*
-      for(var i = 0; i < 10; ++i) 
-      {
-        this.state.locations.push(new Vector2D(0,0));
-        this.state.velocities.push(new Vector2D(0,0));
-      }
-       */
     }
     
     update (deltaTime)
@@ -101,16 +97,21 @@ class GameRoom extends colyseus.Room {
       
     }
 
-    // Authorize client based on provided options before WebSocket handshake is complete
-    onAuth (client, options, request) 
-    {
-      return true;
+    async onAuth (client, options) {
+      const response = await superagent
+      .get(`https://graph.facebook.com/debug_token`)
+      .query({
+        'input_token': options.accessToken,
+        'access_token': process.env.FACEBOOK_APP_TOKEN
+      })
+      .set('Accept', 'application/json');
+      return response.body.data;
     }
-
-    // When client successfully join the room
-    onJoin (client, options, auth) 
-    {
-      this.state.players[client.sessionId] = new Player(client.sessionId);
+  
+    onJoin(client, options, auth) {
+      console.log(options.facebookName, "joined successfully");
+      //console.log("Auth data: ", auth);
+      this.state.players[client.sessionId] = new Player(client.sessionId, options.facebookName);
     }
 
     // When a client sends a message

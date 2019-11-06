@@ -1,11 +1,11 @@
 import * as Colyseus from "colyseus.js";
 import Gameview from './GameView';
-import BoardManager from "./scenes/component/BoardManager";
 
 var client = new Colyseus.Client('ws://localhost:2567');
 
-
-client.joinOrCreate("gameRoom", {/* options */}).then(room => {
+window.joinOrCreate = function(accessToken, facebookName)
+{
+  client.joinOrCreate("gameRoom", { 'accessToken': accessToken, 'facebookName':facebookName }).then(room => {
     console.log("joined successfully", room);
     window.sessionId = room.sessionId;
     
@@ -67,7 +67,7 @@ client.joinOrCreate("gameRoom", {/* options */}).then(room => {
 
   }).catch(e => {
     console.error("join error", e);
-  });
+});
 
 
-
+}

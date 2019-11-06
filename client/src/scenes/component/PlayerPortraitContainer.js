@@ -19,6 +19,6 @@ export default class PlayerPortraitContainer extends Phaser.GameObjects.Containe
             }
           ))});
         this.add(this.background);
-        this.add(new Phaser.GameObjects.Text(scene,0,0, player.id, this.textStyle));
+        this.add(new Phaser.GameObjects.Text(scene,-30,0, player.facebookName, this.textStyle));
     }
 }

@@ -19,13 +19,15 @@
   },
   "dependencies": {
     "@colyseus/monitor": "^0.11.0",
-    "@colyseus/social": "^0.10.2",
+    "@colyseus/social": "^0.10.9",
     "colyseus": "^0.11.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
     "js-simulator": "^1.0.17",
     "nodemon": "^1.19.2",
+    "superagent": "^5.1.0",
     "uniqid": "^5.0.3"
   }
 }

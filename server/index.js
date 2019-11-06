@@ -1,10 +1,10 @@
+require("dotenv").config();
 const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const colyseus = require('colyseus');
 const Monitor = require("@colyseus/monitor");
-//const socialRoutes = require("@colyseus/social/express").default;
-
+const socialRoutes = require("@colyseus/social/express").default;
 const GameRoom = require('./rooms/GameRoom');
 
 const port = process.env.PORT || 2567;
@@ -23,7 +23,7 @@ const gameServer = new colyseus.Server({
 gameServer.define('gameRoom', GameRoom);
 
 // register @colyseus/social routes
-//app.use("/", socialRoutes);
+app.use("/", socialRoutes);
 
 //colyseus game server monitor panel
 app.use("/colyseus", Monitor.monitor(gameServer));

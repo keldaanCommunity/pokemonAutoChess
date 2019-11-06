@@ -11,11 +11,9 @@ export default class BoardManager
 
     addPokemon(pokemon)
     {
-        let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 +330, 790 - 80 * pokemon.positionY, pokemon);
+        let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 + 330, 790 - 80 * pokemon.positionY, pokemon);
         pokemonUI.setScale(3,3);
         this.scene.add.existing(pokemonUI);
-        console.log(this.player);
-        
         if(window.sessionId == this.player.id)
         {
             pokemonUI.setInteractive();
