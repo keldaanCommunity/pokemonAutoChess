@@ -3,6 +3,33 @@ import Gameview from './GameView';
 
 var client = new Colyseus.Client('ws://localhost:2567');
 
+window.fbAsyncInit = function() {
+  FB.init({
+    appId            : '632593943940001',
+    autoLogAppEvents : true,
+    xfbml            : true,
+    version          : 'v5.0'
+  });
+};
+
+window.login = function() {
+    let authResponse;
+    FB.login(function(response) 
+    {
+        if (response.authResponse) 
+        {
+            authResponse = response.authResponse;
+            FB.api(
+                "/"+ authResponse.userID + "/",
+                function (response) {
+                    window.joinOrCreate(authResponse.accessToken, response.name);
+                }
+            );
+            
+        }
+    }, { scope: 'public_profile,email' });
+}
+
 window.joinOrCreate = function(accessToken, facebookName)
 {
   client.joinOrCreate("gameRoom", { 'accessToken': accessToken, 'facebookName':facebookName }).then(room => {

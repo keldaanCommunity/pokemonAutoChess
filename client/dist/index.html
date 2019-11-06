@@ -9,44 +9,11 @@
             margin: 0;
         }
     </style>
+    <script src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script src="main.js"></script>
-    <script type="text/javascript" src="https://rawcdn.githack.com/colyseus/colyseus.js/b769c403be25dcb52bac71d3fb9f45c9f7ac556e/dist/colyseus.js"></script>
 
 </head>
 <body>
     <button onclick="login()">login</button>
-    <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId            : '632593943940001',
-            autoLogAppEvents : true,
-            xfbml            : true,
-            version          : 'v5.0'
-          });
-        };
-      </script>
-
-      <script>
-        function login () {
-            let authResponse;
-            FB.login(function(response) 
-            {
-                if (response.authResponse) 
-                {
-                    authResponse = response.authResponse;
-                    FB.api(
-                        "/"+ authResponse.userID + "/",
-                        function (response) {
-                            window.joinOrCreate(authResponse.accessToken, response.name);
-                        }
-                    );
-                    
-                }
-            }, { scope: 'public_profile,email' });
-
-
-      }
-      </script>
-      <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 </body>
 </html>
