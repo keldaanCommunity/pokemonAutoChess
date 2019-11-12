@@ -55,6 +55,9 @@ export default class GameScene extends Phaser.Scene
         this.transitionScreen.alpha = 0;
 
         this.initilizeDragAndDrop();
+        this.shopContainer.updatePortraits();
+        this.playerContainer.updatePortraits();
+        this.boardManager.update();
         window.initialized = true;
     }
 
