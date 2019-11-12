@@ -2,7 +2,11 @@ import * as Colyseus from "colyseus.js";
 import Gameview from './GameView';
 
 var client = new Colyseus.Client('ws://localhost:2567');
+client.gameView = new Gameview();
 
+window.addEventListener('clickPlay',()=>{
+  login();
+})
 
 
 if(sessionStorage.getItem('lastRoomId') && sessionStorage.getItem('lastSessionId')){
@@ -12,7 +16,7 @@ if(sessionStorage.getItem('lastRoomId') && sessionStorage.getItem('lastSessionId
     console.log("reconnect error", e);
     sessionStorage.removeItem('lastRoomId');
     sessionStorage.removeItem('lastSessionId');
-    window.login();
+    login();
   });
 }
 
@@ -26,7 +30,7 @@ window.fbAsyncInit = function() {
   });
 };
 
-window.login = function() {
+function login() {
     let authResponse;
     FB.login(function(response) 
     {
@@ -54,13 +58,14 @@ function joinOrCreate(accessToken, facebookName)
 }
 
 function initialize(room){
+  client.gameView.game.scene.stop('loginScene');
+  client.gameView.game.scene.start('gameScene');
   console.log("joined successfully", room);
   window.sessionId = room.sessionId;
   
 
   room.onStateChange.once((state) => {
     window.state = state;
-    client.gameView = new Gameview();
   });
   
   room.state.onChange = (changes) => {     

@@ -1,6 +1,6 @@
 import 'Phaser';
-import GameScene from './scenes/GameScene'
-
+import LoginScene from './scenes/LoginScene';
+import GameScene from './scenes/GameScene';
 export default class Gameview
 {
     constructor()
@@ -9,11 +9,10 @@ export default class Gameview
             type: Phaser.AUTO,
             width: 2000,
             height: 1000,
-            scene: [GameScene],
+            scene: [LoginScene, GameScene],
             scale:{
                 mode:Phaser.Scale.FIT
-            },
-            pixelArt: true
+            }
           };
           
           this.game = new Phaser.Game(config);
