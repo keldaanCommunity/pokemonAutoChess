@@ -6,8 +6,7 @@ client.gameView = new Gameview();
 
 window.addEventListener('clickPlay',()=>{
   login();
-})
-
+});
 
 if(sessionStorage.getItem('lastRoomId') && sessionStorage.getItem('lastSessionId')){
   let room = client.reconnect(sessionStorage.getItem('lastRoomId'), sessionStorage.getItem('lastSessionId')).then(room => {
@@ -19,7 +18,6 @@ if(sessionStorage.getItem('lastRoomId') && sessionStorage.getItem('lastSessionId
     login();
   });
 }
-
 
 window.fbAsyncInit = function() {
   FB.init({
@@ -62,8 +60,6 @@ function initialize(room){
   client.gameView.game.scene.start('gameScene');
   console.log("joined successfully", room);
   window.sessionId = room.sessionId;
-  
-
   room.onStateChange.once((state) => {
     window.state = state;
   });
@@ -81,14 +77,13 @@ function initialize(room){
             client.gameView.game.scene.getScene("gameScene").shopContainer.updatePortraits();
             client.gameView.game.scene.getScene("gameScene").playerContainer.updatePortraits();
             client.gameView.game.scene.getScene("gameScene").boardManager.update();
+            client.gameView.game.scene.getScene("gameScene").upadteMoney();
             break;
 
           default:
             break;
         }
     });
-      //client.gameView.game.scene.getScene("gameScene").updateEntitiesLocation(state.locations);
-      //client.gameView.game.scene.getScene("gameScene").updateEntitiesVelocity(state.velocities);
     }
 };
 

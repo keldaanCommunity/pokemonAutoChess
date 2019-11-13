@@ -6,19 +6,16 @@ export default class Gameview
     constructor()
     {
         var config = {
-            type: Phaser.AUTO,
+            type: Phaser.CANVAS,
             width: 2000,
             height: 1000,
+            pixelArt: true,
             scene: [LoginScene, GameScene],
             scale:{
                 mode:Phaser.Scale.FIT
             }
           };
-          
           this.game = new Phaser.Game(config);
-          
-
     }
-
 }
 

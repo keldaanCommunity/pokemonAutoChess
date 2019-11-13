@@ -11,7 +11,8 @@ class Player extends Schema
         this.facebookName = facebookName;
         this.board = new MapSchema();
         this.shop = new MapSchema();
-        this.level = 2;
+        this.level = 1;
+        this.money = 0;
     }
 }
 
@@ -20,7 +21,8 @@ schema.defineTypes(Player,{
     facebookName:"string",
     board: {map: Pokemon},
     shop: {map: Pokemon},
-    level: "number"
+    level: "number",
+    money: "number"
 })
 
 module.exports = Player;
