@@ -1,7 +1,5 @@
 const colyseus = require('colyseus');
 const schema = require('@colyseus/schema');
-const User = require('@colyseus/social').User;
-const FriendRequest = require('@colyseus/social').FriendRequest;
 const Schema = schema.Schema;
 const ArraySchema = schema.ArraySchema;
 const MapSchema = schema.MapSchema;
@@ -12,11 +10,6 @@ const PokemonFactory = require('../type/PokemonFactory');
 const superagent = require('superagent');
 
 class Vector2D extends Schema {}
-schema.defineTypes(Vector2D, {
-  x: "number",
-  y: "number"
-});
-
 
 class FightState extends Schema {
     constructor () {
@@ -29,7 +22,6 @@ class FightState extends Schema {
     }
 }
 
-
 class PickState extends Schema {
   constructor () {
       super();
@@ -39,6 +31,11 @@ class PickState extends Schema {
       this.shop = new Shop();
   }
 }
+
+schema.defineTypes(Vector2D, {
+  x: "number",
+  y: "number"
+});
 
 schema.defineTypes(PickState,{
   time: "number",
@@ -81,7 +78,18 @@ class GameRoom extends colyseus.Room {
         if(this.state.time < 0)
         {
           this.initializePickingPhase();
+          this.computeIncome();
         }
+      }
+    }
+
+    computeIncome()
+    {
+      for (let id in this.state.players) 
+      {
+        let player = this.state.players[id];
+        player.money += Math.min(Math.floor(player.money/10),5);
+        player.money += 5;
       }
     }
 
@@ -94,7 +102,6 @@ class GameRoom extends colyseus.Room {
         this.state.shop.detachShop(player);
         this.state.shop.assignShop(player);
       }
-      
     }
 
     async onAuth (client, options) {
@@ -227,15 +234,18 @@ class GameRoom extends colyseus.Room {
       {
         if(pokemonId in this.state.players[sessionId].shop)
         {
-          this.state.shop.pool.set(pokemonId, this.state.players[sessionId].shop[pokemonId]);
-          delete this.state.players[sessionId].shop[pokemonId];
-          this.state.shop.pool.get(pokemonId).positionX = this.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
-          this.state.shop.pool.get(pokemonId).positionY = 0;
-          this.state.players[sessionId].board[pokemonId] = this.state.shop.pool.get(pokemonId);
-          this.state.shop.pool.delete(pokemonId);
-          
-          this.computeEvolutions(this.state.players[sessionId].board);
-          this.computeEvolutions(this.state.players[sessionId].board);
+          if (this.state.players[sessionId].money >= this.state.players[sessionId].shop[pokemonId].cost){
+            this.state.players[sessionId].money -= this.state.players[sessionId].shop[pokemonId].cost;
+            this.state.shop.pool.set(pokemonId, this.state.players[sessionId].shop[pokemonId]);
+            delete this.state.players[sessionId].shop[pokemonId];
+            this.state.shop.pool.get(pokemonId).positionX = this.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
+            this.state.shop.pool.get(pokemonId).positionY = 0;
+            this.state.players[sessionId].board[pokemonId] = this.state.shop.pool.get(pokemonId);
+            this.state.shop.pool.delete(pokemonId);
+            
+            this.computeEvolutions(this.state.players[sessionId].board);
+            this.computeEvolutions(this.state.players[sessionId].board);
+          }
         }
       }
     }

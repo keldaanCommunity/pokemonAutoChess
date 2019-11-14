@@ -77,7 +77,7 @@ function initialize(room){
             client.gameView.game.scene.getScene("gameScene").shopContainer.updatePortraits();
             client.gameView.game.scene.getScene("gameScene").playerContainer.updatePortraits();
             client.gameView.game.scene.getScene("gameScene").boardManager.update();
-            client.gameView.game.scene.getScene("gameScene").upadteMoney();
+            client.gameView.game.scene.getScene("gameScene").updateMoney();
             break;
 
           default:

@@ -22,11 +22,19 @@ const TYPE = Object.freeze(
 );
 
 const RARITY = Object.freeze({
-	COMMON:'common',
-	UNCOMMON:'uncommon',
-	RARE:'rare',
-	EPIC:'epic',
-	LEGENDARY:'legendary'
+	COMMON:'COMMON',
+	UNCOMMON:'UNCOMMON',
+	RARE:'RARE',
+	EPIC:'EPIC',
+	LEGENDARY:'LEGENDARY'
 });
 
-module.exports = {TYPE, RARITY};
+const COST = Object.freeze({
+	COMMON:1,
+	UNCOMMON:2,
+	RARE:3,
+	EPIC:4,
+	LEGENDARY:5
+});
+
+module.exports = {TYPE, RARITY, COST};

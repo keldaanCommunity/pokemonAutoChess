@@ -51,7 +51,7 @@ export default class GameScene extends Phaser.Scene
         };
         this.nameText = this.add.text(10,50, window.state.players[window.sessionId].facebookName, this.textStyle);
         this.timeText = this.add.text(700,20,window.state.time, this.textStyle);
-        this.money = this.add.text(130,115, window.state.players[window.sessionId].money, this.textStyle);
+        this.money = this.add.text(120,115, window.state.players[window.sessionId].money, this.textStyle);
         this.moneyIcon = this.add.image(200,130,"money");
         this.transitionImage = new Phaser.GameObjects.Image(this, 720, 450, 'transition').setScale(1.5,1.5);
         this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(Number.MAX_VALUE);

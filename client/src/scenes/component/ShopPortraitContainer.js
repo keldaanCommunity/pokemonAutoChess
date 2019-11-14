@@ -41,7 +41,9 @@ export default class ShopPortraitContainer extends Phaser.GameObjects.Container
           }));
         });
         this.add(this.background);
-        this.add(new Phaser.GameObjects.Image(scene,0,0, pokemon.index,"portrait").setScale(2,2));
-        this.add(new Phaser.GameObjects.Text(scene,40,0, pokemon.name, this.textStyle));
+        this.add(new Phaser.GameObjects.Image(scene, 0, 0, pokemon.index,"portrait").setScale(2,2));
+        this.add(new Phaser.GameObjects.Text(scene, 40, 0, pokemon.name, this.textStyle));
+        this.add(new Phaser.GameObjects.Text(scene, 110, -33, pokemon.cost, this.textStyle));
+        this.add(new Phaser.GameObjects.Image(scene, 140, -20, "money").setScale(0.5,0.5));
     }
 }
