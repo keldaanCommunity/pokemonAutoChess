@@ -5,6 +5,7 @@ class Shop
     constructor()
     {
         this.pool = new Map();
+        this.switchPool = new Map();
         let potentialPokemons = ['bulbasaur', 'charmander', 'squirtle'];
         for (let i = 0; i < 40; i++) 
         {

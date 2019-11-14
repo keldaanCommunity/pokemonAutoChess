@@ -236,12 +236,12 @@ class GameRoom extends colyseus.Room {
         {
           if (this.state.players[sessionId].money >= this.state.players[sessionId].shop[pokemonId].cost){
             this.state.players[sessionId].money -= this.state.players[sessionId].shop[pokemonId].cost;
-            this.state.shop.pool.set(pokemonId, this.state.players[sessionId].shop[pokemonId]);
+            this.state.shop.switchPool.set(pokemonId, this.state.players[sessionId].shop[pokemonId]);
             delete this.state.players[sessionId].shop[pokemonId];
-            this.state.shop.pool.get(pokemonId).positionX = this.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
-            this.state.shop.pool.get(pokemonId).positionY = 0;
-            this.state.players[sessionId].board[pokemonId] = this.state.shop.pool.get(pokemonId);
-            this.state.shop.pool.delete(pokemonId);
+            this.state.shop.switchPool.get(pokemonId).positionX = this.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
+            this.state.shop.switchPool.get(pokemonId).positionY = 0;
+            this.state.players[sessionId].board[pokemonId] = this.state.shop.switchPool.get(pokemonId);
+            this.state.shop.switchPool.delete(pokemonId);
             
             this.computeEvolutions(this.state.players[sessionId].board);
             this.computeEvolutions(this.state.players[sessionId].board);
