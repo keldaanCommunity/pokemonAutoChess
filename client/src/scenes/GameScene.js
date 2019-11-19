@@ -24,6 +24,8 @@ export default class GameScene extends Phaser.Scene
       this.load.image("dashboard","assets/ui/dashboard.png");
       this.load.image("transition","assets/ui/transition.png");
       this.load.image("money","assets/ui/money.png");
+      this.load.image("refreshButton","assets/ui/refreshButton.png");
+      this.load.image("levelUpButton", "assets/ui/levelUpButton.png");
     }
     
     create()
@@ -33,12 +35,14 @@ export default class GameScene extends Phaser.Scene
         const tileset = this.map.addTilesetImage("tileset","tiles");
         this.map.createStaticLayer("World",tileset,0,0);
         this.dashboard = this.add.image(850,940,"dashboard");
+        this.refreshButton = this.add.image(120,900,"refreshButton");
+        this.levelUpButton = this.add.image(120,970,"levelUpButton");
         this.board = this.add.group();
         window.animationManager = new AnimationManager(this);
         [1,2,3,4,5,6,7,8,9].forEach(num=>{
             window.animationManager.createAnimations(num);
         });
-        this.shopContainer = new ShopContainer(this, 200, 950);
+        this.shopContainer = new ShopContainer(this, 300, 950);
         this.playerContainer = new PlayerContainer(this, 1750, 100);
         this.boardContainer = new BoardContainer(this, 275, 775);
         this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
