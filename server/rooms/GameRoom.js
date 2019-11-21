@@ -149,12 +149,23 @@ class GameRoom extends colyseus.Room {
 
     onRefresh(sessionId)
     {
-      //TODO implement refresh
+      if(sessionId in this.state.players)
+      {
+        if(this.state.players[sessionId].money >= 2)
+        {
+          this.state.shop.detachShop(this.state.players[sessionId]);
+          this.state.shop.assignShop(this.state.players[sessionId]);
+          this.state.players[sessionId].money -= 2;
+        }
+      }
     }
 
     onLevelUp(sessionId)
     {
-      //TODO implement level up
+      if(sessionId in this.state.players)
+      {
+
+      }
     }
 
     onDragDrop(sessionId, detail)
@@ -179,6 +190,27 @@ class GameRoom extends colyseus.Room {
       }
     }
 
+    onShop(sessionId, pokemonId)
+    {
+      if(sessionId in this.state.players)
+      {
+        if(pokemonId in this.state.players[sessionId].shop)
+        {
+          if (this.state.players[sessionId].money >= this.state.players[sessionId].shop[pokemonId].cost){
+            this.state.players[sessionId].money -= this.state.players[sessionId].shop[pokemonId].cost;
+            this.state.shop.switchPool.set(pokemonId, this.state.players[sessionId].shop[pokemonId]);
+            delete this.state.players[sessionId].shop[pokemonId];
+            this.state.shop.switchPool.get(pokemonId).positionX = this.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
+            this.state.shop.switchPool.get(pokemonId).positionY = 0;
+            this.state.players[sessionId].board[pokemonId] = this.state.shop.switchPool.get(pokemonId);
+            this.state.shop.switchPool.delete(pokemonId);
+            
+            this.computeEvolutions(this.state.players[sessionId].board);
+            this.computeEvolutions(this.state.players[sessionId].board);
+          }
+        }
+      }
+    }
 
     computeEvolutions(board)
     {
@@ -245,29 +277,6 @@ class GameRoom extends colyseus.Room {
         }
       }
       return empty;
-    }
-
-
-    onShop(sessionId, pokemonId)
-    {
-      if(sessionId in this.state.players)
-      {
-        if(pokemonId in this.state.players[sessionId].shop)
-        {
-          if (this.state.players[sessionId].money >= this.state.players[sessionId].shop[pokemonId].cost){
-            this.state.players[sessionId].money -= this.state.players[sessionId].shop[pokemonId].cost;
-            this.state.shop.switchPool.set(pokemonId, this.state.players[sessionId].shop[pokemonId]);
-            delete this.state.players[sessionId].shop[pokemonId];
-            this.state.shop.switchPool.get(pokemonId).positionX = this.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
-            this.state.shop.switchPool.get(pokemonId).positionY = 0;
-            this.state.players[sessionId].board[pokemonId] = this.state.shop.switchPool.get(pokemonId);
-            this.state.shop.switchPool.delete(pokemonId);
-            
-            this.computeEvolutions(this.state.players[sessionId].board);
-            this.computeEvolutions(this.state.players[sessionId].board);
-          }
-        }
-      }
     }
 
     getFirstAvailablePositionInBoard(board)
