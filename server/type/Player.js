@@ -2,6 +2,7 @@ const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 const Pokemon = require('./Pokemon').Pokemon;
+const ExperienceManager = require('./ExperienceManager');
 
 class Player extends Schema
 {
@@ -11,7 +12,7 @@ class Player extends Schema
         this.facebookName = facebookName;
         this.board = new MapSchema();
         this.shop = new MapSchema();
-        this.level = 1;
+        this.experienceManager = new ExperienceManager();
         this.money = 0;
     }
 }
@@ -21,6 +22,7 @@ schema.defineTypes(Player,{
     facebookName:"string",
     board: {map: Pokemon},
     shop: {map: Pokemon},
+    experienceManager: ExperienceManager,
     level: "number",
     money: "number"
 })

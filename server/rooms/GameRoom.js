@@ -164,7 +164,11 @@ class GameRoom extends colyseus.Room {
     {
       if(sessionId in this.state.players)
       {
-
+        if(this.state.players[sessionId].money >= 4)
+        {
+          this.state.players[sessionId].experienceManager.addExperience(4);
+          this.state.players[sessionId].money -= 4;
+        }
       }
     }
 

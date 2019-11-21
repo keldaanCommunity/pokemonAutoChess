@@ -37,4 +37,15 @@ const COST = Object.freeze({
 	LEGENDARY:5
 });
 
-module.exports = {TYPE, RARITY, COST};
+const EXP_TABLE = Object.freeze({
+  1:0,
+  2:2,
+  3:6,
+  4:10,
+  5:20,
+  6:32,
+  7:50,
+  8:70
+});
+
+module.exports = {TYPE, RARITY, COST, EXP_TABLE};
