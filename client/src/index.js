@@ -102,7 +102,7 @@ function initialize(room){
   });
 
   window.addEventListener('shopClick',e=>{
-    room.send({'event':'shopClick','id':e.detail.id});
+    room.send({'event':'shop','id':e.detail.id});
   });
 
   window.addEventListener('playerClick',e=>{
@@ -111,8 +111,16 @@ function initialize(room){
     client.gameView.game.scene.getScene("gameScene").boardManager.player = window.state.players[e.detail.id];
     client.gameView.game.scene.getScene("gameScene").boardManager.buildPokemons();
   });
+
   window.addEventListener('dragDrop',e=>{
     room.send({'event':'dragDrop','detail':e.detail});
   });
 
+  window.addEventListener('refreshClick', e=>{
+    room.send({'event':'refresh'});
+  });
+
+  window.addEventListener('levelUpClick', e=>{
+    room.send({'event':'levelUp'});
+  });
 }

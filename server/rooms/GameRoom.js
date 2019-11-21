@@ -126,15 +126,35 @@ class GameRoom extends colyseus.Room {
     {
       switch (message.event) 
       {
-        case 'shopClick':
-          this.onShopClick(client.sessionId, message.id);
+        case 'shop':
+          this.onShop(client.sessionId, message.id);
           break;
       
         case 'dragDrop':
           this.onDragDrop(client.sessionId, message.detail);
+          break;
+
+        case 'refresh':
+          this.onRefresh(client.sessionId);
+          break;
+
+        case 'levelUp':
+          this.onLevelUp(client.sessionId);
+          break;
+
         default:
           break;
       } 
+    }
+
+    onRefresh(sessionId)
+    {
+      //TODO implement refresh
+    }
+
+    onLevelUp(sessionId)
+    {
+      //TODO implement level up
     }
 
     onDragDrop(sessionId, detail)
@@ -228,7 +248,7 @@ class GameRoom extends colyseus.Room {
     }
 
 
-    onShopClick(sessionId, pokemonId)
+    onShop(sessionId, pokemonId)
     {
       if(sessionId in this.state.players)
       {

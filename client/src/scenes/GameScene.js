@@ -4,6 +4,8 @@ import ShopContainer from './component/shopContainer';
 import PlayerContainer from './component/PlayerContainer';
 import BoardContainer from './component/BoardManager';
 import BoardManager from './component/BoardManager';
+import RefreshButton from './component/RefreshButton';
+import LevelUpButton from './component/LevelUpButton';
 
 export default class GameScene extends Phaser.Scene
 {
@@ -35,8 +37,8 @@ export default class GameScene extends Phaser.Scene
         const tileset = this.map.addTilesetImage("tileset","tiles");
         this.map.createStaticLayer("World",tileset,0,0);
         this.dashboard = this.add.image(850,940,"dashboard");
-        this.refreshButton = this.add.image(120,900,"refreshButton");
-        this.levelUpButton = this.add.image(120,970,"levelUpButton");
+        this.refreshButton = new RefreshButton(this, 120, 900);
+        this.levelUpButton = new LevelUpButton(this, 120, 970);
         this.board = this.add.group();
         window.animationManager = new AnimationManager(this);
         [1,2,3,4,5,6,7,8,9].forEach(num=>{
