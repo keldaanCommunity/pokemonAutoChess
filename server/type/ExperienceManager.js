@@ -31,6 +31,7 @@ class ExperienceManager extends Schema
         }
         else
         {
+            this.experience += quantity;
             return false;
         }
     }

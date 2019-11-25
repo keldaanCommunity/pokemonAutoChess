@@ -20,5 +20,6 @@ export default class PlayerPortraitContainer extends Phaser.GameObjects.Containe
           ))});
         this.add(this.background);
         this.add(new Phaser.GameObjects.Text(scene,-30,0, player.facebookName, this.textStyle));
+        this.add(new Phaser.GameObjects.Text(scene, 50, -30, "Lvl " + player.experienceManager.level,this.textStyle));
     }
 }
