@@ -6,7 +6,8 @@ const ExperienceManager = require('./ExperienceManager');
 
 class Player extends Schema
 {
-    constructor(id, facebookName){
+    constructor(id, facebookName)
+    {
         super();
         this.id = id;
         this.facebookName = facebookName;
@@ -17,14 +18,16 @@ class Player extends Schema
     }
 }
 
-schema.defineTypes(Player,{
-    id:"string",
-    facebookName:"string",
-    board: {map: Pokemon},
-    shop: {map: Pokemon},
-    experienceManager: ExperienceManager,
-    level: "number",
-    money: "number"
-})
+schema.defineTypes(Player,
+    {
+        id:"string",
+        facebookName:"string",
+        board: {map: Pokemon},
+        shop: {map: Pokemon},
+        experienceManager: ExperienceManager,
+        level: "number",
+        money: "number"
+    }
+)
 
 module.exports = Player;

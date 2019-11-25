@@ -179,19 +179,35 @@ class GameRoom extends colyseus.Room {
       {
         if(detail.pokemonId in this.state.players[sessionId].board)
         {
-          let pokemon = this.state.players[sessionId].board[detail.pokemonId];
-          let x = parseInt(detail.x);
-          let y = parseInt(detail.y);
-          if(!this.isPositionEmpty(this.state.players[sessionId].board, x, y))
+          if(this.getTeamSize(sessionId) < this.state.players[sessionId].experienceManager.level)
           {
-            let pokemonToSwap = this.getPokemonByPosition(this.state.players[sessionId].board, x, y);      
-            pokemonToSwap.positionX = pokemon.positionX;
-            pokemonToSwap.positionY = pokemon.positionY;
+            let pokemon = this.state.players[sessionId].board[detail.pokemonId];
+            let x = parseInt(detail.x);
+            let y = parseInt(detail.y);
+            if(!this.isPositionEmpty(this.state.players[sessionId].board, x, y))
+            {
+              let pokemonToSwap = this.getPokemonByPosition(this.state.players[sessionId].board, x, y);      
+              pokemonToSwap.positionX = pokemon.positionX;
+              pokemonToSwap.positionY = pokemon.positionY;
+            }
+            pokemon.positionX = x;
+            pokemon.positionY = y;
           }
-          pokemon.positionX = x;
-          pokemon.positionY = y;
         }
       }
+    }
+
+    getTeamSize(sessionId)
+    {
+      let size = 0;
+      for (let id in this.state.players[sessionId].board) 
+      {
+          if(this.state.players[sessionId].board[id].positionY != 0)
+          {
+            size += 1;
+          }
+      }
+      return size;
     }
 
     onShop(sessionId, pokemonId)
