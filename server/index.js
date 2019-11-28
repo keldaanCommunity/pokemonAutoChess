@@ -27,6 +27,7 @@ app.use("/", socialRoutes);
 
 //colyseus game server monitor panel
 app.use("/colyseus", Monitor.monitor(gameServer));
+app.use(express.static(__dirname + "/../client/dist"));
 
 gameServer.listen(port);
 console.log(`Listening on ws://localhost:${ port }`)
