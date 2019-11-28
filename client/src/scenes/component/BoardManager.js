@@ -63,13 +63,20 @@ export default class BoardManager
           let pokemon = this.player.board[id];
           
           let found = false;
-          this.group.getChildren().forEach(pokemonUI=>{
-              if(pokemon.id == pokemonUI.id){
+          this.group.getChildren().forEach(pokemonUI=>
+            {
+              if(pokemon.id == pokemonUI.id)
+              {
                 found = true;
 
                 if(pokemonUI.positionX != pokemon.positionX || pokemonUI.positionY != pokemon.positionY)
                 {
                     pokemonUI.positionX = pokemon.positionX;
+                    pokemonUI.x = pokemon.positionX * 100 + 330;
+                    pokemonUI.y = 790 - 80 * pokemon.positionY;
+                }
+                if(pokemonUI.x != pokemon.positionX || pokemonUI.y != pokemon.positionY)
+                {
                     pokemonUI.x = pokemon.positionX * 100 + 330;
                     pokemonUI.y = 790 - 80 * pokemon.positionY;
                 }
@@ -81,14 +88,17 @@ export default class BoardManager
           }
         }
         let ids = [];
-        this.group.getChildren().forEach(pokemonUI=>{
+        this.group.getChildren().forEach(pokemonUI=>
+            {
             if (!(pokemonUI.id in this.player.board))
             {
                 ids.push(pokemonUI.id);
             }
         })
-        ids.forEach(id=>{
+        ids.forEach(id=>
+            {
             this.removePokemon(id);
-        })
+            }
+        )
     }
 }

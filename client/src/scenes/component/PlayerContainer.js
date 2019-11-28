@@ -23,4 +23,5 @@ export default class PlayerContainer extends Phaser.GameObjects.Container
         this.removeAll();
         this.buildPlayerPortraits();
     }
+    
 }

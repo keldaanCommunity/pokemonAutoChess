@@ -87,9 +87,9 @@ export default class GameScene extends Phaser.Scene
     }
 
 
-    updateTimeText(time)
+    updateTime()
     {
-        this.timeText.setText(time);
+        this.timeText.setText(window.state.time);
     }
 
     updateMoney()

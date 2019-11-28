@@ -3,7 +3,7 @@ export default class PlayerPortraitContainer extends Phaser.GameObjects.Containe
     constructor(scene, x, y, player)
     {
         super(scene,x ,y);
-        
+        this.id = player.id;
         this.textStyle = 
         {
           fontSize: "30px",

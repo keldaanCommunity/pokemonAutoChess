@@ -55,72 +55,128 @@ function joinOrCreate(accessToken, facebookName)
   });
 }
 
-function initialize(room){
+function initialize(room)
+{
   client.gameView.game.scene.stop('loginScene');
   client.gameView.game.scene.start('gameScene');
   console.log("joined successfully", room);
   window.sessionId = room.sessionId;
+
   room.onStateChange.once((state) => {
     window.state = state;
   });
   
-  room.state.onChange = (changes) => {     
-    if(client.gameView && window.initialized)
-    {
-      changes.forEach(change => {
+  room.state.onChange = (changes) => {
+    changes.forEach(change => {
+      if(client.gameView && window.initialized)
+      {
         switch (change.field) {
           case 'time':
-            client.gameView.game.scene.getScene("gameScene").updateTimeText(state.time);
+              client.gameView.game.scene.getScene("gameScene").updateTime();
             break;
-          
-          case 'players':
-            client.gameView.game.scene.getScene("gameScene").shopContainer.updatePortraits();
-            client.gameView.game.scene.getScene("gameScene").playerContainer.updatePortraits();
-            client.gameView.game.scene.getScene("gameScene").boardManager.update();
-            client.gameView.game.scene.getScene("gameScene").updateMoney();
-            break;
-
+        
           default:
             break;
         }
+      }
     });
-    }
 };
 
-  room.onMessage((message) => {
-    console.log(client.id, "received on", room.name, message);
+  room.state.players.onAdd = (player, key) => {
+    if(client.gameView && window.initialized)
+    {
+      client.gameView.game.scene.getScene("gameScene").playerContainer.updatePortraits();
+    }
+
+    player.onChange = function(changes) {
+      if(client.gameView && window.initialized)
+      {
+        changes.forEach(change => {
+
+          console.log(change.field);
+            switch (change.field) 
+            {
+              case 'money':
+                  if(window.sessionId == player.id)
+                  {
+                    client.gameView.game.scene.getScene("gameScene").updateMoney();
+                  }
+                break;
+            
+              case 'shop':
+                client.gameView.game.scene.getScene("gameScene").shopContainer.updatePortraits();
+                break;
+
+              case 'board':
+                client.gameView.game.scene.getScene("gameScene").boardManager.update();
+                break;
+
+              case 'experienceManager':
+                client.gameView.game.scene.getScene("gameScene").playerContainer.updatePortraits();
+                break;
+
+              default:
+                break;
+            }
+        })
+      }
+    };
+
+    // force "onChange" to be called immediatelly
+    player.triggerAll();
+  }
+
+  room.onMessage((message) => 
+  {
+    console.log(message.message);
+    switch (message.message) {
+      
+      case 'DragDropFailed':
+        client.gameView.game.scene.getScene("gameScene").boardManager.update();
+        break;
+    
+      default:
+        break;
+    }
   });
 
-  room.onError(() => {
+  room.onError(() => 
+  {
     console.log(client.id, "couldn't join", room.name);
   });
 
-  room.onLeave(() => {
+  room.onLeave(() => 
+  {
     sessionStorage.setItem('lastRoomId', room.id);
     sessionStorage.setItem('lastSessionId',room.sessionId);
     console.log(client.id, "left", room.name);
   });
 
-  window.addEventListener('shopClick',e=>{
+  window.addEventListener('shopClick',e=>
+  {
     room.send({'event':'shop','id':e.detail.id});
   });
 
-  window.addEventListener('playerClick',e=>{
+  window.addEventListener('playerClick',e=>
+  {
     client.gameView.game.scene.getScene("gameScene").fade();
     client.gameView.game.scene.getScene("gameScene").boardManager.clear();
     client.gameView.game.scene.getScene("gameScene").boardManager.player = window.state.players[e.detail.id];
     client.gameView.game.scene.getScene("gameScene").boardManager.buildPokemons();
   });
 
-  window.addEventListener('dragDrop',e=>{
+  window.addEventListener('dragDrop',e=>
+  {
     room.send({'event':'dragDrop','detail':e.detail});
   });
 
-  window.addEventListener('refreshClick', e=>{
+  window.addEventListener('refreshClick', e=>
+  {
     room.send({'event':'refresh'});
   });
 
-  window.addEventListener('levelUpClick', e=>{
+  window.addEventListener('levelUpClick', e=>
+  {
     room.send({'event':'levelUp'});
   });
 }

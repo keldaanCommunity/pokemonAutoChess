@@ -131,7 +131,7 @@ class GameRoom extends colyseus.Room {
           break;
       
         case 'dragDrop':
-          this.onDragDrop(client.sessionId, message.detail);
+          this.onDragDrop(client, message.detail);
           break;
 
         case 'refresh':
@@ -172,28 +172,38 @@ class GameRoom extends colyseus.Room {
       }
     }
 
-    onDragDrop(sessionId, detail)
+    onDragDrop(client, detail)
     {
-     
-      if(sessionId in this.state.players)
+      let success = false;
+      if(client.sessionId in this.state.players)
       {
-        if(detail.pokemonId in this.state.players[sessionId].board)
+        if(detail.pokemonId in this.state.players[client.sessionId].board)
         {
-          if(this.getTeamSize(sessionId) < this.state.players[sessionId].experienceManager.level)
+          let pokemon = this.state.players[client.sessionId].board[detail.pokemonId];
+          let x = parseInt(detail.x);
+          let y = parseInt(detail.y);
+          if(this.getTeamSize(client.sessionId) < this.state.players[client.sessionId].experienceManager.level || pokemon.positionY != 0)
           {
-            let pokemon = this.state.players[sessionId].board[detail.pokemonId];
-            let x = parseInt(detail.x);
-            let y = parseInt(detail.y);
-            if(!this.isPositionEmpty(this.state.players[sessionId].board, x, y))
+
+            if(!this.isPositionEmpty(this.state.players[client.sessionId].board, x, y))
             {
-              let pokemonToSwap = this.getPokemonByPosition(this.state.players[sessionId].board, x, y);      
+              let pokemonToSwap = this.getPokemonByPosition(this.state.players[client.sessionId].board, x, y);      
               pokemonToSwap.positionX = pokemon.positionX;
               pokemonToSwap.positionY = pokemon.positionY;
             }
             pokemon.positionX = x;
             pokemon.positionY = y;
+            success = true;
           }
         }
+      }
+      if(!success)
+      {
+        this.send(client, 
+          {
+             message: "DragDropFailed" 
+          }
+        );
       }
     }
 
