@@ -1,6 +1,6 @@
 "use strict";
 import AnimationManager from '../AnimationManager';
-import ShopContainer from './component/shopContainer';
+import ShopContainer from './component/ShopContainer';
 import PlayerContainer from './component/PlayerContainer';
 import BoardContainer from './component/BoardManager';
 import BoardManager from './component/BoardManager';
