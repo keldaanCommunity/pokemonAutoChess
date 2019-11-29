@@ -4,9 +4,9 @@
   "description": "npm init template for bootstraping an empty Colyseus project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev":"nodemon index.js",
-    "test": ""
+    "start": "nodemon index.js",
+    "loadtest": "colyseus-loadtest loadtest/example.js --room my_room --numClients 2",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "UNLICENSED",
@@ -15,8 +15,7 @@
   },
   "homepage": "https://github.com/colyseus/create-colyseus#readme",
   "devDependencies": {
-    "@colyseus/loadtest": "^0.11.0",
-    "nodemon": "^1.19.2"
+    "@colyseus/loadtest": "^0.11.0"
   },
   "dependencies": {
     "@colyseus/monitor": "^0.11.0",
@@ -27,6 +26,7 @@
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
     "js-simulator": "^1.0.17",
+    "nodemon": "^1.19.2",
     "superagent": "^5.1.0",
     "uniqid": "^5.0.3"
   }
