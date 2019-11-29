@@ -7,7 +7,7 @@ const Monitor = require("@colyseus/monitor");
 const socialRoutes = require("@colyseus/social/express").default;
 const GameRoom = require('./rooms/GameRoom');
 
-const port = process.env.PORT || 2567;
+const port = process.env.PORT || 9000;
 const app = express()
 
 app.use(cors());
@@ -27,6 +27,8 @@ app.use("/", socialRoutes);
 
 //colyseus game server monitor panel
 app.use("/colyseus", Monitor.monitor(gameServer));
+
+app.use(express.static(__dirname + "/../client/dist"));
 
 gameServer.listen(port);
 console.log(`Listening on ws://localhost:${ port }`)

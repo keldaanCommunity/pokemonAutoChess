@@ -1,0 +1,41 @@
+{
+  "name": "pokemon-autochess-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "devClient": "webpack-dev-server",
+    "devServer": "nodemon ./server/index.js",
+    "start": "node ./server/index.js",
+    "build": "webpack",
+    "install": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arnaudgregoire/pokemonAutoChess.git"
+  },
+  "author": "arnaudgregoire",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arnaudgregoire/pokemonAutoChess/issues"
+  },
+  "homepage": "https://github.com/arnaudgregoire/pokemonAutoChess#readme",
+  "dependencies": {
+    "phaser": "^3.19.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.1",
+    "@colyseus/monitor": "^0.11.0",
+    "@colyseus/social": "^0.10.9",
+    "colyseus": "^0.11.0",
+    "colyseus.js": "^0.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "js-simulator": "^1.0.17",
+    "nodemon": "^1.19.2",
+    "superagent": "^5.1.0",
+    "uniqid": "^5.0.3"
+  }
+}
