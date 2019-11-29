@@ -1,7 +1,12 @@
 import * as Colyseus from "colyseus.js";
 import Gameview from './GameView';
 
-var client = new Colyseus.Client('ws://localhost:2567');
+// define endpoint based on environment
+const endpoint = (window.location.hostname.indexOf("herokuapp") === -1)
+  ? "ws://localhost:9000" // development (local)
+  : `${window.location.protocol.replace("http", "ws")}//${window.location.hostname}` // production (remote)
+
+var client = new Colyseus.Client(endpoint);
 client.gameView = new Gameview();
 
 window.addEventListener('clickPlay',()=>{
