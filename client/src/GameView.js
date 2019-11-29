@@ -1,4 +1,4 @@
-import 'Phaser';
+import Phaser from 'phaser';
 import LoginScene from './scenes/LoginScene';
 import GameScene from './scenes/GameScene';
 export default class Gameview
