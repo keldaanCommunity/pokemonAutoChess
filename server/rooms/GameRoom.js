@@ -8,17 +8,6 @@ const PokemonFactory = require('../type/PokemonFactory');
 const Pokemon = require('../type/Pokemon');
 const superagent = require('superagent');
 
-class Vector2D extends Schema {}
-
-class FightState extends Schema {
-    constructor () {
-        super();
-        this.time = 5000;
-        this.players = new MapSchema();
-        this.typeState = "FightState";
-    }
-}
-
 class PickState extends Schema {
   constructor () {
       super();
@@ -29,22 +18,10 @@ class PickState extends Schema {
   }
 }
 
-schema.defineTypes(Vector2D, {
-  x: "number",
-  y: "number"
-});
-
 schema.defineTypes(PickState,{
   time: "number",
   typeState: "string",
   players: {map: Player}
-});
-
-schema.defineTypes(FightState, {
-  locations: [ Vector2D ],
-  velocities: [ Vector2D ],
-  typeState: "string",
-  time: "number"
 });
 
 
@@ -59,21 +36,10 @@ class GameRoom extends colyseus.Room {
     update (deltaTime)
     {
       this.state.time -= deltaTime;
-      if(this.state.typeState == "FightState")
+      if(this.state.time < 0)
       {
-        if(this.state.time < 0)
-        {
-          this.initializePickingPhase();
-          this.computeIncome();
-        }
-      }
-      else if(this.state.typeState == "PickState")
-      {
-        if(this.state.time < 0)
-        {
-          this.initializePickingPhase();
-          this.computeIncome();
-        }
+        this.initializePickingPhase();
+        this.computeIncome();
       }
     }
 
@@ -100,11 +66,6 @@ class GameRoom extends colyseus.Room {
         let player = this.state.players[id];
         this.state.shop.assignShop(player);
       }
-    }
-
-    initializeFightingPhase()
-    {
-      this.state.time = 5000;
     }
 
     async onAuth (client, options) 
