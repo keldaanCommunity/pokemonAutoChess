@@ -98,7 +98,6 @@ function initialize(room)
       {
         changes.forEach(change => {
 
-          console.log(change.field);
             switch (change.field) 
             {
               case 'money':

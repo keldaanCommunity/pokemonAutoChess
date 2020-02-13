@@ -1,12 +1,11 @@
 const colyseus = require('colyseus');
 const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
-const ArraySchema = schema.ArraySchema;
 const MapSchema = schema.MapSchema;
-const Simulation = require('../simulation/Simulation');
 const Player = require('../type/Player');
 const Shop = require('../type/Shop');
 const PokemonFactory = require('../type/PokemonFactory');
+const Pokemon = require('../type/Pokemon');
 const superagent = require('superagent');
 
 class Vector2D extends Schema {}
@@ -14,10 +13,8 @@ class Vector2D extends Schema {}
 class FightState extends Schema {
     constructor () {
         super();
-
-        this.locations = new ArraySchema();
-        this.velocities = new ArraySchema();
-        this.simulation = new Simulation();
+        this.time = 5000;
+        this.players = new MapSchema();
         this.typeState = "FightState";
     }
 }
@@ -61,20 +58,17 @@ class GameRoom extends colyseus.Room {
     
     update (deltaTime)
     {
+      this.state.time -= deltaTime;
       if(this.state.typeState == "FightState")
       {
-        this.state.simulation.scheduler.update();
-        for (let i = 0; i < this.state.simulation.space.locations.length; i++) 
+        if(this.state.time < 0)
         {
-          this.state.locations[i].x = this.state.simulation.space.locations[i].x;
-          this.state.locations[i].y = this.state.simulation.space.locations[i].y;
-          this.state.velocities[i].x = this.state.simulation.space.agents[i].velocity.x;
-          this.state.velocities[i].y = this.state.simulation.space.agents[i].velocity.y;
+          this.initializePickingPhase();
+          this.computeIncome();
         }
       }
       else if(this.state.typeState == "PickState")
       {
-        this.state.time -= deltaTime;
         if(this.state.time < 0)
         {
           this.initializePickingPhase();
@@ -100,14 +94,25 @@ class GameRoom extends colyseus.Room {
       {
         let player = this.state.players[id];
         this.state.shop.detachShop(player);
+      }
+      for (let id in this.state.players) 
+      {
+        let player = this.state.players[id];
         this.state.shop.assignShop(player);
       }
     }
 
-    async onAuth (client, options) {
+    initializeFightingPhase()
+    {
+      this.state.time = 5000;
+    }
+
+    async onAuth (client, options) 
+    {
       const response = await superagent
       .get(`https://graph.facebook.com/debug_token`)
-      .query({
+      .query(
+      {
         'input_token': options.accessToken,
         'access_token': process.env.FACEBOOK_APP_TOKEN
       })
@@ -115,9 +120,9 @@ class GameRoom extends colyseus.Room {
       return response.body.data;
     }
   
-    onJoin(client, options, auth) {
+    onJoin(client, options, auth) 
+    {
       console.log(options.facebookName, "joined successfully");
-      //console.log("Auth data: ", auth);
       this.state.players[client.sessionId] = new Player(client.sessionId, options.facebookName);
     }
 
@@ -228,12 +233,10 @@ class GameRoom extends colyseus.Room {
         {
           if (this.state.players[sessionId].money >= this.state.players[sessionId].shop[pokemonId].cost){
             this.state.players[sessionId].money -= this.state.players[sessionId].shop[pokemonId].cost;
-            this.state.shop.switchPool.set(pokemonId, this.state.players[sessionId].shop[pokemonId]);
+            this.state.players[sessionId].board[pokemonId] = Object.assign(new Pokemon.Pokemon(), this.state.players[sessionId].shop[pokemonId]);
             delete this.state.players[sessionId].shop[pokemonId];
-            this.state.shop.switchPool.get(pokemonId).positionX = this.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
-            this.state.shop.switchPool.get(pokemonId).positionY = 0;
-            this.state.players[sessionId].board[pokemonId] = this.state.shop.switchPool.get(pokemonId);
-            this.state.shop.switchPool.delete(pokemonId);
+            this.state.players[sessionId].board[pokemonId].positionX = this.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
+            this.state.players[sessionId].board[pokemonId].positionY = 0;
             
             this.computeEvolutions(this.state.players[sessionId].board);
             this.computeEvolutions(this.state.players[sessionId].board);
