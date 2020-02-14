@@ -8,27 +8,33 @@ const PokemonFactory = require('../type/PokemonFactory');
 const Pokemon = require('../type/Pokemon');
 const superagent = require('superagent');
 
-class PickState extends Schema {
-  constructor () {
+class PickState extends Schema 
+{
+  constructor () 
+  {
       super();
       this.time = 5000;
-      this.typeState = "PickState";
+      this.phase = "pick";
       this.players = new MapSchema();
       this.shop = new Shop();
   }
 }
 
-schema.defineTypes(PickState,{
-  time: "number",
-  typeState: "string",
-  players: {map: Player}
-});
+schema.defineTypes(PickState,
+  {
+    time: "number",
+    phase: "string",
+    players: {map: Player}
+  }
+);
 
 
-class GameRoom extends colyseus.Room {
+class GameRoom extends colyseus.Room 
+{
 
     // When room is initialized
-    onCreate () {
+    onCreate () 
+    {
       this.setState(new PickState());
       this.setSimulationInterval((deltaTime) => this.update(deltaTime));
     }
@@ -38,8 +44,22 @@ class GameRoom extends colyseus.Room {
       this.state.time -= deltaTime;
       if(this.state.time < 0)
       {
-        this.initializePickingPhase();
+        this.switchPhase();
         this.computeIncome();
+      }
+    }
+
+    switchPhase()
+    {
+      if(this.state.phase == "pick")
+      {
+        this.state.phase = "fight";
+        this.initializeFightingPhase();
+      }
+      else if (this.state.phase == "fight")
+      {
+        this.state.phase = "pick";
+        this.initializePickingPhase();
       }
     }
 
@@ -65,6 +85,41 @@ class GameRoom extends colyseus.Room {
       {
         let player = this.state.players[id];
         this.state.shop.assignShop(player);
+      }
+    }
+
+    initializeFightingPhase()
+    {
+      this.state.time = 5000;
+      for (let id in this.state.players)
+      {
+        let player = this.state.players[id];
+        let opponentId = this.getRandomOpponent();
+        if(opponentId == "")
+        {
+          // no opponent fight ?
+        }
+        else
+        {
+
+        }
+      }
+    }
+
+    getRandomOpponent()
+    {
+      let playersId = [];
+      for (let id in this.state.players) 
+      {
+        playersId.push(id);
+      }
+      if(playersId.length > 0)
+      {
+        return this.state.players[playersId[Math.round(Math.random() * (playersId.length -1))]].id;
+      }
+      else
+      {
+        return "";
       }
     }
 

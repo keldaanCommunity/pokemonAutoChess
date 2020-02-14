@@ -3,6 +3,7 @@ const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 const Pokemon = require('./Pokemon').Pokemon;
 const ExperienceManager = require('./ExperienceManager');
+const Simulation  = require('../simulation/Simulation');
 
 class Player extends Schema
 {
@@ -15,6 +16,7 @@ class Player extends Schema
         this.shop = new MapSchema();
         this.experienceManager = new ExperienceManager();
         this.money = 0;
+        this.simulation = new Simulation();
     }
 }
 
