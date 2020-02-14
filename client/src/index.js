@@ -75,10 +75,14 @@ function initialize(room)
     changes.forEach(change => {
       if(client.gameView && window.initialized)
       {
-        switch (change.field) {
+        switch (change.field) 
+        {
           case 'time':
               client.gameView.game.scene.getScene("gameScene").updateTime();
             break;
+          
+          case 'phase':
+            client.gameView.game.scene.getScene("gameScene").updatePhase();
         
           default:
             break;

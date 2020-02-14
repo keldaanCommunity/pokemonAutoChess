@@ -57,6 +57,7 @@ export default class GameScene extends Phaser.Scene
         };
         this.nameText = this.add.text(10,50, window.state.players[window.sessionId].facebookName, this.textStyle);
         this.timeText = this.add.text(700,20,window.state.time, this.textStyle);
+        this.phaseText = this.add.text(550,20, window.state.phase, this.textStyle);
         this.money = this.add.text(120,115, window.state.players[window.sessionId].money, this.textStyle);
         this.moneyIcon = this.add.image(200,130,"money");
         this.transitionImage = new Phaser.GameObjects.Image(this, 720, 450, 'transition').setScale(1.5,1.5);
@@ -77,7 +78,8 @@ export default class GameScene extends Phaser.Scene
 
     fade()
     {
-        this.tweens.add({
+        this.tweens.add(
+        {
             targets: this.transitionScreen,
             duration: 150,
             alpha: 1,
@@ -90,6 +92,11 @@ export default class GameScene extends Phaser.Scene
     updateTime()
     {
         this.timeText.setText(window.state.time);
+    }
+
+    updatePhase()
+    {
+        this.phaseText.setText(window.state.phase);
     }
 
     updateMoney()
@@ -120,7 +127,8 @@ export default class GameScene extends Phaser.Scene
         self.input.on('dragstart', function (pointer, gameObject) 
         {
             self.children.bringToTop(gameObject);
-        }, self);
+        },
+        self);
     
         self.input.on('drag', function (pointer, gameObject, dragX, dragY) 
         {
@@ -128,31 +136,13 @@ export default class GameScene extends Phaser.Scene
             gameObject.y = dragY;
         });
     
-        self.input.on('dragenter', function (pointer, gameObject, dropZone) 
-        {
-            /**
-             *             
-            self.boardGraphics[dropZone.name].clear();
-            self.boardGraphics[dropZone.name].lineStyle(2, 0x00ffff);
-            self.boardGraphics[dropZone.name].strokeRect(dropZone.x - dropZone.input.hitArea.width / 2, dropZone.y - dropZone.input.hitArea.height / 2, dropZone.input.hitArea.width, dropZone.input.hitArea.height);
-             */
-        });
-    
-        self.input.on('dragleave', function (pointer, gameObject, dropZone) 
-        {
-            /**
-            self.boardGraphics[dropZone.name].clear();
-            self.boardGraphics[dropZone.name].lineStyle(2, 0xffff00);
-            self.boardGraphics[dropZone.name].strokeRect(dropZone.x - dropZone.input.hitArea.width / 2, dropZone.y - dropZone.input.hitArea.height / 2, dropZone.input.hitArea.width, dropZone.input.hitArea.height);
-             */
-       });
-    
         self.input.on('drop', function (pointer, gameObject, dropZone) 
         {
             
             window.dispatchEvent(new CustomEvent('dragDrop',
             {
-                detail: {
+                detail: 
+                {
                     'x':dropZone.name.substr(5, 1),
                     'y':dropZone.name.substr(7, 1),
                     'pokemonId':gameObject.id

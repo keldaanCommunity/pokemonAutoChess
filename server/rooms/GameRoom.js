@@ -7,20 +7,21 @@ const Shop = require('../type/Shop');
 const PokemonFactory = require('../type/PokemonFactory');
 const Pokemon = require('../type/Pokemon');
 const superagent = require('superagent');
+const STATE = require('../type/Enum').STATE;
 
-class PickState extends Schema 
+class GameState extends Schema 
 {
   constructor () 
   {
       super();
       this.time = 5000;
-      this.phase = "pick";
+      this.phase = STATE.PICK;
       this.players = new MapSchema();
       this.shop = new Shop();
   }
 }
 
-schema.defineTypes(PickState,
+schema.defineTypes(GameState,
   {
     time: "number",
     phase: "string",
@@ -35,7 +36,7 @@ class GameRoom extends colyseus.Room
     // When room is initialized
     onCreate () 
     {
-      this.setState(new PickState());
+      this.setState(new GameState());
       this.setSimulationInterval((deltaTime) => this.update(deltaTime));
     }
     
@@ -51,14 +52,12 @@ class GameRoom extends colyseus.Room
 
     switchPhase()
     {
-      if(this.state.phase == "pick")
+      if(this.state.phase == STATE.PICK)
       {
-        this.state.phase = "fight";
         this.initializeFightingPhase();
       }
-      else if (this.state.phase == "fight")
+      else if (this.state.phase == STATE.FIGHT)
       {
-        this.state.phase = "pick";
         this.initializePickingPhase();
       }
     }
@@ -75,11 +74,13 @@ class GameRoom extends colyseus.Room
 
     initializePickingPhase()
     {
+      this.state.phase = STATE.PICK;
       this.state.time = 5000;
       for (let id in this.state.players) 
       {
         let player = this.state.players[id];
         this.state.shop.detachShop(player);
+        player.simulation.clearTeams();
       }
       for (let id in this.state.players) 
       {
@@ -90,6 +91,7 @@ class GameRoom extends colyseus.Room
 
     initializeFightingPhase()
     {
+      this.state.phase = STATE.FIGHT;
       this.state.time = 5000;
       for (let id in this.state.players)
       {
@@ -101,7 +103,8 @@ class GameRoom extends colyseus.Room
         }
         else
         {
-
+          player.simulation.setBlueTeam(player.board);
+          player.simulation.setRedTeam(this.state.players[opponentId].board);
         }
       }
     }

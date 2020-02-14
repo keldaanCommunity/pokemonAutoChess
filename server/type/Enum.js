@@ -48,4 +48,9 @@ const EXP_TABLE = Object.freeze({
   8:70
 });
 
-module.exports = {TYPE, RARITY, COST, EXP_TABLE};
+const STATE = Object.freeze({
+  FIGHT:"FIGHT",
+  PICK:"PICK"
+});
+
+module.exports = {TYPE, RARITY, COST, EXP_TABLE, STATE};
