@@ -4,7 +4,7 @@ const MapSchema = schema.MapSchema;
 const Pokemon = require('../type/Pokemon').Pokemon;
 const PokemonFactory = require('../type/PokemonFactory');
 
-class Simulation extends Schema 
+class SimulationState extends Schema 
 {
   constructor () 
   {
@@ -56,11 +56,11 @@ class Simulation extends Schema
   }
 }
 
-schema.defineTypes(Simulation,
+schema.defineTypes(SimulationState,
   {
     redTeam: {map: Pokemon},
     blueTeam: {map: Pokemon}
   }
 );
 
-module.exports = Simulation;
+module.exports = SimulationState;

@@ -80,7 +80,7 @@ class GameRoom extends colyseus.Room
       {
         let player = this.state.players[id];
         this.state.shop.detachShop(player);
-        player.simulation.clearTeams();
+        player.simulationState.clearTeams();
       }
       for (let id in this.state.players) 
       {
@@ -103,8 +103,8 @@ class GameRoom extends colyseus.Room
         }
         else
         {
-          player.simulation.setBlueTeam(player.board);
-          player.simulation.setRedTeam(this.state.players[opponentId].board);
+          player.simulationState.setBlueTeam(player.board);
+          player.simulationState.setRedTeam(this.state.players[opponentId].board);
         }
       }
     }
