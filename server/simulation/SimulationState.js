@@ -44,69 +44,80 @@ class SimulationState extends Schema
 
       function moveEvent (simulation, pkmn) 
     {
-      var grid = simulation.state.grid;
-      var hasTarget = pkmn.chooseTarget(grid);
-      if (hasTarget) 
+      if(pkmn.stats.HP > 0)
       {
-        var targetInRange = pkmn.isTargetInRange(grid);
-        if (targetInRange) 
+        var grid = simulation.state.grid;
+        var hasTarget = pkmn.chooseTarget(grid);
+        if (hasTarget) 
         {
-          // wait a bit before attacking target (attack delay)
-          simulation.addEvent({ delay: 200}, attackEvent, pkmn);
+          var targetInRange = pkmn.isTargetInRange(grid);
+          if (targetInRange) 
+          {
+            // wait a bit before attacking target (attack delay)
+            simulation.addEvent({ delay: 200}, attackEvent, pkmn);
+          }
+          else 
+          {
+            pkmn.moveTowardTarget(grid);
+            simulation.addEvent({delay: 100}, moveEvent, pkmn);
+            simulation.state.log.push([
+              simulation.ctx.time,
+              pkmn.toString() + " move"
+          ]);
+          }
         }
-        else 
-        {
-          pkmn.moveTowardTarget(grid);
-          simulation.addEvent({delay: 100}, moveEvent, pkmn);
-          simulation.state.log.push([
-            simulation.ctx.time,
-            pkmn.toString() + " move"
-        ]);
+        else {
+          // check very fast to get new target
+          simulation.addEvent({delay: 5}, moveEvent, pkmn);
         }
-      }
-      else {
-        // check very fast to get new target
-        simulation.addEvent({delay: 5}, moveEvent, pkmn);
       }
     }
 
     function attackEvent (simulation, pkmn) 
     {
-      var grid = simulation.state.grid;
-      var hasTarget = pkmn.chooseTarget(grid);
-      if (hasTarget) 
+      if(pkmn.stats.HP > 0)
       {
-        var targetInRange = pkmn.isTargetInRange(grid);
-        if (targetInRange) 
+        var grid = simulation.state.grid;
+        var hasTarget = pkmn.chooseTarget(grid);
+        if (hasTarget) 
         {
-          var move = pkmn.chooseAttackMove();
-          var damage = pkmn.getBaseDamage(
-            pkmn.stats.level
-            , pkmn.stats.attack
-            , pkmn.target.stats.defense
-            , move.power
-            , 1);
-          var modifier = pkmn.getModifiers(/* ??? */);
-          pkmn.target.stats.HP -= damage * modifier;
-          pkmn.target.stats.energy += 10;
-          pkmn.stats.energy += 10;
-          simulation.state.log.push(
-            [
-              simulation.ctx.time,
-              pkmn.toString() + " / " + pkmn.target.toString()
-            ]
-          );
-          simulation.addEvent({ delay: 200}, attackEvent, pkmn);
+          var targetInRange = pkmn.isTargetInRange(grid);
+          if (targetInRange) 
+          {
+            var move = pkmn.chooseAttackMove();
+            var damage = pkmn.getBaseDamage(
+              pkmn.stats.level
+              , pkmn.stats.attack
+              , pkmn.target.stats.defense
+              , move.power
+              , 1);
+            var modifier = pkmn.getModifiers(/* ??? */);
+            pkmn.target.stats.HP -= damage * modifier;
+            pkmn.target.stats.energy += 10;
+            simulation.state.log.push(
+              [
+                simulation.ctx.time,
+                pkmn.toString() + " / " + pkmn.target.toString()
+              ]
+            );
+            if(pkmn.target.stats.HP <= 0)
+            {
+              simulation.state.pokemons.splice(simulation.state.pokemons.indexOf(pkmn.target), 1);
+              pkmn.target = null;
+            }
+            pkmn.stats.energy += 10;
+            simulation.addEvent({ delay: 200}, attackEvent, pkmn);
+          }
+          else 
+          {
+            // target has moved, move instantly
+            simulation.addEvent({delay: 0}, moveEvent, pkmn);
+          }
         }
-        else 
-        {
-          // target has moved, move instantly
-          simulation.addEvent({delay: 0}, moveEvent, pkmn);
+        else {
+          // check very fast to get new target
+          simulation.addEvent({delay: 10}, moveEvent, pkmn);
         }
-      }
-      else {
-        // check very fast to get new target
-        simulation.addEvent({delay: 10}, moveEvent, pkmn);
       }
     }
 
