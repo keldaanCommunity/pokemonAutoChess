@@ -8,6 +8,7 @@ const PokemonFactory = require('../type/PokemonFactory');
 const Pokemon = require('../type/Pokemon');
 const superagent = require('superagent');
 const STATE = require('../type/Enum').STATE;
+const SimulationState = require('../simulation/SimulationState'); 
 
 class GameState extends Schema 
 {
@@ -58,6 +59,11 @@ class GameRoom extends colyseus.Room
       }
       else if (this.state.phase == STATE.FIGHT)
       {
+        for (let id in this.state.players) 
+        {
+          let player = this.state.players[id];
+          console.log(player.simulationState.simulation.state.log);
+        }
         this.initializePickingPhase();
       }
     }
@@ -80,7 +86,6 @@ class GameRoom extends colyseus.Room
       {
         let player = this.state.players[id];
         this.state.shop.detachShop(player);
-        player.simulationState.clearTeams();
       }
       for (let id in this.state.players) 
       {
@@ -103,8 +108,32 @@ class GameRoom extends colyseus.Room
         }
         else
         {
-          player.simulationState.setBlueTeam(player.board);
-          player.simulationState.setRedTeam(this.state.players[opponentId].board);
+          let pokemons = [];
+          for (let id in player.board)
+          {
+              let pokemon = player.board[id];
+              if(pokemon.positionY != 0)
+              {
+                  let simulationPokemon = PokemonFactory.createPokemonFromName(pokemon.name);
+                  simulationPokemon.setPosition(pokemon.positionX, pokemon.positionY - 1);
+                  simulationPokemon.group = 0;
+                  pokemons.push(simulationPokemon);
+              }
+          }
+          for (let id in this.state.players[opponentId].board)
+          {
+              let pokemon = this.state.players[opponentId].board[id];
+              if(pokemon.positionY != 0)
+              {
+                  let simulationPokemon = PokemonFactory.createPokemonFromName(pokemon.name);
+                  simulationPokemon.setPosition(pokemon.positionX, 7 - pokemon.positionY);
+                  simulationPokemon.group = 1;
+                  pokemons.push(simulationPokemon);
+              }
+          }
+          
+          player.simulationState = new SimulationState(pokemons);
+          player.simulationState.simulation.run();
         }
       }
     }

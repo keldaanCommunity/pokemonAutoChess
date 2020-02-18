@@ -3,7 +3,6 @@ const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 const Pokemon = require('./Pokemon').Pokemon;
 const ExperienceManager = require('./ExperienceManager');
-const SimulationState  = require('../simulation/SimulationState');
 
 class Player extends Schema
 {
@@ -16,7 +15,7 @@ class Player extends Schema
         this.shop = new MapSchema();
         this.experienceManager = new ExperienceManager();
         this.money = 0;
-        this.simulationState = new SimulationState();
+        this.simulationState = null;
     }
 }
 
@@ -29,7 +28,6 @@ schema.defineTypes(Player,
         experienceManager: ExperienceManager,
         level: "number",
         money: "number",
-        simulationState: SimulationState
     }
 )
 
