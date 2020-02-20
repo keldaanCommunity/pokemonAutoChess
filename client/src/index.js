@@ -123,6 +123,9 @@ function initialize(room)
                 client.gameView.game.scene.getScene("gameScene").playerContainer.updatePortraits();
                 break;
 
+              case 'simulationResult':
+                console.log(player.simulationResult);
+
               default:
                 break;
             }

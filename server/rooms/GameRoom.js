@@ -59,11 +59,6 @@ class GameRoom extends colyseus.Room
       }
       else if (this.state.phase == STATE.FIGHT)
       {
-        for (let id in this.state.players) 
-        {
-          let player = this.state.players[id];
-          console.log(player.simulationState.simulation.state.log);
-        }
         this.initializePickingPhase();
       }
     }
@@ -80,6 +75,7 @@ class GameRoom extends colyseus.Room
 
     initializePickingPhase()
     {
+
       this.state.phase = STATE.PICK;
       this.state.time = 5000;
       for (let id in this.state.players) 
@@ -134,6 +130,7 @@ class GameRoom extends colyseus.Room
           
           player.simulationState = new SimulationState(pokemons);
           player.simulationState.simulation.run();
+          player.setLog(player.simulationState.simulation.state.log);
         }
       }
     }
