@@ -1,41 +1,51 @@
 {
-  "name": "pokemon-autochess-client",
+  "name": "pokemon-autochess",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "devClient": "webpack-dev-server",
-    "devServer": "nodemon ./server/index.js",
-    "start": "node ./server/index.js",
-    "build": "webpack",
-    "install": "npm run build"
-  },
+  "keywords": [],
+  "license": "MIT",
+  "homepage": "https://github.com/arnaudgregoire/pokemonAutoChess#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arnaudgregoire/pokemonAutoChess.git"
   },
-  "author": "arnaudgregoire",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/arnaudgregoire/pokemonAutoChess/issues"
   },
-  "homepage": "https://github.com/arnaudgregoire/pokemonAutoChess#readme",
+  "author": "arnaudgregoire",
+  "contributors": [
+    "ogus"
+  ],
+  "main": "app/index.js",
+  "scripts": {
+    "reset": "rm -rf node_modules/ && rm -f app/public/js/*",
+    "dev-client": "webpack --mode development --watch",
+    "dev-server": "nodemon --ignore ./app/public/src ./app/index.js",
+    "dev": "npm-run-all --parallel dev-*",
+    "build": "webpack --mode production",
+    "start": "node ./app/index.js"
+  },
   "dependencies": {
-    "@colyseus/monitor": "^0.11.0",
+    "@colyseus/monitor": "^0.11.17",
     "@colyseus/social": "^0.10.9",
-    "colyseus": "^0.11.0",
-    "colyseus.js": "^0.11.0",
+    "colyseus": "^0.11.29",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
-    "js-simulator": "^1.0.17",
-    "nodemon": "^1.19.2",
-    "phaser": "^3.19.0",
-    "superagent": "^5.1.0",
-    "uniqid": "^5.0.3",
-    "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.8",
-    "webpack-dev-server": "^3.8.1"
+    "helmet": "^3.21.3",
+    "superagent": "^5.2.2",
+    "uniqid": "^5.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
+    "babel-loader": "^8.0.6",
+    "colyseus.js": "^0.12.0",
+    "nodemon": "^1.19.4",
+    "npm-run-all": "^4.1.5",
+    "phaser": "^3.22.0",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   }
 }
