@@ -1,18 +1,17 @@
 const colyseus = require("colyseus");
 const schema = require("@colyseus/schema");
+const social = require("@colyseus/social");
 const superagent = require("superagent");
 
 class LobbyState extends schema.Schema {
   constructor() {
     super();
     this.playerCount = 0;
-    this.name = "Super lobby";
   }
 }
 
 schema.defineTypes(LobbyState, {
-  playerCount: "number",
-  name: "string"
+  playerCount: "number"
 });
 
 class LobbyRoom extends colyseus.Room {
@@ -23,35 +22,27 @@ class LobbyRoom extends colyseus.Room {
 
   async onAuth(client, options, request) {
     console.log("client try to auth");
-    if (options.type == "fb") {
-      const response = await superagent
-        .get(`https://graph.facebook.com/debug_token`)
-        .set("Accept", "application/json")
-        .query({
-          "input_token": options.token,
-          "access_token": process.env.FACEBOOK_APP_TOKEN
-        });
-      console.log(response);
-      return response.body.data.is_valid;
-    }
-    if (options.type == "user") {
-      // TODO: implement login with username & password
-      return (String(options.username) == "a" && String(options.password) == "b");
-    }
-    return false;
+    console.log(options);
+    let token = social.verifyToken(options.token);
+    let user = await social.User.findById(token._id);
+    return user;
   }
 
   onJoin(client, options, auth) {
-    this.state.playerCount = this.state.playerCount + 1;
+    this.state.playerCount++;
     console.log("client joined", this.state.playerCount);
+    console.log("auth data:");
+    console.log(auth);
+    this.send(client, "Welcome !");
   }
 
   onMessage(client, message) {
-
+    console.log("message received:", message);
+    this.send(client, { text: "message ok" });
   }
 
   onLeave(client, consented) {
-    this.state.playerCount = this.state.playerCount - 1;
+    this.state.playerCount--;
     console.log("client joined", this.state.playerCount);
   }
 

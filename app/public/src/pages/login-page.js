@@ -6,7 +6,6 @@ class LoginPage {
     this.render();
     this.addEventListeners();
     this.initFBLogin();
-    Utils.addScript(document, "https://connect.facebook.net/en_US/sdk.js");
   }
 
   render() {
@@ -45,13 +44,14 @@ class LoginPage {
     document.getElementById("button-home").addEventListener("click", e => {
       window.dispatchEvent(new CustomEvent("render-home"));
     });
-    document.getElementById("button-login").addEventListener("click", this.handleLoginButtonClick);
+    document.getElementById("button-login").addEventListener("click", this.handleLoginButtonClick.bind(this));
   }
 
   handleLoginButtonClick(e) {
+    alert("Not available for now");
     var inputMail = document.getElementById("input-username").value;
     var inputPassword = document.getElementById("input-password").value;
-    this.joinLobbyWithAccount(inputMail, inputPassword);
+    // authenticateWithEmail(inputMail, inputPassword);
   }
 
   initFBLogin() {
@@ -59,6 +59,7 @@ class LoginPage {
       this.testFBLoginStatus();
     }
     else {
+      Utils.addScript(document, "https://connect.facebook.net/en_US/sdk.js");
       window.fbAsyncInit = function () {
         FB.init({
           appId: "632593943940001",
@@ -80,16 +81,12 @@ class LoginPage {
       if (login.status == "connected") {
         console.log("already connected");
         button.textContent = "Continue with Facebook";
-        button.addEventListener("click", e => {
-          this.getFBUserInfo(login.authResponse);
-        });
+        button.addEventListener("click", e => this.authenticateWithFB(login.authResponse.accessToken));
       }
       else {
         console.log("need login");
         button.textContent = "Login with Facebook";
-        button.addEventListener("click", e => {
-          this.tryFBLogin();
-        });
+        button.addEventListener("click", e => this.tryFBLogin());
       }
     });
   }
@@ -100,7 +97,7 @@ class LoginPage {
       console.log("login:", login);
       if (login.status == "connected") {
         console.log("login successful");
-        this.getFBUserInfo(login.authResponse);
+        this.authenticateWithFB(login.authResponse.accessToken);
       }
       else {
         console.log("login failed");
@@ -110,38 +107,44 @@ class LoginPage {
     });
   }
 
-  getFBUserInfo(authInfo) {
-    console.log("fetching information...");
-    FB.api("/me", info => {
-      console.log("info:", info);
-      this.joinLobbyWithFB(authInfo.accessToken, info.name);
-    });
+  authenticateWithFB(accessToken) {
+    _client.auth.login({ accessToken: accessToken })
+      .then(result => {
+        console.log("result", result);
+        this.joinLobbyRoom();
+      }, error => {
+        console.log("errror", error);
+      });
   }
 
-  joinLobbyWithFB(token, name) {
-    console.log("trying to join room", token, name);
-    window._client.joinOrCreate("lobby", {
-      type: "fb",
-      token: token,
-      name: name
-    }).then(room => {
+  authenticateWithEmail(email, password) {
+    client.auth.login({ email: email, password: password })
+      .then(result => {
+        console.log("result", result);
+        this.joinLobbyRoom();
+      }, error => {
+        console.log("errror", error);
+      });
+  }
+
+  joinLobbyRoom() {
+    console.log("trying to join lobby");
+    window._client.joinOrCreate("lobby", {}).then(room => {
+      console.log("joined room:", room);
       window.dispatchEvent(new CustomEvent("render-lobby", { detail: { room: room } }));
     }).catch(e => {
       console.error("join error", e);
     });
   }
 
-  joinLobbyWithAccount(username, password) {
-    window._client.joinOrCreate("lobby", {
-      type: "user",
-      username: username,
-      password: password
-    }).then(room => {
-      window.dispatchEvent(new CustomEvent("render-lobby", { detail: { room: room } }));
-    }).catch(e => {
-      console.error("join error", e);
-    });
-  }
+  // getFBUserInfo(authInfo) {
+  //   console.log("fetching information...");
+  //   FB.api("/me", info => {
+  //     console.log("info:", info);
+  //     this.joinLobbyWithFB(authInfo.accessToken., info.name);
+  //   });
+  // }
+
 }
 
 // let lastRoomId = sessionStorage.getItem("PAC_Room_ID");
