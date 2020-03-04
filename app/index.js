@@ -14,6 +14,7 @@ const port = process.env.PORT || 9000;
 
 const app = express();
 const httpServer = http.createServer(app);
+const gameServer = new Colyseus.Server({server: httpServer, express: app });
 
 // Middleware
 
@@ -29,10 +30,6 @@ app.use("/", socialMiddleware);
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
 });
-
-// Game server
-
-const gameServer = new Colyseus.Server({server: httpServer });
 
 // Monitoring
 // https://github.com/colyseus/colyseus-monitor

@@ -6,53 +6,58 @@ class LobbyState extends schema.Schema {
   constructor() {
     super();
     this.playerCount = 0;
+    this.name = "Super lobby";
   }
 }
+
 schema.defineTypes(LobbyState, {
-  playerCount: "number"
+  playerCount: "number",
+  name: "string"
 });
 
 class LobbyRoom extends colyseus.Room {
-  
+
   onCreate(options) {
-    console.log("create new lobby room");
     this.setState(new LobbyState());
   }
 
-  // Authorize client based on provided options before WebSocket handshake is complete
-  async onAuth(client, options) {
+  async onAuth(client, options, request) {
     console.log("client try to auth");
-    console.log(options);
-    const response = await superagent
-      .get(`https://graph.facebook.com/debug_token`)
-      .set("Accept", "application/json")
-      .query({
-        "input_token": options.token,
-        "access_token": process.env.FACEBOOK_APP_TOKEN
-      });
-    return response.body.data;
+    if (options.type == "fb") {
+      const response = await superagent
+        .get(`https://graph.facebook.com/debug_token`)
+        .set("Accept", "application/json")
+        .query({
+          "input_token": options.token,
+          "access_token": process.env.FACEBOOK_APP_TOKEN
+        });
+      console.log(response);
+      return response.body.data.is_valid;
+    }
+    if (options.type == "user") {
+      // TODO: implement login with username & password
+      return (String(options.username) == "a" && String(options.password) == "b");
+    }
+    return false;
   }
 
-  // When client successfully join the room
   onJoin(client, options, auth) {
-    console.log("client joined");
-    this.playerCount++;
+    this.state.playerCount = this.state.playerCount + 1;
+    console.log("client joined", this.state.playerCount);
   }
 
-  // When a client sends a message
   onMessage(client, message) {
 
   }
 
-  // When a client leaves the room
   onLeave(client, consented) {
-    this.playerCount--;
+    this.state.playerCount = this.state.playerCount - 1;
+    console.log("client joined", this.state.playerCount);
   }
 
-  // Cleanup callback, called after there are no more clients in the room. (see `autoDispose`)
   onDispose() {
 
   }
 }
 
-module.export = LobbyRoom;
+module.exports = LobbyRoom;

@@ -182,16 +182,16 @@ h1 { font-size: 1px !important; } */
   padding: 10px 20px;
 }
 
-#login-email {
+#login-account {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-self: center;
 }
-#login-email > * {
+#login-account > * {
   margin: 5px 0;
 }
-#button-email {
+#button-login {
   margin-top: 20px;
 }
 
