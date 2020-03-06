@@ -1,4 +1,3 @@
-
 import Gameview from "./game/game-view";
 
 class GameContainer {
