@@ -120,7 +120,7 @@ export default class GameScene extends Scene {
     });
 
     self.input.on("drop", function (pointer, gameObject, dropZone) {
-      window.dispatchEvent(new CustomEvent("dragDrop", {
+      window.dispatchEvent(new CustomEvent("drag-drop", {
         detail: {
           "x": dropZone.name.substr(5, 1),
           "y": dropZone.name.substr(7, 1),

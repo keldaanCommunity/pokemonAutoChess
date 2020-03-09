@@ -12,7 +12,7 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
     };
     this.background = new GameObjects.Image(scene, 70, 0, "user");
     this.background.setInteractive().on("pointerdown", () => {
-      window.dispatchEvent(new CustomEvent("playerClick", {
+      window.dispatchEvent(new CustomEvent("player-click", {
         detail: { "id": player.id }
       }));
     });

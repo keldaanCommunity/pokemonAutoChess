@@ -32,7 +32,7 @@ export default class ShopPortraitContainer extends GameObjects.Container {
     };
     this.background = new GameObjects.Rectangle(scene, 80, 0, 160, 80, COLOR_TYPE[pokemon.type]);
     this.background.setInteractive().on("pointerdown", () => {
-      window.dispatchEvent(new CustomEvent("shopClick", {
+      window.dispatchEvent(new CustomEvent("shop-click", {
         detail: { "id": pokemon.id }
       }));
     });

@@ -26,9 +26,6 @@ class Game {
     window.addEventListener("refresh-click", e => this.onRefreshClick(e));
     window.addEventListener("level-click", e => this.onLevelClick(e));
     window.addEventListener("drag-drop", e => this.onDragDrop(e));
-    // Start game
-    this.view.game.scene.stop("loginScene");
-    this.view.game.scene.start("gameScene");
   }
 
   handleRoomStateChange(change) {
@@ -100,12 +97,12 @@ class Game {
     var scene = this.view.game.scene.getScene("gameScene");
     scene.fade();
     scene.boardManager.clear();
-    scene.boardManager.player = window.state.players[e.detail.id];
+    scene.boardManager.player = window.state.players[event.detail.id];
     scene.boardManager.buildPokemons();
   }
 
   onShopClick(event) {
-    this.room.send({ "event": "shop", "id": e.detail.id });
+    this.room.send({ "event": "shop", "id": event.detail.id });
   }
 
   onRefreshClick(event) {
@@ -117,7 +114,7 @@ class Game {
   }
 
   onDragDrop(event) {
-    room.send({ "event": "dragDrop", "detail": event.detail });
+    this.room.send({ "event": "dragDrop", "detail": event.detail });
   }
 }
 
