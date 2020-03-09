@@ -83,8 +83,7 @@ class Lobby{
     }
 
     handleRoomListChange(rooms){
-      console.log("roomlist");
-      
+      document.getElementById('room-list').innerHTML = "";
       rooms.forEach((room) => {
         let el = document.createElement("li");
         el.textContent = `Room id : ${room.roomId} (${room.clients}/${room.maxClients})`;
