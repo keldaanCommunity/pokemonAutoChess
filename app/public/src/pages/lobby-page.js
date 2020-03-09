@@ -1,5 +1,5 @@
 
-const Lobby = require('./lobby');
+const Lobby = require('../lobby');
 
 class LobbyPage {
   constructor(args) {
@@ -19,7 +19,9 @@ class LobbyPage {
   }
 
   addEventListeners(){
+    let self = this;
     document.getElementById("button-home").addEventListener("click", e => {
+      self.room.leave();
       window.dispatchEvent(new CustomEvent("render-home"));
     });
   }

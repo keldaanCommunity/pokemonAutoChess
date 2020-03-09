@@ -9,6 +9,7 @@ const Monitor = require("@colyseus/monitor");
 const socialMiddleware = require("@colyseus/social/express").default;
 const LobbyRoom = require("./rooms/lobby-room");
 const GameRoom = require("./rooms/game-room");
+const PreGameRoom = require("./rooms/pre-game-room");
 
 const port = process.env.PORT || 9000;
 
@@ -42,6 +43,7 @@ app.get("/colyseus", Monitor.monitor(gameServer)); // colyseus monitor panel
 
 gameServer.define("game", GameRoom);
 gameServer.define("lobby", LobbyRoom);
+gameServer.define("preGame", PreGameRoom);
 
 
 // Start
