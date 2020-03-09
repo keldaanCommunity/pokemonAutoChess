@@ -1,20 +1,22 @@
 import Gameview from "./game/game-view";
 
-class GameContainer {
+class Game {
   constructor(room) {
     this.room = room;
     this.view = new Gameview();
-    this.player = null;
-    this.initialState = null;
+    this.initialize();
   }
 
   initialize() {
     // Room event listener
-    this.room.onStateChange.once(state => { this.initialState = state; });
-    this.room.state.onChange(changes => {
-      changes.forEach(change => this.handleRoomStateChange(change));
+    window.sessionId = this.room.sessionId;
+    this.room.onStateChange.once(state => {
+       window.state = state;
     });
-    this.room.players.onAdd(player => this.handleNewPlayer(player));
+    this.room.state.onChange = (changes) => {
+      changes.forEach(change => this.handleRoomStateChange(change));
+    };
+    this.room.state.players.onAdd = (player) => this.handleNewPlayer(player);
     this.room.onMessage(msg => this.handleRoomMessage(msg));
     this.room.onError(err => this.handleRoomError(err));
     this.room.onLeave(client => this.handleRoomLeft(client));
@@ -30,7 +32,7 @@ class GameContainer {
   }
 
   handleRoomStateChange(change) {
-    if (!(window.initialized && this.initialState != null)) return;
+    if (!(window.initialized && this.room.state)) return;
     switch (change.field) {
       case "time":
         this.view.game.scene.getScene("gameScene").updateTime();
@@ -49,7 +51,6 @@ class GameContainer {
     this.player.onChange = (changes => {
       changes.forEach(change => this.handlePlayerChange(change));
     });
-    // force "onChange" to be called immediatelly
     this.player.triggerAll();
   }
 
@@ -120,4 +121,4 @@ class GameContainer {
   }
 }
 
-export default GameContainer;
+export default Game;

@@ -24,7 +24,6 @@ class PreGameRoom extends colyseus.Room {
 
   async onAuth(client, options, request) {
     console.log("client try to auth");
-    console.log(options);
     let token = social.verifyToken(options.token);
     let user = await social.User.findById(token._id);
     return user;
@@ -32,7 +31,7 @@ class PreGameRoom extends colyseus.Room {
 
   onJoin(client, options, auth) {
     this.state.users[auth.facebookId] = new User(auth.facebookId, auth.username);
-    console.log("client joined with auth data:", auth);
+    console.log("client joined pregame");
     this.send(client, "Welcome !");
   }
 
@@ -42,7 +41,7 @@ class PreGameRoom extends colyseus.Room {
   }
 
   onLeave(client, consented) {
-    console.log("client leaved", client);
+    console.log("client leaved pregame");
     delete this.state.users[client.auth.facebookId];
     
   }

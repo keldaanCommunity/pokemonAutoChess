@@ -1,12 +1,12 @@
 const colyseus = require("colyseus");
 const schema = require("@colyseus/schema");
-const superagent = require("superagent");
 const Player = require("../models/player");
 const Shop = require("../models/shop");
 const Pokemon = require("../models/pokemon");
 const PokemonFactory = require("../models/pokemon-factory");
 const STATE = require("../models/enum").STATE;
 const SimulationState = require("../core/simulation-state");
+const social = require("@colyseus/social");
 
 class GameState extends schema.Schema {
   constructor() {
@@ -35,19 +35,14 @@ class GameRoom extends colyseus.Room {
 
   async onAuth(client, options) {
     console.log("client try to auth");
-    const response = await superagent
-      .get(`https://graph.facebook.com/debug_token`)
-      .set("Accept", "application/json")
-      .query({
-        "input_token": options.token,
-        "access_token": process.env.FACEBOOK_APP_TOKEN
-      });
-    return response.body.data;
+    let token = social.verifyToken(options.token);
+    let user = await social.User.findById(token._id);
+    return user;
   }
 
   onJoin(client, options, auth) {
-    console.log(options.name, "joined successfully");
-    this.state.players[client.sessionId] = new Player(client.sessionId, options.facebookName);
+    console.log("client joined game");
+    this.state.players[client.sessionId] = new Player(client.sessionId, auth.username);
   }
 
   // When a client sends a message

@@ -1,5 +1,4 @@
 import { Game, CANVAS, Scale } from "phaser";
-import LoginScene from "./scenes/login-scene";
 import GameScene from "./scenes/game-scene";
 
 export default class Gameview {
@@ -9,7 +8,7 @@ export default class Gameview {
       width: 2000,
       height: 1000,
       pixelArt: true,
-      scene: [LoginScene, GameScene],
+      scene: [GameScene],
       scale: {
         mode: Scale.FIT
       }

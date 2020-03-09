@@ -23,7 +23,6 @@ class LobbyRoom extends colyseus.Room {
 
   async onAuth(client, options, request) {
     console.log("client try to auth");
-    console.log(options);
     let token = social.verifyToken(options.token);
     let user = await social.User.findById(token._id);
     return user;
@@ -31,7 +30,7 @@ class LobbyRoom extends colyseus.Room {
 
   onJoin(client, options, auth) {
     this.state.users[auth.facebookId] = new User(auth.facebookId, auth.username);
-    console.log("client joined with auth data:", auth);
+    console.log("client joined lobby");
     this.send(client, "Welcome !");
   }
 
@@ -41,7 +40,7 @@ class LobbyRoom extends colyseus.Room {
   }
 
   onLeave(client, consented) {
-    console.log("client leaved", client);
+    console.log("client leaved lobby");
     delete this.state.users[client.auth.facebookId];
     
   }

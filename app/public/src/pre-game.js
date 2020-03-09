@@ -12,14 +12,22 @@ class PreGame{
         <p>Logged as : ${window._client.auth.username}</p>
         <h3>Players in room :</h3>
         <ul id="player-list"></ul>
-        <button>Start Game</button>
+        <button id="start-game">Start Game</button>
         </main>`;
         this.initialize();
     }
 
     initialize()
     {
-         let self = this;
+        let self = this;
+        document.getElementById('start-game').addEventListener('click', function(){
+            window._client.create("game", {/* options */}).then(room => {
+                self.room.leave();
+                window.dispatchEvent(new CustomEvent("render-game", { detail: { room: room } }));
+              }).catch(e => {
+                console.error("join error", e);
+              });
+        });
 
         this.room.onLeave((client, consent) => {
           if (consent) {
