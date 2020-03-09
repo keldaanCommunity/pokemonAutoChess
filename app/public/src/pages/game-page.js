@@ -1,7 +1,10 @@
 import GameContainer from "../game/game-container";
 
+const Game = require('../game');
+
 class GamePage {
   constructor(args) {
+    this.room = args.room;
     this.render();
     var room = args.room;
     var container = document.getElementById("game");
@@ -12,11 +15,9 @@ class GamePage {
   render() {
     var content = document.createElement("div");
     content.setAttribute("id", "game");
-    content.innerHTML = `
-    <p>This is game</p>
-    `;
     document.body.innerHTML = "";
     document.body.appendChild(content);
+    this.game = new Game.default(this.room);
   }
 }
 

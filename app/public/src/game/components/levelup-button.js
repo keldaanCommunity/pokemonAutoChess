@@ -2,10 +2,10 @@ import { GameObjects } from "phaser";
 import Button from "./button";
 
 
-export default class PlayButton extends Button {
+export default class LevelUpButton extends Button {
   constructor(scene, x, y) {
     super(scene, x, y, 108, 108);
-    this.background = new GameObjects.Image(scene, 0, 0, "playButton");
+    this.background = new GameObjects.Image(scene, 0, 0, "levelUpButton");
     this.add(this.background);
   }
 
@@ -18,7 +18,7 @@ export default class PlayButton extends Button {
   }
 
   enterButtonActiveState() {
-    window.dispatchEvent(new CustomEvent("clickPlay"));
+    window.dispatchEvent(new CustomEvent("level-click"));
   }
 
 }

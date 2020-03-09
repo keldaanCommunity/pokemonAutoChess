@@ -15,7 +15,7 @@ export default class RefreshButton extends Button {
   }
 
   enterButtonActiveState() {
-    window.dispatchEvent(new CustomEvent("refreshClick"));
+    window.dispatchEvent(new CustomEvent("refresh-click"));
   }
 
 }

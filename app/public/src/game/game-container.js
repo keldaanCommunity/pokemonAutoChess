@@ -38,9 +38,9 @@ class GameContainer {
 
   initializeEvents() {
     // Room event listener
-    this.room.onStateChange.once(state => { this.initialState = state; });
-    this.room.state.onChange(changes => {
-      changes.forEach(change => this.handleRoomStateChange(change));
+    window.sessionId = this.room.sessionId;
+    this.room.onStateChange.once(state => {
+       window.state = state;
     });
     this.room.players.onAdd(player => this.initializePlayer(player));
     this.room.onMessage(msg => this.handleRoomMessage(msg));
@@ -118,12 +118,12 @@ class GameContainer {
     var scene = this.game.scene.getScene("gameScene");
     scene.fade();
     scene.boardManager.clear();
-    scene.boardManager.player = window.state.players[e.detail.id];
+    scene.boardManager.player = window.state.players[event.detail.id];
     scene.boardManager.buildPokemons();
   }
 
   onShopClick(event) {
-    this.room.send({ "event": "shop", "id": e.detail.id });
+    this.room.send({ "event": "shop", "id": event.detail.id });
   }
 
   onRefreshClick(event) {
@@ -139,4 +139,4 @@ class GameContainer {
   }
 }
 
-export default GameContainer;
+export default Game;
