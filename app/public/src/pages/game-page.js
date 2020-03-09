@@ -1,8 +1,12 @@
+import GameContainer from "../game/game-container";
 
 class GamePage {
   constructor(args) {
     this.render();
-    this.addEventListeners();
+    var room = args.room;
+    var container = document.getElementById("game");
+    this.game = new GameContainer(room, container);
+    console.log("GamePage", this);
   }
 
   render() {
@@ -13,10 +17,6 @@ class GamePage {
     `;
     document.body.innerHTML = "";
     document.body.appendChild(content);
-  }
-
-  addEventListeners() {
-
   }
 }
 

@@ -1,5 +1,6 @@
 const colyseus = require("colyseus");
 const schema = require("@colyseus/schema");
+const social = require("@colyseus/social");
 const superagent = require("superagent");
 const Player = require("../models/player");
 const Shop = require("../models/shop");
@@ -34,15 +35,20 @@ class GameRoom extends colyseus.Room {
   }
 
   async onAuth(client, options) {
-    console.log("client try to auth");
-    const response = await superagent
-      .get(`https://graph.facebook.com/debug_token`)
-      .set("Accept", "application/json")
-      .query({
-        "input_token": options.token,
-        "access_token": process.env.FACEBOOK_APP_TOKEN
-      });
-    return response.body.data;
+    console.log("onAuth");
+    console.log(client);
+    console.log(options);
+    // const response = await superagent
+    //   .get(`https://graph.facebook.com/debug_token`)
+    //   .set("Accept", "application/json")
+    //   .query({
+    //     "input_token": options.token,
+    //     "access_token": process.env.FACEBOOK_APP_TOKEN
+    //   });
+    // return response.body.data;
+    let token = social.verifyToken(options.token);
+    let user = await social.User.findById(token._id);
+    return user;
   }
 
   onJoin(client, options, auth) {
