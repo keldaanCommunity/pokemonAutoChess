@@ -8,7 +8,6 @@ const Pokemon = require("../models/pokemon");
 const PokemonFactory = require("../models/pokemon-factory");
 const STATE = require("../models/enum").STATE;
 const SimulationState = require("../core/simulation-state");
-const social = require("@colyseus/social");
 
 class GameState extends schema.Schema {
   constructor() {
@@ -35,7 +34,7 @@ class GameRoom extends colyseus.Room {
     this.setSimulationInterval((deltaTime) => this.update(deltaTime));
   }
 
-  async onAuth(client, options) {
+  async onAuth(client, options, request) {
     console.log("onAuth");
     console.log(client);
     console.log(options);
@@ -71,8 +70,6 @@ class GameRoom extends colyseus.Room {
         break;
       case "levelUp":
         this.onLevelUp(client.sessionId);
-        break;
-      default:
         break;
     }
   }

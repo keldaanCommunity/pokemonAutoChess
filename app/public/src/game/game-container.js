@@ -1,5 +1,5 @@
 
-import { Game, CANVAS, Scale } from "phaser";
+// import { Game, CANVAS, Scale } from "phaser";
 import LoginScene from "./scenes/login-scene";
 import GameScene from "./scenes/game-scene";
 
@@ -24,16 +24,14 @@ class GameContainer {
   initializeGame() {
     // Create Phaser game
     let config = {
-      type: CANVAS,
+      type: Phaser.CANVAS,
       width: 2000,
       height: 1000,
       pixelArt: true,
       scene: [LoginScene, GameScene],
-      scale: {
-        mode: Scale.FIT
-      }
+      scale: { mode: Phaser.Scale.FIT }
     };
-    this.game = new Game(config);
+    this.game = new Phaser.Game(config);
   }
 
   initializeEvents() {
@@ -139,4 +137,4 @@ class GameContainer {
   }
 }
 
-export default Game;
+export default GameContainer;

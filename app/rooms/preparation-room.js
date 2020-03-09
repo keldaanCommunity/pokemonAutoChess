@@ -3,25 +3,25 @@ const schema = require("@colyseus/schema");
 const social = require("@colyseus/social");
 const User = require("../models/user");
 
-class LobbyState extends schema.Schema {
+class PreparationState extends schema.Schema {
   constructor() {
     super();
     this.users = new schema.MapSchema();
   }
 }
 
-schema.defineTypes(LobbyState, {
+schema.defineTypes(PreparationState, {
   users: { map: User }
 });
 
-class LobbyRoom extends colyseus.Room {
+class PreparationRoom extends colyseus.Room {
 
   onCreate(options) {
-    this.setState(new LobbyState());
+    this.setState(new PreparationState());
+    this.maxClients = 8;
   }
 
   async onAuth(client, options, request) {
-    console.log("client try to auth");
     let token = social.verifyToken(options.token);
     let user = await social.User.findById(token._id);
     return user;
@@ -29,7 +29,7 @@ class LobbyRoom extends colyseus.Room {
 
   onJoin(client, options, auth) {
     this.state.users[auth.facebookId] = new User(auth.facebookId, auth.username);
-    console.log("client joined lobby");
+    console.log("client joined pregame");
     this.send(client, "Welcome !");
   }
 
@@ -39,9 +39,8 @@ class LobbyRoom extends colyseus.Room {
   }
 
   onLeave(client, consented) {
-    console.log("client leaved lobby");
+    console.log("client leaved pregame");
     delete this.state.users[client.auth.facebookId];
-    
   }
 
   onDispose() {
@@ -49,4 +48,4 @@ class LobbyRoom extends colyseus.Room {
   }
 }
 
-module.exports = LobbyRoom;
+module.exports = PreparationRoom;

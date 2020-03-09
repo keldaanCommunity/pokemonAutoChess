@@ -37,4 +37,4 @@ let gameConfig = Object.assign({}, commonConfig, {
   },
 });
 
-module.exports = [indexConfig, gameConfig];
+module.exports = [indexConfig];

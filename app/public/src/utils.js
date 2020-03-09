@@ -17,7 +17,7 @@
   function uuid() {
     var s = "", l = "0123456789abcdef";
     for (var i = 0; i < 16; i++) {
-      var b = Math.random()*256|0;
+      var b = Math.random() * 256 | 0;
       if (i == 6) b = (b & 15) | 64;  // 0100xxxx
       if (i == 8) b = (b & 63) | 128; // 10xxxxxx
       s += l[b >> 4] + l[b & 15];
@@ -42,17 +42,23 @@
     return h >>> 0;
   }
   Utils.hash = hash;
-  
-  function addScript(doc, src, onload, onerror) {
+
+  function addScript(doc, src) {
     var id = hash(src).toString(36);
-    if (document.getElementById(id)) { console.log ("script already exists", src); return; }
+    if (document.getElementById(id)) {
+      console.log("script already exists:", src);
+      return new Promise((resolve, reject) => resolve());
+    }
     var script = doc.createElement("script");
     script.setAttribute("type", "text/javascript");
     script.setAttribute("src", src);
     script.setAttribute("id", id);
-    if (typeof onload == "function") script.onload = onload;
-    if (typeof onerror == "function") script.onerror = onerror;
+    var p = new Promise((resolve, reject) => {
+      script.onload = resolve;
+      script.onerror = reject;
+    });
     doc.getElementsByTagName("head")[0].appendChild(script);
+    return p;
   }
   Utils.addScript = addScript;
 

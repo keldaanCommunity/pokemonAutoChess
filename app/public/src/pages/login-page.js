@@ -2,15 +2,16 @@ import Utils from "../utils";
 
 class LoginPage {
   constructor(args) {
-    this.initFB = false;
     this.render();
     this.addEventListeners();
-    this.initFBLogin();
+    Utils.addScript(document, "https://connect.facebook.net/en_US/sdk.js").then(e => {
+      this.initFBLogin();
+    });
   }
 
   render() {
     var content = document.createElement("div");
-    content.setAttribute("id", "home");
+    content.setAttribute("id", "login");
     content.innerHTML = `
     <header>
       <h1>Game Login</h1>
@@ -55,21 +56,19 @@ class LoginPage {
   }
 
   initFBLogin() {
-    if (this.initFB) {
+    if (!!window.fbAsyncInit) {
       this.testFBLoginStatus();
     }
     else {
-      Utils.addScript(document, "https://connect.facebook.net/en_US/sdk.js");
-      window.fbAsyncInit = function () {
+      window.fbAsyncInit = () => {
         FB.init({
           appId: "632593943940001",
           autoLogAppEvents: true,
           xfbml: true,
           version: "v6.0"
         });
-        this.initFB = true;
         this.testFBLoginStatus();
-      }.bind(this);
+      }
     }
   }
 
@@ -129,7 +128,7 @@ class LoginPage {
 
   joinLobbyRoom() {
     console.log("trying to join lobby");
-    window._client.joinOrCreate("lobby", {}).then(room => {
+    _client.joinOrCreate("lobby", {}).then(room => {
       console.log("joined room:", room);
       window.dispatchEvent(new CustomEvent("render-lobby", { detail: { room: room } }));
     }).catch(e => {
