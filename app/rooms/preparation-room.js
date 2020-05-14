@@ -19,6 +19,11 @@ class PreparationRoom extends colyseus.Room {
   onCreate(options) {
     this.setState(new PreparationState());
     this.maxClients = 8;
+
+    this.onMessage("game-start", (client, message) => {
+      this.broadcast("game-start", message, {except: client});
+    });
+
   }
 
   async onAuth(client, options, request) {
@@ -30,12 +35,6 @@ class PreparationRoom extends colyseus.Room {
   onJoin(client, options, auth) {
     this.state.users[auth.facebookId] = new User(auth.facebookId, auth.username);
     console.log("client joined room");
-    this.send(client, "Welcome !");
-  }
-
-  onMessage(client, message) {
-    console.log("message received:", message);
-    this.send(client, { text: "message ok" });
   }
 
   onLeave(client, consented) {

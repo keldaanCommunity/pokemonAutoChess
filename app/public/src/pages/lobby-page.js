@@ -58,9 +58,6 @@ class LobbyPage {
       console.log("new room state", state);
       this.handleUserChange();
     });
-    this.room.onMessage((msg) => {
-      console.log("room message", msg);
-    });
   }
 
   createRoom() {

@@ -39,7 +39,7 @@ class GameContainer {
     });
     
     this.room.state.players.onAdd = player => this.initializePlayer(player);
-    this.room.onMessage(msg => this.handleRoomMessage(msg));
+    this.room.onMessage("DragDropFailed",(client, message) => this.handleDragDropFailed());
     this.room.onLeave(client => this.handleRoomLeft(client));
     this.room.onError(err => console.log("room error", err));
     this.room.state.onChange = (changes) => {
@@ -56,6 +56,9 @@ class GameContainer {
   }
 
   initializePlayer(player) {
+    if(player.id == this.room.sessionId){
+      this.player = player;
+    }
     player.onChange = (changes => {
       changes.forEach(change => this.handlePlayerChange(change, player));
     });
@@ -64,7 +67,7 @@ class GameContainer {
   }
 
   handleRoomStateChange(change) {
-    if (window.state == null) return;
+    if (window.state == null || this.game.scene.getScene("gameScene").timeText == null) return;
     switch (change.field) {
       case "time":
         this.game.scene.getScene("gameScene").updateTime();
@@ -72,11 +75,13 @@ class GameContainer {
       case "phase":
         this.game.scene.getScene("gameScene").updatePhase();
         break;
+      default:
+        break;
     }
   }
 
   handlePlayerChange(change, player) {
-    if (this.game.scene.getScene("gameScene").playerContainer == null) return;
+    if (this.game.scene.getScene("gameScene") == null || this.game.scene.getScene("gameScene").playerContainer == null) return;
     switch (change.field) {
       case "money":
         if (this.room.sessionId == player.id) {
@@ -98,13 +103,8 @@ class GameContainer {
     }
   }
 
-  handleRoomMessage(message) {
-    console.log("room message", message);
-    switch (message.message) {
-      case "DragDropFailed":
-        this.game.scene.getScene("gameScene").boardManager.update();
-        break;
-    }
+  handleDragDropFailed() {
+    this.game.scene.getScene("gameScene").boardManager.update();
   }
 
   handleRoomLeft(client) {
@@ -122,19 +122,19 @@ class GameContainer {
   }
 
   onShopClick(event) {
-    this.room.send({ "event": "shop", "id": event.detail.id });
+    this.room.send("shop",{"id": event.detail.id });
   }
 
   onRefreshClick(event) {
-    this.room.send({ "event": "refresh" });
+    this.room.send("refresh");
   }
 
   onLevelClick(event) {
-    this.room.send({ "event": "levelUp" });
+    this.room.send("levelUp");
   }
 
   onDragDrop(event) {
-    this.room.send({ "event": "dragDrop", "detail": event.detail });
+    this.room.send("dragDrop", {"detail": event.detail });
   }
 }
 

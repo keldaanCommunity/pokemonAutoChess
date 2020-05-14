@@ -33,6 +33,7 @@ class RoomPage {
     });
     document.getElementById("start").addEventListener("click", e => {
       _client.create("game", {/* options */ }).then(room => {
+        this.room.send("game-start", { id: room.id});
         this.room.leave();
         window.dispatchEvent(new CustomEvent("render-game", { detail: { room: room } }));
       }).catch(e => {
@@ -58,8 +59,14 @@ class RoomPage {
       console.log("new room state", state);
       this.handleUserChange();
     });
-    this.room.onMessage((msg) => {
-      console.log("room message", msg);
+
+    this.room.onMessage("game-start", (message) => {
+      _client.joinById(message.id).then(room => {
+        this.room.leave();
+        window.dispatchEvent(new CustomEvent("render-game", { detail: { room: room } }));
+      }).catch(e => {
+        console.error("join error", e);
+      });
     });
   }
 

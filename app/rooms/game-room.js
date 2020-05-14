@@ -25,19 +25,33 @@ schema.defineTypes(GameState, {
   players: { map: Player }
 });
 
-
 class GameRoom extends colyseus.Room {
   // When room is initialized
   onCreate() {
     console.log("create new game room");
+
+    this.onMessage("shop", (client, message) => {
+      this.onShop(client.sessionId, message.id);
+    });
+
+    this.onMessage("dragDrop", (client, message) => {
+      this.onDragDrop(client, message.detail);
+    });
+
+    this.onMessage("refresh", (client, message) => {
+      this.onRefresh(client.sessionId);
+    });
+
+    this.onMessage("levelUp", (client, message) => {
+      this.onLevelUp(client.sessionId);
+    });
+
     this.setState(new GameState());
     this.setSimulationInterval((deltaTime) => this.update(deltaTime));
   }
 
   async onAuth(client, options, request) {
     console.log("onAuth");
-    console.log(client);
-    console.log(options);
     // const response = await superagent
     //   .get(`https://graph.facebook.com/debug_token`)
     //   .set("Accept", "application/json")
@@ -54,24 +68,6 @@ class GameRoom extends colyseus.Room {
   onJoin(client, options, auth) {
     console.log("client joined game");
     this.state.players[client.sessionId] = new Player(client.sessionId, auth.username);
-  }
-
-  // When a client sends a message
-  onMessage(client, message) {
-    switch (message.event) {
-      case "shop":
-        this.onShop(client.sessionId, message.id);
-        break;
-      case "dragDrop":
-        this.onDragDrop(client, message.detail);
-        break;
-      case "refresh":
-        this.onRefresh(client.sessionId);
-        break;
-      case "levelUp":
-        this.onLevelUp(client.sessionId);
-        break;
-    }
   }
 
   async onLeave(client, consented) {
@@ -226,9 +222,7 @@ class GameRoom extends colyseus.Room {
       }
     }
     if (!success) {
-      this.send(client, {
-        message: "DragDropFailed"
-      });
+      client.send("DragDropFailed", {});
     }
   }
 
