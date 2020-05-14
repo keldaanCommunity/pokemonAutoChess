@@ -4,21 +4,29 @@ import PlayerPortraitContainer from "./player-portrait-container";
 export default class PlayerContainer extends GameObjects.Container {
   constructor(scene, x, y) {
     super(scene, x, y);
-    this.buildPlayerPortraits();
+    for (let id in window.state.players){
+      this.addPlayer(window.state.players[id]);
+    }
     scene.add.existing(this);
   }
 
-  buildPlayerPortraits() {
-    let i = 0;
-    for (let id in window.state.players) {
-      this.add(new PlayerPortraitContainer(this.scene, 0, 100 * i, window.state.players[id]));
-      i += 1;
-    }
+  addPlayer(player){
+    this.add(new PlayerPortraitContainer(this.scene, 0, 100 * this.length, player));
   }
 
-  updatePortraits() {
-    this.removeAll();
-    this.buildPlayerPortraits();
+  removePlayer(id){
+    this.remove(this.getFirst('id',id));
   }
 
+  onLifeChange(id, value){
+    this.getFirst('id',id).onLifeChange(value);
+  }
+
+  onMoneyChange(id, value){
+    this.getFirst('id', id).onMoneyChange(value);
+  }
+
+  onLevelChange(id, value){
+    this.getFirst('id', id).onLevelChange(value);
+  }
 }

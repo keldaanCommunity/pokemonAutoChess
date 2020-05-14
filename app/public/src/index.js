@@ -4,7 +4,6 @@ import LoginPage from "./pages/login-page";
 import LobbyPage from "./pages/lobby-page";
 import RoomPage from "./pages/room-page";
 import GamePage from "./pages/game-page";
-import Utils from "./utils";
 
 let endpoint = `${window.location.protocol.replace("http", "ws")}//${window.location.host}`;
 window._client = new colyseus.Client(endpoint);

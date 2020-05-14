@@ -1,21 +1,25 @@
 const TYPE = Object.freeze({
   NORMAL: "NORMAL",
-  FIGHTING: "FIGHTING",
-  FLYING: "FLYING",
-  POISON: "POISON",
-  GROUND: "GROUND",
-  ROCK: "ROCK",
-  BUG: "BUG",
-  GHOST: "GHOST",
-  STEEL: "STEEL",
+  GRASS: "GRASS",
   FIRE: "FIRE",
   WATER: "WATER",
-  GRASS: "GRASS",
   ELECTRIC: "ELECTRIC",
+  FIGHTING: "FIGHTING",
   PSYCHIC: "PSYCHIC",
-  ICE: "ICE",
-  DRAGON: "DRAGON",
   DARK: "DARK",
+  METAL: "METAL",
+  GROUND: "GROUND",
+  POISON: "POISON",
+  DRAGON: "DRAGON",
+  FIELD: "FIELD",
+  MONSTER: "MONSTER",
+  HUMAN: "HUMAN",
+  AQUATIC: "AQUATIC",
+  BUG: "BUG",
+  FLYING: "FLYING",
+  FLORA: "FLORA",
+  MINERAL: "MINERAL",
+  AMORPH: "AMORPH",
   FAIRY: "FAIRY"
 });
 
@@ -51,4 +55,20 @@ const STATE = Object.freeze({
   PICK: "PICK"
 });
 
-module.exports = { TYPE, RARITY, COST, EXP_TABLE, STATE };
+const STATE_TYPE = Object.freeze({
+  MOVING: "MOVING",
+  ATTACKING: "ATTACKING"
+});
+
+const ORIENTATION = Object.freeze({
+  DOWNLEFT: "DOWNLEFT",
+  LEFT: "LEFT",
+  UPLEFT: "UPLEFT",
+  UP: "UP",
+  UPRIGHT: "UPRIGHT",
+  RIGHT: "RIGHT",
+  DOWNRIGHT: "DOWNRIGHT",
+  DOWN: "DOWN"
+});
+
+module.exports = { TYPE, RARITY, COST, EXP_TABLE, STATE, STATE_TYPE, ORIENTATION };

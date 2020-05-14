@@ -1,18 +1,19 @@
 const colyseus = require("colyseus");
 const schema = require("@colyseus/schema");
 const social = require("@colyseus/social");
-const superagent = require("superagent");
 const Player = require("../models/player");
 const Shop = require("../models/shop");
 const Pokemon = require("../models/pokemon");
 const PokemonFactory = require("../models/pokemon-factory");
 const STATE = require("../models/enum").STATE;
-const SimulationState = require("../core/simulation-state");
+const COST = require("../models/enum").COST;
+const Simulation = require('../core/simulation');
 
 class GameState extends schema.Schema {
   constructor() {
     super();
-    this.time = 5000;
+    this.time = 30000;
+    this.roundTime = Math.round(this.time/1000);
     this.phase = STATE.PICK;
     this.players = new schema.MapSchema();
     this.shop = new Shop();
@@ -20,24 +21,46 @@ class GameState extends schema.Schema {
 }
 
 schema.defineTypes(GameState, {
-  time: "number",
+  roundTime: "number",
   phase: "string",
   players: { map: Player }
 });
-
 
 class GameRoom extends colyseus.Room {
   // When room is initialized
   onCreate() {
     console.log("create new game room");
+
+    this.onMessage("shop", (client, message) => {
+      this.onShop(client.sessionId, message.id);
+    });
+
+    this.onMessage("dragDrop", (client, message) => {
+      this.onDragDrop(client, message.detail);
+    });
+
+    this.onMessage("sellDrop", (client, message) => {
+      this.onSellDrop(client, message.detail);
+    });
+
+    this.onMessage("refresh", (client, message) => {
+      this.onRefresh(client.sessionId);
+    });
+
+    this.onMessage("lock", (client, message) => {
+      this.onLock(client.sessionId);
+    });
+
+    this.onMessage("levelUp", (client, message) => {
+      this.onLevelUp(client.sessionId);
+    });
+
     this.setState(new GameState());
     this.setSimulationInterval((deltaTime) => this.update(deltaTime));
   }
 
   async onAuth(client, options, request) {
     console.log("onAuth");
-    console.log(client);
-    console.log(options);
     // const response = await superagent
     //   .get(`https://graph.facebook.com/debug_token`)
     //   .set("Accept", "application/json")
@@ -53,45 +76,15 @@ class GameRoom extends colyseus.Room {
 
   onJoin(client, options, auth) {
     console.log("client joined game");
-    this.state.players[client.sessionId] = new Player(client.sessionId, auth.username);
+    this.state.players[client.sessionId] = new Player(client.sessionId, auth.email.slice(0,auth.email.indexOf("@")));
+    this.state.shop.assignShop(this.state.players[client.sessionId]);
   }
 
-  // When a client sends a message
-  onMessage(client, message) {
-    switch (message.event) {
-      case "shop":
-        this.onShop(client.sessionId, message.id);
-        break;
-      case "dragDrop":
-        this.onDragDrop(client, message.detail);
-        break;
-      case "refresh":
-        this.onRefresh(client.sessionId);
-        break;
-      case "levelUp":
-        this.onLevelUp(client.sessionId);
-        break;
-    }
-  }
-
-  async onLeave(client, consented) {
-    // flag client as inactive for other users
-    this.state.players[client.sessionId].connected = false;
-
-    try {
-      if (consented) {
-        throw new Error("consented leave");
-      }
-      // allow disconnected client to reconnect into this room until 20 seconds
-      await this.allowReconnection(client, 20);
-      // client returned! let's re-activate it.
-      this.state.players[client.sessionId].connected = true;
-    }
-    catch (e) {
-      // 20 seconds expired. let's remove the client.
-      this.state.shop.detachShop(this.state.players[client.sessionId]);
-      delete this.state.players[client.sessionId];
-    }
+  onLeave(client, consented) {
+    console.log('client ' + client.sessionId + 'left');
+    
+    this.state.shop.detachShop(this.state.players[client.sessionId]);
+    delete this.state.players[client.sessionId];
   }
 
   // Cleanup callback, called after there are no more clients in the room. (see `autoDispose`)
@@ -101,9 +94,26 @@ class GameRoom extends colyseus.Room {
 
   update(deltaTime) {
     this.state.time -= deltaTime;
+    if(Math.round(this.state.time/1000) != this.state.roundTime){
+      this.state.roundTime = Math.round(this.state.time/1000);
+    }
     if (this.state.time < 0) {
       this.switchPhase();
-      this.computeIncome();
+    }
+    if(this.state.phase == STATE.FIGHT){
+      let everySimulationFinished = true;
+      for (let id in this.state.players){
+        if(!this.state.players[id].simulation.finished){
+          if(everySimulationFinished){
+            everySimulationFinished = false;
+          }
+          this.state.players[id].simulation.update(deltaTime);
+        }
+      }
+      if(everySimulationFinished){
+        this.switchPhase();
+        this.computeIncome();
+      }
     }
   }
 
@@ -112,71 +122,112 @@ class GameRoom extends colyseus.Room {
       this.initializeFightingPhase();
     }
     else if (this.state.phase == STATE.FIGHT) {
+      this.computeLife();
+      this.computeIncome();
+      this.checkDeath();
       this.initializePickingPhase();
     }
   }
 
-  computeIncome() {
+  computeLife(){
     for (let id in this.state.players) {
       let player = this.state.players[id];
-      player.money += Math.min(Math.floor(player.money / 10), 5);
-      player.money += 5;
+      if(Object.keys(player.simulation.blueTeam).length == 0){
+        if(player.lastBattleResult == "Defeat"){
+          player.streak +=1;
+        }
+        else{
+          player.streak = 0;
+        }
+        player.lastBattleResult = "Defeat";
+        player.life = Math.max(0, player.life - 1);
+      }
+      else if(Object.keys(player.simulation.redTeam).length == 0){
+        if(player.lastBattleResult == "Win"){
+          player.streak += 1;
+        }
+        else{
+          player.streak = 0;
+        }
+        player.lastBattleResult = "Win";
+      }
+      else{
+        if(player.lastBattleResult == "Draw"){
+          player.streak += 1;
+        }
+        else{
+          player.streak = 0;
+        }
+        player.lastBattleResult = "Draw";
+      }
+    }
+  }
+
+  computeIncome() {
+    if(this.state.phase == STATE.PICK){
+      for (let id in this.state.players) {
+        let player = this.state.players[id];
+        player.interest = Math.min(Math.floor(player.money / 10), 5);
+        player.money += player.interest;
+        player.money += Math.max(Math.abs(player.streak) - 1, 0);
+        if(player.lastBattleResult == "Win"){
+          player.money += 1;
+        }
+        player.money += 5;
+        player.experienceManager.addExperience(2);
+      }
+    }
+  }
+
+  checkDeath(){
+    for (let id in this.state.players) {
+      let player = this.state.players[id];
+        if(player.life <= 0){
+          this.kickPlayer(player.id);
+        }
+    }
+  }
+
+  kickPlayer(sessionId){
+    console.log(sessionId);
+    for (let i = 0; i < this.clients.length; i++) {
+      console.log(this.clients[i].sessionId);
+      if(this.clients[i].sessionId == sessionId){
+        this.clients[i].send("kick-out");
+      }
     }
   }
 
   initializePickingPhase() {
     this.state.phase = STATE.PICK;
-    this.state.time = 5000;
+    this.state.time = 30000;
     for (let id in this.state.players) {
       let player = this.state.players[id];
-      this.state.shop.detachShop(player);
-    }
-    for (let id in this.state.players) {
-      let player = this.state.players[id];
-      this.state.shop.assignShop(player);
+      player.simulation.stop();
+      if(!player.shopLocked){
+        this.state.shop.detachShop(player);
+        this.state.shop.assignShop(player);
+      }
     }
   }
 
   initializeFightingPhase() {
     this.state.phase = STATE.FIGHT;
-    this.state.time = 5000;
+    this.state.time = 30000;
     for (let id in this.state.players) {
       let player = this.state.players[id];
-      let opponentId = this.getRandomOpponent();
-      if (opponentId == "") {
-        // no opponent fight ?
-      }
-      else {
-        let pokemons = [];
-        for (let id in player.board) {
-          let pokemon = player.board[id];
-          if (pokemon.positionY != 0) {
-            let simulationPokemon = PokemonFactory.createPokemonFromName(pokemon.name);
-            simulationPokemon.setPosition(pokemon.positionX, pokemon.positionY - 1);
-            simulationPokemon.group = 0;
-            pokemons.push(simulationPokemon);
-          }
-        }
-        for (let id in this.state.players[opponentId].board) {
-          let pokemon = this.state.players[opponentId].board[id];
-          if (pokemon.positionY != 0) {
-            let simulationPokemon = PokemonFactory.createPokemonFromName(pokemon.name);
-            simulationPokemon.setPosition(pokemon.positionX, 7 - pokemon.positionY);
-            simulationPokemon.group = 1;
-            pokemons.push(simulationPokemon);
-          }
-        }
-        player.simulationState = new SimulationState(pokemons);
-        player.simulationState.simulation.run();
-        player.setLog(player.simulationState.simulation.state.log);
-      }
+      let opponentId = this.getRandomOpponent(id);
+      player.simulation = new Simulation(player.board, this.state.players[opponentId].board);
     }
   }
 
-  getRandomOpponent() {
+  getRandomOpponent(playerId) {
     let playersId = [];
+    let playerNumber = Object.keys(this.state.players).length;
     for (let id in this.state.players) {
-      playersId.push(id);
+      if(id != playerId || playerNumber == 1){
+        playersId.push(id);
+      }
     }
     if (playersId.length > 0) {
       return this.state.players[playersId[Math.round(Math.random() * (playersId.length - 1))]].id;
@@ -196,6 +247,12 @@ class GameRoom extends colyseus.Room {
     }
   }
 
+  onLock(sessionId) {
+    if (sessionId in this.state.players) {
+      this.state.players[sessionId].shopLocked = !this.state.players[sessionId].shopLocked;
+    }
+  }
+
   onLevelUp(sessionId) {
     if (sessionId in this.state.players) {
       if (this.state.players[sessionId].money >= 4) {
@@ -205,30 +262,63 @@ class GameRoom extends colyseus.Room {
     }
   }
 
+  swap(board, pokemon, x, y){
+    if (!this.isPositionEmpty(board, x, y)) {
+      let pokemonToSwap = this.getPokemonByPosition(board, x, y);
+      pokemonToSwap.positionX = pokemon.positionX;
+      pokemonToSwap.positionY = pokemon.positionY;
+    }
+    pokemon.positionX = x;
+    pokemon.positionY = y;
+    
+  }
+
+  onSellDrop(client, detail){
+    if (client.sessionId in this.state.players &&
+    detail.pokemonId in this.state.players[client.sessionId].board) {
+        this.state.players[client.sessionId].money += COST[this.state.players[client.sessionId].board[detail.pokemonId].rarity];
+        delete this.state.players[client.sessionId].board[detail.pokemonId];
+    }
+  }
+
   onDragDrop(client, detail) {
     let success = false;
+
     if (client.sessionId in this.state.players) {
       if (detail.pokemonId in this.state.players[client.sessionId].board) {
         let pokemon = this.state.players[client.sessionId].board[detail.pokemonId];
         let x = parseInt(detail.x);
         let y = parseInt(detail.y);
-        if (this.getTeamSize(client.sessionId) < this.state.players[client.sessionId].experienceManager.level || pokemon.positionY != 0) {
 
-          if (!this.isPositionEmpty(this.state.players[client.sessionId].board, x, y)) {
-            let pokemonToSwap = this.getPokemonByPosition(this.state.players[client.sessionId].board, x, y);
-            pokemonToSwap.positionX = pokemon.positionX;
-            pokemonToSwap.positionY = pokemon.positionY;
-          }
-          pokemon.positionX = x;
-          pokemon.positionY = y;
+        if( y == 0 && pokemon.positionY == 0){
+          this.swap(this.state.players[client.sessionId].board,pokemon,x,y);
           success = true;
+        }
+        else if(this.state.phase == STATE.PICK){
+          let teamSize = this.getTeamSize(client.sessionId);
+          if (teamSize < this.state.players[client.sessionId].experienceManager.level) {
+            this.swap(this.state.players[client.sessionId].board,pokemon,x,y);
+            success = true;
+          }
+          else if(teamSize == this.state.players[client.sessionId].experienceManager.level){
+            let empty = this.isPositionEmpty(this.state.players[client.sessionId].board,x,y);
+            if(!empty){
+              this.swap(this.state.players[client.sessionId].board,pokemon,x,y);
+              success = true;
+            }
+            else{
+              if((pokemon.positionY != 0 && y != 0) || y == 0){
+                this.swap(this.state.players[client.sessionId].board,pokemon,x,y);
+                success = true;
+              }
+            }
+          }
         }
       }
     }
+
     if (!success) {
-      this.send(client, {
-        message: "DragDropFailed"
-      });
+      client.send("DragDropFailed", {});
     }
   }
 
@@ -242,21 +332,32 @@ class GameRoom extends colyseus.Room {
     return size;
   }
 
-  onShop(sessionId, pokemonId) {
-    if (sessionId in this.state.players) {
-      if (pokemonId in this.state.players[sessionId].shop) {
-        if (this.state.players[sessionId].money >= this.state.players[sessionId].shop[pokemonId].cost) {
-          this.state.players[sessionId].money -= this.state.players[sessionId].shop[pokemonId].cost;
-          this.state.players[sessionId].board[pokemonId] = Object.assign(new Pokemon.Pokemon(), this.state.players[sessionId].shop[pokemonId]);
-          delete this.state.players[sessionId].shop[pokemonId];
-          this.state.players[sessionId].board[pokemonId].positionX = this.getFirstAvailablePositionInBoard(this.state.players[sessionId].board);
-          this.state.players[sessionId].board[pokemonId].positionY = 0;
-
-          this.computeEvolutions(this.state.players[sessionId].board);
-          this.computeEvolutions(this.state.players[sessionId].board);
-        }
+  getBoardSize(sessionId){   
+    let size = 0;
+    for (let id in this.state.players[sessionId].board) {
+      if (this.state.players[sessionId].board[id].positionY == 0) {
+        size += 1;
       }
     }
+    return size;
+  }
+
+  onShop(sessionId, pokemonId) {
+    if (sessionId in this.state.players
+      && pokemonId in this.state.players[sessionId].shop
+      && this.getBoardSize(sessionId) < 9
+      && this.state.players[sessionId].money >= this.state.players[sessionId].shop[pokemonId].cost) {
+
+      this.state.players[sessionId].money -= this.state.players[sessionId].shop[pokemonId].cost;
+      this.state.players[sessionId].board[pokemonId] = Object.assign(new Pokemon.Pokemon(), this.state.players[sessionId].shop[pokemonId]);
+      delete this.state.players[sessionId].shop[pokemonId];
+      this.state.players[sessionId].board[pokemonId].positionX = this.getFirstAvailablePositionInBoard(this.state.players[sessionId].board);
+      this.state.players[sessionId].board[pokemonId].positionY = 0;
+
+      this.computeEvolutions(this.state.players[sessionId].board);
+      this.computeEvolutions(this.state.players[sessionId].board);
+    }
+
   }
 
   computeEvolutions(board) {
@@ -283,6 +384,7 @@ class GameRoom extends colyseus.Room {
           let x = this.getFirstAvailablePositionInBoard(board);
           let pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName);
           pokemonEvolved.positionX = x;
+          pokemonEvolved.positionY = 0;
           board[pokemonEvolved.id] = pokemonEvolved;
           evolve = true;
         }
@@ -314,14 +416,7 @@ class GameRoom extends colyseus.Room {
 
   getFirstAvailablePositionInBoard(board) {
     for (let i = 0; i < 9; i++) {
-      let occupation = false;
-      for (let id in board) {
-        let pokemon = board[id];
-        if (pokemon.positionX == i && pokemon.positionY == 0) {
-          occupation = true;
-        }
-      }
-      if (!occupation) {
+      if(this.isPositionEmpty(board,i,0)){
         return i;
       }
     }

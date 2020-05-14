@@ -1,0 +1,62 @@
+{
+	"textures": [
+		{
+			"image": "lock.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 59,
+				"h": 152
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "locked",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 57,
+						"h": 74
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 57,
+						"h": 74
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 57,
+						"h": 74
+					}
+				},
+				{
+					"filename": "unlocked",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 57,
+						"h": 74
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 57,
+						"h": 74
+					},
+					"frame": {
+						"x": 1,
+						"y": 77,
+						"w": 57,
+						"h": 74
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:3671405460f5b33eb0d62d3448b8480b:d3c6e0f8a32be0f94cbc60bab8078b00:527c80432462cb13787f275af7e1d7d4$"
+	}
+}

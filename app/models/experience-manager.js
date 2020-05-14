@@ -6,7 +6,7 @@ class ExperienceManager extends schema.Schema {
     super();
     this.level = 2;
     this.experience = 0;
-    this.levelExperience = EXP_TABLE[this.level];
+    this.expNeeded = EXP_TABLE[this.level];
     this.maxLevel = 9;
   }
 
@@ -15,7 +15,7 @@ class ExperienceManager extends schema.Schema {
     while (this.checkForLevelUp(expToAdd)) {
       expToAdd -= EXP_TABLE[this.level];
       this.level += 1;
-      this.levelExperience = EXP_TABLE[this.level];
+      this.expNeeded = EXP_TABLE[this.level];
     }
   }
 
@@ -33,8 +33,7 @@ class ExperienceManager extends schema.Schema {
 schema.defineTypes(ExperienceManager, {
   level: "number",
   experience: "number",
-  levelExperience: "number",
-  maxLevel: "number"
+  expNeeded: "number"
 });
 
 module.exports = ExperienceManager;

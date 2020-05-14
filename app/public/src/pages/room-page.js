@@ -15,7 +15,7 @@ class RoomPage {
       <button id="button-home">Home</button>
     </header>
     <main>
-      <p>Logged as : ${_client.auth.username}</p>
+      <p>Logged as : ${_client.auth.email}</p>
       <h3>Players in room :</h3>
       <ul id="player-list"></ul>
       <button id="start">Start Game</button>
@@ -33,6 +33,7 @@ class RoomPage {
     });
     document.getElementById("start").addEventListener("click", e => {
       _client.create("game", {/* options */ }).then(room => {
+        this.room.send("game-start", { id: room.id});
         this.room.leave();
         window.dispatchEvent(new CustomEvent("render-game", { detail: { room: room } }));
       }).catch(e => {
@@ -50,16 +51,21 @@ class RoomPage {
 
     this.room.onLeave((client, consent) => {
       if (consent) {
-        sessionStorage.setItem('PAC_Room_ID', this.room.id);
-        sessionStorage.setItem('PAC_Session_ID', this.room.sessionId);
+        //sessionStorage.setItem('PAC_Room_ID', this.room.id);
+        //sessionStorage.setItem('PAC_Session_ID', this.room.sessionId);
       }
     });
     this.room.onStateChange((state) => {
-      console.log("new room state", state);
       this.handleUserChange();
     });
-    this.room.onMessage((msg) => {
-      console.log("room message", msg);
+
+    this.room.onMessage("game-start", (message) => {
+      _client.joinById(message.id).then(room => {
+        this.room.leave();
+        window.dispatchEvent(new CustomEvent("render-game", { detail: { room: room } }));
+      }).catch(e => {
+        console.error("join error", e);
+      });
     });
   }
 

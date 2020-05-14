@@ -2,6 +2,7 @@ const colyseus = require("colyseus");
 const schema = require("@colyseus/schema");
 const social = require("@colyseus/social");
 const User = require("../models/user");
+const uniqid = require("uniqid");
 
 class PreparationState extends schema.Schema {
   constructor() {
@@ -19,6 +20,11 @@ class PreparationRoom extends colyseus.Room {
   onCreate(options) {
     this.setState(new PreparationState());
     this.maxClients = 8;
+
+    this.onMessage("game-start", (client, message) => {
+      this.broadcast("game-start", message, {except: client});
+    });
+
   }
 
   async onAuth(client, options, request) {
@@ -28,19 +34,15 @@ class PreparationRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
-    this.state.users[auth.facebookId] = new User(auth.facebookId, auth.username);
-    console.log("client joined pregame");
-    this.send(client, "Welcome !");
-  }
 
-  onMessage(client, message) {
-    console.log("message received:", message);
-    this.send(client, { text: "message ok" });
+    client.id = uniqid();
+    this.state.users[client.id] = new User(client.id, auth.email);
+    console.log("client joined room");
   }
 
   onLeave(client, consented) {
-    console.log("client leaved pregame");
-    delete this.state.users[client.auth.facebookId];
+    console.log("client leaved room");
+    delete this.state.users[new String(client.id)];
   }
 
   onDispose() {

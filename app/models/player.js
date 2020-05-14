@@ -1,43 +1,42 @@
 const schema = require("@colyseus/schema");
 const Pokemon = require("./pokemon").Pokemon;
 const ExperienceManager = require("./experience-manager");
-const LogElement = require("./log-element");
-
+const Simulation = require('../core/simulation');
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
-const ArraySchema = schema.ArraySchema;
 
 class Player extends Schema {
-  constructor(id, facebookName) {
+  constructor(id, name) {
     super();
     this.id = id;
-    this.facebookName = facebookName;
+    this.name = name;
     this.board = new MapSchema();
     this.shop = new MapSchema();
     this.experienceManager = new ExperienceManager();
-    this.money = 0;
-    this.simulationState = null;
-    this.simulationResult = new ArraySchema();
-  }
-
-  setLog(array) {
-    let self = this;
-    this.simulationResult.splice(0, this.simulationResult.length - 1);
-    array.forEach(element => {
-      self.simulationResult.push(new LogElement(element[0], element[1]));
-    });
+    this.money = 5;
+    this.life = 20;
+    this.simulation = new Simulation({},{});
+    this.shopLocked = false;
+    this.streak = 0;
+    this.interest = 0;
+    this.lastBattleResult = "No battle yet";
   }
 }
 
 schema.defineTypes(Player, {
   id: "string",
-  facebookName: "string",
+  name: "string",
   board: { map: Pokemon },
   shop: { map: Pokemon },
+  simulation : Simulation,
   experienceManager: ExperienceManager,
   level: "number",
   money: "number",
-  simulationResult: [LogElement]
+  life: "number",
+  shopLocked: "boolean",
+  streak: "number",
+  interest : "number",
+  lastBattleResult: "string"
 });
 
 module.exports = Player;
