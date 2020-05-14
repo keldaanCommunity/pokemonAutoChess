@@ -18,6 +18,7 @@ class Player extends Schema {
     this.money = 0;
     this.simulationState = null;
     this.simulationResult = new ArraySchema();
+    this.life = 100;
   }
 
   setLog(array) {
@@ -37,6 +38,7 @@ schema.defineTypes(Player, {
   experienceManager: ExperienceManager,
   level: "number",
   money: "number",
+  life: "number",
   simulationResult: [LogElement]
 });
 

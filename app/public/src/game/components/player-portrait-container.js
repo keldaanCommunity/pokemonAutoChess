@@ -17,7 +17,9 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
       }));
     });
     this.add(this.background);
+    this.add(new GameObjects.Text(scene, -30, -30, player.life, this.textStyle));
+    this.add(new GameObjects.Image(scene, 50, -15, "life"));
     this.add(new GameObjects.Text(scene, -30, 0, player.facebookName, this.textStyle));
-    this.add(new GameObjects.Text(scene, 50, -30, "Lvl " + player.experienceManager.level, this.textStyle));
+    this.add(new GameObjects.Text(scene, 120, -30, "Lvl " + player.experienceManager.level, this.textStyle));
   }
 }

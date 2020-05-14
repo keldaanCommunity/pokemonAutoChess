@@ -25,7 +25,8 @@ export default class GameScene extends Scene {
     this.load.image("money", "assets/ui/money.png");
     this.load.image("refreshButton", "assets/ui/refreshButton.png");
     this.load.image("levelUpButton", "assets/ui/levelUpButton.png");
-  }
+    this.load.image("life", "assets/ui/life.png");
+    }
 
   create() {
     this.input.dragDistanceThreshold = 1;
