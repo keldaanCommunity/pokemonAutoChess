@@ -9,16 +9,12 @@ class GameContainer {
     this.div = div;
     this.game = null;
     this.player = null;
-    this.initialState = null;
-    console.log("GameContainer", this);
+    this.initialize();
   }
 
   initialize() {
-    initializeGame();
-    initializeEvents();
-    // Start game
-    this.game.scene.stop("loginScene");
-    this.game.scene.start("gameScene");
+    this.initializeGame();
+    this.initializeEvents();
   }
 
   initializeGame() {
@@ -28,22 +24,29 @@ class GameContainer {
       width: 2000,
       height: 1000,
       pixelArt: true,
-      scene: [LoginScene, GameScene],
+      scene: [GameScene],
       scale: { mode: Phaser.Scale.FIT }
     };
     this.game = new Phaser.Game(config);
   }
 
   initializeEvents() {
+    
     // Room event listener
     window.sessionId = this.room.sessionId;
     this.room.onStateChange.once(state => {
        window.state = state;
     });
-    this.room.players.onAdd(player => this.initializePlayer(player));
+    
+    this.room.state.players.onAdd = player => this.initializePlayer(player);
     this.room.onMessage(msg => this.handleRoomMessage(msg));
     this.room.onLeave(client => this.handleRoomLeft(client));
     this.room.onError(err => console.log("room error", err));
+    this.room.state.onChange = (changes) => {
+      changes.forEach(change => {
+        this.handleRoomStateChange(change);
+      })
+    }
     // Game event listener
     window.addEventListener("shop-click", e => this.onShopClick(e));
     window.addEventListener("player-click", e => this.onPlayerClick(e));
@@ -53,17 +56,15 @@ class GameContainer {
   }
 
   initializePlayer(player) {
-    this.player = player;
-    this.game.scene.getScene("gameScene").playerContainer.updatePortraits();
-    this.player.onChange = (changes => {
-      changes.forEach(change => this.handlePlayerChange(change));
+    player.onChange = (changes => {
+      changes.forEach(change => this.handlePlayerChange(change, player));
     });
     // force "onChange" to be called immediatelly
-    this.player.triggerAll();
+    player.triggerAll();
   }
 
   handleRoomStateChange(change) {
-    if (this.initialState == null) return;
+    if (window.state == null) return;
     switch (change.field) {
       case "time":
         this.game.scene.getScene("gameScene").updateTime();
@@ -74,11 +75,11 @@ class GameContainer {
     }
   }
 
-  handlePlayerChange(change) {
-    if (this.game == null) return;
+  handlePlayerChange(change, player) {
+    if (this.game.scene.getScene("gameScene").playerContainer == null) return;
     switch (change.field) {
       case "money":
-        if (this.room.sessionId == this.player.id) {
+        if (this.room.sessionId == player.id) {
           this.game.scene.getScene("gameScene").updateMoney();
         }
         break;

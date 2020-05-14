@@ -11,7 +11,6 @@ class GamePage {
   render() {
     var content = document.createElement("div");
     content.setAttribute("id", "game");
-    content.innerHTML = `<p>Loading...</p>`;
     document.body.innerHTML = "";
     document.body.appendChild(content);
   }

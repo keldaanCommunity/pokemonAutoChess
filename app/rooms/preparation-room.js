@@ -29,7 +29,7 @@ class PreparationRoom extends colyseus.Room {
 
   onJoin(client, options, auth) {
     this.state.users[auth.facebookId] = new User(auth.facebookId, auth.username);
-    console.log("client joined pregame");
+    console.log("client joined room");
     this.send(client, "Welcome !");
   }
 
@@ -39,7 +39,7 @@ class PreparationRoom extends colyseus.Room {
   }
 
   onLeave(client, consented) {
-    console.log("client leaved pregame");
+    console.log("client leaved room");
     delete this.state.users[client.auth.facebookId];
   }
 

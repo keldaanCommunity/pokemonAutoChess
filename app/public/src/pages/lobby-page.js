@@ -37,7 +37,7 @@ class LobbyPage {
       window.dispatchEvent(new CustomEvent("render-home"));
     });
     document.getElementById("refresh").addEventListener("click", e => {
-      _client.getAvailableRooms("preGame")
+      _client.getAvailableRooms("room")
         .then(rooms => this.handleRoomListChange(rooms))
         .catch(e => console.error(e));
     });
