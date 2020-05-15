@@ -70,24 +70,11 @@ class GameRoom extends colyseus.Room {
     this.state.players[client.sessionId] = new Player(client.sessionId, auth.username);
   }
 
-  async onLeave(client, consented) {
-    // flag client as inactive for other users
-    this.state.players[client.sessionId].connected = false;
-
-    try {
-      if (consented) {
-        throw new Error("consented leave");
-      }
-      // allow disconnected client to reconnect into this room until 20 seconds
-      await this.allowReconnection(client, 20);
-      // client returned! let's re-activate it.
-      this.state.players[client.sessionId].connected = true;
-    }
-    catch (e) {
-      // 20 seconds expired. let's remove the client.
-      this.state.shop.detachShop(this.state.players[client.sessionId]);
-      delete this.state.players[client.sessionId];
-    }
+  onLeave(client, consented) {
+    console.log('client ' + client.sessionId + 'left');
+    
+    this.state.shop.detachShop(this.state.players[client.sessionId]);
+    delete this.state.players[client.sessionId];
   }
 
   // Cleanup callback, called after there are no more clients in the room. (see `autoDispose`)
@@ -108,7 +95,18 @@ class GameRoom extends colyseus.Room {
       this.initializeFightingPhase();
     }
     else if (this.state.phase == STATE.FIGHT) {
+      this.computeLife();
+      this.checkDeath();
       this.initializePickingPhase();
+    }
+  }
+
+  computeLife(){
+    for (let id in this.state.players) {
+      let player = this.state.players[id];
+      if (player.simulationState != null && player.simulationState.status == 2) {
+        player.life = Math.max(0, player.life - 4);
+      }
     }
   }
 
@@ -117,6 +115,26 @@ class GameRoom extends colyseus.Room {
       let player = this.state.players[id];
       player.money += Math.min(Math.floor(player.money / 10), 5);
       player.money += 5;
+    }
+  }
+
+  checkDeath(){
+    for (let id in this.state.players) {
+      let player = this.state.players[id];
+        if(player.life <= 0){
+          this.kickPlayer(player.id);
+        }
+    }
+  }
+
+  kickPlayer(sessionId){
+    console.log(sessionId);
+    for (let i = 0; i < this.clients.length; i++) {
+      console.log(this.clients[i].sessionId);
+      if(this.clients[i].sessionId == sessionId){
+        console.log("kick-out");
+        this.clients[i].send("kick-out");
+      }
     }
   }
 
@@ -138,7 +156,7 @@ class GameRoom extends colyseus.Room {
     this.state.time = 5000;
     for (let id in this.state.players) {
       let player = this.state.players[id];
-      let opponentId = this.getRandomOpponent();
+      let opponentId = this.getRandomOpponent(id);
       if (opponentId == "") {
         // no opponent fight ?
       }
@@ -169,10 +187,12 @@ class GameRoom extends colyseus.Room {
     }
   }
 
-  getRandomOpponent() {
+  getRandomOpponent(playerId) {
     let playersId = [];
     for (let id in this.state.players) {
-      playersId.push(id);
+      if(id != playerId){
+        playersId.push(id);
+      }
     }
     if (playersId.length > 0) {
       return this.state.players[playersId[Math.round(Math.random() * (playersId.length - 1))]].id;

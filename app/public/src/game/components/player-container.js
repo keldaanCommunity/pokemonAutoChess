@@ -8,17 +8,19 @@ export default class PlayerContainer extends GameObjects.Container {
     scene.add.existing(this);
   }
 
-  buildPlayerPortraits() {
+  buildPlayerPortraits(removedId) {
     let i = 0;
     for (let id in window.state.players) {
-      this.add(new PlayerPortraitContainer(this.scene, 0, 100 * i, window.state.players[id]));
-      i += 1;
+      if(id != removedId){
+        this.add(new PlayerPortraitContainer(this.scene, 0, 100 * i, window.state.players[id]));
+        i += 1;
+      }
     }
   }
 
-  updatePortraits() {
+  updatePortraits(removedId) {
     this.removeAll();
-    this.buildPlayerPortraits();
+    this.buildPlayerPortraits(removedId);
   }
 
 }

@@ -18,7 +18,7 @@ class Player extends Schema {
     this.money = 0;
     this.simulationState = null;
     this.simulationResult = new ArraySchema();
-    this.life = 100;
+    this.life = 10;
   }
 
   setLog(array) {

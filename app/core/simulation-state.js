@@ -6,6 +6,9 @@ class SimulationState extends schema.Schema {
   constructor(pokemons) {
     super();
     this.simulation = new Simulation();
+    this.status = 0;
+    let self = this;
+    // 0:running 1:A won 2:B won 3:draw
 
     this.simulation.setInitializer(function (ctx) {
       let grid = new Grid(9, 6);
@@ -29,8 +32,18 @@ class SimulationState extends schema.Schema {
           if (simulation.state.pokemons[i].group == 1) emptyTeamB = false;
         }
       }
-      if (emptyTeamA || emptyTeamB) return true;
-      if (simulation.ctx.time > 10000) return true;
+      if (emptyTeamA){
+        self.status = 2;
+        return true;
+      }     
+      else if(emptyTeamB){
+        self.status = 1;
+        return true;
+      }
+      else if(simulation.ctx.time > 10000){
+        self.status = 3;
+        return true;
+      }
       return false;
     });
 

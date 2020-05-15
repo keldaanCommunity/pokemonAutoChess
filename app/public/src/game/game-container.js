@@ -39,7 +39,9 @@ class GameContainer {
     });
     
     this.room.state.players.onAdd = player => this.initializePlayer(player);
-    this.room.onMessage("DragDropFailed",(client, message) => this.handleDragDropFailed());
+    this.room.state.players.onRemove = (player, key) => this.onPlayerRemove(player, key);
+    this.room.onMessage("DragDropFailed",(message) => this.handleDragDropFailed());
+    this.room.onMessage("kick-out",(message) => this.handleKickOut());
     this.room.onLeave(client => this.handleRoomLeft(client));
     this.room.onError(err => console.log("room error", err));
     this.room.state.onChange = (changes) => {
@@ -62,6 +64,7 @@ class GameContainer {
     player.onChange = (changes => {
       changes.forEach(change => this.handlePlayerChange(change, player));
     });
+    
     // force "onChange" to be called immediatelly
     player.triggerAll();
   }
@@ -110,10 +113,22 @@ class GameContainer {
     this.game.scene.getScene("gameScene").boardManager.update();
   }
 
+  handleKickOut(){
+    console.log('kicked out');
+    
+    _client.joinOrCreate("lobby", {}).then(room => {
+      this.room.leave();
+      console.log("joined room:", room);
+      window.dispatchEvent(new CustomEvent("render-lobby", { detail: { room: room } }));
+    }).catch(e => {
+      console.error("join error", e);
+    });
+  }
+
   handleRoomLeft(client) {
-    sessionStorage.setItem("PAC_Room_ID", room.id);
-    sessionStorage.setItem("PAC_Session_ID", room.sessionId);
-    console.log(client.id, "left", room.name);
+    //sessionStorage.setItem("PAC_Room_ID", room.id);
+    //sessionStorage.setItem("PAC_Session_ID", room.sessionId);
+    console.log(client.id, "left");
   }
 
   onPlayerClick(event) {
@@ -138,6 +153,11 @@ class GameContainer {
 
   onDragDrop(event) {
     this.room.send("dragDrop", {"detail": event.detail });
+  }
+
+  onPlayerRemove(player, key){
+    console.log(player, "has been removed at", key);
+    this.game.scene.getScene("gameScene").playerContainer.updatePortraits(key);
   }
 }
 
