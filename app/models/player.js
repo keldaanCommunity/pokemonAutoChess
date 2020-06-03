@@ -4,7 +4,6 @@ const ExperienceManager = require("./experience-manager");
 
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
-const ArraySchema = schema.ArraySchema;
 
 class Player extends Schema {
   constructor(id, facebookName) {
