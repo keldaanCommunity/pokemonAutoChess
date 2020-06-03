@@ -100,9 +100,6 @@ class GameContainer {
       case "experienceManager":
         this.game.scene.getScene("gameScene").playerContainer.updatePortraits();
         break;
-      case "simulationResult":
-        console.log(player.simulationResult);
-        break;
       case "life":
         this.game.scene.getScene("gameScene").playerContainer.updatePortraits();
         break;

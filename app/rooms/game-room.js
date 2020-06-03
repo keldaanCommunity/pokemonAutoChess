@@ -1,13 +1,11 @@
 const colyseus = require("colyseus");
 const schema = require("@colyseus/schema");
 const social = require("@colyseus/social");
-const superagent = require("superagent");
 const Player = require("../models/player");
 const Shop = require("../models/shop");
 const Pokemon = require("../models/pokemon");
 const PokemonFactory = require("../models/pokemon-factory");
 const STATE = require("../models/enum").STATE;
-const SimulationState = require("../core/simulation-state");
 
 class GameState extends schema.Schema {
   constructor() {
@@ -104,9 +102,7 @@ class GameRoom extends colyseus.Room {
   computeLife(){
     for (let id in this.state.players) {
       let player = this.state.players[id];
-      if (player.simulationState != null && player.simulationState.status == 2) {
-        player.life = Math.max(0, player.life - 4);
-      }
+      //TODO compute lifes after rounds
     }
   }
 
@@ -157,33 +153,7 @@ class GameRoom extends colyseus.Room {
     for (let id in this.state.players) {
       let player = this.state.players[id];
       let opponentId = this.getRandomOpponent(id);
-      if (opponentId == "") {
-        // no opponent fight ?
-      }
-      else {
-        let pokemons = [];
-        for (let id in player.board) {
-          let pokemon = player.board[id];
-          if (pokemon.positionY != 0) {
-            let simulationPokemon = PokemonFactory.createPokemonFromName(pokemon.name);
-            simulationPokemon.setPosition(pokemon.positionX, pokemon.positionY - 1);
-            simulationPokemon.group = 0;
-            pokemons.push(simulationPokemon);
-          }
-        }
-        for (let id in this.state.players[opponentId].board) {
-          let pokemon = this.state.players[opponentId].board[id];
-          if (pokemon.positionY != 0) {
-            let simulationPokemon = PokemonFactory.createPokemonFromName(pokemon.name);
-            simulationPokemon.setPosition(pokemon.positionX, 7 - pokemon.positionY);
-            simulationPokemon.group = 1;
-            pokemons.push(simulationPokemon);
-          }
-        }
-        player.simulationState = new SimulationState(pokemons);
-        player.simulationState.simulation.run();
-        player.setLog(player.simulationState.simulation.state.log);
-      }
+      // TODO pair opponents
     }
   }
 
