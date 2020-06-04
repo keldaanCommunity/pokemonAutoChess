@@ -67,6 +67,7 @@ class GameRoom extends colyseus.Room {
   onJoin(client, options, auth) {
     console.log("client joined game");
     this.state.players[client.sessionId] = new Player(client.sessionId, auth.username);
+    this.state.shop.assignShop(this.state.players[client.sessionId]);
   }
 
   onLeave(client, consented) {
@@ -195,24 +196,27 @@ class GameRoom extends colyseus.Room {
 
   onDragDrop(client, detail) {
     let success = false;
-    if (client.sessionId in this.state.players) {
-      if (detail.pokemonId in this.state.players[client.sessionId].board) {
-        let pokemon = this.state.players[client.sessionId].board[detail.pokemonId];
-        let x = parseInt(detail.x);
-        let y = parseInt(detail.y);
-        if (this.getTeamSize(client.sessionId) < this.state.players[client.sessionId].experienceManager.level || pokemon.positionY != 0) {
-
-          if (!this.isPositionEmpty(this.state.players[client.sessionId].board, x, y)) {
-            let pokemonToSwap = this.getPokemonByPosition(this.state.players[client.sessionId].board, x, y);
-            pokemonToSwap.positionX = pokemon.positionX;
-            pokemonToSwap.positionY = pokemon.positionY;
+    if(this.state.phase == STATE.PICK){
+      if (client.sessionId in this.state.players) {
+        if (detail.pokemonId in this.state.players[client.sessionId].board) {
+          let pokemon = this.state.players[client.sessionId].board[detail.pokemonId];
+          let x = parseInt(detail.x);
+          let y = parseInt(detail.y);
+          if (this.getTeamSize(client.sessionId) < this.state.players[client.sessionId].experienceManager.level || pokemon.positionY != 0) {
+  
+            if (!this.isPositionEmpty(this.state.players[client.sessionId].board, x, y)) {
+              let pokemonToSwap = this.getPokemonByPosition(this.state.players[client.sessionId].board, x, y);
+              pokemonToSwap.positionX = pokemon.positionX;
+              pokemonToSwap.positionY = pokemon.positionY;
+            }
+            pokemon.positionX = x;
+            pokemon.positionY = y;
+            success = true;
           }
-          pokemon.positionX = x;
-          pokemon.positionY = y;
-          success = true;
         }
       }
     }
+
     if (!success) {
       client.send("DragDropFailed", {});
     }
@@ -229,6 +233,7 @@ class GameRoom extends colyseus.Room {
   }
 
   onShop(sessionId, pokemonId) {
+    console.log('onshop');
     if (sessionId in this.state.players) {
       if (pokemonId in this.state.players[sessionId].shop) {
         if (this.state.players[sessionId].money >= this.state.players[sessionId].shop[pokemonId].cost) {
