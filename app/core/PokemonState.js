@@ -1,16 +1,19 @@
 class PokemonState
 {
-    constructor() {
-    }
+    constructor() {}
 
     handleDamage(pokemon, damage){
         pokemon.life -= damage;
         if(pokemon.life < 0){
-            delete pokemon;
+            pokemon = null;
         }
     }
 
-    update(pokemon){
+    update(pokemon){}
 
-    }
+    onEnter(pokemon){}
+
+    onExit(pokemon){}
 };
+
+module.exports = PokemonState;

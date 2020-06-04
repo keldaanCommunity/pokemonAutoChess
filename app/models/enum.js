@@ -51,4 +51,9 @@ const STATE = Object.freeze({
   PICK: "PICK"
 });
 
-module.exports = { TYPE, RARITY, COST, EXP_TABLE, STATE };
+const STATE_TYPE = Object.freeze({
+  MOVING: "MOVING",
+  ATTACKING: "ATTACKING"
+});
+
+module.exports = { TYPE, RARITY, COST, EXP_TABLE, STATE, STATE_TYPE };

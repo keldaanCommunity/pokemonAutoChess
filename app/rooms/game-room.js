@@ -6,6 +6,7 @@ const Shop = require("../models/shop");
 const Pokemon = require("../models/pokemon");
 const PokemonFactory = require("../models/pokemon-factory");
 const STATE = require("../models/enum").STATE;
+const Simulation = require('../core/Simulation');
 
 class GameState extends schema.Schema {
   constructor() {
@@ -86,6 +87,11 @@ class GameRoom extends colyseus.Room {
       this.switchPhase();
       this.computeIncome();
     }
+    if(this.state.phase == STATE.FIGHT){
+      for (let id in this.players){
+        this.players[id].simulation.update();
+      }
+    }
   }
 
   switchPhase() {
@@ -128,7 +134,6 @@ class GameRoom extends colyseus.Room {
     for (let i = 0; i < this.clients.length; i++) {
       console.log(this.clients[i].sessionId);
       if(this.clients[i].sessionId == sessionId){
-        console.log("kick-out");
         this.clients[i].send("kick-out");
       }
     }
@@ -139,10 +144,8 @@ class GameRoom extends colyseus.Room {
     this.state.time = 5000;
     for (let id in this.state.players) {
       let player = this.state.players[id];
+      delete player.simulation;
       this.state.shop.detachShop(player);
-    }
-    for (let id in this.state.players) {
-      let player = this.state.players[id];
       this.state.shop.assignShop(player);
     }
   }
@@ -153,16 +156,15 @@ class GameRoom extends colyseus.Room {
     for (let id in this.state.players) {
       let player = this.state.players[id];
       let opponentId = this.getRandomOpponent(id);
-      // TODO pair opponents
+      this.state.simulation = new Simulation(player.board, this.state.players[opponentId].board);
     }
   }
 
   getRandomOpponent(playerId) {
     let playersId = [];
     for (let id in this.state.players) {
-      if(id != playerId){
-        playersId.push(id);
-      }
+      //if(id != playerId){}
+      playersId.push(id);
     }
     if (playersId.length > 0) {
       return this.state.players[playersId[Math.round(Math.random() * (playersId.length - 1))]].id;

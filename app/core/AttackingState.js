@@ -1,3 +1,5 @@
+const STATE_TYPE = require('../models/enum').STATE_TYPE;
+
 class AttackingState extends PokemonState
 {
     constructor() {
@@ -10,6 +12,15 @@ class AttackingState extends PokemonState
 
     update(pokemon){
         super.update(pokemon);
+    }
+
+    onEnter(pokemon){
+        super.onEnter(pokemon);
+        pokemon.action = STATE_TYPE.ATTACKING;
+    }
+
+    onExit(pokemon){
+        super.onExit(pokemon);
     }
 }
 
