@@ -145,7 +145,7 @@ class GameRoom extends colyseus.Room {
     this.state.time = 5000;
     for (let id in this.state.players) {
       let player = this.state.players[id];
-      delete player.simulation;
+      player.simulation.stop();
       this.state.shop.detachShop(player);
       this.state.shop.assignShop(player);
     }
@@ -157,7 +157,7 @@ class GameRoom extends colyseus.Room {
     for (let id in this.state.players) {
       let player = this.state.players[id];
       let opponentId = this.getRandomOpponent(id);
-      this.state.simulation = new Simulation(player.board, this.state.players[opponentId].board);
+      player.simulation = new Simulation(player.board, this.state.players[opponentId].board);
     }
   }
 

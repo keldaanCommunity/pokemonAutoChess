@@ -64,8 +64,28 @@ class GameContainer {
     player.onChange = (changes => {
       changes.forEach(change => this.handlePlayerChange(change, player));
     });
-    
-    // force "onChange" to be called immediatelly
+    player.simulation.blueTeam.onAdd = (pokemon, key) =>{
+      console.log(pokemon, "has been added at", key);
+      this.handlePokemonAdd(pokemon);
+      pokemon.onChange = function(changes) {
+        changes.forEach(change => {this.handlePokemonChange(change, pokemon)});
+      };
+    };
+    player.simulation.redTeam.onAdd = (pokemon, key) =>{
+      console.log(pokemon, "has been added at", key);
+      this.handlePokemonAdd(pokemon);
+      pokemon.onChange = function(changes) {
+        changes.forEach(change => {this.handlePokemonChange(change, pokemon)});
+      };
+    };
+    player.simulation.blueTeam.onRemove = (pokemon, key) => {
+      console.log(pokemon, "has been removed at", key);
+      this.handlePokemonRemove(pokemon);
+    };
+    player.simulation.redTeam.onRemove = (pokemon, key) => {
+      console.log(pokemon, "has been removed at", key);
+      this.handlePokemonRemove(pokemon);
+    };
     player.triggerAll();
   }
 
@@ -81,6 +101,18 @@ class GameContainer {
       default:
         break;
     }
+  }
+
+  handlePokemonAdd(pokemon){
+
+  }
+
+  handlePokemonRemove(pokemon){
+
+  }
+
+  handlePokemonChange(change, pokemon){
+
   }
 
   handlePlayerChange(change, player) {

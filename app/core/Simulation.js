@@ -13,13 +13,13 @@ class Simulation extends Schema{
         this.blueTeam = new MapSchema();
         for (let id in blueTeam) {
             let pokemon = blueTeam[id];
-            let pokemonEntity = new PokemonEntity(pokemon.name, pokemon.type, pokemon.x, pokemon.y);
+            let pokemonEntity = new PokemonEntity(pokemon.name, pokemon.type, pokemon.positionX, pokemon.positionY);
             this.blueTeam[pokemonEntity.id] = pokemonEntity;
             this.grid.setValue(pokemonEntity.x, pokemonEntity.y, pokemonEntity);
         }
         for (let id in redTeam) {
             let pokemon = redTeam[id];
-            let pokemonEntity = new PokemonEntity(pokemon.name, pokemon.type, pokemon.x, 2 - pokemon.y);
+            let pokemonEntity = new PokemonEntity(pokemon.name, pokemon.type, pokemon.positionX, 2 - pokemon.positionY);
             this.redTeam[pokemonEntity.id] = pokemonEntity;
             this.grid.setValue(pokemonEntity.x, pokemonEntity.y, pokemonEntity);
         }
@@ -31,6 +31,15 @@ class Simulation extends Schema{
         }
         for (let id in this.redTeam) {
             this.redTeam[id].update();
+        }
+    }
+
+    stop(){
+        for (let id in this.blueTeam) {
+            delete this.blueTeam[id];
+        }
+        for (let id in this.redTeam) {
+            delete this.redTeam[id];
         }
     }
 }
