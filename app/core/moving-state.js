@@ -1,26 +1,25 @@
 const STATE_TYPE = require('../models/enum').STATE_TYPE;
-const PokemonState = require('./PokemonState');
+const PokemonState = require('./pokemon-state');
 
-class MovingState extends PokemonState
-{
+class MovingState extends PokemonState {
     constructor() {
         super();
     }
 
-    handleDamage(pokemon, damage){
+    handleDamage(pokemon, damage) {
         super.handleDamage(pokemon, damage);
     }
 
-    update(pokemon){
+    update(pokemon) {
         super.update(pokemon);
     }
 
-    onEnter(pokemon){
+    onEnter(pokemon) {
         super.onEnter(pokemon);
         pokemon.action = STATE_TYPE.MOVING;
     }
 
-    onExit(pokemon){
+    onExit(pokemon) {
         super.onExit(pokemon);
     }
 }

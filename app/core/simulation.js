@@ -1,31 +1,31 @@
-const Grid = require('./grid');
+const Board = require('./board');
 const schema = require("@colyseus/schema");
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
-const PokemonEntity =require('./PokemonEntity');
+const PokemonEntity = require('./pokemon-entity');
 
-class Simulation extends Schema{
+class Simulation extends Schema {
     
-    constructor(blueTeam, redTeam){
+    constructor(blueTeam, redTeam) {
         super();
-        this.grid = new Grid(9,3);
+        this.board = new Board(9,3);
         this.redTeam = new MapSchema();
         this.blueTeam = new MapSchema();
         for (let id in blueTeam) {
             let pokemon = blueTeam[id];
             let pokemonEntity = new PokemonEntity(pokemon.name, pokemon.type, pokemon.positionX, pokemon.positionY);
             this.blueTeam[pokemonEntity.id] = pokemonEntity;
-            this.grid.setValue(pokemonEntity.x, pokemonEntity.y, pokemonEntity);
+            this.board.setValue(pokemonEntity.x, pokemonEntity.y, pokemonEntity);
         }
         for (let id in redTeam) {
             let pokemon = redTeam[id];
             let pokemonEntity = new PokemonEntity(pokemon.name, pokemon.type, pokemon.positionX, 2 - pokemon.positionY);
             this.redTeam[pokemonEntity.id] = pokemonEntity;
-            this.grid.setValue(pokemonEntity.x, pokemonEntity.y, pokemonEntity);
+            this.board.setValue(pokemonEntity.x, pokemonEntity.y, pokemonEntity);
         }
     }
 
-    update(){
+    update() {
         for (let id in this.blueTeam) {
             this.blueTeam[id].update();
         }
@@ -34,7 +34,7 @@ class Simulation extends Schema{
         }
     }
 
-    stop(){
+    stop() {
         for (let id in this.blueTeam) {
             delete this.blueTeam[id];
         }
@@ -47,6 +47,6 @@ class Simulation extends Schema{
 schema.defineTypes(Simulation, {
     blueTeam: { map: PokemonEntity },
     redTeam: { map: PokemonEntity }
-  });
+});
 
 module.exports = Simulation;

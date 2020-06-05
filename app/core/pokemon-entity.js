@@ -1,13 +1,11 @@
 const schema = require("@colyseus/schema");
 const Schema = schema.Schema;
 const STATE_TYPE = require('../models/enum').STATE_TYPE;
-const Simulation = require('./Simulation');
-const MovingState = require('./MovingState');
+const MovingState = require('./moving-state');
 const uniqid = require("uniqid");
 
-class PokemonEntity extends Schema{
-
-    constructor(name, type, x, y){
+class PokemonEntity extends Schema {
+    constructor(name, type, x, y) {
         super();
         this.id = uniqid();
         this.x = x;
@@ -18,21 +16,21 @@ class PokemonEntity extends Schema{
         this.action = STATE_TYPE.MOVING;
     }
 
-    update(){
+    update() {
         this.state.update(this);
     }
 
-    handleDamage(damage){
+    handleDamage(damage) {
         this.state.handleDamage(this, damage);
     }
     
-    changeState(state){
+    changeState(state) {
         this.state.onExit(this);
         this.state = state;
         this.state.onEnter(this);
     }
-    
 }
+
 schema.defineTypes(PokemonEntity, {
     x: "number",
     y: "number",
