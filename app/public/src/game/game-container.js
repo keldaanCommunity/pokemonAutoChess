@@ -65,26 +65,22 @@ class GameContainer {
       changes.forEach(change => this.handlePlayerChange(change, player));
     });
     player.simulation.blueTeam.onAdd = (pokemon, key) =>{
-      console.log(pokemon, "has been added at", key);
-      this.handlePokemonAdd(pokemon);
+      this.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = function(changes) {
-        changes.forEach(change => {this.handlePokemonChange(change, pokemon)});
+        changes.forEach(change => {this.handlePokemonChange(player.id, change, pokemon)});
       };
     };
     player.simulation.redTeam.onAdd = (pokemon, key) =>{
-      console.log(pokemon, "has been added at", key);
-      this.handlePokemonAdd(pokemon);
+      this.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = function(changes) {
-        changes.forEach(change => {this.handlePokemonChange(change, pokemon)});
+        changes.forEach(change => {this.handlePokemonChange(player.id, change, pokemon)});
       };
     };
     player.simulation.blueTeam.onRemove = (pokemon, key) => {
-      console.log(pokemon, "has been removed at", key);
-      this.handlePokemonRemove(pokemon);
+      this.handlePokemonRemove(player.id, pokemon);
     };
     player.simulation.redTeam.onRemove = (pokemon, key) => {
-      console.log(pokemon, "has been removed at", key);
-      this.handlePokemonRemove(pokemon);
+      this.handlePokemonRemove(player.id, pokemon);
     };
     player.triggerAll();
   }
@@ -103,16 +99,16 @@ class GameContainer {
     }
   }
 
-  handlePokemonAdd(pokemon){
-
+  handlePokemonAdd(playerId, pokemon){
+    this.game.scene.getScene("gameScene").battleManager.addPokemon(playerId, pokemon);
   }
 
-  handlePokemonRemove(pokemon){
-
+  handlePokemonRemove(playerId, pokemon){
+    this.game.scene.getScene("gameScene").battleManager.addPokemon(playerId, pokemon);
   }
 
-  handlePokemonChange(change, pokemon){
-
+  handlePokemonChange(playerId, change, pokemon){
+    this.game.scene.getSScene("gameScene").battleManager.changePokemon(playerId, change, pokemon);
   }
 
   handlePlayerChange(change, player) {

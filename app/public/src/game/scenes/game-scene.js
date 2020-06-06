@@ -4,6 +4,7 @@ import ShopContainer from "../components/shop-container";
 import PlayerContainer from "../components/player-container";
 import BoardContainer from "../components/board-manager";
 import BoardManager from "../components/board-manager";
+import BattleManager from "../components/battle-manager";
 import RefreshButton from "../components/refresh-button";
 import LevelUpButton from "../components/levelup-button";
 
@@ -37,6 +38,7 @@ export default class GameScene extends Scene {
     this.refreshButton = new RefreshButton(this, 120, 900);
     this.levelUpButton = new LevelUpButton(this, 120, 970);
     this.board = this.add.group();
+    this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);
     [1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(num => {
       window.animationManager.createAnimations(num);
@@ -45,6 +47,7 @@ export default class GameScene extends Scene {
     this.playerContainer = new PlayerContainer(this, 1750, 100);
     this.boardContainer = new BoardContainer(this, 275, 775);
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
+    this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
     this.textStyle = {
       fontSize: "30px",
       fontFamily: "Verdana",
@@ -66,7 +69,6 @@ export default class GameScene extends Scene {
     this.boardManager.update();
     window.initialized = true;
   }
-
 
   update() {
   }

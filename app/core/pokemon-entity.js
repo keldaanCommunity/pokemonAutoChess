@@ -5,12 +5,12 @@ const MovingState = require('./moving-state');
 const uniqid = require("uniqid");
 
 class PokemonEntity extends Schema {
-    constructor(name, type, x, y) {
+    constructor(index, type, positionX, positionY) {
         super();
         this.id = uniqid();
-        this.x = x;
-        this.y = y;
-        this.name = name;
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.index = index;
         this.type = type;
         this.state = new MovingState();
         this.action = STATE_TYPE.MOVING;
@@ -32,10 +32,10 @@ class PokemonEntity extends Schema {
 }
 
 schema.defineTypes(PokemonEntity, {
-    x: "number",
-    y: "number",
+    positionX: "number",
+    positionY: "number",
     action: "string",
-    name: "string",
+    index: "number",
     type: "string"
 });
   

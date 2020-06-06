@@ -84,6 +84,7 @@ export default class AnimationManager {
   }
 
   getSpriteKey(entity) {
+    
     let orientationTable = {
       "down": 0,
       "downleft": 1,
