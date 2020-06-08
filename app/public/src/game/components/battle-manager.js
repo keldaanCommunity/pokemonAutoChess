@@ -31,6 +31,23 @@ export default class BattleManager {
     }
   }
 
+  changePokemon(playerId, change, pokemon){
+    if(this.player.id == playerId){
+      this.group.getChildren().forEach(pkm => {
+        if (pkm.id == pokemon.id) {
+          switch(change.field){
+            case "positionX":
+              pkm.setX(pokemon.positionX * 100 +330);
+              break;
+            case "positionY":
+              pkm.setY(710 - 80 * pokemon.positionY);
+              break;
+          }
+        }
+      })
+    }
+  }
+
   setPlayer(player) {
     if (player.id != this.player.id) {
       this.player = player;
