@@ -1,6 +1,3 @@
-
-// import { Game, CANVAS, Scale } from "phaser";
-import LoginScene from "./scenes/login-scene";
 import GameScene from "./scenes/game-scene";
 
 class GameContainer {
@@ -104,7 +101,7 @@ class GameContainer {
   }
 
   handlePokemonRemove(playerId, pokemon){
-    this.game.scene.getScene("gameScene").battleManager.addPokemon(playerId, pokemon);
+    this.game.scene.getScene("gameScene").battleManager.removePokemon(playerId, pokemon);
   }
 
   handlePokemonChange(playerId, change, pokemon){

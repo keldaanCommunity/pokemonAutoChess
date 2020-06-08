@@ -55,15 +55,12 @@ class LobbyPage {
       }
     });
     this.room.onStateChange((state) => {
-      console.log("new room state", state);
       this.handleUserChange();
     });
   }
 
   createRoom() {
     _client.create("room", {/* options */ }).then(room => {
-      console.log("create room:", room);
-      this.room.leave();
       window.dispatchEvent(new CustomEvent("render-room", { detail: { room: room } }));
     }).catch(e => {
       console.error("join error", e);
@@ -74,7 +71,6 @@ class LobbyPage {
   joinRoomById(id) {
     if (id === "") return;
     _client.joinById(id).then(room => {
-      console.log("join room:", room);
       this.room.leave();
       window.dispatchEvent(new CustomEvent("render-room", { detail: { room: room } }));
     }).catch(e => {

@@ -83,12 +83,17 @@ export default class GameScene extends Scene {
     });
   }
 
-
   updateTime() {
     this.timeText.setText(window.state.time);
   }
 
   updatePhase() {
+    if(window.state.phase == "FIGHT"){
+      this.boardManager.clearBoard();
+    }
+    else{
+      this.boardManager.buildPokemons();
+    }
     this.phaseText.setText(window.state.phase);
   }
 

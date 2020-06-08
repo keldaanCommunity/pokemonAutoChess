@@ -7,35 +7,27 @@ export default class BattleManager {
     this.player = player;
   }
 
-  addPokemon(pokemon) {
-    let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 + 330, 790 - 80 * pokemon.positionY, pokemon);
-    pokemonUI.setScale(3, 3);
-    this.scene.add.existing(pokemonUI);
-    window.animationManager.displayEntity(pokemonUI);
-    this.group.add(pokemonUI);
+  addPokemon(playerId, pokemon) {
+    if(this.player.id == playerId){
+      let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 + 330, 710 - 80 * pokemon.positionY, pokemon);
+      pokemonUI.setScale(3, 3);
+      this.scene.add.existing(pokemonUI);
+      window.animationManager.displayEntity(pokemonUI);
+      this.group.add(pokemonUI);
+    }
   }
 
   clear() {
     this.group.clear(false, true);
   }
 
-  removePokemon(id) {
-    this.group.getChildren().forEach(pokemon => {
-      if (pokemon.id == id) {
-        pokemon.destroy();
-      }
-    });
-  }
-
-  buildPokemons() {
-    for (let id in this.player.simulation.blueTeam) {
-        let pokemon = this.player.simulation.blueTeam[id];
-        
-        this.addPokemon(pokemon);
-    }
-    for (let id in this.player.simulation.redTeam) {
-        let pokemon = this.player.simulation.redTeam[id];
-        this.addPokemon(pokemon);
+  removePokemon(playerId, pokemon) {
+    if(this.player.id == playerId){
+      this.group.getChildren().forEach(pkm => {
+        if (pkm.id == pokemon.id) {
+          pkm.destroy();
+        }
+      });
     }
   }
 

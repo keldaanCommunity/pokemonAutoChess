@@ -73,17 +73,17 @@ class LoginPage {
   }
 
   testFBLoginStatus() {
-    console.log("fetching login status...");
+    //console.log("fetching login status...");
     FB.getLoginStatus(login => {
-      console.log("login:", login);
+      //console.log("login:", login);
       var button = document.getElementById("button-fb");
       if (login.status == "connected") {
-        console.log("already connected");
+        //console.log("already connected");
         button.textContent = "Continue with Facebook";
         button.addEventListener("click", e => this.authenticateWithFB(login.authResponse.accessToken));
       }
       else {
-        console.log("need login");
+        //console.log("need login");
         button.textContent = "Login with Facebook";
         button.addEventListener("click", e => this.tryFBLogin());
       }
@@ -91,15 +91,15 @@ class LoginPage {
   }
 
   tryFBLogin() {
-    console.log("starting login...");
+    //console.log("starting login...");
     FB.login(login => {
-      console.log("login:", login);
+      //console.log("login:", login);
       if (login.status == "connected") {
-        console.log("login successful");
+        //console.log("login successful");
         this.authenticateWithFB(login.authResponse.accessToken);
       }
       else {
-        console.log("login failed");
+        //console.log("login failed");
       }
     }, {
       scope: "public_profile,email"
@@ -109,37 +109,37 @@ class LoginPage {
   authenticateWithFB(accessToken) {
     _client.auth.login({ accessToken: accessToken })
       .then(result => {
-        console.log("result", result);
+        //console.log("result", result);
         this.joinLobbyRoom();
       }, error => {
-        console.log("errror", error);
+        //console.log("errror", error);
       });
   }
 
   authenticateWithEmail(email, password) {
     client.auth.login({ email: email, password: password })
       .then(result => {
-        console.log("result", result);
+        //console.log("result", result);
         this.joinLobbyRoom();
       }, error => {
-        console.log("errror", error);
+        //console.log("errror", error);
       });
   }
 
   joinLobbyRoom() {
-    console.log("trying to join lobby");
+    //console.log("trying to join lobby");
     _client.joinOrCreate("lobby", {}).then(room => {
-      console.log("joined room:", room);
+      //console.log("joined room:", room);
       window.dispatchEvent(new CustomEvent("render-lobby", { detail: { room: room } }));
     }).catch(e => {
-      console.error("join error", e);
+      //console.error("join error", e);
     });
   }
 
   // getFBUserInfo(authInfo) {
-  //   console.log("fetching information...");
+  //   //console.log("fetching information...");
   //   FB.api("/me", info => {
-  //     console.log("info:", info);
+  //     //console.log("info:", info);
   //     this.joinLobbyWithFB(authInfo.accessToken., info.name);
   //   });
   // }
@@ -151,11 +151,11 @@ class LoginPage {
 // if (lastRoomId && lastSessionId) {
 //   client.reconnect(lastRoomId, lastSessionId)
 //     .then(room => {
-//       console.log("Previous game found, reconnect ?");
-//       console.log(room);
+//       //console.log("Previous game found, reconnect ?");
+//       //console.log(room);
 //     })
 //     .catch(e => {
-//       console.log("Reconnection error", e);
+//       //console.log("Reconnection error", e);
 //       sessionStorage.removeItem("PAC_Room_ID");
 //       sessionStorage.removeItem("PAC_Session_ID");
 //       login();

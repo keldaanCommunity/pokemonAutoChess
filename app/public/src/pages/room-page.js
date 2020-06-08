@@ -56,7 +56,6 @@ class RoomPage {
       }
     });
     this.room.onStateChange((state) => {
-      console.log("new room state", state);
       this.handleUserChange();
     });
 
