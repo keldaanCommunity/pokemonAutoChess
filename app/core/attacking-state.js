@@ -9,8 +9,8 @@ class AttackingState extends PokemonState {
         super.handleDamage(pokemon, damage);
     }
 
-    update(pokemon) {
-        super.update(pokemon);
+    update(pokemon, dt, board) {
+        super.update(pokemon, dt, board);
     }
 
     onEnter(pokemon) {

@@ -32,16 +32,14 @@ export default class BattleManager {
   }
 
   changePokemon(playerId, change, pokemon){
+    
     if(this.player.id == playerId){
       this.group.getChildren().forEach(pkm => {
         if (pkm.id == pokemon.id) {
-          switch(change.field){
-            case "positionX":
-              pkm.setX(pokemon.positionX * 100 +330);
-              break;
-            case "positionY":
-              pkm.setY(710 - 80 * pokemon.positionY);
-              break;
+          if(change.field =="positionX" || change.field == "positionY"){
+            console.log(pokemon.positionX, pokemon.positionY);
+            
+            pkm.moveManager.moveTo(pokemon.positionX * 100 +330, 710 - 80 * pokemon.positionY);
           }
         }
       })

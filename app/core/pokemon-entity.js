@@ -16,8 +16,8 @@ class PokemonEntity extends Schema {
         this.action = STATE_TYPE.MOVING;
     }
 
-    update() {
-        this.state.update(this);
+    update(dt, board) {
+        this.state.update(this, dt, board);
     }
 
     handleDamage(damage) {
@@ -36,7 +36,8 @@ schema.defineTypes(PokemonEntity, {
     positionY: "number",
     action: "string",
     index: "number",
-    type: "string"
+    type: "string",
+    id:"string"
 });
   
 module.exports = PokemonEntity;

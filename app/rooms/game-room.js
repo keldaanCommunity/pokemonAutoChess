@@ -89,8 +89,8 @@ class GameRoom extends colyseus.Room {
       this.computeIncome();
     }
     if(this.state.phase == STATE.FIGHT){
-      for (let id in this.players){
-        this.players[id].simulation.update();
+      for (let id in this.state.players){
+        this.state.players[id].simulation.update(deltaTime);
       }
     }
   }
@@ -153,7 +153,7 @@ class GameRoom extends colyseus.Room {
 
   initializeFightingPhase() {
     this.state.phase = STATE.FIGHT;
-    this.state.time = 5000;
+    this.state.time = 15000;
     for (let id in this.state.players) {
       let player = this.state.players[id];
       let opponentId = this.getRandomOpponent(id);

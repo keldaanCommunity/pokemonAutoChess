@@ -1,4 +1,5 @@
 import GameScene from "./scenes/game-scene";
+import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
 
 class GameContainer {
   constructor(room, div) {
@@ -22,7 +23,14 @@ class GameContainer {
       height: 1000,
       pixelArt: true,
       scene: [GameScene],
-      scale: { mode: Phaser.Scale.FIT }
+      scale: { mode: Phaser.Scale.FIT },
+      plugins: {
+        global: [{
+            key: 'rexMoveTo',
+            plugin: MoveToPlugin,
+            start: true
+        }]
+    }
     };
     this.game = new Phaser.Game(config);
   }
@@ -55,29 +63,30 @@ class GameContainer {
   }
 
   initializePlayer(player) {
-    if(player.id == this.room.sessionId){
-      this.player = player;
+    let self = this;
+    if(player.id == self.room.sessionId){
+      self.player = player;
     }
     player.onChange = (changes => {
-      changes.forEach(change => this.handlePlayerChange(change, player));
+      changes.forEach(change => self.handlePlayerChange(change, player));
     });
     player.simulation.blueTeam.onAdd = (pokemon, key) =>{
-      this.handlePokemonAdd(player.id, pokemon);
+      self.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = function(changes) {
-        changes.forEach(change => {this.handlePokemonChange(player.id, change, pokemon)});
+        changes.forEach(change => {self.handlePokemonChange(player.id, change, pokemon)});
       };
     };
     player.simulation.redTeam.onAdd = (pokemon, key) =>{
-      this.handlePokemonAdd(player.id, pokemon);
+      self.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = function(changes) {
-        changes.forEach(change => {this.handlePokemonChange(player.id, change, pokemon)});
+        changes.forEach(change => {self.handlePokemonChange(player.id, change, pokemon)});
       };
     };
     player.simulation.blueTeam.onRemove = (pokemon, key) => {
-      this.handlePokemonRemove(player.id, pokemon);
+      self.handlePokemonRemove(player.id, pokemon);
     };
     player.simulation.redTeam.onRemove = (pokemon, key) => {
-      this.handlePokemonRemove(player.id, pokemon);
+      self.handlePokemonRemove(player.id, pokemon);
     };
     player.triggerAll();
   }
@@ -105,7 +114,7 @@ class GameContainer {
   }
 
   handlePokemonChange(playerId, change, pokemon){
-    this.game.scene.getSScene("gameScene").battleManager.changePokemon(playerId, change, pokemon);
+    this.game.scene.getScene("gameScene").battleManager.changePokemon(playerId, change, pokemon);
   }
 
   handlePlayerChange(change, player) {

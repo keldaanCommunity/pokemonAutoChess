@@ -10,7 +10,7 @@ class PokemonState {
         }
     }
 
-    update(pokemon) {
+    update(pokemon, dt, board) {
 
     }
 

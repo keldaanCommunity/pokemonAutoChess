@@ -16,7 +16,7 @@ class Simulation extends Schema {
             if(pokemon.positionY != 0){
                 let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, pokemon.positionY - 1);
                 this.blueTeam[pokemonEntity.id] = pokemonEntity;
-                this.board.setValue(pokemonEntity.x, pokemonEntity.y, pokemonEntity);
+                this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
             }
         }
         for (let id in redTeam) {
@@ -24,17 +24,18 @@ class Simulation extends Schema {
             if(pokemon.positionY != 0){
                 let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, 3 + (pokemon.positionY - 1));
                 this.redTeam[pokemonEntity.id] = pokemonEntity;
-                this.board.setValue(pokemonEntity.x, pokemonEntity.y, pokemonEntity);
+                this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
             }
         }
     }
 
-    update() {
+    update(dt) {
+        
         for (let id in this.blueTeam) {
-            this.blueTeam[id].update();
+            this.blueTeam[id].update(dt, this.board);
         }
         for (let id in this.redTeam) {
-            this.redTeam[id].update();
+            this.redTeam[id].update(dt, this.board);
         }
     }
 
