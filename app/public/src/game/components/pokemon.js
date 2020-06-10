@@ -1,5 +1,4 @@
 import { Physics } from "phaser";
-import MoveTo from 'phaser3-rex-plugins/plugins/moveto.js';
 
 export default class Pokemon extends Physics.Arcade.Sprite {
   constructor(scene, x, y, pokemon) {    
@@ -9,9 +8,15 @@ export default class Pokemon extends Physics.Arcade.Sprite {
     this.id = pokemon.id;
     this.positionX = pokemon.positionX;
     this.positionY = pokemon.positionY;
+    if(pokemon.orientation){
+      this.orientation = pokemon.orientation;
+    }
+    else{
+      this.orientation = "DOWNRIGHT";
+    }
     this.moveManager = scene.plugins.get('rexMoveTo').add(this, {
-      speed: 400,
+      speed: 300,
       rotateToTarget: false
-  })
+  });
   }
 }

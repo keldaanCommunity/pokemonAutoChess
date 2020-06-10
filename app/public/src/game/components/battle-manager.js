@@ -12,7 +12,7 @@ export default class BattleManager {
       let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 + 330, 710 - 80 * pokemon.positionY, pokemon);
       pokemonUI.setScale(3, 3);
       this.scene.add.existing(pokemonUI);
-      window.animationManager.displayEntity(pokemonUI);
+      window.animationManager.animateSprite(pokemonUI);
       this.group.add(pokemonUI);
     }
   }
@@ -37,9 +37,12 @@ export default class BattleManager {
       this.group.getChildren().forEach(pkm => {
         if (pkm.id == pokemon.id) {
           if(change.field =="positionX" || change.field == "positionY"){
-            console.log(pokemon.positionX, pokemon.positionY);
-            
+            //console.log(pokemon.positionX, pokemon.positionY);
             pkm.moveManager.moveTo(pokemon.positionX * 100 +330, 710 - 80 * pokemon.positionY);
+          }
+          else if(change.field == "orientation"){
+            pkm.orientation = pokemon.orientation;
+            window.animationManager.animateSprite(pkm);
           }
         }
       })

@@ -22,7 +22,7 @@ export default class BoardManager {
         pokemonUI.setInteractive();
         this.scene.input.setDraggable(pokemonUI);
       }
-      window.animationManager.displayEntity(pokemonUI);
+      window.animationManager.animateSprite(pokemonUI);
       this.group.add(pokemonUI);
     }
   }

@@ -18,7 +18,7 @@ export default class AnimationManager {
       this.game.anims.create({
         key: index + "_0_" + orientation,
         frames: this.game.anims.generateFrameNames(index, { frames: [0, 1, 2], prefix: index + "_0_" + orientation + "_" }),
-        frameRate: 6,
+        frameRate: 4,
         repeat: -1
       });
       // physical attack
@@ -59,25 +59,21 @@ export default class AnimationManager {
     }
   }
 
-  displayEntity(entity) {
-    let orientation = this.getOrientation(1, 1);
-    if (entity.orientation != orientation) {
-      entity.orientation = orientation;
-      let key = this.getSpriteKey(entity);
-      this.playAnimation(entity, key);
-    }
+  animateSprite(entity) {
+    let key = this.getSpriteKey(entity);
+    this.playAnimation(entity, key);
   }
 
   playAnimation(entity, spriteKey) {
     let flipxTable = {
-      "down": false,
-      "downleft": false,
-      "left": false,
-      "upleft": false,
-      "up": false,
-      "upright": true,
-      "right": true,
-      "downright": true
+      "DOWNRIGHT": false,
+      "DOWNLEFT": false,
+      "LEFT": false,
+      "UPLEFT": false,
+      "UP": false,
+      "UPRIGHT": true,
+      "RIGHT": true,
+      "DOWNRIGHT": true
     };
     entity.flipX = flipxTable[entity.orientation];
     entity.anims.play(spriteKey);
@@ -86,14 +82,14 @@ export default class AnimationManager {
   getSpriteKey(entity) {
     
     let orientationTable = {
-      "down": 0,
-      "downleft": 1,
-      "left": 2,
-      "upleft": 3,
-      "up": 4,
-      "upright": 3,
-      "right": 2,
-      "downright": 1
+      "DOWN": 0,
+      "DOWNLEFT": 1,
+      "LEFT": 2,
+      "UPLEFT": 3,
+      "UP": 4,
+      "UPRIGHT": 3,
+      "RIGHT": 2,
+      "DOWNRIGHT": 1
     };
     let key = "";
     key += entity.index;
@@ -104,42 +100,4 @@ export default class AnimationManager {
     return key;
   }
 
-  getOrientation(vx, vy) {
-    let angle = Math.atan2(vy, vx);
-    if (angle < 0) {
-      angle += 2 * Math.PI;
-    }
-    let angleSeparation = Math.PI / 8;
-    let orientation;
-
-    if (angle < angleSeparation) {
-      orientation = "right";
-    }
-    else if (angle < angleSeparation * 3) {
-      orientation = "downright";
-    }
-    else if (angle < angleSeparation * 5) {
-      orientation = "down";
-    }
-    else if (angle < angleSeparation * 7) {
-      orientation = "downleft";
-    }
-    else if (angle < angleSeparation * 9) {
-      orientation = "left";
-    }
-    else if (angle < angleSeparation * 11) {
-      orientation = "upleft";
-    }
-    else if (angle < angleSeparation * 13) {
-      orientation = "up";
-    }
-    else if (angle < angleSeparation * 15) {
-      orientation = "upright";
-    }
-    else {
-      orientation = "right";
-    }
-    
-    return orientation;
-  }
 }

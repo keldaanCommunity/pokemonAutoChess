@@ -8,22 +8,26 @@ class Simulation extends Schema {
     
     constructor(blueTeam, redTeam) {
         super();
-        this.board = new Board(9,3);
+        this.board = new Board(9,6);
         this.redTeam = new MapSchema();
         this.blueTeam = new MapSchema();
         for (let id in blueTeam) {
             let pokemon = blueTeam[id];
+            //console.log("x",pokemon.positionX, "y", pokemon.positionY);
             if(pokemon.positionY != 0){
                 let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, pokemon.positionY - 1);
                 this.blueTeam[pokemonEntity.id] = pokemonEntity;
+                //console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
                 this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
             }
         }
         for (let id in redTeam) {
             let pokemon = redTeam[id];
+            //console.log("x",pokemon.positionX, "y", pokemon.positionY);
             if(pokemon.positionY != 0){
                 let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, 3 + (pokemon.positionY - 1));
                 this.redTeam[pokemonEntity.id] = pokemonEntity;
+                //console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
                 this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
             }
         }

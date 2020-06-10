@@ -1,6 +1,7 @@
 const schema = require("@colyseus/schema");
 const Schema = schema.Schema;
 const STATE_TYPE = require('../models/enum').STATE_TYPE;
+const ORIENTATION = require('../models/enum').ORIENTATION;
 const MovingState = require('./moving-state');
 const uniqid = require("uniqid");
 
@@ -14,6 +15,7 @@ class PokemonEntity extends Schema {
         this.type = type;
         this.state = new MovingState();
         this.action = STATE_TYPE.MOVING;
+        this.orientation = ORIENTATION.DOWNLEFT;
     }
 
     update(dt, board) {
@@ -37,7 +39,8 @@ schema.defineTypes(PokemonEntity, {
     action: "string",
     index: "number",
     type: "string",
-    id:"string"
+    id:"string",
+    orientation:"string"
 });
   
 module.exports = PokemonEntity;

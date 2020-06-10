@@ -1,10 +1,11 @@
 
 const PriorityQueue = require('./priority-queue.js');
+const ORIENTATION = require('../models/enum').ORIENTATION;
 
 class Board {
-    constructor() {
-        this.rows = 8;
-        this.columns = 8;
+    constructor(rows, colums) {
+        this.rows = rows;
+        this.columns = colums;
         this.cell = new Array(this.rows * this.columns);
     }
 
@@ -49,6 +50,46 @@ class Board {
     distanceM(r0, c0, r1, c1) {
         // Manhattan distance
         return Math.abs(r1 - r0) + Math.abs(c1 - c0);
+    }
+
+    orientation(r0, c0, r1, c1){
+        let vx = r1 - r0;
+        let vy = c1 - c0;
+        let angle = Math.atan2(vy, vx);
+        if (angle < 0) {
+            angle += 2 * Math.PI;
+        }
+        let angleSeparation = Math.PI / 8;
+        let orientation;
+    
+        if (angle < angleSeparation) {
+            orientation = ORIENTATION.RIGHT;
+        }
+        else if (angle < angleSeparation * 3) {
+            orientation = ORIENTATION.UPRIGHT;
+        }
+        else if (angle < angleSeparation * 5) {
+            orientation = ORIENTATION.UP;
+        }
+        else if (angle < angleSeparation * 7) {
+            orientation = ORIENTATION.UPLEFT;
+        }
+        else if (angle < angleSeparation * 9) {
+            orientation = ORIENTATION.LEFT;
+        }
+        else if (angle < angleSeparation * 11) {
+            orientation = ORIENTATION.DOWNLEFT;
+        }
+        else if (angle < angleSeparation * 13) {
+            orientation = ORIENTATION.DOWN;
+        }
+        else if (angle < angleSeparation * 15) {
+            orientation = ORIENTATION.DOWNRIGHT;
+        }
+        else {
+            orientation = ORIENTATION.RIGHT;
+        }
+        return orientation;
     }
 
     getAdjacentCells(row, col) {

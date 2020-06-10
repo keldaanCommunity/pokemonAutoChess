@@ -4,7 +4,7 @@ const PokemonState = require('./pokemon-state');
 class MovingState extends PokemonState {
     constructor() {
         super();
-        this.cooldown = 0;
+        this.cooldown = 1000;
     }
 
     handleDamage(pokemon, damage) {
@@ -29,7 +29,10 @@ class MovingState extends PokemonState {
         cells.forEach(cell => {
             if(cell.value == undefined && !moved){
                 moved = true;
+                //console.log("pokemon moved from ",pokemon.positionX, ",",pokemon.positionY," to ",cell.row,cell.column);
+                
                 board.moveValue(pokemon.positionX, pokemon.positionY, cell.row, cell.column);
+                pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, cell.row, cell.column);
                 pokemon.positionX = cell.row;
                 pokemon.positionY = cell.column;
             }

@@ -56,4 +56,15 @@ const STATE_TYPE = Object.freeze({
   ATTACKING: "ATTACKING"
 });
 
-module.exports = { TYPE, RARITY, COST, EXP_TABLE, STATE, STATE_TYPE };
+const ORIENTATION = Object.freeze({
+  DOWNLEFT: "DOWNLEFT",
+  LEFT: "LEFT",
+  UPLEFT: "UPLEFT",
+  UP: "UP",
+  UPRIGHT: "UPRIGHT",
+  RIGHT: "RIGHT",
+  DOWNRIGHT: "DOWNRIGHT",
+  DOWN: "DOWN"
+});
+
+module.exports = { TYPE, RARITY, COST, EXP_TABLE, STATE, STATE_TYPE, ORIENTATION };
