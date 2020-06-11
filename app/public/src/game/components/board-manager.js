@@ -15,7 +15,8 @@ export default class BoardManager {
       }
     });
     if(!presence){
-      let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 + 330, 790 - 80 * pokemon.positionY, pokemon);
+      let coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+      let pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon);
       pokemonUI.setScale(3, 3);
       this.scene.add.existing(pokemonUI);
       if (window.sessionId == this.player.id) {
@@ -51,7 +52,14 @@ export default class BoardManager {
   buildPokemons() {
     for (let id in this.player.board) {
       let pokemon = this.player.board[id];
-      this.addPokemon(pokemon);
+      if(window.state.phase == "FIGHT"){
+        if(pokemon.positionY == 0){
+          this.addPokemon(pokemon);
+        }
+      }
+      else{
+        this.addPokemon(pokemon);
+      }
     }
   }
 
@@ -73,17 +81,26 @@ export default class BoardManager {
 
           if (pokemonUI.positionX != pokemon.positionX || pokemonUI.positionY != pokemon.positionY) {
             pokemonUI.positionX = pokemon.positionX;
-            pokemonUI.x = pokemon.positionX * 100 + 330;
-            pokemonUI.y = 790 - 80 * pokemon.positionY;
+            let coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+            pokemonUI.x = coordinates[0];
+            pokemonUI.y = coordinates[1];
           }
           if (pokemonUI.x != pokemon.positionX || pokemonUI.y != pokemon.positionY) {
-            pokemonUI.x = pokemon.positionX * 100 + 330;
-            pokemonUI.y = 790 - 80 * pokemon.positionY;
+            let coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+            pokemonUI.x = coordinates[0];
+            pokemonUI.y = coordinates[1];
           }
         }
       });
       if (!found) {
-        this.addPokemon(pokemon);
+        if(window.state.phase =="FIGHT"){
+          if(pokemon.positionY ==0){
+            this.addPokemon(pokemon);
+          }
+        }
+        else{
+          this.addPokemon(pokemon);
+        }
       }
     }
     let ids = [];

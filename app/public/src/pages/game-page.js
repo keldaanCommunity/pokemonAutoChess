@@ -5,6 +5,9 @@ class GamePage {
     this.room = args.room;
     this.render();
     this.container = document.getElementById("game");
+    window.transformCoordinate = function(x,y){
+      return [x * 100 + 330, 790 - 80 * y];
+    }
     this.game = new GameContainer(this.room, this.container);
   }
 
