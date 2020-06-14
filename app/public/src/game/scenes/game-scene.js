@@ -55,7 +55,8 @@ export default class GameScene extends Scene {
       align: "center"
     };
     this.nameText = this.add.text(10, 50, window.state.players[window.sessionId].facebookName, this.textStyle);
-    this.timeText = this.add.text(700, 20, window.state.time, this.textStyle);
+    this.timeText = this.add.text(700, 20, window.state.roundTime, this.textStyle);
+    this.add.text(740, 20, "s", this.textStyle);
     this.phaseText = this.add.text(550, 20, window.state.phase, this.textStyle);
     this.money = this.add.text(120, 115, window.state.players[window.sessionId].money, this.textStyle);
     this.moneyIcon = this.add.image(200, 130, "money");
@@ -84,7 +85,7 @@ export default class GameScene extends Scene {
   }
 
   updateTime() {
-    this.timeText.setText(window.state.time);
+    this.timeText.setText(window.state.roundTime);
   }
 
   updatePhase() {

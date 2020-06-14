@@ -12,6 +12,7 @@ class GameState extends schema.Schema {
   constructor() {
     super();
     this.time = 5000;
+    this.roundTime = Math.round(this.time/1000);
     this.phase = STATE.PICK;
     this.players = new schema.MapSchema();
     this.shop = new Shop();
@@ -19,7 +20,7 @@ class GameState extends schema.Schema {
 }
 
 schema.defineTypes(GameState, {
-  time: "number",
+  roundTime: "number",
   phase: "string",
   players: { map: Player }
 });
@@ -84,6 +85,9 @@ class GameRoom extends colyseus.Room {
 
   update(deltaTime) {
     this.state.time -= deltaTime;
+    if(Math.round(this.state.time/1000) != this.state.roundTime){
+      this.state.roundTime = Math.round(this.state.time/1000);
+    }
     if (this.state.time < 0) {
       this.switchPhase();
       this.computeIncome();

@@ -94,7 +94,7 @@ class GameContainer {
   handleRoomStateChange(change) {
     if (window.state == null || this.game.scene.getScene("gameScene").timeText == null) return;
     switch (change.field) {
-      case "time":
+      case "roundTime":
         this.game.scene.getScene("gameScene").updateTime();
         break;
       case "phase":

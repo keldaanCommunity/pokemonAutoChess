@@ -15,7 +15,7 @@ class Simulation extends Schema {
             let pokemon = blueTeam[id];
             //console.log("x",pokemon.positionX, "y", pokemon.positionY); // 0 for blue, 1 for red
             if(pokemon.positionY != 0){
-                let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, 0);
+                let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk, 0);
                 this.blueTeam[pokemonEntity.id] = pokemonEntity;
                 //console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
                 this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
@@ -25,7 +25,7 @@ class Simulation extends Schema {
             let pokemon = redTeam[id];
             //console.log("x",pokemon.positionX, "y", pokemon.positionY);
             if(pokemon.positionY != 0){
-                let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, 3 + (pokemon.positionY - 1), pokemon.hp, 1);
+                let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, 3 + (pokemon.positionY - 1), pokemon.hp, pokemon.atk, 1);
                 this.redTeam[pokemonEntity.id] = pokemonEntity;
                 //console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
                 this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
@@ -36,10 +36,20 @@ class Simulation extends Schema {
     update(dt) {
         
         for (let id in this.blueTeam) {
-            this.blueTeam[id].update(dt, this.board);
+            if(this.blueTeam[id].life <= 0){
+                delete this.blueTeam[id];
+            }
+            else{
+                this.blueTeam[id].update(dt, this.board);
+            }
         }
         for (let id in this.redTeam) {
-            this.redTeam[id].update(dt, this.board);
+            if(this.redTeam[id].life <= 0){
+                delete this.redTeam[id];
+            }
+            else{
+                this.redTeam[id].update(dt, this.board);
+            }
         }
     }
 

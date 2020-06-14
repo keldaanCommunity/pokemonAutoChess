@@ -3,10 +3,11 @@ const Schema = schema.Schema;
 const STATE_TYPE = require('../models/enum').STATE_TYPE;
 const ORIENTATION = require('../models/enum').ORIENTATION;
 const MovingState = require('./moving-state');
+const AttackingState = require('./attacking-state');
 const uniqid = require("uniqid");
 
 class PokemonEntity extends Schema {
-    constructor(index, type, positionX, positionY, hp, team) {
+    constructor(index, type, positionX, positionY, hp, atk, team) {
         super();
         this.id = uniqid();
         this.positionX = positionX;
@@ -17,6 +18,7 @@ class PokemonEntity extends Schema {
         this.action = STATE_TYPE.MOVING;
         this.orientation = ORIENTATION.DOWNLEFT;
         this.hp = hp;
+        this.atk = atk;
         this.life = hp;
         this.cooldown = 1000;
         this.team = team;
@@ -26,14 +28,22 @@ class PokemonEntity extends Schema {
         this.state.update(this, dt, board);
     }
 
-    handleDamage(damage) {
-        this.state.handleDamage(this, damage);
+    handleDamage(damage, board) {
+        this.state.handleDamage(this, damage, board);
     }
     
     changeState(state) {
         this.state.onExit(this);
         this.state = state;
         this.state.onEnter(this);
+    }
+
+    toMovingState(){
+        this.changeState(new MovingState());
+    }
+
+    toAttackingState(){
+        this.changeState(new AttackingState());
     }
 }
 
