@@ -1,6 +1,32 @@
 export default class AnimationManager {
   constructor(game) {
     this.game = game;
+    this.orientationTable = {
+      "DOWN": 0,
+      "DOWNLEFT": 1,
+      "LEFT": 2,
+      "UPLEFT": 3,
+      "UP": 4,
+      "UPRIGHT": 3,
+      "RIGHT": 2,
+      "DOWNRIGHT": 1
+    };
+
+    this.actionTable ={
+      "MOVING":0,
+      "ATTACKING":1
+    }
+
+    this.flipxTable = {
+      "DOWNRIGHT": false,
+      "DOWNLEFT": false,
+      "LEFT": false,
+      "UPLEFT": false,
+      "UP": false,
+      "UPRIGHT": true,
+      "RIGHT": true,
+      "DOWNRIGHT": true
+    };
   }
 
   createAnimations(index) {
@@ -11,52 +37,23 @@ export default class AnimationManager {
       3 : up left
       4 : up
       */
-    var orientations = ["0", "1", "2", "3", "4"];
-    for (var i = 0; i < orientations.length; i++) {
-      var orientation = orientations[i];
-      //moving sprites
+    ["0", "1", "2", "3", "4"].forEach(orientation => {
       this.game.anims.create({
-        key: index + "_0_" + orientation,
-        frames: this.game.anims.generateFrameNames(index, { frames: [0, 1, 2], prefix: index + "_0_" + orientation + "_" }),
+        key: `${index}/0/${orientation}`,
+        frames: this.game.anims.generateFrameNames("pokemons", { frames: [0, 1, 2], prefix: index + "/0/" + orientation + "/" }),
         frameRate: 4,
         repeat: -1
       });
-      // physical attack
+      // attack
       this.game.anims.create({
-        key: index + "_1_" + orientation,
-        frames: this.game.anims.generateFrameNames(index, { frames: [0, 1, 2], prefix: index + "_1_" + orientation + "_" }),
-        frameRate: 6,
-        repeat: -1
+        key: `${index}/1/${orientation}`,
+        frames: this.game.anims.generateFrameNames("pokemons", { frames: [0, 1, 2], prefix: index + "/1/" + orientation + "/" }).concat(
+          this.game.anims.generateFrameNames("pokemons", { frames: [0, 1, 2], prefix: index + "/0/" + orientation + "/" })
+        ),
+        duration: 1000,
+        repeat: -1,
       });
-      // special attack
-      this.game.anims.create({
-        key: index + "_2_" + orientation,
-        frames: this.game.anims.generateFrameNames(index, { frames: [0], prefix: index + "_2_" + orientation + "_" }),
-        frameRate: 6,
-        repeat: -1
-      });
-      // hurt sprite
-      this.game.anims.create({
-        key: index + "_3_" + orientation,
-        frames: this.game.anims.generateFrameNames(index, { frames: [0], prefix: index + "_3_" + orientation + "_" }),
-        frameRate: 6,
-        repeat: -1
-      });
-      // sleep sprite
-      this.game.anims.create({
-        key: index + "_4_" + orientation,
-        frames: this.game.anims.generateFrameNames(index, { frames: [0, 1], prefix: index + "_4_" + orientation + "_" }),
-        frameRate: 6,
-        repeat: -1
-      });
-      // idle sprite
-      this.game.anims.create({
-        key: index + "_5_" + orientation,
-        frames: this.game.anims.generateFrameNames(index, { frames: [0, 2], prefix: index + "_0_" + orientation + "_" }),
-        frameRate: 6,
-        repeat: -1
-      });
-    }
+    });
   }
 
   animateSprite(entity) {
@@ -65,39 +62,12 @@ export default class AnimationManager {
   }
 
   playAnimation(entity, spriteKey) {
-    let flipxTable = {
-      "DOWNRIGHT": false,
-      "DOWNLEFT": false,
-      "LEFT": false,
-      "UPLEFT": false,
-      "UP": false,
-      "UPRIGHT": true,
-      "RIGHT": true,
-      "DOWNRIGHT": true
-    };
-    entity.flipX = flipxTable[entity.orientation];
+    entity.flipX = this.flipxTable[entity.orientation];
     entity.anims.play(spriteKey);
   }
 
   getSpriteKey(entity) {
-    
-    let orientationTable = {
-      "DOWN": 0,
-      "DOWNLEFT": 1,
-      "LEFT": 2,
-      "UPLEFT": 3,
-      "UP": 4,
-      "UPRIGHT": 3,
-      "RIGHT": 2,
-      "DOWNRIGHT": 1
-    };
-    let key = "";
-    key += entity.index;
-    key += "_";
-    key += "0";
-    key += "_";
-    key += orientationTable[entity.orientation];
-    return key;
+    return `${entity.index}/${this.actionTable[entity.action]}/${this.orientationTable[entity.orientation]}`;
   }
 
 }

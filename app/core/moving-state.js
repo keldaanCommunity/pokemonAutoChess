@@ -1,6 +1,5 @@
 const STATE_TYPE = require('../models/enum').STATE_TYPE;
 const PokemonState = require('./pokemon-state');
-const AttackingState = require('./attacking-state');
 
 class MovingState extends PokemonState {
     constructor() {

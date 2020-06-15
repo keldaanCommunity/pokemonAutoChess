@@ -15,11 +15,9 @@ export default class GameScene extends Scene {
   }
 
   preload() {
-    ["1", "2", "3", "4", "5", "6", "7", "8", "9"].forEach(num => {
-      this.load.multiatlas(num, "assets/sprites/" + num + "/" + num + ".json");
-    });
     this.load.image("tiles", "assets/tiles/tileset.png");
     this.load.tilemapTiledJSON("map", "assets/tiles/tilemap.json")
+    this.load.multiatlas("pokemons","assets/pokemons/pokemons.json","assets/pokemons");
     this.load.image("user", "assets/ui/user.png");
     this.load.image("dashboard", "assets/ui/dashboard.png");
     this.load.image("transition", "assets/ui/transition.png");

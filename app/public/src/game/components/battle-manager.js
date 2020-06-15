@@ -44,6 +44,10 @@ export default class BattleManager {
             pkm.orientation = pokemon.orientation;
             window.animationManager.animateSprite(pkm);
           }
+          else if(change.field =="action"){
+            pkm.action = pokemon.action;
+            window.animationManager.animateSprite(pkm);
+          }
         }
       })
     }
