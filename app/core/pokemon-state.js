@@ -19,27 +19,6 @@ class PokemonState {
 
     onExit(pokemon) {
     }
-
-    isTargetInRange(pokemon, board){
-        let targetInRange = false;
-        let cellsInRange = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
-        cellsInRange.forEach((cell) => {
-            if(cell.value !== undefined && cell.value.team != pokemon.team)
-            {
-                targetInRange = true;
-            }
-        });
-        return targetInRange;
-    }
-
-    getTargetInRange(pokemon, board){
-        let cellsInRange = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
-        for (let i = 0; i < cellsInRange.length; i++) {
-            if(cellsInRange[i].value !== undefined && cellsInRange[i].value.team != pokemon.team){
-                return cellsInRange[i].value;
-            }
-        }
-    }
     
     isTarget(pokemon, board){
         let target = false;
@@ -52,12 +31,12 @@ class PokemonState {
     }
 
     getNearestTargetCoordinate(pokemon, board){
-        let x;
-        let y;
+        let x = undefined;
+        let y = undefined;
         let distance = 999;
         board.forEach((r,c,value) => {
             if(value !== undefined && value.team != pokemon.team){
-                let candidateDistance = board.distanceM(pokemon.positionX,pokemon.positionY,r,c);
+                let candidateDistance = board.distance(pokemon.positionX,pokemon.positionY,r,c);
                 if(candidateDistance < distance){
                     distance = candidateDistance;
                     x = r;

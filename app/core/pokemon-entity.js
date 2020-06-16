@@ -7,7 +7,7 @@ const AttackingState = require('./attacking-state');
 const uniqid = require("uniqid");
 
 class PokemonEntity extends Schema {
-    constructor(index, type, positionX, positionY, hp, atk, team) {
+    constructor(index, type, positionX, positionY, hp, atk, range, team) {
         super();
         this.id = uniqid();
         this.positionX = positionX;
@@ -19,6 +19,7 @@ class PokemonEntity extends Schema {
         this.orientation = ORIENTATION.DOWNLEFT;
         this.atk = atk;
         this.life = hp;
+        this.range = range;
         this.cooldown = 1000;
         this.team = team;
     }

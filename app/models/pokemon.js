@@ -6,7 +6,7 @@ const Schema = schema.Schema;
 const uniqid = require("uniqid");
 
 class Pokemon extends schema.Schema {
-  constructor(name, type, rarity, index, evolution, hp, atk) {
+  constructor(name, type, rarity, index, evolution, hp, atk, range) {
     super();
     this.id = uniqid();
     this.name = name;
@@ -19,6 +19,7 @@ class Pokemon extends schema.Schema {
     this.cost = COST[rarity];
     this.hp = hp;
     this.atk = atk;
+    this.range = range;
   }
 
   setPosition(x, y) {
@@ -33,55 +34,55 @@ class Pokemon extends schema.Schema {
 
 class Bulbasaur extends Pokemon {
   constructor() {
-    super("bulbasaur", TYPE.GRASS, RARITY.COMMON, 1, "ivysaur", 10, 1);
+    super("bulbasaur", TYPE.GRASS, RARITY.COMMON, 1, "ivysaur", 10, 1, 3);
   }
 }
 
 class Ivysaur extends Pokemon {
   constructor() {
-    super("ivysaur", TYPE.GRASS, RARITY.COMMON, 2, "venusaur", 20, 2);
+    super("ivysaur", TYPE.GRASS, RARITY.COMMON, 2, "venusaur", 20, 2, 3);
   }
 }
 
 class Venusaur extends Pokemon {
   constructor() {
-    super("venusaur", TYPE.GRASS, RARITY.COMMON, 3, "", 30, 3);
+    super("venusaur", TYPE.GRASS, RARITY.COMMON, 3, "", 30, 3, 3);
   }
 }
 
 class Charmander extends Pokemon {
   constructor() {
-    super("charmander", TYPE.FIRE, RARITY.COMMON, 4, "charmeleon", 10, 1);
+    super("charmander", TYPE.FIRE, RARITY.COMMON, 4, "charmeleon", 10, 1, 1);
   }
 }
 
 class Charmeleon extends Pokemon {
   constructor() {
-    super("charmeleon", TYPE.FIRE, RARITY.COMMON, 5, "charizard", 20, 2);
+    super("charmeleon", TYPE.FIRE, RARITY.COMMON, 5, "charizard", 20, 2, 1);
   }
 }
 
 class Charizard extends Pokemon {
   constructor() {
-    super("charizard", TYPE.FIRE, RARITY.COMMON, 6, "", 30, 3);
+    super("charizard", TYPE.FIRE, RARITY.COMMON, 6, "", 30, 3, 1);
   }
 }
 
 class Squirtle extends Pokemon {
   constructor() {
-    super("squirtle", TYPE.WATER, RARITY.COMMON, 7, "wartortle", 10, 1);
+    super("squirtle", TYPE.WATER, RARITY.COMMON, 7, "wartortle", 10, 1, 2);
   }
 }
 
 class Wartortle extends Pokemon {
   constructor() {
-    super("charmeleon", TYPE.WATER, RARITY.COMMON, 8, "blastoise", 20 ,2);
+    super("charmeleon", TYPE.WATER, RARITY.COMMON, 8, "blastoise", 20 ,2, 2);
   }
 }
 
 class Blastoise extends Pokemon {
   constructor() {
-    super("charizard", TYPE.WATER, RARITY.COMMON, 9, "", 30, 3);
+    super("charizard", TYPE.WATER, RARITY.COMMON, 9, "", 30, 3, 2);
   }
 }
 

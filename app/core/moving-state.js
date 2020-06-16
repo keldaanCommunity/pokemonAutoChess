@@ -10,14 +10,15 @@ class MovingState extends PokemonState {
         super.update(pokemon, dt, board);
         if(pokemon.cooldown <= 0){
             pokemon.cooldown = 1000;
-            if(this.isTargetInRange(pokemon, board)){
+            let targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
+            // no target case
+            if(targetCoordinate[0] === undefined || targetCoordinate[1] === undefined){
+            }
+            else if(board.distance(pokemon.positionX,pokemon.positionY,targetCoordinate[0], targetCoordinate[1]) <= pokemon.range){
                 pokemon.toAttackingState();
             }
             else{
-                if(this.isTarget(pokemon, board)){
-                    let coordinates = this.getNearestTargetCoordinate(pokemon, board);
-                    this.move(pokemon, board, coordinates);
-                }
+                this.move(pokemon, board, targetCoordinate);
             }
         }
         else{
@@ -33,7 +34,7 @@ class MovingState extends PokemonState {
         let y;
         cells.forEach(cell => {
             if(cell.value === undefined){
-                let candidateDistance = board.distanceM(coordinates[0],coordinates[1], cell.row, cell.column);
+                let candidateDistance = board.distance(coordinates[0],coordinates[1], cell.row, cell.column);
                 //console.log(`Candidate (${cell.row},${cell.column}) to ${coordinates}, distance: ${candidateDistance}`);
                 if(candidateDistance < distance){
                     distance = candidateDistance;

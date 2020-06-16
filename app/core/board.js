@@ -47,7 +47,7 @@ class Board {
         return Math.max(Math.abs(r0 - r1), Math.abs(c0 - c1));
     }
 
-    distanceM(r0, c0, r1, c1) {
+    distance(r0, c0, r1, c1) {
         // Manhattan distance
         return Math.abs(r1 - r0) + Math.abs(c1 - c0);
     }
@@ -176,7 +176,7 @@ class Board {
             for (var i = 0; i < adjacents.length; i++) {
                 next = adjacents[i];
                 if (!!next.value) continue; // skip non-empty cell
-                var dist = this.distanceM(current.row,current.column,next.row,next.column);
+                var dist = this.distance(current.row,current.column,next.row,next.column);
                 var a = cost[current.row<<8|current.column] + dist;
                 var b = cost[next.row<<8|next.column];
                 if (b == undefined || a < b) {
