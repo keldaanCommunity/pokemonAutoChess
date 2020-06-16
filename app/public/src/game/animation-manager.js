@@ -56,14 +56,14 @@ export default class AnimationManager {
     });
   }
 
-  animateSprite(entity) {
+  animatePokemon(entity) {
     let key = this.getSpriteKey(entity);
     this.playAnimation(entity, key);
   }
 
   playAnimation(entity, spriteKey) {
     entity.flipX = this.flipxTable[entity.orientation];
-    entity.anims.play(spriteKey);
+    entity.first.anims.play(spriteKey);
   }
 
   getSpriteKey(entity) {

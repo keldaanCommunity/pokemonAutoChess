@@ -17,7 +17,6 @@ class PokemonEntity extends Schema {
         this.state = new MovingState();
         this.action = STATE_TYPE.MOVING;
         this.orientation = ORIENTATION.DOWNLEFT;
-        this.hp = hp;
         this.atk = atk;
         this.life = hp;
         this.cooldown = 1000;
@@ -54,7 +53,9 @@ schema.defineTypes(PokemonEntity, {
     index: "number",
     type: "string",
     id:"string",
-    orientation:"string"
+    orientation:"string",
+    life:"number",
+    team:"number"
 });
   
 module.exports = PokemonEntity;

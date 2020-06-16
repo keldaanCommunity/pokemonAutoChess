@@ -17,13 +17,12 @@ export default class BoardManager {
     if(!presence){
       let coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
       let pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon);
-      pokemonUI.setScale(3, 3);
-      this.scene.add.existing(pokemonUI);
+
       if (window.sessionId == this.player.id) {
         pokemonUI.setInteractive();
         this.scene.input.setDraggable(pokemonUI);
       }
-      window.animationManager.animateSprite(pokemonUI);
+      window.animationManager.animatePokemon(pokemonUI);
       this.group.add(pokemonUI);
     }
   }

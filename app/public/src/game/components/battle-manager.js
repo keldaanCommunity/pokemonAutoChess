@@ -10,9 +10,7 @@ export default class BattleManager {
   addPokemon(playerId, pokemon) {
     if(this.player.id == playerId){
       let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 + 330, 710 - 80 * pokemon.positionY, pokemon);
-      pokemonUI.setScale(3, 3);
-      this.scene.add.existing(pokemonUI);
-      window.animationManager.animateSprite(pokemonUI);
+      window.animationManager.animatePokemon(pokemonUI);
       this.group.add(pokemonUI);
     }
   }
@@ -34,22 +32,29 @@ export default class BattleManager {
   changePokemon(playerId, change, pokemon){
     
     if(this.player.id == playerId){
-      this.group.getChildren().forEach(pkm => {
-        if (pkm.id == pokemon.id) {
+      let children = this.group.getChildren();
+      for (let i = 0; i < children.length; i++) {
+        if(children[i].id == pokemon.id){
           if(change.field =="positionX" || change.field == "positionY"){
             //console.log(pokemon.positionX, pokemon.positionY);
-            pkm.moveManager.moveTo(pokemon.positionX * 100 +330, 710 - 80 * pokemon.positionY);
+            children[i].moveManager.moveTo(pokemon.positionX * 100 +330, 710 - 80 * pokemon.positionY);
           }
           else if(change.field == "orientation"){
-            pkm.orientation = pokemon.orientation;
-            window.animationManager.animateSprite(pkm);
+            children[i].orientation = pokemon.orientation;
+            window.animationManager.animatePokemon(children[i]);
           }
           else if(change.field =="action"){
-            pkm.action = pokemon.action;
-            window.animationManager.animateSprite(pkm);
+            children[i].action = pokemon.action;
+            window.animationManager.animatePokemon(children[i]);
           }
+          else if(change.field =="life"){
+            children[i].life = pokemon.life;
+            children[i].last.setLife(children[i].life);
+          }    
+          break;
         }
-      })
+        
+      }
     }
   }
 
