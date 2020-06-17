@@ -27,6 +27,20 @@ export default class AnimationManager {
       "RIGHT": true,
       "DOWNRIGHT": true
     };
+
+    [1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(num => {
+      this.createAnimations(num);
+    });
+    this.createGrassAnimation();
+  }
+
+  createGrassAnimation(){
+    this.game.anims.create({
+      key: `grass`,
+      frames: this.game.anims.generateFrameNames("attacks", {start:0, end:10, zeroPad: 3, prefix: "GRASS/" }),
+      frameRate: 8,
+      repeat: -1
+    });
   }
 
   createAnimations(index) {

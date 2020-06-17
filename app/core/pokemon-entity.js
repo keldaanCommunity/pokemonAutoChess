@@ -12,6 +12,8 @@ class PokemonEntity extends Schema {
         this.id = uniqid();
         this.positionX = positionX;
         this.positionY = positionY;
+        this.targetX = -1;
+        this.targetY = -1;
         this.index = index;
         this.type = type;
         this.state = new MovingState();
@@ -56,7 +58,10 @@ schema.defineTypes(PokemonEntity, {
     id:"string",
     orientation:"string",
     life:"number",
-    team:"number"
+    team:"number",
+    range:"number",
+    targetX:"number",
+    targetY:"number"
 });
   
 module.exports = PokemonEntity;

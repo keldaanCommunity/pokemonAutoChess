@@ -114,6 +114,7 @@ class GameContainer {
   }
 
   handlePokemonChange(playerId, change, pokemon){
+    //console.log(change);
     this.game.scene.getScene("gameScene").battleManager.changePokemon(playerId, change, pokemon);
   }
 

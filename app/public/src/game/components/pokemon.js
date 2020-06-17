@@ -6,6 +6,9 @@ export default class Pokemon extends GameObjects.Container {
     super(scene, x, y);
     this.index = pokemon.index;
     this.id = pokemon.id;
+    this.range = pokemon.range;
+    this.targetX = null;
+    this.targetY = null;
     this.positionX = pokemon.positionX;
     this.positionY = pokemon.positionY;
     this.setSize(50,50);
@@ -14,6 +17,59 @@ export default class Pokemon extends GameObjects.Container {
     this.setSprite(pokemon, scene);
     this.setLifeBar(pokemon, scene);
     scene.add.existing(this);
+  }
+
+  attackAnimation(){
+    this.projectile = this.scene.add.sprite(this.positionX * 100 +330, 710 - 80 * this.positionY, "attacks","GRASS/000");
+    this.projectile.setScale(3,3);
+    this.projectile.anims.play('grass');
+    this.addTween();
+  }
+
+  addTween(){
+    let self = this;
+    if(this.scene){
+      //console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
+      this.scene.tweens.add({
+        targets: this.projectile,
+        x: this.targetX * 100 + 330,
+        y: 710 - this.targetY * 80,
+        ease: 'Linear',
+        duration: 500,
+        onComplete: function (tween, targets) {
+            targets[0].setVisible(false);
+            if(self.checkAnimations()){
+              self.replayAnimations();
+            }
+            else{
+              self.projectile.destroy();
+            }
+        }
+    });
+    }
+    else{
+      this.projectile.destroy();
+    }
+  }
+
+  replayAnimations(){
+    if(this.first){
+      this.projectile.setPosition(this.positionX * 100 +330, 710 - 80 * this.positionY);
+      this.projectile.setVisible(true);
+      this.addTween();
+    }
+    else{
+      this.projectile.destroy();
+    }
+  }
+
+  checkAnimations(){
+    if(this.action == "ATTACKING"){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   setLifeBar(pokemon, scene){

@@ -37,6 +37,12 @@ export default class BattleManager {
         if(children[i].id == pokemon.id){
           if(change.field =="positionX" || change.field == "positionY"){
             //console.log(pokemon.positionX, pokemon.positionY);
+            if(change.field == "positionX"){
+              children[i].positionX = pokemon.positionX;
+            }
+            else if(change.field == "positionY"){
+              children[i].positionY = pokemon.positionY;
+            }
             children[i].moveManager.moveTo(pokemon.positionX * 100 +330, 710 - 80 * pokemon.positionY);
           }
           else if(change.field == "orientation"){
@@ -50,7 +56,34 @@ export default class BattleManager {
           else if(change.field =="life"){
             children[i].life = pokemon.life;
             children[i].last.setLife(children[i].life);
-          }    
+          }
+          
+          else if(change.field =="targetX"){
+            if(pokemon.targetX >= 0){
+              children[i].targetX = pokemon.targetX;
+            }
+            else{
+              children[i].targetX = null;
+            }
+
+            if(children[i].action == "ATTACKING" && children[i].targetX !== null && children[i].targetY !== null){
+              children[i].attackAnimation();
+            }
+          }
+
+          else if(change.field =="targetY"){
+            if(pokemon.targetY >= 0){
+              children[i].targetY = pokemon.targetY;
+            }
+            else{
+              children[i].targetY = null;
+            }
+
+            if(children[i].action == "ATTACKING" && children[i].targetX !== null && children[i].targetY !== null){
+              children[i].attackAnimation();
+            }
+          }
+
           break;
         }
         

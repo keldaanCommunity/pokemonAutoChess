@@ -18,6 +18,7 @@ export default class GameScene extends Scene {
     this.load.image("tiles", "assets/tiles/tileset.png");
     this.load.tilemapTiledJSON("map", "assets/tiles/tilemap.json")
     this.load.multiatlas("pokemons","assets/pokemons/pokemons.json","assets/pokemons");
+    this.load.multiatlas("attacks","assets/attacks/attacks.json","assets/attacks");
     this.load.image("user", "assets/ui/user.png");
     this.load.image("dashboard", "assets/ui/dashboard.png");
     this.load.image("transition", "assets/ui/transition.png");
@@ -38,9 +39,6 @@ export default class GameScene extends Scene {
     this.board = this.add.group();
     this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);
-    [1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(num => {
-      window.animationManager.createAnimations(num);
-    });
     this.shopContainer = new ShopContainer(this, 300, 950);
     this.playerContainer = new PlayerContainer(this, 1750, 100);
     this.boardContainer = new BoardContainer(this, 275, 775);

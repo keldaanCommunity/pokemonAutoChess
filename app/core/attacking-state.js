@@ -27,6 +27,8 @@ class AttackingState extends PokemonState {
     }
 
     attack(pokemon, board, coordinates){
+        pokemon.targetX = coordinates[0];
+        pokemon.targetY = coordinates[1];
         let target = board.getValue(coordinates[0], coordinates[1]);
         if(target){
             pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
@@ -43,6 +45,8 @@ class AttackingState extends PokemonState {
     }
 
     onExit(pokemon) {
+        pokemon.targetX = -1;
+        pokemon.targetY = -1;
         super.onExit(pokemon);
     }
 }
