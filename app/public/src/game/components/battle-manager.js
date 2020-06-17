@@ -51,7 +51,6 @@ export default class BattleManager {
           }
           else if(change.field =="action"){
             children[i].action = pokemon.action;
-            window.animationManager.animatePokemon(children[i]);
           }
           else if(change.field =="life"){
             children[i].life = pokemon.life;
@@ -67,6 +66,7 @@ export default class BattleManager {
             }
 
             if(children[i].action == "ATTACKING" && children[i].targetX !== null && children[i].targetY !== null){
+            window.animationManager.animatePokemon(children[i]);
               children[i].attackAnimation();
             }
           }
@@ -80,6 +80,7 @@ export default class BattleManager {
             }
 
             if(children[i].action == "ATTACKING" && children[i].targetX !== null && children[i].targetY !== null){
+              window.animationManager.animatePokemon(children[i]);
               children[i].attackAnimation();
             }
           }

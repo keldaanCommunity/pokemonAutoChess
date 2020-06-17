@@ -31,13 +31,20 @@ export default class AnimationManager {
     [1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(num => {
       this.createAnimations(num);
     });
-    this.createGrassAnimation();
+    this.createAttacksAnimations();
   }
 
-  createGrassAnimation(){
+  createAttacksAnimations(){
     this.game.anims.create({
-      key: `grass`,
+      key: `range/GRASS`,
       frames: this.game.anims.generateFrameNames("attacks", {start:0, end:10, zeroPad: 3, prefix: "GRASS/" }),
+      frameRate: 8,
+      repeat: -1
+    });
+
+    this.game.anims.create({
+      key: `range/WATER`,
+      frames: this.game.anims.generateFrameNames("attacks", {start:0, end:18, zeroPad: 3, prefix: "WATER/" }),
       frameRate: 8,
       repeat: -1
     });

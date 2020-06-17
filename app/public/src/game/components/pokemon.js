@@ -7,10 +7,12 @@ export default class Pokemon extends GameObjects.Container {
     this.index = pokemon.index;
     this.id = pokemon.id;
     this.range = pokemon.range;
+    this.type = pokemon.type;
     this.targetX = null;
     this.targetY = null;
     this.positionX = pokemon.positionX;
     this.positionY = pokemon.positionY;
+    this.setRangeType();
     this.setSize(50,50);
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
@@ -22,7 +24,7 @@ export default class Pokemon extends GameObjects.Container {
   attackAnimation(){
     this.projectile = this.scene.add.sprite(this.positionX * 100 +330, 710 - 80 * this.positionY, "attacks","GRASS/000");
     this.projectile.setScale(3,3);
-    this.projectile.anims.play('grass');
+    this.projectile.anims.play(`${this.rangeType}/${this.type}`);
     this.addTween();
   }
 
@@ -113,5 +115,14 @@ export default class Pokemon extends GameObjects.Container {
       speed: 300,
       rotateToTarget: false
   });
+  }
+
+  setRangeType(){
+    if(this.range > 1){
+      this.rangeType = "range";
+    }
+    else{
+      this.rangeType = "melee";
+    }
   }
 }
