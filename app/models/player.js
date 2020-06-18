@@ -1,7 +1,7 @@
 const schema = require("@colyseus/schema");
 const Pokemon = require("./pokemon").Pokemon;
 const ExperienceManager = require("./experience-manager");
-const Simulation = require('../core/Simulation');
+const Simulation = require('../core/simulation');
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 

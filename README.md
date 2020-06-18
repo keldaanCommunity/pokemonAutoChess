@@ -16,7 +16,7 @@ Pick the pokémon you like in the following list:
 ★ Cleffa - Clefairy - Clefable
 ★ Igglybuff - Jigglypuff - Wigglytuff
 ★ Zubat - Golbat - Crobat
-★ Geodude - Graveler - Golem
+★ Graveler - Golem
 ★ Azurill - Marill - Azumarill
 ★ Mareep - Flaaffy - Ampharos
 ★ Hoppip - Skiploom - Jumpluff

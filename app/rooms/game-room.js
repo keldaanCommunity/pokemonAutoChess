@@ -6,7 +6,7 @@ const Shop = require("../models/shop");
 const Pokemon = require("../models/pokemon");
 const PokemonFactory = require("../models/pokemon-factory");
 const STATE = require("../models/enum").STATE;
-const Simulation = require('../core/Simulation');
+const Simulation = require('../core/simulation');
 
 class GameState extends schema.Schema {
   constructor() {
