@@ -29,6 +29,7 @@ In the "12" folder create 2 subfolder :
 
     - "0" for moving sprites
     - "1" for attacking sprites
+    - Add a portrait.png of the pokemon, representing the face of the pokemon
 
 For both subfolder, create 4 subfolder:
 
