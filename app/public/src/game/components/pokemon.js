@@ -22,9 +22,19 @@ export default class Pokemon extends GameObjects.Container {
   }
 
   attackAnimation(){
-    this.projectile = this.scene.add.sprite(this.positionX * 100 +330, 710 - 80 * this.positionY, "attacks","GRASS/000");
+    let x;
+    let y;
+    if(this.range > 1){
+      x = this.positionX;
+      y = this.positionY;
+    }
+    else{
+      x = this.targetX;
+      y = this.targetY;
+    }
+    this.projectile = this.scene.add.sprite(x * 100 +330, 710 - 80 * y, "attacks",`${this.type}/${this.rangeType}/000`);
     this.projectile.setScale(3,3);
-    this.projectile.anims.play(`${this.rangeType}/${this.type}`);
+    this.projectile.anims.play(`${this.type}/${this.rangeType}`);
     this.addTween();
   }
 

@@ -36,18 +36,25 @@ export default class AnimationManager {
 
   createAttacksAnimations(){
     this.game.anims.create({
-      key: `range/GRASS`,
-      frames: this.game.anims.generateFrameNames("attacks", {start:0, end:10, zeroPad: 3, prefix: "GRASS/" }),
+      key: `GRASS/range`,
+      frames: this.game.anims.generateFrameNames("attacks", {start:0, end:10, zeroPad: 3, prefix: "GRASS/range/" }),
       frameRate: 8,
       repeat: -1
     });
 
     this.game.anims.create({
-      key: `range/WATER`,
-      frames: this.game.anims.generateFrameNames("attacks", {start:0, end:18, zeroPad: 3, prefix: "WATER/" }),
+      key: `WATER/range`,
+      frames: this.game.anims.generateFrameNames("attacks", {start:0, end:18, zeroPad: 3, prefix: "WATER/range/" }),
       frameRate: 8,
       repeat: -1
     });
+    
+    this.game.anims.create({
+      key:`FIRE/melee`,
+      frames: this.game.anims.generateFrameNames("attacks",{start:0, end:8, zeroPad: 3, prefix: "FIRE/melee/" }),
+      frameRate:8,
+      repeat: -1
+  });
   }
 
   createAnimations(index) {
