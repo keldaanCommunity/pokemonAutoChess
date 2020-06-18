@@ -113,7 +113,9 @@ class GameRoom extends colyseus.Room {
   computeLife(){
     for (let id in this.state.players) {
       let player = this.state.players[id];
-      //TODO compute lifes after rounds
+      if(Object.keys(player.simulation.blueTeam).length == 0){
+        player.life = Math.max(0, player.life - 1);
+      }
     }
   }
 
