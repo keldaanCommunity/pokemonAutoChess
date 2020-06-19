@@ -8,8 +8,27 @@ class GamePage {
     window.transformCoordinate = function(x,y){
       return [x * 100 + 330, 790 - 80 * y];
     }
+    window.getAttackScale = function(attackSprite){
+      switch (attackSprite) {
+        case "GRASS/range":
+          return [3,3];
+        
+        case "WATER/range":
+          return [3,3];
+
+        case "FIRE/melee":
+          return [2,2];
+        
+        case "ROCK/melee":
+          return [2,2];
+        
+        default:
+          return [3,3];
+      }
+    }
     this.game = new GameContainer(this.room, this.container);
-  }
+  };
+
 
   render() {
     var content = document.createElement("div");

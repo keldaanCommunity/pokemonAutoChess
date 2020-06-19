@@ -8,7 +8,7 @@ class Shop {
   }
 
   assignShop(player) {
-    let potentialPokemons = ["bulbasaur", "charmander", "squirtle"];
+    let potentialPokemons = ["bulbasaur", "charmander", "squirtle", "geodude", "azurill"];
     for (let i = 0; i < 5; i++) {
       let pokemon = PokemonFactory.createPokemonFromName(potentialPokemons[Math.round(Math.random() * (potentialPokemons.length - 1))]);
       player.shop[pokemon.id] = pokemon;

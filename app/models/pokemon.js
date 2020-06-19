@@ -5,8 +5,8 @@ const schema = require("@colyseus/schema");
 const Schema = schema.Schema;
 const uniqid = require("uniqid");
 
-class Pokemon extends schema.Schema {
-  constructor(name, type, rarity, index, evolution, hp, atk, range) {
+class Pokemon extends Schema {
+  constructor(name, type, rarity, index, evolution, hp, atk, range, attackSprite) {
     super();
     this.id = uniqid();
     this.name = name;
@@ -20,6 +20,7 @@ class Pokemon extends schema.Schema {
     this.hp = hp;
     this.atk = atk;
     this.range = range;
+    this.attackSprite = attackSprite;
   }
 
   setPosition(x, y) {
@@ -34,57 +35,94 @@ class Pokemon extends schema.Schema {
 
 class Bulbasaur extends Pokemon {
   constructor() {
-    super("bulbasaur", TYPE.GRASS, RARITY.COMMON, 1, "ivysaur", 10, 1, 3);
+    super("bulbasaur", TYPE.GRASS, RARITY.COMMON, 1, "ivysaur", 10, 1, 3, "GRASS/range");
   }
 }
 
 class Ivysaur extends Pokemon {
   constructor() {
-    super("ivysaur", TYPE.GRASS, RARITY.COMMON, 2, "venusaur", 20, 2, 3);
+    super("ivysaur", TYPE.GRASS, RARITY.COMMON, 2, "venusaur", 20, 2, 3, "GRASS/range");
   }
 }
 
 class Venusaur extends Pokemon {
   constructor() {
-    super("venusaur", TYPE.GRASS, RARITY.COMMON, 3, "", 30, 3, 3);
+    super("venusaur", TYPE.GRASS, RARITY.COMMON, 3, "", 30, 3, 3, "GRASS/range");
   }
 }
 
 class Charmander extends Pokemon {
   constructor() {
-    super("charmander", TYPE.FIRE, RARITY.COMMON, 4, "charmeleon", 10, 1, 1);
+    super("charmander", TYPE.FIRE, RARITY.COMMON, 4, "charmeleon", 10, 1, 1, "FIRE/melee");
   }
 }
 
 class Charmeleon extends Pokemon {
   constructor() {
-    super("charmeleon", TYPE.FIRE, RARITY.COMMON, 5, "charizard", 20, 2, 1);
+    super("charmeleon", TYPE.FIRE, RARITY.COMMON, 5, "charizard", 20, 2, 1, "FIRE/melee");
   }
 }
 
 class Charizard extends Pokemon {
   constructor() {
-    super("charizard", TYPE.FIRE, RARITY.COMMON, 6, "", 30, 3, 1);
+    super("charizard", TYPE.FIRE, RARITY.COMMON, 6, "", 30, 3, 1, "FIRE/melee");
   }
 }
 
 class Squirtle extends Pokemon {
   constructor() {
-    super("squirtle", TYPE.WATER, RARITY.COMMON, 7, "wartortle", 10, 1, 2);
+    super("squirtle", TYPE.WATER, RARITY.COMMON, 7, "wartortle", 10, 1, 2, "WATER/range");
   }
 }
 
 class Wartortle extends Pokemon {
   constructor() {
-    super("charmeleon", TYPE.WATER, RARITY.COMMON, 8, "blastoise", 20 ,2, 2);
+    super("charmeleon", TYPE.WATER, RARITY.COMMON, 8, "blastoise", 20 ,2, 2, "WATER/range");
   }
 }
 
 class Blastoise extends Pokemon {
   constructor() {
-    super("charizard", TYPE.WATER, RARITY.COMMON, 9, "", 30, 3, 2);
+    super("charizard", TYPE.WATER, RARITY.COMMON, 9, "", 30, 3, 2, "WATER/range");
   }
 }
+
+class Geodude extends Pokemon {
+  constructor() {
+    super("geodude", TYPE.ROCK, RARITY.COMMON, 74, "graveler", 10, 1, 1, "ROCK/melee");
+  }
+}
+
+class Graveler extends Pokemon {
+  constructor() {
+    super("graveler", TYPE.ROCK, RARITY.COMMON, 75, "golem", 20 ,2, 1, "ROCK/melee");
+  }
+}
+
+class Golem extends Pokemon {
+  constructor() {
+    super("golem", TYPE.ROCK, RARITY.COMMON, 976, "", 30, 3, 1, "ROCK/melee");
+  }
+}
+
+class Azurill extends Pokemon {
+  constructor() {
+    super("azurill", TYPE.WATER, RARITY.COMMON, 298, "marill", 10, 1, 2, "WATER/range");
+  }
+}
+
+class Marill extends Pokemon {
+  constructor() {
+    super("marill", TYPE.WATER, RARITY.COMMON, 183, "azumarill", 20 ,2, 2, "WATER/range");
+  }
+}
+
+class Azumarill extends Pokemon {
+  constructor() {
+    super("azumarill", TYPE.WATER, RARITY.COMMON, 184, "", 30, 3, 2, "WATER/range");
+  }
+}
+
 
 schema.defineTypes(Pokemon, {
   id: "string",
@@ -95,7 +133,8 @@ schema.defineTypes(Pokemon, {
   evolution: "string",
   positionX: "number",
   positionY: "number",
-  cost: "number"
+  cost: "number",
+  attackSprite: "string"
 });
 
-module.exports = { Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Pokemon };
+module.exports = { Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Geodude, Graveler, Golem, Azurill, Marill, Azumarill, Pokemon };

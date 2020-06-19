@@ -11,7 +11,7 @@ const Simulation = require('../core/simulation');
 class GameState extends schema.Schema {
   constructor() {
     super();
-    this.time = 5000;
+    this.time = 15000;
     this.roundTime = Math.round(this.time/1000);
     this.phase = STATE.PICK;
     this.players = new schema.MapSchema();
@@ -148,7 +148,7 @@ class GameRoom extends colyseus.Room {
 
   initializePickingPhase() {
     this.state.phase = STATE.PICK;
-    this.state.time = 5000;
+    this.state.time = 15000;
     for (let id in this.state.players) {
       let player = this.state.players[id];
       player.simulation.stop();

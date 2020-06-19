@@ -12,6 +12,7 @@ export default class Pokemon extends GameObjects.Container {
     this.targetY = null;
     this.positionX = pokemon.positionX;
     this.positionY = pokemon.positionY;
+    this.attackSprite = pokemon.attackSprite;
     this.setRangeType();
     this.setSize(50,50);
     this.setMovingFunction(scene);
@@ -32,9 +33,10 @@ export default class Pokemon extends GameObjects.Container {
       x = this.targetX;
       y = this.targetY;
     }
-    this.projectile = this.scene.add.sprite(x * 100 +330, 710 - 80 * y, "attacks",`${this.type}/${this.rangeType}/000`);
-    this.projectile.setScale(3,3);
-    this.projectile.anims.play(`${this.type}/${this.rangeType}`);
+    this.projectile = this.scene.add.sprite(x * 100 +330, 710 - 80 * y, "attacks",`${this.attackSprite}/000`);
+    let scale = window.getAttackScale(this.attackSprite);
+    this.projectile.setScale(scale[0], scale[1]);
+    this.projectile.anims.play(`${this.attackSprite}`);
     this.addTween();
   }
 
@@ -66,7 +68,17 @@ export default class Pokemon extends GameObjects.Container {
 
   replayAnimations(){
     if(this.first){
-      this.projectile.setPosition(this.positionX * 100 +330, 710 - 80 * this.positionY);
+      let x;
+      let y;
+      if(this.range > 1){
+        x = this.positionX;
+        y = this.positionY;
+      }
+      else{
+        x = this.targetX;
+        y = this.targetY;
+      }
+      this.projectile.setPosition(x * 100 +330, 710 - 80 * y);
       this.projectile.setVisible(true);
       this.addTween();
     }

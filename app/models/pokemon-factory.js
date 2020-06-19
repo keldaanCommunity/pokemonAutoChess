@@ -21,6 +21,18 @@ class PokemonFactory {
         return new Pokemon.Wartortle();
       case "blastoise":
         return new Pokemon.Blastoise();
+      case "geodude":
+        return new Pokemon.Geodude();
+      case "graveler":
+        return new Pokemon.Graveler();
+      case "golem":
+        return new Pokemon.Golem();
+      case "azurill":
+        return new Pokemon.Azurill();
+      case "marill":
+        return new Pokemon.Marill();
+      case "Azumarill":
+        return new Pokemon.Azumarill();
       default:
         break;
     }
