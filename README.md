@@ -15,7 +15,6 @@ Pick the pokémon you like in the following list:
 ★ Pidgey - Pidgeotto - Pidgeot
 ★ Cleffa - Clefairy - Clefable
 ★ Igglybuff - Jigglypuff - Wigglytuff
-★ Zubat - Golbat - Crobat
 ★ Mareep - Flaaffy - Ampharos
 ★ Hoppip - Skiploom - Jumpluff
 ★ Seedot - Nuzleaf - Shiftry

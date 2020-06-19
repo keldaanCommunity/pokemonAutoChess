@@ -33,6 +33,12 @@ class PokemonFactory {
         return new Pokemon.Marill();
       case "Azumarill":
         return new Pokemon.Azumarill();
+      case "zubat":
+        return new Pokemon.Zubat();
+      case "golbat":
+        return new Pokemon.Golbat();
+      case "crobat":
+        return new Pokemon.Crobat();
       default:
         break;
     }

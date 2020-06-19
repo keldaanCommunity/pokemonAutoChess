@@ -123,6 +123,24 @@ class Azumarill extends Pokemon {
   }
 }
 
+class Zubat extends Pokemon {
+  constructor() {
+    super("zubat", TYPE.POISON, RARITY.COMMON, 41, "golbat", 10, 1, 4, "POISON/range");
+  }
+}
+
+class Golbat extends Pokemon {
+  constructor() {
+    super("golbat", TYPE.POISON, RARITY.COMMON, 42, "Crobat", 20 ,2, 4, "POISON/range");
+  }
+}
+
+class Crobat extends Pokemon {
+  constructor() {
+    super("crobat", TYPE.POISON, RARITY.COMMON, 169, "", 30, 3, 4, "POISON/range");
+  }
+}
+
 
 schema.defineTypes(Pokemon, {
   id: "string",
@@ -137,4 +155,4 @@ schema.defineTypes(Pokemon, {
   attackSprite: "string"
 });
 
-module.exports = { Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Geodude, Graveler, Golem, Azurill, Marill, Azumarill, Pokemon };
+module.exports = { Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Geodude, Graveler, Golem, Azurill, Marill, Azumarill, Zubat, Golbat, Crobat, Pokemon };

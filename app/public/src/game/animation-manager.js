@@ -28,7 +28,7 @@ export default class AnimationManager {
       "DOWNRIGHT": true
     };
 
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 74, 75, 76, 298, 183, 184].forEach(num => {
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 74, 75, 76, 298, 183, 184, 41 ,42, 169].forEach(num => {
       this.createAnimations(num);
     });
     this.createAttacksAnimations();
@@ -59,6 +59,13 @@ export default class AnimationManager {
     this.game.anims.create({
       key:`ROCK/melee`,
       frames: this.game.anims.generateFrameNames("attacks",{start:0, end:10, zeroPad: 3, prefix: "ROCK/melee/" }),
+      frameRate:8,
+      repeat: -1
+    })
+
+    this.game.anims.create({
+      key:`POISON/range`,
+      frames: this.game.anims.generateFrameNames("attacks",{start:0, end:38, zeroPad: 3, prefix: "POISON/range/" }),
       frameRate:8,
       repeat: -1
     })
