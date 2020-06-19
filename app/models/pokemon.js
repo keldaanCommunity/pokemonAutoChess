@@ -141,6 +141,23 @@ class Crobat extends Pokemon {
   }
 }
 
+class Mareep extends Pokemon {
+  constructor() {
+    super("mareep", TYPE.ELECTRIC, RARITY.COMMON, 179, "flaffy", 10, 1, 2, "ELECTRIC/range");
+  }
+}
+
+class Flaffy extends Pokemon {
+  constructor() {
+    super("flaffy", TYPE.ELECTRIC, RARITY.COMMON, 180, "ampharos", 20 ,2, 2, "ELECTRIC/range");
+  }
+}
+
+class Ampharos extends Pokemon {
+  constructor() {
+    super("ampharos", TYPE.ELECTRIC, RARITY.COMMON, 181, "", 30, 3, 2, "ELECTRIC/range");
+  }
+}
 
 schema.defineTypes(Pokemon, {
   id: "string",
@@ -155,4 +172,4 @@ schema.defineTypes(Pokemon, {
   attackSprite: "string"
 });
 
-module.exports = { Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Geodude, Graveler, Golem, Azurill, Marill, Azumarill, Zubat, Golbat, Crobat, Pokemon };
+module.exports = { Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Geodude, Graveler, Golem, Azurill, Marill, Azumarill, Zubat, Golbat, Crobat, Mareep, Flaffy, Ampharos, Pokemon };

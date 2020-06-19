@@ -39,6 +39,12 @@ class PokemonFactory {
         return new Pokemon.Golbat();
       case "crobat":
         return new Pokemon.Crobat();
+      case "ampharos":
+        return new Pokemon.Ampharos();
+      case "mareep":
+        return new Pokemon.Mareep();
+      case "flaffy":
+        return new Pokemon.Flaffy;
       default:
         break;
     }

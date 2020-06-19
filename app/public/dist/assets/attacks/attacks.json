@@ -4,8 +4,8 @@
 			"image": "attacks.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 122,
-				"h": 491
+				"w": 128,
+				"h": 480
 			},
 			"scale": 1,
 			"frames": [
@@ -31,28 +31,7 @@
 					}
 				},
 				{
-					"filename": "ROCK/melee/004",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 72,
-						"h": 56
-					},
-					"spriteSourceSize": {
-						"x": 12,
-						"y": 3,
-						"w": 48,
-						"h": 44
-					},
-					"frame": {
-						"x": 73,
-						"y": 1,
-						"w": 48,
-						"h": 44
-					}
-				},
-				{
-					"filename": "FIRE/melee/002",
+					"filename": "FIRE/melee/003",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -60,16 +39,37 @@
 						"h": 72
 					},
 					"spriteSourceSize": {
-						"x": 10,
-						"y": 24,
-						"w": 47,
-						"h": 46
+						"x": 6,
+						"y": 16,
+						"w": 54,
+						"h": 50
 					},
 					"frame": {
 						"x": 73,
-						"y": 47,
-						"w": 47,
-						"h": 46
+						"y": 1,
+						"w": 54,
+						"h": 50
+					}
+				},
+				{
+					"filename": "ROCK/melee/005",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 72,
+						"h": 56
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 1,
+						"w": 54,
+						"h": 48
+					},
+					"frame": {
+						"x": 73,
+						"y": 53,
+						"w": 54,
+						"h": 48
 					}
 				},
 				{
@@ -115,24 +115,24 @@
 					}
 				},
 				{
-					"filename": "FIRE/melee/003",
+					"filename": "ROCK/melee/006",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 64,
-						"h": 72
+						"w": 72,
+						"h": 56
 					},
 					"spriteSourceSize": {
-						"x": 6,
-						"y": 16,
-						"w": 54,
-						"h": 50
+						"x": 7,
+						"y": 0,
+						"w": 59,
+						"h": 51
 					},
 					"frame": {
 						"x": 67,
-						"y": 95,
-						"w": 54,
-						"h": 50
+						"y": 103,
+						"w": 59,
+						"h": 51
 					}
 				},
 				{
@@ -157,24 +157,24 @@
 					}
 				},
 				{
-					"filename": "ROCK/melee/005",
+					"filename": "FIRE/melee/004",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 72,
-						"h": 56
+						"w": 64,
+						"h": 72
 					},
 					"spriteSourceSize": {
-						"x": 9,
-						"y": 1,
-						"w": 54,
-						"h": 48
+						"x": 4,
+						"y": 10,
+						"w": 57,
+						"h": 52
 					},
 					"frame": {
 						"x": 67,
-						"y": 147,
-						"w": 54,
-						"h": 48
+						"y": 156,
+						"w": 57,
+						"h": 52
 					}
 				},
 				{
@@ -199,7 +199,28 @@
 					}
 				},
 				{
-					"filename": "ROCK/melee/003",
+					"filename": "FIRE/melee/007",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 72
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 5,
+						"w": 61,
+						"h": 41
+					},
+					"frame": {
+						"x": 65,
+						"y": 210,
+						"w": 61,
+						"h": 41
+					}
+				},
+				{
+					"filename": "ROCK/melee/004",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -207,16 +228,79 @@
 						"h": 56
 					},
 					"spriteSourceSize": {
-						"x": 15,
-						"y": 6,
-						"w": 42,
-						"h": 40
+						"x": 12,
+						"y": 3,
+						"w": 48,
+						"h": 44
 					},
 					"frame": {
-						"x": 65,
-						"y": 197,
-						"w": 42,
-						"h": 40
+						"x": 1,
+						"y": 232,
+						"w": 48,
+						"h": 44
+					}
+				},
+				{
+					"filename": "ELECTRIC/range/001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 12,
+						"h": 12
+					},
+					"frame": {
+						"x": 51,
+						"y": 232,
+						"w": 12,
+						"h": 12
+					}
+				},
+				{
+					"filename": "ELECTRIC/range/003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 12,
+						"h": 12
+					},
+					"frame": {
+						"x": 51,
+						"y": 232,
+						"w": 12,
+						"h": 12
+					}
+				},
+				{
+					"filename": "ELECTRIC/range/005",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 12,
+						"h": 12
+					},
+					"frame": {
+						"x": 51,
+						"y": 232,
+						"w": 12,
+						"h": 12
 					}
 				},
 				{
@@ -234,10 +318,31 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 109,
-						"y": 197,
+						"x": 51,
+						"y": 246,
 						"w": 12,
 						"h": 12
+					}
+				},
+				{
+					"filename": "FIRE/melee/002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 72
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 24,
+						"w": 47,
+						"h": 46
+					},
+					"frame": {
+						"x": 65,
+						"y": 253,
+						"w": 47,
+						"h": 46
 					}
 				},
 				{
@@ -255,52 +360,94 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 109,
-						"y": 211,
+						"x": 51,
+						"y": 260,
 						"w": 12,
 						"h": 12
 					}
 				},
 				{
-					"filename": "FIRE/melee/007",
+					"filename": "FIRE/range/004",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 64,
-						"h": 72
+						"w": 16,
+						"h": 16
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 5,
-						"w": 61,
-						"h": 41
+						"x": 3,
+						"y": 1,
+						"w": 13,
+						"h": 11
 					},
 					"frame": {
-						"x": 1,
-						"y": 232,
-						"w": 61,
-						"h": 41
+						"x": 114,
+						"y": 253,
+						"w": 13,
+						"h": 11
 					}
 				},
 				{
-					"filename": "FIRE/melee/004",
+					"filename": "FIRE/range/001",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 64,
-						"h": 72
+						"w": 16,
+						"h": 16
 					},
 					"spriteSourceSize": {
-						"x": 4,
-						"y": 10,
-						"w": 57,
-						"h": 52
+						"x": 0,
+						"y": 4,
+						"w": 13,
+						"h": 10
 					},
 					"frame": {
-						"x": 64,
-						"y": 239,
-						"w": 57,
-						"h": 52
+						"x": 114,
+						"y": 266,
+						"w": 13,
+						"h": 10
+					}
+				},
+				{
+					"filename": "FIRE/range/003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 13,
+						"h": 10
+					},
+					"frame": {
+						"x": 114,
+						"y": 278,
+						"w": 13,
+						"h": 10
+					}
+				},
+				{
+					"filename": "FIRE/range/007",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 5,
+						"w": 13,
+						"h": 10
+					},
+					"frame": {
+						"x": 114,
+						"y": 290,
+						"w": 13,
+						"h": 10
 					}
 				},
 				{
@@ -318,14 +465,14 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 109,
-						"y": 225,
+						"x": 51,
+						"y": 274,
 						"w": 11,
 						"h": 12
 					}
 				},
 				{
-					"filename": "ROCK/melee/006",
+					"filename": "ROCK/melee/003",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -333,16 +480,100 @@
 						"h": 56
 					},
 					"spriteSourceSize": {
-						"x": 7,
-						"y": 0,
-						"w": 59,
-						"h": 51
+						"x": 15,
+						"y": 6,
+						"w": 42,
+						"h": 40
 					},
 					"frame": {
 						"x": 1,
-						"y": 275,
-						"w": 59,
-						"h": 51
+						"y": 278,
+						"w": 42,
+						"h": 40
+					}
+				},
+				{
+					"filename": "POISON/range/003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 7,
+						"w": 18,
+						"h": 18
+					},
+					"frame": {
+						"x": 45,
+						"y": 288,
+						"w": 18,
+						"h": 18
+					}
+				},
+				{
+					"filename": "POISON/range/012",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 7,
+						"w": 18,
+						"h": 18
+					},
+					"frame": {
+						"x": 45,
+						"y": 288,
+						"w": 18,
+						"h": 18
+					}
+				},
+				{
+					"filename": "POISON/range/021",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 7,
+						"w": 18,
+						"h": 18
+					},
+					"frame": {
+						"x": 45,
+						"y": 288,
+						"w": 18,
+						"h": 18
+					}
+				},
+				{
+					"filename": "POISON/range/030",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 7,
+						"w": 18,
+						"h": 18
+					},
+					"frame": {
+						"x": 45,
+						"y": 288,
+						"w": 18,
+						"h": 18
 					}
 				},
 				{
@@ -360,10 +591,388 @@
 						"h": 34
 					},
 					"frame": {
-						"x": 62,
-						"y": 293,
+						"x": 65,
+						"y": 301,
 						"w": 34,
 						"h": 34
+					}
+				},
+				{
+					"filename": "POISON/range/007",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 26,
+						"h": 26
+					},
+					"frame": {
+						"x": 101,
+						"y": 302,
+						"w": 26,
+						"h": 26
+					}
+				},
+				{
+					"filename": "POISON/range/016",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 26,
+						"h": 26
+					},
+					"frame": {
+						"x": 101,
+						"y": 302,
+						"w": 26,
+						"h": 26
+					}
+				},
+				{
+					"filename": "POISON/range/025",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 26,
+						"h": 26
+					},
+					"frame": {
+						"x": 101,
+						"y": 302,
+						"w": 26,
+						"h": 26
+					}
+				},
+				{
+					"filename": "POISON/range/034",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 26,
+						"h": 26
+					},
+					"frame": {
+						"x": 101,
+						"y": 302,
+						"w": 26,
+						"h": 26
+					}
+				},
+				{
+					"filename": "FIRE/melee/000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 72
+					},
+					"spriteSourceSize": {
+						"x": 19,
+						"y": 46,
+						"w": 26,
+						"h": 23
+					},
+					"frame": {
+						"x": 101,
+						"y": 330,
+						"w": 26,
+						"h": 23
+					}
+				},
+				{
+					"filename": "ROCK/melee/000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 72,
+						"h": 56
+					},
+					"spriteSourceSize": {
+						"x": 27,
+						"y": 24,
+						"w": 18,
+						"h": 15
+					},
+					"frame": {
+						"x": 45,
+						"y": 308,
+						"w": 18,
+						"h": 15
+					}
+				},
+				{
+					"filename": "ROCK/melee/002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 72,
+						"h": 56
+					},
+					"spriteSourceSize": {
+						"x": 19,
+						"y": 10,
+						"w": 34,
+						"h": 33
+					},
+					"frame": {
+						"x": 1,
+						"y": 320,
+						"w": 34,
+						"h": 33
+					}
+				},
+				{
+					"filename": "ROCK/melee/001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 72,
+						"h": 56
+					},
+					"spriteSourceSize": {
+						"x": 23,
+						"y": 16,
+						"w": 25,
+						"h": 25
+					},
+					"frame": {
+						"x": 37,
+						"y": 325,
+						"w": 25,
+						"h": 25
+					}
+				},
+				{
+					"filename": "POISON/range/009",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 64,
+						"y": 337,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "POISON/range/018",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 64,
+						"y": 337,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "POISON/range/027",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 64,
+						"y": 337,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "POISON/range/006",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 4,
+						"w": 24,
+						"h": 24
+					},
+					"frame": {
+						"x": 37,
+						"y": 352,
+						"w": 24,
+						"h": 24
+					}
+				},
+				{
+					"filename": "POISON/range/015",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 4,
+						"w": 24,
+						"h": 24
+					},
+					"frame": {
+						"x": 37,
+						"y": 352,
+						"w": 24,
+						"h": 24
+					}
+				},
+				{
+					"filename": "POISON/range/024",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 4,
+						"w": 24,
+						"h": 24
+					},
+					"frame": {
+						"x": 37,
+						"y": 352,
+						"w": 24,
+						"h": 24
+					}
+				},
+				{
+					"filename": "POISON/range/033",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 4,
+						"w": 24,
+						"h": 24
+					},
+					"frame": {
+						"x": 37,
+						"y": 352,
+						"w": 24,
+						"h": 24
+					}
+				},
+				{
+					"filename": "POISON/range/010",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 355,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "POISON/range/019",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 355,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "POISON/range/028",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 355,
+						"w": 32,
+						"h": 32
 					}
 				},
 				{
@@ -382,7 +991,7 @@
 					},
 					"frame": {
 						"x": 98,
-						"y": 293,
+						"y": 355,
 						"w": 22,
 						"h": 22
 					}
@@ -403,7 +1012,7 @@
 					},
 					"frame": {
 						"x": 98,
-						"y": 293,
+						"y": 355,
 						"w": 22,
 						"h": 22
 					}
@@ -424,7 +1033,7 @@
 					},
 					"frame": {
 						"x": 98,
-						"y": 293,
+						"y": 355,
 						"w": 22,
 						"h": 22
 					}
@@ -445,282 +1054,9 @@
 					},
 					"frame": {
 						"x": 98,
-						"y": 293,
+						"y": 355,
 						"w": 22,
 						"h": 22
-					}
-				},
-				{
-					"filename": "POISON/range/004",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 6,
-						"w": 20,
-						"h": 20
-					},
-					"frame": {
-						"x": 98,
-						"y": 317,
-						"w": 20,
-						"h": 20
-					}
-				},
-				{
-					"filename": "POISON/range/013",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 6,
-						"w": 20,
-						"h": 20
-					},
-					"frame": {
-						"x": 98,
-						"y": 317,
-						"w": 20,
-						"h": 20
-					}
-				},
-				{
-					"filename": "POISON/range/022",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 6,
-						"w": 20,
-						"h": 20
-					},
-					"frame": {
-						"x": 98,
-						"y": 317,
-						"w": 20,
-						"h": 20
-					}
-				},
-				{
-					"filename": "POISON/range/031",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 6,
-						"w": 20,
-						"h": 20
-					},
-					"frame": {
-						"x": 98,
-						"y": 317,
-						"w": 20,
-						"h": 20
-					}
-				},
-				{
-					"filename": "ROCK/melee/002",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 72,
-						"h": 56
-					},
-					"spriteSourceSize": {
-						"x": 19,
-						"y": 10,
-						"w": 34,
-						"h": 33
-					},
-					"frame": {
-						"x": 1,
-						"y": 328,
-						"w": 34,
-						"h": 33
-					}
-				},
-				{
-					"filename": "POISON/range/003",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 7,
-						"y": 7,
-						"w": 18,
-						"h": 18
-					},
-					"frame": {
-						"x": 37,
-						"y": 328,
-						"w": 18,
-						"h": 18
-					}
-				},
-				{
-					"filename": "POISON/range/012",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 7,
-						"y": 7,
-						"w": 18,
-						"h": 18
-					},
-					"frame": {
-						"x": 37,
-						"y": 328,
-						"w": 18,
-						"h": 18
-					}
-				},
-				{
-					"filename": "POISON/range/021",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 7,
-						"y": 7,
-						"w": 18,
-						"h": 18
-					},
-					"frame": {
-						"x": 37,
-						"y": 328,
-						"w": 18,
-						"h": 18
-					}
-				},
-				{
-					"filename": "POISON/range/030",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 7,
-						"y": 7,
-						"w": 18,
-						"h": 18
-					},
-					"frame": {
-						"x": 37,
-						"y": 328,
-						"w": 18,
-						"h": 18
-					}
-				},
-				{
-					"filename": "POISON/range/009",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 57,
-						"y": 329,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "POISON/range/018",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 57,
-						"y": 329,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "POISON/range/027",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 57,
-						"y": 329,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "FIRE/melee/008",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 72
-					},
-					"spriteSourceSize": {
-						"x": 17,
-						"y": 3,
-						"w": 30,
-						"h": 37
-					},
-					"frame": {
-						"x": 91,
-						"y": 339,
-						"w": 30,
-						"h": 37
 					}
 				},
 				{
@@ -738,178 +1074,10 @@
 						"h": 6
 					},
 					"frame": {
-						"x": 91,
-						"y": 329,
+						"x": 122,
+						"y": 355,
 						"w": 5,
 						"h": 6
-					}
-				},
-				{
-					"filename": "ROCK/melee/000",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 72,
-						"h": 56
-					},
-					"spriteSourceSize": {
-						"x": 27,
-						"y": 24,
-						"w": 18,
-						"h": 15
-					},
-					"frame": {
-						"x": 37,
-						"y": 348,
-						"w": 18,
-						"h": 15
-					}
-				},
-				{
-					"filename": "POISON/range/010",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 57,
-						"y": 363,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "POISON/range/019",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 57,
-						"y": 363,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "POISON/range/028",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 57,
-						"y": 363,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "POISON/range/008",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 1,
-						"w": 30,
-						"h": 30
-					},
-					"frame": {
-						"x": 91,
-						"y": 378,
-						"w": 30,
-						"h": 30
-					}
-				},
-				{
-					"filename": "POISON/range/017",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 1,
-						"w": 30,
-						"h": 30
-					},
-					"frame": {
-						"x": 91,
-						"y": 378,
-						"w": 30,
-						"h": 30
-					}
-				},
-				{
-					"filename": "POISON/range/026",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 1,
-						"w": 30,
-						"h": 30
-					},
-					"frame": {
-						"x": 91,
-						"y": 378,
-						"w": 30,
-						"h": 30
-					}
-				},
-				{
-					"filename": "POISON/range/035",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 1,
-						"w": 30,
-						"h": 30
-					},
-					"frame": {
-						"x": 91,
-						"y": 378,
-						"w": 30,
-						"h": 30
 					}
 				},
 				{
@@ -927,8 +1095,8 @@
 						"h": 32
 					},
 					"frame": {
-						"x": 1,
-						"y": 363,
+						"x": 63,
+						"y": 371,
 						"w": 32,
 						"h": 32
 					}
@@ -948,8 +1116,8 @@
 						"h": 32
 					},
 					"frame": {
-						"x": 1,
-						"y": 363,
+						"x": 63,
+						"y": 371,
 						"w": 32,
 						"h": 32
 					}
@@ -969,14 +1137,35 @@
 						"h": 32
 					},
 					"frame": {
-						"x": 1,
-						"y": 363,
+						"x": 63,
+						"y": 371,
 						"w": 32,
 						"h": 32
 					}
 				},
 				{
-					"filename": "POISON/range/002",
+					"filename": "FIRE/melee/008",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 72
+					},
+					"spriteSourceSize": {
+						"x": 17,
+						"y": 3,
+						"w": 30,
+						"h": 37
+					},
+					"frame": {
+						"x": 97,
+						"y": 379,
+						"w": 30,
+						"h": 37
+					}
+				},
+				{
+					"filename": "POISON/range/004",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -984,100 +1173,79 @@
 						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 8,
-						"y": 8,
-						"w": 16,
-						"h": 16
+						"x": 6,
+						"y": 6,
+						"w": 20,
+						"h": 20
 					},
 					"frame": {
 						"x": 35,
-						"y": 365,
-						"w": 16,
-						"h": 16
+						"y": 378,
+						"w": 20,
+						"h": 20
 					}
 				},
 				{
-					"filename": "GRASS/range/003",
+					"filename": "POISON/range/013",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
-						"h": 16
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 4,
-						"y": 3,
-						"w": 14,
-						"h": 11
+						"x": 6,
+						"y": 6,
+						"w": 20,
+						"h": 20
 					},
 					"frame": {
 						"x": 35,
-						"y": 383,
-						"w": 14,
-						"h": 11
+						"y": 378,
+						"w": 20,
+						"h": 20
 					}
 				},
 				{
-					"filename": "GRASS/range/004",
+					"filename": "POISON/range/022",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
-						"h": 16
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 3,
-						"y": 4,
-						"w": 14,
-						"h": 11
+						"x": 6,
+						"y": 6,
+						"w": 20,
+						"h": 20
 					},
 					"frame": {
 						"x": 35,
-						"y": 383,
-						"w": 14,
-						"h": 11
+						"y": 378,
+						"w": 20,
+						"h": 20
 					}
 				},
 				{
-					"filename": "GRASS/range/013",
+					"filename": "POISON/range/031",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
-						"h": 16
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 7,
-						"y": 3,
-						"w": 14,
-						"h": 11
+						"x": 6,
+						"y": 6,
+						"w": 20,
+						"h": 20
 					},
 					"frame": {
 						"x": 35,
-						"y": 396,
-						"w": 14,
-						"h": 11
-					}
-				},
-				{
-					"filename": "GRASS/range/014",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 8,
-						"y": 3,
-						"w": 14,
-						"h": 11
-					},
-					"frame": {
-						"x": 35,
-						"y": 396,
-						"w": 14,
-						"h": 11
+						"y": 378,
+						"w": 20,
+						"h": 20
 					}
 				},
 				{
@@ -1096,324 +1264,30 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 397,
+						"y": 389,
 						"w": 32,
 						"h": 32
 					}
 				},
 				{
-					"filename": "POISON/range/037",
+					"filename": "ELECTRIC/range/000",
 					"rotated": false,
 					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 51,
-						"y": 397,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "FIRE/range/008",
-					"rotated": false,
-					"trimmed": true,
 					"sourceSize": {
 						"w": 16,
 						"h": 16
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 5,
-						"w": 14,
-						"h": 9
-					},
-					"frame": {
-						"x": 35,
-						"y": 409,
-						"w": 14,
-						"h": 9
-					}
-				},
-				{
-					"filename": "GRASS/range/002",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 5,
-						"y": 3,
-						"w": 14,
-						"h": 8
-					},
-					"frame": {
-						"x": 35,
-						"y": 420,
-						"w": 14,
-						"h": 8
-					}
-				},
-				{
-					"filename": "GRASS/range/012",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 5,
-						"y": 4,
-						"w": 14,
-						"h": 8
-					},
-					"frame": {
-						"x": 35,
-						"y": 430,
-						"w": 14,
-						"h": 8
-					}
-				},
-				{
-					"filename": "POISON/range/038",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
 						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 1,
-						"y": 431,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "ROCK/melee/001",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 72,
-						"h": 56
-					},
-					"spriteSourceSize": {
-						"x": 23,
-						"y": 16,
-						"w": 25,
-						"h": 25
-					},
-					"frame": {
-						"x": 1,
-						"y": 465,
-						"w": 25,
-						"h": 25
-					}
-				},
-				{
-					"filename": "POISON/range/006",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 4,
-						"w": 24,
-						"h": 24
-					},
-					"frame": {
-						"x": 28,
-						"y": 465,
-						"w": 24,
-						"h": 24
-					}
-				},
-				{
-					"filename": "POISON/range/015",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 4,
-						"w": 24,
-						"h": 24
-					},
-					"frame": {
-						"x": 28,
-						"y": 465,
-						"w": 24,
-						"h": 24
-					}
-				},
-				{
-					"filename": "POISON/range/024",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 4,
-						"w": 24,
-						"h": 24
-					},
-					"frame": {
-						"x": 28,
-						"y": 465,
-						"w": 24,
-						"h": 24
-					}
-				},
-				{
-					"filename": "POISON/range/033",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 4,
-						"w": 24,
-						"h": 24
-					},
-					"frame": {
-						"x": 28,
-						"y": 465,
-						"w": 24,
-						"h": 24
-					}
-				},
-				{
-					"filename": "FIRE/melee/000",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 72
-					},
-					"spriteSourceSize": {
-						"x": 19,
-						"y": 46,
-						"w": 26,
-						"h": 23
+						"w": 16,
+						"h": 16
 					},
 					"frame": {
 						"x": 35,
-						"y": 440,
-						"w": 26,
-						"h": 23
-					}
-				},
-				{
-					"filename": "POISON/range/007",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 3,
-						"w": 26,
-						"h": 26
-					},
-					"frame": {
-						"x": 85,
-						"y": 410,
-						"w": 26,
-						"h": 26
-					}
-				},
-				{
-					"filename": "POISON/range/016",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 3,
-						"w": 26,
-						"h": 26
-					},
-					"frame": {
-						"x": 85,
-						"y": 410,
-						"w": 26,
-						"h": 26
-					}
-				},
-				{
-					"filename": "POISON/range/025",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 3,
-						"w": 26,
-						"h": 26
-					},
-					"frame": {
-						"x": 85,
-						"y": 410,
-						"w": 26,
-						"h": 26
-					}
-				},
-				{
-					"filename": "POISON/range/034",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 3,
-						"w": 26,
-						"h": 26
-					},
-					"frame": {
-						"x": 85,
-						"y": 410,
-						"w": 26,
-						"h": 26
+						"y": 400,
+						"w": 16,
+						"h": 16
 					}
 				},
 				{
@@ -1431,8 +1305,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
 					}
@@ -1452,8 +1326,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
 					}
@@ -1473,8 +1347,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
 					}
@@ -1494,8 +1368,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
 					}
@@ -1515,8 +1389,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
 					}
@@ -1536,8 +1410,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
 					}
@@ -1557,8 +1431,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
 					}
@@ -1578,8 +1452,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
 					}
@@ -1599,8 +1473,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
 					}
@@ -1620,8 +1494,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
 					}
@@ -1641,8 +1515,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
 					}
@@ -1662,10 +1536,115 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 410,
+						"x": 53,
+						"y": 400,
 						"w": 8,
 						"h": 8
+					}
+				},
+				{
+					"filename": "POISON/range/037",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 63,
+						"y": 405,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "POISON/range/008",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 30,
+						"h": 30
+					},
+					"frame": {
+						"x": 97,
+						"y": 418,
+						"w": 30,
+						"h": 30
+					}
+				},
+				{
+					"filename": "POISON/range/017",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 30,
+						"h": 30
+					},
+					"frame": {
+						"x": 97,
+						"y": 418,
+						"w": 30,
+						"h": 30
+					}
+				},
+				{
+					"filename": "POISON/range/026",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 30,
+						"h": 30
+					},
+					"frame": {
+						"x": 97,
+						"y": 418,
+						"w": 30,
+						"h": 30
+					}
+				},
+				{
+					"filename": "POISON/range/035",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 30,
+						"h": 30
+					},
+					"frame": {
+						"x": 97,
+						"y": 418,
+						"w": 30,
+						"h": 30
 					}
 				},
 				{
@@ -1683,8 +1662,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 420,
+						"x": 53,
+						"y": 410,
 						"w": 8,
 						"h": 8
 					}
@@ -1704,8 +1683,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 420,
+						"x": 53,
+						"y": 410,
 						"w": 8,
 						"h": 8
 					}
@@ -1725,10 +1704,52 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 420,
+						"x": 53,
+						"y": 410,
 						"w": 8,
 						"h": 8
+					}
+				},
+				{
+					"filename": "ELECTRIC/range/002",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 35,
+						"y": 418,
+						"w": 16,
+						"h": 16
+					}
+				},
+				{
+					"filename": "POISON/range/038",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 423,
+						"w": 32,
+						"h": 32
 					}
 				},
 				{
@@ -1746,8 +1767,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 430,
+						"x": 53,
+						"y": 420,
 						"w": 8,
 						"h": 8
 					}
@@ -1767,8 +1788,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 430,
+						"x": 53,
+						"y": 420,
 						"w": 8,
 						"h": 8
 					}
@@ -1788,8 +1809,8 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 430,
+						"x": 53,
+						"y": 420,
 						"w": 8,
 						"h": 8
 					}
@@ -1809,31 +1830,52 @@
 						"h": 8
 					},
 					"frame": {
-						"x": 113,
-						"y": 430,
+						"x": 53,
+						"y": 420,
 						"w": 8,
 						"h": 8
 					}
 				},
 				{
-					"filename": "FIRE/range/004",
+					"filename": "ELECTRIC/range/004",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 16,
 						"h": 16
 					},
 					"spriteSourceSize": {
-						"x": 3,
-						"y": 1,
-						"w": 13,
-						"h": 11
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 16
 					},
 					"frame": {
-						"x": 63,
-						"y": 431,
-						"w": 13,
-						"h": 11
+						"x": 1,
+						"y": 457,
+						"w": 16,
+						"h": 16
+					}
+				},
+				{
+					"filename": "POISON/range/002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 8,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 19,
+						"y": 457,
+						"w": 16,
+						"h": 16
 					}
 				},
 				{
@@ -1851,29 +1893,29 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 54,
-						"y": 465,
+						"x": 35,
+						"y": 439,
 						"w": 11,
 						"h": 12
 					}
 				},
 				{
-					"filename": "FIRE/range/001",
+					"filename": "GRASS/range/001",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 16,
+						"w": 24,
 						"h": 16
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 4,
+						"x": 7,
+						"y": 2,
 						"w": 13,
 						"h": 10
 					},
 					"frame": {
-						"x": 54,
-						"y": 479,
+						"x": 48,
+						"y": 436,
 						"w": 13,
 						"h": 10
 					}
@@ -1893,8 +1935,8 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 63,
-						"y": 444,
+						"x": 37,
+						"y": 453,
 						"w": 11,
 						"h": 12
 					}
@@ -1914,8 +1956,8 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 63,
-						"y": 444,
+						"x": 37,
+						"y": 453,
 						"w": 11,
 						"h": 12
 					}
@@ -1935,8 +1977,8 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 67,
-						"y": 458,
+						"x": 37,
+						"y": 467,
 						"w": 11,
 						"h": 12
 					}
@@ -1956,8 +1998,8 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 67,
-						"y": 458,
+						"x": 37,
+						"y": 467,
 						"w": 11,
 						"h": 12
 					}
@@ -1977,8 +2019,8 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 76,
-						"y": 444,
+						"x": 50,
+						"y": 450,
 						"w": 10,
 						"h": 12
 					}
@@ -1998,8 +2040,8 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 76,
-						"y": 444,
+						"x": 50,
+						"y": 450,
 						"w": 10,
 						"h": 12
 					}
@@ -2019,8 +2061,8 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 69,
-						"y": 472,
+						"x": 50,
+						"y": 464,
 						"w": 10,
 						"h": 12
 					}
@@ -2040,77 +2082,56 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 69,
-						"y": 472,
+						"x": 50,
+						"y": 464,
 						"w": 10,
 						"h": 12
 					}
 				},
 				{
-					"filename": "FIRE/range/003",
+					"filename": "GRASS/range/003",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 16,
+						"w": 24,
 						"h": 16
 					},
 					"spriteSourceSize": {
-						"x": 1,
-						"y": 1,
-						"w": 13,
-						"h": 10
+						"x": 4,
+						"y": 3,
+						"w": 14,
+						"h": 11
 					},
 					"frame": {
-						"x": 80,
-						"y": 458,
-						"w": 13,
-						"h": 10
+						"x": 63,
+						"y": 439,
+						"w": 14,
+						"h": 11
 					}
 				},
 				{
-					"filename": "FIRE/range/007",
+					"filename": "GRASS/range/004",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 16,
+						"w": 24,
 						"h": 16
 					},
 					"spriteSourceSize": {
-						"x": 1,
-						"y": 5,
-						"w": 13,
-						"h": 10
+						"x": 3,
+						"y": 4,
+						"w": 14,
+						"h": 11
 					},
 					"frame": {
-						"x": 95,
-						"y": 438,
-						"w": 13,
-						"h": 10
+						"x": 63,
+						"y": 439,
+						"w": 14,
+						"h": 11
 					}
 				},
 				{
-					"filename": "POISON/range/000",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 11,
-						"w": 10,
-						"h": 10
-					},
-					"frame": {
-						"x": 110,
-						"y": 440,
-						"w": 10,
-						"h": 10
-					}
-				},
-				{
-					"filename": "GRASS/range/001",
+					"filename": "GRASS/range/013",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -2119,36 +2140,36 @@
 					},
 					"spriteSourceSize": {
 						"x": 7,
-						"y": 2,
-						"w": 13,
-						"h": 10
+						"y": 3,
+						"w": 14,
+						"h": 11
 					},
 					"frame": {
-						"x": 95,
-						"y": 450,
-						"w": 13,
-						"h": 10
+						"x": 79,
+						"y": 439,
+						"w": 14,
+						"h": 11
 					}
 				},
 				{
-					"filename": "FIRE/range/000",
+					"filename": "GRASS/range/014",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 16,
+						"w": 24,
 						"h": 16
 					},
 					"spriteSourceSize": {
-						"x": 3,
-						"y": 6,
-						"w": 10,
-						"h": 8
+						"x": 8,
+						"y": 3,
+						"w": 14,
+						"h": 11
 					},
 					"frame": {
-						"x": 110,
-						"y": 452,
-						"w": 10,
-						"h": 8
+						"x": 79,
+						"y": 439,
+						"w": 14,
+						"h": 11
 					}
 				},
 				{
@@ -2166,8 +2187,8 @@
 						"h": 10
 					},
 					"frame": {
-						"x": 81,
-						"y": 470,
+						"x": 62,
+						"y": 452,
 						"w": 13,
 						"h": 10
 					}
@@ -2187,52 +2208,10 @@
 						"h": 10
 					},
 					"frame": {
-						"x": 81,
-						"y": 470,
+						"x": 62,
+						"y": 452,
 						"w": 13,
 						"h": 10
-					}
-				},
-				{
-					"filename": "FIRE/range/009",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 5,
-						"w": 10,
-						"h": 8
-					},
-					"frame": {
-						"x": 81,
-						"y": 482,
-						"w": 10,
-						"h": 8
-					}
-				},
-				{
-					"filename": "FIRE/range/010",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 5,
-						"w": 10,
-						"h": 8
-					},
-					"frame": {
-						"x": 93,
-						"y": 482,
-						"w": 10,
-						"h": 8
 					}
 				},
 				{
@@ -2250,8 +2229,8 @@
 						"h": 10
 					},
 					"frame": {
-						"x": 105,
-						"y": 462,
+						"x": 62,
+						"y": 464,
 						"w": 13,
 						"h": 10
 					}
@@ -2271,8 +2250,8 @@
 						"h": 10
 					},
 					"frame": {
-						"x": 105,
-						"y": 474,
+						"x": 77,
+						"y": 452,
 						"w": 13,
 						"h": 10
 					}
@@ -2292,10 +2271,157 @@
 						"h": 10
 					},
 					"frame": {
-						"x": 105,
-						"y": 474,
+						"x": 77,
+						"y": 452,
 						"w": 13,
 						"h": 10
+					}
+				},
+				{
+					"filename": "POISON/range/000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 11,
+						"w": 10,
+						"h": 10
+					},
+					"frame": {
+						"x": 77,
+						"y": 464,
+						"w": 10,
+						"h": 10
+					}
+				},
+				{
+					"filename": "FIRE/range/008",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 5,
+						"w": 14,
+						"h": 9
+					},
+					"frame": {
+						"x": 89,
+						"y": 464,
+						"w": 14,
+						"h": 9
+					}
+				},
+				{
+					"filename": "GRASS/range/002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 24,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 3,
+						"w": 14,
+						"h": 8
+					},
+					"frame": {
+						"x": 92,
+						"y": 452,
+						"w": 14,
+						"h": 8
+					}
+				},
+				{
+					"filename": "GRASS/range/012",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 24,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 4,
+						"w": 14,
+						"h": 8
+					},
+					"frame": {
+						"x": 108,
+						"y": 450,
+						"w": 14,
+						"h": 8
+					}
+				},
+				{
+					"filename": "FIRE/range/000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 6,
+						"w": 10,
+						"h": 8
+					},
+					"frame": {
+						"x": 108,
+						"y": 460,
+						"w": 10,
+						"h": 8
+					}
+				},
+				{
+					"filename": "FIRE/range/009",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 5,
+						"w": 10,
+						"h": 8
+					},
+					"frame": {
+						"x": 105,
+						"y": 470,
+						"w": 10,
+						"h": 8
+					}
+				},
+				{
+					"filename": "FIRE/range/010",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 5,
+						"w": 10,
+						"h": 8
+					},
+					"frame": {
+						"x": 117,
+						"y": 470,
+						"w": 10,
+						"h": 8
 					}
 				}
 			]
@@ -2304,6 +2430,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:661ad2cfcc46b6c31076a6667fdf8e8a:ebb11c9c12357bb769010819c2c71d2f:6bb849f22df261e89ba2a9a6beb3503e$"
+		"smartupdate": "$TexturePacker:SmartUpdate:1dcc4aff06e96e5cc894b001f8414807:558384d088f1f6744a57cc918a55e89a:6bb849f22df261e89ba2a9a6beb3503e$"
 	}
 }
