@@ -49,7 +49,7 @@ export default class Pokemon extends GameObjects.Container {
         x: this.targetX * 100 + 330,
         y: 710 - this.targetY * 80,
         ease: 'Linear',
-        duration: 500,
+        duration: 1000,
         onComplete: function (tween, targets) {
             targets[0].setVisible(false);
             if(self.checkAnimations()){

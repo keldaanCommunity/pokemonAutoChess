@@ -177,6 +177,24 @@ class Clefable extends Pokemon {
   }
 }
 
+class Igglybuff extends Pokemon {
+  constructor() {
+    super("igglybuff", TYPE.FAIRY, RARITY.COMMON, 174, "jigglypuff", 10, 1, 3, "FAIRY/range");
+  }
+}
+
+class Jigglypuff extends Pokemon {
+  constructor() {
+    super("jigglypuff", TYPE.FAIRY, RARITY.COMMON, 39, "wigglytuff", 20 ,2, 3, "FAIRY/range");
+  }
+}
+
+class Wigglytuff extends Pokemon {
+  constructor() {
+    super("wigglytuff", TYPE.FAIRY, RARITY.COMMON, 40, "", 30, 3, 3, "FAIRY/range");
+  }
+}
+
 schema.defineTypes(Pokemon, {
   id: "string",
   name: "string",
@@ -216,4 +234,7 @@ module.exports = {
    , Cleffa
    , Clefairy
    , Clefable
+   , Igglybuff
+   , Wigglytuff
+   , Jigglypuff
    };

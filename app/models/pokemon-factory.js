@@ -51,6 +51,12 @@ class PokemonFactory {
         return new Pokemon.Clefairy();
       case "clefable":
         return new Pokemon.Clefable();
+      case "igglybuff":
+        return new Pokemon.Igglybuff();
+      case "jigglypuff":
+        return new Pokemon.Jigglypuff();
+      case "wigglytuff":
+        return new Pokemon.Wigglytuff();
       default:
         break;
     }

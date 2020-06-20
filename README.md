@@ -13,7 +13,6 @@ Pick the pokémon you like in the following list:
 ★ Caterpie - Metapod - Butterfree 
 ★ Weedle - Kakuna - Beedrill 
 ★ Pidgey - Pidgeotto - Pidgeot
-★ Igglybuff - Jigglypuff - Wigglytuff
 ★ Hoppip - Skiploom - Jumpluff
 ★ Seedot - Nuzleaf - Shiftry
 ★ Starly - Staravia - Staraptor

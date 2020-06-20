@@ -10,6 +10,9 @@ class GamePage {
     }
     window.getAttackScale = function(attackSprite){
       switch (attackSprite) {
+        case "FAIRY/range":
+          return [1.5,1.5];
+
         case "GRASS/range":
           return [3,3];
         
