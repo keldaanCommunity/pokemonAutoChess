@@ -44,7 +44,13 @@ class PokemonFactory {
       case "mareep":
         return new Pokemon.Mareep();
       case "flaffy":
-        return new Pokemon.Flaffy;
+        return new Pokemon.Flaffy();
+      case "cleffa":
+        return new Pokemon.Cleffa();
+      case "clefairy":
+        return new Pokemon.Clefairy();
+      case "clefable":
+        return new Pokemon.Clefable();
       default:
         break;
     }

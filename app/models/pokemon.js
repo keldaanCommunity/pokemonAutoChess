@@ -101,7 +101,7 @@ class Graveler extends Pokemon {
 
 class Golem extends Pokemon {
   constructor() {
-    super("golem", TYPE.ROCK, RARITY.COMMON, 976, "", 30, 3, 1, "ROCK/melee");
+    super("golem", TYPE.ROCK, RARITY.COMMON, 76, "", 30, 3, 1, "ROCK/melee");
   }
 }
 
@@ -159,6 +159,24 @@ class Ampharos extends Pokemon {
   }
 }
 
+class Cleffa extends Pokemon {
+  constructor() {
+    super("cleffa", TYPE.FAIRY, RARITY.COMMON, 173, "clefairy", 10, 1, 1, "FAIRY/melee");
+  }
+}
+
+class Clefairy extends Pokemon {
+  constructor() {
+    super("clefairy", TYPE.FAIRY, RARITY.COMMON, 35, "clefable", 20 ,2, 1, "FAIRY/melee");
+  }
+}
+
+class Clefable extends Pokemon {
+  constructor() {
+    super("clefable", TYPE.FAIRY, RARITY.COMMON, 36, "", 30, 3, 1, "FAIRY/melee");
+  }
+}
+
 schema.defineTypes(Pokemon, {
   id: "string",
   name: "string",
@@ -172,4 +190,30 @@ schema.defineTypes(Pokemon, {
   attackSprite: "string"
 });
 
-module.exports = { Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Geodude, Graveler, Golem, Azurill, Marill, Azumarill, Zubat, Golbat, Crobat, Mareep, Flaffy, Ampharos, Pokemon };
+module.exports = {
+  Pokemon
+   , Bulbasaur
+   , Ivysaur
+   , Venusaur
+   , Charmander
+   , Charmeleon
+   , Charizard
+   , Squirtle
+   , Wartortle
+   , Blastoise
+   , Geodude
+   , Graveler
+   , Golem
+   , Azurill
+   , Marill
+   , Azumarill
+   , Zubat
+   , Golbat
+   , Crobat
+   , Mareep
+   , Flaffy
+   , Ampharos
+   , Cleffa
+   , Clefairy
+   , Clefable
+   };
