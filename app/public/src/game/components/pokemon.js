@@ -111,7 +111,7 @@ export default class Pokemon extends GameObjects.Container {
   }
 
   setSprite(pokemon, scene){
-    let sprite = new GameObjects.Sprite(scene,0,0,"pokemons",`${pokemon.index}/0/1/0`);
+    let sprite = new GameObjects.Sprite(scene,0,0,`${pokemon.rarity}`,`${pokemon.index}/0/1/0`);
     sprite.setScale(3, 3);
     scene.add.existing(sprite);
     this.add(sprite);

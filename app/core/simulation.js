@@ -15,7 +15,7 @@ class Simulation extends Schema {
             let pokemon = blueTeam[id];
             //console.log("x",pokemon.positionX, "y", pokemon.positionY); // 0 for blue, 1 for red
             if(pokemon.positionY != 0){
-                let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk, pokemon.range, 0, pokemon.attackSprite);
+                let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity);
                 this.blueTeam[pokemonEntity.id] = pokemonEntity;
                 //console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
                 this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
@@ -25,7 +25,7 @@ class Simulation extends Schema {
             let pokemon = redTeam[id];
             //console.log("x",pokemon.positionX, "y", pokemon.positionY);
             if(pokemon.positionY != 0){
-                let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, 3 + (pokemon.positionY - 1), pokemon.hp, pokemon.atk, pokemon.range, 1, pokemon.attackSprite);
+                let pokemonEntity = new PokemonEntity(pokemon.index, pokemon.type, pokemon.positionX, 3 + (pokemon.positionY - 1), pokemon.hp, pokemon.atk, pokemon.range, 1, pokemon.attackSprite, pokemon.rarity);
                 this.redTeam[pokemonEntity.id] = pokemonEntity;
                 //console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
                 this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);

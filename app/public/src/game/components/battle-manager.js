@@ -7,6 +7,15 @@ export default class BattleManager {
     this.player = player;
   }
 
+  buildPokemons(){
+    for (let id in this.player.simulation.blueTeam) {
+      this.addPokemon(this.player.id, this.player.simulation.blueTeam[id]);
+    }
+    for (let id in this.player.simulation.redTeam) {
+      this.addPokemon(this.player.id, this.player.simulation.redTeam[id]);
+    }
+  }
+
   addPokemon(playerId, pokemon) {
     if(this.player.id == playerId){
       let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 + 330, 710 - 80 * pokemon.positionY, pokemon);

@@ -167,6 +167,7 @@ class GameContainer {
     scene.fade();
     scene.boardManager.clear();
     scene.boardManager.player = window.state.players[event.detail.id];
+    scene.battleManager.setPlayer(window.state.players[event.detail.id]);
     scene.boardManager.buildPokemons();
   }
 
