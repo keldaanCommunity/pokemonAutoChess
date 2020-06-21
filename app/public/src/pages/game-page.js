@@ -10,11 +10,27 @@ class GamePage {
     }
     window.getAttackScale = function(attackSprite){
       switch (attackSprite) {
+
+        case"FLYING/range":
+          return [1.5,1.5];
+
+        case "FLYING/melee":
+          return [1.5,1.5];
+
+        case "BUG/melee":
+          return [1.5,1.5];
+
         case "FAIRY/range":
           return [1.5,1.5];
 
         case "GRASS/range":
           return [3,3];
+        
+        case "GRASS/melee":
+          return [2,2];
+        
+        case "POISON/range":
+          return [2,2];
         
         case "WATER/range":
           return [3,3];

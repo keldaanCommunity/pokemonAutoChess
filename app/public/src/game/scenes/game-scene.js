@@ -17,7 +17,7 @@ export default class GameScene extends Scene {
   preload() {
     this.load.image("tiles", "assets/tiles/tileset.png");
     this.load.tilemapTiledJSON("map", "assets/tiles/tilemap.json")
-    this.load.multiatlas("pokemons","assets/pokemons/pokemons.json","assets/pokemons");
+    this.load.multiatlas("COMMON","assets/pokemons/common/common.json","assets/pokemons/common");
     this.load.multiatlas("attacks","assets/attacks/attacks.json","assets/attacks");
     this.load.image("user", "assets/ui/user.png");
     this.load.image("dashboard", "assets/ui/dashboard.png");

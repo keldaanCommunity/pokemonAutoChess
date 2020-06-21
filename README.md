@@ -10,12 +10,17 @@ Go to [Spriters Ressources](https://www.spriters-resource.com/ds_dsi/pokemonmyst
 
 Pick the pokémon you like in the following list: 
 
-★ Caterpie - Metapod - Butterfree 
-★ Weedle - Kakuna - Beedrill 
-★ Pidgey - Pidgeotto - Pidgeot
-★ Hoppip - Skiploom - Jumpluff
-★ Seedot - Nuzleaf - Shiftry
-★ Starly - Staravia - Staraptor
+★★ Chikorita - Bayleef - Meganium
+★★ Cyndaquil - Quilava - Typhlosion
+★★ Totodile - Croconaw - Feraligatr
+★★ Treecko - Grovyle - Sceptile
+★★ Torchic - Combusken - Blaziken
+★★ Mudkip - Marshtomp - Swampert
+★★ Turtwig - Grotle - Torterra
+★★ Chimchar - Monferno - Infernape
+★★ Piplup - Prinplup - Empoleon
+★★ Nidoran F - Nidorina - Nidoqueen
+★★ Nidoran M - Nidorino - Nidoking
 
 Create a folder with the name "pokedex_number_of_your_pokemon", for ex: 12. 12 is Papilusion.
 

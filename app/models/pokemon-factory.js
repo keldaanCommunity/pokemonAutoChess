@@ -57,6 +57,42 @@ class PokemonFactory {
         return new Pokemon.Jigglypuff();
       case "wigglytuff":
         return new Pokemon.Wigglytuff();
+      case "caterpie":
+        return new Pokemon.Caterpie();
+      case "metapod":
+        return new Pokemon.Metapod();
+      case "butterfree":
+        return new Pokemon.Butterfree();
+      case "weedle":
+        return new Pokemon.Weedle();
+      case "kakuna":
+        return new Pokemon.Kakuna();
+      case "beedrill":
+        return new Pokemon.Beedrill();
+      case "pidgey":
+        return new Pokemon.Pidgey();
+      case "pidgeotto":
+        return new Pokemon.Pidgeotto();
+      case "pidgeot":
+        return new Pokemon.Pidgeot();
+      case "hoppip":
+        return new Pokemon.Hoppip();
+      case "skiploom":
+        return new Pokemon.Skiploom();
+      case "jumpluff":
+        return new Pokemon.Jumpluff();
+      case "seedot":
+        return new Pokemon.Seedot();
+      case "nuzleaf":
+        return new Pokemon.Nuzleaf();
+      case "shiftry":
+        return new Pokemon.Shiftry();
+      case "starly":
+        return new Pokemon.Starly();
+      case "staravia":
+        return new Pokemon.Staravia();
+      case "staraptor":
+        return new Pokemon.Staraptor();
       default:
         break;
     }

@@ -195,6 +195,114 @@ class Wigglytuff extends Pokemon {
   }
 }
 
+class Caterpie extends Pokemon {
+  constructor() {
+    super("caterpie", TYPE.BUG, RARITY.COMMON, 10, "metapod", 10 ,2, 2, "POISON/range");
+  }
+}
+
+class Metapod extends Pokemon {
+  constructor() {
+    super("metapod", TYPE.BUG, RARITY.COMMON, 11, "butterfree", 20, 3, 2, "POISON/range");
+  }
+}
+
+class Butterfree extends Pokemon {
+  constructor() {
+    super("butterfree", TYPE.BUG, RARITY.COMMON, 12, "", 30, 3, 2, "POISON/range");
+  }
+}
+
+class Weedle extends Pokemon {
+  constructor() {
+    super("weedle", TYPE.BUG, RARITY.COMMON, 13, "kakuna", 10 ,2, 1, "BUG/melee");
+  }
+}
+
+class Kakuna extends Pokemon {
+  constructor() {
+    super("kakuna", TYPE.BUG, RARITY.COMMON, 14, "beedrill", 20, 3, 1, "BUG/melee");
+  }
+}
+
+class Beedrill extends Pokemon {
+  constructor() {
+    super("beedrill", TYPE.BUG, RARITY.COMMON, 15, "", 30, 3, 1, "BUG/melee");
+  }
+}
+
+
+class Pidgey extends Pokemon {
+  constructor() {
+    super("pidgey", TYPE.FLYING, RARITY.COMMON, 16, "pidgeotto", 10 ,2, 3, "FLYING/range");
+  }
+}
+
+class Pidgeotto extends Pokemon {
+  constructor() {
+    super("pidgeotto", TYPE.FLYING, RARITY.COMMON, 17, "pidgeot", 20, 3, 3, "FLYING/range");
+  }
+}
+
+class Pidgeot extends Pokemon {
+  constructor() {
+    super("pidgeot", TYPE.FLYING, RARITY.COMMON, 18, "", 30, 3, 3, "FLYING/range");
+  }
+}
+
+class Hoppip extends Pokemon {
+  constructor() {
+    super("hoppip", TYPE.GRASS, RARITY.COMMON, 187, "skiploom", 10 ,2, 3, "FLYING/range");
+  }
+}
+
+class Skiploom extends Pokemon {
+  constructor() {
+    super("skiploom", TYPE.GRASS, RARITY.COMMON, 188, "jumpluff", 20, 3, 3, "FLYING/range");
+  }
+}
+
+class Jumpluff extends Pokemon {
+  constructor() {
+    super("jumpluff", TYPE.GRASS, RARITY.COMMON, 189, "", 30, 3, 3, "FLYING/range");
+  }
+}
+
+class Seedot extends Pokemon {
+  constructor() {
+    super("seedot", TYPE.GRASS, RARITY.COMMON, 273, "nuzleaf", 10 ,2, 1, "GRASS/melee");
+  }
+}
+
+class Nuzleaf extends Pokemon {
+  constructor() {
+    super("nuzleaf", TYPE.GRASS, RARITY.COMMON, 274, "shiftry", 20, 3, 1, "GRASS/melee");
+  }
+}
+
+class Shiftry extends Pokemon {
+  constructor() {
+    super("shiftry", TYPE.GRASS, RARITY.COMMON, 275, "", 30, 3, 1, "GRASS/melee");
+  }
+}
+
+class Starly extends Pokemon {
+  constructor() {
+    super("starly", TYPE.FLYING, RARITY.COMMON, 396, "staravia", 10 ,2, 1, "FLYING/melee");
+  }
+}
+
+class Staravia extends Pokemon {
+  constructor() {
+    super("staravia", TYPE.FLYING, RARITY.COMMON, 397, "staraptor", 20, 3, 1, "FLYING/melee");
+  }
+}
+
+class Staraptor extends Pokemon {
+  constructor() {
+    super("staraptor", TYPE.FLYING, RARITY.COMMON, 398, "", 30, 3, 1, "FLYING/melee");
+  }
+}
 schema.defineTypes(Pokemon, {
   id: "string",
   name: "string",
@@ -237,4 +345,22 @@ module.exports = {
    , Igglybuff
    , Wigglytuff
    , Jigglypuff
+   , Caterpie
+   , Metapod
+   , Butterfree
+   , Weedle
+   , Kakuna
+   , Beedrill
+   , Pidgey
+   , Pidgeotto
+   , Pidgeot
+   , Hoppip
+   , Skiploom
+   , Jumpluff
+   , Seedot
+   , Nuzleaf
+   , Shiftry
+   , Starly
+   , Staravia
+   , Staraptor
    };
