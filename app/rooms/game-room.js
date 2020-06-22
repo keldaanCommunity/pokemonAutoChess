@@ -200,24 +200,48 @@ class GameRoom extends colyseus.Room {
     }
   }
 
+  swap(board, pokemon, x, y){
+    if (!this.isPositionEmpty(board, x, y)) {
+      let pokemonToSwap = this.getPokemonByPosition(board, x, y);
+      pokemonToSwap.positionX = pokemon.positionX;
+      pokemonToSwap.positionY = pokemon.positionY;
+    }
+    pokemon.positionX = x;
+    pokemon.positionY = y;
+    
+  }
+
   onDragDrop(client, detail) {
     let success = false;
-    if(this.state.phase == STATE.PICK){
-      if (client.sessionId in this.state.players) {
-        if (detail.pokemonId in this.state.players[client.sessionId].board) {
-          let pokemon = this.state.players[client.sessionId].board[detail.pokemonId];
-          let x = parseInt(detail.x);
-          let y = parseInt(detail.y);
-          if (this.getTeamSize(client.sessionId) < this.state.players[client.sessionId].experienceManager.level || pokemon.positionY != 0) {
-  
-            if (!this.isPositionEmpty(this.state.players[client.sessionId].board, x, y)) {
-              let pokemonToSwap = this.getPokemonByPosition(this.state.players[client.sessionId].board, x, y);
-              pokemonToSwap.positionX = pokemon.positionX;
-              pokemonToSwap.positionY = pokemon.positionY;
-            }
-            pokemon.positionX = x;
-            pokemon.positionY = y;
+
+    if (client.sessionId in this.state.players) {
+      if (detail.pokemonId in this.state.players[client.sessionId].board) {
+        let pokemon = this.state.players[client.sessionId].board[detail.pokemonId];
+        let x = parseInt(detail.x);
+        let y = parseInt(detail.y);
+
+        if( y == 0 && pokemon.positionY == 0){
+          this.swap(this.state.players[client.sessionId].board,pokemon,x,y);
+          success = true;
+        }
+        else if(this.state.phase == STATE.PICK){
+          let teamSize = this.getTeamSize(client.sessionId);
+          if (teamSize < this.state.players[client.sessionId].experienceManager.level) {
+            this.swap(this.state.players[client.sessionId].board,pokemon,x,y);
             success = true;
+          }
+          else if(teamSize == this.state.players[client.sessionId].experienceManager.level){
+            let empty = this.isPositionEmpty(this.state.players[client.sessionId].board,x,y);
+            if(!empty){
+              this.swap(this.state.players[client.sessionId].board,pokemon,x,y);
+              success = true;
+            }
+            else{
+              if((pokemon.positionY != 0 && y != 0) || y == 0){
+                this.swap(this.state.players[client.sessionId].board,pokemon,x,y);
+                success = true;
+              }
+            }
           }
         }
       }
