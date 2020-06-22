@@ -60,6 +60,7 @@ class GameContainer {
     window.addEventListener("refresh-click", e => this.onRefreshClick(e));
     window.addEventListener("level-click", e => this.onLevelClick(e));
     window.addEventListener("drag-drop", e => this.onDragDrop(e));
+    window.addEventListener("sell-drop", e => this.onSellDrop(e));
   }
 
   initializePlayer(player) {
@@ -185,6 +186,10 @@ class GameContainer {
 
   onDragDrop(event) {
     this.room.send("dragDrop", {"detail": event.detail });
+  }
+
+  onSellDrop(event){
+    this.room.send("sellDrop", {"detail": event.detail });
   }
 
   onPlayerRemove(player, key){

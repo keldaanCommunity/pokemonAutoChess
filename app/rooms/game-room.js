@@ -6,6 +6,7 @@ const Shop = require("../models/shop");
 const Pokemon = require("../models/pokemon");
 const PokemonFactory = require("../models/pokemon-factory");
 const STATE = require("../models/enum").STATE;
+const COST = require("../models/enum").COST;
 const Simulation = require('../core/simulation');
 
 class GameState extends schema.Schema {
@@ -36,6 +37,10 @@ class GameRoom extends colyseus.Room {
 
     this.onMessage("dragDrop", (client, message) => {
       this.onDragDrop(client, message.detail);
+    });
+
+    this.onMessage("sellDrop", (client, message) => {
+      this.onSellDrop(client, message.detail);
     });
 
     this.onMessage("refresh", (client, message) => {
@@ -171,9 +176,11 @@ class GameRoom extends colyseus.Room {
 
   getRandomOpponent(playerId) {
     let playersId = [];
+    let playerNumber = Object.keys(this.state.players).length;
     for (let id in this.state.players) {
-      //if(id != playerId){}
-      playersId.push(id);
+      if(id != playerId || playerNumber == 1){
+        playersId.push(id);
+      }
     }
     if (playersId.length > 0) {
       return this.state.players[playersId[Math.round(Math.random() * (playersId.length - 1))]].id;
@@ -211,6 +218,14 @@ class GameRoom extends colyseus.Room {
     pokemon.positionX = x;
     pokemon.positionY = y;
     
+  }
+
+  onSellDrop(client, detail){
+    if (client.sessionId in this.state.players &&
+    detail.pokemonId in this.state.players[client.sessionId].board) {
+        this.state.players[client.sessionId].money += COST[this.state.players[client.sessionId].board[detail.pokemonId].rarity];
+        delete this.state.players[client.sessionId].board[detail.pokemonId];
+    }
   }
 
   onDragDrop(client, detail) {

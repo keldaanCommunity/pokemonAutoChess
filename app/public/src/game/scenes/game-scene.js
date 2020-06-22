@@ -35,6 +35,9 @@ export default class GameScene extends Scene {
     const tileset = this.map.addTilesetImage("tileset", "tiles");
     this.map.createStaticLayer("World", tileset, 0, 0);
     this.dashboard = this.add.image(850, 940, "dashboard");
+    this.dashboardZone = this.add.zone(850, 940, this.dashboard.width, this.dashboard.height);
+    this.dashboardZone.setRectangleDropZone(this.dashboard.width, this.dashboard.height);
+    this.dashboardZone.setName("sell-zone");
     this.refreshButton = new RefreshButton(this, 120, 900);
     this.levelUpButton = new LevelUpButton(this, 120, 970);
     this.board = this.add.group();
@@ -126,13 +129,22 @@ export default class GameScene extends Scene {
     });
 
     self.input.on("drop", function (pointer, gameObject, dropZone) {
-      window.dispatchEvent(new CustomEvent("drag-drop", {
-        detail: {
-          "x": dropZone.name.substr(5, 1),
-          "y": dropZone.name.substr(7, 1),
-          "pokemonId": gameObject.id
-        }
-      }));
+      if(dropZone.name == "sell-zone"){
+        window.dispatchEvent(new CustomEvent("sell-drop", {
+          detail: {
+            "pokemonId": gameObject.id
+          }
+        }));
+      }
+      else{
+        window.dispatchEvent(new CustomEvent("drag-drop", {
+          detail: {
+            "x": dropZone.name.substr(5, 1),
+            "y": dropZone.name.substr(7, 1),
+            "pokemonId": gameObject.id
+          }
+        }));
+      }
     });
 
     self.input.on("dragend", function (pointer, gameObject, dropped) {
