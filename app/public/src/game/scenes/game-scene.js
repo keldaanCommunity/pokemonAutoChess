@@ -29,6 +29,7 @@ export default class GameScene extends Scene {
     }
 
   create() {
+    this.input.mouse.disableContextMenu();
     this.input.dragDistanceThreshold = 1;
     this.map = this.make.tilemap({ key: "map" });
     const tileset = this.map.addTilesetImage("tileset", "tiles");

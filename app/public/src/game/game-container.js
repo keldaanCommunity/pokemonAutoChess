@@ -53,7 +53,7 @@ class GameContainer {
       changes.forEach(change => {
         this.handleRoomStateChange(change);
       })
-    }
+    };
     // Game event listener
     window.addEventListener("shop-click", e => this.onShopClick(e));
     window.addEventListener("player-click", e => this.onPlayerClick(e));

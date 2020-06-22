@@ -14,8 +14,8 @@ class Pokemon extends Schema {
     this.rarity = rarity;
     this.index = index;
     this.evolution = evolution;
-    this.positionX = 0;
-    this.positionY = 0;
+    this.positionX = -1;
+    this.positionY = -1;
     this.cost = COST[rarity];
     this.hp = hp;
     this.atk = atk;

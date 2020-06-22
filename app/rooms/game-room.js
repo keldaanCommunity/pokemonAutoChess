@@ -262,22 +262,32 @@ class GameRoom extends colyseus.Room {
     return size;
   }
 
-  onShop(sessionId, pokemonId) {
-    console.log('onshop');
-    if (sessionId in this.state.players) {
-      if (pokemonId in this.state.players[sessionId].shop) {
-        if (this.state.players[sessionId].money >= this.state.players[sessionId].shop[pokemonId].cost) {
-          this.state.players[sessionId].money -= this.state.players[sessionId].shop[pokemonId].cost;
-          this.state.players[sessionId].board[pokemonId] = Object.assign(new Pokemon.Pokemon(), this.state.players[sessionId].shop[pokemonId]);
-          delete this.state.players[sessionId].shop[pokemonId];
-          this.state.players[sessionId].board[pokemonId].positionX = this.getFirstAvailablePositionInBoard(this.state.players[sessionId].board);
-          this.state.players[sessionId].board[pokemonId].positionY = 0;
-
-          this.computeEvolutions(this.state.players[sessionId].board);
-          this.computeEvolutions(this.state.players[sessionId].board);
-        }
+  getBoardSize(sessionId){   
+    let size = 0;
+    for (let id in this.state.players[sessionId].board) {
+      if (this.state.players[sessionId].board[id].positionY == 0) {
+        size += 1;
       }
     }
+    return size;
+  }
+
+  onShop(sessionId, pokemonId) {
+    if (sessionId in this.state.players
+      && pokemonId in this.state.players[sessionId].shop
+      && this.getBoardSize(sessionId) < 9
+      && this.state.players[sessionId].money >= this.state.players[sessionId].shop[pokemonId].cost) {
+
+      this.state.players[sessionId].money -= this.state.players[sessionId].shop[pokemonId].cost;
+      this.state.players[sessionId].board[pokemonId] = Object.assign(new Pokemon.Pokemon(), this.state.players[sessionId].shop[pokemonId]);
+      delete this.state.players[sessionId].shop[pokemonId];
+      this.state.players[sessionId].board[pokemonId].positionX = this.getFirstAvailablePositionInBoard(this.state.players[sessionId].board);
+      this.state.players[sessionId].board[pokemonId].positionY = 0;
+
+      this.computeEvolutions(this.state.players[sessionId].board);
+      this.computeEvolutions(this.state.players[sessionId].board);
+    }
+
   }
 
   computeEvolutions(board) {
@@ -304,6 +314,7 @@ class GameRoom extends colyseus.Room {
           let x = this.getFirstAvailablePositionInBoard(board);
           let pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName);
           pokemonEvolved.positionX = x;
+          pokemonEvolved.positionY = 0;
           board[pokemonEvolved.id] = pokemonEvolved;
           evolve = true;
         }
@@ -335,14 +346,7 @@ class GameRoom extends colyseus.Room {
 
   getFirstAvailablePositionInBoard(board) {
     for (let i = 0; i < 9; i++) {
-      let occupation = false;
-      for (let id in board) {
-        let pokemon = board[id];
-        if (pokemon.positionX == i && pokemon.positionY == 0) {
-          occupation = true;
-        }
-      }
-      if (!occupation) {
+      if(this.isPositionEmpty(board,i,0)){
         return i;
       }
     }
