@@ -131,7 +131,7 @@ class Zubat extends Pokemon {
 
 class Golbat extends Pokemon {
   constructor() {
-    super("golbat", TYPE.POISON, RARITY.COMMON, 42, "Crobat", 20 ,2, 4, "POISON/range");
+    super("golbat", TYPE.POISON, RARITY.COMMON, 42, "crobat", 20 ,2, 4, "POISON/range");
   }
 }
 
