@@ -120,10 +120,12 @@ class GameRoom extends colyseus.Room {
   }
 
   computeIncome() {
-    for (let id in this.state.players) {
-      let player = this.state.players[id];
-      player.money += Math.min(Math.floor(player.money / 10), 5);
-      player.money += 5;
+    if(this.state.phase == STATE.PICK){
+      for (let id in this.state.players) {
+        let player = this.state.players[id];
+        player.money += Math.min(Math.floor(player.money / 10), 5);
+        player.money += 5;
+      }
     }
   }
 
