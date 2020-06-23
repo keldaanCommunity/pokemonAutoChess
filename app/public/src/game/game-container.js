@@ -71,6 +71,10 @@ class GameContainer {
     player.onChange = (changes => {
       changes.forEach(change => self.handlePlayerChange(change, player));
     });
+    
+    player.experienceManager.onChange = (changes => {
+      changes.forEach(change => self.handleExperienceChange(change, player));
+    });
     player.simulation.blueTeam.onAdd = (pokemon, key) =>{
       self.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = function(changes) {
@@ -118,7 +122,28 @@ class GameContainer {
     this.game.scene.getScene("gameScene").battleManager.changePokemon(playerId, change, pokemon);
   }
 
-  handlePlayerChange(change, player) {
+  handleExperienceChange(change, player){
+    if(player.id == this.player.id){
+      switch (change.field) {
+        case "level":
+          this.game.scene.getScene("gameScene").levelUpButton.changeLevel(change.value);
+          break;
+  
+        case "experience":
+          this.game.scene.getScene("gameScene").levelUpButton.changeExperience(change.value);
+          break;
+  
+        case "expNeeded":
+          this.game.scene.getScene("gameScene").levelUpButton.changeExpNeeded(change.value);
+          break;
+      
+        default:
+          break;
+      }
+    }
+  }
+
+   handlePlayerChange(change, player) {
     if (this.game.scene.getScene("gameScene") == null || this.game.scene.getScene("gameScene").playerContainer == null) return;
     switch (change.field) {
       case "money":

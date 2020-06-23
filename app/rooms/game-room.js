@@ -130,6 +130,7 @@ class GameRoom extends colyseus.Room {
         let player = this.state.players[id];
         player.money += Math.min(Math.floor(player.money / 10), 5);
         player.money += 5;
+        player.experienceManager.addExperience(2);
       }
     }
   }

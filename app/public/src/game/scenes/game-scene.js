@@ -24,7 +24,6 @@ export default class GameScene extends Scene {
     this.load.image("transition", "assets/ui/transition.png");
     this.load.image("money", "assets/ui/money.png");
     this.load.image("refreshButton", "assets/ui/refreshButton.png");
-    this.load.image("levelUpButton", "assets/ui/levelUpButton.png");
     this.load.image("life", "assets/ui/life.png");
     }
 
@@ -39,7 +38,7 @@ export default class GameScene extends Scene {
     this.dashboardZone.setRectangleDropZone(this.dashboard.width, this.dashboard.height);
     this.dashboardZone.setName("sell-zone");
     this.refreshButton = new RefreshButton(this, 120, 900);
-    this.levelUpButton = new LevelUpButton(this, 120, 970);
+    this.levelUpButton = new LevelUpButton(this, 120, 970, window.state.players[window.sessionId].experienceManager);
     this.board = this.add.group();
     this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);

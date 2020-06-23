@@ -14,7 +14,7 @@ export default class Pokemon extends GameObjects.Container {
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
     this.setRangeType();
-    this.setSize(50,50);
+    this.setSize(75,75);
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
     this.setSprite(pokemon, scene);
