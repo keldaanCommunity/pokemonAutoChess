@@ -31,7 +31,7 @@ class PokemonFactory {
         return new Pokemon.Azurill();
       case "marill":
         return new Pokemon.Marill();
-      case "Azumarill":
+      case "azumarill":
         return new Pokemon.Azumarill();
       case "zubat":
         return new Pokemon.Zubat();
