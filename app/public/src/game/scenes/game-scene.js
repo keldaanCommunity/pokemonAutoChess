@@ -15,6 +15,16 @@ export default class GameScene extends Scene {
   }
 
   preload() {
+    this.load
+    .on('add', (k, t) => console.log('addfile', k, t))
+    .on('fileprogress', (f, p) => console.log('fileprogress', f.key, f.type, p))
+    .on('load', (f) => console.log('load', f.key, f.type))
+    .on('filecomplete', (k, t) => console.log('filecomplete', k, t))
+    .on('start', () => console.log('start'))
+    .on('postprocess', () => console.log('postprocess'))
+    .on('complete', (l) => console.log('complete'));
+
+    this.load.audioSprite("sounds","assets/sounds/sounds.json",["assets/sounds/sounds.mp3"]);
     this.load.image("tiles", "assets/tiles/tileset.png");
     this.load.tilemapTiledJSON("map", "assets/tiles/tilemap.json")
     this.load.multiatlas("COMMON","assets/pokemons/common/common.json","assets/pokemons/common");
@@ -62,7 +72,8 @@ export default class GameScene extends Scene {
     this.transitionImage = new GameObjects.Image(this, 720, 450, "transition").setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(Number.MAX_VALUE);
     this.transitionScreen.alpha = 0;
-
+    this.music = this.sound.addAudioSprite("sounds");
+    this.music.play('pick-1');
     this.initilizeDragAndDrop();
     this.shopContainer.updatePortraits();
     this.playerContainer.updatePortraits();
@@ -90,9 +101,11 @@ export default class GameScene extends Scene {
   updatePhase() {
     if(window.state.phase == "FIGHT"){
       this.boardManager.clearBoard();
+      this.music.play('battle-1');
     }
     else{
       this.boardManager.buildPokemons();
+      this.music.play('pick-1');
     }
     this.phaseText.setText(window.state.phase);
   }
