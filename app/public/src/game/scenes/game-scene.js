@@ -15,15 +15,66 @@ export default class GameScene extends Scene {
   }
 
   preload() {
-    this.load
-    .on('add', (k, t) => console.log('addfile', k, t))
-    .on('fileprogress', (f, p) => console.log('fileprogress', f.key, f.type, p))
-    .on('load', (f) => console.log('load', f.key, f.type))
-    .on('filecomplete', (k, t) => console.log('filecomplete', k, t))
-    .on('start', () => console.log('start'))
-    .on('postprocess', () => console.log('postprocess'))
-    .on('complete', (l) => console.log('complete'));
+    let self = this;
+    var progressBar = this.add.graphics();
+    var progressBox = this.add.graphics();
+    progressBox.fillStyle(0x222222, 0.8);
+    progressBox.fillRect(500, 500, 1020, 50);
+    
+    var width = this.cameras.main.width;
+    var height = this.cameras.main.height;
+    var loadingText = this.make.text({
+        x: width / 2,
+        y: (height / 2) - 50,
+        text: 'Loading...',
+        style: {
+            font: '30px monospace',
+            fill: '#ffffff'
+        }
+    });
+    loadingText.setOrigin(0.5, 0.5);
+    
+    var percentText = this.make.text({
+        x: width / 2,
+        y: (height / 2)  + 10,
+        text: '0%',
+        style: {
+            font: '28px monospace',
+            fill: '#ffffff'
+        }
+    });
+    percentText.setOrigin(0.5, 0.5);
+    
+    var assetText = this.make.text({
+        x: width / 2,
+        y: (height / 2) + 70,
+        text: '',
+        style: {
+            font: '28px monospace',
+            fill: '#ffffff'
+        }
+    });
 
+    assetText.setOrigin(0.5, 0.5);
+    
+    this.load.on('progress', function (value) {
+        percentText.setText(parseInt(value * 100) + '%');
+        progressBar.clear();
+        progressBar.fillStyle(0xffffff, 1);
+        progressBar.fillRect(500, 510, 1000 * value, 30);
+    });
+    
+    this.load.on('fileprogress', function (file) {
+        assetText.setText('Loading asset: ' + file.key);
+    });
+
+    this.load.on('complete', function () {
+      progressBar.destroy();
+      progressBox.destroy();
+      loadingText.destroy();
+      percentText.destroy();
+      assetText.destroy();
+    });
     this.load.audioSprite("sounds","assets/sounds/sounds.json",["assets/sounds/sounds.mp3"]);
     this.load.image("tiles", "assets/tiles/tileset.png");
     this.load.tilemapTiledJSON("map", "assets/tiles/tilemap.json")
