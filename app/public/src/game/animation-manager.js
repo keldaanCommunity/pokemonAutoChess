@@ -134,7 +134,8 @@ export default class AnimationManager {
         key: `${index}/0/${orientation}`,
         frames: this.game.anims.generateFrameNames(`${rarity}`, { frames: [0, 1, 2], prefix: index + "/0/" + orientation + "/" }),
         frameRate: 4,
-        repeat: -1
+        repeat: -1,
+        yoyo: true
       });
       // attack
       this.game.anims.create({
