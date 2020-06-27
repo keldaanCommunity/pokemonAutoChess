@@ -1785,7 +1785,7 @@
 					}
 				},
 				{
-					"filename": "123/portait",
+					"filename": "123/portrait",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2010,7 +2010,7 @@
 					}
 				},
 				{
-					"filename": "58/portait",
+					"filename": "58/portrait",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -7640,6 +7640,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:0000f25ca7a4f0bc231e30d5f0bd92b7:3333d3fcfe20f9b17c9c93e2049d233a:871d1f61d7472a9d0cf4acf6e81a5580$"
+		"smartupdate": "$TexturePacker:SmartUpdate:4647da7f2b46c998f48027f79f9f6906:3333d3fcfe20f9b17c9c93e2049d233a:871d1f61d7472a9d0cf4acf6e81a5580$"
 	}
 }

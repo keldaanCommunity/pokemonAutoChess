@@ -1,24 +1,11 @@
 import { GameObjects } from "phaser";
 
 const COLOR_TYPE = Object.freeze({
-  NORMAL: "0xada594",
-  FIGHTING: "0xa55239",
-  FLYING: "0x9cadf7",
-  POISON: "0xb55aa5",
-  GROUND: "0xd6b55a",
-  ROCK: "0xbda55a",
-  BUG: "0xadbd21",
-  GHOST: "0x6363b5",
-  STEEL: "0xadadc6",
-  FIRE: "0xf75231",
-  WATER: "0x399cff",
-  GRASS: "0x7bce52",
-  ELECTRIC: "0xffc631",
-  PSYCHIC: "0xff73a5",
-  ICE: "0x5acee7",
-  DRAGON: "0x7b63e7",
-  DARK: "0x735a4a",
-  FAIRY: "0xf7b5f7"
+  COMMON: 0x646464,
+  UNCOMMON: 0x2eab30,
+  RARE: 0x3355b0,
+  EPIC: 0x7933b0,
+  LEGENDARY: 0xffa200
 });
 
 export default class ShopPortraitContainer extends GameObjects.Container {
@@ -30,7 +17,7 @@ export default class ShopPortraitContainer extends GameObjects.Container {
       color: "white",
       align: "center"
     };
-    this.background = new GameObjects.Rectangle(scene, 80, 0, 160, 80, COLOR_TYPE[pokemon.type]);
+    this.background = new GameObjects.Rectangle(scene, 80, 0, 160, 80, COLOR_TYPE[pokemon.rarity]);
     this.background.setInteractive().on("pointerdown", () => {
       window.dispatchEvent(new CustomEvent("shop-click", {
         detail: { "id": pokemon.id }

@@ -30,7 +30,10 @@ class GamePage {
           return [2,2];
         
         case "POISON/range":
-          return [2,2];
+          return [1.5,1.5];
+        
+        case "POISON/melee":
+          return [1,1];
         
         case "WATER/range":
           return [3,3];
@@ -41,8 +44,17 @@ class GamePage {
         case "ROCK/melee":
           return [2,2];
         
+        case "ELECTRIC/melee":
+          return [2,2];
+        
+        case "PSYCHIC/range":
+          return [2,2];
+
+        case "DRAGON/melee":
+          return [2,2];
+
         default:
-          return [3,3];
+          return [2,2];
       }
     }
     this.game = new GameContainer(this.room, this.container);

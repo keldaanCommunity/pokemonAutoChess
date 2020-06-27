@@ -79,6 +79,10 @@ export default class GameScene extends Scene {
     this.load.image("tiles", "assets/tiles/tileset.png");
     this.load.tilemapTiledJSON("map", "assets/tiles/tilemap.json")
     this.load.multiatlas("COMMON","assets/pokemons/common/common.json","assets/pokemons/common");
+    this.load.multiatlas("UNCOMMON","assets/pokemons/uncommon/uncommon.json","assets/pokemons/uncommon");
+    this.load.multiatlas("RARE","assets/pokemons/rare/rare.json","assets/pokemons/rare");
+    this.load.multiatlas("EPIC","assets/pokemons/epic/epic.json","assets/pokemons/epic");
+    this.load.multiatlas("LEGENDARY","assets/pokemons/legendary/legendary.json","assets/pokemons/legendary");
     this.load.multiatlas("attacks","assets/attacks/attacks.json","assets/attacks");
     this.load.image("user", "assets/ui/user.png");
     this.load.image("dashboard", "assets/ui/dashboard.png");
