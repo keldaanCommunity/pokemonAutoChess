@@ -98,8 +98,18 @@ class GameRoom extends colyseus.Room {
       this.computeIncome();
     }
     if(this.state.phase == STATE.FIGHT){
+      let everySimulationFinished = true;
       for (let id in this.state.players){
-        this.state.players[id].simulation.update(deltaTime);
+        if(!this.state.players[id].simulation.finished){
+          if(everySimulationFinished){
+            everySimulationFinished = false;
+          }
+          this.state.players[id].simulation.update(deltaTime);
+        }
+      }
+      if(everySimulationFinished){
+        this.switchPhase();
+        this.computeIncome();
       }
     }
   }

@@ -11,6 +11,7 @@ class Simulation extends Schema {
         this.board = new Board(9,6);
         this.redTeam = new MapSchema();
         this.blueTeam = new MapSchema();
+        this.finished = false;
         for (let id in blueTeam) {
             let pokemon = blueTeam[id];
             //console.log("x",pokemon.positionX, "y", pokemon.positionY); // 0 for blue, 1 for red
@@ -34,6 +35,11 @@ class Simulation extends Schema {
     }
 
     update(dt) {
+
+        if(Object.keys(this.blueTeam).length == 0 || Object.keys(this.redTeam).length == 0){
+            this.finished = true;
+        }
+
         for (let id in this.blueTeam) {
             if(this.blueTeam[id].life <= 0){
                 delete this.blueTeam[id];
