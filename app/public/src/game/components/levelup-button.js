@@ -8,18 +8,28 @@ export default class LevelUpButton extends Button {
     this.textStyle = {
       fontSize: "20px",
       fontFamily: "Verdana",
-      color: "rgb(21, 141, 210)",
+      color: "white",
       align: "center"
     };
+
+    
+    let graphics = new GameObjects.Graphics(scene);
+    let color = 0xffffff;
+    let thickness = 1;
+    let alpha = 1;
+    graphics.lineStyle(thickness, color, alpha);
+    graphics.strokeRect(-100, -25, 200, 50);
+
     this.manager = manager;
-    this.add(new GameObjects.Rectangle(scene,0,0,200,50, 0xffffff));
-    this.add(new GameObjects.Text(scene, -50, -20, "Level Up", this.textStyle));
-    this.add(new GameObjects.Text(scene, 60, -25, "4", this.textStyle));
-    this.add(new GameObjects.Image(scene, 90, -13, "money").setScale(0.5, 0.5));
-    this.lifebar = new LifeBar(scene, 20, 8, 100, 0x158dd2);
+    this.add(new GameObjects.Rectangle(scene,0,0,200,50, 0x484331));
+    this.add(graphics);
+    this.add(new GameObjects.Text(scene, -40, -20, "Buy xp", this.textStyle));
+    this.add(new GameObjects.Text(scene, 57, -25, "4", this.textStyle));
+    this.add(new GameObjects.Image(scene, 85, -12, "money").setScale(0.5, 0.5));
+    this.lifebar = new LifeBar(scene, 20, 8, 100, 0x5062ab);
     this.add(this.lifebar);
     this.level = new GameObjects.Text(scene,-100,0, `Lvl ${manager.level}`, this.textStyle);
-    this.experience = new GameObjects.Text(scene,45,-5, ` ${manager.experience}`, this.textStyle);
+    this.experience = new GameObjects.Text(scene,43,-5, ` ${manager.experience}`, this.textStyle);
     this.expNeeded = new GameObjects.Text(scene,75,-5, ` ${manager.expNeeded}`, this.textStyle);
     this.add(new GameObjects.Text(scene,65,-5,"/", this.textStyle));
     this.add(this.level);

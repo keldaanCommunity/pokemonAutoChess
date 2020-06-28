@@ -126,15 +126,15 @@ class GameContainer {
     if(player.id == this.player.id){
       switch (change.field) {
         case "level":
-          this.game.scene.getScene("gameScene").levelUpButton.changeLevel(change.value);
+          this.game.scene.getScene("gameScene").shopContainer.levelUpButton.changeLevel(change.value);
           break;
   
         case "experience":
-          this.game.scene.getScene("gameScene").levelUpButton.changeExperience(change.value);
+          this.game.scene.getScene("gameScene").shopContainer.levelUpButton.changeExperience(change.value);
           break;
   
         case "expNeeded":
-          this.game.scene.getScene("gameScene").levelUpButton.changeExpNeeded(change.value);
+          this.game.scene.getScene("gameScene").shopContainer.levelUpButton.changeExpNeeded(change.value);
           break;
       
         default:

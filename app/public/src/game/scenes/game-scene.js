@@ -5,8 +5,7 @@ import PlayerContainer from "../components/player-container";
 import BoardContainer from "../components/board-manager";
 import BoardManager from "../components/board-manager";
 import BattleManager from "../components/battle-manager";
-import RefreshButton from "../components/refresh-button";
-import LevelUpButton from "../components/levelup-button";
+
 
 export default class GameScene extends Scene {
 
@@ -98,16 +97,11 @@ export default class GameScene extends Scene {
     this.map = this.make.tilemap({ key: "map" });
     const tileset = this.map.addTilesetImage("tileset", "tiles");
     this.map.createStaticLayer("World", tileset, 0, 0);
-    this.dashboard = this.add.image(850, 940, "dashboard");
-    this.dashboardZone = this.add.zone(850, 940, this.dashboard.width, this.dashboard.height);
-    this.dashboardZone.setRectangleDropZone(this.dashboard.width, this.dashboard.height);
-    this.dashboardZone.setName("sell-zone");
-    this.refreshButton = new RefreshButton(this, 120, 900);
-    this.levelUpButton = new LevelUpButton(this, 120, 970, window.state.players[window.sessionId].experienceManager);
+
     this.board = this.add.group();
     this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);
-    this.shopContainer = new ShopContainer(this, 300, 950);
+    this.shopContainer = new ShopContainer(this, 370, 910);
     this.playerContainer = new PlayerContainer(this, 1750, 100);
     this.boardContainer = new BoardContainer(this, 275, 775);
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);

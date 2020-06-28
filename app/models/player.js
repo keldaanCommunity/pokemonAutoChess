@@ -13,7 +13,7 @@ class Player extends Schema {
     this.board = new MapSchema();
     this.shop = new MapSchema();
     this.experienceManager = new ExperienceManager();
-    this.money = 10;
+    this.money = 5;
     this.life = 10;
     this.simulation = new Simulation({},{});
   }

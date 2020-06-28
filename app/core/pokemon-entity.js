@@ -1,5 +1,6 @@
 const schema = require("@colyseus/schema");
 const Schema = schema.Schema;
+const ArraySchema = schema.ArraySchema;
 const STATE_TYPE = require('../models/enum').STATE_TYPE;
 const ORIENTATION = require('../models/enum').ORIENTATION;
 const MovingState = require('./moving-state');
@@ -7,7 +8,7 @@ const AttackingState = require('./attacking-state');
 const uniqid = require("uniqid");
 
 class PokemonEntity extends Schema {
-    constructor(index, type, positionX, positionY, hp, atk, range, team, attackSprite, rarity) {
+    constructor(index, types, positionX, positionY, hp, atk, range, team, attackSprite, rarity) {
         super();
         this.id = uniqid();
         this.rarity = rarity;
@@ -16,7 +17,12 @@ class PokemonEntity extends Schema {
         this.targetX = -1;
         this.targetY = -1;
         this.index = index;
-        this.type = type;
+        this.types = new ArraySchema();
+        if(types){
+            types.forEach(type => {
+                this.types.push(type);
+            });
+        }
         this.state = new MovingState();
         this.action = STATE_TYPE.MOVING;
         this.orientation = ORIENTATION.DOWNLEFT;
@@ -56,7 +62,7 @@ schema.defineTypes(PokemonEntity, {
     positionY: "number",
     action: "string",
     index: "number",
-    type: "string",
+    types: ["string"],
     id:"string",
     orientation:"string",
     life:"number",
