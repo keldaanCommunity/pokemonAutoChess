@@ -28,6 +28,9 @@ class HomePage {
     <a href="https://colyseus.io/">
       <img src="assets/ui/logo-colyseus.png" alt="Logo: Colyseus" />
     </a>
+    <a href="https://phaser.io/">
+    <img src="assets/ui/logo-phaser.png" alt="Logo: Phaser" />
+  </a>
     
     </footer>`;
     document.body.innerHTML = "";
