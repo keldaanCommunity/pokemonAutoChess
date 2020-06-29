@@ -27,6 +27,7 @@ export default class ShopPortraitContainer extends GameObjects.Container {
     this.add(this.background);
     for (let i = 0; i < pokemon.types.length; i++) {
       this.add(new GameObjects.Text(scene,90,23 * i -10, pokemon.types[i].charAt(0) + pokemon.types[i].slice(1).toLowerCase(),this.textStyle));
+      this.add(new GameObjects.Image(scene,75, 23 * i, "hexagon").setScale(0.5,0.5));
       this.add(new GameObjects.Image(scene,75,23 * i, "types", pokemon.types[i]).setScale(0.5,0.5));
     }
     this.add(new GameObjects.Image(scene, 20, 5, `${pokemon.rarity}`, `${pokemon.index}/portrait`).setScale(2, 2));

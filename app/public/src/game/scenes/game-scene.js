@@ -76,6 +76,7 @@ export default class GameScene extends Scene {
     });
     this.load.audioSprite("sounds","assets/sounds/sounds.json",["assets/sounds/sounds.mp3"]);
     this.load.image("tiles", "assets/tiles/tileset.png");
+    this.load.image("hexagon", "assets/ui/hexagon.png");
     this.load.tilemapTiledJSON("map", "assets/tiles/tilemap.json");
     this.load.multiatlas("rarity", "assets/rarity/rarity.json", "assets/rarity");
     this.load.multiatlas("types","assets/types/types.json", "assets/types");
