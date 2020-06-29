@@ -76,7 +76,9 @@ export default class GameScene extends Scene {
     });
     this.load.audioSprite("sounds","assets/sounds/sounds.json",["assets/sounds/sounds.mp3"]);
     this.load.image("tiles", "assets/tiles/tileset.png");
-    this.load.tilemapTiledJSON("map", "assets/tiles/tilemap.json")
+    this.load.tilemapTiledJSON("map", "assets/tiles/tilemap.json");
+    this.load.multiatlas("rarity", "assets/rarity/rarity.json", "assets/rarity");
+    this.load.multiatlas("types","assets/types/types.json", "assets/types");
     this.load.multiatlas("COMMON","assets/pokemons/common/common.json","assets/pokemons/common");
     this.load.multiatlas("UNCOMMON","assets/pokemons/uncommon/uncommon.json","assets/pokemons/uncommon");
     this.load.multiatlas("RARE","assets/pokemons/rare/rare.json","assets/pokemons/rare");
@@ -84,7 +86,6 @@ export default class GameScene extends Scene {
     this.load.multiatlas("LEGENDARY","assets/pokemons/legendary/legendary.json","assets/pokemons/legendary");
     this.load.multiatlas("attacks","assets/attacks/attacks.json","assets/attacks");
     this.load.image("user", "assets/ui/user.png");
-    this.load.image("dashboard", "assets/ui/dashboard.png");
     this.load.image("transition", "assets/ui/transition.png");
     this.load.image("money", "assets/ui/money.png");
     this.load.image("refreshButton", "assets/ui/refreshButton.png");

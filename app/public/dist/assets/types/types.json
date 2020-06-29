@@ -1,0 +1,461 @@
+{
+	"textures": [
+		{
+			"image": "types.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 823,
+				"h": 43
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "FAIRY",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 44,
+						"h": 41
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 44,
+						"h": 41
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 44,
+						"h": 41
+					}
+				},
+				{
+					"filename": "DRAGON",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 44,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 44,
+						"h": 40
+					},
+					"frame": {
+						"x": 47,
+						"y": 1,
+						"w": 44,
+						"h": 40
+					}
+				},
+				{
+					"filename": "NORMAL",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 41
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 41
+					},
+					"frame": {
+						"x": 93,
+						"y": 1,
+						"w": 41,
+						"h": 41
+					}
+				},
+				{
+					"filename": "FLORA",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 39
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 39
+					},
+					"frame": {
+						"x": 136,
+						"y": 1,
+						"w": 41,
+						"h": 39
+					}
+				},
+				{
+					"filename": "FLYING",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 179,
+						"y": 1,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "METAL",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 33
+					},
+					"frame": {
+						"x": 221,
+						"y": 1,
+						"w": 40,
+						"h": 33
+					}
+				},
+				{
+					"filename": "MINERAL",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 33
+					},
+					"frame": {
+						"x": 263,
+						"y": 1,
+						"w": 40,
+						"h": 33
+					}
+				},
+				{
+					"filename": "PSYCHIC",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 29
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 29
+					},
+					"frame": {
+						"x": 305,
+						"y": 1,
+						"w": 40,
+						"h": 29
+					}
+				},
+				{
+					"filename": "GROUND",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 27
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 27
+					},
+					"frame": {
+						"x": 347,
+						"y": 1,
+						"w": 40,
+						"h": 27
+					}
+				},
+				{
+					"filename": "BUG",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 39,
+						"h": 41
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 39,
+						"h": 41
+					},
+					"frame": {
+						"x": 389,
+						"y": 1,
+						"w": 39,
+						"h": 41
+					}
+				},
+				{
+					"filename": "FIRE",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 39,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 39,
+						"h": 40
+					},
+					"frame": {
+						"x": 430,
+						"y": 1,
+						"w": 39,
+						"h": 40
+					}
+				},
+				{
+					"filename": "DARK",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 38,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 38,
+						"h": 40
+					},
+					"frame": {
+						"x": 471,
+						"y": 1,
+						"w": 38,
+						"h": 40
+					}
+				},
+				{
+					"filename": "AQUATIC",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 38,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 38,
+						"h": 37
+					},
+					"frame": {
+						"x": 511,
+						"y": 1,
+						"w": 38,
+						"h": 37
+					}
+				},
+				{
+					"filename": "ELECTRIC",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 37,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 37,
+						"h": 40
+					},
+					"frame": {
+						"x": 551,
+						"y": 1,
+						"w": 37,
+						"h": 40
+					}
+				},
+				{
+					"filename": "AMORPH",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 36,
+						"h": 41
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 36,
+						"h": 41
+					},
+					"frame": {
+						"x": 590,
+						"y": 1,
+						"w": 36,
+						"h": 41
+					}
+				},
+				{
+					"filename": "FIELD",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 36,
+						"h": 41
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 36,
+						"h": 41
+					},
+					"frame": {
+						"x": 628,
+						"y": 1,
+						"w": 36,
+						"h": 41
+					}
+				},
+				{
+					"filename": "FIGHTING",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 36,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 36,
+						"h": 40
+					},
+					"frame": {
+						"x": 666,
+						"y": 1,
+						"w": 36,
+						"h": 40
+					}
+				},
+				{
+					"filename": "HUMAN",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 31,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 31,
+						"h": 40
+					},
+					"frame": {
+						"x": 704,
+						"y": 1,
+						"w": 31,
+						"h": 40
+					}
+				},
+				{
+					"filename": "GRASS",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 29,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 29,
+						"h": 40
+					},
+					"frame": {
+						"x": 737,
+						"y": 1,
+						"w": 29,
+						"h": 40
+					}
+				},
+				{
+					"filename": "POISON",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 28,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 28,
+						"h": 40
+					},
+					"frame": {
+						"x": 768,
+						"y": 1,
+						"w": 28,
+						"h": 40
+					}
+				},
+				{
+					"filename": "WATER",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 24,
+						"h": 41
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 24,
+						"h": 41
+					},
+					"frame": {
+						"x": 798,
+						"y": 1,
+						"w": 24,
+						"h": 41
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:bb113e221203f97bddf544730b144839:7df76bbdb8cc480d55d77f84874dad65:5961efbfbf4c56b8745347e7a663a32f$"
+	}
+}
