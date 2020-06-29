@@ -55,41 +55,40 @@ class Board {
     orientation(r0, c0, r1, c1){
         let vx = r1 - r0;
         let vy = c1 - c0;
-        let angle = Math.atan2(vy, vx);
-        if (angle < 0) {
-            angle += 2 * Math.PI;
+        if(vx > 0){
+            if(vy == 0){
+                return ORIENTATION.RIGHT;
+            }
+            else if(vy < 0){
+                return ORIENTATION.DOWNRIGHT;
+            }
+            else{
+                return ORIENTATION.UPRIGHT;
+            }
         }
-        let angleSeparation = Math.PI / 8;
-        let orientation;
-    
-        if (angle < angleSeparation) {
-            orientation = ORIENTATION.RIGHT;
+        else if(vx == 0){
+            if(vy == 0){
+                console.log("error orientation");
+                return ORIENTATION.DOWNLEFT;
+            }
+            else if(vy < 0){
+                return ORIENTATION.DOWN;
+            }
+            else{
+                return ORIENTATION.UP;
+            }
         }
-        else if (angle < angleSeparation * 3) {
-            orientation = ORIENTATION.UPRIGHT;
+        else{
+            if(vy == 0){
+                return ORIENTATION.LEFT;
+            }
+            else if(vy < 0){
+                return ORIENTATION.DOWNLEFT;
+            }
+            else{
+                return ORIENTATION.UPLEFT;
+            }
         }
-        else if (angle < angleSeparation * 5) {
-            orientation = ORIENTATION.UP;
-        }
-        else if (angle < angleSeparation * 7) {
-            orientation = ORIENTATION.UPLEFT;
-        }
-        else if (angle < angleSeparation * 9) {
-            orientation = ORIENTATION.LEFT;
-        }
-        else if (angle < angleSeparation * 11) {
-            orientation = ORIENTATION.DOWNLEFT;
-        }
-        else if (angle < angleSeparation * 13) {
-            orientation = ORIENTATION.DOWN;
-        }
-        else if (angle < angleSeparation * 15) {
-            orientation = ORIENTATION.DOWNRIGHT;
-        }
-        else {
-            orientation = ORIENTATION.RIGHT;
-        }
-        return orientation;
     }
 
     getAdjacentCells(row, col) {

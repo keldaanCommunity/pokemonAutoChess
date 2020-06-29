@@ -256,11 +256,14 @@ export default class AnimationManager {
   }
 
   playAnimation(entity, spriteKey) {
-    entity.flipX = this.flipxTable[entity.orientation];
+    entity.first.flipX = this.flipxTable[entity.orientation];
     entity.first.anims.play(spriteKey);
   }
 
   getSpriteKey(entity) {
+    if(entity.orientation == "RIGHT"){
+      console.log(entity);
+    }
     return `${entity.index}/${this.actionTable[entity.action]}/${this.orientationTable[entity.orientation]}`;
   }
 

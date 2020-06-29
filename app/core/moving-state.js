@@ -44,9 +44,9 @@ class MovingState extends PokemonState {
             }
         });
         if(x !== undefined && y !== undefined){
-            //console.log(`pokemon moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates[0]}, ${coordinates[1]}))`);
-            board.moveValue(pokemon.positionX, pokemon.positionY, x, y);
             pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, x, y);
+            //console.log(`pokemon moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates[0]}, ${coordinates[1]})), orientation: ${pokemon.orientation}`);
+            board.moveValue(pokemon.positionX, pokemon.positionY, x, y);
             pokemon.positionX = x;
             pokemon.positionY = y;
         }

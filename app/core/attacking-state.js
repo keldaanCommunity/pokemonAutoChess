@@ -32,6 +32,7 @@ class AttackingState extends PokemonState {
         let target = board.getValue(coordinates[0], coordinates[1]);
         if(target){
             pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
+            //console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
             target.handleDamage(pokemon.atk, board);
         }
         else{

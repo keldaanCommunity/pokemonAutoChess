@@ -122,7 +122,7 @@ export default class Pokemon extends GameObjects.Container {
       this.orientation = pokemon.orientation;
     }
     else{
-      this.orientation = "DOWNRIGHT";
+      this.orientation = "DOWNLEFT";
     }
     if(pokemon.action){
       this.action = pokemon.action;
