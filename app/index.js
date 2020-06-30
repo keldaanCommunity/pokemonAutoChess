@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const Colyseus = require("colyseus");
 const Monitor = require("@colyseus/monitor");
 const socialMiddleware = require("@colyseus/social/express").default;
+const LobbyRoom = Colyseus.LobbyRoom;
 
 const port = process.env.PORT || 9000;
 
@@ -38,11 +39,11 @@ app.get("/colyseus", Monitor.monitor(gameServer)); // colyseus monitor panel
 
 // Room
 
-const LobbyRoom = require("./rooms/lobby-room");
 const PreprationRoom = require("./rooms/preparation-room");
 const GameRoom = require("./rooms/game-room");
+
 gameServer.define("lobby", LobbyRoom);
-gameServer.define("room", PreprationRoom);
+gameServer.define("room", PreprationRoom).enableRealtimeListing();
 gameServer.define("game", GameRoom);
 
 

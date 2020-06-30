@@ -1,9 +1,12 @@
 
+import RoomAvailable from "colyseus.js";
+
 class LobbyPage {
   constructor(args) {
     this.room = args.room;
     this.render();
     this.addEventListeners();
+    this.allRooms = [];
   }
 
   render() {
@@ -16,16 +19,9 @@ class LobbyPage {
     </header>
     <main>
       <p>Logged as : ${_client.auth.username}</p>
-      <h3>Available players :</h3>
-      <ul id="player-list"></ul>
       <h3>Available room ids:</h3>
-      <button id="refresh">Refresh Room List</button>
       <ul id="room-list"></ul>
       <button id="create">Create new room</button>
-      <h3>Join room :</h3>
-      <label for="room-id">Enter the id of desired room:</label>
-      <input type="text" id="room-id" name="room-id" required">
-      <button id="join">Join Room</button>
     </main>`;
     document.body.innerHTML = "";
     document.body.appendChild(content);
@@ -36,16 +32,9 @@ class LobbyPage {
       this.room.leave();
       window.dispatchEvent(new CustomEvent("render-home"));
     });
-    document.getElementById("refresh").addEventListener("click", e => {
-      _client.getAvailableRooms("room")
-        .then(rooms => this.handleRoomListChange(rooms))
-        .catch(e => console.error(e));
-    });
+    
     document.getElementById("create").addEventListener("click", e => {
       this.createRoom();
-    });
-    document.getElementById("join").addEventListener("click", e => {
-      this.joinRoomById(document.getElementById("room-id").value);
     });
 
     this.room.onLeave((client, consent) => {
@@ -54,13 +43,32 @@ class LobbyPage {
         sessionStorage.setItem('PAC_Session_ID', this.room.sessionId);
       }
     });
-    this.room.onStateChange((state) => {
-      this.handleUserChange();
+
+    this.room.onMessage("rooms", (rooms) => {
+      this.allRooms = rooms;
+      this.handleRoomListChange();
+    });
+    
+    this.room.onMessage("+", ([roomId, room]) => {
+      const roomIndex = this.allRooms.findIndex((room) => room.roomId === roomId);
+      if (roomIndex !== -1) {
+        this.allRooms[roomIndex] = room;
+    
+      } else {
+        this.allRooms.push(room);
+      }
+      this.handleRoomListChange();
+    });
+    
+    this.room.onMessage("-", (roomId) => {
+      this.allRooms = this.allRooms.filter((room) => room.roomId !== roomId);
+      this.handleRoomListChange();
     });
   }
 
   createRoom() {
     _client.create("room", {/* options */ }).then(room => {
+      this.room.leave();
       window.dispatchEvent(new CustomEvent("render-room", { detail: { room: room } }));
     }).catch(e => {
       console.error("join error", e);
@@ -79,22 +87,20 @@ class LobbyPage {
     });
   }
 
-  handleUserChange(){
-    document.getElementById("player-list").innerHTML = "";
-    for (let id in this.room.state.users) {
-      let item = document.createElement("li");
-      item.textContent = this.room.state.users[id].name;
-      document.getElementById("player-list").appendChild(item);
+  handleRoomListChange(){
+    let self = this;
+    if(document.getElementById("room-list")){
+      document.getElementById("room-list").innerHTML = "";
+      this.allRooms.forEach((room) => {
+        let item = document.createElement("li");
+        item.textContent = `Room id : ${room.roomId} (${room.clients}/${room.maxClients})`;
+        let button = document.createElement("button");
+        button.textContent = "Join";
+        button.addEventListener("click", () => {self.joinRoomById(room.roomId)});
+        item.appendChild(button);
+        document.getElementById("room-list").appendChild(item);
+      });
     }
-  }
-
-  handleRoomListChange(rooms){
-    document.getElementById("room-list").innerHTML = "";
-    rooms.forEach((room) => {
-      let item = document.createElement("li");
-      item.textContent = `Room id : ${room.roomId} (${room.clients}/${room.maxClients})`;
-      document.getElementById("room-list").appendChild(item);
-    });
   }
 }
 
