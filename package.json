@@ -33,7 +33,7 @@
     "dotenv": "^8.2.0",
     "email-validator": "^2.0.4",
     "express": "^4.16.4",
-    "express-jwt": "^5.3.3",
+    "express-jwt": "^6.0.0",
     "helmet": "^3.22.0",
     "phaser3-rex-plugins": "^1.1.18",
     "uniqid": "^5.0.3"
