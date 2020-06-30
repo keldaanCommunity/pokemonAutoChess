@@ -25,8 +25,9 @@ class LoginPage {
       <input name="radio-group1" id="tab-2" type="radio">
       <label for="tab-2">Facebook</label>
       <div class="tab-row">
-        <div><div id="login-account">
-          <label>Username</label><input type="string" id="input-username">
+        <div>
+        <div id="login-account">
+          <label>Email</label><input type="string" id="input-username">
           <label>Password</label><input type="password" id="input-password">
           <button id="button-login">Log in</button>
         </div></div>
@@ -49,10 +50,9 @@ class LoginPage {
   }
 
   handleLoginButtonClick(e) {
-    alert("Not available for now");
     var inputMail = document.getElementById("input-username").value;
     var inputPassword = document.getElementById("input-password").value;
-    // authenticateWithEmail(inputMail, inputPassword);
+    this.authenticateWithEmail(inputMail, inputPassword);
   }
 
   initFBLogin() {
@@ -112,17 +112,17 @@ class LoginPage {
         //console.log("result", result);
         this.joinLobbyRoom();
       }, error => {
-        //console.log("errror", error);
+        console.log("errror", error);
       });
   }
 
   authenticateWithEmail(email, password) {
-    client.auth.login({ email: email, password: password })
+    _client.auth.login({ email: email, password: password })
       .then(result => {
         //console.log("result", result);
         this.joinLobbyRoom();
       }, error => {
-        //console.log("errror", error);
+        alert(error.data.error);
       });
   }
 

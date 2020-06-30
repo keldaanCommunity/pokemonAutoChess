@@ -72,7 +72,7 @@ class GameRoom extends colyseus.Room {
 
   onJoin(client, options, auth) {
     console.log("client joined game");
-    this.state.players[client.sessionId] = new Player(client.sessionId, auth.username);
+    this.state.players[client.sessionId] = new Player(client.sessionId, auth.email);
     this.state.shop.assignShop(this.state.players[client.sessionId]);
   }
 

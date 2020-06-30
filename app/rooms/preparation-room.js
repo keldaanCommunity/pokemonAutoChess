@@ -33,7 +33,7 @@ class PreparationRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
-    this.state.users[auth.facebookId] = new User(auth.facebookId, auth.username);
+    this.state.users[auth.facebookId] = new User(auth.facebookId, auth.email);
     console.log("client joined room");
   }
 

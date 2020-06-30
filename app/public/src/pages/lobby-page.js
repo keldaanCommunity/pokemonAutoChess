@@ -18,7 +18,7 @@ class LobbyPage {
       <button id="button-home">Home</button>
     </header>
     <main>
-      <p>Logged as : ${_client.auth.username}</p>
+      <p>Logged as : ${_client.auth.email}</p>
       <h3>Available room ids:</h3>
       <ul id="room-list"></ul>
       <button id="create">Create new room</button>
@@ -39,8 +39,8 @@ class LobbyPage {
 
     this.room.onLeave((client, consent) => {
       if (consent) {
-        sessionStorage.setItem('PAC_Room_ID', this.room.id);
-        sessionStorage.setItem('PAC_Session_ID', this.room.sessionId);
+        //sessionStorage.setItem('PAC_Room_ID', this.room.id);
+        //sessionStorage.setItem('PAC_Session_ID', this.room.sessionId);
       }
     });
 
