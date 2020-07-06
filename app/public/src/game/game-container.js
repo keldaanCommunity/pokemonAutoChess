@@ -174,6 +174,7 @@ class GameContainer {
       case "lastBattleResult":
         if (this.room.sessionId == player.id) {
           this.game.scene.getScene("gameScene").moneyContainer.onWonChange(change.value);
+          this.game.scene.getScene("gameScene").lastBattleResult.setText(change.value);
         }
         break;
 
