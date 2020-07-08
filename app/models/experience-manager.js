@@ -31,9 +31,9 @@ class ExperienceManager extends schema.Schema {
 }
 
 schema.defineTypes(ExperienceManager, {
-  level: "number",
-  experience: "number",
-  expNeeded: "number"
+  level: "uint8",
+  experience: "uint8",
+  expNeeded: "uint8"
 });
 
 module.exports = ExperienceManager;

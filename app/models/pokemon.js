@@ -999,11 +999,11 @@ schema.defineTypes(Pokemon, {
   name: "string",
   types: ["string"],
   rarity: "string",
-  index: "number",
+  index: "uint16",
   evolution: "string",
-  positionX: "number",
-  positionY: "number",
-  cost: "number",
+  positionX: "uint8",
+  positionY: "uint8",
+  cost: "uint8",
   attackSprite: "string"
 });
 

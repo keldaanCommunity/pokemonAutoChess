@@ -21,7 +21,7 @@ class GameState extends schema.Schema {
 }
 
 schema.defineTypes(GameState, {
-  roundTime: "number",
+  roundTime: "uint8",
   phase: "string",
   players: { map: Player }
 });
@@ -223,9 +223,9 @@ class GameRoom extends colyseus.Room {
 
   getRandomOpponent(playerId) {
     let playersId = [];
-    let playerNumber = Object.keys(this.state.players).length;
+    let playeruint8 = Object.keys(this.state.players).length;
     for (let id in this.state.players) {
-      if(id != playerId || playerNumber == 1){
+      if(id != playerId || playeruint8 == 1){
         playersId.push(id);
       }
     }
@@ -278,6 +278,7 @@ class GameRoom extends colyseus.Room {
     detail.pokemonId in this.state.players[client.sessionId].board) {
         this.state.players[client.sessionId].money += COST[this.state.players[client.sessionId].board[detail.pokemonId].rarity];
         delete this.state.players[client.sessionId].board[detail.pokemonId];
+        this.state.players[client.sessionId].synergies.update(this.state.players[client.sessionId].board);
     }
   }
 
@@ -314,6 +315,7 @@ class GameRoom extends colyseus.Room {
             }
           }
         }
+        this.state.players[client.sessionId].synergies.update(this.state.players[client.sessionId].board);
       }
     }
 
@@ -356,6 +358,7 @@ class GameRoom extends colyseus.Room {
 
       this.computeEvolutions(this.state.players[sessionId].board);
       this.computeEvolutions(this.state.players[sessionId].board);
+      this.state.players[sessionId].synergies.update(this.state.players[sessionId].board);
     }
 
   }

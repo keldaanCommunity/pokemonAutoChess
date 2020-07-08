@@ -2,6 +2,8 @@ const schema = require("@colyseus/schema");
 const Pokemon = require("./pokemon").Pokemon;
 const ExperienceManager = require("./experience-manager");
 const Simulation = require('../core/simulation');
+const Synergies = require('./synergies');
+
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 
@@ -13,6 +15,7 @@ class Player extends Schema {
     this.board = new MapSchema();
     this.shop = new MapSchema();
     this.experienceManager = new ExperienceManager();
+    this.synergies = new Synergies();
     this.money = 5;
     this.life = 20;
     this.simulation = new Simulation({},{});
@@ -30,12 +33,13 @@ schema.defineTypes(Player, {
   shop: { map: Pokemon },
   simulation : Simulation,
   experienceManager: ExperienceManager,
-  level: "number",
-  money: "number",
-  life: "number",
+  synergies: Synergies,
+  level: "uint8",
+  money: "uint8",
+  life: "uint8",
   shopLocked: "boolean",
-  streak: "number",
-  interest : "number",
+  streak: "uint8",
+  interest : "uint8",
   lastBattleResult: "string"
 });
 

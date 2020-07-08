@@ -76,6 +76,11 @@ class GameContainer {
     player.experienceManager.onChange = (changes => {
       changes.forEach(change => self.handleExperienceChange(change, player));
     });
+
+    player.synergies.onChange = (changes => {
+      changes.forEach(change => self.handleSynergiesChange(change, player));
+    });
+
     player.simulation.blueTeam.onAdd = (pokemon, key) =>{
       self.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = function(changes) {
@@ -104,9 +109,11 @@ class GameContainer {
       case "roundTime":
         this.game.scene.getScene("gameScene").updateTime();
         break;
+
       case "phase":
         this.game.scene.getScene("gameScene").updatePhase();
         break;
+
       default:
         break;
     }
@@ -122,6 +129,12 @@ class GameContainer {
 
   handlePokemonChange(playerId, change, pokemon){
     this.game.scene.getScene("gameScene").battleManager.changePokemon(playerId, change, pokemon);
+  }
+
+  handleSynergiesChange(change, player){
+    if(player.id == this.player.id){
+      this.game.scene.getScene("gameScene").synergiesContainer.updateSynergy(change.field, change.value);
+    }
   }
 
   handleExperienceChange(change, player){
@@ -182,18 +195,23 @@ class GameContainer {
         this.game.scene.getScene("gameScene").shopContainer.updatePortraits();
         }
         break;
+
       case "board":
         if(this.game.scene.getScene("gameScene").boardManager.player.id == player.id){
           this.game.scene.getScene("gameScene").boardManager.update(player.id);
         }
         break;
+
       case "life":
         this.game.scene.getScene("gameScene").playerContainer.onLifeChange(player.id, change.value);
         break;
+
       case "shopLocked":
         if(this.room.sessionId == player.id){
           this.game.scene.getScene("gameScene").shopContainer.lockButton.updateState();
         }
+        break;
+      
     }
   }
 

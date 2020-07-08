@@ -6,7 +6,7 @@ import BoardContainer from "../components/board-manager";
 import BoardManager from "../components/board-manager";
 import BattleManager from "../components/battle-manager";
 import MoneyContainer from "../components/money-container";
-
+import SynergiesContainer from "../components/synergies-container";
 
 export default class GameScene extends Scene {
 
@@ -108,6 +108,7 @@ export default class GameScene extends Scene {
     this.shopContainer = new ShopContainer(this, 370, 910);
     this.playerContainer = new PlayerContainer(this, 1750, 100);
     this.boardContainer = new BoardContainer(this, 275, 775);
+    this.synergiesContainer = new SynergiesContainer(this, 1300, 90);
     this.moneyContainer = new MoneyContainer(this,20, 60, window.state.players[window.sessionId]);
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
