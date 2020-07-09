@@ -11,7 +11,7 @@ export default class PlayerContainer extends GameObjects.Container {
   }
 
   addPlayer(player){
-    this.add(new PlayerPortraitContainer(this.scene, 0, 100 * this.length, player));
+    this.add(new PlayerPortraitContainer(this.scene, 0, 102 * this.length, player));
   }
 
   removePlayer(id){

@@ -106,9 +106,9 @@ export default class GameScene extends Scene {
     this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);
     this.shopContainer = new ShopContainer(this, 370, 910);
-    this.playerContainer = new PlayerContainer(this, 1750, 100);
+    this.playerContainer = new PlayerContainer(this, 1750, 105);
     this.boardContainer = new BoardContainer(this, 275, 775);
-    this.synergiesContainer = new SynergiesContainer(this, 1300, 90);
+    this.synergiesContainer = new SynergiesContainer(this, 1362, 101);
     this.moneyContainer = new MoneyContainer(this,20, 60, window.state.players[window.sessionId]);
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
@@ -119,11 +119,13 @@ export default class GameScene extends Scene {
       align: "center"
     };
     this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name, this.textStyle);
-    this.timeText = this.add.text(700, 20, window.state.roundTime, this.textStyle);
-    this.add.text(800, 20, "Last battle: ", this.textStyle);
-    this.lastBattleResult = this.add.text(1000, 20, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
-    this.add.text(740, 20, "s", this.textStyle);
-    this.phaseText = this.add.text(550, 20, window.state.phase, this.textStyle);
+
+    this.timeText = this.add.text(700, 25, window.state.roundTime, this.textStyle);
+    this.add.text(740, 25, "s", this.textStyle);
+
+    this.lastBattleResult = this.add.text(1070, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
+    
+    this.phaseText = this.add.text(320, 25, window.state.phase, this.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, "transition").setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(Number.MAX_VALUE);
     this.transitionScreen.alpha = 0;
@@ -164,6 +166,18 @@ export default class GameScene extends Scene {
     this.phaseText.setText(window.state.phase);
   }
 
+  drawRectangles(){
+    this.graphics.forEach(rect => {
+      rect.setVisible(true);
+    });
+  }
+
+  removeRectangles(){
+    this.graphics.forEach(rect => {
+      rect.setVisible(false);
+    });
+  }
+
   initilizeDragAndDrop() {
     let self = this;
     self.zones = [];
@@ -171,17 +185,18 @@ export default class GameScene extends Scene {
 
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 9; j++) {
-        self.zones.push(self.add.zone(330 + 100 * j, 790 - 80 * i, 90, 70).setRectangleDropZone(90, 70).setName("zone-" + j + "-" + i));
-        self.graphics.push(self.add.graphics().lineStyle(2, 0xffff00).strokeRect(
+        self.zones.push(self.add.zone(323 + 102 * j, 800 - 102 * i, 102, 102).setRectangleDropZone(102, 102).setName("zone-" + j + "-" + i));
+        self.graphics.push(self.add.graphics().lineStyle(3, 0x304050).strokeRect(
           self.zones[i * 9 + j].x - self.zones[i * 9 + j].input.hitArea.width / 2,
           self.zones[i * 9 + j].y - self.zones[i * 9 + j].input.hitArea.height / 2,
           self.zones[i * 9 + j].input.hitArea.width,
-          self.zones[i * 9 + j].input.hitArea.height)
+          self.zones[i * 9 + j].input.hitArea.height).setVisible(false)
         );
       }
     }
 
     self.input.on("dragstart", function (pointer, gameObject) {
+      self.drawRectangles();
       self.children.bringToTop(gameObject);
     }, self);
 
@@ -191,6 +206,7 @@ export default class GameScene extends Scene {
     });
 
     self.input.on("drop", function (pointer, gameObject, dropZone) {
+      self.removeRectangles();
       if(dropZone.name == "sell-zone"){
         window.dispatchEvent(new CustomEvent("sell-drop", {
           detail: {

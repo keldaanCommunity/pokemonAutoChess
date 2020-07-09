@@ -22,7 +22,7 @@ class Player extends Schema {
     this.shopLocked = false;
     this.streak = 0;
     this.interest = 0;
-    this.lastBattleResult = "No battle yet";
+    this.lastBattleResult = "";
   }
 }
 

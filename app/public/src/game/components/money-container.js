@@ -15,7 +15,6 @@ export default class MoneyContainer extends GameObjects.Container {
         color: "white",
         align: "center"
       };
-    this.add(new GameObjects.Rectangle(scene,80,70,250,300, 0x304050));
 
     this.add(new GameObjects.Text(scene,0,0,"Money:", this.bigTextStyle));
     this.money = new GameObjects.Text(scene, 120, 0, player.money, this.bigTextStyle);

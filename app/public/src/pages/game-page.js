@@ -6,7 +6,10 @@ class GamePage {
     this.render();
     this.container = document.getElementById("game");
     window.transformCoordinate = function(x,y){
-      return [x * 100 + 330, 790 - 80 * y];
+      return [323 + 102 * x, 800 - 102 * y];
+    }
+    window.transformAttackCoordinate = function(x,y){
+      return [323 + 102 * x, 698 - 102 * y];
     }
     window.getAttackScale = function(attackSprite){
       switch (attackSprite) {

@@ -18,7 +18,8 @@ export default class BattleManager {
 
   addPokemon(playerId, pokemon) {
     if(this.player.id == playerId){
-      let pokemonUI = new Pokemon(this.scene, pokemon.positionX * 100 + 330, 710 - 80 * pokemon.positionY, pokemon);
+      let coordinates = window.transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
+      let pokemonUI = new Pokemon(this.scene, coordinates[0],coordinates[1], pokemon);
       window.animationManager.animatePokemon(pokemonUI);
       this.group.add(pokemonUI);
     }
@@ -52,7 +53,8 @@ export default class BattleManager {
             else if(change.field == "positionY"){
               children[i].positionY = pokemon.positionY;
             }
-            children[i].moveManager.moveTo(pokemon.positionX * 100 +330, 710 - 80 * pokemon.positionY);
+            let coordinates = window.transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
+            children[i].moveManager.moveTo(coordinates[0], coordinates[1]);
           }
           else if(change.field == "orientation"){
             children[i].orientation = pokemon.orientation;

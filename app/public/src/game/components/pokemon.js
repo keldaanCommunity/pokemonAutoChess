@@ -33,7 +33,8 @@ export default class Pokemon extends GameObjects.Container {
       x = this.targetX;
       y = this.targetY;
     }
-    this.projectile = this.scene.add.sprite(x * 100 +330, 710 - 80 * y, "attacks",`${this.attackSprite}/000`);
+    let coordinates = window.transformAttackCoordinate(x,y);
+    this.projectile = this.scene.add.sprite(coordinates[0], coordinates[1], "attacks",`${this.attackSprite}/000`);
     let scale = window.getAttackScale(this.attackSprite);
     this.projectile.setScale(scale[0], scale[1]);
     this.projectile.anims.play(`${this.attackSprite}`);
@@ -42,12 +43,13 @@ export default class Pokemon extends GameObjects.Container {
 
   addTween(){
     let self = this;
+    let coordinates = window.transformAttackCoordinate(this.targetX,this.targetY);
     if(this.scene){
       //console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
       this.scene.tweens.add({
         targets: this.projectile,
-        x: this.targetX * 100 + 330,
-        y: 710 - this.targetY * 80,
+        x: coordinates[0],
+        y: coordinates[1],
         ease: 'Linear',
         duration: 1000,
         onComplete: function (tween, targets) {
@@ -78,7 +80,8 @@ export default class Pokemon extends GameObjects.Container {
         x = this.targetX;
         y = this.targetY;
       }
-      this.projectile.setPosition(x * 100 +330, 710 - 80 * y);
+      let coordinates = window.transformAttackCoordinate(x,y);
+      this.projectile.setPosition(coordinates[0], coordinates[1]);
       this.projectile.setVisible(true);
       this.addTween();
     }
