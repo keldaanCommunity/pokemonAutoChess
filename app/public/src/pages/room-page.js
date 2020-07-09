@@ -29,6 +29,7 @@ class RoomPage {
   addEventListeners() {
     document.getElementById("button-home").addEventListener("click", e => {
       this.room.leave();
+      _client.auth.logout();
       window.dispatchEvent(new CustomEvent("render-home"));
     });
     document.getElementById("start").addEventListener("click", e => {

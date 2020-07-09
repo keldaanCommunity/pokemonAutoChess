@@ -120,6 +120,8 @@ export default class GameScene extends Scene {
     };
     this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name, this.textStyle);
     this.timeText = this.add.text(700, 20, window.state.roundTime, this.textStyle);
+    this.add.text(800, 20, "Last battle: ", this.textStyle);
+    this.lastBattleResult = this.add.text(1000, 20, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
     this.add.text(740, 20, "s", this.textStyle);
     this.phaseText = this.add.text(550, 20, window.state.phase, this.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, "transition").setScale(1.5, 1.5);
