@@ -2,9 +2,9 @@ const colyseus = require("colyseus");
 const PreparationState = require("./states/preparation-state");
 const Dispatcher = require("@colyseus/command").Dispatcher;
 const social = require("@colyseus/social");
-const OnJoinCommand = require("./scenarios/preparation-commands").OnJoinCommand;
-const OnGameStartCommand = require("./scenarios/preparation-commands").OnGameStartCommand;
-const OnLeaveCommand = require("./scenarios/preparation-commands").OnLeaveCommand;
+const OnJoinCommand = require("./commands/preparation-commands").OnJoinCommand;
+const OnGameStartCommand = require("./commands/preparation-commands").OnGameStartCommand;
+const OnLeaveCommand = require("./commands/preparation-commands").OnLeaveCommand;
 
 class PreparationRoom extends colyseus.Room {
 
