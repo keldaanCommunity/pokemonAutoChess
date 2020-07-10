@@ -26,6 +26,7 @@
     "start": "node ./app/index.js"
   },
   "dependencies": {
+    "@colyseus/command": "^0.1.5",
     "@colyseus/monitor": "^0.12.2",
     "@colyseus/social": "^0.11.6",
     "colyseus": "^0.13.7",

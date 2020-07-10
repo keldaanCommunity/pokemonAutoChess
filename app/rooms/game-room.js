@@ -1,30 +1,12 @@
 const colyseus = require("colyseus");
-const schema = require("@colyseus/schema");
 const social = require("@colyseus/social");
-const Player = require("../models/player");
-const Shop = require("../models/shop");
 const Pokemon = require("../models/pokemon");
 const PokemonFactory = require("../models/pokemon-factory");
 const STATE = require("../models/enum").STATE;
 const COST = require("../models/enum").COST;
 const Simulation = require('../core/simulation');
-
-class GameState extends schema.Schema {
-  constructor() {
-    super();
-    this.time = 30000;
-    this.roundTime = Math.round(this.time/1000);
-    this.phase = STATE.PICK;
-    this.players = new schema.MapSchema();
-    this.shop = new Shop();
-  }
-}
-
-schema.defineTypes(GameState, {
-  roundTime: "uint8",
-  phase: "string",
-  players: { map: Player }
-});
+const GameState = require('./states/game-state');
+const Player = require("../models/player");
 
 class GameRoom extends colyseus.Room {
   // When room is initialized
@@ -60,15 +42,6 @@ class GameRoom extends colyseus.Room {
   }
 
   async onAuth(client, options, request) {
-    console.log("onAuth");
-    // const response = await superagent
-    //   .get(`https://graph.facebook.com/debug_token`)
-    //   .set("Accept", "application/json")
-    //   .query({
-    //     "input_token": options.token,
-    //     "access_token": process.env.FACEBOOK_APP_TOKEN
-    //   });
-    // return response.body.data;
     let token = social.verifyToken(options.token);
     let user = await social.User.findById(token._id);
     return user;

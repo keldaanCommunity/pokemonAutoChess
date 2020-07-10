@@ -1,30 +1,24 @@
 const colyseus = require("colyseus");
-const schema = require("@colyseus/schema");
+const PreparationState = require("./states/preparation-state");
+const Dispatcher = require("@colyseus/command").Dispatcher;
 const social = require("@colyseus/social");
-const User = require("../models/user");
-const uniqid = require("uniqid");
-
-class PreparationState extends schema.Schema {
-  constructor() {
-    super();
-    this.users = new schema.MapSchema();
-  }
-}
-
-schema.defineTypes(PreparationState, {
-  users: { map: User }
-});
+const OnJoinCommand = require("./scenarios/preparation-commands").OnJoinCommand;
+const OnGameStartCommand = require("./scenarios/preparation-commands").OnGameStartCommand;
+const OnLeaveCommand = require("./scenarios/preparation-commands").OnLeaveCommand;
 
 class PreparationRoom extends colyseus.Room {
+
+  constructor(){
+    super();
+    this.dispatcher = new Dispatcher(this);
+  }
 
   onCreate(options) {
     this.setState(new PreparationState());
     this.maxClients = 8;
-
     this.onMessage("game-start", (client, message) => {
-      this.broadcast("game-start", message, {except: client});
+      this.dispatcher.dispatch(new OnGameStartCommand(), { client, message });
     });
-
   }
 
   async onAuth(client, options, request) {
@@ -34,19 +28,15 @@ class PreparationRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
-
-    client.id = uniqid();
-    this.state.users[client.id] = new User(client.id, auth.email);
-    console.log("client joined room");
+    this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth });
   }
 
   onLeave(client, consented) {
-    console.log("client leaved room");
-    delete this.state.users[new String(client.id)];
+    this.dispatcher.dispatch(new OnLeaveCommand(), { client, consented });
   }
 
   onDispose() {
-
+    this.dispatcher.stop();
   }
 }
 
