@@ -3,6 +3,7 @@ const Pokemon = require("../../models/pokemon");
 const STATE = require("../../models/enum").STATE;
 const COST = require("../../models/enum").COST;
 const Player = require("../../models/player");
+const PokemonFactory = require("../../models/pokemon-factory");
 
 class OnShopCommand extends Command {
     execute({sessionId, pokemonId}) {
@@ -15,10 +16,7 @@ class OnShopCommand extends Command {
             delete this.state.players[sessionId].shop[pokemonId];
             this.state.players[sessionId].board[pokemonId].positionX = this.room.getFirstAvailablePositionInBoard(this.state.players[sessionId].board);
             this.state.players[sessionId].board[pokemonId].positionY = 0;
-        
-            this.room.computeEvolutions(this.state.players[sessionId].board);
-            this.room.computeEvolutions(this.state.players[sessionId].board);
-            this.state.players[sessionId].synergies.update(this.state.players[sessionId].board);
+            return[new OnEvolutionCommand().setPayload(sessionId), new OnEvolutionCommand().setPayload(sessionId)];
         }
     }
 }
@@ -150,6 +148,45 @@ class OnUpdateCommand extends Command{
     }
 }
 
+class OnEvolutionCommand extends Command{
+    execute(sessionId){
+        
+        let evolve = false;
+        for (let id in  this.state.players[sessionId].board) {
+          let pokemon =  this.state.players[sessionId].board[id];
+          let count = 0;
+          let pokemonEvolutionName = pokemon.evolution;
+    
+          if (pokemonEvolutionName != "") {
+            for (let id in  this.state.players[sessionId].board) {
+              if ( this.state.players[sessionId].board[id].index == pokemon.index) {
+                count += 1;
+              }
+            }
+    
+            if (count == 3) {
+              for (let id in  this.state.players[sessionId].board) {
+                if ( this.state.players[sessionId].board[id].index == pokemon.index && count >= 0) {
+                  delete  this.state.players[sessionId].board[id];
+                  count -= 1;
+                }
+              }
+              let x = this.room.getFirstAvailablePositionInBoard( this.state.players[sessionId].board);
+              let pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName);
+              pokemonEvolved.positionX = x;
+              pokemonEvolved.positionY = 0;
+              this.state.players[sessionId].board[pokemonEvolved.id] = pokemonEvolved;
+              evolve = true;
+            }
+          }
+        }
+        if(evolve){
+            this.state.players[sessionId].synergies.update(this.state.players[sessionId].board);
+        }
+        return evolve;
+    }
+}
+
 module.exports = {
     OnShopCommand: OnShopCommand,
     OnDragDropCommand: OnDragDropCommand,
@@ -159,5 +196,6 @@ module.exports = {
     OnLevelUpCommand: OnLevelUpCommand,
     OnJoinCommand: OnJoinCommand,
     OnLeaveCommand: OnLeaveCommand,
-    OnUpdateCommand: OnUpdateCommand
+    OnUpdateCommand: OnUpdateCommand,
+    OnEvolutionCommand: OnEvolutionCommand
 }

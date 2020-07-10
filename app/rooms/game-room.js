@@ -1,7 +1,6 @@
 const colyseus = require("colyseus");
 const social = require("@colyseus/social");
 const Dispatcher = require("@colyseus/command").Dispatcher;
-const PokemonFactory = require("../models/pokemon-factory");
 const STATE = require("../models/enum").STATE;
 const Simulation = require('../core/simulation');
 const GameState = require('./states/game-state');
@@ -69,8 +68,6 @@ class GameRoom extends colyseus.Room {
 
   onDispose() {
     this.dispatcher.stop();
-    return [...Array(count)].map(_ =>
-      new ChildAsyncCommand().setPayload({ i: count }));
   }
 
 
@@ -223,40 +220,6 @@ class GameRoom extends colyseus.Room {
       }
     }
     return size;
-  }
-
-  computeEvolutions(board) {
-    let evolve = false;
-    for (let id in board) {
-      let pokemon = board[id];
-      let count = 0;
-      let pokemonEvolutionName = pokemon.evolution;
-
-      if (pokemonEvolutionName != "") {
-        for (let id in board) {
-          if (board[id].index == pokemon.index) {
-            count += 1;
-          }
-        }
-
-        if (count == 3) {
-          for (let id in board) {
-            if (board[id].index == pokemon.index && count >= 0) {
-              delete board[id];
-              count -= 1;
-            }
-          }
-          let x = this.getFirstAvailablePositionInBoard(board);
-          let pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName);
-          pokemonEvolved.positionX = x;
-          pokemonEvolved.positionY = 0;
-          board[pokemonEvolved.id] = pokemonEvolved;
-          evolve = true;
-        }
-      }
-    }
-
-    return evolve;
   }
 
   getPokemonByPosition(board, x, y) {

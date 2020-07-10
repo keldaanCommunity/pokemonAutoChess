@@ -2,7 +2,7 @@ const PokemonFactory = require("./pokemon-factory");
 
 class Shop {
 
-  static common = ["geodude", "azurill", "zubat","mareep","cleffa","igglybuff","caterpie","weedle","pidgey","hoppip","seedot","starly"];
+  static common = ["geodude"];
   static uncommon = ["bulbasaur","charmander","squirtle","chikorita","cyndaquil","totodile","treecko","torchic","mudkip","turtwig","chimchar","piplup","nidoranF","nidoranM"];
   static rare = ["pichu","machop","horsea","trapinch","spheal","aron","magnemite","rhyhorn","togepi","duskull","lotad","shinx","poliwag"];
   static epic = ["abra","gastly","dratini","larvitar","slakoth","ralts","bagon","beldum","gible","elekid","magby"];
