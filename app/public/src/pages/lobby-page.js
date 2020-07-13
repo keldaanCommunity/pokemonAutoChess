@@ -46,6 +46,7 @@ class LobbyPage {
     });
 
     this.room.onMessage("rooms", (rooms) => {
+      //console.log(rooms);
       this.allRooms = rooms;
       this.handleRoomListChange();
     });
@@ -93,13 +94,15 @@ class LobbyPage {
     if(document.getElementById("room-list")){
       document.getElementById("room-list").innerHTML = "";
       this.allRooms.forEach((room) => {
-        let item = document.createElement("li");
-        item.textContent = `Room id : ${room.roomId} (${room.clients}/${room.maxClients})`;
-        let button = document.createElement("button");
-        button.textContent = "Join";
-        button.addEventListener("click", () => {self.joinRoomById(room.roomId)});
-        item.appendChild(button);
-        document.getElementById("room-list").appendChild(item);
+        if(room.name != "game"){
+          let item = document.createElement("li");
+          item.textContent = `Room id : ${room.roomId} (${room.clients}/${room.maxClients})`;
+          let button = document.createElement("button");
+          button.textContent = "Join";
+          button.addEventListener("click", () => {self.joinRoomById(room.roomId)});
+          item.appendChild(button);
+          document.getElementById("room-list").appendChild(item);
+        }
       });
     }
   }
