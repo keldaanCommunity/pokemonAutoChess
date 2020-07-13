@@ -118,17 +118,25 @@ export default class GameScene extends Scene {
       color: "white",
       align: "center"
     };
+
+    this.bigTextStyle = {
+      fontSize: "80px",
+      fontFamily: "Verdana",
+      color: "white",
+      align: "center"
+    };
     this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name, this.textStyle);
 
     this.timeText = this.add.text(700, 25, window.state.roundTime, this.textStyle);
     this.add.text(740, 25, "s", this.textStyle);
 
     this.lastBattleResult = this.add.text(1070, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
-    
+    this.opponentNameText = this.add.text(500,400,window.state.players[window.sessionId].opponentName, this.bigTextStyle);
+    this.opponentNameText.setAlpha(0);
     this.phaseText = this.add.text(320, 25, window.state.phase, this.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, "transition").setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(Number.MAX_VALUE);
-    this.transitionScreen.alpha = 0;
+    this.transitionScreen.setAlpha(0);
     this.music = this.sound.addAudioSprite("sounds");
     this.music.play('pick-1');
     this.initilizeDragAndDrop();
@@ -144,6 +152,17 @@ export default class GameScene extends Scene {
     this.tweens.add({
       targets: this.transitionScreen,
       duration: 150,
+      alpha: 1,
+      yoyo: true,
+      repeat: 0
+    });
+  }
+
+  displayOpponentName(name){
+    this.opponentNameText.setText(name);
+    this.tweens.add({
+      targets: this.opponentNameText,
+      duration: 1000,
       alpha: 1,
       yoyo: true,
       repeat: 0

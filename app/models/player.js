@@ -23,6 +23,7 @@ class Player extends Schema {
     this.streak = 0;
     this.interest = 0;
     this.lastBattleResult = "";
+    this.opponentName = "";
   }
 }
 
@@ -40,7 +41,8 @@ schema.defineTypes(Player, {
   shopLocked: "boolean",
   streak: "uint8",
   interest : "uint8",
-  lastBattleResult: "string"
+  lastBattleResult: "string",
+  opponentName: "string"
 });
 
 module.exports = Player;

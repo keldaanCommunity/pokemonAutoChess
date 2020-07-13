@@ -4,6 +4,8 @@ const STATE = require("../../models/enum").STATE;
 const COST = require("../../models/enum").COST;
 const Player = require("../../models/player");
 const PokemonFactory = require("../../models/pokemon-factory");
+const Simulation =require("../../core/simulation");
+
 
 class OnShopCommand extends Command {
     execute({sessionId, pokemonId}) {
@@ -77,7 +79,7 @@ class OnSellDropCommand extends Command {
 }
 
 class OnRefreshCommand extends Command {
-    execute({sessionId}) {
+    execute(sessionId) {
         if (sessionId in this.state.players) {
             if (this.state.players[sessionId].money >= 2) {
               this.state.shop.detachShop(this.state.players[sessionId]);
@@ -89,7 +91,7 @@ class OnRefreshCommand extends Command {
 }
 
 class OnLockCommand extends Command {
-    execute({sessionId}) {
+    execute(sessionId) {
         if (sessionId in this.state.players) {
             this.state.players[sessionId].shopLocked = !this.state.players[sessionId].shopLocked;
         }
@@ -97,7 +99,7 @@ class OnLockCommand extends Command {
 }
 
 class OnLevelUpCommand extends Command {
-    execute({sessionId}) {
+    execute(sessionId) {
         if (sessionId in this.state.players) {
             if (this.state.players[sessionId].money >= 4) {
               this.state.players[sessionId].experienceManager.addExperience(4);
@@ -122,15 +124,16 @@ class OnLeaveCommand extends Command{
 }
 
 class OnUpdateCommand extends Command{
-    execute({deltaTime}) {
+    execute(deltaTime) {
+        let updatePhaseNeeded = false;
         this.state.time -= deltaTime;
         if(Math.round(this.state.time/1000) != this.state.roundTime){
           this.state.roundTime = Math.round(this.state.time/1000);
         }
         if (this.state.time < 0) {
-          this.room.switchPhase();
+            updatePhaseNeeded = true;
         }
-        if(this.state.phase == STATE.FIGHT){
+        else if(this.state.phase == STATE.FIGHT){
             let everySimulationFinished = true;
             for (let id in this.state.players){
             if(!this.state.players[id].simulation.finished){
@@ -141,11 +144,122 @@ class OnUpdateCommand extends Command{
             }
             }
             if(everySimulationFinished){
-                this.room.switchPhase();
-                this.room.computeIncome();
+                updatePhaseNeeded = true;
+            }
+        }
+        if(updatePhaseNeeded){
+            return [new OnUpdatePhaseCommand()];
+        }
+    }
+}
+
+class OnKickPlayerCommand extends Command{
+    execute(sessionId){
+        for (let i = 0; i < this.room.clients.length; i++) {
+            if(this.room.clients[i].sessionId == sessionId){
+              this.room.clients[i].send("kick-out");
             }
         }
     }
+}
+
+class OnUpdatePhaseCommand extends Command{
+    execute() {
+        if (this.state.phase == STATE.PICK) {
+          this.initializeFightingPhase();
+        }
+        else if (this.state.phase == STATE.FIGHT) {
+            this.computeLife();
+            let deadPlayerId = this.checkDeath();
+            if(deadPlayerId){
+                return [new OnKickPlayerCommand().setPayload(deadPlayerId)];
+            }
+            this.computeIncome();
+            this.initializePickingPhase();
+        }
+      }
+    
+      computeLife(){
+        for (let id in this.state.players) {
+          let player = this.state.players[id];
+          if(Object.keys(player.simulation.blueTeam).length == 0){
+            if(player.lastBattleResult == "Defeat"){
+              player.streak +=1;
+            }
+            else{
+              player.streak = 0;
+            }
+            player.lastBattleResult = "Defeat";
+            player.life = Math.max(0, player.life - 1);
+          }
+          else if(Object.keys(player.simulation.redTeam).length == 0){
+            if(player.lastBattleResult == "Win"){
+              player.streak += 1;
+            }
+            else{
+              player.streak = 0;
+            }
+            player.lastBattleResult = "Win";
+          }
+          else{
+            if(player.lastBattleResult == "Draw"){
+              player.streak += 1;
+            }
+            else{
+              player.streak = 0;
+            }
+            player.lastBattleResult = "Draw";
+          }
+        }
+      }
+    
+      computeIncome() {
+        for (let id in this.state.players) {
+        let player = this.state.players[id];
+        player.interest = Math.min(Math.floor(player.money / 10), 5);
+        player.money += player.interest;
+        player.money += Math.max(Math.abs(player.streak) - 1, 0);
+        if(player.lastBattleResult == "Win"){
+            player.money += 1;
+        }
+        player.money += 5;
+        player.experienceManager.addExperience(2);
+        }
+      }
+    
+      checkDeath(){
+        for (let id in this.state.players) {
+          let player = this.state.players[id];
+            if(player.life <= 0){
+              return player.id;
+            }
+        }
+      }
+    
+      initializePickingPhase() {
+        this.state.phase = STATE.PICK;
+        this.state.time = 5000;
+        for (let id in this.state.players) {
+          let player = this.state.players[id];
+          player.simulation.stop();
+          player.opponentName = "";
+          if(!player.shopLocked){
+            this.state.shop.detachShop(player);
+            this.state.shop.assignShop(player);
+          }
+        }
+      }
+    
+      initializeFightingPhase() {
+        this.state.phase = STATE.FIGHT;
+        this.state.time = 5000;
+        for (let id in this.state.players) {
+          let player = this.state.players[id];
+          let opponentId = this.room.getRandomOpponent(id);
+          player.opponentName = this.state.players[opponentId].name;
+          player.simulation = new Simulation(player.board, this.state.players[opponentId].board);
+        }
+      }
 }
 
 class OnEvolutionCommand extends Command{
@@ -197,5 +311,6 @@ module.exports = {
     OnJoinCommand: OnJoinCommand,
     OnLeaveCommand: OnLeaveCommand,
     OnUpdateCommand: OnUpdateCommand,
-    OnEvolutionCommand: OnEvolutionCommand
+    OnEvolutionCommand: OnEvolutionCommand,
+    OnUpdatePhaseCommand: OnUpdatePhaseCommand
 }

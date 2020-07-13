@@ -191,6 +191,11 @@ class GameContainer {
         }
         break;
 
+      case "opponentName":
+        if(change.value != ""){
+          this.game.scene.getScene("gameScene").displayOpponentName(change.value);
+        }
+
       case "shop":
         if (this.room.sessionId == player.id) {
         this.game.scene.getScene("gameScene").shopContainer.updatePortraits();
