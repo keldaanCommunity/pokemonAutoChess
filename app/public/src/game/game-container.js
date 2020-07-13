@@ -108,6 +108,9 @@ class GameContainer {
     switch (change.field) {
       case "roundTime":
         this.game.scene.getScene("gameScene").updateTime();
+        if(change.value <= 5){
+          this.game.scene.getScene("gameScene").displayCountDown(change.value);
+        }
         break;
 
       case "phase":

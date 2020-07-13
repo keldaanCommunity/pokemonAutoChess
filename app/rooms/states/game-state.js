@@ -6,7 +6,7 @@ const STATE = require("../../models/enum").STATE;
 class GameState extends schema.Schema {
     constructor() {
       super();
-      this.time = 5000;
+      this.time = 30000;
       this.roundTime = Math.round(this.time/1000);
       this.phase = STATE.PICK;
       this.players = new schema.MapSchema();

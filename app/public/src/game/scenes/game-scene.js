@@ -133,6 +133,8 @@ export default class GameScene extends Scene {
     this.lastBattleResult = this.add.text(1070, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
     this.opponentNameText = this.add.text(500,400,window.state.players[window.sessionId].opponentName, this.bigTextStyle);
     this.opponentNameText.setAlpha(0);
+    this.countdownText = this.add.text(700, 400, window.state.players[window.sessionId].lastBattleResult, this.bigTextStyle);
+    this.countdownText.setAlpha(0);
     this.phaseText = this.add.text(320, 25, window.state.phase, this.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, "transition").setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(Number.MAX_VALUE);
@@ -163,6 +165,18 @@ export default class GameScene extends Scene {
     this.tweens.add({
       targets: this.opponentNameText,
       duration: 1000,
+      alpha: 1,
+      yoyo: true,
+      repeat: 0
+    });
+  }
+
+  displayCountDown(countdown){
+    this.countdownText.setText(countdown);
+    this.countdownText.setAlpha(0);
+    this.tweens.add({
+      targets: this.countdownText,
+      duration: 500,
       alpha: 1,
       yoyo: true,
       repeat: 0

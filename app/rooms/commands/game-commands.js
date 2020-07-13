@@ -238,7 +238,7 @@ class OnUpdatePhaseCommand extends Command{
     
       initializePickingPhase() {
         this.state.phase = STATE.PICK;
-        this.state.time = 5000;
+        this.state.time = 30000;
         for (let id in this.state.players) {
           let player = this.state.players[id];
           player.simulation.stop();
@@ -252,7 +252,7 @@ class OnUpdatePhaseCommand extends Command{
     
       initializeFightingPhase() {
         this.state.phase = STATE.FIGHT;
-        this.state.time = 5000;
+        this.state.time = 30000;
         for (let id in this.state.players) {
           let player = this.state.players[id];
           let opponentId = this.room.getRandomOpponent(id);
