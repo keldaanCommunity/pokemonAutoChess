@@ -5,6 +5,7 @@ const social = require("@colyseus/social");
 const OnJoinCommand = require("./commands/preparation-commands").OnJoinCommand;
 const OnGameStartCommand = require("./commands/preparation-commands").OnGameStartCommand;
 const OnLeaveCommand = require("./commands/preparation-commands").OnLeaveCommand;
+const OnToggleReadyCommand = require("./commands/preparation-commands").OnToggleReadyCommand;
 
 class PreparationRoom extends colyseus.Room {
 
@@ -18,6 +19,10 @@ class PreparationRoom extends colyseus.Room {
     this.maxClients = 8;
     this.onMessage("game-start", (client, message) => {
       this.dispatcher.dispatch(new OnGameStartCommand(), { client, message });
+    });
+
+    this.onMessage("toggle-ready", (client, message) => {
+      this.dispatcher.dispatch(new OnToggleReadyCommand(), client);
     });
   }
 

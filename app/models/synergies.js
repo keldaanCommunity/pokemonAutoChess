@@ -4,46 +4,19 @@ const PokemonFactory = require("./pokemon-factory");
 class Synergies extends schema.Schema {
   constructor() {
     super();    
-    this.NORMAL = 0;
-    this.GRASS = 0;
-    this.NORMAL= 0;
-    this.GRASS = 0;
-    this.FIRE = 0;
-    this.WATER = 0;
-    this.ELECTRIC = 0;
-    this.FIGHTING = 0;
-    this.PSYCHIC = 0;
-    this.DARK = 0;
-    this.METAL = 0;
-    this.GROUND = 0;
-    this.POISON = 0;
-    this.DRAGON = 0;
-    this.FIELD = 0;
-    this.MONSTER = 0;
-    this.HUMAN = 0;
-    this.AQUATIC = 0;
-    this.BUG = 0;
-    this.FLYING = 0;
-    this.FLORA = 0;
-    this.MINERAL = 0;
-    this.AMORPH = 0;
-    this.FAIRY= 0;
+    this.setToZero();
   }
 
   update(board){
     let pokemonNames = [];
     this.setToZero();
     for (let id in board) {
-      if(!pokemonNames.includes(board[id].name) && board[id].positionY != 0){
-          board[id].types.forEach( type => {
-            this[type] += 1;
+      let family = PokemonFactory.getPokemonFamily(board[id].name);
+      if(!pokemonNames.includes(family) && board[id].positionY != 0){
+        pokemonNames.push(family);
+        board[id].types.forEach( type => {
+          this[type] += 1;
         });
-        pokemonNames.push(board[id].name);
-        let pkm = PokemonFactory.createPokemonFromName(board[id].evolution);
-        pokemonNames.push(pkm.name);
-        if(pkm.evolution != ""){
-          pokemonNames.push(pkm.evolution);
-        }
       }
     }
   }

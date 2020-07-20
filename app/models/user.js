@@ -6,6 +6,7 @@ class User extends Schema {
     super();
     this.id = id;
     this.name = name;
+    this.ready = false;
   }
 
   toString(){
@@ -16,7 +17,8 @@ class User extends Schema {
 
 schema.defineTypes(User, {
   id: "string",
-  name: "string"
+  name: "string",
+  ready: "boolean"
 });
 
 module.exports = User;

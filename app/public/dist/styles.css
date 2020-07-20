@@ -254,3 +254,17 @@ h1 { font-size: 1px !important; } */
   justify-content: center;
   align-items: center;
 }
+
+table, td, th {  
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 30%;
+}
+
+th, td {
+  padding: 15px;
+}
