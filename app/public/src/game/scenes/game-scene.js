@@ -83,6 +83,7 @@ export default class GameScene extends Scene {
     this.load.multiatlas("rarity", "assets/rarity/rarity.json", "assets/rarity");
     this.load.multiatlas("types","assets/types/types.json", "assets/types");
     this.load.multiatlas("COMMON","assets/pokemons/common/common.json","assets/pokemons/common");
+    this.load.multiatlas("NEUTRAL","assets/pokemons/neutral/neutral.json","assets/pokemons/neutral");
     this.load.multiatlas("UNCOMMON","assets/pokemons/uncommon/uncommon.json","assets/pokemons/uncommon");
     this.load.multiatlas("RARE","assets/pokemons/rare/rare.json","assets/pokemons/rare");
     this.load.multiatlas("EPIC","assets/pokemons/epic/epic.json","assets/pokemons/epic");

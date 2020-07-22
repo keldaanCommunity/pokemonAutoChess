@@ -652,6 +652,42 @@ class PokemonFactory {
         return new Pokemon.Riolu();
       case "lucario":
         return new Pokemon.Lucario();
+      case "magikarp":
+        return new Pokemon.Magikarp();
+      case "gyarados":
+        return new Pokemon.Gyarados();
+      case "lugia":
+        return new Pokemon.Lugia();
+      case "zapdos":
+        return new Pokemon.Zapdos();
+      case "moltres":
+        return new Pokemon.Moltres();
+      case "articuno":
+        return new Pokemon.Articuno();
+      case "dialga":
+        return new Pokemon.Dialga();
+      case "palkia":
+        return new Pokemon.Palkia();
+      case "suicune":
+        return new Pokemon.Suicune();
+      case "raikou":
+        return new Pokemon.Raikou();
+      case "entei":
+        return new Pokemon.Entei();
+      case "kyogre":
+        return new Pokemon.Kyogre();
+      case "groudon":
+        return new Pokemon.Groudon();
+      case "rayquaza":
+        return new Pokemon.Rayquaza();
+      case "regice":
+        return new Pokemon.Regice();
+      case "regirock":
+        return new Pokemon.Regirock();
+      case "registeel":
+        return new Pokemon.Registeel();
+      case "regigigas":
+        return new Pokemon.Regigigas();
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
