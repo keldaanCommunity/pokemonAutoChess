@@ -19,7 +19,7 @@ export default class BoardManager {
       let pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon);
 
       if (window.sessionId == this.player.id) {
-        pokemonUI.setInteractive();
+        pokemonUI.setInteractive({ useHandCursor: true });
         this.scene.input.setDraggable(pokemonUI);
       }
       window.animationManager.animatePokemon(pokemonUI);

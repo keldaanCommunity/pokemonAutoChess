@@ -11,7 +11,7 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
       align: "center"
     };
     this.background = new GameObjects.Image(scene, 70, 0, "user");
-    this.background.setInteractive().on("pointerdown", () => {
+    this.background.setInteractive({ useHandCursor: true }).on("pointerdown", () => {
       window.dispatchEvent(new CustomEvent("player-click", {
         detail: { "id": player.id }
       }));

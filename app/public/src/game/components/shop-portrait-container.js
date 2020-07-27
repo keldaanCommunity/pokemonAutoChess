@@ -18,7 +18,7 @@ export default class ShopPortraitContainer extends GameObjects.Container {
       align: "center"
     };
     this.background = new GameObjects.Rectangle(scene, 80, 25, 200, 120, COLOR_TYPE[pokemon.rarity]);
-    this.background.setInteractive().on("pointerdown", () => {
+    this.background.setInteractive({ useHandCursor: true }).on("pointerdown", () => {
       window.dispatchEvent(new CustomEvent("shop-click", {
         detail: { "id": pokemon.id }
       }));
