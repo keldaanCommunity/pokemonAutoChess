@@ -253,11 +253,19 @@ class OnUpdatePhaseCommand extends Command{
       initializeFightingPhase() {
         this.state.phase = STATE.FIGHT;
         this.state.time = 30000;
+        this.state.stageLevel += 1;
+
         for (let id in this.state.players) {
           let player = this.state.players[id];
-          let opponentId = this.room.getRandomOpponent(id);
-          player.opponentName = this.state.players[opponentId].name;
-          player.simulation = new Simulation(player.board, this.state.players[opponentId].board);
+          if(this.state.neutralStages.includes(this.state.stageLevel)){
+            player.opponentName = "PVE";
+            player.simulation = new Simulation(player.board, PokemonFactory.getNeutralPokemonsByLevelStage(this.state.stageLevel));
+          }
+          else{
+            let opponentId = this.room.getRandomOpponent(id);
+            player.opponentName = this.state.players[opponentId].name;
+            player.simulation = new Simulation(player.board, this.state.players[opponentId].board);
+          }
         }
       }
 }

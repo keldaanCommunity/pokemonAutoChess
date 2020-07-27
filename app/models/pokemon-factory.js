@@ -1,6 +1,156 @@
 const Pokemon = require("./pokemon");
+const schema = require("@colyseus/schema");
+const MapSchema = schema.MapSchema;
 
 class PokemonFactory {
+
+  static getNeutralPokemonsByLevelStage(level){
+    let pokemons = new MapSchema();
+    switch (level) {
+      case 1:
+        let magikarp1 = PokemonFactory.createPokemonFromName("magikarp");
+        magikarp1.positionX = 3;
+        magikarp1.positionY = 1;
+        let magikarp2 = PokemonFactory.createPokemonFromName("magikarp");
+        magikarp2.positionX = 5;
+        magikarp2.positionY = 1;
+        pokemons[magikarp1.id] = magikarp1;
+        pokemons[magikarp2.id] = magikarp2;
+        break;
+    
+      case 2:
+        let rattata1 = PokemonFactory.createPokemonFromName("rattata");
+        rattata1.positionX = 3;
+        rattata1.positionY = 1;
+        let rattata2 = PokemonFactory.createPokemonFromName("rattata");
+        rattata2.positionX = 5;
+        rattata2.positionY = 1;
+        let raticate = PokemonFactory.createPokemonFromName("raticate");
+        raticate.positionX = 4;
+        raticate.positionY = 2;
+        pokemons[rattata1.id] = rattata1;
+        pokemons[rattata2.id] = rattata2;
+        pokemons[raticate.id] = raticate;
+        break;
+
+      case 3:
+        let spearow1 = PokemonFactory.createPokemonFromName("spearow");
+        spearow1.positionX = 3;
+        spearow1.positionY = 1;
+        let spearow2 = PokemonFactory.createPokemonFromName("spearow");
+        spearow2.positionX = 5;
+        spearow2.positionY = 1;
+        let spearow3 = PokemonFactory.createPokemonFromName("spearow");
+        spearow3.positionX = 4;
+        spearow3.positionY = 1;
+        let fearow = PokemonFactory.createPokemonFromName("fearow");
+        fearow.positionX = 4;
+        fearow.positionY = 2;
+        pokemons[spearow1.id] = spearow1;
+        pokemons[spearow2.id] = spearow2;
+        pokemons[spearow3.id] = spearow3;
+        pokemons[fearow.id] = fearow;
+        break;
+
+      case 10:
+        let gyarados = PokemonFactory.createPokemonFromName("gyarados");
+        gyarados.positionX = 4;
+        gyarados.positionY = 2;
+        pokemons[gyarados.id] = gyarados;
+        break;
+
+      case 15:
+        let lugia = PokemonFactory.createPokemonFromName("lugia");
+        lugia.positionX = 4;
+        lugia.positionY = 2;
+        pokemons[lugia.id] = lugia;
+        break;
+      
+      case 20:
+        let giratina = PokemonFactory.createPokemonFromName("giratina");
+        giratina.positionX = 4;
+        giratina.positionY = 2;
+        pokemons[giratina.id] = giratina;
+        break;
+
+      case 25:
+        let zapdos = PokemonFactory.createPokemonFromName("zapdos");
+        zapdos.positionX = 2;
+        zapdos.positionY = 2;
+        pokemons[zapdos.id] = zapdos;
+        let moltres = PokemonFactory.createPokemonFromName("moltres");
+        moltres.positionX = 4;
+        moltres.positionY = 2;
+        pokemons[moltres.id] = moltres;
+        let articuno = PokemonFactory.createPokemonFromName("articuno");
+        articuno.positionX = 6;
+        articuno.positionY = 2;
+        pokemons[articuno.id] = articuno;
+        break;
+
+      case 30:
+        let dialga = PokemonFactory.createPokemonFromName("dialga");
+        dialga.positionX = 2;
+        dialga.positionY = 2;
+        pokemons[dialga.id] = dialga;
+        let palkia = PokemonFactory.createPokemonFromName("palkia");
+        palkia.positionX = 6;
+        palkia.positionY = 2;
+        pokemons[palkia.id] = palkia;
+        break;
+
+      case 35:
+        let suicune = PokemonFactory.createPokemonFromName("suicune");
+        suicune.positionX = 2;
+        suicune.positionY = 2;
+        pokemons[suicune.id] = suicune;
+        let raikou = PokemonFactory.createPokemonFromName("raikou");
+        raikou.positionX = 4;
+        raikou.positionY = 2;
+        pokemons[raikou.id] = raikou;
+        let entei = PokemonFactory.createPokemonFromName("entei");
+        entei.positionX = 6;
+        entei.positionY = 2;
+        pokemons[entei.id] = entei;
+        break;
+
+        case 40:
+          let regice = PokemonFactory.createPokemonFromName("regice");
+          regice.positionX = 2;
+          regice.positionY = 3;
+          pokemons[regice.id] = regice;
+          let regirock = PokemonFactory.createPokemonFromName("regirock");
+          regirock.positionX = 4;
+          regirock.positionY = 3;
+          pokemons[regirock.id] = regirock;
+          let registeel = PokemonFactory.createPokemonFromName("registeel");
+          registeel.positionX = 6;
+          registeel.positionY = 3;
+          pokemons[registeel.id] = registeel;
+          let regigigas = PokemonFactory.createPokemonFromName("regigigas");
+          regigigas.positionX = 4;
+          regigigas.positionY = 1;
+          pokemons[regigigas.id] = regigigas;
+          break;
+
+        default:
+          let kyogre = PokemonFactory.createPokemonFromName("kyogre");
+          kyogre.positionX = 2;
+          kyogre.positionY = 2;
+          pokemons[kyogre.id] = kyogre;
+          let groudon = PokemonFactory.createPokemonFromName("groudon");
+          groudon.positionX = 4;
+          groudon.positionY = 2;
+          pokemons[groudon.id] = groudon;
+          let rayquaza = PokemonFactory.createPokemonFromName("rayquaza");
+          rayquaza.positionX = 6;
+          rayquaza.positionY = 2;
+          pokemons[rayquaza.id] = rayquaza;
+          break;
+
+    }
+    return pokemons;
+  }
 
   static getPokemonFamily(name){
     switch (name) {
@@ -654,6 +804,14 @@ class PokemonFactory {
         return new Pokemon.Lucario();
       case "magikarp":
         return new Pokemon.Magikarp();
+      case "rattata":
+        return new Pokemon.Rattata();
+      case "raticate":
+        return new Pokemon.Raticate();
+      case "spearow":
+        return new Pokemon.Spearow();
+      case "fearow":
+        return new Pokemon.Fearow();
       case "gyarados":
         return new Pokemon.Gyarados();
       case "lugia":

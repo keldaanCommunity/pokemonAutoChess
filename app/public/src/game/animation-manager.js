@@ -49,6 +49,10 @@ export default class AnimationManager {
       this.createAnimations(num,"LEGENDARY");
     });
 
+    [129,130,19,20,21,22,249,487,144,145,146,483,484,243,244,245,377,378,379,486,382,383,384].forEach(num => {
+      this.createAnimations(num,"NEUTRAL");
+    });
+
     this.createAttacksAnimations();
   }
 
