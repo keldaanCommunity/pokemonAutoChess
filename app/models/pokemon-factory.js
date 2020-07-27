@@ -846,6 +846,8 @@ class PokemonFactory {
         return new Pokemon.Registeel();
       case "regigigas":
         return new Pokemon.Regigigas();
+      case "giratina":
+        return new Pokemon.Giratina();
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
