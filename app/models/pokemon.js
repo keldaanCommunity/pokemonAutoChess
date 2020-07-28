@@ -998,7 +998,7 @@ class Staraptor extends Pokemon {
 }
 class Magikarp extends Pokemon {
   constructor() {
-    super("magikarp", [], RARITY.COMMON, 129, "", 30, 0, 1, 1, "WATER/melee");
+    super("magikarp", [], RARITY.COMMON, 129, "", 10, 0.5, 1, 1, "WATER/melee");
   }
 }
 
@@ -1010,25 +1010,25 @@ class Gyarados extends Pokemon {
 
 class Rattata extends Pokemon {
   constructor() {
-    super("rattata", [], RARITY.COMMON, 19, "", 20, 2, 1, 1, "NORMAL/melee");
+    super("rattata", [], RARITY.COMMON, 19, "", 5, 0.5, 1, 1, "NORMAL/melee");
   }
 }
 
 class Raticate extends Pokemon {
   constructor() {
-    super("raticate", [], RARITY.COMMON, 20, "", 20, 2, 1, 1, "NORMAL/melee");
+    super("raticate", [], RARITY.COMMON, 20, "", 15, 0.5, 1, 1, "NORMAL/melee");
   }
 }
 
 class Spearow extends Pokemon {
   constructor() {
-    super("spearow", [], RARITY.COMMON, 21, "", 20, 2, 1, 1, "NORMAL/melee");
+    super("spearow", [], RARITY.COMMON, 21, "", 5, 0.5, 1, 1, "NORMAL/melee");
   }
 }
 
 class Fearow extends Pokemon {
   constructor() {
-    super("fearow", [], RARITY.COMMON, 22, "", 20, 2, 1, 1, "NORMAL/melee");
+    super("fearow", [], RARITY.COMMON, 22, "", 20, 1, 1, 1, "NORMAL/melee");
   }
 }
 

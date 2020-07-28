@@ -65,7 +65,7 @@ export default class BattleManager {
           }
           else if(change.field =="life"){
             children[i].life = pokemon.life;
-            children[i].last.setLife(children[i].life);
+            children[i].getFirst('objType','lifebar').setLife(children[i].life);
           }
           
           else if(change.field =="targetX"){

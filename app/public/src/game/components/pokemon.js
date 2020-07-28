@@ -1,9 +1,10 @@
 import { GameObjects } from "phaser";
 import Lifebar from "./life-bar";
+import Button from "./button";
 
-export default class Pokemon extends GameObjects.Container {
+export default class Pokemon extends Button {
   constructor(scene, x, y, pokemon, dragable) {    
-    super(scene, x, y);
+    super(scene, x, y, 75, 75);
     this.index = pokemon.index;
     this.id = pokemon.id;
     this.range = pokemon.range;
@@ -14,16 +15,25 @@ export default class Pokemon extends GameObjects.Container {
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
     this.setRangeType();
-    this.setSize(75,75);
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
     this.setSprite(pokemon, scene);
     this.setLifeBar(pokemon, scene);
-    this.setInteractive({ useHandCursor: true });
     if(dragable){
       scene.input.setDraggable(this);
     }
-    scene.add.existing(this);
+  }
+
+  enterButtonHoverState() {
+
+  }
+
+  enterButtonRestState() {
+
+  }
+
+  enterButtonActiveState() {
+
   }
 
   attackAnimation(){
@@ -73,7 +83,7 @@ export default class Pokemon extends GameObjects.Container {
   }
 
   replayAnimations(){
-    if(this.first){
+    if(this){
       let x;
       let y;
       if(this.range > 1){
@@ -120,6 +130,7 @@ export default class Pokemon extends GameObjects.Container {
   setSprite(pokemon, scene){
     let sprite = new GameObjects.Sprite(scene,0,0,`${pokemon.rarity}`,`${pokemon.index}/0/1/0`);
     sprite.setScale(3, 3);
+    sprite.objType = "sprite";
     scene.add.existing(sprite);
     this.add(sprite);
   }

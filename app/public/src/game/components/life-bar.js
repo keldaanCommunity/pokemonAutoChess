@@ -10,6 +10,7 @@ export default class LifeBar extends GameObjects.Graphics {
         this.value = life;
         this.color = color;
         this.p = 56 / this.value;
+        this.objType = "lifebar";
 
         this.draw();
 
