@@ -1,11 +1,13 @@
 import { GameObjects } from "phaser";
 import Lifebar from "./life-bar";
 import Button from "./button";
+import PokemonDetail from "./pokemon-detail";
 
 export default class Pokemon extends Button {
   constructor(scene, x, y, pokemon, dragable) {    
     super(scene, x, y, 75, 75);
     this.index = pokemon.index;
+    this.name = pokemon.name;
     this.id = pokemon.id;
     this.range = pokemon.range;
     this.type = pokemon.type;
@@ -25,15 +27,24 @@ export default class Pokemon extends Button {
   }
 
   enterButtonHoverState() {
-
+    console.log("hover");
+    if(!this.getFirst("objType", "detail")){
+      this.add(new PokemonDetail(this.scene, 20,-130, this.name));
+    }
   }
 
   enterButtonRestState() {
-
+    console.log("rest");
+    let detail = this.getFirst("objType", "detail");
+    console.log(detail);
+    if(detail){
+      console.log("remove detail");
+      this.remove(detail);
+    }
   }
 
   enterButtonActiveState() {
-
+    console.log("active");
   }
 
   attackAnimation(){

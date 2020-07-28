@@ -8,7 +8,7 @@ const AttackingState = require('./attacking-state');
 const uniqid = require("uniqid");
 
 class PokemonEntity extends Schema {
-    constructor(index, positionX, positionY, hp, atk, range, team, attackSprite, rarity) {
+    constructor(name, index, positionX, positionY, hp, atk, range, team, attackSprite, rarity) {
         super();
         this.id = uniqid();
         this.rarity = rarity;
@@ -17,6 +17,7 @@ class PokemonEntity extends Schema {
         this.targetX = -1;
         this.targetY = -1;
         this.index = index;
+        this.name = name;
         this.state = new MovingState();
         this.action = STATE_TYPE.MOVING;
         this.orientation = ORIENTATION.DOWNLEFT;
@@ -64,7 +65,8 @@ schema.defineTypes(PokemonEntity, {
     targetX:"int8",
     targetY:"int8",
     attackSprite:"string",
-    rarity:"string"
+    rarity:"string",
+    name:"string"
 });
   
 module.exports = PokemonEntity;

@@ -78,6 +78,10 @@ export default class GameScene extends Scene {
     this.load.audioSprite("sounds","assets/sounds/sounds.json",["assets/sounds/sounds.mp3"]);
     this.load.image("tiles", "assets/tiles/tileset.png");
     this.load.image("hexagon", "assets/ui/hexagon.png");
+    this.load.image("shield", "assets/ui/shield.png");
+    this.load.image("sword", "assets/ui/sword.png");
+    this.load.image("range", "assets/ui/range.png");
+    this.load.image("heart", "assets/ui/heart.png");
     this.load.multiatlas("lock","assets/lock/lock.json", "assets/lock/");
     this.load.tilemapTiledJSON("map", "assets/tiles/tilemap.json");
     this.load.multiatlas("rarity", "assets/rarity/rarity.json", "assets/rarity");

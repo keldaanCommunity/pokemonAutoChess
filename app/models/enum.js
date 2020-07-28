@@ -86,7 +86,8 @@ const RARITY = Object.freeze({
   UNCOMMON: "UNCOMMON",
   RARE: "RARE",
   EPIC: "EPIC",
-  LEGENDARY: "LEGENDARY"
+  LEGENDARY: "LEGENDARY",
+  NEUTRAL:"NEUTRAL"
 });
 
 const COST = Object.freeze({

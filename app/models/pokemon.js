@@ -998,139 +998,139 @@ class Staraptor extends Pokemon {
 }
 class Magikarp extends Pokemon {
   constructor() {
-    super("magikarp", [], RARITY.COMMON, 129, "", 10, 0.5, 1, 1, "WATER/melee");
+    super("magikarp", [], RARITY.NEUTRAL, 129, "", 10, 0.5, 1, 1, "WATER/melee");
   }
 }
 
 class Gyarados extends Pokemon {
   constructor() {
-    super("gyarados", [], RARITY.COMMON, 130, "", 50, 5, 1, 1, "WATER/melee");
+    super("gyarados", [], RARITY.NEUTRAL, 130, "", 50, 5, 1, 1, "WATER/melee");
   }
 }
 
 class Rattata extends Pokemon {
   constructor() {
-    super("rattata", [], RARITY.COMMON, 19, "", 5, 0.5, 1, 1, "NORMAL/melee");
+    super("rattata", [], RARITY.NEUTRAL, 19, "", 5, 0.5, 1, 1, "NORMAL/melee");
   }
 }
 
 class Raticate extends Pokemon {
   constructor() {
-    super("raticate", [], RARITY.COMMON, 20, "", 15, 0.5, 1, 1, "NORMAL/melee");
+    super("raticate", [], RARITY.NEUTRAL, 20, "", 15, 0.5, 1, 1, "NORMAL/melee");
   }
 }
 
 class Spearow extends Pokemon {
   constructor() {
-    super("spearow", [], RARITY.COMMON, 21, "", 5, 0.5, 1, 1, "NORMAL/melee");
+    super("spearow", [], RARITY.NEUTRAL, 21, "", 5, 0.5, 1, 1, "NORMAL/melee");
   }
 }
 
 class Fearow extends Pokemon {
   constructor() {
-    super("fearow", [], RARITY.COMMON, 22, "", 20, 1, 1, 1, "NORMAL/melee");
+    super("fearow", [], RARITY.NEUTRAL, 22, "", 20, 1, 1, 1, "NORMAL/melee");
   }
 }
 
 class Lugia extends Pokemon {
   constructor() {
-    super("lugia", [], RARITY.COMMON, 249, "", 100, 10, 1, 4, "FLYING/range");
+    super("lugia", [], RARITY.NEUTRAL, 249, "", 100, 10, 1, 4, "FLYING/range");
   }
 }
 
 class Giratina extends Pokemon {
   constructor() {
-    super("lugia", [], RARITY.COMMON, 487, "", 100, 10, 1, 3, "GHOST/range");
+    super("lugia", [], RARITY.NEUTRAL, 487, "", 100, 10, 1, 3, "GHOST/range");
   }
 }
 
 class Zapdos extends Pokemon {
   constructor() {
-    super("zapdos", [], RARITY.COMMON, 145, "", 100, 10, 1, 3, "ELECTRIC/range");
+    super("zapdos", [], RARITY.NEUTRAL, 145, "", 100, 10, 1, 3, "ELECTRIC/range");
   }
 }
 
 class Moltres extends Pokemon {
   constructor() {
-    super("moltres", [], RARITY.COMMON, 146, "", 100, 10, 1, 3, "FIRE/range");
+    super("moltres", [], RARITY.NEUTRAL, 146, "", 100, 10, 1, 3, "FIRE/range");
   }
 }
 
 class Articuno extends Pokemon {
   constructor() {
-    super("articuno", [], RARITY.COMMON, 144, "", 100, 10, 1, 3, "FLYING/range");
+    super("articuno", [], RARITY.NEUTRAL, 144, "", 100, 10, 1, 3, "FLYING/range");
   }
 }
 
 class Dialga extends Pokemon {
   constructor() {
-    super("dialga", [], RARITY.COMMON, 483, "", 150, 10, 1, 3, "FIGHTING/range");
+    super("dialga", [], RARITY.NEUTRAL, 483, "", 150, 10, 1, 3, "FIGHTING/range");
   }
 }
 
 class Palkia extends Pokemon {
   constructor() {
-    super("palkia", [], RARITY.COMMON, 484, "", 150, 10, 1, 1, "DRAGON/melee");
+    super("palkia", [], RARITY.NEUTRAL, 484, "", 150, 10, 1, 1, "DRAGON/melee");
   }
 }
 
 class Suicune extends Pokemon {
   constructor() {
-    super("suicune", [], RARITY.COMMON, 245, "", 150, 10, 1, 1, "WATER/melee");
+    super("suicune", [], RARITY.NEUTRAL, 245, "", 150, 10, 1, 1, "WATER/melee");
   }
 }
 
 class Raikou extends Pokemon {
   constructor() {
-    super("raikou", [], RARITY.COMMON, 243, "", 150, 10, 1, 1, "ELETRIC/melee");
+    super("raikou", [], RARITY.NEUTRAL, 243, "", 150, 10, 1, 1, "ELETRIC/melee");
   }
 }
 
 class Entei extends Pokemon {
   constructor() {
-    super("entei", [], RARITY.COMMON, 244, "", 150, 10, 1, 1, "FIRE/melee");
+    super("entei", [], RARITY.NEUTRAL, 244, "", 150, 10, 1, 1, "FIRE/melee");
   }
 }
 
 class Regice extends Pokemon {
   constructor() {
-    super("regice", [], RARITY.COMMON, 378, "", 150, 10, 1, 1, "ICE/melee");
+    super("regice", [], RARITY.NEUTRAL, 378, "", 150, 10, 1, 1, "ICE/melee");
   }
 }
 
 class Regirock extends Pokemon {
   constructor() {
-    super("regirock", [], RARITY.COMMON, 377, "", 150, 10, 1, 1, "ROCK/melee");
+    super("regirock", [], RARITY.NEUTRAL, 377, "", 150, 10, 1, 1, "ROCK/melee");
   }
 }
 
 class Registeel extends Pokemon {
   constructor() {
-    super("registeel", [], RARITY.COMMON, 379, "", 150, 10, 1, 1, "DRAGON/melee");
+    super("registeel", [], RARITY.NEUTRAL, 379, "", 150, 10, 1, 1, "DRAGON/melee");
   }
 }
 
 class Regigigas extends Pokemon {
   constructor() {
-    super("regigigas", [], RARITY.COMMON, 486, "", 200, 10, 1, 1, "DRAGON/melee");
+    super("regigigas", [], RARITY.NEUTRAL, 486, "", 200, 10, 1, 1, "DRAGON/melee");
   }
 }
 
 class Kyogre extends Pokemon {
   constructor() {
-    super("kyogre", [], RARITY.COMMON, 382, "", 200, 10, 1, 4, "WATER/range");
+    super("kyogre", [], RARITY.NEUTRAL, 382, "", 200, 10, 1, 4, "WATER/range");
   }
 }
 
 class Groudon extends Pokemon {
   constructor() {
-    super("groudon", [], RARITY.COMMON, 383, "", 200, 10, 1, 1, "FIRE/melee");
+    super("groudon", [], RARITY.NEUTRAL, 383, "", 200, 10, 1, 1, "FIRE/melee");
   }
 }
 
 class Rayquaza extends Pokemon {
   constructor() {
-    super("rayquaza", [], RARITY.COMMON, 384, "", 200, 10, 1, 1, "DRAGON/melee");
+    super("rayquaza", [], RARITY.NEUTRAL, 384, "", 200, 10, 1, 1, "DRAGON/melee");
   }
 }
 

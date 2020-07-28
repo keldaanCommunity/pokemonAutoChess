@@ -265,9 +265,6 @@ export default class AnimationManager {
   }
 
   getSpriteKey(entity) {
-    if(entity.orientation == "RIGHT"){
-      console.log(entity);
-    }
     return `${entity.index}/${this.actionTable[entity.action]}/${this.orientationTable[entity.orientation]}`;
   }
 
