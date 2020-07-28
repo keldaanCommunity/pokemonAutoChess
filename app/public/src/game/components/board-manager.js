@@ -16,11 +16,13 @@ export default class BoardManager {
     });
     if(!presence){
       let coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
-      let pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon);
+      let pokemonUI;
 
       if (window.sessionId == this.player.id) {
-        pokemonUI.setInteractive({ useHandCursor: true });
-        this.scene.input.setDraggable(pokemonUI);
+        pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, true);
+      }
+      else{
+        pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false);
       }
       window.animationManager.animatePokemon(pokemonUI);
       this.group.add(pokemonUI);

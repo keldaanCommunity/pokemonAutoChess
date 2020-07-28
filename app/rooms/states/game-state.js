@@ -19,7 +19,8 @@ class GameState extends schema.Schema {
   schema.defineTypes(GameState, {
     roundTime: "uint8",
     phase: "string",
-    players: { map: Player }
+    players: { map: Player },
+    stageLevel: "uint8"
   });
 
   module.exports = GameState;

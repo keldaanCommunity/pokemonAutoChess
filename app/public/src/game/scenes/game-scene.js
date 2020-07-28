@@ -102,14 +102,15 @@ export default class GameScene extends Scene {
     this.map = this.make.tilemap({ key: "map" });
     const tileset = this.map.addTilesetImage("tileset", "tiles");
     this.map.createStaticLayer("World", tileset, 0, 0);
+    this.map.createStaticLayer("Top", tileset, 0, 0);
 
     this.board = this.add.group();
     this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);
-    this.shopContainer = new ShopContainer(this, 370, 910);
+    this.shopContainer = new ShopContainer(this, 385, 910);
     this.playerContainer = new PlayerContainer(this, 1750, 105);
     this.boardContainer = new BoardContainer(this, 275, 775);
-    this.synergiesContainer = new SynergiesContainer(this, 1362, 101);
+    this.synergiesContainer = new SynergiesContainer(this, 1325, 135);
     this.moneyContainer = new MoneyContainer(this,20, 60, window.state.players[window.sessionId]);
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
@@ -128,13 +129,16 @@ export default class GameScene extends Scene {
     };
     this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name, this.textStyle);
 
-    this.timeText = this.add.text(700, 25, window.state.roundTime, this.textStyle);
-    this.add.text(740, 25, "s", this.textStyle);
+    this.turnText = this.add.text(580, 25, window.state.stageLevel, this.textStyle);
+    this.add.text(500, 25, "Turn", this.textStyle);
+
+    this.timeText = this.add.text(870, 25, window.state.roundTime, this.textStyle);
+    this.add.text(910, 25, "s", this.textStyle);
 
     this.lastBattleResult = this.add.text(1070, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
-    this.opponentNameText = this.add.text(500,400,window.state.players[window.sessionId].opponentName, this.bigTextStyle);
+    this.opponentNameText = this.add.text(500,200,window.state.players[window.sessionId].opponentName, this.bigTextStyle);
     this.opponentNameText.setAlpha(0);
-    this.countdownText = this.add.text(700, 400, window.state.players[window.sessionId].lastBattleResult, this.bigTextStyle);
+    this.countdownText = this.add.text(700, 300, window.state.players[window.sessionId].lastBattleResult, this.bigTextStyle);
     this.countdownText.setAlpha(0);
     this.phaseText = this.add.text(320, 25, window.state.phase, this.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, "transition").setScale(1.5, 1.5);

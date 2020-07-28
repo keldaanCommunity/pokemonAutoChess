@@ -2,7 +2,7 @@ import { GameObjects } from "phaser";
 import Lifebar from "./life-bar";
 
 export default class Pokemon extends GameObjects.Container {
-  constructor(scene, x, y, pokemon) {    
+  constructor(scene, x, y, pokemon, dragable) {    
     super(scene, x, y);
     this.index = pokemon.index;
     this.id = pokemon.id;
@@ -19,6 +19,10 @@ export default class Pokemon extends GameObjects.Container {
     this.setParameters(pokemon);
     this.setSprite(pokemon, scene);
     this.setLifeBar(pokemon, scene);
+    this.setInteractive({ useHandCursor: true });
+    if(dragable){
+      scene.input.setDraggable(this);
+    }
     scene.add.existing(this);
   }
 

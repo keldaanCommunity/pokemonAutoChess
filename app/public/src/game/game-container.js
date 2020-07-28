@@ -117,6 +117,8 @@ class GameContainer {
         this.game.scene.getScene("gameScene").updatePhase();
         break;
 
+      case "stageLevel":
+        this.game.scene.getScene("gameScene").turnText.setText(change.value);
       default:
         break;
     }
