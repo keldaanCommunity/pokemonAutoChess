@@ -26,7 +26,7 @@ export default class MoneyContainer extends GameObjects.Container {
     this.add(new GameObjects.Image(scene,180,53,"money").setScale(0.5,0.5));
 
     this.add(new GameObjects.Text(scene,0, 80,"Streak :", this.textStyle));
-    this.streak = new GameObjects.Text(scene, 120, 80, `+ ${Math.max(Math.abs(player.streak) - 1, 0)}`, this.textStyle);
+    this.streak = new GameObjects.Text(scene, 120, 80, `+ ${player.streak}`, this.textStyle);
     this.add(new GameObjects.Image(scene,180,93,"money").setScale(0.5,0.5));
     this.add(this.streak);
 
@@ -57,10 +57,10 @@ export default class MoneyContainer extends GameObjects.Container {
 
   onWonChange(value){
       if(value == "Win"){
-        this.won.setText("+ 0");
+        this.won.setText("+ 1");
       }
       else{
-        this.won.setText("+ 1");
+        this.won.setText("+ 0");
       }
 
   }

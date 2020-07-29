@@ -184,7 +184,7 @@ class OnUpdatePhaseCommand extends Command{
           let player = this.state.players[id];
           if(Object.keys(player.simulation.blueTeam).length == 0){
             if(player.lastBattleResult == "Defeat"){
-              player.streak +=1;
+              player.streak = Math.min(player.streak + 1, 5);
             }
             else{
               player.streak = 0;
@@ -194,7 +194,7 @@ class OnUpdatePhaseCommand extends Command{
           }
           else if(Object.keys(player.simulation.redTeam).length == 0){
             if(player.lastBattleResult == "Win"){
-              player.streak += 1;
+              player.streak += Math.min(player.streak + 1, 5);
             }
             else{
               player.streak = 0;
@@ -203,7 +203,7 @@ class OnUpdatePhaseCommand extends Command{
           }
           else{
             if(player.lastBattleResult == "Draw"){
-              player.streak += 1;
+              player.streak += Math.min(player.streak + 1, 5);
             }
             else{
               player.streak = 0;
@@ -218,7 +218,7 @@ class OnUpdatePhaseCommand extends Command{
         let player = this.state.players[id];
         player.interest = Math.min(Math.floor(player.money / 10), 5);
         player.money += player.interest;
-        player.money += Math.max(Math.abs(player.streak) - 1, 0);
+        player.money += player.streak;
         if(player.lastBattleResult == "Win"){
             player.money += 1;
         }
@@ -246,6 +246,9 @@ class OnUpdatePhaseCommand extends Command{
           if(!player.shopLocked){
             this.state.shop.detachShop(player);
             this.state.shop.assignShop(player);
+          }
+          else{
+            player.shopLocked = false;
           }
         }
       }
