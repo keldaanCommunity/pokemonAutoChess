@@ -1,5 +1,5 @@
-const User = require("../../models/user");
-const schema = require("@colyseus/schema");
+const User = require('../../models/user');
+const schema = require('@colyseus/schema');
 
 class PreparationState extends schema.Schema {
   constructor() {
@@ -9,8 +9,7 @@ class PreparationState extends schema.Schema {
 }
 
 schema.defineTypes(PreparationState, {
-  users: { map: User }
+  users: {map: User}
 });
-
 
 module.exports = PreparationState;

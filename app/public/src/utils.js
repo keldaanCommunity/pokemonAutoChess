@@ -1,67 +1,27 @@
-(function (g, f) {
-  (typeof module === "object" && module.exports) ? module.exports = f() :
-    (typeof define === "function" && define.amd) ? define(f) : g.Utils = f();
-}(typeof self != "undefined" ? self : this, function () {
-  "use strict";
 
-  var Utils = {};
-
-  function uid() {
-    var s = "", l = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    for (var i = 0; i < 9; i++) {
-      s += l[Math.random() * 52 | 0];
-    }
-    return s;
+function hash(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0, l = str.length; i < l; i++) {
+    h ^= str.charCodeAt(i);
+    h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24) | 0;
   }
+  return h >>> 0;
+}
 
-  function uuid() {
-    var s = "", l = "0123456789abcdef";
-    for (var i = 0; i < 16; i++) {
-      var b = Math.random() * 256 | 0;
-      if (i == 6) b = (b & 15) | 64;  // 0100xxxx
-      if (i == 8) b = (b & 63) | 128; // 10xxxxxx
-      s += l[b >> 4] + l[b & 15];
-      if (i == 3 || i == 5 || i == 7 || i == 9) s += "-";
-    }
-    return s;
+export function insertScriptFile(doc, src) {
+  const id = hash(src).toString(36);
+  if (document.getElementById(id)) {
+    console.log('script already exists:', src);
+    return new Promise((resolve, reject) => resolve());
   }
-
-  // function hash(str) {
-  //   var h = 0;
-  //   for (var i = 0; i < str.length; i++) {
-  //     h = (h << 5) - h + str.charCodeAt(i) | 0;
-  //   }
-  //   return h >>> 0;
-  // }
-  function hash(str) {
-    var h = 0x811c9dc5;
-    for (var i = 0, l = str.length; i < l; i++) {
-      h ^= str.charCodeAt(i);
-      h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24) | 0;
-    }
-    return h >>> 0;
-  }
-  Utils.hash = hash;
-
-  function addScript(doc, src) {
-    var id = hash(src).toString(36);
-    if (document.getElementById(id)) {
-      console.log("script already exists:", src);
-      return new Promise((resolve, reject) => resolve());
-    }
-    var script = doc.createElement("script");
-    script.setAttribute("type", "text/javascript");
-    script.setAttribute("src", src);
-    script.setAttribute("id", id);
-    var p = new Promise((resolve, reject) => {
-      script.onload = resolve;
-      script.onerror = reject;
-    });
-    doc.getElementsByTagName("head")[0].appendChild(script);
-    return p;
-  }
-  Utils.addScript = addScript;
-
-
-  return Utils;
-}));
+  const script = doc.createElement('script');
+  script.setAttribute('type', 'text/javascript');
+  script.setAttribute('src', src);
+  script.setAttribute('id', id);
+  const p = new Promise((resolve, reject) => {
+    script.onload = resolve;
+    script.onerror = reject;
+  });
+  doc.getElementsByTagName('head')[0].appendChild(script);
+  return p;
+}

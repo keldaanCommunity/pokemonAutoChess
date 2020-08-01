@@ -1,31 +1,30 @@
-const Pokemon = require("./pokemon");
-const schema = require("@colyseus/schema");
+const Pokemon = require('./pokemon');
+const schema = require('@colyseus/schema');
 const MapSchema = schema.MapSchema;
 
 class PokemonFactory {
-
-  static getNeutralPokemonsByLevelStage(level){
-    let pokemons = new MapSchema();
+  static getNeutralPokemonsByLevelStage(level) {
+    const pokemons = new MapSchema();
     switch (level) {
       case 1:
-        let magikarp1 = PokemonFactory.createPokemonFromName("magikarp");
+        const magikarp1 = PokemonFactory.createPokemonFromName('magikarp');
         magikarp1.positionX = 3;
         magikarp1.positionY = 1;
-        let magikarp2 = PokemonFactory.createPokemonFromName("magikarp");
+        const magikarp2 = PokemonFactory.createPokemonFromName('magikarp');
         magikarp2.positionX = 5;
         magikarp2.positionY = 1;
         pokemons[magikarp1.id] = magikarp1;
         pokemons[magikarp2.id] = magikarp2;
         break;
-    
+
       case 2:
-        let rattata1 = PokemonFactory.createPokemonFromName("rattata");
+        const rattata1 = PokemonFactory.createPokemonFromName('rattata');
         rattata1.positionX = 3;
         rattata1.positionY = 1;
-        let rattata2 = PokemonFactory.createPokemonFromName("rattata");
+        const rattata2 = PokemonFactory.createPokemonFromName('rattata');
         rattata2.positionX = 5;
         rattata2.positionY = 1;
-        let raticate = PokemonFactory.createPokemonFromName("raticate");
+        const raticate = PokemonFactory.createPokemonFromName('raticate');
         raticate.positionX = 4;
         raticate.positionY = 2;
         pokemons[rattata1.id] = rattata1;
@@ -34,16 +33,16 @@ class PokemonFactory {
         break;
 
       case 3:
-        let spearow1 = PokemonFactory.createPokemonFromName("spearow");
+        const spearow1 = PokemonFactory.createPokemonFromName('spearow');
         spearow1.positionX = 3;
         spearow1.positionY = 1;
-        let spearow2 = PokemonFactory.createPokemonFromName("spearow");
+        const spearow2 = PokemonFactory.createPokemonFromName('spearow');
         spearow2.positionX = 5;
         spearow2.positionY = 1;
-        let spearow3 = PokemonFactory.createPokemonFromName("spearow");
+        const spearow3 = PokemonFactory.createPokemonFromName('spearow');
         spearow3.positionX = 4;
         spearow3.positionY = 1;
-        let fearow = PokemonFactory.createPokemonFromName("fearow");
+        const fearow = PokemonFactory.createPokemonFromName('fearow');
         fearow.positionX = 4;
         fearow.positionY = 2;
         pokemons[spearow1.id] = spearow1;
@@ -53,427 +52,426 @@ class PokemonFactory {
         break;
 
       case 10:
-        let gyarados = PokemonFactory.createPokemonFromName("gyarados");
+        const gyarados = PokemonFactory.createPokemonFromName('gyarados');
         gyarados.positionX = 4;
         gyarados.positionY = 2;
         pokemons[gyarados.id] = gyarados;
         break;
 
       case 15:
-        let lugia = PokemonFactory.createPokemonFromName("lugia");
+        const lugia = PokemonFactory.createPokemonFromName('lugia');
         lugia.positionX = 4;
         lugia.positionY = 2;
         pokemons[lugia.id] = lugia;
         break;
-      
+
       case 20:
-        let giratina = PokemonFactory.createPokemonFromName("giratina");
+        const giratina = PokemonFactory.createPokemonFromName('giratina');
         giratina.positionX = 4;
         giratina.positionY = 2;
         pokemons[giratina.id] = giratina;
         break;
 
       case 25:
-        let zapdos = PokemonFactory.createPokemonFromName("zapdos");
+        const zapdos = PokemonFactory.createPokemonFromName('zapdos');
         zapdos.positionX = 2;
         zapdos.positionY = 2;
         pokemons[zapdos.id] = zapdos;
-        let moltres = PokemonFactory.createPokemonFromName("moltres");
+        const moltres = PokemonFactory.createPokemonFromName('moltres');
         moltres.positionX = 4;
         moltres.positionY = 2;
         pokemons[moltres.id] = moltres;
-        let articuno = PokemonFactory.createPokemonFromName("articuno");
+        const articuno = PokemonFactory.createPokemonFromName('articuno');
         articuno.positionX = 6;
         articuno.positionY = 2;
         pokemons[articuno.id] = articuno;
         break;
 
       case 30:
-        let dialga = PokemonFactory.createPokemonFromName("dialga");
+        const dialga = PokemonFactory.createPokemonFromName('dialga');
         dialga.positionX = 2;
         dialga.positionY = 2;
         pokemons[dialga.id] = dialga;
-        let palkia = PokemonFactory.createPokemonFromName("palkia");
+        const palkia = PokemonFactory.createPokemonFromName('palkia');
         palkia.positionX = 6;
         palkia.positionY = 2;
         pokemons[palkia.id] = palkia;
         break;
 
       case 35:
-        let suicune = PokemonFactory.createPokemonFromName("suicune");
+        const suicune = PokemonFactory.createPokemonFromName('suicune');
         suicune.positionX = 2;
         suicune.positionY = 2;
         pokemons[suicune.id] = suicune;
-        let raikou = PokemonFactory.createPokemonFromName("raikou");
+        const raikou = PokemonFactory.createPokemonFromName('raikou');
         raikou.positionX = 4;
         raikou.positionY = 2;
         pokemons[raikou.id] = raikou;
-        let entei = PokemonFactory.createPokemonFromName("entei");
+        const entei = PokemonFactory.createPokemonFromName('entei');
         entei.positionX = 6;
         entei.positionY = 2;
         pokemons[entei.id] = entei;
         break;
 
-        case 40:
-          let regice = PokemonFactory.createPokemonFromName("regice");
-          regice.positionX = 2;
-          regice.positionY = 3;
-          pokemons[regice.id] = regice;
-          let regirock = PokemonFactory.createPokemonFromName("regirock");
-          regirock.positionX = 4;
-          regirock.positionY = 3;
-          pokemons[regirock.id] = regirock;
-          let registeel = PokemonFactory.createPokemonFromName("registeel");
-          registeel.positionX = 6;
-          registeel.positionY = 3;
-          pokemons[registeel.id] = registeel;
-          let regigigas = PokemonFactory.createPokemonFromName("regigigas");
-          regigigas.positionX = 4;
-          regigigas.positionY = 1;
-          pokemons[regigigas.id] = regigigas;
-          break;
+      case 40:
+        const regice = PokemonFactory.createPokemonFromName('regice');
+        regice.positionX = 2;
+        regice.positionY = 3;
+        pokemons[regice.id] = regice;
+        const regirock = PokemonFactory.createPokemonFromName('regirock');
+        regirock.positionX = 4;
+        regirock.positionY = 3;
+        pokemons[regirock.id] = regirock;
+        const registeel = PokemonFactory.createPokemonFromName('registeel');
+        registeel.positionX = 6;
+        registeel.positionY = 3;
+        pokemons[registeel.id] = registeel;
+        const regigigas = PokemonFactory.createPokemonFromName('regigigas');
+        regigigas.positionX = 4;
+        regigigas.positionY = 1;
+        pokemons[regigigas.id] = regigigas;
+        break;
 
-        default:
-          let kyogre = PokemonFactory.createPokemonFromName("kyogre");
-          kyogre.positionX = 2;
-          kyogre.positionY = 2;
-          pokemons[kyogre.id] = kyogre;
-          let groudon = PokemonFactory.createPokemonFromName("groudon");
-          groudon.positionX = 4;
-          groudon.positionY = 2;
-          pokemons[groudon.id] = groudon;
-          let rayquaza = PokemonFactory.createPokemonFromName("rayquaza");
-          rayquaza.positionX = 6;
-          rayquaza.positionY = 2;
-          pokemons[rayquaza.id] = rayquaza;
-          break;
-
+      default:
+        const kyogre = PokemonFactory.createPokemonFromName('kyogre');
+        kyogre.positionX = 2;
+        kyogre.positionY = 2;
+        pokemons[kyogre.id] = kyogre;
+        const groudon = PokemonFactory.createPokemonFromName('groudon');
+        groudon.positionX = 4;
+        groudon.positionY = 2;
+        pokemons[groudon.id] = groudon;
+        const rayquaza = PokemonFactory.createPokemonFromName('rayquaza');
+        rayquaza.positionX = 6;
+        rayquaza.positionY = 2;
+        pokemons[rayquaza.id] = rayquaza;
+        break;
     }
     return pokemons;
   }
 
-  static getPokemonFamily(name){
+  static getPokemonFamily(name) {
     switch (name) {
-      case "bulbasaur":
-        return "bulbasaur";
-      case "ivysaur":
-        return "bulbasaur";
-      case "venusaur":
-        return "bulbasaur";
-      case "charmander":
-        return "charmander";
-      case "charmeleon":
-        return "charmander";
-      case "charizard":
-        return "charmander";
-      case "squirtle":
-        return "squirtle";
-      case "wartortle":
-        return "squirtle";
-      case "blastoise":
-        return "squirtle";
-      case "geodude":
-        return "geodude";
-      case "graveler":
-        return "geodude";
-      case "golem":
-        return "geodude";
-      case "azurill":
-        return "azurill";
-      case "marill":
-        return "azurill";
-      case "azumarill":
-        return "azurill";
-      case "zubat":
-        return "zubat";
-      case "golbat":
-        return "zubat";
-      case "crobat":
-        return "zubat";
-      case "ampharos":
-        return "mareep";
-      case "mareep":
-        return "mareep";
-      case "flaffy":
-        return "mareep";
-      case "cleffa":
-        return "cleffa";
-      case "clefairy":
-        return "cleffa";
-      case "clefable":
-        return "cleffa";
-      case "igglybuff":
-        return "igglybuff";
-      case "jigglypuff":
-        return "igglybuff";
-      case "wigglytuff":
-        return "igglybuff";
-      case "caterpie":
-        return "caterpie";
-      case "metapod":
-        return "caterpie";
-      case "butterfree":
-        return "caterpie";
-      case "weedle":
-        return "weedle";
-      case "kakuna":
-        return "weedle";
-      case "beedrill":
-        return "weedle";
-      case "pidgey":
-        return "pidgey";
-      case "pidgeotto":
-        return "pidgey";
-      case "pidgeot":
-        return "pidgey";
-      case "hoppip":
-        return "hoppip";
-      case "skiploom":
-        return "hoppip";
-      case "jumpluff":
-        return "hoppip";
-      case "seedot":
-        return "seedot";
-      case "nuzleaf":
-        return "seedot";
-      case "shiftry":
-        return "seedot";
-      case "starly":
-        return "starly";
-      case "staravia":
-        return "starly";
-      case "staraptor":
-        return "starly";
-      case "chikorita":
-        return "chikorita";
-      case "bayleef":
-        return "chikorita";
-      case "meganium":
-        return "chikorita";
-      case "cyndaquil":
-        return "cyndaquil";
-      case "quilava":
-        return "cyndaquil";
-      case "typhlosion":
-        return "cyndaquil";
-      case "totodile":
-        return "totodile";
-      case "croconaw":
-        return "totodile";
-      case "feraligatr":
-        return "totodile";
-      case "treecko":
-        return "treecko";
-      case "grovyle":
-        return "treecko";
-      case "sceptile":
-        return "treecko";
-      case "torchic":
-        return "torchic";
-      case "combusken":
-        return "torchic";
-      case "blaziken":
-        return "torchic";
-      case "mudkip":
-        return "mudkip";
-      case "marshtomp":
-        return "mudkip";
-      case "swampert":
-        return "mudkip";    
-      case "turtwig":
-        return "turtwig";
-      case "grotle":
-        return "turtwig";
-      case "torterra":
-        return "turtwig";
-      case "chimchar":
-        return "chimchar";
-      case "monferno":
-        return "chimchar";
-      case "infernape":
-        return "chimchar";   
-      case "piplup":
-        return "piplup";
-      case "prinplup":
-        return "piplup";
-      case "empoleon":
-        return "piplup";
-      case "nidoranF":
-        return "nidoranF";
-      case "nidorina":
-        return "nidoranF";
-      case "nidoqueen":
-        return "nidoranF";
-      case "nidoranM":
-        return "nidoranM";
-      case "nidorino":
-        return "nidoranM";
-      case "nidoking":
-        return "nidoranM";
-      case "pichu":
-        return "pichu";
-      case "pikachu":
-        return "pichu";
-      case "raichu":
-        return "pichu";
-      case "machop":
-        return "machop";
-      case "machoke":
-        return "machop";
-      case "machamp":
-        return "machop";
-      case "horsea":
-        return "horsea";
-      case "seadra":
-        return "horsea";
-      case "kingdra":
-        return "horsea";
-      case "trapinch":
-        return "trapinch";
-      case "vibrava":
-        return "trapinch";
-      case "flygon":
-        return "trapinch";
-      case "spheal":
-        return "spheal";
-      case "sealeo":
-        return "spheal";
-      case "walrein":
-        return "spheal";
-      case "aron":
-        return "aron";
-      case "lairon":
-        return "aron";
-      case "aggron":
-        return "aron";
-      case "magnemite":
-        return "magnemite";
-      case "magneton":
-        return "magnemite";
-      case "magnezone":
-        return "magnemite";
-      case "rhyhorn":
-        return "rhyhorn";
-      case "rhydon":
-        return "rhyhorn";
-      case "rhyperior":
-        return "rhyhorn";
-      case "togepi":
-        return "togepi";
-      case "togetic":
-        return "togepi";
-      case "togekiss":
-        return "togepi";
-      case "duskull":
-        return "duskull";
-      case "dusclops":
-        return "duskull";
-      case "dusknoir":
-        return "duskull";
-      case "lotad":
-        return "lotad";
-      case "lombre":
-        return "lotad";
-      case "ludicolo":
-        return "lotad";
-      case "shinx":
-        return "shinx";
-      case "luxio":
-        return "shinx";
-      case "luxray":
-        return "shinx";
-      case "poliwag":
-        return "poliwag";
-      case "poliwhirl":
-        return "poliwag";
-      case "politoed":
-        return "poliwag";
-      case "abra":
-        return "abra";
-      case "kadabra":
-        return "abra";
-      case "alakazam":
-        return "abra";
-      case "gastly":
-        return "gastly";
-      case "haunter":
-        return "gastly";
-      case "gengar":
-        return "gastly";
-      case "dratini":
-        return "dratini";
-      case "dragonair":
-        return "dratini";
-      case "dragonite":
-        return "dratini";
-      case "larvitar":
-        return "larvitar";
-      case "pupitar":
-        return "larvitar";
-      case "tyranitar":
-        return "larvitar";
-      case "slakoth":
-        return "slakoth";
-      case "vigoroth":
-        return "slakoth";
-      case "slaking":
-        return "slakoth";
-      case "ralts":
-        return "ralts";
-      case "kirlia":
-        return "ralts";
-      case "gardevoir":
-        return "ralts";
-      case "bagon":
-        return "bagon";
-      case "shelgon":
-        return "bagon";
-      case "salamence":
-        return "bagon";
-      case "beldum":
-        return "beldum";
-      case "metang":
-        return "beldum";
-      case "metagross":
-        return "beldum";
-      case "gible":
-        return "gible";
-      case "gabite":
-        return "gible";
-      case "garchomp":
-        return "gible";
-      case "elekid":
-        return "elekid";
-      case "electabuzz":
-        return "elekid";
-      case "electivire":
-        return "elekid";
-      case "magby":
-        return "magby";
-      case "magmar":
-        return "magby";
-      case "magmortar":
-        return "magby";
-      case "munchlax":
-        return "munchlax";
-      case "snorlax":
-        return "munchlax";
-      case "growlithe":
-        return "growlithe";
-      case "arcanine":
-        return "growlithe";
-      case "onix":
-        return "onix";
-      case "steelix":
-        return "onix";
-      case "scyther":
-        return "scyther";
-      case "scizor":
-        return "scyther";
-      case "riolu":
-        return "riolu";
-      case "lucario":
-        return "riolu";
+      case 'bulbasaur':
+        return 'bulbasaur';
+      case 'ivysaur':
+        return 'bulbasaur';
+      case 'venusaur':
+        return 'bulbasaur';
+      case 'charmander':
+        return 'charmander';
+      case 'charmeleon':
+        return 'charmander';
+      case 'charizard':
+        return 'charmander';
+      case 'squirtle':
+        return 'squirtle';
+      case 'wartortle':
+        return 'squirtle';
+      case 'blastoise':
+        return 'squirtle';
+      case 'geodude':
+        return 'geodude';
+      case 'graveler':
+        return 'geodude';
+      case 'golem':
+        return 'geodude';
+      case 'azurill':
+        return 'azurill';
+      case 'marill':
+        return 'azurill';
+      case 'azumarill':
+        return 'azurill';
+      case 'zubat':
+        return 'zubat';
+      case 'golbat':
+        return 'zubat';
+      case 'crobat':
+        return 'zubat';
+      case 'ampharos':
+        return 'mareep';
+      case 'mareep':
+        return 'mareep';
+      case 'flaffy':
+        return 'mareep';
+      case 'cleffa':
+        return 'cleffa';
+      case 'clefairy':
+        return 'cleffa';
+      case 'clefable':
+        return 'cleffa';
+      case 'igglybuff':
+        return 'igglybuff';
+      case 'jigglypuff':
+        return 'igglybuff';
+      case 'wigglytuff':
+        return 'igglybuff';
+      case 'caterpie':
+        return 'caterpie';
+      case 'metapod':
+        return 'caterpie';
+      case 'butterfree':
+        return 'caterpie';
+      case 'weedle':
+        return 'weedle';
+      case 'kakuna':
+        return 'weedle';
+      case 'beedrill':
+        return 'weedle';
+      case 'pidgey':
+        return 'pidgey';
+      case 'pidgeotto':
+        return 'pidgey';
+      case 'pidgeot':
+        return 'pidgey';
+      case 'hoppip':
+        return 'hoppip';
+      case 'skiploom':
+        return 'hoppip';
+      case 'jumpluff':
+        return 'hoppip';
+      case 'seedot':
+        return 'seedot';
+      case 'nuzleaf':
+        return 'seedot';
+      case 'shiftry':
+        return 'seedot';
+      case 'starly':
+        return 'starly';
+      case 'staravia':
+        return 'starly';
+      case 'staraptor':
+        return 'starly';
+      case 'chikorita':
+        return 'chikorita';
+      case 'bayleef':
+        return 'chikorita';
+      case 'meganium':
+        return 'chikorita';
+      case 'cyndaquil':
+        return 'cyndaquil';
+      case 'quilava':
+        return 'cyndaquil';
+      case 'typhlosion':
+        return 'cyndaquil';
+      case 'totodile':
+        return 'totodile';
+      case 'croconaw':
+        return 'totodile';
+      case 'feraligatr':
+        return 'totodile';
+      case 'treecko':
+        return 'treecko';
+      case 'grovyle':
+        return 'treecko';
+      case 'sceptile':
+        return 'treecko';
+      case 'torchic':
+        return 'torchic';
+      case 'combusken':
+        return 'torchic';
+      case 'blaziken':
+        return 'torchic';
+      case 'mudkip':
+        return 'mudkip';
+      case 'marshtomp':
+        return 'mudkip';
+      case 'swampert':
+        return 'mudkip';
+      case 'turtwig':
+        return 'turtwig';
+      case 'grotle':
+        return 'turtwig';
+      case 'torterra':
+        return 'turtwig';
+      case 'chimchar':
+        return 'chimchar';
+      case 'monferno':
+        return 'chimchar';
+      case 'infernape':
+        return 'chimchar';
+      case 'piplup':
+        return 'piplup';
+      case 'prinplup':
+        return 'piplup';
+      case 'empoleon':
+        return 'piplup';
+      case 'nidoranF':
+        return 'nidoranF';
+      case 'nidorina':
+        return 'nidoranF';
+      case 'nidoqueen':
+        return 'nidoranF';
+      case 'nidoranM':
+        return 'nidoranM';
+      case 'nidorino':
+        return 'nidoranM';
+      case 'nidoking':
+        return 'nidoranM';
+      case 'pichu':
+        return 'pichu';
+      case 'pikachu':
+        return 'pichu';
+      case 'raichu':
+        return 'pichu';
+      case 'machop':
+        return 'machop';
+      case 'machoke':
+        return 'machop';
+      case 'machamp':
+        return 'machop';
+      case 'horsea':
+        return 'horsea';
+      case 'seadra':
+        return 'horsea';
+      case 'kingdra':
+        return 'horsea';
+      case 'trapinch':
+        return 'trapinch';
+      case 'vibrava':
+        return 'trapinch';
+      case 'flygon':
+        return 'trapinch';
+      case 'spheal':
+        return 'spheal';
+      case 'sealeo':
+        return 'spheal';
+      case 'walrein':
+        return 'spheal';
+      case 'aron':
+        return 'aron';
+      case 'lairon':
+        return 'aron';
+      case 'aggron':
+        return 'aron';
+      case 'magnemite':
+        return 'magnemite';
+      case 'magneton':
+        return 'magnemite';
+      case 'magnezone':
+        return 'magnemite';
+      case 'rhyhorn':
+        return 'rhyhorn';
+      case 'rhydon':
+        return 'rhyhorn';
+      case 'rhyperior':
+        return 'rhyhorn';
+      case 'togepi':
+        return 'togepi';
+      case 'togetic':
+        return 'togepi';
+      case 'togekiss':
+        return 'togepi';
+      case 'duskull':
+        return 'duskull';
+      case 'dusclops':
+        return 'duskull';
+      case 'dusknoir':
+        return 'duskull';
+      case 'lotad':
+        return 'lotad';
+      case 'lombre':
+        return 'lotad';
+      case 'ludicolo':
+        return 'lotad';
+      case 'shinx':
+        return 'shinx';
+      case 'luxio':
+        return 'shinx';
+      case 'luxray':
+        return 'shinx';
+      case 'poliwag':
+        return 'poliwag';
+      case 'poliwhirl':
+        return 'poliwag';
+      case 'politoed':
+        return 'poliwag';
+      case 'abra':
+        return 'abra';
+      case 'kadabra':
+        return 'abra';
+      case 'alakazam':
+        return 'abra';
+      case 'gastly':
+        return 'gastly';
+      case 'haunter':
+        return 'gastly';
+      case 'gengar':
+        return 'gastly';
+      case 'dratini':
+        return 'dratini';
+      case 'dragonair':
+        return 'dratini';
+      case 'dragonite':
+        return 'dratini';
+      case 'larvitar':
+        return 'larvitar';
+      case 'pupitar':
+        return 'larvitar';
+      case 'tyranitar':
+        return 'larvitar';
+      case 'slakoth':
+        return 'slakoth';
+      case 'vigoroth':
+        return 'slakoth';
+      case 'slaking':
+        return 'slakoth';
+      case 'ralts':
+        return 'ralts';
+      case 'kirlia':
+        return 'ralts';
+      case 'gardevoir':
+        return 'ralts';
+      case 'bagon':
+        return 'bagon';
+      case 'shelgon':
+        return 'bagon';
+      case 'salamence':
+        return 'bagon';
+      case 'beldum':
+        return 'beldum';
+      case 'metang':
+        return 'beldum';
+      case 'metagross':
+        return 'beldum';
+      case 'gible':
+        return 'gible';
+      case 'gabite':
+        return 'gible';
+      case 'garchomp':
+        return 'gible';
+      case 'elekid':
+        return 'elekid';
+      case 'electabuzz':
+        return 'elekid';
+      case 'electivire':
+        return 'elekid';
+      case 'magby':
+        return 'magby';
+      case 'magmar':
+        return 'magby';
+      case 'magmortar':
+        return 'magby';
+      case 'munchlax':
+        return 'munchlax';
+      case 'snorlax':
+        return 'munchlax';
+      case 'growlithe':
+        return 'growlithe';
+      case 'arcanine':
+        return 'growlithe';
+      case 'onix':
+        return 'onix';
+      case 'steelix':
+        return 'onix';
+      case 'scyther':
+        return 'scyther';
+      case 'scizor':
+        return 'scyther';
+      case 'riolu':
+        return 'riolu';
+      case 'lucario':
+        return 'riolu';
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -482,371 +480,371 @@ class PokemonFactory {
 
   static createPokemonFromName(name) {
     switch (name) {
-      case "bulbasaur":
+      case 'bulbasaur':
         return new Pokemon.Bulbasaur();
-      case "ivysaur":
+      case 'ivysaur':
         return new Pokemon.Ivysaur();
-      case "venusaur":
+      case 'venusaur':
         return new Pokemon.Venusaur();
-      case "charmander":
+      case 'charmander':
         return new Pokemon.Charmander();
-      case "charmeleon":
+      case 'charmeleon':
         return new Pokemon.Charmeleon();
-      case "charizard":
+      case 'charizard':
         return new Pokemon.Charizard();
-      case "squirtle":
+      case 'squirtle':
         return new Pokemon.Squirtle();
-      case "wartortle":
+      case 'wartortle':
         return new Pokemon.Wartortle();
-      case "blastoise":
+      case 'blastoise':
         return new Pokemon.Blastoise();
-      case "geodude":
+      case 'geodude':
         return new Pokemon.Geodude();
-      case "graveler":
+      case 'graveler':
         return new Pokemon.Graveler();
-      case "golem":
+      case 'golem':
         return new Pokemon.Golem();
-      case "azurill":
+      case 'azurill':
         return new Pokemon.Azurill();
-      case "marill":
+      case 'marill':
         return new Pokemon.Marill();
-      case "azumarill":
+      case 'azumarill':
         return new Pokemon.Azumarill();
-      case "zubat":
+      case 'zubat':
         return new Pokemon.Zubat();
-      case "golbat":
+      case 'golbat':
         return new Pokemon.Golbat();
-      case "crobat":
+      case 'crobat':
         return new Pokemon.Crobat();
-      case "ampharos":
+      case 'ampharos':
         return new Pokemon.Ampharos();
-      case "mareep":
+      case 'mareep':
         return new Pokemon.Mareep();
-      case "flaffy":
+      case 'flaffy':
         return new Pokemon.Flaffy();
-      case "cleffa":
+      case 'cleffa':
         return new Pokemon.Cleffa();
-      case "clefairy":
+      case 'clefairy':
         return new Pokemon.Clefairy();
-      case "clefable":
+      case 'clefable':
         return new Pokemon.Clefable();
-      case "igglybuff":
+      case 'igglybuff':
         return new Pokemon.Igglybuff();
-      case "jigglypuff":
+      case 'jigglypuff':
         return new Pokemon.Jigglypuff();
-      case "wigglytuff":
+      case 'wigglytuff':
         return new Pokemon.Wigglytuff();
-      case "caterpie":
+      case 'caterpie':
         return new Pokemon.Caterpie();
-      case "metapod":
+      case 'metapod':
         return new Pokemon.Metapod();
-      case "butterfree":
+      case 'butterfree':
         return new Pokemon.Butterfree();
-      case "weedle":
+      case 'weedle':
         return new Pokemon.Weedle();
-      case "kakuna":
+      case 'kakuna':
         return new Pokemon.Kakuna();
-      case "beedrill":
+      case 'beedrill':
         return new Pokemon.Beedrill();
-      case "pidgey":
+      case 'pidgey':
         return new Pokemon.Pidgey();
-      case "pidgeotto":
+      case 'pidgeotto':
         return new Pokemon.Pidgeotto();
-      case "pidgeot":
+      case 'pidgeot':
         return new Pokemon.Pidgeot();
-      case "hoppip":
+      case 'hoppip':
         return new Pokemon.Hoppip();
-      case "skiploom":
+      case 'skiploom':
         return new Pokemon.Skiploom();
-      case "jumpluff":
+      case 'jumpluff':
         return new Pokemon.Jumpluff();
-      case "seedot":
+      case 'seedot':
         return new Pokemon.Seedot();
-      case "nuzleaf":
+      case 'nuzleaf':
         return new Pokemon.Nuzleaf();
-      case "shiftry":
+      case 'shiftry':
         return new Pokemon.Shiftry();
-      case "starly":
+      case 'starly':
         return new Pokemon.Starly();
-      case "staravia":
+      case 'staravia':
         return new Pokemon.Staravia();
-      case "staraptor":
+      case 'staraptor':
         return new Pokemon.Staraptor();
-      case "chikorita":
+      case 'chikorita':
         return new Pokemon.Chikorita();
-      case "bayleef":
+      case 'bayleef':
         return new Pokemon.Bayleef();
-      case "meganium":
+      case 'meganium':
         return new Pokemon.Meganium();
-      case "cyndaquil":
+      case 'cyndaquil':
         return new Pokemon.Cyndaquil();
-      case "quilava":
+      case 'quilava':
         return new Pokemon.Quilava();
-      case "typhlosion":
+      case 'typhlosion':
         return new Pokemon.Typhlosion();
-      case "totodile":
+      case 'totodile':
         return new Pokemon.Totodile();
-      case "croconaw":
+      case 'croconaw':
         return new Pokemon.Croconaw();
-      case "feraligatr":
+      case 'feraligatr':
         return new Pokemon.Feraligatr();
-      case "treecko":
+      case 'treecko':
         return new Pokemon.Treecko();
-      case "grovyle":
+      case 'grovyle':
         return new Pokemon.Grovyle();
-      case "sceptile":
+      case 'sceptile':
         return new Pokemon.Sceptile();
-      case "torchic":
+      case 'torchic':
         return new Pokemon.Torchic();
-      case "combusken":
+      case 'combusken':
         return new Pokemon.Combusken();
-      case "blaziken":
+      case 'blaziken':
         return new Pokemon.Blaziken();
-      case "mudkip":
+      case 'mudkip':
         return new Pokemon.Mudkip();
-      case "marshtomp":
+      case 'marshtomp':
         return new Pokemon.Marshtomp();
-      case "swampert":
-        return new Pokemon.Swampert();    
-      case "turtwig":
+      case 'swampert':
+        return new Pokemon.Swampert();
+      case 'turtwig':
         return new Pokemon.Turtwig();
-      case "grotle":
+      case 'grotle':
         return new Pokemon.Grotle();
-      case "torterra":
+      case 'torterra':
         return new Pokemon.Torterra();
-      case "chimchar":
+      case 'chimchar':
         return new Pokemon.Chimchar();
-      case "monferno":
+      case 'monferno':
         return new Pokemon.Monferno();
-      case "infernape":
-        return new Pokemon.Infernape();   
-      case "piplup":
+      case 'infernape':
+        return new Pokemon.Infernape();
+      case 'piplup':
         return new Pokemon.Piplup();
-      case "prinplup":
+      case 'prinplup':
         return new Pokemon.Prinplup();
-      case "empoleon":
+      case 'empoleon':
         return new Pokemon.Empoleon();
-      case "nidoranF":
+      case 'nidoranF':
         return new Pokemon.NidoranF();
-      case "nidorina":
+      case 'nidorina':
         return new Pokemon.Nidorina();
-      case "nidoqueen":
+      case 'nidoqueen':
         return new Pokemon.Nidoqueen();
-      case "nidoranM":
+      case 'nidoranM':
         return new Pokemon.NidoranM();
-      case "nidorino":
+      case 'nidorino':
         return new Pokemon.Nidorino();
-      case "nidoking":
+      case 'nidoking':
         return new Pokemon.Nidoking();
-      case "pichu":
+      case 'pichu':
         return new Pokemon.Pichu();
-      case "pikachu":
+      case 'pikachu':
         return new Pokemon.Pikachu();
-      case "raichu":
+      case 'raichu':
         return new Pokemon.Raichu();
-      case "machop":
+      case 'machop':
         return new Pokemon.Machop();
-      case "machoke":
+      case 'machoke':
         return new Pokemon.Machoke();
-      case "machamp":
+      case 'machamp':
         return new Pokemon.Machamp();
-      case "horsea":
+      case 'horsea':
         return new Pokemon.Horsea();
-      case "seadra":
+      case 'seadra':
         return new Pokemon.Seadra();
-      case "kingdra":
+      case 'kingdra':
         return new Pokemon.Kingdra();
-      case "trapinch":
+      case 'trapinch':
         return new Pokemon.Trapinch();
-      case "vibrava":
+      case 'vibrava':
         return new Pokemon.Vibrava();
-      case "flygon":
+      case 'flygon':
         return new Pokemon.Flygon();
-      case "spheal":
+      case 'spheal':
         return new Pokemon.Spheal();
-      case "sealeo":
+      case 'sealeo':
         return new Pokemon.Sealeo();
-      case "walrein":
+      case 'walrein':
         return new Pokemon.Walrein();
-      case "aron":
+      case 'aron':
         return new Pokemon.Aron();
-      case "lairon":
+      case 'lairon':
         return new Pokemon.Lairon();
-      case "aggron":
+      case 'aggron':
         return new Pokemon.Aggron();
-      case "magnemite":
+      case 'magnemite':
         return new Pokemon.Magnemite();
-      case "magneton":
+      case 'magneton':
         return new Pokemon.Magneton();
-      case "magnezone":
+      case 'magnezone':
         return new Pokemon.Magnezone();
-      case "rhyhorn":
+      case 'rhyhorn':
         return new Pokemon.Rhyhorn();
-      case "rhydon":
+      case 'rhydon':
         return new Pokemon.Rhydon();
-      case "rhyperior":
+      case 'rhyperior':
         return new Pokemon.Rhyperior();
-      case "togepi":
+      case 'togepi':
         return new Pokemon.Togepi();
-      case "togetic":
+      case 'togetic':
         return new Pokemon.Togetic();
-      case "togekiss":
+      case 'togekiss':
         return new Pokemon.Togekiss();
-      case "duskull":
+      case 'duskull':
         return new Pokemon.Duskull();
-      case "dusclops":
+      case 'dusclops':
         return new Pokemon.Dusclops();
-      case "dusknoir":
+      case 'dusknoir':
         return new Pokemon.Dusknoir();
-      case "lotad":
+      case 'lotad':
         return new Pokemon.Lotad();
-      case "lombre":
+      case 'lombre':
         return new Pokemon.Lombre();
-      case "ludicolo":
+      case 'ludicolo':
         return new Pokemon.Ludicolo();
-      case "shinx":
+      case 'shinx':
         return new Pokemon.Shinx();
-      case "luxio":
+      case 'luxio':
         return new Pokemon.Luxio();
-      case "luxray":
+      case 'luxray':
         return new Pokemon.Luxray();
-      case "poliwag":
+      case 'poliwag':
         return new Pokemon.Poliwag();
-      case "poliwhirl":
+      case 'poliwhirl':
         return new Pokemon.Poliwhirl();
-      case "politoed":
+      case 'politoed':
         return new Pokemon.Politoed();
-      case "abra":
+      case 'abra':
         return new Pokemon.Abra();
-      case "kadabra":
+      case 'kadabra':
         return new Pokemon.Kadabra();
-      case "alakazam":
+      case 'alakazam':
         return new Pokemon.Alakazam();
-      case "gastly":
+      case 'gastly':
         return new Pokemon.Gastly();
-      case "haunter":
+      case 'haunter':
         return new Pokemon.Haunter();
-      case "gengar":
+      case 'gengar':
         return new Pokemon.Gengar();
-      case "dratini":
+      case 'dratini':
         return new Pokemon.Dratini();
-      case "dragonair":
+      case 'dragonair':
         return new Pokemon.Dragonair();
-      case "dragonite":
+      case 'dragonite':
         return new Pokemon.Dragonite();
-      case "larvitar":
+      case 'larvitar':
         return new Pokemon.Larvitar();
-      case "pupitar":
+      case 'pupitar':
         return new Pokemon.Pupitar();
-      case "tyranitar":
+      case 'tyranitar':
         return new Pokemon.Tyranitar();
-      case "slakoth":
+      case 'slakoth':
         return new Pokemon.Slakoth();
-      case "vigoroth":
+      case 'vigoroth':
         return new Pokemon.Vigoroth();
-      case "slaking":
+      case 'slaking':
         return new Pokemon.Slaking();
-      case "ralts":
+      case 'ralts':
         return new Pokemon.Ralts();
-      case "kirlia":
+      case 'kirlia':
         return new Pokemon.Kirlia();
-      case "gardevoir":
+      case 'gardevoir':
         return new Pokemon.Gardevoir();
-      case "bagon":
+      case 'bagon':
         return new Pokemon.Bagon();
-      case "shelgon":
+      case 'shelgon':
         return new Pokemon.Shelgon();
-      case "salamence":
+      case 'salamence':
         return new Pokemon.Salamence();
-      case "beldum":
+      case 'beldum':
         return new Pokemon.Beldum();
-      case "metang":
+      case 'metang':
         return new Pokemon.Metang();
-      case "metagross":
+      case 'metagross':
         return new Pokemon.Metagross();
-      case "gible":
+      case 'gible':
         return new Pokemon.Gible();
-      case "gabite":
+      case 'gabite':
         return new Pokemon.Gabite();
-      case "garchomp":
+      case 'garchomp':
         return new Pokemon.Garchomp();
-      case "elekid":
+      case 'elekid':
         return new Pokemon.Elekid();
-      case "electabuzz":
+      case 'electabuzz':
         return new Pokemon.Electabuzz();
-      case "electivire":
+      case 'electivire':
         return new Pokemon.Electivire();
-      case "magby":
+      case 'magby':
         return new Pokemon.Magby();
-      case "magmar":
+      case 'magmar':
         return new Pokemon.Magmar();
-      case "magmortar":
+      case 'magmortar':
         return new Pokemon.Magmortar();
-      case "munchlax":
+      case 'munchlax':
         return new Pokemon.Munchlax();
-      case "snorlax":
+      case 'snorlax':
         return new Pokemon.Snorlax();
-      case "growlithe":
+      case 'growlithe':
         return new Pokemon.Growlithe();
-      case "arcanine":
+      case 'arcanine':
         return new Pokemon.Arcanine();
-      case "onix":
+      case 'onix':
         return new Pokemon.Onix();
-      case "steelix":
+      case 'steelix':
         return new Pokemon.Steelix();
-      case "scyther":
+      case 'scyther':
         return new Pokemon.Scyther();
-      case "scizor":
+      case 'scizor':
         return new Pokemon.Scizor();
-      case "riolu":
+      case 'riolu':
         return new Pokemon.Riolu();
-      case "lucario":
+      case 'lucario':
         return new Pokemon.Lucario();
-      case "magikarp":
+      case 'magikarp':
         return new Pokemon.Magikarp();
-      case "rattata":
+      case 'rattata':
         return new Pokemon.Rattata();
-      case "raticate":
+      case 'raticate':
         return new Pokemon.Raticate();
-      case "spearow":
+      case 'spearow':
         return new Pokemon.Spearow();
-      case "fearow":
+      case 'fearow':
         return new Pokemon.Fearow();
-      case "gyarados":
+      case 'gyarados':
         return new Pokemon.Gyarados();
-      case "lugia":
+      case 'lugia':
         return new Pokemon.Lugia();
-      case "zapdos":
+      case 'zapdos':
         return new Pokemon.Zapdos();
-      case "moltres":
+      case 'moltres':
         return new Pokemon.Moltres();
-      case "articuno":
+      case 'articuno':
         return new Pokemon.Articuno();
-      case "dialga":
+      case 'dialga':
         return new Pokemon.Dialga();
-      case "palkia":
+      case 'palkia':
         return new Pokemon.Palkia();
-      case "suicune":
+      case 'suicune':
         return new Pokemon.Suicune();
-      case "raikou":
+      case 'raikou':
         return new Pokemon.Raikou();
-      case "entei":
+      case 'entei':
         return new Pokemon.Entei();
-      case "kyogre":
+      case 'kyogre':
         return new Pokemon.Kyogre();
-      case "groudon":
+      case 'groudon':
         return new Pokemon.Groudon();
-      case "rayquaza":
+      case 'rayquaza':
         return new Pokemon.Rayquaza();
-      case "regice":
+      case 'regice':
         return new Pokemon.Regice();
-      case "regirock":
+      case 'regirock':
         return new Pokemon.Regirock();
-      case "registeel":
+      case 'registeel':
         return new Pokemon.Registeel();
-      case "regigigas":
+      case 'regigigas':
         return new Pokemon.Regigigas();
-      case "giratina":
+      case 'giratina':
         return new Pokemon.Giratina();
       default:
         console.log(`No pokemon with name "${name}" found`);

@@ -1,6 +1,6 @@
-const schema = require("@colyseus/schema");
-const Pokemon = require("./pokemon").Pokemon;
-const ExperienceManager = require("./experience-manager");
+const schema = require('@colyseus/schema');
+const Pokemon = require('./pokemon').Pokemon;
+const ExperienceManager = require('./experience-manager');
 const Simulation = require('../core/simulation');
 const Synergies = require('./synergies');
 
@@ -18,31 +18,31 @@ class Player extends Schema {
     this.synergies = new Synergies();
     this.money = 5;
     this.life = 20;
-    this.simulation = new Simulation({},{});
+    this.simulation = new Simulation({}, {});
     this.shopLocked = false;
     this.streak = 0;
     this.interest = 0;
-    this.lastBattleResult = "";
-    this.opponentName = "";
+    this.lastBattleResult = '';
+    this.opponentName = '';
   }
 }
 
 schema.defineTypes(Player, {
-  id: "string",
-  name: "string",
-  board: { map: Pokemon },
-  shop: { map: Pokemon },
-  simulation : Simulation,
+  id: 'string',
+  name: 'string',
+  board: {map: Pokemon},
+  shop: {map: Pokemon},
+  simulation: Simulation,
   experienceManager: ExperienceManager,
   synergies: Synergies,
-  level: "uint8",
-  money: "uint8",
-  life: "uint8",
-  shopLocked: "boolean",
-  streak: "uint8",
-  interest : "uint8",
-  lastBattleResult: "string",
-  opponentName: "string"
+  level: 'uint8',
+  money: 'uint8',
+  life: 'uint8',
+  shopLocked: 'boolean',
+  streak: 'uint8',
+  interest: 'uint8',
+  lastBattleResult: 'string',
+  opponentName: 'string'
 });
 
 module.exports = Player;

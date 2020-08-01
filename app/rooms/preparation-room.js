@@ -1,15 +1,16 @@
-const colyseus = require("colyseus");
-const PreparationState = require("./states/preparation-state");
-const Dispatcher = require("@colyseus/command").Dispatcher;
-const social = require("@colyseus/social");
-const OnJoinCommand = require("./commands/preparation-commands").OnJoinCommand;
-const OnGameStartCommand = require("./commands/preparation-commands").OnGameStartCommand;
-const OnLeaveCommand = require("./commands/preparation-commands").OnLeaveCommand;
-const OnToggleReadyCommand = require("./commands/preparation-commands").OnToggleReadyCommand;
+const colyseus = require('colyseus');
+const social = require('@colyseus/social');
+const {Dispatcher} = require('@colyseus/command');
+const PreparationState = require('./states/preparation-state');
+const {
+  OnGameStartCommand,
+  OnJoinCommand,
+  OnLeaveCommand,
+  OnToggleReadyCommand
+} = require('./commands/preparation-commands');
 
 class PreparationRoom extends colyseus.Room {
-
-  constructor(){
+  constructor() {
     super();
     this.dispatcher = new Dispatcher(this);
   }
@@ -17,27 +18,26 @@ class PreparationRoom extends colyseus.Room {
   onCreate(options) {
     this.setState(new PreparationState());
     this.maxClients = 8;
-    this.onMessage("game-start", (client, message) => {
-      this.dispatcher.dispatch(new OnGameStartCommand(), { client, message });
+    this.onMessage('game-start', (client, message) => {
+      this.dispatcher.dispatch(new OnGameStartCommand(), {client, message});
     });
-
-    this.onMessage("toggle-ready", (client, message) => {
+    this.onMessage('toggle-ready', (client, message) => {
       this.dispatcher.dispatch(new OnToggleReadyCommand(), client);
     });
   }
 
   async onAuth(client, options, request) {
-    let token = social.verifyToken(options.token);
-    let user = await social.User.findById(token._id);
+    const token = social.verifyToken(options.token);
+    const user = await social.User.findById(token._id);
     return user;
   }
 
   onJoin(client, options, auth) {
-    this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth });
+    this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
   }
 
   onLeave(client, consented) {
-    this.dispatcher.dispatch(new OnLeaveCommand(), { client, consented });
+    this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
   }
 
   onDispose() {

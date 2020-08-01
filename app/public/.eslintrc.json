@@ -1,0 +1,9 @@
+{
+  "env": {
+    "node": false,
+    "commonjs": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}

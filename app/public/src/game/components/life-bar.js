@@ -1,54 +1,48 @@
-import { GameObjects } from "phaser";
+import {GameObjects} from 'phaser';
 
 export default class LifeBar extends GameObjects.Graphics {
+  constructor(scene, x, y, life, color) {
+    super(scene);
+    this.x = x;
+    this.y = y;
+    this.value = life;
+    this.color = color;
+    this.p = 56 / this.value;
+    this.objType = 'lifebar';
 
-    constructor (scene, x, y, life, color)
-    {
-        super(scene);
-        this.x = x;
-        this.y = y;
-        this.value = life;
-        this.color = color;
-        this.p = 56 / this.value;
-        this.objType = "lifebar";
+    this.draw();
 
-        this.draw();
+    scene.add.existing(this);
+  }
 
-        scene.add.existing(this);
+  setLife(amount) {
+    this.value = amount;
+
+    if (this.value < 0) {
+      this.value = 0;
     }
 
-    setLife (amount)
-    {
-        this.value = amount;
+    this.draw();
 
-        if (this.value < 0)
-        {
-            this.value = 0;
-        }
+    return (this.value === 0);
+  }
 
-        this.draw();
+  draw() {
+    this.clear();
 
-        return (this.value === 0);
-    }
+    //  BG
+    this.fillStyle(0x000000);
+    this.fillRect(this.x, this.y, 60, 10);
 
-    draw ()
-    {
-        this.clear();
+    //  Health
 
-        //  BG
-        this.fillStyle(0x000000);
-        this.fillRect(this.x, this.y, 60, 10);
+    this.fillStyle(0xffffff);
+    this.fillRect(this.x + 2, this.y + 2, 56, 6);
 
-        //  Health
+    this.fillStyle(this.color);
 
-        this.fillStyle(0xffffff);
-        this.fillRect(this.x + 2, this.y + 2, 56, 6);
+    const d = Math.floor(this.p * this.value);
 
-        this.fillStyle(this.color);
-
-        var d = Math.floor(this.p * this.value);
-
-        this.fillRect(this.x + 2, this.y + 2, d, 6);
-    }
-
+    this.fillRect(this.x + 2, this.y + 2, d, 6);
+  }
 }

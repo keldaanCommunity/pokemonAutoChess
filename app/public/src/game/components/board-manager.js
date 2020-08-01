@@ -1,4 +1,4 @@
-import Pokemon from "./pokemon";
+import Pokemon from './pokemon';
 
 export default class BoardManager {
   constructor(scene, group, player) {
@@ -8,20 +8,19 @@ export default class BoardManager {
   }
 
   addPokemon(pokemon) {
-    let presence = false;
-    this.group.getChildren().forEach(pkm => {
+    const presence = false;
+    this.group.getChildren().forEach((pkm) => {
       if (pkm.id == pokemon.id) {
         pkm.destroy();
       }
     });
-    if(!presence){
-      let coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+    if (!presence) {
+      const coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
       let pokemonUI;
 
       if (window.sessionId == this.player.id) {
         pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, true);
-      }
-      else{
+      } else {
         pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false);
       }
       window.animationManager.animatePokemon(pokemonUI);
@@ -33,17 +32,17 @@ export default class BoardManager {
     this.group.clear(false, true);
   }
 
-  clearBoard(){
-    for (let id in this.player.board) {
-      let pokemon = this.player.board[id];
-      if(pokemon.positionY != 0){
+  clearBoard() {
+    for (const id in this.player.board) {
+      const pokemon = this.player.board[id];
+      if (pokemon.positionY != 0) {
         this.removePokemon(pokemon.id);
       }
     }
   }
 
   removePokemon(id) {
-    this.group.getChildren().forEach(pokemon => {
+    this.group.getChildren().forEach((pokemon) => {
       if (pokemon.id == id) {
         pokemon.destroy();
       }
@@ -51,14 +50,13 @@ export default class BoardManager {
   }
 
   buildPokemons() {
-    for (let id in this.player.board) {
-      let pokemon = this.player.board[id];
-      if(window.state.phase == "FIGHT"){
-        if(pokemon.positionY == 0){
+    for (const id in this.player.board) {
+      const pokemon = this.player.board[id];
+      if (window.state.phase == 'FIGHT') {
+        if (pokemon.positionY == 0) {
           this.addPokemon(pokemon);
         }
-      }
-      else{
+      } else {
         this.addPokemon(pokemon);
       }
     }
@@ -73,44 +71,43 @@ export default class BoardManager {
   }
 
   update() {
-    for (let id in this.player.board) {
-      let pokemon = this.player.board[id];
+    for (const id in this.player.board) {
+      const pokemon = this.player.board[id];
       let found = false;
-      this.group.getChildren().forEach(pokemonUI => {
+      this.group.getChildren().forEach((pokemonUI) => {
         if (pokemon.id == pokemonUI.id) {
           found = true;
 
           if (pokemonUI.positionX != pokemon.positionX || pokemonUI.positionY != pokemon.positionY) {
             pokemonUI.positionX = pokemon.positionX;
-            let coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+            const coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
             pokemonUI.x = coordinates[0];
             pokemonUI.y = coordinates[1];
           }
           if (pokemonUI.x != pokemon.positionX || pokemonUI.y != pokemon.positionY) {
-            let coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+            const coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
             pokemonUI.x = coordinates[0];
             pokemonUI.y = coordinates[1];
           }
         }
       });
       if (!found) {
-        if(window.state.phase =="FIGHT"){
-          if(pokemon.positionY ==0){
+        if (window.state.phase =='FIGHT') {
+          if (pokemon.positionY ==0) {
             this.addPokemon(pokemon);
           }
-        }
-        else{
+        } else {
           this.addPokemon(pokemon);
         }
       }
     }
-    let ids = [];
-    this.group.getChildren().forEach(pokemonUI => {
+    const ids = [];
+    this.group.getChildren().forEach((pokemonUI) => {
       if (!(pokemonUI.id in this.player.board)) {
         ids.push(pokemonUI.id);
       }
     });
-    ids.forEach(id => {
+    ids.forEach((id) => {
       this.removePokemon(id);
     });
   }

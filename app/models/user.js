@@ -1,4 +1,4 @@
-const schema = require("@colyseus/schema");
+const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 
 class User extends Schema {
@@ -9,16 +9,15 @@ class User extends Schema {
     this.ready = false;
   }
 
-  toString(){
-      return `id: ${this.id} name:${this.name}`;
+  toString() {
+    return `id: ${this.id} name:${this.name}`;
   }
-
 }
 
 schema.defineTypes(User, {
-  id: "string",
-  name: "string",
-  ready: "boolean"
+  id: 'string',
+  name: 'string',
+  ready: 'boolean'
 });
 
 module.exports = User;

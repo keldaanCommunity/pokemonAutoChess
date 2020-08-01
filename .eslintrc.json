@@ -1,0 +1,21 @@
+{
+  "extends": ["google"],
+  "env": {
+    "node": true,
+    "es2017": true
+  },
+  "rules": {
+    "camelcase": ["error", {
+      "properties": "always"
+    }],
+    "comma-dangle": ["error", "never"],
+    "guard-for-in": "off",
+    "linebreak-style": ["error", "windows"],
+    "max-len": ["warn", {
+      "code": 80,
+      "tabWidth": 2,
+      "ignoreUrls": true
+    }],
+    "require-jsdoc": "off"
+  }
+}

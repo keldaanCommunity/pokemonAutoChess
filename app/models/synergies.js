@@ -1,27 +1,27 @@
-const schema = require("@colyseus/schema");
-const PokemonFactory = require("./pokemon-factory");
+const schema = require('@colyseus/schema');
+const PokemonFactory = require('./pokemon-factory');
 
 class Synergies extends schema.Schema {
   constructor() {
-    super();    
+    super();
     this.setToZero();
   }
 
-  update(board){
-    let pokemonNames = [];
+  update(board) {
+    const pokemonNames = [];
     this.setToZero();
-    for (let id in board) {
-      let family = PokemonFactory.getPokemonFamily(board[id].name);
-      if(!pokemonNames.includes(family) && board[id].positionY != 0){
+    for (const id in board) {
+      const family = PokemonFactory.getPokemonFamily(board[id].name);
+      if (!pokemonNames.includes(family) && board[id].positionY != 0) {
         pokemonNames.push(family);
-        board[id].types.forEach( type => {
+        board[id].types.forEach( (type) => {
           this[type] += 1;
         });
       }
     }
   }
 
-  setToZero(){
+  setToZero() {
     this.NORMAL = 0;
     this.GRASS = 0;
     this.NORMAL= 0;
@@ -50,30 +50,30 @@ class Synergies extends schema.Schema {
 }
 
 schema.defineTypes(Synergies, {
-    NORMAL : "uint8",
-    GRASS : "uint8",
-    NORMAL: "uint8",
-    GRASS : "uint8",
-    FIRE : "uint8",
-    WATER : "uint8",
-    ELECTRIC : "uint8",
-    FIGHTING : "uint8",
-    PSYCHIC : "uint8",
-    DARK : "uint8",
-    METAL : "uint8",
-    GROUND : "uint8",
-    POISON : "uint8",
-    DRAGON : "uint8",
-    FIELD : "uint8",
-    MONSTER : "uint8",
-    HUMAN : "uint8",
-    AQUATIC : "uint8",
-    BUG : "uint8",
-    FLYING : "uint8",
-    FLORA : "uint8",
-    MINERAL : "uint8",
-    AMORPH : "uint8",
-    FAIRY: "uint8"
+  NORMAL: 'uint8',
+  GRASS: 'uint8',
+  NORMAL: 'uint8',
+  GRASS: 'uint8',
+  FIRE: 'uint8',
+  WATER: 'uint8',
+  ELECTRIC: 'uint8',
+  FIGHTING: 'uint8',
+  PSYCHIC: 'uint8',
+  DARK: 'uint8',
+  METAL: 'uint8',
+  GROUND: 'uint8',
+  POISON: 'uint8',
+  DRAGON: 'uint8',
+  FIELD: 'uint8',
+  MONSTER: 'uint8',
+  HUMAN: 'uint8',
+  AQUATIC: 'uint8',
+  BUG: 'uint8',
+  FLYING: 'uint8',
+  FLORA: 'uint8',
+  MINERAL: 'uint8',
+  AMORPH: 'uint8',
+  FAIRY: 'uint8'
 });
 
 module.exports = Synergies;

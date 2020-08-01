@@ -1,13 +1,12 @@
-
 class HomePage {
   constructor(args) {
     this.render();
     this.addEventListeners();
   }
-  
+
   render() {
-    var content = document.createElement("div");
-    content.setAttribute("id", "home");
+    const content = document.createElement('div');
+    content.setAttribute('id', 'home');
     content.innerHTML = `
     <header>
     <h1>Pokemon: Auto Chess</h1>
@@ -33,14 +32,14 @@ class HomePage {
   </a>
     
     </footer>`;
-    document.body.innerHTML = "";
+    document.body.innerHTML = '';
     document.body.appendChild(content);
   }
 
   addEventListeners() {
-    document.getElementById("button-play").addEventListener("click", e => {
-      window.dispatchEvent(new CustomEvent("render-login"));
-    });  
+    document.getElementById('button-play').addEventListener('click', (e) => {
+      window.dispatchEvent(new CustomEvent('render-login'));
+    });
   }
 }
 

@@ -1,5 +1,5 @@
-const schema = require("@colyseus/schema");
-const EXP_TABLE = require("./enum").EXP_TABLE;
+const schema = require('@colyseus/schema');
+const EXP_TABLE = require('./enum').EXP_TABLE;
 
 class ExperienceManager extends schema.Schema {
   constructor() {
@@ -22,8 +22,7 @@ class ExperienceManager extends schema.Schema {
   checkForLevelUp(quantity) {
     if (this.experience + quantity >= EXP_TABLE[this.level] && this.level < this.maxLevel) {
       return true;
-    }
-    else {
+    } else {
       this.experience += quantity;
       return false;
     }
@@ -31,9 +30,9 @@ class ExperienceManager extends schema.Schema {
 }
 
 schema.defineTypes(ExperienceManager, {
-  level: "uint8",
-  experience: "uint8",
-  expNeeded: "uint8"
+  level: 'uint8',
+  experience: 'uint8',
+  expNeeded: 'uint8'
 });
 
 module.exports = ExperienceManager;
