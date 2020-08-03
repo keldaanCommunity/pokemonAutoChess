@@ -7,6 +7,7 @@ import BoardManager from '../components/board-manager';
 import BattleManager from '../components/battle-manager';
 import MoneyContainer from '../components/money-container';
 import SynergiesContainer from '../components/synergies-container';
+import WeatherManager from '../components/weather-manager';
 
 export default class GameScene extends Scene {
   constructor() {
@@ -80,6 +81,7 @@ export default class GameScene extends Scene {
     this.load.image('sword', 'assets/ui/sword.png');
     this.load.image('range', 'assets/ui/range.png');
     this.load.image('heart', 'assets/ui/heart.png');
+    this.load.image('rain','assets/ui/rain.png');
     this.load.multiatlas('lock', 'assets/lock/lock.json', 'assets/lock/');
     this.load.tilemapTiledJSON('map', 'assets/tiles/tilemap.json');
     this.load.multiatlas('rarity', 'assets/rarity/rarity.json', 'assets/rarity');
@@ -116,6 +118,8 @@ export default class GameScene extends Scene {
     this.moneyContainer = new MoneyContainer(this, 20, 60, window.state.players[window.sessionId]);
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
+    this.weatherManager = new WeatherManager(this);
+
     this.textStyle = {
       fontSize: '30px',
       fontFamily: 'Verdana',
@@ -137,6 +141,7 @@ export default class GameScene extends Scene {
     this.timeText = this.add.text(870, 25, window.state.roundTime, this.textStyle);
     this.add.text(910, 25, 's', this.textStyle);
 
+    this.climateText = this.add.text(100,500,window.state.players[window.sessionId].simulation.climate, this.textStyle);
     this.lastBattleResult = this.add.text(1070, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
     this.opponentNameText = this.add.text(500, 200, window.state.players[window.sessionId].opponentName, this.bigTextStyle);
     this.opponentNameText.setAlpha(0);

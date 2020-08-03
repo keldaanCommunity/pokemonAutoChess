@@ -7,7 +7,7 @@ import LockButton from '../components/lock-button';
 export default class ShopContainer extends GameObjects.Container {
   constructor(scene, x, y) {
     super(scene, x, y);
-    this.dashboardZone = new GameObjects.Zone(scene, 530, 30, 150);
+    this.dashboardZone = new GameObjects.Zone(scene, 0, 0, 150);
     this.dashboardZone.setRectangleDropZone(1400, 150);
     this.dashboardZone.setName('sell-zone');
     this.add(this.dashboardZone);

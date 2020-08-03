@@ -70,6 +70,7 @@ class OnDragDropCommand extends Command {
           }
         }
         this.state.players[client.sessionId].synergies.update(this.state.players[client.sessionId].board);
+        this.state.players[client.sessionId].effects.update(this.state.players[client.sessionId].synergies);
       }
     }
 
@@ -86,6 +87,7 @@ class OnSellDropCommand extends Command {
       this.state.players[client.sessionId].money += COST[this.state.players[client.sessionId].board[detail.pokemonId].rarity];
       delete this.state.players[client.sessionId].board[detail.pokemonId];
       this.state.players[client.sessionId].synergies.update(this.state.players[client.sessionId].board);
+      this.state.players[client.sessionId].effects.update(this.state.players[client.sessionId].synergies);
     }
   }
 }
@@ -266,11 +268,11 @@ class OnUpdatePhaseCommand extends Command {
       const player = this.state.players[id];
       if (this.state.neutralStages.includes(this.state.stageLevel)) {
         player.opponentName = 'PVE';
-        player.simulation = new Simulation(player.board, PokemonFactory.getNeutralPokemonsByLevelStage(this.state.stageLevel));
+        player.simulation = new Simulation(player.board, PokemonFactory.getNeutralPokemonsByLevelStage(this.state.stageLevel), player.effects.list, []);
       } else {
         const opponentId = this.room.getRandomOpponent(id);
         player.opponentName = this.state.players[opponentId].name;
-        player.simulation = new Simulation(player.board, this.state.players[opponentId].board);
+        player.simulation = new Simulation(player.board, this.state.players[opponentId].board, player.effects.list, this.state.players[opponentId].effects.list);
       }
     }
   }
@@ -309,6 +311,7 @@ class OnEvolutionCommand extends Command {
     }
     if (evolve) {
       this.state.players[sessionId].synergies.update(this.state.players[sessionId].board);
+      this.state.players[sessionId].effects.update(this.state.players[sessionId].synergies);
     }
     return evolve;
   }

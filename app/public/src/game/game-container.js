@@ -79,6 +79,14 @@ class GameContainer {
       changes.forEach((change) => this.handleSynergiesChange(change, player));
     });
 
+    player.simulation.onChange = ((changes) => {
+      changes.forEach(change =>{
+        if(change.field == "climate"){
+            this.handleClimateChange(change,player);
+        }
+      })
+    });
+
     player.simulation.blueTeam.onAdd = (pokemon, key) => {
       this.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = (changes) => {
@@ -141,6 +149,23 @@ class GameContainer {
   handleSynergiesChange(change, player) {
     if (player.id == this.player.id) {
       this.game.scene.getScene('gameScene').synergiesContainer.updateSynergy(change.field, change.value);
+    }
+  }
+  
+  handleClimateChange(change, player){
+    if (player.id == this.player.id) {
+      switch (change.value) {
+        case "RAIN":
+          this.game.scene.getScene('gameScene').weatherManager.addRain();
+          break;
+        
+        case "NEUTRAL":
+          this.game.scene.getScene('gameScene').weatherManager.clearWeather();
+      
+        default:
+          break;
+      }
+      this.game.scene.getScene('gameScene').climateText.setText(change.value);
     }
   }
 

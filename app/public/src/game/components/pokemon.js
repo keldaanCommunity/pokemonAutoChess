@@ -27,24 +27,19 @@ export default class Pokemon extends Button {
   }
 
   enterButtonHoverState() {
-    console.log('hover');
     if (!this.getFirst('objType', 'detail')) {
       this.add(new PokemonDetail(this.scene, 20, -130, this.name));
     }
   }
 
   enterButtonRestState() {
-    console.log('rest');
     const detail = this.getFirst('objType', 'detail');
-    console.log(detail);
     if (detail) {
-      console.log('remove detail');
       this.remove(detail);
     }
   }
 
   enterButtonActiveState() {
-    console.log('active');
   }
 
   attackAnimation() {
