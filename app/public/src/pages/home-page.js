@@ -17,6 +17,9 @@ class HomePage {
     </main>
     <footer>
 
+    <a href="https://discord.gg/6JMS7tr">
+    <img src="https://img.shields.io/discord/737230355039387749.svg?style=for-the-badge&colorB=7581dc&logo=discord&logoColor=white">
+    </a>
     <p>
     This is a non profit game. Only made by fans for fans.
     </p>

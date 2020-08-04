@@ -141,7 +141,6 @@ export default class GameScene extends Scene {
     this.timeText = this.add.text(870, 25, window.state.roundTime, this.textStyle);
     this.add.text(910, 25, 's', this.textStyle);
 
-    this.climateText = this.add.text(100,500,window.state.players[window.sessionId].simulation.climate, this.textStyle);
     this.lastBattleResult = this.add.text(1070, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
     this.opponentNameText = this.add.text(500, 200, window.state.players[window.sessionId].opponentName, this.bigTextStyle);
     this.opponentNameText.setAlpha(0);

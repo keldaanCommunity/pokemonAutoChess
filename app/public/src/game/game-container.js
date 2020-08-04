@@ -165,7 +165,6 @@ class GameContainer {
         default:
           break;
       }
-      this.game.scene.getScene('gameScene').climateText.setText(change.value);
     }
   }
 
