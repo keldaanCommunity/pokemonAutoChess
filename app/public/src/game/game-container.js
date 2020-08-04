@@ -159,8 +159,17 @@ class GameContainer {
           this.game.scene.getScene('gameScene').weatherManager.addRain();
           break;
         
+        case "SUN":
+          this.game.scene.getScene('gameScene').weatherManager.addSun();
+          break;
+        
+        case "SANDSTORM":
+          this.game.scene.getScene('gameScene').weatherManager.addSandstorm();
+          break;
+        
         case "NEUTRAL":
           this.game.scene.getScene('gameScene').weatherManager.clearWeather();
+          break;
       
         default:
           break;

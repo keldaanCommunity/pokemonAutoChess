@@ -51,6 +51,9 @@ class Simulation extends Schema {
     if (this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)){
       pokemon.attack = pokemon.attack * 1.3;
     }
+    if(this.climate == CLIMATE.SUN && types.includes(TYPE.SUN)){
+      pokemon.attack = pokemon.attack * 1.35;
+    }
   }
 
   getClimate() {

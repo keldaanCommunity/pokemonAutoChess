@@ -14,7 +14,7 @@ export default class WeatherManager{
                 deathZone: { source: this.screen, type: 'onLeave' },
                 frequency: 50,
                 speedY: { min: 260, max: 280 },
-                lifespan: 30000,
+                lifespan: 5000,
                 scale: 0.5
             },
             {
@@ -22,7 +22,7 @@ export default class WeatherManager{
                 deathZone: { source: this.screen, type: 'onLeave' },
                 frequency: 100,
                 speedY: { min: 360, max: 380 },
-                lifespan: 30000,
+                lifespan: 5000,
                 scale: 0.8
             },
             {
@@ -31,9 +31,18 @@ export default class WeatherManager{
                 frequency: 200,
                 quantity: 4,
                 speedY: { min: 460, max: 480 },
-                lifespan: 30000
+                lifespan: 5000
             },
         ]);
+    }
+
+    addSun(){
+        this.image = this.scene.add.existing(new Phaser.GameObjects.Image(this.scene,550,250,"sun").setScale(4,4));
+        this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene,1000,500,2000,1000,0xffe800,0.15));
+    }
+
+    addSandStorm(){
+        this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene,1000,500,2000,1000,0x9a791a,0.2));
     }
 
     clearWeather(){
@@ -42,6 +51,9 @@ export default class WeatherManager{
         }
         if(this.rectangle){
             this.rectangle.destroy();
+        }
+        if(this.image){
+            this.image.destroy();
         }
     }
 }

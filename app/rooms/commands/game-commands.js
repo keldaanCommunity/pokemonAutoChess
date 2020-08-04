@@ -204,14 +204,14 @@ class OnUpdatePhaseCommand extends Command {
         player.life = Math.max(0, player.life - 1);
       } else if (Object.keys(player.simulation.redTeam).length == 0) {
         if (player.lastBattleResult == 'Win') {
-          player.streak += Math.min(player.streak + 1, 5);
+          player.streak = Math.min(player.streak + 1, 5);
         } else {
           player.streak = 0;
         }
         player.lastBattleResult = 'Win';
       } else {
         if (player.lastBattleResult == 'Draw') {
-          player.streak += Math.min(player.streak + 1, 5);
+          player.streak = Math.min(player.streak + 1, 5);
         } else {
           player.streak = 0;
         }
@@ -245,7 +245,7 @@ class OnUpdatePhaseCommand extends Command {
 
   initializePickingPhase() {
     this.state.phase = STATE.PICK;
-    this.state.time = 30000;
+    this.state.time = 5000;
     for (const id in this.state.players) {
       const player = this.state.players[id];
       player.simulation.stop();
@@ -261,7 +261,7 @@ class OnUpdatePhaseCommand extends Command {
 
   initializeFightingPhase() {
     this.state.phase = STATE.FIGHT;
-    this.state.time = 30000;
+    this.state.time = 5000;
     this.state.stageLevel += 1;
 
     for (const id in this.state.players) {
