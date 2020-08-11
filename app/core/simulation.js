@@ -57,7 +57,7 @@ class Simulation extends Schema {
   }
 
   getClimate() {
-    let climate = CLIMATE.SANDSTORM;
+    let climate = CLIMATE.NEUTRAL;
     if (this.blueEffects.includes(EFFECTS.DRIZZLE) || this.redEffects.includes(EFFECTS.DRIZZLE)) {
       climate = CLIMATE.RAIN;
     }
