@@ -26,6 +26,7 @@ class Player extends Schema {
     this.interest = 0;
     this.lastBattleResult = '';
     this.opponentName = '';
+    this.boardSize = 0;
   }
 }
 
@@ -44,7 +45,8 @@ schema.defineTypes(Player, {
   streak: 'uint8',
   interest: 'uint8',
   lastBattleResult: 'string',
-  opponentName: 'string'
+  opponentName: 'string',
+  boardSize: 'uint8'
 });
 
 module.exports = Player;

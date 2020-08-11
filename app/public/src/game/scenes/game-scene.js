@@ -147,7 +147,9 @@ export default class GameScene extends Scene {
     this.opponentNameText.setAlpha(0);
     this.countdownText = this.add.text(700, 300, window.state.players[window.sessionId].lastBattleResult, this.bigTextStyle);
     this.countdownText.setAlpha(0);
-    this.phaseText = this.add.text(320, 25, window.state.phase, this.textStyle);
+    this.boardSizeText = this.add.text(325, 25, Object.keys(window.state.players[window.sessionId].boardSize).length, this.textStyle);
+    this.add.text(350, 25,'/',this.textStyle);
+    this.maxBoardSizeText = this.add.text(370,25,window.state.players[window.sessionId].experienceManager.level, this.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(Number.MAX_VALUE);
     this.transitionScreen.setAlpha(0);
@@ -207,7 +209,6 @@ export default class GameScene extends Scene {
       this.boardManager.buildPokemons();
       this.music.play('pick-1');
     }
-    this.phaseText.setText(window.state.phase);
   }
 
   drawRectangles() {

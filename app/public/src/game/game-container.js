@@ -182,6 +182,7 @@ class GameContainer {
       switch (change.field) {
         case 'level':
           this.game.scene.getScene('gameScene').shopContainer.levelUpButton.changeLevel(change.value);
+          this.game.scene.getScene('gameScene').maxBoardSizeText.setText(change.value);
           break;
 
         case 'experience':
@@ -245,6 +246,12 @@ class GameContainer {
       case 'board':
         if (this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
           this.game.scene.getScene('gameScene').boardManager.update(player.id);
+        }
+        break;
+
+      case 'boardSize':
+        if (this.room.sessionId == player.id) {
+          this.game.scene.getScene('gameScene').boardSizeText.setText(player.boardSize);
         }
         break;
 

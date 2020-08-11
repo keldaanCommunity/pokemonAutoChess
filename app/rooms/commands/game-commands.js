@@ -71,6 +71,7 @@ class OnDragDropCommand extends Command {
         }
         this.state.players[client.sessionId].synergies.update(this.state.players[client.sessionId].board);
         this.state.players[client.sessionId].effects.update(this.state.players[client.sessionId].synergies);
+        this.state.players[client.sessionId].boardSize = UtilsCommand.getBoardSize(this.state.players[client.sessionId].board);
       }
     }
 
@@ -88,6 +89,7 @@ class OnSellDropCommand extends Command {
       delete this.state.players[client.sessionId].board[detail.pokemonId];
       this.state.players[client.sessionId].synergies.update(this.state.players[client.sessionId].board);
       this.state.players[client.sessionId].effects.update(this.state.players[client.sessionId].synergies);
+      this.state.players[client.sessionId].boardSize = UtilsCommand.getBoardSize(this.state.players[client.sessionId].board);
     }
   }
 }
@@ -176,6 +178,18 @@ class OnKickPlayerCommand extends Command {
   }
 }
 
+class UtilsCommand extends Command{
+  static getBoardSize(board){
+    let boardSize = 0;
+    for(let id in board){
+      if(board[id].positionY != 0){
+        boardSize ++;
+      }
+    }
+    return boardSize;
+  }
+}
+
 class OnUpdatePhaseCommand extends Command {
   execute() {
     if (this.state.phase == STATE.PICK) {
@@ -245,7 +259,7 @@ class OnUpdatePhaseCommand extends Command {
 
   initializePickingPhase() {
     this.state.phase = STATE.PICK;
-    this.state.time = 5000;
+    this.state.time = 30000;
     for (const id in this.state.players) {
       const player = this.state.players[id];
       player.simulation.stop();
@@ -261,7 +275,7 @@ class OnUpdatePhaseCommand extends Command {
 
   initializeFightingPhase() {
     this.state.phase = STATE.FIGHT;
-    this.state.time = 5000;
+    this.state.time = 30000;
     this.state.stageLevel += 1;
 
     for (const id in this.state.players) {
@@ -312,6 +326,7 @@ class OnEvolutionCommand extends Command {
     if (evolve) {
       this.state.players[sessionId].synergies.update(this.state.players[sessionId].board);
       this.state.players[sessionId].effects.update(this.state.players[sessionId].synergies);
+      this.state.players[sessionId].boardSize = UtilsCommand.getBoardSize(this.state.players[sessionId].board);
     }
     return evolve;
   }
