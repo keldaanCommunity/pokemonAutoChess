@@ -6,7 +6,8 @@ class AttackingState extends PokemonState {
     super();
   }
 
-  update(pokemon, dt, board) {
+  update(pokemon, dt, board, climate) {
+    super.update(pokemon, dt, board, climate);
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 1000;
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);

@@ -6,7 +6,7 @@ const AttackingState = require('./attacking-state');
 const uniqid = require('uniqid');
 
 class PokemonEntity extends schema.Schema {
-  constructor(name, index, positionX, positionY, hp, atk, range, team, attackSprite, rarity) {
+  constructor(name, index, positionX, positionY, hp, atk, range, team, attackSprite, rarity, types) {
     super();
     this.id = uniqid();
     this.rarity = rarity;
@@ -25,10 +25,14 @@ class PokemonEntity extends schema.Schema {
     this.cooldown = 1000;
     this.team = team;
     this.attackSprite = attackSprite;
+    this.types = [];
+    types.forEach(type=>{
+      this.types.push(type);
+    });
   }
 
-  update(dt, board) {
-    this.state.update(this, dt, board);
+  update(dt, board, climate) {
+    this.state.update(this, dt, board, climate);
   }
 
   handleDamage(damage, board) {

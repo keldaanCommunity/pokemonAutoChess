@@ -27,7 +27,7 @@ class Simulation extends Schema {
       const pokemon = blueTeam[id];
       // console.log("x",pokemon.positionX, "y", pokemon.positionY); // 0 for blue, 1 for red
       if (pokemon.positionY != 0) {
-        const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity);
+        const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity, pokemon.types);
         this.applyEffects(pokemonEntity, pokemon.types);
         this.blueTeam[pokemonEntity.id] = pokemonEntity;
         // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
@@ -38,7 +38,7 @@ class Simulation extends Schema {
       const pokemon = redTeam[id];
       // console.log("x",pokemon.positionX, "y", pokemon.positionY);
       if (pokemon.positionY != 0) {
-        const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, 5 - (pokemon.positionY - 1), pokemon.hp, pokemon.atk, pokemon.range, 1, pokemon.attackSprite, pokemon.rarity);
+        const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, 5 - (pokemon.positionY - 1), pokemon.hp, pokemon.atk, pokemon.range, 1, pokemon.attackSprite, pokemon.rarity, pokemon.types);
         this.applyEffects(pokemonEntity, pokemon.types);
         this.redTeam[pokemonEntity.id] = pokemonEntity;
         // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
@@ -57,7 +57,7 @@ class Simulation extends Schema {
   }
 
   getClimate() {
-    let climate = CLIMATE.NEUTRAL;
+    let climate = CLIMATE.SANDSTORM;
     if (this.blueEffects.includes(EFFECTS.DRIZZLE) || this.redEffects.includes(EFFECTS.DRIZZLE)) {
       climate = CLIMATE.RAIN;
     }
@@ -82,14 +82,14 @@ class Simulation extends Schema {
       if (this.blueTeam[id].life <= 0) {
         delete this.blueTeam[id];
       } else {
-        this.blueTeam[id].update(dt, this.board);
+        this.blueTeam[id].update(dt, this.board, this.climate);
       }
     }
     for (const id in this.redTeam) {
       if (this.redTeam[id].life <= 0) {
         delete this.redTeam[id];
       } else {
-        this.redTeam[id].update(dt, this.board);
+        this.redTeam[id].update(dt, this.board, this.climate);
       }
     }
   }

@@ -82,6 +82,7 @@ export default class GameScene extends Scene {
     this.load.image('range', 'assets/ui/range.png');
     this.load.image('heart', 'assets/ui/heart.png');
     this.load.image('rain','assets/ui/rain.png');
+    this.load.image('sand','assets/ui/sand.png');
     this.load.image('sun','assets/ui/sun.png');
     this.load.multiatlas('lock', 'assets/lock/lock.json', 'assets/lock/');
     this.load.tilemapTiledJSON('map', 'assets/tiles/tilemap.json');

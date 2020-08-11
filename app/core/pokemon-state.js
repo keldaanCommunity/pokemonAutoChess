@@ -1,3 +1,6 @@
+const TYPE = require('../models/enum').TYPE;
+const CLIMATE = require('../models/enum').CLIMATE;
+
 class PokemonState {
   constructor() {
 
@@ -11,7 +14,12 @@ class PokemonState {
     }
   }
 
-  update(pokemon, dt, board) {
+  update(pokemon, dt, board, climate) {
+    if (pokemon.cooldown <= 0) {
+      if(climate == CLIMATE.SANDSTORM && (!pokemon.types.includes(TYPE.GROUND) || !pokemon.types.includes(TYPE.METAL))){
+        this.handleDamage(pokemon,Math.round(pokemon.life/10), board);
+      }
+    }
   }
 
   onEnter(pokemon) {

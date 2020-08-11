@@ -4,6 +4,8 @@ export default class WeatherManager{
         this.scene = scene;
         this.offscreen = new Phaser.Geom.Rectangle(0, 0, 2000, 100);
         this.screen = new Phaser.Geom.Rectangle(0, 0, 2000, 1000);
+        this.leftscreen = new Phaser.Geom.Rectangle(0,500,100,1000);
+        this.rightscreen = new Phaser.Geom.Rectangle(0,0,2000,4000);
     }
 
     addRain(){
@@ -41,7 +43,37 @@ export default class WeatherManager{
         this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene,1000,500,2000,1000,0xffe800,0.15));
     }
 
-    addSandStorm(){
+    addSandstorm(){
+        this.particles = this.scene.add.particles('sand', [
+            {
+                emitZone: { source: this.leftscreen },
+                deathZone: { source: this.rightscreen, type: 'onLeave' },
+                frequency: 50,
+                speedX: { min: 260, max: 280 },
+                speedY: { min: -260, max: -280 },
+                lifespan: 5000,
+                scale: 0.8
+            },
+            {
+                emitZone: { source: this.leftscreen },
+                deathZone: { source: this.rightscreen, type: 'onLeave' },
+                frequency: 100,
+                speedX: { min: 360, max: 380 },
+                speedY: { min: -260, max: -280 },
+                lifespan: 5000,
+                scale: 1.2
+            },
+            {
+                emitZone: { source: this.offscreen },
+                deathZone: { source: this.rightscreen, type: 'onLeave' },
+                frequency: 200,
+                quantity: 4,
+                scale: 1.5,
+                speedX: { min: 460, max: 480 },
+                speedY: { min: -260, max: -280 },
+                lifespan: 5000
+            },
+        ]);
         this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene,1000,500,2000,1000,0x9a791a,0.2));
     }
 
