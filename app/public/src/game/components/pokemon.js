@@ -17,6 +17,7 @@ export default class Pokemon extends Button {
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
     this.setRangeType();
+    this.setBuff(pokemon, scene);
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
     this.setSprite(pokemon, scene);
@@ -131,6 +132,18 @@ export default class Pokemon extends Button {
     sprite.objType = 'sprite';
     scene.add.existing(sprite);
     this.add(sprite);
+  }
+
+  setBuff(pokemon, scene){
+    if(pokemon.buffed){
+      const buff = new GameObjects.Sprite(scene,0,-40,'buffs','BUFF/000');
+      buff.setScale(2,2);
+      buff.objType = 'buff';
+      scene.add.existing(buff);
+      this.add(buff);
+      window.animationManager.animateBuff(this, 'BUFF');
+    }
+
   }
 
   setParameters(pokemon) {

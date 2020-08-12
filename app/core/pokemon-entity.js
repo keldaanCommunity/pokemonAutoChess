@@ -12,6 +12,8 @@ class PokemonEntity extends schema.Schema {
     this.rarity = rarity;
     this.positionX = positionX;
     this.positionY = positionY;
+    this.buffed = false;
+    this.debuffed = false;
     this.targetX = -1;
     this.targetY = -1;
     this.index = index;
@@ -68,7 +70,9 @@ schema.defineTypes(PokemonEntity, {
   targetY: 'int8',
   attackSprite: 'string',
   rarity: 'string',
-  name: 'string'
+  name: 'string',
+  buffed: 'boolean',
+  debuffed: 'boolean'
 });
 
 module.exports = PokemonEntity;

@@ -50,9 +50,11 @@ class Simulation extends Schema {
   applyEffects(pokemon, types){
     if (this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)){
       pokemon.attack = pokemon.attack * 1.3;
+      pokemon.buffed = true;
     }
     if(this.climate == CLIMATE.SUN && types.includes(TYPE.SUN)){
       pokemon.attack = pokemon.attack * 1.35;
+      pokemon.buffed = true;
     }
   }
 
