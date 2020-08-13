@@ -58,6 +58,10 @@ export default class BattleManager {
             window.animationManager.animatePokemon(children[i]);
           } else if (change.field =='action') {
             children[i].action = pokemon.action;
+          } else if (change.field == 'buffed'){
+            window.animationManager.animateBuff(children[i],'BUFF',this.scene);
+          } else if(change.field == 'debuffed'){
+            window.animationManager.animateBuff(children[i],'DEBUFF', this.scene);
           } else if (change.field =='life') {
             children[i].life = pokemon.life;
             children[i].getFirst('objType', 'lifebar').setLife(children[i].life);

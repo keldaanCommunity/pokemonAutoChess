@@ -14,6 +14,7 @@ class PokemonEntity extends schema.Schema {
     this.positionY = positionY;
     this.buffed = false;
     this.debuffed = false;
+    this.berserk = false;
     this.targetX = -1;
     this.targetY = -1;
     this.index = index;
@@ -22,6 +23,7 @@ class PokemonEntity extends schema.Schema {
     this.action = STATE_TYPE.MOVING;
     this.orientation = ORIENTATION.DOWNLEFT;
     this.atk = atk;
+    this.hp = hp;
     this.life = hp;
     this.range = range;
     this.cooldown = 1000;

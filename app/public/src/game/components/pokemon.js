@@ -136,12 +136,10 @@ export default class Pokemon extends Button {
 
   setBuff(pokemon, scene){
     if(pokemon.buffed){
-      const buff = new GameObjects.Sprite(scene,0,-40,'buffs','BUFF/000');
-      buff.setScale(2,2);
-      buff.objType = 'buff';
-      scene.add.existing(buff);
-      this.add(buff);
-      window.animationManager.animateBuff(this, 'BUFF');
+      window.animationManager.animateBuff(this, 'BUFF', scene);
+    }
+    if(pokemon.debuffed){
+      window.animationManager.animateBuff(this, 'DEBUFF', scene);
     }
 
   }

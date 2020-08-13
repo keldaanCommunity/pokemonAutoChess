@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import {GameObjects} from 'phaser';
 
 export default class AnimationManager {
   constructor(game) {
@@ -276,9 +277,29 @@ export default class AnimationManager {
     this.playAnimation(entity, key);
   }
 
-  animateBuff(entity, key){
+  animateBuff(entity, key, scene){
     let buff = entity.getFirst('objType','buff');
+    if(buff){
     buff.anims.play(key);
+    }
+    else{
+      if(key == 'BUFF'){
+        const buff = new GameObjects.Sprite(scene,0,-40,'buffs','BUFF/000');
+        buff.setScale(2,2);
+        buff.objType = 'buff';
+        scene.add.existing(buff);
+        entity.add(buff);
+        buff.anims.play(key);
+      }
+      else if (key == 'DEBUFF'){
+        const debuff = new GameObjects.Sprite(scene,0,-40,'buffs','DEBUFF/000');
+        debuff.setScale(2,2);
+        debuff.objType = 'buff';
+        scene.add.existing(debuff);
+        entity.add(debuff);
+        buff.anims.play(key);
+      }
+    }
   }
 
   playAnimation(entity, spriteKey) {

@@ -19,6 +19,10 @@ class PokemonState {
       if(climate == CLIMATE.SANDSTORM && (!pokemon.types.includes(TYPE.GROUND) || !pokemon.types.includes(TYPE.METAL))){
         this.handleDamage(pokemon,Math.round(pokemon.life/10), board);
       }
+      if(pokemon.life <= pokemon.hp / 2 && pokemon.types.includes(TYPE.FIRE) && pokemon.berserk == true){
+        pokemon.atk = pokemon.atk * 1.5;
+        pokemon.buffed = true;
+      }
     }
   }
 

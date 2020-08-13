@@ -28,7 +28,7 @@ class Simulation extends Schema {
       // console.log("x",pokemon.positionX, "y", pokemon.positionY); // 0 for blue, 1 for red
       if (pokemon.positionY != 0) {
         const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity, pokemon.types);
-        this.applyEffects(pokemonEntity, pokemon.types);
+        this.applyEffects(pokemonEntity, pokemon.types, blueEffects, redEffects);
         this.blueTeam[pokemonEntity.id] = pokemonEntity;
         // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
         this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
@@ -39,7 +39,7 @@ class Simulation extends Schema {
       // console.log("x",pokemon.positionX, "y", pokemon.positionY);
       if (pokemon.positionY != 0) {
         const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, 5 - (pokemon.positionY - 1), pokemon.hp, pokemon.atk, pokemon.range, 1, pokemon.attackSprite, pokemon.rarity, pokemon.types);
-        this.applyEffects(pokemonEntity, pokemon.types);
+        this.applyEffects(pokemonEntity, pokemon.types, redEffects, blueEffects);
         this.redTeam[pokemonEntity.id] = pokemonEntity;
         // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
         this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
@@ -47,7 +47,7 @@ class Simulation extends Schema {
     }
   }
 
-  applyEffects(pokemon, types){
+  applyEffects(pokemon, types, allyEffects, ennemyEffects){
     if (this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)){
       pokemon.attack = pokemon.attack * 1.3;
       pokemon.buffed = true;
@@ -55,6 +55,10 @@ class Simulation extends Schema {
     if(this.climate == CLIMATE.SUN && types.includes(TYPE.SUN)){
       pokemon.attack = pokemon.attack * 1.35;
       pokemon.buffed = true;
+    }
+
+    if(allyEffects.includes(EFFECTS.BLAZE) && types.includes(TYPE.FIRE)){
+      pokemon.berserk = true;
     }
   }
 
