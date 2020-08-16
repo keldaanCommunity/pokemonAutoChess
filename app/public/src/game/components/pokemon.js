@@ -11,17 +11,20 @@ export default class Pokemon extends Button {
     this.id = pokemon.id;
     this.range = pokemon.range;
     this.type = pokemon.type;
+    this.atkSpeed = pokemon.atkSpeed;
     this.targetX = null;
     this.targetY = null;
     this.positionX = pokemon.positionX;
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
     this.setRangeType();
-    this.setBuff(pokemon, scene);
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
     this.setSprite(pokemon, scene);
     this.setLifeBar(pokemon, scene);
+    if(pokemon.effects){
+      this.setEffects(pokemon, scene);
+    }
     if (dragable) {
       scene.input.setDraggable(this);
     }
@@ -70,7 +73,7 @@ export default class Pokemon extends Button {
         x: coordinates[0],
         y: coordinates[1],
         ease: 'Linear',
-        duration: 1000,
+        duration: this.atkSpeed,
         onComplete: (tween, targets) => {
           targets[0].setVisible(false);
           if (this.checkAnimations()) {
@@ -85,7 +88,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  replayAnimations() {
+  replayAnimations(pkemon) {
     if (this) {
       let x;
       let y;
@@ -121,8 +124,27 @@ export default class Pokemon extends Button {
       } else {
         color = 0xff0000;
       }
-      const lifebar = new Lifebar(scene, -15, 13, pokemon.life, color);
+      const lifebar = new Lifebar(scene, -15, 13, pokemon.hp, color);
       this.add(lifebar);
+    }
+  }
+
+  setEffects(pokemon, scene){
+    let c = 0;
+    if(pokemon.effects.length > 0){
+      pokemon.effects.forEach(effect => {
+        const image = new GameObjects.Image(scene,c*20 - 20, 47, 'effects', effect);
+        const border = new GameObjects.Image(scene,c*20 - 20, 47, 'effects', 'border');
+        image.objType = 'effect';
+        border.objType = 'effect';
+        image.setScale(0.5,0.5);
+        border.setScale(0.5,0.5);
+        scene.add.existing(image);
+        scene.add.existing(border);
+        this.add(image);
+        this.add(border);
+        c+= 1;
+    });
     }
   }
 
@@ -132,16 +154,6 @@ export default class Pokemon extends Button {
     sprite.objType = 'sprite';
     scene.add.existing(sprite);
     this.add(sprite);
-  }
-
-  setBuff(pokemon, scene){
-    if(pokemon.buffed){
-      window.animationManager.animateBuff(this, 'BUFF', scene);
-    }
-    if(pokemon.debuffed){
-      window.animationManager.animateBuff(this, 'DEBUFF', scene);
-    }
-
   }
 
   setParameters(pokemon) {

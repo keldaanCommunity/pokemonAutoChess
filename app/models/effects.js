@@ -42,7 +42,7 @@ class Effects{
     if (synergies.NORMAL >= 9) {
       this.list.push(EFFECTS.PURE_POWER);
     }
-    if (synergies.ELECTRICITY >= 0) {
+    if (synergies.ELECTRIC >= 0) {
       this.list.push(EFFECTS.AGILITY);
     }
     if (synergies.FIGHTING >= 2) {

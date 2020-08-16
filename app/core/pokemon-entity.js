@@ -4,17 +4,15 @@ const ORIENTATION = require('../models/enum').ORIENTATION;
 const MovingState = require('./moving-state');
 const AttackingState = require('./attacking-state');
 const uniqid = require('uniqid');
+const ArraySchema = schema.ArraySchema;
 
 class PokemonEntity extends schema.Schema {
-  constructor(name, index, positionX, positionY, hp, atk, range, team, attackSprite, rarity, types) {
+  constructor(name, index, positionX, positionY, hp, atk, def, range, team, attackSprite, rarity) {
     super();
     this.id = uniqid();
     this.rarity = rarity;
     this.positionX = positionX;
     this.positionY = positionY;
-    this.buffed = false;
-    this.debuffed = false;
-    this.berserk = false;
     this.targetX = -1;
     this.targetY = -1;
     this.index = index;
@@ -22,17 +20,19 @@ class PokemonEntity extends schema.Schema {
     this.state = new MovingState();
     this.action = STATE_TYPE.MOVING;
     this.orientation = ORIENTATION.DOWNLEFT;
+    this.baseAtk = atk;
+    this.baseDef = def;
     this.atk = atk;
+    this.def = def;
     this.hp = hp;
     this.life = hp;
+    this.atkSpeed = 1000;
     this.range = range;
     this.cooldown = 1000;
     this.team = team;
     this.attackSprite = attackSprite;
     this.types = [];
-    types.forEach(type=>{
-      this.types.push(type);
-    });
+    this.effects = new ArraySchema();
   }
 
   update(dt, board, climate) {
@@ -65,16 +65,17 @@ schema.defineTypes(PokemonEntity, {
   index: 'uint16',
   id: 'string',
   orientation: 'string',
+  hp: 'uint8',
   life: 'uint8',
   team: 'uint8',
   range: 'uint8',
+  atkSpeed: 'uint16',
   targetX: 'int8',
   targetY: 'int8',
   attackSprite: 'string',
   rarity: 'string',
   name: 'string',
-  buffed: 'boolean',
-  debuffed: 'boolean'
+  effects: ['string']
 });
 
 module.exports = PokemonEntity;

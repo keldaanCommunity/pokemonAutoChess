@@ -56,7 +56,6 @@ export default class AnimationManager {
     });
 
     this.createAttacksAnimations();
-    this.createBuffsAnimations();
   }
 
   createAttacksAnimations() {
@@ -257,49 +256,9 @@ export default class AnimationManager {
     });
   }
 
-  createBuffsAnimations(){
-    this.game.anims.create({
-      key: 'BUFF',
-      frames: this.game.anims.generateFrameNames('buffs', {start: 0, end: 3, zeroPad: 3, prefix: 'BUFF/'}),
-      frameRate: 8,
-      repeat: -1
-    });
-    this.game.anims.create({
-      key: 'DEBUFF',
-      frames: this.game.anims.generateFrameNames('buffs', {start: 0, end: 3, zeroPad: 3, prefix: 'DEBUFF/'}),
-      frameRate: 8,
-      repeat: -1
-    });
-  }
-
   animatePokemon(entity) {
     const key = this.getSpriteKey(entity);
     this.playAnimation(entity, key);
-  }
-
-  animateBuff(entity, key, scene){
-    let buff = entity.getFirst('objType','buff');
-    if(buff){
-    buff.anims.play(key);
-    }
-    else{
-      if(key == 'BUFF'){
-        const buff = new GameObjects.Sprite(scene,0,-40,'buffs','BUFF/000');
-        buff.setScale(2,2);
-        buff.objType = 'buff';
-        scene.add.existing(buff);
-        entity.add(buff);
-        buff.anims.play(key);
-      }
-      else if (key == 'DEBUFF'){
-        const debuff = new GameObjects.Sprite(scene,0,-40,'buffs','DEBUFF/000');
-        debuff.setScale(2,2);
-        debuff.objType = 'buff';
-        scene.add.existing(debuff);
-        entity.add(debuff);
-        buff.anims.play(key);
-      }
-    }
   }
 
   playAnimation(entity, spriteKey) {

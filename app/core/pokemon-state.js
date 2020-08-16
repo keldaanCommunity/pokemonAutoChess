@@ -1,3 +1,5 @@
+const { EFFECTS } = require('../models/enum');
+
 const TYPE = require('../models/enum').TYPE;
 const CLIMATE = require('../models/enum').CLIMATE;
 
@@ -7,7 +9,8 @@ class PokemonState {
   }
 
   handleDamage(pokemon, damage, board) {
-    pokemon.life -= damage;
+    const reducedDamage = Math.max(0, damage - pokemon.def);
+    pokemon.life -= reducedDamage;
     // console.log(`${pokemon.id} took ${damage} and has now ${pokemon.life} life`);
     if (pokemon.life <= 0) {
       board.setValue(pokemon.positionX, pokemon.positionY, undefined);
@@ -17,11 +20,26 @@ class PokemonState {
   update(pokemon, dt, board, climate) {
     if (pokemon.cooldown <= 0) {
       if(climate == CLIMATE.SANDSTORM && (!pokemon.types.includes(TYPE.GROUND) || !pokemon.types.includes(TYPE.METAL))){
-        this.handleDamage(pokemon,Math.round(pokemon.life/10), board);
+        this.handleDamage(pokemon, Math.round(pokemon.hp / 10), board);
       }
-      if(pokemon.life <= pokemon.hp / 2 && pokemon.types.includes(TYPE.FIRE) && pokemon.berserk == true){
+      if(pokemon.life <= pokemon.hp / 2 && pokemon.effects.includes(EFFECTS.BLAZE)){
         pokemon.atk = pokemon.atk * 1.5;
-        pokemon.buffed = true;
+      }
+
+      if(pokemon.effects.includes(EFFECTS.INGRAIN)){
+        pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.round(pokemon.hp / 20));
+      }
+
+      if(pokemon.effects.includes(EFFECTS.RAIN_DISH)){
+        pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.round(pokemon.hp / 10));
+      }
+
+      if(pokemon.effects.includes(EFFECTS.POISON_GAS)){
+        this.handleDamage(pokemon, Math.round(pokemon.hp / 10), board);
+      }
+
+      if(pokemon.effects.includes(EFFECTS.TOXIC)){
+        this.handleDamage(pokemon, Math.round(pokemon.hp / 10), board);
       }
     }
   }
