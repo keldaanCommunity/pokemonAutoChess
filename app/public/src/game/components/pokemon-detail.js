@@ -12,7 +12,7 @@ const COLOR_TYPE = Object.freeze({
 });
 
 export default class PokemonDetail extends GameObjects.Container {
-  constructor(scene, x, y, name) {
+  constructor(scene, x, y,name, hp, atk, def, range, atkSpeed) {
     super(scene, x, y);
     this.pokemonInformation = PokemonFactory.createPokemonFromName(name);
     this.textStyle = {
@@ -20,23 +20,62 @@ export default class PokemonDetail extends GameObjects.Container {
       fontFamily: 'Verdana',
       color: 'white'
     };
+    this.greenTextStyle= {
+      fontSize: '20px',
+      fontFamily: 'Verdana',
+      color: '#00ff00'
+    };
+    this.redTextStyle= {
+      fontSize: '20px',
+      fontFamily: 'Verdana',
+      color: '#ff0000'
+    };
     this.objType = 'detail';
-    this.add(new GameObjects.Rectangle(scene, 80, 60, 160, 120, COLOR_TYPE[this.pokemonInformation.rarity]));
+    this.add(new GameObjects.Rectangle(scene, 80, 80, 160, 120, COLOR_TYPE[this.pokemonInformation.rarity]));
     const displayName = name.charAt(0).toUpperCase() + name.slice(1);
-    this.add(new GameObjects.Text(scene, 10, 20, displayName, this.textStyle));
-    this.add(new GameObjects.Image(scene, 120, 40, `${this.pokemonInformation.rarity}`, `${this.pokemonInformation.index}/portrait`));
+    this.add(new GameObjects.Text(scene, 5, 20, displayName, this.textStyle));
+    this.add(new GameObjects.Image(scene, 140, 40, `${this.pokemonInformation.rarity}`, `${this.pokemonInformation.index}/portrait`));
     for (let i = 0; i < this.pokemonInformation.types.length; i++) {
       this.add(new GameObjects.Image(scene, 30*i +20, 60, 'hexagon').setScale(0.5, 0.5));
       this.add(new GameObjects.Image(scene, 30*i +20, 60, 'types', this.pokemonInformation.types[i]).setScale(0.5, 0.5));
     }
 
-    this.add(new GameObjects.Text(scene, 20, 80, this.pokemonInformation.hp, this.textStyle));
+    this.add(new GameObjects.Text(scene, 20, 80, hp, this.getColorStyle(this.pokemonInformation.hp, hp, false)));
     this.add(new GameObjects.Image(scene, 60, 90, 'heart'));
-    this.add(new GameObjects.Text(scene, 100, 80, this.pokemonInformation.atk, this.textStyle));
+    this.add(new GameObjects.Text(scene, 100, 80, atk, this.getColorStyle(this.pokemonInformation.atk, atk, false)));
     this.add(new GameObjects.Image(scene, 140, 90, 'sword'));
-    this.add(new GameObjects.Text(scene, 20, 100, this.pokemonInformation.def, this.textStyle));
+    this.add(new GameObjects.Text(scene, 20, 100, def, this.getColorStyle(this.pokemonInformation.def, def, false)));
     this.add(new GameObjects.Image(scene, 60, 110, 'shield'));
-    this.add(new GameObjects.Text(scene, 100, 100, this.pokemonInformation.range, this.textStyle));
+    this.add(new GameObjects.Text(scene, 100, 100, range, this.getColorStyle(this.pokemonInformation.range, range, false)));
     this.add(new GameObjects.Image(scene, 140, 110, 'range'));
+    this.add(new GameObjects.Text(scene, 50, 120, atkSpeed, this.getColorStyle(this.pokemonInformation.atkSpeed, atkSpeed, true)));
+    this.add(new GameObjects.Image(scene, 110, 130, 'range'));
+  }
+
+
+
+  getColorStyle(original, actual, isAtkSpeed){
+    if(isAtkSpeed){
+      if(actual > original){
+        return this.redTextStyle;
+      }
+      else if(actual == original){
+        return this.textStyle;
+      }
+      else{
+        return this.greenTextStyle;
+      }
+    }
+    else{
+      if(original > actual){
+        return this.redTextStyle;
+      }
+      else if(actual == original){
+        return this.textStyle;
+      }
+      else{
+        return this.greenTextStyle;
+      }
+    }
   }
 }

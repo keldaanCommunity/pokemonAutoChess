@@ -66,6 +66,8 @@ schema.defineTypes(PokemonEntity, {
   id: 'string',
   orientation: 'string',
   hp: 'uint8',
+  atk: 'uint8',
+  def: 'uint8',
   life: 'uint8',
   team: 'uint8',
   range: 'uint8',

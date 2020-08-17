@@ -30,6 +30,7 @@ class Pokemon extends Schema {
     this.def = def;
     this.range = range;
     this.attackSprite = attackSprite;
+    this.atkSpeed = 1000;
   }
 
   toString() {
@@ -531,253 +532,253 @@ class Raichu extends Pokemon {
 
 class Bulbasaur extends Pokemon {
   constructor() {
-    super('bulbasaur', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.UNCOMMON, 1, 'ivysaur', 15, 2.5, 1, 3, 'GRASS/range');
+    super('bulbasaur', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.UNCOMMON, 1, 'ivysaur', 15, 2, 1, 3, 'GRASS/range');
   }
 }
 
 class Ivysaur extends Pokemon {
   constructor() {
-    super('ivysaur', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.UNCOMMON, 2, 'venusaur', 25, 3.5, 1, 3, 'GRASS/range');
+    super('ivysaur', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.UNCOMMON, 2, 'venusaur', 25, 3, 1, 3, 'GRASS/range');
   }
 }
 
 class Venusaur extends Pokemon {
   constructor() {
-    super('venusaur', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.UNCOMMON, 3, '', 35, 4.5, 1, 3, 'GRASS/range');
+    super('venusaur', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.UNCOMMON, 3, '', 35, 4, 1, 3, 'GRASS/range');
   }
 }
 
 class Chikorita extends Pokemon {
   constructor() {
-    super('chikorita', [TYPE.GRASS, TYPE.FLORA], RARITY.UNCOMMON, 152, 'bayleef', 15, 2.5, 1, 3, 'GRASS/range');
+    super('chikorita', [TYPE.GRASS, TYPE.FLORA], RARITY.UNCOMMON, 152, 'bayleef', 15, 2, 1, 3, 'GRASS/range');
   }
 }
 
 class Bayleef extends Pokemon {
   constructor() {
-    super('bayleef', [TYPE.GRASS, TYPE.FLORA], RARITY.UNCOMMON, 153, 'meganium', 25, 3.5, 1, 3, 'GRASS/range');
+    super('bayleef', [TYPE.GRASS, TYPE.FLORA], RARITY.UNCOMMON, 153, 'meganium', 25, 3, 1, 3, 'GRASS/range');
   }
 }
 
 class Meganium extends Pokemon {
   constructor() {
-    super('meganium', [TYPE.GRASS, TYPE.FLORA], RARITY.UNCOMMON, 154, '', 35, 4.5, 1, 3, 'GRASS/range');
+    super('meganium', [TYPE.GRASS, TYPE.FLORA], RARITY.UNCOMMON, 154, '', 35, 4, 1, 3, 'GRASS/range');
   }
 }
 
 class NidoranF extends Pokemon {
   constructor() {
-    super('nidoranF', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 29, 'nidorina', 15, 2.5, 1, 1, 'POISON/melee');
+    super('nidoranF', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 29, 'nidorina', 15, 2, 1, 1, 'POISON/melee');
   }
 }
 
 class Nidorina extends Pokemon {
   constructor() {
-    super('nidorina', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 30, 'nidoqueen', 25, 3.5, 1, 1, 'POISON/melee');
+    super('nidorina', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 30, 'nidoqueen', 25, 3, 1, 1, 'POISON/melee');
   }
 }
 
 class Nidoqueen extends Pokemon {
   constructor() {
-    super('nidoqueen', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 31, '', 35, 4.5, 1, 1, 'POISON/melee');
+    super('nidoqueen', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 31, '', 35, 4, 1, 1, 'POISON/melee');
   }
 }
 
 class NidoranM extends Pokemon {
   constructor() {
-    super('nidoranM', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 32, 'nidorino', 15, 2.5, 1, 1, 'POISON/melee');
+    super('nidoranM', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 32, 'nidorino', 15, 2, 1, 1, 'POISON/melee');
   }
 }
 
 class Nidorino extends Pokemon {
   constructor() {
-    super('nidorino', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 33, 'nidoking', 25, 3.5, 1, 1, 'POISON/melee');
+    super('nidorino', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 33, 'nidoking', 25, 3, 1, 1, 'POISON/melee');
   }
 }
 
 class Nidoking extends Pokemon {
   constructor() {
-    super('nidoking', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 34, '', 35, 4.5, 1, 1, 'POISON/melee');
+    super('nidoking', [TYPE.POISON, TYPE.FIELD], RARITY.UNCOMMON, 34, '', 35, 4, 1, 1, 'POISON/melee');
   }
 }
 
 class Piplup extends Pokemon {
   constructor() {
-    super('piplup', [TYPE.WATER, TYPE.FLYING], RARITY.UNCOMMON, 393, 'prinplup', 15, 2.5, 1, 1, 'WATER/melee');
+    super('piplup', [TYPE.WATER, TYPE.FLYING], RARITY.UNCOMMON, 393, 'prinplup', 15, 2, 1, 1, 'WATER/melee');
   }
 }
 
 class Prinplup extends Pokemon {
   constructor() {
-    super('prinplup', [TYPE.WATER, TYPE.FLYING, TYPE.METAL], RARITY.UNCOMMON, 394, 'empoleon', 25, 3.5, 1, 1, 'WATER/melee');
+    super('prinplup', [TYPE.WATER, TYPE.FLYING, TYPE.METAL], RARITY.UNCOMMON, 394, 'empoleon', 25, 3, 1, 1, 'WATER/melee');
   }
 }
 
 class Empoleon extends Pokemon {
   constructor() {
-    super('empoleon', [TYPE.WATER, TYPE.FLYING, TYPE.METAL], RARITY.UNCOMMON, 395, '', 35, 4.5, 1, 1, 'WATER/melee');
+    super('empoleon', [TYPE.WATER, TYPE.FLYING, TYPE.METAL], RARITY.UNCOMMON, 395, '', 35, 4, 1, 1, 'WATER/melee');
   }
 }
 
 class Chimchar extends Pokemon {
   constructor() {
-    super('chimchar', [TYPE.FIRE, TYPE.HUMAN], RARITY.UNCOMMON, 390, 'monferno', 15, 2.5, 1, 1, 'FIRE/melee');
+    super('chimchar', [TYPE.FIRE, TYPE.HUMAN], RARITY.UNCOMMON, 390, 'monferno', 15, 2, 1, 1, 'FIRE/melee');
   }
 }
 
 class Monferno extends Pokemon {
   constructor() {
-    super('monferno', [TYPE.FIRE, TYPE.HUMAN, TYPE.FIGHTING], RARITY.UNCOMMON, 391, 'infernape', 25, 3.5, 1, 1, 'FIRE/melee');
+    super('monferno', [TYPE.FIRE, TYPE.HUMAN, TYPE.FIGHTING], RARITY.UNCOMMON, 391, 'infernape', 25, 3, 1, 1, 'FIRE/melee');
   }
 }
 
 class Infernape extends Pokemon {
   constructor() {
-    super('infernape', [TYPE.FIRE, TYPE.HUMAN, TYPE.FIGHTING], RARITY.UNCOMMON, 392, '', 35, 4.5, 1, 1, 'FIRE/melee');
+    super('infernape', [TYPE.FIRE, TYPE.HUMAN, TYPE.FIGHTING], RARITY.UNCOMMON, 392, '', 35, 4, 1, 1, 'FIRE/melee');
   }
 }
 
 class Turtwig extends Pokemon {
   constructor() {
-    super('turtwig', [TYPE.GRASS, TYPE.GROUND, TYPE.FLORA], RARITY.UNCOMMON, 387, 'grotle', 15, 2.5, 1, 1, 'GRASS/melee');
+    super('turtwig', [TYPE.GRASS, TYPE.GROUND, TYPE.FLORA], RARITY.UNCOMMON, 387, 'grotle', 15, 2, 1, 1, 'GRASS/melee');
   }
 }
 
 class Grotle extends Pokemon {
   constructor() {
-    super('grotle', [TYPE.GRASS, TYPE.GROUND, TYPE.FLORA], RARITY.UNCOMMON, 388, 'torterra', 25, 3.5, 1, 1, 'GRASS/melee');
+    super('grotle', [TYPE.GRASS, TYPE.GROUND, TYPE.FLORA], RARITY.UNCOMMON, 388, 'torterra', 25, 3, 1, 1, 'GRASS/melee');
   }
 }
 
 class Torterra extends Pokemon {
   constructor() {
-    super('torterra', [TYPE.GRASS, TYPE.GROUND, TYPE.FLORA], RARITY.UNCOMMON, 389, '', 35, 4.5, 1, 1, 'GRASS/melee');
+    super('torterra', [TYPE.GRASS, TYPE.GROUND, TYPE.FLORA], RARITY.UNCOMMON, 389, '', 35, 4, 1, 1, 'GRASS/melee');
   }
 }
 
 class Mudkip extends Pokemon {
   constructor() {
-    super('mudkip', [TYPE.WATER, TYPE.GROUND, TYPE.MONSTER], RARITY.UNCOMMON, 258, 'marshtomp', 15, 2.5, 1, 1, 'WATER/melee');
+    super('mudkip', [TYPE.WATER, TYPE.GROUND, TYPE.MONSTER], RARITY.UNCOMMON, 258, 'marshtomp', 15, 2, 1, 1, 'WATER/melee');
   }
 }
 
 class Marshtomp extends Pokemon {
   constructor() {
-    super('marshtomp', [TYPE.WATER, TYPE.GROUND, TYPE.MONSTER], RARITY.UNCOMMON, 259, 'swampert', 25, 3.5, 1, 1, 'WATER/melee');
+    super('marshtomp', [TYPE.WATER, TYPE.GROUND, TYPE.MONSTER], RARITY.UNCOMMON, 259, 'swampert', 25, 3, 1, 1, 'WATER/melee');
   }
 }
 
 class Swampert extends Pokemon {
   constructor() {
-    super('swampert', [TYPE.WATER, TYPE.GROUND, TYPE.MONSTER], RARITY.UNCOMMON, 260, '', 35, 4.5, 1, 1, 'WATER/melee');
+    super('swampert', [TYPE.WATER, TYPE.GROUND, TYPE.MONSTER], RARITY.UNCOMMON, 260, '', 35, 4, 1, 1, 'WATER/melee');
   }
 }
 
 class Torchic extends Pokemon {
   constructor() {
-    super('torchic', [TYPE.FIRE, TYPE.FLYING], RARITY.UNCOMMON, 255, 'combusken', 15, 2.5, 1, 1, 'FIRE/melee');
+    super('torchic', [TYPE.FIRE, TYPE.FLYING], RARITY.UNCOMMON, 255, 'combusken', 15, 2, 1, 1, 'FIRE/melee');
   }
 }
 
 class Combusken extends Pokemon {
   constructor() {
-    super('combusken', [TYPE.FIRE, TYPE.FIGHTING, TYPE.FLYING], RARITY.UNCOMMON, 256, 'blaziken', 25, 3.5, 1, 1, 'FIRE/melee');
+    super('combusken', [TYPE.FIRE, TYPE.FIGHTING, TYPE.FLYING], RARITY.UNCOMMON, 256, 'blaziken', 25, 3, 1, 1, 'FIRE/melee');
   }
 }
 
 class Blaziken extends Pokemon {
   constructor() {
-    super('blaziken', [TYPE.FIRE, TYPE.FIGHTING, TYPE.FLYING], RARITY.UNCOMMON, 257, '', 35, 4.5, 1, 1, 'FIRE/melee');
+    super('blaziken', [TYPE.FIRE, TYPE.FIGHTING, TYPE.FLYING], RARITY.UNCOMMON, 257, '', 35, 4, 1, 1, 'FIRE/melee');
   }
 }
 
 class Treecko extends Pokemon {
   constructor() {
-    super('treecko', [TYPE.GRASS, TYPE.MONSTER], RARITY.UNCOMMON, 252, 'grovyle', 15, 2.5, 1, 1, 'GRASS/melee');
+    super('treecko', [TYPE.GRASS, TYPE.MONSTER], RARITY.UNCOMMON, 252, 'grovyle', 15, 2, 1, 1, 'GRASS/melee');
   }
 }
 
 class Grovyle extends Pokemon {
   constructor() {
-    super('grovyle', [TYPE.GRASS, TYPE.MONSTER], RARITY.UNCOMMON, 253, 'sceptile', 25, 3.5, 1, 1, 'GRASS/melee');
+    super('grovyle', [TYPE.GRASS, TYPE.MONSTER], RARITY.UNCOMMON, 253, 'sceptile', 25, 3, 1, 1, 'GRASS/melee');
   }
 }
 
 class Sceptile extends Pokemon {
   constructor() {
-    super('sceptile', [TYPE.GRASS, TYPE.MONSTER], RARITY.UNCOMMON, 254, '', 35, 4.5, 1, 1, 'GRASS/melee');
+    super('sceptile', [TYPE.GRASS, TYPE.MONSTER], RARITY.UNCOMMON, 254, '', 35, 4, 1, 1, 'GRASS/melee');
   }
 }
 
 class Totodile extends Pokemon {
   constructor() {
-    super('totodile', [TYPE.WATER, TYPE.AQUATIC], RARITY.UNCOMMON, 158, 'croconaw', 15, 2.5, 1, 1, 'WATER/melee');
+    super('totodile', [TYPE.WATER, TYPE.AQUATIC], RARITY.UNCOMMON, 158, 'croconaw', 15, 2, 1, 1, 'WATER/melee');
   }
 }
 
 class Croconaw extends Pokemon {
   constructor() {
-    super('croconaw', [TYPE.WATER, TYPE.AQUATIC], RARITY.UNCOMMON, 159, 'feraligatr', 25, 3.5, 1, 1, 'WATER/melee');
+    super('croconaw', [TYPE.WATER, TYPE.AQUATIC], RARITY.UNCOMMON, 159, 'feraligatr', 25, 3, 1, 1, 'WATER/melee');
   }
 }
 
 class Feraligatr extends Pokemon {
   constructor() {
-    super('feraligatr', [TYPE.WATER, TYPE.AQUATIC], RARITY.UNCOMMON, 160, '', 35, 4.5, 1, 1, 'WATER/melee');
+    super('feraligatr', [TYPE.WATER, TYPE.AQUATIC], RARITY.UNCOMMON, 160, '', 35, 4, 1, 1, 'WATER/melee');
   }
 }
 
 class Cyndaquil extends Pokemon {
   constructor() {
-    super('cyndaquil', [TYPE.FIRE, TYPE.FIELD], RARITY.UNCOMMON, 155, 'quilava', 15, 2.5, 1, 3, 'FIRE/range');
+    super('cyndaquil', [TYPE.FIRE, TYPE.FIELD], RARITY.UNCOMMON, 155, 'quilava', 15, 2, 1, 3, 'FIRE/range');
   }
 }
 
 class Quilava extends Pokemon {
   constructor() {
-    super('quilava', [TYPE.FIRE, TYPE.FIELD], RARITY.UNCOMMON, 156, 'typhlosion', 25, 3.5, 1, 3, 'FIRE/range');
+    super('quilava', [TYPE.FIRE, TYPE.FIELD], RARITY.UNCOMMON, 156, 'typhlosion', 25, 3, 1, 3, 'FIRE/range');
   }
 }
 
 class Typhlosion extends Pokemon {
   constructor() {
-    super('typhlosion', [TYPE.FIRE, TYPE.FIELD], RARITY.UNCOMMON, 157, '', 35, 4.5, 1, 3, 'FIRE/range');
+    super('typhlosion', [TYPE.FIRE, TYPE.FIELD], RARITY.UNCOMMON, 157, '', 35, 4, 1, 3, 'FIRE/range');
   }
 }
 
 class Charmander extends Pokemon {
   constructor() {
-    super('charmander', [TYPE.FIRE, TYPE.MONSTER], RARITY.UNCOMMON, 4, 'charmeleon', 15, 2.5, 1, 1, 'FIRE/melee');
+    super('charmander', [TYPE.FIRE, TYPE.MONSTER], RARITY.UNCOMMON, 4, 'charmeleon', 15, 2, 1, 1, 'FIRE/melee');
   }
 }
 
 class Charmeleon extends Pokemon {
   constructor() {
-    super('charmeleon', [TYPE.FIRE, TYPE.MONSTER], RARITY.UNCOMMON, 5, 'charizard', 25, 3.5, 1, 1, 'FIRE/melee');
+    super('charmeleon', [TYPE.FIRE, TYPE.MONSTER], RARITY.UNCOMMON, 5, 'charizard', 25, 3, 1, 1, 'FIRE/melee');
   }
 }
 
 class Charizard extends Pokemon {
   constructor() {
-    super('charizard', [TYPE.FIRE, TYPE.MONSTER], RARITY.UNCOMMON, 6, '', 35, 4.5, 1, 1, 'FIRE/melee');
+    super('charizard', [TYPE.FIRE, TYPE.MONSTER], RARITY.UNCOMMON, 6, '', 35, 4, 1, 1, 'FIRE/melee');
   }
 }
 
 class Squirtle extends Pokemon {
   constructor() {
-    super('squirtle', [TYPE.WATER, TYPE.AQUATIC, TYPE.MONSTER], RARITY.UNCOMMON, 7, 'wartortle', 15, 2.5, 1, 2, 'WATER/range');
+    super('squirtle', [TYPE.WATER, TYPE.AQUATIC, TYPE.MONSTER], RARITY.UNCOMMON, 7, 'wartortle', 15, 2, 1, 2, 'WATER/range');
   }
 }
 
 class Wartortle extends Pokemon {
   constructor() {
-    super('charmeleon', [TYPE.WATER, TYPE.AQUATIC, TYPE.MONSTER], RARITY.UNCOMMON, 8, 'blastoise', 25, 3.5, 1, 2, 'WATER/range');
+    super('charmeleon', [TYPE.WATER, TYPE.AQUATIC, TYPE.MONSTER], RARITY.UNCOMMON, 8, 'blastoise', 25, 3, 1, 2, 'WATER/range');
   }
 }
 
 class Blastoise extends Pokemon {
   constructor() {
-    super('charizard', [TYPE.WATER, TYPE.AQUATIC, TYPE.MONSTER], RARITY.UNCOMMON, 9, '', 35, 4.5, 1, 2, 'WATER/range');
+    super('charizard', [TYPE.WATER, TYPE.AQUATIC, TYPE.MONSTER], RARITY.UNCOMMON, 9, '', 35, 4, 1, 2, 'WATER/range');
   }
 }
 
@@ -999,7 +1000,7 @@ class Staraptor extends Pokemon {
 }
 class Magikarp extends Pokemon {
   constructor() {
-    super('magikarp', [], RARITY.NEUTRAL, 129, '', 10, 1.5, 1, 1, 'WATER/melee');
+    super('magikarp', [], RARITY.NEUTRAL, 129, '', 10, 1, 1, 1, 'WATER/melee');
   }
 }
 
@@ -1011,19 +1012,19 @@ class Gyarados extends Pokemon {
 
 class Rattata extends Pokemon {
   constructor() {
-    super('rattata', [], RARITY.NEUTRAL, 19, '', 5, 1.5, 1, 1, 'NORMAL/melee');
+    super('rattata', [], RARITY.NEUTRAL, 19, '', 5, 2, 1, 1, 'NORMAL/melee');
   }
 }
 
 class Raticate extends Pokemon {
   constructor() {
-    super('raticate', [], RARITY.NEUTRAL, 20, '', 15, 1.5, 1, 1, 'NORMAL/melee');
+    super('raticate', [], RARITY.NEUTRAL, 20, '', 15, 2, 1, 1, 'NORMAL/melee');
   }
 }
 
 class Spearow extends Pokemon {
   constructor() {
-    super('spearow', [], RARITY.NEUTRAL, 21, '', 5, 1.5, 1, 1, 'NORMAL/melee');
+    super('spearow', [], RARITY.NEUTRAL, 21, '', 5, 2, 1, 1, 'NORMAL/melee');
   }
 }
 
@@ -1146,7 +1147,12 @@ schema.defineTypes(Pokemon, {
   positionX: 'uint8',
   positionY: 'uint8',
   cost: 'uint8',
-  attackSprite: 'string'
+  attackSprite: 'string',
+  atkSpeed:'uint16',
+  def:'uint8',
+  atk:'uint8',
+  hp:'uint8',
+  range:'uint8' 
 });
 
 module.exports = {
