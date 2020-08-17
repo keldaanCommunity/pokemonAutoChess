@@ -46,11 +46,56 @@ class Simulation extends Schema {
         this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
       }
     }
+    if(blueEffects.includes(EFFECTS.PRIMORDIAL_SEA)){
+      const kyogre = PokemonFactory.createPokemonFromName('kyogre');
+      const coord = this.getFirstAvailablePlaceOnBoard(true);
+      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp,kyogre.atk,kyogre.def,kyogre.range,0,kyogre.attackSprite,kyogre.rarity);
+      this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, blueTeam, redTeam);
+      this.blueTeam[pokemonEntity.id] = pokemonEntity;
+      this.board.setValue(coord[0], coord[1], pokemonEntity);
+    }
+    if(redEffects.includes(EFFECTS.PRIMORDIAL_SEA)){
+      const kyogre = PokemonFactory.createPokemonFromName('kyogre');
+      const coord = this.getFirstAvailablePlaceOnBoard(false);
+      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp,kyogre.atk,kyogre.def,kyogre.range,1,kyogre.attackSprite,kyogre.rarity);
+      this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, redTeam, blueTeam);
+      this.redTeam[pokemonEntity.id] = pokemonEntity;
+      this.board.setValue(coord[0], coord[1], pokemonEntity);
+    }
+  }
+
+  getFirstAvailablePlaceOnBoard(ascending){
+    let row = 0;
+    let column = 0;
+    if(ascending){
+      outerloop:
+      for (let x = 0; x < this.board.rows; x++) {
+        for (let y = 0; y < this.board.columns; y++) {
+          if(this.board.getValue(x,y) === undefined){
+            row = x;
+            column = y;
+            break outerloop;
+          }
+        }
+      }
+    }
+    else{
+      outerloop:
+      for (let x = 0; x < this.board.rows; x++) {
+        for (var y = this.board.columns - 1; y >= 0; y--){
+          if(this.board.getValue(x,y) === undefined){
+            row = x;
+            column = y;
+            break outerloop;
+          }
+        }
+      }
+    }
+    return [row,column];
   }
 
   applyEffects(pokemon, types, allyEffects, ennemyEffects, allyTeam, ennemyTeam){
-    console.log(allyEffects);
-    console.log(ennemyEffects);
+
     allyEffects.forEach(effect => {
       switch (effect) {
         case EFFECTS.BLAZE:
@@ -96,7 +141,7 @@ class Simulation extends Schema {
         case EFFECTS.PRIMORDIAL_SEA:
           if(this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)){
             pokemon.effects.push(EFFECTS.PRIMORDIAL_SEA);
-            pokemon.atk += Math.round(okemon.baseAtk * 0.33);
+            pokemon.atk += Math.round(pokemon.baseAtk * 0.33);
           }
           break;
 

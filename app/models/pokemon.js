@@ -1120,7 +1120,7 @@ class Regigigas extends Pokemon {
 
 class Kyogre extends Pokemon {
   constructor() {
-    super('kyogre', [], RARITY.NEUTRAL, 382, '', 200, 10, 1, 4, 'WATER/range');
+    super('kyogre', [TYPE.WATER, TYPE.AQUATIC], RARITY.NEUTRAL, 382, '', 200, 10, 1, 4, 'WATER/range');
   }
 }
 
