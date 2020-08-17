@@ -21,10 +21,6 @@ export default class Pokemon extends Button {
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
     this.setSprite(pokemon, scene);
-    this.setLifeBar(pokemon, scene);
-    if(pokemon.effects){
-      this.setEffects(pokemon, scene);
-    }
     if (dragable) {
       scene.input.setDraggable(this);
     }
@@ -116,7 +112,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setLifeBar(pokemon, scene) {
+  setLifeBar(pokemon, scene, height) {
     if (pokemon.life) {
       let color;
       if (pokemon.team == 0) {
@@ -124,17 +120,17 @@ export default class Pokemon extends Button {
       } else {
         color = 0xff0000;
       }
-      const lifebar = new Lifebar(scene, -15, 13, pokemon.hp, color);
+      const lifebar = new Lifebar(scene, -15, height, pokemon.hp, color);
       this.add(lifebar);
     }
   }
 
-  setEffects(pokemon, scene){
+  setEffects(pokemon, scene, height){
     let c = 0;
     if(pokemon.effects.length > 0){
       pokemon.effects.forEach(effect => {
-        const image = new GameObjects.Image(scene,c*20 - 20, 47, 'effects', effect);
-        const border = new GameObjects.Image(scene,c*20 - 20, 47, 'effects', 'border');
+        const image = new GameObjects.Image(scene,c*20 - 20, height, 'effects', effect);
+        const border = new GameObjects.Image(scene,c*20 - 20, height, 'effects', 'border');
         image.objType = 'effect';
         border.objType = 'effect';
         image.setScale(0.5,0.5);
@@ -151,9 +147,17 @@ export default class Pokemon extends Button {
   setSprite(pokemon, scene) {
     const sprite = new GameObjects.Sprite(scene, 0, 0, `${pokemon.rarity}`, `${pokemon.index}/0/1/0`);
     sprite.setScale(2, 2);
+    const socle = new GameObjects.Image(scene,0,sprite.height,'socle');
+    socle.objType = 'socle';
     sprite.objType = 'sprite';
+    scene.add.existing(socle);
     scene.add.existing(sprite);
+    this.add(socle);
     this.add(sprite);
+    this.setLifeBar(pokemon, scene, sprite.height/2 + 5);
+    if(pokemon.effects){
+      this.setEffects(pokemon, scene, sprite.height + 30);
+    }
   }
 
   setParameters(pokemon) {
