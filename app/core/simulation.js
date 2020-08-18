@@ -138,13 +138,6 @@ class Simulation extends Schema {
           }
           break;
 
-        case EFFECTS.PRIMORDIAL_SEA:
-          if(this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)){
-            pokemon.effects.push(EFFECTS.PRIMORDIAL_SEA);
-            pokemon.atk += Math.round(pokemon.baseAtk * 0.33);
-          }
-          break;
-
         case EFFECTS.STAMINA:
           if(types.includes(TYPE.NORMAL)){
             pokemon.effects.push(EFFECTS.STAMINA);
@@ -161,10 +154,8 @@ class Simulation extends Schema {
           break;
         
         case EFFECTS.PURE_POWER:
-          if(types.includes(TYPE.NORMAL)){
-            pokemon.atk += Math.round(pokemon.baseAtk);
-            pokemon.effects.push(EFFECTS.PURE_POWER);
-          }
+          pokemon.atk += Math.round(pokemon.baseAtk);
+          pokemon.effects.push(EFFECTS.PURE_POWER);
           break;
         
         case EFFECTS.AGILITY:
@@ -181,13 +172,17 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.REVENGE:
-          if(types.includes(TYPE.FIGHTING)){
+          if(types.includes(TYPE.FIGHTING) && Object.keys(ennemyTeam).length > Object.keys(allyTeam).length){
+            pokemon.atk += Math.round(pokemon.baseAtk * 0.2);
             pokemon.effects.push(EFFECTS.REVENGE);
           }
           break;
         
         case EFFECTS.PUNISHMENT:
           if(types.includes(TYPE.FIGHTING)){
+            ennemyEffects.forEach(effect =>{
+              pokemon.atk += Math.round(pokemon.baseAtk * 0.1);
+            });
             pokemon.effects.push(EFFECTS.PUNISHMENT);
           }
           break;
@@ -222,12 +217,6 @@ class Simulation extends Schema {
         case EFFECTS.ANGER_POINT:
           if(types.includes(TYPE.FIELD)){
             pokemon.effects.push(EFFECTS.ANGER_POINT);
-          }
-          break;
-
-        case EFFECTS.PURSUIT:
-          if(types.includes(TYPE.MONSTER)){
-            pokemon.effects.push(EFFECTS.PURSUIT);
           }
           break;
        
@@ -345,6 +334,12 @@ class Simulation extends Schema {
           pokemon.life -= Math.round(pokemon.hp * 0.1);
           pokemon.effects.push(EFFECTS.STEALTH_ROCK);
           break;
+
+        case EFFECTS.PURSUIT:
+          if(types.includes(TYPE.MONSTER)){
+            pokemon.effects.push(EFFECTS.PURSUIT);
+          }
+          break;
         
         case EFFECTS.POISON_GAS:
           if(Math.random() > 0.9){
@@ -360,6 +355,10 @@ class Simulation extends Schema {
           pokemon.atk -= Math.round(pokemon.baseAtk * 0.3);
           pokemon.effects.push(EFFECTS.INTIMIDATE);
           break;
+
+        case EFFECTS.DRACO_METEOR:
+          pokemon.life -= Math.round(pokemon.hp * 0.1);
+          pokemon.effects.push(EFFECTS.DRACO_METEOR);
 
         case EFFECTS.STICKY_WEB:
           pokemon.atkSpeed = pokemon.atkSpeed *0.9;

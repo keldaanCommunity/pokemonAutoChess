@@ -2,6 +2,8 @@ const Command = require('@colyseus/command').Command;
 const {Pokemon} = require('../../models/pokemon');
 const STATE = require('../../models/enum').STATE;
 const COST = require('../../models/enum').COST;
+const TYPE = require('../../models/enum').TYPE;
+const EFFECTS = require('../../models/enum').EFFECTS;
 const Player = require('../../models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const Simulation = require('../../core/simulation');
@@ -307,7 +309,7 @@ class OnEvolutionCommand extends Command {
           }
         }
 
-        if (count == 3) {
+        if (count == 3 || (pokemon.types.includes(TYPE.BUG) && count == 2 && this.state.players[sessionId].effects.includes(EFFECTS.SWARM))) {
           for (const id in this.state.players[sessionId].board) {
             if ( this.state.players[sessionId].board[id].index == pokemon.index && count >= 0) {
               delete this.state.players[sessionId].board[id];

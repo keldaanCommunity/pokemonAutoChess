@@ -1,4 +1,5 @@
 const STATE_TYPE = require('../models/enum').STATE_TYPE;
+const EFFECTS = require('../models/enum').EFFECTS;
 const PokemonState = require('./pokemon-state');
 
 class AttackingState extends PokemonState {
@@ -31,7 +32,25 @@ class AttackingState extends PokemonState {
     if (target) {
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
       // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
-      target.handleDamage(pokemon.atk, board);
+      if(target.effects.includes(EFFECTS.ATTRACT)){
+        if(Math.random() > 0.75){
+          pokemon.cooldown = 3000;
+        }
+        if(target.effects.includes(EFFECTS.BABY_DOLL_EYES)){
+          if(Math.random() > 0.8){
+            pokemon.atk -= Math.round(pokemon.baseAtk * 0.2);
+          }
+        }
+      }
+      else{
+        let victim = target.handleDamage(pokemon.atk, board);
+        if(victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)){
+          pokemon.life = Math.min(pokemon.hp, Math.round(pokemon.life + 0.4 * pokemon.hp));
+        }
+        if(victim && pokemon.effects.includes(EFFECTS.POWER_TRIP)){
+          pokemon.atk += Math.round(pokemon.baseAtk * 0.25);
+        }
+      }
     } else {
       console.log('warning, no target detected at given coordinates');
     }

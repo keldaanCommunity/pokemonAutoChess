@@ -44,7 +44,7 @@ export default class SynergyContainer extends Button {
     this.synergyCount = new GameObjects.Text(scene, 20, -20, '', this.textStyle);
     this.add(this.synergyCount);
     this.add(new GameObjects.Image(scene, -30, 0, 'types', type));
-    this.detail = new SynergyDetail(scene, -250, 0, type, this.color);
+    this.detail = new SynergyDetail(scene, -240, 0, type);
     this.add(this.detail);
   }
 

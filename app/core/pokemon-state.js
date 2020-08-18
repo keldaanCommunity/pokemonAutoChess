@@ -9,12 +9,22 @@ class PokemonState {
   }
 
   handleDamage(pokemon, damage, board) {
+    let death = false;
     const reducedDamage = Math.max(0, damage - pokemon.def);
     pokemon.life -= reducedDamage;
     // console.log(`${pokemon.id} took ${damage} and has now ${pokemon.life} life`);
+    if(pokemon.effects.includes(EFFECTS.RAGE)){
+      pokemon.attack += Math.round(pokemon.baseAtk * 0.05);
+    }
+    if(pokemon.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.25){
+      pokemon.life = 0;
+      death = true;
+    }
     if (pokemon.life <= 0) {
       board.setValue(pokemon.positionX, pokemon.positionY, undefined);
+      death = true;
     }
+    return death;
   }
 
   update(pokemon, dt, board, climate) {
@@ -35,7 +45,7 @@ class PokemonState {
       }
 
       if(pokemon.effects.includes(EFFECTS.POISON_GAS)){
-        this.handleDamage(pokemon, Math.round(pokemon.hp / 10), board);
+        this.handleDamage(pokemon, Math.round(pokemon.hp / 20), board);
       }
 
       if(pokemon.effects.includes(EFFECTS.TOXIC)){
