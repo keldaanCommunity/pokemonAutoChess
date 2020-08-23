@@ -42,14 +42,12 @@ class AttackingState extends PokemonState {
           }
         }
       }
-      else{
-        let victim = target.handleDamage(pokemon.atk, board);
-        if(victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)){
-          pokemon.life = Math.min(pokemon.hp, Math.round(pokemon.life + 0.4 * pokemon.hp));
-        }
-        if(victim && pokemon.effects.includes(EFFECTS.POWER_TRIP)){
-          pokemon.atk += Math.round(pokemon.baseAtk * 0.25);
-        }
+      let victim = target.handleDamage(pokemon.atk, board);
+      if(victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)){
+        pokemon.life = Math.min(pokemon.hp, Math.round(pokemon.life + 0.4 * pokemon.hp));
+      }
+      if(victim && pokemon.effects.includes(EFFECTS.POWER_TRIP)){
+        pokemon.atk += Math.round(pokemon.baseAtk * 0.25);
       }
     } else {
       console.log('warning, no target detected at given coordinates');
