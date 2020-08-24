@@ -39,8 +39,8 @@ export default class PokemonDetail extends GameObjects.Container {
       this.add(new GameObjects.Image(scene, 30*i +20, 60, 'hexagon').setScale(0.5, 0.5));
       this.add(new GameObjects.Image(scene, 30*i +20, 60, 'types', this.pokemonInformation.types[i]).setScale(0.5, 0.5));
     }
-
-    this.add(new GameObjects.Text(scene, 20, 80, hp, this.getColorStyle(this.pokemonInformation.hp, hp, false)));
+    this.hp = new GameObjects.Text(scene, 20, 80, hp, this.getColorStyle(this.pokemonInformation.hp, hp, false))
+    this.add(this.hp);
     this.add(new GameObjects.Image(scene, 60, 90, 'heart'));
     this.add(new GameObjects.Text(scene, 100, 80, atk, this.getColorStyle(this.pokemonInformation.atk, atk, false)));
     this.add(new GameObjects.Image(scene, 140, 90, 'sword'));
@@ -48,8 +48,10 @@ export default class PokemonDetail extends GameObjects.Container {
     this.add(new GameObjects.Image(scene, 60, 110, 'shield'));
     this.add(new GameObjects.Text(scene, 100, 100, range, this.getColorStyle(this.pokemonInformation.range, range, false)));
     this.add(new GameObjects.Image(scene, 140, 110, 'range'));
-    this.add(new GameObjects.Text(scene, 50, 120, atkSpeed, this.getColorStyle(this.pokemonInformation.atkSpeed, atkSpeed, true)));
+    this.atkSpeed = new GameObjects.Text(scene, 50, 120, atkSpeed, this.getColorStyle(this.pokemonInformation.atkSpeed, atkSpeed, true))
+    this.add(this.atkSpeed);
     this.add(new GameObjects.Image(scene, 110, 130, 'range'));
+    this.setDepth(10);
   }
 
 

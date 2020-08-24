@@ -46,6 +46,7 @@ export default class SynergyContainer extends Button {
     this.add(new GameObjects.Image(scene, -30, 0, 'types', type));
     this.detail = new SynergyDetail(scene, -240, 0, type);
     this.add(this.detail);
+    this.setDepth(999);
   }
 
   updateSynergy(value) {

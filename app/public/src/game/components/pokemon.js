@@ -30,6 +30,7 @@ export default class Pokemon extends Button {
     if(pokemon.life){
       this.life = pokemon.life;
     }
+    this.setDepth(5);
   }
 
   enterButtonHoverState() {
@@ -95,7 +96,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  replayAnimations(pkemon) {
+  replayAnimations() {
     if (this) {
       let x;
       let y;
@@ -107,9 +108,12 @@ export default class Pokemon extends Button {
         y = this.targetY;
       }
       const coordinates = window.transformAttackCoordinate(x, y);
-      this.projectile.setPosition(coordinates[0], coordinates[1]);
-      this.projectile.setVisible(true);
-      this.addTween();
+      if(this.projectile.scene){
+        this.projectile.setPosition(coordinates[0], coordinates[1]);
+        this.projectile.setVisible(true);
+        this.projectile.setDepth(7);
+        this.addTween();
+      }
     } else {
       this.projectile.destroy();
     }
@@ -131,7 +135,8 @@ export default class Pokemon extends Button {
       } else {
         color = 0xff0000;
       }
-      const lifebar = new Lifebar(scene, -15, height, pokemon.life, color);
+      const lifebar = new Lifebar(scene, -15, height, pokemon.hp, color);
+      lifebar.setLife(pokemon.life);
       this.add(lifebar);
     }
   }

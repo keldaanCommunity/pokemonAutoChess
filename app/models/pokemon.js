@@ -526,7 +526,7 @@ class Raichu extends Pokemon {
 
 class Lotad extends Pokemon {
   constructor() {
-    super('lotad', [TYPE.GRASS, TYPE.WATER, TYPE.AQUATIC], RARITY.UNCOMMON, 270, 'lombre', 15, 2, 1, 3, 'GRASS/range');
+    super('lotad', [TYPE.GRASS, TYPE.WATER, TYPE.AQUATIC], RARITY.RARE, 270, 'lombre', 15, 2, 1, 3, 'GRASS/range');
   }
 }
 

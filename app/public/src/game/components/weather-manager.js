@@ -9,7 +9,7 @@ export default class WeatherManager{
     }
 
     addRain(){
-        this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene,1000,500,2000,1000,0x296383,0.3));
+        this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene,1000,500,2000,1000,0x296383,0.3).setDepth(8));
         this.particles = this.scene.add.particles('rain', [
             {
                 emitZone: { source: this.offscreen },
@@ -39,8 +39,9 @@ export default class WeatherManager{
     }
 
     addSun(){
-        this.image = this.scene.add.existing(new Phaser.GameObjects.Image(this.scene,550,250,"sun").setScale(4,4));
-        this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene,1000,500,2000,1000,0xffe800,0.15));
+        this.image = this.scene.add.existing(new Phaser.GameObjects.Image(this.scene,550,250,"sun").setScale(4,4).setDepth(8));
+        this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene,1000,500,2000,1000,0xffe800,0.15).setDepth(8));
+        
     }
 
     addSandstorm(){
@@ -74,7 +75,7 @@ export default class WeatherManager{
                 lifespan: 5000
             },
         ]);
-        this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene,1000,500,2000,1000,0x9a791a,0.2));
+        this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene,1000,500,2000,1000,0x9a791a,0.2).setDepth(8));
     }
 
     clearWeather(){

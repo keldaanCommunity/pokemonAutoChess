@@ -23,7 +23,7 @@ class GameRoom extends colyseus.Room {
 
     this.onMessage('dragDrop', (client, message) => {
       this.dispatcher.dispatch(new Commands.OnDragDropCommand(), {
-        client,
+        sessionId: client.sessionId,
         detail: message.detail
       });
     });
@@ -95,25 +95,6 @@ class GameRoom extends colyseus.Room {
     pokemon.positionY = y;
   }
 
-  getTeamSize(sessionId) {
-    let size = 0;
-    for (const id in this.state.players[sessionId].board) {
-      if (this.state.players[sessionId].board[id].positionY != 0) {
-        size += 1;
-      }
-    }
-    return size;
-  }
-
-  getBoardSize(sessionId) {
-    let size = 0;
-    for (const id in this.state.players[sessionId].board) {
-      if (this.state.players[sessionId].board[id].positionY == 0) {
-        size += 1;
-      }
-    }
-    return size;
-  }
 
   getPokemonByPosition(board, x, y) {
     for (const id in board) {
@@ -142,6 +123,17 @@ class GameRoom extends colyseus.Room {
       }
     }
     return new Error('no place found, board full');
+  }
+
+  getFirstAvailablePositionInTeam(board){
+    for (let x = 1; x < 9; x++) {
+      for (let y = 0; y < 4; y++) {
+        if (this.isPositionEmpty(board, x, y)) {
+          return [x,y];
+        }
+      }
+    }
+    return new Error('no place found, team full');
   }
 }
 

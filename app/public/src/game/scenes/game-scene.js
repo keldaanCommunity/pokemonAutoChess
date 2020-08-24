@@ -155,7 +155,7 @@ export default class GameScene extends Scene {
     this.add.text(350, 25,'/',this.textStyle);
     this.maxBoardSizeText = this.add.text(370,25,window.state.players[window.sessionId].experienceManager.level, this.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
-    this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(Number.MAX_VALUE);
+    this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
     this.transitionScreen.setAlpha(0);
     this.music = this.sound.addAudioSprite('sounds');
     this.music.play('pick-1');
