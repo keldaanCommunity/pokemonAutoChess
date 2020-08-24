@@ -14,6 +14,10 @@ class Simulation extends Schema {
     this.board = new Board(9, 6);
     this.redTeam = new MapSchema();
     this.blueTeam = new MapSchema();
+    this.blueSpikes = false;
+    this.redSpikes = false;
+    this.blueRocks = false;
+    this.redRocks = false;
     this.blueEffects = [];
     this.redEffects = [];
     if(blueEffects){
@@ -23,6 +27,7 @@ class Simulation extends Schema {
       this.redEffects = redEffects;
     }
     this.climate = this.getClimate();
+    this.getEntryHazards();
     this.finished = false;
     for (const id in blueTeam) {
       const pokemon = blueTeam[id];
@@ -403,6 +408,21 @@ class Simulation extends Schema {
     return climate;
   }
 
+  getEntryHazards(){
+    if(this.blueEffects.includes(EFFECTS.SPIKES)){
+      this.redSpikes = true;
+    }
+    if(this.redEffects.includes(EFFECTS.SPIKES)){
+      this.blueSpikes = true;
+    }
+    if(this.blueEffects.includes(EFFECTS.STEALTH_ROCK)){
+      this.redRocks = true;
+    }
+    if(this.redEffects.includes(EFFECTS.STEALTH_ROCK)){
+      this.blueRocks = true;
+    }
+  }
+
   update(dt) {
     if (Object.keys(this.blueTeam).length == 0 || Object.keys(this.redTeam).length == 0) {
       this.finished = true;
@@ -432,13 +452,21 @@ class Simulation extends Schema {
       delete this.redTeam[id];
     }
     this.climate = CLIMATE.NEUTRAL;
+    this.blueSpikes = false;
+    this.redSpikes = false;
+    this.blueRocks = false;
+    this.redRocks = false;
   }
 }
 
 schema.defineTypes(Simulation, {
   blueTeam: {map: PokemonEntity},
   redTeam: {map: PokemonEntity},
-  climate:"string"
+  climate:'string',
+  blueSpikes: 'boolean',
+  redSpikes: 'boolean',
+  blueRocks: 'boolean',
+  redRocks: 'boolean'
 });
 
 module.exports = Simulation;

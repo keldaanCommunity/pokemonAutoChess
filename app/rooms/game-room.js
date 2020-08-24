@@ -23,7 +23,7 @@ class GameRoom extends colyseus.Room {
 
     this.onMessage('dragDrop', (client, message) => {
       this.dispatcher.dispatch(new Commands.OnDragDropCommand(), {
-        sessionId: client.sessionId,
+        client: client,
         detail: message.detail
       });
     });
@@ -126,8 +126,8 @@ class GameRoom extends colyseus.Room {
   }
 
   getFirstAvailablePositionInTeam(board){
-    for (let x = 1; x < 9; x++) {
-      for (let y = 0; y < 4; y++) {
+    for (let x = 0; x < 9; x++) {
+      for (let y = 1; y < 4; y++) {
         if (this.isPositionEmpty(board, x, y)) {
           return [x,y];
         }

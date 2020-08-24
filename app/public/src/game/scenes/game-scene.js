@@ -8,6 +8,7 @@ import BattleManager from '../components/battle-manager';
 import MoneyContainer from '../components/money-container';
 import SynergiesContainer from '../components/synergies-container';
 import WeatherManager from '../components/weather-manager';
+import EntryHazardsManager from '../components/Entry-hazards-manager';
 
 export default class GameScene extends Scene {
   constructor() {
@@ -124,6 +125,7 @@ export default class GameScene extends Scene {
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
     this.weatherManager = new WeatherManager(this);
+    this.entryHazardsManager = new EntryHazardsManager(this, this.map, tileset);
 
     this.textStyle = {
       fontSize: '30px',

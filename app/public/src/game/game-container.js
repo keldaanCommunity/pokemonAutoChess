@@ -81,8 +81,40 @@ class GameContainer {
 
     player.simulation.onChange = ((changes) => {
       changes.forEach(change =>{
-        if(change.field == "climate"){
+        if(change.field == 'climate'){
             this.handleClimateChange(change,player);
+        }
+        else if(change.field == 'redRocks'){
+          if(change.value){
+            this.game.scene.getScene('gameScene').entryHazardsManager.addRedRocks();
+          }
+          else{
+            this.game.scene.getScene('gameScene').entryHazardsManager.clearRedRocks();
+          }
+        }
+        else if(change.field == 'blueRocks'){
+          if(change.value){
+            this.game.scene.getScene('gameScene').entryHazardsManager.addBlueRocks();
+          }
+          else{
+            this.game.scene.getScene('gameScene').entryHazardsManager.clearBlueRocks();
+          }
+        }
+        else if(change.field == 'redSpikes'){
+          if(change.value){
+            this.game.scene.getScene('gameScene').entryHazardsManager.addRedSpikes();
+          }
+          else{
+            this.game.scene.getScene('gameScene').entryHazardsManager.clearRedSpikes();
+          }
+        }
+        else if(change.field == 'blueSpikes'){
+          if(change.value){
+            this.game.scene.getScene('gameScene').entryHazardsManager.addBlueSpikes();
+          }
+          else{
+            this.game.scene.getScene('gameScene').entryHazardsManager.clearBlueSpikes();
+          }
         }
       })
     });
