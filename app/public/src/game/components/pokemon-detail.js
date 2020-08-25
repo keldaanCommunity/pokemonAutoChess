@@ -12,7 +12,7 @@ const COLOR_TYPE = Object.freeze({
 });
 
 export default class PokemonDetail extends GameObjects.Container {
-  constructor(scene, x, y,name, hp, atk, def, range, atkSpeed) {
+  constructor(scene, x, y,name, hp, atk, def,speDef, attackType, range, atkSpeed) {
     super(scene, x, y);
     this.pokemonInformation = PokemonFactory.createPokemonFromName(name);
     this.textStyle = {
@@ -39,18 +39,25 @@ export default class PokemonDetail extends GameObjects.Container {
       this.add(new GameObjects.Image(scene, 30*i +20, 60, 'hexagon').setScale(0.5, 0.5));
       this.add(new GameObjects.Image(scene, 30*i +20, 60, 'types', this.pokemonInformation.types[i]).setScale(0.5, 0.5));
     }
+    this.add(new GameObjects.Image(scene,140,70, attackType).setScale(0.5,0.5));
     this.hp = new GameObjects.Text(scene, 20, 80, hp, this.getColorStyle(this.pokemonInformation.hp, hp, false))
     this.add(this.hp);
     this.add(new GameObjects.Image(scene, 60, 90, 'heart'));
-    this.add(new GameObjects.Text(scene, 100, 80, atk, this.getColorStyle(this.pokemonInformation.atk, atk, false)));
+    this.atk = new GameObjects.Text(scene, 100, 80, atk, this.getColorStyle(this.pokemonInformation.atk, atk, false));
+    this.add(this.atk);
     this.add(new GameObjects.Image(scene, 140, 90, 'sword'));
-    this.add(new GameObjects.Text(scene, 20, 100, def, this.getColorStyle(this.pokemonInformation.def, def, false)));
+    this.def = new GameObjects.Text(scene, 20, 100, def, this.getColorStyle(this.pokemonInformation.def, def, false));
+    this.add(this.def);
     this.add(new GameObjects.Image(scene, 60, 110, 'shield'));
-    this.add(new GameObjects.Text(scene, 100, 100, range, this.getColorStyle(this.pokemonInformation.range, range, false)));
+    this.range = new GameObjects.Text(scene, 100, 100, range, this.getColorStyle(this.pokemonInformation.range, range, false));
+    this.add(this.range);
     this.add(new GameObjects.Image(scene, 140, 110, 'range'));
-    this.atkSpeed = new GameObjects.Text(scene, 50, 120, atkSpeed, this.getColorStyle(this.pokemonInformation.atkSpeed, atkSpeed, true))
+    this.atkSpeed = new GameObjects.Text(scene, 80, 120, atkSpeed, this.getColorStyle(this.pokemonInformation.atkSpeed, atkSpeed, true))
     this.add(this.atkSpeed);
-    this.add(new GameObjects.Image(scene, 110, 130, 'range'));
+    this.add(new GameObjects.Image(scene, 140, 130, 'range'));
+    this.speDef = new GameObjects.Text(scene, 20, 120, speDef, this.getColorStyle(this.pokemonInformation.speDef, speDef, false));
+    this.add(this.speDef);
+    this.add(new GameObjects.Image(scene, 60, 130, 'shield'));
     this.setDepth(10);
   }
 

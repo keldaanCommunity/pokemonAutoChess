@@ -42,7 +42,7 @@ class AttackingState extends PokemonState {
           }
         }
       }
-      let victim = target.handleDamage(pokemon.atk, board);
+      let victim = target.handleDamage(pokemon.atk, board, pokemon.attackType);
       if(victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)){
         pokemon.life = Math.min(pokemon.hp, Math.round(pokemon.life + 0.4 * pokemon.hp));
       }

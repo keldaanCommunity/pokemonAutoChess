@@ -1,4 +1,4 @@
-const { EFFECTS } = require('../models/enum');
+const { EFFECTS, ATTACK_TYPE } = require('../models/enum');
 
 const TYPE = require('../models/enum').TYPE;
 const CLIMATE = require('../models/enum').CLIMATE;
@@ -8,9 +8,16 @@ class PokemonState {
 
   }
 
-  handleDamage(pokemon, damage, board) {
+  handleDamage(pokemon, damage, board, attackType) {
     let death = false;
-    const reducedDamage = Math.max(0, damage - pokemon.def);
+    let reducedDamage = damage;
+    if(attackType == ATTACK_TYPE.PHYSICAL){
+      reducedDamage = Math.max(0, damage - pokemon.def);
+    }
+    if(attackType == ATTACK_TYPE.SPECIAL){
+      reducedDamage = Math.max(0, damage - pokemon.speDef);
+    }
+
     pokemon.life -= reducedDamage;
     // console.log(`${pokemon.id} took ${damage} and has now ${pokemon.life} life`);
     if(pokemon.effects.includes(EFFECTS.RAGE)){
@@ -30,7 +37,7 @@ class PokemonState {
   update(pokemon, dt, board, climate) {
     if (pokemon.cooldown <= 0) {
       if(climate == CLIMATE.SANDSTORM && (!pokemon.types.includes(TYPE.GROUND) || !pokemon.types.includes(TYPE.METAL))){
-        this.handleDamage(pokemon, Math.round(pokemon.hp / 10), board);
+        this.handleDamage(pokemon, Math.round(pokemon.hp / 10), board, ATTACK_TYPE.SPECIAL);
       }
       if(pokemon.life <= pokemon.hp / 2 && pokemon.effects.includes(EFFECTS.BLAZE)){
         pokemon.atk = pokemon.atk * 1.5;
@@ -45,11 +52,11 @@ class PokemonState {
       }
 
       if(pokemon.effects.includes(EFFECTS.POISON_GAS)){
-        this.handleDamage(pokemon, Math.round(pokemon.hp / 20), board);
+        this.handleDamage(pokemon, Math.round(pokemon.hp / 20), board, ATTACK_TYPE.SPECIAL);
       }
 
       if(pokemon.effects.includes(EFFECTS.TOXIC)){
-        this.handleDamage(pokemon, Math.round(pokemon.hp / 10), board);
+        this.handleDamage(pokemon, Math.round(pokemon.hp / 10), board, ATTACK_TYPE.SPECIAL);
       }
     }
   }

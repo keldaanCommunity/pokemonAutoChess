@@ -33,7 +33,7 @@ class Simulation extends Schema {
       const pokemon = blueTeam[id];
       // console.log("x",pokemon.positionX, "y", pokemon.positionY); // 0 for blue, 1 for red
       if (pokemon.positionY != 0) {
-        const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk,pokemon.def, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity);
+        const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk,pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity);
         this.applyEffects(pokemonEntity, pokemon.types, blueEffects, redEffects, blueTeam, redTeam);
         this.blueTeam[pokemonEntity.id] = pokemonEntity;
         // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
@@ -44,7 +44,7 @@ class Simulation extends Schema {
       const pokemon = redTeam[id];
       // console.log("x",pokemon.positionX, "y", pokemon.positionY);
       if (pokemon.positionY != 0) {
-        const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, 5 - (pokemon.positionY - 1), pokemon.hp, pokemon.atk, pokemon.def, pokemon.range, 1, pokemon.attackSprite, pokemon.rarity);
+        const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, 5 - (pokemon.positionY - 1), pokemon.hp, pokemon.atk, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 1, pokemon.attackSprite, pokemon.rarity);
         this.applyEffects(pokemonEntity, pokemon.types, redEffects, blueEffects, redTeam, blueTeam);
         this.redTeam[pokemonEntity.id] = pokemonEntity;
         // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
@@ -54,7 +54,7 @@ class Simulation extends Schema {
     if(blueEffects.includes(EFFECTS.PRIMORDIAL_SEA)){
       const kyogre = PokemonFactory.createPokemonFromName('kyogre');
       const coord = this.getFirstAvailablePlaceOnBoard(true);
-      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp,kyogre.atk,kyogre.def,kyogre.range,0,kyogre.attackSprite,kyogre.rarity);
+      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp,kyogre.atk,kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range,0,kyogre.attackSprite,kyogre.rarity);
       this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, blueTeam, redTeam);
       this.blueTeam[pokemonEntity.id] = pokemonEntity;
       this.board.setValue(coord[0], coord[1], pokemonEntity);
@@ -62,7 +62,7 @@ class Simulation extends Schema {
     if(redEffects.includes(EFFECTS.PRIMORDIAL_SEA)){
       const kyogre = PokemonFactory.createPokemonFromName('kyogre');
       const coord = this.getFirstAvailablePlaceOnBoard(false);
-      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp,kyogre.atk,kyogre.def,kyogre.range,1,kyogre.attackSprite,kyogre.rarity);
+      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp,kyogre.atk,kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range,1,kyogre.attackSprite,kyogre.rarity);
       this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, redTeam, blueTeam);
       this.redTeam[pokemonEntity.id] = pokemonEntity;
       this.board.setValue(coord[0], coord[1], pokemonEntity);
@@ -154,6 +154,7 @@ class Simulation extends Schema {
           if(types.includes(TYPE.NORMAL)){
             pokemon.atk += Math.round(pokemon.baseAtk * 0.1);
             pokemon.def += Math.round(pokemon.baseDef * 0.1);
+            pokemon.speDef += Math.round(pokemon.baseSpeDef * 0.1);
             pokemon.effects.push(EFFECTS.STRENGTH);
           }
           break;
@@ -296,6 +297,11 @@ class Simulation extends Schema {
             pokemon.effects.push(EFFECTS.BABY_DOLL_EYES);
           }
           break;
+                
+        case EFFECTS.FLOWER_SHIELD:
+          pokemon.speDef += Math.round(pokemon.baseSpeDef * 0.3);
+          pokemon.effects.push(EFFECTS.FLOWER_SHIELD);
+          break;
 
         default:
           break;
@@ -311,22 +317,24 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.PSYWAVE:
-          pokemon.def -= Math.round(pokemon.baseDef * 0.3);
+          pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.3);
           pokemon.effects.push(EFFECTS.PSYWAVE);
           break;
         
         case EFFECTS.MAGIC_ROOM:
-          pokemon.def -= Math.round(pokemon.baseDef * 0.3);
+          pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.3);
           pokemon.effects.push(EFFECTS.MAGIC_ROOM);
           break;
         
         case EFFECTS.MEAN_LOOK:
           pokemon.def -= Math.round(pokemon.baseDef * 0.2);
+          pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.2);
           pokemon.effects.push(EFFECTS.MEAN_LOOK);
           break;
 
         case EFFECTS.SCARY_FACE:
           pokemon.def -= Math.round(pokemon.baseDef * 0.2);
+          pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.2);
           pokemon.effects.push(EFFECTS.SCARY_FACE);
           break;
         
@@ -378,11 +386,6 @@ class Simulation extends Schema {
         case EFFECTS.HURRICANE:
           pokemon.life -= Math.round(pokemon.hp * 0.1);
           pokemon.effects.push(EFFECTS.RAZOR_WIND);
-          break;
-        
-        case EFFECTS.FLOWER_SHIELD:
-          pokemon.def -= Math.round(pokemon.baseDef * 0.3);
-          pokemon.effects.push(EFFECTS.FLOWER_SHIELD);
           break;
 
         default:

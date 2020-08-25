@@ -13,6 +13,8 @@ export default class Pokemon extends Button {
     this.range = pokemon.range;
     this.atk = pokemon.atk;
     this.def = pokemon.def;
+    this.speDef = pokemon.speDef;
+    this.attackType = pokemon.attackType;
     this.type = pokemon.type;
     this.atkSpeed = pokemon.atkSpeed;
     this.targetX = null;
@@ -36,10 +38,10 @@ export default class Pokemon extends Button {
   enterButtonHoverState() {
     if (!this.getFirst('objType', 'detail')) {
       if(this.life){
-        this.add(new PokemonDetail(this.scene, 20, -130,this.name, this.life, this.atk, this.def, this.range, this.atkSpeed));
+        this.add(new PokemonDetail(this.scene, 20, -130,this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed));
       }
       else{
-        this.add(new PokemonDetail(this.scene, 20, -130,this.name, this.hp, this.atk, this.def, this.range, this.atkSpeed));
+        this.add(new PokemonDetail(this.scene, 20, -130,this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed));
       }
     }
   }

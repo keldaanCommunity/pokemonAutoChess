@@ -71,6 +71,30 @@ export default class BattleManager {
             if(detail){
               detail.hp.setText(pokemon.life);
             }
+          } else if(change.field == 'atk'){
+            children[i].atk = pokemon.attackAnimation;
+            let detail = children[i].getFirst('objType','detail');
+            if(detail){
+              detail.atk.setText(pokemon.atk);
+            }
+          } else if(change.field == 'def'){
+            children[i].def = pokemon.def;
+            let detail = children[i].getFirst('objType','detail');
+            if(detail){
+              detail.def.setText(pokemon.def);
+            }
+          } else if(change.field == 'speDef'){
+            children[i].speDef = pokemon.speDef;
+            let detail = children[i].getFirst('objType','detail');
+            if(detail){
+              detail.speDef.setText(pokemon.speDef);
+            }
+          } else if(change.field == 'range'){
+            children[i].range = pokemon.range;
+            let detail = children[i].getFirst('objType','detail');
+            if(detail){
+              detail.atkSpeed.setText(pokemon.range);
+            }
           } else if (change.field =='targetX') {
             if (pokemon.targetX >= 0) {
               children[i].targetX = pokemon.targetX;
