@@ -359,7 +359,7 @@ class OnEvolutionCommand extends Command {
           }
         }
 
-        if (count == 3 || (pokemon.types.includes(TYPE.BUG) && count == 2 && this.state.players[sessionId].effects.includes(EFFECTS.SWARM))) {
+        if (count == 3 || (pokemon.types.includes(TYPE.BUG) && count == 2 && this.state.players[sessionId].effects.list.includes(EFFECTS.SWARM))) {
           for (const id in this.state.players[sessionId].board) {
             if ( this.state.players[sessionId].board[id].index == pokemon.index && count >= 0) {
               delete this.state.players[sessionId].board[id];
