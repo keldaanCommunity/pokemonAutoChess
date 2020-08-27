@@ -23,10 +23,7 @@ class PokemonState {
     if(pokemon.effects.includes(EFFECTS.RAGE)){
       pokemon.attack += Math.round(pokemon.baseAtk * 0.05);
     }
-    if(pokemon.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.25){
-      pokemon.life = 0;
-      death = true;
-    }
+
     if (pokemon.life <= 0) {
       board.setValue(pokemon.positionX, pokemon.positionY, undefined);
       death = true;

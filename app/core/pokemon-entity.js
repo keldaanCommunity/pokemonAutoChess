@@ -43,7 +43,7 @@ class PokemonEntity extends schema.Schema {
   }
 
   handleDamage(damage, board, attackType) {
-    this.state.handleDamage(this, damage, board, attackType);
+    return this.state.handleDamage(this, damage, board, attackType);
   }
 
   changeState(state) {
