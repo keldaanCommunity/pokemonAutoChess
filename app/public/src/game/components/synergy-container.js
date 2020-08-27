@@ -37,11 +37,65 @@ export default class SynergyContainer extends Button {
       FAIRY: 0x82525b
     };
 
+    this.textColor = {
+      NORMAL: "#6d7050",
+      GRASS: "#395b2a",
+      FIRE: "#8f4b20",
+      WATER: "#38455f",
+      ELECTRIC: "#7a681f",
+      FIGHTING: "#521816",
+      PSYCHIC: "#672439",
+      DARK: "#0a0907",
+      METAL: "#4c4c52",
+      GROUND: "#5f5331",
+      POISON: "#4b2247",
+      DRAGON: "#353055",
+      FIELD: "#516d6b",
+      MONSTER: "#07210f",
+      HUMAN: "#000000",
+      AQUATIC: "#002c46",
+      BUG: "#5f6a24",
+      FLYING: "#3b3647",
+      FLORA: "#180d1c",
+      MINERAL: "#3f3817",
+      AMORPH: "#2d253b",
+      FAIRY: "#82525b"
+    };
+
+    this.typeActivation = {
+      NORMAL: 3,
+      GRASS: 3,
+      FIRE: 3,
+      WATER: 3,
+      ELECTRIC: 1,
+      FIGHTING: 2,
+      PSYCHIC: 2,
+      DARK: 2,
+      METAL: 2,
+      GROUND: 2,
+      POISON: 3,
+      DRAGON: 2,
+      FIELD: 3,
+      MONSTER: 3,
+      HUMAN: 2,
+      AQUATIC: 3,
+      BUG: 2,
+      FLYING: 2,
+      FLORA: 2,
+      MINERAL: 1,
+      AMORPH: 1,
+      FAIRY: 2
+    };
+
+
     this.type = type;
     this.color = this.typeColor[type];
+    this.colorText = this.textColor[type];
+    this.threshold = this.typeActivation[type];
     this.background = new GameObjects.Rectangle(scene, 0, 0, 130, 62, this.color).setVisible(false);
     this.add(this.background);
-    this.synergyCount = new GameObjects.Text(scene, 20, -20, '', this.textStyle);
+    this.synergyCount = new GameObjects.Text(scene, 20, -20, '0', this.textStyle);
+    this.synergyCount.setColor(this.colorText);
     this.add(this.synergyCount);
     this.add(new GameObjects.Image(scene, -30, 0, 'types', type));
     this.detail = new SynergyDetail(scene, -240, 0, type);
@@ -50,12 +104,13 @@ export default class SynergyContainer extends Button {
   }
 
   updateSynergy(value) {
-    if (value == 0) {
-      this.background.setVisible(false);
-      this.synergyCount.setText('');
-    } else {
+    this.synergyCount.setText(value);
+    if (value >= this.threshold) {
       this.background.setVisible(true);
-      this.synergyCount.setText(value);
+      this.synergyCount.setColor("#ffffff");
+    } else {
+      this.background.setVisible(false);
+      this.synergyCount.setColor(this.colorText);
     }
   }
 
