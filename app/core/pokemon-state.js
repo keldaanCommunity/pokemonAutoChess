@@ -23,7 +23,10 @@ class PokemonState {
     if(pokemon.effects.includes(EFFECTS.RAGE)){
       pokemon.attack += Math.round(pokemon.baseAtk * 0.05);
     }
-
+    if(pokemon.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.25){
+      pokemon.life = 0;
+      death = true;
+    }
     if (pokemon.life <= 0) {
       board.setValue(pokemon.positionX, pokemon.positionY, undefined);
       death = true;
@@ -33,9 +36,12 @@ class PokemonState {
 
   update(pokemon, dt, board, climate) {
     if (pokemon.cooldown <= 0) {
-      if(climate == CLIMATE.SANDSTORM && (!pokemon.types.includes(TYPE.GROUND) || !pokemon.types.includes(TYPE.METAL))){
-        this.handleDamage(pokemon, Math.round(pokemon.hp / 10), board, ATTACK_TYPE.SPECIAL);
-      }
+      if(climate == CLIMATE.SANDSTORM)
+      {
+        if(!pokemon.types.includes(TYPE.GROUND) && !pokemon.types.includes(TYPE.METAL)){
+          this.handleDamage(pokemon, Math.round(pokemon.hp / 10), board, ATTACK_TYPE.SPECIAL);
+        }
+      } 
       if(pokemon.life <= pokemon.hp / 2 && pokemon.effects.includes(EFFECTS.BLAZE)){
         pokemon.atk = pokemon.atk * 1.5;
       }

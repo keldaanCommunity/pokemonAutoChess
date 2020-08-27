@@ -7,7 +7,7 @@ const uniqid = require('uniqid');
 const ArraySchema = schema.ArraySchema;
 
 class PokemonEntity extends schema.Schema {
-  constructor(name, index, positionX, positionY, hp, atk, def, speDef, attackType, range, team, attackSprite, rarity) {
+  constructor(name, index, positionX, positionY, hp, atk, def, speDef, attackType, range, team, attackSprite, rarity, types) {
     super();
     this.id = uniqid();
     this.rarity = rarity;
@@ -34,8 +34,11 @@ class PokemonEntity extends schema.Schema {
     this.cooldown = 1000;
     this.team = team;
     this.attackSprite = attackSprite;
-    this.types = [];
     this.effects = new ArraySchema();
+    this.types = [];
+    types.forEach(type => {
+      this.types.push(type);
+    });
   }
 
   update(dt, board, climate) {
