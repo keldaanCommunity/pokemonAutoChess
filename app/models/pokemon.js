@@ -775,13 +775,13 @@ class Squirtle extends Pokemon {
 
 class Wartortle extends Pokemon {
   constructor() {
-    super('charmeleon', [TYPE.WATER, TYPE.AQUATIC, TYPE.MONSTER], RARITY.UNCOMMON, 8, 'blastoise', 25, 3, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL);
+    super('wartortle', [TYPE.WATER, TYPE.AQUATIC, TYPE.MONSTER], RARITY.UNCOMMON, 8, 'blastoise', 25, 3, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL);
   }
 }
 
 class Blastoise extends Pokemon {
   constructor() {
-    super('charizard', [TYPE.WATER, TYPE.AQUATIC, TYPE.MONSTER], RARITY.UNCOMMON, 9, '', 35, 4, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL);
+    super('blastoise', [TYPE.WATER, TYPE.AQUATIC, TYPE.MONSTER], RARITY.UNCOMMON, 9, '', 35, 4, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL);
   }
 }
 
