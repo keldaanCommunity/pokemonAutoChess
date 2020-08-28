@@ -142,7 +142,7 @@ export default class GameScene extends Scene {
       color: 'white',
       align: 'center'
     };
-    this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name, this.textStyle);
+    this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name.slice(0,10), this.textStyle);
 
     this.turnText = this.add.text(580, 25, window.state.stageLevel, this.textStyle);
     this.add.text(500, 25, 'Turn', this.textStyle);
