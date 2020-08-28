@@ -143,7 +143,8 @@ export default class GameScene extends Scene {
       align: 'center'
     };
     this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name.slice(0,10), this.textStyle);
-
+    this.phaseText = this.add.text(1270, 25, window.state.players[window.sessionId].phase, this.textStyle);
+    this.opponentNameText = this.add.text(1470, 25, window.state.players[window.sessionId].opponentName.slice(0,10), this.textStyle);
     this.turnText = this.add.text(580, 25, window.state.stageLevel, this.textStyle);
     this.add.text(500, 25, 'Turn', this.textStyle);
 
@@ -151,8 +152,7 @@ export default class GameScene extends Scene {
     this.add.text(910, 25, 's', this.textStyle);
 
     this.lastBattleResult = this.add.text(1070, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
-    this.opponentNameText = this.add.text(500, 200, window.state.players[window.sessionId].opponentName, this.bigTextStyle);
-    this.opponentNameText.setAlpha(0);
+    
     this.countdownText = this.add.text(700, 300, window.state.players[window.sessionId].lastBattleResult, this.bigTextStyle);
     this.countdownText.setAlpha(0);
     this.boardSizeText = this.add.text(325, 25, Object.keys(window.state.players[window.sessionId].boardSize).length, this.textStyle);
@@ -182,17 +182,6 @@ export default class GameScene extends Scene {
     });
   }
 
-  displayOpponentName(name) {
-    this.opponentNameText.setText(name);
-    this.tweens.add({
-      targets: this.opponentNameText,
-      duration: 1000,
-      alpha: 1,
-      yoyo: true,
-      repeat: 0
-    });
-  }
-
   displayCountDown(countdown) {
     this.countdownText.setText(countdown);
     this.countdownText.setAlpha(0);
@@ -210,6 +199,7 @@ export default class GameScene extends Scene {
   }
 
   updatePhase() {
+    this.phaseText.setText(window.state.phase);
     if (window.state.phase == 'FIGHT') {
       this.boardManager.clearBoard();
       this.music.play('battle-1');

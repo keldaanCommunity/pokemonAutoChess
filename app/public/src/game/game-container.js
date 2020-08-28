@@ -265,8 +265,8 @@ class GameContainer {
         break;
 
       case 'opponentName':
-        if (change.value != '') {
-          this.game.scene.getScene('gameScene').displayOpponentName(change.value);
+        if (this.room.sessionId == player.id) {
+          this.game.scene.getScene('gameScene').opponentNameText.setText(change.value.slice(0,10));
         }
 
       case 'shop':
