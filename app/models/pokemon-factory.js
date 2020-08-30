@@ -464,13 +464,19 @@ class PokemonFactory {
         return 'onix';
       case 'steelix':
         return 'onix';
+      case 'mega-steelix':
+        return 'onix';
       case 'scyther':
         return 'scyther';
       case 'scizor':
         return 'scyther';
+      case 'mega-scizor':
+        return 'scyther';
       case 'riolu':
         return 'riolu';
       case 'lucario':
+        return 'riolu';
+      case 'mega-lucario':
         return 'riolu';
       default:
         console.log(`No pokemon with name "${name}" found`);
@@ -792,14 +798,20 @@ class PokemonFactory {
         return new Pokemon.Onix();
       case 'steelix':
         return new Pokemon.Steelix();
+      case 'mega-steelix':
+        return new Pokemon.MegaSteelix();
       case 'scyther':
         return new Pokemon.Scyther();
       case 'scizor':
         return new Pokemon.Scizor();
+      case 'mega-scizor':
+        return  new Pokemon.MegaScizor();
       case 'riolu':
         return new Pokemon.Riolu();
       case 'lucario':
         return new Pokemon.Lucario();
+      case 'mega-lucario':
+        return new Pokemon.MegaLucario();
       case 'magikarp':
         return new Pokemon.Magikarp();
       case 'rattata':

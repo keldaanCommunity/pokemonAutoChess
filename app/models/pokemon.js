@@ -49,7 +49,13 @@ class Riolu extends Pokemon {
 
 class Lucario extends Pokemon {
   constructor() {
-    super('lucario', [TYPE.FIGHTING, TYPE.HUMAN], RARITY.LEGENDARY, 448, '', 60, 7, 1, 1, 3, 'FIGHTING/range', ATTACK_TYPE.SPECIAL);
+    super('lucario', [TYPE.FIGHTING, TYPE.HUMAN], RARITY.LEGENDARY, 448, 'mega-lucario', 60, 7, 1, 1, 3, 'FIGHTING/range', ATTACK_TYPE.SPECIAL);
+  }
+}
+
+class MegaLucario extends Pokemon {
+  constructor() {
+    super('mega-lucario', [TYPE.FIGHTING, TYPE.HUMAN], RARITY.LEGENDARY, 4480, '', 70, 10, 1, 1, 3, 'FIGHTING/range', ATTACK_TYPE.SPECIAL);
   }
 }
 
@@ -61,7 +67,13 @@ class Scyther extends Pokemon {
 
 class Scizor extends Pokemon {
   constructor() {
-    super('scizor', [TYPE.BUG, TYPE.METAL], RARITY.LEGENDARY, 212, '', 60, 7, 1, 1, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL);
+    super('scizor', [TYPE.BUG, TYPE.METAL], RARITY.LEGENDARY, 212, 'mega-scizor', 60, 7, 1, 1, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL);
+  }
+}
+
+class MegaScizor extends Pokemon {
+  constructor() {
+    super('mega-scizor', [TYPE.BUG, TYPE.METAL], RARITY.LEGENDARY, 2120, '', 80, 8, 2, 1, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 
@@ -73,7 +85,13 @@ class Onix extends Pokemon {
 
 class Steelix extends Pokemon {
   constructor() {
-    super('steelix', [TYPE.MINERAL, TYPE.GROUND, TYPE.METAL], RARITY.LEGENDARY, 208, '', 60, 7, 1, 1, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
+    super('steelix', [TYPE.MINERAL, TYPE.GROUND, TYPE.METAL], RARITY.LEGENDARY, 208, 'mega-steelix', 60, 7, 1, 1, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
+  }
+}
+
+class MegaSteelix extends Pokemon {
+  constructor() {
+    super('mega-steelix', [TYPE.MINERAL, TYPE.GROUND, TYPE.METAL], RARITY.LEGENDARY, 2080, '', 80, 7, 5, 1, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 
@@ -1318,10 +1336,13 @@ module.exports = {
   Arcanine,
   Onix,
   Steelix,
+  MegaSteelix,
   Scyther,
   Scizor,
+  MegaScizor,
   Riolu,
   Lucario,
+  MegaLucario,
   Magikarp,
   Rattata,
   Raticate,

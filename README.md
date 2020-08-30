@@ -11,3 +11,6 @@ Implementation of [reddit specifications](https://www.reddit.com/r/AutoChess/com
 
  --> [Play !](https://pokemon-auto-chess.herokuapp.com/)
 
+## Credits
+
+Sprites: RedBlueYellow, Juenca, Kustem R
