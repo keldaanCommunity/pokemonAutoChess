@@ -31,7 +31,7 @@ export default class ShopPortraitContainer extends GameObjects.Container {
       this.add(new GameObjects.Image(scene, 75, 23 * i, 'types', pokemon.types[i]).setScale(0.5, 0.5));
     }
     this.add(new GameObjects.Image(scene, 20, 5, `${pokemon.rarity}`, `${pokemon.index}/portrait`).setScale(2, 2));
-    this.add(new GameObjects.Image(scene,160,-24,pokemon.attackType));
+    this.add(new GameObjects.Image(scene, 160, -24, pokemon.attackType));
     if (pokemon.rarity != 'COMMON') {
       this.add(new GameObjects.Image(scene, 80, -28, 'rarity', pokemon.rarity));
     }

@@ -36,7 +36,7 @@ class PokemonEntity extends schema.Schema {
     this.attackSprite = attackSprite;
     this.effects = new ArraySchema();
     this.types = [];
-    types.forEach(type => {
+    types.forEach((type) => {
       this.types.push(type);
     });
   }

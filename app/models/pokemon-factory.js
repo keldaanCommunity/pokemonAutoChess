@@ -805,7 +805,7 @@ class PokemonFactory {
       case 'scizor':
         return new Pokemon.Scizor();
       case 'mega-scizor':
-        return  new Pokemon.MegaScizor();
+        return new Pokemon.MegaScizor();
       case 'riolu':
         return new Pokemon.Riolu();
       case 'lucario':

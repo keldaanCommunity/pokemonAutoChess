@@ -26,7 +26,7 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
     this.add(new GameObjects.Text(scene, 150, -30, 'Lvl ', this.textStyle));
     this.level = new GameObjects.Text(scene, 200, -30, player.experienceManager.level, this.textStyle);
     this.add(this.level);
-    this.add(new GameObjects.Text(scene, -30, 0, player.name.slice(0,15), this.textStyle));
+    this.add(new GameObjects.Text(scene, -30, 0, player.name.slice(0, 15), this.textStyle));
   }
 
   onLifeChange(value) {

@@ -289,7 +289,7 @@ class Gastly extends Pokemon {
 
 class Haunter extends Pokemon {
   constructor() {
-    super('haunter', [TYPE.DARK, TYPE.POISON, TYPE.AMORPH], RARITY.EPIC, 93, 'gengar', 40, 5, 1,1, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL);
+    super('haunter', [TYPE.DARK, TYPE.POISON, TYPE.AMORPH], RARITY.EPIC, 93, 'gengar', 40, 5, 1, 1, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL);
   }
 }
 
@@ -1169,13 +1169,13 @@ schema.defineTypes(Pokemon, {
   positionY: 'uint8',
   cost: 'uint8',
   attackSprite: 'string',
-  atkSpeed:'uint16',
-  def:'uint8',
-  speDef:'uint8',
-  attackType:'string',
-  atk:'uint8',
-  hp:'uint8',
-  range:'uint8' 
+  atkSpeed: 'uint16',
+  def: 'uint8',
+  speDef: 'uint8',
+  attackType: 'string',
+  atk: 'uint8',
+  hp: 'uint8',
+  range: 'uint8'
 });
 
 module.exports = {

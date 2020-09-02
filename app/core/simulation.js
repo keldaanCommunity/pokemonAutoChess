@@ -20,10 +20,10 @@ class Simulation extends Schema {
     this.redRocks = false;
     this.blueEffects = [];
     this.redEffects = [];
-    if(blueEffects){
+    if (blueEffects) {
       this.blueEffects = blueEffects;
     }
-    if(redEffects){
+    if (redEffects) {
       this.redEffects = redEffects;
     }
     this.climate = this.getClimate();
@@ -33,7 +33,7 @@ class Simulation extends Schema {
       const pokemon = blueTeam[id];
       // console.log("x",pokemon.positionX, "y", pokemon.positionY); // 0 for blue, 1 for red
       if (pokemon.positionY != 0) {
-        const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk,pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity, pokemon.types);
+        const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity, pokemon.types);
         this.applyEffects(pokemonEntity, pokemon.types, blueEffects, redEffects, blueTeam, redTeam);
         this.blueTeam[pokemonEntity.id] = pokemonEntity;
         // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
@@ -51,44 +51,43 @@ class Simulation extends Schema {
         this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
       }
     }
-    if(blueEffects.includes(EFFECTS.PRIMORDIAL_SEA)){
+    if (blueEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
       const kyogre = PokemonFactory.createPokemonFromName('kyogre');
       const coord = this.getFirstAvailablePlaceOnBoard(true);
-      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp,kyogre.atk,kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range,0,kyogre.attackSprite,kyogre.rarity, kyogre.types);
+      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.atk, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 0, kyogre.attackSprite, kyogre.rarity, kyogre.types);
       this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, blueTeam, redTeam);
       this.blueTeam[pokemonEntity.id] = pokemonEntity;
       this.board.setValue(coord[0], coord[1], pokemonEntity);
     }
-    if(redEffects.includes(EFFECTS.PRIMORDIAL_SEA)){
+    if (redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
       const kyogre = PokemonFactory.createPokemonFromName('kyogre');
       const coord = this.getFirstAvailablePlaceOnBoard(false);
-      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp,kyogre.atk,kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range,1,kyogre.attackSprite,kyogre.rarity, kyogre.types);
+      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.atk, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 1, kyogre.attackSprite, kyogre.rarity, kyogre.types);
       this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, redTeam, blueTeam);
       this.redTeam[pokemonEntity.id] = pokemonEntity;
       this.board.setValue(coord[0], coord[1], pokemonEntity);
     }
   }
 
-  getFirstAvailablePlaceOnBoard(ascending){
+  getFirstAvailablePlaceOnBoard(ascending) {
     let row = 0;
     let column = 0;
-    if(ascending){
+    if (ascending) {
       outerloop:
       for (let x = 0; x < this.board.rows; x++) {
         for (let y = 0; y < this.board.columns; y++) {
-          if(this.board.getValue(x,y) === undefined){
+          if (this.board.getValue(x, y) === undefined) {
             row = x;
             column = y;
             break outerloop;
           }
         }
       }
-    }
-    else{
+    } else {
       outerloop:
       for (let x = 0; x < this.board.rows; x++) {
-        for (var y = this.board.columns - 1; y >= 0; y--){
-          if(this.board.getValue(x,y) === undefined){
+        for (let y = this.board.columns - 1; y >= 0; y--) {
+          if (this.board.getValue(x, y) === undefined) {
             row = x;
             column = y;
             break outerloop;
@@ -96,79 +95,78 @@ class Simulation extends Schema {
         }
       }
     }
-    return [row,column];
+    return [row, column];
   }
 
-  applyEffects(pokemon, types, allyEffects, ennemyEffects, allyTeam, ennemyTeam){
-
-    allyEffects.forEach(effect => {
+  applyEffects(pokemon, types, allyEffects, ennemyEffects, allyTeam, ennemyTeam) {
+    allyEffects.forEach((effect) => {
       switch (effect) {
         case EFFECTS.BLAZE:
-          if(types.includes(TYPE.FIRE)){
+          if (types.includes(TYPE.FIRE)) {
             pokemon.effects.push(EFFECTS.BLAZE);
           }
           break;
-        
+
         case EFFECTS.DROUGHT:
-          if(this.climate == CLIMATE.SUN && types.includes(TYPE.FIRE)){
+          if (this.climate == CLIMATE.SUN && types.includes(TYPE.FIRE)) {
             pokemon.effects.push(EFFECTS.DROUGHT);
             pokemon.atk += Math.round(pokemon.baseAtk * 0.33);
           }
           break;
-        
+
         case EFFECTS.INGRAIN:
-          if(types.includes(TYPE.GRASS)){
+          if (types.includes(TYPE.GRASS)) {
             pokemon.effects.push(EFFECTS.INGRAIN);
           }
           break;
-        
+
         case EFFECTS.GROWTH:
-          if(types.includes(TYPE.GRASS)){
+          if (types.includes(TYPE.GRASS)) {
             pokemon.effects.push(EFFECTS.GROWTH);
             pokemon.def += Math.round(pokemon.baseDef * 0.25);
           }
           break;
 
         case EFFECTS.DRIZZLE:
-          if(this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)){
+          if (this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)) {
             pokemon.effects.push(EFFECTS.DRIZZLE);
             pokemon.atk += Math.round(pokemon.baseAtk * 0.33);
           }
           break;
 
         case EFFECTS.RAIN_DANCE:
-          if(this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)){
+          if (this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)) {
             pokemon.effects.push(EFFECTS.RAIN_DANCE);
             pokemon.atk += Math.round(pokemon.baseAtk * 0.33);
           }
           break;
 
         case EFFECTS.STAMINA:
-          if(types.includes(TYPE.NORMAL)){
+          if (types.includes(TYPE.NORMAL)) {
             pokemon.effects.push(EFFECTS.STAMINA);
             pokemon.life += 20;
           }
           break;
-        
+
         case EFFECTS.STRENGTH:
-          if(types.includes(TYPE.NORMAL)){
+          if (types.includes(TYPE.NORMAL)) {
             pokemon.atk += Math.round(pokemon.baseAtk * 0.1);
             pokemon.def += Math.round(pokemon.baseDef * 0.1);
             pokemon.speDef += Math.round(pokemon.baseSpeDef * 0.1);
             pokemon.effects.push(EFFECTS.STRENGTH);
           }
           break;
-        
+
         case EFFECTS.PURE_POWER:
           pokemon.atk += Math.round(pokemon.baseAtk);
           pokemon.effects.push(EFFECTS.PURE_POWER);
           break;
-        
+
         case EFFECTS.AGILITY:
-          if(types.includes(TYPE.ELECTRIC)){
+          if (types.includes(TYPE.ELECTRIC)) {
             let speedFactor = 1;
-            for (const id in allyTeam){
-              if(allyTeam[id].types.includes(TYPE.ELECTRIC)){
+            for (const id in allyTeam) {
+              if (allyTeam[id].types.includes(TYPE.ELECTRIC)) {
                 speedFactor -= 0.1;
               }
             }
@@ -178,66 +176,66 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.REVENGE:
-          if(types.includes(TYPE.FIGHTING) && Object.keys(ennemyTeam).length > Object.keys(allyTeam).length){
+          if (types.includes(TYPE.FIGHTING) && Object.keys(ennemyTeam).length > Object.keys(allyTeam).length) {
             pokemon.atk += Math.round(pokemon.baseAtk * 0.2);
             pokemon.effects.push(EFFECTS.REVENGE);
           }
           break;
-        
+
         case EFFECTS.PUNISHMENT:
-          if(types.includes(TYPE.FIGHTING)){
-            ennemyEffects.forEach(effect =>{
+          if (types.includes(TYPE.FIGHTING)) {
+            ennemyEffects.forEach((effect) =>{
               pokemon.atk += Math.round(pokemon.baseAtk * 0.1);
             });
             pokemon.effects.push(EFFECTS.PUNISHMENT);
           }
           break;
-        
+
         case EFFECTS.IRON_DEFENSE:
-          if(types.includes(TYPE.MINERAL)){
+          if (types.includes(TYPE.MINERAL)) {
             pokemon.def += Math.round(pokemon.baseDef * 0.5);
             pokemon.effects.push(EFFECTS.IRON_DEFENSE);
           }
           break;
-        
+
         case EFFECTS.AUTOTOMIZE:
-          if(types.includes(TYPE.MINERAL)){
+          if (types.includes(TYPE.MINERAL)) {
             pokemon.atkSpeed += pokemon.atkSpeed * 0.5;
             pokemon.effects.push(EFFECTS.AUTOTOMIZE);
           }
           break;
-        
+
         case EFFECTS.WORK_UP:
-          if(types.includes(TYPE.FIELD)){
+          if (types.includes(TYPE.FIELD)) {
             pokemon.atk += Math.round(pokemon.baseAtk * Object.keys(ennemyTeam).length * 0.04);
             pokemon.effects.push(EFFECTS.WORK_UP);
           }
           break;
 
         case EFFECTS.RAGE:
-          if(types.includes(TYPE.FIELD)){
+          if (types.includes(TYPE.FIELD)) {
             pokemon.effects.push(EFFECTS.RAGE);
           }
           break;
-        
+
         case EFFECTS.ANGER_POINT:
-          if(types.includes(TYPE.FIELD)){
+          if (types.includes(TYPE.FIELD)) {
             pokemon.effects.push(EFFECTS.ANGER_POINT);
           }
           break;
-       
+
         case EFFECTS.BRUTAL_SWING:
-          if(types.includes(TYPE.MONSTER)){
+          if (types.includes(TYPE.MONSTER)) {
             pokemon.effects.push(EFFECTS.BRUTAL_SWING);
           }
           break;
 
         case EFFECTS.POWER_TRIP:
-          if(types.includes(TYPE.MONSTER)){
+          if (types.includes(TYPE.MONSTER)) {
             pokemon.effects.push(EFFECTS.POWER_TRIP);
           }
           break;
-        
+
         case EFFECTS.MEDITATE:
           pokemon.atk += Math.round(pokemon.baseAtk * 0.15);
           pokemon.def += Math.round(pokemon.baseDef * 0.15);
@@ -253,51 +251,51 @@ class Simulation extends Schema {
           pokemon.def += Math.round(pokemon.baseDef * 0.3);
           pokemon.effects.push(EFFECTS.CALM_MIND);
           break;
-        
+
         case EFFECTS.SWIFT_SWIM:
-          if(types.includes(TYPE.WATER) && this.climate == CLIMATE.RAIN){
+          if (types.includes(TYPE.WATER) && this.climate == CLIMATE.RAIN) {
             pokemon.atkSpeed = pokemon.atkSpeed * 0.7;
             pokemon.effects.push(EFFECTS.SWIFT_SWIM);
           }
           break;
-        
+
         case EFFECTS.HYDO_CANNON:
-          if(types.includes(TYPE.WATER) && this.climate == CLIMATE.RAIN){
+          if (types.includes(TYPE.WATER) && this.climate == CLIMATE.RAIN) {
             pokemon.atk += Math.round(pokemon.baseAtk * 0.3);
             pokemon.effects.push(EFFECTS.HYDO_CANNON);
           }
           break;
 
         case EFFECTS.RAIN_DISH:
-          if(types.includes(TYPE.FLORA) && this.climate == CLIMATE.RAIN){
+          if (types.includes(TYPE.FLORA) && this.climate == CLIMATE.RAIN) {
             pokemon.effects.push(EFFECTS.RAIN_DISH);
           }
           break;
-        
+
         case EFFECTS.BATTLE_ARMOR:
-          if(types.includes(TYPE.MINERAL)){
+          if (types.includes(TYPE.MINERAL)) {
             pokemon.def += Math.round(pokemon.baseDef * 0.25);
             pokemon.effects.push(EFFECTS.BATTLE_ARMOR);
           }
           break;
-        
+
         case EFFECTS.PHANTOM_FORCE:
-          if(types.includes(TYPE.AMORPH)){
+          if (types.includes(TYPE.AMORPH)) {
             pokemon.effects.push(EFFECTS.PHANTOM_FORCE);
           }
-      
+
         case EFFECTS.ATTRACT:
-          if(types.includes(TYPE.FAIRY)){
+          if (types.includes(TYPE.FAIRY)) {
             pokemon.effects.push(EFFECTS.ATTRACT);
           }
           break;
 
         case EFFECTS.BABY_DOLL_EYES:
-          if(types.includes(TYPE.FAIRY)){
+          if (types.includes(TYPE.FAIRY)) {
             pokemon.effects.push(EFFECTS.BABY_DOLL_EYES);
           }
           break;
-                
+
         case EFFECTS.FLOWER_SHIELD:
           pokemon.speDef += Math.round(pokemon.baseSpeDef * 0.3);
           pokemon.effects.push(EFFECTS.FLOWER_SHIELD);
@@ -308,9 +306,8 @@ class Simulation extends Schema {
       }
     });
 
-    ennemyEffects.forEach(effect => {
+    ennemyEffects.forEach((effect) => {
       switch (effect) {
-
         case EFFECTS.SPORE:
           pokemon.atkSpeed = pokemon.atkSpeed * 0.5;
           pokemon.effects.push(EFFECTS.SPORE);
@@ -320,12 +317,12 @@ class Simulation extends Schema {
           pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.3);
           pokemon.effects.push(EFFECTS.PSYWAVE);
           break;
-        
+
         case EFFECTS.MAGIC_ROOM:
           pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.3);
           pokemon.effects.push(EFFECTS.MAGIC_ROOM);
           break;
-        
+
         case EFFECTS.MEAN_LOOK:
           pokemon.def -= Math.round(pokemon.baseDef * 0.2);
           pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.2);
@@ -337,7 +334,7 @@ class Simulation extends Schema {
           pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.2);
           pokemon.effects.push(EFFECTS.SCARY_FACE);
           break;
-        
+
         case EFFECTS.SPIKES:
           pokemon.life -= Math.round(pokemon.hp * 0.1);
           pokemon.effects.push(EFFECTS.SPIKES);
@@ -349,17 +346,17 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.PURSUIT:
-          if(types.includes(TYPE.MONSTER)){
+          if (types.includes(TYPE.MONSTER)) {
             pokemon.effects.push(EFFECTS.PURSUIT);
           }
           break;
-        
+
         case EFFECTS.POISON_GAS:
-          if(Math.random() > 0.9){
+          if (Math.random() > 0.9) {
             pokemon.effects.push(EFFECTS.POISON_GAS);
           }
           break;
-        
+
         case EFFECTS.TOXIC:
           pokemon.effects.push(EFFECTS.TOXIC);
           break;
@@ -411,17 +408,17 @@ class Simulation extends Schema {
     return climate;
   }
 
-  getEntryHazards(){
-    if(this.blueEffects.includes(EFFECTS.SPIKES)){
+  getEntryHazards() {
+    if (this.blueEffects.includes(EFFECTS.SPIKES)) {
       this.redSpikes = true;
     }
-    if(this.redEffects.includes(EFFECTS.SPIKES)){
+    if (this.redEffects.includes(EFFECTS.SPIKES)) {
       this.blueSpikes = true;
     }
-    if(this.blueEffects.includes(EFFECTS.STEALTH_ROCK)){
+    if (this.blueEffects.includes(EFFECTS.STEALTH_ROCK)) {
       this.redRocks = true;
     }
-    if(this.redEffects.includes(EFFECTS.STEALTH_ROCK)){
+    if (this.redEffects.includes(EFFECTS.STEALTH_ROCK)) {
       this.blueRocks = true;
     }
   }
@@ -465,7 +462,7 @@ class Simulation extends Schema {
 schema.defineTypes(Simulation, {
   blueTeam: {map: PokemonEntity},
   redTeam: {map: PokemonEntity},
-  climate:'string',
+  climate: 'string',
   blueSpikes: 'boolean',
   redSpikes: 'boolean',
   blueRocks: 'boolean',

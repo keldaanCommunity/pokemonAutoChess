@@ -262,7 +262,7 @@ export default class AnimationManager {
   }
 
   playAnimation(entity, spriteKey) {
-    let sprite = entity.getFirst('objType', 'sprite');
+    const sprite = entity.getFirst('objType', 'sprite');
     sprite.flipX = this.flipxTable[entity.orientation];
     sprite.anims.play(spriteKey);
   }

@@ -125,11 +125,11 @@ class GameRoom extends colyseus.Room {
     return new Error('no place found, board full');
   }
 
-  getFirstAvailablePositionInTeam(board){
+  getFirstAvailablePositionInTeam(board) {
     for (let x = 0; x < 9; x++) {
       for (let y = 1; y < 4; y++) {
         if (this.isPositionEmpty(board, x, y)) {
-          return [x,y];
+          return [x, y];
         }
       }
     }

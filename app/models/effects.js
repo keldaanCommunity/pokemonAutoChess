@@ -1,7 +1,7 @@
 const CLIMATE = require('./enum').CLIMATE;
 const EFFECTS = require('./enum').EFFECTS;
 
-class Effects{
+class Effects {
   constructor() {
     this.climate = CLIMATE.NEUTRAL;
     this.list = [];

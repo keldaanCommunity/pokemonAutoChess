@@ -38,28 +38,28 @@ export default class SynergyContainer extends Button {
     };
 
     this.textColor = {
-      NORMAL: "#6d7050",
-      GRASS: "#395b2a",
-      FIRE: "#8f4b20",
-      WATER: "#38455f",
-      ELECTRIC: "#7a681f",
-      FIGHTING: "#521816",
-      PSYCHIC: "#672439",
-      DARK: "#0a0907",
-      METAL: "#4c4c52",
-      GROUND: "#5f5331",
-      POISON: "#4b2247",
-      DRAGON: "#353055",
-      FIELD: "#516d6b",
-      MONSTER: "#07210f",
-      HUMAN: "#000000",
-      AQUATIC: "#002c46",
-      BUG: "#5f6a24",
-      FLYING: "#3b3647",
-      FLORA: "#180d1c",
-      MINERAL: "#3f3817",
-      AMORPH: "#2d253b",
-      FAIRY: "#82525b"
+      NORMAL: '#6d7050',
+      GRASS: '#395b2a',
+      FIRE: '#8f4b20',
+      WATER: '#38455f',
+      ELECTRIC: '#7a681f',
+      FIGHTING: '#521816',
+      PSYCHIC: '#672439',
+      DARK: '#0a0907',
+      METAL: '#4c4c52',
+      GROUND: '#5f5331',
+      POISON: '#4b2247',
+      DRAGON: '#353055',
+      FIELD: '#516d6b',
+      MONSTER: '#07210f',
+      HUMAN: '#000000',
+      AQUATIC: '#002c46',
+      BUG: '#5f6a24',
+      FLYING: '#3b3647',
+      FLORA: '#180d1c',
+      MINERAL: '#3f3817',
+      AMORPH: '#2d253b',
+      FAIRY: '#82525b'
     };
 
     this.typeActivation = {
@@ -107,7 +107,7 @@ export default class SynergyContainer extends Button {
     this.synergyCount.setText(value);
     if (value >= this.threshold) {
       this.background.setVisible(true);
-      this.synergyCount.setColor("#ffffff");
+      this.synergyCount.setColor('#ffffff');
     } else {
       this.background.setVisible(false);
       this.synergyCount.setColor(this.colorText);

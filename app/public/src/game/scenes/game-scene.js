@@ -82,12 +82,12 @@ export default class GameScene extends Scene {
     this.load.image('sword', 'assets/ui/sword.png');
     this.load.image('range', 'assets/ui/range.png');
     this.load.image('heart', 'assets/ui/heart.png');
-    this.load.image('rain','assets/ui/rain.png');
-    this.load.image('sand','assets/ui/sand.png');
-    this.load.image('sun','assets/ui/sun.png');
-    this.load.image('socle','assets/ui/socle.png');
-    this.load.image('PHYSICAL','assets/types/PHYSICAL.png');
-    this.load.image('SPECIAL','assets/types/SPECIAL.png');
+    this.load.image('rain', 'assets/ui/rain.png');
+    this.load.image('sand', 'assets/ui/sand.png');
+    this.load.image('sun', 'assets/ui/sun.png');
+    this.load.image('socle', 'assets/ui/socle.png');
+    this.load.image('PHYSICAL', 'assets/types/PHYSICAL.png');
+    this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
     this.load.multiatlas('type-details', 'assets/types/type-details.json', 'assets/types/');
     this.load.multiatlas('lock', 'assets/lock/lock.json', 'assets/lock/');
     this.load.tilemapTiledJSON('map', 'assets/tiles/tilemap.json');
@@ -142,9 +142,9 @@ export default class GameScene extends Scene {
       color: 'white',
       align: 'center'
     };
-    this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name.slice(0,10), this.textStyle);
+    this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name.slice(0, 10), this.textStyle);
     this.phaseText = this.add.text(1270, 25, window.state.players[window.sessionId].phase, this.textStyle);
-    this.opponentNameText = this.add.text(1470, 25, window.state.players[window.sessionId].opponentName.slice(0,10), this.textStyle);
+    this.opponentNameText = this.add.text(1470, 25, window.state.players[window.sessionId].opponentName.slice(0, 10), this.textStyle);
     this.turnText = this.add.text(580, 25, window.state.stageLevel, this.textStyle);
     this.add.text(500, 25, 'Turn', this.textStyle);
 
@@ -152,12 +152,12 @@ export default class GameScene extends Scene {
     this.add.text(910, 25, 's', this.textStyle);
 
     this.lastBattleResult = this.add.text(1070, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
-    
+
     this.countdownText = this.add.text(700, 300, window.state.players[window.sessionId].lastBattleResult, this.bigTextStyle);
     this.countdownText.setAlpha(0);
     this.boardSizeText = this.add.text(325, 25, Object.keys(window.state.players[window.sessionId].boardSize).length, this.textStyle);
-    this.add.text(350, 25,'/',this.textStyle);
-    this.maxBoardSizeText = this.add.text(370,25,window.state.players[window.sessionId].experienceManager.level, this.textStyle);
+    this.add.text(350, 25, '/', this.textStyle);
+    this.maxBoardSizeText = this.add.text(370, 25, window.state.players[window.sessionId].experienceManager.level, this.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
     this.transitionScreen.setAlpha(0);

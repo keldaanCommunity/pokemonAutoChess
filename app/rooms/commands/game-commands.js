@@ -77,7 +77,7 @@ class OnDragDropCommand extends Command {
       }
     }
 
-    
+
     if (!success) {
       client.send('DragDropFailed', {});
     }
@@ -181,20 +181,20 @@ class OnKickPlayerCommand extends Command {
   }
 }
 
-class UtilsCommand extends Command{
-  static getBoardSize(board){
+class UtilsCommand extends Command {
+  static getBoardSize(board) {
     let boardSize = 0;
-    for(let id in board){
-      if(board[id].positionY == 0){
+    for (const id in board) {
+      if (board[id].positionY == 0) {
         boardSize ++;
       }
     }
     return boardSize;
   }
 
-  static getFirstPokemonOnBoard(board){
-    for (let id in board){
-      if(board[id].positionY == 0){
+  static getFirstPokemonOnBoard(board) {
+    for (const id in board) {
+      if (board[id].positionY == 0) {
         return board[id];
       }
     }
@@ -214,8 +214,8 @@ class UtilsCommand extends Command{
 class OnUpdatePhaseCommand extends Command {
   execute() {
     if (this.state.phase == STATE.PICK) {
-      let commands = this.checkForLazyTeam();
-      if(commands.length != 0){
+      const commands = this.checkForLazyTeam();
+      if (commands.length != 0) {
         return commands;
       }
       this.initializeFightingPhase();
@@ -298,30 +298,30 @@ class OnUpdatePhaseCommand extends Command {
     }
   }
 
-  checkForLazyTeam(){
-    let commands = [];
+  checkForLazyTeam() {
+    const commands = [];
     for (const id in this.state.players) {
       const player = this.state.players[id];
       const teamSize = UtilsCommand.getTeamSize(player.board);
       if (teamSize < player.experienceManager.level) {
-        let numberOfPokemonsToMove = player.experienceManager.level - teamSize;
+        const numberOfPokemonsToMove = player.experienceManager.level - teamSize;
         for (let i = 0; i < numberOfPokemonsToMove; i++) {
           const boardSize = UtilsCommand.getBoardSize(player.board);
-          if(boardSize > 0){
-            let coordinate = this.room.getFirstAvailablePositionInTeam(player.board);
-            let detail = {
+          if (boardSize > 0) {
+            const coordinate = this.room.getFirstAvailablePositionInTeam(player.board);
+            const detail = {
               'pokemonId': UtilsCommand.getFirstPokemonOnBoard(player.board).id,
-              'x':coordinate[0],
+              'x': coordinate[0],
               'y': coordinate[1]
             };
-            let client = {
-              'sessionId':id
-            }
-            commands.push(new OnDragDropCommand().setPayload({'client': client,'detail':detail}));
+            const client = {
+              'sessionId': id
+            };
+            commands.push(new OnDragDropCommand().setPayload({'client': client, 'detail': detail}));
           }
         }
       }
-    } 
+    }
     return commands;
   }
 

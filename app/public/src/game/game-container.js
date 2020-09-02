@@ -80,43 +80,35 @@ class GameContainer {
     });
 
     player.simulation.onChange = ((changes) => {
-      changes.forEach(change =>{
-        if(change.field == 'climate'){
-            this.handleClimateChange(change,player);
-        }
-        else if(change.field == 'redRocks'){
-          if(change.value){
+      changes.forEach((change) =>{
+        if (change.field == 'climate') {
+          this.handleClimateChange(change, player);
+        } else if (change.field == 'redRocks') {
+          if (change.value) {
             this.game.scene.getScene('gameScene').entryHazardsManager.addRedRocks();
-          }
-          else{
+          } else {
             this.game.scene.getScene('gameScene').entryHazardsManager.clearRedRocks();
           }
-        }
-        else if(change.field == 'blueRocks'){
-          if(change.value){
+        } else if (change.field == 'blueRocks') {
+          if (change.value) {
             this.game.scene.getScene('gameScene').entryHazardsManager.addBlueRocks();
-          }
-          else{
+          } else {
             this.game.scene.getScene('gameScene').entryHazardsManager.clearBlueRocks();
           }
-        }
-        else if(change.field == 'redSpikes'){
-          if(change.value){
+        } else if (change.field == 'redSpikes') {
+          if (change.value) {
             this.game.scene.getScene('gameScene').entryHazardsManager.addRedSpikes();
-          }
-          else{
+          } else {
             this.game.scene.getScene('gameScene').entryHazardsManager.clearRedSpikes();
           }
-        }
-        else if(change.field == 'blueSpikes'){
-          if(change.value){
+        } else if (change.field == 'blueSpikes') {
+          if (change.value) {
             this.game.scene.getScene('gameScene').entryHazardsManager.addBlueSpikes();
-          }
-          else{
+          } else {
             this.game.scene.getScene('gameScene').entryHazardsManager.clearBlueSpikes();
           }
         }
-      })
+      });
     });
 
     player.simulation.blueTeam.onAdd = (pokemon, key) => {
@@ -183,26 +175,26 @@ class GameContainer {
       this.game.scene.getScene('gameScene').synergiesContainer.updateSynergy(change.field, change.value);
     }
   }
-  
-  handleClimateChange(change, player){
+
+  handleClimateChange(change, player) {
     if (player.id == this.player.id) {
       switch (change.value) {
-        case "RAIN":
+        case 'RAIN':
           this.game.scene.getScene('gameScene').weatherManager.addRain();
           break;
-        
-        case "SUN":
+
+        case 'SUN':
           this.game.scene.getScene('gameScene').weatherManager.addSun();
           break;
-        
-        case "SANDSTORM":
+
+        case 'SANDSTORM':
           this.game.scene.getScene('gameScene').weatherManager.addSandstorm();
           break;
-        
-        case "NEUTRAL":
+
+        case 'NEUTRAL':
           this.game.scene.getScene('gameScene').weatherManager.clearWeather();
           break;
-      
+
         default:
           break;
       }
@@ -266,7 +258,7 @@ class GameContainer {
 
       case 'opponentName':
         if (this.room.sessionId == player.id) {
-          this.game.scene.getScene('gameScene').opponentNameText.setText(change.value.slice(0,10));
+          this.game.scene.getScene('gameScene').opponentNameText.setText(change.value.slice(0, 10));
         }
 
       case 'shop':

@@ -29,7 +29,7 @@ export default class Pokemon extends Button {
     if (dragable) {
       scene.input.setDraggable(this);
     }
-    if(pokemon.life){
+    if (pokemon.life) {
       this.life = pokemon.life;
     }
     this.setDepth(5);
@@ -37,11 +37,10 @@ export default class Pokemon extends Button {
 
   enterButtonHoverState() {
     if (!this.getFirst('objType', 'detail')) {
-      if(this.life){
-        this.add(new PokemonDetail(this.scene, 20, -130,this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed));
-      }
-      else{
-        this.add(new PokemonDetail(this.scene, 20, -130,this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed));
+      if (this.life) {
+        this.add(new PokemonDetail(this.scene, 20, -130, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed));
+      } else {
+        this.add(new PokemonDetail(this.scene, 20, -130, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed));
       }
     }
   }
@@ -110,7 +109,7 @@ export default class Pokemon extends Button {
         y = this.targetY;
       }
       const coordinates = window.transformAttackCoordinate(x, y);
-      if(this.projectile.scene){
+      if (this.projectile.scene) {
         this.projectile.setPosition(coordinates[0], coordinates[1]);
         this.projectile.setVisible(true);
         this.projectile.setDepth(7);
@@ -143,29 +142,29 @@ export default class Pokemon extends Button {
     }
   }
 
-  setEffects(pokemon, scene, height){
+  setEffects(pokemon, scene, height) {
     let c = 0;
-    if(pokemon.effects.length > 0){
-      pokemon.effects.forEach(effect => {
-        const image = new GameObjects.Image(scene,c*20 - 20, height, 'effects', effect);
-        const border = new GameObjects.Image(scene,c*20 - 20, height, 'effects', 'border');
+    if (pokemon.effects.length > 0) {
+      pokemon.effects.forEach((effect) => {
+        const image = new GameObjects.Image(scene, c*20 - 20, height, 'effects', effect);
+        const border = new GameObjects.Image(scene, c*20 - 20, height, 'effects', 'border');
         image.objType = 'effect';
         border.objType = 'effect';
-        image.setScale(0.5,0.5);
-        border.setScale(0.5,0.5);
+        image.setScale(0.5, 0.5);
+        border.setScale(0.5, 0.5);
         scene.add.existing(image);
         scene.add.existing(border);
         this.add(image);
         this.add(border);
         c+= 1;
-    });
+      });
     }
   }
 
   setSprite(pokemon, scene) {
     const sprite = new GameObjects.Sprite(scene, 0, 0, `${pokemon.rarity}`, `${pokemon.index}/0/1/0`);
     sprite.setScale(2, 2);
-    const socle = new GameObjects.Image(scene,0,sprite.height,'socle');
+    const socle = new GameObjects.Image(scene, 0, sprite.height, 'socle');
     socle.objType = 'socle';
     sprite.objType = 'sprite';
     scene.add.existing(socle);
@@ -173,7 +172,7 @@ export default class Pokemon extends Button {
     this.add(socle);
     this.add(sprite);
     this.setLifeBar(pokemon, scene, sprite.height/2 + 5);
-    if(pokemon.effects){
+    if (pokemon.effects) {
       this.setEffects(pokemon, scene, sprite.height + 30);
     }
   }

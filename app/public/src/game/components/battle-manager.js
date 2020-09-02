@@ -58,41 +58,41 @@ export default class BattleManager {
             window.animationManager.animatePokemon(children[i]);
           } else if (change.field =='action') {
             children[i].action = pokemon.action;
-          } else if(change.field == 'atkSpeed'){
+          } else if (change.field == 'atkSpeed') {
             children[i].atkSpeed = pokemon.atkSpeed;
-            let detail = children[i].getFirst('objType','detail');
-            if(detail){
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
               detail.atkSpeed.setText(pokemon.atkSpeed);
             }
           } else if (change.field =='life') {
             children[i].life = pokemon.life;
             children[i].getFirst('objType', 'lifebar').setLife(children[i].life);
-            let detail = children[i].getFirst('objType','detail');
-            if(detail){
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
               detail.hp.setText(pokemon.life);
             }
-          } else if(change.field == 'atk'){
+          } else if (change.field == 'atk') {
             children[i].atk = pokemon.attackAnimation;
-            let detail = children[i].getFirst('objType','detail');
-            if(detail){
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
               detail.atk.setText(pokemon.atk);
             }
-          } else if(change.field == 'def'){
+          } else if (change.field == 'def') {
             children[i].def = pokemon.def;
-            let detail = children[i].getFirst('objType','detail');
-            if(detail){
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
               detail.def.setText(pokemon.def);
             }
-          } else if(change.field == 'speDef'){
+          } else if (change.field == 'speDef') {
             children[i].speDef = pokemon.speDef;
-            let detail = children[i].getFirst('objType','detail');
-            if(detail){
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
               detail.speDef.setText(pokemon.speDef);
             }
-          } else if(change.field == 'range'){
+          } else if (change.field == 'range') {
             children[i].range = pokemon.range;
-            let detail = children[i].getFirst('objType','detail');
-            if(detail){
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
               detail.atkSpeed.setText(pokemon.range);
             }
           } else if (change.field =='targetX') {
