@@ -7,6 +7,7 @@ const EFFECTS = require('../../models/enum').EFFECTS;
 const Player = require('../../models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const Simulation = require('../../core/simulation');
+const ItemFactory = require('../../models/item-factory');
 
 class OnShopCommand extends Command {
   execute({sessionId, pokemonId}) {
@@ -24,19 +25,6 @@ class OnShopCommand extends Command {
         }
       }
     }
-    /*
-    if (sessionId in this.state.players
-    && pokemonId in this.state.players[sessionId].shop
-    && this.room.getBoardSize(sessionId) < 9
-    && this.state.players[sessionId].money >= this.state.players[sessionId].shop[pokemonId].cost) {
-        this.state.players[sessionId].money -= this.state.players[sessionId].shop[pokemonId].cost;
-        this.state.players[sessionId].board[pokemonId] = Object.assign(new pokemon.Pokemon(), this.state.players[sessionId].shop[pokemonId]);
-        delete this.state.players[sessionId].shop[pokemonId];
-        this.state.players[sessionId].board[pokemonId].positionX = this.room.getFirstAvailablePositionInBoard(this.state.players[sessionId].board);
-        this.state.players[sessionId].board[pokemonId].positionY = 0;
-        return[new OnEvolutionCommand().setPayload(sessionId), new OnEvolutionCommand().setPayload(sessionId)];
-    }
-  */
   }
 }
 
@@ -288,6 +276,9 @@ class OnUpdatePhaseCommand extends Command {
     for (const id in this.state.players) {
       const player = this.state.players[id];
       player.simulation.stop();
+      if(player.opponentName == 'PVE' && player.lastBattleResult == 'Win'){
+        player.items.push(ItemFactory.createRandomItem());
+      }
       player.opponentName = '';
       if (!player.shopLocked) {
         this.state.shop.detachShop(player);

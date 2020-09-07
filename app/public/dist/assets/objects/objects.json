@@ -304,7 +304,7 @@
 					}
 				},
 				{
-					"filename": "ELECTRIC_STONE",
+					"filename": "THUNDER_STONE",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -472,7 +472,7 @@
 					}
 				},
 				{
-					"filename": "GRASS_STONE",
+					"filename": "LEAF_STONE",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {

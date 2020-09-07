@@ -4,9 +4,10 @@ const ExperienceManager = require('./experience-manager');
 const Simulation = require('../core/simulation');
 const Synergies = require('./synergies');
 const Effects = require('./effects');
-
+const Item = require('./item').Item;
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
+const ArraySchema = schema.ArraySchema;
 
 class Player extends Schema {
   constructor(id, name) {
@@ -15,6 +16,7 @@ class Player extends Schema {
     this.name = name;
     this.board = new MapSchema();
     this.shop = new MapSchema();
+    this.items = new ArraySchema();
     this.experienceManager = new ExperienceManager();
     this.synergies = new Synergies();
     this.effects = new Effects();
@@ -46,7 +48,8 @@ schema.defineTypes(Player, {
   interest: 'uint8',
   lastBattleResult: 'string',
   opponentName: 'string',
-  boardSize: 'uint8'
+  boardSize: 'uint8',
+  items:[Item]
 });
 
 module.exports = Player;

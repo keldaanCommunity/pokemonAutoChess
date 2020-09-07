@@ -7,6 +7,7 @@ const ATTACK_TYPE = require('./enum').ATTACK_TYPE;
 const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 const uniqid = require('uniqid');
+const Item = require('./item').Item;
 const ArraySchema = schema.ArraySchema;
 
 class Pokemon extends Schema {
@@ -34,6 +35,7 @@ class Pokemon extends Schema {
     this.attackSprite = attackSprite;
     this.atkSpeed = 1000;
     this.attackType = attackType;
+    this.items = new ArraySchema();
   }
 
   toString() {
@@ -1175,7 +1177,8 @@ schema.defineTypes(Pokemon, {
   attackType: 'string',
   atk: 'uint8',
   hp: 'uint8',
-  range: 'uint8'
+  range: 'uint8',
+  items: [Item]
 });
 
 module.exports = {
