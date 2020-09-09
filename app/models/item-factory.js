@@ -1,88 +1,88 @@
-const OBJECTS = require('./enum').OBJECTS;
+const ITEMS = require('./enum').ITEMS;
 const Item = require('./item');
 
 class ItemFactory{
 
     static createRandomItem(){
-        let keys = Object.keys(OBJECTS);
+        let keys = Object.keys(ITEMS);
         return ItemFactory.createItemFromName(keys[Math.floor(Math.random() * keys.length)]);
     }
 
     static createItemFromName(name){
         switch (name) {
-            case OBJECTS.APRICOT_BERRY:
+            case ITEMS.APRICOT_BERRY:
                 return new Item.ApricotBerry();
         
-            case OBJECTS.PETAYA_BERRY:
+            case ITEMS.PETAYA_BERRY:
                 return new Item.PetayaBerry();
             
-            case OBJECTS.SALAC_BERRY:
+            case ITEMS.SALAC_BERRY:
                 return new Item.SalacBerry();
             
-            case OBJECTS.LIECHI_BERRY:
+            case ITEMS.LIECHI_BERRY:
                 return new Item.LiechiBerry();
             
-            case OBJECTS.GANLON_BERRY:
+            case ITEMS.GANLON_BERRY:
                 return new Item.GanlonBerry();
 
-            case OBJECTS.ORAN_BERRY:
+            case ITEMS.ORAN_BERRY:
                 return new Item.OranBerry();
             
-            case OBJECTS.WHITE_GLASSES:
+            case ITEMS.WHITE_GLASSES:
                 return new Item.WhiteGlasses();
 
-            case OBJECTS.WATER_STONE:
+            case ITEMS.WATER_STONE:
                 return new Item.WaterStone();
             
-            case OBJECTS.THUNDER_STONE:
+            case ITEMS.THUNDER_STONE:
                 return new Item.ThunderStone();
             
-            case OBJECTS.SOFT_SAND:
+            case ITEMS.SOFT_SAND:
                 return new Item.SoftSand();
 
-            case OBJECTS.SHELL_BELL:
+            case ITEMS.SHELL_BELL:
                 return new Item.ShellBell();
             
-            case OBJECTS.ROCKY_HELMET:
+            case ITEMS.ROCKY_HELMET:
                 return new Item.RockyHelmet();
             
-            case OBJECTS.POISON_BARB:
+            case ITEMS.POISON_BARB:
                 return new Item.PoisonBarb();
 
-            case OBJECTS.NIGHT_STONE:
+            case ITEMS.NIGHT_STONE:
                 return new Item.NightStone();
     
-            case OBJECTS.MUSCLE_BAND:
+            case ITEMS.MUSCLE_BAND:
                 return new Item.MuscleBand();
 
-            case OBJECTS.MOON_STONE:
+            case ITEMS.MOON_STONE:
                 return new Item.MoonStone();
         
-            case OBJECTS.METRONOME:
+            case ITEMS.METRONOME:
                 return new Item.Metronome();
 
-            case OBJECTS.METAL_SKIN:
+            case ITEMS.METAL_SKIN:
                 return new Item.MetalSkin();
 
-            case OBJECTS.LIFE_ORB:
+            case ITEMS.LIFE_ORB:
                 return new Item.LifeOrb();
 
-            case OBJECTS.LEAF_STONE:
+            case ITEMS.LEAF_STONE:
                 return new Item.LeafStone();
 
-            case OBJECTS.FIRE_STONE:
+            case ITEMS.FIRE_STONE:
                 return new Item.FireStone();
             
-            case OBJECTS.DRAGON_FANG:
+            case ITEMS.DRAGON_FANG:
                 return new Item.DragonFang();
             
-            case OBJECTS.COIN_AMULET:
+            case ITEMS.COIN_AMULET:
                 return new Item.CoinAmulet();
 
-            case OBJECTS.BLACK_BELT:
+            case ITEMS.BLACK_BELT:
                 return new Item.BlackBelt();
         
-            case OBJECTS.BIG_ROOT:
+            case ITEMS.BIG_ROOT:
                 return new Item.BigRoot();
         }
     }

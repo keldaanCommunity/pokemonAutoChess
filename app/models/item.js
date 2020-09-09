@@ -1,7 +1,7 @@
 const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 const uniqid = require('uniqid');
-const OBJECTS = require('./enum').OBJECTS;
+const ITEMS = require('./enum').ITEMS;
 
 class Item extends Schema{
     constructor(name){
@@ -13,151 +13,151 @@ class Item extends Schema{
 
 class WhiteGlasses extends Item{
     constructor(){
-        super(OBJECTS.WHITE_GLASSES);
+        super(ITEMS.WHITE_GLASSES);
     }
 }
 
 class MuscleBand extends Item{
     constructor(){
-        super(OBJECTS.MUSCLE_BAND);
+        super(ITEMS.MUSCLE_BAND);
     }
 }
 
 class LifeOrb extends Item{
     constructor(){
-        super(OBJECTS.LIFE_ORB);
+        super(ITEMS.LIFE_ORB);
     }
 }
 
 class CoinAmulet extends Item{
     constructor(){
-        super(OBJECTS.COIN_AMULET);
+        super(ITEMS.COIN_AMULET);
     }
 }
 
 class RockyHelmet extends Item{
     constructor(){
-        super(OBJECTS.ROCKY_HELMET);
+        super(ITEMS.ROCKY_HELMET);
     }
 }
 
 class ShellBell extends Item{
     constructor(){
-        super(OBJECTS.SHELL_BELL);
+        super(ITEMS.SHELL_BELL);
     }
 }
 
 class BigRoot extends Item{
     constructor(){
-        super(OBJECTS.BIG_ROOT);
+        super(ITEMS.BIG_ROOT);
     }
 }
 
 class ApricotBerry extends Item{
     constructor(){
-        super(OBJECTS.APRICOT_BERRY);
+        super(ITEMS.APRICOT_BERRY);
     }
 }
 
 class LiechiBerry extends Item{
     constructor(){
-        super(OBJECTS.LIECHI_BERRY);
+        super(ITEMS.LIECHI_BERRY);
     }
 }
 
 class GanlonBerry extends Item{
     constructor(){
-        super(OBJECTS.GANLON_BERRY);
+        super(ITEMS.GANLON_BERRY);
     }
 }
 
 class PetayaBerry extends Item{
     constructor(){
-        super(OBJECTS.PETAYA_BERRY);
+        super(ITEMS.PETAYA_BERRY);
     }
 }
 
 class SalacBerry extends Item{
     constructor(){
-        super(OBJECTS.SALAC_BERRY);
+        super(ITEMS.SALAC_BERRY);
     }
 }
 
 class OranBerry extends Item{
     constructor(){
-        super(OBJECTS.ORAN_BERRY);
+        super(ITEMS.ORAN_BERRY);
     }
 }
 
 class SoftSand extends Item{
     constructor(){
-        super(OBJECTS.SOFT_SAND);
+        super(ITEMS.SOFT_SAND);
     }
 }
 
 class MoonStone extends Item{
     constructor(){
-        super(OBJECTS.MOON_STONE);
+        super(ITEMS.MOON_STONE);
     }
 }
 
 class NightStone extends Item{
     constructor(){
-        super(OBJECTS.NIGHT_STONE);
+        super(ITEMS.NIGHT_STONE);
     }
 }
 
 class PoisonBarb extends Item{
     constructor(){
-        super(OBJECTS.POISON_BARB);
+        super(ITEMS.POISON_BARB);
     }
 }
 
 class DragonFang extends Item{
     constructor(){
-        super(OBJECTS.DRAGON_FANG);
+        super(ITEMS.DRAGON_FANG);
     }
 }
 
 class ThunderStone extends Item{
     constructor(){
-        super(OBJECTS.THUNDER_STONE);
+        super(ITEMS.THUNDER_STONE);
     }
 }
 
 class MetalSkin extends Item{
     constructor(){
-        super(OBJECTS.METAL_SKIN);
+        super(ITEMS.METAL_SKIN);
     }
 }
 
 class Metronome extends Item{
     constructor(){
-        super(OBJECTS.METRONOME);
+        super(ITEMS.METRONOME);
     }
 }
 
 class WaterStone extends Item{
     constructor(){
-        super(OBJECTS.WATER_STONE);
+        super(ITEMS.WATER_STONE);
     }
 }
 
 class FireStone extends Item{
     constructor(){
-        super(OBJECTS.FIRE_STONE);
+        super(ITEMS.FIRE_STONE);
     }
 }
 
 class LeafStone extends Item{
     constructor(){
-        super(OBJECTS.LEAF_STONE);
+        super(ITEMS.LEAF_STONE);
     }
 }
 
 class BlackBelt extends Item{
     constructor(){
-        super(OBJECTS.BLACK_BELT);
+        super(ITEMS.BLACK_BELT);
     }
 }
 

@@ -6,6 +6,7 @@ import PokemonDetail from './pokemon-detail';
 export default class Pokemon extends Button {
   constructor(scene, x, y, pokemon, dragable) {
     super(scene, x, y, 75, 75);
+    this.objType = 'pokemon';
     this.index = pokemon.index;
     this.name = pokemon.name;
     this.id = pokemon.id;

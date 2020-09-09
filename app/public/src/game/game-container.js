@@ -79,6 +79,14 @@ class GameContainer {
       changes.forEach((change) => this.handleSynergiesChange(change, player));
     });
 
+    player.items.onAdd = ((item, index) =>{
+      this.handleItemsAdd(player, item, index);
+    });
+
+    player.items.onRemove = ((item, index) =>{
+      this.handleItemsRemove(index);
+    });
+
     player.simulation.onChange = ((changes) => {
       changes.forEach((change) =>{
         if (change.field == 'climate') {
@@ -166,8 +174,26 @@ class GameContainer {
     this.game.scene.getScene('gameScene').battleManager.removePokemon(playerId, pokemon);
   }
 
+  handleItemsAdd(player, item, index){
+    if(player.id == this.player.id){
+      this.game.scene.getScene('gameScene').itemsContainer.addItem(item, index);
+    }
+  }
+
+  handleItemsRemove(player, index){
+    if(player.id == this.player.id){
+      this.game.scene.getScene('gameScene').itemsContainer.removeItem(index);
+    }
+  }
+
   handlePokemonChange(playerId, change, pokemon) {
     this.game.scene.getScene('gameScene').battleManager.changePokemon(playerId, change, pokemon);
+  }
+
+  handleSynergiesChange(change, player) {
+    if (player.id == this.player.id) {
+      this.game.scene.getScene('gameScene').synergiesContainer.updateSynergy(change.field, change.value);
+    }
   }
 
   handleSynergiesChange(change, player) {

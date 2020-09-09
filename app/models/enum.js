@@ -5,7 +5,7 @@ const CLIMATE = Object.freeze({
   SANDSTORM: 'SANDSTORM'
 });
 
-const OBJECTS = Object.freeze({
+const ITEMS = Object.freeze({
   WHITE_GLASSES: 'WHITE_GLASSES'
   , MUSCLE_BAND: 'MUSCLE_BAND'
   , LIFE_ORB: 'LIFE_ORB'
@@ -31,6 +31,63 @@ const OBJECTS = Object.freeze({
   , FIRE_STONE: 'FIRE_STONE'
   , LEAF_STONE: 'LEAF_STONE'
   , BLACK_BELT: 'BLACK_BELT'
+});
+
+const ITEM_NAME = Object.freeze({
+  WHITE_GLASSES: 'White Glasses'
+  , MUSCLE_BAND: 'Muscle Band'
+  , LIFE_ORB: 'Life Orb'
+  , COIN_AMULET: 'Coin Amulet'
+  , ROCKY_HELMET: 'Rocky Helmet'
+  , SHELL_BELL: 'Shell Bell'
+  , BIG_ROOT: 'Big Root'
+  , APRICOT_BERRY: 'Apricot Berry'
+  , LIECHI_BERRY: 'Liechi Berry'
+  , GANLON_BERRY: 'Ganlon Berry'
+  , PETAYA_BERRY: 'Petaya Berry'
+  , SALAC_BERRY: 'Salac Berry'
+  , ORAN_BERRY: 'Oran Berry'
+  , SOFT_SAND: 'Soft Sand'
+  , MOON_STONE: 'Moon Stone'
+  , NIGHT_STONE: 'Night Stone'
+  , POISON_BARB: 'Poison Barb'
+  , DRAGON_FANG: 'Dragon Fang'
+  , THUNDER_STONE: 'Thunder Stone'
+  , METAL_SKIN: 'Metal Skin'
+  , METRONOME: 'Metronome'
+  , WATER_STONE: 'Water Stone'
+  , FIRE_STONE: 'Fire Stone'
+  , LEAF_STONE: 'Leaf Stone'
+  , BLACK_BELT: 'Black Belt'
+});
+
+
+const ITEM_DESCRIPTION = Object.freeze({
+  WHITE_GLASSES: '+10% special attack'
+  , MUSCLE_BAND: '+10% attack'
+  , LIFE_ORB: '+20% damage, cost 5% life for each attack'
+  , COIN_AMULET: 'Chance to drop between 1 and 5 gold at each round'
+  , ROCKY_HELMET: 'When user is attacked, the attacker take 12% max health damage'
+  , SHELL_BELL: '10% life steal on each attack'
+  , BIG_ROOT: '+ 5% health / second restored'
+  , APRICOT_BERRY: '+50% spe def when below 50% health'
+  , LIECHI_BERRY: '+50% attack when health below 50%'
+  , GANLON_BERRY: '+50% def when health below 50%'
+  , PETAYA_BERRY: '+50% attack special when health below 50%'
+  , SALAC_BERRY: '+50 % attack speed when health below 50%'
+  , ORAN_BERRY: 'Restore 25% health when below 25% health'
+  , SOFT_SAND: '+50% damage if pokemon has type ground'
+  , MOON_STONE: '+20% damage if type Fairy. Will evolve  Eevee into Sylveon.'
+  , NIGHT_STONE: '+20% damage if type Dark. Will evolve Eevee into Umbreon.'
+  , POISON_BARB: '+20% damage if type poison. Will evolve Eevee into Espeon.'
+  , DRAGON_FANG: '+20% damage if type dragon.'
+  , THUNDER_STONE: '+20% damage if type electric. Will evolve Eevee into Jolteon.'
+  , METAL_SKIN: '+20% damage if type metal.'
+  , METRONOME: '+5% damage each time the pokemon attack.'
+  , WATER_STONE: '+20% damage if type water. Will evolve Eeve into Vaporeon.'
+  , FIRE_STONE: '+20% damage if type fire. Will evolve Eevee into Flareon'
+  , LEAF_STONE: '+20% damage if type grass. Will evolve Eevee into Leafon '
+  , BLACK_BELT: '+20% damage if type fighting.'
 });
 
 const EFFECTS = Object.freeze({
@@ -163,4 +220,4 @@ const ATTACK_TYPE = Object.freeze({
   SPECIAL: 'SPECIAL'
 });
 
-module.exports = {TYPE, RARITY, COST, EXP_TABLE, STATE, STATE_TYPE, ORIENTATION, EFFECTS, CLIMATE, ATTACK_TYPE, OBJECTS};
+module.exports = {TYPE, RARITY, COST, EXP_TABLE, STATE, STATE_TYPE, ORIENTATION, EFFECTS, CLIMATE, ATTACK_TYPE, ITEMS, ITEM_NAME, ITEM_DESCRIPTION};

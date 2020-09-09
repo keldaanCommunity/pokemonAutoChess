@@ -9,6 +9,7 @@ import MoneyContainer from '../components/money-container';
 import SynergiesContainer from '../components/synergies-container';
 import WeatherManager from '../components/weather-manager';
 import EntryHazardsManager from '../components/Entry-hazards-manager';
+import ItemsContainer from '../components/items-container';
 
 export default class GameScene extends Scene {
   constructor() {
@@ -88,6 +89,7 @@ export default class GameScene extends Scene {
     this.load.image('socle', 'assets/ui/socle.png');
     this.load.image('PHYSICAL', 'assets/types/PHYSICAL.png');
     this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
+    this.load.multiatlas('items','assets/items/items.json','assets/items/')
     this.load.multiatlas('type-details', 'assets/types/type-details.json', 'assets/types/');
     this.load.multiatlas('lock', 'assets/lock/lock.json', 'assets/lock/');
     this.load.tilemapTiledJSON('map', 'assets/tiles/tilemap.json');
@@ -123,6 +125,7 @@ export default class GameScene extends Scene {
     this.playerContainer = new PlayerContainer(this, 1750, 105);
     this.boardContainer = new BoardContainer(this, 275, 775);
     this.synergiesContainer = new SynergiesContainer(this, 1325, 135);
+    this.itemsContainer = new ItemsContainer(this, 45, 555);
     this.moneyContainer = new MoneyContainer(this, 20, 60, window.state.players[window.sessionId]);
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
@@ -264,7 +267,8 @@ export default class GameScene extends Scene {
           detail: {
             'x': dropZone.name.substr(5, 1),
             'y': dropZone.name.substr(7, 1),
-            'pokemonId': gameObject.id
+            'id': gameObject.id,
+            'objType': gameObject.objType
           }
         }));
       }

@@ -33,35 +33,40 @@ class OnDragDropCommand extends Command {
     let success = false;
 
     if (client.sessionId in this.state.players) {
-      if (detail.pokemonId in this.state.players[client.sessionId].board) {
-        const pokemon = this.state.players[client.sessionId].board[detail.pokemonId];
-        const x = parseInt(detail.x);
-        const y = parseInt(detail.y);
-
-        if ( y == 0 && pokemon.positionY == 0) {
-          this.room.swap(this.state.players[client.sessionId].board, pokemon, x, y);
-          success = true;
-        } else if (this.state.phase == STATE.PICK) {
-          const teamSize = UtilsCommand.getTeamSize(this.state.players[client.sessionId].board);
-          if (teamSize < this.state.players[client.sessionId].experienceManager.level) {
+      if(detail.objType == 'pokemon'){
+        if (detail.pokemonId in this.state.players[client.sessionId].board) {
+          const pokemon = this.state.players[client.sessionId].board[detail.pokemonId];
+          const x = parseInt(detail.x);
+          const y = parseInt(detail.y);
+  
+          if ( y == 0 && pokemon.positionY == 0) {
             this.room.swap(this.state.players[client.sessionId].board, pokemon, x, y);
             success = true;
-          } else if (teamSize == this.state.players[client.sessionId].experienceManager.level) {
-            const empty = this.room.isPositionEmpty(this.state.players[client.sessionId].board, x, y);
-            if (!empty) {
+          } else if (this.state.phase == STATE.PICK) {
+            const teamSize = UtilsCommand.getTeamSize(this.state.players[client.sessionId].board);
+            if (teamSize < this.state.players[client.sessionId].experienceManager.level) {
               this.room.swap(this.state.players[client.sessionId].board, pokemon, x, y);
               success = true;
-            } else {
-              if ((pokemon.positionY != 0 && y != 0) || y == 0) {
+            } else if (teamSize == this.state.players[client.sessionId].experienceManager.level) {
+              const empty = this.room.isPositionEmpty(this.state.players[client.sessionId].board, x, y);
+              if (!empty) {
                 this.room.swap(this.state.players[client.sessionId].board, pokemon, x, y);
                 success = true;
+              } else {
+                if ((pokemon.positionY != 0 && y != 0) || y == 0) {
+                  this.room.swap(this.state.players[client.sessionId].board, pokemon, x, y);
+                  success = true;
+                }
               }
             }
           }
+          this.state.players[client.sessionId].synergies.update(this.state.players[client.sessionId].board);
+          this.state.players[client.sessionId].effects.update(this.state.players[client.sessionId].synergies);
+          this.state.players[client.sessionId].boardSize = UtilsCommand.getTeamSize(this.state.players[client.sessionId].board);
         }
-        this.state.players[client.sessionId].synergies.update(this.state.players[client.sessionId].board);
-        this.state.players[client.sessionId].effects.update(this.state.players[client.sessionId].synergies);
-        this.state.players[client.sessionId].boardSize = UtilsCommand.getTeamSize(this.state.players[client.sessionId].board);
+      }
+      if(detail.objType == 'item'){
+
       }
     }
 
@@ -301,9 +306,10 @@ class OnUpdatePhaseCommand extends Command {
           if (boardSize > 0) {
             const coordinate = this.room.getFirstAvailablePositionInTeam(player.board);
             const detail = {
-              'pokemonId': UtilsCommand.getFirstPokemonOnBoard(player.board).id,
+              'id': UtilsCommand.getFirstPokemonOnBoard(player.board).id,
               'x': coordinate[0],
-              'y': coordinate[1]
+              'y': coordinate[1],
+              'objType':'pokemon'
             };
             const client = {
               'sessionId': id

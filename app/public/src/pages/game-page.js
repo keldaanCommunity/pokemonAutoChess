@@ -11,6 +11,7 @@ class GamePage {
     window.transformAttackCoordinate = function(x, y) {
       return [323 + 102 * x, 698 - 102 * y];
     };
+
     window.getAttackScale = function(attackSprite) {
       switch (attackSprite) {
         case 'FLYING/range':
