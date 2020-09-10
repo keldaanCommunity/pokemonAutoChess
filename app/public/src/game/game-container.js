@@ -44,7 +44,7 @@ class GameContainer {
 
     this.room.state.players.onAdd = (player) => this.initializePlayer(player);
     this.room.state.players.onRemove = (player, key) => this.onPlayerRemove(player, key);
-    this.room.onMessage('DragDropFailed', (message) => this.handleDragDropFailed());
+    this.room.onMessage('DragDropFailed', (message) => this.handleDragDropFailed(message));
     this.room.onMessage('kick-out', (message) => this.handleKickOut());
     this.room.onLeave((client) => this.handleRoomLeft(client));
     this.room.onError((err) => console.log('room error', err));
@@ -84,7 +84,7 @@ class GameContainer {
     });
 
     player.items.onRemove = ((item, index) =>{
-      this.handleItemsRemove(index);
+      this.handleItemsRemove(player, index);
     });
 
     player.simulation.onChange = ((changes) => {
@@ -317,8 +317,13 @@ class GameContainer {
     }
   }
 
-  handleDragDropFailed() {
-    this.game.scene.getScene('gameScene').boardManager.update();
+  handleDragDropFailed(message) {
+    if(message.updateBoard){
+      this.game.scene.getScene('gameScene').boardManager.update();
+    }
+    if(message.updateItems){
+      this.game.scene.getScene('gameScene').itemsContainer.updateItem(message.itemIndex);
+    }
   }
 
   handleKickOut() {

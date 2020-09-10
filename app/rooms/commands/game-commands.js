@@ -31,11 +31,16 @@ class OnShopCommand extends Command {
 class OnDragDropCommand extends Command {
   execute({client, detail}) {
     let success = false;
+    let message = {
+      'updateBoard':true,
+      'updateItems':true,
+      'itemIndex':-1
+    }
 
     if (client.sessionId in this.state.players) {
       if(detail.objType == 'pokemon'){
-        if (detail.pokemonId in this.state.players[client.sessionId].board) {
-          const pokemon = this.state.players[client.sessionId].board[detail.pokemonId];
+        if (detail.id in this.state.players[client.sessionId].board) {
+          const pokemon = this.state.players[client.sessionId].board[detail.id];
           const x = parseInt(detail.x);
           const y = parseInt(detail.y);
   
@@ -52,10 +57,12 @@ class OnDragDropCommand extends Command {
               if (!empty) {
                 this.room.swap(this.state.players[client.sessionId].board, pokemon, x, y);
                 success = true;
+                message.updateBoard = false;
               } else {
                 if ((pokemon.positionY != 0 && y != 0) || y == 0) {
                   this.room.swap(this.state.players[client.sessionId].board, pokemon, x, y);
                   success = true;
+                  message.updateBoard = false;
                 }
               }
             }
@@ -66,13 +73,29 @@ class OnDragDropCommand extends Command {
         }
       }
       if(detail.objType == 'item'){
-
+        const itemIndex = this.state.players[client.sessionId].items.findIndex((item) => item.id === detail.id);
+        if ( itemIndex != -1 ) {
+          const object = this.state.players[client.sessionId].items[detail.id];
+          const x = parseInt(detail.x);
+          const y = parseInt(detail.y);
+          for (let id in this.state.players[client.sessionId].board){
+            let pokemon = this.state.players[client.sessionId].board[id];
+            if(pokemon.positionX == x && pokemon.positionY == y && pokemon.items.length <= 3){
+              pokemon.items.push(ItemFactory.createItemFromName(this.state.players[client.sessionId].items[itemIndex].name));
+              this.state.players[client.sessionId].items.splice(itemIndex, 1);
+              success = true;
+              message.updateItems = false;
+            }
+          }
+        }
+        if(!success){
+          message.itemIndex = itemIndex;
+        }
       }
     }
 
-
     if (!success) {
-      client.send('DragDropFailed', {});
+      client.send('DragDropFailed', message);
     }
   }
 }
@@ -82,6 +105,9 @@ class OnSellDropCommand extends Command {
     if (client.sessionId in this.state.players &&
     detail.pokemonId in this.state.players[client.sessionId].board) {
       this.state.players[client.sessionId].money += COST[this.state.players[client.sessionId].board[detail.pokemonId].rarity];
+      for (let i = 0; i < this.state.players[client.sessionId].board[detail.pokemonId].items.length; i++) {
+        this.state.players[client.sessionId].items.push(ItemFactory.createItemFromName(this.state.players[client.sessionId].board[detail.pokemonId].items[i].name));
+      }
       delete this.state.players[client.sessionId].board[detail.pokemonId];
       this.state.players[client.sessionId].synergies.update(this.state.players[client.sessionId].board);
       this.state.players[client.sessionId].effects.update(this.state.players[client.sessionId].synergies);
@@ -344,6 +370,7 @@ class OnUpdatePhaseCommand extends Command {
 class OnEvolutionCommand extends Command {
   execute(sessionId) {
     let evolve = false;
+    let itemsToTransfer = [];
     for (const id in this.state.players[sessionId].board) {
       const pokemon = this.state.players[sessionId].board[id];
       let count = 0;
@@ -359,6 +386,9 @@ class OnEvolutionCommand extends Command {
         if (count == 3 || (pokemon.types.includes(TYPE.BUG) && count == 2 && this.state.players[sessionId].effects.list.includes(EFFECTS.SWARM))) {
           for (const id in this.state.players[sessionId].board) {
             if ( this.state.players[sessionId].board[id].index == pokemon.index && count >= 0) {
+              for (let i = 0; i < this.state.players[sessionId].board[id].items.length; i++) {
+                itemsToTransfer.push(this.state.players[sessionId].board[id].items[i].name);
+              }
               delete this.state.players[sessionId].board[id];
               count -= 1;
             }
@@ -367,6 +397,18 @@ class OnEvolutionCommand extends Command {
           const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName);
           pokemonEvolved.positionX = x;
           pokemonEvolved.positionY = 0;
+          for (let i = 0; i < 3; i++) {
+            const itemTransfer = itemsToTransfer.pop();
+            if(itemTransfer){
+              pokemonEvolved.items.push(ItemFactory.createItemFromName(itemTransfer));
+            }
+            else{
+              break;
+            }
+          }
+          while(itemsToTransfer.length > 0){
+            this.state.players[sessionId].items.push(itemsToTransfer.pop());
+          }
           this.state.players[sessionId].board[pokemonEvolved.id] = pokemonEvolved;
           evolve = true;
         }

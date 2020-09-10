@@ -78,6 +78,10 @@ export default class BoardManager {
         if (pokemon.id == pokemonUI.id) {
           found = true;
 
+          if(pokemon.items && pokemon.items.length != 0 && pokemonUI.items.length != pokemon.items.length){
+            pokemonUI.setItems(pokemon, this.scene);
+          }
+
           if (pokemonUI.positionX != pokemon.positionX || pokemonUI.positionY != pokemon.positionY) {
             pokemonUI.positionX = pokemon.positionX;
             const coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);

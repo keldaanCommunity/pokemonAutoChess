@@ -6,13 +6,12 @@ export default class ItemContainer extends Button{
     constructor(scene, x, y, item, dragable) {
         super(scene, x, y, 15, 15);
         this.objType = 'item';
+        this.add(new GameObjects.Image(scene, 0, 0, 'hexagon').setScale(0.5, 0.5));
         this.sprite = new GameObjects.Image(scene,0,0,'items', item.name);
-        this.socle = new GameObjects.Image(scene,0,10,'socle').setScale(0.5,0.5);
         this.detail = new ItemDetail(scene, 15, 0, item.name);
         this.id = item.id;
         this.name = item.name;
         this.add(this.sprite);
-        this.add(this.socle);
         this.add(this.detail);
         if (dragable) {
             scene.input.setDraggable(this);

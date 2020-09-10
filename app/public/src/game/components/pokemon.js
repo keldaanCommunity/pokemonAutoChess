@@ -2,11 +2,13 @@ import {GameObjects} from 'phaser';
 import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
+import ItemContainer from './item-container';
 
 export default class Pokemon extends Button {
   constructor(scene, x, y, pokemon, dragable) {
     super(scene, x, y, 75, 75);
     this.objType = 'pokemon';
+    this.height = 0;
     this.index = pokemon.index;
     this.name = pokemon.name;
     this.id = pokemon.id;
@@ -23,6 +25,7 @@ export default class Pokemon extends Button {
     this.positionX = pokemon.positionX;
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
+    this.items = [];
     this.setRangeType();
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
@@ -164,17 +167,31 @@ export default class Pokemon extends Button {
 
   setSprite(pokemon, scene) {
     const sprite = new GameObjects.Sprite(scene, 0, 0, `${pokemon.rarity}`, `${pokemon.index}/0/1/0`);
+    this.height = sprite.height;
+    this.width = sprite.width;
     sprite.setScale(2, 2);
-    const socle = new GameObjects.Image(scene, 0, sprite.height, 'socle');
+    const socle = new GameObjects.Image(scene, 0, this.height, 'socle');
     socle.objType = 'socle';
     sprite.objType = 'sprite';
     scene.add.existing(socle);
     scene.add.existing(sprite);
     this.add(socle);
     this.add(sprite);
-    this.setLifeBar(pokemon, scene, sprite.height/2 + 5);
+    this.setLifeBar(pokemon, scene, this.height/2 + 5);
+    this.setItems(pokemon, scene);
     if (pokemon.effects) {
-      this.setEffects(pokemon, scene, sprite.height + 30);
+      this.setEffects(pokemon, scene, this.height + 30);
+    }
+  }
+
+  setItems(pokemon, scene){
+    if(pokemon.items){
+      for (let index = 0; index < pokemon.items.length; index++) {console.log(pokemon.items[index]);
+        const item = new ItemContainer(scene,this.width + 15, index * 25 - this.height - 15,pokemon.items[index], false);
+        scene.add.existing(item);
+        this.add(item);
+        this.items.push(item.id);
+      }
     }
   }
 
