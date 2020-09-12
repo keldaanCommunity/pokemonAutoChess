@@ -2,32 +2,25 @@ import {GameObjects} from 'phaser';
 import ItemContainer from './item-container';
 
 export default class ItemsContainer extends GameObjects.Container{
-    constructor(scene, x, y) {
+    constructor(scene, x, y, player) {
         super(scene,x,y);
-        this.items = new Array(9);
         scene.add.existing(this);
     }
 
-    addItem(item, index){
-        //console.log(`ìtem ${item.name} at ${index}`);
-        let itemContainer = new ItemContainer(this.scene, index * 30, 0, item, true);
-        this.items[index] = itemContainer;
-        this.add(itemContainer);
+    onAddItem(item, id){
+        this.add(new ItemContainer(this.scene, this.length * 30, 0, {'name':item.name, 'id':id}, true));
+    }
+    
+    onRemoveItem(id) {
+        this.remove(this.getFirst('id', id));
     }
 
-    removeItem(index){
-        if(this.items[index]){
-            this.items[index].destroy();
+    updateItem(id){
+        let itemToRemove = this.getFirst('id',id);
+        if(itemToRemove){
+            let name = itemToRemove.name;
+            this.remove(itemToRemove);
+            this.add(new ItemContainer(this.scene, this.length * 30, 0, {'name':name, 'id':id}, true));
         }
-    }
-
-    updateItem(index){
-        if(this.items[index]){
-            let itemContainer = new ItemContainer(this.scene, index * 30, 0, {'name':this.items[index].name, 'id':this.items[index].id}, true);
-            this.items[index].destroy();
-            this.items[index] = itemContainer;
-            this.add(itemContainer);
-        }
-        
-    }
+    }        
 }

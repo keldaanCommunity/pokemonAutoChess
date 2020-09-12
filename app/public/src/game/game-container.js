@@ -79,12 +79,20 @@ class GameContainer {
       changes.forEach((change) => this.handleSynergiesChange(change, player));
     });
 
-    player.items.onAdd = ((item, index) =>{
-      this.handleItemsAdd(player, item, index);
+    player.items.onAdd = ((item, key) =>{
+      console.log("add");
+      console.log(item.name);
+      console.log(item.id);
+      console.log(key);
+      this.handleItemsAdd(player, item, key);
     });
 
-    player.items.onRemove = ((item, index) =>{
-      this.handleItemsRemove(player, index);
+    player.items.onRemove = ((item, key) =>{
+      console.log("remove");
+      console.log(item.name);
+      console.log(item.id);
+      console.log(key);
+      this.handleItemsRemove(player, key);
     });
 
     player.simulation.onChange = ((changes) => {
@@ -174,15 +182,15 @@ class GameContainer {
     this.game.scene.getScene('gameScene').battleManager.removePokemon(playerId, pokemon);
   }
 
-  handleItemsAdd(player, item, index){
+  handleItemsAdd(player, item, itemId){
     if(player.id == this.player.id){
-      this.game.scene.getScene('gameScene').itemsContainer.addItem(item, index);
+      this.game.scene.getScene('gameScene').itemsContainer.onAddItem(item, itemId);
     }
   }
 
-  handleItemsRemove(player, index){
+  handleItemsRemove(player, itemId){
     if(player.id == this.player.id){
-      this.game.scene.getScene('gameScene').itemsContainer.removeItem(index);
+      this.game.scene.getScene('gameScene').itemsContainer.onRemoveItem(itemId);
     }
   }
 
@@ -322,7 +330,7 @@ class GameContainer {
       this.game.scene.getScene('gameScene').boardManager.update();
     }
     if(message.updateItems){
-      this.game.scene.getScene('gameScene').itemsContainer.updateItem(message.itemIndex);
+      this.game.scene.getScene('gameScene').itemsContainer.updateItem(message.itemId);
     }
   }
 

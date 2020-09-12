@@ -77,8 +77,8 @@ export default class BoardManager {
       this.group.getChildren().forEach((pokemonUI) => {
         if (pokemon.id == pokemonUI.id) {
           found = true;
-
-          if(pokemon.items && pokemon.items.length != 0 && pokemonUI.items.length != pokemon.items.length){
+          
+          if(pokemon.items && Object.keys(pokemon.items).length != 0){
             pokemonUI.setItems(pokemon, this.scene);
           }
 

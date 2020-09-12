@@ -9,6 +9,7 @@ export default class Pokemon extends Button {
     super(scene, x, y, 75, 75);
     this.objType = 'pokemon';
     this.height = 0;
+    this.width = 0;
     this.index = pokemon.index;
     this.name = pokemon.name;
     this.id = pokemon.id;
@@ -25,7 +26,6 @@ export default class Pokemon extends Button {
     this.positionX = pokemon.positionX;
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
-    this.items = [];
     this.setRangeType();
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
@@ -186,11 +186,16 @@ export default class Pokemon extends Button {
 
   setItems(pokemon, scene){
     if(pokemon.items){
-      for (let index = 0; index < pokemon.items.length; index++) {console.log(pokemon.items[index]);
-        const item = new ItemContainer(scene,this.width + 15, index * 25 - this.height - 15,pokemon.items[index], false);
+      if(Object.keys(pokemon.items).length != 0){
+        console.log(pokemon.items);
+      }
+
+      let i = 0;
+      for (const id in pokemon.items) {
+        const item = new ItemContainer(scene,this.width + 15, i * 25 - this.height - 15,pokemon.items[id], false);
         scene.add.existing(item);
         this.add(item);
-        this.items.push(item.id);
+        i += 1;
       }
     }
   }

@@ -4,9 +4,7 @@ const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 const PokemonEntity = require('./pokemon-entity');
 const PokemonFactory = require('../models/pokemon-factory');
-const CLIMATE = require('../models/enum').CLIMATE;
-const EFFECTS = require('../models/enum').EFFECTS;
-const TYPE = require('../models/enum').TYPE;
+const {CLIMATE, EFFECTS, TYPE, ITEMS, ATTACK_TYPE} = require('../models/enum');
 
 class Simulation extends Schema {
   constructor(blueTeam, redTeam, blueEffects, redEffects) {
@@ -98,6 +96,109 @@ class Simulation extends Schema {
     return [row, column];
   }
 
+  applyItemsEffects(pokemon,types){
+    for(let key in pokemon.items){
+      let item = pokemon.items[key];
+
+      switch (item.name) {
+
+        case ITEMS.WHITE_GLASSES:
+          if(pokemon.attackType == ATTACK_TYPE.SPECIAL){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1)
+          }
+          break;
+
+        case ITEMS.MUSCLE_BAND:
+          if(pokemon.attackType == ATTACK_TYPE.PHYSICAL){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1);
+          }
+          break;
+        
+        case ITEMS.LIFE_ORB:
+          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          break;
+
+        case ITEMS.MOON_STONE:
+          if(types.includes(TYPE.FAIRY)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+
+        case ITEMS.SILK_SCARF:
+          if(types.includes(TYPE.NORMAL)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+
+        case ITEMS.SOFT_SAND:
+          if(types.includes(TYPE.GROUND)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+
+        case ITEMS.NIGHT_STONE:
+          if(types.includes(TYPE.DARK)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+
+        case ITEMS.POISON_BARB:
+          if(types.includes(TYPE.POISON)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+
+        case ITEMS.DRAGON_FANG:
+          if(types.includes(TYPE.DRAGON)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+
+        case ITEMS.THUNDER_STONE:
+          if(types.includes(TYPE.ELECTRIC)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+
+        case ITEMS.NIGHT_STONE:
+          if(types.includes(TYPE.DARK)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+
+        case ITEMS.METAL_SKIN:
+          if(types.includes(TYPE.METAL)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+
+        case ITEMS.WATER_STONE:
+          if(types.includes(TYPE.WATER)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+
+        case ITEMS.FIRE_STONE:
+          if(types.includes(TYPE.FIRE)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+        
+        case ITEMS.LEAF_STONE:
+          if(types.includes(TYPE.GRASS)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+   
+        case ITEMS.BLACK_BELT:
+          if(types.includes(TYPE.FIGHTING)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          }
+          break;
+      }
+    }
+  }
+
   applyEffects(pokemon, types, allyEffects, ennemyEffects, allyTeam, ennemyTeam) {
     allyEffects.forEach((effect) => {
       switch (effect) {
@@ -110,7 +211,7 @@ class Simulation extends Schema {
         case EFFECTS.DROUGHT:
           if (this.climate == CLIMATE.SUN && types.includes(TYPE.FIRE)) {
             pokemon.effects.push(EFFECTS.DROUGHT);
-            pokemon.atk += Math.round(pokemon.baseAtk * 0.33);
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.33);
           }
           break;
 
@@ -123,21 +224,21 @@ class Simulation extends Schema {
         case EFFECTS.GROWTH:
           if (types.includes(TYPE.GRASS)) {
             pokemon.effects.push(EFFECTS.GROWTH);
-            pokemon.def += Math.round(pokemon.baseDef * 0.25);
+            pokemon.def += Math.ceil(pokemon.baseDef * 0.25);
           }
           break;
 
         case EFFECTS.DRIZZLE:
           if (this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)) {
             pokemon.effects.push(EFFECTS.DRIZZLE);
-            pokemon.atk += Math.round(pokemon.baseAtk * 0.33);
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.33);
           }
           break;
 
         case EFFECTS.RAIN_DANCE:
           if (this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)) {
             pokemon.effects.push(EFFECTS.RAIN_DANCE);
-            pokemon.atk += Math.round(pokemon.baseAtk * 0.33);
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.33);
           }
           break;
 
@@ -150,15 +251,15 @@ class Simulation extends Schema {
 
         case EFFECTS.STRENGTH:
           if (types.includes(TYPE.NORMAL)) {
-            pokemon.atk += Math.round(pokemon.baseAtk * 0.1);
-            pokemon.def += Math.round(pokemon.baseDef * 0.1);
-            pokemon.speDef += Math.round(pokemon.baseSpeDef * 0.1);
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1);
+            pokemon.def += Math.ceil(pokemon.baseDef * 0.1);
+            pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.1);
             pokemon.effects.push(EFFECTS.STRENGTH);
           }
           break;
 
         case EFFECTS.PURE_POWER:
-          pokemon.atk += Math.round(pokemon.baseAtk);
+          pokemon.atk += Math.ceil(pokemon.baseAtk);
           pokemon.effects.push(EFFECTS.PURE_POWER);
           break;
 
@@ -177,7 +278,7 @@ class Simulation extends Schema {
 
         case EFFECTS.REVENGE:
           if (types.includes(TYPE.FIGHTING) && Object.keys(ennemyTeam).length > Object.keys(allyTeam).length) {
-            pokemon.atk += Math.round(pokemon.baseAtk * 0.2);
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
             pokemon.effects.push(EFFECTS.REVENGE);
           }
           break;
@@ -185,7 +286,7 @@ class Simulation extends Schema {
         case EFFECTS.PUNISHMENT:
           if (types.includes(TYPE.FIGHTING)) {
             ennemyEffects.forEach((effect) =>{
-              pokemon.atk += Math.round(pokemon.baseAtk * 0.1);
+              pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1);
             });
             pokemon.effects.push(EFFECTS.PUNISHMENT);
           }
@@ -193,7 +294,7 @@ class Simulation extends Schema {
 
         case EFFECTS.IRON_DEFENSE:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.def += Math.round(pokemon.baseDef * 0.5);
+            pokemon.def += Math.ceil(pokemon.baseDef * 0.5);
             pokemon.effects.push(EFFECTS.IRON_DEFENSE);
           }
           break;
@@ -207,7 +308,7 @@ class Simulation extends Schema {
 
         case EFFECTS.WORK_UP:
           if (types.includes(TYPE.FIELD)) {
-            pokemon.atk += Math.round(pokemon.baseAtk * Object.keys(ennemyTeam).length * 0.04);
+            pokemon.atk += Math.ceil(pokemon.baseAtk * Object.keys(ennemyTeam).length * 0.04);
             pokemon.effects.push(EFFECTS.WORK_UP);
           }
           break;
@@ -237,8 +338,8 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.MEDITATE:
-          pokemon.atk += Math.round(pokemon.baseAtk * 0.15);
-          pokemon.def += Math.round(pokemon.baseDef * 0.15);
+          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.15);
+          pokemon.def += Math.ceil(pokemon.baseDef * 0.15);
           pokemon.effects.push(EFFECTS.MEDITATE);
           break;
 
@@ -247,8 +348,8 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.CALM_MIND:
-          pokemon.atk += Math.round(pokemon.baseAtk * 0.3);
-          pokemon.def += Math.round(pokemon.baseDef * 0.3);
+          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3);
+          pokemon.def += Math.ceil(pokemon.baseDef * 0.3);
           pokemon.effects.push(EFFECTS.CALM_MIND);
           break;
 
@@ -261,7 +362,7 @@ class Simulation extends Schema {
 
         case EFFECTS.HYDO_CANNON:
           if (types.includes(TYPE.WATER) && this.climate == CLIMATE.RAIN) {
-            pokemon.atk += Math.round(pokemon.baseAtk * 0.3);
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3);
             pokemon.effects.push(EFFECTS.HYDO_CANNON);
           }
           break;
@@ -274,7 +375,7 @@ class Simulation extends Schema {
 
         case EFFECTS.BATTLE_ARMOR:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.def += Math.round(pokemon.baseDef * 0.25);
+            pokemon.def += Math.ceil(pokemon.baseDef * 0.25);
             pokemon.effects.push(EFFECTS.BATTLE_ARMOR);
           }
           break;
@@ -297,7 +398,7 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.FLOWER_SHIELD:
-          pokemon.speDef += Math.round(pokemon.baseSpeDef * 0.3);
+          pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.3);
           pokemon.effects.push(EFFECTS.FLOWER_SHIELD);
           break;
 
@@ -314,34 +415,34 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.PSYWAVE:
-          pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.3);
+          pokemon.speDef -= Math.ceil(pokemon.baseSpeDef * 0.3);
           pokemon.effects.push(EFFECTS.PSYWAVE);
           break;
 
         case EFFECTS.MAGIC_ROOM:
-          pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.3);
+          pokemon.speDef -= Math.ceil(pokemon.baseSpeDef * 0.3);
           pokemon.effects.push(EFFECTS.MAGIC_ROOM);
           break;
 
         case EFFECTS.MEAN_LOOK:
-          pokemon.def -= Math.round(pokemon.baseDef * 0.2);
-          pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.2);
+          pokemon.def -= Math.ceil(pokemon.baseDef * 0.2);
+          pokemon.speDef -= Math.ceil(pokemon.baseSpeDef * 0.2);
           pokemon.effects.push(EFFECTS.MEAN_LOOK);
           break;
 
         case EFFECTS.SCARY_FACE:
-          pokemon.def -= Math.round(pokemon.baseDef * 0.2);
-          pokemon.speDef -= Math.round(pokemon.baseSpeDef * 0.2);
+          pokemon.def -= Math.ceil(pokemon.baseDef * 0.2);
+          pokemon.speDef -= Math.ceil(pokemon.baseSpeDef * 0.2);
           pokemon.effects.push(EFFECTS.SCARY_FACE);
           break;
 
         case EFFECTS.SPIKES:
-          pokemon.life -= Math.round(pokemon.hp * 0.1);
+          pokemon.life -= Math.ceil(pokemon.hp * 0.1);
           pokemon.effects.push(EFFECTS.SPIKES);
           break;
 
         case EFFECTS.STEALTH_ROCK:
-          pokemon.life -= Math.round(pokemon.hp * 0.1);
+          pokemon.life -= Math.ceil(pokemon.hp * 0.1);
           pokemon.effects.push(EFFECTS.STEALTH_ROCK);
           break;
 
@@ -362,12 +463,12 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.INTIMIDATE:
-          pokemon.atk -= Math.round(pokemon.baseAtk * 0.3);
+          pokemon.atk -= Math.ceil(pokemon.baseAtk * 0.3);
           pokemon.effects.push(EFFECTS.INTIMIDATE);
           break;
 
         case EFFECTS.DRACO_METEOR:
-          pokemon.life -= Math.round(pokemon.hp * 0.1);
+          pokemon.life -= Math.ceil(pokemon.hp * 0.1);
           pokemon.effects.push(EFFECTS.DRACO_METEOR);
 
         case EFFECTS.STICKY_WEB:
@@ -376,12 +477,12 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.RAZOR_WIND:
-          pokemon.life -= Math.round(pokemon.hp * 0.1);
+          pokemon.life -= Math.ceil(pokemon.hp * 0.1);
           pokemon.effects.push(EFFECTS.RAZOR_WIND);
           break;
 
         case EFFECTS.HURRICANE:
-          pokemon.life -= Math.round(pokemon.hp * 0.1);
+          pokemon.life -= Math.ceil(pokemon.hp * 0.1);
           pokemon.effects.push(EFFECTS.RAZOR_WIND);
           break;
 

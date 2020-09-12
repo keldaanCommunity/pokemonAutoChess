@@ -5,7 +5,7 @@ class ItemFactory{
 
     static createRandomItem(){
         let keys = Object.keys(ITEMS);
-        return ItemFactory.createItemFromName(keys[Math.floor(Math.random() * keys.length)]);
+        return ItemFactory.createItemFromName(keys[Math.floor(Math.random() * keys.length) - 1]);
     }
 
     static createItemFromName(name){

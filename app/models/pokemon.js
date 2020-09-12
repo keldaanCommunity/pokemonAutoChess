@@ -7,15 +7,17 @@ const ATTACK_TYPE = require('./enum').ATTACK_TYPE;
 const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 const uniqid = require('uniqid');
-const Item = require('./item').Item;
+const { Item } = require('./item');
 const ArraySchema = schema.ArraySchema;
-
+const MapSchema = schema.MapSchema;
+const ItemFactory = require('./item-factory');
 class Pokemon extends Schema {
   constructor(name, types, rarity, index, evolution, hp, atk, def, speDef, range, attackSprite, attackType) {
     super();
     this.id = uniqid();
     this.name = name;
     this.types = new ArraySchema();
+    this.items = new MapSchema();
     if (types) {
       types.forEach((type) => {
         this.types.push(type);
@@ -35,7 +37,10 @@ class Pokemon extends Schema {
     this.attackSprite = attackSprite;
     this.atkSpeed = 1000;
     this.attackType = attackType;
-    this.items = new ArraySchema();
+    let itemToAdd = ItemFactory.createRandomItem();
+    console.log(itemToAdd.id);
+    console.log(itemToAdd.name);
+    this.items[itemToAdd.id] = itemToAdd;
   }
 
   toString() {
@@ -1178,7 +1183,7 @@ schema.defineTypes(Pokemon, {
   atk: 'uint8',
   hp: 'uint8',
   range: 'uint8',
-  items: [Item]
+  items: {map: Item}
 });
 
 module.exports = {

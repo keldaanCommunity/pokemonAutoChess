@@ -7,7 +7,6 @@ const Effects = require('./effects');
 const Item = require('./item').Item;
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
-const ArraySchema = schema.ArraySchema;
 
 class Player extends Schema {
   constructor(id, name) {
@@ -16,7 +15,7 @@ class Player extends Schema {
     this.name = name;
     this.board = new MapSchema();
     this.shop = new MapSchema();
-    this.items = new ArraySchema();
+    this.items = new MapSchema();
     this.experienceManager = new ExperienceManager();
     this.synergies = new Synergies();
     this.effects = new Effects();
@@ -49,7 +48,7 @@ schema.defineTypes(Player, {
   lastBattleResult: 'string',
   opponentName: 'string',
   boardSize: 'uint8',
-  items:[Item]
+  items:{map: Item}
 });
 
 module.exports = Player;

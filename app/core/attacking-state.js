@@ -1,5 +1,4 @@
-const STATE_TYPE = require('../models/enum').STATE_TYPE;
-const EFFECTS = require('../models/enum').EFFECTS;
+const {STATE_TYPE, EFFECTS, ITEMS} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class AttackingState extends PokemonState {
@@ -38,20 +37,38 @@ class AttackingState extends PokemonState {
         }
         if (target.effects.includes(EFFECTS.BABY_DOLL_EYES)) {
           if (Math.random() > 0.8) {
-            pokemon.atk -= Math.round(pokemon.baseAtk * 0.2);
+            pokemon.atk -= Math.ceil(pokemon.baseAtk * 0.2);
           }
         }
       }
       let damage = pokemon.atk;
+
+
       if (pokemon.effects.includes(EFFECTS.PURSUIT) && target.life/target.hp < 0.25) {
         damage = target.hp;
       }
       const victim = target.handleDamage(damage, board, pokemon.attackType);
+
+      for (let key in target.items) {
+        if(target.items[key].name == ITEMS.ROCKY_HELMET){
+          pokemon.life -= Math.ceil(pokemon.hp * 0.12);
+        }
+      }
+
+      for (let key in pokemon.items){
+        if(pokemon.items[key].name == ITEMS.LIFE_ORB){
+          pokemon.life -= Math.ceil(pokemon.hp * 0.05);
+        }
+        else if(pokemon.items[key].name == ITEMS.SHELL_BELL){
+          pokemon.life+= Math.ceil(damage / 10);
+        }
+      }
+
       if (victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)) {
-        pokemon.life = Math.min(pokemon.hp, Math.round(pokemon.life + 0.4 * pokemon.hp));
+        pokemon.life = Math.min(pokemon.hp, Math.ceil(pokemon.life + 0.4 * pokemon.hp));
       }
       if (victim && pokemon.effects.includes(EFFECTS.POWER_TRIP)) {
-        pokemon.atk += Math.round(pokemon.baseAtk * 0.25);
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.25);
       }
     } else {
       console.log('warning, no target detected at given coordinates');

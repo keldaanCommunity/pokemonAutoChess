@@ -31,6 +31,7 @@ const ITEMS = Object.freeze({
   , FIRE_STONE: 'FIRE_STONE'
   , LEAF_STONE: 'LEAF_STONE'
   , BLACK_BELT: 'BLACK_BELT'
+  , SILK_SCARF: 'SILK_SCARF'
 });
 
 const ITEM_NAME = Object.freeze({
@@ -59,6 +60,7 @@ const ITEM_NAME = Object.freeze({
   , FIRE_STONE: 'Fire Stone'
   , LEAF_STONE: 'Leaf Stone'
   , BLACK_BELT: 'Black Belt'
+  , SILK_SCARF: 'Silk Scarf'
 });
 
 
@@ -88,6 +90,7 @@ const ITEM_DESCRIPTION = Object.freeze({
   , FIRE_STONE: '+20% damage if type fire. Will evolve Eevee into Flareon'
   , LEAF_STONE: '+20% damage if type grass. Will evolve Eevee into Leafon '
   , BLACK_BELT: '+20% damage if type fighting.'
+  , SILK_SCARF: '+20% damage if type normal.'
 });
 
 const EFFECTS = Object.freeze({

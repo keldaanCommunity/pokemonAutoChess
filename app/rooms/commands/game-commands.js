@@ -1,13 +1,11 @@
 const Command = require('@colyseus/command').Command;
 const {Pokemon} = require('../../models/pokemon');
-const STATE = require('../../models/enum').STATE;
-const COST = require('../../models/enum').COST;
-const TYPE = require('../../models/enum').TYPE;
-const EFFECTS = require('../../models/enum').EFFECTS;
+const {STATE, COST, TYPE, EFFECTS, ITEMS} = require('../../models/enum');
 const Player = require('../../models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const Simulation = require('../../core/simulation');
 const ItemFactory = require('../../models/item-factory');
+const { Item } = require('../../models/item');
 
 class OnShopCommand extends Command {
   execute({sessionId, pokemonId}) {
@@ -34,7 +32,7 @@ class OnDragDropCommand extends Command {
     let message = {
       'updateBoard':true,
       'updateItems':true,
-      'itemIndex':-1
+      'itemId':''
     }
 
     if (client.sessionId in this.state.players) {
@@ -73,23 +71,24 @@ class OnDragDropCommand extends Command {
         }
       }
       if(detail.objType == 'item'){
-        const itemIndex = this.state.players[client.sessionId].items.findIndex((item) => item.id === detail.id);
-        if ( itemIndex != -1 ) {
-          const object = this.state.players[client.sessionId].items[detail.id];
+        let item = this.state.players[client.sessionId].items[detail.id];
+        if ( item ) {
           const x = parseInt(detail.x);
           const y = parseInt(detail.y);
           for (let id in this.state.players[client.sessionId].board){
             let pokemon = this.state.players[client.sessionId].board[id];
-            if(pokemon.positionX == x && pokemon.positionY == y && pokemon.items.length <= 3){
-              pokemon.items.push(ItemFactory.createItemFromName(this.state.players[client.sessionId].items[itemIndex].name));
-              this.state.players[client.sessionId].items.splice(itemIndex, 1);
+            if(pokemon.positionX == x && pokemon.positionY == y && Object.keys(pokemon.items).length <= 3){
+              this.state.players[client.sessionId].board[id].items[detail.id] = Object.assign(new Item(), this.state.players[client.sessionId].items[detail.id]);
+              delete this.state.players[client.sessionId].items[detail.id];
+              console.log(this.state.players[client.sessionId].board[id].items);
               success = true;
               message.updateItems = false;
+              break;
             }
           }
-        }
-        if(!success){
-          message.itemIndex = itemIndex;
+          if(!success){
+            message.itemId = item.id;
+          }
         }
       }
     }
@@ -105,8 +104,9 @@ class OnSellDropCommand extends Command {
     if (client.sessionId in this.state.players &&
     detail.pokemonId in this.state.players[client.sessionId].board) {
       this.state.players[client.sessionId].money += COST[this.state.players[client.sessionId].board[detail.pokemonId].rarity];
-      for (let i = 0; i < this.state.players[client.sessionId].board[detail.pokemonId].items.length; i++) {
-        this.state.players[client.sessionId].items.push(ItemFactory.createItemFromName(this.state.players[client.sessionId].board[detail.pokemonId].items[i].name));
+      for (let id in this.state.players[client.sessionId].board[detail.pokemonId].items) {
+        let item = this.state.players[client.sessionId].board[detail.pokemonId].items[id];
+        this.state.players[client.sessionId].items[item.id] = Object.assign(new Item(), item);
       }
       delete this.state.players[client.sessionId].board[detail.pokemonId];
       this.state.players[client.sessionId].synergies.update(this.state.players[client.sessionId].board);
@@ -289,6 +289,16 @@ class OnUpdatePhaseCommand extends Command {
       }
       player.money += 5;
       player.experienceManager.addExperience(2);
+      for (let i = 0; i < player.board.length; i++) {
+        if(player.board[i].positionX != 0){
+          for (let id in player.board[i].items){
+            let item = player.board[i].items[id];
+            if(item.name == ITEMS.COIN_AMULET){
+              player.money += Math.round(Math.random() * 5);
+            }
+          }
+        }
+      }
     }
   }
 
@@ -308,7 +318,9 @@ class OnUpdatePhaseCommand extends Command {
       const player = this.state.players[id];
       player.simulation.stop();
       if(player.opponentName == 'PVE' && player.lastBattleResult == 'Win'){
-        player.items.push(ItemFactory.createRandomItem());
+        let item = ItemFactory.createRandomItem();
+        console.log(item.name);
+        player.items[item.id] = item;
       }
       player.opponentName = '';
       if (!player.shopLocked) {
@@ -370,7 +382,6 @@ class OnUpdatePhaseCommand extends Command {
 class OnEvolutionCommand extends Command {
   execute(sessionId) {
     let evolve = false;
-    let itemsToTransfer = [];
     for (const id in this.state.players[sessionId].board) {
       const pokemon = this.state.players[sessionId].board[id];
       let count = 0;
@@ -386,8 +397,8 @@ class OnEvolutionCommand extends Command {
         if (count == 3 || (pokemon.types.includes(TYPE.BUG) && count == 2 && this.state.players[sessionId].effects.list.includes(EFFECTS.SWARM))) {
           for (const id in this.state.players[sessionId].board) {
             if ( this.state.players[sessionId].board[id].index == pokemon.index && count >= 0) {
-              for (let i = 0; i < this.state.players[sessionId].board[id].items.length; i++) {
-                itemsToTransfer.push(this.state.players[sessionId].board[id].items[i].name);
+              for (let itemId in this.state.players[sessionId].board[id].items) {
+                this.state.players[sessionId].items[this.state.players[sessionId].board[id].items[itemId].id] = Object.assign(new Item(), this.state.players[sessionId].board[id].items[itemId]);
               }
               delete this.state.players[sessionId].board[id];
               count -= 1;
@@ -397,18 +408,6 @@ class OnEvolutionCommand extends Command {
           const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName);
           pokemonEvolved.positionX = x;
           pokemonEvolved.positionY = 0;
-          for (let i = 0; i < 3; i++) {
-            const itemTransfer = itemsToTransfer.pop();
-            if(itemTransfer){
-              pokemonEvolved.items.push(ItemFactory.createItemFromName(itemTransfer));
-            }
-            else{
-              break;
-            }
-          }
-          while(itemsToTransfer.length > 0){
-            this.state.players[sessionId].items.push(itemsToTransfer.pop());
-          }
           this.state.players[sessionId].board[pokemonEvolved.id] = pokemonEvolved;
           evolve = true;
         }

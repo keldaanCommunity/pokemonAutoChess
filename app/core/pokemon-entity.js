@@ -7,6 +7,7 @@ const uniqid = require('uniqid');
 const ItemFactory = require('../models/item-factory');
 const { Item } = require('../models/item');
 const ArraySchema = schema.ArraySchema;
+const MapSchema = schema.MapSchema;
 
 class PokemonEntity extends schema.Schema {
   constructor(name, index, positionX, positionY, hp, atk, def, speDef, attackType, range, team, attackSprite, rarity, types, items) {
@@ -41,10 +42,12 @@ class PokemonEntity extends schema.Schema {
     types.forEach((type) => {
       this.types.push(type);
     });
-    this.items = new ArraySchema();
-    items.forEach((item) => {
-      this.items.push(ItemFactory.createItemFromName(item.name));
-    });
+    this.items = new MapSchema();
+    for(let key in items){
+      let item = items[key];
+      let itemToAdd = ItemFactory.createItemFromName(item.name);
+      this.items[itemToAdd.id] = itemToAdd;
+    }
   }
 
   update(dt, board, climate) {
@@ -92,7 +95,7 @@ schema.defineTypes(PokemonEntity, {
   rarity: 'string',
   name: 'string',
   effects: ['string'],
-  items:[Item]
+  items:{map: Item}
 });
 
 module.exports = PokemonEntity;
