@@ -4,7 +4,7 @@
 			"image": "items.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 196,
+				"w": 198,
 				"h": 64
 			},
 			"scale": 1,
@@ -451,24 +451,45 @@
 					}
 				},
 				{
-					"filename": "LIFE_ORB",
+					"filename": "APRICOT_BERRY",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 16,
-						"h": 16
+						"w": 17,
+						"h": 18
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 16,
-						"h": 16
+						"w": 17,
+						"h": 18
 					},
 					"frame": {
 						"x": 178,
 						"y": 1,
-						"w": 16,
-						"h": 16
+						"w": 17,
+						"h": 18
+					}
+				},
+				{
+					"filename": "METRONOME",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 20
+					},
+					"frame": {
+						"x": 182,
+						"y": 21,
+						"w": 15,
+						"h": 20
 					}
 				},
 				{
@@ -493,24 +514,24 @@
 					}
 				},
 				{
-					"filename": "METRONOME",
+					"filename": "LIFE_ORB",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 15,
-						"h": 20
+						"w": 16,
+						"h": 16
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 15,
-						"h": 20
+						"w": 16,
+						"h": 16
 					},
 					"frame": {
 						"x": 180,
-						"y": 42,
-						"w": 15,
-						"h": 20
+						"y": 43,
+						"w": 16,
+						"h": 16
 					}
 				}
 			]
@@ -519,6 +540,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:d131788c780cee01d94a4afc17d0b861:351980843fc4bfa7172c782baa0f640f:110e074689c9edd2c54833ce2e4d9270$"
+		"smartupdate": "$TexturePacker:SmartUpdate:9f65699fa39d4750c39468fd6e5ce162:b7d6b645d82dc284c815ca539ad46538:110e074689c9edd2c54833ce2e4d9270$"
 	}
 }
