@@ -39,6 +39,34 @@ export default class BattleManager {
     }
   }
 
+  changePokemonItems(playerId, change, pokemon){
+    if (this.player.id == playerId) {
+      const children = this.group.getChildren();
+      for (let i = 0; i < children.length; i++) {
+        if (children[i].id == pokemon.id) {
+          if(change.field == 'item0' && change.value == ''){
+            let item = children[i].getFirst('place', 'item0');
+            if(item){
+              children[i].remove(item);
+            }
+          }
+          if(change.field == 'item1' && change.value == ''){
+            let item = children[i].getFirst('place', 'item1');
+            if(item){
+              children[i].remove(item);
+            }
+          }
+          if(change.field == 'item2' && change.value == ''){
+            let item = children[i].getFirst('place', 'item2');
+            if(item){
+              children[i].remove(item);
+            }
+          }
+        }
+      }
+    }
+  }
+
   changePokemon(playerId, change, pokemon) {
     if (this.player.id == playerId) {
       const children = this.group.getChildren();

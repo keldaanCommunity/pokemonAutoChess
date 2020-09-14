@@ -185,18 +185,21 @@ export default class Pokemon extends Button {
   }
 
   setItems(pokemon, scene){
-    if(pokemon.items){
-      if(Object.keys(pokemon.items).length != 0){
-        console.log(pokemon.items);
-      }
-
-      let i = 0;
-      for (const id in pokemon.items) {
-        const item = new ItemContainer(scene,this.width + 15, i * 25 - this.height - 15,pokemon.items[id], false);
-        scene.add.existing(item);
-        this.add(item);
-        i += 1;
-      }
+    
+    if(pokemon.items.item0 && pokemon.items.item0 != ''){
+      const item = new ItemContainer(scene,this.width + 15, this.height - 50,pokemon.items.item0, false, 'item0');
+      scene.add.existing(item);
+      this.add(item)
+    }
+    if(pokemon.items.item1 && pokemon.items.item1 != ''){
+      const item = new ItemContainer(scene,this.width + 15, this.height - 20,pokemon.items.item1, false, 'item1');
+      scene.add.existing(item);
+      this.add(item)
+    }
+    if(pokemon.items.item2 && pokemon.items.item2 != ''){
+      const item = new ItemContainer(scene,this.width + 15, this.height + 10,pokemon.items.item2, false, 'item2');
+      scene.add.existing(item);
+      this.add(item)
     }
   }
 

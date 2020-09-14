@@ -49,19 +49,16 @@ class AttackingState extends PokemonState {
       }
       const victim = target.handleDamage(damage, board, pokemon.attackType);
 
-      for (let key in target.items) {
-        if(target.items[key].name == ITEMS.ROCKY_HELMET){
-          pokemon.life -= Math.ceil(pokemon.hp * 0.12);
-        }
+      if(target.items.count(ITEMS.ROCKY_HELMET) != 0){
+        pokemon.life -= Math.ceil(pokemon.hp * 0.12) * target.items.count(ITEMS.ROCKY_HELMET);
       }
 
-      for (let key in pokemon.items){
-        if(pokemon.items[key].name == ITEMS.LIFE_ORB){
-          pokemon.life -= Math.ceil(pokemon.hp * 0.05);
-        }
-        else if(pokemon.items[key].name == ITEMS.SHELL_BELL){
-          pokemon.life+= Math.ceil(damage / 10);
-        }
+      if(pokemon.items.count(ITEMS.LIFE_ORB) != 0){
+        pokemon.life -= Math.ceil(pokemon.hp * 0.05) * pokemon.items.count(ITEMS.LIFE_ORB);
+      }
+
+      if(pokemon.items.count(ITEMS.SHELL_BELL) != 0){
+        pokemon.life+= Math.ceil(damage / 10) * pokemon.items.count(ITEMS.SHELL_BELL);
       }
 
       if (victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)) {

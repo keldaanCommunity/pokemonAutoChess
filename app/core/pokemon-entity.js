@@ -4,10 +4,8 @@ const ORIENTATION = require('../models/enum').ORIENTATION;
 const MovingState = require('./moving-state');
 const AttackingState = require('./attacking-state');
 const uniqid = require('uniqid');
-const ItemFactory = require('../models/item-factory');
-const { Item } = require('../models/item');
+const Items = require('../models/items');
 const ArraySchema = schema.ArraySchema;
-const MapSchema = schema.MapSchema;
 
 class PokemonEntity extends schema.Schema {
   constructor(name, index, positionX, positionY, hp, atk, def, speDef, attackType, range, team, attackSprite, rarity, types, items) {
@@ -42,12 +40,7 @@ class PokemonEntity extends schema.Schema {
     types.forEach((type) => {
       this.types.push(type);
     });
-    this.items = new MapSchema();
-    for(let key in items){
-      let item = items[key];
-      let itemToAdd = ItemFactory.createItemFromName(item.name);
-      this.items[itemToAdd.id] = itemToAdd;
-    }
+    this.items = new Items(items);
   }
 
   update(dt, board, climate) {
@@ -95,7 +88,7 @@ schema.defineTypes(PokemonEntity, {
   rarity: 'string',
   name: 'string',
   effects: ['string'],
-  items:{map: Item}
+  items:Items
 });
 
 module.exports = PokemonEntity;

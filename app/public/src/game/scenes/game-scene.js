@@ -125,7 +125,7 @@ export default class GameScene extends Scene {
     this.playerContainer = new PlayerContainer(this, 1750, 105);
     this.boardContainer = new BoardContainer(this, 275, 775);
     this.synergiesContainer = new SynergiesContainer(this, 1325, 135);
-    this.itemsContainer = new ItemsContainer(this, 45, 555, window.state.players[window.sessionId]);
+    this.itemsContainer = new ItemsContainer(this, 66, 530);
     this.moneyContainer = new MoneyContainer(this, 20, 60, window.state.players[window.sessionId]);
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
@@ -257,20 +257,31 @@ export default class GameScene extends Scene {
     this.input.on('drop', (pointer, gameObject, dropZone) => {
       this.removeRectangles();
       if (dropZone.name == 'sell-zone') {
+        if(gameObject.objType == 'item'){
+          this.itemsContainer.updateItem(gameObject.place);
+        }
         window.dispatchEvent(new CustomEvent('sell-drop', {
           detail: {
             'pokemonId': gameObject.id
           }
         }));
       } else {
+        let place = '';
+        if(gameObject.place){
+          place = gameObject.place;
+        }
         window.dispatchEvent(new CustomEvent('drag-drop', {
           detail: {
             'x': dropZone.name.substr(5, 1),
             'y': dropZone.name.substr(7, 1),
             'id': gameObject.id,
-            'objType': gameObject.objType
+            'objType': gameObject.objType,
+            'place': place
           }
         }));
+        if(gameObject.objType == 'item'){
+          this.itemsContainer.updateItem(gameObject.place);
+        }
       }
     }, this);
 

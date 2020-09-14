@@ -79,20 +79,8 @@ class GameContainer {
       changes.forEach((change) => this.handleSynergiesChange(change, player));
     });
 
-    player.items.onAdd = ((item, key) =>{
-      console.log("add");
-      console.log(item.name);
-      console.log(item.id);
-      console.log(key);
-      this.handleItemsAdd(player, item, key);
-    });
-
-    player.items.onRemove = ((item, key) =>{
-      console.log("remove");
-      console.log(item.name);
-      console.log(item.id);
-      console.log(key);
-      this.handleItemsRemove(player, key);
+    player.stuff.onChange = ((changes) =>{
+      changes.forEach((change) => this.handleStuffChange(change, player));
     });
 
     player.simulation.onChange = ((changes) => {
@@ -134,12 +122,22 @@ class GameContainer {
           this.handlePokemonChange(player.id, change, pokemon);
         });
       };
+      pokemon.items.onChange = (changes) => {
+        changes.forEach((change) => {
+          this.handlePokemonItemsChange(player.id, change, pokemon);
+        });
+      };
     };
     player.simulation.redTeam.onAdd = (pokemon, key) => {
       this.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = (changes) => {
         changes.forEach((change) => {
           this.handlePokemonChange(player.id, change, pokemon);
+        });
+      };
+      pokemon.items.onChange = (changes) => {
+        changes.forEach((change) => {
+          this.handlePokemonItemsChange(player.id, change, pokemon);
         });
       };
     };
@@ -182,15 +180,9 @@ class GameContainer {
     this.game.scene.getScene('gameScene').battleManager.removePokemon(playerId, pokemon);
   }
 
-  handleItemsAdd(player, item, itemId){
+  handleStuffChange(change, player){
     if(player.id == this.player.id){
-      this.game.scene.getScene('gameScene').itemsContainer.onAddItem(item, itemId);
-    }
-  }
-
-  handleItemsRemove(player, itemId){
-    if(player.id == this.player.id){
-      this.game.scene.getScene('gameScene').itemsContainer.onRemoveItem(itemId);
+      this.game.scene.getScene('gameScene').itemsContainer.changeStuff(change.field, change.value);
     }
   }
 
@@ -198,6 +190,9 @@ class GameContainer {
     this.game.scene.getScene('gameScene').battleManager.changePokemon(playerId, change, pokemon);
   }
 
+  handlePokemonItemsChange(playerId, change, pokemon) {
+    this.game.scene.getScene('gameScene').battleManager.changePokemonItems(playerId, change, pokemon);
+  }
   handleSynergiesChange(change, player) {
     if (player.id == this.player.id) {
       this.game.scene.getScene('gameScene').synergiesContainer.updateSynergy(change.field, change.value);
@@ -326,11 +321,13 @@ class GameContainer {
   }
 
   handleDragDropFailed(message) {
+
     if(message.updateBoard){
       this.game.scene.getScene('gameScene').boardManager.update();
     }
+    
     if(message.updateItems){
-      this.game.scene.getScene('gameScene').itemsContainer.updateItem(message.itemId);
+      this.game.scene.getScene('gameScene').itemsContainer.updateItem(message.field);
     }
   }
 

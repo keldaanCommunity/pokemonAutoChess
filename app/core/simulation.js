@@ -33,6 +33,7 @@ class Simulation extends Schema {
       if (pokemon.positionY != 0) {
         const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity, pokemon.types, pokemon.items);
         this.applyEffects(pokemonEntity, pokemon.types, blueEffects, redEffects, blueTeam, redTeam);
+        this.applyItemsEffects(pokemonEntity, pokemon.types);
         this.blueTeam[pokemonEntity.id] = pokemonEntity;
         // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
         this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
@@ -44,6 +45,7 @@ class Simulation extends Schema {
       if (pokemon.positionY != 0) {
         const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, 5 - (pokemon.positionY - 1), pokemon.hp, pokemon.atk, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 1, pokemon.attackSprite, pokemon.rarity, pokemon.types, pokemon.items);
         this.applyEffects(pokemonEntity, pokemon.types, redEffects, blueEffects, redTeam, blueTeam);
+        this.applyItemsEffects(pokemonEntity, pokemon.types);
         this.redTeam[pokemonEntity.id] = pokemonEntity;
         // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
         this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
@@ -97,104 +99,92 @@ class Simulation extends Schema {
   }
 
   applyItemsEffects(pokemon,types){
-    for(let key in pokemon.items){
-      let item = pokemon.items[key];
 
-      switch (item.name) {
+    if(pokemon.items.count(ITEMS.WHITE_GLASSES) != 0){
+      if(pokemon.attackType == ATTACK_TYPE.SPECIAL){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1) * pokemon.items.count(ITEMS.WHITE_GLASSES);
+      }
+    }
 
-        case ITEMS.WHITE_GLASSES:
-          if(pokemon.attackType == ATTACK_TYPE.SPECIAL){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1)
-          }
-          break;
+    if(pokemon.items.count(ITEMS.MUSCLE_BAND) != 0){
+      if(pokemon.attackType == ATTACK_TYPE.PHYSICAL){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1) * pokemon.items.count(ITEMS.MUSCLE_BAND);
+      }
+    }
 
-        case ITEMS.MUSCLE_BAND:
-          if(pokemon.attackType == ATTACK_TYPE.PHYSICAL){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1);
-          }
-          break;
-        
-        case ITEMS.LIFE_ORB:
-          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          break;
+    if(pokemon.items.count(ITEMS.LIFE_ORB) != 0){
+      pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2) * pokemon.items.count(ITEMS.LIFE_ORB);
+    }
 
-        case ITEMS.MOON_STONE:
-          if(types.includes(TYPE.FAIRY)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
+    if(pokemon.items.count(ITEMS.MOON_STONE) != 0){
+      if(types.includes(TYPE.FAIRY)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.MOON_STONE);
+      }
+    }
 
-        case ITEMS.SILK_SCARF:
-          if(types.includes(TYPE.NORMAL)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
+    if(pokemon.items.count(ITEMS.SILK_SCARF) != 0){
+      if(types.includes(TYPE.NORMAL)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.SILK_SCARF);
+      }
+    }
 
-        case ITEMS.SOFT_SAND:
-          if(types.includes(TYPE.GROUND)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
+    if(pokemon.items.count(ITEMS.SOFT_SAND) != 0){
+      if(types.includes(TYPE.GROUND)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.SOFT_SAND);
+      }
+    }
 
-        case ITEMS.NIGHT_STONE:
-          if(types.includes(TYPE.DARK)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
+    if(pokemon.items.count(ITEMS.NIGHT_STONE) != 0){
+      if(types.includes(TYPE.DARK)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.NIGHT_STONE);
+      }
+    }
+    
+    if(pokemon.items.count(ITEMS.POISON_BARB) != 0){
+      if(types.includes(TYPE.POISON)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.POISON_BARB);
+      }
+    }
 
-        case ITEMS.POISON_BARB:
-          if(types.includes(TYPE.POISON)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
+    if(pokemon.items.count(ITEMS.DRAGON_FANG) != 0){
+      if(types.includes(TYPE.DRAGON)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.DRAGON_FANG);
+      }
+    }
 
-        case ITEMS.DRAGON_FANG:
-          if(types.includes(TYPE.DRAGON)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
+    if(pokemon.items.count(ITEMS.THUNDER_STONE) != 0){
+      if(types.includes(TYPE.ELECTRIC)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.THUNDER_STONE);
+      }
+    }
 
-        case ITEMS.THUNDER_STONE:
-          if(types.includes(TYPE.ELECTRIC)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
+    if(pokemon.items.count(ITEMS.METAL_SKIN) != 0){
+      if(types.includes(TYPE.METAL)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.METAL_SKIN);
+      }
+    }
 
-        case ITEMS.NIGHT_STONE:
-          if(types.includes(TYPE.DARK)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
+    if(pokemon.items.count(ITEMS.WATER_STONE) != 0){
+      if(types.includes(TYPE.WATER)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.WATER_STONE);
+      }
+    }
 
-        case ITEMS.METAL_SKIN:
-          if(types.includes(TYPE.METAL)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
+    if(pokemon.items.count(ITEMS.FIRE_STONE) != 0){
+      if(types.includes(TYPE.FIRE)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.FIRE_STONE);
+      }
+    }
 
-        case ITEMS.WATER_STONE:
-          if(types.includes(TYPE.WATER)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
+    if(pokemon.items.count(ITEMS.LEAF_STONE) != 0){
+      if(types.includes(TYPE.GRASS)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.LEAF_STONE);
+      }
+    }
 
-        case ITEMS.FIRE_STONE:
-          if(types.includes(TYPE.FIRE)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
-        
-        case ITEMS.LEAF_STONE:
-          if(types.includes(TYPE.GRASS)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
-   
-        case ITEMS.BLACK_BELT:
-          if(types.includes(TYPE.FIGHTING)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          }
-          break;
+    if(pokemon.items.count(ITEMS.BLACK_BELT) != 0){
+      if(types.includes(TYPE.FIGHTING)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.BLACK_BELT);
       }
     }
   }

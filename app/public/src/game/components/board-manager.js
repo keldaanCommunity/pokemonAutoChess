@@ -78,7 +78,7 @@ export default class BoardManager {
         if (pokemon.id == pokemonUI.id) {
           found = true;
           
-          if(pokemon.items && Object.keys(pokemon.items).length != 0){
+          if(pokemon.items){
             pokemonUI.setItems(pokemon, this.scene);
           }
 
