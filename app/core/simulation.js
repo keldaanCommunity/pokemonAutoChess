@@ -189,6 +189,12 @@ class Simulation extends Schema {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.BLACK_BELT);
       }
     }
+
+    if(pokemon.items.count(ITEMS.DAWN_STONE) != 0){
+      if(types.includes(TYPE.PSYCHIC)){
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.DAWN_STONE);
+      }
+    }
   }
 
   applyEffects(pokemon, types, allyEffects, ennemyEffects, allyTeam, ennemyTeam) {

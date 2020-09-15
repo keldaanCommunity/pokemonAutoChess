@@ -24,7 +24,7 @@ const ITEMS = Object.freeze({
   , NIGHT_STONE: 'NIGHT_STONE'
   , POISON_BARB: 'POISON_BARB'
   , DRAGON_FANG: 'DRAGON_FANG'
-  , THUNDER_STONE: 'THUNER_STONE'
+  , THUNDER_STONE: 'THUNDER_STONE'
   , METAL_SKIN: 'METAL_SKIN'
   , METRONOME: 'METRONOME'
   , WATER_STONE: 'WATER_STONE'
@@ -32,6 +32,7 @@ const ITEMS = Object.freeze({
   , LEAF_STONE: 'LEAF_STONE'
   , BLACK_BELT: 'BLACK_BELT'
   , SILK_SCARF: 'SILK_SCARF'
+  , DAWN_STONE:'DAWN_STONE'
 });
 
 const ITEM_NAME = Object.freeze({
@@ -61,6 +62,7 @@ const ITEM_NAME = Object.freeze({
   , LEAF_STONE: 'Leaf Stone'
   , BLACK_BELT: 'Black Belt'
   , SILK_SCARF: 'Silk Scarf'
+  , DAWN_STONE: 'Dawn Stone'
 });
 
 
@@ -81,7 +83,7 @@ const ITEM_DESCRIPTION = Object.freeze({
   , SOFT_SAND: '+50% damage if pokemon has type ground'
   , MOON_STONE: '+50% damage if type Fairy. Will evolve  Eevee into Sylveon.'
   , NIGHT_STONE: '+50% damage if type Dark. Will evolve Eevee into Umbreon.'
-  , POISON_BARB: '+50% damage if type poison. Will evolve Eevee into Espeon.'
+  , POISON_BARB: '+50% damage if type poison.'
   , DRAGON_FANG: '+50% damage if type dragon.'
   , THUNDER_STONE: '+50% damage if type electric. Will evolve Eevee into Jolteon.'
   , METAL_SKIN: '+50% damage if type metal.'
@@ -91,6 +93,7 @@ const ITEM_DESCRIPTION = Object.freeze({
   , LEAF_STONE: '+50% damage if type grass. Will evolve Eevee into Leafon '
   , BLACK_BELT: '+50% damage if type fighting.'
   , SILK_SCARF: '+50% damage if type normal.'
+  , DAWN_STONE: '+50% damage if type psychic. Will evolve Eevee into Espeon.'
 });
 
 const EFFECTS = Object.freeze({

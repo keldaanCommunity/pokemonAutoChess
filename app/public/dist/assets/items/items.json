@@ -430,16 +430,16 @@
 					}
 				},
 				{
-					"filename": "FIRE_STONE",
+					"filename": "DAWN_STONE",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 20,
-						"h": 21
+						"w": 24,
+						"h": 24
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
+						"x": 2,
+						"y": 2,
 						"w": 20,
 						"h": 21
 					},
@@ -451,7 +451,7 @@
 					}
 				},
 				{
-					"filename": "PETAYA_BERRY",
+					"filename": "FIRE_STONE",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -472,6 +472,27 @@
 					}
 				},
 				{
+					"filename": "PETAYA_BERRY",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 20,
+						"h": 21
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 20,
+						"h": 21
+					},
+					"frame": {
+						"x": 1,
+						"y": 86,
+						"w": 20,
+						"h": 21
+					}
+				},
+				{
 					"filename": "SALAC_BERRY",
 					"rotated": false,
 					"trimmed": false,
@@ -486,8 +507,8 @@
 						"h": 21
 					},
 					"frame": {
-						"x": 1,
-						"y": 86,
+						"x": 23,
+						"y": 87,
 						"w": 22,
 						"h": 21
 					}
@@ -507,7 +528,7 @@
 						"h": 22
 					},
 					"frame": {
-						"x": 25,
+						"x": 47,
 						"y": 87,
 						"w": 22,
 						"h": 22
@@ -528,7 +549,7 @@
 						"h": 22
 					},
 					"frame": {
-						"x": 49,
+						"x": 71,
 						"y": 87,
 						"w": 22,
 						"h": 22
@@ -549,7 +570,7 @@
 						"h": 22
 					},
 					"frame": {
-						"x": 73,
+						"x": 95,
 						"y": 87,
 						"w": 22,
 						"h": 22
@@ -561,6 +582,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:e92744db1f9692a1048c108828f1e1fe:fc6fb34e757f761739798ded3ee806da:110e074689c9edd2c54833ce2e4d9270$"
+		"smartupdate": "$TexturePacker:SmartUpdate:98e92f127496446f4183eb37b0139f82:33bc532da41e6b23e12ea0a1b217f6bf:110e074689c9edd2c54833ce2e4d9270$"
 	}
 }

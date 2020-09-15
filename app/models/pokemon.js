@@ -15,7 +15,7 @@ class Pokemon extends Schema {
     this.name = name;
     this.types = new ArraySchema();
     this.items = new Items();
-    //this.items.add(ItemFactory.createRandomItem());
+    //this.items.add(ItemFactory.createRandomStone());
     if (types) {
       types.forEach((type) => {
         this.types.push(type);
@@ -1158,7 +1158,53 @@ class Rayquaza extends Pokemon {
   }
 }
 
+class Eevee extends Pokemon{
+  constructor(){
+    super('eevee',[TYPE.NORMAL, TYPE.FIELD],RARITY.UNCOMMON,133,'',30,2,1,1,1,'NORMAL/melee', ATTACK_TYPE.PHYSICAL);
+  }
+}
 
+class Vaporeon extends Pokemon{
+  constructor(){
+    super('vaporeon',[TYPE.WATER, TYPE.AQUATIC, TYPE.FIELD],RARITY.UNCOMMON,134,'',50,3,1,1,2,'WATER/range', ATTACK_TYPE.SPECIAL);
+  }
+}
+
+class Jolteon extends Pokemon{
+  constructor(){
+    super('jolteon',[TYPE.ELECTRIC, TYPE.FIELD],RARITY.UNCOMMON,135,'',50,3,1,1,3,'ELECTRIC/range', ATTACK_TYPE.SPECIAL);
+  }
+}
+
+class Flareon extends Pokemon{
+  constructor(){
+    super('flareon',[TYPE.FIRE, TYPE.FIELD],RARITY.UNCOMMON,136,'',50,3,1,1,1,'FIRE/melee', ATTACK_TYPE.PHYSICAL);
+  }
+}
+
+class Espeon extends Pokemon{
+  constructor(){
+    super('espeon',[TYPE.PSYCHIC, TYPE.FIELD],RARITY.UNCOMMON,196,'',50,3,1,1,3,'PSYCHIC/range', ATTACK_TYPE.SPECIAL);
+  }
+}
+
+class Umbreon extends Pokemon{
+  constructor(){
+    super('umbreon',[TYPE.DARK, TYPE.FIELD],RARITY.UNCOMMON,197,'',50,3,1,1,1,'DRAGON/melee', ATTACK_TYPE.PHYSICAL);
+  }
+}
+
+class Leafon extends Pokemon{
+  constructor(){
+    super('leafon',[TYPE.GRASS, TYPE.FLORA, TYPE.FIELD],RARITY.UNCOMMON,470,'',50,3,1,1,1,'GRASS/melee', ATTACK_TYPE.PHYSICAL);
+  }
+}
+
+class Sylveon extends Pokemon{
+  constructor(){
+    super('sylveon',[TYPE.FAIRY, TYPE.FIELD],RARITY.UNCOMMON,700,'',50,3,1,1,3,'FAIRY/range', ATTACK_TYPE.SPECIAL);
+  }
+}
 schema.defineTypes(Pokemon, {
   id: 'string',
   name: 'string',
@@ -1367,5 +1413,13 @@ module.exports = {
   Kyogre,
   Groudon,
   Rayquaza,
-  Regigigas
+  Regigigas,
+  Eevee,
+  Vaporeon,
+  Jolteon,
+  Flareon,
+  Espeon,
+  Umbreon,
+  Leafon,
+  Sylveon
 };

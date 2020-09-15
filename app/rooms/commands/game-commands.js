@@ -78,12 +78,139 @@ class OnDragDropCommand extends Command {
           for (let id in this.state.players[client.sessionId].board){
             let pokemon = this.state.players[client.sessionId].board[id];
             if(pokemon.positionX == x && pokemon.positionY == y && pokemon.items.length < 3){
-              //console.log(pokemon.items.length, item);
-              pokemon.items.add(item);
-              this.state.players[client.sessionId].stuff.remove(item);
-              success = true;
-              message.updateItems = false;
-              break;
+              let evolve = false;
+              if(pokemon.name == 'eevee' && item == ITEMS.WATER_STONE){
+                evolve = true;
+                const x = pokemon.positionX;
+                const y = pokemon.positionY;
+                const eevolution = PokemonFactory.createPokemonFromName('vaporeon');
+                eevolution.positionX = x;
+                eevolution.positionY = y;
+                eevolution.items.item0 = pokemon.items.item0;
+                eevolution.items.item1 = pokemon.items.item1;
+                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items.add(item);
+                delete this.state.players[client.sessionId].board[id];
+                this.state.players[client.sessionId].board[eevolution.id] = eevolution;
+                this.state.players[client.sessionId].stuff.remove(item);
+                success = true;
+                message.updateItems = false;
+              }
+              else if(pokemon.name == 'eevee' && item == ITEMS.FIRE_STONE){
+                evolve = true;
+                const x = pokemon.positionX;
+                const y = pokemon.positionY;
+                const eevolution = PokemonFactory.createPokemonFromName('flareon');
+                eevolution.positionX = x;
+                eevolution.positionY = y;
+                eevolution.items.item0 = pokemon.items.item0;
+                eevolution.items.item1 = pokemon.items.item1;
+                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items.add(item);
+                delete this.state.players[client.sessionId].board[id];
+                this.state.players[client.sessionId].board[eevolution.id] = eevolution;
+                this.state.players[client.sessionId].stuff.remove(item);
+                success = true;
+                message.updateItems = false;
+              }
+              else if(pokemon.name == 'eevee' && item == ITEMS.THUNDER_STONE){
+                evolve = true;
+                const x = pokemon.positionX;
+                const y = pokemon.positionY;
+                const eevolution = PokemonFactory.createPokemonFromName('jolteon');
+                eevolution.positionX = x;
+                eevolution.positionY = y;
+                eevolution.items.item0 = pokemon.items.item0;
+                eevolution.items.item1 = pokemon.items.item1;
+                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items.add(item);
+                delete this.state.players[client.sessionId].board[id];
+                this.state.players[client.sessionId].board[eevolution.id] = eevolution;
+                this.state.players[client.sessionId].stuff.remove(item);
+                success = true;
+                message.updateItems = false;
+              }
+              else if(pokemon.name == 'eevee' && item == ITEMS.NIGHT_STONE){
+                evolve = true;
+                const x = pokemon.positionX;
+                const y = pokemon.positionY;
+                const eevolution = PokemonFactory.createPokemonFromName('umbreon');
+                eevolution.positionX = x;
+                eevolution.positionY = y;
+                eevolution.items.item0 = pokemon.items.item0;
+                eevolution.items.item1 = pokemon.items.item1;
+                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items.add(item);
+                delete this.state.players[client.sessionId].board[id];
+                this.state.players[client.sessionId].board[eevolution.id] = eevolution;
+                this.state.players[client.sessionId].stuff.remove(item);
+                success = true;
+                message.updateItems = false;
+              }
+              else if(pokemon.name == 'eevee' && item == ITEMS.MOON_STONE){
+                evolve = true;
+                const x = pokemon.positionX;
+                const y = pokemon.positionY;
+                const eevolution = PokemonFactory.createPokemonFromName('sylveon');
+                eevolution.positionX = x;
+                eevolution.positionY = y;
+                eevolution.items.item0 = pokemon.items.item0;
+                eevolution.items.item1 = pokemon.items.item1;
+                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items.add(item);
+                delete this.state.players[client.sessionId].board[id];
+                this.state.players[client.sessionId].board[eevolution.id] = eevolution;
+                this.state.players[client.sessionId].stuff.remove(item);
+                success = true;
+                message.updateItems = false;
+              }
+              else if (pokemon.name == 'eevee' && item == ITEMS.LEAF_STONE){
+                evolve = true;
+                const x = pokemon.positionX;
+                const y = pokemon.positionY;
+                const eevolution = PokemonFactory.createPokemonFromName('leafon');
+                eevolution.positionX = x;
+                eevolution.positionY = y;
+                eevolution.items.item0 = pokemon.items.item0;
+                eevolution.items.item1 = pokemon.items.item1;
+                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items.add(item);
+                delete this.state.players[client.sessionId].board[id];
+                this.state.players[client.sessionId].board[eevolution.id] = eevolution;
+                this.state.players[client.sessionId].stuff.remove(item);
+                success = true;
+                message.updateItems = false;
+              }
+              else if(pokemon.name == 'eevee' && item == ITEMS.DAWN_STONE){
+                evolve = true;
+                const x = pokemon.positionX;
+                const y = pokemon.positionY;
+                const eevolution = PokemonFactory.createPokemonFromName('espeon');
+                eevolution.positionX = x;
+                eevolution.positionY = y;
+                eevolution.items.item0 = pokemon.items.item0;
+                eevolution.items.item1 = pokemon.items.item1;
+                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items.add(item);
+                delete this.state.players[client.sessionId].board[id];
+                this.state.players[client.sessionId].board[eevolution.id] = eevolution;
+                this.state.players[client.sessionId].stuff.remove(item);
+                success = true;
+                message.updateItems = false;
+              }
+              else{
+                pokemon.items.add(item);
+                this.state.players[client.sessionId].stuff.remove(item);
+                success = true;
+                message.updateItems = false;
+                break;
+              }
+              if (evolve) {
+                this.state.players[client.sessionId].synergies.update(this.state.players[client.sessionId].board);
+                this.state.players[client.sessionId].effects.update(this.state.players[client.sessionId].synergies);
+                this.state.players[client.sessionId].boardSize = UtilsCommand.getTeamSize(this.state.players[client.sessionId].board);
+              }
+
             }
           }
         }
