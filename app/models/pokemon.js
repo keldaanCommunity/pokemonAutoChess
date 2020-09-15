@@ -5,6 +5,7 @@ const Schema = schema.Schema;
 const uniqid = require('uniqid');
 const ArraySchema = schema.ArraySchema;
 const {TYPE, RARITY, COST, ATTACK_TYPE} = require('./enum');
+const ItemFactory = require('./item-factory');
 const Items = require('./items');
 
 class Pokemon extends Schema {
@@ -14,6 +15,7 @@ class Pokemon extends Schema {
     this.name = name;
     this.types = new ArraySchema();
     this.items = new Items();
+    //this.items.add(ItemFactory.createRandomItem());
     if (types) {
       types.forEach((type) => {
         this.types.push(type);
@@ -330,7 +332,7 @@ class Poliwhirl extends Pokemon {
 
 class Politoed extends Pokemon {
   constructor() {
-    super('politoed', [TYPE.WATER], RARITY.RARE, 186, '', 40, 5, 1, 1, 3, 'WATER/range', ATTACK_TYPE.SPECIAL);
+    super('politoed', [TYPE.WATER, TYPE.AQUATIC], RARITY.RARE, 186, '', 40, 5, 1, 1, 3, 'WATER/range', ATTACK_TYPE.SPECIAL);
   }
 }
 

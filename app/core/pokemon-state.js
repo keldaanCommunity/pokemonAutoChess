@@ -40,7 +40,7 @@ class PokemonState {
         }
       }
       if (pokemon.life <= pokemon.hp / 2 && pokemon.effects.includes(EFFECTS.BLAZE)) {
-        pokemon.atk = pokemon.atk * 1.1;
+        pokemon.atk = Math.ceil(pokemon.atk * 1.1);
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {

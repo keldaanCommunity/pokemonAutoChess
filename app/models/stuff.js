@@ -49,7 +49,11 @@ class Stuff extends Schema{
     }
 
     remove(itemToRemove){
-        if(this.item1 == itemToRemove){
+        if(this.item0 == itemToRemove){
+            this.item0 = '';
+            this.length --;
+        }
+        else if(this.item1 == itemToRemove){
             this.item1 = '';
             this.length --;
         }
@@ -57,14 +61,33 @@ class Stuff extends Schema{
             this.item2 = '';
             this.length --;
         }
-        else if(this.item0 == itemToRemove){
-            this.item0 = '';
+        else if(this.item3 == itemToRemove){
+            this.item3 = '';
+            this.length --;
+        }
+        else if(this.item4 == itemToRemove){
+            this.item4 = '';
+            this.length --;
+        }
+        else if(this.item5 == itemToRemove){
+            this.item5 = '';
+            this.length --;
+        }
+        else if(this.item6 == itemToRemove){
+            this.item6 = '';
+            this.length --;
+        }
+        else if(this.item7 == itemToRemove){
+            this.item7 = '';
+            this.length --;
+        }
+        else if(this.item8 == itemToRemove){
+            this.item8 = '';
             this.length --;
         }
     }
 
     add(itemToAdd){
-        let field = '';
         if(this.item0 == ''){
             this.item0 = itemToAdd;
             this.length ++;

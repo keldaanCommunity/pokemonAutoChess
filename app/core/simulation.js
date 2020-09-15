@@ -24,6 +24,8 @@ class Simulation extends Schema {
     if (redEffects) {
       this.redEffects = redEffects;
     }
+    console.log('blueEffects', blueEffects);
+    console.log('redEffects', redEffects);
     this.climate = this.getClimate();
     this.getEntryHazards();
     this.finished = false;
@@ -235,7 +237,7 @@ class Simulation extends Schema {
         case EFFECTS.STAMINA:
           if (types.includes(TYPE.NORMAL)) {
             pokemon.effects.push(EFFECTS.STAMINA);
-            pokemon.life += 20;
+            pokemon.life += Math.ceil(pokemon.hp * 0.3);
           }
           break;
 
@@ -312,6 +314,12 @@ class Simulation extends Schema {
         case EFFECTS.ANGER_POINT:
           if (types.includes(TYPE.FIELD)) {
             pokemon.effects.push(EFFECTS.ANGER_POINT);
+          }
+          break;
+          
+        case EFFECTS.PURSUIT:
+          if (types.includes(TYPE.MONSTER)) {
+            pokemon.effects.push(EFFECTS.PURSUIT);
           }
           break;
 
@@ -405,24 +413,22 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.PSYWAVE:
-          pokemon.speDef -= Math.ceil(pokemon.baseSpeDef * 0.3);
+          pokemon.speDef = Math.max(0, Math.ceil(pokemon.baseSpeDef * 0.7));
           pokemon.effects.push(EFFECTS.PSYWAVE);
           break;
 
         case EFFECTS.MAGIC_ROOM:
-          pokemon.speDef -= Math.ceil(pokemon.baseSpeDef * 0.3);
+          pokemon.speDef = Math.max(0, Math.ceil(pokemon.baseSpeDef * 0.7));
           pokemon.effects.push(EFFECTS.MAGIC_ROOM);
           break;
 
         case EFFECTS.MEAN_LOOK:
-          pokemon.def -= Math.ceil(pokemon.baseDef * 0.2);
-          pokemon.speDef -= Math.ceil(pokemon.baseSpeDef * 0.2);
+          pokemon.def = Math.max(0, Math.ceil(pokemon.baseDef * 0.8));
           pokemon.effects.push(EFFECTS.MEAN_LOOK);
           break;
 
         case EFFECTS.SCARY_FACE:
-          pokemon.def -= Math.ceil(pokemon.baseDef * 0.2);
-          pokemon.speDef -= Math.ceil(pokemon.baseSpeDef * 0.2);
+          pokemon.def = Math.max(0, Math.ceil(pokemon.baseDef * 0.8));
           pokemon.effects.push(EFFECTS.SCARY_FACE);
           break;
 
@@ -434,12 +440,6 @@ class Simulation extends Schema {
         case EFFECTS.STEALTH_ROCK:
           pokemon.life -= Math.ceil(pokemon.hp * 0.1);
           pokemon.effects.push(EFFECTS.STEALTH_ROCK);
-          break;
-
-        case EFFECTS.PURSUIT:
-          if (types.includes(TYPE.MONSTER)) {
-            pokemon.effects.push(EFFECTS.PURSUIT);
-          }
           break;
 
         case EFFECTS.POISON_GAS:
@@ -462,7 +462,7 @@ class Simulation extends Schema {
           pokemon.effects.push(EFFECTS.DRACO_METEOR);
 
         case EFFECTS.STICKY_WEB:
-          pokemon.atkSpeed = pokemon.atkSpeed *0.9;
+          pokemon.atkSpeed = pokemon.atkSpeed * 1.3;
           pokemon.effects.push(EFFECTS.STICKY_WEB);
           break;
 

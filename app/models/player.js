@@ -19,7 +19,7 @@ class Player extends Schema {
     this.experienceManager = new ExperienceManager();
     this.synergies = new Synergies();
     this.effects = new Effects();
-    this.money = 5;
+    this.money = 255;
     this.life = 20;
     this.simulation = new Simulation({}, {}, [], []);
     this.shopLocked = false;

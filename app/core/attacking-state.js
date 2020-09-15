@@ -33,18 +33,18 @@ class AttackingState extends PokemonState {
       // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
       if (target.effects.includes(EFFECTS.ATTRACT)) {
         if (Math.random() > 0.75) {
-          pokemon.cooldown = 3000;
+          pokemon.atkSpeed = Math.min(2000, Math.ceil(pokemon.atkSpeed * 1.1));
         }
         if (target.effects.includes(EFFECTS.BABY_DOLL_EYES)) {
-          if (Math.random() > 0.8) {
-            pokemon.atk -= Math.ceil(pokemon.baseAtk * 0.2);
+          if (Math.random() > 0.75) {
+            pokemon.atk = Math.max(Math.ceil(pokemon.baseAtk / 2), pokemon.atk - Math.ceil(pokemon.baseAtk * 0.1));
           }
         }
       }
       let damage = pokemon.atk;
 
 
-      if (pokemon.effects.includes(EFFECTS.PURSUIT) && target.life/target.hp < 0.25) {
+      if (pokemon.effects.includes(EFFECTS.PURSUIT) && target.life/target.hp < 0.3) {
         damage = target.hp;
       }
       const victim = target.handleDamage(damage, board, pokemon.attackType);
@@ -65,7 +65,7 @@ class AttackingState extends PokemonState {
         pokemon.life = Math.min(pokemon.hp, Math.ceil(pokemon.life + 0.4 * pokemon.hp));
       }
       if (victim && pokemon.effects.includes(EFFECTS.POWER_TRIP)) {
-        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.25);
+        pokemon.atk = Math.max(0, pokemon.atk + Math.ceil(pokemon.baseAtk * 0.25));
       }
     } else {
       console.log('warning, no target detected at given coordinates');
