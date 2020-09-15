@@ -24,8 +24,8 @@ class Simulation extends Schema {
     if (redEffects) {
       this.redEffects = redEffects;
     }
-    console.log('blueEffects', blueEffects);
-    console.log('redEffects', redEffects);
+    //console.log('blueEffects', blueEffects);
+    //console.log('redEffects', redEffects);
     this.climate = this.getClimate();
     this.getEntryHazards();
     this.finished = false;
@@ -263,7 +263,7 @@ class Simulation extends Schema {
                 speedFactor -= 0.1;
               }
             }
-            pokemon.atkSpeed = pokemon.atkSpeed * speedFactor;
+            pokemon.atkSpeed = Math.max(300,pokemon.atkSpeed * speedFactor);
             pokemon.effects.push(EFFECTS.AGILITY);
           }
           break;
@@ -293,7 +293,7 @@ class Simulation extends Schema {
 
         case EFFECTS.AUTOTOMIZE:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.atkSpeed += pokemon.atkSpeed * 0.5;
+            pokemon.atkSpeed = Math.max(300, pokemon.atkSpeed * 0.5);
             pokemon.effects.push(EFFECTS.AUTOTOMIZE);
           }
           break;
@@ -353,7 +353,7 @@ class Simulation extends Schema {
 
         case EFFECTS.SWIFT_SWIM:
           if (types.includes(TYPE.WATER) && this.climate == CLIMATE.RAIN) {
-            pokemon.atkSpeed = pokemon.atkSpeed * 0.7;
+            pokemon.atkSpeed = Math.max(300,pokemon.atkSpeed * 0.7);
             pokemon.effects.push(EFFECTS.SWIFT_SWIM);
           }
           break;
@@ -408,7 +408,7 @@ class Simulation extends Schema {
     ennemyEffects.forEach((effect) => {
       switch (effect) {
         case EFFECTS.SPORE:
-          pokemon.atkSpeed = pokemon.atkSpeed * 0.5;
+          pokemon.atkSpeed = pokemon.atkSpeed * 1.5;
           pokemon.effects.push(EFFECTS.SPORE);
           break;
 

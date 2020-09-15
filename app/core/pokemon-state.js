@@ -53,7 +53,7 @@ class PokemonState {
 
       if(pokemon.items.count(ITEMS.SALAC_BERRY) != 0){
         if(pokemon.life <= pokemon.hp / 2){
-          pokemon.atkSpeed = pokemon.atkSpeed * 0.5;
+          pokemon.atkSpeed = Math.max(300,pokemon.atkSpeed * 0.5);
          pokemon.items.remove(ITEMS.SALAC_BERRY);
         }
       }
