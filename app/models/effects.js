@@ -78,10 +78,10 @@ class Effects {
     if (synergies.GROUND >= 6) {
       this.list.push(EFFECTS.SANDSTORM);
     }
-    if (synergies.POISON >= 2) {
+    if (synergies.POISON >= 3) {
       this.list.push(EFFECTS.POISON_GAS);
     }
-    if (synergies.POISON >= 4) {
+    if (synergies.POISON >= 6) {
       this.list.push(EFFECTS.TOXIC);
     }
     if (synergies.DRAGON >= 2) {

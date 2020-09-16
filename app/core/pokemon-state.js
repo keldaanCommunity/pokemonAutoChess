@@ -12,8 +12,11 @@ class PokemonState {
     if (attackType == ATTACK_TYPE.PHYSICAL) {
       reducedDamage = Math.max(0, damage - pokemon.def);
     }
-    if (attackType == ATTACK_TYPE.SPECIAL) {
+    else if (attackType == ATTACK_TYPE.SPECIAL) {
       reducedDamage = Math.max(0, damage - pokemon.speDef);
+    }
+    else if(attackType == ATTACK_TYPE.TRUE){
+      reducedDamage = damage;
     }
 
     pokemon.life -= reducedDamage;
@@ -36,7 +39,7 @@ class PokemonState {
     if (pokemon.cooldown <= 0) {
       if (climate == CLIMATE.SANDSTORM) {
         if (!pokemon.types.includes(TYPE.GROUND) && !pokemon.types.includes(TYPE.METAL)) {
-          this.handleDamage(pokemon, Math.ceil(pokemon.hp / 10), board, ATTACK_TYPE.SPECIAL);
+          this.handleDamage(pokemon, Math.ceil(pokemon.hp / 10), board, ATTACK_TYPE.TRUE);
         }
       }
       if (pokemon.life <= pokemon.hp / 2 && pokemon.effects.includes(EFFECTS.BLAZE)) {
@@ -102,11 +105,11 @@ class PokemonState {
       }
 
       if (pokemon.effects.includes(EFFECTS.POISON_GAS)) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.SPECIAL);
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
       }
 
       if (pokemon.effects.includes(EFFECTS.TOXIC)) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp / 10), board, ATTACK_TYPE.SPECIAL);
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp / 10), board, ATTACK_TYPE.TRUE);
       }
     }
   }

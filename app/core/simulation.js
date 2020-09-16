@@ -449,7 +449,7 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.POISON_GAS:
-          if (Math.random() > 0.9) {
+          if (Math.random() > 0.7) {
             pokemon.effects.push(EFFECTS.POISON_GAS);
           }
           break;

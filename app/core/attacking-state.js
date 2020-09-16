@@ -1,4 +1,4 @@
-const {STATE_TYPE, EFFECTS, ITEMS} = require('../models/enum');
+const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class AttackingState extends PokemonState {
@@ -47,7 +47,7 @@ class AttackingState extends PokemonState {
       if (pokemon.effects.includes(EFFECTS.PURSUIT) && target.life/target.hp < 0.3) {
         damage = target.hp;
       }
-      const victim = target.handleDamage(damage, board, pokemon.attackType);
+      const victim = target.handleDamage(damage, board, ATTACK_TYPE.TRUE);
 
       if(target.items.count(ITEMS.ROCKY_HELMET) != 0){
         pokemon.life -= Math.ceil(pokemon.hp * 0.12) * target.items.count(ITEMS.ROCKY_HELMET);
