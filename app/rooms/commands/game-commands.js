@@ -12,7 +12,8 @@ class OnShopCommand extends Command {
       const player = this.state.players[sessionId];
       if (pokemonId in player.shop) {
         const pokemon = player.shop[pokemonId];
-        if (UtilsCommand.getBoardSize(player.board) < 9 && player.money >= pokemon.cost) {
+        if (player.money >= pokemon.cost && (UtilsCommand.getBoardSize(player.board) < 9 
+        || (UtilsCommand.getPossibleEvolution(player.board, pokemon.name) && UtilsCommand.getBoardSize(player.board) == 9))) {
           player.money -= player.shop[pokemonId].cost;
           player.board[pokemonId] = Object.assign(new Pokemon(), player.shop[pokemonId]);
           delete player.shop[pokemonId];
@@ -338,6 +339,16 @@ class UtilsCommand extends Command {
       }
     }
     return boardSize;
+  }
+
+  static getPossibleEvolution(board, name){
+    let count = 0;
+    for(const id in board){
+      if(board[id].name == name){
+        count ++;
+      }
+    }
+    return (count >= 2);
   }
 
   static getFirstPokemonOnBoard(board) {
