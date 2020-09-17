@@ -5,7 +5,7 @@ const COMMON = ['geodude', 'azurill', 'zubat', 'mareep', 'cleffa', 'igglybuff', 
 const UNCOMMON = ['eevee','bulbasaur', 'charmander', 'squirtle', 'chikorita', 'cyndaquil', 'totodile', 'treecko', 'torchic', 'mudkip', 'turtwig', 'chimchar', 'piplup', 'nidoranF', 'nidoranM'];
 const RARE = ['pichu', 'machop', 'horsea', 'trapinch', 'spheal', 'aron', 'magnemite', 'rhyhorn', 'togepi', 'duskull', 'lotad', 'shinx', 'poliwag'];
 const EPIC = ['abra', 'gastly', 'dratini', 'larvitar', 'slakoth', 'ralts', 'bagon', 'beldum', 'gible', 'elekid', 'magby'];
-const LEGENDARY = ['munchlax', 'growlithe', 'onix', 'scyther', 'riolu'];
+const LEGENDARY = ['meditite', 'numel', 'onix', 'scyther', 'riolu'];
 
 const PROBABILITY = {
   1: [1, 0, 0, 0, 0],

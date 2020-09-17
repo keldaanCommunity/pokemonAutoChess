@@ -108,6 +108,24 @@ class Arcanine extends Pokemon {
   }
 }
 
+class Numel extends Pokemon{
+  constructor(){
+    super('numel',[TYPE.FIRE,TYPE.FIELD,TYPE.GROUND], RARITY.LEGENDARY, 322, 'camerupt', 40, 4, 1, 1, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL);
+  }
+}
+
+class Camerupt extends Pokemon{
+  constructor(){
+    super('camerupt',[TYPE.FIRE,TYPE.FIELD,TYPE.GROUND], RARITY.LEGENDARY, 323, 'mega-camerupt', 60, 6, 1, 1, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL);
+  }
+}
+
+class MegaCamerupt extends Pokemon{
+  constructor(){
+  super('mega-camerupt',[TYPE.FIRE,TYPE.FIELD,TYPE.GROUND], RARITY.LEGENDARY, 3230, '', 80, 5, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL);
+  }
+}
+
 class Munchlax extends Pokemon {
   constructor() {
     super('munchlax', [TYPE.NORMAL, TYPE.HUMAN], RARITY.LEGENDARY, 446, 'snorlax', 50, 6, 1, 1, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL);
@@ -117,6 +135,24 @@ class Munchlax extends Pokemon {
 class Snorlax extends Pokemon {
   constructor() {
     super('snorlax', [TYPE.NORMAL, TYPE.HUMAN], RARITY.LEGENDARY, 143, '', 60, 7, 1, 1, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL);
+  }
+}
+
+class Meditite extends Pokemon{
+  constructor(){
+    super('meditite', [TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 307, 'medicham', 50, 6, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL);
+  }
+}
+
+class Medicham extends Pokemon{
+  constructor(){
+    super('medicham', [TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 308, 'mega-medicham', 60, 6, 1, 1, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL);
+  }
+}
+
+class MegaMedicham extends Pokemon{
+  constructor(){
+    super('mega-medicham', [TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 3080, '', 70, 7, 1, 1, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 
@@ -1421,5 +1457,11 @@ module.exports = {
   Espeon,
   Umbreon,
   Leafon,
-  Sylveon
+  Sylveon,
+  Meditite,
+  Medicham,
+  MegaMedicham,
+  Numel,
+  Camerupt,
+  MegaCamerupt
 };

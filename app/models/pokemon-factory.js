@@ -494,6 +494,18 @@ class PokemonFactory {
         return 'leafon';
       case 'sylveon':
         return 'sylveon';
+      case 'meditite':
+        return 'meditite';
+      case 'medicham':
+        return 'meditite';
+      case 'mega-medicham':
+        return 'meditite';
+      case 'numel':
+        return 'numel';
+      case 'camerupt':
+        return 'numel';
+      case 'mega-camerupt':
+        return 'numel';
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -890,6 +902,18 @@ class PokemonFactory {
         return new Pokemon.Leafon();
       case 'sylveon':
         return new Pokemon.Sylveon();
+      case 'meditite':
+        return new Pokemon.Meditite();
+      case 'medicham':
+        return new Pokemon.Medicham();
+      case 'mega-medicham':
+        return new Pokemon.MegaMedicham();
+      case 'numel':
+        return new Pokemon.Numel();
+      case 'camerupt':
+        return new Pokemon.Camerupt();
+      case 'mega-camerupt':
+        return new Pokemon.MegaCamerupt();
         default:
         console.log(`No pokemon with name "${name}" found`);
         break;

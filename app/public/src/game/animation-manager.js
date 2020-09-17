@@ -47,7 +47,7 @@ export default class AnimationManager {
       this.createAnimations(num, 'EPIC');
     });
 
-    [58, 59, 95, 123, 143, 208, 212, 446, 447, 448, 2080, 2120, 4480].forEach((num) => {
+    [58, 59, 95, 123, 143, 208, 212, 446, 447, 448, 2080, 2120, 4480, 322, 323, 3230, 307, 308, 3080].forEach((num) => {
       this.createAnimations(num, 'LEGENDARY');
     });
 
