@@ -109,7 +109,7 @@ class PokemonState {
       }
 
       if (pokemon.effects.includes(EFFECTS.TOXIC)) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp / 10), board, ATTACK_TYPE.TRUE);
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
       }
     }
   }
