@@ -102,10 +102,10 @@ class Effects {
     if (synergies.MONSTER >= 3) {
       this.list.push(EFFECTS.PURSUIT);
     }
-    if (synergies.MONSTER >= 6) {
+    if (synergies.MONSTER >= 5) {
       this.list.push(EFFECTS.BRUTAL_SWING);
     }
-    if (synergies.MONSTER >= 9) {
+    if (synergies.MONSTER >= 7) {
       this.list.push(EFFECTS.POWER_TRIP);
     }
     if (synergies.HUMAN >= 3) {

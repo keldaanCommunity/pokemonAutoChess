@@ -108,7 +108,7 @@ class PokemonState {
         this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
       }
 
-      if (pokemon.effects.includes(EFFECTS.TOXIC)) {
+      if (pokemon.effects.includes(EFFECTS.TOXIC) && (!pokemon.types.includes(TYPE.POISON) && !pokemon.types.includes(TYPE.METAL))) {
         this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
       }
     }
