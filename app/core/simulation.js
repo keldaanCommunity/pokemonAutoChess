@@ -306,7 +306,7 @@ class Simulation extends Schema {
 
         case EFFECTS.WORK_UP:
           if (types.includes(TYPE.FIELD)) {
-            pokemon.atk += Math.ceil(pokemon.baseAtk * Object.keys(ennemyTeam).length * 0.04);
+            pokemon.atk += Math.ceil(pokemon.baseAtk * Object.keys(ennemyTeam).length * 0.06);
             pokemon.effects.push(EFFECTS.WORK_UP);
           }
           break;

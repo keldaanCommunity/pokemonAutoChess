@@ -39,7 +39,7 @@ class PokemonState {
     if (pokemon.cooldown <= 0) {
       if (climate == CLIMATE.SANDSTORM) {
         if (!pokemon.types.includes(TYPE.GROUND) && !pokemon.types.includes(TYPE.METAL)) {
-          this.handleDamage(pokemon, Math.ceil(pokemon.hp / 10), board, ATTACK_TYPE.TRUE);
+          this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
         }
       }
       if (pokemon.life <= pokemon.hp / 2 && pokemon.effects.includes(EFFECTS.BLAZE)) {
