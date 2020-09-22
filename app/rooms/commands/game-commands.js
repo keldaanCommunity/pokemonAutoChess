@@ -382,7 +382,11 @@ class OnUpdatePhaseCommand extends Command {
       this.computeLife();
       const deadPlayerId = this.checkDeath();
       if (deadPlayerId) {
-        return [new OnKickPlayerCommand().setPayload(deadPlayerId)];
+        this.state.players[deadPlayerId].alive = false;
+        for(const id in this.state.players[deadPlayerId].board){
+          delete this.state.players[deadPlayerId].board[id];
+        }
+        //return [new OnKickPlayerCommand().setPayload(deadPlayerId)];
       }
       this.computeIncome();
       this.initializePickingPhase();
@@ -421,18 +425,20 @@ class OnUpdatePhaseCommand extends Command {
   computeIncome() {
     for (const id in this.state.players) {
       const player = this.state.players[id];
-      player.interest = Math.min(Math.floor(player.money / 10), 5);
-      player.money += player.interest;
-      player.money += player.streak;
-      if (player.lastBattleResult == 'Win') {
-        player.money += 1;
-      }
-      player.money += 5;
-      player.experienceManager.addExperience(2);
-      for (let i = 0; i < player.board.length; i++) {
-        if(player.board[i].positionX != 0){
-          if(player.board[i].items.count(ITEMS.COIN_AMULET) != 0){
-            player.money += Math.round(Math.random() * 5) * player.board[i].items.count(ITEMS.COIN_AMULET);
+      if(player.alive){
+        player.interest = Math.min(Math.floor(player.money / 10), 5);
+        player.money += player.interest;
+        player.money += player.streak;
+        if (player.lastBattleResult == 'Win') {
+          player.money += 1;
+        }
+        player.money += 5;
+        player.experienceManager.addExperience(2);
+        for (let i = 0; i < player.board.length; i++) {
+          if(player.board[i].positionX != 0){
+            if(player.board[i].items.count(ITEMS.COIN_AMULET) != 0){
+              player.money += Math.round(Math.random() * 5) * player.board[i].items.count(ITEMS.COIN_AMULET);
+            }
           }
         }
       }
@@ -454,16 +460,18 @@ class OnUpdatePhaseCommand extends Command {
     for (const id in this.state.players) {
       const player = this.state.players[id];
       player.simulation.stop();
-      if(player.opponentName == 'PVE' && player.lastBattleResult == 'Win'){
-        let item = ItemFactory.createRandomItem();
-        player.stuff.add(item);
-      }
-      player.opponentName = '';
-      if (!player.shopLocked) {
-        this.state.shop.detachShop(player);
-        this.state.shop.assignShop(player);
-      } else {
-        player.shopLocked = false;
+      if(player.alive){
+        if(player.opponentName == 'PVE' && player.lastBattleResult == 'Win'){
+          let item = ItemFactory.createRandomItem();
+          player.stuff.add(item);
+        }
+        player.opponentName = '';
+        if (!player.shopLocked) {
+          this.state.shop.detachShop(player);
+          this.state.shop.assignShop(player);
+        } else {
+          player.shopLocked = false;
+        }
       }
     }
   }
@@ -503,13 +511,15 @@ class OnUpdatePhaseCommand extends Command {
 
     for (const id in this.state.players) {
       const player = this.state.players[id];
-      if (this.state.neutralStages.includes(this.state.stageLevel)) {
-        player.opponentName = 'PVE';
-        player.simulation = new Simulation(player.board, PokemonFactory.getNeutralPokemonsByLevelStage(this.state.stageLevel), player.effects.list, []);
-      } else {
-        const opponentId = this.room.getRandomOpponent(id);
-        player.opponentName = this.state.players[opponentId].name;
-        player.simulation = new Simulation(player.board, this.state.players[opponentId].board, player.effects.list, this.state.players[opponentId].effects.list);
+      if(player.alive){
+        if (this.state.neutralStages.includes(this.state.stageLevel)) {
+          player.opponentName = 'PVE';
+          player.simulation = new Simulation(player.board, PokemonFactory.getNeutralPokemonsByLevelStage(this.state.stageLevel), player.effects.list, []);
+        } else {
+          const opponentId = this.room.getRandomOpponent(id);
+          player.opponentName = this.state.players[opponentId].name;
+          player.simulation = new Simulation(player.board, this.state.players[opponentId].board, player.effects.list, this.state.players[opponentId].effects.list);
+        }
       }
     }
   }

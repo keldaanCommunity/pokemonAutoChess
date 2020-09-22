@@ -28,6 +28,7 @@ class Player extends Schema {
     this.lastBattleResult = '';
     this.opponentName = '';
     this.boardSize = 0;
+    this.alive = true;
   }
 }
 

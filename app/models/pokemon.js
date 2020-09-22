@@ -464,37 +464,37 @@ class Rhyperior extends Pokemon {
 
 class Magnemite extends Pokemon {
   constructor() {
-    super('magnemite', [TYPE.ELECTRIC, TYPE.METAL, TYPE.MINERAL], RARITY.RARE, 81, 'magneton', 80, 5, 1, 1, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL);
+    super('magnemite', [TYPE.ELECTRIC, TYPE.METAL], RARITY.RARE, 81, 'magneton', 80, 5, 1, 1, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL);
   }
 }
 
 class Magneton extends Pokemon {
   constructor() {
-    super('magneton', [TYPE.ELECTRIC, TYPE.METAL, TYPE.MINERAL], RARITY.RARE, 82, 'magnezone', 120, 9, 1, 1, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL);
+    super('magneton', [TYPE.ELECTRIC, TYPE.METAL], RARITY.RARE, 82, 'magnezone', 120, 9, 1, 1, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL);
   }
 }
 
 class Magnezone extends Pokemon {
   constructor() {
-    super('magnezone', [TYPE.ELECTRIC, TYPE.METAL, TYPE.MINERAL], RARITY.RARE, 462, '', 220, 16, 1, 1, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL);
+    super('magnezone', [TYPE.ELECTRIC, TYPE.METAL], RARITY.RARE, 462, '', 220, 16, 1, 1, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL);
   }
 }
 
 class Aron extends Pokemon {
   constructor() {
-    super('aron', [TYPE.METAL, TYPE.MONSTER], RARITY.RARE, 304, 'lairon', 80, 5, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
+    super('aron', [TYPE.METAL, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 304, 'lairon', 80, 5, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 
 class Lairon extends Pokemon {
   constructor() {
-    super('lairon', [TYPE.METAL, TYPE.MONSTER], RARITY.RARE, 305, 'aggron', 120, 9, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
+    super('lairon', [TYPE.METAL, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 305, 'aggron', 120, 9, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 
 class Aggron extends Pokemon {
   constructor() {
-    super('aggron', [TYPE.METAL, TYPE.MONSTER], RARITY.RARE, 306, '', 220, 16, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
+    super('aggron', [TYPE.METAL, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 306, '', 220, 16, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 

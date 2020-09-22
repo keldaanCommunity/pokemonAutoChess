@@ -12,7 +12,7 @@ export default class SynergiesContainer extends GameObjects.Container {
       cy += 1;
       if (cy > 10) {
         cy = 0;
-        cx = 170;
+        cx = 136;
       }
     });
 

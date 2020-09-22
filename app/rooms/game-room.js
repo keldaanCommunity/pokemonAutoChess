@@ -71,9 +71,9 @@ class GameRoom extends colyseus.Room {
 
   getRandomOpponent(playerId) {
     const playersId = [];
-    const playeruint8 = Object.keys(this.state.players).length;
+    const numberOfPlayers = Object.keys(this.state.players).length;
     for (const id in this.state.players) {
-      if (id != playerId || playeruint8 == 1) {
+      if (this.state.players[id].alive && (id != playerId || numberOfPlayers == 1 )) {
         playersId.push(id);
       }
     }
