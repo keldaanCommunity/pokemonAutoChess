@@ -1,6 +1,7 @@
 import GameScene from './scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
 
+
 class GameContainer {
   constructor(room, div) {
     this.room = room;
@@ -117,6 +118,18 @@ class GameContainer {
       }
     });
 
+    player.simulation.dpsMeter.onAdd = (dps, key) => {
+      this.handleDpsAdd(player.id, dps);
+      dps.onChange = (changes) => {
+        changes.forEach((change) => {
+          this.handleDpsChange(player.id, change, dps);
+        });
+      };
+    };
+    player.simulation.dpsMeter.onRemove = (dps, key) => {
+      this.handleDpsRemove(player.id, dps);
+    };
+
     player.simulation.blueTeam.onAdd = (pokemon, key) => {
       this.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = (changes) => {
@@ -130,6 +143,7 @@ class GameContainer {
         });
       };
     };
+
     player.simulation.redTeam.onAdd = (pokemon, key) => {
       this.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = (changes) => {
@@ -171,6 +185,24 @@ class GameContainer {
         this.game.scene.getScene('gameScene').turnText.setText(change.value);
       default:
         break;
+    }
+  }
+
+  handleDpsAdd(playerId, dps){
+    if(playerId == this.player.id){
+      this.game.scene.getScene('gameScene').dpsMeterContainer.addDps(dps);
+    }
+  }
+
+  handleDpsRemove(playerId, dps){
+    if(playerId == this.player.id){
+      this.game.scene.getScene('gameScene').dpsMeterContainer.removeDps(dps);
+    }
+  }
+
+  handleDpsChange(playerId, change, dps){
+    if(playerId == this.player.id){
+      this.game.scene.getScene('gameScene').dpsMeterContainer.changeDps(dps, change);
     }
   }
 

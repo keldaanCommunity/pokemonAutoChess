@@ -42,10 +42,11 @@ class AttackingState extends PokemonState {
         }
       }
       let damage = pokemon.atk;
-
-
       if (pokemon.effects.includes(EFFECTS.PURSUIT) && target.life/target.hp < 0.3) {
         damage = target.hp;
+      }
+      if(pokemon.team == 0){
+        pokemon.damageDone += damage;
       }
       const victim = target.handleDamage(damage, board, ATTACK_TYPE.TRUE);
 

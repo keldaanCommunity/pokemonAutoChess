@@ -1058,7 +1058,7 @@ class Staraptor extends Pokemon {
 }
 class Magikarp extends Pokemon {
   constructor() {
-    super('magikarp', [], RARITY.NEUTRAL, 129, '', 60, 1, 1, 1, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL);
+    super('magikarp', [], RARITY.NEUTRAL, 129, '', 30, 1, 1, 1, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 

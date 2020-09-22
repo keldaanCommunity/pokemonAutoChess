@@ -8,7 +8,7 @@ const Items = require('../models/items');
 const ArraySchema = schema.ArraySchema;
 
 class PokemonEntity extends schema.Schema {
-  constructor(name, index, positionX, positionY, hp, atk, def, speDef, attackType, range, team, attackSprite, rarity, types, items) {
+  constructor(name, index, positionX, positionY, hp, atk, def, speDef, attackType, range, team, attackSprite, rarity, types, items, simulation) {
     super();
     this.id = uniqid();
     this.rarity = rarity;
@@ -41,6 +41,8 @@ class PokemonEntity extends schema.Schema {
       this.types.push(type);
     });
     this.items = new Items(items);
+    this.simulation = simulation;
+    this.damageDone = 0;
   }
 
   update(dt, board, climate) {
@@ -58,11 +60,11 @@ class PokemonEntity extends schema.Schema {
   }
 
   toMovingState() {
-    this.changeState(new MovingState());
+    this.changeState(new MovingState(this.simulation));
   }
 
   toAttackingState() {
-    this.changeState(new AttackingState());
+    this.changeState(new AttackingState(this.simulation));
   }
 }
 

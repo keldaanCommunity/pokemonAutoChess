@@ -10,6 +10,7 @@ import SynergiesContainer from '../components/synergies-container';
 import WeatherManager from '../components/weather-manager';
 import EntryHazardsManager from '../components/Entry-hazards-manager';
 import ItemsContainer from '../components/items-container';
+import DpsMeterContainer from '../components/dps-meter-container';
 
 export default class GameScene extends Scene {
   constructor() {
@@ -125,6 +126,7 @@ export default class GameScene extends Scene {
     this.playerContainer = new PlayerContainer(this, 1800, 105);
     this.boardContainer = new BoardContainer(this, 275, 775);
     this.synergiesContainer = new SynergiesContainer(this, 1290, 135);
+    this.dpsMeterContainer = new DpsMeterContainer(this, 1500,135);
     this.itemsContainer = new ItemsContainer(this, 66, 530);
     this.moneyContainer = new MoneyContainer(this, 20, 60, window.state.players[window.sessionId]);
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
