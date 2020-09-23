@@ -24,7 +24,7 @@ class PokemonState {
     if (pokemon.effects.includes(EFFECTS.RAGE)) {
       pokemon.attack += Math.ceil(pokemon.baseAtk * 0.05);
     }
-    if (pokemon.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.25) {
+    if (pokemon.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
       pokemon.life = 0;
       death = true;
     }
@@ -42,8 +42,8 @@ class PokemonState {
           this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
         }
       }
-      if (pokemon.life <= pokemon.hp / 2 && pokemon.effects.includes(EFFECTS.BLAZE)) {
-        pokemon.atk = Math.ceil(pokemon.atk * 1.1);
+      if (pokemon.effects.includes(EFFECTS.BLAZE)) {
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.05);
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {

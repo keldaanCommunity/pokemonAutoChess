@@ -11,11 +11,12 @@ export default class DpsMeterContainer extends GameObjects.Container {
       color: 'white',
       align: 'center'
     };
+    this.maxDamage = 0;
     scene.add.existing(this);
   }
 
     addDps(dps){
-        this.add(new DpsContainer(this.scene,0,100*this.length, dps.id, dps.name, dps.damage));
+        this.add(new DpsContainer(this.scene,0,70*this.length, dps.id, dps.name, dps.damage));
     }
 
     removeDps(dps){
@@ -23,8 +24,21 @@ export default class DpsMeterContainer extends GameObjects.Container {
     }
 
     changeDps(dps, change){
-        if(change.field == 'damage'){
-            this.getFirst('id', dps.id).changeDamage(change.value);
+      if(change.field == 'damage'){
+        let child = this.getFirst('id', dps.id);
+        child.damage = change.value;
+        child.damageText.setText(change.value);
+        if(this.maxDamage < change.value){
+          this.maxDamage = Math.max(change.value, this.maxDamage);
+          this.updateDps();
         }
+      }
+    }
+
+    updateDps(){
+      let self = this;
+      this.iterate(function(child){
+        child.updateDps(self.maxDamage);
+      });
     }
 }

@@ -213,7 +213,7 @@ class Simulation extends Schema {
         case EFFECTS.DROUGHT:
           if (this.climate == CLIMATE.SUN && types.includes(TYPE.FIRE)) {
             pokemon.effects.push(EFFECTS.DROUGHT);
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.33);
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5);
           }
           break;
 
@@ -423,22 +423,22 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.PSYWAVE:
-          pokemon.speDef = Math.max(0, Math.ceil(pokemon.baseSpeDef * 0.7));
+          pokemon.speDef = Math.max(0, Math.floor(pokemon.baseSpeDef * 0.7));
           pokemon.effects.push(EFFECTS.PSYWAVE);
           break;
 
         case EFFECTS.MAGIC_ROOM:
-          pokemon.speDef = Math.max(0, Math.ceil(pokemon.baseSpeDef * 0.7));
+          pokemon.speDef = Math.max(0, Math.floor(pokemon.baseSpeDef * 0.7));
           pokemon.effects.push(EFFECTS.MAGIC_ROOM);
           break;
 
         case EFFECTS.MEAN_LOOK:
-          pokemon.def = Math.max(0, Math.ceil(pokemon.baseDef * 0.8));
+          pokemon.def = Math.max(0, Math.floor(pokemon.baseDef * 0.8));
           pokemon.effects.push(EFFECTS.MEAN_LOOK);
           break;
 
         case EFFECTS.SCARY_FACE:
-          pokemon.def = Math.max(0, Math.ceil(pokemon.baseDef * 0.8));
+          pokemon.def = Math.max(0, Math.floor(pokemon.baseDef * 0.8));
           pokemon.effects.push(EFFECTS.SCARY_FACE);
           break;
 
@@ -497,11 +497,11 @@ class Simulation extends Schema {
     if (this.blueEffects.includes(EFFECTS.DRIZZLE) || this.redEffects.includes(EFFECTS.DRIZZLE)) {
       climate = CLIMATE.RAIN;
     }
-    if (this.blueEffects.includes(EFFECTS.DROUGHT) || this.redEffects.includes(EFFECTS.DROUGHT)) {
-      climate = CLIMATE.SUN;
-    }
     if (this.blueEffects.includes(EFFECTS.SANDSTORM) || this.redEffects.includes(EFFECTS.SANDSTORM)) {
       climate = CLIMATE.SANDSTORM;
+    }
+    if (this.blueEffects.includes(EFFECTS.DROUGHT) || this.redEffects.includes(EFFECTS.DROUGHT)) {
+      climate = CLIMATE.SUN;
     }
     if (this.blueEffects.includes(EFFECTS.PRIMORDIAL_SEA) || this.redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
       climate = CLIMATE.RAIN;

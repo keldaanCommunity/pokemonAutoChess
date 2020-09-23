@@ -126,7 +126,7 @@ export default class GameScene extends Scene {
     this.playerContainer = new PlayerContainer(this, 1800, 105);
     this.boardContainer = new BoardContainer(this, 275, 775);
     this.synergiesContainer = new SynergiesContainer(this, 1290, 135);
-    this.dpsMeterContainer = new DpsMeterContainer(this, 1500,135);
+    this.dpsMeterContainer = new DpsMeterContainer(this, 1505,135);
     this.itemsContainer = new ItemsContainer(this, 66, 530);
     this.moneyContainer = new MoneyContainer(this, 20, 60, window.state.players[window.sessionId]);
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
@@ -204,6 +204,7 @@ export default class GameScene extends Scene {
   }
 
   updatePhase() {
+    this.dpsMeterContainer.maxDamage = 0;
     this.phaseText.setText(window.state.phase);
     if (window.state.phase == 'FIGHT') {
       this.boardManager.clearBoard();

@@ -63,10 +63,10 @@ class AttackingState extends PokemonState {
       }
 
       if (victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)) {
-        pokemon.life = Math.min(pokemon.hp, Math.ceil(pokemon.life + 0.4 * pokemon.hp));
+        pokemon.life = pokemon.hp;
       }
       if (victim && pokemon.effects.includes(EFFECTS.POWER_TRIP)) {
-        pokemon.atk = Math.max(0, pokemon.atk + Math.ceil(pokemon.baseAtk * 0.25));
+        pokemon.atk += pokemon.baseAtk;
       }
     } else {
       console.log('warning, no target detected at given coordinates');
