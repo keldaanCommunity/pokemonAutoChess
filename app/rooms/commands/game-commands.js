@@ -407,7 +407,7 @@ class OnUpdatePhaseCommand extends Command {
   getStageLevelDamage(stageLevel){
     let damage = 0;
     let stageLevelFloor = Math.floor(stageLevel/5);
-    if(stageLevelFloor == 0 || stageLevelFloor == 2){
+    if(stageLevelFloor == 0 || stageLevelFloor == 1){
       damage = 1;
     }
     else if(stageLevelFloor == 2 || stageLevelFloor == 3){
