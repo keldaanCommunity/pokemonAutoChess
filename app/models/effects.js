@@ -108,13 +108,13 @@ class Effects {
     if (synergies.MONSTER >= 7) {
       this.list.push(EFFECTS.POWER_TRIP);
     }
-    if (synergies.HUMAN >= 3) {
+    if (synergies.HUMAN >= 2) {
       this.list.push(EFFECTS.MEDITATE);
     }
-    if (synergies.HUMAN >= 6) {
+    if (synergies.HUMAN >= 4) {
       this.list.push(EFFECTS.FOCUS_ENERGY);
     }
-    if (synergies.HUMAN >= 9) {
+    if (synergies.HUMAN >= 6) {
       this.list.push(EFFECTS.CALM_MIND);
     }
     if (synergies.AQUATIC >= 3) {
@@ -141,10 +141,13 @@ class Effects {
     if (synergies.FLORA >= 4) {
       this.list.push(EFFECTS.FLOWER_SHIELD);
     }
-    if (synergies.MINERAL > 0) {
+    if (synergies.MINERAL >= 2) {
       this.list.push(EFFECTS.BATTLE_ARMOR);
     }
-    if (synergies.AMORPH > 0) {
+    if (synergies.MINERAL >= 4) {
+      this.list.push(EFFECTS.MOUTAIN_RESISTANCE);
+    }
+    if (synergies.AMORPH >= 2) {
       this.list.push(EFFECTS.PHANTOM_FORCE);
     }
     if (synergies.FAIRY >= 2) {

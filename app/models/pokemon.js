@@ -284,19 +284,19 @@ class Slaking extends Pokemon {
 
 class Larvitar extends Pokemon {
   constructor() {
-    super('larvitar', [TYPE.DARK, TYPE.MONSTER], RARITY.EPIC, 246, 'pupitar', 90, 8, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
+    super('larvitar', [TYPE.DARK, TYPE.MONSTER, TYPE.MINERAL], RARITY.EPIC, 246, 'pupitar', 90, 8, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 
 class Pupitar extends Pokemon {
   constructor() {
-    super('pupitar', [TYPE.DARK, TYPE.MONSTER], RARITY.EPIC, 247, 'tyranitar', 130, 9, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
+    super('pupitar', [TYPE.DARK, TYPE.MONSTER, TYPE.MINERAL], RARITY.EPIC, 247, 'tyranitar', 130, 9, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 
 class Tyranitar extends Pokemon {
   constructor() {
-    super('tyranitar', [TYPE.DARK, TYPE.MONSTER], RARITY.EPIC, 248, '', 230, 16, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
+    super('tyranitar', [TYPE.DARK, TYPE.MONSTER, TYPE.MINERAL], RARITY.EPIC, 248, '', 230, 16, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 
@@ -356,13 +356,13 @@ class Alakazam extends Pokemon {
 
 class Poliwag extends Pokemon {
   constructor() {
-    super('poliwag', [TYPE.WATER], RARITY.RARE, 60, 'poliwhirl', 80, 5, 1, 1, 3, 'WATER/range', ATTACK_TYPE.SPECIAL);
+    super('poliwag', [TYPE.WATER, TYPE.AQUATIC], RARITY.RARE, 60, 'poliwhirl', 80, 5, 1, 1, 3, 'WATER/range', ATTACK_TYPE.SPECIAL);
   }
 }
 
 class Poliwhirl extends Pokemon {
   constructor() {
-    super('poliwhirl', [TYPE.WATER, TYPE.FIGHTING], RARITY.RARE, 61, 'politoed', 120, 9, 1, 1, 3, 'WATER/range', ATTACK_TYPE.SPECIAL);
+    super('poliwhirl', [TYPE.WATER, TYPE.FIGHTING, TYPE.AQUATIC], RARITY.RARE, 61, 'politoed', 120, 9, 1, 1, 3, 'WATER/range', ATTACK_TYPE.SPECIAL);
   }
 }
 

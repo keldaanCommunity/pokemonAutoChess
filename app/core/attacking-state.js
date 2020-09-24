@@ -48,7 +48,12 @@ class AttackingState extends PokemonState {
       if(pokemon.team == 0){
         pokemon.damageDone += damage;
       }
-      const victim = target.handleDamage(damage, board, ATTACK_TYPE.TRUE);
+      let attackType = pokemon.attackType;
+      if(pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)){
+        attackType = ATTACK_TYPE.TRUE;
+      }
+
+      const victim = target.handleDamage(damage, board, attackType);
 
       if(target.items.count(ITEMS.ROCKY_HELMET) != 0){
         pokemon.life -= Math.ceil(pokemon.hp * 0.12) * target.items.count(ITEMS.ROCKY_HELMET);

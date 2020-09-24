@@ -273,7 +273,7 @@ class Simulation extends Schema {
                 speedFactor -= 0.1;
               }
             }
-            pokemon.atkSpeed = Math.max(300,pokemon.atkSpeed * speedFactor);
+            pokemon.atkSpeed = Math.max(500,pokemon.atkSpeed * speedFactor);
             pokemon.effects.push(EFFECTS.AGILITY);
           }
           break;
@@ -295,15 +295,15 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.IRON_DEFENSE:
-          if (types.includes(TYPE.MINERAL)) {
+          if (types.includes(TYPE.METAL)) {
             pokemon.def += Math.ceil(pokemon.baseDef * 0.5);
             pokemon.effects.push(EFFECTS.IRON_DEFENSE);
           }
           break;
 
         case EFFECTS.AUTOTOMIZE:
-          if (types.includes(TYPE.MINERAL)) {
-            pokemon.atkSpeed = Math.max(300, pokemon.atkSpeed * 0.5);
+          if (types.includes(TYPE.METAL)) {
+            pokemon.atkSpeed = Math.max(500, pokemon.atkSpeed * 0.5);
             pokemon.effects.push(EFFECTS.AUTOTOMIZE);
           }
           break;
@@ -328,26 +328,23 @@ class Simulation extends Schema {
           break;
           
         case EFFECTS.PURSUIT:
-          if (types.includes(TYPE.MONSTER)) {
             pokemon.effects.push(EFFECTS.PURSUIT);
-          }
+          
           break;
 
         case EFFECTS.BRUTAL_SWING:
-          if (types.includes(TYPE.MONSTER)) {
             pokemon.effects.push(EFFECTS.BRUTAL_SWING);
-          }
+          
           break;
 
         case EFFECTS.POWER_TRIP:
-          if (types.includes(TYPE.MONSTER)) {
             pokemon.effects.push(EFFECTS.POWER_TRIP);
-          }
           break;
 
         case EFFECTS.MEDITATE:
           pokemon.atk += Math.ceil(pokemon.baseAtk * 0.15);
           pokemon.def += Math.ceil(pokemon.baseDef * 0.15);
+          pokemon.atkSpeed = Math.max(500,pokemon.atkSpeed * 0.8);
           pokemon.effects.push(EFFECTS.MEDITATE);
           break;
 
@@ -363,7 +360,7 @@ class Simulation extends Schema {
 
         case EFFECTS.SWIFT_SWIM:
           if (types.includes(TYPE.WATER) && this.climate == CLIMATE.RAIN) {
-            pokemon.atkSpeed = Math.max(300,pokemon.atkSpeed * 0.7);
+            pokemon.atkSpeed = Math.max(500,pokemon.atkSpeed * 0.7);
             pokemon.effects.push(EFFECTS.SWIFT_SWIM);
           }
           break;
@@ -383,15 +380,25 @@ class Simulation extends Schema {
 
         case EFFECTS.BATTLE_ARMOR:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.def += Math.ceil(pokemon.baseDef * 0.25);
+            pokemon.def += Math.ceil(pokemon.baseDef * 0.5);
             pokemon.effects.push(EFFECTS.BATTLE_ARMOR);
+          }
+          break;
+
+        case EFFECTS.MOUTAIN_RESISTANCE:
+          if (types.includes(TYPE.MINERAL)) {
+            pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.5);
+            pokemon.life += Math.ceil(pokemon.hp); 
+            pokemon.effects.push(EFFECTS.MOUTAIN_RESISTANCE);
           }
           break;
 
         case EFFECTS.PHANTOM_FORCE:
           if (types.includes(TYPE.AMORPH)) {
+            pokemon.atkSpeed = Math.max(500,pokemon.atkSpeed * 0.7);
             pokemon.effects.push(EFFECTS.PHANTOM_FORCE);
           }
+          break;
 
         case EFFECTS.ATTRACT:
           if (types.includes(TYPE.FAIRY)) {
@@ -406,7 +413,8 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.FLOWER_SHIELD:
-          pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.3);
+          pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.5);
+          pokemon.speDef += Math.ceil(pokemon.baseDef * 0.5);
           pokemon.effects.push(EFFECTS.FLOWER_SHIELD);
           break;
 

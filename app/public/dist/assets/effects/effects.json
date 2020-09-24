@@ -199,6 +199,27 @@
 					}
 				},
 				{
+					"filename": "MOUTAIN_RESISTANCE",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 43,
+						"y": 43,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
 					"filename": "BLAZE",
 					"rotated": false,
 					"trimmed": false,
@@ -1002,6 +1023,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:f7e047fcdf7d875b3083c9c6cd03e076:45930b0caedacc39f2fecee0485de3fd:05d3c1256da5d10ff4f36ef2966c3322$"
+		"smartupdate": "$TexturePacker:SmartUpdate:49da447f0ce7f6c4d5aeef432fb9b296:3439213ebd4cf21cbbf0003a0219d882:05d3c1256da5d10ff4f36ef2966c3322$"
 	}
 }

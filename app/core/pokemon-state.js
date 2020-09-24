@@ -51,12 +51,12 @@ class PokemonState {
       }
       
       if(pokemon.items.count(ITEMS.METRONOME) != 0){
-        pokemon.atk = Math.ceil(pokemon.atk * 1.05) * pokemon.items.count(ITEMS.METRONOME);
+        pokemon.atk = Math.ceil(pokemon.baseAtk * 1.05) * pokemon.items.count(ITEMS.METRONOME);
       }
 
       if(pokemon.items.count(ITEMS.SALAC_BERRY) != 0){
         if(pokemon.life <= pokemon.hp / 2){
-          pokemon.atkSpeed = Math.max(300,pokemon.atkSpeed * 0.5);
+          pokemon.atkSpeed = Math.max(500,pokemon.atkSpeed * 0.5);
          pokemon.items.remove(ITEMS.SALAC_BERRY);
         }
       }

@@ -1,6 +1,6 @@
 const Command = require('@colyseus/command').Command;
 const {Pokemon} = require('../../models/pokemon');
-const {STATE, COST, TYPE, EFFECTS, ITEMS} = require('../../models/enum');
+const {STATE, COST, TYPE, EFFECTS, ITEMS, RARITY_HP_COST} = require('../../models/enum');
 const Player = require('../../models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const Simulation = require('../../core/simulation');
@@ -228,6 +228,12 @@ class OnSellDropCommand extends Command {
     if (client.sessionId in this.state.players &&
     detail.pokemonId in this.state.players[client.sessionId].board) {
       this.state.players[client.sessionId].money += COST[this.state.players[client.sessionId].board[detail.pokemonId].rarity];
+      if(PokemonFactory.getPokemonFamily(this.state.players[client.sessionId].board[detail.pokemonId].name) != this.state.players[client.sessionId].board[detail.pokemonId].name){
+        this.state.players[client.sessionId].money += COST[this.state.players[client.sessionId].board[detail.pokemonId].rarity];
+      }
+      if(this.state.players[client.sessionId].board[detail.pokemonId].evolution == ''){
+        this.state.players[client.sessionId].money += COST[this.state.players[client.sessionId].board[detail.pokemonId].rarity];
+      }
       if(this.state.players[client.sessionId].board[detail.pokemonId].items.item0 != ''){
         this.state.players[client.sessionId].stuff.add(this.state.players[client.sessionId].board[detail.pokemonId].items.item0);
       }
@@ -380,17 +386,49 @@ class OnUpdatePhaseCommand extends Command {
       this.initializeFightingPhase();
     } else if (this.state.phase == STATE.FIGHT) {
       this.computeLife();
-      const deadPlayerId = this.checkDeath();
-      if (deadPlayerId) {
-        this.state.players[deadPlayerId].alive = false;
-        for(const id in this.state.players[deadPlayerId].board){
-          delete this.state.players[deadPlayerId].board[id];
-        }
+      this.checkDeath();
         //return [new OnKickPlayerCommand().setPayload(deadPlayerId)];
-      }
       this.computeIncome();
       this.initializePickingPhase();
     }
+  }
+
+  computePlayerDamage(redTeam, stageLevel){
+    let damage = 0;
+    if(Object.keys(redTeam).length > 0){
+      for (const id in redTeam){
+        damage += RARITY_HP_COST[redTeam[id].rarity];
+      }
+    }
+    damage += this.getStageLevelDamage(stageLevel);
+    return damage;
+  }
+
+  getStageLevelDamage(stageLevel){
+    let damage = 0;
+    let stageLevelFloor = Math.floor(stageLevel/5);
+    if(stageLevelFloor == 0 || stageLevelFloor == 2){
+      damage = 1;
+    }
+    else if(stageLevelFloor == 2 || stageLevelFloor == 3){
+      damage = 2;
+    }
+    else if(stageLevelFloor == 4){
+      damage = 3;
+    }
+    else if(stageLevelFloor == 5){
+      damage = 4;
+    }
+    else if(stageLevelFloor == 6){
+      damage = 5;
+    }
+    else if (stageLevelFloor == 7){
+      damage = 8;
+    }
+    else{
+      damage = 15;
+    }
+    return damage;
   }
 
   computeLife() {
@@ -403,7 +441,7 @@ class OnUpdatePhaseCommand extends Command {
           player.streak = 0;
         }
         player.lastBattleResult = 'Defeat';
-        player.life = Math.max(0, player.life - 1);
+        player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, this.state.stageLevel));
       } else if (Object.keys(player.simulation.redTeam).length == 0) {
         if (player.lastBattleResult == 'Win') {
           player.streak = Math.min(player.streak + 1, 5);
@@ -418,6 +456,7 @@ class OnUpdatePhaseCommand extends Command {
           player.streak = 0;
         }
         player.lastBattleResult = 'Draw';
+        player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, this.state.stageLevel));
       }
     }
   }
@@ -449,7 +488,10 @@ class OnUpdatePhaseCommand extends Command {
     for (const id in this.state.players) {
       const player = this.state.players[id];
       if (player.life <= 0) {
-        return player.id;
+        player.alive = false;
+        for (boardId in player.board){
+          delete this.state.players[id].board[boardId];
+        }
       }
     }
   }
