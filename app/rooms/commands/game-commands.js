@@ -489,7 +489,7 @@ class OnUpdatePhaseCommand extends Command {
       const player = this.state.players[id];
       if (player.life <= 0) {
         player.alive = false;
-        for (boardId in player.board){
+        for (const boardId in player.board){
           delete this.state.players[id].board[boardId];
         }
       }
