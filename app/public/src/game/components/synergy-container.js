@@ -82,8 +82,8 @@ export default class SynergyContainer extends Button {
       BUG: 2,
       FLYING: 2,
       FLORA: 2,
-      MINERAL: 1,
-      AMORPH: 1,
+      MINERAL: 2,
+      AMORPH: 2,
       FAIRY: 2
     };
 
