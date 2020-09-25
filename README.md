@@ -5,7 +5,7 @@
   
   ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
-![game preview](https://cdn.discordapp.com/attachments/737230355039387752/737604000689684550/unknown.png)
+![game preview](doc/img/main.png)
 
 Implementation of [reddit specifications](https://www.reddit.com/r/AutoChess/comments/ar4cjh/pokemon_autochess_concept/).
 
