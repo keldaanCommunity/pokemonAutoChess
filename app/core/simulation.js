@@ -267,13 +267,17 @@ class Simulation extends Schema {
 
         case EFFECTS.AGILITY:
           if (types.includes(TYPE.ELECTRIC)) {
-            let speedFactor = 1;
+            let pokemonNames = [];
             for (const id in allyTeam) {
               if (allyTeam[id].types.includes(TYPE.ELECTRIC)) {
-                speedFactor -= 0.1;
+                let family = PokemonFactory.getPokemonFamily(allyTeam[id].name);
+                if(!pokemonNames.includes(family)){
+                  pokemonNames.push(family);
+                }
               }
             }
-            pokemon.atkSpeed = Math.max(500,pokemon.atkSpeed * speedFactor);
+            let speedFactor = 1- 0.1 * pokemonNames.length;
+            pokemon.atkSpeed = Math.max(400,pokemon.atkSpeed * speedFactor);
             pokemon.effects.push(EFFECTS.AGILITY);
           }
           break;
@@ -303,7 +307,7 @@ class Simulation extends Schema {
 
         case EFFECTS.AUTOTOMIZE:
           if (types.includes(TYPE.METAL)) {
-            pokemon.atkSpeed = Math.max(500, pokemon.atkSpeed * 0.5);
+            pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.5);
             pokemon.effects.push(EFFECTS.AUTOTOMIZE);
           }
           break;
@@ -344,7 +348,7 @@ class Simulation extends Schema {
         case EFFECTS.MEDITATE:
           pokemon.atk += Math.ceil(pokemon.baseAtk * 0.15);
           pokemon.def += Math.ceil(pokemon.baseDef * 0.15);
-          pokemon.atkSpeed = Math.max(500,pokemon.atkSpeed * 0.8);
+          pokemon.atkSpeed = Math.max(400,pokemon.atkSpeed * 0.8);
           pokemon.effects.push(EFFECTS.MEDITATE);
           break;
 
@@ -360,7 +364,7 @@ class Simulation extends Schema {
 
         case EFFECTS.SWIFT_SWIM:
           if (types.includes(TYPE.WATER) && this.climate == CLIMATE.RAIN) {
-            pokemon.atkSpeed = Math.max(500,pokemon.atkSpeed * 0.7);
+            pokemon.atkSpeed = Math.max(400,pokemon.atkSpeed * 0.7);
             pokemon.effects.push(EFFECTS.SWIFT_SWIM);
           }
           break;
@@ -395,7 +399,7 @@ class Simulation extends Schema {
 
         case EFFECTS.PHANTOM_FORCE:
           if (types.includes(TYPE.AMORPH)) {
-            pokemon.atkSpeed = Math.max(500,pokemon.atkSpeed * 0.7);
+            pokemon.atkSpeed = Math.max(400,pokemon.atkSpeed * 0.7);
             pokemon.effects.push(EFFECTS.PHANTOM_FORCE);
           }
           break;
