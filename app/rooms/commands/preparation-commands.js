@@ -32,8 +32,8 @@ class OnMessageCommand extends Command {
 
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
-    delete this.state.users[''+client.id];
     this.room.broadcast('messages', {'name':'Server', 'message':`${ this.state.users[client.id].name } left.`});
+    delete this.state.users[''+client.id];
   }
 }
 

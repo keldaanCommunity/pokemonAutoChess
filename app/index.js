@@ -44,7 +44,7 @@ hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
 
 // Room
 
-const LobbyRoom = Colyseus.LobbyRoom;
+const LobbyRoom = require('./rooms/custom-lobby-room');
 const PreprationRoom = require('./rooms/preparation-room');
 const GameRoom = require('./rooms/game-room');
 

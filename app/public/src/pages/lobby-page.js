@@ -10,21 +10,38 @@ class LobbyPage {
     const content = document.createElement('div');
     content.setAttribute('id', 'lobby');
     content.innerHTML = `
-    <header>
-      <h1>Game Lobby</h1>
-      <button id="button-home">Home</button>
-    </header>
-    <main>
-      <p>Logged as : ${_client.auth.email}</p>
+  <header>
+    <h1>Game Lobby</h1>
+    <button id="button-home">Home</button>
+  </header>
+
+  <div style="display:flex; height:80%;"> 
+
+    <div style="width:20%; height:100%;">      
+      <ul id="messages" style="height:100%; overflow: scroll; display:flex; flex-flow:column;">
+      </ul>
+    </div>
+
+    <div style="display:flex; flex-flow:column; justify-content:space-around; align-items:center; width:80%; height:100%;">   
+     <p>Logged as : ${_client.auth.email}</p>
       <h3>Available room ids:</h3>
       <ul id="room-list"></ul>
       <button id="create">Create new room</button>
-    </main>`;
+    </div>
+
+  </div>
+
+  <div style="width:20%; display:flex;">
+    <input style="width:80%;" id="inputMessage" class="inputMessage" placeholder="Type here..." type="text">
+    <button style="width:20%;" id="send">Send</button>
+  </div>`;
     document.body.innerHTML = '';
     document.body.appendChild(content);
   }
 
   addEventListeners() {
+    let self = this;
+
     document.getElementById('button-home').addEventListener('click', (e) => {
       this.room.leave();
       _client.auth.logout();
@@ -33,6 +50,16 @@ class LobbyPage {
 
     document.getElementById('create').addEventListener('click', (e) => {
       this.createRoom();
+    });
+
+    document.getElementById('send').addEventListener('click',function(){
+      self.sendMessage();
+    });
+    document.getElementById('inputMessage').addEventListener('keyup', function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        self.sendMessage();
+      }
     });
 
     this.room.onLeave((client, consent) => {
@@ -62,6 +89,22 @@ class LobbyPage {
       this.allRooms = this.allRooms.filter((room) => room.roomId !== roomId);
       this.handleRoomListChange();
     });
+
+    this.room.onMessage('messages', (message) => {
+      //console.log(message)
+      let messageHTML = document.createElement('li');
+      let nameHTML = document.createElement('p');
+      nameHTML.style.color = 'black';
+      nameHTML.style.fontWeight = 'bold';
+      nameHTML.textContent = message.name + ' : ';
+      let messageContentHTML = document.createElement('p');
+      messageContentHTML.textContent = message.message;
+      messageHTML.appendChild(nameHTML);
+      messageHTML.appendChild(messageContentHTML);
+      messageHTML.style.display = 'flex';
+      document.getElementById('messages').appendChild(messageHTML);
+
+    });
   }
 
   createRoom() {
@@ -83,6 +126,13 @@ class LobbyPage {
       console.error('join error', e);
       alert(e);
     });
+  }
+
+  sendMessage(){
+    if(document.getElementById('inputMessage').value != ''){
+      this.room.send('messages', {'name': _client.auth.email, 'message': document.getElementById('inputMessage').value});
+      document.getElementById('inputMessage').value = '';
+    }
   }
 
   handleRoomListChange() {
