@@ -6,6 +6,7 @@ class OnJoinCommand extends Command {
   execute({client, options, auth}) {
     client.id = uniqid();
     this.state.users[client.id] = new User(client.id, auth.email);
+    this.room.broadcast('messages', {'name':'Server', 'message':`${ auth.email } joined.`});
   }
 }
 
@@ -23,9 +24,16 @@ class OnGameStartCommand extends Command {
   }
 }
 
+class OnMessageCommand extends Command {
+  execute({client, message}) {
+    this.room.broadcast('messages', message);
+  }
+}
+
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
     delete this.state.users[''+client.id];
+    this.room.broadcast('messages', {'name':'Server', 'message':`${ this.state.users[client.id].name } left.`});
   }
 }
 
@@ -39,5 +47,6 @@ module.exports = {
   OnJoinCommand: OnJoinCommand,
   OnGameStartCommand: OnGameStartCommand,
   OnLeaveCommand: OnLeaveCommand,
-  OnToggleReadyCommand: OnToggleReadyCommand
+  OnToggleReadyCommand: OnToggleReadyCommand,
+  OnMessageCommand: OnMessageCommand
 };

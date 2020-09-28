@@ -6,7 +6,8 @@ const {
   OnGameStartCommand,
   OnJoinCommand,
   OnLeaveCommand,
-  OnToggleReadyCommand
+  OnToggleReadyCommand,
+  OnMessageCommand
 } = require('./commands/preparation-commands');
 
 class PreparationRoom extends colyseus.Room {
@@ -24,6 +25,9 @@ class PreparationRoom extends colyseus.Room {
     this.onMessage('toggle-ready', (client, message) => {
       this.dispatcher.dispatch(new OnToggleReadyCommand(), client);
     });
+    this.onMessage('messages', (client, message) => {
+      this.dispatcher.dispatch(new OnMessageCommand(), {client, message});
+  });
   }
 
   async onAuth(client, options, request) {
