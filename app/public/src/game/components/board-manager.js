@@ -19,9 +19,9 @@ export default class BoardManager {
       let pokemonUI;
 
       if (window.sessionId == this.player.id) {
-        pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, true);
+        pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, true, true);
       } else {
-        pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false);
+        pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false, true);
       }
       window.animationManager.animatePokemon(pokemonUI);
       this.group.add(pokemonUI);

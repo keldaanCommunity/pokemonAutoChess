@@ -5,8 +5,9 @@ import PokemonDetail from './pokemon-detail';
 import ItemContainer from './item-container';
 
 export default class Pokemon extends Button {
-  constructor(scene, x, y, pokemon, dragable) {
+  constructor(scene, x, y, pokemon, dragable, isPopup) {
     super(scene, x, y, 75, 75);
+    this.isPopup = isPopup;
     this.objType = 'pokemon';
     this.height = 0;
     this.width = 0;
@@ -40,7 +41,7 @@ export default class Pokemon extends Button {
   }
 
   enterButtonHoverState() {
-    if (!this.getFirst('objType', 'detail')) {
+    if (!this.getFirst('objType', 'detail') && this.isPopup) {
       if (this.life) {
         this.add(new PokemonDetail(this.scene, 20, -130, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed));
       } else {

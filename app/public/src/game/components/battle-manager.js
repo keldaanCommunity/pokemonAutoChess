@@ -19,7 +19,7 @@ export default class BattleManager {
   addPokemon(playerId, pokemon) {
     if (this.player.id == playerId) {
       const coordinates = window.transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
-      const pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon);
+      const pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false, true);
       window.animationManager.animatePokemon(pokemonUI);
       this.group.add(pokemonUI);
     }

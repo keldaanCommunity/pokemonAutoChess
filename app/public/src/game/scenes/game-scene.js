@@ -11,6 +11,8 @@ import WeatherManager from '../components/weather-manager';
 import EntryHazardsManager from '../components/Entry-hazards-manager';
 import ItemsContainer from '../components/items-container';
 import DpsMeterContainer from '../components/dps-meter-container';
+import Pokemon from '../components/pokemon';
+import PokemonFactory from '../../../../models/pokemon-factory'
 
 export default class GameScene extends Scene {
   constructor() {
@@ -132,6 +134,8 @@ export default class GameScene extends Scene {
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
     this.weatherManager = new WeatherManager(this);
     this.entryHazardsManager = new EntryHazardsManager(this, this.map, tileset);
+    this.pokemon = this.add.existing(new Pokemon(this, 135,390,PokemonFactory.createPokemonFromName(window.state.players[window.sessionId].avatar),false));
+    window.animationManager.animatePokemon(this.pokemon);
 
     this.textStyle = {
       fontSize: '30px',
@@ -245,6 +249,18 @@ export default class GameScene extends Scene {
         this.graphics.push(graphic);
       }
     }
+
+    this.input.mouse.disableContextMenu();
+
+    this.input.on('pointerdown', function (pointer) {
+        if (pointer.rightButtonDown())
+        {
+          //console.log(this.pokemon);
+          this.pokemon.orientation = window.getOrientation(this.pokemon.x, this.pokemon.y, pointer.x, pointer.y);
+          window.animationManager.animatePokemon(this.pokemon);
+          this.pokemon.moveManager.moveTo(pointer.x, pointer.y);
+        }
+    }, this);
 
     this.input.on('dragstart', (pointer, gameObject) => {
       this.drawRectangles();

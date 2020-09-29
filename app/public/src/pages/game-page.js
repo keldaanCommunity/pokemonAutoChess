@@ -1,4 +1,5 @@
 import GameContainer from '../game/game-container';
+import {ORIENTATION} from '../../../models/enum';
 
 class GamePage {
   constructor(args) {
@@ -10,6 +11,42 @@ class GamePage {
     };
     window.transformAttackCoordinate = function(x, y) {
       return [323 + 102 * x, 698 - 102 * y];
+    };
+
+    window.getOrientation = function(x1, y1, x2, y2) {
+      let angle = Math.atan2(y2 - y1, x2 - x1);
+      if(angle < 0){
+        angle += 2 * Math.PI;
+      }
+      let quarterPi = Math.PI / 4;
+      console.log(angle);
+      if(angle < quarterPi){
+        return ORIENTATION.RIGHT;
+      }
+      else if(angle < 2 * quarterPi){
+        return ORIENTATION.DOWNRIGHT;
+      }
+      else if(angle < 3 * quarterPi){
+        return ORIENTATION.DOWN;
+      }
+      else if(angle < 4 * quarterPi){
+        return ORIENTATION.DOWNLEFT;
+      }
+      else if(angle < 5 * quarterPi){
+        return ORIENTATION.LEFT;
+      }
+      else if(angle < 6 * quarterPi){
+        return ORIENTATION.UPLEFT;
+      }
+      else if(angle < 7 * quarterPi){
+        return ORIENTATION.UP;
+      }
+      else if(angle < 8 * quarterPi){
+        return ORIENTATION.UPRIGHT;
+      }
+      else{
+        return ORIENTATION.RIGHT;
+      }
     };
 
     window.getAttackScale = function(attackSprite) {
