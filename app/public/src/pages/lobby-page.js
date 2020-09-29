@@ -17,13 +17,13 @@ class LobbyPage {
 
   <div style="display:flex; height:80%;"> 
 
-    <div style="width:20%; height:100%;">      
+    <div style="width:30%; height:100%;">      
       <ul id="messages" style="height:100%; overflow: scroll; display:flex; flex-flow:column;">
       </ul>
     </div>
 
-    <div style="display:flex; flex-flow:column; justify-content:space-around; align-items:center; width:80%; height:100%;">   
-     <p>Logged as : ${_client.auth.email}</p>
+    <div style="display:flex; flex-flow:column; justify-content:space-around; align-items:center; width:70%; height:100%;">   
+     <div style="display:flex;flex-flow:row;"><img style="width:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
       <h3>Available room ids:</h3>
       <ul id="room-list"></ul>
       <button id="create">Create new room</button>
@@ -31,7 +31,7 @@ class LobbyPage {
 
   </div>
 
-  <div style="width:20%; display:flex;">
+  <div style="width:30%; display:flex;">
     <input style="width:80%;" id="inputMessage" class="inputMessage" placeholder="Type here..." type="text">
     <button style="width:20%;" id="send">Send</button>
   </div>`;
@@ -91,14 +91,25 @@ class LobbyPage {
     });
 
     this.room.onMessage('messages', (message) => {
-      //console.log(message)
+      //console.log(message);
       let messageHTML = document.createElement('li');
       let nameHTML = document.createElement('p');
+      let messageContentHTML = document.createElement('p');
+
+      messageContentHTML.textContent = message.message;
+
       nameHTML.style.color = 'black';
       nameHTML.style.fontWeight = 'bold';
       nameHTML.textContent = message.name + ' : ';
-      let messageContentHTML = document.createElement('p');
-      messageContentHTML.textContent = message.message;
+      
+      if(message.avatar){
+        let imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${message.avatar}.png`;
+        imageHTML.style.width = '50px';
+        imageHTML.style.height = '50px';
+        messageHTML.appendChild(imageHTML);
+      }
+      
       messageHTML.appendChild(nameHTML);
       messageHTML.appendChild(messageContentHTML);
       messageHTML.style.display = 'flex';
@@ -130,7 +141,7 @@ class LobbyPage {
 
   sendMessage(){
     if(document.getElementById('inputMessage').value != ''){
-      this.room.send('messages', {'name': _client.auth.email, 'message': document.getElementById('inputMessage').value});
+      this.room.send('messages', {'name': _client.auth.email, 'message': document.getElementById('inputMessage').value, 'avatar': _client.auth.metadata.avatar});
       document.getElementById('inputMessage').value = '';
     }
   }

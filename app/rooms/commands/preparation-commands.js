@@ -5,7 +5,7 @@ const User = require('../../models/user');
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
     client.id = uniqid();
-    this.state.users[client.id] = new User(client.id, auth.email);
+    this.state.users[client.id] = new User(client.id, auth.email, auth.metadata.avatar);
     this.room.broadcast('messages', {'name':'Server', 'message':`${ auth.email } joined.`});
   }
 }

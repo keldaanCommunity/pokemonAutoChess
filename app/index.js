@@ -40,6 +40,12 @@ hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
   if (provider == 'email' && !validator.validate($set.email)) {
     throw new Error('email is not valid');
   };
+
+  $setOnInsert.metadata = {
+    avatar: 'eevee',
+    wins: 0
+  };
+
 });
 
 // Room

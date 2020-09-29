@@ -113,6 +113,7 @@ class LoginPage {
   }
 
   joinLobbyRoom() {
+    //console.log(_client);
     _client.joinOrCreate('lobby', {}).then((room) => {
       window.dispatchEvent(new CustomEvent('render-lobby', {detail: {room: room}}));
     }).catch((e) => {

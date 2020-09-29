@@ -1,4 +1,5 @@
 import {GameObjects} from 'phaser';
+import PokemonFactory from '../../../../models/pokemon-factory';
 
 export default class PlayerPortraitContainer extends GameObjects.Container {
   constructor(scene, x, y, player) {
@@ -10,23 +11,24 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
       color: 'white',
       align: 'center'
     };
-    this.background = new GameObjects.Image(scene, 70, 0, 'user');
+    let pokemon = PokemonFactory.createPokemonFromName(player.avatar);
+    this.background = new GameObjects.Image(scene, -50, 0, pokemon.rarity, `${pokemon.index}/portrait`).setScale(1.5,1.5);
     this.background.setInteractive({useHandCursor: true}).on('pointerdown', () => {
       window.dispatchEvent(new CustomEvent('player-click', {
         detail: {'id': player.id}
       }));
     });
     this.add(this.background);
-    this.life = new GameObjects.Text(scene, -40, -30, player.life, this.textStyle);
+    this.life = new GameObjects.Text(scene, -20, -30, player.life, this.textStyle);
     this.add(this.life);
-    this.add(new GameObjects.Image(scene, 30, -15, 'life'));
-    this.money = new GameObjects.Text(scene, 60, -30, player.money, this.textStyle);
+    this.add(new GameObjects.Image(scene, 60, -15, 'life'));
+    this.money = new GameObjects.Text(scene, 130, -30, player.money, this.textStyle);
     this.add(this.money);
-    this.add(new GameObjects.Image(scene, 115, -12, 'money').setScale(0.5, 0.5));
-    this.add(new GameObjects.Text(scene, 130, -30, 'Lvl ', this.textStyle));
-    this.level = new GameObjects.Text(scene, 170, -30, player.experienceManager.level, this.textStyle);
+    this.add(new GameObjects.Image(scene, 180, -12, 'money').setScale(0.5, 0.5));
+    this.add(new GameObjects.Text(scene, 130, 0, 'Lvl ', this.textStyle));
+    this.level = new GameObjects.Text(scene, 180, 0, player.experienceManager.level, this.textStyle);
     this.add(this.level);
-    this.add(new GameObjects.Text(scene, -40, 0, player.name.slice(0, 15), this.textStyle));
+    this.add(new GameObjects.Text(scene, -20, 0, player.name.slice(0, 15), this.textStyle));
   }
 
   onLifeChange(value) {

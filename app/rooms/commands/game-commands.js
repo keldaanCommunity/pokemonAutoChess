@@ -285,7 +285,7 @@ class OnLevelUpCommand extends Command {
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    this.state.players[client.sessionId] = new Player(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')));
+    this.state.players[client.sessionId] = new Player(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')),client.auth.metadata.avatar);
     this.state.shop.assignShop(this.state.players[client.sessionId]);
   }
 }

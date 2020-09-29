@@ -15,13 +15,13 @@ class RoomPage {
     </header>
     <div style="display:flex; height:80%;"> 
 
-      <div style="width:20%; height:100%;">      
+      <div style="width:30%; height:100%;">      
         <ul id="messages" style="height:100%; overflow: scroll; display:flex; flex-flow:column;">
         </ul>
       </div>
 
-      <div style="display:flex; flex-flow:column; justify-content:space-around; align-items:center; width:80%; height:100%;">   
-      <p>Logged as : ${_client.auth.email}</p>
+      <div style="display:flex; flex-flow:column; justify-content:space-around; align-items:center; width:70%; height:100%;">   
+      <div style="display:flex;flex-flow:row;"><img style="width:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
       <h3>Players in room :</h3>
       <table id="players-table">
         <tr>
@@ -38,7 +38,7 @@ class RoomPage {
     </div>
 
     </div>
-      <div style="width:20%; display:flex;">
+      <div style="width:30%; display:flex;">
         <input style="width:80%;" id="inputMessage" class="inputMessage" placeholder="Type here..." type="text">
         <button style="width:20%;" id="send">Send</button>
       </div>
@@ -50,7 +50,7 @@ class RoomPage {
 
   sendMessage(){
     if(document.getElementById('inputMessage').value != ''){
-      this.room.send('messages', {'name': _client.auth.email, 'message': document.getElementById('inputMessage').value});
+      this.room.send('messages', {'name': _client.auth.email, 'message': document.getElementById('inputMessage').value, 'avatar': _client.auth.metadata.avatar});
       document.getElementById('inputMessage').value = '';
     }
   }
@@ -114,19 +114,29 @@ class RoomPage {
     });
 
     this.room.onMessage('messages', (message) => {
-
+      //console.log(message);
       let messageHTML = document.createElement('li');
       let nameHTML = document.createElement('p');
+      let messageContentHTML = document.createElement('p');
+
+      messageContentHTML.textContent = message.message;
+
       nameHTML.style.color = 'black';
       nameHTML.style.fontWeight = 'bold';
       nameHTML.textContent = message.name + ' : ';
-      let messageContentHTML = document.createElement('p');
-      messageContentHTML.textContent = message.message;
+      
+      if(message.avatar){
+        let imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${message.avatar}.png`;
+        imageHTML.style.width = '50px';
+        imageHTML.style.height = '50px';
+        messageHTML.appendChild(imageHTML);
+      }
+      
       messageHTML.appendChild(nameHTML);
       messageHTML.appendChild(messageContentHTML);
       messageHTML.style.display = 'flex';
       document.getElementById('messages').appendChild(messageHTML);
-
     });
 
     this.room.onMessage('game-start', (message) => {
@@ -143,7 +153,6 @@ class RoomPage {
     document.getElementById('players-table').innerHTML = `
     <tr>
     <th>Player</th>
-    <th>Elo</th>
     <th>Ready</th>
     </tr>`;
 
@@ -156,8 +165,7 @@ class RoomPage {
       }
       document.getElementById('players-table').innerHTML +=`
       <tr>
-      <td>${this.room.state.users[id].name}</td>
-      <td>1000</td>
+      <td style="display:flex;"><img style="width:50px; height:50px;"src="assets/avatar/${this.room.state.users[id].avatar}.png"></img><p>${this.room.state.users[id].name}</p></td>
       <td>${icon}</td>
       </tr>`;
     }

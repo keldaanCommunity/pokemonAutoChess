@@ -919,6 +919,11 @@ class PokemonFactory {
         break;
     }
   }
+
+  static getPokemonRarityFromName(name){
+    let pokemon = PokemonFactory.createPokemonFromName(name);
+    return pokemon.rarity;
+  }
 }
 
 module.exports = PokemonFactory;

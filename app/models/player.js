@@ -9,10 +9,11 @@ const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 
 class Player extends Schema {
-  constructor(id, name) {
+  constructor(id, name, avatar) {
     super();
     this.id = id;
     this.name = name;
+    this.avatar = avatar;
     this.board = new MapSchema();
     this.shop = new MapSchema();
     this.stuff = new Stuff();
@@ -35,6 +36,7 @@ class Player extends Schema {
 schema.defineTypes(Player, {
   id: 'string',
   name: 'string',
+  avatar: 'string',
   board: {map: Pokemon},
   shop: {map: Pokemon},
   simulation: Simulation,

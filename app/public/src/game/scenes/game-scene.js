@@ -104,7 +104,6 @@ export default class GameScene extends Scene {
     this.load.multiatlas('EPIC', 'assets/pokemons/epic/epic.json', 'assets/pokemons/epic');
     this.load.multiatlas('LEGENDARY', 'assets/pokemons/legendary/legendary.json', 'assets/pokemons/legendary');
     this.load.multiatlas('attacks', 'assets/attacks/attacks.json', 'assets/attacks');
-    this.load.image('user', 'assets/ui/user.png');
     this.load.image('transition', 'assets/ui/transition.png');
     this.load.image('money', 'assets/ui/money.png');
     this.load.image('refreshButton', 'assets/ui/refreshButton.png');
