@@ -446,19 +446,19 @@ class Togekiss extends Pokemon {
 
 class Rhyhorn extends Pokemon {
   constructor() {
-    super('rhyhorn', [TYPE.GROUND, TYPE.MONSTER], RARITY.RARE, 111, 'rhydon', 80, 5, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
+    super('rhyhorn', [TYPE.GROUND, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 111, 'rhydon', 80, 5, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 
 class Rhydon extends Pokemon {
   constructor() {
-    super('rhydon', [TYPE.GROUND, TYPE.MONSTER], RARITY.RARE, 112, 'rhyperior', 120, 9, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
+    super('rhydon', [TYPE.GROUND, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 112, 'rhyperior', 120, 9, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 
 class Rhyperior extends Pokemon {
   constructor() {
-    super('rhyperior', [TYPE.GROUND, TYPE.MONSTER], RARITY.RARE, 464, '', 220, 16, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
+    super('rhyperior', [TYPE.GROUND, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 464, '', 220, 16, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL);
   }
 }
 
