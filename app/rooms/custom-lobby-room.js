@@ -23,7 +23,6 @@ async onAuth(client, options, request) {
 
 onJoin (client, options, auth) {
   super.onJoin(client, options, auth);
-  console.log(client.auth.metadata);
   this.broadcast('messages', {'name':'Server', 'message':`${auth.email} joined.`});
 }
 

@@ -504,7 +504,7 @@ class OnUpdatePhaseCommand extends Command {
       player.simulation.stop();
       if(player.alive){
         if(player.opponentName == 'PVE' && player.lastBattleResult == 'Win'){
-          let item = ItemFactory.createRandomItem();
+          let item = ItemFactory.createRandomStone();
           player.stuff.add(item);
         }
         player.opponentName = '';

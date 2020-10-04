@@ -13,7 +13,7 @@ class GameRoom extends colyseus.Room {
   // When room is initialized
   onCreate() {
     this.setState(new GameState());
-
+    this.maxClients = 8;
     this.onMessage('shop', (client, message) => {
       this.dispatcher.dispatch(new Commands.OnShopCommand(), {
         sessionId: client.sessionId,
