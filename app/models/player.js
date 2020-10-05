@@ -9,7 +9,7 @@ const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 
 class Player extends Schema {
-  constructor(id, name, avatar) {
+  constructor(id, name, avatar, isBot) {
     super();
     this.id = id;
     this.name = name;
@@ -30,6 +30,7 @@ class Player extends Schema {
     this.opponentName = '';
     this.boardSize = 0;
     this.alive = true;
+    this.isBot = isBot;
   }
 }
 

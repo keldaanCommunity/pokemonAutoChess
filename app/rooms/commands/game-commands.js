@@ -285,7 +285,7 @@ class OnLevelUpCommand extends Command {
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    this.state.players[client.sessionId] = new Player(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')),client.auth.metadata.avatar);
+    this.state.players[client.sessionId] = new Player(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')),client.auth.metadata.avatar, false);
     this.state.shop.assignShop(this.state.players[client.sessionId]);
   }
 }
@@ -565,6 +565,7 @@ class OnUpdatePhaseCommand extends Command {
     this.state.phase = STATE.FIGHT;
     this.state.time = 30000;
     this.state.stageLevel += 1;
+    this.state.botManager.updateBots();
 
     for (const id in this.state.players) {
       const player = this.state.players[id];

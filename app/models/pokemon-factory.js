@@ -914,8 +914,9 @@ class PokemonFactory {
         return new Pokemon.Camerupt();
       case 'mega-camerupt':
         return new Pokemon.MegaCamerupt();
-        default:
-        console.log(`No pokemon with name "${name}" found`);
+      default:
+        console.log(`No pokemon with name "${name}" found, return magikarp`);
+        return new Pokemon.Magikarp();
         break;
     }
   }

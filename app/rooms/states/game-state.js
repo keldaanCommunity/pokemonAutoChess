@@ -1,6 +1,7 @@
 const Player = require('../../models/player');
 const Shop = require('../../models/shop');
 const schema = require('@colyseus/schema');
+const BotManager = require('../../core/bot-manager');
 const STATE = require('../../models/enum').STATE;
 
 class GameState extends schema.Schema {
@@ -14,6 +15,7 @@ class GameState extends schema.Schema {
     this.players = new schema.MapSchema();
     this.shop = new Shop();
     this.gameFinished = false;
+    this.botManager = new BotManager();
   }
 }
 
