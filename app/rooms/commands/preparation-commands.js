@@ -1,6 +1,7 @@
 const Command = require('@colyseus/command').Command;
 const uniqid = require('uniqid');
 const User = require('../../models/user');
+const BOT_AVATAR = require('../../models/enum').BOT_AVATAR;
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
@@ -49,9 +50,10 @@ class OnAddBotCommand extends Command {
   execute(client) {
     if(Object.keys(this.state.users).length < 8){
       let id = uniqid();
-      let name = 'charmeleon'; 
-      this.state.users[id] = new User(id, 'BOT', name, true, true);
-      this.room.broadcast('messages', {'name':'Server', 'message':`Bot ${ name } added.`});
+      let botList = Object.keys(BOT_AVATAR);
+      let bot = botList[Math.floor(Math.random() * botList.length)];
+      this.state.users[id] = new User(id, `BOT ${BOT_AVATAR[bot]}`, BOT_AVATAR[bot], true, true);
+      this.room.broadcast('messages', {'name':'Server', 'message':`Bot ${ BOT_AVATAR[bot] } added.`});
     }
   }
 }
