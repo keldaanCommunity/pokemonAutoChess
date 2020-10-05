@@ -60,6 +60,7 @@ class Simulation extends Schema {
     if (blueEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
       const kyogre = PokemonFactory.createPokemonFromName('kyogre');
       const coord = this.getFirstAvailablePlaceOnBoard(true);
+      const dps = new Dps(pokemon.id, pokemon.name);
       const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.atk, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 0, kyogre.attackSprite, kyogre.rarity, kyogre.types, kyogre.items, this);
       this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, blueTeam, redTeam);
       this.blueTeam[pokemonEntity.id] = pokemonEntity;
