@@ -19,7 +19,7 @@ class GamePage {
         angle += 2 * Math.PI;
       }
       let quarterPi = Math.PI / 4;
-      console.log(angle);
+      //console.log(angle);
       if(angle < quarterPi){
         return ORIENTATION.RIGHT;
       }

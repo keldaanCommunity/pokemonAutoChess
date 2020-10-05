@@ -2,7 +2,7 @@ const colyseus = require('colyseus');
 const social = require('@colyseus/social');
 const {Dispatcher} = require('@colyseus/command');
 const PreparationState = require('./states/preparation-state');
-const {OnGameStartCommand, OnJoinCommand, OnLeaveCommand, OnToggleReadyCommand, OnMessageCommand} = require('./commands/preparation-commands');
+const {OnGameStartCommand, OnJoinCommand, OnLeaveCommand, OnToggleReadyCommand, OnMessageCommand, OnAddBotCommand, OnRemoveBotCommand} = require('./commands/preparation-commands');
 
 class PreparationRoom extends colyseus.Room {
   constructor() {
@@ -21,7 +21,13 @@ class PreparationRoom extends colyseus.Room {
     });
     this.onMessage('messages', (client, message) => {
       this.dispatcher.dispatch(new OnMessageCommand(), {client, message});
-  });
+    });
+    this.onMessage('addBot', (client, message) => {
+      this.dispatcher.dispatch(new OnAddBotCommand(), client);
+    });
+    this.onMessage('removeBot', (client, message) => {
+      this.dispatcher.dispatch(new OnRemoveBotCommand(), client);
+    });
   }
 
   async onAuth(client, options, request) {

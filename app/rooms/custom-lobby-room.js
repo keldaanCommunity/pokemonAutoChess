@@ -33,7 +33,7 @@ onLeave (client) {
 
 onDispose () {
   super.onDispose();
-  console.log("Dispose ChatRoom");
+  console.log('Dispose LobbyRoom');
 }
 }
 

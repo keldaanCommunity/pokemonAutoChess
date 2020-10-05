@@ -13,6 +13,7 @@ class GameState extends schema.Schema {
     this.phase = STATE.PICK;
     this.players = new schema.MapSchema();
     this.shop = new Shop();
+    this.gameFinished = false;
   }
 }
 

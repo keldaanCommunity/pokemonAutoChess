@@ -3,6 +3,7 @@ const social = require('@colyseus/social');
 const {Dispatcher} = require('@colyseus/command');
 const GameState = require('./states/game-state');
 const Commands = require('./commands/game-commands');
+const Player = require('../models/player');
 
 class GameRoom extends colyseus.Room {
   constructor() {
@@ -11,9 +12,18 @@ class GameRoom extends colyseus.Room {
   }
 
   // When room is initialized
-  onCreate() {
+  onCreate(options) {
     this.setState(new GameState());
     this.maxClients = 8;
+
+    for (const id in options.users){
+      let user = options.users[id];
+      if(user.isBot){
+        this.state.players[id] = new Player(user.id, user.name, user.avatar);
+        this.state.shop.assignShop(this.state.players[id]);
+      }
+    }
+
     this.onMessage('shop', (client, message) => {
       this.dispatcher.dispatch(new Commands.OnShopCommand(), {
         sessionId: client.sessionId,

@@ -34,6 +34,8 @@ class RoomPage {
         <button id="ready">Ready</button>
         <button id="start">Start Game</button>
         <button id="quit">Quit Room</button>
+        <button id="addBot">Add Bot</button>
+        <button id="removeBot">Remove Bot</button>
       </div>
     </div>
 
@@ -63,6 +65,13 @@ class RoomPage {
     });
 
     let self = this;
+    document.getElementById('addBot').addEventListener('click', function () {
+      self.room.send('addBot');
+    });
+
+    document.getElementById('removeBot').addEventListener('click', function () {
+      self.room.send('removeBot');
+    });
 
     document.getElementById('send').addEventListener('click',function(){
       self.sendMessage();
@@ -82,7 +91,7 @@ class RoomPage {
         }
       }
       if (allUsersReady) {
-        _client.create('game', {/* options */ }).then((room) => {
+        _client.create('game', {'users':this.room.state.users}).then((room) => {
           this.room.send('game-start', {id: room.id});
           this.room.leave();
           window.dispatchEvent(new CustomEvent('render-game', {detail: {room: room}}));
@@ -110,6 +119,7 @@ class RoomPage {
       }
     });
     this.room.onStateChange((state) => {
+      console.log(state);
       this.handleUserChange();
     });
 
@@ -150,6 +160,7 @@ class RoomPage {
   }
 
   handleUserChange() {
+    let self = this;
     document.getElementById('players-table').innerHTML = `
     <tr>
     <th>Player</th>
@@ -158,16 +169,19 @@ class RoomPage {
 
     for (const id in this.room.state.users) {
       let icon = '';
-      if (this.room.state.users[id].ready) {
-        icon = `<i class="fa fa-check" aria-hidden="true"></i>`;
-      } else {
-        icon = `<i class="fa fa-times" aria-hidden="true"></i>`;
-      }
-      document.getElementById('players-table').innerHTML +=`
-      <tr>
-      <td style="display:flex;"><img style="width:50px; height:50px;"src="assets/avatar/${this.room.state.users[id].avatar}.png"></img><p>${this.room.state.users[id].name}</p></td>
-      <td>${icon}</td>
-      </tr>`;
+      if(this.room.state.users[id].name !== undefined){
+        if (this.room.state.users[id].ready) {
+          icon = `<i class="fa fa-check" aria-hidden="true"></i>`;
+        } else {
+          icon = `<i class="fa fa-times" aria-hidden="true"></i>`;
+        }
+        document.getElementById('players-table').innerHTML +=`
+        <tr>
+        <td style="display:flex;"><img style="width:50px; height:50px;"src="assets/avatar/${this.room.state.users[id].avatar}.png"></img><p>${this.room.state.users[id].name}</p></td>
+        <td>${icon}</td>
+        </tr>`;
+      };
+
     }
   }
 }

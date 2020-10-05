@@ -185,9 +185,9 @@ const RARITY = Object.freeze({
 const RARITY_HP_COST= Object.freeze({
   COMMON: 1,
   UNCOMMON: 2,
-  RARE: 4,
-  EPIC: 6,
-  LEGENDARY: 8,
+  RARE: 3,
+  EPIC: 4,
+  LEGENDARY: 5,
   NEUTRAL: 1
 });
 

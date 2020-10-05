@@ -4,9 +4,11 @@ const User = require('../../models/user');
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    client.id = uniqid();
-    this.state.users[client.id] = new User(client.id, auth.email, auth.metadata.avatar);
+    this.state.users[client.sessionId] = new User(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.avatar, false, false);
     this.room.broadcast('messages', {'name':'Server', 'message':`${ auth.email } joined.`});
+    if(Object.keys(this.state.users).length > 8){
+      return [new OnRemoveBotCommand()];
+    }
   }
 }
 
@@ -43,10 +45,35 @@ class OnToggleReadyCommand extends Command {
   }
 }
 
+class OnAddBotCommand extends Command {
+  execute(client) {
+    if(Object.keys(this.state.users).length < 8){
+      let id = uniqid();
+      let name = 'charmeleon'; 
+      this.state.users[id] = new User(id, 'BOT', name, true, true);
+      this.room.broadcast('messages', {'name':'Server', 'message':`Bot ${ name } added.`});
+    }
+  }
+}
+
+class OnRemoveBotCommand extends Command {
+  execute(client) {
+    for (const id in this.state.users) {
+      if(this.state.users[id].isBot){
+        delete this.state.users[id];
+        this.room.broadcast('messages', {'name':'Server', 'message':`Bot removed.`});
+        break;
+      }
+    }
+  }
+}
+
 module.exports = {
   OnJoinCommand: OnJoinCommand,
   OnGameStartCommand: OnGameStartCommand,
   OnLeaveCommand: OnLeaveCommand,
   OnToggleReadyCommand: OnToggleReadyCommand,
-  OnMessageCommand: OnMessageCommand
+  OnMessageCommand: OnMessageCommand,
+  OnAddBotCommand: OnAddBotCommand,
+  OnRemoveBotCommand: OnRemoveBotCommand
 };

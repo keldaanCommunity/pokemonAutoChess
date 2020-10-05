@@ -327,12 +327,8 @@ class OnUpdateCommand extends Command {
 }
 
 class OnKickPlayerCommand extends Command {
-  execute(sessionId) {
-    for (let i = 0; i < this.room.clients.length; i++) {
-      if (this.room.clients[i].sessionId == sessionId) {
-        this.room.clients[i].send('kick-out');
-      }
-    }
+  execute() {
+    this.room.broadcast('kick-out');
   }
 }
 
@@ -387,10 +383,29 @@ class OnUpdatePhaseCommand extends Command {
     } else if (this.state.phase == STATE.FIGHT) {
       this.computeLife();
       this.checkDeath();
-        //return [new OnKickPlayerCommand().setPayload(deadPlayerId)];
+      const kickCommands = this.checkEndGame();
+      if(kickCommands.length != 0){
+        return kickCommands;
+      }
       this.computeIncome();
       this.initializePickingPhase();
     }
+  }
+
+  checkEndGame(){
+    let commands = [];
+    let numberOfPlayersAlive = 0;
+    for (const id in this.state.players) {
+      const player = this.state.players[id];
+      if (player.alive) {
+        numberOfPlayersAlive += 1;
+      }
+    }
+    if(numberOfPlayersAlive <= 1 && !this.state.gameFinished){
+      this.state.gameFinished = true;
+      commands.push(new OnKickPlayerCommand());
+    }
+    return commands;
   }
 
   computePlayerDamage(redTeam, stageLevel){
