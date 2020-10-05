@@ -63,6 +63,7 @@ class Simulation extends Schema {
       const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.atk, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 0, kyogre.attackSprite, kyogre.rarity, kyogre.types, kyogre.items, this);
       this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, blueTeam, redTeam);
       this.blueTeam[pokemonEntity.id] = pokemonEntity;
+      this.dpsMeter[pokemonEntity.id] = dps;
       this.board.setValue(coord[0], coord[1], pokemonEntity);
     }
     if (redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
