@@ -181,6 +181,7 @@ export default class GameScene extends Scene {
   }
 
   fade() {
+    /*
     this.tweens.add({
       targets: this.transitionScreen,
       duration: 150,
@@ -188,6 +189,7 @@ export default class GameScene extends Scene {
       yoyo: true,
       repeat: 0
     });
+    */
   }
 
   displayCountDown(countdown) {
