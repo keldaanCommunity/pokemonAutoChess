@@ -15,7 +15,7 @@ class Effects {
     if (synergies.GRASS >= 6) {
       this.list.push(EFFECTS.GROWTH);
     }
-    if (synergies.GRASS >= 9) {
+    if (synergies.GRASS >= 8) {
       this.list.push(EFFECTS.SPORE);
     }
     if (synergies.FIRE >= 3) {
