@@ -10,15 +10,12 @@ class MovingState extends PokemonState {
   update(pokemon, dt, board, climate) {
     super.update(pokemon, dt, board, climate);
     if (pokemon.cooldown <= 0) {
-      if (pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
-        pokemon.cooldown = 100;
-      } else {
-        pokemon.cooldown = 1000;
-      }
+      pokemon.cooldown = 1000;
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
       // no target case
       if (targetCoordinate[0] === undefined || targetCoordinate[1] === undefined) {
-      } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) <= pokemon.range) {
+      }
+      else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) <= pokemon.range) {
         pokemon.toAttackingState();
       } else {
         this.move(pokemon, board, targetCoordinate);

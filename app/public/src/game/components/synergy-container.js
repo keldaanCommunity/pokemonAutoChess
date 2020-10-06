@@ -92,13 +92,13 @@ export default class SynergyContainer extends Button {
     this.color = this.typeColor[type];
     this.colorText = this.textColor[type];
     this.threshold = this.typeActivation[type];
-    this.background = new GameObjects.Rectangle(scene, 0, 0, 130, 62, this.color).setVisible(false);
+    this.background = new GameObjects.Rectangle(scene, 0, 0, 110, 62, this.color).setVisible(false);
     this.add(this.background);
     this.synergyCount = new GameObjects.Text(scene, 20, -20, '0', this.textStyle);
     this.synergyCount.setColor(this.colorText);
     this.add(this.synergyCount);
     this.add(new GameObjects.Image(scene, -30, 0, 'types', type));
-    this.detail = new SynergyDetail(scene, -240, 0, type);
+    this.detail = new SynergyDetail(scene, -380, 0, type);
     this.add(this.detail);
     this.setDepth(999);
   }
@@ -115,7 +115,7 @@ export default class SynergyContainer extends Button {
   }
 
   enterButtonHoverState() {
-    this.detail.setScale(1, 1);
+    this.detail.setScale(2, 2);
   }
 
   enterButtonRestState() {

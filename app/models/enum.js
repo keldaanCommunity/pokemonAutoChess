@@ -1,3 +1,98 @@
+const WORDS = Object.freeze({
+  GAME_LOBBY:{
+    'eng':'Game Lobby',
+    'esp':'Lobby del juego'
+  },
+  HOME:{
+    'eng':'Home',
+    'esp':'Inicio'
+  },
+  CHANGE_LANGAGE:{
+    'eng':'Change Langage',
+    'esp':'Cambiar idioma'
+  },
+  AVAILABLE_ROOM_IDS:{
+    'eng':'Available room ids',
+    'esp':'Sala disponible'
+  },
+  CREATE_NEW_ROOM:{
+    'eng':'Create new room',
+    'esp':'Crear una nueva sala'
+  },
+  TYPE_HERE:{
+    'eng':'Type here',
+    'esp':'Escriba aquí'
+  },
+  SEND:{
+    'eng':'Send',
+    'esp':'Envía'
+  },
+  ROOM_ID:{
+    'eng':'Room identifier',
+    'esp':'Identificador de la sala'
+  },
+  PLAYERS_IN_ROOM:{
+    'eng':'Players in room',
+    'esp':'Los jugadores en la sala'
+  },
+  PLAYER:{
+    'eng':'Player',
+    'esp':'Jugador'
+  },
+  READY:{
+    'eng':'Ready',
+    'esp':'listo'
+  },
+  START_GAME:{
+    'eng':'Start Game',
+    'esp':'Empieza el juego'
+  },
+  QUIT_ROOM:{
+    'eng':'Quit Room',
+    'esp':'Salga de la sala'
+  },
+  ADD_BOT:{
+    'eng':'Add bot',
+    'esp':'Añade el bot'
+  },
+  REMOVE_BOT:{
+   'eng':'Remove bot',
+   'esp':'Quitar el bot' 
+  },
+  REFRESH:{
+    'eng':'Refresh',
+    'esp':'Actualizar'
+  },
+  BUY_XP:{
+    'eng':'Buy exp',
+    'esp':'Comprar xp'
+  },
+  TURN:{
+    'eng':'Turn',
+    'esp':'Gira'
+  },
+  MONEY:{
+    'eng':'Money',
+    'esp':'Dinero'
+  },
+  BASE:{
+    'eng':'Base',
+    'esp':'Base'
+  },
+  STREAK:{
+    'eng':'Streak',
+    'esp':'Raya'
+  },
+  INTEREST:{
+    'eng':'Interest',
+    'esp':'Interes'
+  },
+  WIN:{
+    'eng':'Win',
+    'esp':'Victoria'
+  }
+});
+
 const CLIMATE = Object.freeze({
   NEUTRAL: 'NEUTRAL',
   RAIN: 'RAIN',
@@ -36,64 +131,227 @@ const ITEMS = Object.freeze({
 });
 
 const ITEM_NAME = Object.freeze({
-  WHITE_GLASSES: 'White Glasses'
-  , MUSCLE_BAND: 'Muscle Band'
-  , LIFE_ORB: 'Life Orb'
-  , COIN_AMULET: 'Coin Amulet'
-  , ROCKY_HELMET: 'Rocky Helmet'
-  , SHELL_BELL: 'Shell Bell'
-  , BIG_ROOT: 'Big Root'
-  , APRICOT_BERRY: 'Apricot Berry'
-  , LIECHI_BERRY: 'Liechi Berry'
-  , GANLON_BERRY: 'Ganlon Berry'
-  , PETAYA_BERRY: 'Petaya Berry'
-  , SALAC_BERRY: 'Salac Berry'
-  , ORAN_BERRY: 'Oran Berry'
-  , SOFT_SAND: 'Soft Sand'
-  , MOON_STONE: 'Moon Stone'
-  , NIGHT_STONE: 'Night Stone'
-  , POISON_BARB: 'Poison Barb'
-  , DRAGON_FANG: 'Dragon Fang'
-  , THUNDER_STONE: 'Thunder Stone'
-  , METAL_SKIN: 'Metal Skin'
-  , METRONOME: 'Metronome'
-  , WATER_STONE: 'Water Stone'
-  , FIRE_STONE: 'Fire Stone'
-  , LEAF_STONE: 'Leaf Stone'
-  , BLACK_BELT: 'Black Belt'
-  , SILK_SCARF: 'Silk Scarf'
-  , DAWN_STONE: 'Dawn Stone'
+  WHITE_GLASSES:{
+    'eng':'White Glasses',
+    'esp':'Gafas blancas'
+  }
+  , MUSCLE_BAND:{
+    eng:'Muscle Band',
+    esp:'Banda Muscular'
+  } 
+  , LIFE_ORB:{
+    eng:'Life Orb',
+    esp:'Orbe de la Vida'
+  } 
+  , COIN_AMULET:{
+    eng:'Coin Amulet',
+    esp:'Amuleto de monedas'
+  } 
+  , ROCKY_HELMET:{
+    eng:'Rocky Helmet',
+    esp:'Casco rocoso'
+  } 
+  , SHELL_BELL:{
+    eng:'Shell Bell',
+    esp:'Casco Campana'
+  } 
+  , BIG_ROOT:{
+    eng:'Big Root',
+    esp:'Raíz Grande'
+  } 
+  , APRICOT_BERRY:{
+    eng:'Apricot Berry',
+    esp:'Apricot Baya'
+  } 
+  , LIECHI_BERRY:{
+    eng:'Liechi Berry',
+    esp:'Liechi Baya'
+  } 
+  , GANLON_BERRY:{
+    eng:'Ganlon Berry',
+    esp:'Ganlon Baya'
+  } 
+  , PETAYA_BERRY:{
+    eng:'Petaya Berry',
+    esp:'Petaya Baya'
+  } 
+  , SALAC_BERRY:{
+    eng:'Salac Berry',
+    esp:'Salac Baya'
+  } 
+  , ORAN_BERRY:{
+    eng:'Oran Berry',
+    esp:'Oran Baya'
+  } 
+  , SOFT_SAND:{
+    eng:'Soft Sand',
+    esp:'Arena Blanda'
+  } 
+  , MOON_STONE:{
+    eng:'Moon Stone',
+    esp:'Piedra lunar'
+  } 
+  , NIGHT_STONE:{
+    eng:'Night Stone',
+    esp:'Piedra Nocturna'
+  } 
+  , POISON_BARB:{
+    eng:'Poison Barb',
+    esp:'Barra de veneno'
+  }
+  , DRAGON_FANG:{
+    eng:'Dragon Fang',
+    esp:'Colmillo de Dragón'
+  } 
+  , THUNDER_STONE:{
+    eng:'Thunder Stone',
+    esp:'Piedra del Trueno'
+  } 
+  , METAL_SKIN:{
+    eng:'Metal Skin',
+    esp:'Piel de metal'
+  } 
+  , METRONOME:{
+    eng:'Metronome',
+    esp:'Metrónomo'
+  } 
+  , WATER_STONE:{
+    eng:'Water Stone',
+    esp:'Piedra de agua'
+  } 
+  , FIRE_STONE:{
+    eng:'Fire Stone',
+    esp:'Piedra de fuego'
+  } 
+  , LEAF_STONE:{
+    eng:'Leaf Stone',
+    esp:'Piedra de la hoja'
+  } 
+  , BLACK_BELT:{
+    eng:'Cinturón negro',
+    esp:'Black Belt'
+  } 
+  , SILK_SCARF:{
+    eng:'Silk Scarf',
+    esp:'Bufanda de Seda'
+  } 
+  , DAWN_STONE:{
+    eng:'Dawn Stone',
+    esp:'Piedra del amanecer'
+  }
 });
 
 
 const ITEM_DESCRIPTION = Object.freeze({
-  WHITE_GLASSES: '+10% special attack'
-  , MUSCLE_BAND: '+10% attack'
-  , LIFE_ORB: '+20% damage, cost 5% life for each attack'
-  , COIN_AMULET: 'Chance to drop between 1 and 5 gold at each round'
-  , ROCKY_HELMET: 'When user is attacked, the attacker take 12% max health damage'
-  , SHELL_BELL: '10% life steal on each attack'
-  , BIG_ROOT: '+ 5% health / second restored'
-  , APRICOT_BERRY: '+50% spe def when below 50% health'
-  , LIECHI_BERRY: '+50% attack when health below 50%'
-  , GANLON_BERRY: '+50% def when health below 50%'
-  , PETAYA_BERRY: '+50% attack special when health below 50%'
-  , SALAC_BERRY: '+50 % attack speed when health below 50%'
-  , ORAN_BERRY: 'Restore 25% health when below 25% health'
-  , SOFT_SAND: '+50% damage if pokemon has type ground'
-  , MOON_STONE: '+50% damage if type Fairy. Will evolve  Eevee into Sylveon.'
-  , NIGHT_STONE: '+50% damage if type Dark. Will evolve Eevee into Umbreon.'
-  , POISON_BARB: '+50% damage if type poison.'
-  , DRAGON_FANG: '+50% damage if type dragon.'
-  , THUNDER_STONE: '+50% damage if type electric. Will evolve Eevee into Jolteon.'
-  , METAL_SKIN: '+50% damage if type metal.'
-  , METRONOME: '+5% damage each time the pokemon attack.'
-  , WATER_STONE: '+50% damage if type water. Will evolve Eeve into Vaporeon.'
-  , FIRE_STONE: '+50% damage if type fire. Will evolve Eevee into Flareon'
-  , LEAF_STONE: '+50% damage if type grass. Will evolve Eevee into Leafon '
-  , BLACK_BELT: '+50% damage if type fighting.'
-  , SILK_SCARF: '+50% damage if type normal.'
-  , DAWN_STONE: '+50% damage if type psychic. Will evolve Eevee into Espeon.'
+  WHITE_GLASSES:
+  {
+    eng:'+10% special attack',
+    esp:'+10% de ataque especial'
+  } 
+  , MUSCLE_BAND:{
+    eng:'+10% attack',
+    esp:'+10% de ataque'
+  }  
+  , LIFE_ORB:{
+    eng:'+100% damage, cost 5% life for each attack',
+    esp:'100% de daño, cuesta un 5% de vida por cada ataque'
+  }  
+  , COIN_AMULET:{
+    eng:'Chance to drop between 1 and 5 gold at each round',
+    esp:'Oportunidad de dejar caer entre 1 y 5 monedas de oro en cada ronda'
+  }  
+  , ROCKY_HELMET:{
+    eng:'When user is attacked, the attacker take 12% max health damage',
+    esp:'Cuando el usuario es atacado, el atacante recibe un 12% de daño máximo de salud.'
+  }  
+  , SHELL_BELL:{
+    eng: '10% life steal on each attack',
+    esp:'10% de robo de vida en cada ataque'
+  } 
+  , BIG_ROOT:{
+    eng:'+ 5% health / second restored',
+    esp:'+ 5% de salud / segundo restaurado'
+  }  
+  , APRICOT_BERRY:{
+    eng: '+50% spe def when below 50% health',
+    esp:'+50% de defensa cuando está por debajo del 50% de salud'
+  } 
+  , LIECHI_BERRY:{
+    eng:'+50% attack when health below 50%',
+    esp:'+50% de ataque cuando la salud está por debajo del 50%'
+  }  
+  , GANLON_BERRY:{
+    eng:'+50% def when health below 50%',
+    esp:'+50% def cuando la salud está por debajo del 50%'
+  }  
+  , PETAYA_BERRY:{
+    eng:'+50% attack special when health below 50%',
+    esp:'+50% de ataque especial cuando la salud está por debajo del 50%'
+  }  
+  , SALAC_BERRY:{
+    eng:'+50 % attack speed when health below 50%',
+    esp:'+50% de velocidad de ataque cuando la salud está por debajo del 50%'
+  }  
+  , ORAN_BERRY:{
+    eng:'Restore 25% health when below 25% health',
+    esp:'Restaurar el 25% de la salud cuando está por debajo del 25% de la salud'
+  }  
+  , SOFT_SAND:{
+    eng:'+10% atk speed. +50% damage if pokemon has type ground.',
+    esp:'+10% de velocidad de la tinta. +50% de daño si el pokemon tiene el tipo de tierra.'
+  }  
+  , MOON_STONE:{
+    eng:'+10% atk speed. +50% damage if type Fairy. Will evolve  Eevee into Sylveon.',
+    esp:'+10% de velocidad. +50% de daño si es del tipo Hada. '
+  }  
+  , NIGHT_STONE:{
+    eng:'+10% atk speed. +50% damage if type Dark. Will evolve Eevee into Umbreon.',
+    esp:'10% de velocidad. +50% de daño si es del tipo Oscuridad. Convertirá a Eevee en Umbreón'
+  }  
+  , POISON_BARB:{
+    eng:'+10% atk speed. +50% damage if type poison.',
+    esp:'10% de velocidad. +50% de daño si es veneno.'
+  }  
+  , DRAGON_FANG:{
+    eng:'+10% atk speed. +50% damage if type dragon.',
+    esp:'+10% a la velocidad de la tinta. +50% de daño si es un dragón.'
+  }  
+  , THUNDER_STONE:{
+    eng:'+10% atk speed. +50% damage if type electric. Will evolve Eevee into Jolteon.',
+    esp:'+10% a velocidad de corteza". +50% de daño si es de tipo eléctrico. Evolucionará Eevee a Jolteon.'
+  }  
+  , METAL_SKIN:{
+    eng:'+10% atk speed. +50% damage if type metal.',
+    esp:'10% a la velocidad de la luz. +50% de daño si es de tipo metálico.'
+  }  
+  , METRONOME:{
+    eng:'+5% damage each time the pokemon attack.',
+    esp:'5% de daño cada vez que el pokemon ataca.'
+  }  
+  , WATER_STONE:{
+    eng:'+10% atk speed. +50% damage if type water. Will evolve Eeve into Vaporeon.',
+    esp:'+10% a la velocidad de ataque. +50% de daño si es de agua. Convertirá a Eeve en Vaporeon".'
+  }  
+  , FIRE_STONE:{
+    eng:'+10% atk speed. +50% damage if type fire. Will evolve Eevee into Flareon',
+    esp:'+10% a la velocidad de ataque. +50% de daño si se escribe "fuego". Convertirá a Eevee en Flareon'
+  }  
+  , LEAF_STONE:{
+    eng:'+10% atk speed. +50% damage if type grass. Will evolve Eevee into Leafon ',
+    esp:''
+  }  
+  , BLACK_BELT:{
+    eng:'+10% atk speed. +50% damage if type fighting.',
+    esp:'+10% a la velocidad de la tinta. +50% de daño si se trata de hierba. Evolucionará Eevee en Leafon'
+  }  
+  , SILK_SCARF:{
+    eng:'+10% atk speed. +50% damage if type normal.',
+    esp:'+10% de velocidad de corte. +50% de daño si el tipo es normal.'
+  }  
+  , DAWN_STONE:{
+    eng:'+10% atk speed. +50% damage if type psychic. Will evolve Eevee into Espeon.',
+    esp:'+10% de velocidad de corte. +50% de daño si es del tipo psíquico. Evolucionará Eevee a Espeon.'
+  }  
 });
 
 const EFFECTS = Object.freeze({
@@ -123,7 +381,7 @@ const EFFECTS = Object.freeze({
   POISON_GAS: 'POISON_GAS',
   TOXIC: 'TOXIC',
   INTIMIDATE: 'INTIMIDATE',
-  DRACO_METEOR: 'DRACO_METEOR',
+  DRAGON_DANCE: 'DRAGON_DANCE',
   WORK_UP: 'WORK_UP',
   RAGE: 'RAGE',
   ANGER_POINT: 'ANGER_POINT',
@@ -180,6 +438,123 @@ const ITEM_TYPE = Object.freeze({
   MOON_STONE: 'MOON_STONE'
 });
 
+const LAST_BATTLE_RESULT_TRADUCTION = Object.freeze({
+  Win:{
+    eng:'Win',
+    esp:'Gana'
+  },
+  Defeat:{
+    eng:'Defeat',
+    esp:'Derrota'
+  },
+  Draw:{
+    eng:'Draw',
+    esp:'Empate'
+  }
+});
+
+const PHASE_TRADUCTION = Object.freeze({
+  PICK:{
+    eng:'Pick',
+    esp:'Escoge'
+  },
+  FIGHT:{
+    eng:'Fight',
+    esp:'Luchar'
+  }
+});
+
+const TYPE_TRADUCTION = Object.freeze({
+  NORMAL: {
+    eng:'Normal',
+    esp:'Normal'
+  },
+  GRASS: {
+    eng:'Grass',
+    esp:'Hierba'
+  },
+  FIRE: {
+    eng:'Fire',
+    esp:'Fuego'
+  },
+  WATER: {
+    eng:'Water',
+    esp:'Agua'
+  },
+  ELECTRIC: {
+    eng:'Electric',
+    esp:'Electrico'
+  },
+  FIGHTING: {
+    eng:'Fighting',
+    esp:'Luchando'
+  },
+  PSYCHIC: {
+    eng:'Psychic',
+    esp:'Psiquico'
+  },
+  DARK: {
+    eng:'Dark',
+    esp:'Oscuro'
+  },
+  METAL: {
+    eng:'Metal',
+    esp:'Metal'
+  },
+  GROUND: {
+    eng:'Ground',
+    esp:'Tierra'
+  },
+  POISON: {
+    eng:'Poison',
+    esp:'Veneno'
+  },
+  DRAGON: {
+    eng:'Dragon',
+    esp:'Dragón'
+  },
+  FIELD: {
+    eng:'Field',
+    esp:'Campo'
+  },
+  MONSTER: {
+    eng:'Monster',
+    esp:'Monstruo'
+  },
+  HUMAN: {
+    eng:'Human',
+    esp:'Humano'
+  },
+  AQUATIC: {
+    eng:'Aquatic',
+    esp:'Acuático'
+  },
+  BUG: {
+    eng:'Bug',
+    esp:'Insecto'
+  },
+  FLYING: {
+    eng:'Flying',
+    esp:'Volando'
+  },
+  FLORA: {
+    eng:'Flora',
+    esp:'Flor'
+  },
+  MINERAL: {
+    eng:'Mineral',
+    esp:'Mineral'
+  },
+  AMORPH: {
+    eng:'Amorph',
+    esp:'Fantasma'
+  },
+  FAIRY: {
+    eng:'Fairy',
+    esp:'Feria'
+  }
+});
+
 const TYPE = Object.freeze({
   NORMAL: 'NORMAL',
   GRASS: 'GRASS',
@@ -216,11 +591,11 @@ const RARITY = Object.freeze({
 
 const RARITY_HP_COST= Object.freeze({
   COMMON: 1,
-  UNCOMMON: 2,
-  RARE: 3,
-  EPIC: 4,
-  LEGENDARY: 5,
-  NEUTRAL: 1
+  UNCOMMON: 1,
+  RARE: 2,
+  EPIC: 2,
+  LEGENDARY: 3,
+  NEUTRAL: 3
 });
 
 const COST = Object.freeze({
@@ -235,14 +610,18 @@ const BOT_AVATAR = Object.freeze({
   WATER1:'squirtle',
   FIRE1:'charmander',
   POISON1:'zubat',
-  GRASS1:'bulbasaur'
+  GRASS1:'bulbasaur',
+  GROUND1:'geodude',
+  NORMAL1:'jigglypuff'
 });
 
 const POKEMON_BOT = Object.freeze({
   squirtle:'WATER1',
   charmander:'FIRE1',
   zubat:'POISON1',
-  bulbasaur:'GRASS1'
+  bulbasaur:'GRASS1',
+  geodude:'GROUND1',
+  jigglypuff:'NORMAL1'
 });
 
 const EXP_TABLE = Object.freeze({
@@ -283,4 +662,13 @@ const ATTACK_TYPE = Object.freeze({
   TRUE:'TRUE'
 });
 
-module.exports = {ITEM_TYPE, TYPE_ITEM, POKEMON_BOT, BOT_AVATAR, TYPE, RARITY,RARITY_HP_COST, COST, EXP_TABLE, STATE, STATE_TYPE, ORIENTATION, EFFECTS, CLIMATE, ATTACK_TYPE, ITEMS, ITEM_NAME, ITEM_DESCRIPTION};
+const MAP_TYPE = Object.freeze({
+  WATER:'WATER',
+  NORMAL:'NORMAL',
+  FIRE:'FIRE',
+  GRASS:'GRASS',
+  ICE:'ICE',
+  ROCK:'ROCK'
+});
+
+module.exports = {LAST_BATTLE_RESULT_TRADUCTION, PHASE_TRADUCTION, TYPE_TRADUCTION, WORDS, MAP_TYPE, ITEM_TYPE, TYPE_ITEM, POKEMON_BOT, BOT_AVATAR, TYPE, RARITY,RARITY_HP_COST, COST, EXP_TABLE, STATE, STATE_TYPE, ORIENTATION, EFFECTS, CLIMATE, ATTACK_TYPE, ITEMS, ITEM_NAME, ITEM_DESCRIPTION};

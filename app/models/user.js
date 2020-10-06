@@ -4,11 +4,13 @@ const Schema = schema.Schema;
 class User extends Schema {
   constructor(id, name, avatar, isBot, ready) {
     super();
-    this.id = id;
-    this.name = name;
-    this.avatar = avatar;
-    this.ready = ready;
-    this.isBot = isBot;
+    this.assign({
+      id: id,
+      name: name,
+      avatar: avatar,
+      ready: ready,
+      isBot: isBot
+    });
   }
 
   toString() {

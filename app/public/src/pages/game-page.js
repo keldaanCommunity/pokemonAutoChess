@@ -4,13 +4,17 @@ import {ORIENTATION} from '../../../models/enum';
 class GamePage {
   constructor(args) {
     this.room = args.room;
+    window.langage = 'esp';
+    if(window._client.auth.lang){
+      window.langage = window._client.auth.lang;
+    }
     this.render();
     this.container = document.getElementById('game');
     window.transformCoordinate = function(x, y) {
-      return [323 + 102 * x, 800 - 102 * y];
+      return [382 + 96 * x, 808 - 120 * y];
     };
     window.transformAttackCoordinate = function(x, y) {
-      return [323 + 102 * x, 698 - 102 * y];
+      return [382 + 96 * x, 712 - 120 * y];
     };
 
     window.getOrientation = function(x1, y1, x2, y2) {

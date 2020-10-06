@@ -15,7 +15,7 @@ class Effects {
     if (synergies.GRASS >= 6) {
       this.list.push(EFFECTS.GROWTH);
     }
-    if (synergies.GRASS >= 9) {
+    if (synergies.GRASS >= 8) {
       this.list.push(EFFECTS.SPORE);
     }
     if (synergies.FIRE >= 3) {
@@ -88,7 +88,7 @@ class Effects {
       this.list.push(EFFECTS.INTIMIDATE);
     }
     if (synergies.DRAGON >= 4) {
-      this.list.push(EFFECTS.DRACO_METEOR);
+      this.list.push(EFFECTS.DRAGON_DANCE);
     }
     if (synergies.FIELD >= 3) {
       this.list.push(EFFECTS.WORK_UP);

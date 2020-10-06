@@ -9,7 +9,7 @@ class HomePage {
     content.setAttribute('id', 'home');
     content.innerHTML = `
     <header>
-    <h1>Pokemon: Auto Chess</h1>
+    <h1>Pokemon Auto Chess</h1>
     </header>
     <main>
     <img src="assets/ui/logo-pac.png" alt="Logo: Pokemon Auto Chess" />

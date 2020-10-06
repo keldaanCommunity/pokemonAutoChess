@@ -1,10 +1,9 @@
 const Pokemon = require('./pokemon');
 const schema = require('@colyseus/schema');
-const MapSchema = schema.MapSchema;
 
 class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level) {
-    const pokemons = new MapSchema();
+    let pokemons = new Map();
     switch (level) {
       case 1:
         const magikarp1 = PokemonFactory.createPokemonFromName('magikarp');
@@ -13,8 +12,8 @@ class PokemonFactory {
         const magikarp2 = PokemonFactory.createPokemonFromName('magikarp');
         magikarp2.positionX = 5;
         magikarp2.positionY = 1;
-        pokemons[magikarp1.id] = magikarp1;
-        pokemons[magikarp2.id] = magikarp2;
+        pokemons.set(magikarp1.id, magikarp1);
+        pokemons.set(magikarp2.id, magikarp2);
         break;
 
       case 2:
@@ -27,9 +26,9 @@ class PokemonFactory {
         const raticate = PokemonFactory.createPokemonFromName('raticate');
         raticate.positionX = 4;
         raticate.positionY = 2;
-        pokemons[rattata1.id] = rattata1;
-        pokemons[rattata2.id] = rattata2;
-        pokemons[raticate.id] = raticate;
+        pokemons.set(rattata1.id, rattata1);
+        pokemons.set(rattata2.id, rattata2);
+        pokemons.set(raticate.id, raticate);
         break;
 
       case 3:
@@ -45,106 +44,106 @@ class PokemonFactory {
         const fearow = PokemonFactory.createPokemonFromName('fearow');
         fearow.positionX = 4;
         fearow.positionY = 2;
-        pokemons[spearow1.id] = spearow1;
-        pokemons[spearow2.id] = spearow2;
-        pokemons[spearow3.id] = spearow3;
-        pokemons[fearow.id] = fearow;
+        pokemons.set(spearow1.id, spearow1);
+        pokemons.set(spearow2.id, spearow2);
+        pokemons.set(spearow3.id, spearow3);
+        pokemons.set(fearow.id, fearow);
         break;
 
       case 10:
         const gyarados = PokemonFactory.createPokemonFromName('gyarados');
         gyarados.positionX = 4;
         gyarados.positionY = 2;
-        pokemons[gyarados.id] = gyarados;
+        pokemons.set(gyarados.id, gyarados);
         break;
 
       case 15:
         const lugia = PokemonFactory.createPokemonFromName('lugia');
         lugia.positionX = 4;
         lugia.positionY = 2;
-        pokemons[lugia.id] = lugia;
+        pokemons.set(lugia.id, lugia);
         break;
 
       case 20:
         const giratina = PokemonFactory.createPokemonFromName('giratina');
         giratina.positionX = 4;
         giratina.positionY = 2;
-        pokemons[giratina.id] = giratina;
+        pokemons.set(giratina.id, giratina);
         break;
 
       case 25:
         const zapdos = PokemonFactory.createPokemonFromName('zapdos');
         zapdos.positionX = 2;
         zapdos.positionY = 2;
-        pokemons[zapdos.id] = zapdos;
+        pokemons.set(zapdos.id, zapdos);
         const moltres = PokemonFactory.createPokemonFromName('moltres');
         moltres.positionX = 4;
         moltres.positionY = 2;
-        pokemons[moltres.id] = moltres;
+        pokemons.set(moltres.id, moltres);
         const articuno = PokemonFactory.createPokemonFromName('articuno');
         articuno.positionX = 6;
         articuno.positionY = 2;
-        pokemons[articuno.id] = articuno;
+        pokemons.set(articuno.id, articuno);
         break;
 
       case 30:
         const dialga = PokemonFactory.createPokemonFromName('dialga');
         dialga.positionX = 2;
         dialga.positionY = 2;
-        pokemons[dialga.id] = dialga;
+        pokemons.set(dialga.id, dialga);
         const palkia = PokemonFactory.createPokemonFromName('palkia');
         palkia.positionX = 6;
         palkia.positionY = 2;
-        pokemons[palkia.id] = palkia;
+        pokemons.set(palkia.id, palkia);
         break;
 
       case 35:
         const suicune = PokemonFactory.createPokemonFromName('suicune');
         suicune.positionX = 2;
         suicune.positionY = 2;
-        pokemons[suicune.id] = suicune;
+        pokemons.set(suicune.id, suicune);
         const raikou = PokemonFactory.createPokemonFromName('raikou');
         raikou.positionX = 4;
         raikou.positionY = 2;
-        pokemons[raikou.id] = raikou;
+        pokemons.set(raikou.id, raikou);
         const entei = PokemonFactory.createPokemonFromName('entei');
         entei.positionX = 6;
         entei.positionY = 2;
-        pokemons[entei.id] = entei;
+        pokemons.set(entei.id, entei);
         break;
 
       case 40:
         const regice = PokemonFactory.createPokemonFromName('regice');
         regice.positionX = 2;
         regice.positionY = 3;
-        pokemons[regice.id] = regice;
+        pokemons.set(regice.id, regice);
         const regirock = PokemonFactory.createPokemonFromName('regirock');
         regirock.positionX = 4;
         regirock.positionY = 3;
-        pokemons[regirock.id] = regirock;
+        pokemons.set(regirock.id, regirock);
         const registeel = PokemonFactory.createPokemonFromName('registeel');
         registeel.positionX = 6;
         registeel.positionY = 3;
-        pokemons[registeel.id] = registeel;
+        pokemons.set(registeel.id, registeel);
         const regigigas = PokemonFactory.createPokemonFromName('regigigas');
         regigigas.positionX = 4;
         regigigas.positionY = 1;
-        pokemons[regigigas.id] = regigigas;
+        pokemons.set(regigigas.id, regigigas);
         break;
 
       default:
         const kyogre = PokemonFactory.createPokemonFromName('kyogre');
         kyogre.positionX = 2;
         kyogre.positionY = 2;
-        pokemons[kyogre.id] = kyogre;
+        pokemons.set(kyogre.id, kyogre);
         const groudon = PokemonFactory.createPokemonFromName('groudon');
         groudon.positionX = 4;
         groudon.positionY = 2;
-        pokemons[groudon.id] = groudon;
+        pokemons.set(groudon.id, groudon);
         const rayquaza = PokemonFactory.createPokemonFromName('rayquaza');
         rayquaza.positionX = 6;
         rayquaza.positionY = 2;
-        pokemons[rayquaza.id] = rayquaza;
+        pokemons.set(rayquaza.id, rayquaza);
         break;
     }
     return pokemons;
@@ -506,6 +505,12 @@ class PokemonFactory {
         return 'numel';
       case 'mega-camerupt':
         return 'numel';
+      case 'ditto':
+        return 'ditto';
+      case 'sandshrew':
+        return 'sandshrew';
+      case 'darkrai':
+        return 'darkrai';
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -914,6 +919,12 @@ class PokemonFactory {
         return new Pokemon.Camerupt();
       case 'mega-camerupt':
         return new Pokemon.MegaCamerupt();
+      case 'ditto':
+        return new Pokemon.Ditto();
+      case 'sandshrew':
+        return new Pokemon.Sandshrew();
+      case 'darkrai':
+        return new Pokemon.Darkrai();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();

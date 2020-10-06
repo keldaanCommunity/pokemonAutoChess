@@ -8,12 +8,15 @@ export default class BattleManager {
   }
 
   buildPokemons() {
-    for (const id in this.player.simulation.blueTeam) {
-      this.addPokemon(this.player.id, this.player.simulation.blueTeam[id]);
-    }
-    for (const id in this.player.simulation.redTeam) {
-      this.addPokemon(this.player.id, this.player.simulation.redTeam[id]);
-    }
+
+    this.player.simulation.blueTeam.forEach((pkm, key) => {
+      this.addPokemon(this.player.id, pkm);
+    });
+
+    this.player.simulation.redTeam.forEach((pkm, key) => {
+      this.addPokemon(this.player.id, pkm);
+    });
+    
   }
 
   addPokemon(playerId, pokemon) {

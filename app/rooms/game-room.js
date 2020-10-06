@@ -15,9 +15,8 @@ class GameRoom extends colyseus.Room {
   onCreate(options) {
     this.setState(new GameState());
     this.maxClients = 8;
-
     for (const id in options.users){
-      let user = options.users[id];
+      const user = options.users[id];
       if(user.isBot){
         this.state.players[id] = new Player(user.id, user.name, user.avatar, true);
         this.state.botManager.addBot(this.state.players[id]);
@@ -28,7 +27,7 @@ class GameRoom extends colyseus.Room {
     this.onMessage('shop', (client, message) => {
       this.dispatcher.dispatch(new Commands.OnShopCommand(), {
         sessionId: client.sessionId,
-        pokemonId: message.id
+        index: message.id
       });
     });
 
@@ -82,12 +81,14 @@ class GameRoom extends colyseus.Room {
 
   getRandomOpponent(playerId) {
     const playersId = [];
-    const numberOfPlayers = Object.keys(this.state.players).length;
-    for (const id in this.state.players) {
-      if (this.state.players[id].alive && (id != playerId || numberOfPlayers == 1 )) {
+    const numberOfPlayers = this.state.players.size;
+
+    this.state.players.forEach((player, id) => {
+      if (player.alive && (id != playerId || numberOfPlayers == 1 )) {
         playersId.push(id);
       }
-    }
+    });
+
     if (playersId.length > 0) {
       const n = Math.floor(Math.random() * playersId.length);
       return this.state.players[playersId[n]].id;
@@ -96,9 +97,10 @@ class GameRoom extends colyseus.Room {
     }
   }
 
-  swap(board, pokemon, x, y) {
-    if (!this.isPositionEmpty(board, x, y)) {
-      const pokemonToSwap = this.getPokemonByPosition(board, x, y);
+  swap(playerId, pokemon, x, y) {
+    if (!this.isPositionEmpty(playerId, x, y)) {
+      const pokemonToSwap = this.getPokemonByPosition(playerId, x, y);
+
       pokemonToSwap.positionX = pokemon.positionX;
       pokemonToSwap.positionY = pokemon.positionY;
     }
@@ -107,44 +109,44 @@ class GameRoom extends colyseus.Room {
   }
 
 
-  getPokemonByPosition(board, x, y) {
-    for (const id in board) {
-      const pokemon = board[id];
+  getPokemonByPosition(playerId, x, y) {
+    let pkm;
+    this.state.players.get(playerId).board.forEach((pokemon, key) => {
       if (pokemon.positionX == x && pokemon.positionY == y) {
-        return pokemon;
+        pkm = pokemon;
       }
-    }
+    });
+    return pkm;
   }
 
-  isPositionEmpty(board, x, y) {
+  isPositionEmpty(playerId, x, y) {
     let empty = true;
-    for (const id in board) {
-      const pokemon = board[id];
+
+    this.state.players.get(playerId).board.forEach((pokemon, key) => {
       if (pokemon.positionX == x && pokemon.positionY == y) {
         empty = false;
       }
-    }
+    });
+
     return empty;
   }
 
-  getFirstAvailablePositionInBoard(board) {
-    for (let i = 0; i < 9; i++) {
-      if (this.isPositionEmpty(board, i, 0)) {
+  getFirstAvailablePositionInBoard(playerId) {
+    for (let i = 0; i < 8; i++) {
+      if (this.isPositionEmpty(playerId, i, 0)) {
         return i;
       }
     }
-    return new Error('no place found, board full');
   }
 
-  getFirstAvailablePositionInTeam(board) {
-    for (let x = 0; x < 9; x++) {
+  getFirstAvailablePositionInTeam(playerId) {
+    for (let x = 0; x < 8; x++) {
       for (let y = 1; y < 4; y++) {
-        if (this.isPositionEmpty(board, x, y)) {
+        if (this.isPositionEmpty(playerId, x, y)) {
           return [x, y];
         }
       }
     }
-    return new Error('no place found, team full');
   }
 }
 

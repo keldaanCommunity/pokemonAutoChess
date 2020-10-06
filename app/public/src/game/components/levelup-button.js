@@ -1,6 +1,7 @@
 import {GameObjects} from 'phaser';
 import Button from './button';
 import LifeBar from './life-bar';
+import {WORDS} from '../../../../models/enum';
 
 export default class LevelUpButton extends Button {
   constructor(scene, x, y, manager) {
@@ -23,7 +24,7 @@ export default class LevelUpButton extends Button {
     this.manager = manager;
     this.add(new GameObjects.Rectangle(scene, 0, 0, 200, 50, 0x484331));
     this.add(graphics);
-    this.add(new GameObjects.Text(scene, -40, -20, 'Buy xp', this.textStyle));
+    this.add(new GameObjects.Text(scene, -80, -25, WORDS.BUY_XP[window.langage], this.textStyle));
     this.add(new GameObjects.Text(scene, 57, -25, '4', this.textStyle));
     this.add(new GameObjects.Image(scene, 85, -12, 'money').setScale(0.5, 0.5));
     this.lifebar = new LifeBar(scene, 20, 8, 100, 0x5062ab);

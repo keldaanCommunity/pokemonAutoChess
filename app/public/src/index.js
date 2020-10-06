@@ -13,6 +13,37 @@ window.addEventListener('render-login', (e) => new LoginPage(e.detail));
 window.addEventListener('render-lobby', (e) => new LobbyPage(e.detail));
 window.addEventListener('render-room', (e) => new RoomPage(e.detail));
 window.addEventListener('render-game', (e) => new GamePage(e.detail));
+window.addEventListener('switch-lang', (e) => {
+  window._client.auth.lang = e.detail.lang;
+  //console.log(e.detail);
+  window._client.auth.save().then(function(){
+    switch (e.detail.render) {
+      case 'home':
+        new HomePage(e.detail);
+        break;
+  
+      case 'login':
+      new LoginPage(e.detail);
+      break;
+  
+      case 'lobby':
+      new LobbyPage(e.detail);
+      break;
+  
+      case 'room':
+      new RoomPage(e.detail);
+      break;
+  
+      case 'game':
+      new GamePage(e.detail);
+      break;
+  
+      default:
+        break;
+    }
+  })
+
+});
 
 window.onload = () => new HomePage();
 

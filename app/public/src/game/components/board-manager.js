@@ -8,37 +8,51 @@ export default class BoardManager {
   }
 
   addPokemon(pokemon) {
-    const presence = false;
+
     this.group.getChildren().forEach((pkm) => {
       if (pkm.id == pokemon.id) {
         pkm.destroy();
       }
     });
-    if (!presence) {
-      const coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
-      let pokemonUI;
 
-      if (window.sessionId == this.player.id) {
-        pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, true, true);
-      } else {
-        pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false, true);
-      }
-      window.animationManager.animatePokemon(pokemonUI);
-      this.group.add(pokemonUI);
+    const coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+    let pokemonUI;
+
+    if (window.sessionId == this.player.id) {
+      pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, true, true);
+    } else {
+      pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false, true);
     }
+    window.animationManager.animatePokemon(pokemonUI);
+    this.group.add(pokemonUI);
+    
   }
 
   clear() {
     this.group.clear(false, true);
   }
 
+  buildMode(){
+    this.group.getChildren().forEach((pokemonUI) => {
+      pokemonUI.setVisible(true);
+    })
+  }
+
+  battleMode(){
+    this.group.getChildren().forEach((pokemonUI) => {
+      if(pokemonUI.positionY != 0){
+        pokemonUI.setVisible(false);
+      }
+    })
+  }
+
   clearBoard() {
-    for (const id in this.player.board) {
-      const pokemon = this.player.board[id];
+
+    this.player.board.forEach((pokemon, key) => {
       if (pokemon.positionY != 0) {
         this.removePokemon(pokemon.id);
       }
-    }
+    });
   }
 
   removePokemon(id) {
@@ -50,8 +64,7 @@ export default class BoardManager {
   }
 
   buildPokemons() {
-    for (const id in this.player.board) {
-      const pokemon = this.player.board[id];
+    this.player.board.forEach((pokemon, key) => {
       if (window.state.phase == 'FIGHT') {
         if (pokemon.positionY == 0) {
           this.addPokemon(pokemon);
@@ -59,7 +72,7 @@ export default class BoardManager {
       } else {
         this.addPokemon(pokemon);
       }
-    }
+    });
   }
 
   setPlayer(player) {
@@ -70,9 +83,36 @@ export default class BoardManager {
     }
   }
 
+  changePokemon(pokemon, change){
+    let pokemonUI;
+    let coordinates;
+    switch (change.field) {
+      case 'positionX':
+        pokemonUI = this.group.getFirst('id',pokemon.id);
+        pokemonUI.positionX = change.value;
+        pokemonUI.positionY = pokemon.positionY;
+        coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+        pokemonUI.x = coordinates[0];
+        pokemonUI.y = coordinates[1];
+        break;
+    
+      case 'positionY':
+        pokemonUI = this.group.getFirst('id',pokemon.id);
+        pokemonUI.positionY = change.value;
+        pokemonUI.positionX = pokemon.positionX;
+        coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+        pokemonUI.x = coordinates[0];
+        pokemonUI.y = coordinates[1];
+        break;
+
+      default:
+        break;
+    }
+  }
+
   update() {
-    for (const id in this.player.board) {
-      const pokemon = this.player.board[id];
+
+    this.player.board.$items.forEach((pokemon, key) => {
       let found = false;
       this.group.getChildren().forEach((pokemonUI) => {
         if (pokemon.id == pokemonUI.id) {
@@ -104,10 +144,10 @@ export default class BoardManager {
           this.addPokemon(pokemon);
         }
       }
-    }
-    const ids = [];
+    });
+    let ids = [];
     this.group.getChildren().forEach((pokemonUI) => {
-      if (!(pokemonUI.id in this.player.board)) {
+      if (!this.player.board.has(pokemonUI.id)) {
         ids.push(pokemonUI.id);
       }
     });
@@ -115,4 +155,5 @@ export default class BoardManager {
       this.removePokemon(id);
     });
   }
+  
 }

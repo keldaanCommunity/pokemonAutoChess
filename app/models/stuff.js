@@ -4,15 +4,17 @@ const Schema = schema.Schema;
 class Stuff extends Schema{
     constructor(){
         super();
-        this.item0 = '';
-        this.item1 = '';
-        this.item2 = '';
-        this.item3 = '';
-        this.item4 = '';
-        this.item5 = '';
-        this.item6 = '';
-        this.item7 = '';
-        this.item8 = '';
+        this.assign({
+            item0: '',
+            item1: '',
+            item2: '',
+            item3: '',
+            item4: '',
+            item5: '',
+            item6: '',
+            item7: '',
+            item8: ''
+        });
         this.length = 0;
     }
 

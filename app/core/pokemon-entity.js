@@ -8,41 +8,48 @@ const Items = require('../models/items');
 const ArraySchema = schema.ArraySchema;
 
 class PokemonEntity extends schema.Schema {
-  constructor(name, index, positionX, positionY, hp, atk, def, speDef, attackType, range, team, attackSprite, rarity, types, items, simulation) {
+  constructor(name, index, positionX, positionY, hp, atk, def, speDef, attackType, range, team, attackSprite, rarity, types, items, stars, simulation) {
     super();
-    this.id = uniqid();
-    this.rarity = rarity;
-    this.positionX = positionX;
-    this.positionY = positionY;
-    this.targetX = -1;
-    this.targetY = -1;
-    this.index = index;
-    this.name = name;
+
     this.state = new MovingState();
-    this.action = STATE_TYPE.MOVING;
-    this.orientation = ORIENTATION.DOWNLEFT;
-    this.baseAtk = atk;
-    this.baseDef = def;
-    this.atk = atk;
-    this.def = def;
-    this.baseSpeDef = speDef;
-    this.speDef = speDef;
-    this.attackType = attackType;
-    this.hp = hp;
-    this.life = hp;
-    this.atkSpeed = 1000;
-    this.range = range;
-    this.cooldown = 1000;
-    this.team = team;
-    this.attackSprite = attackSprite;
     this.effects = new ArraySchema();
-    this.types = [];
+    this.items = new Items(items);
+    this.simulation = simulation;
+    this.assign(
+      {
+        id: uniqid(),
+        rarity: rarity,
+        positionX: positionX,
+        positionY: positionY,
+        targetX: -1,
+        targetY: -1,
+        index: index,
+        name: name,
+        action: STATE_TYPE.MOVING,
+        orientation: ORIENTATION.DOWNLEFT,
+        baseAtk: atk,
+        baseDef: def,
+        atk: atk,
+        def: def,
+        baseSpeDef: speDef,
+        speDef: speDef,
+        attackType: attackType,
+        hp: hp,
+        life: hp,
+        atkSpeed: 1000,
+        range: range,
+        cooldown: 1000,
+        team: team,
+        attackSprite: attackSprite,
+        types: [],
+        damageDone: 0,
+        stars: stars
+      }
+    )
+
     types.forEach((type) => {
       this.types.push(type);
     });
-    this.items = new Items(items);
-    this.simulation = simulation;
-    this.damageDone = 0;
   }
 
   update(dt, board, climate) {
@@ -90,7 +97,8 @@ schema.defineTypes(PokemonEntity, {
   rarity: 'string',
   name: 'string',
   effects: ['string'],
-  items:Items
+  items:Items,
+  stars:'uint8'
 });
 
 module.exports = PokemonEntity;

@@ -4,10 +4,13 @@ const EXP_TABLE = require('./enum').EXP_TABLE;
 class ExperienceManager extends schema.Schema {
   constructor() {
     super();
-    this.level = 2;
-    this.experience = 0;
-    this.expNeeded = EXP_TABLE[this.level];
     this.maxLevel = 9;
+    this.assign({
+      level: 2,
+      experience: 0,
+      expNeeded: EXP_TABLE[2]
+      }
+    )
   }
 
   addExperience(quantity) {

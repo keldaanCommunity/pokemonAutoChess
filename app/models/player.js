@@ -7,30 +7,33 @@ const Effects = require('./effects');
 const Stuff = require('./stuff');
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
+const ArraySchema = schema.ArraySchema;
 
 class Player extends Schema {
   constructor(id, name, avatar, isBot) {
     super();
-    this.id = id;
-    this.name = name;
-    this.avatar = avatar;
-    this.board = new MapSchema();
-    this.shop = new MapSchema();
-    this.stuff = new Stuff();
-    this.experienceManager = new ExperienceManager();
-    this.synergies = new Synergies();
-    this.effects = new Effects();
-    this.money = 5;
-    this.life = 100;
-    this.simulation = new Simulation({}, {}, [], []);
-    this.shopLocked = false;
-    this.streak = 0;
-    this.interest = 0;
-    this.lastBattleResult = '';
-    this.opponentName = '';
-    this.boardSize = 0;
-    this.alive = true;
-    this.isBot = isBot;
+    this.assign({
+      id : id,
+      name : name,
+      avatar : avatar,
+      board : new MapSchema(),
+      shop : new ArraySchema(),
+      stuff : new Stuff(),
+      experienceManager : new ExperienceManager(),
+      synergies : new Synergies(),
+      effects : new Effects(),
+      money : 5,
+      life : 100,
+      simulation : new Simulation(),
+      shopLocked : false,
+      streak : 0,
+      interest : 0,
+      lastBattleResult : '',
+      opponentName : '',
+      boardSize : 0,
+      alive : true,
+      isBot : isBot
+    });
   }
 }
 
@@ -39,7 +42,7 @@ schema.defineTypes(Player, {
   name: 'string',
   avatar: 'string',
   board: {map: Pokemon},
-  shop: {map: Pokemon},
+  shop: ['string'],
   simulation: Simulation,
   experienceManager: ExperienceManager,
   synergies: Synergies,

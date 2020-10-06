@@ -2,7 +2,7 @@ import {GameObjects} from 'phaser';
 import DpsContainer from './dps-container';
 
 export default class DpsMeterContainer extends GameObjects.Container {
-  constructor(scene, x, y) {
+  constructor(scene, x, y, player) {
     super(scene, x, y);
 
     this.textStyle = {
@@ -12,33 +12,43 @@ export default class DpsMeterContainer extends GameObjects.Container {
       align: 'center'
     };
     this.maxDamage = 0;
+    this.player = player;
     scene.add.existing(this);
   }
 
-    addDps(dps){
-        this.add(new DpsContainer(this.scene,0,70*this.length, dps.id, dps.name, dps.damage));
-    }
+  changePlayer(player){
+    this.player = player;
+    this.removeAll();
 
-    removeDps(dps){
-        this.remove(this.getFirst('id', dps.id));
-    }
+    player.simulation.dpsMeter.forEach((dps, key) => {
+      this.addDps(dps);
+    });
+  }
 
-    changeDps(dps, change){
-      if(change.field == 'damage'){
-        let child = this.getFirst('id', dps.id);
-        child.damage = change.value;
-        child.damageText.setText(change.value);
-        if(this.maxDamage < change.value){
-          this.maxDamage = Math.max(change.value, this.maxDamage);
-          this.updateDps();
-        }
+  addDps(dps){
+      this.add(new DpsContainer(this.scene,0,70*this.length, dps.id, dps.name, dps.damage));
+  }
+
+  removeDps(dps){
+      this.remove(this.getFirst('id', dps.id));
+  }
+
+  changeDps(dps, change){
+    if(change.field == 'damage'){
+      let child = this.getFirst('id', dps.id);
+      child.damage = change.value;
+      child.damageText.setText(change.value);
+      if(this.maxDamage < change.value){
+        this.maxDamage = Math.max(change.value, this.maxDamage);
+        this.updateDps();
       }
     }
+  }
 
-    updateDps(){
-      let self = this;
-      this.iterate(function(child){
-        child.updateDps(self.maxDamage);
-      });
-    }
+  updateDps(){
+    let self = this;
+    this.iterate(function(child){
+      child.updateDps(self.maxDamage);
+    });
+  }
 }

@@ -1,0 +1,15 @@
+{
+  "resources": [
+    "ICE.ogg",
+    "ICE.m4a",
+    "ICE.mp3",
+    "ICE.ac3"
+  ],
+  "spritemap": {
+    "ICE": {
+      "start": 0,
+      "end": 343.56244897959186,
+      "loop": false
+    }
+  }
+}

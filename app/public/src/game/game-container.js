@@ -1,6 +1,6 @@
 import GameScene from './scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
-
+import {MAP_TYPE, LAST_BATTLE_RESULT_TRADUCTION} from '../../../models/enum.js';
 
 class GameContainer {
   constructor(room, div) {
@@ -12,7 +12,6 @@ class GameContainer {
   }
 
   initialize() {
-    this.initializeGame();
     this.initializeEvents();
   }
 
@@ -33,6 +32,7 @@ class GameContainer {
         }]
       }
     };
+    window.state = this.room.state;
     this.game = new Phaser.Game(config);
   }
 
@@ -42,6 +42,7 @@ class GameContainer {
     this.room.onStateChange.once((state) => {
       window.state = state;
     });
+
 
     this.room.state.players.onAdd = (player) => this.initializePlayer(player);
     this.room.state.players.onRemove = (player, key) => this.onPlayerRemove(player, key);
@@ -53,7 +54,7 @@ class GameContainer {
       changes.forEach((change) => {
         this.handleRoomStateChange(change);
       });
-    };
+    }
     // Game event listener
     window.addEventListener('shop-click', (e) => this.onShopClick(e));
     window.addEventListener('player-click', (e) => this.onPlayerClick(e));
@@ -65,12 +66,56 @@ class GameContainer {
   }
 
   initializePlayer(player) {
+    ////console.log(player);
+    let self = this;
     if (this.room.sessionId == player.id) {
       this.player = player;
     }
     player.onChange = ((changes) => {
-      changes.forEach((change) => this.handlePlayerChange(change, player));
+      changes.forEach((change) => self.handlePlayerChange(change, player));
     });
+
+    player.board.onAdd = function(pokemon, key){
+      pokemon.onChange = function(changes){
+        
+        changes.forEach((change) => {
+          self.handleBoardPokemonChange(player, pokemon, change);
+        });
+
+      };
+
+      pokemon.items.onChange = function(changes){
+        
+        changes.forEach((change) => {
+          self.handleBoardPokemonChange(player, pokemon, change);
+        });
+
+      };
+      self.handleBoardPokemonAdd(player, pokemon);
+    };
+
+    player.board.onRemove = function(pokemon, key){
+      self.handleBoardPokemonRemove(player, pokemon);
+    };
+
+    player.shop.onAdd = function(pokemon, key){
+      self.handleAddShopPokemon(player, pokemon, key);
+    };
+
+    player.shop.onRemove = function(pokemon, key){
+      self.handleRemoveShopPokemon(player, key);
+    };
+
+    player.shop.onChange = function(pokemon, index){
+      //console.log(index, player.shop[index]);
+      if(player.shop[index] == ''){
+        self.handleRemoveShopPokemon(player, index);
+      }
+      else{
+        self.handleAddShopPokemon(player, player.shop[index], index);
+      }
+    }
+
 
     player.experienceManager.onChange = ((changes) => {
       changes.forEach((change) => this.handleExperienceChange(change, player));
@@ -85,8 +130,10 @@ class GameContainer {
     });
 
     player.simulation.onChange = ((changes) => {
-      if (player.id == this.player.id) {
+      
+      if (player.id == this.room.sessionId  && this.game.scene.getScene('gameScene') != null) {
         changes.forEach((change) =>{
+          //console.log('simulation change ', change.field, change.value);
           if (change.field == 'climate') {
             this.handleClimateChange(change, player);
           } else if (change.field == 'redRocks') {
@@ -119,6 +166,7 @@ class GameContainer {
     });
 
     player.simulation.dpsMeter.onAdd = (dps, key) => {
+      //console.log('add Dps');
       this.handleDpsAdd(player.id, dps);
       dps.onChange = (changes) => {
         changes.forEach((change) => {
@@ -127,17 +175,22 @@ class GameContainer {
       };
     };
     player.simulation.dpsMeter.onRemove = (dps, key) => {
+      //console.log('remove Dps');
       this.handleDpsRemove(player.id, dps);
     };
 
     player.simulation.blueTeam.onAdd = (pokemon, key) => {
+      //console.log('add pokemon');
       this.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = (changes) => {
+        //console.log('change pokemon');
         changes.forEach((change) => {
+          //console.log(change.field);
           this.handlePokemonChange(player.id, change, pokemon);
         });
       };
       pokemon.items.onChange = (changes) => {
+        //console.log('change item');
         changes.forEach((change) => {
           this.handlePokemonItemsChange(player.id, change, pokemon);
         });
@@ -145,22 +198,27 @@ class GameContainer {
     };
 
     player.simulation.redTeam.onAdd = (pokemon, key) => {
+      //console.log('add pokemon');
       this.handlePokemonAdd(player.id, pokemon);
       pokemon.onChange = (changes) => {
+        //console.log('change pokemon');
         changes.forEach((change) => {
           this.handlePokemonChange(player.id, change, pokemon);
         });
       };
       pokemon.items.onChange = (changes) => {
+        //console.log('change item');
         changes.forEach((change) => {
           this.handlePokemonItemsChange(player.id, change, pokemon);
         });
       };
     };
     player.simulation.blueTeam.onRemove = (pokemon, key) => {
+      //console.log('remove pokemon');
       this.handlePokemonRemove(player.id, pokemon);
     };
     player.simulation.redTeam.onRemove = (pokemon, key) => {
+      //console.log('remove pokemon');
       this.handlePokemonRemove(player.id, pokemon);
     };
     player.triggerAll();
@@ -168,7 +226,14 @@ class GameContainer {
   }
 
   handleRoomStateChange(change) {
-    if (window.state == null || this.game.scene.getScene('gameScene').timeText == null) return;
+
+    if(change.field == 'mapType'){
+      let keys = Object.keys(MAP_TYPE);
+      if(keys.includes(change.value)){
+        this.initializeGame();
+      }
+    }
+    if (window.state == null || this.game == null || this.game.scene == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').timeText == null) return;
     switch (change.field) {
       case 'roundTime':
         this.game.scene.getScene('gameScene').updateTime();
@@ -189,58 +254,56 @@ class GameContainer {
   }
 
   handleDpsAdd(playerId, dps){
-    if(playerId == this.player.id){
+    if(playerId == this.game.scene.getScene('gameScene').dpsMeterContainer.player.id){
       this.game.scene.getScene('gameScene').dpsMeterContainer.addDps(dps);
     }
   }
 
   handleDpsRemove(playerId, dps){
-    if(playerId == this.player.id){
+    if(playerId == this.game.scene.getScene('gameScene').dpsMeterContainer.player.id){
       this.game.scene.getScene('gameScene').dpsMeterContainer.removeDps(dps);
     }
   }
 
   handleDpsChange(playerId, change, dps){
-    if(playerId == this.player.id){
+    if(playerId == this.game.scene.getScene('gameScene').dpsMeterContainer.player.id){
       this.game.scene.getScene('gameScene').dpsMeterContainer.changeDps(dps, change);
     }
   }
 
   handlePokemonAdd(playerId, pokemon) {
+    //console.log('simulation add' + pokemon.name);
     this.game.scene.getScene('gameScene').battleManager.addPokemon(playerId, pokemon);
   }
 
   handlePokemonRemove(playerId, pokemon) {
+    //console.log('simulation remove' + pokemon.name);
     this.game.scene.getScene('gameScene').battleManager.removePokemon(playerId, pokemon);
   }
 
   handleStuffChange(change, player){
-    if(player.id == this.player.id){
+    if(player.id == this.room.sessionId  && this.game.scene.getScene('gameScene') != null){
       this.game.scene.getScene('gameScene').itemsContainer.changeStuff(change.field, change.value);
     }
   }
 
   handlePokemonChange(playerId, change, pokemon) {
+    //console.log('simulation change' + change.field);
     this.game.scene.getScene('gameScene').battleManager.changePokemon(playerId, change, pokemon);
   }
 
   handlePokemonItemsChange(playerId, change, pokemon) {
     this.game.scene.getScene('gameScene').battleManager.changePokemonItems(playerId, change, pokemon);
   }
+  
   handleSynergiesChange(change, player) {
-    if (player.id == this.player.id) {
-      this.game.scene.getScene('gameScene').synergiesContainer.updateSynergy(change.field, change.value);
-    }
-  }
-
-  handleSynergiesChange(change, player) {
-    if (player.id == this.player.id) {
+    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').synergiesContainer && player.id == this.game.scene.getScene('gameScene').synergiesContainer.player.id) {
       this.game.scene.getScene('gameScene').synergiesContainer.updateSynergy(change.field, change.value);
     }
   }
 
   handleClimateChange(change, player) {
-    if (player.id == this.player.id) {
+    if (player.id == this.room.sessionId && this.game.scene.getScene('gameScene') != null) {
       switch (change.value) {
         case 'RAIN':
           this.game.scene.getScene('gameScene').weatherManager.addRain();
@@ -264,8 +327,39 @@ class GameContainer {
     }
   }
 
+  handleBoardPokemonAdd(player, pokemon){
+      if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
+        this.game.scene.getScene('gameScene').boardManager.update();
+      }
+  }
+
+  handleBoardPokemonRemove(player, pokemon){
+    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
+      this.game.scene.getScene('gameScene').boardManager.update();
+    }
+  }
+
+  handleBoardPokemonChange(player, pokemon, change){
+    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
+      this.game.scene.getScene('gameScene').boardManager.update();
+    }
+  }
+
+  handleAddShopPokemon(player, pokemon, key){
+    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.room.sessionId == player.id) {
+      this.game.scene.getScene('gameScene').shopContainer.addPortrait(pokemon, key);
+    }
+  }
+
+  handleRemoveShopPokemon(player, index){
+    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.room.sessionId == player.id) {
+      this.game.scene.getScene('gameScene').shopContainer.removePortrait(index);
+    }
+  }
+
   handleExperienceChange(change, player) {
-    if (player.id == this.player.id) {
+
+    if (player.id == this.room.sessionId && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').playerContainer && this.game.scene.getScene('gameScene').shopContainer) {
       switch (change.field) {
         case 'level':
           this.game.scene.getScene('gameScene').shopContainer.levelUpButton.changeLevel(change.value);
@@ -284,14 +378,14 @@ class GameContainer {
           break;
       }
     }
-    if (change.field == 'level') {
+    if (change.field == 'level' && this.game.scene.getScene('gameScene') != null) {
       this.game.scene.getScene('gameScene').playerContainer.onLevelChange(player.id, change.value);
     }
   }
 
 
   handlePlayerChange(change, player) {
-    if (this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null) return;
+    if (this.game == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null ) return;
     switch (change.field) {
       case 'money':
         if (this.room.sessionId == player.id) {
@@ -315,7 +409,7 @@ class GameContainer {
       case 'lastBattleResult':
         if (this.room.sessionId == player.id) {
           this.game.scene.getScene('gameScene').moneyContainer.onWonChange(change.value);
-          this.game.scene.getScene('gameScene').lastBattleResult.setText(change.value);
+          this.game.scene.getScene('gameScene').lastBattleResult.setText(LAST_BATTLE_RESULT_TRADUCTION[change.value][window.langage]);
         }
         break;
 
@@ -323,18 +417,6 @@ class GameContainer {
         if (this.room.sessionId == player.id) {
           this.game.scene.getScene('gameScene').opponentNameText.setText(change.value.slice(0, 10));
         }
-
-      case 'shop':
-        if (this.room.sessionId == player.id) {
-          this.game.scene.getScene('gameScene').shopContainer.updatePortraits();
-        }
-        break;
-
-      case 'board':
-        if (this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
-          this.game.scene.getScene('gameScene').boardManager.update(player.id);
-        }
-        break;
 
       case 'boardSize':
         if (this.room.sessionId == player.id) {
@@ -366,11 +448,11 @@ class GameContainer {
   }
 
   handleKickOut() {
-    console.log('kicked out');
+    //console.log('kicked out');
 
     _client.joinOrCreate('lobby', {}).then((room) => {
       this.room.leave();
-      console.log('joined room:', room);
+      //console.log('joined room:', room);
       window.dispatchEvent(new CustomEvent('render-lobby', {detail: {room: room}}));
     }).catch((e) => {
       console.error('join error', e);
@@ -380,15 +462,18 @@ class GameContainer {
   handleRoomLeft(client) {
     // sessionStorage.setItem("PAC_Room_ID", room.id);
     // sessionStorage.setItem("PAC_Session_ID", room.sessionId);
-    console.log(client.id, 'left');
+    //console.log(client.id, 'left');
   }
 
   onPlayerClick(event) {
     const scene = this.game.scene.getScene('gameScene');
+    
     scene.fade();
     scene.boardManager.clear();
     scene.boardManager.player = window.state.players[event.detail.id];
     scene.battleManager.setPlayer(window.state.players[event.detail.id]);
+    scene.synergiesContainer.changePlayer(window.state.players[event.detail.id]);
+    scene.dpsMeterContainer.changePlayer(window.state.players[event.detail.id]);
     scene.boardManager.buildPokemons();
   }
 
@@ -417,12 +502,12 @@ class GameContainer {
   }
 
   onPlayerRemove(player, key) {
-    if (this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null) return;
+    if (this.game == null || this.game.scene == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null) return;
     this.game.scene.getScene('gameScene').playerContainer.removePlayer(key);
   }
 
   onPlayerAdd(player) {
-    if (this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null) return;
+    if (this.game == null || this.game.scene == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null) return;
     this.game.scene.getScene('gameScene').playerContainer.addPlayer(player);
   }
 }

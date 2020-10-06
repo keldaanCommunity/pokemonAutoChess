@@ -81,6 +81,7 @@ class AttackingState extends PokemonState {
   onEnter(pokemon) {
     super.onEnter(pokemon);
     pokemon.action = STATE_TYPE.ATTACKING;
+    pokemon.cooldown = 0;
   }
 
   onExit(pokemon) {

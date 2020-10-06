@@ -1,4 +1,5 @@
 import {GameObjects, Game} from 'phaser';
+import {TYPE_TRADUCTION} from '../../../../models/enum'
 
 const COLOR_TYPE = Object.freeze({
   COMMON: 0x686d7d,
@@ -17,16 +18,17 @@ export default class ShopPortraitContainer extends GameObjects.Container {
       color: 'white',
       align: 'center'
     };
+    let self = this;
     this.background = new GameObjects.Rectangle(scene, 80, 25, 200, 120, COLOR_TYPE[pokemon.rarity]);
     this.background.setInteractive({useHandCursor: true}).on('pointerdown', () => {
       window.dispatchEvent(new CustomEvent('shop-click', {
-        detail: {'id': pokemon.id}
+        detail: {'id': self.positionInShop}
       }));
     });
     const name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
     this.add(this.background);
     for (let i = 0; i < pokemon.types.length; i++) {
-      this.add(new GameObjects.Text(scene, 90, 23 * i -10, pokemon.types[i].charAt(0) + pokemon.types[i].slice(1).toLowerCase(), this.textStyle));
+      this.add(new GameObjects.Text(scene, 90, 23 * i -10, TYPE_TRADUCTION[pokemon.types[i]][window.langage], this.textStyle));
       this.add(new GameObjects.Image(scene, 75, 23 * i, 'hexagon').setScale(0.5, 0.5));
       this.add(new GameObjects.Image(scene, 75, 23 * i, 'types', pokemon.types[i]).setScale(0.5, 0.5));
     }

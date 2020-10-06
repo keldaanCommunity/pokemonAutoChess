@@ -14,7 +14,7 @@ export default class LockButton extends Button {
     this.add(this.lock);
 
     const graphics = new GameObjects.Graphics(scene);
-    const color = 0xffffff;
+    const color = 0x000000;
     const thickness = 1;
     const alpha = 1;
     graphics.lineStyle(thickness, color, alpha);

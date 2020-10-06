@@ -1,6 +1,12 @@
+import { WORDS } from "../../../models/enum";
+
 class RoomPage {
   constructor(args) {
     this.room = args.room;
+    this.langage = 'esp';
+    if(window._client.auth.lang){
+      this.langage = window._client.auth.lang;
+    }
     this.render();
     this.addEventListeners();
   }
@@ -8,10 +14,11 @@ class RoomPage {
   render() {
     const content = document.createElement('div');
     content.setAttribute('id', 'pre-game');
+
     content.innerHTML = `
     <header>
-      <h1>Room ID: ${this.room.id}</h1>
-      <button id="button-home">Home</button>
+      <h1>${WORDS.ROOM_ID[this.langage]}: ${this.room.id}</h1>
+      <button type="button" class="btn btn-secondary" id="button-home">${WORDS.GAME_LOBBY[this.langage]}</button>
     </header>
     <div style="display:flex; height:80%;"> 
 
@@ -24,26 +31,25 @@ class RoomPage {
         <div style="display:flex;flex-flow:row;"><img style="width:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
         <p style='margin-left:10px;'>${_client.auth.email}</p>
         </div>
-        <h3>Players in room :</h3>
+        <h3>${WORDS.PLAYERS_IN_ROOM[this.langage]} :</h3>
         <table id="players-table">
           <tr>
-            <th>Player</th>
-            <th>Elo</th>
-            <th>Ready</th>
+            <th>${WORDS.PLAYER[this.langage]}</th>
+            <th>${WORDS.READY[this.langage]}</th>
           </tr>
         </table>
         </div>
         <div style="display:flex;  flex-flow:column; justify-content:center;">
-          <button id="ready">Ready</button>
-          <button id="start">Start Game</button>
-          <button id="quit">Quit Room</button>
-          <button id="addBot">Add Bot</button>
-          <button id="removeBot">Remove Bot</button>
+          <button type="button" class="btn btn-secondary" id="ready">${WORDS.READY[this.langage]}</button>
+          <button type="button" class="btn btn-secondary" id="start">${WORDS.START_GAME[this.langage]}</button>
+          <button type="button" class="btn btn-secondary" id="quit">${WORDS.QUIT_ROOM[this.langage]}</button>
+          <button type="button" class="btn btn-secondary" id="addBot">${WORDS.ADD_BOT[this.langage]}</button>
+          <button type="button" class="btn btn-secondary" id="removeBot">${WORDS.REMOVE_BOT[this.langage]}</button>
         </div>
     </div>
       <div style="width:30%; display:flex;">
-        <input style="width:80%;" id="inputMessage" class="inputMessage" placeholder="Type here..." type="text">
-        <button style="width:20%;" id="send">Send</button>
+        <input style="width:80%;" id="inputMessage" class="inputMessage" placeholder="${WORDS.TYPE_HERE[this.langage]}..." type="text">
+        <button type="button" class="btn btn-secondary" style="width:20%;" id="send">${WORDS.SEND}</button>
       </div>
     </div> 
     `;
@@ -86,11 +92,13 @@ class RoomPage {
 
     document.getElementById('start').addEventListener('click', (e) => {
       let allUsersReady = true;
-      for (const id in this.room.state.users) {
-        if (!this.room.state.users[id].ready) {
+
+      this.room.state.users.forEach((user, key) => {
+        if (!user.ready) {
           allUsersReady = false;
         }
-      }
+      });
+
       if (allUsersReady) {
         _client.create('game', {'users':this.room.state.users}).then((room) => {
           this.room.send('game-start', {id: room.id});
@@ -164,26 +172,25 @@ class RoomPage {
     let self = this;
     document.getElementById('players-table').innerHTML = `
     <tr>
-    <th>Player</th>
-    <th>Ready</th>
+    <th>${WORDS.PLAYER[this.langage]}</th>
+    <th>${WORDS.READY[this.langage]}</th>
     </tr>`;
 
-    for (const id in this.room.state.users) {
+    this.room.state.users.forEach((user, key) => {
       let icon = '';
-      if(this.room.state.users[id].name !== undefined){
-        if (this.room.state.users[id].ready) {
+      if(user.name !== undefined){
+        if (user.ready) {
           icon = `<i class="fa fa-check" aria-hidden="true"></i>`;
         } else {
           icon = `<i class="fa fa-times" aria-hidden="true"></i>`;
         }
         document.getElementById('players-table').innerHTML +=`
         <tr>
-        <td style="display:flex;"><img style="width:50px; height:50px;"src="assets/avatar/${this.room.state.users[id].avatar}.png"></img><p>${this.room.state.users[id].name}</p></td>
+        <td style="display:flex;"><img style="width:50px; height:50px;"src="assets/avatar/${user.avatar}.png"></img><p>${user.name}</p></td>
         <td>${icon}</td>
         </tr>`;
       };
-
-    }
+    });
   }
 }
 

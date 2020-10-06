@@ -3,9 +3,13 @@ const schema = require('@colyseus/schema');
 class Dps extends schema.Schema{
     constructor(id, name){
         super();
-        this.id = id;
-        this.name = name;
-        this.damage = 0;
+        this.assign(
+            {
+                id: id,
+                name: name,
+                damage: 0
+            }
+        )
     }
     
     changeDamage(damage){

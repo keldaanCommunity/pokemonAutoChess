@@ -20,7 +20,7 @@ class PokemonState {
     }
 
     pokemon.life -= reducedDamage;
-    // console.log(`${pokemon.id} took ${damage} and has now ${pokemon.life} life`);
+    //console.log(`${pokemon.id} took ${damage} and has now ${pokemon.life} life`);
     if (pokemon.effects.includes(EFFECTS.RAGE)) {
       pokemon.attack += Math.ceil(pokemon.baseAtk * 0.05);
     }
@@ -44,6 +44,10 @@ class PokemonState {
       }
       if (pokemon.effects.includes(EFFECTS.BLAZE)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.05);
+      }
+
+      if(pokemon.effects.includes(EFFECTS.DRAGON_DANCE)){
+        pokemon.atkSpeed = Math.max(400,pokemon.atkSpeed * 0.95);
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {

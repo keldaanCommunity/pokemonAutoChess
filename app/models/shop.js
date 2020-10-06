@@ -20,15 +20,21 @@ const PROBABILITY = {
 
 class Shop {
   detachShop(player) {
-    for (const id in player.shop) {
-      delete player.shop[id];
-    }
+    player.shop[0] = '';
+    player.shop[1] = '';
+    player.shop[2] = '';
+    player.shop[3] = '';
+    player.shop[4] = '';
   }
 
   assignShop(player) {
     for (let i = 0; i < 5; i++) {
-      const pokemon = PokemonFactory.createPokemonFromName(this.pickPokemon(player));
-      player.shop[pokemon.id] = pokemon;
+      let pokemon = PokemonFactory.createPokemonFromName(this.pickPokemon(player));
+      const seed = Math.random();
+      if(seed > 0.993){
+        pokemon = PokemonFactory.createPokemonFromName('ditto');
+      }
+      player.shop[i] = pokemon.name;
     }
   }
 
@@ -37,24 +43,62 @@ class Shop {
     const seed = Math.random();
     let pokemon = '';
     let threshold = 0;
+    let common = [];
+    let uncommon = [];
+    let rare = [];
+    let epic = [];
+    let legendary = [];
+    let threeStars = [];
+
+    player.board.forEach((pokemon, id) => {
+      if(pokemon.stars == 3){
+        threeStars.push(PokemonFactory.getPokemonFamily(pokemon.name));
+      }
+  });
+
+    COMMON.forEach(name => {
+      if(!threeStars.includes(name)){
+        common.push(name);
+      }
+    });
+    UNCOMMON.forEach(name => {
+      if(!threeStars.includes(name)){
+        uncommon.push(name);
+      }
+    });
+    RARE.forEach(name => {
+      if(!threeStars.includes(name)){
+        rare.push(name);
+      }
+    });
+    EPIC.forEach(name => {
+      if(!threeStars.includes(name)){
+        epic.push(name);
+      }
+    });
+    LEGENDARY.forEach(name => {
+      if(!threeStars.includes(name)){
+        legendary.push(name);
+      }
+    });
     for (let i = 0; i < playerProbality.length; i++) {
       threshold += playerProbality[i];
       if (seed < threshold) {
         switch (i) {
           case 0:
-            pokemon = COMMON[Math.floor(Math.random() * COMMON.length)];
+            pokemon = common[Math.floor(Math.random() * common.length)];
             break;
           case 1:
-            pokemon = UNCOMMON[Math.floor(Math.random() * UNCOMMON.length)];
+            pokemon = uncommon[Math.floor(Math.random() * uncommon.length)];
             break;
           case 2:
-            pokemon = RARE[Math.floor(Math.random() * RARE.length)];
+            pokemon = rare[Math.floor(Math.random() * rare.length)];
             break;
           case 3:
-            pokemon = EPIC[Math.floor(Math.random() * EPIC.length)];
+            pokemon = epic[Math.floor(Math.random() * epic.length)];
             break;
           case 4:
-            pokemon = LEGENDARY[Math.floor(Math.random() * LEGENDARY.length)];
+            pokemon = legendary[Math.floor(Math.random() * legendary.length)];
             break;
           default:
             console.log(`error in shop while picking seed = ${seed}, threshold = ${threshold}, index = ${i}`);

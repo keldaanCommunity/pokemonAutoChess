@@ -5,9 +5,12 @@ class Items extends Schema{
     constructor(items){
         super();
         this.length = 0;
-        this.item0 = '';
-        this.item1 = '';
-        this.item2 = '';
+        this.assign({
+            item0: '',
+            item1: '',
+            item2: ''
+        });
+        
         if(items){
             this.add(items.item0);
             this.add(items.item1);

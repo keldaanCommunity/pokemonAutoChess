@@ -13,4 +13,4 @@ Implementation of [reddit specifications](https://www.reddit.com/r/AutoChess/com
 
 ## Credits
 
-Sprites: RedBlueYellow, Juenca, Kustem R
+Sprites: RedBlueYellow, Juenca, Kustem R, SilverDeoxys563, Naokohiro

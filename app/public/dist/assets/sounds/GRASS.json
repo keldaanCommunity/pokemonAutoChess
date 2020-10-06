@@ -1,0 +1,15 @@
+{
+  "resources": [
+    "GRASS.ogg",
+    "GRASS.m4a",
+    "GRASS.mp3",
+    "GRASS.ac3"
+  ],
+  "spritemap": {
+    "GRASS": {
+      "start": 0,
+      "end": 213.90222222222224,
+      "loop": false
+    }
+  }
+}

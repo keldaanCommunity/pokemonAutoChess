@@ -81,7 +81,7 @@ export default class Pokemon extends Button {
   addTween() {
     const coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
     if (this.scene) {
-      // console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
+      //console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
       this.scene.tweens.add({
         targets: this.projectile,
         x: coordinates[0],

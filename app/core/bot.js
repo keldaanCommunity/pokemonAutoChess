@@ -28,9 +28,10 @@ class Bot{
     }
 
     updatePlayerTeam(){
-        for (const id in this.player.board){
-            delete this.player.board[id];
-        }
+
+        this.player.board.forEach((pokemon, key) => {
+            this.player.board.delete(key);
+        });
 
         let stepTeam = this.scenario.steps[this.step];
         for (let i = 0; i < stepTeam.board.length; i++) {
@@ -47,17 +48,18 @@ class Bot{
             const item = items[i];
             let itemAdded = false;
             if(specificItems.includes(item)){
-                for(const id in this.player.board){
-                    let pokemon = this.player.board[id];
+
+                this.player.board.forEach((pokemon, key) => {
                     if(pokemon.types.includes(ITEM_TYPE[item])){
                         pokemon.items.add(item);
                         itemAdded = true;
                     }
-                }
+                });
+
             }
             if(!itemAdded){
-                let pokemonIds = Object.keys(this.player.board);
-                let pokemon = this.player.board[pokemonIds[Math.floor(Math.random() * pokemonIds.length)]];
+                let pokemonIds = Array.from(this.player.board);
+                let pokemon = this.player.board.get(pokemonIds[Math.floor(Math.random() * pokemonIds.length)][0]);
                 pokemon.items.add(item);
             }
         }

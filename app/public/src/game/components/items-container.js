@@ -11,36 +11,36 @@ export default class ItemsContainer extends GameObjects.Container{
                 y:0
             },
             'item1': {
-                x:68,
+                x:48,
                 y:0
             },
             'item2': {
-                x:136,
+                x:96,
                 y:0
             },
             'item3': {
                 x:0,
-                y:68
+                y:48
             },
             'item4': {
-                x:68,
-                y:68
+                x:48,
+                y:48
             },
             'item5': {
-                x:136,
-                y:68
+                x:96,
+                y:48
             },
             'item6': {
                 x:0,
-                y:136
+                y:96
             },
             'item7': {
-                x:68,
-                y:136
+                x:48,
+                y:96
             },
             'item8': {
-                x:136,
-                y:136
+                x:96,
+                y:96
             }
         }
     }

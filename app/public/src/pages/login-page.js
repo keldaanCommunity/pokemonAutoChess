@@ -15,7 +15,7 @@ class LoginPage {
     content.innerHTML = `
     <header>
       <h1>Game Login</h1>
-      <button id="button-home">Home</button>
+      <button id="button-home" type="button" class="btn btn-secondary">Home</button>
     </header>
     <main>
     <div id="login-container">
@@ -29,10 +29,10 @@ class LoginPage {
         <div id="login-account">
           <label>Email</label><input type="string" id="input-username">
           <label>Password</label><input type="password" id="input-password">
-          <button id="button-login">Log in</button>
+          <button id="button-login" type="button" class="btn btn-secondary">Log in</button>
         </div></div>
         <div><div id="login-fb">
-          <button id="button-fb"></button>
+          <button id="button-fb" type="button" class="btn btn-secondary"></button>
         </div></div>
       </div>
       </div>

@@ -12,7 +12,8 @@ import EntryHazardsManager from '../components/Entry-hazards-manager';
 import ItemsContainer from '../components/items-container';
 import DpsMeterContainer from '../components/dps-meter-container';
 import Pokemon from '../components/pokemon';
-import PokemonFactory from '../../../../models/pokemon-factory'
+import PokemonFactory from '../../../../models/pokemon-factory';
+import {WORDS, PHASE_TRADUCTION} from '../../../../models/enum';
 
 export default class GameScene extends Scene {
   constructor() {
@@ -79,8 +80,10 @@ export default class GameScene extends Scene {
       percentText.destroy();
       assetText.destroy();
     });
-    this.load.audioSprite('sounds', 'assets/sounds/sounds.json', ['assets/sounds/sounds.mp3']);
-    this.load.image('tiles', 'assets/tiles/tileset.png');
+    //console.log(window.state.mapType);
+    this.load.audioSprite('sounds', `assets/sounds/${window.state.mapType}.json`, [`assets/sounds/${window.state.mapType}.mp3`]);
+    this.load.image('tiles', `assets/tiles/${window.state.mapType}.png`);
+    this.load.tilemapTiledJSON('map', `assets/tiles/${window.state.mapType}.json`);
     this.load.image('hexagon', 'assets/ui/hexagon.png');
     this.load.image('shield', 'assets/ui/shield.png');
     this.load.image('sword', 'assets/ui/sword.png');
@@ -93,9 +96,8 @@ export default class GameScene extends Scene {
     this.load.image('PHYSICAL', 'assets/types/PHYSICAL.png');
     this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
     this.load.multiatlas('items','assets/items/items.json','assets/items/')
-    this.load.multiatlas('type-details', 'assets/types/type-details.json', 'assets/types/');
+    this.load.multiatlas('type-details', `assets/types/${window.langage}/type-details.json`, `assets/types/${window.langage}/`);
     this.load.multiatlas('lock', 'assets/lock/lock.json', 'assets/lock/');
-    this.load.tilemapTiledJSON('map', 'assets/tiles/tilemap.json');
     this.load.multiatlas('effects', 'assets/effects/effects.json', 'assets/effects');
     this.load.multiatlas('rarity', 'assets/rarity/rarity.json', 'assets/rarity');
     this.load.multiatlas('types', 'assets/types/types.json', 'assets/types');
@@ -116,63 +118,67 @@ export default class GameScene extends Scene {
     this.input.mouse.disableContextMenu();
     this.input.dragDistanceThreshold = 1;
     this.map = this.make.tilemap({key: 'map'});
-    const tileset = this.map.addTilesetImage('tileset', 'tiles');
+    const tileset = this.map.addTilesetImage(window.state.mapType, 'tiles',24,24,1,1);
     this.map.createStaticLayer('World', tileset, 0, 0);
-    this.map.createStaticLayer('Top', tileset, 0, 0);
+    //this.map.createStaticLayer('Top', tileset, 0, 0);
 
     this.board = this.add.group();
     this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);
-    this.shopContainer = new ShopContainer(this, 385, 910);
-    this.playerContainer = new PlayerContainer(this, 1800, 105);
-    this.boardContainer = new BoardContainer(this, 275, 775);
-    this.synergiesContainer = new SynergiesContainer(this, 1290, 135);
-    this.dpsMeterContainer = new DpsMeterContainer(this, 1505,135);
-    this.itemsContainer = new ItemsContainer(this, 66, 530);
-    this.moneyContainer = new MoneyContainer(this, 20, 60, window.state.players[window.sessionId]);
+    this.shopContainer = new ShopContainer(this, 470, 912);
+    this.playerContainer = new PlayerContainer(this, 1800, 160);
+    this.boardContainer = new BoardContainer(this, 382, 808);
+    this.synergiesContainer = new SynergiesContainer(this, 1290, 135, window.state.players[window.sessionId]);
+    this.dpsMeterContainer = new DpsMeterContainer(this, 1520, 135, window.state.players[window.sessionId]);
+    this.itemsContainer = new ItemsContainer(this, 66, 430);
+    this.moneyContainer = new MoneyContainer(this, 10, 60, window.state.players[window.sessionId]);
     this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
     this.weatherManager = new WeatherManager(this);
     this.entryHazardsManager = new EntryHazardsManager(this, this.map, tileset);
-    this.pokemon = this.add.existing(new Pokemon(this, 135,390,PokemonFactory.createPokemonFromName(window.state.players[window.sessionId].avatar),false));
+    this.pokemon = this.add.existing(new Pokemon(this, 130,340,PokemonFactory.createPokemonFromName(window.state.players[window.sessionId].avatar),false));
     window.animationManager.animatePokemon(this.pokemon);
 
     this.textStyle = {
-      fontSize: '30px',
+      fontSize: '35px',
       fontFamily: 'Verdana',
       color: 'white',
-      align: 'center'
+      align: 'center',
+      stroke: '#000',
+      strokeThickness: 2,
     };
 
     this.bigTextStyle = {
       fontSize: '80px',
       fontFamily: 'Verdana',
       color: 'white',
-      align: 'center'
+      align: 'center',
+      stroke: '#000',
+      strokeThickness: 2
     };
     this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name.slice(0, 10), this.textStyle);
-    this.phaseText = this.add.text(1270, 25, window.state.players[window.sessionId].phase, this.textStyle);
-    this.opponentNameText = this.add.text(1470, 25, window.state.players[window.sessionId].opponentName.slice(0, 10), this.textStyle);
-    this.turnText = this.add.text(580, 25, window.state.stageLevel, this.textStyle);
-    this.add.text(500, 25, 'Turn', this.textStyle);
+    this.phaseText = this.add.text(860, 25, window.state.players[window.sessionId].phase, this.textStyle);
+    this.opponentNameText = this.add.text(1270, 25, window.state.players[window.sessionId].opponentName.slice(0, 10), this.textStyle);
+    
+    this.turnText = this.add.text(560, 25, window.state.stageLevel, this.textStyle);
+    this.add.text(470, 25, WORDS.TURN[window.langage], this.textStyle);
 
-    this.timeText = this.add.text(870, 25, window.state.roundTime, this.textStyle);
-    this.add.text(910, 25, 's', this.textStyle);
+    this.timeText = this.add.text(685, 25, window.state.roundTime, this.textStyle);
+    this.add.text(735, 25, 's', this.textStyle);
 
-    this.lastBattleResult = this.add.text(1070, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
+    this.lastBattleResult = this.add.text(1050, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
 
     this.countdownText = this.add.text(700, 300, window.state.players[window.sessionId].lastBattleResult, this.bigTextStyle);
     this.countdownText.setAlpha(0);
-    this.boardSizeText = this.add.text(325, 25, Object.keys(window.state.players[window.sessionId].boardSize).length, this.textStyle);
-    this.add.text(350, 25, '/', this.textStyle);
-    this.maxBoardSizeText = this.add.text(370, 25, window.state.players[window.sessionId].experienceManager.level, this.textStyle);
+    this.boardSizeText = this.add.text(300, 25, Object.keys(window.state.players[window.sessionId].boardSize).length, this.textStyle);
+    this.add.text(325, 25, '/', this.textStyle);
+    this.maxBoardSizeText = this.add.text(350, 25, window.state.players[window.sessionId].experienceManager.level, this.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
     this.transitionScreen.setAlpha(0);
     this.music = this.sound.addAudioSprite('sounds');
-    this.music.play('pick-1');
+    this.music.play(window.state.mapType);
     this.initilizeDragAndDrop();
-    this.shopContainer.updatePortraits();
     this.boardManager.update();
     window.initialized = true;
   }
@@ -210,13 +216,13 @@ export default class GameScene extends Scene {
 
   updatePhase() {
     this.dpsMeterContainer.maxDamage = 0;
-    this.phaseText.setText(window.state.phase);
+    this.phaseText.setText(PHASE_TRADUCTION[window.state.phase][window.langage]);
     if (window.state.phase == 'FIGHT') {
       this.boardManager.clearBoard();
-      this.music.play('battle-1');
+      //this.music.play('battle-1');
     } else {
       this.boardManager.buildPokemons();
-      this.music.play('pick-1');
+      //this.music.play('pick-1');
     }
   }
 
@@ -237,16 +243,16 @@ export default class GameScene extends Scene {
     this.graphics = [];
 
     for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 9; j++) {
-        const zone = this.add.zone(323 + 102 * j, 800 - 102 * i, 102, 102);
-        zone.setRectangleDropZone(102, 102);
+      for (let j = 0; j < 8; j++) {
+        const zone = this.add.zone(382 + 96 * j, 808 - 120 * i, 96, 120);
+        zone.setRectangleDropZone(96, 120);
         zone.setName('zone-' + j + '-' + i);
         this.zones.push(zone);
         const graphic = this.add.graphics().lineStyle(3, 0x304050).strokeRect(
-            this.zones[i * 9 + j].x - this.zones[i * 9 + j].input.hitArea.width / 2,
-            this.zones[i * 9 + j].y - this.zones[i * 9 + j].input.hitArea.height / 2,
-            this.zones[i * 9 + j].input.hitArea.width,
-            this.zones[i * 9 + j].input.hitArea.height);
+            this.zones[i * 8 + j].x - this.zones[i * 8 + j].input.hitArea.width / 2,
+            this.zones[i * 8 + j].y - this.zones[i * 8 + j].input.hitArea.height / 2,
+            this.zones[i * 8 + j].input.hitArea.width,
+            this.zones[i * 8 + j].input.hitArea.height);
         graphic.setVisible(false);
         this.graphics.push(graphic);
       }
