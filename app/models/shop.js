@@ -1,6 +1,5 @@
 const PokemonFactory = require('./pokemon-factory');
 
-
 const COMMON = ['geodude', 'azurill', 'zubat', 'mareep', 'cleffa', 'igglybuff', 'caterpie', 'weedle', 'pidgey', 'hoppip', 'seedot', 'starly'];
 const UNCOMMON = ['eevee','bulbasaur', 'charmander', 'squirtle', 'chikorita', 'cyndaquil', 'totodile', 'treecko', 'torchic', 'mudkip', 'turtwig', 'chimchar', 'piplup', 'nidoranF', 'nidoranM'];
 const RARE = ['pichu', 'machop', 'horsea', 'trapinch', 'spheal', 'aron', 'magnemite', 'rhyhorn', 'togepi', 'duskull', 'lotad', 'shinx', 'poliwag'];
