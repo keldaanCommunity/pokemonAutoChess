@@ -20,25 +20,26 @@ class RoomPage {
         </ul>
       </div>
 
-      <div style="display:flex; flex-flow:column; justify-content:space-around; align-items:center; width:70%; height:100%;">   
-      <div style="display:flex;flex-flow:row;"><img style="width:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
-      <h3>Players in room :</h3>
-      <table id="players-table">
-        <tr>
-          <th>Player</th>
-          <th>Elo</th>
-          <th>Ready</th>
-        </tr>
-      </table>
-      <div style="display:flex;  flex-flow:column;">
-        <button id="ready">Ready</button>
-        <button id="start">Start Game</button>
-        <button id="quit">Quit Room</button>
-        <button id="addBot">Add Bot</button>
-        <button id="removeBot">Remove Bot</button>
-      </div>
-    </div>
-
+      <div style="display:flex; flex-flow:column; justify-content:space-around; align-items:center; width:50%; height:100%;">   
+        <div style="display:flex;flex-flow:row;"><img style="width:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
+        <p style='margin-left:10px;'>${_client.auth.email}</p>
+        </div>
+        <h3>Players in room :</h3>
+        <table id="players-table">
+          <tr>
+            <th>Player</th>
+            <th>Elo</th>
+            <th>Ready</th>
+          </tr>
+        </table>
+        </div>
+        <div style="display:flex;  flex-flow:column; justify-content:center;">
+          <button id="ready">Ready</button>
+          <button id="start">Start Game</button>
+          <button id="quit">Quit Room</button>
+          <button id="addBot">Add Bot</button>
+          <button id="removeBot">Remove Bot</button>
+        </div>
     </div>
       <div style="width:30%; display:flex;">
         <input style="width:80%;" id="inputMessage" class="inputMessage" placeholder="Type here..." type="text">
@@ -119,7 +120,7 @@ class RoomPage {
       }
     });
     this.room.onStateChange((state) => {
-      console.log(state);
+      //console.log(state);
       this.handleUserChange();
     });
 
