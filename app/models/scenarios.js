@@ -3258,14 +3258,14 @@ const SCENARIOS =
             "y":2
           },
           {
-            "name":"pikachu",
+            "name":"pichu",
             "x":3,
             "y":3
           },
           {
             "name":"togepi",
             "x":3,
-            "y":3
+            "y":1
           }
         ]
       },
@@ -3294,14 +3294,14 @@ const SCENARIOS =
             "y":2
           },
           {
-            "name":"pikachu",
+            "name":"pichu",
             "x":3,
             "y":3
           },
           {
             "name":"togetic",
             "x":3,
-            "y":3
+            "y":1
           }
         ]
       },
@@ -3330,19 +3330,19 @@ const SCENARIOS =
             "y":2
           },
           {
-            "name":"pikachu",
+            "name":"pichu",
             "x":3,
             "y":3
           },
           {
             "name":"togetic",
             "x":3,
-            "y":3
+            "y":1
           },
           {
             "name":"slakoth",
-            "x":3,
-            "y":3
+            "x":4,
+            "y":1
           }
         ]
       },
