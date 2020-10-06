@@ -234,13 +234,15 @@ const COST = Object.freeze({
 const BOT_AVATAR = Object.freeze({
   WATER1:'squirtle',
   FIRE1:'charmander',
-  POISON1:'zubat'
+  POISON1:'zubat',
+  GRASS1:'bulbasaur'
 });
 
 const POKEMON_BOT = Object.freeze({
   squirtle:'WATER1',
   charmander:'FIRE1',
-  zubat:'POISON1'
+  zubat:'POISON1',
+  bulbasaur:'GRASS1'
 });
 
 const EXP_TABLE = Object.freeze({
