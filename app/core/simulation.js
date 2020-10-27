@@ -137,7 +137,7 @@ class Simulation extends Schema {
             break;
 
           case EFFECTS.WATER:
-            pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.1);
+            pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.2);
             break;
 
           case EFFECTS.NORMAL:
@@ -149,7 +149,7 @@ class Simulation extends Schema {
             break;
           
           case EFFECTS.ROCK:
-            pokemon.def += Math.ceil(pokemon.baseDef * 0.25);
+            pokemon.def += Math.ceil(pokemon.baseDef * 0.2);
             break;
 
           default:
