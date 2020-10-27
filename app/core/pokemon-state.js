@@ -53,6 +53,10 @@ class PokemonState {
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
         pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.ceil(pokemon.hp / 20));
       }
+
+      if (pokemon.effects.includes(EFFECTS.GRASS)) {
+        pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.ceil(pokemon.hp / 20));
+      }
       
       if(pokemon.items.count(ITEMS.METRONOME) != 0){
         pokemon.atk = Math.ceil(pokemon.baseAtk * 1.05) * pokemon.items.count(ITEMS.METRONOME);

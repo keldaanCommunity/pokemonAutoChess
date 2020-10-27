@@ -13,7 +13,7 @@ import ItemsContainer from '../components/items-container';
 import DpsMeterContainer from '../components/dps-meter-container';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
-import {WORDS, PHASE_TRADUCTION} from '../../../../models/enum';
+import {WORDS, PHASE_TRADUCTION, MAP_TYPE_NAME} from '../../../../models/enum';
 
 export default class GameScene extends Scene {
   constructor() {
@@ -156,18 +156,15 @@ export default class GameScene extends Scene {
       stroke: '#000',
       strokeThickness: 2
     };
+    this.mapName = this.add.text(1570,25, MAP_TYPE_NAME[window.state.mapType], this.textStyle);
     this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name.slice(0, 10), this.textStyle);
     this.phaseText = this.add.text(860, 25, window.state.players[window.sessionId].phase, this.textStyle);
     this.opponentNameText = this.add.text(1270, 25, window.state.players[window.sessionId].opponentName.slice(0, 10), this.textStyle);
-    
     this.turnText = this.add.text(560, 25, window.state.stageLevel, this.textStyle);
     this.add.text(470, 25, WORDS.TURN[window.langage], this.textStyle);
-
     this.timeText = this.add.text(685, 25, window.state.roundTime, this.textStyle);
     this.add.text(735, 25, 's', this.textStyle);
-
     this.lastBattleResult = this.add.text(1050, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
-
     this.countdownText = this.add.text(700, 300, window.state.players[window.sessionId].lastBattleResult, this.bigTextStyle);
     this.countdownText.setAlpha(0);
     this.boardSizeText = this.add.text(300, 25, Object.keys(window.state.players[window.sessionId].boardSize).length, this.textStyle);
@@ -181,6 +178,15 @@ export default class GameScene extends Scene {
     this.initilizeDragAndDrop();
     this.boardManager.update();
     window.initialized = true;
+
+    //console.log(window.state.mapType);
+    let self = this;
+    window.state.specialCells.forEach((cell) => {
+      let coordinates = window.transformAttackCoordinate(cell.positionX, cell.positionY);
+      let sprite = new GameObjects.Sprite(self,coordinates[0],coordinates[1],'attacks',`${window.state.mapType}/cell/000`);
+      self.add.existing(sprite);
+      window.animationManager.playSpecialCells(sprite);
+    });
   }
 
   update() {

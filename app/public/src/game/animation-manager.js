@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-import {GameObjects} from 'phaser';
 
 export default class AnimationManager {
   constructor(game) {
@@ -56,6 +55,52 @@ export default class AnimationManager {
     });
 
     this.createAttacksAnimations();
+
+    this.createSpecialCellsAnimations();
+  }
+
+  createSpecialCellsAnimations(){
+    this.game.anims.create({
+      key: `FIRE/cell`,
+      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'FIRE/cell/'}),
+      frameRate: 30,
+      repeat: -1
+    });
+
+    this.game.anims.create({
+      key: `GRASS/cell`,
+      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 19, zeroPad: 3, prefix: 'GRASS/cell/'}),
+      frameRate: 15,
+      repeat: -1
+    });
+
+    this.game.anims.create({
+      key: `WATER/cell`,
+      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 6, zeroPad: 3, prefix: 'WATER/cell/'}),
+      frameRate: 15,
+      repeat: -1
+    });
+
+    this.game.anims.create({
+      key: `NORMAL/cell`,
+      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 51, zeroPad: 3, prefix: 'NORMAL/cell/'}),
+      frameRate: 15,
+      repeat: -1
+    });
+
+    this.game.anims.create({
+      key: `ICE/cell`,
+      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 14, zeroPad: 3, prefix: 'ICE/cell/'}),
+      frameRate: 15,
+      repeat: -1
+    });
+
+    this.game.anims.create({
+      key: `ROCK/cell`,
+      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'ROCK/cell/'}),
+      frameRate: 30,
+      repeat: -1
+    });
   }
 
   createAttacksAnimations() {
@@ -265,6 +310,12 @@ export default class AnimationManager {
     const sprite = entity.getFirst('objType', 'sprite');
     sprite.flipX = this.flipxTable[entity.orientation];
     sprite.anims.play(spriteKey);
+  }
+
+  playSpecialCells(entity){
+    console.log(entity);
+    console.log(window.state.mapType);
+    entity.anims.play(`${window.state.mapType}/cell`);
   }
 
   getSpriteKey(entity) {

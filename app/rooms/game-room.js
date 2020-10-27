@@ -18,7 +18,7 @@ class GameRoom extends colyseus.Room {
     for (const id in options.users){
       const user = options.users[id];
       if(user.isBot){
-        this.state.players[id] = new Player(user.id, user.name, user.avatar, true);
+        this.state.players.set(id, new Player(user.id, user.name, user.avatar, true, this.state.specialCells, this.state.mapType));
         this.state.botManager.addBot(this.state.players[id]);
         this.state.shop.assignShop(this.state.players[id]);
       }
