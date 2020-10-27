@@ -1,8 +1,10 @@
 const Command = require('@colyseus/command').Command;
-const {STATE, COST, TYPE, EFFECTS, ITEMS, RARITY_HP_COST} = require('../../models/enum');
+const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE} = require('../../models/enum');
 const Player = require('../../models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
+const Mongoose = require('mongoose');
+const User = require('@colyseus/social').User;
 
 class OnShopCommand extends Command {
   execute({sessionId, index}) {
@@ -22,6 +24,7 @@ class OnShopCommand extends Command {
         }
       }
     }
+    
   }
 }
 
@@ -93,23 +96,24 @@ class OnDragDropCommand extends Command {
         if ( item ) {
           const x = parseInt(detail.x);
           const y = parseInt(detail.y);
+          let eevolution;
+          let evolve = false;
+
           this.state.players.get(client.sessionId).board.forEach((pokemon, id) => {
             if(pokemon.positionX == x && pokemon.positionY == y && pokemon.items.length < 3){
-              let evolve = false;
+              
               if(pokemon.name == 'eevee' && item == ITEMS.WATER_STONE){
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('vaporeon');
+                eevolution = PokemonFactory.createPokemonFromName('vaporeon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -117,16 +121,14 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('flareon');
+                eevolution = PokemonFactory.createPokemonFromName('flareon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -134,16 +136,14 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('jolteon');
+                eevolution = PokemonFactory.createPokemonFromName('jolteon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -151,16 +151,14 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('umbreon');
+                eevolution = PokemonFactory.createPokemonFromName('umbreon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -168,16 +166,14 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('sylveon');
+                eevolution = PokemonFactory.createPokemonFromName('sylveon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -185,16 +181,14 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('leafon');
+                eevolution = PokemonFactory.createPokemonFromName('leafon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -202,16 +196,29 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('espeon');
+                eevolution = PokemonFactory.createPokemonFromName('espeon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
+                success = true;
+                message.updateItems = false;
+              }
+              else if(pokemon.name == 'eevee' && item == ITEMS.ICY_ROCK){
+                evolve = true;
+                const x = pokemon.positionX;
+                const y = pokemon.positionY;
+                eevolution = PokemonFactory.createPokemonFromName('glaceon');
+                eevolution.positionX = x;
+                eevolution.positionY = y;
+                eevolution.items.item0 = pokemon.items.item0;
+                eevolution.items.item1 = pokemon.items.item1;
+                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items.add(item);
+                this.state.players.get(client.sessionId).board.delete(id);
                 success = true;
                 message.updateItems = false;
               }
@@ -221,13 +228,17 @@ class OnDragDropCommand extends Command {
                 success = true;
                 message.updateItems = false;
               }
-              if (evolve) {
-                this.state.players.get(client.sessionId).synergies.update(this.state.players.get(client.sessionId).board);
-                this.state.players.get(client.sessionId).effects.update(this.state.players.get(client.sessionId).synergies);
-                this.state.players.get(client.sessionId).boardSize = UtilsCommand.getTeamSize(this.state.players.get(client.sessionId).board);
-              }
             }
           });
+          if(eevolution){
+            this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
+            this.state.players.get(client.sessionId).stuff.remove(item);
+          }
+          if (evolve) {
+            this.state.players.get(client.sessionId).synergies.update(this.state.players.get(client.sessionId).board);
+            this.state.players.get(client.sessionId).effects.update(this.state.players.get(client.sessionId).synergies);
+            this.state.players.get(client.sessionId).boardSize = UtilsCommand.getTeamSize(this.state.players.get(client.sessionId).board);
+          }
         }
       }
     }
@@ -303,14 +314,21 @@ class OnLevelUpCommand extends Command {
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    this.state.players.set(client.sessionId, new Player(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')),client.auth.metadata.avatar, false));
+    this.state.players.set(client.sessionId, new Player(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')),client.auth.metadata.avatar, false, this.state.specialCells, this.state.mapType, auth.email));
     this.state.shop.assignShop(this.state.players.get(client.sessionId));
+    if(this.state.players.size == 8){
+      //console.log('game elligible to xp');
+      this.state.elligibleToXP = true;
+    }
   }
 }
 
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
     this.state.shop.detachShop(this.state.players.get(client.sessionId));
+    if(!this.state.players.get(client.sessionId).alive && this.state.elligibleToXP){
+      UtilsCommand.computePlayerExperience(this.state.players.get(client.sessionId));
+    }
     this.state.players.delete(client.sessionId);
   }
 }
@@ -355,6 +373,17 @@ class OnKickPlayerCommand extends Command {
 }
 
 class UtilsCommand extends Command {
+
+  static getNumberOfPlayersAlive(players){
+    let numberOfPlayersAlive = 0;
+    players.forEach((player, key) => {
+      if(player.alive){
+        numberOfPlayersAlive ++;
+      }
+    });
+    return numberOfPlayersAlive;
+  }
+
   static getBoardSize(board) {
     let boardSize = 0;
 
@@ -437,19 +466,73 @@ class OnUpdatePhaseCommand extends Command {
 
   checkEndGame(){
     let commands = [];
-    let numberOfPlayersAlive = 0;
-
-    this.state.players.forEach((player, key) => {
-      if (player.alive) {
-        numberOfPlayersAlive += 1;
-      }
-    });
+    let numberOfPlayersAlive = UtilsCommand.getNumberOfPlayersAlive(this.state.players);
 
     if(numberOfPlayersAlive <= 1 && !this.state.gameFinished){
+      this.state.players.forEach(player=>{
+        if(player.alive){
+          this.computePlayerExperience(player);
+        }
+      });
       this.state.gameFinished = true;
       commands.push(new OnKickPlayerCommand());
     }
     return commands;
+  }
+
+  computePlayerExperience(player){
+    let self = this;
+    if(this.state.elligibleToXP){
+      let place = UtilsCommand.getNumberOfPlayersAlive(this.state.players);
+      let exp = XP_PLACE[place];
+
+      Mongoose.connect(process.env.MONGO_URI , (err) => {
+        User.find({email: player.email}, (err, users)=> {
+            if(err){
+              console.log(err);
+            }
+            else{
+              users.forEach(usr => {
+                if(!player.dbConsumed){
+                  let actualExp = 0;
+                  let actualLevel = 0;
+                  if(usr.metadata.exp){
+                    actualExp = usr.metadata.exp;
+                  }
+                  if(usr.metadata.level){
+                    actualLevel = usr.metadata.level;
+                  }
+                  let expThreshold = XP_TABLE[actualLevel];
+                  if(expThreshold === undefined){
+                    expThreshold = XP_TABLE[XP_TABLE.length - 1];
+                  }
+                  if(actualExp + exp >= expThreshold){
+                    usr.metadata.level += 1;
+                    usr.metadata.exp = actualExp + exp - expThreshold;
+                  }
+                  else{
+                    usr.metadata.exp = actualExp + exp;
+                  }
+  
+                  if(place == 1){
+                    usr.metadata.wins += 1;
+                    usr.metadata.mapWin[self.state.mapType] += 1;
+                  }
+                  self.room.clients.forEach(cli => {
+                    if(cli.auth.email == usr.email){
+                      cli.send('metadata',usr.metadata);
+                    }
+                  });
+                  usr.markModified('metadata');
+                  //console.log('user metadata changed');
+                  usr.save();
+                  player.dbConsumed = true;
+                }
+              });
+            }
+        });
+      });
+    }
   }
 
   computePlayerDamage(redTeam, playerLevel){
@@ -523,6 +606,7 @@ class OnUpdatePhaseCommand extends Command {
 
   computeIncome() {
     this.state.players.forEach((player, key) => {
+
       if(player.alive){
         player.interest = Math.min(Math.floor(player.money / 5), 6);
         player.money += player.interest;
@@ -551,7 +635,10 @@ class OnUpdatePhaseCommand extends Command {
         player.alive = false;
         player.board.forEach((pokemon, id) => {
           player.board.delete(id);
-        })
+        });
+        if(!player.isBot && !player.dbConsumed){
+          this.computePlayerExperience(player);
+        }
       }
     });
   }
@@ -608,7 +695,7 @@ class OnUpdatePhaseCommand extends Command {
 
   initializeFightingPhase() {
     this.state.phase = STATE.FIGHT;
-    this.state.time = 30000;
+    this.state.time = 40000;
     this.state.stageLevel += 1;
     this.state.botManager.updateBots();
 

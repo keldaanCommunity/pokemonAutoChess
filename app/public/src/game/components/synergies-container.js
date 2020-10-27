@@ -1,5 +1,6 @@
 import {GameObjects} from 'phaser';
 import SynergyContainer from './synergy-container';
+import {TYPE} from '../../../../models/enum';
 
 export default class SynergiesContainer extends GameObjects.Container {
   constructor(scene, x, y, player) {
@@ -7,11 +8,11 @@ export default class SynergiesContainer extends GameObjects.Container {
     let cy = 0;
     let cx = 0;
     this.player = player;
-    this.types = ['NORMAL', 'GRASS', 'FIRE', 'WATER', 'ELECTRIC', 'FIGHTING', 'PSYCHIC', 'DARK', 'METAL', 'GROUND', 'POISON', 'DRAGON', 'FIELD', 'MONSTER', 'HUMAN', 'AQUATIC', 'BUG', 'FLYING', 'FLORA', 'MINERAL', 'AMORPH', 'FAIRY'];
+    this.types = Object.keys(TYPE);
     this.types.forEach((type) => {
-      this.add(new SynergyContainer(scene, cx, 68 * cy, type));
+      this.add(new SynergyContainer(scene, cx, 62 * cy, type));
       cy += 1;
-      if (cy > 10) {
+      if (cy > 11) {
         cy = 0;
         cx = 110;
       }

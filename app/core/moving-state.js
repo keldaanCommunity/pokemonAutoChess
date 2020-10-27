@@ -15,10 +15,12 @@ class MovingState extends PokemonState {
       // no target case
       if (targetCoordinate[0] === undefined || targetCoordinate[1] === undefined) {
       }
-      else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) <= pokemon.range) {
+      else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) <= pokemon.range && !pokemon.confusion) {
         pokemon.toAttackingState();
       } else {
-        this.move(pokemon, board, targetCoordinate);
+        if(!pokemon.sleep && !pokemon.freeze){
+          this.move(pokemon, board, targetCoordinate);
+        }
       }
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt);

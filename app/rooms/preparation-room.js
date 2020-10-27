@@ -13,6 +13,8 @@ class PreparationRoom extends colyseus.Room {
   onCreate(options) {
     this.setState(new PreparationState());
     this.maxClients = 8;
+    this.dispatcher.dispatch(new OnAddBotCommand());
+    
     this.onMessage('game-start', (client, message) => {
       this.dispatcher.dispatch(new OnGameStartCommand(), {client, message});
     });
@@ -23,10 +25,10 @@ class PreparationRoom extends colyseus.Room {
       this.dispatcher.dispatch(new OnMessageCommand(), {client, message});
     });
     this.onMessage('addBot', (client, message) => {
-      this.dispatcher.dispatch(new OnAddBotCommand(), client);
+      this.dispatcher.dispatch(new OnAddBotCommand());
     });
     this.onMessage('removeBot', (client, message) => {
-      this.dispatcher.dispatch(new OnRemoveBotCommand(), client);
+      this.dispatcher.dispatch(new OnRemoveBotCommand());
     });
   }
 

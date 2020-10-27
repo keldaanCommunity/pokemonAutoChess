@@ -38,6 +38,36 @@ export default class WeatherManager {
     ]);
   }
 
+  addSnow() {
+
+    this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene, 1000, 500, 2000, 1000, 0xa7cade, 0.3).setDepth(8));
+    this.particles = this.scene.add.particles('snowflakes', [
+      {
+        emitZone: {source: this.offscreen},
+        deathZone: {source: this.screen, type: 'onLeave'},
+        frequency: 10,
+        speedY: {min: 70, max: 80},
+        lifespan: 5000,
+        scale: 0.5
+      },
+      {
+        emitZone: {source: this.offscreen},
+        deathZone: {source: this.screen, type: 'onLeave'},
+        frequency: 20,
+        speedY: {min: 100, max: 110},
+        lifespan: 5000,
+        scale: 0.8
+      },
+      {
+        emitZone: {source: this.offscreen},
+        deathZone: {source: this.screen, type: 'onLeave'},
+        frequency: 40,
+        speedY: {min: 200, max: 210},
+        lifespan: 5000
+      }
+    ]);
+  }
+
   addSun() {
     this.image = this.scene.add.existing(new Phaser.GameObjects.Image(this.scene, 550, 250, 'sun').setScale(4, 4).setDepth(8));
     this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene, 1000, 500, 2000, 1000, 0xffe800, 0.15).setDepth(8));

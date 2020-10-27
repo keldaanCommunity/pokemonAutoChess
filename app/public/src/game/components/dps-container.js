@@ -27,7 +27,8 @@ export default class DpsContainer extends GameObjects.Container {
       FLORA: 0x180d1c,
       MINERAL: 0x3f3817,
       AMORPH: 0x2d253b,
-      FAIRY: 0x82525b
+      FAIRY: 0x82525b,
+      ICE: 0x38455f
     };
     
     this.name = name;
@@ -41,7 +42,7 @@ export default class DpsContainer extends GameObjects.Container {
     };
     this.pokemon = PokemonFactory.createPokemonFromName(this.name);
     const nameText = this.pokemon.name.charAt(0).toUpperCase() + this.pokemon.name.slice(1);
-    this.add(new GameObjects.Image(scene,25,0, this.pokemon.rarity, `${this.pokemon.index}/portrait`));
+    this.add(new GameObjects.Image(scene,25,0, this.pokemon.sheet, `${this.pokemon.index}/portrait`));
     this.add(new GameObjects.Text(scene,50,-25,nameText,this.textStyle));
     this.damageText = new GameObjects.Text(scene,150,0,this.damage,this.textStyle);
     this.damageBar = new GameObjects.Rectangle(scene,90,29,170,15,this.typeColor[this.pokemon.types[0]]);

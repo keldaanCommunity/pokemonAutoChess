@@ -2,7 +2,6 @@ import {Scene, GameObjects} from 'phaser';
 import AnimationManager from '../animation-manager';
 import ShopContainer from '../components/shop-container';
 import PlayerContainer from '../components/player-container';
-import BoardContainer from '../components/board-manager';
 import BoardManager from '../components/board-manager';
 import BattleManager from '../components/battle-manager';
 import MoneyContainer from '../components/money-container';
@@ -13,7 +12,7 @@ import ItemsContainer from '../components/items-container';
 import DpsMeterContainer from '../components/dps-meter-container';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
-import {WORDS, PHASE_TRADUCTION} from '../../../../models/enum';
+import {WORDS, PHASE_TRADUCTION, MAP_TYPE_NAME} from '../../../../models/enum';
 
 export default class GameScene extends Scene {
   constructor() {
@@ -85,33 +84,35 @@ export default class GameScene extends Scene {
     this.load.image('tiles', `assets/tiles/${window.state.mapType}.png`);
     this.load.tilemapTiledJSON('map', `assets/tiles/${window.state.mapType}.json`);
     this.load.image('hexagon', 'assets/ui/hexagon.png');
-    this.load.image('shield', 'assets/ui/shield.png');
-    this.load.image('sword', 'assets/ui/sword.png');
-    this.load.image('range', 'assets/ui/range.png');
-    this.load.image('heart', 'assets/ui/heart.png');
     this.load.image('rain', 'assets/ui/rain.png');
     this.load.image('sand', 'assets/ui/sand.png');
     this.load.image('sun', 'assets/ui/sun.png');
     this.load.image('socle', 'assets/ui/socle.png');
     this.load.image('PHYSICAL', 'assets/types/PHYSICAL.png');
     this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
-    this.load.multiatlas('items','assets/items/items.json','assets/items/')
+    this.load.multiatlas('snowflakes','assets/ui/snowflakes.json','assets/ui/');
+    this.load.multiatlas('status','assets/status/status.json','assets/status/');
+    this.load.multiatlas('icons','assets/ui/icons.json','assets/ui/');
+    this.load.multiatlas('items','assets/items/items.json','assets/items/');
     this.load.multiatlas('type-details', `assets/types/${window.langage}/type-details.json`, `assets/types/${window.langage}/`);
     this.load.multiatlas('lock', 'assets/lock/lock.json', 'assets/lock/');
     this.load.multiatlas('effects', 'assets/effects/effects.json', 'assets/effects');
     this.load.multiatlas('rarity', 'assets/rarity/rarity.json', 'assets/rarity');
     this.load.multiatlas('types', 'assets/types/types.json', 'assets/types');
+    this.load.multiatlas('december', 'assets/pokemons/december/december.json', 'assets/pokemons/december/')
     this.load.multiatlas('COMMON', 'assets/pokemons/common/common.json', 'assets/pokemons/common');
     this.load.multiatlas('NEUTRAL', 'assets/pokemons/neutral/neutral.json', 'assets/pokemons/neutral');
     this.load.multiatlas('UNCOMMON', 'assets/pokemons/uncommon/uncommon.json', 'assets/pokemons/uncommon');
     this.load.multiatlas('RARE', 'assets/pokemons/rare/rare.json', 'assets/pokemons/rare');
     this.load.multiatlas('EPIC', 'assets/pokemons/epic/epic.json', 'assets/pokemons/epic');
+    this.load.multiatlas('EPIC2', 'assets/pokemons/epic/epic2.json', 'assets/pokemons/epic');
+    this.load.multiatlas('UNCOMMON2', 'assets/pokemons/uncommon/uncommon2.json', 'assets/pokemons/uncommon');
     this.load.multiatlas('LEGENDARY', 'assets/pokemons/legendary/legendary.json', 'assets/pokemons/legendary');
     this.load.multiatlas('attacks', 'assets/attacks/attacks.json', 'assets/attacks');
+    this.load.multiatlas('specials', 'assets/attacks/specials.json', 'assets/attacks');
     this.load.image('transition', 'assets/ui/transition.png');
     this.load.image('money', 'assets/ui/money.png');
-    this.load.image('refreshButton', 'assets/ui/refreshButton.png');
-    this.load.image('life', 'assets/ui/life.png');
+    this.load.multiatlas('life', 'assets/ui/life.json', 'assets/ui');
   }
 
   create() {
@@ -122,17 +123,15 @@ export default class GameScene extends Scene {
     this.map.createStaticLayer('World', tileset, 0, 0);
     //this.map.createStaticLayer('Top', tileset, 0, 0);
 
-    this.board = this.add.group();
     this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);
     this.shopContainer = new ShopContainer(this, 470, 912);
     this.playerContainer = new PlayerContainer(this, 1800, 160);
-    this.boardContainer = new BoardContainer(this, 382, 808);
     this.synergiesContainer = new SynergiesContainer(this, 1290, 135, window.state.players[window.sessionId]);
     this.dpsMeterContainer = new DpsMeterContainer(this, 1520, 135, window.state.players[window.sessionId]);
     this.itemsContainer = new ItemsContainer(this, 66, 430);
     this.moneyContainer = new MoneyContainer(this, 10, 60, window.state.players[window.sessionId]);
-    this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
+    this.boardManager = new BoardManager(this, window.state.players[window.sessionId]);
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
     this.weatherManager = new WeatherManager(this);
     this.entryHazardsManager = new EntryHazardsManager(this, this.map, tileset);
@@ -156,18 +155,15 @@ export default class GameScene extends Scene {
       stroke: '#000',
       strokeThickness: 2
     };
+    this.mapName = this.add.text(1570,25, MAP_TYPE_NAME[window.state.mapType], this.textStyle);
     this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name.slice(0, 10), this.textStyle);
     this.phaseText = this.add.text(860, 25, window.state.players[window.sessionId].phase, this.textStyle);
     this.opponentNameText = this.add.text(1270, 25, window.state.players[window.sessionId].opponentName.slice(0, 10), this.textStyle);
-    
     this.turnText = this.add.text(560, 25, window.state.stageLevel, this.textStyle);
     this.add.text(470, 25, WORDS.TURN[window.langage], this.textStyle);
-
     this.timeText = this.add.text(685, 25, window.state.roundTime, this.textStyle);
     this.add.text(735, 25, 's', this.textStyle);
-
     this.lastBattleResult = this.add.text(1050, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
-
     this.countdownText = this.add.text(700, 300, window.state.players[window.sessionId].lastBattleResult, this.bigTextStyle);
     this.countdownText.setAlpha(0);
     this.boardSizeText = this.add.text(300, 25, Object.keys(window.state.players[window.sessionId].boardSize).length, this.textStyle);
@@ -177,10 +173,26 @@ export default class GameScene extends Scene {
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
     this.transitionScreen.setAlpha(0);
     this.music = this.sound.addAudioSprite('sounds');
-    this.music.play(window.state.mapType);
+    this.music.play(window.state.mapType,{
+      mute: false,
+      volume: 0.3,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: true,
+      delay: 0
+  });
     this.initilizeDragAndDrop();
-    this.boardManager.update();
     window.initialized = true;
+
+    //console.log(window.state.mapType);
+    let self = this;
+    window.state.specialCells.forEach((cell) => {
+      let coordinates = window.transformAttackCoordinate(cell.positionX, cell.positionY);
+      let sprite = new GameObjects.Sprite(self,coordinates[0],coordinates[1],'attacks',`${window.state.mapType}/cell/000`);
+      self.add.existing(sprite);
+      window.animationManager.playSpecialCells(sprite);
+    });
   }
 
   update() {
@@ -218,10 +230,10 @@ export default class GameScene extends Scene {
     this.dpsMeterContainer.maxDamage = 0;
     this.phaseText.setText(PHASE_TRADUCTION[window.state.phase][window.langage]);
     if (window.state.phase == 'FIGHT') {
-      this.boardManager.clearBoard();
+      this.boardManager.battleMode();
       //this.music.play('battle-1');
     } else {
-      this.boardManager.buildPokemons();
+      this.boardManager.pickMode();
       //this.music.play('pick-1');
     }
   }
@@ -305,6 +317,9 @@ export default class GameScene extends Scene {
             'place': place
           }
         }));
+        if(gameObject.objType == 'pokemon'){
+          window.lastDragDropPokemon = gameObject;
+        }
         if(gameObject.objType == 'item'){
           this.itemsContainer.updateItem(gameObject.place);
         }

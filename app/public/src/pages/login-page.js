@@ -1,4 +1,5 @@
 import {insertScriptFile} from '../utils';
+import * as uniqid from 'uniqid';
 
 class LoginPage {
   constructor(args) {
@@ -21,16 +22,24 @@ class LoginPage {
     <div id="login-container">
       <div class="tab-container">
       <input name="radio-group1" id="tab-1" type="radio" checked>
-      <label for="tab-1">Account</label>
+      <label for="tab-1">Guest</label>
       <input name="radio-group1" id="tab-2" type="radio">
-      <label for="tab-2">Facebook</label>
+      <label for="tab-2">Account</label>
+      <input name="radio-group1" id="tab-3" type="radio">
+      <label for="tab-3">Facebook</label>
       <div class="tab-row">
+        <div>
+        <div id="login-guest">
+          <button id="button-guest" type="button" class="btn btn-secondary">Log as guest</button>
+        </div>
+        </div>
         <div>
         <div id="login-account">
           <label>Email</label><input type="string" id="input-username">
           <label>Password</label><input type="password" id="input-password">
           <button id="button-login" type="button" class="btn btn-secondary">Log in</button>
-        </div></div>
+        </div>
+        </div>
         <div><div id="login-fb">
           <button id="button-fb" type="button" class="btn btn-secondary"></button>
         </div></div>
@@ -47,12 +56,17 @@ class LoginPage {
       window.dispatchEvent(new CustomEvent('render-home'));
     });
     document.getElementById('button-login').addEventListener('click', this.handleLoginButtonClick.bind(this));
+    document.getElementById('button-guest').addEventListener('click', this.handleGuestButtonClick.bind(this));
   }
 
   handleLoginButtonClick(e) {
     const inputMail = document.getElementById('input-username').value;
     const inputPassword = document.getElementById('input-password').value;
     this.authenticateWithEmail(inputMail, inputPassword);
+  }
+
+  handleGuestButtonClick(e) {
+    this.authenticateWithEmail(`guest${uniqid()}@test.test`, 'guest');
   }
 
   initFBLogin() {

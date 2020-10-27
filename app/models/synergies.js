@@ -28,7 +28,8 @@ class Synergies extends schema.Schema {
       FLORA: 0,
       MINERAL: 0,
       AMORPH: 0,
-      FAIRY: 0
+      FAIRY: 0,
+      ICE: 0
     });
   }
 
@@ -72,6 +73,7 @@ class Synergies extends schema.Schema {
     this.MINERAL = 0;
     this.AMORPH = 0;
     this.FAIRY= 0;
+    this.ICE = 0;
   }
 }
 
@@ -99,7 +101,8 @@ schema.defineTypes(Synergies, {
   FLORA: 'uint8',
   MINERAL: 'uint8',
   AMORPH: 'uint8',
-  FAIRY: 'uint8'
+  FAIRY: 'uint8',
+  ICE:'uint8'
 });
 
 module.exports = Synergies;

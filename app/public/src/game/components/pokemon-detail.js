@@ -1,5 +1,6 @@
 import {GameObjects} from 'phaser';
 import PokemonFactory from '../../../../models/pokemon-factory';
+import {SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
 
 
 const COLOR_TYPE = Object.freeze({
@@ -18,7 +19,9 @@ export default class PokemonDetail extends GameObjects.Container {
     this.textStyle = {
       fontSize: '20px',
       fontFamily: 'Verdana',
-      color: 'white'
+      color: 'white',
+      align: 'center',
+      wordWrap: { width: 200, useAdvancedWrap: true }
     };
     this.greenTextStyle= {
       fontSize: '20px',
@@ -30,11 +33,12 @@ export default class PokemonDetail extends GameObjects.Container {
       fontFamily: 'Verdana',
       color: '#ff0000'
     };
+
     this.objType = 'detail';
-    this.add(new GameObjects.Rectangle(scene, 80, 80, 160, 120, COLOR_TYPE[this.pokemonInformation.rarity]));
+    this.add(new GameObjects.Rectangle(scene, 190, 90, 370, 140, COLOR_TYPE[this.pokemonInformation.rarity]));
     const displayName = name.charAt(0).toUpperCase() + name.slice(1);
     this.add(new GameObjects.Text(scene, 5, 20, displayName, this.textStyle));
-    this.add(new GameObjects.Image(scene, 140, 40, `${this.pokemonInformation.rarity}`, `${this.pokemonInformation.index}/portrait`));
+    this.add(new GameObjects.Image(scene, 140, 40, this.pokemonInformation.sheet, `${this.pokemonInformation.index}/portrait`));
     for (let i = 0; i < this.pokemonInformation.types.length; i++) {
       this.add(new GameObjects.Image(scene, 30*i +20, 60, 'hexagon').setScale(0.5, 0.5));
       this.add(new GameObjects.Image(scene, 30*i +20, 60, 'types', this.pokemonInformation.types[i]).setScale(0.5, 0.5));
@@ -42,23 +46,26 @@ export default class PokemonDetail extends GameObjects.Container {
     this.add(new GameObjects.Image(scene, 140, 70, attackType).setScale(0.5, 0.5));
     this.hp = new GameObjects.Text(scene, 20, 80, hp, this.getColorStyle(this.pokemonInformation.hp, hp, false));
     this.add(this.hp);
-    this.add(new GameObjects.Image(scene, 60, 90, 'heart'));
+    this.add(new GameObjects.Image(scene, 60, 90, 'icons', 'hp').setScale(2,2));
     this.atk = new GameObjects.Text(scene, 100, 80, atk, this.getColorStyle(this.pokemonInformation.atk, atk, false));
     this.add(this.atk);
-    this.add(new GameObjects.Image(scene, 140, 90, 'sword'));
+    this.add(new GameObjects.Image(scene, 140, 90, 'icons','atk').setScale(2,2));
     this.def = new GameObjects.Text(scene, 20, 100, def, this.getColorStyle(this.pokemonInformation.def, def, false));
     this.add(this.def);
-    this.add(new GameObjects.Image(scene, 60, 110, 'shield'));
+    this.add(new GameObjects.Image(scene, 60, 110, 'icons','def').setScale(2,2));
     this.range = new GameObjects.Text(scene, 100, 100, range, this.getColorStyle(this.pokemonInformation.range, range, false));
     this.add(this.range);
-    this.add(new GameObjects.Image(scene, 140, 110, 'range'));
+    this.add(new GameObjects.Image(scene, 140, 110, 'icons', 'range').setScale(2,2));
     this.atkSpeed = new GameObjects.Text(scene, 80, 120, atkSpeed, this.getColorStyle(this.pokemonInformation.atkSpeed, atkSpeed, true));
     this.add(this.atkSpeed);
-    this.add(new GameObjects.Image(scene, 140, 130, 'range'));
+    this.add(new GameObjects.Image(scene, 140, 130, 'icons','atkSpeed').setScale(2,2));
     this.speDef = new GameObjects.Text(scene, 20, 120, speDef, this.getColorStyle(this.pokemonInformation.speDef, speDef, false));
     this.add(this.speDef);
-    this.add(new GameObjects.Image(scene, 60, 130, 'shield'));
-    this.setDepth(10);
+    this.add(new GameObjects.Image(scene, 60, 130, 'icons','speDef').setScale(2,2));
+    this.mana = new GameObjects.Text(scene, 10, 140, this.pokemonInformation.maxMana, this.textStyle);
+    this.add(this.mana);
+    this.add(new GameObjects.Image(scene,60, 150, 'icons', 'mana').setScale(2,2));
+    this.add(new GameObjects.Text(scene,180,20, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill][window.langage], this.textStyle));
   }
 
 

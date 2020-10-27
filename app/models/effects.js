@@ -156,6 +156,12 @@ class Effects {
     if (synergies.FAIRY >= 4) {
       this.list.push(EFFECTS.BABY_DOLL_EYES);
     }
+    if (synergies.ICE >= 2) {
+      this.list.push(EFFECTS.SNOW);
+    }
+    if (synergies.ICE >= 4) {
+      this.list.push(EFFECTS.MANA_HEAL);
+    }
   }
 }
 

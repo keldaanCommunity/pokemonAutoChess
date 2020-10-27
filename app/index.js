@@ -5,10 +5,11 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const Colyseus = require('colyseus');
-const Monitor = require('@colyseus/monitor');
+const monitor = require("@colyseus/monitor").monitor;
 const hooks = require('@colyseus/social').hooks;
 const socialMiddleware = require('@colyseus/social/express').default;
 const validator = require('email-validator');
+const basicAuth = require('express-basic-auth');
 
 const port = process.env.PORT || 9000;
 
@@ -29,12 +30,17 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-// Monitoring
-// https://github.com/colyseus/colyseus-monitor
-// https://www.npmjs.com/package/express-basic-auth
-// set admin name/password in .env, then use process.env.ADMIN_NAME/ADMIN_PASS
+const basicAuthMiddleware = basicAuth({
+  // list of users and passwords
+  users: {
+      "admin": process.env.ADMIN_PASSWORD,
+  },
+  // sends WWW-Authenticate header, which will prompt the user to fill
+  // credentials in
+  challenge: true
+});
 
-app.get('/colyseus', Monitor.monitor(gameServer)); // colyseus monitor panel
+app.use("/colyseus", basicAuthMiddleware, monitor());
 
 hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
   if (provider == 'email' && !validator.validate($set.email)) {
@@ -42,8 +48,18 @@ hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
   };
 
   $setOnInsert.metadata = {
-    avatar: 'eevee',
-    wins: 0
+    avatar: 'rattata',
+    wins: 0,
+    exp: 0,
+    level: 0,
+    mapWin:{
+      ICE:0,
+      FIRE:0,
+      GROUND:0,
+      NORMAL:0,
+      GRASS:0,
+      WATER:0
+    }
   };
 
 });

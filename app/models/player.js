@@ -10,7 +10,7 @@ const MapSchema = schema.MapSchema;
 const ArraySchema = schema.ArraySchema;
 
 class Player extends Schema {
-  constructor(id, name, avatar, isBot) {
+  constructor(id, name, avatar, isBot, specialCells, mapType, email) {
     super();
     this.assign({
       id : id,
@@ -24,7 +24,7 @@ class Player extends Schema {
       effects : new Effects(),
       money : 5,
       life : 100,
-      simulation : new Simulation(),
+      simulation : new Simulation(specialCells, mapType),
       shopLocked : false,
       streak : 0,
       interest : 0,
@@ -32,7 +32,9 @@ class Player extends Schema {
       opponentName : '',
       boardSize : 0,
       alive : true,
-      isBot : isBot
+      isBot : isBot,
+      email: email,
+      dbConsumed: false
     });
   }
 }

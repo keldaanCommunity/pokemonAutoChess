@@ -4,6 +4,7 @@ const {Dispatcher} = require('@colyseus/command');
 const GameState = require('./states/game-state');
 const Commands = require('./commands/game-commands');
 const Player = require('../models/player');
+const GameStats = require('../models/game-stats');
 
 class GameRoom extends colyseus.Room {
   constructor() {
@@ -18,11 +19,13 @@ class GameRoom extends colyseus.Room {
     for (const id in options.users){
       const user = options.users[id];
       if(user.isBot){
-        this.state.players[id] = new Player(user.id, user.name, user.avatar, true);
+        this.state.players.set(id, new Player(user.id, user.name, user.avatar, true, this.state.specialCells, this.state.mapType, ''));
         this.state.botManager.addBot(this.state.players[id]);
         this.state.shop.assignShop(this.state.players[id]);
       }
     }
+
+    GameStats.create({'time': Date.now()});
 
     this.onMessage('shop', (client, message) => {
       this.dispatcher.dispatch(new Commands.OnShopCommand(), {

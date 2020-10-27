@@ -1,3 +1,5 @@
+import { GameObjects } from 'phaser';
+import { SPECIAL_SKILL } from '../../../../models/enum';
 import Pokemon from './pokemon';
 
 export default class BattleManager {
@@ -43,6 +45,7 @@ export default class BattleManager {
   }
 
   changePokemonItems(playerId, change, pokemon){
+    
     if (this.player.id == playerId) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {
@@ -53,17 +56,26 @@ export default class BattleManager {
               children[i].remove(item);
             }
           }
-          if(change.field == 'item1' && change.value == ''){
+          else if(change.field == 'item0' && change.value != ''){
+            children[i].setItem0(change.value);
+          }
+          else if(change.field == 'item1' && change.value == ''){
             let item = children[i].getFirst('place', 'item1');
             if(item){
               children[i].remove(item);
             }
           }
-          if(change.field == 'item2' && change.value == ''){
+          else if(change.field == 'item1' && change.value != ''){
+            children[i].setItem1(change.value);
+          }
+          else if(change.field == 'item2' && change.value == ''){
             let item = children[i].getFirst('place', 'item2');
             if(item){
               children[i].remove(item);
             }
+          }
+          else if(change.field == 'item2' && change.value != ''){
+            children[i].setItem2(change.value);
           }
         }
       }
@@ -71,6 +83,7 @@ export default class BattleManager {
   }
 
   changePokemon(playerId, change, pokemon) {
+
     if (this.player.id == playerId) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {
@@ -83,7 +96,15 @@ export default class BattleManager {
               children[i].positionY = pokemon.positionY;
             }
             const coordinates = window.transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
-            children[i].moveManager.moveTo(coordinates[0], coordinates[1]);
+            if(pokemon.skill == SPECIAL_SKILL.TELEPORT){
+              children[i].x = coordinates[0];
+              children[i].y = coordinates[1];
+              children[i].specialAttackAnimation();
+            }
+            else{
+              children[i].moveManager.moveTo(coordinates[0], coordinates[1]);
+            }
+            
           } else if (change.field == 'orientation') {
             children[i].orientation = pokemon.orientation;
             window.animationManager.animatePokemon(children[i]);
@@ -96,14 +117,27 @@ export default class BattleManager {
               detail.atkSpeed.setText(pokemon.atkSpeed);
             }
           } else if (change.field =='life') {
+            if(change.value && change.previousValue){
+              this.displayDamage(children[i].x, children[i].y, change.value - change.previousValue);
+            }
             children[i].life = pokemon.life;
             children[i].getFirst('objType', 'lifebar').setLife(children[i].life);
             const detail = children[i].getFirst('objType', 'detail');
             if (detail) {
               detail.hp.setText(pokemon.life);
             }
+          } else if (change.field =='mana') {
+            children[i].mana = pokemon.mana;
+            children[i].getFirst('objType', 'manabar').setLife(children[i].mana);
+            const detail = children[i].getFirst('objType', 'detail');
+            if(change.previousValue > change.value){
+              children[i].specialAttackAnimation();
+            }
+            if (detail) {
+              detail.mana.setText(pokemon.mana);
+            }
           } else if (change.field == 'atk') {
-            children[i].atk = pokemon.attackAnimation;
+            children[i].atk = pokemon.atk;
             const detail = children[i].getFirst('objType', 'detail');
             if (detail) {
               detail.atk.setText(pokemon.atk);
@@ -149,10 +183,106 @@ export default class BattleManager {
               children[i].attackAnimation();
             }
           }
+          else if(change.field == 'poison'){
+            if(pokemon.poison){
+              children[i].addPoison();
+            }
+            else{
+              children[i].removePoison();
+            }
+          }
+          else if(change.field == 'sleep'){
+            if(pokemon.sleep){
+              children[i].addSleep();
+            }
+            else{
+              children[i].removeSleep();
+            }
+          }
+          else if(change.field == 'burn'){
+            if(pokemon.burn){
+              children[i].addBurn();
+            }
+            else{
+              children[i].removeBurn();
+            }
+          }
+          else if(change.field == 'silence'){
+            if(pokemon.silence){
+              children[i].addSilence();
+            }
+            else{
+              children[i].removeSilence();
+            }
+          }
+          else if(change.field == 'confusion'){
+            if(pokemon.confusion){
+              children[i].addConfusion();
+            }
+            else{
+              children[i].removeConfusion();
+            }
+          }
+          else if(change.field == 'freeze'){
+            if(pokemon.freeze){
+              children[i].addFreeze();
+            }
+            else{
+              children[i].removeFreeze();
+            }
+          }
+          else if(change.field == 'protect'){
+            if(pokemon.protect){
+              children[i].addProtect();
+            }
+            else{
+              children[i].removeProtect();
+            }
+          }
           break;
         }
       }
     }
+  }
+
+  displayDamage(x,y,damage){
+    let color;
+    let damageText;
+    if(damage >= 0){
+      color='green';
+      damageText = `+${damage}`;
+    }
+    else{
+      color='red';
+      damageText = damage;
+    }
+    let text = this.scene.add.existing(new GameObjects.Text(this.scene,x-25,y -30,damageText,{
+      fontSize: '40px',
+      stroke: '#fff',
+      fontFamily: 'Verdana',
+      color: color,
+      align: 'center',
+      strokeThickness: 2
+    }));
+    text.setDepth(9);
+
+    this.scene.add.tween({
+      targets: [text],
+      ease: 'Linear',
+      duration: 1000,
+      delay: 0,
+      alpha: {
+        getStart: () => 1,
+        getEnd: () => 0
+      },
+      y:{
+        getStart: () => y - 30,
+        getEnd: () => y - 90
+      },
+      onComplete: () => {
+        text.destroy(true);
+      }
+    });
   }
 
   setPlayer(player) {

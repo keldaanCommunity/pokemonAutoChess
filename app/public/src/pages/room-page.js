@@ -49,7 +49,7 @@ class RoomPage {
     </div>
       <div style="width:30%; display:flex;">
         <input style="width:80%;" id="inputMessage" class="inputMessage" placeholder="${WORDS.TYPE_HERE[this.langage]}..." type="text">
-        <button type="button" class="btn btn-secondary" style="width:20%;" id="send">${WORDS.SEND}</button>
+        <button type="button" class="btn btn-secondary" style="width:20%;" id="send">${WORDS.SEND[this.langage]}</button>
       </div>
     </div> 
     `;

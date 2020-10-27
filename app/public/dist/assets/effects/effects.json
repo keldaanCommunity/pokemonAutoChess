@@ -220,6 +220,27 @@
 					}
 				},
 				{
+					"filename": "ROCK",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 43,
+						"y": 43,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
 					"filename": "BLAZE",
 					"rotated": false,
 					"trimmed": false,
@@ -242,6 +263,27 @@
 				},
 				{
 					"filename": "DROUGHT",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 43,
+						"y": 85,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "FIRE",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -472,6 +514,27 @@
 					}
 				},
 				{
+					"filename": "WATER",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 127,
+						"y": 1,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
 					"filename": "FLOWER_SHIELD",
 					"rotated": false,
 					"trimmed": false,
@@ -509,6 +572,27 @@
 					"frame": {
 						"x": 127,
 						"y": 43,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "GRASS",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 127,
+						"y": 85,
 						"w": 40,
 						"h": 40
 					}
@@ -598,7 +682,7 @@
 					}
 				},
 				{
-					"filename": "HYDRO_CANNON",
+					"filename": "HYDO_CANNON",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -640,7 +724,7 @@
 					}
 				},
 				{
-					"filename": "INTIMIDATE",
+					"filename": "ICE",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -661,7 +745,49 @@
 					}
 				},
 				{
-					"filename": "MAGIC_ROOM",
+					"filename": "MANA_HEAL",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 169,
+						"y": 85,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "SNOW",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 169,
+						"y": 85,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "INTIMIDATE",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -677,6 +803,27 @@
 					"frame": {
 						"x": 211,
 						"y": 1,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "MAGIC_ROOM",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 211,
+						"y": 43,
 						"w": 40,
 						"h": 40
 					}
@@ -697,7 +844,7 @@
 					},
 					"frame": {
 						"x": 211,
-						"y": 1,
+						"y": 43,
 						"w": 40,
 						"h": 40
 					}
@@ -718,7 +865,7 @@
 					},
 					"frame": {
 						"x": 211,
-						"y": 43,
+						"y": 85,
 						"w": 40,
 						"h": 40
 					}
@@ -739,34 +886,13 @@
 					},
 					"frame": {
 						"x": 211,
-						"y": 43,
-						"w": 40,
-						"h": 40
-					}
-				},
-				{
-					"filename": "PHANTOM_FORCE",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 40,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 40,
-						"h": 40
-					},
-					"frame": {
-						"x": 211,
 						"y": 85,
 						"w": 40,
 						"h": 40
 					}
 				},
 				{
-					"filename": "POISON_GAS",
+					"filename": "NORMAL",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -782,69 +908,6 @@
 					"frame": {
 						"x": 253,
 						"y": 1,
-						"w": 40,
-						"h": 40
-					}
-				},
-				{
-					"filename": "TOXIC",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 40,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 40,
-						"h": 40
-					},
-					"frame": {
-						"x": 253,
-						"y": 1,
-						"w": 40,
-						"h": 40
-					}
-				},
-				{
-					"filename": "PUNISHMENT",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 40,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 40,
-						"h": 40
-					},
-					"frame": {
-						"x": 253,
-						"y": 43,
-						"w": 40,
-						"h": 40
-					}
-				},
-				{
-					"filename": "REVENGE",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 40,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 40,
-						"h": 40
-					},
-					"frame": {
-						"x": 253,
-						"y": 43,
 						"w": 40,
 						"h": 40
 					}
@@ -865,7 +928,7 @@
 					},
 					"frame": {
 						"x": 253,
-						"y": 85,
+						"y": 1,
 						"w": 40,
 						"h": 40
 					}
@@ -886,7 +949,7 @@
 					},
 					"frame": {
 						"x": 253,
-						"y": 85,
+						"y": 1,
 						"w": 40,
 						"h": 40
 					}
@@ -907,7 +970,112 @@
 					},
 					"frame": {
 						"x": 253,
+						"y": 1,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "PHANTOM_FORCE",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 253,
+						"y": 43,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "POISON_GAS",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 253,
 						"y": 85,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "TOXIC",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 253,
+						"y": 85,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "PUNISHMENT",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 295,
+						"y": 1,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "REVENGE",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 295,
+						"y": 1,
 						"w": 40,
 						"h": 40
 					}
@@ -928,7 +1096,7 @@
 					},
 					"frame": {
 						"x": 295,
-						"y": 1,
+						"y": 43,
 						"w": 40,
 						"h": 40
 					}
@@ -1018,6 +1186,27 @@
 					}
 				},
 				{
+					"filename": "SWARM",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 337,
+						"y": 1,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
 					"filename": "border",
 					"rotated": false,
 					"trimmed": false,
@@ -1044,6 +1233,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:fb86ba8eedffe0502aec6f384fd127f4:fde42fc749647f62d44fc261b83bab02:05d3c1256da5d10ff4f36ef2966c3322$"
+		"smartupdate": "$TexturePacker:SmartUpdate:196ae3997abb3a88aba3820c1feba889:ca14c16114de339f002ca497a094fdae:05d3c1256da5d10ff4f36ef2966c3322$"
 	}
 }

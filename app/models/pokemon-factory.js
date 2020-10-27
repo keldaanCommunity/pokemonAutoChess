@@ -1,5 +1,7 @@
 const Pokemon = require('./pokemon');
 const schema = require('@colyseus/schema');
+const {SPECIAL_SKILL} = require('./enum');
+const Strategy = require('../core/attack-strategy');
 
 class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level) {
@@ -149,6 +151,151 @@ class PokemonFactory {
     return pokemons;
   }
 
+  static createStrategyFromName(name){
+    switch (name) {
+      case SPECIAL_SKILL.FIRE_BLAST:
+        return new Strategy.FireBlastStrategy(); 
+      
+      case SPECIAL_SKILL.WHEEL_OF_FIRE:
+        return new Strategy.WheelOfFireStrategy();  
+
+      case SPECIAL_SKILL.SEISMIC_TOSS:
+        return new Strategy.SeismicTossStrategy();
+
+      case SPECIAL_SKILL.GUILLOTINE:
+        return new Strategy.GuillotineStrategy();
+    
+      case SPECIAL_SKILL.ROCK_SLIDE:
+        return new Strategy.RockSlideStrategy();
+
+      case SPECIAL_SKILL.HEAT_WAVE:
+        return new Strategy.HeatWaveStrategy();
+
+      case SPECIAL_SKILL.THUNDER:
+        return new Strategy.ThunderStrategy();
+
+      case SPECIAL_SKILL.HYDRO_PUMP:
+        return new Strategy.HydroPumpStrategy();
+
+      case SPECIAL_SKILL.DRACO_METEOR:
+        return new Strategy.DracoMeteorStrategy();
+
+      case SPECIAL_SKILL.BLAZE_KICK:
+        return new Strategy.BlazeKickStrategy();
+      
+      case SPECIAL_SKILL.WISH:
+        return new Strategy.WishStrategy();
+
+      case SPECIAL_SKILL.CALM_MIND:
+        return new Strategy.CalmMindStrategy();
+
+      case SPECIAL_SKILL.IRON_DEFENSE:
+        return new Strategy.IronDefenseStrategy();
+      
+      case SPECIAL_SKILL.METRONOME:
+        return new Strategy.MetronomeStrategy();
+
+      case SPECIAL_SKILL.SOAK:
+        return new Strategy.SoakStrategy();
+
+      case SPECIAL_SKILL.IRON_TAIL:
+        return new Strategy.IronTailStrategy();
+
+      case SPECIAL_SKILL.BLAST_BURN:
+        return new Strategy.BlastBurnStrategy();
+
+      case SPECIAL_SKILL.CHARGE:
+        return new Strategy.ChargeStrategy();
+      
+      case SPECIAL_SKILL.DISCHARGE:
+        return new Strategy.DischargeStrategy();
+
+      case SPECIAL_SKILL.BITE:
+        return new Strategy.BiteStrategy();
+
+      case SPECIAL_SKILL.DRAGON_TAIL:
+        return new Strategy.DragonTailStrategy();
+      
+      case SPECIAL_SKILL.DRAGON_BREATH:
+        return new Strategy.DragonBreathStrategy();
+      
+      case SPECIAL_SKILL.ICICLE_CRASH:
+        return new Strategy.IcicleCrashStrategy();
+
+      case SPECIAL_SKILL.ROOT:
+        return new Strategy.RootStrategy();
+      
+      case SPECIAL_SKILL.TORMENT:
+        return new Strategy.TormentStrategy();
+      
+      case SPECIAL_SKILL.STOMP:
+        return new Strategy.StompStrategy();
+
+      case SPECIAL_SKILL.DARK_PULSE:
+        return new Strategy.DarkPulseStrategy();
+
+      case SPECIAL_SKILL.NIGHT_SLASH:
+        return new Strategy.NightSlashStrategy();
+
+      case SPECIAL_SKILL.BUG_BUZZ:
+        return new Strategy.BugBuzzStrategy();
+
+      case SPECIAL_SKILL.POISON_STING:
+        return new Strategy.PoisonStingStrategy();
+
+      case SPECIAL_SKILL.LEECH_LIFE:
+        return new Strategy.LeechLifeStrategy();
+    
+      case SPECIAL_SKILL.HAPPY_HOUR:
+        return new Strategy.HappyHourStrategy();
+      
+      case SPECIAL_SKILL.TELEPORT:
+        return new Strategy.TeleportStrategy();
+
+      case SPECIAL_SKILL.NASTY_PLOT:
+        return new Strategy.NastyPlotStrategy();
+
+      case SPECIAL_SKILL.THIEF:
+        return new Strategy.ThiefStrategy();
+
+      case SPECIAL_SKILL.STUN_SPORE:
+        return new Strategy.StunSporeStrategy();
+
+      case SPECIAL_SKILL.METEOR_MASH:
+        return new Strategy.MeteorMashStrategy();
+
+      case SPECIAL_SKILL.HURRICANE:
+        return new Strategy.HurricaneStrategy();
+      
+      case SPECIAL_SKILL.BURN:
+        return new Strategy.BurnStrategy();
+
+      case SPECIAL_SKILL.SLEEP:
+        return new Strategy.SleepStrategy();
+
+      case SPECIAL_SKILL.SILENCE:
+        return new Strategy.SilenceStrategy();
+      
+      case SPECIAL_SKILL.CONFUSION:
+        return new Strategy.ConfusionStrategy();
+      
+      case SPECIAL_SKILL.FREEZE:
+        return new Strategy.FreezeStrategy();
+
+      case SPECIAL_SKILL.PROTECT:
+        return new Strategy.ProtectStrategy();
+
+      case SPECIAL_SKILL.POISON:
+        return new Strategy.PoisonStrategy();
+
+      case SPECIAL_SKILL.DEFAULT:
+        return new Strategy.AttackStrategy();
+
+      default:
+        return new Strategy.AttackStrategy();
+    }
+  }
+
   static getPokemonFamily(name) {
     switch (name) {
       case 'bulbasaur':
@@ -169,6 +316,12 @@ class PokemonFactory {
         return 'squirtle';
       case 'blastoise':
         return 'squirtle';
+      case 'slowpoke':
+        return 'slowpoke';
+      case 'slowbro':
+        return 'slowpoke';
+      case 'slowking':
+        return 'slowpoke';
       case 'geodude':
         return 'geodude';
       case 'graveler':
@@ -493,6 +646,8 @@ class PokemonFactory {
         return 'leafon';
       case 'sylveon':
         return 'sylveon';
+      case 'glaceon':
+        return 'glaceon';
       case 'meditite':
         return 'meditite';
       case 'medicham':
@@ -511,6 +666,42 @@ class PokemonFactory {
         return 'sandshrew';
       case 'darkrai':
         return 'darkrai';
+      case 'litwick':
+        return 'litwick';
+      case 'lampent':
+        return 'litwick';
+      case 'chandelure':
+        return 'litwick';
+      case 'bellsprout':
+        return 'bellsprout';
+      case 'weepinbell':
+        return 'bellsprout';
+      case 'victreebel':
+        return 'bellsprout';
+      case 'swinub':
+        return 'swinub';
+      case 'piloswine':
+        return 'swinub';
+      case 'mamoswine':
+        return 'swinub';
+      case 'snorunt':
+        return 'snorunt';
+      case 'glalie':
+        return 'snorunt';
+      case 'froslass':
+        return 'snorunt';
+      case 'snover':
+        return 'snover';
+      case 'abomasnow':
+        return 'snover';
+      case 'mega-abomasnow':
+        return 'snover';
+      case 'vanillite':
+        return 'vanillite';
+      case 'vanillish':
+        return 'vanillite';
+      case 'vanilluxe':
+        return 'vanillite';
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -537,6 +728,12 @@ class PokemonFactory {
         return new Pokemon.Wartortle();
       case 'blastoise':
         return new Pokemon.Blastoise();
+      case 'slowpoke':
+        return new Pokemon.Slowpoke();
+      case 'slowbro':
+        return new Pokemon.Slowbro();
+      case 'slowking':
+        return new Pokemon.Slowking();
       case 'geodude':
         return new Pokemon.Geodude();
       case 'graveler':
@@ -907,6 +1104,8 @@ class PokemonFactory {
         return new Pokemon.Leafon();
       case 'sylveon':
         return new Pokemon.Sylveon();
+      case 'glaceon':
+        return new Pokemon.Glaceon();
       case 'meditite':
         return new Pokemon.Meditite();
       case 'medicham':
@@ -925,10 +1124,45 @@ class PokemonFactory {
         return new Pokemon.Sandshrew();
       case 'darkrai':
         return new Pokemon.Darkrai();
+      case 'litwick':
+        return new Pokemon.Litwick();
+      case 'lampent':
+        return new Pokemon.Lampent();
+      case 'chandelure':
+        return new Pokemon.Chandelure();
+      case 'bellsprout':
+        return new Pokemon.Bellsprout();
+      case 'weepinbell':
+        return new Pokemon.Weepinbell();
+      case 'victreebel':
+        return new Pokemon.Victreebel();
+      case 'swinub':
+        return new Pokemon.Swinub();
+      case 'piloswine':
+        return new Pokemon.Piloswine();
+      case 'mamoswine':
+        return new Pokemon.Mamoswine();
+      case 'snorunt':
+        return new Pokemon.Snorunt();
+      case 'glalie':
+        return new Pokemon.Glalie();
+      case 'froslass':
+        return new Pokemon.Froslass();
+      case 'snover':
+        return new Pokemon.Snover();
+      case 'abomasnow':
+        return new Pokemon.Abomasnow();
+      case 'mega-abomasnow':
+        return new Pokemon.MegaAbomasnow();
+      case 'vanillite':
+        return new Pokemon.Vanillite();
+      case 'vanillish':
+        return new Pokemon.Vanillish();
+      case 'vanilluxe':
+        return new Pokemon.Vanilluxe();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();
-        break;
     }
   }
 

@@ -3,40 +3,128 @@ const {EFFECTS, ATTACK_TYPE, TYPE, CLIMATE, ITEMS} = require('../models/enum');
 
 class PokemonState {
   constructor() {
-
   }
 
-  handleDamage(pokemon, damage, board, attackType) {
-    let death = false;
-    let reducedDamage = damage;
-    if (attackType == ATTACK_TYPE.PHYSICAL) {
-      reducedDamage = Math.max(0, damage - pokemon.def);
+  handleHeal(pokemon, heal){
+    if(pokemon.life > 0){
+      pokemon.life = Math.min(pokemon.hp, pokemon.life + heal);
     }
-    else if (attackType == ATTACK_TYPE.SPECIAL) {
-      reducedDamage = Math.max(0, damage - pokemon.speDef);
-    }
-    else if(attackType == ATTACK_TYPE.TRUE){
-      reducedDamage = damage;
-    }
+  }
 
-    pokemon.life -= reducedDamage;
-    //console.log(`${pokemon.id} took ${damage} and has now ${pokemon.life} life`);
-    if (pokemon.effects.includes(EFFECTS.RAGE)) {
-      pokemon.attack += Math.ceil(pokemon.baseAtk * 0.05);
-    }
-    if (pokemon.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
-      pokemon.life = 0;
-      death = true;
-    }
-    if (pokemon.life <= 0) {
-      board.setValue(pokemon.positionX, pokemon.positionY, undefined);
-      death = true;
+  handleDamage(pokemon, damage, board, attackType, attacker) {
+    let death = false;
+    if(!pokemon.protect){
+      let reducedDamage = damage;
+      let armorFactor = 0.1;
+      if (attackType == ATTACK_TYPE.PHYSICAL) {
+        let ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * pokemon.def))));
+        reducedDamage = Math.max(0,Math.round(ritodamage));
+      }
+      else if (attackType == ATTACK_TYPE.SPECIAL) {
+        let ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * pokemon.speDef))));
+        reducedDamage = Math.max(0,Math.round(ritodamage));
+      }
+      else if(attackType == ATTACK_TYPE.TRUE){
+        reducedDamage = damage;
+      }
+  
+      if(attacker && attacker.burn){
+        reducedDamage = reducedDamage / 2;
+      }
+  
+      if(attacker && attacker.team == 0){
+        attacker.damageDone += reducedDamage;
+      }
+  
+      pokemon.life = Math.max(0, pokemon.life - reducedDamage);
+      //console.log(`${pokemon.id} took ${damage} and has now ${pokemon.life} life`);
+      if (pokemon.effects.includes(EFFECTS.RAGE)) {
+        pokemon.attack += Math.ceil(pokemon.baseAtk * 0.05);
+      }
+      if (pokemon.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
+        pokemon.life = 0;
+        death = true;
+      }
+
+      if(pokemon){
+        pokemon.setMana(pokemon.mana + Math.ceil(reducedDamage / 10));
+      }
+
+      if(attacker){
+        attacker.setMana(attacker.mana + 5);
+      }
+
+      if (pokemon.life <= 0) {
+        board.setValue(pokemon.positionX, pokemon.positionY, undefined);
+        death = true;
+      }
     }
     return death;
   }
 
   update(pokemon, dt, board, climate) {
+
+    if(pokemon.burn){
+      pokemon.updateBurn(dt);
+    }
+
+    if(pokemon.poison){
+      pokemon.updatePoison(dt);
+    }
+
+    if(pokemon.sleep){
+      pokemon.updateSleep(dt);
+    }
+
+    if(pokemon.silence){
+      pokemon.updateSilence(dt);
+    }
+
+    if(pokemon.protect){
+      pokemon.updateProtect(dt);
+    }
+
+    if(pokemon.freeze){
+      pokemon.updateFreeze(dt);
+    }
+
+    if(pokemon.confusion){
+      pokemon.updateConfusion(dt);
+    }
+
+    if (pokemon.manaCooldown <= 0) {
+      pokemon.setMana(pokemon.mana + 10);
+
+      pokemon.manaCooldown = 1000;
+      if(pokemon.mana >= pokemon.maxMana){
+
+        if(pokemon.targetX == -1 || pokemon.targetY == -1){
+          const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
+          if (targetCoordinate[0] !== undefined && targetCoordinate[1] !== undefined) {
+              pokemon.targetX = targetCoordinate[0];
+              pokemon.targetY = targetCoordinate[1];
+          }
+        }
+        let target = board.getValue(pokemon.targetX, pokemon.targetY);
+        if(target){
+          pokemon.strategy.process(pokemon, this, board, target);
+        }
+      }
+    }
+    else{
+      pokemon.manaCooldown = Math.max(0, pokemon.manaCooldown - dt);
+    }
+
     if (pokemon.cooldown <= 0) {
+
+      if(pokemon.burn){
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp / 5), board, ATTACK_TYPE.TRUE);
+      }
+
+      if(pokemon.poison){
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.15), board, ATTACK_TYPE.TRUE);
+      }
+
       if (climate == CLIMATE.SANDSTORM) {
         if (!pokemon.types.includes(TYPE.GROUND) && !pokemon.types.includes(TYPE.METAL)) {
           this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
@@ -46,16 +134,20 @@ class PokemonState {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.05);
       }
 
-      if(pokemon.effects.includes(EFFECTS.DRAGON_DANCE)){
-        pokemon.atkSpeed = Math.max(400,pokemon.atkSpeed * 0.95);
+      if(pokemon.effects.includes(EFFECTS.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)){
+        pokemon.atkSpeed = Math.max(400,Math.round(pokemon.atkSpeed * 0.97));
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
-        pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.ceil(pokemon.hp / 20));
+        pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
+      }
+
+      if (pokemon.effects.includes(EFFECTS.GRASS)) {
+        pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
       }
       
       if(pokemon.items.count(ITEMS.METRONOME) != 0){
-        pokemon.atk = Math.ceil(pokemon.baseAtk * 1.05) * pokemon.items.count(ITEMS.METRONOME);
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.05) * pokemon.items.count(ITEMS.METRONOME);
       }
 
       if(pokemon.items.count(ITEMS.SALAC_BERRY) != 0){
@@ -95,17 +187,17 @@ class PokemonState {
 
       if(pokemon.items.count(ITEMS.ORAN_BERRY) != 0){
         if(pokemon.life <= pokemon.hp / 4){
-          pokemon.life += Math.ceil(pokemon.hp / 4);
+          pokemon.handleHeal(Math.ceil(pokemon.hp / 4));
           pokemon.items.remove(ITEMS.ORAN_BERRY);
         }
       }
 
       if(pokemon.items.count(ITEMS.BIG_ROOT) != 0){
-        pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.ceil(pokemon.hp / 20));
+        pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
       }
 
       if (pokemon.effects.includes(EFFECTS.RAIN_DISH)) {
-        pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.ceil(pokemon.hp / 10));
+        pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
       }
 
       if (pokemon.effects.includes(EFFECTS.POISON_GAS)) {
