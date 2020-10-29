@@ -619,7 +619,8 @@ const BOT_AVATAR = Object.freeze({
   GRASS1:'bulbasaur',
   GROUND1:'geodude',
   NORMAL1:'jigglypuff',
-  ELECTRIC1:'pikachu'
+  ELECTRIC1:'pikachu',
+  MONSTER1:'larvitar'
 });
 
 const POKEMON_BOT = Object.freeze({
@@ -629,7 +630,8 @@ const POKEMON_BOT = Object.freeze({
   bulbasaur:'GRASS1',
   geodude:'GROUND1',
   jigglypuff:'NORMAL1',
-  pikachu:'ELECTRIC1'
+  pikachu:'ELECTRIC1',
+  larvitar:'MONSTER1'
 });
 
 const EXP_TABLE = Object.freeze({

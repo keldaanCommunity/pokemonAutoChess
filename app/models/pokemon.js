@@ -324,7 +324,7 @@ class Dragonair extends Pokemon {
 
 class Dragonite extends Pokemon {
   constructor() {
-    super('dragonite', [TYPE.DRAGON, TYPE.AQUATIC], RARITY.EPIC, 149, '', 230, 16, 4,4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL,3);
+    super('dragonite', [TYPE.DRAGON, TYPE.AQUATIC, TYPE.FLYING], RARITY.EPIC, 149, '', 230, 16, 4,4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL,3);
   }
 }
 
@@ -546,7 +546,7 @@ class Flygon extends Pokemon {
 
 class Horsea extends Pokemon {
   constructor() {
-    super('horsea', [TYPE.WATER, TYPE.AQUATIC], RARITY.RARE, 116, 'seadra', 80, 5, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL,1);
+    super('horsea', [TYPE.WATER, TYPE.AQUATIC, TYPE.DRAGON], RARITY.RARE, 116, 'seadra', 80, 5, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL,1);
   }
 }
 
@@ -828,7 +828,7 @@ class Charmeleon extends Pokemon {
 
 class Charizard extends Pokemon {
   constructor() {
-    super('charizard', [TYPE.FIRE, TYPE.MONSTER], RARITY.UNCOMMON, 6, '', 210, 16, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,3);
+    super('charizard', [TYPE.FIRE, TYPE.MONSTER, TYPE.FLYING], RARITY.UNCOMMON, 6, '', 210, 16, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,3);
   }
 }
 
