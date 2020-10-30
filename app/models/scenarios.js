@@ -4775,7 +4775,7 @@ const SCENARIOS =
             "y":3
           },
           {
-            "name":"jolteon",
+            "name":"mareep",
             "x":4,
             "y":2
           }
@@ -4801,7 +4801,7 @@ const SCENARIOS =
             "y":2
           },
           {
-            "name":"jolteon",
+            "name":"magnemite",
             "x":5,
             "y":1
           }
@@ -4822,7 +4822,7 @@ const SCENARIOS =
             "y":3
           },
           {
-            "name":"jolteon",
+            "name":"magnemite",
             "x":4,
             "y":2
           },

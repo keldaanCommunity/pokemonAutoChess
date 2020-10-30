@@ -313,8 +313,8 @@ export default class AnimationManager {
   }
 
   playSpecialCells(entity){
-    console.log(entity);
-    console.log(window.state.mapType);
+    //console.log(entity);
+    //console.log(window.state.mapType);
     entity.anims.play(`${window.state.mapType}/cell`);
   }
 

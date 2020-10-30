@@ -189,10 +189,12 @@ class LobbyPage {
       document.getElementById('room-list').innerHTML = '';
       this.allRooms.forEach((room) => {
         if (room.name != 'game') {
-          const item = document.createElement('li');
+          let item = document.createElement('li');
           item.textContent = `Room id : ${room.roomId} (${room.clients}/${room.maxClients})`;
-          const button = document.createElement('button');
+          let button = document.createElement('button');
           button.textContent = 'Join';
+          button.classList.add("btn");
+          button.classList.add("btn-secondary");
           button.addEventListener('click', () => {
             this.joinRoomById(room.roomId);
           });

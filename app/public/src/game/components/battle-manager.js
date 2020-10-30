@@ -103,7 +103,7 @@ export default class BattleManager {
               detail.hp.setText(pokemon.life);
             }
           } else if (change.field == 'atk') {
-            children[i].atk = pokemon.attackAnimation;
+            children[i].atk = pokemon.atk;
             const detail = children[i].getFirst('objType', 'detail');
             if (detail) {
               detail.atk.setText(pokemon.atk);
