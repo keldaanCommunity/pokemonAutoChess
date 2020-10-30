@@ -497,7 +497,6 @@ class Simulation extends Schema {
           break;
           
       case EFFECTS.DRAGON_DANCE:
-        pokemon.effects.push(EFFECTS.DRAGON_DANCE);
         if (types.includes(TYPE.DRAGON)) {
           pokemon.effects.push(EFFECTS.DRAGON_DANCE);
         }

@@ -46,8 +46,8 @@ class PokemonState {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.05);
       }
 
-      if(pokemon.effects.includes(EFFECTS.DRAGON_DANCE)){
-        pokemon.atkSpeed = Math.max(400,pokemon.atkSpeed * 0.95);
+      if(pokemon.effects.includes(EFFECTS.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)){
+        pokemon.atkSpeed = Math.max(400,pokemon.atkSpeed * 0.97);
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
