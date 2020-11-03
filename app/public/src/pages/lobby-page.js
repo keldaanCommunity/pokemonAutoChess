@@ -1,4 +1,4 @@
-import { WORDS } from "../../../models/enum";
+import { WORDS, XP_TABLE } from "../../../models/enum";
 
 class LobbyPage {
   constructor(args) {
@@ -8,20 +8,157 @@ class LobbyPage {
     if(window._client.auth.lang){
       this.langage = window._client.auth.lang;
     }
+    this.initializeRoom();
+
     this.render();
     this.addEventListeners();
   }
+  
+  addMessage(message){
+    //console.log(message);
+    if(document.getElementById('messages')){
+      let messageHTML = document.createElement('li');
+      let nameHTML = document.createElement('p');
+      let messageContentHTML = document.createElement('p');
+  
+      messageContentHTML.textContent = message.payload;
+      const timeOfMessage = new Date(message.time);
+      nameHTML.style.color = 'black';
+      nameHTML.style.fontWeight = 'bold';
+      nameHTML.textContent = `${timeOfMessage.toUTCString()} - ${message.name} :`;
+      
+      if(message.avatar){
+        let imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${message.avatar}.png`;
+        imageHTML.style.width = '50px';
+        imageHTML.style.height = '50px';
+        messageHTML.appendChild(imageHTML);
+      }
+      
+      messageHTML.appendChild(nameHTML);
+      messageHTML.appendChild(messageContentHTML);
+      messageHTML.style.display = 'flex';
+      document.getElementById('messages').appendChild(messageHTML);
+      messageHTML.scrollIntoView();
+    }
+  }
+
+  initializeRoom(){
+    this.room.onLeave((client, consent) => {
+
+      if (consent) {
+        // sessionStorage.setItem('PAC_Room_ID', this.room.id);
+        // sessionStorage.setItem('PAC_Session_ID', this.room.sessionId);
+      }
+    });
+    let self = this;
+    this.room.state.messages.onAdd = (message, index) => {
+      self.addMessage(message);
+    };
+
+    this.room.onMessage('rooms', (rooms) => {
+      // console.log(rooms);
+      this.allRooms = rooms;
+      this.handleRoomListChange();
+    });
+
+    this.room.onMessage('to-lobby', ()=>{
+      this.room.leave();
+      _client.auth.logout();
+      window.dispatchEvent(new CustomEvent('render-home'));
+    });
+
+    this.room.onMessage('+', ([roomId, room]) => {
+      const roomIndex = this.allRooms.findIndex((room) => room.roomId === roomId);
+      if (roomIndex !== -1) {
+        this.allRooms[roomIndex] = room;
+      } else {
+        this.allRooms.push(room);
+      }
+      this.handleRoomListChange();
+    });
+
+    this.room.onMessage('-', (roomId) => {
+      this.allRooms = this.allRooms.filter((room) => room.roomId !== roomId);
+      this.handleRoomListChange();
+    });
+  }
 
   render() {
+    let self = this;
     const content = document.createElement('div');
     content.setAttribute('id', 'lobby');
     content.innerHTML = `
   <header>
     <h1>${WORDS.GAME_LOBBY[this.langage]}</h1>
   </header>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        <div style="display:flex;flex-flow:row;">
+          <img style="width:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
+          <h4>${_client.auth.email}</h4>
+        </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h4>Level ${_client.auth.metadata.level}</h4>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${_client.auth.metadata.exp}" aria-valuemin="0" aria-valuemax="${XP_TABLE[_client.auth.metadata.level]}" style="width: ${_client.auth.metadata.exp * 100 / XP_TABLE[_client.auth.metadata.level]}%">${_client.auth.metadata.exp}/${XP_TABLE[_client.auth.metadata.level]} XP</div>
+          </div>
+          <h4>Wins</h4>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${_client.auth.metadata.wins}" aria-valuemin="0" aria-valuemax="500" style="width: ${_client.auth.metadata.wins * 100 / 500}%">${_client.auth.metadata.wins}/500 Wins</div>
+          </div>
+          <h4>Frosty Forest</h4>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.ICE}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.ICE * 100 / 100}%">${_client.auth.metadata.mapWin.ICE}/100 Wins</div>
+          </div>
+          <h4>Glimmer Desert</h4>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.GROUND}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.GROUND * 100 / 100}%">${_client.auth.metadata.mapWin.GROUND}/100 Wins</div>
+          </div>
+          <h4>Hidden Highland</h4>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.GRASS}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.GRASS * 100 / 100}%">${_client.auth.metadata.mapWin.GRASS}/100 Wins</div>
+          </div>
+          <h4>Magma Cavern</h4>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.FIRE}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.FIRE * 100 / 100}%">${_client.auth.metadata.mapWin.FIRE}/100 Wins</div>
+          </div>
+          <h4>Tiny Woods</h4>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.NORMAL}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.NORMAL * 100 / 100}%">${_client.auth.metadata.mapWin.NORMAL}/100 Wins</div>
+          </div>
+          <h4>Stormy Sea</h4>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-cyan" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.WATER}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.WATER * 100 / 100}%">${_client.auth.metadata.mapWin.WATER}/100 Wins</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">${WORDS.CLOSE[this.langage]}</button>
+          <button type="button" class="btn btn-primary">${WORDS.SAVE[this.langage]}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div style="display:flex; justify-content:space-between;"> 
+  
     <button type="button" class="btn btn-secondary" id="button-home">${WORDS.HOME[this.langage]}</button>
     <div class="dropdown">
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+      Profile
+    </button>
+
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <img src="assets/flags/${this.langage}.png"/>  
     ${WORDS.CHANGE_LANGAGE[this.langage]}
@@ -58,6 +195,11 @@ class LobbyPage {
   </div>`;
     document.body.innerHTML = '';
     document.body.appendChild(content);
+    this.handleRoomListChange();
+    this.room.state.messages.forEach((message, index) => {
+      self.addMessage(message);
+    });
+
   }
 
   addEventListeners() {
@@ -93,67 +235,7 @@ class LobbyPage {
       window.dispatchEvent(new CustomEvent('switch-lang',{detail: {lang: 'esp', render: 'lobby', room: self.room}}));
     });
 
-    this.room.onLeave((client, consent) => {
 
-      if (consent) {
-        // sessionStorage.setItem('PAC_Room_ID', this.room.id);
-        // sessionStorage.setItem('PAC_Session_ID', this.room.sessionId);
-      }
-    });
-
-    this.room.state.messages.onAdd = (message, index) => {
-      //console.log(message);
-      let messageHTML = document.createElement('li');
-      let nameHTML = document.createElement('p');
-      let messageContentHTML = document.createElement('p');
-
-      messageContentHTML.textContent = message.payload;
-      const timeOfMessage = new Date(message.time);
-      nameHTML.style.color = 'black';
-      nameHTML.style.fontWeight = 'bold';
-      nameHTML.textContent = `${timeOfMessage.toUTCString()} - ${message.name} :`;
-      
-      if(message.avatar){
-        let imageHTML = document.createElement('img');
-        imageHTML.src = `assets/avatar/${message.avatar}.png`;
-        imageHTML.style.width = '50px';
-        imageHTML.style.height = '50px';
-        messageHTML.appendChild(imageHTML);
-      }
-      
-      messageHTML.appendChild(nameHTML);
-      messageHTML.appendChild(messageContentHTML);
-      messageHTML.style.display = 'flex';
-      document.getElementById('messages').appendChild(messageHTML);
-      messageHTML.scrollIntoView();
-    };
-
-    this.room.onMessage('rooms', (rooms) => {
-      // console.log(rooms);
-      this.allRooms = rooms;
-      this.handleRoomListChange();
-    });
-
-    this.room.onMessage('to-lobby', ()=>{
-      this.room.leave();
-      _client.auth.logout();
-      window.dispatchEvent(new CustomEvent('render-home'));
-    });
-
-    this.room.onMessage('+', ([roomId, room]) => {
-      const roomIndex = this.allRooms.findIndex((room) => room.roomId === roomId);
-      if (roomIndex !== -1) {
-        this.allRooms[roomIndex] = room;
-      } else {
-        this.allRooms.push(room);
-      }
-      this.handleRoomListChange();
-    });
-
-    this.room.onMessage('-', (roomId) => {
-      this.allRooms = this.allRooms.filter((room) => room.roomId !== roomId);
-      this.handleRoomListChange();
-    });
   }
 
   createRoom() {

@@ -90,6 +90,14 @@ const WORDS = Object.freeze({
   WIN:{
     'eng':'Win',
     'esp':'Victoria'
+  },
+  CLOSE:{
+    'eng':'Close',
+    'esp':'Cerrar'
+  },
+  SAVE:{
+    'eng':'Save Changes',
+    'esp':'Guardar cambios'
   }
 });
 
@@ -338,7 +346,7 @@ const ITEM_DESCRIPTION = Object.freeze({
   }  
   , LEAF_STONE:{
     eng:'+10% atk speed. +50% damage if type grass. Will evolve Eevee into Leafon ',
-    esp:''
+    esp:'+10% a la velocidad de la tinta. +50% de daño si se trata de hierba. Evolucionará Eevee en Leafon'
   }  
   , BLACK_BELT:{
     eng:'+10% atk speed. +50% damage if type fighting.',
@@ -694,4 +702,8 @@ const MAP_TYPE_NAME = Object.freeze({
   ROCK:'Glimmer Desert'
 });
 
-module.exports = {MAP_TYPE_NAME, LAST_BATTLE_RESULT_TRADUCTION, PHASE_TRADUCTION, TYPE_TRADUCTION, WORDS, MAP_TYPE, ITEM_TYPE, TYPE_ITEM, POKEMON_BOT, BOT_AVATAR, TYPE, RARITY,RARITY_HP_COST, COST, EXP_TABLE, STATE, STATE_TYPE, ORIENTATION, EFFECTS, CLIMATE, ATTACK_TYPE, ITEMS, ITEM_NAME, ITEM_DESCRIPTION};
+const XP_TABLE = [1000,1500,2000,2500,2500,2500,2500,2500,2500,2500,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000];
+
+const XP_PLACE = [700,500,400,300,200,150,100,100];
+
+module.exports = {XP_PLACE, XP_TABLE, MAP_TYPE_NAME, LAST_BATTLE_RESULT_TRADUCTION, PHASE_TRADUCTION, TYPE_TRADUCTION, WORDS, MAP_TYPE, ITEM_TYPE, TYPE_ITEM, POKEMON_BOT, BOT_AVATAR, TYPE, RARITY,RARITY_HP_COST, COST, EXP_TABLE, STATE, STATE_TYPE, ORIENTATION, EFFECTS, CLIMATE, ATTACK_TYPE, ITEMS, ITEM_NAME, ITEM_DESCRIPTION};

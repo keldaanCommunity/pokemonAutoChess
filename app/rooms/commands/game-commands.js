@@ -1,8 +1,10 @@
 const Command = require('@colyseus/command').Command;
-const {STATE, COST, TYPE, EFFECTS, ITEMS, RARITY_HP_COST} = require('../../models/enum');
+const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE} = require('../../models/enum');
 const Player = require('../../models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
+const Mongoose = require('mongoose');
+const User = require('@colyseus/social').User;
 
 class OnShopCommand extends Command {
   execute({sessionId, index}) {
@@ -303,8 +305,12 @@ class OnLevelUpCommand extends Command {
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    this.state.players.set(client.sessionId, new Player(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')),client.auth.metadata.avatar, false, this.state.specialCells, this.state.mapType));
+    this.state.players.set(client.sessionId, new Player(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')),client.auth.metadata.avatar, false, this.state.specialCells, this.state.mapType, auth.email));
     this.state.shop.assignShop(this.state.players.get(client.sessionId));
+    if(this.state.players.size == 8){
+      console.log('game elligible to xp');
+      this.state.elligibleToXP = true;
+    }
   }
 }
 
@@ -355,6 +361,17 @@ class OnKickPlayerCommand extends Command {
 }
 
 class UtilsCommand extends Command {
+
+  static getNumberOfPlayersAlive(players){
+    let numberOfPlayersAlive = 0;
+    players.forEach((player, key) => {
+      if(player.alive){
+        numberOfPlayersAlive ++;
+      }
+    });
+    return numberOfPlayersAlive;
+  }
+
   static getBoardSize(board) {
     let boardSize = 0;
 
@@ -437,19 +454,70 @@ class OnUpdatePhaseCommand extends Command {
 
   checkEndGame(){
     let commands = [];
-    let numberOfPlayersAlive = 0;
-
-    this.state.players.forEach((player, key) => {
-      if (player.alive) {
-        numberOfPlayersAlive += 1;
-      }
-    });
+    let numberOfPlayersAlive = UtilsCommand.getNumberOfPlayersAlive(this.state.players);
 
     if(numberOfPlayersAlive <= 1 && !this.state.gameFinished){
+      this.state.players.forEach(player=>{
+        if(player.alive){
+          this.computePlayerExperience(player);
+        }
+      });
       this.state.gameFinished = true;
       commands.push(new OnKickPlayerCommand());
     }
     return commands;
+  }
+
+  computePlayerExperience(player){
+    let self = this;
+    if(this.state.elligibleToXP){
+      let place = UtilsCommand.getNumberOfPlayersAlive(this.state.players);
+      let exp = XP_PLACE[place];
+
+      Mongoose.connect(process.env.MONGO_URI , (err) => {
+        User.find({email: player.email}, (err, users)=> {
+            if(err){
+              console.log(err);
+            }
+            else{
+              users.forEach(usr => {
+                if(!player.dbConsumed){
+                  let actualExp = 0;
+                  let actualLevel = 0;
+                  if(usr.metadata.exp){
+                    actualExp = usr.metadata.exp;
+                  }
+                  if(usr.metadata.level){
+                    actualLevel = usr.metadata.level;
+                  }
+                  let expThreshold = XP_TABLE[actualLevel];
+                  if(actualExp + exp >= expThreshold){
+                    usr.metadata.level += 1;
+                    usr.metadata.exp = actualExp + exp - expThreshold;
+                  }
+                  else{
+                    usr.metadata.exp = actualExp + exp;
+                  }
+  
+                  if(place == 1){
+                    usr.metadata.wins += 1;
+                    usr.metadata.mapWin[self.state.mapType] += 1;
+                  }
+                  self.room.clients.forEach(cli => {
+                    if(cli.auth.email == usr.email){
+                      cli.send('metadata',usr.metadata);
+                    }
+                  });
+                  usr.markModified('metadata');
+                  console.log('user metadata changed');
+                  usr.save();
+                  player.dbConsumed = true;
+                }
+              });
+            }
+        });
+      });
+    }
   }
 
   computePlayerDamage(redTeam, playerLevel){
@@ -523,6 +591,7 @@ class OnUpdatePhaseCommand extends Command {
 
   computeIncome() {
     this.state.players.forEach((player, key) => {
+
       if(player.alive){
         player.interest = Math.min(Math.floor(player.money / 5), 6);
         player.money += player.interest;
@@ -551,7 +620,10 @@ class OnUpdatePhaseCommand extends Command {
         player.alive = false;
         player.board.forEach((pokemon, id) => {
           player.board.delete(id);
-        })
+        });
+        if(!player.isBot && !player.dbConsumed){
+          this.computePlayerExperience(player);
+        }
       }
     });
   }

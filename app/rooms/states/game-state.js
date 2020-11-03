@@ -17,6 +17,7 @@ class GameState extends schema.Schema {
     this.botManager = new BotManager();
     this.shop = new Shop();
     this.specialCells = new schema.ArraySchema();
+    this.elligibleToXP = true;
     this.initializeSpecialCells();
 
     this.assign({

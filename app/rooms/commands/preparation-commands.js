@@ -1,12 +1,12 @@
 const Command = require('@colyseus/command').Command;
 const uniqid = require('uniqid');
-const User = require('../../models/user');
+const GameUser = require('../../models/game-user');
 const BOT_AVATAR = require('../../models/enum').BOT_AVATAR;
 const POKEMON_BOT = require('../../models/enum').POKEMON_BOT;
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    this.state.users[client.sessionId] = new User(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.avatar, false, false);
+    this.state.users[client.sessionId] = new GameUser(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.avatar, false, false);
     this.room.broadcast('messages', {'name':'Server', 'message':`${ auth.email } joined.`});
     if(this.state.users.size > 8){
       return [new OnRemoveBotCommand()];
@@ -75,7 +75,7 @@ class OnAddBotCommand extends Command {
         bot = botList[Math.floor(Math.random() * botList.length)];
       }
 
-      this.state.users[id] = new User(id, `BOT ${BOT_AVATAR[bot]}`, BOT_AVATAR[bot], true, true);
+      this.state.users[id] = new GameUser(id, `BOT ${BOT_AVATAR[bot]}`, BOT_AVATAR[bot], true, true);
       this.room.broadcast('messages', {'name':'Server', 'message':`Bot ${ BOT_AVATAR[bot] } added.`});
     }
   }

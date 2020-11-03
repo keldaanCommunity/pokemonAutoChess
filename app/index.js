@@ -43,7 +43,17 @@ hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
 
   $setOnInsert.metadata = {
     avatar: 'eevee',
-    wins: 0
+    wins: 0,
+    exp: 0,
+    level: 0,
+    mapWin:{
+      ICE:0,
+      FIRE:0,
+      GROUND:0,
+      NORMAL:0,
+      GRASS:0,
+      WATER:0
+    }
   };
 
 });

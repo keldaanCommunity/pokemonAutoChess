@@ -84,7 +84,7 @@ class Scizor extends Pokemon {
 
 class MegaScizor extends Pokemon {
   constructor() {
-    super('mega-scizor', [TYPE.BUG, TYPE.METAL], RARITY.LEGENDARY, 2120, '', 230, 16, 2, 5, 5, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL,3);
+    super('mega-scizor', [TYPE.BUG, TYPE.METAL], RARITY.LEGENDARY, 2120, '', 230, 16, 2, 5, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL,3);
   }
 }
 
@@ -126,13 +126,13 @@ class Numel extends Pokemon{
 
 class Camerupt extends Pokemon{
   constructor(){
-    super('camerupt',[TYPE.FIRE,TYPE.FIELD,TYPE.GROUND], RARITY.LEGENDARY, 323, 'mega-camerupt', 130, 9, 5, 5, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,2);
+    super('camerupt',[TYPE.FIRE,TYPE.FIELD,TYPE.GROUND], RARITY.LEGENDARY, 323, 'mega-camerupt', 150, 9, 10, 10, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,2);
   }
 }
 
 class MegaCamerupt extends Pokemon{
   constructor(){
-  super('mega-camerupt',[TYPE.FIRE,TYPE.FIELD,TYPE.GROUND], RARITY.LEGENDARY, 3230, '', 230, 16, 5, 5, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,3);
+  super('mega-camerupt',[TYPE.FIRE,TYPE.FIELD,TYPE.GROUND], RARITY.LEGENDARY, 3230, '', 230, 16, 15, 15, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,3);
   }
 }
 
@@ -1224,7 +1224,7 @@ class Jolteon extends Pokemon{
 
 class Flareon extends Pokemon{
   constructor(){
-    super('flareon',[TYPE.FIRE, TYPE.FIELD],RARITY.UNCOMMON,136,'',130,3,3,2,1,'FIRE/melee', ATTACK_TYPE.PHYSICAL,2);
+    super('flareon',[TYPE.FIRE, TYPE.FIELD],RARITY.UNCOMMON,136,'',130,9,3,2,1,'FIRE/melee', ATTACK_TYPE.PHYSICAL,2);
   }
 }
 
