@@ -329,19 +329,19 @@ class GameContainer {
 
   handleBoardPokemonAdd(player, pokemon){
       if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
-        this.game.scene.getScene('gameScene').boardManager.update();
+        this.game.scene.getScene('gameScene').boardManager.addPokemon(pokemon);
       }
   }
 
   handleBoardPokemonRemove(player, pokemon){
     if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
-      this.game.scene.getScene('gameScene').boardManager.update();
+      this.game.scene.getScene('gameScene').boardManager.removePokemon(pokemon);
     }
   }
 
   handleBoardPokemonChange(player, pokemon, change){
     if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
-      this.game.scene.getScene('gameScene').boardManager.update();
+      this.game.scene.getScene('gameScene').boardManager.changePokemon(pokemon, change);
     }
   }
 
@@ -439,7 +439,9 @@ class GameContainer {
   handleDragDropFailed(message) {
 
     if(message.updateBoard){
-      this.game.scene.getScene('gameScene').boardManager.update();
+      let coordinates = window.transformCoordinate(window.lastDragDropPokemon.positionX, window.lastDragDropPokemon.positionY);
+      window.lastDragDropPokemon.x = coordinates[0];
+      window.lastDragDropPokemon.y = coordinates[1];
     }
     
     if(message.updateItems){

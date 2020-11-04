@@ -24,6 +24,7 @@ class OnShopCommand extends Command {
         }
       }
     }
+    
   }
 }
 
@@ -491,6 +492,9 @@ class OnUpdatePhaseCommand extends Command {
                     actualLevel = usr.metadata.level;
                   }
                   let expThreshold = XP_TABLE[actualLevel];
+                  if(expThreshold === undefined){
+                    expThreshold = XP_TABLE[XP_TABLE.length - 1];
+                  }
                   if(actualExp + exp >= expThreshold){
                     usr.metadata.level += 1;
                     usr.metadata.exp = actualExp + exp - expThreshold;

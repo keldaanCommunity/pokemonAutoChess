@@ -2,7 +2,6 @@ import {Scene, GameObjects} from 'phaser';
 import AnimationManager from '../animation-manager';
 import ShopContainer from '../components/shop-container';
 import PlayerContainer from '../components/player-container';
-import BoardContainer from '../components/board-manager';
 import BoardManager from '../components/board-manager';
 import BattleManager from '../components/battle-manager';
 import MoneyContainer from '../components/money-container';
@@ -121,17 +120,15 @@ export default class GameScene extends Scene {
     this.map.createStaticLayer('World', tileset, 0, 0);
     //this.map.createStaticLayer('Top', tileset, 0, 0);
 
-    this.board = this.add.group();
     this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);
     this.shopContainer = new ShopContainer(this, 470, 912);
     this.playerContainer = new PlayerContainer(this, 1800, 160);
-    this.boardContainer = new BoardContainer(this, 382, 808);
     this.synergiesContainer = new SynergiesContainer(this, 1290, 135, window.state.players[window.sessionId]);
     this.dpsMeterContainer = new DpsMeterContainer(this, 1520, 135, window.state.players[window.sessionId]);
     this.itemsContainer = new ItemsContainer(this, 66, 430);
     this.moneyContainer = new MoneyContainer(this, 10, 60, window.state.players[window.sessionId]);
-    this.boardManager = new BoardManager(this, this.board, window.state.players[window.sessionId]);
+    this.boardManager = new BoardManager(this, window.state.players[window.sessionId]);
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
     this.weatherManager = new WeatherManager(this);
     this.entryHazardsManager = new EntryHazardsManager(this, this.map, tileset);
@@ -175,7 +172,6 @@ export default class GameScene extends Scene {
     this.music = this.sound.addAudioSprite('sounds');
     this.music.play(window.state.mapType);
     this.initilizeDragAndDrop();
-    this.boardManager.update();
     window.initialized = true;
 
     //console.log(window.state.mapType);
@@ -223,10 +219,10 @@ export default class GameScene extends Scene {
     this.dpsMeterContainer.maxDamage = 0;
     this.phaseText.setText(PHASE_TRADUCTION[window.state.phase][window.langage]);
     if (window.state.phase == 'FIGHT') {
-      this.boardManager.clearBoard();
+      this.boardManager.battleMode();
       //this.music.play('battle-1');
     } else {
-      this.boardManager.buildPokemons();
+      this.boardManager.pickMode();
       //this.music.play('pick-1');
     }
   }
@@ -310,6 +306,9 @@ export default class GameScene extends Scene {
             'place': place
           }
         }));
+        if(gameObject.objType == 'pokemon'){
+          window.lastDragDropPokemon = gameObject;
+        }
         if(gameObject.objType == 'item'){
           this.itemsContainer.updateItem(gameObject.place);
         }

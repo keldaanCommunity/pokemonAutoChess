@@ -185,22 +185,43 @@ export default class Pokemon extends Button {
     }
   }
 
-  setItems(pokemon, scene){
+  setItem0(item){
+    if(this.item0){
+      this.remove(this.item0);
+    }
+    this.item0 = new ItemContainer(this.scene,this.width + 15, this.height - 50, item, false, 'item0');
+    this.scene.add.existing(item);
+    this.add(this.item0);
+  }
+
+  setItem1(item){
+    if(this.item1){
+      this.remove(this.item1);
+    }
+    this.item1 = new ItemContainer(this.scene,this.width + 15, this.height - 20, item, false, 'item1');
+    this.scene.add.existing(this.item1);
+    this.add(this.item1);
+  }
+
+  setItem2(item){
+    if(this.item2){
+      this.remove(this.item2);
+    }
+    this.item2 = new ItemContainer(this.scene,this.width + 15, this.height + 10, item, false, 'item2');
+    this.scene.add.existing(this.item2);
+    this.add(this.item2);
+  }
+
+  setItems(pokemon){
     
     if(pokemon.items.item0 && pokemon.items.item0 != ''){
-      const item = new ItemContainer(scene,this.width + 15, this.height - 50,pokemon.items.item0, false, 'item0');
-      scene.add.existing(item);
-      this.add(item)
+      this.setItem0(pokemon.items.item0);
     }
     if(pokemon.items.item1 && pokemon.items.item1 != ''){
-      const item = new ItemContainer(scene,this.width + 15, this.height - 20,pokemon.items.item1, false, 'item1');
-      scene.add.existing(item);
-      this.add(item)
+      this.setItem1(pokemon.items.item1);
     }
     if(pokemon.items.item2 && pokemon.items.item2 != ''){
-      const item = new ItemContainer(scene,this.width + 15, this.height + 10,pokemon.items.item2, false, 'item2');
-      scene.add.existing(item);
-      this.add(item)
+      this.setItem2(pokemon.items.item2);
     }
   }
 

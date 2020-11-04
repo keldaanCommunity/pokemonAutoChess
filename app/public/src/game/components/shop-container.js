@@ -41,10 +41,13 @@ export default class ShopContainer extends GameObjects.Container {
     portrait.positionInShop = index;
     this.portraits[index] = portrait;
     this.add(portrait);
+    //console.log('add portrait', pokemon, this.length);
   }
 
   removePortrait(index){
-    this.remove(this.getFirst('positionInShop', index),true);
+    this.remove(this.portraits[index], true);
+    //this.remove(this.getFirst('positionInShop', index),true);
+    //console.log(this.length);
   }
 
 }
