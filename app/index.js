@@ -42,7 +42,7 @@ hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
   };
 
   $setOnInsert.metadata = {
-    avatar: 'eevee',
+    avatar: 'rattata',
     wins: 0,
     exp: 0,
     level: 0,

@@ -96,7 +96,7 @@ class LobbyPage {
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
         <div style="display:flex;flex-flow:row;">
@@ -140,11 +140,76 @@ class LobbyPage {
           <div class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-cyan" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.WATER}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.WATER * 100 / 100}%">${_client.auth.metadata.mapWin.WATER}/100 Wins</div>
           </div>
+
+          <table class="table">
+          <tbody>
+            <tr>
+              <td><img src="assets/avatar/rattata.png" alt="" class="img-thumbnail" style="filter:grayscale(0%);" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 0"></td>
+              <td><img src="assets/avatar/pidgey.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 1"></td>
+              <td><img src="assets/avatar/spearow.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 2"></td>
+              <td><img src="assets/avatar/caterpie.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 3"></td>
+              <td><img src="assets/avatar/weedle.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 4"></td>
+              <td><img src="assets/avatar/igglybuff.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 5"></td>
+              <td><img src="assets/avatar/seedot.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 6"></td>
+              <td><img src="assets/avatar/zubat.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 7"></td>
+              <td><img src="assets/avatar/sandshrew.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 8"></td>
+              <td><img src="assets/avatar/pikachu.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 9"></td>
+            </tr>
+            <tr>
+              <td><img src="assets/avatar/nidoranF.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 10"></td>
+              <td><img src="assets/avatar/machop.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 11"></td>
+              <td><img src="assets/avatar/geodude.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 12"></td>
+              <td><img src="assets/avatar/eevee.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 13"></td>
+              <td><img src="assets/avatar/poliwag.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 14"></td>
+              <td><img src="assets/avatar/turtwig.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 15"></td>
+              <td><img src="assets/avatar/togepi.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 16"></td>
+              <td><img src="assets/avatar/ralts.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 17"></td>
+              <td><img src="assets/avatar/nidoranM.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 18"></td>
+              <td><img src="assets/avatar/slakoth.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 19"></td>
+            </tr>
+            <tr>
+              <td><img src="assets/avatar/growlithe.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 20"></td>
+              <td><img src="assets/avatar/numel.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 21"></td>
+              <td><img src="assets/avatar/abra.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 22"></td>
+              <td><img src="assets/avatar/horsea.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 23"></td>
+              <td><img src="assets/avatar/gastly.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 24"></td>
+              <td><img src="assets/avatar/mudkip.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 25"></td>
+              <td><img src="assets/avatar/trapinch.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Glimmer Desert"></td>
+              <td><img src="assets/avatar/vibrava.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Glimmer Desert"></td>
+              <td><img src="assets/avatar/flygon.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Glimmer Desert"></td>
+              <td><img src="assets/avatar/regirock.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Glimmer Desert"></td>
+            </tr>        
+            <tr>
+            <td><img src="assets/avatar/bagon.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Tiny Woods"></td>
+            <td><img src="assets/avatar/shelgon.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Tiny Woods"></td>
+            <td><img src="assets/avatar/salamence.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Tiny Woods"></td>
+            <td><img src="assets/avatar/rayquaza.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Tiny Woods"></td>
+              <td><img src="assets/avatar/spheal.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Frosty Forest"></td>
+              <td><img src="assets/avatar/sealeo.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Frosty Forest"></td>
+              <td><img src="assets/avatar/walrein.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Frosty Forest"></td>
+              <td><img src="assets/avatar/articuno.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Frosty Forest"></td>
+              <td><img src="assets/avatar/bulbasaur.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Hidden Highland"></td>
+              <td><img src="assets/avatar/ivysaur.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Hidden Highland"></td>
+            </tr>
+            <tr>
+            <td><img src="assets/avatar/venusaur.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Hidden Highland"></td>
+            <td><img src="assets/avatar/shaymin.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Hidden Highland"></td>
+            <td><img src="assets/avatar/squirtle.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Stormy Sea"></td>
+            <td><img src="assets/avatar/wartortle.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Stormy Sea"></td>
+            <td><img src="assets/avatar/blastoise.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Stormy Sea"></td>
+            <td><img src="assets/avatar/kyogre.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Stormy Sea"></td>
+            <td><img src="assets/avatar/charmander.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Magma Cavern"></td>
+            <td><img src="assets/avatar/charmeleon.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Magma Cavern"></td>
+            <td><img src="assets/avatar/charizard.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Magma Cavern"></td>
+            <td><img src="assets/avatar/groudon.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Magma Cavern"></td>
+          </tr>
+          </tbody>
+        </table>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">${WORDS.CLOSE[this.langage]}</button>
-          <button type="button" class="btn btn-primary">${WORDS.SAVE[this.langage]}</button>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">${WORDS.CLOSE[this.langage]}</button>
+        <button type="button" class="btn btn-primary">${WORDS.SAVE[this.langage]}</button>
+      </div>
       </div>
     </div>
   </div>
@@ -195,6 +260,9 @@ class LobbyPage {
   </div>`;
     document.body.innerHTML = '';
     document.body.appendChild(content);
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
     this.handleRoomListChange();
     this.room.state.messages.forEach((message, index) => {
       self.addMessage(message);

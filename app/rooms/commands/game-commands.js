@@ -513,7 +513,7 @@ class OnUpdatePhaseCommand extends Command {
                     }
                   });
                   usr.markModified('metadata');
-                  console.log('user metadata changed');
+                  //console.log('user metadata changed');
                   usr.save();
                   player.dbConsumed = true;
                 }
