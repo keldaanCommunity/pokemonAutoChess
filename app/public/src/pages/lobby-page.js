@@ -68,6 +68,13 @@ class LobbyPage {
       window.dispatchEvent(new CustomEvent('render-home'));
     });
 
+    this.room.onMessage('metadata', (metadata) => {
+      _client.auth.metadata = metadata;
+      console.log(metadata);
+      document.getElementById('avatarModal').src = `assets/avatar/${_client.auth.metadata.avatar}.png`;
+      document.getElementById('avatar').src = `assets/avatar/${_client.auth.metadata.avatar}.png`;
+    });
+
     this.room.onMessage('+', ([roomId, room]) => {
       const roomIndex = this.allRooms.findIndex((room) => room.roomId === roomId);
       if (roomIndex !== -1) {
@@ -100,7 +107,7 @@ class LobbyPage {
       <div class="modal-content">
         <div class="modal-header">
         <div style="display:flex;flex-flow:row;">
-          <img style="width:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
+          <img style="width:50px;" id='avatarModal' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
           <h4>${_client.auth.email}</h4>
         </div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -144,71 +151,70 @@ class LobbyPage {
           <table class="table">
           <tbody>
             <tr>
-              <td><img src="assets/avatar/rattata.png" alt="" class="img-thumbnail" style="filter:grayscale(0%);" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 0"></td>
-              <td><img src="assets/avatar/pidgey.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 1"></td>
-              <td><img src="assets/avatar/spearow.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 2"></td>
-              <td><img src="assets/avatar/caterpie.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 3"></td>
-              <td><img src="assets/avatar/weedle.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 4"></td>
-              <td><img src="assets/avatar/igglybuff.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 5"></td>
-              <td><img src="assets/avatar/seedot.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 6"></td>
-              <td><img src="assets/avatar/zubat.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 7"></td>
-              <td><img src="assets/avatar/sandshrew.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 8"></td>
-              <td><img src="assets/avatar/pikachu.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 9"></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('rattata')><img src="assets/avatar/rattata.png" style="filter:grayscale(${_client.auth.metadata.level >= 0 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at level 0"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('pidgey')><img src="assets/avatar/pidgey.png" style="filter:grayscale(${_client.auth.metadata.level >= 1 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 1"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('spearow')><img src="assets/avatar/spearow.png" style="filter:grayscale(${_client.auth.metadata.level >= 2 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 2"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('caterpie')><img src="assets/avatar/caterpie.png" style="filter:grayscale(${_client.auth.metadata.level >= 3 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 3"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('weedle')><img src="assets/avatar/weedle.png" style="filter:grayscale(${_client.auth.metadata.level >= 4 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 4"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('igglybuff')><img src="assets/avatar/igglybuff.png" style="filter:grayscale(${_client.auth.metadata.level >= 5 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 5"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('seedot')><img src="assets/avatar/seedot.png" style="filter:grayscale(${_client.auth.metadata.level >= 6 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 6"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('zubat')><img src="assets/avatar/zubat.png" style="filter:grayscale(${_client.auth.metadata.level >= 7 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 7"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('sandshrew')><img src="assets/avatar/sandshrew.png" style="filter:grayscale(${_client.auth.metadata.level >= 8 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 8"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('pikachu')><img src="assets/avatar/pikachu.png" style="filter:grayscale(${_client.auth.metadata.level >= 9 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 9"></button></td>
             </tr>
             <tr>
-              <td><img src="assets/avatar/nidoranF.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 10"></td>
-              <td><img src="assets/avatar/machop.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 11"></td>
-              <td><img src="assets/avatar/geodude.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 12"></td>
-              <td><img src="assets/avatar/eevee.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 13"></td>
-              <td><img src="assets/avatar/poliwag.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 14"></td>
-              <td><img src="assets/avatar/turtwig.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 15"></td>
-              <td><img src="assets/avatar/togepi.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 16"></td>
-              <td><img src="assets/avatar/ralts.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 17"></td>
-              <td><img src="assets/avatar/nidoranM.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 18"></td>
-              <td><img src="assets/avatar/slakoth.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 19"></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('nidoranF')><img src="assets/avatar/nidoranF.png" style="filter:grayscale(${_client.auth.metadata.level >= 10 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 10"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('machop')><img src="assets/avatar/machop.png" style="filter:grayscale(${_client.auth.metadata.level >= 11 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 11"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('geodude')><img src="assets/avatar/geodude.png" style="filter:grayscale(${_client.auth.metadata.level >= 12 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 12"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('eevee')><img src="assets/avatar/eevee.png" style="filter:grayscale(${_client.auth.metadata.level >= 13 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 13"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('poliwag')><img src="assets/avatar/poliwag.png" style="filter:grayscale(${_client.auth.metadata.level >= 14 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 14"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('turtwig')><img src="assets/avatar/turtwig.png" style="filter:grayscale(${_client.auth.metadata.level >= 15 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 15"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('togepi')><img src="assets/avatar/togepi.png" style="filter:grayscale(${_client.auth.metadata.level >= 16 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 16"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('ralts')><img src="assets/avatar/ralts.png" style="filter:grayscale(${_client.auth.metadata.level >= 17 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 17"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('nidoranM')><img src="assets/avatar/nidoranM.png" style="filter:grayscale(${_client.auth.metadata.level >= 18 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 18"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('slakoth')><img src="assets/avatar/slakoth.png" style="filter:grayscale(${_client.auth.metadata.level >= 19 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 19"></button></td>
             </tr>
             <tr>
-              <td><img src="assets/avatar/growlithe.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 20"></td>
-              <td><img src="assets/avatar/numel.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 21"></td>
-              <td><img src="assets/avatar/abra.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 22"></td>
-              <td><img src="assets/avatar/horsea.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 23"></td>
-              <td><img src="assets/avatar/gastly.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 24"></td>
-              <td><img src="assets/avatar/mudkip.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 25"></td>
-              <td><img src="assets/avatar/trapinch.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Glimmer Desert"></td>
-              <td><img src="assets/avatar/vibrava.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Glimmer Desert"></td>
-              <td><img src="assets/avatar/flygon.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Glimmer Desert"></td>
-              <td><img src="assets/avatar/regirock.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Glimmer Desert"></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('growlithe')><img src="assets/avatar/growlithe.png" style="filter:grayscale(${_client.auth.metadata.level >= 20 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 20"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('numel')><img src="assets/avatar/numel.png" style="filter:grayscale(${_client.auth.metadata.level >= 21 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 21"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('abra')><img src="assets/avatar/abra.png" style="filter:grayscale(${_client.auth.metadata.level >= 22 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 22"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('horsea')><img src="assets/avatar/horsea.png" style="filter:grayscale(${_client.auth.metadata.level >= 23 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 23"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('gastly')><img src="assets/avatar/gastly.png" style="filter:grayscale(${_client.auth.metadata.level >= 24 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 24"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('mudkip')><img src="assets/avatar/mudkip.png" style="filter:grayscale(${_client.auth.metadata.level >= 25 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock at lvl 25"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('trapinch')><img src="assets/avatar/trapinch.png" style="filter:grayscale(${_client.auth.metadata.mapWin.GROUND >= 5 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Glimmer Desert"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('vibrava')><img src="assets/avatar/vibrava.png" style="filter:grayscale(${_client.auth.metadata.mapWin.GROUND >= 10 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Glimmer Desert"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('flygon')><img src="assets/avatar/flygon.png" style="filter:grayscale(${_client.auth.metadata.mapWin.GROUND >= 25 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Glimmer Desert"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('regirock')><img src="assets/avatar/regirock.png" style="filter:grayscale(${_client.auth.metadata.mapWin.GROUND >= 100 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Glimmer Desert"></button></td>
             </tr>        
             <tr>
-            <td><img src="assets/avatar/bagon.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Tiny Woods"></td>
-            <td><img src="assets/avatar/shelgon.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Tiny Woods"></td>
-            <td><img src="assets/avatar/salamence.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Tiny Woods"></td>
-            <td><img src="assets/avatar/rayquaza.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Tiny Woods"></td>
-              <td><img src="assets/avatar/spheal.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Frosty Forest"></td>
-              <td><img src="assets/avatar/sealeo.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Frosty Forest"></td>
-              <td><img src="assets/avatar/walrein.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Frosty Forest"></td>
-              <td><img src="assets/avatar/articuno.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Frosty Forest"></td>
-              <td><img src="assets/avatar/bulbasaur.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Hidden Highland"></td>
-              <td><img src="assets/avatar/ivysaur.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Hidden Highland"></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('bagon')><img src="assets/avatar/bagon.png" style="filter:grayscale(${_client.auth.metadata.mapWin.NORMAL >= 5 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Tiny Woods"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('shelgon')><img src="assets/avatar/shelgon.png" style="filter:grayscale(${_client.auth.metadata.mapWin.NORMAL >= 10 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Tiny Woods"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('salamence')><img src="assets/avatar/salamence.png" style="filter:grayscale(${_client.auth.metadata.mapWin.NORMAL >= 25 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Tiny Woods"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('rayquaza')><img src="assets/avatar/rayquaza.png" style="filter:grayscale(${_client.auth.metadata.mapWin.NORMAL >= 100 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Tiny Woods"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('spheal')><img src="assets/avatar/spheal.png" style="filter:grayscale(${_client.auth.metadata.mapWin.ICE >= 5 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Frosty Forest"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('sealeo')><img src="assets/avatar/sealeo.png" style="filter:grayscale(${_client.auth.metadata.mapWin.ICE >= 10 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Frosty Forest"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('walrein')><img src="assets/avatar/walrein.png" style="filter:grayscale(${_client.auth.metadata.mapWin.ICE >= 25 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Frosty Forest"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('articuno')><img src="assets/avatar/articuno.png" style="filter:grayscale(${_client.auth.metadata.mapWin.ICE >= 100 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Frosty Forest"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('bulbasaur')><img src="assets/avatar/bulbasaur.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.GRASS >= 5 ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Hidden Highland"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('ivysaur')><img src="assets/avatar/ivysaur.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.GRASS >= 10 ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Hidden Highland"></button></td>
             </tr>
             <tr>
-            <td><img src="assets/avatar/venusaur.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Hidden Highland"></td>
-            <td><img src="assets/avatar/shaymin.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Hidden Highland"></td>
-            <td><img src="assets/avatar/squirtle.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Stormy Sea"></td>
-            <td><img src="assets/avatar/wartortle.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Stormy Sea"></td>
-            <td><img src="assets/avatar/blastoise.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Stormy Sea"></td>
-            <td><img src="assets/avatar/kyogre.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Stormy Sea"></td>
-            <td><img src="assets/avatar/charmander.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Magma Cavern"></td>
-            <td><img src="assets/avatar/charmeleon.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Magma Cavern"></td>
-            <td><img src="assets/avatar/charizard.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Magma Cavern"></td>
-            <td><img src="assets/avatar/groudon.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Magma Cavern"></td>
-          </tr>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('venusaur')><img src="assets/avatar/venusaur.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.GRASS >= 25 ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Hidden Highland"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('shaymin')><img src="assets/avatar/shaymin.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.GRASS >= 100 ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Hidden Highland"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('squirtle')><img src="assets/avatar/squirtle.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 5 ? 0:1})"  class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Stormy Sea"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('wartortle')><img src="assets/avatar/wartortle.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 10 ? 0:1})"  class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Stormy Sea"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('blastoise')><img src="assets/avatar/blastoise.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 25 ? 0:1})"  class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Stormy Sea"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('kyogre')><img src="assets/avatar/kyogre.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 100 ? 0:1})"  class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Stormy Sea"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('charmander')><img src="assets/avatar/charmander.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 5 ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 5 wins in Magma Cavern"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('charmeleon')><img src="assets/avatar/charmeleon.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 10 ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 10 wins in Magma Cavern"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('charizard')><img src="assets/avatar/charizard.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 25 ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 25 wins in Magma Cavern"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('groudon')><img src="assets/avatar/groudon.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 100 ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Unlock after 100 wins in Magma Cavern"></button></td>
+            </tr>
           </tbody>
         </table>
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">${WORDS.CLOSE[this.langage]}</button>
-        <button type="button" class="btn btn-primary">${WORDS.SAVE[this.langage]}</button>
       </div>
       </div>
     </div>
@@ -246,7 +252,7 @@ class LobbyPage {
     </div>
 
     <div style="display:flex; flex-flow:column; justify-content:space-around; align-items:center; width:50%; height:100%;">   
-     <div style="display:flex;flex-flow:row;"><img style="width:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
+     <div style="display:flex;flex-flow:row;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
       <h3>${WORDS.AVAILABLE_ROOM_IDS[this.langage]}:</h3>
       <ul id="room-list"></ul>
       <button type="button" class="btn btn-secondary" id="create">${WORDS.CREATE_NEW_ROOM[this.langage]}</button>
@@ -273,6 +279,10 @@ class LobbyPage {
   addEventListeners() {
     //console.log(_client.auth.lang);
     let self = this;
+
+    window.changeAvatar = function(pokemon){
+      self.room.send('avatar',{'pokemon':pokemon});
+    }
 
     document.getElementById('button-home').addEventListener('click', (e) => {
       this.room.leave();
