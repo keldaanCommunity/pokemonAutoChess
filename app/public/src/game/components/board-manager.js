@@ -5,6 +5,7 @@ export default class BoardManager {
     this.pokemons = new Map();
     this.scene = scene;
     this.player = player;
+    this.mode = 'pick';
     this.buildPokemons();
   }
 
@@ -19,6 +20,9 @@ export default class BoardManager {
     }
     window.animationManager.animatePokemon(pokemonUI);
     this.pokemons.set(pokemonUI.id, pokemonUI);
+    if(pokemon.positionY != 0 && this.mode == 'battle'){
+      pokemonUI.setVisible(false);
+    }
   }
 
 
@@ -36,6 +40,7 @@ export default class BoardManager {
   }
   
   battleMode(){
+    this.mode = 'battle';
     this.pokemons.forEach(pokemon => {
       if(pokemon.positionY != 0){
         pokemon.setVisible(false);
@@ -44,15 +49,19 @@ export default class BoardManager {
   }
 
   pickMode(){
+    this.mode = 'pick';
     this.pokemons.forEach(pokemon => {
       pokemon.setVisible(true);
     });
   }
 
   setPlayer(player) {
+
     if (player.id != this.player.id) {
+      this.pokemons.forEach((pokemon, key) => {
+        pokemon.destroy(true);
+      });
       this.player = player;
-      this.group.clear(true, true);
       this.buildPokemons();
     }
   }

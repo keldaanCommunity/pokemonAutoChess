@@ -470,13 +470,11 @@ class GameContainer {
   onPlayerClick(event) {
     const scene = this.game.scene.getScene('gameScene');
     
-    scene.fade();
-    scene.boardManager.clear();
-    scene.boardManager.player = window.state.players[event.detail.id];
+    //scene.fade();
+    scene.boardManager.setPlayer(window.state.players[event.detail.id]);
     scene.battleManager.setPlayer(window.state.players[event.detail.id]);
     scene.synergiesContainer.changePlayer(window.state.players[event.detail.id]);
     scene.dpsMeterContainer.changePlayer(window.state.players[event.detail.id]);
-    scene.boardManager.buildPokemons();
   }
 
   onShopClick(event) {
