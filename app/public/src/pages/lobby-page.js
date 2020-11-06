@@ -70,7 +70,7 @@ class LobbyPage {
 
     this.room.onMessage('metadata', (metadata) => {
       _client.auth.metadata = metadata;
-      console.log(metadata);
+      //console.log(metadata);
       document.getElementById('avatarModal').src = `assets/avatar/${_client.auth.metadata.avatar}.png`;
       document.getElementById('avatar').src = `assets/avatar/${_client.auth.metadata.avatar}.png`;
     });

@@ -16,7 +16,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     this.setState(new LobbyState());
   
     Mongoose.connect(process.env.MONGO_URI , (err) => {
-      Chat.find({'time': { $gt: Date.now() - 3600000 }},(err, messages)=> {
+      Chat.find({'time': { $gt: Date.now() - 86400000 }},(err, messages)=> {
           if(err){
             console.log(err);
           }
@@ -386,7 +386,7 @@ onJoin (client, options, auth) {
 onLeave (client) {
   super.onLeave(client);
   const time = new Date(Date.now());
-  this.state.addMessage('Server',`${client.auth.email} left.`, auth.metadata.avatar,Date.now(), true);
+  //this.state.addMessage('Server',`${client.auth.email} left.`, client.auth.metadata.avatar,Date.now(), true);
 }
 
 onDispose () {

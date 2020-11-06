@@ -309,7 +309,7 @@ class OnJoinCommand extends Command {
     this.state.players.set(client.sessionId, new Player(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')),client.auth.metadata.avatar, false, this.state.specialCells, this.state.mapType, auth.email));
     this.state.shop.assignShop(this.state.players.get(client.sessionId));
     if(this.state.players.size == 8){
-      console.log('game elligible to xp');
+      //console.log('game elligible to xp');
       this.state.elligibleToXP = true;
     }
   }

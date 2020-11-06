@@ -10,6 +10,7 @@ export default class BoardManager {
   }
 
   addPokemon(pokemon) {
+    //console.log(pokemon.name, this.mode);
     const coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
     let pokemonUI;
 
@@ -40,6 +41,7 @@ export default class BoardManager {
   }
   
   battleMode(){
+    //console.log('battleMode');
     this.mode = 'battle';
     this.pokemons.forEach(pokemon => {
       if(pokemon.positionY != 0){
@@ -49,6 +51,7 @@ export default class BoardManager {
   }
 
   pickMode(){
+    //console.log('pickMode');
     this.mode = 'pick';
     this.pokemons.forEach(pokemon => {
       pokemon.setVisible(true);
@@ -85,6 +88,9 @@ export default class BoardManager {
         coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
         pokemonUI.x = coordinates[0];
         pokemonUI.y = coordinates[1];
+        if(pokemonUI.positionY != 0 && this.mode == 'battle'){
+          pokemonUI.setVisible(false);
+        }
         break;
       
       case 'item0':
