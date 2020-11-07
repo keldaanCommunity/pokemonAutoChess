@@ -54,6 +54,10 @@ export default class AnimationManager {
       this.createAnimations(num, 'NEUTRAL');
     });
 
+    [607,608,609].forEach((num) => {
+      this.createAnimations(num, 'EPIC2');
+    });
+
     this.createAttacksAnimations();
 
     this.createSpecialCellsAnimations();
@@ -273,7 +277,7 @@ export default class AnimationManager {
     });
   }
 
-  createAnimations(index, rarity) {
+  createAnimations(index, sheet) {
     /*
       0 : down
       1 : down left
@@ -284,7 +288,7 @@ export default class AnimationManager {
     ['0', '1', '2', '3', '4'].forEach((orientation) => {
       this.game.anims.create({
         key: `${index}/0/${orientation}`,
-        frames: this.game.anims.generateFrameNames(`${rarity}`, {frames: [0, 1, 2], prefix: index + '/0/' + orientation + '/'}),
+        frames: this.game.anims.generateFrameNames(sheet, {frames: [0, 1, 2], prefix: index + '/0/' + orientation + '/'}),
         frameRate: 4,
         repeat: -1,
         yoyo: true
@@ -292,8 +296,8 @@ export default class AnimationManager {
       // attack
       this.game.anims.create({
         key: `${index}/1/${orientation}`,
-        frames: this.game.anims.generateFrameNames(`${rarity}`, {frames: [0, 1, 2], prefix: index + '/1/' + orientation + '/'}).concat(
-            this.game.anims.generateFrameNames(`${rarity}`, {frames: [0, 1, 2], prefix: index + '/0/' + orientation + '/'})
+        frames: this.game.anims.generateFrameNames(sheet, {frames: [0, 1, 2], prefix: index + '/1/' + orientation + '/'}).concat(
+            this.game.anims.generateFrameNames(sheet, {frames: [0, 1, 2], prefix: index + '/0/' + orientation + '/'})
         ),
         duration: 1000,
         repeat: -1

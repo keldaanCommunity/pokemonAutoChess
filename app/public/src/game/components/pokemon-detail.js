@@ -34,7 +34,7 @@ export default class PokemonDetail extends GameObjects.Container {
     this.add(new GameObjects.Rectangle(scene, 80, 80, 160, 120, COLOR_TYPE[this.pokemonInformation.rarity]));
     const displayName = name.charAt(0).toUpperCase() + name.slice(1);
     this.add(new GameObjects.Text(scene, 5, 20, displayName, this.textStyle));
-    this.add(new GameObjects.Image(scene, 140, 40, `${this.pokemonInformation.rarity}`, `${this.pokemonInformation.index}/portrait`));
+    this.add(new GameObjects.Image(scene, 140, 40, this.pokemonInformation.sheet, `${this.pokemonInformation.index}/portrait`));
     for (let i = 0; i < this.pokemonInformation.types.length; i++) {
       this.add(new GameObjects.Image(scene, 30*i +20, 60, 'hexagon').setScale(0.5, 0.5));
       this.add(new GameObjects.Image(scene, 30*i +20, 60, 'types', this.pokemonInformation.types[i]).setScale(0.5, 0.5));

@@ -277,8 +277,8 @@ const ITEM_DESCRIPTION = Object.freeze({
     esp:'10% de robo de vida en cada ataque'
   } 
   , BIG_ROOT:{
-    eng:'+ 5% health / second restored',
-    esp:'+ 5% de salud / segundo restaurado'
+    eng:'+ 5% health / attack restored',
+    esp:'+ 5% de salud / atacado restaurado'
   }  
   , APRICOT_BERRY:{
     eng: '+50% spe def when below 50% health',

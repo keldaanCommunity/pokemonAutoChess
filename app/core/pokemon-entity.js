@@ -8,7 +8,7 @@ const Items = require('../models/items');
 const ArraySchema = schema.ArraySchema;
 
 class PokemonEntity extends schema.Schema {
-  constructor(name, index, positionX, positionY, hp, atk, def, speDef, attackType, range, team, attackSprite, rarity, types, items, stars, simulation) {
+  constructor(name, index, positionX, positionY, hp, atk, def, speDef, attackType, range, team, attackSprite, rarity, sheet, types, items, stars, simulation) {
     super();
 
     this.state = new MovingState();
@@ -19,6 +19,7 @@ class PokemonEntity extends schema.Schema {
       {
         id: uniqid(),
         rarity: rarity,
+        sheet: sheet,
         positionX: positionX,
         positionY: positionY,
         targetX: -1,
@@ -94,6 +95,7 @@ schema.defineTypes(PokemonEntity, {
   targetX: 'int8',
   targetY: 'int8',
   attackSprite: 'string',
+  sheet: 'string',
   rarity: 'string',
   name: 'string',
   effects: ['string'],

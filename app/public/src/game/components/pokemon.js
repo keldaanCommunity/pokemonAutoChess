@@ -167,7 +167,7 @@ export default class Pokemon extends Button {
   }
 
   setSprite(pokemon, scene) {
-    const sprite = new GameObjects.Sprite(scene, 0, 0, `${pokemon.rarity}`, `${pokemon.index}/0/1/0`);
+    const sprite = new GameObjects.Sprite(scene, 0, 0, pokemon.sheet, `${pokemon.index}/0/1/0`);
     this.height = sprite.height;
     this.width = sprite.width;
     sprite.setScale(2, 2);

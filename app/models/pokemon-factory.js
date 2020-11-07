@@ -511,6 +511,12 @@ class PokemonFactory {
         return 'sandshrew';
       case 'darkrai':
         return 'darkrai';
+      case 'litwick':
+        return 'litwick';
+      case 'lampent':
+        return 'litwick';
+      case 'chandelure':
+        return 'litwick';
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -925,10 +931,15 @@ class PokemonFactory {
         return new Pokemon.Sandshrew();
       case 'darkrai':
         return new Pokemon.Darkrai();
+      case 'litwick':
+        return new Pokemon.Litwick();
+      case 'lampent':
+        return new Pokemon.Lampent();
+      case 'chandelure':
+        return new Pokemon.Chandelure();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();
-        break;
     }
   }
 

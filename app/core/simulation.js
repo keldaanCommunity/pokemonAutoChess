@@ -46,7 +46,7 @@ class Simulation extends Schema {
       blueTeam.forEach((pokemon, key) => {
         // console.log("x",pokemon.positionX, "y", pokemon.positionY); // 0 for blue, 1 for red
         if (pokemon.positionY != 0) {
-          let pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity, pokemon.types, pokemon.items, pokemon.stars, this);
+          let pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.atk, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity, pokemon.sheet, pokemon.types, pokemon.items, pokemon.stars, this);
           let dps = new Dps(pokemonEntity.id, pokemonEntity.name);
           this.applySpecialCellsEffects(pokemonEntity);
           this.applyEffects(pokemonEntity, pokemon.types, blueEffects, redEffects, blueTeam, redTeam);
@@ -63,7 +63,7 @@ class Simulation extends Schema {
     if(redTeam){
       redTeam.forEach((pokemon, key) => {
         if (pokemon.positionY != 0) {
-          let pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, 5 - (pokemon.positionY - 1), pokemon.hp, pokemon.atk, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 1, pokemon.attackSprite, pokemon.rarity, pokemon.types, pokemon.items, pokemon.stars, this);
+          let pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, 5 - (pokemon.positionY - 1), pokemon.hp, pokemon.atk, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 1, pokemon.attackSprite, pokemon.rarity, pokemon.sheet, pokemon.types, pokemon.items, pokemon.stars, this);
           this.applySpecialCellsEffects(pokemonEntity);
           this.applyEffects(pokemonEntity, pokemon.types, redEffects, blueEffects, redTeam, blueTeam);
           this.applyItemsEffects(pokemonEntity, pokemon.types);
@@ -80,7 +80,7 @@ class Simulation extends Schema {
       let kyogre = PokemonFactory.createPokemonFromName('kyogre');
       let coord = this.getFirstAvailablePlaceOnBoard(true);
       let dps = new Dps(kyogre.id, kyogre.name);
-      let pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.atk, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 0, kyogre.attackSprite, kyogre.rarity, kyogre.types, kyogre.items, kyogre.stars, this);
+      let pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.atk, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 0, kyogre.attackSprite, kyogre.rarity, kyogre.sheet, kyogre.types, kyogre.items, kyogre.stars, this);
       this.applySpecialCellsEffects(pokemonEntity);
       this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, blueTeam, redTeam);
       this.blueTeam.set(pokemonEntity.id, pokemonEntity);
@@ -90,7 +90,7 @@ class Simulation extends Schema {
     if (redEffects && redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
       let kyogre = PokemonFactory.createPokemonFromName('kyogre');
       let coord = this.getFirstAvailablePlaceOnBoard(false);
-      let pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.atk, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 1, kyogre.attackSprite, kyogre.rarity, kyogre.types, kyogre.items, kyogre.stars, this);
+      let pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.atk, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 1, kyogre.attackSprite, kyogre.rarity, kyogre.sheet, kyogre.types, kyogre.items, kyogre.stars, this);
       this.applySpecialCellsEffects(pokemonEntity);
       this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, redTeam, blueTeam);
       this.redTeam.set(pokemonEntity.id, pokemonEntity);
