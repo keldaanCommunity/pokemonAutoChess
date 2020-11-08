@@ -98,6 +98,18 @@ const WORDS = Object.freeze({
   SAVE:{
     'eng':'Save Changes',
     'esp':'Guardar cambios'
+  },
+  UNLOCK:{
+    'eng':'Unlock at lvl',
+    'esp':'Desbloquear en el nivel'
+  },
+  UNLOCK_AFTER:{
+    'eng':'Unlock after',
+    'esp':'Desbloquear después de'
+  },
+  WINS_IN:{
+    'eng':'wins in',
+    'esp':'victorias en'
   }
 });
 
