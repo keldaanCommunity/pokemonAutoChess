@@ -110,7 +110,7 @@ export default class GameScene extends Scene {
     this.load.multiatlas('attacks', 'assets/attacks/attacks.json', 'assets/attacks');
     this.load.image('transition', 'assets/ui/transition.png');
     this.load.image('money', 'assets/ui/money.png');
-    this.load.image('life', 'assets/ui/life.png');
+    this.load.multiatlas('life', 'assets/ui/life.json', 'assets/ui');
   }
 
   create() {

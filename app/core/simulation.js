@@ -437,14 +437,14 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.SWIFT_SWIM:
-          if (types.includes(TYPE.WATER) && this.climate == CLIMATE.RAIN) {
+          if (types.includes(TYPE.AQUATIC) && this.climate == CLIMATE.RAIN) {
             pokemon.atkSpeed = Math.max(400,pokemon.atkSpeed * 0.7);
             pokemon.effects.push(EFFECTS.SWIFT_SWIM);
           }
           break;
 
         case EFFECTS.HYDO_CANNON:
-          if (types.includes(TYPE.WATER) && this.climate == CLIMATE.RAIN) {
+          if (types.includes(TYPE.AQUATIC) && this.climate == CLIMATE.RAIN) {
             pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3);
             pokemon.effects.push(EFFECTS.HYDO_CANNON);
           }
