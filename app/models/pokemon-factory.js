@@ -169,6 +169,12 @@ class PokemonFactory {
         return 'squirtle';
       case 'blastoise':
         return 'squirtle';
+      case 'slowpoke':
+        return 'slowpoke';
+      case 'slowbro':
+        return 'slowpoke';
+      case 'slowking':
+        return 'slowpoke';
       case 'geodude':
         return 'geodude';
       case 'graveler':
@@ -543,6 +549,12 @@ class PokemonFactory {
         return new Pokemon.Wartortle();
       case 'blastoise':
         return new Pokemon.Blastoise();
+      case 'slowpoke':
+        return new Pokemon.Slowpoke();
+      case 'slowbro':
+        return new Pokemon.Slowbro();
+      case 'slowking':
+        return new Pokemon.Slowking();
       case 'geodude':
         return new Pokemon.Geodude();
       case 'graveler':

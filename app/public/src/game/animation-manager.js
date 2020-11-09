@@ -58,6 +58,10 @@ export default class AnimationManager {
       this.createAnimations(num, 'EPIC2');
     });
 
+    [79,80,199].forEach((num) => {
+      this.createAnimations(num, 'UNCOMMON2');
+    });
+
     this.createAttacksAnimations();
 
     this.createSpecialCellsAnimations();

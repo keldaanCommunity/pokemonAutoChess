@@ -835,19 +835,37 @@ class Typhlosion extends Pokemon {
 
 class Charmander extends Pokemon {
   constructor() {
-    super('charmander', [TYPE.FIRE, TYPE.MONSTER], RARITY.UNCOMMON, 'UNCOMMON',  4, 'charmeleon', 70, 5, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,1);
+    super('charmander', [TYPE.FIRE, TYPE.MONSTER], RARITY.UNCOMMON, 'UNCOMMON', 4, 'charmeleon', 70, 5, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,1);
   }
 }
 
 class Charmeleon extends Pokemon {
   constructor() {
-    super('charmeleon', [TYPE.FIRE, TYPE.MONSTER], RARITY.UNCOMMON, 'UNCOMMON',  5, 'charizard', 120, 9, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,2);
+    super('charmeleon', [TYPE.FIRE, TYPE.MONSTER], RARITY.UNCOMMON, 'UNCOMMON', 5, 'charizard', 120, 9, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,2);
   }
 }
 
 class Charizard extends Pokemon {
   constructor() {
-    super('charizard', [TYPE.FIRE, TYPE.MONSTER, TYPE.FLYING], RARITY.UNCOMMON, 'UNCOMMON',  6, '', 210, 20, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,3);
+    super('charizard', [TYPE.FIRE, TYPE.MONSTER, TYPE.FLYING], RARITY.UNCOMMON, 'UNCOMMON', 6, '', 210, 20, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL,3);
+  }
+}
+
+class Slowpoke extends Pokemon {
+  constructor() {
+    super('slowpoke', [TYPE.AQUATIC, TYPE.PSYCHIC], RARITY.UNCOMMON, 'UNCOMMON2', 79, 'slowbro', 70, 5, 2, 2, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL,1);
+  }
+}
+
+class Slowbro extends Pokemon {
+  constructor() {
+    super('slowbro', [TYPE.AQUATIC, TYPE.PSYCHIC], RARITY.UNCOMMON, 'UNCOMMON2', 80, 'slowking', 120, 9, 3, 3, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL,2);
+  }
+}
+
+class Slowking extends Pokemon {
+  constructor() {
+    super('slowking', [TYPE.AQUATIC, TYPE.PSYCHIC], RARITY.UNCOMMON, 'UNCOMMON2', 199, '', 210, 20, 4, 4, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL,3);
   }
 }
 
@@ -1513,5 +1531,8 @@ module.exports = {
   Darkrai,
   Litwick,
   Lampent,
-  Chandelure
+  Chandelure,
+  Slowpoke,
+  Slowbro,
+  Slowking
 };
