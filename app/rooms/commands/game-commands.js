@@ -318,6 +318,9 @@ class OnJoinCommand extends Command {
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
     this.state.shop.detachShop(this.state.players.get(client.sessionId));
+    if(!this.state.players.get(client.sessionId).alive && this.state.elligibleToXP){
+      UtilsCommand.computePlayerExperience(this.state.players.get(client.sessionId));
+    }
     this.state.players.delete(client.sessionId);
   }
 }
