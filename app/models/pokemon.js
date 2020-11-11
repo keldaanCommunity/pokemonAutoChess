@@ -253,7 +253,7 @@ class Shelgon extends Pokemon {
 
 class Salamence extends Pokemon {
   constructor() {
-    super('salamence', [TYPE.DRAGON, TYPE.MONSTER], RARITY.EPIC, 'EPIC',  373, '', 230, 18, 1, 1, 2, 'FIRE/range', ATTACK_TYPE.SPECIAL,3);
+    super('salamence', [TYPE.DRAGON, TYPE.MONSTER, TYPE.FLYING], RARITY.EPIC, 'EPIC',  373, '', 230, 18, 1, 1, 2, 'FIRE/range', ATTACK_TYPE.SPECIAL,3);
   }
 }
 
