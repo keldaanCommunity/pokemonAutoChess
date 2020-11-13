@@ -84,17 +84,14 @@ export default class GameScene extends Scene {
     this.load.image('tiles', `assets/tiles/${window.state.mapType}.png`);
     this.load.tilemapTiledJSON('map', `assets/tiles/${window.state.mapType}.json`);
     this.load.image('hexagon', 'assets/ui/hexagon.png');
-    this.load.image('shield', 'assets/ui/shield.png');
-    this.load.image('sword', 'assets/ui/sword.png');
-    this.load.image('range', 'assets/ui/range.png');
-    this.load.image('heart', 'assets/ui/heart.png');
     this.load.image('rain', 'assets/ui/rain.png');
     this.load.image('sand', 'assets/ui/sand.png');
     this.load.image('sun', 'assets/ui/sun.png');
     this.load.image('socle', 'assets/ui/socle.png');
     this.load.image('PHYSICAL', 'assets/types/PHYSICAL.png');
     this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
-    this.load.multiatlas('items','assets/items/items.json','assets/items/')
+    this.load.multiatlas('icons','assets/ui/icons.json','assets/ui/');
+    this.load.multiatlas('items','assets/items/items.json','assets/items/');
     this.load.multiatlas('type-details', `assets/types/${window.langage}/type-details.json`, `assets/types/${window.langage}/`);
     this.load.multiatlas('lock', 'assets/lock/lock.json', 'assets/lock/');
     this.load.multiatlas('effects', 'assets/effects/effects.json', 'assets/effects');
