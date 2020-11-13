@@ -31,7 +31,7 @@ export default class PokemonDetail extends GameObjects.Container {
       color: '#ff0000'
     };
     this.objType = 'detail';
-    this.add(new GameObjects.Rectangle(scene, 80, 80, 160, 120, COLOR_TYPE[this.pokemonInformation.rarity]));
+    this.add(new GameObjects.Rectangle(scene, 80, 90, 160, 140, COLOR_TYPE[this.pokemonInformation.rarity]));
     const displayName = name.charAt(0).toUpperCase() + name.slice(1);
     this.add(new GameObjects.Text(scene, 5, 20, displayName, this.textStyle));
     this.add(new GameObjects.Image(scene, 140, 40, this.pokemonInformation.sheet, `${this.pokemonInformation.index}/portrait`));
@@ -58,7 +58,9 @@ export default class PokemonDetail extends GameObjects.Container {
     this.speDef = new GameObjects.Text(scene, 20, 120, speDef, this.getColorStyle(this.pokemonInformation.speDef, speDef, false));
     this.add(this.speDef);
     this.add(new GameObjects.Image(scene, 60, 130, 'icons','speDef').setScale(2,2));
-    this.setDepth(10);
+    this.maxMana = new GameObjects.Text(scene, 10, 140, this.pokemonInformation.maxMana, this.textStyle);
+    this.add(this.maxMana);
+    this.add(new GameObjects.Image(scene,60, 150, 'icons', 'mana').setScale(2,2));
   }
 
 
