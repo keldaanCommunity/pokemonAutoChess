@@ -36,6 +36,15 @@ class PokemonState {
   }
 
   update(pokemon, dt, board, climate) {
+
+    if (pokemon.manaCooldown <= 0) {
+      pokemon.mana = Math.min(pokemon.mana + 10, pokemon.maxMana);
+      pokemon.manaCooldown = 1000;
+    }
+    else{
+      pokemon.manaCooldown = Math.max(0, pokemon.manaCooldown - dt);
+    }
+
     if (pokemon.cooldown <= 0) {
       if (climate == CLIMATE.SANDSTORM) {
         if (!pokemon.types.includes(TYPE.GROUND) && !pokemon.types.includes(TYPE.METAL)) {

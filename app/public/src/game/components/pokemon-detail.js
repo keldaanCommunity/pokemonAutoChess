@@ -58,8 +58,8 @@ export default class PokemonDetail extends GameObjects.Container {
     this.speDef = new GameObjects.Text(scene, 20, 120, speDef, this.getColorStyle(this.pokemonInformation.speDef, speDef, false));
     this.add(this.speDef);
     this.add(new GameObjects.Image(scene, 60, 130, 'icons','speDef').setScale(2,2));
-    this.maxMana = new GameObjects.Text(scene, 10, 140, this.pokemonInformation.maxMana, this.textStyle);
-    this.add(this.maxMana);
+    this.mana = new GameObjects.Text(scene, 10, 140, this.pokemonInformation.maxMana, this.textStyle);
+    this.add(this.mana);
     this.add(new GameObjects.Image(scene,60, 150, 'icons', 'mana').setScale(2,2));
   }
 

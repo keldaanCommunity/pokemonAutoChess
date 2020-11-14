@@ -102,6 +102,13 @@ export default class BattleManager {
             if (detail) {
               detail.hp.setText(pokemon.life);
             }
+          } else if (change.field =='mana') {
+            children[i].mana = pokemon.mana;
+            children[i].getFirst('objType', 'manabar').setLife(children[i].mana);
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
+              detail.mana.setText(pokemon.mana);
+            }
           } else if (change.field == 'atk') {
             children[i].atk = pokemon.atk;
             const detail = children[i].getFirst('objType', 'detail');

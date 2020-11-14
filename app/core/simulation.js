@@ -72,8 +72,7 @@ class Simulation extends Schema {
           // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
           this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
         }
-      })
-      
+      });
     }
 
     if (blueEffects && blueEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {

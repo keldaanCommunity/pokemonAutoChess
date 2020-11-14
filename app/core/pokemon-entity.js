@@ -42,6 +42,7 @@ class PokemonEntity extends schema.Schema {
         atkSpeed: 1000,
         range: range,
         cooldown: 1000,
+        manaCooldown:1000,
         team: team,
         attackSprite: attackSprite,
         types: [],

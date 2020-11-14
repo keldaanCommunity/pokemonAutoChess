@@ -1,20 +1,21 @@
 import {GameObjects} from 'phaser';
 
 export default class LifeBar extends GameObjects.Graphics {
-  constructor(scene, x, y, life, color) {
+  constructor(scene, x, y, life, color, objType) {
     super(scene);
     this.x = x;
     this.y = y;
     this.value = life;
     this.color = color;
     this.p = 56 / this.value;
-    this.objType = 'lifebar';
+    this.objType = objType;
     this.draw();
 
     scene.add.existing(this);
   }
 
   setLife(amount) {
+    console.log(this.objType, amount);
     this.value = amount;
 
     if (this.value < 0) {

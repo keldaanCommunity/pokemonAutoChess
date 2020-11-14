@@ -134,16 +134,25 @@ export default class Pokemon extends Button {
   }
 
   setLifeBar(pokemon, scene, height) {
-    if (pokemon.life) {
+    if (pokemon.life !== undefined) {
       let color;
       if (pokemon.team == 0) {
         color = 0x00ff00;
       } else {
         color = 0xff0000;
       }
-      const lifebar = new Lifebar(scene, -15, height, pokemon.hp, color);
+      const lifebar = new Lifebar(scene, -15, height, pokemon.hp, color, 'lifebar');
       lifebar.setLife(pokemon.life);
       this.add(lifebar);
+    }
+  }
+
+  setManaBar(pokemon, scene, height) {
+    if (pokemon.mana !== undefined) {
+      let color = 0x01b8fe;
+      const manabar = new Lifebar(scene, -15, height + 5, pokemon.maxMana, color, 'manabar');
+      manabar.setLife(pokemon.mana);
+      this.add(manabar);
     }
   }
 
@@ -151,8 +160,8 @@ export default class Pokemon extends Button {
     let c = 0;
     if (pokemon.effects.length > 0) {
       pokemon.effects.forEach((effect) => {
-        const image = new GameObjects.Image(scene, c*20 - 20, height, 'effects', effect);
-        const border = new GameObjects.Image(scene, c*20 - 20, height, 'effects', 'border');
+        const image = new GameObjects.Image(scene, c*20 - 20, height + 10, 'effects', effect);
+        const border = new GameObjects.Image(scene, c*20 - 20, height + 10, 'effects', 'border');
         image.objType = 'effect';
         border.objType = 'effect';
         image.setScale(0.5, 0.5);
@@ -179,6 +188,7 @@ export default class Pokemon extends Button {
     this.add(socle);
     this.add(sprite);
     this.setLifeBar(pokemon, scene, this.height/2 + 5);
+    this.setManaBar(pokemon, scene, this.height/2 + 5);
     this.setItems(pokemon, scene);
     if (pokemon.effects) {
       this.setEffects(pokemon, scene, this.height + 30);
