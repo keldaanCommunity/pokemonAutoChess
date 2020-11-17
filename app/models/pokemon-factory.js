@@ -237,6 +237,18 @@ class PokemonFactory {
       case SPECIAL_SKILL.NIGHT_SLASH:
         return new Strategy.NightSlashStrategy();
 
+      case SPECIAL_SKILL.BUG_BUZZ:
+        return new Strategy.BugBuzzStrategy();
+
+      case SPECIAL_SKILL.POISON_STING:
+        return new Strategy.PoisonStingStrategy();
+
+      case SPECIAL_SKILL.LEECH_LIFE:
+        return new Strategy.LeechLifeStrategy();
+    
+      case SPECIAL_SKILL.HAPPY_HOUR:
+        return new Strategy.HappyHourStrategy();
+      
       case SPECIAL_SKILL.DEFAULT:
         return new Strategy.AttackStrategy();
 

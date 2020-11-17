@@ -301,6 +301,34 @@ export default class AnimationManager {
       frameRate: 6,
       repeat: 0
     });
+    
+    this.game.anims.create({
+      key: SPECIAL_SKILL.BUG_BUZZ,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 28, zeroPad: 3, prefix: `${SPECIAL_SKILL.BUG_BUZZ}/`}),
+      frameRate: 20,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.POISON_STING,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 12, zeroPad: 3, prefix: `${SPECIAL_SKILL.POISON_STING}/`}),
+      frameRate: 12,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.LEECH_LIFE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${SPECIAL_SKILL.LEECH_LIFE}/`}),
+      frameRate: 15,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.HAPPY_HOUR,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 20, zeroPad: 3, prefix: `${SPECIAL_SKILL.HAPPY_HOUR}/`}),
+      frameRate: 15,
+      repeat: 0
+    });
   }
 
   createAttacksAnimations() {

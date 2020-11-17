@@ -1,4 +1,4 @@
-const {ATTACK_TYPE, TYPE, SPECIAL_SKILL} = require('../models/enum');
+const {ATTACK_TYPE, TYPE, EFFECTS} = require('../models/enum');
 //const PokemonFactory = require('../models/pokemon-factory');
 
 class AttackStrategy{
@@ -629,7 +629,6 @@ class IcicleCrashStrategy extends AttackStrategy{
     }
 }
 
-
 class RootStrategy extends AttackStrategy{
 
     constructor(){
@@ -756,7 +755,7 @@ class NightSlashStrategy extends AttackStrategy{
             default:
                 break;
         }
-        
+
         target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
 
         let cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
@@ -764,6 +763,129 @@ class NightSlashStrategy extends AttackStrategy{
         cells.forEach((cell) => {
             if(cell.value && pokemon.team != cell.value.team){
                 cell.value.def = Math.max(0,cell.value.def - 1);
+            }
+        });
+    }
+}
+
+class BugBuzzStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+        let damage = 0;
+
+        switch (pokemon.stars) {
+            case 1:
+                damage = 20;
+                break;
+            case 2:
+                damage = 30;
+                break;
+            case 3:
+                damage = 40;
+                break;
+            default:
+                break;
+        }
+        
+        target.handleDamage(damage, board, ATTACK_TYPE.TRUE, pokemon);
+    }
+}
+
+class PoisonStingStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+        let damage = 0;
+
+        switch (pokemon.stars) {
+            case 1:
+                damage = 30;
+                break;
+            case 2:
+                damage = 40;
+                break;
+            case 3:
+                damage = 50;
+                break;
+            default:
+                break;
+        }
+        if(target.effects.includes(EFFECTS.POISON_GAS) || target.effects.includes(EFFECTS.TOXIC)){
+            damage = damage * 2;
+        }
+        
+        target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    }
+}
+
+class LeechLifeStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+        let damage = 0;
+
+        switch (pokemon.stars) {
+            case 1:
+                damage = 10;
+                break;
+            case 2:
+                damage = 20;
+                break;
+            case 3:
+                damage = 30;
+                break;
+            default:
+                break;
+        }
+
+        let cells = board.getAdjacentCells(target.positionX, target.positionY);
+
+        cells.forEach((cell) => {
+            if(cell.value && pokemon.team != cell.value.team){
+                cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+                pokemon.life += damage;
+            }
+        });
+    }
+}
+
+class HappyHourStrategy extends AttackStrategy{
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+        let buff = 0;
+        switch (pokemon.stars) {
+            case 1:
+                buff = 1;
+                break;
+            case 2:
+                buff = 2;
+                break;
+            case 3:
+                buff = 3;
+                break;
+            default:
+                break;
+        }
+        board.forEach((x, y, ally) => {
+            if(ally && pokemon.team == ally.team){
+                ally.atk += 1;
             }
         });
     }
@@ -805,7 +927,11 @@ class MetronomeStrategy extends AttackStrategy{
             TormentStrategy,
             StompStrategy,
             DarkPulseStrategy,
-            NightSlashStrategy
+            NightSlashStrategy,
+            BugBuzzStrategy,
+            PoisonStingStrategy,
+            LeechLifeStrategy,
+            HappyHourStrategy
         ];
         let strategy = new skills[Math.floor(Math.random() * skills.length)]();
         strategy.process(pokemon, state, board, target);
@@ -843,5 +969,9 @@ module.exports = {
     TormentStrategy,
     StompStrategy,
     DarkPulseStrategy,
-    NightSlashStrategy
+    NightSlashStrategy,
+    BugBuzzStrategy,
+    PoisonStingStrategy,
+    LeechLifeStrategy,
+    HappyHourStrategy
 }

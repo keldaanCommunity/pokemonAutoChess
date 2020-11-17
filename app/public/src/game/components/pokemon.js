@@ -405,6 +405,50 @@ export default class Pokemon extends Button {
           });
           break;
 
+        case SPECIAL_SKILL.BUG_BUZZ:
+          coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BUG_BUZZ}/000`);
+          specialProjectile.setDepth(7);
+          specialProjectile.setScale(2,2);
+          specialProjectile.anims.play(SPECIAL_SKILL.BUG_BUZZ);
+          specialProjectile.once('animationcomplete', () => {
+            specialProjectile.destroy();
+          });
+          break;
+
+        case SPECIAL_SKILL.POISON_STING:
+          coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.POISON_STING}/000`);
+          specialProjectile.setDepth(7);
+          specialProjectile.setScale(2,2);
+          specialProjectile.anims.play(SPECIAL_SKILL.POISON_STING);
+          specialProjectile.once('animationcomplete', () => {
+            specialProjectile.destroy();
+          });
+          break;
+
+        case SPECIAL_SKILL.LEECH_LIFE:
+          coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.LEECH_LIFE}/000`);
+          specialProjectile.setDepth(7);
+          specialProjectile.setScale(2,2);
+          specialProjectile.anims.play(SPECIAL_SKILL.LEECH_LIFE);
+          specialProjectile.once('animationcomplete', () => {
+            specialProjectile.destroy();
+          });
+          break;      
+
+        case SPECIAL_SKILL.HAPPY_HOUR:
+          coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HAPPY_HOUR}/000`);
+          specialProjectile.setDepth(7);
+          specialProjectile.setScale(2,2);
+          specialProjectile.anims.play(SPECIAL_SKILL.HAPPY_HOUR);
+          specialProjectile.once('animationcomplete', () => {
+            specialProjectile.destroy();
+          });
+          break;    
+
         default:
           break;
       }
