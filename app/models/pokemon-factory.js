@@ -1,5 +1,7 @@
 const Pokemon = require('./pokemon');
 const schema = require('@colyseus/schema');
+const {SPECIAL_SKILL} = require('./enum');
+const Strategy = require('../core/attack-strategy');
 
 class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level) {
@@ -147,6 +149,100 @@ class PokemonFactory {
         break;
     }
     return pokemons;
+  }
+
+  static createStrategyFromName(name){
+    switch (name) {
+      case SPECIAL_SKILL.FIRE_BLAST:
+        return new Strategy.FireBlastStrategy(); 
+      
+      case SPECIAL_SKILL.WHEEL_OF_FIRE:
+        return new Strategy.WheelOfFireStrategy();  
+
+      case SPECIAL_SKILL.SEISMIC_TOSS:
+        return new Strategy.SeismicTossStrategy();
+
+      case SPECIAL_SKILL.GUILLOTINE:
+        return new Strategy.GuillotineStrategy();
+    
+      case SPECIAL_SKILL.ROCK_SLIDE:
+        return new Strategy.RockSlideStrategy();
+
+      case SPECIAL_SKILL.HEAT_WAVE:
+        return new Strategy.HeatWaveStrategy();
+
+      case SPECIAL_SKILL.THUNDER:
+        return new Strategy.ThunderStrategy();
+
+      case SPECIAL_SKILL.HYDRO_PUMP:
+        return new Strategy.HydroPumpStrategy();
+
+      case SPECIAL_SKILL.DRACO_METEOR:
+        return new Strategy.DracoMeteorStrategy();
+
+      case SPECIAL_SKILL.BLAZE_KICK:
+        return new Strategy.BlazeKickStrategy();
+      
+      case SPECIAL_SKILL.WISH:
+        return new Strategy.WishStrategy();
+
+      case SPECIAL_SKILL.CALM_MIND:
+        return new Strategy.CalmMindStrategy();
+
+      case SPECIAL_SKILL.IRON_DEFENSE:
+        return new Strategy.IronDefenseStrategy();
+      
+      case SPECIAL_SKILL.METRONOME:
+        return new Strategy.MetronomeStrategy();
+
+      case SPECIAL_SKILL.SOAK:
+        return new Strategy.SoakStrategy();
+
+      case SPECIAL_SKILL.IRON_TAIL:
+        return new Strategy.IronTailStrategy();
+
+      case SPECIAL_SKILL.BLAST_BURN:
+        return new Strategy.BlastBurnStrategy();
+
+      case SPECIAL_SKILL.CHARGE:
+        return new Strategy.ChargeStrategy();
+      
+      case SPECIAL_SKILL.DISCHARGE:
+        return new Strategy.DischargeStrategy();
+
+      case SPECIAL_SKILL.BITE:
+        return new Strategy.BiteStrategy();
+
+      case SPECIAL_SKILL.DRAGON_TAIL:
+        return new Strategy.DragonTailStrategy();
+      
+      case SPECIAL_SKILL.DRAGON_BREATH:
+        return new Strategy.DragonBreathStrategy();
+      
+      case SPECIAL_SKILL.ICICLE_CRASH:
+        return new Strategy.IcicleCrashStrategy();
+
+      case SPECIAL_SKILL.ROOT:
+        return new Strategy.RootStrategy();
+      
+      case SPECIAL_SKILL.TORMENT:
+        return new Strategy.TormentStrategy();
+      
+      case SPECIAL_SKILL.STOMP:
+        return new Strategy.StompStrategy();
+
+      case SPECIAL_SKILL.DARK_PULSE:
+        return new Strategy.DarkPulseStrategy();
+
+      case SPECIAL_SKILL.NIGHT_SLASH:
+        return new Strategy.NightSlashStrategy();
+
+      case SPECIAL_SKILL.DEFAULT:
+        return new Strategy.AttackStrategy();
+
+      default:
+        return new Strategy.AttackStrategy();
+    }
   }
 
   static getPokemonFamily(name) {

@@ -6,7 +6,8 @@ class PokemonState {
 
   }
 
-  handleDamage(pokemon, damage, board, attackType) {
+  handleDamage(pokemon, damage, board, attackType, attacker) {
+
     let death = false;
     let reducedDamage = damage;
     if (attackType == ATTACK_TYPE.PHYSICAL) {
@@ -17,6 +18,10 @@ class PokemonState {
     }
     else if(attackType == ATTACK_TYPE.TRUE){
       reducedDamage = damage;
+    }
+
+    if(attacker && attacker.team == 0){
+      attacker.damageDone += reducedDamage;
     }
 
     pokemon.life -= reducedDamage;
@@ -40,6 +45,20 @@ class PokemonState {
     if (pokemon.manaCooldown <= 0) {
       pokemon.mana = Math.min(pokemon.mana + 10, pokemon.maxMana);
       pokemon.manaCooldown = 1000;
+      if(pokemon.mana >= pokemon.maxMana){
+
+        if(pokemon.targetX == -1 || pokemon.targetY == -1){
+          const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
+          if (targetCoordinate[0] !== undefined && targetCoordinate[1] !== undefined) {
+              pokemon.targetX = targetCoordinate[0];
+              pokemon.targetY = targetCoordinate[1];
+          }
+        }
+        let target = board.getValue(pokemon.targetX, pokemon.targetY);
+        if(target){
+          pokemon.strategy.process(pokemon, this, board, target);
+        }
+      }
     }
     else{
       pokemon.manaCooldown = Math.max(0, pokemon.manaCooldown - dt);

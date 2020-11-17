@@ -6,15 +6,17 @@ const AttackingState = require('./attacking-state');
 const uniqid = require('uniqid');
 const Items = require('../models/items');
 const ArraySchema = schema.ArraySchema;
+const PokemonFactory = require('../models/pokemon-factory');
 
 class PokemonEntity extends schema.Schema {
-  constructor(name, index, positionX, positionY, hp, maxMana, atk, def, speDef, attackType, range, team, attackSprite, rarity, sheet, types, items, stars, simulation) {
+  constructor(name, index, positionX, positionY, hp, maxMana, atk, def, speDef, attackType, range, team, attackSprite, rarity, sheet, types, items, stars, simulation, skill) {
     super();
 
     this.state = new MovingState();
     this.effects = new ArraySchema();
     this.items = new Items(items);
     this.simulation = simulation;
+    this.strategy = PokemonFactory.createStrategyFromName(skill);
     this.assign(
       {
         id: uniqid(),
@@ -47,7 +49,8 @@ class PokemonEntity extends schema.Schema {
         attackSprite: attackSprite,
         types: [],
         damageDone: 0,
-        stars: stars
+        stars: stars,
+        skill: skill
       }
     )
 
@@ -59,9 +62,9 @@ class PokemonEntity extends schema.Schema {
   update(dt, board, climate) {
     this.state.update(this, dt, board, climate);
   }
-
-  handleDamage(damage, board, attackType) {
-    return this.state.handleDamage(this, damage, board, attackType);
+  
+  handleDamage(damage, board, attackType, attacker) {
+    return this.state.handleDamage(this, damage, board, attackType, attacker);
   }
 
   changeState(state) {
@@ -105,7 +108,8 @@ schema.defineTypes(PokemonEntity, {
   name: 'string',
   effects: ['string'],
   items:Items,
-  stars:'uint8'
+  stars:'uint8',
+  skill:'string'
 });
 
 module.exports = PokemonEntity;

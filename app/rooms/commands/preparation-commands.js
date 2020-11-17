@@ -50,7 +50,7 @@ class OnToggleReadyCommand extends Command {
 }
 
 class OnAddBotCommand extends Command {
-  execute(client) {
+  execute() {
     if(this.state.users.size < 8){
       let id = uniqid();
       let botList = Object.keys(BOT_AVATAR);
@@ -82,7 +82,7 @@ class OnAddBotCommand extends Command {
 }
 
 class OnRemoveBotCommand extends Command {
-  execute(client) {
+  execute() {
     let botFound = false;
     this.state.users.forEach((user, key) => {
       if(user.isBot && !botFound){

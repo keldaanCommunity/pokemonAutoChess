@@ -43,6 +43,7 @@ export default class BattleManager {
   }
 
   changePokemonItems(playerId, change, pokemon){
+    
     if (this.player.id == playerId) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {
@@ -71,6 +72,7 @@ export default class BattleManager {
   }
 
   changePokemon(playerId, change, pokemon) {
+
     if (this.player.id == playerId) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {
@@ -106,6 +108,9 @@ export default class BattleManager {
             children[i].mana = pokemon.mana;
             children[i].getFirst('objType', 'manabar').setLife(children[i].mana);
             const detail = children[i].getFirst('objType', 'detail');
+            if(change.previousValue > change.value){
+              children[i].specialAttackAnimation();
+            }
             if (detail) {
               detail.mana.setText(pokemon.mana);
             }
