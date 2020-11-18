@@ -891,6 +891,159 @@ class HappyHourStrategy extends AttackStrategy{
     }
 }
 
+class TeleportStrategy extends AttackStrategy{
+   
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+
+        let potentialCells = [[0,0],[0,5],[7,5],[7,0]];
+        this.shuffleArray(potentialCells);
+
+        for (let i = 0; i < potentialCells.length; i++) {
+            let entity = board.getValue(potentialCells[i][0],potentialCells[i][1]);
+            if(entity === undefined){
+                board.moveValue(pokemon.positionX, pokemon.positionY, potentialCells[i][0], potentialCells[i][1]);
+                pokemon.positionX = potentialCells[i][0];
+                pokemon.positionY = potentialCells[i][1];
+                break;
+            }
+        }
+    }
+
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+}
+
+class NastyPlotStrategy extends AttackStrategy{
+   
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+        let buff = 0;
+        switch (pokemon.stars) {
+            case 1:
+                buff = 5;
+                break;
+            case 2:
+                buff = 10;
+                break;
+            case 3:
+                buff = 20;
+                break;
+            default:
+                break;
+        }
+        pokemon.atk += buff;
+    }
+
+}
+
+class ThiefStrategy extends AttackStrategy{
+   
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+        let damage = 0;
+        switch (pokemon.stars) {
+            case 1:
+                damage = 5;
+                break;
+            case 2:
+                damage = 10;
+                break;
+            case 3:
+                damage = 20;
+                break;
+            default:
+                break;
+        }
+        let items = target.items.getAllItems();
+        items.forEach( item => {
+            pokemon.items.add(item);
+            target.items.remove(item);
+        });
+        target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    }
+
+}
+
+class StunSporeStrategy extends AttackStrategy{
+   
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+        let debuff = 0;
+        switch (pokemon.stars) {
+            case 1:
+                debuff = 1.5;
+                break;
+            case 2:
+                debuff = 2;
+                break;
+            case 3:
+                debuff = 3;
+                break;
+            default:
+                break;
+        }
+
+        target.atkSpeed = pokemon.atkSpeed * debuff;
+    }
+}
+
+class MeteorMashStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+        let damage = 0;
+
+        switch (pokemon.stars) {
+            case 1:
+                damage = 30;
+                break;
+            case 2:
+                damage = 50;
+                break;
+            case 3:
+                damage = 70;
+                break;
+            default:
+                break;
+        }
+
+        pokemon.atk += 1;
+        let cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+
+        cells.forEach((cell) => {
+            if(cell.value && pokemon.team != cell.value.team){
+                cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+            }
+        });
+    }
+}
+
 class MetronomeStrategy extends AttackStrategy{
 
     constructor(){
@@ -931,7 +1084,12 @@ class MetronomeStrategy extends AttackStrategy{
             BugBuzzStrategy,
             PoisonStingStrategy,
             LeechLifeStrategy,
-            HappyHourStrategy
+            HappyHourStrategy,
+            TeleportStrategy,
+            NastyPlotStrategy,
+            ThiefStrategy,
+            StunSporeStrategy,
+            MeteorMashStrategy
         ];
         let strategy = new skills[Math.floor(Math.random() * skills.length)]();
         strategy.process(pokemon, state, board, target);
@@ -973,5 +1131,10 @@ module.exports = {
     BugBuzzStrategy,
     PoisonStingStrategy,
     LeechLifeStrategy,
-    HappyHourStrategy
+    HappyHourStrategy,
+    TeleportStrategy,
+    NastyPlotStrategy,
+    ThiefStrategy,
+    StunSporeStrategy,
+    MeteorMashStrategy
 }

@@ -249,6 +249,21 @@ class PokemonFactory {
       case SPECIAL_SKILL.HAPPY_HOUR:
         return new Strategy.HappyHourStrategy();
       
+      case SPECIAL_SKILL.TELEPORT:
+        return new Strategy.TeleportStrategy();
+
+      case SPECIAL_SKILL.NASTY_PLOT:
+        return new Strategy.NastyPlotStrategy();
+
+      case SPECIAL_SKILL.THIEF:
+        return new Strategy.ThiefStrategy();
+
+      case SPECIAL_SKILL.STUN_SPORE:
+        return new Strategy.StunSporeStrategy();
+
+      case SPECIAL_SKILL.METEOR_MASH:
+        return new Strategy.MeteorMashStrategy();
+
       case SPECIAL_SKILL.DEFAULT:
         return new Strategy.AttackStrategy();
 

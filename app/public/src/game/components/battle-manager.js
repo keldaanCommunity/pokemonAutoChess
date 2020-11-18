@@ -1,3 +1,4 @@
+import { SPECIAL_SKILL } from '../../../../models/enum';
 import Pokemon from './pokemon';
 
 export default class BattleManager {
@@ -54,17 +55,26 @@ export default class BattleManager {
               children[i].remove(item);
             }
           }
-          if(change.field == 'item1' && change.value == ''){
+          else if(change.field == 'item0' && change.value != ''){
+            children[i].setItem0(change.value);
+          }
+          else if(change.field == 'item1' && change.value == ''){
             let item = children[i].getFirst('place', 'item1');
             if(item){
               children[i].remove(item);
             }
           }
-          if(change.field == 'item2' && change.value == ''){
+          else if(change.field == 'item1' && change.value != ''){
+            children[i].setItem1(change.value);
+          }
+          else if(change.field == 'item2' && change.value == ''){
             let item = children[i].getFirst('place', 'item2');
             if(item){
               children[i].remove(item);
             }
+          }
+          else if(change.field == 'item2' && change.value != ''){
+            children[i].setItem2(change.value);
           }
         }
       }
@@ -85,7 +95,15 @@ export default class BattleManager {
               children[i].positionY = pokemon.positionY;
             }
             const coordinates = window.transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
-            children[i].moveManager.moveTo(coordinates[0], coordinates[1]);
+            if(pokemon.skill == SPECIAL_SKILL.TELEPORT){
+              children[i].x = coordinates[0];
+              children[i].y = coordinates[1];
+              children[i].specialAttackAnimation();
+            }
+            else{
+              children[i].moveManager.moveTo(coordinates[0], coordinates[1]);
+            }
+            
           } else if (change.field == 'orientation') {
             children[i].orientation = pokemon.orientation;
             window.animationManager.animatePokemon(children[i]);
