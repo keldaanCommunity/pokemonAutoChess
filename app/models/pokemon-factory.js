@@ -264,6 +264,9 @@ class PokemonFactory {
       case SPECIAL_SKILL.METEOR_MASH:
         return new Strategy.MeteorMashStrategy();
 
+      case SPECIAL_SKILL.HURRICANE:
+        return new Strategy.HurricaneStrategy();
+
       case SPECIAL_SKILL.DEFAULT:
         return new Strategy.AttackStrategy();
 

@@ -493,7 +493,6 @@ export default class Pokemon extends Button {
             });
             break;
 
-
           case SPECIAL_SKILL.METEOR_MASH:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.METEOR_MASH}/000`);
@@ -505,6 +504,16 @@ export default class Pokemon extends Button {
             });
             break;
 
+          case SPECIAL_SKILL.HURRICANE:
+            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HURRICANE}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2,2);
+            specialProjectile.anims.play(SPECIAL_SKILL.HURRICANE);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
           default:
             break;
       }

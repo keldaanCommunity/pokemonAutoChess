@@ -1,5 +1,6 @@
 import {GameObjects} from 'phaser';
 import PokemonFactory from '../../../../models/pokemon-factory';
+import {SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
 
 
 const COLOR_TYPE = Object.freeze({
@@ -18,7 +19,9 @@ export default class PokemonDetail extends GameObjects.Container {
     this.textStyle = {
       fontSize: '20px',
       fontFamily: 'Verdana',
-      color: 'white'
+      color: 'white',
+      align: 'center',
+      wordWrap: { width: 200, useAdvancedWrap: true }
     };
     this.greenTextStyle= {
       fontSize: '20px',
@@ -30,8 +33,9 @@ export default class PokemonDetail extends GameObjects.Container {
       fontFamily: 'Verdana',
       color: '#ff0000'
     };
+
     this.objType = 'detail';
-    this.add(new GameObjects.Rectangle(scene, 80, 90, 160, 140, COLOR_TYPE[this.pokemonInformation.rarity]));
+    this.add(new GameObjects.Rectangle(scene, 200, 90, 400, 140, COLOR_TYPE[this.pokemonInformation.rarity]));
     const displayName = name.charAt(0).toUpperCase() + name.slice(1);
     this.add(new GameObjects.Text(scene, 5, 20, displayName, this.textStyle));
     this.add(new GameObjects.Image(scene, 140, 40, this.pokemonInformation.sheet, `${this.pokemonInformation.index}/portrait`));
@@ -61,6 +65,7 @@ export default class PokemonDetail extends GameObjects.Container {
     this.mana = new GameObjects.Text(scene, 10, 140, this.pokemonInformation.maxMana, this.textStyle);
     this.add(this.mana);
     this.add(new GameObjects.Image(scene,60, 150, 'icons', 'mana').setScale(2,2));
+    this.add(new GameObjects.Text(scene,180,20, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill][window.langage], this.textStyle));
   }
 
 

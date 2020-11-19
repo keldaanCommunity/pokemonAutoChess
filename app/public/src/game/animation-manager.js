@@ -364,6 +364,13 @@ export default class AnimationManager {
       frameRate: 22,
       repeat: 0
     });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.HURRICANE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 51, zeroPad: 3, prefix: `${SPECIAL_SKILL.HURRICANE}/`}),
+      frameRate: 51,
+      repeat: 0
+    });
   }
 
   createAttacksAnimations() {

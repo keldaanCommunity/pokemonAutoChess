@@ -33,13 +33,13 @@ class FireBlastStrategy extends AttackStrategy{
         let damage = 0;
         switch (pokemon.stars) {
             case 1:
-                damage = 70;
+                damage = 30;
                 break;
             case 2:
-                damage = 100;
+                damage = 50;
                 break;
             case 3:
-                damage = 150;
+                damage = 100;
                 break;
             default:
                 break;
@@ -216,18 +216,18 @@ class ThunderStrategy extends AttackStrategy{
         let damage = 0;
         switch (pokemon.stars) {
             case 1:
-                damage = 40;
+                damage = 30;
                 break;
             case 2:
                 damage = 50;
                 break;
             case 3:
-                damage = 60;
+                damage = 70;
                 break;
             default:
                 break;
         }
-        target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        target.handleDamage(damage, board, ATTACK_TYPE.TRUE, pokemon);
     }
 }
 
@@ -247,7 +247,7 @@ class DracoMeteorStrategy extends AttackStrategy{
                 damage = 20;
                 break;
             case 3:
-                damage = 30;
+                damage = 40;
                 break;
             default:
                 break;
@@ -872,13 +872,13 @@ class HappyHourStrategy extends AttackStrategy{
         let buff = 0;
         switch (pokemon.stars) {
             case 1:
-                buff = 1;
+                buff = 5;
                 break;
             case 2:
-                buff = 2;
+                buff = 10;
                 break;
             case 3:
-                buff = 3;
+                buff = 15;
                 break;
             default:
                 break;
@@ -1033,7 +1033,7 @@ class MeteorMashStrategy extends AttackStrategy{
                 break;
         }
 
-        pokemon.atk += 1;
+        pokemon.atk += 5;
         let cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
 
         cells.forEach((cell) => {
@@ -1041,6 +1041,36 @@ class MeteorMashStrategy extends AttackStrategy{
                 cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
             }
         });
+    }
+}
+
+class HurricaneStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+        let damage = 0;
+        switch (pokemon.stars) {
+            case 1:
+                damage = 10;
+                break;
+            case 2:
+                damage = 20;
+                break;
+            case 3:
+                damage = 30;
+                break;
+            default:
+                break;
+        }
+        target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        let secondTarget = board.getValue(target.positionX, target.positionY + 1);
+        if(secondTarget && secondTarget != pokemon){
+            secondTarget.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        }
     }
 }
 
@@ -1089,7 +1119,8 @@ class MetronomeStrategy extends AttackStrategy{
             NastyPlotStrategy,
             ThiefStrategy,
             StunSporeStrategy,
-            MeteorMashStrategy
+            MeteorMashStrategy,
+            HurricaneStrategy
         ];
         let strategy = new skills[Math.floor(Math.random() * skills.length)]();
         strategy.process(pokemon, state, board, target);
@@ -1136,5 +1167,6 @@ module.exports = {
     NastyPlotStrategy,
     ThiefStrategy,
     StunSporeStrategy,
-    MeteorMashStrategy
+    MeteorMashStrategy,
+    HurricaneStrategy
 }

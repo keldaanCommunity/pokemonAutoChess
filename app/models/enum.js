@@ -470,7 +470,167 @@ const SPECIAL_SKILL = Object.freeze({
   NASTY_PLOT:'NASTY_PLOT',
   THIEF:'THIEF',
   STUN_SPORE:'STUN_SPORE',
-  METEOR_MASH:'METEOR_MASH'
+  METEOR_MASH:'METEOR_MASH',
+  HURRICANE:'HURRICANE'
+});
+
+const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+  DEFAULT:{
+    eng:'',
+    esp:''
+  },
+  FIRE_BLAST:{
+    eng:'Throw a fire blast for 30/50/100 special damage',
+    esp:'Lanza una ráfaga de fuego para 30/50/100 de daño especial'
+  },
+  WHEEL_OF_FIRE:{
+    eng:'Sends a fire wheel that makes a round trip doing 30/40/50 special damages.',
+    esp:'Envía una rueda de fuego que hace un viaje de ida y vuelta haciendo 30/40/50 de daño especial.'
+  },
+  SEISMIC_TOSS:{
+    eng:'Mono target attack that deals true damage function of how big is your team',
+    esp:'Ataque de objetivo mono que inflige daño real en función de lo grande que sea tu equipo.'
+  },
+  GUILLOTINE:{
+    eng:'Mono target attack that deals physical damage. Restores half mana if target killed',
+    esp:'Ataque de objetivo mono que causa daño físico. Restaura la mitad de maná si el objetivo muere'
+  },
+  ROCK_SLIDE:{
+    eng:'Mono target attack that deals physical damage. Doubles damage if target is type flying.',
+    esp:'Ataque de objetivo mono que causa daño físico. Duplica el daño si el objetivo es de tipo volador.'
+  },
+  HEAT_WAVE:{
+    eng:'Area of effect attack that deals 30/40/50 special damage in all ennemies in a line behind the target.',
+    esp:'Ataque de área de efecto que inflige 30/40/50 de daño especial a todos los enemigos en una línea detrás del objetivo.'
+  },
+  THUNDER:{
+     eng:'Mono target damage that deals 30/50/70 true damage.',
+    esp:'Daño de objetivo mono que inflige 30/50/70 de daño verdadero.'
+  },
+  HYDRO_PUMP:{
+    eng:'Area of effect attack that deals 30/40/50 special damage in all ennemies in a line behind the target.',
+    esp:'Ataque de área de efecto que inflige 30/40/50 de daño especial a todos los enemigos en una línea detrás del objetivo.'
+  },
+  DRACO_METEOR:{
+    eng:'Area of effect attack that deals 10/20/40 special damages to all ennemies',
+    esp:'Ataque de área de efecto que causa 10/20/40 de daño especial a todos los enemigos'
+  },
+  BLAZE_KICK:{
+    eng:'Mono target that deals 30/60/90 physical damage.',
+    esp:'Objetivo mono que causa 30/60/90 de daño físico'
+  },
+  WISH:{
+    eng:'Restores 50 hp to 1/2/3 ally pokemon',
+    esp:'Restaura 50 hp a 1/2/3 de pokemon aliado'
+  },
+  CALM_MIND:{
+    eng:'Buff pokemon attack by 50/100/150%',
+    esp:'Ataque de pokemón de la Buff en un 50/100/150%.'
+  },
+  IRON_DEFENSE:{
+    eng:'Buff pokemon defense / special defense by 4/6/8 points',
+    esp:'Defensa pokemon buff / defensa especial por 4/6/8 puntos'
+  },
+  METRONOME:{
+    eng:'Shoot a random capacity',
+    esp:'Disparar una capacidad aleatoria'
+  },
+  SOAK:{
+    eng:'Deals 20/30/40 special damage and restores 10 mana to friendly pokemons',
+    esp:'Hace 20/30/40 de daño especial y devuelve 10 de maná a los pokemons amistosos.'
+  },
+  IRON_TAIL:{
+    eng:'Mono target damage attack that deals 20/30/40. Buff defense by 1/3/5 points.',
+    esp:'Ataque de daño al objetivo mono que reparte 20/30/40. Pulveriza la defensa por 1/3/5 puntos.'
+  },
+  BLAST_BURN:{
+    eng:'Area of effect attack that deals 50/100/150 special damages.',
+    esp:'Ataque en el área de efecto que causa 50/100/150 daños especiales.'
+  },
+  CHARGE:{
+    eng:'Buff all electric ally pokemons attack by 10/20/30 %',
+    esp:'Pulir todos los pokemones aliados eléctricos atacan en un 10/20/30 %.'
+  },
+  DISCHARGE:{
+    eng:'Area of effect attack that deals 40/60/80 special damages.',
+    esp:'Ataque en el área de efecto que causa 40/60/80 daños especiales.'
+  },
+  BITE:{
+    eng:'50% Life steal mono target physical attack that deals 30/50/70 damage.',
+    esp:'50% Vida robar mono objetivo de ataque físico que inflige 30/50/70 de daño.'
+  },
+  DRAGON_TAIL:{
+    eng:'Mono target physical attack that deals 30/40/50 damage and buff defenses by 1/2/3 points',
+    esp:'El ataque físico de un monoobjetivo que inflige 30/40/50 de daño y mejora las defensas en 1/2/3 puntos'
+  },
+  DRAGON_BREATH:{
+    eng:'Area of effect attack that deals 30/40/50 special damage in a line behind the target',
+    esp:'Ataque de área de efecto que inflige 30/40/50 de daño especial en una línea detrás del objetivo'
+  },
+  ICICLE_CRASH:{
+    eng:'Area of effect attack that deals 30/40/50 physical damage around the target',
+    esp:'Ataque de área de efecto que causa 30/40/50 de daño físico alrededor del objetivo'
+  },
+  ROOT:{
+    eng:'Heal all nearby ally pokemons by 20/30/40 hp.',
+    esp:'Curar a todos los pokemons aliados cercanos con 20/30/40 hp.'
+  },
+  TORMENT:{
+    eng:'Increase attack speed by 20/30/40 %',
+    esp:'Aumenta la velocidad de ataque en un 20/30/40 %.'
+  },
+  STOMP:{
+    eng:'Mono target physical damage (2*atk*stars)',
+    esp:'Daño físico del objetivo mono (2*atk*stars)'
+  },
+  DARK_PULSE:{
+    eng:'Life drain target attack that deals 30/50/70 special damage',
+    esp:'Ataque al objetivo de drenaje de vida que causa 30/50/70 de daño especial'
+  },
+  NIGHT_SLASH:{
+    eng:'Mono target special attack that does 40/60/80. Decreases all ennemies defense by 1 point.',
+    esp:'Ataque especial de objetivo mono que hace 40/60/80. Disminuye la defensa de todos los enemigos en 1 punto.'
+  },
+  BUG_BUZZ:{
+    eng:'Mono target true damage attack that does 20/30/40.',
+    esp:'Ataque de daño verdadero de un mono objetivo que hace 20/30/40.'
+  },
+  POISON_STING:{
+    eng:'Physical mono target damage that deals 30/40/50. Doubles damage if target is poisoned.',
+    esp:'Daño físico de un solo objetivo que reparte 30/40/50. Duplica el daño si el objetivo está envenenado.'
+  },
+  LEECH_LIFE:{
+    eng:'Area of effect life steal special damage attack 10/20/30 around the target',
+    esp:'Área de efecto robo de vida daño especial ataque 10/20/30 alrededor del objetivo'
+  },
+  HAPPY_HOUR:{
+    eng:'Buff all ally attacks by 5/10/15 points.',
+    esp:'Pulir todos los ataques de los aliados por 5/10/15 puntos.'
+  },
+  TELEPORT:{
+    eng:'Teleport the pokemon on one edge of the map',
+    esp:'Teletransportar el pokemon en un borde del mapa'
+  },
+  NASTY_PLOT:{
+    eng:'Buff pokemon attack by 5/10/20 points',
+    esp:'Buff pokemon ataque por 5/10/20 puntos'
+  },
+  THIEF:{
+    eng:'Steal ennemy target item and deals 5/10/20 physical damage',
+    esp:'Roba el objeto del enemigo e inflige 5/10/20 de daño físico'
+  },
+  STUN_SPORE:{
+    eng:'Decrease target attack speed by 50/100/200%',
+    esp:'Disminuir la velocidad de ataque del objetivo en un 50/100/200%'
+  },
+  METEOR_MASH:{
+    eng:'Area of effect around the target that deals 30/50/70 damages. Buff pokemon attack by 5 points.',
+    esp:'Área de efecto alrededor del objetivo que produce 30/50/70 daños. Buff pokemon ataque por 5 puntos.'
+  },
+  HURRICANE:{
+    eng:'Area of effect attack that deals 10/20/30 damages in a line behind the target',
+    esp:'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo'
+  }
 });
 
 const TYPE_ITEM = Object.freeze({
@@ -759,4 +919,4 @@ const XP_TABLE = [1000,1500,2000,2500,2500,2500,2500,2500,2500,2500,3000,3000,30
 
 const XP_PLACE = [700,500,400,300,200,150,100,100];
 
-module.exports = {SPECIAL_SKILL, XP_PLACE, XP_TABLE, MAP_TYPE_NAME, LAST_BATTLE_RESULT_TRADUCTION, PHASE_TRADUCTION, TYPE_TRADUCTION, WORDS, MAP_TYPE, ITEM_TYPE, TYPE_ITEM, POKEMON_BOT, BOT_AVATAR, TYPE, RARITY,RARITY_HP_COST, COST, EXP_TABLE, STATE, STATE_TYPE, ORIENTATION, EFFECTS, CLIMATE, ATTACK_TYPE, ITEMS, ITEM_NAME, ITEM_DESCRIPTION};
+module.exports = {SPECIAL_SKILL_DESCRIPTION, SPECIAL_SKILL, XP_PLACE, XP_TABLE, MAP_TYPE_NAME, LAST_BATTLE_RESULT_TRADUCTION, PHASE_TRADUCTION, TYPE_TRADUCTION, WORDS, MAP_TYPE, ITEM_TYPE, TYPE_ITEM, POKEMON_BOT, BOT_AVATAR, TYPE, RARITY,RARITY_HP_COST, COST, EXP_TABLE, STATE, STATE_TYPE, ORIENTATION, EFFECTS, CLIMATE, ATTACK_TYPE, ITEMS, ITEM_NAME, ITEM_DESCRIPTION};
