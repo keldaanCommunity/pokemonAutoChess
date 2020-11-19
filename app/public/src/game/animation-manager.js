@@ -371,6 +371,13 @@ export default class AnimationManager {
       frameRate: 51,
       repeat: 0
     });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.IRON_TAIL,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 6, zeroPad: 3, prefix: `${SPECIAL_SKILL.IRON_TAIL}/`}),
+      frameRate: 6,
+      repeat: 0
+    });
   }
 
   createAttacksAnimations() {
