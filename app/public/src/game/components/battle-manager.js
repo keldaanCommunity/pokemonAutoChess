@@ -1,3 +1,4 @@
+import { GameObjects } from 'phaser';
 import { SPECIAL_SKILL } from '../../../../models/enum';
 import Pokemon from './pokemon';
 
@@ -116,6 +117,9 @@ export default class BattleManager {
               detail.atkSpeed.setText(pokemon.atkSpeed);
             }
           } else if (change.field =='life') {
+            if(change.value && change.previousValue){
+              this.displayDamage(children[i].x, children[i].y, change.value - change.previousValue);
+            }
             children[i].life = pokemon.life;
             children[i].getFirst('objType', 'lifebar').setLife(children[i].life);
             const detail = children[i].getFirst('objType', 'detail');
@@ -183,6 +187,35 @@ export default class BattleManager {
         }
       }
     }
+  }
+
+  displayDamage(x,y,damage){
+    let text = this.scene.add.existing(new GameObjects.Text(this.scene,x-20,y -20,damage,{
+      fontSize: '40px',
+      stroke: '#000',
+      fontFamily: 'Verdana',
+      color: 'white',
+      align: 'center'
+    }));
+    text.setDepth(9);
+
+    this.scene.add.tween({
+      targets: [text],
+      ease: 'Linear',
+      duration: 1000,
+      delay: 0,
+      alpha: {
+        getStart: () => 1,
+        getEnd: () => 0
+      },
+      y:{
+        getStart: () => y - 20,
+        getEnd: () => y - 70
+      },
+      onComplete: () => {
+        text.destroy(true);
+      }
+    });
   }
 
   setPlayer(player) {

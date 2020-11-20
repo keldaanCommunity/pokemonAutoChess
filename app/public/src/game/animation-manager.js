@@ -116,7 +116,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: SPECIAL_SKILL.FIRE_BLAST,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 16, zeroPad: 3, prefix: `${SPECIAL_SKILL.FIRE_BLAST}/`}),
-      frameRate: 12,
+      frameRate: 6,
       repeat: 0
     });
 
@@ -130,105 +130,105 @@ export default class AnimationManager {
     this.game.anims.create({
       key: SPECIAL_SKILL.SEISMIC_TOSS,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${SPECIAL_SKILL.SEISMIC_TOSS}/`}),
-      frameRate: 20,
+      frameRate: 10,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.GUILLOTINE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${SPECIAL_SKILL.GUILLOTINE}/`}),
-      frameRate: 20,
+      frameRate: 10,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.ROCK_SLIDE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 79, zeroPad: 3, prefix: `${SPECIAL_SKILL.ROCK_SLIDE}/`}),
-      frameRate: 60,
+      frameRate: 30,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.HEAT_WAVE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 49, zeroPad: 3, prefix: `${SPECIAL_SKILL.HEAT_WAVE}/`}),
-      frameRate: 60,
+      frameRate: 30,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.THUNDER,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 12, zeroPad: 3, prefix: `${SPECIAL_SKILL.THUNDER}/`}),
-      frameRate: 12,
+      frameRate: 6,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.HYDRO_PUMP,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${SPECIAL_SKILL.HYDRO_PUMP}/`}),
-      frameRate: 19,
+      frameRate: 10,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.DRACO_METEOR,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 34, zeroPad: 3, prefix: `${SPECIAL_SKILL.DRACO_METEOR}/`}),
-      frameRate: 20,
+      frameRate: 10,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.BLAZE_KICK,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 15, zeroPad: 3, prefix: `${SPECIAL_SKILL.BLAZE_KICK}/`}),
-      frameRate: 30,
+      frameRate: 15,
       repeat: 2
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.WISH,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 14, zeroPad: 3, prefix: `${SPECIAL_SKILL.WISH}/`}),
-      frameRate: 15,
+      frameRate: 8,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.CALM_MIND,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 45, zeroPad: 3, prefix: `${SPECIAL_SKILL.CALM_MIND}/`}),
-      frameRate: 40,
+      frameRate: 20,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.IRON_DEFENSE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 17, zeroPad: 3, prefix: `${SPECIAL_SKILL.IRON_DEFENSE}/`}),
-      frameRate: 13,
+      frameRate: 6,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.METRONOME,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 36, zeroPad: 3, prefix: `${SPECIAL_SKILL.METRONOME}/`}),
-      frameRate: 30,
+      frameRate: 15,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.SOAK,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 45, zeroPad: 3, prefix: `${SPECIAL_SKILL.SOAK}/`}),
-      frameRate: 30,
+      frameRate: 15,
       repeat: 0
     });
     
     this.game.anims.create({
       key: SPECIAL_SKILL.BLAST_BURN,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 16, zeroPad: 3, prefix: `${SPECIAL_SKILL.BLAST_BURN}/`}),
-      frameRate: 16,
+      frameRate: 8,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.CHARGE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 7, zeroPad: 3, prefix: `${SPECIAL_SKILL.CHARGE}/`}),
-      frameRate: 7,
+      frameRate: 3,
       repeat: 0
     });
 
@@ -242,140 +242,140 @@ export default class AnimationManager {
     this.game.anims.create({
       key: SPECIAL_SKILL.BITE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 11, zeroPad: 3, prefix: `${SPECIAL_SKILL.BITE}/`}),
-      frameRate: 12,
+      frameRate: 6,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.DRAGON_TAIL,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 25, zeroPad: 3, prefix: `${SPECIAL_SKILL.DRAGON_TAIL}/`}),
-      frameRate: 25,
+      frameRate: 12,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.DRAGON_BREATH,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 9, zeroPad: 3, prefix: `${SPECIAL_SKILL.DRAGON_BREATH}/`}),
-      frameRate: 9,
+      frameRate: 5,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.ICICLE_CRASH,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 26, zeroPad: 3, prefix: `${SPECIAL_SKILL.ICICLE_CRASH}/`}),
-      frameRate: 9,
+      frameRate: 5,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.ROOT,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 48, zeroPad: 3, prefix: `${SPECIAL_SKILL.ROOT}/`}),
-      frameRate: 30,
+      frameRate: 15,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.TORMENT,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${SPECIAL_SKILL.TORMENT}/`}),
-      frameRate: 19,
+      frameRate: 10,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.STOMP,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 12, zeroPad: 3, prefix: `${SPECIAL_SKILL.STOMP}/`}),
-      frameRate: 12,
+      frameRate: 6,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.DARK_PULSE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 31, zeroPad: 3, prefix: `${SPECIAL_SKILL.DARK_PULSE}/`}),
-      frameRate: 20,
+      frameRate: 10,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.NIGHT_SLASH,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 6, zeroPad: 3, prefix: `${SPECIAL_SKILL.NIGHT_SLASH}/`}),
-      frameRate: 6,
+      frameRate: 3,
       repeat: 0
     });
     
     this.game.anims.create({
       key: SPECIAL_SKILL.BUG_BUZZ,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 28, zeroPad: 3, prefix: `${SPECIAL_SKILL.BUG_BUZZ}/`}),
-      frameRate: 20,
+      frameRate: 10,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.POISON_STING,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 12, zeroPad: 3, prefix: `${SPECIAL_SKILL.POISON_STING}/`}),
-      frameRate: 12,
+      frameRate: 6,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.LEECH_LIFE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${SPECIAL_SKILL.LEECH_LIFE}/`}),
-      frameRate: 15,
+      frameRate: 8,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.HAPPY_HOUR,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 20, zeroPad: 3, prefix: `${SPECIAL_SKILL.HAPPY_HOUR}/`}),
-      frameRate: 15,
+      frameRate: 8,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.TELEPORT,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${SPECIAL_SKILL.TELEPORT}/`}),
-      frameRate: 10,
+      frameRate: 5,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.NASTY_PLOT,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${SPECIAL_SKILL.NASTY_PLOT}/`}),
-      frameRate: 20,
+      frameRate: 10,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.THIEF,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 7, zeroPad: 3, prefix: `${SPECIAL_SKILL.THIEF}/`}),
-      frameRate: 7,
+      frameRate: 3,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.STUN_SPORE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 21, zeroPad: 3, prefix: `${SPECIAL_SKILL.STUN_SPORE}/`}),
-      frameRate: 15,
+      frameRate: 7,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.METEOR_MASH,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 45, zeroPad: 3, prefix: `${SPECIAL_SKILL.METEOR_MASH}/`}),
-      frameRate: 22,
+      frameRate: 11,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.HURRICANE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 51, zeroPad: 3, prefix: `${SPECIAL_SKILL.HURRICANE}/`}),
-      frameRate: 51,
+      frameRate: 25,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.IRON_TAIL,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 6, zeroPad: 3, prefix: `${SPECIAL_SKILL.IRON_TAIL}/`}),
-      frameRate: 6,
+      frameRate: 3,
       repeat: 0
     });
   }

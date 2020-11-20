@@ -135,7 +135,7 @@ class WheelOfFireStrategy extends AttackStrategy{
         }
         let cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
         cells.forEach(cell=>{
-            if(cell.value){
+            if(cell.value && cell.value != pokemon){
                 cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
             }
         });
@@ -286,7 +286,7 @@ class WishStrategy extends AttackStrategy{
         
         board.forEach((x, y, ally) => {
             if(ally && pokemon.team == ally.team && count > 0){
-                ally.life = ally.life + heal;
+                ally.life = Math.min(ally.hp, ally.life + heal);
                 count -= 1;
             }
         });
@@ -885,7 +885,7 @@ class HappyHourStrategy extends AttackStrategy{
         }
         board.forEach((x, y, ally) => {
             if(ally && pokemon.team == ally.team){
-                ally.atk += 1;
+                ally.atk += buff;
             }
         });
     }
