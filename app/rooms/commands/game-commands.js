@@ -637,7 +637,7 @@ class OnUpdatePhaseCommand extends Command {
 
   initializePickingPhase() {
     this.state.phase = STATE.PICK;
-    this.state.time = 30000;
+    this.state.time = 40000;
 
     this.state.players.forEach((player, key) => {
       player.simulation.stop();
@@ -687,7 +687,7 @@ class OnUpdatePhaseCommand extends Command {
 
   initializeFightingPhase() {
     this.state.phase = STATE.FIGHT;
-    this.state.time = 30000;
+    this.state.time = 40000;
     this.state.stageLevel += 1;
     this.state.botManager.updateBots();
 

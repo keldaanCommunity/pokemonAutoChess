@@ -9,7 +9,7 @@ const ArraySchema = schema.ArraySchema;
 const PokemonFactory = require('../models/pokemon-factory');
 
 class PokemonEntity extends schema.Schema {
-  constructor(name, index, positionX, positionY, hp, maxMana, atk, def, speDef, attackType, range, team, attackSprite, rarity, sheet, types, items, stars, simulation, skill) {
+  constructor(name, index, positionX, positionY, hp, maxMana, atk, atkSpeed, def, speDef, attackType, range, team, attackSprite, rarity, sheet, types, items, stars, simulation, skill) {
     super();
 
     this.state = new MovingState();
@@ -41,7 +41,7 @@ class PokemonEntity extends schema.Schema {
         maxMana:maxMana,
         mana:0,
         life: hp,
-        atkSpeed: 1000,
+        atkSpeed: atkSpeed,
         range: range,
         cooldown: 1000,
         manaCooldown:1000,
@@ -89,14 +89,14 @@ schema.defineTypes(PokemonEntity, {
   index: 'uint16',
   id: 'string',
   orientation: 'string',
-  hp: 'uint8',
+  hp: 'uint16',
   mana: 'uint8',
   maxMana: 'uint8',
-  atk: 'uint8',
-  def: 'uint8',
-  speDef: 'uint8',
+  atk: 'uint16',
+  def: 'uint16',
+  speDef: 'uint16',
   attackType: 'string',
-  life: 'uint8',
+  life: 'uint16',
   team: 'uint8',
   range: 'uint8',
   atkSpeed: 'uint16',

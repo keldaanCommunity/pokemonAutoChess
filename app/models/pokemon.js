@@ -29,7 +29,7 @@ class Pokemon extends Schema {
       speDef: speDef,
       range: range,
       attackSprite: attackSprite,
-      atkSpeed: 1000,
+      atkSpeed: 1500,
       attackType: attackType,
       stars: stars,
       maxMana: maxMana,

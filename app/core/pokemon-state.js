@@ -7,7 +7,13 @@ class PokemonState {
   }
 
   handleDamage(pokemon, damage, board, attackType, attacker) {
-
+    if(pokemon){
+      pokemon.mana = Math.min(pokemon.mana + 5, pokemon.maxMana);
+    }
+    if(attacker){
+      attacker.mana = Math.min(attacker.mana + 5, attacker.maxMana);
+    }
+    
     let death = false;
     let reducedDamage = damage;
     if (attackType == ATTACK_TYPE.PHYSICAL) {
@@ -24,7 +30,7 @@ class PokemonState {
       attacker.damageDone += reducedDamage;
     }
 
-    pokemon.life -= reducedDamage;
+    pokemon.life = Math.max(0, pokemon.life - reducedDamage);
     //console.log(`${pokemon.id} took ${damage} and has now ${pokemon.life} life`);
     if (pokemon.effects.includes(EFFECTS.RAGE)) {
       pokemon.attack += Math.ceil(pokemon.baseAtk * 0.05);
