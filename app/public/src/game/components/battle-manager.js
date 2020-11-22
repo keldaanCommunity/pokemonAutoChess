@@ -190,12 +190,23 @@ export default class BattleManager {
   }
 
   displayDamage(x,y,damage){
-    let text = this.scene.add.existing(new GameObjects.Text(this.scene,x-20,y -20,damage,{
+    let color;
+    let damageText;
+    if(damage >= 0){
+      color='green';
+      damageText = `+${damage}`;
+    }
+    else{
+      color='red';
+      damageText = damage;
+    }
+    let text = this.scene.add.existing(new GameObjects.Text(this.scene,x-25,y -30,damageText,{
       fontSize: '40px',
-      stroke: '#000',
+      stroke: '#fff',
       fontFamily: 'Verdana',
-      color: 'white',
-      align: 'center'
+      color: color,
+      align: 'center',
+      strokeThickness: 2
     }));
     text.setDepth(9);
 
@@ -209,8 +220,8 @@ export default class BattleManager {
         getEnd: () => 0
       },
       y:{
-        getStart: () => y - 20,
-        getEnd: () => y - 70
+        getStart: () => y - 30,
+        getEnd: () => y - 90
       },
       onComplete: () => {
         text.destroy(true);

@@ -472,7 +472,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.THIEF:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.THIEF}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2,2);
