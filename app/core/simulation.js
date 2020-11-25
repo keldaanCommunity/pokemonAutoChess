@@ -399,7 +399,7 @@ class Simulation extends Schema {
         case EFFECTS.ANGER_POINT:
           if (types.includes(TYPE.FIELD)) {
             pokemon.effects.push(EFFECTS.ANGER_POINT);
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 2);
+            pokemon.atk += Math.ceil(pokemon.baseAtk);
             pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.5);
           }
           break;

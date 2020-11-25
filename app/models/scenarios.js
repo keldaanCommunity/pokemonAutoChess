@@ -7136,7 +7136,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 2,
+        "roundsRequired": 3,
         "board":
         [
           {
@@ -7162,7 +7162,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 2,
+        "roundsRequired": 3,
         "board":
         [
           {
@@ -7188,7 +7188,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 2,
+        "roundsRequired": 3,
         "board":
         [
           {
@@ -7219,7 +7219,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 2,
+        "roundsRequired": 3,
         "board":
         [
           {
@@ -7255,7 +7255,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 1,
+        "roundsRequired": 2,
         "board":
         [
           {
@@ -7291,7 +7291,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 3,
+        "roundsRequired": 4,
         "board":
         [
           {
@@ -7332,7 +7332,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 1,
+        "roundsRequired": 2,
         "board":
         [
           {
@@ -7373,7 +7373,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 4,
+        "roundsRequired": 5,
         "board":
         [
           {
@@ -7398,47 +7398,6 @@ const SCENARIOS =
           },
           {
             "name":"rhydon",
-            "x":3,
-            "y":3
-          },
-          {
-            "name":"kingdra",
-            "x":3,
-            "y":1
-          },
-		  {
-            "name":"dragonair",
-            "x":0,
-            "y":3
-          }
-        ]
-      },
-      {
-        "roundsRequired": 4,
-        "board":
-        [
-          {
-            "name":"shelgon",
-            "x":4,
-            "y":1
-          },
-          {
-            "name":"gabite",
-            "x":4,
-            "y":2
-          },
-          {
-            "name":"crobat",
-            "x":4,
-            "y":3
-          },
-          {
-            "name":"flygon",
-            "x":3,
-            "y":2
-          },
-          {
-            "name":"rhyperior",
             "x":3,
             "y":3
           },
@@ -7492,6 +7451,47 @@ const SCENARIOS =
             "name":"dragonair",
             "x":0,
             "y":3
+          }
+        ]
+      },
+      {
+        "roundsRequired": 6,
+        "board":
+        [
+          {
+            "name":"shelgon",
+            "x":4,
+            "y":1
+          },
+          {
+            "name":"gabite",
+            "x":4,
+            "y":2
+          },
+          {
+            "name":"crobat",
+            "x":4,
+            "y":3
+          },
+          {
+            "name":"flygon",
+            "x":3,
+            "y":2
+          },
+          {
+            "name":"rhyperior",
+            "x":3,
+            "y":3
+          },
+          {
+            "name":"kingdra",
+            "x":3,
+            "y":1
+          },
+		  {
+            "name":"dragonair",
+            "x":0,
+            "y":3
           },
 		  {
             "name":"larvitar",
@@ -7501,7 +7501,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 3,
+        "roundsRequired": 4,
         "board":
         [
           {
@@ -7593,7 +7593,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 2,
+        "roundsRequired": 3,
         "board":
         [
           {
@@ -7639,7 +7639,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 3,
+        "roundsRequired": 4,
         "board":
         [
           {
@@ -7690,7 +7690,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 3,
+        "roundsRequired": 4,
         "board":
         [
           {
@@ -7741,7 +7741,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 3,
+        "roundsRequired": 4,
         "board":
         [
           {
@@ -7792,7 +7792,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 3,
+        "roundsRequired": 4,
         "board":
         [
           {
@@ -7843,7 +7843,7 @@ const SCENARIOS =
         ]
       },
       {
-        "roundsRequired": 3,
+        "roundsRequired": 4,
         "board":
         [
           {

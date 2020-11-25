@@ -96,23 +96,24 @@ class OnDragDropCommand extends Command {
         if ( item ) {
           const x = parseInt(detail.x);
           const y = parseInt(detail.y);
+          let eevolution;
+          let evolve = false;
+
           this.state.players.get(client.sessionId).board.forEach((pokemon, id) => {
             if(pokemon.positionX == x && pokemon.positionY == y && pokemon.items.length < 3){
-              let evolve = false;
+              
               if(pokemon.name == 'eevee' && item == ITEMS.WATER_STONE){
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('vaporeon');
+                eevolution = PokemonFactory.createPokemonFromName('vaporeon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -120,16 +121,14 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('flareon');
+                eevolution = PokemonFactory.createPokemonFromName('flareon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -137,16 +136,14 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('jolteon');
+                eevolution = PokemonFactory.createPokemonFromName('jolteon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -154,16 +151,14 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('umbreon');
+                eevolution = PokemonFactory.createPokemonFromName('umbreon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -171,16 +166,14 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('sylveon');
+                eevolution = PokemonFactory.createPokemonFromName('sylveon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -188,16 +181,14 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('leafon');
+                eevolution = PokemonFactory.createPokemonFromName('leafon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -205,16 +196,14 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                const eevolution = PokemonFactory.createPokemonFromName('espeon');
+                eevolution = PokemonFactory.createPokemonFromName('espeon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
-                //eevolution.items.add(item);
+                eevolution.items.add(item);
                 this.state.players.get(client.sessionId).board.delete(id);
-                this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-                this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
@@ -224,13 +213,17 @@ class OnDragDropCommand extends Command {
                 success = true;
                 message.updateItems = false;
               }
-              if (evolve) {
-                this.state.players.get(client.sessionId).synergies.update(this.state.players.get(client.sessionId).board);
-                this.state.players.get(client.sessionId).effects.update(this.state.players.get(client.sessionId).synergies);
-                this.state.players.get(client.sessionId).boardSize = UtilsCommand.getTeamSize(this.state.players.get(client.sessionId).board);
-              }
             }
           });
+          if(eevolution){
+            this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
+            this.state.players.get(client.sessionId).stuff.remove(item);
+          }
+          if (evolve) {
+            this.state.players.get(client.sessionId).synergies.update(this.state.players.get(client.sessionId).board);
+            this.state.players.get(client.sessionId).effects.update(this.state.players.get(client.sessionId).synergies);
+            this.state.players.get(client.sessionId).boardSize = UtilsCommand.getTeamSize(this.state.players.get(client.sessionId).board);
+          }
         }
       }
     }
