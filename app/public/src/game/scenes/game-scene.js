@@ -170,6 +170,7 @@ export default class GameScene extends Scene {
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
     this.transitionScreen.setAlpha(0);
     this.music = this.sound.addAudioSprite('sounds');
+    this.music.loop = true;
     this.music.play(window.state.mapType);
     this.initilizeDragAndDrop();
     window.initialized = true;
