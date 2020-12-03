@@ -1103,6 +1103,25 @@ class Staraptor extends Pokemon {
     super('staraptor', [TYPE.NORMAL, TYPE.FLYING], RARITY.COMMON, 'COMMON',  398, '', 200, 20, 2, 2, 1, 'FLYING/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.HURRICANE);
   }
 }
+
+class Bellsprout extends Pokemon {
+  constructor() {
+    super('bellsprout', [TYPE.GRASS, TYPE.POISON], RARITY.COMMON, 'december',  69, 'weepinbell', 60, 5, 2, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL,1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Weepinbell extends Pokemon {
+  constructor() {
+    super('weepinbell', [TYPE.GRASS, TYPE.POISON], RARITY.COMMON, 'december',  70, 'victreebel', 110, 9, 2, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Victreebel extends Pokemon {
+  constructor() {
+    super('victreebel', [TYPE.GRASS, TYPE.POISON], RARITY.COMMON, 'december',  71, '', 200, 20, 2, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
 class Magikarp extends Pokemon {
   constructor() {
     super('magikarp', [TYPE.WATER], RARITY.NEUTRAL, 'NEUTRAL',  129, '', 30, 1, 1, 1, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL,1, 100, SPECIAL_SKILL.DEFAULT);
@@ -1536,5 +1555,8 @@ module.exports = {
   Chandelure,
   Slowpoke,
   Slowbro,
-  Slowking
+  Slowking,
+  Bellsprout,
+  Weepinbell,
+  Victreebel
 };

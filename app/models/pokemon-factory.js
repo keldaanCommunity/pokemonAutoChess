@@ -649,6 +649,12 @@ class PokemonFactory {
         return 'litwick';
       case 'chandelure':
         return 'litwick';
+      case 'bellsprout':
+        return 'bellsprout';
+      case 'weepinbell':
+        return 'bellsprout';
+      case 'victreebel':
+        return 'bellsprout';
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1075,6 +1081,12 @@ class PokemonFactory {
         return new Pokemon.Lampent();
       case 'chandelure':
         return new Pokemon.Chandelure();
+      case 'bellsprout':
+        return new Pokemon.Bellsprout();
+      case 'weepinbell':
+        return new Pokemon.Weepinbell();
+      case 'victreebel':
+        return new Pokemon.Victreebel();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();
