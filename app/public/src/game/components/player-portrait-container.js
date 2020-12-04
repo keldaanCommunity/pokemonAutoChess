@@ -49,6 +49,9 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
     if(value <= 20){
       lifeLevel = 'life20';
     }
+    if(value <= 0){
+      lifeLevel = 'life0';
+    }
     this.lifeAsset.setTexture('life',lifeLevel);
   }
 
