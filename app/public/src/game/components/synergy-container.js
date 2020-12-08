@@ -4,7 +4,7 @@ import SynergyDetail from './synergy-detail';
 
 export default class SynergyContainer extends Button {
   constructor(scene, x, y, type) {
-    super(scene, x, y, 130, 62);
+    super(scene, x, y, 130, 50);
     this.textStyle = {
       fontSize: '30px',
       fontFamily: 'Verdana',
@@ -84,7 +84,8 @@ export default class SynergyContainer extends Button {
       FLORA: 2,
       MINERAL: 2,
       AMORPH: 2,
-      FAIRY: 2
+      FAIRY: 2,
+      ICE: 2
     };
 
 
@@ -92,12 +93,12 @@ export default class SynergyContainer extends Button {
     this.color = this.typeColor[type];
     this.colorText = this.textColor[type];
     this.threshold = this.typeActivation[type];
-    this.background = new GameObjects.Rectangle(scene, 0, 0, 110, 62, this.color).setVisible(false);
+    this.background = new GameObjects.Rectangle(scene, 0, 0, 110, 50, this.color).setVisible(false);
     this.add(this.background);
-    this.synergyCount = new GameObjects.Text(scene, 20, -20, '0', this.textStyle);
+    this.synergyCount = new GameObjects.Text(scene, 20, -15, '0', this.textStyle);
     this.synergyCount.setColor(this.colorText);
     this.add(this.synergyCount);
-    this.add(new GameObjects.Image(scene, -30, 0, 'types', type));
+    this.add(new GameObjects.Image(scene, -20, 0, 'types', type));
     this.detail = new SynergyDetail(scene, -380, 0, type);
     this.add(this.detail);
     this.setDepth(999);

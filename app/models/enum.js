@@ -779,6 +779,10 @@ const TYPE_TRADUCTION = Object.freeze({
   FAIRY: {
     eng:'Fairy',
     esp:'Feria'
+  },
+  ICE:{
+    eng:'Ice',
+    esp:'Hielo'
   }
 });
 
@@ -804,7 +808,8 @@ const TYPE = Object.freeze({
   FLORA: 'FLORA',
   MINERAL: 'MINERAL',
   AMORPH: 'AMORPH',
-  FAIRY: 'FAIRY'
+  FAIRY: 'FAIRY',
+  ICE:'ICE'
 });
 
 const RARITY = Object.freeze({
