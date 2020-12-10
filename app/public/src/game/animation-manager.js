@@ -63,7 +63,7 @@ export default class AnimationManager {
       this.createAnimations(num, 'UNCOMMON2');
     });
 
-    [69,70,71].forEach((num) => {
+    [69,70,71,220,221,361,362,459,460,473,478,582,583,584,4600].forEach((num) => {
       this.createAnimations(num, 'december');
     });
     

@@ -530,19 +530,91 @@ class Aggron extends Pokemon {
 
 class Spheal extends Pokemon {
   constructor() {
-    super('spheal', [TYPE.WATER, TYPE.FIELD], RARITY.RARE, 'RARE',  363, 'sealeo', 80, 5, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,1, 100, SPECIAL_SKILL.ICICLE_CRASH);
+    super('spheal', [TYPE.WATER, TYPE.FIELD, TYPE.ICE], RARITY.RARE, 'RARE',  363, 'sealeo', 80, 5, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,1, 100, SPECIAL_SKILL.ICICLE_CRASH);
   }
 }
 
 class Sealeo extends Pokemon {
   constructor() {
-    super('sealeo', [TYPE.WATER, TYPE.FIELD], RARITY.RARE, 'RARE',  364, 'walrein', 120, 9, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.ICICLE_CRASH);
+    super('sealeo', [TYPE.WATER, TYPE.FIELD, TYPE.ICE], RARITY.RARE, 'RARE',  364, 'walrein', 120, 9, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.ICICLE_CRASH);
   }
 }
 
 class Walrein extends Pokemon {
   constructor() {
-    super('walrein', [TYPE.WATER, TYPE.FIELD], RARITY.RARE, 'RARE',  365, '', 220, 20, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.ICICLE_CRASH);
+    super('walrein', [TYPE.WATER, TYPE.FIELD, TYPE.ICE], RARITY.RARE, 'RARE',  365, '', 220, 20, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class Swinub extends Pokemon {
+  constructor() {
+    super('swinub', [TYPE.GROUND, TYPE.ICE], RARITY.UNCOMMON, 'december',  200, 'piloswine', 80, 5, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,1, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class Piloswine extends Pokemon {
+  constructor() {
+    super('piloswine', [TYPE.GROUND, TYPE.ICE], RARITY.UNCOMMON, 'december',  221, 'walrein', 120, 9, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class Mamoswine extends Pokemon {
+  constructor() {
+    super('mamoswine', [TYPE.GROUND, TYPE.ICE], RARITY.UNCOMMON, 'december',  473, '', 220, 20, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class Snover extends Pokemon {
+  constructor() {
+    super('snover', [TYPE.GRASS, TYPE.ICE], RARITY.LEGENDARY, 'december',  459, 'abomasnow', 80, 7, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,1, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class Abomasnow extends Pokemon {
+  constructor() {
+    super('abomasnow', [TYPE.GRASS, TYPE.ICE], RARITY.LEGENDARY, 'december',  460, 'mega-abomasnow', 120, 11, 6,6, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class MegaAbomasnow extends Pokemon {
+  constructor() {
+    super('mega-abomasnow', [TYPE.GRASS, TYPE.ICE], RARITY.LEGENDARY, 'december',  4600, '', 220, 25, 8,8, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class Snorunt extends Pokemon {
+  constructor() {
+    super('snorunt', [TYPE.AMORPH, TYPE.ICE], RARITY.EPIC, 'december',  361, 'glalie', 80, 5, 2,2, 3, 'ICE/melee', ATTACK_TYPE.SPECIAL,1, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class Glalie extends Pokemon {
+  constructor() {
+    super('glalie', [TYPE.AMORPH, TYPE.ICE], RARITY.EPIC, 'december',  362, 'froslass', 120, 9, 2,2, 3, 'ICE/melee', ATTACK_TYPE.SPECIAL,2, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class Froslass extends Pokemon {
+  constructor() {
+    super('froslass', [TYPE.AMORPH, TYPE.ICE], RARITY.EPIC, 'december',  478, '', 220, 20, 2,2, 3, 'ICE/melee', ATTACK_TYPE.SPECIAL,3, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class Vanillite extends Pokemon {
+  constructor() {
+    super('vanillite', [TYPE.FAIRY, TYPE.ICE], RARITY.RARE, 'december',  582, 'vanillish', 80, 5, 2,2, 3, 'ICE/melee', ATTACK_TYPE.SPECIAL,1, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class Vanillish extends Pokemon {
+  constructor() {
+    super('vanillish', [TYPE.FAIRY, TYPE.ICE], RARITY.RARE, 'december',  583, 'vanilluxe', 120, 8, 2,2, 3, 'ICE/melee', ATTACK_TYPE.SPECIAL,2, 100, SPECIAL_SKILL.ICICLE_CRASH);
+  }
+}
+
+class Vanilluxe extends Pokemon {
+  constructor() {
+    super('vanilluxe', [TYPE.FAIRY, TYPE.ICE], RARITY.RARE, 'december',  584, '', 220, 19, 2,2, 3, 'ICE/melee', ATTACK_TYPE.SPECIAL,3, 100, SPECIAL_SKILL.ICICLE_CRASH);
   }
 }
 
@@ -1558,5 +1630,17 @@ module.exports = {
   Slowking,
   Bellsprout,
   Weepinbell,
-  Victreebel
+  Victreebel,
+  Swinub,
+  Piloswine,
+  Mamoswine,
+  Snorunt,
+  Glalie,
+  Froslass,
+  Snover,
+  Abomasnow,
+  MegaAbomasnow,
+  Vanillite,
+  Vanillish,
+  Vanilluxe
 };

@@ -655,6 +655,30 @@ class PokemonFactory {
         return 'bellsprout';
       case 'victreebel':
         return 'bellsprout';
+      case 'swinub':
+        return 'swinub';
+      case 'piloswine':
+        return 'swinub';
+      case 'mamoswine':
+        return 'swinub';
+      case 'snorunt':
+        return 'snorunt';
+      case 'glalie':
+        return 'snorunt';
+      case 'froslass':
+        return 'snorunt';
+      case 'snover':
+        return 'snover';
+      case 'abomasnow':
+        return 'snover';
+      case 'mega-abomasnow':
+        return 'snover';
+      case 'vanillite':
+        return 'vanillite';
+      case 'vanillish':
+        return 'vanillite';
+      case 'vanilluxe':
+        return 'vanillite';
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1087,6 +1111,30 @@ class PokemonFactory {
         return new Pokemon.Weepinbell();
       case 'victreebel':
         return new Pokemon.Victreebel();
+      case 'swinub':
+        return new Pokemon.Swinub();
+      case 'piloswine':
+        return new Pokemon.Piloswine();
+      case 'mamoswine':
+        return new Pokemon.Mamoswine();
+      case 'snorunt':
+        return new Pokemon.Snorunt();
+      case 'glalie':
+        return new Pokemon.Glalie();
+      case 'froslass':
+        return new Pokemon.Froslass();
+      case 'snover':
+        return new Pokemon.Snover();
+      case 'abomasnow':
+        return new Pokemon.Abomasnow();
+      case 'mega-abomasnow':
+        return new Pokemon.MegaAbomasnow();
+      case 'vanillite':
+        return new Pokemon.Vanillite();
+      case 'vanillish':
+        return new Pokemon.Vanillish();
+      case 'vanilluxe':
+        return new Pokemon.Vanilluxe();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();
