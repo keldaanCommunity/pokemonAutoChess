@@ -59,7 +59,8 @@ export default class SynergyContainer extends Button {
       FLORA: '#180d1c',
       MINERAL: '#3f3817',
       AMORPH: '#2d253b',
-      FAIRY: '#82525b'
+      FAIRY: '#82525b',
+      ICE: '#38455f'
     };
 
     this.typeActivation = {

@@ -7,7 +7,7 @@ class AttackStrategy{
     }
 
     process(pokemon, state, board, target){
-        pokemon.mana = 0;
+        pokemon.setMana(0);
     }
 }
 
@@ -19,6 +19,91 @@ class LeechSeedStrategy extends AttackStrategy{
 
     process(pokemon, state, board, target){
         super.process(pokemon, state, board, target);
+    }
+}
+
+class BurnStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+       target.triggerBurn();
+    }
+}
+
+class SilenceStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+       target.triggerSilence();
+    }
+}
+
+class PoisonStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+       target.triggerPoison();
+    }
+}
+
+class FreezeStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+       target.triggerFreeze();
+    }
+}
+
+
+class ProtectStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+       pokemon.triggerProtect();
+    }
+}
+
+class SleepStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+       target.triggerSleep();
+    }
+}
+
+class ConfusionStrategy extends AttackStrategy{
+
+    constructor(){
+        super();
+    }
+
+    process(pokemon, state, board, target){
+        super.process(pokemon, state, board, target);
+       target.triggerConfusion();
     }
 }
 
@@ -78,7 +163,7 @@ class GuillotineStrategy extends AttackStrategy{
         let damage = pokemon.atk * pokemon.stars;
         const victim = target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
         if(victim){
-            pokemon.mana += Math.floor(pokemon.maxMana / 2); 
+            pokemon.setMana(Math.floor(pokemon.maxMana / 2));
         }
     }
 }
@@ -372,7 +457,7 @@ class SoakStrategy extends AttackStrategy{
 
         board.forEach((x, y, ally) => {
             if(ally && pokemon.team == ally.team){
-                ally.mana = Math.min(ally.mana + 10, ally.maxMana);
+                ally.setMana(ally.mana + 10);
             }
         });
 
@@ -1120,7 +1205,14 @@ class MetronomeStrategy extends AttackStrategy{
             ThiefStrategy,
             StunSporeStrategy,
             MeteorMashStrategy,
-            HurricaneStrategy
+            HurricaneStrategy,
+            BurnStrategy,
+            SleepStrategy,
+            FreezeStrategy,
+            ConfusionStrategy,
+            ProtectStrategy,
+            PoisonStrategy,
+            SilenceStrategy
         ];
         let strategy = new skills[Math.floor(Math.random() * skills.length)]();
         strategy.process(pokemon, state, board, target);
@@ -1168,5 +1260,12 @@ module.exports = {
     ThiefStrategy,
     StunSporeStrategy,
     MeteorMashStrategy,
-    HurricaneStrategy
+    HurricaneStrategy,
+    BurnStrategy,
+    SleepStrategy,
+    FreezeStrategy,
+    ConfusionStrategy,
+    ProtectStrategy,
+    PoisonStrategy,
+    SilenceStrategy
 }

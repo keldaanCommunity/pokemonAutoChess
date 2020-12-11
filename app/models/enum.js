@@ -471,13 +471,48 @@ const SPECIAL_SKILL = Object.freeze({
   THIEF:'THIEF',
   STUN_SPORE:'STUN_SPORE',
   METEOR_MASH:'METEOR_MASH',
-  HURRICANE:'HURRICANE'
+  HURRICANE:'HURRICANE',
+  BURN:'BURN',
+  SILENCE:'SILENCE',
+  SLEEP:'SLEEP',
+  FREEZE:'FREEZE',
+  PROTECT:'PROTECT',
+  POISON:'POISON',
+  CONFUSION:'CONFUSION'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
   DEFAULT:{
     eng:'',
     esp:''
+  },
+  BURN:{
+    eng:'Burn the target for 10 seconds, dealing 10% hp / seconds, divide their attack by two.',
+    esp:'Quemar el objetivo durante 10 segundos, repartiendo el 10% de hp/segundos, dividir su ataque por dos.'
+  },
+  POISON:{
+    eng:'Poison the target for 10 seconds, dealing 15%/seconds',
+    esp:'Envenenar el objetivo durante 10 segundos, repartiendo 15%/segundos'
+  },
+  SLEEP:{
+    eng:'Sleeps the target for 5 seconds',
+    esp:'Duerme el objetivo durante 5 segundos'
+  },
+  SILENCE:{
+    eng:'Silence the target for 10 seconds',
+    esp:'Silenciar el objetivo durante 10 segundos'
+  },
+  PROTECT:{
+    eng:'Makes the pokemon invulnerable for 3 seconds.',
+    esp:'Hace que el pokemon sea invulnerable durante 3 segundos.'
+  },
+  FREEZE:{
+    eng:'Freeze the target for 5 seconds',
+    esp:'Congela el objetivo durante 5 segundos'
+  },
+  CONFUSION:{
+    eng:'Makes the target confused for 3 seconds',
+    esp:'Hace que el objetivo se confunda durante 3 segundos'
   },
   FIRE_BLAST:{
     eng:'Throw a fire blast for 30/50/100 special damage',

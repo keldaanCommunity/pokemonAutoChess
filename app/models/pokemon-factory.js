@@ -266,6 +266,27 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.HURRICANE:
         return new Strategy.HurricaneStrategy();
+      
+      case SPECIAL_SKILL.BURN:
+        return new Strategy.BurnStrategy();
+
+      case SPECIAL_SKILL.SLEEP:
+        return new Strategy.SleepStrategy();
+
+      case SPECIAL_SKILL.SILENCE:
+        return new Strategy.SilenceStrategy();
+      
+      case SPECIAL_SKILL.CONFUSION:
+        return new Strategy.ConfusionStrategy();
+      
+      case SPECIAL_SKILL.FREEZE:
+        return new Strategy.FreezeStrategy();
+
+      case SPECIAL_SKILL.PROTECT:
+        return new Strategy.ProtectStrategy();
+
+      case SPECIAL_SKILL.POISON:
+        return new Strategy.PoisonStrategy();
 
       case SPECIAL_SKILL.DEFAULT:
         return new Strategy.AttackStrategy();

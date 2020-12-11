@@ -16,7 +16,11 @@ class AttackingState extends PokemonState {
         pokemon.toMovingState();
       } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) > pokemon.range) {
         pokemon.toMovingState();
-      } else {
+      }
+      else if(pokemon.confusion){
+        pokemon.toMovingState();
+      }
+      else {
         this.attack(pokemon, board, targetCoordinate);
       }
     } else {
@@ -28,7 +32,7 @@ class AttackingState extends PokemonState {
     pokemon.targetX = coordinates[0];
     pokemon.targetY = coordinates[1];
     const target = board.getValue(coordinates[0], coordinates[1]);
-    if (target) {
+    if (target && !pokemon.sleep && !pokemon.freeze) {
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
       // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
       if (target.effects.includes(EFFECTS.ATTRACT)) {
@@ -71,8 +75,6 @@ class AttackingState extends PokemonState {
       if (victim && pokemon.effects.includes(EFFECTS.POWER_TRIP)) {
         pokemon.atk += pokemon.baseAtk;
       }
-    } else {
-      console.log('warning, no target detected at given coordinates');
     }
   }
 
