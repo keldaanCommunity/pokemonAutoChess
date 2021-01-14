@@ -80,13 +80,13 @@ class Scyther extends Pokemon {
 
 class Scizor extends Pokemon {
   constructor() {
-    super('scizor', [TYPE.BUG, TYPE.METAL], RARITY.LEGENDARY, 'LEGENDARY',  212, 'mega-scizor', 130, 9, 5, 5, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.PROTECT);
+    super('scizor', [TYPE.BUG, TYPE.METAL], RARITY.LEGENDARY, 'LEGENDARY',  212, 'mega-scizor', 130, 9, 6, 6, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.PROTECT);
   }
 }
 
 class MegaScizor extends Pokemon {
   constructor() {
-    super('mega-scizor', [TYPE.BUG, TYPE.METAL], RARITY.LEGENDARY, 'LEGENDARY',  2120, '', 230, 18, 2, 5, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.PROTECT);
+    super('mega-scizor', [TYPE.BUG, TYPE.METAL], RARITY.LEGENDARY, 'LEGENDARY',  2120, '', 230, 20, 7, 7, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.PROTECT);
   }
 }
 
@@ -152,19 +152,19 @@ class Snorlax extends Pokemon {
 
 class Meditite extends Pokemon{
   constructor(){
-    super('meditite', [TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 'LEGENDARY',  307, 'medicham', 90, 5, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL,1, 100, SPECIAL_SKILL.CONFUSION);
+    super('meditite', [TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 'LEGENDARY',  307, 'medicham', 90, 5, 5, 5, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL,1, 100, SPECIAL_SKILL.CONFUSION);
   }
 }
 
 class Medicham extends Pokemon{
   constructor(){
-    super('medicham', [TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 'LEGENDARY',  308, 'mega-medicham', 130, 9, 5, 5, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.CONFUSION);
+    super('medicham', [TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 'LEGENDARY',  308, 'mega-medicham', 130, 9, 6, 6, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.CONFUSION);
   }
 }
 
 class MegaMedicham extends Pokemon{
   constructor(){
-    super('mega-medicham', [TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 'LEGENDARY',  3080, '', 230, 20, 5, 5, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.CONFUSION);
+    super('mega-medicham', [TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 'LEGENDARY',  3080, '', 230, 20, 7, 7, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.CONFUSION);
   }
 }
 
@@ -194,13 +194,13 @@ class Elekid extends Pokemon {
 
 class Electabuzz extends Pokemon {
   constructor() {
-    super('electabuzz', [TYPE.ELECTRIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC',  125, 'electivire', 130, 9, 4,4, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.DISCHARGE);
+    super('electabuzz', [TYPE.ELECTRIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC',  125, 'electivire', 130, 9, 5,5, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.DISCHARGE);
   }
 }
 
 class Electivire extends Pokemon {
   constructor() {
-    super('electivire', [TYPE.ELECTRIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC',  466, '', 230, 20, 4,4, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.DISCHARGE);
+    super('electivire', [TYPE.ELECTRIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC',  466, '', 230, 20, 6,6, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.DISCHARGE);
   }
 }
 
@@ -482,13 +482,13 @@ class Rhyhorn extends Pokemon {
 
 class Rhydon extends Pokemon {
   constructor() {
-    super('rhydon', [TYPE.GROUND, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 'RARE',  112, 'rhyperior', 120, 9, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.STOMP);
+    super('rhydon', [TYPE.GROUND, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 'RARE',  112, 'rhyperior', 120, 9, 6,6, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.STOMP);
   }
 }
 
 class Rhyperior extends Pokemon {
   constructor() {
-    super('rhyperior', [TYPE.GROUND, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 'RARE',  464, '', 220, 20, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.STOMP);
+    super('rhyperior', [TYPE.GROUND, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 'RARE',  464, '', 220, 20, 8,8, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.STOMP);
   }
 }
 
@@ -518,13 +518,13 @@ class Aron extends Pokemon {
 
 class Lairon extends Pokemon {
   constructor() {
-    super('lairon', [TYPE.METAL, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 'RARE',  305, 'aggron', 120, 9, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.STOMP);
+    super('lairon', [TYPE.METAL, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 'RARE',  305, 'aggron', 120, 9, 6,6, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.STOMP);
   }
 }
 
 class Aggron extends Pokemon {
   constructor() {
-    super('aggron', [TYPE.METAL, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 'RARE',  306, '', 220, 20, 4,4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.STOMP);
+    super('aggron', [TYPE.METAL, TYPE.MONSTER, TYPE.MINERAL], RARITY.RARE, 'RARE',  306, '', 220, 20, 8,8, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.STOMP);
   }
 }
 
@@ -560,13 +560,13 @@ class Piloswine extends Pokemon {
 
 class Mamoswine extends Pokemon {
   constructor() {
-    super('mamoswine', [TYPE.GROUND, TYPE.ICE], RARITY.UNCOMMON, 'december',  473, '', 220, 20, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.ICICLE_CRASH);
+    super('mamoswine', [TYPE.GROUND, TYPE.ICE], RARITY.UNCOMMON, 'december',  473, '', 220, 20, 6,6, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.ICICLE_CRASH);
   }
 }
 
 class Snover extends Pokemon {
   constructor() {
-    super('snover', [TYPE.GRASS, TYPE.ICE], RARITY.LEGENDARY, 'december',  459, 'abomasnow', 80, 7, 4,4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,1, 100, SPECIAL_SKILL.FREEZE);
+    super('snover', [TYPE.GRASS, TYPE.ICE], RARITY.LEGENDARY, 'december',  459, 'abomasnow', 80, 7, 8,8, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL,1, 100, SPECIAL_SKILL.FREEZE);
   }
 }
 
@@ -968,13 +968,13 @@ class Geodude extends Pokemon {
 
 class Graveler extends Pokemon {
   constructor() {
-    super('graveler', [TYPE.GROUND, TYPE.MINERAL], RARITY.COMMON, 'COMMON',  75, 'golem', 110, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.ROCK_SLIDE);
+    super('graveler', [TYPE.GROUND, TYPE.MINERAL], RARITY.COMMON, 'COMMON',  75, 'golem', 110, 9, 4, 4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,2, 100, SPECIAL_SKILL.ROCK_SLIDE);
   }
 }
 
 class Golem extends Pokemon {
   constructor() {
-    super('golem', [TYPE.GROUND, TYPE.MINERAL], RARITY.COMMON, 'COMMON',  76, '', 200, 20, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.ROCK_SLIDE);
+    super('golem', [TYPE.GROUND, TYPE.MINERAL], RARITY.COMMON, 'COMMON',  76, '', 200, 20, 8, 8, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL,3, 100, SPECIAL_SKILL.ROCK_SLIDE);
   }
 }
 
@@ -1415,7 +1415,7 @@ schema.defineTypes(Pokemon, {
   speDef: 'uint8',
   attackType: 'string',
   atk: 'uint8',
-  hp: 'uint8',
+  hp: 'uint16',
   range: 'uint8',
   stars: 'uint8',
   maxMana: 'uint8',

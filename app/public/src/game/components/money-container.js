@@ -20,21 +20,21 @@ export default class MoneyContainer extends GameObjects.Container {
     this.add(this.money);
 
     this.add(new GameObjects.Text(scene, 0, 40, `${WORDS.BASE[window.langage]}`, this.bigTextStyle));
-    this.add(new GameObjects.Text(scene, 120, 40, '+5', this.bigTextStyle));
+    this.add(new GameObjects.Text(scene, 120, 40, '+ 5', this.bigTextStyle));
     this.add(new GameObjects.Image(scene, 185, 58, 'money').setScale(0.5, 0.5));
 
     this.add(new GameObjects.Text(scene, 0, 80, `${WORDS.STREAK[window.langage]}`, this.bigTextStyle));
-    this.streak = new GameObjects.Text(scene, 120, 80, `+${player.streak}`, this.bigTextStyle);
+    this.streak = new GameObjects.Text(scene, 120, 80, `+ ${player.streak}`, this.bigTextStyle);
     this.add(new GameObjects.Image(scene, 185, 98, 'money').setScale(0.5, 0.5));
     this.add(this.streak);
 
     this.add(new GameObjects.Text(scene, 0, 120, `${WORDS.INTEREST[window.langage]}`, this.bigTextStyle));
-    this.interest = new GameObjects.Text(scene, 120, 120, `+${player.interest}`, this.bigTextStyle);
+    this.interest = new GameObjects.Text(scene, 120, 120, `+ ${player.interest}`, this.bigTextStyle);
     this.add(new GameObjects.Image(scene, 185, 138, 'money').setScale(0.5, 0.5));
     this.add(this.interest);
 
     this.add(new GameObjects.Text(scene, 0, 160, `${WORDS.WIN[window.langage]}`, this.bigTextStyle));
-    this.won = new GameObjects.Text(scene, 120, 160, '+0', this.bigTextStyle);
+    this.won = new GameObjects.Text(scene, 120, 160, '+ 0', this.bigTextStyle);
     this.add(new GameObjects.Image(scene, 185, 178, 'money').setScale(0.5, 0.5));
     this.add(this.won);
 

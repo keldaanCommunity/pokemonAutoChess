@@ -427,7 +427,7 @@ class ThunderStrategy extends AttackStrategy{
             default:
                 break;
         }
-        target.handleDamage(damage, board, ATTACK_TYPE.TRUE, pokemon);
+        target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
     }
 }
 

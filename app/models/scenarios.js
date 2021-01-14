@@ -6548,7 +6548,7 @@ const SCENARIOS =
             "y":1
           },
           {
-            "name":"camerupt",
+            "name":"numel",
             "x":2,
             "y":3
           }
@@ -6589,7 +6589,7 @@ const SCENARIOS =
             "y":1
           },
           {
-            "name":"camerupt",
+            "name":"numel",
             "x":2,
             "y":3
           }
