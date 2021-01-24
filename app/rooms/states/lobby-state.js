@@ -12,7 +12,8 @@ class LobbyState extends schema.Schema {
       if(this.messages.length > 200){
         this.messages.splice(0, 1);
       }
-      const message = new Message(name, payload, avatar, time);
+      let safeName = name.split('@')[0];
+      const message = new Message(safeName, payload, avatar, time);
       this.messages.push(message);
       //console.log(message.name);
       if(save){

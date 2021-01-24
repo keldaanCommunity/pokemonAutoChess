@@ -12,51 +12,76 @@ class LoginPage {
 
   render() {
     const content = document.createElement('div');
-    content.setAttribute('id', 'login');
+    content.setAttribute('id', 'home');
     content.innerHTML = `
-    <header>
-      <h1>Game Login</h1>
-      <button id="button-home" type="button" class="btn btn-secondary">Home</button>
-    </header>
-    <main>
-    <div id="login-container">
-      <div class="tab-container">
-      <input name="radio-group1" id="tab-1" type="radio" checked>
-      <label for="tab-1">Guest</label>
-      <input name="radio-group1" id="tab-2" type="radio">
-      <label for="tab-2">Account</label>
-      <input name="radio-group1" id="tab-3" type="radio">
-      <label for="tab-3">Facebook</label>
-      <div class="tab-row">
-        <div>
-        <div id="login-guest">
-          <button id="button-guest" type="button" class="btn btn-secondary">Log as guest</button>
-        </div>
-        </div>
-        <div>
-        <div id="login-account">
-          <label>Email</label><input type="string" id="input-username">
-          <label>Password</label><input type="password" id="input-password">
-          <button id="button-login" type="button" class="btn btn-secondary">Log in</button>
-        </div>
-        </div>
-        <div><div id="login-fb">
-          <button id="button-fb" type="button" class="btn btn-secondary"></button>
-        </div></div>
+    <div id="play-panel" class="nes-container with-title is-centered" style="height:30%; margin-left:15%;margin-top:15%; background-color: rgba(255, 255, 255, .5);">
+    <p class="title" style="">Game</p>
+    <h1 style="font-size:50px; margin-bottom:40px;">Pokemon Auto Chess</h1>
+    <button id="button-guest" type="button" class="nes-btn is-success">Login as guest</button>
+    <button id="display-login" type="button" class="nes-btn is-warning">Log with email</button>
+    <button id="button-fb" type="button" class="nes-btn is-primary">Log with Facebook</button>
+    <div id="mail" style="display:none;">
+      <div class="nes-field" style="margin-top:10px;">
+        <label for="name_field">Email</label>
+        <input id="input-username" type="text" id="name_field" class="nes-input">
       </div>
+      <div class="nes-field" style="margin-top:10px;">
+        <label for="name_field">Password</label>
+        <input id="input-password" type="password" id="name_field" class="nes-input">
       </div>
+      <button id="button-login" type="button" class="nes-btn is-warning" style="margin-top:20px;">Login</button>
     </div>
-    </main>`;
+    </div>
+    <div class="nes-container with-title is-centered" style="width:20%; height:30%; margin:10px; background-color: rgba(255, 255, 255, .5);">
+    <p class="title">Media</p>
+    
+    <section class="icon-list" style="margin-bottom:15px;">
+    <!-- facebook -->
+    <a href="https://www.facebook.com/Pok%C3%A9mon-Auto-Chess-Espa%C3%B1ol-108035354419173">
+    <i class="nes-icon facebook is-large"></i>
+    </a>
+    
+    <!-- github -->
+    <a href="https://github.com/arnaudgregoire/pokemonAutoChess">
+    <i class="nes-icon github is-large"></i>
+    </a>
+    
+    <!-- twitch -->
+    <a href="https://www.twitch.tv/ag_interactive">
+    <i class="nes-icon twitch is-large"></i>
+    </a>
+    
+    <!-- youtube -->
+    <a href="https://www.youtube.com/watch?v=sn68G5b-xkE">
+    <i class="nes-icon youtube is-large"></i>
+    </a>
+    </i>
+    </section>
+
+    <button type="button" class="nes-btn is-error"><a>Join Discord</a></button>
+    <p style="margin-top:10px;">This is a non profit game. Only made by fans for fans.</p>
+    </div>
+    <img src="assets/ui/chrysacier.gif" style="position:absolute; top:160px; left:580px;"/>
+    `;
     document.body.innerHTML = '';
     document.body.appendChild(content);
   }
 
   addEventListeners() {
-    document.getElementById('button-home').addEventListener('click', (e) => {
-      window.dispatchEvent(new CustomEvent('render-home'));
-    });
+    document.getElementById('display-login').addEventListener('click', this.handleDisplayLoginClick.bind(this));
     document.getElementById('button-login').addEventListener('click', this.handleLoginButtonClick.bind(this));
     document.getElementById('button-guest').addEventListener('click', this.handleGuestButtonClick.bind(this));
+  }
+
+  handleDisplayLoginClick(e){
+    if(document.getElementById('mail').style.display == 'none'){
+      document.getElementById('play-panel').style.height = "50%";
+      document.getElementById('mail').style.display = "";
+    }
+    else{
+      document.getElementById('play-panel').style.height = "30%";
+      document.getElementById('mail').style.display = "none";
+    }
   }
 
   handleLoginButtonClick(e) {
@@ -92,7 +117,7 @@ class LoginPage {
         button.textContent = 'Continue with Facebook';
         button.addEventListener('click', (e) => this.authenticateWithFB(login.authResponse.accessToken));
       } else {
-        button.textContent = 'Login with Facebook';
+        button.textContent = 'Log with Facebook';
         button.addEventListener('click', (e) => this.tryFBLogin());
       }
     });

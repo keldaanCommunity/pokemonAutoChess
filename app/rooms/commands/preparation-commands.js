@@ -7,7 +7,7 @@ const POKEMON_BOT = require('../../models/enum').POKEMON_BOT;
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
     this.state.users[client.sessionId] = new GameUser(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.avatar, false, false);
-    this.room.broadcast('messages', {'name':'Server', 'message':`${ auth.email } joined.`});
+    this.room.broadcast('messages', {'name':'Server', 'payload':`${ auth.email.split('@')[0] } joined.`,'avatar':auth.metadata.avatar});
     if(this.state.users.size > 8){
       return [new OnRemoveBotCommand()];
     }
@@ -38,7 +38,7 @@ class OnMessageCommand extends Command {
 
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
-    this.room.broadcast('messages', {'name':'Server', 'message':`${ this.state.users[client.id].name } left.`});
+    this.room.broadcast('messages', {'name':'Server', 'payload':`${ this.state.users[client.id].name } left.`,'avatar':'magnemite'});
     delete this.state.users[''+client.id];
   }
 }
@@ -76,7 +76,7 @@ class OnAddBotCommand extends Command {
       }
 
       this.state.users[id] = new GameUser(id, `BOT ${BOT_AVATAR[bot]}`, BOT_AVATAR[bot], true, true);
-      this.room.broadcast('messages', {'name':'Server', 'message':`Bot ${ BOT_AVATAR[bot] } added.`});
+      this.room.broadcast('messages', {'name':'Server', 'payload':`Bot ${ BOT_AVATAR[bot] } added.`,'avatar':'magnemite'});
     }
   }
 }
@@ -88,7 +88,7 @@ class OnRemoveBotCommand extends Command {
       if(user.isBot && !botFound){
         this.state.users.delete(key);
         botFound = true;
-        this.room.broadcast('messages', {'name':'Server', 'message':`Bot removed.`});
+        this.room.broadcast('messages', {'name':'Server', 'payload':`Bot removed.`,'avatar':'magnemite'});
       }
     });
   }

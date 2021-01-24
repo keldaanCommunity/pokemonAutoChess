@@ -3,197 +3,20 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  font-family: Arial, Helvetica, sans-serif;
+  background-image: url("assets/ui/background.png");
+  background-repeat: round;
 }
 
-/* HOME */
 
-#home {
-  display: flex;
-  flex-flow: column nowrap;
+#home{
   width: 100%;
   height: 100%;
-  background: #f2f2f2;
-}
-
-#home header {
-  width: 100%;
-}
-
-#home h1 {
-  margin: 0;
-  padding: 30px 0;
-  font-size: 40px;
-  font-family: Impact;
-  text-align: center;
-  color: #f2f2f2;
-  background-color: #505160;
-}
-
-#home main {
-  flex: 1;
-  position: relative;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
 }
 
-#home main img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 300px;
-  width: auto;
-  -webkit-transform: translate(-50%,-50%);
-  -moz-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-}
-
-#home #button-play {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  display: block;
-  margin: 0;
-  padding: 15px 30px;
-  font-size: 30px;
-  font-weight: bold;
-  color: #f2f2f2;
-  background-color: #505160;
-  cursor: pointer;
-  border: 4px solid #505160;
-  outline: 0;
-  -webkit-transform: translate(-50%,-50%);
-  -moz-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-}
-#home #button-play:hover, #home #button-play:active, #home #button-play:focus {
-  /* background-color: #598234; */
-  border: 4px solid #598234;
-}
-
-#home footer {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-}
-
-#home footer img {
-  height: 60px;
-  width: auto;
-  margin: 10px;
-}
-
-/* LOGIN */
-
-
-#login {
-  display: flex;
-  flex-flow: column nowrap;
-  width: 100%;
-  height: 100%;
-}
-
-#login header {
-  width: 100%;
-}
-
-#login h1 {
-  margin: 0;
-  padding: 30px 0;
-  font-size: 40px;
-  font-family: Impact;
-  text-align: center;
-  color: #f2f2f2;
-  background-color: #505160;
-}
-
-#login main {
-  flex: 1;
-  position: relative;
-}
-
-#login-container {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  width: 350px;
-  height: 400px;
-  background-color: #f2f2f2;
-  -webkit-transform: translate(-50%,-50%);
-  -moz-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-}
-
-.tab-container {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-
-.tab-container > input { display: none; opacity: 0; }
-.tab-container > label {
-  display: inline-block;
-  width: 90px;
-  margin: 5px 0;
-  padding: 5px 0;
-  background-color: rgba(0, 0, 0, 0);
-  color: white;
-  border: 0px solid transparent;
-  text-align: center;
-  cursor: pointer;
-}
-.tab-container > input:checked + label {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.tab-row {
-  position: relative;
-  left: 0;
-  display: table;
-  table-layout: fixed;
-  border-spacing: 0;
-  width:300%;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  transition: all 0.2s;
-}
-.tab-container > input:nth-of-type(1):checked ~ .tab-row { left: 0; }
-.tab-container > input:nth-of-type(2):checked ~ .tab-row { left: -100%; }
-.tab-container > input:nth-of-type(3):checked ~ .tab-row { left: -200%; }
-
-.tab-row > div {
-  display: table-cell;
-  vertical-align: top;
-  width: 100%;
-  height: 100%;
-  padding: 10px 20px;
-}
-
-#login-account {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-self: center;
-}
-#login-account > * {
-  margin: 5px 0;
-}
-#button-login {
-  margin-top: 20px;
-}
-
-#button-fb {
-  margin: 10px 0;
+header {
+  width: 100vw;
 }
 
 /* LOBBY */
@@ -205,25 +28,6 @@ body {
   height: 100%;
 }
 
-#lobby h1 {
-  margin: 0;
-  padding: 30px 0;
-  font-size: 40px;
-  font-family: Impact;
-  text-align: center;
-  color: #f2f2f2;
-  background-color: #505160;
-}
-
-#lobby main {
-  flex: 1;
-  position: relative;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-}
-
 /*PRE GAME */
 
 #pre-game {
@@ -231,39 +35,6 @@ body {
   flex-flow: column nowrap;
   width: 100%;
   height: 100%;
-}
-
-#pre-game h1 {
-  margin: 0;
-  padding: 30px 0;
-  font-size: 40px;
-  font-family: Impact;
-  text-align: center;
-  color: #f2f2f2;
-  background-color: #505160;
-}
-
-#pre-game main {
-  flex: 1;
-  position: relative;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-}
-
-table, td, th {  
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-table {
-  border-collapse: collapse;
-  width: 50%;
-}
-
-th, td {
-  padding: 5px;
 }
 
 .invisibleButton{

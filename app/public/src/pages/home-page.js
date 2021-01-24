@@ -7,34 +7,44 @@ class HomePage {
   render() {
     const content = document.createElement('div');
     content.setAttribute('id', 'home');
+    content.style.padding = '5px';
     content.innerHTML = `
-    <header>
-    <h1>Pokemon Auto Chess</h1>
-    </header>
-    <main>
-    <img src="assets/ui/logo-pac.png" alt="Logo: Pokemon Auto Chess" />
-    <button id="button-play">Play</button>
-    </main>
-    <footer>
-
-    <a href="https://discord.gg/6JMS7tr">
-    <img src="https://img.shields.io/discord/737230355039387749.svg?style=for-the-badge&colorB=7581dc&logo=discord&logoColor=white">
-    </a>
-    <p>
-    This is a non profit game. Only made by fans for fans.
-    </p>
-    <a href="https://github.com/arnaudgregoire/pokemonAutoChess">
-      <img src="assets/ui/logo-github.png" alt="Logo: Github" />
-    </a>
-    <img src="assets/ui/logo-agi.png" alt="Logo: AG Interactive" />
-    <a href="https://colyseus.io/">
-      <img src="assets/ui/logo-colyseus.png" alt="Logo: Colyseus" />
-    </a>
-    <a href="https://phaser.io/">
-    <img src="assets/ui/logo-phaser.png" alt="Logo: Phaser" />
-  </a>
+    <div class="nes-container with-title is-centered" style="height:30%; margin-left:15%;margin-top:15%; background-color: rgba(255, 255, 255, .5);">
+      <p class="title" style="">Game</p>
+      <h1 style= "font-size:50px; margin-bottom:40px;">Pokemon Auto Chess</h1>
+      <button id="button-play" type="button" class="nes-btn is-success"><h3>Play !</h3></button>
+    </div>
     
-    </footer>`;
+    <div class="nes-container with-title is-centered" style="width:20%; height:30%; margin:10px; background-color: rgba(255, 255, 255, .5);">
+    <p class="title">Media</p>
+    
+    <section class="icon-list" style="margin-bottom:15px;">
+    <!-- facebook -->
+    <a href="https://www.facebook.com/Pok%C3%A9mon-Auto-Chess-Espa%C3%B1ol-108035354419173">
+    <i class="nes-icon facebook is-large"></i>
+    </a>
+    
+    <!-- github -->
+    <a href="https://github.com/arnaudgregoire/pokemonAutoChess">
+    <i class="nes-icon github is-large"></i>
+    </a>
+    
+    <!-- twitch -->
+    <a href="https://www.twitch.tv/ag_interactive">
+    <i class="nes-icon twitch is-large"></i>
+    </a>
+    
+    <!-- youtube -->
+    <a href="https://www.youtube.com/watch?v=sn68G5b-xkE">
+    <i class="nes-icon youtube is-large"></i>
+    </a>
+    </i>
+    </section>
+    <button type="button" class="nes-btn is-error"><a>Join Discord</a></button>
+    <p style="margin-top:10px;">This is a non profit game. Only made by fans for fans.</p>
+    </div>
+    <img src="assets/ui/chrysacier.gif" style="position:absolute; top:160px; left:580px;"/>
+`;
     document.body.innerHTML = '';
     document.body.appendChild(content);
   }

@@ -373,8 +373,7 @@ async onAuth(client, options, request) {
 
 onJoin (client, options, auth) {
   super.onJoin(client, options, auth);
-  const time = new Date(Date.now());
-  this.state.addMessage('Server',`${auth.email} joined.`, auth.metadata.avatar, Date.now(), true);
+  this.state.addMessage('Server',`${auth.email.split('@')[0]} joined.`, auth.metadata.avatar, Date.now(), true);
   this.clients.forEach(cli => {
     if(cli.auth.email == client.auth.email && client.sessionId != cli.sessionId){
 

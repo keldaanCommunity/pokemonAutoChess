@@ -17,27 +17,28 @@ class LobbyPage {
   addMessage(message){
     //console.log(message);
     if(document.getElementById('messages')){
-      let messageHTML = document.createElement('li');
-      let nameHTML = document.createElement('p');
-      let messageContentHTML = document.createElement('p');
+
+      let messageHTML = document.createElement('section');
+      messageHTML.className = "message -left";
+
+      let balloonHTML = document.createElement('div');
+      balloonHTML.className = "nes-balloon from-left";
   
+      let messageContentHTML = document.createElement('p');
       messageContentHTML.textContent = message.payload;
+      balloonHTML.appendChild(messageContentHTML);
+      /*
       const timeOfMessage = new Date(message.time);
       nameHTML.style.color = 'black';
       nameHTML.style.fontWeight = 'bold';
-      nameHTML.textContent = `${timeOfMessage.toUTCString()} - ${message.name} :`;
-      
-      if(message.avatar){
-        let imageHTML = document.createElement('img');
-        imageHTML.src = `assets/avatar/${message.avatar}.png`;
-        imageHTML.style.width = '50px';
-        imageHTML.style.height = '50px';
-        messageHTML.appendChild(imageHTML);
-      }
-      
-      messageHTML.appendChild(nameHTML);
-      messageHTML.appendChild(messageContentHTML);
-      messageHTML.style.display = 'flex';
+      nameHTML.textContent = `${timeOfMessage.getHours()}:${timeOfMessage.getMinutes()} - ${message.name} :`;
+      */
+      let imageHTML = document.createElement('img');
+      imageHTML.src = `assets/avatar/${message.avatar}.png`;
+      imageHTML.style.width = '50px';
+      imageHTML.style.height = '50px';
+      messageHTML.appendChild(imageHTML);
+      messageHTML.appendChild(balloonHTML);
       document.getElementById('messages').appendChild(messageHTML);
       messageHTML.scrollIntoView();
     }
@@ -95,12 +96,8 @@ class LobbyPage {
     let self = this;
     const content = document.createElement('div');
     content.setAttribute('id', 'lobby');
+    content.style.padding = '10px';
     content.innerHTML = `
-  <header>
-    <h1>${WORDS.GAME_LOBBY[this.langage]}</h1>
-  </header>
-
-  
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -116,37 +113,21 @@ class LobbyPage {
         </div>
         <div class="modal-body">
           <h4>Level ${_client.auth.metadata.level}</h4>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${_client.auth.metadata.exp}" aria-valuemin="0" aria-valuemax="${XP_TABLE[_client.auth.metadata.level]}" style="width: ${_client.auth.metadata.exp * 100 / XP_TABLE[_client.auth.metadata.level]}%">${_client.auth.metadata.exp}/${XP_TABLE[_client.auth.metadata.level]} XP</div>
-          </div>
+          <progress class="nes-progress" value="${_client.auth.metadata.exp}" max="${XP_TABLE[_client.auth.metadata.level]}"></progress>
           <h4>Wins</h4>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${_client.auth.metadata.wins}" aria-valuemin="0" aria-valuemax="500" style="width: ${_client.auth.metadata.wins * 100 / 500}%">${_client.auth.metadata.wins}/500 Wins</div>
-          </div>
+          <progress class="nes-progress" value="${_client.auth.metadata.wins}" max="500"></progress>
           <h4>Frosty Forest</h4>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.ICE}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.ICE * 100 / 100}%">${_client.auth.metadata.mapWin.ICE}/100 Wins</div>
-          </div>
+          <progress class="nes-progress is-primary" value="${_client.auth.metadata.mapWin.ICE}" max="100"></progress>
           <h4>Glimmer Desert</h4>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.GROUND}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.GROUND * 100 / 100}%">${_client.auth.metadata.mapWin.GROUND}/100 Wins</div>
-          </div>
+          <progress class="nes-progress is-warning" value="${_client.auth.metadata.mapWin.GROUND}" max="100"></progress>
           <h4>Hidden Highland</h4>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.GRASS}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.GRASS * 100 / 100}%">${_client.auth.metadata.mapWin.GRASS}/100 Wins</div>
-          </div>
+          <progress class="nes-progress is-success" value="${_client.auth.metadata.mapWin.GRASS}" max="100"></progress>
           <h4>Magma Cavern</h4>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.FIRE}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.FIRE * 100 / 100}%">${_client.auth.metadata.mapWin.FIRE}/100 Wins</div>
-          </div>
+          <progress class="nes-progress is-success" value="${_client.auth.metadata.mapWin.FIRE}" max="100"></progress>
           <h4>Tiny Woods</h4>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.NORMAL}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.NORMAL * 100 / 100}%">${_client.auth.metadata.mapWin.NORMAL}/100 Wins</div>
-          </div>
+          <progress class="nes-progress is-success" value="${_client.auth.metadata.mapWin.NORMAL}" max="100"></progress>
           <h4>Stormy Sea</h4>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-cyan" role="progressbar" aria-valuenow="${_client.auth.metadata.mapWin.WATER}" aria-valuemin="0" aria-valuemax="100" style="width: ${_client.auth.metadata.mapWin.WATER * 100 / 100}%">${_client.auth.metadata.mapWin.WATER}/100 Wins</div>
-          </div>
+          <progress class="nes-progress is-primary" value="${_client.auth.metadata.mapWin.WATER}" max="100"></progress>
 
           <table class="table">
           <tbody>
@@ -222,15 +203,15 @@ class LobbyPage {
 
   <div style="display:flex; justify-content:space-between;"> 
   
-    <button type="button" class="btn btn-secondary" id="button-home">${WORDS.HOME[this.langage]}</button>
+    <button type="button" class="nes-btn" id="button-home">${WORDS.HOME[this.langage]}</button>
     <div class="dropdown">
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="nes-btn is-warning" data-toggle="modal" data-target="#exampleModal">
       Profile
     </button>
 
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="nes-btn is-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <img src="assets/flags/${this.langage}.png"/>  
     ${WORDS.CHANGE_LANGAGE[this.langage]}
     </button>
@@ -244,26 +225,32 @@ class LobbyPage {
       </div>
     </div>
   </div>
-  <div style="display:flex; height:80%;"> 
+  <div style="display:flex; justify-content:space-between; height:100%;"> 
 
-    <div style="width:50%; height:100%;">      
-      <ul id="messages" style="height:100%; overflow: scroll; display:flex; flex-flow:column;">
-      </ul>
-    </div>
-
-    <div style="display:flex; flex-flow:column; justify-content:space-around; align-items:center; width:50%; height:100%;">   
-     <div style="display:flex;flex-flow:row;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
-      <h3>${WORDS.AVAILABLE_ROOM_IDS[this.langage]}:</h3>
-      <ul id="room-list"></ul>
-      <button type="button" class="btn btn-secondary" id="create">${WORDS.CREATE_NEW_ROOM[this.langage]}</button>
-    </div>
-
+  <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; margin-left:15%;">
+  <p class="title">Game Lobby</p>  
+   <div style="display:flex;flex-flow:row;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
+    <h3 style="margin:10px;">${WORDS.AVAILABLE_ROOM_IDS[this.langage]}:</h3>
+    
+    <div id="room-list" style="margin-top:10px; list-style: none;"></div>
+    <button type="button" class="nes-btn is-success" id="create">${WORDS.CREATE_NEW_ROOM[this.langage]}</button>
   </div>
 
-  <div id='chat-container' style="width:50%; display:flex;">
-    <input style="width:80%;" id="inputMessage" class="inputMessage" placeholder="${WORDS.TYPE_HERE[this.langage]}..." type="text">
-    <button type="button" class="btn btn-secondary" style="width:20%;" id="send">${WORDS.SEND[this.langage]}</button>
-  </div>`;
+    <section class="nes-container" style="background-color: rgba(255, 255, 255, .5); margin:10px; overflow:scroll; height:90vh;">
+    <section class="message-list" id="messages">
+      </section>
+
+      <div id='chat-container' style="display:flex; position:relative; bottom:0px; left:0px;">
+      <div class="nes-field" style="width:78%; margin-right:2%;">
+        <input type="text" id="inputMessage" class="nes-input" placeholder="${WORDS.TYPE_HERE[this.langage]}...">
+      </div>
+      <button type="button" class="nes-btn is-error" style="width:20%;" id="send">${WORDS.SEND[this.langage]}</button>
+      </div>
+    </section>
+  </div>
+
+
+`;
     document.body.innerHTML = '';
     document.body.appendChild(content);
     $(function () {
@@ -349,17 +336,36 @@ class LobbyPage {
       document.getElementById('room-list').innerHTML = '';
       this.allRooms.forEach((room) => {
         if (room.name != 'game') {
-          let item = document.createElement('li');
-          item.textContent = `Room id : ${room.roomId} (${room.clients}/${room.maxClients})`;
+          let nesContainer = document.createElement('div');
+          nesContainer.style.marginTop = '20px';
+          nesContainer.style.marginBottom = '20px';
+          nesContainer.className = 'nes-container with-title is-centered';
+
+          let infoContainer = document.createElement('div');
+          infoContainer.style.display = 'flex';
+          infoContainer.style.justifyContent = 'space-around';
+
+          let title = document.createElement('p');
+          title.className = 'title';
+          title.textContent = `Room id : ${room.roomId}`;
+
+          let content = document.createElement('h3');
+          content.style.marginTop = '15px';
+          content.textContent = `${room.clients} / ${room.maxClients}`;
+
           let button = document.createElement('button');
           button.textContent = 'Join';
-          button.classList.add("btn");
-          button.classList.add("btn-secondary");
+          button.className = 'nes-btn is-warning';
           button.addEventListener('click', () => {
             this.joinRoomById(room.roomId);
           });
-          item.appendChild(button);
-          document.getElementById('room-list').appendChild(item);
+
+          infoContainer.appendChild(content);
+          infoContainer.appendChild(button);
+          nesContainer.appendChild(title);
+          nesContainer.appendChild(infoContainer);
+          
+          document.getElementById('room-list').appendChild(nesContainer);
         }
       });
     }

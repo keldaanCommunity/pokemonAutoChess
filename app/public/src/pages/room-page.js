@@ -14,43 +14,45 @@ class RoomPage {
   render() {
     const content = document.createElement('div');
     content.setAttribute('id', 'pre-game');
-
+    content.style.padding = '10px';
     content.innerHTML = `
-    <header>
-      <h1>${WORDS.ROOM_ID[this.langage]}: ${this.room.id}</h1>
-      <button type="button" class="btn btn-secondary" id="button-home">${WORDS.GAME_LOBBY[this.langage]}</button>
-    </header>
-    <div style="display:flex; height:80%;"> 
+    <button type="button" class="nes-btn" style="width: max-content;" id="button-home">${WORDS.GAME_LOBBY[this.langage]}</button>
+    <div style="display:flex; flex-flow:row;justify-content:space-between;"> 
 
-      <div style="width:30%; height:100%;">      
-        <ul id="messages" style="height:100%; overflow: scroll; display:flex; flex-flow:column;">
-        </ul>
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; display:flex; flex-flow:column; justify-content:space-between;">
+      <p class="title">${WORDS.ROOM_ID[this.langage]}: ${this.room.id}</p>
+      <div style="display:flex;flex-flow:row;"><img style="width:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
+      <p style='margin-left:10px;'>${_client.auth.email}</p>
       </div>
-
-      <div style="display:flex; flex-flow:column; justify-content:space-around; align-items:center; width:50%; height:100%;">   
-        <div style="display:flex;flex-flow:row;"><img style="width:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
-        <p style='margin-left:10px;'>${_client.auth.email}</p>
-        </div>
-        <h3>${WORDS.PLAYERS_IN_ROOM[this.langage]} :</h3>
-        <table id="players-table">
-          <tr>
-            <th>${WORDS.PLAYER[this.langage]}</th>
-            <th>${WORDS.READY[this.langage]}</th>
-          </tr>
-        </table>
-        </div>
-        <div style="display:flex;  flex-flow:column; justify-content:center;">
-          <button type="button" class="btn btn-secondary" id="ready">${WORDS.READY[this.langage]}</button>
-          <button type="button" class="btn btn-secondary" id="start">${WORDS.START_GAME[this.langage]}</button>
-          <button type="button" class="btn btn-secondary" id="quit">${WORDS.QUIT_ROOM[this.langage]}</button>
-          <button type="button" class="btn btn-secondary" id="addBot">${WORDS.ADD_BOT[this.langage]}</button>
-          <button type="button" class="btn btn-secondary" id="removeBot">${WORDS.REMOVE_BOT[this.langage]}</button>
-        </div>
+      <h3>${WORDS.PLAYERS_IN_ROOM[this.langage]} :</h3>
+      <table id="players-table" style="width:100%; flex-grow:2; border-spacing: 10px;">
+        <tr>
+          <th>${WORDS.PLAYER[this.langage]}</th>
+          <th>${WORDS.READY[this.langage]}</th>
+        </tr>
+      </table>
+      <div>
+      <button type="button" class="nes-btn is-warning" id="ready">${WORDS.READY[this.langage]}</button>
+      <button type="button" class="nes-btn is-success" id="start">${WORDS.START_GAME[this.langage]}</button>
+      <button type="button" class="nes-btn is-error" id="quit">${WORDS.QUIT_ROOM[this.langage]}</button>
+      <button type="button" class="nes-btn is-primary" id="addBot">${WORDS.ADD_BOT[this.langage]}</button>
+      <button type="button" class="nes-btn is-primary" id="removeBot">${WORDS.REMOVE_BOT[this.langage]}</button>
     </div>
-      <div style="width:30%; display:flex;">
-        <input style="width:80%;" id="inputMessage" class="inputMessage" placeholder="${WORDS.TYPE_HERE[this.langage]}..." type="text">
-        <button type="button" class="btn btn-secondary" style="width:20%;" id="send">${WORDS.SEND[this.langage]}</button>
       </div>
+
+      <section class="nes-container" style="background-color: rgba(255, 255, 255, .5); margin:10px; overflow:scroll; height:90vh;">
+      <section class="message-list" id="messages" style="height:95%;">
+        </section>
+  
+        <div id='chat-container' style="display:flex; position:relative; bottom:0px; left:0px;">
+        <div class="nes-field" style="width:78%; margin-right:2%;">
+          <input type="text" id="inputMessage" class="nes-input" placeholder="${WORDS.TYPE_HERE[this.langage]}...">
+        </div>
+        <button type="button" class="nes-btn is-error" style="width:20%;" id="send">${WORDS.SEND[this.langage]}</button>
+        </div>
+      </section>
+    </div>
+    </div>
     </div> 
     `;
     document.body.innerHTML = '';
@@ -59,7 +61,7 @@ class RoomPage {
 
   sendMessage(){
     if(document.getElementById('inputMessage').value != ''){
-      this.room.send('messages', {'name': _client.auth.email, 'message': document.getElementById('inputMessage').value, 'avatar': _client.auth.metadata.avatar});
+      this.room.send('messages', {'name': _client.auth.email, 'payload': document.getElementById('inputMessage').value, 'avatar': _client.auth.metadata.avatar});
       document.getElementById('inputMessage').value = '';
     }
   }
@@ -133,29 +135,33 @@ class RoomPage {
     });
 
     this.room.onMessage('messages', (message) => {
-      //console.log(message);
-      let messageHTML = document.createElement('li');
-      let nameHTML = document.createElement('p');
+    //console.log(message);
+    if(document.getElementById('messages')){
+
+      let messageHTML = document.createElement('section');
+      messageHTML.className = "message -left";
+
+      let balloonHTML = document.createElement('div');
+      balloonHTML.className = "nes-balloon from-left";
+  
       let messageContentHTML = document.createElement('p');
-
-      messageContentHTML.textContent = message.message;
-
+      messageContentHTML.textContent = message.payload;
+      balloonHTML.appendChild(messageContentHTML);
+      /*
+      const timeOfMessage = new Date(message.time);
       nameHTML.style.color = 'black';
       nameHTML.style.fontWeight = 'bold';
-      nameHTML.textContent = message.name + ' : ';
-      
-      if(message.avatar){
-        let imageHTML = document.createElement('img');
-        imageHTML.src = `assets/avatar/${message.avatar}.png`;
-        imageHTML.style.width = '50px';
-        imageHTML.style.height = '50px';
-        messageHTML.appendChild(imageHTML);
-      }
-      
-      messageHTML.appendChild(nameHTML);
-      messageHTML.appendChild(messageContentHTML);
-      messageHTML.style.display = 'flex';
+      nameHTML.textContent = `${timeOfMessage.getHours()}:${timeOfMessage.getMinutes()} - ${message.name} :`;
+      */
+      let imageHTML = document.createElement('img');
+      imageHTML.src = `assets/avatar/${message.avatar}.png`;
+      imageHTML.style.width = '50px';
+      imageHTML.style.height = '50px';
+      messageHTML.appendChild(imageHTML);
+      messageHTML.appendChild(balloonHTML);
       document.getElementById('messages').appendChild(messageHTML);
+      messageHTML.scrollIntoView();
+    }
     });
 
     this.room.onMessage('game-start', (message) => {

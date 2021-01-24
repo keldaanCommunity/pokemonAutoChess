@@ -12,7 +12,7 @@ const WORDS = Object.freeze({
     'esp':'Cambiar idioma'
   },
   AVAILABLE_ROOM_IDS:{
-    'eng':'Available room ids',
+    'eng':'Available rooms',
     'esp':'Sala disponible'
   },
   CREATE_NEW_ROOM:{
