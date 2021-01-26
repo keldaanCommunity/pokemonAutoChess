@@ -181,91 +181,91 @@ class Simulation extends Schema {
       if(types.includes(TYPE.FAIRY)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.MOON_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.MOON_STONE));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1* pokemon.items.count(ITEMS.MOON_STONE)));
     }
 
     if(pokemon.items.count(ITEMS.SILK_SCARF) != 0){
       if(types.includes(TYPE.NORMAL)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.SILK_SCARF);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.SILK_SCARF));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.SILK_SCARF)));
     }
 
     if(pokemon.items.count(ITEMS.SOFT_SAND) != 0){
       if(types.includes(TYPE.GROUND)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.SOFT_SAND);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.SOFT_SAND));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.SOFT_SAND)));
     }
 
     if(pokemon.items.count(ITEMS.NIGHT_STONE) != 0){
       if(types.includes(TYPE.DARK)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.NIGHT_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.NIGHT_STONE));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.NIGHT_STONE)));
     }
     
     if(pokemon.items.count(ITEMS.POISON_BARB) != 0){
       if(types.includes(TYPE.POISON)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.POISON_BARB);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.POISON_BARB));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.POISON_BARB)));
     }
 
     if(pokemon.items.count(ITEMS.DRAGON_FANG) != 0){
       if(types.includes(TYPE.DRAGON)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.DRAGON_FANG);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.DRAGON_FANG));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.DRAGON_FANG)));
     }
 
     if(pokemon.items.count(ITEMS.THUNDER_STONE) != 0){
       if(types.includes(TYPE.ELECTRIC)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.THUNDER_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.THUNDER_STONE));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.THUNDER_STONE)));
     }
 
     if(pokemon.items.count(ITEMS.METAL_SKIN) != 0){
       if(types.includes(TYPE.METAL)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.METAL_SKIN);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.METAL_SKIN));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.METAL_SKIN)));
     }
 
     if(pokemon.items.count(ITEMS.WATER_STONE) != 0){
       if(types.includes(TYPE.WATER)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.WATER_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.WATER_STONE));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.WATER_STONE)));
     }
 
     if(pokemon.items.count(ITEMS.FIRE_STONE) != 0){
       if(types.includes(TYPE.FIRE)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.FIRE_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.FIRE_STONE));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.FIRE_STONE)));
     }
 
     if(pokemon.items.count(ITEMS.LEAF_STONE) != 0){
       if(types.includes(TYPE.GRASS)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.LEAF_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.LEAF_STONE));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.LEAF_STONE)));
     }
 
     if(pokemon.items.count(ITEMS.BLACK_BELT) != 0){
       if(types.includes(TYPE.FIGHTING)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.BLACK_BELT);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.BLACK_BELT));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.BLACK_BELT)));
     }
 
     if(pokemon.items.count(ITEMS.DAWN_STONE) != 0){
       if(types.includes(TYPE.PSYCHIC)){
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.DAWN_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9 / pokemon.items.count(ITEMS.DAWN_STONE));
+      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.DAWN_STONE)));
     }
   }
 

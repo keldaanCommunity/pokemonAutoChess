@@ -287,7 +287,7 @@ const ITEM_DESCRIPTION = Object.freeze({
     esp:'Oportunidad de dejar caer entre 1 y 5 monedas de oro en cada ronda'
   }  
   , ROCKY_HELMET:{
-    eng:'When user is attacked, the attacker take 12% max health damage',
+    eng:'When user is attacked, the attacker take 12% max health physical damage',
     esp:'Cuando el usuario es atacado, el atacante recibe un 12% de daño máximo de salud.'
   }  
   , SHELL_BELL:{
