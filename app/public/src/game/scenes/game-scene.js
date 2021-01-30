@@ -79,7 +79,7 @@ export default class GameScene extends Scene {
       percentText.destroy();
       assetText.destroy();
     });
-    //console.log(window.state.mapType);
+    // console.log(window.state.mapType);
     this.load.audioSprite('sounds', `assets/sounds/${window.state.mapType}.json`, [`assets/sounds/${window.state.mapType}.mp3`]);
     this.load.image('tiles', `assets/tiles/${window.state.mapType}.png`);
     this.load.tilemapTiledJSON('map', `assets/tiles/${window.state.mapType}.json`);
@@ -90,16 +90,16 @@ export default class GameScene extends Scene {
     this.load.image('socle', 'assets/ui/socle.png');
     this.load.image('PHYSICAL', 'assets/types/PHYSICAL.png');
     this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
-    this.load.multiatlas('snowflakes','assets/ui/snowflakes.json','assets/ui/');
-    this.load.multiatlas('status','assets/status/status.json','assets/status/');
-    this.load.multiatlas('icons','assets/ui/icons.json','assets/ui/');
-    this.load.multiatlas('items','assets/items/items.json','assets/items/');
+    this.load.multiatlas('snowflakes', 'assets/ui/snowflakes.json', 'assets/ui/');
+    this.load.multiatlas('status', 'assets/status/status.json', 'assets/status/');
+    this.load.multiatlas('icons', 'assets/ui/icons.json', 'assets/ui/');
+    this.load.multiatlas('items', 'assets/items/items.json', 'assets/items/');
     this.load.multiatlas('type-details', `assets/types/${window.langage}/type-details.json`, `assets/types/${window.langage}/`);
     this.load.multiatlas('lock', 'assets/lock/lock.json', 'assets/lock/');
     this.load.multiatlas('effects', 'assets/effects/effects.json', 'assets/effects');
     this.load.multiatlas('rarity', 'assets/rarity/rarity.json', 'assets/rarity');
     this.load.multiatlas('types', 'assets/types/types.json', 'assets/types');
-    this.load.multiatlas('december', 'assets/pokemons/december/december.json', 'assets/pokemons/december/')
+    this.load.multiatlas('december', 'assets/pokemons/december/december.json', 'assets/pokemons/december/');
     this.load.multiatlas('COMMON', 'assets/pokemons/common/common.json', 'assets/pokemons/common');
     this.load.multiatlas('NEUTRAL', 'assets/pokemons/neutral/neutral.json', 'assets/pokemons/neutral');
     this.load.multiatlas('UNCOMMON', 'assets/pokemons/uncommon/uncommon.json', 'assets/pokemons/uncommon');
@@ -119,9 +119,9 @@ export default class GameScene extends Scene {
     this.input.mouse.disableContextMenu();
     this.input.dragDistanceThreshold = 1;
     this.map = this.make.tilemap({key: 'map'});
-    const tileset = this.map.addTilesetImage(window.state.mapType, 'tiles',24,24,1,1);
+    const tileset = this.map.addTilesetImage(window.state.mapType, 'tiles', 24, 24, 1, 1);
     this.map.createStaticLayer('World', tileset, 0, 0);
-    //this.map.createStaticLayer('Top', tileset, 0, 0);
+    // this.map.createStaticLayer('Top', tileset, 0, 0);
 
     this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);
@@ -135,7 +135,7 @@ export default class GameScene extends Scene {
     this.battleManager = new BattleManager(this, this.battle, window.state.players[window.sessionId]);
     this.weatherManager = new WeatherManager(this);
     this.entryHazardsManager = new EntryHazardsManager(this, this.map, tileset);
-    this.pokemon = this.add.existing(new Pokemon(this, 130,340,PokemonFactory.createPokemonFromName(window.state.players[window.sessionId].avatar),false));
+    this.pokemon = this.add.existing(new Pokemon(this, 130, 340, PokemonFactory.createPokemonFromName(window.state.players[window.sessionId].avatar), false));
     window.animationManager.animatePokemon(this.pokemon);
 
     this.textStyle = {
@@ -144,7 +144,7 @@ export default class GameScene extends Scene {
       color: 'white',
       align: 'center',
       stroke: '#000',
-      strokeThickness: 2,
+      strokeThickness: 2
     };
 
     this.bigTextStyle = {
@@ -155,7 +155,7 @@ export default class GameScene extends Scene {
       stroke: '#000',
       strokeThickness: 2
     };
-    this.mapName = this.add.text(1570,25, MAP_TYPE_NAME[window.state.mapType], this.textStyle);
+    this.mapName = this.add.text(1570, 25, MAP_TYPE_NAME[window.state.mapType], this.textStyle);
     this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name.slice(0, 10), this.textStyle);
     this.phaseText = this.add.text(860, 25, window.state.players[window.sessionId].phase, this.textStyle);
     this.opponentNameText = this.add.text(1270, 25, window.state.players[window.sessionId].opponentName.slice(0, 10), this.textStyle);
@@ -173,7 +173,7 @@ export default class GameScene extends Scene {
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
     this.transitionScreen.setAlpha(0);
     this.music = this.sound.addAudioSprite('sounds');
-    this.music.play(window.state.mapType,{
+    this.music.play(window.state.mapType, {
       mute: false,
       volume: 0.3,
       rate: 1,
@@ -181,15 +181,15 @@ export default class GameScene extends Scene {
       seek: 0,
       loop: true,
       delay: 0
-  });
+    });
     this.initilizeDragAndDrop();
     window.initialized = true;
 
-    //console.log(window.state.mapType);
-    let self = this;
+    // console.log(window.state.mapType);
+    const self = this;
     window.state.specialCells.forEach((cell) => {
-      let coordinates = window.transformAttackCoordinate(cell.positionX, cell.positionY);
-      let sprite = new GameObjects.Sprite(self,coordinates[0],coordinates[1],'attacks',`${window.state.mapType}/cell/000`);
+      const coordinates = window.transformAttackCoordinate(cell.positionX, cell.positionY);
+      const sprite = new GameObjects.Sprite(self, coordinates[0], coordinates[1], 'attacks', `${window.state.mapType}/cell/000`);
       self.add.existing(sprite);
       window.animationManager.playSpecialCells(sprite);
     });
@@ -231,10 +231,10 @@ export default class GameScene extends Scene {
     this.phaseText.setText(PHASE_TRADUCTION[window.state.phase][window.langage]);
     if (window.state.phase == 'FIGHT') {
       this.boardManager.battleMode();
-      //this.music.play('battle-1');
+      // this.music.play('battle-1');
     } else {
       this.boardManager.pickMode();
-      //this.music.play('pick-1');
+      // this.music.play('pick-1');
     }
   }
 
@@ -272,15 +272,14 @@ export default class GameScene extends Scene {
 
     this.input.mouse.disableContextMenu();
 
-    this.input.on('pointerdown', function (pointer) {
-        if (pointer.rightButtonDown())
-        {
-          //console.log(this.pokemon);
-          this.pokemon.orientation = window.getOrientation(this.pokemon.x, this.pokemon.y, pointer.x, pointer.y);
-          window.animationManager.animatePokemon(this.pokemon);
-          this.pokemon.moveManager.moveTo(pointer.x, pointer.y);
-        }
-    }, this);
+    this.input.on('pointerdown', (pointer) => {
+      if (pointer.rightButtonDown()) {
+        // console.log(this.pokemon);
+        this.pokemon.orientation = window.getOrientation(this.pokemon.x, this.pokemon.y, pointer.x, pointer.y);
+        window.animationManager.animatePokemon(this.pokemon);
+        this.pokemon.moveManager.moveTo(pointer.x, pointer.y);
+      }
+    });
 
     this.input.on('dragstart', (pointer, gameObject) => {
       this.drawRectangles();
@@ -295,7 +294,7 @@ export default class GameScene extends Scene {
     this.input.on('drop', (pointer, gameObject, dropZone) => {
       this.removeRectangles();
       if (dropZone.name == 'sell-zone') {
-        if(gameObject.objType == 'item'){
+        if (gameObject.objType == 'item') {
           this.itemsContainer.updateItem(gameObject.place);
         }
         window.dispatchEvent(new CustomEvent('sell-drop', {
@@ -305,7 +304,7 @@ export default class GameScene extends Scene {
         }));
       } else {
         let place = '';
-        if(gameObject.place){
+        if (gameObject.place) {
           place = gameObject.place;
         }
         window.dispatchEvent(new CustomEvent('drag-drop', {
@@ -317,10 +316,10 @@ export default class GameScene extends Scene {
             'place': place
           }
         }));
-        if(gameObject.objType == 'pokemon'){
+        if (gameObject.objType == 'pokemon') {
           window.lastDragDropPokemon = gameObject;
         }
-        if(gameObject.objType == 'item'){
+        if (gameObject.objType == 'item') {
           this.itemsContainer.updateItem(gameObject.place);
         }
       }

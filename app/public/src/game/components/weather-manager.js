@@ -39,7 +39,6 @@ export default class WeatherManager {
   }
 
   addSnow() {
-
     this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene, 1000, 500, 2000, 1000, 0xa7cade, 0.3).setDepth(8));
     this.particles = this.scene.add.particles('snowflakes', [
       {

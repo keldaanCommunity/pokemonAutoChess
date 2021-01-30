@@ -55,18 +55,18 @@ export default class AnimationManager {
       this.createAnimations(num, 'NEUTRAL');
     });
 
-    [607,608,609].forEach((num) => {
+    [607, 608, 609].forEach((num) => {
       this.createAnimations(num, 'EPIC2');
     });
 
-    [79,80,199].forEach((num) => {
+    [79, 80, 199].forEach((num) => {
       this.createAnimations(num, 'UNCOMMON2');
     });
 
-    [69,70,71,220,221,361,362,459,460,471,473,478,582,583,584,4600].forEach((num) => {
+    [69, 70, 71, 220, 221, 361, 362, 459, 460, 471, 473, 478, 582, 583, 584, 4600].forEach((num) => {
       this.createAnimations(num, 'december');
     });
-    
+
 
     this.createAttacksAnimations();
     this.createSpecialAttacksAnimations();
@@ -74,7 +74,7 @@ export default class AnimationManager {
     this.createStatusAnimations();
   }
 
-  createStatusAnimations(){
+  createStatusAnimations() {
     this.game.anims.create({
       key: `poison`,
       frames: this.game.anims.generateFrameNames('status', {start: 0, end: 14, zeroPad: 3, prefix: 'status/poison/'}),
@@ -125,7 +125,7 @@ export default class AnimationManager {
     });
   }
 
-  createSpecialCellsAnimations(){
+  createSpecialCellsAnimations() {
     this.game.anims.create({
       key: `FIRE/cell`,
       frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'FIRE/cell/'}),
@@ -169,7 +169,7 @@ export default class AnimationManager {
     });
   }
 
-  createSpecialAttacksAnimations(){
+  createSpecialAttacksAnimations() {
     this.game.anims.create({
       key: SPECIAL_SKILL.FIRE_BLAST,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 16, zeroPad: 3, prefix: `${SPECIAL_SKILL.FIRE_BLAST}/`}),
@@ -274,7 +274,7 @@ export default class AnimationManager {
       frameRate: 15,
       repeat: 0
     });
-    
+
     this.game.anims.create({
       key: SPECIAL_SKILL.BLAST_BURN,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 16, zeroPad: 3, prefix: `${SPECIAL_SKILL.BLAST_BURN}/`}),
@@ -358,7 +358,7 @@ export default class AnimationManager {
       frameRate: 3,
       repeat: 0
     });
-    
+
     this.game.anims.create({
       key: SPECIAL_SKILL.BUG_BUZZ,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 28, zeroPad: 3, prefix: `${SPECIAL_SKILL.BUG_BUZZ}/`}),
@@ -646,9 +646,9 @@ export default class AnimationManager {
     sprite.anims.play(spriteKey);
   }
 
-  playSpecialCells(entity){
-    //console.log(entity);
-    //console.log(window.state.mapType);
+  playSpecialCells(entity) {
+    // console.log(entity);
+    // console.log(window.state.mapType);
     entity.anims.play(`${window.state.mapType}/cell`);
   }
 

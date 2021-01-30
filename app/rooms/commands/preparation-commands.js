@@ -7,8 +7,8 @@ const POKEMON_BOT = require('../../models/enum').POKEMON_BOT;
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
     this.state.users[client.sessionId] = new GameUser(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.avatar, false, false);
-    this.room.broadcast('messages', {'name':'Server', 'payload':`${ auth.email.split('@')[0] } joined.`,'avatar':auth.metadata.avatar});
-    if(this.state.users.size > 8){
+    this.room.broadcast('messages', {'name': 'Server', 'payload': `${ auth.email.split('@')[0] } joined.`, 'avatar': auth.metadata.avatar});
+    if (this.state.users.size > 8) {
       return [new OnRemoveBotCommand()];
     }
   }
@@ -38,7 +38,7 @@ class OnMessageCommand extends Command {
 
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
-    this.room.broadcast('messages', {'name':'Server', 'payload':`${ this.state.users[client.id].name } left.`,'avatar':'magnemite'});
+    this.room.broadcast('messages', {'name': 'Server', 'payload': `${ this.state.users[client.id].name } left.`, 'avatar': 'magnemite'});
     delete this.state.users[''+client.id];
   }
 }
@@ -51,32 +51,32 @@ class OnToggleReadyCommand extends Command {
 
 class OnAddBotCommand extends Command {
   execute() {
-    if(this.state.users.size < 8){
-      let id = uniqid();
-      let botList = Object.keys(BOT_AVATAR);
+    if (this.state.users.size < 8) {
+      const id = uniqid();
+      const botList = Object.keys(BOT_AVATAR);
       let bot;
-      let actualBotList = [];
-      let potentialBotList = [];
+      const actualBotList = [];
+      const potentialBotList = [];
 
       this.state.users.forEach((user, key) => {
-        if(user.isBot){
+        if (user.isBot) {
           actualBotList.push(POKEMON_BOT[user.avatar]);
         }
       });
 
       for (let i = 0; i < botList.length; i++) {
-        if(!actualBotList.includes(botList[i])){
+        if (!actualBotList.includes(botList[i])) {
           potentialBotList.push(botList[i]);
         }
       }
       bot = potentialBotList[Math.floor(Math.random() * potentialBotList.length)];
 
-      if(bot === undefined){
+      if (bot === undefined) {
         bot = botList[Math.floor(Math.random() * botList.length)];
       }
 
       this.state.users[id] = new GameUser(id, `BOT ${BOT_AVATAR[bot]}`, BOT_AVATAR[bot], true, true);
-      this.room.broadcast('messages', {'name':'Server', 'payload':`Bot ${ BOT_AVATAR[bot] } added.`,'avatar':'magnemite'});
+      this.room.broadcast('messages', {'name': 'Server', 'payload': `Bot ${ BOT_AVATAR[bot] } added.`, 'avatar': 'magnemite'});
     }
   }
 }
@@ -85,10 +85,10 @@ class OnRemoveBotCommand extends Command {
   execute() {
     let botFound = false;
     this.state.users.forEach((user, key) => {
-      if(user.isBot && !botFound){
+      if (user.isBot && !botFound) {
         this.state.users.delete(key);
         botFound = true;
-        this.room.broadcast('messages', {'name':'Server', 'payload':`Bot removed.`,'avatar':'magnemite'});
+        this.room.broadcast('messages', {'name': 'Server', 'payload': `Bot removed.`, 'avatar': 'magnemite'});
       }
     });
   }

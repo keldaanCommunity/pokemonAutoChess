@@ -14,10 +14,10 @@ class Message extends Schema {
 }
 
 schema.defineTypes(Message, {
-    name: 'string',
-    payload: 'string',
-    avatar: 'string',
-    time: 'uint64'
+  name: 'string',
+  payload: 'string',
+  avatar: 'string',
+  time: 'uint64'
 });
 
 module.exports = Message;

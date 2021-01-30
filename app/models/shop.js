@@ -1,10 +1,10 @@
 const PokemonFactory = require('./pokemon-factory');
 
-const COMMON = ['geodude', 'azurill', 'zubat', 'mareep', 'cleffa', 'igglybuff', 'caterpie', 'weedle', 'pidgey', 'hoppip', 'seedot', 'starly','bellsprout'];
-const UNCOMMON = ['swinub','eevee','bulbasaur', 'charmander', 'slowpoke', 'squirtle', 'chikorita', 'cyndaquil', 'totodile', 'treecko', 'torchic', 'mudkip', 'turtwig', 'chimchar', 'piplup', 'nidoranF', 'nidoranM'];
-const RARE = ['vanillite','pichu', 'machop', 'horsea', 'trapinch', 'spheal', 'aron', 'magnemite', 'rhyhorn', 'togepi', 'duskull', 'lotad', 'shinx', 'poliwag'];
-const EPIC = ['snorunt','abra', 'gastly', 'dratini', 'larvitar', 'slakoth', 'ralts', 'bagon', 'beldum', 'gible', 'elekid', 'magby', 'litwick'];
-const LEGENDARY = ['meditite', 'numel', 'onix', 'scyther', 'riolu','snover'];
+const COMMON = ['geodude', 'azurill', 'zubat', 'mareep', 'cleffa', 'igglybuff', 'caterpie', 'weedle', 'pidgey', 'hoppip', 'seedot', 'starly', 'bellsprout'];
+const UNCOMMON = ['swinub', 'eevee', 'bulbasaur', 'charmander', 'slowpoke', 'squirtle', 'chikorita', 'cyndaquil', 'totodile', 'treecko', 'torchic', 'mudkip', 'turtwig', 'chimchar', 'piplup', 'nidoranF', 'nidoranM'];
+const RARE = ['vanillite', 'pichu', 'machop', 'horsea', 'trapinch', 'spheal', 'aron', 'magnemite', 'rhyhorn', 'togepi', 'duskull', 'lotad', 'shinx', 'poliwag'];
+const EPIC = ['snorunt', 'abra', 'gastly', 'dratini', 'larvitar', 'slakoth', 'ralts', 'bagon', 'beldum', 'gible', 'elekid', 'magby', 'litwick'];
+const LEGENDARY = ['meditite', 'numel', 'onix', 'scyther', 'riolu', 'snover'];
 
 const PROBABILITY = {
   1: [1, 0, 0, 0, 0],
@@ -31,7 +31,7 @@ class Shop {
     for (let i = 0; i < 5; i++) {
       let pokemon = PokemonFactory.createPokemonFromName(this.pickPokemon(player));
       const seed = Math.random();
-      if(seed > 0.993){
+      if (seed > 0.993) {
         pokemon = PokemonFactory.createPokemonFromName('ditto');
       }
       player.shop[i] = pokemon.name;
@@ -43,41 +43,41 @@ class Shop {
     const seed = Math.random();
     let pokemon = '';
     let threshold = 0;
-    let common = [];
-    let uncommon = [];
-    let rare = [];
-    let epic = [];
-    let legendary = [];
-    let threeStars = [];
+    const common = [];
+    const uncommon = [];
+    const rare = [];
+    const epic = [];
+    const legendary = [];
+    const threeStars = [];
 
     player.board.forEach((pokemon, id) => {
-      if(pokemon.stars == 3){
+      if (pokemon.stars == 3) {
         threeStars.push(PokemonFactory.getPokemonFamily(pokemon.name));
       }
-  });
+    });
 
-    COMMON.forEach(name => {
-      if(!threeStars.includes(name)){
+    COMMON.forEach((name) => {
+      if (!threeStars.includes(name)) {
         common.push(name);
       }
     });
-    UNCOMMON.forEach(name => {
-      if(!threeStars.includes(name)){
+    UNCOMMON.forEach((name) => {
+      if (!threeStars.includes(name)) {
         uncommon.push(name);
       }
     });
-    RARE.forEach(name => {
-      if(!threeStars.includes(name)){
+    RARE.forEach((name) => {
+      if (!threeStars.includes(name)) {
         rare.push(name);
       }
     });
-    EPIC.forEach(name => {
-      if(!threeStars.includes(name)){
+    EPIC.forEach((name) => {
+      if (!threeStars.includes(name)) {
         epic.push(name);
       }
     });
-    LEGENDARY.forEach(name => {
-      if(!threeStars.includes(name)){
+    LEGENDARY.forEach((name) => {
+      if (!threeStars.includes(name)) {
         legendary.push(name);
       }
     });

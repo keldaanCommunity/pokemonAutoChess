@@ -73,14 +73,13 @@ class LoginPage {
     document.getElementById('button-guest').addEventListener('click', this.handleGuestButtonClick.bind(this));
   }
 
-  handleDisplayLoginClick(e){
-    if(document.getElementById('mail').style.display == 'none'){
-      document.getElementById('play-panel').style.height = "50%";
-      document.getElementById('mail').style.display = "";
-    }
-    else{
-      document.getElementById('play-panel').style.height = "30%";
-      document.getElementById('mail').style.display = "none";
+  handleDisplayLoginClick(e) {
+    if (document.getElementById('mail').style.display == 'none') {
+      document.getElementById('play-panel').style.height = '50%';
+      document.getElementById('mail').style.display = '';
+    } else {
+      document.getElementById('play-panel').style.height = '30%';
+      document.getElementById('mail').style.display = 'none';
     }
   }
 
@@ -152,7 +151,7 @@ class LoginPage {
   }
 
   joinLobbyRoom() {
-    //console.log(_client);
+    // console.log(_client);
     _client.joinOrCreate('lobby', {}).then((room) => {
       window.dispatchEvent(new CustomEvent('render-lobby', {detail: {room: room}}));
     }).catch((e) => {

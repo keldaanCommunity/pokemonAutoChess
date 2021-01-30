@@ -35,7 +35,7 @@ export default class SynergyContainer extends Button {
       MINERAL: 0x3f3817,
       AMORPH: 0x2d253b,
       FAIRY: 0x82525b,
-      ICE:0x38455f
+      ICE: 0x38455f
     };
 
     this.textColor = {

@@ -102,7 +102,7 @@ schema.defineTypes(Synergies, {
   MINERAL: 'uint8',
   AMORPH: 'uint8',
   FAIRY: 'uint8',
-  ICE:'uint8'
+  ICE: 'uint8'
 });
 
 module.exports = Synergies;

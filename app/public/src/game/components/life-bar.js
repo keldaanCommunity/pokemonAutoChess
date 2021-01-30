@@ -15,7 +15,7 @@ export default class LifeBar extends GameObjects.Graphics {
   }
 
   setLife(amount) {
-    //console.log(this.objType, amount);
+    // console.log(this.objType, amount);
     this.value = amount;
 
     if (this.value < 0) {

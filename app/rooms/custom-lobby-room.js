@@ -10,347 +10,345 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     super();
   }
 
-  onCreate (options) {
-    let self = this;
+  onCreate(options) {
+    const self = this;
     super.onCreate(options);
     this.setState(new LobbyState());
-  
-    Mongoose.connect(process.env.MONGO_URI , (err) => {
-      Chat.find({'time': { $gt: Date.now() - 86400000 }},(err, messages)=> {
-          if(err){
-            console.log(err);
-          }
-          else{
-            messages.forEach(message => {
-              self.state.addMessage(message.name, message.payload, message.avatar, message.time, false);
+
+    Mongoose.connect(process.env.MONGO_URI, (err) => {
+      Chat.find({'time': {$gt: Date.now() - 86400000}}, (err, messages)=> {
+        if (err) {
+          console.log(err);
+        } else {
+          messages.forEach((message) => {
+            self.state.addMessage(message.name, message.payload, message.avatar, message.time, false);
           });
-          }
+        }
       });
     });
-    
-    this.onMessage("new-message", (client, message) => {
-      this.state.addMessage(message.name, message.payload, message.avatar,Date.now(), true);
+
+    this.onMessage('new-message', (client, message) => {
+      this.state.addMessage(message.name, message.payload, message.avatar, Date.now(), true);
     });
 
-    this.onMessage("avatar", (client, message) => {
-      let pokemon = message.pokemon;
-      let lvl = client.auth.metadata.level;
-      let mapWin = client.auth.metadata.mapWin;
+    this.onMessage('avatar', (client, message) => {
+      const pokemon = message.pokemon;
+      const lvl = client.auth.metadata.level;
+      const mapWin = client.auth.metadata.mapWin;
       let changeNeeded = false;
       switch (pokemon) {
         case 'rattata':
-          if(lvl >= 0){
+          if (lvl >= 0) {
             changeNeeded = true;
           }
           break;
 
         case 'pidgey':
-          if(lvl >= 1){
+          if (lvl >= 1) {
             changeNeeded = true;
           }
-          break;          
+          break;
 
         case 'spearow':
-          if(lvl >= 2){
+          if (lvl >= 2) {
             changeNeeded = true;
           }
-          break;    
+          break;
 
         case 'caterpie':
-          if(lvl >= 3){
+          if (lvl >= 3) {
             changeNeeded = true;
           }
-          break;    
+          break;
 
         case 'weedle':
-          if(lvl >= 4){
+          if (lvl >= 4) {
             changeNeeded = true;
           }
-          break;    
+          break;
 
         case 'igglybuff':
-          if(lvl >= 5){
+          if (lvl >= 5) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'seedot':
-          if(lvl >= 6){
+          if (lvl >= 6) {
             changeNeeded = true;
           }
-          break;    
+          break;
 
         case 'zubat':
-          if(lvl >= 7){
+          if (lvl >= 7) {
             changeNeeded = true;
           }
-          break;   
-          
+          break;
+
         case 'sandshrew':
-          if(lvl >= 8){
+          if (lvl >= 8) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'pikachu':
-          if(lvl >= 9){
+          if (lvl >= 9) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'nidoranF':
-          if(lvl >= 10){
+          if (lvl >= 10) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'machop':
-          if(lvl >= 11){
+          if (lvl >= 11) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'geodude':
-          if(lvl >= 12){
+          if (lvl >= 12) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'eevee':
-          if(lvl >= 13){
+          if (lvl >= 13) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'poliwag':
-          if(lvl >= 14){
+          if (lvl >= 14) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'turtwig':
-          if(lvl >= 15){
+          if (lvl >= 15) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'togepi':
-          if(lvl >= 16){
+          if (lvl >= 16) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'ralts':
-          if(lvl >= 17){
+          if (lvl >= 17) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'nidoranM':
-          if(lvl >= 18){
+          if (lvl >= 18) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'slakoth':
-          if(lvl >= 19){
+          if (lvl >= 19) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'growlithe':
-          if(lvl >= 20){
+          if (lvl >= 20) {
             changeNeeded = true;
           }
-          break;    
-          
+          break;
+
         case 'numel':
-          if(lvl >= 21){
+          if (lvl >= 21) {
             changeNeeded = true;
           }
-          break;  
+          break;
 
         case 'abra':
-          if(lvl >= 22){
+          if (lvl >= 22) {
             changeNeeded = true;
           }
-          break;    
-                      
+          break;
+
         case 'horsea':
-          if(lvl >= 23){
+          if (lvl >= 23) {
             changeNeeded = true;
           }
-          break;    
-                    
+          break;
+
         case 'gastly':
-          if(lvl >= 24){
+          if (lvl >= 24) {
             changeNeeded = true;
           }
-          break;    
-                    
+          break;
+
         case 'mudkip':
-          if(lvl >= 25){
+          if (lvl >= 25) {
             changeNeeded = true;
           }
-          break;    
-                    
+          break;
+
         case 'trapinch':
-          if(mapWin.GROUND >= 5){
+          if (mapWin.GROUND >= 5) {
             changeNeeded = true;
           }
-          break;    
-                            
+          break;
+
         case 'vibrava':
-          if(mapWin.GROUND >= 10){
+          if (mapWin.GROUND >= 10) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'flygon':
-          if(mapWin.GROUND >= 25){
+          if (mapWin.GROUND >= 25) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'regirock':
-          if(mapWin.GROUND >= 100){
+          if (mapWin.GROUND >= 100) {
             changeNeeded = true;
           }
-          break;  
-          
+          break;
+
         case 'bagon':
-          if(mapWin.NORMAL >= 5){
+          if (mapWin.NORMAL >= 5) {
             changeNeeded = true;
           }
-          break;    
-                            
+          break;
+
         case 'shelgon':
-          if(mapWin.NORMAL >= 10){
+          if (mapWin.NORMAL >= 10) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'salamence':
-          if(mapWin.NORMAL >= 25){
+          if (mapWin.NORMAL >= 25) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'rayquaza':
-          if(mapWin.NORMAL >= 100){
+          if (mapWin.NORMAL >= 100) {
             changeNeeded = true;
           }
-          break;  
+          break;
 
         case 'spheal':
-          if(mapWin.ICE >= 5){
+          if (mapWin.ICE >= 5) {
             changeNeeded = true;
           }
-          break;    
-                            
+          break;
+
         case 'sealeo':
-          if(mapWin.ICE >= 10){
+          if (mapWin.ICE >= 10) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'walrein':
-          if(mapWin.ICE >= 25){
+          if (mapWin.ICE >= 25) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'articuno':
-          if(mapWin.ICE >= 100){
+          if (mapWin.ICE >= 100) {
             changeNeeded = true;
           }
-          break;  
+          break;
 
         case 'bulbasaur':
-          if(mapWin.GRASS >= 5){
+          if (mapWin.GRASS >= 5) {
             changeNeeded = true;
           }
-          break;    
-                            
+          break;
+
         case 'ivysaur':
-          if(mapWin.GRASS >= 10){
+          if (mapWin.GRASS >= 10) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'venusaur':
-          if(mapWin.GRASS >= 25){
+          if (mapWin.GRASS >= 25) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'shaymin':
-          if(mapWin.GRASS >= 100){
+          if (mapWin.GRASS >= 100) {
             changeNeeded = true;
           }
-          break;                
+          break;
 
         case 'squirtle':
-          if(mapWin.WATER >= 5){
+          if (mapWin.WATER >= 5) {
             changeNeeded = true;
           }
-          break;    
-                            
+          break;
+
         case 'wartortle':
-          if(mapWin.WATER >= 10){
+          if (mapWin.WATER >= 10) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'blastoise':
-          if(mapWin.WATER >= 25){
+          if (mapWin.WATER >= 25) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'kyogre':
-          if(mapWin.WATER >= 100){
+          if (mapWin.WATER >= 100) {
             changeNeeded = true;
           }
-          break;    
+          break;
 
         case 'charmander':
-          if(mapWin.FIRE >= 5){
+          if (mapWin.FIRE >= 5) {
             changeNeeded = true;
           }
-          break;    
-                            
+          break;
+
         case 'charmeleon':
-          if(mapWin.FIRE >= 10){
+          if (mapWin.FIRE >= 10) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'charizard':
-          if(mapWin.FIRE >= 25){
+          if (mapWin.FIRE >= 25) {
             changeNeeded = true;
           }
-          break;  
-                                      
+          break;
+
         case 'groudon':
-          if(mapWin.FIRE >= 100){
+          if (mapWin.FIRE >= 100) {
             changeNeeded = true;
           }
-          break;    
+          break;
 
         default:
           break;
       }
 
-      if(changeNeeded){
+      if (changeNeeded) {
         client.auth.metadata.avatar = pokemon;
-        Mongoose.connect(process.env.MONGO_URI , (err) => {
+        Mongoose.connect(process.env.MONGO_URI, (err) => {
           User.find({email: client.auth.email}, (err, users)=> {
-            if(err){
+            if (err) {
               console.log(err);
-            }
-            else{
-              users.forEach(usr => {
+            } else {
+              users.forEach((usr) => {
                 usr.metadata.avatar = pokemon;
                 usr.markModified('metadata');
                 usr.save();
@@ -360,38 +358,37 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
         });
       }
 
-      client.send('metadata',client.auth.metadata);
+      client.send('metadata', client.auth.metadata);
     });
-}
+  }
 
-async onAuth(client, options, request) {
-  super.onAuth(client, options, request);
-  const token = social.verifyToken(options.token);
-  const user = await social.User.findById(token._id);
-  return user;
-}
+  async onAuth(client, options, request) {
+    super.onAuth(client, options, request);
+    const token = social.verifyToken(options.token);
+    const user = await social.User.findById(token._id);
+    return user;
+  }
 
-onJoin (client, options, auth) {
-  super.onJoin(client, options, auth);
-  this.state.addMessage('Server',`${auth.email.split('@')[0]} joined.`, auth.metadata.avatar, Date.now(), true);
-  this.clients.forEach(cli => {
-    if(cli.auth.email == client.auth.email && client.sessionId != cli.sessionId){
+  onJoin(client, options, auth) {
+    super.onJoin(client, options, auth);
+    this.state.addMessage('Server', `${auth.email.split('@')[0]} joined.`, auth.metadata.avatar, Date.now(), true);
+    this.clients.forEach((cli) => {
+      if (cli.auth.email == client.auth.email && client.sessionId != cli.sessionId) {
+        cli.send('to-lobby', {});
+      }
+    });
+  }
 
-      cli.send('to-lobby',{});
-    }
-  });
-}
+  onLeave(client) {
+    super.onLeave(client);
+    // const time = new Date(Date.now());
+    // this.state.addMessage('Server',`${client.auth.email} left.`, client.auth.metadata.avatar, Date.now(), true);
+  }
 
-onLeave (client) {
-  super.onLeave(client);
-  const time = new Date(Date.now());
-  //this.state.addMessage('Server',`${client.auth.email} left.`, client.auth.metadata.avatar,Date.now(), true);
-}
-
-onDispose () {
-  super.onDispose();
-  console.log('Dispose LobbyRoom');
-}
+  onDispose() {
+    super.onDispose();
+    console.log('Dispose LobbyRoom');
+  }
 }
 
 module.exports = CustomLobbyRoom;

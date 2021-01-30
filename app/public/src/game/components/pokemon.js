@@ -1,9 +1,8 @@
-import {Game, GameObjects} from 'phaser';
+import {GameObjects} from 'phaser';
 import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemContainer from './item-container';
-//import pokemon from '../../../../models/pokemon';
 import {SPECIAL_SKILL} from '../../../../models/enum.js';
 
 export default class Pokemon extends Button {
@@ -81,32 +80,31 @@ export default class Pokemon extends Button {
     this.addTween();
   }
 
-  specialAttackAnimation(){
-    if(this.skill){
+  specialAttackAnimation() {
+    if (this.skill) {
       let coordinates;
       let specialProjectile;
       let coordinatesTarget;
 
-      if(this.targetX != -1 && this.targetY != -1){
-
+      if (this.targetX != -1 && this.targetY != -1) {
         switch (this.skill) {
           case SPECIAL_SKILL.FIRE_BLAST:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.FIRE_BLAST}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.FIRE_BLAST);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-          
+
           case SPECIAL_SKILL.WHEEL_OF_FIRE:
             coordinatesTarget = window.transformAttackCoordinate(this.targetX, this.targetY);
             coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.WHEEL_OF_FIRE}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.WHEEL_OF_FIRE);
             this.scene.tweens.add({
               targets: specialProjectile,
@@ -120,404 +118,404 @@ export default class Pokemon extends Button {
               }
             });
             break;
-  
+
           case SPECIAL_SKILL.SEISMIC_TOSS:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SEISMIC_TOSS}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.SEISMIC_TOSS);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-            
+
           case SPECIAL_SKILL.GUILLOTINE:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.GUILLOTINE}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(3,3);
+            specialProjectile.setScale(3, 3);
             specialProjectile.anims.play(SPECIAL_SKILL.GUILLOTINE);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.ROCK_SLIDE:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ROCK_SLIDE}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.ROCK_SLIDE);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.HEAT_WAVE:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HEAT_WAVE}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.HEAT_WAVE);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.THUNDER:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.THUNDER}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.THUNDER);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.HYDRO_PUMP:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HYDRO_PUMP}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.HYDRO_PUMP);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.DRACO_METEOR:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DRACO_METEOR}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.DRACO_METEOR);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.BLAZE_KICK:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BLAZE_KICK}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.BLAZE_KICK);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.WISH:
             coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.WISH}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(3,3);
+            specialProjectile.setScale(3, 3);
             specialProjectile.anims.play(SPECIAL_SKILL.WISH);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-            
-        case SPECIAL_SKILL.CALM_MIND:
-          coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
-          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.CALM_MIND}/000`);
-          specialProjectile.setDepth(7);
-          specialProjectile.setScale(2,2);
-          specialProjectile.anims.play(SPECIAL_SKILL.CALM_MIND);
-          specialProjectile.once('animationcomplete', () => {
-            specialProjectile.destroy();
-          });
-          break;
-  
-        case SPECIAL_SKILL.IRON_DEFENSE:
-          coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
-          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.IRON_DEFENSE}/000`);
-          specialProjectile.setDepth(7);
-          specialProjectile.setScale(2,2);
-          specialProjectile.anims.play(SPECIAL_SKILL.IRON_DEFENSE);
-          specialProjectile.once('animationcomplete', () => {
-            specialProjectile.destroy();
-          });
-          break;
-  
-        case SPECIAL_SKILL.METRONOME:
-          coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
-          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.METRONOME}/000`);
-          specialProjectile.setDepth(7);
-          specialProjectile.setScale(2,2);
-          specialProjectile.anims.play(SPECIAL_SKILL.METRONOME);
-          specialProjectile.once('animationcomplete', () => {
-            specialProjectile.destroy();
-          });
-          break;
-  
-        case SPECIAL_SKILL.SOAK:
-          coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
-          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SOAK}/000`);
-          specialProjectile.setDepth(7);
-          specialProjectile.setScale(2,2);
-          specialProjectile.anims.play(SPECIAL_SKILL.SOAK);
-          specialProjectile.once('animationcomplete', () => {
-            specialProjectile.destroy();
-          });
-          break;
-  
-        case SPECIAL_SKILL.IRON_TAIL:
-          coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
-          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.IRON_TAIL}/000`);
-          specialProjectile.setDepth(7);
-          specialProjectile.setScale(2,2);
-          specialProjectile.anims.play(SPECIAL_SKILL.IRON_TAIL);
-          specialProjectile.once('animationcomplete', () => {
-            specialProjectile.destroy();
-          });
-          break;
-  
-        case SPECIAL_SKILL.BLAST_BURN:
-          coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
-          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BLAST_BURN}/000`);
-          specialProjectile.setDepth(7);
-          specialProjectile.setScale(3,3);
-          specialProjectile.anims.play(SPECIAL_SKILL.BLAST_BURN);
-          specialProjectile.once('animationcomplete', () => {
-            specialProjectile.destroy();
-          });
-          break;
-  
-        case SPECIAL_SKILL.CHARGE:
-          coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
-          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.CHARGE}/000`);
-          specialProjectile.setDepth(7);
-          specialProjectile.setScale(2,2);
-          specialProjectile.anims.play(SPECIAL_SKILL.CHARGE);
-          specialProjectile.once('animationcomplete', () => {
-            specialProjectile.destroy();
-          });
-          break;
-  
-        case SPECIAL_SKILL.DISCHARGE:
-          coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
-          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DISCHARGE}/000`);
-          specialProjectile.setDepth(7);
-          specialProjectile.setScale(3,3);
-          specialProjectile.anims.play(SPECIAL_SKILL.DISCHARGE);
-          specialProjectile.once('animationcomplete', () => {
-            specialProjectile.destroy();
-          });
-          break;
-        
-        case SPECIAL_SKILL.BITE:
-          coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
-          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BITE}/000`);
-          specialProjectile.setDepth(7);
-          specialProjectile.setScale(2,2);
-          specialProjectile.anims.play(SPECIAL_SKILL.BITE);
-          specialProjectile.once('animationcomplete', () => {
-            specialProjectile.destroy();
-          });
-          break;
-  
-        case SPECIAL_SKILL.DRAGON_TAIL:
-          coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
-          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DRAGON_TAIL}/000`);
-          specialProjectile.setDepth(7);
-          specialProjectile.setScale(2,2);
-          specialProjectile.anims.play(SPECIAL_SKILL.DRAGON_TAIL);
-          specialProjectile.once('animationcomplete', () => {
-            specialProjectile.destroy();
-          });
-          break;
-  
-        case SPECIAL_SKILL.DRAGON_BREATH:
-          coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
-          specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DRAGON_BREATH}/000`);
-          specialProjectile.setDepth(7);
-          specialProjectile.setScale(2,2);
-          specialProjectile.anims.play(SPECIAL_SKILL.DRAGON_BREATH);
-          specialProjectile.once('animationcomplete', () => {
-            specialProjectile.destroy();
-          });
-          break;
-          
+
+          case SPECIAL_SKILL.CALM_MIND:
+            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.CALM_MIND}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.CALM_MIND);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.IRON_DEFENSE:
+            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.IRON_DEFENSE}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.IRON_DEFENSE);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.METRONOME:
+            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.METRONOME}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.METRONOME);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.SOAK:
+            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SOAK}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.SOAK);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.IRON_TAIL:
+            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.IRON_TAIL}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.IRON_TAIL);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.BLAST_BURN:
+            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BLAST_BURN}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(3, 3);
+            specialProjectile.anims.play(SPECIAL_SKILL.BLAST_BURN);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.CHARGE:
+            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.CHARGE}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.CHARGE);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.DISCHARGE:
+            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DISCHARGE}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(3, 3);
+            specialProjectile.anims.play(SPECIAL_SKILL.DISCHARGE);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.BITE:
+            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BITE}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.BITE);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.DRAGON_TAIL:
+            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DRAGON_TAIL}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.DRAGON_TAIL);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.DRAGON_BREATH:
+            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DRAGON_BREATH}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.DRAGON_BREATH);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
           case SPECIAL_SKILL.ICICLE_CRASH:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ICICLE_CRASH}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(3,3);
+            specialProjectile.setScale(3, 3);
             specialProjectile.anims.play(SPECIAL_SKILL.ICICLE_CRASH);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.ROOT:
             coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ROOT}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.ROOT);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.TORMENT:
             coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.TORMENT}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.TORMENT);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.STOMP:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.STOMP}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(3,3);
+            specialProjectile.setScale(3, 3);
             specialProjectile.anims.play(SPECIAL_SKILL.STOMP);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.DARK_PULSE:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DARK_PULSE}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.DARK_PULSE);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.NIGHT_SLASH:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.NIGHT_SLASH}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.NIGHT_SLASH);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.BUG_BUZZ:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BUG_BUZZ}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.BUG_BUZZ);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.POISON_STING:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.POISON_STING}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.POISON_STING);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
+
           case SPECIAL_SKILL.LEECH_LIFE:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.LEECH_LIFE}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.LEECH_LIFE);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
-            break;      
-  
+            break;
+
           case SPECIAL_SKILL.HAPPY_HOUR:
             coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HAPPY_HOUR}/000`);
             specialProjectile.setDepth(7);
-            specialProjectile.setScale(2,2);
+            specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.HAPPY_HOUR);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
-  
-            case SPECIAL_SKILL.TELEPORT:
-              coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
-              specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.TELEPORT}/000`);
-              specialProjectile.setDepth(7);
-              specialProjectile.setScale(2,2);
-              specialProjectile.anims.play(SPECIAL_SKILL.TELEPORT);
-              specialProjectile.once('animationcomplete', () => {
-                specialProjectile.destroy();
-              });
-              break;
-  
-            case SPECIAL_SKILL.NASTY_PLOT:
-              coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
-              specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.NASTY_PLOT}/000`);
-              specialProjectile.setDepth(7);
-              specialProjectile.setScale(2,2);
-              specialProjectile.anims.play(SPECIAL_SKILL.NASTY_PLOT);
-              specialProjectile.once('animationcomplete', () => {
-                specialProjectile.destroy();
-              });
-              break;
-  
-            case SPECIAL_SKILL.THIEF:
-              coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
-              specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.THIEF}/000`);
-              specialProjectile.setDepth(7);
-              specialProjectile.setScale(2,2);
-              specialProjectile.anims.play(SPECIAL_SKILL.THIEF);
-              specialProjectile.once('animationcomplete', () => {
-                specialProjectile.destroy();
-              });
-              break;
-  
-            case SPECIAL_SKILL.STUN_SPORE:
-              coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
-              specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.STUN_SPORE}/000`);
-              specialProjectile.setDepth(7);
-              specialProjectile.setScale(2,2);
-              specialProjectile.anims.play(SPECIAL_SKILL.STUN_SPORE);
-              specialProjectile.once('animationcomplete', () => {
-                specialProjectile.destroy();
-              });
-              break;
-  
-            case SPECIAL_SKILL.METEOR_MASH:
-              coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
-              specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.METEOR_MASH}/000`);
-              specialProjectile.setDepth(7);
-              specialProjectile.setScale(3,3);
-              specialProjectile.anims.play(SPECIAL_SKILL.METEOR_MASH);
-              specialProjectile.once('animationcomplete', () => {
-                specialProjectile.destroy();
-              });
-              break;
-  
-            case SPECIAL_SKILL.HURRICANE:
-              coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
-              specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HURRICANE}/000`);
-              specialProjectile.setDepth(7);
-              specialProjectile.setScale(2,2);
-              specialProjectile.anims.play(SPECIAL_SKILL.HURRICANE);
-              specialProjectile.once('animationcomplete', () => {
-                specialProjectile.destroy();
-              });
-              break;
-            default:
-              break;
+
+          case SPECIAL_SKILL.TELEPORT:
+            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.TELEPORT}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.TELEPORT);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.NASTY_PLOT:
+            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.NASTY_PLOT}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.NASTY_PLOT);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.THIEF:
+            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.THIEF}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.THIEF);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.STUN_SPORE:
+            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.STUN_SPORE}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.STUN_SPORE);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.METEOR_MASH:
+            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.METEOR_MASH}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(3, 3);
+            specialProjectile.anims.play(SPECIAL_SKILL.METEOR_MASH);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.HURRICANE:
+            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HURRICANE}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.HURRICANE);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+          default:
+            break;
         }
       }
     }
@@ -526,7 +524,7 @@ export default class Pokemon extends Button {
   addTween() {
     const coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
     if (this.scene) {
-      //console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
+      // console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
       this.scene.tweens.add({
         targets: this.projectile,
         x: coordinates[0],
@@ -594,7 +592,7 @@ export default class Pokemon extends Button {
 
   setManaBar(pokemon, scene, height) {
     if (pokemon.mana !== undefined) {
-      let color = 0x01b8fe;
+      const color = 0x01b8fe;
       const manabar = new Lifebar(scene, -15, height + 5, pokemon.maxMana, color, 'manabar');
       manabar.setLife(pokemon.mana);
       this.add(manabar);
@@ -640,42 +638,41 @@ export default class Pokemon extends Button {
     }
   }
 
-  setItem0(item){
-    if(this.item0){
+  setItem0(item) {
+    if (this.item0) {
       this.remove(this.item0);
     }
-    this.item0 = new ItemContainer(this.scene,this.width + 15, this.height - 50, item, false, 'item0');
+    this.item0 = new ItemContainer(this.scene, this.width + 15, this.height - 50, item, false, 'item0');
     this.scene.add.existing(item);
     this.add(this.item0);
   }
 
-  setItem1(item){
-    if(this.item1){
+  setItem1(item) {
+    if (this.item1) {
       this.remove(this.item1);
     }
-    this.item1 = new ItemContainer(this.scene,this.width + 15, this.height - 20, item, false, 'item1');
+    this.item1 = new ItemContainer(this.scene, this.width + 15, this.height - 20, item, false, 'item1');
     this.scene.add.existing(this.item1);
     this.add(this.item1);
   }
 
-  setItem2(item){
-    if(this.item2){
+  setItem2(item) {
+    if (this.item2) {
       this.remove(this.item2);
     }
-    this.item2 = new ItemContainer(this.scene,this.width + 15, this.height + 10, item, false, 'item2');
+    this.item2 = new ItemContainer(this.scene, this.width + 15, this.height + 10, item, false, 'item2');
     this.scene.add.existing(this.item2);
     this.add(this.item2);
   }
 
-  setItems(pokemon){
-    
-    if(pokemon.items.item0 && pokemon.items.item0 != ''){
+  setItems(pokemon) {
+    if (pokemon.items.item0 && pokemon.items.item0 != '') {
       this.setItem0(pokemon.items.item0);
     }
-    if(pokemon.items.item1 && pokemon.items.item1 != ''){
+    if (pokemon.items.item1 && pokemon.items.item1 != '') {
       this.setItem1(pokemon.items.item1);
     }
-    if(pokemon.items.item2 && pokemon.items.item2 != ''){
+    if (pokemon.items.item2 && pokemon.items.item2 != '') {
       this.setItem2(pokemon.items.item2);
     }
   }
@@ -708,10 +705,10 @@ export default class Pokemon extends Button {
     }
   }
 
-  addBurn(){
-    if(!this.getFirst('objType', 'burn')){
-      let burn = new GameObjects.Sprite(this.scene,0,-30,'status','status/burn/000');
-      burn.setScale(2,2);
+  addBurn() {
+    if (!this.getFirst('objType', 'burn')) {
+      const burn = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/burn/000');
+      burn.setScale(2, 2);
       this.scene.add.existing(burn);
       burn.objType = 'burn';
       burn.anims.play('burn');
@@ -719,17 +716,17 @@ export default class Pokemon extends Button {
     }
   }
 
-  removeBurn(){
-    let sprite = this.getFirst('objType', 'burn');
-    if(sprite){
-      this.remove(sprite,true);
+  removeBurn() {
+    const sprite = this.getFirst('objType', 'burn');
+    if (sprite) {
+      this.remove(sprite, true);
     }
   }
 
-  addSleep(){
-    if(!this.getFirst('objType', 'sleep')){
-      let sleep = new GameObjects.Sprite(this.scene,0,-30,'status','status/sleep/000');
-      sleep.setScale(2,2);
+  addSleep() {
+    if (!this.getFirst('objType', 'sleep')) {
+      const sleep = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/sleep/000');
+      sleep.setScale(2, 2);
       this.scene.add.existing(sleep);
       sleep.objType = 'sleep';
       sleep.anims.play('sleep');
@@ -737,17 +734,17 @@ export default class Pokemon extends Button {
     }
   }
 
-  removeSleep(){
-    let sprite = this.getFirst('objType', 'sleep');
-    if(sprite){
-      this.remove(sprite,true);
+  removeSleep() {
+    const sprite = this.getFirst('objType', 'sleep');
+    if (sprite) {
+      this.remove(sprite, true);
     }
   }
 
-  addSilence(){
-    if(!this.getFirst('objType', 'silence')){
-      let silence = new GameObjects.Sprite(this.scene,0,-30,'status','status/silence/000');
-      silence.setScale(2,2);
+  addSilence() {
+    if (!this.getFirst('objType', 'silence')) {
+      const silence = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/silence/000');
+      silence.setScale(2, 2);
       this.scene.add.existing(silence);
       silence.objType = 'silence';
       silence.anims.play('silence');
@@ -755,17 +752,17 @@ export default class Pokemon extends Button {
     }
   }
 
-  removeSilence(){
-    let sprite = this.getFirst('objType', 'silence');
-    if(sprite){
-      this.remove(sprite,true);
+  removeSilence() {
+    const sprite = this.getFirst('objType', 'silence');
+    if (sprite) {
+      this.remove(sprite, true);
     }
   }
 
-  addFreeze(){
-    if(!this.getFirst('objType', 'freeze')){
-      let freeze = new GameObjects.Sprite(this.scene,0,0,'status','status/freeze/000');
-      freeze.setScale(2,2);
+  addFreeze() {
+    if (!this.getFirst('objType', 'freeze')) {
+      const freeze = new GameObjects.Sprite(this.scene, 0, 0, 'status', 'status/freeze/000');
+      freeze.setScale(2, 2);
       this.scene.add.existing(freeze);
       freeze.objType = 'freeze';
       freeze.anims.play('freeze');
@@ -773,17 +770,17 @@ export default class Pokemon extends Button {
     }
   }
 
-  removeFreeze(){
-    let sprite = this.getFirst('objType', 'freeze');
-    if(sprite){
-      this.remove(sprite,true);
+  removeFreeze() {
+    const sprite = this.getFirst('objType', 'freeze');
+    if (sprite) {
+      this.remove(sprite, true);
     }
   }
 
-  addConfusion(){
-    if(!this.getFirst('objType', 'confusion')){
-      let confusion = new GameObjects.Sprite(this.scene,0,-30,'status','status/confusion/000');
-      confusion.setScale(2,2);
+  addConfusion() {
+    if (!this.getFirst('objType', 'confusion')) {
+      const confusion = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/confusion/000');
+      confusion.setScale(2, 2);
       this.scene.add.existing(confusion);
       confusion.objType = 'confusion';
       confusion.anims.play('confusion');
@@ -791,17 +788,17 @@ export default class Pokemon extends Button {
     }
   }
 
-  removeConfusion(){
-    let sprite = this.getFirst('objType', 'confusion');
-    if(sprite){
-      this.remove(sprite,true);
+  removeConfusion() {
+    const sprite = this.getFirst('objType', 'confusion');
+    if (sprite) {
+      this.remove(sprite, true);
     }
   }
 
-  addPoison(){
-    if(!this.getFirst('objType', 'poison')){
-      let poison = new GameObjects.Sprite(this.scene,0,-30,'status','status/poison/000');
-      poison.setScale(2,2);
+  addPoison() {
+    if (!this.getFirst('objType', 'poison')) {
+      const poison = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/poison/000');
+      poison.setScale(2, 2);
       this.scene.add.existing(poison);
       poison.objType = 'poison';
       poison.anims.play('poison');
@@ -809,17 +806,17 @@ export default class Pokemon extends Button {
     }
   }
 
-  removePoison(){
-    let sprite = this.getFirst('objType', 'poison');
-    if(sprite){
-      this.remove(sprite,true);
+  removePoison() {
+    const sprite = this.getFirst('objType', 'poison');
+    if (sprite) {
+      this.remove(sprite, true);
     }
   }
 
-  addProtect(){
-    if(!this.getFirst('objType', 'protect')){
-      let protect = new GameObjects.Sprite(this.scene,0,-30,'status','status/protect/000');
-      protect.setScale(2,2);
+  addProtect() {
+    if (!this.getFirst('objType', 'protect')) {
+      const protect = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/protect/000');
+      protect.setScale(2, 2);
       this.scene.add.existing(protect);
       protect.objType = 'protect';
       protect.anims.play('protect');
@@ -827,10 +824,10 @@ export default class Pokemon extends Button {
     }
   }
 
-  removeProtect(){
-    let sprite = this.getFirst('objType', 'protect');
-    if(sprite){
-      this.remove(sprite,true);
+  removeProtect() {
+    const sprite = this.getFirst('objType', 'protect');
+    if (sprite) {
+      this.remove(sprite, true);
     }
   }
 }

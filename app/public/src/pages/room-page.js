@@ -1,10 +1,10 @@
-import { WORDS } from "../../../models/enum";
+import {WORDS} from '../../../models/enum';
 
 class RoomPage {
   constructor(args) {
     this.room = args.room;
     this.langage = 'esp';
-    if(window._client.auth.lang){
+    if (window._client.auth.lang) {
       this.langage = window._client.auth.lang;
     }
     this.render();
@@ -59,8 +59,8 @@ class RoomPage {
     document.body.appendChild(content);
   }
 
-  sendMessage(){
-    if(document.getElementById('inputMessage').value != ''){
+  sendMessage() {
+    if (document.getElementById('inputMessage').value != '') {
       this.room.send('messages', {'name': _client.auth.email, 'payload': document.getElementById('inputMessage').value, 'avatar': _client.auth.metadata.avatar});
       document.getElementById('inputMessage').value = '';
     }
@@ -73,22 +73,22 @@ class RoomPage {
       window.dispatchEvent(new CustomEvent('render-home'));
     });
 
-    let self = this;
-    document.getElementById('addBot').addEventListener('click', function () {
-      self.room.send('addBot');
+    document.getElementById('addBot').addEventListener('click', () => {
+      this.room.send('addBot');
     });
 
-    document.getElementById('removeBot').addEventListener('click', function () {
-      self.room.send('removeBot');
+    document.getElementById('removeBot').addEventListener('click', () => {
+      this.room.send('removeBot');
     });
 
-    document.getElementById('send').addEventListener('click',function(){
-      self.sendMessage();
+    document.getElementById('send').addEventListener('click', () => {
+      this.sendMessage();
     });
-    document.getElementById('inputMessage').addEventListener('keyup', function(event) {
+
+    document.getElementById('inputMessage').addEventListener('keyup', (event) => {
       if (event.keyCode === 13) {
-       event.preventDefault();
-       self.sendMessage();
+        event.preventDefault();
+        this.sendMessage();
       }
     });
 
@@ -102,7 +102,7 @@ class RoomPage {
       });
 
       if (allUsersReady) {
-        _client.create('game', {'users':this.room.state.users}).then((room) => {
+        _client.create('game', {'users': this.room.state.users}).then((room) => {
           this.room.send('game-start', {id: room.id});
           this.room.leave();
           window.dispatchEvent(new CustomEvent('render-game', {detail: {room: room}}));
@@ -130,38 +130,37 @@ class RoomPage {
       }
     });
     this.room.onStateChange((state) => {
-      //console.log(state);
+      // console.log(state);
       this.handleUserChange();
     });
 
     this.room.onMessage('messages', (message) => {
-    //console.log(message);
-    if(document.getElementById('messages')){
+    // console.log(message);
+      if (document.getElementById('messages')) {
+        const messageHTML = document.createElement('section');
+        messageHTML.className = 'message -left';
 
-      let messageHTML = document.createElement('section');
-      messageHTML.className = "message -left";
+        const balloonHTML = document.createElement('div');
+        balloonHTML.className = 'nes-balloon from-left';
 
-      let balloonHTML = document.createElement('div');
-      balloonHTML.className = "nes-balloon from-left";
-  
-      let messageContentHTML = document.createElement('p');
-      messageContentHTML.textContent = message.payload;
-      balloonHTML.appendChild(messageContentHTML);
-      /*
+        const messageContentHTML = document.createElement('p');
+        messageContentHTML.textContent = message.payload;
+        balloonHTML.appendChild(messageContentHTML);
+        /*
       const timeOfMessage = new Date(message.time);
       nameHTML.style.color = 'black';
       nameHTML.style.fontWeight = 'bold';
       nameHTML.textContent = `${timeOfMessage.getHours()}:${timeOfMessage.getMinutes()} - ${message.name} :`;
       */
-      let imageHTML = document.createElement('img');
-      imageHTML.src = `assets/avatar/${message.avatar}.png`;
-      imageHTML.style.width = '50px';
-      imageHTML.style.height = '50px';
-      messageHTML.appendChild(imageHTML);
-      messageHTML.appendChild(balloonHTML);
-      document.getElementById('messages').appendChild(messageHTML);
-      messageHTML.scrollIntoView();
-    }
+        const imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${message.avatar}.png`;
+        imageHTML.style.width = '50px';
+        imageHTML.style.height = '50px';
+        messageHTML.appendChild(imageHTML);
+        messageHTML.appendChild(balloonHTML);
+        document.getElementById('messages').appendChild(messageHTML);
+        messageHTML.scrollIntoView();
+      }
     });
 
     this.room.onMessage('game-start', (message) => {
@@ -175,7 +174,6 @@ class RoomPage {
   }
 
   handleUserChange() {
-    let self = this;
     document.getElementById('players-table').innerHTML = `
     <tr>
     <th>${WORDS.PLAYER[this.langage]}</th>
@@ -184,7 +182,7 @@ class RoomPage {
 
     this.room.state.users.forEach((user, key) => {
       let icon = '';
-      if(user.name !== undefined){
+      if (user.name !== undefined) {
         if (user.ready) {
           icon = `<i class="fa fa-check" aria-hidden="true"></i>`;
         } else {

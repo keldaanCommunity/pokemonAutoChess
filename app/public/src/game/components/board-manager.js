@@ -10,7 +10,7 @@ export default class BoardManager {
   }
 
   addPokemon(pokemon) {
-    //console.log(pokemon.name, this.mode);
+    // console.log(pokemon.name, this.mode);
     const coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
     let pokemonUI;
 
@@ -21,15 +21,15 @@ export default class BoardManager {
     }
     window.animationManager.animatePokemon(pokemonUI);
     this.pokemons.set(pokemonUI.id, pokemonUI);
-    if(pokemon.positionY != 0 && this.mode == 'battle'){
+    if (pokemon.positionY != 0 && this.mode == 'battle') {
       pokemonUI.setVisible(false);
     }
   }
 
 
   removePokemon(pokemonToRemove) {
-    let pokemonUI = this.pokemons.get(pokemonToRemove.id);
-    if(pokemonUI){
+    const pokemonUI = this.pokemons.get(pokemonToRemove.id);
+    if (pokemonUI) {
       pokemonUI.destroy(true);
     }
   }
@@ -39,27 +39,26 @@ export default class BoardManager {
       this.addPokemon(pokemon);
     });
   }
-  
-  battleMode(){
-    //console.log('battleMode');
+
+  battleMode() {
+    // console.log('battleMode');
     this.mode = 'battle';
-    this.pokemons.forEach(pokemon => {
-      if(pokemon.positionY != 0){
+    this.pokemons.forEach((pokemon) => {
+      if (pokemon.positionY != 0) {
         pokemon.setVisible(false);
       }
     });
   }
 
-  pickMode(){
-    //console.log('pickMode');
+  pickMode() {
+    // console.log('pickMode');
     this.mode = 'pick';
-    this.pokemons.forEach(pokemon => {
+    this.pokemons.forEach((pokemon) => {
       pokemon.setVisible(true);
     });
   }
 
   setPlayer(player) {
-
     if (player.id != this.player.id) {
       this.pokemons.forEach((pokemon, key) => {
         pokemon.destroy(true);
@@ -69,9 +68,9 @@ export default class BoardManager {
     }
   }
 
-  changePokemon(pokemon, change){
-    //console.log('change', change.field, pokemon.name);
-    let pokemonUI = this.pokemons.get(pokemon.id);
+  changePokemon(pokemon, change) {
+    // console.log('change', change.field, pokemon.name);
+    const pokemonUI = this.pokemons.get(pokemon.id);
     let coordinates;
     switch (change.field) {
       case 'positionX':
@@ -81,32 +80,32 @@ export default class BoardManager {
         pokemonUI.x = coordinates[0];
         pokemonUI.y = coordinates[1];
         break;
-    
+
       case 'positionY':
         pokemonUI.positionY = change.value;
         pokemonUI.positionX = pokemon.positionX;
         coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
         pokemonUI.x = coordinates[0];
         pokemonUI.y = coordinates[1];
-        if(pokemonUI.positionY != 0 && this.mode == 'battle'){
+        if (pokemonUI.positionY != 0 && this.mode == 'battle') {
           pokemonUI.setVisible(false);
         }
         break;
-      
+
       case 'item0':
-        if(change.value != '' && change.previousValue !== undefined && change.previousValue != change.value){
+        if (change.value != '' && change.previousValue !== undefined && change.previousValue != change.value) {
           pokemonUI.setItem0(change.value);
         }
         break;
-      
+
       case 'item1':
-        if(change.value != '' && change.previousValue !== undefined && change.previousValue != change.value){
+        if (change.value != '' && change.previousValue !== undefined && change.previousValue != change.value) {
           pokemonUI.setItem1(change.value);
         }
         break;
-      
+
       case 'item2':
-        if(change.value != '' && change.previousValue !== undefined && change.previousValue != change.value){
+        if (change.value != '' && change.previousValue !== undefined && change.previousValue != change.value) {
           pokemonUI.setItem2(change.value);
         }
         break;
@@ -116,5 +115,4 @@ export default class BoardManager {
         break;
     }
   }
-  
 }

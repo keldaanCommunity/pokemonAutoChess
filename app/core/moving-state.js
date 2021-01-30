@@ -1,5 +1,4 @@
 const STATE_TYPE = require('../models/enum').STATE_TYPE;
-const EFFECTS = require('../models/enum').EFFECTS;
 const PokemonState = require('./pokemon-state');
 
 class MovingState extends PokemonState {
@@ -14,11 +13,10 @@ class MovingState extends PokemonState {
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
       // no target case
       if (targetCoordinate[0] === undefined || targetCoordinate[1] === undefined) {
-      }
-      else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) <= pokemon.range && !pokemon.confusion) {
+      } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) <= pokemon.range && !pokemon.confusion) {
         pokemon.toAttackingState();
       } else {
-        if(!pokemon.sleep && !pokemon.freeze){
+        if (!pokemon.sleep && !pokemon.freeze) {
           this.move(pokemon, board, targetCoordinate);
         }
       }

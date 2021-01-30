@@ -22,15 +22,14 @@ export default class SynergiesContainer extends GameObjects.Container {
   }
 
   updateSynergy(field, value) {
-    
     this.getFirst('type', field).updateSynergy(value);
   }
 
-  changePlayer(player){
+  changePlayer(player) {
     this.player = player;
-    let synergies = Object.keys(player.synergies);
-    synergies.forEach(synergy =>{
-      if(this.types.includes(synergy)){
+    const synergies = Object.keys(player.synergies);
+    synergies.forEach((synergy) =>{
+      if (this.types.includes(synergy)) {
         this.updateSynergy(synergy, player.synergies[synergy]);
       }
     });

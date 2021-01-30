@@ -11,11 +11,12 @@
     "comma-dangle": ["error", "never"],
     "guard-for-in": "off",
     "linebreak-style": ["error", "windows"],
-    "max-len": ["warn", {
-      "code": 120,
-      "tabWidth": 2,
-      "ignoreUrls": true
-    }],
+    // "max-len": ["warn", {
+    //   "code": 160,
+    //   "tabWidth": 2,
+    //   "ignoreUrls": true
+    // }],
+    "max-len": "off",
     "require-jsdoc": "off"
   }
 }

@@ -9,8 +9,8 @@ class ExperienceManager extends schema.Schema {
       level: 2,
       experience: 0,
       expNeeded: EXP_TABLE[2]
-      }
-    )
+    }
+    );
   }
 
   addExperience(quantity) {
