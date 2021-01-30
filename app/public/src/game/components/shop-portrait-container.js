@@ -1,5 +1,5 @@
-import {GameObjects, Game} from 'phaser';
-import {TYPE_TRADUCTION} from '../../../../models/enum'
+import {GameObjects} from 'phaser';
+import {TYPE_TRADUCTION} from '../../../../models/enum';
 
 const COLOR_TYPE = Object.freeze({
   COMMON: 0x686d7d,
@@ -18,7 +18,7 @@ export default class ShopPortraitContainer extends GameObjects.Container {
       color: 'white',
       align: 'center'
     };
-    let self = this;
+    const self = this;
     this.background = new GameObjects.Rectangle(scene, 80, 25, 200, 120, COLOR_TYPE[pokemon.rarity]);
     this.background.setInteractive({useHandCursor: true}).on('pointerdown', () => {
       window.dispatchEvent(new CustomEvent('shop-click', {

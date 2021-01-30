@@ -31,9 +31,9 @@ class GameState extends schema.Schema {
     });
   }
 
-  initializeSpecialCells(){
-    let x = [0,1,2,3,4,5,6,7];
-    let y = [0,1,2];
+  initializeSpecialCells() {
+    const x = [0, 1, 2, 3, 4, 5, 6, 7];
+    const y = [0, 1, 2];
     this.shuffle(x);
     this.shuffle(y);
     this.specialCells.push(new SpecialCell(x.pop(), y.pop()));

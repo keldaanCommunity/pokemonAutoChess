@@ -16,11 +16,9 @@ class AttackingState extends PokemonState {
         pokemon.toMovingState();
       } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) > pokemon.range) {
         pokemon.toMovingState();
-      }
-      else if(pokemon.confusion){
+      } else if (pokemon.confusion) {
         pokemon.toMovingState();
-      }
-      else {
+      } else {
         this.attack(pokemon, board, targetCoordinate, climate);
       }
     } else {
@@ -33,17 +31,17 @@ class AttackingState extends PokemonState {
     pokemon.targetY = coordinates[1];
     const target = board.getValue(coordinates[0], coordinates[1]);
     if (target && !pokemon.sleep && !pokemon.freeze) {
-      if(pokemon.effects.includes(EFFECTS.SNOW) && climate == CLIMATE.SNOW){
-        if(Math.random() > 0.9){
+      if (pokemon.effects.includes(EFFECTS.SNOW) && climate == CLIMATE.SNOW) {
+        if (Math.random() > 0.9) {
           target.triggerFreeze(2000);
         }
       }
-      if(pokemon.items.count(ITEMS.ICY_ROCK) != 0){
-        if(Math.random() > 0.9){
+      if (pokemon.items.count(ITEMS.ICY_ROCK) != 0) {
+        if (Math.random() > 0.9) {
           target.triggerFreeze(2000);
         }
       }
-      if(pokemon.effects.includes(EFFECTS.MANA_HEAL)){
+      if (pokemon.effects.includes(EFFECTS.MANA_HEAL)) {
         pokemon.setMana(pokemon.mana + 5);
       }
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
@@ -64,21 +62,21 @@ class AttackingState extends PokemonState {
       }
 
       let attackType = pokemon.attackType;
-      if(pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)){
+      if (pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
         attackType = ATTACK_TYPE.TRUE;
       }
 
       const victim = target.handleDamage(damage, board, attackType, pokemon);
 
-      if(target.items.count(ITEMS.ROCKY_HELMET) != 0){
+      if (target.items.count(ITEMS.ROCKY_HELMET) != 0) {
         pokemon.handleDamage(Math.ceil(pokemon.hp * 0.12) * target.items.count(ITEMS.ROCKY_HELMET), board, ATTACK_TYPE.PHYSICAL, target);
       }
 
-      if(pokemon.items.count(ITEMS.LIFE_ORB) != 0){
+      if (pokemon.items.count(ITEMS.LIFE_ORB) != 0) {
         pokemon.handleDamage(Math.ceil(pokemon.hp * 0.05) * pokemon.items.count(ITEMS.LIFE_ORB), board, ATTACK_TYPE.TRUE, pokemon);
       }
 
-      if(pokemon.items.count(ITEMS.SHELL_BELL) != 0){
+      if (pokemon.items.count(ITEMS.SHELL_BELL) != 0) {
         pokemon.handleHeal(Math.ceil(damage / 10) * pokemon.items.count(ITEMS.SHELL_BELL));
       }
 

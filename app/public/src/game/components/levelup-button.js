@@ -27,7 +27,7 @@ export default class LevelUpButton extends Button {
     this.add(new GameObjects.Text(scene, -80, -25, WORDS.BUY_XP[window.langage], this.textStyle));
     this.add(new GameObjects.Text(scene, 57, -25, '4', this.textStyle));
     this.add(new GameObjects.Image(scene, 85, -12, 'money').setScale(0.5, 0.5));
-    this.lifebar = new LifeBar(scene, 20, 8, 100, 0x5062ab,'lifebar');
+    this.lifebar = new LifeBar(scene, 20, 8, 100, 0x5062ab, 'lifebar');
     this.add(this.lifebar);
     this.level = new GameObjects.Text(scene, -100, 0, `Lvl ${manager.level}`, this.textStyle);
     this.experience = new GameObjects.Text(scene, 43, -5, ` ${manager.experience}`, this.textStyle);

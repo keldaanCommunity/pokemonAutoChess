@@ -7,7 +7,6 @@ const uniqid = require('uniqid');
 const Items = require('../models/items');
 const ArraySchema = schema.ArraySchema;
 const PokemonFactory = require('../models/pokemon-factory');
-const pokemon = require('../models/pokemon');
 
 class PokemonEntity extends schema.Schema {
   constructor(name, index, positionX, positionY, hp, maxMana, atk, atkSpeed, def, speDef, attackType, range, team, attackSprite, rarity, sheet, types, items, stars, simulation, skill) {
@@ -19,47 +18,47 @@ class PokemonEntity extends schema.Schema {
     this.simulation = simulation;
     this.strategy = PokemonFactory.createStrategyFromName(skill);
     this.assign(
-      {
-        id: uniqid(),
-        rarity: rarity,
-        sheet: sheet,
-        positionX: positionX,
-        positionY: positionY,
-        targetX: -1,
-        targetY: -1,
-        index: index,
-        name: name,
-        action: STATE_TYPE.MOVING,
-        orientation: ORIENTATION.DOWNLEFT,
-        baseAtk: atk,
-        baseDef: def,
-        atk: atk,
-        def: def,
-        baseSpeDef: speDef,
-        speDef: speDef,
-        attackType: attackType,
-        hp: hp,
-        maxMana:maxMana,
-        mana:0,
-        life: hp,
-        atkSpeed: atkSpeed,
-        range: range,
-        cooldown: 1000,
-        manaCooldown:1000,
-        team: team,
-        attackSprite: attackSprite,
-        types: [],
-        damageDone: 0,
-        stars: stars,
-        skill: skill,
-        burn:false,
-        silence:false,
-        poison:false,
-        freeze:false,
-        protect:false,
-        sleep:false,
-        confusion:false
-      }
+        {
+          id: uniqid(),
+          rarity: rarity,
+          sheet: sheet,
+          positionX: positionX,
+          positionY: positionY,
+          targetX: -1,
+          targetY: -1,
+          index: index,
+          name: name,
+          action: STATE_TYPE.MOVING,
+          orientation: ORIENTATION.DOWNLEFT,
+          baseAtk: atk,
+          baseDef: def,
+          atk: atk,
+          def: def,
+          baseSpeDef: speDef,
+          speDef: speDef,
+          attackType: attackType,
+          hp: hp,
+          maxMana: maxMana,
+          mana: 0,
+          life: hp,
+          atkSpeed: atkSpeed,
+          range: range,
+          cooldown: 1000,
+          manaCooldown: 1000,
+          team: team,
+          attackSprite: attackSprite,
+          types: [],
+          damageDone: 0,
+          stars: stars,
+          skill: skill,
+          burn: false,
+          silence: false,
+          poison: false,
+          freeze: false,
+          protect: false,
+          sleep: false,
+          confusion: false
+        }
     );
 
     this.burnCooldown = 0;
@@ -78,12 +77,12 @@ class PokemonEntity extends schema.Schema {
   update(dt, board, climate) {
     this.state.update(this, dt, board, climate);
   }
-  
+
   handleDamage(damage, board, attackType, attacker) {
     return this.state.handleDamage(this, damage, board, attackType, attacker);
   }
 
-  handleHeal(heal){
+  handleHeal(heal) {
     return this.state.handleHeal(this, heal);
   }
 
@@ -106,11 +105,10 @@ class PokemonEntity extends schema.Schema {
     this.burnCooldown = timer;
   }
 
-  updateBurn(dt){
-    if(this.burnCooldown - dt <= 0){
+  updateBurn(dt) {
+    if (this.burnCooldown - dt <= 0) {
       this.burn = false;
-    }
-    else{
+    } else {
       this.burnCooldown = this.burnCooldown - dt;
     }
   }
@@ -120,11 +118,10 @@ class PokemonEntity extends schema.Schema {
     this.silenceCooldown = timer;
   }
 
-  updateSilence(dt){
-    if(this.silenceCooldown - dt <= 0){
+  updateSilence(dt) {
+    if (this.silenceCooldown - dt <= 0) {
       this.silence = false;
-    }
-    else{
+    } else {
       this.silenceCooldown = this.silenceCooldown - dt;
     }
   }
@@ -134,11 +131,10 @@ class PokemonEntity extends schema.Schema {
     this.poisonCooldown = timer;
   }
 
-  updatePoison(dt){
-    if(this.poisonCooldown - dt <= 0){
+  updatePoison(dt) {
+    if (this.poisonCooldown - dt <= 0) {
       this.poison = false;
-    }
-    else{
+    } else {
       this.poisonCooldown = this.poisonCooldown - dt;
     }
   }
@@ -148,11 +144,10 @@ class PokemonEntity extends schema.Schema {
     this.freezeCooldown = timer;
   }
 
-  updateFreeze(dt){
-    if(this.freezeCooldown - dt <= 0){
+  updateFreeze(dt) {
+    if (this.freezeCooldown - dt <= 0) {
       this.freeze = false;
-    }
-    else{
+    } else {
       this.freezeCooldown = this.freezeCooldown - dt;
     }
   }
@@ -162,11 +157,10 @@ class PokemonEntity extends schema.Schema {
     this.protectCooldown = timer;
   }
 
-  updateProtect(dt){
-    if(this.protectCooldown - dt <= 0){
+  updateProtect(dt) {
+    if (this.protectCooldown - dt <= 0) {
       this.protect = false;
-    }
-    else{
+    } else {
       this.protectCooldown = this.protectCooldown - dt;
     }
   }
@@ -176,11 +170,10 @@ class PokemonEntity extends schema.Schema {
     this.sleepCooldown = timer;
   }
 
-  updateSleep(dt){
-    if(this.sleepCooldown - dt <= 0){
+  updateSleep(dt) {
+    if (this.sleepCooldown - dt <= 0) {
       this.sleep = false;
-    }
-    else{
+    } else {
       this.sleepCooldown = this.sleepCooldown - dt;
     }
   }
@@ -190,17 +183,16 @@ class PokemonEntity extends schema.Schema {
     this.confusionCooldown = timer;
   }
 
-  updateConfusion(dt){
-    if(this.confusionCooldown - dt <= 0){
+  updateConfusion(dt) {
+    if (this.confusionCooldown - dt <= 0) {
       this.confusion = false;
-    }
-    else{
+    } else {
       this.confusionCooldown = this.confusionCooldown - dt;
     }
   }
 
-  setMana(mana){
-    if(!this.silence){
+  setMana(mana) {
+    if (!this.silence) {
       this.mana = Math.min(mana, this.maxMana);
     }
   }
@@ -231,16 +223,16 @@ schema.defineTypes(PokemonEntity, {
   rarity: 'string',
   name: 'string',
   effects: ['string'],
-  items:Items,
-  stars:'uint8',
-  skill:'string',
-  burn:'boolean',
-  silence:'boolean',
-  poison:'boolean',
-  freeze:'boolean',
-  protect:'boolean',
-  sleep:'boolean',
-  confusion:'boolean'
+  items: Items,
+  stars: 'uint8',
+  skill: 'string',
+  burn: 'boolean',
+  silence: 'boolean',
+  poison: 'boolean',
+  freeze: 'boolean',
+  protect: 'boolean',
+  sleep: 'boolean',
+  confusion: 'boolean'
 });
 
 module.exports = PokemonEntity;

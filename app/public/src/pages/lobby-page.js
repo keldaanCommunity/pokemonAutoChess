@@ -1,11 +1,11 @@
-import { WORDS, XP_TABLE } from "../../../models/enum";
+import {WORDS, XP_TABLE} from '../../../models/enum';
 
 class LobbyPage {
   constructor(args) {
     this.room = args.room;
     this.allRooms = [];
     this.langage = 'esp';
-    if(window._client.auth.lang){
+    if (window._client.auth.lang) {
       this.langage = window._client.auth.lang;
     }
     this.initializeRoom();
@@ -13,18 +13,17 @@ class LobbyPage {
     this.render();
     this.addEventListeners();
   }
-  
-  addMessage(message){
-    //console.log(message);
-    if(document.getElementById('messages')){
 
-      let messageHTML = document.createElement('section');
-      messageHTML.className = "message -left";
+  addMessage(message) {
+    // console.log(message);
+    if (document.getElementById('messages')) {
+      const messageHTML = document.createElement('section');
+      messageHTML.className = 'message -left';
 
-      let balloonHTML = document.createElement('div');
-      balloonHTML.className = "nes-balloon from-left";
-  
-      let messageContentHTML = document.createElement('p');
+      const balloonHTML = document.createElement('div');
+      balloonHTML.className = 'nes-balloon from-left';
+
+      const messageContentHTML = document.createElement('p');
       messageContentHTML.textContent = message.payload;
       balloonHTML.appendChild(messageContentHTML);
       /*
@@ -33,7 +32,7 @@ class LobbyPage {
       nameHTML.style.fontWeight = 'bold';
       nameHTML.textContent = `${timeOfMessage.getHours()}:${timeOfMessage.getMinutes()} - ${message.name} :`;
       */
-      let imageHTML = document.createElement('img');
+      const imageHTML = document.createElement('img');
       imageHTML.src = `assets/avatar/${message.avatar}.png`;
       imageHTML.style.width = '50px';
       imageHTML.style.height = '50px';
@@ -44,15 +43,14 @@ class LobbyPage {
     }
   }
 
-  initializeRoom(){
+  initializeRoom() {
     this.room.onLeave((client, consent) => {
-
       if (consent) {
         // sessionStorage.setItem('PAC_Room_ID', this.room.id);
         // sessionStorage.setItem('PAC_Session_ID', this.room.sessionId);
       }
     });
-    let self = this;
+    const self = this;
     this.room.state.messages.onAdd = (message, index) => {
       self.addMessage(message);
     };
@@ -71,7 +69,7 @@ class LobbyPage {
 
     this.room.onMessage('metadata', (metadata) => {
       _client.auth.metadata = metadata;
-      //console.log(metadata);
+      // console.log(metadata);
       document.getElementById('avatarModal').src = `assets/avatar/${_client.auth.metadata.avatar}.png`;
       document.getElementById('avatar').src = `assets/avatar/${_client.auth.metadata.avatar}.png`;
     });
@@ -93,7 +91,7 @@ class LobbyPage {
   }
 
   render() {
-    let self = this;
+    const self = this;
     const content = document.createElement('div');
     content.setAttribute('id', 'lobby');
     content.style.padding = '10px';
@@ -248,28 +246,25 @@ class LobbyPage {
       </div>
     </section>
   </div>
-
-
 `;
     document.body.innerHTML = '';
     document.body.appendChild(content);
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
+    $(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
     this.handleRoomListChange();
     this.room.state.messages.forEach((message, index) => {
       self.addMessage(message);
     });
-
   }
 
   addEventListeners() {
-    //console.log(_client.auth.lang);
-    let self = this;
+    // console.log(_client.auth.lang);
+    const self = this;
 
-    window.changeAvatar = function(pokemon){
-      self.room.send('avatar',{'pokemon':pokemon});
-    }
+    window.changeAvatar = function(pokemon) {
+      self.room.send('avatar', {'pokemon': pokemon});
+    };
 
     document.getElementById('button-home').addEventListener('click', (e) => {
       this.room.leave();
@@ -281,7 +276,7 @@ class LobbyPage {
       this.createRoom();
     });
 
-    document.getElementById('send').addEventListener('click',function(){
+    document.getElementById('send').addEventListener('click', function() {
       self.sendMessage();
     });
 
@@ -293,14 +288,12 @@ class LobbyPage {
     });
 
     document.getElementById('eng-button').addEventListener('click', (e) => {
-      window.dispatchEvent(new CustomEvent('switch-lang',{detail: {lang: 'eng', render: 'lobby', room: self.room}}));
+      window.dispatchEvent(new CustomEvent('switch-lang', {detail: {lang: 'eng', render: 'lobby', room: self.room}}));
     });
 
     document.getElementById('esp-button').addEventListener('click', (e) => {
-      window.dispatchEvent(new CustomEvent('switch-lang',{detail: {lang: 'esp', render: 'lobby', room: self.room}}));
+      window.dispatchEvent(new CustomEvent('switch-lang', {detail: {lang: 'esp', render: 'lobby', room: self.room}}));
     });
-
-
   }
 
   createRoom() {
@@ -324,8 +317,8 @@ class LobbyPage {
     });
   }
 
-  sendMessage(){
-    if(document.getElementById('inputMessage').value != ''){
+  sendMessage() {
+    if (document.getElementById('inputMessage').value != '') {
       this.room.send('new-message', {'name': _client.auth.email, 'payload': document.getElementById('inputMessage').value, 'avatar': _client.auth.metadata.avatar});
       document.getElementById('inputMessage').value = '';
     }
@@ -336,24 +329,24 @@ class LobbyPage {
       document.getElementById('room-list').innerHTML = '';
       this.allRooms.forEach((room) => {
         if (room.name != 'game') {
-          let nesContainer = document.createElement('div');
+          const nesContainer = document.createElement('div');
           nesContainer.style.marginTop = '20px';
           nesContainer.style.marginBottom = '20px';
           nesContainer.className = 'nes-container with-title is-centered';
 
-          let infoContainer = document.createElement('div');
+          const infoContainer = document.createElement('div');
           infoContainer.style.display = 'flex';
           infoContainer.style.justifyContent = 'space-around';
 
-          let title = document.createElement('p');
+          const title = document.createElement('p');
           title.className = 'title';
           title.textContent = `Room id : ${room.roomId}`;
 
-          let content = document.createElement('h3');
+          const content = document.createElement('h3');
           content.style.marginTop = '15px';
           content.textContent = `${room.clients} / ${room.maxClients}`;
 
-          let button = document.createElement('button');
+          const button = document.createElement('button');
           button.textContent = 'Join';
           button.className = 'nes-btn is-warning';
           button.addEventListener('click', () => {
@@ -364,7 +357,7 @@ class LobbyPage {
           infoContainer.appendChild(button);
           nesContainer.appendChild(title);
           nesContainer.appendChild(infoContainer);
-          
+
           document.getElementById('room-list').appendChild(nesContainer);
         }
       });

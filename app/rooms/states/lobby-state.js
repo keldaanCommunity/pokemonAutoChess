@@ -8,22 +8,22 @@ class LobbyState extends schema.Schema {
     this.messages = new schema.ArraySchema();
   }
 
-  addMessage(name, payload, avatar, time, save){
-      if(this.messages.length > 200){
-        this.messages.splice(0, 1);
-      }
-      let safeName = name.split('@')[0];
-      const message = new Message(safeName, payload, avatar, time);
-      this.messages.push(message);
-      //console.log(message.name);
-      if(save){
-        Chat.create({'name':message.name,'avatar':message.avatar,'payload':message.payload, 'time': message.time});
-      }
+  addMessage(name, payload, avatar, time, save) {
+    if (this.messages.length > 200) {
+      this.messages.splice(0, 1);
+    }
+    const safeName = name.split('@')[0];
+    const message = new Message(safeName, payload, avatar, time);
+    this.messages.push(message);
+    // console.log(message.name);
+    if (save) {
+      Chat.create({'name': message.name, 'avatar': message.avatar, 'payload': message.payload, 'time': message.time});
+    }
   }
 }
 
 schema.defineTypes(LobbyState, {
-    messages: [Message]
+  messages: [Message]
 });
 
 module.exports = LobbyState;

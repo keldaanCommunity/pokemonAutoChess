@@ -13,8 +13,8 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
       stroke: '#000',
       strokeThickness: 2
     };
-    let pokemon = PokemonFactory.createPokemonFromName(player.avatar);
-    this.background = new GameObjects.Image(scene, -50, 0, pokemon.rarity, `${pokemon.index}/portrait`).setScale(1.5,1.5);
+    const pokemon = PokemonFactory.createPokemonFromName(player.avatar);
+    this.background = new GameObjects.Image(scene, -50, 0, pokemon.rarity, `${pokemon.index}/portrait`).setScale(1.5, 1.5);
     this.background.setInteractive({useHandCursor: true}).on('pointerdown', () => {
       window.dispatchEvent(new CustomEvent('player-click', {
         detail: {'id': player.id}
@@ -23,7 +23,7 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
     this.add(this.background);
     this.life = new GameObjects.Text(scene, -20, -30, player.life, this.textStyle);
     this.add(this.life);
-    this.lifeAsset = new GameObjects.Image(scene, 60, -15, 'life','life100');
+    this.lifeAsset = new GameObjects.Image(scene, 60, -15, 'life', 'life100');
     this.add(this.lifeAsset);
     this.money = new GameObjects.Text(scene, 130, -30, player.money, this.textStyle);
     this.add(this.money);
@@ -37,22 +37,22 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
   onLifeChange(value) {
     this.life.setText(value);
     let lifeLevel = 'life100';
-    if(value <= 80){
+    if (value <= 80) {
       lifeLevel = 'life80';
     }
-    if(value <= 60){
+    if (value <= 60) {
       lifeLevel = 'life60';
     }
-    if(value <= 40){
+    if (value <= 40) {
       lifeLevel = 'life40';
     }
-    if(value <= 20){
+    if (value <= 20) {
       lifeLevel = 'life20';
     }
-    if(value <= 0){
+    if (value <= 0) {
       lifeLevel = 'life0';
     }
-    this.lifeAsset.setTexture('life',lifeLevel);
+    this.lifeAsset.setTexture('life', lifeLevel);
   }
 
   onMoneyChange(value) {

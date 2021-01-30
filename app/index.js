@@ -5,7 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const Colyseus = require('colyseus');
-const monitor = require("@colyseus/monitor").monitor;
+const monitor = require('@colyseus/monitor').monitor;
 const hooks = require('@colyseus/social').hooks;
 const socialMiddleware = require('@colyseus/social/express').default;
 const validator = require('email-validator');
@@ -33,14 +33,14 @@ app.get('/', (req, res) => {
 const basicAuthMiddleware = basicAuth({
   // list of users and passwords
   users: {
-      "admin": process.env.ADMIN_PASSWORD,
+    'admin': process.env.ADMIN_PASSWORD
   },
   // sends WWW-Authenticate header, which will prompt the user to fill
   // credentials in
   challenge: true
 });
 
-app.use("/colyseus", basicAuthMiddleware, monitor());
+app.use('/colyseus', basicAuthMiddleware, monitor());
 
 hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
   if (provider == 'email' && !validator.validate($set.email)) {
@@ -52,16 +52,15 @@ hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
     wins: 0,
     exp: 0,
     level: 0,
-    mapWin:{
-      ICE:0,
-      FIRE:0,
-      GROUND:0,
-      NORMAL:0,
-      GRASS:0,
-      WATER:0
+    mapWin: {
+      ICE: 0,
+      FIRE: 0,
+      GROUND: 0,
+      NORMAL: 0,
+      GRASS: 0,
+      WATER: 0
     }
   };
-
 });
 
 // Room

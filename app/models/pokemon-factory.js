@@ -1,11 +1,10 @@
 const Pokemon = require('./pokemon');
-const schema = require('@colyseus/schema');
 const {SPECIAL_SKILL} = require('./enum');
 const Strategy = require('../core/attack-strategy');
 
 class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level) {
-    let pokemons = new Map();
+    const pokemons = new Map();
     switch (level) {
       case 1:
         const magikarp1 = PokemonFactory.createPokemonFromName('magikarp');
@@ -151,20 +150,20 @@ class PokemonFactory {
     return pokemons;
   }
 
-  static createStrategyFromName(name){
+  static createStrategyFromName(name) {
     switch (name) {
       case SPECIAL_SKILL.FIRE_BLAST:
-        return new Strategy.FireBlastStrategy(); 
-      
+        return new Strategy.FireBlastStrategy();
+
       case SPECIAL_SKILL.WHEEL_OF_FIRE:
-        return new Strategy.WheelOfFireStrategy();  
+        return new Strategy.WheelOfFireStrategy();
 
       case SPECIAL_SKILL.SEISMIC_TOSS:
         return new Strategy.SeismicTossStrategy();
 
       case SPECIAL_SKILL.GUILLOTINE:
         return new Strategy.GuillotineStrategy();
-    
+
       case SPECIAL_SKILL.ROCK_SLIDE:
         return new Strategy.RockSlideStrategy();
 
@@ -182,7 +181,7 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.BLAZE_KICK:
         return new Strategy.BlazeKickStrategy();
-      
+
       case SPECIAL_SKILL.WISH:
         return new Strategy.WishStrategy();
 
@@ -191,7 +190,7 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.IRON_DEFENSE:
         return new Strategy.IronDefenseStrategy();
-      
+
       case SPECIAL_SKILL.METRONOME:
         return new Strategy.MetronomeStrategy();
 
@@ -206,7 +205,7 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.CHARGE:
         return new Strategy.ChargeStrategy();
-      
+
       case SPECIAL_SKILL.DISCHARGE:
         return new Strategy.DischargeStrategy();
 
@@ -215,19 +214,19 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.DRAGON_TAIL:
         return new Strategy.DragonTailStrategy();
-      
+
       case SPECIAL_SKILL.DRAGON_BREATH:
         return new Strategy.DragonBreathStrategy();
-      
+
       case SPECIAL_SKILL.ICICLE_CRASH:
         return new Strategy.IcicleCrashStrategy();
 
       case SPECIAL_SKILL.ROOT:
         return new Strategy.RootStrategy();
-      
+
       case SPECIAL_SKILL.TORMENT:
         return new Strategy.TormentStrategy();
-      
+
       case SPECIAL_SKILL.STOMP:
         return new Strategy.StompStrategy();
 
@@ -245,10 +244,10 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.LEECH_LIFE:
         return new Strategy.LeechLifeStrategy();
-    
+
       case SPECIAL_SKILL.HAPPY_HOUR:
         return new Strategy.HappyHourStrategy();
-      
+
       case SPECIAL_SKILL.TELEPORT:
         return new Strategy.TeleportStrategy();
 
@@ -266,7 +265,7 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.HURRICANE:
         return new Strategy.HurricaneStrategy();
-      
+
       case SPECIAL_SKILL.BURN:
         return new Strategy.BurnStrategy();
 
@@ -275,10 +274,10 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.SILENCE:
         return new Strategy.SilenceStrategy();
-      
+
       case SPECIAL_SKILL.CONFUSION:
         return new Strategy.ConfusionStrategy();
-      
+
       case SPECIAL_SKILL.FREEZE:
         return new Strategy.FreezeStrategy();
 
@@ -1166,8 +1165,8 @@ class PokemonFactory {
     }
   }
 
-  static getPokemonRarityFromName(name){
-    let pokemon = PokemonFactory.createPokemonFromName(name);
+  static getPokemonRarityFromName(name) {
+    const pokemon = PokemonFactory.createPokemonFromName(name);
     return pokemon.rarity;
   }
 }
