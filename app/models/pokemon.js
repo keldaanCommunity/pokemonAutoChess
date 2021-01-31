@@ -61,13 +61,13 @@ class Riolu extends Pokemon {
 
 class Lucario extends Pokemon {
   constructor() {
-    super('lucario', [TYPE.FIGHTING, TYPE.HUMAN], RARITY.LEGENDARY, 'LEGENDARY', 448, 'mega-lucario', 130, 9, 1, 1, 2, 'FIGHTING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.SILENCE);
+    super('lucario', [TYPE.FIGHTING, TYPE.HUMAN, TYPE.METAL], RARITY.LEGENDARY, 'LEGENDARY', 448, 'mega-lucario', 130, 9, 1, 1, 2, 'FIGHTING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.SILENCE);
   }
 }
 
 class MegaLucario extends Pokemon {
   constructor() {
-    super('mega-lucario', [TYPE.FIGHTING, TYPE.HUMAN], RARITY.LEGENDARY, 'LEGENDARY', 4480, '', 230, 18, 1, 1, 2, 'FIGHTING/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.SILENCE);
+    super('mega-lucario', [TYPE.FIGHTING, TYPE.HUMAN, TYPE.METAL], RARITY.LEGENDARY, 'LEGENDARY', 4480, '', 230, 18, 1, 1, 2, 'FIGHTING/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.SILENCE);
   }
 }
 

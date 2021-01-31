@@ -84,8 +84,8 @@ const WORDS = Object.freeze({
     'esp': 'Raya'
   },
   INTEREST: {
-    'eng': 'Interest',
-    'esp': 'Interes'
+    'eng': 'Inter',
+    'esp': 'Inter'
   },
   WIN: {
     'eng': 'Win',
@@ -758,8 +758,8 @@ const TYPE_TRADUCTION = Object.freeze({
     esp: 'Agua'
   },
   ELECTRIC: {
-    eng: 'Electric',
-    esp: 'Electrico'
+    eng: 'Elec',
+    esp: 'Elec'
   },
   FIGHTING: {
     eng: 'Fighting',

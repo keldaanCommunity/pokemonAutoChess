@@ -6,14 +6,14 @@ export default class ItemDetail extends GameObjects.Container {
     super(scene, x, y);
     this.textStyle = {
       fontSize: '35px',
-      fontFamily: 'Verdana',
+      fontFamily: "'Press Start 2P'",
       color: 'white',
       align: 'center',
       wordWrap: {width: 400, useAdvancedWrap: true}
     };
     this.descriptionTextStyle={
-      fontSize: '20px',
-      fontFamily: 'Verdana',
+      fontSize: '15px',
+      fontFamily: "'Press Start 2P'",
       color: 'white',
       align: 'center',
       wordWrap: {width: 400, useAdvancedWrap: true}

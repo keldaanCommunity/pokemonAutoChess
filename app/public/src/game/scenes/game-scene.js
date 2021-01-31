@@ -20,6 +20,13 @@ export default class GameScene extends Scene {
   }
 
   preload() {
+
+  this.load.rexWebFont({
+      google: {
+          families: ['Press Start 2P']
+      }
+  });
+
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
     progressBox.fillStyle(0x222222, 0.8);
@@ -90,6 +97,8 @@ export default class GameScene extends Scene {
     this.load.image('socle', 'assets/ui/socle.png');
     this.load.image('PHYSICAL', 'assets/types/PHYSICAL.png');
     this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
+    this.load.image('refresh','assets/ui/refresh.png','assets/ui');
+    this.load.image('buy_exp','assets/ui/buy_exp.png','assets/ui');
     this.load.multiatlas('snowflakes', 'assets/ui/snowflakes.json', 'assets/ui/');
     this.load.multiatlas('status', 'assets/status/status.json', 'assets/status/');
     this.load.multiatlas('icons', 'assets/ui/icons.json', 'assets/ui/');
@@ -138,37 +147,37 @@ export default class GameScene extends Scene {
     this.pokemon = this.add.existing(new Pokemon(this, 130, 340, PokemonFactory.createPokemonFromName(window.state.players[window.sessionId].avatar), false));
     window.animationManager.animatePokemon(this.pokemon);
 
-    this.textStyle = {
-      fontSize: '35px',
-      fontFamily: 'Verdana',
+    window.textStyle = {
+      fontSize: '25px',
+      fontFamily: "'Press Start 2P'",
       color: 'white',
       align: 'center',
       stroke: '#000',
-      strokeThickness: 2
+      strokeThickness: 3
     };
 
-    this.bigTextStyle = {
+    window.bigTextStyle = {
       fontSize: '80px',
-      fontFamily: 'Verdana',
+      fontFamily: "'Press Start 2P'",
       color: 'white',
       align: 'center',
       stroke: '#000',
-      strokeThickness: 2
+      strokeThickness: 3
     };
-    this.mapName = this.add.text(1570, 25, MAP_TYPE_NAME[window.state.mapType], this.textStyle);
-    this.nameText = this.add.text(20, 20, window.state.players[window.sessionId].name.slice(0, 10), this.textStyle);
-    this.phaseText = this.add.text(860, 25, window.state.players[window.sessionId].phase, this.textStyle);
-    this.opponentNameText = this.add.text(1270, 25, window.state.players[window.sessionId].opponentName.slice(0, 10), this.textStyle);
-    this.turnText = this.add.text(560, 25, window.state.stageLevel, this.textStyle);
-    this.add.text(470, 25, WORDS.TURN[window.langage], this.textStyle);
-    this.timeText = this.add.text(685, 25, window.state.roundTime, this.textStyle);
-    this.add.text(735, 25, 's', this.textStyle);
-    this.lastBattleResult = this.add.text(1050, 25, window.state.players[window.sessionId].lastBattleResult, this.textStyle);
-    this.countdownText = this.add.text(700, 300, window.state.players[window.sessionId].lastBattleResult, this.bigTextStyle);
+    this.mapName = this.add.text(1570, 25, MAP_TYPE_NAME[window.state.mapType], window.textStyle);
+    this.nameText = this.add.text(10, 20, window.state.players[window.sessionId].name.slice(0, 8), window.textStyle);
+    this.phaseText = this.add.text(860, 25, window.state.players[window.sessionId].phase, window.textStyle);
+    this.opponentNameText = this.add.text(1270, 25, window.state.players[window.sessionId].opponentName.slice(0, 8), window.textStyle);
+    this.turnText = this.add.text(565, 25, window.state.stageLevel, window.textStyle);
+    this.add.text(460, 25, WORDS.TURN[window.langage], window.textStyle);
+    this.timeText = this.add.text(685, 25, window.state.roundTime, window.textStyle);
+    this.add.text(735, 25, 's', window.textStyle);
+    this.lastBattleResult = this.add.text(1040, 25, window.state.players[window.sessionId].lastBattleResult, window.textStyle);
+    this.countdownText = this.add.text(700, 300, window.state.players[window.sessionId].lastBattleResult, window.bigTextStyle);
     this.countdownText.setAlpha(0);
-    this.boardSizeText = this.add.text(300, 25, Object.keys(window.state.players[window.sessionId].boardSize).length, this.textStyle);
-    this.add.text(325, 25, '/', this.textStyle);
-    this.maxBoardSizeText = this.add.text(350, 25, window.state.players[window.sessionId].experienceManager.level, this.textStyle);
+    this.boardSizeText = this.add.text(300, 25, Object.keys(window.state.players[window.sessionId].boardSize).length, window.textStyle);
+    this.add.text(325, 25, '/', window.textStyle);
+    this.maxBoardSizeText = this.add.text(350, 25, window.state.players[window.sessionId].experienceManager.level, window.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
     this.transitionScreen.setAlpha(0);
@@ -289,6 +298,14 @@ export default class GameScene extends Scene {
     this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
       gameObject.x = dragX;
       gameObject.y = dragY;
+    });
+
+    this.input.keyboard.on('keyup-' + 'R', (e)=>{
+      window.dispatchEvent(new CustomEvent('refresh-click'));
+    });
+
+    this.input.keyboard.on('keyup-' + 'E', (e)=>{
+      window.dispatchEvent(new CustomEvent('level-click'));
     });
 
     this.input.on('drop', (pointer, gameObject, dropZone) => {

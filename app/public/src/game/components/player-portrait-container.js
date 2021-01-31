@@ -6,16 +6,16 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
     super(scene, x, y);
     this.id = player.id;
     this.textStyle = {
-      fontSize: '30px',
-      fontFamily: 'Verdana',
+      fontSize: '18px',
+      fontFamily: "'Press Start 2P'",
       color: 'white',
       align: 'center',
       stroke: '#000',
-      strokeThickness: 2
+      strokeThickness: 3
     };
     const pokemon = PokemonFactory.createPokemonFromName(player.avatar);
     this.background = new GameObjects.Image(scene, -50, 0, pokemon.rarity, `${pokemon.index}/portrait`).setScale(1.5, 1.5);
-    this.background.setInteractive({useHandCursor: true}).on('pointerdown', () => {
+    this.background.setInteractive({cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`}).on('pointerdown', () => {
       window.dispatchEvent(new CustomEvent('player-click', {
         detail: {'id': player.id}
       }));
@@ -27,7 +27,7 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
     this.add(this.lifeAsset);
     this.money = new GameObjects.Text(scene, 130, -30, player.money, this.textStyle);
     this.add(this.money);
-    this.add(new GameObjects.Image(scene, 180, -12, 'money').setScale(0.5, 0.5));
+    this.add(new GameObjects.Image(scene, 180, -20, 'money').setScale(0.5, 0.5));
     this.add(new GameObjects.Text(scene, 130, 0, 'Lvl ', this.textStyle));
     this.level = new GameObjects.Text(scene, 180, 0, player.experienceManager.level, this.textStyle);
     this.add(this.level);

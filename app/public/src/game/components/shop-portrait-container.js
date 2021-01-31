@@ -13,14 +13,14 @@ export default class ShopPortraitContainer extends GameObjects.Container {
   constructor(scene, x, y, pokemon) {
     super(scene, x, y);
     this.textStyle = {
-      fontSize: '20px',
-      fontFamily: 'Verdana',
+      fontSize: '15px',
+      fontFamily: "'Press Start 2P'",
       color: 'white',
       align: 'center'
     };
     const self = this;
     this.background = new GameObjects.Rectangle(scene, 80, 25, 200, 120, COLOR_TYPE[pokemon.rarity]);
-    this.background.setInteractive({useHandCursor: true}).on('pointerdown', () => {
+    this.background.setInteractive({cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`}).on('pointerdown', () => {
       window.dispatchEvent(new CustomEvent('shop-click', {
         detail: {'id': self.positionInShop}
       }));

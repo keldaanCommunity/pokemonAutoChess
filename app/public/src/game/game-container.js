@@ -1,5 +1,6 @@
 import GameScene from './scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
+import WebFontLoaderPlugin from 'phaser3-rex-plugins/plugins/webfontloader-plugin.js';
 import {MAP_TYPE, LAST_BATTLE_RESULT_TRADUCTION} from '../../../models/enum.js';
 
 class GameContainer {
@@ -29,7 +30,12 @@ class GameContainer {
           key: 'rexMoveTo',
           plugin: MoveToPlugin,
           start: true
-        }]
+        },
+        {
+          key: 'rexWebFontLoader',
+          plugin: WebFontLoaderPlugin,
+          start: true
+        }],
       }
     };
     window.state = this.room.state;

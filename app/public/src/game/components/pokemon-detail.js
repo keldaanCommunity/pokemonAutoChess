@@ -17,20 +17,20 @@ export default class PokemonDetail extends GameObjects.Container {
     super(scene, x, y);
     this.pokemonInformation = PokemonFactory.createPokemonFromName(name);
     this.textStyle = {
-      fontSize: '20px',
-      fontFamily: 'Verdana',
+      fontSize: '15px',
+      fontFamily: "'Press Start 2P'",
       color: 'white',
       align: 'center',
       wordWrap: {width: 200, useAdvancedWrap: true}
     };
     this.greenTextStyle= {
-      fontSize: '20px',
-      fontFamily: 'Verdana',
+      fontSize: '15px',
+      fontFamily: "'Press Start 2P'",
       color: '#00ff00'
     };
     this.redTextStyle= {
-      fontSize: '20px',
-      fontFamily: 'Verdana',
+      fontSize: '15px',
+      fontFamily: "'Press Start 2P'",
       color: '#ff0000'
     };
 

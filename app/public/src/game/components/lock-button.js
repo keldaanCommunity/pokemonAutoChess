@@ -5,8 +5,8 @@ export default class LockButton extends Button {
   constructor(scene, x, y) {
     super(scene, x, y, 50, 50);
     this.textStyle = {
-      fontSize: '20px',
-      fontFamily: 'Verdana',
+      fontSize: '15px',
+      fontFamily: "'Press Start 2P'",
       color: 'white',
       align: 'center'
     };

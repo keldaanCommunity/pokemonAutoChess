@@ -7,7 +7,7 @@ export default class SynergyContainer extends Button {
     super(scene, x, y, 130, 50);
     this.textStyle = {
       fontSize: '30px',
-      fontFamily: 'Verdana',
+      fontFamily: "'Press Start 2P'",
       color: 'white',
       align: 'center'
     };

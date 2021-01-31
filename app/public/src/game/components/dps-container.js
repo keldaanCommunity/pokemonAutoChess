@@ -35,10 +35,12 @@ export default class DpsContainer extends GameObjects.Container {
     this.id = id;
     this.damage = damage;
     this.textStyle = {
-      fontSize: '20px',
-      fontFamily: 'Verdana',
-      color: 'black',
-      align: 'center'
+      fontSize: '15px',
+      fontFamily: "'Press Start 2P'",
+      color: 'white',
+      align: 'center',
+      strokeThickness: 3,
+      stroke: '#000'
     };
     this.pokemon = PokemonFactory.createPokemonFromName(this.name);
     const nameText = this.pokemon.name.charAt(0).toUpperCase() + this.pokemon.name.slice(1);

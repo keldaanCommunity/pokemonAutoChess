@@ -230,14 +230,7 @@ export default class BattleManager {
       color='red';
       damageText = damage;
     }
-    const text = this.scene.add.existing(new GameObjects.Text(this.scene, x-25, y -30, damageText, {
-      fontSize: '40px',
-      stroke: '#fff',
-      fontFamily: 'Verdana',
-      color: color,
-      align: 'center',
-      strokeThickness: 2
-    }));
+    const text = this.scene.add.existing(new GameObjects.Text(this.scene, x-25, y -30, damageText, window.textStyle));
     text.setDepth(9);
 
     this.scene.add.tween({

@@ -6,8 +6,8 @@ export default class RefreshButton extends Button {
   constructor(scene, x, y) {
     super(scene, x, y, 200, 50);
     this.textStyle = {
-      fontSize: '20px',
-      fontFamily: 'Verdana',
+      fontSize: '15px',
+      fontFamily: "'Press Start 2P'",
       color: 'white',
       align: 'center'
     };
@@ -23,7 +23,7 @@ export default class RefreshButton extends Button {
     this.add(graphics);
     this.add(new GameObjects.Text(scene, -60, -10, WORDS.REFRESH[window.langage], this.textStyle));
     this.add(new GameObjects.Text(scene, 55, -20, '2', this.textStyle));
-    this.add(new GameObjects.Image(scene, 85, -10, 'money').setScale(0.5, 0.5));
+    this.add(new GameObjects.Image(scene, 85, -15, 'money').setScale(0.5, 0.5));
   }
 
   enterButtonHoverState() {
