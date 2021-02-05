@@ -164,7 +164,7 @@ export default class GameScene extends Scene {
       stroke: '#000',
       strokeThickness: 3
     };
-    this.mapName = this.add.text(1570, 25, MAP_TYPE_NAME[window.state.mapType], window.textStyle);
+    this.mapName = this.add.text(1570, 25, MAP_TYPE_NAME[window.state.mapType][window.langage], window.textStyle);
     this.nameText = this.add.text(10, 20, window.state.players[window.sessionId].name.slice(0, 8), window.textStyle);
     this.phaseText = this.add.text(860, 25, window.state.players[window.sessionId].phase, window.textStyle);
     this.opponentNameText = this.add.text(1270, 25, window.state.players[window.sessionId].opponentName.slice(0, 8), window.textStyle);

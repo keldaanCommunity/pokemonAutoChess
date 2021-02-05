@@ -7,7 +7,7 @@ export default class LevelUpButton extends Button {
   constructor(scene, x, y, manager) {
     super(scene, x, y, 200, 50);
     this.textStyle = {
-      fontSize: '15px',
+      fontSize: '20px',
       fontFamily: "Verdana",
       color: 'white',
       align: 'center'

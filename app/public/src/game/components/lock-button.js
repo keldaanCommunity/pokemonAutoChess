@@ -5,7 +5,7 @@ export default class LockButton extends Button {
   constructor(scene, x, y) {
     super(scene, x, y, 50, 50);
     this.textStyle = {
-      fontSize: '15px',
+      fontSize: '20px',
       fontFamily: "Verdana",
       color: 'white',
       align: 'center'

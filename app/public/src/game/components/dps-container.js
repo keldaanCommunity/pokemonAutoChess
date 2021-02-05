@@ -35,7 +35,7 @@ export default class DpsContainer extends GameObjects.Container {
     this.id = id;
     this.damage = damage;
     this.textStyle = {
-      fontSize: '15px',
+      fontSize: '20px',
       fontFamily: "Verdana",
       color: 'white',
       align: 'center',

@@ -6,7 +6,7 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
     super(scene, x, y);
     this.id = player.id;
     this.textStyle = {
-      fontSize: '18px',
+      fontSize: '25px',
       fontFamily: "Verdana",
       color: 'white',
       align: 'center',

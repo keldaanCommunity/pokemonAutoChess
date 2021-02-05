@@ -13,7 +13,7 @@ export default class ShopPortraitContainer extends GameObjects.Container {
   constructor(scene, x, y, pokemon) {
     super(scene, x, y);
     this.textStyle = {
-      fontSize: '15px',
+      fontSize: '20px',
       fontFamily: "Verdana",
       color: 'white',
       align: 'center'

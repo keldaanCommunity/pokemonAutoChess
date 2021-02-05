@@ -12,7 +12,7 @@ export default class ItemDetail extends GameObjects.Container {
       wordWrap: {width: 400, useAdvancedWrap: true}
     };
     this.descriptionTextStyle={
-      fontSize: '15px',
+      fontSize: '20px',
       fontFamily: "Verdana",
       color: 'white',
       align: 'center',

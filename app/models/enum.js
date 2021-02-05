@@ -323,7 +323,6 @@ const ITEM_NAME = Object.freeze({
   }
 });
 
-
 const ITEM_DESCRIPTION = Object.freeze({
   WHITE_GLASSES:
   {
@@ -1119,12 +1118,36 @@ const MAP_TYPE = Object.freeze({
 });
 
 const MAP_TYPE_NAME = Object.freeze({
-  WATER: 'Stormy Sea',
-  NORMAL: 'Tiny Woods',
-  FIRE: 'Magma Cavern',
-  GRASS: 'Hidden Highland',
-  ICE: 'Frosty Forest',
-  ROCK: 'Glimmer Desert'
+  WATER: {
+    'eng': 'Stormy Sea',
+    'esp': 'Mar Tormentoso',
+    'fra': 'Mer Houleuse'
+  },
+  NORMAL: {
+    'eng': 'Tiny Woods',
+    'esp': 'Arboleda Chica',
+    'fra': 'Petit Bois'
+  },
+  FIRE: {
+    'eng': 'Magma Cavern',
+    'esp': 'Caverna Magma',
+    'fra': 'Mine Magma'
+  },
+  GRASS: {
+    'eng': 'Hidden Highland',
+    'esp': 'Tierra Oculta',
+    'fra': 'Terres Illusoires'
+  },
+  ICE: {
+    'eng': 'Frosty Forest',
+    'esp': 'Bosque Helado',
+    'fra': 'Forêt Givrée'
+  },
+  ROCK: {
+    'eng': 'Shimmer Desert',
+    'esp': 'Desierto Trémulo',
+    'fra': 'Désert Chatoyant'
+  }
 });
 
 const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000];
