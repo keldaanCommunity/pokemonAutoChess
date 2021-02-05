@@ -16,7 +16,7 @@ class RoomPage {
     content.setAttribute('id', 'pre-game');
     content.style.padding = '10px';
     content.innerHTML = `
-    <button type="button" class="nes-btn" style="width: max-content;" id="button-home">${WORDS.GAME_LOBBY[this.langage]}</button>
+    <button type="button" class="nes-btn" style="width: max-content;" id="quit">${WORDS.GAME_LOBBY[this.langage]}</button>
     <div style="display:flex; flex-flow:row;justify-content:space-between;"> 
 
     <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; display:flex; flex-flow:column; justify-content:space-between;">
@@ -34,7 +34,6 @@ class RoomPage {
       <div>
       <button type="button" class="nes-btn is-warning" id="ready">${WORDS.READY[this.langage]}</button>
       <button type="button" class="nes-btn is-success" id="start">${WORDS.START_GAME[this.langage]}</button>
-      <button type="button" class="nes-btn is-error" id="quit">${WORDS.QUIT_ROOM[this.langage]}</button>
       <button type="button" class="nes-btn is-primary" id="addBot">${WORDS.ADD_BOT[this.langage]}</button>
       <button type="button" class="nes-btn is-primary" id="removeBot">${WORDS.REMOVE_BOT[this.langage]}</button>
     </div>
@@ -67,12 +66,6 @@ class RoomPage {
   }
 
   addEventListeners() {
-    document.getElementById('button-home').addEventListener('click', (e) => {
-      this.room.leave();
-      _client.auth.logout();
-      window.dispatchEvent(new CustomEvent('render-home'));
-    });
-
     document.getElementById('addBot').addEventListener('click', () => {
       this.room.send('addBot');
     });

@@ -148,12 +148,12 @@ export default class GameScene extends Scene {
     window.animationManager.animatePokemon(this.pokemon);
 
     window.textStyle = {
-      fontSize: '25px',
-      fontFamily: "'Press Start 2P'",
+      fontSize: '35px',
+      fontFamily: "Verdana",
       color: 'white',
       align: 'center',
       stroke: '#000',
-      strokeThickness: 3
+      strokeThickness: 2
     };
 
     window.bigTextStyle = {

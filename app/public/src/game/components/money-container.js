@@ -6,11 +6,11 @@ export default class MoneyContainer extends GameObjects.Container {
     super(scene, x, y);
     this.bigTextStyle = {
       fontSize: '20px',
-      fontFamily: "'Press Start 2P'",
+      fontFamily: "Verdana",
       color: 'white',
       align: 'center',
       stroke: '#000',
-      strokeThickness: 3
+      strokeThickness: 1
     };
 
 

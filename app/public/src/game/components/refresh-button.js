@@ -7,7 +7,7 @@ export default class RefreshButton extends Button {
     super(scene, x, y, 200, 50);
     this.textStyle = {
       fontSize: '15px',
-      fontFamily: "'Press Start 2P'",
+      fontFamily: "Verdana",
       color: 'white',
       align: 'center'
     };

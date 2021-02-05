@@ -3,7 +3,13 @@ import {WORDS, XP_TABLE} from '../../../models/enum';
 class LobbyPage {
   constructor(args) {
     this.room = args.room;
-    this.allRooms = [];
+    if(args.allRooms){
+      this.allRooms = args.allRooms;
+    }
+    else{
+      this.allRooms = [];
+    }
+
     this.langage = 'esp';
     if (window._client.auth.lang) {
       this.langage = window._client.auth.lang;
@@ -220,13 +226,16 @@ class LobbyPage {
         <a class="dropdown-item" href="#" id ="esp-button">
         <img src="assets/flags/esp.png"/>
         Español</a>
+        <a class="dropdown-item" href="#" id ="fra-button">
+        <img src="assets/flags/fra.png"/>
+        Français</a>
       </div>
     </div>
   </div>
   <div style="display:flex; justify-content:space-between; height:100%;"> 
 
   <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; margin-left:15%;">
-  <p class="title">Game Lobby</p>  
+  <p class="title">${WORDS.GAME_LOBBY[this.langage]}</p>  
    <div style="display:flex;flex-flow:row;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
     <h3 style="margin:10px;">${WORDS.AVAILABLE_ROOM_IDS[this.langage]}:</h3>
     
@@ -288,11 +297,15 @@ class LobbyPage {
     });
 
     document.getElementById('eng-button').addEventListener('click', (e) => {
-      window.dispatchEvent(new CustomEvent('switch-lang', {detail: {lang: 'eng', render: 'lobby', room: self.room}}));
+      window.dispatchEvent(new CustomEvent('switch-lang', {detail: {lang: 'eng', render: 'lobby', room: self.room, allRooms: self.allRooms}}));
     });
 
     document.getElementById('esp-button').addEventListener('click', (e) => {
-      window.dispatchEvent(new CustomEvent('switch-lang', {detail: {lang: 'esp', render: 'lobby', room: self.room}}));
+      window.dispatchEvent(new CustomEvent('switch-lang', {detail: {lang: 'esp', render: 'lobby', room: self.room, allRooms: self.allRooms}}));
+    });
+
+    document.getElementById('fra-button').addEventListener('click', (e) => {
+      window.dispatchEvent(new CustomEvent('switch-lang', {detail: {lang: 'fra', render: 'lobby', room: self.room, allRooms: self.allRooms}}));
     });
   }
 

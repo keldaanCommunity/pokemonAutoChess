@@ -14,7 +14,7 @@ export default class ShopPortraitContainer extends GameObjects.Container {
     super(scene, x, y);
     this.textStyle = {
       fontSize: '15px',
-      fontFamily: "'Press Start 2P'",
+      fontFamily: "Verdana",
       color: 'white',
       align: 'center'
     };

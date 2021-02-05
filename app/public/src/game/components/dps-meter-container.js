@@ -7,7 +7,7 @@ export default class DpsMeterContainer extends GameObjects.Container {
 
     this.textStyle = {
       fontSize: '15px',
-      fontFamily: "'Press Start 2P'",
+      fontFamily: "Verdana",
       color: 'white',
       align: 'center'
     };
