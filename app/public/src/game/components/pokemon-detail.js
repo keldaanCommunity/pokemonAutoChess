@@ -34,9 +34,16 @@ export default class PokemonDetail extends GameObjects.Container {
       color: '#ff0000'
     };
 
+    let displayName;
+    if(window.langage = 'fra'){
+      displayName = this.pokemonInformation.frenchName.charAt(0).toUpperCase() + this.pokemonInformation.frenchName.slice(1);
+    }
+    else{
+      displayName = this.pokemonInformation.name.charAt(0).toUpperCase() + this.pokemonInformation.name.slice(1);
+    }
+
     this.objType = 'detail';
     this.add(new GameObjects.Rectangle(scene, 190, 90, 370, 140, COLOR_TYPE[this.pokemonInformation.rarity]));
-    const displayName = name.charAt(0).toUpperCase() + name.slice(1);
     this.add(new GameObjects.Text(scene, 5, 20, displayName, this.textStyle));
     this.add(new GameObjects.Image(scene, 140, 40, this.pokemonInformation.sheet, `${this.pokemonInformation.index}/portrait`));
     for (let i = 0; i < this.pokemonInformation.types.length; i++) {

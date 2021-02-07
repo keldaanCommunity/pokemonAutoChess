@@ -640,7 +640,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
   ROCK_SLIDE: {
     eng: 'Mono target attack that deals physical damage. Doubles damage if target is type flying.',
     esp: 'Ataque de objetivo mono que causa daño físico. Duplica el daño si el objetivo es de tipo volador.',
-    fra:''
+    fra:'Attaque mono cible qui fait des dégats physiques. Double les dégats si type vol.'
   },
   HEAT_WAVE: {
     eng: 'Area of effect attack that deals 30/40/50 special damage in all ennemies in a line behind the target.',
