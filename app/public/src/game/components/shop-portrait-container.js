@@ -25,7 +25,13 @@ export default class ShopPortraitContainer extends GameObjects.Container {
         detail: {'id': self.positionInShop}
       }));
     });
-    const name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+    let name;
+    if(window.langage = 'fra'){
+      name = pokemon.frenchName.charAt(0).toUpperCase() + pokemon.frenchName.slice(1);
+    }
+    else{
+      name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+    }
     this.add(this.background);
     for (let i = 0; i < pokemon.types.length; i++) {
       this.add(new GameObjects.Text(scene, 90, 23 * i -10, TYPE_TRADUCTION[pokemon.types[i]][window.langage], this.textStyle));

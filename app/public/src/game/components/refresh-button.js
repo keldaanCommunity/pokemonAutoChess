@@ -22,7 +22,7 @@ export default class RefreshButton extends Button {
     this.add(new GameObjects.Rectangle(scene, 0, 0, 200, 50, 0x293942));
     this.add(graphics);
     this.add(new GameObjects.Text(scene, -60, -10, WORDS.REFRESH[window.langage], this.textStyle));
-    this.add(new GameObjects.Text(scene, 55, -20, '2', this.textStyle));
+    this.add(new GameObjects.Text(scene, 55, -25, '2', this.textStyle));
     this.add(new GameObjects.Image(scene, 85, -15, 'money').setScale(0.5, 0.5));
   }
 

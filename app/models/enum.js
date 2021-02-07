@@ -31,12 +31,12 @@ const WORDS = Object.freeze({
   },
   SEND: {
     'eng': 'Send',
-    'esp': 'Envía',
+    'esp': 'Envíar',
     'fra': 'Envoyer'
   },
   ROOM_ID: {
     'eng': 'Room identifier',
-    'esp': 'Identificador de la sala',
+    'esp': 'Codigo de la sala',
     'fra': 'Identifiant de la partie'
   },
   PLAYERS_IN_ROOM: {
@@ -56,7 +56,7 @@ const WORDS = Object.freeze({
   },
   START_GAME: {
     'eng': 'Start Game',
-    'esp': 'Empieza el juego',
+    'esp': 'Jugar',
     'fra': 'Lancer la partie'
   },
   QUIT_ROOM: {
@@ -66,7 +66,7 @@ const WORDS = Object.freeze({
   },
   ADD_BOT: {
     'eng': 'Add bot',
-    'esp': 'Añade el bot',
+    'esp': 'Añadir bot',
     'fra': 'Ajouter un bot'
   },
   REMOVE_BOT: {
@@ -442,7 +442,7 @@ const ITEM_DESCRIPTION = Object.freeze({
   },
   LEAF_STONE: {
     eng: '+10% atk speed. +50% damage if type grass. Will evolve Eevee into Leafon ',
-    esp: '+10% a la velocidad de la tinta. +50% de daño si se trata de hierba. Evolucionará Eevee en Leafon',
+    esp: '+10% a la velocidad de la tinta. +50% de daño si se trata de planta. Evolucionará Eevee en Leafon',
     fra: '+10% vitesse d attaque. +50% attaque si type feuille. Fait évoluer Evoli en Phylali.'
   },
   BLACK_BELT: {
@@ -882,7 +882,7 @@ const TYPE_TRADUCTION = Object.freeze({
   },
   GRASS: {
     eng: 'Grass',
-    esp: 'Hierba',
+    esp: 'Planta',
     fra: 'Feuille'
   },
   FIRE: {
@@ -902,7 +902,7 @@ const TYPE_TRADUCTION = Object.freeze({
   },
   FIGHTING: {
     eng: 'Fighting',
-    esp: 'Luchando',
+    esp: 'Lucha',
     fra: 'Combat'
   },
   PSYCHIC: {
@@ -912,13 +912,13 @@ const TYPE_TRADUCTION = Object.freeze({
   },
   DARK: {
     eng: 'Dark',
-    esp: 'Oscuro',
+    esp: 'Siniestro',
     fra: 'Ténèbres'
   },
   METAL: {
-    eng: 'Metal',
-    esp: 'Metal',
-    fra: 'Métal'
+    eng: 'Steel',
+    esp: 'Acero',
+    fra: 'Acier'
   },
   GROUND: {
     eng: 'Ground',
@@ -947,7 +947,7 @@ const TYPE_TRADUCTION = Object.freeze({
   },
   HUMAN: {
     eng: 'Human',
-    esp: 'Humano',
+    esp: 'Humanoide',
     fra: 'Humain'
   },
   AQUATIC: {
@@ -957,12 +957,12 @@ const TYPE_TRADUCTION = Object.freeze({
   },
   BUG: {
     eng: 'Bug',
-    esp: 'Insecto',
+    esp: 'Bicho',
     fra: 'Insecte'
   },
   FLYING: {
     eng: 'Flying',
-    esp: 'Volando',
+    esp: 'Volador',
     fra: 'Vol'
   },
   FLORA: {
@@ -972,7 +972,7 @@ const TYPE_TRADUCTION = Object.freeze({
   },
   MINERAL: {
     eng: 'Mineral',
-    esp: 'Mineral',
+    esp: 'Roca',
     fra: 'Minéral'
   },
   AMORPH: {
@@ -982,7 +982,7 @@ const TYPE_TRADUCTION = Object.freeze({
   },
   FAIRY: {
     eng: 'Fairy',
-    esp: 'Feria',
+    esp: 'Hada',
     fra: 'Fée'
   },
   ICE: {
@@ -1150,6 +1150,874 @@ const MAP_TYPE_NAME = Object.freeze({
   }
 });
 
+const TYPE_DETAILS = Object.freeze({
+  NORMAL: {
+    description:{
+      eng:[
+        {
+          title:`(3) Stamina`,
+          text:`+30% bonus HP for all normal allies`
+        },
+        {
+          title:`(6) Strength`,
+          text:`ATK, DEF + 10% for normal allies`
+        },
+        {
+          title:`(9) Stamina`,
+          text:`+100% ATK for all allies`
+        }
+      ],
+      esp:[
+        {
+          title:`(3) Resistencia`,
+          text:`30% de CV de bonficacion para todos los aliados normales`
+        },
+        {
+          title:`(6) Fuerza`,
+          text:`Aumentar el ATK y la DEF en un 10%`
+        },
+        {
+          title:`(9) Poder Puro`,
+          text:`+100% ATK para todos sus aliados`
+        }
+      ],
+      fra:[
+        {
+          title:`(3) Force`,
+          text:`+30% HP pour les alliés normaux`
+        },
+        {
+          title:`(6) Stockage`,
+          text:`ATK, DEF +10% pour les alliés normaux`
+        },
+        {
+          title:`(9) Concentration`,
+          text:`+100% ATK pour tous les alliés`
+        }
+      ]
+    },
+    pokemons: ['pidgey','starly','igglybuff','cleffa','eevee','togepi','slakoth','meditite','scyther']
+  },
+  GRASS: {
+    description:{
+      eng:[
+        {
+          title:`(3) Ingrain`,
+          text:`+5% HP/s for grass allies`
+        },
+        {
+          title:`(6) Growth`,
+          text:`DEF, SPEDEF + 25% for grass allies`
+        },
+        {
+          title:`(9) Stun Spore`,
+          text:`-50% ATK speed for ennemy team`
+        }
+      ],
+      esp:[
+        {
+          title:`(3) Ingrediente`,
+          text:`+5% HP/s para los tipos de Planta`
+        },
+        {
+          title:`(6) Crecimiento`,
+          text:`Aumentar el ATK y la DEF en un 10%`
+        },
+        {
+          title:`(9) Espora aturdidora`,
+          text:`Los ennemigos que no son de Planta tienen un 50% ATK speed`
+        }
+      ],
+      fra:[
+        {
+          title:`(3) Racine`,
+          text:`+5% HP/s pour tous les alliés plante`
+        },
+        {
+          title:`(6) Croissance`,
+          text:`DEF, SPEDEF + 25% pour tous les alliés plante`
+        },
+        {
+          title:`(9) Para Spore`,
+          text:`-50% ATK speed pour tous les ennemis`
+        }
+      ]
+    },
+    pokemons: ['bellsprout','seedot','hoppip','caterpie','treecko','leafon','turtwig','chikorita','bulbasaur','lotad','snover']
+  },
+  FIRE: {
+    description:{
+      eng:[
+        {
+          title:`(3) Blaze`,
+          text:`Fire pkm gains +5 ATK at each attack`
+        },
+        {
+          title:`(6) Drought`,
+          text:`Sun itensifies, fire pkm gains +50% ATK`
+        }
+      ],
+      esp:[
+        {
+          title:`(3) Blaze`,
+          text:`Fire pkm gana un 5% de dano en cada ataque`
+        },
+        {
+          title:`(6) Sequia`,
+          text:`El so se intensifica, los pkm de fuego gana +50% ATK`
+        }
+      ],
+      fra:[
+        {
+          title:`(3) Torche`,
+          text:`Les pkm feu gagnent 5% d'ATK à chaque attaque`
+        },
+        {
+          title:`(6) Zénith`,
+          text:`Le soleil s'intensifie, augmentant l'ATK des pkm feu de 50%`
+        }
+      ]
+    },
+    pokemons: ['charmander','cyndaquil','torchic','flareon','chimchar','litwick','magby','numel']
+  },
+  WATER: {
+    description:{
+      eng:[
+        {
+          title:`(3) Rain dance`,
+          text:`Rain falls, 30% ATK for water allies`
+        },
+        {
+          title:`(6) Crachin`,
+          text:`The rain is getting heavier, 30% more ATK`
+        },
+        {
+          title:`(9) Primordial sea`,
+          text:`Invoke Kyogre, the king of the oceans`
+        }
+      ],
+      esp:[
+        {
+          title:`(3) Danza de la lluvia`,
+          text:`Cae la lluvia, 30% de ATK para los aliados del agua`
+        },
+        {
+          title:`(6) Crachin`,
+          text:`La lluvia es cada vez más intensa, un 30% más de ATK.`
+        },
+        {
+          title:`(9) Mar Primordial`,
+          text:`Invoca a Kyogre, el rey de los océanos`
+        }
+      ],
+      fra:[
+        {
+          title:`(3) Danse pluie`,
+          text:`La pluie tombe, 30% d'ATK pour les alliés eau`
+        },
+        {
+          title:`(6) Crachin`,
+          text:`La pluie s'intensifie, 30% d'ATK en plus`
+        },
+        {
+          title:`(9) Mer primordiale`,
+          text:`Invoque Kyogre, le roi des océans`
+        }
+      ]
+    },
+    pokemons: ['azurill','squirtle','slowbro','vaporeon','totodile','mudkip','piplup','horsea','spheal','lotad','poliwag']
+  },
+  ELECTRIC: {
+    description:{
+      eng:[
+        {
+          title:`(-) Agilidad`,
+          text:`+10% de velocidad ATK por cada aliado eléctrico del equipo`
+        }
+      ],
+      esp:[
+        {
+          title:`(-) Agility`,
+          text:`+10% ATK speed for each elec ally in the team`
+        }
+      ],
+      fra:[
+        {
+          title:`(-) Agilité`,
+          text:`+10% ATK speed pour chaque allié elec dans l'équipe`
+        }
+      ]
+    },
+    pokemons: ['mareep','pichu','jolteon','magnemite','shinx','elekid']
+  },
+  FIGHTING: {
+    description:{
+      eng:[
+        {
+          title:`(2) Revenge`,
+          text:`If the team is outnumbered, the fighting pkm's win +20% ATK`
+        },
+        {
+          title:`(4) Punishment`,
+          text:`+10% ATK for each active synergy in the enemy team`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Venganza`,
+          text:`Si el equipo es superado en número, el combate pkm gana +20% ATK`
+        },
+        {
+          title:`(4) Castigo`,
+          text:`+10% ATK por cada sinergia activa en el equipo enemigo`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Vengeance`,
+          text:`Si l'équipe est en infériorité numérique, les pkm combat gagnent +20% ATK`
+        },
+        {
+          title:`(4) Punition`,
+          text:`+10% ATK pour chaque synergie active dans l'équipe ennemie`
+        }
+      ]
+    },
+    pokemons: ['combusken','machop','poliwhirl','meditite','riolu']
+  },
+  PSYCHIC: {
+    description:{
+      eng:[
+        {
+          title:`(2) Vagabundeo Psíquico`,
+          text:`El equipo enemigo tiene un -30% de SPEDEF`
+        },
+        {
+          title:`(4) Psyko`,
+          text:`El equipo enemigo tiene un -30% adicional de SPEDEF`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Psywave`,
+          text:`Enemy team has -30% SPEDEF`
+        },
+        {
+          title:`(4) Psyko`,
+          text:`Enemy team has an additional -30% SPEDEF`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Vague Psy`,
+          text:`L'équipe ennemie a -30% SPEDEF`
+        },
+        {
+          title:`(4) Psyko`,
+          text:`L'équipe ennemie a un additionel -30% SPEDEF`
+        }
+      ]
+    },
+    pokemons: ['slowpoke','espeon','togepi','abra','ralts','beldum']
+  },
+  DARK: {
+    description:{
+      eng:[
+        {
+          title:`(2) Black eyes`,
+          text:`-25% DEF for the enemy team`
+        },
+        {
+          title:`(4) Atmósfera oscura`,
+          text:`-25% additional DEF for the enemy team`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Halo Negra`,
+          text:`-25% DEF para el equipo enemigo`
+        },
+        {
+          title:`(4) Grima`,
+          text:`25% de DEF adicional para el equipo enemigo`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Regard Noir`,
+          text:`-25% DEF pour la team ennemie`
+        },
+        {
+          title:`(4) Aura Ténébreuse`,
+          text:`-25% DEF additionel pour la team ennemie`
+        }
+      ]
+    },
+    pokemons: ['seedot','umbreon','duskull','gastly','larvitar']
+  },
+  METAL: {
+    description:{
+      eng:[
+        {
+          title:`(2) Steel wall`,
+          text:`+50% DEF for steel pkm`
+        },
+        {
+          title:`(4) Lightening`,
+          text:`+100% ATK speed for steel pkm`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Muro de acero`,
+          text:`+50% DEF para pkm de acero`
+        },
+        {
+          title:`(4) Rayo`,
+          text:`+100% de velocidad ATK para pkm de acero`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Mur d'acier`,
+          text:`+50% DEF pour les pkm acier`
+        },
+        {
+          title:`(4) Allègement`,
+          text:`+100% ATK speed pour les pkm acier`
+        }
+      ]
+    },
+    pokemons: ['prinplup','aron','magnemite','beldum','steelix','scizor','lucario']
+  },
+  GROUND: {
+    description:{
+      eng:[
+        {
+          title:`(2) Spikes`,
+          text:`-10% HP for the enemies at the beginning of the fight`
+        },
+        {
+          title:`(4) Stealth Rock`,
+          text:`-10% HP for the enemies at the beginning of the fight`
+        },
+        {
+          title:`(6) Sandstorm`,
+          text:`A sandstorm is raging, making 10% HP/s at pkm non ground/steel`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Picotas`,
+          text:`-10% de HP para los enemigos al comienzo del combate`
+        },
+        {
+          title:`(4) Trampa de rocas`,
+          text:`-10% de HP para los enemigos al comienzo del combate`
+        },
+        {
+          title:`(6) Tormenta de arena`,
+          text:`Se desata una tormenta de arena que produce un 10% de HP/s por pkm de tierra/acero`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Picots`,
+          text:`-10% HP pour les ennemis au début du combat`
+        },
+        {
+          title:`(4) Piège de roc`,
+          text:`-10% HP pour les ennemis au début du combat`
+        },
+        {
+          title:`(6) Tempête de sable`,
+          text:`Une tempête de sable fait rage, faisant 10% HP/s aux pkm non sol/acier`
+        }
+      ]
+    },
+    pokemons: ['geodude','mudkip','igglybuff','turtwig','trapinch','swinub','rhyhorn','gible','numel','onix']
+  },
+  POISON: {
+    description:{
+      eng:[
+        {
+          title:`(3) Toxik Gas`,
+          text:`30% chance of poisoning each pkm of the enemy team (5% HP/s)`
+        },
+        {
+          title:`(6) Toxik`,
+          text:`All the pkm of the enemy team are poisoned (5% HP/s)`
+        }
+      ],
+      esp:[
+        {
+          title:`(3) Toxik gas`,
+          text:`30% de probabilidad de envenenar cada pkm del equipo enemigo (5% HP/s)`
+        },
+        {
+          title:`(6) Fuerza`,
+          text:`Todos los pkm del equipo enemigo están envenenados (5% HP/s)`
+        }
+      ],
+      fra:[
+        {
+          title:`(3) Gaz Toxik`,
+          text:`30% de chance d'empoisonner chaque pkm de l'équipe ennemie (5% HP/s)`
+        },
+        {
+          title:`(6) Toxik`,
+          text:`Tous les pkm de la team ennemie sont empoisonnés (5% HP/s)`
+        }
+      ]
+    },
+    pokemons: ['bellsprout','weedle','caterpie','zubat','nidoranM','nidoranF','bulbasaur','gastly']
+  },
+  DRAGON: {
+    description:{
+      eng:[
+        {
+          title:`(2) Bullying`,
+          text:`-30% ATK for the enemy team`
+        },
+        {
+          title:`(4) Dragon Dance`,
+          text:`+5% ATK for pkm dragons at each attack`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Intimidación`,
+          text:`-30% ATK para el equipo enemigo`
+        },
+        {
+          title:`(4) Fuerza`,
+          text:`+5% ATK para dragones pkm en cada ataque`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Intimidation`,
+          text:`-30% ATK pour l'équipe ennemie`
+        },
+        {
+          title:`(4) Danse Draco`,
+          text:`+5% ATK pour les pkm dragons à chaque attaque`
+        }
+      ]
+    },
+    pokemons: ['horsea','vibrava','dratini','bagon','gible']
+  },
+  FIELD: {
+    description:{
+      eng:[
+        {
+          title:`(3) Bulk up`,
+          text:`+5% ATK per opponent in the enemy team`
+        },
+        {
+          title:`(6) Rage`,
+          text:`+5% ATK per each shot received`
+        },
+        {
+          title:`(9) Sword Dance`,
+          text:`The attack speed is doubled for animal pkm`
+        }
+      ],
+      esp:[
+        {
+          title:`(3) Gonflette`,
+          text:`+5% ATK por oponente en el equipo enemigo`
+        },
+        {
+          title:`(6) Furia`,
+          text:`+5% ATK por cada golpe recibido`
+        },
+        {
+          title:`(9) Cuchillas de baile`,
+          text:`La velocidad de ataque se duplica para los animales pkm`
+        }
+      ],
+      fra:[
+        {
+          title:`(3) Gonflette`,
+          text:`+5% ATK par adversaire dans l'équipe ennemie`
+        },
+        {
+          title:`(6) Rage`,
+          text:`+5% ATK par chaque coup reçu`
+        },
+        {
+          title:`(9) Danse Lames`,
+          text:`La vitesse d'attaque est doublé pour les pkm animal`
+        }
+      ]
+    },
+    pokemons: ['mareep','eevee','cyndaquil','nidoranM','nidoranF','spheal','shinx','numel']
+  },
+  MONSTER: {
+    description:{
+      eng:[
+        {
+          title:`(3) Pursuit`,
+          text:`Enemies are executed below 30% HP`
+        },
+        {
+          title:`(5) Pride`,
+          text:`Every kill restores the life of the pkm`
+        },
+        {
+          title:`(7) Berserk`,
+          text:`Each kill increases ATK by pkm by 100%`
+        }
+      ],
+      esp:[
+        {
+          title:`(3) Persecución`,
+          text:`Los enemigos se ejecutan por debajo del 30% de HP`
+        },
+        {
+          title:`(5) La arrogancia`,
+          text:`Cada muerte devuelve la vida al pkm`
+        },
+        {
+          title:`(7) Berserk`,
+          text:`Cada muerte aumenta el ATK del pkm en un 100%`
+        }
+      ],
+      fra:[
+        {
+          title:`(3) Poursuite`,
+          text:`Les ennemis sont éxécutés en dessous de 30% HP`
+        },
+        {
+          title:`(5) Arrogance`,
+          text:`Chaque kill restaure la vie du pkm`
+        },
+        {
+          title:`(7) Berserk`,
+          text:`Chaque kill augmente l'ATK du pkm de 100%`
+        }
+      ]
+    },
+    pokemons: ['squirtle','charmander','treecko','aron','rhyhorn','larvitar','gible']
+  },
+  HUMAN: {
+    description:{
+      eng:[
+        {
+          title:`(2) Meditation`,
+          text:`+20% ATK and +20% ATK speed for human pkm`
+        },
+        {
+          title:`(4) Power`,
+          text:`10% critical hit chance for human pkm`
+        },
+        {
+          title:`(6) Calm Mind`,
+          text:`+20% ATK and +20% DEF for human pkm`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Meditación`,
+          text:`+20% de ATK y +20% de velocidad ATK para pkm humanos`
+        },
+        {
+          title:`(4) Poder`,
+          text:`10% de probabilidad de golpe crítico para el pkm humano`
+        },
+        {
+          title:`(6) Plenitud`,
+          text:`+20% ATK y +20% DEF para pkm humano`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Méditation`,
+          text:`+20% ATK et +20% ATK speed pour les pkm humains`
+        },
+        {
+          title:`(4) Puissance`,
+          text:`10% de chance de coup critique pour les pkm humains`
+        },
+        {
+          title:`(6) Plénitude`,
+          text:`+20% ATK et +20% DEF pour les pkm humains`
+        }
+      ]
+    },
+    pokemons: ['chimchar','machop','abra','slakoth','elekid','magby','meditite','riolu']
+  },
+  AQUATIC: {
+    description:{
+      eng:[
+        {
+          title:`(3) Swift swim`,
+          text:`+30% ATK speed for aquatic pkm`
+        },
+        {
+          title:`(6) Hydro pump`,
+          text:`+30% ATK for aquatic pkm`
+        }
+      ],
+      esp:[
+        {
+          title:`(3) Resbalón`,
+          text:`+30% de velocidad ATK por pkm de agua`
+        },
+        {
+          title:`(6) Cañón hidráulico`,
+          text:`+30% ATK para pkm acuáticos`
+        }
+      ],
+      fra:[
+        {
+          title:`(3) Glissade`,
+          text:`+30% ATK speed pour les pkm aquatiques`
+        },
+        {
+          title:`(6) Hydro cannon`,
+          text:`+30% ATK pour les pkm aquatiques`
+        }
+      ]
+    },
+    pokemons: ['vaporeon','squirtle','slowpoke','totodile','horsea','lotad','poliwag','dratini']
+  },
+  BUG: {
+    description:{
+      eng:[
+        {
+          title:`(2) Swarm`,
+          text:`2 pkm needed to evolve (instead of 3)`
+        },
+        {
+          title:`(4) Sticky web`,
+          text:`-33% ATK speed for the enemy team`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Essaim`,
+          text:`Se necesitan 2 pkm para evolucionar (en lugar de 3)`
+        },
+        {
+          title:`(4) Web pegajosa`,
+          text:`-33% de velocidad ATK para el equipo enemigo`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Essaim`,
+          text:`2 pkm nécessaires pour évoluer (au lieu de 3)`
+        },
+        {
+          title:`(4) Toile gluante`,
+          text:`-33% ATK speed pour l'équipe ennemie`
+        }
+      ]
+    },
+    pokemons: ['caterpie','weedle','trapinch','scyther']
+  },
+  FLYING: {
+    description:{
+      eng:[
+        {
+          title:`(2) Tornado`,
+          text:`-10% HP for the enemy team at the beginning of the fight`
+        },
+        {
+          title:`(4) Hurricane`,
+          text:`The effect of the tornado is doubled`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Tornado`,
+          text:`-10% de HP para el equipo enemigo al comienzo del combate`
+        },
+        {
+          title:`(4) Huracán`,
+          text:`El efecto del tornado se duplica`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Tornade`,
+          text:`-10% HP pour l'équipe ennemie au début du combat`
+        },
+        {
+          title:`(4) Ouragan`,
+          text:`L'effet de la tornade est doublée`
+        }
+      ]
+    },
+    pokemons: ['starly','pidgey','hoppip','zubat','charizard','torchic','piplup','togepi','salamence']
+  },
+  FLORA: {
+    description:{
+      eng:[
+        {
+          title:`(2) Sink`,
+          text:`Restore 10% HP/s if it rains`
+        },
+        {
+          title:`(4) Floral shield`,
+          text:`+50% DEF and +50% SPEDEF for all pkm`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Lavamanos`,
+          text:`Restaurar un 10% de HP/s si llueve`
+        },
+        {
+          title:`(4) Escudo floral`,
+          text:`Aumentar el ATK y la DEF en un 10%`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Lavabo`,
+          text:`Restaure 10% HP/s si il pleut`
+        },
+        {
+          title:`(4) Bouclier floral`,
+          text:`+50% DEF et +50%SPEDEF pour tous les pkm`
+        }
+      ]
+    },
+    pokemons: ['hoppip','turtwig','chikorita','bulbasaur','leafon']
+  },
+  MINERAL: {
+    description:{
+      eng:[
+        {
+          title:`(2) Armour Ball`,
+          text:`+50% DEF for mineral pkm`
+        },
+        {
+          title:`(4) Mountaineer`,
+          text:`+50% SPEDEF and +100% HP for mineral pkm`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Bola de Armadura`,
+          text:`30% de CV de bonficacion para todos los aliados normales`
+        },
+        {
+          title:`(4) Montañés`,
+          text:`+50% SPEDEF y +100% HP por pkm mineral`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Boul' Armure`,
+          text:`+50% DEF pour les pkm minéraux`
+        },
+        {
+          title:`(4) Montagnard`,
+          text:`+50% SPEDEF et +100% HP pour les pkm minéraux`
+        }
+      ]
+    },
+    pokemons: ['geodude','aron','rhyhorn','larvitar','beldum','onix']
+  },
+  AMORPH: {
+    description:{
+      eng:[
+        {
+          title:`(2) Phantom force`,
+          text:`Ghosts gain 15% ATK speed and do true damage`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Fuerza fantasma`,
+          text:`Los fantasmas ganan un 15% de velocidad ATK y hacen daño verdadero`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Revenant`,
+          text:`Les fantômes gagnent 15% d'ATK speed et font des dégats bruts`
+        }
+      ]
+    },
+    pokemons: ['ralts','litwick','gastly','duskull','snorunt']
+  },
+  FAIRY: {
+    description:{
+      eng:[
+        {
+          title:`(2) Charm`,
+          text:`25% chance to reduce the ATK speed of the target with each attack (max:50%)`
+        },
+        {
+          title:`(4) Nice smile`,
+          text:`25% chance of reducing the target's ATK with each attack (max:50%)`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Encanto`,
+          text:`25% de probabilidad de reducir la velocidad ATK del objetivo con cada ataque (máx:50%)`
+        },
+        {
+          title:`(4) Bonita sonrisa`,
+          text:`25% de probabilidad de reducir el ATK del objetivo con cada ataque (máx:50%)`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Charme`,
+          text:`25% de chance de réduire l'ATK speed de la cible à chaque attaque (max:50%)`
+        },
+        {
+          title:`(4) Joli sourire`,
+          text:`25% de chance de réduire l'ATK de la cible à chaque attaque (max:50%)`
+        }
+      ]
+    },
+    pokemons: ['azurill','cleffa','igglybuff','sylveon','pichu','vanillite','togepi']
+  },
+  ICE: {
+    description:{
+      eng:[
+        {
+          title:`(2) Snow alert`,
+          text:`+10% chance to freeze the enemy during an attack`
+        },
+        {
+          title:`(4) Mana Care`,
+          text:`+50% mana regeneration for ice pkm`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Alerta de nieve`,
+          text:`+10% de probabilidad de congelar al enemigo durante un ataque`
+        },
+        {
+          title:`(4) Fuerza`,
+          text:`+50% de regeneración de maná por pkm de hielo`
+        }
+      ],
+      fra:[
+        {
+          title:`(2) Alerte neige`,
+          text:`+10% de chance de geler l'ennemi lors d'une attaque`
+        },
+        {
+          title:`(4) Soin Mana`,
+          text:`+50% de régénération mana pour les pkm glace`
+        }
+      ]
+    },
+    pokemons: ['swinub','glaceon','spheal','vanillite','snorunt','snover']
+  }
+});
+
 const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000];
 
 const XP_PLACE = [700, 500, 400, 300, 200, 150, 100, 100];
@@ -1182,5 +2050,6 @@ module.exports = {
   ATTACK_TYPE,
   ITEMS,
   ITEM_NAME,
-  ITEM_DESCRIPTION
+  ITEM_DESCRIPTION,
+  TYPE_DETAILS
 };

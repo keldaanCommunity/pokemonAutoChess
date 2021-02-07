@@ -99,11 +99,11 @@ export default class GameScene extends Scene {
     this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
     this.load.image('refresh','assets/ui/refresh.png','assets/ui');
     this.load.image('buy_exp','assets/ui/buy_exp.png','assets/ui');
+    this.load.image('detail','assets/ui/detail.png','assets/ui');
     this.load.multiatlas('snowflakes', 'assets/ui/snowflakes.json', 'assets/ui/');
     this.load.multiatlas('status', 'assets/status/status.json', 'assets/status/');
     this.load.multiatlas('icons', 'assets/ui/icons.json', 'assets/ui/');
     this.load.multiatlas('items', 'assets/items/items.json', 'assets/items/');
-    this.load.multiatlas('type-details', `assets/types/${window.langage}/type-details.json`, `assets/types/${window.langage}/`);
     this.load.multiatlas('lock', 'assets/lock/lock.json', 'assets/lock/');
     this.load.multiatlas('effects', 'assets/effects/effects.json', 'assets/effects');
     this.load.multiatlas('rarity', 'assets/rarity/rarity.json', 'assets/rarity');

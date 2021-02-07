@@ -5,12 +5,12 @@ export default class MoneyContainer extends GameObjects.Container {
   constructor(scene, x, y, player) {
     super(scene, x, y);
     this.bigTextStyle = {
-      fontSize: '20px',
+      fontSize: '30px',
       fontFamily: "Verdana",
       color: 'white',
       align: 'center',
       stroke: '#000',
-      strokeThickness: 1
+      strokeThickness: 2
     };
 
 

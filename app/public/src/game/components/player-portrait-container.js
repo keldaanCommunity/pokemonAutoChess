@@ -6,12 +6,12 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
     super(scene, x, y);
     this.id = player.id;
     this.textStyle = {
-      fontSize: '25px',
+      fontSize: '30px',
       fontFamily: "Verdana",
       color: 'white',
       align: 'center',
       stroke: '#000',
-      strokeThickness: 1
+      strokeThickness: 2
     };
     const pokemon = PokemonFactory.createPokemonFromName(player.avatar);
     this.background = new GameObjects.Image(scene, -50, 0, pokemon.rarity, `${pokemon.index}/portrait`).setScale(1.5, 1.5);
