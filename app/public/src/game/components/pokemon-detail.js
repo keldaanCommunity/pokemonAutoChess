@@ -35,7 +35,7 @@ export default class PokemonDetail extends GameObjects.Container {
     };
 
     let displayName;
-    if(window.langage = 'fra'){
+    if(window.langage == 'fra'){
       displayName = this.pokemonInformation.frenchName.charAt(0).toUpperCase() + this.pokemonInformation.frenchName.slice(1);
     }
     else{

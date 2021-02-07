@@ -26,7 +26,7 @@ export default class ShopPortraitContainer extends GameObjects.Container {
       }));
     });
     let name;
-    if(window.langage = 'fra'){
+    if(window.langage == 'fra'){
       name = pokemon.frenchName.charAt(0).toUpperCase() + pokemon.frenchName.slice(1);
     }
     else{
