@@ -83,6 +83,14 @@ class LobbyPage {
       self.addMessage(message);
     };
 
+    this.room.state.users.onAdd = (user, id)=>{
+      self.handleUserListChange();
+    }
+
+    this.room.state.users.onRemove = (user, id)=>{
+      self.handleUserListChange();
+    }
+
     this.room.onMessage('rooms', (rooms) => {
       // console.log(rooms);
       this.allRooms = rooms;
@@ -256,13 +264,20 @@ class LobbyPage {
   </div>
   <div style="display:flex; justify-content:space-between; height:100%;"> 
 
-  <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; margin-left:15%;">
-  <p class="title">${WORDS.GAME_LOBBY[this.langage]}</p>  
-   <div style="display:flex;flex-flow:row;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
-    <h3 style="margin:10px;">${WORDS.AVAILABLE_ROOM_IDS[this.langage]}:</h3>
-    
-    <div id="room-list" style="margin-top:10px; list-style: none;"></div>
-    <button type="button" class="nes-btn is-success" id="create">${WORDS.CREATE_NEW_ROOM[this.langage]}</button>
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; margin-left:15%;">
+      <p class="title">${WORDS.GAME_LOBBY[this.langage]}</p>  
+      <div style="display:flex;flex-flow:row;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
+      <h3 style="margin:10px;">${WORDS.AVAILABLE_ROOM_IDS[this.langage]}:</h3>
+      
+      <div id="room-list" style="margin-top:10px; list-style: none;"></div>
+      <button type="button" class="nes-btn is-success" id="create">${WORDS.CREATE_NEW_ROOM[this.langage]}</button>
+    </div>
+
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; margin-left:15%;">
+    <p class="title">${WORDS.USERS[this.langage]}</p> 
+    <div id='user-container'>
+
+    </div>
   </div>
 
     <section class="nes-container" style="background-color: rgba(255, 255, 255, .5); margin:10px; overflow:scroll; height:90vh; width:30%;">
@@ -284,6 +299,7 @@ class LobbyPage {
       $('[data-toggle="tooltip"]').tooltip();
     });
     this.handleRoomListChange();
+    this.handleUserListChange();
     this.room.state.messages.forEach((message, index) => {
       self.addMessage(message);
     });
@@ -356,6 +372,26 @@ class LobbyPage {
     if (document.getElementById('inputMessage').value != '') {
       this.room.send('new-message', {'name': _client.auth.email, 'payload': document.getElementById('inputMessage').value, 'avatar': _client.auth.metadata.avatar});
       document.getElementById('inputMessage').value = '';
+    }
+  }
+
+  handleUserListChange(){
+    if(document.getElementById('user-container')){
+      document.getElementById('user-container').innerHTML = '';
+      this.room.state.users.forEach(user => {
+        const userHTML = document.createElement('div');
+        userHTML.style.display = 'flex';
+        userHTML.style.flexFlow = 'column';
+        userHTML.style.alignItems = 'center';
+        const imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${user.avatar}.png`;
+        const nameHTML = document.createElement('p');
+        nameHTML.style.fontSize = '10px';
+        nameHTML.textContent = user.name;
+        userHTML.appendChild(imageHTML);
+        userHTML.appendChild(nameHTML);
+        document.getElementById('user-container').appendChild(userHTML);
+      });
     }
   }
 

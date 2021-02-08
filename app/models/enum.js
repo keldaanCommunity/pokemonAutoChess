@@ -4,6 +4,11 @@ const WORDS = Object.freeze({
     'esp': 'Lobby del juego',
     'fra': 'Salon principal'
   },
+  USERS: {
+    'eng': 'Users',
+    'esp': 'Usuarios',
+    'fra': 'Utilisateurs'
+  },
   HOME: {
     'eng': 'Home',
     'esp': 'Inicio',

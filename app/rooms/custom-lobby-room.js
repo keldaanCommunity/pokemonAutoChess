@@ -4,6 +4,7 @@ const LobbyState = require('./states/lobby-state');
 const Mongoose = require('mongoose');
 const Chat = require('../models/chat');
 const User = require('@colyseus/social').User;
+const GameUser = require('../models/game-user');
 
 class CustomLobbyRoom extends colyseus.LobbyRoom {
   constructor() {
@@ -371,6 +372,8 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
   onJoin(client, options, auth) {
     super.onJoin(client, options, auth);
+    this.state.users[client.sessionId] = new GameUser(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.avatar, false, false);
+    //console.log(this.state.users);
     //this.state.addMessage(auth.email.split('@')[0], `${auth.email.split('@')[0]} joined.`, auth.metadata.avatar, Date.now(), true);
     this.clients.forEach((cli) => {
       if (cli.auth.email == client.auth.email && client.sessionId != cli.sessionId) {
@@ -381,6 +384,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
   onLeave(client) {
     super.onLeave(client);
+    this.state.users.delete(client.sessionId);
     // const time = new Date(Date.now());
     // this.state.addMessage('Server',`${client.auth.email} left.`, client.auth.metadata.avatar, Date.now(), true);
   }
