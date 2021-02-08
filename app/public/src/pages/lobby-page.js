@@ -29,6 +29,7 @@ class LobbyPage {
 
       const balloonHTML = document.createElement('div');
       balloonHTML.className = 'nes-balloon from-left';
+      balloonHTML.style.borderImageRepeat= 'unset';
 
       const messageContentHTML = document.createElement('p');
       messageContentHTML.style.fontSize = '10px';
