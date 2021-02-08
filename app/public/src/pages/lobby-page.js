@@ -25,11 +25,13 @@ class LobbyPage {
     if (document.getElementById('messages')) {
       const messageHTML = document.createElement('section');
       messageHTML.className = 'message -left';
+      messageHTML.style.display = 'flex';
 
       const balloonHTML = document.createElement('div');
       balloonHTML.className = 'nes-balloon from-left';
 
       const messageContentHTML = document.createElement('p');
+      messageContentHTML.style.fontSize = '10px';
       messageContentHTML.textContent = message.payload;
       balloonHTML.appendChild(messageContentHTML);
       /*
@@ -42,7 +44,27 @@ class LobbyPage {
       imageHTML.src = `assets/avatar/${message.avatar}.png`;
       imageHTML.style.width = '50px';
       imageHTML.style.height = '50px';
-      messageHTML.appendChild(imageHTML);
+
+      const hourHTML = document.createElement('p');
+      const timeOfMessage = new Date(message.time);
+      hourHTML. textContent = `${timeOfMessage.getHours()}:${timeOfMessage.getMinutes()}`;
+      hourHTML.style.marginBottom ='0px;'
+
+      const nameHTML = document.createElement('p');
+      nameHTML.textContent = `${message.name}`;
+      nameHTML.style.marginBottom ='0px;'
+      nameHTML.style.fontSize = '10px';
+      
+      const detailHTML = document.createElement('div');
+      detailHTML.style.display = 'flex';
+      detailHTML.style.flexFlow = 'column';
+      detailHTML.style.alignItems = 'center';
+
+      detailHTML.appendChild(imageHTML);
+      detailHTML.appendChild(nameHTML);
+      detailHTML.appendChild(hourHTML);
+
+      messageHTML.appendChild(detailHTML);
       messageHTML.appendChild(balloonHTML);
       document.getElementById('messages').appendChild(messageHTML);
       messageHTML.scrollIntoView();
@@ -243,7 +265,7 @@ class LobbyPage {
     <button type="button" class="nes-btn is-success" id="create">${WORDS.CREATE_NEW_ROOM[this.langage]}</button>
   </div>
 
-    <section class="nes-container" style="background-color: rgba(255, 255, 255, .5); margin:10px; overflow:scroll; height:90vh;">
+    <section class="nes-container" style="background-color: rgba(255, 255, 255, .5); margin:10px; overflow:scroll; height:90vh; width:30%;">
     <section class="message-list" id="messages">
       </section>
 

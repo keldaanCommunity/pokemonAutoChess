@@ -371,7 +371,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
   onJoin(client, options, auth) {
     super.onJoin(client, options, auth);
-    this.state.addMessage('Server', `${auth.email.split('@')[0]} joined.`, auth.metadata.avatar, Date.now(), true);
+    //this.state.addMessage(auth.email.split('@')[0], `${auth.email.split('@')[0]} joined.`, auth.metadata.avatar, Date.now(), true);
     this.clients.forEach((cli) => {
       if (cli.auth.email == client.auth.email && client.sessionId != cli.sessionId) {
         cli.send('to-lobby', {});

@@ -60,7 +60,12 @@ class RoomPage {
 
   sendMessage() {
     if (document.getElementById('inputMessage').value != '') {
-      this.room.send('messages', {'name': _client.auth.email, 'payload': document.getElementById('inputMessage').value, 'avatar': _client.auth.metadata.avatar});
+      this.room.send('messages', {
+        'name': _client.auth.email.split('@')[0],
+        'payload': document.getElementById('inputMessage').value,
+        'avatar': _client.auth.metadata.avatar,
+        'time': Date.now()
+      });
       document.getElementById('inputMessage').value = '';
     }
   }
@@ -132,24 +137,45 @@ class RoomPage {
       if (document.getElementById('messages')) {
         const messageHTML = document.createElement('section');
         messageHTML.className = 'message -left';
-
+        messageHTML.style.display = 'flex';
+  
         const balloonHTML = document.createElement('div');
         balloonHTML.className = 'nes-balloon from-left';
-
+  
         const messageContentHTML = document.createElement('p');
         messageContentHTML.textContent = message.payload;
         balloonHTML.appendChild(messageContentHTML);
         /*
-      const timeOfMessage = new Date(message.time);
-      nameHTML.style.color = 'black';
-      nameHTML.style.fontWeight = 'bold';
-      nameHTML.textContent = `${timeOfMessage.getHours()}:${timeOfMessage.getMinutes()} - ${message.name} :`;
-      */
+        const timeOfMessage = new Date(message.time);
+        nameHTML.style.color = 'black';
+        nameHTML.style.fontWeight = 'bold';
+        nameHTML.textContent = `${timeOfMessage.getHours()}:${timeOfMessage.getMinutes()} - ${message.name} :`;
+        */
         const imageHTML = document.createElement('img');
         imageHTML.src = `assets/avatar/${message.avatar}.png`;
         imageHTML.style.width = '50px';
         imageHTML.style.height = '50px';
-        messageHTML.appendChild(imageHTML);
+  
+        const hourHTML = document.createElement('p');
+        const timeOfMessage = new Date(message.time);
+        hourHTML. textContent = `${timeOfMessage.getHours()}:${timeOfMessage.getMinutes()}`;
+        hourHTML.style.marginBottom ='0px;'
+  
+        const nameHTML = document.createElement('p');
+        nameHTML.textContent = `${message.name}`;
+        nameHTML.style.marginBottom ='0px;'
+        nameHTML.style.fontSize = '10px';
+        
+        const detailHTML = document.createElement('div');
+        detailHTML.style.display = 'flex';
+        detailHTML.style.flexFlow = 'column';
+        detailHTML.style.alignItems = 'center';
+  
+        detailHTML.appendChild(imageHTML);
+        detailHTML.appendChild(nameHTML);
+        detailHTML.appendChild(hourHTML);
+  
+        messageHTML.appendChild(detailHTML);
         messageHTML.appendChild(balloonHTML);
         document.getElementById('messages').appendChild(messageHTML);
         messageHTML.scrollIntoView();
