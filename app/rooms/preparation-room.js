@@ -2,6 +2,7 @@ const colyseus = require('colyseus');
 const social = require('@colyseus/social');
 const {Dispatcher} = require('@colyseus/command');
 const PreparationState = require('./states/preparation-state');
+const Filter = require('bad-words');
 const {
   OnGameStartCommand,
   OnJoinCommand,
@@ -16,6 +17,7 @@ class PreparationRoom extends colyseus.Room {
   constructor() {
     super();
     this.dispatcher = new Dispatcher(this);
+    this.filter = new Filter();
   }
 
   onCreate(options) {

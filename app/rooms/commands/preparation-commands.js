@@ -12,7 +12,7 @@ class OnJoinCommand extends Command {
       'payload': `${ auth.email.split('@')[0] } joined.`,
       'avatar': auth.metadata.avatar,
       'time': Date.now()
-      });
+    });
     if (this.state.users.size > 8) {
       return [new OnRemoveBotCommand()];
     }
@@ -37,6 +37,14 @@ class OnGameStartCommand extends Command {
 
 class OnMessageCommand extends Command {
   execute({client, message}) {
+    let safePayload = message.payload;
+    try{
+      safePayload = this.room.filter.clean(safePayload);
+    }
+    catch(error){
+      console.error('bad words library error');
+    }
+    message.payload = safePayload;
     this.room.broadcast('messages', message);
   }
 }

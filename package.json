@@ -30,6 +30,7 @@
     "@colyseus/command": "^0.1.5",
     "@colyseus/monitor": "^0.12.2",
     "@colyseus/social": "^0.11.6",
+    "bad-words": "^3.0.4",
     "colyseus": "^0.14.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
