@@ -204,7 +204,7 @@ const ITEM_NAME = Object.freeze({
   COIN_AMULET: {
     eng: 'Coin Amulet',
     esp: 'Amuleto de monedas',
-    fra: 'Amulette Balkany'
+    fra: 'Piece Rune'
   },
   ROCKY_HELMET: {
     eng: 'Rocky Helmet',
@@ -307,14 +307,14 @@ const ITEM_NAME = Object.freeze({
     fra: 'Pierre feuille'
   },
   BLACK_BELT: {
-    eng: 'Cinturón negro',
-    esp: 'Black Belt',
+    eng: 'Black Belt',
+    esp: 'Cinturón negro',
     fra: 'Ceinture noire'
   },
   SILK_SCARF: {
     eng: 'Silk Scarf',
     esp: 'Bufanda de Seda',
-    fra: 'Echarpe de soie'
+    fra: 'Mouchoir Soie'
   },
   DAWN_STONE: {
     eng: 'Dawn Stone',
