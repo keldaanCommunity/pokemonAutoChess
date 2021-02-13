@@ -309,7 +309,8 @@ class OnJoinCommand extends Command {
         false,
         this.state.specialCells,
         this.state.mapType,
-        auth.email
+        auth.email,
+        this.state.players.size + 1
     ));
     this.state.shop.assignShop(this.state.players.get(client.sessionId));
     if (this.state.players.size == 8) {
@@ -449,6 +450,7 @@ class OnUpdatePhaseCommand extends Command {
       this.initializeFightingPhase();
     } else if (this.state.phase == STATE.FIGHT) {
       this.computeLife();
+      this.rankPlayers();
       this.checkDeath();
       const kickCommands = this.checkEndGame();
       if (kickCommands.length != 0) {
@@ -566,6 +568,19 @@ class OnUpdatePhaseCommand extends Command {
     return damage;
   }
 */
+  rankPlayers(){
+    let rankArray = [];
+    this.state.players.forEach((player, key) => {
+      rankArray.push({id:player.id, life:player.life});
+    });
+    rankArray.sort(function(a,b){
+      return b.life - a.life;
+    });
+    rankArray.forEach((rankPlayer, index)=>{
+      this.state.players.get(rankPlayer.id).rank = index + 1;
+    });
+  }
+
   computeLife() {
     this.state.players.forEach((player, key) => {
       if (player.simulation.blueTeam.size == 0) {

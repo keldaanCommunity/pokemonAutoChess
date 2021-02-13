@@ -421,6 +421,7 @@ class GameContainer {
         if (this.room.sessionId == player.id) {
           this.game.scene.getScene('gameScene').opponentNameText.setText(change.value.slice(0, 10));
         }
+        break;
 
       case 'boardSize':
         if (this.room.sessionId == player.id) {
@@ -436,6 +437,10 @@ class GameContainer {
         if (this.room.sessionId == player.id) {
           this.game.scene.getScene('gameScene').shopContainer.lockButton.updateState();
         }
+        break;
+
+      case 'rank':
+        this.game.scene.getScene('gameScene').playerContainer.onRankChange(player.id, change.value);
         break;
     }
   }

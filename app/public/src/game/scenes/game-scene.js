@@ -135,7 +135,7 @@ export default class GameScene extends Scene {
     this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);
     this.shopContainer = new ShopContainer(this, 470, 912);
-    this.playerContainer = new PlayerContainer(this, 1800, 160);
+    this.playerContainer = new PlayerContainer(this, 1800, 70);
     this.synergiesContainer = new SynergiesContainer(this, 1290, 135, window.state.players[window.sessionId]);
     this.dpsMeterContainer = new DpsMeterContainer(this, 1520, 135, window.state.players[window.sessionId]);
     this.itemsContainer = new ItemsContainer(this, 66, 430);

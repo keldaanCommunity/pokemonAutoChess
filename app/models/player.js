@@ -10,7 +10,7 @@ const MapSchema = schema.MapSchema;
 const ArraySchema = schema.ArraySchema;
 
 class Player extends Schema {
-  constructor(id, name, avatar, isBot, specialCells, mapType, email) {
+  constructor(id, name, avatar, isBot, specialCells, mapType, email, rank) {
     super();
     this.assign({
       id: id,
@@ -34,7 +34,8 @@ class Player extends Schema {
       alive: true,
       isBot: isBot,
       email: email,
-      dbConsumed: false
+      dbConsumed: false,
+      rank: rank
     });
   }
 }
@@ -57,7 +58,8 @@ schema.defineTypes(Player, {
   lastBattleResult: 'string',
   opponentName: 'string',
   boardSize: 'uint8',
-  stuff: Stuff
+  stuff: Stuff,
+  rank : 'uint8'
 });
 
 module.exports = Player;

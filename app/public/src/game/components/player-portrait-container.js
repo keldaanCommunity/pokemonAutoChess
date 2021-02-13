@@ -13,6 +13,18 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
       stroke: '#000',
       strokeThickness: 2
     };
+    this.playerStyle={
+      fontSize: '30px',
+      fontFamily: "Verdana",
+      color: '#ADFF2F',
+      align: 'center',
+      stroke: '#000',
+      strokeThickness: 3
+    }
+    let textStyle = this.textStyle;
+    if(player.id == window.sessionId){
+      textStyle = this.playerStyle;
+    }
     const pokemon = PokemonFactory.createPokemonFromName(player.avatar);
     this.background = new GameObjects.Image(scene, -50, 0, pokemon.rarity, `${pokemon.index}/portrait`).setScale(1.5, 1.5);
     this.background.setInteractive({cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`}).on('pointerdown', () => {
@@ -21,17 +33,21 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
       }));
     });
     this.add(this.background);
-    this.life = new GameObjects.Text(scene, -20, -30, player.life, this.textStyle);
+    this.life = new GameObjects.Text(scene, -20, -30, player.life, textStyle);
     this.add(this.life);
     this.lifeAsset = new GameObjects.Image(scene, 60, -15, 'life', 'life100');
     this.add(this.lifeAsset);
-    this.money = new GameObjects.Text(scene, 130, -30, player.money, this.textStyle);
+    this.money = new GameObjects.Text(scene, 130, -30, player.money, textStyle);
     this.add(this.money);
-    this.add(new GameObjects.Image(scene, 180, -20, 'money').setScale(0.5, 0.5));
-    this.add(new GameObjects.Text(scene, 130, 0, 'Lvl ', this.textStyle));
-    this.level = new GameObjects.Text(scene, 180, 0, player.experienceManager.level, this.textStyle);
+    this.add(new GameObjects.Image(scene, 180, -15, 'money').setScale(0.5, 0.5));
+    this.add(new GameObjects.Text(scene, 130, 0, 'Lvl ', textStyle));
+    this.level = new GameObjects.Text(scene, 180, 0, player.experienceManager.level, textStyle);
     this.add(this.level);
-    this.add(new GameObjects.Text(scene, -20, 0, player.name.slice(0, 8), this.textStyle));
+    this.add(new GameObjects.Text(scene, -20, 0, player.name.slice(0, 8), textStyle));
+    this.moveManager = scene.plugins.get('rexMoveTo').add(this, {
+      speed: 500,
+      rotateToTarget: false
+    });
   }
 
   onLifeChange(value) {
@@ -61,5 +77,9 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
 
   onLevelChange(value) {
     this.level.setText(value);
+  }
+
+  onRankChange(value){
+    this.moveManager.moveTo(0, 102 * value);
   }
 }
