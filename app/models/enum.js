@@ -1,4 +1,9 @@
 const WORDS = Object.freeze({
+  LEAVE:{
+    'eng': 'Exit the dungeon',
+    'esp': 'Salir del calabozo',
+    'fra': 'Quitter le donjon'
+  },
   GAME_LOBBY: {
     'eng': 'Game Lobby',
     'esp': 'Lobby del juego',

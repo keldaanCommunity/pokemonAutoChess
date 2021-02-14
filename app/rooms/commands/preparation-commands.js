@@ -94,7 +94,12 @@ class OnAddBotCommand extends Command {
       }
 
       this.state.users[id] = new GameUser(id, `BOT ${BOT_AVATAR[bot]}`, BOT_AVATAR[bot], true, true);
-      this.room.broadcast('messages', {'name': 'Server', 'payload': `Bot ${ BOT_AVATAR[bot] } added.`, 'avatar': 'magnemite'});
+      this.room.broadcast('messages', {
+        'name': 'Server',
+         'payload': `Bot ${ BOT_AVATAR[bot] } added.`,
+          'avatar': 'magnemite',
+          'time':Date.now()
+        });
     }
   }
 }
@@ -106,7 +111,12 @@ class OnRemoveBotCommand extends Command {
       if (user.isBot && !botFound) {
         this.state.users.delete(key);
         botFound = true;
-        this.room.broadcast('messages', {'name': 'Server', 'payload': `Bot removed.`, 'avatar': 'magnemite'});
+        this.room.broadcast('messages', {
+          'name': 'Server',
+           'payload': `Bot removed.`,
+            'avatar': 'magnemite',
+            'time':Date.now()
+          });
       }
     });
   }
