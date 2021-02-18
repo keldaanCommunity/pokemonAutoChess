@@ -1,4 +1,24 @@
 const WORDS = Object.freeze({
+  RANK:{
+    'eng': 'Rank',
+    'esp': 'Rango',
+    'fra': 'Rang'
+  },
+  COMPOSITION:{
+    'eng': 'Team composition',
+    'esp': 'Composición del equipo',
+    'fra': 'Composition d équipe'
+  },
+  RESULTS:{
+    'eng': 'Results',
+    'esp': 'Resultados',
+    'fra': 'Résultats'
+  },
+  EXPERIENCE:{
+    'eng': 'experience',
+    'esp': 'experiencia',
+    'fra': 'experience'
+  },
   LEAVE:{
     'eng': 'Exit the dungeon',
     'esp': 'Salir del calabozo',
@@ -1129,34 +1149,34 @@ const MAP_TYPE = Object.freeze({
 
 const MAP_TYPE_NAME = Object.freeze({
   WATER: {
-    'eng': 'Stormy Sea',
-    'esp': 'Mar Tormentoso',
-    'fra': 'Mer Houleuse'
+    'eng': 'Stormy \n Sea',
+    'esp': 'Mar \n Tormentoso',
+    'fra': 'Mer \n Houleuse'
   },
   NORMAL: {
-    'eng': 'Tiny Woods',
-    'esp': 'Arboleda Chica',
-    'fra': 'Petit Bois'
+    'eng': 'Tiny \n Woods',
+    'esp': 'Arboleda \n Chica',
+    'fra': 'Petit \n Bois'
   },
   FIRE: {
-    'eng': 'Magma Cavern',
-    'esp': 'Caverna Magma',
-    'fra': 'Mine Magma'
+    'eng': 'Magma \n Cavern',
+    'esp': 'Caverna \n Magma',
+    'fra': 'Mine \n Magma'
   },
   GRASS: {
-    'eng': 'Hidden Highland',
-    'esp': 'Tierra Oculta',
-    'fra': 'Terres Illusoires'
+    'eng': 'Hidden \n Highland',
+    'esp': 'Tierra \n Oculta',
+    'fra': 'Terres \n Illusoires'
   },
   ICE: {
-    'eng': 'Frosty Forest',
-    'esp': 'Bosque Helado',
-    'fra': 'Forêt Givrée'
+    'eng': 'Frosty \n Forest',
+    'esp': 'Bosque \n Helado',
+    'fra': 'Forêt \n Givrée'
   },
   ROCK: {
-    'eng': 'Shimmer Desert',
-    'esp': 'Desierto Trémulo',
-    'fra': 'Désert Chatoyant'
+    'eng': 'Shimmer \n Desert',
+    'esp': 'Desierto \n Trémulo',
+    'fra': 'Désert \n Chatoyant'
   }
 });
 

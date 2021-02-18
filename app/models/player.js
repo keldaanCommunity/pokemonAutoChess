@@ -34,7 +34,7 @@ class Player extends Schema {
       alive: true,
       isBot: isBot,
       email: email,
-      dbConsumed: false,
+      exp: 0,
       rank: rank
     });
   }
@@ -59,7 +59,8 @@ schema.defineTypes(Player, {
   opponentName: 'string',
   boardSize: 'uint8',
   stuff: Stuff,
-  rank : 'uint8'
+  rank : 'uint8',
+  exp: 'uint16'
 });
 
 module.exports = Player;

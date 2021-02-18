@@ -23,6 +23,6 @@ export default class LeaveButton extends Button {
   }
 
   enterButtonActiveState() {
-    window.dispatchEvent(new CustomEvent('refresh-click'));
+    document.getElementById('game').dispatchEvent(new CustomEvent('leave-game'));
   }
 }

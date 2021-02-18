@@ -31,7 +31,7 @@ export default class LockButton extends Button {
   }
 
   enterButtonActiveState() {
-    window.dispatchEvent(new CustomEvent('lock-click'));
+    document.getElementById('game').dispatchEvent(new CustomEvent('lock-click'));
   }
 
   updateState() {

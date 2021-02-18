@@ -93,6 +93,12 @@ class GamePage {
           return [2, 2];
       }
     };
+
+    this.room.onLeave((client, consent) => {
+      this.container = null;
+      this.game = null;
+    });
+
     this.game = new GameContainer(this.room, this.container);
   };
 
@@ -103,6 +109,7 @@ class GamePage {
     document.body.innerHTML = '';
     document.body.appendChild(content);
   }
+
 }
 
 export default GamePage;

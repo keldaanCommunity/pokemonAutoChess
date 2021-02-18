@@ -65,13 +65,16 @@ hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
 
 // Room
 
+const AfterGameRoom = require('./rooms/after-game-room');
 const LobbyRoom = require('./rooms/custom-lobby-room');
 const PreprationRoom = require('./rooms/preparation-room');
 const GameRoom = require('./rooms/game-room');
 
+gameServer.define('after-game', AfterGameRoom);
 gameServer.define('lobby', LobbyRoom);
 gameServer.define('room', PreprationRoom).enableRealtimeListing();
 gameServer.define('game', GameRoom);
+
 
 
 // Start

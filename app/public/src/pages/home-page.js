@@ -40,7 +40,7 @@ class HomePage {
     </a>
     </i>
     </section>
-    <button type="button" class="nes-btn is-error"><a>Join Discord</a></button>
+    <button type="button" class="nes-btn is-error" onclick="location.href = 'https://discord.gg/6JMS7tr';">Join Discord</button>
     <p style="margin-top:10px;">This is a non profit game. Only made by fans for fans.</p>
     </div>
     <img src="assets/ui/chrysacier.gif" style="position:absolute; top:160px; left:580px;"/>

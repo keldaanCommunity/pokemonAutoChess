@@ -4,38 +4,75 @@ import LoginPage from './pages/login-page';
 import LobbyPage from './pages/lobby-page';
 import RoomPage from './pages/room-page';
 import GamePage from './pages/game-page';
+import AfterGamePage from './pages/after-game-page';
 
 const endpoint = `${window.location.protocol.replace('http', 'ws')}//${window.location.host}`;
 window._client = new colyseus.Client(endpoint);
+window.page = null;
 
-window.addEventListener('render-home', (e) => new HomePage(e.detail));
-window.addEventListener('render-login', (e) => new LoginPage(e.detail));
-window.addEventListener('render-lobby', (e) => new LobbyPage(e.detail));
-window.addEventListener('render-room', (e) => new RoomPage(e.detail));
-window.addEventListener('render-game', (e) => new GamePage(e.detail));
+
+window.listAllEventListeners = function listAllEventListeners() {
+  const allElements = Array.prototype.slice.call(document.querySelectorAll('*'));
+  allElements.push(document);
+  allElements.push(window);
+
+  const types = [];
+
+  for (let ev in window) {
+    if (/^on/.test(ev)) types[types.length] = ev;
+  }
+
+  let elements = [];
+  for (let i = 0; i < allElements.length; i++) {
+    const currentElement = allElements[i];
+    for (let j = 0; j < types.length; j++) {
+      if (typeof currentElement[types[j]] === 'function') {
+        elements.push({
+          "node": currentElement,
+          "type": types[j],
+          "func": currentElement[types[j]].toString(),
+        });
+      }
+    }
+  }
+
+  return elements.sort(function(a,b) {
+    return a.type.localeCompare(b.type);
+  });
+}
+
+window.addEventListener('render-home', (e) => {window.page = new HomePage(e.detail)});
+window.addEventListener('render-login', (e) =>{window.page =  new LoginPage(e.detail)});
+window.addEventListener('render-lobby', (e) =>{window.page =  new LobbyPage(e.detail)});
+window.addEventListener('render-room', (e) =>{window.page =  new RoomPage(e.detail)});
+window.addEventListener('render-game', (e) =>{
+  window.page =  new GamePage(e.detail);
+  document.getElementById('game').addEventListener('render-after-game', (e) =>{ console.log('render-after-game');window.page =  new AfterGamePage(e.detail)});
+});
+
 window.addEventListener('switch-lang', (e) => {
   window._client.auth.lang = e.detail.lang;
   // console.log(e.detail);
   window._client.auth.save().then(function() {
     switch (e.detail.render) {
       case 'home':
-        new HomePage(e.detail);
+        window.page = new HomePage(e.detail);
         break;
 
       case 'login':
-        new LoginPage(e.detail);
+        window.page = new LoginPage(e.detail);
         break;
 
       case 'lobby':
-        new LobbyPage(e.detail);
+        window.page = new LobbyPage(e.detail);
         break;
 
       case 'room':
-        new RoomPage(e.detail);
+        window.page = new RoomPage(e.detail);
         break;
 
       case 'game':
-        new GamePage(e.detail);
+        window.page = new GamePage(e.detail);
         break;
 
       default:
@@ -45,50 +82,3 @@ window.addEventListener('switch-lang', (e) => {
 });
 
 window.onload = () => new HomePage();
-
-/*
-window.onload = () => {
-  Utils.addScript(document, "https://connect.facebook.net/en_US/sdk.js");
-  window.fbAsyncInit = function () {
-    console.log("init fb...");
-    FB.init({
-      appId: "632593943940001",
-      autoLogAppEvents: true,
-      xfbml: true,
-      version: "v6.0"
-    });
-    var b = document.createElement("button");
-    b.addEventListener("click", () => {
-      console.log("starting login...");
-      FB.login(login => {
-        if (login.status == "connected") {
-          console.log("authenticate client...");
-          _client.auth.login({ accessToken: login.authResponse.accessToken }).then(r => {
-            console.log("joining room...");
-            _client.joinOrCreate("game", {}).then(room => {
-              new GamePage({ room: room });
-            }).catch(e => {
-              console.error("join error:", e);
-            });
-          }, e => {
-            console.log("authentication error:", e);
-          });
-        }
-        else {
-          console.log("login failed:", login);
-        }
-      }, {
-        scope: "public_profile,email"
-      });
-    });
-    try {
-      b.dispatchEvent(new MouseEvent("click"));
-    }
-    catch (e) {
-      var evt = document.createEvent("MouseEvent");
-      evt.initMouseEvent("true", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-      b.dispatchEvent(evt);
-    }
-  }
-};
-*/

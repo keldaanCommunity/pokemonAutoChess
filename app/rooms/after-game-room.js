@@ -1,16 +1,13 @@
 const colyseus = require('colyseus');
 const social = require('@colyseus/social');
+const SimplePlayer = require('../models/simple-player');
 const {Dispatcher} = require('@colyseus/command');
 const AfterGameState = require('./states/after-game-state');
 const Filter = require('bad-words');
 const {
-  OnGameStartCommand,
   OnJoinCommand,
   OnLeaveCommand,
-  OnToggleReadyCommand,
   OnMessageCommand,
-  OnAddBotCommand,
-  OnRemoveBotCommand
 } = require('./commands/preparation-commands');
 
 class AfterGameRoom extends colyseus.Room {
@@ -23,22 +20,16 @@ class AfterGameRoom extends colyseus.Room {
   onCreate(options) {
     this.setState(new AfterGameState());
     this.maxClients = 8;
-    this.dispatcher.dispatch(new OnAddBotCommand());
-
-    this.onMessage('game-start', (client, message) => {
-      this.dispatcher.dispatch(new OnGameStartCommand(), {client, message});
-    });
-    this.onMessage('toggle-ready', (client, message) => {
-      this.dispatcher.dispatch(new OnToggleReadyCommand(), client);
-    });
+    //console.log('before', this.state.players);
+    if(options.players){
+      options.players.forEach(plyr => {
+        let player = new SimplePlayer(plyr.id, plyr.name, plyr.avatar, plyr.rank, plyr.pokemons, plyr.exp, plyr.alive);
+        this.state.players.set(player.id, player);
+      });
+    }
+    //console.log('after', this.state.players);
     this.onMessage('messages', (client, message) => {
       this.dispatcher.dispatch(new OnMessageCommand(), {client, message});
-    });
-    this.onMessage('addBot', (client, message) => {
-      this.dispatcher.dispatch(new OnAddBotCommand());
-    });
-    this.onMessage('removeBot', (client, message) => {
-      this.dispatcher.dispatch(new OnRemoveBotCommand());
     });
   }
 
@@ -49,16 +40,30 @@ class AfterGameRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
-    // console.log(client);
+    console.log('join after game');
+    if(options.players){
+
+      this.state.players.forEach((value, key)=> {
+        this.state.players.delete(key);
+      });
+      
+      options.players.forEach(plyr => {
+        let player = new SimplePlayer(plyr.id, plyr.name, plyr.avatar, plyr.rank, plyr.pokemons, plyr.exp, plyr.alive);
+        this.state.players.set(player.id, player);
+      });
+      
+    }
     this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
   }
 
   onLeave(client, consented) {
+    console.log('leave after game');
     this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
   }
 
   onDispose() {
     this.dispatcher.stop();
+    console.log('dispose after game');
   }
 }
 

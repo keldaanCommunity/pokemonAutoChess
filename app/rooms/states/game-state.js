@@ -27,7 +27,8 @@ class GameState extends schema.Schema {
       roundTime: roundTime,
       phase: STATE.PICK,
       gameFinished: false,
-      mapType: mapType
+      mapType: mapType,
+      afterGameId:''
     });
   }
 
@@ -46,6 +47,7 @@ class GameState extends schema.Schema {
 }
 
 schema.defineTypes(GameState, {
+  afterGameId:'string',
   roundTime: 'uint8',
   phase: 'string',
   players: {map: Player},

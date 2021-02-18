@@ -98,8 +98,6 @@ export default class GameScene extends Scene {
     this.load.image('socle', 'assets/ui/socle.png');
     this.load.image('PHYSICAL', 'assets/types/PHYSICAL.png');
     this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
-    this.load.image('refresh','assets/ui/refresh.png','assets/ui');
-    this.load.image('buy_exp','assets/ui/buy_exp.png','assets/ui');
     this.load.image('detail','assets/ui/detail.png','assets/ui');
     this.load.multiatlas('snowflakes', 'assets/ui/snowflakes.json', 'assets/ui/');
     this.load.multiatlas('status', 'assets/status/status.json', 'assets/status/');
@@ -155,7 +153,8 @@ export default class GameScene extends Scene {
       color: 'white',
       align: 'center',
       stroke: '#000',
-      strokeThickness: 2
+      strokeThickness: 2,
+      wordWrap: { width: 200, useAdvancedWrap: true }
     };
 
     window.bigTextStyle = {
@@ -166,7 +165,7 @@ export default class GameScene extends Scene {
       stroke: '#000',
       strokeThickness: 3
     };
-    this.mapName = this.add.text(5, 320, MAP_TYPE_NAME[window.state.mapType][window.langage], window.textStyle);
+    this.mapName = this.add.text(45, 300, MAP_TYPE_NAME[window.state.mapType][window.langage], window.textStyle);
     this.nameText = this.add.text(10, 20, window.state.players[window.sessionId].name.slice(0, 8), window.textStyle);
     this.phaseText = this.add.text(860, 25, window.state.players[window.sessionId].phase, window.textStyle);
     this.opponentNameText = this.add.text(1270, 25, window.state.players[window.sessionId].opponentName.slice(0, 8), window.textStyle);
@@ -303,11 +302,11 @@ export default class GameScene extends Scene {
     });
 
     this.input.keyboard.on('keyup-' + 'R', (e)=>{
-      window.dispatchEvent(new CustomEvent('refresh-click'));
+      document.getElementById('game').dispatchEvent(new CustomEvent('refresh-click'));
     });
 
     this.input.keyboard.on('keyup-' + 'E', (e)=>{
-      window.dispatchEvent(new CustomEvent('level-click'));
+      document.getElementById('game').dispatchEvent(new CustomEvent('level-click'));
     });
 
     this.input.on('drop', (pointer, gameObject, dropZone) => {
@@ -316,7 +315,7 @@ export default class GameScene extends Scene {
         if (gameObject.objType == 'item') {
           this.itemsContainer.updateItem(gameObject.place);
         }
-        window.dispatchEvent(new CustomEvent('sell-drop', {
+        document.getElementById('game').dispatchEvent(new CustomEvent('sell-drop', {
           detail: {
             'pokemonId': gameObject.id
           }
@@ -326,7 +325,7 @@ export default class GameScene extends Scene {
         if (gameObject.place) {
           place = gameObject.place;
         }
-        window.dispatchEvent(new CustomEvent('drag-drop', {
+        document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
           detail: {
             'x': dropZone.name.substr(5, 1),
             'y': dropZone.name.substr(7, 1),

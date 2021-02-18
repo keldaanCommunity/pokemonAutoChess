@@ -59,6 +59,10 @@ class GameRoom extends colyseus.Room {
     this.onMessage('levelUp', (client, message) => {
       this.dispatcher.dispatch(new Commands.OnLevelUpCommand(), client.sessionId);
     });
+    
+    this.onMessage('set-afterGameId', (client, message) => {
+      this.state.afterGameId = message.id;
+    });
 
     this.setSimulationInterval((deltaTime) =>
       this.dispatcher.dispatch(new Commands.OnUpdateCommand(), deltaTime));
@@ -71,15 +75,18 @@ class GameRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
+    console.log('join game');
     this.dispatcher.dispatch(new Commands.OnJoinCommand(), {client, options, auth});
   }
 
   onLeave(client, consented) {
+    console.log('leave game');
     this.dispatcher.dispatch(new Commands.OnLeaveCommand(), {client, consented});
   }
 
   onDispose() {
     this.dispatcher.stop();
+    console.log('Dispose game');
   }
 
   getRandomOpponent(playerId) {

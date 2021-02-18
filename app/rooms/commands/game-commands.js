@@ -322,11 +322,61 @@ class OnJoinCommand extends Command {
 
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
+    this.computePlayerExperience(this.state.players.get(client.sessionId));
     this.state.shop.detachShop(this.state.players.get(client.sessionId));
     if (!this.state.players.get(client.sessionId).alive && this.state.elligibleToXP) {
       UtilsCommand.computePlayerExperience(this.state.players.get(client.sessionId));
     }
-    this.state.players.delete(client.sessionId);
+  }
+
+  computePlayerExperience(player) {
+    const self = this;
+    if (this.state.elligibleToXP) {
+      player.exp = XP_PLACE[player.rank];
+
+      Mongoose.connect(process.env.MONGO_URI, (err) => {
+        User.find({email: player.email}, (err, users)=> {
+          if (err) {
+            console.log(err);
+          } else {
+            users.forEach((usr) => {
+              let actualExp = 0;
+              let actualLevel = 0;
+              if (usr.metadata.exp) {
+                actualExp = usr.metadata.exp;
+              }
+              if (usr.metadata.level) {
+                actualLevel = usr.metadata.level;
+              }
+              let expThreshold = XP_TABLE[actualLevel];
+              if (expThreshold === undefined) {
+                expThreshold = XP_TABLE[XP_TABLE.length - 1];
+              }
+              if (actualExp + player.exp >= expThreshold) {
+                usr.metadata.level += 1;
+                usr.metadata.exp = actualExp + player.exp - expThreshold;
+              } else {
+                usr.metadata.exp = actualExp + player.exp;
+              }
+
+              if (player.rank == 1) {
+                usr.metadata.wins += 1;
+                usr.metadata.mapWin[self.state.mapType] += 1;
+              }
+              self.room.clients.forEach((cli) => {
+                if (cli.auth.email == usr.email) {
+                  cli.send('metadata', usr.metadata);
+                }
+              });
+              usr.markModified('metadata');
+              // console.log('user metadata changed');
+              usr.save();
+              
+            });
+          }
+        });
+      });
+    }
   }
 }
 
@@ -466,68 +516,10 @@ class OnUpdatePhaseCommand extends Command {
     const numberOfPlayersAlive = UtilsCommand.getNumberOfPlayersAlive(this.state.players);
 
     if (numberOfPlayersAlive <= 1 && !this.state.gameFinished) {
-      this.state.players.forEach((player)=>{
-        if (player.alive) {
-          this.computePlayerExperience(player);
-        }
-      });
       this.state.gameFinished = true;
-      commands.push(new OnKickPlayerCommand());
+      //commands.push(new OnKickPlayerCommand());
     }
     return commands;
-  }
-
-  computePlayerExperience(player) {
-    const self = this;
-    if (this.state.elligibleToXP) {
-      const place = UtilsCommand.getNumberOfPlayersAlive(this.state.players);
-      const exp = XP_PLACE[place];
-
-      Mongoose.connect(process.env.MONGO_URI, (err) => {
-        User.find({email: player.email}, (err, users)=> {
-          if (err) {
-            console.log(err);
-          } else {
-            users.forEach((usr) => {
-              if (!player.dbConsumed) {
-                let actualExp = 0;
-                let actualLevel = 0;
-                if (usr.metadata.exp) {
-                  actualExp = usr.metadata.exp;
-                }
-                if (usr.metadata.level) {
-                  actualLevel = usr.metadata.level;
-                }
-                let expThreshold = XP_TABLE[actualLevel];
-                if (expThreshold === undefined) {
-                  expThreshold = XP_TABLE[XP_TABLE.length - 1];
-                }
-                if (actualExp + exp >= expThreshold) {
-                  usr.metadata.level += 1;
-                  usr.metadata.exp = actualExp + exp - expThreshold;
-                } else {
-                  usr.metadata.exp = actualExp + exp;
-                }
-
-                if (place == 1) {
-                  usr.metadata.wins += 1;
-                  usr.metadata.mapWin[self.state.mapType] += 1;
-                }
-                self.room.clients.forEach((cli) => {
-                  if (cli.auth.email == usr.email) {
-                    cli.send('metadata', usr.metadata);
-                  }
-                });
-                usr.markModified('metadata');
-                // console.log('user metadata changed');
-                usr.save();
-                player.dbConsumed = true;
-              }
-            });
-          }
-        });
-      });
-    }
   }
 
   computePlayerDamage(redTeam, playerLevel) {
@@ -571,7 +563,9 @@ class OnUpdatePhaseCommand extends Command {
   rankPlayers(){
     let rankArray = [];
     this.state.players.forEach((player, key) => {
-      rankArray.push({id:player.id, life:player.life});
+      if(player.alive){
+        rankArray.push({id:player.id, life:player.life});
+      }
     });
     rankArray.sort(function(a,b){
       return b.life - a.life;
@@ -637,10 +631,8 @@ class OnUpdatePhaseCommand extends Command {
     this.state.players.forEach((player, key) => {
       if (player.life <= 0) {
         player.alive = false;
-        player.board.forEach((pokemon, id) => {
-          player.board.delete(id);
-        });
-        if (!player.isBot && !player.dbConsumed) {
+
+        if (!player.isBot) {
           this.computePlayerExperience(player);
         }
       }

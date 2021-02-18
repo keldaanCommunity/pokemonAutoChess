@@ -33,6 +33,6 @@ export default class RefreshButton extends Button {
   }
 
   enterButtonActiveState() {
-    window.dispatchEvent(new CustomEvent('refresh-click'));
+    document.getElementById('game').dispatchEvent(new CustomEvent('refresh-click'));
   }
 }

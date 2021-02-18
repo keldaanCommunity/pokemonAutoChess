@@ -65,6 +65,6 @@ export default class LevelUpButton extends Button {
   }
 
   enterButtonActiveState() {
-    window.dispatchEvent(new CustomEvent('level-click'));
+    document.getElementById('game').dispatchEvent(new CustomEvent('level-click'));
   }
 }
