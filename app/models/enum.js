@@ -1355,7 +1355,7 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     },
-    pokemons: ['azurill','squirtle','slowbro','vaporeon','totodile','mudkip','piplup','horsea','spheal','lotad','poliwag']
+    pokemons: ['azurill','squirtle','vaporeon','totodile','mudkip','piplup','horsea','spheal','lotad','poliwag']
   },
   ELECTRIC: {
     description:{
@@ -1811,7 +1811,7 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     },
-    pokemons: ['vaporeon','squirtle','totodile','horsea','lotad','poliwag','dratini']
+    pokemons: ['vaporeon','squirtle','totodile','slowpoke','horsea','lotad','poliwag','dratini']
   },
   BUG: {
     description:{
