@@ -1565,7 +1565,7 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     },
-    pokemons: ['geodude','mudkip','igglybuff','turtwig','trapinch','swinub','rhyhorn','gible','numel','onix']
+    pokemons: ['geodude','mudkip','turtwig','trapinch','swinub','rhyhorn','gible','numel','onix']
   },
   POISON: {
     description:{
@@ -1811,7 +1811,7 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     },
-    pokemons: ['vaporeon','squirtle','slowpoke','totodile','horsea','lotad','poliwag','dratini']
+    pokemons: ['vaporeon','squirtle','totodile','horsea','lotad','poliwag','dratini']
   },
   BUG: {
     description:{
@@ -2050,7 +2050,7 @@ const TYPE_DETAILS = Object.freeze({
 
 const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000];
 
-const XP_PLACE = [700, 500, 400, 300, 200, 150, 100, 100];
+const XP_PLACE = [700, 500, 400, 300, 200, 150, 100, 0];
 
 module.exports = {
   SPECIAL_SKILL_DESCRIPTION,

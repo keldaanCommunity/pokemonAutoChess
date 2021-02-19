@@ -625,6 +625,9 @@ class Simulation extends Schema {
     }
 
     this.blueTeam.forEach((pkm, key) => {
+      if(!pkm.life){
+        this.blueTeam.delete(key);
+      }
       if (pkm.life <= 0) {
         this.blueTeam.delete(key);
       } else {
@@ -635,6 +638,9 @@ class Simulation extends Schema {
 
 
     this.redTeam.forEach((pkm, key) => {
+      if(!pkm.life){
+        this.redTeam.delete(key);
+      }
       if (pkm.life <= 0) {
         this.redTeam.delete(key);
       } else {

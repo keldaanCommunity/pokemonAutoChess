@@ -323,59 +323,56 @@ class OnJoinCommand extends Command {
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
     this.state.shop.detachShop(this.state.players.get(client.sessionId));
-    if (!this.state.players.get(client.sessionId).alive && this.state.elligibleToXP) {
+    if (this.state.elligibleToXP) {
       this.computePlayerExperience(this.state.players.get(client.sessionId));
     }
   }
 
   computePlayerExperience(player) {
     const self = this;
-    if (this.state.elligibleToXP) {
-      player.exp = XP_PLACE[player.rank];
+    player.exp = XP_PLACE[player.rank - 1];
 
-      Mongoose.connect(process.env.MONGO_URI, (err) => {
-        User.find({email: player.email}, (err, users)=> {
-          if (err) {
-            console.log(err);
-          } else {
-            users.forEach((usr) => {
-              let actualExp = 0;
-              let actualLevel = 0;
-              if (usr.metadata.exp) {
-                actualExp = usr.metadata.exp;
-              }
-              if (usr.metadata.level) {
-                actualLevel = usr.metadata.level;
-              }
-              let expThreshold = XP_TABLE[actualLevel];
-              if (expThreshold === undefined) {
-                expThreshold = XP_TABLE[XP_TABLE.length - 1];
-              }
-              if (actualExp + player.exp >= expThreshold) {
-                usr.metadata.level += 1;
-                usr.metadata.exp = actualExp + player.exp - expThreshold;
-              } else {
-                usr.metadata.exp = actualExp + player.exp;
-              }
+    Mongoose.connect(process.env.MONGO_URI, (err) => {
+      User.find({email: player.email}, (err, users)=> {
+        if (err) {
+          console.log(err);
+        } else {
+          users.forEach((usr) => {
+            let actualExp = 0;
+            let actualLevel = 0;
+            if (usr.metadata.exp) {
+              actualExp = usr.metadata.exp;
+            }
+            if (usr.metadata.level) {
+              actualLevel = usr.metadata.level;
+            }
+            let expThreshold = XP_TABLE[actualLevel];
+            if (expThreshold === undefined) {
+              expThreshold = XP_TABLE[XP_TABLE.length - 1];
+            }
+            if (actualExp + player.exp >= expThreshold) {
+              usr.metadata.level += 1;
+              usr.metadata.exp = actualExp + player.exp - expThreshold;
+            } else {
+              usr.metadata.exp = actualExp + player.exp;
+            }
 
-              if (player.rank == 1) {
-                usr.metadata.wins += 1;
-                usr.metadata.mapWin[self.state.mapType] += 1;
+            if (player.rank == 1) {
+              usr.metadata.wins += 1;
+              usr.metadata.mapWin[self.state.mapType] += 1;
+            }
+            self.room.clients.forEach((cli) => {
+              if (cli.auth.email == usr.email) {
+                cli.send('metadata', usr.metadata);
               }
-              self.room.clients.forEach((cli) => {
-                if (cli.auth.email == usr.email) {
-                  cli.send('metadata', usr.metadata);
-                }
-              });
-              usr.markModified('metadata');
-              // console.log('user metadata changed');
-              usr.save();
-              
             });
-          }
-        });
+            usr.markModified('metadata');
+            // console.log('user metadata changed');
+            usr.save();
+          });
+        }
       });
-    }
+    });
   }
 }
 
@@ -514,7 +511,7 @@ class OnUpdatePhaseCommand extends Command {
     const commands = [];
     const numberOfPlayersAlive = UtilsCommand.getNumberOfPlayersAlive(this.state.players);
 
-    if (numberOfPlayersAlive <= 1 && !this.state.gameFinished) {
+    if (numberOfPlayersAlive <= 1) {
       this.state.gameFinished = true;
       //commands.push(new OnKickPlayerCommand());
     }
@@ -571,6 +568,7 @@ class OnUpdatePhaseCommand extends Command {
     });
     rankArray.forEach((rankPlayer, index)=>{
       this.state.players.get(rankPlayer.id).rank = index + 1;
+      this.state.players.get(rankPlayer.id).exp = XP_PLACE[this.state.players.get(rankPlayer.id).rank];
     });
   }
 
