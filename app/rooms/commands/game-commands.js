@@ -568,7 +568,7 @@ class OnUpdatePhaseCommand extends Command {
     });
     rankArray.forEach((rankPlayer, index)=>{
       this.state.players.get(rankPlayer.id).rank = index + 1;
-      this.state.players.get(rankPlayer.id).exp = XP_PLACE[this.state.players.get(rankPlayer.id).rank];
+      this.state.players.get(rankPlayer.id).exp = XP_PLACE[index];
     });
   }
 
