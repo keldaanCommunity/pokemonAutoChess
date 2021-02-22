@@ -421,7 +421,7 @@ class GameContainer {
 
       case 'opponentName':
         if (this.room.sessionId == player.id) {
-          this.game.scene.getScene('gameScene').opponentNameText.setText(change.value.slice(0, 10));
+          this.game.scene.getScene('gameScene').battleManager.setOpponentName(change.value.slice(0, 10));
         }
         break;
 

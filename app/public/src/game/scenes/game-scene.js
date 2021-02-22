@@ -124,6 +124,26 @@ export default class GameScene extends Scene {
   }
 
   create() {
+
+    window.textStyle = {
+      fontSize: '35px',
+      fontFamily: "Verdana",
+      color: 'white',
+      align: 'center',
+      stroke: '#000',
+      strokeThickness: 2,
+      wordWrap: { width: 200, useAdvancedWrap: true }
+    };
+
+    window.bigTextStyle = {
+      fontSize: '80px',
+      fontFamily: "'Press Start 2P'",
+      color: 'white',
+      align: 'center',
+      stroke: '#000',
+      strokeThickness: 3
+    };
+    
     this.input.mouse.disableContextMenu();
     this.input.dragDistanceThreshold = 1;
     this.map = this.make.tilemap({key: 'map'});
@@ -147,28 +167,10 @@ export default class GameScene extends Scene {
     this.pokemon = this.add.existing(new Pokemon(this, 130, 640, PokemonFactory.createPokemonFromName(window.state.players[window.sessionId].avatar), false));
     window.animationManager.animatePokemon(this.pokemon);
 
-    window.textStyle = {
-      fontSize: '35px',
-      fontFamily: "Verdana",
-      color: 'white',
-      align: 'center',
-      stroke: '#000',
-      strokeThickness: 2,
-      wordWrap: { width: 200, useAdvancedWrap: true }
-    };
 
-    window.bigTextStyle = {
-      fontSize: '80px',
-      fontFamily: "'Press Start 2P'",
-      color: 'white',
-      align: 'center',
-      stroke: '#000',
-      strokeThickness: 3
-    };
     this.mapName = this.add.text(45, 300, MAP_TYPE_NAME[window.state.mapType][window.langage], window.textStyle);
     this.nameText = this.add.text(10, 20, window.state.players[window.sessionId].name.slice(0, 8), window.textStyle);
     this.phaseText = this.add.text(860, 25, window.state.players[window.sessionId].phase, window.textStyle);
-    this.opponentNameText = this.add.text(1270, 25, window.state.players[window.sessionId].opponentName.slice(0, 8), window.textStyle);
     this.turnText = this.add.text(565, 25, window.state.stageLevel, window.textStyle);
     this.add.text(460, 25, WORDS.TURN[window.langage], window.textStyle);
     this.timeText = this.add.text(685, 25, window.state.roundTime, window.textStyle);

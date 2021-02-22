@@ -7098,6 +7098,7 @@ const SCENARIOS =
     ]
   },
   'DRAGON1': {
+
     'steps': [
       {
         'roundsRequired': 0,
@@ -7894,6 +7895,1207 @@ const SCENARIOS =
         ]
       }
     ]
+  },
+  'HUMAN1': {
+	'steps': [
+    {
+        'roundsRequired': 0,
+        'board': [
+          {
+            'name': 'seedot',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'mareep',
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': 'torchic',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'chimchar',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'charmander',
+            'x': 5,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': 'torchic',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'chimchar',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'cyndaquil',
+            'x': 4,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': 'torchic',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'chimchar',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'mareep',
+            'x': 4,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': 'combusken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'chimchar',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'charmander',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'machop',
+            'x': 2,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': 'torchic',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'monferno',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'cyndaquil',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'pichu',
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': 'torchic',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'chimchar',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flaffy',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'magnemite',
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': 'combusken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'chimchar',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'charmeleon',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'machop',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'magnemite',
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': 'combusken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'monferno',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'cyndaquil',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'charmander',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'pichu',
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': 'torchic',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'monferno',
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': 'machop',
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': 'flaffy',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'magnemite',
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': 'combusken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'chimchar',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'charmeleon',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'machoke',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'magnemite',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'abra',
+            'x': 4,
+            'y': 1
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': 'combusken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'monferno',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'cyndaquil',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'charmander',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'pichu',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'elekid',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'magby',
+            'x': 5,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'torchic',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'monferno',
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': 'machop',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'shinx',
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': 'flaffy',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'magnemite',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'magby',
+            'x': 5,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'combusken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'chimchar',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'charmeleon',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'machoke',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'magnemite',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'kadabra',
+            'x': 4,
+            'y': 1
+          },
+		  {
+            'name': 'magby',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'riolu',
+            'x': 4,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'combusken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'monferno',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'cyndaquil',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'charmander',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'pikachu',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'electabuzz',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'magby',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'abra',
+            'x': 4,
+            'y': 1
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'torchic',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'Infernape',
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': 'machop',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'shinx',
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': 'flaffy',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'magnemite',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'magmar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'meditite',
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'chimchar',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'charmeleon',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'machoke',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'magneton',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'kadabra',
+            'x': 4,
+            'y': 1
+          },
+		  {
+            'name': 'magby',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'lucario',
+            'x': 4,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'combusken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'monferno',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'quilava',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'charmander',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'pikachu',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'electabuzz',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'magby',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'kadabra',
+            'x': 4,
+            'y': 1
+          }
+		  ,
+		  {
+            'name': 'slakoth',
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'combusken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'infernape',
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': 'machoke',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'luxio',
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': 'flaffy',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'magnemite',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'magmar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'medicham',
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'monferno',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'charmeleon',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'machamp',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'magneton',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'alakazam',
+            'x': 4,
+            'y': 1
+          },
+		  {
+            'name': 'magmar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'lucario',
+            'x': 4,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'infernape',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'quilava',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'charmander',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'pikachu',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'electivire',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'magmar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'kadabra',
+            'x': 4,
+            'y': 1
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'infernape',
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': 'machoke',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'luxio',
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': 'flaffy',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'magnemite',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'magmortar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'medicham',
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'monferno',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'charmeleon',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'machamp',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'magneton',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'alakazam',
+            'x': 4,
+            'y': 1
+          },
+		  {
+            'name': 'magmar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'lucario',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'electivire',
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'infernape',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'quilava',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'charmander',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'pikachu',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'electivire',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'magmar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'kadabra',
+            'x': 4,
+            'y': 1
+          }
+		  ,
+		  {
+            'name': 'slakoth',
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'infernape',
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': 'machoke',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'luxio',
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': 'flaffy',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'magnemite',
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': 'magmortar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'medicham',
+            'x': 1,
+            'y': 3
+          }
+		  ,
+		  {
+            'name': 'lucario',
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'infernape',
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': 'machamp',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'alakazam',
+            'x': 4,
+            'y': 1
+          },
+		  {
+            'name': 'magmar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'lucario',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'electivire',
+            'x': 1,
+            'y': 3
+          },
+		  {
+            'name': 'medicham',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'beldum',
+            'x': 6,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'infernape',
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': 'machamp',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'alakazam',
+            'x': 4,
+            'y': 1
+          },
+		  {
+            'name': 'magmortar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'lucario',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'electivire',
+            'x': 1,
+            'y': 3
+          },
+		  {
+            'name': 'medicham',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'metang',
+            'x': 6,
+            'y': 3
+          }
+        ]
+      },	  
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'infernape',
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': 'machamp',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'alakazam',
+            'x': 4,
+            'y': 1
+          },
+		  {
+            'name': 'magmortar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'megaLucario',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'electivire',
+            'x': 1,
+            'y': 3
+          },
+		  {
+            'name': 'medicham',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'metang',
+            'x': 6,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'infernape',
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': 'machamp',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'alakazam',
+            'x': 4,
+            'y': 1
+          },
+		  {
+            'name': 'magmortar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'megaLucario',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'electivire',
+            'x': 1,
+            'y': 3
+          },
+		  {
+            'name': 'megaMedicham',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'metang',
+            'x': 6,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'blaziken',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'infernape',
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': 'machamp',
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': 'alakazam',
+            'x': 4,
+            'y': 1
+          },
+		  {
+            'name': 'magmortar',
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': 'megaLucario',
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': 'electivire',
+            'x': 1,
+            'y': 3
+          },
+		  {
+            'name': 'megaMedicham',
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': 'metagross',
+            'x': 6,
+            'y': 3
+          }
+        ]
+      }
+	]
   }
 };
 

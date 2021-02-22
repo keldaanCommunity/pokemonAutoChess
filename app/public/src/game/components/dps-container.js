@@ -39,11 +39,17 @@ export default class DpsContainer extends GameObjects.Container {
       fontFamily: "Verdana",
       color: 'white',
       align: 'center',
-      strokeThickness: 1,
+      strokeThickness:2,
       stroke: '#000'
     };
     this.pokemon = PokemonFactory.createPokemonFromName(this.name);
-    const nameText = this.pokemon.name.charAt(0).toUpperCase() + this.pokemon.name.slice(1);
+    let nameText;
+    if(window.langage == 'fra'){
+      nameText = this.pokemon.frenchName.charAt(0).toUpperCase() + this.pokemon.frenchName.slice(1);
+    }
+    else{
+      nameText = this.pokemon.name.charAt(0).toUpperCase() + this.pokemon.name.slice(1);
+    } 
     this.add(new GameObjects.Image(scene, 25, 0, this.pokemon.sheet, `${this.pokemon.index}/portrait`));
     this.add(new GameObjects.Text(scene, 50, -25, nameText, this.textStyle));
     this.damageText = new GameObjects.Text(scene, 150, 0, this.damage, this.textStyle);

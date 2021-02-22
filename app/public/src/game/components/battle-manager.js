@@ -7,6 +7,7 @@ export default class BattleManager {
     this.group = group;
     this.scene = scene;
     this.player = player;
+    this.opponentNameText = this.scene.add.text(1270, 25, this.player.opponentName.slice(0, 8), window.textStyle);
   }
 
   buildPokemons() {
@@ -256,7 +257,12 @@ export default class BattleManager {
     if (player.id != this.player.id) {
       this.player = player;
       this.group.clear(true, true);
+      this.opponentNameText.setText(this.player.opponentName.slice(0, 8));
       this.buildPokemons();
     }
+  }
+
+  setOpponentName(name){
+    this.opponentNameText.setText(name);
   }
 }
