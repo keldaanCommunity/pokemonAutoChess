@@ -1,5 +1,5 @@
 const Command = require('@colyseus/command').Command;
-const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE} = require('../../models/enum');
+const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY} = require('../../models/enum');
 const Player = require('../../models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
@@ -13,6 +13,10 @@ class OnShopCommand extends Command {
       if (player.shop[index]) {
         const name = player.shop[index];
         const pokemon = PokemonFactory.createPokemonFromName(name);
+        if(pokemon.rarity == RARITY.MYTHICAL){
+          this.state.shop.detachShop(player);
+          this.state.shop.assignShop(player);
+        }
         if (player.money >= pokemon.cost && (UtilsCommand.getBoardSize(player.board) < 8 ||
         (UtilsCommand.getPossibleEvolution(player.board, pokemon.name) && UtilsCommand.getBoardSize(player.board) == 8))) {
           player.money -= pokemon.cost;
@@ -528,34 +532,7 @@ class OnUpdatePhaseCommand extends Command {
     damage = Math.max(damage, 0);
     return damage;
   }
-  /*
-  getStageLevelDamage(stageLevel){
-    let damage = 0;
-    let stageLevelFloor = Math.floor(stageLevel/5);
-    if(stageLevelFloor == 0 || stageLevelFloor == 1){
-      damage = 1;
-    }
-    else if(stageLevelFloor == 2 || stageLevelFloor == 3){
-      damage = 2;
-    }
-    else if(stageLevelFloor == 4){
-      damage = 3;
-    }
-    else if(stageLevelFloor == 5){
-      damage = 4;
-    }
-    else if(stageLevelFloor == 6){
-      damage = 5;
-    }
-    else if (stageLevelFloor == 7){
-      damage = 8;
-    }
-    else{
-      damage = 15;
-    }
-    return damage;
-  }
-*/
+
   rankPlayers(){
     let rankArray = [];
     this.state.players.forEach((player, key) => {
@@ -646,7 +623,15 @@ class OnUpdatePhaseCommand extends Command {
         player.opponentName = '';
         if (!player.shopLocked) {
           this.state.shop.detachShop(player);
-          this.state.shop.assignShop(player);
+          if(this.state.stageLevel == 10){
+            this.state.shop.assignFirstMythicalShop(player);
+          }
+          else if(this.state.stageLevel == 20){
+            this.state.shop.assignSecondMythicalShop(player);
+          }
+          else{
+            this.state.shop.assignShop(player);
+          }
         } else {
           player.shopLocked = false;
         }

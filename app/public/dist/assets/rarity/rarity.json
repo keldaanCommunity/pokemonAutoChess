@@ -35,6 +35,31 @@
 					}
 				},
 				{
+					"filename": "MYTHICAL",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 125,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 125,
+						"h": 26
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 125,
+						"h": 26
+					},
+					"anchor": {
+						"x": 0.504,
+						"y": 0.34615384615384615
+					}
+				},
+				{
 					"filename": "UNCOMMON",
 					"rotated": false,
 					"trimmed": false,

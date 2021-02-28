@@ -5,6 +5,8 @@ const UNCOMMON = ['swinub', 'eevee', 'bulbasaur', 'charmander', 'slowpoke', 'squ
 const RARE = ['vanillite', 'pichu', 'machop', 'horsea', 'trapinch', 'spheal', 'aron', 'magnemite', 'rhyhorn', 'togepi', 'duskull', 'lotad', 'shinx', 'poliwag'];
 const EPIC = ['snorunt', 'abra', 'gastly', 'dratini', 'larvitar', 'slakoth', 'ralts', 'bagon', 'beldum', 'gible', 'elekid', 'magby', 'litwick'];
 const LEGENDARY = ['meditite', 'numel', 'onix', 'scyther', 'riolu', 'snover'];
+const MYTHICAL_1 = ['virizion','regice','registeel','regirock','uxie','mesprit','azelf','latias','latios','zapdos','moltres','articuno','lapras','aerodactyl','absol','spiritomb','rotom','manaphy','cobalion','terrakion','keldeo','tornadus','thundurus','landorus','volcarona'];
+const MYTHICAL_2 = ['mewtwo','entei','suicune','raikou','kyurem','reshiram','zekrom','regigigas','celebi','victini','jirachi','arceus','deoxys','shaymin','giratina','darkrai','cresselia','heatran','lugia','ho-Oh','palkia','dialga','rayquaza','kyogre','groudon'];
 
 const PROBABILITY = {
   1: [1, 0, 0, 0, 0],
@@ -35,6 +37,18 @@ class Shop {
         pokemon = PokemonFactory.createPokemonFromName('ditto');
       }
       player.shop[i] = pokemon.name;
+    }
+  }
+
+  assignFirstMythicalShop(player){
+    for (let i = 0; i < 5; i++) {
+      player.shop[i] = PokemonFactory.createPokemonFromName(MYTHICAL_1[Math.floor(Math.random() * MYTHICAL_1.length)]).name;
+    }
+  }
+
+  assignSecondMythicalShop(player){
+    for (let i = 0; i < 5; i++) {
+      player.shop[i] = PokemonFactory.createPokemonFromName(MYTHICAL_2[Math.floor(Math.random() * MYTHICAL_2.length)]).name;
     }
   }
 

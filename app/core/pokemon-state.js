@@ -52,7 +52,7 @@ class PokemonState {
         attacker.setMana(attacker.mana + 5);
       }
 
-      if (pokemon.life <= 0) {
+      if (!pokemon.life || pokemon.life <= 0) {
         board.setValue(pokemon.positionX, pokemon.positionY, undefined);
         death = true;
       }
@@ -120,7 +120,7 @@ class PokemonState {
       }
 
       if (climate == CLIMATE.SANDSTORM) {
-        if (!pokemon.types.includes(TYPE.GROUND) && !pokemon.types.includes(TYPE.METAL)) {
+        if (!pokemon.types.includes(TYPE.GROUND) && !pokemon.types.includes(TYPE.METAL) &&!pokemon.types.includes(TYPE.MINERAL)) {
           this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
         }
       }

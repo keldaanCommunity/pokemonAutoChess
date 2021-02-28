@@ -8399,7 +8399,7 @@ const SCENARIOS =
 		  {
             'name': 'meditite',
             'x': 3,
-            'y': 2
+            'y': 1
           }
         ]
       },

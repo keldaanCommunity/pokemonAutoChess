@@ -1,23 +1,29 @@
 import {GameObjects} from 'phaser';
-import {TYPE_TRADUCTION} from '../../../../models/enum';
+import {TYPE_TRADUCTION, RARITY} from '../../../../models/enum';
 
 const COLOR_TYPE = Object.freeze({
   COMMON: 0x686d7d,
   UNCOMMON: 0x478a41,
   RARE: 0x5062ab,
   EPIC: 0x7b469c,
-  LEGENDARY: 0xa6802e
+  LEGENDARY: 0xa6802e,
+  MYTHICAL: 0xffdeff
 });
 
 export default class ShopPortraitContainer extends GameObjects.Container {
   constructor(scene, x, y, pokemon) {
     super(scene, x, y);
+    let color = 'white';
+    if(pokemon.rarity == RARITY.MYTHICAL){
+      color = '#1f1f1f';
+    }
     this.textStyle = {
       fontSize: '20px',
-      fontFamily: "Verdana",
-      color: 'white',
+      fontFamily: 'Verdana',
+      color: color,
       align: 'center'
     };
+
     const self = this;
     this.background = new GameObjects.Rectangle(scene, 80, 25, 200, 120, COLOR_TYPE[pokemon.rarity]);
     this.background.setInteractive({cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`}).on('pointerdown', () => {

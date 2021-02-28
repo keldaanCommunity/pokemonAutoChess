@@ -98,6 +98,7 @@ export default class GameScene extends Scene {
     this.load.image('socle', 'assets/ui/socle.png');
     this.load.image('PHYSICAL', 'assets/types/PHYSICAL.png');
     this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
+    this.load.image('TRUE','assets/types/TRUE.png');
     this.load.image('detail','assets/ui/detail.png','assets/ui');
     this.load.multiatlas('snowflakes', 'assets/ui/snowflakes.json', 'assets/ui/');
     this.load.multiatlas('status', 'assets/status/status.json', 'assets/status/');
@@ -108,6 +109,7 @@ export default class GameScene extends Scene {
     this.load.multiatlas('rarity', 'assets/rarity/rarity.json', 'assets/rarity');
     this.load.multiatlas('types', 'assets/types/types.json', 'assets/types');
     this.load.multiatlas('december', 'assets/pokemons/december/december.json', 'assets/pokemons/december/');
+    this.load.multiatlas('february', 'assets/pokemons/february/february.json', 'assets/pokemons/february/');
     this.load.multiatlas('COMMON', 'assets/pokemons/common/common.json', 'assets/pokemons/common');
     this.load.multiatlas('NEUTRAL', 'assets/pokemons/neutral/neutral.json', 'assets/pokemons/neutral');
     this.load.multiatlas('UNCOMMON', 'assets/pokemons/uncommon/uncommon.json', 'assets/pokemons/uncommon');
