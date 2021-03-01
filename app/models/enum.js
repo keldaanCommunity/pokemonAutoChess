@@ -1366,14 +1366,14 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(-) Agilidad`,
-          text:`+10% de velocidad ATK por cada aliado eléctrico del equipo`
+          title:`(-) Agility`,
+          text:`+10% ATK speed for each elec ally in the team`
         }
       ],
       esp:[
         {
-          title:`(-) Agility`,
-          text:`+10% ATK speed for each elec ally in the team`
+          title:`(-) Agilidad`,
+          text:`+10% de velocidad ATK por cada aliado eléctrico del equipo`
         }
       ],
       fra:[
@@ -1424,22 +1424,22 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(2) Vagabundeo Psíquico`,
-          text:`El equipo enemigo tiene un -30% de SPEDEF`
-        },
-        {
-          title:`(4) Psyko`,
-          text:`El equipo enemigo tiene un -30% adicional de SPEDEF`
-        }
-      ],
-      esp:[
-        {
           title:`(2) Psywave`,
           text:`Enemy team has -30% SPEDEF`
         },
         {
           title:`(4) Psyko`,
           text:`Enemy team has an additional -30% SPEDEF`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Vagabundeo Psíquico`,
+          text:`El equipo enemigo tiene un -30% de SPEDEF`
+        },
+        {
+          title:`(4) Psyko`,
+          text:`El equipo enemigo tiene un -30% adicional de SPEDEF`
         }
       ],
       fra:[
