@@ -1088,7 +1088,14 @@ const BOT_AVATAR = Object.freeze({
   MONSTER1: 'larvitar',
   FIELD1: 'nidoqueen',
   DRAGON1: 'dratini',
-  HUMAN1:'riolu'
+  HUMAN1:'riolu',
+  DARK: 'darkrai',
+  GRASS2: 'shaymin',
+  GROUND2: 'regirock',
+  WATER2: 'kyogre',
+  ELECTRIC2: 'zapdos',
+  DRAGON2: 'rayquaza',
+  FIRE2:'moltres'
 });
 
 const POKEMON_BOT = Object.freeze({
@@ -1102,7 +1109,14 @@ const POKEMON_BOT = Object.freeze({
   larvitar: 'MONSTER1',
   nidoqueen: 'FIELD1',
   dratini: 'DRAGON1',
-  riolu: 'HUMAN1'
+  riolu: 'HUMAN1',
+  darkrai: 'DARK',
+  shaymin: 'GRASS2',
+  regirock: 'GROUND2',
+  kyogre: 'WATER2',
+  zapdos: 'ELECTRIC2',
+  rayquaza: 'DRAGON2',
+  moltres: 'FIRE2'
 });
 
 const EXP_TABLE = Object.freeze({

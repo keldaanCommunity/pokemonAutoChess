@@ -497,9 +497,7 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.SNOW:
-          if (types.includes(TYPE.ICE)) {
             pokemon.effects.push(EFFECTS.SNOW);
-          }
           break;
 
         case EFFECTS.MANA_HEAL:

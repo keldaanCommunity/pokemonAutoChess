@@ -1394,7 +1394,7 @@ class Sandshrew extends Pokemon {
 
 class Darkrai extends Pokemon {
   constructor() {
-    super('darkrai', 'darkrai',[TYPE.DARK], RARITY.MYTHICAL, 'NEUTRAL', 491, '', 200, 20, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DARK_PULSE);
+    super('darkrai', 'darkrai',[TYPE.DARK, TYPE.MONSTER], RARITY.MYTHICAL, 'NEUTRAL', 491, '', 200, 20, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DARK_PULSE);
   }
 }
 
