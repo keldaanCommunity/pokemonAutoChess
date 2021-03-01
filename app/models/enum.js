@@ -229,7 +229,7 @@ const ITEM_NAME = Object.freeze({
   COIN_AMULET: {
     eng: 'Coin Amulet',
     esp: 'Amuleto de monedas',
-    fra: 'Amulette Balkany'
+    fra: 'Piece Rune'
   },
   ROCKY_HELMET: {
     eng: 'Rocky Helmet',
@@ -332,14 +332,14 @@ const ITEM_NAME = Object.freeze({
     fra: 'Pierre feuille'
   },
   BLACK_BELT: {
-    eng: 'Cinturón negro',
-    esp: 'Black Belt',
+    eng: 'Black Belt',
+    esp: 'Cinturón negro',
     fra: 'Ceinture noire'
   },
   SILK_SCARF: {
     eng: 'Silk Scarf',
     esp: 'Bufanda de Seda',
-    fra: 'Echarpe de soie'
+    fra: 'Mouchoir Soie'
   },
   DAWN_STONE: {
     eng: 'Dawn Stone',
@@ -1380,14 +1380,14 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(-) Agilidad`,
-          text:`+10% de velocidad ATK por cada aliado eléctrico del equipo`
+          title:`(-) Agility`,
+          text:`+10% ATK speed for each elec ally in the team`
         }
       ],
       esp:[
         {
-          title:`(-) Agility`,
-          text:`+10% ATK speed for each elec ally in the team`
+          title:`(-) Agilidad`,
+          text:`+10% de velocidad ATK por cada aliado eléctrico del equipo`
         }
       ],
       fra:[
@@ -1438,22 +1438,22 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(2) Vagabundeo Psíquico`,
-          text:`El equipo enemigo tiene un -30% de SPEDEF`
-        },
-        {
-          title:`(4) Psyko`,
-          text:`El equipo enemigo tiene un -30% adicional de SPEDEF`
-        }
-      ],
-      esp:[
-        {
           title:`(2) Psywave`,
           text:`Enemy team has -30% SPEDEF`
         },
         {
           title:`(4) Psyko`,
           text:`Enemy team has an additional -30% SPEDEF`
+        }
+      ],
+      esp:[
+        {
+          title:`(2) Vagabundeo Psíquico`,
+          text:`El equipo enemigo tiene un -30% de SPEDEF`
+        },
+        {
+          title:`(4) Psyko`,
+          text:`El equipo enemigo tiene un -30% adicional de SPEDEF`
         }
       ],
       fra:[
