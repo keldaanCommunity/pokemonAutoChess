@@ -701,6 +701,82 @@ class PokemonFactory {
         return 'vanillite';
       case 'vanilluxe':
         return 'vanillite';
+      case  'volcarona':
+        return 'volcarona';
+      case 'landorus':
+        return 'landorus';
+      case 'tornadus':
+        return 'tornadus';
+      case 'thundurus':
+        return 'thundurus';
+      case 'keldeo':
+        return 'keldeo';
+      case 'terrakion':
+        return 'terrakion';
+      case 'virizion':
+        return 'virizion';
+      case 'cobalion':
+        return 'cobalion';
+      case 'manaphy':
+        return 'manaphy';
+      case 'rotom':
+        return 'rotom';
+      case 'spiritomb':
+        return 'spiritomb';
+      case 'absol':
+        return 'absol';
+      case 'lapras':
+        return 'lapras';
+      case 'latias':
+        return 'latias';
+      case 'latios':
+        return 'latios';
+      case 'mesprit':
+        return 'mesprit';
+      case 'azelf':
+        return 'azelf';
+      case 'uxie':
+        return 'uxie';
+      case 'mewtwo':
+        return 'mewtwo';
+      case 'kyurem':
+        return 'kyurem';
+      case 'reshiram':
+        return 'reshiram';
+      case 'zekrom':
+        return 'zekrom';
+      case 'celebi':
+        return 'celebi';
+      case 'victini':
+        return 'victini';
+      case 'jirachi':
+        return 'jirachi';
+      case 'arceus':
+        return 'arceus';
+      case 'deoxys':
+        return 'deoxys';
+      case 'shaymin':
+        return 'shaymin';
+      case 'cresselia':
+        return 'cresselia';
+      case 'heatran':
+        return 'heatran';
+      case 'ho-Oh':
+        return 'ho-Oh';
+      case 'regice':
+        return 'regice';
+      case 'registeel':
+        return 'registeel';
+      case 'regirock':
+        return 'regirock';
+      case 'articuno':
+        return 'articuno';
+      case 'zapdos':
+        return 'zapdos';
+      case 'moltres':
+        return 'moltres';
+      case 'aerodactyl':
+        return 'aerodactyl';
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1159,6 +1235,70 @@ class PokemonFactory {
         return new Pokemon.Vanillish();
       case 'vanilluxe':
         return new Pokemon.Vanilluxe();
+      case 'volcarona':
+        return new Pokemon.Volcarona();
+      case 'landorus':
+        return new Pokemon.Landorus();
+      case 'thundurus':
+        return new Pokemon.Thundurus();
+      case 'tornadus':
+        return new Pokemon.Tornadus();
+      case 'keldeo':
+        return new Pokemon.Keldeo();
+      case 'terrakion':
+        return new Pokemon.Terrakion();
+      case 'virizion':
+        return new Pokemon.Virizion();
+      case 'cobalion':
+        return new Pokemon.Cobalion();
+      case 'manaphy':
+        return new Pokemon.Manaphy();
+      case 'spiritomb':
+        return new Pokemon.Spiritomb();
+      case 'absol':
+        return new Pokemon.Absol();
+      case 'lapras':
+        return new Pokemon.Lapras();
+      case 'latias':
+        return new Pokemon.Latias();
+      case 'latios':
+        return new Pokemon.Latios();
+      case 'mesprit':
+        return new Pokemon.Mesprit();
+      case 'azelf':
+        return new Pokemon.Azelf();
+      case 'uxie':
+        return new Pokemon.Uxie();
+      case 'mewtwo':
+        return new Pokemon.Mewtwo();
+      case 'kyurem':
+        return new Pokemon.Kyurem();
+      case 'reshiram':
+        return new Pokemon.Reshiram();
+      case 'zekrom':
+        return new Pokemon.Zekrom();
+      case 'celebi':
+        return new Pokemon.Celebi();
+      case 'victini':
+        return new Pokemon.Victini();
+      case 'jirachi':
+        return new Pokemon.Jirachi();
+      case 'arceus':
+        return new Pokemon.Arceus();
+      case 'deoxys':
+        return new Pokemon.Deoxys();
+      case 'shaymin':
+        return new Pokemon.Shaymin();
+      case 'cresselia':
+        return new Pokemon.Cresselia();
+      case 'heatran':
+        return new Pokemon.Heatran();
+      case 'ho-Oh':
+        return new Pokemon.HooH();
+      case 'rotom':
+        return new Pokemon.Rotom();
+      case 'aerodactyl':
+        return new Pokemon.Aerodactyl();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();

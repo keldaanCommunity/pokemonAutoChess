@@ -1,6 +1,6 @@
 import {GameObjects} from 'phaser';
 import PokemonFactory from '../../../../models/pokemon-factory';
-import {SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
+import {SPECIAL_SKILL_DESCRIPTION, RARITY} from '../../../../models/enum';
 
 
 const COLOR_TYPE = Object.freeze({
@@ -9,17 +9,22 @@ const COLOR_TYPE = Object.freeze({
   UNCOMMON: 0x478a41,
   RARE: 0x5062ab,
   EPIC: 0x7b469c,
-  LEGENDARY: 0xa6802e
+  LEGENDARY: 0xa6802e,
+  MYTHICAL: 0xffdeff
 });
 
 export default class PokemonDetail extends GameObjects.Container {
   constructor(scene, x, y, name, hp, atk, def, speDef, attackType, range, atkSpeed) {
     super(scene, x, y);
     this.pokemonInformation = PokemonFactory.createPokemonFromName(name);
+    let color = 'white';
+    if(this.pokemonInformation.rarity == RARITY.MYTHICAL){
+      color = '#1f1f1f';
+    }
     this.textStyle = {
       fontSize: '20px',
       fontFamily: "Verdana",
-      color: 'white',
+      color: color,
       align: 'center',
       wordWrap: {width: 200, useAdvancedWrap: true}
     };

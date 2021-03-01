@@ -1232,103 +1232,103 @@ class Fearow extends Pokemon {
 
 class Lugia extends Pokemon {
   constructor() {
-    super('lugia', 'lugia',[TYPE.WATER, TYPE.NORMAL], RARITY.NEUTRAL, 'NEUTRAL', 249, '', 250, 20, 10, 2, 4, 'FLYING/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.HURRICANE);
+    super('lugia', 'lugia',[TYPE.AQUATIC, TYPE.NORMAL], RARITY.MYTHICAL, 'NEUTRAL', 249, '', 300, 30, 5, 5, 4, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HURRICANE);
   }
 }
 
 class Giratina extends Pokemon {
   constructor() {
-    super('giratina', 'giratina',[TYPE.DARK, TYPE.AMORPH], RARITY.NEUTRAL, 'NEUTRAL', 487, '', 250, 20, 10, 2, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('giratina', 'giratina',[TYPE.DRAGON, TYPE.AMORPH], RARITY.MYTHICAL, 'NEUTRAL', 487, '', 300, 30, 5, 5, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.NIGHT_SLASH);
   }
 }
 
 class Zapdos extends Pokemon {
   constructor() {
-    super('zapdos', 'électhor',[TYPE.ELECTRIC, TYPE.FLYING], RARITY.NEUTRAL, 'NEUTRAL', 145, '', 250, 20, 10, 2, 2, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('zapdos', 'électhor',[TYPE.ELECTRIC, TYPE.FLYING], RARITY.MYTHICAL, 'NEUTRAL', 145, '', 200, 20, 3, 3, 2, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CHARGE);
   }
 }
 
 class Moltres extends Pokemon {
   constructor() {
-    super('moltres', 'sulfura',[TYPE.FIRE, TYPE.FLYING], RARITY.NEUTRAL, 'NEUTRAL', 146, '', 250, 20, 10, 2, 2, 'FIRE/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('moltres', 'sulfura',[TYPE.FIRE, TYPE.FLYING], RARITY.MYTHICAL, 'NEUTRAL', 146, '', 200, 20, 3, 3, 2, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.WHEEL_OF_FIRE);
   }
 }
 
 class Articuno extends Pokemon {
   constructor() {
-    super('articuno', 'artikodin',[TYPE.WATER, TYPE.FLYING], RARITY.NEUTRAL, 'NEUTRAL', 144, '', 250, 20, 10, 2, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('articuno', 'artikodin',[TYPE.ICE, TYPE.FLYING], RARITY.MYTHICAL, 'NEUTRAL', 144, '', 200, 20, 3, 3, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.FREEZE);
   }
 }
 
 class Dialga extends Pokemon {
   constructor() {
-    super('dialga', 'dialga',[TYPE.METAL, TYPE.DRAGON], RARITY.NEUTRAL, 'NEUTRAL', 483, '', 250, 20, 10, 2, 2, 'FIGHTING/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('dialga', 'dialga',[TYPE.METAL, TYPE.DRAGON], RARITY.MYTHICAL, 'NEUTRAL', 483, '', 300, 30, 5, 5, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DRACO_METEOR);
   }
 }
 
 class Palkia extends Pokemon {
   constructor() {
-    super('palkia', 'palkia',[TYPE.DRAGON, TYPE.WATER], RARITY.NEUTRAL, 'NEUTRAL', 484, '', 250, 20, 10, 2, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('palkia', 'palkia',[TYPE.DRAGON, TYPE.WATER], RARITY.MYTHICAL, 'NEUTRAL', 484, '', 300, 30, 5, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DRAGON_TAIL);
   }
 }
 
 class Suicune extends Pokemon {
   constructor() {
-    super('suicune', 'suicune',[TYPE.WATER, TYPE.AQUATIC], RARITY.NEUTRAL, 'NEUTRAL', 245, '', 250, 20, 10, 2, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('suicune', 'suicune',[TYPE.WATER, TYPE.AQUATIC], RARITY.MYTHICAL, 'NEUTRAL', 245, '', 300, 30, 5, 5, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HYDRO_PUMP);
   }
 }
 
 class Raikou extends Pokemon {
   constructor() {
-    super('raikou', 'raikou',[TYPE.ELECTRIC], RARITY.NEUTRAL, 'NEUTRAL', 243, '', 250, 20, 10, 2, 1, 'ELETRIC/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('raikou', 'raikou',[TYPE.ELECTRIC, TYPE.FIELD], RARITY.MYTHICAL, 'NEUTRAL', 243, '', 300, 30, 5, 5, 1, 'ELETRIC/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.THUNDER);
   }
 }
 
 class Entei extends Pokemon {
   constructor() {
-    super('entei', 'entei',[TYPE.FIRE], RARITY.NEUTRAL, 'NEUTRAL', 244, '', 250, 20, 10, 2, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('entei', 'entei',[TYPE.FIRE, TYPE.FIELD], RARITY.MYTHICAL, 'NEUTRAL', 244, '', 300, 30, 5, 5, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.FIRE_BLAST);
   }
 }
 
 class Regice extends Pokemon {
   constructor() {
-    super('regice', 'régice',[TYPE.WATER], RARITY.NEUTRAL, 'NEUTRAL', 378, '', 250, 20, 10, 2, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('regice', 'régice',[TYPE.ICE, TYPE.HUMAN], RARITY.MYTHICAL, 'NEUTRAL', 378, '', 200, 20, 3, 3, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ICICLE_CRASH);
   }
 }
 
 class Regirock extends Pokemon {
   constructor() {
-    super('regirock', 'régirock',[TYPE.MINERAL], RARITY.NEUTRAL, 'NEUTRAL', 377, '', 250, 20, 10, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('regirock', 'régirock',[TYPE.MINERAL, TYPE.HUMAN], RARITY.MYTHICAL, 'NEUTRAL', 377, '', 200, 20, 3, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
   }
 }
 
 class Registeel extends Pokemon {
   constructor() {
-    super('registeel', 'régisteel',[TYPE.METAL], RARITY.NEUTRAL, 'NEUTRAL', 379, '', 250, 20, 10, 2, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('registeel', 'régisteel',[TYPE.METAL, TYPE.HUMAN], RARITY.MYTHICAL, 'NEUTRAL', 379, '', 200, 20, 3, 3, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.IRON_DEFENSE);
   }
 }
 
 class Regigigas extends Pokemon {
   constructor() {
-    super('regigigas', 'régigigas',[TYPE.NORMAL], RARITY.NEUTRAL, 'NEUTRAL', 486, '', 250, 20, 10, 2, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('regigigas', 'régigigas',[TYPE.NORMAL, TYPE.MONSTER, TYPE.HUMAN], RARITY.MYTHICAL, 'NEUTRAL', 486, '', 300, 30, 5, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.IRON_TAIL);
   }
 }
 
 class Kyogre extends Pokemon {
   constructor() {
-    super('kyogre', 'kyogre',[TYPE.WATER, TYPE.AQUATIC], RARITY.NEUTRAL, 'NEUTRAL', 382, '', 250, 20, 10, 2, 4, 'WATER/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('kyogre', 'kyogre',[TYPE.WATER, TYPE.AQUATIC], RARITY.MYTHICAL, 'NEUTRAL', 382, '', 300, 30, 5, 5, 4, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HYDRO_PUMP);
   }
 }
 
 class Groudon extends Pokemon {
   constructor() {
-    super('groudon', 'groudon',[TYPE.GROUND, TYPE.FIRE], RARITY.NEUTRAL, 'NEUTRAL', 383, '', 250, 20, 10, 2, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('groudon', 'groudon',[TYPE.GROUND, TYPE.FIRE], RARITY.MYTHICAL, 'NEUTRAL', 383, '', 300, 30, 5, 5, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HEAT_WAVE);
   }
 }
 
 class Rayquaza extends Pokemon {
   constructor() {
-    super('rayquaza', 'rayquaza',[TYPE.DRAGON, TYPE.FLYING], RARITY.NEUTRAL, 'NEUTRAL', 384, '', 250, 20, 10, 2, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('rayquaza', 'rayquaza',[TYPE.DRAGON, TYPE.FLYING], RARITY.MYTHICAL, 'NEUTRAL', 384, '', 300, 30, 5, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DRACO_METEOR);
   }
 }
 
@@ -1394,7 +1394,199 @@ class Sandshrew extends Pokemon {
 
 class Darkrai extends Pokemon {
   constructor() {
-    super('darkrai', 'sablaireau',[TYPE.DARK, TYPE.AMORPH], RARITY.NEUTRAL, 'NEUTRAL', 491, '', 200, 10, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('darkrai', 'darkrai',[TYPE.DARK], RARITY.MYTHICAL, 'NEUTRAL', 491, '', 200, 20, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DARK_PULSE);
+  }
+}
+
+class Volcarona extends Pokemon {
+  constructor() {
+    super('volcarona', 'pyrax',[TYPE.FIRE, TYPE.BUG], RARITY.MYTHICAL, 'february', 637, '', 200, 20, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.FIRE_BLAST);
+  }
+}
+
+class Landorus extends Pokemon {
+  constructor() {
+    super('landorus', 'démétéros',[TYPE.GROUND, TYPE.FLYING], RARITY.MYTHICAL, 'february', 645, '', 200, 20, 3, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
+  }
+}
+
+class Thundurus extends Pokemon {
+  constructor() {
+    super('thundurus', 'fulguris',[TYPE.ELECTRIC, TYPE.FLYING], RARITY.MYTHICAL, 'february', 642, '', 200, 20, 3, 3, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.THUNDER);
+  }
+}
+
+class Tornadus extends Pokemon {
+  constructor() {
+    super('tornadus', 'boréas',[TYPE.FLYING], RARITY.MYTHICAL, 'february', 641, '', 200, 20, 3, 3, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HURRICANE);
+  }
+}
+
+class Keldeo extends Pokemon {
+  constructor() {
+    super('keldeo', 'keldeo',[TYPE.WATER, TYPE.FIGHTING], RARITY.MYTHICAL, 'february', 647, '', 200, 20, 3, 3, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.GUILLOTINE);
+  }
+}
+
+class Terrakion extends Pokemon {
+  constructor() {
+    super('terrakion', 'terrakium',[TYPE.MINERAL, TYPE.FIGHTING], RARITY.MYTHICAL, 'february', 639, '', 200, 20, 3, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
+  }
+}
+
+class Virizion extends Pokemon {
+  constructor() {
+    super('virizion', 'viridium',[TYPE.GRASS, TYPE.FIGHTING], RARITY.MYTHICAL, 'february', 640, '', 200, 20, 3, 3, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SEISMIC_TOSS);
+  }
+}
+
+class Cobalion extends Pokemon {
+  constructor() {
+    super('cobalion', 'cobaltium',[TYPE.METAL, TYPE.FIGHTING], RARITY.MYTHICAL, 'february', 638, '', 200, 20, 3, 3, 1, 'FIGHTING/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SEISMIC_TOSS);
+  }
+}
+
+class Manaphy extends Pokemon {
+  constructor() {
+    super('manaphy', 'manaphy',[TYPE.WATER, TYPE.BUG], RARITY.MYTHICAL, 'february', 490, '', 200, 20, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.NASTY_PLOT);
+  }
+}
+
+class Rotom extends Pokemon {
+  constructor() {
+    super('rotom', 'motisma',[TYPE.ELECTRIC, TYPE.AMORPH], RARITY.MYTHICAL, 'february', 479, '', 200, 20, 3, 3, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
+  }
+}
+
+class Spiritomb extends Pokemon {
+  constructor() {
+    super('spiritomb', 'spiritomb',[TYPE.DARK, TYPE.AMORPH], RARITY.MYTHICAL, 'february', 442, '', 200, 20, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.NIGHT_SLASH);
+  }
+}
+
+class Absol extends Pokemon {
+  constructor() {
+    super('absol', 'absol',[TYPE.DARK, TYPE.FIELD], RARITY.MYTHICAL, 'february', 359, '', 200, 20, 3, 3, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.THIEF);
+  }
+}
+
+class Lapras extends Pokemon {
+  constructor() {
+    super('lapras', 'lokhlass',[TYPE.WATER, TYPE.ICE], RARITY.MYTHICAL, 'february', 131, '', 200, 20, 3, 3, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SOAK);
+  }
+}
+
+class Latias extends Pokemon {
+  constructor() {
+    super('latias', 'latias',[TYPE.PSYCHIC, TYPE.DRAGON], RARITY.MYTHICAL, 'february', 380, '', 200, 20, 3, 3, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DRACO_METEOR);
+  }
+}
+
+class Latios extends Pokemon {
+  constructor() {
+    super('latios', 'latios',[TYPE.PSYCHIC, TYPE.DRAGON], RARITY.MYTHICAL, 'february', 381, '', 200, 20, 3, 3, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DRACO_METEOR);
+  }
+}
+
+class Uxie extends Pokemon {
+  constructor() {
+    super('uxie', 'créhelf',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 480, '', 200, 20, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
+  }
+}
+
+class Mesprit extends Pokemon {
+  constructor() {
+    super('mesprit', 'créfollet',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 481, '', 200, 20, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
+  }
+}
+
+class Azelf extends Pokemon {
+  constructor() {
+    super('azelf', 'créfadet',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 482, '', 200, 20, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
+  }
+}
+
+class Aerodactyl extends Pokemon {
+  constructor() {
+    super('aerodactyl', 'ptéra',[TYPE.FLYING, TYPE.MINERAL], RARITY.MYTHICAL, 'february', 142, '', 200, 20, 3, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
+  }
+}
+
+class Mewtwo extends Pokemon {
+  constructor() {
+    super('mewtwo', 'mewtwo',[TYPE.PSYCHIC, TYPE.MONSTER], RARITY.MYTHICAL, 'february', 150, '', 300, 30, 5, 5, 3, 'PSYCHIC/range', ATTACK_TYPE.TRUE, 2, 100, SPECIAL_SKILL.TORMENT);
+  }
+}
+
+class Kyurem extends Pokemon {
+  constructor() {
+    super('kyurem', 'kyurem',[TYPE.DRAGON, TYPE.MONSTER, TYPE.ICE], RARITY.MYTHICAL, 'february', 646, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.FREEZE);
+  }
+}
+
+class Reshiram extends Pokemon {
+  constructor() {
+    super('reshiram', 'reshiram',[TYPE.DRAGON, TYPE.FIRE], RARITY.MYTHICAL, 'february', 643, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.BURN);
+  }
+}
+
+class Zekrom extends Pokemon {
+  constructor() {
+    super('zekrom', 'zekrom',[TYPE.DRAGON, TYPE.ELECTRIC], RARITY.MYTHICAL, 'february', 644, '', 300, 30, 5, 5, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.THUNDER);
+  }
+}
+
+class Celebi extends Pokemon {
+  constructor() {
+    super('celebi', 'celebi',[TYPE.GRASS, TYPE.PSYCHIC], RARITY.MYTHICAL, 'february', 251, '', 300, 30, 5, 5, 3, 'GRASS/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.LEECH_LIFE);
+  }
+}
+
+class Victini extends Pokemon {
+  constructor() {
+    super('victini', 'victini',[TYPE.FIRE, TYPE.PSYCHIC], RARITY.MYTHICAL, 'february', 494, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.BURN);
+  }
+}
+
+class Jirachi extends Pokemon {
+  constructor() {
+    super('jirachi', 'jirachi',[TYPE.METAL, TYPE.PSYCHIC], RARITY.MYTHICAL, 'february', 385, '', 300, 30, 5, 5, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.WISH);
+  }
+}
+
+class Arceus extends Pokemon {
+  constructor() {
+    super('arceus', 'arceus',[TYPE.NORMAL, TYPE.FIELD], RARITY.MYTHICAL, 'february', 493, '', 300, 30, 5, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HAPPY_HOUR);
+  }
+}
+
+class Deoxys extends Pokemon {
+  constructor() {
+    super('deoxys', 'deoxys',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.MYTHICAL, 'february', 386, '', 300, 30, 5, 5, 1, 'PSYCHIC/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.PROTECT);
+  }
+}
+
+class Shaymin extends Pokemon {
+  constructor() {
+    super('shaymin', 'shaymin',[TYPE.GRASS, TYPE.FLORA], RARITY.MYTHICAL, 'february', 492, '', 300, 30, 5, 5, 3, 'GRASS/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.SILENCE);
+  }
+}
+
+class Cresselia extends Pokemon {
+  constructor() {
+    super('cresselia', 'cresselia',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 488, '', 300, 30, 5, 5, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.WISH);
+  }
+}
+
+class Heatran extends Pokemon {
+  constructor() {
+    super('heatran', 'heatran',[TYPE.FIRE, TYPE.METAL], RARITY.MYTHICAL, 'february', 485, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.BURN);
+  }
+}
+
+class HooH extends Pokemon {
+  constructor() {
+    super('ho-Oh', 'ho-Oh',[TYPE.FIRE, TYPE.FLYING], RARITY.MYTHICAL, 'february', 250, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.BURN);
   }
 }
 
@@ -1650,5 +1842,37 @@ module.exports = {
   Vanillite,
   Vanillish,
   Vanilluxe,
-  Glaceon
+  Glaceon,
+  Volcarona,
+  Landorus,
+  Thundurus,
+  Tornadus,
+  Keldeo,
+  Terrakion,
+  Virizion,
+  Cobalion,
+  Manaphy,
+  Rotom,
+  Spiritomb,
+  Absol,
+  Lapras,
+  Latias,
+  Latios,
+  Mesprit,
+  Azelf,
+  Uxie,
+  Mewtwo,
+  Kyurem,
+  Reshiram,
+  Zekrom,
+  Celebi,
+  Victini,
+  Jirachi,
+  Arceus,
+  Deoxys,
+  Shaymin,
+  Cresselia,
+  Heatran,
+  HooH,
+  Aerodactyl
 };

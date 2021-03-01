@@ -19,7 +19,7 @@ class GameRoom extends colyseus.Room {
     for (const id in options.users) {
       const user = options.users[id];
       if (user.isBot) {
-        this.state.players.set(id, new Player(user.id, user.name, user.avatar, true, this.state.specialCells, this.state.mapType, ''));
+        this.state.players.set(id, new Player(user.id, user.name, user.avatar, true, this.state.specialCells, this.state.mapType, '', this.state.players.size + 1));
         this.state.botManager.addBot(this.state.players[id]);
         this.state.shop.assignShop(this.state.players[id]);
       }
@@ -28,40 +28,59 @@ class GameRoom extends colyseus.Room {
     GameStats.create({'time': Date.now()});
 
     this.onMessage('shop', (client, message) => {
-      this.dispatcher.dispatch(new Commands.OnShopCommand(), {
-        sessionId: client.sessionId,
-        index: message.id
-      });
+      if(!this.state.gameFinished){
+        this.dispatcher.dispatch(new Commands.OnShopCommand(), {
+          sessionId: client.sessionId,
+          index: message.id
+        });
+      }
     });
 
     this.onMessage('dragDrop', (client, message) => {
-      this.dispatcher.dispatch(new Commands.OnDragDropCommand(), {
-        client: client,
-        detail: message.detail
-      });
+      if(!this.state.gameFinished){
+        this.dispatcher.dispatch(new Commands.OnDragDropCommand(), {
+          client: client,
+          detail: message.detail
+        });
+      }
     });
 
     this.onMessage('sellDrop', (client, message) => {
-      this.dispatcher.dispatch(new Commands.OnSellDropCommand(), {
-        client,
-        detail: message.detail
-      });
+      if(!this.state.gameFinished){
+        this.dispatcher.dispatch(new Commands.OnSellDropCommand(), {
+          client,
+          detail: message.detail
+        });
+      }
     });
 
     this.onMessage('refresh', (client, message) => {
-      this.dispatcher.dispatch(new Commands.OnRefreshCommand(), client.sessionId);
+      if(!this.state.gameFinished){
+        this.dispatcher.dispatch(new Commands.OnRefreshCommand(), client.sessionId);
+      }
     });
 
     this.onMessage('lock', (client, message) => {
-      this.dispatcher.dispatch(new Commands.OnLockCommand(), client.sessionId);
+      if(!this.state.gameFinished){
+        this.dispatcher.dispatch(new Commands.OnLockCommand(), client.sessionId);
+      }
     });
 
     this.onMessage('levelUp', (client, message) => {
-      this.dispatcher.dispatch(new Commands.OnLevelUpCommand(), client.sessionId);
+      if(!this.state.gameFinished){
+        this.dispatcher.dispatch(new Commands.OnLevelUpCommand(), client.sessionId);
+      }
+    });
+    
+    this.onMessage('set-afterGameId', (client, message) => {
+      this.state.afterGameId = message.id;
     });
 
-    this.setSimulationInterval((deltaTime) =>
-      this.dispatcher.dispatch(new Commands.OnUpdateCommand(), deltaTime));
+    this.setSimulationInterval((deltaTime) =>{
+      if(!this.state.gameFinished){
+        this.dispatcher.dispatch(new Commands.OnUpdateCommand(), deltaTime);
+      }
+    })
   }
 
   async onAuth(client, options, request) {
@@ -71,15 +90,18 @@ class GameRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
+    console.log('join game');
     this.dispatcher.dispatch(new Commands.OnJoinCommand(), {client, options, auth});
   }
 
   onLeave(client, consented) {
+    console.log('leave game');
     this.dispatcher.dispatch(new Commands.OnLeaveCommand(), {client, consented});
   }
 
   onDispose() {
     this.dispatcher.stop();
+    console.log('Dispose game');
   }
 
   getRandomOpponent(playerId) {
@@ -96,7 +118,7 @@ class GameRoom extends colyseus.Room {
       const n = Math.floor(Math.random() * playersId.length);
       return this.state.players[playersId[n]].id;
     } else {
-      return '';
+      return playerId;
     }
   }
 

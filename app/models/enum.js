@@ -1,4 +1,29 @@
 const WORDS = Object.freeze({
+  RANK:{
+    'eng': 'Rank',
+    'esp': 'Rango',
+    'fra': 'Rang'
+  },
+  COMPOSITION:{
+    'eng': 'Team composition',
+    'esp': 'Composición del equipo',
+    'fra': 'Composition d équipe'
+  },
+  RESULTS:{
+    'eng': 'Results',
+    'esp': 'Resultados',
+    'fra': 'Résultats'
+  },
+  EXPERIENCE:{
+    'eng': 'experience',
+    'esp': 'experiencia',
+    'fra': 'experience'
+  },
+  LEAVE:{
+    'eng': 'Exit the dungeon',
+    'esp': 'Salir del calabozo',
+    'fra': 'Quitter le donjon'
+  },
   GAME_LOBBY: {
     'eng': 'Game Lobby',
     'esp': 'Lobby del juego',
@@ -1029,6 +1054,7 @@ const RARITY = Object.freeze({
   RARE: 'RARE',
   EPIC: 'EPIC',
   LEGENDARY: 'LEGENDARY',
+  MYTHICAL: 'MYTHICAL',
   NEUTRAL: 'NEUTRAL'
 });
 
@@ -1038,6 +1064,7 @@ const RARITY_HP_COST= Object.freeze({
   RARE: 2,
   EPIC: 2,
   LEGENDARY: 3,
+  MYTHICAL: 3,
   NEUTRAL: 3
 });
 
@@ -1046,6 +1073,7 @@ const COST = Object.freeze({
   UNCOMMON: 2,
   RARE: 3,
   EPIC: 4,
+  MYTHICAL: 6,
   LEGENDARY: 5
 });
 
@@ -1059,7 +1087,8 @@ const BOT_AVATAR = Object.freeze({
   ELECTRIC1: 'pikachu',
   MONSTER1: 'larvitar',
   FIELD1: 'nidoqueen',
-  DRAGON1: 'dratini'
+  DRAGON1: 'dratini',
+  HUMAN1:'riolu'
 });
 
 const POKEMON_BOT = Object.freeze({
@@ -1072,7 +1101,8 @@ const POKEMON_BOT = Object.freeze({
   pikachu: 'ELECTRIC1',
   larvitar: 'MONSTER1',
   nidoqueen: 'FIELD1',
-  dratini: 'DRAGON1'
+  dratini: 'DRAGON1',
+  riolu: 'HUMAN1'
 });
 
 const EXP_TABLE = Object.freeze({
@@ -1124,34 +1154,34 @@ const MAP_TYPE = Object.freeze({
 
 const MAP_TYPE_NAME = Object.freeze({
   WATER: {
-    'eng': 'Stormy Sea',
-    'esp': 'Mar Tormentoso',
-    'fra': 'Mer Houleuse'
+    'eng': 'Stormy \n Sea',
+    'esp': 'Mar \n Tormentoso',
+    'fra': 'Mer \n Houleuse'
   },
   NORMAL: {
-    'eng': 'Tiny Woods',
-    'esp': 'Arboleda Chica',
-    'fra': 'Petit Bois'
+    'eng': 'Tiny \n Woods',
+    'esp': 'Arboleda \n Chica',
+    'fra': 'Petit \n Bois'
   },
   FIRE: {
-    'eng': 'Magma Cavern',
-    'esp': 'Caverna Magma',
-    'fra': 'Mine Magma'
+    'eng': 'Magma \n Cavern',
+    'esp': 'Caverna \n Magma',
+    'fra': 'Mine \n Magma'
   },
   GRASS: {
-    'eng': 'Hidden Highland',
-    'esp': 'Tierra Oculta',
-    'fra': 'Terres Illusoires'
+    'eng': 'Hidden \n Highland',
+    'esp': 'Tierra \n Oculta',
+    'fra': 'Terres \n Illusoires'
   },
   ICE: {
-    'eng': 'Frosty Forest',
-    'esp': 'Bosque Helado',
-    'fra': 'Forêt Givrée'
+    'eng': 'Frosty \n Forest',
+    'esp': 'Bosque \n Helado',
+    'fra': 'Forêt \n Givrée'
   },
   ROCK: {
-    'eng': 'Shimmer Desert',
-    'esp': 'Desierto Trémulo',
-    'fra': 'Désert Chatoyant'
+    'eng': 'Shimmer \n Desert',
+    'esp': 'Desierto \n Trémulo',
+    'fra': 'Désert \n Chatoyant'
   }
 });
 
@@ -1330,7 +1360,7 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     },
-    pokemons: ['azurill','squirtle','slowbro','vaporeon','totodile','mudkip','piplup','horsea','spheal','lotad','poliwag']
+    pokemons: ['azurill','squirtle','vaporeon','totodile','mudkip','piplup','horsea','spheal','lotad','poliwag']
   },
   ELECTRIC: {
     description:{
@@ -1540,7 +1570,7 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     },
-    pokemons: ['geodude','mudkip','igglybuff','turtwig','trapinch','swinub','rhyhorn','gible','numel','onix']
+    pokemons: ['geodude','mudkip','turtwig','trapinch','swinub','rhyhorn','gible','numel','onix']
   },
   POISON: {
     description:{
@@ -1786,7 +1816,7 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     },
-    pokemons: ['vaporeon','squirtle','slowpoke','totodile','horsea','lotad','poliwag','dratini']
+    pokemons: ['vaporeon','squirtle','totodile','slowpoke','horsea','lotad','poliwag','dratini']
   },
   BUG: {
     description:{
@@ -2025,7 +2055,7 @@ const TYPE_DETAILS = Object.freeze({
 
 const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000];
 
-const XP_PLACE = [700, 500, 400, 300, 200, 150, 100, 100];
+const XP_PLACE = [700, 500, 400, 300, 200, 150, 100, 0];
 
 module.exports = {
   SPECIAL_SKILL_DESCRIPTION,

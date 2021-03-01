@@ -22,6 +22,7 @@ class GameContainer {
       type: Phaser.CANVAS,
       width: 2000,
       height: 1000,
+      parent: this.div,
       pixelArt: true,
       scene: [GameScene],
       scale: {mode: Phaser.Scale.FIT},
@@ -64,13 +65,14 @@ class GameContainer {
       });
     };
     // Game event listener
-    window.addEventListener('shop-click', (e) => this.onShopClick(e));
-    window.addEventListener('player-click', (e) => this.onPlayerClick(e));
-    window.addEventListener('refresh-click', (e) => this.onRefreshClick(e));
-    window.addEventListener('lock-click', (e) => this.onLockClick(e));
-    window.addEventListener('level-click', (e) => this.onLevelClick(e));
-    window.addEventListener('drag-drop', (e) => this.onDragDrop(e));
-    window.addEventListener('sell-drop', (e) => this.onSellDrop(e));
+    document.getElementById('game').addEventListener('shop-click', (e) => this.onShopClick(e));
+    document.getElementById('game').addEventListener('player-click', (e) => this.onPlayerClick(e));
+    document.getElementById('game').addEventListener('refresh-click', (e) => this.onRefreshClick(e));
+    document.getElementById('game').addEventListener('lock-click', (e) => this.onLockClick(e));
+    document.getElementById('game').addEventListener('level-click', (e) => this.onLevelClick(e));
+    document.getElementById('game').addEventListener('drag-drop', (e) => this.onDragDrop(e));
+    document.getElementById('game').addEventListener('sell-drop', (e) => this.onSellDrop(e));
+    document.getElementById('game').addEventListener('leave-game', (e) => this.onLeaveGame(e));
   }
 
   initializePlayer(player) {
@@ -419,8 +421,9 @@ class GameContainer {
 
       case 'opponentName':
         if (this.room.sessionId == player.id) {
-          this.game.scene.getScene('gameScene').opponentNameText.setText(change.value.slice(0, 10));
+          this.game.scene.getScene('gameScene').battleManager.setOpponentName(change.value.slice(0, 10));
         }
+        break;
 
       case 'boardSize':
         if (this.room.sessionId == player.id) {
@@ -436,6 +439,10 @@ class GameContainer {
         if (this.room.sessionId == player.id) {
           this.game.scene.getScene('gameScene').shopContainer.lockButton.updateState();
         }
+        break;
+
+      case 'rank':
+        this.game.scene.getScene('gameScene').playerContainer.onRankChange(player.id, change.value);
         break;
     }
   }
@@ -458,7 +465,7 @@ class GameContainer {
     _client.joinOrCreate('lobby', {}).then((room) => {
       this.room.leave();
       // console.log('joined room:', room);
-      window.dispatchEvent(new CustomEvent('render-lobby', {detail: {room: room}}));
+      document.getElementById('game').dispatchEvent(new CustomEvent('render-lobby', {detail: {room: room}}));
     }).catch((e) => {
       console.error('join error', e);
     });
@@ -502,6 +509,62 @@ class GameContainer {
 
   onSellDrop(event) {
     this.room.send('sellDrop', {'detail': event.detail});
+  }
+
+
+  onLeaveGame(event){
+/*
+    window.removeEventListener('shop-click', this.onShopClick);
+    window.removeEventListener('player-click', this.onPlayerClick);
+    window.removeEventListener('refresh-click', this.onRefreshClick);
+    window.removeEventListener('lock-click', this.onLockClick);
+    window.removeEventListener('level-click', this.onLevelClick);
+    window.removeEventListener('drag-drop', this.onDragDrop);
+    window.removeEventListener('sell-drop', this.onSellDrop);
+    window.removeEventListener('leave-game', this.onLeaveGame);
+*/
+    this.game.destroy(true);
+
+    if(this.room.state.afterGameId == ''){
+      let savePlayers = [];
+      this.room.state.players.forEach(player => savePlayers.push(this.transformToSimplePlayer(player)));
+      _client.create('after-game', {'players':savePlayers}).then((room) => {
+        this.room.send('set-afterGameId', {'id': room.id});
+        this.room.leave();
+        document.getElementById('game').dispatchEvent(new CustomEvent('render-after-game', {detail: {room: room}}));
+        //console.log('joined room:', room);
+      }).catch((e) => {
+        console.error('join error', e);
+      });
+    }
+    else{
+      let savePlayers = [];
+      this.room.state.players.forEach(player => savePlayers.push(this.transformToSimplePlayer(player)));
+      _client.joinById(this.room.state.afterGameId, {'players':savePlayers}).then((room) => {
+        this.room.leave();
+        document.getElementById('game').dispatchEvent(new CustomEvent('render-after-game', {detail: {room: room}}));
+        //console.log('joined room:', room);
+      }).catch((e) => {
+        console.error('join error', e);
+      });
+    }
+  }
+
+  transformToSimplePlayer(player){
+    let simplePlayer = {
+      name: player.name,
+      id: player.id,
+      rank: player.rank,
+      avatar: player.avatar,
+      pokemons: [],
+      exp: player.exp
+    };
+    player.board.forEach(pokemon => {
+      if(pokemon.positionY != 0){
+        simplePlayer.pokemons.push(pokemon.name);
+      }
+    });
+    return simplePlayer;
   }
 
   onPlayerRemove(player, key) {

@@ -468,7 +468,7 @@ class WishStrategy extends AttackStrategy {
 
     board.forEach((x, y, ally) => {
       if (ally && pokemon.team == ally.team && count > 0) {
-        ally.life = Math.min(ally.hp, ally.life + heal);
+        ally.handleHeal(heal);
         count -= 1;
       }
     });

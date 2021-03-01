@@ -49,16 +49,18 @@ class PreparationRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
-    // console.log(client);
+    console.log('join room');
     this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
   }
 
   onLeave(client, consented) {
+    console.log('leave room');
     this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
   }
 
   onDispose() {
     this.dispatcher.stop();
+    console.log('Dispose room');
   }
 }
 

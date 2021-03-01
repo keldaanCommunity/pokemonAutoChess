@@ -94,7 +94,11 @@ class LobbyPage {
 
     this.room.onMessage('rooms', (rooms) => {
       // console.log(rooms);
-      this.allRooms = rooms;
+      rooms.forEach(room =>{
+        if(room.name == 'room'){
+          this.allRooms.push(room);
+        }
+      });
       this.handleRoomListChange();
     });
 
@@ -112,13 +116,15 @@ class LobbyPage {
     });
 
     this.room.onMessage('+', ([roomId, room]) => {
-      const roomIndex = this.allRooms.findIndex((room) => room.roomId === roomId);
-      if (roomIndex !== -1) {
-        this.allRooms[roomIndex] = room;
-      } else {
-        this.allRooms.push(room);
+      if(room.name == 'room'){
+        const roomIndex = this.allRooms.findIndex((room) => room.roomId === roomId);
+        if (roomIndex !== -1) {
+          this.allRooms[roomIndex] = room;
+        } else {
+          this.allRooms.push(room);
+        }
+        this.handleRoomListChange();
       }
-      this.handleRoomListChange();
     });
 
     this.room.onMessage('-', (roomId) => {

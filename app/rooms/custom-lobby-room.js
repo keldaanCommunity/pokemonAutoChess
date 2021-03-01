@@ -372,6 +372,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
   onJoin(client, options, auth) {
     super.onJoin(client, options, auth);
+    console.log('join lobby');
     this.state.users[client.sessionId] = new GameUser(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.avatar, false, false);
     //console.log(this.state.users);
     //this.state.addMessage(auth.email.split('@')[0], `${auth.email.split('@')[0]} joined.`, auth.metadata.avatar, Date.now(), true);
@@ -384,6 +385,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
   onLeave(client) {
     super.onLeave(client);
+    console.log('leave lobby');
     this.state.users.delete(client.sessionId);
     // const time = new Date(Date.now());
     // this.state.addMessage('Server',`${client.auth.email} left.`, client.auth.metadata.avatar, Date.now(), true);

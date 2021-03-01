@@ -13,7 +13,7 @@ export default class PlayerContainer extends GameObjects.Container {
   }
 
   addPlayer(player) {
-    this.add(new PlayerPortraitContainer(this.scene, 0, 102 * this.length, player));
+    this.add(new PlayerPortraitContainer(this.scene, 0, 102 * player.rank, player));
   }
 
   removePlayer(id) {
@@ -22,6 +22,10 @@ export default class PlayerContainer extends GameObjects.Container {
 
   onLifeChange(id, value) {
     this.getFirst('id', id).onLifeChange(value);
+  }
+
+  onRankChange(id, value){
+    this.getFirst('id',id).onRankChange(value);
   }
 
   onMoneyChange(id, value) {

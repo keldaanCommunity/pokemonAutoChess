@@ -1,5 +1,5 @@
 const Command = require('@colyseus/command').Command;
-const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE} = require('../../models/enum');
+const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY} = require('../../models/enum');
 const Player = require('../../models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
@@ -13,6 +13,10 @@ class OnShopCommand extends Command {
       if (player.shop[index]) {
         const name = player.shop[index];
         const pokemon = PokemonFactory.createPokemonFromName(name);
+        if(pokemon.rarity == RARITY.MYTHICAL){
+          this.state.shop.detachShop(player);
+          this.state.shop.assignShop(player);
+        }
         if (player.money >= pokemon.cost && (UtilsCommand.getBoardSize(player.board) < 8 ||
         (UtilsCommand.getPossibleEvolution(player.board, pokemon.name) && UtilsCommand.getBoardSize(player.board) == 8))) {
           player.money -= pokemon.cost;
@@ -45,7 +49,7 @@ class OnDragDropCommand extends Command {
           const y = parseInt(detail.y);
           if (pokemon.name == 'ditto') {
             const pokemonToClone = this.room.getPokemonByPosition(client.sessionId, x, y);
-            if (pokemonToClone) {
+            if (pokemonToClone && pokemonToClone.rarity != RARITY.MYTHICAL) {
               dittoReplaced = true;
               const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonFamily(pokemonToClone.name));
               this.state.players.get(client.sessionId).board.delete(detail.id);
@@ -309,7 +313,8 @@ class OnJoinCommand extends Command {
         false,
         this.state.specialCells,
         this.state.mapType,
-        auth.email
+        auth.email,
+        this.state.players.size + 1
     ));
     this.state.shop.assignShop(this.state.players.get(client.sessionId));
     if (this.state.players.size == 8) {
@@ -322,10 +327,56 @@ class OnJoinCommand extends Command {
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
     this.state.shop.detachShop(this.state.players.get(client.sessionId));
-    if (!this.state.players.get(client.sessionId).alive && this.state.elligibleToXP) {
-      UtilsCommand.computePlayerExperience(this.state.players.get(client.sessionId));
+    if (this.state.elligibleToXP) {
+      this.computePlayerExperience(this.state.players.get(client.sessionId));
     }
-    this.state.players.delete(client.sessionId);
+  }
+
+  computePlayerExperience(player) {
+    const self = this;
+    player.exp = XP_PLACE[player.rank - 1];
+
+    Mongoose.connect(process.env.MONGO_URI, (err) => {
+      User.find({email: player.email}, (err, users)=> {
+        if (err) {
+          console.log(err);
+        } else {
+          users.forEach((usr) => {
+            let actualExp = 0;
+            let actualLevel = 0;
+            if (usr.metadata.exp) {
+              actualExp = usr.metadata.exp;
+            }
+            if (usr.metadata.level) {
+              actualLevel = usr.metadata.level;
+            }
+            let expThreshold = XP_TABLE[actualLevel];
+            if (expThreshold === undefined) {
+              expThreshold = XP_TABLE[XP_TABLE.length - 1];
+            }
+            if (actualExp + player.exp >= expThreshold) {
+              usr.metadata.level += 1;
+              usr.metadata.exp = actualExp + player.exp - expThreshold;
+            } else {
+              usr.metadata.exp = actualExp + player.exp;
+            }
+
+            if (player.rank == 1) {
+              usr.metadata.wins += 1;
+              usr.metadata.mapWin[self.state.mapType] += 1;
+            }
+            self.room.clients.forEach((cli) => {
+              if (cli.auth.email == usr.email) {
+                cli.send('metadata', usr.metadata);
+              }
+            });
+            usr.markModified('metadata');
+            // console.log('user metadata changed');
+            usr.save();
+          });
+        }
+      });
+    });
   }
 }
 
@@ -449,6 +500,7 @@ class OnUpdatePhaseCommand extends Command {
       this.initializeFightingPhase();
     } else if (this.state.phase == STATE.FIGHT) {
       this.computeLife();
+      this.rankPlayers();
       this.checkDeath();
       const kickCommands = this.checkEndGame();
       if (kickCommands.length != 0) {
@@ -463,69 +515,11 @@ class OnUpdatePhaseCommand extends Command {
     const commands = [];
     const numberOfPlayersAlive = UtilsCommand.getNumberOfPlayersAlive(this.state.players);
 
-    if (numberOfPlayersAlive <= 1 && !this.state.gameFinished) {
-      this.state.players.forEach((player)=>{
-        if (player.alive) {
-          this.computePlayerExperience(player);
-        }
-      });
+    if (numberOfPlayersAlive <= 1) {
       this.state.gameFinished = true;
-      commands.push(new OnKickPlayerCommand());
+      //commands.push(new OnKickPlayerCommand());
     }
     return commands;
-  }
-
-  computePlayerExperience(player) {
-    const self = this;
-    if (this.state.elligibleToXP) {
-      const place = UtilsCommand.getNumberOfPlayersAlive(this.state.players);
-      const exp = XP_PLACE[place];
-
-      Mongoose.connect(process.env.MONGO_URI, (err) => {
-        User.find({email: player.email}, (err, users)=> {
-          if (err) {
-            console.log(err);
-          } else {
-            users.forEach((usr) => {
-              if (!player.dbConsumed) {
-                let actualExp = 0;
-                let actualLevel = 0;
-                if (usr.metadata.exp) {
-                  actualExp = usr.metadata.exp;
-                }
-                if (usr.metadata.level) {
-                  actualLevel = usr.metadata.level;
-                }
-                let expThreshold = XP_TABLE[actualLevel];
-                if (expThreshold === undefined) {
-                  expThreshold = XP_TABLE[XP_TABLE.length - 1];
-                }
-                if (actualExp + exp >= expThreshold) {
-                  usr.metadata.level += 1;
-                  usr.metadata.exp = actualExp + exp - expThreshold;
-                } else {
-                  usr.metadata.exp = actualExp + exp;
-                }
-
-                if (place == 1) {
-                  usr.metadata.wins += 1;
-                  usr.metadata.mapWin[self.state.mapType] += 1;
-                }
-                self.room.clients.forEach((cli) => {
-                  if (cli.auth.email == usr.email) {
-                    cli.send('metadata', usr.metadata);
-                  }
-                });
-                usr.markModified('metadata');
-                // console.log('user metadata changed');
-                usr.save();
-                player.dbConsumed = true;
-              }
-            });
-          }
-        });
-      });
-    }
   }
 
   computePlayerDamage(redTeam, playerLevel) {
@@ -538,34 +532,23 @@ class OnUpdatePhaseCommand extends Command {
     damage = Math.max(damage, 0);
     return damage;
   }
-  /*
-  getStageLevelDamage(stageLevel){
-    let damage = 0;
-    let stageLevelFloor = Math.floor(stageLevel/5);
-    if(stageLevelFloor == 0 || stageLevelFloor == 1){
-      damage = 1;
-    }
-    else if(stageLevelFloor == 2 || stageLevelFloor == 3){
-      damage = 2;
-    }
-    else if(stageLevelFloor == 4){
-      damage = 3;
-    }
-    else if(stageLevelFloor == 5){
-      damage = 4;
-    }
-    else if(stageLevelFloor == 6){
-      damage = 5;
-    }
-    else if (stageLevelFloor == 7){
-      damage = 8;
-    }
-    else{
-      damage = 15;
-    }
-    return damage;
+
+  rankPlayers(){
+    let rankArray = [];
+    this.state.players.forEach((player, key) => {
+      if(player.alive){
+        rankArray.push({id:player.id, life:player.life});
+      }
+    });
+    rankArray.sort(function(a,b){
+      return b.life - a.life;
+    });
+    rankArray.forEach((rankPlayer, index)=>{
+      this.state.players.get(rankPlayer.id).rank = index + 1;
+      this.state.players.get(rankPlayer.id).exp = XP_PLACE[index];
+    });
   }
-*/
+
   computeLife() {
     this.state.players.forEach((player, key) => {
       if (player.simulation.blueTeam.size == 0) {
@@ -622,12 +605,6 @@ class OnUpdatePhaseCommand extends Command {
     this.state.players.forEach((player, key) => {
       if (player.life <= 0) {
         player.alive = false;
-        player.board.forEach((pokemon, id) => {
-          player.board.delete(id);
-        });
-        if (!player.isBot && !player.dbConsumed) {
-          this.computePlayerExperience(player);
-        }
       }
     });
   }
@@ -646,7 +623,15 @@ class OnUpdatePhaseCommand extends Command {
         player.opponentName = '';
         if (!player.shopLocked) {
           this.state.shop.detachShop(player);
-          this.state.shop.assignShop(player);
+          if(this.state.stageLevel == 10){
+            this.state.shop.assignFirstMythicalShop(player);
+          }
+          else if(this.state.stageLevel == 20){
+            this.state.shop.assignSecondMythicalShop(player);
+          }
+          else{
+            this.state.shop.assignShop(player);
+          }
         } else {
           player.shopLocked = false;
         }
