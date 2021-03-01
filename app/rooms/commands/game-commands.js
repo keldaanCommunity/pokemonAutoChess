@@ -49,7 +49,7 @@ class OnDragDropCommand extends Command {
           const y = parseInt(detail.y);
           if (pokemon.name == 'ditto') {
             const pokemonToClone = this.room.getPokemonByPosition(client.sessionId, x, y);
-            if (pokemonToClone) {
+            if (pokemonToClone && pokemonToClone.rarity != RARITY.MYTHICAL) {
               dittoReplaced = true;
               const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonFamily(pokemonToClone.name));
               this.state.players.get(client.sessionId).board.delete(detail.id);
