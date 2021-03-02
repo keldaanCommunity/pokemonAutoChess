@@ -47,7 +47,9 @@ window.addEventListener('render-lobby', (e) =>{window.page =  new LobbyPage(e.de
 window.addEventListener('render-room', (e) =>{window.page =  new RoomPage(e.detail)});
 window.addEventListener('render-game', (e) =>{
   window.page =  new GamePage(e.detail);
-  document.getElementById('game').addEventListener('render-after-game', (e) =>{ console.log('render-after-game');window.page =  new AfterGamePage(e.detail)});
+  document.getElementById('game').addEventListener('render-after-game', (e) =>{
+    window.page =  new AfterGamePage(e.detail)
+  });
 });
 
 window.addEventListener('switch-lang', (e) => {

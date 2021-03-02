@@ -129,7 +129,7 @@ class PokemonState {
       }
 
       if (pokemon.effects.includes(EFFECTS.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)) {
-        pokemon.atkSpeed = Math.max(400, Math.round(pokemon.atkSpeed * 0.97));
+        pokemon.atkSpeed = Math.max(400, Math.round(pokemon.atkSpeed * 0.95));
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {

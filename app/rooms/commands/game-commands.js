@@ -177,7 +177,7 @@ class OnDragDropCommand extends Command {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName('leafon');
+                eevolution = PokemonFactory.createPokemonFromName('leafeon');
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;

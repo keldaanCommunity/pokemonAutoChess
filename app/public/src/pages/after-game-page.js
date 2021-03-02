@@ -3,7 +3,6 @@ import {WORDS} from '../../../models/enum';
 class AfterGamePage {
   constructor(args) {
     this.room = args.room;
-    console.log(this.room.id);
     this.langage = 'esp';
     if (window._client.auth.lang) {
       this.langage = window._client.auth.lang;

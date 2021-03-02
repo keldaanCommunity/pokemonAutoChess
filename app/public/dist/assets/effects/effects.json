@@ -682,7 +682,7 @@
 					}
 				},
 				{
-					"filename": "HYDO_CANNON",
+					"filename": "HYDRO_CANNON",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1233,6 +1233,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:196ae3997abb3a88aba3820c1feba889:ca14c16114de339f002ca497a094fdae:05d3c1256da5d10ff4f36ef2966c3322$"
+		"smartupdate": "$TexturePacker:SmartUpdate:407a8b5c4c5579f15877ad651d2abaf5:ca14c16114de339f002ca497a094fdae:05d3c1256da5d10ff4f36ef2966c3322$"
 	}
 }

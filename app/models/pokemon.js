@@ -1280,7 +1280,7 @@ class Suicune extends Pokemon {
 
 class Raikou extends Pokemon {
   constructor() {
-    super('raikou', 'raikou',[TYPE.ELECTRIC, TYPE.FIELD], RARITY.MYTHICAL, 'NEUTRAL', 243, '', 300, 30, 5, 5, 1, 'ELETRIC/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.THUNDER);
+    super('raikou', 'raikou',[TYPE.ELECTRIC, TYPE.FIELD], RARITY.MYTHICAL, 'NEUTRAL', 243, '', 300, 30, 5, 5, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.THUNDER);
   }
 }
 
@@ -1368,9 +1368,9 @@ class Umbreon extends Pokemon {
   }
 }
 
-class Leafon extends Pokemon {
+class Leafeon extends Pokemon {
   constructor() {
-    super('leafon', 'phylali',[TYPE.GRASS, TYPE.FLORA, TYPE.FIELD], RARITY.UNCOMMON, 'UNCOMMON', 470, '', 130, 9, 3, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HAPPY_HOUR);
+    super('leafeon', 'phylali',[TYPE.GRASS, TYPE.FLORA, TYPE.FIELD], RARITY.UNCOMMON, 'UNCOMMON', 470, '', 130, 9, 3, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HAPPY_HOUR);
   }
 }
 
@@ -1811,7 +1811,7 @@ module.exports = {
   Flareon,
   Espeon,
   Umbreon,
-  Leafon,
+  Leafeon,
   Sylveon,
   Meditite,
   Medicham,

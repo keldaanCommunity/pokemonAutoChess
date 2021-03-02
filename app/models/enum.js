@@ -471,8 +471,8 @@ const ITEM_DESCRIPTION = Object.freeze({
     fra: '+10% vitesse d attaque. +50% attaque si type feu. Fait évoluer Evoli en Pyroli.'
   },
   LEAF_STONE: {
-    eng: '+10% atk speed. +50% damage if type grass. Will evolve Eevee into Leafon ',
-    esp: '+10% a la velocidad de la tinta. +50% de daño si se trata de planta. Evolucionará Eevee en Leafon',
+    eng: '+10% atk speed. +50% damage if type grass. Will evolve Eevee into leafeon ',
+    esp: '+10% a la velocidad de la tinta. +50% de daño si se trata de planta. Evolucionará Eevee en leafeon',
     fra: '+10% vitesse d attaque. +50% attaque si type feuille. Fait évoluer Evoli en Phylali.'
   },
   BLACK_BELT: {
@@ -1292,7 +1292,7 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     },
-    pokemons: ['bellsprout','seedot','hoppip','caterpie','treecko','leafon','turtwig','chikorita','bulbasaur','lotad','snover']
+    pokemons: ['bellsprout','seedot','hoppip','caterpie','treecko','leafeon','turtwig','chikorita','bulbasaur','lotad','snover']
   },
   FIRE: {
     description:{
@@ -1630,7 +1630,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(4) Dragon Dance`,
-          text:`+5% ATK for pkm dragons at each attack`
+          text:`+5% attack speed for pkm dragons at each attack`
         }
       ],
       esp:[
@@ -1640,7 +1640,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(4) Fuerza`,
-          text:`+5% ATK para dragones pkm en cada ataque`
+          text:`+5% velocidad de ataque para dragones pkm en cada ataque`
         }
       ],
       fra:[
@@ -1650,7 +1650,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(4) Danse Draco`,
-          text:`+5% ATK pour les pkm dragons à chaque attaque`
+          text:`+5% vitesse d'attaque pour les pkm dragons à chaque attaque`
         }
       ]
     },
@@ -1935,7 +1935,7 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     },
-    pokemons: ['hoppip','turtwig','chikorita','bulbasaur','leafon']
+    pokemons: ['hoppip','turtwig','chikorita','bulbasaur','leafeon']
   },
   MINERAL: {
     description:{

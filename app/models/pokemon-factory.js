@@ -641,8 +641,8 @@ class PokemonFactory {
         return 'espeon';
       case 'umbreon':
         return 'umbreon';
-      case 'leafon':
-        return 'leafon';
+      case 'leafeon':
+        return 'leafeon';
       case 'sylveon':
         return 'sylveon';
       case 'glaceon':
@@ -777,6 +777,24 @@ class PokemonFactory {
         return 'moltres';
       case 'aerodactyl':
         return 'aerodactyl';
+      case 'groudon':
+        return 'groudon';
+      case 'kyogre':
+        return 'kyogre';
+      case 'rayquaza':
+        return 'rayquaza';
+      case 'palkia':
+        return 'palkia';
+      case 'dialga':
+        return 'dialga';
+      case 'giratina':
+        return 'giratina';
+      case 'suicune':
+        return 'suicune';
+      case 'entei':
+        return 'entei';
+      case 'raikou':
+        return 'raikou';
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1175,8 +1193,8 @@ class PokemonFactory {
         return new Pokemon.Espeon();
       case 'umbreon':
         return new Pokemon.Umbreon();
-      case 'leafon':
-        return new Pokemon.Leafon();
+      case 'leafeon':
+        return new Pokemon.Leafeon();
       case 'sylveon':
         return new Pokemon.Sylveon();
       case 'glaceon':
