@@ -775,7 +775,7 @@ const SCENARIOS =
             'y': 2
           },
           {
-            'name': 'poliwrath',
+            'name': 'politoed',
             'x': 1,
             'y': 1
           },
@@ -12228,7 +12228,7 @@ const SCENARIOS =
             'y': 2
           },
           {
-            'name': 'poliwrath',
+            'name': 'politoed',
             'x': 1,
             'y': 1
           },
