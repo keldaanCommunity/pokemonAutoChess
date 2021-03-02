@@ -30,6 +30,10 @@ class PokemonState {
         reducedDamage = reducedDamage / 2;
       }
 
+      if (attacker && attacker.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
+        reducedDamage = pokemon.life + 1;
+      }
+
       if (attacker && attacker.team == 0) {
         attacker.damageDone += reducedDamage;
       }
@@ -39,10 +43,7 @@ class PokemonState {
       if (pokemon.effects.includes(EFFECTS.RAGE)) {
         pokemon.attack += Math.ceil(pokemon.baseAtk * 0.05);
       }
-      if (pokemon.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
-        pokemon.life = 0;
-        death = true;
-      }
+
 
       if (pokemon) {
         pokemon.setMana(pokemon.mana + Math.ceil(reducedDamage / 10));

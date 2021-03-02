@@ -22,7 +22,7 @@ class Player extends Schema {
       experienceManager: new ExperienceManager(),
       synergies: new Synergies(),
       effects: new Effects(),
-      money: 5,
+      money: 500,
       life: 100,
       simulation: new Simulation(specialCells, mapType),
       shopLocked: false,

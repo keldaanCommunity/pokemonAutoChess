@@ -57,9 +57,6 @@ class AttackingState extends PokemonState {
         }
       }
       let damage = pokemon.atk;
-      if (pokemon.effects.includes(EFFECTS.PURSUIT) && target.life/target.hp < 0.3) {
-        damage = target.hp;
-      }
 
       let attackType = pokemon.attackType;
       if (pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {

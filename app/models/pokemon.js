@@ -350,19 +350,19 @@ class Gengar extends Pokemon {
 
 class Abra extends Pokemon {
   constructor() {
-    super('abra', 'abra',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 63, 'kadabra', 90, 5, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 30, SPECIAL_SKILL.TELEPORT);
+    super('abra', 'abra',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 63, 'kadabra', 90, 5, 1, 1, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 30, SPECIAL_SKILL.TELEPORT);
   }
 }
 
 class Kadabra extends Pokemon {
   constructor() {
-    super('kadabra', 'kadabra',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 64, 'alakazam', 130, 9, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 30, SPECIAL_SKILL.TELEPORT);
+    super('kadabra', 'kadabra',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 64, 'alakazam', 130, 9, 1, 1, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 30, SPECIAL_SKILL.TELEPORT);
   }
 }
 
 class Alakazam extends Pokemon {
   constructor() {
-    super('alakazam', 'alakazam',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 65, '', 230, 18, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 30, SPECIAL_SKILL.TELEPORT);
+    super('alakazam', 'alakazam',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 65, '', 230, 18, 1, 1, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 30, SPECIAL_SKILL.TELEPORT);
   }
 }
 
@@ -1454,7 +1454,7 @@ class Manaphy extends Pokemon {
 
 class Rotom extends Pokemon {
   constructor() {
-    super('rotom', 'motisma',[TYPE.ELECTRIC, TYPE.AMORPH], RARITY.MYTHICAL, 'february', 479, '', 200, 20, 3, 3, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
+    super('rotom', 'motisma',[TYPE.ELECTRIC, TYPE.AMORPH], RARITY.MYTHICAL, 'february', 479, '', 200, 12, 3, 3, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
   }
 }
 
@@ -1466,13 +1466,13 @@ class Spiritomb extends Pokemon {
 
 class Absol extends Pokemon {
   constructor() {
-    super('absol', 'absol',[TYPE.DARK, TYPE.FIELD], RARITY.MYTHICAL, 'february', 359, '', 200, 20, 3, 3, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.THIEF);
+    super('absol', 'absol',[TYPE.DARK, TYPE.FIELD], RARITY.MYTHICAL, 'february', 359, '', 250, 20, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.THIEF);
   }
 }
 
 class Lapras extends Pokemon {
   constructor() {
-    super('lapras', 'lokhlass',[TYPE.WATER, TYPE.ICE], RARITY.MYTHICAL, 'february', 131, '', 200, 20, 3, 3, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SOAK);
+    super('lapras', 'lokhlass',[TYPE.WATER, TYPE.ICE], RARITY.MYTHICAL, 'february', 131, '', 250, 20, 6, 6, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SOAK);
   }
 }
 
@@ -1490,25 +1490,25 @@ class Latios extends Pokemon {
 
 class Uxie extends Pokemon {
   constructor() {
-    super('uxie', 'créhelf',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 480, '', 200, 20, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
+    super('uxie', 'créhelf',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 480, '', 200, 12, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
   }
 }
 
 class Mesprit extends Pokemon {
   constructor() {
-    super('mesprit', 'créfollet',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 481, '', 200, 20, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
+    super('mesprit', 'créfollet',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 481, '', 200, 12, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
   }
 }
 
 class Azelf extends Pokemon {
   constructor() {
-    super('azelf', 'créfadet',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 482, '', 200, 20, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
+    super('azelf', 'créfadet',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 482, '', 200, 12, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
   }
 }
 
 class Aerodactyl extends Pokemon {
   constructor() {
-    super('aerodactyl', 'ptéra',[TYPE.FLYING, TYPE.MINERAL], RARITY.MYTHICAL, 'february', 142, '', 200, 20, 3, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
+    super('aerodactyl', 'ptéra',[TYPE.FLYING, TYPE.MINERAL], RARITY.MYTHICAL, 'february', 142, '', 200, 20, 6, 6, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
   }
 }
 
