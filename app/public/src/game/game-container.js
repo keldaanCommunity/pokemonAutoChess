@@ -447,15 +447,17 @@ class GameContainer {
         break;
 
       case 'alive':
-        let rankPhrase = `${WORDS.PLACE[window.langage]} no ${player.rank}`;
-        let titlePhrase = WORDS.RANKING[window.langage];
-        if(!change.value){
-          this.game.scene.getScene('gameScene').showPopup(
-            {
-              title: titlePhrase,
-              info: rankPhrase
-            }
-          )
+        if (this.room.sessionId == player.id) {
+          let rankPhrase = `${WORDS.PLACE[window.langage]} no ${player.rank}`;
+          let titlePhrase = WORDS.RANKING[window.langage];
+          if(!change.value){
+            this.game.scene.getScene('gameScene').showPopup(
+              {
+                title: titlePhrase,
+                info: rankPhrase
+              }
+            )
+          }
         }
         break;
     }
