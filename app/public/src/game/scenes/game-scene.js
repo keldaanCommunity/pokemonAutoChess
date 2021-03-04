@@ -14,10 +14,13 @@ import LeaveButton from '../components/leave-button';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
 import {WORDS, PHASE_TRADUCTION, MAP_TYPE_NAME} from '../../../../models/enum';
+import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 
 export default class GameScene extends Scene {
   constructor() {
-    super({key: 'gameScene'});
+    super({
+      key: 'gameScene'
+    });
   }
 
   preload() {
@@ -26,6 +29,12 @@ export default class GameScene extends Scene {
       google: {
           families: ['Press Start 2P']
       }
+  });
+
+  this.load.scenePlugin({
+    key: 'rexUIPlugin',
+    url: UIPlugin,
+    sceneKey: 'rexUIPlugin'
   });
 
     const progressBar = this.add.graphics();
@@ -145,8 +154,9 @@ export default class GameScene extends Scene {
       stroke: '#000',
       strokeThickness: 3
     };
-    
+    this.dialog = undefined;
     this.input.mouse.disableContextMenu();
+
     this.input.dragDistanceThreshold = 1;
     this.map = this.make.tilemap({key: 'map'});
     const tileset = this.map.addTilesetImage(window.state.mapType, 'tiles', 24, 24, 1, 1);
@@ -293,6 +303,12 @@ export default class GameScene extends Scene {
         window.animationManager.animatePokemon(this.pokemon);
         this.pokemon.moveManager.moveTo(pointer.x, pointer.y);
       }
+      else{
+        if (this.dialog && !this.dialog.isInTouching(pointer)) {
+        this.dialog.scaleDownDestroy(100);
+        this.dialog = undefined;
+        }
+      }
     });
 
     this.input.on('dragstart', (pointer, gameObject) => {
@@ -353,5 +369,111 @@ export default class GameScene extends Scene {
         gameObject.y = gameObject.input.dragStartY;
       }
     });
+  }
+
+  showPopup(message){
+    if (this.dialog === undefined) {
+      this.createDialog(this, this.sys.canvas.width/2, this.sys.canvas.height/4, message);
+    }
+    else{
+      this.dialog.scaleDownDestroy(100);
+      this.dialog = undefined;
+      this.createDialog(this, this.sys.canvas.width/2, this.sys.canvas.height/4, message);
+    }
+  }
+
+  createLabel(scene, text) {
+    return scene.rexUIPlugin.add.label({
+        // width: 40,
+        // height: 40,
+
+        background: scene.rexUIPlugin.add.roundRectangle(0, 0, 0, 0, 20, 0x5e92f3),
+
+        text: scene.add.text(0, 0, text, {
+            fontSize: '24px',
+            fontFamily: 'Verdana'
+        }),
+
+        space: {
+            left: 10,
+            right: 10,
+            top: 10,
+            bottom: 10
+        }
+    });
+    }
+
+  createDialog(scene, x, y, message) {
+
+      this.dialog = this.rexUIPlugin.add.dialog({
+          x: x,
+          y: y,
+
+          background: this.rexUIPlugin.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
+
+          title: this.rexUIPlugin.add.label({
+              background: this.rexUIPlugin.add.roundRectangle(0, 0, 100, 40, 20, 0x003c8f),
+              text: this.add.text(0, 0, message.title, {
+                  fontSize: '24px',
+                  fontFamily:'Verdana'
+              }),
+              space: {
+                  left: 15,
+                  right: 15,
+                  top: 10,
+                  bottom: 10
+              }
+          }),
+
+          content: this.add.text(0, 0, message.info, {
+              fontSize: '24px',
+              fontFamily:'Verdana'
+          }),
+
+          actions: [], // Assing an empty array instead of `undefined`
+
+          space: {
+              title: 25,
+              content: 25,
+              action: 15,
+
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: 20,
+          },
+
+          align: {
+              actions: 'right', // 'center'|'left'|'right'
+          },
+
+          expand: {
+              content: false, // Content is a pure text object
+          }
+      })
+          .addAction([
+            this.createLabel(this, WORDS.STAY[window.langage]),
+            this.createLabel(this, WORDS.LEAVE[window.langage])
+          ])        
+          .layout()
+          // .drawBounds(this.add.graphics(), 0xff0000)
+          .popUp(1000);
+
+      this.dialog
+          .on('button.click', function (button, groupName, index) {
+            if(index == 0){
+              this.dialog.scaleDownDestroy(100);
+              this.dialog = undefined;
+            }
+            else if(index == 1){
+              document.getElementById('game').dispatchEvent(new CustomEvent('leave-game'));
+            }
+          }, this)
+          .on('button.over', function (button, groupName, index) {
+              button.getElement('background').setStrokeStyle(1, 0xffffff);
+          })
+          .on('button.out', function (button, groupName, index) {
+              button.getElement('background').setStrokeStyle();
+          });
   }
 }

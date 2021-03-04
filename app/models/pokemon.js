@@ -158,13 +158,13 @@ class Meditite extends Pokemon {
 
 class Medicham extends Pokemon {
   constructor() {
-    super('medicham', 'charmina',[TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 'LEGENDARY', 308, 'mega-medicham', 130, 9, 6, 6, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.CONFUSION);
+    super('medicham', 'charmina',[TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 'LEGENDARY', 308, 'mega-medicham', 130, 9, 6, 6, 2, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.CONFUSION);
   }
 }
 
 class MegaMedicham extends Pokemon {
   constructor() {
-    super('mega-medicham', 'méga-charmina',[TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 'LEGENDARY', 3080, '', 230, 20, 7, 7, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.CONFUSION);
+    super('mega-medicham', 'méga-charmina',[TYPE.NORMAL, TYPE.HUMAN, TYPE.FIGHTING], RARITY.LEGENDARY, 'LEGENDARY', 3080, '', 230, 20, 7, 7, 2, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.CONFUSION);
   }
 }
 
@@ -1232,7 +1232,7 @@ class Fearow extends Pokemon {
 
 class Lugia extends Pokemon {
   constructor() {
-    super('lugia', 'lugia',[TYPE.AQUATIC, TYPE.NORMAL], RARITY.MYTHICAL, 'NEUTRAL', 249, '', 300, 30, 5, 5, 4, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HURRICANE);
+    super('lugia', 'lugia',[TYPE.AQUATIC, TYPE.FLYING, TYPE.PSYCHIC], RARITY.MYTHICAL, 'NEUTRAL', 249, '', 300, 30, 5, 5, 4, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HURRICANE);
   }
 }
 

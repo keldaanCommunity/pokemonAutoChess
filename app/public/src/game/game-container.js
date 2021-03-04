@@ -1,7 +1,7 @@
 import GameScene from './scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
 import WebFontLoaderPlugin from 'phaser3-rex-plugins/plugins/webfontloader-plugin.js';
-import {MAP_TYPE, LAST_BATTLE_RESULT_TRADUCTION} from '../../../models/enum.js';
+import {MAP_TYPE, LAST_BATTLE_RESULT_TRADUCTION, WORDS} from '../../../models/enum.js';
 
 class GameContainer {
   constructor(room, div) {
@@ -57,6 +57,7 @@ class GameContainer {
     this.room.onMessage('metadata', (metadata) => {
       _client.auth.metadata = metadata;
     });
+    this.room.onMessage('info',(message)=> this.handleServerInfo(message));
     this.room.onLeave((client) => this.handleRoomLeft(client));
     this.room.onError((err) => console.log('room error', err));
     this.room.state.onChange = (changes) => {
@@ -444,6 +445,19 @@ class GameContainer {
       case 'rank':
         this.game.scene.getScene('gameScene').playerContainer.onRankChange(player.id, change.value);
         break;
+
+      case 'alive':
+        let rankPhrase = `${WORDS.PLACE[window.langage]} no ${player.rank}`;
+        let titlePhrase = WORDS.RANKING[window.langage];
+        if(!change.value){
+          this.game.scene.getScene('gameScene').showPopup(
+            {
+              title: titlePhrase,
+              info: rankPhrase
+            }
+          )
+        }
+        break;
     }
   }
 
@@ -457,6 +471,10 @@ class GameContainer {
     if (message.updateItems) {
       this.game.scene.getScene('gameScene').itemsContainer.updateItem(message.field);
     }
+  }
+
+  handleServerInfo(message){
+    this.game.scene.getScene('gameScene').showPopup(message);
   }
 
   handleKickOut() {

@@ -24,6 +24,21 @@ const WORDS = Object.freeze({
     'esp': 'Salir del calabozo',
     'fra': 'Quitter le donjon'
   },
+  RANKING:{
+    'eng': 'Ranking',
+    'esp': 'Clasificación',
+    'fra': 'Classement'
+  },
+  STAY:{
+    'eng': 'Stay',
+    'esp': 'Permanezca en',
+    'fra': 'Rester'
+  },
+  PLACE:{
+    'eng': 'place',
+    'esp': 'puesto',
+    'fra': 'place'
+  },
   GAME_LOBBY: {
     'eng': 'Game Lobby',
     'esp': 'Lobby del juego',

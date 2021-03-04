@@ -33,6 +33,12 @@ class OnShopCommand extends Command {
 
 class OnDragDropCommand extends Command {
   execute({client, detail}) {
+    /*
+    client.send('info', {
+      title:'Information',
+      info:'Tu es un sanglier'
+    });
+    */
     let success = false;
     let dittoReplaced = false;
     const message = {

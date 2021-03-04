@@ -60,7 +60,8 @@ schema.defineTypes(Player, {
   boardSize: 'uint8',
   stuff: Stuff,
   rank : 'uint8',
-  exp: 'uint16'
+  exp: 'uint16',
+  alive: 'boolean'
 });
 
 module.exports = Player;
