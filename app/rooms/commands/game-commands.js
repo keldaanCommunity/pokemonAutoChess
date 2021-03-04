@@ -523,6 +523,11 @@ class OnUpdatePhaseCommand extends Command {
 
     if (numberOfPlayersAlive <= 1) {
       this.state.gameFinished = true;
+      this.room.broadcast('info',
+      {
+        title:'End of the game',
+        info:'We have a winner !'
+      });
       //commands.push(new OnKickPlayerCommand());
     }
     return commands;
