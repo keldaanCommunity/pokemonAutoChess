@@ -160,13 +160,13 @@ class Simulation extends Schema {
   applyItemsEffects(pokemon, types) {
     if (pokemon.items.count(ITEMS.WHITE_GLASSES) != 0) {
       if (pokemon.attackType == ATTACK_TYPE.SPECIAL) {
-        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1) * pokemon.items.count(ITEMS.WHITE_GLASSES);
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3) * pokemon.items.count(ITEMS.WHITE_GLASSES);
       }
     }
 
     if (pokemon.items.count(ITEMS.MUSCLE_BAND) != 0) {
       if (pokemon.attackType == ATTACK_TYPE.PHYSICAL) {
-        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1) * pokemon.items.count(ITEMS.MUSCLE_BAND);
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3) * pokemon.items.count(ITEMS.MUSCLE_BAND);
       }
     }
 
@@ -413,28 +413,37 @@ class Simulation extends Schema {
           pokemon.effects.push(EFFECTS.POWER_TRIP);
           break;
 
+        case EFFECTS.AMNESIA:
+          pokemon.effects.push(EFFECTS.AMNESIA);
+          pokemon.speDef += 5;
+          break;
+        
+        case EFFECTS.LIGHT_SCREEN:
+          pokemon.effects.push(EFFECTS.LIGHT_SCREEN);
+          pokemon.speDef += 10;
+          break;
+        
+        case EFFECTS.EERIE_SPELL:
+          pokemon.effects.push(EFFECTS.EERIE_SPELL);
+          pokemon.speDef += 20;
+          break;
+
         case EFFECTS.MEDITATE:
-          if(types.includes(TYPE.HUMAN)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.15);
-            pokemon.life += Math.ceil(pokemon.hp * 0.15);
-            pokemon.effects.push(EFFECTS.MEDITATE);
-          }
+          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.15);
+          pokemon.life += Math.ceil(pokemon.hp * 0.15);
+          pokemon.effects.push(EFFECTS.MEDITATE);
           break;
 
         case EFFECTS.FOCUS_ENERGY:
-          if(types.includes(TYPE.HUMAN)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-            pokemon.life += Math.ceil(pokemon.hp * 0.2);
-            pokemon.effects.push(EFFECTS.FOCUS_ENERGY);
-          }
+          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+          pokemon.life += Math.ceil(pokemon.hp * 0.2);
+          pokemon.effects.push(EFFECTS.FOCUS_ENERGY);
           break;
 
         case EFFECTS.CALM_MIND:
-          if(types.includes(TYPE.HUMAN)){
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3);
-            pokemon.life += Math.ceil(pokemon.hp * 0.3);
-            pokemon.effects.push(EFFECTS.CALM_MIND);
-          }
+          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3);
+          pokemon.life += Math.ceil(pokemon.hp * 0.3);
+          pokemon.effects.push(EFFECTS.CALM_MIND);
           break;
 
         case EFFECTS.TAILWIND:
@@ -525,7 +534,7 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.SNOW:
-            pokemon.effects.push(EFFECTS.SNOW);
+          pokemon.effects.push(EFFECTS.SNOW);
           break;
 
         case EFFECTS.MANA_HEAL:
@@ -542,16 +551,6 @@ class Simulation extends Schema {
         case EFFECTS.SPORE:
           pokemon.atkSpeed = pokemon.atkSpeed * 1.5;
           pokemon.effects.push(EFFECTS.SPORE);
-          break;
-
-        case EFFECTS.PSYWAVE:
-          pokemon.speDef = Math.max(0, Math.floor(pokemon.baseSpeDef * 0.7));
-          pokemon.effects.push(EFFECTS.PSYWAVE);
-          break;
-
-        case EFFECTS.MAGIC_ROOM:
-          pokemon.speDef = Math.max(0, Math.floor(pokemon.baseSpeDef * 0.7));
-          pokemon.effects.push(EFFECTS.MAGIC_ROOM);
           break;
 
         case EFFECTS.MEAN_LOOK:

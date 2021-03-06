@@ -3,7 +3,7 @@ import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemContainer from './item-container';
-import {SPECIAL_SKILL} from '../../../../models/enum.js';
+import {SPECIAL_SKILL, EFFECTS_ICON} from '../../../../models/enum.js';
 
 export default class Pokemon extends Button {
   constructor(scene, x, y, pokemon, dragable, isPopup) {
@@ -604,20 +604,58 @@ export default class Pokemon extends Button {
   }
 
   setEffects(pokemon, scene, height) {
-    let c = 0;
     if (pokemon.effects.length > 0) {
-      pokemon.effects.forEach((effect) => {
-        const image = new GameObjects.Image(scene, c*20 - 20, height + 10, 'effects', effect);
-        const border = new GameObjects.Image(scene, c*20 - 20, height + 10, 'effects', 'border');
-        image.objType = 'effect';
-        border.objType = 'effect';
-        image.setScale(0.5, 0.5);
-        border.setScale(0.5, 0.5);
-        scene.add.existing(image);
-        scene.add.existing(border);
-        this.add(image);
-        this.add(border);
-        c+= 1;
+      pokemon.effects.forEach((effect, c) => {
+
+        let color;
+        if(EFFECTS_ICON[effect].positive){
+          color = 0xbdffd5;
+        }
+        else{
+          color = 0xffd5bd;
+        }
+
+        let level = "";
+        switch (EFFECTS_ICON[effect].level) {
+          case 0:
+            level = "";
+            break;
+
+          case 1:
+            level = "I";
+            break;
+
+          case 2:
+            level = "II";
+            break;
+
+          case 3:
+            level = "III";
+            break;
+
+          case 4:
+            level = "IV";
+            break;
+        
+          default:
+            break;
+        }
+
+        let background = new GameObjects.Rectangle(scene, c*20 -20, height +10, 20, 20, color);
+        let backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5,0.5);
+        let backgroundText = new GameObjects.Text(scene, c*20 -30, height+5, level, {
+          fontSize: '15px',
+          fontFamily: 'Verdana',
+          color:'#000000'
+        });
+        background.objType = 'effect';
+        backgroundIcon.objType = 'effect';
+        scene.add.existing(background);
+        scene.add.existing(backgroundIcon);
+        scene.add.existing(backgroundText);
+        this.add(background);
+        this.add(backgroundIcon);
+        this.add(backgroundText);
       });
     }
   }

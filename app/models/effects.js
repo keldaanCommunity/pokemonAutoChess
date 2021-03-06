@@ -52,10 +52,13 @@ class Effects {
       this.list.push(EFFECTS.PUNISHMENT);
     }
     if (synergies.PSYCHIC >= 2) {
-      this.list.push(EFFECTS.PSYWAVE);
+      this.list.push(EFFECTS.AMNESIA);
     }
     if (synergies.PSYCHIC >= 4) {
-      this.list.push(EFFECTS.MAGIC_ROOM);
+      this.list.push(EFFECTS.LIGHT_SCREEN);
+    }
+    if (synergies.PSYCHIC >= 6) {
+      this.list.push(EFFECTS.EERIE_SPELL);
     }
     if (synergies.DARK >= 2) {
       this.list.push(EFFECTS.MEAN_LOOK);

@@ -371,14 +371,14 @@ const ITEM_NAME = Object.freeze({
 const ITEM_DESCRIPTION = Object.freeze({
   WHITE_GLASSES:
   {
-    eng: '+10% special attack',
-    esp: '+10% de ataque especial',
-    fra: '+10% attaque spéciale'
+    eng: '+30% special attack',
+    esp: '+30% de ataque especial',
+    fra: '+30% attaque spéciale'
   },
   MUSCLE_BAND: {
-    eng: '+10% attack',
-    esp: '+10% de ataque',
-    fra: '+10% attaque physique'
+    eng: '+30% attack',
+    esp: '+30% de ataque',
+    fra: '+30% attaque physique'
   },
   LIFE_ORB: {
     eng: '+100% damage, cost 5% life for each attack',
@@ -512,6 +512,32 @@ const ITEM_DESCRIPTION = Object.freeze({
   }
 });
 
+const TYPE = Object.freeze({
+  NORMAL: 'NORMAL',
+  GRASS: 'GRASS',
+  FIRE: 'FIRE',
+  WATER: 'WATER',
+  ELECTRIC: 'ELECTRIC',
+  FIGHTING: 'FIGHTING',
+  PSYCHIC: 'PSYCHIC',
+  DARK: 'DARK',
+  METAL: 'METAL',
+  GROUND: 'GROUND',
+  POISON: 'POISON',
+  DRAGON: 'DRAGON',
+  FIELD: 'FIELD',
+  MONSTER: 'MONSTER',
+  HUMAN: 'HUMAN',
+  AQUATIC: 'AQUATIC',
+  BUG: 'BUG',
+  FLYING: 'FLYING',
+  FLORA: 'FLORA',
+  MINERAL: 'MINERAL',
+  AMORPH: 'AMORPH',
+  FAIRY: 'FAIRY',
+  ICE: 'ICE'
+});
+
 const EFFECTS = Object.freeze({
   INGRAIN: 'INGRAIN',
   GROWTH: 'GROWTH',
@@ -527,8 +553,9 @@ const EFFECTS = Object.freeze({
   AGILITY: 'AGILITY',
   REVENGE: 'REVENGE',
   PUNISHMENT: 'PUNISHMENT',
-  PSYWAVE: 'PSYWAVE',
-  MAGIC_ROOM: 'MAGIC_ROOM',
+  AMNESIA:'AMNESIA',
+  LIGHT_SCREEN:'LIGHT_SCREEN',
+  EERIE_SPELL:'EERIE_SPELL',
   MEAN_LOOK: 'MEAN_LOOK',
   SCARY_FACE: 'SCARY_FACE',
   IRON_DEFENSE: 'IRON_DEFENSE',
@@ -572,6 +599,304 @@ const EFFECTS = Object.freeze({
   SNOW: 'SNOW',
   MANA_HEAL: 'MANA_HEAL'
 });
+
+const EFFECTS_ICON = Object.freeze({
+    INGRAIN: {
+      level: 1,
+      positive: true,
+      type:TYPE.GRASS
+    },
+    GROWTH: {
+      level: 2,
+      positive: true,
+      type:TYPE.GRASS
+    },
+    SPORE: {
+      level: 3,
+      positive: false,
+      type:TYPE.GRASS
+    },
+    BLAZE: {
+      level: 1,
+      positive: true,
+      type:TYPE.FIRE
+    },
+    DROUGHT: {
+      level: 2,
+      positive: true,
+      type:TYPE.FIRE
+    },
+    DRIZZLE: {
+      level: 1,
+      positive: true,
+      type:TYPE.WATER
+    },
+    RAIN_DANCE: {
+      level: 2,
+      positive: true,
+      type:TYPE.WATER
+    },
+    PRIMORDIAL_SEA: {
+      level: 3,
+      positive: true,
+      type:TYPE.WATER
+    },
+    STAMINA: {
+      level: 1,
+      positive: true,
+      type:TYPE.NORMAL
+    },
+    STRENGTH: {
+      level: 2,
+      positive: true,
+      type:TYPE.NORMAL
+    },
+    PURE_POWER: {
+      level: 3,
+      positive: true,
+      type:TYPE.NORMAL
+    },
+    AGILITY: {
+      level: 1,
+      positive: true,
+      type:TYPE.ELECTRIC
+    },
+    REVENGE: {
+      level: 1,
+      positive: true,
+      type:TYPE.FIGHTING
+    },
+    PUNISHMENT: {
+      level: 2,
+      positive: true,
+      type:TYPE.FIGHTING
+    },
+    AMNESIA:{
+      level: 1,
+      positive: true,
+      type:TYPE.PSYCHIC
+    },
+    LIGHT_SCREEN:{
+      level: 2,
+      positive: true,
+      type:TYPE.PSYCHIC
+    },
+    EERIE_SPELL:{
+      level: 3,
+      positive: true,
+      type:TYPE.PSYCHIC
+    },
+    MEAN_LOOK: {
+      level: 1,
+      positive: true,
+      type:TYPE.DARK
+    },
+    SCARY_FACE: {
+      level: 2,
+      positive: true,
+      type:TYPE.DARK
+    },
+    IRON_DEFENSE: {
+      level: 1,
+      positive: true,
+      type:TYPE.METAL
+    },
+    AUTOTOMIZE: {
+      level: 2,
+      positive: true,
+      type:TYPE.METAL
+    },
+    SPIKES: {
+      level: 1,
+      positive: false,
+      type:TYPE.GROUND
+    },
+    STEALTH_ROCK: {
+      level: 2,
+      positive: false,
+      type:TYPE.GROUND
+    },
+    SANDSTORM: {
+      level: 3,
+      positive: false,
+      type:TYPE.GROUND
+    },
+    POISON_GAS: {
+      level: 1,
+      positive: false,
+      type:TYPE.POISON
+    },
+    TOXIC: {
+      level: 2,
+      positive: false,
+      type:TYPE.POISON
+    },
+    INTIMIDATE: {
+      level: 1,
+      positive: false,
+      type:TYPE.DRAGON
+    },
+    DRAGON_DANCE: {
+      level: 2,
+      positive: true,
+      type:TYPE.DRAGON
+    },
+    WORK_UP: {
+      level: 1,
+      positive: true,
+      type:TYPE.FIELD
+    },
+    RAGE: {
+      level: 2,
+      positive: true,
+      type:TYPE.FIELD
+    },
+    ANGER_POINT: {
+      level: 3,
+      positive: true,
+      type:TYPE.FIELD
+    },
+    PURSUIT: {
+      level: 1,
+      positive: true,
+      type:TYPE.MONSTER
+    },
+    BRUTAL_SWING: {
+      level: 2,
+      positive: true,
+      type:TYPE.MONSTER
+    },
+    POWER_TRIP: {
+      level: 3,
+      positive: true,
+      type:TYPE.MONSTER
+    },
+    MEDITATE: {
+      level: 1,
+      positive: true,
+      type:TYPE.HUMAN
+    },
+    FOCUS_ENERGY: {
+      level: 2,
+      positive: true,
+      type:TYPE.HUMAN
+    },
+    CALM_MIND: {
+      level: 3,
+      positive: true,
+      type:TYPE.HUMAN
+    },
+    SWARM: {
+      level: 1,
+      positive: true,
+      type:TYPE.BUG
+    },
+    STICKY_WEB: {
+      level: 2,
+      positive: false,
+      type:TYPE.BUG
+    },
+    SWIFT_SWIM: {
+      level: 1,
+      positive: true,
+      type:TYPE.AQUATIC
+    },
+    HYDO_CANNON: {
+      level: 2,
+      positive: true,
+      type:TYPE.AQUATIC
+    },
+    TAILWIND: {
+      level: 1,
+      positive: true,
+      type:TYPE.FLYING
+    },
+    FEATHER_DANCE: {
+      level: 2,
+      positive: true,
+      type:TYPE.FLYING
+    },
+    MAX_AIRSTREAM: {
+      level: 3,
+      positive: true,
+      type:TYPE.FLYING
+    },
+    RAIN_DISH: {
+      level: 1,
+      positive: true,
+      type:TYPE.FLORA
+    },
+    FLOWER_SHIELD: {
+      level: 2,
+      positive: true,
+      type:TYPE.FLORA
+    },
+    BATTLE_ARMOR: {
+      level: 1,
+      positive: true,
+      type:TYPE.MINERAL
+    },
+    MOUTAIN_RESISTANCE: {
+      level: 2,
+      positive: true,
+      type:TYPE.MINERAL
+    },
+    PHANTOM_FORCE: {
+      level: 1,
+      positive: true,
+      type:TYPE.AMORPH
+    },
+    ATTRACT: {
+      level: 1,
+      positive: true,
+      type:TYPE.FAIRY
+    },
+    BABY_DOLL_EYES: {
+      level: 2,
+      positive: true,
+      type:TYPE.FAIRY
+    },
+    ROCK: {
+      level: 0,
+      positive: true,
+      type:TYPE.MINERAL
+    },
+    GRASS: {
+      level: 0,
+      positive: true,
+      type:TYPE.GRASS
+    },
+    FIRE: {
+      level: 0,
+      positive: true,
+      type:TYPE.FIRE
+    },
+    WATER: {
+      level: 0,
+      positive: true,
+      type:TYPE.WATER
+    },
+    NORMAL: {
+      level: 0,
+      positive: true,
+      type:TYPE.NORMAL
+    },
+    ICE: {
+      level: 0,
+      positive: true,
+      type:TYPE.ICE
+    },
+    SNOW: {
+      level: 1,
+      positive: true,
+      type:TYPE.ICE
+    },
+    MANA_HEAL: {
+      level: 2,
+      positive: true,
+      type:TYPE.ICE
+    }
+})
 
 const SPECIAL_SKILL = Object.freeze({
   DEFAULT: 'DEFAULT',
@@ -1038,31 +1363,6 @@ const TYPE_TRADUCTION = Object.freeze({
   }
 });
 
-const TYPE = Object.freeze({
-  NORMAL: 'NORMAL',
-  GRASS: 'GRASS',
-  FIRE: 'FIRE',
-  WATER: 'WATER',
-  ELECTRIC: 'ELECTRIC',
-  FIGHTING: 'FIGHTING',
-  PSYCHIC: 'PSYCHIC',
-  DARK: 'DARK',
-  METAL: 'METAL',
-  GROUND: 'GROUND',
-  POISON: 'POISON',
-  DRAGON: 'DRAGON',
-  FIELD: 'FIELD',
-  MONSTER: 'MONSTER',
-  HUMAN: 'HUMAN',
-  AQUATIC: 'AQUATIC',
-  BUG: 'BUG',
-  FLYING: 'FLYING',
-  FLORA: 'FLORA',
-  MINERAL: 'MINERAL',
-  AMORPH: 'AMORPH',
-  FAIRY: 'FAIRY',
-  ICE: 'ICE'
-});
 
 const RARITY = Object.freeze({
   COMMON: 'COMMON',
@@ -1454,32 +1754,44 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(2) Psywave`,
-          text:`Enemy team has -30% SPEDEF`
+          title:`(2) Amnesia`,
+          text:`Ally gains +5 SPEDEF`
         },
         {
-          title:`(4) Psyko`,
-          text:`Enemy team has an additional -30% SPEDEF`
+          title:`(4) Light Screen`,
+          text:`Ally gains additional +10 SPEDEF`
+        },
+        {
+          title:`(6) Eerie Spell`,
+          text:`Ally gains additional +20 SPEDEF`
         }
       ],
       esp:[
         {
-          title:`(2) Vagabundeo Psíquico`,
-          text:`El equipo enemigo tiene un -30% de SPEDEF`
+          title:`(2) Amnesia`,
+          text:`Ally gana +5 SPEDEF`
         },
         {
-          title:`(4) Psyko`,
-          text:`El equipo enemigo tiene un -30% adicional de SPEDEF`
+          title:`(4) Pantalla de luz`,
+          text:`Ally gana +10 SPEDEF adicionales`
+        },
+        {
+          title:`(6) Hechizo espeluznante`,
+          text:`Ally gana +20 SPEDEF adicionales`
         }
       ],
       fra:[
         {
-          title:`(2) Vague Psy`,
-          text:`L'équipe ennemie a -30% SPEDEF`
+          title:`(2) Amnésie`,
+          text:`Les alliés gagnent +5 SPEDEF`
         },
         {
-          title:`(4) Psyko`,
-          text:`L'équipe ennemie a un additionel -30% SPEDEF`
+          title:`(4) Mur lumière`,
+          text:`Les alliés gagnent un additionel +10 SPEDEF`
+        },
+        {
+          title:`(6) Sort Sinistre`,
+          text:`Les alliés gagnent un additionel +20 SPEDEF`
         }
       ]
     },
@@ -1771,43 +2083,43 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Meditation`,
-          text:`+15% ATK and +15% HP for human pkm`
+          text:`+15% ATK and +15% HP for all pkm`
         },
         {
           title:`(4) Power`,
-          text:`+20% ATK and +20% HP for human pkm`
+          text:`+20% ATK and +20% HP for all pkm`
         },
         {
           title:`(6) Calm Mind`,
-          text:`+30% ATK and +30% HP for human pkm`
+          text:`+30% ATK and +30% HP for all pkm`
         }
       ],
       esp:[
         {
           title:`(2) Meditación`,
-          text:`+15% de ATK y +15% HP para pkm humanos`
+          text:`+15% de ATK y +15% HP para todos los pokemones`
         },
         {
           title:`(4) Poder`,
-          text:`+20% de ATK y +20% HP para pkm humanos`
+          text:`+20% de ATK y +20% HP para todos los pokemones`
         },
         {
           title:`(6) Plenitud`,
-          text:`+30% de ATK y +30% HP para pkm humanos`
+          text:`+30% de ATK y +30% HP para todos los pokemones`
         }
       ],
       fra:[
         {
           title:`(2) Méditation`,
-          text:`+20% ATK et +20% ATK speed pour les pkm humains`
+          text:`+20% ATK et +20% ATK speed pour tous les pkm`
         },
         {
           title:`(4) Puissance`,
-          text:`10% de chance de coup critique pour les pkm humains`
+          text:`10% de chance de coup critique pour tous les pkm`
         },
         {
           title:`(6) Plénitude`,
-          text:`+20% ATK et +20% DEF pour les pkm humains`
+          text:`+20% ATK et +20% DEF pour tous les pkm`
         }
       ]
     },
@@ -1928,7 +2240,7 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     },
-    pokemons: ['starly','pidgey','hoppip','zubat','charizard','torchic','piplup','togepi','salamence']
+    pokemons: ['starly','pidgey','hoppip','zubat','charizard','torchic','piplup','salamence']
   },
   FLORA: {
     description:{
@@ -2066,8 +2378,8 @@ const TYPE_DETAILS = Object.freeze({
           text:`+10% chance to freeze the enemy during an attack`
         },
         {
-          title:`(4) Mana Care`,
-          text:`+50% mana regeneration for ice pkm`
+          title:`(4) Mana Heal`,
+          text:`+50% mana regeneration for all pkm`
         }
       ],
       esp:[
@@ -2077,7 +2389,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(4) Fuerza`,
-          text:`+50% de regeneración de maná por pkm de hielo`
+          text:`+50% de regeneración de maná por todos pkm`
         }
       ],
       fra:[
@@ -2087,7 +2399,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(4) Soin Mana`,
-          text:`+50% de régénération mana pour les pkm glace`
+          text:`+50% de régénération mana pour tous les pkm`
         }
       ]
     },
@@ -2128,5 +2440,6 @@ module.exports = {
   ITEMS,
   ITEM_NAME,
   ITEM_DESCRIPTION,
-  TYPE_DETAILS
+  TYPE_DETAILS,
+  EFFECTS_ICON
 };
