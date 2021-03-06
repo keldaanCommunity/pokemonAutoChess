@@ -130,10 +130,13 @@ class Effects {
       this.list.push(EFFECTS.STICKY_WEB);
     }
     if (synergies.FLYING >= 2) {
-      this.list.push(EFFECTS.RAZOR_WIND);
+      this.list.push(EFFECTS.TAILWIND);
     }
     if (synergies.FLYING >= 4) {
-      this.list.push(EFFECTS.HURRICANE);
+      this.list.push(EFFECTS.FEATHER_DANCE);
+    }
+    if (synergies.FLYING >= 6) {
+      this.list.push(EFFECTS.MAX_AIRSTREAM);
     }
     if (synergies.FLORA >= 2) {
       this.list.push(EFFECTS.RAIN_DISH);

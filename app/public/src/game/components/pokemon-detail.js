@@ -14,7 +14,7 @@ const COLOR_TYPE = Object.freeze({
 });
 
 export default class PokemonDetail extends GameObjects.Container {
-  constructor(scene, x, y, name, hp, atk, def, speDef, attackType, range, atkSpeed) {
+  constructor(scene, x, y, name, hp, atk, def, speDef, attackType, range, atkSpeed, critChance) {
     super(scene, x, y);
     this.pokemonInformation = PokemonFactory.createPokemonFromName(name);
     let color = 'white';
@@ -74,6 +74,9 @@ export default class PokemonDetail extends GameObjects.Container {
     this.speDef = new GameObjects.Text(scene, 20, 120, speDef, this.getColorStyle(this.pokemonInformation.speDef, speDef, false));
     this.add(this.speDef);
     this.add(new GameObjects.Image(scene, 60, 130, 'icons', 'speDef').setScale(2, 2));
+    this.critChance = new GameObjects.Text(scene, 100, 140, critChance, this.textStyle);
+    this.add(this.critChance);
+    this.add(new GameObjects.Image(scene,140, 150, 'icons', 'critChance').setScale(2,2));
     this.mana = new GameObjects.Text(scene, 10, 140, this.pokemonInformation.maxMana, this.textStyle);
     this.add(this.mana);
     this.add(new GameObjects.Image(scene, 60, 150, 'icons', 'mana').setScale(2, 2));

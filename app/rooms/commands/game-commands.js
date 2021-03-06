@@ -592,7 +592,7 @@ class OnUpdatePhaseCommand extends Command {
   computeIncome() {
     this.state.players.forEach((player, key) => {
       if (player.alive) {
-        player.interest = Math.min(Math.floor(player.money / 5), 6);
+        player.interest = Math.min(Math.floor(player.money / 10), 5);
         player.money += player.interest;
         player.money += player.streak;
         if (player.lastBattleResult == 'Win') {

@@ -100,6 +100,12 @@ export default class BattleManager {
             window.animationManager.animatePokemon(children[i]);
           } else if (change.field =='action') {
             children[i].action = pokemon.action;
+          } else if (change.field == 'critChance') {
+            children[i].critChance = pokemon.critChance;
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
+              detail.critChance.setText(pokemon.critChance);
+            }
           } else if (change.field == 'atkSpeed') {
             children[i].atkSpeed = pokemon.atkSpeed;
             const detail = children[i].getFirst('objType', 'detail');
@@ -225,13 +231,21 @@ export default class BattleManager {
     let color;
     let damageText;
     if (damage >= 0) {
-      color='green';
+      color='#00FF00';
       damageText = `+${damage}`;
     } else {
-      color='red';
+      color='#FF0000';
       damageText = damage;
     }
-    const text = this.scene.add.existing(new GameObjects.Text(this.scene, x-25, y -30, damageText, window.textStyle));
+    let textStyle = {
+      fontSize: '40px',
+      fontFamily: 'Verdana',
+      color: color,
+      align: 'center',
+      strokeThickness:2,
+      stroke: '#000'
+    };
+    const text = this.scene.add.existing(new GameObjects.Text(this.scene, x-25, y -30, damageText, textStyle));
     text.setDepth(9);
 
     this.scene.add.tween({

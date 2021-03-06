@@ -414,20 +414,48 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.MEDITATE:
-          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.15);
-          pokemon.def += Math.ceil(pokemon.baseDef * 0.15);
-          pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.8);
-          pokemon.effects.push(EFFECTS.MEDITATE);
+          if(types.includes(TYPE.HUMAN)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.15);
+            pokemon.life += Math.ceil(pokemon.hp * 0.15);
+            pokemon.effects.push(EFFECTS.MEDITATE);
+          }
           break;
 
         case EFFECTS.FOCUS_ENERGY:
-          pokemon.effects.push(EFFECTS.FOCUS_ENERGY);
+          if(types.includes(TYPE.HUMAN)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
+            pokemon.life += Math.ceil(pokemon.hp * 0.2);
+            pokemon.effects.push(EFFECTS.FOCUS_ENERGY);
+          }
           break;
 
         case EFFECTS.CALM_MIND:
-          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3);
-          pokemon.def += Math.ceil(pokemon.baseDef * 0.3);
-          pokemon.effects.push(EFFECTS.CALM_MIND);
+          if(types.includes(TYPE.HUMAN)){
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3);
+            pokemon.life += Math.ceil(pokemon.hp * 0.3);
+            pokemon.effects.push(EFFECTS.CALM_MIND);
+          }
+          break;
+
+        case EFFECTS.TAILWIND:
+          if(types.includes(TYPE.FLYING)){
+            pokemon.critChance += 10;
+            pokemon.effects.push(EFFECTS.TAILWIND);
+          }
+          break;
+
+        case EFFECTS.FEATHER_DANCE:
+          if(types.includes(TYPE.FLYING)){
+            pokemon.critChance += 20;
+            pokemon.effects.push(EFFECTS.FEATHER_DANCE);
+          }
+          break;
+
+        case EFFECTS.MAX_AIRSTREAM:
+          if(types.includes(TYPE.FLYING)){
+            pokemon.critChance += 40;
+            pokemon.effects.push(EFFECTS.MAX_AIRSTREAM);
+          }
           break;
 
         case EFFECTS.SWIFT_SWIM:
@@ -564,16 +592,6 @@ class Simulation extends Schema {
         case EFFECTS.STICKY_WEB:
           pokemon.atkSpeed = pokemon.atkSpeed * 1.3;
           pokemon.effects.push(EFFECTS.STICKY_WEB);
-          break;
-
-        case EFFECTS.RAZOR_WIND:
-          pokemon.handleDamage(Math.ceil(pokemon.hp * 0.1), this.board, ATTACK_TYPE.TRUE);
-          pokemon.effects.push(EFFECTS.RAZOR_WIND);
-          break;
-
-        case EFFECTS.HURRICANE:
-          pokemon.handleDamage(Math.ceil(pokemon.hp * 0.1), this.board, ATTACK_TYPE.TRUE);
-          pokemon.effects.push(EFFECTS.RAZOR_WIND);
           break;
 
         default:

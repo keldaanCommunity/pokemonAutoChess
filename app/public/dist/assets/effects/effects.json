@@ -535,7 +535,7 @@
 					}
 				},
 				{
-					"filename": "FLOWER_SHIELD",
+					"filename": "FEATHER_DANCE",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -551,6 +551,69 @@
 					"frame": {
 						"x": 127,
 						"y": 43,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "MAX_AIRSTREAM",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 127,
+						"y": 43,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "TAILWIND",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 127,
+						"y": 43,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "FLOWER_SHIELD",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 127,
+						"y": 85,
 						"w": 40,
 						"h": 40
 					}
@@ -571,76 +634,13 @@
 					},
 					"frame": {
 						"x": 127,
-						"y": 43,
+						"y": 85,
 						"w": 40,
 						"h": 40
 					}
 				},
 				{
 					"filename": "GRASS",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 40,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 40,
-						"h": 40
-					},
-					"frame": {
-						"x": 127,
-						"y": 85,
-						"w": 40,
-						"h": 40
-					}
-				},
-				{
-					"filename": "GROWTH",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 40,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 40,
-						"h": 40
-					},
-					"frame": {
-						"x": 127,
-						"y": 85,
-						"w": 40,
-						"h": 40
-					}
-				},
-				{
-					"filename": "INGRAIN",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 40,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 40,
-						"h": 40
-					},
-					"frame": {
-						"x": 127,
-						"y": 85,
-						"w": 40,
-						"h": 40
-					}
-				},
-				{
-					"filename": "HURRICANE",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -661,7 +661,28 @@
 					}
 				},
 				{
-					"filename": "RAZOR_WIND",
+					"filename": "GROWTH",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 169,
+						"y": 1,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "INGRAIN",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1081,70 +1102,28 @@
 					}
 				},
 				{
+					"filename": "RAZOR_WIND",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 295,
+						"y": 43,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
 					"filename": "SANDSTORM",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 40,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 40,
-						"h": 40
-					},
-					"frame": {
-						"x": 295,
-						"y": 43,
-						"w": 40,
-						"h": 40
-					}
-				},
-				{
-					"filename": "SPIKES",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 40,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 40,
-						"h": 40
-					},
-					"frame": {
-						"x": 295,
-						"y": 43,
-						"w": 40,
-						"h": 40
-					}
-				},
-				{
-					"filename": "STEALTH_ROCK",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 40,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 40,
-						"h": 40
-					},
-					"frame": {
-						"x": 295,
-						"y": 43,
-						"w": 40,
-						"h": 40
-					}
-				},
-				{
-					"filename": "SPORE",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1165,7 +1144,49 @@
 					}
 				},
 				{
-					"filename": "STICKY_WEB",
+					"filename": "SPIKES",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 295,
+						"y": 85,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "STEALTH_ROCK",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 295,
+						"y": 85,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "SPORE",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1181,6 +1202,27 @@
 					"frame": {
 						"x": 337,
 						"y": 1,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "STICKY_WEB",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 337,
+						"y": 43,
 						"w": 40,
 						"h": 40
 					}
@@ -1201,7 +1243,7 @@
 					},
 					"frame": {
 						"x": 337,
-						"y": 1,
+						"y": 43,
 						"w": 40,
 						"h": 40
 					}
@@ -1222,7 +1264,7 @@
 					},
 					"frame": {
 						"x": 337,
-						"y": 43,
+						"y": 85,
 						"w": 40,
 						"h": 40
 					}
@@ -1233,6 +1275,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:407a8b5c4c5579f15877ad651d2abaf5:ca14c16114de339f002ca497a094fdae:05d3c1256da5d10ff4f36ef2966c3322$"
+		"smartupdate": "$TexturePacker:SmartUpdate:ec98695d0e709e2373ab2c472b92411e:b6d73c84b490ce04ecf817ab1c0e408a:05d3c1256da5d10ff4f36ef2966c3322$"
 	}
 }

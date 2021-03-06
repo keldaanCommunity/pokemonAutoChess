@@ -553,8 +553,9 @@ const EFFECTS = Object.freeze({
   STICKY_WEB: 'STICKY_WEB',
   SWIFT_SWIM: 'SWIFT_SWIM',
   HYDO_CANNON: 'HYDRO_CANNON',
-  RAZOR_WIND: 'RAZOR_WIND',
-  HURRICANE: 'HURRICANE',
+  TAILWIND: 'TAILWIND',
+  FEATHER_DANCE: 'FEATHER_DANCE',
+  MAX_AIRSTREAM: 'MAX_AIRSTREAM',
   RAIN_DISH: 'RAIN_DISH',
   FLOWER_SHIELD: 'FLOWER_SHIELD',
   BATTLE_ARMOR: 'BATTLE_ARMOR',
@@ -1770,29 +1771,29 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Meditation`,
-          text:`+20% ATK and +20% ATK speed for human pkm`
+          text:`+15% ATK and +15% HP for human pkm`
         },
         {
           title:`(4) Power`,
-          text:`10% critical hit chance for human pkm`
+          text:`+20% ATK and +20% HP for human pkm`
         },
         {
           title:`(6) Calm Mind`,
-          text:`+20% ATK and +20% DEF for human pkm`
+          text:`+30% ATK and +30% HP for human pkm`
         }
       ],
       esp:[
         {
           title:`(2) Meditación`,
-          text:`+20% de ATK y +20% de velocidad ATK para pkm humanos`
+          text:`+15% de ATK y +15% HP para pkm humanos`
         },
         {
           title:`(4) Poder`,
-          text:`10% de probabilidad de golpe crítico para el pkm humano`
+          text:`+20% de ATK y +20% HP para pkm humanos`
         },
         {
           title:`(6) Plenitud`,
-          text:`+20% ATK y +20% DEF para pkm humano`
+          text:`+30% de ATK y +30% HP para pkm humanos`
         }
       ],
       fra:[
@@ -1886,32 +1887,44 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(2) Tornado`,
-          text:`-10% HP for the enemy team at the beginning of the fight`
+          title:`(2) Tailwind`,
+          text:`+10% critical chance for flying pokemons`
         },
         {
-          title:`(4) Hurricane`,
-          text:`The effect of the tornado is doubled`
+          title:`(4) Feather Dance`,
+          text:`+20% additional critical chance for flying pokemons`
+        },
+        {
+          title:`(6) Max Airstream`,
+          text:`+40% additional critical chance for flying pokemons`
         }
       ],
       esp:[
         {
-          title:`(2) Tornado`,
-          text:`-10% de HP para el equipo enemigo al comienzo del combate`
+          title:`(2) Viento de cola`,
+          text:`+10% de probabilidad de crítico para los pokemones voladores`
         },
         {
-          title:`(4) Huracán`,
-          text:`El efecto del tornado se duplica`
+          title:`(4) Danza de las plumas`,
+          text:`+20% de probabilidad de crítico adicional para los pokemones voladores`
+        },
+        {
+          title:`(6) Corriente de aire máxima`,
+          text:`+40% de probabilidad de crítico adicional para los pokemones voladores`
         }
       ],
       fra:[
         {
-          title:`(2) Tornade`,
-          text:`-10% HP pour l'équipe ennemie au début du combat`
+          title:`(2) Vent arrière`,
+          text:`+10% de coup critique pour les pokémons vols`
         },
         {
-          title:`(4) Ouragan`,
-          text:`L'effet de la tornade est doublée`
+          title:`(4) Danse des plumes`,
+          text:`+20% de coup critique pour les pokémons vols`
+        },
+        {
+          title:`(6) Max Airstream`,
+          text:`+40% de coup critique pour les pokémons vols`
         }
       ]
     },

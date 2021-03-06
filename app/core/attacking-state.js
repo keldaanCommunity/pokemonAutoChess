@@ -56,15 +56,18 @@ class AttackingState extends PokemonState {
           }
         }
       }
-      let damage = pokemon.atk;
-
+      let damage;
+      if(Math.random() * 100 < pokemon.critChance){
+        damage = Math.round(pokemon.atk * 1.5);
+      }
+      else{
+        damage = pokemon.atk;
+      }
+      
       let attackType = pokemon.attackType;
       if (pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
         attackType = ATTACK_TYPE.TRUE;
       }
-
-      const victim = target.handleDamage(damage, board, attackType, pokemon);
-
       if (target.items.count(ITEMS.ROCKY_HELMET) != 0) {
         pokemon.handleDamage(Math.ceil(pokemon.hp * 0.12) * target.items.count(ITEMS.ROCKY_HELMET), board, ATTACK_TYPE.PHYSICAL, target);
       }
@@ -76,6 +79,8 @@ class AttackingState extends PokemonState {
       if (pokemon.items.count(ITEMS.SHELL_BELL) != 0) {
         pokemon.handleHeal(Math.ceil(damage / 10) * pokemon.items.count(ITEMS.SHELL_BELL));
       }
+
+      const victim = target.handleDamage(damage, board, attackType, pokemon);
 
       if (victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)) {
         pokemon.handleHeal(pokemon.hp);

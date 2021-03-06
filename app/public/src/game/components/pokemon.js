@@ -17,6 +17,7 @@ export default class Pokemon extends Button {
     this.id = pokemon.id;
     this.hp = pokemon.hp;
     this.range = pokemon.range;
+    this.critChance = 10;
     this.atk = pokemon.atk;
     this.def = pokemon.def;
     this.speDef = pokemon.speDef;
@@ -39,15 +40,18 @@ export default class Pokemon extends Button {
     if (pokemon.life) {
       this.life = pokemon.life;
     }
+    if(pokemon.critChance){
+      this.critChance = pokemon.critChance;
+    }
     this.setDepth(5);
   }
 
   enterButtonHoverState() {
     if (!this.getFirst('objType', 'detail') && this.isPopup) {
       if (this.life) {
-        this.add(new PokemonDetail(this.scene, 20, -170, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed));
+        this.add(new PokemonDetail(this.scene, 20, -170, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed, this.critChance));
       } else {
-        this.add(new PokemonDetail(this.scene, 20, -170, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed));
+        this.add(new PokemonDetail(this.scene, 20, -170, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed, this.critChance));
       }
     }
   }
