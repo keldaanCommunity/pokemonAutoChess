@@ -36,11 +36,13 @@ export default class ShopContainer extends GameObjects.Container {
       this.remove(this.portraits[index], true);
       this.portraits[index] = null;
     }
-    const pkm = PokemonFactory.createPokemonFromName(pokemon);
-    const portrait = new ShopPortraitContainer(this.scene, 130 + index * 210, 0, pkm);
-    portrait.positionInShop = index;
-    this.portraits[index] = portrait;
-    this.add(portrait);
+    if(pokemon){
+      const pkm = PokemonFactory.createPokemonFromName(pokemon);
+      const portrait = new ShopPortraitContainer(this.scene, 130 + index * 210, 0, pkm);
+      portrait.positionInShop = index;
+      this.portraits[index] = portrait;
+      this.add(portrait);
+    }
     // console.log('add portrait', pokemon, this.length);
   }
 

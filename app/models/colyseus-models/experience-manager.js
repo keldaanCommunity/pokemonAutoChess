@@ -1,5 +1,5 @@
 const schema = require('@colyseus/schema');
-const EXP_TABLE = require('./enum').EXP_TABLE;
+const EXP_TABLE = require('../enum').EXP_TABLE;
 
 class ExperienceManager extends schema.Schema {
   constructor() {

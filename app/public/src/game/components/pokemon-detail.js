@@ -38,6 +38,13 @@ export default class PokemonDetail extends GameObjects.Container {
       fontFamily: "Verdana",
       color: '#ff0000'
     };
+    this.titleTextStyle = {
+      fontSize: '20px',
+      fontFamily: "Verdana",
+      color: '#06ec88',
+      align: 'center',
+      wordWrap: {width: 200, useAdvancedWrap: true}
+    }
 
     let displayName;
     if(window.langage == 'fra'){
@@ -80,7 +87,8 @@ export default class PokemonDetail extends GameObjects.Container {
     this.mana = new GameObjects.Text(scene, 10, 140, this.pokemonInformation.maxMana, this.textStyle);
     this.add(this.mana);
     this.add(new GameObjects.Image(scene, 60, 150, 'icons', 'mana').setScale(2, 2));
-    this.add(new GameObjects.Text(scene, 180, 20, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill][window.langage], this.textStyle));
+    this.add(new GameObjects.Text(scene, 180, 20, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].title[window.langage], this.titleTextStyle));
+    this.add(new GameObjects.Text(scene, 180, 40, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].description[window.langage], this.textStyle));
   }
 
 

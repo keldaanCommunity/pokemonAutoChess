@@ -1,5 +1,5 @@
-const GameUser = require('../../models/game-user');
-const SimplePlayer = require('../../models/simple-player');
+const GameUser = require('../../models/colyseus-models/game-user');
+const SimplePlayer = require('../../models/colyseus-models/simple-player');
 const schema = require('@colyseus/schema');
 
 class AfterGameState extends schema.Schema {

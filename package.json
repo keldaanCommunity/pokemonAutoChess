@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@colyseus/command": "^0.1.5",
-    "@colyseus/monitor": "^0.14.0",
+    "@colyseus/monitor": "^0.14.3",
     "@colyseus/social": "^0.11.6",
     "bad-words": "^3.0.4",
     "colyseus": "^0.14.0",
@@ -39,7 +39,7 @@
     "express-basic-auth": "^1.2.0",
     "express-jwt": "^5.3.3",
     "helmet": "^3.23.3",
-    "mongoose": "^5.10.9",
+    "mongoose": "^5.12.0",
     "phaser3-rex-plugins": "^1.1.19",
     "uniqid": "^5.0.3"
   },

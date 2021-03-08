@@ -1,4 +1,278 @@
+const PKM = Object.freeze({
+  DITTO: "ditto",
+  BULBASAUR: "bulbasaur",
+  IVYSAUR: "ivysaur",
+  VENUSAUR: "venusaur",
+  CHARMANDER: "charmander",
+  CHARMELEON: "charmeleon",
+  CHARIZARD: "charizard",
+  SQUIRTLE: "squirtle",
+  WARTORTLE: "wartortle",
+  BLASTOISE: "blastoise",
+  GEODUDE: "geodude",
+  GRAVELER: "graveler",
+  GOLEM: "golem",
+  AZURILL: "azurill",
+  MARILL: "marill",
+  AZUMARILL: "azumarill",
+  ZUBAT: "zubat",
+  GOLBAT: "golbat",
+  CROBAT: "crobat",
+  MAREEP: "mareep",
+  FLAFFY: "flaffy",
+  AMPHAROS: "ampharos",
+  CLEFFA: "cleffa",
+  CLEFAIRY: "clefairy",
+  CLEFABLE: "clefable",
+  IGGLYBUFF: "igglybuff",
+  WIGGLYTUFF: "wygglytuff",
+  JIGGLYPUFF: "jigglypuff",
+  CATERPIE: "caterpie",
+  METAPOD: "metapod",
+  BUTTERFREE: "butterfree",
+  WEEDLE: "weedle",
+  KAKUNA: "kakuna",
+  BEEDRILL: "beedrill",
+  PIDGEY: "pidgey",
+  PIDGEOTTO: "pidgeotto",
+  PIDGEOT: "pidgeot",
+  HOPPIP: "hoppip",
+  SKIPLOOM: "skiploom",
+  JUMPLUFF: "jumpluff",
+  SEEDOT: "seedot",
+  NUZLEAF: "nuzleaf",
+  SHIFTRY: "shiftry",
+  STARLY: "starly",
+  STARAVIA: "staravia",
+  STARAPTOR: "staraptor",
+  CHIKORITA: "chikorita",
+  BAYLEEF: "bayleef",
+  MEGANIUM: "meganium",
+  CYNDAQUIL: "cyndaquil",
+  QUILAVA: "quilava",
+  TYPHLOSION: "typlosion",
+  TOTODILE: "totodile",
+  CROCONAW: "croconaw",
+  FERALIGATR: "feraligatr",
+  TREECKO: "treecko",
+  GROVYLE: "grovyle",
+  SCEPTILE: "sceptile",
+  TORCHIC: "torchic",
+  COMBUSKEN: "combusken",
+  BLAZIKEN: "blaziken",
+  MUDKIP: "mudkip",
+  MARSHTOMP: "marshtomp",
+  SWAMPERT: "swampert",
+  TURTWIG: "turtwig",
+  GROTLE: "grotle",
+  TORTERRA: "torterra",
+  CHIMCHAR: "chimchar",
+  MONFERNO: "monferno",
+  INFERNAPE: "infernape",
+  PIPLUP: "piplup",
+  PRINPLUP: "prinplup",
+  EMPOLEON: "empoleon",
+  NIDORANF: "nidoranF",
+  NIDORINA: "nidorina",
+  NIDOQUEEN: "nidoqueen",
+  NIDORANM: "nidoranM",
+  NIDORINO: "nidorino",
+  NIDOKING: "nidoking",
+  PICHU: "pichu",
+  PIKACHU: "pikachu",
+  RAICHU: "raichu",
+  MACHOP: "machop",
+  MACHOKE: "machoke",
+  MACHAMP: "machamp",
+  HORSEA: "horsea",
+  SEADRA: "seadra",
+  KINGDRA: "kingdra",
+  TRAPINCH: "trapinch",
+  VIBRAVA: "vibrava",
+  FLYGON: "flygon",
+  SPHEAL: "spheal",
+  SEALEO: "sealeo",
+  WALREIN: "walrein",
+  ARON: "aron",
+  LAIRON: "lairon",
+  AGGRON: "aggron",
+  MAGNEMITE: "magnemite",
+  MAGNETON: "magneton",
+  MAGNEZONE: "magnezone",
+  RHYHORN: "rhyhorn",
+  RHYDON: "rhydon",
+  RHYPERIOR: "rhyperior",
+  TOGEPI: "togepi",
+  TOGETIC: "togetic",
+  TOGEKISS: "togekiss",
+  DUSKULL: "duskull",
+  DUSCLOPS: "dusclops",
+  DUSKNOIR: "dusknoir",
+  LOTAD: "lotad",
+  LOMBRE: "lombre",
+  LUDICOLO: "ludicolo",
+  SHINX: "shinx",
+  LUXIO: "luxio",
+  LUXRAY: "luxray",
+  POLIWAG: "poliwag",
+  POLIWHIRL: "poliwhirl",
+  POLITOED: "politoed",
+  ABRA: "abra",
+  KADABRA: "kadabra",
+  ALAKAZAM: "alakazam",
+  GASTLY: "gastly",
+  HAUNTER: "haunter",
+  GENGAR: "gengar",
+  DRATINI: "dratini",
+  DRAGONAIR: "dragonair",
+  DRAGONITE: "dragonite",
+  LARVITAR: "larvitar",
+  PUPITAR: "pupitar",
+  TYRANITAR: "tyranitar",
+  SLAKOTH: "slakoth",
+  VIGOROTH: "vigoroth",
+  SLAKING: "slaking",
+  RALTS: "ralts",
+  KIRLIA: "kirlia",
+  GARDEVOIR: "gardevoir",
+  BAGON: "bagon",
+  SHELGON: "shelgon",
+  SALAMENCE: "salamence",
+  BELDUM: "beldum",
+  METANG: "metang",
+  METAGROSS: "metagross",
+  GIBLE: "gible",
+  GABITE: "gabite",
+  GARCHOMP: "garchomp",
+  ELEKID: "elekid",
+  ELECTABUZZ: "electabuzz",
+  ELECTIVIRE: "electivire",
+  MAGBY: "magby",
+  MAGMAR: "magmar",
+  MAGMORTAR: "magmortar",
+  MUNCHLAX: "munchlax",
+  SNORLAX: "snorlax",
+  GROWLITHE: "growlithe",
+  ARCANINE: "arcanine",
+  ONIX: "onix",
+  STEELIX: "steelix",
+  MEGASTEELIX: "mega-steelix",
+  SCYTHER: "scyther",
+  SCIZOR: "scizor",
+  MEGASCIZOR: "mega-scizor",
+  RIOLU: "riolu",
+  LUCARIO: "lucario",
+  MEGALUCARIO: "mega-lucario",
+  MAGIKARP: "magikarp",
+  RATTATA: "rattata",
+  RATICATE: "raticate",
+  SPEAROW: "spearow",
+  FEAROW: "fearow",
+  GYARADOS: "gyarados",
+  LUGIA: "lugia",
+  GIRATINA: "giratina",
+  ZAPDOS: "zapdos",
+  MOLTRES: "moltres",
+  ARTICUNO: "articuno",
+  DIALGA: "dialga",
+  PALKIA: "palkia",
+  SUICUNE: "suicune",
+  RAIKOU: "raikou",
+  ENTEI: "entei",
+  REGICE: "regice",
+  REGIROCK: "regirock",
+  REGISTEEL: "registeel",
+  KYOGRE: "kyogre",
+  GROUDON: "groudon",
+  RAYQUAZA: "rayquaza",
+  REGIGIGAS: "regigigas",
+  EEVEE: "eevee",
+  VAPOREON: "vaporeon",
+  JOLTEON: "jolteon",
+  FLAREON: "flareon",
+  ESPEON: "espeon",
+  UMBREON: "umbreon",
+  LEAFEON: "leafeon",
+  SYLVEON: "sylveon",
+  MEDITITE: "meditite",
+  MEDICHAM: "medicham",
+  MEGAMEDICHAM: "mega-medicham",
+  NUMEL: "numel",
+  CAMERUPT: "camerupt",
+  MEGACAMERUPT: "mega-camerupt",
+  SANDSHREW: "sandshrew",
+  DARKRAI: "darkrai",
+  LITWICK: "litwick",
+  LAMPENT: "lampent",
+  CHANDELURE: "chandelure",
+  SLOWPOKE: "slowpoke",
+  SLOWBRO: "slowbro",
+  SLOWKING: "slowking",
+  BELLSPROUT: "bellsprout",
+  WEEPINBELL: "weepinbell",
+  VICTREEBEL: "victreebel",
+  CARVANHA: "carvanha",
+  HOUNDOUR: "houndour",
+  SWINUB: "swinub",
+  PILOSWINE: "piloswine",
+  MAMOSWINE: "mamoswine",
+  SNORUNT: "snorunt",
+  GLALIE: "glalie",
+  FROSLASS: "froslass",
+  SNOVER: "snover",
+  ABOMASNOW: "abomasnow",
+  MEGAABOMASNOW: "mega-abomasnow",
+  VANILLITE: "vanillite",
+  VANILLISH: "vanillish",
+  VANILLUXE: "vanilluxe",
+  GLACEON: "glaceon",
+  VOLCARONA: "volcarona",
+  LANDORUS: "landorus",
+  THUNDURUS: "thundurus",
+  TORNADUS: "tornadus",
+  KELDEO: "keldeo",
+  TERRAKION: "terrakion",
+  VIRIZION: "virizion",
+  COBALION: "cobalion",
+  MANAPHY: "manaphy",
+  ROTOM: "rotom",
+  SPIRITOMB: "spiritomb",
+  ABSOL: "absol",
+  LAPRAS: "lapras",
+  LATIAS: "latias",
+  LATIOS: "latios",
+  MESPRIT: "mesprit",
+  AZELF: "azelf",
+  UXIE: "uxie",
+  MEWTWO: "mewtwo",
+  KYUREM: "kyurem",
+  RESHIRAM: "reshiram",
+  ZEKROM: "zekrom",
+  CELEBI: "celebi",
+  VICTINI: "victini",
+  JIRACHI: "jirachi",
+  ARCEUS: "arceus",
+  DEOXYS: "deoxys",
+  SHAYMIN: "shaymin",
+  CRESSELIA: "cresselia",
+  HEATRAN: "heatran",
+  HOOH: "ho-Oh",
+  AERODACTYL:"aerodactyl",
+  PRIMALKYOGRE:"primal-Kyogre",
+  PRIMALGROUDON:"primal-Groudon"
+});
+
 const WORDS = Object.freeze({
+  LEVEL:{
+    'eng': 'Level',
+    'esp': 'Nivel',
+    'fra': 'Niveau'
+  },
+  LEADERBOARD:{
+    'eng': 'Leaderboard',
+    'esp': 'Posiciones',
+    'fra': 'Classement'
+  },
   RANK:{
     'eng': 'Rank',
     'esp': 'Rango',
@@ -222,7 +496,15 @@ const ITEMS = Object.freeze({
   BLACK_BELT: 'BLACK_BELT',
   SILK_SCARF: 'SILK_SCARF',
   DAWN_STONE: 'DAWN_STONE',
-  ICY_ROCK: 'ICY_ROCK'
+  ICY_ROCK: 'ICY_ROCK',
+  RAZOR_FANG: 'RAZOR_FANG',
+  RAZOR_CLAW: 'RAZOR_CLAW',
+  SCOPE_LENS: 'SCOPE_LENS',
+  REVIVER_SEED: 'REVIVER_SEED',
+  ASSAULT_VEST:'ASSAULT_VEST',
+  BLUE_ORB:'BLUE_ORB',
+  RED_ORB:'RED_ORB',
+  WONDER_BOX:'WONDER_BOX'
 });
 
 const ITEM_NAME = Object.freeze({
@@ -365,6 +647,46 @@ const ITEM_NAME = Object.freeze({
     eng: 'Icy Rock',
     esp: 'Roca helada',
     fra: 'Rocher glacé'
+  },
+  RAZOR_FANG: {
+    eng: 'Razor Fang',
+    esp: 'Colmillo de afeitar',
+    fra: 'Croc Rasoir'
+  },
+  RAZOR_CLAW: {
+    eng: 'Razor Claw',
+    esp: 'Manijas rasoir',
+    fra: 'Griffe Rasoir'
+  },
+  SCOPE_LENS: {
+    eng: 'Scope Lens',
+    esp: 'lente del visor',
+    fra: 'Lentilscope'
+  },
+  REVIVER_SEED: {
+    eng: 'Reviver Seed',
+    esp: 'Resugraina',
+    fra: 'Résugraine'
+  },
+  ASSAULT_VEST: {
+    eng: 'Assault Vest',
+    esp: 'Chaleco de asalto',
+    fra: 'Veste de combat'
+  },
+  BLUE_ORB: {
+    eng: 'Blue Orb',
+    esp: 'Orbe azul',
+    fra: 'Gemme Bleue'
+  },
+  RED_ORB: {
+    eng: 'Red Orb',
+    esp: 'Orbe rojo',
+    fra: 'Gemme Rouge'
+  },
+  WONDER_BOX: {
+    eng: 'Wonder Box',
+    esp: 'Caja de Maravillas',
+    fra: 'Boite mystère'
   }
 });
 
@@ -406,34 +728,34 @@ const ITEM_DESCRIPTION = Object.freeze({
     fra: '+ 5% vie / seconde'
   },
   APRICOT_BERRY: {
-    eng: '+50% spe def when below 50% health',
-    esp: '+50% de defensa cuando está por debajo del 50% de salud',
-    fra: '+50% de défense spé quand la vie passe en dessous de 50%'
+    eng: '+100% spe def when below 50% health',
+    esp: '+100% de defensa cuando está por debajo del 50% de salud',
+    fra: '+100% de défense spé quand la vie passe en dessous de 50%'
   },
   LIECHI_BERRY: {
-    eng: '+50% attack when health below 50%',
-    esp: '+50% de ataque cuando la salud está por debajo del 50%',
-    fra: '+50% d attaque quand la vie passe en dessous de 50%'
+    eng: '+100% attack when health below 50%',
+    esp: '+100% de ataque cuando la salud está por debajo del 50%',
+    fra: '+100% d attaque quand la vie passe en dessous de 50%'
   },
   GANLON_BERRY: {
-    eng: '+50% def when health below 50%',
-    esp: '+50% def cuando la salud está por debajo del 50%',
-    fra: '+50% de défense quand la vie passe en dessous de 50%'
+    eng: '+100% def when health below 50%',
+    esp: '+100% def cuando la salud está por debajo del 50%',
+    fra: '+100% de défense quand la vie passe en dessous de 50%'
   },
   PETAYA_BERRY: {
-    eng: '+50% attack special when health below 50%',
-    esp: '+50% de ataque especial cuando la salud está por debajo del 50%',
-    fra: '+50% d attaque spéciale quand la vie passe en dessous de 50%'
+    eng: '+100% attack special when health below 50%',
+    esp: '+100% de ataque especial cuando la salud está por debajo del 50%',
+    fra: '+100% d attaque spéciale quand la vie passe en dessous de 50%'
   },
   SALAC_BERRY: {
-    eng: '+50 % attack speed when health below 50%',
-    esp: '+50% de velocidad de ataque cuando la salud está por debajo del 50%',
-    fra: '+50% de vitesse d attaque quand la vie passe en dessous de 50%'
+    eng: '+100% attack speed when health below 50%',
+    esp: '+100% de velocidad de ataque cuando la salud está por debajo del 50%',
+    fra: '+100% de vitesse d attaque quand la vie passe en dessous de 50%'
   },
   ORAN_BERRY: {
-    eng: 'Restore 25% health when below 25% health',
-    esp: 'Restaurar el 25% de la salud cuando está por debajo del 25% de la salud',
-    fra: 'Restaure 25% de la vie quand la vie du pokémon descend en dessous de 25%'
+    eng: 'Restore 50% health when below 50% health',
+    esp: 'Restaurar el 50% de la salud cuando está por debajo del 50% de la salud',
+    fra: 'Restaure 50% de la vie quand la vie du pokémon descend en dessous de 50%'
   },
   SOFT_SAND: {
     eng: '+10% atk speed. +50% damage if pokemon has type ground.',
@@ -498,7 +820,7 @@ const ITEM_DESCRIPTION = Object.freeze({
   SILK_SCARF: {
     eng: '+10% atk speed. +50% damage if type normal.',
     esp: '+10% de velocidad de corte. +50% de daño si el tipo es normal.',
-    fra: '+10% vitesse d attaque. +50% attaque si type électrique.'
+    fra: '+10% vitesse d attaque. +50% attaque si type normal.'
   },
   DAWN_STONE: {
     eng: '+10% atk speed. +50% damage if type psychic. Will evolve Eevee into Espeon.',
@@ -506,9 +828,49 @@ const ITEM_DESCRIPTION = Object.freeze({
     fra: '+10% vitesse d attaque. +50% attaque si type psy. Fait évoluer Evoli en Mentali.'
   },
   ICY_ROCK: {
-    eng: '10% chance to freeze. Will evolve Eevee into Glaceon.',
-    esp: '10% de probabilidad de congelarse. Evolucionará Eevee a Glaceon',
+    eng: '10% chance to freeze. +50% damage if type ice. Will evolve Eevee into Glaceon.',
+    esp: '10% de probabilidad de congelarse.+50% de daño si es del tipo hielo. Evolucionará Eevee a Glaceon',
     fra: '+10% vitesse d attaque. +50% attaque si type glace. Fait évoluer évoli en Givrali.'
+  },
+  RAZOR_FANG: {
+    eng: '+50% critical strike damage',
+    esp: '+50% de daño por golpe crítico',
+    fra: '+50% dégâts des coups critiques'
+  },
+  RAZOR_CLAW: {
+    eng: 'Critical hits do true damage',
+    esp: 'Los golpes críticos hacen daño verdadero',
+    fra: 'Les coups critiques font des true dégats'
+  },
+  SCOPE_LENS: {
+    eng: '+50% critical hits',
+    esp: '+50% de golpes críticos',
+    fra: '+50% de coups critiques'
+  },
+  REVIVER_SEED: {
+    eng: 'Revives the pokemon',
+    esp: 'Revive al pokémon',
+    fra: 'Fait revivre le pokémon'
+  },
+  ASSAULT_VEST: {
+    eng: '+50% special defense',
+    esp: '+50% de defensa especial',
+    fra: '+50% défense spécial'
+  },
+  BLUE_ORB: {
+    eng: 'Team Aqua strengthens the pokemon s ability',
+    esp: 'El equipo Aqua refuerza la habilidad del pokémon',
+    fra: 'La team Aqua renforce la capacité du pokémon'
+  },
+  RED_ORB: {
+    eng: 'Team Magma strengthens the pokemon s ability',
+    esp: 'El equipo Magma refuerza la habilidad del pokémon',
+    fra: 'La team Magma renforce la capacité du pokémon'
+  },
+  WONDER_BOX: {
+    eng: 'Start the game with 2 random items',
+    esp: 'Comienza el juego con 2 objetos al azar',
+    fra: 'Commence la partie avec 2 items aléatoires'
   }
 });
 
@@ -590,14 +952,14 @@ const EFFECTS = Object.freeze({
   PHANTOM_FORCE: 'PHANTOM_FORCE',
   ATTRACT: 'ATTRACT',
   BABY_DOLL_EYES: 'BABY_DOLL_EYES',
-  ROCK: 'ROCK',
+  GROUND: 'GROUND',
   GRASS: 'GRASS',
   FIRE: 'FIRE',
   WATER: 'WATER',
   NORMAL: 'NORMAL',
   ICE: 'ICE',
   SNOW: 'SNOW',
-  MANA_HEAL: 'MANA_HEAL'
+  SHEER_COLD: 'SHEER_COLD'
 });
 
 const EFFECTS_ICON = Object.freeze({
@@ -688,12 +1050,12 @@ const EFFECTS_ICON = Object.freeze({
     },
     MEAN_LOOK: {
       level: 1,
-      positive: true,
+      positive: false,
       type:TYPE.DARK
     },
     SCARY_FACE: {
       level: 2,
-      positive: true,
+      positive: false,
       type:TYPE.DARK
     },
     IRON_DEFENSE: {
@@ -856,7 +1218,7 @@ const EFFECTS_ICON = Object.freeze({
       positive: true,
       type:TYPE.FAIRY
     },
-    ROCK: {
+    GROUND: {
       level: 0,
       positive: true,
       type:TYPE.MINERAL
@@ -891,7 +1253,7 @@ const EFFECTS_ICON = Object.freeze({
       positive: true,
       type:TYPE.ICE
     },
-    MANA_HEAL: {
+    SHEER_COLD: {
       level: 2,
       positive: true,
       type:TYPE.ICE
@@ -949,234 +1311,556 @@ const SPECIAL_SKILL = Object.freeze({
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
   DEFAULT: {
-    eng: '',
-    esp: '',
-    fra:''
+    title:{
+      eng: '',
+      esp: '',
+      fra:''
+    },
+    description:{
+      eng: '',
+      esp: '',
+      fra:''
+    }
   },
   BURN: {
-    eng: 'Burn the whole team for 2/4/8 seconds, dealing 5% hp / seconds, divide their attack by two.',
-    esp: 'Quemar todo el equipo durante 2/4/8 segundos, repartiendo el 5% de hp/segundos, dividir su ataque por dos.',
-    fra:'Brule la cible pour 2/4/8 secondes, lui faisant perdre 5% hp/secondes, divisant son attaque par 2.'
+    title:{
+      eng: 'Burn',
+      esp: 'Quemado',
+      fra: 'Brulure'
+    },
+    description:{
+      eng: 'Burn the whole team for 2/4/8 seconds, dealing 5% hp / seconds, divide their attack by two.',
+      esp: 'Quemar todo el equipo durante 2/4/8 segundos, repartiendo el 5% de hp/segundos, dividir su ataque por dos.',
+      fra:'Brule la cible pour 2/4/8 secondes, lui faisant perdre 5% hp/secondes, divisant son attaque par 2.'
+    }
   },
   POISON: {
-    eng: 'Poison the target for 5/10/20 seconds, dealing 15% hp/seconds',
-    esp: 'Envenenar el objetivo durante 5/10/20 segundos, repartiendo 15% hp/segundos',
-    fra:'Empoisonne la cible durant 5/10/20 secondes, faisant 15% hp/secondes'
+    title:{
+      eng: 'Poison',
+      esp: 'Veneno',
+      fra: 'Poison'
+    },
+    description:{
+      eng: 'Poison the target for 5/10/20 seconds, dealing 15% hp/seconds',
+      esp: 'Envenenar el objetivo durante 5/10/20 segundos, repartiendo 15% hp/segundos',
+      fra:'Empoisonne la cible durant 5/10/20 secondes, faisant 15% hp/secondes'
+    }
   },
   SLEEP: {
-    eng: 'Sleeps the target for 3/5/7 seconds',
-    esp: 'Duerme el objetivo durante 3/5/7 segundos',
-    fra:'Endors la cible durant 3/5/7 secondes'
+    title:{
+      eng: 'Sleep',
+      esp: 'Duerme',
+      fra: 'Dormir'
+    },
+    description:{
+      eng: 'Sleeps the target for 3/5/7 seconds',
+      esp: 'Duerme el objetivo durante 3/5/7 segundos',
+      fra:'Endors la cible durant 3/5/7 secondes'
+    }
   },
   SILENCE: {
-    eng: 'Silence the whole team for 2/4/8 seconds',
-    esp: 'Silenciar todo el equipo durante 2/4/8 segundos',
-    fra: 'Silence toute l équipe ennemie durant 2/4/8 secondes'
+    title:{
+      eng: 'Silence',
+      esp: 'Silencio',
+      fra: 'Silence'
+    },
+    description:{
+      eng: 'Silence the whole team for 2/4/8 seconds',
+      esp: 'Silenciar todo el equipo durante 2/4/8 segundos',
+      fra: 'Silence toute l équipe ennemie durant 2/4/8 secondes'
+    }
   },
   PROTECT: {
-    eng: 'Makes the pokemon invulnerable for 3/5/7 seconds.',
-    esp: 'Hace que el pokemon sea invulnerable durante 3/5/7 segundos.',
-    fra: 'Rend le pokémon invulnérable durant 3/5/7 secondes'
+    title:{
+      eng: 'Protect',
+      esp: 'Proteja',
+      fra: 'Abri'
+    },
+    description:{
+      eng: 'Makes the pokemon invulnerable for 3/5/7 seconds.',
+      esp: 'Hace que el pokemon sea invulnerable durante 3/5/7 segundos.',
+      fra: 'Rend le pokémon invulnérable durant 3/5/7 secondes'
+    }
   },
   FREEZE: {
-    eng: 'Freeze the whole ennemy team for 1/2/4 seconds',
-    esp: 'Congela todo el equipo durante 1/2/4 segundos',
-    fra:'Gèle la cible durant 1/2/4 secondes'
+    title:{
+      eng: 'Freeze',
+      esp: 'Congelar',
+      fra: 'Gelé'
+    },
+    description:{
+      eng: 'Freeze the whole ennemy team for 1/2/4 seconds',
+      esp: 'Congela todo el equipo durante 1/2/4 segundos',
+      fra:'Gèle la cible durant 1/2/4 secondes'
+    }
   },
   CONFUSION: {
-    eng: 'Makes the target confused for 1/2/4 seconds',
-    esp: 'Hace que todo el equipo se confunda durante 1/2/4 segundos',
-    fra:'Rend toute la team ennemie confus pendant 1/ 2 4 secondes'
+    title:{
+      eng: 'Confusion',
+      esp: 'Confusión',
+      fra: 'Confusion'
+    },
+    description:{
+      eng: 'Makes the target confused for 1/2/4 seconds',
+      esp: 'Hace que todo el equipo se confunda durante 1/2/4 segundos',
+      fra:'Rend toute la team ennemie confus pendant 1/ 2 4 secondes'
+    }
   },
   FIRE_BLAST: {
-    eng: 'Throw a fire blast for 30/50/100 special damage',
-    esp: 'Lanza una ráfaga de fuego para 30/50/100 de daño especial',
-    fra:'Lance une déflagration infligeant 30/50/100 dégats spéciaux'
+    title:{
+      eng: 'Fire Blast',
+      esp: 'Ráfaga de fuego',
+      fra: 'Déflagration'
+    },
+    description:{
+      eng: 'Throw a fire blast for 30/50/100 special damage',
+      esp: 'Lanza una ráfaga de fuego para 30/50/100 de daño especial',
+      fra:'Lance une déflagration infligeant 30/50/100 dégats spéciaux'
+    }
   },
   WHEEL_OF_FIRE: {
-    eng: 'Sends a fire wheel that makes a round trip doing 30/40/50 special damages.',
-    esp: 'Envía una rueda de fuego que hace un viaje de ida y vuelta haciendo 30/40/50 de daño especial.',
-    fra:'Envoie une boule de feu faisant un aller retour, endommageant les pokémons pour 30/40/50 dégats spéciaux'
+    title:{
+      eng: 'Wheel of fire',
+      esp: 'Rueda de fuego',
+      fra: 'Roue de feu'
+    },
+    description:{
+      eng: 'Sends a fire wheel that makes a round trip doing 30/40/50 special damages.',
+      esp: 'Envía una rueda de fuego que hace un viaje de ida y vuelta haciendo 30/40/50 de daño especial.',
+      fra:'Envoie une boule de feu faisant un aller retour, endommageant les pokémons pour 30/40/50 dégats spéciaux'
+    }
   },
   SEISMIC_TOSS: {
-    eng: 'Mono target attack that deals true damage function of how big is your team',
-    esp: 'Ataque de objetivo mono que inflige daño real en función de lo grande que sea tu equipo.',
-    fra:'Attaque mono cible dont les dégats varient en fonction de la taille de l équipe.'
+    title:{
+      eng: 'Seismic toss',
+      esp: 'Lanzamiento sísmico',
+      fra: 'Frappe Atlas'
+    },
+    description:{
+      eng: 'Mono target attack that deals true damage function of how big is your team',
+      esp: 'Ataque de objetivo mono que inflige daño real en función de lo grande que sea tu equipo.',
+      fra:'Attaque mono cible dont les dégats varient en fonction de la taille de l équipe.'
+    }
   },
   GUILLOTINE: {
-    eng: 'Mono target attack that deals physical damage. Restores half mana if target killed',
-    esp: 'Ataque de objetivo mono que causa daño físico. Restaura la mitad de maná si el objetivo muere',
-    fra:'Attaque mono cible qui fait des dégats physiques. Restaure la moitié du mana si la cible est tué.'
+    title:{
+      eng: 'Guillotine',
+      esp: 'Guillotina',
+      fra: 'Guillotine'
+    },
+    description:{
+      eng: 'Mono target attack that deals physical damage. Restores half mana if target killed',
+      esp: 'Ataque de objetivo mono que causa daño físico. Restaura la mitad de maná si el objetivo muere',
+      fra:'Attaque mono cible qui fait des dégats physiques. Restaure la moitié du mana si la cible est tué.'
+    }
   },
   ROCK_SLIDE: {
-    eng: 'Mono target attack that deals physical damage. Doubles damage if target is type flying.',
-    esp: 'Ataque de objetivo mono que causa daño físico. Duplica el daño si el objetivo es de tipo volador.',
-    fra:'Attaque mono cible qui fait des dégats physiques. Double les dégats si type vol.'
+    title:{
+      eng: 'Rock Slide',
+      esp: 'Deslizamiento de rocas',
+      fra: 'Eboulement'
+    },
+    description:{
+      eng: 'Mono target attack that deals physical damage. Doubles damage if target is type flying.',
+      esp: 'Ataque de objetivo mono que causa daño físico. Duplica el daño si el objetivo es de tipo volador.',
+      fra:'Attaque mono cible qui fait des dégats physiques. Double les dégats si type vol.'
+    }
   },
   HEAT_WAVE: {
-    eng: 'Area of effect attack that deals 30/40/50 special damage in all ennemies in a line behind the target.',
-    esp: 'Ataque de área de efecto que inflige 30/40/50 de daño especial a todos los enemigos en una línea detrás del objetivo.',
-    fra:'Attaque AOE qui infique 30/40/50 dégats spéciaux dans une ligne derrière la cible.'
+    title:{
+      eng: 'Heat wave',
+      esp: 'Ola de calor',
+      fra: 'Canicule'
+    },
+    description:{
+      eng: 'Area of effect attack that deals 30/40/50 special damage in all ennemies in a line behind the target.',
+      esp: 'Ataque de área de efecto que inflige 30/40/50 de daño especial a todos los enemigos en una línea detrás del objetivo.',
+      fra:'Attaque AOE qui infique 30/40/50 dégats spéciaux dans une ligne derrière la cible.'
+    }
   },
   THUNDER: {
-    eng: 'Mono target damage that deals 30/50/70 special damage.',
-    esp: 'Daño de objetivo mono que inflige 30/50/70 de daño especial.',
-    fra:'Attaque monocibe infligeant 30/50/70 dégats spéciaux.'
+    title:{
+      eng: 'Thunder',
+      esp: 'Trueno',
+      fra: 'Fatal-Foudre'
+    },
+    description:{
+      eng: 'Mono target damage that deals 30/50/70 special damage.',
+      esp: 'Daño de objetivo mono que inflige 30/50/70 de daño especial.',
+      fra:'Attaque monocibe infligeant 30/50/70 dégats spéciaux.'
+    }
   },
   HYDRO_PUMP: {
-    eng: 'Area of effect attack that deals 30/40/50 special damage in all ennemies in a line behind the target.',
-    esp: 'Ataque de área de efecto que inflige 30/40/50 de daño especial a todos los enemigos en una línea detrás del objetivo.',
-    fra:'Attaque AOE qui infique 30/40/50 dégats spéciaux dans une ligne derrière la cible.'
+    title:{
+      eng: 'Hydro Pump',
+      esp: 'Hidrobomba',
+      fra: 'Hydrocanon'
+    },
+    description:{
+      eng: 'Area of effect attack that deals 30/40/50 special damage in all ennemies in a line behind the target.',
+      esp: 'Ataque de área de efecto que inflige 30/40/50 de daño especial a todos los enemigos en una línea detrás del objetivo.',
+      fra:'Attaque AOE qui infique 30/40/50 dégats spéciaux dans une ligne derrière la cible.'
+    }
   },
   DRACO_METEOR: {
-    eng: 'Area of effect attack that deals 10/20/40 special damages to all ennemies',
-    esp: 'Ataque de área de efecto que causa 10/20/40 de daño especial a todos los enemigos',
-    fra:'Inflige 10/20/40 dégats spéciaux à tous les pokémons ennemis.'
+    title:{
+      eng: 'Draco meteor',
+      esp: 'Meteoro Draco',
+      fra: 'Draco meteor'
+    },
+    description:{
+      eng: 'Area of effect attack that deals 10/20/40 special damages to all ennemies',
+      esp: 'Ataque de área de efecto que causa 10/20/40 de daño especial a todos los enemigos',
+      fra:'Inflige 10/20/40 dégats spéciaux à tous les pokémons ennemis.'
+    }
   },
   BLAZE_KICK: {
-    eng: 'Mono target that deals 30/60/90 physical damage.',
-    esp: 'Objetivo mono que causa 30/60/90 de daño físico',
-    fra:'Attaque monocinle faisant 30/60/90 dégats physiques'
+    title:{
+      eng: 'Blaze kick',
+      esp: 'Patada de fuego',
+      fra: 'Pied de feu'
+    },
+    description:{
+      eng: 'Mono target that deals 30/60/90 physical damage.',
+      esp: 'Objetivo mono que causa 30/60/90 de daño físico',
+      fra:'Attaque monocinle faisant 30/60/90 dégats physiques'
+    }
   },
   WISH: {
-    eng: 'Restores 50 hp to 1/2/3 ally pokemon',
-    esp: 'Restaura 50 hp a 1/2/3 de pokemon aliado',
-    fra:'Soigne 50 hp à 1/2/3 pokémons alliés'
+    title:{
+      eng: 'Wish',
+      esp: 'Deseo',
+      fra: 'Voeu'
+    },
+    description:{
+      eng: 'Restores 50 hp to 1/2/3 ally pokemon',
+      esp: 'Restaura 50 hp a 1/2/3 de pokemon aliado',
+      fra:'Soigne 50 hp à 1/2/3 pokémons alliés'
+    }
   },
   CALM_MIND: {
-    eng: 'Buff pokemon attack by 50/100/150%',
-    esp: 'Ataque de pokemón de la Buff en un 50/100/150%.',
-    fra:'Augmente l attaque du pokémon de 50/100/150%.'
+    title:{
+      eng: 'Calm mind',
+      esp: 'Mente tranquila',
+      fra: 'Plénitude'
+    },
+    description:{
+      eng: 'Buff pokemon attack by 50/100/150%',
+      esp: 'Ataque de pokemón de la Buff en un 50/100/150%.',
+      fra:'Augmente l attaque du pokémon de 50/100/150%.'
+    }
   },
   IRON_DEFENSE: {
-    eng: 'Buff pokemon defense / special defense by 4/6/8 points',
-    esp: 'Defensa pokemon buff / defensa especial por 4/6/8 puntos',
-    fra:'Augmente la défense du pokémon de 4/6/8 points'
+    title:{
+      eng: 'Iron Defense',
+      esp: 'Defensa del hierro',
+      fra: 'Mur de fer'
+    },
+    description:{
+      eng: 'Buff pokemon defense / special defense by 4/6/8 points',
+      esp: 'Defensa pokemon buff / defensa especial por 4/6/8 puntos',
+      fra:'Augmente la défense du pokémon de 4/6/8 points'
+    }
   },
   METRONOME: {
-    eng: 'Shoot a random capacity',
-    esp: 'Disparar una capacidad aleatoria',
-    fra:'Execute une capacité au hasard'
+    title:{
+      eng: 'Metronome',
+      esp: 'Métrónomo',
+      fra: 'Metronome'
+    },
+    description:{
+      eng: 'Shoot a random capacity',
+      esp: 'Disparar una capacidad aleatoria',
+      fra:'Execute une capacité au hasard'
+    }
   },
   SOAK: {
-    eng: 'Deals 20/30/40 special damage and restores 10 mana to friendly pokemons',
-    esp: 'Hace 20/30/40 de daño especial y devuelve 10 de maná a los pokemons amistosos.',
-    fra:'Fait 20/30/40 dégats spéciaux et restaure 10 mana à chaque pokémon allié.'
+    title:{
+      eng: 'Soak',
+      esp: 'Empápate',
+      fra: 'Lessivage'
+    },
+    description:{
+      eng: 'Deals 20/30/40 special damage and restores 10 mana to friendly pokemons',
+      esp: 'Hace 20/30/40 de daño especial y devuelve 10 de maná a los pokemons amistosos.',
+      fra:'Fait 20/30/40 dégats spéciaux et restaure 10 mana à chaque pokémon allié.'
+    }
   },
   IRON_TAIL: {
-    eng: 'Mono target damage attack that deals 20/30/40. Buff defense by 1/3/5 points.',
-    esp: 'Ataque de daño al objetivo mono que reparte 20/30/40. Pulveriza la defensa por 1/3/5 puntos.',
-    fra:'Attaque monocible faisant 20/30/40 dégats physique. Booste la défense de 1/3/5 points.'
+    title:{
+      eng: 'Iron tail',
+      esp: 'Cola de hierro',
+      fra: 'Queue de fer'
+    },
+    description:{
+      eng: 'Mono target damage attack that deals 20/30/40. Buff defense by 1/3/5 points.',
+      esp: 'Ataque de daño al objetivo mono que reparte 20/30/40. Pulveriza la defensa por 1/3/5 puntos.',
+      fra:'Attaque monocible faisant 20/30/40 dégats physique. Booste la défense de 1/3/5 points.'
+    }
   },
   BLAST_BURN: {
-    eng: 'Area of effect attack that deals 30/50/80 special damages.',
-    esp: 'Ataque en el área de efecto que causa 30/50/80 daños especiales.',
-    fra:'Attaque AOE en cercle faisant 30/50/80 dégats spéciaux.'
+    title:{
+      eng: 'Blast Burn',
+      esp: 'Quemadura por ráfaga',
+      fra: 'Aire de feu'
+    },
+    description:{
+      eng: 'Area of effect attack that deals 30/50/80 special damages.',
+      esp: 'Ataque en el área de efecto que causa 30/50/80 daños especiales.',
+      fra:'Attaque AOE en cercle faisant 30/50/80 dégats spéciaux.'
+    }
   },
   CHARGE: {
-    eng: 'Buff all electric ally pokemons attack by 10/20/30 %',
-    esp: 'Pulir todos los pokemones aliados eléctricos atacan en un 10/20/30 %.',
-    fra:'Augmente l attaque des alliés electrique de 10/20/30%'
+    title:{
+      eng: 'Charge',
+      esp: 'Carga',
+      fra: 'Chargeur'
+    },
+    description:{
+      eng: 'Buff all electric ally pokemons attack by 10/20/30 %',
+      esp: 'Pulir todos los pokemones aliados eléctricos atacan en un 10/20/30 %.',
+      fra:'Augmente l attaque des alliés electrique de 10/20/30%'
+    }
   },
   DISCHARGE: {
-    eng: 'Area of effect attack that deals 40/60/80 special damages.',
-    esp: 'Ataque en el área de efecto que causa 40/60/80 daños especiales.',
-    fra:'Attaque AOE en cercle faisant 40/60/80 dégats spéciaux.'
+    title:{
+      eng: 'Discharge',
+      esp: 'Descarga',
+      fra: 'Coud Jus'
+    },
+    description:{
+      eng: 'Area of effect attack that deals 40/60/80 special damages.',
+      esp: 'Ataque en el área de efecto que causa 40/60/80 daños especiales.',
+      fra:'Attaque AOE en cercle faisant 40/60/80 dégats spéciaux.'
+    }
   },
   BITE: {
-    eng: '50% Life steal mono target physical attack that deals 30/50/70 damage.',
-    esp: '50% Vida robar mono objetivo de ataque físico que inflige 30/50/70 de daño.',
-    fra:'Attaque monocible avec 50% de vol de vie faisant 30/50/70 dégats spéciaux.'
+    title:{
+      eng: 'Bite',
+      esp: 'Mordida',
+      fra: 'Morsure'
+    },
+    description:{
+      eng: '50% Life steal mono target physical attack that deals 30/50/70 damage.',
+      esp: '50% Vida robar mono objetivo de ataque físico que inflige 30/50/70 de daño.',
+      fra:'Attaque monocible avec 50% de vol de vie faisant 30/50/70 dégats spéciaux.'
+    }
   },
   DRAGON_TAIL: {
-    eng: 'Mono target physical attack that deals 30/40/50 damage and buff defenses by 1/2/3 points',
-    esp: 'El ataque físico de un monoobjetivo que inflige 30/40/50 de daño y mejora las defensas en 1/2/3 puntos',
-    fra:'Attaque mono-cible faisant 30/40/50 dégats physique et boostant les défenses de 1/2/3 points.'
+    title:{
+      eng: 'Dragon Tail',
+      esp: 'Cola de Dragón',
+      fra: 'Draco Queue'
+    },
+    description:{
+      eng: 'Mono target physical attack that deals 30/40/50 damage and buff defenses by 1/2/3 points',
+      esp: 'El ataque físico de un monoobjetivo que inflige 30/40/50 de daño y mejora las defensas en 1/2/3 puntos',
+      fra:'Attaque mono-cible faisant 30/40/50 dégats physique et boostant les défenses de 1/2/3 points.'
+    }
   },
   DRAGON_BREATH: {
-    eng: 'Area of effect attack that deals 30/40/50 special damage in a line behind the target',
-    esp: 'Ataque de área de efecto que inflige 30/40/50 de daño especial en una línea detrás del objetivo',
-    fra:'Attaque AOE faisant 30/40/50 dégats spéciaux dans une ligne derrière la cible'
+    title:{
+      eng: 'Dragon Breath',
+      esp: 'Aliento de Dragón',
+      fra: 'Draco Souffle'
+    },
+    description:{
+      eng: 'Area of effect attack that deals 30/40/50 special damage in a line behind the target',
+      esp: 'Ataque de área de efecto que inflige 30/40/50 de daño especial en una línea detrás del objetivo',
+      fra:'Attaque AOE faisant 30/40/50 dégats spéciaux dans une ligne derrière la cible'
+    }
   },
   ICICLE_CRASH: {
-    eng: 'Area of effect attack that deals 30/40/50 physical damage around the target',
-    esp: 'Ataque de área de efecto que causa 30/40/50 de daño físico alrededor del objetivo',
-    fra:'Attaque AOE en cercle faisant 30/40/50 dégats physiques'
+    title:{
+      eng: 'Icicle Crash',
+      esp: 'Choque de carámbanos',
+      fra: 'Chute glace'
+    },
+    description:{
+      eng: 'Area of effect attack that deals 30/40/50 physical damage around the target',
+      esp: 'Ataque de área de efecto que causa 30/40/50 de daño físico alrededor del objetivo',
+      fra:'Attaque AOE en cercle faisant 30/40/50 dégats physiques'
+    }
   },
   ROOT: {
-    eng: 'Heal all nearby ally pokemons by 20/30/40 hp.',
-    esp: 'Curar a todos los pokemons aliados cercanos con 20/30/40 hp.',
-    fra:'Soigne les alliés autour de 20/30/40 hp.'
+    title:{
+      eng: 'Root',
+      esp: 'Raíz',
+      fra: 'Racine'
+    },
+    description:{
+      eng: 'Heal all nearby ally pokemons by 20/30/40 hp.',
+      esp: 'Curar a todos los pokemons aliados cercanos con 20/30/40 hp.',
+      fra:'Soigne les alliés autour de 20/30/40 hp.'
+    }
   },
   TORMENT: {
-    eng: 'Increase attack speed by 20/30/40 %',
-    esp: 'Aumenta la velocidad de ataque en un 20/30/40 %.',
-    fra:'Augmente la vitesse d attaque de 20/30/40%'
+    title:{
+      eng: 'Torment',
+      esp: 'Viaje',
+      fra: 'Tourment'
+    },
+    description:{
+      eng: 'Increase attack speed by 20/30/40 %',
+      esp: 'Aumenta la velocidad de ataque en un 20/30/40 %.',
+      fra:'Augmente la vitesse d attaque de 20/30/40%'
+    }
   },
   STOMP: {
-    eng: 'Mono target physical damage (2*atk*stars)',
-    esp: 'Daño físico del objetivo mono (2*atk*stars)',
-    fra:'Attaque mono cible faisant 2*atk*stars dégats physiques'
+    title:{
+      eng: 'Stomp',
+      esp: 'Pisotón',
+      fra: 'Ecrasement'
+    },
+    description:{
+      eng: 'Mono target physical damage (2*atk*stars)',
+      esp: 'Daño físico del objetivo mono (2*atk*stars)',
+      fra:'Attaque mono cible faisant 2*atk*stars dégats physiques'
+    }
   },
   DARK_PULSE: {
-    eng: 'Life drain target attack that deals 30/50/70 special damage',
-    esp: 'Ataque al objetivo de drenaje de vida que causa 30/50/70 de daño especial',
-    fra:'Attaque vol de vie faisant 30/50/70 dégats spéciaux.'
+    title:{
+      eng: 'Dark Pulse',
+      esp: 'Pulso oscuro',
+      fra: 'Vibrobscur'
+    },
+    description:{
+      eng: 'Life drain target attack that deals 30/50/70 special damage',
+      esp: 'Ataque al objetivo de drenaje de vida que causa 30/50/70 de daño especial',
+      fra:'Attaque vol de vie faisant 30/50/70 dégats spéciaux.'
+    }
   },
   NIGHT_SLASH: {
-    eng: 'Mono target special attack that does 40/60/80. Decreases all ennemies defense by 1 point.',
-    esp: 'Ataque especial de objetivo mono que hace 40/60/80. Disminuye la defensa de todos los enemigos en 1 punto.',
-    fra:'Attaque spéciale faisant 40/60/80 points de dégats. Diminue la défense de toute la team ennemie de 1 point.'
+    title:{
+      eng: 'Night Slash',
+      esp: 'Tajo nocturno',
+      fra: 'Tranche Nuit'
+    },
+    description:{
+      eng: 'Mono target special attack that does 40/60/80. Decreases all ennemies defense by 1 point.',
+      esp: 'Ataque especial de objetivo mono que hace 40/60/80. Disminuye la defensa de todos los enemigos en 1 punto.',
+      fra:'Attaque spéciale faisant 40/60/80 points de dégats. Diminue la défense de toute la team ennemie de 1 point.'
+    }
   },
   BUG_BUZZ: {
-    eng: 'Mono target special damage attack that does 20/30/40.',
-    esp: 'Ataque de daño especial de un mono objetivo que hace 20/30/40.',
-    fra:'Attaque mono cible faisant 20/30/40 dégats spéciaux'
+    title:{
+      eng: 'Bug Buzz',
+      esp: 'Bichos',
+      fra: 'Bourdon'
+    },
+    description:{
+      eng: 'Mono target special damage attack that does 20/30/40.',
+      esp: 'Ataque de daño especial de un mono objetivo que hace 20/30/40.',
+      fra:'Attaque mono cible faisant 20/30/40 dégats spéciaux'
+    }
   },
   POISON_STING: {
-    eng: 'Physical mono target damage that deals 30/40/50. Doubles damage if target is poisoned.',
-    esp: 'Daño físico de un solo objetivo que reparte 30/40/50. Duplica el daño si el objetivo está envenenado.',
-    fra:'Attaque physique mono cible faisant 30/40/50 dégats. Double les dégats si la cible est empoisonné.'
+    title:{
+      eng: 'Poison Sting',
+      esp: 'Picadura de veneno',
+      fra: 'Dard Venin'
+    },
+    description:{
+      eng: 'Physical mono target damage that deals 30/40/50. Doubles damage if target is poisoned.',
+      esp: 'Daño físico de un solo objetivo que reparte 30/40/50. Duplica el daño si el objetivo está envenenado.',
+      fra:'Attaque physique mono cible faisant 30/40/50 dégats. Double les dégats si la cible est empoisonné.'
+    }
   },
   LEECH_LIFE: {
-    eng: 'Area of effect life steal special damage attack 10/20/30 around the target',
-    esp: 'Área de efecto robo de vida daño especial ataque 10/20/30 alrededor del objetivo',
-    fra:'Attaque vol de vie en AOE faisant 10/20/30 points de dégats.'
+    title:{
+      eng: 'Leech Life',
+      esp: 'Vampirismo',
+      fra: 'Vampirisme'
+    },
+    description:{
+      eng: 'Area of effect life steal special damage attack 10/20/30 around the target',
+      esp: 'Área de efecto robo de vida daño especial ataque 10/20/30 alrededor del objetivo',
+      fra:'Attaque vol de vie en AOE faisant 10/20/30 points de dégats.'
+    }
   },
   HAPPY_HOUR: {
-    eng: 'Buff all ally attacks by 3/6/9 points.',
-    esp: 'Pulir todos los ataques de los aliados por 3/6/9 puntos.',
-    fra:'Augmente l attaque de toute l équipe de 3/6/9 points.'
+    title:{
+      eng: 'Happy hour',
+      esp: 'La hora feliz',
+      fra: 'Happy hour'
+    },
+    description:{
+      eng: 'Buff all ally attacks by 3/6/9 points.',
+      esp: 'Pulir todos los ataques de los aliados por 3/6/9 puntos.',
+      fra:'Augmente l attaque de toute l équipe de 3/6/9 points.'
+    }
   },
   TELEPORT: {
-    eng: 'Teleport the pokemon on one edge of the map',
-    esp: 'Teletransportar el pokemon en un borde del mapa',
-    fra:'Téléporte le pokémon sur un coin de la carte.'
+    title:{
+      eng: 'Teleport',
+      esp: 'Teletransporte',
+      fra: 'Teleport'
+    },
+    description:{
+      eng: 'Teleport the pokemon on one edge of the map',
+      esp: 'Teletransportar el pokemon en un borde del mapa',
+      fra:'Téléporte le pokémon sur un coin de la carte.'
+    }
   },
   NASTY_PLOT: {
-    eng: 'Buff pokemon attack by 5/10/20 points',
-    esp: 'Buff pokemon ataque por 5/10/20 puntos',
-    fra:'Booste l attaque du pokémon de 5/10/20 points'
+    title:{
+      eng: 'Nasty Plot',
+      esp: 'Trama desagradable',
+      fra: 'Machination'
+    },
+    description:{
+      eng: 'Buff pokemon attack by 5/10/20 points',
+      esp: 'Buff pokemon ataque por 5/10/20 puntos',
+      fra:'Booste l attaque du pokémon de 5/10/20 points'
+    }
   },
   THIEF: {
-    eng: 'Steal ennemy target item and deals 5/10/20 physical damage',
-    esp: 'Roba el objeto del enemigo e inflige 5/10/20 de daño físico',
-    fra:'Vole l item du pokémon ennemi et inflige 5/10/20 dégats physiques'
+    title:{
+      eng: 'Thief',
+      esp: 'Ladrón',
+      fra: 'Larcin'
+    },
+    description:{
+      eng: 'Steal ennemy target item and deals 5/10/20 physical damage',
+      esp: 'Roba el objeto del enemigo e inflige 5/10/20 de daño físico',
+      fra:'Vole l item du pokémon ennemi et inflige 5/10/20 dégats physiques'
+    }
   },
   STUN_SPORE: {
-    eng: 'Decrease target attack speed by 50/100/200%',
-    esp: 'Disminuir la velocidad de ataque del objetivo en un 50/100/200%',
-    fra:'Diminue la vitesse d attaque du pokémon de 50/100/200%'
+    title:{
+      eng: 'Stun Spore',
+      esp: 'Espora de aturdimiento',
+      fra: 'Poudre para'
+    },
+    description:{
+      eng: 'Decrease target attack speed by 50/100/200% and deals 5/10/20 physical damage',
+      esp: 'Disminuir la velocidad de ataque del objetivo en un 50/100/200% e inflige 5/10/20 de daño físico',
+      fra:'Diminue la vitesse d attaque du pokémon de 50/100/200% et inflige 5/10/20 dégats physiques'
+    }
   },
   METEOR_MASH: {
-    eng: 'Area of effect around the target that deals 30/50/70 damages. Buff pokemon attack by 5 points.',
-    esp: 'Área de efecto alrededor del objetivo que produce 30/50/70 daños. Buff pokemon ataque por 5 puntos.',
-    fra:'Attaque en AOE faisant 30/50/40 dégats spéciaux. Booste l attaque du pokémon de 5 points.'
+    title:{
+      eng: 'Meteor mash',
+      esp: 'Puré de meteoritos',
+      fra: 'Poing Meteor'
+    },
+    description:{
+      eng: 'Area of effect around the target that deals 30/50/70 damages. Buff pokemon attack by 5 points.',
+      esp: 'Área de efecto alrededor del objetivo que produce 30/50/70 daños. Buff pokemon ataque por 5 puntos.',
+      fra:'Attaque en AOE faisant 30/50/40 dégats spéciaux. Booste l attaque du pokémon de 5 points.'
+    }
   },
   HURRICANE: {
-    eng: 'Area of effect attack that deals 10/20/30 damages in a line behind the target',
-    esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
-    fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
+    title:{
+      eng: 'Hurricane',
+      esp: 'Huracán',
+      fra: 'Vent Violent'
+    },
+    description:{
+      eng: 'Area of effect attack that deals 10/20/30 damages in a line behind the target',
+      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
+      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
+    }
   }
 });
 
@@ -1363,7 +2047,6 @@ const TYPE_TRADUCTION = Object.freeze({
   }
 });
 
-
 const RARITY = Object.freeze({
   COMMON: 'COMMON',
   UNCOMMON: 'UNCOMMON',
@@ -1380,8 +2063,8 @@ const RARITY_HP_COST= Object.freeze({
   RARE: 2,
   EPIC: 2,
   LEGENDARY: 3,
-  MYTHICAL: 3,
-  NEUTRAL: 3
+  MYTHICAL: 4,
+  NEUTRAL: 2
 });
 
 const COST = Object.freeze({
@@ -1394,24 +2077,25 @@ const COST = Object.freeze({
 });
 
 const BOT_AVATAR = Object.freeze({
-  WATER1: 'squirtle',
-  FIRE1: 'charmander',
-  POISON1: 'zubat',
-  GRASS1: 'bulbasaur',
-  GROUND1: 'geodude',
-  NORMAL1: 'jigglypuff',
-  ELECTRIC1: 'pikachu',
-  MONSTER1: 'larvitar',
-  FIELD1: 'nidoqueen',
-  DRAGON1: 'dratini',
-  HUMAN1:'riolu',
-  DARK: 'darkrai',
-  GRASS2: 'shaymin',
-  GROUND2: 'regirock',
-  WATER2: 'kyogre',
-  ELECTRIC2: 'zapdos',
-  DRAGON2: 'rayquaza',
-  FIRE2:'moltres'
+  WATER1: PKM.SQUIRTLE,
+  FIRE1: PKM.CHARMANDER,
+  POISON1: PKM.ZUBAT,
+  GRASS1: PKM.BULBASAUR,
+  GROUND1: PKM.GEODUDE,
+  NORMAL1: PKM.JIGGLYPUFF,
+  ELECTRIC1: PKM.PIKACHU,
+  MONSTER1: PKM.LARVITAR,
+  FIELD1: PKM.NIDOQUEEN,
+  DRAGON1: PKM.DRATINI,
+  HUMAN1:PKM.RIOLU,
+  DARK: PKM.DARKRAI,
+  GRASS2: PKM.SHAYMIN,
+  GROUND2: PKM.REGIROCK,
+  WATER2: PKM.KYOGRE,
+  ELECTRIC2: PKM.ZAPDOS,
+  DRAGON2: PKM.RAYQUAZA,
+  FIRE2:PKM.MOLTRES,
+  DRAGON3: PKM.KYUREM
 });
 
 const POKEMON_BOT = Object.freeze({
@@ -1432,7 +2116,8 @@ const POKEMON_BOT = Object.freeze({
   kyogre: 'WATER2',
   zapdos: 'ELECTRIC2',
   rayquaza: 'DRAGON2',
-  moltres: 'FIRE2'
+  moltres: 'FIRE2',
+  kyurem: 'DRAGON3'
 });
 
 const EXP_TABLE = Object.freeze({
@@ -1464,7 +2149,8 @@ const ORIENTATION = Object.freeze({
   UPRIGHT: 'UPRIGHT',
   RIGHT: 'RIGHT',
   DOWNRIGHT: 'DOWNRIGHT',
-  DOWN: 'DOWN'
+  DOWN: 'DOWN',
+  UNCLEAR: 'UNCLEAR'
 });
 
 const ATTACK_TYPE = Object.freeze({
@@ -1479,7 +2165,7 @@ const MAP_TYPE = Object.freeze({
   FIRE: 'FIRE',
   GRASS: 'GRASS',
   ICE: 'ICE',
-  ROCK: 'ROCK'
+  GROUND: 'GROUND'
 });
 
 const MAP_TYPE_NAME = Object.freeze({
@@ -1508,7 +2194,7 @@ const MAP_TYPE_NAME = Object.freeze({
     'esp': 'Bosque \n Helado',
     'fra': 'Forêt \n Givrée'
   },
-  ROCK: {
+  GROUND: {
     'eng': 'Shimmer \n Desert',
     'esp': 'Desierto \n Trémulo',
     'fra': 'Désert \n Chatoyant'
@@ -1560,8 +2246,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`+100% ATK pour tous les alliés`
         }
       ]
-    },
-    pokemons: ['pidgey','starly','igglybuff','cleffa','eevee','togepi','slakoth','meditite','scyther']
+    }
   },
   GRASS: {
     description:{
@@ -1571,12 +2256,12 @@ const TYPE_DETAILS = Object.freeze({
           text:`+5% HP/s for grass allies`
         },
         {
-          title:`(6) Growth`,
-          text:`DEF, SPEDEF + 25% for grass allies`
+          title:`(5) Growth`,
+          text:`+10% HP/s for grass allies`
         },
         {
-          title:`(9) Stun Spore`,
-          text:`-50% ATK speed for ennemy team`
+          title:`(7) Stun Spore`,
+          text:`-30% ATK speed for ennemy team`
         }
       ],
       esp:[
@@ -1585,12 +2270,12 @@ const TYPE_DETAILS = Object.freeze({
           text:`+5% HP/s para los tipos de Planta`
         },
         {
-          title:`(6) Crecimiento`,
-          text:`Aumentar el ATK y la DEF en un 10%`
+          title:`(5) Crecimiento`,
+          text:`+10% HP/s para los tipos de Planta`
         },
         {
-          title:`(9) Espora aturdidora`,
-          text:`Los ennemigos que no son de Planta tienen un 50% ATK speed`
+          title:`(7) Espora aturdidora`,
+          text:`Los ennemigos que no son de Planta tienen un 30% ATK speed`
         }
       ],
       fra:[
@@ -1599,16 +2284,15 @@ const TYPE_DETAILS = Object.freeze({
           text:`+5% HP/s pour tous les alliés plante`
         },
         {
-          title:`(6) Croissance`,
-          text:`DEF, SPEDEF + 25% pour tous les alliés plante`
+          title:`(5) Croissance`,
+          text:`+10% HP/s pour tous les alliés plante`
         },
         {
-          title:`(9) Para Spore`,
-          text:`-50% ATK speed pour tous les ennemis`
+          title:`(7) Para Spore`,
+          text:`-30% ATK speed pour tous les ennemis`
         }
       ]
-    },
-    pokemons: ['bellsprout','seedot','hoppip','caterpie','treecko','leafeon','turtwig','chikorita','bulbasaur','lotad','snover']
+    }
   },
   FIRE: {
     description:{
@@ -1642,8 +2326,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`Le soleil s'intensifie, augmentant l'ATK des pkm feu de 50%`
         }
       ]
-    },
-    pokemons: ['charmander','cyndaquil','torchic','flareon','chimchar','litwick','magby','numel']
+    }
   },
   WATER: {
     description:{
@@ -1689,8 +2372,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`Invoque Kyogre, le roi des océans`
         }
       ]
-    },
-    pokemons: ['azurill','squirtle','vaporeon','totodile','mudkip','piplup','horsea','spheal','lotad','poliwag']
+    }
   },
   ELECTRIC: {
     description:{
@@ -1712,8 +2394,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`+10% ATK speed pour chaque allié elec dans l'équipe`
         }
       ]
-    },
-    pokemons: ['mareep','pichu','jolteon','magnemite','shinx','elekid']
+    }
   },
   FIGHTING: {
     description:{
@@ -1747,8 +2428,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`+10% ATK pour chaque synergie active dans l'équipe ennemie`
         }
       ]
-    },
-    pokemons: ['combusken','machop','poliwhirl','meditite','riolu']
+    }
   },
   PSYCHIC: {
     description:{
@@ -1794,8 +2474,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`Les alliés gagnent un additionel +20 SPEDEF`
         }
       ]
-    },
-    pokemons: ['slowpoke','espeon','togepi','abra','ralts','beldum']
+    }
   },
   DARK: {
     description:{
@@ -1829,8 +2508,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`-25% DEF additionel pour la team ennemie`
         }
       ]
-    },
-    pokemons: ['seedot','umbreon','duskull','gastly','larvitar']
+    }
   },
   METAL: {
     description:{
@@ -1864,8 +2542,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`+100% ATK speed pour les pkm acier`
         }
       ]
-    },
-    pokemons: ['prinplup','aron','magnemite','beldum','steelix','scizor','lucario']
+    }
   },
   GROUND: {
     description:{
@@ -1911,8 +2588,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`Une tempête de sable fait rage, faisant 10% HP/s aux pkm non sol/acier`
         }
       ]
-    },
-    pokemons: ['geodude','mudkip','turtwig','trapinch','swinub','rhyhorn','gible','numel','onix']
+    }
   },
   POISON: {
     description:{
@@ -1946,8 +2622,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`Tous les pkm de la team ennemie sont empoisonnés (5% HP/s)`
         }
       ]
-    },
-    pokemons: ['bellsprout','weedle','caterpie','zubat','nidoranM','nidoranF','bulbasaur','gastly']
+    }
   },
   DRAGON: {
     description:{
@@ -1981,8 +2656,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`+5% vitesse d'attaque pour les pkm dragons à chaque attaque`
         }
       ]
-    },
-    pokemons: ['horsea','vibrava','dratini','bagon','gible']
+    }
   },
   FIELD: {
     description:{
@@ -2025,11 +2699,10 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(9) Danse Lames`,
-          text:`La vitesse d'attaque est doublé pour les pkm animal`
+          text:`La vitesse d'attaque est doublée pour les pkm animal`
         }
       ]
-    },
-    pokemons: ['mareep','eevee','cyndaquil','nidoranM','nidoranF','spheal','shinx','numel']
+    }
   },
   MONSTER: {
     description:{
@@ -2075,8 +2748,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`Chaque kill augmente l'ATK du pkm de 100%`
         }
       ]
-    },
-    pokemons: ['squirtle','charmander','treecko','aron','rhyhorn','larvitar','gible']
+    }
   },
   HUMAN: {
     description:{
@@ -2115,15 +2787,14 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(4) Puissance`,
-          text:`10% de chance de coup critique pour tous les pkm`
+          text:`+20% ATK et +20% ATK speed pour tous les pkm`
         },
         {
           title:`(6) Plénitude`,
           text:`+20% ATK et +20% DEF pour tous les pkm`
         }
       ]
-    },
-    pokemons: ['chimchar','machop','abra','slakoth','elekid','magby','meditite','riolu']
+    }
   },
   AQUATIC: {
     description:{
@@ -2157,8 +2828,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`+30% ATK pour les pkm aquatiques`
         }
       ]
-    },
-    pokemons: ['vaporeon','squirtle','totodile','slowpoke','horsea','lotad','poliwag','dratini']
+    }
   },
   BUG: {
     description:{
@@ -2192,8 +2862,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`-33% ATK speed pour l'équipe ennemie`
         }
       ]
-    },
-    pokemons: ['caterpie','weedle','trapinch','scyther']
+    }
   },
   FLYING: {
     description:{
@@ -2239,8 +2908,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`+40% de coup critique pour les pokémons vols`
         }
       ]
-    },
-    pokemons: ['starly','pidgey','hoppip','zubat','charizard','torchic','piplup','salamence']
+    }
   },
   FLORA: {
     description:{
@@ -2274,8 +2942,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`+50% DEF et +50%SPEDEF pour tous les pkm`
         }
       ]
-    },
-    pokemons: ['hoppip','turtwig','chikorita','bulbasaur','leafeon']
+    }
   },
   MINERAL: {
     description:{
@@ -2309,8 +2976,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`+50% SPEDEF et +100% HP pour les pkm minéraux`
         }
       ]
-    },
-    pokemons: ['geodude','aron','rhyhorn','larvitar','beldum','onix']
+    }
   },
   AMORPH: {
     description:{
@@ -2332,8 +2998,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`Les fantômes gagnent 15% d'ATK speed et font des dégats bruts`
         }
       ]
-    },
-    pokemons: ['ralts','litwick','gastly','duskull','snorunt']
+    }
   },
   FAIRY: {
     description:{
@@ -2367,8 +3032,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`25% de chance de réduire l'ATK de la cible à chaque attaque (max:50%)`
         }
       ]
-    },
-    pokemons: ['azurill','cleffa','igglybuff','sylveon','pichu','vanillite','togepi']
+    }
   },
   ICE: {
     description:{
@@ -2378,8 +3042,8 @@ const TYPE_DETAILS = Object.freeze({
           text:`+10% chance to freeze the enemy during an attack`
         },
         {
-          title:`(4) Mana Heal`,
-          text:`+50% mana regeneration for all pkm`
+          title:`(4)Sheer cold`,
+          text:`+30% chance to freeze the enemy during an attack`
         }
       ],
       esp:[
@@ -2388,8 +3052,8 @@ const TYPE_DETAILS = Object.freeze({
           text:`+10% de probabilidad de congelar al enemigo durante un ataque`
         },
         {
-          title:`(4) Fuerza`,
-          text:`+50% de regeneración de maná por todos pkm`
+          title:`(4) Frío Polar`,
+          text:`+30% de probabilidad de congelar al enemigo durante un ataque`
         }
       ],
       fra:[
@@ -2398,14 +3062,14 @@ const TYPE_DETAILS = Object.freeze({
           text:`+10% de chance de geler l'ennemi lors d'une attaque`
         },
         {
-          title:`(4) Soin Mana`,
-          text:`+50% de régénération mana pour tous les pkm`
+          title:`(4) Glaciation`,
+          text:`+30% de chance de geler l'ennemi lors d'une attaque`
         }
       ]
-    },
-    pokemons: ['swinub','glaceon','spheal','vanillite','snorunt','snover']
+    }
   }
 });
+
 
 const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000];
 
@@ -2441,5 +3105,6 @@ module.exports = {
   ITEM_NAME,
   ITEM_DESCRIPTION,
   TYPE_DETAILS,
-  EFFECTS_ICON
+  EFFECTS_ICON,
+  PKM
 };

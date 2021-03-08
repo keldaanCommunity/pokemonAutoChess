@@ -79,11 +79,11 @@
         {
          "columns":18,
          "firstgid":1,
-         "image":"ROCK.png",
+         "image":"GROUND.png",
          "imageheight":601,
          "imagewidth":451,
          "margin":1,
-         "name":"ROCK",
+         "name":"GROUND",
          "spacing":1,
          "tilecount":432,
          "tileheight":24,

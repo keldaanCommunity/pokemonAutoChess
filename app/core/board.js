@@ -66,7 +66,7 @@ class Board {
     } else if (vx == 0) {
       if (vy == 0) {
         console.log('error orientation', r0, c0, r1, c1);
-        return ORIENTATION.DOWNLEFT;
+        return ORIENTATION.UNCLEAR;
       } else if (vy < 0) {
         return ORIENTATION.DOWN;
       } else {

@@ -4,7 +4,7 @@ const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 const PokemonEntity = require('./pokemon-entity');
 const PokemonFactory = require('../models/pokemon-factory');
-const {CLIMATE, EFFECTS, TYPE, ITEMS, ATTACK_TYPE} = require('../models/enum');
+const {CLIMATE, EFFECTS, TYPE, ITEMS, ATTACK_TYPE, PKM} = require('../models/enum');
 const Dps = require('./dps');
 
 class Simulation extends Schema {
@@ -43,18 +43,8 @@ class Simulation extends Schema {
 
     if (blueTeam) {
       blueTeam.forEach((pokemon, key) => {
-        // console.log("x",pokemon.positionX, "y", pokemon.positionY); // 0 for blue, 1 for red
         if (pokemon.positionY != 0) {
-          const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.maxMana, pokemon.atk, pokemon.atkSpeed, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity, pokemon.sheet, pokemon.types, pokemon.items, pokemon.stars, this, pokemon.skill);
-          const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
-          this.applySpecialCellsEffects(pokemonEntity);
-          this.applyEffects(pokemonEntity, pokemon.types, blueEffects, redEffects, blueTeam, redTeam);
-          this.applyItemsEffects(pokemonEntity, pokemon.types);
-          this.blueTeam.set(pokemonEntity.id, pokemonEntity);
-          // console.log(this.blueTeam.size);
-          this.dpsMeter.set(pokemonEntity.id, dps);
-          // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
-          this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
+          this.addPokemon(pokemon, pokemon.positionX, pokemon.positionY - 1, 0);
         }
       });
     }
@@ -62,37 +52,41 @@ class Simulation extends Schema {
     if (redTeam) {
       redTeam.forEach((pokemon, key) => {
         if (pokemon.positionY != 0) {
-          const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, 5 - (pokemon.positionY - 1), pokemon.hp, pokemon.maxMana, pokemon.atk, pokemon.atkSpeed, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 1, pokemon.attackSprite, pokemon.rarity, pokemon.sheet, pokemon.types, pokemon.items, pokemon.stars, this, pokemon.skill);
-          this.applySpecialCellsEffects(pokemonEntity);
-          this.applyEffects(pokemonEntity, pokemon.types, redEffects, blueEffects, redTeam, blueTeam);
-          this.applyItemsEffects(pokemonEntity, pokemon.types);
-          this.redTeam.set(pokemonEntity.id, pokemonEntity);
-          // console.log(this.redTeam.size);
-          // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
-          this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
+          this.addPokemon(pokemon, pokemon.positionX, 5 - (pokemon.positionY - 1), 1);
         }
       });
     }
 
     if (blueEffects && blueEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
-      const kyogre = PokemonFactory.createPokemonFromName('kyogre');
+      const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
       const coord = this.getFirstAvailablePlaceOnBoard(true);
-      const dps = new Dps(kyogre.id, kyogre.name);
-      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.maxMana, kyogre.atk, kyogre.atkSpeed, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 0, kyogre.attackSprite, kyogre.rarity, kyogre.sheet, kyogre.types, kyogre.items, kyogre.stars, this, kyogre.skill);
-      this.applySpecialCellsEffects(pokemonEntity);
-      this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, blueTeam, redTeam);
-      this.blueTeam.set(pokemonEntity.id, pokemonEntity);
-      this.dpsMeter.set(pokemonEntity.id, dps);
-      this.board.setValue(coord[0], coord[1], pokemonEntity);
+      this.addPokemon(kyogre, coord[0], coord[1], 0);
+      
+
     }
     if (redEffects && redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
-      const kyogre = PokemonFactory.createPokemonFromName('kyogre');
+      const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
       const coord = this.getFirstAvailablePlaceOnBoard(false);
-      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.maxMana, kyogre.atk, kyogre.atkSpeed, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 1, kyogre.attackSprite, kyogre.rarity, kyogre.sheet, kyogre.types, kyogre.items, kyogre.stars, this, kyogre.skill);
+      this.addPokemon(kyogre, coord[0], coord[1], 1);
+    }
+  }
+
+  addPokemon(pokemon, x, y, team){
+    const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this);
+
+    this.applyItemsEffects(pokemonEntity, pokemon.types);
+    this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
+
+    if(team == 0){
+      this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects, this.redEffects, this.blueTeam, this.redTeam);
       this.applySpecialCellsEffects(pokemonEntity);
-      this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, redTeam, blueTeam);
+      const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
+      this.blueTeam.set(pokemonEntity.id, pokemonEntity);
+      this.dpsMeter.set(pokemonEntity.id, dps);
+    }
+    if(team == 1){
+      this.applyEffects(pokemonEntity, pokemon.types, this.redEffects, this.blueEffects, this.redTeam, this.blueTeam);
       this.redTeam.set(pokemonEntity.id, pokemonEntity);
-      this.board.setValue(coord[0], coord[1], pokemonEntity);
     }
   }
 
@@ -145,7 +139,7 @@ class Simulation extends Schema {
             pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9);
             break;
 
-          case EFFECTS.ROCK:
+          case EFFECTS.GROUND:
             pokemon.def += Math.ceil(pokemon.baseDef * 0.2);
             break;
 
@@ -158,6 +152,21 @@ class Simulation extends Schema {
   }
 
   applyItemsEffects(pokemon, types) {
+
+    if(pokemon.items.count(ITEMS.WONDER_BOX) != 0){
+      pokemon.items.remove(ITEMS.WONDER_BOX);
+      pokemon.items.add(Object.keys(ITEMS)[Math.floor(Math.random() * Object.keys(ITEMS).length)]);
+      pokemon.items.add(Object.keys(ITEMS)[Math.floor(Math.random() * Object.keys(ITEMS).length)]);
+    }
+
+    if(pokemon.items.count(ITEMS.ASSAULT_VEST) != 0){
+      pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.5) * pokemon.items.count(ITEMS.ASSAULT_VEST);
+    }
+
+    if (pokemon.items.count(ITEMS.SCOPE_LENS) != 0) {
+      pokemon.critChance += 50 * pokemon.items.count(ITEMS.SCOPE_LENS);
+    }
+
     if (pokemon.items.count(ITEMS.WHITE_GLASSES) != 0) {
       if (pokemon.attackType == ATTACK_TYPE.SPECIAL) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3) * pokemon.items.count(ITEMS.WHITE_GLASSES);
@@ -244,6 +253,12 @@ class Simulation extends Schema {
       pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.FIRE_STONE)));
     }
 
+    if (pokemon.items.count(ITEMS.ICY_ROCK) != 0) {
+      if (types.includes(TYPE.ICE)) {
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.ICY_ROCK);
+      }
+    }
+
     if (pokemon.items.count(ITEMS.LEAF_STONE) != 0) {
       if (types.includes(TYPE.GRASS)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.LEAF_STONE);
@@ -291,7 +306,6 @@ class Simulation extends Schema {
         case EFFECTS.GROWTH:
           if (types.includes(TYPE.GRASS)) {
             pokemon.effects.push(EFFECTS.GROWTH);
-            pokemon.def += Math.ceil(pokemon.baseDef * 0.25);
           }
           break;
 
@@ -468,14 +482,14 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.SWIFT_SWIM:
-          if (types.includes(TYPE.AQUATIC) && this.climate == CLIMATE.RAIN) {
+          if (types.includes(TYPE.AQUATIC)) {
             pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.7);
             pokemon.effects.push(EFFECTS.SWIFT_SWIM);
           }
           break;
 
         case EFFECTS.HYDO_CANNON:
-          if (types.includes(TYPE.AQUATIC) && this.climate == CLIMATE.RAIN) {
+          if (types.includes(TYPE.AQUATIC)) {
             pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3);
             pokemon.effects.push(EFFECTS.HYDO_CANNON);
           }
@@ -534,11 +548,15 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.SNOW:
-          pokemon.effects.push(EFFECTS.SNOW);
+          if(this.climate == CLIMATE.SNOW){
+            pokemon.effects.push(EFFECTS.SNOW);
+          }
           break;
 
-        case EFFECTS.MANA_HEAL:
-          pokemon.effects.push(EFFECTS.MANA_HEAL);
+        case EFFECTS.SHEER_COLD:
+          if(this.climate == CLIMATE.SNOW){
+            pokemon.effects.push(EFFECTS.SHEER_COLD);
+          }
           break;
 
         default:
@@ -549,7 +567,7 @@ class Simulation extends Schema {
     ennemyEffects.forEach((effect) => {
       switch (effect) {
         case EFFECTS.SPORE:
-          pokemon.atkSpeed = pokemon.atkSpeed * 1.5;
+          pokemon.atkSpeed = pokemon.atkSpeed * 1.3;
           pokemon.effects.push(EFFECTS.SPORE);
           break;
 

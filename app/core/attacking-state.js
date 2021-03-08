@@ -1,4 +1,4 @@
-const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE} = require('../models/enum');
+const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class AttackingState extends PokemonState {
@@ -31,8 +31,15 @@ class AttackingState extends PokemonState {
     pokemon.targetY = coordinates[1];
     const target = board.getValue(coordinates[0], coordinates[1]);
     if (target && !pokemon.sleep && !pokemon.freeze) {
-      if (pokemon.effects.includes(EFFECTS.SNOW) && climate == CLIMATE.SNOW) {
-        if (Math.random() > 0.9) {
+      if (climate == CLIMATE.SNOW) {
+        let freezeChance = 0;
+        if(pokemon.effects.includes(EFFECTS.SNOW)){
+          freezeChance += 0.1;
+        }
+        if(pokemon.effects.includes(EFFECTS.SHEER_COLD)){
+          freezeChance += 0.3;
+        }
+        if (Math.random() > 1 - freezeChance) {
           target.triggerFreeze(2000);
         }
       }
@@ -41,10 +48,14 @@ class AttackingState extends PokemonState {
           target.triggerFreeze(2000);
         }
       }
-      if (pokemon.effects.includes(EFFECTS.MANA_HEAL)) {
+      if (pokemon.effects.includes(EFFECTS.SHEER_COLD)) {
         pokemon.setMana(pokemon.mana + 5);
       }
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
+      if(pokemon.orientation == ORIENTATION.UNCLEAR){
+        console.log(`error orientation, was attacking, name ${pokemon.name}`)
+        pokemon.orientation = ORIENTATION.DOWNLEFT;
+      }
       // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
       if (target.effects.includes(EFFECTS.ATTRACT)) {
         if (Math.random() > 0.75) {
@@ -58,7 +69,12 @@ class AttackingState extends PokemonState {
       }
       let damage;
       if(Math.random() * 100 < pokemon.critChance){
-        damage = Math.round(pokemon.atk * 1.5);
+        if(pokemon.items.count(ITEMS.RAZOR_FANG) != 0){
+          damage = Math.round(pokemon.atk * (1.5 + 0.5 * pokemon.items.count(ITEMS.RAZOR_FANG)));
+        }
+        else{
+          damage = Math.round(pokemon.atk * 1.5);
+        }
       }
       else{
         damage = pokemon.atk;

@@ -1,5 +1,5 @@
 const schema = require('@colyseus/schema');
-const PokemonFactory = require('./pokemon-factory');
+const PokemonFactory = require('../pokemon-factory');
 
 class Synergies extends schema.Schema {
   constructor() {

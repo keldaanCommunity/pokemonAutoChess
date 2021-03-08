@@ -1,10 +1,14 @@
 const colyseus = require('colyseus');
 const social = require('@colyseus/social');
+const {PKM, TYPE, RARITY} = require('../models/enum');
 const LobbyState = require('./states/lobby-state');
 const Mongoose = require('mongoose');
-const Chat = require('../models/chat');
+const Chat = require('../models/mongo-models/chat');
 const User = require('@colyseus/social').User;
-const GameUser = require('../models/game-user');
+const Statistic = require('../models/mongo-models/statistic');
+const GameUser = require('../models/colyseus-models/game-user');
+const LeaderboardInfo = require('../models/colyseus-models/leaderboard-info');
+const PokemonFactory = require('../models/pokemon-factory');
 
 class CustomLobbyRoom extends colyseus.LobbyRoom {
   constructor() {
@@ -24,6 +28,122 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           messages.forEach((message) => {
             self.state.addMessage(message.name, message.payload, message.avatar, message.time, false);
           });
+        }
+      });
+      User.find({'metadata.level': { $gte: 1 }}, (err, users)=> {
+        if(err){
+          message.reply(`Bzz bzz, ERROR connecting to the database, proceed to self destruction.`);
+        }
+        else{
+          if(users.length == 0){
+            message.reply(`Bzz bzz, No users found with email ${email}.`);
+          }
+          users.sort(function(a, b) {
+            return parseInt(b.metadata.level) - parseInt(a.metadata.level);
+          });
+        }
+
+        for (let i = 0; i < 25; i++) {
+          const user = users[i];
+          self.state.leaderboard.push(new LeaderboardInfo(user.email.slice(0, user.email.indexOf('@')), user.metadata.avatar, i + 1, user.metadata.level));
+        }
+      });
+      Statistic.find({'time':{$gt: Date.now() - 2592000000}}, (err, stats)=>{
+        let typeCount = new Map();
+        let pkmCount = new Map();
+        let mythicalPkmCount = new Map();
+        let threeStarsPkmCount = new Map();
+        let playersCount = new Map();
+        let avatars = new Map();
+
+        Object.keys(TYPE).forEach(type => {
+          typeCount.set(type,0);
+        });
+        Object.values(PKM).forEach(pkm => {
+          pkmCount.set(pkm,0);
+          mythicalPkmCount.set(pkm,0);
+          threeStarsPkmCount.set(pkm,0);
+        });
+        stats.forEach((stat)=>{
+          if(stat.pokemons && stat.pokemons.length != 0){
+            if(stat.pokemons.length > 2){
+              if(stat.avatar && !avatars.has(stat.name)){
+                avatars.set(stat.name, stat.avatar);
+              }
+              if(playersCount.has(stat.name)){
+                playersCount.set(stat.name, playersCount.get(stat.name) + 1);
+              }
+              else{
+                playersCount.set(stat.name, 1);
+              }
+            }
+            stat.pokemons.forEach(pokemon =>{
+              let colyseusPkm = PokemonFactory.createPokemonFromName(pokemon);
+              pkmCount.set(pokemon, pkmCount.get(pokemon) + 1);
+              if(colyseusPkm.rarity == RARITY.MYTHICAL){
+                mythicalPkmCount.set(pokemon, mythicalPkmCount.get(pokemon) + 1);
+              }
+              if(colyseusPkm.stars == 3){
+                threeStarsPkmCount.set(pokemon, threeStarsPkmCount.get(pokemon) + 1);
+              }
+              colyseusPkm.types.forEach(type =>{
+                typeCount.set(type, typeCount.get(type) + 1);
+              });
+            });
+          }
+        });
+        let types = [];
+        let mythicalPkms = [];
+        let pkms = [];
+        let threeStarsPkm = [];
+        let players = [];
+
+        playersCount.forEach((value, key) =>{
+          if(value != 0){
+            if(avatars.has(key)){
+              players.push({player: key, count: value, avatar: avatars.get(key)});
+            }
+            else{
+              players.push({player: key, count: value, avatar: 'rattata'});
+            }
+          }
+        });
+        pkmCount.forEach((value, key) =>{
+          if(value != 0){
+            pkms.push({pkm: key, count: value});
+          }
+        });
+        mythicalPkmCount.forEach((value, key) =>{
+          if(value != 0){
+            mythicalPkms.push({pkm: key, count: value});
+          }
+        });
+        threeStarsPkmCount.forEach((value, key) =>{
+          if(value != 0){
+            threeStarsPkm.push({pkm: key, count: value});
+          }
+        });
+        typeCount.forEach((value, key) =>{
+          if(value != 0){
+            types.push({type: key, count: value});
+          }
+        });
+        types.sort((a, b) => {return b.count - a.count});
+        mythicalPkms.sort((a, b) => {return b.count - a.count});
+        pkms.sort((a, b) => {return b.count - a.count});
+        threeStarsPkm.sort((a, b) => {return b.count - a.count});
+        players.sort((a, b) => {return b.count - a.count});
+        //console.log(players);
+
+        for (let i = 0; i < types.length; i++) {
+          self.state.typesLeaderboard.push(new LeaderboardInfo(types[i].type, types[i].type, i+1 ,types[i].count));
+        }
+        
+        for (let i = 0; i < 25; i++) {
+          self.state.mythicalPokemonLeaderboard.push(new LeaderboardInfo(mythicalPkms[i].pkm, mythicalPkms[i].pkm, i+1 ,mythicalPkms[i].count));
+          self.state.pokemonLeaderboard.push(new LeaderboardInfo(pkms[i].pkm, pkms[i].pkm, i+1 ,pkms[i].count));
+          self.state.threeStarsLeaderboard.push(new LeaderboardInfo(threeStarsPkm[i].pkm, threeStarsPkm[i].pkm, i+1 ,threeStarsPkm[i].count));
+          self.state.playersLeaderboard.push(new LeaderboardInfo(players[i].player, players[i].avatar, i+1, players[i].count));
         }
       });
     });

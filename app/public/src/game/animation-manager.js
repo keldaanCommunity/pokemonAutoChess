@@ -67,7 +67,7 @@ export default class AnimationManager {
       this.createAnimations(num, 'december');
     });
 
-    [637, 638, 639, 640, 641, 641, 642, 643, 644, 645, 646, 647, 490, 479, 480, 481, 482, 483, 484, 485, 488, 492, 493, 494, 442, 359, 142, 131, 380, 381, 150, 250, 251, 385, 386].forEach((num) => {
+    [3820,3830,228, 318, 637, 638, 639, 640, 641, 641, 642, 643, 644, 645, 646, 647, 490, 479, 480, 481, 482, 483, 484, 485, 488, 492, 493, 494, 442, 359, 142, 131, 380, 381, 150, 250, 251, 385, 386].forEach((num) => {
       this.createAnimations(num, 'february');
     });
 
@@ -165,8 +165,8 @@ export default class AnimationManager {
     });
 
     this.game.anims.create({
-      key: `ROCK/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'ROCK/cell/'}),
+      key: `GROUND/cell`,
+      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'GROUND/cell/'}),
       frameRate: 30,
       repeat: -1
     });
@@ -622,7 +622,8 @@ export default class AnimationManager {
       this.game.anims.create({
         key: `${index}/0/${orientation}`,
         frames: this.game.anims.generateFrameNames(sheet, {frames: [0, 1, 2], prefix: index + '/0/' + orientation + '/'}),
-        frameRate: 4,
+        duration: 400,
+        repeatDelay: 300,
         repeat: -1,
         yoyo: true
       });

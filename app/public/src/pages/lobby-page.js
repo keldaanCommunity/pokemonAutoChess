@@ -1,14 +1,44 @@
 import {WORDS, XP_TABLE} from '../../../models/enum';
+import PokemonFactory from '../../../models/pokemon-factory';
 
 class LobbyPage {
   constructor(args) {
     this.room = args.room;
+    this.maxCountPokemon = 0;
+    this.maxCountMythical = 0;
+    this.maxCountType = 0;
     if(args.allRooms){
       this.allRooms = args.allRooms;
     }
     else{
       this.allRooms = [];
     }
+
+    this.typeColor = {
+      NORMAL: '#9ca071',
+      GRASS: '#71b951',
+      FIRE: '#e17733',
+      WATER: '#6781b3',
+      ELECTRIC: '#f2cd3c',
+      FIGHTING: '#ad2f29',
+      PSYCHIC: '#df4f7c',
+      DARK: '#7f6c5c',
+      METAL: '#b0b1c3',
+      GROUND: '#d6b965',
+      POISON: '#a5549d',
+      DRAGON: '#6f65a8',
+      FIELD: '#94d1cb',
+      MONSTER: '#448150',
+      HUMAN: '#666666',
+      AQUATIC: '#306e9f',
+      BUG: '#9eb039',
+      FLYING: '#9688b5',
+      FLORA: '#845796',
+      MINERAL: '#ad9a3c',
+      AMORPH: '#7e69a0',
+      FAIRY: '#e591a0',
+      ICE: '#63c0e4'
+    };
 
     this.langage = 'esp';
     if (window._client.auth.lang) {
@@ -84,6 +114,24 @@ class LobbyPage {
       self.addMessage(message);
     };
 
+    this.room.state.leaderboard.onAdd = (player, id) =>{
+      if(player.rank >= 24){
+        self.handleLeaderboardChange();
+      }
+    }
+
+    this.room.state.pokemonLeaderboard.onAdd = (pokemon, id) =>{
+      self.maxCountPokemon = Math.max(self.maxCountPokemon, pokemon.value);
+    }
+
+    this.room.state.mythicalPokemonLeaderboard.onAdd = (pokemon, id) =>{
+      self.maxCountMythical = Math.max(self.maxCountMythical, pokemon.value);
+    }
+
+    this.room.state.typesLeaderboard.onAdd = (type, id) =>{
+      self.maxCountType = Math.max(self.maxCountType, type.value);
+    }
+
     this.room.state.users.onAdd = (user, id)=>{
       self.handleUserListChange();
     }
@@ -135,6 +183,8 @@ class LobbyPage {
 
   render() {
     const self = this;
+    let username = _client.auth.email.split('@')[0];
+    //console.log(username);
     const content = document.createElement('div');
     content.setAttribute('id', 'lobby');
     content.style.padding = '10px';
@@ -146,7 +196,7 @@ class LobbyPage {
         <div class="modal-header">
         <div style="display:flex;flex-flow:row;">
           <img style="width:50px;" id='avatarModal' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
-          <h4>${_client.auth.email}</h4>
+          <h4>${username}</h4>
         </div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -242,56 +292,97 @@ class LobbyPage {
     </div>
   </div>
 
-  <div style="display:flex; justify-content:space-between;"> 
-  
-    <button type="button" class="nes-btn" id="button-home">${WORDS.HOME[this.langage]}</button>
-    <div class="dropdown">
+  <div style="display:flex; justify-content:space-between; margin-left:10px; margin-right:10px;"> 
+    <div style="display:flex; justify-content:space-between;"> 
+      <button type="button" class="nes-btn" id="button-home">${WORDS.HOME[this.langage]}</button>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="nes-btn is-warning" data-toggle="modal" data-target="#exampleModal">
+      <div class="dropdown">
+        <button style="margin-left:10px;" class="nes-btn is-error dropdown-toggle" type="button" id="leaderboardButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        ${WORDS.LEADERBOARD[this.langage]}
+        </button>
+          <div class="dropdown-menu" aria-labelledby="leaderboardButton">
+            <a class="dropdown-item" href="#" id ="pokemon-button">
+            Most played pokemon</a>
+            <a class="dropdown-item" href="#" id ="mythical-button">
+            Most played mythical</a>
+            <a class="dropdown-item" href="#" id ="threeStars-button">
+            Most played 3 stars pokemon</a>
+            <a class="dropdown-item" href="#" id ="type-button">
+            Most played type</a>
+            <a class="dropdown-item" href="#" id ="leaderboard-button">
+            Leaderboard player</a>
+            <a class="dropdown-item" href="#" id ="players-button">
+            Most played game by player</a>
+          </div>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between;"> 
+
+      <button type="button" class="nes-btn is-warning" data-toggle="modal" data-target="#exampleModal" style="margin-right:10px;">
       Profile
-    </button>
+      </button>
 
-    <button class="nes-btn is-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <img src="assets/flags/${this.langage}.png"/>  
-    ${WORDS.CHANGE_LANGAGE[this.langage]}
-    </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#" id ="eng-button">
-        <img src="assets/flags/eng.png"/>
-        English</a>
-        <a class="dropdown-item" href="#" id ="esp-button">
-        <img src="assets/flags/esp.png"/>
-        Español</a>
-        <a class="dropdown-item" href="#" id ="fra-button">
-        <img src="assets/flags/fra.png"/>
-        Français</a>
+      <div class="dropdown">
+        <button class="nes-btn is-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="assets/flags/${this.langage}.png"/>  
+        ${WORDS.CHANGE_LANGAGE[this.langage]}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#" id ="eng-button">
+          <img src="assets/flags/eng.png"/>
+          English</a>
+          <a class="dropdown-item" href="#" id ="esp-button">
+          <img src="assets/flags/esp.png"/>
+          Español</a>
+          <a class="dropdown-item" href="#" id ="fra-button">
+          <img src="assets/flags/fra.png"/>
+          Français</a>
+        </div>
       </div>
     </div>
   </div>
   <div style="display:flex; justify-content:space-between; height:100%;"> 
 
-    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; margin-left:15%;">
-      <p class="title">${WORDS.GAME_LOBBY[this.langage]}</p>  
-      <div style="display:flex;flex-flow:row;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; width:30%; overflow-y: scroll;
+    height: 90vh;">
+      <div id='leaderboard-container'>
+      <table style="border-spacing: 10px 0px; border-collapse:separate; width: 100%;">
+        <thead>
+            <tr>
+                <th colspan="2">${WORDS.LEADERBOARD[this.langage]}</th>
+                <th id='secondThTitle'>${WORDS.PLAYER[this.langage]}</th>
+                <th id='thirdThTitle'>${WORDS.LEVEL[this.langage]}</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboard-table">
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; width:30%; overflow-y: scroll;
+    height: 90vh;">
+      <div style="display:flex;flex-flow:row; justify-content: center;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${username}</p></div>
       <h3 style="margin:10px;">${WORDS.AVAILABLE_ROOM_IDS[this.langage]}:</h3>
       
       <div id="room-list" style="margin-top:10px; list-style: none;"></div>
       <button type="button" class="nes-btn is-success" id="create">${WORDS.CREATE_NEW_ROOM[this.langage]}</button>
     </div>
 
-    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; margin-left:15%;">
-    <p class="title">${WORDS.USERS[this.langage]}</p> 
-    <div id='user-container'>
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; width: 10%; height: 90vh; overflow-y:scroll;">
+      <div id='user-container'>
 
+      </div>
     </div>
-  </div>
 
-    <section class="nes-container" style="background-color: rgba(255, 255, 255, .5); margin:10px; overflow:scroll; height:90vh; width:30%;">
+    <section class="nes-container" style="background-color: rgba(255, 255, 255, .5); margin:10px; overflow-y: scroll;
+    height: 90vh; width:30%;">
     <section class="message-list" id="messages">
       </section>
 
-      <div id='chat-container' style="display:flex; position:relative; bottom:0px; left:0px;">
+      <div id='chat-container' style="display:flex; position:relative; bottom:10px; left:0px;">
       <div class="nes-field" style="width:78%; margin-right:2%;">
         <input type="text" id="inputMessage" class="nes-input" placeholder="${WORDS.TYPE_HERE[this.langage]}...">
       </div>
@@ -307,6 +398,7 @@ class LobbyPage {
     });
     this.handleRoomListChange();
     this.handleUserListChange();
+    this.handleLeaderboardChange();
     this.room.state.messages.forEach((message, index) => {
       self.addMessage(message);
     });
@@ -351,6 +443,30 @@ class LobbyPage {
 
     document.getElementById('fra-button').addEventListener('click', (e) => {
       window.dispatchEvent(new CustomEvent('switch-lang', {detail: {lang: 'fra', render: 'lobby', room: self.room, allRooms: self.allRooms}}));
+    });
+
+    document.getElementById('leaderboard-button').addEventListener('click', (e) => {
+      self.handleLeaderboardChange();
+    });
+
+    document.getElementById('pokemon-button').addEventListener('click', (e) => {
+      self.handleLeaderboardPokemonChange();
+    });
+
+    document.getElementById('mythical-button').addEventListener('click', (e) => {
+      self.handleLeaderboardMythicalChange();
+    });
+
+    document.getElementById('type-button').addEventListener('click', (e) => {
+      self.handleLeaderboardTypeChange();
+    });
+
+    document.getElementById('threeStars-button').addEventListener('click', (e) => {
+      self.handleLeaderboardTheeStarsPokemonChange();
+    });
+
+    document.getElementById('players-button').addEventListener('click', (e) => {
+      self.handleLeaderboardPlayersChange();
     });
   }
 
@@ -398,6 +514,232 @@ class LobbyPage {
         userHTML.appendChild(imageHTML);
         userHTML.appendChild(nameHTML);
         document.getElementById('user-container').appendChild(userHTML);
+      });
+    }
+  }
+
+  handleLeaderboardPokemonChange(){
+    document.getElementById('secondThTitle').textContent = 'Pokemon';
+    document.getElementById('thirdThTitle').textContent = 'Count';
+    
+    if(document.getElementById('leaderboard-container')){
+      document.getElementById('leaderboard-table').innerHTML = '';
+      this.room.state.pokemonLeaderboard.forEach(pokemon =>{
+        let colyseusPokemon = PokemonFactory.createPokemonFromName(pokemon.name);
+        const playerHTML = document.createElement('tr');
+
+        const rankHTML = document.createElement('td');
+        rankHTML.textContent = pokemon.rank;
+
+        const avatarHTML = document.createElement('td');
+        const imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${pokemon.name}.png`;
+        avatarHTML.appendChild(imageHTML);
+
+        const nameHTML = document.createElement('td');
+        nameHTML.textContent = pokemon.name;
+
+        const levelHTML = document.createElement('td');
+        levelHTML.style.display = 'block';
+        levelHTML.style.height = '30px';
+        //console.log(colyseusPokemon.types[0]);
+        levelHTML.style.backgroundColor = this.typeColor[colyseusPokemon.types[0]];
+        levelHTML.style.width = `${pokemon.value * 100/this.maxCountPokemon}%`;
+        levelHTML.textContent = pokemon.value;
+
+        playerHTML.appendChild(rankHTML);
+        playerHTML.appendChild(avatarHTML);
+        playerHTML.appendChild(nameHTML);
+        playerHTML.appendChild(levelHTML);
+
+        document.getElementById('leaderboard-table').appendChild(playerHTML);
+      });
+    }
+  }
+
+  handleLeaderboardMythicalChange(){
+    document.getElementById('secondThTitle').textContent = 'Pokemon';
+    document.getElementById('thirdThTitle').textContent = 'Count';
+    if(document.getElementById('leaderboard-container')){
+      document.getElementById('leaderboard-table').innerHTML = '';
+      this.room.state.mythicalPokemonLeaderboard.forEach(pokemon =>{
+        let colyseusPokemon = PokemonFactory.createPokemonFromName(pokemon.name);
+        const playerHTML = document.createElement('tr');
+
+        const rankHTML = document.createElement('td');
+        rankHTML.textContent = pokemon.rank;
+
+        const avatarHTML = document.createElement('td');
+        const imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${pokemon.name}.png`;
+        avatarHTML.appendChild(imageHTML);
+
+        const nameHTML = document.createElement('td');
+        nameHTML.textContent = pokemon.name;
+
+        const levelHTML = document.createElement('td');
+        levelHTML.style.display = 'block';
+        levelHTML.style.height = '30px';
+        //console.log(colyseusPokemon.types[0]);
+        levelHTML.style.backgroundColor = this.typeColor[colyseusPokemon.types[0]];
+        levelHTML.style.width = `${pokemon.value * 100/this.maxCountMythical}%`;
+        levelHTML.textContent = pokemon.value;
+
+        playerHTML.appendChild(rankHTML);
+        playerHTML.appendChild(avatarHTML);
+        playerHTML.appendChild(nameHTML);
+        playerHTML.appendChild(levelHTML);
+
+        document.getElementById('leaderboard-table').appendChild(playerHTML);
+      });
+    }
+  }
+
+  handleLeaderboardTypeChange(){
+    document.getElementById('secondThTitle').textContent = 'Type';
+    document.getElementById('thirdThTitle').textContent = 'Count';
+    
+    if(document.getElementById('leaderboard-container')){
+      document.getElementById('leaderboard-table').innerHTML = '';
+      this.room.state.typesLeaderboard.forEach(type =>{
+        const playerHTML = document.createElement('tr');
+
+        const rankHTML = document.createElement('td');
+        rankHTML.textContent = type.rank;
+
+        const avatarHTML = document.createElement('td');
+        const imageHTML = document.createElement('img');
+        imageHTML.src = `assets/types/${type.name}.png`;
+        avatarHTML.appendChild(imageHTML);
+
+        const nameHTML = document.createElement('td');
+        nameHTML.textContent = type.name;
+
+        const levelHTML = document.createElement('td');
+        levelHTML.style.display = 'block';
+        levelHTML.style.height = '30px';
+        //console.log(colyseusPokemon.types[0]);
+        levelHTML.style.backgroundColor = this.typeColor[type.name];
+        levelHTML.style.width = `${type.value * 100/this.maxCountType}%`;
+        levelHTML.textContent = type.value;
+
+        playerHTML.appendChild(rankHTML);
+        playerHTML.appendChild(avatarHTML);
+        playerHTML.appendChild(nameHTML);
+        playerHTML.appendChild(levelHTML);
+
+        document.getElementById('leaderboard-table').appendChild(playerHTML);
+      });
+    }
+  }
+
+  handleLeaderboardTheeStarsPokemonChange(){
+    document.getElementById('secondThTitle').textContent = 'Pokemon';
+    document.getElementById('thirdThTitle').textContent = 'Count';
+    
+    if(document.getElementById('leaderboard-container')){
+      document.getElementById('leaderboard-table').innerHTML = '';
+      this.room.state.threeStarsLeaderboard.forEach(pokemon =>{
+        let colyseusPokemon = PokemonFactory.createPokemonFromName(pokemon.name);
+        const playerHTML = document.createElement('tr');
+
+        const rankHTML = document.createElement('td');
+        rankHTML.textContent = pokemon.rank;
+
+        const avatarHTML = document.createElement('td');
+        const imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${pokemon.name}.png`;
+        avatarHTML.appendChild(imageHTML);
+
+        const nameHTML = document.createElement('td');
+        nameHTML.textContent = pokemon.name;
+
+        const levelHTML = document.createElement('td');
+        levelHTML.style.display = 'block';
+        levelHTML.style.height = '30px';
+        //console.log(colyseusPokemon.types[0]);
+        levelHTML.style.backgroundColor = this.typeColor[colyseusPokemon.types[0]];
+        levelHTML.style.width = `${pokemon.value * 100/this.maxCountPokemon}%`;
+        levelHTML.textContent = pokemon.value;
+
+        playerHTML.appendChild(rankHTML);
+        playerHTML.appendChild(avatarHTML);
+        playerHTML.appendChild(nameHTML);
+        playerHTML.appendChild(levelHTML);
+
+        document.getElementById('leaderboard-table').appendChild(playerHTML);
+      });
+    }
+  }
+
+  handleLeaderboardChange(){
+    document.getElementById('secondThTitle').textContent = 'Player';
+    document.getElementById('thirdThTitle').textContent = 'level';
+    if(document.getElementById('leaderboard-container')){
+      document.getElementById('leaderboard-table').innerHTML = '';
+      this.room.state.leaderboard.forEach(player =>{
+        const playerHTML = document.createElement('tr');
+
+        const rankHTML = document.createElement('td');
+        rankHTML.textContent = player.rank;
+
+        const avatarHTML = document.createElement('td');
+        const imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${player.avatar}.png`;
+        avatarHTML.appendChild(imageHTML);
+
+        const nameHTML = document.createElement('td');
+        nameHTML.textContent = player.name.slice(0,10);
+
+        const levelHTML = document.createElement('td');
+        levelHTML.textContent = player.value;
+
+        playerHTML.appendChild(rankHTML);
+        playerHTML.appendChild(avatarHTML);
+        playerHTML.appendChild(nameHTML);
+        playerHTML.appendChild(levelHTML);
+
+        document.getElementById('leaderboard-table').appendChild(playerHTML);
+      });
+    }
+  }
+
+  handleLeaderboardPlayersChange(){
+    document.getElementById('secondThTitle').textContent = 'Player';
+    document.getElementById('thirdThTitle').textContent = 'Count';
+    if(document.getElementById('leaderboard-container')){
+      document.getElementById('leaderboard-table').innerHTML = '';
+      this.room.state.playersLeaderboard.forEach(player =>{
+        let avatar = player.avatar;
+        if(avatar == 'rattata'){
+          this.room.state.leaderboard.forEach(plyr =>{
+            if(plyr.name == player.name){
+              avatar = plyr.avatar;
+            }
+          });
+        }
+        const playerHTML = document.createElement('tr');
+
+        const rankHTML = document.createElement('td');
+        rankHTML.textContent = player.rank;
+
+        const avatarHTML = document.createElement('td');
+        const imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${avatar}.png`;
+        avatarHTML.appendChild(imageHTML);
+
+        const nameHTML = document.createElement('td');
+        nameHTML.textContent = player.name.slice(0,10);
+
+        const levelHTML = document.createElement('td');
+        levelHTML.textContent = player.value;
+
+        playerHTML.appendChild(rankHTML);
+        playerHTML.appendChild(avatarHTML);
+        playerHTML.appendChild(nameHTML);
+        playerHTML.appendChild(levelHTML);
+
+        document.getElementById('leaderboard-table').appendChild(playerHTML);
       });
     }
   }

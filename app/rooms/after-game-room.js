@@ -1,8 +1,9 @@
 const colyseus = require('colyseus');
 const social = require('@colyseus/social');
-const SimplePlayer = require('../models/simple-player');
+const SimplePlayer = require('../models/colyseus-models/simple-player');
 const {Dispatcher} = require('@colyseus/command');
 const AfterGameState = require('./states/after-game-state');
+const Statistic = require('../models/mongo-models/statistic');
 const Filter = require('bad-words');
 const {
   OnJoinCommand,
@@ -49,7 +50,22 @@ class AfterGameRoom extends colyseus.Room {
       
       options.players.forEach(plyr => {
         let player = new SimplePlayer(plyr.id, plyr.name, plyr.avatar, plyr.rank, plyr.pokemons, plyr.exp, plyr.alive);
+        let pokemons = [];
+        player.pokemons.forEach(pkm =>{
+          pokemons.push(pkm);
+        });
         this.state.players.set(player.id, player);
+        if(!player.name.includes('BOT') && auth.email.slice(0, auth.email.indexOf('@')) == player.name){
+          Statistic.create(
+            {
+              time: Date.now(),
+              name: player.name,
+              pokemons: pokemons,
+              rank: player.rank,
+              avatar: player.avatar
+            }
+          )
+        }
       });
       
     }

@@ -12,10 +12,10 @@ class Effects {
     if (synergies.GRASS >= 3) {
       this.list.push(EFFECTS.INGRAIN);
     }
-    if (synergies.GRASS >= 6) {
+    if (synergies.GRASS >= 5) {
       this.list.push(EFFECTS.GROWTH);
     }
-    if (synergies.GRASS >= 8) {
+    if (synergies.GRASS >= 7) {
       this.list.push(EFFECTS.SPORE);
     }
     if (synergies.FIRE >= 3) {
@@ -166,7 +166,7 @@ class Effects {
       this.list.push(EFFECTS.SNOW);
     }
     if (synergies.ICE >= 4) {
-      this.list.push(EFFECTS.MANA_HEAL);
+      this.list.push(EFFECTS.SHEER_COLD);
     }
   }
 }

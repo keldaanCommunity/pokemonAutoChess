@@ -25,8 +25,34 @@ export default class SynergiesContainer extends GameObjects.Container {
     this.getFirst('type', field).updateSynergy(value);
   }
 
+  enablePokemon(pokemon){
+    pokemon.types.forEach( type => {
+      this.getFirst('type', type).enablePokemon(pokemon.name);
+    });
+  }
+
+  disablePokemon(pokemon){
+    pokemon.types.forEach( type => {
+      this.getFirst('type', type).disablePokemon(pokemon.name);
+    });
+  }
+
+  enablePlayerPokemons(player){
+    player.board.forEach( pokemon => {
+      this.enablePokemon(pokemon);
+    });
+  }
+
+  disablePlayerPokemons(player){
+    player.board.forEach( pokemon => {
+      this.disablePokemon(pokemon);
+    });
+  }
+
   changePlayer(player) {
+    this.disablePlayerPokemons(this.player);
     this.player = player;
+    this.enablePlayerPokemons(this.player);
     const synergies = Object.keys(player.synergies);
     synergies.forEach((synergy) =>{
       if (this.types.includes(synergy)) {

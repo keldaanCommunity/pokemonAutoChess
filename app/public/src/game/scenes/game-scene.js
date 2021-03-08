@@ -114,7 +114,6 @@ export default class GameScene extends Scene {
     this.load.multiatlas('icons', 'assets/ui/icons.json', 'assets/ui/');
     this.load.multiatlas('items', 'assets/items/items.json', 'assets/items/');
     this.load.multiatlas('lock', 'assets/lock/lock.json', 'assets/lock/');
-    this.load.multiatlas('effects', 'assets/effects/effects.json', 'assets/effects');
     this.load.multiatlas('rarity', 'assets/rarity/rarity.json', 'assets/rarity');
     this.load.multiatlas('types', 'assets/types/types.json', 'assets/types');
     this.load.multiatlas('december', 'assets/pokemons/december/december.json', 'assets/pokemons/december/');

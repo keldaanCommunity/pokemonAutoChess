@@ -3,8 +3,8 @@ const social = require('@colyseus/social');
 const {Dispatcher} = require('@colyseus/command');
 const GameState = require('./states/game-state');
 const Commands = require('./commands/game-commands');
-const Player = require('../models/player');
-const GameStats = require('../models/game-stats');
+const Player = require('../models/colyseus-models/player');
+const GameStats = require('../models/mongo-models/game-stats');
 
 class GameRoom extends colyseus.Room {
   constructor() {
@@ -104,22 +104,27 @@ class GameRoom extends colyseus.Room {
     console.log('Dispose game');
   }
 
-  getRandomOpponent(playerId) {
+  getRandomOpponent(playerId, lastOpponentName) {
     const playersId = [];
     const numberOfPlayers = this.state.players.size;
+    let opponentId;
 
     this.state.players.forEach((player, id) => {
-      if (player.alive && (id != playerId || numberOfPlayers == 1 )) {
-        playersId.push(id);
+
+      if (player.alive && id != playerId) {
+        if(numberOfPlayers > 1){
+          if(player.name != lastOpponentName){
+            playersId.push(id);
+          }
+        }
+        else{
+          playersId.push(id);
+        }
       }
     });
 
-    if (playersId.length > 0) {
-      const n = Math.floor(Math.random() * playersId.length);
-      return this.state.players[playersId[n]].id;
-    } else {
-      return playerId;
-    }
+    const n = Math.floor(Math.random() * playersId.length);
+    return playersId[n];
   }
 
   swap(playerId, pokemon, x, y) {
