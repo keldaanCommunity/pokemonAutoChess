@@ -11728,7 +11728,7 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': 'kyogre',
             'x': 1,
             'y': 2
           },
@@ -11769,7 +11769,7 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': 'kyogre',
             'x': 1,
             'y': 2
           },
@@ -11815,7 +11815,7 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': 'kyogre',
             'x': 1,
             'y': 2
           },
@@ -11866,7 +11866,7 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': 'kyogre',
             'x': 1,
             'y': 2
           },
@@ -13471,7 +13471,7 @@ const SCENARIOS =
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': 'rayquaza',
             'x': 3,
             'y': 3
           },
@@ -13517,7 +13517,7 @@ const SCENARIOS =
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': 'rayquaza',
             'x': 3,
             'y': 3
           },
@@ -13563,7 +13563,7 @@ const SCENARIOS =
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': 'rayquaza',
             'x': 3,
             'y': 3
           },
@@ -14054,7 +14054,7 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': 'moltres',
             'x': 4,
             'y': 3
           },
@@ -14254,7 +14254,7 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': 'entei',
             'x': 4,
             'y': 3
           },
@@ -14300,7 +14300,7 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': 'entei',
             'x': 4,
             'y': 3
           },
@@ -14351,7 +14351,7 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': 'entei',
             'x': 4,
             'y': 3
           },
@@ -14675,6 +14675,702 @@ const SCENARIOS =
             'name': 'lucario',
             'x': 2,
             'y': 1
+          }
+        ]
+      }
+    ]
+  },
+  'DRAGON3': {
+    'steps': [
+      {
+        'roundsRequired': 0,
+        'board': [
+          {
+            'name': 'caterpie',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'weedle',
+            'x': 4,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': 'weedle',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'caterpie',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'golbat',
+            'x': 4,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'metapod',
+            'x': 5,
+            'y': 1
+          },
+          {
+            'name': 'kakuna',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'nuzleaf',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'leafeon',
+            'x': 5,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'beedrill',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'butterfree',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'leafon',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'nuzleaf',
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'beedrill',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'butterfree',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'leafon',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'vibrava',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'nuzleaf',
+            'x': 3,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': 'beedrill',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'butterfree',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'leafon',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'vibrava',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'nuzleaf',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'horsea',
+            'x': 3,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': 'beedrill',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'butterfree',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'shelgon',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'seadra',
+            'x': 3,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 4,
+        'board':
+        [
+          {
+            'name': 'shelgon',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'butterfree',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'lairon',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'seadra',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'beldum',
+            'x': 0,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': 'shelgon',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'butterfree',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'lairon',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'kingdra',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'metang',
+            'x': 0,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': 'shelgon',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'butterfree',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'aggron',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'kingdra',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'metang',
+            'x': 0,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': 'shelgon',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'kyurem',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'aggron',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'kingdra',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'metang',
+            'x': 0,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 6,
+        'board':
+        [
+          {
+            'name': 'salamance',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'kyurem',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'aggron',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'kingdra',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'metang',
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': 'onix',
+            'x': 1,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': 'salamance',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'kyurem',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'aggron',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'kingdra',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'metagross',
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': 'steelix',
+            'x': 1,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 6,
+        'board':
+        [
+          {
+            'name': 'salamence',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'kyurem',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'aggron',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'pupitar',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'metagross',
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': 'steelix',
+            'x': 1,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 4,
+        'board':
+        [
+          {
+            'name': 'salamence',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'kyurem',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'aggron',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'tyranitar',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'metagross',
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': 'steelix',
+            'x': 1,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': 'salamence',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'kyurem',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'aggron',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'tyranitar',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'metagross',
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': 'steelix',
+            'x': 1,
+            'y': 1
+          },
+          {
+            'name': 'scizor',
+            'x': 2,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': 'salamence',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'kyurem',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'aggron',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'tyranitar',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'metagross',
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': 'steelix',
+            'x': 1,
+            'y': 1
+          },
+          {
+            'name': 'mega-scizor',
+            'x': 2,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 4,
+        'board':
+        [
+          {
+            'name': 'salamence',
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': 'kyurem',
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': 'latios',
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': 'flygon',
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': 'aggron',
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': 'tyranitar',
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': 'metagross',
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': 'mega-steelix',
+            'x': 1,
+            'y': 1
+          },
+          {
+            'name': 'mega-scizor',
+            'x': 2,
+            'y': 2
           }
         ]
       }
