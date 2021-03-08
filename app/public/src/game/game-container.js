@@ -114,11 +114,12 @@ class GameContainer {
     };
 
     player.shop.onChange = function(pokemon, index) {
-      // console.log(index, player.shop[index]);
-      if (player.shop[index] == '') {
-        self.handleRemoveShopPokemon(player, index);
-      } else {
-        self.handleAddShopPokemon(player, player.shop[index], index);
+      if(pokemon !== undefined){
+        if (player.shop[index] == '') {
+          self.handleRemoveShopPokemon(player, index);
+        } else {
+          self.handleAddShopPokemon(player, player.shop[index], index);
+        }
       }
     };
 
@@ -338,29 +339,41 @@ class GameContainer {
   handleBoardPokemonAdd(player, pokemon) {
     if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
       this.game.scene.getScene('gameScene').boardManager.addPokemon(pokemon);
+      if(pokemon.positionY != 0){
+        this.game.scene.getScene('gameScene').synergiesContainer.enablePokemon(pokemon);
+      }
     }
   }
 
   handleBoardPokemonRemove(player, pokemon) {
     if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
       this.game.scene.getScene('gameScene').boardManager.removePokemon(pokemon);
+      this.game.scene.getScene('gameScene').synergiesContainer.disablePokemon(pokemon);
     }
   }
 
   handleBoardPokemonChange(player, pokemon, change) {
     if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
       this.game.scene.getScene('gameScene').boardManager.changePokemon(pokemon, change);
+      if(pokemon.positionY == 0){
+        this.game.scene.getScene('gameScene').synergiesContainer.disablePokemon(pokemon);
+      }
+      else{
+        this.game.scene.getScene('gameScene').synergiesContainer.enablePokemon(pokemon);
+      }
     }
   }
 
   handleAddShopPokemon(player, pokemon, key) {
     if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.room.sessionId == player.id) {
+      //console.log(pokemon, key);
       this.game.scene.getScene('gameScene').shopContainer.addPortrait(pokemon, key);
     }
   }
 
   handleRemoveShopPokemon(player, index) {
     if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.room.sessionId == player.id) {
+      //console.log('remove', index);
       this.game.scene.getScene('gameScene').shopContainer.removePortrait(index);
     }
   }
@@ -549,7 +562,7 @@ class GameContainer {
       let savePlayers = [];
       this.room.state.players.forEach(player => savePlayers.push(this.transformToSimplePlayer(player)));
       _client.create('after-game', {'players':savePlayers}).then((room) => {
-        this.room.send('set-afterGameId', {'id': room.id});
+        //this.room.send('set-afterGameId', {'id': room.id});
         this.room.leave();
         document.getElementById('game').dispatchEvent(new CustomEvent('render-after-game', {detail: {room: room}}));
         //console.log('joined room:', room);

@@ -84,6 +84,10 @@ class LobbyPage {
       self.addMessage(message);
     };
 
+    this.room.state.leaderboard.onAdd = (player, id) =>{
+      self.handleLeaderboardChange();
+    }
+
     this.room.state.users.onAdd = (user, id)=>{
       self.handleUserListChange();
     }
@@ -271,7 +275,25 @@ class LobbyPage {
   </div>
   <div style="display:flex; justify-content:space-between; height:100%;"> 
 
-    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; margin-left:15%;">
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px;">
+      <p class="title">${WORDS.LEADERBOARD[this.langage]}</p> 
+      <div id='leaderboard-container'>
+      <table>
+        <thead>
+            <tr>
+                <th colspan="2">${WORDS.LEADERBOARD[this.langage]}</th>
+                <th>${WORDS.PLAYER[this.langage]}</th>
+                <th>${WORDS.LEVEL[this.langage]}</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboard-table">
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px;">
       <p class="title">${WORDS.GAME_LOBBY[this.langage]}</p>  
       <div style="display:flex;flex-flow:row;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${_client.auth.email}</p></div>
       <h3 style="margin:10px;">${WORDS.AVAILABLE_ROOM_IDS[this.langage]}:</h3>
@@ -280,12 +302,12 @@ class LobbyPage {
       <button type="button" class="nes-btn is-success" id="create">${WORDS.CREATE_NEW_ROOM[this.langage]}</button>
     </div>
 
-    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; margin-left:15%;">
-    <p class="title">${WORDS.USERS[this.langage]}</p> 
-    <div id='user-container'>
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px;">
+      <p class="title">${WORDS.USERS[this.langage]}</p> 
+      <div id='user-container'>
 
+      </div>
     </div>
-  </div>
 
     <section class="nes-container" style="background-color: rgba(255, 255, 255, .5); margin:10px; overflow:scroll; height:90vh; width:30%;">
     <section class="message-list" id="messages">
@@ -307,6 +329,7 @@ class LobbyPage {
     });
     this.handleRoomListChange();
     this.handleUserListChange();
+    this.handleLeaderboardChange();
     this.room.state.messages.forEach((message, index) => {
       self.addMessage(message);
     });
@@ -398,6 +421,36 @@ class LobbyPage {
         userHTML.appendChild(imageHTML);
         userHTML.appendChild(nameHTML);
         document.getElementById('user-container').appendChild(userHTML);
+      });
+    }
+  }
+
+  handleLeaderboardChange(){
+    if(document.getElementById('leaderboard-container')){
+      document.getElementById('leaderboard-table').innerHTML = '';
+      this.room.state.leaderboard.forEach(player =>{
+        const playerHTML = document.createElement('tr');
+
+        const rankHTML = document.createElement('td');
+        rankHTML.textContent = player.rank;
+
+        const avatarHTML = document.createElement('td');
+        const imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${player.avatar}.png`;
+        avatarHTML.appendChild(imageHTML);
+
+        const nameHTML = document.createElement('td');
+        nameHTML.textContent = player.name;
+
+        const levelHTML = document.createElement('td');
+        levelHTML.textContent = player.lvl;
+
+        playerHTML.appendChild(rankHTML);
+        playerHTML.appendChild(avatarHTML);
+        playerHTML.appendChild(nameHTML);
+        playerHTML.appendChild(levelHTML);
+
+        document.getElementById('leaderboard-table').appendChild(playerHTML);
       });
     }
   }

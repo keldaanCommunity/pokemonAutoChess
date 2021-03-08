@@ -1,12 +1,13 @@
 const PokemonFactory = require('./pokemon-factory');
+const {PKM} = require('./enum');
 
-const COMMON = ['geodude', 'azurill', 'zubat', 'mareep', 'cleffa', 'igglybuff', 'caterpie', 'weedle', 'pidgey', 'hoppip', 'seedot', 'starly', 'bellsprout'];
-const UNCOMMON = ['swinub', 'eevee', 'bulbasaur', 'charmander', 'slowpoke', 'squirtle', 'chikorita', 'cyndaquil', 'totodile', 'treecko', 'torchic', 'mudkip', 'turtwig', 'chimchar', 'piplup', 'nidoranF', 'nidoranM'];
-const RARE = ['vanillite', 'pichu', 'machop', 'horsea', 'trapinch', 'spheal', 'aron', 'magnemite', 'rhyhorn', 'togepi', 'duskull', 'lotad', 'shinx', 'poliwag'];
-const EPIC = ['snorunt', 'abra', 'gastly', 'dratini', 'larvitar', 'slakoth', 'ralts', 'bagon', 'beldum', 'gible', 'elekid', 'magby', 'litwick'];
-const LEGENDARY = ['meditite', 'numel', 'onix', 'scyther', 'riolu', 'snover'];
-const MYTHICAL_1 = ['virizion','regice','registeel','regirock','uxie','mesprit','azelf','latias','latios','zapdos','moltres','articuno','lapras','aerodactyl','absol','spiritomb','rotom','manaphy','cobalion','terrakion','keldeo','tornadus','thundurus','landorus','volcarona'];
-const MYTHICAL_2 = ['mewtwo','entei','suicune','raikou','kyurem','reshiram','zekrom','regigigas','celebi','victini','jirachi','arceus','deoxys','shaymin','giratina','darkrai','cresselia','heatran','lugia','ho-Oh','palkia','dialga','rayquaza','kyogre','groudon'];
+const COMMON = [PKM.GEODUDE, PKM.AZURILL, PKM.ZUBAT, PKM.MAREEP, PKM.CLEFFA, PKM.IGGLYBUFF, PKM.CATERPIE, PKM.WEEDLE, PKM.PIDGEY, PKM.HOPPIP, PKM.SEEDOT, PKM.STARLY, PKM.BELLSPROUT];
+const UNCOMMON = [PKM.SWINUB, PKM.EEVEE, PKM.BULBASAUR, PKM.CHARMANDER, PKM.SLOWPOKE, PKM.SQUIRTLE, PKM.CHIKORITA, PKM.CYNDAQUIL, PKM.TOTODILE, PKM.TREECKO, PKM.TORCHIC, PKM.MUDKIP, PKM.TURTWIG, PKM.CHIMCHAR, PKM.PIPLUP, PKM.NIDORANF, PKM.NIDORANM];
+const RARE = [PKM.VANILLITE, PKM.PICHU, PKM.MACHOP, PKM.HORSEA, PKM.TRAPINCH, PKM.SPHEAL, PKM.ARON, PKM.MAGNEMITE, PKM.RHYHORN, PKM.TOGEPI, PKM.DUSKULL, PKM.LOTAD, PKM.SHINX, PKM.POLIWAG];
+const EPIC = [PKM.SNORUNT, PKM.ABRA, PKM.GASTLY, PKM.DRATINI, PKM.LARVITAR, PKM.SLAKOTH, PKM.RALTS, PKM.BAGON, PKM.BELDUM, PKM.GIBLE, PKM.ELEKID, PKM.MAGBY, PKM.LITWICK];
+const LEGENDARY = [PKM.MEDITITE, PKM.NUMEL, PKM.ONIX, PKM.SCYTHER, PKM.RIOLU, PKM.SNOVER];
+const MYTHICAL_1 = [PKM.VIRIZION, PKM.REGICE, PKM.REGISTEEL, PKM.REGIROCK, PKM.UXIE, PKM.MESPRIT, PKM.AZELF, PKM.LATIAS, PKM.LATIOS, PKM.ZAPDOS, PKM.MOLTRES, PKM.ARTICUNO, PKM.LAPRAS, PKM.AERODACTYL, PKM.ABSOL, PKM.SPIRITOMB, PKM.ROTOM, PKM.MANAPHY, PKM.COBALION, PKM.TERRAKION, PKM.KELDEO, PKM.TORNADUS, PKM.THUNDURUS, PKM.LANDORUS, PKM.VOLCARONA];
+const MYTHICAL_2 = [PKM.MEWTWO, PKM.ENTEI, PKM.SUICUNE, PKM.RAIKOU, PKM.KYUREM, PKM.RESHIRAM, PKM.ZEKROM, PKM.REGIGIGAS, PKM.CELEBI, PKM.VICTINI, PKM.JIRACHI, PKM.ARCEUS, PKM.DEOXYS, PKM.SHAYMIN, PKM.GIRATINA, PKM.DARKRAI, PKM.CRESSELIA, PKM.HEATRAN, PKM.LUGIA, PKM.HOOH, PKM.PALKIA, PKM.DIALGA, PKM.RAYQUAZA, PKM.KYOGRE, PKM.GROUDON];
 
 const PROBABILITY = {
   1: [1, 0, 0, 0, 0],
@@ -34,7 +35,7 @@ class Shop {
       let pokemon = PokemonFactory.createPokemonFromName(this.pickPokemon(player));
       const seed = Math.random();
       if (seed > 0.993) {
-        pokemon = PokemonFactory.createPokemonFromName('ditto');
+        pokemon = PokemonFactory.createPokemonFromName(PKM.DITTO);
       }
       player.shop[i] = pokemon.name;
     }

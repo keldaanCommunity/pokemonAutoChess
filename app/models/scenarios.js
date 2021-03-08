@@ -1,3 +1,5 @@
+const PKM = require('./enum').PKM;
+
 const SCENARIOS =
 {
   'WATER1': {
@@ -6,12 +8,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'hoppip',
+            'name': PKM.HOPPIP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'hoppip',
+            'name': PKM.HOPPIP,
             'x': 4,
             'y': 3
           }
@@ -22,17 +24,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'hoppip',
+            'name': PKM.HOPPIP,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'chikorita',
+            'name': PKM.CHIKORITA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 4,
             'y': 2
           }
@@ -43,22 +45,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'horsea',
+            'name': PKM.HORSEA,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'squirtle',
+            'name': PKM.SQUIRTLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'piplup',
+            'name': PKM.PIPLUP,
             'x': 5,
             'y': 3
           }
@@ -69,22 +71,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'horsea',
+            'name': PKM.HORSEA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'squirtle',
+            'name': PKM.SQUIRTLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           }
@@ -95,27 +97,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'horsea',
+            'name': PKM.HORSEA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'squirtle',
+            'name': PKM.SQUIRTLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'totodile',
+            'name': PKM.TOTODILE,
             'x': 3,
             'y': 3
           }
@@ -126,27 +128,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
+            'name': PKM.SEADRA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'totodile',
+            'name': PKM.TOTODILE,
             'x': 3,
             'y': 3
           }
@@ -157,27 +159,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
+            'name': PKM.SEADRA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'poliwag',
+            'name': PKM.POLIWAG,
             'x': 5,
             'y': 1
           }
@@ -188,32 +190,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwag',
+            'name': PKM.POLIWAG,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           }
@@ -224,32 +226,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           }
@@ -260,37 +262,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           }
@@ -301,42 +303,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'prinplup',
+            'name': PKM.PRINPLUP,
             'x': 3,
             'y': 2
           }
@@ -347,47 +349,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'prinplup',
+            'name': PKM.PRINPLUP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'spheal',
+            'name': PKM.SPHEAL,
             'x': 0,
             'y': 2
           }
@@ -398,47 +400,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'prinplup',
+            'name': PKM.PRINPLUP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -449,47 +451,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'prinplup',
+            'name': PKM.PRINPLUP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -500,47 +502,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'prinplup',
+            'name': PKM.PRINPLUP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -551,47 +553,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'empoleon',
+            'name': PKM.EMPOLEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -602,47 +604,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'feraligatr',
+            'name': PKM.FERALIGATR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'empoleon',
+            'name': PKM.EMPOLEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -653,47 +655,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'swampert',
+            'name': PKM.SWAMPERT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'feraligatr',
+            'name': PKM.FERALIGATR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'empoleon',
+            'name': PKM.EMPOLEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -704,47 +706,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'swampert',
+            'name': PKM.SWAMPERT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'feraligatr',
+            'name': PKM.FERALIGATR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'empoleon',
+            'name': PKM.EMPOLEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -755,47 +757,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'swampert',
+            'name': PKM.SWAMPERT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'politoed',
+            'name': PKM.POLITOED,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'feraligatr',
+            'name': PKM.FERALIGATR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'empoleon',
+            'name': PKM.EMPOLEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -809,12 +811,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'igglybuff',
+            'name': PKM.IGGLYBUFF,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'igglybuff',
+            'name': PKM.IGGLYBUFF,
             'x': 4,
             'y': 3
           }
@@ -825,17 +827,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'igglybuff',
+            'name': PKM.IGGLYBUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'azurill',
+            'name': PKM.AZURILL,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'cleffa',
+            'name': PKM.CLEFFA,
             'x': 4,
             'y': 2
           }
@@ -846,22 +848,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'cyndaquil',
+            'name': PKM.CYNDAQUIL,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'charmander',
+            'name': PKM.CHARMANDER,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 5,
             'y': 3
           }
@@ -872,22 +874,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'cyndaquil',
+            'name': PKM.CYNDAQUIL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           }
@@ -898,27 +900,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'cyndaquil',
+            'name': PKM.CYNDAQUIL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 2,
             'y': 3
           }
@@ -929,27 +931,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 2,
             'y': 3
           }
@@ -960,27 +962,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 2,
             'y': 3
           }
@@ -991,32 +993,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machop',
+            'name': PKM.MACHOP,
             'x': 4,
             'y': 3
           }
@@ -1027,32 +1029,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'monferno',
+            'name': PKM.MONFERNO,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machop',
+            'name': PKM.MACHOP,
             'x': 4,
             'y': 3
           }
@@ -1063,37 +1065,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'monferno',
+            'name': PKM.MONFERNO,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machop',
+            'name': PKM.MACHOP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magby',
+            'name': PKM.MAGBY,
             'x': 1,
             'y': 1
           }
@@ -1104,37 +1106,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': PKM.MACHOKE,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magby',
+            'name': PKM.MAGBY,
             'x': 1,
             'y': 1
           }
@@ -1145,42 +1147,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': PKM.MACHOKE,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'numel',
+            'name': PKM.NUMEL,
             'x': 5,
             'y': 3
           }
@@ -1191,47 +1193,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': PKM.MACHOKE,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'numel',
+            'name': PKM.NUMEL,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'riolu',
+            'name': PKM.RIOLU,
             'x': 2,
             'y': 1
           }
@@ -1242,47 +1244,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': PKM.MACHOKE,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'numel',
+            'name': PKM.NUMEL,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'riolu',
+            'name': PKM.RIOLU,
             'x': 2,
             'y': 1
           }
@@ -1293,47 +1295,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': PKM.MACHOKE,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'riolu',
+            'name': PKM.RIOLU,
             'x': 2,
             'y': 1
           }
@@ -1344,47 +1346,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': PKM.MACHOKE,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 1
           }
@@ -1395,47 +1397,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': PKM.MACHOKE,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 1
           }
@@ -1446,47 +1448,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machamp',
+            'name': PKM.MACHAMP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 1
           }
@@ -1497,47 +1499,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machamp',
+            'name': PKM.MACHAMP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmortar',
+            'name': PKM.MAGMORTAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 1
           }
@@ -1548,47 +1550,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machamp',
+            'name': PKM.MACHAMP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmortar',
+            'name': PKM.MAGMORTAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'megacamerupt',
+            'name': PKM.MEGACAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 1
           }
@@ -1602,12 +1604,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'geodude',
+            'name': PKM.GEODUDE,
             'x': 4,
             'y': 3
           }
@@ -1618,17 +1620,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'geodude',
+            'name': PKM.GEODUDE,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'weedle',
+            'name': PKM.WEEDLE,
             'x': 4,
             'y': 2
           }
@@ -1639,22 +1641,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'weedle',
+            'name': PKM.WEEDLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'nidoranF',
+            'name': PKM.NIDORANF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'nidoranM',
+            'name': PKM.NIDORANM,
             'x': 5,
             'y': 3
           }
@@ -1665,22 +1667,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'weedle',
+            'name': PKM.WEEDLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'nidoranF',
+            'name': PKM.NIDORANF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'nidoranM',
+            'name': PKM.NIDORANM,
             'x': 3,
             'y': 3
           }
@@ -1691,27 +1693,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'weedle',
+            'name': PKM.WEEDLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'nidoranF',
+            'name': PKM.NIDORANF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'nidoranM',
+            'name': PKM.NIDORANM,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bulbasaur',
+            'name': PKM.BULBASAUR,
             'x': 2,
             'y': 3
           }
@@ -1722,27 +1724,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'weedle',
+            'name': PKM.WEEDLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'nidoranF',
+            'name': PKM.NIDORANF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'nidoranM',
+            'name': PKM.NIDORANM,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 2,
             'y': 3
           }
@@ -1753,27 +1755,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'weedle',
+            'name': PKM.WEEDLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 2,
             'y': 3
           }
@@ -1784,32 +1786,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'weedle',
+            'name': PKM.WEEDLE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'gastly',
+            'name': PKM.GASTLY,
             'x': 4,
             'y': 3
           }
@@ -1820,32 +1822,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'kakuna',
+            'name': PKM.KAKUNA,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'gastly',
+            'name': PKM.GASTLY,
             'x': 4,
             'y': 3
           }
@@ -1856,37 +1858,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'kakuna',
+            'name': PKM.KAKUNA,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'gastly',
+            'name': PKM.GASTLY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'duskull',
+            'name': PKM.DUSKULL,
             'x': 1,
             'y': 1
           }
@@ -1897,37 +1899,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'kakuna',
+            'name': PKM.KAKUNA,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'gastly',
+            'name': PKM.GASTLY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'dusclops',
+            'name': PKM.DUSCLOPS,
             'x': 1,
             'y': 1
           }
@@ -1938,37 +1940,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'kakuna',
+            'name': PKM.KAKUNA,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'haunter',
+            'name': PKM.HAUNTER,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'dusclops',
+            'name': PKM.DUSCLOPS,
             'x': 1,
             'y': 1
           }
@@ -1979,42 +1981,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'kakuna',
+            'name': PKM.KAKUNA,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'haunter',
+            'name': PKM.HAUNTER,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'dusclops',
+            'name': PKM.DUSCLOPS,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'ralts',
+            'name': PKM.RALTS,
             'x': 3,
             'y': 1
           }
@@ -2025,42 +2027,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'kakuna',
+            'name': PKM.KAKUNA,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'haunter',
+            'name': PKM.HAUNTER,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'dusclops',
+            'name': PKM.DUSCLOPS,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'kirlia',
+            'name': PKM.KIRLIA,
             'x': 3,
             'y': 1
           }
@@ -2071,42 +2073,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'haunter',
+            'name': PKM.HAUNTER,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'dusclops',
+            'name': PKM.DUSCLOPS,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'gardevoir',
+            'name': PKM.GARDEVOIR,
             'x': 3,
             'y': 1
           }
@@ -2117,42 +2119,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'venusaur',
+            'name': PKM.VENUSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'haunter',
+            'name': PKM.HAUNTER,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'dusclops',
+            'name': PKM.DUSCLOPS,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'gardevoir',
+            'name': PKM.GARDEVOIR,
             'x': 3,
             'y': 1
           }
@@ -2163,42 +2165,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'venusaur',
+            'name': PKM.VENUSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'haunter',
+            'name': PKM.HAUNTER,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'dusclops',
+            'name': PKM.DUSCLOPS,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'gardevoir',
+            'name': PKM.GARDEVOIR,
             'x': 3,
             'y': 1
           }
@@ -2209,47 +2211,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'venusaur',
+            'name': PKM.VENUSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'haunter',
+            'name': PKM.HAUNTER,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'dusclops',
+            'name': PKM.DUSCLOPS,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'gardevoir',
+            'name': PKM.GARDEVOIR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 5,
             'y': 3
           }
@@ -2260,47 +2262,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'venusaur',
+            'name': PKM.VENUSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'haunter',
+            'name': PKM.HAUNTER,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'dusclops',
+            'name': PKM.DUSCLOPS,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'gardevoir',
+            'name': PKM.GARDEVOIR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 5,
             'y': 3
           }
@@ -2311,47 +2313,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'venusaur',
+            'name': PKM.VENUSAUR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'gengar',
+            'name': PKM.GENGAR,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'dusclops',
+            'name': PKM.DUSCLOPS,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'gardevoir',
+            'name': PKM.GARDEVOIR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'meganium',
+            'name': PKM.MEGANIUM,
             'x': 5,
             'y': 3
           }
@@ -2365,12 +2367,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'geodude',
+            'name': PKM.GEODUDE,
             'x': 4,
             'y': 3
           }
@@ -2381,17 +2383,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'geodude',
+            'name': PKM.GEODUDE,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'turtwig',
+            'name': PKM.TURTWIG,
             'x': 4,
             'y': 2
           }
@@ -2402,22 +2404,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'geodude',
+            'name': PKM.GEODUDE,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'turtwig',
+            'name': PKM.TURTWIG,
             'x': 5,
             'y': 3
           }
@@ -2428,22 +2430,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'turtwig',
+            'name': PKM.TURTWIG,
             'x': 5,
             'y': 3
           }
@@ -2454,27 +2456,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'turtwig',
+            'name': PKM.TURTWIG,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 1,
             'y': 3
           }
@@ -2485,27 +2487,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 1,
             'y': 3
           }
@@ -2516,27 +2518,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 1,
             'y': 3
           }
@@ -2547,27 +2549,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 1,
             'y': 3
           }
@@ -2578,32 +2580,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'trapinch',
+            'name': PKM.TRAPINCH,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gible',
+            'name': PKM.GIBLE,
             'x': 6,
             'y': 3
           }
@@ -2614,37 +2616,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'trapinch',
+            'name': PKM.TRAPINCH,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gible',
+            'name': PKM.GIBLE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 0,
             'y': 3
           }
@@ -2655,37 +2657,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gible',
+            'name': PKM.GIBLE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 0,
             'y': 3
           }
@@ -2696,37 +2698,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gible',
+            'name': PKM.GIBLE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           }
@@ -2737,37 +2739,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           }
@@ -2778,42 +2780,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'larvitar',
+            'name': PKM.LARVITAR,
             'x': 7,
             'y': 3
           }
@@ -2824,42 +2826,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 7,
             'y': 3
           }
@@ -2870,42 +2872,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'golem',
+            'name': PKM.GOLEM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 7,
             'y': 3
           }
@@ -2916,42 +2918,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'swampert',
+            'name': PKM.SWAMPERT,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'golem',
+            'name': PKM.GOLEM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torterra',
+            'name': PKM.TORTERRA,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 7,
             'y': 3
           }
@@ -2962,47 +2964,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'swampert',
+            'name': PKM.SWAMPERT,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'golem',
+            'name': PKM.GOLEM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torterra',
+            'name': PKM.TORTERRA,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 7,
             'y': 3
           },
           {
-            'name': 'onix',
+            'name': PKM.ONIX,
             'x': 7,
             'y': 2
           }
@@ -3013,47 +3015,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'swampert',
+            'name': PKM.SWAMPERT,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'golem',
+            'name': PKM.GOLEM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torterra',
+            'name': PKM.TORTERRA,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 7,
             'y': 3
           },
           {
-            'name': 'steelix',
+            'name': PKM.STEELIX,
             'x': 7,
             'y': 2
           }
@@ -3064,47 +3066,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'swampert',
+            'name': PKM.SWAMPERT,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'golem',
+            'name': PKM.GOLEM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torterra',
+            'name': PKM.TORTERRA,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 7,
             'y': 3
           },
           {
-            'name': 'mega-steelix',
+            'name': PKM.MEGASTEELIX,
             'x': 7,
             'y': 2
           }
@@ -3118,12 +3120,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'igglybuff',
+            'name': PKM.IGGLYBUFF,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'cleffa',
+            'name': PKM.CLEFFA,
             'x': 4,
             'y': 3
           }
@@ -3134,17 +3136,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'cleffa',
+            'name': PKM.CLEFFA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'azurill',
+            'name': PKM.AZURILL,
             'x': 4,
             'y': 2
           }
@@ -3155,22 +3157,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'cleffa',
+            'name': PKM.CLEFFA,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'eevee',
+            'name': PKM.EEVEE,
             'x': 5,
             'y': 3
           }
@@ -3181,22 +3183,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 3,
             'y': 2
           }
@@ -3207,27 +3209,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 3,
             'y': 3
           }
@@ -3238,32 +3240,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'togepi',
+            'name': PKM.TOGEPI,
             'x': 3,
             'y': 1
           }
@@ -3274,32 +3276,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'togetic',
+            'name': PKM.TOGETIC,
             'x': 3,
             'y': 1
           }
@@ -3310,37 +3312,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'togetic',
+            'name': PKM.TOGETIC,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'slakoth',
+            'name': PKM.SLAKOTH,
             'x': 4,
             'y': 1
           }
@@ -3351,37 +3353,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togetic',
+            'name': PKM.TOGETIC,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slakoth',
+            'name': PKM.SLAKOTH,
             'x': 3,
             'y': 3
           }
@@ -3392,37 +3394,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togetic',
+            'name': PKM.TOGETIC,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'vigoroth',
+            'name': PKM.VIGOROTH,
             'x': 3,
             'y': 3
           }
@@ -3433,37 +3435,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'vigoroth',
+            'name': PKM.VIGOROTH,
             'x': 3,
             'y': 3
           }
@@ -3474,42 +3476,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 2,
             'y': 2
           }
@@ -3520,47 +3522,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'elekid',
+            'name': PKM.ELEKID,
             'x': 1,
             'y': 2
           }
@@ -3571,47 +3573,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           }
@@ -3622,47 +3624,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           }
@@ -3673,47 +3675,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           }
@@ -3724,108 +3726,52 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'munchlax',
-            'x': 1,
-            'y': 1
-          }
-        ]
-      },
-      {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': 'clefairy',
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': 'wigglytuff',
-            'x': 4,
-            'y': 2
-          },
-          {
-            'name': 'sylveon',
-            'x': 4,
-            'y': 3
-          },
-          {
-            'name': 'azumarill',
-            'x': 3,
-            'y': 2
-          },
-          {
-            'name': 'raichu',
-            'x': 3,
-            'y': 1
-          },
-          {
-            'name': 'togekiss',
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': 'slaking',
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': 'luxray',
-            'x': 2,
-            'y': 2
-          },
-          {
-            'name': 'electabuzz',
-            'x': 1,
-            'y': 2
-          },
-          {
-            'name': 'snorlax',
+            'name': PKM.MUNCHLAX,
             'x': 1,
             'y': 1
           }
@@ -3836,52 +3782,52 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'snorlax',
+            'name': PKM.SNORLAX,
             'x': 1,
             'y': 1
           }
@@ -3892,52 +3838,108 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'azumarill',
+            'name': PKM.AZUMARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'snorlax',
+            'name': PKM.SNORLAX,
+            'x': 1,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.CLEFAIRY,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.WIGGLYTUFF,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.SYLVEON,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.AZUMARILL,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.RAICHU,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.TOGEKISS,
+            'x': 2,
+            'y': 1
+          },
+          {
+            'name': PKM.SLAKING,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.LUXRAY,
+            'x': 2,
+            'y': 2
+          },
+          {
+            'name': PKM.ELECTABUZZ,
+            'x': 1,
+            'y': 2
+          },
+          {
+            'name': PKM.SNORLAX,
             'x': 1,
             'y': 1
           }
@@ -3951,12 +3953,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'hoppip',
+            'name': PKM.HOPPIP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 3
           }
@@ -3967,17 +3969,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'hoppip',
+            'name': PKM.HOPPIP,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 4,
             'y': 2
           }
@@ -3988,22 +3990,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'bulbasaur',
+            'name': PKM.BULBASAUR,
             'x': 5,
             'y': 1
           }
@@ -4014,22 +4016,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'bulbasaur',
+            'name': PKM.BULBASAUR,
             'x': 5,
             'y': 1
           }
@@ -4040,27 +4042,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'bulbasaur',
+            'name': PKM.BULBASAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'treecko',
+            'name': PKM.TREECKO,
             'x': 3,
             'y': 3
           }
@@ -4071,27 +4073,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'treecko',
+            'name': PKM.TREECKO,
             'x': 3,
             'y': 3
           }
@@ -4102,27 +4104,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           }
@@ -4133,32 +4135,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chikorita',
+            'name': PKM.CHIKORITA,
             'x': 1,
             'y': 1
           }
@@ -4169,32 +4171,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           }
@@ -4205,37 +4207,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           }
@@ -4246,42 +4248,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'turtwig',
+            'name': PKM.TURTWIG,
             'x': 3,
             'y': 2
           }
@@ -4292,42 +4294,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           }
@@ -4338,47 +4340,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'lotad',
+            'name': PKM.LOTAD,
             'x': 0,
             'y': 2
           }
@@ -4389,47 +4391,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 0,
             'y': 2
           }
@@ -4440,47 +4442,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 0,
             'y': 2
           }
@@ -4491,47 +4493,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'shiftry',
+            'name': PKM.SHIFTRY,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 0,
             'y': 2
           }
@@ -4542,47 +4544,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'shiftry',
+            'name': PKM.SHIFTRY,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 0,
             'y': 2
           }
@@ -4593,47 +4595,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'shiftry',
+            'name': PKM.SHIFTRY,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'venusaur',
+            'name': PKM.VENUSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 0,
             'y': 2
           }
@@ -4644,47 +4646,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'shiftry',
+            'name': PKM.SHIFTRY,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'venusaur',
+            'name': PKM.VENUSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'meganium',
+            'name': PKM.MEGANIUM,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 0,
             'y': 2
           }
@@ -4695,47 +4697,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'shiftry',
+            'name': PKM.SHIFTRY,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'venusaur',
+            'name': PKM.VENUSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'meganium',
+            'name': PKM.MEGANIUM,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'torterra',
+            'name': PKM.TORTERRA,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 0,
             'y': 2
           }
@@ -4749,12 +4751,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 3
           }
@@ -4765,17 +4767,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 4,
             'y': 2
           }
@@ -4786,22 +4788,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 5,
             'y': 1
           }
@@ -4812,22 +4814,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 5,
             'y': 1
           }
@@ -4838,27 +4840,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'shinx',
+            'name': PKM.SHINX,
             'x': 3,
             'y': 3
           }
@@ -4869,27 +4871,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'shinx',
+            'name': PKM.SHINX,
             'x': 3,
             'y': 3
           }
@@ -4900,27 +4902,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'shinx',
+            'name': PKM.SHINX,
             'x': 3,
             'y': 3
           }
@@ -4931,32 +4933,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'shinx',
+            'name': PKM.SHINX,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'elekid',
+            'name': PKM.ELEKID,
             'x': 1,
             'y': 1
           }
@@ -4967,32 +4969,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magneton',
+            'name': PKM.MAGNETON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'shinx',
+            'name': PKM.SHINX,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'elekid',
+            'name': PKM.ELEKID,
             'x': 1,
             'y': 1
           }
@@ -5003,37 +5005,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magneton',
+            'name': PKM.MAGNETON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'shinx',
+            'name': PKM.SHINX,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'elekid',
+            'name': PKM.ELEKID,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'riolu',
+            'name': PKM.RIOLU,
             'x': 2,
             'y': 3
           }
@@ -5044,37 +5046,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magneton',
+            'name': PKM.MAGNETON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'elekid',
+            'name': PKM.ELEKID,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'riolu',
+            'name': PKM.RIOLU,
             'x': 2,
             'y': 3
           }
@@ -5085,37 +5087,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnezone',
+            'name': PKM.MAGNEZONE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'riolu',
+            'name': PKM.RIOLU,
             'x': 2,
             'y': 3
           }
@@ -5126,42 +5128,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnezone',
+            'name': PKM.MAGNEZONE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'riolu',
+            'name': PKM.RIOLU,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 2
           }
@@ -5172,42 +5174,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnezone',
+            'name': PKM.MAGNEZONE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 2
           }
@@ -5218,47 +5220,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnezone',
+            'name': PKM.MAGNEZONE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'scizor',
+            'name': PKM.SCIZOR,
             'x': 3,
             'y': 2
           }
@@ -5269,47 +5271,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'ampharos',
+            'name': PKM.AMPHAROS,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnezone',
+            'name': PKM.MAGNEZONE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'scizor',
+            'name': PKM.SCIZOR,
             'x': 3,
             'y': 2
           }
@@ -5320,47 +5322,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'ampharos',
+            'name': PKM.AMPHAROS,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnezone',
+            'name': PKM.MAGNEZONE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'scizor',
+            'name': PKM.SCIZOR,
             'x': 3,
             'y': 2
           }
@@ -5371,47 +5373,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'ampharos',
+            'name': PKM.AMPHAROS,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnezone',
+            'name': PKM.MAGNEZONE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'electivire',
+            'name': PKM.ELECTIVIRE,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'scizor',
+            'name': PKM.SCIZOR,
             'x': 3,
             'y': 2
           }
@@ -5422,47 +5424,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'ampharos',
+            'name': PKM.AMPHAROS,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnezone',
+            'name': PKM.MAGNEZONE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'electivire',
+            'name': PKM.ELECTIVIRE,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'scizor',
+            'name': PKM.SCIZOR,
             'x': 3,
             'y': 2
           }
@@ -5473,47 +5475,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'ampharos',
+            'name': PKM.AMPHAROS,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'magnezone',
+            'name': PKM.MAGNEZONE,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'electivire',
+            'name': PKM.ELECTIVIRE,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'scizor',
+            'name': PKM.SCIZOR,
             'x': 3,
             'y': 2
           }
@@ -5527,12 +5529,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 3
           }
@@ -5543,17 +5545,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charmander',
+            'name': PKM.CHARMANDER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'treecko',
+            'name': PKM.TREECKO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'squirtle',
+            'name': PKM.SQUIRTLE,
             'x': 2,
             'y': 2
           }
@@ -5564,22 +5566,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charmander',
+            'name': PKM.CHARMANDER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'treecko',
+            'name': PKM.TREECKO,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 1,
             'y': 3
           }
@@ -5590,22 +5592,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 1,
             'y': 3
           }
@@ -5616,27 +5618,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'squirtle',
+            'name': PKM.SQUIRTLE,
             'x': 0,
             'y': 3
           }
@@ -5647,27 +5649,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 0,
             'y': 3
           }
@@ -5678,27 +5680,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 0,
             'y': 3
           }
@@ -5709,32 +5711,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'larvitar',
+            'name': PKM.LARVITAR,
             'x': 5,
             'y': 3
           }
@@ -5745,32 +5747,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 5,
             'y': 3
           }
@@ -5781,37 +5783,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 0,
             'y': 3
           }
@@ -5822,37 +5824,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 0,
             'y': 3
           }
@@ -5863,37 +5865,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 0,
             'y': 3
           }
@@ -5904,42 +5906,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'gible',
+            'name': PKM.GIBLE,
             'x': 6,
             'y': 2
           }
@@ -5950,42 +5952,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 2
           }
@@ -5996,42 +5998,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 2
           }
@@ -6042,47 +6044,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 2
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 5,
             'y': 2
           }
@@ -6093,47 +6095,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 2
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 5,
             'y': 2
           }
@@ -6144,47 +6146,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 2
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 5,
             'y': 2
           }
@@ -6195,47 +6197,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 6,
             'y': 2
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 5,
             'y': 2
           }
@@ -6246,47 +6248,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aggron',
+            'name': PKM.AGGRON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 6,
             'y': 2
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 5,
             'y': 2
           }
@@ -6300,12 +6302,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'eevee',
+            'name': PKM.EEVEE,
             'x': 4,
             'y': 3
           }
@@ -6316,17 +6318,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'eevee',
+            'name': PKM.EEVEE,
             'x': 4,
             'y': 2
           }
@@ -6337,22 +6339,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoranF',
+            'name': PKM.NIDORANF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoranM',
+            'name': PKM.NIDORANM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'eevee',
+            'name': PKM.EEVEE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           }
@@ -6363,22 +6365,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoranF',
+            'name': PKM.NIDORANF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoranM',
+            'name': PKM.NIDORANM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           }
@@ -6389,27 +6391,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoranF',
+            'name': PKM.NIDORANF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoranM',
+            'name': PKM.NIDORANM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           }
@@ -6420,27 +6422,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoranF',
+            'name': PKM.NIDORANF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           }
@@ -6451,27 +6453,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           }
@@ -6482,32 +6484,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 1,
             'y': 1
           }
@@ -6518,37 +6520,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidorino',
+            'name': PKM.NIDORINO,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'numel',
+            'name': PKM.NUMEL,
             'x': 2,
             'y': 3
           }
@@ -6559,37 +6561,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidorina',
+            'name': PKM.NIDORINA,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'numel',
+            'name': PKM.NUMEL,
             'x': 2,
             'y': 3
           }
@@ -6600,37 +6602,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 2,
             'y': 3
           }
@@ -6641,42 +6643,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -6687,42 +6689,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'walrein',
+            'name': PKM.WALREIN,
             'x': 0,
             'y': 2
           }
@@ -6733,42 +6735,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'walrein',
+            'name': PKM.WALREIN,
             'x': 0,
             'y': 2
           }
@@ -6779,47 +6781,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'walrein',
+            'name': PKM.WALREIN,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 3,
             'y': 2
           }
@@ -6830,47 +6832,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'walrein',
+            'name': PKM.WALREIN,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 3,
             'y': 2
           }
@@ -6881,47 +6883,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'mega-camerupt',
+            'name': PKM.MEGACAMERUPT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'walrein',
+            'name': PKM.WALREIN,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 3,
             'y': 2
           }
@@ -6932,52 +6934,52 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'mega-camerupt',
+            'name': PKM.MEGACAMERUPT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'walrein',
+            'name': PKM.WALREIN,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 2,
             'y': 2
           }
@@ -6988,52 +6990,52 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'mega-camerupt',
+            'name': PKM.MEGACAMERUPT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'walrein',
+            'name': PKM.WALREIN,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ampharos',
+            'name': PKM.AMPHAROS,
             'x': 2,
             'y': 2
           }
@@ -7044,52 +7046,52 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'nidoking',
+            'name': PKM.NIDOKING,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nidoqueen',
+            'name': PKM.NIDOQUEEN,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'umbreon',
+            'name': PKM.UMBREON,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'espeon',
+            'name': PKM.ESPEON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'mega-camerupt',
+            'name': PKM.MEGACAMERUPT,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'walrein',
+            'name': PKM.WALREIN,
             'x': 0,
             'y': 2
           },
           {
-            'name': 'jolteon',
+            'name': PKM.JOLTEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ampharos',
+            'name': PKM.AMPHAROS,
             'x': 2,
             'y': 2
           }
@@ -7104,12 +7106,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'weedle',
+            'name': PKM.WEEDLE,
             'x': 4,
             'y': 3
           }
@@ -7120,17 +7122,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'weedle',
+            'name': PKM.WEEDLE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 2
           }
@@ -7141,22 +7143,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'kakuna',
+            'name': PKM.KAKUNA,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'nidoranM',
+            'name': PKM.NIDORANM,
             'x': 5,
             'y': 3
           }
@@ -7167,22 +7169,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'trapinch',
+            'name': PKM.TRAPINCH,
             'x': 3,
             'y': 2
           }
@@ -7193,27 +7195,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'trapinch',
+            'name': PKM.TRAPINCH,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 3,
             'y': 3
           }
@@ -7224,32 +7226,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'horsea',
+            'name': PKM.HORSEA,
             'x': 3,
             'y': 1
           }
@@ -7260,32 +7262,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'seadra',
+            'name': PKM.SEADRA,
             'x': 3,
             'y': 1
           }
@@ -7296,37 +7298,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'bagon',
+            'name': PKM.BAGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'seadra',
+            'name': PKM.SEADRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dratini',
+            'name': PKM.DRATINI,
             'x': 0,
             'y': 3
           }
@@ -7337,37 +7339,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'seadra',
+            'name': PKM.SEADRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dratini',
+            'name': PKM.DRATINI,
             'x': 0,
             'y': 3
           }
@@ -7378,37 +7380,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'gible',
+            'name': PKM.GIBLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           }
@@ -7419,37 +7421,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           }
@@ -7460,42 +7462,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'larvitar',
+            'name': PKM.LARVITAR,
             'x': 1,
             'y': 1
           }
@@ -7506,42 +7508,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 1,
             'y': 1
           }
@@ -7552,42 +7554,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           }
@@ -7598,42 +7600,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           }
@@ -7644,47 +7646,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'onix',
+            'name': PKM.ONIX,
             'x': 2,
             'y': 2
           }
@@ -7695,47 +7697,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonite',
+            'name': PKM.DRAGONITE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'onix',
+            'name': PKM.ONIX,
             'x': 2,
             'y': 2
           }
@@ -7746,47 +7748,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonite',
+            'name': PKM.DRAGONITE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'steelix',
+            'name': PKM.STEELIX,
             'x': 2,
             'y': 2
           }
@@ -7797,47 +7799,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonite',
+            'name': PKM.DRAGONITE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'steelix',
+            'name': PKM.STEELIX,
             'x': 2,
             'y': 2
           }
@@ -7848,47 +7850,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonite',
+            'name': PKM.DRAGONITE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'steelix',
+            'name': PKM.STEELIX,
             'x': 2,
             'y': 2
           }
@@ -7902,12 +7904,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 3,
             'y': 2
           }
@@ -7918,17 +7920,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'charmander',
+            'name': PKM.CHARMANDER,
             'x': 5,
             'y': 3
           }
@@ -7939,17 +7941,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'cyndaquil',
+            'name': PKM.CYNDAQUIL,
             'x': 4,
             'y': 2
           }
@@ -7960,17 +7962,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 4,
             'y': 2
           }
@@ -7981,22 +7983,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'charmander',
+            'name': PKM.CHARMANDER,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'machop',
+            'name': PKM.MACHOP,
             'x': 2,
             'y': 3
           }
@@ -8007,22 +8009,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'monferno',
+            'name': PKM.MONFERNO,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'cyndaquil',
+            'name': PKM.CYNDAQUIL,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 3,
             'y': 2
           }
@@ -8033,22 +8035,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 3,
             'y': 2
           }
@@ -8059,27 +8061,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'machop',
+            'name': PKM.MACHOP,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 3,
             'y': 2
           }
@@ -8090,27 +8092,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'monferno',
+            'name': PKM.MONFERNO,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'cyndaquil',
+            'name': PKM.CYNDAQUIL,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'charmander',
+            'name': PKM.CHARMANDER,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 3,
             'y': 2
           }
@@ -8121,27 +8123,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'monferno',
+            'name': PKM.MONFERNO,
             'x': 4,
             'y': 3
           },
 		  {
-            'name': 'machop',
+            'name': PKM.MACHOP,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 3,
             'y': 2
           }
@@ -8152,32 +8154,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'machoke',
+            'name': PKM.MACHOKE,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 3,
             'y': 2
           },
 		  {
-            'name': 'abra',
+            'name': PKM.ABRA,
             'x': 4,
             'y': 1
           }
@@ -8188,37 +8190,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'monferno',
+            'name': PKM.MONFERNO,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'cyndaquil',
+            'name': PKM.CYNDAQUIL,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'charmander',
+            'name': PKM.CHARMANDER,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 3,
             'y': 2
           },
 		  {
-            'name': 'elekid',
+            'name': PKM.ELEKID,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'magby',
+            'name': PKM.MAGBY,
             'x': 5,
             'y': 2
           }
@@ -8229,37 +8231,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'monferno',
+            'name': PKM.MONFERNO,
             'x': 4,
             'y': 3
           },
 		  {
-            'name': 'machop',
+            'name': PKM.MACHOP,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'shinx',
+            'name': PKM.SHINX,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 3,
             'y': 2
           },
 		  {
-            'name': 'magby',
+            'name': PKM.MAGBY,
             'x': 5,
             'y': 2
           }
@@ -8270,42 +8272,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'machoke',
+            'name': PKM.MACHOKE,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 3,
             'y': 2
           },
 		  {
-            'name': 'kadabra',
+            'name': PKM.KADABRA,
             'x': 4,
             'y': 1
           },
 		  {
-            'name': 'magby',
+            'name': PKM.MAGBY,
             'x': 5,
             'y': 2
           },
 		  {
-            'name': 'riolu',
+            'name': PKM.RIOLU,
             'x': 4,
             'y': 2
           }
@@ -8316,324 +8318,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'monferno',
+            'name': PKM.MONFERNO,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'cyndaquil',
+            'name': PKM.CYNDAQUIL,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'charmander',
+            'name': PKM.CHARMANDER,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 3,
             'y': 2
           },
 		  {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'magby',
+            'name': PKM.MAGBY,
             'x': 5,
             'y': 2
           },
 		  {
-            'name': 'abra',
-            'x': 4,
-            'y': 1
-          }
-        ]
-      },
-	  {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': 'torchic',
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': 'Infernape',
-            'x': 4,
-            'y': 3
-          },
-		  {
-            'name': 'machop',
-            'x': 2,
-            'y': 3
-          },
-		  {
-            'name': 'shinx',
-            'x': 5,
-            'y': 3
-          },
-          {
-            'name': 'flaffy',
-            'x': 4,
-            'y': 2
-          },
-		  {
-            'name': 'magnemite',
-            'x': 3,
-            'y': 2
-          },
-		  {
-            'name': 'magmar',
-            'x': 5,
-            'y': 2
-          },
-		  {
-            'name': 'meditite',
-            'x': 3,
-            'y': 1
-          }
-        ]
-      },
-	  {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': 'blaziken',
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': 'chimchar',
-            'x': 4,
-            'y': 3
-          },
-          {
-            'name': 'charmeleon',
-            'x': 5,
-            'y': 3
-          },
-		  {
-            'name': 'machoke',
-            'x': 2,
-            'y': 3
-          },
-		  {
-            'name': 'magneton',
-            'x': 3,
-            'y': 2
-          },
-		  {
-            'name': 'kadabra',
-            'x': 4,
-            'y': 1
-          },
-		  {
-            'name': 'magby',
-            'x': 5,
-            'y': 2
-          },
-		  {
-            'name': 'lucario',
-            'x': 4,
-            'y': 2
-          }
-        ]
-      },
-	  {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': 'combusken',
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': 'monferno',
-            'x': 4,
-            'y': 3
-          },
-          {
-            'name': 'quilava',
-            'x': 4,
-            'y': 2
-          },
-		  {
-            'name': 'charmander',
-            'x': 5,
-            'y': 3
-          },
-		  {
-            'name': 'pikachu',
-            'x': 3,
-            'y': 2
-          },
-		  {
-            'name': 'electabuzz',
-            'x': 2,
-            'y': 3
-          },
-		  {
-            'name': 'magby',
-            'x': 5,
-            'y': 2
-          },
-		  {
-            'name': 'kadabra',
-            'x': 4,
-            'y': 1
-          }
-		  ,
-		  {
-            'name': 'slakoth',
-            'x': 1,
-            'y': 3
-          }
-        ]
-      },
-	  {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': 'combusken',
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': 'infernape',
-            'x': 4,
-            'y': 3
-          },
-		  {
-            'name': 'machoke',
-            'x': 2,
-            'y': 3
-          },
-		  {
-            'name': 'luxio',
-            'x': 5,
-            'y': 3
-          },
-          {
-            'name': 'flaffy',
-            'x': 4,
-            'y': 2
-          },
-		  {
-            'name': 'magnemite',
-            'x': 3,
-            'y': 2
-          },
-		  {
-            'name': 'magmar',
-            'x': 5,
-            'y': 2
-          },
-		  {
-            'name': 'medicham',
-            'x': 1,
-            'y': 3
-          }
-        ]
-      },
-	  {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': 'blaziken',
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': 'monferno',
-            'x': 4,
-            'y': 3
-          },
-          {
-            'name': 'charmeleon',
-            'x': 5,
-            'y': 3
-          },
-		  {
-            'name': 'machamp',
-            'x': 2,
-            'y': 3
-          },
-		  {
-            'name': 'magneton',
-            'x': 3,
-            'y': 2
-          },
-		  {
-            'name': 'alakazam',
-            'x': 4,
-            'y': 1
-          },
-		  {
-            'name': 'magmar',
-            'x': 5,
-            'y': 2
-          },
-		  {
-            'name': 'lucario',
-            'x': 4,
-            'y': 2
-          }
-        ]
-      },
-	  {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': 'blaziken',
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': 'infernape',
-            'x': 4,
-            'y': 3
-          },
-          {
-            'name': 'quilava',
-            'x': 4,
-            'y': 2
-          },
-		  {
-            'name': 'charmander',
-            'x': 5,
-            'y': 3
-          },
-		  {
-            'name': 'pikachu',
-            'x': 3,
-            'y': 2
-          },
-		  {
-            'name': 'electivire',
-            'x': 2,
-            'y': 3
-          },
-		  {
-            'name': 'magmar',
-            'x': 5,
-            'y': 2
-          },
-		  {
-            'name': 'kadabra',
+            'name': PKM.ABRA,
             'x': 4,
             'y': 1
           }
@@ -8644,44 +8364,44 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'blaziken',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 4,
             'y': 3
           },
 		  {
-            'name': 'machoke',
+            'name': PKM.MACHOP,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'luxio',
+            'name': PKM.SHINX,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 3,
             'y': 2
           },
 		  {
-            'name': 'magmortar',
+            'name': PKM.MAGMAR,
             'x': 5,
             'y': 2
           },
 		  {
-            'name': 'medicham',
-            'x': 1,
-            'y': 3
+            'name': PKM.MEDITITE,
+            'x': 3,
+            'y': 1
           }
         ]
       },
@@ -8690,49 +8410,44 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'monferno',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'machamp',
+            'name': PKM.MACHOKE,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'magneton',
+            'name': PKM.MAGNETON,
             'x': 3,
             'y': 2
           },
 		  {
-            'name': 'alakazam',
+            'name': PKM.KADABRA,
             'x': 4,
             'y': 1
           },
 		  {
-            'name': 'magmar',
+            'name': PKM.MAGBY,
             'x': 5,
             'y': 2
           },
 		  {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 4,
             'y': 2
-          },
-		  {
-            'name': 'electivire',
-            'x': 1,
-            'y': 3
           }
         ]
       },
@@ -8741,48 +8456,48 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'blaziken',
+            'name': PKM.COMBUSKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.MONFERNO,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'charmander',
+            'name': PKM.CHARMANDER,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 3,
             'y': 2
           },
 		  {
-            'name': 'electivire',
+            'name': PKM.ELECTABUZZ,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'magmar',
+            'name': PKM.MAGBY,
             'x': 5,
             'y': 2
           },
 		  {
-            'name': 'kadabra',
+            'name': PKM.KADABRA,
             'x': 4,
             'y': 1
           }
 		  ,
 		  {
-            'name': 'slakoth',
+            'name': PKM.SLAKOTH,
             'x': 1,
             'y': 3
           }
@@ -8793,48 +8508,335 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'blaziken',
+            'name': PKM.COMBUSKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 4,
             'y': 3
           },
 		  {
-            'name': 'machoke',
+            'name': PKM.MACHOKE,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'flaffy',
+            'name': PKM.FLAFFY,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'magnemite',
+            'name': PKM.MAGNEMITE,
             'x': 3,
             'y': 2
           },
 		  {
-            'name': 'magmortar',
+            'name': PKM.MAGMAR,
             'x': 5,
             'y': 2
           },
 		  {
-            'name': 'medicham',
+            'name': PKM.MEDICHAM,
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.BLAZIKEN,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.MONFERNO,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.CHARMELEON,
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': PKM.MACHAMP,
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': PKM.MAGNETON,
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': PKM.ALAKAZAM,
+            'x': 4,
+            'y': 1
+          },
+		  {
+            'name': PKM.MAGMAR,
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': PKM.LUCARIO,
+            'x': 4,
+            'y': 2
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.BLAZIKEN,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.INFERNAPE,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.QUILAVA,
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': PKM.CHARMANDER,
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': PKM.PIKACHU,
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': PKM.ELECTIVIRE,
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': PKM.MAGMAR,
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': PKM.KADABRA,
+            'x': 4,
+            'y': 1
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.BLAZIKEN,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.INFERNAPE,
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': PKM.MACHOKE,
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': PKM.LUXIO,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.FLAFFY,
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': PKM.MAGNEMITE,
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': PKM.MAGMORTAR,
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': PKM.MEDICHAM,
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.BLAZIKEN,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.MONFERNO,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.CHARMELEON,
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': PKM.MACHAMP,
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': PKM.MAGNETON,
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': PKM.ALAKAZAM,
+            'x': 4,
+            'y': 1
+          },
+		  {
+            'name': PKM.MAGMAR,
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': PKM.LUCARIO,
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': PKM.ELECTIVIRE,
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.BLAZIKEN,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.INFERNAPE,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.QUILAVA,
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': PKM.CHARMANDER,
+            'x': 5,
+            'y': 3
+          },
+		  {
+            'name': PKM.PIKACHU,
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': PKM.ELECTIVIRE,
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': PKM.MAGMAR,
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': PKM.KADABRA,
+            'x': 4,
+            'y': 1
+          }
+		  ,
+		  {
+            'name': PKM.SLAKOTH,
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+	  {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.BLAZIKEN,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.INFERNAPE,
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': PKM.MACHOKE,
+            'x': 2,
+            'y': 3
+          },
+		  {
+            'name': PKM.LUXIO,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.FLAFFY,
+            'x': 4,
+            'y': 2
+          },
+		  {
+            'name': PKM.MAGNEMITE,
+            'x': 3,
+            'y': 2
+          },
+		  {
+            'name': PKM.MAGMORTAR,
+            'x': 5,
+            'y': 2
+          },
+		  {
+            'name': PKM.MEDICHAM,
             'x': 1,
             'y': 3
           }
 		  ,
 		  {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 1,
             'y': 3
           }
@@ -8845,47 +8847,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 4,
             'y': 3
           },
 		  {
-            'name': 'machamp',
+            'name': PKM.MACHAMP,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'alakazam',
+            'name': PKM.ALAKAZAM,
             'x': 4,
             'y': 1
           },
 		  {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 5,
             'y': 2
           },
 		  {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'electivire',
+            'name': PKM.ELECTIVIRE,
             'x': 1,
             'y': 3
           },
 		  {
-            'name': 'medicham',
+            'name': PKM.MEDICHAM,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'beldum',
+            'name': PKM.BELDUM,
             'x': 6,
             'y': 3
           }
@@ -8896,47 +8898,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 4,
             'y': 3
           },
 		  {
-            'name': 'machamp',
+            'name': PKM.MACHAMP,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'alakazam',
+            'name': PKM.ALAKAZAM,
             'x': 4,
             'y': 1
           },
 		  {
-            'name': 'magmortar',
+            'name': PKM.MAGMORTAR,
             'x': 5,
             'y': 2
           },
 		  {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'electivire',
+            'name': PKM.ELECTIVIRE,
             'x': 1,
             'y': 3
           },
 		  {
-            'name': 'medicham',
+            'name': PKM.MEDICHAM,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'metang',
+            'name': PKM.METANG,
             'x': 6,
             'y': 3
           }
@@ -8947,47 +8949,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 4,
             'y': 3
           },
 		  {
-            'name': 'machamp',
+            'name': PKM.MACHAMP,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'alakazam',
+            'name': PKM.ALAKAZAM,
             'x': 4,
             'y': 1
           },
 		  {
-            'name': 'magmortar',
+            'name': PKM.MAGMORTAR,
             'x': 5,
             'y': 2
           },
 		  {
-            'name': 'megaLucario',
+            'name': PKM.MEGALUCARIO,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'electivire',
+            'name': PKM.ELECTIVIRE,
             'x': 1,
             'y': 3
           },
 		  {
-            'name': 'medicham',
+            'name': PKM.MEDICHAM,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'metang',
+            'name': PKM.METANG,
             'x': 6,
             'y': 3
           }
@@ -8998,47 +9000,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 4,
             'y': 3
           },
 		  {
-            'name': 'machamp',
+            'name': PKM.MACHAMP,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'alakazam',
+            'name': PKM.ALAKAZAM,
             'x': 4,
             'y': 1
           },
 		  {
-            'name': 'magmortar',
+            'name': PKM.MAGMORTAR,
             'x': 5,
             'y': 2
           },
 		  {
-            'name': 'megaLucario',
+            'name': PKM.MEGALUCARIO,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'electivire',
+            'name': PKM.ELECTIVIRE,
             'x': 1,
             'y': 3
           },
 		  {
-            'name': 'megaMedicham',
+            'name': PKM.MEGAMEDICHAM,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'metang',
+            'name': PKM.METANG,
             'x': 6,
             'y': 3
           }
@@ -9049,47 +9051,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 4,
             'y': 3
           },
 		  {
-            'name': 'machamp',
+            'name': PKM.MACHAMP,
             'x': 2,
             'y': 3
           },
 		  {
-            'name': 'alakazam',
+            'name': PKM.ALAKAZAM,
             'x': 4,
             'y': 1
           },
 		  {
-            'name': 'magmortar',
+            'name': PKM.MAGMORTAR,
             'x': 5,
             'y': 2
           },
 		  {
-            'name': 'megaLucario',
+            'name': PKM.MEGALUCARIO,
             'x': 4,
             'y': 2
           },
 		  {
-            'name': 'electivire',
+            'name': PKM.ELECTIVIRE,
             'x': 1,
             'y': 3
           },
 		  {
-            'name': 'megaMedicham',
+            'name': PKM.MEGAMEDICHAM,
             'x': 5,
             'y': 3
           },
 		  {
-            'name': 'metagross',
+            'name': PKM.METAGROSS,
             'x': 6,
             'y': 3
           }
@@ -9103,12 +9105,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 3
           }
@@ -9119,17 +9121,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 2
           }
@@ -9140,22 +9142,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'kakuna',
+            'name': PKM.KAKUNA,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 5,
             'y': 3
           }
@@ -9166,22 +9168,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'kakuna',
+            'name': PKM.KAKUNA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 3,
             'y': 2
           }
@@ -9192,27 +9194,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'kakuna',
+            'name': PKM.KAKUNA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'golbat',
+            'name': PKM.GOLBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'duskull',
+            'name': PKM.DUSKULL,
             'x': 3,
             'y': 3
           }
@@ -9223,32 +9225,32 @@ const SCENARIOS =
         'board':
         [
             {
-              'name': 'kakuna',
+              'name': PKM.KAKUNA,
               'x': 4,
               'y': 1
             },
             {
-              'name': 'metapod',
+              'name': PKM.METAPOD,
               'x': 4,
               'y': 2
             },
             {
-              'name': 'golbat',
+              'name': PKM.GOLBAT,
               'x': 4,
               'y': 3
             },
             {
-              'name': 'nuzleaf',
+              'name': PKM.NUZLEAF,
               'x': 3,
               'y': 2
             },
             {
-              'name': 'duskull',
+              'name': PKM.DUSKULL,
               'x': 3,
               'y': 3
             },
             {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
             }
@@ -9259,32 +9261,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'larvitar',
+            'name': PKM.LARVITAR,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'duskull',
+            'name': PKM.DUSKULL,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'spiritomb',
+            'name': PKM.SPIRITOMB,
             'x': 3,
             'y': 1
           }
@@ -9295,37 +9297,37 @@ const SCENARIOS =
         'board':
         [
         {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 4,
             'y': 1
             },
             {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 4,
             'y': 2
             },
             {
-            'name': 'crobat',
+            'name': PKM.CROBAT,
             'x': 4,
             'y': 3
             },
             {
-            'name': 'shiftry',
+            'name': PKM.SHIFTRY,
             'x': 3,
             'y': 2
             },
             {
-            'name': 'dusclops',
+            'name': PKM.DUSCLOPS,
             'x': 3,
             'y': 3
             },
             {
-            'name': 'spiritomb',
+            'name': PKM.SPIRITOMB,
             'x': 3,
             'y': 1
             },
           {
-            'name': 'gastly',
+            'name': PKM.GASTLY,
             'x': 0,
             'y': 3
           }
@@ -9336,37 +9338,37 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'beedrill',
+                'name': PKM.BEEDRILL,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'pupitar',
+                'name': PKM.PUPITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'crobat',
+                'name': PKM.CROBAT,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'shiftry',
+                'name': PKM.SHIFTRY,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusclops',
+                'name': PKM.DUSCLOPS,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'haunter',
+                'name': PKM.HAUNTER,
                 'x': 0,
                 'y': 3
             }
@@ -9377,37 +9379,37 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'beedrill',
+                'name': PKM.BEEDRILL,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'pupitar',
+                'name': PKM.PUPITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'crobat',
+                'name': PKM.CROBAT,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'shiftry',
+                'name': PKM.SHIFTRY,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusknoir',
+                'name': PKM.DUSKNOIR,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'haunter',
+                'name': PKM.HAUNTER,
                 'x': 0,
                 'y': 3
             }
@@ -9418,42 +9420,42 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'beedrill',
+                'name': PKM.BEEDRILL,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'pupitar',
+                'name': PKM.PUPITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'crobat',
+                'name': PKM.CROBAT,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'shiftry',
+                'name': PKM.SHIFTRY,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusknoir',
+                'name': PKM.DUSKNOIR,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'haunter',
+                'name': PKM.HAUNTER,
                 'x': 0,
                 'y': 3
                 },
                 {
-                'name': 'aron',
+                'name': PKM.ARON,
                 'x': 1,
                 'y': 1
                 }
@@ -9465,42 +9467,42 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'beedrill',
+                'name': PKM.BEEDRILL,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'pupitar',
+                'name': PKM.PUPITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'crobat',
+                'name': PKM.CROBAT,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'shiftry',
+                'name': PKM.SHIFTRY,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusknoir',
+                'name': PKM.DUSKNOIR,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'haunter',
+                'name': PKM.HAUNTER,
                 'x': 0,
                 'y': 3
                 },
                 {
-                'name': 'lairon',
+                'name': PKM.LAIRON,
                 'x': 1,
                 'y': 1
                 }
@@ -9512,42 +9514,42 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'beedrill',
+                'name': PKM.BEEDRILL,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'pupitar',
+                'name': PKM.PUPITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'crobat',
+                'name': PKM.CROBAT,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'shiftry',
+                'name': PKM.SHIFTRY,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusknoir',
+                'name': PKM.DUSKNOIR,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'gengar',
+                'name': PKM.GENGAR,
                 'x': 0,
                 'y': 3
                 },
                 {
-                'name': 'lairon',
+                'name': PKM.LAIRON,
                 'x': 1,
                 'y': 1
                 }
@@ -9558,42 +9560,42 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'beedrill',
+                'name': PKM.BEEDRILL,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'tyranitar',
+                'name': PKM.TYRANITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'crobat',
+                'name': PKM.CROBAT,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'shiftry',
+                'name': PKM.SHIFTRY,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusknoir',
+                'name': PKM.DUSKNOIR,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'gengar',
+                'name': PKM.GENGAR,
                 'x': 0,
                 'y': 3
                 },
                 {
-                'name': 'lairon',
+                'name': PKM.LAIRON,
                 'x': 1,
                 'y': 1
                 }
@@ -9604,42 +9606,42 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'darkrai',
+                'name': PKM.DARKRAI,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'tyranitar',
+                'name': PKM.TYRANITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'crobat',
+                'name': PKM.CROBAT,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'shiftry',
+                'name': PKM.SHIFTRY,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusknoir',
+                'name': PKM.DUSKNOIR,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'gengar',
+                'name': PKM.GENGAR,
                 'x': 0,
                 'y': 3
                 },
                 {
-                'name': 'lairon',
+                'name': PKM.LAIRON,
                 'x': 1,
                 'y': 1
                 }
@@ -9650,47 +9652,47 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'darkrai',
+                'name': PKM.DARKRAI,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'tyranitar',
+                'name': PKM.TYRANITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'crobat',
+                'name': PKM.CROBAT,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'shiftry',
+                'name': PKM.SHIFTRY,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusknoir',
+                'name': PKM.DUSKNOIR,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'gengar',
+                'name': PKM.GENGAR,
                 'x': 0,
                 'y': 3
                 },
                 {
-                'name': 'lairon',
+                'name': PKM.LAIRON,
                 'x': 1,
                 'y': 1
                 },
                 {
-                'name': 'metang',
+                'name': PKM.METANG,
                 'x': 2,
                 'y': 2
                 }
@@ -9701,47 +9703,47 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'darkrai',
+                'name': PKM.DARKRAI,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'tyranitar',
+                'name': PKM.TYRANITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'kirlia',
+                'name': PKM.KIRLIA,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'shiftry',
+                'name': PKM.SHIFTRY,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusknoir',
+                'name': PKM.DUSKNOIR,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'gengar',
+                'name': PKM.GENGAR,
                 'x': 0,
                 'y': 3
                 },
                 {
-                'name': 'lairon',
+                'name': PKM.LAIRON,
                 'x': 1,
                 'y': 1
                 },
                 {
-                'name': 'metang',
+                'name': PKM.METANG,
                 'x': 2,
                 'y': 2
                 }
@@ -9752,47 +9754,47 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'darkrai',
+                'name': PKM.DARKRAI,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'tyranitar',
+                'name': PKM.TYRANITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'kirlia',
+                'name': PKM.KIRLIA,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'shiftry',
+                'name': PKM.SHIFTRY,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusknoir',
+                'name': PKM.DUSKNOIR,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'gengar',
+                'name': PKM.GENGAR,
                 'x': 0,
                 'y': 3
                 },
                 {
-                'name': 'aggron',
+                'name': PKM.AGGRON,
                 'x': 1,
                 'y': 1
                 },
                 {
-                'name': 'metang',
+                'name': PKM.METANG,
                 'x': 2,
                 'y': 2
                 }
@@ -9803,47 +9805,47 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'darkrai',
+                'name': PKM.DARKRAI,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'tyranitar',
+                'name': PKM.TYRANITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'gardevoir',
+                'name': PKM.GARDEVOIR,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'steelix',
+                'name': PKM.STEELIX,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusknoir',
+                'name': PKM.DUSKNOIR,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'gengar',
+                'name': PKM.GENGAR,
                 'x': 0,
                 'y': 3
                 },
                 {
-                'name': 'aggron',
+                'name': PKM.AGGRON,
                 'x': 1,
                 'y': 1
                 },
                 {
-                'name': 'metagross',
+                'name': PKM.METAGROSS,
                 'x': 2,
                 'y': 2
                 }
@@ -9854,47 +9856,47 @@ const SCENARIOS =
         'board':
         [
             {
-                'name': 'darkrai',
+                'name': PKM.DARKRAI,
                 'x': 4,
                 'y': 1
                 },
                 {
-                'name': 'tyranitar',
+                'name': PKM.TYRANITAR,
                 'x': 4,
                 'y': 2
                 },
                 {
-                'name': 'gardevoir',
+                'name': PKM.GARDEVOIR,
                 'x': 4,
                 'y': 3
                 },
                 {
-                'name': 'mega-steelix',
+                'name': PKM.MEGASTEELIX,
                 'x': 3,
                 'y': 2
                 },
                 {
-                'name': 'dusknoir',
+                'name': PKM.DUSKNOIR,
                 'x': 3,
                 'y': 3
                 },
                 {
-                'name': 'spiritomb',
+                'name': PKM.SPIRITOMB,
                 'x': 3,
                 'y': 1
                 },
                 {
-                'name': 'gengar',
+                'name': PKM.GENGAR,
                 'x': 0,
                 'y': 3
                 },
                 {
-                'name': 'aggron',
+                'name': PKM.AGGRON,
                 'x': 1,
                 'y': 1
                 },
                 {
-                'name': 'metagross',
+                'name': PKM.METAGROSS,
                 'x': 2,
                 'y': 2
                 }
@@ -9908,12 +9910,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'hoppip',
+            'name': PKM.HOPPIP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 3
           }
@@ -9924,17 +9926,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'hoppip',
+            'name': PKM.HOPPIP,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 4,
             'y': 2
           }
@@ -9945,22 +9947,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'seedot',
+            'name': PKM.SEEDOT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'bulbasaur',
+            'name': PKM.BULBASAUR,
             'x': 5,
             'y': 1
           }
@@ -9971,22 +9973,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'bulbasaur',
+            'name': PKM.BULBASAUR,
             'x': 5,
             'y': 1
           }
@@ -9997,27 +9999,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'nuzleaf',
+            'name': PKM.NUZLEAF,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'bulbasaur',
+            'name': PKM.BULBASAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'treecko',
+            'name': PKM.TREECKO,
             'x': 3,
             'y': 3
           }
@@ -10028,27 +10030,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'treecko',
+            'name': PKM.TREECKO,
             'x': 3,
             'y': 3
           }
@@ -10059,27 +10061,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           }
@@ -10090,32 +10092,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chikorita',
+            'name': PKM.CHIKORITA,
             'x': 1,
             'y': 1
           }
@@ -10126,32 +10128,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           }
@@ -10162,37 +10164,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           }
@@ -10203,42 +10205,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'turtwig',
+            'name': PKM.TURTWIG,
             'x': 3,
             'y': 2
           }
@@ -10249,42 +10251,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           }
@@ -10295,47 +10297,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'bayleef',
+            'name': PKM.BAYLEEF,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'lotad',
+            'name': PKM.LOTAD,
             'x': 0,
             'y': 2
           }
@@ -10346,47 +10348,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'skiploom',
+            'name': PKM.SKIPLOOM,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'celebi',
+            'name': PKM.CELEBI,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 0,
             'y': 2
           }
@@ -10397,47 +10399,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'celebi',
+            'name': PKM.CELEBI,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 0,
             'y': 2
           }
@@ -10448,47 +10450,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'celebi',
+            'name': PKM.CELEBI,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 0,
             'y': 2
           }
@@ -10499,47 +10501,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'ivysaur',
+            'name': PKM.IVYSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'celebi',
+            'name': PKM.CELEBI,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 0,
             'y': 2
           }
@@ -10550,47 +10552,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'venusaur',
+            'name': PKM.VENUSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'grovyle',
+            'name': PKM.GROVYLE,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'celebi',
+            'name': PKM.CELEBI,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 0,
             'y': 2
           }
@@ -10601,47 +10603,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'venusaur',
+            'name': PKM.VENUSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'celebi',
+            'name': PKM.CELEBI,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 0,
             'y': 2
           }
@@ -10652,47 +10654,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'jumpluff',
+            'name': PKM.JUMPLUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'mesprit',
+            'name': PKM.MESPRIT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'venusaur',
+            'name': PKM.VENUSAUR,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'celebi',
+            'name': PKM.CELEBI,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'sceptile',
+            'name': PKM.SCEPTILE,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'leafeon',
+            'name': PKM.LEAFEON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'torterra',
+            'name': PKM.TORTERRA,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 0,
             'y': 2
           }
@@ -10706,12 +10708,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'geodude',
+            'name': PKM.GEODUDE,
             'x': 4,
             'y': 3
           }
@@ -10722,17 +10724,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'mareep',
+            'name': PKM.MAREEP,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'geodude',
+            'name': PKM.GEODUDE,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'turtwig',
+            'name': PKM.TURTWIG,
             'x': 4,
             'y': 2
           }
@@ -10743,22 +10745,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'geodude',
+            'name': PKM.GEODUDE,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'turtwig',
+            'name': PKM.TURTWIG,
             'x': 5,
             'y': 3
           }
@@ -10769,22 +10771,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'turtwig',
+            'name': PKM.TURTWIG,
             'x': 5,
             'y': 3
           }
@@ -10795,27 +10797,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'turtwig',
+            'name': PKM.TURTWIG,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 1,
             'y': 3
           }
@@ -10826,27 +10828,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 1,
             'y': 3
           }
@@ -10857,27 +10859,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 1,
             'y': 3
           }
@@ -10888,27 +10890,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 1,
             'y': 3
           }
@@ -10919,32 +10921,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'trapinch',
+            'name': PKM.TRAPINCH,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gible',
+            'name': PKM.GIBLE,
             'x': 6,
             'y': 3
           }
@@ -10955,37 +10957,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'trapinch',
+            'name': PKM.TRAPINCH,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gible',
+            'name': PKM.GIBLE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 0,
             'y': 3
           }
@@ -10996,37 +10998,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gible',
+            'name': PKM.GIBLE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'aron',
+            'name': PKM.ARON,
             'x': 0,
             'y': 3
           }
@@ -11037,37 +11039,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gible',
+            'name': PKM.GIBLE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           }
@@ -11078,37 +11080,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           }
@@ -11119,42 +11121,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'larvitar',
+            'name': PKM.LARVITAR,
             'x': 7,
             'y': 3
           }
@@ -11165,42 +11167,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'graveler',
+            'name': PKM.GRAVELER,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 7,
             'y': 3
           }
@@ -11211,42 +11213,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'golem',
+            'name': PKM.GOLEM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'grotle',
+            'name': PKM.GROTLE,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'groudon',
+            'name': PKM.GROUDON,
             'x': 7,
             'y': 3
           }
@@ -11257,42 +11259,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'golem',
+            'name': PKM.GOLEM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torterra',
+            'name': PKM.TORTERRA,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'groudon',
+            'name': PKM.GROUDON,
             'x': 7,
             'y': 3
           }
@@ -11303,47 +11305,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'golem',
+            'name': PKM.GOLEM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torterra',
+            'name': PKM.TORTERRA,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'groudon',
+            'name': PKM.GROUDON,
             'x': 7,
             'y': 3
           },
           {
-            'name': 'onix',
+            'name': PKM.ONIX,
             'x': 7,
             'y': 2
           }
@@ -11354,47 +11356,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'golem',
+            'name': PKM.GOLEM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torterra',
+            'name': PKM.TORTERRA,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'groudon',
+            'name': PKM.GROUDON,
             'x': 7,
             'y': 3
           },
           {
-            'name': 'steelix',
+            'name': PKM.STEELIX,
             'x': 7,
             'y': 2
           }
@@ -11405,47 +11407,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'regirock',
+            'name': PKM.REGIROCK,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'golem',
+            'name': PKM.GOLEM,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torterra',
+            'name': PKM.TORTERRA,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 6,
             'y': 3
           },
           {
-            'name': 'lairon',
+            'name': PKM.LAIRON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'groudon',
+            'name': PKM.GROUDON,
             'x': 7,
             'y': 3
           },
           {
-            'name': 'mega-steelix',
+            'name': PKM.MEGASTEELIX,
             'x': 7,
             'y': 2
           }
@@ -11459,12 +11461,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'hoppip',
+            'name': PKM.HOPPIP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'hoppip',
+            'name': PKM.HOPPIP,
             'x': 4,
             'y': 3
           }
@@ -11475,17 +11477,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'hoppip',
+            'name': PKM.HOPPIP,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'chikorita',
+            'name': PKM.CHIKORITA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 4,
             'y': 2
           }
@@ -11496,22 +11498,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'horsea',
+            'name': PKM.HORSEA,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'squirtle',
+            'name': PKM.SQUIRTLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'piplup',
+            'name': PKM.PIPLUP,
             'x': 5,
             'y': 3
           }
@@ -11522,22 +11524,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'horsea',
+            'name': PKM.HORSEA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'squirtle',
+            'name': PKM.SQUIRTLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'mudkip',
+            'name': PKM.MUDKIP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           }
@@ -11548,27 +11550,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'horsea',
+            'name': PKM.HORSEA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'squirtle',
+            'name': PKM.SQUIRTLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'marshtomp',
+            'name': PKM.MARSHTOMP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'totodile',
+            'name': PKM.TOTODILE,
             'x': 3,
             'y': 3
           }
@@ -11579,27 +11581,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
+            'name': PKM.SEADRA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'totodile',
+            'name': PKM.TOTODILE,
             'x': 3,
             'y': 3
           }
@@ -11610,27 +11612,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
+            'name': PKM.SEADRA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'poliwag',
+            'name': PKM.POLIWAG,
             'x': 5,
             'y': 1
           }
@@ -11641,32 +11643,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwag',
+            'name': PKM.POLIWAG,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           }
@@ -11677,32 +11679,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           }
@@ -11713,37 +11715,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.KYOGRE,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           }
@@ -11754,42 +11756,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.KYOGRE,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'prinplup',
+            'name': PKM.PRINPLUP,
             'x': 3,
             'y': 2
           }
@@ -11800,47 +11802,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.KYOGRE,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'prinplup',
+            'name': PKM.PRINPLUP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'spheal',
+            'name': PKM.SPHEAL,
             'x': 0,
             'y': 2
           }
@@ -11851,47 +11853,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'wartortle',
+            'name': PKM.WARTORTLE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.KYOGRE,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'prinplup',
+            'name': PKM.PRINPLUP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -11902,47 +11904,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'kyogre',
+            'name': PKM.KYOGRE,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'prinplup',
+            'name': PKM.PRINPLUP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -11953,47 +11955,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'kyogre',
+            'name': PKM.KYOGRE,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'prinplup',
+            'name': PKM.PRINPLUP,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -12004,47 +12006,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'kyogre',
+            'name': PKM.KYOGRE,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'croconaw',
+            'name': PKM.CROCONAW,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'empoleon',
+            'name': PKM.EMPOLEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -12055,47 +12057,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'kyogre',
+            'name': PKM.KYOGRE,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'feraligatr',
+            'name': PKM.FERALIGATR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'empoleon',
+            'name': PKM.EMPOLEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -12106,47 +12108,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'kyogre',
+            'name': PKM.KYOGRE,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'feraligatr',
+            'name': PKM.FERALIGATR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'lombre',
+            'name': PKM.LOMBRE,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'empoleon',
+            'name': PKM.EMPOLEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -12157,47 +12159,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'kyogre',
+            'name': PKM.KYOGRE,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'poliwhirl',
+            'name': PKM.POLIWHIRL,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'feraligatr',
+            'name': PKM.FERALIGATR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'empoleon',
+            'name': PKM.EMPOLEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -12208,47 +12210,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'seadra',
-            'x': 0,
+            'name': PKM.SEADRA,
+            'x': 4,
             'y': 1
           },
           {
-            'name': 'blastoise',
+            'name': PKM.BLASTOISE,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'lapras',
+            'name': PKM.LAPRAS,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'kyogre',
+            'name': PKM.KYOGRE,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'politoed',
+            'name': PKM.POLITOED,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'feraligatr',
+            'name': PKM.FERALIGATR,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'ludicolo',
+            'name': PKM.LUDICOLO,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'empoleon',
+            'name': PKM.EMPOLEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'sealeo',
+            'name': PKM.SEALEO,
             'x': 0,
             'y': 2
           }
@@ -12262,12 +12264,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'igglybuff',
+            'name': PKM.IGGLYBUFF,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'cleffa',
+            'name': PKM.CLEFFA,
             'x': 4,
             'y': 3
           }
@@ -12278,17 +12280,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'cleffa',
+            'name': PKM.CLEFFA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'azurill',
+            'name': PKM.AZURILL,
             'x': 4,
             'y': 2
           }
@@ -12299,22 +12301,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'cleffa',
+            'name': PKM.CLEFFA,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'eevee',
+            'name': PKM.EEVEE,
             'x': 5,
             'y': 3
           }
@@ -12325,22 +12327,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 3,
             'y': 2
           }
@@ -12351,27 +12353,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 3,
             'y': 3
           }
@@ -12382,32 +12384,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'marill',
+            'name': PKM.MARILL,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'togepi',
+            'name': PKM.TOGEPI,
             'x': 3,
             'y': 1
           }
@@ -12418,32 +12420,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'togetic',
+            'name': PKM.TOGETIC,
             'x': 3,
             'y': 1
           }
@@ -12454,37 +12456,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pichu',
+            'name': PKM.PICHU,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'togetic',
+            'name': PKM.TOGETIC,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'slakoth',
+            'name': PKM.SLAKOTH,
             'x': 4,
             'y': 1
           }
@@ -12495,37 +12497,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'jigglypuff',
+            'name': PKM.JIGGLYPUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togetic',
+            'name': PKM.TOGETIC,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slakoth',
+            'name': PKM.SLAKOTH,
             'x': 3,
             'y': 3
           }
@@ -12536,37 +12538,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'pikachu',
+            'name': PKM.PIKACHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togetic',
+            'name': PKM.TOGETIC,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'vigoroth',
+            'name': PKM.VIGOROTH,
             'x': 3,
             'y': 3
           }
@@ -12577,37 +12579,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'vigoroth',
+            'name': PKM.VIGOROTH,
             'x': 3,
             'y': 3
           }
@@ -12618,42 +12620,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxio',
+            'name': PKM.LUXIO,
             'x': 2,
             'y': 2
           }
@@ -12664,47 +12666,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'elekid',
+            'name': PKM.ELEKID,
             'x': 1,
             'y': 2
           }
@@ -12715,47 +12717,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           }
@@ -12766,47 +12768,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'raikou',
+            'name': PKM.RAIKOU,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           }
@@ -12817,47 +12819,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'raikou',
+            'name': PKM.RAIKOU,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           }
@@ -12868,108 +12870,52 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'raikou',
-            'x': 1,
-            'y': 1
-          }
-        ]
-      },
-      {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': 'clefairy',
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': 'wigglytuff',
-            'x': 4,
-            'y': 2
-          },
-          {
-            'name': 'sylveon',
-            'x': 4,
-            'y': 3
-          },
-          {
-            'name': 'thundurus',
-            'x': 3,
-            'y': 2
-          },
-          {
-            'name': 'raichu',
-            'x': 3,
-            'y': 1
-          },
-          {
-            'name': 'togekiss',
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': 'slaking',
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': 'luxray',
-            'x': 2,
-            'y': 2
-          },
-          {
-            'name': 'electabuzz',
-            'x': 1,
-            'y': 2
-          },
-          {
-            'name': 'raikou',
+            'name': PKM.RAIKOU,
             'x': 1,
             'y': 1
           }
@@ -12980,52 +12926,52 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'raikou',
+            'name': PKM.RAIKOU,
             'x': 1,
             'y': 1
           }
@@ -13036,52 +12982,108 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'clefairy',
+            'name': PKM.CLEFAIRY,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'wigglytuff',
+            'name': PKM.WIGGLYTUFF,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'sylveon',
+            'name': PKM.SYLVEON,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'thundurus',
+            'name': PKM.THUNDURUS,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'raichu',
+            'name': PKM.RAICHU,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'togekiss',
+            'name': PKM.TOGEKISS,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'slaking',
+            'name': PKM.SLAKING,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'luxray',
+            'name': PKM.LUXRAY,
             'x': 2,
             'y': 2
           },
           {
-            'name': 'electabuzz',
+            'name': PKM.ELECTABUZZ,
             'x': 1,
             'y': 2
           },
           {
-            'name': 'raikou',
+            'name': PKM.RAIKOU,
+            'x': 1,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.CLEFAIRY,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.WIGGLYTUFF,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.SYLVEON,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.THUNDURUS,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.RAICHU,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.TOGEKISS,
+            'x': 2,
+            'y': 1
+          },
+          {
+            'name': PKM.SLAKING,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.LUXRAY,
+            'x': 2,
+            'y': 2
+          },
+          {
+            'name': PKM.ELECTABUZZ,
+            'x': 1,
+            'y': 2
+          },
+          {
+            'name': PKM.RAIKOU,
             'x': 1,
             'y': 1
           }
@@ -13095,12 +13097,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'weedle',
+            'name': PKM.WEEDLE,
             'x': 4,
             'y': 3
           }
@@ -13111,17 +13113,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'weedle',
+            'name': PKM.WEEDLE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'caterpie',
+            'name': PKM.CATERPIE,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 2
           }
@@ -13132,22 +13134,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'metapod',
+            'name': PKM.METAPOD,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'kakuna',
+            'name': PKM.KAKUNA,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'nidoranM',
+            'name': PKM.NIDORANM,
             'x': 5,
             'y': 3
           }
@@ -13158,22 +13160,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'trapinch',
+            'name': PKM.TRAPINCH,
             'x': 3,
             'y': 2
           }
@@ -13184,27 +13186,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'trapinch',
+            'name': PKM.TRAPINCH,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyhorn',
+            'name': PKM.RHYHORN,
             'x': 3,
             'y': 3
           }
@@ -13215,32 +13217,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'zubat',
+            'name': PKM.ZUBAT,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'vibrava',
+            'name': PKM.VIBRAVA,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'horsea',
+            'name': PKM.HORSEA,
             'x': 3,
             'y': 1
           }
@@ -13251,32 +13253,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'beedrill',
+            'name': PKM.BEEDRILL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'seadra',
+            'name': PKM.SEADRA,
             'x': 3,
             'y': 1
           }
@@ -13287,37 +13289,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'bagon',
+            'name': PKM.BAGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'seadra',
+            'name': PKM.SEADRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dratini',
+            'name': PKM.DRATINI,
             'x': 0,
             'y': 3
           }
@@ -13328,37 +13330,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'butterfree',
+            'name': PKM.BUTTERFREE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'seadra',
+            'name': PKM.SEADRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dratini',
+            'name': PKM.DRATINI,
             'x': 0,
             'y': 3
           }
@@ -13369,37 +13371,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'gible',
+            'name': PKM.GIBLE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhydon',
+            'name': PKM.RHYDON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           }
@@ -13410,37 +13412,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RHYPERIOR,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           }
@@ -13451,42 +13453,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'gabite',
+            'name': PKM.GABITE,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RAYQUAZA,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'larvitar',
+            'name': PKM.LARVITAR,
             'x': 1,
             'y': 1
           }
@@ -13497,42 +13499,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RAYQUAZA,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'pupitar',
+            'name': PKM.PUPITAR,
             'x': 1,
             'y': 1
           }
@@ -13543,42 +13545,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'shelgon',
+            'name': PKM.SHELGON,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rhyperior',
+            'name': PKM.RAYQUAZA,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           }
@@ -13589,42 +13591,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rayquaza',
+            'name': PKM.RAYQUAZA,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           }
@@ -13635,47 +13637,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rayquaza',
+            'name': PKM.RAYQUAZA,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonair',
+            'name': PKM.DRAGONAIR,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'onix',
+            'name': PKM.ONIX,
             'x': 2,
             'y': 2
           }
@@ -13686,47 +13688,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rayquaza',
+            'name': PKM.RAYQUAZA,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonite',
+            'name': PKM.DRAGONITE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'onix',
+            'name': PKM.ONIX,
             'x': 2,
             'y': 2
           }
@@ -13737,47 +13739,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rayquaza',
+            'name': PKM.RAYQUAZA,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonite',
+            'name': PKM.DRAGONITE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'steelix',
+            'name': PKM.STEELIX,
             'x': 2,
             'y': 2
           }
@@ -13788,47 +13790,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rayquaza',
+            'name': PKM.RAYQUAZA,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonite',
+            'name': PKM.DRAGONITE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'steelix',
+            'name': PKM.STEELIX,
             'x': 2,
             'y': 2
           }
@@ -13839,47 +13841,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'salamence',
+            'name': PKM.SALAMENCE,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'garchomp',
+            'name': PKM.GARCHOMP,
             'x': 4,
             'y': 2
           },
           {
-            'name': 'latios',
+            'name': PKM.LATIOS,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'flygon',
+            'name': PKM.FLYGON,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'rayquaza',
+            'name': PKM.RAYQUAZA,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'kingdra',
+            'name': PKM.KINGDRA,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'dragonite',
+            'name': PKM.DRAGONITE,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'tyranitar',
+            'name': PKM.TYRANITAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'steelix',
+            'name': PKM.STEELIX,
             'x': 2,
             'y': 2
           }
@@ -13893,12 +13895,12 @@ const SCENARIOS =
         'roundsRequired': 0,
         'board': [
           {
-            'name': 'igglybuff',
+            'name': PKM.IGGLYBUFF,
             'x': 3,
             'y': 2
           },
           {
-            'name': 'igglybuff',
+            'name': PKM.IGGLYBUFF,
             'x': 4,
             'y': 3
           }
@@ -13909,17 +13911,17 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'igglybuff',
+            'name': PKM.IGGLYBUFF,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'azurill',
+            'name': PKM.AZURILL,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'cleffa',
+            'name': PKM.CLEFFA,
             'x': 4,
             'y': 2
           }
@@ -13930,22 +13932,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'cyndaquil',
+            'name': PKM.CYNDAQUIL,
             'x': 5,
             'y': 1
           },
           {
-            'name': 'charmander',
+            'name': PKM.CHARMANDER,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 5,
             'y': 3
           }
@@ -13956,22 +13958,22 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'cyndaquil',
+            'name': PKM.CYNDAQUIL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           }
@@ -13982,27 +13984,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'cyndaquil',
+            'name': PKM.CYNDAQUIL,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 2,
             'y': 3
           }
@@ -14013,27 +14015,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.CHIMCHAR,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'torchic',
+            'name': PKM.TORCHIC,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 2,
             'y': 3
           }
@@ -14044,27 +14046,27 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 4,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'chimchar',
+            'name': PKM.MOLTRES,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 2,
             'y': 3
           }
@@ -14075,32 +14077,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machop',
+            'name': PKM.MACHOP,
             'x': 4,
             'y': 3
           }
@@ -14111,32 +14113,32 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machop',
+            'name': PKM.MACHOP,
             'x': 4,
             'y': 3
           }
@@ -14147,37 +14149,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'combusken',
+            'name': PKM.COMBUSKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machop',
+            'name': PKM.MACHOP,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magby',
+            'name': PKM.MAGBY,
             'x': 1,
             'y': 1
           }
@@ -14188,37 +14190,37 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': PKM.MACHOKE,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magby',
+            'name': PKM.MAGBY,
             'x': 1,
             'y': 1
           }
@@ -14229,42 +14231,42 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 2,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': PKM.ENTEI,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'numel',
+            'name': PKM.NUMEL,
             'x': 5,
             'y': 3
           }
@@ -14275,47 +14277,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charmeleon',
+            'name': PKM.CHARMELEON,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': PKM.ENTEI,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'numel',
+            'name': PKM.NUMEL,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'riolu',
+            'name': PKM.RIOLU,
             'x': 2,
             'y': 1
           }
@@ -14326,47 +14328,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'machoke',
+            'name': PKM.ENTEI,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'numel',
+            'name': PKM.NUMEL,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'riolu',
+            'name': PKM.RIOLU,
             'x': 2,
             'y': 1
           }
@@ -14377,47 +14379,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'infernape',
+            'name': PKM.INFERNAPE,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'entei',
+            'name': PKM.ENTEI,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'riolu',
+            'name': PKM.RIOLU,
             'x': 2,
             'y': 1
           }
@@ -14428,47 +14430,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'quilava',
+            'name': PKM.QUILAVA,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'entei',
+            'name': PKM.ENTEI,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 1
           }
@@ -14479,47 +14481,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'entei',
+            'name': PKM.ENTEI,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 1
           }
@@ -14530,47 +14532,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'entei',
+            'name': PKM.ENTEI,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmar',
+            'name': PKM.MAGMAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 1
           }
@@ -14581,47 +14583,47 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'entei',
+            'name': PKM.ENTEI,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmortar',
+            'name': PKM.MAGMORTAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'camerupt',
+            'name': PKM.CAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 1
           }
@@ -14632,49 +14634,745 @@ const SCENARIOS =
         'board':
         [
           {
-            'name': 'typhlosion',
+            'name': PKM.TYPHLOSION,
             'x': 1,
             'y': 1
           },
           {
-            'name': 'charizard',
+            'name': PKM.CHARIZARD,
             'x': 0,
             'y': 3
           },
           {
-            'name': 'moltres',
+            'name': PKM.MOLTRES,
             'x': 1,
             'y': 3
           },
           {
-            'name': 'blaziken',
+            'name': PKM.BLAZIKEN,
             'x': 2,
             'y': 3
           },
           {
-            'name': 'flareon',
+            'name': PKM.FLAREON,
             'x': 3,
             'y': 3
           },
           {
-            'name': 'entei',
+            'name': PKM.ENTEI,
             'x': 4,
             'y': 3
           },
           {
-            'name': 'magmortar',
+            'name': PKM.MAGMORTAR,
             'x': 3,
             'y': 1
           },
           {
-            'name': 'megacamerupt',
+            'name': PKM.MEGACAMERUPT,
             'x': 5,
             'y': 3
           },
           {
-            'name': 'lucario',
+            'name': PKM.LUCARIO,
             'x': 2,
             'y': 1
+          }
+        ]
+      }
+    ]
+  },
+  'DRAGON3': {
+    'steps': [
+      {
+        'roundsRequired': 0,
+        'board': [
+          {
+            'name': PKM.CATERPIE,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.WEEDLE,
+            'x': 4,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': PKM.WEEDLE,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.CATERPIE,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.GOLBAT,
+            'x': 4,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.METAPOD,
+            'x': 5,
+            'y': 1
+          },
+          {
+            'name': PKM.KAKUNA,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.NUZLEAF,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.LEAFEON,
+            'x': 5,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.BEEDRILL,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.BUTTERFREE,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LEAFEON,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.NUZLEAF,
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.BEEDRILL,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.BUTTERFREE,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LEAFEON,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.VIBRAVA,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.NUZLEAF,
+            'x': 3,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.BEEDRILL,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.BUTTERFREE,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LEAFEON,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.VIBRAVA,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.NUZLEAF,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.HORSEA,
+            'x': 3,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': PKM.BEEDRILL,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.BUTTERFREE,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.SHELGON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.SEADRA,
+            'x': 3,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 4,
+        'board':
+        [
+          {
+            'name': PKM.SHELGON,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.BUTTERFREE,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.LAIRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.SEADRA,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.BELDUM,
+            'x': 0,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': PKM.SHELGON,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.BUTTERFREE,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.LAIRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.KINGDRA,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.METANG,
+            'x': 0,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': PKM.SHELGON,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.BUTTERFREE,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.KINGDRA,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.METANG,
+            'x': 0,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': PKM.SHELGON,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.KYUREM,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.KINGDRA,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.METANG,
+            'x': 0,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 6,
+        'board':
+        [
+          {
+            'name': PKM.SALAMENCE,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.KYUREM,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.KINGDRA,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.METANG,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.ONIX,
+            'x': 1,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': PKM.SALAMENCE,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.KYUREM,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.KINGDRA,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.METAGROSS,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.STEELIX,
+            'x': 1,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 6,
+        'board':
+        [
+          {
+            'name': PKM.SALAMENCE,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.KYUREM,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.PUPITAR,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.METAGROSS,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.STEELIX,
+            'x': 1,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 4,
+        'board':
+        [
+          {
+            'name': PKM.SALAMENCE,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.KYUREM,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.TYRANITAR,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.METAGROSS,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.STEELIX,
+            'x': 1,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': PKM.SALAMENCE,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.KYUREM,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.TYRANITAR,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.METAGROSS,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.STEELIX,
+            'x': 1,
+            'y': 1
+          },
+          {
+            'name': PKM.SCIZOR,
+            'x': 2,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': PKM.SALAMENCE,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.KYUREM,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.TYRANITAR,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.METAGROSS,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.STEELIX,
+            'x': 1,
+            'y': 1
+          },
+          {
+            'name': PKM.MEGASCIZOR,
+            'x': 2,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 4,
+        'board':
+        [
+          {
+            'name': PKM.SALAMENCE,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.KYUREM,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.LATIOS,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.FLYGON,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.TYRANITAR,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.METAGROSS,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MEGASTEELIX,
+            'x': 1,
+            'y': 1
+          },
+          {
+            'name': PKM.MEGASCIZOR,
+            'x': 2,
+            'y': 2
           }
         ]
       }

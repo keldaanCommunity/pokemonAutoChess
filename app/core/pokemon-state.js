@@ -12,52 +12,63 @@ class PokemonState {
   }
 
   handleDamage(pokemon, damage, board, attackType, attacker) {
-    let death = false;
-    if (!pokemon.protect) {
-      let reducedDamage = damage;
-      const armorFactor = 0.1;
-      if (attackType == ATTACK_TYPE.PHYSICAL) {
-        const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * pokemon.def))));
-        reducedDamage = Math.max(0, Math.round(ritodamage));
-      } else if (attackType == ATTACK_TYPE.SPECIAL) {
-        const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * pokemon.speDef))));
-        reducedDamage = Math.max(0, Math.round(ritodamage));
-      } else if (attackType == ATTACK_TYPE.TRUE) {
-        reducedDamage = damage;
-      }
-
-      if (attacker && attacker.burn) {
-        reducedDamage = reducedDamage / 2;
-      }
-
-      if (attacker && attacker.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
-        reducedDamage = pokemon.life + 1;
-      }
-
-      if (attacker && attacker.team == 0) {
-        attacker.damageDone += reducedDamage;
-      }
-
-      pokemon.life = Math.max(0, pokemon.life - reducedDamage);
-      // console.log(`${pokemon.id} took ${damage} and has now ${pokemon.life} life`);
-      if (pokemon.effects.includes(EFFECTS.RAGE)) {
-        pokemon.attack += Math.ceil(pokemon.baseAtk * 0.05);
-      }
-
-
-      if (pokemon) {
-        pokemon.setMana(pokemon.mana + Math.ceil(reducedDamage / 10));
-      }
-
-      if (attacker) {
-        attacker.setMana(attacker.mana + 5);
-      }
-
-      if (!pokemon.life || pokemon.life <= 0) {
-        board.setValue(pokemon.positionX, pokemon.positionY, undefined);
-        death = true;
+    let death;
+    if(pokemon.life == 0){
+      death = true;
+    }
+    else{
+      death = false;
+      if (!pokemon.protect) {
+        let reducedDamage = damage;
+        const armorFactor = 0.1;
+        if (attackType == ATTACK_TYPE.PHYSICAL) {
+          const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * pokemon.def))));
+          reducedDamage = Math.max(0, Math.round(ritodamage));
+        } else if (attackType == ATTACK_TYPE.SPECIAL) {
+          const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * pokemon.speDef))));
+          reducedDamage = Math.max(0, Math.round(ritodamage));
+        } else if (attackType == ATTACK_TYPE.TRUE) {
+          reducedDamage = damage;
+        }
+  
+        if (attacker && attacker.burn) {
+          reducedDamage = reducedDamage / 2;
+        }
+  
+        if (attacker && attacker.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
+          reducedDamage = pokemon.life + 1;
+        }
+  
+        if(!reducedDamage){
+          reducedDamage = 0;
+          console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
+        }
+  
+        if (attacker && attacker.team == 0) {
+          attacker.damageDone += reducedDamage;
+        }
+  
+        pokemon.life = Math.max(0, pokemon.life - reducedDamage);
+        // console.log(`${pokemon.id} took ${damage} and has now ${pokemon.life} life`);
+        if (pokemon.effects.includes(EFFECTS.RAGE)) {
+          pokemon.attack += Math.ceil(pokemon.baseAtk * 0.05);
+        }
+  
+        if (pokemon) {
+          pokemon.setMana(pokemon.mana + Math.ceil(reducedDamage / 10));
+        }
+  
+        if (attacker) {
+          attacker.setMana(attacker.mana + 5);
+        }
+  
+        if (!pokemon.life || pokemon.life <= 0) {
+          board.setValue(pokemon.positionX, pokemon.positionY, undefined);
+          death = true;
+        }
       }
     }
+    
     return death;
   }
 

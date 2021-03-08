@@ -5,6 +5,7 @@ const Mongoose = require('mongoose');
 const Chat = require('../models/chat');
 const User = require('@colyseus/social').User;
 const GameUser = require('../models/game-user');
+const LeaderboardPlayer = require('../models/leaderboard-player');
 
 class CustomLobbyRoom extends colyseus.LobbyRoom {
   constructor() {
@@ -24,6 +25,24 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           messages.forEach((message) => {
             self.state.addMessage(message.name, message.payload, message.avatar, message.time, false);
           });
+        }
+      });
+      User.find({'metadata.level': { $gte: 1 }}, (err, users)=> {
+        if(err){
+          message.reply(`Bzz bzz, ERROR connecting to the database, proceed to self destruction.`);
+        }
+        else{
+          if(users.length == 0){
+            message.reply(`Bzz bzz, No users found with email ${email}.`);
+          }
+          users.sort(function(a, b) {
+            return parseInt(b.metadata.level) - parseInt(a.metadata.level);
+          });
+        }
+
+        for (let i = 0; i < 18; i++) {
+          const user = users[i];
+          self.state.leaderboard.push(new LeaderboardPlayer(user.email.slice(0, user.email.indexOf('@')), user.metadata.avatar, i + 1, user.metadata.level));
         }
       });
     });

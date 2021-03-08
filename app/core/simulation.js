@@ -4,7 +4,7 @@ const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 const PokemonEntity = require('./pokemon-entity');
 const PokemonFactory = require('../models/pokemon-factory');
-const {CLIMATE, EFFECTS, TYPE, ITEMS, ATTACK_TYPE} = require('../models/enum');
+const {CLIMATE, EFFECTS, TYPE, ITEMS, ATTACK_TYPE, PKM} = require('../models/enum');
 const Dps = require('./dps');
 
 class Simulation extends Schema {
@@ -75,7 +75,7 @@ class Simulation extends Schema {
     }
 
     if (blueEffects && blueEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
-      const kyogre = PokemonFactory.createPokemonFromName('kyogre');
+      const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
       const coord = this.getFirstAvailablePlaceOnBoard(true);
       const dps = new Dps(kyogre.id, kyogre.name);
       const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.maxMana, kyogre.atk, kyogre.atkSpeed, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 0, kyogre.attackSprite, kyogre.rarity, kyogre.sheet, kyogre.types, kyogre.items, kyogre.stars, this, kyogre.skill);
@@ -86,7 +86,7 @@ class Simulation extends Schema {
       this.board.setValue(coord[0], coord[1], pokemonEntity);
     }
     if (redEffects && redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
-      const kyogre = PokemonFactory.createPokemonFromName('kyogre');
+      const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
       const coord = this.getFirstAvailablePlaceOnBoard(false);
       const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.maxMana, kyogre.atk, kyogre.atkSpeed, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 1, kyogre.attackSprite, kyogre.rarity, kyogre.sheet, kyogre.types, kyogre.items, kyogre.stars, this, kyogre.skill);
       this.applySpecialCellsEffects(pokemonEntity);

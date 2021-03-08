@@ -1,5 +1,5 @@
 const Command = require('@colyseus/command').Command;
-const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY} = require('../../models/enum');
+const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY, PKM} = require('../../models/enum');
 const Player = require('../../models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
@@ -13,17 +13,21 @@ class OnShopCommand extends Command {
       if (player.shop[index]) {
         const name = player.shop[index];
         const pokemon = PokemonFactory.createPokemonFromName(name);
-        if(pokemon.rarity == RARITY.MYTHICAL){
-          this.state.shop.detachShop(player);
-          this.state.shop.assignShop(player);
-        }
+
         if (player.money >= pokemon.cost && (UtilsCommand.getBoardSize(player.board) < 8 ||
         (UtilsCommand.getPossibleEvolution(player.board, pokemon.name) && UtilsCommand.getBoardSize(player.board) == 8))) {
           player.money -= pokemon.cost;
           pokemon.positionX = this.room.getFirstAvailablePositionInBoard(player.id);
           pokemon.positionY = 0;
           player.board.set(pokemon.id, pokemon);
-          player.shop[index] = '';
+          
+          if(pokemon.rarity == RARITY.MYTHICAL){
+            this.state.shop.detachShop(player);
+            this.state.shop.assignShop(player);
+          }
+          else{
+            player.shop[index] = '';
+          }
           return [new OnEvolutionCommand().setPayload(sessionId), new OnEvolutionCommand().setPayload(sessionId)];
         }
       }
@@ -53,7 +57,7 @@ class OnDragDropCommand extends Command {
           const pokemon = this.state.players.get(client.sessionId).board.get(detail.id);
           const x = parseInt(detail.x);
           const y = parseInt(detail.y);
-          if (pokemon.name == 'ditto') {
+          if (pokemon.name == PKM.DITTO) {
             const pokemonToClone = this.room.getPokemonByPosition(client.sessionId, x, y);
             if (pokemonToClone && pokemonToClone.rarity != RARITY.MYTHICAL) {
               dittoReplaced = true;
@@ -109,11 +113,11 @@ class OnDragDropCommand extends Command {
 
           this.state.players.get(client.sessionId).board.forEach((pokemon, id) => {
             if (pokemon.positionX == x && pokemon.positionY == y && pokemon.items.length < 3) {
-              if (pokemon.name == 'eevee' && item == ITEMS.WATER_STONE) {
+              if (pokemon.name == PKM.EEVEE && item == ITEMS.WATER_STONE) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName('vaporeon');
+                eevolution = PokemonFactory.createPokemonFromName(PKM.VAPOREON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
@@ -123,11 +127,11 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(client.sessionId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (pokemon.name == 'eevee' && item == ITEMS.FIRE_STONE) {
+              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.FIRE_STONE) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName('flareon');
+                eevolution = PokemonFactory.createPokemonFromName(PKM.FLAREON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
@@ -137,11 +141,11 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(client.sessionId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (pokemon.name == 'eevee' && item == ITEMS.THUNDER_STONE) {
+              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.THUNDER_STONE) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName('jolteon');
+                eevolution = PokemonFactory.createPokemonFromName(PKM.JOLTEON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
@@ -151,11 +155,11 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(client.sessionId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (pokemon.name == 'eevee' && item == ITEMS.NIGHT_STONE) {
+              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.NIGHT_STONE) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName('umbreon');
+                eevolution = PokemonFactory.createPokemonFromName(PKM.UMBREON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
@@ -165,11 +169,11 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(client.sessionId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (pokemon.name == 'eevee' && item == ITEMS.MOON_STONE) {
+              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.MOON_STONE) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName('sylveon');
+                eevolution = PokemonFactory.createPokemonFromName(PKM.SYLVEON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
@@ -179,11 +183,11 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(client.sessionId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (pokemon.name == 'eevee' && item == ITEMS.LEAF_STONE) {
+              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.LEAF_STONE) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName('leafeon');
+                eevolution = PokemonFactory.createPokemonFromName(PKM.LEAFEON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
@@ -193,11 +197,11 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(client.sessionId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (pokemon.name == 'eevee' && item == ITEMS.DAWN_STONE) {
+              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.DAWN_STONE) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName('espeon');
+                eevolution = PokemonFactory.createPokemonFromName(PKM.ESPEON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
@@ -207,11 +211,11 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(client.sessionId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (pokemon.name == 'eevee' && item == ITEMS.ICY_ROCK) {
+              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.ICY_ROCK) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName('glaceon');
+                eevolution = PokemonFactory.createPokemonFromName(PKM.GLACEON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
                 eevolution.items.item0 = pokemon.items.item0;
@@ -452,7 +456,7 @@ class UtilsCommand extends Command {
     let boardSize = 0;
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.name != 'ditto') {
+      if (pokemon.positionY == 0 && pokemon.name != PKM.DITTO) {
         boardSize ++;
       }
     });
@@ -475,7 +479,7 @@ class UtilsCommand extends Command {
     let pkm;
     let found = false;
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.name != 'ditto' && !found) {
+      if (pokemon.positionY == 0 && pokemon.name != PKM.DITTO && !found) {
         found = true;
         pkm = pokemon;
       }
@@ -533,14 +537,28 @@ class OnUpdatePhaseCommand extends Command {
     return commands;
   }
 
-  computePlayerDamage(redTeam, playerLevel) {
+  computePlayerDamage(redTeam, playerLevel, stageLevel) {
     let damage = playerLevel - 2;
+    let multiplier = 1;
+    if(stageLevel >= 10){
+      multiplier = 1.5;
+    }
+    else if(stageLevel >= 15){
+      multiplier = 2;
+    }
+    else if(stageLevel >= 20){
+      multiplier = 2.5;
+    }
+    else if(stageLevel >= 25){
+      multiplier = 3.0;
+    }
+
     if (redTeam.size > 0) {
       redTeam.forEach((pokemon, key) => {
         damage += pokemon.stars;
       });
     }
-    damage = Math.max(damage, 0);
+    damage = Math.max(Math.round(damage * multiplier), 0);
     return damage;
   }
 
@@ -569,7 +587,7 @@ class OnUpdatePhaseCommand extends Command {
           player.streak = 0;
         }
         player.lastBattleResult = 'Defeat';
-        player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level));
+        player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel));
       } else if (player.simulation.redTeam.size == 0) {
         if (player.lastBattleResult == 'Win') {
           player.streak = Math.min(player.streak + 1, 5);
@@ -584,7 +602,7 @@ class OnUpdatePhaseCommand extends Command {
           player.streak = 0;
         }
         player.lastBattleResult = 'Draw';
-        player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level));
+        player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel));
       }
     });
   }

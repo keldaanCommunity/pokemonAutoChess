@@ -127,4 +127,12 @@ export default class SynergyContainer extends Button {
 
   enterButtonActiveState() {
   }
+
+  enablePokemon(pokemon){
+    this.detail.enablePokemon(pokemon);
+  }
+
+  disablePokemon(pokemon){
+    this.detail.disablePokemon(pokemon);
+  }
 }

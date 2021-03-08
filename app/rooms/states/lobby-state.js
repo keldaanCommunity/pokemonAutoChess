@@ -1,6 +1,7 @@
 const schema = require('@colyseus/schema');
 const Message = require('../../models/message');
 const GameUser = require('../../models/game-user');
+const LeaderboardPlayer = require('../../models/leaderboard-player');
 const Chat = require('../../models/chat');
 const Filter = require('bad-words');
 
@@ -8,6 +9,7 @@ class LobbyState extends schema.Schema {
   constructor() {
     super();
     this.messages = new schema.ArraySchema();
+    this.leaderboard = new schema.ArraySchema();
     this.users = new schema.MapSchema();
     this.filter = new Filter();
   }
@@ -39,7 +41,8 @@ class LobbyState extends schema.Schema {
 
 schema.defineTypes(LobbyState, {
   messages: [Message],
-  users: {map: GameUser}
+  users: {map: GameUser},
+  leaderboard: [LeaderboardPlayer]
 });
 
 module.exports = LobbyState;
