@@ -8367,7 +8367,7 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': 'Infernape',
+            'name': 'infernape',
             'x': 4,
             'y': 3
           },
@@ -14759,7 +14759,7 @@ const SCENARIOS =
             'y': 2
           },
           {
-            'name': 'leafon',
+            'name': 'leafeon',
             'x': 4,
             'y': 3
           },
@@ -14785,7 +14785,7 @@ const SCENARIOS =
             'y': 2
           },
           {
-            'name': 'leafon',
+            'name': 'leafeon',
             'x': 4,
             'y': 3
           },
@@ -14816,7 +14816,7 @@ const SCENARIOS =
             'y': 2
           },
           {
-            'name': 'leafon',
+            'name': 'leafeon',
             'x': 4,
             'y': 3
           },
