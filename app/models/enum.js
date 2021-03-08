@@ -1412,7 +1412,7 @@ const BOT_AVATAR = Object.freeze({
   ELECTRIC2: 'zapdos',
   DRAGON2: 'rayquaza',
   FIRE2:'moltres',
-  DRAGON3: 'kyurem',
+  DRAGON3: 'kyurem'
 });
 
 const POKEMON_BOT = Object.freeze({
