@@ -541,16 +541,16 @@ class OnUpdatePhaseCommand extends Command {
     let damage = playerLevel - 2;
     let multiplier = 1;
     if(stageLevel >= 10){
-      multiplier = 1.5;
+      multiplier = 1.25;
     }
     else if(stageLevel >= 15){
-      multiplier = 2;
+      multiplier = 1.5;
     }
     else if(stageLevel >= 20){
-      multiplier = 2.5;
+      multiplier = 2.0;
     }
     else if(stageLevel >= 25){
-      multiplier = 3.0;
+      multiplier = 2.5;
     }
 
     if (redTeam.size > 0) {

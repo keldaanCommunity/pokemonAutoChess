@@ -860,7 +860,7 @@ const EFFECTS = Object.freeze({
   PHANTOM_FORCE: 'PHANTOM_FORCE',
   ATTRACT: 'ATTRACT',
   BABY_DOLL_EYES: 'BABY_DOLL_EYES',
-  ROCK: 'ROCK',
+  GROUND: 'GROUND',
   GRASS: 'GRASS',
   FIRE: 'FIRE',
   WATER: 'WATER',
@@ -1126,7 +1126,7 @@ const EFFECTS_ICON = Object.freeze({
       positive: true,
       type:TYPE.FAIRY
     },
-    ROCK: {
+    GROUND: {
       level: 0,
       positive: true,
       type:TYPE.MINERAL
@@ -1750,7 +1750,7 @@ const MAP_TYPE = Object.freeze({
   FIRE: 'FIRE',
   GRASS: 'GRASS',
   ICE: 'ICE',
-  ROCK: 'ROCK'
+  GROUND: 'GROUND'
 });
 
 const MAP_TYPE_NAME = Object.freeze({
@@ -1779,7 +1779,7 @@ const MAP_TYPE_NAME = Object.freeze({
     'esp': 'Bosque \n Helado',
     'fra': 'Forêt \n Givrée'
   },
-  ROCK: {
+  GROUND: {
     'eng': 'Shimmer \n Desert',
     'esp': 'Desierto \n Trémulo',
     'fra': 'Désert \n Chatoyant'
@@ -2066,7 +2066,7 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     },
-    pokemons: [PKM.SLOWPOKE,PKM.ESPEON,PKM.TOGEPI,PKM.ABRA,PKM.RALTS,PKM.BELDUM]
+    pokemons: [PKM.SLOWPOKE,PKM.ESPEON,PKM.ABRA,PKM.RALTS,PKM.BELDUM]
   },
   DARK: {
     description:{

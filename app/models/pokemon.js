@@ -458,19 +458,19 @@ class Dusknoir extends Pokemon {
 
 class Togepi extends Pokemon {
   constructor() {
-    super(PKM.TOGEPI, 'togépi',[TYPE.NORMAL, TYPE.FAIRY, TYPE.PSYCHIC], RARITY.RARE, 'RARE', 175, PKM.TOGETIC, 80, 5, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 1, 50, SPECIAL_SKILL.WISH);
+    super(PKM.TOGEPI, 'togépi',[TYPE.NORMAL, TYPE.FAIRY], RARITY.RARE, 'RARE', 175, PKM.TOGETIC, 80, 5, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 1, 50, SPECIAL_SKILL.WISH);
   }
 }
 
 class Togetic extends Pokemon {
   constructor() {
-    super(PKM.TOGETIC, 'togétic',[TYPE.NORMAL, TYPE.FAIRY, TYPE.PSYCHIC], RARITY.RARE, 'RARE', 176, PKM.TOGEKISS, 120, 9, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 50, SPECIAL_SKILL.WISH);
+    super(PKM.TOGETIC, 'togétic',[TYPE.NORMAL, TYPE.FAIRY, TYPE.FLYING], RARITY.RARE, 'RARE', 176, PKM.TOGEKISS, 120, 9, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 50, SPECIAL_SKILL.WISH);
   }
 }
 
 class Togekiss extends Pokemon {
   constructor() {
-    super(PKM.TOGEKISS, 'togekiss',[TYPE.NORMAL, TYPE.FAIRY, TYPE.PSYCHIC], RARITY.RARE, 'RARE', 468, '', 220, 18, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 3, 50, SPECIAL_SKILL.WISH);
+    super(PKM.TOGEKISS, 'togekiss',[TYPE.NORMAL, TYPE.FAIRY, TYPE.FLYING], RARITY.RARE, 'RARE', 468, '', 220, 18, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 3, 50, SPECIAL_SKILL.WISH);
   }
 }
 

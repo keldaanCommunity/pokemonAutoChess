@@ -145,7 +145,7 @@ class Simulation extends Schema {
             pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9);
             break;
 
-          case EFFECTS.ROCK:
+          case EFFECTS.GROUND:
             pokemon.def += Math.ceil(pokemon.baseDef * 0.2);
             break;
 

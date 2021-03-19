@@ -1,12 +1,12 @@
 {
   "resources": [
-    "ROCK.ogg",
-    "ROCK.m4a",
-    "ROCK.mp3",
-    "ROCK.ac3"
+    "GROUND.ogg",
+    "GROUND.m4a",
+    "GROUND.mp3",
+    "GROUND.ac3"
   ],
   "spritemap": {
-    "ROCK": {
+    "GROUND": {
       "start": 0,
       "end": 209.34603174603174,
       "loop": false

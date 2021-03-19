@@ -165,8 +165,8 @@ export default class AnimationManager {
     });
 
     this.game.anims.create({
-      key: `ROCK/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'ROCK/cell/'}),
+      key: `GROUND/cell`,
+      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'GROUND/cell/'}),
       frameRate: 30,
       repeat: -1
     });
