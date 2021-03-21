@@ -1256,7 +1256,7 @@ class Moltres extends Pokemon {
 
 class Articuno extends Pokemon {
   constructor() {
-    super(PKM.ARRTICUNO, 'artikodin',[TYPE.ICE, TYPE.FLYING], RARITY.MYTHICAL, 'NEUTRAL', 144, '', 200, 20, 3, 3, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.FREEZE);
+    super(PKM.ARTICUNO, 'artikodin',[TYPE.ICE, TYPE.FLYING], RARITY.MYTHICAL, 'NEUTRAL', 144, '', 200, 20, 3, 3, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.FREEZE);
   }
 }
 

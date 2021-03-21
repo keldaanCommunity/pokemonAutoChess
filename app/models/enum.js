@@ -2296,7 +2296,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(9) Danse Lames`,
-          text:`La vitesse d'attaque est doublé pour les pkm animal`
+          text:`La vitesse d'attaque est doublée pour les pkm animal`
         }
       ]
     },

@@ -366,14 +366,12 @@ class GameContainer {
 
   handleAddShopPokemon(player, pokemon, key) {
     if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.room.sessionId == player.id) {
-      //console.log(pokemon, key);
       this.game.scene.getScene('gameScene').shopContainer.addPortrait(pokemon, key);
     }
   }
 
   handleRemoveShopPokemon(player, index) {
     if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.room.sessionId == player.id) {
-      //console.log('remove', index);
       this.game.scene.getScene('gameScene').shopContainer.removePortrait(index);
     }
   }

@@ -22,7 +22,6 @@ class OnShopCommand extends Command {
           player.board.set(pokemon.id, pokemon);
           
           if(pokemon.rarity == RARITY.MYTHICAL){
-            this.state.shop.detachShop(player);
             this.state.shop.assignShop(player);
           }
           else{
@@ -286,7 +285,6 @@ class OnRefreshCommand extends Command {
     if (this.state.players.has(sessionId)) {
       const player = this.state.players.get(sessionId);
       if (player.money >= 2) {
-        this.state.shop.detachShop(player);
         this.state.shop.assignShop(player);
         player.money -= 2;
       }
@@ -336,7 +334,6 @@ class OnJoinCommand extends Command {
 
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
-    this.state.shop.detachShop(this.state.players.get(client.sessionId));
     if (this.state.elligibleToXP) {
       this.computePlayerExperience(this.state.players.get(client.sessionId));
     }
@@ -651,7 +648,6 @@ class OnUpdatePhaseCommand extends Command {
         }
         player.opponentName = '';
         if (!player.shopLocked) {
-          this.state.shop.detachShop(player);
           if(this.state.stageLevel == 10){
             this.state.shop.assignFirstMythicalShop(player);
           }
@@ -698,7 +694,7 @@ class OnUpdatePhaseCommand extends Command {
 
   initializeFightingPhase() {
     this.state.phase = STATE.FIGHT;
-    this.state.time = 40000;
+    this.state.time = 4000;
     this.state.stageLevel += 1;
     this.state.botManager.updateBots();
 

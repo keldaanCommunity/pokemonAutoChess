@@ -22,15 +22,9 @@ const PROBABILITY = {
 };
 
 class Shop {
-  detachShop(player) {
-    player.shop[0] = '';
-    player.shop[1] = '';
-    player.shop[2] = '';
-    player.shop[3] = '';
-    player.shop[4] = '';
-  }
 
   assignShop(player) {
+
     for (let i = 0; i < 5; i++) {
       let pokemon = PokemonFactory.createPokemonFromName(this.pickPokemon(player));
       const seed = Math.random();
