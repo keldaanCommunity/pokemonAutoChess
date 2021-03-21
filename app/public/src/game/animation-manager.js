@@ -622,7 +622,8 @@ export default class AnimationManager {
       this.game.anims.create({
         key: `${index}/0/${orientation}`,
         frames: this.game.anims.generateFrameNames(sheet, {frames: [0, 1, 2], prefix: index + '/0/' + orientation + '/'}),
-        frameRate: 4,
+        duration: 500,
+        repeatDelay: 300,
         repeat: -1,
         yoyo: true
       });

@@ -694,7 +694,7 @@ class OnUpdatePhaseCommand extends Command {
 
   initializeFightingPhase() {
     this.state.phase = STATE.FIGHT;
-    this.state.time = 4000;
+    this.state.time = 40000;
     this.state.stageLevel += 1;
     this.state.botManager.updateBots();
 
