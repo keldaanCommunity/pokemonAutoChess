@@ -648,7 +648,7 @@ class OnUpdatePhaseCommand extends Command {
         }
         player.opponentName = '';
         if (!player.shopLocked) {
-          if(this.state.stageLevel == 1){
+          if(this.state.stageLevel == 10){
             this.state.shop.assignFirstMythicalShop(player);
           }
           else if(this.state.stageLevel == 20){
