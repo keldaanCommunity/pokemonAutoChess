@@ -2386,7 +2386,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(4) Puissance`,
-          text:`10% de chance de coup critique pour tous les pkm`
+          text:`+20% ATK et +20% ATK speed pour tous les pkm`
         },
         {
           title:`(6) Plénitude`,

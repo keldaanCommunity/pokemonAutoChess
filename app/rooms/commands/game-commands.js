@@ -704,7 +704,7 @@ class OnUpdatePhaseCommand extends Command {
           player.opponentName = 'PVE';
           player.simulation.initialize(player.board, PokemonFactory.getNeutralPokemonsByLevelStage(this.state.stageLevel), player.effects.list, []);
         } else {
-          const opponentId = this.room.getRandomOpponent(key);
+          const opponentId = this.room.getRandomOpponent(key, player.opponentName);
           player.opponentName = this.state.players.get(opponentId).name;
           player.simulation.initialize(player.board, this.state.players.get(opponentId).board, player.effects.list, this.state.players.get(opponentId).effects.list);
         }

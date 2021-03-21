@@ -1382,7 +1382,7 @@ class Sylveon extends Pokemon {
 
 class Glaceon extends Pokemon {
   constructor() {
-    super(PKM.GLACEON, 'givrali',[TYPE.ICE, TYPE.FIELD], RARITY.UNCOMMON, 'december', 471, '', 130, 9, 1, 1, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HAPPY_HOUR);
+    super(PKM.GLACEON, 'givrali',[TYPE.ICE, TYPE.FIELD], RARITY.UNCOMMON, 'december', 471, '', 130, 9, 1, 1, 2, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HAPPY_HOUR);
   }
 }
 
