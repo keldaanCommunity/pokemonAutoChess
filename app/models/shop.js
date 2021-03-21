@@ -45,8 +45,11 @@ class Shop {
   }
 
   assignSecondMythicalShop(player){
+    let mythical_copy = JSON.parse(JSON.stringify(MYTHICAL_2));
     for (let i = 0; i < 5; i++) {
-      player.shop[i] = PokemonFactory.createPokemonFromName(MYTHICAL_2[Math.floor(Math.random() * MYTHICAL_2.length)]).name;
+      let pkm = PokemonFactory.createPokemonFromName(mythical_copy[Math.floor(Math.random() * mythical_copy.length)]).name;
+      mythical_copy.splice(mythical_copy.indexOf(pkm),1);
+      player.shop[i] = pkm;
     }
   }
 
