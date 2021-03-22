@@ -244,6 +244,12 @@ class Simulation extends Schema {
       pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.FIRE_STONE)));
     }
 
+    if (pokemon.items.count(ITEMS.ICY_ROCK) != 0) {
+      if (types.includes(TYPE.ICE)) {
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.ICY_ROCK);
+      }
+    }
+
     if (pokemon.items.count(ITEMS.LEAF_STONE) != 0) {
       if (types.includes(TYPE.GRASS)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.LEAF_STONE);
@@ -291,7 +297,6 @@ class Simulation extends Schema {
         case EFFECTS.GROWTH:
           if (types.includes(TYPE.GRASS)) {
             pokemon.effects.push(EFFECTS.GROWTH);
-            pokemon.def += Math.ceil(pokemon.baseDef * 0.25);
           }
           break;
 
@@ -549,7 +554,7 @@ class Simulation extends Schema {
     ennemyEffects.forEach((effect) => {
       switch (effect) {
         case EFFECTS.SPORE:
-          pokemon.atkSpeed = pokemon.atkSpeed * 1.5;
+          pokemon.atkSpeed = pokemon.atkSpeed * 1.3;
           pokemon.effects.push(EFFECTS.SPORE);
           break;
 

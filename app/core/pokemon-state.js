@@ -73,6 +73,7 @@ class PokemonState {
   }
 
   update(pokemon, dt, board, climate) {
+    let updateEffects = false;
     if (pokemon.burn) {
       pokemon.updateBurn(dt);
     }
@@ -116,6 +117,7 @@ class PokemonState {
         const target = board.getValue(pokemon.targetX, pokemon.targetY);
         if (target) {
           pokemon.strategy.process(pokemon, this, board, target);
+          updateEffects = true;
         }
       }
     } else {
@@ -146,6 +148,10 @@ class PokemonState {
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
         pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
+      }
+
+      if (pokemon.effects.includes(EFFECTS.GROWTH)) {
+        pokemon.handleHeal(Math.ceil(pokemon.hp / 10));
       }
 
       if (pokemon.effects.includes(EFFECTS.GRASS)) {
@@ -214,6 +220,7 @@ class PokemonState {
         this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
       }
     }
+    return updateEffects;
   }
 
   onEnter(pokemon) {

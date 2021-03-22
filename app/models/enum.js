@@ -776,8 +776,8 @@ const ITEM_DESCRIPTION = Object.freeze({
     fra: '+10% vitesse d attaque. +50% attaque si type psy. Fait évoluer Evoli en Mentali.'
   },
   ICY_ROCK: {
-    eng: '10% chance to freeze. Will evolve Eevee into Glaceon.',
-    esp: '10% de probabilidad de congelarse. Evolucionará Eevee a Glaceon',
+    eng: '10% chance to freeze. +50% damage if type ice. Will evolve Eevee into Glaceon.',
+    esp: '10% de probabilidad de congelarse.+50% de daño si es del tipo hielo. Evolucionará Eevee a Glaceon',
     fra: '+10% vitesse d attaque. +50% attaque si type glace. Fait évoluer évoli en Givrali.'
   }
 });
@@ -958,12 +958,12 @@ const EFFECTS_ICON = Object.freeze({
     },
     MEAN_LOOK: {
       level: 1,
-      positive: true,
+      positive: false,
       type:TYPE.DARK
     },
     SCARY_FACE: {
       level: 2,
-      positive: true,
+      positive: false,
       type:TYPE.DARK
     },
     IRON_DEFENSE: {
@@ -1434,9 +1434,9 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
     fra:'Vole l item du pokémon ennemi et inflige 5/10/20 dégats physiques'
   },
   STUN_SPORE: {
-    eng: 'Decrease target attack speed by 50/100/200%',
-    esp: 'Disminuir la velocidad de ataque del objetivo en un 50/100/200%',
-    fra:'Diminue la vitesse d attaque du pokémon de 50/100/200%'
+    eng: 'Decrease target attack speed by 50/100/200% and deals 5/10/20 physical damage',
+    esp: 'Disminuir la velocidad de ataque del objetivo en un 50/100/200% e inflige 5/10/20 de daño físico',
+    fra:'Diminue la vitesse d attaque du pokémon de 50/100/200% et inflige 5/10/20 dégats physiques'
   },
   METEOR_MASH: {
     eng: 'Area of effect around the target that deals 30/50/70 damages. Buff pokemon attack by 5 points.',
@@ -1842,12 +1842,12 @@ const TYPE_DETAILS = Object.freeze({
           text:`+5% HP/s for grass allies`
         },
         {
-          title:`(6) Growth`,
-          text:`DEF, SPEDEF + 25% for grass allies`
+          title:`(5) Growth`,
+          text:`+10% HP/s for grass allies`
         },
         {
-          title:`(9) Stun Spore`,
-          text:`-50% ATK speed for ennemy team`
+          title:`(7) Stun Spore`,
+          text:`-30% ATK speed for ennemy team`
         }
       ],
       esp:[
@@ -1856,12 +1856,12 @@ const TYPE_DETAILS = Object.freeze({
           text:`+5% HP/s para los tipos de Planta`
         },
         {
-          title:`(6) Crecimiento`,
-          text:`Aumentar el ATK y la DEF en un 10%`
+          title:`(5) Crecimiento`,
+          text:`+10% HP/s para los tipos de Planta`
         },
         {
-          title:`(9) Espora aturdidora`,
-          text:`Los ennemigos que no son de Planta tienen un 50% ATK speed`
+          title:`(7) Espora aturdidora`,
+          text:`Los ennemigos que no son de Planta tienen un 30% ATK speed`
         }
       ],
       fra:[
@@ -1870,12 +1870,12 @@ const TYPE_DETAILS = Object.freeze({
           text:`+5% HP/s pour tous les alliés plante`
         },
         {
-          title:`(6) Croissance`,
-          text:`DEF, SPEDEF + 25% pour tous les alliés plante`
+          title:`(5) Croissance`,
+          text:`+10% HP/s pour tous les alliés plante`
         },
         {
-          title:`(9) Para Spore`,
-          text:`-50% ATK speed pour tous les ennemis`
+          title:`(7) Para Spore`,
+          text:`-30% ATK speed pour tous les ennemis`
         }
       ]
     },

@@ -1146,20 +1146,24 @@ class StunSporeStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
     let debuff = 0;
+    let damage = 0;
     switch (pokemon.stars) {
       case 1:
         debuff = 1.5;
+        damage = 5;
         break;
       case 2:
         debuff = 2;
+        damage = 10;
         break;
       case 3:
         debuff = 3;
+        damage = 20;
         break;
       default:
         break;
     }
-
+    target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
     target.atkSpeed = pokemon.atkSpeed * debuff;
   }
 }

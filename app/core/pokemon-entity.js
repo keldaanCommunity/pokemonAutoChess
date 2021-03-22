@@ -76,7 +76,10 @@ class PokemonEntity extends schema.Schema {
   }
 
   update(dt, board, climate) {
-    this.state.update(this, dt, board, climate);
+    let updateEffects = this.state.update(this, dt, board, climate);
+    if(updateEffects){
+      this.simulation.applyItemsEffects(this, this.types);
+    }
   }
 
   handleDamage(damage, board, attackType, attacker) {

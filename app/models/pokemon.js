@@ -242,13 +242,13 @@ class Metagross extends Pokemon {
 
 class Bagon extends Pokemon {
   constructor() {
-    super(PKM.BAGON, 'draby',[TYPE.DRAGON, TYPE.MONSTER], RARITY.EPIC, 'EPIC', 371, PKM.SHELGON, 90, 5, 1, 1, 2, 'FIRE/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DRACO_METEOR);
+    super(PKM.BAGON, 'draby',[TYPE.DRAGON, TYPE.MONSTER], RARITY.EPIC, 'EPIC', 371, PKM.SHELGON, 90, 5, 3, 3, 1, 'DRAGON/melee', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DRACO_METEOR);
   }
 }
 
 class Shelgon extends Pokemon {
   constructor() {
-    super(PKM.SHELGON, 'drackhaus',[TYPE.DRAGON, TYPE.MONSTER], RARITY.EPIC, 'EPIC', 372, PKM.SALAMENCE, 130, 9, 1, 1, 2, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DRACO_METEOR);
+    super(PKM.SHELGON, 'drackhaus',[TYPE.DRAGON, TYPE.MONSTER], RARITY.EPIC, 'EPIC', 372, PKM.SALAMENCE, 130, 9, 3, 3, 1, 'DRAGON/melee', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DRACO_METEOR);
   }
 }
 
@@ -1544,7 +1544,7 @@ class Celebi extends Pokemon {
 
 class Victini extends Pokemon {
   constructor() {
-    super(PKM.VICTINI, 'victini',[TYPE.FIRE, TYPE.PSYCHIC], RARITY.MYTHICAL, 'february', 494, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.BURN);
+    super(PKM.VICTINI, 'victini',[TYPE.FIRE, TYPE.PSYCHIC], RARITY.MYTHICAL, 'february', 494, '', 100, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.BURN);
   }
 }
 
