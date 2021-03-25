@@ -158,6 +158,10 @@ class Simulation extends Schema {
   }
 
   applyItemsEffects(pokemon, types) {
+    if (pokemon.items.count(ITEMS.SCOPE_LENS) != 0) {
+      pokemon.crit += 50;
+    }
+
     if (pokemon.items.count(ITEMS.WHITE_GLASSES) != 0) {
       if (pokemon.attackType == ATTACK_TYPE.SPECIAL) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3) * pokemon.items.count(ITEMS.WHITE_GLASSES);
@@ -473,14 +477,14 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.SWIFT_SWIM:
-          if (types.includes(TYPE.AQUATIC) && this.climate == CLIMATE.RAIN) {
+          if (types.includes(TYPE.AQUATIC)) {
             pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.7);
             pokemon.effects.push(EFFECTS.SWIFT_SWIM);
           }
           break;
 
         case EFFECTS.HYDO_CANNON:
-          if (types.includes(TYPE.AQUATIC) && this.climate == CLIMATE.RAIN) {
+          if (types.includes(TYPE.AQUATIC)) {
             pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3);
             pokemon.effects.push(EFFECTS.HYDO_CANNON);
           }

@@ -5,7 +5,7 @@
 			"format": "RGBA8888",
 			"size": {
 				"w": 26,
-				"h": 660
+				"h": 769
 			},
 			"scale": 1,
 			"frames": [
@@ -346,6 +346,27 @@
 					}
 				},
 				{
+					"filename": "SCOPE_LENS",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 22,
+						"h": 21
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 22,
+						"h": 21
+					},
+					"frame": {
+						"x": 1,
+						"y": 387,
+						"w": 22,
+						"h": 21
+					}
+				},
+				{
 					"filename": "ROCKY_HELMET",
 					"rotated": false,
 					"trimmed": true,
@@ -361,7 +382,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 387,
+						"y": 410,
 						"w": 22,
 						"h": 20
 					}
@@ -382,7 +403,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 409,
+						"y": 432,
 						"w": 21,
 						"h": 23
 					}
@@ -403,9 +424,30 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 434,
+						"y": 457,
 						"w": 21,
 						"h": 23
+					}
+				},
+				{
+					"filename": "REVIVER_SEED",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 21,
+						"h": 22
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 21,
+						"h": 22
+					},
+					"frame": {
+						"x": 1,
+						"y": 482,
+						"w": 21,
+						"h": 22
 					}
 				},
 				{
@@ -424,7 +466,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 459,
+						"y": 506,
 						"w": 21,
 						"h": 21
 					}
@@ -445,7 +487,28 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 482,
+						"y": 529,
+						"w": 21,
+						"h": 21
+					}
+				},
+				{
+					"filename": "RARE_CANDY",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 21,
+						"h": 21
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 21,
+						"h": 21
+					},
+					"frame": {
+						"x": 1,
+						"y": 552,
 						"w": 21,
 						"h": 21
 					}
@@ -466,7 +529,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 505,
+						"y": 575,
 						"w": 21,
 						"h": 20
 					}
@@ -487,7 +550,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 527,
+						"y": 597,
 						"w": 21,
 						"h": 19
 					}
@@ -508,7 +571,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 548,
+						"y": 618,
 						"w": 20,
 						"h": 21
 					}
@@ -529,7 +592,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 571,
+						"y": 641,
 						"w": 19,
 						"h": 22
 					}
@@ -550,7 +613,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 595,
+						"y": 665,
 						"w": 19,
 						"h": 20
 					}
@@ -571,9 +634,30 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 617,
+						"y": 687,
 						"w": 18,
 						"h": 18
+					}
+				},
+				{
+					"filename": "RAZOR_CLAW",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 18,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 18,
+						"h": 17
+					},
+					"frame": {
+						"x": 1,
+						"y": 707,
+						"w": 18,
+						"h": 17
 					}
 				},
 				{
@@ -592,9 +676,30 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 637,
+						"y": 726,
 						"w": 17,
 						"h": 22
+					}
+				},
+				{
+					"filename": "RAZOR_FANG",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 18
+					},
+					"frame": {
+						"x": 1,
+						"y": 750,
+						"w": 16,
+						"h": 18
 					}
 				}
 			]
@@ -603,6 +708,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:5fe4853a9e8490b275a5251196c2a095:d343f13f0f3f4421a10176af1ab27a1a:110e074689c9edd2c54833ce2e4d9270$"
+		"smartupdate": "$TexturePacker:SmartUpdate:824698e6a9519b8a66961753581289f8:3cfd72beceb38b1c2ff6578e5ec5fdb6:110e074689c9edd2c54833ce2e4d9270$"
 	}
 }

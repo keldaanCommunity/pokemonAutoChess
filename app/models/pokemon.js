@@ -1274,7 +1274,7 @@ class Palkia extends Pokemon {
 
 class Suicune extends Pokemon {
   constructor() {
-    super(PKM.SUICUNE, 'suicune',[TYPE.WATER, TYPE.AQUATIC], RARITY.MYTHICAL, 'NEUTRAL', 245, '', 300, 30, 5, 5, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HYDRO_PUMP);
+    super(PKM.SUICUNE, 'suicune',[TYPE.WATER, TYPE.ICE], RARITY.MYTHICAL, 'NEUTRAL', 245, '', 300, 30, 5, 5, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HYDRO_PUMP);
   }
 }
 

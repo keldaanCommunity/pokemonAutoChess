@@ -492,7 +492,11 @@ const ITEMS = Object.freeze({
   BLACK_BELT: 'BLACK_BELT',
   SILK_SCARF: 'SILK_SCARF',
   DAWN_STONE: 'DAWN_STONE',
-  ICY_ROCK: 'ICY_ROCK'
+  ICY_ROCK: 'ICY_ROCK',
+  RAZOR_FANG: 'RAZOR_FANG',
+  RAZOR_CLAW: 'RAZOR_CLAW',
+  SCOPE_LENS: 'SCOPE_LENS',
+  REVIVER_SEED: 'REVIVER_SEED'
 });
 
 const ITEM_NAME = Object.freeze({
@@ -635,6 +639,26 @@ const ITEM_NAME = Object.freeze({
     eng: 'Icy Rock',
     esp: 'Roca helada',
     fra: 'Rocher glacé'
+  },
+  RAZOR_FANG: {
+    eng: 'Razor Fang',
+    esp: 'Colmillo de afeitar',
+    fra: 'Croc Rasoir'
+  },
+  RAZOR_CLAW: {
+    eng: 'Razor Claw',
+    esp: 'Manijas rasoir',
+    fra: 'Griffe Rasoir'
+  },
+  SCOPE_LENS: {
+    eng: 'Scope Lens',
+    esp: 'lente del visor',
+    fra: 'Lentilscope'
+  },
+  REVIVER_SEED: {
+    eng: 'Reviver Seed',
+    esp: 'Resugraina',
+    fra: 'Résugraine'
   }
 });
 
@@ -676,34 +700,34 @@ const ITEM_DESCRIPTION = Object.freeze({
     fra: '+ 5% vie / seconde'
   },
   APRICOT_BERRY: {
-    eng: '+50% spe def when below 50% health',
-    esp: '+50% de defensa cuando está por debajo del 50% de salud',
-    fra: '+50% de défense spé quand la vie passe en dessous de 50%'
+    eng: '+100% spe def when below 50% health',
+    esp: '+100% de defensa cuando está por debajo del 50% de salud',
+    fra: '+100% de défense spé quand la vie passe en dessous de 50%'
   },
   LIECHI_BERRY: {
-    eng: '+50% attack when health below 50%',
-    esp: '+50% de ataque cuando la salud está por debajo del 50%',
-    fra: '+50% d attaque quand la vie passe en dessous de 50%'
+    eng: '+100% attack when health below 50%',
+    esp: '+100% de ataque cuando la salud está por debajo del 50%',
+    fra: '+100% d attaque quand la vie passe en dessous de 50%'
   },
   GANLON_BERRY: {
-    eng: '+50% def when health below 50%',
-    esp: '+50% def cuando la salud está por debajo del 50%',
-    fra: '+50% de défense quand la vie passe en dessous de 50%'
+    eng: '+100% def when health below 50%',
+    esp: '+100% def cuando la salud está por debajo del 50%',
+    fra: '+100% de défense quand la vie passe en dessous de 50%'
   },
   PETAYA_BERRY: {
-    eng: '+50% attack special when health below 50%',
-    esp: '+50% de ataque especial cuando la salud está por debajo del 50%',
-    fra: '+50% d attaque spéciale quand la vie passe en dessous de 50%'
+    eng: '+100% attack special when health below 50%',
+    esp: '+100% de ataque especial cuando la salud está por debajo del 50%',
+    fra: '+100% d attaque spéciale quand la vie passe en dessous de 50%'
   },
   SALAC_BERRY: {
-    eng: '+50 % attack speed when health below 50%',
-    esp: '+50% de velocidad de ataque cuando la salud está por debajo del 50%',
-    fra: '+50% de vitesse d attaque quand la vie passe en dessous de 50%'
+    eng: '+100% attack speed when health below 50%',
+    esp: '+100% de velocidad de ataque cuando la salud está por debajo del 50%',
+    fra: '+100% de vitesse d attaque quand la vie passe en dessous de 50%'
   },
   ORAN_BERRY: {
-    eng: 'Restore 25% health when below 25% health',
-    esp: 'Restaurar el 25% de la salud cuando está por debajo del 25% de la salud',
-    fra: 'Restaure 25% de la vie quand la vie du pokémon descend en dessous de 25%'
+    eng: 'Restore 50% health when below 50% health',
+    esp: 'Restaurar el 50% de la salud cuando está por debajo del 50% de la salud',
+    fra: 'Restaure 50% de la vie quand la vie du pokémon descend en dessous de 50%'
   },
   SOFT_SAND: {
     eng: '+10% atk speed. +50% damage if pokemon has type ground.',
@@ -779,6 +803,26 @@ const ITEM_DESCRIPTION = Object.freeze({
     eng: '10% chance to freeze. +50% damage if type ice. Will evolve Eevee into Glaceon.',
     esp: '10% de probabilidad de congelarse.+50% de daño si es del tipo hielo. Evolucionará Eevee a Glaceon',
     fra: '+10% vitesse d attaque. +50% attaque si type glace. Fait évoluer évoli en Givrali.'
+  },
+  RAZOR_FANG: {
+    eng: '+50% critical strike damage',
+    esp: '+50% de daño por golpe crítico',
+    fra: '+50% dégâts des coups critiques'
+  },
+  RAZOR_CLAW: {
+    eng: 'Critical hits do true damage',
+    esp: 'Los golpes críticos hacen daño verdadero',
+    fra: 'Les coups critiques font des true dégats'
+  },
+  SCOPE_LENS: {
+    eng: '+50% critical hits',
+    esp: '+50% de golpes críticos',
+    fra: '+50% de coups critiques'
+  },
+  REVIVER_SEED: {
+    eng: 'Revives the pokemon',
+    esp: 'Revive al pokémon',
+    fra: 'Fait revivre le pokémon'
   }
 });
 

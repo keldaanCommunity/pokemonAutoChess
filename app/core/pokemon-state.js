@@ -13,6 +13,9 @@ class PokemonState {
 
   handleDamage(pokemon, damage, board, attackType, attacker) {
     let death;
+    if (attacker && attacker.items.count(ITEMS.RAZOR_CLAW) != 0) {
+      attackType = ATTACK_TYPE.TRUE;
+    }
     if(pokemon.life == 0){
       death = true;
     }
@@ -63,8 +66,14 @@ class PokemonState {
         }
   
         if (!pokemon.life || pokemon.life <= 0) {
-          board.setValue(pokemon.positionX, pokemon.positionY, undefined);
-          death = true;
+          if(pokemon.items.count(ITEMS.REVIVER_SEED) != 0){
+            pokemon.life = pokemon.hp;
+            pokemon.items.remove(ITEMS.REVIVER_SEED);
+          }
+          else{
+            board.setValue(pokemon.positionX, pokemon.positionY, undefined);
+            death = true;
+          }
         }
       }
     }
@@ -164,42 +173,42 @@ class PokemonState {
 
       if (pokemon.items.count(ITEMS.SALAC_BERRY) != 0) {
         if (pokemon.life <= pokemon.hp / 2) {
-          pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.5);
+          pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 2);
           pokemon.items.remove(ITEMS.SALAC_BERRY);
         }
       }
 
       if (pokemon.items.count(ITEMS.LIECHI_BERRY) != 0) {
         if (pokemon.life <= pokemon.hp / 2 && pokemon.attackType == ATTACK_TYPE.PHYSICAL) {
-          pokemon.atk = Math.ceil(pokemon.atk * 1.5);
+          pokemon.atk = Math.ceil(pokemon.atk * 2);
           pokemon.items.remove(ITEMS.LIECHI_BERRY);
         }
       }
 
       if (pokemon.items.count(ITEMS.GANLON_BERRY) != 0) {
         if (pokemon.life <= pokemon.hp / 2) {
-          pokemon.def = Math.ceil(pokemon.def * 1.5);
+          pokemon.def = Math.ceil(pokemon.def * 2);
           pokemon.items.remove(ITEMS.GANLON_BERRY);
         }
       }
 
       if (pokemon.items.count(ITEMS.PETAYA_BERRY) != 0) {
         if (pokemon.life <= pokemon.hp / 2 && pokemon.attackType == ATTACK_TYPE.SPECIAL) {
-          pokemon.atk = Math.ceil(pokemon.atk * 1.5);
+          pokemon.atk = Math.ceil(pokemon.atk * 2);
           pokemon.items.remove(ITEMS.PETAYA_BERRY);
         }
       }
 
       if (pokemon.items.count(ITEMS.APRICOT_BERRY) != 0) {
         if (pokemon.life <= pokemon.hp / 2) {
-          pokemon.speDef = Math.ceil(pokemon.speDef * 1.5);
+          pokemon.speDef = Math.ceil(pokemon.speDef * 2);
           pokemon.items.remove(ITEMS.APRICOT_BERRY);
         }
       }
 
       if (pokemon.items.count(ITEMS.ORAN_BERRY) != 0) {
-        if (pokemon.life <= pokemon.hp / 4) {
-          pokemon.handleHeal(Math.ceil(pokemon.hp / 4));
+        if (pokemon.life <= pokemon.hp / 2) {
+          pokemon.handleHeal(Math.ceil(pokemon.hp / 2));
           pokemon.items.remove(ITEMS.ORAN_BERRY);
         }
       }
