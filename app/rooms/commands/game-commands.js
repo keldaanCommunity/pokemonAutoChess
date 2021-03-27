@@ -362,7 +362,7 @@ class OnJoinCommand extends Command {
 
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
-    if (this.state.elligibleToXP) {
+    if (this.state.elligibleToXP && this.state.stageLevel > 15) {
       this.computePlayerExperience(this.state.players.get(client.sessionId));
     }
   }
