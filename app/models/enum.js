@@ -257,7 +257,9 @@ const PKM = Object.freeze({
   CRESSELIA: "cresselia",
   HEATRAN: "heatran",
   HOOH: "ho-Oh",
-  AERODACTYL:"aerodactyl"
+  AERODACTYL:"aerodactyl",
+  PRIMALKYOGRE:"primal-Kyogre",
+  PRIMALGROUDON:"primal-Groudon"
 });
 
 const WORDS = Object.freeze({

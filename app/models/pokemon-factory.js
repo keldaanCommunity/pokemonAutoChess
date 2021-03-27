@@ -811,6 +811,10 @@ class PokemonFactory {
         return PKM.CARVANHA;
       case PKM.HOUNDOUR:
         return PKM.HOUNDOUR;
+      case PKM.PRIMALGROUDON:
+        return PKM.GROUDON;
+      case PKM.PRIMALKYOGRE:
+        return PKM.KYOGRE;
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1337,6 +1341,10 @@ class PokemonFactory {
         return new Pokemon.Houndour();
       case PKM.CARVANHA:
         return new Pokemon.Carvanha();
+      case PKM.PRIMALKYOGRE:
+        return new Pokemon.PrimalKyogre();
+      case PKM.PRIMALGROUDON:
+        return new Pokemon.PrimalGroudon();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();

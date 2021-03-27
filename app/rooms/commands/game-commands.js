@@ -224,7 +224,35 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(client.sessionId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else {
+              } else if (pokemon.name == PKM.GROUDON && item == ITEMS.RED_ORB) {
+                evolve = true;
+                const x = pokemon.positionX;
+                const y = pokemon.positionY;
+                eevolution = PokemonFactory.createPokemonFromName(PKM.PRIMALGROUDON);
+                eevolution.positionX = x;
+                eevolution.positionY = y;
+                eevolution.items.item0 = pokemon.items.item0;
+                eevolution.items.item1 = pokemon.items.item1;
+                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items.add(item);
+                this.state.players.get(client.sessionId).board.delete(id);
+                success = true;
+                message.updateItems = false;
+              } else if (pokemon.name == PKM.KYOGRE && item == ITEMS.BLUE_ORB) {
+                evolve = true;
+                const x = pokemon.positionX;
+                const y = pokemon.positionY;
+                eevolution = PokemonFactory.createPokemonFromName(PKM.PRIMALKYOGRE);
+                eevolution.positionX = x;
+                eevolution.positionY = y;
+                eevolution.items.item0 = pokemon.items.item0;
+                eevolution.items.item1 = pokemon.items.item1;
+                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items.add(item);
+                this.state.players.get(client.sessionId).board.delete(id);
+                success = true;
+                message.updateItems = false;
+              }else {
                 pokemon.items.add(item);
                 this.state.players.get(client.sessionId).stuff.remove(item);
                 success = true;
@@ -644,7 +672,7 @@ class OnUpdatePhaseCommand extends Command {
       if (player.alive) {
         if (player.opponentName == 'PVE' && player.lastBattleResult == 'Win') {
           const item = ItemFactory.createRandomItem();
-          //const item = ItemFactory.createSpecificItems([ITEMS.WONDER_BOX, ITEMS.RED_ORB, ITEMS.BLUE_ORB, ITEMS.ASSAULT_VEST]);
+          //const item = ItemFactory.createSpecificItems([ITEMS.RED_ORB, ITEMS.BLUE_ORB]);
           player.stuff.add(item);
         }
         player.opponentName = '';

@@ -1586,7 +1586,7 @@ class Shaymin extends Pokemon {
 
 class Cresselia extends Pokemon {
   constructor() {
-    super(PKM.CRESSELIA, 'cresselia',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 488, '', 300, 30, 5, 5, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.WISH);
+    super(PKM.CRESSELIA, 'cresselia',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 488, '', 300, 30, 5, 5, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 30, SPECIAL_SKILL.WISH);
   }
 }
 
@@ -1601,6 +1601,19 @@ class HooH extends Pokemon {
     super(PKM.HOOH, 'ho-Oh',[TYPE.FIRE, TYPE.FLYING], RARITY.MYTHICAL, 'february', 250, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.BURN);
   }
 }
+
+class PrimalGroudon extends Pokemon {
+  constructor() {
+    super(PKM.PRIMALGROUDON, 'Primo-Groudon',[TYPE.GROUND, TYPE.FIRE], RARITY.MYTHICAL, 'february', 3830, '', 400, 40, 10, 10, 1, 'FIRE/melee', ATTACK_TYPE.TRUE, 3, 100, SPECIAL_SKILL.BURN);
+  }
+}
+
+class PrimalKyogre extends Pokemon {
+  constructor() {
+    super(PKM.PRIMALKYOGRE, 'Primo-Kyogre',[TYPE.WATER, TYPE.ELECTRIC, TYPE.AQUATIC], RARITY.MYTHICAL, 'february', 3820, '', 400, 40, 5, 5, 3, 'WATER/range', ATTACK_TYPE.TRUE, 3, 100, SPECIAL_SKILL.THUNDER);
+  }
+}
+
 
 schema.defineTypes(Pokemon, {
   id: 'string',
@@ -1888,5 +1901,7 @@ module.exports = {
   HooH,
   Aerodactyl,
   Houndour,
-  Carvanha
+  Carvanha,
+  PrimalGroudon,
+  PrimalKyogre
 };
