@@ -1,5 +1,5 @@
-const {EFFECTS, ATTACK_TYPE, TYPE, CLIMATE, ITEMS} = require('../models/enum');
-
+const {EFFECTS, ATTACK_TYPE, TYPE, CLIMATE, ITEMS, PKM} = require('../models/enum');
+const PokemonFactory = require('../models/pokemon-factory');
 
 class PokemonState {
   constructor() {
@@ -116,6 +116,31 @@ class PokemonState {
 
       pokemon.manaCooldown = 1000;
       if (pokemon.mana >= pokemon.maxMana) {
+        if(pokemon.items.count(ITEMS.RED_ORB) != 0){
+          for (let i = 0; i < pokemon.items.count(ITEMS.RED_ORB); i++) {
+            let created = false;
+            const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+            cells.forEach((cell) => {
+              if (!cell.value && !created) {
+                pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.HOUNDOUR),cell.row, cell.column, pokemon.team);
+                created = true;
+              }
+            });
+          }
+        }
+        if(pokemon.items.count(ITEMS.BLUE_ORB) != 0){
+          for (let i = 0; i < pokemon.items.count(ITEMS.BLUE_ORB); i++) {
+            let created = false;
+            const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+            cells.forEach((cell) => {
+              if (!cell.value && !created) {
+                pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.CARVANHA),cell.row, cell.column, pokemon.team);
+                created = true;
+              }
+            });
+          }
+        }
+
         if (pokemon.targetX == -1 || pokemon.targetY == -1) {
           const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
           if (targetCoordinate[0] !== undefined && targetCoordinate[1] !== undefined) {

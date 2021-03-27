@@ -1194,6 +1194,18 @@ class Victreebel extends Pokemon {
   }
 }
 
+class Carvanha extends Pokemon {
+  constructor() {
+    super(PKM.CARVANHA, 'carvanha',[TYPE.WATER, TYPE.AQUATIC], RARITY.COMMON, 'february', 318, '', 40, 4, 1, 1, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BITE);
+  }
+}
+
+class Houndour extends Pokemon {
+  constructor() {
+    super(PKM.HOUNDOUR, 'malosse',[TYPE.FIRE, TYPE.DARK], RARITY.COMMON, 'february', 228, '', 40, 4, 1, 1, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BLAZE_KICK);
+  }
+}
+
 class Magikarp extends Pokemon {
   constructor() {
     super(PKM.MAGIKARP, 'magicarpe',[TYPE.WATER], RARITY.NEUTRAL, 'NEUTRAL', 129, PKM.GYARADOS, 30, 1, 1, 1, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
@@ -1874,5 +1886,7 @@ module.exports = {
   Cresselia,
   Heatran,
   HooH,
-  Aerodactyl
+  Aerodactyl,
+  Houndour,
+  Carvanha
 };

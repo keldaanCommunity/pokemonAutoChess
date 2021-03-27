@@ -5,7 +5,7 @@
 			"format": "RGBA8888",
 			"size": {
 				"w": 26,
-				"h": 769
+				"h": 850
 			},
 			"scale": 1,
 			"frames": [
@@ -556,6 +556,48 @@
 					}
 				},
 				{
+					"filename": "ASSAULT_VEST",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 21,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 21,
+						"h": 18
+					},
+					"frame": {
+						"x": 1,
+						"y": 618,
+						"w": 21,
+						"h": 18
+					}
+				},
+				{
+					"filename": "WONDER_BOX",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 21,
+						"h": 15
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 21,
+						"h": 15
+					},
+					"frame": {
+						"x": 1,
+						"y": 638,
+						"w": 21,
+						"h": 15
+					}
+				},
+				{
 					"filename": "DAWN_STONE",
 					"rotated": false,
 					"trimmed": true,
@@ -571,7 +613,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 618,
+						"y": 655,
 						"w": 20,
 						"h": 21
 					}
@@ -592,7 +634,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 641,
+						"y": 678,
 						"w": 19,
 						"h": 22
 					}
@@ -613,9 +655,51 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 665,
+						"y": 702,
 						"w": 19,
 						"h": 20
+					}
+				},
+				{
+					"filename": "RED_ORB",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 18,
+						"h": 22
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 18,
+						"h": 22
+					},
+					"frame": {
+						"x": 1,
+						"y": 724,
+						"w": 18,
+						"h": 22
+					}
+				},
+				{
+					"filename": "BLUE_ORB",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 18,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 18,
+						"h": 18
+					},
+					"frame": {
+						"x": 1,
+						"y": 748,
+						"w": 18,
+						"h": 18
 					}
 				},
 				{
@@ -634,7 +718,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 687,
+						"y": 768,
 						"w": 18,
 						"h": 18
 					}
@@ -655,7 +739,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 707,
+						"y": 788,
 						"w": 18,
 						"h": 17
 					}
@@ -676,7 +760,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 726,
+						"y": 807,
 						"w": 17,
 						"h": 22
 					}
@@ -697,7 +781,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 750,
+						"y": 831,
 						"w": 16,
 						"h": 18
 					}
@@ -708,6 +792,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:824698e6a9519b8a66961753581289f8:3cfd72beceb38b1c2ff6578e5ec5fdb6:110e074689c9edd2c54833ce2e4d9270$"
+		"smartupdate": "$TexturePacker:SmartUpdate:fe04a70ce66c2ed56172e2657e2e46e9:3b5163e9d99548395f07bc3693675402:110e074689c9edd2c54833ce2e4d9270$"
 	}
 }

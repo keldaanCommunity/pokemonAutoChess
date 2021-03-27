@@ -66,11 +66,11 @@ class Board {
     } else if (vx == 0) {
       if (vy == 0) {
         console.log('error orientation', r0, c0, r1, c1);
-        this.cells.forEach((cell)=>{
-          if(cell.value){
-            console.log(cell.value.name);
-            console.log(cell.value.positionX);
-            console.log(cell.value.positionY);
+        this.cell.forEach((c)=>{
+          if(c.value){
+            console.log(c.value.name);
+            console.log(c.value.positionX);
+            console.log(c.value.positionY);
           }
         });
         return ORIENTATION.DOWNLEFT;

@@ -807,6 +807,10 @@ class PokemonFactory {
         return PKM.RATTATA;
       case PKM.LUGIA:
         return PKM.LUGIA;
+      case PKM.CARVANHA:
+        return PKM.CARVANHA;
+      case PKM.HOUNDOUR:
+        return PKM.HOUNDOUR;
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1329,6 +1333,10 @@ class PokemonFactory {
         return new Pokemon.Rotom();
       case PKM.AERODACTYL:
         return new Pokemon.Aerodactyl();
+      case PKM.HOUNDOUR:
+        return new Pokemon.Houndour();
+      case PKM.CARVANHA:
+        return new Pokemon.Carvanha();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();

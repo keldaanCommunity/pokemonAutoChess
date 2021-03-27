@@ -43,18 +43,8 @@ class Simulation extends Schema {
 
     if (blueTeam) {
       blueTeam.forEach((pokemon, key) => {
-        // console.log("x",pokemon.positionX, "y", pokemon.positionY); // 0 for blue, 1 for red
         if (pokemon.positionY != 0) {
-          const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, pokemon.positionY - 1, pokemon.hp, pokemon.maxMana, pokemon.atk, pokemon.atkSpeed, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 0, pokemon.attackSprite, pokemon.rarity, pokemon.sheet, pokemon.types, pokemon.items, pokemon.stars, this, pokemon.skill);
-          const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
-          this.applySpecialCellsEffects(pokemonEntity);
-          this.applyEffects(pokemonEntity, pokemon.types, blueEffects, redEffects, blueTeam, redTeam);
-          this.applyItemsEffects(pokemonEntity, pokemon.types);
-          this.blueTeam.set(pokemonEntity.id, pokemonEntity);
-          // console.log(this.blueTeam.size);
-          this.dpsMeter.set(pokemonEntity.id, dps);
-          // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
-          this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
+          this.addPokemon(pokemon, pokemon.positionX, pokemon.positionY - 1, 0);
         }
       });
     }
@@ -62,14 +52,7 @@ class Simulation extends Schema {
     if (redTeam) {
       redTeam.forEach((pokemon, key) => {
         if (pokemon.positionY != 0) {
-          const pokemonEntity = new PokemonEntity(pokemon.name, pokemon.index, pokemon.positionX, 5 - (pokemon.positionY - 1), pokemon.hp, pokemon.maxMana, pokemon.atk, pokemon.atkSpeed, pokemon.def, pokemon.speDef, pokemon.attackType, pokemon.range, 1, pokemon.attackSprite, pokemon.rarity, pokemon.sheet, pokemon.types, pokemon.items, pokemon.stars, this, pokemon.skill);
-          this.applySpecialCellsEffects(pokemonEntity);
-          this.applyEffects(pokemonEntity, pokemon.types, redEffects, blueEffects, redTeam, blueTeam);
-          this.applyItemsEffects(pokemonEntity, pokemon.types);
-          this.redTeam.set(pokemonEntity.id, pokemonEntity);
-          // console.log(this.redTeam.size);
-          // console.log("entity x",pokemonEntity.positionX, "y", pokemonEntity.positionY);
-          this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
+          this.addPokemon(pokemon, pokemon.positionX, 5 - (pokemon.positionY - 1), 1);
         }
       });
     }
@@ -77,22 +60,31 @@ class Simulation extends Schema {
     if (blueEffects && blueEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
       const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
       const coord = this.getFirstAvailablePlaceOnBoard(true);
-      const dps = new Dps(kyogre.id, kyogre.name);
-      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.maxMana, kyogre.atk, kyogre.atkSpeed, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 0, kyogre.attackSprite, kyogre.rarity, kyogre.sheet, kyogre.types, kyogre.items, kyogre.stars, this, kyogre.skill);
-      this.applySpecialCellsEffects(pokemonEntity);
-      this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, blueTeam, redTeam);
-      this.blueTeam.set(pokemonEntity.id, pokemonEntity);
-      this.dpsMeter.set(pokemonEntity.id, dps);
-      this.board.setValue(coord[0], coord[1], pokemonEntity);
+      this.addPokemon(kyogre, coord[0], coord[1], 0);
+      
+
     }
     if (redEffects && redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
       const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
       const coord = this.getFirstAvailablePlaceOnBoard(false);
-      const pokemonEntity = new PokemonEntity(kyogre.name, kyogre.index, coord[0], coord[1], kyogre.hp, kyogre.maxMana, kyogre.atk, kyogre.atkSpeed, kyogre.def, kyogre.speDef, kyogre.attackType, kyogre.range, 1, kyogre.attackSprite, kyogre.rarity, kyogre.sheet, kyogre.types, kyogre.items, kyogre.stars, this, kyogre.skill);
+      this.addPokemon(kyogre, coord[0], coord[1], 1);
+    }
+  }
+
+  addPokemon(pokemon, x, y, team){
+    const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this);
+    this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects, this.redEffects, this.blueTeam, this.redTeam);
+    this.applyItemsEffects(pokemonEntity, pokemon.types);
+    this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
+
+    if(team == 0){
       this.applySpecialCellsEffects(pokemonEntity);
-      this.applyEffects(pokemonEntity, kyogre.types, blueEffects, redEffects, redTeam, blueTeam);
+      const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
+      this.blueTeam.set(pokemonEntity.id, pokemonEntity);
+      this.dpsMeter.set(pokemonEntity.id, dps);
+    }
+    if(team == 1){
       this.redTeam.set(pokemonEntity.id, pokemonEntity);
-      this.board.setValue(coord[0], coord[1], pokemonEntity);
     }
   }
 
@@ -158,8 +150,19 @@ class Simulation extends Schema {
   }
 
   applyItemsEffects(pokemon, types) {
+
+    if(pokemon.items.count(ITEMS.WONDER_BOX) != 0){
+      pokemon.items.remove(ITEMS.WONDER_BOX);
+      pokemon.items.add(Object.keys(ITEMS)[Math.floor(Math.random() * Object.keys(ITEMS).length)]);
+      pokemon.items.add(Object.keys(ITEMS)[Math.floor(Math.random() * Object.keys(ITEMS).length)]);
+    }
+
+    if(pokemon.items.count(ITEMS.ASSAULT_VEST) != 0){
+      pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.5) * pokemon.items.count(ITEMS.ASSAULT_VEST);
+    }
+
     if (pokemon.items.count(ITEMS.SCOPE_LENS) != 0) {
-      pokemon.crit += 50;
+      pokemon.critChance += 50 * pokemon.items.count(ITEMS.SCOPE_LENS);
     }
 
     if (pokemon.items.count(ITEMS.WHITE_GLASSES) != 0) {

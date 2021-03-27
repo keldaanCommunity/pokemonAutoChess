@@ -211,6 +211,8 @@ const PKM = Object.freeze({
   BELLSPROUT: "bellsprout",
   WEEPINBELL: "weepinbell",
   VICTREEBEL: "victreebel",
+  CARVANHA: "carvanha",
+  HOUNDOUR: "houndour",
   SWINUB: "swinub",
   PILOSWINE: "piloswine",
   MAMOSWINE: "mamoswine",
@@ -496,7 +498,11 @@ const ITEMS = Object.freeze({
   RAZOR_FANG: 'RAZOR_FANG',
   RAZOR_CLAW: 'RAZOR_CLAW',
   SCOPE_LENS: 'SCOPE_LENS',
-  REVIVER_SEED: 'REVIVER_SEED'
+  REVIVER_SEED: 'REVIVER_SEED',
+  ASSAULT_VEST:'ASSAULT_VEST',
+  BLUE_ORB:'BLUE_ORB',
+  RED_ORB:'RED_ORB',
+  WONDER_BOX:'WONDER_BOX'
 });
 
 const ITEM_NAME = Object.freeze({
@@ -659,6 +665,26 @@ const ITEM_NAME = Object.freeze({
     eng: 'Reviver Seed',
     esp: 'Resugraina',
     fra: 'Résugraine'
+  },
+  ASSAULT_VEST: {
+    eng: 'Assault Vest',
+    esp: 'Chaleco de asalto',
+    fra: 'Veste de combat'
+  },
+  BLUE_ORB: {
+    eng: 'Blue Orb',
+    esp: 'Orbe azul',
+    fra: 'Gemme Bleue'
+  },
+  RED_ORB: {
+    eng: 'Red Orb',
+    esp: 'Orbe rojo',
+    fra: 'Gemme Rouge'
+  },
+  WONDER_BOX: {
+    eng: 'Wonder Box',
+    esp: 'Caja de Maravillas',
+    fra: 'Boite mystère'
   }
 });
 
@@ -823,6 +849,26 @@ const ITEM_DESCRIPTION = Object.freeze({
     eng: 'Revives the pokemon',
     esp: 'Revive al pokémon',
     fra: 'Fait revivre le pokémon'
+  },
+  ASSAULT_VEST: {
+    eng: '+50% special defense',
+    esp: '+50% de defensa especial',
+    fra: '+50% défense spécial'
+  },
+  BLUE_ORB: {
+    eng: 'Team Aqua strengthens the pokemon s ability',
+    esp: 'El equipo Aqua refuerza la habilidad del pokémon',
+    fra: 'La team Aqua renforce la capacité du pokémon'
+  },
+  RED_ORB: {
+    eng: 'Team Magma strengthens the pokemon s ability',
+    esp: 'El equipo Magma refuerza la habilidad del pokémon',
+    fra: 'La team Magma renforce la capacité du pokémon'
+  },
+  WONDER_BOX: {
+    eng: 'Start the game with 2 random items',
+    esp: 'Comienza el juego con 2 objetos al azar',
+    fra: 'Commence la partie avec 2 items aléatoires'
   }
 });
 

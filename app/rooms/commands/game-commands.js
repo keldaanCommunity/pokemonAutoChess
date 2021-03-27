@@ -644,6 +644,7 @@ class OnUpdatePhaseCommand extends Command {
       if (player.alive) {
         if (player.opponentName == 'PVE' && player.lastBattleResult == 'Win') {
           const item = ItemFactory.createRandomItem();
+          //const item = ItemFactory.createSpecificItems([ITEMS.WONDER_BOX, ITEMS.RED_ORB, ITEMS.BLUE_ORB, ITEMS.ASSAULT_VEST]);
           player.stuff.add(item);
         }
         player.opponentName = '';

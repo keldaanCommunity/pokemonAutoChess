@@ -19,6 +19,10 @@ class ItemFactory {
     ];
     return keys[Math.floor(Math.random() * keys.length)];
   }
+
+  static createSpecificItems(array){
+    return array[Math.floor(Math.random() * array.length)];
+  }
 }
 
 module.exports = ItemFactory;

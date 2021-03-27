@@ -9,49 +9,49 @@ const ArraySchema = schema.ArraySchema;
 const PokemonFactory = require('../models/pokemon-factory');
 
 class PokemonEntity extends schema.Schema {
-  constructor(name, index, positionX, positionY, hp, maxMana, atk, atkSpeed, def, speDef, attackType, range, team, attackSprite, rarity, sheet, types, items, stars, simulation, skill) {
+  constructor(pokemon, positionX, positionY, team, simulation) {
     super();
 
     this.state = new MovingState();
     this.effects = new ArraySchema();
-    this.items = new Items(items);
+    this.items = new Items(pokemon.items);
     this.simulation = simulation;
-    this.strategy = PokemonFactory.createStrategyFromName(skill);
+    this.strategy = PokemonFactory.createStrategyFromName(pokemon.skill);
     this.assign(
         {
           id: uniqid(),
-          rarity: rarity,
-          sheet: sheet,
+          rarity: pokemon.rarity,
+          sheet: pokemon.sheet,
           positionX: positionX,
           positionY: positionY,
           targetX: -1,
           targetY: -1,
-          index: index,
-          name: name,
+          index: pokemon.index,
+          name: pokemon.name,
           critChance: 10,
           action: STATE_TYPE.MOVING,
           orientation: ORIENTATION.DOWNLEFT,
-          baseAtk: atk,
-          baseDef: def,
-          atk: atk,
-          def: def,
-          baseSpeDef: speDef,
-          speDef: speDef,
-          attackType: attackType,
-          hp: hp,
-          maxMana: maxMana,
+          baseAtk: pokemon.atk,
+          baseDef: pokemon.def,
+          atk: pokemon.atk,
+          def: pokemon.def,
+          baseSpeDef: pokemon.speDef,
+          speDef: pokemon.speDef,
+          attackType: pokemon.attackType,
+          hp: pokemon.hp,
+          maxMana:pokemon.maxMana,
           mana: 0,
-          life: hp,
-          atkSpeed: atkSpeed,
-          range: range,
+          life: pokemon.hp,
+          atkSpeed: pokemon.atkSpeed,
+          range: pokemon.range,
           cooldown: 1000,
           manaCooldown: 1000,
           team: team,
-          attackSprite: attackSprite,
+          attackSprite: pokemon.attackSprite,
           types: [],
           damageDone: 0,
-          stars: stars,
-          skill: skill,
+          stars: pokemon.stars,
+          skill: pokemon.skill,
           burn: false,
           silence: false,
           poison: false,
@@ -70,7 +70,7 @@ class PokemonEntity extends schema.Schema {
     this.sleepCooldown = 0;
     this.confusionCooldown = 0;
 
-    types.forEach((type) => {
+    pokemon.types.forEach((type) => {
       this.types.push(type);
     });
   }
