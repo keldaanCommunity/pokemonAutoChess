@@ -1562,7 +1562,7 @@ class Victini extends Pokemon {
 
 class Jirachi extends Pokemon {
   constructor() {
-    super(PKM.JIRACHI, 'jirachi',[TYPE.METAL, TYPE.PSYCHIC], RARITY.MYTHICAL, 'february', 385, '', 300, 30, 5, 5, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.WISH);
+    super(PKM.JIRACHI, 'jirachi',[TYPE.METAL, TYPE.PSYCHIC], RARITY.MYTHICAL, 'february', 385, '', 300, 30, 5, 5, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 50, SPECIAL_SKILL.WISH);
   }
 }
 
