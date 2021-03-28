@@ -1178,19 +1178,19 @@ class Staraptor extends Pokemon {
 
 class Bellsprout extends Pokemon {
   constructor() {
-    super(PKM.BELLSPROUT, 'chétiflor',[TYPE.GRASS, TYPE.POISON], RARITY.COMMON, 'december', 69, PKM.WEEPINBELL, 60, 5, 2, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.BELLSPROUT, 'chétiflor',[TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.COMMON, 'december', 69, PKM.WEEPINBELL, 60, 5, 2, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Weepinbell extends Pokemon {
   constructor() {
-    super(PKM.WEEPINBELL, 'boustiflor',[TYPE.GRASS, TYPE.POISON], RARITY.COMMON, 'december', 70, PKM.VICTREEBEL, 110, 9, 2, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.WEEPINBELL, 'boustiflor',[TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.COMMON, 'december', 70, PKM.VICTREEBEL, 110, 9, 2, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Victreebel extends Pokemon {
   constructor() {
-    super(PKM.VICTREEBEL, 'empiflor',[TYPE.GRASS, TYPE.POISON], RARITY.COMMON, 'december', 71, '', 200, 20, 2, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.VICTREEBEL, 'empiflor',[TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.COMMON, 'december', 71, '', 200, 20, 2, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.ROOT);
   }
 }
 

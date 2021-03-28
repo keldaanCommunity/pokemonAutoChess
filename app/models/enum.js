@@ -2063,8 +2063,8 @@ const RARITY_HP_COST= Object.freeze({
   RARE: 2,
   EPIC: 2,
   LEGENDARY: 3,
-  MYTHICAL: 3,
-  NEUTRAL: 3
+  MYTHICAL: 4,
+  NEUTRAL: 2
 });
 
 const COST = Object.freeze({

@@ -632,21 +632,21 @@ class PokemonFactory {
       case PKM.EEVEE:
         return PKM.EEVEE;
       case PKM.VAPOREON:
-        return PKM.VAPOREON;
+        return PKM.EEVEE;
       case PKM.JOLTEON:
-        return PKM.JOLTEON;
+        return PKM.EEVEE;
       case PKM.FLAREON:
-        return PKM.FLAREON;
+        return PKM.EEVEE;
       case PKM.ESPEON:
-        return PKM.ESPEON;
+        return PKM.EEVEE;
       case PKM.UMBREON:
-        return PKM.UMBREON;
+        return PKM.EEVEE;
       case PKM.LEAFEON:
-        return PKM.LEAFEON;
+        return PKM.EEVEE;
       case PKM.SYLVEON:
-        return PKM.SYLVEON;
+        return PKM.EEVEE;
       case PKM.GLACEON:
-        return PKM.GLACEON;
+        return PKM.EEVEE;
       case PKM.MEDITITE:
         return PKM.MEDITITE;
       case PKM.MEDICHAM:
@@ -815,6 +815,10 @@ class PokemonFactory {
         return PKM.GROUDON;
       case PKM.PRIMALKYOGRE:
         return PKM.KYOGRE;
+      case PKM.FEAROW:
+        return PKM.SPEAROW;
+      case PKM.SPEAROW:
+        return PKM.SPEAROW;
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
