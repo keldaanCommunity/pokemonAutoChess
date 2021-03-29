@@ -820,7 +820,7 @@ const ITEM_DESCRIPTION = Object.freeze({
   SILK_SCARF: {
     eng: '+10% atk speed. +50% damage if type normal.',
     esp: '+10% de velocidad de corte. +50% de daño si el tipo es normal.',
-    fra: '+10% vitesse d attaque. +50% attaque si type électrique.'
+    fra: '+10% vitesse d attaque. +50% attaque si type normal.'
   },
   DAWN_STONE: {
     eng: '+10% atk speed. +50% damage if type psychic. Will evolve Eevee into Espeon.',

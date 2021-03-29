@@ -1,6 +1,6 @@
 const Command = require('@colyseus/command').Command;
 const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY, PKM} = require('../../models/enum');
-const Player = require('../../models/player');
+const Player = require('../../models/colyseus-models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
 const Mongoose = require('mongoose');

@@ -1,8 +1,8 @@
 const schema = require('@colyseus/schema');
-const Message = require('../../models/message');
-const GameUser = require('../../models/game-user');
-const LeaderboardPlayer = require('../../models/leaderboard-player');
-const Chat = require('../../models/chat');
+const Message = require('../../models/colyseus-models/message');
+const GameUser = require('../../models/colyseus-models/game-user');
+const LeaderboardPlayer = require('../../models/colyseus-models/leaderboard-player');
+const Chat = require('../../models/mongo-models/chat');
 const Filter = require('bad-words');
 
 class LobbyState extends schema.Schema {

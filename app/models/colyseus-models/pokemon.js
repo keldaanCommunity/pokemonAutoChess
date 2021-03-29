@@ -4,7 +4,7 @@ const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 const uniqid = require('uniqid');
 const ArraySchema = schema.ArraySchema;
-const {SPECIAL_SKILL, TYPE, RARITY, COST, ATTACK_TYPE, PKM} = require('./enum');
+const {SPECIAL_SKILL, TYPE, RARITY, COST, ATTACK_TYPE, PKM} = require('../enum');
 const Items = require('./items');
 
 class Pokemon extends Schema {

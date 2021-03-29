@@ -3,8 +3,8 @@ const social = require('@colyseus/social');
 const {Dispatcher} = require('@colyseus/command');
 const GameState = require('./states/game-state');
 const Commands = require('./commands/game-commands');
-const Player = require('../models/player');
-const GameStats = require('../models/game-stats');
+const Player = require('../models/colyseus-models/player');
+const GameStats = require('../models/mongo-models/game-stats');
 
 class GameRoom extends colyseus.Room {
   constructor() {

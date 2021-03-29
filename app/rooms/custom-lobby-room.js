@@ -2,10 +2,10 @@ const colyseus = require('colyseus');
 const social = require('@colyseus/social');
 const LobbyState = require('./states/lobby-state');
 const Mongoose = require('mongoose');
-const Chat = require('../models/chat');
+const Chat = require('../models/mongo-models/chat');
 const User = require('@colyseus/social').User;
-const GameUser = require('../models/game-user');
-const LeaderboardPlayer = require('../models/leaderboard-player');
+const GameUser = require('../models/colyseus-models/game-user');
+const LeaderboardPlayer = require('../models/colyseus-models/leaderboard-player');
 
 class CustomLobbyRoom extends colyseus.LobbyRoom {
   constructor() {

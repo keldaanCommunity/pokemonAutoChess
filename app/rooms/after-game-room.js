@@ -1,9 +1,9 @@
 const colyseus = require('colyseus');
 const social = require('@colyseus/social');
-const SimplePlayer = require('../models/simple-player');
+const SimplePlayer = require('../models/colyseus-models/simple-player');
 const {Dispatcher} = require('@colyseus/command');
 const AfterGameState = require('./states/after-game-state');
-const Statistic = require('../models/statistic');
+const Statistic = require('../models/mongo-models/statistic');
 const Filter = require('bad-words');
 const {
   OnJoinCommand,

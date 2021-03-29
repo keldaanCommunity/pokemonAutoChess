@@ -1,4 +1,4 @@
-const Pokemon = require('./pokemon');
+const Pokemon = require('./colyseus-models/pokemon');
 const {SPECIAL_SKILL, PKM} = require('./enum');
 const Strategy = require('../core/attack-strategy');
 

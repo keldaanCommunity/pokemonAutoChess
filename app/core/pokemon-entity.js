@@ -4,7 +4,7 @@ const ORIENTATION = require('../models/enum').ORIENTATION;
 const MovingState = require('./moving-state');
 const AttackingState = require('./attacking-state');
 const uniqid = require('uniqid');
-const Items = require('../models/items');
+const Items = require('../models/colyseus-models/items');
 const ArraySchema = schema.ArraySchema;
 const PokemonFactory = require('../models/pokemon-factory');
 
