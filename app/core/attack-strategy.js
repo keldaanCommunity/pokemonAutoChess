@@ -1067,7 +1067,7 @@ class TeleportStrategy extends AttackStrategy {
     for (let i = 0; i < potentialCells.length; i++) {
       const entity = board.getValue(potentialCells[i][0], potentialCells[i][1]);
       if (entity === undefined) {
-        board.moveValue(pokemon.positionX, pokemon.positionY, potentialCells[i][0], potentialCells[i][1]);
+        board.swapValue(pokemon.positionX, pokemon.positionY, potentialCells[i][0], potentialCells[i][1]);
         pokemon.positionX = potentialCells[i][0];
         pokemon.positionY = potentialCells[i][1];
         break;

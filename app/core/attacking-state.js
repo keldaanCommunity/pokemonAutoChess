@@ -1,4 +1,4 @@
-const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE} = require('../models/enum');
+const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class AttackingState extends PokemonState {
@@ -45,6 +45,10 @@ class AttackingState extends PokemonState {
         pokemon.setMana(pokemon.mana + 5);
       }
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
+      if(pokemon.orientation == ORIENTATION.UNCLEAR){
+        console.log(`error orientation, was attacking, name ${pokemon.name}`)
+        pokemon.orientation = ORIENTATION.DOWNLEFT;
+      }
       // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
       if (target.effects.includes(EFFECTS.ATTRACT)) {
         if (Math.random() > 0.75) {

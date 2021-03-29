@@ -1,4 +1,4 @@
-const STATE_TYPE = require('../models/enum').STATE_TYPE;
+const {STATE_TYPE, ORIENTATION} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class MovingState extends PokemonState {
@@ -44,8 +44,12 @@ class MovingState extends PokemonState {
     });
     if (x !== undefined && y !== undefined) {
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, x, y);
+      if(pokemon.orientation == ORIENTATION.UNCLEAR){
+        console.log(`error orientation, was moving, name ${pokemon.name}`)
+        pokemon.orientation = ORIENTATION.DOWNLEFT;
+      }
       // console.log(`pokemon moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates[0]}, ${coordinates[1]})), orientation: ${pokemon.orientation}`);
-      board.moveValue(pokemon.positionX, pokemon.positionY, x, y);
+      board.swapValue(pokemon.positionX, pokemon.positionY, x, y);
       pokemon.positionX = x;
       pokemon.positionY = y;
     }

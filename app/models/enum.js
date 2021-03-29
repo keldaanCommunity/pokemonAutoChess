@@ -2149,7 +2149,8 @@ const ORIENTATION = Object.freeze({
   UPRIGHT: 'UPRIGHT',
   RIGHT: 'RIGHT',
   DOWNRIGHT: 'DOWNRIGHT',
-  DOWN: 'DOWN'
+  DOWN: 'DOWN',
+  UNCLEAR: 'UNCLEAR'
 });
 
 const ATTACK_TYPE = Object.freeze({

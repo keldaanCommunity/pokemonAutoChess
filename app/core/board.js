@@ -66,16 +66,7 @@ class Board {
     } else if (vx == 0) {
       if (vy == 0) {
         console.log('error orientation', r0, c0, r1, c1);
-        if(this.cell){
-          this.cell.forEach((c)=>{
-            if(c && c.value){
-              console.log(c.value.name);
-              console.log(c.value.positionX);
-              console.log(c.value.positionY);
-            }
-          });
-        }
-        return ORIENTATION.DOWNLEFT;
+        return ORIENTATION.UNCLEAR;
       } else if (vy < 0) {
         return ORIENTATION.DOWN;
       } else {
