@@ -244,14 +244,6 @@ class PokemonState {
       if (pokemon.effects.includes(EFFECTS.RAIN_DISH)) {
         pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
       }
-
-      if (pokemon.effects.includes(EFFECTS.POISON_GAS)) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
-      }
-
-      if (pokemon.effects.includes(EFFECTS.TOXIC) && (!pokemon.types.includes(TYPE.POISON) && !pokemon.types.includes(TYPE.METAL))) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
-      }
     }
     return updateEffects;
   }

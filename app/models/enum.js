@@ -1085,12 +1085,12 @@ const EFFECTS_ICON = Object.freeze({
     },
     POISON_GAS: {
       level: 1,
-      positive: false,
+      positive: true,
       type:TYPE.POISON
     },
     TOXIC: {
       level: 2,
-      positive: false,
+      positive: true,
       type:TYPE.POISON
     },
     INTIMIDATE: {
@@ -2595,31 +2595,31 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Toxik Gas`,
-          text:`30% chance of poisoning each pkm of the enemy team (5% HP/s)`
+          text:`+20% chance of poison the target for 2 seconds, dealing 15% hp/seconds`
         },
         {
           title:`(6) Toxik`,
-          text:`All the pkm of the enemy team are poisoned (5% HP/s)`
+          text:`+30% chance of poison the target for 2 seconds, dealing 15% hp/seconds`
         }
       ],
       esp:[
         {
           title:`(3) Toxik gas`,
-          text:`30% de probabilidad de envenenar cada pkm del equipo enemigo (5% HP/s)`
+          text:`+20% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo`
         },
         {
           title:`(6) Fuerza`,
-          text:`Todos los pkm del equipo enemigo están envenenados (5% HP/s)`
+          text:`+30% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo`
         }
       ],
       fra:[
         {
           title:`(3) Gaz Toxik`,
-          text:`30% de chance d'empoisonner chaque pkm de l'équipe ennemie (5% HP/s)`
+          text:`+20% de chances d'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes`
         },
         {
           title:`(6) Toxik`,
-          text:`Tous les pkm de la team ennemie sont empoisonnés (5% HP/s)`
+          text:`+30% de chances d'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes`
         }
       ]
     }

@@ -982,7 +982,7 @@ class PoisonStingStrategy extends AttackStrategy {
       default:
         break;
     }
-    if (target.effects.includes(EFFECTS.POISON_GAS) || target.effects.includes(EFFECTS.TOXIC)) {
+    if (pokemon.effects.includes(EFFECTS.POISON_GAS) || pokemon.effects.includes(EFFECTS.TOXIC)) {
       damage = damage * 2;
     }
 

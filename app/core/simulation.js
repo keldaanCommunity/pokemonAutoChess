@@ -559,6 +559,18 @@ class Simulation extends Schema {
           }
           break;
 
+        case EFFECTS.POISON_GAS:
+          if(types.includes(TYPE.POISON)){
+            pokemon.effects.push(EFFECTS.POISON_GAS);
+          }
+          break;
+
+        case EFFECTS.TOXIC:
+          if(types.includes(TYPE.POISON)){
+            pokemon.effects.push(EFFECTS.TOXIC);
+          }
+          break;
+
         default:
           break;
       }
@@ -589,16 +601,6 @@ class Simulation extends Schema {
         case EFFECTS.STEALTH_ROCK:
           pokemon.handleDamage(Math.ceil(pokemon.hp * 0.1), this.board, ATTACK_TYPE.TRUE);
           pokemon.effects.push(EFFECTS.STEALTH_ROCK);
-          break;
-
-        case EFFECTS.POISON_GAS:
-          if (Math.random() > 0.7) {
-            pokemon.effects.push(EFFECTS.POISON_GAS);
-          }
-          break;
-
-        case EFFECTS.TOXIC:
-          pokemon.effects.push(EFFECTS.TOXIC);
           break;
 
         case EFFECTS.INTIMIDATE:

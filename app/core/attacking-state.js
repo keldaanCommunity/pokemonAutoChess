@@ -1,4 +1,4 @@
-const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION} = require('../models/enum');
+const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION, TYPE} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class AttackingState extends PokemonState {
@@ -48,9 +48,18 @@ class AttackingState extends PokemonState {
           target.triggerFreeze(2000);
         }
       }
-      if (pokemon.effects.includes(EFFECTS.SHEER_COLD)) {
-        pokemon.setMana(pokemon.mana + 5);
-      }
+       let poisonChance = 0;
+       if(pokemon.effects.includes(EFFECTS.POISON_GAS)){
+          poisonChance += 0.2;
+       }
+       if(pokemon.effects.includes(EFFECTS.TOXIC)){
+         poisonChance += 0.3;
+       }
+       if(poisonChance != 0 && !(target.types.includes(TYPE.METAL) || target.types.includes(TYPE.POISON))){
+         if(Math.random() > poisonChance){
+           target.triggerPoison(2000);
+         }
+       }
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
       if(pokemon.orientation == ORIENTATION.UNCLEAR){
         console.log(`error orientation, was attacking, name ${pokemon.name}`)
