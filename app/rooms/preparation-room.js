@@ -1,7 +1,9 @@
 const colyseus = require('colyseus');
 const social = require('@colyseus/social');
 const {Dispatcher} = require('@colyseus/command');
+const EloBot = require('../models/mongo-models/elo-bot');
 const PreparationState = require('./states/preparation-state');
+const Mongoose = require('mongoose');
 const Filter = require('bad-words');
 const {
   OnGameStartCommand,
@@ -18,12 +20,22 @@ class PreparationRoom extends colyseus.Room {
     super();
     this.dispatcher = new Dispatcher(this);
     this.filter = new Filter();
+    this.elos = new Map();
   }
 
   onCreate(options) {
+    let self = this;
     this.setState(new PreparationState());
     this.maxClients = 8;
-    this.dispatcher.dispatch(new OnAddBotCommand());
+
+    Mongoose.connect(process.env.MONGO_URI, (err) => {
+      EloBot.find({},(err, bots) => {
+        bots.forEach(bot => {
+          self.elos.set(bot.name, bot.elo);
+        });
+        self.dispatcher.dispatch(new OnAddBotCommand());
+      });
+    });
 
     this.onMessage('game-start', (client, message) => {
       this.dispatcher.dispatch(new OnGameStartCommand(), {client, message});

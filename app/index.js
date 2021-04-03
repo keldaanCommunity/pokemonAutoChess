@@ -52,6 +52,7 @@ hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
     wins: 0,
     exp: 0,
     level: 0,
+    elo: 1000,
     mapWin: {
       ICE: 0,
       FIRE: 0,
@@ -64,7 +65,6 @@ hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
 });
 
 // Room
-
 const AfterGameRoom = require('./rooms/after-game-room');
 const LobbyRoom = require('./rooms/custom-lobby-room');
 const PreprationRoom = require('./rooms/preparation-room');
@@ -75,9 +75,6 @@ gameServer.define('lobby', LobbyRoom);
 gameServer.define('room', PreprationRoom).enableRealtimeListing();
 gameServer.define('game', GameRoom);
 
-
-
 // Start
-
 gameServer.listen(port);
 console.log(`Game server started, listening on port ${port}`);

@@ -345,6 +345,7 @@ class OnJoinCommand extends Command {
     this.state.players.set(client.sessionId, new Player(
         client.sessionId,
         auth.email.slice(0, auth.email.indexOf('@')),
+        client.auth.metadata.elo,
         client.auth.metadata.avatar,
         false,
         this.state.specialCells,

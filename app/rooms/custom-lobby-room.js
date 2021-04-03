@@ -492,8 +492,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
   onJoin(client, options, auth) {
     super.onJoin(client, options, auth);
-    console.log('join lobby');
-    this.state.users[client.sessionId] = new GameUser(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.avatar, false, false);
+    this.state.users[client.sessionId] = new GameUser(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.elo, auth.metadata.avatar, false, false);
     //console.log(this.state.users);
     //this.state.addMessage(auth.email.split('@')[0], `${auth.email.split('@')[0]} joined.`, auth.metadata.avatar, Date.now(), true);
     this.clients.forEach((cli) => {

@@ -5,6 +5,9 @@ const GameState = require('./states/game-state');
 const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
 const GameStats = require('../models/mongo-models/game-stats');
+const EloBot = require('../models/mongo-models/elo-bot');
+const {POKEMON_BOT} = require('../models/enum');
+const EloRank = require('elo-rank');
 
 class GameRoom extends colyseus.Room {
   constructor() {
@@ -16,10 +19,11 @@ class GameRoom extends colyseus.Room {
   onCreate(options) {
     this.setState(new GameState());
     this.maxClients = 8;
+    this.eloEngine = new EloRank();
     for (const id in options.users) {
       const user = options.users[id];
       if (user.isBot) {
-        this.state.players.set(id, new Player(user.id, user.name, user.avatar, true, this.state.specialCells, this.state.mapType, '', this.state.players.size + 1));
+        this.state.players.set(id, new Player(user.id, user.name, user.elo, user.avatar, true, this.state.specialCells, this.state.mapType, '', this.state.players.size + 1));
         this.state.botManager.addBot(this.state.players[id]);
         this.state.shop.assignShop(this.state.players[id]);
       }
@@ -100,8 +104,50 @@ class GameRoom extends colyseus.Room {
   }
 
   onDispose() {
+    let self = this;
+    if(this.state.stageLevel > 5){
+      this.state.players.forEach(player =>{
+        if(player.isBot){
+          EloBot.find({'name': POKEMON_BOT[player.name]}, (err, bots)=>{
+            if(bots){
+              bots.forEach(bot =>{
+                bot.elo = self.computeElo(player);
+                bot.save();
+              }); 
+            }
+          });
+        }
+      });
+    }
     this.dispatcher.stop();
     console.log('Dispose game');
+  }
+
+  computeElo(player){
+    let eloGains = [];
+    for (let i = 0; i < eloGains.length; i++) {
+      eloGains.push(actualElo);
+    }
+    let meanGain = 0;
+    this.state.players.forEach(plyr =>{
+      if(player.name != plyr.name){
+        let expectedScoreA = this.eloEngine.getExpected(player.elo, plyr.elo);
+        if(player.rank < plyr.rank){
+          eloGains.push(this.eloEngine.updateRating(expectedScoreA, 1, player.elo));
+        }
+        else{
+          eloGains.push(this.eloEngine.updateRating(expectedScoreA, 0, player.elo));
+        }
+      }
+    });
+
+    eloGains.forEach(gain => {
+      meanGain += gain;
+    });
+    meanGain = Math.floor(meanGain / eloGains.length);
+    //console.log(`${player.name} will be ${meanGain} (${player.rank})`);
+    return meanGain;
+
   }
 
   getRandomOpponent(playerId, lastOpponentName) {

@@ -10,7 +10,7 @@ const MapSchema = schema.MapSchema;
 const ArraySchema = schema.ArraySchema;
 
 class Player extends Schema {
-  constructor(id, name, avatar, isBot, specialCells, mapType, email, rank) {
+  constructor(id, name, elo, avatar, isBot, specialCells, mapType, email, rank) {
     super();
     this.assign({
       id: id,
@@ -35,7 +35,8 @@ class Player extends Schema {
       isBot: isBot,
       email: email,
       exp: 0,
-      rank: rank
+      rank: rank,
+      elo: elo
     });
   }
 }
@@ -61,7 +62,8 @@ schema.defineTypes(Player, {
   stuff: Stuff,
   rank : 'uint8',
   exp: 'uint16',
-  alive: 'boolean'
+  alive: 'boolean',
+  elo: 'uint16'
 });
 
 module.exports = Player;
