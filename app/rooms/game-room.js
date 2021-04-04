@@ -128,7 +128,7 @@ class GameRoom extends colyseus.Room {
               console.log(err);
             } else {
               users.forEach((usr) => {
-                usr.elo = self.computeElo(player, rank);
+                usr.metadata.elo = self.computeElo(player, rank);
                 usr.markModified('metadata');
                 usr.save();
               });
