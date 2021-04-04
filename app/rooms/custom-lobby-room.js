@@ -457,6 +457,17 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
             changeNeeded = true;
           }
           break;
+        
+        case 'meowth':
+          if(client.auth.metadata.donor){
+            changeNeeded = true;
+          }
+          break;
+        
+        case 'persian':
+          if(client.auth.metadata.donor){
+            changeNeeded = true;
+          }
 
         default:
           break;

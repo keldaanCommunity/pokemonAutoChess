@@ -259,10 +259,17 @@ const PKM = Object.freeze({
   HOOH: "ho-Oh",
   AERODACTYL:"aerodactyl",
   PRIMALKYOGRE:"primal-Kyogre",
-  PRIMALGROUDON:"primal-Groudon"
+  PRIMALGROUDON:"primal-Groudon",
+  MEOWTH:"meowth",
+  PERSIAN:"persian"
 });
 
 const WORDS = Object.freeze({
+  TIPEE_DONOR:{
+    'eng': ' being a tipee donor',
+    'esp': 'ser donante de tipee',
+    'fra': 'être un donateur tipee'
+  },
   LEVEL:{
     'eng': 'Level',
     'esp': 'Nivel',

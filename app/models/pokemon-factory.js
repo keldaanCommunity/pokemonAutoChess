@@ -819,6 +819,10 @@ class PokemonFactory {
         return PKM.SPEAROW;
       case PKM.SPEAROW:
         return PKM.SPEAROW;
+      case PKM.MEOWTH:
+        return PKM.MEOWTH;
+      case PKM.PERSIAN:
+        return PKM.MEOWTH;
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1349,6 +1353,10 @@ class PokemonFactory {
         return new Pokemon.PrimalKyogre();
       case PKM.PRIMALGROUDON:
         return new Pokemon.PrimalGroudon();
+      case PKM.MEOWTH:
+        return new Pokemon.Meowth();
+      case PKM.PERSIAN:
+        return new Pokemon.Persian();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();

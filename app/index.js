@@ -53,6 +53,7 @@ hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
     exp: 0,
     level: 0,
     elo: 1000,
+    donor: false,
     mapWin: {
       ICE: 0,
       FIRE: 0,

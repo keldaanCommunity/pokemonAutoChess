@@ -110,13 +110,13 @@ class MegaSteelix extends Pokemon {
 
 class Growlithe extends Pokemon {
   constructor() {
-    super(PKM.GROWLITHE, 'caninos',[TYPE.FIRE, TYPE.FIELD], RARITY.LEGENDARY, 'LEGENDARY', 58, PKM.ARCANINE, 90, 9, 5, 5, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super(PKM.GROWLITHE, 'caninos',[], RARITY.LEGENDARY, 'LEGENDARY', 58, PKM.ARCANINE, 90, 9, 5, 5, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Arcanine extends Pokemon {
   constructor() {
-    super(PKM.ARCANINE, 'arcanin',[TYPE.FIRE, TYPE.FIELD], RARITY.LEGENDARY, 'LEGENDARY', 59, '', 130, 20, 5, 5, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super(PKM.ARCANINE, 'arcanin',[], RARITY.LEGENDARY, 'LEGENDARY', 59, '', 130, 20, 5, 5, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
@@ -140,13 +140,13 @@ class MegaCamerupt extends Pokemon {
 
 class Munchlax extends Pokemon {
   constructor() {
-    super(PKM.MUNCHLAX, 'goinfrex',[TYPE.NORMAL, TYPE.HUMAN], RARITY.LEGENDARY, 'LEGENDARY', 446, PKM.SNORLAX, 90, 9, 5, 5, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super(PKM.MUNCHLAX, 'goinfrex',[], RARITY.LEGENDARY, 'LEGENDARY', 446, PKM.SNORLAX, 90, 9, 5, 5, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Snorlax extends Pokemon {
   constructor() {
-    super(PKM.SNORLAX, 'ronflex',[TYPE.NORMAL, TYPE.HUMAN], RARITY.LEGENDARY, 'LEGENDARY', 143, '', 130, 20, 5, 5, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super(PKM.SNORLAX, 'ronflex',[], RARITY.LEGENDARY, 'LEGENDARY', 143, '', 130, 20, 5, 5, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
@@ -1614,6 +1614,18 @@ class PrimalKyogre extends Pokemon {
   }
 }
 
+class Meowth extends Pokemon {
+  constructor() {
+    super(PKM.MEOWTH, 'miaouss',[], RARITY.NEUTRAL, 'february', 52, '', 100, 10, 2, 2, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+  }
+}
+
+class Persian extends Pokemon {
+  constructor() {
+    super(PKM.PERSIAN, 'persian',[], RARITY.NEUTRAL, 'february', 53, '', 100, 10, 2, 2, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+  }
+}
+
 
 schema.defineTypes(Pokemon, {
   id: 'string',
@@ -1903,5 +1915,7 @@ module.exports = {
   Houndour,
   Carvanha,
   PrimalGroudon,
-  PrimalKyogre
+  PrimalKyogre,
+  Meowth,
+  Persian
 };
