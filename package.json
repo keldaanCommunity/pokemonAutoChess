@@ -38,7 +38,7 @@
     "email-validator": "^2.0.4",
     "express": "^4.16.4",
     "express-basic-auth": "^1.2.0",
-    "express-jwt": "^5.3.3",
+    "express-jwt": "^6.0.0",
     "express-rate-limit": "^5.2.6",
     "helmet": "^3.23.3",
     "mongoose": "^5.12.0",
