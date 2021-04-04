@@ -36,8 +36,11 @@ export default class DpsMeterContainer extends GameObjects.Container {
   changeDps(dps, change) {
     if (change.field == 'damage') {
       const child = this.getFirst('id', dps.id);
-      child.damage = change.value;
-      child.damageText.setText(change.value);
+      if(child){
+        child.damage = change.value;
+        child.damageText.setText(change.value);
+      }
+
       if (this.maxDamage < change.value) {
         this.maxDamage = Math.max(change.value, this.maxDamage);
         this.updateDps();
