@@ -5,6 +5,7 @@ const GameState = require('./states/game-state');
 const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
 const GameStats = require('../models/mongo-models/game-stats');
+const User = require('@colyseus/social').User;
 const EloBot = require('../models/mongo-models/elo-bot');
 const {POKEMON_BOT} = require('../models/enum');
 const EloRank = require('elo-rank');
@@ -111,9 +112,26 @@ class GameRoom extends colyseus.Room {
           EloBot.find({'name': POKEMON_BOT[player.name]}, (err, bots)=>{
             if(bots){
               bots.forEach(bot =>{
-                bot.elo = self.computeElo(player);
+                bot.elo = self.computeElo(player, player.rank);
                 bot.save();
               }); 
+            }
+          });
+        }
+        else{
+          let rank = player.rank;
+          if(!this.state.gameFinished && player.life != 0){
+            rank = 9;
+          }
+          User.find({email: player.email}, (err, users)=> {
+            if (err) {
+              console.log(err);
+            } else {
+              users.forEach((usr) => {
+                usr.elo = self.computeElo(player, rank);
+                usr.markModified('metadata');
+                usr.save();
+              });
             }
           });
         }
@@ -123,7 +141,7 @@ class GameRoom extends colyseus.Room {
     console.log('Dispose game');
   }
 
-  computeElo(player){
+  computeElo(player, rank){
     let eloGains = [];
     for (let i = 0; i < eloGains.length; i++) {
       eloGains.push(actualElo);
@@ -132,7 +150,7 @@ class GameRoom extends colyseus.Room {
     this.state.players.forEach(plyr =>{
       if(player.name != plyr.name){
         let expectedScoreA = this.eloEngine.getExpected(player.elo, plyr.elo);
-        if(player.rank < plyr.rank){
+        if(rank < plyr.rank){
           eloGains.push(this.eloEngine.updateRating(expectedScoreA, 1, player.elo));
         }
         else{
@@ -145,7 +163,8 @@ class GameRoom extends colyseus.Room {
       meanGain += gain;
     });
     meanGain = Math.floor(meanGain / eloGains.length);
-    //console.log(`${player.name} will be ${meanGain} (${player.rank})`);
+    //console.log(eloGains);
+    console.log(`${player.name} will be ${meanGain} (${rank})`);
     return meanGain;
 
   }
