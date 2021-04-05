@@ -114,9 +114,9 @@ class LobbyPage {
       self.addMessage(message);
     };
 
-    this.room.state.playerEloLeaderboard.onAdd = (player, id) =>{
+    this.room.state.leaderboard.onAdd = (player, id) =>{
       if(player.rank >= 25){
-        self.handleLeaderboardEloChange();
+        self.handleLeaderboardChange();
       }
     }
 
@@ -394,7 +394,7 @@ class LobbyPage {
     });
     this.handleRoomListChange();
     this.handleUserListChange();
-    this.handleLeaderboardEloChange();
+    this.handleLeaderboardChange();
     this.room.state.messages.forEach((message, index) => {
       self.addMessage(message);
     });
