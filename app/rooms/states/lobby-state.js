@@ -14,7 +14,8 @@ class LobbyState extends schema.Schema {
     this.mythicalPokemonLeaderboard = new schema.ArraySchema();
     this.typesLeaderboard = new schema.ArraySchema();
     this.threeStarsLeaderboard = new schema.ArraySchema();
-    this.playersLeaderboard = new schema.ArraySchema();
+    this.botEloLeaderboard = new schema.ArraySchema();
+    this.playerEloLeaderboard = new schema.ArraySchema();
     this.users = new schema.MapSchema();
     this.filter = new Filter();
   }
@@ -52,7 +53,8 @@ schema.defineTypes(LobbyState, {
   mythicalPokemonLeaderboard: [LeaderboardInfo],
   typesLeaderboard: [LeaderboardInfo],
   threeStarsLeaderboard: [LeaderboardInfo],
-  playersLeaderboard: [LeaderboardInfo]
+  botEloLeaderboard: [LeaderboardInfo],
+  playerEloLeaderboard: [LeaderboardInfo]
 });
 
 module.exports = LobbyState;

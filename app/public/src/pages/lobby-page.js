@@ -114,9 +114,9 @@ class LobbyPage {
       self.addMessage(message);
     };
 
-    this.room.state.leaderboard.onAdd = (player, id) =>{
-      if(player.rank >= 24){
-        self.handleLeaderboardChange();
+    this.room.state.playerEloLeaderboard.onAdd = (player, id) =>{
+      if(player.rank >= 25){
+        self.handleLeaderboardEloChange();
       }
     }
 
@@ -196,7 +196,7 @@ class LobbyPage {
         <div class="modal-header">
         <div style="display:flex;flex-flow:row;">
           <img style="width:50px;" id='avatarModal' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
-          <h4>${username}</h4>
+          <h4>${username} (${_client.auth.metadata.elo})</h4>
         </div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -304,9 +304,11 @@ class LobbyPage {
             <a class="dropdown-item" href="#" id ="type-button">
             Most played type</a>
             <a class="dropdown-item" href="#" id ="leaderboard-button">
-            Leaderboard player</a>
-            <a class="dropdown-item" href="#" id ="players-button">
-            Most played game by player</a>
+            Player Level</a>
+            <a class="dropdown-item" href="#" id ="elo-bot-button">
+            Leaderboard</a>
+            <a class="dropdown-item" href="#" id ="elo-player-button">
+            Bot Leaderboard</a>
           </div>
       </div>
     </div>
@@ -358,7 +360,7 @@ class LobbyPage {
 
     <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; width:30%; overflow-y: scroll;
     height: 90vh;">
-      <div style="display:flex;flex-flow:row; justify-content: center;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${username}</p></div>
+      <div style="display:flex;flex-flow:row; justify-content: center;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${username} (${_client.auth.metadata.elo})</p></div>
       <h3 style="margin:10px;">${WORDS.AVAILABLE_ROOM_IDS[this.langage]}:</h3>
       
       <div id="room-list" style="margin-top:10px; list-style: none;"></div>
@@ -392,7 +394,7 @@ class LobbyPage {
     });
     this.handleRoomListChange();
     this.handleUserListChange();
-    this.handleLeaderboardChange();
+    this.handleLeaderboardEloChange();
     this.room.state.messages.forEach((message, index) => {
       self.addMessage(message);
     });
@@ -459,8 +461,12 @@ class LobbyPage {
       self.handleLeaderboardTheeStarsPokemonChange();
     });
 
-    document.getElementById('players-button').addEventListener('click', (e) => {
-      self.handleLeaderboardPlayersChange();
+    document.getElementById('elo-bot-button').addEventListener('click', (e) => {
+      self.handleLeaderboardEloChange();
+    });
+
+    document.getElementById('elo-player-button').addEventListener('click', (e) => {
+      self.handleLeaderboardEloBotChange();
     });
   }
 
@@ -504,10 +510,74 @@ class LobbyPage {
         imageHTML.src = `assets/avatar/${user.avatar}.png`;
         const nameHTML = document.createElement('p');
         nameHTML.style.fontSize = '10px';
-        nameHTML.textContent = user.name;
+        nameHTML.textContent = `${user.name} (${_client.auth.metadata.elo})`;
         userHTML.appendChild(imageHTML);
         userHTML.appendChild(nameHTML);
         document.getElementById('user-container').appendChild(userHTML);
+      });
+    }
+  }
+
+  handleLeaderboardEloChange(){
+    document.getElementById('secondThTitle').textContent = 'Player';
+    document.getElementById('thirdThTitle').textContent = 'Elo';
+    if(document.getElementById('leaderboard-container')){
+      document.getElementById('leaderboard-table').innerHTML = '';
+      this.room.state.playerEloLeaderboard.forEach(player =>{
+        const playerHTML = document.createElement('tr');
+
+        const rankHTML = document.createElement('td');
+        rankHTML.textContent = player.rank;
+
+        const avatarHTML = document.createElement('td');
+        const imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${player.avatar}.png`;
+        avatarHTML.appendChild(imageHTML);
+
+        const nameHTML = document.createElement('td');
+        nameHTML.textContent = player.name.slice(0,10);
+
+        const levelHTML = document.createElement('td');
+        levelHTML.textContent = player.value;
+
+        playerHTML.appendChild(rankHTML);
+        playerHTML.appendChild(avatarHTML);
+        playerHTML.appendChild(nameHTML);
+        playerHTML.appendChild(levelHTML);
+
+        document.getElementById('leaderboard-table').appendChild(playerHTML);
+      });
+    }
+  }
+
+  handleLeaderboardEloBotChange(){
+    document.getElementById('secondThTitle').textContent = 'Bot';
+    document.getElementById('thirdThTitle').textContent = 'Elo';
+    if(document.getElementById('leaderboard-container')){
+      document.getElementById('leaderboard-table').innerHTML = '';
+      this.room.state.botEloLeaderboard.forEach(player =>{
+        const playerHTML = document.createElement('tr');
+
+        const rankHTML = document.createElement('td');
+        rankHTML.textContent = player.rank;
+
+        const avatarHTML = document.createElement('td');
+        const imageHTML = document.createElement('img');
+        imageHTML.src = `assets/avatar/${player.avatar}.png`;
+        avatarHTML.appendChild(imageHTML);
+
+        const nameHTML = document.createElement('td');
+        nameHTML.textContent = player.name.slice(0,10);
+
+        const levelHTML = document.createElement('td');
+        levelHTML.textContent = player.value;
+
+        playerHTML.appendChild(rankHTML);
+        playerHTML.appendChild(avatarHTML);
+        playerHTML.appendChild(nameHTML);
+        playerHTML.appendChild(levelHTML);
+
+        document.getElementById('leaderboard-table').appendChild(playerHTML);
       });
     }
   }
@@ -680,46 +750,6 @@ class LobbyPage {
         const avatarHTML = document.createElement('td');
         const imageHTML = document.createElement('img');
         imageHTML.src = `assets/avatar/${player.avatar}.png`;
-        avatarHTML.appendChild(imageHTML);
-
-        const nameHTML = document.createElement('td');
-        nameHTML.textContent = player.name.slice(0,10);
-
-        const levelHTML = document.createElement('td');
-        levelHTML.textContent = player.value;
-
-        playerHTML.appendChild(rankHTML);
-        playerHTML.appendChild(avatarHTML);
-        playerHTML.appendChild(nameHTML);
-        playerHTML.appendChild(levelHTML);
-
-        document.getElementById('leaderboard-table').appendChild(playerHTML);
-      });
-    }
-  }
-
-  handleLeaderboardPlayersChange(){
-    document.getElementById('secondThTitle').textContent = 'Player';
-    document.getElementById('thirdThTitle').textContent = 'Count';
-    if(document.getElementById('leaderboard-container')){
-      document.getElementById('leaderboard-table').innerHTML = '';
-      this.room.state.playersLeaderboard.forEach(player =>{
-        let avatar = player.avatar;
-        if(avatar == 'rattata'){
-          this.room.state.leaderboard.forEach(plyr =>{
-            if(plyr.name == player.name){
-              avatar = plyr.avatar;
-            }
-          });
-        }
-        const playerHTML = document.createElement('tr');
-
-        const rankHTML = document.createElement('td');
-        rankHTML.textContent = player.rank;
-
-        const avatarHTML = document.createElement('td');
-        const imageHTML = document.createElement('img');
-        imageHTML.src = `assets/avatar/${avatar}.png`;
         avatarHTML.appendChild(imageHTML);
 
         const nameHTML = document.createElement('td');

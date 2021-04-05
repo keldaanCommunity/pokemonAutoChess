@@ -11,6 +11,7 @@ class GameState extends schema.Schema {
     super();
     const keys = Object.keys(MAP_TYPE);
     const mapType = keys[Math.floor(Math.random() * keys.length)];
+    //const mapType = MAP_TYPE.FIRE;
     const time = 60000;
     const roundTime = Math.round(time/1000);
     this.players = new schema.MapSchema();

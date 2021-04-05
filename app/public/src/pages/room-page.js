@@ -22,7 +22,7 @@ class RoomPage {
     <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; display:flex; flex-flow:column; justify-content:space-between;">
       <p class="title">${WORDS.ROOM_ID[this.langage]}: ${this.room.id}</p>
       <div style="display:flex;flex-flow:row;"><img style="width:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
-      <p style='margin-left:10px;'>${_client.auth.email}</p>
+      <p style='margin-left:10px;'>${_client.auth.email.slice(0, _client.auth.email.indexOf('@'))} (${_client.auth.metadata.elo})</p>
       </div>
       <h3>${WORDS.PLAYERS_IN_ROOM[this.langage]} :</h3>
       <table id="players-table" style="width:100%; flex-grow:2; border-spacing: 10px;">
@@ -209,7 +209,7 @@ class RoomPage {
         }
         document.getElementById('players-table').innerHTML +=`
         <tr>
-        <td style="display:flex;"><img style="width:50px; height:50px;"src="assets/avatar/${user.avatar}.png"></img><p>${user.name}</p></td>
+        <td style="display:flex;"><img style="width:50px; height:50px;"src="assets/avatar/${user.avatar}.png"></img><p>${user.name} (${user.elo})</p></td>
         <td>${icon}</td>
         </tr>`;
       };

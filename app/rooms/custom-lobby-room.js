@@ -1,6 +1,6 @@
 const colyseus = require('colyseus');
 const social = require('@colyseus/social');
-const {PKM, TYPE, RARITY} = require('../models/enum');
+const {PKM, TYPE, RARITY, BOT_AVATAR} = require('../models/enum');
 const LobbyState = require('./states/lobby-state');
 const Mongoose = require('mongoose');
 const Chat = require('../models/mongo-models/chat');
@@ -9,6 +9,7 @@ const Statistic = require('../models/mongo-models/statistic');
 const GameUser = require('../models/colyseus-models/game-user');
 const LeaderboardInfo = require('../models/colyseus-models/leaderboard-info');
 const PokemonFactory = require('../models/pokemon-factory');
+const EloBot = require('../models/mongo-models/elo-bot');
 
 class CustomLobbyRoom extends colyseus.LobbyRoom {
   constructor() {
@@ -30,22 +31,37 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           });
         }
       });
-      User.find({'metadata.level': { $gte: 1 }}, (err, users)=> {
+      User.find({}, ['email','metadata'], {limit:25, sort:{'metadata.level': -1}}, (err, users)=> {
         if(err){
-          message.reply(`Bzz bzz, ERROR connecting to the database, proceed to self destruction.`);
+          console.log(err);
         }
         else{
-          if(users.length == 0){
-            message.reply(`Bzz bzz, No users found with email ${email}.`);
+          for (let i = 0; i < users.length; i++) {
+            const user = users[i];
+            self.state.leaderboard.push(new LeaderboardInfo(user.email.slice(0, user.email.indexOf('@')), user.metadata.avatar, i + 1, user.metadata.level));
           }
-          users.sort(function(a, b) {
-            return parseInt(b.metadata.level) - parseInt(a.metadata.level);
-          });
         }
-
-        for (let i = 0; i < 25; i++) {
-          const user = users[i];
-          self.state.leaderboard.push(new LeaderboardInfo(user.email.slice(0, user.email.indexOf('@')), user.metadata.avatar, i + 1, user.metadata.level));
+      });
+      User.find({},['email','metadata'],{limit:25, sort:{'metadata.elo': -1}}, (err, users)=>{
+        if(err){
+          console.log(err);
+        }
+        else{
+          for (let i = 0; i < users.length; i++) {
+            const user = users[i];
+            self.state.playerEloLeaderboard.push(new LeaderboardInfo(user.email.slice(0, user.email.indexOf('@')), user.metadata.avatar, i + 1, user.metadata.elo));
+          }
+        }
+      });
+      EloBot.find({},['name','elo'],{sort: {'elo': -1}}, (err, bots)=>{
+        if(err){
+          console.log(err);
+        }
+        else{
+          for (let i = 0; i < bots.length; i++) {
+            const bot = bots[i];
+            self.state.botEloLeaderboard.push(new LeaderboardInfo(BOT_AVATAR[bot.name], BOT_AVATAR[bot.name], i + 1, bot.elo));
+          }
         }
       });
       Statistic.find({'time':{$gt: Date.now() - 2592000000}}, (err, stats)=>{
@@ -53,7 +69,6 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
         let pkmCount = new Map();
         let mythicalPkmCount = new Map();
         let threeStarsPkmCount = new Map();
-        let playersCount = new Map();
         let avatars = new Map();
 
         Object.keys(TYPE).forEach(type => {
@@ -69,12 +84,6 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
             if(stat.pokemons.length > 2){
               if(stat.avatar && !avatars.has(stat.name)){
                 avatars.set(stat.name, stat.avatar);
-              }
-              if(playersCount.has(stat.name)){
-                playersCount.set(stat.name, playersCount.get(stat.name) + 1);
-              }
-              else{
-                playersCount.set(stat.name, 1);
               }
             }
             stat.pokemons.forEach(pokemon =>{
@@ -96,18 +105,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
         let mythicalPkms = [];
         let pkms = [];
         let threeStarsPkm = [];
-        let players = [];
 
-        playersCount.forEach((value, key) =>{
-          if(value != 0){
-            if(avatars.has(key)){
-              players.push({player: key, count: value, avatar: avatars.get(key)});
-            }
-            else{
-              players.push({player: key, count: value, avatar: 'rattata'});
-            }
-          }
-        });
         pkmCount.forEach((value, key) =>{
           if(value != 0){
             pkms.push({pkm: key, count: value});
@@ -132,7 +130,6 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
         mythicalPkms.sort((a, b) => {return b.count - a.count});
         pkms.sort((a, b) => {return b.count - a.count});
         threeStarsPkm.sort((a, b) => {return b.count - a.count});
-        players.sort((a, b) => {return b.count - a.count});
         //console.log(players);
 
         for (let i = 0; i < types.length; i++) {
@@ -143,7 +140,6 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           self.state.mythicalPokemonLeaderboard.push(new LeaderboardInfo(mythicalPkms[i].pkm, mythicalPkms[i].pkm, i+1 ,mythicalPkms[i].count));
           self.state.pokemonLeaderboard.push(new LeaderboardInfo(pkms[i].pkm, pkms[i].pkm, i+1 ,pkms[i].count));
           self.state.threeStarsLeaderboard.push(new LeaderboardInfo(threeStarsPkm[i].pkm, threeStarsPkm[i].pkm, i+1 ,threeStarsPkm[i].count));
-          self.state.playersLeaderboard.push(new LeaderboardInfo(players[i].player, players[i].avatar, i+1, players[i].count));
         }
       });
     });
