@@ -4,7 +4,6 @@ const {Dispatcher} = require('@colyseus/command');
 const GameState = require('./states/game-state');
 const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
-const GameStats = require('../models/mongo-models/game-stats');
 const User = require('@colyseus/social').User;
 const EloBot = require('../models/mongo-models/elo-bot');
 const {POKEMON_BOT} = require('../models/enum');
@@ -29,8 +28,6 @@ class GameRoom extends colyseus.Room {
         this.state.shop.assignShop(this.state.players[id]);
       }
     }
-
-    GameStats.create({'time': Date.now()});
 
     this.onMessage('shop', (client, message) => {
       if(!this.state.gameFinished){
