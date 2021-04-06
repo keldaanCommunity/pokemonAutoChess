@@ -4,6 +4,7 @@ const {Dispatcher} = require('@colyseus/command');
 const GameState = require('./states/game-state');
 const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
+const Statistic = require('../models/mongo-models/statistic');
 const User = require('@colyseus/social').User;
 const EloBot = require('../models/mongo-models/elo-bot');
 const {POKEMON_BOT} = require('../models/enum');
@@ -116,9 +117,15 @@ class GameRoom extends colyseus.Room {
           });
         }
         else{
-          Statistic.create(
-            this.transformToSimplePlayer(player)
-          )
+          let dbrecord = this.transformToSimplePlayer(player);
+
+          Statistic.create({
+            time: Date.now(),
+            name: dbrecord.name,
+            pokemons: dbrecord.pokemons,
+            rank: dbrecord.rank,
+            avatar: dbrecord.avatar
+          });
           let rank = player.rank;
           if(!this.state.gameFinished && player.life != 0){
             rank = 9;
