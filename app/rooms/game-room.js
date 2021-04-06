@@ -116,6 +116,9 @@ class GameRoom extends colyseus.Room {
           });
         }
         else{
+          Statistic.create(
+            this.transformToSimplePlayer(player)
+          )
           let rank = player.rank;
           if(!this.state.gameFinished && player.life != 0){
             rank = 9;
@@ -136,6 +139,23 @@ class GameRoom extends colyseus.Room {
     }
     this.dispatcher.stop();
     console.log('Dispose game');
+  }
+
+  transformToSimplePlayer(player){
+    let simplePlayer = {
+      name: player.name,
+      id: player.id,
+      rank: player.rank,
+      avatar: player.avatar,
+      pokemons: [],
+      exp: player.exp
+    };
+    player.board.forEach(pokemon => {
+      if(pokemon.positionY != 0){
+        simplePlayer.pokemons.push(pokemon.name);
+      }
+    });
+    return simplePlayer;
   }
 
   computeElo(player, rank){

@@ -55,17 +55,6 @@ class AfterGameRoom extends colyseus.Room {
           pokemons.push(pkm);
         });
         this.state.players.set(player.id, player);
-        if(!player.name.includes('BOT') && auth.email.slice(0, auth.email.indexOf('@')) == player.name){
-          Statistic.create(
-            {
-              time: Date.now(),
-              name: player.name,
-              pokemons: pokemons,
-              rank: player.rank,
-              avatar: player.avatar
-            }
-          )
-        }
       });
       
     }

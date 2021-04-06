@@ -510,7 +510,7 @@ class LobbyPage {
         imageHTML.src = `assets/avatar/${user.avatar}.png`;
         const nameHTML = document.createElement('p');
         nameHTML.style.fontSize = '10px';
-        nameHTML.textContent = `${user.name} (${_client.auth.metadata.elo})`;
+        nameHTML.textContent = `${user.name} (${user.elo})`;
         userHTML.appendChild(imageHTML);
         userHTML.appendChild(nameHTML);
         document.getElementById('user-container').appendChild(userHTML);

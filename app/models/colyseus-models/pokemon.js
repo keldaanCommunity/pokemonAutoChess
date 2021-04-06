@@ -1418,7 +1418,7 @@ class Volcarona extends Pokemon {
 
 class Landorus extends Pokemon {
   constructor() {
-    super(PKM.LANDORUS, 'démétéros',[TYPE.GROUND, TYPE.FLYING], RARITY.MYTHICAL, 'february', 645, '', 200, 20, 3, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
+    super(PKM.LANDORUS, 'démétéros',[TYPE.GROUND, TYPE.FLYING], RARITY.MYTHICAL, 'february', 645, '', 200, 20, 3, 3, 2, 'FLYING/range', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
   }
 }
 
@@ -1556,7 +1556,7 @@ class Celebi extends Pokemon {
 
 class Victini extends Pokemon {
   constructor() {
-    super(PKM.VICTINI, 'victini',[TYPE.FIRE, TYPE.PSYCHIC], RARITY.MYTHICAL, 'february', 494, '', 100, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.BURN);
+    super(PKM.VICTINI, 'victini',[TYPE.FIRE, TYPE.PSYCHIC], RARITY.MYTHICAL, 'february', 494, '', 100, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.BURN);
   }
 }
 
