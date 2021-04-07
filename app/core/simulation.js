@@ -52,7 +52,7 @@ class Simulation extends Schema {
     if (redTeam) {
       redTeam.forEach((pokemon, key) => {
         if (pokemon.positionY != 0) {
-          this.addPokemon(pokemon, pokemon.positionX, 5 - (pokemon.positionY - 1), 1, redTeam, blueTeam);
+          this.addPokemon(pokemon, pokemon.positionX, 5 - (pokemon.positionY - 1), 1, blueTeam, redTeam);
         }
       });
     }
