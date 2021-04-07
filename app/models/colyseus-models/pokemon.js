@@ -260,19 +260,19 @@ class Salamence extends Pokemon {
 
 class Ralts extends Pokemon {
   constructor() {
-    super(PKM.RALTS, 'tarsal',[TYPE.PSYCHIC, TYPE.AMORPH], RARITY.EPIC, 'EPIC', 280, PKM.KIRLIA, 90, 5, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.CALM_MIND);
+    super(PKM.RALTS, 'tarsal',[TYPE.PSYCHIC, TYPE.FAIRY, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 280, PKM.KIRLIA, 90, 5, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.CALM_MIND);
   }
 }
 
 class Kirlia extends Pokemon {
   constructor() {
-    super(PKM.KIRLIA, 'kirlia',[TYPE.PSYCHIC, TYPE.AMORPH], RARITY.EPIC, 'EPIC', 281, PKM.GARDEVOIR, 130, 9, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
+    super(PKM.KIRLIA, 'kirlia',[TYPE.PSYCHIC, TYPE.FAIRY, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 281, PKM.GARDEVOIR, 130, 9, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
   }
 }
 
 class Gardevoir extends Pokemon {
   constructor() {
-    super(PKM.GARDEVOIR, 'gardevoir',[TYPE.PSYCHIC, TYPE.AMORPH], RARITY.EPIC, 'EPIC', 282, '', 230, 18, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.CALM_MIND);
+    super(PKM.GARDEVOIR, 'gardevoir',[TYPE.PSYCHIC, TYPE.FAIRY, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 282, '', 230, 18, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.CALM_MIND);
   }
 }
 
@@ -332,19 +332,19 @@ class Dragonite extends Pokemon {
 
 class Gastly extends Pokemon {
   constructor() {
-    super(PKM.GASTLY, 'fantominus',[TYPE.DARK, TYPE.POISON, TYPE.AMORPH], RARITY.EPIC, 'EPIC', 92, PKM.HAUNTER, 90, 5, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DARK_PULSE);
+    super(PKM.GASTLY, 'fantominus',[TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.EPIC, 'EPIC', 92, PKM.HAUNTER, 90, 5, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DARK_PULSE);
   }
 }
 
 class Haunter extends Pokemon {
   constructor() {
-    super(PKM.HAUNTER, 'spectrum',[TYPE.DARK, TYPE.POISON, TYPE.AMORPH], RARITY.EPIC, 'EPIC', 93, PKM.GENGAR, 130, 9, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DARK_PULSE);
+    super(PKM.HAUNTER, 'spectrum',[TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.EPIC, 'EPIC', 93, PKM.GENGAR, 130, 9, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DARK_PULSE);
   }
 }
 
 class Gengar extends Pokemon {
   constructor() {
-    super(PKM.GENGAR, 'ectoplasma',[TYPE.DARK, TYPE.POISON, TYPE.AMORPH], RARITY.EPIC, 'EPIC', 94, '', 230, 18, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DARK_PULSE);
+    super(PKM.GENGAR, 'ectoplasma',[TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.EPIC, 'EPIC', 94, '', 230, 18, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DARK_PULSE);
   }
 }
 
@@ -1244,7 +1244,7 @@ class Fearow extends Pokemon {
 
 class Lugia extends Pokemon {
   constructor() {
-    super(PKM.LUGIA, 'lugia',[TYPE.AQUATIC, TYPE.FLYING, TYPE.PSYCHIC], RARITY.MYTHICAL, 'NEUTRAL', 249, '', 300, 30, 5, 5, 4, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HURRICANE);
+    super(PKM.LUGIA, 'lugia',[TYPE.AQUATIC, TYPE.FLYING, TYPE.PSYCHIC], RARITY.MYTHICAL, 'NEUTRAL', 249, '', 300, 30, 5, 5, 4, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.SILENCE);
   }
 }
 

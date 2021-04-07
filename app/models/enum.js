@@ -2386,19 +2386,19 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(-) Agility`,
-          text:`+10% ATK speed for each elec ally in the team`
+          text:`+15% ATK speed for each elec ally in the team`
         }
       ],
       esp:[
         {
           title:`(-) Agilidad`,
-          text:`+10% de velocidad ATK por cada aliado eléctrico del equipo`
+          text:`+15% de velocidad ATK por cada aliado eléctrico del equipo`
         }
       ],
       fra:[
         {
           title:`(-) Agilité`,
-          text:`+10% ATK speed pour chaque allié elec dans l'équipe`
+          text:`+15% ATK speed pour chaque allié elec dans l'équipe`
         }
       ]
     }
@@ -2408,31 +2408,31 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Revenge`,
-          text:`If the team is outnumbered, the fighting pkm's win +20% ATK`
+          text:`+10 mana / attack for all pkm`
         },
         {
           title:`(4) Punishment`,
-          text:`+10% ATK for each active synergy in the enemy team`
+          text:`+20 mana / attack for all pkm`
         }
       ],
       esp:[
         {
           title:`(2) Venganza`,
-          text:`Si el equipo es superado en número, el combate pkm gana +20% ATK`
+          text:`+10 maná/ataque para todos los pkm`
         },
         {
           title:`(4) Castigo`,
-          text:`+10% ATK por cada sinergia activa en el equipo enemigo`
+          text:`+20 maná/ataque para todos los pkm`
         }
       ],
       fra:[
         {
           title:`(2) Vengeance`,
-          text:`Si l'équipe est en infériorité numérique, les pkm combat gagnent +20% ATK`
+          text:`+10 mana / attaque pour tous les pkm`
         },
         {
           title:`(4) Punition`,
-          text:`+10% ATK pour chaque synergie active dans l'équipe ennemie`
+          text:`+20 mana / attaque pour tous les pkm`
         }
       ]
     }

@@ -357,26 +357,18 @@ class Simulation extends Schema {
               }
             });
 
-            const speedFactor = 1- 0.1 * pokemonNames.length;
+            const speedFactor = 1- 0.15 * pokemonNames.length;
             pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * speedFactor);
             pokemon.effects.push(EFFECTS.AGILITY);
           }
           break;
 
         case EFFECTS.REVENGE:
-          if (types.includes(TYPE.FIGHTING) && ennemyTeam.size > allyTeam.size) {
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-            pokemon.effects.push(EFFECTS.REVENGE);
-          }
+          pokemon.effects.push(EFFECTS.REVENGE);
           break;
 
         case EFFECTS.PUNISHMENT:
-          if (types.includes(TYPE.FIGHTING)) {
-            ennemyEffects.forEach((effect) =>{
-              pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1);
-            });
-            pokemon.effects.push(EFFECTS.PUNISHMENT);
-          }
+          pokemon.effects.push(EFFECTS.PUNISHMENT);
           break;
 
         case EFFECTS.IRON_DEFENSE:
