@@ -2790,15 +2790,15 @@ const TYPE_DETAILS = Object.freeze({
       fra:[
         {
           title:`(2) Méditation`,
-          text:`+20% ATK et +20% ATK speed pour tous les pkm`
+          text:`+15% ATK et +15% HP pour tous les pkm`
         },
         {
           title:`(4) Puissance`,
-          text:`+20% ATK et +20% ATK speed pour tous les pkm`
+          text:`+20% ATK et +20% HP pour tous les pkm`
         },
         {
           title:`(6) Plénitude`,
-          text:`+20% ATK et +20% DEF pour tous les pkm`
+          text:`+30% ATK et +30% HP pour tous les pkm`
         }
       ]
     }

@@ -350,19 +350,19 @@ class Gengar extends Pokemon {
 
 class Abra extends Pokemon {
   constructor() {
-    super(PKM.ABRA, 'abra',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 63, PKM.KADABRA, 90, 5, 1, 1, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 30, SPECIAL_SKILL.TELEPORT);
+    super(PKM.ABRA, 'abra',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 63, PKM.KADABRA, 90, 5, 1, 1, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 50, SPECIAL_SKILL.TELEPORT);
   }
 }
 
 class Kadabra extends Pokemon {
   constructor() {
-    super(PKM.KADABRA, 'kadabra',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 64, PKM.ALAKAZAM, 130, 9, 1, 1, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 30, SPECIAL_SKILL.TELEPORT);
+    super(PKM.KADABRA, 'kadabra',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 64, PKM.ALAKAZAM, 130, 9, 1, 1, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 50, SPECIAL_SKILL.TELEPORT);
   }
 }
 
 class Alakazam extends Pokemon {
   constructor() {
-    super(PKM.ALAKAZAM, 'alakazam',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 65, '', 230, 18, 1, 1, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 30, SPECIAL_SKILL.TELEPORT);
+    super(PKM.ALAKAZAM, 'alakazam',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 65, '', 230, 18, 1, 1, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 50, SPECIAL_SKILL.TELEPORT);
   }
 }
 
