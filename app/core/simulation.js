@@ -357,7 +357,7 @@ class Simulation extends Schema {
               }
             });
 
-            const speedFactor = 1- 0.15 * pokemonNames.length;
+            const speedFactor = 1- 0.10 * pokemonNames.length;
             pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * speedFactor);
             pokemon.effects.push(EFFECTS.AGILITY);
           }

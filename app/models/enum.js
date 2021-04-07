@@ -2386,19 +2386,19 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(-) Agility`,
-          text:`+15% ATK speed for each elec ally in the team`
+          text:`+10% ATK speed for each elec ally in the team`
         }
       ],
       esp:[
         {
           title:`(-) Agilidad`,
-          text:`+15% de velocidad ATK por cada aliado eléctrico del equipo`
+          text:`+10% de velocidad ATK por cada aliado eléctrico del equipo`
         }
       ],
       fra:[
         {
           title:`(-) Agilité`,
-          text:`+15% ATK speed pour chaque allié elec dans l'équipe`
+          text:`+10% ATK speed pour chaque allié elec dans l'équipe`
         }
       ]
     }
