@@ -349,7 +349,7 @@ class Simulation extends Schema {
             const pokemonNames = [];
 
             allyTeam.forEach((pkm, key) => {
-              if (pkm.types.includes(TYPE.ELECTRIC)) {
+              if (pkm.types.includes(TYPE.ELECTRIC) && pkm.positionY != 0) {
                 const family = PokemonFactory.getPokemonFamily(pkm.name);
                 if (!pokemonNames.includes(family)) {
                   pokemonNames.push(family);
