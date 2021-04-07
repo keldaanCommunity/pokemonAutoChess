@@ -188,7 +188,7 @@ class GameRoom extends colyseus.Room {
     });
     meanGain = Math.floor(meanGain / eloGains.length);
     //console.log(eloGains);
-    console.log(`${player.name} will be ${meanGain} (${rank})`);
+    console.log(`${player.name} (was ${player.elo}) will be ${meanGain} (${rank})`);
     return meanGain;
 
   }

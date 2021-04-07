@@ -2408,31 +2408,31 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Revenge`,
-          text:`+10 mana / attack for all pkm`
+          text:`+5 mana / attack for all pkm`
         },
         {
           title:`(4) Punishment`,
-          text:`+20 mana / attack for all pkm`
+          text:`+10 mana / attack for all pkm`
         }
       ],
       esp:[
         {
           title:`(2) Venganza`,
-          text:`+10 maná/ataque para todos los pkm`
+          text:`+5 maná/ataque para todos los pkm`
         },
         {
           title:`(4) Castigo`,
-          text:`+20 maná/ataque para todos los pkm`
+          text:`+10 maná/ataque para todos los pkm`
         }
       ],
       fra:[
         {
           title:`(2) Vengeance`,
-          text:`+10 mana / attaque pour tous les pkm`
+          text:`+5 mana / attaque pour tous les pkm`
         },
         {
           title:`(4) Punition`,
-          text:`+20 mana / attaque pour tous les pkm`
+          text:`+10 mana / attaque pour tous les pkm`
         }
       ]
     }
