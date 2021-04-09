@@ -715,9 +715,9 @@ const ITEM_DESCRIPTION = Object.freeze({
     fra: '+100% attaque, blesse le pokémon de 5% hp/s'
   },
   COIN_AMULET: {
-    eng: 'Chance to drop between 1 and 5 gold at each round',
-    esp: 'Oportunidad de dejar caer entre 1 y 5 monedas de oro en cada ronda',
-    fra: 'Chance de gagner entre 1 et 5 argent à chaque tour.'
+    eng: 'Chance to drop between 1 and 3 gold at each round',
+    esp: 'Oportunidad de dejar caer entre 1 y 3 monedas de oro en cada ronda',
+    fra: 'Chance de gagner entre 1 et 3 argent à chaque tour.'
   },
   ROCKY_HELMET: {
     eng: 'When user is attacked, the attacker take 12% max health physical damage',

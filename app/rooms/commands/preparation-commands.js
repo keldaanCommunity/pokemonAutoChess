@@ -29,7 +29,8 @@ class OnGameStartCommand extends Command {
       }
     });
 
-    if (allUsersReady) {
+    if (allUsersReady && !this.state.gameStarted) {
+      this.state.gameStarted = true;
       this.room.broadcast('game-start', message, {except: client});
     }
   }

@@ -5,11 +5,15 @@ class PreparationState extends schema.Schema {
   constructor() {
     super();
     this.users = new schema.MapSchema();
+    this.assign({
+      gameStarted: false
+    });
   }
 }
 
 schema.defineTypes(PreparationState, {
-  users: {map: GameUser}
+  users: {map: GameUser},
+  gameStarted: 'boolean'
 });
 
 module.exports = PreparationState;

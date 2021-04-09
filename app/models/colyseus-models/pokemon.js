@@ -278,19 +278,19 @@ class Gardevoir extends Pokemon {
 
 class Slakoth extends Pokemon {
   constructor() {
-    super(PKM.SLAKOTH, 'parecool',[TYPE.NORMAL, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 287, PKM.VIGOROTH, 90, 5, 4, 4, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.SEISMIC_TOSS);
+    super(PKM.SLAKOTH, 'parecool',[TYPE.NORMAL, TYPE.FIELD], RARITY.EPIC, 'EPIC', 287, PKM.VIGOROTH, 90, 5, 4, 4, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.SEISMIC_TOSS);
   }
 }
 
 class Vigoroth extends Pokemon {
   constructor() {
-    super(PKM.VIGOROTH, 'vigoroth',[TYPE.NORMAL, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 288, PKM.SLAKING, 130, 9, 4, 4, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SEISMIC_TOSS);
+    super(PKM.VIGOROTH, 'vigoroth',[TYPE.NORMAL, TYPE.FIELD], RARITY.EPIC, 'EPIC', 288, PKM.SLAKING, 130, 9, 4, 4, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SEISMIC_TOSS);
   }
 }
 
 class Slaking extends Pokemon {
   constructor() {
-    super(PKM.SLAKING, 'monaflemit',[TYPE.NORMAL, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 289, '', 230, 20, 4, 4, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.SEISMIC_TOSS);
+    super(PKM.SLAKING, 'monaflemit',[TYPE.NORMAL, TYPE.FIELD], RARITY.EPIC, 'EPIC', 289, '', 230, 20, 4, 4, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.SEISMIC_TOSS);
   }
 }
 
@@ -1406,7 +1406,7 @@ class Sandshrew extends Pokemon {
 
 class Darkrai extends Pokemon {
   constructor() {
-    super(PKM.DARKRAI, 'darkrai',[TYPE.DARK, TYPE.MONSTER], RARITY.MYTHICAL, 'NEUTRAL', 491, '', 200, 20, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DARK_PULSE);
+    super(PKM.DARKRAI, 'darkrai',[TYPE.DARK, TYPE.MONSTER, TYPE.AMORPH], RARITY.MYTHICAL, 'NEUTRAL', 491, '', 200, 20, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DARK_PULSE);
   }
 }
 

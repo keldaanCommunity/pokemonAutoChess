@@ -128,7 +128,14 @@ class GameRoom extends colyseus.Room {
           });
           let rank = player.rank;
           if(!this.state.gameFinished && player.life != 0){
-            rank = 9;
+            let rankOfLastPlayerAlive = 8;
+            this.state.players.forEach(plyr =>{
+              console.log(plyr.life);
+              if(plyr.life <= 0){
+                rankOfLastPlayerAlive = Math.min(rankOfLastPlayerAlive, plyr.rank);
+              }
+            });
+            rank = rankOfLastPlayerAlive;
           }
           User.find({email: player.email}, (err, users)=> {
             if (err) {

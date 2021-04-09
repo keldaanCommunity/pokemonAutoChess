@@ -648,7 +648,7 @@ class OnUpdatePhaseCommand extends Command {
         player.board.forEach((pokemon, id) => {
           if (pokemon.positionX != 0) {
             if (pokemon.items.count(ITEMS.COIN_AMULET) != 0) {
-              player.money += Math.round(Math.random() * 5) * pokemon.items.count(ITEMS.COIN_AMULET);
+              player.money += Math.round(Math.random() * 3) * pokemon.items.count(ITEMS.COIN_AMULET);
             }
           }
         });
