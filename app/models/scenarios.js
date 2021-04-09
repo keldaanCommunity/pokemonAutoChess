@@ -16124,6 +16124,846 @@ const SCENARIOS =
         ]
       }
     ]
+  },
+  'FIGHT1':{
+    'steps': [
+      {
+        'roundsRequired': 0,
+        'board': [
+          {
+            'name': PKM.GRAVELER,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.BELLSPROUT,
+            'x': 4,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': PKM.GRAVELER,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.BELLSPROUT,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.BULBASAUR,
+            'x': 4,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.NIDORANF,
+            'x': 5,
+            'y': 1
+          },
+          {
+            'name': PKM.GRAVELER,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.WEEPINBELL,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.BULBASAUR,
+            'x': 5,
+            'y': 3
+          }
+        ]
+      }, 
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.NIDORANF,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.GRAVELER,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.WEEPINBELL,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.IVYSAUR,
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': PKM.NIDORANF,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.GRAVELER,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.WEEPINBELL,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.IVYSAUR,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.SEEDOT,
+            'x': 3,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': PKM.NIDORINA,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.GRAVELER,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.WEEPINBELL,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.IVYSAUR,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.SEEDOT,
+            'x': 3,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': PKM.NIDORINA,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.GRAVELER,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.WEEPINBELL,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.IVYSAUR,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.SEEDOT,
+            'x': 3,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': PKM.NIDORINA,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.GRAVELER,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.WEEPINBELL,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.IVYSAUR,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.SEEDOT,
+            'x': 3,
+            'y': 4
+          },
+          {
+            'name': PKM.ARON,
+            'x': 3,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.NIDORINA,
+            'x': 4,
+            'y': 1
+          },
+          {
+            'name': PKM.GRAVELER,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.WEEPINBELL,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYHORN,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 3,
+            'y': 4
+          },
+          {
+            'name': PKM.ARON,
+            'x': 3,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.NIDORINA,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.GRAVELER,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.WEEPINBELL,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYHORN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.ARON,
+            'x': 3,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.NIDORINA,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.GRAVELER,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.WEEPINBELL,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYHORN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.ARON,
+            'x': 3,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.GIBLE,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.GRAVELER,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHOP,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYDON,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.LAIRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.RIOLU,
+            'x': 6,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.GIBLE,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.BELDUM,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHOP,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYDON,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.LAIRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.RIOLU,
+            'x': 6,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.GIBLE,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.METANG,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHOKE,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYDON,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.LAIRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.RIOLU,
+            'x': 6,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.NUMEL,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.METANG,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHOKE,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYPERIOR,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.LAIRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.RIOLU,
+            'x': 6,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.NUMEL,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.METANG,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHOKE,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYPERIOR,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.LAIRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.RIOLU,
+            'x': 6,
+            'y': 2
+          },
+          {
+            'name': PKM.REGIGIGAS,
+            'x': 6,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': PKM.CAMERUPT,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.METANG,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHOKE,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYPERIOR,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.LUCARIO,
+            'x': 6,
+            'y': 2
+          },
+          {
+            'name': PKM.REGIGIGAS,
+            'x': 6,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': PKM.CAMERUPT,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.METANG,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHOKE,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYPERIOR,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.LUCARIO,
+            'x': 6,
+            'y': 2
+          },
+          {
+            'name': PKM.REGIGIGAS,
+            'x': 6,
+            'y': 3
+          },
+          {
+            'name': PKM.MEDITITE,
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 4,
+        'board':
+        [
+          {
+            'name': PKM.CAMERUPT,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.METANG,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHAMP,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYPERIOR,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.LUCARIO,
+            'x': 6,
+            'y': 2
+          },
+          {
+            'name': PKM.REGIGIGAS,
+            'x': 6,
+            'y': 3
+          },
+          {
+            'name': PKM.MEDICHAM,
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 5,
+        'board':
+        [
+          {
+            'name': PKM.MEGACAMERUPT,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.METAGROSS,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHAMP,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYPERIOR,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.LUCARIO,
+            'x': 6,
+            'y': 2
+          },
+          {
+            'name': PKM.REGIGIGAS,
+            'x': 6,
+            'y': 3
+          },
+          {
+            'name': PKM.MEDICHAM,
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.MEGACAMERUPT,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.METAGROSS,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHAMP,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYPERIOR,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.MEGALUCARIO,
+            'x': 6,
+            'y': 2
+          },
+          {
+            'name': PKM.REGIGIGAS,
+            'x': 6,
+            'y': 3
+          },
+          {
+            'name': PKM.MEDICHAM,
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.MEGACAMERUPT,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.METAGROSS,
+            'x': 0,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHAMP,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RHYPERIOR,
+            'x': 1,
+            'y': 3
+          },
+          {
+            'name': PKM.TERRAKION,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.AGGRON,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.MEGALUCARIO,
+            'x': 6,
+            'y': 2
+          },
+          {
+            'name': PKM.REGIGIGAS,
+            'x': 6,
+            'y': 3
+          },
+          {
+            'name': PKM.MEGAMEDICHAM,
+            'x': 3,
+            'y': 2
+          }
+        ]
+      }
+    ]
   }
 };
 
