@@ -19,6 +19,7 @@ class AfterGameRoom extends colyseus.Room {
   }
 
   onCreate(options) {
+    console.log(`create after game`);
     this.setState(new AfterGameState());
     this.maxClients = 8;
     //console.log('before', this.state.players);
@@ -41,7 +42,7 @@ class AfterGameRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
-    console.log('join after game');
+    console.log(`${client.auth.email} join after game`);
     if(options.players){
 
       this.state.players.forEach((value, key)=> {
@@ -62,13 +63,13 @@ class AfterGameRoom extends colyseus.Room {
   }
 
   onLeave(client, consented) {
-    console.log('leave after game');
+    console.log(`${client.auth.email} leave after game`);
     this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
   }
 
   onDispose() {
+    console.log(`dispose after game`);
     this.dispatcher.stop();
-    console.log('dispose after game');
   }
 }
 

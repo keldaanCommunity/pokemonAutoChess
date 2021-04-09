@@ -24,6 +24,7 @@ class PreparationRoom extends colyseus.Room {
   }
 
   onCreate(options) {
+    console.log('create preparation room');
     let self = this;
     this.setState(new PreparationState());
     this.maxClients = 8;
@@ -61,18 +62,18 @@ class PreparationRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
-    console.log('join room');
+    console.log(`${client.auth.email} join preparation room`);
     this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
   }
 
   onLeave(client, consented) {
-    console.log('leave room');
+    console.log(`${client.auth.email} leave preparation room`);
     this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
   }
 
   onDispose() {
+    console.log('Dispose preparation room');
     this.dispatcher.stop();
-    console.log('Dispose room');
   }
 }
 

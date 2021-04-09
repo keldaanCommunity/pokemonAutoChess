@@ -18,6 +18,7 @@ class GameRoom extends colyseus.Room {
 
   // When room is initialized
   onCreate(options) {
+    console.log(`create game room`);
     this.setState(new GameState());
     this.maxClients = 8;
     this.eloEngine = new EloRank();
@@ -93,16 +94,17 @@ class GameRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
-    console.log('join game');
+    console.log(`${client.auth.email} join game room`);
     this.dispatcher.dispatch(new Commands.OnJoinCommand(), {client, options, auth});
   }
 
   onLeave(client, consented) {
-    console.log('leave game');
+    console.log(`${client.auth.email} leave game room`);
     this.dispatcher.dispatch(new Commands.OnLeaveCommand(), {client, consented});
   }
 
   onDispose() {
+    console.log(`dispose game room`);
     let self = this;
     if(this.state.stageLevel > 10){
       this.state.players.forEach(player =>{
@@ -152,7 +154,6 @@ class GameRoom extends colyseus.Room {
       });
     }
     this.dispatcher.stop();
-    console.log('Dispose game');
   }
 
   transformToSimplePlayer(player){

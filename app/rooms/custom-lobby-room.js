@@ -17,6 +17,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
   }
 
   onCreate(options) {
+    console.log(`create lobby`);
     const self = this;
     super.onCreate(options);
     this.setState(new LobbyState());
@@ -499,6 +500,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
   onJoin(client, options, auth) {
     super.onJoin(client, options, auth);
+    console.log(`${client.auth.email} join lobby`);
     this.state.users[client.sessionId] = new GameUser(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.elo, auth.metadata.avatar, false, false);
     //console.log(this.state.users);
     //this.state.addMessage(auth.email.split('@')[0], `${auth.email.split('@')[0]} joined.`, auth.metadata.avatar, Date.now(), true);
@@ -511,7 +513,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
   onLeave(client) {
     super.onLeave(client);
-    console.log('leave lobby');
+    console.log(`${client.auth.email} leave lobby`);
     this.state.users.delete(client.sessionId);
     // const time = new Date(Date.now());
     // this.state.addMessage('Server',`${client.auth.email} left.`, client.auth.metadata.avatar, Date.now(), true);
@@ -519,7 +521,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
   onDispose() {
     super.onDispose();
-    console.log('Dispose LobbyRoom');
+    console.log(`dispose lobby`);
   }
 }
 
