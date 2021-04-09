@@ -16,10 +16,10 @@ Object.keys(SCENARIOS).forEach(botName => {
                             console.log(`error with pokemone name ${pokemon.name} in bot ${botName}`);
                         }
                         if(pokemon.x === undefined || pokemon.x <0 || pokemon.x >7){
-                            console.log(`error with coordinate x ${pokemon.x} bot ${botName}`);
+                            console.log(`error with coordinate x ${pokemon.x} bot ${botName} pokemon ${pokemon.name} at step ${index}`);
                         }
                         if(pokemon.y === undefined || pokemon.y <1 || pokemon.y >3){
-                            console.log(`error with coordinate x ${pokemon.y} bot ${botName}`);
+                            console.log(`error with coordinate y ${pokemon.y} bot ${botName} pokemon ${pokemon.name} at step ${index}`);
                         }
                         
                         let error = false;

@@ -16335,7 +16335,7 @@ const SCENARIOS =
           {
             'name': PKM.SEEDOT,
             'x': 3,
-            'y': 4
+            'y': 3
           },
           {
             'name': PKM.ARON,
@@ -16371,7 +16371,7 @@ const SCENARIOS =
           {
             'name': PKM.TERRAKION,
             'x': 3,
-            'y': 4
+            'y': 3
           },
           {
             'name': PKM.ARON,
