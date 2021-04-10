@@ -336,7 +336,7 @@ class LobbyPage {
   </div>
   <div style="display:flex; justify-content:space-between; height:100%;"> 
 
-    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; width:30%; overflow-y: scroll;
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; padding:5px; width:30%; overflow-y: scroll;
     height: 90vh;">
       <div id='leaderboard-container'>
       <table style="border-spacing: 10px 0px; border-collapse:separate; width: 100%;">
@@ -529,8 +529,8 @@ class LobbyPage {
 
   handleHistoryChange(playerId){
     document.getElementById('firstThTitle').textContent = 'Team';
-    document.getElementById('secondThTitle').textContent = 'Rank';
-    document.getElementById('thirdThTitle').textContent = 'Elo';
+    document.getElementById('secondThTitle').textContent = 'Rank/Elo';
+    document.getElementById('thirdThTitle').textContent = 'Date';
     if(document.getElementById('leaderboard-container')){
       document.getElementById('leaderboard-table').innerHTML = '';
       document.getElementById('leaderboard-table').style.borderSpacing = '15px 5px';
@@ -565,10 +565,11 @@ class LobbyPage {
         const eloHTML = document.createElement('td');
         eloHTML.textContent = record.elo;
 
-        recordHTML.appendChild(timeHTML);
+        
         recordHTML.appendChild(teamHTML);
         recordHTML.appendChild(rankHTML);
         recordHTML.appendChild(eloHTML);
+        recordHTML.appendChild(timeHTML);
 
         document.getElementById('leaderboard-table').appendChild(recordHTML);
       });
