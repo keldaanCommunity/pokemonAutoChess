@@ -49,54 +49,54 @@ class OnDragDropCommand extends Command {
       'updateItems': true,
       'field': detail.place
     };
-    let id;
+    let playerId;
 
     if(typeof client.auth._id == 'object'){
-      id = client.auth._id.toHexString();
+      playerId = client.auth._id.toHexString();
     }
     else{
-      id = client.auth._id;
+      playerId = client.auth._id;
     }
-    if (this.state.players.has(id)) {
+    if (this.state.players.has(playerId)) {
       if (detail.objType == 'pokemon') {
         message.updateItems = false;
-        if (this.state.players.get(id).board.has(detail.id)) {
-          const pokemon = this.state.players.get(id).board.get(detail.id);
+        if (this.state.players.get(playerId).board.has(detail.id)) {
+          const pokemon = this.state.players.get(playerId).board.get(detail.id);
           const x = parseInt(detail.x);
           const y = parseInt(detail.y);
           if (pokemon.name == PKM.DITTO) {
-            const pokemonToClone = this.room.getPokemonByPosition(id, x, y);
+            const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y);
             if (pokemonToClone && pokemonToClone.rarity != RARITY.MYTHICAL) {
               dittoReplaced = true;
               const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonFamily(pokemonToClone.name));
-              this.state.players.get(id).board.delete(detail.id);
-              const position = this.room.getFirstAvailablePositionInBoard(id);
+              this.state.players.get(playerId).board.delete(detail.id);
+              const position = this.room.getFirstAvailablePositionInBoard(playerId);
               if (position !== undefined) {
                 replaceDitto.positionX = position;
                 replaceDitto.positionY = 0;
-                this.state.players.get(id).board.set(replaceDitto.id, replaceDitto);
+                this.state.players.get(playerId).board.set(replaceDitto.id, replaceDitto);
                 success = true;
                 message.updateBoard = false;
               }
             }
           } else {
             if ( y == 0 && pokemon.positionY == 0) {
-              this.room.swap(id, pokemon, x, y);
+              this.room.swap(playerId, pokemon, x, y);
               success = true;
             } else if (this.state.phase == STATE.PICK) {
-              const teamSize = UtilsCommand.getTeamSize(this.state.players.get(id).board);
-              if (teamSize < this.state.players.get(id).experienceManager.level) {
-                this.room.swap(id, pokemon, x, y);
+              const teamSize = UtilsCommand.getTeamSize(this.state.players.get(playerId).board);
+              if (teamSize < this.state.players.get(playerId).experienceManager.level) {
+                this.room.swap(playerId, pokemon, x, y);
                 success = true;
-              } else if (teamSize == this.state.players.get(id).experienceManager.level) {
-                const empty = this.room.isPositionEmpty(id, x, y);
+              } else if (teamSize == this.state.players.get(playerId).experienceManager.level) {
+                const empty = this.room.isPositionEmpty(playerId, x, y);
                 if (!empty) {
-                  this.room.swap(id, pokemon, x, y);
+                  this.room.swap(playerId, pokemon, x, y);
                   success = true;
                   message.updateBoard = false;
                 } else {
                   if ((pokemon.positionY != 0 && y != 0) || y == 0) {
-                    this.room.swap(id, pokemon, x, y);
+                    this.room.swap(playerId, pokemon, x, y);
                     success = true;
                     message.updateBoard = false;
                   }
@@ -104,21 +104,21 @@ class OnDragDropCommand extends Command {
               }
             }
           }
-          this.state.players.get(id).synergies.update(this.state.players.get(id).board);
-          this.state.players.get(id).effects.update(this.state.players.get(id).synergies);
-          this.state.players.get(id).boardSize = UtilsCommand.getTeamSize(this.state.players.get(id).board);
+          this.state.players.get(playerId).synergies.update(this.state.players.get(playerId).board);
+          this.state.players.get(playerId).effects.update(this.state.players.get(playerId).synergies);
+          this.state.players.get(playerId).boardSize = UtilsCommand.getTeamSize(this.state.players.get(playerId).board);
         }
       }
       if (detail.objType == 'item') {
         message.updateBoard = false;
-        const item = this.state.players.get(id).stuff[detail.place];
+        const item = this.state.players.get(playerId).stuff[detail.place];
         if ( item ) {
           const x = parseInt(detail.x);
           const y = parseInt(detail.y);
           let eevolution;
           let evolve = false;
 
-          this.state.players.get(id).board.forEach((pokemon, id) => {
+          this.state.players.get(playerId).board.forEach((pokemon, id) => {
             if (pokemon.positionX == x && pokemon.positionY == y && pokemon.items.length < 3) {
               if (pokemon.name == PKM.EEVEE && item == ITEMS.WATER_STONE) {
                 evolve = true;
@@ -131,7 +131,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(id).board.delete(id);
+                this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.FIRE_STONE) {
@@ -145,7 +145,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(id).board.delete(id);
+                this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.THUNDER_STONE) {
@@ -159,7 +159,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(id).board.delete(id);
+                this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.NIGHT_STONE) {
@@ -173,7 +173,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(id).board.delete(id);
+                this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.MOON_STONE) {
@@ -187,7 +187,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(id).board.delete(id);
+                this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.LEAF_STONE) {
@@ -201,7 +201,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(id).board.delete(id);
+                this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.DAWN_STONE) {
@@ -215,7 +215,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(id).board.delete(id);
+                this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.ICY_ROCK) {
@@ -229,7 +229,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(id).board.delete(id);
+                this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.GROUDON && item == ITEMS.RED_ORB) {
@@ -243,7 +243,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(id).board.delete(id);
+                this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.KYOGRE && item == ITEMS.BLUE_ORB) {
@@ -257,25 +257,25 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(id).board.delete(id);
+                this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
               }else {
                 pokemon.items.add(item);
-                this.state.players.get(id).stuff.remove(item);
+                this.state.players.get(playerId).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
             }
           });
           if (eevolution) {
-            this.state.players.get(id).board.set(eevolution.id, eevolution);
-            this.state.players.get(id).stuff.remove(item);
+            this.state.players.get(playerId).board.set(eevolution.id, eevolution);
+            this.state.players.get(playerId).stuff.remove(item);
           }
           if (evolve) {
-            this.state.players.get(id).synergies.update(this.state.players.get(id).board);
-            this.state.players.get(id).effects.update(this.state.players.get(id).synergies);
-            this.state.players.get(id).boardSize = UtilsCommand.getTeamSize(this.state.players.get(id).board);
+            this.state.players.get(playerId).synergies.update(this.state.players.get(playerId).board);
+            this.state.players.get(playerId).effects.update(this.state.players.get(playerId).synergies);
+            this.state.players.get(playerId).boardSize = UtilsCommand.getTeamSize(this.state.players.get(playerId).board);
           }
         }
       }
@@ -284,7 +284,7 @@ class OnDragDropCommand extends Command {
       client.send('DragDropFailed', message);
     }
     if (dittoReplaced) {
-      return [new OnEvolutionCommand().setPayload(id), new OnEvolutionCommand().setPayload(id)];
+      return [new OnEvolutionCommand().setPayload(playerId), new OnEvolutionCommand().setPayload(playerId)];
     }
   }
 }
