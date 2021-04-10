@@ -7,9 +7,9 @@ const Mongoose = require('mongoose');
 const User = require('@colyseus/social').User;
 
 class OnShopCommand extends Command {
-  execute({sessionId, index}) {
-    if (this.state.players.has(sessionId)) {
-      const player = this.state.players.get(sessionId);
+  execute({id, index}) {
+    if (this.state.players.has(id)) {
+      const player = this.state.players.get(id);
       if (player.shop[index]) {
         const name = player.shop[index];
         const pokemon = PokemonFactory.createPokemonFromName(name);
@@ -27,7 +27,7 @@ class OnShopCommand extends Command {
           else{
             player.shop[index] = '';
           }
-          return [new OnEvolutionCommand().setPayload(sessionId), new OnEvolutionCommand().setPayload(sessionId)];
+          return [new OnEvolutionCommand().setPayload(id), new OnEvolutionCommand().setPayload(id)];
         }
       }
     }
@@ -49,46 +49,54 @@ class OnDragDropCommand extends Command {
       'updateItems': true,
       'field': detail.place
     };
-    if (this.state.players.has(client.sessionId)) {
+    let id;
+
+    if(typeof client.auth._id == 'object'){
+      id = client.auth._id.toHexString();
+    }
+    else{
+      id = client.auth._id;
+    }
+    if (this.state.players.has(id)) {
       if (detail.objType == 'pokemon') {
         message.updateItems = false;
-        if (this.state.players.get(client.sessionId).board.has(detail.id)) {
-          const pokemon = this.state.players.get(client.sessionId).board.get(detail.id);
+        if (this.state.players.get(id).board.has(detail.id)) {
+          const pokemon = this.state.players.get(id).board.get(detail.id);
           const x = parseInt(detail.x);
           const y = parseInt(detail.y);
           if (pokemon.name == PKM.DITTO) {
-            const pokemonToClone = this.room.getPokemonByPosition(client.sessionId, x, y);
+            const pokemonToClone = this.room.getPokemonByPosition(id, x, y);
             if (pokemonToClone && pokemonToClone.rarity != RARITY.MYTHICAL) {
               dittoReplaced = true;
               const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonFamily(pokemonToClone.name));
-              this.state.players.get(client.sessionId).board.delete(detail.id);
-              const position = this.room.getFirstAvailablePositionInBoard(client.sessionId);
+              this.state.players.get(id).board.delete(detail.id);
+              const position = this.room.getFirstAvailablePositionInBoard(id);
               if (position !== undefined) {
                 replaceDitto.positionX = position;
                 replaceDitto.positionY = 0;
-                this.state.players.get(client.sessionId).board.set(replaceDitto.id, replaceDitto);
+                this.state.players.get(id).board.set(replaceDitto.id, replaceDitto);
                 success = true;
                 message.updateBoard = false;
               }
             }
           } else {
             if ( y == 0 && pokemon.positionY == 0) {
-              this.room.swap(client.sessionId, pokemon, x, y);
+              this.room.swap(id, pokemon, x, y);
               success = true;
             } else if (this.state.phase == STATE.PICK) {
-              const teamSize = UtilsCommand.getTeamSize(this.state.players.get(client.sessionId).board);
-              if (teamSize < this.state.players.get(client.sessionId).experienceManager.level) {
-                this.room.swap(client.sessionId, pokemon, x, y);
+              const teamSize = UtilsCommand.getTeamSize(this.state.players.get(id).board);
+              if (teamSize < this.state.players.get(id).experienceManager.level) {
+                this.room.swap(id, pokemon, x, y);
                 success = true;
-              } else if (teamSize == this.state.players.get(client.sessionId).experienceManager.level) {
-                const empty = this.room.isPositionEmpty(client.sessionId, x, y);
+              } else if (teamSize == this.state.players.get(id).experienceManager.level) {
+                const empty = this.room.isPositionEmpty(id, x, y);
                 if (!empty) {
-                  this.room.swap(client.sessionId, pokemon, x, y);
+                  this.room.swap(id, pokemon, x, y);
                   success = true;
                   message.updateBoard = false;
                 } else {
                   if ((pokemon.positionY != 0 && y != 0) || y == 0) {
-                    this.room.swap(client.sessionId, pokemon, x, y);
+                    this.room.swap(id, pokemon, x, y);
                     success = true;
                     message.updateBoard = false;
                   }
@@ -96,21 +104,21 @@ class OnDragDropCommand extends Command {
               }
             }
           }
-          this.state.players.get(client.sessionId).synergies.update(this.state.players.get(client.sessionId).board);
-          this.state.players.get(client.sessionId).effects.update(this.state.players.get(client.sessionId).synergies);
-          this.state.players.get(client.sessionId).boardSize = UtilsCommand.getTeamSize(this.state.players.get(client.sessionId).board);
+          this.state.players.get(id).synergies.update(this.state.players.get(id).board);
+          this.state.players.get(id).effects.update(this.state.players.get(id).synergies);
+          this.state.players.get(id).boardSize = UtilsCommand.getTeamSize(this.state.players.get(id).board);
         }
       }
       if (detail.objType == 'item') {
         message.updateBoard = false;
-        const item = this.state.players.get(client.sessionId).stuff[detail.place];
+        const item = this.state.players.get(id).stuff[detail.place];
         if ( item ) {
           const x = parseInt(detail.x);
           const y = parseInt(detail.y);
           let eevolution;
           let evolve = false;
 
-          this.state.players.get(client.sessionId).board.forEach((pokemon, id) => {
+          this.state.players.get(id).board.forEach((pokemon, id) => {
             if (pokemon.positionX == x && pokemon.positionY == y && pokemon.items.length < 3) {
               if (pokemon.name == PKM.EEVEE && item == ITEMS.WATER_STONE) {
                 evolve = true;
@@ -123,7 +131,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(client.sessionId).board.delete(id);
+                this.state.players.get(id).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.FIRE_STONE) {
@@ -137,7 +145,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(client.sessionId).board.delete(id);
+                this.state.players.get(id).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.THUNDER_STONE) {
@@ -151,7 +159,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(client.sessionId).board.delete(id);
+                this.state.players.get(id).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.NIGHT_STONE) {
@@ -165,7 +173,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(client.sessionId).board.delete(id);
+                this.state.players.get(id).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.MOON_STONE) {
@@ -179,7 +187,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(client.sessionId).board.delete(id);
+                this.state.players.get(id).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.LEAF_STONE) {
@@ -193,7 +201,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(client.sessionId).board.delete(id);
+                this.state.players.get(id).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.DAWN_STONE) {
@@ -207,7 +215,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(client.sessionId).board.delete(id);
+                this.state.players.get(id).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.EEVEE && item == ITEMS.ICY_ROCK) {
@@ -221,7 +229,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(client.sessionId).board.delete(id);
+                this.state.players.get(id).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.GROUDON && item == ITEMS.RED_ORB) {
@@ -235,7 +243,7 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(client.sessionId).board.delete(id);
+                this.state.players.get(id).board.delete(id);
                 success = true;
                 message.updateItems = false;
               } else if (pokemon.name == PKM.KYOGRE && item == ITEMS.BLUE_ORB) {
@@ -249,25 +257,25 @@ class OnDragDropCommand extends Command {
                 eevolution.items.item1 = pokemon.items.item1;
                 eevolution.items.item2 = pokemon.items.item2;
                 eevolution.items.add(item);
-                this.state.players.get(client.sessionId).board.delete(id);
+                this.state.players.get(id).board.delete(id);
                 success = true;
                 message.updateItems = false;
               }else {
                 pokemon.items.add(item);
-                this.state.players.get(client.sessionId).stuff.remove(item);
+                this.state.players.get(id).stuff.remove(item);
                 success = true;
                 message.updateItems = false;
               }
             }
           });
           if (eevolution) {
-            this.state.players.get(client.sessionId).board.set(eevolution.id, eevolution);
-            this.state.players.get(client.sessionId).stuff.remove(item);
+            this.state.players.get(id).board.set(eevolution.id, eevolution);
+            this.state.players.get(id).stuff.remove(item);
           }
           if (evolve) {
-            this.state.players.get(client.sessionId).synergies.update(this.state.players.get(client.sessionId).board);
-            this.state.players.get(client.sessionId).effects.update(this.state.players.get(client.sessionId).synergies);
-            this.state.players.get(client.sessionId).boardSize = UtilsCommand.getTeamSize(this.state.players.get(client.sessionId).board);
+            this.state.players.get(id).synergies.update(this.state.players.get(id).board);
+            this.state.players.get(id).effects.update(this.state.players.get(id).synergies);
+            this.state.players.get(id).boardSize = UtilsCommand.getTeamSize(this.state.players.get(id).board);
           }
         }
       }
@@ -276,17 +284,17 @@ class OnDragDropCommand extends Command {
       client.send('DragDropFailed', message);
     }
     if (dittoReplaced) {
-      return [new OnEvolutionCommand().setPayload(client.sessionId), new OnEvolutionCommand().setPayload(client.sessionId)];
+      return [new OnEvolutionCommand().setPayload(id), new OnEvolutionCommand().setPayload(id)];
     }
   }
 }
 
 class OnSellDropCommand extends Command {
   execute({client, detail}) {
-    if (this.state.players.has(client.sessionId) &&
-      this.state.players.get(client.sessionId).board.has(detail.pokemonId)) {
-      const pokemon = this.state.players.get(client.sessionId).board.get(detail.pokemonId);
-      const player = this.state.players.get(client.sessionId);
+    if (this.state.players.has(client.auth._id.toHexString()) &&
+      this.state.players.get(client.auth._id.toHexString()).board.has(detail.pokemonId)) {
+      const pokemon = this.state.players.get(client.auth._id.toHexString()).board.get(detail.pokemonId);
+      const player = this.state.players.get(client.auth._id.toHexString());
       player.money += COST[pokemon.rarity] * pokemon.stars;
 
       if (pokemon.items.item0 != '') {
@@ -309,9 +317,9 @@ class OnSellDropCommand extends Command {
 }
 
 class OnRefreshCommand extends Command {
-  execute(sessionId) {
-    if (this.state.players.has(sessionId)) {
-      const player = this.state.players.get(sessionId);
+  execute(id) {
+    if (this.state.players.has(id)) {
+      const player = this.state.players.get(id);
       if (player.money >= 2) {
         this.state.shop.assignShop(player);
         player.money -= 2;
@@ -321,17 +329,17 @@ class OnRefreshCommand extends Command {
 }
 
 class OnLockCommand extends Command {
-  execute(sessionId) {
-    if (this.state.players.has(sessionId)) {
-      this.state.players.get(sessionId).shopLocked = !this.state.players.get(sessionId).shopLocked;
+  execute(id) {
+    if (this.state.players.has(id)) {
+      this.state.players.get(id).shopLocked = !this.state.players.get(id).shopLocked;
     }
   }
 }
 
 class OnLevelUpCommand extends Command {
-  execute(sessionId) {
-    if (this.state.players.has(sessionId)) {
-      const player = this.state.players.get(sessionId);
+  execute(id) {
+    if (this.state.players.has(id)) {
+      const player = this.state.players.get(id);
       if (player.money >= 4) {
         player.experienceManager.addExperience(4);
         player.money -= 4;
@@ -342,8 +350,8 @@ class OnLevelUpCommand extends Command {
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    this.state.players.set(client.sessionId, new Player(
-        client.sessionId,
+    this.state.players.set(client.auth._id.toHexString(), new Player(
+        client.auth._id.toHexString(),
         auth.email.slice(0, auth.email.indexOf('@')),
         client.auth.metadata.elo,
         client.auth.metadata.avatar,
@@ -353,7 +361,7 @@ class OnJoinCommand extends Command {
         auth.email,
         this.state.players.size + 1
     ));
-    this.state.shop.assignShop(this.state.players.get(client.sessionId));
+    this.state.shop.assignShop(this.state.players.get(client.auth._id.toHexString()));
     if (this.state.players.size == 8) {
       // console.log('game elligible to xp');
       this.state.elligibleToXP = true;
@@ -364,7 +372,7 @@ class OnJoinCommand extends Command {
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
     if (this.state.elligibleToXP && this.state.stageLevel > 15) {
-      this.computePlayerExperience(this.state.players.get(client.sessionId));
+      this.computePlayerExperience(this.state.players.get(client.auth._id.toHexString()));
     }
   }
 
@@ -373,7 +381,7 @@ class OnLeaveCommand extends Command {
     player.exp = XP_PLACE[player.rank - 1];
 
     Mongoose.connect(process.env.MONGO_URI, (err) => {
-      User.find({email: player.email}, (err, users)=> {
+      User.find({_id: player.id}, (err, users)=> {
         if (err) {
           console.log(err);
         } else {
@@ -402,7 +410,7 @@ class OnLeaveCommand extends Command {
               usr.metadata.mapWin[self.state.mapType] += 1;
             }
             self.room.clients.forEach((cli) => {
-              if (cli.auth.email == usr.email) {
+              if (cli.auth._id == usr._id) {
                 cli.send('metadata', usr.metadata);
               }
             });
@@ -712,7 +720,9 @@ class OnUpdatePhaseCommand extends Command {
               'objType': 'pokemon'
             };
             const client = {
-              'sessionId': key
+              auth:{
+                '_id': key
+              }
             };
             commands.push(new OnDragDropCommand().setPayload({'client': client, 'detail': detail}));
           }
@@ -744,10 +754,10 @@ class OnUpdatePhaseCommand extends Command {
 }
 
 class OnEvolutionCommand extends Command {
-  execute(sessionId) {
+  execute(id) {
     let evolve = false;
     const itemsToAdd = [];
-    const player = this.state.players.get(sessionId);
+    const player = this.state.players.get(id);
     player.board.forEach((pokemon, key) => {
       let count = 0;
       const pokemonEvolutionName = pokemon.evolution;

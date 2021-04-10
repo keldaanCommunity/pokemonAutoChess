@@ -121,12 +121,6 @@ class RoomPage {
       this.room.send('toggle-ready');
     });
 
-    this.room.onLeave((client, consent) => {
-      if (consent) {
-        // sessionStorage.setItem('PAC_Room_ID', this.room.id);
-        // sessionStorage.setItem('PAC_Session_ID', this.room.sessionId);
-      }
-    });
     this.room.onStateChange((state) => {
       // console.log(state);
       this.handleUserChange();

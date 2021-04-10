@@ -103,12 +103,6 @@ class LobbyPage {
   }
 
   initializeRoom() {
-    this.room.onLeave((client, consent) => {
-      if (consent) {
-        // sessionStorage.setItem('PAC_Room_ID', this.room.id);
-        // sessionStorage.setItem('PAC_Session_ID', this.room.sessionId);
-      }
-    });
     const self = this;
     this.room.state.messages.onAdd = (message, index) => {
       self.addMessage(message);

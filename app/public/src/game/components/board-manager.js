@@ -14,7 +14,7 @@ export default class BoardManager {
     const coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
     let pokemonUI;
 
-    if (window.sessionId == this.player.id) {
+    if (_client.auth._id == this.player.id) {
       pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, true, true);
     } else {
       pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false, true);

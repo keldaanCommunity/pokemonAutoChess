@@ -34,7 +34,7 @@ class GameRoom extends colyseus.Room {
     this.onMessage('shop', (client, message) => {
       if(!this.state.gameFinished){
         this.dispatcher.dispatch(new Commands.OnShopCommand(), {
-          sessionId: client.sessionId,
+          id: client.auth._id.toHexString(),
           index: message.id
         });
       }
@@ -60,19 +60,19 @@ class GameRoom extends colyseus.Room {
 
     this.onMessage('refresh', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnRefreshCommand(), client.sessionId);
+        this.dispatcher.dispatch(new Commands.OnRefreshCommand(), client.auth._id.toHexString());
       }
     });
 
     this.onMessage('lock', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnLockCommand(), client.sessionId);
+        this.dispatcher.dispatch(new Commands.OnLockCommand(), client.auth._id.toHexString());
       }
     });
 
     this.onMessage('levelUp', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnLevelUpCommand(), client.sessionId);
+        this.dispatcher.dispatch(new Commands.OnLevelUpCommand(), client.auth._id.toHexString());
       }
     });
     
@@ -119,7 +119,7 @@ class GameRoom extends colyseus.Room {
   onDispose() {
     console.log(`dispose game room`);
     let self = this;
-    if(this.state.stageLevel > 10){
+    if(this.state.stageLevel > 1){
       this.state.players.forEach(player =>{
         if(player.isBot){
           EloBot.find({'name': POKEMON_BOT[player.name]}, (err, bots)=>{
@@ -139,7 +139,8 @@ class GameRoom extends colyseus.Room {
             name: dbrecord.name,
             pokemons: dbrecord.pokemons,
             rank: dbrecord.rank,
-            avatar: dbrecord.avatar
+            avatar: dbrecord.avatar,
+            playerId: dbrecord.id
           });
           let rank = player.rank;
           if(!this.state.gameFinished && player.life != 0){
@@ -152,7 +153,7 @@ class GameRoom extends colyseus.Room {
             });
             rank = rankOfLastPlayerAlive;
           }
-          User.find({email: player.email}, (err, users)=> {
+          User.find({_id: player.id}, (err, users)=> {
             if (err) {
               console.log(err);
             } else {

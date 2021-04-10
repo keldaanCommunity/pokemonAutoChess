@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const statisticSchema = new Schema(
     {
+      playerId:{
+        type: String
+      },
       time:{
         type: Number
       },

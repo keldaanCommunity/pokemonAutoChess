@@ -13,7 +13,7 @@ export default class ShopContainer extends GameObjects.Container {
     this.dashboardZone.setRectangleDropZone(1400, 150);
     this.dashboardZone.setName('sell-zone');
     this.add(this.dashboardZone);
-    this.levelUpButton = new LevelUpButton(scene, 0, 58, window.state.players[window.sessionId].experienceManager);
+    this.levelUpButton = new LevelUpButton(scene, 0, 58, window.state.players[_client.auth._id].experienceManager);
     this.add(new RefreshButton(scene, 0, -8));
     this.add(this.levelUpButton);
     this.lockButton = new LockButton(scene, -135, -8);
@@ -23,7 +23,7 @@ export default class ShopContainer extends GameObjects.Container {
   }
 
   buildShopPortraits() {
-    const player = window.state.players[window.sessionId];
+    const player = window.state.players[_client.auth._id];
     this.addPortrait(player.shop[0], 0);
     this.addPortrait(player.shop[1], 1);
     this.addPortrait(player.shop[2], 2);

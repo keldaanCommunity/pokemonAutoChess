@@ -473,7 +473,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
       if (changeNeeded) {
         client.auth.metadata.avatar = pokemon;
         Mongoose.connect(process.env.MONGO_URI, (err) => {
-          User.find({email: client.auth.email}, (err, users)=> {
+          User.find({_id: client.auth._id.toHexString()}, (err, users)=> {
             if (err) {
               console.log(err);
             } else {
@@ -501,7 +501,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
   onJoin(client, options, auth) {
     super.onJoin(client, options, auth);
     console.log(`${client.auth.email} join lobby`);
-    this.state.users[client.sessionId] = new GameUser(client.sessionId, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.elo, auth.metadata.avatar, false, false);
+    this.state.users[client.auth._id.toHexString()] = new GameUser(client.auth._id.toHexString(), auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.elo, auth.metadata.avatar, false, false);
     //console.log(this.state.users);
     //this.state.addMessage(auth.email.split('@')[0], `${auth.email.split('@')[0]} joined.`, auth.metadata.avatar, Date.now(), true);
     this.clients.forEach((cli) => {
@@ -514,7 +514,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
   onLeave(client) {
     super.onLeave(client);
     console.log(`${client.auth.email} leave lobby`);
-    this.state.users.delete(client.sessionId);
+    this.state.users.delete(client.auth._id.toHexString());
     // const time = new Date(Date.now());
     // this.state.addMessage('Server',`${client.auth.email} left.`, client.auth.metadata.avatar, Date.now(), true);
   }

@@ -161,22 +161,4 @@ class LoginPage {
   }
 }
 
-/*
-let lastRoomId = sessionStorage.getItem('PAC_Room_ID');
-let lastSessionId = sessionStorage.getItem('PAC_Session_ID');
-if (lastRoomId && lastSessionId) {
-  client.reconnect(lastRoomId, lastSessionId)
-    .then(room => {
-      //console.log('Previous game found, reconnect ?');
-      //console.log(room);
-    })
-    .catch(e => {
-      //console.log('Reconnection error', e);
-      sessionStorage.removeItem('PAC_Room_ID');
-      sessionStorage.removeItem('PAC_Session_ID');
-      login();
-    });
-}
-*/
-
 export default LoginPage;

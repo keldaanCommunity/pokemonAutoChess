@@ -22,7 +22,7 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
       strokeThickness: 3
     }
     let textStyle = this.textStyle;
-    if(player.id == window.sessionId){
+    if(player.id == _client.auth._id){
       textStyle = this.playerStyle;
     }
     const pokemon = PokemonFactory.createPokemonFromName(player.avatar);

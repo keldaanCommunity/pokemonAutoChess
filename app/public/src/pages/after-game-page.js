@@ -188,8 +188,8 @@ class AfterGamePage {
 
     document.getElementById('players-table').appendChild(trHTML);
 
-    if(player.id == window.sessionId){
-      document.getElementById('xp').innerHTML = `<p id="xp">+${this.room.state.players.get(window.sessionId).exp} ${WORDS.EXPERIENCE[this.langage]}</p>`;
+    if(player.id == _client.auth._id){
+      document.getElementById('xp').innerHTML = `<p id="xp">+${this.room.state.players.get(_client.auth._id).exp} ${WORDS.EXPERIENCE[this.langage]}</p>`;
     }
   }
 

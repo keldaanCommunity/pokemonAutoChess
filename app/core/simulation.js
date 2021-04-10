@@ -406,17 +406,21 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.PURSUIT:
-          pokemon.effects.push(EFFECTS.PURSUIT);
-
+          if(types.includes(TYPE.MONSTER)){
+            pokemon.effects.push(EFFECTS.PURSUIT);
+          }
           break;
 
         case EFFECTS.BRUTAL_SWING:
-          pokemon.effects.push(EFFECTS.BRUTAL_SWING);
-
+          if(types.includes(TYPE.MONSTER)){
+            pokemon.effects.push(EFFECTS.BRUTAL_SWING);
+          }
           break;
 
         case EFFECTS.POWER_TRIP:
-          pokemon.effects.push(EFFECTS.POWER_TRIP);
+          if(types.includes(TYPE.MONSTER)){
+            pokemon.effects.push(EFFECTS.POWER_TRIP);
+          }
           break;
 
         case EFFECTS.AMNESIA:

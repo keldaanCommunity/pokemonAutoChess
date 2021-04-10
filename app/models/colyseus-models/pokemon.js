@@ -404,19 +404,19 @@ class Politoed extends Pokemon {
 
 class Shinx extends Pokemon {
   constructor() {
-    super(PKM.SHINX, 'lixy',[TYPE.ELECTRIC, TYPE.FIELD], RARITY.RARE, 'RARE', 403, PKM.LUXIO, 80, 5, 4, 4, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.CHARGE);
+    super(PKM.SHINX, 'lixy',[TYPE.ELECTRIC, TYPE.FIELD], RARITY.RARE, 'RARE', 403, PKM.LUXIO, 80, 5, 4, 4, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DISCHARGE);
   }
 }
 
 class Luxio extends Pokemon {
   constructor() {
-    super(PKM.LUXIO, 'luxio',[TYPE.ELECTRIC, TYPE.FIELD], RARITY.RARE, 'RARE', 404, PKM.LUXRAY, 120, 9, 4, 4, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.CHARGE);
+    super(PKM.LUXIO, 'luxio',[TYPE.ELECTRIC, TYPE.FIELD], RARITY.RARE, 'RARE', 404, PKM.LUXRAY, 120, 9, 4, 4, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DISCHARGE);
   }
 }
 
 class Luxray extends Pokemon {
   constructor() {
-    super(PKM.LUXRAY, 'luxray',[TYPE.ELECTRIC, TYPE.FIELD], RARITY.RARE, 'RARE', 405, '', 220, 20, 4, 4, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.CHARGE);
+    super(PKM.LUXRAY, 'luxray',[TYPE.ELECTRIC, TYPE.FIELD], RARITY.RARE, 'RARE', 405, '', 220, 20, 4, 4, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DISCHARGE);
   }
 }
 
@@ -494,19 +494,19 @@ class Rhyperior extends Pokemon {
 
 class Magnemite extends Pokemon {
   constructor() {
-    super(PKM.MAGNEMITE, 'magnéti',[TYPE.ELECTRIC, TYPE.METAL], RARITY.RARE, 'RARE', 81, PKM.MAGNETON, 80, 5, 1, 1, 2, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DISCHARGE);
+    super(PKM.MAGNEMITE, 'magnéti',[TYPE.ELECTRIC, TYPE.METAL], RARITY.RARE, 'RARE', 81, PKM.MAGNETON, 80, 5, 1, 1, 2, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.CHARGE);
   }
 }
 
 class Magneton extends Pokemon {
   constructor() {
-    super(PKM.MAGNETON, 'magnéton',[TYPE.ELECTRIC, TYPE.METAL], RARITY.RARE, 'RARE', 82, PKM.MAGNEZONE, 120, 9, 1, 1, 2, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DISCHARGE);
+    super(PKM.MAGNETON, 'magnéton',[TYPE.ELECTRIC, TYPE.METAL], RARITY.RARE, 'RARE', 82, PKM.MAGNEZONE, 120, 9, 1, 1, 2, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CHARGE);
   }
 }
 
 class Magnezone extends Pokemon {
   constructor() {
-    super(PKM.MAGNEZONE, 'magnézone',[TYPE.ELECTRIC, TYPE.METAL], RARITY.RARE, 'RARE', 462, '', 220, 18, 1, 1, 2, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DISCHARGE);
+    super(PKM.MAGNEZONE, 'magnézone',[TYPE.ELECTRIC, TYPE.METAL], RARITY.RARE, 'RARE', 462, '', 220, 18, 1, 1, 2, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.CHARGE);
   }
 }
 

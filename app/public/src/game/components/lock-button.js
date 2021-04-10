@@ -35,7 +35,7 @@ export default class LockButton extends Button {
   }
 
   updateState() {
-    if (window.state.players[window.sessionId].shopLocked) {
+    if (window.state.players[_client.auth._id].shopLocked) {
       this.lock.setTexture('lock', 'locked');
     } else {
       this.lock.setTexture('lock', 'unlocked');

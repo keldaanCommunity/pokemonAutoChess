@@ -45,7 +45,6 @@ class GameContainer {
 
   initializeEvents() {
     // Room event listener
-    window.sessionId = this.room.sessionId;
     this.room.onStateChange.once((state) => {
       window.state = state;
     });
@@ -79,7 +78,7 @@ class GameContainer {
   initializePlayer(player) {
     // //console.log(player);
     const self = this;
-    if (this.room.sessionId == player.id) {
+    if (_client.auth._id == player.id) {
       this.player = player;
     }
     player.onChange = ((changes) => {
@@ -137,7 +136,7 @@ class GameContainer {
     });
 
     player.simulation.onChange = ((changes) => {
-      if (player.id == this.room.sessionId && this.game.scene.getScene('gameScene') != null) {
+      if (player.id == _client.auth._id && this.game.scene.getScene('gameScene') != null) {
         changes.forEach((change) =>{
           // console.log('simulation change ', change.field, change.value);
           if (change.field == 'climate') {
@@ -287,7 +286,7 @@ class GameContainer {
   }
 
   handleStuffChange(change, player) {
-    if (player.id == this.room.sessionId && this.game.scene.getScene('gameScene') != null) {
+    if (player.id == _client.auth._id && this.game.scene.getScene('gameScene') != null) {
       this.game.scene.getScene('gameScene').itemsContainer.changeStuff(change.field, change.value);
     }
   }
@@ -308,7 +307,7 @@ class GameContainer {
   }
 
   handleClimateChange(change, player) {
-    if (player.id == this.room.sessionId && this.game.scene.getScene('gameScene') != null) {
+    if (player.id == _client.auth._id && this.game.scene.getScene('gameScene') != null) {
       switch (change.value) {
         case 'RAIN':
           this.game.scene.getScene('gameScene').weatherManager.addRain();
@@ -365,19 +364,19 @@ class GameContainer {
   }
 
   handleAddShopPokemon(player, pokemon, key) {
-    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.room.sessionId == player.id) {
+    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && _client.auth._id == player.id) {
       this.game.scene.getScene('gameScene').shopContainer.addPortrait(pokemon, key);
     }
   }
 
   handleRemoveShopPokemon(player, index) {
-    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.room.sessionId == player.id) {
+    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && _client.auth._id == player.id) {
       this.game.scene.getScene('gameScene').shopContainer.removePortrait(index);
     }
   }
 
   handleExperienceChange(change, player) {
-    if (player.id == this.room.sessionId && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').playerContainer && this.game.scene.getScene('gameScene').shopContainer) {
+    if (player.id == _client.auth._id && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').playerContainer && this.game.scene.getScene('gameScene').shopContainer) {
       switch (change.field) {
         case 'level':
           this.game.scene.getScene('gameScene').shopContainer.levelUpButton.changeLevel(change.value);
@@ -406,39 +405,39 @@ class GameContainer {
     if (this.game == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null ) return;
     switch (change.field) {
       case 'money':
-        if (this.room.sessionId == player.id) {
+        if (_client.auth._id == player.id) {
           this.game.scene.getScene('gameScene').moneyContainer.onMoneyChange(change.value);
         }
         this.game.scene.getScene('gameScene').playerContainer.onMoneyChange(player.id, change.value);
         break;
 
       case 'streak':
-        if (this.room.sessionId == player.id) {
+        if (_client.auth._id == player.id) {
           this.game.scene.getScene('gameScene').moneyContainer.onStreakChange(change.value);
         }
         break;
 
       case 'interest':
-        if (this.room.sessionId == player.id) {
+        if (_client.auth._id == player.id) {
           this.game.scene.getScene('gameScene').moneyContainer.onInterestChange(change.value);
         }
         break;
 
       case 'lastBattleResult':
-        if (this.room.sessionId == player.id) {
+        if (_client.auth._id == player.id) {
           this.game.scene.getScene('gameScene').moneyContainer.onWonChange(change.value);
           this.game.scene.getScene('gameScene').lastBattleResult.setText(LAST_BATTLE_RESULT_TRADUCTION[change.value][window.langage]);
         }
         break;
 
       case 'opponentName':
-        if (this.room.sessionId == player.id) {
+        if (_client.auth._id == player.id) {
           this.game.scene.getScene('gameScene').battleManager.setOpponentName(change.value.slice(0, 10));
         }
         break;
 
       case 'boardSize':
-        if (this.room.sessionId == player.id) {
+        if (_client.auth._id == player.id) {
           this.game.scene.getScene('gameScene').boardSizeText.setText(player.boardSize);
         }
         break;
@@ -448,7 +447,7 @@ class GameContainer {
         break;
 
       case 'shopLocked':
-        if (this.room.sessionId == player.id) {
+        if (_client.auth._id == player.id) {
           this.game.scene.getScene('gameScene').shopContainer.lockButton.updateState();
         }
         break;
@@ -458,7 +457,7 @@ class GameContainer {
         break;
 
       case 'alive':
-        if (this.room.sessionId == player.id) {
+        if (_client.auth._id == player.id) {
           let rankPhrase = `${WORDS.PLACE[window.langage]} no ${player.rank}`;
           let titlePhrase = WORDS.RANKING[window.langage];
           if(!change.value){
@@ -500,12 +499,6 @@ class GameContainer {
     }).catch((e) => {
       console.error('join error', e);
     });
-  }
-
-  handleRoomLeft(client) {
-    // sessionStorage.setItem("PAC_Room_ID", room.id);
-    // sessionStorage.setItem("PAC_Session_ID", room.sessionId);
-    // console.log(client.id, 'left');
   }
 
   onPlayerClick(event) {
