@@ -1,9 +1,9 @@
 const schema = require('@colyseus/schema');
 const Message = require('../../models/colyseus-models/message');
-const GameUser = require('../../models/colyseus-models/game-user');
 const LeaderboardInfo = require('../../models/colyseus-models/leaderboard-info');
 const Chat = require('../../models/mongo-models/chat');
 const Filter = require('bad-words');
+const DetailledGameUser = require('../../models/colyseus-models/detailled-game-user');
 
 class LobbyState extends schema.Schema {
   constructor() {
@@ -47,7 +47,7 @@ class LobbyState extends schema.Schema {
 
 schema.defineTypes(LobbyState, {
   messages: [Message],
-  users: {map: GameUser},
+  users: {map: DetailledGameUser},
   leaderboard: [LeaderboardInfo],
   pokemonLeaderboard: [LeaderboardInfo],
   mythicalPokemonLeaderboard: [LeaderboardInfo],

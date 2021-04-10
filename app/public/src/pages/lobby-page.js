@@ -303,6 +303,8 @@ class LobbyPage {
             Leaderboard</a>
             <a class="dropdown-item" href="#" id ="elo-player-button">
             Bot Leaderboard</a>
+            <a class="dropdown-item" href="#" id ="history-button">
+            History</a>
           </div>
       </div>
     </div>
@@ -340,7 +342,7 @@ class LobbyPage {
       <table style="border-spacing: 10px 0px; border-collapse:separate; width: 100%;">
         <thead>
             <tr>
-                <th colspan="2">${WORDS.LEADERBOARD[this.langage]}</th>
+                <th id='firstThTitle' colspan="2">${WORDS.LEADERBOARD[this.langage]}</th>
                 <th id='secondThTitle'>${WORDS.PLAYER[this.langage]}</th>
                 <th id='thirdThTitle'>${WORDS.LEVEL[this.langage]}</th>
             </tr>
@@ -400,6 +402,10 @@ class LobbyPage {
 
     window.changeAvatar = function(pokemon) {
       self.room.send('avatar', {'pokemon': pokemon});
+    };
+
+    window.historyClick = function(id){
+      self.handleHistoryChange(id);
     };
 
     document.getElementById('button-home').addEventListener('click', (e) => {
@@ -462,6 +468,10 @@ class LobbyPage {
     document.getElementById('elo-player-button').addEventListener('click', (e) => {
       self.handleLeaderboardEloBotChange();
     });
+
+    document.getElementById('history-button').addEventListener('click', (e) => {
+      self.handleHistoryChange(_client.auth._id);
+    });
   }
 
   createRoom() {
@@ -496,10 +506,15 @@ class LobbyPage {
     if(document.getElementById('user-container')){
       document.getElementById('user-container').innerHTML = '';
       this.room.state.users.forEach(user => {
-        const userHTML = document.createElement('div');
+        const userHTML = document.createElement('button');
+        userHTML.addEventListener('click',e=>{
+          window.historyClick(user.id);
+        });
+        userHTML.className = 'invisibleButton';
         userHTML.style.display = 'flex';
         userHTML.style.flexFlow = 'column';
         userHTML.style.alignItems = 'center';
+        userHTML.style.cursor = 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer';
         const imageHTML = document.createElement('img');
         imageHTML.src = `assets/avatar/${user.avatar}.png`;
         const nameHTML = document.createElement('p');
@@ -512,7 +527,56 @@ class LobbyPage {
     }
   }
 
+  handleHistoryChange(playerId){
+    document.getElementById('firstThTitle').textContent = 'Team';
+    document.getElementById('secondThTitle').textContent = 'Rank';
+    document.getElementById('thirdThTitle').textContent = 'Elo';
+    if(document.getElementById('leaderboard-container')){
+      document.getElementById('leaderboard-table').innerHTML = '';
+      document.getElementById('leaderboard-table').style.borderSpacing = '15px 5px';
+      this.room.state.users.get(playerId).history.forEach(record =>{
+        const recordHTML = document.createElement('tr');
+
+        const timeHTML = document.createElement('td');
+        let jsdate = new Date(record.time);
+        const dateHTML = document.createElement('span');
+        dateHTML.textContent = jsdate.toLocaleDateString()
+
+        const hourHTML = document.createElement('span');
+        hourHTML.textContent = `${jsdate.getHours()}:${jsdate.getMinutes()}`;
+        timeHTML.appendChild(dateHTML);
+        timeHTML.appendChild(document.createElement('br'));
+        timeHTML.appendChild(hourHTML);
+
+        const teamHTML = document.createElement('td');
+        teamHTML.style.display = 'flex';
+    
+        record.pokemons.forEach(pokemon => {
+          let pokemonImage = document.createElement('img');
+          pokemonImage.src = `assets/avatar/${pokemon}.png`;
+          pokemonImage.style.width = '40px';
+          pokemonImage.style.height = '40px';
+          teamHTML.appendChild(pokemonImage);
+        });
+
+        const rankHTML = document.createElement('td');
+        rankHTML.textContent = record.rank;
+
+        const eloHTML = document.createElement('td');
+        eloHTML.textContent = record.elo;
+
+        recordHTML.appendChild(timeHTML);
+        recordHTML.appendChild(teamHTML);
+        recordHTML.appendChild(rankHTML);
+        recordHTML.appendChild(eloHTML);
+
+        document.getElementById('leaderboard-table').appendChild(recordHTML);
+      });
+    }
+  }
+
   handleLeaderboardEloChange(){
+    document.getElementById('firstThTitle').textContent = WORDS.LEADERBOARD[this.langage];
     document.getElementById('secondThTitle').textContent = 'Player';
     document.getElementById('thirdThTitle').textContent = 'Elo';
     if(document.getElementById('leaderboard-container')){
@@ -545,6 +609,7 @@ class LobbyPage {
   }
 
   handleLeaderboardEloBotChange(){
+    document.getElementById('firstThTitle').textContent = WORDS.LEADERBOARD[this.langage];
     document.getElementById('secondThTitle').textContent = 'Bot';
     document.getElementById('thirdThTitle').textContent = 'Elo';
     if(document.getElementById('leaderboard-container')){
@@ -577,6 +642,7 @@ class LobbyPage {
   }
 
   handleLeaderboardPokemonChange(){
+    document.getElementById('firstThTitle').textContent = WORDS.LEADERBOARD[this.langage];
     document.getElementById('secondThTitle').textContent = 'Pokemon';
     document.getElementById('thirdThTitle').textContent = 'Count';
     
@@ -616,6 +682,7 @@ class LobbyPage {
   }
 
   handleLeaderboardMythicalChange(){
+    document.getElementById('firstThTitle').textContent = WORDS.LEADERBOARD[this.langage];
     document.getElementById('secondThTitle').textContent = 'Pokemon';
     document.getElementById('thirdThTitle').textContent = 'Count';
     if(document.getElementById('leaderboard-container')){
@@ -654,6 +721,7 @@ class LobbyPage {
   }
 
   handleLeaderboardTypeChange(){
+    document.getElementById('firstThTitle').textContent = WORDS.LEADERBOARD[this.langage];
     document.getElementById('secondThTitle').textContent = 'Type';
     document.getElementById('thirdThTitle').textContent = 'Count';
     
@@ -692,6 +760,7 @@ class LobbyPage {
   }
 
   handleLeaderboardTheeStarsPokemonChange(){
+    document.getElementById('firstThTitle').textContent = WORDS.LEADERBOARD[this.langage];
     document.getElementById('secondThTitle').textContent = 'Pokemon';
     document.getElementById('thirdThTitle').textContent = 'Count';
     
@@ -731,6 +800,7 @@ class LobbyPage {
   }
 
   handleLeaderboardChange(){
+    document.getElementById('firstThTitle').textContent = WORDS.LEADERBOARD[this.langage];
     document.getElementById('secondThTitle').textContent = 'Player';
     document.getElementById('thirdThTitle').textContent = 'level';
     if(document.getElementById('leaderboard-container')){

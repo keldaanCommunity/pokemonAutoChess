@@ -5,6 +5,9 @@ const statisticSchema = new Schema(
       playerId:{
         type: String
       },
+      elo:{
+        type: Number
+      },
       time:{
         type: Number
       },

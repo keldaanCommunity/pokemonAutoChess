@@ -119,7 +119,7 @@ class GameRoom extends colyseus.Room {
   onDispose() {
     console.log(`dispose game room`);
     let self = this;
-    if(this.state.stageLevel > 10){
+    if(this.state.stageLevel > 1){
       this.state.players.forEach(player =>{
         if(player.isBot){
           EloBot.find({'name': POKEMON_BOT[player.name]}, (err, bots)=>{
@@ -133,6 +133,7 @@ class GameRoom extends colyseus.Room {
         }
         else{
           let dbrecord = this.transformToSimplePlayer(player);
+          console.log(dbrecord);
 
           Statistic.create({
             time: Date.now(),
@@ -140,13 +141,13 @@ class GameRoom extends colyseus.Room {
             pokemons: dbrecord.pokemons,
             rank: dbrecord.rank,
             avatar: dbrecord.avatar,
-            playerId: dbrecord.id
+            playerId: dbrecord.id,
+            elo: dbrecord.elo
           });
           let rank = player.rank;
           if(!this.state.gameFinished && player.life != 0){
-            let rankOfLastPlayerAlive = 8;
+            let rankOfLastPlayerAlive = this.state.players.size;
             this.state.players.forEach(plyr =>{
-              console.log(plyr.life);
               if(plyr.life <= 0){
                 rankOfLastPlayerAlive = Math.min(rankOfLastPlayerAlive, plyr.rank);
               }
@@ -177,7 +178,8 @@ class GameRoom extends colyseus.Room {
       rank: player.rank,
       avatar: player.avatar,
       pokemons: [],
-      exp: player.exp
+      exp: player.exp,
+      elo: player.elo
     };
     player.board.forEach(pokemon => {
       if(pokemon.positionY != 0){

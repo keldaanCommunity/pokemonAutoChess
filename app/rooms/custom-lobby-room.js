@@ -10,6 +10,10 @@ const GameUser = require('../models/colyseus-models/game-user');
 const LeaderboardInfo = require('../models/colyseus-models/leaderboard-info');
 const PokemonFactory = require('../models/pokemon-factory');
 const EloBot = require('../models/mongo-models/elo-bot');
+const schema = require('@colyseus/schema');
+const GameRecord = require('../models/colyseus-models/game-record');
+const DetailledGameUser = require('../models/colyseus-models/detailled-game-user');
+const ArraySchema = schema.ArraySchema;
 
 class CustomLobbyRoom extends colyseus.LobbyRoom {
   constructor() {
@@ -501,12 +505,24 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
   onJoin(client, options, auth) {
     super.onJoin(client, options, auth);
     console.log(`${client.auth.email} join lobby`);
-    this.state.users[client.auth._id.toHexString()] = new GameUser(client.auth._id.toHexString(), auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.elo, auth.metadata.avatar, false, false);
-    //console.log(this.state.users);
-    //this.state.addMessage(auth.email.split('@')[0], `${auth.email.split('@')[0]} joined.`, auth.metadata.avatar, Date.now(), true);
-    this.clients.forEach((cli) => {
-      if (cli.auth.email == client.auth.email && client.sessionId != cli.sessionId) {
-        cli.send('to-lobby', {});
+    Statistic.find({'playerId': client.auth._id.toHexString()}, ['pokemons','time','rank','elo'], {limit:10, sort:{'time': -1}}, (err, stats)=>{
+      if(err){
+        console.log(err);
+      }
+      else{
+        let records = new ArraySchema();
+        stats.forEach(record =>{
+          //console.log(record.elo);
+          records.push(new GameRecord(record.time, record.rank, record.elo, record.pokemons));
+        });
+        
+        this.state.users[client.auth._id.toHexString()] = new DetailledGameUser(client.auth._id.toHexString(), auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.elo, auth.metadata.avatar, false, false, records);
+
+        this.clients.forEach((cli) => {
+          if (cli.auth.email == client.auth.email && client.sessionId != cli.sessionId) {
+            cli.send('to-lobby', {});
+          }
+        });
       }
     });
   }
