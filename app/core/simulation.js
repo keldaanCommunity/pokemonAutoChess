@@ -76,10 +76,10 @@ class Simulation extends Schema {
 
     this.applyItemsEffects(pokemonEntity, pokemon.types);
     this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
+    this.applySpecialCellsEffects(pokemonEntity);
 
     if(team == 0){
       this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects, this.redEffects, blueTeam, redTeam);
-      this.applySpecialCellsEffects(pokemonEntity);
       const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
       this.blueTeam.set(pokemonEntity.id, pokemonEntity);
       this.dpsMeter.set(pokemonEntity.id, dps);

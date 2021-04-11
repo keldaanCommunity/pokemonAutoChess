@@ -38,8 +38,14 @@ class GameState extends schema.Schema {
     const y = [0, 1, 2];
     this.shuffle(x);
     this.shuffle(y);
-    this.specialCells.push(new SpecialCell(x.pop(), y.pop()));
-    this.specialCells.push(new SpecialCell(x.pop(), y.pop()));
+    let firstPodX = x.pop();
+    let firstPodY = y.pop();
+    let secondPodX = x.pop();
+    let secondPodY = y.pop();
+    this.specialCells.push(new SpecialCell(firstPodX, firstPodY));
+    this.specialCells.push(new SpecialCell(secondPodX, secondPodY));
+    this.specialCells.push(new SpecialCell(firstPodX, 5 - firstPodY));
+    this.specialCells.push(new SpecialCell(secondPodX, 5 - secondPodY));
   }
 
   shuffle(array) {
