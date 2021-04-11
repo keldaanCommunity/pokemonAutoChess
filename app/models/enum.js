@@ -261,7 +261,13 @@ const PKM = Object.freeze({
   PRIMALKYOGRE:"primal-Kyogre",
   PRIMALGROUDON:"primal-Groudon",
   MEOWTH:"meowth",
-  PERSIAN:"persian"
+  PERSIAN:"persian",
+  DEINO:"deino",
+  ZWEILOUS:"zweilous",
+  HYDREIGON:"hydreigon",
+  SANDILE:"sandile",
+  KROKOROK:"krokorok",
+  KROOKODILE:"krookodile"
 });
 
 const WORDS = Object.freeze({

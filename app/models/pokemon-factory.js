@@ -823,6 +823,18 @@ class PokemonFactory {
         return PKM.MEOWTH;
       case PKM.PERSIAN:
         return PKM.MEOWTH;
+      case PKM.DEINO:
+        return PKM.DEINO;
+      case PKM.ZWEILOUS:
+        return PKM.DEINO;
+      case PKM.HYDREIGON:
+        return PKM.DEINO;
+      case PKM.SANDILE:
+        return PKM.SANDILE;
+      case PKM.KROKOROK:
+        return PKM.SANDILE;
+      case PKM.KROOKODILE:
+        return PKM.SANDILE;
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1357,6 +1369,18 @@ class PokemonFactory {
         return new Pokemon.Meowth();
       case PKM.PERSIAN:
         return new Pokemon.Persian();
+      case PKM.DEINO:
+        return new Pokemon.Deino();
+      case PKM.ZWEILOUS:
+        return new Pokemon.Zweilous();
+      case PKM.HYDREIGON:
+        return new Pokemon.Hydreigon();
+      case PKM.SANDILE:
+        return new Pokemon.Sandile();
+      case PKM.KROKOROK:
+        return new Pokemon.Krookorok();
+      case PKM.KROOKODILE:
+        return new Pokemon.Krookodile();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();

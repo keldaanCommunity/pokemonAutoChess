@@ -348,6 +348,24 @@ class Gengar extends Pokemon {
   }
 }
 
+class Deino extends Pokemon {
+  constructor() {
+    super(PKM.DEINO, 'solochi',[TYPE.DARK, TYPE.DRAGON], RARITY.EPIC, 'february', 633, PKM.ZWEILOUS, 90, 5, 1, 1, 2, 'FIRE/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DRACO_METEOR);
+  }
+}
+
+class Zweilous extends Pokemon {
+  constructor() {
+    super(PKM.ZWEILOUS, 'diamat',[TYPE.DARK, TYPE.DRAGON], RARITY.EPIC, 'february', 634, PKM.HYDREIGON, 130, 9, 1, 1, 2, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DRACO_METEOR);
+  }
+}
+
+class Hydreigon extends Pokemon {
+  constructor() {
+    super(PKM.HYDREIGON, 'tryoxhydre',[TYPE.DARK, TYPE.DRAGON], RARITY.EPIC, 'february', 635, '', 230, 18, 1, 1, 2, 'FIRE/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DRACO_METEOR);
+  }
+}
+
 class Abra extends Pokemon {
   constructor() {
     super(PKM.ABRA, 'abra',[TYPE.PSYCHIC, TYPE.HUMAN], RARITY.EPIC, 'EPIC', 63, PKM.KADABRA, 90, 5, 1, 1, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 50, SPECIAL_SKILL.TELEPORT);
@@ -471,6 +489,24 @@ class Togetic extends Pokemon {
 class Togekiss extends Pokemon {
   constructor() {
     super(PKM.TOGEKISS, 'togekiss',[TYPE.NORMAL, TYPE.FAIRY, TYPE.FLYING], RARITY.RARE, 'RARE', 468, '', 220, 18, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 3, 50, SPECIAL_SKILL.WISH);
+  }
+}
+
+class Sandile extends Pokemon {
+  constructor() {
+    super(PKM.SANDILE, 'mascaïman',[TYPE.GROUND, TYPE.DARK, TYPE.FIELD], RARITY.RARE, 'february', 551, PKM.KROKOROK, 80, 5, 4, 4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.STOMP);
+  }
+}
+
+class Krookorok extends Pokemon {
+  constructor() {
+    super(PKM.KROKOROK, 'escroco',[TYPE.GROUND, TYPE.DARK, TYPE.FIELD], RARITY.RARE, 'february', 552, PKM.KROOKODILE, 120, 9, 6, 6, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.STOMP);
+  }
+}
+
+class Krookodile extends Pokemon {
+  constructor() {
+    super(PKM.KROOKODILE, 'krocorible',[TYPE.GROUND, TYPE.DARK, TYPE.FIELD], RARITY.RARE, 'february', 553, '', 220, 20, 8, 8, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.STOMP);
   }
 }
 
@@ -1917,5 +1953,11 @@ module.exports = {
   PrimalGroudon,
   PrimalKyogre,
   Meowth,
-  Persian
+  Persian,
+  Deino,
+  Zweilous,
+  Hydreigon,
+  Sandile,
+  Krookorok,
+  Krookodile
 };

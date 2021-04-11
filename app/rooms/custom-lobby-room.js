@@ -47,7 +47,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           }
         }
       });
-      User.find({},['email','metadata'],{limit:25, sort:{'metadata.elo': -1}}, (err, users)=>{
+      User.find({'metadata.elo':{$ne: 1000}},['email','metadata'],{limit:25, sort:{'metadata.elo': -1}}, (err, users)=>{
         if(err){
           console.log(err);
         }
@@ -505,7 +505,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
   onJoin(client, options, auth) {
     super.onJoin(client, options, auth);
     console.log(`${client.auth.email} join lobby`);
-    Statistic.find({'playerId': client.auth._id.toHexString()}, ['pokemons','time','rank','elo'], {limit:10, sort:{'time': -1}}, (err, stats)=>{
+    Statistic.find({'playerId': client.auth._id.toHexString()}, ['pokemons','time','rank','elo'], {limit:15, sort:{'time': -1}}, (err, stats)=>{
       if(err){
         console.log(err);
       }
