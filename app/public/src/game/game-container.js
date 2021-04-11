@@ -57,7 +57,7 @@ class GameContainer {
       _client.auth.metadata = metadata;
     });
     this.room.onMessage('info',(message)=> this.handleServerInfo(message));
-    this.room.onLeave((client) => this.handleRoomLeft(client));
+    //this.room.onLeave((client) => this.handleRoomLeft(client));
     this.room.onError((err) => console.log('room error', err));
     this.room.state.onChange = (changes) => {
       changes.forEach((change) => {
