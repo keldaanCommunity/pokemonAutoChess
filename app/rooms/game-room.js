@@ -119,7 +119,7 @@ class GameRoom extends colyseus.Room {
   onDispose() {
     console.log(`dispose game room`);
     let self = this;
-    if(this.state.stageLevel > 1){
+    if(this.state.stageLevel > 10){
       this.state.players.forEach(player =>{
         if(player.isBot){
           EloBot.find({'name': POKEMON_BOT[player.name]}, (err, bots)=>{
