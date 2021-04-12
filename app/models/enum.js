@@ -1348,9 +1348,9 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Brulure'
     },
     description:{
-      eng: 'Burn the whole team for 2/4/8 seconds, dealing 5% hp / seconds, divide their attack by two.',
-      esp: 'Quemar todo el equipo durante 2/4/8 segundos, repartiendo el 5% de hp/segundos, dividir su ataque por dos.',
-      fra:'Brule la cible pour 2/4/8 secondes, lui faisant perdre 5% hp/secondes, divisant son attaque par 2.'
+      eng: 'Burn the whole team for 2/4/8 seconds, dealing 5% hp / seconds',
+      esp: 'Quemar todo el equipo durante 2/4/8 segundos, repartiendo el 5% de hp/segundos',
+      fra:'Brule la cible pour 2/4/8 secondes, lui faisant perdre 5% hp/secondes'
     }
   },
   POISON: {

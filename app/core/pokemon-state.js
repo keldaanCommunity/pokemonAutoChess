@@ -34,10 +34,6 @@ class PokemonState {
           reducedDamage = damage;
         }
   
-        if (attacker && attacker.burn) {
-          reducedDamage = reducedDamage / 2;
-        }
-  
         if (attacker && attacker.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
           reducedDamage = pokemon.life + 1;
         }

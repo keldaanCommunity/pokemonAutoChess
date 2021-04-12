@@ -125,7 +125,7 @@ class GameRoom extends colyseus.Room {
           EloBot.find({'name': POKEMON_BOT[player.name]}, (err, bots)=>{
             if(bots){
               bots.forEach(bot =>{
-                bot.elo = self.computeElo(player, player.rank);
+                bot.elo = self.computeElo(player, player.rank, player.elo);
                 bot.save();
               }); 
             }
@@ -144,27 +144,31 @@ class GameRoom extends colyseus.Room {
             });
             rank = rankOfLastPlayerAlive;
           }
-          console.log(dbrecord);
-          let elo = self.computeElo(player, rank);
-
-          Statistic.create({
-            time: Date.now(),
-            name: dbrecord.name,
-            pokemons: dbrecord.pokemons,
-            rank: dbrecord.rank,
-            avatar: dbrecord.avatar,
-            playerId: dbrecord.id,
-            elo: elo
-          });
 
           User.find({_id: player.id}, (err, users)=> {
             if (err) {
               console.log(err);
             } else {
               users.forEach((usr) => {
-                usr.metadata.elo = elo;
-                usr.markModified('metadata');
-                usr.save();
+
+                console.log(dbrecord);
+                if(usr.metadata.elo){
+                  let elo = self.computeElo(player, rank, usr.metadata.elo);
+      
+                  Statistic.create({
+                    time: Date.now(),
+                    name: dbrecord.name,
+                    pokemons: dbrecord.pokemons,
+                    rank: dbrecord.rank,
+                    avatar: dbrecord.avatar,
+                    playerId: dbrecord.id,
+                    elo: elo
+                  });
+  
+                  usr.metadata.elo = elo;
+                  usr.markModified('metadata');
+                  usr.save();
+                }
               });
             }
           });
@@ -192,15 +196,12 @@ class GameRoom extends colyseus.Room {
     return simplePlayer;
   }
 
-  computeElo(player, rank){
+  computeElo(player, rank, elo){
     let eloGains = [];
-    for (let i = 0; i < eloGains.length; i++) {
-      eloGains.push(actualElo);
-    }
     let meanGain = 0;
     this.state.players.forEach(plyr =>{
       if(player.name != plyr.name){
-        let expectedScoreA = this.eloEngine.getExpected(player.elo, plyr.elo);
+        let expectedScoreA = this.eloEngine.getExpected(elo, plyr.elo);
         if(rank < plyr.rank){
           eloGains.push(this.eloEngine.updateRating(expectedScoreA, 1, player.elo));
         }
