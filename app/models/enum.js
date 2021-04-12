@@ -963,6 +963,7 @@ const EFFECTS = Object.freeze({
   BATTLE_ARMOR: 'BATTLE_ARMOR',
   MOUTAIN_RESISTANCE: 'MOUTAIN_RESISTANCE',
   PHANTOM_FORCE: 'PHANTOM_FORCE',
+  CURSE: 'CURSE',
   ATTRACT: 'ATTRACT',
   BABY_DOLL_EYES: 'BABY_DOLL_EYES',
   GROUND: 'GROUND',
@@ -1220,6 +1221,11 @@ const EFFECTS_ICON = Object.freeze({
       level: 1,
       positive: true,
       type:TYPE.AMORPH
+    },
+    CURSE:{
+      level: 2,
+      positive: true,
+      type: TYPE.AMORPH
     },
     ATTRACT: {
       level: 1,
@@ -3001,18 +3007,30 @@ const TYPE_DETAILS = Object.freeze({
         {
           title:`(2) Phantom force`,
           text:`Ghosts gain 15% ATK speed and do true damage`
+        },
+        {
+          title:`(4) Curse`,
+          text:`Ghost attacks silence their targets`
         }
       ],
       esp:[
         {
           title:`(2) Fuerza fantasma`,
           text:`Los fantasmas ganan un 15% de velocidad ATK y hacen daño verdadero`
+        },
+        {
+          title:`(4) Maldición`,
+          text:`Los ataques fantasma silencian sus objetivos`
         }
       ],
       fra:[
         {
           title:`(2) Revenant`,
           text:`Les fantômes gagnent 15% d'ATK speed et font des dégats bruts`
+        },
+        {
+          title:`(4) Malédiction`,
+          text:`Les attaques des fantomes réduisent aux silences leurs cibles`
         }
       ]
     }

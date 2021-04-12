@@ -518,6 +518,11 @@ class Simulation extends Schema {
             pokemon.effects.push(EFFECTS.PHANTOM_FORCE);
           }
           break;
+        
+        case EFFECTS.CURSE:
+          if(types.includes(TYPE.AMORPH)){
+            pokemon.effects.push(EFFECTS.CURSE);
+          }
 
         case EFFECTS.ATTRACT:
           if (types.includes(TYPE.FAIRY)) {

@@ -60,6 +60,9 @@ class AttackingState extends PokemonState {
            target.triggerPoison(2000);
          }
        }
+       if(pokemon.effects.includes(EFFECTS.CURSE)){
+         target.triggerSilence(2000);
+       }
        if(pokemon.effects.includes(EFFECTS.REVENGE)){
          pokemon.setMana(pokemon.mana + 5);
        }

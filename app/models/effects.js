@@ -156,6 +156,9 @@ class Effects {
     if (synergies.AMORPH >= 2) {
       this.list.push(EFFECTS.PHANTOM_FORCE);
     }
+    if(synergies.AMORPH >= 4){
+      this.list.push(EFFECTS.CURSE);
+    }
     if (synergies.FAIRY >= 2) {
       this.list.push(EFFECTS.ATTRACT);
     }
