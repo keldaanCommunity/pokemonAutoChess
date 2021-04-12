@@ -119,7 +119,7 @@ class GameRoom extends colyseus.Room {
   onDispose() {
     console.log(`dispose game room`);
     let self = this;
-    if(this.state.stageLevel > 10){
+    if(this.state.stageLevel > 1){
       this.state.players.forEach(player =>{
         if(player.isBot){
           EloBot.find({'name': POKEMON_BOT[player.name]}, (err, bots)=>{
@@ -133,17 +133,7 @@ class GameRoom extends colyseus.Room {
         }
         else{
           let dbrecord = this.transformToSimplePlayer(player);
-          console.log(dbrecord);
 
-          Statistic.create({
-            time: Date.now(),
-            name: dbrecord.name,
-            pokemons: dbrecord.pokemons,
-            rank: dbrecord.rank,
-            avatar: dbrecord.avatar,
-            playerId: dbrecord.id,
-            elo: dbrecord.elo
-          });
           let rank = player.rank;
           if(!this.state.gameFinished && player.life != 0){
             let rankOfLastPlayerAlive = this.state.players.size;
@@ -154,12 +144,25 @@ class GameRoom extends colyseus.Room {
             });
             rank = rankOfLastPlayerAlive;
           }
+          console.log(dbrecord);
+          let elo = self.computeElo(player, rank);
+
+          Statistic.create({
+            time: Date.now(),
+            name: dbrecord.name,
+            pokemons: dbrecord.pokemons,
+            rank: dbrecord.rank,
+            avatar: dbrecord.avatar,
+            playerId: dbrecord.id,
+            elo: elo
+          });
+
           User.find({_id: player.id}, (err, users)=> {
             if (err) {
               console.log(err);
             } else {
               users.forEach((usr) => {
-                usr.metadata.elo = self.computeElo(player, rank);
+                usr.metadata.elo = elo;
                 usr.markModified('metadata');
                 usr.save();
               });
