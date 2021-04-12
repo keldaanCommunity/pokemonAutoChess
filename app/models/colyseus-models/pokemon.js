@@ -1574,7 +1574,7 @@ class Kyurem extends Pokemon {
 
 class Reshiram extends Pokemon {
   constructor() {
-    super(PKM.RESHIRAM, 'reshiram',[TYPE.DRAGON, TYPE.FIRE], RARITY.MYTHICAL, 'february', 643, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.BURN);
+    super(PKM.RESHIRAM, 'reshiram',[TYPE.DRAGON, TYPE.FIRE], RARITY.MYTHICAL, 'february', 643, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.BURN);
   }
 }
 
@@ -1592,7 +1592,7 @@ class Celebi extends Pokemon {
 
 class Victini extends Pokemon {
   constructor() {
-    super(PKM.VICTINI, 'victini',[TYPE.FIRE, TYPE.PSYCHIC], RARITY.MYTHICAL, 'february', 494, '', 100, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.BURN);
+    super(PKM.VICTINI, 'victini',[TYPE.FIRE, TYPE.PSYCHIC], RARITY.MYTHICAL, 'february', 494, '', 300, 30, 5, 5, 3, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BURN);
   }
 }
 
@@ -1634,7 +1634,7 @@ class Heatran extends Pokemon {
 
 class HooH extends Pokemon {
   constructor() {
-    super(PKM.HOOH, 'ho-Oh',[TYPE.FIRE, TYPE.FLYING], RARITY.MYTHICAL, 'february', 250, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.BURN);
+    super(PKM.HOOH, 'ho-Oh',[TYPE.FIRE, TYPE.FLYING], RARITY.MYTHICAL, 'february', 250, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.BURN);
   }
 }
 
