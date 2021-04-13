@@ -154,6 +154,9 @@ class GameRoom extends colyseus.Room {
                 console.log(dbrecord);
                 if(usr.metadata.elo){
                   let elo = self.computeElo(player, rank, usr.metadata.elo);
+                  usr.metadata.elo = elo;
+                  usr.markModified('metadata');
+                  usr.save();
       
                   Statistic.create({
                     time: Date.now(),
@@ -164,10 +167,6 @@ class GameRoom extends colyseus.Room {
                     playerId: dbrecord.id,
                     elo: elo
                   });
-  
-                  usr.metadata.elo = elo;
-                  usr.markModified('metadata');
-                  usr.save();
                 }
               });
             }
