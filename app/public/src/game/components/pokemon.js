@@ -59,7 +59,7 @@ export default class Pokemon extends Button {
   enterButtonRestState() {
     const detail = this.getFirst('objType', 'detail');
     if (detail) {
-      this.remove(detail);
+      this.remove(detail,true);
     }
   }
 
@@ -683,7 +683,7 @@ export default class Pokemon extends Button {
 
   setItem0(item) {
     if (this.item0) {
-      this.remove(this.item0);
+      this.remove(this.item0,true);
     }
     this.item0 = new ItemContainer(this.scene, this.width + 15, this.height - 50, item, false, 'item0');
     this.scene.add.existing(item);
@@ -692,7 +692,7 @@ export default class Pokemon extends Button {
 
   setItem1(item) {
     if (this.item1) {
-      this.remove(this.item1);
+      this.remove(this.item1,true);
     }
     this.item1 = new ItemContainer(this.scene, this.width + 15, this.height - 20, item, false, 'item1');
     this.scene.add.existing(this.item1);
@@ -701,7 +701,7 @@ export default class Pokemon extends Button {
 
   setItem2(item) {
     if (this.item2) {
-      this.remove(this.item2);
+      this.remove(this.item2,true);
     }
     this.item2 = new ItemContainer(this.scene, this.width + 15, this.height + 10, item, false, 'item2');
     this.scene.add.existing(this.item2);

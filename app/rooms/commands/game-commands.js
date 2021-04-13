@@ -615,25 +615,31 @@ class OnUpdatePhaseCommand extends Command {
   computeLife() {
     this.state.players.forEach((player, key) => {
       if (player.simulation.blueTeam.size == 0) {
-        if (player.lastBattleResult == 'Defeat') {
-          player.streak = Math.min(player.streak + 1, 5);
-        } else {
-          player.streak = 0;
+        if(player.opponentName != 'PVE'){
+          if (player.lastBattleResult == 'Defeat') {
+            player.streak = Math.min(player.streak + 1, 5);
+          } else {
+            player.streak = 0;
+          }
         }
         player.lastBattleResult = 'Defeat';
         player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel));
       } else if (player.simulation.redTeam.size == 0) {
-        if (player.lastBattleResult == 'Win') {
-          player.streak = Math.min(player.streak + 1, 5);
-        } else {
-          player.streak = 0;
+        if(player.opponentName != 'PVE'){
+          if (player.lastBattleResult == 'Win') {
+            player.streak = Math.min(player.streak + 1, 5);
+          } else {
+            player.streak = 0;
+          }
         }
         player.lastBattleResult = 'Win';
       } else {
-        if (player.lastBattleResult == 'Draw') {
-          player.streak = Math.min(player.streak + 1, 5);
-        } else {
-          player.streak = 0;
+        if(player.opponentName != 'PVE'){
+          if (player.lastBattleResult == 'Draw') {
+            player.streak = Math.min(player.streak + 1, 5);
+          } else {
+            player.streak = 0;
+          }
         }
         player.lastBattleResult = 'Draw';
         player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel));

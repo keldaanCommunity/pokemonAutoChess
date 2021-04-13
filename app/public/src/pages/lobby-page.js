@@ -127,6 +127,10 @@ class LobbyPage {
     }
 
     this.room.state.users.onAdd = (user, id)=>{
+      if(user.id == _client.auth._id){
+        //console.log(`${user.name} (${user.elo})`);
+        document.getElementById('player-title').textContent = `${user.name} (${user.elo})`;
+      }
       self.handleUserListChange();
     }
 
@@ -190,7 +194,7 @@ class LobbyPage {
         <div class="modal-header">
         <div style="display:flex;flex-flow:row;">
           <img style="width:50px;" id='avatarModal' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
-          <h4>${username} (${_client.auth.metadata.elo})</h4>
+          <h4 id='player-title'>${username} (${_client.auth.metadata.elo})</h4>
         </div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>

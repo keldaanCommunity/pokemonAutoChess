@@ -83,7 +83,7 @@ export default class ItemsContainer extends GameObjects.Container {
 
   removeItem(field) {
     const itemContainer = this.getFirst('place', field);
-    this.remove(itemContainer);
+    this.remove(itemContainer, true);
   }
 
   updateItem(field) {

@@ -17,7 +17,7 @@ export default class PlayerContainer extends GameObjects.Container {
   }
 
   removePlayer(id) {
-    this.remove(this.getFirst('id', id));
+    this.remove(this.getFirst('id', id), true);
   }
 
   onLifeChange(id, value) {

@@ -37,7 +37,7 @@ export default class BattleManager {
     if (this.player.id == playerId) {
       this.group.getChildren().forEach((pkm) => {
         if (pkm.id == pokemon.id) {
-          pkm.destroy();
+          pkm.destroy(true);
         }
       });
     }
@@ -51,21 +51,24 @@ export default class BattleManager {
           if (change.field == 'item0' && change.value == '') {
             const item = children[i].getFirst('place', 'item0');
             if (item) {
-              children[i].remove(item);
+              children[i].remove(item,true);
+              item.destroy();
             }
           } else if (change.field == 'item0' && change.value != '') {
             children[i].setItem0(change.value);
           } else if (change.field == 'item1' && change.value == '') {
             const item = children[i].getFirst('place', 'item1');
             if (item) {
-              children[i].remove(item);
+              children[i].remove(item,true);
+              item.destroy();
             }
           } else if (change.field == 'item1' && change.value != '') {
             children[i].setItem1(change.value);
           } else if (change.field == 'item2' && change.value == '') {
             const item = children[i].getFirst('place', 'item2');
             if (item) {
-              children[i].remove(item);
+              children[i].remove(item,true);
+              item.destroy();
             }
           } else if (change.field == 'item2' && change.value != '') {
             children[i].setItem2(change.value);

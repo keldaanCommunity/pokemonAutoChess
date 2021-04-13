@@ -18,7 +18,7 @@ export default class DpsMeterContainer extends GameObjects.Container {
 
   changePlayer(player) {
     this.player = player;
-    this.removeAll();
+    this.removeAll(true);
 
     player.simulation.dpsMeter.forEach((dps, key) => {
       this.addDps(dps);
@@ -26,14 +26,17 @@ export default class DpsMeterContainer extends GameObjects.Container {
   }
 
   addDps(dps) {
+    //console.log('add dps',dps.name);
     this.add(new DpsContainer(this.scene, 0, 70*this.length, dps.id, dps.name, dps.damage));
   }
 
   removeDps(dps) {
-    this.remove(this.getFirst('id', dps.id));
+    //console.log('remove dps', dps.name);
+    this.remove(this.getFirst('id', dps.id), true);
   }
 
   changeDps(dps, change) {
+    //console.log('change dps', dps.name);
     if (change.field == 'damage') {
       const child = this.getFirst('id', dps.id);
       if(child){

@@ -1622,7 +1622,7 @@ class Shaymin extends Pokemon {
 
 class Cresselia extends Pokemon {
   constructor() {
-    super(PKM.CRESSELIA, 'cresselia',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 488, '', 300, 30, 5, 5, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 30, SPECIAL_SKILL.WISH);
+    super(PKM.CRESSELIA, 'cresselia',[TYPE.PSYCHIC, TYPE.FAIRY], RARITY.MYTHICAL, 'february', 488, '', 300, 30, 5, 5, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 50, SPECIAL_SKILL.WISH);
   }
 }
 
