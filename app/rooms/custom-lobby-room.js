@@ -519,7 +519,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
         this.state.users[client.auth._id.toHexString()] = new DetailledGameUser(client.auth._id.toHexString(), auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.elo, auth.metadata.avatar, false, false, records);
 
         this.clients.forEach((cli) => {
-          if (cli.auth.email == client.auth.email && client.sessionId != cli.sessionId) {
+          if (client.auth.email && cli.auth.email == client.auth.email && client.sessionId != cli.sessionId) {
             cli.send('to-lobby', {});
           }
         });
