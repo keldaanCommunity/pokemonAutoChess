@@ -7,19 +7,19 @@ export default class EntryHazardsManager {
   }
 
   addBlueSpikes() {
-    this.blueSpikes = this.map.createStaticLayer('blue_spikes', this.tileset, 0, 0);
+    this.blueSpikes = this.map.createLayer('blue_spikes', this.tileset, 0, 0);
   }
 
   addRedSpikes() {
-    this.redSpikes = this.map.createStaticLayer('red_spikes', this.tileset, 0, 0);
+    this.redSpikes = this.map.createLayer('red_spikes', this.tileset, 0, 0);
   }
 
   addBlueRocks() {
-    this.blueRocks = this.map.createStaticLayer('blue_rocks', this.tileset, 0, 0);
+    this.blueRocks = this.map.createLayer('blue_rocks', this.tileset, 0, 0);
   }
 
   addRedRocks() {
-    this.redRocks = this.map.createStaticLayer('red_rocks', this.tileset, 0, 0);
+    this.redRocks = this.map.createLayer('red_rocks', this.tileset, 0, 0);
   }
 
   clearBlueSpikes() {

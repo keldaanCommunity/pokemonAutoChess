@@ -159,8 +159,7 @@ export default class GameScene extends Scene {
     this.input.dragDistanceThreshold = 1;
     this.map = this.make.tilemap({key: 'map'});
     const tileset = this.map.addTilesetImage(window.state.mapType, 'tiles', 24, 24, 1, 1);
-    this.map.createStaticLayer('World', tileset, 0, 0);
-    // this.map.createStaticLayer('Top', tileset, 0, 0);
+    this.map.createLayer('World', tileset, 0, 0);
 
     this.battle = this.add.group();
     window.animationManager = new AnimationManager(this);
