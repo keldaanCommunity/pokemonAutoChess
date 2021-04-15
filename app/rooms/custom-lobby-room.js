@@ -153,6 +153,43 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
       this.state.addMessage(message.name, message.payload, message.avatar, Date.now(), true);
     });
 
+    this.onMessage('map', (client, message) => {
+      const mapName = `${message.map}${message.index}`;
+      const map = message.map;
+      const index = message.index;
+      const mapWin = client.auth.metadata.mapWin[map];
+      let changeNeeded = false;
+      if(index == 0){
+        changeNeeded = true;
+      }
+      else if(index == 1 && mapWin >= 5){
+        changeNeeded = true;
+      }
+      else if(index == 2 && mapWin >= 10){
+        changeNeeded = true;
+      }
+      else if(index == 3 && mapWin >= 20){
+        changeNeeded = true;
+      }
+      else if(index == 4 && mapWin >= 40){
+        changeNeeded = true;
+      }
+      if(changeNeeded && mapName != client.auth.metadata.map[map]){
+        client.auth.metadata.map[map] = mapName;
+        User.find({_id: client.auth._id.toHexString()}, (err, users)=> {
+          if (err) {
+            console.log(err);
+          } else {
+            users.forEach((usr) => {
+              usr.metadata.map[map] = mapName;
+              usr.markModified('metadata');
+              usr.save();
+            });
+          }
+        });
+      }
+    });
+
     this.onMessage('avatar', (client, message) => {
       const pokemon = message.pokemon;
       const lvl = client.auth.metadata.level;
@@ -435,25 +472,25 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           }
           break;
 
-        case 'charmander':
+        case 'cyndaquil':
           if (mapWin.FIRE >= 5) {
             changeNeeded = true;
           }
           break;
 
-        case 'charmeleon':
+        case 'quilava':
           if (mapWin.FIRE >= 10) {
             changeNeeded = true;
           }
           break;
 
-        case 'charizard':
+        case 'typlosion':
           if (mapWin.FIRE >= 25) {
             changeNeeded = true;
           }
           break;
 
-        case 'groudon':
+        case 'entei':
           if (mapWin.FIRE >= 100) {
             changeNeeded = true;
           }
@@ -474,20 +511,18 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           break;
       }
 
-      if (changeNeeded) {
+      if (changeNeeded && client.auth.metadata.avatar != pokemon) {
         client.auth.metadata.avatar = pokemon;
-        Mongoose.connect(process.env.MONGO_URI, (err) => {
-          User.find({_id: client.auth._id.toHexString()}, (err, users)=> {
-            if (err) {
-              console.log(err);
-            } else {
-              users.forEach((usr) => {
-                usr.metadata.avatar = pokemon;
-                usr.markModified('metadata');
-                usr.save();
-              });
-            }
-          });
+        User.find({_id: client.auth._id.toHexString()}, (err, users)=> {
+          if (err) {
+            console.log(err);
+          } else {
+            users.forEach((usr) => {
+              usr.metadata.avatar = pokemon;
+              usr.markModified('metadata');
+              usr.save();
+            });
+          }
         });
       }
 

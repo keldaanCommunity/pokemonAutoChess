@@ -602,19 +602,19 @@ class Mamoswine extends Pokemon {
 
 class Snover extends Pokemon {
   constructor() {
-    super(PKM.SNOVER, 'blizzi', [TYPE.GRASS, TYPE.ICE], RARITY.LEGENDARY, 'december', 459, PKM.ABOMASNOW, 80, 7, 8, 8, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.FREEZE);
+    super(PKM.SNOVER, 'blizzi', [TYPE.GRASS, TYPE.ICE], RARITY.LEGENDARY, 'december', 459, PKM.ABOMASNOW, 80, 7, 6, 6, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.FREEZE);
   }
 }
 
 class Abomasnow extends Pokemon {
   constructor() {
-    super(PKM.ABOMASNOW, 'blizzaroi',[TYPE.GRASS, TYPE.ICE], RARITY.LEGENDARY, 'december', 460, PKM.MEGAABOMASNOW, 120, 11, 6, 6, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.FREEZE);
+    super(PKM.ABOMASNOW, 'blizzaroi',[TYPE.GRASS, TYPE.ICE], RARITY.LEGENDARY, 'december', 460, PKM.MEGAABOMASNOW, 120, 11, 8, 8, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.FREEZE);
   }
 }
 
 class MegaAbomasnow extends Pokemon {
   constructor() {
-    super(PKM.MEGAABOMASNOW, 'méga-blizzaroi',[TYPE.GRASS, TYPE.ICE], RARITY.LEGENDARY, 'december', 4600, '', 220, 25, 8, 8, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.FREEZE);
+    super(PKM.MEGAABOMASNOW, 'méga-blizzaroi',[TYPE.GRASS, TYPE.ICE], RARITY.LEGENDARY, 'december', 4600, '', 220, 25, 10, 10, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.FREEZE);
   }
 }
 
@@ -1340,19 +1340,19 @@ class Entei extends Pokemon {
 
 class Regice extends Pokemon {
   constructor() {
-    super(PKM.REGICE, 'régice',[TYPE.ICE, TYPE.HUMAN], RARITY.MYTHICAL, 'NEUTRAL', 378, '', 200, 20, 3, 3, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ICICLE_CRASH);
+    super(PKM.REGICE, 'régice',[TYPE.ICE, TYPE.HUMAN], RARITY.MYTHICAL, 'NEUTRAL', 378, '', 200, 20, 6, 6, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ICICLE_CRASH);
   }
 }
 
 class Regirock extends Pokemon {
   constructor() {
-    super(PKM.REGIROCK, 'régirock',[TYPE.MINERAL, TYPE.HUMAN], RARITY.MYTHICAL, 'NEUTRAL', 377, '', 200, 20, 3, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
+    super(PKM.REGIROCK, 'régirock',[TYPE.MINERAL, TYPE.HUMAN], RARITY.MYTHICAL, 'NEUTRAL', 377, '', 200, 20, 6, 6, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
   }
 }
 
 class Registeel extends Pokemon {
   constructor() {
-    super(PKM.REGISTEEL, 'régisteel',[TYPE.METAL, TYPE.HUMAN], RARITY.MYTHICAL, 'NEUTRAL', 379, '', 200, 20, 3, 3, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.IRON_DEFENSE);
+    super(PKM.REGISTEEL, 'régisteel',[TYPE.METAL, TYPE.HUMAN], RARITY.MYTHICAL, 'NEUTRAL', 379, '', 200, 20, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.IRON_DEFENSE);
   }
 }
 
@@ -1442,7 +1442,7 @@ class Sandshrew extends Pokemon {
 
 class Darkrai extends Pokemon {
   constructor() {
-    super(PKM.DARKRAI, 'darkrai',[TYPE.DARK, TYPE.MONSTER, TYPE.AMORPH], RARITY.MYTHICAL, 'NEUTRAL', 491, '', 200, 20, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DARK_PULSE);
+    super(PKM.DARKRAI, 'darkrai',[TYPE.DARK, TYPE.MONSTER, TYPE.AMORPH], RARITY.MYTHICAL, 'NEUTRAL', 491, '', 300, 30, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DARK_PULSE);
   }
 }
 
@@ -1478,19 +1478,19 @@ class Keldeo extends Pokemon {
 
 class Terrakion extends Pokemon {
   constructor() {
-    super(PKM.TERRAKION, 'terrakium',[TYPE.MINERAL, TYPE.FIGHTING], RARITY.MYTHICAL, 'february', 639, '', 200, 20, 3, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
+    super(PKM.TERRAKION, 'terrakium',[TYPE.MINERAL, TYPE.FIGHTING], RARITY.MYTHICAL, 'february', 639, '', 200, 20, 6, 6, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
   }
 }
 
 class Virizion extends Pokemon {
   constructor() {
-    super(PKM.VIRIZION, 'viridium',[TYPE.GRASS, TYPE.FIGHTING], RARITY.MYTHICAL, 'february', 640, '', 200, 20, 3, 3, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SEISMIC_TOSS);
+    super(PKM.VIRIZION, 'viridium',[TYPE.GRASS, TYPE.FIGHTING], RARITY.MYTHICAL, 'february', 640, '', 200, 20, 6, 6, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SEISMIC_TOSS);
   }
 }
 
 class Cobalion extends Pokemon {
   constructor() {
-    super(PKM.COBALION, 'cobaltium',[TYPE.METAL, TYPE.FIGHTING], RARITY.MYTHICAL, 'february', 638, '', 200, 20, 3, 3, 1, 'FIGHTING/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SEISMIC_TOSS);
+    super(PKM.COBALION, 'cobaltium',[TYPE.METAL, TYPE.FIGHTING], RARITY.MYTHICAL, 'february', 638, '', 200, 20, 6, 6, 1, 'FIGHTING/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SEISMIC_TOSS);
   }
 }
 

@@ -96,10 +96,16 @@ export default class GameScene extends Scene {
       percentText.destroy();
       assetText.destroy();
     });
-    // console.log(window.state.mapType);
+
+    let chosenTileset = `${window.state.mapType}0`;
+    if(_client.auth.metadata.map[window.state.mapType]){
+      chosenTileset = _client.auth.metadata.map[window.state.mapType];
+    }
+
+    console.log(chosenTileset);
     this.load.audioSprite('sounds', `assets/sounds/${window.state.mapType}.json`, [`assets/sounds/${window.state.mapType}.mp3`]);
-    this.load.image('tiles', `assets/tiles/${window.state.mapType}.png`);
-    this.load.tilemapTiledJSON('map', `assets/tiles/${window.state.mapType}.json`);
+    this.load.image('tiles', `assets/tiles/${window.state.mapType}/${chosenTileset}.png`);
+    this.load.tilemapTiledJSON('map', `assets/tiles/${window.state.mapType}/${window.state.mapType}.json`);
     this.load.image('hexagon', 'assets/ui/hexagon.png');
     this.load.image('rain', 'assets/ui/rain.png');
     this.load.image('sand', 'assets/ui/sand.png');

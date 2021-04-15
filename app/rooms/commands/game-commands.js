@@ -362,7 +362,7 @@ class OnJoinCommand extends Command {
         this.state.players.size + 1
     ));
     this.state.shop.assignShop(this.state.players.get(client.auth._id.toHexString()));
-    if (this.state.players.size == 8) {
+    if (this.state.players.size >= 8) {
       // console.log('game elligible to xp');
       this.state.elligibleToXP = true;
     }
@@ -372,55 +372,8 @@ class OnJoinCommand extends Command {
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
     if (this.state.elligibleToXP && this.state.stageLevel > 15) {
-      this.computePlayerExperience(this.state.players.get(client.auth._id.toHexString()));
+      
     }
-  }
-
-  computePlayerExperience(player) {
-    const self = this;
-    player.exp = XP_PLACE[player.rank - 1];
-
-    Mongoose.connect(process.env.MONGO_URI, (err) => {
-      User.find({_id: player.id}, (err, users)=> {
-        if (err) {
-          console.log(err);
-        } else {
-          users.forEach((usr) => {
-            let actualExp = 0;
-            let actualLevel = 0;
-            if (usr.metadata.exp) {
-              actualExp = usr.metadata.exp;
-            }
-            if (usr.metadata.level) {
-              actualLevel = usr.metadata.level;
-            }
-            let expThreshold = XP_TABLE[actualLevel];
-            if (expThreshold === undefined) {
-              expThreshold = XP_TABLE[XP_TABLE.length - 1];
-            }
-            if (actualExp + player.exp >= expThreshold) {
-              usr.metadata.level += 1;
-              usr.metadata.exp = actualExp + player.exp - expThreshold;
-            } else {
-              usr.metadata.exp = actualExp + player.exp;
-            }
-
-            if (player.rank == 1) {
-              usr.metadata.wins += 1;
-              usr.metadata.mapWin[self.state.mapType] += 1;
-            }
-            self.room.clients.forEach((cli) => {
-              if (cli.auth._id == usr._id) {
-                cli.send('metadata', usr.metadata);
-              }
-            });
-            usr.markModified('metadata');
-            // console.log('user metadata changed');
-            usr.save();
-          });
-        }
-      });
-    });
   }
 }
 

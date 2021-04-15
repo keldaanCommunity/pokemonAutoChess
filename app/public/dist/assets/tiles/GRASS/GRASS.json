@@ -29,7 +29,7 @@
          "name":"blue_rocks",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":85,
          "x":0,
          "y":0
@@ -41,7 +41,7 @@
          "name":"red_rocks",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":85,
          "x":0,
          "y":0
@@ -53,7 +53,7 @@
          "name":"red_spikes",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":85,
          "x":0,
          "y":0
@@ -65,7 +65,7 @@
          "name":"blue_spikes",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":85,
          "x":0,
          "y":0
@@ -74,13 +74,13 @@
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.4.2",
+ "tiledversion":"1.5.0",
  "tileheight":24,
  "tilesets":[
         {
          "columns":18,
          "firstgid":1,
-         "image":"GRASS.png",
+         "image":"GRASS0.png",
          "imageheight":601,
          "imagewidth":451,
          "margin":1,
@@ -89,9 +89,22 @@
          "tilecount":432,
          "tileheight":24,
          "tilewidth":24
+        }, 
+        {
+         "columns":18,
+         "firstgid":433,
+         "image":"..\/ICE\/ICE0.png",
+         "imageheight":601,
+         "imagewidth":451,
+         "margin":1,
+         "name":"ICE",
+         "spacing":1,
+         "tilecount":432,
+         "tileheight":24,
+         "tilewidth":24
         }],
  "tilewidth":24,
  "type":"map",
- "version":1.4,
+ "version":1.5,
  "width":85
 }

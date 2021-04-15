@@ -201,23 +201,12 @@ class LobbyPage {
           </button>
         </div>
         <div class="modal-body">
-          <h4>Level ${_client.auth.metadata.level}</h4>
+          <h4>Level ${_client.auth.metadata.level} ${_client.auth.metadata.exp} / ${XP_TABLE[_client.auth.metadata.level]}</h4>
           <progress class="nes-progress" value="${_client.auth.metadata.exp}" max="${XP_TABLE[_client.auth.metadata.level]}"></progress>
-          <h4>Wins</h4>
+          <h4>Wins (${_client.auth.metadata.wins})</h4>
           <progress class="nes-progress" value="${_client.auth.metadata.wins}" max="500"></progress>
-          <h4>Frosty Forest</h4>
-          <progress class="nes-progress is-primary" value="${_client.auth.metadata.mapWin.ICE}" max="100"></progress>
-          <h4>Glimmer Desert</h4>
-          <progress class="nes-progress is-warning" value="${_client.auth.metadata.mapWin.GROUND}" max="100"></progress>
-          <h4>Hidden Highland</h4>
-          <progress class="nes-progress is-success" value="${_client.auth.metadata.mapWin.GRASS}" max="100"></progress>
-          <h4>Magma Cavern</h4>
-          <progress class="nes-progress is-success" value="${_client.auth.metadata.mapWin.FIRE}" max="100"></progress>
-          <h4>Tiny Woods</h4>
-          <progress class="nes-progress is-success" value="${_client.auth.metadata.mapWin.NORMAL}" max="100"></progress>
-          <h4>Stormy Sea</h4>
-          <progress class="nes-progress is-primary" value="${_client.auth.metadata.mapWin.WATER}" max="100"></progress>
 
+          <h4>Avatar</h4>
           <table class="table">
           <tbody>
             <tr>
@@ -270,11 +259,100 @@ class LobbyPage {
             </tr>
             <tr>
               <td><button class="invisibleButton" onclick=window.changeAvatar('venusaur')><img src="assets/avatar/venusaur.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.GRASS >= 25 ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 25 ${WORDS.WINS_IN[this.langage]} Hidden Highland"></button></td>
-              <td><button class="invisibleButton" onclick=window.changeAvatar('shaymin')><img src="assets/avatar/shaymin.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.GRASS >= 100 ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 100 ${WORDS.WINS_IN[this.langage]} Hidden Highland"></button></td>
-              <td><button class="invisibleButton" onclick=window.changeAvatar('meowth')><img src="assets/avatar/meowth.png" alt="" style="filter:grayscale(${_client.auth.metadata.donor ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} ${WORDS.TIPEE_DONOR[this.langage]}"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('shaymin')><img src="assets/avatar/shaymin.png" alt="" style="filter:grayscale(${_client.auth.metadata.mapWin.GRASS >= 100 ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 100 ${WORDS.WINS_IN[this.langage]} Hidden Highland"></button></td>    
+              <td><button class="invisibleButton" onclick=window.changeAvatar('cyndaquil')><img src="assets/avatar/cyndaquil.png" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 5 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 5 ${WORDS.WINS_IN[this.langage]} Magma Cavern"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('quilava')><img src="assets/avatar/quilava.png" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 10 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 10 ${WORDS.WINS_IN[this.langage]} Magma Cavern"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('typlosion')><img src="assets/avatar/typlosion.png" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 25 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 25 ${WORDS.WINS_IN[this.langage]} Magma Cavern"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('entei')><img src="assets/avatar/entei.png" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 100 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 100 ${WORDS.WINS_IN[this.langage]} Magma Cavern"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('squirtle')><img src="assets/avatar/squirtle.png" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 5 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 5 ${WORDS.WINS_IN[this.langage]} Stormy Sea"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('wartortle')><img src="assets/avatar/wartortle.png" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 10 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 10 ${WORDS.WINS_IN[this.langage]} Stormy Sea"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('blastoise')><img src="assets/avatar/blastoise.png" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 25 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 25 ${WORDS.WINS_IN[this.langage]} Stormy Sea"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeAvatar('kyogre')><img src="assets/avatar/kyogre.png" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 100 ? 0:1})" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 100 ${WORDS.WINS_IN[this.langage]} Stormy Sea"></button></td>
+            </tr>
+            <tr>
+            <td><button class="invisibleButton" onclick=window.changeAvatar('meowth')><img src="assets/avatar/meowth.png" alt="" style="filter:grayscale(${_client.auth.metadata.donor ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} ${WORDS.TIPEE_DONOR[this.langage]}"></button></td>
               <td><button class="invisibleButton" onclick=window.changeAvatar('persian')><img src="assets/avatar/persian.png" alt="" style="filter:grayscale(${_client.auth.metadata.donor ? 0:1})" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} ${WORDS.TIPEE_DONOR[this.langage]}"></button></td>
             </tr>
           </tbody>
+        </table>
+        <h4>Map Customization</h4>
+        <p>Magma Cavern (${_client.auth.metadata.mapWin.FIRE})</p>
+        <progress class="nes-progress is-error" value="${_client.auth.metadata.mapWin.FIRE}" max="100"></progress>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><button class="invisibleButton" onclick=window.changeMap('FIRE',0)><img src="assets/tiles/FIRE/FIRE0-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Default map"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeMap('FIRE',1)><img src="assets/tiles/FIRE/FIRE1-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 5 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 5 ${WORDS.WINS_IN[this.langage]} Magma Cavern"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeMap('FIRE',2)><img src="assets/tiles/FIRE/FIRE2-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 10 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 10 ${WORDS.WINS_IN[this.langage]} Magma Cavern"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeMap('FIRE',3)><img src="assets/tiles/FIRE/FIRE3-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 20 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 20 ${WORDS.WINS_IN[this.langage]} Magma Cavern"></button></td>
+              <td><button class="invisibleButton" onclick=window.changeMap('FIRE',4)><img src="assets/tiles/FIRE/FIRE4-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.FIRE >= 40 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 40 ${WORDS.WINS_IN[this.langage]} Magma Cavern"></button></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Frosty Forest (${_client.auth.metadata.mapWin.ICE})</p>
+        <progress class="nes-progress is-primary" value="${_client.auth.metadata.mapWin.ICE}" max="100"></progress>
+        <table class="table">
+        <tbody>
+          <tr>
+            <td><button class="invisibleButton" onclick=window.changeMap('ICE',0)><img src="assets/tiles/ICE/ICE0-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Default map"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('ICE',1)><img src="assets/tiles/ICE/ICE1-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.ICE >= 5 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 5 ${WORDS.WINS_IN[this.langage]} Frosty Forest"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('ICE',2)><img src="assets/tiles/ICE/ICE2-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.ICE >= 10 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 10 ${WORDS.WINS_IN[this.langage]} Frosty Forest"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('ICE',3)><img src="assets/tiles/ICE/ICE3-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.ICE >= 20 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 20 ${WORDS.WINS_IN[this.langage]} Frosty Forest"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('ICE',4)><img src="assets/tiles/ICE/ICE4-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.ICE >= 40 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 40 ${WORDS.WINS_IN[this.langage]} Frosty Forest"></button></td>
+          </tr>
+        </tbody>
+        </table>
+        <p>Glimmer Desert (${_client.auth.metadata.mapWin.GROUND})</p>
+        <progress class="nes-progress is-warning" value="${_client.auth.metadata.mapWin.GROUND}" max="100"></progress>
+        <table class="table">
+        <tbody>
+          <tr>
+            <td><button class="invisibleButton" onclick=window.changeMap('GROUND',0)><img src="assets/tiles/GROUND/GROUND0-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Default map"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('GROUND',1)><img src="assets/tiles/GROUND/GROUND1-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.GROUND >= 5 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 5 ${WORDS.WINS_IN[this.langage]} Glimmer Desert"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('GROUND',2)><img src="assets/tiles/GROUND/GROUND2-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.GROUND >= 10 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 10 ${WORDS.WINS_IN[this.langage]} Glimmer Desert"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('GROUND',3)><img src="assets/tiles/GROUND/GROUND3-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.GROUND >= 20 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 20 ${WORDS.WINS_IN[this.langage]} Glimmer Desert"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('GROUND',4)><img src="assets/tiles/GROUND/GROUND4-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.GROUND >= 40 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 40 ${WORDS.WINS_IN[this.langage]} Glimmer Desert"></button></td>
+          </tr>
+        </tbody>
+        </table>
+        <p>Hidden Highland (${_client.auth.metadata.mapWin.GRASS})</p>
+        <progress class="nes-progress is-success" value="${_client.auth.metadata.mapWin.GRASS}" max="100"></progress>
+        <table class="table">
+        <tbody>
+          <tr>
+            <td><button class="invisibleButton" onclick=window.changeMap('GRASS',0)><img src="assets/tiles/GRASS/GRASS0-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Default map"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('GRASS',1)><img src="assets/tiles/GRASS/GRASS1-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.GRASS >= 5 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 5 ${WORDS.WINS_IN[this.langage]} Hidden Highland"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('GRASS',2)><img src="assets/tiles/GRASS/GRASS2-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.GRASS >= 10 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 10 ${WORDS.WINS_IN[this.langage]} Hidden Highland"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('GRASS',3)><img src="assets/tiles/GRASS/GRASS3-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.GRASS >= 20 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 20 ${WORDS.WINS_IN[this.langage]} Hidden Highland"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('GRASS',4)><img src="assets/tiles/GRASS/GRASS4-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.GRASS >= 40 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 40 ${WORDS.WINS_IN[this.langage]} Hidden Highland"></button></td>
+          </tr>
+        </tbody>
+        </table>
+        <p>Tiny Woods (${_client.auth.metadata.mapWin.NORMAL})</p>
+        <progress class="nes-progress is-success" value="${_client.auth.metadata.mapWin.NORMAL}" max="100"></progress>
+        <table class="table">
+        <tbody>
+          <tr>
+            <td><button class="invisibleButton" onclick=window.changeMap('NORMAL',0)><img src="assets/tiles/NORMAL/NORMAL0-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Default map"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('NORMAL',1)><img src="assets/tiles/NORMAL/NORMAL1-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.NORMAL >= 5 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 5 ${WORDS.WINS_IN[this.langage]} Tiny Woods"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('NORMAL',2)><img src="assets/tiles/NORMAL/NORMAL2-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.NORMAL >= 10 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 10 ${WORDS.WINS_IN[this.langage]} Tiny Woods"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('NORMAL',3)><img src="assets/tiles/NORMAL/NORMAL3-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.NORMAL >= 20 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 20 ${WORDS.WINS_IN[this.langage]} Tiny Woods"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('NORMAL',4)><img src="assets/tiles/NORMAL/NORMAL4-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.NORMAL >= 40 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 40 ${WORDS.WINS_IN[this.langage]} Tiny Woods"></button></td>
+          </tr>
+        </tbody>
+        </table>
+        <p>Stormy Sea (${_client.auth.metadata.mapWin.WATER})</p>
+        <progress class="nes-progress is-primary" value="${_client.auth.metadata.mapWin.WATER}" max="100"></progress>
+        <table class="table">
+        <tbody>
+          <tr>
+            <td><button class="invisibleButton" onclick=window.changeMap('WATER',0)><img src="assets/tiles/WATER/WATER0-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" data-placement="right" title="Default map"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('WATER',1)><img src="assets/tiles/WATER/WATER1-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 5 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 5 ${WORDS.WINS_IN[this.langage]} Stormy Sea"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('WATER',2)><img src="assets/tiles/WATER/WATER2-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 10 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 10 ${WORDS.WINS_IN[this.langage]} Stormy Sea"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('WATER',3)><img src="assets/tiles/WATER/WATER3-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 20 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 20 ${WORDS.WINS_IN[this.langage]} Stormy Sea"></button></td>
+            <td><button class="invisibleButton" onclick=window.changeMap('WATER',4)><img src="assets/tiles/WATER/WATER4-preview.png" alt="" class="img-thumbnail" data-toggle="tooltip" style="filter:grayscale(${_client.auth.metadata.mapWin.WATER >= 40 ? 0:1})" data-placement="right" title="${WORDS.UNLOCK_AFTER[this.langage]} 40 ${WORDS.WINS_IN[this.langage]} Stormy Sea"></button></td>
+          </tr>
+        </tbody>
         </table>
         </div>
       <div class="modal-footer">
@@ -406,6 +484,10 @@ class LobbyPage {
 
     window.changeAvatar = function(pokemon) {
       self.room.send('avatar', {'pokemon': pokemon});
+    };
+
+    window.changeMap = function(map,index) {
+      self.room.send('map', {'map': map, 'index':parseInt(index)});
     };
 
     window.historyClick = function(id){

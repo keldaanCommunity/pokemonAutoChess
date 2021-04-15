@@ -7,7 +7,7 @@ const Player = require('../models/colyseus-models/player');
 const Statistic = require('../models/mongo-models/statistic');
 const User = require('@colyseus/social').User;
 const EloBot = require('../models/mongo-models/elo-bot');
-const {POKEMON_BOT} = require('../models/enum');
+const {POKEMON_BOT, XP_PLACE, XP_TABLE} = require('../models/enum');
 const EloRank = require('elo-rank');
 
 class GameRoom extends colyseus.Room {
@@ -119,7 +119,7 @@ class GameRoom extends colyseus.Room {
   onDispose() {
     console.log(`dispose game room`);
     let self = this;
-    if(this.state.stageLevel > 10){
+    if(this.state.stageLevel >= 10 && this.state.elligibleToXP){
       this.state.players.forEach(player =>{
         if(player.isBot){
           EloBot.find({'name': POKEMON_BOT[player.name]}, (err, bots)=>{
@@ -133,8 +133,9 @@ class GameRoom extends colyseus.Room {
         }
         else{
           let dbrecord = this.transformToSimplePlayer(player);
-
+          player.exp = XP_PLACE[player.rank - 1];
           let rank = player.rank;
+
           if(!this.state.gameFinished && player.life != 0){
             let rankOfLastPlayerAlive = this.state.players.size;
             this.state.players.forEach(plyr =>{
@@ -151,10 +152,29 @@ class GameRoom extends colyseus.Room {
             } else {
               users.forEach((usr) => {
 
-                console.log(dbrecord);
+                let expThreshold = XP_TABLE[usr.metadata.level];
+                if (expThreshold === undefined) {
+                  expThreshold = XP_TABLE[XP_TABLE.length - 1];
+                }
+                if (usr.metadata.exp + player.exp >= expThreshold) {
+                  usr.metadata.level += 1;
+                  usr.metadata.exp = usr.metadata.exp + player.exp - expThreshold;
+                } else {
+                  usr.metadata.exp = usr.metadata.exp + player.exp;
+                }
+    
+                if (player.rank == 1) {
+                  usr.metadata.wins += 1;
+                  usr.metadata.mapWin[self.state.mapType] += 1;
+                }
+
+                
                 if(usr.metadata.elo){
                   let elo = self.computeElo(player, rank, usr.metadata.elo);
-                  usr.metadata.elo = elo;
+                  if(elo){
+                    usr.metadata.elo = elo;
+                  }
+                  console.log(usr);
                   usr.markModified('metadata');
                   usr.save();
       

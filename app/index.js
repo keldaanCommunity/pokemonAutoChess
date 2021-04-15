@@ -71,6 +71,14 @@ hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
       NORMAL: 0,
       GRASS: 0,
       WATER: 0
+    },
+    map:{
+      ICE: 'ICE0',
+      FIRE: 'FIRE0',
+      GROUND: 'GROUND0',
+      NORMAL: 'NORMAL0',
+      GRASS: 'GRASS0',
+      WATER: 'WATER0'
     }
   };
 });
