@@ -486,7 +486,7 @@ class GameContainer {
   }
 
   handleServerInfo(message){
-    this.game.scene.getScene('gameScene').showPopup(message);
+    //this.game.scene.getScene('gameScene').showPopup(message);
   }
 
   handleKickOut() {
