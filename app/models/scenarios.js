@@ -17108,7 +17108,7 @@ const SCENARIOS =
         ]
       },
       {
-        'roundsRequired': 3,
+        'roundsRequired': 4,
         'board':
         [
           {
@@ -17144,7 +17144,7 @@ const SCENARIOS =
         ]
       },
       {
-        'roundsRequired': 3,
+        'roundsRequired': 4,
         'board':
         [
           {
@@ -17185,7 +17185,7 @@ const SCENARIOS =
         ]
       },
       {
-        'roundsRequired': 3,
+        'roundsRequired': 4,
         'board':
         [
           {
@@ -17226,7 +17226,7 @@ const SCENARIOS =
         ]
       },
       {
-        'roundsRequired': 2,
+        'roundsRequired': 3,
         'board':
         [
           {
@@ -17272,7 +17272,7 @@ const SCENARIOS =
         ]
       },
       {
-        'roundsRequired': 2,
+        'roundsRequired': 3,
         'board':
         [
           {
@@ -17323,7 +17323,7 @@ const SCENARIOS =
         ]
       },
       {
-        'roundsRequired': 2,
+        'roundsRequired': 3,
         'board':
         [
           {
