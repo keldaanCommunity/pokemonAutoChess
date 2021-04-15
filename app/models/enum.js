@@ -2116,7 +2116,8 @@ const BOT_AVATAR = Object.freeze({
   FIRE2:PKM.MOLTRES,
   DRAGON3: PKM.KYUREM,
   ICE1:PKM.ARTICUNO,
-  FIGHT1:PKM.REGIGIGAS
+  FIGHT1:PKM.REGIGIGAS,
+  DEOXYS:PKM.DEOXYS
 });
 
 const POKEMON_BOT = Object.freeze({
@@ -2140,7 +2141,8 @@ const POKEMON_BOT = Object.freeze({
   moltres: 'FIRE2',
   kyurem: 'DRAGON3',
   articuno:'ICE1',
-  regigigas:'FIGHT1'
+  regigigas:'FIGHT1',
+  deoxys:'DEOXYS'
 });
 
 const EXP_TABLE = Object.freeze({

@@ -13,7 +13,7 @@ Object.keys(SCENARIOS).forEach(botName => {
                     let coordinates = [];
                     step.board.forEach(pokemon=>{
                         if(!pokemon.name || !Object.values(PKM).includes(pokemon.name)){
-                            console.log(`error with pokemone name ${pokemon.name} in bot ${botName}`);
+                            console.log(`error with pokemone name ${JSON.stringify(pokemon)} ${pokemon.name} in bot ${botName} at step ${index}`);
                         }
                         if(pokemon.x === undefined || pokemon.x <0 || pokemon.x >7){
                             console.log(`error with coordinate x ${pokemon.x} bot ${botName} pokemon ${pokemon.name} at step ${index}`);

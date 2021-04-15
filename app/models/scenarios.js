@@ -16964,6 +16964,568 @@ const SCENARIOS =
         ]
       }
     ]
+  },
+  'DEOXYS': {
+    'steps': [
+      {
+        'roundsRequired': 0,
+        'board': [
+          {
+            'name': PKM.CLEFFA,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.IGGLYBUFF,
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': PKM.CLEFFA,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.IGGLYBUFF,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.FLAFFY,
+            'x': 2,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': PKM.CHIMCHAR,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.TORCHIC,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.FLAFFY,
+            'x': 2,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': PKM.CHIMCHAR,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.COMBUSKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.FLAFFY,
+            'x': 2,
+            'y': 2
+          },
+          {
+            'name': PKM.SEEDOT,
+            'x': 4,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 1,
+        'board':
+        [
+          {
+            'name': PKM.CHIMCHAR,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.COMBUSKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.FLAFFY,
+            'x': 2,
+            'y': 2
+          },
+          {
+            'name': PKM.CYNDAQUIL,
+            'x': 3,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': PKM.CHIMCHAR,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.COMBUSKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHOP,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.CYNDAQUIL,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.MAGBY,
+            'x': 2,
+            'y': 2
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.MONFERNO,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.COMBUSKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHOP,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.QUILAVA,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.MAGBY,
+            'x': 2,
+            'y': 2
+          },
+          {
+            'name': PKM.COBALION,
+            'x': 3,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.MONFERNO,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.COMBUSKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHOKE,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.RALTS,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.MAGBY,
+            'x': 2,
+            'y': 2
+          },
+          {
+            'name': PKM.COBALION,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.BELDUM,
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 3,
+        'board':
+        [
+          {
+            'name': PKM.MONFERNO,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.COMBUSKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.MEDITITE,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.KIRLIA,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.MAGMAR,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.COBALION,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.BELDUM,
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': PKM.MONFERNO,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.COMBUSKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.MEDITITE,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.KIRLIA,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.MAGMAR,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.COBALION,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.METANG,
+            'x': 1,
+            'y': 3
+          },
+		  {
+            'name': PKM.DEOXYS,
+            'x': 4,
+            'y': 3
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': PKM.INFERNAPE,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.COMBUSKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.MEDICHAM,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.KIRLIA,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.MAGMAR,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.COBALION,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.METANG,
+            'x': 1,
+            'y': 3
+          },
+		  {
+            'name': PKM.DEOXYS,
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': PKM.ABRA,
+            'x': 0,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': PKM.INFERNAPE,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.BLAZIKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.MEDICHAM,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.KIRLIA,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.MAGMAR,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.COBALION,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.METANG,
+            'x': 1,
+            'y': 3
+          },
+		  {
+            'name': PKM.DEOXYS,
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': PKM.KADABRA,
+            'x': 0,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 4,
+        'board':
+        [
+          {
+            'name': PKM.INFERNAPE,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.BLAZIKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.MEDICHAM,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.GARDEVOIR,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.MAGMAR,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.COBALION,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.METANG,
+            'x': 1,
+            'y': 3
+          },
+		  {
+            'name': PKM.DEOXYS,
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': PKM.KADABRA,
+            'x': 0,
+            'y': 1
+          }
+        ]
+      },
+      {
+        'roundsRequired': 4,
+        'board':
+        [
+          {
+            'name': PKM.INFERNAPE,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.BLAZIKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.MEDICHAM,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.GARDEVOIR,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.MAGMAR,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.COBALION,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.METAGROSS,
+            'x': 1,
+            'y': 3
+          },
+		  {
+            'name': PKM.DEOXYS,
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': PKM.KADABRA,
+            'x': 0,
+            'y': 1
+          }
+        ]
+      },{
+        'roundsRequired': 6,
+        'board':
+        [
+          {
+            'name': PKM.INFERNAPE,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.BLAZIKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.MEDICHAM,
+            'x': 3,
+            'y': 2
+          },
+          {
+            'name': PKM.GARDEVOIR,
+            'x': 3,
+            'y': 1
+          },
+          {
+            'name': PKM.MAGMORTAR,
+            'x': 4,
+            'y': 2
+          },
+          {
+            'name': PKM.COBALION,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.METAGROSS,
+            'x': 1,
+            'y': 3
+          },
+		  {
+            'name': PKM.DEOXYS,
+            'x': 4,
+            'y': 3
+          },
+		  {
+            'name': PKM.ALAKAZAM,
+            'x': 0,
+            'y': 1
+          }
+        ]
+      }
+    ]
   }
 };
 
