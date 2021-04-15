@@ -16997,7 +16997,7 @@ const SCENARIOS =
             'y': 2
           },
           {
-            'name': PKM.FLAFFY,
+            'name': PKM.MAREEP,
             'x': 2,
             'y': 2
           }
@@ -17018,7 +17018,7 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': PKM.FLAFFY,
+            'name': PKM.MAREEP,
             'x': 2,
             'y': 2
           }
@@ -17034,12 +17034,12 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': PKM.COMBUSKEN,
+            'name': PKM.TORCHIC,
             'x': 2,
             'y': 3
           },
           {
-            'name': PKM.FLAFFY,
+            'name': PKM.MAREEP,
             'x': 2,
             'y': 2
           },
@@ -17144,7 +17144,7 @@ const SCENARIOS =
         ]
       },
       {
-        'roundsRequired': 4,
+        'roundsRequired': 3,
         'board':
         [
           {
@@ -17158,7 +17158,42 @@ const SCENARIOS =
             'y': 3
           },
           {
-            'name': PKM.MACHOKE,
+            'name': PKM.MACHOP,
+            'x': 4,
+            'y': 3
+          },
+          {
+            'name': PKM.MAGBY,
+            'x': 2,
+            'y': 2
+          },
+          {
+            'name': PKM.COBALION,
+            'x': 3,
+            'y': 3
+          },
+          {
+            'name': PKM.BELDUM,
+            'x': 1,
+            'y': 3
+          }
+        ]
+      },{
+        'roundsRequired': 2,
+        'board':
+        [
+          {
+            'name': PKM.MONFERNO,
+            'x': 5,
+            'y': 3
+          },
+          {
+            'name': PKM.COMBUSKEN,
+            'x': 2,
+            'y': 3
+          },
+          {
+            'name': PKM.MACHOP,
             'x': 4,
             'y': 3
           },
@@ -17185,7 +17220,7 @@ const SCENARIOS =
         ]
       },
       {
-        'roundsRequired': 4,
+        'roundsRequired': 6,
         'board':
         [
           {
@@ -17226,7 +17261,7 @@ const SCENARIOS =
         ]
       },
       {
-        'roundsRequired': 3,
+        'roundsRequired': 5,
         'board':
         [
           {
