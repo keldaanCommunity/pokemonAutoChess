@@ -1,5 +1,5 @@
 import GameContainer from '../game/game-container';
-import {ORIENTATION} from '../../../models/enum';
+import {ORIENTATION, WORDS} from '../../../models/enum';
 
 class GamePage {
   constructor(args) {
@@ -10,6 +10,7 @@ class GamePage {
     }
     this.render();
     this.container = document.getElementById('game');
+    
     window.transformCoordinate = function(x, y) {
       return [382 + 96 * x, 808 - 120 * y];
     };
@@ -104,10 +105,28 @@ class GamePage {
 
 
   render() {
-    const content = document.createElement('div');
-    content.setAttribute('id', 'game');
-    document.body.innerHTML = '';
-    document.body.appendChild(content);
+    document.body.innerHTML = `
+    <div id="modal-popup" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document"  style="background-color: rgba(255, 255, 255, .5);">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id ="modal-title" class="modal-title">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="modal-info">Modal body text goes here.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="nes-btn is-primary" data-dismiss="modal" style="margin-right:10px;">${WORDS.STAY[window.langage]}</button>
+            <button type="button" id="leave-button" class="nes-btn is-error">${WORDS.LEAVE[window.langage]}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="game"></div>
+    `;
   }
 
 }

@@ -36,7 +36,7 @@ class GameContainer {
           key: 'rexWebFontLoader',
           plugin: WebFontLoaderPlugin,
           start: true
-        }],
+        }]
       }
     };
     window.state = this.room.state;
@@ -73,6 +73,7 @@ class GameContainer {
     document.getElementById('game').addEventListener('drag-drop', (e) => this.onDragDrop(e));
     document.getElementById('game').addEventListener('sell-drop', (e) => this.onSellDrop(e));
     document.getElementById('game').addEventListener('leave-game', (e) => this.onLeaveGame(e));
+    document.getElementById('leave-button').addEventListener('click', (e) => this.onLeaveGame(e));
   }
 
   initializePlayer(player) {
@@ -461,14 +462,7 @@ class GameContainer {
           let rankPhrase = `${WORDS.PLACE[window.langage]} no ${player.rank}`;
           let titlePhrase = WORDS.RANKING[window.langage];
           if(!change.value){
-            /*
-            this.game.scene.getScene('gameScene').showPopup(
-              {
-                title: titlePhrase,
-                info: rankPhrase
-              }
-            )
-            */
+            this.showPopup(titlePhrase, rankPhrase);
           }
         }
         break;
@@ -488,6 +482,7 @@ class GameContainer {
   }
 
   handleServerInfo(message){
+    this.showPopup(message.title, message.info);
     //this.game.scene.getScene('gameScene').showPopup(message);
   }
 
@@ -537,6 +532,11 @@ class GameContainer {
     this.room.send('sellDrop', {'detail': event.detail});
   }
 
+  showPopup(title, info){
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-info').textContent = info;
+    $('#modal-popup').modal();
+  }
 
   onLeaveGame(event){
 /*
