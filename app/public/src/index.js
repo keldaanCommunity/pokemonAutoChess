@@ -5,6 +5,7 @@ import LobbyPage from './pages/lobby-page';
 import RoomPage from './pages/room-page';
 import GamePage from './pages/game-page';
 import AfterGamePage from './pages/after-game-page';
+import BotCreationPage from './pages/bot-creation-page';
 
 const endpoint = `${window.location.protocol.replace('http', 'ws')}//${window.location.host}`;
 window._client = new colyseus.Client(endpoint);
@@ -41,6 +42,7 @@ window.listAllEventListeners = function listAllEventListeners() {
   });
 }
 
+window.addEventListener('render-creation-bot', (e)=> {window.page = new BotCreationPage(e.detail)});
 window.addEventListener('render-home', (e) => {window.page = new HomePage(e.detail)});
 window.addEventListener('render-login', (e) =>{window.page =  new LoginPage(e.detail)});
 window.addEventListener('render-lobby', (e) =>{window.page =  new LobbyPage(e.detail)});
@@ -77,6 +79,10 @@ window.addEventListener('switch-lang', (e) => {
         window.page = new GamePage(e.detail);
         break;
 
+      case 'bot-creation':
+        window.page = new BotCreationPage(e.detail);
+        break;
+        
       default:
         break;
     }

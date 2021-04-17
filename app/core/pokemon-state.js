@@ -6,7 +6,7 @@ class PokemonState {
   }
 
   handleHeal(pokemon, heal) {
-    if (pokemon.life > 0) {
+    if (pokemon.life > 0 && pokemon.life < pokemon.hp) {
       pokemon.life = Math.min(pokemon.hp, pokemon.life + heal);
     }
   }
@@ -40,15 +40,21 @@ class PokemonState {
   
         if(!reducedDamage){
           reducedDamage = 0;
-          console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
+          //console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
         }
   
         if (attacker && attacker.team == 0) {
           attacker.damageDone += reducedDamage;
         }
-  
-        pokemon.life = Math.max(0, pokemon.life - reducedDamage);
-        // console.log(`${pokemon.id} took ${damage} and has now ${pokemon.life} life`);
+        let residualDamage = reducedDamage;
+
+        if(pokemon.shield > 0){
+          residualDamage = Math.max(0,reducedDamage - pokemon.shield);
+          pokemon.shield = Math.max(0, pokemon.shield - reducedDamage);
+        }
+
+        pokemon.life = Math.max(0, pokemon.life - residualDamage);
+        console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
         if (pokemon.effects.includes(EFFECTS.RAGE)) {
           pokemon.attack += Math.ceil(pokemon.baseAtk * 0.05);
         }

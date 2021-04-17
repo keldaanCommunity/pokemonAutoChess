@@ -64,11 +64,14 @@ class Simulation extends Schema {
       
 
     }
+
     if (redEffects && redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
       const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
       const coord = this.getFirstAvailablePlaceOnBoard(false);
       this.addPokemon(kyogre, coord[0], coord[1], 1);
     }
+
+    this.applyPostEffects();
   }
 
   addPokemon(pokemon, x, y, team, blueTeam, redTeam){
@@ -132,7 +135,7 @@ class Simulation extends Schema {
             break;
 
           case EFFECTS.NORMAL:
-            pokemon.life += Math.ceil(pokemon.hp * 0.3);
+            pokemon.shield += Math.ceil(pokemon.hp * 0.3);
             break;
 
           case EFFECTS.ICE:
@@ -281,6 +284,53 @@ class Simulation extends Schema {
     }
   }
 
+  applyPostEffects(){
+    this.blueTeam.forEach(pokemon =>{
+      let shieldBonus = 0;
+      if(pokemon.effects.includes(EFFECTS.STAMINA)){
+        shieldBonus = 20;
+      }
+      if(pokemon.effects.includes(EFFECTS.STRENGTH)){
+        shieldBonus += 30;
+      }
+      if(pokemon.effects.includes(EFFECTS.PURE_POWER)){
+        shieldBonus += 50;
+      }
+      if(shieldBonus >= 0){
+        pokemon.shield += shieldBonus;
+        const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+
+        cells.forEach((cell) => {
+          if (cell.value && pokemon.team == cell.value.team) {
+            cell.value.shield += shieldBonus;
+          }
+        });
+      }
+    });
+    this.redTeam.forEach(pokemon =>{
+      let shieldBonus = 0;
+      if(pokemon.effects.includes(EFFECTS.STAMINA)){
+        shieldBonus = 20;
+      }
+      if(pokemon.effects.includes(EFFECTS.STRENGTH)){
+        shieldBonus += 30;
+      }
+      if(pokemon.effects.includes(EFFECTS.PURE_POWER)){
+        shieldBonus += 50;
+      }
+      if(shieldBonus >= 0){
+        pokemon.shield += shieldBonus;
+        const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+
+        cells.forEach((cell) => {
+          if (cell.value && pokemon.team == cell.value.team) {
+            cell.value.shield += shieldBonus;
+          }
+        });
+      }
+    });
+  }
+
   applyEffects(pokemon, types, allyEffects, ennemyEffects, allyTeam, ennemyTeam) {
     allyEffects.forEach((effect) => {
       switch (effect) {
@@ -326,22 +376,19 @@ class Simulation extends Schema {
         case EFFECTS.STAMINA:
           if (types.includes(TYPE.NORMAL)) {
             pokemon.effects.push(EFFECTS.STAMINA);
-            pokemon.life += Math.ceil(pokemon.hp * 0.3);
           }
           break;
 
         case EFFECTS.STRENGTH:
           if (types.includes(TYPE.NORMAL)) {
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.1);
-            pokemon.def += Math.ceil(pokemon.baseDef * 0.1);
-            pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.1);
             pokemon.effects.push(EFFECTS.STRENGTH);
           }
           break;
 
         case EFFECTS.PURE_POWER:
-          pokemon.atk += Math.ceil(pokemon.baseAtk);
-          pokemon.effects.push(EFFECTS.PURE_POWER);
+          if (types.includes(TYPE.NORMAL)) {
+            pokemon.effects.push(EFFECTS.PURE_POWER);
+          }
           break;
 
         case EFFECTS.AGILITY:
@@ -440,19 +487,19 @@ class Simulation extends Schema {
 
         case EFFECTS.MEDITATE:
           pokemon.atk += Math.ceil(pokemon.baseAtk * 0.15);
-          pokemon.life += Math.ceil(pokemon.hp * 0.15);
+          pokemon.shield += Math.ceil(pokemon.hp * 0.15);
           pokemon.effects.push(EFFECTS.MEDITATE);
           break;
 
         case EFFECTS.FOCUS_ENERGY:
           pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          pokemon.life += Math.ceil(pokemon.hp * 0.2);
+          pokemon.shield += Math.ceil(pokemon.hp * 0.2);
           pokemon.effects.push(EFFECTS.FOCUS_ENERGY);
           break;
 
         case EFFECTS.CALM_MIND:
           pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3);
-          pokemon.life += Math.ceil(pokemon.hp * 0.3);
+          pokemon.shield += Math.ceil(pokemon.hp * 0.3);
           pokemon.effects.push(EFFECTS.CALM_MIND);
           break;
 
@@ -507,7 +554,7 @@ class Simulation extends Schema {
         case EFFECTS.MOUTAIN_RESISTANCE:
           if (types.includes(TYPE.MINERAL)) {
             pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.5);
-            pokemon.life += Math.ceil(pokemon.hp);
+            pokemon.shield += Math.ceil(pokemon.hp);
             pokemon.effects.push(EFFECTS.MOUTAIN_RESISTANCE);
           }
           break;
@@ -538,7 +585,6 @@ class Simulation extends Schema {
 
         case EFFECTS.FLOWER_SHIELD:
           pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.5);
-          pokemon.speDef += Math.ceil(pokemon.baseDef * 0.5);
           pokemon.effects.push(EFFECTS.FLOWER_SHIELD);
           break;
 

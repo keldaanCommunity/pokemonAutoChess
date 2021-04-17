@@ -2232,43 +2232,43 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Stamina`,
-          text:`+30% bonus HP for all normal allies`
+          text:`+20 HP for every pokemon around`
         },
         {
           title:`(6) Strength`,
-          text:`ATK, DEF + 10% for normal allies`
+          text:`+30 HP for every pokemon around`
         },
         {
-          title:`(9) Stamina`,
-          text:`+100% ATK for all allies`
+          title:`(9) Pure power`,
+          text:`+50 HP for every pokemon around`
         }
       ],
       esp:[
         {
           title:`(3) Resistencia`,
-          text:`30% de CV de bonficacion para todos los aliados normales`
+          text:`+20 HP por cada pokemon que esté cerca`
         },
         {
           title:`(6) Fuerza`,
-          text:`Aumentar el ATK y la DEF en un 10%`
+          text:`+30 HP por cada pokemon que esté cerca`
         },
         {
           title:`(9) Poder Puro`,
-          text:`+100% ATK para todos sus aliados`
+          text:`+50 HP por cada pokemon que esté cerca`
         }
       ],
       fra:[
         {
           title:`(3) Force`,
-          text:`+30% HP pour les alliés normaux`
+          text:`+20 HP pour tous les pokémons autours`
         },
         {
           title:`(6) Stockage`,
-          text:`ATK, DEF +10% pour les alliés normaux`
+          text:`+30 HP pour tous les pokémons autours`
         },
         {
           title:`(9) Concentration`,
-          text:`+100% ATK pour tous les alliés`
+          text:`+50 HP pour tous les pokémons autours`
         }
       ]
     }

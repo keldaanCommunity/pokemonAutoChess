@@ -125,6 +125,24 @@ export default class BattleManager {
             if (detail) {
               detail.hp.setText(pokemon.life);
             }
+          } else if(change.field == 'shield'){
+            if (change.value && change.previousValue) {
+              this.displayDamage(children[i].x, children[i].y, change.value - change.previousValue);
+            }
+            if(change.value > 0){
+              children[i].shield = pokemon.shield;
+              const shieldbar = children[i].getFirst('objType', 'shieldbar');
+              if(shieldbar){
+                shieldbar.setLife(children[i].shield);
+              }
+            }
+            else{
+              const shieldbar = children[i].getFirst('objType', 'shieldbar');
+              if(shieldbar){
+                children[i].remove(shieldbar, true);
+              }
+            }
+
           } else if (change.field =='mana') {
             children[i].mana = pokemon.mana;
             children[i].getFirst('objType', 'manabar').setLife(children[i].mana);

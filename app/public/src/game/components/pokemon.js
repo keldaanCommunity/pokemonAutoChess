@@ -40,6 +40,9 @@ export default class Pokemon extends Button {
     if (pokemon.life) {
       this.life = pokemon.life;
     }
+    if(pokemon.shield){
+      this.shield = pokemon.shield;
+    }
     if(pokemon.critChance){
       this.critChance = pokemon.critChance;
     }
@@ -588,16 +591,27 @@ export default class Pokemon extends Button {
       } else {
         color = 0xff0000;
       }
-      const lifebar = new Lifebar(scene, -15, height, pokemon.hp, color, 'lifebar');
+      const lifeRatio = pokemon.life / (pokemon.life + pokemon.shield);
+      const lifebar = new Lifebar(scene, -15, height, lifeRatio * 60, pokemon.hp, color, 'lifebar', true);
       lifebar.setLife(pokemon.life);
       this.add(lifebar);
+    }
+  }
+
+  setShieldBar(pokemon, scene, height) {
+    const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
+    if (pokemon.shield !== undefined && pokemon.shield > 0) {
+      const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
+      const shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, height, shieldRatio * 60, pokemon.shield, 0x939393, 'shieldbar', true);
+      shieldbar.setLife(pokemon.shield);
+      this.add(shieldbar);
     }
   }
 
   setManaBar(pokemon, scene, height) {
     if (pokemon.mana !== undefined) {
       const color = 0x01b8fe;
-      const manabar = new Lifebar(scene, -15, height + 5, pokemon.maxMana, color, 'manabar');
+      const manabar = new Lifebar(scene, -15, height + 5, 60, pokemon.maxMana, color, 'manabar', true);
       manabar.setLife(pokemon.mana);
       this.add(manabar);
     }
@@ -673,8 +687,11 @@ export default class Pokemon extends Button {
     scene.add.existing(sprite);
     this.add(socle);
     this.add(sprite);
+
+    this.setShieldBar(pokemon, scene, this.height/2 + 5);
     this.setLifeBar(pokemon, scene, this.height/2 + 5);
     this.setManaBar(pokemon, scene, this.height/2 + 5);
+    
     this.setItems(pokemon, scene);
     if (pokemon.effects) {
       this.setEffects(pokemon, scene, this.height + 30);

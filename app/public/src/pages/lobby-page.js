@@ -500,9 +500,17 @@ class LobbyPage {
       window.dispatchEvent(new CustomEvent('render-home'));
     });
 
+    /*
+    document.getElementById('button-creation-bot').addEventListener('click', (e) => {
+      this.room.leave();
+      _client.auth.logout();
+      window.dispatchEvent(new CustomEvent('render-creation-bot'));
+    });
+    */
     document.getElementById('create').addEventListener('click', (e) => {
       this.createRoom();
     });
+    
 
     document.getElementById('send').addEventListener('click', function() {
       self.sendMessage();
