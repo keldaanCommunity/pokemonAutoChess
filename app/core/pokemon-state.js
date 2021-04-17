@@ -54,7 +54,7 @@ class PokemonState {
         }
 
         pokemon.life = Math.max(0, pokemon.life - residualDamage);
-        console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
+        //console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
         if (pokemon.effects.includes(EFFECTS.RAGE)) {
           pokemon.attack += Math.ceil(pokemon.baseAtk * 0.05);
         }
