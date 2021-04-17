@@ -35,6 +35,12 @@ class PreparationRoom extends colyseus.Room {
           self.elos.set(bot.name, bot.elo);
         });
         self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
       });
     });
 
