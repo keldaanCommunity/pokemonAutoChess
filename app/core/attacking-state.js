@@ -88,10 +88,10 @@ class AttackingState extends PokemonState {
       let damage;
       if(Math.random() * 100 < pokemon.critChance){
         if(pokemon.items.count(ITEMS.RAZOR_FANG) != 0){
-          damage = Math.round(pokemon.atk * (1.5 + 0.5 * pokemon.items.count(ITEMS.RAZOR_FANG)));
+          damage = Math.round(pokemon.atk * (2 + 0.5 * pokemon.items.count(ITEMS.RAZOR_FANG)));
         }
         else{
-          damage = Math.round(pokemon.atk * 1.5);
+          damage = Math.round(pokemon.atk * 2);
         }
       }
       else{
