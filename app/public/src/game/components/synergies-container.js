@@ -26,9 +26,11 @@ export default class SynergiesContainer extends GameObjects.Container {
   }
 
   enablePokemon(pokemon){
-    pokemon.types.forEach( type => {
-      this.getFirst('type', type).enablePokemon(pokemon.name);
-    });
+    if(pokemon.positionY != 0){
+      pokemon.types.forEach( type => {
+        this.getFirst('type', type).enablePokemon(pokemon.name);
+      });
+    }
   }
 
   disablePokemon(pokemon){
@@ -39,7 +41,9 @@ export default class SynergiesContainer extends GameObjects.Container {
 
   enablePlayerPokemons(player){
     player.board.forEach( pokemon => {
-      this.enablePokemon(pokemon);
+      if(pokemon.positionY != 0){
+        this.enablePokemon(pokemon);
+      }
     });
   }
 

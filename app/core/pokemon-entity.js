@@ -197,7 +197,7 @@ class PokemonEntity extends schema.Schema {
   }
 
   setMana(mana) {
-    if (!this.silence) {
+    if (!this.silence && !this.protect) {
       this.mana = Math.min(mana, this.maxMana);
     }
   }

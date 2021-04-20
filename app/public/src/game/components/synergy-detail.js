@@ -75,14 +75,14 @@ export default class SynergyDetail extends GameObjects.Container {
     for (let i = 0; i < pokemonCandidates.length; i++) {
       this.add(new GameObjects.Image(scene, -330 + 40 * i, 110, pokemonCandidates[i].sheet, `${pokemonCandidates[i].index}/portrait`));
       let marker = new GameObjects.Rectangle(scene, -330 + 40 * i, 110, 39, 39, 0xffffff, 0);
-      this.pokemons.set(pokemonCandidates[i].name, marker);
+      this.pokemons.set(PokemonFactory.getPokemonFamily(pokemonCandidates[i].name), marker);
       this.add(marker); 
     }
 
     for (let i = 0; i < mythicalPokemonCandidates.length; i++) {
       this.add(new GameObjects.Image(scene, -330 + 40 * i, 150, mythicalPokemonCandidates[i].sheet, `${mythicalPokemonCandidates[i].index}/portrait`));
       let marker = new GameObjects.Rectangle(scene, -330 + 40 * i, 150, 39, 39, 0xffffff, 0);
-      this.pokemons.set(mythicalPokemonCandidates[i].name, marker);
+      this.pokemons.set(PokemonFactory.getPokemonFamily(mythicalPokemonCandidates[i].name), marker);
       this.add(marker); 
     }
 
