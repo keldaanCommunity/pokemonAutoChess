@@ -637,6 +637,13 @@ export default class AnimationManager {
         repeat: -1
       });
     });
+
+    this.game.anims.create({
+      key: `${index}/2`,
+      frames: this.game.anims.generateFrameNames('sleep', {frames: [0, 1], prefix: index + '/2/'}),
+      duration: 1000,
+      repeat: -1
+    });
   }
 
   animatePokemon(entity) {
@@ -650,9 +657,12 @@ export default class AnimationManager {
     sprite.anims.play(spriteKey);
   }
 
+  playSleepAnimation(entity){
+    const sprite = entity.getFirst('objType', 'sprite');
+    sprite.anims.play(`${entity.index}/2`);
+  }
+
   playSpecialCells(entity) {
-    // console.log(entity);
-    // console.log(window.state.mapType);
     entity.anims.play(`${window.state.mapType}/cell`);
   }
 

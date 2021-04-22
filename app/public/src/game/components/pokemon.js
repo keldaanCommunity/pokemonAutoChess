@@ -792,13 +792,18 @@ export default class Pokemon extends Button {
       sleep.anims.play('sleep');
       this.add(sleep);
     }
+    //console.log('sleep');
+    const sprite = this.getFirst('objType', 'sprite');
+    sprite.anims.play(`${this.index}/2`);
   }
 
   removeSleep() {
-    const sprite = this.getFirst('objType', 'sleep');
-    if (sprite) {
-      this.remove(sprite, true);
+    const sleepEffect = this.getFirst('objType', 'sleep');
+    if (sleepEffect) {
+      this.remove(sleepEffect, true);
     }
+
+    window.animationManager.animatePokemon(this);
   }
 
   addSilence() {

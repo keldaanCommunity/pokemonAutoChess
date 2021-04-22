@@ -599,7 +599,7 @@ class OnUpdatePhaseCommand extends Command {
 
   computeIncome() {
     this.state.players.forEach((player, key) => {
-      if (player.alive) {
+      if (player.alive && !player.isBot) {
         player.interest = Math.min(Math.floor(player.money / 10), 5);
         player.money += player.interest;
         player.money += player.streak;

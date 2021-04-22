@@ -76,7 +76,7 @@ class Simulation extends Schema {
 
   addPokemon(pokemon, x, y, team, blueTeam, redTeam){
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this);
-
+    //pokemonEntity.triggerSleep(5000);
     this.applyItemsEffects(pokemonEntity, pokemon.types);
     this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
     this.applySpecialCellsEffects(pokemonEntity);
