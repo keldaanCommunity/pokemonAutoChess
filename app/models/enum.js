@@ -2012,7 +2012,7 @@ const TYPE_TRADUCTION = Object.freeze({
   FIELD: {
     eng: 'Field',
     esp: 'Campo',
-    fra: 'Animal'
+    fra: 'Terrestre'
   },
   MONSTER: {
     eng: 'Monster',
@@ -2688,43 +2688,43 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Bulk up`,
-          text:`+5% ATK per opponent in the enemy team`
+          text:`+2 ATK for pokemons on the same column`
         },
         {
           title:`(6) Rage`,
-          text:`+5% ATK per each shot received`
+          text:`+4 ATK for pokemons on the same column`
         },
         {
           title:`(9) Sword Dance`,
-          text:`The attack speed is doubled for animal pkm`
+          text:`+8 ATK for pokemons on the same column`
         }
       ],
       esp:[
         {
           title:`(3) Gonflette`,
-          text:`+5% ATK por oponente en el equipo enemigo`
+          text:`+2 ATK para pokemons en la misma columna`
         },
         {
           title:`(6) Furia`,
-          text:`+5% ATK por cada golpe recibido`
+          text:`+4 ATK para pokemons en la misma columna`
         },
         {
           title:`(9) Cuchillas de baile`,
-          text:`La velocidad de ataque se duplica para los animales pkm`
+          text:`+8 ATK para pokemons en la misma columna`
         }
       ],
       fra:[
         {
           title:`(3) Gonflette`,
-          text:`+5% ATK par adversaire dans l'équipe ennemie`
+          text:`+2 ATK pour les pokémons sur la même colonne`
         },
         {
           title:`(6) Rage`,
-          text:`+5% ATK par chaque coup reçu`
+          text:`+4 ATK pour les pokémons sur la même colonne`
         },
         {
           title:`(9) Danse Lames`,
-          text:`La vitesse d'attaque est doublée pour les pkm animal`
+          text:`+8 ATK pour les pokémons sur la même colonne`
         }
       ]
     }

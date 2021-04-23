@@ -306,7 +306,29 @@ class Simulation extends Schema {
           }
         });
       }
+      let attackBonus = 0;
+      if(pokemon.effects.includes(EFFECTS.WORK_UP)){
+        attackBonus = 2;
+      }
+      if(pokemon.effects.includes(EFFECTS.RAGE)){
+        attackBonus += 4;
+      }
+      if(pokemon.effects.includes(EFFECTS.ANGER_POINT)){
+        attackBonus += 8;
+      }
+      if(attackBonus >= 0){
+        if(this.board.getValue(pokemon.positionX, 0)){
+          pokemon.atk += attackBonus;
+        }
+        if(this.board.getValue(pokemon.positionX, 1)){
+          pokemon.atk += attackBonus;
+        }
+        if(this.board.getValue(pokemon.positionX, 2)){
+          pokemon.atk += attackBonus;
+        }
+      }
     });
+
     this.redTeam.forEach(pokemon =>{
       let shieldBonus = 0;
       if(pokemon.effects.includes(EFFECTS.STAMINA)){
@@ -327,6 +349,27 @@ class Simulation extends Schema {
             cell.value.shield += shieldBonus;
           }
         });
+      }
+      let attackBonus = 0;
+      if(pokemon.effects.includes(EFFECTS.WORK_UP)){
+        attackBonus = 2;
+      }
+      if(pokemon.effects.includes(EFFECTS.RAGE)){
+        attackBonus += 4;
+      }
+      if(pokemon.effects.includes(EFFECTS.ANGER_POINT)){
+        attackBonus += 8;
+      }
+      if(attackBonus >= 0){
+        if(this.board.getValue(pokemon.positionX, 3)){
+          pokemon.atk += attackBonus;
+        }
+        if(this.board.getValue(pokemon.positionX, 4)){
+          pokemon.atk += attackBonus;
+        }
+        if(this.board.getValue(pokemon.positionX, 5)){
+          pokemon.atk += attackBonus;
+        }
       }
     });
   }
@@ -434,7 +477,6 @@ class Simulation extends Schema {
 
         case EFFECTS.WORK_UP:
           if (types.includes(TYPE.FIELD)) {
-            pokemon.atk += Math.ceil(pokemon.baseAtk * ennemyTeam.size * 0.06);
             pokemon.effects.push(EFFECTS.WORK_UP);
           }
           break;
@@ -448,7 +490,6 @@ class Simulation extends Schema {
         case EFFECTS.ANGER_POINT:
           if (types.includes(TYPE.FIELD)) {
             pokemon.effects.push(EFFECTS.ANGER_POINT);
-            pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.5);
           }
           break;
 
