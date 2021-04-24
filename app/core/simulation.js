@@ -318,13 +318,13 @@ class Simulation extends Schema {
       }
       if(attackBonus >= 0){
         if(this.board.getValue(pokemon.positionX, 0)){
-          pokemon.atk += attackBonus;
+          this.board.getValue(pokemon.positionX, 0).atk += attackBonus;
         }
         if(this.board.getValue(pokemon.positionX, 1)){
-          pokemon.atk += attackBonus;
+          this.board.getValue(pokemon.positionX, 1).atk += attackBonus;
         }
         if(this.board.getValue(pokemon.positionX, 2)){
-          pokemon.atk += attackBonus;
+          this.board.getValue(pokemon.positionX, 2).atk += attackBonus;
         }
       }
     });
@@ -362,13 +362,13 @@ class Simulation extends Schema {
       }
       if(attackBonus >= 0){
         if(this.board.getValue(pokemon.positionX, 3)){
-          pokemon.atk += attackBonus;
+          this.board.getValue(pokemon.positionX, 3).atk += attackBonus;
         }
         if(this.board.getValue(pokemon.positionX, 4)){
-          pokemon.atk += attackBonus;
+          this.board.getValue(pokemon.positionX, 4).atk += attackBonus;
         }
         if(this.board.getValue(pokemon.positionX, 5)){
-          pokemon.atk += attackBonus;
+          this.board.getValue(pokemon.positionX, 5).atk += attackBonus;
         }
       }
     });
