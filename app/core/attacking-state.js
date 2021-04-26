@@ -75,16 +75,6 @@ class AttackingState extends PokemonState {
         pokemon.orientation = ORIENTATION.DOWNLEFT;
       }
       // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
-      if (target.effects.includes(EFFECTS.ATTRACT)) {
-        if (Math.random() > 0.75) {
-          pokemon.atkSpeed = Math.min(2000, Math.ceil(pokemon.atkSpeed * 1.1));
-        }
-        if (target.effects.includes(EFFECTS.BABY_DOLL_EYES)) {
-          if (Math.random() > 0.75) {
-            pokemon.atk = Math.max(Math.ceil(pokemon.baseAtk / 2), pokemon.atk - Math.ceil(pokemon.baseAtk * 0.1));
-          }
-        }
-      }
       let damage;
       if(Math.random() * 100 < pokemon.critChance){
         if(pokemon.items.count(ITEMS.RAZOR_FANG) != 0){

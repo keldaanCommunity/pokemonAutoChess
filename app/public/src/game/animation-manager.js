@@ -641,7 +641,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: `${index}/2`,
       frames: this.game.anims.generateFrameNames('sleep', {frames: [0, 1], prefix: index + '/2/'}),
-      duration: 1000,
+      duration: 2000,
       repeat: -1
     });
   }

@@ -3041,32 +3041,32 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(2) Charm`,
-          text:`25% chance to reduce the ATK speed of the target with each attack (max:50%)`
+          title:`(2) Sing`,
+          text:`Fairy pokemons put asleep their mirror opponent for 2 seconds`
         },
         {
-          title:`(4) Nice smile`,
-          text:`25% chance of reducing the target's ATK with each attack (max:50%)`
+          title:`(4) Jigglypuff Microphone`,
+          text:`Fairy pokemons put asleep their mirror opponent for 4 seconds`
         }
       ],
       esp:[
         {
-          title:`(2) Encanto`,
-          text:`25% de probabilidad de reducir la velocidad ATK del objetivo con cada ataque (máx:50%)`
+          title:`(2) Canción de cuna`,
+          text:`Los pokemons hada duermen a su oponente en el espejo durante 2 segundos`
         },
         {
-          title:`(4) Bonita sonrisa`,
-          text:`25% de probabilidad de reducir el ATK del objetivo con cada ataque (máx:50%)`
+          title:`(4) Jigglypuff Micrófono`,
+          text:`Los pokemons hada duermen a su oponente en el espejo durante 4 segundos`
         }
       ],
       fra:[
         {
-          title:`(2) Charme`,
-          text:`25% de chance de réduire l'ATK speed de la cible à chaque attaque (max:50%)`
+          title:`(2) Berceuse`,
+          text:`Les pokémons fées endorment leur adversaire miroir pendant 2 secondes.`
         },
         {
-          title:`(4) Joli sourire`,
-          text:`25% de chance de réduire l'ATK de la cible à chaque attaque (max:50%)`
+          title:`(4) Micro de Rondoudou`,
+          text:`Les pokémons fées endorment leur adversaire miroir pendant 4 secondes.`
         }
       ]
     }

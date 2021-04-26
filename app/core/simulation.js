@@ -327,6 +327,18 @@ class Simulation extends Schema {
           this.board.getValue(pokemon.positionX, 2).atk += attackBonus;
         }
       }
+      let sleepMalus = 0;
+      if(pokemon.effects.includes(EFFECTS.ATTRACT)){
+        sleepMalus += 2000;
+      }
+      if(pokemon.effects.includes(EFFECTS.BABY_DOLL_EYES)){
+        sleepMalus += 4000;
+      }
+      if(sleepMalus > 0){
+        if(this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)){
+          this.board.getValue(pokemon.positionX,  5 - pokemon.positionY).triggerSleep(sleepMalus);
+        }
+      }
     });
 
     this.redTeam.forEach(pokemon =>{
@@ -369,6 +381,19 @@ class Simulation extends Schema {
         }
         if(this.board.getValue(pokemon.positionX, 5)){
           this.board.getValue(pokemon.positionX, 5).atk += attackBonus;
+        }
+      }
+
+      let sleepMalus = 0;
+      if(pokemon.effects.includes(EFFECTS.ATTRACT)){
+        sleepMalus += 2000;
+      }
+      if(pokemon.effects.includes(EFFECTS.BABY_DOLL_EYES)){
+        sleepMalus += 4000;
+      }
+      if(sleepMalus > 0){
+        if(this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)){
+          this.board.getValue(pokemon.positionX,  5 - pokemon.positionY).triggerSleep(sleepMalus);
         }
       }
     });
