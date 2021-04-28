@@ -240,27 +240,43 @@ class GameRoom extends colyseus.Room {
 
   }
 
-  getRandomOpponent(playerId, lastOpponentName) {
-    const playersId = [];
-    const numberOfPlayers = this.state.players.size;
-    let opponentId;
+  computeRandomOpponent(playerId) {
+      let player = this.state.players.get(playerId);
+      this.checkOpponents(playerId);
+      if(player.opponents.length == 0){
+        this.fillOpponents(playerId);
+      }
+      if(player.opponents.length > 0){
+        let id = player.opponents.pop();
+        player.opponentName = this.state.players.get(id).name;
+        return id;
+      }
+      else{
+        return;
+      }
+  }
 
-    this.state.players.forEach((player, id) => {
-
-      if (player.alive && id != playerId) {
-        if(numberOfPlayers > 1){
-          if(player.name != lastOpponentName){
-            playersId.push(id);
-          }
-        }
-        else{
-          playersId.push(id);
-        }
+  checkOpponents(playerId){
+    let player = this.state.players.get(playerId);
+    let indexToDelete = [];
+    player.opponents.forEach((p,i) =>{
+      if(!this.state.players.get(p).alive){
+        indexToDelete.push(i);
       }
     });
+    indexToDelete.forEach(index =>{
+      player.opponents.splice(index, 1);
+    });
+  }
 
-    const n = Math.floor(Math.random() * playersId.length);
-    return playersId[n];
+  fillOpponents(playerId){
+    let player = this.state.players.get(playerId);
+    this.state.players.forEach((plyr, key) =>{
+      if(plyr.alive && player.id != plyr.id){
+        player.opponents.push(key);
+      }
+    });
+    player.opponents.sort(() => Math.random() - 0.5);
   }
 
   swap(playerId, pokemon, x, y) {
