@@ -2195,34 +2195,67 @@ const MAP_TYPE = Object.freeze({
 
 const MAP_TYPE_NAME = Object.freeze({
   WATER: {
-    'eng': 'Stormy \n Sea',
-    'esp': 'Mar \n Tormentoso',
-    'fra': 'Mer \n Houleuse'
+    'eng': 'Stormy Sea',
+    'esp': 'Mar Tormentoso',
+    'fra': 'Mer Houleuse'
   },
   NORMAL: {
-    'eng': 'Tiny \n Woods',
-    'esp': 'Arboleda \n Chica',
-    'fra': 'Petit \n Bois'
+    'eng': 'Tiny Woods',
+    'esp': 'Arboleda Chica',
+    'fra': 'Petit Bois'
   },
   FIRE: {
-    'eng': 'Magma \n Cavern',
-    'esp': 'Caverna \n Magma',
-    'fra': 'Mine \n Magma'
+    'eng': 'Magma Cavern',
+    'esp': 'Caverna Magma',
+    'fra': 'Mine  Magma'
   },
   GRASS: {
-    'eng': 'Hidden \n Highland',
-    'esp': 'Tierra \n Oculta',
-    'fra': 'Terres \n Illusoires'
+    'eng': 'Hidden Highland',
+    'esp': 'Tierra Oculta',
+    'fra': 'Terres Illusoires'
   },
   ICE: {
-    'eng': 'Frosty \n Forest',
-    'esp': 'Bosque \n Helado',
-    'fra': 'Forêt \n Givrée'
+    'eng': 'Frosty Forest',
+    'esp': 'Bosque Helado',
+    'fra': 'Forêt Givrée'
   },
   GROUND: {
-    'eng': 'Shimmer \n Desert',
-    'esp': 'Desierto \n Trémulo',
-    'fra': 'Désert \n Chatoyant'
+    'eng': 'Shimmer Desert',
+    'esp': 'Desierto Trémulo',
+    'fra': 'Désert Chatoyant'
+  }
+});
+
+const MAP_TYPE_NAME_DESCRIPTION = Object.freeze({
+  WATER: {
+    'eng': '+20% SPE DEF for pokemons placed on puddle.',
+    'esp': '+20% SPE DEF para los pokemons colocados en el puddle.',
+    'fra': '+20% SPE DEF pour les pokémons placés sur un puddle.'
+  },
+  NORMAL: {
+    'eng': '+20% HP for pokemons placed on puddle.',
+    'esp': '+20% HP para los pokemons colocados en el puddle.',
+    'fra': '+20% HP pour les pokémons placés sur un puddle.'
+  },
+  FIRE: {
+    'eng': '+20% ATK for pokemons placed on puddle.',
+    'esp': '+20% ATK para los pokemons colocados en el puddle.',
+    'fra': '+20% ATK pour les pokémons placés sur un puddle.'
+  },
+  GRASS: {
+    'eng': '+5% HP regeneration if placed on puddle.',
+    'esp': '+5% de regeneración de HP si se coloca en el puddle.',
+    'fra': '+5% de régénération des HP si placé sur un puddle.'
+  },
+  ICE: {
+    'eng': '+10% ATK SPEED for pokemons placed on puddle.',
+    'esp': '+10% ATK SPEED para los pokemons colocados en el puddle.',
+    'fra': '+10% ATK SPEED pour les pokémons placés sur un puddle.'
+  },
+  GROUND: {
+    'eng': '+20% DEF for pokemons placed on puddle.',
+    'esp': '+20% DEF para los pokemons colocados en el puddle.',
+    'fra': '+20% DEF pour les pokémons placés sur un puddle.'
   }
 });
 
@@ -3118,6 +3151,7 @@ module.exports = {
   XP_PLACE,
   XP_TABLE,
   MAP_TYPE_NAME,
+  MAP_TYPE_NAME_DESCRIPTION,
   LAST_BATTLE_RESULT_TRADUCTION,
   PHASE_TRADUCTION,
   TYPE_TRADUCTION,

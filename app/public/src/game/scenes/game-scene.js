@@ -11,6 +11,7 @@ import EntryHazardsManager from '../components/Entry-hazards-manager';
 import ItemsContainer from '../components/items-container';
 import DpsMeterContainer from '../components/dps-meter-container';
 import LeaveButton from '../components/leave-button';
+import MapNameButton from '../components/map-name-button';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
 import {WORDS, PHASE_TRADUCTION, MAP_TYPE_NAME} from '../../../../models/enum';
@@ -108,6 +109,7 @@ export default class GameScene extends Scene {
     this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
     this.load.image('TRUE','assets/types/TRUE.png');
     this.load.image('detail','assets/ui/detail.png','assets/ui');
+    this.load.image('littleDetail', 'assets/ui/detail-little.png', 'assets/ui');
     this.load.multiatlas('sleep','assets/pokemons/sleep/sleep.json', 'assets/pokemons/sleep');
     this.load.multiatlas('snowflakes', 'assets/ui/snowflakes.json', 'assets/ui/');
     this.load.multiatlas('status', 'assets/status/status.json', 'assets/status/');
@@ -177,8 +179,7 @@ export default class GameScene extends Scene {
     this.pokemon = this.add.existing(new Pokemon(this, 130, 640, PokemonFactory.createPokemonFromName(window.state.players[_client.auth._id].avatar), false));
     window.animationManager.animatePokemon(this.pokemon);
 
-
-    this.mapName = this.add.text(45, 300, MAP_TYPE_NAME[window.state.mapType][window.langage], window.textStyle);
+    this.mapName = new MapNameButton(this, 120, 330, window.state.mapType, window.langage);
     this.nameText = this.add.text(10, 20, window.state.players[_client.auth._id].name.slice(0, 8), window.textStyle);
     this.phaseText = this.add.text(860, 25, window.state.players[_client.auth._id].phase, window.textStyle);
     this.turnText = this.add.text(565, 25, window.state.stageLevel, window.textStyle);
