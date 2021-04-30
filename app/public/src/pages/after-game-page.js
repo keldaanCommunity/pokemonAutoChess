@@ -20,7 +20,7 @@ class AfterGamePage {
     <button type="button" class="nes-btn" style="width: max-content;" id="quit">${WORDS.GAME_LOBBY[this.langage]}</button>
     <div style="display:flex; flex-flow:row;justify-content:space-between;"> 
 
-    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; display:flex; flex-flow:column;">
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .6); margin:10px; display:flex; flex-flow:column;">
       <p class="title">${WORDS.ROOM_ID[this.langage]}: ${this.room.id}</p>
       <div style="display:flex;flex-flow:row;justify-content:space-around;">
         <img style="width:50px; height:50px;" src='assets/avatar/${_client.auth.metadata.avatar}.png'></img>
@@ -37,7 +37,7 @@ class AfterGamePage {
       </table>
       </div>
 
-      <section class="nes-container" style="background-color: rgba(255, 255, 255, .5); margin:10px; overflow:scroll; height:90vh;">
+      <section class="nes-container" style="background-color: rgba(255, 255, 255, .6); margin:10px; overflow:scroll; height:90vh;">
       <section class="message-list" id="messages" style="height:95%;">
         </section>
   

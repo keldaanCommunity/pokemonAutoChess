@@ -9,13 +9,13 @@ class HomePage {
     content.setAttribute('id', 'home');
     content.style.padding = '5px';
     content.innerHTML = `
-    <div class="nes-container with-title is-centered" style="height:30%; margin-left:15%;margin-top:15%; background-color: rgba(255, 255, 255, .5);">
+    <div class="nes-container with-title is-centered" style="height:30%; margin-left:15%;margin-top:15%; background-color: rgba(255, 255, 255, .6);">
       <p class="title" style="">Game</p>
       <h1 style= "font-size:50px; margin-bottom:40px;">Pokemon Auto Chess</h1>
       <button id="button-play" type="button" class="nes-btn is-success"><h3>Play !</h3></button>
     </div>
     
-    <div class="nes-container with-title is-centered" style="width:20%; height:40%; margin:10px; background-color: rgba(255, 255, 255, .5);">
+    <div class="nes-container with-title is-centered" style="width:20%; height:40%; margin:10px; background-color: rgba(255, 255, 255, .6);">
     <p class="title">Media</p>
     
     <section class="icon-list" style="margin-bottom:15px;">

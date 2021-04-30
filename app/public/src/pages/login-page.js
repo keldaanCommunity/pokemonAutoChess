@@ -14,7 +14,7 @@ class LoginPage {
     const content = document.createElement('div');
     content.setAttribute('id', 'home');
     content.innerHTML = `
-    <div id="play-panel" class="nes-container with-title is-centered" style="height:30%; margin-left:15%;margin-top:15%; background-color: rgba(255, 255, 255, .5);">
+    <div id="play-panel" class="nes-container with-title is-centered" style="height:30%; margin-left:15%;margin-top:15%; background-color: rgba(255, 255, 255, .6);">
     <p class="title" style="">Game</p>
     <h1 style="font-size:50px; margin-bottom:40px;">Pokemon Auto Chess</h1>
     <button id="button-guest" type="button" class="nes-btn is-success">Login as guest</button>
@@ -32,7 +32,7 @@ class LoginPage {
       <button id="button-login" type="button" class="nes-btn is-warning" style="margin-top:20px;">Login</button>
     </div>
     </div>
-    <div class="nes-container with-title is-centered" style="width:20%; height:40%; margin:10px; background-color: rgba(255, 255, 255, .5);">
+    <div class="nes-container with-title is-centered" style="width:20%; height:40%; margin:10px; background-color: rgba(255, 255, 255, .6);">
     <p class="title">Media</p>
     
     <section class="icon-list" style="margin-bottom:15px;">

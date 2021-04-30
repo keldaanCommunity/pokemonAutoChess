@@ -9,7 +9,7 @@ class BotCreationPage {
       content.setAttribute('id', 'bot-creation');
       content.style.padding = '5px';
       content.innerHTML = `
-      <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5);">
+      <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .6);">
         <p class="title" style="">Bot Creation</p>
       </div>
   `;

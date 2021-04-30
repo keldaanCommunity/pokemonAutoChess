@@ -107,7 +107,7 @@ class GamePage {
   render() {
     document.body.innerHTML = `
     <div id="modal-popup" class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document"  style="background-color: rgba(255, 255, 255, .5);">
+      <div class="modal-dialog" role="document"  style="background-color: rgba(255, 255, 255, .6);">
         <div class="modal-content">
           <div class="modal-header">
             <h5 id ="modal-title" class="modal-title">Modal title</h5>

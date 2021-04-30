@@ -418,7 +418,7 @@ class LobbyPage {
   </div>
   <div style="display:flex; justify-content:space-between; height:100%;"> 
 
-    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; padding:5px; width:30%; overflow-y: scroll;
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .6); margin:10px; padding:5px; width:30%; overflow-y: scroll;
     height: 90vh;">
       <div id='leaderboard-container'>
       <table style="border-spacing: 10px 0px; border-collapse:separate; width: 100%;">
@@ -436,7 +436,7 @@ class LobbyPage {
       </div>
     </div>
 
-    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; width:30%; overflow-y: scroll;
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .6); margin:10px; width:30%; overflow-y: scroll;
     height: 90vh;">
       <div style="display:flex;flex-flow:row; justify-content: center;"><img style="width:50px;" id='avatar' src='assets/avatar/${_client.auth.metadata.avatar}.png'></img><p style='margin-left:10px;'>${username} (${_client.auth.metadata.elo})</p></div>
       <h3 style="margin:10px;">${WORDS.AVAILABLE_ROOM_IDS[this.langage]}:</h3>
@@ -445,13 +445,13 @@ class LobbyPage {
       <button type="button" class="nes-btn is-success" id="create">${WORDS.CREATE_NEW_ROOM[this.langage]}</button>
     </div>
 
-    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .5); margin:10px; width: 10%; height: 90vh; overflow-y:scroll;">
+    <div class="nes-container with-title is-centered" style="background-color: rgba(255, 255, 255, .6); margin:10px; width: 10%; height: 90vh; overflow-y:scroll;">
       <div id='user-container'>
 
       </div>
     </div>
 
-    <section class="nes-container" style="background-color: rgba(255, 255, 255, .5); margin:10px; overflow-y: scroll;
+    <section class="nes-container" style="background-color: rgba(255, 255, 255, .6); margin:10px; overflow-y: scroll;
     height: 90vh; width:30%;">
     <section class="message-list" id="messages">
       </section>
