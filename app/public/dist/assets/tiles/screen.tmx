@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="85" height="43" tilewidth="24" tileheight="24" infinite="0" nextlayerid="7" nextobjectid="1">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="85" height="43" tilewidth="24" tileheight="24" infinite="0" nextlayerid="7" nextobjectid="1">
  <editorsettings>
   <export target="GRASS.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="GRASS" tilewidth="24" tileheight="24" spacing="1" margin="1" tilecount="432" columns="18">
-  <image source="GRASS.png" width="451" height="601"/>
+  <image source="GRASS/GRASS0.png" width="451" height="601"/>
  </tileset>
  <layer id="1" name="World" width="85" height="43">
   <data encoding="csv">
