@@ -2073,7 +2073,8 @@ const RARITY = Object.freeze({
   EPIC: 'EPIC',
   LEGENDARY: 'LEGENDARY',
   MYTHICAL: 'MYTHICAL',
-  NEUTRAL: 'NEUTRAL'
+  NEUTRAL: 'NEUTRAL',
+  SUMMON: 'SUMMON'
 });
 
 const RARITY_HP_COST= Object.freeze({
@@ -2083,7 +2084,8 @@ const RARITY_HP_COST= Object.freeze({
   EPIC: 2,
   LEGENDARY: 3,
   MYTHICAL: 4,
-  NEUTRAL: 2
+  NEUTRAL: 2,
+  SUMMON: 1
 });
 
 const COST = Object.freeze({
@@ -2092,7 +2094,8 @@ const COST = Object.freeze({
   RARE: 3,
   EPIC: 4,
   MYTHICAL: 6,
-  LEGENDARY: 5
+  LEGENDARY: 5,
+  SUMMON: 0
 });
 
 const BOT_AVATAR = Object.freeze({

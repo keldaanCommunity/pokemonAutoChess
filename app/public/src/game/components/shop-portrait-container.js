@@ -7,7 +7,8 @@ const COLOR_TYPE = Object.freeze({
   RARE: 0x5062ab,
   EPIC: 0x7b469c,
   LEGENDARY: 0xa6802e,
-  MYTHICAL: 0xffdeff
+  MYTHICAL: 0xffdeff,
+  SUMMON: 0x991f1f
 });
 
 export default class ShopPortraitContainer extends GameObjects.Container {

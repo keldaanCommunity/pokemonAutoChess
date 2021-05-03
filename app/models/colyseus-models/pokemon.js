@@ -1232,13 +1232,13 @@ class Victreebel extends Pokemon {
 
 class Carvanha extends Pokemon {
   constructor() {
-    super(PKM.CARVANHA, 'carvanha',[TYPE.WATER, TYPE.AQUATIC], RARITY.COMMON, 'february', 318, '', 40, 4, 1, 1, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BITE);
+    super(PKM.CARVANHA, 'carvanha',[TYPE.WATER, TYPE.AQUATIC], RARITY.SUMMON, 'february', 318, '', 40, 4, 1, 1, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BITE);
   }
 }
 
 class Houndour extends Pokemon {
   constructor() {
-    super(PKM.HOUNDOUR, 'malosse',[TYPE.FIRE, TYPE.DARK], RARITY.COMMON, 'february', 228, '', 40, 4, 1, 1, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BLAZE_KICK);
+    super(PKM.HOUNDOUR, 'malosse',[TYPE.FIRE, TYPE.DARK], RARITY.SUMMON, 'february', 228, '', 40, 4, 1, 1, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BLAZE_KICK);
   }
 }
 
