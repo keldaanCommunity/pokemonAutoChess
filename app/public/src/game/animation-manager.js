@@ -71,6 +71,10 @@ export default class AnimationManager {
       this.createAnimations(num, 'february');
     });
 
+    [577, 578, 579].forEach((num) => {
+      this.createAnimations(num, 'april');
+    });
+
     this.createAttacksAnimations();
     this.createSpecialAttacksAnimations();
     this.createSpecialCellsAnimations();

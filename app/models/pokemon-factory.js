@@ -835,6 +835,12 @@ class PokemonFactory {
         return PKM.SANDILE;
       case PKM.KROOKODILE:
         return PKM.SANDILE;
+      case PKM.SOLOSIS:
+        return PKM.SOLOSIS;
+      case PKM.DUOSION:
+        return PKM.DUOSION;
+      case PKM.REUNICLUS:
+        return PKM.REUNICLUS;
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1381,6 +1387,12 @@ class PokemonFactory {
         return new Pokemon.Krookorok();
       case PKM.KROOKODILE:
         return new Pokemon.Krookodile();
+      case PKM.SOLOSIS:
+        return new Pokemon.Solosis();
+      case PKM.DUOSION:
+        return new Pokemon.Duosion();
+      case PKM.REUNICLUS:
+        return new Pokemon.Reuniclus();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();

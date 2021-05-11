@@ -267,7 +267,10 @@ const PKM = Object.freeze({
   HYDREIGON:"hydreigon",
   SANDILE:"sandile",
   KROKOROK:"krokorok",
-  KROOKODILE:"krookodile"
+  KROOKODILE:"krookodile",
+  SOLOSIS:"solosis",
+  DUOSION:"duosion",
+  REUNICLUS:"reuniclus"
 });
 
 const WORDS = Object.freeze({

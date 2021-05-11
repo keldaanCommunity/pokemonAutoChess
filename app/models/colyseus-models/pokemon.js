@@ -296,19 +296,19 @@ class Slaking extends Pokemon {
 
 class Larvitar extends Pokemon {
   constructor() {
-    super(PKM.LARVITAR, 'embrylex',[TYPE.DARK, TYPE.MONSTER, TYPE.MINERAL], RARITY.EPIC, 'EPIC', 246, PKM.PUPITAR, 90, 8, 4, 4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.NASTY_PLOT);
+    super(PKM.LARVITAR, 'embrylex',[TYPE.DARK, TYPE.MONSTER, TYPE.MINERAL], RARITY.EPIC, 'EPIC', 246, PKM.PUPITAR, 90, 8, 4, 4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BITE);
   }
 }
 
 class Pupitar extends Pokemon {
   constructor() {
-    super(PKM.PUPITAR, 'ymphect',[TYPE.DARK, TYPE.MONSTER, TYPE.MINERAL], RARITY.EPIC, 'EPIC', 247, PKM.TYRANITAR, 130, 9, 4, 4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.NASTY_PLOT);
+    super(PKM.PUPITAR, 'ymphect',[TYPE.DARK, TYPE.MONSTER, TYPE.MINERAL], RARITY.EPIC, 'EPIC', 247, PKM.TYRANITAR, 130, 9, 4, 4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.BITE);
   }
 }
 
 class Tyranitar extends Pokemon {
   constructor() {
-    super(PKM.TYRANITAR, 'tyranocif',[TYPE.DARK, TYPE.MONSTER, TYPE.MINERAL], RARITY.EPIC, 'EPIC', 248, '', 230, 20, 4, 4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.NASTY_PLOT);
+    super(PKM.TYRANITAR, 'tyranocif',[TYPE.DARK, TYPE.MONSTER, TYPE.MINERAL], RARITY.EPIC, 'EPIC', 248, '', 230, 20, 4, 4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.BITE);
   }
 }
 
@@ -399,6 +399,24 @@ class Lampent extends Pokemon {
 class Chandelure extends Pokemon {
   constructor() {
     super(PKM.CHANDELURE, 'lugulabre',[TYPE.FIRE, TYPE.AMORPH], RARITY.EPIC, 'EPIC2', 609, '', 230, 18, 1, 1, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.FIRE_BLAST);
+  }
+}
+
+class Solosis extends Pokemon {
+  constructor() {
+    super(PKM.SOLOSIS, 'nucléos',[TYPE.PSYCHIC, TYPE.AMORPH], RARITY.EPIC, 'april', 577, PKM.DUOSION, 90, 5, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.LEECH_LIFE);
+  }
+}
+
+class Duosion extends Pokemon {
+  constructor() {
+    super(PKM.DUOSION, 'méïos',[TYPE.PSYCHIC, TYPE.AMORPH], RARITY.EPIC, 'april', 578, PKM.REUNICLUS, 130, 9, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.LEECH_LIFE);
+  }
+}
+
+class Reuniclus extends Pokemon {
+  constructor() {
+    super(PKM.REUNICLUS, 'symbios‎',[TYPE.PSYCHIC, TYPE.AMORPH], RARITY.EPIC, 'april', 579, '', 230, 18, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.LEECH_LIFE);
   }
 }
 
@@ -1662,7 +1680,6 @@ class Persian extends Pokemon {
   }
 }
 
-
 schema.defineTypes(Pokemon, {
   id: 'string',
   name: 'string',
@@ -1959,5 +1976,8 @@ module.exports = {
   Hydreigon,
   Sandile,
   Krookorok,
-  Krookodile
+  Krookodile,
+  Solosis,
+  Duosion,
+  Reuniclus
 };
