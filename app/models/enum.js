@@ -2621,7 +2621,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(6) Sandstorm`,
-          text:`A sandstorm is raging, making 10% HP/s at pkm non ground/steel`
+          text:`A sandstorm is raging, making 10% HP/s at pkm non ground/steel/mineral`
         }
       ],
       esp:[
@@ -2635,7 +2635,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(6) Tormenta de arena`,
-          text:`Se desata una tormenta de arena que produce un 10% de HP/s por pkm de tierra/acero`
+          text:`Se desata una tormenta de arena que produce un 10% de HP/s por pkm de tierra/acero/mineral`
         }
       ],
       fra:[
@@ -2649,7 +2649,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(6) Tempête de sable`,
-          text:`Une tempête de sable fait rage, faisant 10% HP/s aux pkm non sol/acier`
+          text:`Une tempête de sable fait rage, faisant 10% HP/s aux pkm non sol/acier/mineral`
         }
       ]
     }
