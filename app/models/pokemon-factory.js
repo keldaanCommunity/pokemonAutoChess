@@ -838,9 +838,9 @@ class PokemonFactory {
       case PKM.SOLOSIS:
         return PKM.SOLOSIS;
       case PKM.DUOSION:
-        return PKM.DUOSION;
+        return PKM.SOLOSIS;
       case PKM.REUNICLUS:
-        return PKM.REUNICLUS;
+        return PKM.SOLOSIS;
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;

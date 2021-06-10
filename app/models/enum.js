@@ -525,7 +525,7 @@ const ITEMS = Object.freeze({
 
 const ITEM_NAME = Object.freeze({
   WHITE_GLASSES: {
-    eng: 'White Glasses',
+    eng: 'Wise Glasses',
     esp: 'Gafas blancas',
     fra: 'Lunettes blanches'
   },
@@ -540,7 +540,7 @@ const ITEM_NAME = Object.freeze({
     fra: 'Orbe Vie'
   },
   COIN_AMULET: {
-    eng: 'Coin Amulet',
+    eng: 'Amulet Coin',
     esp: 'Amuleto de monedas',
     fra: 'Piece Rune'
   },
@@ -600,7 +600,7 @@ const ITEM_NAME = Object.freeze({
     fra: 'Pierre lune'
   },
   NIGHT_STONE: {
-    eng: 'Night Stone',
+    eng: 'Dusk Stone',
     esp: 'Piedra Nocturna',
     fra: 'Pierre nuit'
   },
@@ -620,7 +620,7 @@ const ITEM_NAME = Object.freeze({
     fra: 'Pierre foudre'
   },
   METAL_SKIN: {
-    eng: 'Metal Skin',
+    eng: 'Metal Coat',
     esp: 'Piel de metal',
     fra: 'Peau métal'
   },
@@ -680,9 +680,9 @@ const ITEM_NAME = Object.freeze({
     fra: 'Lentilscope'
   },
   REVIVER_SEED: {
-    eng: 'Reviver Seed',
+    eng: 'Revival Herb',
     esp: 'Resugraina',
-    fra: 'Résugraine'
+    fra: 'Herbe Rappel'
   },
   ASSAULT_VEST: {
     eng: 'Assault Vest',
@@ -719,27 +719,27 @@ const ITEM_DESCRIPTION = Object.freeze({
     fra: '+30% attaque physique'
   },
   LIFE_ORB: {
-    eng: '+100% damage, cost 5% life for each attack',
+    eng: '+100% damage, lose 5% HP per hit.',
     esp: '100% de daño, cuesta un 5% de vida por cada ataque',
     fra: '+100% attaque, blesse le pokémon de 5% hp/s'
   },
   COIN_AMULET: {
-    eng: 'Chance to drop between 1 and 3 gold at each round',
+    eng: 'Earn 1-3 gold every round.',
     esp: 'Oportunidad de dejar caer entre 1 y 3 monedas de oro en cada ronda',
     fra: 'Chance de gagner entre 1 et 3 argent à chaque tour.'
   },
   ROCKY_HELMET: {
-    eng: 'When user is attacked, the attacker take 12% max health physical damage',
+    eng: 'The attacker of the wearer takes 12% HP damage per physical hit.',
     esp: 'Cuando el usuario es atacado, el atacante recibe un 12% de daño máximo de salud.',
     fra: 'Quand le pokémon est attaqué, l attaquant subit 12% de vie en dommage physique'
   },
   SHELL_BELL: {
-    eng: '10% life steal on each attack',
+    eng: 'Restore 10% of the damage dealt.',
     esp: '10% de robo de vida en cada ataque',
     fra: '+10% vol de vie à chaque attaque'
   },
   BIG_ROOT: {
-    eng: '+ 5% health / attack restored',
+    eng: 'Restore 5% of your HP per hit.',
     esp: '+ 5% de salud / atacado restaurado',
     fra: '+ 5% vie / seconde'
   },
@@ -849,17 +849,17 @@ const ITEM_DESCRIPTION = Object.freeze({
     fra: '+10% vitesse d attaque. +50% attaque si type glace. Fait évoluer évoli en Givrali.'
   },
   RAZOR_FANG: {
-    eng: '+50% critical strike damage',
+    eng: '+50% Critical Hit damage.',
     esp: '+50% de daño por golpe crítico',
     fra: '+50% dégâts des coups critiques'
   },
   RAZOR_CLAW: {
-    eng: 'Critical hits do true damage',
+    eng: 'Critical Hits ignore stat changes.',
     esp: 'Los golpes críticos hacen daño verdadero',
     fra: 'Les coups critiques font des true dégats'
   },
   SCOPE_LENS: {
-    eng: '+50% critical hits',
+    eng: '+50% Critical Hit chance.',
     esp: '+50% de golpes críticos',
     fra: '+50% de coups critiques'
   },
@@ -1442,7 +1442,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
   },
   WHEEL_OF_FIRE: {
     title:{
-      eng: 'Wheel of fire',
+      eng: 'Flame Wheel',
       esp: 'Rueda de fuego',
       fra: 'Roue de feu'
     },
@@ -1514,7 +1514,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
   },
   HYDRO_PUMP: {
     title:{
-      eng: 'Hydro Pump',
+      eng: 'Hydro Cannon',
       esp: 'Hidrobomba',
       fra: 'Hydrocanon'
     },
@@ -1574,7 +1574,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
   },
   IRON_DEFENSE: {
     title:{
-      eng: 'Iron Defense',
+      eng: 'Defense Curl',
       esp: 'Defensa del hierro',
       fra: 'Mur de fer'
     },
@@ -2271,15 +2271,15 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Stamina`,
-          text:`+20 HP for every pokemon around`
+          text:`All allies adjacent to your Normal pokemon have +20 HP.`
         },
         {
           title:`(6) Strength`,
-          text:`+30 HP for every pokemon around`
+          text:`All allies adjacent to your Normal pokemon have +30 HP.`
         },
         {
           title:`(9) Pure power`,
-          text:`+50 HP for every pokemon around`
+          text:`All allies adjacent to your Normal pokemon have +50 HP.`
         }
       ],
       esp:[
@@ -2317,15 +2317,15 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Ingrain`,
-          text:`+5% HP/s for grass allies`
+          text:`Grass allies restore 5% HP per second.`
         },
         {
           title:`(5) Growth`,
-          text:`+10% HP/s for grass allies`
+          text:`Grass allies restore 10% extra HP per second.`
         },
         {
           title:`(7) Stun Spore`,
-          text:`-30% ATK speed for ennemy team`
+          text:`Enemies have -30% speed.`
         }
       ],
       esp:[
@@ -2363,11 +2363,11 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Blaze`,
-          text:`Fire pkm gains +5 ATK at each attack`
+          text:`Your Fire pokemon gain +5 Attack after every hit.`
         },
         {
           title:`(6) Drought`,
-          text:`Sun itensifies, fire pkm gains +50% ATK`
+          text:`Your Fire pokemon have +50% Attack. (Harsh Sunlight)`
         }
       ],
       esp:[
@@ -2397,15 +2397,15 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Rain dance`,
-          text:`Rain falls, 30% ATK for water allies`
+          text:`Your Water pokemon have +30% Attack. (Rain)`
         },
         {
           title:`(6) Crachin`,
-          text:`The rain is getting heavier, 30% more ATK`
+          text:`Your Water pokemon have +30% more Attack. (Rain)`
         },
         {
           title:`(9) Primordial sea`,
-          text:`Invoke Kyogre, the king of the oceans`
+          text:`Summon Kyogre, the king of the oceans. (Rain)`
         }
       ],
       esp:[
@@ -2442,8 +2442,8 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(-) Agility`,
-          text:`+10% ATK speed for each elec ally in the team`
+          title:`(-) Charge`,
+          text:`Your Electric pokemon have +10% speed. (stacks)`
         }
       ],
       esp:[
@@ -2465,11 +2465,11 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Revenge`,
-          text:`+5 mana / attack for all pkm`
+          text:`+5 Mana per hit.`
         },
         {
           title:`(4) Punishment`,
-          text:`+10 mana / attack for all pkm`
+          text:`+10 extra Mana per hit.`
         }
       ],
       esp:[
@@ -2499,15 +2499,15 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Amnesia`,
-          text:`Ally gains +5 SPEDEF`
+          text:`All your pokemon have +5 Special Defense.`
         },
         {
           title:`(4) Light Screen`,
-          text:`Ally gains additional +10 SPEDEF`
+          text:`All your pokemon have +10 Special Defense.`
         },
         {
           title:`(6) Eerie Spell`,
-          text:`Ally gains additional +20 SPEDEF`
+          text:`All your pokemon have +20 Special Defense.`
         }
       ],
       esp:[
@@ -2545,11 +2545,11 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Black eyes`,
-          text:`-25% DEF for the enemy team`
+          text:`Enemies have -25% Defense.`
         },
         {
           title:`(4) Atmósfera oscura`,
-          text:`-25% additional DEF for the enemy team`
+          text:`Enemies have -25% less Defense.`
         }
       ],
       esp:[
@@ -2579,11 +2579,11 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Steel wall`,
-          text:`+50% DEF for steel pkm`
+          text:`Your Steel pokemon have +50% Defense.`
         },
         {
           title:`(4) Lightening`,
-          text:`+100% ATK speed for steel pkm`
+          text:`Your Steel pokemon have +100% Speed.`
         }
       ],
       esp:[
@@ -2613,15 +2613,15 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Spikes`,
-          text:`-10% HP for the enemies at the beginning of the fight`
+          text:`Enemies lose 10% HP when entering the battle.`
         },
         {
           title:`(4) Stealth Rock`,
-          text:`-10% HP for the enemies at the beginning of the fight`
+          text:`Enemies lose 10% more HP when entering the battle.`
         },
         {
           title:`(6) Sandstorm`,
-          text:`A sandstorm is raging, making 10% HP/s at pkm non ground/steel/mineral`
+          text:`All non-Ground/Steel pokemon lose 10% HP per second.`
         }
       ],
       esp:[
@@ -2659,11 +2659,11 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Toxik Gas`,
-          text:`+20% chance of poison the target for 2 seconds, dealing 15% hp/seconds`
+          text:`Your Poison pokemon have a 20% chance to poison the target for 2 seconds. (15% HP per second)`
         },
         {
           title:`(6) Toxik`,
-          text:`+30% chance of poison the target for 2 seconds, dealing 15% hp/seconds`
+          text:`Your Poison pokemon have an extra 30% chance to poison the target for 2 seconds. (15% HP per second)`
         }
       ],
       esp:[
@@ -2693,11 +2693,11 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Bullying`,
-          text:`-30% ATK for the enemy team`
+          text:`Enemies have -30% Attack.`
         },
         {
           title:`(4) Dragon Dance`,
-          text:`+5% attack speed for pkm dragons at each attack`
+          text:`Your Dragon pokemon gain +5 Speed after every hit.`
         }
       ],
       esp:[
@@ -2727,15 +2727,15 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Bulk up`,
-          text:`+2 ATK for pokemons on the same column`
+          text:`Your pokemon on the same column have +2 Attack.`
         },
         {
           title:`(6) Rage`,
-          text:`+4 ATK for pokemons on the same column`
+          text:`Your pokemon on the same column have +4 Attack.`
         },
         {
           title:`(9) Sword Dance`,
-          text:`+8 ATK for pokemons on the same column`
+          text:`Your pokemon on the same column have +8 Attack.`
         }
       ],
       esp:[
@@ -2773,15 +2773,15 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Pursuit`,
-          text:`Enemies are executed below 30% HP`
+          text:`Enemies below 30% HP faint in one hit.`
         },
         {
           title:`(5) Pride`,
-          text:`Every kill restores the life of the pkm`
+          text:`After causing an enemy to faint, restore to full health.`
         },
         {
-          title:`(7) Berserk`,
-          text:`Each kill increases ATK by pkm by 100%`
+          title:`(7) Moxie`,
+          text:`After causing an enemy to faint, gain +100% Attack.`
         }
       ],
       esp:[
@@ -2819,15 +2819,15 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Meditation`,
-          text:`+15% ATK and +15% HP for all pkm`
+          text:`Your pokemon have +15% Attack and HP.`
         },
         {
           title:`(4) Power`,
-          text:`+20% ATK and +20% HP for all pkm`
+          text:`Your pokemon have +20% Attack and HP.`
         },
         {
           title:`(6) Calm Mind`,
-          text:`+30% ATK and +30% HP for all pkm`
+          text:`Your pokemon have +30% Attack and HP.`
         }
       ],
       esp:[
@@ -2865,11 +2865,11 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Swift swim`,
-          text:`+30% ATK speed for aquatic pkm`
+          text:`Your Aquatic pokemon have +30% Speed.`
         },
         {
           title:`(6) Hydro pump`,
-          text:`+30% ATK for aquatic pkm`
+          text:`Your Aquatic pokemon have +30% Attack.`
         }
       ],
       esp:[
@@ -2899,11 +2899,11 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Swarm`,
-          text:`2 pkm needed to evolve (instead of 3)`
+          text:`Your Bug pokemon evolve faster. (2 instead of 3)`
         },
         {
           title:`(4) Sticky web`,
-          text:`-33% ATK speed for the enemy team`
+          text:`Enemies have -33% Speed.`
         }
       ],
       esp:[
@@ -2933,15 +2933,15 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Tailwind`,
-          text:`+10% critical chance for flying pokemons`
+          text:`Your Flying pokemon have +10% Critical Hit chance.`
         },
         {
           title:`(4) Feather Dance`,
-          text:`+20% additional critical chance for flying pokemons`
+          text:`Your Flying pokemon have +20% Critical Hit chance.`
         },
         {
           title:`(6) Max Airstream`,
-          text:`+40% additional critical chance for flying pokemons`
+          text:`Your Flying pokemon have +40% Critical Hit chance.`
         }
       ],
       esp:[
@@ -2978,12 +2978,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(2) Sink`,
-          text:`Restore 10% HP/s if it rains`
+          title:`(2) Rain Dish`,
+          text:`Your Flora pokemon restore 10% HP per second in rain.`
         },
         {
           title:`(4) Floral shield`,
-          text:`+50% DEF and +50% SPEDEF for all pkm`
+          text:`All your pokemon have +50% Defense and Special Defense.`
         }
       ],
       esp:[
@@ -3012,12 +3012,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(2) Armour Ball`,
-          text:`+50% DEF for mineral pkm`
+          title:`(2) Harden`,
+          text:`Your Mineral pokemon have +50% Defense.`
         },
         {
-          title:`(4) Mountaineer`,
-          text:`+50% SPEDEF and +100% HP for mineral pkm`
+          title:`(4) Solid Rock`,
+          text:`Your Mineral pokemon have +50% Defense and +100% HP.`
         }
       ],
       esp:[
@@ -3047,11 +3047,11 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Phantom force`,
-          text:`Ghosts gain 15% ATK speed and do true damage`
+          text:`Your Amorphous pokemon have +15% Speed and ignore stat changes.`
         },
         {
           title:`(4) Curse`,
-          text:`Ghost attacks silence their targets`
+          text:`Hits from your Amorphous pokemon prevent the target from filling up their Mana.`
         }
       ],
       esp:[
@@ -3081,11 +3081,11 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Sing`,
-          text:`Fairy pokemons put asleep their mirror opponent for 2 seconds`
+          text:`Your Fairy pokemon put their front opponent to sleep for 2 seconds.`
         },
         {
           title:`(4) Jigglypuff Microphone`,
-          text:`Fairy pokemons put asleep their mirror opponent for 4 seconds`
+          text:`Your Fairy pokemon put their front opponent to sleep for 4 seconds.`
         }
       ],
       esp:[
@@ -3115,11 +3115,11 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(2) Snow alert`,
-          text:`+10% chance to freeze the enemy during an attack`
+          text:`Your Ice pokemon have a 10% chance to freeze an enemy for 2 seconds after a hit.`
         },
         {
           title:`(4)Sheer cold`,
-          text:`+30% chance to freeze the enemy during an attack`
+          text:`Your Ice pokemon have a 30% chance to freeze an enemy for 2 seconds after a hit.`
         }
       ],
       esp:[
