@@ -1382,7 +1382,7 @@ class Regigigas extends Pokemon {
 
 class Kyogre extends Pokemon {
   constructor() {
-    super(PKM.KYOGRE, 'kyogre',[TYPE.WATER, TYPE.AQUATIC], RARITY.MYTHICAL, 'NEUTRAL', 382, '', 300, 30, 5, 5, 4, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HYDRO_PUMP);
+    super(PKM.KYOGRE, 'kyogre',[TYPE.WATER, TYPE.AQUATIC], RARITY.MYTHICAL, 'NEUTRAL', 382, '', 300, 30, 5, 5, 4, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.ORIGIN_PULSE);
   }
 }
 

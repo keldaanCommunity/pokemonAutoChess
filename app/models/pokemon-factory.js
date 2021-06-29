@@ -287,6 +287,9 @@ class PokemonFactory {
       case SPECIAL_SKILL.POISON:
         return new Strategy.PoisonStrategy();
 
+      case SPECIAL_SKILL.ORIGIN_PULSE:
+        return new Strategy.OriginPulseStrategy();
+        
       case SPECIAL_SKILL.DEFAULT:
         return new Strategy.AttackStrategy();
 

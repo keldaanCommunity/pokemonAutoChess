@@ -126,6 +126,24 @@ export default class Pokemon extends Button {
             });
             break;
 
+          case SPECIAL_SKILL.ORIGIN_PULSE:
+            coordinatesTarget = window.transformAttackCoordinate(0, this.targetY);
+            coordinates = window.transformAttackCoordinate(8, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ORIGIN_PULSE}/0`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.ORIGIN_PULSE);
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              duration: 2000,
+              onComplete: (tween, targets) => {
+                specialProjectile.destroy();
+              }
+            });
+            break;
+
           case SPECIAL_SKILL.SEISMIC_TOSS:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SEISMIC_TOSS}/000`);

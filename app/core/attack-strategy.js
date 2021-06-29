@@ -19,6 +19,23 @@ class LeechSeedStrategy extends AttackStrategy {
   }
 }
 
+class OriginPulseStrategy extends AttackStrategy {
+  constructor() {
+    super();
+  }
+
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let damage = 60;
+
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team && target.positionY == y) {
+        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+      }
+    });
+  }
+}
+
 class BurnStrategy extends AttackStrategy {
   constructor() {
     super();
@@ -1283,7 +1300,8 @@ class MetronomeStrategy extends AttackStrategy {
       ConfusionStrategy,
       ProtectStrategy,
       PoisonStrategy,
-      SilenceStrategy
+      SilenceStrategy,
+      OriginPulseStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1338,5 +1356,6 @@ module.exports = {
   ConfusionStrategy,
   ProtectStrategy,
   PoisonStrategy,
-  SilenceStrategy
+  SilenceStrategy,
+  OriginPulseStrategy
 };

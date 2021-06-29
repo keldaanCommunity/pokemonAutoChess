@@ -1328,7 +1328,8 @@ const SPECIAL_SKILL = Object.freeze({
   FREEZE: 'FREEZE',
   PROTECT: 'PROTECT',
   POISON: 'POISON',
-  CONFUSION: 'CONFUSION'
+  CONFUSION: 'CONFUSION',
+  ORIGIN_PULSE: 'ORIGIN_PULSE'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
@@ -1606,6 +1607,18 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Deals 20/30/40 special damage and restores 10 mana to friendly pokemons',
       esp: 'Hace 20/30/40 de daño especial y devuelve 10 de maná a los pokemons amistosos.',
       fra:'Fait 20/30/40 dégats spéciaux et restaure 10 mana à chaque pokémon allié.'
+    }
+  },
+  ORIGIN_PULSE: {
+    title:{
+      eng: 'Origin Pulse',
+      esp: 'Pulso Primigenio',
+      fra: 'Onde Originelle'
+    },
+    description:{
+      eng: 'A wave travels horizontally across the battlefield doing 60 magic damage',
+      esp: 'Una ola viaja horizontalmente por el campo de batalla haciendo 60 de daño mágico.',
+      fra:'Une vague parcourt horizontalement le champ de bataille faisant 60 dégats magiques'
     }
   },
   IRON_TAIL: {

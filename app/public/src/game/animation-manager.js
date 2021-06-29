@@ -442,6 +442,14 @@ export default class AnimationManager {
       frameRate: 3,
       repeat: 0
     });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.ORIGIN_PULSE,
+      frames: this.game.anims.generateFrameNames('june', {start: 0, end: 6, prefix: `${SPECIAL_SKILL.ORIGIN_PULSE}/`}),
+      frameRate: 12,
+      repeat: -1,
+      yoyo: true
+    });
   }
 
   createAttacksAnimations() {
