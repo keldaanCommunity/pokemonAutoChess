@@ -32,7 +32,7 @@ class LoginPage {
       <button id="button-login" type="button" class="nes-btn is-warning" style="margin-top:20px;">Login</button>
     </div>
     </div>
-    <div class="nes-container with-title is-centered" style="width:20%; height:40%; margin:10px; background-color: rgba(255, 255, 255, .6);">
+    <div class="nes-container with-title is-centered" style="width:20%; height:45%; margin:10px; background-color: rgba(255, 255, 255, .6);">
     <p class="title">Media</p>
     
     <section class="icon-list" style="margin-bottom:15px;">
@@ -60,6 +60,7 @@ class LoginPage {
 
     <button type="button" class="nes-btn is-error" onclick="location.href = 'https://discord.gg/6JMS7tr';">Join Discord</button>
     <button style="margin-top:10px;" type="button" class="nes-btn is-warning" onclick="location.href = 'https://fr.tipeee.com/pokemon-auto-chess';">Donate</button>
+    <button style="margin-top:10px;" type="button" class="nes-btn" onclick="location.href = 'https://www.termsfeed.com/live/ddf4f373-8cdf-4efd-a547-c2a8e0a22a9a';">Privacy Policy</button>
     <p style="margin-top:10px;">This is a non profit game. Only made by fans for fans.</p>
     </div>
     <img src="assets/ui/chrysacier.gif" style="position:absolute; top:160px; left:580px;"/>
