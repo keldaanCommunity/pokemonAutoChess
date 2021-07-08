@@ -36,6 +36,24 @@ class OriginPulseStrategy extends AttackStrategy {
   }
 }
 
+class SeedFlareStrategy extends AttackStrategy{
+  constructor(){
+    super();
+  }
+
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let damage = 30;
+
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team) {
+        tg.speDef -= 1;
+        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+      }
+    });
+  }
+}
+
 class BurnStrategy extends AttackStrategy {
   constructor() {
     super();
@@ -1301,7 +1319,8 @@ class MetronomeStrategy extends AttackStrategy {
       ProtectStrategy,
       PoisonStrategy,
       SilenceStrategy,
-      OriginPulseStrategy
+      OriginPulseStrategy,
+      SeedFlareStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1357,5 +1376,6 @@ module.exports = {
   ProtectStrategy,
   PoisonStrategy,
   SilenceStrategy,
-  OriginPulseStrategy
+  OriginPulseStrategy,
+  SeedFlareStrategy
 };

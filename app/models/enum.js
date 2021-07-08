@@ -1329,7 +1329,8 @@ const SPECIAL_SKILL = Object.freeze({
   PROTECT: 'PROTECT',
   POISON: 'POISON',
   CONFUSION: 'CONFUSION',
-  ORIGIN_PULSE: 'ORIGIN_PULSE'
+  ORIGIN_PULSE: 'ORIGIN_PULSE',
+  SEED_FLARE:'SEED_FLARE'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
@@ -1612,13 +1613,25 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
   ORIGIN_PULSE: {
     title:{
       eng: 'Origin Pulse',
-      esp: 'Pulso Primigenio',
+      esp: 'Fogonazo',
       fra: 'Onde Originelle'
     },
     description:{
       eng: 'A wave travels horizontally across the battlefield doing 60 magic damage',
       esp: 'Una ola viaja horizontalmente por el campo de batalla haciendo 60 de daño mágico.',
       fra:'Une vague parcourt horizontalement le champ de bataille faisant 60 dégats magiques'
+    }
+  },
+  SEED_FLARE: {
+    title:{
+      eng: 'Seed Flare',
+      esp: 'Pulso Primigenio',
+      fra: 'Fulmigraine'
+    },
+    description:{
+      eng: 'Shaymins body emits a shock wave, dealing 30 magic damage to all ennemies, and decreasing their spedef by 2.',
+      esp: 'El cuerpo de Shaymin emite una onda de choque que inflige 30 de daño mágico a todos los enemigos y reduce su velocidad en 2.',
+      fra:'Le corps de Shaymin émet une onde de choc, infligeant 30 dégâts magiques à tous les ennemis et réduisant leur vitesse de 2.'
     }
   },
   IRON_TAIL: {

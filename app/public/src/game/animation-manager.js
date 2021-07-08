@@ -450,6 +450,13 @@ export default class AnimationManager {
       repeat: -1,
       yoyo: true
     });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.SEED_FLARE,
+      frames: this.game.anims.generateFrameNames('june', {start: 0, end: 9, prefix: `${SPECIAL_SKILL.SEED_FLARE}/`}),
+      frameRate: 12,
+      repeat: 0
+    });
   }
 
   createAttacksAnimations() {

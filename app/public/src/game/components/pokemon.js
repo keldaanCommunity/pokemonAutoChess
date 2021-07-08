@@ -144,6 +144,17 @@ export default class Pokemon extends Button {
             });
             break;
 
+          case SPECIAL_SKILL.SEED_FLARE:
+            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SEED_FLARE}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(5, 5);
+            specialProjectile.anims.play(SPECIAL_SKILL.SEED_FLARE);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
           case SPECIAL_SKILL.SEISMIC_TOSS:
             coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SEISMIC_TOSS}/000`);

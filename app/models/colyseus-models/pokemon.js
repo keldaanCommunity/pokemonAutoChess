@@ -1634,7 +1634,7 @@ class Deoxys extends Pokemon {
 
 class Shaymin extends Pokemon {
   constructor() {
-    super(PKM.SHAYMIN, 'shaymin',[TYPE.GRASS, TYPE.FLORA], RARITY.MYTHICAL, 'february', 492, '', 300, 30, 5, 5, 3, 'GRASS/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.SILENCE);
+    super(PKM.SHAYMIN, 'shaymin',[TYPE.GRASS, TYPE.FLORA], RARITY.MYTHICAL, 'february', 492, '', 300, 30, 5, 5, 3, 'GRASS/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.SEED_FLARE);
   }
 }
 

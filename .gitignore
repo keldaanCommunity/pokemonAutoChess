@@ -3,3 +3,7 @@ node_modules
 app/public/dist/**/*.js
 *.code-workspace
 db-commands/
+/app/public/dist/assets/tiles/newBackground.tmx
+/app/public/dist/assets/tiles/sleepBackground.json
+/app/public/dist/assets/tiles/sleepBackground.png
+/app/public/dist/assets/tiles/sleepBackgroundMirror.png

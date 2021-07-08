@@ -290,6 +290,9 @@ class PokemonFactory {
       case SPECIAL_SKILL.ORIGIN_PULSE:
         return new Strategy.OriginPulseStrategy();
         
+      case SPECIAL_SKILL.SEED_FLARE:
+        return new Strategy.SeedFlareStrategy();
+      
       case SPECIAL_SKILL.DEFAULT:
         return new Strategy.AttackStrategy();
 
