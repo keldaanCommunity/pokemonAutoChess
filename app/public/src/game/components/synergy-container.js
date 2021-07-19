@@ -97,10 +97,10 @@ export default class SynergyContainer extends Button {
     this.threshold = this.typeActivation[type];
     this.background = new GameObjects.Rectangle(scene, 0, 0, 110, 50, this.color).setVisible(false);
     this.add(this.background);
-    this.synergyCount = new GameObjects.Text(scene, 20, -15, '0', this.textStyle);
+    this.synergyCount = new GameObjects.Text(scene, 10, -15, '0', this.textStyle);
     this.synergyCount.setColor(this.colorText);
     this.add(this.synergyCount);
-    this.add(new GameObjects.Image(scene, -20, 0, 'types', type));
+    this.add(new GameObjects.Image(scene, -20, -2, 'types', type));
     this.detail = new SynergyDetail(scene, -380, 10, type);
     this.add(this.detail);
     this.setDepth(999);

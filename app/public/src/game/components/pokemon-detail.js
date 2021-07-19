@@ -60,8 +60,7 @@ export default class PokemonDetail extends GameObjects.Container {
     this.add(new GameObjects.Text(scene, 5, 20, displayName, this.textStyle));
     this.add(new GameObjects.Image(scene, 140, 40, this.pokemonInformation.sheet, `${this.pokemonInformation.index}/portrait`));
     for (let i = 0; i < this.pokemonInformation.types.length; i++) {
-      this.add(new GameObjects.Image(scene, 30*i +20, 60, 'hexagon').setScale(0.5, 0.5));
-      this.add(new GameObjects.Image(scene, 30*i +20, 60, 'types', this.pokemonInformation.types[i]).setScale(0.5, 0.5));
+      this.add(new GameObjects.Image(scene, 30*i +20, 60, 'types', this.pokemonInformation.types[i]));
     }
     this.add(new GameObjects.Image(scene, 140, 70, attackType).setScale(0.5, 0.5));
     this.hp = new GameObjects.Text(scene, 20, 80, hp, this.getColorStyle(this.pokemonInformation.hp, hp, false));
