@@ -10,12 +10,18 @@ const hooks = require('@colyseus/social').hooks;
 const socialMiddleware = require('@colyseus/social/express').default;
 const validator = require('email-validator');
 const basicAuth = require('express-basic-auth');
+const {WebSocketTransport} = require("@colyseus/ws-transport");
+
 
 const port = process.env.PORT || 9000;
 
 const app = express();
 const httpServer = http.createServer(app);
-const gameServer = new Colyseus.Server({server: httpServer});
+const gameServer = new Colyseus.Server({
+    transport: new WebSocketTransport({
+        server: httpServer
+    })
+});
 
 app.use(cors());
 app.use(helmet());
