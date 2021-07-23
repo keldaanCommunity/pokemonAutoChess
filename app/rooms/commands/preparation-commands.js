@@ -6,7 +6,7 @@ const POKEMON_BOT = require('../../models/enum').POKEMON_BOT;
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    this.state.users[client.auth._id.toHexString()] = new GameUser(client.auth._id.toHexString(), auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.elo, auth.metadata.avatar, false, false);
+    this.state.users[client.auth.uid] = new GameUser(client.auth.uid, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.elo, auth.metadata.avatar, false, false);
     this.room.broadcast('messages', {
       'name': 'Server',
       'payload': `${ auth.email.split('@')[0] } joined.`,
@@ -54,17 +54,17 @@ class OnLeaveCommand extends Command {
   execute({client, consented}) {
     this.room.broadcast('messages', {
       'name': 'Server',
-      'payload': `${ this.state.users[client.auth._id.toHexString()].name } left.`,
+      'payload': `${ this.state.users[client.auth.uid].name } left.`,
       'avatar': 'magnemite',
       'time':Date.now()
     });
-    delete this.state.users[''+client.auth._id.toHexString()];
+    delete this.state.users[''+client.auth.uid];
   }
 }
 
 class OnToggleReadyCommand extends Command {
   execute(client) {
-    this.state.users[client.auth._id.toHexString()].ready = !this.state.users[client.auth._id.toHexString()].ready;
+    this.state.users[client.auth.uid].ready = !this.state.users[client.auth.uid].ready;
   }
 }
 

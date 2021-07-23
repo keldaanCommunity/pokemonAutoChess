@@ -29,7 +29,6 @@
   "dependencies": {
     "@colyseus/command": "^0.1.5",
     "@colyseus/monitor": "^0.14.3",
-    "@colyseus/social": "^0.11.6",
     "@colyseus/ws-transport": "^0.14.20",
     "bad-words": "^3.0.4",
     "colyseus": "^0.14.20",
@@ -44,6 +43,7 @@
     "express-rate-limit": "^5.2.6",
     "firebase": "^8.7.1",
     "firebase-admin": "^9.11.0",
+    "firebaseui": "^4.8.1",
     "helmet": "^3.23.3",
     "mongoose": "^5.12.0",
     "nes.css": "^2.3.0",

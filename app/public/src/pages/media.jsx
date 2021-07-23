@@ -4,9 +4,17 @@ import React, { Component } from 'react';
 class Media extends Component {
   render() {
     return (
-        <div className="nes-container with-title is-centered" style={{backgroundColor: 'rgba(255, 255, 255, .6)', width:'30%'}}>
-            <p className="title">Media</p>
-            
+        <div className="nes-container" style={{
+          backgroundColor: 'rgba(255, 255, 255, .6)',
+           width:'100%',
+           bottom:'0px',
+           height:'100px',
+           display:'flex',
+           padding:'5px',
+           alignItems:'center',
+           justifyContent:'space-between',
+           position:'absolute'
+           }}>
             <section className="icon-list" style={{marginBottom:'15px'}}>
                 <a href="https://www.facebook.com/Pok%C3%A9mon-Auto-Chess-Espa%C3%B1ol-108035354419173">
                 <i className="nes-icon facebook is-large"></i>
@@ -26,10 +34,12 @@ class Media extends Component {
 
             </section>
 
-            <button type="button" className="nes-btn is-error" onClick={this.handleDiscordClick.bind(this)}>Join Discord</button>
+            <p>This is a non profit game. Only made by fans for fans.</p>
+
+            <button type="button" className="nes-btn is-primary" onClick={this.handleDiscordClick.bind(this)}>Join Discord</button>
             <button  type="button" onClick={this.handleTipeeClick.bind(this)} className="nes-btn is-warning">Donate</button>
             <button  type="button" className="nes-btn" onClick={this.handlePrivacyPolicyClick.bind(this)}>Privacy Policy</button>
-            <p>This is a non profit game. Only made by fans for fans.</p>
+
         </div>
     );
   }

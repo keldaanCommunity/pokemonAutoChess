@@ -1,14 +1,13 @@
 const colyseus = require('colyseus');
-const social = require('@colyseus/social');
 const {Dispatcher} = require('@colyseus/command');
 const GameState = require('./states/game-state');
 const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
 const Statistic = require('../models/mongo-models/statistic');
-const User = require('@colyseus/social').User;
 const EloBot = require('../models/mongo-models/elo-bot');
 const {POKEMON_BOT, XP_PLACE, XP_TABLE} = require('../models/enum');
 const EloRank = require('elo-rank');
+
 
 class GameRoom extends colyseus.Room {
   constructor() {
@@ -34,7 +33,7 @@ class GameRoom extends colyseus.Room {
     this.onMessage('shop', (client, message) => {
       if(!this.state.gameFinished){
         this.dispatcher.dispatch(new Commands.OnShopCommand(), {
-          id: client.auth._id.toHexString(),
+          id: client.auth.uid,
           index: message.id
         });
       }
@@ -60,19 +59,19 @@ class GameRoom extends colyseus.Room {
 
     this.onMessage('refresh', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnRefreshCommand(), client.auth._id.toHexString());
+        this.dispatcher.dispatch(new Commands.OnRefreshCommand(), client.auth.uid);
       }
     });
 
     this.onMessage('lock', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnLockCommand(), client.auth._id.toHexString());
+        this.dispatcher.dispatch(new Commands.OnLockCommand(), client.auth.uid);
       }
     });
 
     this.onMessage('levelUp', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnLevelUpCommand(), client.auth._id.toHexString());
+        this.dispatcher.dispatch(new Commands.OnLevelUpCommand(), client.auth.uid);
       }
     });
     

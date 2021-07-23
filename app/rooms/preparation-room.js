@@ -1,5 +1,4 @@
 const colyseus = require('colyseus');
-const social = require('@colyseus/social');
 const {Dispatcher} = require('@colyseus/command');
 const EloBot = require('../models/mongo-models/elo-bot');
 const PreparationState = require('./states/preparation-state');

@@ -3,8 +3,6 @@ const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY, PKM} = req
 const Player = require('../../models/colyseus-models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
-const Mongoose = require('mongoose');
-const User = require('@colyseus/social').User;
 
 class OnShopCommand extends Command {
   execute({id, index}) {
@@ -52,7 +50,7 @@ class OnDragDropCommand extends Command {
     let playerId;
 
     if(typeof client.auth._id == 'object'){
-      playerId = client.auth._id.toHexString();
+      playerId = client.auth.uid;
     }
     else{
       playerId = client.auth._id;
@@ -291,10 +289,10 @@ class OnDragDropCommand extends Command {
 
 class OnSellDropCommand extends Command {
   execute({client, detail}) {
-    if (this.state.players.has(client.auth._id.toHexString()) &&
-      this.state.players.get(client.auth._id.toHexString()).board.has(detail.pokemonId)) {
-      const pokemon = this.state.players.get(client.auth._id.toHexString()).board.get(detail.pokemonId);
-      const player = this.state.players.get(client.auth._id.toHexString());
+    if (this.state.players.has(client.auth.uid) &&
+      this.state.players.get(client.auth.uid).board.has(detail.pokemonId)) {
+      const pokemon = this.state.players.get(client.auth.uid).board.get(detail.pokemonId);
+      const player = this.state.players.get(client.auth.uid);
       player.money += COST[pokemon.rarity] * pokemon.stars;
 
       if (pokemon.items.item0 != '') {
@@ -350,8 +348,8 @@ class OnLevelUpCommand extends Command {
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    this.state.players.set(client.auth._id.toHexString(), new Player(
-        client.auth._id.toHexString(),
+    this.state.players.set(client.auth.uid, new Player(
+        client.auth.uid,
         auth.email.slice(0, auth.email.indexOf('@')),
         client.auth.metadata.elo,
         client.auth.metadata.avatar,
@@ -361,7 +359,7 @@ class OnJoinCommand extends Command {
         auth.email,
         this.state.players.size + 1
     ));
-    this.state.shop.assignShop(this.state.players.get(client.auth._id.toHexString()));
+    this.state.shop.assignShop(this.state.players.get(client.auth.uid));
     if (this.state.players.size >= 8) {
       // console.log('game elligible to xp');
       this.state.elligibleToXP = true;

@@ -6,14 +6,29 @@ const cors = require('cors');
 const helmet = require('helmet');
 const Colyseus = require('colyseus');
 const monitor = require('@colyseus/monitor').monitor;
-const hooks = require('@colyseus/social').hooks;
-const socialMiddleware = require('@colyseus/social/express').default;
-const validator = require('email-validator');
 const basicAuth = require('express-basic-auth');
 const {WebSocketTransport} = require("@colyseus/ws-transport");
+const admin = require('firebase-admin');
 
 
 const port = process.env.PORT || 9000;
+
+const firebaseKey = {
+  "type": process.env.TYPE,
+  "project_id": process.env.PROJECT_ID,
+  "private_key_id": process.env.PRIVATE_KEY_ID,
+  "private_key": process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
+  "client_email": process.env.CLIENT_EMAIL,
+  "client_id": process.env.CLIENT_ID,
+  "auth_uri": process.env.AUTH_URI,
+  "token_uri": process.env.TOKEN_URI,
+  "auth_provider_x509_cert_url": process.env.AUTH_PROVIDER_X509_CERT_URL,
+  "client_x509_cert_url": process.env.CLIENT_X509_CERT_URL
+}
+
+admin.initializeApp({
+  credential: admin.credential.cert(firebaseKey)
+});
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -27,10 +42,6 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public', 'dist')));
-
-// Routing
-
-app.use('/', socialMiddleware);
 
 // set up rate limiter: maximum of five requests per minute
 var RateLimit = require('express-rate-limit');
@@ -51,43 +62,10 @@ const basicAuthMiddleware = basicAuth({
   users: {
     'admin': process.env.ADMIN_PASSWORD
   },
-  // sends WWW-Authenticate header, which will prompt the user to fill
-  // credentials in
   challenge: true
 });
 
 app.use('/colyseus', basicAuthMiddleware, monitor());
-
-hooks.beforeAuthenticate((provider, $setOnInsert, $set) => {
-  if (provider == 'email' && !validator.validate($set.email)) {
-    throw new Error('email is not valid');
-  };
-
-  $setOnInsert.metadata = {
-    avatar: 'rattata',
-    wins: 0,
-    exp: 0,
-    level: 0,
-    elo: 1000,
-    donor: false,
-    mapWin: {
-      ICE: 0,
-      FIRE: 0,
-      GROUND: 0,
-      NORMAL: 0,
-      GRASS: 0,
-      WATER: 0
-    },
-    map:{
-      ICE: 'ICE0',
-      FIRE: 'FIRE0',
-      GROUND: 'GROUND0',
-      NORMAL: 'NORMAL0',
-      GRASS: 'GRASS0',
-      WATER: 'WATER0'
-    }
-  };
-});
 
 // Room
 const AfterGameRoom = require('./rooms/after-game-room');
