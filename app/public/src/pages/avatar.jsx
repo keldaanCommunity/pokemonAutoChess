@@ -9,7 +9,7 @@ class Avatar extends Component{
             textAlign:'center',
             width:'100px'
             }}>
-            <img src={"assets/avatar/" + this.props.avatar + ".png"}/>
+            <img src={"/assets/avatar/" + this.props.avatar + ".png"}/>
             <p>{this.props.name} {elo}</p>
         </div>;
     }

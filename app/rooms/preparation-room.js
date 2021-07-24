@@ -4,6 +4,7 @@ const EloBot = require('../models/mongo-models/elo-bot');
 const PreparationState = require('./states/preparation-state');
 const Mongoose = require('mongoose');
 const Filter = require('bad-words');
+const admin = require('firebase-admin');
 const {
   OnGameStartCommand,
   OnJoinCommand,
@@ -49,7 +50,7 @@ class PreparationRoom extends colyseus.Room {
     this.onMessage('toggle-ready', (client, message) => {
       this.dispatcher.dispatch(new OnToggleReadyCommand(), client);
     });
-    this.onMessage('messages', (client, message) => {
+    this.onMessage('new-message', (client, message) => {
       this.dispatcher.dispatch(new OnMessageCommand(), {client, message});
     });
     this.onMessage('addBot', (client, message) => {
@@ -61,8 +62,8 @@ class PreparationRoom extends colyseus.Room {
   }
 
   async onAuth(client, options, request) {
-    const token = social.verifyToken(options.token);
-    const user = await social.User.findById(token._id);
+    const token = await admin.auth().verifyIdToken(options.idToken);
+    const user = await admin.auth().getUser(token.uid);
     return user;
   }
 

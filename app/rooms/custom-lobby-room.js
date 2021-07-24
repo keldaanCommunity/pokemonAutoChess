@@ -68,6 +68,8 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           }
         }
       });
+      
+      /*
       Statistic.find({'time':{$gt: Date.now() - 2592000000}}, (err, stats)=>{
 
         if(stats.length != 0){
@@ -149,7 +151,9 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           }
         }
       });
+          */
     });
+
 
     this.onMessage('new-message', (client, message) => {
       this.state.addMessage(message.name, message.payload, message.avatar, Date.now(), true);

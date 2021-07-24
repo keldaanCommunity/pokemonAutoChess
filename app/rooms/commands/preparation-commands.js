@@ -1,21 +1,26 @@
 const Command = require('@colyseus/command').Command;
 const uniqid = require('uniqid');
 const GameUser = require('../../models/colyseus-models/game-user');
+const UserMetadata = require('../../models/mongo-models/user-metadata');
 const BOT_AVATAR = require('../../models/enum').BOT_AVATAR;
 const POKEMON_BOT = require('../../models/enum').POKEMON_BOT;
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    this.state.users[client.auth.uid] = new GameUser(client.auth.uid, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.elo, auth.metadata.avatar, false, false);
-    this.room.broadcast('messages', {
-      'name': 'Server',
-      'payload': `${ auth.email.split('@')[0] } joined.`,
-      'avatar': auth.metadata.avatar,
-      'time': Date.now()
+    UserMetadata.findOne({'uid':auth.uid},(err, user)=>{
+      if(user){
+        this.state.users[client.auth.uid] = new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false);
+        this.room.broadcast('messages', {
+          'name': 'Server',
+          'payload': `${ user.displayName } joined.`,
+          'avatar': user.avatar,
+          'time': Date.now()
+        });
+        if (this.state.users.size > 8) {
+          return [new OnRemoveBotCommand()];
+        }
+      }
     });
-    if (this.state.users.size > 8) {
-      return [new OnRemoveBotCommand()];
-    }
   }
 }
 

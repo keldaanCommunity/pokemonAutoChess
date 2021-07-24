@@ -3,20 +3,28 @@ import RoomItem from './room-item';
 
 class RoomMenu extends Component{
     render(){
+
+        const ulStyle = {
+            listStyle: 'none',
+            padding: '0px'
+        };
+
         return <div className="nes-container" style={{
             backgroundColor: 'rgba(255, 255, 255, .6)',
-             margin:'10px'
+             margin:'10px',
+             display: 'flex',
+             flexFlow: 'column'
              }}>
             <h1>Available Rooms:</h1>
-             <ul>
+             <ul style={ulStyle}>
                  {this.props.allRooms.map(this.createItem.bind(this))}
              </ul>
-            <button className='nes-btn is-success'>Create room</button>
+            <button onClick={this.props.createRoom} className='nes-btn is-success'>Create room</button>
         </div>;
     }
 
     createItem(i){
-        return <li key={i.id}><RoomItem/></li>
+        return <li key={i.roomId}><RoomItem id={i.roomId} clients={i.clients} maxClients={i.maxClients}/></li>
     }
 }
 
