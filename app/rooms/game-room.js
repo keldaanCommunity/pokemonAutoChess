@@ -7,6 +7,7 @@ const Statistic = require('../models/mongo-models/statistic');
 const EloBot = require('../models/mongo-models/elo-bot');
 const {POKEMON_BOT, XP_PLACE, XP_TABLE} = require('../models/enum');
 const EloRank = require('elo-rank');
+const admin = require('firebase-admin');
 
 
 class GameRoom extends colyseus.Room {
@@ -87,13 +88,13 @@ class GameRoom extends colyseus.Room {
   }
 
   async onAuth(client, options, request) {
-    const token = social.verifyToken(options.token);
-    const user = await social.User.findById(token._id);
+    const token = await admin.auth().verifyIdToken(options.idToken);
+    const user = await admin.auth().getUser(token.uid);
     return user;
   }
 
   onJoin(client, options, auth) {
-    console.log(`${client.auth.email} join game room`);
+    console.log(`${client.auth.displayName} join game room`);
     this.dispatcher.dispatch(new Commands.OnJoinCommand(), {client, options, auth});
   }
 

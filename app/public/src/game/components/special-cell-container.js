@@ -2,9 +2,9 @@ import Button from './button';
 import {GameObjects} from 'phaser';
 
 export default class SpecialCellContainer extends Button {
-  constructor(scene, x, y) {
+  constructor(scene, x, y, mapType) {
     super(scene, x, y, 50, 50);
-    this.sprite = new GameObjects.Sprite(scene, 0, 0, 'attacks', `${window.state.mapType}/cell/000`);
+    this.sprite = new GameObjects.Sprite(scene, 0, 0, 'attacks', `${mapType}/cell/000`);
     this.add(this.sprite);
     scene.add.existing(this);
   }

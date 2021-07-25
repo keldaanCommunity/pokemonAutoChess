@@ -15,12 +15,21 @@ import MapNameButton from '../components/map-name-button';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
 import {WORDS, PHASE_TRADUCTION, MAP_TYPE_NAME} from '../../../../models/enum';
+import firebase from 'firebase/app';
+import { transformAttackCoordinate, getOrientation } from '../../utils';
+
 
 export default class GameScene extends Scene {
   constructor() {
     super({
-      key: 'gameScene'
+      key: 'gameScene',
+      active: false
     });
+  }
+
+  init(room){
+    this.room = room;
+    this.uid = firebase.auth().currentUser.uid;
   }
 
   preload() {
@@ -91,55 +100,57 @@ export default class GameScene extends Scene {
       assetText.destroy();
     });
 
-    let chosenTileset = `${window.state.mapType}0`;
-    if(_client.auth.metadata.map[window.state.mapType]){
-      chosenTileset = _client.auth.metadata.map[window.state.mapType];
+    let chosenTileset = `${this.room.state.mapType}0`;
+    /*
+    if(this.uid.auth.metadata.map[this.room.state.mapType]){
+      chosenTileset = this.uid.auth.metadata.map[this.room.state.mapType];
     }
+    */
 
     console.log(chosenTileset);
-    this.load.audioSprite('sounds', `assets/sounds/${window.state.mapType}.json`, [`assets/sounds/${window.state.mapType}.mp3`]);
-    this.load.image('tiles', `assets/tiles/${window.state.mapType}/${chosenTileset}.png`);
-    this.load.tilemapTiledJSON('map', `assets/tiles/${window.state.mapType}/${window.state.mapType}.json`);
-    this.load.image('hexagon', 'assets/ui/hexagon.png');
-    this.load.image('rain', 'assets/ui/rain.png');
-    this.load.image('sand', 'assets/ui/sand.png');
-    this.load.image('sun', 'assets/ui/sun.png');
-    this.load.image('socle', 'assets/ui/socle.png');
-    this.load.image('PHYSICAL', 'assets/types/PHYSICAL.png');
-    this.load.image('SPECIAL', 'assets/types/SPECIAL.png');
-    this.load.image('TRUE','assets/types/TRUE.png');
-    this.load.image('detail','assets/ui/detail.png','assets/ui');
-    this.load.image('littleDetail', 'assets/ui/detail-little.png', 'assets/ui');
-    this.load.multiatlas('sleep','assets/pokemons/sleep/sleep.json', 'assets/pokemons/sleep');
-    this.load.multiatlas('snowflakes', 'assets/ui/snowflakes.json', 'assets/ui/');
-    this.load.multiatlas('status', 'assets/status/status.json', 'assets/status/');
-    this.load.multiatlas('icons', 'assets/ui/icons.json', 'assets/ui/');
-    this.load.multiatlas('items', 'assets/items/items.json', 'assets/items/');
-    this.load.multiatlas('lock', 'assets/lock/lock.json', 'assets/lock/');
-    this.load.multiatlas('rarity', 'assets/rarity/rarity.json', 'assets/rarity');
-    this.load.multiatlas('types', 'assets/types/types.json', 'assets/types');
-    this.load.multiatlas('december', 'assets/pokemons/december/december.json', 'assets/pokemons/december/');
-    this.load.multiatlas('february', 'assets/pokemons/february/february.json', 'assets/pokemons/february/');
-    this.load.multiatlas('april', 'assets/pokemons/april/april.json', 'assets/pokemons/april/');
-    this.load.multiatlas('COMMON', 'assets/pokemons/common/common.json', 'assets/pokemons/common');
-    this.load.multiatlas('NEUTRAL', 'assets/pokemons/neutral/neutral.json', 'assets/pokemons/neutral');
-    this.load.multiatlas('UNCOMMON', 'assets/pokemons/uncommon/uncommon.json', 'assets/pokemons/uncommon');
-    this.load.multiatlas('RARE', 'assets/pokemons/rare/rare.json', 'assets/pokemons/rare');
-    this.load.multiatlas('EPIC', 'assets/pokemons/epic/epic.json', 'assets/pokemons/epic');
-    this.load.multiatlas('EPIC2', 'assets/pokemons/epic/epic2.json', 'assets/pokemons/epic');
-    this.load.multiatlas('UNCOMMON2', 'assets/pokemons/uncommon/uncommon2.json', 'assets/pokemons/uncommon');
-    this.load.multiatlas('LEGENDARY', 'assets/pokemons/legendary/legendary.json', 'assets/pokemons/legendary');
-    this.load.multiatlas('attacks', 'assets/attacks/attacks.json', 'assets/attacks');
-    this.load.multiatlas('specials', 'assets/attacks/specials.json', 'assets/attacks');
-    this.load.multiatlas('june', 'assets/attacks/june.json', 'assets/attacks');
-    this.load.image('transition', 'assets/ui/transition.png');
-    this.load.image('money', 'assets/ui/money.png');
-    this.load.multiatlas('life', 'assets/ui/life.json', 'assets/ui');
+    this.load.audioSprite('sounds', `/assets/sounds/${this.room.state.mapType}.json`, [`/assets/sounds/${this.room.state.mapType}.mp3`]);
+    this.load.image('tiles', `/assets/tiles/${this.room.state.mapType}/${chosenTileset}.png`);
+    this.load.tilemapTiledJSON('map', `/assets/tiles/${this.room.state.mapType}/${this.room.state.mapType}.json`);
+    this.load.image('hexagon', '/assets/ui/hexagon.png');
+    this.load.image('rain', '/assets/ui/rain.png');
+    this.load.image('sand', '/assets/ui/sand.png');
+    this.load.image('sun', '/assets/ui/sun.png');
+    this.load.image('socle', '/assets/ui/socle.png');
+    this.load.image('PHYSICAL', '/assets/types/PHYSICAL.png');
+    this.load.image('SPECIAL', '/assets/types/SPECIAL.png');
+    this.load.image('TRUE','/assets/types/TRUE.png');
+    this.load.image('detail','/assets/ui/detail.png','/assets/ui');
+    this.load.image('littleDetail', '/assets/ui/detail-little.png', '/assets/ui');
+    this.load.multiatlas('sleep','/assets/pokemons/sleep/sleep.json', '/assets/pokemons/sleep');
+    this.load.multiatlas('snowflakes', '/assets/ui/snowflakes.json', '/assets/ui/');
+    this.load.multiatlas('status', '/assets/status/status.json', '/assets/status/');
+    this.load.multiatlas('icons', '/assets/ui/icons.json', '/assets/ui/');
+    this.load.multiatlas('items', '/assets/items/items.json', '/assets/items/');
+    this.load.multiatlas('lock', '/assets/lock/lock.json', '/assets/lock/');
+    this.load.multiatlas('rarity', '/assets/rarity/rarity.json', '/assets/rarity');
+    this.load.multiatlas('types', '/assets/types/types.json', '/assets/types');
+    this.load.multiatlas('december', '/assets/pokemons/december/december.json', '/assets/pokemons/december/');
+    this.load.multiatlas('february', '/assets/pokemons/february/february.json', '/assets/pokemons/february/');
+    this.load.multiatlas('april', '/assets/pokemons/april/april.json', '/assets/pokemons/april/');
+    this.load.multiatlas('COMMON', '/assets/pokemons/common/common.json', '/assets/pokemons/common');
+    this.load.multiatlas('NEUTRAL', '/assets/pokemons/neutral/neutral.json', '/assets/pokemons/neutral');
+    this.load.multiatlas('UNCOMMON', '/assets/pokemons/uncommon/uncommon.json', '/assets/pokemons/uncommon');
+    this.load.multiatlas('RARE', '/assets/pokemons/rare/rare.json', '/assets/pokemons/rare');
+    this.load.multiatlas('EPIC', '/assets/pokemons/epic/epic.json', '/assets/pokemons/epic');
+    this.load.multiatlas('EPIC2', '/assets/pokemons/epic/epic2.json', '/assets/pokemons/epic');
+    this.load.multiatlas('UNCOMMON2', '/assets/pokemons/uncommon/uncommon2.json', '/assets/pokemons/uncommon');
+    this.load.multiatlas('LEGENDARY', '/assets/pokemons/legendary/legendary.json', '/assets/pokemons/legendary');
+    this.load.multiatlas('attacks', '/assets/attacks/attacks.json', '/assets/attacks');
+    this.load.multiatlas('specials', '/assets/attacks/specials.json', '/assets/attacks');
+    this.load.multiatlas('june', '/assets/attacks/june.json', '/assets/attacks');
+    this.load.image('transition', '/assets/ui/transition.png');
+    this.load.image('money', '/assets/ui/money.png');
+    this.load.multiatlas('life', '/assets/ui/life.json', '/assets/ui');
   }
 
   create() {
 
-    window.textStyle = {
+    this.textStyle = {
       fontSize: '35px',
       fontFamily: "Verdana",
       color: 'white',
@@ -149,7 +160,7 @@ export default class GameScene extends Scene {
       wordWrap: { width: 200, useAdvancedWrap: true }
     };
 
-    window.bigTextStyle = {
+    this.bigTextStyle = {
       fontSize: '80px',
       fontFamily: "'Press Start 2P'",
       color: 'white',
@@ -162,43 +173,43 @@ export default class GameScene extends Scene {
 
     this.input.dragDistanceThreshold = 1;
     this.map = this.make.tilemap({key: 'map'});
-    const tileset = this.map.addTilesetImage(window.state.mapType, 'tiles', 24, 24, 1, 1);
+    const tileset = this.map.addTilesetImage(this.room.state.mapType, 'tiles', 24, 24, 1, 1);
     this.map.createLayer('World', tileset, 0, 0);
 
     this.battle = this.add.group();
-    window.animationManager = new AnimationManager(this);
-    this.shopContainer = new ShopContainer(this, 470, 912);
-    this.playerContainer = new PlayerContainer(this, 1800, 70);
-    this.synergiesContainer = new SynergiesContainer(this, 1290, 135, window.state.players[_client.auth._id]);
-    this.dpsMeterContainer = new DpsMeterContainer(this, 1520, 135, window.state.players[_client.auth._id]);
+    this.animationManager = new AnimationManager(this, this.room.state.mapType);
+    this.shopContainer = new ShopContainer(this, 470, 912, this.room.state.players[this.uid]);
+    this.playerContainer = new PlayerContainer(this, 1800, 70, this.room.state.players);
+    this.synergiesContainer = new SynergiesContainer(this, 1290, 135, this.room.state.players[this.uid]);
+    this.dpsMeterContainer = new DpsMeterContainer(this, 1520, 135, this.room.state.players[this.uid]);
     this.itemsContainer = new ItemsContainer(this, 66, 430);
-    this.moneyContainer = new MoneyContainer(this, 10, 60, window.state.players[_client.auth._id]);
-    this.boardManager = new BoardManager(this, window.state.players[_client.auth._id]);
-    this.battleManager = new BattleManager(this, this.battle, window.state.players[_client.auth._id]);
+    this.moneyContainer = new MoneyContainer(this, 10, 60, this.room.state.players[this.uid]);
+    this.boardManager = new BoardManager(this, this.room.state.players[this.uid]);
+    this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid]);
     this.weatherManager = new WeatherManager(this);
     this.entryHazardsManager = new EntryHazardsManager(this, this.map, tileset);
     this.leaveButton = new LeaveButton(this, 1750, 30);
-    this.pokemon = this.add.existing(new Pokemon(this, 130, 640, PokemonFactory.createPokemonFromName(window.state.players[_client.auth._id].avatar), false));
-    window.animationManager.animatePokemon(this.pokemon);
+    this.pokemon = this.add.existing(new Pokemon(this, 130, 640, PokemonFactory.createPokemonFromName(this.room.state.players[this.uid].avatar), false));
+    this.animationManager.animatePokemon(this.pokemon);
 
-    this.mapName = new MapNameButton(this, 120, 330, window.state.mapType, window.langage);
-    this.nameText = this.add.text(10, 20, window.state.players[_client.auth._id].name.slice(0, 8), window.textStyle);
-    this.phaseText = this.add.text(860, 25, window.state.players[_client.auth._id].phase, window.textStyle);
-    this.turnText = this.add.text(565, 25, window.state.stageLevel, window.textStyle);
-    this.add.text(460, 25, WORDS.TURN[window.langage], window.textStyle);
-    this.timeText = this.add.text(685, 25, window.state.roundTime, window.textStyle);
-    this.add.text(735, 25, 's', window.textStyle);
-    this.lastBattleResult = this.add.text(1040, 25, window.state.players[_client.auth._id].lastBattleResult, window.textStyle);
-    this.countdownText = this.add.text(700, 300, window.state.players[_client.auth._id].lastBattleResult, window.bigTextStyle);
+    this.mapName = new MapNameButton(this, 120, 330, this.room.state.mapType, 'eng');
+    this.nameText = this.add.text(10, 20, this.room.state.players[this.uid].name.slice(0, 8), this.textStyle);
+    this.phaseText = this.add.text(860, 25, this.room.state.players[this.uid].phase, this.textStyle);
+    this.turnText = this.add.text(565, 25, this.room.state.stageLevel, this.textStyle);
+    this.add.text(460, 25, WORDS.TURN['eng'], this.textStyle);
+    this.timeText = this.add.text(685, 25, this.room.state.roundTime, this.textStyle);
+    this.add.text(735, 25, 's', this.textStyle);
+    this.lastBattleResult = this.add.text(1040, 25, this.room.state.players[this.uid].lastBattleResult, this.textStyle);
+    this.countdownText = this.add.text(700, 300, this.room.state.players[this.uid].lastBattleResult, this.bigTextStyle);
     this.countdownText.setAlpha(0);
-    this.boardSizeText = this.add.text(300, 25, Object.keys(window.state.players[_client.auth._id].boardSize).length, window.textStyle);
-    this.add.text(325, 25, '/', window.textStyle);
-    this.maxBoardSizeText = this.add.text(350, 25, window.state.players[_client.auth._id].experienceManager.level, window.textStyle);
+    this.boardSizeText = this.add.text(300, 25, Object.keys(this.room.state.players[this.uid].boardSize).length, this.textStyle);
+    this.add.text(325, 25, '/', this.textStyle);
+    this.maxBoardSizeText = this.add.text(350, 25, this.room.state.players[this.uid].experienceManager.level, this.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
     this.transitionScreen.setAlpha(0);
     this.music = this.sound.addAudioSprite('sounds');
-    this.music.play(window.state.mapType, {
+    this.music.play(this.room.state.mapType, {
       mute: false,
       volume: 0.3,
       rate: 1,
@@ -208,15 +219,14 @@ export default class GameScene extends Scene {
       delay: 0
     });
     this.initilizeDragAndDrop();
-    window.initialized = true;
 
-    // console.log(window.state.mapType);
+    // console.log(this.room.state.mapType);
     const self = this;
-    window.state.specialCells.forEach((cell) => {
-      const coordinates = window.transformAttackCoordinate(cell.positionX, cell.positionY);
-      const sprite = new GameObjects.Sprite(self, coordinates[0], coordinates[1], 'attacks', `${window.state.mapType}/cell/000`);
+    this.room.state.specialCells.forEach((cell) => {
+      const coordinates = transformAttackCoordinate(cell.positionX, cell.positionY);
+      const sprite = new GameObjects.Sprite(self, coordinates[0], coordinates[1], 'attacks', `${this.room.state.mapType}/cell/000`);
       self.add.existing(sprite);
-      window.animationManager.playSpecialCells(sprite);
+      this.animationManager.playSpecialCells(sprite);
     });
 
   }
@@ -249,13 +259,13 @@ export default class GameScene extends Scene {
   }
 
   updateTime() {
-    this.timeText.setText(window.state.roundTime);
+    this.timeText.setText(this.room.state.roundTime);
   }
 
   updatePhase() {
     this.dpsMeterContainer.maxDamage = 0;
-    this.phaseText.setText(PHASE_TRADUCTION[window.state.phase][window.langage]);
-    if (window.state.phase == 'FIGHT') {
+    this.phaseText.setText(PHASE_TRADUCTION[this.room.state.phase]['eng']);
+    if (this.room.state.phase == 'FIGHT') {
       this.boardManager.battleMode();
       // this.music.play('battle-1');
     } else {
@@ -301,8 +311,8 @@ export default class GameScene extends Scene {
     this.input.on('pointerdown', (pointer) => {
       if (pointer.rightButtonDown()) {
         // console.log(this.pokemon);
-        this.pokemon.orientation = window.getOrientation(this.pokemon.x, this.pokemon.y, pointer.x, pointer.y);
-        window.animationManager.animatePokemon(this.pokemon);
+        this.pokemon.orientation = getOrientation(this.pokemon.x, this.pokemon.y, pointer.x, pointer.y);
+        this.animationManager.animatePokemon(this.pokemon);
         this.pokemon.moveManager.moveTo(pointer.x, pointer.y);
       }
       else{
@@ -371,10 +381,5 @@ export default class GameScene extends Scene {
         gameObject.y = gameObject.input.dragStartY;
       }
     });
-  }
-
-  showPopup(message){
-    console.log(message);
-    window.addLabel(message.title, message.info);
   }
 }

@@ -1,27 +1,84 @@
+ export function transformCoordinate(x,y){
+  return [382 + 96 * x, 808 - 120 * y];
+ };
 
-function hash(str) {
-  let h = 0x811c9dc5;
-  for (let i = 0, l = str.length; i < l; i++) {
-    h ^= str.charCodeAt(i);
-    h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24) | 0;
-  }
-  return h >>> 0;
-}
+ export function transformAttackCoordinate(x,y){
+  return [382 + 96 * x, 712 - 120 * y];
+ }
 
-export function insertScriptFile(doc, src) {
-  const id = hash(src).toString(36);
-  if (document.getElementById(id)) {
-    console.log('script already exists:', src);
-    return new Promise((resolve, reject) => resolve());
+ export function getOrientation(x1, y1, x2, y2){
+  let angle = Math.atan2(y2 - y1, x2 - x1);
+  if (angle < 0) {
+    angle += 2 * Math.PI;
   }
-  const script = doc.createElement('script');
-  script.setAttribute('type', 'text/javascript');
-  script.setAttribute('src', src);
-  script.setAttribute('id', id);
-  const p = new Promise((resolve, reject) => {
-    script.onload = resolve;
-    script.onerror = reject;
-  });
-  doc.getElementsByTagName('head')[0].appendChild(script);
-  return p;
-}
+  const quarterPi = Math.PI / 4;
+  // console.log(angle);
+  if (angle < quarterPi) {
+    return ORIENTATION.RIGHT;
+  } else if (angle < 2 * quarterPi) {
+    return ORIENTATION.DOWNRIGHT;
+  } else if (angle < 3 * quarterPi) {
+    return ORIENTATION.DOWN;
+  } else if (angle < 4 * quarterPi) {
+    return ORIENTATION.DOWNLEFT;
+  } else if (angle < 5 * quarterPi) {
+    return ORIENTATION.LEFT;
+  } else if (angle < 6 * quarterPi) {
+    return ORIENTATION.UPLEFT;
+  } else if (angle < 7 * quarterPi) {
+    return ORIENTATION.UP;
+  } else if (angle < 8 * quarterPi) {
+    return ORIENTATION.UPRIGHT;
+  } else {
+    return ORIENTATION.RIGHT;
+  }
+ }
+
+ export function getAttackScale(attackSprite){
+  switch (attackSprite) {
+    case 'FLYING/range':
+      return [1.5, 1.5];
+
+    case 'FLYING/melee':
+      return [1.5, 1.5];
+
+    case 'BUG/melee':
+      return [1.5, 1.5];
+
+    case 'FAIRY/range':
+      return [1.5, 1.5];
+
+    case 'GRASS/range':
+      return [3, 3];
+
+    case 'GRASS/melee':
+      return [2, 2];
+
+    case 'POISON/range':
+      return [1.5, 1.5];
+
+    case 'POISON/melee':
+      return [1, 1];
+
+    case 'WATER/range':
+      return [3, 3];
+
+    case 'FIRE/melee':
+      return [2, 2];
+
+    case 'ROCK/melee':
+      return [2, 2];
+
+    case 'ELECTRIC/melee':
+      return [2, 2];
+
+    case 'PSYCHIC/range':
+      return [2, 2];
+
+    case 'DRAGON/melee':
+      return [2, 2];
+
+    default:
+      return [2, 2];
+  }
+ }

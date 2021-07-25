@@ -11,10 +11,11 @@ export default class Chat extends React.Component {
    
     return <div className="nes-container" style={{
         backgroundColor: 'rgba(255, 255, 255, .6)',
-         margin:'10px'
+         margin:'10px',
+         overflow:'scroll'
          }}>
             <ChatHistory messages={this.props.messages}/>
-            <form onSubmit={this.props.handleSubmit}>
+            <form onSubmit={this.props.handleSubmit} style={{display:'flex'}}>
               <div className="nes-field" style={{width: '80%'}}>
                 <input id="name_field" type="text" className="nes-input" onChange={this.props.setCurrentText} value={this.props.currentText} />
               </div>

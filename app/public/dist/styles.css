@@ -6,42 +6,12 @@ body {
   background-image: url("assets/ui/background.png");
 }
 
-
-#home{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-header {
+#root{
   width: 100vw;
+  height: 100vh;
 }
 
-/* LOBBY */
-
-#lobby {
-  display: flex;
-  flex-flow: column nowrap;
-  width: 100%;
-  height: 100%;
-}
-
-/*PRE GAME */
-
-#pre-game {
-  display: flex;
-  flex-flow: column nowrap;
-  width: 100%;
-  height: 100%;
-}
-
-.invisibleButton{
-  background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+.App{
+  width: 100vw;
+  height: 100vh;
 }

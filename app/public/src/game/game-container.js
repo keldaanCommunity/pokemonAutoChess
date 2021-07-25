@@ -2,13 +2,15 @@ import GameScene from './scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
 import WebFontLoaderPlugin from 'phaser3-rex-plugins/plugins/webfontloader-plugin.js';
 import {MAP_TYPE, LAST_BATTLE_RESULT_TRADUCTION, WORDS} from '../../../models/enum.js';
+import {transformCoordinate} from '../utils';
 
 class GameContainer {
-  constructor(room, div) {
-    this.room = room;
+  constructor(div, uid) {
+    this.room = window._room;
     this.div = div;
     this.game = null;
     this.player = null;
+    this.uid = uid;
     this.initialize();
   }
 
@@ -39,14 +41,16 @@ class GameContainer {
         }]
       }
     };
-    window.state = this.room.state;
     this.game = new Phaser.Game(config);
+    this.game.scene.start('gameScene', this.room);
   }
 
   initializeEvents() {
     // Room event listener
+    console.log('event');
     this.room.onStateChange.once((state) => {
-      window.state = state;
+      console.log('once');
+      this.initializeGame();
     });
 
     this.room.state.players.onAdd = (player) => this.initializePlayer(player);
@@ -65,6 +69,7 @@ class GameContainer {
       });
     };
     // Game event listener
+    /*
     document.getElementById('game').addEventListener('shop-click', (e) => this.onShopClick(e));
     document.getElementById('game').addEventListener('player-click', (e) => this.onPlayerClick(e));
     document.getElementById('game').addEventListener('refresh-click', (e) => this.onRefreshClick(e));
@@ -74,6 +79,7 @@ class GameContainer {
     document.getElementById('game').addEventListener('sell-drop', (e) => this.onSellDrop(e));
     document.getElementById('game').addEventListener('leave-game', (e) => this.onLeaveGame(e));
     document.getElementById('leave-button').addEventListener('click', (e) => this.onLeaveGame(e));
+    */
   }
 
   initializePlayer(player) {
@@ -232,13 +238,8 @@ class GameContainer {
   }
 
   handleRoomStateChange(change) {
-    if (change.field == 'mapType') {
-      const keys = Object.keys(MAP_TYPE);
-      if (keys.includes(change.value)) {
-        this.initializeGame();
-      }
-    }
-    if (window.state == null || this.game == null || this.game.scene == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').timeText == null) return;
+
+    if (this.room.state == null || this.game == null || this.game.scene == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').timeText == null) return;
     switch (change.field) {
       case 'roundTime':
         this.game.scene.getScene('gameScene').updateTime();
@@ -337,7 +338,7 @@ class GameContainer {
   }
 
   handleBoardPokemonAdd(player, pokemon) {
-    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
+    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
       this.game.scene.getScene('gameScene').boardManager.addPokemon(pokemon);
       if(pokemon.positionY != 0){
         this.game.scene.getScene('gameScene').synergiesContainer.enablePokemon(pokemon);
@@ -346,14 +347,14 @@ class GameContainer {
   }
 
   handleBoardPokemonRemove(player, pokemon) {
-    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
+    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
       this.game.scene.getScene('gameScene').boardManager.removePokemon(pokemon);
       this.game.scene.getScene('gameScene').synergiesContainer.disablePokemon(pokemon);
     }
   }
 
   handleBoardPokemonChange(player, pokemon, change) {
-    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
+    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
       this.game.scene.getScene('gameScene').boardManager.changePokemon(pokemon, change);
       if(pokemon.positionY == 0){
         this.game.scene.getScene('gameScene').synergiesContainer.disablePokemon(pokemon);
@@ -365,13 +366,13 @@ class GameContainer {
   }
 
   handleAddShopPokemon(player, pokemon, key) {
-    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && _client.auth._id == player.id) {
+    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && _client.auth._id == player.id) {
       this.game.scene.getScene('gameScene').shopContainer.addPortrait(pokemon, key);
     }
   }
 
   handleRemoveShopPokemon(player, index) {
-    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && _client.auth._id == player.id) {
+    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && _client.auth._id == player.id) {
       this.game.scene.getScene('gameScene').shopContainer.removePortrait(index);
     }
   }
@@ -427,7 +428,7 @@ class GameContainer {
       case 'lastBattleResult':
         if (_client.auth._id == player.id) {
           this.game.scene.getScene('gameScene').moneyContainer.onWonChange(change.value);
-          this.game.scene.getScene('gameScene').lastBattleResult.setText(LAST_BATTLE_RESULT_TRADUCTION[change.value][window.langage]);
+          this.game.scene.getScene('gameScene').lastBattleResult.setText(LAST_BATTLE_RESULT_TRADUCTION[change.value]['eng']);
         }
         break;
 
@@ -459,8 +460,8 @@ class GameContainer {
 
       case 'alive':
         if (_client.auth._id == player.id) {
-          let rankPhrase = `${WORDS.PLACE[window.langage]} no ${player.rank}`;
-          let titlePhrase = WORDS.RANKING[window.langage];
+          let rankPhrase = `${WORDS.PLACE['eng']} no ${player.rank}`;
+          let titlePhrase = WORDS.RANKING['eng'];
           if(!change.value){
             this.showPopup(titlePhrase, rankPhrase);
           }
@@ -471,7 +472,7 @@ class GameContainer {
 
   handleDragDropFailed(message) {
     if (message.updateBoard) {
-      const coordinates = window.transformCoordinate(window.lastDragDropPokemon.positionX, window.lastDragDropPokemon.positionY);
+      const coordinates = transformCoordinate(window.lastDragDropPokemon.positionX, window.lastDragDropPokemon.positionY);
       window.lastDragDropPokemon.x = coordinates[0];
       window.lastDragDropPokemon.y = coordinates[1];
     }
@@ -502,10 +503,10 @@ class GameContainer {
     const scene = this.game.scene.getScene('gameScene');
 
     // scene.fade();
-    scene.boardManager.setPlayer(window.state.players[event.detail.id]);
-    scene.battleManager.setPlayer(window.state.players[event.detail.id]);
-    scene.synergiesContainer.changePlayer(window.state.players[event.detail.id]);
-    scene.dpsMeterContainer.changePlayer(window.state.players[event.detail.id]);
+    scene.boardManager.setPlayer(this.room.state.players[event.detail.id]);
+    scene.battleManager.setPlayer(this.room.state.players[event.detail.id]);
+    scene.synergiesContainer.changePlayer(this.room.state.players[event.detail.id]);
+    scene.dpsMeterContainer.changePlayer(this.room.state.players[event.detail.id]);
   }
 
   onShopClick(event) {

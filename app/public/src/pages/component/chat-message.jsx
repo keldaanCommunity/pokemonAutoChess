@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '../avatar';
+import Avatar from './avatar';
 
 export default class ChatMessage extends React.Component{
     render() {

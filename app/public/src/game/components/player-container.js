@@ -2,10 +2,11 @@ import {GameObjects} from 'phaser';
 import PlayerPortraitContainer from './player-portrait-container';
 
 export default class PlayerContainer extends GameObjects.Container {
-  constructor(scene, x, y) {
+  constructor(scene, x, y, players) {
     super(scene, x, y);
+    this.players = players;
 
-    window.state.players.forEach((player, key) => {
+    this.players.forEach((player, key) => {
       this.addPlayer(player);
     });
 

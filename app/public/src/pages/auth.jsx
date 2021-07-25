@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Login from './login';
-import Media from './media';
+import Login from './component/login';
+import Media from './component/media';
 
 class Auth extends Component {
   render() {

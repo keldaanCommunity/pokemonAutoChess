@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import Chat from './chat/chat';
-import CurrentUsers from './current-users';
-import Leaderboard from './leaderboard';
-import RoomMenu from './room-menu';
+import Chat from './component/chat';
+import CurrentUsers from './component/current-users';
+import Leaderboard from './component/leaderboard';
+import RoomMenu from './component/room-menu';
 import firebase from 'firebase/app';
 
 class Lobby extends Component {

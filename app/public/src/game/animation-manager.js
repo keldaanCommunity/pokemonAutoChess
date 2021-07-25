@@ -2,7 +2,8 @@
 import {SPECIAL_SKILL} from '../../../models/enum.js';
 
 export default class AnimationManager {
-  constructor(game) {
+  constructor(game, mapType) {
+    this.mapType = mapType;
     this.game = game;
     this.orientationTable = {
       'DOWN': 0,
@@ -682,7 +683,7 @@ export default class AnimationManager {
   }
 
   playSpecialCells(entity) {
-    entity.anims.play(`${window.state.mapType}/cell`);
+    entity.anims.play(`${this.mapType}/cell`);
   }
 
   getSpriteKey(entity) {

@@ -1,6 +1,7 @@
 import {GameObjects} from 'phaser';
 import {SPECIAL_SKILL} from '../../../../models/enum';
 import Pokemon from './pokemon';
+import { transformAttackCoordinate } from '../../utils';
 
 export default class BattleManager {
   constructor(scene, group, player) {
@@ -22,7 +23,7 @@ export default class BattleManager {
 
   addPokemon(playerId, pokemon) {
     if (this.player.id == playerId) {
-      const coordinates = window.transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
+      const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
       const pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false, true);
       window.animationManager.animatePokemon(pokemonUI);
       this.group.add(pokemonUI);
@@ -90,7 +91,7 @@ export default class BattleManager {
             } else if (change.field == 'positionY') {
               children[i].positionY = pokemon.positionY;
             }
-            const coordinates = window.transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
+            const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
             if (pokemon.skill == SPECIAL_SKILL.TELEPORT) {
               children[i].x = coordinates[0];
               children[i].y = coordinates[1];

@@ -1,4 +1,5 @@
 import Pokemon from './pokemon';
+import {transformCoordinate} from '../../utils';
 
 export default class BoardManager {
   constructor(scene, player) {
@@ -11,7 +12,7 @@ export default class BoardManager {
 
   addPokemon(pokemon) {
     // console.log(pokemon.name, this.mode);
-    const coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+    const coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY);
     let pokemonUI;
 
     if (_client.auth._id == this.player.id) {
@@ -76,7 +77,7 @@ export default class BoardManager {
       case 'positionX':
         pokemonUI.positionX = change.value;
         pokemonUI.positionY = pokemon.positionY;
-        coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+        coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY);
         pokemonUI.x = coordinates[0];
         pokemonUI.y = coordinates[1];
         break;
@@ -84,7 +85,7 @@ export default class BoardManager {
       case 'positionY':
         pokemonUI.positionY = change.value;
         pokemonUI.positionX = pokemon.positionX;
-        coordinates = window.transformCoordinate(pokemon.positionX, pokemon.positionY);
+        coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY);
         pokemonUI.x = coordinates[0];
         pokemonUI.y = coordinates[1];
         if (pokemonUI.positionY != 0 && this.mode == 'battle') {

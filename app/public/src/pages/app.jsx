@@ -4,6 +4,7 @@ import Home from './home';
 import Auth from './auth';
 import Lobby from './lobby';
 import Preparation from './preparation';
+import Game from './game';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
           <Route path='/auth' component={Auth}/>
           <Route path='/lobby' component={Lobby}/>
           <Route path='/preparation/:id' component={Preparation}/>
+          <Route path='/game/:id' component={Game}/>
         </Switch>
       </div>
     )

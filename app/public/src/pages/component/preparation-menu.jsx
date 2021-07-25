@@ -23,6 +23,7 @@ class PreparationMenu extends Component{
                 </table>
                 <div style={{display: 'flex'}}>
                     <button className='nes-btn is-warning' onClick={this.props.toggleReady}>Ready</button>
+                    <button className='nes-btn is-success' onClick={this.props.startGame}>Start Game</button>
                     <button className='nes-btn is-primary' onClick={this.props.addBot}>Add Bot</button>
                     <button className='nes-btn is-primary' onClick={this.props.removeBot}>Remove Bot</button>
                 </div>

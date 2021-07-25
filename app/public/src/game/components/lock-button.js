@@ -2,7 +2,7 @@ import {GameObjects} from 'phaser';
 import Button from './button';
 
 export default class LockButton extends Button {
-  constructor(scene, x, y) {
+  constructor(scene, player, x, y) {
     super(scene, x, y, 50, 50);
     this.textStyle = {
       fontSize: '20px',
@@ -10,6 +10,7 @@ export default class LockButton extends Button {
       color: 'white',
       align: 'center'
     };
+    this.player = player;
     this.lock = new GameObjects.Image(scene, 0, 0, 'lock', 'unlocked').setScale(0.5, 0.5);
     this.add(this.lock);
 
@@ -35,7 +36,7 @@ export default class LockButton extends Button {
   }
 
   updateState() {
-    if (window.state.players[_client.auth._id].shopLocked) {
+    if (this.player.shopLocked) {
       this.lock.setTexture('lock', 'locked');
     } else {
       this.lock.setTexture('lock', 'unlocked');

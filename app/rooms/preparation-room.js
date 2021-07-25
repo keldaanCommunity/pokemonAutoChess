@@ -2,7 +2,6 @@ const colyseus = require('colyseus');
 const {Dispatcher} = require('@colyseus/command');
 const EloBot = require('../models/mongo-models/elo-bot');
 const PreparationState = require('./states/preparation-state');
-const Mongoose = require('mongoose');
 const Filter = require('bad-words');
 const admin = require('firebase-admin');
 const {
@@ -29,19 +28,17 @@ class PreparationRoom extends colyseus.Room {
     this.setState(new PreparationState());
     this.maxClients = 8;
 
-    Mongoose.connect(process.env.MONGO_URI, (err) => {
-      EloBot.find({},(err, bots) => {
-        bots.forEach(bot => {
-          self.elos.set(bot.name, bot.elo);
-        });
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
+    EloBot.find({},(err, bots) => {
+      bots.forEach(bot => {
+        self.elos.set(bot.name, bot.elo);
       });
+      self.dispatcher.dispatch(new OnAddBotCommand());
+      self.dispatcher.dispatch(new OnAddBotCommand());
+      self.dispatcher.dispatch(new OnAddBotCommand());
+      self.dispatcher.dispatch(new OnAddBotCommand());
+      self.dispatcher.dispatch(new OnAddBotCommand());
+      self.dispatcher.dispatch(new OnAddBotCommand());
+      self.dispatcher.dispatch(new OnAddBotCommand());
     });
 
     this.onMessage('game-start', (client, message) => {

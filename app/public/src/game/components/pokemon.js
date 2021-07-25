@@ -4,6 +4,7 @@ import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemContainer from './item-container';
 import {SPECIAL_SKILL, EFFECTS_ICON} from '../../../../models/enum.js';
+import { transformAttackCoordinate, getAttackScale } from '../../utils';
 
 export default class Pokemon extends Button {
   constructor(scene, x, y, pokemon, dragable, isPopup) {
@@ -79,9 +80,9 @@ export default class Pokemon extends Button {
       x = this.targetX;
       y = this.targetY;
     }
-    const coordinates = window.transformAttackCoordinate(x, y);
+    const coordinates = transformAttackCoordinate(x, y);
     this.projectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'attacks', `${this.attackSprite}/000`);
-    const scale = window.getAttackScale(this.attackSprite);
+    const scale = getAttackScale(this.attackSprite);
     this.projectile.setScale(scale[0], scale[1]);
     this.projectile.anims.play(`${this.attackSprite}`);
     this.addTween();
@@ -96,7 +97,7 @@ export default class Pokemon extends Button {
       if (this.targetX != -1 && this.targetY != -1) {
         switch (this.skill) {
           case SPECIAL_SKILL.FIRE_BLAST:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.FIRE_BLAST}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -107,8 +108,8 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.WHEEL_OF_FIRE:
-            coordinatesTarget = window.transformAttackCoordinate(this.targetX, this.targetY);
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.WHEEL_OF_FIRE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -127,8 +128,8 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.ORIGIN_PULSE:
-            coordinatesTarget = window.transformAttackCoordinate(0, this.targetY);
-            coordinates = window.transformAttackCoordinate(8, this.targetY);
+            coordinatesTarget = transformAttackCoordinate(0, this.targetY);
+            coordinates = transformAttackCoordinate(8, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ORIGIN_PULSE}/0`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -145,7 +146,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.SEED_FLARE:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SEED_FLARE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(5, 5);
@@ -156,7 +157,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.SEISMIC_TOSS:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SEISMIC_TOSS}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -167,7 +168,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.GUILLOTINE:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.GUILLOTINE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
@@ -178,7 +179,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.ROCK_SLIDE:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ROCK_SLIDE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -189,7 +190,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.HEAT_WAVE:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HEAT_WAVE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -200,7 +201,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.THUNDER:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.THUNDER}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -211,7 +212,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.HYDRO_PUMP:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HYDRO_PUMP}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -222,7 +223,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.DRACO_METEOR:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DRACO_METEOR}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -233,7 +234,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.BLAZE_KICK:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BLAZE_KICK}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -244,7 +245,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.WISH:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.WISH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
@@ -255,7 +256,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.CALM_MIND:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.CALM_MIND}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -266,7 +267,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.IRON_DEFENSE:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.IRON_DEFENSE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -277,7 +278,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.METRONOME:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.METRONOME}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -288,7 +289,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.SOAK:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SOAK}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -299,7 +300,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.IRON_TAIL:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.IRON_TAIL}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -310,7 +311,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.BLAST_BURN:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BLAST_BURN}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
@@ -321,7 +322,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.CHARGE:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.CHARGE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -332,7 +333,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.DISCHARGE:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DISCHARGE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
@@ -343,7 +344,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.BITE:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BITE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -354,7 +355,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.DRAGON_TAIL:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DRAGON_TAIL}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -365,7 +366,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.DRAGON_BREATH:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DRAGON_BREATH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -376,7 +377,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.ICICLE_CRASH:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ICICLE_CRASH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
@@ -387,7 +388,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.ROOT:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ROOT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -398,7 +399,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.TORMENT:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.TORMENT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -409,7 +410,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.STOMP:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.STOMP}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
@@ -420,7 +421,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.DARK_PULSE:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DARK_PULSE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -431,7 +432,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.NIGHT_SLASH:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.NIGHT_SLASH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -442,7 +443,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.BUG_BUZZ:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BUG_BUZZ}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -453,7 +454,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.POISON_STING:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.POISON_STING}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -464,7 +465,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.LEECH_LIFE:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.LEECH_LIFE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -475,7 +476,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.HAPPY_HOUR:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HAPPY_HOUR}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -486,7 +487,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.TELEPORT:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.TELEPORT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -497,7 +498,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.NASTY_PLOT:
-            coordinates = window.transformAttackCoordinate(this.positionX, this.positionY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.NASTY_PLOT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -508,7 +509,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.THIEF:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.THIEF}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -519,7 +520,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.STUN_SPORE:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.STUN_SPORE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -530,7 +531,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.METEOR_MASH:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.METEOR_MASH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
@@ -541,7 +542,7 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.HURRICANE:
-            coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HURRICANE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
@@ -558,7 +559,7 @@ export default class Pokemon extends Button {
   }
 
   addTween() {
-    const coordinates = window.transformAttackCoordinate(this.targetX, this.targetY);
+    const coordinates = transformAttackCoordinate(this.targetX, this.targetY);
     if (this.scene) {
       // console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
       this.scene.tweens.add({
@@ -592,7 +593,7 @@ export default class Pokemon extends Button {
         x = this.targetX;
         y = this.targetY;
       }
-      const coordinates = window.transformAttackCoordinate(x, y);
+      const coordinates = transformAttackCoordinate(x, y);
       if (this.projectile.scene) {
         this.projectile.setPosition(coordinates[0], coordinates[1]);
         this.projectile.setVisible(true);
