@@ -27,8 +27,8 @@ class GameRoom extends colyseus.Room {
       //console.log(user);
       if (user.isBot) {
         this.state.players.set(id, new Player(user.id, user.name, user.elo, user.avatar, true, this.state.specialCells, this.state.mapType, this.state.players.size + 1, `${this.state.mapType}0`));
-        this.state.botManager.addBot(this.state.players[id]);
-        this.state.shop.assignShop(this.state.players[id]);
+        this.state.botManager.addBot(this.state.players.get(id));
+        this.state.shop.assignShop(this.state.players.get(id));
       }
     }
 

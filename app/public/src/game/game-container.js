@@ -522,44 +522,6 @@ class GameContainer {
     $('#modal-popup').modal();
   }
 
-  onLeaveGame(event){
-/*
-    window.removeEventListener('shop-click', this.onShopClick);
-    window.removeEventListener('player-click', this.onPlayerClick);
-    window.removeEventListener('refresh-click', this.onRefreshClick);
-    window.removeEventListener('lock-click', this.onLockClick);
-    window.removeEventListener('level-click', this.onLevelClick);
-    window.removeEventListener('drag-drop', this.onDragDrop);
-    window.removeEventListener('sell-drop', this.onSellDrop);
-    window.removeEventListener('leave-game', this.onLeaveGame);
-*/
-    this.game.destroy(true);
-
-    if(this.room.state.afterGameId == ''){
-      let savePlayers = [];
-      this.room.state.players.forEach(player => savePlayers.push(this.transformToSimplePlayer(player)));
-      _client.create('after-game', {'players':savePlayers}).then((room) => {
-        //this.room.send('set-afterGameId', {'id': room.id});
-        this.room.leave();
-        document.getElementById('game').dispatchEvent(new CustomEvent('render-after-game', {detail: {room: room}}));
-        //console.log('joined room:', room);
-      }).catch((e) => {
-        console.error('join error', e);
-      });
-    }
-    else{
-      let savePlayers = [];
-      this.room.state.players.forEach(player => savePlayers.push(this.transformToSimplePlayer(player)));
-      _client.joinById(this.room.state.afterGameId, {'players':savePlayers}).then((room) => {
-        this.room.leave();
-        document.getElementById('game').dispatchEvent(new CustomEvent('render-after-game', {detail: {room: room}}));
-        //console.log('joined room:', room);
-      }).catch((e) => {
-        console.error('join error', e);
-      });
-    }
-  }
-
   transformToSimplePlayer(player){
     let simplePlayer = {
       name: player.name,

@@ -3,15 +3,10 @@ const {PKM, TYPE, RARITY, BOT_AVATAR} = require('../models/enum');
 const LobbyState = require('./states/lobby-state');
 const Mongoose = require('mongoose');
 const Chat = require('../models/mongo-models/chat');
-const Statistic = require('../models/mongo-models/statistic');
 const UserMetadata = require('../models/mongo-models/user-metadata');
 const LeaderboardInfo = require('../models/colyseus-models/leaderboard-info');
-const PokemonFactory = require('../models/pokemon-factory');
-const EloBot = require('../models/mongo-models/elo-bot');
 const schema = require('@colyseus/schema');
-const GameRecord = require('../models/colyseus-models/game-record');
 const GameUser = require('../models/colyseus-models/game-user');
-const ArraySchema = schema.ArraySchema;
 const admin = require('firebase-admin');
 
 class CustomLobbyRoom extends colyseus.LobbyRoom {
@@ -549,21 +544,21 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     //console.log(auth);
     UserMetadata.findOne({'uid':auth.uid},(err, user)=>{
       if(user){
-        this.state.users[client.auth.uid] = new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.map);
+        this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.map));
       }
       else{
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName
         });
-        this.state.users[client.auth.uid] = new GameUser(client.auth.uid, client.auth.displayName, 1000, 'rattata', false, false, {
+        this.state.users.set(client.auth.uid, new GameUser(client.auth.uid, client.auth.displayName, 1000, 'rattata', false, false, {
           FIRE: 'FIRE0',
           ICE:'ICE0',
           GROUND:'GROUND0',
           NORMAL:'NORMAL0',
           GRASS:'GRASS0',
           WATER:'WATER0'
-        });
+        }));
       }
     });
     /*
@@ -579,7 +574,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           records.push(new GameRecord(record.time, record.rank, record.elo, record.pokemons));
         });
         
-        this.state.users[client.auth.uid] = new DetailledGameUser(client.auth.uid, client.auth.displayName, auth.metadata.elo, auth.metadata.avatar, false, false, records);
+        this.state.users.get(client.auth.uid) = new DetailledGameUser(client.auth.uid, client.auth.displayName, auth.metadata.elo, auth.metadata.avatar, false, false, records);
 
         this.clients.forEach((cli) => {
           if (client.auth.email && cli.auth.email == client.auth.email && client.sessionId != cli.sessionId) {

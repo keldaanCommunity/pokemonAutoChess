@@ -1,5 +1,5 @@
-import GameContainer from '../game/game-container';
-import {ORIENTATION, WORDS} from '../../../models/enum';
+import GameContainer from '../../game/game-container';
+import {ORIENTATION, WORDS} from '../../../../models/enum';
 
 class GamePage {
   constructor(args) {

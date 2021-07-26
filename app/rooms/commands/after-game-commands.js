@@ -6,16 +6,23 @@ const POKEMON_BOT = require('../../models/enum').POKEMON_BOT;
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    this.state.users[client.auth.uid] = new GameUser(client.auth.uid, auth.email.slice(0, auth.email.indexOf('@')), auth.metadata.elo, auth.metadata.avatar, false, false);
-    this.room.broadcast('messages', {
-      'name': 'Server',
-      'payload': `${ auth.email.split('@')[0] } joined.`,
-      'avatar': auth.metadata.avatar,
-      'time': Date.now()
+    UserMetadata.findOne({'uid':auth.uid},(err, user)=>{
+      if(user){
+        this.state.users.set(client.auth.uid,  new GameUser(user.uid,
+          user.displayName,
+          user.elo,
+          user.avatar,
+          false,
+          ''));
+
+        this.room.broadcast('messages', {
+          'name': 'Server',
+          'payload': `${ user.displayName } joined.`,
+          'avatar': user.avatar,
+          'time': Date.now()
+        });
+      }
     });
-    if (this.state.users.size > 8) {
-      return [new OnRemoveBotCommand()];
-    }
   }
 }
 
@@ -37,11 +44,11 @@ class OnLeaveCommand extends Command {
   execute({client, consented}) {
     this.room.broadcast('messages', {
       'name': 'Server',
-      'payload': `${ this.state.users[client.id].name } left.`,
+      'payload': `${ this.state.users.get(client.auth.uid).name } left.`,
       'avatar': 'magnemite',
       'time':Date.now()
     });
-    delete this.state.users[''+client.id];
+    this.state.users.delete(client.auth.uid);
   }
 }
 

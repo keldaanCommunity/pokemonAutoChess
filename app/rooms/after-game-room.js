@@ -2,8 +2,9 @@ const colyseus = require('colyseus');
 const SimplePlayer = require('../models/colyseus-models/simple-player');
 const {Dispatcher} = require('@colyseus/command');
 const AfterGameState = require('./states/after-game-state');
-const Statistic = require('../models/mongo-models/statistic');
+const UserMetadata = require('../models/mongo-models/user-metadata');
 const Filter = require('bad-words');
+const admin = require('firebase-admin');
 const {
   OnJoinCommand,
   OnLeaveCommand,
@@ -35,8 +36,8 @@ class AfterGameRoom extends colyseus.Room {
   }
 
   async onAuth(client, options, request) {
-    const token = social.verifyToken(options.token);
-    const user = await social.User.findById(token._id);
+    const token = await admin.auth().verifyIdToken(options.idToken);
+    const user = await admin.auth().getUser(token.uid);
     return user;
   }
 

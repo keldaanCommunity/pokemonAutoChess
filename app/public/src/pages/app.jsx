@@ -5,6 +5,7 @@ import Auth from './auth';
 import Lobby from './lobby';
 import Preparation from './preparation';
 import Game from './game';
+import AfterGame from './after-game';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
           <Route path='/lobby' component={Lobby}/>
           <Route path='/preparation/:id' component={Preparation}/>
           <Route path='/game/:id' component={Game}/>
+          <Route path='/after/:id' component={AfterGame}/>
         </Switch>
       </div>
     )

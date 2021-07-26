@@ -1,4 +1,4 @@
-import {insertScriptFile} from '../utils';
+import {insertScriptFile} from '../../utils';
 import * as uniqid from 'uniqid';
 
 class LoginPage {

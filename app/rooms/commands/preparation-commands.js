@@ -9,7 +9,7 @@ class OnJoinCommand extends Command {
   execute({client, options, auth}) {
     UserMetadata.findOne({'uid':auth.uid},(err, user)=>{
       if(user){
-        this.state.users[user.uid] = new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.map);
+        this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.map));
         this.room.broadcast('messages', {
           'name': 'Server',
           'payload': `${ user.displayName } joined.`,
@@ -59,17 +59,17 @@ class OnLeaveCommand extends Command {
   execute({client, consented}) {
     this.room.broadcast('messages', {
       'name': 'Server',
-      'payload': `${ this.state.users[client.auth.uid].name } left.`,
+      'payload': `${ this.state.users.get(client.auth.uid).name } left.`,
       'avatar': 'magnemite',
       'time':Date.now()
     });
-    delete this.state.users[''+client.auth.uid];
+    this.state.users.delete(client.auth.uid);
   }
 }
 
 class OnToggleReadyCommand extends Command {
   execute(client) {
-    this.state.users[client.auth.uid].ready = !this.state.users[client.auth.uid].ready;
+    this.state.users.get(client.auth.uid).ready = !this.state.users.get(client.auth.uid).ready;
   }
 }
 
@@ -99,7 +99,7 @@ class OnAddBotCommand extends Command {
         bot = botList[Math.floor(Math.random() * botList.length)];
       }
 
-      this.state.users[id] = new GameUser(id, BOT_AVATAR[bot], this.room.elos.get(bot), BOT_AVATAR[bot], true, true,
+      this.state.users.set(id, new GameUser(id, BOT_AVATAR[bot], this.room.elos.get(bot), BOT_AVATAR[bot], true, true,
       {          
         FIRE: 'FIRE0',
         ICE:'ICE0',
@@ -107,7 +107,7 @@ class OnAddBotCommand extends Command {
         NORMAL:'NORMAL0',
         GRASS:'GRASS0',
         WATER:'WATER0'
-    });
+    }));
       this.room.broadcast('messages', {
         'name': 'Server',
          'payload': `Bot ${ BOT_AVATAR[bot] } added.`,

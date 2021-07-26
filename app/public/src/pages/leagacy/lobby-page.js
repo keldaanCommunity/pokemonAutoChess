@@ -1,5 +1,5 @@
-import {WORDS, XP_TABLE} from '../../../models/enum';
-import PokemonFactory from '../../../models/pokemon-factory';
+import {WORDS, XP_TABLE} from '../../../../models/enum';
+import PokemonFactory from '../../../../models/pokemon-factory';
 
 class LobbyPage {
   constructor(args) {

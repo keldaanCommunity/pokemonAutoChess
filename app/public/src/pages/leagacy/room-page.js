@@ -1,4 +1,4 @@
-import {WORDS} from '../../../models/enum';
+import {WORDS} from '../../../../models/enum';
 
 class RoomPage {
   constructor(args) {
