@@ -10,7 +10,7 @@ const PokemonFactory = require('../models/pokemon-factory');
 const EloBot = require('../models/mongo-models/elo-bot');
 const schema = require('@colyseus/schema');
 const GameRecord = require('../models/colyseus-models/game-record');
-const DetailledGameUser = require('../models/colyseus-models/detailled-game-user');
+const GameUser = require('../models/colyseus-models/game-user');
 const ArraySchema = schema.ArraySchema;
 const admin = require('firebase-admin');
 
@@ -35,6 +35,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           });
         }
       });
+      /*
       UserMetadata.find({}, ['displayName','avatar','level'], {limit:25, sort:{'level': -1}}, (err, users)=> {
         if(err){
           console.log(err);
@@ -46,17 +47,19 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           }
         }
       });
-      UserMetadata.find({'elo':{$ne: 1000}},['displayName','avatar','elo'],{limit:25, sort:{'elo': -1}}, (err, users)=>{
+      */
+      UserMetadata.find({},['displayName','avatar','elo'],{limit:25, sort:{'elo': -1}}, (err, users)=>{
         if(err){
           console.log(err);
         }
         else{
           for (let i = 0; i < users.length; i++) {
             const user = users[i];
-            self.state.playerEloLeaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.elo));
+            self.state.leaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.elo));
           }
         }
       });
+      /*
       EloBot.find({},['name','elo'],{sort: {'elo': -1}}, (err, bots)=>{
         if(err){
           console.log(err);
@@ -68,8 +71,6 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           }
         }
       });
-      
-      /*
       Statistic.find({'time':{$gt: Date.now() - 2592000000}}, (err, stats)=>{
 
         if(stats.length != 0){
@@ -548,14 +549,21 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     //console.log(auth);
     UserMetadata.findOne({'uid':auth.uid},(err, user)=>{
       if(user){
-        this.state.users[client.auth.uid] = new DetailledGameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.history);
+        this.state.users[client.auth.uid] = new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.map);
       }
       else{
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName
         });
-        this.state.users[client.auth.uid] = new DetailledGameUser(client.auth.uid, client.auth.displayName, 1000, 'rattata', false, false, []);
+        this.state.users[client.auth.uid] = new GameUser(client.auth.uid, client.auth.displayName, 1000, 'rattata', false, false, {
+          FIRE: 'FIRE0',
+          ICE:'ICE0',
+          GROUND:'GROUND0',
+          NORMAL:'NORMAL0',
+          GRASS:'GRASS0',
+          WATER:'WATER0'
+        });
       }
     });
     /*

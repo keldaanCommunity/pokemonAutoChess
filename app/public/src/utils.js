@@ -1,3 +1,5 @@
+ import { ORIENTATION } from "../../models/enum";
+ 
  export function transformCoordinate(x,y){
   return [382 + 96 * x, 808 - 120 * y];
  };

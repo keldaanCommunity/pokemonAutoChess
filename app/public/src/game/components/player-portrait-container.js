@@ -2,7 +2,7 @@ import {GameObjects} from 'phaser';
 import PokemonFactory from '../../../../models/pokemon-factory';
 
 export default class PlayerPortraitContainer extends GameObjects.Container {
-  constructor(scene, x, y, player) {
+  constructor(scene, x, y, player, uid) {
     super(scene, x, y);
     this.id = player.id;
     this.textStyle = {
@@ -22,7 +22,7 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
       strokeThickness: 3
     }
     let textStyle = this.textStyle;
-    if(player.id == _client.auth._id){
+    if(player.id == uid){
       textStyle = this.playerStyle;
     }
     const pokemon = PokemonFactory.createPokemonFromName(player.avatar);

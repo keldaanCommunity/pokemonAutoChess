@@ -832,8 +832,7 @@ export default class Pokemon extends Button {
     if (sleepEffect) {
       this.remove(sleepEffect, true);
     }
-
-    window.animationManager.animatePokemon(this);
+    //window.animationManager.animatePokemon(this);
   }
 
   addSilence() {

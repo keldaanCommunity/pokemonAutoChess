@@ -4,11 +4,12 @@ import Pokemon from './pokemon';
 import { transformAttackCoordinate } from '../../utils';
 
 export default class BattleManager {
-  constructor(scene, group, player) {
+  constructor(scene, group, player, animationManager) {
     this.group = group;
     this.scene = scene;
     this.player = player;
     this.opponentNameText = this.scene.add.text(1270, 25, this.player.opponentName.slice(0, 8), window.textStyle);
+    this.animationManager = animationManager;
   }
 
   buildPokemons() {
@@ -25,7 +26,7 @@ export default class BattleManager {
     if (this.player.id == playerId) {
       const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
       const pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false, true);
-      window.animationManager.animatePokemon(pokemonUI);
+      this.animationManager.animatePokemon(pokemonUI);
       this.group.add(pokemonUI);
     }
   }
@@ -101,7 +102,7 @@ export default class BattleManager {
             }
           } else if (change.field == 'orientation') {
             children[i].orientation = pokemon.orientation;
-            window.animationManager.animatePokemon(children[i]);
+            this.animationManager.animatePokemon(children[i]);
           } else if (change.field =='action') {
             children[i].action = pokemon.action;
           } else if (change.field == 'critChance') {
@@ -186,7 +187,7 @@ export default class BattleManager {
             }
 
             if (children[i].action == 'ATTACKING' && children[i].targetX !== null && children[i].targetY !== null) {
-              window.animationManager.animatePokemon(children[i]);
+              this.animationManager.animatePokemon(children[i]);
               children[i].attackAnimation();
             }
           } else if (change.field =='targetY') {
@@ -197,7 +198,7 @@ export default class BattleManager {
             }
 
             if (children[i].action == 'ATTACKING' && children[i].targetX !== null && children[i].targetY !== null) {
-              window.animationManager.animatePokemon(children[i]);
+              this.animationManager.animatePokemon(children[i]);
               children[i].attackAnimation();
             }
           } else if (change.field == 'poison') {

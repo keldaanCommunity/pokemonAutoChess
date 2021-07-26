@@ -41,11 +41,6 @@ class Login extends Component {
         if (!firebase.apps.length) {
             firebase.initializeApp(this.firebaseConfig);
             firebase.auth().onAuthStateChanged(user => {
-                if(user){
-                    window._client.auth._id = user.uid;
-                    window._client.auth.email = user.email;
-                    window._client.auth.displayName = user.displayName;
-                }
                 this.setState({isSignedIn: !!user});
           });
         } 

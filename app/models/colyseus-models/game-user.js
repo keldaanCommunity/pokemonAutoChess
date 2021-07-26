@@ -1,8 +1,9 @@
 const schema = require('@colyseus/schema');
+const MapTileset = require('./map-tileset');
 const Schema = schema.Schema;
 
 class GameUser extends Schema {
-  constructor(id, name, elo, avatar, isBot, ready) {
+  constructor(id, name, elo, avatar, isBot, ready, map) {
     super();
     this.assign({
       id: id,
@@ -10,7 +11,8 @@ class GameUser extends Schema {
       avatar: avatar,
       ready: ready,
       isBot: isBot,
-      elo: elo
+      elo: elo,
+      map: new MapTileset(map)
     });
   }
 
@@ -25,7 +27,8 @@ schema.defineTypes(GameUser, {
   avatar: 'string',
   ready: 'boolean',
   isBot: 'boolean',
-  elo: 'uint16'
+  elo: 'uint16',
+  map: MapTileset
 });
 
 module.exports = GameUser;

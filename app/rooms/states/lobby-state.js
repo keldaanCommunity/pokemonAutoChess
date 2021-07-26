@@ -3,15 +3,13 @@ const Message = require('../../models/colyseus-models/message');
 const LeaderboardInfo = require('../../models/colyseus-models/leaderboard-info');
 const Chat = require('../../models/mongo-models/chat');
 const Filter = require('bad-words');
-const DetailledGameUser = require('../../models/colyseus-models/detailled-game-user');
+const GameUser = require('../../models/colyseus-models/game-user');
 
 class LobbyState extends schema.Schema {
   constructor() {
     super();
     this.messages = new schema.ArraySchema();
     this.leaderboard = new schema.ArraySchema();
-    this.botEloLeaderboard = new schema.ArraySchema();
-    this.playerEloLeaderboard = new schema.ArraySchema();
     this.users = new schema.MapSchema();
     this.filter = new Filter();
   }
@@ -43,10 +41,8 @@ class LobbyState extends schema.Schema {
 
 schema.defineTypes(LobbyState, {
   messages: [Message],
-  users: {map: DetailledGameUser},
-  leaderboard: [LeaderboardInfo],
-  botEloLeaderboard: [LeaderboardInfo],
-  playerEloLeaderboard: [LeaderboardInfo]
+  users: {map: GameUser},
+  leaderboard: [LeaderboardInfo]
 });
 
 module.exports = LobbyState;

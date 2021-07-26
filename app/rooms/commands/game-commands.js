@@ -3,6 +3,7 @@ const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY, PKM} = req
 const Player = require('../../models/colyseus-models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
+const UserMetadata = require('../../models/mongo-models/user-metadata');
 
 class OnShopCommand extends Command {
   execute({id, index}) {
@@ -47,14 +48,8 @@ class OnDragDropCommand extends Command {
       'updateItems': true,
       'field': detail.place
     };
-    let playerId;
+    let playerId = client.auth.uid;;
 
-    if(typeof client.auth._id == 'object'){
-      playerId = client.auth.uid;
-    }
-    else{
-      playerId = client.auth._id;
-    }
     if (this.state.players.has(playerId)) {
       if (detail.objType == 'pokemon') {
         message.updateItems = false;
@@ -278,7 +273,7 @@ class OnDragDropCommand extends Command {
         }
       }
     }
-    if (!success) {
+    if (!success && client.send) {
       client.send('DragDropFailed', message);
     }
     if (dittoReplaced) {
@@ -348,22 +343,28 @@ class OnLevelUpCommand extends Command {
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    this.state.players.set(client.auth.uid, new Player(
-        client.auth.uid,
-        auth.email.slice(0, auth.email.indexOf('@')),
-        client.auth.metadata.elo,
-        client.auth.metadata.avatar,
-        false,
-        this.state.specialCells,
-        this.state.mapType,
-        auth.email,
-        this.state.players.size + 1
-    ));
-    this.state.shop.assignShop(this.state.players.get(client.auth.uid));
-    if (this.state.players.size >= 8) {
-      // console.log('game elligible to xp');
-      this.state.elligibleToXP = true;
-    }
+    //console.log(this.state.mapType);
+    UserMetadata.findOne({'uid':auth.uid},(err, user)=>{
+      if(user){
+        this.state.players.set(client.auth.uid, new Player(
+          user.uid,
+          user.displayName,
+          user.elo,
+          user.avatar,
+          false,
+          this.state.specialCells,
+          this.state.mapType,
+          this.state.players.size + 1,
+          user.map[this.state.mapType]
+      ));
+     // console.log(this.state.players.get(client.auth.uid).tileset);
+      this.state.shop.assignShop(this.state.players.get(client.auth.uid));
+      if (this.state.players.size >= 8) {
+        // console.log('game elligible to xp');
+        this.state.elligibleToXP = true;
+      }
+      }
+    });
   }
 }
 
@@ -675,7 +676,7 @@ class OnUpdatePhaseCommand extends Command {
             };
             const client = {
               auth:{
-                '_id': key
+                'uid': key
               }
             };
             commands.push(new OnDragDropCommand().setPayload({'client': client, 'detail': detail}));

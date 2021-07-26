@@ -100,14 +100,9 @@ export default class GameScene extends Scene {
       assetText.destroy();
     });
 
-    let chosenTileset = `${this.room.state.mapType}0`;
-    /*
-    if(this.uid.auth.metadata.map[this.room.state.mapType]){
-      chosenTileset = this.uid.auth.metadata.map[this.room.state.mapType];
-    }
-    */
+    let chosenTileset = this.room.state.players.get(this.uid).tileset;
 
-    console.log(chosenTileset);
+    //console.log(chosenTileset);
     this.load.audioSprite('sounds', `/assets/sounds/${this.room.state.mapType}.json`, [`/assets/sounds/${this.room.state.mapType}.mp3`]);
     this.load.image('tiles', `/assets/tiles/${this.room.state.mapType}/${chosenTileset}.png`);
     this.load.tilemapTiledJSON('map', `/assets/tiles/${this.room.state.mapType}/${this.room.state.mapType}.json`);
@@ -179,13 +174,13 @@ export default class GameScene extends Scene {
     this.battle = this.add.group();
     this.animationManager = new AnimationManager(this, this.room.state.mapType);
     this.shopContainer = new ShopContainer(this, 470, 912, this.room.state.players[this.uid]);
-    this.playerContainer = new PlayerContainer(this, 1800, 70, this.room.state.players);
+    this.playerContainer = new PlayerContainer(this, 1800, 70, this.room.state.players, this.uid);
     this.synergiesContainer = new SynergiesContainer(this, 1290, 135, this.room.state.players[this.uid]);
     this.dpsMeterContainer = new DpsMeterContainer(this, 1520, 135, this.room.state.players[this.uid]);
     this.itemsContainer = new ItemsContainer(this, 66, 430);
     this.moneyContainer = new MoneyContainer(this, 10, 60, this.room.state.players[this.uid]);
-    this.boardManager = new BoardManager(this, this.room.state.players[this.uid]);
-    this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid]);
+    this.boardManager = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
+    this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
     this.entryHazardsManager = new EntryHazardsManager(this, this.map, tileset);
     this.leaveButton = new LeaveButton(this, 1750, 30);

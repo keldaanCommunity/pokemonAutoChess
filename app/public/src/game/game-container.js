@@ -46,13 +46,6 @@ class GameContainer {
   }
 
   initializeEvents() {
-    // Room event listener
-    console.log('event');
-    this.room.onStateChange.once((state) => {
-      console.log('once');
-      this.initializeGame();
-    });
-
     this.room.state.players.onAdd = (player) => this.initializePlayer(player);
     this.room.state.players.onRemove = (player, key) => this.onPlayerRemove(player, key);
     this.room.onMessage('DragDropFailed', (message) => this.handleDragDropFailed(message));
@@ -68,25 +61,14 @@ class GameContainer {
         this.handleRoomStateChange(change);
       });
     };
-    // Game event listener
-    /*
-    document.getElementById('game').addEventListener('shop-click', (e) => this.onShopClick(e));
-    document.getElementById('game').addEventListener('player-click', (e) => this.onPlayerClick(e));
-    document.getElementById('game').addEventListener('refresh-click', (e) => this.onRefreshClick(e));
-    document.getElementById('game').addEventListener('lock-click', (e) => this.onLockClick(e));
-    document.getElementById('game').addEventListener('level-click', (e) => this.onLevelClick(e));
-    document.getElementById('game').addEventListener('drag-drop', (e) => this.onDragDrop(e));
-    document.getElementById('game').addEventListener('sell-drop', (e) => this.onSellDrop(e));
-    document.getElementById('game').addEventListener('leave-game', (e) => this.onLeaveGame(e));
-    document.getElementById('leave-button').addEventListener('click', (e) => this.onLeaveGame(e));
-    */
   }
 
   initializePlayer(player) {
     // //console.log(player);
     const self = this;
-    if (_client.auth._id == player.id) {
+    if (this.uid == player.id) {
       this.player = player;
+      this.initializeGame();
     }
     player.onChange = ((changes) => {
       changes.forEach((change) => self.handlePlayerChange(change, player));
@@ -143,7 +125,7 @@ class GameContainer {
     });
 
     player.simulation.onChange = ((changes) => {
-      if (player.id == _client.auth._id && this.game.scene.getScene('gameScene') != null) {
+      if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').entryHazardsManager) {
         changes.forEach((change) =>{
           // console.log('simulation change ', change.field, change.value);
           if (change.field == 'climate') {
@@ -288,7 +270,7 @@ class GameContainer {
   }
 
   handleStuffChange(change, player) {
-    if (player.id == _client.auth._id && this.game.scene.getScene('gameScene') != null) {
+    if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').itemsContainer) {
       this.game.scene.getScene('gameScene').itemsContainer.changeStuff(change.field, change.value);
     }
   }
@@ -303,13 +285,13 @@ class GameContainer {
   }
 
   handleSynergiesChange(change, player) {
-    if (this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').synergiesContainer && player.id == this.game.scene.getScene('gameScene').synergiesContainer.player.id) {
+    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').synergiesContainer && player.id == this.game.scene.getScene('gameScene').synergiesContainer.player.id) {
       this.game.scene.getScene('gameScene').synergiesContainer.updateSynergy(change.field, change.value);
     }
   }
 
   handleClimateChange(change, player) {
-    if (player.id == _client.auth._id && this.game.scene.getScene('gameScene') != null) {
+    if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null) {
       switch (change.value) {
         case 'RAIN':
           this.game.scene.getScene('gameScene').weatherManager.addRain();
@@ -366,19 +348,19 @@ class GameContainer {
   }
 
   handleAddShopPokemon(player, pokemon, key) {
-    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && _client.auth._id == player.id) {
+    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.uid == player.id) {
       this.game.scene.getScene('gameScene').shopContainer.addPortrait(pokemon, key);
     }
   }
 
   handleRemoveShopPokemon(player, index) {
-    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && _client.auth._id == player.id) {
+    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.uid == player.id) {
       this.game.scene.getScene('gameScene').shopContainer.removePortrait(index);
     }
   }
 
   handleExperienceChange(change, player) {
-    if (player.id == _client.auth._id && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').playerContainer && this.game.scene.getScene('gameScene').shopContainer) {
+    if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').playerContainer && this.game.scene.getScene('gameScene').shopContainer) {
       switch (change.field) {
         case 'level':
           this.game.scene.getScene('gameScene').shopContainer.levelUpButton.changeLevel(change.value);
@@ -397,7 +379,7 @@ class GameContainer {
           break;
       }
     }
-    if (change.field == 'level' && this.game.scene.getScene('gameScene') != null) {
+    if (this.game != null && change.field == 'level' && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').playerContainer) {
       this.game.scene.getScene('gameScene').playerContainer.onLevelChange(player.id, change.value);
     }
   }
@@ -407,39 +389,39 @@ class GameContainer {
     if (this.game == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null ) return;
     switch (change.field) {
       case 'money':
-        if (_client.auth._id == player.id) {
+        if (this.uid == player.id) {
           this.game.scene.getScene('gameScene').moneyContainer.onMoneyChange(change.value);
         }
         this.game.scene.getScene('gameScene').playerContainer.onMoneyChange(player.id, change.value);
         break;
 
       case 'streak':
-        if (_client.auth._id == player.id) {
+        if (this.uid == player.id) {
           this.game.scene.getScene('gameScene').moneyContainer.onStreakChange(change.value);
         }
         break;
 
       case 'interest':
-        if (_client.auth._id == player.id) {
+        if (this.uid == player.id) {
           this.game.scene.getScene('gameScene').moneyContainer.onInterestChange(change.value);
         }
         break;
 
       case 'lastBattleResult':
-        if (_client.auth._id == player.id) {
+        if (this.uid == player.id) {
           this.game.scene.getScene('gameScene').moneyContainer.onWonChange(change.value);
           this.game.scene.getScene('gameScene').lastBattleResult.setText(LAST_BATTLE_RESULT_TRADUCTION[change.value]['eng']);
         }
         break;
 
       case 'opponentName':
-        if (_client.auth._id == player.id) {
+        if (this.uid == player.id) {
           this.game.scene.getScene('gameScene').battleManager.setOpponentName(change.value.slice(0, 10));
         }
         break;
 
       case 'boardSize':
-        if (_client.auth._id == player.id) {
+        if (this.uid == player.id) {
           this.game.scene.getScene('gameScene').boardSizeText.setText(player.boardSize);
         }
         break;
@@ -449,7 +431,7 @@ class GameContainer {
         break;
 
       case 'shopLocked':
-        if (_client.auth._id == player.id) {
+        if (this.uid == player.id) {
           this.game.scene.getScene('gameScene').shopContainer.lockButton.updateState();
         }
         break;
@@ -459,7 +441,7 @@ class GameContainer {
         break;
 
       case 'alive':
-        if (_client.auth._id == player.id) {
+        if (this.uid == player.id) {
           let rankPhrase = `${WORDS.PLACE['eng']} no ${player.rank}`;
           let titlePhrase = WORDS.RANKING['eng'];
           if(!change.value){
@@ -510,6 +492,7 @@ class GameContainer {
   }
 
   onShopClick(event) {
+    //console.log('shop');
     this.room.send('shop', {'id': event.detail.id});
   }
 

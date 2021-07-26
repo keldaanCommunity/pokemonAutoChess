@@ -10,7 +10,7 @@ const MapSchema = schema.MapSchema;
 const ArraySchema = schema.ArraySchema;
 
 class Player extends Schema {
-  constructor(id, name, elo, avatar, isBot, specialCells, mapType, email, rank) {
+  constructor(id, name, elo, avatar, isBot, specialCells, mapType, rank, tileset) {
     super();
     this.opponents = [];
     this.assign({
@@ -34,10 +34,10 @@ class Player extends Schema {
       boardSize: 0,
       alive: true,
       isBot: isBot,
-      email: email,
       exp: 0,
       rank: rank,
-      elo: elo
+      elo: elo,
+      tileset: tileset
     });
   }
 }
@@ -51,7 +51,6 @@ schema.defineTypes(Player, {
   simulation: Simulation,
   experienceManager: ExperienceManager,
   synergies: Synergies,
-  level: 'uint8',
   money: 'uint8',
   life: 'uint8',
   shopLocked: 'boolean',
@@ -64,7 +63,8 @@ schema.defineTypes(Player, {
   rank : 'uint8',
   exp: 'uint16',
   alive: 'boolean',
-  elo: 'uint16'
+  elo: 'uint16',
+  tileset: 'string'
 });
 
 module.exports = Player;

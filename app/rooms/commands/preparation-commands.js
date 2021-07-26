@@ -9,7 +9,7 @@ class OnJoinCommand extends Command {
   execute({client, options, auth}) {
     UserMetadata.findOne({'uid':auth.uid},(err, user)=>{
       if(user){
-        this.state.users[client.auth.uid] = new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false);
+        this.state.users[user.uid] = new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.map);
         this.room.broadcast('messages', {
           'name': 'Server',
           'payload': `${ user.displayName } joined.`,
@@ -99,7 +99,15 @@ class OnAddBotCommand extends Command {
         bot = botList[Math.floor(Math.random() * botList.length)];
       }
 
-      this.state.users[id] = new GameUser(id, BOT_AVATAR[bot], this.room.elos.get(bot), BOT_AVATAR[bot], true, true);
+      this.state.users[id] = new GameUser(id, BOT_AVATAR[bot], this.room.elos.get(bot), BOT_AVATAR[bot], true, true,
+      {          
+        FIRE: 'FIRE0',
+        ICE:'ICE0',
+        GROUND:'GROUND0',
+        NORMAL:'NORMAL0',
+        GRASS:'GRASS0',
+        WATER:'WATER0'
+    });
       this.room.broadcast('messages', {
         'name': 'Server',
          'payload': `Bot ${ BOT_AVATAR[bot] } added.`,

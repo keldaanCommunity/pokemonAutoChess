@@ -29,6 +29,7 @@ class PreparationRoom extends colyseus.Room {
     this.maxClients = 8;
 
     EloBot.find({},(err, bots) => {
+      //console.log(bots);
       bots.forEach(bot => {
         self.elos.set(bot.name, bot.elo);
       });

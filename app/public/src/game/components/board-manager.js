@@ -2,11 +2,13 @@ import Pokemon from './pokemon';
 import {transformCoordinate} from '../../utils';
 
 export default class BoardManager {
-  constructor(scene, player) {
+  constructor(scene, player, animationManager, uid) {
     this.pokemons = new Map();
+    this.uid = uid;
     this.scene = scene;
     this.player = player;
     this.mode = 'pick';
+    this.animationManager = animationManager;
     this.buildPokemons();
   }
 
@@ -15,12 +17,12 @@ export default class BoardManager {
     const coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY);
     let pokemonUI;
 
-    if (_client.auth._id == this.player.id) {
+    if (this.uid == this.player.id) {
       pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, true, true);
     } else {
       pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false, true);
     }
-    window.animationManager.animatePokemon(pokemonUI);
+    this.animationManager.animatePokemon(pokemonUI);
     this.pokemons.set(pokemonUI.id, pokemonUI);
     if (pokemon.positionY != 0 && this.mode == 'battle') {
       pokemonUI.setVisible(false);

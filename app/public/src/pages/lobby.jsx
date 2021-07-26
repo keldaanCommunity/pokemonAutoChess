@@ -48,13 +48,7 @@ class Lobby extends Component {
 
                 this.room.state.leaderboard.onAdd = (l) => {this.setState({leaderboard: this.room.state.leaderboard})};
                 this.room.state.leaderboard.onRemove = (l) => {this.setState({leaderboard: this.room.state.leaderboard})};
-            
-                this.room.state.botEloLeaderboard.onAdd = (e) => {this.setState({botEloLeaderboard: this.room.state.botEloLeaderboard})};
-                this.room.state.botEloLeaderboard.onRemove = (e) => {this.setState({botEloLeaderboard: this.room.state.botEloLeaderboard})};
 
-                this.room.state.playerEloLeaderboard.onAdd = (e) => {this.setState({playerEloLeaderboard: this.room.state.playerEloLeaderboard})};
-                this.room.state.playerEloLeaderboard.onRemove = (e) => {this.setState({playerEloLeaderboard: this.room.state.playerEloLeaderboard})};
-            
                 this.room.onMessage('rooms', (rooms) => {
                     rooms.forEach(room =>{
                       if(room.name == 'room'){
@@ -99,7 +93,7 @@ class Lobby extends Component {
     }
 
     sendMessage(payload){
-        this.room.send('new-message', {'name': window._client.auth.displayName, 'payload': payload, 'avatar':this.state.user.avatar });
+        this.room.send('new-message', {'name': this.state.user.displayName, 'payload': payload, 'avatar':this.state.user.avatar });
     }
 
     createRoom() {

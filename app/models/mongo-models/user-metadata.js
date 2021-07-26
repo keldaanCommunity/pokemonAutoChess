@@ -66,43 +66,25 @@ const userMetadataSchema = new Schema(
         },
         FIRE:{
           type: String,
-          default: 'ICE0'
+          default: 'FIRE0'
         },
         GROUND:{
           type: String,
-          default: 'ICE0'
+          default: 'GROUND0'
         },
         NORMAL:{
           type: String,
-          default: 'ICE0'
+          default: 'NORMAL0'
         },
         GRASS:{
           type: String,
-          default: 'ICE0'
+          default: 'GRASS0'
         },
         WATER:{
           type: String,
-          default: 'ICE0'
+          default: 'WATER0'
         }
-      },
-      history:[
-        {
-          time:{
-            type: Number
-          },
-          rank:{
-            type: Number
-          },
-          elo: {
-            type: Number
-          },
-          pokemons:[
-            {
-              type: String
-            }
-          ]
-        }
-      ]
+      }
     }
 );
 

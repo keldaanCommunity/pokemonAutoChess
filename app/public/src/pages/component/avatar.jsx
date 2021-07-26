@@ -6,8 +6,7 @@ class Avatar extends Component{
         const elo = this.props.elo ? '(' + this.props.elo + ')': '';
 
         return <div style={{
-            textAlign:'center',
-            width:'100px'
+            textAlign:'center'
             }}>
             <img src={"/assets/avatar/" + this.props.avatar + ".png"}/>
             <p>{this.props.name} {elo}</p>

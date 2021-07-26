@@ -12,9 +12,26 @@ class Game extends Component {
     }
 
     componentDidMount(){
-        console.log(this.container);
-        console.log(this.container.current);
         this.game = new GameContainer(this.container.current, this.uid);
+        document.getElementById('game').addEventListener('shop-click', this.game.onShopClick.bind(this.game));
+        document.getElementById('game').addEventListener('player-click', this.game.onPlayerClick.bind(this.game));
+        document.getElementById('game').addEventListener('refresh-click', this.game.onRefreshClick.bind(this.game));
+        document.getElementById('game').addEventListener('lock-click', this.game.onLockClick.bind(this.game));
+        document.getElementById('game').addEventListener('level-click', this.game.onLevelClick.bind(this.game));
+        document.getElementById('game').addEventListener('drag-drop', this.game.onDragDrop.bind(this.game));
+        document.getElementById('game').addEventListener('sell-drop', this.game.onSellDrop.bind(this.game));
+        document.getElementById('game').addEventListener('leave-game', this.game.onLeaveGame.bind(this.game));
+    }
+
+    componentWillUnmount(){
+      document.getElementById('game').removeEventListener('shop-click', this.game.onShopClick.bind(this.game));
+      document.getElementById('game').removeEventListener('player-click', this.game.onPlayerClick.bind(this.game));
+      document.getElementById('game').removeEventListener('refresh-click', this.game.onRefreshClick.bind(this.game));
+      document.getElementById('game').removeEventListener('lock-click', this.game.onLockClick.bind(this.game));
+      document.getElementById('game').removeEventListener('level-click', this.game.onLevelClick.bind(this.game));
+      document.getElementById('game').removeEventListener('drag-drop', this.game.onDragDrop.bind(this.game));
+      document.getElementById('game').removeEventListener('sell-drop', this.game.onSellDrop.bind(this.game));
+      document.getElementById('game').removeEventListener('leave-game', this.game.onLeaveGame.bind(this.game));
     }
 
   render() {
