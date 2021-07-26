@@ -15,7 +15,7 @@ class RoomMenu extends Component{
              display: 'flex',
              flexFlow: 'column'
              }}>
-            <h1>Available Rooms:</h1>
+            <h3>Available Rooms:</h3>
              <ul style={ulStyle}>
                  {this.props.allRooms.map(this.createItem.bind(this))}
              </ul>

@@ -593,7 +593,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
   onLeave(client) {
     super.onLeave(client);
-    console.log(`${client.auth.email} leave lobby`);
+    console.log(`${client.auth.displayName} leave lobby`);
     this.state.users.delete(client.auth.uid);
     // const time = new Date(Date.now());
     // this.state.addMessage('Server',`${client.auth.email} left.`, client.auth.metadata.avatar, Date.now(), true);

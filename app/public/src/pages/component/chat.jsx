@@ -12,7 +12,8 @@ export default class Chat extends React.Component {
     return <div className="nes-container" style={{
         backgroundColor: 'rgba(255, 255, 255, .6)',
          margin:'10px',
-         overflow:'scroll'
+         overflow:'scroll',
+         height:'92vh'
          }}>
             <ChatHistory messages={this.props.messages}/>
             <form onSubmit={this.props.handleSubmit} style={{display:'flex'}}>

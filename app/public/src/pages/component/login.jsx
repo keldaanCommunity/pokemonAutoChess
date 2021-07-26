@@ -40,10 +40,11 @@ class Login extends Component {
         // Initialize Firebase
         if (!firebase.apps.length) {
             firebase.initializeApp(this.firebaseConfig);
-            firebase.auth().onAuthStateChanged(user => {
-                this.setState({isSignedIn: !!user});
-          });
         } 
+
+        firebase.auth().onAuthStateChanged(user => {
+          this.setState({isSignedIn: !!user});
+      });
     }
 
   render() {

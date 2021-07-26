@@ -7,7 +7,7 @@ class Leaderboard extends Component{
             backgroundColor: 'rgba(255, 255, 255, .6)',
              margin:'10px'
              }}>
-            <h1>Leaderboard:</h1>
+            <h3>Leaderboard:</h3>
             <table>
                 <thead></thead>
                 <tbody>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Chat from './component/chat';
 import CurrentUsers from './component/current-users';
 import Leaderboard from './component/leaderboard';
@@ -25,7 +25,6 @@ class Lobby extends Component {
             allRooms: [],
             logOut: false,
             preparationRoomId: ''
-            
         };
 
         this.uid = firebase.auth().currentUser.uid;
@@ -84,7 +83,7 @@ class Lobby extends Component {
     handleSubmit (e) {
         e.preventDefault()
         this.sendMessage(this.state.currentText);
-        this.setState({currentText: ""});
+        this.setState({currentText: ''});
     }
     
     setCurrentText (e) {
@@ -93,7 +92,7 @@ class Lobby extends Component {
     }
 
     sendMessage(payload){
-        this.room.send('new-message', {'name': this.state.user.displayName, 'payload': payload, 'avatar':this.state.user.avatar });
+        this.room.send('new-message', {'name': this.state.user.name, 'payload': payload, 'avatar':this.state.user.avatar });
     }
 
     createRoom() {
@@ -109,7 +108,15 @@ class Lobby extends Component {
               alert(e);
             });
         });
-      }
+    }
+
+    logOut(){
+        this.room.leave();
+        firebase.auth().signOut();
+        this.setState({
+            logOut: true
+        });
+    }
 
   render() {
       if(this.state.logOut){
@@ -122,10 +129,13 @@ class Lobby extends Component {
       }
       else{
         return (
-            <div className="App" style={{
+            <div className='App'>
+                <button className='nes-btn is-primary' onClick={this.logOut.bind(this)}>Sign Out</button>
+
+                <div style={{
                 display:'flex',
                 justifyContent:'space-between'
-            }}>
+                }}>
                 <Leaderboard
                     infos={this.state.leaderboard}
                 />
@@ -142,6 +152,8 @@ class Lobby extends Component {
                     setCurrentText={this.setCurrentText.bind(this)}
                     currentText={this.state.currentText}
                 />
+                </div>
+
             </div>
         );
       }

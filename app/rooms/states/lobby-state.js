@@ -18,9 +18,6 @@ class LobbyState extends schema.Schema {
     if (this.messages.length > 200) {
       this.messages.splice(0, 1);
     }
-    const safeName = name.split('@')[0];
-    if(safeName.includes('guest')){
-    }
     else{
       let safePayload = payload;
       try{
@@ -29,7 +26,7 @@ class LobbyState extends schema.Schema {
       catch (error) {
       console.error('bad words library error');
       } 
-      const message = new Message(safeName, safePayload, avatar, time);
+      const message = new Message(name, safePayload, avatar, time);
       this.messages.push(message);
       // console.log(message.name);
       if (save) {
