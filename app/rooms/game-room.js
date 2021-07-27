@@ -4,6 +4,7 @@ const GameState = require('./states/game-state');
 const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
 const Statistic = require('../models/mongo-models/statistic');
+const UserMetadata = require('../models/mongo-models/user-metadata');
 const EloBot = require('../models/mongo-models/elo-bot');
 const {POKEMON_BOT, XP_PLACE, XP_TABLE} = require('../models/enum');
 const EloRank = require('elo-rank');
@@ -120,7 +121,9 @@ class GameRoom extends colyseus.Room {
   onDispose() {
     console.log(`dispose game room`);
     let self = this;
-    if(this.state.stageLevel >= 10 && this.state.elligibleToXP){
+    let requiredStageLevel = process.env.MODE == 'dev' ? 0 : 10;
+
+    if(this.state.stageLevel >= requiredStageLevel && this.state.elligibleToXP){
       this.state.players.forEach(player =>{
         if(player.isBot){
           EloBot.find({'name': POKEMON_BOT[player.name]}, (err, bots)=>{
@@ -147,49 +150,46 @@ class GameRoom extends colyseus.Room {
             rank = rankOfLastPlayerAlive;
           }
 
-          User.find({_id: player.id}, (err, users)=> {
+          UserMetadata.findOne({uid: player.id}, (err, usr)=> {
             if (err) {
               console.log(err);
             } else {
-              users.forEach((usr) => {
+              let expThreshold = XP_TABLE[usr.level];
+              if (expThreshold === undefined) {
+                expThreshold = XP_TABLE[XP_TABLE.length - 1];
+              }
+              if (usr.exp + player.exp >= expThreshold) {
+                usr.level += 1;
+                usr.exp = usr.exp + player.exp - expThreshold;
+              } else {
+                usr.exp = usr.exp + player.exp;
+              }
+  
+              if (player.rank == 1) {
+                usr.wins += 1;
+                usr.mapWin[self.state.mapType] += 1;
+              }
 
-                let expThreshold = XP_TABLE[usr.metadata.level];
-                if (expThreshold === undefined) {
-                  expThreshold = XP_TABLE[XP_TABLE.length - 1];
+              
+              if(usr.elo){
+                let elo = self.computeElo(player, rank, usr.elo);
+                if(elo){
+                  usr.elo = elo;
                 }
-                if (usr.metadata.exp + player.exp >= expThreshold) {
-                  usr.metadata.level += 1;
-                  usr.metadata.exp = usr.metadata.exp + player.exp - expThreshold;
-                } else {
-                  usr.metadata.exp = usr.metadata.exp + player.exp;
-                }
+                console.log(usr);
+                //usr.markModified('metadata');
+                usr.save();
     
-                if (player.rank == 1) {
-                  usr.metadata.wins += 1;
-                  usr.metadata.mapWin[self.state.mapType] += 1;
-                }
-
-                
-                if(usr.metadata.elo){
-                  let elo = self.computeElo(player, rank, usr.metadata.elo);
-                  if(elo){
-                    usr.metadata.elo = elo;
-                  }
-                  console.log(usr);
-                  usr.markModified('metadata');
-                  usr.save();
-      
-                  Statistic.create({
-                    time: Date.now(),
-                    name: dbrecord.name,
-                    pokemons: dbrecord.pokemons,
-                    rank: dbrecord.rank,
-                    avatar: dbrecord.avatar,
-                    playerId: dbrecord.id,
-                    elo: elo
-                  });
-                }
-              });
+                Statistic.create({
+                  time: Date.now(),
+                  name: dbrecord.name,
+                  pokemons: dbrecord.pokemons,
+                  rank: dbrecord.rank,
+                  avatar: dbrecord.avatar,
+                  playerId: dbrecord.id,
+                  elo: elo
+                });
+              }
             }
           });
         }
