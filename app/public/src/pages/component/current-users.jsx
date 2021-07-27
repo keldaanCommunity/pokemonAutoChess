@@ -6,12 +6,13 @@ class CurrentUsers extends Component{
     render(){
         const ulStyle = {
             listStyle: 'none',
-            padding: '0px'
+            padding: '0px',
         };
 
         return <div className="nes-container" style={{
             backgroundColor: 'rgba(255, 255, 255, .6)',
-             margin:'10px'
+             margin:'10px',
+             flexBasis:'10%'
              }}>
             <ul style={ulStyle}>{Array.from(this.props.users).map(this.createUser.bind(this))}</ul>
             
