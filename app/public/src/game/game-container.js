@@ -2,7 +2,7 @@ import GameScene from './scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
 import WebFontLoaderPlugin from 'phaser3-rex-plugins/plugins/webfontloader-plugin.js';
 import {MAP_TYPE, LAST_BATTLE_RESULT_TRADUCTION, WORDS} from '../../../models/enum.js';
-import {transformCoordinate} from '../utils';
+import {transformCoordinate} from '../pages/utils/utils';
 
 class GameContainer {
   constructor(div, uid) {

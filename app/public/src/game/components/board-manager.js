@@ -1,5 +1,5 @@
 import Pokemon from './pokemon';
-import {transformCoordinate} from '../../utils';
+import {transformCoordinate} from '../../pages/utils/utils';
 
 export default class BoardManager {
   constructor(scene, player, animationManager, uid) {

@@ -16,7 +16,7 @@ import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
 import {WORDS, PHASE_TRADUCTION, MAP_TYPE_NAME} from '../../../../models/enum';
 import firebase from 'firebase/app';
-import { transformAttackCoordinate, getOrientation } from '../../utils';
+import { transformAttackCoordinate, getOrientation } from '../../pages/utils/utils';
 
 
 export default class GameScene extends Scene {

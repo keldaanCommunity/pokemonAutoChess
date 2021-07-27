@@ -67,7 +67,6 @@ class Login extends Component {
         );
     }
     else{
-        //console.log(firebase.auth().currentUser);
         return(
         <div id="play-panel" className="nes-container with-title is-centered" style={{
             backgroundColor: 'rgba(255, 255, 255, .6)',

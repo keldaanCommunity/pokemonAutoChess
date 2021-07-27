@@ -4,7 +4,7 @@ import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemContainer from './item-container';
 import {SPECIAL_SKILL, EFFECTS_ICON} from '../../../../models/enum.js';
-import { transformAttackCoordinate, getAttackScale } from '../../utils';
+import { transformAttackCoordinate, getAttackScale } from '../../pages/utils/utils';
 
 export default class Pokemon extends Button {
   constructor(scene, x, y, pokemon, dragable, isPopup) {

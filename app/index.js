@@ -53,7 +53,7 @@ var limiter = new RateLimit({
 // apply rate limiter to all requests
 app.use(limiter);
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 

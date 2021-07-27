@@ -5,11 +5,14 @@ import CurrentUsers from './component/current-users';
 import Leaderboard from './component/leaderboard';
 import RoomMenu from './component/room-menu';
 import firebase from 'firebase/app';
+import { FIREBASE_CONFIG } from './utils/utils';
+import { Client } from 'colyseus.js';
 
 class Lobby extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+
         this.state = {
             messages: [],
             users: {},
@@ -23,60 +26,71 @@ class Lobby extends Component {
             playerEloLeaderboard: [],
             currentText: '',
             allRooms: [],
-            logOut: false,
+            isSignedIn: false,
             preparationRoomId: ''
         };
 
-        this.uid = firebase.auth().currentUser.uid;
+        this.client = new Client(window.endpoint);
 
-        firebase.auth().currentUser.getIdToken().then(token =>{
-            window._client.joinOrCreate('lobby', {idToken: token})
-            .then(room=>{
-                window._room = room;
-                this.room = room;
-                this.room.state.messages.onAdd = (m) => {this.setState({messages: this.room.state.messages})};
-                this.room.state.messages.onRemove = (m) => {this.setState({messages: this.room.state.messages})};
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(FIREBASE_CONFIG);
+        } 
 
-                this.room.state.users.onAdd = (u) => {
-                    if(u.id == this.uid){
-                        this.setState({user: u});
-                    }
-                    this.setState({users: this.room.state.users})
-                };
-                this.room.state.users.onRemove = (u) => {this.setState({users: this.room.state.users})};
+        firebase.auth().onAuthStateChanged(user => {
+            this.setState({isSignedIn: !!user});
+            if(user){
+                this.uid = firebase.auth().currentUser.uid;
 
-                this.room.state.leaderboard.onAdd = (l) => {this.setState({leaderboard: this.room.state.leaderboard})};
-                this.room.state.leaderboard.onRemove = (l) => {this.setState({leaderboard: this.room.state.leaderboard})};
-
-                this.room.onMessage('rooms', (rooms) => {
-                    rooms.forEach(room =>{
-                      if(room.name == 'room'){
-                        this.setState({allRooms: this.state.allRooms.concat(room)});
-                      }
+                firebase.auth().currentUser.getIdToken().then(token =>{
+                    this.client.joinOrCreate('lobby', {idToken: token})
+                    .then(room=>{
+                        this.room = room;
+                        this.room.state.messages.onAdd = (m) => {this.setState({messages: this.room.state.messages})};
+                        this.room.state.messages.onRemove = (m) => {this.setState({messages: this.room.state.messages})};
+        
+                        this.room.state.users.onAdd = (u) => {
+                            if(u.id == this.uid){
+                                this.setState({user: u});
+                            }
+                            this.setState({users: this.room.state.users})
+                        };
+                        this.room.state.users.onRemove = (u) => {this.setState({users: this.room.state.users})};
+        
+                        this.room.state.leaderboard.onAdd = (l) => {this.setState({leaderboard: this.room.state.leaderboard})};
+                        this.room.state.leaderboard.onRemove = (l) => {this.setState({leaderboard: this.room.state.leaderboard})};
+        
+                        this.room.onMessage('rooms', (rooms) => {
+                            rooms.forEach(room =>{
+                              if(room.name == 'room'){
+                                this.setState({allRooms: this.state.allRooms.concat(room)});
+                              }
+                            });
+                          });
+                      
+                        this.room.onMessage('+', ([roomId, room]) => {
+                            if(room.name == 'room' && this._ismounted){
+                                const roomIndex = this.state.allRooms.findIndex((room) => room.roomId === roomId);
+                                if (roomIndex !== -1) {
+                                    let allRooms = [...this.state.allRooms];
+                                    allRooms[roomIndex] = room;
+                                    this.setState({allRooms: allRooms});
+                                } 
+                                else {
+                                    this.setState({allRooms: this.state.allRooms.concat(room)});
+                                }
+                            }
+                        });
+                    
+                        this.room.onMessage('-', (roomId) => {
+                            if(this._ismounted){
+                                const allRooms = this.state.allRooms.filter((room) => room.roomId !== roomId);
+                                this.setState({allRooms: allRooms});
+                            }
+                        });
                     });
-                  });
-              
-                this.room.onMessage('+', ([roomId, room]) => {
-                    if(room.name == 'room' && this._ismounted){
-                        const roomIndex = this.state.allRooms.findIndex((room) => room.roomId === roomId);
-                        if (roomIndex !== -1) {
-                            let allRooms = [...this.state.allRooms];
-                            allRooms[roomIndex] = room;
-                            this.setState({allRooms: allRooms});
-                        } 
-                        else {
-                            this.setState({allRooms: this.state.allRooms.concat(room)});
-                        }
-                    }
                 });
-            
-                this.room.onMessage('-', (roomId) => {
-                    if(this._ismounted){
-                        const allRooms = this.state.allRooms.filter((room) => room.roomId !== roomId);
-                        this.setState({allRooms: allRooms});
-                    }
-                });
-            });
+            }
         });
     }
 
@@ -97,12 +111,13 @@ class Lobby extends Component {
 
     createRoom() {
         firebase.auth().currentUser.getIdToken().then(token =>{
-            window._client.create('room', {idToken: token}).then((room) => {
-                window._room = room;
+            this.client.create('room', {idToken: token}).then((room) => {
+                this.room.leave();
+                localStorage.setItem('lastRoomId', room.id);
+                localStorage.setItem('lastSessionId', room.sessionId);
                 this.setState({
                     preparationRoomId: room.id
                 });
-                this.room.leave();
             }).catch((e) => {
               console.error('join error', e);
               alert(e);
@@ -113,29 +128,30 @@ class Lobby extends Component {
     logOut(){
         this.room.leave();
         firebase.auth().signOut();
-        this.setState({
-            logOut: true
-        });
     }
 
   render() {
-      if(this.state.logOut){
-        return <Redirect to="/auth" />;
+        const lobbyStyle = {
+            display:'flex',
+            justifyContent:'space-between'
+        };
+
+      if(!this.state.isSignedIn){
+        return <div>
+        </div>;
       }
-      else if(this.state.preparationRoomId != ''){
-        return <Redirect to={{
-            pathname: '/preparation/' + this.state.preparationRoomId
-    }} />;
+      if(this.state.preparationRoomId != ''){
+        return <Redirect to='/preparation'/>;
       }
       else{
         return (
             <div className='App'>
-                <button className='nes-btn is-primary' onClick={this.logOut.bind(this)}>Sign Out</button>
 
-                <div style={{
-                display:'flex',
-                justifyContent:'space-between'
-                }}>
+                <Link to='/auth'>
+                    <button className='nes-btn is-primary' onClick={this.logOut.bind(this)}>Sign Out</button>        
+                </Link>
+
+                <div style={lobbyStyle}>
                 <Leaderboard
                     infos={this.state.leaderboard}
                 />

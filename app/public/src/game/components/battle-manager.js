@@ -1,7 +1,7 @@
 import {GameObjects} from 'phaser';
 import {SPECIAL_SKILL} from '../../../../models/enum';
 import Pokemon from './pokemon';
-import { transformAttackCoordinate } from '../../utils';
+import { transformAttackCoordinate } from '../../pages/utils/utils';
 
 export default class BattleManager {
   constructor(scene, group, player, animationManager) {
