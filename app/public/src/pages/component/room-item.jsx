@@ -7,7 +7,7 @@ class RoomItem extends Component {
         <p className='title'>Room id: {this.props.id}</p>
         <div style={{display: 'flex', justifyContent: 'space-around'}}>
             <h3>{this.props.clients}/{this.props.maxClients}</h3>
-            <Link to={'./preparation' + this.props.id}>
+            <Link to={'./preparation'}>
               <button className='nes-btn is-warning'>Join</button>
             </Link>
         </div>

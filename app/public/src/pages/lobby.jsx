@@ -113,10 +113,12 @@ class Lobby extends Component {
         firebase.auth().currentUser.getIdToken().then(token =>{
             this.client.create('room', {idToken: token}).then((room) => {
                 this.room.leave();
-                localStorage.setItem('lastRoomId', room.id);
+                let id = room.id;
+                localStorage.setItem('lastRoomId', id);
                 localStorage.setItem('lastSessionId', room.sessionId);
+                room.connection.close();
                 this.setState({
-                    preparationRoomId: room.id
+                    preparationRoomId: id
                 });
             }).catch((e) => {
               console.error('join error', e);
@@ -136,6 +138,11 @@ class Lobby extends Component {
             justifyContent:'space-between'
         };
 
+        const buttonStyle= {
+            marginLeft:'10px',
+            marginTop:'10px'
+        }
+
       if(!this.state.isSignedIn){
         return <div>
         </div>;
@@ -148,7 +155,7 @@ class Lobby extends Component {
             <div className='App'>
 
                 <Link to='/auth'>
-                    <button className='nes-btn is-primary' onClick={this.logOut.bind(this)}>Sign Out</button>        
+                    <button className='nes-btn is-primary' style={buttonStyle} onClick={this.logOut.bind(this)}>Sign Out</button>
                 </Link>
 
                 <div style={lobbyStyle}>

@@ -3,11 +3,17 @@ import Avatar from './avatar';
 
 class PreparationMenu extends Component{
     render(){
+        const buttonStyle = {
+            marginLeft:'10px',
+            marginRight:'10px'
+        };
+
         return <div className="nes-container with-title is-centered" style={{
             backgroundColor: 'rgba(255, 255, 255, .6)',
              margin:'10px',
              display: 'flex',
-             flexFlow: 'column'
+             flexFlow: 'column',
+             justifyContent: 'space-between'
              }}>
                 <p className="title">Room id: {this.props.id}</p>
                 <table>
@@ -22,10 +28,10 @@ class PreparationMenu extends Component{
                     </tbody>
                 </table>
                 <div style={{display: 'flex'}}>
-                    <button className='nes-btn is-warning' onClick={this.props.toggleReady}>Ready</button>
-                    <button className='nes-btn is-success' onClick={this.props.startGame}>Start Game</button>
-                    <button className='nes-btn is-primary' onClick={this.props.addBot}>Add Bot</button>
-                    <button className='nes-btn is-primary' onClick={this.props.removeBot}>Remove Bot</button>
+                    <button style={buttonStyle} className='nes-btn is-warning' onClick={this.props.toggleReady}>Ready</button>
+                    <button style={buttonStyle} className='nes-btn is-success' onClick={this.props.startGame}>Start Game</button>
+                    <button style={buttonStyle} className='nes-btn is-primary' onClick={this.props.addBot}>Add Bot</button>
+                    <button style={buttonStyle} className='nes-btn is-primary' onClick={this.props.removeBot}>Remove Bot</button>
                 </div>
             </div>
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Chat from './component/chat';
 import firebase from 'firebase/app';
 import PreparationMenu from './component/preparation-menu';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Client } from 'colyseus.js';
 import { FIREBASE_CONFIG } from './utils/utils';
 
@@ -109,7 +109,20 @@ class Preparation extends Component {
         });
     }
 
+    leaveRoom(){
+        this.room.leave();
+    }
+
   render() {
+    const preparationStyle = {
+        display:'flex',
+        justifyContent:'space-between'
+    };
+
+    const buttonStyle= {
+        marginLeft:'10px',
+        marginTop:'10px'
+    }
 
     if(!this.state.isSignedIn){
         return <div>
@@ -122,24 +135,26 @@ class Preparation extends Component {
     }
     else{
         return (
-            <div className="App" style={{
-                display:'flex',
-                justifyContent:'space-between'
-            }}>
-                <PreparationMenu
-                    id={this.id}
-                    users={this.state.users}
-                    addBot={this.addBot.bind(this)}
-                    removeBot={this.removeBot.bind(this)}
-                    toggleReady={this.toggleReady.bind(this)}
-                    startGame={this.startGame.bind(this)}
-                />
-                <Chat 
-                    messages={this.state.messages}
-                    handleSubmit={this.handleSubmit.bind(this)} 
-                    setCurrentText={this.setCurrentText.bind(this)}
-                    currentText={this.state.currentText}
-                />
+            <div className="App">
+                <Link to='/lobby'>
+                    <button className='nes-btn is-primary' style={buttonStyle} onClick={this.leaveRoom.bind(this)}>Lobby</button>
+                </Link>
+                <div style={preparationStyle}>
+                    <PreparationMenu
+                        id={this.id}
+                        users={this.state.users}
+                        addBot={this.addBot.bind(this)}
+                        removeBot={this.removeBot.bind(this)}
+                        toggleReady={this.toggleReady.bind(this)}
+                        startGame={this.startGame.bind(this)}
+                    />
+                    <Chat 
+                        messages={this.state.messages}
+                        handleSubmit={this.handleSubmit.bind(this)} 
+                        setCurrentText={this.setCurrentText.bind(this)}
+                        currentText={this.state.currentText}
+                    />
+                </div>
             </div>
         );    
     }
