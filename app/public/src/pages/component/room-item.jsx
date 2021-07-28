@@ -8,10 +8,14 @@ class RoomItem extends Component {
         <div style={{display: 'flex', justifyContent: 'space-around'}}>
             <h3>{this.props.clients}/{this.props.maxClients}</h3>
             <Link to={'./preparation'}>
-              <button className='nes-btn is-warning'>Join</button>
+              <button onClick={this.saveIds.bind(this)} className='nes-btn is-warning'>Join</button>
             </Link>
         </div>
     </div>
+  }
+
+  saveIds(){
+    localStorage.setItem('lastRoomId', this.props.id);
   }
 }
 export default RoomItem;

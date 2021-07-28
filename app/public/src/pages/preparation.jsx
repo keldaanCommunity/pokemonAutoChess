@@ -29,35 +29,62 @@ class Preparation extends Component {
         firebase.auth().onAuthStateChanged(user => {
             this.setState({isSignedIn: !!user});
             this.uid = firebase.auth().currentUser.uid;
+            
             this.id = localStorage.getItem('lastRoomId');
             this.sessionId = localStorage.getItem('lastSessionId');
 
-            firebase.auth().currentUser.getIdToken().then(token =>{
-                this.client.reconnect(this.id, this.sessionId)
-                .then(room=>{
-                    this.room = room;
-                    this.room.onMessage('messages', (message) => {
-                        this.setState({
-                            messages: this.state.messages.concat(message)
+            try {
+                firebase.auth().currentUser.getIdToken().then(token =>{
+                    this.client.reconnect(this.id, this.sessionId)
+                    .then(room=>{
+                        this.initializeRoom(room);
+                    })
+                    .catch((err)=>{
+                        this.client.joinById(this.id, {idToken: token}).then(room =>{
+                            this.initializeRoom(room);
                         });
                     });
-        
-                    this.room.state.users.onAdd = (u) => {
-                        if(u.id == this.uid){
-                            this.setState({user: u});
-                        }
-                        u.onChange = changes =>{
-                            this.setState({users: this.room.state.users});
-                        }
-                        this.setState({users: this.room.state.users});
-                    };
-        
-                    this.room.state.users.onRemove = (player, key) => {
-                        this.setState({users: this.room.state.users});
-                    };
                 });
+              
+              } catch (e) {
+                console.error("join error", e);
+            }
+        });
+    }
+
+    initializeRoom(room){
+        this.room = room;
+
+        localStorage.setItem('lastRoomId', this.room.id);
+        localStorage.setItem('lastSessionId', this.room.sessionId);
+
+        this.room.onMessage('messages', (message) => {
+            this.setState({
+                messages: this.state.messages.concat(message)
             });
         });
+
+        this.room.onMessage('game-start', (message) => {
+            localStorage.setItem('lastRoomId', message.id);
+            this.room.leave();
+            this.setState({
+                gameId: message.id
+            });
+          });
+
+        this.room.state.users.onAdd = (u) => {
+            if(u.id == this.uid){
+                this.setState({user: u});
+            }
+            u.onChange = changes =>{
+                this.setState({users: this.room.state.users});
+            }
+            this.setState({users: this.room.state.users});
+        };
+
+        this.room.state.users.onRemove = (player, key) => {
+            this.setState({users: this.room.state.users});
+        };
     }
 
     handleSubmit (e) {
@@ -99,9 +126,14 @@ class Preparation extends Component {
       
             if (allUsersReady) {
               this.client.create('game', {users: this.room.state.users, idToken: token}).then((room) => {
-                this.setState({gameId: room.id});
                 this.room.send('game-start', {id: room.id});
                 this.room.leave();
+                let id = room.id;
+                localStorage.setItem('lastRoomId', id);
+                localStorage.setItem('lastSessionId', room.sessionId);
+                room.connection.close();
+                this.setState({gameId: room.id});
+                
               }).catch((e) => {
                 console.error('join error', e);
               });
@@ -129,9 +161,7 @@ class Preparation extends Component {
         </div>;
       }
     if(this.state.gameId != ''){
-        return <Redirect to={{
-            pathname: '/game/' + this.state.gameId
-        }} />;
+        return <Redirect to='/game'/>;
     }
     else{
         return (

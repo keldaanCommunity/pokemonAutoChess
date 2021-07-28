@@ -7,6 +7,7 @@ const POKEMON_BOT = require('../../models/enum').POKEMON_BOT;
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
+
     UserMetadata.findOne({'uid':auth.uid},(err, user)=>{
       if(user){
         this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.map));
@@ -16,11 +17,12 @@ class OnJoinCommand extends Command {
           'avatar': user.avatar,
           'time': Date.now()
         });
-        if (this.state.users.size > 8) {
-          return [new OnRemoveBotCommand()];
-        }
       }
     });
+
+    if (this.state.users.size >= 8) {
+      return [new OnRemoveBotCommand()];
+    }
   }
 }
 
@@ -120,6 +122,7 @@ class OnAddBotCommand extends Command {
 
 class OnRemoveBotCommand extends Command {
   execute() {
+    console.log('remove bot');
     let botFound = false;
     this.state.users.forEach((user, key) => {
       if (user.isBot && !botFound) {

@@ -100,22 +100,20 @@ class GameRoom extends colyseus.Room {
     this.dispatcher.dispatch(new Commands.OnJoinCommand(), {client, options, auth});
   }
 
-  async onLeave(client, consented) {
+  async onLeave (client, consented) {  
     try {
       if (consented) {
           throw new Error("consented leave");
       }
-
+  
       // allow disconnected client to reconnect into this room until 20 seconds
       await this.allowReconnection(client, 20);
   
     } catch (e) {
   
-      // 20 seconds expired. let's remove the client.
-      console.log(`${client.auth.email} leave game room`);
-      this.dispatcher.dispatch(new Commands.OnLeaveCommand(), {client, consented});
+      console.log(`${client.auth.displayName} leave game room`);
+      this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
     }
-
   }
 
   onDispose() {

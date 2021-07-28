@@ -5,8 +5,8 @@ import {MAP_TYPE, LAST_BATTLE_RESULT_TRADUCTION, WORDS} from '../../../models/en
 import {transformCoordinate} from '../pages/utils/utils';
 
 class GameContainer {
-  constructor(div, uid) {
-    this.room = window._room;
+  constructor(div, uid, room) {
+    this.room = room;
     this.div = div;
     this.game = null;
     this.player = null;
