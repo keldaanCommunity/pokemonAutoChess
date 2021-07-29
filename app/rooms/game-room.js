@@ -96,12 +96,13 @@ class GameRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
-    console.log(`${client.auth.displayName} join game room`);
     this.dispatcher.dispatch(new Commands.OnJoinCommand(), {client, options, auth});
   }
 
   async onLeave (client, consented) {  
     try {
+
+      console.log(`${client.auth.displayName} is leaving`);
       if (consented) {
           throw new Error("consented leave");
       }
@@ -112,7 +113,7 @@ class GameRoom extends colyseus.Room {
     } catch (e) {
   
       console.log(`${client.auth.displayName} leave game room`);
-      this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
+      this.dispatcher.dispatch(new Commands.OnLeaveCommand(), {client, consented});
     }
   }
 

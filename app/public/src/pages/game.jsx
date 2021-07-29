@@ -15,7 +15,8 @@ class Game extends Component {
 
         this.state = {
           afterGameId: '',
-          isSignedIn: false
+          isSignedIn: false,
+          connected: false
         };
 
         // Initialize Firebase
@@ -36,15 +37,8 @@ class Game extends Component {
                   .then(room=>{
                       this.initializeRoom(room);
                   })
-                  .catch((err)=>{
-                      this.client.joinById(this.id, {idToken: token}).then(room =>{
-                          this.initializeRoom(room);
-                      })
-                      .catch(err=>{
-                        this.setState({
-                            toLobby: true
-                        });
-                    });
+                  .catch(err=>{
+                    console.log(err);
                   });
               });
             
@@ -56,6 +50,9 @@ class Game extends Component {
 
     initializeRoom(room){
       this.room = room;
+      this.setState({
+        connected:true
+      });
       this.gameContainer = new GameContainer(this.container.current, this.uid, this.room);
       document.getElementById('game').addEventListener('shop-click', this.gameContainer.onShopClick.bind(this.gameContainer));
       document.getElementById('game').addEventListener('player-click', this.gameContainer.onPlayerClick.bind(this.gameContainer));
@@ -99,6 +96,21 @@ class Game extends Component {
       document.getElementById('game').removeEventListener('leave-game', this.leaveGame.bind(this));
     }
 
+    reconnect(){
+      firebase.auth().currentUser.getIdToken().then(token =>{
+        this.client.reconnect(this.id, this.sessionId)
+        .then(room=>{
+            this.initializeRoom(room);
+        })
+        .catch(err=>{
+          this.setState({
+            toLobby: true
+          });
+          console.log(err);
+        });
+      });
+    }
+
   render() {
     if(!this.state.isSignedIn){
       return <div>
@@ -109,6 +121,11 @@ class Game extends Component {
     }
     if(this.state.afterGameId != ''){
       return <Redirect to='/after'/>;
+    }
+    if(!this.state.connected){
+      return <div style={{display:'flex', marginLeft: '50%', marginTop: '25%'}}>
+        <button className='nes-btn is-warning' onClick={this.reconnect.bind(this)}>Join Game</button>
+      </div>
     }
     else{
       return (

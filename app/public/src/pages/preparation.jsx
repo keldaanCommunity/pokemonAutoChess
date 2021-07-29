@@ -41,17 +41,9 @@ class Preparation extends Component {
                         this.initializeRoom(room);
                     })
                     .catch((err)=>{
-                        this.client.joinById(this.id, {idToken: token}).then(room =>{
-                            this.initializeRoom(room);
-                        })
-                        .catch(err=>{
-                            this.setState({
-                                toLobby: true
-                            });
-                        });
+                        console.log(err);
                     });
                 });
-              
               } catch (e) {
                 console.error("join error", e);
             }
@@ -61,9 +53,6 @@ class Preparation extends Component {
     initializeRoom(room){
         this.room = room;
 
-        localStorage.setItem('lastRoomId', this.room.id);
-        localStorage.setItem('lastSessionId', this.room.sessionId);
-
         this.room.onMessage('messages', (message) => {
             this.setState({
                 messages: this.state.messages.concat(message)
@@ -71,12 +60,15 @@ class Preparation extends Component {
         });
 
         this.room.onMessage('game-start', (message) => {
-            localStorage.setItem('lastRoomId', message.id);
-            this.room.leave();
-            this.setState({
-                gameId: message.id
+            console.log('game start');
+            firebase.auth().currentUser.getIdToken().then(token =>{
+                this.client.joinById(message.id, {idToken: token}).then((room) => {
+                    this.closeConnection(room);
+                  }).catch((e) => {
+                    console.error('join error', e);
+                });
             });
-          });
+        });
 
         this.room.state.users.onAdd = (u) => {
             if(u.id == this.uid){
@@ -133,12 +125,7 @@ class Preparation extends Component {
             if (allUsersReady) {
               this.client.create('game', {users: this.room.state.users, idToken: token}).then((room) => {
                 this.room.send('game-start', {id: room.id});
-                this.room.leave();
-                let id = room.id;
-                localStorage.setItem('lastRoomId', id);
-                localStorage.setItem('lastSessionId', room.sessionId);
-                room.connection.close();
-                this.setState({gameId: room.id});
+                this.closeConnection(room);
                 
               }).catch((e) => {
                 console.error('join error', e);
@@ -147,7 +134,16 @@ class Preparation extends Component {
         });
     }
 
-    leaveRoom(){
+    closeConnection(room){
+        this.room.leave();
+        let id = room.id;
+        localStorage.setItem('lastRoomId', id);
+        localStorage.setItem('lastSessionId', room.sessionId);
+        room.connection.close();
+        this.setState({gameId: room.id});
+    }
+
+    toLobby(){
         this.room.leave();
     }
 
@@ -176,7 +172,7 @@ class Preparation extends Component {
         return (
             <div className="App">
                 <Link to='/lobby'>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={this.leaveRoom.bind(this)}>Lobby</button>
+                    <button className='nes-btn is-primary' style={buttonStyle} onClick={this.toLobby.bind(this)}>Lobby</button>
                 </Link>
                 <div style={preparationStyle}>
                     <PreparationMenu

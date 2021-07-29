@@ -4,10 +4,8 @@ import PlayerPortraitContainer from './player-portrait-container';
 export default class PlayerContainer extends GameObjects.Container {
   constructor(scene, x, y, players, uid) {
     super(scene, x, y);
-    this.players = players;
     this.uid = uid;
-
-    this.players.forEach((player, key) => {
+    players.forEach((player, key) => {
       this.addPlayer(player);
     });
 

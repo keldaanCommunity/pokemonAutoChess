@@ -24,7 +24,7 @@ class RoomMenu extends Component{
     }
 
     createItem(i){
-        return <li key={i.roomId}><RoomItem id={i.roomId} clients={i.clients} maxClients={i.maxClients}/></li>
+        return <li key={i.roomId}><RoomItem id={i.roomId} clients={i.clients} maxClients={i.maxClients} joinRoom={this.props.joinRoom}/></li>
     }
 }
 

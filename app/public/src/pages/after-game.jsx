@@ -65,6 +65,7 @@ class AfterGame extends Component {
 
     leaveRoom(){
         this.room.leave();
+        this.room.connection.close();
     }
 
   render() {

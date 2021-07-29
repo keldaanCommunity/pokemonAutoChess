@@ -11,10 +11,6 @@ class GameContainer {
     this.game = null;
     this.player = null;
     this.uid = uid;
-    this.initialize();
-  }
-
-  initialize() {
     this.initializeEvents();
   }
 
@@ -49,10 +45,6 @@ class GameContainer {
     this.room.state.players.onAdd = (player) => this.initializePlayer(player);
     this.room.state.players.onRemove = (player, key) => this.onPlayerRemove(player, key);
     this.room.onMessage('DragDropFailed', (message) => this.handleDragDropFailed(message));
-    this.room.onMessage('kick-out', (message) => this.handleKickOut());
-    this.room.onMessage('metadata', (metadata) => {
-      _client.auth.metadata = metadata;
-    });
     this.room.onMessage('info',(message)=> this.handleServerInfo(message));
     //this.room.onLeave((client) => this.handleRoomLeft(client));
     this.room.onError((err) => console.log('room error', err));

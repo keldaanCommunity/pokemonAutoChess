@@ -4,6 +4,7 @@ import PokemonFactory from '../../../../models/pokemon-factory';
 export default class PlayerPortraitContainer extends GameObjects.Container {
   constructor(scene, x, y, player, uid) {
     super(scene, x, y);
+    console.log(player.name, player.rank);
     this.id = player.id;
     this.textStyle = {
       fontSize: '30px',

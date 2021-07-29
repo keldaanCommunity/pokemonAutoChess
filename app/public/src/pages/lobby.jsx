@@ -112,14 +112,7 @@ class Lobby extends Component {
     createRoom() {
         firebase.auth().currentUser.getIdToken().then(token =>{
             this.client.create('room', {idToken: token}).then((room) => {
-                this.room.leave();
-                let id = room.id;
-                localStorage.setItem('lastRoomId', id);
-                localStorage.setItem('lastSessionId', room.sessionId);
-                room.connection.close();
-                this.setState({
-                    preparationRoomId: id
-                });
+                this.closeConnection(room);
             }).catch((e) => {
               console.error('join error', e);
               alert(e);
@@ -132,6 +125,28 @@ class Lobby extends Component {
         firebase.auth().signOut();
     }
 
+    joinRoom(id){
+        firebase.auth().currentUser.getIdToken().then(token =>{
+            this.client.joinById(id, {idToken: token}).then((room) => {
+                this.closeConnection(room);
+            }).catch((e) => {
+              console.error('join error', e);
+              alert(e);
+            });
+        });
+    }
+
+    closeConnection(room){
+        this.room.leave();
+        let id = room.id;
+        localStorage.setItem('lastRoomId', id);
+        localStorage.setItem('lastSessionId', room.sessionId);
+        room.connection.close();
+        this.setState({
+            preparationRoomId: id
+        });
+    }
+
   render() {
         const lobbyStyle = {
             display:'flex',
@@ -140,7 +155,8 @@ class Lobby extends Component {
 
         const buttonStyle= {
             marginLeft:'10px',
-            marginTop:'10px'
+            marginTop:'10px',
+            marginRight:'10px'
         }
 
       if(!this.state.isSignedIn){
@@ -153,10 +169,12 @@ class Lobby extends Component {
       else{
         return (
             <div className='App'>
-
-                <Link to='/auth'>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={this.logOut.bind(this)}>Sign Out</button>
-                </Link>
+                <div style={{display:'flex'}}>
+                    <Link to='/auth'>
+                            <button className='nes-btn is-error' style={buttonStyle} onClick={this.logOut.bind(this)}>Sign Out</button>
+                    </Link>
+                    <button className='nes-btn is-primary' style={buttonStyle}>Profile</button>
+                </div>
 
                 <div style={lobbyStyle}>
                 <Leaderboard
@@ -165,6 +183,7 @@ class Lobby extends Component {
                 <RoomMenu
                     allRooms={this.state.allRooms}
                     createRoom={this.createRoom.bind(this)}
+                    joinRoom={this.joinRoom.bind(this)}
                 />
                 <CurrentUsers
                     users={this.state.users}
