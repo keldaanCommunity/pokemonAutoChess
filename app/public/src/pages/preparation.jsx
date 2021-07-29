@@ -136,6 +136,7 @@ class Preparation extends Component {
 
     closeConnection(room){
         this.room.leave();
+        this.room.connection.close();
         let id = room.id;
         localStorage.setItem('lastRoomId', id);
         localStorage.setItem('lastSessionId', room.sessionId);

@@ -128,11 +128,10 @@ class Game extends Component {
       </div>
     }
     else{
-      return (
-        <main style={{display:'flex'}}>
-            <div id='game' ref={this.container}></div>
-        </main>
-        );
+      return <div>
+        <div id='game' ref={this.container} style={{maxHeight:'100vh'}}></div>
+      </div>
+      
     }
   }
 }
