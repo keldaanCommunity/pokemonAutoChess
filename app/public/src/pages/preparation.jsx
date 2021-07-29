@@ -18,7 +18,8 @@ class Preparation extends Component {
             user:{},
             currentText: '',
             gameId: '',
-            isSignedIn: false
+            isSignedIn: false,
+            toLobby: false
         };
 
         // Initialize Firebase
@@ -42,6 +43,11 @@ class Preparation extends Component {
                     .catch((err)=>{
                         this.client.joinById(this.id, {idToken: token}).then(room =>{
                             this.initializeRoom(room);
+                        })
+                        .catch(err=>{
+                            this.setState({
+                                toLobby: true
+                            });
                         });
                     });
                 });
@@ -162,6 +168,9 @@ class Preparation extends Component {
       }
     if(this.state.gameId != ''){
         return <Redirect to='/game'/>;
+    }
+    if(this.state.toLobby){
+        return <Redirect to='/lobby'/>;
     }
     else{
         return (

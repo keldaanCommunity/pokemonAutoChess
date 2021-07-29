@@ -61,7 +61,7 @@ class OnLeaveCommand extends Command {
   execute({client, consented}) {
     this.room.broadcast('messages', {
       'name': 'Server',
-      'payload': `${ this.state.users.get(client.auth.uid).name } left.`,
+      'payload': `${ client.auth.displayName } left.`,
       'avatar': 'magnemite',
       'time':Date.now()
     });

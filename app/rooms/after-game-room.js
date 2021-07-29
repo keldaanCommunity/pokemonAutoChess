@@ -62,9 +62,20 @@ class AfterGameRoom extends colyseus.Room {
     this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
   }
 
-  onLeave(client, consented) {
-    console.log(`${client.auth.email} leave after game`);
-    this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
+  async onLeave(client, consented) {
+    try {
+      if (consented) {
+          throw new Error("consented leave");
+      }
+  
+      // allow disconnected client to reconnect into this room until 20 seconds
+      await this.allowReconnection(client, 20);
+  
+    } catch (e) {
+  
+      console.log(`${client.auth.displayName} leave preparation room`);
+      this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
+    }
   }
 
   onDispose() {

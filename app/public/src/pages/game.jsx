@@ -39,7 +39,12 @@ class Game extends Component {
                   .catch((err)=>{
                       this.client.joinById(this.id, {idToken: token}).then(room =>{
                           this.initializeRoom(room);
-                      });
+                      })
+                      .catch(err=>{
+                        this.setState({
+                            toLobby: true
+                        });
+                    });
                   });
               });
             
@@ -66,18 +71,20 @@ class Game extends Component {
       this.removeEventListeners();
       let savePlayers = [];
       this.gameContainer.game.destroy(true);
-      this.gameContainer.room.state.players.forEach(player => savePlayers.push(this.gameContainer.transformToSimplePlayer(player)));
+      this.room.state.players.forEach(player => savePlayers.push(this.gameContainer.transformToSimplePlayer(player)));
+
       firebase.auth().currentUser.getIdToken().then(token =>{
-        window._client.create('after-game', {players:savePlayers, idToken:token}).then((room) => {
-          window._room = room;
-          this.gameContainer.room.leave();
-          this.setState({
-            afterGameId: room.id
+        this.client.create('after-game', {players:savePlayers, idToken:token}).then((room) => {
+          this.room.leave();
+          let id = room.id;
+          localStorage.setItem('lastRoomId', id);
+          localStorage.setItem('lastSessionId', room.sessionId);
+          room.connection.close();
+          this.setState({afterGameId: room.id});
           });
           //console.log('joined room:', room);
-        }).catch((e) => {
-          console.error('join error', e);
-        });
+      }).catch((e) => {
+        console.error('join error', e);
       });
     }
 
@@ -97,10 +104,11 @@ class Game extends Component {
       return <div>
       </div>;
     }
+    if(this.state.toLobby){
+      return <Redirect to='/lobby'/>;
+    }
     if(this.state.afterGameId != ''){
-      return <Redirect to={{
-        pathname: '/after/' + this.state.afterGameId
-    }}/>;
+      return <Redirect to='/after'/>;
     }
     else{
       return (
