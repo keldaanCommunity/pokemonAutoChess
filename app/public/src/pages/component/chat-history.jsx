@@ -1,14 +1,15 @@
 import React from 'react';
 import ChatMessage from './chat-message';
-import { findDOMNode } from 'react-dom';
 
- export default class ChatHistory extends React.Component{
+export default class ChatHistory extends React.Component {
+    constructor(props) {
+        super(props)
+        this.domElement = React.createRef()
+    }
 
     componentDidUpdate(){
-        if(this.props.messages.length != 0){
-            //console.log(this.props.messages.length);
-            let domMessages = findDOMNode(this.refs.history);
-            domMessages.scrollTop = domMessages.scrollHeight;
+        if (this.props.messages.length > 0) {
+            this.domElement.current.scrollTop = this.domElement.current.scrollHeight;
         }
     }
 
@@ -16,21 +17,19 @@ import { findDOMNode } from 'react-dom';
         let liStyles = {
             padding: '5px',
             borderBottom: '1px solid #ddd'
-         };
-         return <li key={index} style={liStyles}><ChatMessage message={message}/></li>
+        };
+        return <div key={index} style={liStyles}><ChatMessage message={message}/></div>
     }
 
     render() {
-           
         let ulStyles = {
-           listStyle: 'none',
-           margin: 0,
-           padding: 0,
-           overflowX: 'hidden',
-           overflowY: 'scroll',
-           maxWidth: 'inherit',
-           maxHeight: 'inherit'
+            flex: '1',
+            width: '100%',
+            overflowX: 'hidden',
+            overflowY: 'auto',
+            maxWidth: 'inherit',
+            maxHeight: 'inherit'
         };
-        return <ul ref="history" style={ulStyles}>{this.props.messages.map(this.createMessage.bind(this))}</ul>;
-     }
+        return <div ref={this.domElement} style={ulStyles}>{this.props.messages.map(this.createMessage)}</div>;
+    }
  }

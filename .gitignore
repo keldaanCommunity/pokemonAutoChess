@@ -1,8 +1,9 @@
-node_modules
+node_modules/
+db-commands/
+.vscode/
 *.env
 app/public/dist/**/*.js
 *.code-workspace
-db-commands/
 /app/public/dist/assets/tiles/newBackground.tmx
 /app/public/dist/assets/tiles/sleepBackground.json
 /app/public/dist/assets/tiles/sleepBackground.png
