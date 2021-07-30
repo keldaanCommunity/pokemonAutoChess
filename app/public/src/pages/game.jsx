@@ -4,6 +4,7 @@ import GameContainer from '../game/game-container';
 import firebase from 'firebase/app';
 import { FIREBASE_CONFIG } from './utils/utils';
 import { Client } from 'colyseus.js';
+import Modal from './component/modal';
 
 class Game extends Component {
 
@@ -62,6 +63,10 @@ class Game extends Component {
       document.getElementById('game').addEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').addEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
       document.getElementById('game').addEventListener('leave-game', this.leaveGame.bind(this));
+      document.getElementById('leave-button').addEventListener('click', ()=>{
+        this.gameContainer.closePopup();
+        setTimeout(this.leaveGame.bind(this), 500);
+      });
     }
 
     leaveGame(){
@@ -86,6 +91,7 @@ class Game extends Component {
     }
 
     removeEventListeners(){
+      this.gameContainer.closePopup();
       document.getElementById('game').removeEventListener('shop-click', this.gameContainer.onShopClick.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('player-click', this.gameContainer.onPlayerClick.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('refresh-click', this.gameContainer.onRefreshClick.bind(this.gameContainer));
@@ -94,6 +100,7 @@ class Game extends Component {
       document.getElementById('game').removeEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('leave-game', this.leaveGame.bind(this));
+      document.getElementById('leave-button').removeEventListener('click', this.leaveGame.bind(this));
     }
 
     reconnect(){
@@ -123,12 +130,16 @@ class Game extends Component {
       return <Redirect to='/after'/>;
     }
     if(!this.state.connected){
-      return <div style={{display:'flex', marginLeft: '50%', marginTop: '25%'}}>
-        <button className='nes-btn is-warning' onClick={this.reconnect.bind(this)}>Join Game</button>
+      return <div style={{display:'flex', position: 'absolute', top:'50%', left:'50%', marginLeft: '-300px', marginTop: '-150px', backgroundColor: 'rgba(255, 255, 255, .6)'}}>
+          <div className="nes-container with-title is-centered" style={{width: '600px', height: '300px'}}>
+            <p className="title">Container.is-centered</p>
+            <button className='nes-btn is-warning' onClick={this.reconnect.bind(this)}>Join Game</button>
+        </div>
       </div>
     }
     else{
       return <div>
+        <Modal/>
         <div id='game' ref={this.container} style={{maxHeight:'100vh'}}></div>
       </div>
       

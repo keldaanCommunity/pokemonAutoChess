@@ -501,6 +501,7 @@ class GameContainer {
   }
 
   onDragDrop(event) {
+    this.showPopup('test', 'tues sanglier');
     this.room.send('dragDrop', {'detail': event.detail});
   }
 
@@ -512,6 +513,10 @@ class GameContainer {
     document.getElementById('modal-title').textContent = title;
     document.getElementById('modal-info').textContent = info;
     $('#modal-popup').modal();
+  }
+
+  closePopup(){
+    $('#modal-popup').modal('hide');
   }
 
   transformToSimplePlayer(player){

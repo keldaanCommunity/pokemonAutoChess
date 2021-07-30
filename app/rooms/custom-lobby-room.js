@@ -20,7 +20,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     super.onCreate(options);
     this.setState(new LobbyState());
 
-    Mongoose.connect(process.env.MONGO_URI, (err) => {
+    Mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true , useUnifiedTopology: true }, (err) => {
       Chat.find({'time': {$gt: Date.now() - 864000000}}, (err, messages)=> {
         if (err) {
           console.log(err);
