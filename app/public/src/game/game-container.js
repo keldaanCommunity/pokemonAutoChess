@@ -501,7 +501,7 @@ class GameContainer {
   }
 
   onDragDrop(event) {
-    this.showPopup('test', 'tues sanglier');
+    //this.showPopup('test', 'tues sanglier');
     this.room.send('dragDrop', {'detail': event.detail});
   }
 

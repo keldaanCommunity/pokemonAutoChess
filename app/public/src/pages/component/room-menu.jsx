@@ -13,7 +13,8 @@ class RoomMenu extends Component{
             backgroundColor: 'rgba(255, 255, 255, .6)',
              margin:'10px',
              display: 'flex',
-             flexFlow: 'column'
+             flexFlow: 'column',
+             flexBasis: '10%'
              }}>
             <h3>Available Rooms:</h3>
              <ul style={ulStyle}>

@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import Chat from './component/chat';
 import CurrentUsers from './component/current-users';
-import Leaderboard from './component/leaderboard';
 import RoomMenu from './component/room-menu';
+import TabMenu from './component/tab-menu';
 import firebase from 'firebase/app';
 import { FIREBASE_CONFIG } from './utils/utils';
 import { Client } from 'colyseus.js';
+
 
 class Lobby extends Component {
 
@@ -53,7 +54,10 @@ class Lobby extends Component {
                             if(u.id == this.uid){
                                 this.setState({user: u});
                             }
-                            this.setState({users: this.room.state.users})
+                            u.onChange = () =>{
+                                this.setState({users: this.room.state.users});
+                            };
+                            this.setState({users: this.room.state.users});
                         };
                         this.room.state.users.onRemove = (u) => {this.setState({users: this.room.state.users})};
         
@@ -87,6 +91,12 @@ class Lobby extends Component {
                                 const allRooms = this.state.allRooms.filter((room) => room.roomId !== roomId);
                                 this.setState({allRooms: allRooms});
                             }
+                        });
+
+                        this.room.onMessage('user', (user)=>{
+                            this.setState({
+                                user: user
+                            });
                         });
                     });
                 });
@@ -147,6 +157,10 @@ class Lobby extends Component {
         });
     }
 
+    changeAvatar(pokemon){
+        this.room.send('avatar', {'pokemon': pokemon});
+    }
+
   render() {
         const lobbyStyle = {
             display:'flex',
@@ -173,13 +187,16 @@ class Lobby extends Component {
                     <Link to='/auth'>
                             <button className='nes-btn is-error' style={buttonStyle} onClick={this.logOut.bind(this)}>Sign Out</button>
                     </Link>
-                    <button className='nes-btn is-primary' style={buttonStyle}>Profile</button>
                 </div>
 
                 <div style={lobbyStyle}>
-                <Leaderboard
-                    infos={this.state.leaderboard}
+
+                <TabMenu
+                    leaderboard={this.state.leaderboard}
+                    user={this.state.user}
+                    changeAvatar={this.changeAvatar.bind(this)}
                 />
+
                 <RoomMenu
                     allRooms={this.state.allRooms}
                     createRoom={this.createRoom.bind(this)}
@@ -195,7 +212,6 @@ class Lobby extends Component {
                     currentText={this.state.currentText}
                 />
                 </div>
-
             </div>
         );
       }

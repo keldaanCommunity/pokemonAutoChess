@@ -3,11 +3,7 @@ import LeaderboardInfo from './leaderboard-info';
 
 class Leaderboard extends Component{
     render(){
-        return <div className="nes-container" style={{
-            backgroundColor: 'rgba(255, 255, 255, .6)',
-             margin:'10px'
-             }}>
-            <h3>Leaderboard:</h3>
+        return <div>
             <table>
                 <thead></thead>
                 <tbody>

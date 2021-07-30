@@ -1,13 +1,14 @@
 const colyseus = require('colyseus');
-const {PKM, TYPE, RARITY, BOT_AVATAR} = require('../models/enum');
 const LobbyState = require('./states/lobby-state');
 const Mongoose = require('mongoose');
 const Chat = require('../models/mongo-models/chat');
 const UserMetadata = require('../models/mongo-models/user-metadata');
 const LeaderboardInfo = require('../models/colyseus-models/leaderboard-info');
 const schema = require('@colyseus/schema');
-const GameUser = require('../models/colyseus-models/game-user');
+const LobbyUser = require('../models/colyseus-models/lobby-user');
 const admin = require('firebase-admin');
+const GameRecord = require('../models/colyseus-models/game-record');
+const Statistic = require('../models/mongo-models/statistic');
 
 class CustomLobbyRoom extends colyseus.LobbyRoom {
   constructor() {
@@ -193,342 +194,335 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     });
 
     this.onMessage('avatar', (client, message) => {
-      const pokemon = message.pokemon;
-      const lvl = client.auth.metadata.level;
-      const mapWin = client.auth.metadata.mapWin;
-      let changeNeeded = false;
-      switch (pokemon) {
-        case 'rattata':
-          if (lvl >= 0) {
-            changeNeeded = true;
+      UserMetadata.findOne({'uid':client.auth.uid},(err, user)=>{
+        if(user){
+          const pokemon = message.pokemon;
+          const lvl = user.level;
+          const mapWin = user.mapWin;
+          let changeNeeded = false;
+          switch (pokemon) {
+            case 'rattata':
+              if (lvl >= 0) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'pidgey':
+              if (lvl >= 1) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'spearow':
+              if (lvl >= 2) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'caterpie':
+              if (lvl >= 3) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'weedle':
+              if (lvl >= 4) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'igglybuff':
+              if (lvl >= 5) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'seedot':
+              if (lvl >= 6) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'zubat':
+              if (lvl >= 7) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'sandshrew':
+              if (lvl >= 8) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'pikachu':
+              if (lvl >= 9) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'nidoranF':
+              if (lvl >= 10) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'machop':
+              if (lvl >= 11) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'geodude':
+              if (lvl >= 12) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'eevee':
+              if (lvl >= 13) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'poliwag':
+              if (lvl >= 14) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'turtwig':
+              if (lvl >= 15) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'togepi':
+              if (lvl >= 16) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'ralts':
+              if (lvl >= 17) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'nidoranM':
+              if (lvl >= 18) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'slakoth':
+              if (lvl >= 19) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'growlithe':
+              if (lvl >= 20) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'numel':
+              if (lvl >= 21) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'abra':
+              if (lvl >= 22) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'horsea':
+              if (lvl >= 23) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'gastly':
+              if (lvl >= 24) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'mudkip':
+              if (lvl >= 25) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'trapinch':
+              if (mapWin.GROUND >= 5) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'vibrava':
+              if (mapWin.GROUND >= 10) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'flygon':
+              if (mapWin.GROUND >= 25) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'regirock':
+              if (mapWin.GROUND >= 100) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'bagon':
+              if (mapWin.NORMAL >= 5) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'shelgon':
+              if (mapWin.NORMAL >= 10) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'salamence':
+              if (mapWin.NORMAL >= 25) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'rayquaza':
+              if (mapWin.NORMAL >= 100) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'spheal':
+              if (mapWin.ICE >= 5) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'sealeo':
+              if (mapWin.ICE >= 10) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'walrein':
+              if (mapWin.ICE >= 25) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'articuno':
+              if (mapWin.ICE >= 100) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'bulbasaur':
+              if (mapWin.GRASS >= 5) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'ivysaur':
+              if (mapWin.GRASS >= 10) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'venusaur':
+              if (mapWin.GRASS >= 25) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'shaymin':
+              if (mapWin.GRASS >= 100) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'squirtle':
+              if (mapWin.WATER >= 5) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'wartortle':
+              if (mapWin.WATER >= 10) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'blastoise':
+              if (mapWin.WATER >= 25) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'kyogre':
+              if (mapWin.WATER >= 100) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'cyndaquil':
+              if (mapWin.FIRE >= 5) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'quilava':
+              if (mapWin.FIRE >= 10) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'typlosion':
+              if (mapWin.FIRE >= 25) {
+                changeNeeded = true;
+              }
+              break;
+    
+            case 'entei':
+              if (mapWin.FIRE >= 100) {
+                changeNeeded = true;
+              }
+              break;
+            
+            case 'meowth':
+              if(client.auth.metadata.donor){
+                changeNeeded = true;
+              }
+              break;
+            
+            case 'persian':
+              if(client.auth.metadata.donor){
+                changeNeeded = true;
+              }
+    
+            default:
+              break;
           }
-          break;
-
-        case 'pidgey':
-          if (lvl >= 1) {
-            changeNeeded = true;
+    
+          if (changeNeeded && user.avatar != pokemon) {
+            user.avatar = pokemon;
+            user.save();
+            this.state.users.get(user.uid).avatar = user.avatar;
           }
-          break;
-
-        case 'spearow':
-          if (lvl >= 2) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'caterpie':
-          if (lvl >= 3) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'weedle':
-          if (lvl >= 4) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'igglybuff':
-          if (lvl >= 5) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'seedot':
-          if (lvl >= 6) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'zubat':
-          if (lvl >= 7) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'sandshrew':
-          if (lvl >= 8) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'pikachu':
-          if (lvl >= 9) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'nidoranF':
-          if (lvl >= 10) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'machop':
-          if (lvl >= 11) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'geodude':
-          if (lvl >= 12) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'eevee':
-          if (lvl >= 13) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'poliwag':
-          if (lvl >= 14) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'turtwig':
-          if (lvl >= 15) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'togepi':
-          if (lvl >= 16) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'ralts':
-          if (lvl >= 17) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'nidoranM':
-          if (lvl >= 18) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'slakoth':
-          if (lvl >= 19) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'growlithe':
-          if (lvl >= 20) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'numel':
-          if (lvl >= 21) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'abra':
-          if (lvl >= 22) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'horsea':
-          if (lvl >= 23) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'gastly':
-          if (lvl >= 24) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'mudkip':
-          if (lvl >= 25) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'trapinch':
-          if (mapWin.GROUND >= 5) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'vibrava':
-          if (mapWin.GROUND >= 10) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'flygon':
-          if (mapWin.GROUND >= 25) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'regirock':
-          if (mapWin.GROUND >= 100) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'bagon':
-          if (mapWin.NORMAL >= 5) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'shelgon':
-          if (mapWin.NORMAL >= 10) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'salamence':
-          if (mapWin.NORMAL >= 25) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'rayquaza':
-          if (mapWin.NORMAL >= 100) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'spheal':
-          if (mapWin.ICE >= 5) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'sealeo':
-          if (mapWin.ICE >= 10) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'walrein':
-          if (mapWin.ICE >= 25) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'articuno':
-          if (mapWin.ICE >= 100) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'bulbasaur':
-          if (mapWin.GRASS >= 5) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'ivysaur':
-          if (mapWin.GRASS >= 10) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'venusaur':
-          if (mapWin.GRASS >= 25) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'shaymin':
-          if (mapWin.GRASS >= 100) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'squirtle':
-          if (mapWin.WATER >= 5) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'wartortle':
-          if (mapWin.WATER >= 10) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'blastoise':
-          if (mapWin.WATER >= 25) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'kyogre':
-          if (mapWin.WATER >= 100) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'cyndaquil':
-          if (mapWin.FIRE >= 5) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'quilava':
-          if (mapWin.FIRE >= 10) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'typlosion':
-          if (mapWin.FIRE >= 25) {
-            changeNeeded = true;
-          }
-          break;
-
-        case 'entei':
-          if (mapWin.FIRE >= 100) {
-            changeNeeded = true;
-          }
-          break;
-        
-        case 'meowth':
-          if(client.auth.metadata.donor){
-            changeNeeded = true;
-          }
-          break;
-        
-        case 'persian':
-          if(client.auth.metadata.donor){
-            changeNeeded = true;
-          }
-
-        default:
-          break;
-      }
-
-      if (changeNeeded && client.auth.metadata.avatar != pokemon) {
-        client.auth.metadata.avatar = pokemon;
-        User.find({_id: client.auth.uid}, (err, users)=> {
-          if (err) {
-            console.log(err);
-          } else {
-            users.forEach((usr) => {
-              usr.metadata.avatar = pokemon;
-              usr.markModified('metadata');
-              usr.save();
-            });
-          }
-        });
-      }
-
-      client.send('metadata', client.auth.metadata);
+        }
+      });
     });
   }
 
@@ -542,23 +536,68 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
   onJoin(client, options, auth) {
     super.onJoin(client, options, auth);
     //console.log(auth);
-    UserMetadata.findOne({'uid':auth.uid},(err, user)=>{
+    UserMetadata.findOne({'uid':client.auth.uid},(err, user)=>{
       if(user){
-        this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.map));
+        Statistic.find({'playerId': client.auth.uid}, ['pokemons','time','rank','elo'], {limit:10, sort:{'time': -1}}, (err, stats)=>{
+          if(err){
+            console.log(err);
+          }
+          else{
+            let records = new schema.ArraySchema();
+            stats.forEach(record =>{
+              records.push(new GameRecord(record.time, record.rank, record.elo, record.pokemons));
+            });
+
+            this.state.users.set(client.auth.uid, new LobbyUser(
+              user.uid,
+              user.displayName, 
+              user.elo, 
+              user.avatar,
+              user.map,
+              user.langage,
+              user.wins,
+              user.exp,
+              user.level,
+              user.mapWin,
+              user.donor,
+              records));
+          }
+        });
+
       }
       else{
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName
         });
-        this.state.users.set(client.auth.uid, new GameUser(client.auth.uid, client.auth.displayName, 1000, 'rattata', false, false, {
-          FIRE: 'FIRE0',
-          ICE:'ICE0',
-          GROUND:'GROUND0',
-          NORMAL:'NORMAL0',
-          GRASS:'GRASS0',
-          WATER:'WATER0'
-        }));
+        this.state.users.set(client.auth.uid, new LobbyUser(
+          client.auth.uid,
+          client.auth.displayName,
+          1000,
+          'rattata',
+          {
+            FIRE: 'FIRE0',
+            ICE:'ICE0',
+            GROUND:'GROUND0',
+            NORMAL:'NORMAL0',
+            GRASS:'GRASS0',
+            WATER:'WATER0'
+          },
+          'eng',
+          0,
+          0,
+          0,
+          {
+            FIRE: 0,
+            ICE:0,
+            GROUND:0,
+            NORMAL:0,
+            GRASS:0,
+            WATER:0
+          },
+          false,
+          []
+        ));
       }
     });
     /*

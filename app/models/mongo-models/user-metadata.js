@@ -9,6 +9,10 @@ const userMetadataSchema = new Schema(
       displayName: {
         type: String
       },
+      langage: {
+        type: String,
+        default: 'eng'
+      },
       avatar: {
         type: String,
         default: 'rattata'
