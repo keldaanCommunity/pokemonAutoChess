@@ -8,7 +8,16 @@ export default class BattleManager {
     this.group = group;
     this.scene = scene;
     this.player = player;
-    this.opponentNameText = this.scene.add.text(1270, 25, this.player.opponentName.slice(0, 8), window.textStyle);
+    this.textStyle = {
+      fontSize: '35px',
+      fontFamily: "Verdana",
+      color: 'white',
+      align: 'center',
+      stroke: '#000',
+      strokeThickness: 2,
+      wordWrap: { width: 200, useAdvancedWrap: true }
+    };
+    this.opponentNameText = this.scene.add.text(1270, 25, this.player.opponentName.slice(0, 8), this.textStyle);
     this.animationManager = animationManager;
   }
 

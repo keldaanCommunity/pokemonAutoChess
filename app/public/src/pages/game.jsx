@@ -132,7 +132,7 @@ class Game extends Component {
     if(!this.state.connected){
       return <div style={{display:'flex', position: 'absolute', top:'50%', left:'50%', marginLeft: '-300px', marginTop: '-150px', backgroundColor: 'rgba(255, 255, 255, .6)'}}>
           <div className="nes-container with-title is-centered" style={{width: '600px', height: '300px'}}>
-            <p className="title">Container.is-centered</p>
+            <p className="title">Game</p>
             <button className='nes-btn is-warning' onClick={this.reconnect.bind(this)}>Join Game</button>
         </div>
       </div>

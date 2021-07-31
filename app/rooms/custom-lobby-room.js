@@ -197,6 +197,42 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
       });
     });
 
+    this.onMessage('search', (client, message)=>{
+
+      UserMetadata.findOne({'displayName':message.name},(err, user)=>{
+        if(user){
+          Statistic.find({'playerId': user.uid}, ['pokemons','time','rank','elo'], {limit:10, sort:{'time': -1}}, (err, stats)=>{
+            if(err){
+              console.log(err);
+            }
+            else{
+              let records = new schema.ArraySchema();
+              stats.forEach(record =>{
+                records.push(new GameRecord(record.time, record.rank, record.elo, record.pokemons));
+              });
+              
+              client.send('user', new LobbyUser(
+                user.uid,
+                user.displayName, 
+                user.elo, 
+                user.avatar,
+                user.map,
+                user.langage,
+                user.wins,
+                user.exp,
+                user.level,
+                user.mapWin,
+                user.donor,
+                records));
+            }
+          });
+        }
+        else{
+          client.send('user', {});
+        }
+      });
+    });
+
     this.onMessage('avatar', (client, message) => {
       UserMetadata.findOne({'uid':client.auth.uid},(err, user)=>{
         if(user){

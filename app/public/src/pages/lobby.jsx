@@ -18,6 +18,7 @@ class Lobby extends Component {
             messages: [],
             users: {},
             user:{},
+            searchedUser:{},
             leaderboard: [],
             pokemonLeaderboard: [],
             mythicalPokemonLeaderboard: [],
@@ -52,7 +53,10 @@ class Lobby extends Component {
         
                         this.room.state.users.onAdd = (u) => {
                             if(u.id == this.uid){
-                                this.setState({user: u});
+                                this.setState({
+                                                user: u,
+                                                searchedUser: u
+                                            });
                             }
                             u.onChange = () =>{
                                 this.setState({users: this.room.state.users});
@@ -95,7 +99,7 @@ class Lobby extends Component {
 
                         this.room.onMessage('user', (user)=>{
                             this.setState({
-                                user: user
+                                searchedUser: user
                             });
                         });
                     });
@@ -166,16 +170,22 @@ class Lobby extends Component {
     }
 
     changeName(name){
-        firebase.auth().currentUser.updateProfile({displayName: name})
-        .then(()=> {
-            // Profile updated successfully!
-            this.room.send('name', {'name': name});
-          }, function(error) {
-            console.log(error);
-          });
+        if(name.length > 3){
+            firebase.auth().currentUser.updateProfile({displayName: name})
+            .then(()=> {
+                // Profile updated successfully!
+                this.room.send('name', {'name': name});
+              }, function(error) {
+                console.log(error);
+            });
+        }
     }
 
-  render() {
+    searchName(name){
+        this.room.send('search', {'name':name});
+    }
+
+    render() {
         const lobbyStyle = {
             display:'flex',
             justifyContent:'space-between'
@@ -208,9 +218,11 @@ class Lobby extends Component {
                 <TabMenu
                     leaderboard={this.state.leaderboard}
                     user={this.state.user}
+                    searchedUser={this.state.searchedUser}
                     changeAvatar={this.changeAvatar.bind(this)}
                     changeName={this.changeName.bind(this)}
                     changeMap={this.changeMap.bind(this)}
+                    searchName={this.searchName.bind(this)}
                 />
 
                 <RoomMenu
@@ -233,12 +245,12 @@ class Lobby extends Component {
       }
     }
 
-  componentDidMount() { 
-    this._ismounted = true;
+    componentDidMount() { 
+        this._ismounted = true;
   }
   
-  componentWillUnmount() {
-     this._ismounted = false;
+    componentWillUnmount() {
+        this._ismounted = false;
   }
 }
 export default Lobby;

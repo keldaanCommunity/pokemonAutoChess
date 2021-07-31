@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Leaderboard from './leaderboard';
 import Profile from './profile';
+import Search from './search';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
@@ -13,8 +14,9 @@ class TabMenu extends Component {
         flexBasis:'30%'
         }}>
             <TabList>
-            <Tab>Leaderboard</Tab>
-            <Tab>Profile</Tab>
+                <Tab>Leaderboard</Tab>
+                <Tab>Profile</Tab>
+                <Tab>Search</Tab>
             </TabList>
 
             <TabPanel>
@@ -27,6 +29,12 @@ class TabMenu extends Component {
                     user={this.props.user}
                     changeAvatar={this.props.changeAvatar}
                     changeName={this.props.changeName}
+                />
+            </TabPanel>
+            <TabPanel>
+                <Search
+                    searchName={this.props.searchName}
+                    user={this.props.searchedUser}
                 />
             </TabPanel>
         </Tabs>

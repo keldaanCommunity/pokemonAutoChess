@@ -19,7 +19,8 @@ class Preparation extends Component {
             currentText: '',
             gameId: '',
             isSignedIn: false,
-            toLobby: false
+            toLobby: false,
+            connected: false
         };
 
         // Initialize Firebase
@@ -52,6 +53,9 @@ class Preparation extends Component {
 
     initializeRoom(room){
         this.room = room;
+        this.setState({
+            connected:true
+        });
 
         this.room.onMessage('messages', (message) => {
             this.setState({
@@ -144,6 +148,21 @@ class Preparation extends Component {
         this.setState({gameId: room.id});
     }
 
+    reconnect(){
+        firebase.auth().currentUser.getIdToken().then(token =>{
+          this.client.reconnect(this.id, this.sessionId)
+          .then(room=>{
+              this.initializeRoom(room);
+          })
+          .catch(err=>{
+            this.setState({
+              toLobby: true
+            });
+            console.log(err);
+          });
+        });
+      }
+
     toLobby(){
         this.room.leave();
     }
@@ -168,6 +187,14 @@ class Preparation extends Component {
     }
     if(this.state.toLobby){
         return <Redirect to='/lobby'/>;
+    }
+    if(!this.state.connected){
+        return <div style={{display:'flex', position: 'absolute', top:'50%', left:'50%', marginLeft: '-300px', marginTop: '-150px', backgroundColor: 'rgba(255, 255, 255, .6)'}}>
+            <div className="nes-container with-title is-centered" style={{width: '600px', height: '300px'}}>
+              <p className="title">Game</p>
+              <button className='nes-btn is-warning' onClick={this.reconnect.bind(this)}>Join Preparation Room</button>
+          </div>
+        </div>
     }
     else{
         return (
