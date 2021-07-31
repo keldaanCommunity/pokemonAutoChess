@@ -4,8 +4,12 @@ import LeaderboardInfo from './leaderboard-info';
 class Leaderboard extends Component{
     render(){
         return <div>
+            <div style={{display:'flex', justifyContent:'space-between'}}>
+                <p>Rank</p>
+                <p>Name</p>
+                <p>Elo</p>
+            </div>
             <table>
-                <thead></thead>
                 <tbody>
                     {this.props.infos.map(this.createItem.bind(this))}
                 </tbody>
