@@ -1,8 +1,27 @@
 import React, { Component } from 'react';
 import { XP_TABLE } from '../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import TilesetMenu from './tileset-menu';
 
 class Profile extends Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+            inputValue:''
+        }
+    }
+
+    handleInputValueChange(event){
+        this.setState({
+            inputValue:event.target.value
+        });
+    }
+
+    handleChangeName(){
+        this.props.changeName(this.state.inputValue);
+    }
+
   render() {
     return (
         <div>
@@ -10,14 +29,15 @@ class Profile extends Component {
                 <img src={"/assets/avatar/" + this.props.user.avatar + ".png"}/>
                 <h5>{this.props.user.name}</h5>
             </div>
-            <p>Langage: {this.props.user.langage}</p>
-            <p>Elo: {this.props.user.elo}</p>
-            <p>Wins: {this.props.user.wins}</p>
             <p>Level {this.props.user.level}</p>
             <div style={{display:'flex', justifyContent:'space-between'}}>
                 <progress className="nes-progress" value={this.props.user.exp} max={XP_TABLE[this.props.user.level]}></progress>
                 <p>{this.props.user.exp} / {XP_TABLE[this.props.user.level]}</p>
             </div>
+            <p>Langage: {this.props.user.langage}</p>
+            <p>Elo: {this.props.user.elo}</p>
+            <p>Wins: {this.props.user.wins}</p>
+            <p>Tipee contributor: {this.props.user.donor ? 'Yes': 'No'}</p>
 
             <Tabs>
                 <TabList>
@@ -30,8 +50,8 @@ class Profile extends Component {
                     <div>
                         <h5>Change Name</h5>
                         <div className="nes-field is-inline">
-                            <input type="text" id="inline_field" className="nes-input" placeholder={this.props.user.name}/>
-                            <button className="nes-btn is-primary">Change</button>
+                            <input type="text" id="inline_field" className="nes-input" placeholder={this.props.user.name} onChange={this.handleInputValueChange.bind(this)}/>
+                            <button className="nes-btn is-primary" onClick={this.handleChangeName.bind(this)}>Change</button>
                         </div>
                     </div>
                 </TabPanel>
@@ -111,6 +131,7 @@ class Profile extends Component {
                 <TabPanel>
                     <div>
                         <h5>Change Tileset</h5>
+                        <TilesetMenu mapWin={this.props.user.mapWin} changeMap={this.props.changeMap}/>
                     </div>
                 </TabPanel>
             </Tabs>

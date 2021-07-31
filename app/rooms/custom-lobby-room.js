@@ -157,40 +157,44 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     });
 
     this.onMessage('map', (client, message) => {
-      const mapName = `${message.map}${message.index}`;
-      const map = message.map;
-      const index = message.index;
-      const mapWin = client.auth.metadata.mapWin[map];
-      let changeNeeded = false;
-      if(index == 0){
-        changeNeeded = true;
-      }
-      else if(index == 1 && mapWin >= 5){
-        changeNeeded = true;
-      }
-      else if(index == 2 && mapWin >= 10){
-        changeNeeded = true;
-      }
-      else if(index == 3 && mapWin >= 20){
-        changeNeeded = true;
-      }
-      else if(index == 4 && mapWin >= 40){
-        changeNeeded = true;
-      }
-      if(changeNeeded && mapName != client.auth.metadata.map[map]){
-        client.auth.metadata.map[map] = mapName;
-        User.find({_id: client.auth.uid}, (err, users)=> {
-          if (err) {
-            console.log(err);
-          } else {
-            users.forEach((usr) => {
-              usr.metadata.map[map] = mapName;
-              usr.markModified('metadata');
-              usr.save();
-            });
+      UserMetadata.findOne({'uid':client.auth.uid},(err, user)=>{
+        if(user){
+          const mapName = `${message.map}${message.index}`;
+          const map = message.map;
+          const index = message.index;
+          const mapWin = user.mapWin[map];
+          let changeNeeded = false;
+          if(index == 0){
+            changeNeeded = true;
           }
-        });
-      }
+          else if(index == 1 && mapWin >= 5){
+            changeNeeded = true;
+          }
+          else if(index == 2 && mapWin >= 10){
+            changeNeeded = true;
+          }
+          else if(index == 3 && mapWin >= 20){
+            changeNeeded = true;
+          }
+          else if(index == 4 && mapWin >= 40){
+            changeNeeded = true;
+          }
+          if(changeNeeded && mapName != user.map[map]){
+            user.map[map] = mapName;
+            user.save()
+          }
+        }
+      });
+    });
+
+    this.onMessage('name', (client, message)=>{
+      this.state.users.get(client.auth.uid).name = message.name;
+      UserMetadata.findOne({'uid':client.auth.uid},(err, user)=>{
+        if(user){
+          user.displayName = message.name;
+          user.save();
+        }
+      });
     });
 
     this.onMessage('avatar', (client, message) => {

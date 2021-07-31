@@ -26,6 +26,7 @@ class TabMenu extends Component {
                 <Profile 
                     user={this.props.user}
                     changeAvatar={this.props.changeAvatar}
+                    changeName={this.props.changeName}
                 />
             </TabPanel>
         </Tabs>
@@ -33,6 +34,3 @@ class TabMenu extends Component {
   }
 }
 export default TabMenu;
-
-
-

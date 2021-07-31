@@ -161,6 +161,20 @@ class Lobby extends Component {
         this.room.send('avatar', {'pokemon': pokemon});
     }
 
+    changeMap(map, index){
+        this.room.send('map', {'map': map, 'index':index});
+    }
+
+    changeName(name){
+        firebase.auth().currentUser.updateProfile({displayName: name})
+        .then(()=> {
+            // Profile updated successfully!
+            this.room.send('name', {'name': name});
+          }, function(error) {
+            console.log(error);
+          });
+    }
+
   render() {
         const lobbyStyle = {
             display:'flex',
@@ -195,6 +209,8 @@ class Lobby extends Component {
                     leaderboard={this.state.leaderboard}
                     user={this.state.user}
                     changeAvatar={this.changeAvatar.bind(this)}
+                    changeName={this.changeName.bind(this)}
+                    changeMap={this.changeMap.bind(this)}
                 />
 
                 <RoomMenu
