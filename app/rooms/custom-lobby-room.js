@@ -44,7 +44,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
         }
       });
       */
-      UserMetadata.find({},['displayName','avatar','elo'],{limit:25, sort:{'elo': -1}}, (err, users)=>{
+      UserMetadata.find({},['displayName','avatar','elo'],{limit:30, sort:{'elo': -1}}, (err, users)=>{
         if(err){
           console.log(err);
         }

@@ -15,7 +15,7 @@ export default class Chat extends React.Component {
       alignItems: 'flex-start',
       backgroundColor: 'rgba(255, 255, 255, .6)',
       margin:'10px',
-      height:'92vh',
+      height:'90vh',
       flexBasis: '35%'
       }}>
         <ChatHistory messages={this.props.messages}/>

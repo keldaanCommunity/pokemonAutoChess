@@ -11,7 +11,9 @@ class TabMenu extends Component {
     <Tabs className="nes-container" style={{
         backgroundColor: 'rgba(255, 255, 255, .6)',
         margin:'10px',
-        flexBasis:'30%'
+        flexBasis:'30%',
+        height:'90vh',
+        overflowY:'scroll'
         }}>
             <TabList>
                 <Tab>Leaderboard</Tab>

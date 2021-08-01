@@ -12,7 +12,8 @@ class CurrentUsers extends Component{
         return <div className="nes-container" style={{
             backgroundColor: 'rgba(255, 255, 255, .6)',
              margin:'10px',
-             flexBasis:'10%'
+             flexBasis:'10%',
+             height:'90vh'
              }}>
             <ul style={ulStyle}>{Array.from(this.props.users).map(this.createUser.bind(this))}</ul>
             

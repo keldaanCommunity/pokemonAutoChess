@@ -14,7 +14,8 @@ class RoomMenu extends Component{
              margin:'10px',
              display: 'flex',
              flexFlow: 'column',
-             flexBasis: '10%'
+             flexBasis: '10%',
+             height: '90vh'
              }}>
             <h3>Available Rooms:</h3>
              <ul style={ulStyle}>
