@@ -18,7 +18,7 @@ export default class ChatHistory extends React.Component {
             padding: '5px',
             borderBottom: '1px solid #ddd'
         };
-        return <div key={index} style={liStyles}><ChatMessage message={message}/></div>
+        return <div key={index} style={liStyles}><ChatMessage message={message} displayInfo={this.props.displayInfo}/></div>
     }
 
     render() {
@@ -30,6 +30,6 @@ export default class ChatHistory extends React.Component {
             maxWidth: 'inherit',
             maxHeight: 'inherit'
         };
-        return <div ref={this.domElement} style={ulStyles}>{this.props.messages.map(this.createMessage)}</div>;
+        return <div ref={this.domElement} style={ulStyles}>{this.props.messages.map(this.createMessage.bind(this))}</div>;
     }
  }

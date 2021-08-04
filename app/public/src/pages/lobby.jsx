@@ -29,7 +29,8 @@ class Lobby extends Component {
             currentText: '',
             allRooms: [],
             isSignedIn: false,
-            preparationRoomId: ''
+            preparationRoomId: '',
+            tabIndex: 0
         };
 
         this.client = new Client(window.endpoint);
@@ -185,6 +186,17 @@ class Lobby extends Component {
         this.room.send('search', {'name':name});
     }
 
+    displayInfo(name){
+        this.setTabIndex(2);
+        this.searchName(name);
+    }
+
+    setTabIndex(i){
+        this.setState({
+            tabIndex:i
+        });
+    }
+
     render() {
         const lobbyStyle = {
             display:'flex',
@@ -219,10 +231,13 @@ class Lobby extends Component {
                     leaderboard={this.state.leaderboard}
                     user={this.state.user}
                     searchedUser={this.state.searchedUser}
+                    tabIndex={this.state.tabIndex}
                     changeAvatar={this.changeAvatar.bind(this)}
                     changeName={this.changeName.bind(this)}
                     changeMap={this.changeMap.bind(this)}
                     searchName={this.searchName.bind(this)}
+                    setTabIndex={this.setTabIndex.bind(this)}
+                    displayInfo={this.displayInfo.bind(this)}
                 />
 
                 <RoomMenu
@@ -232,12 +247,14 @@ class Lobby extends Component {
                 />
                 <CurrentUsers
                     users={this.state.users}
+                    displayInfo={this.displayInfo.bind(this)}
                 />
                 <Chat 
                     messages={this.state.messages}
+                    currentText={this.state.currentText}
                     handleSubmit={this.handleSubmit.bind(this)} 
                     setCurrentText={this.setCurrentText.bind(this)}
-                    currentText={this.state.currentText}
+                    displayInfo={this.displayInfo.bind(this)}
                 />
                 </div>
             </div>

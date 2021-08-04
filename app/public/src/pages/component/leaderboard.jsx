@@ -23,7 +23,8 @@ class Leaderboard extends Component{
         name={i.name} 
         avatar ={i.avatar} 
         rank={i.rank} 
-        value={i.value}/>
+        value={i.value}
+        displayInfo={this.props.displayInfo}/>
     }
 }
 

@@ -18,7 +18,10 @@ export default class Chat extends React.Component {
       height:'90vh',
       flexBasis: '35%'
       }}>
-        <ChatHistory messages={this.props.messages}/>
+        <ChatHistory 
+          messages={this.props.messages}
+          displayInfo={this.props.displayInfo}
+        />
         <form onSubmit={this.props.handleSubmit} style={{
           display:'flex',
           flexFlow: 'row nowrap',
