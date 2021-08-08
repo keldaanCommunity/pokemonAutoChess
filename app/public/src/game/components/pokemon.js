@@ -651,13 +651,7 @@ export default class Pokemon extends Button {
     if (pokemon.effects.length > 0) {
       pokemon.effects.forEach((effect, c) => {
         if( effect && EFFECTS_ICON[effect]){
-          let color;
-          if(EFFECTS_ICON[effect].positive){
-            color = 0xbdffd5;
-          }
-          else{
-            color = 0xffd5bd;
-          }
+          let color = 0xffffff;
   
           let level = "";
           switch (EFFECTS_ICON[effect].level) {
