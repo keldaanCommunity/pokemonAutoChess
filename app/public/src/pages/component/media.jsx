@@ -20,10 +20,6 @@ class Media extends Component {
                 <i className="nes-icon facebook is-large"></i>
                 </a>
 
-                <a href="https://github.com/arnaudgregoire/pokemonAutoChess">
-                <i className="nes-icon github is-large"></i>
-                </a>
-
                 <a href="https://www.twitch.tv/ag_interactive">
                 <i className="nes-icon twitch is-large"></i>
                 </a>
