@@ -7,6 +7,7 @@ import TabMenu from './component/tab-menu';
 import firebase from 'firebase/app';
 import { FIREBASE_CONFIG } from './utils/utils';
 import { Client } from 'colyseus.js';
+import DiscordButton from './component/discord-button';
 
 
 class Lobby extends Component {
@@ -20,12 +21,6 @@ class Lobby extends Component {
             user:{},
             searchedUser:{},
             leaderboard: [],
-            pokemonLeaderboard: [],
-            mythicalPokemonLeaderboard: [],
-            typesLeaderboard: [],
-            threeStarsLeaderboard: [],
-            botEloLeaderboard: [],
-            playerEloLeaderboard: [],
             currentText: '',
             allRooms: [],
             isSignedIn: false,
@@ -223,6 +218,7 @@ class Lobby extends Component {
                     <Link to='/auth'>
                             <button className='nes-btn is-error' style={buttonStyle} onClick={this.logOut.bind(this)}>Sign Out</button>
                     </Link>
+                    <DiscordButton/>
                 </div>
 
                 <div style={lobbyStyle}>
@@ -239,7 +235,6 @@ class Lobby extends Component {
                     setTabIndex={this.setTabIndex.bind(this)}
                     displayInfo={this.displayInfo.bind(this)}
                 />
-
                 <RoomMenu
                     allRooms={this.state.allRooms}
                     createRoom={this.createRoom.bind(this)}
