@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import DiscordButton from './discord-button';
 
 class Media extends Component {
   render() {
@@ -20,10 +20,6 @@ class Media extends Component {
                 <i className="nes-icon facebook is-large"></i>
                 </a>
 
-                <a href="https://github.com/arnaudgregoire/pokemonAutoChess">
-                <i className="nes-icon github is-large"></i>
-                </a>
-
                 <a href="https://www.twitch.tv/ag_interactive">
                 <i className="nes-icon twitch is-large"></i>
                 </a>
@@ -36,16 +32,12 @@ class Media extends Component {
 
             <p>This is a non profit game. Only made by fans for fans.</p>
 
-            <button type="button" className="nes-btn is-primary" onClick={this.handleDiscordClick.bind(this)}>Join Discord</button>
+            <DiscordButton/>
             <button  type="button" onClick={this.handleTipeeClick.bind(this)} className="nes-btn is-warning">Donate</button>
             <button  type="button" className="nes-btn" onClick={this.handlePrivacyPolicyClick.bind(this)}>Privacy Policy</button>
 
         </div>
     );
-  }
-
-  handleDiscordClick(){
-    window.location.href = 'https://discord.gg/6JMS7tr'
   }
 
   handleTipeeClick(){
