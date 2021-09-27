@@ -789,6 +789,8 @@ class PokemonFactory {
         return PKM.KYOGRE;
       case PKM.RAYQUAZA:
         return PKM.RAYQUAZA;
+      case PKM.MEGARAYQUAZA:
+        return PKM.MEGARAYQUAZA;
       case PKM.PALKIA:
         return PKM.PALKIA;
       case PKM.DIALGA:
@@ -817,6 +819,8 @@ class PokemonFactory {
         return PKM.CARVANHA;
       case PKM.HOUNDOUR:
         return PKM.HOUNDOUR;
+      case PKM.SWABLU:
+        return PKM.SWABLU;
       case PKM.PRIMALGROUDON:
         return PKM.GROUDON;
       case PKM.PRIMALKYOGRE:
@@ -1223,6 +1227,8 @@ class PokemonFactory {
         return new Pokemon.Groudon();
       case PKM.RAYQUAZA:
         return new Pokemon.Rayquaza();
+      case PKM.MEGARAYQUAZA:
+        return new Pokemon.MegaRayquaza();
       case PKM.REGICE:
         return new Pokemon.Regice();
       case PKM.REGIROCK:
@@ -1371,6 +1377,8 @@ class PokemonFactory {
         return new Pokemon.Aerodactyl();
       case PKM.HOUNDOUR:
         return new Pokemon.Houndour();
+      case PKM.SWABLU:
+        return new Pokemon.Swablu();
       case PKM.CARVANHA:
         return new Pokemon.Carvanha();
       case PKM.PRIMALKYOGRE:

@@ -148,6 +148,19 @@ class PokemonState {
               });
             }
           }
+
+          if(pokemon.items.count(ITEMS.DELTA_ORB) != 0){
+            for (let i = 0; i < pokemon.items.count(ITEMS.DELTA_ORB); i++) {
+              let created = false;
+              const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+              cells.forEach((cell) => {
+                if (!cell.value && !created) {
+                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.SWABLU),cell.row, cell.column, pokemon.team);
+                  created = true;
+                }
+              });
+            }
+          }
           pokemon.strategy.process(pokemon, this, board, target);
           updateEffects = true;
         }

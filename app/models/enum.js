@@ -270,7 +270,9 @@ const PKM = Object.freeze({
   KROOKODILE:"krookodile",
   SOLOSIS:"solosis",
   DUOSION:"duosion",
-  REUNICLUS:"reuniclus"
+  REUNICLUS:"reuniclus",
+  MEGARAYQUAZA:"mega-Rayquaza",
+  SWABLU:"swablu"
 });
 
 const WORDS = Object.freeze({
@@ -520,6 +522,7 @@ const ITEMS = Object.freeze({
   ASSAULT_VEST:'ASSAULT_VEST',
   BLUE_ORB:'BLUE_ORB',
   RED_ORB:'RED_ORB',
+  DELTA_ORB:'DELTA_ORB',
   WONDER_BOX:'WONDER_BOX'
 });
 
@@ -698,6 +701,11 @@ const ITEM_NAME = Object.freeze({
     eng: 'Red Orb',
     esp: 'Orbe rojo',
     fra: 'Gemme Rouge'
+  },
+  DELTA_ORB: {
+    eng: 'Delta Orb',
+    esp: 'Orbe Delta',
+    fra: 'Gemme Delta'
   },
   WONDER_BOX: {
     eng: 'Wonder Box',
@@ -882,6 +890,11 @@ const ITEM_DESCRIPTION = Object.freeze({
     eng: 'Team Magma strengthens the pokemon s ability',
     esp: 'El equipo Magma refuerza la habilidad del pokémon',
     fra: 'La team Magma renforce la capacité du pokémon'
+  },
+  DELTA_ORB:{
+    eng: 'Team Delta strengthens the pokemon s ability',
+    esp: 'El equipo Delta refuerza la habilidad del pokémon',
+    fra: 'La team Delta renforce la capacité du pokémon'
   },
   WONDER_BOX: {
     eng: 'Start the game with 2 random items',

@@ -1260,6 +1260,12 @@ class Houndour extends Pokemon {
   }
 }
 
+class Swablu extends Pokemon {
+  constructor() {
+    super(PKM.SWABLU, 'tylton',[TYPE.FAIRY, TYPE.FLYING], RARITY.SUMMON, 'september', 333, '', 40, 4, 1, 1, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DRAGON_TAIL);
+  }
+}
+
 class Magikarp extends Pokemon {
   constructor() {
     super(PKM.MAGIKARP, 'magicarpe',[TYPE.WATER], RARITY.NEUTRAL, 'NEUTRAL', 129, PKM.GYARADOS, 30, 1, 1, 1, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
@@ -1328,7 +1334,7 @@ class Articuno extends Pokemon {
 
 class Dialga extends Pokemon {
   constructor() {
-    super(PKM.DIALGA, 'dialga',[TYPE.METAL, TYPE.DRAGON], RARITY.MYTHICAL, 'NEUTRAL', 483, '', 300, 30, 5, 5, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DRACO_METEOR);
+    super(PKM.DIALGA, 'dialga',[TYPE.METAL, TYPE.DRAGON], RARITY.MYTHICAL, 'NEUTRAL', 483, '', 300, 30, 5, 5, 2, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DRACO_METEOR);
   }
 }
 
@@ -1668,6 +1674,12 @@ class PrimalKyogre extends Pokemon {
   }
 }
 
+class MegaRayquaza extends Pokemon {
+  constructor() {
+    super(PKM.MEGARAYQUAZA, 'Mega-Rayquaza',[TYPE.DRAGON, TYPE.FLYING], RARITY.MYTHICAL, 'september', 3840, '', 400, 40, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.TRUE, 3, 100, SPECIAL_SKILL.DRACO_METEOR);
+  }
+}
+
 class Meowth extends Pokemon {
   constructor() {
     super(PKM.MEOWTH, 'miaouss',[], RARITY.NEUTRAL, 'february', 52, '', 100, 10, 2, 2, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
@@ -1979,5 +1991,7 @@ module.exports = {
   Krookodile,
   Solosis,
   Duosion,
-  Reuniclus
+  Reuniclus,
+  MegaRayquaza,
+  Swablu
 };

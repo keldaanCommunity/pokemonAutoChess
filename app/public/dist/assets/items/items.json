@@ -5,7 +5,7 @@
 			"format": "RGBA8888",
 			"size": {
 				"w": 26,
-				"h": 850
+				"h": 866
 			},
 			"scale": 1,
 			"frames": [
@@ -785,6 +785,27 @@
 						"w": 16,
 						"h": 18
 					}
+				},
+				{
+					"filename": "DELTA_ORB",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 14
+					},
+					"frame": {
+						"x": 1,
+						"y": 851,
+						"w": 14,
+						"h": 14
+					}
 				}
 			]
 		}
@@ -792,6 +813,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:fe04a70ce66c2ed56172e2657e2e46e9:3b5163e9d99548395f07bc3693675402:110e074689c9edd2c54833ce2e4d9270$"
+		"smartupdate": "$TexturePacker:SmartUpdate:ab407403a5cebdcf4e6be6851c71b68e:09cacf11cc3f75ac22641c53d6b32bcf:110e074689c9edd2c54833ce2e4d9270$"
 	}
 }

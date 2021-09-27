@@ -127,6 +127,7 @@ export default class GameScene extends Scene {
     this.load.multiatlas('december', '/assets/pokemons/december/december.json', '/assets/pokemons/december/');
     this.load.multiatlas('february', '/assets/pokemons/february/february.json', '/assets/pokemons/february/');
     this.load.multiatlas('april', '/assets/pokemons/april/april.json', '/assets/pokemons/april/');
+    this.load.multiatlas('september', '/assets/pokemons/september/september.json', '/assets/pokemons/september/');
     this.load.multiatlas('COMMON', '/assets/pokemons/common/common.json', '/assets/pokemons/common');
     this.load.multiatlas('NEUTRAL', '/assets/pokemons/neutral/neutral.json', '/assets/pokemons/neutral');
     this.load.multiatlas('UNCOMMON', '/assets/pokemons/uncommon/uncommon.json', '/assets/pokemons/uncommon');

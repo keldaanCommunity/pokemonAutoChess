@@ -253,6 +253,20 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
+              } else if (pokemon.name == PKM.RAYQUAZA && item == ITEMS.DELTA_ORB) {
+                evolve = true;
+                const x = pokemon.positionX;
+                const y = pokemon.positionY;
+                eevolution = PokemonFactory.createPokemonFromName(PKM.MEGARAYQUAZA);
+                eevolution.positionX = x;
+                eevolution.positionY = y;
+                eevolution.items.item0 = pokemon.items.item0;
+                eevolution.items.item1 = pokemon.items.item1;
+                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items.add(item);
+                this.state.players.get(playerId).board.delete(id);
+                success = true;
+                message.updateItems = false;
               }else {
                 pokemon.items.add(item);
                 this.state.players.get(playerId).stuff.remove(item);
@@ -641,8 +655,8 @@ class OnUpdatePhaseCommand extends Command {
       player.simulation.stop();
       if (player.alive) {
         if (player.opponentName == 'PVE' && player.lastBattleResult == 'Win') {
-          const item = ItemFactory.createRandomItem();
-          //const item = ItemFactory.createSpecificItems([ITEMS.RED_ORB, ITEMS.BLUE_ORB]);
+          //const item = ItemFactory.createRandomItem();
+          const item = ItemFactory.createSpecificItems([ITEMS.DELTA_ORB, ITEMS.BLUE_ORB]);
           player.stuff.add(item);
         }
         player.opponentName = '';
