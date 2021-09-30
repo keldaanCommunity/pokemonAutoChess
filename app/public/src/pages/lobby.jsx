@@ -8,6 +8,8 @@ import firebase from 'firebase/app';
 import { FIREBASE_CONFIG } from './utils/utils';
 import { Client } from 'colyseus.js';
 import DiscordButton from './component/discord-button';
+import DonateButton from './component/donate-button';
+import PolicyButton from './component/policy-button';
 
 
 class Lobby extends Component {
@@ -219,6 +221,8 @@ class Lobby extends Component {
                             <button className='nes-btn is-error' style={buttonStyle} onClick={this.logOut.bind(this)}>Sign Out</button>
                     </Link>
                     <DiscordButton/>
+                    <DonateButton/>
+                    <PolicyButton/>
                 </div>
 
                 <div style={lobbyStyle}>
