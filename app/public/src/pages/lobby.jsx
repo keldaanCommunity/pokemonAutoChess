@@ -10,7 +10,7 @@ import { Client } from 'colyseus.js';
 import DiscordButton from './component/discord-button';
 import DonateButton from './component/donate-button';
 import PolicyButton from './component/policy-button';
-
+import CreditsButton from './component/credits-button';
 
 class Lobby extends Component {
 
@@ -223,6 +223,7 @@ class Lobby extends Component {
                     <DiscordButton/>
                     <DonateButton/>
                     <PolicyButton/>
+                    <CreditsButton/>
                 </div>
 
                 <div style={lobbyStyle}>
