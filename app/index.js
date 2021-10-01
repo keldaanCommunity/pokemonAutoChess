@@ -53,9 +53,30 @@ var limiter = new RateLimit({
 // apply rate limiter to all requests
 app.use(limiter);
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
+
+app.get('/auth', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+ 
+app.get('/lobby', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+
+app.get('/preparation', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+
+app.get('/game', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+
+app.get('/after', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+
 
 const basicAuthMiddleware = basicAuth({
   // list of users and passwords
