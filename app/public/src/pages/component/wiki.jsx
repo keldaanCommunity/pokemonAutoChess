@@ -18,7 +18,7 @@ class Wiki extends Component{
                 </TabList>
 
                 {Object.keys(RARITY).map((r=>{
-                    return <TabPanel key={r}>{r}
+                    return <TabPanel key={r}>
                         <PokemonWiki rarity={r}/>
                     </TabPanel>
                 }))}
