@@ -11,6 +11,7 @@ import DiscordButton from './component/discord-button';
 import DonateButton from './component/donate-button';
 import PolicyButton from './component/policy-button';
 import CreditsButton from './component/credits-button';
+import Wiki from './component/wiki';
 
 class Lobby extends Component {
 
@@ -27,7 +28,8 @@ class Lobby extends Component {
             allRooms: [],
             isSignedIn: false,
             preparationRoomId: '',
-            tabIndex: 0
+            tabIndex: 0,
+            showWiki: false
         };
 
         this.client = new Client(window.endpoint);
@@ -194,6 +196,15 @@ class Lobby extends Component {
         });
     }
 
+    toggleWiki(){
+        this.setState((prevState)=>{
+            return{
+                ...prevState,
+                showWiki: !prevState.showWiki
+            }
+        });
+    }
+
     render() {
         const lobbyStyle = {
             display:'flex',
@@ -213,6 +224,9 @@ class Lobby extends Component {
       if(this.state.preparationRoomId != ''){
         return <Redirect to='/preparation'/>;
       }
+      if(this.state.showWiki){
+        return <Wiki toggleWiki={this.toggleWiki.bind(this)} content='Lobby'/>;
+      }
       else{
         return (
             <div className='App'>
@@ -224,6 +238,7 @@ class Lobby extends Component {
                     <DonateButton/>
                     <PolicyButton/>
                     <CreditsButton/>
+                    <button className='nes-btn is-success' style={buttonStyle} onClick={this.toggleWiki.bind(this)}>Wiki</button>
                 </div>
 
                 <div style={lobbyStyle}>
