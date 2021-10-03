@@ -355,6 +355,7 @@ class GameContainer {
     if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').playerContainer && this.game.scene.getScene('gameScene').shopContainer) {
       switch (change.field) {
         case 'level':
+          this.game.scene.getScene('gameScene').shopContainer.percentageDisplay.updatePercentages(change.value);
           this.game.scene.getScene('gameScene').shopContainer.levelUpButton.changeLevel(change.value);
           this.game.scene.getScene('gameScene').maxBoardSizeText.setText(change.value);
           break;

@@ -9,8 +9,6 @@ const LobbyUser = require('../models/colyseus-models/lobby-user');
 const admin = require('firebase-admin');
 const GameRecord = require('../models/colyseus-models/game-record');
 const Statistic = require('../models/mongo-models/statistic');
-const EloBot = require('../models/mongo-models/elo-bot.js');
-const {BOT_AVATAR} = require('../models/enum');
 
 class CustomLobbyRoom extends colyseus.LobbyRoom {
   constructor() {
@@ -33,19 +31,31 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           });
         }
       });
-      let tempLeaderboard = [];
-      UserMetadata.find({},['displayName','avatar','elo'],{limit:20, sort:{'elo': -1}}, (err, users)=>{
+      /*
+      UserMetadata.find({}, ['displayName','avatar','level'], {limit:25, sort:{'level': -1}}, (err, users)=> {
         if(err){
           console.log(err);
         }
         else{
           for (let i = 0; i < users.length; i++) {
             const user = users[i];
-            tempLeaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.elo));
+            self.state.leaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.level));
           }
         }
       });
-      
+      */
+      UserMetadata.find({},['displayName','avatar','elo'],{limit:30, sort:{'elo': -1}}, (err, users)=>{
+        if(err){
+          console.log(err);
+        }
+        else{
+          for (let i = 0; i < users.length; i++) {
+            const user = users[i];
+            self.state.leaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.elo));
+          }
+        }
+      });
+      /*
       EloBot.find({},['name','elo'],{sort: {'elo': -1}}, (err, bots)=>{
         if(err){
           console.log(err);
@@ -53,17 +63,10 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
         else{
           for (let i = 0; i < bots.length; i++) {
             const bot = bots[i];
-            tempLeaderboard.push(new LeaderboardInfo("BOT " + BOT_AVATAR[bot.name], BOT_AVATAR[bot.name], i + 1, bot.elo));
+            self.state.botEloLeaderboard.push(new LeaderboardInfo(BOT_AVATAR[bot.name], BOT_AVATAR[bot.name], i + 1, bot.elo));
           }
-          tempLeaderboard.sort((a,b)=>{return b.value - a.value});
-          tempLeaderboard.forEach((item,index)=>{item.rank = index + 1});
-          tempLeaderboard = tempLeaderboard.slice(0,30);
-          tempLeaderboard.forEach(item=>{
-            self.state.leaderboard.push(item);
-          });
         }
       });
-      /*
       Statistic.find({'time':{$gt: Date.now() - 2592000000}}, (err, stats)=>{
 
         if(stats.length != 0){

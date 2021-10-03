@@ -3200,6 +3200,18 @@ const RARITY_COLOR = Object.freeze({
   SUMMON: '#991f1f'
 });
 
+const PROBABILITY = {
+  1: [1, 0, 0, 0, 0],
+  2: [1, 0, 0, 0, 0],
+  3: [0.7, 0.3, 0, 0, 0],
+  4: [0.55, 0.3, 0.15, 0, 0],
+  5: [0.4, 0.3, 0.25, 0.05, 0],
+  6: [0.29, 0.295, 0.31, 0.1, 0.005],
+  7: [0.24, 0.28, 0.31, 0.15, 0.02],
+  8: [0.2, 0.24, 0.31, 0.2, 0.05],
+  9: [0.1, 0.19, 0.31, 0.30, 0.1]
+};
+
 module.exports = {
   SPECIAL_SKILL_DESCRIPTION,
   SPECIAL_SKILL,
@@ -3233,5 +3245,6 @@ module.exports = {
   TYPE_DETAILS,
   EFFECTS_ICON,
   PKM,
-  RARITY_COLOR
+  RARITY_COLOR,
+  PROBABILITY
 };

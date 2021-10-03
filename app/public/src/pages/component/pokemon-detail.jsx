@@ -26,7 +26,7 @@ class PokemonDetail extends Component {
                 <p>Mana: {pokemon.maxMana}</p>
             </div>
             <div style={{width: '30%'}}>
-                <p>Abilty: {SPECIAL_SKILL_DESCRIPTION[pokemon.skill].title.eng}</p>
+                <p>Ability: {SPECIAL_SKILL_DESCRIPTION[pokemon.skill].title.eng}</p>
                 <p>Description:{SPECIAL_SKILL_DESCRIPTION[pokemon.skill].description.eng}</p>
             </div>
         </div>
