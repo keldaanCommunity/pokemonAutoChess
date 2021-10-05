@@ -13,7 +13,7 @@ class PolicyButton extends Component{
     }
 
     handlePrivacyPolicyClick(){
-        window.location.href = 'https://www.termsfeed.com/live/ddf4f373-8cdf-4efd-a547-c2a8e0a22a9a';
+        window.location.href = 'https://pokemonautochess-b18fb.web.app/privacy-policy.html';
     }
 }
 
