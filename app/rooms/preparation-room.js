@@ -79,7 +79,7 @@ class PreparationRoom extends colyseus.Room {
       }
   
       // allow disconnected client to reconnect into this room until 20 seconds
-      await this.allowReconnection(client, 20);
+      await this.allowReconnection(client, 60);
   
     } catch (e) {
   

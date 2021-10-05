@@ -2402,7 +2402,7 @@ const TYPE_DETAILS = Object.freeze({
       eng:[
         {
           title:`(3) Blaze`,
-          text:`Your Fire pokemon gain +5 Attack after every hit.`
+          text:`Your Fire pokemon gain +1 Attack after every hit.`
         },
         {
           title:`(6) Drought`,
@@ -3185,10 +3185,32 @@ const TYPE_DETAILS = Object.freeze({
   }
 });
 
-
 const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000];
 
 const XP_PLACE = [700, 500, 400, 300, 200, 150, 100, 0];
+
+const RARITY_COLOR = Object.freeze({
+  COMMON: '#686d7d',
+  NEUTRAL: '#686d7d',
+  UNCOMMON: '#478a41',
+  RARE: '#5062ab',
+  EPIC: '#7b469c',
+  LEGENDARY: '#a6802e',
+  MYTHICAL: '#ffc0cb',
+  SUMMON: '#991f1f'
+});
+
+const PROBABILITY = {
+  1: [1, 0, 0, 0, 0],
+  2: [1, 0, 0, 0, 0],
+  3: [0.7, 0.3, 0, 0, 0],
+  4: [0.55, 0.3, 0.15, 0, 0],
+  5: [0.4, 0.3, 0.25, 0.05, 0],
+  6: [0.29, 0.295, 0.31, 0.1, 0.005],
+  7: [0.24, 0.28, 0.31, 0.15, 0.02],
+  8: [0.2, 0.24, 0.31, 0.2, 0.05],
+  9: [0.1, 0.19, 0.31, 0.30, 0.1]
+};
 
 module.exports = {
   SPECIAL_SKILL_DESCRIPTION,
@@ -3222,5 +3244,7 @@ module.exports = {
   ITEM_DESCRIPTION,
   TYPE_DETAILS,
   EFFECTS_ICON,
-  PKM
+  PKM,
+  RARITY_COLOR,
+  PROBABILITY
 };
