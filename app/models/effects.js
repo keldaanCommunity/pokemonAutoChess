@@ -30,7 +30,7 @@ class Effects {
     if (synergies.WATER >= 6) {
       this.list.push(EFFECTS.RAIN_DANCE);
     }
-    if (synergies.WATER >= 9) {
+    if (synergies.WATER >= 8) {
       this.list.push(EFFECTS.PRIMORDIAL_SEA);
     }
     if (synergies.NORMAL >= 3) {
@@ -120,11 +120,16 @@ class Effects {
     if (synergies.HUMAN >= 6) {
       this.list.push(EFFECTS.CALM_MIND);
     }
-    if (synergies.AQUATIC >= 3) {
-      this.list.push(EFFECTS.SWIFT_SWIM);
-    }
-    if (synergies.AQUATIC >= 6) {
-      this.list.push(EFFECTS.HYDO_CANNON);
+    if(synergies.AQUATIC >= 0){
+
+        if (synergies.AQUATIC >= 4) {
+            this.list.push(EFFECTS.HYDRO_CANNON);
+        }
+
+        else if (synergies.AQUATIC >= 2) {
+            this.list.push(EFFECTS.SWIFT_SWIM);
+        }
+
     }
     if (synergies.BUG >= 2) {
       this.list.push(EFFECTS.SWARM);

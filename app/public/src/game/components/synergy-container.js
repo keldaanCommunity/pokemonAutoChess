@@ -80,7 +80,7 @@ export default class SynergyContainer extends Button {
       FIELD: 3,
       MONSTER: 3,
       HUMAN: 2,
-      AQUATIC: 3,
+      AQUATIC: 2,
       BUG: 2,
       FLYING: 2,
       FLORA: 2,

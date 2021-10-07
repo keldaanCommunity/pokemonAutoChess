@@ -422,19 +422,19 @@ class Reuniclus extends Pokemon {
 
 class Poliwag extends Pokemon {
   constructor() {
-    super(PKM.POLIWAG, 'ptitard',[TYPE.WATER, TYPE.AQUATIC], RARITY.RARE, 'RARE', 60, PKM.POLIWHIRL, 80, 5, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.SOAK);
+    super(PKM.POLIWAG, 'ptitard',[TYPE.WATER, TYPE.FIGHTING], RARITY.RARE, 'RARE', 60, PKM.POLIWHIRL, 80, 5, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.SOAK);
   }
 }
 
 class Poliwhirl extends Pokemon {
   constructor() {
-    super(PKM.POLIWHIRL, 'tetarte',[TYPE.WATER, TYPE.FIGHTING, TYPE.AQUATIC], RARITY.RARE, 'RARE', 61, PKM.POLITOED, 120, 9, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.SOAK);
+    super(PKM.POLIWHIRL, 'tetarte',[TYPE.WATER, TYPE.FIGHTING], RARITY.RARE, 'RARE', 61, PKM.POLITOED, 120, 9, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.SOAK);
   }
 }
 
 class Politoed extends Pokemon {
   constructor() {
-    super(PKM.POLITOED, 'tarpaud',[TYPE.WATER, TYPE.AQUATIC], RARITY.RARE, 'RARE', 186, '', 220, 18, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.SOAK);
+    super(PKM.POLITOED, 'tarpaud',[TYPE.WATER, TYPE.FIGHTING], RARITY.RARE, 'RARE', 186, '', 220, 18, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.SOAK);
   }
 }
 
@@ -584,19 +584,19 @@ class Aggron extends Pokemon {
 
 class Spheal extends Pokemon {
   constructor() {
-    super(PKM.SPHEAL, 'obalie',[TYPE.WATER, TYPE.FIELD, TYPE.ICE], RARITY.RARE, 'RARE', 363, PKM.SEALEO, 80, 5, 4, 4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ICICLE_CRASH);
+    super(PKM.SPHEAL, 'obalie',[TYPE.AQUATIC, TYPE.ICE], RARITY.RARE, 'RARE', 363, PKM.SEALEO, 80, 5, 4, 4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ICICLE_CRASH);
   }
 }
 
 class Sealeo extends Pokemon {
   constructor() {
-    super(PKM.SEALEO, 'phogleur',[TYPE.WATER, TYPE.FIELD, TYPE.ICE], RARITY.RARE, 'RARE', 364, PKM.WALREIN, 120, 9, 4, 4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ICICLE_CRASH);
+    super(PKM.SEALEO, 'phogleur',[TYPE.AQUATIC, TYPE.ICE], RARITY.RARE, 'RARE', 364, PKM.WALREIN, 120, 9, 4, 4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ICICLE_CRASH);
   }
 }
 
 class Walrein extends Pokemon {
   constructor() {
-    super(PKM.WALREIN, 'kaimorse',[TYPE.WATER, TYPE.FIELD, TYPE.ICE], RARITY.RARE, 'RARE', 365, '', 220, 20, 4, 4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.ICICLE_CRASH);
+    super(PKM.WALREIN, 'kaimorse',[TYPE.AQUATIC, TYPE.ICE], RARITY.RARE, 'RARE', 365, '', 220, 20, 4, 4, 1, 'ICE/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.ICICLE_CRASH);
   }
 }
 
@@ -926,19 +926,19 @@ class Sceptile extends Pokemon {
 
 class Totodile extends Pokemon {
   constructor() {
-    super(PKM.TOTODILE, 'kaiminus',[TYPE.WATER, TYPE.AQUATIC], RARITY.UNCOMMON, 'UNCOMMON', 158, PKM.CROCONAW, 70, 5, 3, 3, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BITE);
+    super(PKM.TOTODILE, 'kaiminus',[TYPE.MONSTER, TYPE.AQUATIC], RARITY.UNCOMMON, 'UNCOMMON', 158, PKM.CROCONAW, 70, 5, 3, 3, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BITE);
   }
 }
 
 class Croconaw extends Pokemon {
   constructor() {
-    super(PKM.CROCONAW, 'crocodil',[TYPE.WATER, TYPE.AQUATIC], RARITY.UNCOMMON, 'UNCOMMON', 159, PKM.FERALIGATR, 120, 9, 3, 3, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.BITE);
+    super(PKM.CROCONAW, 'crocodil',[TYPE.MONSTER, TYPE.AQUATIC], RARITY.UNCOMMON, 'UNCOMMON', 159, PKM.FERALIGATR, 120, 9, 3, 3, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.BITE);
   }
 }
 
 class Feraligatr extends Pokemon {
   constructor() {
-    super(PKM.FERALIGATR, 'aligatueur',[TYPE.WATER, TYPE.AQUATIC], RARITY.UNCOMMON, 'UNCOMMON', 160, '', 210, 20, 3, 3, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.BITE);
+    super(PKM.FERALIGATR, 'aligatueur',[TYPE.MONSTER, TYPE.AQUATIC], RARITY.UNCOMMON, 'UNCOMMON', 160, '', 210, 20, 3, 3, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.BITE);
   }
 }
 
@@ -998,19 +998,19 @@ class Slowking extends Pokemon {
 
 class Squirtle extends Pokemon {
   constructor() {
-    super(PKM.SQUIRTLE, 'carapuce',[TYPE.WATER, TYPE.MONSTER], RARITY.UNCOMMON, 'UNCOMMON', 7, PKM.WARTORTLE, 70, 5, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.HYDRO_PUMP);
+    super(PKM.SQUIRTLE, 'carapuce',[TYPE.WATER, TYPE.FIELD], RARITY.UNCOMMON, 'UNCOMMON', 7, PKM.WARTORTLE, 70, 5, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.HYDRO_PUMP);
   }
 }
 
 class Wartortle extends Pokemon {
   constructor() {
-    super(PKM.WARTORTLE, 'carabaffe',[TYPE.WATER, TYPE.MONSTER], RARITY.UNCOMMON, 'UNCOMMON', 8, PKM.BLASTOISE, 120, 9, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HYDRO_PUMP);
+    super(PKM.WARTORTLE, 'carabaffe',[TYPE.WATER, TYPE.FIELD], RARITY.UNCOMMON, 'UNCOMMON', 8, PKM.BLASTOISE, 120, 9, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HYDRO_PUMP);
   }
 }
 
 class Blastoise extends Pokemon {
   constructor() {
-    super(PKM.BLASTOISE, 'tortank',[TYPE.WATER, TYPE.MONSTER], RARITY.UNCOMMON, 'UNCOMMON', 9, '', 210, 20, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.HYDRO_PUMP);
+    super(PKM.BLASTOISE, 'tortank',[TYPE.WATER, TYPE.FIELD], RARITY.UNCOMMON, 'UNCOMMON', 9, '', 210, 20, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.HYDRO_PUMP);
   }
 }
 

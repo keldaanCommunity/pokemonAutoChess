@@ -970,7 +970,7 @@ const EFFECTS = Object.freeze({
   SWARM: 'SWARM',
   STICKY_WEB: 'STICKY_WEB',
   SWIFT_SWIM: 'SWIFT_SWIM',
-  HYDO_CANNON: 'HYDRO_CANNON',
+  HYDRO_CANNON: 'HYDRO_CANNON',
   TAILWIND: 'TAILWIND',
   FEATHER_DANCE: 'FEATHER_DANCE',
   MAX_AIRSTREAM: 'MAX_AIRSTREAM',
@@ -1193,7 +1193,7 @@ const EFFECTS_ICON = Object.freeze({
       positive: true,
       type:TYPE.AQUATIC
     },
-    HYDO_CANNON: {
+    HYDRO_CANNON: {
       level: 2,
       positive: true,
       type:TYPE.AQUATIC
@@ -2443,7 +2443,7 @@ const TYPE_DETAILS = Object.freeze({
           text:`Your Water pokemon have +30% more Attack. (Rain)`
         },
         {
-          title:`(9) Primordial sea`,
+          title:`(8) Primordial sea`,
           text:`Summon Kyogre, the king of the oceans. (Rain)`
         }
       ],
@@ -2903,12 +2903,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(3) Swift swim`,
-          text:`Your Aquatic pokemon have +30% Speed.`
+          title:`(2) Swift swim`,
+          text:`Revive aquatic pokemons at first death with 40% health and 30% increased damage.`
         },
         {
-          title:`(6) Hydro pump`,
-          text:`Your Aquatic pokemon have +30% Attack.`
+          title:`(4) Hydro pump`,
+          text:`Revive aquatic pokemons at first death with 80% health and 60% increased damage.`
         }
       ],
       esp:[

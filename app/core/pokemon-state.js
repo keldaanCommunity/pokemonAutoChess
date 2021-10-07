@@ -69,6 +69,16 @@ class PokemonState {
             pokemon.life = pokemon.hp;
             pokemon.items.remove(ITEMS.REVIVER_SEED);
           }
+          else if(pokemon.effects.includes(EFFECTS.SWIFT_SWIM)){
+              pokemon.life = pokemon.hp * 0.4;
+              pokemon.atk += pokemon.baseAtk * 0.3;
+              pokemon.effects.splice(pokemon.effects.findIndex(e => e === EFFECTS.SWIFT_SWIM),1);
+          }
+          else if(pokemon.effects.includes(EFFECTS.HYDRO_CANNON)){
+              pokemon.life = pokemon.hp * 0.8;
+              pokemon.atk += pokemon.baseAtk *0.6;
+              pokemon.effects.splice(pokemon.effects.findIndex(e => e === EFFECTS.HYDRO_CANNON),1);
+          }
           else{
             board.setValue(pokemon.positionX, pokemon.positionY, undefined);
             death = true;
