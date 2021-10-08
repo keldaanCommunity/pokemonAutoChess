@@ -2412,11 +2412,11 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           title:`(4) Drought`,
-          text:`Your Fire pokemon have +2 Attack after every hit. (Sunlight)`
+          text:`Your Fire pokemon gain +2 Attack after every hit. (Sunlight)`
         },
         {
           title:`(6) Desolate Land`,
-          text:`Your Fire pokemon have +3 Attack after every hit. (Harsh Sunlight)`
+          text:`Your Fire pokemon gain +3 Attack after every hit. (Harsh Sunlight)`
         }
       ],
       esp:[
