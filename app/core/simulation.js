@@ -409,11 +409,16 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.DROUGHT:
-          if (this.climate == CLIMATE.SUN && types.includes(TYPE.FIRE)) {
+          if (types.includes(TYPE.FIRE)) {
             pokemon.effects.push(EFFECTS.DROUGHT);
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5);
           }
           break;
+
+        case EFFECTS.DESOLATE_LAND:
+            if (types.includes(TYPE.FIRE)) {
+                pokemon.effects.push(EFFECTS.DESOLATE_LAND);
+            }
+            break;
 
         case EFFECTS.INGRAIN:
           if (types.includes(TYPE.GRASS)) {

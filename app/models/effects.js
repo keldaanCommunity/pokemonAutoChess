@@ -18,11 +18,14 @@ class Effects {
     if (synergies.GRASS >= 7) {
       this.list.push(EFFECTS.SPORE);
     }
-    if (synergies.FIRE >= 3) {
+    if (synergies.FIRE >= 2) {
       this.list.push(EFFECTS.BLAZE);
     }
-    if (synergies.FIRE >= 6) {
+    if (synergies.FIRE >= 4) {
       this.list.push(EFFECTS.DROUGHT);
+    }
+    if (synergies.FIRE >= 6) {
+        this.list.push(EFFECTS.DESOLATE_LAND);
     }
     if (synergies.WATER >= 3) {
       this.list.push(EFFECTS.DRIZZLE);

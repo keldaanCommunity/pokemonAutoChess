@@ -935,6 +935,7 @@ const EFFECTS = Object.freeze({
   SPORE: 'SPORE',
   BLAZE: 'BLAZE',
   DROUGHT: 'DROUGHT',
+  DESOLATE_LAND:'DESOLATE_LAND',
   DRIZZLE: 'DRIZZLE',
   RAIN_DANCE: 'RAIN_DANCE',
   PRIMORDIAL_SEA: 'PRIMORDIAL_SEA',
@@ -1017,6 +1018,11 @@ const EFFECTS_ICON = Object.freeze({
       level: 2,
       positive: true,
       type:TYPE.FIRE
+    },
+    DESOLATE_LAND:{
+      level:3,
+      positive: true,
+      type: TYPE.FIRE
     },
     DRIZZLE: {
       level: 1,
@@ -2401,12 +2407,16 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(3) Blaze`,
+          title:`(2) Blaze`,
           text:`Your Fire pokemon gain +1 Attack after every hit.`
         },
         {
-          title:`(6) Drought`,
-          text:`Your Fire pokemon have +50% Attack. (Harsh Sunlight)`
+          title:`(4) Drought`,
+          text:`Your Fire pokemon have +2 Attack. (Harsh Sunlight)`
+        },
+        {
+          title:`(6) Desolate Land`,
+          text:`Your Fire pokemon have +3 Attack. (Harsh Sunlight)`
         }
       ],
       esp:[

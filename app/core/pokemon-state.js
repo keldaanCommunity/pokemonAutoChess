@@ -194,9 +194,14 @@ class PokemonState {
         }
       }
       if (pokemon.effects.includes(EFFECTS.BLAZE)) {
-        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.05);
+        pokemon.atk += 1;
       }
-
+      if (pokemon.effects.includes(EFFECTS.DROUGHT)) {
+        pokemon.atk += 1;
+      }
+      if (pokemon.effects.includes(EFFECTS.DESOLATE_LAND)) {
+        pokemon.atk += 1;
+      }
       if (pokemon.effects.includes(EFFECTS.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)) {
         pokemon.atkSpeed = Math.max(400, Math.round(pokemon.atkSpeed * 0.95));
       }
