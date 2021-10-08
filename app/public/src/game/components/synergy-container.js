@@ -67,7 +67,7 @@ export default class SynergyContainer extends Button {
     this.typeActivation = {
       NORMAL: 3,
       GRASS: 3,
-      FIRE: 3,
+      FIRE: 2,
       WATER: 3,
       ELECTRIC: 1,
       FIGHTING: 2,
