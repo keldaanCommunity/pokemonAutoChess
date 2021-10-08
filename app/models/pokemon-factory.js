@@ -638,21 +638,21 @@ class PokemonFactory {
       case PKM.EEVEE:
         return PKM.EEVEE;
       case PKM.VAPOREON:
-        return PKM.EEVEE;
+        return PKM.VAPOREON;
       case PKM.JOLTEON:
-        return PKM.EEVEE;
+        return PKM.JOLTEON;
       case PKM.FLAREON:
-        return PKM.EEVEE;
+        return PKM.FLAREON;
       case PKM.ESPEON:
-        return PKM.EEVEE;
+        return PKM.ESPEON;
       case PKM.UMBREON:
-        return PKM.EEVEE;
+        return PKM.UMBREON;
       case PKM.LEAFEON:
-        return PKM.EEVEE;
+        return PKM.LEAFEON;
       case PKM.SYLVEON:
-        return PKM.EEVEE;
+        return PKM.SYLVEON;
       case PKM.GLACEON:
-        return PKM.EEVEE;
+        return PKM.GLACEON;
       case PKM.MEDITITE:
         return PKM.MEDITITE;
       case PKM.MEDICHAM:
