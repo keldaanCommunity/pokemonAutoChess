@@ -12,7 +12,7 @@ class GameState extends schema.Schema {
     const keys = Object.keys(MAP_TYPE);
     const mapType = keys[Math.floor(Math.random() * keys.length)];
     //const mapType = MAP_TYPE.FIRE;
-    const time = 60000;
+    const time = process.env.MODE == 'dev' ? 10000 : 60000;
     const roundTime = Math.round(time/1000);
     this.players = new schema.MapSchema();
     this.botManager = new BotManager();

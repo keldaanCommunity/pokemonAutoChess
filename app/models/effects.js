@@ -18,15 +18,17 @@ class Effects {
     if (synergies.GRASS >= 7) {
       this.list.push(EFFECTS.SPORE);
     }
-    if (synergies.FIRE >= 2) {
-      this.list.push(EFFECTS.BLAZE);
-    }
-    if (synergies.FIRE >= 4) {
-      this.list.push(EFFECTS.DROUGHT);
-    }
-    if (synergies.FIRE >= 6) {
-        this.list.push(EFFECTS.DESOLATE_LAND);
-    }
+    if(synergies.FIRE >= 0){
+      if (synergies.FIRE >= 6) {
+          this.list.push(EFFECTS.DESOLATE_LAND);
+      }
+      else if (synergies.FIRE >= 4) {
+        this.list.push(EFFECTS.DROUGHT);
+      }
+      else if (synergies.FIRE >= 2) {
+        this.list.push(EFFECTS.BLAZE);
+      }
+  }
     if (synergies.WATER >= 3) {
       this.list.push(EFFECTS.DRIZZLE);
     }
@@ -124,7 +126,6 @@ class Effects {
       this.list.push(EFFECTS.CALM_MIND);
     }
     if(synergies.AQUATIC >= 0){
-
         if (synergies.AQUATIC >= 4) {
             this.list.push(EFFECTS.HYDRO_CANNON);
         }
@@ -132,7 +133,6 @@ class Effects {
         else if (synergies.AQUATIC >= 2) {
             this.list.push(EFFECTS.SWIFT_SWIM);
         }
-
     }
     if (synergies.BUG >= 2) {
       this.list.push(EFFECTS.SWARM);
@@ -149,11 +149,16 @@ class Effects {
     if (synergies.FLYING >= 6) {
       this.list.push(EFFECTS.MAX_AIRSTREAM);
     }
-    if (synergies.FLORA >= 2) {
-      this.list.push(EFFECTS.RAIN_DISH);
-    }
-    if (synergies.FLORA >= 4) {
-      this.list.push(EFFECTS.FLOWER_SHIELD);
+    if(synergies.FLORA >= 0){
+      if (synergies.FLORA >= 4) {
+        this.list.push(EFFECTS.VILE_FLOWER);
+      }
+      else if (synergies.FLORA >= 3) {
+        this.list.push(EFFECTS.GLOOM_FLOWER);
+      }
+      else if (synergies.FLORA >= 2) {
+        this.list.push(EFFECTS.ODD_FLOWER);
+      }
     }
     if (synergies.MINERAL >= 2) {
       this.list.push(EFFECTS.BATTLE_ARMOR);

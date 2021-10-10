@@ -607,9 +607,21 @@ class Simulation extends Schema {
           }
           break;
 
-        case EFFECTS.RAIN_DISH:
-          if (types.includes(TYPE.FLORA) && this.climate == CLIMATE.RAIN) {
-            pokemon.effects.push(EFFECTS.RAIN_DISH);
+        case EFFECTS.ODD_FLOWER:
+          if (types.includes(TYPE.FLORA)) {
+            pokemon.effects.push(EFFECTS.ODD_FLOWER);
+          }
+          break;
+
+        case EFFECTS.GLOOM_FLOWER:
+          if (types.includes(TYPE.FLORA)) {
+            pokemon.effects.push(EFFECTS.GLOOM_FLOWER);
+          }
+          break;
+
+        case EFFECTS.VILE_FLOWER:
+          if (types.includes(TYPE.FLORA)) {
+            pokemon.effects.push(EFFECTS.VILE_FLOWER);
           }
           break;
 
@@ -650,11 +662,6 @@ class Simulation extends Schema {
           if (types.includes(TYPE.FAIRY)) {
             pokemon.effects.push(EFFECTS.BABY_DOLL_EYES);
           }
-          break;
-
-        case EFFECTS.FLOWER_SHIELD:
-          pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.5);
-          pokemon.effects.push(EFFECTS.FLOWER_SHIELD);
           break;
 
         case EFFECTS.DRAGON_DANCE:

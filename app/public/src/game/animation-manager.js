@@ -76,7 +76,7 @@ export default class AnimationManager {
       this.createAnimations(num, 'april');
     });
 
-    [333, 3840].forEach((num) => {
+    [333, 3840, 43, 44, 45, 182].forEach((num) => {
       this.createAnimations(num, 'september');
     });
 

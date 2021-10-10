@@ -1692,6 +1692,31 @@ class Persian extends Pokemon {
   }
 }
 
+class Oddish extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Gloom extends Pokemon {
+  constructor() {
+    super(PKM.GLOOM, 'ortide',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 44, PKM.VILEPLUME, 230, 18, 3, 3, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 2, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Vileplume extends Pokemon {
+  constructor() {
+    super(PKM.VILEPLUME, 'rafflesia',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 45, '', 360, 27, 4, 4, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 3, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Bellossom extends Pokemon {
+  constructor() {
+    super(PKM.BELLOSSOM, 'joliflor',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 182, '', 360, 27, 8, 8, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 3, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+
 schema.defineTypes(Pokemon, {
   id: 'string',
   name: 'string',
@@ -1993,5 +2018,9 @@ module.exports = {
   Duosion,
   Reuniclus,
   MegaRayquaza,
-  Swablu
+  Swablu,
+  Oddish,
+  Gloom,
+  Vileplume,
+  Bellossom
 };
