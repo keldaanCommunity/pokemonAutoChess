@@ -83,4 +83,20 @@ export default class PlayerPortraitContainer extends GameObjects.Container {
   onRankChange(value){
     this.moveManager.moveTo(0, 102 * value);
   }
+
+  onPokemonAdd(pokemon){
+    let self = this;
+    let portrait = new GameObjects.Image(this.scene, -50, 0, pokemon.sheet, `${pokemon.index}/portrait`).setScale(1.5,1.5);
+    this.add(portrait);
+    this.scene.tweens.add({
+        targets: portrait,
+        x: portrait.x - 60,
+        y: portrait.y,
+        duration: 1000,
+        yoyo: true,
+        onComplete: (tween, targets) => {
+            self.remove(portrait, true);
+        }
+      });
+  }
 }

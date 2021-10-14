@@ -312,11 +312,17 @@ class GameContainer {
   }
 
   handleBoardPokemonAdd(player, pokemon) {
-    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
-      this.game.scene.getScene('gameScene').boardManager.addPokemon(pokemon);
-      if(pokemon.positionY != 0){
-        this.game.scene.getScene('gameScene').synergiesContainer.enablePokemon(pokemon);
-      }
+    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager) {
+        if(this.game.scene.getScene('gameScene').playerContainer){
+            this.game.scene.getScene('gameScene').playerContainer.onPokemonAdd(player.id, pokemon);
+        }
+
+        if(this.game.scene.getScene('gameScene').boardManager.player.id == player.id){
+            this.game.scene.getScene('gameScene').boardManager.addPokemon(pokemon);
+            if(pokemon.positionY != 0){
+              this.game.scene.getScene('gameScene').synergiesContainer.enablePokemon(pokemon);
+            }
+        }
     }
   }
 

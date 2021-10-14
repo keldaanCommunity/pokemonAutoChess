@@ -35,4 +35,8 @@ export default class PlayerContainer extends GameObjects.Container {
   onLevelChange(id, value) {
     this.getFirst('id', id).onLevelChange(value);
   }
+
+  onPokemonAdd(id, pokemon){
+      this.getFirst('id',id).onPokemonAdd(pokemon);
+  }
 }
