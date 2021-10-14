@@ -272,7 +272,11 @@ const PKM = Object.freeze({
   DUOSION:"duosion",
   REUNICLUS:"reuniclus",
   MEGARAYQUAZA:"mega-Rayquaza",
-  SWABLU:"swablu"
+  SWABLU:"swablu",
+  ODDISH:"oddish",
+  GLOOM:"gloom",
+  VILEPLUME:"vileplume",
+  BELLOSSOM:"bellossom"
 });
 
 const WORDS = Object.freeze({
@@ -975,8 +979,9 @@ const EFFECTS = Object.freeze({
   TAILWIND: 'TAILWIND',
   FEATHER_DANCE: 'FEATHER_DANCE',
   MAX_AIRSTREAM: 'MAX_AIRSTREAM',
-  RAIN_DISH: 'RAIN_DISH',
-  FLOWER_SHIELD: 'FLOWER_SHIELD',
+  ODD_FLOWER: 'ODD_FLOWER',
+  GLOOM_FLOWER: 'GLOOM_FLOWER',
+  VILE_FLOWER:'VILE_FLOWER',
   BATTLE_ARMOR: 'BATTLE_ARMOR',
   MOUTAIN_RESISTANCE: 'MOUTAIN_RESISTANCE',
   PHANTOM_FORCE: 'PHANTOM_FORCE',
@@ -1219,13 +1224,18 @@ const EFFECTS_ICON = Object.freeze({
       positive: true,
       type:TYPE.FLYING
     },
-    RAIN_DISH: {
+    ODD_FLOWER: {
       level: 1,
       positive: true,
       type:TYPE.FLORA
     },
-    FLOWER_SHIELD: {
+    GLOOM_FLOWER: {
       level: 2,
+      positive: true,
+      type:TYPE.FLORA
+    },
+    VILE_FLOWER: {
+      level: 3,
       positive: true,
       type:TYPE.FLORA
     },
@@ -3027,12 +3037,16 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-          title:`(2) Rain Dish`,
-          text:`Your Flora pokemon restore 10% HP per second in rain.`
+          title:`(2) Odd Flower`,
+          text:`When all flora allied have died, the oddish flower will rise from its grave..`
         },
         {
-          title:`(4) Floral shield`,
-          text:`All your pokemon have +50% Defense and Special Defense.`
+          title:`(3) Gloom Flower`,
+          text:`When all flora allied have died, the gloom flower will rise from its grave..`
+        },
+        {
+          title:`(4) Vile Flower`,
+          text:`When all flora allied have died, the vile flower will rise from its grave..`
         }
       ],
       esp:[

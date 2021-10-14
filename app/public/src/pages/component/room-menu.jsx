@@ -14,10 +14,11 @@ class RoomMenu extends Component{
              margin:'10px',
              display: 'flex',
              flexFlow: 'column',
-             flexBasis: '10%',
+             flexBasis: '15%',
              height: '90vh'
              }}>
-            <h3>Available Rooms:</h3>
+            <h6 style={{textAlign:'center'}}>Available Rooms:</h6>
+            <h6 style={{textAlign:'center'}}>Click 'Create Room' to play</h6>
              <ul style={ulStyle}>
                  {this.props.allRooms.map(this.createItem.bind(this))}
              </ul>

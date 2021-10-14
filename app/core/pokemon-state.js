@@ -197,10 +197,10 @@ class PokemonState {
         pokemon.atk += 1;
       }
       if (pokemon.effects.includes(EFFECTS.DROUGHT)) {
-        pokemon.atk += 1;
+        pokemon.atk += 2;
       }
       if (pokemon.effects.includes(EFFECTS.DESOLATE_LAND)) {
-        pokemon.atk += 1;
+        pokemon.atk += 3;
       }
       if (pokemon.effects.includes(EFFECTS.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)) {
         pokemon.atkSpeed = Math.max(400, Math.round(pokemon.atkSpeed * 0.95));
@@ -265,10 +265,6 @@ class PokemonState {
       }
 
       if (pokemon.items.count(ITEMS.BIG_ROOT) != 0) {
-        pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
-      }
-
-      if (pokemon.effects.includes(EFFECTS.RAIN_DISH)) {
         pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
       }
     }

@@ -851,6 +851,14 @@ class PokemonFactory {
         return PKM.SOLOSIS;
       case PKM.REUNICLUS:
         return PKM.SOLOSIS;
+      case PKM.ODDISH:
+        return PKM.ODDISH;
+      case PKM.GLOOM:
+        return PKM.ODDISH;
+      case PKM.VILEPLUME:
+        return PKM.ODDISH;
+      case PKM.BELLOSSOM:
+        return PKM.ODDISH;
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1407,6 +1415,14 @@ class PokemonFactory {
         return new Pokemon.Duosion();
       case PKM.REUNICLUS:
         return new Pokemon.Reuniclus();
+      case PKM.ODDISH:
+        return new Pokemon.Oddish();
+      case PKM.GLOOM:
+        return new Pokemon.Gloom();
+      case PKM.VILEPLUME:
+        return new Pokemon.Vileplume();
+      case PKM.BELLOSSOM:
+        return new Pokemon.Bellossom();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();
