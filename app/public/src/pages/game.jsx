@@ -5,7 +5,13 @@ import firebase from 'firebase/app';
 import { FIREBASE_CONFIG } from './utils/utils';
 import { Client } from 'colyseus.js';
 import Modal from './component/modal';
-
+import GameShop from './component/game-shop';
+import GameInformations from './component/game-informations';
+import GamePlayers from './component/game-players';
+import { WORDS} from '../../../models/enum';
+import GamePlayerInformations from './component/game-player-informations';
+import GameDpsMeter from './component/game-dps-meter';
+import GameSynergies from './component/game-synergies';
 class Game extends Component {
 
     constructor(props){
@@ -15,9 +21,67 @@ class Game extends Component {
         this.container = React.createRef();
 
         this.state = {
+          dpsMeter: {},
           afterGameId: '',
           isSignedIn: false,
-          connected: false
+          connected: false,
+          shopLocked: false,
+          name: '',
+          money: 0,
+          currentPlayerId:'',
+          experienceManager:
+          {
+            level: 2,
+            experience: 0,
+            expNeeded: 2
+          },
+          shop:[],
+          player:{
+            lastBattleResult: '',
+            boardSize: 0,
+            opponentName:'',
+            experienceManager:{
+                level:2
+            },
+            avatar:'rattata',
+            money:5,
+            name:'',
+            synergies:{
+                NORMAL: 0,
+                GRASS: 0,
+                NORMAL: 0,
+                GRASS: 0,
+                FIRE: 0,
+                WATER: 0,
+                ELECTRIC: 0,
+                FIGHTING: 0,
+                PSYCHIC: 0,
+                DARK: 0,
+                METAL: 0,
+                GROUND: 0,
+                POISON: 0,
+                DRAGON: 0,
+                FIELD: 0,
+                MONSTER: 0,
+                HUMAN: 0,
+                AQUATIC: 0,
+                BUG: 0,
+                FLYING: 0,
+                FLORA: 0,
+                MINERAL: 0,
+                AMORPH: 0,
+                FAIRY: 0,
+                ICE: 0
+            }
+
+          },
+          gameState:{
+            roundTime: '',
+            phase: '',
+            players: {},
+            stageLevel: 0,
+            mapType: ''
+          }
         };
 
         // Initialize Firebase
@@ -28,7 +92,11 @@ class Game extends Component {
         firebase.auth().onAuthStateChanged(user => {
           this.setState({isSignedIn: !!user});
           this.uid = firebase.auth().currentUser.uid;
-          
+          this.setState(
+              {
+                currentPlayerId: this.uid
+              }
+          );
           this.id = localStorage.getItem('lastRoomId');
           this.sessionId = localStorage.getItem('lastSessionId');
 
@@ -51,18 +119,144 @@ class Game extends Component {
 
     initializeRoom(room){
       this.room = room;
+
       this.setState({
         connected:true
       });
+
+      this.room.state.players.onAdd = (player) => {
+        this.gameContainer.initializePlayer(player);
+        player.onChange = ((changes) => {
+          if(player.id == this.state.currentPlayerId){
+            this.setState({
+              player: player
+            });
+          }
+          if(player.id == this.uid){
+            this.setState({
+              name: player.name,
+              money: player.money,
+              shopLocked: player.shopLocked,
+              experienceManager: player.experienceManager
+            })
+          }
+
+          changes.forEach((change) => {
+            if(change.field == 'alive' && this.uid == player.id) {
+                let rankPhrase = `${WORDS.PLACE['eng']} no ${player.rank}`;
+                let titlePhrase = WORDS.RANKING['eng'];
+                if(!change.value){
+                this.gameContainer.showPopup(titlePhrase, rankPhrase);
+                }
+            }
+          });
+        });
+        player.shop.onAdd = (p)=>{
+            if(player.id == this.uid){
+                this.setState({
+                  shop: player.shop
+                })
+            }
+        }
+        player.shop.onRemove = (p)=>{
+            if(player.id == this.uid){
+                this.setState({
+                  shop: player.shop
+                })
+            }
+        }
+        player.shop.onChange = (p)=>{
+            if(player.id == this.uid){
+                this.setState({
+                  shop: player.shop
+                })
+            }
+        }
+
+        player.synergies.onChange = (s)=>{
+            if(player.id == this.state.currentPlayerId){
+                this.setState({
+                    player: player
+                });
+            }
+        };
+
+        player.simulation.dpsMeter.onAdd = (dps, key) => {
+            if(player.id == this.state.currentPlayerId){
+                this.setState({
+                    dpsMeter:player.simulation.dpsMeter
+                });
+            }
+            dps.onChange = (changes) => {
+                if(player.id == this.state.currentPlayerId){
+                    this.setState({
+                        dpsMeter:player.simulation.dpsMeter
+                    });
+                }
+            };
+          };
+          player.simulation.dpsMeter.onRemove = (dps, key) => {
+            if(player.id == this.state.currentPlayerId){
+                this.setState({
+                    dpsMeter:player.simulation.dpsMeter
+                });
+            }
+          };
+
+      };
+      this.room.state.players.onRemove = (player, key) => {
+        this.gameContainer.onPlayerRemove(player, key)
+      };
+
+      this.room.state.onChange = (changes)=>{
+        if(this.gameContainer && this.gameContainer.game){
+          changes.forEach(change=>{
+            switch (change.field) {
+              case 'phase':
+                this.gameContainer.game.scene.getScene('gameScene').updatePhase();
+                this.setState({
+                    phase: change.value
+                });
+                break;
+
+            case 'afterGameId':
+                this.setState({
+                    afterGameId: change.value
+                });
+                break;
+  
+            case 'roundTime':
+                this.setState({
+                    roundTime: change.value
+                });
+                break;
+
+            case 'stageLevel':
+                this.setState({
+                    stageLevel: change.value
+                });
+                break;
+
+            case 'mapType':
+                this.setState({
+                    mapType: change.value
+                });
+                break;
+
+            default:
+                break;
+            }
+          });
+        }
+      }
+
+      this.setState({
+        gameState: this.room.state
+      });
+
       this.gameContainer = new GameContainer(this.container.current, this.uid, this.room);
-      document.getElementById('game').addEventListener('shop-click', this.gameContainer.onShopClick.bind(this.gameContainer));
-      document.getElementById('game').addEventListener('player-click', this.gameContainer.onPlayerClick.bind(this.gameContainer));
-      document.getElementById('game').addEventListener('refresh-click', this.gameContainer.onRefreshClick.bind(this.gameContainer));
-      document.getElementById('game').addEventListener('lock-click', this.gameContainer.onLockClick.bind(this.gameContainer));
-      document.getElementById('game').addEventListener('level-click', this.gameContainer.onLevelClick.bind(this.gameContainer));
       document.getElementById('game').addEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').addEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
-      document.getElementById('game').addEventListener('leave-game', this.leaveGame.bind(this));
       document.getElementById('leave-button').addEventListener('click', ()=>{
         this.gameContainer.closePopup();
         setTimeout(this.leaveGame.bind(this), 500);
@@ -92,14 +286,8 @@ class Game extends Component {
 
     removeEventListeners(){
       this.gameContainer.closePopup();
-      document.getElementById('game').removeEventListener('shop-click', this.gameContainer.onShopClick.bind(this.gameContainer));
-      document.getElementById('game').removeEventListener('player-click', this.gameContainer.onPlayerClick.bind(this.gameContainer));
-      document.getElementById('game').removeEventListener('refresh-click', this.gameContainer.onRefreshClick.bind(this.gameContainer));
-      document.getElementById('game').removeEventListener('lock-click', this.gameContainer.onLockClick.bind(this.gameContainer));
-      document.getElementById('game').removeEventListener('level-click', this.gameContainer.onLevelClick.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
-      document.getElementById('game').removeEventListener('leave-game', this.leaveGame.bind(this));
       document.getElementById('leave-button').removeEventListener('click', this.leaveGame.bind(this));
     }
 
@@ -118,7 +306,32 @@ class Game extends Component {
       });
     }
 
+    refreshClick() {
+      this.room.send('refresh');
+    }
+
+    lockClick() {
+      this.room.send('lock');
+    }
+
+    levelClick() {
+        this.room.send('levelUp');
+    }
+
+    shopClick(index){
+      this.room.send('shop', {'id': index});
+    }
+
+    playerClick(id){
+        this.setState({
+            currentPlayerId:id,
+            player:this.state.gameState.players.get(id)
+        });
+        this.gameContainer.onPlayerClick(id);
+    }
+
   render() {
+
     if(!this.state.isSignedIn){
       return <div>
       </div>;
@@ -140,7 +353,45 @@ class Game extends Component {
     else{
       return <div>
         <Modal/>
-        <div id='game' ref={this.container} style={{maxHeight:'100vh'}}></div>
+        <GameShop 
+            levelExp={this.state.experienceManager.level} 
+            experience={this.state.experienceManager.experience} 
+            experienceNeeded={this.state.experienceManager.expNeeded} 
+            money={this.state.money} refresh={this.refreshClick.bind(this)} 
+            lock={this.lockClick.bind(this)} 
+            shopLocked={this.state.shopLocked} 
+            level={this.levelClick.bind(this)}
+            shop={this.state.shop}
+            shopClick={this.shopClick.bind(this)}
+        />
+        <GameInformations
+          time={this.state.gameState.roundTime}
+          turn={this.state.gameState.stageLevel}
+          click={this.leaveGame.bind(this)}
+          />
+        <GamePlayers 
+            players={this.state.gameState.players}
+            playerClick={this.playerClick.bind(this)}
+            uid={this.uid}
+        />
+        <GamePlayerInformations
+            boardSize={this.state.player.boardSize} 
+            maxBoardSize={this.state.player.experienceManager.level}
+            avatar={this.state.player.avatar}
+            opponent={this.state.player.opponentName}
+            money={this.state.player.money}
+            name={this.state.player.name}
+        />
+        <GameDpsMeter
+            dpsMeter={this.state.dpsMeter}
+        />
+        <GameSynergies
+            synergies={this.state.player.synergies}
+        />
+        <div id='game' ref={this.container} style={{
+          maxHeight:'100vh'
+        }}>
+        </div>
       </div>
       
     }

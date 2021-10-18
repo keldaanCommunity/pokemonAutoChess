@@ -1199,7 +1199,7 @@ class StunSporeStrategy extends AttackStrategy {
         break;
     }
     target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
-    target.atkSpeed = pokemon.atkSpeed * debuff;
+    target.atkSpeed = Math.max(400,pokemon.atkSpeed * debuff);
   }
 }
 

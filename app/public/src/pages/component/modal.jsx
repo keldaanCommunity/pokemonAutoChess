@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class Modal extends Component {
   render() {
     return (
-        <div id="modal-popup" className="modal" tabindex="-1" role="dialog">
+        <div id="modal-popup" className="modal" tabIndex="-1" role="dialog">
         <div className="modal-dialog" role="document"  style={{backgroundColor: 'rgba(255, 255, 255, .6)'}}>
           <div className="modal-content">
             <div className="modal-header">

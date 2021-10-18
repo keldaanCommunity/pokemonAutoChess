@@ -24,7 +24,7 @@ export default class Pokemon extends Button {
     this.speDef = pokemon.speDef;
     this.attackType = pokemon.attackType;
     this.type = pokemon.type;
-    this.atkSpeed = pokemon.atkSpeed;
+    this.atkSpeed = pokemon.atkSpeed ? pokemon.atkSpeed: 1500;
     this.targetX = null;
     this.targetY = null;
     this.skill = pokemon.skill;
@@ -567,7 +567,7 @@ export default class Pokemon extends Button {
         x: coordinates[0],
         y: coordinates[1],
         ease: 'Linear',
-        duration: this.atkSpeed,
+        duration: this.atkSpeed ? this.atkSpeed: 1500,
         onComplete: (tween, targets) => {
           targets[0].setVisible(false);
           if (this.checkAnimations()) {

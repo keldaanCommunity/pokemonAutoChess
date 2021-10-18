@@ -2218,8 +2218,8 @@ const EXP_TABLE = Object.freeze({
 });
 
 const STATE = Object.freeze({
-  FIGHT: 'FIGHT',
-  PICK: 'PICK'
+  FIGHT: 'Fight',
+  PICK: 'Pick'
 });
 
 const STATE_TYPE = Object.freeze({
@@ -2325,14 +2325,17 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+          trigger: 3,
           title:`(3) Stamina`,
           text:`All allies adjacent to your Normal pokemon have +20 HP.`
         },
         {
+            trigger: 6,
           title:`(6) Strength`,
           text:`All allies adjacent to your Normal pokemon have +30 HP.`
         },
         {
+            trigger: 9,
           title:`(9) Pure power`,
           text:`All allies adjacent to your Normal pokemon have +50 HP.`
         }
@@ -2371,14 +2374,17 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 3,
           title:`(3) Ingrain`,
           text:`Grass allies restore 5% HP per second.`
         },
         {
+            trigger: 5,
           title:`(5) Growth`,
           text:`Grass allies restore 10% extra HP per second.`
         },
         {
+            trigger: 7,
           title:`(7) Stun Spore`,
           text:`Enemies have -30% speed.`
         }
@@ -2417,24 +2423,29 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Blaze`,
           text:`Your Fire pokemon gain +1 Attack after every hit.`
         },
         {
+            trigger: 4,
           title:`(4) Drought`,
           text:`Your Fire pokemon gain +2 Attack after every hit. (Sunlight)`
         },
         {
+            trigger: 6,
           title:`(6) Desolate Land`,
           text:`Your Fire pokemon gain +3 Attack after every hit. (Harsh Sunlight)`
         }
       ],
       esp:[
         {
+            trigger: 3,
           title:`(3) Blaze`,
           text:`Fire pkm gana un 5% de dano en cada ataque`
         },
         {
+            trigger: 6,
           title:`(6) Sequia`,
           text:`El so se intensifica, los pkm de fuego gana +50% ATK`
         }
@@ -2455,14 +2466,17 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 3,
           title:`(3) Rain dance`,
           text:`Your Water pokemon have +30% Attack. (Rain)`
         },
         {
+            trigger: 6,
           title:`(6) Crachin`,
           text:`Your Water pokemon have +30% more Attack. (Rain)`
         },
         {
+            trigger: 8,
           title:`(8) Primordial sea`,
           text:`Summon Kyogre, the king of the oceans. (Rain)`
         }
@@ -2501,6 +2515,7 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 1,
           title:`(-) Charge`,
           text:`Your Electric pokemon have +10% speed. (stacks)`
         }
@@ -2523,10 +2538,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Revenge`,
           text:`+5 Mana per hit.`
         },
         {
+            trigger: 4,
           title:`(4) Punishment`,
           text:`+10 extra Mana per hit.`
         }
@@ -2557,14 +2574,17 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Amnesia`,
           text:`All your pokemon have +5 Special Defense.`
         },
         {
+            trigger: 4,
           title:`(4) Light Screen`,
           text:`All your pokemon have +10 Special Defense.`
         },
         {
+            trigger: 6,
           title:`(6) Eerie Spell`,
           text:`All your pokemon have +20 Special Defense.`
         }
@@ -2603,10 +2623,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Black eyes`,
           text:`Enemies have -25% Defense.`
         },
         {
+            trigger: 4,
           title:`(4) Atmósfera oscura`,
           text:`Enemies have -25% less Defense.`
         }
@@ -2637,10 +2659,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Steel wall`,
           text:`Your Steel pokemon have +50% Defense.`
         },
         {
+            trigger: 4,
           title:`(4) Lightening`,
           text:`Your Steel pokemon have +100% Speed.`
         }
@@ -2671,14 +2695,17 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Spikes`,
           text:`Enemies lose 10% HP when entering the battle.`
         },
         {
+            trigger: 4,
           title:`(4) Stealth Rock`,
           text:`Enemies lose 10% more HP when entering the battle.`
         },
         {
+            trigger: 6,
           title:`(6) Sandstorm`,
           text:`All non-Ground/Steel pokemon lose 10% HP per second.`
         }
@@ -2717,10 +2744,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 3,
           title:`(3) Toxik Gas`,
           text:`Your Poison pokemon have a 20% chance to poison the target for 2 seconds. (15% HP per second)`
         },
         {
+            trigger: 6,
           title:`(6) Toxik`,
           text:`Your Poison pokemon have an extra 30% chance to poison the target for 2 seconds. (15% HP per second)`
         }
@@ -2751,10 +2780,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Bullying`,
           text:`Enemies have -30% Attack.`
         },
         {
+            trigger: 4,
           title:`(4) Dragon Dance`,
           text:`Your Dragon pokemon gain +5 Speed after every hit.`
         }
@@ -2785,14 +2816,17 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 3,
           title:`(3) Bulk up`,
           text:`Your pokemon on the same column have +2 Attack.`
         },
         {
+            trigger: 6,
           title:`(6) Rage`,
           text:`Your pokemon on the same column have +4 Attack.`
         },
         {
+            trigger: 9,
           title:`(9) Sword Dance`,
           text:`Your pokemon on the same column have +8 Attack.`
         }
@@ -2831,14 +2865,17 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 3,
           title:`(3) Pursuit`,
           text:`Enemies below 30% HP faint in one hit.`
         },
         {
+            trigger: 5,
           title:`(5) Pride`,
           text:`After causing an enemy to faint, restore to full health.`
         },
         {
+            trigger: 7,
           title:`(7) Moxie`,
           text:`After causing an enemy to faint, gain +100% Attack.`
         }
@@ -2877,14 +2914,17 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Meditation`,
           text:`Your pokemon have +15% Attack and HP.`
         },
         {
+            trigger: 4,
           title:`(4) Power`,
           text:`Your pokemon have +20% Attack and HP.`
         },
         {
+            trigger: 6,
           title:`(6) Calm Mind`,
           text:`Your pokemon have +30% Attack and HP.`
         }
@@ -2923,10 +2963,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Swift swim`,
           text:`Revive aquatic pokemons at first death with 40% health and 30% increased damage.`
         },
         {
+            trigger: 4,
           title:`(4) Hydro pump`,
           text:`Revive aquatic pokemons at first death with 80% health and 60% increased damage.`
         }
@@ -2957,10 +2999,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Swarm`,
           text:`Your Bug pokemon evolve faster. (2 instead of 3)`
         },
         {
+            trigger: 4,
           title:`(4) Sticky web`,
           text:`Enemies have -33% Speed.`
         }
@@ -2991,14 +3035,17 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Tailwind`,
           text:`Your Flying pokemon have +10% Critical Hit chance.`
         },
         {
+            trigger: 4,
           title:`(4) Feather Dance`,
           text:`Your Flying pokemon have +20% Critical Hit chance.`
         },
         {
+            trigger: 6,
           title:`(6) Max Airstream`,
           text:`Your Flying pokemon have +40% Critical Hit chance.`
         }
@@ -3037,14 +3084,17 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Odd Flower`,
           text:`When all flora allied have died, the oddish flower will rise from its grave..`
         },
         {
+            trigger: 3,  
           title:`(3) Gloom Flower`,
           text:`When all flora allied have died, the gloom flower will rise from its grave..`
         },
         {
+            trigger: 4,
           title:`(4) Vile Flower`,
           text:`When all flora allied have died, the vile flower will rise from its grave..`
         }
@@ -3075,10 +3125,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Harden`,
           text:`Your Mineral pokemon have +50% Defense.`
         },
         {
+            trigger: 4,
           title:`(4) Solid Rock`,
           text:`Your Mineral pokemon have +50% Defense and +100% HP.`
         }
@@ -3109,10 +3161,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Phantom force`,
           text:`Your Amorphous pokemon have +15% Speed and ignore stat changes.`
         },
         {
+            trigger: 4,
           title:`(4) Curse`,
           text:`Hits from your Amorphous pokemon prevent the target from filling up their Mana.`
         }
@@ -3143,10 +3197,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Sing`,
           text:`Your Fairy pokemon put their front opponent to sleep for 2 seconds.`
         },
         {
+            trigger: 4,
           title:`(4) Jigglypuff Microphone`,
           text:`Your Fairy pokemon put their front opponent to sleep for 4 seconds.`
         }
@@ -3177,10 +3233,12 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
+            trigger: 2,
           title:`(2) Snow alert`,
           text:`Your Ice pokemon have a 10% chance to freeze an enemy for 2 seconds after a hit.`
         },
         {
+            trigger: 4,
           title:`(4)Sheer cold`,
           text:`Your Ice pokemon have a 30% chance to freeze an enemy for 2 seconds after a hit.`
         }
@@ -3209,6 +3267,32 @@ const TYPE_DETAILS = Object.freeze({
   }
 });
 
+const TYPE_TRIGGER = {
+  NORMAL: [3,6,9],
+  GRASS: [3,5,7],
+  FIRE: [2,4,6],
+  WATER: [3,6,8],
+  ELECTRIC: [1],
+  FIGHTING: [2,4],
+  PSYCHIC: [2,4,6],
+  DARK: [2,4],
+  METAL: [2,4],
+  GROUND: [2,4,6],
+  POISON: [3,6],
+  DRAGON: [2,4],
+  FIELD: [3,6,9],
+  MONSTER: [3,5,7],
+  HUMAN: [2,4,6],
+  AQUATIC: [2,4],
+  BUG: [2,4],
+  FLYING: [2,4,6],
+  FLORA: [2,4],
+  MINERAL: [2,4],
+  AMORPH: [2,4],
+  FAIRY: [2,4],
+  ICE: [2,4]
+}
+
 const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000];
 
 const XP_PLACE = [700, 500, 400, 300, 200, 150, 100, 0];
@@ -3235,6 +3319,254 @@ const PROBABILITY = {
   8: [0.2, 0.24, 0.31, 0.2, 0.05],
   9: [0.1, 0.19, 0.31, 0.30, 0.1]
 };
+
+const PRECOMPUTED_TYPE_POKEMONS = {
+    NORMAL: {
+      pokemons: [
+        'cleffa',  'igglybuff',
+        'pidgey',  'starly',
+        'eevee',   'togepi',
+        'slakoth', 'ditto',
+        'scyther', 'meditite'
+      ],
+      mythicalPokemons: [ 'regigigas', 'arceus' ]
+    },
+    GRASS: {
+      pokemons: [
+        'bulbasaur',  'caterpie',
+        'hoppip',     'seedot',
+        'chikorita',  'treecko',
+        'turtwig',    'leafeon',
+        'bellsprout', 'oddish',
+        'lotad',      'snover'
+      ],
+      mythicalPokemons: [ 'virizion', 'celebi', 'shaymin' ]
+    },
+    FIRE: {
+      pokemons: [
+        'charmander', 'cyndaquil',
+        'torchic',    'chimchar',
+        'flareon',    'houndour',
+        'magby',      'litwick',
+        'numel'
+      ],
+      mythicalPokemons: [
+        'moltres',
+        'entei',
+        'groudon',
+        'volcarona',
+        'reshiram',
+        'victini',
+        'heatran',
+        'ho-Oh',
+        'primal-Groudon'
+      ]
+    },
+    WATER: {
+      pokemons: [
+        'squirtle', 'azurill',
+        'mudkip',   'piplup',
+        'vaporeon', 'carvanha',
+        'horsea',   'lotad',
+        'poliwag'
+      ],
+      mythicalPokemons: [
+        'palkia',
+        'suicune',
+        'kyogre',
+        'keldeo',
+        'manaphy',
+        'lapras',
+        'primal-Kyogre'
+      ]
+    },
+    ELECTRIC: {
+      pokemons: [ 'mareep', 'jolteon', 'pichu', 'magnemite', 'shinx', 'elekid' ],
+      mythicalPokemons: [
+        'zapdos',
+        'raikou',
+        'thundurus',
+        'rotom',
+        'zekrom',
+        'primal-Kyogre'
+      ]
+    },
+    FIGHTING: {
+      pokemons: [
+        'combusken',
+        'monferno',
+        'machop',
+        'poliwag',
+        'riolu',
+        'meditite'
+      ],
+      mythicalPokemons: [ 'keldeo', 'terrakion', 'virizion', 'cobalion' ]
+    },
+    PSYCHIC: {
+      pokemons: [ 'espeon', 'slowpoke', 'abra', 'ralts', 'beldum', 'solosis' ],
+      mythicalPokemons: [
+        'lugia',   'latias',
+        'latios',  'mesprit',
+        'azelf',   'uxie',
+        'mewtwo',  'celebi',
+        'victini', 'jirachi',
+        'deoxys',  'cresselia'
+      ]
+    },
+    DARK: {
+      pokemons: [
+        'seedot',   'umbreon',
+        'carvanha', 'houndour',
+        'duskull',  'larvitar',
+        'deino',    'sandile'
+      ],
+      mythicalPokemons: [ 'darkrai', 'spiritomb', 'absol' ]
+    },
+    METAL: {
+      pokemons: [
+        'prinplup',
+        'aron',
+        'magnemite',
+        'beldum',
+        'steelix',
+        'scizor',
+        'lucario'
+      ],
+      mythicalPokemons: [ 'dialga', 'registeel', 'cobalion', 'jirachi', 'heatran' ]
+    },
+    GROUND: {
+      pokemons: [
+        'geodude',  'mudkip',
+        'turtwig',  'swinub',
+        'trapinch', 'rhyhorn',
+        'gible',    'sandile',
+        'onix',     'numel'
+      ],
+      mythicalPokemons: [ 'groudon', 'landorus', 'primal-Groudon' ]
+    },
+    POISON: {
+      pokemons: [
+        'bulbasaur',
+        'zubat',
+        'weedle',
+        'nidoranF',
+        'nidoranM',
+        'bellsprout',
+        'oddish',
+        'gastly'
+      ],
+      mythicalPokemons: []
+    },
+    DRAGON: {
+      pokemons: [ 'horsea', 'vibrava', 'dratini', 'bagon', 'gible', 'deino' ],
+      mythicalPokemons: [
+        'giratina',
+        'dialga',
+        'palkia',
+        'rayquaza',
+        'latias',
+        'latios',
+        'kyurem',
+        'reshiram',
+        'zekrom',
+        'mega-Rayquaza'
+      ]
+    },
+    FIELD: {
+      pokemons: [
+        'squirtle', 'mareep',
+        'seedot',   'cyndaquil',
+        'nidoranF', 'nidoranM',
+        'eevee',    'vaporeon',
+        'jolteon',  'flareon',
+        'espeon',   'umbreon',
+        'leafeon',  'sylveon',
+        'glaceon',  'shinx',
+        'slakoth',  'sandile',
+        'numel'
+      ],
+      mythicalPokemons: [ 'raikou', 'entei', 'absol', 'arceus' ]
+    },
+    MONSTER: {
+      pokemons: [
+        'charmander', 'totodile',
+        'treecko',    'aron',
+        'rhyhorn',    'gastly',
+        'larvitar',   'bagon',
+        'gible'
+      ],
+      mythicalPokemons: [ 'regigigas', 'darkrai', 'mewtwo', 'kyurem' ]
+    },
+    HUMAN: {
+      pokemons: [
+        'chimchar', 'machop',
+        'abra',     'ralts',
+        'elekid',   'magby',
+        'riolu',    'meditite'
+      ],
+      mythicalPokemons: [ 'regice', 'regirock', 'registeel', 'regigigas', 'deoxys' ]
+    },
+    AQUATIC: {
+      pokemons: [ 'totodile', 'slowpoke', 'spheal', 'dratini' ],
+      mythicalPokemons: [ 'lugia', 'kyogre', 'primal-Kyogre' ]
+    },
+    BUG: {
+      pokemons: [ 'caterpie', 'weedle', 'trapinch', 'scyther' ],
+      mythicalPokemons: [ 'volcarona', 'manaphy' ]
+    },
+    FLYING: {
+      pokemons: [
+        'charizard',  'zubat',
+        'butterfree', 'beedrill',
+        'pidgey',     'hoppip',
+        'starly',     'torchic',
+        'piplup',     'swablu',
+        'togetic',    'dragonite',
+        'salamence'
+      ],
+      mythicalPokemons: [
+        'lugia',         'zapdos',
+        'moltres',       'articuno',
+        'rayquaza',      'landorus',
+        'thundurus',     'tornadus',
+        'ho-Oh',         'aerodactyl',
+        'mega-Rayquaza'
+      ]
+    },
+    FLORA: {
+      pokemons: [
+        'bulbasaur',
+        'hoppip',
+        'chikorita',
+        'turtwig',
+        'leafeon',
+        'bellsprout'
+      ],
+      mythicalPokemons: [ 'shaymin' ]
+    },
+    MINERAL: {
+      pokemons: [ 'geodude', 'aron', 'rhyhorn', 'larvitar', 'beldum', 'onix' ],
+      mythicalPokemons: [ 'regirock', 'terrakion', 'aerodactyl' ]
+    },
+    AMORPH: {
+      pokemons: [ 'duskull', 'gastly', 'litwick', 'snorunt', 'solosis' ],
+      mythicalPokemons: [ 'giratina', 'darkrai', 'rotom', 'spiritomb' ]
+    },
+    FAIRY: {
+      pokemons: [
+        'azurill',   'cleffa',
+        'igglybuff', 'sylveon',
+        'swablu',    'pichu',
+        'togepi',    'ralts',
+        'vanillite'
+      ],
+      mythicalPokemons: [ 'mesprit', 'azelf', 'uxie', 'cresselia' ]
+    },
+    ICE: {
+      pokemons: [ 'swinub', 'glaceon', 'spheal', 'snorunt', 'vanillite', 'snover' ],
+      mythicalPokemons: [ 'articuno', 'suicune', 'regice', 'lapras', 'kyurem' ]
+    }
+  }
 
 module.exports = {
   SPECIAL_SKILL_DESCRIPTION,
@@ -3270,5 +3602,7 @@ module.exports = {
   EFFECTS_ICON,
   PKM,
   RARITY_COLOR,
-  PROBABILITY
+  PROBABILITY,
+  TYPE_TRIGGER,
+  PRECOMPUTED_TYPE_POKEMONS
 };
