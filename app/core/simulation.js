@@ -702,7 +702,7 @@ class Simulation extends Schema {
     ennemyEffects.forEach((effect) => {
       switch (effect) {
         case EFFECTS.SPORE:
-          pokemon.atkSpeed = pokemon.atkSpeed * 1.3;
+          pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 1.3);
           pokemon.effects.push(EFFECTS.SPORE);
           break;
 
@@ -732,7 +732,7 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.STICKY_WEB:
-          pokemon.atkSpeed = pokemon.atkSpeed * 1.3;
+          pokemon.atkSpeed = Math.max(400,pokemon.atkSpeed * 1.3);
           pokemon.effects.push(EFFECTS.STICKY_WEB);
           break;
 
