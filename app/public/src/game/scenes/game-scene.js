@@ -190,14 +190,7 @@ export default class GameScene extends Scene {
 
     this.mapName = new MapNameButton(this, 120, 330, this.room.state.mapType, 'eng');
     this.nameText = this.add.text(10, 20, this.room.state.players[this.uid].name.slice(0, 8), this.textStyle);
-    this.phaseText = this.add.text(860, 25, this.room.state.players[this.uid].phase, this.textStyle);
-    this.turnText = this.add.text(565, 25, this.room.state.stageLevel, this.textStyle);
-    this.add.text(460, 25, WORDS.TURN['eng'], this.textStyle);
-    this.timeText = this.add.text(685, 25, this.room.state.roundTime, this.textStyle);
-    this.add.text(735, 25, 's', this.textStyle);
     this.lastBattleResult = this.add.text(1040, 25, this.room.state.players[this.uid].lastBattleResult, this.textStyle);
-    this.countdownText = this.add.text(700, 300, this.room.state.players[this.uid].lastBattleResult, this.bigTextStyle);
-    this.countdownText.setAlpha(0);
     this.boardSizeText = this.add.text(300, 25, Object.keys(this.room.state.players[this.uid].boardSize).length, this.textStyle);
     this.add.text(325, 25, '/', this.textStyle);
     this.maxBoardSizeText = this.add.text(350, 25, this.room.state.players[this.uid].experienceManager.level, this.textStyle);
@@ -230,43 +223,12 @@ export default class GameScene extends Scene {
   update() {
   }
 
-  fade() {
-    /*
-    this.tweens.add({
-      targets: this.transitionScreen,
-      duration: 150,
-      alpha: 1,
-      yoyo: true,
-      repeat: 0
-    });
-    */
-  }
-
-  displayCountDown(countdown) {
-    this.countdownText.setText(countdown);
-    this.countdownText.setAlpha(0);
-    this.tweens.add({
-      targets: this.countdownText,
-      duration: 500,
-      alpha: 1,
-      yoyo: true,
-      repeat: 0
-    });
-  }
-
-  updateTime() {
-    this.timeText.setText(this.room.state.roundTime);
-  }
-
   updatePhase() {
     this.dpsMeterContainer.maxDamage = 0;
-    this.phaseText.setText(PHASE_TRADUCTION[this.room.state.phase]['eng']);
     if (this.room.state.phase == 'FIGHT') {
       this.boardManager.battleMode();
-      // this.music.play('battle-1');
     } else {
       this.boardManager.pickMode();
-      // this.music.play('pick-1');
     }
   }
 

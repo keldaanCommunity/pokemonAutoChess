@@ -2218,8 +2218,8 @@ const EXP_TABLE = Object.freeze({
 });
 
 const STATE = Object.freeze({
-  FIGHT: 'FIGHT',
-  PICK: 'PICK'
+  FIGHT: 'Fight',
+  PICK: 'Pick'
 });
 
 const STATE_TYPE = Object.freeze({

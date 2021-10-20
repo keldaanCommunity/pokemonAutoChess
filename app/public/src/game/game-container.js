@@ -42,17 +42,10 @@ class GameContainer {
   }
 
   initializeEvents() {
-    this.room.state.players.onAdd = (player) => this.initializePlayer(player);
-    this.room.state.players.onRemove = (player, key) => this.onPlayerRemove(player, key);
     this.room.onMessage('DragDropFailed', (message) => this.handleDragDropFailed(message));
     this.room.onMessage('info',(message)=> this.handleServerInfo(message));
     //this.room.onLeave((client) => this.handleRoomLeft(client));
     this.room.onError((err) => console.log('room error', err));
-    this.room.state.onChange = (changes) => {
-      changes.forEach((change) => {
-        this.handleRoomStateChange(change);
-      });
-    };
   }
 
   initializePlayer(player) {
@@ -209,28 +202,6 @@ class GameContainer {
     };
     player.triggerAll();
     this.onPlayerAdd(player);
-  }
-
-  handleRoomStateChange(change) {
-
-    if (this.room.state == null || this.game == null || this.game.scene == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').timeText == null) return;
-    switch (change.field) {
-      case 'roundTime':
-        this.game.scene.getScene('gameScene').updateTime();
-        if (change.value <= 5) {
-          this.game.scene.getScene('gameScene').displayCountDown(change.value);
-        }
-        break;
-
-      case 'phase':
-        this.game.scene.getScene('gameScene').updatePhase();
-        break;
-
-      case 'stageLevel':
-        this.game.scene.getScene('gameScene').turnText.setText(change.value);
-      default:
-        break;
-    }
   }
 
   handleDpsAdd(playerId, dps) {

@@ -5,6 +5,9 @@ import firebase from 'firebase/app';
 import { FIREBASE_CONFIG } from './utils/utils';
 import { Client } from 'colyseus.js';
 import Modal from './component/modal';
+import GameTime from './component/game-time';
+import GamePhase from './component/game-phase';
+import GameTurn from './component/game-turn';
 
 class Game extends Component {
 
@@ -17,7 +20,17 @@ class Game extends Component {
         this.state = {
           afterGameId: '',
           isSignedIn: false,
-          connected: false
+          connected: false,
+          player:{
+            
+          },
+          gameState:{
+            roundTime: '',
+            phase: '',
+            players: {},
+            stageLevel: 0,
+            mapType: ''
+          }
         };
 
         // Initialize Firebase
@@ -51,9 +64,33 @@ class Game extends Component {
 
     initializeRoom(room){
       this.room = room;
+      this.room.state.players.onAdd = (player) => {
+        this.gameContainer.initializePlayer(player);
+      };
+      this.room.state.players.onRemove = (player, key) => {
+        this.gameContainer.onPlayerRemove(player, key)
+      };
       this.setState({
-        connected:true
+        connected:true,
+        gameState: room.state
       });
+
+      this.room.state.onChange = (changes)=>{
+        changes.forEach(change=>{
+          switch (change.field) {
+            case 'phase':
+              this.gameContainer.game.scene.getScene('gameScene').updatePhase();
+              break;
+
+            default:
+              break;
+          }
+        });
+        this.setState({
+          gameState: this.room.state
+        });
+      }
+
       this.gameContainer = new GameContainer(this.container.current, this.uid, this.room);
       document.getElementById('game').addEventListener('shop-click', this.gameContainer.onShopClick.bind(this.gameContainer));
       document.getElementById('game').addEventListener('player-click', this.gameContainer.onPlayerClick.bind(this.gameContainer));
@@ -140,7 +177,11 @@ class Game extends Component {
     else{
       return <div>
         <Modal/>
-        <div id='game' ref={this.container} style={{maxHeight:'100vh'}}></div>
+        <GameTime time={this.state.gameState.roundTime}/>
+        <GamePhase phase={this.state.gameState.phase}/>
+        <GameTurn turn={this.state.gameState.stageLevel}/>
+        <div id='game' ref={this.container} style={{maxHeight:'100vh'}}>
+        </div>
       </div>
       
     }
