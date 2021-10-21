@@ -27,7 +27,7 @@
     "start": "node ./app/index.js"
   },
   "dependencies": {
-    "@colyseus/command": "^0.1.5",
+    "@colyseus/command": "^0.1.7",
     "@colyseus/monitor": "^0.14.3",
     "@colyseus/ws-transport": "^0.14.20",
     "bad-words": "^3.0.4",
@@ -57,6 +57,7 @@
     "react-resizable": "^3.0.4",
     "react-router-dom": "^5.2.0",
     "react-tabs": "^3.2.2",
+    "react-tooltip": "^4.2.21",
     "uniqid": "^5.0.3"
   },
   "devDependencies": {

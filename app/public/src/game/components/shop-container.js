@@ -1,8 +1,6 @@
 import {GameObjects} from 'phaser';
 import ShopPortraitContainer from './shop-portrait-container';
-import RefreshButton from '../components/refresh-button';
 import LevelUpButton from '../components/levelup-button';
-import LockButton from '../components/lock-button';
 import PokemonFactory from '../../../../models/pokemon-factory';
 import PercentageDisplay from './percentage-display';
 
@@ -18,10 +16,7 @@ export default class ShopContainer extends GameObjects.Container {
     this.levelUpButton = new LevelUpButton(scene, 0, 58, this.player.experienceManager);
     this.percentageDisplay = new PercentageDisplay(scene, -60, -55);
     this.add(this.percentageDisplay);
-    this.add(new RefreshButton(scene, 0, -8));
     this.add(this.levelUpButton);
-    this.lockButton = new LockButton(scene, this.player, -135, -8);
-    this.add(this.lockButton);
     this.buildShopPortraits();
     scene.add.existing(this);
   }

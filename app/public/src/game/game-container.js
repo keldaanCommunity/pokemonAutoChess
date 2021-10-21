@@ -361,12 +361,6 @@ class GameContainer {
         this.game.scene.getScene('gameScene').playerContainer.onLifeChange(player.id, change.value);
         break;
 
-      case 'shopLocked':
-        if (this.uid == player.id) {
-          this.game.scene.getScene('gameScene').shopContainer.lockButton.updateState();
-        }
-        break;
-
       case 'rank':
         this.game.scene.getScene('gameScene').playerContainer.onRankChange(player.id, change.value);
         break;
@@ -425,14 +419,6 @@ class GameContainer {
   onShopClick(event) {
     //console.log('shop');
     this.room.send('shop', {'id': event.detail.id});
-  }
-
-  onRefreshClick(event) {
-    this.room.send('refresh');
-  }
-
-  onLockClick(event) {
-    this.room.send('lock');
   }
 
   onLevelClick(event) {

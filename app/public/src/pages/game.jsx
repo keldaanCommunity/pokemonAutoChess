@@ -14,6 +14,8 @@ import GameLeave from './component/game-leave';
 import GameOccupation from './component/game-occupation';
 import GameProfile from './component/game-profile';
 import GameMapName from './component/game-map-name';
+import GameRefresh from './component/game-refresh';
+import GameLock from './component/game-lock';
 
 class Game extends Component {
 
@@ -27,12 +29,13 @@ class Game extends Component {
           afterGameId: '',
           isSignedIn: false,
           connected: false,
+          shopLocked: false,
+          name: '',
+          money: 0,
           player:{
             lastBattleResult: '',
             boardSize: 0,
             opponentName:'',
-            name:'',
-            money: 0,
             experienceManager:
               {
                 level: 2
@@ -55,7 +58,7 @@ class Game extends Component {
         firebase.auth().onAuthStateChanged(user => {
           this.setState({isSignedIn: !!user});
           this.uid = firebase.auth().currentUser.uid;
-          
+          this.currentPlayerId = this.uid;
           this.id = localStorage.getItem('lastRoomId');
           this.sessionId = localStorage.getItem('lastSessionId');
 
@@ -81,11 +84,19 @@ class Game extends Component {
       this.room.state.players.onAdd = (player) => {
         this.gameContainer.initializePlayer(player);
         player.onChange = ((changes) => {
-          if(player.id == this.uid){
+          if(player.id == this.currentPlayerId){
             this.setState({
               player: player
             });
           }
+          if(player.id == this.uid){
+            this.setState({
+              name: player.name,
+              money: player.money,
+              shopLocked: player.shopLocked
+            })
+          }
+
           changes.forEach((change) => this.gameContainer.handlePlayerChange(change, player));
         });
       };
@@ -98,16 +109,18 @@ class Game extends Component {
       });
 
       this.room.state.onChange = (changes)=>{
-        changes.forEach(change=>{
-          switch (change.field) {
-            case 'phase':
-              this.gameContainer.game.scene.getScene('gameScene').updatePhase();
-              break;
-
-            default:
-              break;
-          }
-        });
+        if(this.gameContainer && this.gameContainer.game){
+          changes.forEach(change=>{
+            switch (change.field) {
+              case 'phase':
+                this.gameContainer.game.scene.getScene('gameScene').updatePhase();
+                break;
+  
+              default:
+                break;
+            }
+          });
+        }
         this.setState({
           gameState: this.room.state
         });
@@ -116,8 +129,6 @@ class Game extends Component {
       this.gameContainer = new GameContainer(this.container.current, this.uid, this.room);
       document.getElementById('game').addEventListener('shop-click', this.gameContainer.onShopClick.bind(this.gameContainer));
       document.getElementById('game').addEventListener('player-click', this.gameContainer.onPlayerClick.bind(this.gameContainer));
-      document.getElementById('game').addEventListener('refresh-click', this.gameContainer.onRefreshClick.bind(this.gameContainer));
-      document.getElementById('game').addEventListener('lock-click', this.gameContainer.onLockClick.bind(this.gameContainer));
       document.getElementById('game').addEventListener('level-click', this.gameContainer.onLevelClick.bind(this.gameContainer));
       document.getElementById('game').addEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').addEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
@@ -152,8 +163,6 @@ class Game extends Component {
       this.gameContainer.closePopup();
       document.getElementById('game').removeEventListener('shop-click', this.gameContainer.onShopClick.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('player-click', this.gameContainer.onPlayerClick.bind(this.gameContainer));
-      document.getElementById('game').removeEventListener('refresh-click', this.gameContainer.onRefreshClick.bind(this.gameContainer));
-      document.getElementById('game').removeEventListener('lock-click', this.gameContainer.onLockClick.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('level-click', this.gameContainer.onLevelClick.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
@@ -176,6 +185,15 @@ class Game extends Component {
       });
     }
 
+    refreshClick() {
+      this.room.send('refresh');
+    }
+
+    
+    lockClick() {
+      this.room.send('lock');
+    }
+
   render() {
     if(!this.state.isSignedIn){
       return <div>
@@ -196,10 +214,10 @@ class Game extends Component {
       </div>
     }
     else{
-      console.log(this.state.gameState);
-      console.log(this.state.gameState.mapType);
       return <div>
         <Modal/>
+        <GameLock lock={this.lockClick.bind(this)} shopLocked={this.state.shopLocked}/>
+        <GameRefresh refresh={this.refreshClick.bind(this)}/>
         <GameLeave handleClick={this.leaveGame.bind(this)}/>
         <GameMapName mapName={this.state.gameState.mapType}/>
         <GameOccupation boardSize={this.state.player.boardSize} maxBoardSize={this.state.player.experienceManager.level}/>
@@ -208,7 +226,7 @@ class Game extends Component {
         <GameTime time={this.state.gameState.roundTime}/>
         <GamePhase phase={this.state.gameState.phase}/>
         <GameTurn turn={this.state.gameState.stageLevel}/>
-        <GameProfile name={this.state.player.name} money={this.state.player.money}/>
+        <GameProfile name={this.state.name} money={this.state.money}/>
         <div id='game' ref={this.container} style={{maxHeight:'100vh'}}>
         </div>
       </div>
