@@ -4,17 +4,14 @@ import ShopContainer from '../components/shop-container';
 import PlayerContainer from '../components/player-container';
 import BoardManager from '../components/board-manager';
 import BattleManager from '../components/battle-manager';
-import MoneyContainer from '../components/money-container';
 import SynergiesContainer from '../components/synergies-container';
 import WeatherManager from '../components/weather-manager';
 import EntryHazardsManager from '../components/Entry-hazards-manager';
 import ItemsContainer from '../components/items-container';
 import DpsMeterContainer from '../components/dps-meter-container';
-import LeaveButton from '../components/leave-button';
-import MapNameButton from '../components/map-name-button';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
-import {WORDS, PHASE_TRADUCTION, MAP_TYPE_NAME} from '../../../../models/enum';
+import {STATE} from '../../../../models/enum';
 import firebase from 'firebase/app';
 import { transformAttackCoordinate, getOrientation } from '../../pages/utils/utils';
 
@@ -179,21 +176,13 @@ export default class GameScene extends Scene {
     this.synergiesContainer = new SynergiesContainer(this, 1290, 135, this.room.state.players[this.uid]);
     this.dpsMeterContainer = new DpsMeterContainer(this, 1520, 135, this.room.state.players[this.uid]);
     this.itemsContainer = new ItemsContainer(this, 66, 430);
-    this.moneyContainer = new MoneyContainer(this, 10, 60, this.room.state.players[this.uid]);
     this.boardManager = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
     this.entryHazardsManager = new EntryHazardsManager(this, this.map, tileset);
-    this.leaveButton = new LeaveButton(this, 1750, 30);
     this.pokemon = this.add.existing(new Pokemon(this, 130, 640, PokemonFactory.createPokemonFromName(this.room.state.players[this.uid].avatar), false));
     this.animationManager.animatePokemon(this.pokemon);
 
-    this.mapName = new MapNameButton(this, 120, 330, this.room.state.mapType, 'eng');
-    this.nameText = this.add.text(10, 20, this.room.state.players[this.uid].name.slice(0, 8), this.textStyle);
-    this.lastBattleResult = this.add.text(1040, 25, this.room.state.players[this.uid].lastBattleResult, this.textStyle);
-    this.boardSizeText = this.add.text(300, 25, Object.keys(this.room.state.players[this.uid].boardSize).length, this.textStyle);
-    this.add.text(325, 25, '/', this.textStyle);
-    this.maxBoardSizeText = this.add.text(350, 25, this.room.state.players[this.uid].experienceManager.level, this.textStyle);
     this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
     this.transitionScreen.setAlpha(0);
@@ -225,7 +214,7 @@ export default class GameScene extends Scene {
 
   updatePhase() {
     this.dpsMeterContainer.maxDamage = 0;
-    if (this.room.state.phase == 'FIGHT') {
+    if (this.room.state.phase == STATE.FIGHT) {
       this.boardManager.battleMode();
     } else {
       this.boardManager.pickMode();

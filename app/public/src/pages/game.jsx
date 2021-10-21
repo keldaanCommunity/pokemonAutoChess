@@ -8,6 +8,12 @@ import Modal from './component/modal';
 import GameTime from './component/game-time';
 import GamePhase from './component/game-phase';
 import GameTurn from './component/game-turn';
+import GameResult from './component/game-result';
+import GameOpponent from './component/game-opponent';
+import GameLeave from './component/game-leave';
+import GameOccupation from './component/game-occupation';
+import GameProfile from './component/game-profile';
+import GameMapName from './component/game-map-name';
 
 class Game extends Component {
 
@@ -22,7 +28,15 @@ class Game extends Component {
           isSignedIn: false,
           connected: false,
           player:{
-            
+            lastBattleResult: '',
+            boardSize: 0,
+            opponentName:'',
+            name:'',
+            money: 0,
+            experienceManager:
+              {
+                level: 2
+              }
           },
           gameState:{
             roundTime: '',
@@ -66,6 +80,14 @@ class Game extends Component {
       this.room = room;
       this.room.state.players.onAdd = (player) => {
         this.gameContainer.initializePlayer(player);
+        player.onChange = ((changes) => {
+          if(player.id == this.uid){
+            this.setState({
+              player: player
+            });
+          }
+          changes.forEach((change) => this.gameContainer.handlePlayerChange(change, player));
+        });
       };
       this.room.state.players.onRemove = (player, key) => {
         this.gameContainer.onPlayerRemove(player, key)
@@ -99,7 +121,6 @@ class Game extends Component {
       document.getElementById('game').addEventListener('level-click', this.gameContainer.onLevelClick.bind(this.gameContainer));
       document.getElementById('game').addEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').addEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
-      document.getElementById('game').addEventListener('leave-game', this.leaveGame.bind(this));
       document.getElementById('leave-button').addEventListener('click', ()=>{
         this.gameContainer.closePopup();
         setTimeout(this.leaveGame.bind(this), 500);
@@ -175,11 +196,19 @@ class Game extends Component {
       </div>
     }
     else{
+      console.log(this.state.gameState);
+      console.log(this.state.gameState.mapType);
       return <div>
         <Modal/>
+        <GameLeave handleClick={this.leaveGame.bind(this)}/>
+        <GameMapName mapName={this.state.gameState.mapType}/>
+        <GameOccupation boardSize={this.state.player.boardSize} maxBoardSize={this.state.player.experienceManager.level}/>
+        <GameOpponent opponent={this.state.player.opponentName}/>
+        <GameResult result={this.state.player.lastBattleResult}/>
         <GameTime time={this.state.gameState.roundTime}/>
         <GamePhase phase={this.state.gameState.phase}/>
         <GameTurn turn={this.state.gameState.stageLevel}/>
+        <GameProfile name={this.state.player.name} money={this.state.player.money}/>
         <div id='game' ref={this.container} style={{maxHeight:'100vh'}}>
         </div>
       </div>

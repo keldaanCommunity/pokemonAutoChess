@@ -44,7 +44,6 @@ class GameContainer {
   initializeEvents() {
     this.room.onMessage('DragDropFailed', (message) => this.handleDragDropFailed(message));
     this.room.onMessage('info',(message)=> this.handleServerInfo(message));
-    //this.room.onLeave((client) => this.handleRoomLeft(client));
     this.room.onError((err) => console.log('room error', err));
   }
 
@@ -55,9 +54,6 @@ class GameContainer {
       this.player = player;
       this.initializeGame();
     }
-    player.onChange = ((changes) => {
-      changes.forEach((change) => self.handlePlayerChange(change, player));
-    });
 
     player.board.onAdd = function(pokemon, key) {
       pokemon.onChange = function(changes) {
@@ -334,7 +330,6 @@ class GameContainer {
         case 'level':
           this.game.scene.getScene('gameScene').shopContainer.percentageDisplay.updatePercentages(change.value);
           this.game.scene.getScene('gameScene').shopContainer.levelUpButton.changeLevel(change.value);
-          this.game.scene.getScene('gameScene').maxBoardSizeText.setText(change.value);
           break;
 
         case 'experience':
@@ -359,41 +354,7 @@ class GameContainer {
     if (this.game == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null ) return;
     switch (change.field) {
       case 'money':
-        if (this.uid == player.id) {
-          this.game.scene.getScene('gameScene').moneyContainer.onMoneyChange(change.value);
-        }
         this.game.scene.getScene('gameScene').playerContainer.onMoneyChange(player.id, change.value);
-        break;
-
-      case 'streak':
-        if (this.uid == player.id) {
-          this.game.scene.getScene('gameScene').moneyContainer.onStreakChange(change.value);
-        }
-        break;
-
-      case 'interest':
-        if (this.uid == player.id) {
-          this.game.scene.getScene('gameScene').moneyContainer.onInterestChange(change.value);
-        }
-        break;
-
-      case 'lastBattleResult':
-        if (this.uid == player.id) {
-          this.game.scene.getScene('gameScene').moneyContainer.onWonChange(change.value);
-          this.game.scene.getScene('gameScene').lastBattleResult.setText(LAST_BATTLE_RESULT_TRADUCTION[change.value]['eng']);
-        }
-        break;
-
-      case 'opponentName':
-        if (this.uid == player.id) {
-          this.game.scene.getScene('gameScene').battleManager.setOpponentName(change.value.slice(0, 10));
-        }
-        break;
-
-      case 'boardSize':
-        if (this.uid == player.id) {
-          this.game.scene.getScene('gameScene').boardSizeText.setText(player.boardSize);
-        }
         break;
 
       case 'life':
