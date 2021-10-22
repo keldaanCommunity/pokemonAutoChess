@@ -421,10 +421,6 @@ class GameContainer {
     this.room.send('shop', {'id': event.detail.id});
   }
 
-  onLevelClick(event) {
-    this.room.send('levelUp');
-  }
-
   onDragDrop(event) {
     //this.showPopup('test', 'tues sanglier');
     this.room.send('dragDrop', {'detail': event.detail});

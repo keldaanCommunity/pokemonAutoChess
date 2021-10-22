@@ -32,7 +32,7 @@
     "@colyseus/ws-transport": "^0.14.20",
     "bad-words": "^3.0.4",
     "bootstrap": "^5.0.2",
-    "colyseus": "^0.14.20",
+    "colyseus": "^0.14.23",
     "colyseus.js": "^0.14.13",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

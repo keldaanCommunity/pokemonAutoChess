@@ -12,10 +12,8 @@ import GameResult from './component/game-result';
 import GameOpponent from './component/game-opponent';
 import GameLeave from './component/game-leave';
 import GameOccupation from './component/game-occupation';
-import GameProfile from './component/game-profile';
 import GameMapName from './component/game-map-name';
-import GameRefresh from './component/game-refresh';
-import GameLock from './component/game-lock';
+import GameShop from './component/game-shop';
 
 class Game extends Component {
 
@@ -36,9 +34,12 @@ class Game extends Component {
             lastBattleResult: '',
             boardSize: 0,
             opponentName:'',
+            shop:[],
             experienceManager:
               {
-                level: 2
+                level: 2,
+                experience: 0,
+                expNeeded: 2
               }
           },
           gameState:{
@@ -129,7 +130,6 @@ class Game extends Component {
       this.gameContainer = new GameContainer(this.container.current, this.uid, this.room);
       document.getElementById('game').addEventListener('shop-click', this.gameContainer.onShopClick.bind(this.gameContainer));
       document.getElementById('game').addEventListener('player-click', this.gameContainer.onPlayerClick.bind(this.gameContainer));
-      document.getElementById('game').addEventListener('level-click', this.gameContainer.onLevelClick.bind(this.gameContainer));
       document.getElementById('game').addEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').addEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
       document.getElementById('leave-button').addEventListener('click', ()=>{
@@ -163,7 +163,6 @@ class Game extends Component {
       this.gameContainer.closePopup();
       document.getElementById('game').removeEventListener('shop-click', this.gameContainer.onShopClick.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('player-click', this.gameContainer.onPlayerClick.bind(this.gameContainer));
-      document.getElementById('game').removeEventListener('level-click', this.gameContainer.onLevelClick.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('leave-game', this.leaveGame.bind(this));
@@ -189,9 +188,12 @@ class Game extends Component {
       this.room.send('refresh');
     }
 
-    
     lockClick() {
       this.room.send('lock');
+    }
+
+    levelClick() {
+        this.room.send('levelUp');
     }
 
   render() {
@@ -216,8 +218,15 @@ class Game extends Component {
     else{
       return <div>
         <Modal/>
-        <GameLock lock={this.lockClick.bind(this)} shopLocked={this.state.shopLocked}/>
-        <GameRefresh refresh={this.refreshClick.bind(this)}/>
+        <GameShop 
+        levelExp={this.state.player.experienceManager.level} 
+        experience={this.state.player.experienceManager.experience} 
+        experienceNeeded={this.state.player.experienceManager.expNeeded} 
+        money={this.state.money} refresh={this.refreshClick.bind(this)} 
+        lock={this.lockClick.bind(this)} 
+        shopLocked={this.state.shopLocked} 
+        level={this.levelClick.bind(this)}
+        shop={this.state.player.shop}/>
         <GameLeave handleClick={this.leaveGame.bind(this)}/>
         <GameMapName mapName={this.state.gameState.mapType}/>
         <GameOccupation boardSize={this.state.player.boardSize} maxBoardSize={this.state.player.experienceManager.level}/>
@@ -226,7 +235,6 @@ class Game extends Component {
         <GameTime time={this.state.gameState.roundTime}/>
         <GamePhase phase={this.state.gameState.phase}/>
         <GameTurn turn={this.state.gameState.stageLevel}/>
-        <GameProfile name={this.state.name} money={this.state.money}/>
         <div id='game' ref={this.container} style={{maxHeight:'100vh'}}>
         </div>
       </div>

@@ -171,7 +171,7 @@ export default class GameScene extends Scene {
 
     this.battle = this.add.group();
     this.animationManager = new AnimationManager(this, this.room.state.mapType);
-    this.shopContainer = new ShopContainer(this, 470, 912, this.room.state.players[this.uid]);
+    //this.shopContainer = new ShopContainer(this, 470, 912, this.room.state.players[this.uid]);
     this.playerContainer = new PlayerContainer(this, 1800, 70, this.room.state.players, this.uid);
     this.synergiesContainer = new SynergiesContainer(this, 1290, 135, this.room.state.players[this.uid]);
     this.dpsMeterContainer = new DpsMeterContainer(this, 1520, 135, this.room.state.players[this.uid]);
