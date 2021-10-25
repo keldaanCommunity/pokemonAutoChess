@@ -416,11 +416,6 @@ class GameContainer {
     scene.dpsMeterContainer.changePlayer(this.room.state.players[event.detail.id]);
   }
 
-  onShopClick(event) {
-    //console.log('shop');
-    this.room.send('shop', {'id': event.detail.id});
-  }
-
   onDragDrop(event) {
     //this.showPopup('test', 'tues sanglier');
     this.room.send('dragDrop', {'detail': event.detail});

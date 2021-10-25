@@ -18,12 +18,12 @@ class GameShop extends Component{
         }
 
         return <div style={style} className='nes-container'>
-            <div style={{position: 'absolute', bottom:'15%', left:'1%'}}>{this.props.money}<img style={{width:'25px', marginBottom:'3px'}} src="/assets/ui/money.png"/></div>
+            <div style={{position: 'absolute', bottom:'15%', left:'1%', fontSize: '22px'}}>{this.props.money}<img style={{width:'25px', marginBottom:'6px'}} src="/assets/ui/money.png"/></div>
             <GameLock  shopLocked={this.props.shopLocked} lock={this.props.lock}/>
             <GameRefresh refresh={this.props.refresh}/>
             <GameLevel level={this.props.level}/>
             <GameExperience level={this.props.levelExp} experience={this.props.experience} experienceNeeded={this.props.experienceNeeded}/>
-            <GameStore shop={this.props.shop}/>
+            <GameStore shop={this.props.shop} shopClick={this.props.shopClick}/>
         </div>;
     }
 }

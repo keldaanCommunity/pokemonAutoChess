@@ -5,15 +5,8 @@ import firebase from 'firebase/app';
 import { FIREBASE_CONFIG } from './utils/utils';
 import { Client } from 'colyseus.js';
 import Modal from './component/modal';
-import GameTime from './component/game-time';
-import GamePhase from './component/game-phase';
-import GameTurn from './component/game-turn';
-import GameResult from './component/game-result';
-import GameOpponent from './component/game-opponent';
-import GameLeave from './component/game-leave';
-import GameOccupation from './component/game-occupation';
-import GameMapName from './component/game-map-name';
 import GameShop from './component/game-shop';
+import GameInformations from './component/game-informations';
 
 class Game extends Component {
 
@@ -128,7 +121,6 @@ class Game extends Component {
       }
 
       this.gameContainer = new GameContainer(this.container.current, this.uid, this.room);
-      document.getElementById('game').addEventListener('shop-click', this.gameContainer.onShopClick.bind(this.gameContainer));
       document.getElementById('game').addEventListener('player-click', this.gameContainer.onPlayerClick.bind(this.gameContainer));
       document.getElementById('game').addEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').addEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
@@ -161,7 +153,6 @@ class Game extends Component {
 
     removeEventListeners(){
       this.gameContainer.closePopup();
-      document.getElementById('game').removeEventListener('shop-click', this.gameContainer.onShopClick.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('player-click', this.gameContainer.onPlayerClick.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
@@ -196,7 +187,12 @@ class Game extends Component {
         this.room.send('levelUp');
     }
 
+    shopClick(index){
+      this.room.send('shop', {'id': index});
+    }
+
   render() {
+
     if(!this.state.isSignedIn){
       return <div>
       </div>;
@@ -226,16 +222,19 @@ class Game extends Component {
         lock={this.lockClick.bind(this)} 
         shopLocked={this.state.shopLocked} 
         level={this.levelClick.bind(this)}
-        shop={this.state.player.shop}/>
-        <GameLeave handleClick={this.leaveGame.bind(this)}/>
-        <GameMapName mapName={this.state.gameState.mapType}/>
-        <GameOccupation boardSize={this.state.player.boardSize} maxBoardSize={this.state.player.experienceManager.level}/>
-        <GameOpponent opponent={this.state.player.opponentName}/>
-        <GameResult result={this.state.player.lastBattleResult}/>
-        <GameTime time={this.state.gameState.roundTime}/>
-        <GamePhase phase={this.state.gameState.phase}/>
-        <GameTurn turn={this.state.gameState.stageLevel}/>
-        <div id='game' ref={this.container} style={{maxHeight:'100vh'}}>
+        shop={this.state.player.shop}
+        shopClick={this.shopClick.bind(this)}/>
+        <GameInformations
+          boardSize={this.state.player.boardSize}
+          maxBoardSize={this.state.player.experienceManager.level}
+          opponent={this.state.player.opponentName}
+          result={this.state.player.lastBattleResult}
+          time={this.state.gameState.roundTime}
+          turn={this.state.gameState.stageLevel}
+        />
+        <div id='game' ref={this.container} style={{
+          maxHeight:'100vh'
+        }}>
         </div>
       </div>
       
