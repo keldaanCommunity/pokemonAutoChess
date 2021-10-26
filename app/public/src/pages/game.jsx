@@ -11,6 +11,7 @@ import GamePlayers from './component/game-players';
 import { WORDS} from '../../../models/enum';
 import GamePlayerInformations from './component/game-player-informations';
 import GameDpsMeter from './component/game-dps-meter';
+import GameSynergies from './component/game-synergies';
 
 class Game extends Component {
 
@@ -45,7 +46,34 @@ class Game extends Component {
             },
             avatar:'rattata',
             money:5,
-            name:''
+            name:'',
+            synergies:{
+                NORMAL: 0,
+                GRASS: 0,
+                NORMAL: 0,
+                GRASS: 0,
+                FIRE: 0,
+                WATER: 0,
+                ELECTRIC: 0,
+                FIGHTING: 0,
+                PSYCHIC: 0,
+                DARK: 0,
+                METAL: 0,
+                GROUND: 0,
+                POISON: 0,
+                DRAGON: 0,
+                FIELD: 0,
+                MONSTER: 0,
+                HUMAN: 0,
+                AQUATIC: 0,
+                BUG: 0,
+                FLYING: 0,
+                FLORA: 0,
+                MINERAL: 0,
+                AMORPH: 0,
+                FAIRY: 0,
+                ICE: 0
+            }
 
           },
           gameState:{
@@ -145,6 +173,14 @@ class Game extends Component {
                 })
             }
         }
+
+        player.synergies.onChange = (s)=>{
+            if(player.id == this.state.currentPlayerId){
+                this.setState({
+                    player: player
+                });
+            }
+        };
 
         player.simulation.dpsMeter.onAdd = (dps, key) => {
             if(player.id == this.state.currentPlayerId){
@@ -348,6 +384,9 @@ class Game extends Component {
         />
         <GameDpsMeter
             dpsMeter={this.state.dpsMeter}
+        />
+        <GameSynergies
+            synergies={this.state.player.synergies}
         />
         <div id='game' ref={this.container} style={{
           maxHeight:'100vh'

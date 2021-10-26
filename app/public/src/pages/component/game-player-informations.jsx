@@ -11,7 +11,8 @@ class GamePlayerInformations extends Component{
             display:'flex',
             justifyContent:'space-evenly',
             padding:'10px',
-            minWidth:'40%'
+            minWidth:'40%',
+            height:'7%'
         }
 
         return <div style={style} className='nes-container'>
