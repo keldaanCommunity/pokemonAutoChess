@@ -18,12 +18,12 @@ class GamePlayerInformations extends Component{
         return <div style={style} className='nes-container'>
                 <h4>{this.props.boardSize}/{this.props.maxBoardSize}</h4>
                 <div style={{display:'flex'}}>
-                    <img src={`assets/avatar/${this.props.avatar}.png`}/>
-                    <p>{this.props.name}</p>
-                </div>
-                <div style={{display:'flex'}}>
                     <h4>{this.props.money}</h4>
                     <img style={{width:'20px', height:'20px', marginBottom:'5px'}} src='assets/ui/money.png'/>
+                </div>
+                <div style={{display:'flex'}}>
+                    <img src={`assets/avatar/${this.props.avatar}.png`}/>
+                    <p>{this.props.name}</p>
                 </div>
                 <p>{this.props.opponent == '' ? '': 'Vs ' + this.props.opponent}</p>
         </div>;

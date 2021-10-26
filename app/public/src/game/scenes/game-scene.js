@@ -2,7 +2,6 @@ import {Scene, GameObjects} from 'phaser';
 import AnimationManager from '../animation-manager';
 import BoardManager from '../components/board-manager';
 import BattleManager from '../components/battle-manager';
-import SynergiesContainer from '../components/synergies-container';
 import WeatherManager from '../components/weather-manager';
 import EntryHazardsManager from '../components/Entry-hazards-manager';
 import ItemsContainer from '../components/items-container';
@@ -168,7 +167,6 @@ export default class GameScene extends Scene {
 
     this.battle = this.add.group();
     this.animationManager = new AnimationManager(this, this.room.state.mapType);
-    this.synergiesContainer = new SynergiesContainer(this, 1290, 135, this.room.state.players[this.uid]);
     this.itemsContainer = new ItemsContainer(this, 66, 430);
     this.boardManager = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid], this.animationManager);

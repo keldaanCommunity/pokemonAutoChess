@@ -3209,6 +3209,32 @@ const TYPE_DETAILS = Object.freeze({
   }
 });
 
+const TYPE_TRIGGER = {
+  NORMAL: [3,6,9],
+  GRASS: [3,5,7],
+  FIRE: [2,4,6],
+  WATER: [3,6,8],
+  ELECTRIC: [1],
+  FIGHTING: [2,4],
+  PSYCHIC: [2,4,6],
+  DARK: [2,4],
+  METAL: [2,4],
+  GROUND: [2,4,6],
+  POISON: [3,6],
+  DRAGON: [2,4],
+  FIELD: [3,6,9],
+  MONSTER: [3,5,7],
+  HUMAN: [2,4,6],
+  AQUATIC: [2,4],
+  BUG: [2,4],
+  FLYING: [2,4,6],
+  FLORA: [2,4],
+  MINERAL: [2,4],
+  AMORPH: [2,4],
+  FAIRY: [2,4],
+  ICE: [2,4]
+}
+
 const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000];
 
 const XP_PLACE = [700, 500, 400, 300, 200, 150, 100, 0];
@@ -3270,5 +3296,6 @@ module.exports = {
   EFFECTS_ICON,
   PKM,
   RARITY_COLOR,
-  PROBABILITY
+  PROBABILITY,
+  TYPE_TRIGGER
 };

@@ -74,10 +74,6 @@ class GameContainer {
       self.handleBoardPokemonRemove(player, pokemon);
     };
 
-    player.synergies.onChange = ((changes) => {
-      changes.forEach((change) => this.handleSynergiesChange(change, player));
-    });
-
     player.stuff.onChange = ((changes) =>{
       changes.forEach((change) => this.handleStuffChange(change, player));
     });
@@ -187,11 +183,6 @@ class GameContainer {
     this.game.scene.getScene('gameScene').battleManager.changePokemonItems(playerId, change, pokemon);
   }
 
-  handleSynergiesChange(change, player) {
-    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').synergiesContainer && player.id == this.game.scene.getScene('gameScene').synergiesContainer.player.id) {
-      this.game.scene.getScene('gameScene').synergiesContainer.updateSynergy(change.field, change.value);
-    }
-  }
 
   handleClimateChange(change, player) {
     if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null) {
@@ -226,9 +217,6 @@ class GameContainer {
     if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager) {
         if(this.game.scene.getScene('gameScene').boardManager.player.id == player.id){
             this.game.scene.getScene('gameScene').boardManager.addPokemon(pokemon);
-            if(pokemon.positionY != 0){
-              this.game.scene.getScene('gameScene').synergiesContainer.enablePokemon(pokemon);
-            }
         }
     }
   }
@@ -236,19 +224,12 @@ class GameContainer {
   handleBoardPokemonRemove(player, pokemon) {
     if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
       this.game.scene.getScene('gameScene').boardManager.removePokemon(pokemon);
-      this.game.scene.getScene('gameScene').synergiesContainer.disablePokemon(pokemon);
     }
   }
 
   handleBoardPokemonChange(player, pokemon, change) {
     if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
       this.game.scene.getScene('gameScene').boardManager.changePokemon(pokemon, change);
-      if(pokemon.positionY == 0){
-        this.game.scene.getScene('gameScene').synergiesContainer.disablePokemon(pokemon);
-      }
-      else{
-        this.game.scene.getScene('gameScene').synergiesContainer.enablePokemon(pokemon);
-      }
     }
   }
 
@@ -287,7 +268,6 @@ class GameContainer {
     // scene.fade();
     scene.boardManager.setPlayer(this.room.state.players[id]);
     scene.battleManager.setPlayer(this.room.state.players[id]);
-    scene.synergiesContainer.changePlayer(this.room.state.players[id]);
   }
 
   onDragDrop(event) {

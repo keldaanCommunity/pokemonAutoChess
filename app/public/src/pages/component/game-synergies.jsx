@@ -13,11 +13,10 @@ class GameSynergies extends Component{
             width: '12%',
             top:'8.5%',
             flexFlow: 'column',
-            backgroundColor: 'rgba(255, 255, 255, 0.7)'
+            maxHeight:'75%'
         }
 
-        return <div style={style} className='nes-container'>
-            <h5>Synergies</h5>
+        return <div style={style}>
             {Object.keys(TYPE).map(type=>{
                 if(this.props.synergies[type] > 0){
                     return <GameSynergy key={type} type={type} value={this.props.synergies[type]}/>;
