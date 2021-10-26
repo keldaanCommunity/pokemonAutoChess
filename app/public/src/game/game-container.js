@@ -74,29 +74,6 @@ class GameContainer {
       self.handleBoardPokemonRemove(player, pokemon);
     };
 
-    player.shop.onAdd = function(pokemon, key) {
-      self.handleAddShopPokemon(player, pokemon, key);
-    };
-
-    player.shop.onRemove = function(pokemon, key) {
-      self.handleRemoveShopPokemon(player, key);
-    };
-
-    player.shop.onChange = function(pokemon, index) {
-      if(pokemon !== undefined){
-        if (player.shop[index] == '') {
-          self.handleRemoveShopPokemon(player, index);
-        } else {
-          self.handleAddShopPokemon(player, player.shop[index], index);
-        }
-      }
-    };
-
-
-    player.experienceManager.onChange = ((changes) => {
-      changes.forEach((change) => this.handleExperienceChange(change, player));
-    });
-
     player.synergies.onChange = ((changes) => {
       changes.forEach((change) => this.handleSynergiesChange(change, player));
     });
@@ -139,20 +116,6 @@ class GameContainer {
         });
       }
     });
-
-    player.simulation.dpsMeter.onAdd = (dps, key) => {
-      // console.log('add Dps');
-      this.handleDpsAdd(player.id, dps);
-      dps.onChange = (changes) => {
-        changes.forEach((change) => {
-          this.handleDpsChange(player.id, change, dps);
-        });
-      };
-    };
-    player.simulation.dpsMeter.onRemove = (dps, key) => {
-      // console.log('remove Dps');
-      this.handleDpsRemove(player.id, dps);
-    };
 
     player.simulation.blueTeam.onAdd = (pokemon, key) => {
       // console.log('add pokemon');
@@ -197,25 +160,6 @@ class GameContainer {
       this.handlePokemonRemove(player.id, pokemon);
     };
     player.triggerAll();
-    this.onPlayerAdd(player);
-  }
-
-  handleDpsAdd(playerId, dps) {
-    if (playerId == this.game.scene.getScene('gameScene').dpsMeterContainer.player.id) {
-      this.game.scene.getScene('gameScene').dpsMeterContainer.addDps(dps);
-    }
-  }
-
-  handleDpsRemove(playerId, dps) {
-    if (playerId == this.game.scene.getScene('gameScene').dpsMeterContainer.player.id) {
-      this.game.scene.getScene('gameScene').dpsMeterContainer.removeDps(dps);
-    }
-  }
-
-  handleDpsChange(playerId, change, dps) {
-    if (playerId == this.game.scene.getScene('gameScene').dpsMeterContainer.player.id) {
-      this.game.scene.getScene('gameScene').dpsMeterContainer.changeDps(dps, change);
-    }
   }
 
   handlePokemonAdd(playerId, pokemon) {
@@ -280,10 +224,6 @@ class GameContainer {
 
   handleBoardPokemonAdd(player, pokemon) {
     if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager) {
-        if(this.game.scene.getScene('gameScene').playerContainer){
-            this.game.scene.getScene('gameScene').playerContainer.onPokemonAdd(player.id, pokemon);
-        }
-
         if(this.game.scene.getScene('gameScene').boardManager.player.id == player.id){
             this.game.scene.getScene('gameScene').boardManager.addPokemon(pokemon);
             if(pokemon.positionY != 0){
@@ -309,71 +249,6 @@ class GameContainer {
       else{
         this.game.scene.getScene('gameScene').synergiesContainer.enablePokemon(pokemon);
       }
-    }
-  }
-
-  handleAddShopPokemon(player, pokemon, key) {
-    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.uid == player.id) {
-      this.game.scene.getScene('gameScene').shopContainer.addPortrait(pokemon, key);
-    }
-  }
-
-  handleRemoveShopPokemon(player, index) {
-    if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').shopContainer && this.uid == player.id) {
-      this.game.scene.getScene('gameScene').shopContainer.removePortrait(index);
-    }
-  }
-
-  handleExperienceChange(change, player) {
-    if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').playerContainer && this.game.scene.getScene('gameScene').shopContainer) {
-      switch (change.field) {
-        case 'level':
-          this.game.scene.getScene('gameScene').shopContainer.percentageDisplay.updatePercentages(change.value);
-          this.game.scene.getScene('gameScene').shopContainer.levelUpButton.changeLevel(change.value);
-          break;
-
-        case 'experience':
-          this.game.scene.getScene('gameScene').shopContainer.levelUpButton.changeExperience(change.value);
-          break;
-
-        case 'expNeeded':
-          this.game.scene.getScene('gameScene').shopContainer.levelUpButton.changeExpNeeded(change.value);
-          break;
-
-        default:
-          break;
-      }
-    }
-    if (this.game != null && change.field == 'level' && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').playerContainer) {
-      this.game.scene.getScene('gameScene').playerContainer.onLevelChange(player.id, change.value);
-    }
-  }
-
-
-  handlePlayerChange(change, player) {
-    if (this.game == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null ) return;
-    switch (change.field) {
-      case 'money':
-        this.game.scene.getScene('gameScene').playerContainer.onMoneyChange(player.id, change.value);
-        break;
-
-      case 'life':
-        this.game.scene.getScene('gameScene').playerContainer.onLifeChange(player.id, change.value);
-        break;
-
-      case 'rank':
-        this.game.scene.getScene('gameScene').playerContainer.onRankChange(player.id, change.value);
-        break;
-
-      case 'alive':
-        if (this.uid == player.id) {
-          let rankPhrase = `${WORDS.PLACE['eng']} no ${player.rank}`;
-          let titlePhrase = WORDS.RANKING['eng'];
-          if(!change.value){
-            this.showPopup(titlePhrase, rankPhrase);
-          }
-        }
-        break;
     }
   }
 
@@ -406,14 +281,13 @@ class GameContainer {
     });
   }
 
-  onPlayerClick(event) {
+  onPlayerClick(id) {
     const scene = this.game.scene.getScene('gameScene');
 
     // scene.fade();
-    scene.boardManager.setPlayer(this.room.state.players[event.detail.id]);
-    scene.battleManager.setPlayer(this.room.state.players[event.detail.id]);
-    scene.synergiesContainer.changePlayer(this.room.state.players[event.detail.id]);
-    scene.dpsMeterContainer.changePlayer(this.room.state.players[event.detail.id]);
+    scene.boardManager.setPlayer(this.room.state.players[id]);
+    scene.battleManager.setPlayer(this.room.state.players[id]);
+    scene.synergiesContainer.changePlayer(this.room.state.players[id]);
   }
 
   onDragDrop(event) {
@@ -450,16 +324,6 @@ class GameContainer {
       }
     });
     return simplePlayer;
-  }
-
-  onPlayerRemove(player, key) {
-    if (this.game == null || this.game.scene == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null) return;
-    this.game.scene.getScene('gameScene').playerContainer.removePlayer(key);
-  }
-
-  onPlayerAdd(player) {
-    if (this.game == null || this.game.scene == null || this.game.scene.getScene('gameScene') == null || this.game.scene.getScene('gameScene').playerContainer == null) return;
-    this.game.scene.getScene('gameScene').playerContainer.addPlayer(player);
   }
 }
 

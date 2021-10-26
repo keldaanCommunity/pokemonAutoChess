@@ -1,14 +1,11 @@
 import {Scene, GameObjects} from 'phaser';
 import AnimationManager from '../animation-manager';
-import ShopContainer from '../components/shop-container';
-import PlayerContainer from '../components/player-container';
 import BoardManager from '../components/board-manager';
 import BattleManager from '../components/battle-manager';
 import SynergiesContainer from '../components/synergies-container';
 import WeatherManager from '../components/weather-manager';
 import EntryHazardsManager from '../components/Entry-hazards-manager';
 import ItemsContainer from '../components/items-container';
-import DpsMeterContainer from '../components/dps-meter-container';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
 import {STATE} from '../../../../models/enum';
@@ -171,10 +168,7 @@ export default class GameScene extends Scene {
 
     this.battle = this.add.group();
     this.animationManager = new AnimationManager(this, this.room.state.mapType);
-    //this.shopContainer = new ShopContainer(this, 470, 912, this.room.state.players[this.uid]);
-    this.playerContainer = new PlayerContainer(this, 1800, 70, this.room.state.players, this.uid);
     this.synergiesContainer = new SynergiesContainer(this, 1290, 135, this.room.state.players[this.uid]);
-    this.dpsMeterContainer = new DpsMeterContainer(this, 1520, 135, this.room.state.players[this.uid]);
     this.itemsContainer = new ItemsContainer(this, 66, 430);
     this.boardManager = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid], this.animationManager);
@@ -213,7 +207,6 @@ export default class GameScene extends Scene {
   }
 
   updatePhase() {
-    this.dpsMeterContainer.maxDamage = 0;
     if (this.room.state.phase == STATE.FIGHT) {
       this.boardManager.battleMode();
     } else {
