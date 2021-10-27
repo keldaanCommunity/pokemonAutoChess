@@ -6,7 +6,7 @@ class GamePlayerInformations extends Component{
         const style = {
             position:'absolute',
             top:'.5%',
-            left:'21%',
+            left:'30%',
             backgroundColor: 'rgba(255, 255, 255, 0.7)',
             display:'flex',
             justifyContent:'space-evenly',

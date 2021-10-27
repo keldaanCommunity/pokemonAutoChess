@@ -9,7 +9,7 @@ import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
 import {STATE} from '../../../../models/enum';
 import firebase from 'firebase/app';
-import { transformAttackCoordinate, getOrientation } from '../../pages/utils/utils';
+import { transformAttackCoordinate, getOrientation, transformCoordinate } from '../../pages/utils/utils';
 
 
 export default class GameScene extends Scene {
@@ -230,7 +230,8 @@ export default class GameScene extends Scene {
 
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 8; j++) {
-        const zone = this.add.zone(382 + 96 * j, 808 - 120 * i, 96, 120);
+        const coord = transformCoordinate(j,i);
+        const zone = this.add.zone(coord[0], coord[1]);
         zone.setRectangleDropZone(96, 120);
         zone.setName('zone-' + j + '-' + i);
         this.zones.push(zone);

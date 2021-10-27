@@ -10,7 +10,7 @@ class GameShop extends Component{
     render(){
         const style = {
             position:'absolute',
-            left:'0.5%',
+            left:'10%',
             bottom:'0.5%',
             width:'80%',
             height:'15%',

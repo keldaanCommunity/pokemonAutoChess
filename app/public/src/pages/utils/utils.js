@@ -10,11 +10,11 @@ export const FIREBASE_CONFIG = {
 };   
 
  export function transformCoordinate(x,y){
-  return [382 + 96 * x, 808 - 120 * y];
+  return [28 * 24 + 96 * x, 808 - 120 * y];
  };
 
  export function transformAttackCoordinate(x,y){
-  return [382 + 96 * x, 712 - 120 * y];
+  return [28 * 24 + 96 * x, 712 - 120 * y];
  }
 
  export function getOrientation(x1, y1, x2, y2){

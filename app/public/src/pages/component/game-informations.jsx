@@ -18,7 +18,7 @@ class GameInformations extends Component{
         return <div style={style} className='nes-container'>
                 <img src='/assets/ui/clock.png'/>
                 <h5>T{this.props.turn}</h5>
-                <h5>{this.props.time}s</h5>
+                <h2>{this.props.time}s</h2>
         </div>;
     }
 }
