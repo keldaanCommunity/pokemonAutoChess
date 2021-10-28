@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import GameLeave from './gam-leave';
 class GameInformations extends Component{
 
     render(){
@@ -16,7 +16,7 @@ class GameInformations extends Component{
         }
 
         return <div style={style} className='nes-container'>
-                <img src='/assets/ui/clock.png'/>
+                <GameLeave click={this.props.click}/>
                 <h5>T{this.props.turn}</h5>
                 <h2>{this.props.time}s</h2>
         </div>;

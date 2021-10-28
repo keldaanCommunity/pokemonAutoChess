@@ -12,7 +12,6 @@ import { WORDS} from '../../../models/enum';
 import GamePlayerInformations from './component/game-player-informations';
 import GameDpsMeter from './component/game-dps-meter';
 import GameSynergies from './component/game-synergies';
-
 class Game extends Component {
 
     constructor(props){
@@ -368,6 +367,7 @@ class Game extends Component {
         <GameInformations
           time={this.state.gameState.roundTime}
           turn={this.state.gameState.stageLevel}
+          click={this.leaveGame.bind(this)}
           />
         <GamePlayers 
             players={this.state.gameState.players}
