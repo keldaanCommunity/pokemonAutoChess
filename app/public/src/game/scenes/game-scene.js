@@ -141,12 +141,9 @@ export default class GameScene extends Scene {
 
     this.textStyle = {
       fontSize: '35px',
-      fontFamily: "Verdana",
-      color: 'white',
-      align: 'center',
-      stroke: '#000',
-      strokeThickness: 2,
-      wordWrap: { width: 200, useAdvancedWrap: true }
+      fontFamily: "'Press Start 2P'",
+      color: 'black',
+      align: 'center'
     };
 
     this.bigTextStyle = {
@@ -216,11 +213,13 @@ export default class GameScene extends Scene {
     this.graphics.forEach((rect) => {
       rect.setVisible(true);
     });
+    this.dragDropText.setVisible(true);
   }
 
   removeRectangles() {
     this.graphics.forEach((rect) => {
       rect.setVisible(false);
+      this.dragDropText.setVisible(false);
     });
   }
 
@@ -231,11 +230,11 @@ export default class GameScene extends Scene {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 8; j++) {
         const coord = transformCoordinate(j,i);
-        const zone = this.add.zone(coord[0], coord[1]);
+        const zone = this.add.zone(coord[0], coord[1], 96, 120);
         zone.setRectangleDropZone(96, 120);
         zone.setName('zone-' + j + '-' + i);
         this.zones.push(zone);
-        const graphic = this.add.graphics().lineStyle(3, 0x304050).strokeRect(
+        const graphic = this.add.graphics().lineStyle(3, 0x000000,0.3).strokeRect(
             this.zones[i * 8 + j].x - this.zones[i * 8 + j].input.hitArea.width / 2,
             this.zones[i * 8 + j].y - this.zones[i * 8 + j].input.hitArea.height / 2,
             this.zones[i * 8 + j].input.hitArea.width,
@@ -244,6 +243,32 @@ export default class GameScene extends Scene {
         this.graphics.push(graphic);
       }
     }
+    let sellZoneCoord = transformCoordinate(4, 5);
+    let sellZone = this.add.zone(sellZoneCoord[0] -48, sellZoneCoord[1] + 24, 8 * 96, 240);
+    sellZone.setRectangleDropZone(8 * 96, 240);
+    sellZone.setName('sell-zone');
+    this.zones.push(sellZone);
+
+    let graphic = this.add.graphics()
+    .lineStyle(3, 0x000000)
+    .strokeRect(
+        sellZone.x - sellZone.input.hitArea.width / 2,
+        sellZone.y - sellZone.input.hitArea.height / 2,
+        sellZone.input.hitArea.width,
+        sellZone.input.hitArea.height
+    )
+    .fillStyle(0xffffff, 0.6)
+    .fillRect(
+        sellZone.x - sellZone.input.hitArea.width / 2,
+        sellZone.y - sellZone.input.hitArea.height / 2,
+        sellZone.input.hitArea.width,
+        sellZone.input.hitArea.height
+    );
+    graphic.setVisible(false);
+    this.graphics.push(graphic);
+    
+    this.dragDropText = this.add.text(sellZoneCoord[0] - 4 * 96 + 24, sellZoneCoord[1], 'Drop here to sell', this.textStyle);
+    this.dragDropText.setVisible(false);
 
     this.input.mouse.disableContextMenu();
 
@@ -272,16 +297,9 @@ export default class GameScene extends Scene {
       gameObject.y = dragY;
     });
 
-    this.input.keyboard.on('keyup-' + 'R', (e)=>{
-      document.getElementById('game').dispatchEvent(new CustomEvent('refresh-click'));
-    });
-
-    this.input.keyboard.on('keyup-' + 'E', (e)=>{
-      document.getElementById('game').dispatchEvent(new CustomEvent('level-click'));
-    });
-
     this.input.on('drop', (pointer, gameObject, dropZone) => {
       this.removeRectangles();
+      console.log(dropZone.name);
       if (dropZone.name == 'sell-zone') {
         if (gameObject.objType == 'item') {
           this.itemsContainer.updateItem(gameObject.place);
@@ -315,9 +333,10 @@ export default class GameScene extends Scene {
     }, this);
 
     this.input.on('dragend', (pointer, gameObject, dropped) => {
-      if (!dropped) {
-        gameObject.x = gameObject.input.dragStartX;
-        gameObject.y = gameObject.input.dragStartY;
+        this.removeRectangles();
+        if (!dropped) {
+            gameObject.x = gameObject.input.dragStartX;
+            gameObject.y = gameObject.input.dragStartY;
       }
     });
   }

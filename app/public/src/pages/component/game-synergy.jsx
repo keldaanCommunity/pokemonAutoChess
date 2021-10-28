@@ -26,7 +26,7 @@ class GameSynergy extends Component{
                     justifyContent:'space-between'
                 }}>
                     {TYPE_TRIGGER[this.props.type].map(t=>{
-                        return <span key={t} style={{color: this.props.value >= t ? '#70884f': '#000000'}}>
+                        return <span key={t} style={{color: this.props.value >= t ? '#000000': '#808080'}}>
                             {t} 
                             </span>;
                     })}
