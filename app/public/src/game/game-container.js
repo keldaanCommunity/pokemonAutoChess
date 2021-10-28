@@ -160,12 +160,16 @@ class GameContainer {
 
   handlePokemonAdd(playerId, pokemon) {
     // console.log('simulation add' + pokemon.name);
-    this.game.scene.getScene('gameScene').battleManager.addPokemon(playerId, pokemon);
+    if(this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager){
+        this.game.scene.getScene('gameScene').battleManager.addPokemon(playerId, pokemon);
+    }
   }
 
   handlePokemonRemove(playerId, pokemon) {
     // console.log('simulation remove' + pokemon.name);
-    this.game.scene.getScene('gameScene').battleManager.removePokemon(playerId, pokemon);
+    if(this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager){
+        this.game.scene.getScene('gameScene').battleManager.removePokemon(playerId, pokemon);
+    }
   }
 
   handleStuffChange(change, player) {
@@ -176,11 +180,15 @@ class GameContainer {
 
   handlePokemonChange(playerId, change, pokemon) {
     // console.log('simulation change' + change.field);
-    this.game.scene.getScene('gameScene').battleManager.changePokemon(playerId, change, pokemon);
+    if(this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager){
+        this.game.scene.getScene('gameScene').battleManager.changePokemon(playerId, change, pokemon);
+    }
   }
 
   handlePokemonItemsChange(playerId, change, pokemon) {
-    this.game.scene.getScene('gameScene').battleManager.changePokemonItems(playerId, change, pokemon);
+    if(this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager){
+        this.game.scene.getScene('gameScene').battleManager.changePokemonItems(playerId, change, pokemon);
+    }
   }
 
 

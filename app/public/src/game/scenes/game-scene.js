@@ -298,7 +298,7 @@ export default class GameScene extends Scene {
 
     this.input.on('drop', (pointer, gameObject, dropZone) => {
       this.removeRectangles();
-      console.log(dropZone.name);
+      //console.log(dropZone.name);
       if (dropZone.name == 'sell-zone') {
         if (gameObject.objType == 'item') {
           this.itemsContainer.updateItem(gameObject.place);
