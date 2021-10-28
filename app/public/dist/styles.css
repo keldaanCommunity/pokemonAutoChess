@@ -35,3 +35,10 @@ body {
 color: 'none';
 background: 'none'
 }
+
+.customeTheme{
+    opacity:1 !important;
+    border-color:#000 !important;
+    border-style:solid !important;
+    border-width:4px !important
+}

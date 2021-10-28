@@ -250,15 +250,14 @@ export default class GameScene extends Scene {
     this.zones.push(sellZone);
 
     let graphic = this.add.graphics()
-    .lineStyle(3, 0x000000)
-    .strokeRect(
+    .fillStyle(0xffffff, 0.6)
+    .fillRect(
         sellZone.x - sellZone.input.hitArea.width / 2,
         sellZone.y - sellZone.input.hitArea.height / 2,
         sellZone.input.hitArea.width,
         sellZone.input.hitArea.height
-    )
-    .fillStyle(0xffffff, 0.6)
-    .fillRect(
+    ).lineStyle(4, 0x000000)
+    .strokeRect(
         sellZone.x - sellZone.input.hitArea.width / 2,
         sellZone.y - sellZone.input.hitArea.height / 2,
         sellZone.input.hitArea.width,
