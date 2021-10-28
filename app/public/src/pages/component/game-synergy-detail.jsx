@@ -21,12 +21,12 @@ class GameSynergyDetail extends Component{
              })}
             <div style={{display:'flex'}}>
             {PRECOMPUTED_TYPE_POKEMONS[this.props.type].pokemons.map(p=>{
-                return <img src={'assets/avatar/' + p + '.png'}/>    
+                return <img key={p} src={'assets/avatar/' + p + '.png'}/>    
             })}
             </div>
             <div style={{display:'flex', marginTop:'10px'}}>
             {PRECOMPUTED_TYPE_POKEMONS[this.props.type].mythicalPokemons.map(p=>{
-                return <img src={'assets/avatar/' + p + '.png'}/>    
+                return <img key={p} src={'assets/avatar/' + p + '.png'}/>    
             })}
             </div>
         </div>
