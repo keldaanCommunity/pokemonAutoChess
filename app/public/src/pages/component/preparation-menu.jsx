@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InlineAvatar from './inline-Avatar';
+import InlineAvatar from './inline-avatar';
 
 class PreparationMenu extends Component{
     render(){
