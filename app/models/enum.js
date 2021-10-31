@@ -1976,17 +1976,17 @@ const ITEM_TYPE = Object.freeze({
 });
 
 const LAST_BATTLE_RESULT_TRADUCTION = Object.freeze({
-  Win: {
+  WIN: {
     eng: 'Win',
     esp: 'Gana',
     fra: 'Victoire'
   },
-  Defeat: {
+  DEFEAT: {
     eng: 'Defeat',
     esp: 'Derrota',
     fra: 'Défaite'
   },
-  Draw: {
+  DRAW: {
     eng: 'Draw',
     esp: 'Empate',
     fra: 'Egalité'
@@ -3568,7 +3568,14 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     }
   }
 
+const BATTLE_RESULT = Object.freeze({
+  WIN:'WIN',
+  DEFEAT:'DEFEAT',
+  DRAW:'DRAW'
+});
+
 module.exports = {
+  BATTLE_RESULT,
   SPECIAL_SKILL_DESCRIPTION,
   SPECIAL_SKILL,
   XP_PLACE,

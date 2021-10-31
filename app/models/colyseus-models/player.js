@@ -5,6 +5,7 @@ const Simulation = require('../../core/simulation');
 const Synergies = require('./synergies');
 const Effects = require('../effects');
 const Stuff = require('./stuff');
+const BattleResult = require('./battle-result');
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 const ArraySchema = schema.ArraySchema;
@@ -19,6 +20,7 @@ class Player extends Schema {
       avatar: avatar,
       board: new MapSchema(),
       shop: new ArraySchema(),
+      history: new ArraySchema(),
       stuff: new Stuff(),
       experienceManager: new ExperienceManager(),
       synergies: new Synergies(),
@@ -29,16 +31,32 @@ class Player extends Schema {
       shopLocked: false,
       streak: 0,
       interest: 0,
-      lastBattleResult: '',
-      opponentName: '',
       boardSize: 0,
       alive: true,
       isBot: isBot,
       exp: 0,
       rank: rank,
       elo: elo,
-      tileset: tileset
+      tileset: tileset,
+      opponentame:'',
+      opponentAvatar:''
     });
+  }
+
+  addBattleResult(name, result, avatar){
+    if(this.history.length >= 5){
+      this.history.shift();
+    }
+    this.history.push(new BattleResult(name, result, avatar));
+  }
+  
+  getLastBattleResult(){
+    if(this.history.length > 0){
+      return this.history[this.history.length - 1].result;
+    }
+    else{
+      return '';
+    }
   }
 }
 
@@ -56,15 +74,16 @@ schema.defineTypes(Player, {
   shopLocked: 'boolean',
   streak: 'uint8',
   interest: 'uint8',
-  lastBattleResult: 'string',
   opponentName: 'string',
+  opponentAvatar:'string',
   boardSize: 'uint8',
   stuff: Stuff,
   rank : 'uint8',
   exp: 'uint16',
   alive: 'boolean',
   elo: 'uint16',
-  tileset: 'string'
+  tileset: 'string',
+  history:[BattleResult]
 });
 
 module.exports = Player;

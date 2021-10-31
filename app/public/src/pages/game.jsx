@@ -37,9 +37,9 @@ class Game extends Component {
           },
           shop:[],
           player:{
-            lastBattleResult: '',
             boardSize: 0,
             opponentName:'',
+            opponentAvatar:'',
             experienceManager:{
                 level:2
             },
@@ -379,6 +379,7 @@ class Game extends Component {
             maxBoardSize={this.state.player.experienceManager.level}
             avatar={this.state.player.avatar}
             opponent={this.state.player.opponentName}
+            opponentAvatar={this.state.player.opponentAvatar}
             money={this.state.player.money}
             name={this.state.player.name}
         />

@@ -249,6 +249,7 @@ class GameRoom extends colyseus.Room {
       if(player.opponents.length > 0){
         let id = player.opponents.pop();
         player.opponentName = this.state.players.get(id).name;
+        player.opponentAvatar = this.state.players.get(id).avatar;
         return id;
       }
       else{

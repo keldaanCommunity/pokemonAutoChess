@@ -1,5 +1,5 @@
 const Command = require('@colyseus/command').Command;
-const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY, PKM} = require('../../models/enum');
+const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY, PKM, BATTLE_RESULT} = require('../../models/enum');
 const Player = require('../../models/colyseus-models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
@@ -585,32 +585,32 @@ class OnUpdatePhaseCommand extends Command {
     this.state.players.forEach((player, key) => {
       if (player.simulation.blueTeam.size == 0) {
         if(player.opponentName != 'PVE'){
-          if (player.lastBattleResult == 'Defeat') {
+          if (player.getLastBattleResult() == BATTLE_RESULT.DEFEAT) {
             player.streak = Math.min(player.streak + 1, 5);
           } else {
             player.streak = 0;
           }
         }
-        player.lastBattleResult = 'Defeat';
+        player.addBattleResult(player.opponentName, BATTLE_RESULT.DEFEAT, player.opponentAvatar);
         player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel));
       } else if (player.simulation.redTeam.size == 0) {
         if(player.opponentName != 'PVE'){
-          if (player.lastBattleResult == 'Win') {
+          if (player.getLastBattleResult() == BATTLE_RESULT.WIN) {
             player.streak = Math.min(player.streak + 1, 5);
           } else {
             player.streak = 0;
           }
         }
-        player.lastBattleResult = 'Win';
+        player.addBattleResult(player.opponentName, BATTLE_RESULT.WIN, player.opponentAvatar);
       } else {
         if(player.opponentName != 'PVE'){
-          if (player.lastBattleResult == 'Draw') {
+          if (player.getLastBattleResult() == BATTLE_RESULT.DRAW) {
             player.streak = Math.min(player.streak + 1, 5);
           } else {
             player.streak = 0;
           }
         }
-        player.lastBattleResult = 'Draw';
+        player.addBattleResult(player.opponentName, BATTLE_RESULT.DRAW, player.opponentAvatar);
         player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel));
       }
     });
@@ -622,7 +622,7 @@ class OnUpdatePhaseCommand extends Command {
         player.interest = Math.min(Math.floor(player.money / 10), 5);
         player.money += player.interest;
         player.money += player.streak;
-        if (player.lastBattleResult == 'Win') {
+        if (player.getLastBattleResult() == BATTLE_RESULT.WIN) {
           player.money += 1;
         }
         player.money += 5;
@@ -654,12 +654,13 @@ class OnUpdatePhaseCommand extends Command {
     this.state.players.forEach((player, key) => {
       player.simulation.stop();
       if (player.alive) {
-        if (player.opponentName == 'PVE' && player.lastBattleResult == 'Win') {
+        if (player.opponentName == 'PVE' && player.getLastBattleResult() == BATTLE_RESULT.WIN) {
           const item = ItemFactory.createRandomItem();
           //const item = ItemFactory.createSpecificItems([ITEMS.DELTA_ORB, ITEMS.BLUE_ORB]);
           player.stuff.add(item);
         }
         player.opponentName = '';
+        player.opponentAvatar = '';
         if (!player.shopLocked) {
           if(this.state.stageLevel == 10){
             this.state.shop.assignFirstMythicalShop(player);
@@ -717,6 +718,7 @@ class OnUpdatePhaseCommand extends Command {
       if (player.alive) {
         if (this.state.neutralStages.includes(this.state.stageLevel)) {
           player.opponentName = 'PVE';
+          player.opponentAvatar = 'magnemite';
           player.simulation.initialize(player.board, PokemonFactory.getNeutralPokemonsByLevelStage(this.state.stageLevel), player.effects.list, []);
         } else {
           const opponentId = this.room.computeRandomOpponent(key);

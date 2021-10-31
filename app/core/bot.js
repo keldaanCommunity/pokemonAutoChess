@@ -1,4 +1,4 @@
-const {POKEMON_BOT, ITEM_TYPE} = require('../models/enum');
+const {POKEMON_BOT, ITEM_TYPE, BATTLE_RESULT} = require('../models/enum');
 const SCENARIOS = require('../models/scenarios');
 const PokemonFactory = require('../models/pokemon-factory');
 class Bot {
@@ -11,11 +11,11 @@ class Bot {
   }
 
   updateProgress() {
-    if (this.player.lastBattleResult == 'Defeat') {
+    if (this.player.getLastBattleResult() == BATTLE_RESULT.DEFEAT) {
       this.progress += 1;
-    } else if (this.player.lastBattleResult == 'Draw') {
+    } else if (this.player.getLastBattleResult() == BATTLE_RESULT.DRAW) {
       this.progress += 1;
-    } else if (this.player.lastBattleResult == 'Win') {
+    } else if (this.player.getLastBattleResult() == BATTLE_RESULT.WIN) {
       this.progress += 1.5;
     }
     if (this.scenario.steps[this.step + 1] && this.progress >= this.scenario.steps[this.step + 1].roundsRequired) {

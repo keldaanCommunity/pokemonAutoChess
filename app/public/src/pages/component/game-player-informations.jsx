@@ -15,6 +15,16 @@ class GamePlayerInformations extends Component{
             height:'7%'
         }
 
+        let opponent = null;
+        if(this.props.opponent != '' && this.props.opponentAvatar !=''){
+            opponent = 
+            <div style={{display:'flex'}}>
+                <p>Vs</p>
+                <img src={`assets/avatar/${this.props.opponentAvatar}.png`}/>
+                <p>{this.props.opponent}</p>
+            </div>;
+        }
+
         return <div style={style} className='nes-container'>
                 <h4>{this.props.boardSize}/{this.props.maxBoardSize}</h4>
                 <div style={{display:'flex'}}>
@@ -25,7 +35,7 @@ class GamePlayerInformations extends Component{
                     <img src={`assets/avatar/${this.props.avatar}.png`}/>
                     <p>{this.props.name}</p>
                 </div>
-                <p>{this.props.opponent == '' ? '': 'Vs ' + this.props.opponent}</p>
+                {opponent}
         </div>;
     }
 }
