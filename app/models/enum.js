@@ -3574,6 +3574,60 @@ const BATTLE_RESULT = Object.freeze({
   DRAW:'DRAW'
 });
 
+const NEUTRAL_STAGE = [
+  {
+    turn: 1,
+    avatar: PKM.MAGIKARP
+},
+{
+  turn: 2,
+  avatar: PKM.RATICATE
+},
+{
+  turn: 3,
+  avatar: PKM.FEAROW
+},
+{
+  turn: 10,
+  avatar: PKM.GYARADOS
+},
+{
+  turn: 15,
+  avatar: PKM.LUGIA
+},
+{
+  turn: 20,
+  avatar: PKM.GIRATINA
+},
+{
+  turn: 25,
+  avatar: PKM.ZAPDOS
+},
+{
+  turn: 30,
+  avatar: PKM.DIALGA
+},
+{
+  turn: 35,
+  avatar: PKM.SUICUNE
+},
+{
+  turn: 40,
+  avatar: PKM.REGICE
+},
+{
+  turn: 45,
+  avatar: PKM.RAYQUAZA
+},
+{
+  turn: 50,
+  avatar: PKM.RAYQUAZA
+},
+{
+  turn: 55,
+  avatar: PKM.RAYQUAZA
+}];
+
 module.exports = {
   BATTLE_RESULT,
   SPECIAL_SKILL_DESCRIPTION,
@@ -3611,5 +3665,6 @@ module.exports = {
   RARITY_COLOR,
   PROBABILITY,
   TYPE_TRIGGER,
-  PRECOMPUTED_TYPE_POKEMONS
+  PRECOMPUTED_TYPE_POKEMONS,
+  NEUTRAL_STAGE
 };

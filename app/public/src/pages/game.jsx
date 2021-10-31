@@ -151,6 +151,16 @@ class Game extends Component {
             }
           });
         });
+
+        player.history.onChange = (player, key) => {
+          this.setState({
+            gameState:{
+              ...this.state.gameState,
+              players: this.state.gameState.players
+            }
+          });
+      };
+
         player.shop.onAdd = (p)=>{
             if(player.id == this.uid){
                 this.setState({
@@ -172,7 +182,6 @@ class Game extends Component {
                 })
             }
         }
-
         player.synergies.onChange = (s)=>{
             if(player.id == this.state.currentPlayerId){
                 this.setState({
@@ -180,7 +189,6 @@ class Game extends Component {
                 });
             }
         };
-
         player.simulation.dpsMeter.onAdd = (dps, key) => {
             if(player.id == this.state.currentPlayerId){
                 this.setState({
@@ -195,7 +203,7 @@ class Game extends Component {
                 }
             };
           };
-          player.simulation.dpsMeter.onRemove = (dps, key) => {
+        player.simulation.dpsMeter.onRemove = (dps, key) => {
             if(player.id == this.state.currentPlayerId){
                 this.setState({
                     dpsMeter:player.simulation.dpsMeter

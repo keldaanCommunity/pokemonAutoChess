@@ -23,7 +23,6 @@ class GameState extends schema.Schema {
 
     this.assign({
       time: time,
-      neutralStages: [1, 2, 3, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55],
       stageLevel: 0,
       roundTime: roundTime,
       phase: STATE.PICK,

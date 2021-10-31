@@ -1,5 +1,5 @@
 const Command = require('@colyseus/command').Command;
-const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY, PKM, BATTLE_RESULT} = require('../../models/enum');
+const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY, PKM, BATTLE_RESULT, NEUTRAL_STAGE} = require('../../models/enum');
 const Player = require('../../models/colyseus-models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
@@ -716,9 +716,10 @@ class OnUpdatePhaseCommand extends Command {
 
     this.state.players.forEach((player, key) => {
       if (player.alive) {
-        if (this.state.neutralStages.includes(this.state.stageLevel)) {
+        let stageIndex = NEUTRAL_STAGE.findIndex(stage=>{return stage.turn == this.state.stageLevel});
+        if (stageIndex != -1) {
           player.opponentName = 'PVE';
-          player.opponentAvatar = 'magnemite';
+          player.opponentAvatar = NEUTRAL_STAGE[stageIndex].avatar;
           player.simulation.initialize(player.board, PokemonFactory.getNeutralPokemonsByLevelStage(this.state.stageLevel), player.effects.list, []);
         } else {
           const opponentId = this.room.computeRandomOpponent(key);

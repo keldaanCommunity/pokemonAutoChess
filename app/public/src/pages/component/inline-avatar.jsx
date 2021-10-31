@@ -6,8 +6,7 @@ class InlineAvatar extends Component{
         const elo = this.props.elo ? '(' + this.props.elo + ')': '';
 
         return <div style={{
-            display:'flex',
-            justifyContent:'center'
+            display:'flex'
             }}>
             <img src={"/assets/avatar/" + this.props.avatar + ".png"}/>
             <p>{this.props.name} {elo}</p>

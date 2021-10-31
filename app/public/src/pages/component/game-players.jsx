@@ -23,6 +23,9 @@ class GamePlayers extends Component{
                 life={p[1].life} 
                 playerClick={this.props.playerClick} 
                 id={p[0]}
+                money={p[1].money}
+                history={p[1].history}
+                name={p[1].name}
                 color={this.props.uid == p[1].id ? 'rgba(247, 213, 29, 0.7)':'rgba(255, 255, 255, 0.7)'}
                 />
             })}

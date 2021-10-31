@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactTooltip from 'react-tooltip';
+import GamePlayerDetail from './game-player-detail';
 
 class GamePlayer extends Component{
 
@@ -26,7 +28,21 @@ class GamePlayer extends Component{
             top:'5%'
         }
 
-        return  <div style={style} className='nes-container' onClick={()=>{this.props.playerClick(this.props.id)}}>
+        return  <div 
+            style={style} 
+            className='nes-container' 
+            onClick={()=>{this.props.playerClick(this.props.id)}}
+            data-tip
+            data-for={'detail-' + this.props.id}
+        >
+             <ReactTooltip id={'detail-' + this.props.id} 
+                className='customeTheme' 
+                textColor='#000000' 
+                backgroundColor='rgba(255,255,255,0.7)' 
+                effect='solid'
+                place='left'>
+            <GamePlayerDetail name={this.props.name} life={this.props.life} money={this.props.money} history={this.props.history}/>
+        </ReactTooltip>
             <img style={imgStyle} src={`assets/avatar/${this.props.avatar}.png`}/>
             <progress style={progressStyle} className="nes-progress is-error" value={this.props.life} max="100"></progress>
         </div>
