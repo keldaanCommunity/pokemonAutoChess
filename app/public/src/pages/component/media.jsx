@@ -39,7 +39,7 @@ class Media extends Component {
             <DonateButton/>
             <PolicyButton/>
             <CreditsButton/>
-
+           <p>V1.11</p>
         </div>
     );
   }
