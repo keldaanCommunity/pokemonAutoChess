@@ -21,7 +21,7 @@ class GamePlayerInformations extends Component{
             <div style={{display:'flex'}}>
                 <p>Vs</p>
                 <img src={`assets/avatar/${this.props.opponentAvatar}.png`}/>
-                <p>{this.props.opponent}</p>
+                <p style={{marginLeft:'5px'}}>{this.props.opponent}</p>
             </div>;
         }
 
@@ -33,7 +33,7 @@ class GamePlayerInformations extends Component{
                 </div>
                 <div style={{display:'flex'}}>
                     <img src={`assets/avatar/${this.props.avatar}.png`}/>
-                    <p>{this.props.name}</p>
+                    <p style={{marginLeft:'5px'}}>{this.props.name}</p>
                 </div>
                 {opponent}
         </div>;
