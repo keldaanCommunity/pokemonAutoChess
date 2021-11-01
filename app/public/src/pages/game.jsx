@@ -12,6 +12,8 @@ import { WORDS} from '../../../models/enum';
 import GamePlayerInformations from './component/game-player-informations';
 import GameDpsMeter from './component/game-dps-meter';
 import GameSynergies from './component/game-synergies';
+import GameRarityPercentage from './component/game-rarity-percentage';
+
 class Game extends Component {
 
     constructor(props){
@@ -396,6 +398,9 @@ class Game extends Component {
         />
         <GameSynergies
             synergies={this.state.player.synergies}
+        />
+        <GameRarityPercentage
+            level={this.state.experienceManager.level}
         />
         <div id='game' ref={this.container} style={{
           maxHeight:'100vh'
