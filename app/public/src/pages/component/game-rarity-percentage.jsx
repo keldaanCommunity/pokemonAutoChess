@@ -25,7 +25,8 @@ class GameRarityPercentage extends Component{
             {[RARITY.COMMON, RARITY.UNCOMMON, RARITY.RARE, RARITY.EPIC, RARITY.LEGENDARY].map((rarity,index)=>{
                 return <div key={rarity}
                     style={{
-                        backgroundColor:RARITY_RGB[rarity]
+                        backgroundColor:RARITY_RGB[rarity],
+                        padding:'3px'
                     }}
                 >
                     {Math.floor(PROBABILITY[this.props.level][index] * 100)}%
