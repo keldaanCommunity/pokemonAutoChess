@@ -118,7 +118,7 @@ class GameRoom extends colyseus.Room {
   }
 
   onDispose() {
-    cdevonsole.log(`dispose game room`);
+    //console.log(`dispose game room`);
     let self = this;
     let requiredStageLevel = 8;
 
