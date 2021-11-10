@@ -33,6 +33,20 @@ class OnShopCommand extends Command {
   }
 }
 
+class OnItemCommand extends Command{
+  execute({playerId, id}){
+    if(this.state.players.has(playerId)){
+      const player = this.state.players.get(playerId);
+      if(player.itemsProposition.includes(id)){
+        player.stuff.add(id);
+      }
+      while(player.itemsProposition.length > 0){
+          player.itemsProposition.pop();
+      }
+    }
+  }
+}
+
 class OnDragDropCommand extends Command {
   execute({client, detail}) {
     /*
@@ -655,9 +669,13 @@ class OnUpdatePhaseCommand extends Command {
       player.simulation.stop();
       if (player.alive) {
         if (player.opponentName == 'PVE' && player.getLastBattleResult() == BATTLE_RESULT.WIN) {
-          const item = ItemFactory.createRandomItem();
+          let items = ItemFactory.createRandomItems();
+          items.forEach(item=>{
+            player.itemsProposition.push(item);
+          });
+          //const item = ItemFactory.createRandomItem();
           //const item = ItemFactory.createSpecificItems([ITEMS.DELTA_ORB, ITEMS.BLUE_ORB]);
-          player.stuff.add(item);
+          //player.stuff.add(item);
         }
         player.opponentName = '';
         player.opponentAvatar = '';
@@ -715,7 +733,13 @@ class OnUpdatePhaseCommand extends Command {
     this.state.botManager.updateBots();
 
     this.state.players.forEach((player, key) => {
+
       if (player.alive) {
+        if(player.itemsProposition.length != 0){
+          while(player.itemsProposition.length > 0){
+            player.itemsProposition.pop();
+          }
+        }
         let stageIndex = NEUTRAL_STAGE.findIndex(stage=>{return stage.turn == this.state.stageLevel});
         if (stageIndex != -1) {
           player.opponentName = 'PVE';
@@ -817,5 +841,6 @@ module.exports = {
   OnLeaveCommand: OnLeaveCommand,
   OnUpdateCommand: OnUpdateCommand,
   OnEvolutionCommand: OnEvolutionCommand,
-  OnUpdatePhaseCommand: OnUpdatePhaseCommand
+  OnUpdatePhaseCommand: OnUpdatePhaseCommand,
+  OnItemCommand: OnItemCommand
 };

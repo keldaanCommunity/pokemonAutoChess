@@ -8,3 +8,4 @@ app/public/dist/**/*.js
 /app/public/dist/assets/tiles/sleepBackground.json
 /app/public/dist/assets/tiles/sleepBackground.png
 /app/public/dist/assets/tiles/sleepBackgroundMirror.png
+/app/public/dist/index.js.LICENSE.txt

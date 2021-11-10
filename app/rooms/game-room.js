@@ -41,6 +41,15 @@ class GameRoom extends colyseus.Room {
         });
       }
     });
+    
+    this.onMessage('item', (client, message) => {
+      if(!this.state.gameFinished){
+        this.dispatcher.dispatch(new Commands.OnItemCommand(), {
+          playerId: client.auth.uid,
+          id: message.id
+        });
+      }
+    });
 
     this.onMessage('dragDrop', (client, message) => {
       if(!this.state.gameFinished){

@@ -13,6 +13,7 @@ import GamePlayerInformations from './component/game-player-informations';
 import GameDpsMeter from './component/game-dps-meter';
 import GameSynergies from './component/game-synergies';
 import GameRarityPercentage from './component/game-rarity-percentage';
+import GameItemsProposition from './component/game-items-proposition';
 
 class Game extends Component {
 
@@ -38,6 +39,7 @@ class Game extends Component {
             expNeeded: 2
           },
           shop:[],
+          itemsProposition:[],
           player:{
             boardSize: 0,
             opponentName:'',
@@ -184,6 +186,30 @@ class Game extends Component {
                 })
             }
         }
+
+        
+        player.itemsProposition.onAdd = (p)=>{
+          if(player.id == this.uid){
+              this.setState({
+                itemsProposition: player.itemsProposition
+              })
+          }
+      }
+      player.itemsProposition.onRemove = (p)=>{
+          if(player.id == this.uid){
+              this.setState({
+                itemsProposition: player.itemsProposition
+              })
+          }
+      }
+      player.itemsProposition.onChange = (p)=>{
+          if(player.id == this.uid){
+              this.setState({
+                itemsProposition: player.itemsProposition
+              })
+          }
+      }
+
         player.synergies.onChange = (s)=>{
             if(player.id == this.state.currentPlayerId){
                 this.setState({
@@ -332,6 +358,10 @@ class Game extends Component {
       this.room.send('shop', {'id': index});
     }
 
+    itemClick(item){
+      this.room.send('item',{'id': item});
+    }
+
     playerClick(id){
         this.setState({
             currentPlayerId:id,
@@ -401,6 +431,10 @@ class Game extends Component {
         />
         <GameRarityPercentage
             level={this.state.experienceManager.level}
+        />
+        <GameItemsProposition
+            proposition={this.state.itemsProposition}
+            itemClick={this.itemClick.bind(this)}
         />
         <div id='game' ref={this.container} style={{
           maxHeight:'100vh'
