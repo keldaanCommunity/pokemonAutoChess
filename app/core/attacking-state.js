@@ -111,13 +111,9 @@ class AttackingState extends PokemonState {
         if (target.effects.includes(EFFECTS.ODD_FLOWER) 
         || target.effects.includes(EFFECTS.GLOOM_FLOWER) 
         || target.effects.includes(EFFECTS.VILE_FLOWER)){
-          let triggerFlower = true;
-          board.forEach((x, y, pkm) => {
-            if (pkm && pkm.team == target.team && pkm.types.includes(TYPE.FLORA)) {
-              triggerFlower = false;
-            }
-          });
-          if(triggerFlower){
+
+          if(!pokemon.simulation.flowerSpawn[target.team]){
+            pokemon.simulation.flowerSpawn[target.team] = true;
             if(target.effects.includes(EFFECTS.ODD_FLOWER)){
               pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.ODDISH),target.positionX, target.positionY, target.team);
             }

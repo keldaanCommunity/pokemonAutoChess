@@ -40,6 +40,7 @@ class Simulation extends Schema {
     this.climate = this.getClimate();
     this.getEntryHazards();
     this.finished = false;
+    this.flowerSpawn = [false, false];
 
     if (blueTeam) {
       blueTeam.forEach((pokemon, key) => {

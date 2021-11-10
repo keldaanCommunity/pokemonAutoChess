@@ -3086,17 +3086,17 @@ const TYPE_DETAILS = Object.freeze({
         {
             trigger: 2,
           title:`(2) Odd Flower`,
-          text:`When all flora allied have died, the oddish flower will rise from its grave..`
+          text:`When an flora ally is dead, the oddish flower will rise from its grave..`
         },
         {
             trigger: 3,  
           title:`(3) Gloom Flower`,
-          text:`When all flora allied have died, the gloom flower will rise from its grave..`
+          text:`When an flora ally is dead, the gloom flower will rise from its grave..`
         },
         {
             trigger: 4,
           title:`(4) Vile Flower`,
-          text:`When all flora allied have died, the vile flower will rise from its grave..`
+          text:`When an flora ally is dead, the vile flower will rise from its grave..`
         }
       ],
       esp:[
