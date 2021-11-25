@@ -77,6 +77,9 @@ app.get('/after', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
+app.get('/team-builder', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
 
 const basicAuthMiddleware = basicAuth({
   // list of users and passwords

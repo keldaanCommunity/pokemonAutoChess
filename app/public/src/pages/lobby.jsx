@@ -239,6 +239,9 @@ class Lobby extends Component {
                     <PolicyButton/>
                     <CreditsButton/>
                     <button className='nes-btn is-success' style={buttonStyle} onClick={this.toggleWiki.bind(this)}>Wiki</button>
+                    <Link to='/team-builder'>
+                            <button className='nes-btn is-primary' style={buttonStyle} onClick={this.logOut.bind(this)}>BOT Builder</button>
+                    </Link>
                 </div>
 
                 <div style={lobbyStyle}>
