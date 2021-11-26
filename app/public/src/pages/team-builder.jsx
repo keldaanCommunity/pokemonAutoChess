@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { PKM } from '../../../models/enum';
+import { PKM, ITEMS, PRECOMPUTED_TYPE_POKEMONS, PRECOMPUTED_RARITY_POKEMONS } from '../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import PokemonFactory from '../../../models/pokemon-factory';
+import GameSynergies from './component/game-synergies';
+import WikiContent from './component/wiki-content';
+import SelectedEntity from './component/selected-entity';
 
 class TeamBuilder extends Component {
 
@@ -809,21 +813,104 @@ class TeamBuilder extends Component {
                     }
                   ]
                 }
-              ]
-        };
+              ],
+            synergies:{
+              NORMAL: 0,
+              GRASS: 0,
+              NORMAL: 0,
+              GRASS: 0,
+              FIRE: 0,
+              WATER: 0,
+              ELECTRIC: 0,
+              FIGHTING: 0,
+              PSYCHIC: 0,
+              DARK: 0,
+              METAL: 0,
+              GROUND: 0,
+              POISON: 0,
+              DRAGON: 0,
+              FIELD: 0,
+              MONSTER: 0,
+              HUMAN: 0,
+              AQUATIC: 0,
+              BUG: 0,
+              FLYING: 0,
+              FLORA: 0,
+              MINERAL: 0,
+              AMORPH: 0,
+              FAIRY: 0,
+              ICE: 0
+            },
+            selectedEntity:{
+            }
+        }
     }
+
+  updateSynergies(i){
+    let newSynergies = {
+      NORMAL: 0,
+      GRASS: 0,
+      NORMAL: 0,
+      GRASS: 0,
+      FIRE: 0,
+      WATER: 0,
+      ELECTRIC: 0,
+      FIGHTING: 0,
+      PSYCHIC: 0,
+      DARK: 0,
+      METAL: 0,
+      GROUND: 0,
+      POISON: 0,
+      DRAGON: 0,
+      FIELD: 0,
+      MONSTER: 0,
+      HUMAN: 0,
+      AQUATIC: 0,
+      BUG: 0,
+      FLYING: 0,
+      FLORA: 0,
+      MINERAL: 0,
+      AMORPH: 0,
+      FAIRY: 0,
+      ICE: 0
+    };
+    let pokemonNames = [];
+
+    this.state.steps[i].board.forEach(pkm=>{
+      const family = PokemonFactory.getPokemonFamily(pkm.name);
+      const pkmTypes = PokemonFactory.createPokemonFromName(pkm.name).types;
+      if (!pokemonNames.includes(family)) {
+        pokemonNames.push(family);
+        pkmTypes.forEach( (type) => {
+          newSynergies[type] += 1;
+        });
+      }
+    });
+
+    this.setState({
+      synergies: newSynergies
+    });
+  }
+
+  selectEntity(e){
+    console.log(e);
+  }
+
+  componentDidMount(){
+    this.updateSynergies(0);
+  }
 
   render() {
       
     const buttonStyle= {
-        position:'absolute',
         top:'10px',
         left:'10px'
     }
 
     const tabStyle = {
-        backgroundColor: 'rgba(255, 255, 255, .6)',
-        margin:'10px'
+        backgroundColor: 'rgba(255, 255, 255, .7)',
+        margin:'10px',
+        width:'40%'
     }
 
     const teamBuilderStyle = {
@@ -839,14 +926,15 @@ class TeamBuilder extends Component {
     }
 
     const tdStyle = {
-        width:'100px',
-        height:'100px'
+        width:'60px',
+        height:'60px'
     }
 
     const imgStyle = {
-        width:'80px',
-        height:'80px',
-        imageRendering:'pixelated'
+        width:'40px',
+        height:'40px',
+        imageRendering:'pixelated',
+        cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
     }
 
     const tabPaneStyle = {
@@ -858,13 +946,38 @@ class TeamBuilder extends Component {
         backgroundColor:'rgba(255,255,255,0.7)'
     }
 
+    const pokemonPoolStyle = {
+      display:'flex',
+      flexWrap:'wrap',
+      backgroundColor:'rgb(255,255,255,0.7)',
+      margin:'10px'
+    }
+
+    const itemPoolStyle={
+      display:'flex',
+      flexWrap:'wrap',
+      backgroundColor:'rgb(255,255,255,0.7)',
+      margin:'10px'
+    }
+
+    const bottomContainerStyle={
+      display:'flex',
+      width:'100%',
+      marginLeft:'20%',
+      margin:'10px',
+      position:'absolute',
+      bottom:'0px'
+    }
+
     return <div className="App">
             <Link to='/auth'>
                 <button className='nes-btn is-primary' style={buttonStyle}>Lobby</button>
             </Link>
             <div style={teamBuilderStyle}>
-                <Tabs className="nes-container" style={tabStyle}
-                    selectedIndex={this.state.step} onSelect={i => this.setState({step:i})}>
+
+              <GameSynergies synergies={this.state.synergies}/>
+              <Tabs className="nes-container" style={tabStyle}
+                    selectedIndex={this.state.step} onSelect={i => {this.updateSynergies(i);this.setState({step:i});}}>
 
                         <TabList>
                             {this.state.steps.map((step,i)=>{
@@ -894,15 +1007,29 @@ class TeamBuilder extends Component {
                             </TabPanel>
                         })}
                 </Tabs>
-                <div className='nes-container' style={{
-                    display:'flex',
-                    flexWrap:'wrap',
-                    backgroundColor:'rgb(255,255,255,0.7)',
-                    margin:'10px'
-                    }}>
-                    {Object.keys(PKM).map(key=>{
-                        return <div key={key}><img src={'assets/avatar/' + PKM[key] + '.png'} /></div>;
+                <SelectedEntity entity={this.state.selectedEntity}/>
+
+                <div style={bottomContainerStyle}>
+                  <div className='nes-container' style={itemPoolStyle}>
+                    {Object.keys(ITEMS).map(item=>{
+                        return <div onClick={this.selectEntity.bind(this)} key={item}><img style={imgStyle} src={'assets/items/' + ITEMS[item] + '.png'}/></div>;
                     })}
+                  </div>
+                  <Tabs className='nes-container' style={pokemonPoolStyle}>
+                    <TabList>
+                      {Object.keys(PRECOMPUTED_RARITY_POKEMONS).map((r)=>{
+                          return <Tab style={cursorStyle} key={r}><p>{r}</p></Tab>
+                      })}
+                    </TabList>
+
+                    {Object.keys(PRECOMPUTED_RARITY_POKEMONS).map((key)=>{
+                      return <TabPanel key={key} style={{display:'flex', flexWrap:'wrap'}}>
+                            {PRECOMPUTED_RARITY_POKEMONS[key].map((pkm)=>{
+                              return <div onClick={this.selectEntity.bind(this)} key={pkm}><img style={imgStyle} src={'assets/avatar/' + pkm + '.png'}/></div>;
+                            })}
+                        </TabPanel>
+                    })}
+                  </Tabs>
                 </div>
             </div>
         </div>

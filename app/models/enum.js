@@ -3320,6 +3320,125 @@ const PROBABILITY = {
   9: [0.1, 0.19, 0.31, 0.30, 0.1]
 };
 
+const PRECOMPUTED_RARITY_POKEMONS = {
+  COMMON: [
+    'geodude',    'graveler',   'golem',
+    'azurill',    'marill',     'azumarill',
+    'zubat',      'golbat',     'crobat',
+    'mareep',     'flaffy',     'ampharos',
+    'cleffa',     'clefairy',   'clefable',
+    'igglybuff',  'wygglytuff', 'jigglypuff',
+    'caterpie',   'metapod',    'butterfree',
+    'weedle',     'kakuna',     'beedrill',
+    'pidgey',     'pidgeotto',  'pidgeot',
+    'hoppip',     'skiploom',   'jumpluff',
+    'seedot',     'nuzleaf',    'shiftry',
+    'starly',     'staravia',   'staraptor',
+    'bellsprout', 'weepinbell', 'victreebel'
+  ],
+  UNCOMMON: [
+    'bulbasaur',  'ivysaur',    'venusaur',  'charmander',
+    'charmeleon', 'charizard',  'squirtle',  'wartortle',
+    'blastoise',  'chikorita',  'bayleef',   'meganium',
+    'cyndaquil',  'quilava',    'typlosion', 'totodile',
+    'croconaw',   'feraligatr', 'treecko',   'grovyle',
+    'sceptile',   'torchic',    'combusken', 'blaziken',
+    'mudkip',     'marshtomp',  'swampert',  'turtwig',
+    'grotle',     'torterra',   'chimchar',  'monferno',
+    'infernape',  'piplup',     'prinplup',  'empoleon',
+    'nidoranF',   'nidorina',   'nidoqueen', 'nidoranM',
+    'nidorino',   'nidoking',   'eevee',     'vaporeon',
+    'jolteon',    'flareon',    'espeon',    'umbreon',
+    'leafeon',    'sylveon',    'slowpoke',  'slowbro',
+    'slowking',   'swinub',     'piloswine', 'mamoswine',
+    'glaceon'
+  ],
+  RARE: [
+    'pichu',     'pikachu',   'raichu',
+    'machop',    'machoke',   'machamp',
+    'horsea',    'seadra',    'kingdra',
+    'trapinch',  'vibrava',   'flygon',
+    'spheal',    'sealeo',    'walrein',
+    'aron',      'lairon',    'aggron',
+    'magnemite', 'magneton',  'magnezone',
+    'rhyhorn',   'rhydon',    'rhyperior',
+    'togepi',    'togetic',   'togekiss',
+    'duskull',   'dusclops',  'dusknoir',
+    'lotad',     'lombre',    'ludicolo',
+    'shinx',     'luxio',     'luxray',
+    'poliwag',   'poliwhirl', 'politoed',
+    'vanillite', 'vanillish', 'vanilluxe',
+    'sandile',   'krokorok',  'krookodile'
+  ],
+  EPIC: [
+    'abra',     'kadabra',    'alakazam',
+    'gastly',   'haunter',    'gengar',
+    'dratini',  'dragonair',  'dragonite',
+    'larvitar', 'pupitar',    'tyranitar',
+    'slakoth',  'vigoroth',   'slaking',
+    'ralts',    'kirlia',     'gardevoir',
+    'bagon',    'shelgon',    'salamence',
+    'beldum',   'metang',     'metagross',
+    'gible',    'gabite',     'garchomp',
+    'elekid',   'electabuzz', 'electivire',
+    'magby',    'magmar',     'magmortar',
+    'litwick',  'lampent',    'chandelure',
+    'snorunt',  'glalie',     'froslass',
+    'deino',    'zweilous',   'hydreigon',
+    'solosis',  'duosion',    'reuniclus'
+  ],
+  LEGENDARY: [
+    'ditto',          'munchlax',
+    'snorlax',        'growlithe',
+    'arcanine',       'onix',
+    'steelix',        'mega-steelix',
+    'scyther',        'scizor',
+    'mega-scizor',    'riolu',
+    'lucario',        'mega-lucario',
+    'meditite',       'medicham',
+    'mega-medicham',  'numel',
+    'camerupt',       'mega-camerupt',
+    'snover',         'abomasnow',
+    'mega-abomasnow'
+  ],
+  MYTHICAL: [
+    'lugia',          'giratina',      'zapdos',
+    'moltres',        'articuno',      'dialga',
+    'palkia',         'suicune',       'raikou',
+    'entei',          'regice',        'regirock',
+    'registeel',      'kyogre',        'groudon',
+    'rayquaza',       'regigigas',     'darkrai',
+    'volcarona',      'landorus',      'thundurus',
+    'tornadus',       'keldeo',        'terrakion',
+    'virizion',       'cobalion',      'manaphy',
+    'rotom',          'spiritomb',     'absol',
+    'lapras',         'latias',        'latios',
+    'mesprit',        'azelf',         'uxie',
+    'mewtwo',         'kyurem',        'reshiram',
+    'zekrom',         'celebi',        'victini',
+    'jirachi',        'arceus',        'deoxys',
+    'shaymin',        'cresselia',     'heatran',
+    'ho-Oh',          'aerodactyl',    'primal-Kyogre',
+    'primal-Groudon', 'mega-Rayquaza'
+  ],
+  NEUTRAL: [
+    'magikarp',  'rattata',
+    'raticate',  'spearow',
+    'fearow',    'gyarados',
+    'sandshrew', 'meowth',
+    'persian'
+  ],
+  SUMMON: [
+    'carvanha',
+    'houndour',
+    'swablu',
+    'oddish',
+    'gloom',
+    'vileplume',
+    'bellossom'
+  ]
+}
+
 const PRECOMPUTED_TYPE_POKEMONS = {
     NORMAL: {
       pokemons: [
@@ -3666,5 +3785,6 @@ module.exports = {
   PROBABILITY,
   TYPE_TRIGGER,
   PRECOMPUTED_TYPE_POKEMONS,
-  NEUTRAL_STAGE
+  NEUTRAL_STAGE,
+  PRECOMPUTED_RARITY_POKEMONS
 };

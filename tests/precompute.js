@@ -141,6 +141,26 @@ Object.keys(TYPE).forEach(type=>{
     //console.log(pokemonCandidates);
     //console.log(mythicalPokemonCandidates);
 });
-console.log(data);
+//console.log(data);
 
+let precomputedData = {
+    COMMON:[],
+    UNCOMMON:[],
+    RARE:[],
+    EPIC:[],
+    LEGENDARY:[],
+    MYTHICAL: [],
+    NEUTRAL: [],
+    SUMMON: []
+}
 
+Object.keys(RARITY).forEach(rarity=>{
+    Object.keys(PKM).forEach(key=>{
+        let r = PokemonFactory.getPokemonRarityFromName(PKM[key]);
+        if(r == rarity){
+            precomputedData[rarity].push(PKM[key]);
+        }
+    });
+});
+
+console.log(precomputedData);
