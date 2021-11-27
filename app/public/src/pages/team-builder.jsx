@@ -4,8 +4,12 @@ import { PKM, ITEMS, PRECOMPUTED_TYPE_POKEMONS, PRECOMPUTED_RARITY_POKEMONS } fr
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import PokemonFactory from '../../../models/pokemon-factory';
 import GameSynergies from './component/game-synergies';
-import WikiContent from './component/wiki-content';
 import SelectedEntity from './component/selected-entity';
+
+const MODE = Object.freeze({
+  WRITE:'WRITE',
+  ERASE:'ERASE'
+});
 
 class TeamBuilder extends Component {
 
@@ -841,8 +845,8 @@ class TeamBuilder extends Component {
               FAIRY: 0,
               ICE: 0
             },
-            selectedEntity:{
-            }
+            entity:'',
+            mode: MODE.WRITE
         }
     }
 
@@ -893,7 +897,82 @@ class TeamBuilder extends Component {
   }
 
   selectEntity(e){
-    console.log(e);
+    this.setState({
+      entity:e  
+    });
+  }
+
+  changeToWriteMode(){
+    this.setState({
+      mode:MODE.WRITE
+    });
+  }
+
+  chaneToEraseMode(){
+    this.setState({
+      mode:MODE.ERASE
+    });
+  }
+
+  handleEditorClick(x,y){
+    this.state.mode == MODE.WRITE ? this.write(x,y): this.erase(x,y);
+  }
+
+  write(x,y){
+    if(Object.keys(ITEMS).includes(this.state.entity)){
+      this.writeItem(x,y);
+    }
+    else if(Object.values(PKM).includes(this.state.entity)){
+      this.writePokemon(x,y);
+    }
+  }
+
+  writeItem(x,y){
+  }
+
+  writePokemon(x,y){
+    let found = false;
+    this.state.steps[this.state.step].board.forEach((pkm,i)=>{
+      if(pkm.x==x && pkm.y==y){
+        found = true;
+        let copySteps = this.state.steps.slice();
+        copySteps[this.state.step].board[i].name = this.state.entity;
+        this.setState({
+          steps: copySteps
+        });
+      }
+    });
+    if(!found){
+      let copySteps = this.state.steps.slice();
+      copySteps[this.state.step].board.push({
+          name: this.state.entity,
+          x: x,
+          y: y
+      });
+      this.setState({
+        steps: copySteps
+      });
+      this.updateSynergies(this.state.step);
+    }
+  }
+
+  erase(x,y){
+    this.state.steps[this.state.step].board.forEach((pkm,i)=>{
+      if(pkm.x == x && pkm.y == y){
+        let copySteps = this.state.steps.slice();
+        copySteps[this.state.step].board = copySteps[this.state.step].board.filter(pkm=>{
+          if(pkm.x == x && pkm.y == y){
+          }
+          else{
+            return pkm;
+          }
+        })
+        this.setState({
+          steps:copySteps
+        });
+        this.updateSynergies(this.state.step);
+      }
+    });
   }
 
   componentDidMount(){
@@ -904,21 +983,18 @@ class TeamBuilder extends Component {
       
     const buttonStyle= {
         top:'10px',
-        left:'10px'
+        left:'10px',
+        position:'absolute',
+        display:'flex'
     }
 
     const tabStyle = {
         backgroundColor: 'rgba(255, 255, 255, .7)',
         margin:'10px',
-        width:'40%'
-    }
-
-    const teamBuilderStyle = {
-        display:'flex',
-        justifyContent:'space-between',
-        flexFlow:'column',
-        alignItems:'center',
-        height:'100%'
+        width:'50%',
+        position:'absolute',
+        top:'8.5%',
+        left:'25%'
     }
 
     const cursorStyle = {
@@ -927,7 +1003,9 @@ class TeamBuilder extends Component {
 
     const tdStyle = {
         width:'60px',
-        height:'60px'
+        height:'60px',
+        cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
+
     }
 
     const imgStyle = {
@@ -940,10 +1018,6 @@ class TeamBuilder extends Component {
     const tabPaneStyle = {
         display:'flex',
         justifyContent:'center'
-    }
-
-    const tableStyle = {
-        backgroundColor:'rgba(255,255,255,0.7)'
     }
 
     const pokemonPoolStyle = {
@@ -963,76 +1037,75 @@ class TeamBuilder extends Component {
     const bottomContainerStyle={
       display:'flex',
       width:'100%',
-      marginLeft:'20%',
-      margin:'10px',
       position:'absolute',
       bottom:'0px'
     }
 
     return <div className="App">
-            <Link to='/auth'>
-                <button className='nes-btn is-primary' style={buttonStyle}>Lobby</button>
-            </Link>
-            <div style={teamBuilderStyle}>
+      <div style={buttonStyle}>
+        <Link to='/auth'>
+          <button className='nes-btn is-primary'>Lobby</button>
+        </Link>
+        <button onClick={this.changeToWriteMode.bind(this)} className='nes-btn is-success'>Write Mode</button>
+        <button onClick={this.chaneToEraseMode.bind(this)} className='nes-btn is-warning'>Erase Mode</button>
+      </div>
+      <GameSynergies synergies={this.state.synergies}/>
+        <Tabs className="nes-container" style={tabStyle}
+              selectedIndex={this.state.step} onSelect={i => {this.updateSynergies(i);this.setState({step:i});}}>
 
-              <GameSynergies synergies={this.state.synergies}/>
-              <Tabs className="nes-container" style={tabStyle}
-                    selectedIndex={this.state.step} onSelect={i => {this.updateSynergies(i);this.setState({step:i});}}>
-
-                        <TabList>
-                            {this.state.steps.map((step,i)=>{
-                                return <Tab style={cursorStyle} key={i}><p>{i}</p></Tab>
-                            })}
-                        </TabList>
-
-                        {this.state.steps.map((step,i)=>{
-                            return <TabPanel style={tabPaneStyle} key={i}>
-                                <table style={tableStyle} className='nes-table is-bordered is-centered'>
-                                    <tbody>
-                                        {[3,2,1,0].map(y => {
-                                            return <tr key={y}>
-                                                {[0,1,2,3,4,5,6,7].map(x=>{
-                                                    let r = <td style={tdStyle} key={x}></td>;
-                                                    this.state.steps[i].board.forEach(p=>{
-                                                        if(p.x == x && p.y == y){
-                                                            r = <td style={tdStyle} key={x}> <img style={imgStyle} src={'assets/avatar/'+ p.name +'.png'}></img></td>
-                                                        }
-                                                    });
-                                                    return r;
-                                                })}  
-                                            </tr>
-                                        })}
-                                    </tbody>
-                                </table>    
-                            </TabPanel>
-                        })}
-                </Tabs>
-                <SelectedEntity entity={this.state.selectedEntity}/>
-
-                <div style={bottomContainerStyle}>
-                  <div className='nes-container' style={itemPoolStyle}>
-                    {Object.keys(ITEMS).map(item=>{
-                        return <div onClick={this.selectEntity.bind(this)} key={item}><img style={imgStyle} src={'assets/items/' + ITEMS[item] + '.png'}/></div>;
-                    })}
-                  </div>
-                  <Tabs className='nes-container' style={pokemonPoolStyle}>
-                    <TabList>
-                      {Object.keys(PRECOMPUTED_RARITY_POKEMONS).map((r)=>{
-                          return <Tab style={cursorStyle} key={r}><p>{r}</p></Tab>
+                  <TabList>
+                      {this.state.steps.map((step,i)=>{
+                          return <Tab style={cursorStyle} key={i}><p>{i}</p></Tab>
                       })}
-                    </TabList>
+                  </TabList>
 
-                    {Object.keys(PRECOMPUTED_RARITY_POKEMONS).map((key)=>{
-                      return <TabPanel key={key} style={{display:'flex', flexWrap:'wrap'}}>
-                            {PRECOMPUTED_RARITY_POKEMONS[key].map((pkm)=>{
-                              return <div onClick={this.selectEntity.bind(this)} key={pkm}><img style={imgStyle} src={'assets/avatar/' + pkm + '.png'}/></div>;
-                            })}
-                        </TabPanel>
-                    })}
-                  </Tabs>
-                </div>
+                  {this.state.steps.map((step,i)=>{
+                      return <TabPanel style={tabPaneStyle} key={i}>
+                          <table className='nes-table is-bordered is-centered'>
+                              <tbody>
+                                  {[3,2,1,0].map(y => {
+                                      return <tr key={y}>
+                                          {[0,1,2,3,4,5,6,7].map(x=>{
+                                              let r = <td style={tdStyle} onClick={this.handleEditorClick.bind(this,x,y)} key={x}></td>;
+                                              this.state.steps[i].board.forEach(p=>{
+                                                  if(p.x == x && p.y == y){
+                                                      r = <td style={tdStyle} onClick={this.handleEditorClick.bind(this,x,y)} key={x}> <img style={imgStyle} src={'assets/avatar/'+ p.name +'.png'}></img></td>
+                                                  }
+                                              });
+                                              return r;
+                                          })}  
+                                      </tr>
+                                  })}
+                              </tbody>
+                          </table>    
+                      </TabPanel>
+                  })}
+          </Tabs>
+          <SelectedEntity entity={this.state.entity}/>
+
+          <div style={bottomContainerStyle}>
+            <div className='nes-container' style={itemPoolStyle}>
+              {Object.keys(ITEMS).map(item=>{
+                  return <div onClick={this.selectEntity.bind(this, item)} key={item}><img style={imgStyle} src={'assets/items/' + ITEMS[item] + '.png'}/></div>;
+              })}
             </div>
-        </div>
+            <Tabs className='nes-container' style={pokemonPoolStyle}>
+              <TabList>
+                {Object.keys(PRECOMPUTED_RARITY_POKEMONS).map((r)=>{
+                    return <Tab style={cursorStyle} key={r}><p>{r}</p></Tab>
+                })}
+              </TabList>
+
+              {Object.keys(PRECOMPUTED_RARITY_POKEMONS).map((key)=>{
+                return <TabPanel key={key} style={{display:'flex', flexWrap:'wrap'}}>
+                      {PRECOMPUTED_RARITY_POKEMONS[key].map((pkm)=>{
+                        return <div onClick={this.selectEntity.bind(this, pkm)} key={pkm}><img style={imgStyle} src={'assets/avatar/' + pkm + '.png'}/></div>;
+                      })}
+                  </TabPanel>
+              })}
+            </Tabs>
+          </div>
+    </div>
     ; 
   }
 }
