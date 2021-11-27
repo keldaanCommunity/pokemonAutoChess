@@ -1002,8 +1002,8 @@ class TeamBuilder extends Component {
     }
 
     const tdStyle = {
-        width:'60px',
-        height:'60px',
+        width:'100px',
+        height:'100px',
         cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
 
     }
@@ -1013,6 +1013,13 @@ class TeamBuilder extends Component {
         height:'40px',
         imageRendering:'pixelated',
         cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
+    }
+
+    const bigImgStyle={
+      width:'80px',
+      height:'80px',
+      imageRendering:'pixelated',
+      cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
     }
 
     const tabPaneStyle = {
@@ -1036,9 +1043,10 @@ class TeamBuilder extends Component {
 
     const bottomContainerStyle={
       display:'flex',
-      width:'100%',
+      width:'87%',
       position:'absolute',
-      bottom:'0px'
+      bottom:'0px',
+      right:'0px'
     }
 
     return <div className="App">
@@ -1069,7 +1077,7 @@ class TeamBuilder extends Component {
                                               let r = <td style={tdStyle} onClick={this.handleEditorClick.bind(this,x,y)} key={x}></td>;
                                               this.state.steps[i].board.forEach(p=>{
                                                   if(p.x == x && p.y == y){
-                                                      r = <td style={tdStyle} onClick={this.handleEditorClick.bind(this,x,y)} key={x}> <img style={imgStyle} src={'assets/avatar/'+ p.name +'.png'}></img></td>
+                                                      r = <td style={tdStyle} onClick={this.handleEditorClick.bind(this,x,y)} key={x}> <img style={bigImgStyle} src={'assets/avatar/'+ p.name +'.png'}></img></td>
                                                   }
                                               });
                                               return r;
