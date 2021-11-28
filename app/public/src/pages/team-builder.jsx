@@ -928,6 +928,24 @@ class TeamBuilder extends Component {
   }
 
   writeItem(x,y){
+    this.state.steps[this.state.step].board.forEach((pkm,i)=>{
+      if(pkm.x==x && pkm.y==y){
+        let copySteps = this.state.steps.slice();
+        if(!copySteps[this.state.step].board[i].items){
+          copySteps[this.state.step].board[i].items = [];
+          copySteps[this.state.step].board[i].items.push(this.state.entity);
+        }
+        else if(copySteps[this.state.step].board[i].items.length < 3){
+          copySteps[this.state.step].board[i].items.push(this.state.entity);
+        }
+        else if(copySteps[this.state.step].board[i].items.length >= 3){
+          copySteps[this.state.step].board[i].items = [this.state.entity];
+        }
+        this.setState({
+          steps: copySteps
+        });
+      }
+    });
   }
 
   writePokemon(x,y){
@@ -1002,10 +1020,16 @@ class TeamBuilder extends Component {
     }
 
     const tdStyle = {
-        width:'100px',
+        width:'80px',
         height:'100px',
-        cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
+        cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`,
+        padding:'0px'
+    }
 
+    const divTdStyle = {
+      display:'flex',
+      justifyContent:'space-between',
+      flexFlow:'column'
     }
 
     const imgStyle = {
@@ -1054,8 +1078,8 @@ class TeamBuilder extends Component {
         <Link to='/auth'>
           <button className='nes-btn is-primary'>Lobby</button>
         </Link>
-        <button onClick={this.changeToWriteMode.bind(this)} className='nes-btn is-success'>Write Mode</button>
-        <button onClick={this.chaneToEraseMode.bind(this)} className='nes-btn is-warning'>Erase Mode</button>
+        <button onClick={this.changeToWriteMode.bind(this)} className='nes-btn'>Write Mode</button>
+        <button onClick={this.chaneToEraseMode.bind(this)} className='nes-btn'>Erase Mode</button>
       </div>
       <GameSynergies synergies={this.state.synergies}/>
         <Tabs className="nes-container" style={tabStyle}
@@ -1077,7 +1101,14 @@ class TeamBuilder extends Component {
                                               let r = <td style={tdStyle} onClick={this.handleEditorClick.bind(this,x,y)} key={x}></td>;
                                               this.state.steps[i].board.forEach(p=>{
                                                   if(p.x == x && p.y == y){
-                                                      r = <td style={tdStyle} onClick={this.handleEditorClick.bind(this,x,y)} key={x}> <img style={bigImgStyle} src={'assets/avatar/'+ p.name +'.png'}></img></td>
+                                                      r = <td style={tdStyle} onClick={this.handleEditorClick.bind(this,x,y)} key={x}>
+                                                        <div style={divTdStyle}>
+                                                          <img style={bigImgStyle} src={'assets/avatar/'+ p.name +'.png'}></img>
+                                                            {p.items ? <div style={{display:'flex', justifyContent:'space-evenly'}}>{p.items.map((it,j)=>{
+                                                              return <img key={j} style={{height:'20px', width:'20px'}} src={'assets/items/' + it + '.png'}/>
+                                                            })}</div>: null}
+                                                        </div>
+                                                         </td>
                                                   }
                                               });
                                               return r;
