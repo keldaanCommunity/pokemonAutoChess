@@ -1601,765 +1601,746 @@ const SCENARIOS =
   'POISON1': {
     'steps': [
       {
-        'roundsRequired': 0,
-        'board': [
-          {
-            'name': PKM.ZUBAT,
-            'x': 3,
-            'y': 2
-          },
-          {
-            'name': PKM.GEODUDE,
-            'x': 4,
-            'y': 3
-          }
-        ]
+         "roundsRequired":0,
+         "board":[
+            {
+               "name":"PKM.ZUBAT",
+               "x":3,
+               "y":2
+            },
+            {
+               "name":"PKM.GEODUDE",
+               "x":4,
+               "y":3
+            }
+         ]
       },
       {
-        'roundsRequired': 1,
-        'board':
-        [
-          {
-            'name': PKM.ZUBAT,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.GEODUDE,
-            'x': 3,
-            'y': 1
-          },
-          {
-            'name': PKM.WEEDLE,
-            'x': 4,
-            'y': 2
-          }
-        ]
+         "roundsRequired":1,
+         "board":[
+            {
+               "name":"PKM.ZUBAT",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.GEODUDE",
+               "x":3,
+               "y":1
+            },
+            {
+               "name":"PKM.WEEDLE",
+               "x":4,
+               "y":2
+            }
+         ]
       },
       {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': PKM.ZUBAT,
-            'x': 5,
-            'y': 1
-          },
-          {
-            'name': PKM.WEEDLE,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORANF,
-            'x': 4,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORANM,
-            'x': 5,
-            'y': 3
-          }
-        ]
+         "roundsRequired":3,
+         "board":[
+            {
+               "name":"PKM.ZUBAT",
+               "x":5,
+               "y":1
+            },
+            {
+               "name":"PKM.WEEDLE",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORANF",
+               "x":4,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORANM",
+               "x":5,
+               "y":3
+            }
+         ]
       },
       {
-        'roundsRequired': 2,
-        'board':
-        [
-          {
-            'name': PKM.GOLBAT,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.WEEDLE,
-            'x': 5,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORANF,
-            'x': 4,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORANM,
-            'x': 3,
-            'y': 3
-          }
-        ]
+         "roundsRequired":2,
+         "board":[
+            {
+               "name":"PKM.GOLBAT",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.WEEDLE",
+               "x":5,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORANF",
+               "x":4,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORANM",
+               "x":3,
+               "y":3
+            }
+         ]
       },
       {
-        'roundsRequired': 2,
-        'board':
-        [
-          {
-            'name': PKM.GOLBAT,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.WEEDLE,
-            'x': 5,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORANF,
-            'x': 4,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORANM,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.BULBASAUR,
-            'x': 2,
-            'y': 3
-          }
-        ]
+         "roundsRequired":2,
+         "board":[
+            {
+               "name":"PKM.GOLBAT",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.WEEDLE",
+               "x":5,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORANF",
+               "x":4,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORANM",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.BULBASAUR",
+               "x":2,
+               "y":3
+            }
+         ]
       },
       {
-        'roundsRequired': 2,
-        'board':
-        [
-          {
-            'name': PKM.GOLBAT,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.WEEDLE,
-            'x': 5,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORANF,
-            'x': 4,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORANM,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.IVYSAUR,
-            'x': 2,
-            'y': 3
-          }
-        ]
+         "roundsRequired":2,
+         "board":[
+            {
+               "name":"PKM.GOLBAT",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.WEEDLE",
+               "x":5,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORANF",
+               "x":4,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORANM",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.IVYSAUR",
+               "x":2,
+               "y":3
+            }
+         ]
       },
       {
-        'roundsRequired': 1,
-        'board':
-        [
-          {
-            'name': PKM.GOLBAT,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.WEEDLE,
-            'x': 5,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINA,
-            'x': 4,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.IVYSAUR,
-            'x': 2,
-            'y': 3
-          }
-        ]
+         "roundsRequired":1,
+         "board":[
+            {
+               "name":"PKM.GOLBAT",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.WEEDLE",
+               "x":5,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINA",
+               "x":4,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.IVYSAUR",
+               "x":2,
+               "y":3
+            }
+         ]
       },
       {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': PKM.GOLBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.WEEDLE,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINA,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.IVYSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.GASTLY,
-            'x': 4,
-            'y': 3
-          }
-        ]
+         "roundsRequired":3,
+         "board":[
+            {
+               "name":"PKM.GOLBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.WEEDLE",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINA",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.IVYSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.GASTLY",
+               "x":4,
+               "y":3
+            }
+         ]
       },
       {
-        'roundsRequired': 1,
-        'board':
-        [
-          {
-            'name': PKM.GOLBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.KAKUNA,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINA,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.IVYSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.GASTLY,
-            'x': 4,
-            'y': 3
-          }
-        ]
+         "roundsRequired":1,
+         "board":[
+            {
+               "name":"PKM.GOLBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.KAKUNA",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINA",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.IVYSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.GASTLY",
+               "x":4,
+               "y":3
+            }
+         ]
       },
       {
-        'roundsRequired': 4,
-        'board':
-        [
-          {
-            'name': PKM.GOLBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.KAKUNA,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINA,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.IVYSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.GASTLY,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.DUSKULL,
-            'x': 1,
-            'y': 1
-          }
-        ]
+         "roundsRequired":4,
+         "board":[
+            {
+               "name":"PKM.GOLBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.KAKUNA",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINA",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.IVYSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.GASTLY",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.DUSKULL",
+               "x":1,
+               "y":1
+            }
+         ]
       },
       {
-        'roundsRequired': 4,
-        'board':
-        [
-          {
-            'name': PKM.GOLBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.KAKUNA,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINA,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.IVYSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.GASTLY,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.DUSCLOPS,
-            'x': 1,
-            'y': 1
-          }
-        ]
+         "roundsRequired":4,
+         "board":[
+            {
+               "name":"PKM.GOLBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.KAKUNA",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINA",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.IVYSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.GASTLY",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.DUSCLOPS",
+               "x":1,
+               "y":1
+            }
+         ]
       },
       {
-        'roundsRequired': 5,
-        'board':
-        [
-          {
-            'name': PKM.CROBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.KAKUNA,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINA,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.IVYSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.HAUNTER,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.DUSCLOPS,
-            'x': 1,
-            'y': 1
-          }
-        ]
+         "roundsRequired":5,
+         "board":[
+            {
+               "name":"PKM.CROBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.KAKUNA",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINA",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.IVYSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.HAUNTER",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.DUSCLOPS",
+               "x":1,
+               "y":1
+            }
+         ]
       },
       {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': PKM.CROBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.KAKUNA,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINA,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.IVYSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.HAUNTER,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.DUSCLOPS,
-            'x': 1,
-            'y': 1
-          },
-          {
-            'name': PKM.RALTS,
-            'x': 3,
-            'y': 1
-          }
-        ]
+         "roundsRequired":3,
+         "board":[
+            {
+               "name":"PKM.CROBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.KAKUNA",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINA",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.IVYSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.HAUNTER",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.DUSCLOPS",
+               "x":1,
+               "y":1
+            },
+            {
+               "name":"PKM.RALTS",
+               "x":3,
+               "y":1
+            }
+         ]
       },
       {
-        'roundsRequired': 5,
-        'board':
-        [
-          {
-            'name': PKM.CROBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.KAKUNA,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINA,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.IVYSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.HAUNTER,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.DUSCLOPS,
-            'x': 1,
-            'y': 1
-          },
-          {
-            'name': PKM.KIRLIA,
-            'x': 3,
-            'y': 1
-          }
-        ]
+         "roundsRequired":5,
+         "board":[
+            {
+               "name":"PKM.CROBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.KAKUNA",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINA",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.IVYSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.HAUNTER",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.DUSCLOPS",
+               "x":1,
+               "y":1
+            },
+            {
+               "name":"PKM.KIRLIA",
+               "x":3,
+               "y":1
+            }
+         ]
       },
       {
-        'roundsRequired': 4,
-        'board':
-        [
-          {
-            'name': PKM.CROBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.BEEDRILL,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINA,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.IVYSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.HAUNTER,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.DUSCLOPS,
-            'x': 1,
-            'y': 1
-          },
-          {
-            'name': PKM.GARDEVOIR,
-            'x': 3,
-            'y': 1
-          }
-        ]
+         "roundsRequired":4,
+         "board":[
+            {
+               "name":"PKM.CROBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.BEEDRILL",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINA",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.IVYSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.HAUNTER",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.DUSCLOPS",
+               "x":1,
+               "y":1
+            },
+            {
+               "name":"PKM.GARDEVOIR",
+               "x":3,
+               "y":1
+            }
+         ]
       },
       {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': PKM.CROBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.BEEDRILL,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINA,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.VENUSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.HAUNTER,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.DUSCLOPS,
-            'x': 1,
-            'y': 1
-          },
-          {
-            'name': PKM.GARDEVOIR,
-            'x': 3,
-            'y': 1
-          }
-        ]
+         "roundsRequired":3,
+         "board":[
+            {
+               "name":"PKM.CROBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.BEEDRILL",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINA",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.VENUSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.HAUNTER",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.DUSCLOPS",
+               "x":1,
+               "y":1
+            },
+            {
+               "name":"PKM.GARDEVOIR",
+               "x":3,
+               "y":1
+            }
+         ]
       },
       {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': PKM.CROBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.BEEDRILL,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDOQUEEN,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.VENUSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.HAUNTER,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.DUSCLOPS,
-            'x': 1,
-            'y': 1
-          },
-          {
-            'name': PKM.GARDEVOIR,
-            'x': 3,
-            'y': 1
-          }
-        ]
+         "roundsRequired":3,
+         "board":[
+            {
+               "name":"PKM.CROBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.BEEDRILL",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDOQUEEN",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.VENUSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.HAUNTER",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.DUSCLOPS",
+               "x":1,
+               "y":1
+            },
+            {
+               "name":"PKM.GARDEVOIR",
+               "x":3,
+               "y":1
+            }
+         ]
       },
       {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': PKM.CROBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.BEEDRILL,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDOQUEEN,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDORINO,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.VENUSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.HAUNTER,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.DUSCLOPS,
-            'x': 1,
-            'y': 1
-          },
-          {
-            'name': PKM.GARDEVOIR,
-            'x': 3,
-            'y': 1
-          },
-          {
-            'name': PKM.BAYLEEF,
-            'x': 5,
-            'y': 3
-          }
-        ]
+         "roundsRequired":3,
+         "board":[
+            {
+               "name":"PKM.CROBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.BEEDRILL",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDOQUEEN",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDORINO",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.VENUSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.HAUNTER",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.DUSCLOPS",
+               "x":1,
+               "y":1
+            },
+            {
+               "name":"PKM.GARDEVOIR",
+               "x":3,
+               "y":1
+            },
+            {
+               "name":"PKM.BAYLEEF",
+               "x":5,
+               "y":3
+            }
+         ]
       },
       {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': PKM.CROBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.BEEDRILL,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDOQUEEN,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDOKING,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.VENUSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.HAUNTER,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.DUSCLOPS,
-            'x': 1,
-            'y': 1
-          },
-          {
-            'name': PKM.GARDEVOIR,
-            'x': 3,
-            'y': 1
-          },
-          {
-            'name': PKM.BAYLEEF,
-            'x': 5,
-            'y': 3
-          }
-        ]
+         "roundsRequired":3,
+         "board":[
+            {
+               "name":"PKM.CROBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.BEEDRILL",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDOQUEEN",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDOKING",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.VENUSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.HAUNTER",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.DUSCLOPS",
+               "x":1,
+               "y":1
+            },
+            {
+               "name":"PKM.GARDEVOIR",
+               "x":3,
+               "y":1
+            },
+            {
+               "name":"PKM.BAYLEEF",
+               "x":5,
+               "y":3
+            }
+         ]
       },
       {
-        'roundsRequired': 3,
-        'board':
-        [
-          {
-            'name': PKM.CROBAT,
-            'x': 2,
-            'y': 1
-          },
-          {
-            'name': PKM.BEEDRILL,
-            'x': 0,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDOQUEEN,
-            'x': 1,
-            'y': 3
-          },
-          {
-            'name': PKM.NIDOKING,
-            'x': 2,
-            'y': 3
-          },
-          {
-            'name': PKM.VENUSAUR,
-            'x': 3,
-            'y': 3
-          },
-          {
-            'name': PKM.GENGAR,
-            'x': 4,
-            'y': 1
-          },
-          {
-            'name': PKM.DUSCLOPS,
-            'x': 1,
-            'y': 1
-          },
-          {
-            'name': PKM.GARDEVOIR,
-            'x': 3,
-            'y': 1
-          },
-          {
-            'name': PKM.MEGANIUM,
-            'x': 5,
-            'y': 3
-          }
-        ]
+         "roundsRequired":3,
+         "board":[
+            {
+               "name":"PKM.CROBAT",
+               "x":2,
+               "y":1
+            },
+            {
+               "name":"PKM.BEEDRILL",
+               "x":0,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDOQUEEN",
+               "x":1,
+               "y":3
+            },
+            {
+               "name":"PKM.NIDOKING",
+               "x":2,
+               "y":3
+            },
+            {
+               "name":"PKM.VENUSAUR",
+               "x":3,
+               "y":3
+            },
+            {
+               "name":"PKM.GENGAR",
+               "x":4,
+               "y":1
+            },
+            {
+               "name":"PKM.DUSCLOPS",
+               "x":1,
+               "y":1
+            },
+            {
+               "name":"PKM.GARDEVOIR",
+               "x":3,
+               "y":1
+            },
+            {
+               "name":"PKM.MEGANIUM",
+               "x":5,
+               "y":3
+            }
+         ]
       }
-    ]
+   ]
   },
   'GROUND1': {
     'steps': [

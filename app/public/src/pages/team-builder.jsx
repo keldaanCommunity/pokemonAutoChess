@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { PKM, ITEMS, PRECOMPUTED_TYPE_POKEMONS, PRECOMPUTED_RARITY_POKEMONS } from '../../../models/enum';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { PKM, ITEMS } from '../../../models/enum';
 import PokemonFactory from '../../../models/pokemon-factory';
 import GameSynergies from './component/game-synergies';
 import SelectedEntity from './component/selected-entity';
+import ModalMenu from './component/modal-menu';
+import ItemPicker from './component/item-picker';
+import PokemonPicker from './component/pokemon-picker';
+import TeamEditor from './component/team-editor';
+//import "bootstrap/dist/css/bootstrap.min.css";
 
 const MODE = Object.freeze({
   WRITE:'WRITE',
   ERASE:'ERASE'
+});
+
+const MODAL_MODE = Object.freeze({
+  EXPORT:'EXPORT',
+  IMPORT:'IMPORT'
 });
 
 class TeamBuilder extends Component {
@@ -846,7 +855,9 @@ class TeamBuilder extends Component {
               ICE: 0
             },
             entity:'',
-            mode: MODE.WRITE
+            mode: MODE.WRITE,
+            modalMode:MODAL_MODE,
+            modalBoolean: false
         }
     }
 
@@ -902,17 +913,27 @@ class TeamBuilder extends Component {
     });
   }
 
-  changeToWriteMode(){
-    this.setState({
-      mode:MODE.WRITE
+  toggleMode(){
+    this.setState(prevState=>{
+      return{
+        mode:prevState.mode == MODE.WRITE ? MODE.ERASE: MODE.WRITE
+      };
     });
   }
 
-  chaneToEraseMode(){
+  showModal(mode){
     this.setState({
-      mode:MODE.ERASE
+      modalMode: mode,
+      modalBoolean: true
     });
-  }
+  };
+
+
+  hideModal(){
+    this.setState({
+      modalBoolean: false
+    });
+  };
 
   handleEditorClick(x,y){
     this.state.mode == MODE.WRITE ? this.write(x,y): this.erase(x,y);
@@ -993,8 +1014,34 @@ class TeamBuilder extends Component {
     });
   }
 
+  handleTabClick(i){
+    this.updateSynergies(i);
+    this.setState({step:i});
+  }
+
   componentDidMount(){
     this.updateSynergies(0);
+  }
+
+  import(text){
+    console.log(text);
+    try{
+      let json = JSON.parse(text);
+      if(json.validate){
+
+      }
+      this.setState({
+        steps:json
+      });
+      this.updateSynergies(this.state.step);
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+
+  validate(json){
+    return true;
   }
 
   render() {
@@ -1004,65 +1051,6 @@ class TeamBuilder extends Component {
         left:'10px',
         position:'absolute',
         display:'flex'
-    }
-
-    const tabStyle = {
-        backgroundColor: 'rgba(255, 255, 255, .7)',
-        margin:'10px',
-        width:'50%',
-        position:'absolute',
-        top:'8.5%',
-        left:'25%'
-    }
-
-    const cursorStyle = {
-        cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
-    }
-
-    const tdStyle = {
-        width:'80px',
-        height:'100px',
-        cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`,
-        padding:'0px'
-    }
-
-    const divTdStyle = {
-      display:'flex',
-      justifyContent:'space-between',
-      flexFlow:'column'
-    }
-
-    const imgStyle = {
-        width:'40px',
-        height:'40px',
-        imageRendering:'pixelated',
-        cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
-    }
-
-    const bigImgStyle={
-      width:'80px',
-      height:'80px',
-      imageRendering:'pixelated',
-      cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
-    }
-
-    const tabPaneStyle = {
-        display:'flex',
-        justifyContent:'center'
-    }
-
-    const pokemonPoolStyle = {
-      display:'flex',
-      flexWrap:'wrap',
-      backgroundColor:'rgb(255,255,255,0.7)',
-      margin:'10px'
-    }
-
-    const itemPoolStyle={
-      display:'flex',
-      flexWrap:'wrap',
-      backgroundColor:'rgb(255,255,255,0.7)',
-      margin:'10px'
     }
 
     const bottomContainerStyle={
@@ -1078,72 +1066,32 @@ class TeamBuilder extends Component {
         <Link to='/auth'>
           <button className='nes-btn is-primary'>Lobby</button>
         </Link>
-        <button onClick={this.changeToWriteMode.bind(this)} className='nes-btn'>Write Mode</button>
-        <button onClick={this.chaneToEraseMode.bind(this)} className='nes-btn'>Erase Mode</button>
+        <button onClick={this.toggleMode.bind(this, MODAL_MODE.IMPORT)} className='nes-btn'>{this.state.mode} Mode</button>
+        <button onClick={this.showModal.bind(this, MODAL_MODE.IMPORT)} className='nes-btn is-warning'>Import</button>
+        <button onClick={this.showModal.bind(this, MODAL_MODE.EXPORT)} className='nes-btn is-warning'>Export</button>
       </div>
       <GameSynergies synergies={this.state.synergies}/>
-        <Tabs className="nes-container" style={tabStyle}
-              selectedIndex={this.state.step} onSelect={i => {this.updateSynergies(i);this.setState({step:i});}}>
-
-                  <TabList>
-                      {this.state.steps.map((step,i)=>{
-                          return <Tab style={cursorStyle} key={i}><p>{i}</p></Tab>
-                      })}
-                  </TabList>
-
-                  {this.state.steps.map((step,i)=>{
-                      return <TabPanel style={tabPaneStyle} key={i}>
-                          <table className='nes-table is-bordered is-centered'>
-                              <tbody>
-                                  {[3,2,1,0].map(y => {
-                                      return <tr key={y}>
-                                          {[0,1,2,3,4,5,6,7].map(x=>{
-                                              let r = <td style={tdStyle} onClick={this.handleEditorClick.bind(this,x,y)} key={x}></td>;
-                                              this.state.steps[i].board.forEach(p=>{
-                                                  if(p.x == x && p.y == y){
-                                                      r = <td style={tdStyle} onClick={this.handleEditorClick.bind(this,x,y)} key={x}>
-                                                        <div style={divTdStyle}>
-                                                          <img style={bigImgStyle} src={'assets/avatar/'+ p.name +'.png'}></img>
-                                                            {p.items ? <div style={{display:'flex', justifyContent:'space-evenly'}}>{p.items.map((it,j)=>{
-                                                              return <img key={j} style={{height:'20px', width:'20px'}} src={'assets/items/' + it + '.png'}/>
-                                                            })}</div>: null}
-                                                        </div>
-                                                         </td>
-                                                  }
-                                              });
-                                              return r;
-                                          })}  
-                                      </tr>
-                                  })}
-                              </tbody>
-                          </table>    
-                      </TabPanel>
-                  })}
-          </Tabs>
+          <TeamEditor 
+            step={this.state.step}
+            steps={this.state.steps}
+            handleTabClick={this.handleTabClick.bind(this)}
+            handleEditorClick={this.handleEditorClick.bind(this)}
+           />
           <SelectedEntity entity={this.state.entity}/>
 
           <div style={bottomContainerStyle}>
-            <div className='nes-container' style={itemPoolStyle}>
-              {Object.keys(ITEMS).map(item=>{
-                  return <div onClick={this.selectEntity.bind(this, item)} key={item}><img style={imgStyle} src={'assets/items/' + ITEMS[item] + '.png'}/></div>;
-              })}
-            </div>
-            <Tabs className='nes-container' style={pokemonPoolStyle}>
-              <TabList>
-                {Object.keys(PRECOMPUTED_RARITY_POKEMONS).map((r)=>{
-                    return <Tab style={cursorStyle} key={r}><p>{r}</p></Tab>
-                })}
-              </TabList>
-
-              {Object.keys(PRECOMPUTED_RARITY_POKEMONS).map((key)=>{
-                return <TabPanel key={key} style={{display:'flex', flexWrap:'wrap'}}>
-                      {PRECOMPUTED_RARITY_POKEMONS[key].map((pkm)=>{
-                        return <div onClick={this.selectEntity.bind(this, pkm)} key={pkm}><img style={imgStyle} src={'assets/avatar/' + pkm + '.png'}/></div>;
-                      })}
-                  </TabPanel>
-              })}
-            </Tabs>
+            <ItemPicker selectEntity={this.selectEntity.bind(this)}/>
+            <PokemonPicker selectEntity={this.selectEntity.bind(this)}/>
           </div>
+
+          <ModalMenu 
+            modalBoolean={this.state.modalBoolean}
+            showModal={this.showModal.bind(this)}
+            steps={this.state.steps} 
+            hideModal={this.hideModal.bind(this)}
+            modalMode={this.state.modalMode}
+            import={this.import.bind(this)}
+          />
     </div>
     ; 
   }

@@ -26,16 +26,6 @@ body {
   outline: inherit;
 }
 
-::selection {
-  color: 'none';
-  background: 'none'
-}
-
-::-moz-selection{
-color: 'none';
-background: 'none'
-}
-
 .customeTheme{
     opacity:1 !important;
     border-color:#000 !important;

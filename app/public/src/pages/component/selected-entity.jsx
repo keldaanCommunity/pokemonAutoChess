@@ -8,8 +8,9 @@ class SelectedEntity extends Component {
             display: 'flex',
             position:'absolute',
             right:'0px',
-            top:'0px',
+            top:'8.5%',
             margin:'10px',
+            marginTop:'0px',
             backgroundColor:'rgba(255,255,255,0.7)',
             flexFlow:'column',
             width:'20%'
