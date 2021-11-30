@@ -12,6 +12,7 @@ import DonateButton from './component/donate-button';
 import PolicyButton from './component/policy-button';
 import CreditsButton from './component/credits-button';
 import Wiki from './component/wiki';
+import TeamBuilder from './team-builder';
 
 class Lobby extends Component {
 
@@ -29,7 +30,9 @@ class Lobby extends Component {
             isSignedIn: false,
             preparationRoomId: '',
             tabIndex: 0,
-            showWiki: false
+            showWiki: false,
+            showBuilder: false,
+            pasteBinUrl: ''
         };
 
         this.client = new Client(window.endpoint);
@@ -67,7 +70,13 @@ class Lobby extends Component {
         
                         this.room.state.leaderboard.onAdd = (l) => {this.setState({leaderboard: this.room.state.leaderboard})};
                         this.room.state.leaderboard.onRemove = (l) => {this.setState({leaderboard: this.room.state.leaderboard})};
-        
+                        
+                        this.room.onMessage('pastebin-url', (json) =>{
+                            this.setState({
+                                pasteBinUrl: json.url
+                            });
+                        });
+
                         this.room.onMessage('rooms', (rooms) => {
                             rooms.forEach(room =>{
                               if(room.name == 'room'){
@@ -121,6 +130,10 @@ class Lobby extends Component {
 
     sendMessage(payload){
         this.room.send('new-message', {'name': this.state.user.name, 'payload': payload, 'avatar':this.state.user.avatar });
+    }
+
+    createBot(bot){
+        this.room.send('bot-creation',{'bot': bot});
     }
 
     createRoom() {
@@ -199,8 +212,15 @@ class Lobby extends Component {
     toggleWiki(){
         this.setState((prevState)=>{
             return{
-                ...prevState,
                 showWiki: !prevState.showWiki
+            }
+        });
+    }
+
+    toggleBuilder(){
+        this.setState((prevState)=>{
+            return{
+                showBuilder: !prevState.showBuilder
             }
         });
     }
@@ -227,6 +247,13 @@ class Lobby extends Component {
       if(this.state.showWiki){
         return <Wiki toggleWiki={this.toggleWiki.bind(this)} content='Lobby'/>;
       }
+      if(this.state.showBuilder){
+          return <TeamBuilder 
+          toggleBuilder={this.toggleBuilder.bind(this)}
+          createBot={this.createBot.bind(this)}
+          pasteBinUrl={this.state.pasteBinUrl}
+          />
+      }
       else{
         return (
             <div className='App'>
@@ -239,9 +266,7 @@ class Lobby extends Component {
                     <PolicyButton/>
                     <CreditsButton/>
                     <button className='nes-btn is-success' style={buttonStyle} onClick={this.toggleWiki.bind(this)}>Wiki</button>
-                    <Link to='/team-builder'>
-                            <button className='nes-btn is-primary' style={buttonStyle} onClick={this.logOut.bind(this)}>BOT Builder</button>
-                    </Link>
+                    <button className='nes-btn is-primary' style={buttonStyle} onClick={this.toggleBuilder.bind(this)}>BOT Builder</button>
                 </div>
 
                 <div style={lobbyStyle}>

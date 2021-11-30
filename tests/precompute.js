@@ -4,6 +4,7 @@ const PKM = require('../app/models/enum').PKM;
 const TYPE = require('../app/models/enum').TYPE;
 const PokemonFactory = require('../app/models/pokemon-factory');
 
+/*
 let data = {
     NORMAL: {
         pokemons:[],
@@ -164,3 +165,18 @@ Object.keys(RARITY).forEach(rarity=>{
 });
 
 console.log(precomputedData);
+*/
+
+let typeData = {};
+
+Object.keys(TYPE).forEach(type=>{
+    typeData[type] = [];
+    Object.keys(PKM).forEach(key=>{
+        let pkm = PokemonFactory.createPokemonFromName(PKM[key]);
+        if(pkm.types.includes(type)){
+            typeData[type].push(pkm.name);
+        }
+    });
+});
+
+console.log(typeData);

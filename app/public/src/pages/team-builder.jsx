@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { PKM, ITEMS } from '../../../models/enum';
 import PokemonFactory from '../../../models/pokemon-factory';
 import GameSynergies from './component/game-synergies';
@@ -26,7 +25,8 @@ class TeamBuilder extends Component {
         super(props);
         this.state = {
             step: 0,
-            steps: [
+            bot:{
+              steps: [
                 {
                   'roundsRequired': 0,
                   'board': [
@@ -826,7 +826,11 @@ class TeamBuilder extends Component {
                     }
                   ]
                 }
-              ],
+              ],           
+              id:'WATER1',
+              avatar:'squirtle',
+              author:'Keldaan'
+            },
             synergies:{
               NORMAL: 0,
               GRASS: 0,
@@ -891,7 +895,7 @@ class TeamBuilder extends Component {
     };
     let pokemonNames = [];
 
-    this.state.steps[i].board.forEach(pkm=>{
+    this.state.bot.steps[i].board.forEach(pkm=>{
       const family = PokemonFactory.getPokemonFamily(pkm.name);
       const pkmTypes = PokemonFactory.createPokemonFromName(pkm.name).types;
       if (!pokemonNames.includes(family)) {
@@ -949,9 +953,9 @@ class TeamBuilder extends Component {
   }
 
   writeItem(x,y){
-    this.state.steps[this.state.step].board.forEach((pkm,i)=>{
+    this.state.bot.steps[this.state.step].board.forEach((pkm,i)=>{
       if(pkm.x==x && pkm.y==y){
-        let copySteps = this.state.steps.slice();
+        let copySteps = this.state.bot.steps.slice();
         if(!copySteps[this.state.step].board[i].items){
           copySteps[this.state.step].board[i].items = [];
           copySteps[this.state.step].board[i].items.push(this.state.entity);
@@ -962,43 +966,58 @@ class TeamBuilder extends Component {
         else if(copySteps[this.state.step].board[i].items.length >= 3){
           copySteps[this.state.step].board[i].items = [this.state.entity];
         }
-        this.setState({
-          steps: copySteps
-        });
+        this.setState(prevState=>{
+          return {
+          bot:{
+            ...prevState.bot,
+            steps:copySteps
+          }
+        }
+      });
       }
     });
   }
 
   writePokemon(x,y){
     let found = false;
-    this.state.steps[this.state.step].board.forEach((pkm,i)=>{
+    this.state.bot.steps[this.state.step].board.forEach((pkm,i)=>{
       if(pkm.x==x && pkm.y==y){
         found = true;
-        let copySteps = this.state.steps.slice();
+        let copySteps = this.state.bot.steps.slice();
         copySteps[this.state.step].board[i].name = this.state.entity;
-        this.setState({
-          steps: copySteps
+        this.setState(prevState=>{
+          return{
+            bot:{
+              ...prevState.bot,
+              steps:copySteps
+            }
+          }
         });
       }
     });
     if(!found){
-      let copySteps = this.state.steps.slice();
+      let copySteps = this.state.bot.steps.slice();
       copySteps[this.state.step].board.push({
           name: this.state.entity,
           x: x,
           y: y
       });
-      this.setState({
-        steps: copySteps
+      this.setState(prevState=>{
+        return{
+          bot:{
+            ...prevState.bot,
+            steps:copySteps
+          }
+        }
       });
       this.updateSynergies(this.state.step);
     }
   }
 
   erase(x,y){
-    this.state.steps[this.state.step].board.forEach((pkm,i)=>{
+    this.state.bot.steps[this.state.step].board.forEach((pkm,i)=>{
       if(pkm.x == x && pkm.y == y){
-        let copySteps = this.state.steps.slice();
+        let copySteps = this.state.bot.steps.slice();
         copySteps[this.state.step].board = copySteps[this.state.step].board.filter(pkm=>{
           if(pkm.x == x && pkm.y == y){
           }
@@ -1006,8 +1025,13 @@ class TeamBuilder extends Component {
             return pkm;
           }
         })
-        this.setState({
-          steps:copySteps
+        this.setState(prevState=>{
+          return{
+            bot:{
+              ...prevState.bot,
+              steps:copySteps
+            }
+          }
         });
         this.updateSynergies(this.state.step);
       }
@@ -1017,6 +1041,36 @@ class TeamBuilder extends Component {
   handleTabClick(i){
     this.updateSynergies(i);
     this.setState({step:i});
+  }
+
+  handleAuthorChange(e){
+    this.setState(prevState=>{
+      return {
+        bot:{
+          ...prevState.bot,
+          author: e.target.value
+        }
+    }})
+  }
+
+  handleIdChange(e){
+    this.setState(prevState=>{
+      return {
+        bot:{
+          ...prevState.bot,
+          id: e.target.value
+        }
+    }})
+  }
+
+  handleAvatarChange(e){
+    this.setState(prevState=>{
+      return {
+        bot:{
+          ...prevState.bot,
+          avatar: e.target.value
+        }
+    }})
   }
 
   componentDidMount(){
@@ -1031,12 +1085,13 @@ class TeamBuilder extends Component {
 
       }
       this.setState({
-        steps:json
+        bot:json
       });
       this.updateSynergies(this.state.step);
+      this.hideModal();
     }
     catch(error){
-      console.log(error);
+      alert(error);
     }
   }
 
@@ -1046,12 +1101,18 @@ class TeamBuilder extends Component {
 
   render() {
       
-    const buttonStyle= {
+    const buttonsStyle= {
         top:'10px',
         left:'10px',
         position:'absolute',
         display:'flex'
     }
+
+    const buttonStyle = {
+      marginLeft:'10px',
+      marginTop:'10px',
+      marginRight:'10px'
+  }
 
     const bottomContainerStyle={
       display:'flex',
@@ -1062,20 +1123,24 @@ class TeamBuilder extends Component {
     }
 
     return <div className="App">
-      <div style={buttonStyle}>
-        <Link to='/auth'>
-          <button className='nes-btn is-primary'>Lobby</button>
-        </Link>
-        <button onClick={this.toggleMode.bind(this, MODAL_MODE.IMPORT)} className='nes-btn'>{this.state.mode} Mode</button>
-        <button onClick={this.showModal.bind(this, MODAL_MODE.IMPORT)} className='nes-btn is-warning'>Import</button>
-        <button onClick={this.showModal.bind(this, MODAL_MODE.EXPORT)} className='nes-btn is-warning'>Export</button>
+      <div style={buttonsStyle}>
+        <button style={buttonStyle} onClick={this.props.toggleBuilder} className='nes-btn is-primary'>Lobby</button>
+        <button style={buttonStyle} onClick={this.toggleMode.bind(this, MODAL_MODE.IMPORT)} className='nes-btn'>{this.state.mode} Mode</button>
+        <button style={buttonStyle} onClick={this.showModal.bind(this, MODAL_MODE.IMPORT)} className='nes-btn is-warning'>Import</button>
+        <button style={buttonStyle} onClick={this.showModal.bind(this, MODAL_MODE.EXPORT)} className='nes-btn is-warning'>Export</button>
       </div>
       <GameSynergies synergies={this.state.synergies}/>
           <TeamEditor 
             step={this.state.step}
-            steps={this.state.steps}
+            steps={this.state.bot.steps}
+            avatar={this.state.bot.avatar}
+            id={this.state.bot.id}
+            author={this.state.bot.author}
             handleTabClick={this.handleTabClick.bind(this)}
             handleEditorClick={this.handleEditorClick.bind(this)}
+            handleAuthorChange={this.handleAuthorChange.bind(this)}
+            handleAvatarChange={this.handleAvatarChange.bind(this)}
+            handleIdChange={this.handleIdChange.bind(this)}
            />
           <SelectedEntity entity={this.state.entity}/>
 
@@ -1087,10 +1152,12 @@ class TeamBuilder extends Component {
           <ModalMenu 
             modalBoolean={this.state.modalBoolean}
             showModal={this.showModal.bind(this)}
-            steps={this.state.steps} 
+            bot={this.state.bot} 
             hideModal={this.hideModal.bind(this)}
             modalMode={this.state.modalMode}
             import={this.import.bind(this)}
+            createBot={this.props.createBot}
+            pasteBinUrl={this.props.pasteBinUrl}
           />
     </div>
     ; 

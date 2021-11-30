@@ -6,7 +6,7 @@ const Player = require('../models/colyseus-models/player');
 const Statistic = require('../models/mongo-models/statistic');
 const UserMetadata = require('../models/mongo-models/user-metadata');
 const EloBot = require('../models/mongo-models/elo-bot');
-const {POKEMON_BOT, XP_PLACE, XP_TABLE} = require('../models/enum');
+const {XP_PLACE, XP_TABLE} = require('../models/enum');
 const EloRank = require('elo-rank');
 const admin = require('firebase-admin');
 
@@ -134,7 +134,7 @@ class GameRoom extends colyseus.Room {
     if(this.state.stageLevel >= requiredStageLevel && this.state.elligibleToXP){
       this.state.players.forEach(player =>{
         if(player.isBot){
-          EloBot.find({'name': POKEMON_BOT[player.name]}, (err, bots)=>{
+          EloBot.find({'name': player.id}, (err, bots)=>{
             if(bots){
               bots.forEach(bot =>{
                 bot.elo = self.computeElo(player, player.rank, player.elo);

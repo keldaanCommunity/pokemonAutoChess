@@ -1,6 +1,7 @@
 const SCENARIOS = require('../app/models/scenarios');
 const {PKM} = require('../app/models/enum');
 
+/*
 Object.keys(SCENARIOS).forEach(botName => {
     const bot = SCENARIOS[botName];
     if(bot.steps && bot.steps.length !=0){
@@ -47,4 +48,43 @@ Object.keys(SCENARIOS).forEach(botName => {
     else{
         console.log(`problem with steps bot ${botName}`);
     }
+});
+
+let newScenarios = {};
+
+Object.keys(SCENARIOS).forEach(botName => {
+    let newBot = {
+        id:botName,
+        avatar:BOT_AVATAR[botName],
+        steps:[]
+    };
+    const bot = SCENARIOS[botName];
+
+    bot.steps.forEach(step=>{
+        let newStep = {
+            board:[],
+            roundsRequired: step.roundsRequired
+        };
+        step.board.forEach(pkm=>{
+            newStep.board.push({
+                ...pkm
+            });
+        });
+        newBot.steps.push(newStep);
+    });
+    newScenarios[botName] = newBot;
+});
+
+console.log(JSON.stringify(newScenarios));
+*/
+
+let newScenarios = {};
+
+Object.keys(SCENARIOS).forEach(botName => {
+    let newBot = {
+        id:botName,
+        avatar:BOT_AVATAR[botName],
+        steps:[]
+    };
+    newScenarios[botName] = newBot;
 });

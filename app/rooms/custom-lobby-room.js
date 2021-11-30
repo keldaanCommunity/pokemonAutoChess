@@ -9,6 +9,14 @@ const LobbyUser = require('../models/colyseus-models/lobby-user');
 const admin = require('firebase-admin');
 const GameRecord = require('../models/colyseus-models/game-record');
 const Statistic = require('../models/mongo-models/statistic');
+const { MessageEmbed, WebhookClient } = require('discord.js');
+const PasteBinAPI = require('pastebin-ts');
+
+const pastebin = new PasteBinAPI({
+  'api_dev_key' : process.env.PASTEBIN_API_DEV_KEY,
+  'api_user_name' : process.env.PASTEBIN_API_USERNAME,
+  'api_user_password' : process.env.PASTEBIN_API_PASSWORD
+});
 
 class CustomLobbyRoom extends colyseus.LobbyRoom {
   constructor() {
@@ -19,6 +27,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     console.log(`create lobby`);
     const self = this;
     super.onCreate(options);
+    this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
     this.setState(new LobbyState());
 
     Mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true , useUnifiedTopology: true }, (err) => {
@@ -31,19 +40,6 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           });
         }
       });
-      /*
-      UserMetadata.find({}, ['displayName','avatar','level'], {limit:25, sort:{'level': -1}}, (err, users)=> {
-        if(err){
-          console.log(err);
-        }
-        else{
-          for (let i = 0; i < users.length; i++) {
-            const user = users[i];
-            self.state.leaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.level));
-          }
-        }
-      });
-      */
       UserMetadata.find({},['displayName','avatar','elo'],{limit:30, sort:{'elo': -1}}, (err, users)=>{
         if(err){
           console.log(err);
@@ -55,105 +51,36 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           }
         }
       });
-      /*
-      EloBot.find({},['name','elo'],{sort: {'elo': -1}}, (err, bots)=>{
-        if(err){
-          console.log(err);
-        }
-        else{
-          for (let i = 0; i < bots.length; i++) {
-            const bot = bots[i];
-            self.state.botEloLeaderboard.push(new LeaderboardInfo(BOT_AVATAR[bot.name], BOT_AVATAR[bot.name], i + 1, bot.elo));
-          }
-        }
-      });
-      Statistic.find({'time':{$gt: Date.now() - 2592000000}}, (err, stats)=>{
-
-        if(stats.length != 0){
-          let typeCount = new Map();
-          let pkmCount = new Map();
-          let mythicalPkmCount = new Map();
-          let threeStarsPkmCount = new Map();
-          let avatars = new Map();
-  
-          Object.keys(TYPE).forEach(type => {
-            typeCount.set(type,0);
-          });
-          Object.values(PKM).forEach(pkm => {
-            pkmCount.set(pkm,0);
-            mythicalPkmCount.set(pkm,0);
-            threeStarsPkmCount.set(pkm,0);
-          });
-          stats.forEach((stat)=>{
-            if(stat.pokemons && stat.pokemons.length != 0){
-              if(stat.pokemons.length > 2){
-                if(stat.avatar && !avatars.has(stat.name)){
-                  avatars.set(stat.name, stat.avatar);
-                }
-              }
-              stat.pokemons.forEach(pokemon =>{
-                let colyseusPkm = PokemonFactory.createPokemonFromName(pokemon);
-                pkmCount.set(pokemon, pkmCount.get(pokemon) + 1);
-                if(colyseusPkm.rarity == RARITY.MYTHICAL){
-                  mythicalPkmCount.set(pokemon, mythicalPkmCount.get(pokemon) + 1);
-                }
-                if(colyseusPkm.stars == 3){
-                  threeStarsPkmCount.set(pokemon, threeStarsPkmCount.get(pokemon) + 1);
-                }
-                colyseusPkm.types.forEach(type =>{
-                  typeCount.set(type, typeCount.get(type) + 1);
-                });
-              });
-            }
-          });
-          let types = [];
-          let mythicalPkms = [];
-          let pkms = [];
-          let threeStarsPkm = [];
-  
-          pkmCount.forEach((value, key) =>{
-            if(value != 0){
-              pkms.push({pkm: key, count: value});
-            }
-          });
-          mythicalPkmCount.forEach((value, key) =>{
-            if(value != 0){
-              mythicalPkms.push({pkm: key, count: value});
-            }
-          });
-          threeStarsPkmCount.forEach((value, key) =>{
-            if(value != 0){
-              threeStarsPkm.push({pkm: key, count: value});
-            }
-          });
-          typeCount.forEach((value, key) =>{
-            if(value != 0){
-              types.push({type: key, count: value});
-            }
-          });
-          types.sort((a, b) => {return b.count - a.count});
-          mythicalPkms.sort((a, b) => {return b.count - a.count});
-          pkms.sort((a, b) => {return b.count - a.count});
-          threeStarsPkm.sort((a, b) => {return b.count - a.count});
-          //console.log(players);
-  
-          for (let i = 0; i < types.length; i++) {
-            self.state.typesLeaderboard.push(new LeaderboardInfo(types[i].type, types[i].type, i+1 ,types[i].count));
-          }
-          
-          for (let i = 0; i < 25; i++) {
-            self.state.mythicalPokemonLeaderboard.push(new LeaderboardInfo(mythicalPkms[i].pkm, mythicalPkms[i].pkm, i+1 ,mythicalPkms[i].count));
-            self.state.pokemonLeaderboard.push(new LeaderboardInfo(pkms[i].pkm, pkms[i].pkm, i+1 ,pkms[i].count));
-            self.state.threeStarsLeaderboard.push(new LeaderboardInfo(threeStarsPkm[i].pkm, threeStarsPkm[i].pkm, i+1 ,threeStarsPkm[i].count));
-          }
-        }
-      });
-          */
     });
 
 
     this.onMessage('new-message', (client, message) => {
       this.state.addMessage(message.name, message.payload, message.avatar, Date.now(), true);
+    });
+
+    this.onMessage('bot-creation',(client, message)=>{
+      const bot = message.bot;
+      const user = this.state.users.get(client.auth.uid);
+      pastebin.createPaste({text: JSON.stringify(bot), format: 'json'}).then((data) => {
+        const dsEmbed = new MessageEmbed()
+        .setTitle(`BOT ${bot.avatar} created by ${bot.author}`)
+        .setURL(data)
+        .setAuthor(user.name, `https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/dist/assets/avatar/${user.avatar}.png`)
+        .setDescription(`A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder`)
+        .setThumbnail(`https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/dist/assets/avatar/${bot.avatar}.png`);
+        client.send('pastebin-url', {url: data});
+        try{
+          this.discordWebhook.send({
+            embeds: [dsEmbed]
+          });
+        }
+        catch(error){
+          console.log(error);
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+    });
     });
 
     this.onMessage('map', (client, message) => {
@@ -640,37 +567,12 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
         ));
       }
     });
-    /*
-    console.log(`${client.auth.email} join lobby`);
-    Statistic.find({'playerId': client.auth.uid}, ['pokemons','time','rank','elo'], {limit:15, sort:{'time': -1}}, (err, stats)=>{
-      if(err){
-        console.log(err);
-      }
-      else{
-        let records = new ArraySchema();
-        stats.forEach(record =>{
-          //console.log(record.elo);
-          records.push(new GameRecord(record.time, record.rank, record.elo, record.pokemons));
-        });
-        
-        this.state.users.get(client.auth.uid) = new DetailledGameUser(client.auth.uid, client.auth.displayName, auth.metadata.elo, auth.metadata.avatar, false, false, records);
-
-        this.clients.forEach((cli) => {
-          if (client.auth.email && cli.auth.email == client.auth.email && client.sessionId != cli.sessionId) {
-            cli.send('to-lobby', {});
-          }
-        });
-      }
-    });
-    */
   }
 
   onLeave(client) {
     super.onLeave(client);
     console.log(`${client.auth.displayName} leave lobby`);
     this.state.users.delete(client.auth.uid);
-    // const time = new Date(Date.now());
-    // this.state.addMessage('Server',`${client.auth.email} left.`, client.auth.metadata.avatar, Date.now(), true);
   }
 
   onDispose() {

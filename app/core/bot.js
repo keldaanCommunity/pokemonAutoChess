@@ -1,4 +1,4 @@
-const {POKEMON_BOT, ITEM_TYPE, BATTLE_RESULT} = require('../models/enum');
+const {ITEM_TYPE, BATTLE_RESULT} = require('../models/enum');
 const SCENARIOS = require('../models/scenarios');
 const PokemonFactory = require('../models/pokemon-factory');
 class Bot {
@@ -6,7 +6,7 @@ class Bot {
     this.player = player;
     this.step = 0;
     this.progress = 0;
-    this.scenario = SCENARIOS[POKEMON_BOT[player.avatar]];
+    this.scenario = SCENARIOS[player.id];
     this.updatePlayerTeam(0);
   }
 

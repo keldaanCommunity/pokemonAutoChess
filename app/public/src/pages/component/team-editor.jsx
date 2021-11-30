@@ -25,7 +25,9 @@ const tdStyle = {
 const divTdStyle = {
   display:'flex',
   justifyContent:'space-between',
-  flexFlow:'column'
+  flexFlow:'column',
+  width:'80px',
+  height:'80px'
 }
 
 const imgStyle = {
@@ -47,10 +49,30 @@ const tabPaneStyle = {
     justifyContent:'center'
 }
 
+const labelStyle={
+    marginLeft:'10px'
+}
+
 class TeamEditor extends Component{
     render(){
-        return <Tabs className="nes-container" style={tabStyle}
-        selectedIndex={this.props.step} onSelect={i => {this.props.handleTabClick(i)}}>
+        return <div className="nes-container" style={tabStyle}>
+            
+            <div style={{display:'flex'}}>
+                <div className="nes-field is-inline">
+                    <label style={labelStyle} htmlFor="inline_field">ID</label>
+                    <input onChange={this.props.handleIdChange} type="text" id="inline_field" className="nes-input" placeholder="Id" value={this.props.id}/>
+                </div>
+                <div className="nes-field is-inline">
+                    <label style={labelStyle} htmlFor="inline_field">Avatar</label>
+                    <input onChange={this.props.handleAvatarChange} type="text" id="inline_field" className="nes-input" placeholder="Avatar Name" value={this.props.avatar}/>
+                </div>
+                <div className="nes-field is-inline">
+                    <label style={labelStyle} htmlFor="inline_field">Author</label>
+                    <input onChange={this.props.handleAuthorChange} type="text" id="inline_field" className="nes-input" placeholder="Author Name" value={this.props.author}/>
+                </div>
+            </div>
+
+            <Tabs selectedIndex={this.props.step} onSelect={i => {this.props.handleTabClick(i)}}>
 
             <TabList>
                 {this.props.steps.map((step,i)=>{
@@ -69,13 +91,13 @@ class TeamEditor extends Component{
                                         this.props.steps[i].board.forEach(p=>{
                                             if(p.x == x && p.y == y){
                                                 r = <td style={tdStyle} onClick={()=>{this.props.handleEditorClick(x,y)}} key={x}>
-                                                  <div style={divTdStyle}>
+                                                <div style={divTdStyle}>
                                                     <img style={bigImgStyle} src={'assets/avatar/'+ p.name +'.png'}></img>
-                                                      {p.items ? <div style={{display:'flex', justifyContent:'space-evenly'}}>{p.items.map((it,j)=>{
-                                                        return <img key={j} style={{height:'20px', width:'20px'}} src={'assets/items/' + it + '.png'}/>
-                                                      })}</div>: null}
-                                                  </div>
-                                                </td>
+                                                    {p.items ? <div style={{display:'flex', justifyContent:'space-evenly'}}>{p.items.map((it,j)=>{
+                                                        return <img key={j} style={{height:'20px', width:'20px', position:'relative', bottom:'20px'}} src={'assets/items/' + it + '.png'}/>
+                                                    })}</div>: null}
+                                                </div>
+                                            </td>
                                             }
                                         });
                                         return r;
@@ -86,7 +108,8 @@ class TeamEditor extends Component{
                     </table>    
                 </TabPanel>
             })}
-    </Tabs>;
+            </Tabs>
+            </div>;
     }
 }
 

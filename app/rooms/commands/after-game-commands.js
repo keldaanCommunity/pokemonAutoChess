@@ -1,8 +1,6 @@
 const Command = require('@colyseus/command').Command;
 const uniqid = require('uniqid');
 const GameUser = require('../../models/colyseus-models/game-user');
-const BOT_AVATAR = require('../../models/enum').BOT_AVATAR;
-const POKEMON_BOT = require('../../models/enum').POKEMON_BOT;
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {

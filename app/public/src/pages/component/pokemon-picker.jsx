@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PRECOMPUTED_RARITY_POKEMONS } from '../../../../models/enum';
+import { PRECOMPUTED_TYPE_POKEMONS_ALL } from '../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const pokemonPoolStyle = {
@@ -25,14 +25,14 @@ class PokemonPicker extends Component{
     render(){
         return <Tabs className='nes-container' style={pokemonPoolStyle}>
         <TabList>
-          {Object.keys(PRECOMPUTED_RARITY_POKEMONS).map((r)=>{
-              return <Tab style={cursorStyle} key={r}><p>{r}</p></Tab>
+          {Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL).map((t)=>{
+              return <Tab style={cursorStyle} key={t}><img src={'assets/types/' + t + '.png'}></img></Tab>
           })}
         </TabList>
         
-        {Object.keys(PRECOMPUTED_RARITY_POKEMONS).map((key)=>{
+        {Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL).map((key)=>{
           return <TabPanel key={key} style={{display:'flex', flexWrap:'wrap'}}>
-                {PRECOMPUTED_RARITY_POKEMONS[key].map((pkm)=>{
+                {PRECOMPUTED_TYPE_POKEMONS_ALL[key].map((pkm)=>{
                   return <div onClick={()=>{this.props.selectEntity(pkm)}} key={pkm}><img style={imgStyle} src={'assets/avatar/' + pkm + '.png'}/></div>;
                 })}
             </TabPanel>

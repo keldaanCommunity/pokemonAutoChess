@@ -2,8 +2,7 @@ const Command = require('@colyseus/command').Command;
 const uniqid = require('uniqid');
 const GameUser = require('../../models/colyseus-models/game-user');
 const UserMetadata = require('../../models/mongo-models/user-metadata');
-const BOT_AVATAR = require('../../models/enum').BOT_AVATAR;
-const POKEMON_BOT = require('../../models/enum').POKEMON_BOT;
+const SCENARIOS = require('../../models/scenarios');
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
@@ -78,15 +77,14 @@ class OnToggleReadyCommand extends Command {
 class OnAddBotCommand extends Command {
   execute() {
     if (this.state.users.size < 8) {
-      const id = uniqid();
-      const botList = Object.keys(BOT_AVATAR);
+      const botList = Object.keys(SCENARIOS);
       let bot;
       const actualBotList = [];
       const potentialBotList = [];
 
       this.state.users.forEach((user, key) => {
         if (user.isBot) {
-          actualBotList.push(POKEMON_BOT[user.avatar]);
+          actualBotList.push(user.id);
         }
       });
 
@@ -101,7 +99,7 @@ class OnAddBotCommand extends Command {
         bot = botList[Math.floor(Math.random() * botList.length)];
       }
 
-      this.state.users.set(id, new GameUser(id, BOT_AVATAR[bot], this.room.elos.get(bot), BOT_AVATAR[bot], true, true,
+      this.state.users.set(SCENARIOS[bot].id, new GameUser(SCENARIOS[bot].id, SCENARIOS[bot].avatar, this.room.elos.get(bot), SCENARIOS[bot].avatar, true, true,
       {          
         FIRE: 'FIRE0',
         ICE:'ICE0',
@@ -112,7 +110,7 @@ class OnAddBotCommand extends Command {
     }));
       this.room.broadcast('messages', {
         'name': 'Server',
-         'payload': `Bot ${ BOT_AVATAR[bot] } added.`,
+         'payload': `Bot ${ SCENARIOS[bot].avatar } added.`,
           'avatar': 'magnemite',
           'time':Date.now()
         });
