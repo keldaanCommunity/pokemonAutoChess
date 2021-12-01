@@ -12,7 +12,7 @@ import DonateButton from './component/donate-button';
 import PolicyButton from './component/policy-button';
 import CreditsButton from './component/credits-button';
 import Wiki from './component/wiki';
-import TeamBuilder from './team-builder';
+import TeamBuilder from './component/team-builder';
 
 class Lobby extends Component {
 

@@ -6,7 +6,6 @@ import Lobby from './lobby';
 import Preparation from './preparation';
 import Game from './game';
 import AfterGame from './after-game';
-import TeamBuilder from './team-builder';
 
 class App extends Component {
   render() {

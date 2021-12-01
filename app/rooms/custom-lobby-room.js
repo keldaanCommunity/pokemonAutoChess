@@ -61,7 +61,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     this.onMessage('bot-creation',(client, message)=>{
       const bot = message.bot;
       const user = this.state.users.get(client.auth.uid);
-      pastebin.createPaste({text: JSON.stringify(bot), format: 'json'}).then((data) => {
+      pastebin.createPaste({text: JSON.stringify(bot),title: `${user.name} has uploaded BOT ${bot.avatar}`, format: 'json'}).then((data) => {
         const dsEmbed = new MessageEmbed()
         .setTitle(`BOT ${bot.avatar} created by ${bot.author}`)
         .setURL(data)

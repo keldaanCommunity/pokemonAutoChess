@@ -20,7 +20,7 @@ class GameSynergy extends Component{
         <ReactTooltip id={'detail-' + this.props.type} 
         className='customeTheme' 
         textColor='#000000' 
-        backgroundColor='rgba(255,255,255,0.7)' 
+        backgroundColor='rgba(255,255,255,1)' 
         effect='solid'
         place='right'>
             <GameSynergyDetail type={this.props.type} value={this.props.value}/>
