@@ -47,7 +47,8 @@ class TeamBuilder extends Component {
         super(props);
         this.state = {
             step: 0,
-            copiedStep:-1,
+            copyBoard: [],
+            copyRoundsRequired:0,
             bot:{
               steps: [
                 {
@@ -452,26 +453,28 @@ class TeamBuilder extends Component {
   }
 
   copy(step){
+    let copyBoard=[...this.state.bot.steps[step].board];
+    let copyRoundsRequired = this.state.bot.steps[step].roundsRequired;
+
     this.setState({
-      copiedStep: step
+      copyBoard: copyBoard,
+      copyRoundsRequired:copyRoundsRequired
     });
   }
 
   paste(){
-    if(this.state.step != this.state.copiedStep && this.state.copiedStep != -1){
-      let copySteps = this.state.bot.steps.slice();
-      copySteps[this.state.step].board = copySteps[this.state.copiedStep].board.slice();
-      copySteps[this.state.step].roundsRequired = copySteps[this.state.copiedStep].roundsRequired;
-      this.setState(prevState=>{
-        return{
-          bot:{
-            ...prevState.bot,
-            steps:copySteps
-          }
+    let copySteps = [...this.state.bot.steps];
+    copySteps[this.state.step].board = JSON.parse(JSON.stringify(this.state.copyBoard));
+    copySteps[this.state.step].roundsRequired = this.state.copyRoundsRequired;
+    this.setState(prevState=>{
+      return{
+        bot:{
+          ...prevState.bot,
+          steps:copySteps
         }
-      });
-      this.updateSynergies(this.state.step);
-    }
+      }
+    });
+    this.updateSynergies(this.state.step);
   }
 
   validate(json){

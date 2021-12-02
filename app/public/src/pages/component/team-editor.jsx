@@ -121,7 +121,7 @@ class TeamEditor extends Component{
                                     effect='solid'>
                                     <p>Points required represent how much your bot needs to work to get to the next step</p>
                                     <p>Once your bot has acquired enough points, it will go to the next step</p>
-                                    <ul class="nes-list is-disc">
+                                    <ul className="nes-list is-disc">
                                         <li>For a victory, your bot will get 1.5 point</li>
                                         <li>For a defeat or a draw, your bot will get 1 point</li>
                                     </ul>
