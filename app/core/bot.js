@@ -35,29 +35,14 @@ class Bot {
       const pkm = PokemonFactory.createPokemonFromName(stepTeam.board[i].name);
       pkm.positionX = stepTeam.board[i].x;
       pkm.positionY = stepTeam.board[i].y;
+      if(stepTeam.board[i].items){
+        stepTeam.board[i].items.forEach(item=>{
+          pkm.items.add(item);
+        });
+      }
       this.player.board[pkm.id] = pkm;
     }
 
-    const items = this.player.stuff.getAllItems();
-    const specificItems = Object.keys(ITEM_TYPE);
-
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      let itemAdded = false;
-      if (specificItems.includes(item)) {
-        this.player.board.forEach((pokemon, key) => {
-          if (pokemon.types.includes(ITEM_TYPE[item])) {
-            pokemon.items.add(item);
-            itemAdded = true;
-          }
-        });
-      }
-      if (!itemAdded) {
-        const pokemonIds = Array.from(this.player.board);
-        const pokemon = this.player.board.get(pokemonIds[Math.floor(Math.random() * pokemonIds.length)][0]);
-        pokemon.items.add(item);
-      }
-    }
     this.player.synergies.update(this.player.board);
     this.player.effects.update(this.player.synergies);
   }

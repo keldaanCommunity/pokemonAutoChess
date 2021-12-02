@@ -54,7 +54,8 @@ const itemImgStyle={
     position:'relative',
     bottom:'20px',
     borderRadius:'10px',
-    border:'1px solid black'
+    border:'1px solid white',
+    backgroundColor:'white'
 }
 
 class TeamEditor extends Component{
@@ -96,7 +97,7 @@ class TeamEditor extends Component{
                     <p>Each step represents the state of your bot at a moment in the game</p>
                     <p>The bot will start with the team defined on step 1. Then, it will go to step 2 and so on</p>
                     <p>The team of the step 2 should always be stronger than the step 1 team</p>
-                    <p>As the player cannot get more than 10 pokemons, your bot is not allowed too.</p>
+                    <p>As the player cannot get more than 10 pokemons/step, your bot is not allowed too.</p>
                 </ReactTooltip>
                 
                 {this.props.steps.map((step,i)=>{
