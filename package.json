@@ -27,7 +27,7 @@
     "dev": "npm-run-all --parallel dev-*",
     "lint": "npx eslint app/",
     "build": "webpack --mode production",
-    "start": "node ./app/index.js NODE_OPTIONS=--openssl-legacy-provider"
+    "start": "node ./app/index.js"
   },
   "dependencies": {
     "@colyseus/command": "^0.1.5",
