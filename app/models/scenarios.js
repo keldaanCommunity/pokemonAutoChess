@@ -788,7 +788,7 @@ const SCENARIOS ={
   },
   "FIRE1": {
     "id": "FIRE1",
-    "author":"Keldaan",
+    "author": "Keldaan",
     "avatar": "charmander",
     "steps": [
       {
@@ -911,7 +911,10 @@ const SCENARIOS ={
           {
             "name": "quilava",
             "x": 4,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charmeleon",
@@ -941,7 +944,10 @@ const SCENARIOS ={
           {
             "name": "quilava",
             "x": 4,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charmeleon",
@@ -971,7 +977,10 @@ const SCENARIOS ={
           {
             "name": "quilava",
             "x": 2,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charmeleon",
@@ -1006,7 +1015,10 @@ const SCENARIOS ={
           {
             "name": "quilava",
             "x": 2,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charmeleon",
@@ -1041,7 +1053,10 @@ const SCENARIOS ={
           {
             "name": "quilava",
             "x": 2,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charmeleon",
@@ -1081,7 +1096,10 @@ const SCENARIOS ={
           {
             "name": "quilava",
             "x": 2,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charmeleon",
@@ -1091,7 +1109,10 @@ const SCENARIOS ={
           {
             "name": "infernape",
             "x": 1,
-            "y": 3
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "blaziken",
@@ -1121,7 +1142,10 @@ const SCENARIOS ={
           {
             "name": "quilava",
             "x": 2,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charmeleon",
@@ -1131,7 +1155,10 @@ const SCENARIOS ={
           {
             "name": "infernape",
             "x": 1,
-            "y": 3
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "blaziken",
@@ -1166,7 +1193,10 @@ const SCENARIOS ={
           {
             "name": "quilava",
             "x": 1,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charmeleon",
@@ -1176,7 +1206,10 @@ const SCENARIOS ={
           {
             "name": "infernape",
             "x": 1,
-            "y": 3
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "blaziken",
@@ -1216,7 +1249,10 @@ const SCENARIOS ={
           {
             "name": "quilava",
             "x": 1,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charizard",
@@ -1226,7 +1262,10 @@ const SCENARIOS ={
           {
             "name": "infernape",
             "x": 1,
-            "y": 3
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "blaziken",
@@ -1266,7 +1305,10 @@ const SCENARIOS ={
           {
             "name": "quilava",
             "x": 1,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charizard",
@@ -1276,7 +1318,10 @@ const SCENARIOS ={
           {
             "name": "infernape",
             "x": 1,
-            "y": 3
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "blaziken",
@@ -1301,7 +1346,10 @@ const SCENARIOS ={
           {
             "name": "camerupt",
             "x": 5,
-            "y": 3
+            "y": 3,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "riolu",
@@ -1316,7 +1364,10 @@ const SCENARIOS ={
           {
             "name": "quilava",
             "x": 1,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charizard",
@@ -1326,7 +1377,10 @@ const SCENARIOS ={
           {
             "name": "infernape",
             "x": 1,
-            "y": 3
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "blaziken",
@@ -1351,7 +1405,10 @@ const SCENARIOS ={
           {
             "name": "camerupt",
             "x": 5,
-            "y": 3
+            "y": 3,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "lucario",
@@ -1366,7 +1423,10 @@ const SCENARIOS ={
           {
             "name": "typlosion",
             "x": 1,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charizard",
@@ -1376,7 +1436,10 @@ const SCENARIOS ={
           {
             "name": "infernape",
             "x": 1,
-            "y": 3
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "blaziken",
@@ -1401,7 +1464,10 @@ const SCENARIOS ={
           {
             "name": "camerupt",
             "x": 5,
-            "y": 3
+            "y": 3,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "lucario",
@@ -1416,7 +1482,10 @@ const SCENARIOS ={
           {
             "name": "typlosion",
             "x": 1,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charizard",
@@ -1426,7 +1495,10 @@ const SCENARIOS ={
           {
             "name": "infernape",
             "x": 1,
-            "y": 3
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "blaziken",
@@ -1451,7 +1523,10 @@ const SCENARIOS ={
           {
             "name": "camerupt",
             "x": 5,
-            "y": 3
+            "y": 3,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "lucario",
@@ -1466,7 +1541,10 @@ const SCENARIOS ={
           {
             "name": "typlosion",
             "x": 1,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charizard",
@@ -1476,7 +1554,10 @@ const SCENARIOS ={
           {
             "name": "infernape",
             "x": 1,
-            "y": 3
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "blaziken",
@@ -1501,7 +1582,10 @@ const SCENARIOS ={
           {
             "name": "camerupt",
             "x": 5,
-            "y": 3
+            "y": 3,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "lucario",
@@ -1516,7 +1600,10 @@ const SCENARIOS ={
           {
             "name": "typlosion",
             "x": 1,
-            "y": 1
+            "y": 1,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "charizard",
@@ -1526,7 +1613,10 @@ const SCENARIOS ={
           {
             "name": "infernape",
             "x": 1,
-            "y": 3
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "blaziken",
@@ -1551,7 +1641,10 @@ const SCENARIOS ={
           {
             "name": "mega-camerupt",
             "x": 5,
-            "y": 3
+            "y": 3,
+            "items": [
+              "FIRE_STONE"
+            ]
           },
           {
             "name": "lucario",
@@ -3866,7 +3959,7 @@ const SCENARIOS ={
   },
   "GRASS1": {
     "id": "GRASS1",
-    "author":"Keldaan",
+    "author": "Keldaan",
     "avatar": "bulbasaur",
     "steps": [
       {
@@ -3907,15 +4000,30 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "skiploom",
+            "name": "caterpie",
             "x": 4,
-            "y": 1
+            "y": 2
+          },
+          {
+            "name": "bulbasaur",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "hoppip",
+            "x": 2,
+            "y": 2
           },
           {
             "name": "seedot",
-            "x": 4,
+            "x": 3,
             "y": 3
-          },
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
           {
             "name": "caterpie",
             "x": 4,
@@ -3923,8 +4031,18 @@ const SCENARIOS ={
           },
           {
             "name": "bulbasaur",
-            "x": 5,
-            "y": 1
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "skiploom",
+            "x": 2,
+            "y": 2
+          },
+          {
+            "name": "nuzleaf",
+            "x": 3,
+            "y": 3
           }
         ],
         "roundsRequired": 3
@@ -3932,70 +4050,35 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "skiploom",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
-          {
             "name": "metapod",
             "x": 4,
             "y": 2
           },
           {
             "name": "bulbasaur",
-            "x": 5,
-            "y": 1
-          }
-        ],
-        "roundsRequired": 2
-      },
-      {
-        "board": [
-          {
-            "name": "skiploom",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "metapod",
-            "x": 4,
+            "x": 3,
             "y": 2
           },
           {
-            "name": "bulbasaur",
-            "x": 5,
-            "y": 1
+            "name": "skiploom",
+            "x": 2,
+            "y": 2
+          },
+          {
+            "name": "nuzleaf",
+            "x": 3,
+            "y": 3
           },
           {
             "name": "treecko",
-            "x": 3,
+            "x": 2,
             "y": 3
           }
         ],
-        "roundsRequired": 2
+        "roundsRequired": 3
       },
       {
         "board": [
-          {
-            "name": "skiploom",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
           {
             "name": "metapod",
             "x": 4,
@@ -4003,78 +4086,97 @@ const SCENARIOS ={
           },
           {
             "name": "ivysaur",
-            "x": 5,
-            "y": 1
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "skiploom",
+            "x": 2,
+            "y": 2
+          },
+          {
+            "name": "nuzleaf",
+            "x": 3,
+            "y": 3
           },
           {
             "name": "treecko",
-            "x": 3,
+            "x": 2,
             "y": 3
           }
         ],
-        "roundsRequired": 2
+        "roundsRequired": 3
       },
       {
         "board": [
           {
-            "name": "skiploom",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "metapod",
+            "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
             "name": "ivysaur",
-            "x": 5,
-            "y": 1
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "skiploom",
+            "x": 2,
+            "y": 2
+          },
+          {
+            "name": "nuzleaf",
+            "x": 3,
+            "y": 3
           },
           {
             "name": "grovyle",
-            "x": 3,
+            "x": 2,
             "y": 3
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 3
       },
       {
         "board": [
           {
-            "name": "skiploom",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "metapod",
+            "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
             "name": "ivysaur",
-            "x": 5,
-            "y": 1
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "skiploom",
+            "x": 2,
+            "y": 2
+          },
+          {
+            "name": "nuzleaf",
+            "x": 3,
+            "y": 3
           },
           {
             "name": "grovyle",
-            "x": 3,
+            "x": 2,
             "y": 3
           },
           {
             "name": "chikorita",
-            "x": 1,
-            "y": 1
+            "x": 4,
+            "y": 3
           }
         ],
         "roundsRequired": 3
@@ -4082,213 +4184,255 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "skiploom",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "metapod",
+            "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
             "name": "ivysaur",
-            "x": 5,
-            "y": 1
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
-            "name": "grovyle",
+            "name": "skiploom",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
+          },
+          {
+            "name": "nuzleaf",
             "x": 3,
             "y": 3
           },
           {
+            "name": "grovyle",
+            "x": 2,
+            "y": 3
+          },
+          {
             "name": "bayleef",
-            "x": 1,
-            "y": 1
+            "x": 4,
+            "y": 3
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 3
       },
       {
         "board": [
           {
-            "name": "skiploom",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "metapod",
+            "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
             "name": "ivysaur",
-            "x": 5,
-            "y": 1
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
-            "name": "grovyle",
+            "name": "skiploom",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
+          },
+          {
+            "name": "nuzleaf",
             "x": 3,
             "y": 3
           },
           {
+            "name": "grovyle",
+            "x": 2,
+            "y": 3
+          },
+          {
             "name": "bayleef",
-            "x": 1,
-            "y": 1
+            "x": 4,
+            "y": 3
           },
           {
             "name": "leafeon",
-            "x": 2,
-            "y": 3
+            "x": 1,
+            "y": 3,
+            "items": [
+              "LEAF_STONE"
+            ]
           }
         ],
-        "roundsRequired": 4
+        "roundsRequired": 3
       },
       {
         "board": [
           {
-            "name": "skiploom",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "metapod",
+            "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
             "name": "ivysaur",
-            "x": 5,
-            "y": 1
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
-            "name": "grovyle",
+            "name": "skiploom",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
+          },
+          {
+            "name": "nuzleaf",
             "x": 3,
             "y": 3
           },
           {
+            "name": "sceptile",
+            "x": 2,
+            "y": 3
+          },
+          {
             "name": "bayleef",
-            "x": 1,
-            "y": 1
+            "x": 4,
+            "y": 3
           },
           {
             "name": "leafeon",
-            "x": 2,
-            "y": 3
+            "x": 1,
+            "y": 3,
+            "items": [
+              "LEAF_STONE"
+            ]
           },
           {
             "name": "turtwig",
-            "x": 3,
-            "y": 2
+            "x": 5,
+            "y": 3
           }
         ],
-        "roundsRequired": 4
+        "roundsRequired": 3
       },
       {
         "board": [
           {
-            "name": "skiploom",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "metapod",
+            "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
             "name": "ivysaur",
-            "x": 5,
-            "y": 1
-          },
-          {
-            "name": "grovyle",
             "x": 3,
-            "y": 3
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
-            "name": "bayleef",
-            "x": 1,
-            "y": 1
+            "name": "skiploom",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
           },
           {
-            "name": "leafeon",
+            "name": "sceptile",
             "x": 2,
             "y": 3
           },
           {
-            "name": "grotle",
-            "x": 3,
-            "y": 2
-          }
-        ],
-        "roundsRequired": 5
-      },
-      {
-        "board": [
-          {
-            "name": "skiploom",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
+            "name": "bayleef",
             "x": 4,
             "y": 3
           },
           {
-            "name": "metapod",
+            "name": "leafeon",
+            "x": 1,
+            "y": 3,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "grotle",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "virizion",
+            "x": 3,
+            "y": 3
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
             "name": "ivysaur",
-            "x": 5,
-            "y": 1
-          },
-          {
-            "name": "grovyle",
             "x": 3,
-            "y": 3
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
-            "name": "bayleef",
-            "x": 1,
-            "y": 1
+            "name": "skiploom",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
           },
           {
-            "name": "leafeon",
+            "name": "sceptile",
             "x": 2,
             "y": 3
           },
           {
+            "name": "bayleef",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 1,
+            "y": 3,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
             "name": "grotle",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "virizion",
             "x": 3,
-            "y": 2
+            "y": 3
           },
           {
             "name": "lotad",
-            "x": 0,
+            "x": 5,
             "y": 2
           }
         ],
@@ -4296,166 +4440,6 @@ const SCENARIOS ={
       },
       {
         "board": [
-          {
-            "name": "skiploom",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "metapod",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "ivysaur",
-            "x": 5,
-            "y": 1
-          },
-          {
-            "name": "grovyle",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "bayleef",
-            "x": 1,
-            "y": 1
-          },
-          {
-            "name": "leafeon",
-            "x": 2,
-            "y": 3
-          },
-          {
-            "name": "grotle",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "lombre",
-            "x": 0,
-            "y": 2
-          }
-        ],
-        "roundsRequired": 5
-      },
-      {
-        "board": [
-          {
-            "name": "jumpluff",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "metapod",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "ivysaur",
-            "x": 5,
-            "y": 1
-          },
-          {
-            "name": "grovyle",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "bayleef",
-            "x": 1,
-            "y": 1
-          },
-          {
-            "name": "leafeon",
-            "x": 2,
-            "y": 3
-          },
-          {
-            "name": "grotle",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "lombre",
-            "x": 0,
-            "y": 2
-          }
-        ],
-        "roundsRequired": 2
-      },
-      {
-        "board": [
-          {
-            "name": "jumpluff",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "shiftry",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "metapod",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "ivysaur",
-            "x": 5,
-            "y": 1
-          },
-          {
-            "name": "grovyle",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "bayleef",
-            "x": 1,
-            "y": 1
-          },
-          {
-            "name": "leafeon",
-            "x": 2,
-            "y": 3
-          },
-          {
-            "name": "grotle",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "ludicolo",
-            "x": 0,
-            "y": 2
-          }
-        ],
-        "roundsRequired": 3
-      },
-      {
-        "board": [
-          {
-            "name": "jumpluff",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "shiftry",
-            "x": 4,
-            "y": 3
-          },
           {
             "name": "butterfree",
             "x": 4,
@@ -4463,132 +4447,51 @@ const SCENARIOS ={
           },
           {
             "name": "ivysaur",
-            "x": 5,
-            "y": 1
-          },
-          {
-            "name": "grovyle",
             "x": 3,
-            "y": 3
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
-          {
-            "name": "bayleef",
-            "x": 1,
-            "y": 1
-          },
-          {
-            "name": "leafeon",
-            "x": 2,
-            "y": 3
-          },
-          {
-            "name": "grotle",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "ludicolo",
-            "x": 0,
-            "y": 2
-          }
-        ],
-        "roundsRequired": 3
-      },
-      {
-        "board": [
           {
             "name": "jumpluff",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "shiftry",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "butterfree",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "venusaur",
-            "x": 5,
-            "y": 1
-          },
-          {
-            "name": "grovyle",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "bayleef",
-            "x": 1,
-            "y": 1
-          },
-          {
-            "name": "leafeon",
             "x": 2,
-            "y": 3
-          },
-          {
-            "name": "grotle",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "ludicolo",
-            "x": 0,
-            "y": 2
-          }
-        ],
-        "roundsRequired": 3
-      },
-      {
-        "board": [
-          {
-            "name": "jumpluff",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "shiftry",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "butterfree",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "venusaur",
-            "x": 5,
-            "y": 1
-          },
-          {
-            "name": "meganium",
-            "x": 3,
-            "y": 3
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
           },
           {
             "name": "sceptile",
-            "x": 1,
-            "y": 1
-          },
-          {
-            "name": "leafeon",
             "x": 2,
             "y": 3
           },
           {
-            "name": "grotle",
-            "x": 3,
-            "y": 2
+            "name": "bayleef",
+            "x": 4,
+            "y": 3
           },
           {
-            "name": "ludicolo",
-            "x": 0,
+            "name": "leafeon",
+            "x": 1,
+            "y": 3,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "grotle",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "virizion",
+            "x": 3,
+            "y": 3
+          },
+          {
+            "name": "lombre",
+            "x": 5,
             "y": 2
           }
         ],
@@ -4597,15 +4500,195 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "jumpluff",
+            "name": "butterfree",
             "x": 4,
-            "y": 1
+            "y": 2
           },
           {
-            "name": "shiftry",
+            "name": "ivysaur",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "jumpluff",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
+          },
+          {
+            "name": "sceptile",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "meganium",
             "x": 4,
             "y": 3
           },
+          {
+            "name": "leafeon",
+            "x": 1,
+            "y": 3,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "grotle",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "virizion",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "lombre",
+            "x": 5,
+            "y": 2
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "butterfree",
+            "x": 4,
+            "y": 2
+          },
+          {
+            "name": "ivysaur",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "jumpluff",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
+          },
+          {
+            "name": "sceptile",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "meganium",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 1,
+            "y": 3,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "grotle",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "virizion",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "ludicolo",
+            "x": 5,
+            "y": 2
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "butterfree",
+            "x": 4,
+            "y": 2
+          },
+          {
+            "name": "ivysaur",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "jumpluff",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
+          },
+          {
+            "name": "sceptile",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "meganium",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 1,
+            "y": 3,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "grotle",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "virizion",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "ludicolo",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "WATER_STONE",
+              "LEAF_STONE"
+            ]
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
           {
             "name": "butterfree",
             "x": 4,
@@ -4613,33 +4696,194 @@ const SCENARIOS ={
           },
           {
             "name": "venusaur",
-            "x": 5,
-            "y": 1
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB",
+              "BIG_ROOT"
+            ]
           },
           {
-            "name": "meganium",
-            "x": 3,
-            "y": 3
+            "name": "jumpluff",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
           },
           {
             "name": "sceptile",
-            "x": 1,
-            "y": 1
-          },
-          {
-            "name": "leafeon",
             "x": 2,
             "y": 3
           },
           {
-            "name": "torterra",
+            "name": "meganium",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 1,
+            "y": 3,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "grotle",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "virizion",
             "x": 3,
-            "y": 2
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "ludicolo",
-            "x": 0,
+            "x": 5,
+            "y": 2,
+            "items": [
+              "WATER_STONE",
+              "LEAF_STONE"
+            ]
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "butterfree",
+            "x": 4,
             "y": 2
+          },
+          {
+            "name": "venusaur",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB",
+              "BIG_ROOT"
+            ]
+          },
+          {
+            "name": "jumpluff",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
+          },
+          {
+            "name": "sceptile",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "meganium",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 1,
+            "y": 3,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "grotle",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "virizion",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "ludicolo",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "WATER_STONE",
+              "LEAF_STONE"
+            ]
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "butterfree",
+            "x": 4,
+            "y": 2
+          },
+          {
+            "name": "venusaur",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB",
+              "BIG_ROOT"
+            ]
+          },
+          {
+            "name": "jumpluff",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "BIG_ROOT"
+            ]
+          },
+          {
+            "name": "sceptile",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "meganium",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 1,
+            "y": 3,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "grotle",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "virizion",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "ludicolo",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "WATER_STONE",
+              "LEAF_STONE"
+            ]
           }
         ],
         "roundsRequired": 3
@@ -8908,7 +9152,7 @@ const SCENARIOS ={
   },
   "DARK": {
     "id": "DARK",
-    "author":"Keldaan",
+    "author": "Keldaan",
     "avatar": "darkrai",
     "steps": [
       {
@@ -8949,17 +9193,12 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "metapod",
-            "x": 5,
-            "y": 1
-          },
-          {
-            "name": "kakuna",
+            "name": "golbat",
             "x": 4,
             "y": 2
           },
           {
-            "name": "golbat",
+            "name": "kakuna",
             "x": 4,
             "y": 3
           },
@@ -8967,29 +9206,34 @@ const SCENARIOS ={
             "name": "nuzleaf",
             "x": 5,
             "y": 3
+          },
+          {
+            "name": "metapod",
+            "x": 5,
+            "y": 2
           }
         ],
         "roundsRequired": 3
       },
       {
         "board": [
-          {
-            "name": "kakuna",
-            "x": 4,
-            "y": 1
-          },
           {
             "name": "metapod",
             "x": 4,
             "y": 2
           },
           {
-            "name": "golbat",
-            "x": 4,
+            "name": "kakuna",
+            "x": 3,
             "y": 3
           },
           {
             "name": "nuzleaf",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "golbat",
             "x": 3,
             "y": 2
           }
@@ -8998,30 +9242,34 @@ const SCENARIOS ={
       },
       {
         "board": [
-          {
-            "name": "kakuna",
-            "x": 4,
-            "y": 1
-          },
           {
             "name": "metapod",
             "x": 4,
             "y": 2
           },
           {
-            "name": "golbat",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "nuzleaf",
+            "name": "duskull",
             "x": 3,
             "y": 2
           },
           {
-            "name": "duskull",
+            "name": "umbreon",
             "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "NIGHT_STONE"
+            ]
+          },
+          {
+            "name": "nuzleaf",
+            "x": 4,
             "y": 3
+          },
+          {
+            "name": "golbat",
+            "x": 2,
+            "y": 2
           }
         ],
         "roundsRequired": 3
@@ -9029,34 +9277,33 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "kakuna",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "metapod",
-            "x": 4,
+            "name": "duskull",
+            "x": 3,
             "y": 2
           },
           {
-            "name": "golbat",
-            "x": 4,
-            "y": 3
+            "name": "umbreon",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "NIGHT_STONE"
+            ]
           },
           {
             "name": "nuzleaf",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "duskull",
-            "x": 3,
+            "x": 4,
             "y": 3
           },
           {
+            "name": "golbat",
+            "x": 2,
+            "y": 2
+          },
+          {
             "name": "spiritomb",
-            "x": 3,
-            "y": 1
+            "x": 4,
+            "y": 2
           }
         ],
         "roundsRequired": 3
@@ -9064,379 +9311,41 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "larvitar",
-            "x": 4,
+            "name": "duskull",
+            "x": 3,
             "y": 2
           },
           {
-            "name": "crobat",
-            "x": 4,
-            "y": 3
+            "name": "umbreon",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "NIGHT_STONE"
+            ]
           },
           {
             "name": "nuzleaf",
-            "x": 3,
-            "y": 2
+            "x": 4,
+            "y": 3
           },
           {
-            "name": "duskull",
-            "x": 3,
-            "y": 3
+            "name": "golbat",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
             "name": "spiritomb",
-            "x": 3,
-            "y": 1
-          }
-        ],
-        "roundsRequired": 2
-      },
-      {
-        "board": [
-          {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "pupitar",
             "x": 4,
             "y": 2
-          },
-          {
-            "name": "crobat",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "shiftry",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "dusclops",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "spiritomb",
-            "x": 3,
-            "y": 1
           },
           {
             "name": "gastly",
-            "x": 0,
-            "y": 3
-          }
-        ],
-        "roundsRequired": 4
-      },
-      {
-        "board": [
-          {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "pupitar",
-            "x": 4,
+            "x": 5,
             "y": 2
-          },
-          {
-            "name": "crobat",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "shiftry",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "dusclops",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "spiritomb",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "haunter",
-            "x": 0,
-            "y": 3
-          }
-        ],
-        "roundsRequired": 2
-      },
-      {
-        "board": [
-          {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "pupitar",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "crobat",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "shiftry",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "dusknoir",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "spiritomb",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "haunter",
-            "x": 0,
-            "y": 3
-          }
-        ],
-        "roundsRequired": 5
-      },
-      {
-        "board": [
-          {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "pupitar",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "crobat",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "shiftry",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "dusknoir",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "spiritomb",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "haunter",
-            "x": 0,
-            "y": 3
-          },
-          {
-            "name": "aron",
-            "x": 1,
-            "y": 1
-          }
-        ],
-        "roundsRequired": 5
-      },
-      {
-        "board": [
-          {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "pupitar",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "crobat",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "shiftry",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "dusknoir",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "spiritomb",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "haunter",
-            "x": 0,
-            "y": 3
-          },
-          {
-            "name": "lairon",
-            "x": 1,
-            "y": 1
-          }
-        ],
-        "roundsRequired": 6
-      },
-      {
-        "board": [
-          {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "pupitar",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "crobat",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "shiftry",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "dusknoir",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "spiritomb",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "gengar",
-            "x": 0,
-            "y": 3
-          },
-          {
-            "name": "lairon",
-            "x": 1,
-            "y": 1
-          }
-        ],
-        "roundsRequired": 4
-      },
-      {
-        "board": [
-          {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "tyranitar",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "crobat",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "shiftry",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "dusknoir",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "spiritomb",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "gengar",
-            "x": 0,
-            "y": 3
-          },
-          {
-            "name": "lairon",
-            "x": 1,
-            "y": 1
-          }
-        ],
-        "roundsRequired": 5
-      },
-      {
-        "board": [
-          {
-            "name": "darkrai",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "tyranitar",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "crobat",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "shiftry",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "dusknoir",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "spiritomb",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "gengar",
-            "x": 0,
-            "y": 3
-          },
-          {
-            "name": "lairon",
-            "x": 1,
-            "y": 1
           }
         ],
         "roundsRequired": 3
@@ -9444,252 +9353,769 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "darkrai",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "tyranitar",
-            "x": 4,
+            "name": "dusclops",
+            "x": 3,
             "y": 2
           },
           {
-            "name": "crobat",
+            "name": "umbreon",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "NIGHT_STONE"
+            ]
+          },
+          {
+            "name": "shiftry",
             "x": 4,
             "y": 3
           },
           {
-            "name": "shiftry",
+            "name": "golbat",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "spiritomb",
+            "x": 4,
+            "y": 2
+          },
+          {
+            "name": "gastly",
+            "x": 5,
+            "y": 2
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "dusclops",
             "x": 3,
             "y": 2
           },
           {
-            "name": "dusknoir",
+            "name": "umbreon",
             "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "NIGHT_STONE"
+            ]
+          },
+          {
+            "name": "shiftry",
+            "x": 4,
             "y": 3
           },
           {
             "name": "spiritomb",
-            "x": 3,
-            "y": 1
+            "x": 4,
+            "y": 2
           },
           {
-            "name": "gengar",
-            "x": 0,
+            "name": "larvitar",
+            "x": 2,
             "y": 3
+          },
+          {
+            "name": "haunter",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "dusclops",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "umbreon",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "NIGHT_STONE"
+            ]
+          },
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "spiritomb",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "pupitar",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "haunter",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "dusknoir",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "umbreon",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "NIGHT_STONE"
+            ]
+          },
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "spiritomb",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "pupitar",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "haunter",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "aron",
+            "x": 5,
+            "y": 3
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "dusknoir",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "umbreon",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "NIGHT_STONE"
+            ]
+          },
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "spiritomb",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "pupitar",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "haunter",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
             "name": "lairon",
-            "x": 1,
-            "y": 1
+            "x": 5,
+            "y": 3
           },
           {
-            "name": "metang",
+            "name": "onix",
             "x": 2,
             "y": 2
           }
         ],
-        "roundsRequired": 4
+        "roundsRequired": 3
       },
       {
         "board": [
           {
-            "name": "darkrai",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "tyranitar",
-            "x": 4,
+            "name": "dusknoir",
+            "x": 3,
             "y": 2
           },
           {
-            "name": "kirlia",
-            "x": 4,
-            "y": 3
+            "name": "umbreon",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "NIGHT_STONE"
+            ]
           },
           {
             "name": "shiftry",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "dusknoir",
-            "x": 3,
+            "x": 4,
             "y": 3
           },
           {
             "name": "spiritomb",
-            "x": 3,
-            "y": 1
+            "x": 4,
+            "y": 2,
+            "items": [
+              "WHITE_GLASSES"
+            ]
           },
           {
-            "name": "gengar",
-            "x": 0,
-            "y": 3
+            "name": "haunter",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
             "name": "lairon",
-            "x": 1,
-            "y": 1
+            "x": 5,
+            "y": 3
           },
           {
-            "name": "metang",
+            "name": "onix",
             "x": 2,
-            "y": 2
+            "y": 2,
+            "items": [
+              "ROCKY_HELMET"
+            ]
+          },
+          {
+            "name": "tyranitar",
+            "x": 2,
+            "y": 3
           }
         ],
-        "roundsRequired": 4
+        "roundsRequired": 3
       },
       {
         "board": [
           {
-            "name": "darkrai",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "tyranitar",
-            "x": 4,
+            "name": "dusknoir",
+            "x": 3,
             "y": 2
-          },
-          {
-            "name": "kirlia",
-            "x": 4,
-            "y": 3
           },
           {
             "name": "shiftry",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "dusknoir",
-            "x": 3,
+            "x": 4,
             "y": 3
           },
           {
             "name": "spiritomb",
-            "x": 3,
-            "y": 1
+            "x": 4,
+            "y": 2,
+            "items": [
+              "WHITE_GLASSES"
+            ]
           },
           {
             "name": "gengar",
-            "x": 0,
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "lairon",
+            "x": 5,
             "y": 3
           },
           {
-            "name": "aggron",
-            "x": 1,
-            "y": 1
+            "name": "onix",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ROCKY_HELMET"
+            ]
+          },
+          {
+            "name": "tyranitar",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "darkrai",
+            "x": 4,
+            "y": 1,
+            "items": [
+              "NIGHT_STONE",
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "beldum",
+            "x": 3,
+            "y": 3
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "dusknoir",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "spiritomb",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "gengar",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "lairon",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "onix",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ROCKY_HELMET"
+            ]
+          },
+          {
+            "name": "tyranitar",
+            "x": 2,
+            "y": 3,
+            "items": [
+              "SOFT_SAND"
+            ]
+          },
+          {
+            "name": "darkrai",
+            "x": 4,
+            "y": 1,
+            "items": [
+              "NIGHT_STONE",
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "metang",
-            "x": 2,
-            "y": 2
+            "x": 3,
+            "y": 3
           }
         ],
-        "roundsRequired": 4
+        "roundsRequired": 3
       },
       {
         "board": [
           {
-            "name": "darkrai",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "tyranitar",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "gardevoir",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "steelix",
-            "x": 3,
-            "y": 2
-          },
-          {
             "name": "dusknoir",
             "x": 3,
+            "y": 2
+          },
+          {
+            "name": "shiftry",
+            "x": 4,
             "y": 3
           },
           {
             "name": "spiritomb",
-            "x": 3,
-            "y": 1
+            "x": 4,
+            "y": 2,
+            "items": [
+              "WHITE_GLASSES"
+            ]
           },
           {
             "name": "gengar",
-            "x": 0,
-            "y": 3
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
             "name": "aggron",
-            "x": 1,
-            "y": 1
+            "x": 5,
+            "y": 3
           },
           {
-            "name": "metagross",
+            "name": "onix",
             "x": 2,
-            "y": 2
+            "y": 2,
+            "items": [
+              "ROCKY_HELMET"
+            ]
+          },
+          {
+            "name": "tyranitar",
+            "x": 2,
+            "y": 3,
+            "items": [
+              "SOFT_SAND"
+            ]
+          },
+          {
+            "name": "darkrai",
+            "x": 4,
+            "y": 1,
+            "items": [
+              "NIGHT_STONE",
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "metang",
+            "x": 3,
+            "y": 3
           }
         ],
-        "roundsRequired": 4
+        "roundsRequired": 3
       },
       {
         "board": [
           {
-            "name": "darkrai",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "tyranitar",
-            "x": 4,
+            "name": "dusknoir",
+            "x": 3,
             "y": 2
           },
           {
-            "name": "gardevoir",
+            "name": "shiftry",
             "x": 4,
+            "y": 3
+          },
+          {
+            "name": "spiritomb",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "gengar",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "aggron",
+            "x": 5,
             "y": 3
           },
           {
             "name": "mega-steelix",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ROCKY_HELMET"
+            ]
+          },
+          {
+            "name": "tyranitar",
+            "x": 2,
+            "y": 3,
+            "items": [
+              "SOFT_SAND"
+            ]
+          },
+          {
+            "name": "darkrai",
+            "x": 4,
+            "y": 1,
+            "items": [
+              "NIGHT_STONE",
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "metang",
+            "x": 3,
+            "y": 3
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "dusknoir",
             "x": 3,
             "y": 2
           },
           {
-            "name": "dusknoir",
-            "x": 3,
+            "name": "shiftry",
+            "x": 4,
             "y": 3
           },
           {
             "name": "spiritomb",
-            "x": 3,
-            "y": 1
+            "x": 4,
+            "y": 2,
+            "items": [
+              "WHITE_GLASSES"
+            ]
           },
           {
             "name": "gengar",
-            "x": 0,
-            "y": 3
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
             "name": "aggron",
-            "x": 1,
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "mega-steelix",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ROCKY_HELMET"
+            ]
+          },
+          {
+            "name": "tyranitar",
+            "x": 2,
+            "y": 3,
+            "items": [
+              "SOFT_SAND"
+            ]
+          },
+          {
+            "name": "darkrai",
+            "x": 4,
+            "y": 1,
+            "items": [
+              "NIGHT_STONE",
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "metang",
+            "x": 3,
+            "y": 3
+          },
+          {
+            "name": "solosis",
+            "x": 3,
             "y": 1
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "dusknoir",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "spiritomb",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "gengar",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "aggron",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "mega-steelix",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ROCKY_HELMET"
+            ]
+          },
+          {
+            "name": "tyranitar",
+            "x": 2,
+            "y": 3,
+            "items": [
+              "SOFT_SAND"
+            ]
+          },
+          {
+            "name": "darkrai",
+            "x": 4,
+            "y": 1,
+            "items": [
+              "NIGHT_STONE",
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "metagross",
-            "x": 2,
-            "y": 2
+            "x": 3,
+            "y": 3
+          },
+          {
+            "name": "duosion",
+            "x": 3,
+            "y": 1
           }
         ],
-        "roundsRequired": 4
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "dusknoir",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "spiritomb",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "gengar",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "aggron",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "mega-steelix",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ROCKY_HELMET",
+              "BIG_ROOT"
+            ]
+          },
+          {
+            "name": "tyranitar",
+            "x": 2,
+            "y": 3,
+            "items": [
+              "SOFT_SAND"
+            ]
+          },
+          {
+            "name": "darkrai",
+            "x": 4,
+            "y": 1,
+            "items": [
+              "NIGHT_STONE",
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "metagross",
+            "x": 3,
+            "y": 3
+          },
+          {
+            "name": "reuniclus",
+            "x": 3,
+            "y": 1
+          }
+        ],
+        "roundsRequired": 3
       }
     ]
   },
@@ -15059,7 +15485,7 @@ const SCENARIOS ={
   },
   "ICE1": {
     "id": "ICE1",
-    "author":"Nocifer",
+    "author": "Nocifer",
     "avatar": "articuno",
     "steps": [
       {
@@ -15100,48 +15526,23 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "metapod",
+            "name": "bellsprout",
             "x": 5,
-            "y": 1
+            "y": 3
           },
           {
             "name": "kakuna",
             "x": 4,
-            "y": 2
+            "y": 3
           },
           {
             "name": "hoppip",
             "x": 4,
-            "y": 3
+            "y": 2
           },
           {
-            "name": "bellsprout",
+            "name": "metapod",
             "x": 5,
-            "y": 3
-          }
-        ],
-        "roundsRequired": 3
-      },
-      {
-        "board": [
-          {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "butterfree",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "hoppip",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "weepinbell",
-            "x": 3,
             "y": 2
           }
         ],
@@ -15150,29 +15551,57 @@ const SCENARIOS ={
       {
         "board": [
           {
+            "name": "butterfree",
+            "x": 4,
+            "y": 2
+          },
+          {
+            "name": "weepinbell",
+            "x": 3,
+            "y": 3
+          },
+          {
+            "name": "hoppip",
+            "x": 3,
+            "y": 2
+          },
+          {
             "name": "beedrill",
             "x": 4,
-            "y": 1
-          },
+            "y": 3
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
           {
             "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
-            "name": "hoppip",
+            "name": "beedrill",
             "x": 4,
             "y": 3
-          },
-          {
-            "name": "weepinbell",
-            "x": 3,
-            "y": 2
           },
           {
             "name": "bulbasaur",
             "x": 3,
-            "y": 3
+            "y": 2
+          },
+          {
+            "name": "hoppip",
+            "x": 2,
+            "y": 2
+          },
+          {
+            "name": "weepinbell",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           }
         ],
         "roundsRequired": 3
@@ -15180,34 +15609,40 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
             "name": "butterfree",
             "x": 4,
             "y": 2
+          },
+          {
+            "name": "weepinbell",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "skiploom",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "weepinbell",
             "x": 3,
             "y": 2
-          },
-          {
-            "name": "bulbasaur",
-            "x": 3,
-            "y": 3
           },
           {
             "name": "articuno",
-            "x": 3,
-            "y": 1
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK"
+            ]
+          },
+          {
+            "name": "bulbasaur",
+            "x": 1,
+            "y": 2
+          },
+          {
+            "name": "beedrill",
+            "x": 2,
+            "y": 3
           }
         ],
         "roundsRequired": 3
@@ -15215,34 +15650,40 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
             "name": "butterfree",
             "x": 4,
-            "y": 2
-          },
-          {
-            "name": "skiploom",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "weepinbell",
-            "x": 3,
             "y": 2
           },
           {
             "name": "ivysaur",
             "x": 3,
+            "y": 2
+          },
+          {
+            "name": "weepinbell",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "beedrill",
+            "x": 2,
             "y": 3
           },
           {
             "name": "articuno",
-            "x": 3,
-            "y": 1
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK"
+            ]
+          },
+          {
+            "name": "skiploom",
+            "x": 1,
+            "y": 2
           }
         ],
         "roundsRequired": 2
@@ -15250,39 +15691,45 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
             "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
-            "name": "skiploom",
-            "x": 4,
-            "y": 3
-          },
-          {
             "name": "weepinbell",
             "x": 3,
-            "y": 2
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "ivysaur",
             "x": 3,
+            "y": 2
+          },
+          {
+            "name": "beedrill",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "snover",
+            "x": 4,
             "y": 3
           },
           {
             "name": "articuno",
-            "x": 3,
-            "y": 1
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK"
+            ]
           },
           {
-            "name": "snover",
-            "x": 0,
-            "y": 3
+            "name": "skiploom",
+            "x": 1,
+            "y": 2
           }
         ],
         "roundsRequired": 4
@@ -15290,38 +15737,47 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
             "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
-            "name": "jumpluff",
-            "x": 4,
-            "y": 3
-          },
-          {
             "name": "weepinbell",
             "x": 3,
-            "y": 2
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "snover",
+            "x": 4,
+            "y": 3,
+            "items": [
+              "ROCKY_HELMET"
+            ]
           },
           {
             "name": "ivysaur",
             "x": 3,
-            "y": 3
+            "y": 2
+          },
+          {
+            "name": "jumpluff",
+            "x": 1,
+            "y": 2
           },
           {
             "name": "articuno",
-            "x": 3,
-            "y": 1
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK"
+            ]
           },
           {
-            "name": "snover",
-            "x": 0,
+            "name": "beedrill",
+            "x": 2,
             "y": 3
           }
         ],
@@ -15330,38 +15786,107 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "beedrill",
+            "name": "butterfree",
             "x": 4,
-            "y": 1
+            "y": 2
           },
+          {
+            "name": "beedrill",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "victreebel",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "snover",
+            "x": 4,
+            "y": 3,
+            "items": [
+              "ROCKY_HELMET"
+            ]
+          },
+          {
+            "name": "ivysaur",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "articuno",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "ICY_ROCK"
+            ]
+          },
+          {
+            "name": "jumpluff",
+            "x": 1,
+            "y": 2
+          }
+        ],
+        "roundsRequired": 5
+      },
+      {
+        "board": [
           {
             "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
-            "name": "jumpluff",
+            "name": "snover",
             "x": 4,
-            "y": 3
+            "y": 3,
+            "items": [
+              "ROCKY_HELMET"
+            ]
           },
           {
-            "name": "weepinbell",
-            "x": 3,
+            "name": "jumpluff",
+            "x": 1,
             "y": 2
           },
           {
-            "name": "venusaur",
-            "x": 3,
-            "y": 3
+            "name": "ivysaur",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "victreebel",
+            "x": 2,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "articuno",
             "x": 3,
-            "y": 1
+            "y": 2,
+            "items": [
+              "ICY_ROCK"
+            ]
           },
           {
-            "name": "snover",
-            "x": 0,
+            "name": "chikorita",
+            "x": 1,
+            "y": 3
+          },
+          {
+            "name": "beedrill",
+            "x": 3,
             "y": 3
           }
         ],
@@ -15370,84 +15895,57 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
             "name": "butterfree",
             "x": 4,
             "y": 2
-          },
-          {
-            "name": "jumpluff",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "victreebel",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "venusaur",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "articuno",
-            "x": 3,
-            "y": 1
           },
           {
             "name": "snover",
-            "x": 0,
-            "y": 3
-          }
-        ],
-        "roundsRequired": 5
-      },
-      {
-        "board": [
-          {
-            "name": "beedrill",
             "x": 4,
-            "y": 1
-          },
-          {
-            "name": "butterfree",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "jumpluff",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "victreebel",
-            "x": 3,
-            "y": 2
+            "y": 3,
+            "items": [
+              "ROCKY_HELMET"
+            ]
           },
           {
             "name": "venusaur",
             "x": 3,
-            "y": 3
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
-            "name": "articuno",
+            "name": "beedrill",
             "x": 3,
-            "y": 1
-          },
-          {
-            "name": "abomasnow",
-            "x": 0,
             "y": 3
           },
           {
             "name": "bayleef",
             "x": 1,
-            "y": 1
+            "y": 3
+          },
+          {
+            "name": "victreebel",
+            "x": 2,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "jumpluff",
+            "x": 1,
+            "y": 2
+          },
+          {
+            "name": "articuno",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK",
+              "WHITE_GLASSES"
+            ]
           }
         ],
         "roundsRequired": 6
@@ -15455,44 +15953,57 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
             "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
-            "name": "jumpluff",
+            "name": "abomasnow",
             "x": 4,
-            "y": 3
+            "y": 3,
+            "items": [
+              "ROCKY_HELMET"
+            ]
+          },
+          {
+            "name": "articuno",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK",
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "jumpluff",
+            "x": 1,
+            "y": 2
           },
           {
             "name": "victreebel",
-            "x": 3,
-            "y": 2
+            "x": 2,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "venusaur",
             "x": 3,
-            "y": 3
-          },
-          {
-            "name": "articuno",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "abomasnow",
-            "x": 0,
-            "y": 3
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
             "name": "bayleef",
             "x": 1,
-            "y": 1
+            "y": 3
+          },
+          {
+            "name": "beedrill",
+            "x": 3,
+            "y": 3
           }
         ],
         "roundsRequired": 4
@@ -15500,44 +16011,57 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
             "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
-            "name": "jumpluff",
+            "name": "abomasnow",
             "x": 4,
-            "y": 3
+            "y": 3,
+            "items": [
+              "ROCKY_HELMET"
+            ]
           },
           {
             "name": "victreebel",
             "x": 3,
-            "y": 2
-          },
-          {
-            "name": "venusaur",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "articuno",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "abomasnow",
-            "x": 0,
-            "y": 3
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "meganium",
             "x": 1,
-            "y": 1
+            "y": 3
+          },
+          {
+            "name": "beedrill",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "articuno",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK",
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "venusaur",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "jumpluff",
+            "x": 1,
+            "y": 2
           }
         ],
         "roundsRequired": 5
@@ -15545,44 +16069,65 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
             "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
-            "name": "jumpluff",
+            "name": "abomasnow",
             "x": 4,
-            "y": 3
+            "y": 3,
+            "items": [
+              "ROCKY_HELMET"
+            ]
           },
           {
             "name": "victreebel",
             "x": 3,
-            "y": 2
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "venusaur",
             "x": 3,
-            "y": 3
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
             "name": "articuno",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "abomasnow",
-            "x": 0,
-            "y": 3
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK",
+              "WHITE_GLASSES"
+            ]
           },
           {
             "name": "suicune",
             "x": 1,
-            "y": 1
+            "y": 3,
+            "items": [
+              "ICY_ROCK"
+            ]
+          },
+          {
+            "name": "snorunt",
+            "x": 5,
+            "y": 3
+          },
+          {
+            "name": "jumpluff",
+            "x": 1,
+            "y": 2
+          },
+          {
+            "name": "beedrill",
+            "x": 2,
+            "y": 3
           }
         ],
         "roundsRequired": 3
@@ -15590,202 +16135,270 @@ const SCENARIOS ={
       {
         "board": [
           {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
             "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
-            "name": "jumpluff",
-            "x": 4,
-            "y": 3
-          },
-          {
             "name": "victreebel",
             "x": 3,
-            "y": 2
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "venusaur",
             "x": 3,
-            "y": 3
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
             "name": "articuno",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "abomasnow",
-            "x": 0,
-            "y": 3
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK",
+              "WHITE_GLASSES"
+            ]
           },
           {
             "name": "suicune",
             "x": 1,
-            "y": 1
+            "y": 3,
+            "items": [
+              "ICY_ROCK"
+            ]
           },
           {
             "name": "snorunt",
-            "x": 2,
-            "y": 2
-          }
-        ],
-        "roundsRequired": 4
-      },
-      {
-        "board": [
-          {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "butterfree",
-            "x": 4,
-            "y": 2
+            "x": 5,
+            "y": 3
           },
           {
             "name": "jumpluff",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "victreebel",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "venusaur",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "articuno",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "abomasnow",
-            "x": 0,
-            "y": 3
-          },
-          {
-            "name": "suicune",
             "x": 1,
-            "y": 1
-          },
-          {
-            "name": "glalie",
-            "x": 2,
             "y": 2
-          }
-        ],
-        "roundsRequired": 4
-      },
-      {
-        "board": [
+          },
           {
             "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "butterfree",
-            "x": 4,
-            "y": 2
-          },
-          {
-            "name": "jumpluff",
-            "x": 4,
+            "x": 2,
             "y": 3
-          },
-          {
-            "name": "victreebel",
-            "x": 3,
-            "y": 2
-          },
-          {
-            "name": "venusaur",
-            "x": 3,
-            "y": 3
-          },
-          {
-            "name": "articuno",
-            "x": 3,
-            "y": 1
           },
           {
             "name": "mega-abomasnow",
-            "x": 0,
-            "y": 3
-          },
-          {
-            "name": "suicune",
-            "x": 1,
-            "y": 1
-          },
-          {
-            "name": "glalie",
-            "x": 2,
-            "y": 2
+            "x": 4,
+            "y": 3,
+            "items": [
+              "ROCKY_HELMET",
+              "WONDER_BOX"
+            ]
           }
         ],
-        "roundsRequired": 4
+        "roundsRequired": 3
       },
       {
         "board": [
-          {
-            "name": "beedrill",
-            "x": 4,
-            "y": 1
-          },
           {
             "name": "butterfree",
             "x": 4,
             "y": 2
           },
           {
-            "name": "jumpluff",
-            "x": 4,
-            "y": 3
-          },
-          {
             "name": "victreebel",
             "x": 3,
-            "y": 2
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
           },
           {
             "name": "venusaur",
             "x": 3,
-            "y": 3
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
           },
           {
             "name": "articuno",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "mega-abomasnow",
-            "x": 0,
-            "y": 3
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK",
+              "WHITE_GLASSES"
+            ]
           },
           {
             "name": "suicune",
             "x": 1,
-            "y": 1
+            "y": 3,
+            "items": [
+              "ICY_ROCK"
+            ]
           },
           {
-            "name": "froslass",
-            "x": 2,
+            "name": "jumpluff",
+            "x": 1,
             "y": 2
+          },
+          {
+            "name": "beedrill",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "mega-abomasnow",
+            "x": 4,
+            "y": 3,
+            "items": [
+              "ROCKY_HELMET",
+              "WONDER_BOX"
+            ]
+          },
+          {
+            "name": "glalie",
+            "x": 5,
+            "y": 3
           }
         ],
-        "roundsRequired": 4
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "butterfree",
+            "x": 4,
+            "y": 2
+          },
+          {
+            "name": "victreebel",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "venusaur",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "articuno",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK",
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "suicune",
+            "x": 1,
+            "y": 3,
+            "items": [
+              "ICY_ROCK"
+            ]
+          },
+          {
+            "name": "jumpluff",
+            "x": 1,
+            "y": 2
+          },
+          {
+            "name": "beedrill",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "mega-abomasnow",
+            "x": 4,
+            "y": 3,
+            "items": [
+              "ROCKY_HELMET",
+              "WONDER_BOX"
+            ]
+          },
+          {
+            "name": "glalie",
+            "x": 5,
+            "y": 3
+          }
+        ],
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "butterfree",
+            "x": 4,
+            "y": 2
+          },
+          {
+            "name": "victreebel",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "venusaur",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "POISON_BARB"
+            ]
+          },
+          {
+            "name": "articuno",
+            "x": 2,
+            "y": 2,
+            "items": [
+              "ICY_ROCK",
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "suicune",
+            "x": 1,
+            "y": 3,
+            "items": [
+              "ICY_ROCK"
+            ]
+          },
+          {
+            "name": "jumpluff",
+            "x": 1,
+            "y": 2
+          },
+          {
+            "name": "beedrill",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "name": "mega-abomasnow",
+            "x": 4,
+            "y": 3,
+            "items": [
+              "ROCKY_HELMET",
+              "WONDER_BOX"
+            ]
+          },
+          {
+            "name": "glalie",
+            "x": 5,
+            "y": 3
+          }
+        ],
+        "roundsRequired": 3
       }
     ]
   },
@@ -17196,6 +17809,928 @@ const SCENARIOS ={
           }
         ],
         "roundsRequired": 6
+      }
+    ]
+  },
+  "EEVEE":{
+    "id": "EEVEE",
+    "author": "Nocifer",
+    "avatar": "eevee",
+    "steps": [
+      {
+        "board": [
+          {
+            "name": "seedot",
+            "x": 3,
+            "y": 3
+          },
+          {
+            "name": "mareep",
+            "x": 3,
+            "y": 2
+          }
+        ],
+        "roundsRequired": 0
+      },
+      {
+        "board": [
+          {
+            "name": "seedot",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "nidoranM",
+            "x": 4,
+            "y": 2
+          },
+          {
+            "name": "mareep",
+            "x": 4,
+            "y": 1
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "nuzleaf",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "mareep",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "cyndaquil",
+            "x": 3,
+            "y": 1
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "nuzleaf",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "mareep",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "cyndaquil",
+            "x": 3,
+            "y": 1
+          },
+          {
+            "name": "flareon",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "nuzleaf",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "mareep",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "cyndaquil",
+            "x": 3,
+            "y": 1
+          },
+          {
+            "name": "flareon",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "nuzleaf",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "mareep",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "cyndaquil",
+            "x": 3,
+            "y": 1
+          },
+          {
+            "name": "flareon",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "nidoranF",
+            "x": 3,
+            "y": 3
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "nuzleaf",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "flaffy",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "cyndaquil",
+            "x": 3,
+            "y": 1
+          },
+          {
+            "name": "flareon",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "nuzleaf",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "flaffy",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "quilava",
+            "x": 3,
+            "y": 1
+          },
+          {
+            "name": "flareon",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "nuzleaf",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "flaffy",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "quilava",
+            "x": 3,
+            "y": 1
+          },
+          {
+            "name": "flareon",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "magnemite",
+            "x": 5,
+            "y": 2
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "flaffy",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "quilava",
+            "x": 3,
+            "y": 1,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "flareon",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "magnemite",
+            "x": 5,
+            "y": 2
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "flaffy",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "quilava",
+            "x": 3,
+            "y": 1,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "flareon",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "magneton",
+            "x": 5,
+            "y": 2
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "flaffy",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "quilava",
+            "x": 3,
+            "y": 1,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "magneton",
+            "x": 5,
+            "y": 2
+          },
+          {
+            "name": "camerupt",
+            "x": 5,
+            "y": 3,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "shinx",
+            "x": 3,
+            "y": 2
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "flaffy",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "quilava",
+            "x": 3,
+            "y": 1,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL"
+            ]
+          },
+          {
+            "name": "magneton",
+            "x": 5,
+            "y": 2
+          },
+          {
+            "name": "camerupt",
+            "x": 5,
+            "y": 3,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "luxray",
+            "x": 3,
+            "y": 2
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "ampharos",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "quilava",
+            "x": 3,
+            "y": 1,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "LIFE_ORB"
+            ]
+          },
+          {
+            "name": "magneton",
+            "x": 5,
+            "y": 2
+          },
+          {
+            "name": "camerupt",
+            "x": 5,
+            "y": 3,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "luxray",
+            "x": 3,
+            "y": 2
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "ampharos",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "quilava",
+            "x": 3,
+            "y": 1,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "LIFE_ORB"
+            ]
+          },
+          {
+            "name": "camerupt",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "luxray",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "raikou",
+            "x": 5,
+            "y": 3,
+            "items": [
+              "REVIVER_SEED"
+            ]
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "ampharos",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "quilava",
+            "x": 3,
+            "y": 1,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "LIFE_ORB"
+            ]
+          },
+          {
+            "name": "camerupt",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "luxray",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "raikou",
+            "x": 5,
+            "y": 3,
+            "items": [
+              "REVIVER_SEED"
+            ]
+          },
+          {
+            "name": "magnezone",
+            "x": 5,
+            "y": 1
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "ampharos",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "typlosion",
+            "x": 3,
+            "y": 1,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "LIFE_ORB"
+            ]
+          },
+          {
+            "name": "camerupt",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "luxray",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "raikou",
+            "x": 5,
+            "y": 3,
+            "items": [
+              "REVIVER_SEED"
+            ]
+          },
+          {
+            "name": "wartortle",
+            "x": 5,
+            "y": 1
+          },
+          {
+            "name": "jolteon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "THUNDER_STONE"
+            ]
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "ampharos",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "typlosion",
+            "x": 3,
+            "y": 1,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "LIFE_ORB"
+            ]
+          },
+          {
+            "name": "mega-camerupt",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "luxray",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "raikou",
+            "x": 5,
+            "y": 3,
+            "items": [
+              "REVIVER_SEED"
+            ]
+          },
+          {
+            "name": "wartortle",
+            "x": 5,
+            "y": 1
+          },
+          {
+            "name": "jolteon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "THUNDER_STONE"
+            ]
+          }
+        ],
+        "roundsRequired": 1
+      },
+      {
+        "board": [
+          {
+            "name": "shiftry",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "ampharos",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "typlosion",
+            "x": 3,
+            "y": 1,
+            "items": [
+              "WHITE_GLASSES"
+            ]
+          },
+          {
+            "name": "absol",
+            "x": 3,
+            "y": 3,
+            "items": [
+              "SHELL_BELL",
+              "LIFE_ORB"
+            ]
+          },
+          {
+            "name": "mega-camerupt",
+            "x": 5,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          },
+          {
+            "name": "luxray",
+            "x": 3,
+            "y": 2
+          },
+          {
+            "name": "raikou",
+            "x": 5,
+            "y": 3,
+            "items": [
+              "REVIVER_SEED",
+              "METRONOME"
+            ]
+          },
+          {
+            "name": "blastoise",
+            "x": 5,
+            "y": 1
+          },
+          {
+            "name": "jolteon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "THUNDER_STONE"
+            ]
+          }
+        ],
+        "roundsRequired": 1
       }
     ]
   }
