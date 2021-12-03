@@ -17850,7 +17850,7 @@ const SCENARIOS ={
             "y": 1
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 2
       },
       {
         "board": [
@@ -17878,43 +17878,7 @@ const SCENARIOS ={
             "y": 1
           }
         ],
-        "roundsRequired": 1
-      },
-      {
-        "board": [
-          {
-            "name": "nuzleaf",
-            "x": 4,
-            "y": 3
-          },
-          {
-            "name": "leafeon",
-            "x": 4,
-            "y": 2,
-            "items": [
-              "LEAF_STONE"
-            ]
-          },
-          {
-            "name": "mareep",
-            "x": 4,
-            "y": 1
-          },
-          {
-            "name": "cyndaquil",
-            "x": 3,
-            "y": 1
-          },
-          {
-            "name": "flareon",
-            "x": 3,
-            "y": 2,
-            "items": [
-              "FIRE_STONE"
-            ]
-          }
-        ],
-        "roundsRequired": 1
+        "roundsRequired": 2
       },
       {
         "board": [
@@ -17950,7 +17914,43 @@ const SCENARIOS ={
             ]
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 3
+      },
+      {
+        "board": [
+          {
+            "name": "nuzleaf",
+            "x": 4,
+            "y": 3
+          },
+          {
+            "name": "leafeon",
+            "x": 4,
+            "y": 2,
+            "items": [
+              "LEAF_STONE"
+            ]
+          },
+          {
+            "name": "mareep",
+            "x": 4,
+            "y": 1
+          },
+          {
+            "name": "cyndaquil",
+            "x": 3,
+            "y": 1
+          },
+          {
+            "name": "flareon",
+            "x": 3,
+            "y": 2,
+            "items": [
+              "FIRE_STONE"
+            ]
+          }
+        ],
+        "roundsRequired": 3
       },
       {
         "board": [
@@ -17991,7 +17991,7 @@ const SCENARIOS ={
             "y": 3
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 3
       },
       {
         "board": [
@@ -18035,7 +18035,7 @@ const SCENARIOS ={
             ]
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 3
       },
       {
         "board": [
@@ -18079,7 +18079,7 @@ const SCENARIOS ={
             ]
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 4
       },
       {
         "board": [
@@ -18128,7 +18128,7 @@ const SCENARIOS ={
             "y": 2
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 3
       },
       {
         "board": [
@@ -18180,7 +18180,7 @@ const SCENARIOS ={
             "y": 2
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 5
       },
       {
         "board": [
@@ -18232,7 +18232,7 @@ const SCENARIOS ={
             "y": 2
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 5
       },
       {
         "board": [
@@ -18289,7 +18289,7 @@ const SCENARIOS ={
             "y": 2
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 3
       },
       {
         "board": [
@@ -18346,7 +18346,7 @@ const SCENARIOS ={
             "y": 2
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 3
       },
       {
         "board": [
@@ -18404,7 +18404,7 @@ const SCENARIOS ={
             "y": 2
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 4
       },
       {
         "board": [
@@ -18465,7 +18465,7 @@ const SCENARIOS ={
             ]
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 3
       },
       {
         "board": [
@@ -18531,7 +18531,7 @@ const SCENARIOS ={
             "y": 1
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 3
       },
       {
         "board": [
@@ -18597,7 +18597,7 @@ const SCENARIOS ={
             ]
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 3
       },
       {
         "board": [
@@ -18663,7 +18663,7 @@ const SCENARIOS ={
             ]
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 4
       },
       {
         "board": [
@@ -18730,7 +18730,7 @@ const SCENARIOS ={
             ]
           }
         ],
-        "roundsRequired": 1
+        "roundsRequired": 4
       }
     ]
   }
