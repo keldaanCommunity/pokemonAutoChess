@@ -52,18 +52,24 @@ class TeamBuilder extends Component {
             bot:{
               steps: [
                 {
-                  'roundsRequired': 0,
+                  'roundsRequired': 2,
                   'board': [
                   ]
                 },
                 {
-                  'roundsRequired': 1,
+                  'roundsRequired': 2,
                   'board':
                   [
                   ]
                 },
                 {
-                  'roundsRequired': 3,
+                  'roundsRequired': 2,
+                  'board':
+                  [
+                  ]
+                },
+                {
+                  'roundsRequired': 2,
                   'board':
                   [
                   ]
@@ -87,49 +93,7 @@ class TeamBuilder extends Component {
                   ]
                 },
                 {
-                  'roundsRequired': 1,
-                  'board':
-                  [
-                  ]
-                },
-                {
-                  'roundsRequired': 3,
-                  'board':
-                  [
-                  ]
-                },
-                {
-                  'roundsRequired': 1,
-                  'board':
-                  [
-                  ]
-                },
-                {
-                  'roundsRequired': 4,
-                  'board':
-                  [
-                  ]
-                },
-                {
-                  'roundsRequired': 4,
-                  'board':
-                  [
-                  ]
-                },
-                {
-                  'roundsRequired': 5,
-                  'board':
-                  [
-                  ]
-                },
-                {
-                  'roundsRequired': 3,
-                  'board':
-                  [
-                  ]
-                },
-                {
-                  'roundsRequired': 5,
+                  'roundsRequired': 2,
                   'board':
                   [
                   ]
@@ -141,31 +105,67 @@ class TeamBuilder extends Component {
                   ]
                 },
                 {
-                  'roundsRequired': 3,
+                  'roundsRequired': 2,
                   'board':
                   [
                   ]
                 },
                 {
-                  'roundsRequired': 3,
+                  'roundsRequired': 2,
                   'board':
                   [
                   ]
                 },
                 {
-                  'roundsRequired': 3,
+                  'roundsRequired': 2,
                   'board':
                   [
                   ]
                 },
                 {
-                  'roundsRequired': 3,
+                  'roundsRequired': 2,
                   'board':
                   [
                   ]
                 },
                 {
-                  'roundsRequired': 3,
+                  'roundsRequired': 2,
+                  'board':
+                  [
+                  ]
+                },
+                {
+                  'roundsRequired': 2,
+                  'board':
+                  [
+                  ]
+                },
+                {
+                  'roundsRequired': 2,
+                  'board':
+                  [
+                  ]
+                },
+                {
+                  'roundsRequired': 2,
+                  'board':
+                  [
+                  ]
+                },
+                {
+                  'roundsRequired': 2,
+                  'board':
+                  [
+                  ]
+                },
+                {
+                  'roundsRequired': 2,
+                  'board':
+                  [
+                  ]
+                },
+                {
+                  'roundsRequired': 2,
                   'board':
                   [
                   ]
@@ -442,7 +442,8 @@ class TeamBuilder extends Component {
 
       }
       this.setState({
-        bot:json
+        bot:json,
+        step:0
       });
       this.updateSynergies(this.state.step);
       this.hideModal();

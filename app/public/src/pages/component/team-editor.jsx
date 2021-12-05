@@ -62,7 +62,21 @@ class TeamEditor extends Component{
     render(){
         return <div className="nes-container" style={tabStyle}>
             
-            <div style={{display:'flex'}}>
+            <div style={{display:'flex', alignItems:'center'}}>
+
+                <p data-tip data-for={'help'}>Help</p>
+                <ReactTooltip id={'help'}
+                className='customeTheme' 
+                textColor='#000000' 
+                backgroundColor='rgba(255,255,255,1)' 
+                effect='solid'>
+                <p>To create a bot, you need to fill a certain number of steps.</p>
+                <p>Each step represents the state of your bot at a moment in the game</p>
+                <p>The bot will start with the team defined on step 1. Then, it will go to step 2 and so on</p>
+                <p>The team of the step 2 should always be stronger than the step 1 team</p>
+                <p>As the player cannot get more than 10 pokemons/step, your bot is not allowed too.</p>
+                </ReactTooltip>
+
                 <div className="nes-field is-inline">
                     <label style={labelStyle} htmlFor="inline_field">ID</label>
                     <input onChange={this.props.handleIdChange} type="text" id="inline_field" className="nes-input" placeholder="Id" value={this.props.id}/>
@@ -85,21 +99,7 @@ class TeamEditor extends Component{
 
             <Tabs selectedIndex={this.props.step} onSelect={i => {this.props.handleTabClick(i)}}>
 
-            <TabList
-            data-tip
-            data-for={'tablist-board'}>
-                <ReactTooltip id={'tablist-board'}
-                    className='customeTheme' 
-                    textColor='#000000' 
-                    backgroundColor='rgba(255,255,255,1)' 
-                    effect='solid'>
-                    <p>To create a bot, you need to fill a certain number of steps.</p>
-                    <p>Each step represents the state of your bot at a moment in the game</p>
-                    <p>The bot will start with the team defined on step 1. Then, it will go to step 2 and so on</p>
-                    <p>The team of the step 2 should always be stronger than the step 1 team</p>
-                    <p>As the player cannot get more than 10 pokemons/step, your bot is not allowed too.</p>
-                </ReactTooltip>
-                
+            <TabList>
                 {this.props.steps.map((step,i)=>{
                     return <Tab style={cursorStyle} key={i}>
                         <p>{i}</p>
@@ -109,8 +109,8 @@ class TeamEditor extends Component{
 
             {this.props.steps.map((step,i)=>{
                 return <TabPanel style={tabPaneStyle} key={i}>
-                    <div>
-                        <div style={{display:'flex',alignItems:'center', justifyContent:'center',marginBottom:'10px'}}>
+                    <div style={{width:'100%'}}>
+                        <div style={{display:'flex',alignItems:'center', justifyContent:'space-evenly',marginBottom:'10px'}}>
                             <label htmlFor="default_select"
                                 data-tip
                                 data-for={'step-' + i}>
@@ -127,19 +127,14 @@ class TeamEditor extends Component{
                                     </ul>
                                     <p>The more points you require, the longer the bot will stay on this step</p>
                                 </ReactTooltip>
-                                Points required</label>
-                            <div className="nes-select" style={{width:'auto'}}>
-                                    <select onChange={this.props.handleRoundsRequiredChange} value={this.props.steps[i].roundsRequired}>
-                                    <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                    </select>
+                                Points required: {this.props.steps[i].roundsRequired}</label>
+                                <p>Faster</p>
+                                <div style={{flexGrow:'0.4'}}>
+                                    <input onChange={this.props.handleRoundsRequiredChange} value={this.props.steps[i].roundsRequired} type="range" id="roundSlider" name="roundSlider"
+                                        min="0" max="5" step="1"/>
                                 </div>
-                            </div>
+                                <p>Slower</p>
+                        </div>
                         <div style={{marginBottom:'10px', display:'flex', justifyContent:'center'}}>
                             <table className='nes-table is-bordered is-centered'>
                                 <tbody>
