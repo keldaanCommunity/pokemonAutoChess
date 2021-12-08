@@ -2,6 +2,7 @@ const colyseus = require('colyseus');
 const LobbyState = require('./states/lobby-state');
 const Mongoose = require('mongoose');
 const Chat = require('../models/mongo-models/chat');
+const Bot = require('../models/mongo-models/bot');
 const UserMetadata = require('../models/mongo-models/user-metadata');
 const LeaderboardInfo = require('../models/colyseus-models/leaderboard-info');
 const schema = require('@colyseus/schema');
@@ -28,6 +29,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     const self = this;
     super.onCreate(options);
     this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
+    this.bots = new Map();
     this.setState(new LobbyState());
 
     Mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true , useUnifiedTopology: true }, (err) => {
@@ -50,6 +52,12 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
             self.state.leaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.elo));
           }
         }
+      });
+      Bot.find({}, (err, bots)=>{
+        bots.forEach(bot=>{
+          self.bots[bot.avatar] = bot;
+        });
+        self.broadcast('bot-data', self.bots);
       });
     });
 
@@ -503,6 +511,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
   onJoin(client, options, auth) {
     super.onJoin(client, options, auth);
     //console.log(auth);
+    client.send('bot-data',this.bots);
     UserMetadata.findOne({'uid':client.auth.uid},(err, user)=>{
       if(user){
         Statistic.find({'playerId': client.auth.uid}, ['pokemons','time','rank','elo'], {limit:10, sort:{'time': -1}}, (err, stats)=>{

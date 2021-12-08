@@ -2,7 +2,6 @@ const Command = require('@colyseus/command').Command;
 const uniqid = require('uniqid');
 const GameUser = require('../../models/colyseus-models/game-user');
 const UserMetadata = require('../../models/mongo-models/user-metadata');
-const SCENARIOS = require('../../models/scenarios');
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
@@ -77,7 +76,10 @@ class OnToggleReadyCommand extends Command {
 class OnAddBotCommand extends Command {
   execute() {
     if (this.state.users.size < 8) {
-      const botList = Object.keys(SCENARIOS);
+      let botList = [];
+      this.room.elos.forEach((value, key)=>{
+        botList.push(key);
+      });
       let bot;
       const actualBotList = [];
       const potentialBotList = [];
@@ -87,7 +89,6 @@ class OnAddBotCommand extends Command {
           actualBotList.push(user.id);
         }
       });
-
       for (let i = 0; i < botList.length; i++) {
         if (!actualBotList.includes(botList[i])) {
           potentialBotList.push(botList[i]);
@@ -99,18 +100,24 @@ class OnAddBotCommand extends Command {
         bot = botList[Math.floor(Math.random() * botList.length)];
       }
 
-      this.state.users.set(SCENARIOS[bot].id, new GameUser(SCENARIOS[bot].id, SCENARIOS[bot].avatar, this.room.elos.get(bot), SCENARIOS[bot].avatar, true, true,
-      {          
-        FIRE: 'FIRE0',
-        ICE:'ICE0',
-        GROUND:'GROUND0',
-        NORMAL:'NORMAL0',
-        GRASS:'GRASS0',
-        WATER:'WATER0'
-    }));
+      this.state.users.set(bot, new GameUser(
+        bot,
+        bot,
+        this.room.elos.get(bot),
+        bot,
+        true,
+        true,
+        {          
+          FIRE: 'FIRE0',
+          ICE:'ICE0',
+          GROUND:'GROUND0',
+          NORMAL:'NORMAL0',
+          GRASS:'GRASS0',
+          WATER:'WATER0'
+        }));
       this.room.broadcast('messages', {
         'name': 'Server',
-         'payload': `Bot ${ SCENARIOS[bot].avatar } added.`,
+         'payload': `Bot ${ bot } added.`,
           'avatar': 'magnemite',
           'time':Date.now()
         });

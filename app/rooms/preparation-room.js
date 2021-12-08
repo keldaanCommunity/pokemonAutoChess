@@ -1,6 +1,6 @@
 const colyseus = require('colyseus');
 const {Dispatcher} = require('@colyseus/command');
-const EloBot = require('../models/mongo-models/elo-bot');
+const Bot = require('../models/mongo-models/bot');
 const PreparationState = require('./states/preparation-state');
 const Filter = require('bad-words');
 const admin = require('firebase-admin');
@@ -27,11 +27,10 @@ class PreparationRoom extends colyseus.Room {
     let self = this;
     this.setState(new PreparationState());
     this.maxClients = 8;
-
-    EloBot.find({},(err, bots) => {
-      //console.log(bots);
+    
+    Bot.find({}, ['avatar','elo'], null, (err, bots) => {
       bots.forEach(bot => {
-        self.elos.set(bot.name, bot.elo);
+        self.elos.set(bot.avatar, bot.elo);
       });
       self.dispatcher.dispatch(new OnAddBotCommand());
       self.dispatcher.dispatch(new OnAddBotCommand());

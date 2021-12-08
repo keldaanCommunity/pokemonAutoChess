@@ -1,13 +1,17 @@
 const {ITEM_TYPE, BATTLE_RESULT} = require('../models/enum');
-const SCENARIOS = require('../models/scenarios');
 const PokemonFactory = require('../models/pokemon-factory');
+const BOT = require('../models/mongo-models/bot');
+
 class Bot {
   constructor(player) {
     this.player = player;
     this.step = 0;
     this.progress = 0;
-    this.scenario = SCENARIOS[player.id];
-    this.updatePlayerTeam(0);
+    console.log(player.name);
+    BOT.findOne({'avatar': player.name},['steps'], null,(err, bot)=>{
+      this.scenario = bot;
+      this.updatePlayerTeam(0);
+    });
   }
 
   updateProgress() {

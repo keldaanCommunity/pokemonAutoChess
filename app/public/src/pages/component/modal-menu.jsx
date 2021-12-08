@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
-import Scenarios from '../../../../models/scenarios';
 
 const textAreaStyle={
   height:'400px'
@@ -24,7 +23,7 @@ class ModalMenu extends Component {
       //console.log(e.target.value);
       if(e.target.value.length !=0){
         this.setState({
-          textArea:JSON.stringify(Scenarios[e.target.value])
+          textArea:JSON.stringify(this.props.botData[e.target.value])
         });
       }
     }
@@ -64,8 +63,8 @@ class ModalMenu extends Component {
           <div className="nes-select">
           <select defaultValue="" onChange={this.handleScenariosChange.bind(this)} id="default_select">
               <option value="" hidden>Select...</option>
-              {Object.keys(Scenarios).sort((a,b)=>{return Scenarios[a].avatar.localeCompare(Scenarios[b].avatar)}).map(key=>{
-                  return <option key={key} value={key}>{Scenarios[key].avatar}</option>;
+              {Object.keys(this.props.botData).sort((a,b)=>{return this.props.botData[a].avatar.localeCompare(this.props.botData[b].avatar)}).map(key=>{
+                  return <option key={key} value={key}>{this.props.botData[key].avatar}</option>;
               })};
           </select>
           </div>

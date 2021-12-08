@@ -32,7 +32,8 @@ class Lobby extends Component {
             tabIndex: 0,
             showWiki: false,
             showBuilder: false,
-            pasteBinUrl: ''
+            pasteBinUrl: '',
+            botData: {}
         };
 
         this.client = new Client(window.endpoint);
@@ -84,6 +85,12 @@ class Lobby extends Component {
                               }
                             });
                           });
+
+                        this.room.onMessage('bot-data', (bots)=>{
+                            this.setState({
+                                botData: bots
+                            });
+                        });
                       
                         this.room.onMessage('+', ([roomId, room]) => {
                             if(room.name == 'room' && this._ismounted){
@@ -252,6 +259,7 @@ class Lobby extends Component {
           toggleBuilder={this.toggleBuilder.bind(this)}
           createBot={this.createBot.bind(this)}
           pasteBinUrl={this.state.pasteBinUrl}
+          botData={this.state.botData}
           />
       }
       else{

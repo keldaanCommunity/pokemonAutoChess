@@ -572,6 +572,7 @@ class TeamBuilder extends Component {
 
           <ModalMenu 
             modalBoolean={this.state.modalBoolean}
+            botData={this.props.botData}
             showModal={this.showModal.bind(this)}
             bot={this.state.bot} 
             hideModal={this.hideModal.bind(this)}
