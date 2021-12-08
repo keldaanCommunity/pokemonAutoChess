@@ -53,8 +53,14 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           }
         }
       });
-      Bot.find({}, (err, bots)=>{
+      Bot.find({},{_id:0}, (err, bots)=>{
         bots.forEach(bot=>{
+          let b = {
+            steps: [],
+            avatar: bot.avatar,
+            author: bot.author,
+            elo: bot.elo
+          };
           self.bots[bot.avatar] = bot;
         });
         self.broadcast('bot-data', self.bots);

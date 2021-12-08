@@ -54,6 +54,21 @@ const bot = new Schema(
         required: true
       },
       steps:[step]
+    },
+    {
+        toJSON: {
+          transform: function (doc, ret) {
+              console.log("to json");
+            delete ret._id;
+            delete ret.__v;
+            ret.steps.forEach(step=>{
+                step.board.forEach(board=>{
+                    delete board._id;
+                });
+                delete step._id;
+            });
+          }
+        }
     }
 );
 
