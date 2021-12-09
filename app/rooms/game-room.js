@@ -129,7 +129,7 @@ class GameRoom extends colyseus.Room {
   onDispose() {
     //console.log(`dispose game room`);
     let self = this;
-    let requiredStageLevel = 0;
+    let requiredStageLevel = 10;
 
     if(this.state.stageLevel >= requiredStageLevel && this.state.elligibleToXP){
       this.state.players.forEach(player =>{
