@@ -4,6 +4,7 @@ import Profile from './profile';
 import Search from './search';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import BotLeaderboard from './bot-leaderboard';
 
 class TabMenu extends Component {
 
@@ -28,7 +29,8 @@ class TabMenu extends Component {
         <Tabs className="nes-container" style={tabStyle}
             selectedIndex={this.props.tabIndex} onSelect={i => this.props.setTabIndex(i)}>
                 <TabList>
-                    <Tab style={cursorStyle}>Leaderboard</Tab>
+                    <Tab style={cursorStyle}>Players</Tab>
+                    <Tab style={cursorStyle}>Bots</Tab>
                     <Tab style={cursorStyle}>Profile</Tab>
                     <Tab style={cursorStyle}>Search</Tab>
                 </TabList>
@@ -37,6 +39,11 @@ class TabMenu extends Component {
                     <Leaderboard
                         infos={this.props.leaderboard}
                         displayInfo={this.props.displayInfo}
+                    />
+                </TabPanel>
+                <TabPanel>
+                    <BotLeaderboard
+                        botData={this.props.botData}
                     />
                 </TabPanel>
                 <TabPanel>

@@ -281,6 +281,7 @@ class Lobby extends Component {
 
                 <TabMenu
                     leaderboard={this.state.leaderboard}
+                    botData={this.state.botData}
                     user={this.state.user}
                     searchedUser={this.state.searchedUser}
                     tabIndex={this.state.tabIndex}
