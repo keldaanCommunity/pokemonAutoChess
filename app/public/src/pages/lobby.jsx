@@ -206,7 +206,7 @@ class Lobby extends Component {
     }
 
     displayInfo(name){
-        this.setTabIndex(2);
+        this.setTabIndex(3);
         this.searchName(name);
     }
 
