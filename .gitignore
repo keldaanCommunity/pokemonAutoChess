@@ -1,5 +1,4 @@
 node_modules/
-db-commands/
 .vscode/
 *.env
 app/public/dist/**/*.js
