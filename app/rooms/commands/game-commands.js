@@ -385,8 +385,9 @@ class OnJoinCommand extends Command {
           this.state.players.size + 1,
           user.map[this.state.mapType]
       ));
-
-      console.log(`${client.auth.displayName} ${client.id} join game room`);
+      if(client && client.auth && client.auth.displayName){
+        console.log(`${client.auth.displayName} ${client.id} join game room`);
+      }
 
       this.state.players.forEach(p=>{
         console.log(p.name);

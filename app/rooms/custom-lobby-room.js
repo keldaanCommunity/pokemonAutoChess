@@ -587,8 +587,10 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
   onLeave(client) {
     try{
       super.onLeave(client);
-      console.log(`${client.auth.displayName} leave lobby`);
-      this.state.users.delete(client.auth.uid);
+      if(client && client.auth && client.auth.displayName){
+        console.log(`${client.auth.displayName} ${client.id} leave lobby`);
+        this.state.users.delete(client.auth.uid);
+      }
     }
     catch(error){
       console.log(error);

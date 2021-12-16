@@ -111,7 +111,9 @@ class GameRoom extends colyseus.Room {
   async onLeave (client, consented) {  
     try {
 
-      console.log(`${client.auth.displayName} is leaving`);
+      if(client && client.auth && client.auth.displayName){
+        console.log(`${client.auth.displayName} is leaving`);
+      }
       if (consented) {
           throw new Error("consented leave");
       }
@@ -120,9 +122,10 @@ class GameRoom extends colyseus.Room {
       await this.allowReconnection(client, 60);
   
     } catch (e) {
-  
-      console.log(`${client.auth.displayName} leave game room`);
-      this.dispatcher.dispatch(new Commands.OnLeaveCommand(), {client, consented});
+      if(client && client.auth && client.auth.displayName){
+        console.log(`${client.auth.displayName} leave game room`);
+        this.dispatcher.dispatch(new Commands.OnLeaveCommand(), {client, consented});
+      }
     }
   }
 

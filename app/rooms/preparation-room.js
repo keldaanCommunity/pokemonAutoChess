@@ -65,13 +65,17 @@ class PreparationRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
-    console.log(`${client.auth.displayName}  ${client.sessionId}  join preparation room`);
-    this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
+    if(client && client.auth && client.auth.displayName){
+      console.log(`${client.auth.displayName} ${client.id} join game room`);
+      this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
+    }
   }
 
   async onLeave (client, consented) {
     
-    console.log(`${client.auth.displayName} ${client.sessionId} is leaving preparation room`);
+    if(client && client.auth && client.auth.displayName){
+      console.log(`${client.auth.displayName} ${client.id} is leaving preparation room`);
+    }
     try {
       if (consented) {
           throw new Error("consented leave");
@@ -82,7 +86,9 @@ class PreparationRoom extends colyseus.Room {
   
     } catch (e) {
   
-      console.log(`${client.auth.displayName}  ${client.sessionId}  leave preparation room`);
+      if(client && client.auth && client.auth.displayName){
+        console.log(`${client.auth.displayName} ${client.id} leave preparation room`);
+      }
       this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
     }
   }

@@ -57,13 +57,15 @@ class OnMessageCommand extends Command {
 
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
-    this.room.broadcast('messages', {
-      'name': 'Server',
-      'payload': `${ client.auth.displayName } left.`,
-      'avatar': 'magnemite',
-      'time':Date.now()
-    });
+    if(client && client.auth && client.auth.displayName){
+      this.room.broadcast('messages', {
+        'name': 'Server',
+        'payload': `${ client.auth.displayName } left.`,
+        'avatar': 'magnemite',
+        'time':Date.now()
+      }); 
     this.state.users.delete(client.auth.uid);
+    }
   }
 }
 

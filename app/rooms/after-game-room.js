@@ -72,9 +72,11 @@ class AfterGameRoom extends colyseus.Room {
       await this.allowReconnection(client, 60);
   
     } catch (e) {
-  
-      console.log(`${client.auth.displayName} leave preparation room`);
-      this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
+            this.state.users.delete(client.auth.uid);
+            if(client && client.auth && client.auth.displayName){
+              console.log(`${client.auth.displayName} leave after game room`);
+              this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
+            }
     }
   }
 
