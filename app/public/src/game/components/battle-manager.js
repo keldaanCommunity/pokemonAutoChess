@@ -106,7 +106,12 @@ export default class BattleManager {
               children[i].y = coordinates[1];
               children[i].specialAttackAnimation();
             } else {
-              children[i].moveManager.setSpeed(2 * Math.max(Math.abs(children[i].x - coordinates[0], Math.abs(children[i].y - coordinates[1]))));
+              children[i].moveManager.setSpeed(
+                3 * Math.max(
+                  Math.abs(children[i].x - coordinates[0]),
+                  Math.abs(children[i].y - coordinates[1])
+                )
+              );
               children[i].moveManager.moveTo(coordinates[0], coordinates[1]);
             }
           } else if (change.field == 'orientation') {
