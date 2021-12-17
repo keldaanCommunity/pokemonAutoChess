@@ -31,6 +31,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
     this.bots = new Map();
     this.setState(new LobbyState());
+    this.autoDispose = false;
 
     Mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true , useUnifiedTopology: true }, (err) => {
       Chat.find({'time': {$gt: Date.now() - 864000000}}, (err, messages)=> {
