@@ -81,7 +81,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
         .setTitle(`BOT ${bot.avatar} created by ${bot.author}`)
         .setURL(data)
         .setAuthor(user.name, `https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/dist/assets/avatar/${user.avatar}.png`)
-        .setDescription(`A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder`)
+        .setDescription(`A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`)
         .setThumbnail(`https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/dist/assets/avatar/${bot.avatar}.png`);
         client.send('pastebin-url', {url: data});
         try{

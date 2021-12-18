@@ -27,7 +27,8 @@
     "dev": "npm-run-all --parallel dev-*",
     "lint": "npx eslint app/",
     "build": "webpack --mode production",
-    "start": "node ./app/index.js"
+    "start": "node ./app/index.js",
+    "add-bot": "node ./db-commands/populate-bot.js"
   },
   "dependencies": {
     "@colyseus/command": "^0.1.5",
