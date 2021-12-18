@@ -9,4 +9,4 @@
 
 ## Credits
 
-Sprites: RedBlueYellow, Juenca, Kustem R, SilverDeoxys563, Naokohiro, academico95, PowerCrystal, FakeZShayner, Seelker
+Sprites: RedBlueYellow, Juenca, Kustem R, SilverDeoxys563, Naokohiro, academico95, PowerCrystal, FakeZShayner, NeroIntruder, Emmufin, PMDCollab

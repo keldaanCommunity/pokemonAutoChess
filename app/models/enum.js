@@ -276,7 +276,27 @@ const PKM = Object.freeze({
   ODDISH:"oddish",
   GLOOM:"gloom",
   VILEPLUME:"vileplume",
-  BELLOSSOM:"bellossom"
+  BELLOSSOM:"bellossom",
+  AMAURA:"amaura",
+  AURORUS:"aurorus",
+  ANORITH:"anorith",
+  ARCHEN:"archen",
+  ARCHEOPS:"archeops",
+  ARMALDO:"armaldo",
+  BASTIODON:"bastiodon",
+  CARRACOSTA:"carracosta",
+  CRADILY:"cradily",
+  CRANIDOS:"cranidos",
+  KABUTO:"kabuto",
+  KABUTOPS:"kabutops",
+  LILEEP:"lileep",
+  OMANYTE:"omanyte",
+  OMASTAR:"omastar",
+  RAMPARDOS:"rampardos",
+  SHIELDON:"shieldon",
+  TIRTOUGA:"tirtouga",
+  TYRANTRUM:"tyrantrum",
+  TYRUNT:"tyrunt"
 });
 
 const WORDS = Object.freeze({
@@ -527,10 +547,76 @@ const ITEMS = Object.freeze({
   BLUE_ORB:'BLUE_ORB',
   RED_ORB:'RED_ORB',
   DELTA_ORB:'DELTA_ORB',
-  WONDER_BOX:'WONDER_BOX'
+  WONDER_BOX:'WONDER_BOX',
+  ARMOR_FOSSIL:'ARMOR_FOSSIL',
+  CLAW_FOSSIL:'CLAW_FOSSIL',
+  COVER_FOSSIL:'COVER_FOSSIL',
+  DOME_FOSSIL:'DOME_FOSSIL',
+  HELIX_FOSSIL:'HELIX_FOSSIL',
+  JAW_FOSSIL:'JAW_FOSSIL',
+  OLD_AMBER:'OLD_AMBER',
+  PLUM_FOSSIL:'PLUM_FOSSIL',
+  ROOT_FOSSIL:'ROOT_FOSSIL',
+  SAIL_FOSSIL:'SAIL_FOSSIL',
+  SKULL_FOSSIL:'SKUL_FOSSIL'
 });
 
 const ITEM_NAME = Object.freeze({
+  ARMOR_FOSSIL: {
+    eng: 'Armor Fossil',
+    esp: 'Armor Fossil',
+    fra: 'Armor Fossil'
+  },
+  CLAW_FOSSIL:{
+    eng: 'Claw Fossil',
+    esp: 'Claw Fossil',
+    fra: 'Claw Fossil'
+  },
+  COVER_FOSSIL:{
+    eng: 'Cover Fossil',
+    esp: 'Cover Fossil',
+    fra: 'Cover Fossil'
+  },
+  DOME_FOSSIL:{
+    eng: 'Dome Fossil',
+    esp: 'Dome Fossil',
+    fra: 'Dome Fossil'
+  },
+  HELIX_FOSSIL:{
+    eng: 'Helix Fossil',
+    esp: 'Helix Fossil',
+    fra: 'Helix Fossil'
+  },
+  JAW_FOSSIL:{
+    eng: 'Jaw Fossil',
+    esp: 'Jaw Fossil',
+    fra: 'Jaw Fossil'
+  },
+  OLD_AMBER:{
+    eng: 'Old Amber',
+    esp: 'Old Amber',
+    fra: 'Old Amber'
+  },
+  PLUM_FOSSIL:{
+    eng: 'Plum Fossil',
+    esp: 'Plum Fossil',
+    fra: 'Plum Fossil'
+  },
+  ROOT_FOSSIL:{
+    eng: 'Root Fossil',
+    esp: 'Root Fossil',
+    fra: 'Root Fossil'
+  },
+  SAIL_FOSSIL:{
+    eng: 'Sail Fossil',
+    esp: 'Sail Fossil',
+    fra: 'Sail Fossil'
+  },
+  SKULL_FOSSIL:{
+    eng: 'Skull Fossil',
+    esp: 'Skull Fossil',
+    fra: 'Skull Fossil'
+  },
   WHITE_GLASSES: {
     eng: 'Wise Glasses',
     esp: 'Gafas blancas',
@@ -719,6 +805,61 @@ const ITEM_NAME = Object.freeze({
 });
 
 const ITEM_DESCRIPTION = Object.freeze({
+  ARMOR_FOSSIL: {
+    eng: 'Give this to a Ditto to make it evolve into a Shieldon',
+    esp: 'Armor Fossil',
+    fra: 'Armor Fossil'
+  },
+  CLAW_FOSSIL:{
+    eng: 'Give this to a Ditto to make it evolve into an Anorith',
+    esp: 'Claw Fossil',
+    fra: 'Claw Fossil'
+  },
+  COVER_FOSSIL:{
+    eng: 'Give this to a Ditto to make it evolve into a Tirtouga',
+    esp: 'Cover Fossil',
+    fra: 'Cover Fossil'
+  },
+  DOME_FOSSIL:{
+    eng: 'Give this to a Ditto to make it evolve into a Kabuto',
+    esp: 'Dome Fossil',
+    fra: 'Dome Fossil'
+  },
+  HELIX_FOSSIL:{
+    eng: 'Give this to a Ditto to make it evolve into a Omanyte',
+    esp: 'Helix Fossil',
+    fra: 'Helix Fossil'
+  },
+  JAW_FOSSIL:{
+    eng: 'Give this to a Ditto to make it evolve into a Tyrunt',
+    esp: 'Jaw Fossil',
+    fra: 'Jaw Fossil'
+  },
+  OLD_AMBER:{
+    eng: 'Give this to a Ditto to make it evolve into an Aerodactyl',
+    esp: 'Old Amber',
+    fra: 'Old Amber'
+  },
+  PLUM_FOSSIL:{
+    eng: 'Give this to a Ditto to make it evolve into an Archen',
+    esp: 'Plum Fossil',
+    fra: 'Plum Fossil'
+  },
+  ROOT_FOSSIL:{
+    eng: 'Give this to a Ditto to make it evolve into a Lileep',
+    esp: 'Root Fossil',
+    fra: 'Root Fossil'
+  },
+  SAIL_FOSSIL:{
+    eng: 'Give this to a Ditto to make it evolve into an Amaura',
+    esp: 'Sail Fossil',
+    fra: 'Sail Fossil'
+  },
+  SKULL_FOSSIL:{
+    eng: 'Give this to a Ditto to make it evolve into a Cranidos',
+    esp: 'Skull Fossil',
+    fra: 'Skull Fossil'
+  },
   WHITE_GLASSES:
   {
     eng: '+30% special attack',

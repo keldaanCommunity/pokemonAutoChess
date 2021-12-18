@@ -1,5 +1,5 @@
 const Pokemon = require('./colyseus-models/pokemon');
-const {SPECIAL_SKILL, PKM} = require('./enum');
+const {SPECIAL_SKILL, PKM, PRECOMPUTED_TYPE_POKEMONS} = require('./enum');
 const Strategy = require('../core/attack-strategy');
 
 class PokemonFactory {
@@ -859,6 +859,46 @@ class PokemonFactory {
         return PKM.ODDISH;
       case PKM.BELLOSSOM:
         return PKM.ODDISH;
+      case PKM.AMAURA:
+        return PKM.AMAURA;
+      case PKM.AURORUS:
+        return PKM.AMAURA;
+      case PKM.ANORITH:
+        return PKM.ANORITH;
+      case PKM.ARMALDO:
+        return PKM.ANORITH;
+      case PKM.ARCHEN:
+        return PKM.ARCHEN;
+      case PKM.ARCHEOPS:
+        return PKM.ARCHEN;
+      case PKM.SHIELDON:
+        return PKM.SHIELDON;
+      case PKM.BASTIODON:
+        return PKM.SHIELDON;
+      case PKM.TIRTOUGA:
+        return PKM.TIRTOUGA;
+      case PKM.CARRACOSTA:
+        return PKM.TIRTOUGA;
+      case PKM.LILEEP:
+        return PKM.LILEEP;
+      case PKM.CRADILY:
+        return PKM.LILEEP;
+      case PKM.KABUTO:
+        return PKM.KABUTO;
+      case PKM.KABUTOPS:
+        return PKM.KABUTO;
+      case PKM.OMANYTE:
+        return PKM.OMANYTE;
+      case PKM.OMASTAR:
+        return PKM.OMANYTE;
+      case PKM.CRANIDOS:
+        return PKM.CRANIDOS;
+      case PKM.RAMPARDOS:
+        return PKM.CRANIDOS;
+      case PKM.TYRUNT:
+        return PKM.TYRUNT;
+      case PKM.TYRANTRUM:
+        return PKM.TYRUNT;
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1423,6 +1463,42 @@ class PokemonFactory {
         return new Pokemon.Vileplume();
       case PKM.BELLOSSOM:
         return new Pokemon.Bellossom();
+      case PKM.AMAURA:
+        return new Pokemon.Amaura();
+      case PKM.AURORUS:
+        return new Pokemon.Aurorus();
+      case PKM.ANORITH:
+        return new Pokemon.Anorith();
+      case PKM.ARMALDO:
+        return new Pokemon.Armaldo();
+      case PKM.ARCHEN:
+        return new Pokemon.Archen();
+      case PKM.ARCHEOPS:
+        return new Pokemon.Archeops();
+      case PKM.SHIELDON:
+        return new Pokemon.Shieldon();
+      case PKM.BASTIODON:
+        return new Pokemon.Bastiodon();
+      case PKM.TIRTOUGA:
+        return new Pokemon.Tirtouga();
+      case PKM.CARRACOSTA:
+        return new Pokemon.Carracosta();
+      case PKM.CRADILY:
+        return new Pokemon.Cradily();
+      case PKM.LILEEP:
+        return new Pokemon.Lileep();
+      case PKM.OMANYTE:
+        return new Pokemon.Omanyte();
+      case PKM.OMASTAR:
+        return new Pokemon.Omastar();
+      case PKM.CRANIDOS:
+        return new Pokemon.Cranidos();
+      case PKM.RAMPARDOS:
+        return new Pokemon.Rampardos();
+      case PKM.TYRUNT:
+        return new Pokemon.Tyrunt();
+      case PKM.TYRANTRUM:
+        return new Pokemon.Tyrantrum();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();

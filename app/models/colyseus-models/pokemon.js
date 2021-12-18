@@ -1716,6 +1716,127 @@ class Bellossom extends Pokemon {
   }
 }
 
+class Amaura extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Aurorus extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Anorith extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Armaldo extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Archen extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Archeops extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Shieldon extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Bastiodon extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Tirtouga extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Carracosta extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Lileep extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Cradily extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Cranidos extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Rampardos extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Kabuto extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Kabutops extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Omanyte extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Omastar extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Tyrunt extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+class Tyrantrum extends Pokemon {
+  constructor() {
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+  }
+}
+
+
 
 schema.defineTypes(Pokemon, {
   id: 'string',
@@ -2022,5 +2143,25 @@ module.exports = {
   Oddish,
   Gloom,
   Vileplume,
-  Bellossom
+  Bellossom,
+  Amaura,
+  Aurorus,
+  Anorith,
+  Archen,
+  Archeops,
+  Armaldo,
+  Bastiodon,
+  Carracosta,
+  Cradily,
+  Cranidos,
+  Kabuto,
+  Kabutops,
+  Lileep,
+  Omanyte,
+  Omastar,
+  Rampardos,
+  Shieldon,
+  Tirtouga,
+  Tyrantrum,
+  Tyrunt
 };

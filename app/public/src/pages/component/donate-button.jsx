@@ -13,7 +13,7 @@ class DonateButton extends Component{
     }
 
     handleTipeeClick(){
-        window.location.href = 'https://fr.tipeee.com/pokemon-auto-chess';
+        window.location.href = 'https://en.tipeee.com/pokemon-auto-chess';
     }
 }
 
