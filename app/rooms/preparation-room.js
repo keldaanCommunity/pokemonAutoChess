@@ -29,16 +29,18 @@ class PreparationRoom extends colyseus.Room {
     this.maxClients = 8;
     
     Bot.find({}, ['avatar','elo'], null, (err, bots) => {
-      bots.forEach(bot => {
-        self.elos.set(bot.avatar, bot.elo);
-      });
-      self.dispatcher.dispatch(new OnAddBotCommand());
-      self.dispatcher.dispatch(new OnAddBotCommand());
-      self.dispatcher.dispatch(new OnAddBotCommand());
-      self.dispatcher.dispatch(new OnAddBotCommand());
-      self.dispatcher.dispatch(new OnAddBotCommand());
-      self.dispatcher.dispatch(new OnAddBotCommand());
-      self.dispatcher.dispatch(new OnAddBotCommand());
+      if(bots){
+        bots.forEach(bot => {
+          self.elos.set(bot.avatar, bot.elo);
+        });
+        self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
+        self.dispatcher.dispatch(new OnAddBotCommand());
+      }
     });
 
     this.onMessage('game-start', (client, message) => {
