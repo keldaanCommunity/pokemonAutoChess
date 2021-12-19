@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {TYPE} from '../../../../models/enum';
 import GameSynergy from './game-synergy';
 
 class GameSynergies extends Component{
@@ -17,7 +16,7 @@ class GameSynergies extends Component{
         }
 
         return <div style={style}>
-            {Object.keys(TYPE).map(type=>{
+            {Object.keys(this.props.synergies).sort((a,b)=>{return this.props.synergies[b] - this.props.synergies[a]}).map(type=>{
                 if(this.props.synergies[type] > 0){
                     return <GameSynergy key={type} type={type} value={this.props.synergies[type]}/>;
                 }
