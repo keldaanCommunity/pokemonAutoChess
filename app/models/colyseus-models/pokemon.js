@@ -416,7 +416,7 @@ class Duosion extends Pokemon {
 
 class Reuniclus extends Pokemon {
   constructor() {
-    super(PKM.REUNICLUS, 'symbios‎',[TYPE.PSYCHIC, TYPE.AMORPH], RARITY.EPIC, 'april', 579, '', 230, 18, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.LEECH_LIFE);
+    super(PKM.REUNICLUS, 'symbios',[TYPE.PSYCHIC, TYPE.AMORPH], RARITY.EPIC, 'april', 579, '', 230, 18, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.LEECH_LIFE);
   }
 }
 
@@ -1578,12 +1578,6 @@ class Azelf extends Pokemon {
   }
 }
 
-class Aerodactyl extends Pokemon {
-  constructor() {
-    super(PKM.AERODACTYL, 'ptéra',[TYPE.FLYING, TYPE.MINERAL], RARITY.MYTHICAL, 'february', 142, '', 200, 20, 6, 6, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
-  }
-}
-
 class Mewtwo extends Pokemon {
   constructor() {
     super(PKM.MEWTWO, 'mewtwo',[TYPE.PSYCHIC, TYPE.MONSTER], RARITY.MYTHICAL, 'february', 150, '', 300, 30, 5, 5, 3, 'PSYCHIC/range', ATTACK_TYPE.TRUE, 2, 100, SPECIAL_SKILL.TORMENT);
@@ -1718,124 +1712,129 @@ class Bellossom extends Pokemon {
 
 class Amaura extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.AMAURA, 'amaura',[TYPE.FOSSIL, TYPE.ICE], RARITY.LEGENDARY, 'fossil', 43, PKM.AURORUS, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Aurorus extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.AURORUS, 'aurorus',[TYPE.FOSSIL, TYPE.ICE], RARITY.LEGENDARY, 'fossil', 43, '', 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Anorith extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.ANORITH, 'anorith',[TYPE.FOSSIL, TYPE.BUG], RARITY.LEGENDARY, 'fossil', 43, PKM.ARMALDO, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Armaldo extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.ARMALDO, 'armaldo',[TYPE.FOSSIL, TYPE.BUG], RARITY.LEGENDARY, 'fossil', 43, '', 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Archen extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.ARCHEN, 'aéroptéri',[TYPE.FOSSIL, TYPE.FLYING], RARITY.LEGENDARY, 'fossil', 43, PKM.ARCHEOPS, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Archeops extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.ARCHEOPS, 'aéroptéryx',[TYPE.FOSSIL, TYPE.FLYING], RARITY.LEGENDARY, 'fossil', 43, '', 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Shieldon extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.SHIELDON, 'dinoclier',[TYPE.FOSSIL, TYPE.METAL], RARITY.LEGENDARY, 'fossil', 43, PKM.BASTIODON, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Bastiodon extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.BASTIODON, 'bastiodon',[TYPE.FOSSIL, TYPE.METAL], RARITY.LEGENDARY, 'fossil', 43, '', 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Tirtouga extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.TIRTOUGA, 'tirtouga',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 43, PKM.CARRACOSTA, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Carracosta extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.CARRACOSTA, 'carracosta',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 43, '', 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Lileep extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.LILEEP, 'lilia',[TYPE.FOSSIL, TYPE.GRASS], RARITY.LEGENDARY, 'fossil', 43, PKM.CRADILY, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Cradily extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.CRADILY, 'vacylis',[TYPE.FOSSIL, TYPE.GRASS], RARITY.LEGENDARY, 'fossil', 43, '', 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Cranidos extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.CRANIDOS, 'kranidos',[TYPE.FOSSIL, TYPE.MONSTER], RARITY.LEGENDARY, 'fossil', 43, PKM.RAMPARDOS, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Rampardos extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.RAMPARDOS, 'charkos',[TYPE.FOSSIL, TYPE.MONSTER], RARITY.LEGENDARY, 'fossil', 43, '', 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Kabuto extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.KABUTO, 'kabuto',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 43, PKM.KABUTOPS, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Kabutops extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.KABUTOPS, 'kabutops',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 43, '', 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Omanyte extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.OMANYTE, 'omanyte',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 43, PKM.OMASTAR, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Omastar extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.OMASTAR, 'omastar',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 43, '', 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Tyrunt extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.TYRUNT, 'ptyranidur',[TYPE.FOSSIL, TYPE.DRAGON], RARITY.LEGENDARY, 'fossil', 43, PKM.TYRANTRUM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
 class Tyrantrum extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.TYRANTRUM, 'rexilius',[TYPE.FOSSIL, TYPE.DRAGON], RARITY.LEGENDARY, 'fossil', 43, '', 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
   }
 }
 
+class Aerodactyl extends Pokemon {
+  constructor() {
+    super(PKM.AERODACTYL, 'ptéra',[TYPE.FOSSIL, TYPE.FLYING], RARITY.LEGENDARY, 'february', 142, '', 200, 20, 6, 6, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
+  }
+}
 
 
 schema.defineTypes(Pokemon, {

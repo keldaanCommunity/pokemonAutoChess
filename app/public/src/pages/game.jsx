@@ -75,7 +75,8 @@ class Game extends Component {
                 MINERAL: 0,
                 AMORPH: 0,
                 FAIRY: 0,
-                ICE: 0
+                ICE: 0,
+                FOSSIL: 0
             }
 
           },

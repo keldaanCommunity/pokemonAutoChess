@@ -1071,7 +1071,8 @@ const TYPE = Object.freeze({
   MINERAL: 'MINERAL',
   AMORPH: 'AMORPH',
   FAIRY: 'FAIRY',
-  ICE: 'ICE'
+  ICE: 'ICE',
+  FOSSIL: 'FOSSIL'
 });
 
 const EFFECTS = Object.freeze({
@@ -2262,6 +2263,11 @@ const TYPE_TRADUCTION = Object.freeze({
     eng: 'Ice',
     esp: 'Hielo',
     fra: 'Glace'
+  },
+  FOSSIL:{
+    eng: 'Fossil',
+    esp: 'Fossil',
+    fra: 'Fossile'
   }
 });
 
@@ -2720,7 +2726,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
             trigger: 4,
-          title:`(4) Atmósfera oscura`,
+          title:`(4) Dark Presence`,
           text:`Enemies have -25% less Defense.`
         }
       ],
@@ -3355,6 +3361,67 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     }
+  },
+  FOSSIL: {
+    description:{
+      eng:[
+        {
+          trigger: 2,
+          title:`(2) Historic Power`,
+          text:`+10% Crit Chance and +20% Crit Damage.`
+        },{
+          trigger: 4,
+          title:`(4) Ancient Power`,
+          text:`+30% Crit Chance and +40% Crit Damage`
+        },{
+          trigger: 6,
+          title:`(6) Elder Power`,
+          text:`+50% Crit Chance and +60% Crit Damage`
+        },{
+          trigger: 8,
+          title:`(8) Unown Gatherings`,
+          text:`+80% Crit Chance and +100% Crit Damage`
+        }
+      ],
+      esp:[
+        {
+          trigger: 2,
+          title:`(2) Historic Power`,
+          text:`+10% Crit Chance and +20% Crit Damage.`
+        },{
+          trigger: 4,
+          title:`(4) Ancient Power`,
+          text:`+30% Crit Chance and +40% Crit Damage`
+        },{
+          trigger: 6,
+          title:`(6) Elder Power`,
+          text:`+50% Crit Chance and +60% Crit Damage`
+        },{
+          trigger: 8,
+          title:`(8) Unown Gatherings`,
+          text:`+80% Crit Chance and +100% Crit Damage`
+        }
+      ],
+      fra:[
+        {
+          trigger: 2,
+          title:`(2) Historic Power`,
+          text:`+10% Crit Chance and +20% Crit Damage.`
+        },{
+          trigger: 4,
+          title:`(4) Ancient Power`,
+          text:`+30% Crit Chance and +40% Crit Damage`
+        },{
+          trigger: 6,
+          title:`(6) Elder Power`,
+          text:`+50% Crit Chance and +60% Crit Damage`
+        },{
+          trigger: 8,
+          title:`(8) Unown Gatherings`,
+          text:`+80% Crit Chance and +100% Crit Damage`
+        }
+      ]
+    }
   }
 });
 
@@ -3377,11 +3444,12 @@ const TYPE_TRIGGER = {
   AQUATIC: [2,4],
   BUG: [2,4],
   FLYING: [2,4,6],
-  FLORA: [2,4],
+  FLORA: [2,3,4],
   MINERAL: [2,4],
   AMORPH: [2,4],
   FAIRY: [2,4],
-  ICE: [2,4]
+  ICE: [2,4],
+  FOSSIL:[2,4,6,8]
 }
 
 const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];

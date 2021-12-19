@@ -200,7 +200,8 @@ class TeamBuilder extends Component {
               MINERAL: 0,
               AMORPH: 0,
               FAIRY: 0,
-              ICE: 0
+              ICE: 0,
+              FOSSIL: 0
             },
             entity:'',
             mode: MODE.WRITE,
@@ -235,7 +236,8 @@ class TeamBuilder extends Component {
       MINERAL: 0,
       AMORPH: 0,
       FAIRY: 0,
-      ICE: 0
+      ICE: 0,
+      FOSSIL: 0
     };
     let pokemonNames = [];
 
