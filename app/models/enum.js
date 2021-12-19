@@ -882,9 +882,9 @@ const ITEM_DESCRIPTION = Object.freeze({
     fra: 'Chance de gagner entre 1 et 3 argent à chaque tour.'
   },
   ROCKY_HELMET: {
-    eng: 'The attacker of the wearer takes 12% HP damage per physical hit.',
-    esp: 'Cuando el usuario es atacado, el atacante recibe un 12% de daño máximo de salud.',
-    fra: 'Quand le pokémon est attaqué, l attaquant subit 12% de vie en dommage physique'
+    eng: 'The attacker of the wearer takes 4% HP damage per physical hit.',
+    esp: 'Cuando el usuario es atacado, el atacante recibe un 4% de daño máximo de salud.',
+    fra: 'Quand le pokémon est attaqué, l attaquant subit 4% de vie en dommage physique'
   },
   SHELL_BELL: {
     eng: 'Restore 10% of the damage dealt.',

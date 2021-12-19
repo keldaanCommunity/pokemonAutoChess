@@ -94,7 +94,7 @@ class AttackingState extends PokemonState {
         attackType = ATTACK_TYPE.TRUE;
       }
       if (target.items.count(ITEMS.ROCKY_HELMET) != 0) {
-        pokemon.handleDamage(Math.ceil(pokemon.hp * 0.12) * target.items.count(ITEMS.ROCKY_HELMET), board, ATTACK_TYPE.PHYSICAL, target);
+        pokemon.handleDamage(Math.ceil(pokemon.hp * 0.04) * target.items.count(ITEMS.ROCKY_HELMET), board, ATTACK_TYPE.PHYSICAL, target);
       }
 
       if (pokemon.items.count(ITEMS.LIFE_ORB) != 0) {
