@@ -79,6 +79,10 @@ export default class AnimationManager {
     [333, 3840, 43, 44, 45, 182].forEach((num) => {
       this.createAnimations(num, 'september');
     });
+    
+    [138, 139, 140, 141, 345, 346, 347, 348, 408, 409, 410, 411, 564, 565, 566, 567, 696, 697, 698, 699].forEach((num) => {
+      this.createAnimations(num, 'fossil');
+    });
 
     this.createAttacksAnimations();
     this.createSpecialAttacksAnimations();
