@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ITEMS, PKM, RARITY_COLOR, ITEM_DESCRIPTION } from '../../../../models/enum';
+import { ITEMS, PKM, RARITY_COLOR, ITEM_DESCRIPTION, ITEM_NAME } from '../../../../models/enum';
 import PokemonFactory from '../../../../models/pokemon-factory';
 
 class SelectedEntity extends Component {
@@ -26,7 +26,7 @@ class SelectedEntity extends Component {
             return <div className='nes-container' style={entityStyle}>
                 <div style={{display:'flex'}}>
                     <img style={imgStyle} src={'assets/items/' + this.props.entity + '.png'}/>
-                    <h3>{this.props.entity}</h3>
+                    <h3>{ITEM_NAME[this.props.entity].eng}</h3>
                 </div>
                 <p>{ITEM_DESCRIPTION[this.props.entity].eng}</p>
         </div>

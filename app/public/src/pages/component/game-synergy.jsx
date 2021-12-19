@@ -9,7 +9,7 @@ class GameSynergy extends Component{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-around',
-            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            backgroundColor: this.props.value >= TYPE_TRIGGER[this.props.type][0] ? 'rgba(255,255,255,1)': 'rgba(255,255,255,0.6)',
             marginBottom: '5px',
             padding:'5px',
             cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
@@ -22,7 +22,8 @@ class GameSynergy extends Component{
         textColor='#000000' 
         backgroundColor='rgba(255,255,255,1)' 
         effect='solid'
-        place='right'>
+        place='right'
+        offset={{bottom: this.props.isFirst ? 100: 0}}>
             <GameSynergyDetail type={this.props.type} value={this.props.value}/>
         </ReactTooltip>
 
