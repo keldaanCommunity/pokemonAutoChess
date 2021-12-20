@@ -2081,6 +2081,18 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }
+  },
+  HEAL_BLOCK: {
+    title:{
+      eng: 'Heal Block',
+      esp: 'Heal Block',
+      fra: 'Heal Block'
+    },
+    description:{
+      eng: 'Area of effect attack that deals 10/20/30 damages in a line behind the target',
+      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
+      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
+    }
   }
 });
 
@@ -4066,10 +4078,10 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     pokemons: [
       'aerodactyl', 'amaura',
       'anorith',    'archen',
-      'bastiodon',  'carracosta',
+      'shieldon',  'tirtouga',
       'cradily',    'cranidos',
       'kabuto',     'omanyte',
-      'tyrantrum'
+      'tyrunt'
     ],
     mythicalPokemons: []
   }
