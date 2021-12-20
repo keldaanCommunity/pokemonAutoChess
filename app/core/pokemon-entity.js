@@ -59,7 +59,8 @@ class PokemonEntity extends schema.Schema {
           freeze: false,
           protect: false,
           sleep: false,
-          confusion: false
+          confusion: false,
+          wound: false
         }
     );
 
@@ -70,6 +71,7 @@ class PokemonEntity extends schema.Schema {
     this.protectCooldown = 0;
     this.sleepCooldown = 0;
     this.confusionCooldown = 0;
+    this.woundCooldown = 0;
 
     pokemon.types.forEach((type) => {
       this.types.push(type);
@@ -196,6 +198,19 @@ class PokemonEntity extends schema.Schema {
     }
   }
 
+  triggerWound(timer){
+    this.wound = true;
+    this.woundCooldown = timer;
+  }
+
+  updateWound(dt){
+    if (this.woundCooldown - dt <= 0) {
+      this.wound = false;
+    } else {
+      this.woundCooldown = this.woundCooldown - dt;
+    }
+  }
+
   setMana(mana) {
     if (!this.silence && !this.protect) {
       this.mana = Math.min(mana, this.maxMana);
@@ -239,7 +254,8 @@ schema.defineTypes(PokemonEntity, {
   freeze: 'boolean',
   protect: 'boolean',
   sleep: 'boolean',
-  confusion: 'boolean'
+  confusion: 'boolean',
+  wound: 'boolean'
 });
 
 module.exports = PokemonEntity;

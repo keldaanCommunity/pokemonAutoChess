@@ -257,6 +257,12 @@ export default class BattleManager {
             } else {
               children[i].removeProtect();
             }
+          } else if (change.field == 'wound'){
+            if (pokemon.wound) {
+              children[i].addWound();
+            } else {
+              children[i].removeWound();
+            }
           }
           break;
         }

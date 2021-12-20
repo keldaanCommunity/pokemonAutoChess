@@ -6,7 +6,7 @@ class PokemonState {
   }
 
   handleHeal(pokemon, heal) {
-    if (pokemon.life > 0 && pokemon.life < pokemon.hp) {
+    if (pokemon.life > 0 && pokemon.life < pokemon.hp && !pokemon.wound) {
       pokemon.life = Math.min(pokemon.hp, pokemon.life + heal);
     }
   }
@@ -118,6 +118,10 @@ class PokemonState {
 
     if (pokemon.confusion) {
       pokemon.updateConfusion(dt);
+    }
+
+    if(pokemon.wound) {
+      pokemon.updateWound(dt);
     }
 
     if (pokemon.manaCooldown <= 0) {

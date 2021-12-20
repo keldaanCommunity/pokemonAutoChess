@@ -292,6 +292,9 @@ class PokemonFactory {
         
       case SPECIAL_SKILL.SEED_FLARE:
         return new Strategy.SeedFlareStrategy();
+
+      case SPECIAL_SKILL.HEAL_BLOCK:
+        return new Strategy.HealBlockStrategy();
       
       case SPECIAL_SKILL.DEFAULT:
         return new Strategy.AttackStrategy();

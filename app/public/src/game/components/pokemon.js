@@ -551,6 +551,7 @@ export default class Pokemon extends Button {
               specialProjectile.destroy();
             });
             break;
+            
           default:
             break;
         }
@@ -786,6 +787,24 @@ export default class Pokemon extends Button {
       this.rangeType = 'range';
     } else {
       this.rangeType = 'melee';
+    }
+  }
+
+  addWound(){
+    if (!this.getFirst('objType', 'wound')) {
+      const wound = new GameObjects.Sprite(this.scene, 0, -30, 'wound', '000');
+      wound.setScale(2, 2);
+      this.scene.add.existing(wound);
+      wound.objType = 'wound';
+      wound.anims.play('wound');
+      this.add(wound);
+    }
+  }
+
+  removeWound(){
+    const sprite = this.getFirst('objType', 'wound');
+    if(sprite){
+      this.remove(sprite, true);
     }
   }
 

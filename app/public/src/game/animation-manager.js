@@ -139,6 +139,13 @@ export default class AnimationManager {
       frameRate: 10,
       repeat: -1
     });
+
+    this.game.anims.create({
+      key: `wound`,
+      frames: this.game.anims.generateFrameNames('wound', {start: 0, end: 3, zeroPad: 3}),
+      frameRate: 10,
+      repeat: -1
+    });
   }
 
   createSpecialCellsAnimations() {

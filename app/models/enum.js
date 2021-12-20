@@ -555,7 +555,7 @@ const ITEMS = Object.freeze({
   HELIX_FOSSIL:'HELIX_FOSSIL',
   JAW_FOSSIL:'JAW_FOSSIL',
   OLD_AMBER:'OLD_AMBER',
-  PLUM_FOSSIL:'PLUM_FOSSIL',
+  PLUME_FOSSIL:'PLUME_FOSSIL',
   ROOT_FOSSIL:'ROOT_FOSSIL',
   SAIL_FOSSIL:'SAIL_FOSSIL',
   SKULL_FOSSIL:'SKULL_FOSSIL'
@@ -597,7 +597,7 @@ const ITEM_NAME = Object.freeze({
     esp: 'Old Amber',
     fra: 'Old Amber'
   },
-  PLUM_FOSSIL:{
+  PLUME_FOSSIL:{
     eng: 'Plum Fossil',
     esp: 'Plum Fossil',
     fra: 'Plum Fossil'
@@ -840,7 +840,7 @@ const ITEM_DESCRIPTION = Object.freeze({
     esp: 'Old Amber',
     fra: 'Old Amber'
   },
-  PLUM_FOSSIL:{
+  PLUME_FOSSIL:{
     eng: 'Give this to a Ditto to make it evolve into an Archen',
     esp: 'Plum Fossil',
     fra: 'Plum Fossil'
@@ -1501,7 +1501,8 @@ const SPECIAL_SKILL = Object.freeze({
   POISON: 'POISON',
   CONFUSION: 'CONFUSION',
   ORIGIN_PULSE: 'ORIGIN_PULSE',
-  SEED_FLARE:'SEED_FLARE'
+  SEED_FLARE:'SEED_FLARE',
+  HEAL_BLOCK: 'HEAL_BLOCK'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
