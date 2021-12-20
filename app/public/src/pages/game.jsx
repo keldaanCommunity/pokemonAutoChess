@@ -50,6 +50,7 @@ class Game extends Component {
             avatar:'rattata',
             money:5,
             name:'',
+            life:100,
             synergies:{
                 NORMAL: 0,
                 GRASS: 0,
@@ -423,6 +424,7 @@ class Game extends Component {
             opponentAvatar={this.state.player.opponentAvatar}
             money={this.state.player.money}
             name={this.state.player.name}
+            life={this.state.player.life}
         />
         <GameDpsMeter
             dpsMeter={this.state.dpsMeter}
