@@ -53,6 +53,7 @@
     "helmet": "^3.23.3",
     "mongoose": "^5.13.4",
     "nes.css": "^2.3.0",
+    "npm": "^8.3.0",
     "pastebin-ts": "^1.2.0",
     "phaser": "^3.55.2",
     "phaser3-rex-plugins": "^1.1.44",

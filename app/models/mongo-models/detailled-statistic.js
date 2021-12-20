@@ -1,5 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const {ITEMS, PKM} = require('./../enum');
+
+const pokemon = new Schema({
+  name:{
+    type: String,
+    enum: Object.values(PKM)
+  },
+  items:[
+    {
+      type: String,
+      enum: Object.keys(ITEMS)
+    }
+  ]
+});
+
 const statisticSchema = new Schema(
     {
       playerId:{
@@ -20,11 +35,7 @@ const statisticSchema = new Schema(
       avatar:{
         type: String
       },
-      pokemons:[
-        {
-          type: String
-        }
-      ]
+      pokemons:[pokemon]
     }
 );
 
