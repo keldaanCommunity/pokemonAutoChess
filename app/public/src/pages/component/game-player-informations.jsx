@@ -2,6 +2,24 @@ import React, { Component } from 'react';
 
 class GamePlayerInformations extends Component{
 
+    getLifePngName() {
+        let lifePngName = 'life_100';
+        if(this.props.life > 80){
+            lifePngName = 'life_100';
+        } else if(this.props.life > 60 && this.props.life <= 80){
+            lifePngName = 'life_80';
+        } else if(this.props.life > 40 && this.props.life <= 60){
+            lifePngName = 'life_60';            
+        } else if(this.props.life > 20 && this.props.life <= 40){
+            lifePngName = 'life_40';
+        } else if(this.props.life > 0 && this.props.life <= 20){
+            lifePngName = 'life_20';
+        } else {
+            lifePngName = 'life_0';
+        }
+        return lifePngName;
+      }
+
     render(){
         const style = {
             position:'absolute',
@@ -29,14 +47,18 @@ class GamePlayerInformations extends Component{
                 <h4>{this.props.boardSize}/{this.props.maxBoardSize}</h4>
                 <div style={{display:'flex'}}>
                     <h4>{this.props.money}</h4>
-                    <img style={{width:'20px', height:'20px', marginBottom:'5px'}} src='assets/ui/money.png'/>
+                    <img style={{width:'25px', height:'25px', marginBottom:'5px'}} src='assets/ui/money.png'/>
+                </div>
+                <div style={{display:'flex'}}>
+                    <h4 style={{marginLeft:'5px'}}>{this.props.life}</h4>
+                    <img style={{width:'25px', height:'25px', marginBottom:'5px'}} src={`assets/ui/${this.getLifePngName()}.png`}/>
                 </div>
                 <div style={{display:'flex'}}>
                     <img src={`assets/avatar/${this.props.avatar}.png`}/>
                     <p style={{marginLeft:'5px'}}>{this.props.name}</p>
                 </div>
                 {opponent}
-        </div>;
+                </div>;
     }
 }
 
