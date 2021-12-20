@@ -598,9 +598,9 @@ const ITEM_NAME = Object.freeze({
     fra: 'Old Amber'
   },
   PLUME_FOSSIL:{
-    eng: 'Plum Fossil',
-    esp: 'Plum Fossil',
-    fra: 'Plum Fossil'
+    eng: 'Plume Fossil',
+    esp: 'Plume Fossil',
+    fra: 'Plume Fossil'
   },
   ROOT_FOSSIL:{
     eng: 'Root Fossil',
@@ -3506,7 +3506,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'victreebel',     'snover',     'abomasnow',
     'mega-abomasnow', 'virizion',   'celebi',
     'shaymin',        'oddish',     'gloom',
-    'vileplume',      'bellossom'
+    'vileplume',      'bellossom',  'cradily',
+    'lileep'
   ],
   FIRE: [
     'charmander',    'charmeleon',     'charizard',
@@ -3532,7 +3533,9 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'magikarp', 'gyarados',      'palkia',
     'suicune',  'kyogre',        'vaporeon',
     'carvanha', 'keldeo',        'manaphy',
-    'lapras',   'primal-Kyogre'
+    'lapras',   'primal-Kyogre', 'carracosta',
+    'kabuto',   'kabutops',      'omanyte',
+    'omastar',  'tirtouga'
   ],
   ELECTRIC: [
     'mareep',     'flaffy',
@@ -3595,7 +3598,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'mega-scizor',  'lucario',
     'mega-lucario', 'dialga',
     'registeel',    'cobalion',
-    'jirachi',      'heatran'
+    'jirachi',      'heatran',
+    'bastiodon',    'shieldon'
   ],
   GROUND: [
     'geodude',        'graveler',  'golem',
@@ -3623,20 +3627,16 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'bellossom'
   ],
   DRAGON: [
-    'horsea',        'seadra',
-    'kingdra',       'vibrava',
-    'flygon',        'dratini',
-    'dragonair',     'dragonite',
-    'bagon',         'shelgon',
-    'salamence',     'gible',
-    'gabite',        'garchomp',
-    'giratina',      'dialga',
-    'palkia',        'rayquaza',
-    'latias',        'latios',
-    'kyurem',        'reshiram',
-    'zekrom',        'deino',
-    'zweilous',      'hydreigon',
-    'mega-Rayquaza'
+    'horsea',    'seadra',    'kingdra',
+    'vibrava',   'flygon',    'dratini',
+    'dragonair', 'dragonite', 'bagon',
+    'shelgon',   'salamence', 'gible',
+    'gabite',    'garchomp',  'giratina',
+    'dialga',    'palkia',    'rayquaza',
+    'latias',    'latios',    'kyurem',
+    'reshiram',  'zekrom',    'deino',
+    'zweilous',  'hydreigon', 'mega-Rayquaza',
+    'tyrantrum', 'tyrunt'
   ],
   FIELD: [
     'squirtle',      'wartortle',  'blastoise',
@@ -3666,7 +3666,7 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'bagon',      'shelgon',    'salamence',
     'gible',      'gabite',     'garchomp',
     'regigigas',  'darkrai',    'mewtwo',
-    'kyurem'
+    'kyurem',     'cranidos',   'rampardos'
   ],
   HUMAN: [
     'chimchar',     'monferno',
@@ -3702,7 +3702,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'trapinch',   'vibrava',
     'flygon',     'scyther',
     'scizor',     'mega-scizor',
-    'volcarona',  'manaphy'
+    'volcarona',  'manaphy',
+    'anorith',    'armaldo'
   ],
   FLYING: [
     'charizard',  'zubat',         'golbat',
@@ -3717,7 +3718,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'lugia',      'zapdos',        'moltres',
     'articuno',   'rayquaza',      'landorus',
     'thundurus',  'tornadus',      'ho-Oh',
-    'aerodactyl', 'mega-Rayquaza', 'swablu'
+    'aerodactyl', 'mega-Rayquaza', 'swablu',
+    'archen',     'archeops'
   ],
   FLORA: [
     'bulbasaur',  'ivysaur',
@@ -3731,17 +3733,16 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'shaymin'
   ],
   MINERAL: [
-    'geodude',    'graveler',
-    'golem',      'aron',
-    'lairon',     'aggron',
-    'rhyhorn',    'rhydon',
-    'rhyperior',  'larvitar',
-    'pupitar',    'tyranitar',
-    'beldum',     'metang',
-    'metagross',  'onix',
-    'steelix',    'mega-steelix',
-    'regirock',   'terrakion',
-    'aerodactyl'
+    'geodude',   'graveler',
+    'golem',     'aron',
+    'lairon',    'aggron',
+    'rhyhorn',   'rhydon',
+    'rhyperior', 'larvitar',
+    'pupitar',   'tyranitar',
+    'beldum',    'metang',
+    'metagross', 'onix',
+    'steelix',   'mega-steelix',
+    'regirock',  'terrakion'
   ],
   AMORPH: [
     'duskull',    'dusclops',
@@ -3777,257 +3778,302 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'mega-abomasnow', 'vanillite',
     'vanillish',      'vanilluxe',
     'glaceon',        'lapras',
-    'kyurem'
+    'kyurem',         'amaura',
+    'aurorus'
+  ],
+  FOSSIL: [
+    'aerodactyl', 'amaura',
+    'aurorus',    'anorith',
+    'archen',     'archeops',
+    'armaldo',    'bastiodon',
+    'carracosta', 'cradily',
+    'cranidos',   'kabuto',
+    'kabutops',   'lileep',
+    'omanyte',    'omastar',
+    'rampardos',  'shieldon',
+    'tirtouga',   'tyrantrum',
+    'tyrunt'
   ]
 }
 
 const PRECOMPUTED_TYPE_POKEMONS = {
-    NORMAL: {
-      pokemons: [
-        'cleffa',  'igglybuff',
-        'pidgey',  'starly',
-        'eevee',   'togepi',
-        'slakoth', 'ditto',
-        'scyther', 'meditite'
-      ],
-      mythicalPokemons: [ 'regigigas', 'arceus' ]
-    },
-    GRASS: {
-      pokemons: [
-        'bulbasaur',  'caterpie',
-        'hoppip',     'seedot',
-        'chikorita',  'treecko',
-        'turtwig',    'leafeon',
-        'bellsprout', 'oddish',
-        'lotad',      'snover'
-      ],
-      mythicalPokemons: [ 'virizion', 'celebi', 'shaymin' ]
-    },
-    FIRE: {
-      pokemons: [
-        'charmander', 'cyndaquil',
-        'torchic',    'chimchar',
-        'flareon',    'houndour',
-        'magby',      'litwick',
-        'numel'
-      ],
-      mythicalPokemons: [
-        'moltres',
-        'entei',
-        'groudon',
-        'volcarona',
-        'reshiram',
-        'victini',
-        'heatran',
-        'ho-Oh',
-        'primal-Groudon'
-      ]
-    },
-    WATER: {
-      pokemons: [
-        'squirtle', 'azurill',
-        'mudkip',   'piplup',
-        'vaporeon', 'carvanha',
-        'horsea',   'lotad',
-        'poliwag'
-      ],
-      mythicalPokemons: [
-        'palkia',
-        'suicune',
-        'kyogre',
-        'keldeo',
-        'manaphy',
-        'lapras',
-        'primal-Kyogre'
-      ]
-    },
-    ELECTRIC: {
-      pokemons: [ 'mareep', 'jolteon', 'pichu', 'magnemite', 'shinx', 'elekid' ],
-      mythicalPokemons: [
-        'zapdos',
-        'raikou',
-        'thundurus',
-        'rotom',
-        'zekrom',
-        'primal-Kyogre'
-      ]
-    },
-    FIGHTING: {
-      pokemons: [
-        'combusken',
-        'monferno',
-        'machop',
-        'poliwag',
-        'riolu',
-        'meditite'
-      ],
-      mythicalPokemons: [ 'keldeo', 'terrakion', 'virizion', 'cobalion' ]
-    },
-    PSYCHIC: {
-      pokemons: [ 'espeon', 'slowpoke', 'abra', 'ralts', 'beldum', 'solosis' ],
-      mythicalPokemons: [
-        'lugia',   'latias',
-        'latios',  'mesprit',
-        'azelf',   'uxie',
-        'mewtwo',  'celebi',
-        'victini', 'jirachi',
-        'deoxys',  'cresselia'
-      ]
-    },
-    DARK: {
-      pokemons: [
-        'seedot',   'umbreon',
-        'carvanha', 'houndour',
-        'duskull',  'larvitar',
-        'deino',    'sandile'
-      ],
-      mythicalPokemons: [ 'darkrai', 'spiritomb', 'absol' ]
-    },
-    METAL: {
-      pokemons: [
-        'prinplup',
-        'aron',
-        'magnemite',
-        'beldum',
-        'steelix',
-        'scizor',
-        'lucario'
-      ],
-      mythicalPokemons: [ 'dialga', 'registeel', 'cobalion', 'jirachi', 'heatran' ]
-    },
-    GROUND: {
-      pokemons: [
-        'geodude',  'mudkip',
-        'turtwig',  'swinub',
-        'trapinch', 'rhyhorn',
-        'gible',    'sandile',
-        'onix',     'numel'
-      ],
-      mythicalPokemons: [ 'groudon', 'landorus', 'primal-Groudon' ]
-    },
-    POISON: {
-      pokemons: [
-        'bulbasaur',
-        'zubat',
-        'weedle',
-        'nidoranF',
-        'nidoranM',
-        'bellsprout',
-        'oddish',
-        'gastly'
-      ],
-      mythicalPokemons: []
-    },
-    DRAGON: {
-      pokemons: [ 'horsea', 'vibrava', 'dratini', 'bagon', 'gible', 'deino' ],
-      mythicalPokemons: [
-        'giratina',
-        'dialga',
-        'palkia',
-        'rayquaza',
-        'latias',
-        'latios',
-        'kyurem',
-        'reshiram',
-        'zekrom',
-        'mega-Rayquaza'
-      ]
-    },
-    FIELD: {
-      pokemons: [
-        'squirtle', 'mareep',
-        'seedot',   'cyndaquil',
-        'nidoranF', 'nidoranM',
-        'eevee',    'vaporeon',
-        'jolteon',  'flareon',
-        'espeon',   'umbreon',
-        'leafeon',  'sylveon',
-        'glaceon',  'shinx',
-        'slakoth',  'sandile',
-        'numel'
-      ],
-      mythicalPokemons: [ 'raikou', 'entei', 'absol', 'arceus' ]
-    },
-    MONSTER: {
-      pokemons: [
-        'charmander', 'totodile',
-        'treecko',    'aron',
-        'rhyhorn',    'gastly',
-        'larvitar',   'bagon',
-        'gible'
-      ],
-      mythicalPokemons: [ 'regigigas', 'darkrai', 'mewtwo', 'kyurem' ]
-    },
-    HUMAN: {
-      pokemons: [
-        'chimchar', 'machop',
-        'abra',     'ralts',
-        'elekid',   'magby',
-        'riolu',    'meditite'
-      ],
-      mythicalPokemons: [ 'regice', 'regirock', 'registeel', 'regigigas', 'deoxys' ]
-    },
-    AQUATIC: {
-      pokemons: [ 'totodile', 'slowpoke', 'spheal', 'dratini' ],
-      mythicalPokemons: [ 'lugia', 'kyogre', 'primal-Kyogre' ]
-    },
-    BUG: {
-      pokemons: [ 'caterpie', 'weedle', 'trapinch', 'scyther' ],
-      mythicalPokemons: [ 'volcarona', 'manaphy' ]
-    },
-    FLYING: {
-      pokemons: [
-        'charizard',  'zubat',
-        'butterfree', 'beedrill',
-        'pidgey',     'hoppip',
-        'starly',     'torchic',
-        'piplup',     'swablu',
-        'togetic',    'dragonite',
-        'salamence'
-      ],
-      mythicalPokemons: [
-        'lugia',         'zapdos',
-        'moltres',       'articuno',
-        'rayquaza',      'landorus',
-        'thundurus',     'tornadus',
-        'ho-Oh',         'aerodactyl',
-        'mega-Rayquaza'
-      ]
-    },
-    FLORA: {
-      pokemons: [
-        'bulbasaur',
-        'hoppip',
-        'chikorita',
-        'turtwig',
-        'leafeon',
-        'bellsprout'
-      ],
-      mythicalPokemons: [ 'shaymin' ]
-    },
-    MINERAL: {
-      pokemons: [ 'geodude', 'aron', 'rhyhorn', 'larvitar', 'beldum', 'onix' ],
-      mythicalPokemons: [ 'regirock', 'terrakion', 'aerodactyl' ]
-    },
-    AMORPH: {
-      pokemons: [ 'duskull', 'gastly', 'litwick', 'snorunt', 'solosis' ],
-      mythicalPokemons: [ 'giratina', 'darkrai', 'rotom', 'spiritomb' ]
-    },
-    FAIRY: {
-      pokemons: [
-        'azurill',   'cleffa',
-        'igglybuff', 'sylveon',
-        'swablu',    'pichu',
-        'togepi',    'ralts',
-        'vanillite'
-      ],
-      mythicalPokemons: [ 'mesprit', 'azelf', 'uxie', 'cresselia' ]
-    },
-    ICE: {
-      pokemons: [ 'swinub', 'glaceon', 'spheal', 'snorunt', 'vanillite', 'snover' ],
-      mythicalPokemons: [ 'articuno', 'suicune', 'regice', 'lapras', 'kyurem' ]
-    }
+  NORMAL: {
+    pokemons: [
+      'cleffa',  'igglybuff',
+      'pidgey',  'starly',
+      'eevee',   'togepi',
+      'slakoth', 'ditto',
+      'scyther', 'meditite'
+    ],
+    mythicalPokemons: [ 'regigigas', 'arceus' ]
+  },
+  GRASS: {
+    pokemons: [
+      'bulbasaur',  'caterpie',
+      'hoppip',     'seedot',
+      'chikorita',  'treecko',
+      'turtwig',    'leafeon',
+      'bellsprout', 'oddish',
+      'lotad',      'snover',
+      'cradily'
+    ],
+    mythicalPokemons: [ 'virizion', 'celebi', 'shaymin' ]
+  },
+  FIRE: {
+    pokemons: [
+      'charmander', 'cyndaquil',
+      'torchic',    'chimchar',
+      'flareon',    'houndour',
+      'magby',      'litwick',
+      'numel'
+    ],
+    mythicalPokemons: [
+      'moltres',
+      'entei',
+      'groudon',
+      'volcarona',
+      'reshiram',
+      'victini',
+      'heatran',
+      'ho-Oh',
+      'primal-Groudon'
+    ]
+  },
+  WATER: {
+    pokemons: [
+      'squirtle', 'azurill',
+      'mudkip',   'piplup',
+      'vaporeon', 'carvanha',
+      'horsea',   'lotad',
+      'poliwag',  'carracosta',
+      'kabuto',   'omanyte'
+    ],
+    mythicalPokemons: [
+      'palkia',
+      'suicune',
+      'kyogre',
+      'keldeo',
+      'manaphy',
+      'lapras',
+      'primal-Kyogre'
+    ]
+  },
+  ELECTRIC: {
+    pokemons: [ 'mareep', 'jolteon', 'pichu', 'magnemite', 'shinx', 'elekid' ],
+    mythicalPokemons: [
+      'zapdos',
+      'raikou',
+      'thundurus',
+      'rotom',
+      'zekrom',
+      'primal-Kyogre'
+    ]
+  },
+  FIGHTING: {
+    pokemons: [
+      'combusken',
+      'monferno',
+      'machop',
+      'poliwag',
+      'riolu',
+      'meditite'
+    ],
+    mythicalPokemons: [ 'keldeo', 'terrakion', 'virizion', 'cobalion' ]
+  },
+  PSYCHIC: {
+    pokemons: [ 'espeon', 'slowpoke', 'abra', 'ralts', 'beldum', 'solosis' ],
+    mythicalPokemons: [
+      'lugia',   'latias',
+      'latios',  'mesprit',
+      'azelf',   'uxie',
+      'mewtwo',  'celebi',
+      'victini', 'jirachi',
+      'deoxys',  'cresselia'
+    ]
+  },
+  DARK: {
+    pokemons: [
+      'seedot',   'umbreon',
+      'carvanha', 'houndour',
+      'duskull',  'larvitar',
+      'deino',    'sandile'
+    ],
+    mythicalPokemons: [ 'darkrai', 'spiritomb', 'absol' ]
+  },
+  METAL: {
+    pokemons: [
+      'prinplup',  'aron',
+      'magnemite', 'beldum',
+      'steelix',   'scizor',
+      'lucario',   'bastiodon'
+    ],
+    mythicalPokemons: [ 'dialga', 'registeel', 'cobalion', 'jirachi', 'heatran' ]
+  },
+  GROUND: {
+    pokemons: [
+      'geodude',  'mudkip',
+      'turtwig',  'swinub',
+      'trapinch', 'rhyhorn',
+      'gible',    'sandile',
+      'onix',     'numel'
+    ],
+    mythicalPokemons: [ 'groudon', 'landorus', 'primal-Groudon' ]
+  },
+  POISON: {
+    pokemons: [
+      'bulbasaur',
+      'zubat',
+      'weedle',
+      'nidoranF',
+      'nidoranM',
+      'bellsprout',
+      'oddish',
+      'gastly'
+    ],
+    mythicalPokemons: []
+  },
+  DRAGON: {
+    pokemons: [
+      'horsea',
+      'vibrava',
+      'dratini',
+      'bagon',
+      'gible',
+      'deino',
+      'tyrantrum'
+    ],
+    mythicalPokemons: [
+      'giratina',
+      'dialga',
+      'palkia',
+      'rayquaza',
+      'latias',
+      'latios',
+      'kyurem',
+      'reshiram',
+      'zekrom',
+      'mega-Rayquaza'
+    ]
+  },
+  FIELD: {
+    pokemons: [
+      'squirtle', 'mareep',
+      'seedot',   'cyndaquil',
+      'nidoranF', 'nidoranM',
+      'eevee',    'vaporeon',
+      'jolteon',  'flareon',
+      'espeon',   'umbreon',
+      'leafeon',  'sylveon',
+      'glaceon',  'shinx',
+      'slakoth',  'sandile',
+      'numel'
+    ],
+    mythicalPokemons: [ 'raikou', 'entei', 'absol', 'arceus' ]
+  },
+  MONSTER: {
+    pokemons: [
+      'charmander', 'totodile',
+      'treecko',    'aron',
+      'rhyhorn',    'gastly',
+      'larvitar',   'bagon',
+      'gible',      'cranidos'
+    ],
+    mythicalPokemons: [ 'regigigas', 'darkrai', 'mewtwo', 'kyurem' ]
+  },
+  HUMAN: {
+    pokemons: [
+      'chimchar', 'machop',
+      'abra',     'ralts',
+      'elekid',   'magby',
+      'riolu',    'meditite'
+    ],
+    mythicalPokemons: [ 'regice', 'regirock', 'registeel', 'regigigas', 'deoxys' ]
+  },
+  AQUATIC: {
+    pokemons: [ 'totodile', 'slowpoke', 'spheal', 'dratini' ],
+    mythicalPokemons: [ 'lugia', 'kyogre', 'primal-Kyogre' ]
+  },
+  BUG: {
+    pokemons: [ 'caterpie', 'weedle', 'trapinch', 'scyther', 'anorith' ],
+    mythicalPokemons: [ 'volcarona', 'manaphy' ]
+  },
+  FLYING: {
+    pokemons: [
+      'charizard',  'zubat',
+      'butterfree', 'beedrill',
+      'pidgey',     'hoppip',
+      'starly',     'torchic',
+      'piplup',     'swablu',
+      'togetic',    'dragonite',
+      'salamence',  'aerodactyl',
+      'archen'
+    ],
+    mythicalPokemons: [
+      'lugia',
+      'zapdos',
+      'moltres',
+      'articuno',
+      'rayquaza',
+      'landorus',
+      'thundurus',
+      'tornadus',
+      'ho-Oh',
+      'mega-Rayquaza'
+    ]
+  },
+  FLORA: {
+    pokemons: [
+      'bulbasaur',
+      'hoppip',
+      'chikorita',
+      'turtwig',
+      'leafeon',
+      'bellsprout'
+    ],
+    mythicalPokemons: [ 'shaymin' ]
+  },
+  MINERAL: {
+    pokemons: [ 'geodude', 'aron', 'rhyhorn', 'larvitar', 'beldum', 'onix' ],
+    mythicalPokemons: [ 'regirock', 'terrakion' ]
+  },
+  AMORPH: {
+    pokemons: [ 'duskull', 'gastly', 'litwick', 'snorunt', 'solosis' ],
+    mythicalPokemons: [ 'giratina', 'darkrai', 'rotom', 'spiritomb' ]
+  },
+  FAIRY: {
+    pokemons: [
+      'azurill',   'cleffa',
+      'igglybuff', 'sylveon',
+      'swablu',    'pichu',
+      'togepi',    'ralts',
+      'vanillite'
+    ],
+    mythicalPokemons: [ 'mesprit', 'azelf', 'uxie', 'cresselia' ]
+  },
+  ICE: {
+    pokemons: [
+      'swinub',
+      'glaceon',
+      'spheal',
+      'snorunt',
+      'vanillite',
+      'snover',
+      'amaura'
+    ],
+    mythicalPokemons: [ 'articuno', 'suicune', 'regice', 'lapras', 'kyurem' ]
+  },
+  FOSSIL: {
+    pokemons: [
+      'aerodactyl', 'amaura',
+      'anorith',    'archen',
+      'bastiodon',  'carracosta',
+      'cradily',    'cranidos',
+      'kabuto',     'omanyte',
+      'tyrantrum'
+    ],
+    mythicalPokemons: []
   }
+}
 
 const BATTLE_RESULT = Object.freeze({
   WIN:'WIN',

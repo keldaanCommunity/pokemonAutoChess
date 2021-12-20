@@ -1502,6 +1502,10 @@ class PokemonFactory {
         return new Pokemon.Tyrunt();
       case PKM.TYRANTRUM:
         return new Pokemon.Tyrantrum();
+      case PKM.KABUTO:
+        return new Pokemon.Kabuto();
+      case PKM.KABUTOPS:
+        return new Pokemon.Kabutops();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();

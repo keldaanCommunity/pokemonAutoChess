@@ -20,6 +20,22 @@ class ItemFactory {
     return keys[Math.floor(Math.random() * keys.length)];
   }
 
+  static getFossils(){
+    return [
+      ITEMS.DOME_FOSSIL,
+      ITEMS.HELIX_FOSSIL,
+      ITEMS.OLD_AMBER,
+      ITEMS.ROOT_FOSSIL,
+      ITEMS.CLAW_FOSSIL,
+      ITEMS.SAIL_FOSSIL,
+      ITEMS.JAW_FOSSIL,
+      ITEMS.PLUME_FOSSIL,
+      ITEMS.ARMOR_FOSSIL,
+      ITEMS.COVER_FOSSIL,
+      ITEMS.SKULL_FOSSIL
+    ];
+  }
+
   static createSpecificItems(array){
     return array[Math.floor(Math.random() * array.length)];
   }
@@ -33,6 +49,17 @@ class ItemFactory {
     items.push(keys.pop());
     return items;
   }
+
+  static createRandomFossils(){
+    let keys = ItemFactory.getFossils();
+    ItemFactory.shuffleArray(keys);
+    let items = [];
+    items.push(keys.pop());
+    items.push(keys.pop());
+    items.push(keys.pop());
+    return items;
+  }
+
 
   static shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {

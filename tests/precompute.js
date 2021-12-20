@@ -4,7 +4,7 @@ const PKM = require('../app/models/enum').PKM;
 const TYPE = require('../app/models/enum').TYPE;
 const PokemonFactory = require('../app/models/pokemon-factory');
 
-/*
+
 let data = {
     NORMAL: {
         pokemons:[],
@@ -97,6 +97,10 @@ let data = {
     ICE: {
         pokemons:[],
         mythicalPokemons:[]
+    },
+    FOSSIL: {
+        pokemons:[],
+        mythicalPokemons:[]
     }
 };
 
@@ -142,41 +146,20 @@ Object.keys(TYPE).forEach(type=>{
     //console.log(pokemonCandidates);
     //console.log(mythicalPokemonCandidates);
 });
-//console.log(data);
 
-let precomputedData = {
-    COMMON:[],
-    UNCOMMON:[],
-    RARE:[],
-    EPIC:[],
-    LEGENDARY:[],
-    MYTHICAL: [],
-    NEUTRAL: [],
-    SUMMON: []
-}
 
-Object.keys(RARITY).forEach(rarity=>{
-    Object.keys(PKM).forEach(key=>{
-        let r = PokemonFactory.getPokemonRarityFromName(PKM[key]);
-        if(r == rarity){
-            precomputedData[rarity].push(PKM[key]);
-        }
-    });
-});
-
-console.log(precomputedData);
-*/
-
-let typeData = {};
-
+let dataAll = {};
 Object.keys(TYPE).forEach(type=>{
-    typeData[type] = [];
-    Object.keys(PKM).forEach(key=>{
-        let pkm = PokemonFactory.createPokemonFromName(PKM[key]);
-        if(pkm.types.includes(type)){
-            typeData[type].push(pkm.name);
-        }
+    let pokemons = [];
+    
+    Object.values(PKM).forEach(pkm => {
+      let pokemon = PokemonFactory.createPokemonFromName(pkm);
+      if(pokemon.types.includes(type)){
+        pokemons.push(pkm);
+      }
     });
+
+    dataAll[type] = pokemons;
 });
 
-console.log(typeData);
+console.log(dataAll);
