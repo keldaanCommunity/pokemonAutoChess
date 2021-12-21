@@ -9,6 +9,7 @@ const BOT = require('../models/mongo-models/bot');
 const {XP_PLACE, XP_TABLE} = require('../models/enum');
 const EloRank = require('elo-rank');
 const admin = require('firebase-admin');
+const DetailledStatistic = require('../models/mongo-models/detailled-statistic');
 
 
 class GameRoom extends colyseus.Room {
@@ -132,7 +133,7 @@ class GameRoom extends colyseus.Room {
   onDispose() {
     //console.log(`dispose game room`);
     let self = this;
-    let requiredStageLevel = 10;
+    let requiredStageLevel = process.env.MODE == 'dev' ? 0: 10;
 
     if(this.state.stageLevel >= requiredStageLevel && this.state.elligibleToXP){
       this.state.players.forEach(player =>{
@@ -191,7 +192,7 @@ class GameRoom extends colyseus.Room {
                 //usr.markModified('metadata');
                 usr.save();
     
-                Statistic.create({
+                DetailledStatistic.create({
                   time: Date.now(),
                   name: dbrecord.name,
                   pokemons: dbrecord.pokemons,
@@ -219,9 +220,14 @@ class GameRoom extends colyseus.Room {
       exp: player.exp,
       elo: player.elo
     };
+
     player.board.forEach(pokemon => {
+
       if(pokemon.positionY != 0){
-        simplePlayer.pokemons.push(pokemon.name);
+        simplePlayer.pokemons.push({
+          name: pokemon.name,
+          items: pokemon.items.getAllItems()
+        });
       }
     });
     return simplePlayer;

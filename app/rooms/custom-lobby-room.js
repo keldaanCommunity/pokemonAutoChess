@@ -9,9 +9,9 @@ const schema = require('@colyseus/schema');
 const LobbyUser = require('../models/colyseus-models/lobby-user');
 const admin = require('firebase-admin');
 const GameRecord = require('../models/colyseus-models/game-record');
-const Statistic = require('../models/mongo-models/statistic');
 const { MessageEmbed, WebhookClient } = require('discord.js');
 const PasteBinAPI = require('pastebin-ts');
+const DetailledStatistic = require('../models/mongo-models/detailled-statistic');
 
 const pastebin = new PasteBinAPI({
   'api_dev_key' : process.env.PASTEBIN_API_DEV_KEY,
@@ -143,7 +143,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
       UserMetadata.findOne({'displayName':message.name},(err, user)=>{
         if(user){
-          Statistic.find({'playerId': user.uid}, ['pokemons','time','rank','elo'], {limit:10, sort:{'time': -1}}, (err, stats)=>{
+          DetailledStatistic.find({'playerId': user.uid}, ['pokemons','time','rank','elo'], {limit:10, sort:{'time': -1}}, (err, stats)=>{
             if(err){
               console.log(err);
             }
@@ -521,7 +521,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     client.send('bot-data',this.bots);
     UserMetadata.findOne({'uid':client.auth.uid},(err, user)=>{
       if(user){
-        Statistic.find({'playerId': client.auth.uid}, ['pokemons','time','rank','elo'], {limit:10, sort:{'time': -1}}, (err, stats)=>{
+        DetailledStatistic.find({'playerId': client.auth.uid}, ['pokemons','time','rank','elo'], {limit:10, sort:{'time': -1}}, (err, stats)=>{
           if(err){
             console.log(err);
           }

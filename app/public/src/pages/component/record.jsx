@@ -25,7 +25,7 @@ class Record extends Component{
                 <h3>Top {this.props.record.rank}</h3>
                 <p>Elo: {this.props.record.elo}</p>
             </div>
-            <div style={{display:'flex'}}>
+            <div style={{display:'flex', overflowX:'scroll'}}>
                 {this.props.record.pokemons.map(this.createPokemon.bind(this))}
             </div>
     </div>
@@ -33,7 +33,10 @@ class Record extends Component{
 
     createPokemon(p, index){
         return <div key={index}>
-            <img src={"/assets/avatar/" + p + ".png"}/>
+            <img style={{width:'60px'}} src={"/assets/avatar/" + p.name + ".png"}/>
+            <div style={{display:'flex'}}>
+                {p.items.map((item, i)=> {return <img style={{width:'20px', height:'20px'}} src={"/assets/items/" + item + ".png"}/>})}
+            </div>
         </div>
     }
 

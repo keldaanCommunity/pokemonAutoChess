@@ -2,6 +2,27 @@ const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 const ArraySchema = schema.ArraySchema;
 
+class PokemonRecord extends Schema{
+    constructor(mongoPokemon){
+        super();
+        this.assign(
+            {
+                name: mongoPokemon.name,
+                items: new ArraySchema()
+            }
+        );
+        mongoPokemon.items.forEach(it=>{
+            this.items.push(it);
+        });
+    }
+}
+
+schema.defineTypes(PokemonRecord, {
+    name: 'string',
+    items: ['string']
+});
+
+
 class GameRecord extends Schema {
   constructor(time, rank, elo, pokemons) {
     super();
@@ -13,7 +34,7 @@ class GameRecord extends Schema {
     });
 
     pokemons.forEach(pokemon =>{
-        this.pokemons.push(pokemon);
+        this.pokemons.push(new PokemonRecord(pokemon));
     });
     }
 }
@@ -21,7 +42,7 @@ class GameRecord extends Schema {
 schema.defineTypes(GameRecord, {
     time: 'uint64',
     rank: 'uint8',
-    pokemons: ['string'],
+    pokemons: [PokemonRecord],
     elo: 'uint16'
 });
 
