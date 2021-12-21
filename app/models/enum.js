@@ -2089,7 +2089,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Heal Block'
     },
     description:{
-      eng: 'Area of effect attack that deals 10/20/30 damages in a line behind the target',
+      eng: 'Apply wound status (target cannot heal) to all adjacent ennemies.',
       esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }
