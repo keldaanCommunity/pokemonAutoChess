@@ -77,19 +77,18 @@ class AttackingState extends PokemonState {
       }
       // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
       let damage;
+      let attackType = pokemon.attackType;
+
       if(Math.random() * 100 < pokemon.critChance){
-        if(pokemon.items.count(ITEMS.RAZOR_FANG) != 0){
-          damage = Math.round(pokemon.atk * (2 + 0.5 * pokemon.items.count(ITEMS.RAZOR_FANG)));
-        }
-        else{
-          damage = Math.round(pokemon.atk * 2);
+        damage = Math.round(pokemon.atk * pokemon.critDamage);
+        if (pokemon.items.count(ITEMS.RAZOR_CLAW) != 0) {
+          attackType = ATTACK_TYPE.TRUE;
         }
       }
       else{
         damage = pokemon.atk;
       }
       
-      let attackType = pokemon.attackType;
       if (pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
         attackType = ATTACK_TYPE.TRUE;
       }

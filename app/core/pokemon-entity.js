@@ -73,6 +73,7 @@ class PokemonEntity extends schema.Schema {
     this.sleepCooldown = 0;
     this.confusionCooldown = 0;
     this.woundCooldown = 0;
+    this.critDamage = 2;
 
     pokemon.types.forEach((type) => {
       this.types.push(type);

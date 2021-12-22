@@ -13,9 +13,7 @@ class PokemonState {
 
   handleDamage(pokemon, damage, board, attackType, attacker) {
     let death;
-    if (attacker && attacker.items.count(ITEMS.RAZOR_CLAW) != 0) {
-      attackType = ATTACK_TYPE.TRUE;
-    }
+
     if(pokemon.life == 0){
       death = true;
     }

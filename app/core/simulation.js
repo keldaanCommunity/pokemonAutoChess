@@ -171,6 +171,10 @@ class Simulation extends Schema {
       pokemon.critChance += 50 * pokemon.items.count(ITEMS.SCOPE_LENS);
     }
 
+    if(pokemon.items.count(ITEMS.RAZOR_FANG)){
+      pokemon.critDamage += 0.5 * pokemon.items.count(ITEMS.RAZOR_FANG);
+    }
+
     if (pokemon.items.count(ITEMS.WHITE_GLASSES) != 0) {
       if (pokemon.attackType == ATTACK_TYPE.SPECIAL) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3) * pokemon.items.count(ITEMS.WHITE_GLASSES);
