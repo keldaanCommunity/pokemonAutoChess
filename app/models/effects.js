@@ -28,7 +28,21 @@ class Effects {
       else if (synergies.FIRE >= 2) {
         this.list.push(EFFECTS.BLAZE);
       }
-  }
+    }
+    if(synergies.FOSSIL >= 0){
+      if (synergies.FOSSIL >= 8) {
+          this.list.push(EFFECTS.UNOWN_GATHERINGS);
+      }
+      else if (synergies.FOSSIL >= 6) {
+        this.list.push(EFFECTS.ELDER_POWER);
+      }
+      else if (synergies.FOSSIL >= 4) {
+        this.list.push(EFFECTS.ANCIENT_POWER);
+      }
+      else if (synergies.FOSSIL >= 2) {
+        this.list.push(EFFECTS.HISTORIC_POWER);
+      }
+    }
     if (synergies.WATER >= 3) {
       this.list.push(EFFECTS.DRIZZLE);
     }

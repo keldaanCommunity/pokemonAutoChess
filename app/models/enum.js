@@ -1137,7 +1137,11 @@ const EFFECTS = Object.freeze({
   NORMAL: 'NORMAL',
   ICE: 'ICE',
   SNOW: 'SNOW',
-  SHEER_COLD: 'SHEER_COLD'
+  SHEER_COLD: 'SHEER_COLD',
+  HISTORIC_POWER: 'HISTORIC_POWER',
+  ANCIENT_POWER:'ANCIENT_POWER',
+  ELDER_POWER:'ELDER_POWER',
+  UNOWN_GATHERINGS:'UNOWN_GATHERINGS'
 });
 
 const EFFECTS_ICON = Object.freeze({
@@ -1450,7 +1454,27 @@ const EFFECTS_ICON = Object.freeze({
       level: 2,
       positive: true,
       type:TYPE.ICE
-    }
+    },
+    HISTORIC_POWER: {
+      level: 1,
+      positive: true,
+      type:TYPE.FOSSIL
+    },
+    ANCIENT_POWER:{
+      level: 2,
+      positive: true,
+      type:TYPE.FOSSIL
+    },
+    ELDER_POWER:{
+      level: 3,
+      positive: true,
+      type:TYPE.FOSSIL
+    },
+    UNOWN_GATHERINGS:{
+      level: 4,
+      positive: true,
+      type:TYPE.FOSSIL
+    },
 })
 
 const SPECIAL_SKILL = Object.freeze({

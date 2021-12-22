@@ -19,6 +19,7 @@ export default class Pokemon extends Button {
     this.hp = pokemon.hp;
     this.range = pokemon.range;
     this.critChance = 10;
+    this.critCount = 0;
     this.atk = pokemon.atk;
     this.def = pokemon.def;
     this.speDef = pokemon.speDef;
@@ -554,7 +555,7 @@ export default class Pokemon extends Button {
 
           case SPECIAL_SKILL.ROAR_OF_TIME:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ROAR_OF_TIME', `${SPECIAL_SKILL.ROAR_OF_TIME}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ROAR_OF_TIME', `000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
             specialProjectile.anims.play(SPECIAL_SKILL.ROAR_OF_TIME);

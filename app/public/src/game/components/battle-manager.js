@@ -269,11 +269,38 @@ export default class BattleManager {
             } else {
               children[i].removeResurection();
             }
+          } else if (change.field == 'critCount'){
+            if (change.value != 0 && change.value > children[i].critCount) {
+              this.displayCriticalHit(children[i].x, children[i].y);
+            }
           }
           break;
         }
       }
     }
+  }
+
+  displayCriticalHit(x,y){
+    const crit = this.scene.add.existing(new GameObjects.Image(this.scene, x-10, y-30, 'crit'));
+    crit.setDepth(9);
+    crit.setScale(2,2);
+    this.scene.add.tween({
+      targets: [crit],
+      ease: 'Linear',
+      duration: 1000,
+      delay: 0,
+      alpha: {
+        getStart: () => 1,
+        getEnd: () => 0
+      },
+      y: {
+        getStart: () => y - 30,
+        getEnd: () => y - 90
+      },
+      onComplete: () => {
+        crit.destroy(true);
+      }
+    });
   }
 
   displayDamage(x, y, damage) {

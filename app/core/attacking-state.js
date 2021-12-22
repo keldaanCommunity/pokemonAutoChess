@@ -81,6 +81,7 @@ class AttackingState extends PokemonState {
 
       if(Math.random() * 100 < pokemon.critChance){
         damage = Math.round(pokemon.atk * pokemon.critDamage);
+        pokemon.critCount ++;
         if (pokemon.items.count(ITEMS.RAZOR_CLAW) != 0) {
           attackType = ATTACK_TYPE.TRUE;
         }
