@@ -99,7 +99,6 @@ export default class GameScene extends Scene {
     this.load.audioSprite('sounds', `/assets/sounds/${this.room.state.mapType}.json`, [`/assets/sounds/${this.room.state.mapType}.mp3`]);
     this.load.image('tiles', `/assets/tiles/${this.room.state.mapType}/${chosenTileset}.png`);
     this.load.tilemapTiledJSON('map', `/assets/tiles/${this.room.state.mapType}/${this.room.state.mapType}.json`);
-    this.load.image('crit', '/assets/status/crit.png');
     this.load.image('hexagon', '/assets/ui/hexagon.png');
     this.load.image('rain', '/assets/ui/rain.png');
     this.load.image('sand', '/assets/ui/sand.png');

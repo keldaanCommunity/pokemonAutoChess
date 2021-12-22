@@ -309,6 +309,36 @@ class PokemonState {
     });
     return [x, y];
   }
+
+  getFarthestTargetCoordinateAvailablePlace(pokemon, board){
+    let x = undefined;
+    let y = undefined;
+    let pokemons = [];
+    
+    board.forEach((r,c,value)=>{
+      if(value !== undefined && value.team != pokemon.team){
+        const d = board.distance(pokemon.positionX, pokemon.positionY, r, c);
+        pokemons.push({distance: d, x: r, y: c});
+      }
+    });
+
+    pokemons.sort((a,b)=>{return a-b});
+
+    for (let i = 0; i < pokemons.length; i++) {
+      const p = pokemons[i];
+      const around = board.getAdjacentCells(p.x, p.y);
+      around.forEach((cell) => {
+        if (!cell.value) {
+          x = cell.row;
+          y = cell.column;
+        }
+      });
+      if(x !== undefined && y !== undefined){
+        break;
+      }
+    }
+    return  [x, y];
+  }
 };
 
 module.exports = PokemonState;

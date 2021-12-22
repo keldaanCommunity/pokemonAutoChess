@@ -1,4 +1,4 @@
-const {STATE_TYPE, ORIENTATION} = require('../models/enum');
+const {STATE_TYPE, ORIENTATION, TYPE} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class MovingState extends PokemonState {
@@ -27,21 +27,30 @@ class MovingState extends PokemonState {
 
   move(pokemon, board, coordinates) {
     // console.log('move attempt');
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
-    let distance = 999;
+
     let x;
     let y;
-    cells.forEach((cell) => {
-      if (cell.value === undefined) {
-        const candidateDistance = board.distance(coordinates[0], coordinates[1], cell.row, cell.column);
-        // console.log(`Candidate (${cell.row},${cell.column}) to ${coordinates}, distance: ${candidateDistance}`);
-        if (candidateDistance < distance) {
-          distance = candidateDistance;
-          x = cell.row;
-          y = cell.column;
+    if(pokemon.types.includes(TYPE.FOSSIL)){
+      const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
+      x = farthestCoordinate[0];
+      y = farthestCoordinate[1];
+    }
+    else{
+      const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+      let distance = 999;
+
+      cells.forEach((cell) => {
+        if (cell.value === undefined) {
+          const candidateDistance = board.distance(coordinates[0], coordinates[1], cell.row, cell.column);
+          // console.log(`Candidate (${cell.row},${cell.column}) to ${coordinates}, distance: ${candidateDistance}`);
+          if (candidateDistance < distance) {
+            distance = candidateDistance;
+            x = cell.row;
+            y = cell.column;
+          }
         }
-      }
-    });
+      });
+    }
     if (x !== undefined && y !== undefined) {
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, x, y);
       if(pokemon.orientation == ORIENTATION.UNCLEAR){

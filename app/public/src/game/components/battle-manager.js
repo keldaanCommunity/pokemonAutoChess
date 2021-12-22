@@ -281,9 +281,16 @@ export default class BattleManager {
   }
 
   displayCriticalHit(x,y){
-    const crit = this.scene.add.existing(new GameObjects.Image(this.scene, x-10, y-30, 'crit'));
+    let textStyle = {
+      fontSize: '30px',
+      fontFamily: 'Verdana',
+      color: '#FF0000',
+      align: 'center',
+      strokeThickness:2,
+      stroke: '#000'
+    };
+    const crit = this.scene.add.existing(new GameObjects.Text(this.scene, x-25, y -50, 'CRIT !', textStyle));
     crit.setDepth(9);
-    crit.setScale(2,2);
     this.scene.add.tween({
       targets: [crit],
       ease: 'Linear',
@@ -294,8 +301,8 @@ export default class BattleManager {
         getEnd: () => 0
       },
       y: {
-        getStart: () => y - 30,
-        getEnd: () => y - 90
+        getStart: () => y - 50,
+        getEnd: () => y - 110
       },
       onComplete: () => {
         crit.destroy(true);

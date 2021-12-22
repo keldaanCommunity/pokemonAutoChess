@@ -44,7 +44,7 @@ class Bot {
           pkm.items.add(item);
         });
       }
-      this.player.board[pkm.id] = pkm;
+      this.player.board.set(pkm.id, pkm);
     }
 
     this.player.synergies.update(this.player.board);

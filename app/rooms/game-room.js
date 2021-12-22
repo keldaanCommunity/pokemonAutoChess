@@ -36,10 +36,15 @@ class GameRoom extends colyseus.Room {
 
     this.onMessage('shop', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnShopCommand(), {
-          id: client.auth.uid,
-          index: message.id
-        });
+        try{
+          this.dispatcher.dispatch(new Commands.OnShopCommand(), {
+            id: client.auth.uid,
+            index: message.id
+          });
+        }
+        catch(error){
+          console.log(error);
+        }
       }
     });
     

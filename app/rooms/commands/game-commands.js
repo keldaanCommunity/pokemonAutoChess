@@ -8,7 +8,7 @@ const Items = require('../../models/colyseus-models/items');
 
 class OnShopCommand extends Command {
   execute({id, index}) {
-    if (this.state.players.has(id)) {
+    if (id !== true && index !== true && this.state.players.has(id)) {
       const player = this.state.players.get(id);
       if (player.shop[index]) {
         const name = player.shop[index];
@@ -776,6 +776,27 @@ class OnUpdatePhaseCommand extends Command {
         } else {
           player.shopLocked = false;
         }
+        player.board.forEach((pokemon,key)=>{
+          if(pokemon.fossilTimer !== undefined){
+            if(pokemon.fossilTimer == 0){
+              let itemsToAdd = pokemon.items.getAllItems();
+              const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemon.evolution);
+              for (let i = 0; i < 3; i++) {
+                const itemToAdd = itemsToAdd.pop();
+                if (itemToAdd) {
+                  pokemonEvolved.items.add(itemToAdd);
+                }
+              }
+              pokemonEvolved.positionX = pokemon.positionX;
+              pokemonEvolved.positionY = pokemon.positionY;
+              player.board.delete(key);
+              player.board.set(pokemonEvolved.id, pokemonEvolved);
+            }
+            else{
+              pokemon.fossilTimer -= 1;
+            }
+          }
+        });
       }
     });
   }
@@ -899,7 +920,7 @@ class OnEvolutionCommand extends Command {
           });
           pokemonEvolved.positionX = x;
           pokemonEvolved.positionY = y;
-          player.board[pokemonEvolved.id] = pokemonEvolved;
+          player.board.set(pokemonEvolved.id, pokemonEvolved);
           evolve = true;
         }
       }

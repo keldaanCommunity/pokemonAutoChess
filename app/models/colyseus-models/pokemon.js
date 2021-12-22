@@ -41,6 +41,10 @@ class Pokemon extends Schema {
         this.types.push(type);
       });
     }
+
+    if(this.types.includes(TYPE.FOSSIL) && this.evolution != ''){
+      this.fossilTimer = 1;
+    }
   }
 
   toString() {
