@@ -19,6 +19,25 @@ class LeechSeedStrategy extends AttackStrategy {
   }
 }
 
+class RoarOfTimeStrategy extends AttackStrategy{
+  constructor() {
+    super();
+  }
+
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+
+    let candidate = pokemon;
+    board.forEach((x, y, pkm) => {
+      if (pkm && pokemon.team == pkm.team && pkm.items.length > candidate.items.length && !pkm.resurection) {
+        candidate = pkm;
+      }
+    });
+  
+    candidate.resurection = true;
+  }
+}
+
 class HealBlockStrategy extends AttackStrategy {
   constructor() {
     super();
@@ -1354,7 +1373,8 @@ class MetronomeStrategy extends AttackStrategy {
       SilenceStrategy,
       OriginPulseStrategy,
       SeedFlareStrategy,
-      HealBlockStrategy
+      HealBlockStrategy,
+      RoarOfTimeStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1412,5 +1432,6 @@ module.exports = {
   SilenceStrategy,
   OriginPulseStrategy,
   SeedFlareStrategy,
-  HealBlockStrategy
+  HealBlockStrategy,
+  RoarOfTimeStrategy
 };

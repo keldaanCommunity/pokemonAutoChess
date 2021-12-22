@@ -143,7 +143,14 @@ export default class AnimationManager {
     this.game.anims.create({
       key: `wound`,
       frames: this.game.anims.generateFrameNames('wound', {start: 0, end: 3, zeroPad: 3}),
-      frameRate: 10,
+      frameRate: 3,
+      repeat: -1
+    });
+
+    this.game.anims.create({
+      key: `resurection`,
+      frames: this.game.anims.generateFrameNames('resurection', {start: 0, end: 3, zeroPad: 3}),
+      frameRate: 3,
       repeat: -1
     });
   }
@@ -471,6 +478,13 @@ export default class AnimationManager {
       key: SPECIAL_SKILL.SEED_FLARE,
       frames: this.game.anims.generateFrameNames('june', {start: 0, end: 9, prefix: `${SPECIAL_SKILL.SEED_FLARE}/`}),
       frameRate: 12,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.ROAR_OF_TIME,
+      frames: this.game.anims.generateFrameNames('ROAR_OF_TIME', {start: 0, end: 28, zeroPad: 3}),
+      frameRate: 15,
       repeat: 0
     });
   }

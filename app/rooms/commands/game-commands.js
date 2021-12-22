@@ -4,6 +4,7 @@ const Player = require('../../models/colyseus-models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
 const UserMetadata = require('../../models/mongo-models/user-metadata');
+const Items = require('../../models/colyseus-models/items');
 
 class OnShopCommand extends Command {
   execute({id, index}) {
@@ -134,9 +135,7 @@ class OnDragDropCommand extends Command {
                 eevolution = PokemonFactory.createPokemonFromName(PKM.VAPOREON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
-                eevolution.items.item0 = pokemon.items.item0;
-                eevolution.items.item1 = pokemon.items.item1;
-                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items = new Items(pokemon.items);
                 eevolution.items.add(item);
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
@@ -148,9 +147,7 @@ class OnDragDropCommand extends Command {
                 eevolution = PokemonFactory.createPokemonFromName(PKM.FLAREON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
-                eevolution.items.item0 = pokemon.items.item0;
-                eevolution.items.item1 = pokemon.items.item1;
-                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items = new Items(pokemon.items);
                 eevolution.items.add(item);
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
@@ -162,9 +159,7 @@ class OnDragDropCommand extends Command {
                 eevolution = PokemonFactory.createPokemonFromName(PKM.JOLTEON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
-                eevolution.items.item0 = pokemon.items.item0;
-                eevolution.items.item1 = pokemon.items.item1;
-                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items = new Items(pokemon.items);
                 eevolution.items.add(item);
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
@@ -176,9 +171,7 @@ class OnDragDropCommand extends Command {
                 eevolution = PokemonFactory.createPokemonFromName(PKM.UMBREON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
-                eevolution.items.item0 = pokemon.items.item0;
-                eevolution.items.item1 = pokemon.items.item1;
-                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items = new Items(pokemon.items);
                 eevolution.items.add(item);
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
@@ -190,9 +183,7 @@ class OnDragDropCommand extends Command {
                 eevolution = PokemonFactory.createPokemonFromName(PKM.SYLVEON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
-                eevolution.items.item0 = pokemon.items.item0;
-                eevolution.items.item1 = pokemon.items.item1;
-                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items = new Items(pokemon.items);
                 eevolution.items.add(item);
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
@@ -204,9 +195,7 @@ class OnDragDropCommand extends Command {
                 eevolution = PokemonFactory.createPokemonFromName(PKM.LEAFEON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
-                eevolution.items.item0 = pokemon.items.item0;
-                eevolution.items.item1 = pokemon.items.item1;
-                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items = new Items(pokemon.items);
                 eevolution.items.add(item);
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
@@ -218,9 +207,7 @@ class OnDragDropCommand extends Command {
                 eevolution = PokemonFactory.createPokemonFromName(PKM.ESPEON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
-                eevolution.items.item0 = pokemon.items.item0;
-                eevolution.items.item1 = pokemon.items.item1;
-                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items = new Items(pokemon.items);
                 eevolution.items.add(item);
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
@@ -232,9 +219,7 @@ class OnDragDropCommand extends Command {
                 eevolution = PokemonFactory.createPokemonFromName(PKM.GLACEON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
-                eevolution.items.item0 = pokemon.items.item0;
-                eevolution.items.item1 = pokemon.items.item1;
-                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items = new Items(pokemon.items);
                 eevolution.items.add(item);
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
@@ -246,9 +231,7 @@ class OnDragDropCommand extends Command {
                 eevolution = PokemonFactory.createPokemonFromName(PKM.PRIMALGROUDON);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
-                eevolution.items.item0 = pokemon.items.item0;
-                eevolution.items.item1 = pokemon.items.item1;
-                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items = new Items(pokemon.items);
                 eevolution.items.add(item);
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
@@ -260,9 +243,7 @@ class OnDragDropCommand extends Command {
                 eevolution = PokemonFactory.createPokemonFromName(PKM.PRIMALKYOGRE);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
-                eevolution.items.item0 = pokemon.items.item0;
-                eevolution.items.item1 = pokemon.items.item1;
-                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items = new Items(pokemon.items);
                 eevolution.items.add(item);
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
@@ -274,9 +255,7 @@ class OnDragDropCommand extends Command {
                 eevolution = PokemonFactory.createPokemonFromName(PKM.MEGARAYQUAZA);
                 eevolution.positionX = x;
                 eevolution.positionY = y;
-                eevolution.items.item0 = pokemon.items.item0;
-                eevolution.items.item1 = pokemon.items.item1;
-                eevolution.items.item2 = pokemon.items.item2;
+                eevolution.items = new Items(pokemon.items);
                 eevolution.items.add(item);
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
@@ -428,15 +407,8 @@ class OnSellDropCommand extends Command {
       const player = this.state.players.get(client.auth.uid);
       player.money += COST[pokemon.rarity] * pokemon.stars;
 
-      if (pokemon.items.item0 != '') {
-        player.stuff.add(pokemon.items.item0);
-      }
-      if (pokemon.items.item1 != '') {
-        player.stuff.add(pokemon.items.item1);
-      }
-      if (pokemon.items.item2 != '') {
-        player.stuff.add(pokemon.items.item2);
-      }
+      let items = pokemon.items.getAllItems();
+      items.forEach(it=>{player.stuff.add(it)});
 
       player.board.delete(detail.pokemonId);
 

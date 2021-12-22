@@ -263,6 +263,12 @@ export default class BattleManager {
             } else {
               children[i].removeWound();
             }
+          } else if (change.field == 'resurection'){
+            if (pokemon.resurection) {
+              children[i].addResurection();
+            } else {
+              children[i].removeResurection();
+            }
           }
           break;
         }

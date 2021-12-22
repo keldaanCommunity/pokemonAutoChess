@@ -79,6 +79,10 @@ class PokemonState {
               pokemon.atk += pokemon.baseAtk *0.6;
               pokemon.effects.splice(pokemon.effects.findIndex(e => e === EFFECTS.HYDRO_CANNON),1);
           }
+          else if(pokemon.resurection){
+            pokemon.resurection = false;
+            pokemon.life = pokemon.hp;
+          }
           else{
             board.setValue(pokemon.positionX, pokemon.positionY, undefined);
             death = true;

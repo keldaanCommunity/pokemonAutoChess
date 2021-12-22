@@ -113,6 +113,7 @@ export default class GameScene extends Scene {
     this.load.multiatlas('snowflakes', '/assets/ui/snowflakes.json', '/assets/ui/');
     this.load.multiatlas('status', '/assets/status/status.json', '/assets/status/');
     this.load.multiatlas('wound', '/assets/status/wound.json', '/assets/status');
+    this.load.multiatlas('resurection', '/assets/status/resurection.json', '/assets/status');
     this.load.multiatlas('icons', '/assets/ui/icons.json', '/assets/ui/');
     this.load.multiatlas('items', '/assets/items/items.json', '/assets/items/');
     this.load.multiatlas('lock', '/assets/lock/lock.json', '/assets/lock/');
@@ -134,6 +135,7 @@ export default class GameScene extends Scene {
     this.load.multiatlas('attacks', '/assets/attacks/attacks.json', '/assets/attacks');
     this.load.multiatlas('specials', '/assets/attacks/specials.json', '/assets/attacks');
     this.load.multiatlas('june', '/assets/attacks/june.json', '/assets/attacks');
+    this.load.multiatlas('ROAR_OF_TIME', '/assets/attacks/ROAR_OF_TIME.json', '/assets/attacks');
     this.load.image('transition', '/assets/ui/transition.png');
     this.load.image('money', '/assets/ui/money.png');
     this.load.multiatlas('life', '/assets/ui/life.json', '/assets/ui');

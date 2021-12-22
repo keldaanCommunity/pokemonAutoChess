@@ -60,7 +60,8 @@ class PokemonEntity extends schema.Schema {
           protect: false,
           sleep: false,
           confusion: false,
-          wound: false
+          wound: false,
+          resurection: false
         }
     );
 
@@ -255,7 +256,8 @@ schema.defineTypes(PokemonEntity, {
   protect: 'boolean',
   sleep: 'boolean',
   confusion: 'boolean',
-  wound: 'boolean'
+  wound: 'boolean',
+  resurection: 'boolean'
 });
 
 module.exports = PokemonEntity;

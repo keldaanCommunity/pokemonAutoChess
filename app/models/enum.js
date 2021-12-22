@@ -1502,7 +1502,8 @@ const SPECIAL_SKILL = Object.freeze({
   CONFUSION: 'CONFUSION',
   ORIGIN_PULSE: 'ORIGIN_PULSE',
   SEED_FLARE:'SEED_FLARE',
-  HEAL_BLOCK: 'HEAL_BLOCK'
+  HEAL_BLOCK: 'HEAL_BLOCK',
+  ROAR_OF_TIME: 'ROAR_OF_TIME'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
@@ -2090,6 +2091,18 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
     },
     description:{
       eng: 'Apply wound status (target cannot heal) to all adjacent ennemies.',
+      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
+      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
+    }
+  },
+  ROAR_OF_TIME: {
+    title:{
+      eng: 'Roar of time',
+      esp: 'Roar of time',
+      fra: 'Roar of time'
+    },
+    description:{
+      eng: 'Add a second life to the pokemon that has the most items.',
       esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }

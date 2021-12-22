@@ -551,6 +551,17 @@ export default class Pokemon extends Button {
               specialProjectile.destroy();
             });
             break;
+
+          case SPECIAL_SKILL.ROAR_OF_TIME:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ROAR_OF_TIME', `${SPECIAL_SKILL.ROAR_OF_TIME}/000`);
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.ROAR_OF_TIME);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
             
           default:
             break;
@@ -933,6 +944,24 @@ export default class Pokemon extends Button {
 
   removeProtect() {
     const sprite = this.getFirst('objType', 'protect');
+    if (sprite) {
+      this.remove(sprite, true);
+    }
+  }
+
+  addResurection() {
+    if (!this.getFirst('objType', 'resurection')) {
+      const resurection = new GameObjects.Sprite(this.scene, 0, -45, 'resurection', '000');
+      resurection.setScale(2, 2);
+      this.scene.add.existing(resurection);
+      resurection.objType = 'resurection';
+      resurection.anims.play('resurection');
+      this.add(resurection);
+    }
+  }
+
+  removeResurection() {
+    const sprite = this.getFirst('objType', 'resurection');
     if (sprite) {
       this.remove(sprite, true);
     }
