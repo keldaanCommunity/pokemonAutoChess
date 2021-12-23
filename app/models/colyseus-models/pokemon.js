@@ -43,7 +43,7 @@ class Pokemon extends Schema {
     }
 
     if(this.types.includes(TYPE.FOSSIL) && this.evolution != ''){
-      this.fossilTimer = 1;
+      this.fossilTimer = process.env.MODE == 'dev' ? 1: 5;
     }
   }
 
