@@ -10,7 +10,7 @@ export default class ItemContainer extends Button {
       this.add(new GameObjects.Ellipse(scene, 0, 0, 70, 70, 0xffffff, 0.7).setStrokeStyle(3, 0x000000, 1));
     }
     else{
-      this.add(new GameObjects.Image(scene, 0, 0, 'hexagon').setScale(0.5, 0.5));
+      this.add(new GameObjects.Ellipse(scene, 0, 0, 30, 30, 0xffffff, 0.7).setStrokeStyle(1, 0x000000, 1));
     }
    this.sprite = new GameObjects.Image(scene, 0, 0, 'items', item).setScale(dragable ? 2:1, dragable? 2:1);
     this.detail = new ItemDetail(scene, 15, 0, item);

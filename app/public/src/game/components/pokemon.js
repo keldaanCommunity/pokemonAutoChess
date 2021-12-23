@@ -692,19 +692,15 @@ export default class Pokemon extends Button {
               break;
           }
   
-          let background = new GameObjects.Rectangle(scene, c*20 -20, height +10, 20, 20, color);
           let backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5,0.5);
           let backgroundText = new GameObjects.Text(scene, c*20 -30, height+5, level, {
             fontSize: '15px',
             fontFamily: 'Verdana',
             color:'#000000'
           });
-          background.objType = 'effect';
           backgroundIcon.objType = 'effect';
-          scene.add.existing(background);
           scene.add.existing(backgroundIcon);
           scene.add.existing(backgroundText);
-          this.add(background);
           this.add(backgroundIcon);
           this.add(backgroundText);
         }
