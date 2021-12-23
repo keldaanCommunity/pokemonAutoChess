@@ -1528,7 +1528,8 @@ const SPECIAL_SKILL = Object.freeze({
   SEED_FLARE:'SEED_FLARE',
   HEAL_BLOCK: 'HEAL_BLOCK',
   ROAR_OF_TIME: 'ROAR_OF_TIME',
-  ROCK_TOMB:'ROCK_TOMB'
+  ROCK_TOMB:'ROCK_TOMB',
+  ROCK_SMASH:'ROCK_SMASH'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
@@ -2115,7 +2116,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Heal Block'
     },
     description:{
-      eng: 'Apply wound status (target cannot heal) to all adjacent ennemies.',
+      eng: 'Apply wound status (target cannot heal) to all adjacent ennemies for 5s/10s/15s.',
       esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }
@@ -2139,7 +2140,19 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Rock Tomb'
     },
     description:{
-      eng: 'Mono target attack that deals 30/60/90 damage and decrease target attack speed by 300/600/900.',
+      eng: 'Mono target attack that deals 30/60/90 physical damage and decrease target attack speed by 300/600/900.',
+      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
+      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
+    }
+  },
+  ROCK_SMASH: {
+    title:{
+      eng: 'Rock Smash',
+      esp: 'Rock Smash',
+      fra: 'Rock Smash'
+    },
+    description:{
+      eng: 'Mono target attack that deals 20/40/60 damage and silence target for 3/6/9s.',
       esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }

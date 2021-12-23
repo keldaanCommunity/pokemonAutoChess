@@ -494,6 +494,13 @@ export default class AnimationManager {
       frameRate: 20,
       repeat: 0
     });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.ROCK_SMASH,
+      frames: this.game.anims.generateFrameNames('ROCK_SMASH', {start: 0, end: 8, zeroPad: 3}),
+      frameRate: 10,
+      repeat: 0
+    });
   }
 
   createAttacksAnimations() {

@@ -301,6 +301,9 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.ROCK_TOMB:
         return new Strategy.RockTombStrategy();
+
+      case SPECIAL_SKILL.ROCK_SMASH:
+        return new Strategy.RockSmashStrategy();
       
       case SPECIAL_SKILL.DEFAULT:
         return new Strategy.AttackStrategy();
