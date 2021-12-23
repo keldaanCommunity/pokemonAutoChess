@@ -298,6 +298,9 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.ROAR_OF_TIME:
         return new Strategy.RoarOfTimeStrategy();
+
+      case SPECIAL_SKILL.ROCK_TOMB:
+        return new Strategy.RockTombStrategy();
       
       case SPECIAL_SKILL.DEFAULT:
         return new Strategy.AttackStrategy();

@@ -1527,7 +1527,8 @@ const SPECIAL_SKILL = Object.freeze({
   ORIGIN_PULSE: 'ORIGIN_PULSE',
   SEED_FLARE:'SEED_FLARE',
   HEAL_BLOCK: 'HEAL_BLOCK',
-  ROAR_OF_TIME: 'ROAR_OF_TIME'
+  ROAR_OF_TIME: 'ROAR_OF_TIME',
+  ROCK_TOMB:'ROCK_TOMB'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
@@ -2127,6 +2128,18 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
     },
     description:{
       eng: 'Add a second life to the pokemon that has the most items.',
+      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
+      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
+    }
+  },
+  ROCK_TOMB: {
+    title:{
+      eng: 'Rock Tomb',
+      esp: 'Rock Tomb',
+      fra: 'Rock Tomb'
+    },
+    description:{
+      eng: 'Mono target attack that deals 30/60/90 damage and decrease target attack speed by 300/600/900.',
       esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }

@@ -1764,13 +1764,13 @@ class Bastiodon extends Pokemon {
 
 class Tirtouga extends Pokemon {
   constructor() {
-    super(PKM.TIRTOUGA, 'tirtouga',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 564, PKM.CARRACOSTA, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.HYDRO_PUMP);
+    super(PKM.TIRTOUGA, 'tirtouga',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 564, PKM.CARRACOSTA, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROCK_TOMB);
   }
 }
 
 class Carracosta extends Pokemon {
   constructor() {
-    super(PKM.CARRACOSTA, 'carracosta',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 565, '', 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HYDRO_PUMP);
+    super(PKM.CARRACOSTA, 'carracosta',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 565, '', 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_TOMB);
   }
 }
 
@@ -1812,13 +1812,13 @@ class Kabutops extends Pokemon {
 
 class Omanyte extends Pokemon {
   constructor() {
-    super(PKM.OMANYTE, 'omanyte',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 138, PKM.OMASTAR, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.HYDRO_PUMP);
+    super(PKM.OMANYTE, 'omanyte',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 138, PKM.OMASTAR, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROCK_TOMB);
   }
 }
 
 class Omastar extends Pokemon {
   constructor() {
-    super(PKM.OMASTAR, 'omastar',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 139, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HYDRO_PUMP);
+    super(PKM.OMASTAR, 'omastar',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 139, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_TOMB);
   }
 }
 

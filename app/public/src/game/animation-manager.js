@@ -94,35 +94,35 @@ export default class AnimationManager {
     this.game.anims.create({
       key: `poison`,
       frames: this.game.anims.generateFrameNames('status', {start: 0, end: 14, zeroPad: 3, prefix: 'status/poison/'}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1
     });
 
     this.game.anims.create({
       key: `sleep`,
       frames: this.game.anims.generateFrameNames('status', {start: 0, end: 9, zeroPad: 3, prefix: 'status/sleep/'}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1
     });
 
     this.game.anims.create({
       key: `silence`,
       frames: this.game.anims.generateFrameNames('status', {start: 0, end: 8, zeroPad: 3, prefix: 'status/silence/'}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1
     });
 
     this.game.anims.create({
       key: `protect`,
       frames: this.game.anims.generateFrameNames('status', {start: 0, end: 9, zeroPad: 3, prefix: 'status/protect/'}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1
     });
 
     this.game.anims.create({
       key: `freeze`,
       frames: this.game.anims.generateFrameNames('status', {start: 0, end: 5, zeroPad: 3, prefix: 'status/freeze/'}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1
     });
 
@@ -136,7 +136,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: `burn`,
       frames: this.game.anims.generateFrameNames('status', {start: 0, end: 7, zeroPad: 3, prefix: 'status/burn/'}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1
     });
 
@@ -217,14 +217,14 @@ export default class AnimationManager {
     this.game.anims.create({
       key: SPECIAL_SKILL.SEISMIC_TOSS,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${SPECIAL_SKILL.SEISMIC_TOSS}/`}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.GUILLOTINE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${SPECIAL_SKILL.GUILLOTINE}/`}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: 0
     });
 
@@ -252,14 +252,14 @@ export default class AnimationManager {
     this.game.anims.create({
       key: SPECIAL_SKILL.HYDRO_PUMP,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${SPECIAL_SKILL.HYDRO_PUMP}/`}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: 0
     });
 
     this.game.anims.create({
       key: SPECIAL_SKILL.DRACO_METEOR,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 34, zeroPad: 3, prefix: `${SPECIAL_SKILL.DRACO_METEOR}/`}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: 0
     });
 
@@ -364,7 +364,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: SPECIAL_SKILL.TORMENT,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${SPECIAL_SKILL.TORMENT}/`}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: 0
     });
 
@@ -378,7 +378,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: SPECIAL_SKILL.DARK_PULSE,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 31, zeroPad: 3, prefix: `${SPECIAL_SKILL.DARK_PULSE}/`}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: 0
     });
 
@@ -392,7 +392,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: SPECIAL_SKILL.BUG_BUZZ,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 28, zeroPad: 3, prefix: `${SPECIAL_SKILL.BUG_BUZZ}/`}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: 0
     });
 
@@ -427,7 +427,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: SPECIAL_SKILL.NASTY_PLOT,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${SPECIAL_SKILL.NASTY_PLOT}/`}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: 0
     });
 
@@ -485,6 +485,13 @@ export default class AnimationManager {
       key: SPECIAL_SKILL.ROAR_OF_TIME,
       frames: this.game.anims.generateFrameNames('ROAR_OF_TIME', {start: 0, end: 28, zeroPad: 3}),
       frameRate: 15,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.ROCK_TOMB,
+      frames: this.game.anims.generateFrameNames('ROCK_TOMB', {start: 0, end: 21, zeroPad: 3}),
+      frameRate: 20,
       repeat: 0
     });
   }
@@ -556,7 +563,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: `DRAGON/melee`,
       frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 10, zeroPad: 3, prefix: 'DRAGON/melee/'}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1
     });
 
@@ -619,7 +626,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: `FAIRY/melee`,
       frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 25, zeroPad: 3, prefix: 'FAIRY/melee/'}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1
     });
 
@@ -633,7 +640,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: `FLYING/melee`,
       frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 24, zeroPad: 3, prefix: 'FLYING/melee/'}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1
     });
 
@@ -647,7 +654,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: `BUG/melee`,
       frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 15, zeroPad: 3, prefix: 'BUG/melee/'}),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1
     });
 
