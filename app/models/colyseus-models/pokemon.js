@@ -1692,145 +1692,145 @@ class Persian extends Pokemon {
 
 class Oddish extends Pokemon {
   constructor() {
-    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.ODDISH, 'mystherbe',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
 class Gloom extends Pokemon {
   constructor() {
-    super(PKM.GLOOM, 'ortide',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 44, PKM.VILEPLUME, 230, 18, 3, 3, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 2, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.GLOOM, 'ortide',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 44, PKM.VILEPLUME, 230, 18, 3, 3, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 2, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
 class Vileplume extends Pokemon {
   constructor() {
-    super(PKM.VILEPLUME, 'rafflesia',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 45, '', 360, 27, 4, 4, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 3, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.VILEPLUME, 'rafflesia',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 45, '', 360, 27, 4, 4, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 3, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
 class Bellossom extends Pokemon {
   constructor() {
-    super(PKM.BELLOSSOM, 'joliflor',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 182, '', 360, 27, 8, 8, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 3, 100, SPECIAL_SKILL.ROOT);
+    super(PKM.BELLOSSOM, 'joliflor',[TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 182, '', 360, 27, 8, 8, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 3, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
 class Amaura extends Pokemon {
   constructor() {
-    super(PKM.AMAURA, 'amaura',[TYPE.FOSSIL, TYPE.ICE], RARITY.LEGENDARY, 'fossil', 698, PKM.AURORUS, 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.AMAURA, 'amaura',[TYPE.FOSSIL, TYPE.ICE], RARITY.LEGENDARY, 'fossil', 698, PKM.AURORUS, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ICICLE_CRASH);
   }
 }
 
 class Aurorus extends Pokemon {
   constructor() {
-    super(PKM.AURORUS, 'aurorus',[TYPE.FOSSIL, TYPE.ICE], RARITY.LEGENDARY, 'fossil', 699, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.AURORUS, 'aurorus',[TYPE.FOSSIL, TYPE.ICE], RARITY.LEGENDARY, 'fossil', 699, '', 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ICICLE_CRASH);
   }
 }
 
 class Anorith extends Pokemon {
   constructor() {
-    super(PKM.ANORITH, 'anorith',[TYPE.FOSSIL, TYPE.BUG], RARITY.LEGENDARY, 'fossil', 347, PKM.ARMALDO, 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.ANORITH, 'anorith',[TYPE.FOSSIL, TYPE.BUG], RARITY.LEGENDARY, 'fossil', 347, PKM.ARMALDO, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BUG_BUZZ);
   }
 }
 
 class Armaldo extends Pokemon {
   constructor() {
-    super(PKM.ARMALDO, 'armaldo',[TYPE.FOSSIL, TYPE.BUG], RARITY.LEGENDARY, 'fossil', 348, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.ARMALDO, 'armaldo',[TYPE.FOSSIL, TYPE.BUG], RARITY.LEGENDARY, 'fossil', 348, '', 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.BUG_BUZZ);
   }
 }
 
 class Archen extends Pokemon {
   constructor() {
-    super(PKM.ARCHEN, 'aéroptéri',[TYPE.FOSSIL, TYPE.FLYING], RARITY.LEGENDARY, 'fossil', 566, PKM.ARCHEOPS, 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.ARCHEN, 'aéroptéri',[TYPE.FOSSIL, TYPE.FLYING], RARITY.LEGENDARY, 'fossil', 566, PKM.ARCHEOPS, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROCK_SLIDE);
   }
 }
 
 class Archeops extends Pokemon {
   constructor() {
-    super(PKM.ARCHEOPS, 'aéroptéryx',[TYPE.FOSSIL, TYPE.FLYING], RARITY.LEGENDARY, 'fossil', 567, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.ARCHEOPS, 'aéroptéryx',[TYPE.FOSSIL, TYPE.FLYING], RARITY.LEGENDARY, 'fossil', 567, '', 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
   }
 }
 
 class Shieldon extends Pokemon {
   constructor() {
-    super(PKM.SHIELDON, 'dinoclier',[TYPE.FOSSIL, TYPE.METAL], RARITY.LEGENDARY, 'fossil', 410, PKM.BASTIODON, 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.SHIELDON, 'dinoclier',[TYPE.FOSSIL, TYPE.METAL], RARITY.LEGENDARY, 'fossil', 410, PKM.BASTIODON, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.IRON_DEFENSE);
   }
 }
 
 class Bastiodon extends Pokemon {
   constructor() {
-    super(PKM.BASTIODON, 'bastiodon',[TYPE.FOSSIL, TYPE.METAL], RARITY.LEGENDARY, 'fossil', 411, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.BASTIODON, 'bastiodon',[TYPE.FOSSIL, TYPE.METAL], RARITY.LEGENDARY, 'fossil', 411, '', 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.IRON_DEFENSE);
   }
 }
 
 class Tirtouga extends Pokemon {
   constructor() {
-    super(PKM.TIRTOUGA, 'tirtouga',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 564, PKM.CARRACOSTA, 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.TIRTOUGA, 'tirtouga',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 564, PKM.CARRACOSTA, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.HYDRO_PUMP);
   }
 }
 
 class Carracosta extends Pokemon {
   constructor() {
-    super(PKM.CARRACOSTA, 'carracosta',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 565, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.CARRACOSTA, 'carracosta',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 565, '', 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HYDRO_PUMP);
   }
 }
 
 class Lileep extends Pokemon {
   constructor() {
-    super(PKM.LILEEP, 'lilia',[TYPE.FOSSIL, TYPE.GRASS], RARITY.LEGENDARY, 'fossil', 345, PKM.CRADILY, 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.LILEEP, 'lilia',[TYPE.FOSSIL, TYPE.GRASS], RARITY.LEGENDARY, 'fossil', 345, PKM.CRADILY, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.HEAL_BLOCK);
   }
 }
 
 class Cradily extends Pokemon {
   constructor() {
-    super(PKM.CRADILY, 'vacylis',[TYPE.FOSSIL, TYPE.GRASS], RARITY.LEGENDARY, 'fossil', 346, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.CRADILY, 'vacylis',[TYPE.FOSSIL, TYPE.GRASS], RARITY.LEGENDARY, 'fossil', 346, '', 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HEAL_BLOCK);
   }
 }
 
 class Cranidos extends Pokemon {
   constructor() {
-    super(PKM.CRANIDOS, 'kranidos',[TYPE.FOSSIL, TYPE.MONSTER], RARITY.LEGENDARY, 'fossil', 408, PKM.RAMPARDOS, 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.CRANIDOS, 'kranidos',[TYPE.FOSSIL, TYPE.MONSTER], RARITY.LEGENDARY, 'fossil', 408, PKM.RAMPARDOS, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROCK_SLIDE);
   }
 }
 
 class Rampardos extends Pokemon {
   constructor() {
-    super(PKM.RAMPARDOS, 'charkos',[TYPE.FOSSIL, TYPE.MONSTER], RARITY.LEGENDARY, 'fossil', 409, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.RAMPARDOS, 'charkos',[TYPE.FOSSIL, TYPE.MONSTER], RARITY.LEGENDARY, 'fossil', 409, '', 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.ROCK_SLIDE);
   }
 }
 
 class Kabuto extends Pokemon {
   constructor() {
-    super(PKM.KABUTO, 'kabuto',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 140, PKM.KABUTOPS, 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.KABUTO, 'kabuto',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 140, PKM.KABUTOPS, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.HEAL_BLOCK);
   }
 }
 
 class Kabutops extends Pokemon {
   constructor() {
-    super(PKM.KABUTOPS, 'kabutops',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 141, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.KABUTOPS, 'kabutops',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 141, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HEAL_BLOCK);
   }
 }
 
 class Omanyte extends Pokemon {
   constructor() {
-    super(PKM.OMANYTE, 'omanyte',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 138, PKM.OMASTAR, 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.OMANYTE, 'omanyte',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 138, PKM.OMASTAR, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.HYDRO_PUMP);
   }
 }
 
 class Omastar extends Pokemon {
   constructor() {
-    super(PKM.OMASTAR, 'omastar',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 139, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.OMASTAR, 'omastar',[TYPE.FOSSIL, TYPE.WATER], RARITY.LEGENDARY, 'fossil', 139, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HYDRO_PUMP);
   }
 }
 
 class Tyrunt extends Pokemon {
   constructor() {
-    super(PKM.TYRUNT, 'ptyranidur',[TYPE.FOSSIL, TYPE.DRAGON], RARITY.LEGENDARY, 'fossil', 696, PKM.TYRANTRUM, 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.TYRUNT, 'ptyranidur',[TYPE.FOSSIL, TYPE.DRAGON], RARITY.LEGENDARY, 'fossil', 696, PKM.TYRANTRUM, 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.HEAL_BLOCK);
   }
 }
 
 class Tyrantrum extends Pokemon {
   constructor() {
-    super(PKM.TYRANTRUM, 'rexilius',[TYPE.FOSSIL, TYPE.DRAGON], RARITY.LEGENDARY, 'fossil', 697, '', 120, 9, 2, 2, 2, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.ROAR_OF_TIME);
+    super(PKM.TYRANTRUM, 'rexilius',[TYPE.FOSSIL, TYPE.DRAGON], RARITY.LEGENDARY, 'fossil', 697, '', 120, 9, 2, 2, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HEAL_BLOCK);
   }
 }
 
