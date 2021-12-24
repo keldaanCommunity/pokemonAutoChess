@@ -44,19 +44,40 @@ class PreparationRoom extends colyseus.Room {
     });
 
     this.onMessage('game-start', (client, message) => {
-      this.dispatcher.dispatch(new OnGameStartCommand(), {client, message});
+      try{
+        this.dispatcher.dispatch(new OnGameStartCommand(), {client, message});
+      }
+      catch(error){
+        console.log(error);
+      }
     });
     this.onMessage('toggle-ready', (client, message) => {
-      this.dispatcher.dispatch(new OnToggleReadyCommand(), client);
+      try {
+        this.dispatcher.dispatch(new OnToggleReadyCommand(), client);
+      } catch (error) {
+        console.log(error);
+      }
     });
     this.onMessage('new-message', (client, message) => {
-      this.dispatcher.dispatch(new OnMessageCommand(), {client, message});
+      try {
+        this.dispatcher.dispatch(new OnMessageCommand(), {client, message});
+      } catch (error) {
+        console.log(error);
+      }
     });
     this.onMessage('addBot', (client, message) => {
-      this.dispatcher.dispatch(new OnAddBotCommand());
+      try {
+        this.dispatcher.dispatch(new OnAddBotCommand());
+      } catch (error) {
+        console.log(error);
+      }
     });
     this.onMessage('removeBot', (client, message) => {
-      this.dispatcher.dispatch(new OnRemoveBotCommand());
+      try {
+        this.dispatcher.dispatch(new OnRemoveBotCommand());
+      } catch (error) {
+        console.log(error);
+      }
     });
   }
 

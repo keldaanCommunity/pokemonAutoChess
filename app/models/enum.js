@@ -1121,6 +1121,7 @@ const EFFECTS = Object.freeze({
   TAILWIND: 'TAILWIND',
   FEATHER_DANCE: 'FEATHER_DANCE',
   MAX_AIRSTREAM: 'MAX_AIRSTREAM',
+  MAX_GUARD:'MAX_GUARD',
   ODD_FLOWER: 'ODD_FLOWER',
   GLOOM_FLOWER: 'GLOOM_FLOWER',
   VILE_FLOWER:'VILE_FLOWER',
@@ -1367,6 +1368,11 @@ const EFFECTS_ICON = Object.freeze({
     },
     MAX_AIRSTREAM: {
       level: 3,
+      positive: true,
+      type:TYPE.FLYING
+    },
+    MAX_GUARD: {
+      level: 4,
       positive: true,
       type:TYPE.FLYING
     },
@@ -3210,45 +3216,66 @@ const TYPE_DETAILS = Object.freeze({
         {
             trigger: 2,
           title:`(2) Tailwind`,
-          text:`Your Flying pokemon have +10% Critical Hit chance.`
+          text:`Give a protection effect for 1sec when the pokemon fell under 20% hp`
         },
         {
-            trigger: 4,
+          trigger: 4,
           title:`(4) Feather Dance`,
-          text:`Your Flying pokemon have +20% Critical Hit chance.`
+          text:`Give a protection effect for 2sec when the pokemon fell under 40% hp`
         },
         {
-            trigger: 6,
+          trigger: 6,
           title:`(6) Max Airstream`,
-          text:`Your Flying pokemon have +40% Critical Hit chance.`
+          text:`Give a protection effect for 3sec when the pokemon fell under 50% hp`
+        },
+        {
+          trigger: 8,
+          title:`(8) Max Guard`,
+          text:`Give a protection effect for 4sec when the pokemon fell under 50% hp`
         }
       ],
       esp:[
         {
-          title:`(2) Viento de cola`,
-          text:`+10% de probabilidad de crítico para los pokemones voladores`
+            trigger: 2,
+          title:`(2) Tailwind`,
+          text:`Give a protection effect for 1sec when the pokemon fell under 20% hp`
         },
         {
-          title:`(4) Danza de las plumas`,
-          text:`+20% de probabilidad de crítico adicional para los pokemones voladores`
+          trigger: 4,
+          title:`(4) Feather Dance`,
+          text:`Give a protection effect for 1sec when the pokemon fell under 40% hp`
         },
         {
-          title:`(6) Corriente de aire máxima`,
-          text:`+40% de probabilidad de crítico adicional para los pokemones voladores`
+          trigger: 6,
+          title:`(6) Max Airstream`,
+          text:`Give a protection effect for 2sec when the pokemon fell under 50% hp`
+        },
+        {
+          trigger: 8,
+          title:`(8) Max Guard`,
+          text:`Add a second protection effect at 30%`
         }
       ],
       fra:[
         {
-          title:`(2) Vent arrière`,
-          text:`+10% de coup critique pour les pokémons vols`
+            trigger: 2,
+          title:`(2) Tailwind`,
+          text:`Give a protection effect for 1sec when the pokemon fell under 20% hp`
         },
         {
-          title:`(4) Danse des plumes`,
-          text:`+20% de coup critique pour les pokémons vols`
+          trigger: 4,
+          title:`(4) Feather Dance`,
+          text:`Give a protection effect for 1sec when the pokemon fell under 40% hp`
         },
         {
+          trigger: 6,
           title:`(6) Max Airstream`,
-          text:`+40% de coup critique pour les pokémons vols`
+          text:`Give a protection effect for 2sec when the pokemon fell under 50% hp`
+        },
+        {
+          trigger: 8,
+          title:`(8) Max Guard`,
+          text:`Add a second protection effect at 30%`
         }
       ]
     }
@@ -3519,7 +3546,7 @@ const TYPE_TRIGGER = {
   HUMAN: [2,4,6],
   AQUATIC: [2,4],
   BUG: [2,4],
-  FLYING: [2,4,6],
+  FLYING: [2,4,6,8],
   FLORA: [2,3,4],
   MINERAL: [2,4],
   AMORPH: [2,4],
@@ -4210,7 +4237,27 @@ const NEUTRAL_STAGE = [
   avatar: PKM.RAYQUAZA
 }];
 
+const FLYING_PROTECT_THRESHOLD = Object.freeze({
+  TAILWIND:{
+    duration: 1000,
+    threshold: 0.2
+  },
+  FEATHER_DANCE:{
+    duration: 2000,
+    threshold: 0.4
+  },
+  MAX_AIRSTREAM:{
+    duration: 3000,
+    threshold: 0.5
+  },
+  MAX_GUARD:{
+    duration: 4000,
+    threshold: 0.5
+  }
+});
+
 module.exports = {
+  FLYING_PROTECT_THRESHOLD,
   BATTLE_RESULT,
   SPECIAL_SKILL_DESCRIPTION,
   SPECIAL_SKILL,

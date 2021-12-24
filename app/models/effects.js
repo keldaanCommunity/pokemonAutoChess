@@ -154,14 +154,19 @@ class Effects {
     if (synergies.BUG >= 4) {
       this.list.push(EFFECTS.STICKY_WEB);
     }
-    if (synergies.FLYING >= 2) {
-      this.list.push(EFFECTS.TAILWIND);
-    }
-    if (synergies.FLYING >= 4) {
-      this.list.push(EFFECTS.FEATHER_DANCE);
-    }
-    if (synergies.FLYING >= 6) {
-      this.list.push(EFFECTS.MAX_AIRSTREAM);
+    if(synergies.FLYING >= 0){
+      if (synergies.FLYING >= 8) {
+        this.list.push(EFFECTS.MAX_GUARD);
+      }
+      else if (synergies.FLYING >= 6) {
+        this.list.push(EFFECTS.MAX_AIRSTREAM);
+      }
+      else if (synergies.FLYING >= 4) {
+        this.list.push(EFFECTS.FEATHER_DANCE);
+      }
+      else if (synergies.FLYING >= 2) {
+        this.list.push(EFFECTS.TAILWIND);
+      }
     }
     if(synergies.FLORA >= 0){
       if (synergies.FLORA >= 4) {

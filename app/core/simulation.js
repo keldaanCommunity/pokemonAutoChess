@@ -613,22 +613,29 @@ class Simulation extends Schema {
 
         case EFFECTS.TAILWIND:
           if(types.includes(TYPE.FLYING)){
-            pokemon.critChance += 10;
+            pokemon.flyingProtection = true;
             pokemon.effects.push(EFFECTS.TAILWIND);
           }
           break;
 
         case EFFECTS.FEATHER_DANCE:
           if(types.includes(TYPE.FLYING)){
-            pokemon.critChance += 20;
+            pokemon.flyingProtection = true;
             pokemon.effects.push(EFFECTS.FEATHER_DANCE);
           }
           break;
 
         case EFFECTS.MAX_AIRSTREAM:
           if(types.includes(TYPE.FLYING)){
-            pokemon.critChance += 40;
+            pokemon.flyingProtection = true;
             pokemon.effects.push(EFFECTS.MAX_AIRSTREAM);
+          }
+          break;
+
+        case EFFECTS.MAX_GUARD:
+          if(types.includes(TYPE.FLYING)){
+            pokemon.flyingProtection = true;
+            pokemon.effects.push(EFFECTS.MAX_GUARD);
           }
           break;
 

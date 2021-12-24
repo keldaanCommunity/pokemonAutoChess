@@ -1,4 +1,4 @@
-const {EFFECTS, ATTACK_TYPE, TYPE, CLIMATE, ITEMS, PKM} = require('../models/enum');
+const {EFFECTS, ATTACK_TYPE, TYPE, CLIMATE, ITEMS, PKM, FLYING_PROTECT_THRESHOLD} = require('../models/enum');
 const PokemonFactory = require('../models/pokemon-factory');
 
 class PokemonState {
@@ -53,9 +53,38 @@ class PokemonState {
 
         pokemon.life = Math.max(0, pokemon.life - residualDamage);
         //console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
-  
+        
         if (pokemon) {
           pokemon.setMana(pokemon.mana + Math.ceil(reducedDamage / 10));
+
+          if(pokemon.life && pokemon.life > 0){
+            if(pokemon.flyingProtection){
+              if(pokemon.effects.includes(EFFECTS.TAILWIND)){
+                if(pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.TAILWIND].threshold){
+                  pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.TAILWIND].duration);
+                  pokemon.flyingProtection = false;
+                }
+              }
+              else if(pokemon.effects.includes(EFFECTS.FEATHER_DANCE)){
+                if(pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.FEATHER_DANCE].threshold){
+                  pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.FEATHER_DANCE].duration);
+                  pokemon.flyingProtection = false;
+                }
+              }
+              else if(pokemon.effects.includes(EFFECTS.MAX_AIRSTREAM)){
+                if(pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_AIRSTREAM].threshold){
+                  pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_AIRSTREAM].duration);
+                  pokemon.flyingProtection = false;
+                }
+              }
+              else if(pokemon.effects.includes(EFFECTS.MAX_GUARD)){
+                if(pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_GUARD].threshold){
+                  pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_GUARD].duration);
+                  pokemon.flyingProtection = false;
+                }
+              }
+            }
+          }
         }
   
         if (attacker) {
