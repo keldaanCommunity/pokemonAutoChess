@@ -806,32 +806,32 @@ const ITEM_NAME = Object.freeze({
 
 const ITEM_DESCRIPTION = Object.freeze({
   ARMOR_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Shieldon',
+    eng: 'Give this to a Ditto to make it evolve into a Shieldon (Rare, 6 tours to evolve)',
     esp: 'Armor Fossil',
     fra: 'Armor Fossil'
   },
   CLAW_FOSSIL:{
-    eng: 'Give this to a Ditto to make it evolve into an Anorith',
+    eng: 'Give this to a Ditto to make it evolve into an Anorith (Uncommon, 4 tours to evolve)',
     esp: 'Claw Fossil',
     fra: 'Claw Fossil'
   },
   COVER_FOSSIL:{
-    eng: 'Give this to a Ditto to make it evolve into a Tirtouga',
+    eng: 'Give this to a Ditto to make it evolve into a Tirtouga (Rare, 6 tours to evolve)',
     esp: 'Cover Fossil',
     fra: 'Cover Fossil'
   },
   DOME_FOSSIL:{
-    eng: 'Give this to a Ditto to make it evolve into a Kabuto',
+    eng: 'Give this to a Ditto to make it evolve into a Kabuto (Uncommon, 4 tours to evolve)',
     esp: 'Dome Fossil',
     fra: 'Dome Fossil'
   },
   HELIX_FOSSIL:{
-    eng: 'Give this to a Ditto to make it evolve into a Omanyte',
+    eng: 'Give this to a Ditto to make it evolve into a Omanyte (Uncommon, 4 tours to evolve)',
     esp: 'Helix Fossil',
     fra: 'Helix Fossil'
   },
   JAW_FOSSIL:{
-    eng: 'Give this to a Ditto to make it evolve into a Tyrunt',
+    eng: 'Give this to a Ditto to make it evolve into a Tyrunt (Epic, 8 tours to evolve)',
     esp: 'Jaw Fossil',
     fra: 'Jaw Fossil'
   },
@@ -841,22 +841,22 @@ const ITEM_DESCRIPTION = Object.freeze({
     fra: 'Old Amber'
   },
   PLUME_FOSSIL:{
-    eng: 'Give this to a Ditto to make it evolve into an Archen',
+    eng: 'Give this to a Ditto to make it evolve into an Archen (Rare, 6 tours to evolve)',
     esp: 'Plum Fossil',
     fra: 'Plum Fossil'
   },
   ROOT_FOSSIL:{
-    eng: 'Give this to a Ditto to make it evolve into a Lileep',
+    eng: 'Give this to a Ditto to make it evolve into a Lileep (Uncommon, 4 tours to evolve)',
     esp: 'Root Fossil',
     fra: 'Root Fossil'
   },
   SAIL_FOSSIL:{
-    eng: 'Give this to a Ditto to make it evolve into an Amaura',
+    eng: 'Give this to a Ditto to make it evolve into an Amaura (Epic, 8 tours to evolve)',
     esp: 'Sail Fossil',
     fra: 'Sail Fossil'
   },
   SKULL_FOSSIL:{
-    eng: 'Give this to a Ditto to make it evolve into a Cranidos',
+    eng: 'Give this to a Ditto to make it evolve into a Cranidos (Rare, 6 tours to evolve)',
     esp: 'Skull Fossil',
     fra: 'Skull Fossil'
   },
