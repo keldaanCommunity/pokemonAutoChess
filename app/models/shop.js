@@ -16,12 +16,21 @@ class Shop {
   assignShop(player) {
 
     for (let i = 0; i < 5; i++) {
-      let pokemon = PokemonFactory.createPokemonFromName(this.pickPokemon(player));
+      let pokemon = this.pickPokemon(player);
       const seed = Math.random();
       if (seed > 0.993) {
-        pokemon = PokemonFactory.createPokemonFromName(PKM.DITTO);
+        pokemon = PKM.DITTO;
       }
-      player.shop[i] = pokemon.name;
+      player.shop[i] = pokemon;
+    }
+  }
+
+  assignDittoShop(player){
+    player.shop[0] = PKM.DITTO;
+
+    for (let i = 1; i < 5; i++) {
+      let pokemon = this.pickPokemon(player);
+      player.shop[i] = pokemon;
     }
   }
 

@@ -59,7 +59,6 @@ class Pokemon extends Schema {
         default:
           break;
       }
-      this.fossilTimer = process.env.MODE == 'dev' ? 1: 5;
     }
   }
 

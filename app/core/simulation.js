@@ -431,32 +431,32 @@ class Simulation extends Schema {
 
         case EFFECTS.HISTORIC_POWER:
           if(types.includes(TYPE.FOSSIL)){
-            pokemon.critChance += 10;
-            pokemon.critDamage += 0.2;
+            pokemon.critChance += 20;
+            pokemon.critDamage += 0.4;
             pokemon.effects.push(EFFECTS.HISTORIC_POWER);
           }
           break;
 
         case EFFECTS.ANCIENT_POWER:
           if(types.includes(TYPE.FOSSIL)){
-            pokemon.critChance += 30;
-            pokemon.critDamage += 0.4;
+            pokemon.critChance += 40;
+            pokemon.critDamage += 0.8;
             pokemon.effects.push(EFFECTS.ANCIENT_POWER);
           }
           break;
 
         case EFFECTS.ELDER_POWER:
           if(types.includes(TYPE.FOSSIL)){
-            pokemon.critChance += 50;
-            pokemon.critDamage += 0.6;
+            pokemon.critChance += 70;
+            pokemon.critDamage += 1.4;
             pokemon.effects.push(EFFECTS.ELDER_POWER);
           }
           break;
 
         case EFFECTS.UNOWN_GATHERINGS:
           if(types.includes(TYPE.FOSSIL)){
-            pokemon.critChance += 80;
-            pokemon.critDamage += 1;
+            pokemon.critChance += 100;
+            pokemon.critDamage += 2.5;
             pokemon.effects.push(EFFECTS.UNOWN_GATHERINGS);
           }
           break;

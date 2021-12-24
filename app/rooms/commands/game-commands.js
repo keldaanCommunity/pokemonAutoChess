@@ -752,8 +752,8 @@ class OnUpdatePhaseCommand extends Command {
       player.simulation.stop();
       if (player.alive) {
         if (player.opponentName == 'PVE' && player.getLastBattleResult() == BATTLE_RESULT.WIN) {
-          //let items = ItemFactory.createRandomItems();
-          let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
+          let items = ItemFactory.createRandomItems();
+          //let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
           items.forEach(item=>{
             player.itemsProposition.push(item);
           });
@@ -769,6 +769,12 @@ class OnUpdatePhaseCommand extends Command {
           }
           else if(this.state.stageLevel == 20){
             this.state.shop.assignSecondMythicalShop(player);
+          }
+          else if(this.state.stageLevel == 2){
+            this.state.shop.assignDittoShop(player);
+          }
+          else if(this.state.stageLevel == 3){
+            this.state.shop.assignDittoShop(player);
           }
           else{
             this.state.shop.assignShop(player);
@@ -798,7 +804,7 @@ class OnUpdatePhaseCommand extends Command {
           }
         });
       }
-    });
+    });;
   }
 
   checkForLazyTeam() {

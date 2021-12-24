@@ -3509,19 +3509,19 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 2,
           title:`(2) Historic Power`,
-          text:`+10% Crit Chance and +20% Crit Damage.`
+          text:`+20% Crit Chance and +40% Crit Damage.`
         },{
           trigger: 4,
           title:`(4) Ancient Power`,
-          text:`+30% Crit Chance and +40% Crit Damage`
+          text:`+40% Crit Chance and +80% Crit Damage`
         },{
           trigger: 6,
           title:`(6) Elder Power`,
-          text:`+50% Crit Chance and +60% Crit Damage`
+          text:`+70% Crit Chance and +140% Crit Damage`
         },{
           trigger: 8,
           title:`(8) Unown Gatherings`,
-          text:`+80% Crit Chance and +100% Crit Damage`
+          text:`+100% Crit Chance and +250% Crit Damage`
         }
       ],
       esp:[
