@@ -19,6 +19,42 @@ class LeechSeedStrategy extends AttackStrategy {
   }
 }
 
+class HeadSmashStrategy extends AttackStrategy{
+  constructor() {
+    super();
+  }
+
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+
+    let d = 0;
+    let recoil = 0;
+    switch (pokemon.stars) {
+      case 1:
+        d = 40;
+        recoil = 5;
+        break;
+      case 2:
+        d = 80;
+        recoil = 10;
+        break;
+      case 3:
+        d = 150;
+        recoil = 15;
+        break;
+      default:
+        break;
+    }
+    if(target.sleep || target.freeze){
+      target.handleDamage(target.life, board, ATTACK_TYPE.TRUE, pokemon);
+    }
+    else{
+      target.handleDamage(d, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    }
+    pokemon.handleDamage(recoil, board, ATTACK_TYPE.TRUE, pokemon);
+  }
+}
+
 class RockSmashStrategy extends AttackStrategy{
   constructor() {
     super();
@@ -1439,7 +1475,8 @@ class MetronomeStrategy extends AttackStrategy {
       HealBlockStrategy,
       RoarOfTimeStrategy,
       RockTombStrategy,
-      RockSmashStrategy
+      RockSmashStrategy,
+      HeadSmashStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1500,5 +1537,6 @@ module.exports = {
   HealBlockStrategy,
   RoarOfTimeStrategy,
   RockTombStrategy,
-  RockSmashStrategy
+  RockSmashStrategy,
+  HeadSmashStrategy
 };

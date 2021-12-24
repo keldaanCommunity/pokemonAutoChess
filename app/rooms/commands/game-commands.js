@@ -260,7 +260,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (item == ITEMS.DOME_FOSSIL) {
+              } else if (pokemon.name == PKM.DITTO && item == ITEMS.DOME_FOSSIL) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
@@ -270,7 +270,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (item == ITEMS.HELIX_FOSSIL) {
+              } else if (pokemon.name == PKM.DITTO && item == ITEMS.HELIX_FOSSIL) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
@@ -280,7 +280,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (item == ITEMS.OLD_AMBER) {
+              } else if (pokemon.name == PKM.DITTO && item == ITEMS.OLD_AMBER) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
@@ -290,7 +290,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (item == ITEMS.ROOT_FOSSIL) {
+              } else if (pokemon.name == PKM.DITTO && item == ITEMS.ROOT_FOSSIL) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
@@ -300,7 +300,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (item == ITEMS.CLAW_FOSSIL) {
+              } else if (pokemon.name == PKM.DITTO && item == ITEMS.CLAW_FOSSIL) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
@@ -310,7 +310,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (item == ITEMS.SKULL_FOSSIL) {
+              } else if (pokemon.name == PKM.DITTO && item == ITEMS.SKULL_FOSSIL) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
@@ -320,7 +320,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (item == ITEMS.ARMOR_FOSSIL) {
+              } else if (pokemon.name == PKM.DITTO && item == ITEMS.ARMOR_FOSSIL) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
@@ -330,7 +330,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (item == ITEMS.PLUME_FOSSIL) {
+              } else if (pokemon.name == PKM.DITTO && item == ITEMS.PLUME_FOSSIL) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
@@ -340,7 +340,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (item == ITEMS.COVER_FOSSIL) {
+              } else if (pokemon.name == PKM.DITTO && item == ITEMS.COVER_FOSSIL) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
@@ -350,7 +350,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (item == ITEMS.JAW_FOSSIL) {
+              } else if (pokemon.name == PKM.DITTO && item == ITEMS.JAW_FOSSIL) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
@@ -360,7 +360,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              } else if (item == ITEMS.SAIL_FOSSIL) {
+              } else if (pokemon.name == PKM.DITTO && item == ITEMS.SAIL_FOSSIL) {
                 evolve = true;
                 const x = pokemon.positionX;
                 const y = pokemon.positionY;
@@ -752,8 +752,8 @@ class OnUpdatePhaseCommand extends Command {
       player.simulation.stop();
       if (player.alive) {
         if (player.opponentName == 'PVE' && player.getLastBattleResult() == BATTLE_RESULT.WIN) {
-          let items = ItemFactory.createRandomItems();
-         // let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
+          //let items = ItemFactory.createRandomItems();
+          let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
           items.forEach(item=>{
             player.itemsProposition.push(item);
           });

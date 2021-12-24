@@ -1541,7 +1541,8 @@ const SPECIAL_SKILL = Object.freeze({
   HEAL_BLOCK: 'HEAL_BLOCK',
   ROAR_OF_TIME: 'ROAR_OF_TIME',
   ROCK_TOMB:'ROCK_TOMB',
-  ROCK_SMASH:'ROCK_SMASH'
+  ROCK_SMASH:'ROCK_SMASH',
+  HEAD_SMASH:'HEAD_SMASH'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
@@ -2165,6 +2166,18 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
     },
     description:{
       eng: 'Mono target attack that deals 20/40/60 damage and silence target for 3/6/9s.',
+      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
+      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
+    }
+  },
+  HEAD_SMASH: {
+    title:{
+      eng: 'Head Smash',
+      esp: 'Head Smash',
+      fra: 'Head Smash'
+    },
+    description:{
+      eng: 'The pokemon hurt itself for 5/10/15 hp, and deals 40/80/150 physical damage. Execute if the target is asleep/frozen.',
       esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }

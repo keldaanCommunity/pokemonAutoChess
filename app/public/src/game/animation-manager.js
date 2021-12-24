@@ -501,6 +501,13 @@ export default class AnimationManager {
       frameRate: 10,
       repeat: 0
     });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.HEAD_SMASH,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 79, zeroPad: 3, prefix: `${SPECIAL_SKILL.ROCK_SLIDE}/`}),
+      frameRate: 30,
+      repeat: 0
+    });
   }
 
   createAttacksAnimations() {
