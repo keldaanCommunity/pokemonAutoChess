@@ -79,11 +79,16 @@ class Effects {
     if (synergies.PSYCHIC >= 6) {
       this.list.push(EFFECTS.EERIE_SPELL);
     }
-    if (synergies.DARK >= 2) {
-      this.list.push(EFFECTS.MEAN_LOOK);
-    }
-    if (synergies.DARK >= 4) {
-      this.list.push(EFFECTS.SCARY_FACE);
+    if(synergies.DARK >= 0){
+      if (synergies.DARK >= 6) {
+        this.list.push(EFFECTS.BEAT_UP);
+      }
+      else if(synergies.DARK >= 4){
+        this.list.push(EFFECTS.ASSURANCE);
+      }
+      else if (synergies.DARK >= 2) {
+        this.list.push(EFFECTS.HONE_CLAWS);
+      }
     }
     if (synergies.METAL >= 2) {
       this.list.push(EFFECTS.IRON_DEFENSE);

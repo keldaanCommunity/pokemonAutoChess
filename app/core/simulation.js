@@ -407,6 +407,28 @@ class Simulation extends Schema {
   applyEffects(pokemon, types, allyEffects, ennemyEffects, allyTeam, ennemyTeam) {
     allyEffects.forEach((effect) => {
       switch (effect) {
+
+        case EFFECTS.HONE_CLAWS:
+          if(types.includes(TYPE.DARK) && pokemon.items.length != 0){
+            pokemon.atk += 4 * pokemon.items.length;
+            pokemon.shield += 20 * pokemon.items.length;
+          }
+          break;
+
+        case EFFECTS.ASSURANCE:
+          if(types.includes(TYPE.DARK) && pokemon.items.length != 0){
+            pokemon.atk += 7 * pokemon.items.length;
+            pokemon.shield += 30 * pokemon.items.length;
+          }
+          break;
+
+        case EFFECTS.BEAT_UP:
+          if(types.includes(TYPE.DARK) && pokemon.items.length != 0){
+            pokemon.atk += 10 * pokemon.items.length;
+            pokemon.shield += 50 * pokemon.items.length;
+          }
+          break;
+
         case EFFECTS.HISTORIC_POWER:
           if(types.includes(TYPE.FOSSIL)){
             pokemon.critChance += 10;
@@ -748,16 +770,6 @@ class Simulation extends Schema {
         case EFFECTS.SPORE:
           pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 1.3);
           pokemon.effects.push(EFFECTS.SPORE);
-          break;
-
-        case EFFECTS.MEAN_LOOK:
-          pokemon.def = Math.max(0, Math.floor(pokemon.baseDef * 0.8));
-          pokemon.effects.push(EFFECTS.MEAN_LOOK);
-          break;
-
-        case EFFECTS.SCARY_FACE:
-          pokemon.def = Math.max(0, Math.floor(pokemon.baseDef * 0.8));
-          pokemon.effects.push(EFFECTS.SCARY_FACE);
           break;
 
         case EFFECTS.SPIKES:

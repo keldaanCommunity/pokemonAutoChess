@@ -1281,6 +1281,9 @@ class ThiefStrategy extends AttackStrategy {
       pokemon.items.add(item);
       target.items.remove(item);
     });
+
+    pokemon.simulation.applyItemsEffects(pokemon, pokemon.types);
+    target.simulation.applyItemsEffects(target, target.types);
     target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }

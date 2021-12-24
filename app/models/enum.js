@@ -1094,8 +1094,9 @@ const EFFECTS = Object.freeze({
   AMNESIA:'AMNESIA',
   LIGHT_SCREEN:'LIGHT_SCREEN',
   EERIE_SPELL:'EERIE_SPELL',
-  MEAN_LOOK: 'MEAN_LOOK',
-  SCARY_FACE: 'SCARY_FACE',
+  HONE_CLAWS: 'HONE_CLAWS',
+  ASSURANCE: 'ASSURANCE',
+  BEAT_UP:'BEAT_UP',
   IRON_DEFENSE: 'IRON_DEFENSE',
   AUTOTOMIZE: 'AUTOTOMIZE',
   SPIKES: 'SPIKES',
@@ -1236,14 +1237,19 @@ const EFFECTS_ICON = Object.freeze({
       positive: true,
       type:TYPE.PSYCHIC
     },
-    MEAN_LOOK: {
+    HONE_CLAWS: {
       level: 1,
-      positive: false,
+      positive: true,
       type:TYPE.DARK
     },
-    SCARY_FACE: {
+    ASSURANCE: {
       level: 2,
-      positive: false,
+      positive: true,
+      type:TYPE.DARK
+    },
+    BEAT_UP:{
+      level:3,
+      positive: true,
       type:TYPE.DARK
     },
     IRON_DEFENSE: {
@@ -2802,34 +2808,53 @@ const TYPE_DETAILS = Object.freeze({
     description:{
       eng:[
         {
-            trigger: 2,
-          title:`(2) Black eyes`,
-          text:`Enemies have -25% Defense.`
+          trigger: 2,
+          title:`(2) Hone Claws`,
+          text:`Dark pokemons gains +4 damage/+20 shield for each held items`
         },
         {
-            trigger: 4,
-          title:`(4) Dark Presence`,
-          text:`Enemies have -25% less Defense.`
+          trigger: 4,
+          title:`(4) Assurance`,
+          text:`Dark pokemons gains +7 damage/+30 shield for each held items`
+        },
+        {
+          trigger: 6,
+          title:`(6) Beat up`,
+          text:`Dark pokemons gains +10 damage/+50 shield for each held items`
         }
       ],
       esp:[
         {
-          title:`(2) Halo Negra`,
-          text:`-25% DEF para el equipo enemigo`
+          trigger: 2,
+          title:`(2) Hone Claws`,
+          text:`Dark pokemons gains +4 attack/+20 shield for each held items`
         },
         {
-          title:`(4) Grima`,
-          text:`25% de DEF adicional para el equipo enemigo`
+          trigger: 4,
+          title:`(4) Assurance`,
+          text:`Dark pokemons gains +7 attack/+30 shield for each held items`
+        },
+        {
+          trigger: 6,
+          title:`(6) Beat up`,
+          text:`Dark pokemons gains +10 attack/+50 shield for each held items`
         }
       ],
       fra:[
         {
-          title:`(2) Regard Noir`,
-          text:`-25% DEF pour la team ennemie`
+          trigger: 2,
+          title:`(2) Hone Claws`,
+          text:`Dark pokemons gains +4 attack/+20 shield for each held items`
         },
         {
-          title:`(4) Aura Ténébreuse`,
-          text:`-25% DEF additionel pour la team ennemie`
+          trigger: 4,
+          title:`(4) Assurance`,
+          text:`Dark pokemons gains +7 attack/+30 shield for each held items`
+        },
+        {
+          trigger: 6,
+          title:`(6) Beat up`,
+          text:`Dark pokemons gains +10 attack/+50 shield for each held items`
         }
       ]
     }
@@ -3536,7 +3561,7 @@ const TYPE_TRIGGER = {
   ELECTRIC: [1],
   FIGHTING: [2,4],
   PSYCHIC: [2,4,6],
-  DARK: [2,4],
+  DARK: [2,4,6],
   METAL: [2,4],
   GROUND: [2,4,6],
   POISON: [3,6],
