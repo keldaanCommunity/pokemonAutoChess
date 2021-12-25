@@ -351,13 +351,17 @@ class PokemonState {
       }
     });
 
-    pokemons.sort((a,b)=>{return a-b});
+    pokemons.sort((a,b)=>{return b.distance-a.distance});
 
     for (let i = 0; i < pokemons.length; i++) {
       const p = pokemons[i];
       const around = board.getAdjacentCells(p.x, p.y);
-      around.forEach((cell) => {
-        if (!cell.value) {
+      let manhattanAround = around.filter(e=>{return board.distance(e.row, e.column, p.x, p.y) == 1});
+      manhattanAround.sort((a,b)=>{return board.distance(b.row, b.column, pokemon.positionX, pokemon.positionY) - 
+        board.distance(a.row, a.column, pokemon.positionX, pokemon.positionY);
+      })
+      manhattanAround.forEach((cell) => {
+        if (!cell.value && x === undefined && y === undefined) {
           x = cell.row;
           y = cell.column;
         }

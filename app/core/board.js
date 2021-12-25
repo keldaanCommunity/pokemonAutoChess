@@ -43,13 +43,13 @@ class Board {
   }
 
   distance(r0, c0, r1, c1) {
-    // chebyshev distance
-    return Math.max(Math.abs(r0 - r1), Math.abs(c0 - c1));
-  }
-
-  distanceM(r0, c0, r1, c1) {
     // Manhattan distance
     return Math.abs(r1 - r0) + Math.abs(c1 - c0);
+  }
+
+  distanceC(r0, c0, r1, c1) {
+    // chebyshev distance
+    return Math.max(Math.abs(r0 - r1), Math.abs(c0 - c1));
   }
 
   orientation(r0, c0, r1, c1) {
