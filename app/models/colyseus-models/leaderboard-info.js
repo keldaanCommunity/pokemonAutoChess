@@ -19,7 +19,7 @@ class LeaderboardInfo extends Schema {
 schema.defineTypes(LeaderboardInfo, {
   name: 'string',
   avatar: 'string',
-  rank : 'uint16',
+  rank: 'uint16',
   value: 'uint16'
 });
 

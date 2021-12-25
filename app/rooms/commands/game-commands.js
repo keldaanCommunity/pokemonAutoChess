@@ -1,5 +1,5 @@
 const Command = require('@colyseus/command').Command;
-const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, XP_TABLE, RARITY, PKM, BATTLE_RESULT, NEUTRAL_STAGE} = require('../../models/enum');
+const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, RARITY, PKM, BATTLE_RESULT, NEUTRAL_STAGE} = require('../../models/enum');
 const Player = require('../../models/colyseus-models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
@@ -20,11 +20,10 @@ class OnShopCommand extends Command {
           pokemon.positionX = this.room.getFirstAvailablePositionInBoard(player.id);
           pokemon.positionY = 0;
           player.board.set(pokemon.id, pokemon);
-          
-          if(pokemon.rarity == RARITY.MYTHICAL){
+
+          if (pokemon.rarity == RARITY.MYTHICAL) {
             this.state.shop.assignShop(player);
-          }
-          else{
+          } else {
             player.shop[index] = '';
           }
           return [new OnEvolutionCommand().setPayload(id), new OnEvolutionCommand().setPayload(id)];
@@ -34,15 +33,15 @@ class OnShopCommand extends Command {
   }
 }
 
-class OnItemCommand extends Command{
-  execute({playerId, id}){
-    if(this.state.players.has(playerId)){
+class OnItemCommand extends Command {
+  execute({playerId, id}) {
+    if (this.state.players.has(playerId)) {
       const player = this.state.players.get(playerId);
-      if(player.itemsProposition.includes(id)){
+      if (player.itemsProposition.includes(id)) {
         player.stuff.add(id);
       }
-      while(player.itemsProposition.length > 0){
-          player.itemsProposition.pop();
+      while (player.itemsProposition.length > 0) {
+        player.itemsProposition.pop();
       }
     }
   }
@@ -63,7 +62,7 @@ class OnDragDropCommand extends Command {
       'updateItems': true,
       'field': detail.place
     };
-    let playerId = client.auth.uid;;
+    const playerId = client.auth.uid; ;
 
     if (this.state.players.has(playerId)) {
       if (detail.objType == 'pokemon') {
@@ -370,7 +369,7 @@ class OnDragDropCommand extends Command {
                 this.state.players.get(playerId).board.delete(id);
                 success = true;
                 message.updateItems = false;
-              }else {
+              } else {
                 pokemon.items.add(item);
                 this.state.players.get(playerId).stuff.remove(item);
                 success = true;
@@ -407,8 +406,10 @@ class OnSellDropCommand extends Command {
       const player = this.state.players.get(client.auth.uid);
       player.money += COST[pokemon.rarity] * pokemon.stars;
 
-      let items = pokemon.items.getAllItems();
-      items.forEach(it=>{player.stuff.add(it)});
+      const items = pokemon.items.getAllItems();
+      items.forEach((it)=>{
+        player.stuff.add(it);
+      });
 
       player.board.delete(detail.pokemonId);
 
@@ -453,34 +454,33 @@ class OnLevelUpCommand extends Command {
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-
-    UserMetadata.findOne({'uid':auth.uid},(err, user)=>{
-      if(user){
+    UserMetadata.findOne({'uid': auth.uid}, (err, user)=>{
+      if (user) {
         this.state.players.set(client.auth.uid, new Player(
-          user.uid,
-          user.displayName,
-          user.elo,
-          user.avatar,
-          false,
-          this.state.specialCells,
-          this.state.mapType,
-          this.state.players.size + 1,
-          user.map[this.state.mapType]
-      ));
-      if(client && client.auth && client.auth.displayName){
-        console.log(`${client.auth.displayName} ${client.id} join game room`);
-      }
+            user.uid,
+            user.displayName,
+            user.elo,
+            user.avatar,
+            false,
+            this.state.specialCells,
+            this.state.mapType,
+            this.state.players.size + 1,
+            user.map[this.state.mapType]
+        ));
+        if (client && client.auth && client.auth.displayName) {
+          console.log(`${client.auth.displayName} ${client.id} join game room`);
+        }
 
-      this.state.players.forEach(p=>{
-        console.log(p.name);
-      });
-     // console.log(this.state.players.get(client.auth.uid).tileset);
-      this.state.shop.assignShop(this.state.players.get(client.auth.uid));
-      if (this.state.players.size >= 8) {
+        this.state.players.forEach((p)=>{
+          console.log(p.name);
+        });
+        // console.log(this.state.players.get(client.auth.uid).tileset);
+        this.state.shop.assignShop(this.state.players.get(client.auth.uid));
+        if (this.state.players.size >= 8) {
         // console.log('game elligible to xp');
-        this.state.elligibleToXP = true;
+          this.state.elligibleToXP = true;
+        }
       }
-    }
     });
   }
 }
@@ -520,12 +520,6 @@ class OnUpdateCommand extends Command {
         return [new OnUpdatePhaseCommand()];
       }
     }
-  }
-}
-
-class OnKickPlayerCommand extends Command {
-  execute() {
-    this.room.broadcast('kick-out');
   }
 }
 
@@ -628,11 +622,11 @@ class OnUpdatePhaseCommand extends Command {
     if (numberOfPlayersAlive <= 1) {
       this.state.gameFinished = true;
       this.room.broadcast('info',
-      {
-        title:'End of the game',
-        info:'We have a winner !'
-      });
-      //commands.push(new OnKickPlayerCommand());
+          {
+            title: 'End of the game',
+            info: 'We have a winner !'
+          });
+      // commands.push(new OnKickPlayerCommand());
     }
     return commands;
   }
@@ -640,16 +634,13 @@ class OnUpdatePhaseCommand extends Command {
   computePlayerDamage(redTeam, playerLevel, stageLevel) {
     let damage = playerLevel - 2;
     let multiplier = 1;
-    if(stageLevel >= 10){
+    if (stageLevel >= 10) {
       multiplier = 1.25;
-    }
-    else if(stageLevel >= 15){
+    } else if (stageLevel >= 15) {
       multiplier = 1.5;
-    }
-    else if(stageLevel >= 20){
+    } else if (stageLevel >= 20) {
       multiplier = 2.0;
-    }
-    else if(stageLevel >= 25){
+    } else if (stageLevel >= 25) {
       multiplier = 2.5;
     }
 
@@ -662,14 +653,14 @@ class OnUpdatePhaseCommand extends Command {
     return damage;
   }
 
-  rankPlayers(){
-    let rankArray = [];
+  rankPlayers() {
+    const rankArray = [];
     this.state.players.forEach((player, key) => {
-      if(player.alive){
-        rankArray.push({id:player.id, life:player.life});
+      if (player.alive) {
+        rankArray.push({id: player.id, life: player.life});
       }
     });
-    rankArray.sort(function(a,b){
+    rankArray.sort(function(a, b) {
       return b.life - a.life;
     });
     rankArray.forEach((rankPlayer, index)=>{
@@ -681,7 +672,7 @@ class OnUpdatePhaseCommand extends Command {
   computeLife() {
     this.state.players.forEach((player, key) => {
       if (player.simulation.blueTeam.size == 0) {
-        if(player.opponentName != 'PVE'){
+        if (player.opponentName != 'PVE') {
           if (player.getLastBattleResult() == BATTLE_RESULT.DEFEAT) {
             player.streak = Math.min(player.streak + 1, 5);
           } else {
@@ -691,7 +682,7 @@ class OnUpdatePhaseCommand extends Command {
         player.addBattleResult(player.opponentName, BATTLE_RESULT.DEFEAT, player.opponentAvatar);
         player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel));
       } else if (player.simulation.redTeam.size == 0) {
-        if(player.opponentName != 'PVE'){
+        if (player.opponentName != 'PVE') {
           if (player.getLastBattleResult() == BATTLE_RESULT.WIN) {
             player.streak = Math.min(player.streak + 1, 5);
           } else {
@@ -700,7 +691,7 @@ class OnUpdatePhaseCommand extends Command {
         }
         player.addBattleResult(player.opponentName, BATTLE_RESULT.WIN, player.opponentAvatar);
       } else {
-        if(player.opponentName != 'PVE'){
+        if (player.opponentName != 'PVE') {
           if (player.getLastBattleResult() == BATTLE_RESULT.DRAW) {
             player.streak = Math.min(player.streak + 1, 5);
           } else {
@@ -752,40 +743,36 @@ class OnUpdatePhaseCommand extends Command {
       player.simulation.stop();
       if (player.alive) {
         if (player.opponentName == 'PVE' && player.getLastBattleResult() == BATTLE_RESULT.WIN) {
-          let items = ItemFactory.createRandomItems();
-          //let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
-          items.forEach(item=>{
+          const items = ItemFactory.createRandomItems();
+          // let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
+          items.forEach((item)=>{
             player.itemsProposition.push(item);
           });
-          //const item = ItemFactory.createRandomItem();
-          //const item = ItemFactory.createSpecificItems([ITEMS.DELTA_ORB, ITEMS.BLUE_ORB]);
-          //player.stuff.add(item);
+          // const item = ItemFactory.createRandomItem();
+          // const item = ItemFactory.createSpecificItems([ITEMS.DELTA_ORB, ITEMS.BLUE_ORB]);
+          // player.stuff.add(item);
         }
         player.opponentName = '';
         player.opponentAvatar = '';
         if (!player.shopLocked) {
-          if(this.state.stageLevel == 10){
+          if (this.state.stageLevel == 10) {
             this.state.shop.assignFirstMythicalShop(player);
-          }
-          else if(this.state.stageLevel == 20){
+          } else if (this.state.stageLevel == 20) {
             this.state.shop.assignSecondMythicalShop(player);
-          }
-          else if(this.state.stageLevel == 2){
+          } else if (this.state.stageLevel == 2) {
             this.state.shop.assignDittoShop(player);
-          }
-          else if(this.state.stageLevel == 3){
+          } else if (this.state.stageLevel == 3) {
             this.state.shop.assignDittoShop(player);
-          }
-          else{
+          } else {
             this.state.shop.assignShop(player);
           }
         } else {
           player.shopLocked = false;
         }
-        player.board.forEach((pokemon,key)=>{
-          if(pokemon.fossilTimer !== undefined){
-            if(pokemon.fossilTimer == 0){
-              let itemsToAdd = pokemon.items.getAllItems();
+        player.board.forEach((pokemon, key)=>{
+          if (pokemon.fossilTimer !== undefined) {
+            if (pokemon.fossilTimer == 0) {
+              const itemsToAdd = pokemon.items.getAllItems();
               const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemon.evolution);
               for (let i = 0; i < 3; i++) {
                 const itemToAdd = itemsToAdd.pop();
@@ -797,14 +784,13 @@ class OnUpdatePhaseCommand extends Command {
               pokemonEvolved.positionY = pokemon.positionY;
               player.board.delete(key);
               player.board.set(pokemonEvolved.id, pokemonEvolved);
-            }
-            else{
+            } else {
               pokemon.fossilTimer -= 1;
             }
           }
         });
       }
-    });;
+    }); ;
   }
 
   checkForLazyTeam() {
@@ -825,7 +811,7 @@ class OnUpdatePhaseCommand extends Command {
               'objType': 'pokemon'
             };
             const client = {
-              auth:{
+              auth: {
                 'uid': key
               }
             };
@@ -844,21 +830,22 @@ class OnUpdatePhaseCommand extends Command {
     this.state.botManager.updateBots();
 
     this.state.players.forEach((player, key) => {
-
       if (player.alive) {
-        if(player.itemsProposition.length != 0){
-          while(player.itemsProposition.length > 0){
+        if (player.itemsProposition.length != 0) {
+          while (player.itemsProposition.length > 0) {
             player.itemsProposition.pop();
           }
         }
-        let stageIndex = NEUTRAL_STAGE.findIndex(stage=>{return stage.turn == this.state.stageLevel});
+        const stageIndex = NEUTRAL_STAGE.findIndex((stage)=>{
+          return stage.turn == this.state.stageLevel;
+        });
         if (stageIndex != -1) {
           player.opponentName = 'PVE';
           player.opponentAvatar = NEUTRAL_STAGE[stageIndex].avatar;
           player.simulation.initialize(player.board, PokemonFactory.getNeutralPokemonsByLevelStage(this.state.stageLevel), player.effects.list, []);
         } else {
           const opponentId = this.room.computeRandomOpponent(key);
-          if(opponentId){
+          if (opponentId) {
             player.simulation.initialize(player.board, this.state.players.get(opponentId).board, player.effects.list, this.state.players.get(opponentId).effects.list);
           }
         }

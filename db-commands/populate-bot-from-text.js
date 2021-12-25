@@ -2,7 +2,7 @@ require('dotenv').config();
 const Mongoose = require('mongoose');
 const Bot = require('../app/models/mongo-models/bot');
 
-let data = `{
+const data = `{
   "avatar": "cresselia",
   "elo": 1000,
   "author": "D L",
@@ -974,26 +974,24 @@ let data = `{
 }`;
 
 try {
-    let json = JSON.parse(data);
-    console.log(`connect to db ...`);
-    Mongoose.connect(process.env.MONGO_URI, (err) => {
-        Bot.deleteMany({'avatar':json.avatar}, (err, result)=>{
-          if(err){
-            console.log(err);
-          }
-          else{
-            console.log(result);
-          }
-          console.log(`creating bot ${json.avatar}...`);
-          Bot.create({
-            avatar: json.avatar,
-            elo: 1000,
-            author: json.author,
-            steps: json.steps
-          });
-        });
+  const json = JSON.parse(data);
+  console.log(`connect to db ...`);
+  Mongoose.connect(process.env.MONGO_URI, (err) => {
+    Bot.deleteMany({'avatar': json.avatar}, (err, result)=>{
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+      console.log(`creating bot ${json.avatar}...`);
+      Bot.create({
+        avatar: json.avatar,
+        elo: 1000,
+        author: json.author,
+        steps: json.steps
+      });
     });
-
+  });
 } catch (e) {
-    console.error("Parsing error:", e);
+  console.error('Parsing error:', e);
 }

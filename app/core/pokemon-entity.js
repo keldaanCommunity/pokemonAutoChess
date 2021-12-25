@@ -40,7 +40,7 @@ class PokemonEntity extends schema.Schema {
           speDef: pokemon.speDef,
           attackType: pokemon.attackType,
           hp: pokemon.hp,
-          maxMana:pokemon.maxMana,
+          maxMana: pokemon.maxMana,
           mana: 0,
           shield: 0,
           life: pokemon.hp,
@@ -82,8 +82,8 @@ class PokemonEntity extends schema.Schema {
   }
 
   update(dt, board, climate) {
-    let updateEffects = this.state.update(this, dt, board, climate);
-    if(updateEffects){
+    const updateEffects = this.state.update(this, dt, board, climate);
+    if (updateEffects) {
       this.simulation.applyItemsEffects(this, this.types);
     }
   }
@@ -201,12 +201,12 @@ class PokemonEntity extends schema.Schema {
     }
   }
 
-  triggerWound(timer){
+  triggerWound(timer) {
     this.wound = true;
     this.woundCooldown = timer;
   }
 
-  updateWound(dt){
+  updateWound(dt) {
     if (this.woundCooldown - dt <= 0) {
       this.wound = false;
     } else {

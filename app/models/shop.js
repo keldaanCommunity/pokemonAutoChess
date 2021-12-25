@@ -7,14 +7,12 @@ const RARE = [PKM.SANDILE, PKM.VANILLITE, PKM.PICHU, PKM.MACHOP, PKM.HORSEA, PKM
 const EPIC = [PKM.SOLOSIS, PKM.DEINO, PKM.SNORUNT, PKM.ABRA, PKM.GASTLY, PKM.DRATINI, PKM.LARVITAR, PKM.SLAKOTH, PKM.RALTS, PKM.BAGON, PKM.BELDUM, PKM.GIBLE, PKM.ELEKID, PKM.MAGBY, PKM.LITWICK];
 const LEGENDARY = [PKM.MEDITITE, PKM.NUMEL, PKM.ONIX, PKM.SCYTHER, PKM.RIOLU, PKM.SNOVER];
 const MYTHICAL_1 = [PKM.VIRIZION, PKM.REGICE, PKM.REGISTEEL, PKM.REGIROCK, PKM.UXIE, PKM.MESPRIT, PKM.AZELF, PKM.LATIAS, PKM.LATIOS, PKM.ZAPDOS, PKM.MOLTRES, PKM.ARTICUNO, PKM.LAPRAS, PKM.ABSOL, PKM.SPIRITOMB, PKM.ROTOM, PKM.MANAPHY, PKM.COBALION, PKM.TERRAKION, PKM.KELDEO, PKM.TORNADUS, PKM.THUNDURUS, PKM.LANDORUS, PKM.VOLCARONA];
-//const MYTHICAL_1 = [PKM.VIRIZION, PKM.REGICE, PKM.REGISTEEL, PKM.REGIROCK, PKM.GROUDON, PKM.KYOGRE];
+// const MYTHICAL_1 = [PKM.VIRIZION, PKM.REGICE, PKM.REGISTEEL, PKM.REGIROCK, PKM.GROUDON, PKM.KYOGRE];
 const MYTHICAL_2 = [PKM.MEWTWO, PKM.ENTEI, PKM.SUICUNE, PKM.RAIKOU, PKM.KYUREM, PKM.RESHIRAM, PKM.ZEKROM, PKM.REGIGIGAS, PKM.CELEBI, PKM.VICTINI, PKM.JIRACHI, PKM.ARCEUS, PKM.DEOXYS, PKM.SHAYMIN, PKM.GIRATINA, PKM.DARKRAI, PKM.CRESSELIA, PKM.HEATRAN, PKM.LUGIA, PKM.HOOH, PKM.PALKIA, PKM.DIALGA, PKM.RAYQUAZA, PKM.KYOGRE, PKM.GROUDON];
 
 
 class Shop {
-
   assignShop(player) {
-
     for (let i = 0; i < 5; i++) {
       let pokemon = this.pickPokemon(player);
       const seed = Math.random();
@@ -25,29 +23,29 @@ class Shop {
     }
   }
 
-  assignDittoShop(player){
+  assignDittoShop(player) {
     player.shop[0] = PKM.DITTO;
 
     for (let i = 1; i < 5; i++) {
-      let pokemon = this.pickPokemon(player);
+      const pokemon = this.pickPokemon(player);
       player.shop[i] = pokemon;
     }
   }
 
-  assignFirstMythicalShop(player){
-    let mythical_copy = JSON.parse(JSON.stringify(MYTHICAL_1));
+  assignFirstMythicalShop(player) {
+    const mythicalCopy = JSON.parse(JSON.stringify(MYTHICAL_1));
     for (let i = 0; i < 5; i++) {
-      let pkm = PokemonFactory.createPokemonFromName(mythical_copy[Math.floor(Math.random() * mythical_copy.length)]).name;
-      mythical_copy.splice(mythical_copy.indexOf(pkm),1);
+      const pkm = PokemonFactory.createPokemonFromName(mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]).name;
+      mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1);
       player.shop[i] = pkm;
     }
   }
 
-  assignSecondMythicalShop(player){
-    let mythical_copy = JSON.parse(JSON.stringify(MYTHICAL_2));
+  assignSecondMythicalShop(player) {
+    const mythicalCopy = JSON.parse(JSON.stringify(MYTHICAL_2));
     for (let i = 0; i < 5; i++) {
-      let pkm = PokemonFactory.createPokemonFromName(mythical_copy[Math.floor(Math.random() * mythical_copy.length)]).name;
-      mythical_copy.splice(mythical_copy.indexOf(pkm),1);
+      const pkm = PokemonFactory.createPokemonFromName(mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]).name;
+      mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1);
       player.shop[i] = pkm;
     }
   }

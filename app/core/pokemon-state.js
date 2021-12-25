@@ -14,10 +14,9 @@ class PokemonState {
   handleDamage(pokemon, damage, board, attackType, attacker) {
     let death;
 
-    if(pokemon.life == 0){
+    if (pokemon.life == 0) {
       death = true;
-    }
-    else{
+    } else {
       death = false;
       if (!pokemon.protect) {
         let reducedDamage = damage;
@@ -31,54 +30,51 @@ class PokemonState {
         } else if (attackType == ATTACK_TYPE.TRUE) {
           reducedDamage = damage;
         }
-  
+
         if (attacker && attacker.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
           reducedDamage = pokemon.life + 1;
         }
-  
-        if(!reducedDamage){
+
+        if (!reducedDamage) {
           reducedDamage = 0;
-          //console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
+          // console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
         }
-  
+
         if (attacker && attacker.team == 0) {
           attacker.damageDone += reducedDamage;
         }
         let residualDamage = reducedDamage;
 
-        if(pokemon.shield > 0){
-          residualDamage = Math.max(0,reducedDamage - pokemon.shield);
+        if (pokemon.shield > 0) {
+          residualDamage = Math.max(0, reducedDamage - pokemon.shield);
           pokemon.shield = Math.max(0, pokemon.shield - reducedDamage);
         }
 
         pokemon.life = Math.max(0, pokemon.life - residualDamage);
-        //console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
-        
+        // console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
+
         if (pokemon) {
           pokemon.setMana(pokemon.mana + Math.ceil(reducedDamage / 10));
 
-          if(pokemon.life && pokemon.life > 0){
-            if(pokemon.flyingProtection){
-              if(pokemon.effects.includes(EFFECTS.TAILWIND)){
-                if(pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.TAILWIND].threshold){
+          if (pokemon.life && pokemon.life > 0) {
+            if (pokemon.flyingProtection) {
+              if (pokemon.effects.includes(EFFECTS.TAILWIND)) {
+                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.TAILWIND].threshold) {
                   pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.TAILWIND].duration);
                   pokemon.flyingProtection = false;
                 }
-              }
-              else if(pokemon.effects.includes(EFFECTS.FEATHER_DANCE)){
-                if(pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.FEATHER_DANCE].threshold){
+              } else if (pokemon.effects.includes(EFFECTS.FEATHER_DANCE)) {
+                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.FEATHER_DANCE].threshold) {
                   pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.FEATHER_DANCE].duration);
                   pokemon.flyingProtection = false;
                 }
-              }
-              else if(pokemon.effects.includes(EFFECTS.MAX_AIRSTREAM)){
-                if(pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_AIRSTREAM].threshold){
+              } else if (pokemon.effects.includes(EFFECTS.MAX_AIRSTREAM)) {
+                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_AIRSTREAM].threshold) {
                   pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_AIRSTREAM].duration);
                   pokemon.flyingProtection = false;
                 }
-              }
-              else if(pokemon.effects.includes(EFFECTS.MAX_GUARD)){
-                if(pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_GUARD].threshold){
+              } else if (pokemon.effects.includes(EFFECTS.MAX_GUARD)) {
+                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_GUARD].threshold) {
                   pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_GUARD].duration);
                   pokemon.flyingProtection = false;
                 }
@@ -86,38 +82,34 @@ class PokemonState {
             }
           }
         }
-  
+
         if (attacker) {
           attacker.setMana(attacker.mana + 5);
         }
-  
+
         if (!pokemon.life || pokemon.life <= 0) {
-          if(pokemon.items.count(ITEMS.REVIVER_SEED) != 0){
+          if (pokemon.items.count(ITEMS.REVIVER_SEED) != 0) {
             pokemon.life = pokemon.hp;
             pokemon.items.remove(ITEMS.REVIVER_SEED);
-          }
-          else if(pokemon.effects.includes(EFFECTS.SWIFT_SWIM)){
-              pokemon.life = pokemon.hp * 0.4;
-              pokemon.atk += pokemon.baseAtk * 0.3;
-              pokemon.effects.splice(pokemon.effects.findIndex(e => e === EFFECTS.SWIFT_SWIM),1);
-          }
-          else if(pokemon.effects.includes(EFFECTS.HYDRO_CANNON)){
-              pokemon.life = pokemon.hp * 0.8;
-              pokemon.atk += pokemon.baseAtk *0.6;
-              pokemon.effects.splice(pokemon.effects.findIndex(e => e === EFFECTS.HYDRO_CANNON),1);
-          }
-          else if(pokemon.resurection){
+          } else if (pokemon.effects.includes(EFFECTS.SWIFT_SWIM)) {
+            pokemon.life = pokemon.hp * 0.4;
+            pokemon.atk += pokemon.baseAtk * 0.3;
+            pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.SWIFT_SWIM), 1);
+          } else if (pokemon.effects.includes(EFFECTS.HYDRO_CANNON)) {
+            pokemon.life = pokemon.hp * 0.8;
+            pokemon.atk += pokemon.baseAtk *0.6;
+            pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.HYDRO_CANNON), 1);
+          } else if (pokemon.resurection) {
             pokemon.resurection = false;
             pokemon.life = pokemon.hp;
-          }
-          else{
+          } else {
             board.setValue(pokemon.positionX, pokemon.positionY, undefined);
             death = true;
           }
         }
       }
     }
-    
+
     return death;
   }
 
@@ -151,7 +143,7 @@ class PokemonState {
       pokemon.updateConfusion(dt);
     }
 
-    if(pokemon.wound) {
+    if (pokemon.wound) {
       pokemon.updateWound(dt);
     }
 
@@ -169,38 +161,38 @@ class PokemonState {
         }
         const target = board.getValue(pokemon.targetX, pokemon.targetY);
         if (target) {
-          if(pokemon.items.count(ITEMS.RED_ORB) != 0){
+          if (pokemon.items.count(ITEMS.RED_ORB) != 0) {
             for (let i = 0; i < pokemon.items.count(ITEMS.RED_ORB); i++) {
               let created = false;
               const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
               cells.forEach((cell) => {
                 if (!cell.value && !created) {
-                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.HOUNDOUR),cell.row, cell.column, pokemon.team);
+                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.HOUNDOUR), cell.row, cell.column, pokemon.team);
                   created = true;
                 }
               });
             }
           }
-          if(pokemon.items.count(ITEMS.BLUE_ORB) != 0){
+          if (pokemon.items.count(ITEMS.BLUE_ORB) != 0) {
             for (let i = 0; i < pokemon.items.count(ITEMS.BLUE_ORB); i++) {
               let created = false;
               const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
               cells.forEach((cell) => {
                 if (!cell.value && !created) {
-                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.CARVANHA),cell.row, cell.column, pokemon.team);
+                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.CARVANHA), cell.row, cell.column, pokemon.team);
                   created = true;
                 }
               });
             }
           }
 
-          if(pokemon.items.count(ITEMS.DELTA_ORB) != 0){
+          if (pokemon.items.count(ITEMS.DELTA_ORB) != 0) {
             for (let i = 0; i < pokemon.items.count(ITEMS.DELTA_ORB); i++) {
               let created = false;
               const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
               cells.forEach((cell) => {
                 if (!cell.value && !created) {
-                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.SWABLU),cell.row, cell.column, pokemon.team);
+                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.SWABLU), cell.row, cell.column, pokemon.team);
                   created = true;
                 }
               });
@@ -339,38 +331,43 @@ class PokemonState {
     return [x, y];
   }
 
-  getFarthestTargetCoordinateAvailablePlace(pokemon, board){
+  getFarthestTargetCoordinateAvailablePlace(pokemon, board) {
     let x = undefined;
     let y = undefined;
-    let pokemons = [];
-    
-    board.forEach((r,c,value)=>{
-      if(value !== undefined && value.team != pokemon.team){
+    const pokemons = [];
+
+    board.forEach((r, c, value)=>{
+      if (value !== undefined && value.team != pokemon.team) {
         const d = board.distance(pokemon.positionX, pokemon.positionY, r, c);
         pokemons.push({distance: d, x: r, y: c});
       }
     });
 
-    pokemons.sort((a,b)=>{return b.distance-a.distance});
+    pokemons.sort((a, b)=>{
+      return b.distance-a.distance;
+    });
 
     for (let i = 0; i < pokemons.length; i++) {
       const p = pokemons[i];
       const around = board.getAdjacentCells(p.x, p.y);
-      let manhattanAround = around.filter(e=>{return board.distance(e.row, e.column, p.x, p.y) == 1});
-      manhattanAround.sort((a,b)=>{return board.distance(b.row, b.column, pokemon.positionX, pokemon.positionY) - 
+      const manhattanAround = around.filter((e)=>{
+        return board.distance(e.row, e.column, p.x, p.y) == 1;
+      });
+      manhattanAround.sort((a, b)=>{
+        return board.distance(b.row, b.column, pokemon.positionX, pokemon.positionY) -
         board.distance(a.row, a.column, pokemon.positionX, pokemon.positionY);
-      })
+      });
       manhattanAround.forEach((cell) => {
         if (!cell.value && x === undefined && y === undefined) {
           x = cell.row;
           y = cell.column;
         }
       });
-      if(x !== undefined && y !== undefined){
+      if (x !== undefined && y !== undefined) {
         break;
       }
     }
-    return  [x, y];
+    return [x, y];
   }
 };
 

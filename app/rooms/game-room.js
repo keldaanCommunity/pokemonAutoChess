@@ -3,7 +3,6 @@ const {Dispatcher} = require('@colyseus/command');
 const GameState = require('./states/game-state');
 const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
-const Statistic = require('../models/mongo-models/statistic');
 const UserMetadata = require('../models/mongo-models/user-metadata');
 const BOT = require('../models/mongo-models/bot');
 const {XP_PLACE, XP_TABLE} = require('../models/enum');
@@ -26,7 +25,7 @@ class GameRoom extends colyseus.Room {
     this.eloEngine = new EloRank();
     for (const id in options.users) {
       const user = options.users[id];
-      //console.log(user);
+      // console.log(user);
       if (user.isBot) {
         this.state.players.set(id, new Player(user.id, user.name, user.elo, user.avatar, true, this.state.specialCells, this.state.mapType, this.state.players.size + 1, `${this.state.mapType}0`));
         this.state.botManager.addBot(this.state.players.get(id));
@@ -35,34 +34,33 @@ class GameRoom extends colyseus.Room {
     }
 
     this.onMessage('shop', (client, message) => {
-      if(!this.state.gameFinished){
-        try{
+      if (!this.state.gameFinished) {
+        try {
           this.dispatcher.dispatch(new Commands.OnShopCommand(), {
             id: client.auth.uid,
             index: message.id
           });
-        }
-        catch(error){
+        } catch (error) {
           console.log('shop error', message);
         }
       }
     });
-    
+
     this.onMessage('item', (client, message) => {
-      if(!this.state.gameFinished){
+      if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new Commands.OnItemCommand(), {
             playerId: client.auth.uid,
             id: message.id
           });
         } catch (error) {
-          
+
         }
       }
     });
 
     this.onMessage('dragDrop', (client, message) => {
-      if(!this.state.gameFinished){
+      if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new Commands.OnDragDropCommand(), {
             client: client,
@@ -75,7 +73,7 @@ class GameRoom extends colyseus.Room {
     });
 
     this.onMessage('sellDrop', (client, message) => {
-      if(!this.state.gameFinished){
+      if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new Commands.OnSellDropCommand(), {
             client,
@@ -88,7 +86,7 @@ class GameRoom extends colyseus.Room {
     });
 
     this.onMessage('refresh', (client, message) => {
-      if(!this.state.gameFinished){
+      if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new Commands.OnRefreshCommand(), client.auth.uid);
         } catch (error) {
@@ -98,7 +96,7 @@ class GameRoom extends colyseus.Room {
     });
 
     this.onMessage('lock', (client, message) => {
-      if(!this.state.gameFinished){
+      if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new Commands.OnLockCommand(), client.auth.uid);
         } catch (error) {
@@ -108,7 +106,7 @@ class GameRoom extends colyseus.Room {
     });
 
     this.onMessage('levelUp', (client, message) => {
-      if(!this.state.gameFinished){
+      if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new Commands.OnLevelUpCommand(), client.auth.uid);
         } catch (error) {
@@ -116,20 +114,20 @@ class GameRoom extends colyseus.Room {
         }
       }
     });
-    
+
     this.onMessage('set-afterGameId', (client, message) => {
       this.state.afterGameId = message.id;
     });
 
     this.setSimulationInterval((deltaTime) =>{
-      if(!this.state.gameFinished){
+      if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new Commands.OnUpdateCommand(), deltaTime);
         } catch (error) {
-         console.log('update error'); 
+          console.log('update error');
         }
       }
-    })
+    });
   }
 
   async onAuth(client, options, request) {
@@ -142,21 +140,19 @@ class GameRoom extends colyseus.Room {
     this.dispatcher.dispatch(new Commands.OnJoinCommand(), {client, options, auth});
   }
 
-  async onLeave (client, consented) {  
+  async onLeave(client, consented) {
     try {
-
-      if(client && client.auth && client.auth.displayName){
+      if (client && client.auth && client.auth.displayName) {
         console.log(`${client.auth.displayName} is leaving`);
       }
       if (consented) {
-          throw new Error("consented leave");
+        throw new Error('consented leave');
       }
-  
+
       // allow disconnected client to reconnect into this room until 20 seconds
       await this.allowReconnection(client, 60);
-  
     } catch (e) {
-      if(client && client.auth && client.auth.displayName){
+      if (client && client.auth && client.auth.displayName) {
         console.log(`${client.auth.displayName} leave game room`);
         this.dispatcher.dispatch(new Commands.OnLeaveCommand(), {client, consented});
       }
@@ -164,31 +160,30 @@ class GameRoom extends colyseus.Room {
   }
 
   onDispose() {
-    //console.log(`dispose game room`);
-    let self = this;
-    let requiredStageLevel = process.env.MODE == 'dev' ? 0: 10;
+    // console.log(`dispose game room`);
+    const self = this;
+    const requiredStageLevel = process.env.MODE == 'dev' ? 0: 10;
 
-    if(this.state.stageLevel >= requiredStageLevel && this.state.elligibleToXP){
-      this.state.players.forEach(player =>{
-        if(player.isBot){
+    if (this.state.stageLevel >= requiredStageLevel && this.state.elligibleToXP) {
+      this.state.players.forEach((player) =>{
+        if (player.isBot) {
           BOT.find({'avatar': player.id}, (err, bots)=>{
-            if(bots){
-              bots.forEach(bot =>{
+            if (bots) {
+              bots.forEach((bot) =>{
                 bot.elo = self.computeElo(player, player.rank, player.elo);
                 bot.save();
-              }); 
+              });
             }
           });
-        }
-        else{
-          let dbrecord = this.transformToSimplePlayer(player);
+        } else {
+          const dbrecord = this.transformToSimplePlayer(player);
           player.exp = XP_PLACE[player.rank - 1];
           let rank = player.rank;
 
-          if(!this.state.gameFinished && player.life != 0){
+          if (!this.state.gameFinished && player.life != 0) {
             let rankOfLastPlayerAlive = this.state.players.size;
-            this.state.players.forEach(plyr =>{
-              if(plyr.life <= 0){
+            this.state.players.forEach((plyr) =>{
+              if (plyr.life <= 0) {
                 rankOfLastPlayerAlive = Math.min(rankOfLastPlayerAlive, plyr.rank);
               }
             });
@@ -209,22 +204,22 @@ class GameRoom extends colyseus.Room {
               } else {
                 usr.exp = usr.exp + player.exp;
               }
-  
+
               if (player.rank == 1) {
                 usr.wins += 1;
                 usr.mapWin[self.state.mapType] += 1;
               }
 
-              
-              if(usr.elo){
-                let elo = self.computeElo(player, rank, usr.elo);
-                if(elo){
+
+              if (usr.elo) {
+                const elo = self.computeElo(player, rank, usr.elo);
+                if (elo) {
                   usr.elo = elo;
                 }
                 console.log(usr);
-                //usr.markModified('metadata');
+                // usr.markModified('metadata');
                 usr.save();
-    
+
                 DetailledStatistic.create({
                   time: Date.now(),
                   name: dbrecord.name,
@@ -243,8 +238,8 @@ class GameRoom extends colyseus.Room {
     this.dispatcher.stop();
   }
 
-  transformToSimplePlayer(player){
-    let simplePlayer = {
+  transformToSimplePlayer(player) {
+    const simplePlayer = {
       name: player.name,
       id: player.id,
       rank: player.rank,
@@ -254,9 +249,8 @@ class GameRoom extends colyseus.Room {
       elo: player.elo
     };
 
-    player.board.forEach(pokemon => {
-
-      if(pokemon.positionY != 0){
+    player.board.forEach((pokemon) => {
+      if (pokemon.positionY != 0) {
         simplePlayer.pokemons.push({
           name: pokemon.name,
           items: pokemon.items.getAllItems()
@@ -266,65 +260,62 @@ class GameRoom extends colyseus.Room {
     return simplePlayer;
   }
 
-  computeElo(player, rank, elo){
-    let eloGains = [];
+  computeElo(player, rank, elo) {
+    const eloGains = [];
     let meanGain = 0;
-    this.state.players.forEach(plyr =>{
-      if(player.name != plyr.name){
-        let expectedScoreA = this.eloEngine.getExpected(elo, plyr.elo);
-        if(rank < plyr.rank){
+    this.state.players.forEach((plyr) =>{
+      if (player.name != plyr.name) {
+        const expectedScoreA = this.eloEngine.getExpected(elo, plyr.elo);
+        if (rank < plyr.rank) {
           eloGains.push(this.eloEngine.updateRating(expectedScoreA, 1, player.elo));
-        }
-        else{
+        } else {
           eloGains.push(this.eloEngine.updateRating(expectedScoreA, 0, player.elo));
         }
       }
     });
 
-    eloGains.forEach(gain => {
+    eloGains.forEach((gain) => {
       meanGain += gain;
     });
     meanGain = Math.floor(meanGain / eloGains.length);
-    //console.log(eloGains);
+    // console.log(eloGains);
     console.log(`${player.name} (was ${player.elo}) will be ${meanGain} (${rank})`);
     return meanGain;
-
   }
 
   computeRandomOpponent(playerId) {
-      let player = this.state.players.get(playerId);
-      this.checkOpponents(playerId);
-      if(player.opponents.length == 0){
-        this.fillOpponents(playerId);
-      }
-      if(player.opponents.length > 0){
-        let id = player.opponents.pop();
-        player.opponentName = this.state.players.get(id).name;
-        player.opponentAvatar = this.state.players.get(id).avatar;
-        return id;
-      }
-      else{
-        return;
-      }
+    const player = this.state.players.get(playerId);
+    this.checkOpponents(playerId);
+    if (player.opponents.length == 0) {
+      this.fillOpponents(playerId);
+    }
+    if (player.opponents.length > 0) {
+      const id = player.opponents.pop();
+      player.opponentName = this.state.players.get(id).name;
+      player.opponentAvatar = this.state.players.get(id).avatar;
+      return id;
+    } else {
+      return;
+    }
   }
 
-  checkOpponents(playerId){
-    let player = this.state.players.get(playerId);
-    let indexToDelete = [];
-    player.opponents.forEach((p,i) =>{
-      if(!this.state.players.get(p).alive){
+  checkOpponents(playerId) {
+    const player = this.state.players.get(playerId);
+    const indexToDelete = [];
+    player.opponents.forEach((p, i) =>{
+      if (!this.state.players.get(p).alive) {
         indexToDelete.push(i);
       }
     });
-    indexToDelete.forEach(index =>{
+    indexToDelete.forEach((index) =>{
       player.opponents.splice(index, 1);
     });
   }
 
-  fillOpponents(playerId){
-    let player = this.state.players.get(playerId);
+  fillOpponents(playerId) {
+    const player = this.state.players.get(playerId);
     this.state.players.forEach((plyr, key) =>{
-      if(plyr.alive && player.id != plyr.id){
+      if (plyr.alive && player.id != plyr.id) {
         player.opponents.push(key);
       }
     });

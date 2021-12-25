@@ -11,7 +11,7 @@ class GameState extends schema.Schema {
     super();
     const keys = Object.keys(MAP_TYPE);
     const mapType = keys[Math.floor(Math.random() * keys.length)];
-    //const mapType = MAP_TYPE.GROUND;
+    // const mapType = MAP_TYPE.GROUND;
     const time = process.env.MODE == 'dev' ? 10000 : 30000;
     const roundTime = Math.round(time/1000);
     this.players = new schema.MapSchema();
@@ -28,7 +28,7 @@ class GameState extends schema.Schema {
       phase: STATE.PICK,
       gameFinished: false,
       mapType: mapType,
-      afterGameId:''
+      afterGameId: ''
     });
   }
 
@@ -37,10 +37,10 @@ class GameState extends schema.Schema {
     const y = [0, 1, 2];
     this.shuffle(x);
     this.shuffle(y);
-    let firstPodX = x.pop();
-    let firstPodY = y.pop();
-    let secondPodX = x.pop();
-    let secondPodY = y.pop();
+    const firstPodX = x.pop();
+    const firstPodY = y.pop();
+    const secondPodX = x.pop();
+    const secondPodY = y.pop();
     this.specialCells.push(new SpecialCell(firstPodX, firstPodY));
     this.specialCells.push(new SpecialCell(secondPodX, secondPodY));
     this.specialCells.push(new SpecialCell(firstPodX, 5 - firstPodY));
@@ -53,7 +53,7 @@ class GameState extends schema.Schema {
 }
 
 schema.defineTypes(GameState, {
-  afterGameId:'string',
+  afterGameId: 'string',
   roundTime: 'uint8',
   phase: 'string',
   players: {map: Player},

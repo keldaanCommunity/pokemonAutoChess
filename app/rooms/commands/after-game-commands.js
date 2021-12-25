@@ -1,17 +1,16 @@
 const Command = require('@colyseus/command').Command;
-const uniqid = require('uniqid');
 const GameUser = require('../../models/colyseus-models/game-user');
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
-    UserMetadata.findOne({'uid':auth.uid},(err, user)=>{
-      if(user){
-        this.state.users.set(client.auth.uid,  new GameUser(user.uid,
-          user.displayName,
-          user.elo,
-          user.avatar,
-          false,
-          ''));
+    UserMetadata.findOne({'uid': auth.uid}, (err, user)=>{
+      if (user) {
+        this.state.users.set(client.auth.uid, new GameUser(user.uid,
+            user.displayName,
+            user.elo,
+            user.avatar,
+            false,
+            ''));
 
         this.room.broadcast('messages', {
           'name': 'Server',
@@ -27,10 +26,9 @@ class OnJoinCommand extends Command {
 class OnMessageCommand extends Command {
   execute({client, message}) {
     let safePayload = message.payload;
-    try{
+    try {
       safePayload = this.room.filter.clean(safePayload);
-    }
-    catch(error){
+    } catch (error) {
       console.error('bad words library error');
     }
     message.payload = safePayload;
@@ -44,7 +42,7 @@ class OnLeaveCommand extends Command {
       'name': 'Server',
       'payload': `${ this.state.users.get(client.auth.uid).name } left.`,
       'avatar': 'magnemite',
-      'time':Date.now()
+      'time': Date.now()
     });
     this.state.users.delete(client.auth.uid);
   }

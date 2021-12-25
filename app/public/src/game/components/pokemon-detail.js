@@ -1,6 +1,6 @@
 import {GameObjects} from 'phaser';
 import PokemonFactory from '../../../../models/pokemon-factory';
-import {SPECIAL_SKILL_DESCRIPTION, RARITY} from '../../../../models/enum';
+import {SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
 
 export default class PokemonDetail extends GameObjects.Container {
   constructor(scene, x, y, name, hp, atk, def, speDef, attackType, range, atkSpeed, critChance) {
@@ -9,39 +9,38 @@ export default class PokemonDetail extends GameObjects.Container {
 
     this.textStyle = {
       fontSize: '20px',
-      fontFamily: "'Press Start 2P'",
+      fontFamily: '\'Press Start 2P\'',
       color: '#000000',
       align: 'center',
       wordWrap: {width: 500, useAdvancedWrap: true}
     };
     this.greenTextStyle= {
       fontSize: '20px',
-      fontFamily: "'Press Start 2P'",
+      fontFamily: '\'Press Start 2P\'',
       color: '#013220'
     };
     this.redTextStyle= {
       fontSize: '20px',
-      fontFamily: "'Press Start 2P'",
+      fontFamily: '\'Press Start 2P\'',
       color: '#991701'
     };
     this.titleTextStyle = {
       fontSize: '20px',
-      fontFamily: "'Press Start 2P'",
+      fontFamily: '\'Press Start 2P\'',
       color: '#013220',
       align: 'center',
       wordWrap: {width: 400, useAdvancedWrap: true}
-    }
+    };
 
     let displayName;
-    if(window.langage == 'fra'){
+    if (window.langage == 'fra') {
       displayName = this.pokemonInformation.frenchName.charAt(0).toUpperCase() + this.pokemonInformation.frenchName.slice(1);
-    }
-    else{
+    } else {
       displayName = this.pokemonInformation.name.charAt(0).toUpperCase() + this.pokemonInformation.name.slice(1);
     }
 
     this.objType = 'detail';
-    this.add(new GameObjects.Rectangle(scene, 360, 100, 720, 200, 0xffffff, 0.7).setStrokeStyle(3,0x000000,1));
+    this.add(new GameObjects.Rectangle(scene, 360, 100, 720, 200, 0xffffff, 0.7).setStrokeStyle(3, 0x000000, 1));
     this.add(new GameObjects.Text(scene, 45, 15, displayName, this.greenTextStyle));
     this.add(new GameObjects.Image(scene, 22, 22, this.pokemonInformation.sheet, `${this.pokemonInformation.index}/portrait`));
     for (let i = 0; i < this.pokemonInformation.types.length; i++) {
@@ -68,7 +67,7 @@ export default class PokemonDetail extends GameObjects.Container {
     this.add(new GameObjects.Image(scene, 100, 140, 'icons', 'speDef').setScale(2, 2));
     this.critChance = new GameObjects.Text(scene, 130, 150, critChance, this.textStyle);
     this.add(this.critChance);
-    this.add(new GameObjects.Image(scene,200, 160, 'icons', 'critChance').setScale(2,2));
+    this.add(new GameObjects.Image(scene, 200, 160, 'icons', 'critChance').setScale(2, 2));
     this.mana = new GameObjects.Text(scene, 10, 150, this.pokemonInformation.maxMana, this.textStyle);
     this.add(this.mana);
     this.add(new GameObjects.Image(scene, 100, 160, 'icons', 'mana').setScale(2, 2));

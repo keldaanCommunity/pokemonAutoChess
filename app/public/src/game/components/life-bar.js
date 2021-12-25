@@ -11,7 +11,7 @@ export default class LifeBar extends GameObjects.Graphics {
     this.p = (this.width - 4) / this.value;
     this.objType = objType;
     this.drawBg = drawBg;
-    
+
     this.draw();
 
     scene.add.existing(this);
@@ -33,15 +33,15 @@ export default class LifeBar extends GameObjects.Graphics {
   draw() {
     this.clear();
 
-    if(this.drawBg){
+    if (this.drawBg) {
     //  BG
-    this.fillStyle(0x000000);
-    this.fillRect(this.x, this.y, this.width, 10);
+      this.fillStyle(0x000000);
+      this.fillRect(this.x, this.y, this.width, 10);
 
-    //  Health
+      //  Health
 
-    this.fillStyle(0xffffff);
-    this.fillRect(this.x + 2, this.y + 2, this.width - 4, 6);
+      this.fillStyle(0xffffff);
+      this.fillRect(this.x + 2, this.y + 2, this.width - 4, 6);
     }
 
     this.fillStyle(this.color);

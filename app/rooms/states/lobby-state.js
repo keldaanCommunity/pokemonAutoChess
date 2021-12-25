@@ -17,15 +17,13 @@ class LobbyState extends schema.Schema {
   addMessage(name, payload, avatar, time, save) {
     if (this.messages.length > 200) {
       this.messages.splice(0, 1);
-    }
-    else{
+    } else {
       let safePayload = payload;
-      try{
+      try {
         safePayload = this.filter.clean(payload);
+      } catch (error) {
+        console.error('bad words library error');
       }
-      catch (error) {
-      console.error('bad words library error');
-      } 
       const message = new Message(name, safePayload, avatar, time);
       this.messages.push(message);
       // console.log(message.name);

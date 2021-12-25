@@ -20,7 +20,7 @@ class ItemFactory {
     return keys[Math.floor(Math.random() * keys.length)];
   }
 
-  static getFossils(){
+  static getFossils() {
     return [
       ITEMS.DOME_FOSSIL,
       ITEMS.HELIX_FOSSIL,
@@ -36,24 +36,24 @@ class ItemFactory {
     ];
   }
 
-  static createSpecificItems(array){
+  static createSpecificItems(array) {
     return array[Math.floor(Math.random() * array.length)];
   }
 
-  static createRandomItems(){
-    let keys = Object.keys(ITEMS);
+  static createRandomItems() {
+    const keys = Object.keys(ITEMS);
     ItemFactory.shuffleArray(keys);
-    let items = [];
+    const items = [];
     items.push(keys.pop());
     items.push(keys.pop());
     items.push(keys.pop());
     return items;
   }
 
-  static createRandomFossils(){
-    let keys = ItemFactory.getFossils();
+  static createRandomFossils() {
+    const keys = ItemFactory.getFossils();
     ItemFactory.shuffleArray(keys);
-    let items = [];
+    const items = [];
     items.push(keys.pop());
     items.push(keys.pop());
     items.push(keys.pop());
@@ -63,10 +63,10 @@ class ItemFactory {
 
   static shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
-}
+  }
 }
 
 module.exports = ItemFactory;

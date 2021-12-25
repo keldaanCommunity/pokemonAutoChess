@@ -1,7 +1,6 @@
 import GameScene from './scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
 import WebFontLoaderPlugin from 'phaser3-rex-plugins/plugins/webfontloader-plugin.js';
-import {MAP_TYPE, LAST_BATTLE_RESULT_TRADUCTION, WORDS} from '../../../models/enum.js';
 import {transformCoordinate} from '../pages/utils/utils';
 
 class GameContainer {
@@ -43,7 +42,7 @@ class GameContainer {
 
   initializeEvents() {
     this.room.onMessage('DragDropFailed', (message) => this.handleDragDropFailed(message));
-    this.room.onMessage('info',(message)=> this.handleServerInfo(message));
+    this.room.onMessage('info', (message)=> this.handleServerInfo(message));
     this.room.onError((err) => console.log('room error', err));
   }
 
@@ -160,15 +159,15 @@ class GameContainer {
 
   handlePokemonAdd(playerId, pokemon) {
     // console.log('simulation add' + pokemon.name);
-    if(this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager){
-        this.game.scene.getScene('gameScene').battleManager.addPokemon(playerId, pokemon);
+    if (this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager) {
+      this.game.scene.getScene('gameScene').battleManager.addPokemon(playerId, pokemon);
     }
   }
 
   handlePokemonRemove(playerId, pokemon) {
     // console.log('simulation remove' + pokemon.name);
-    if(this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager){
-        this.game.scene.getScene('gameScene').battleManager.removePokemon(playerId, pokemon);
+    if (this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager) {
+      this.game.scene.getScene('gameScene').battleManager.removePokemon(playerId, pokemon);
     }
   }
 
@@ -180,14 +179,14 @@ class GameContainer {
 
   handlePokemonChange(playerId, change, pokemon) {
     // console.log('simulation change' + change.field);
-    if(this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager){
-        this.game.scene.getScene('gameScene').battleManager.changePokemon(playerId, change, pokemon);
+    if (this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager) {
+      this.game.scene.getScene('gameScene').battleManager.changePokemon(playerId, change, pokemon);
     }
   }
 
   handlePokemonItemsChange(playerId, change, pokemon) {
-    if(this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager){
-        this.game.scene.getScene('gameScene').battleManager.changePokemonItems(playerId, change, pokemon);
+    if (this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager) {
+      this.game.scene.getScene('gameScene').battleManager.changePokemonItems(playerId, change, pokemon);
     }
   }
 
@@ -223,9 +222,9 @@ class GameContainer {
 
   handleBoardPokemonAdd(player, pokemon) {
     if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager) {
-        if(this.game.scene.getScene('gameScene').boardManager.player.id == player.id){
-            this.game.scene.getScene('gameScene').boardManager.addPokemon(pokemon);
-        }
+      if (this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
+        this.game.scene.getScene('gameScene').boardManager.addPokemon(pokemon);
+      }
     }
   }
 
@@ -253,9 +252,9 @@ class GameContainer {
     }
   }
 
-  handleServerInfo(message){
+  handleServerInfo(message) {
     this.showPopup(message.title, message.info);
-    //this.game.scene.getScene('gameScene').showPopup(message);
+    // this.game.scene.getScene('gameScene').showPopup(message);
   }
 
   handleKickOut() {
@@ -279,7 +278,7 @@ class GameContainer {
   }
 
   onDragDrop(event) {
-    //this.showPopup('test', 'tues sanglier');
+    // this.showPopup('test', 'tues sanglier');
     this.room.send('dragDrop', {'detail': event.detail});
   }
 
@@ -287,18 +286,18 @@ class GameContainer {
     this.room.send('sellDrop', {'detail': event.detail});
   }
 
-  showPopup(title, info){
+  showPopup(title, info) {
     document.getElementById('modal-title').textContent = title;
     document.getElementById('modal-info').textContent = info;
     $('#modal-popup').modal();
   }
 
-  closePopup(){
+  closePopup() {
     $('#modal-popup').modal('hide');
   }
 
-  transformToSimplePlayer(player){
-    let simplePlayer = {
+  transformToSimplePlayer(player) {
+    const simplePlayer = {
       name: player.name,
       id: player.id,
       rank: player.rank,
@@ -306,8 +305,8 @@ class GameContainer {
       pokemons: [],
       exp: player.exp
     };
-    player.board.forEach(pokemon => {
-      if(pokemon.positionY != 0){
+    player.board.forEach((pokemon) => {
+      if (pokemon.positionY != 0) {
         simplePlayer.pokemons.push(pokemon.name);
       }
     });

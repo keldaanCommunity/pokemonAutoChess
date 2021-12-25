@@ -39,23 +39,22 @@ class Player extends Schema {
       rank: rank,
       elo: elo,
       tileset: tileset,
-      opponentame:'',
-      opponentAvatar:''
+      opponentame: '',
+      opponentAvatar: ''
     });
   }
 
-  addBattleResult(name, result, avatar){
-    if(this.history.length >= 5){
+  addBattleResult(name, result, avatar) {
+    if (this.history.length >= 5) {
       this.history.shift();
     }
     this.history.push(new BattleResult(name, result, avatar));
   }
-  
-  getLastBattleResult(){
-    if(this.history.length > 0){
+
+  getLastBattleResult() {
+    if (this.history.length > 0) {
       return this.history[this.history.length - 1].result;
-    }
-    else{
+    } else {
       return '';
     }
   }
@@ -70,22 +69,22 @@ schema.defineTypes(Player, {
   simulation: Simulation,
   experienceManager: ExperienceManager,
   synergies: Synergies,
-  itemsProposition:['string'],
+  itemsProposition: ['string'],
   money: 'uint8',
   life: 'uint8',
   shopLocked: 'boolean',
   streak: 'uint8',
   interest: 'uint8',
   opponentName: 'string',
-  opponentAvatar:'string',
+  opponentAvatar: 'string',
   boardSize: 'uint8',
   stuff: Stuff,
-  rank : 'uint8',
+  rank: 'uint8',
   exp: 'uint16',
   alive: 'boolean',
   elo: 'uint16',
   tileset: 'string',
-  history:[BattleResult]
+  history: [BattleResult]
 });
 
 module.exports = Player;

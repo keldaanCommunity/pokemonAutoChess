@@ -9,7 +9,7 @@ import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
 import {STATE} from '../../../../models/enum';
 import firebase from 'firebase/compat/app';
-import { transformAttackCoordinate, getOrientation, transformCoordinate } from '../../pages/utils/utils';
+import {transformAttackCoordinate, getOrientation, transformCoordinate} from '../../pages/utils/utils';
 
 
 export default class GameScene extends Scene {
@@ -20,18 +20,17 @@ export default class GameScene extends Scene {
     });
   }
 
-  init(room){
+  init(room) {
     this.room = room;
     this.uid = firebase.auth().currentUser.uid;
   }
 
   preload() {
-
-  this.load.rexWebFont({
+    this.load.rexWebFont({
       google: {
-          families: ['Press Start 2P']
+        families: ['Press Start 2P']
       }
-  });
+    });
 
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
@@ -93,9 +92,9 @@ export default class GameScene extends Scene {
       assetText.destroy();
     });
 
-    let chosenTileset = this.room.state.players.get(this.uid).tileset;
+    const chosenTileset = this.room.state.players.get(this.uid).tileset;
 
-    //console.log(chosenTileset);
+    // console.log(chosenTileset);
     this.load.audioSprite('sounds', `/assets/sounds/${this.room.state.mapType}.json`, [`/assets/sounds/${this.room.state.mapType}.mp3`]);
     this.load.image('tiles', `/assets/tiles/${this.room.state.mapType}/${chosenTileset}.png`);
     this.load.tilemapTiledJSON('map', `/assets/tiles/${this.room.state.mapType}/${this.room.state.mapType}.json`);
@@ -105,10 +104,10 @@ export default class GameScene extends Scene {
     this.load.image('socle', '/assets/ui/socle.png');
     this.load.image('PHYSICAL', '/assets/types/PHYSICAL.png');
     this.load.image('SPECIAL', '/assets/types/SPECIAL.png');
-    this.load.image('TRUE','/assets/types/TRUE.png');
-    this.load.image('detail','/assets/ui/detail.png','/assets/ui');
+    this.load.image('TRUE', '/assets/types/TRUE.png');
+    this.load.image('detail', '/assets/ui/detail.png', '/assets/ui');
     this.load.image('littleDetail', '/assets/ui/detail-little.png', '/assets/ui');
-    this.load.multiatlas('sleep','/assets/pokemons/sleep/sleep.json', '/assets/pokemons/sleep');
+    this.load.multiatlas('sleep', '/assets/pokemons/sleep/sleep.json', '/assets/pokemons/sleep');
     this.load.multiatlas('snowflakes', '/assets/ui/snowflakes.json', '/assets/ui/');
     this.load.multiatlas('status', '/assets/status/status.json', '/assets/status/');
     this.load.multiatlas('wound', '/assets/status/wound.json', '/assets/status');
@@ -143,17 +142,16 @@ export default class GameScene extends Scene {
   }
 
   create() {
-
     this.textStyle = {
       fontSize: '35px',
-      fontFamily: "'Press Start 2P'",
+      fontFamily: '\'Press Start 2P\'',
       color: 'black',
       align: 'center'
     };
 
     this.bigTextStyle = {
       fontSize: '80px',
-      fontFamily: "'Press Start 2P'",
+      fontFamily: '\'Press Start 2P\'',
       color: 'white',
       align: 'center',
       stroke: '#000',
@@ -200,7 +198,6 @@ export default class GameScene extends Scene {
       self.add.existing(sprite);
       this.animationManager.playSpecialCells(sprite);
     });
-
   }
 
   update() {
@@ -234,12 +231,12 @@ export default class GameScene extends Scene {
 
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 8; j++) {
-        const coord = transformCoordinate(j,i);
+        const coord = transformCoordinate(j, i);
         const zone = this.add.zone(coord[0], coord[1], 96, 120);
         zone.setRectangleDropZone(96, 120);
         zone.setName('zone-' + j + '-' + i);
         this.zones.push(zone);
-        const graphic = this.add.graphics().lineStyle(3, 0x000000,0.3).strokeRect(
+        const graphic = this.add.graphics().lineStyle(3, 0x000000, 0.3).strokeRect(
             this.zones[i * 8 + j].x - this.zones[i * 8 + j].input.hitArea.width / 2,
             this.zones[i * 8 + j].y - this.zones[i * 8 + j].input.hitArea.height / 2,
             this.zones[i * 8 + j].input.hitArea.width,
@@ -248,29 +245,29 @@ export default class GameScene extends Scene {
         this.graphics.push(graphic);
       }
     }
-    let sellZoneCoord = transformCoordinate(4, 5);
-    let sellZone = this.add.zone(sellZoneCoord[0] -48, sellZoneCoord[1] + 24, 8 * 96, 240);
+    const sellZoneCoord = transformCoordinate(4, 5);
+    const sellZone = this.add.zone(sellZoneCoord[0] -48, sellZoneCoord[1] + 24, 8 * 96, 240);
     sellZone.setRectangleDropZone(8 * 96, 240);
     sellZone.setName('sell-zone');
     this.zones.push(sellZone);
 
-    let graphic = this.add.graphics()
-    .fillStyle(0xffffff, 0.6)
-    .fillRect(
-        sellZone.x - sellZone.input.hitArea.width / 2,
-        sellZone.y - sellZone.input.hitArea.height / 2,
-        sellZone.input.hitArea.width,
-        sellZone.input.hitArea.height
-    ).lineStyle(4, 0x000000)
-    .strokeRect(
-        sellZone.x - sellZone.input.hitArea.width / 2,
-        sellZone.y - sellZone.input.hitArea.height / 2,
-        sellZone.input.hitArea.width,
-        sellZone.input.hitArea.height
-    );
+    const graphic = this.add.graphics()
+        .fillStyle(0xffffff, 0.6)
+        .fillRect(
+            sellZone.x - sellZone.input.hitArea.width / 2,
+            sellZone.y - sellZone.input.hitArea.height / 2,
+            sellZone.input.hitArea.width,
+            sellZone.input.hitArea.height
+        ).lineStyle(4, 0x000000)
+        .strokeRect(
+            sellZone.x - sellZone.input.hitArea.width / 2,
+            sellZone.y - sellZone.input.hitArea.height / 2,
+            sellZone.input.hitArea.width,
+            sellZone.input.hitArea.height
+        );
     graphic.setVisible(false);
     this.graphics.push(graphic);
-    
+
     this.dragDropText = this.add.text(sellZoneCoord[0] - 4 * 96 + 24, sellZoneCoord[1], 'Drop here to sell', this.textStyle);
     this.dragDropText.setVisible(false);
 
@@ -282,11 +279,10 @@ export default class GameScene extends Scene {
         this.pokemon.orientation = getOrientation(this.pokemon.x, this.pokemon.y, pointer.x, pointer.y);
         this.animationManager.animatePokemon(this.pokemon);
         this.pokemon.moveManager.moveTo(pointer.x, pointer.y);
-      }
-      else{
+      } else {
         if (this.dialog && !this.dialog.isInTouching(pointer)) {
-        this.dialog.scaleDownDestroy(100);
-        this.dialog = undefined;
+          this.dialog.scaleDownDestroy(100);
+          this.dialog = undefined;
         }
       }
     });
@@ -303,7 +299,7 @@ export default class GameScene extends Scene {
 
     this.input.on('drop', (pointer, gameObject, dropZone) => {
       this.removeRectangles();
-      //console.log(dropZone.name);
+      // console.log(dropZone.name);
       if (dropZone.name == 'sell-zone') {
         if (gameObject.objType == 'item') {
           this.itemsContainer.updateItem(gameObject.place);
@@ -337,10 +333,10 @@ export default class GameScene extends Scene {
     }, this);
 
     this.input.on('dragend', (pointer, gameObject, dropped) => {
-        this.removeRectangles();
-        if (!dropped) {
-            gameObject.x = gameObject.input.dragStartX;
-            gameObject.y = gameObject.input.dragStartY;
+      this.removeRectangles();
+      if (!dropped) {
+        gameObject.x = gameObject.input.dragStartX;
+        gameObject.y = gameObject.input.dragStartY;
       }
     });
   }

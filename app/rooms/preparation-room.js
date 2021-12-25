@@ -24,13 +24,13 @@ class PreparationRoom extends colyseus.Room {
 
   onCreate(options) {
     console.log('create preparation room');
-    let self = this;
+    const self = this;
     this.setState(new PreparationState());
     this.maxClients = 8;
-    
-    Bot.find({}, ['avatar','elo'], null, (err, bots) => {
-      if(bots){
-        bots.forEach(bot => {
+
+    Bot.find({}, ['avatar', 'elo'], null, (err, bots) => {
+      if (bots) {
+        bots.forEach((bot) => {
           self.elos.set(bot.avatar, bot.elo);
         });
         self.dispatcher.dispatch(new OnAddBotCommand());
@@ -44,10 +44,9 @@ class PreparationRoom extends colyseus.Room {
     });
 
     this.onMessage('game-start', (client, message) => {
-      try{
+      try {
         this.dispatcher.dispatch(new OnGameStartCommand(), {client, message});
-      }
-      catch(error){
+      } catch (error) {
         console.log(error);
       }
     });
@@ -88,28 +87,25 @@ class PreparationRoom extends colyseus.Room {
   }
 
   onJoin(client, options, auth) {
-    if(client && client.auth && client.auth.displayName){
+    if (client && client.auth && client.auth.displayName) {
       console.log(`${client.auth.displayName} ${client.id} join game room`);
       this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
     }
   }
 
-  async onLeave (client, consented) {
-    
-    if(client && client.auth && client.auth.displayName){
+  async onLeave(client, consented) {
+    if (client && client.auth && client.auth.displayName) {
       console.log(`${client.auth.displayName} ${client.id} is leaving preparation room`);
     }
     try {
       if (consented) {
-          throw new Error("consented leave");
+        throw new Error('consented leave');
       }
-  
+
       // allow disconnected client to reconnect into this room until 20 seconds
       await this.allowReconnection(client, 60);
-  
     } catch (e) {
-  
-      if(client && client.auth && client.auth.displayName){
+      if (client && client.auth && client.auth.displayName) {
         console.log(`${client.auth.displayName} ${client.id} leave preparation room`);
       }
       this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});

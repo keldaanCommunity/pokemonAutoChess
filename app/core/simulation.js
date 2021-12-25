@@ -62,8 +62,6 @@ class Simulation extends Schema {
       const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
       const coord = this.getFirstAvailablePlaceOnBoard(true);
       this.addPokemon(kyogre, coord[0], coord[1], 0);
-      
-
     }
 
     if (redEffects && redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
@@ -75,20 +73,20 @@ class Simulation extends Schema {
     this.applyPostEffects();
   }
 
-  addPokemon(pokemon, x, y, team, blueTeam, redTeam){
+  addPokemon(pokemon, x, y, team, blueTeam, redTeam) {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this);
-    //pokemonEntity.triggerSleep(5000);
+    // pokemonEntity.triggerSleep(5000);
     this.applyItemsEffects(pokemonEntity, pokemon.types);
     this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
     this.applySpecialCellsEffects(pokemonEntity);
 
-    if(team == 0){
+    if (team == 0) {
       this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects, this.redEffects, blueTeam, redTeam);
       const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
       this.blueTeam.set(pokemonEntity.id, pokemonEntity);
       this.dpsMeter.set(pokemonEntity.id, dps);
     }
-    if(team == 1){
+    if (team == 1) {
       this.applyEffects(pokemonEntity, pokemon.types, this.redEffects, this.blueEffects, redTeam, blueTeam);
       this.redTeam.set(pokemonEntity.id, pokemonEntity);
     }
@@ -156,14 +154,13 @@ class Simulation extends Schema {
   }
 
   applyItemsEffects(pokemon, types) {
-
-    if(pokemon.items.count(ITEMS.WONDER_BOX) != 0){
+    if (pokemon.items.count(ITEMS.WONDER_BOX) != 0) {
       pokemon.items.remove(ITEMS.WONDER_BOX);
       pokemon.items.add(Object.keys(ITEMS)[Math.floor(Math.random() * Object.keys(ITEMS).length)]);
       pokemon.items.add(Object.keys(ITEMS)[Math.floor(Math.random() * Object.keys(ITEMS).length)]);
     }
 
-    if(pokemon.items.count(ITEMS.ASSAULT_VEST) != 0){
+    if (pokemon.items.count(ITEMS.ASSAULT_VEST) != 0) {
       pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.5) * pokemon.items.count(ITEMS.ASSAULT_VEST);
     }
 
@@ -171,7 +168,7 @@ class Simulation extends Schema {
       pokemon.critChance += 50 * pokemon.items.count(ITEMS.SCOPE_LENS);
     }
 
-    if(pokemon.items.count(ITEMS.RAZOR_FANG)){
+    if (pokemon.items.count(ITEMS.RAZOR_FANG)) {
       pokemon.critDamage += 0.5 * pokemon.items.count(ITEMS.RAZOR_FANG);
     }
 
@@ -289,19 +286,19 @@ class Simulation extends Schema {
     }
   }
 
-  applyPostEffects(){
-    this.blueTeam.forEach(pokemon =>{
+  applyPostEffects() {
+    this.blueTeam.forEach((pokemon) =>{
       let shieldBonus = 0;
-      if(pokemon.effects.includes(EFFECTS.STAMINA)){
+      if (pokemon.effects.includes(EFFECTS.STAMINA)) {
         shieldBonus = 20;
       }
-      if(pokemon.effects.includes(EFFECTS.STRENGTH)){
+      if (pokemon.effects.includes(EFFECTS.STRENGTH)) {
         shieldBonus += 30;
       }
-      if(pokemon.effects.includes(EFFECTS.PURE_POWER)){
+      if (pokemon.effects.includes(EFFECTS.PURE_POWER)) {
         shieldBonus += 50;
       }
-      if(shieldBonus >= 0){
+      if (shieldBonus >= 0) {
         pokemon.shield += shieldBonus;
         const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
 
@@ -312,52 +309,52 @@ class Simulation extends Schema {
         });
       }
       let attackBonus = 0;
-      if(pokemon.effects.includes(EFFECTS.WORK_UP)){
+      if (pokemon.effects.includes(EFFECTS.WORK_UP)) {
         attackBonus = 2;
       }
-      if(pokemon.effects.includes(EFFECTS.RAGE)){
+      if (pokemon.effects.includes(EFFECTS.RAGE)) {
         attackBonus += 4;
       }
-      if(pokemon.effects.includes(EFFECTS.ANGER_POINT)){
+      if (pokemon.effects.includes(EFFECTS.ANGER_POINT)) {
         attackBonus += 8;
       }
-      if(attackBonus >= 0){
-        if(this.board.getValue(pokemon.positionX, 0)){
+      if (attackBonus >= 0) {
+        if (this.board.getValue(pokemon.positionX, 0)) {
           this.board.getValue(pokemon.positionX, 0).atk += attackBonus;
         }
-        if(this.board.getValue(pokemon.positionX, 1)){
+        if (this.board.getValue(pokemon.positionX, 1)) {
           this.board.getValue(pokemon.positionX, 1).atk += attackBonus;
         }
-        if(this.board.getValue(pokemon.positionX, 2)){
+        if (this.board.getValue(pokemon.positionX, 2)) {
           this.board.getValue(pokemon.positionX, 2).atk += attackBonus;
         }
       }
       let sleepMalus = 0;
-      if(pokemon.effects.includes(EFFECTS.ATTRACT)){
+      if (pokemon.effects.includes(EFFECTS.ATTRACT)) {
         sleepMalus += 2000;
       }
-      if(pokemon.effects.includes(EFFECTS.BABY_DOLL_EYES)){
+      if (pokemon.effects.includes(EFFECTS.BABY_DOLL_EYES)) {
         sleepMalus += 4000;
       }
-      if(sleepMalus > 0){
-        if(this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)){
-          this.board.getValue(pokemon.positionX,  5 - pokemon.positionY).triggerSleep(sleepMalus);
+      if (sleepMalus > 0) {
+        if (this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)) {
+          this.board.getValue(pokemon.positionX, 5 - pokemon.positionY).triggerSleep(sleepMalus);
         }
       }
     });
 
-    this.redTeam.forEach(pokemon =>{
+    this.redTeam.forEach((pokemon) =>{
       let shieldBonus = 0;
-      if(pokemon.effects.includes(EFFECTS.STAMINA)){
+      if (pokemon.effects.includes(EFFECTS.STAMINA)) {
         shieldBonus = 20;
       }
-      if(pokemon.effects.includes(EFFECTS.STRENGTH)){
+      if (pokemon.effects.includes(EFFECTS.STRENGTH)) {
         shieldBonus += 30;
       }
-      if(pokemon.effects.includes(EFFECTS.PURE_POWER)){
+      if (pokemon.effects.includes(EFFECTS.PURE_POWER)) {
         shieldBonus += 50;
       }
-      if(shieldBonus >= 0){
+      if (shieldBonus >= 0) {
         pokemon.shield += shieldBonus;
         const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
 
@@ -368,37 +365,37 @@ class Simulation extends Schema {
         });
       }
       let attackBonus = 0;
-      if(pokemon.effects.includes(EFFECTS.WORK_UP)){
+      if (pokemon.effects.includes(EFFECTS.WORK_UP)) {
         attackBonus = 2;
       }
-      if(pokemon.effects.includes(EFFECTS.RAGE)){
+      if (pokemon.effects.includes(EFFECTS.RAGE)) {
         attackBonus += 4;
       }
-      if(pokemon.effects.includes(EFFECTS.ANGER_POINT)){
+      if (pokemon.effects.includes(EFFECTS.ANGER_POINT)) {
         attackBonus += 8;
       }
-      if(attackBonus >= 0){
-        if(this.board.getValue(pokemon.positionX, 3)){
+      if (attackBonus >= 0) {
+        if (this.board.getValue(pokemon.positionX, 3)) {
           this.board.getValue(pokemon.positionX, 3).atk += attackBonus;
         }
-        if(this.board.getValue(pokemon.positionX, 4)){
+        if (this.board.getValue(pokemon.positionX, 4)) {
           this.board.getValue(pokemon.positionX, 4).atk += attackBonus;
         }
-        if(this.board.getValue(pokemon.positionX, 5)){
+        if (this.board.getValue(pokemon.positionX, 5)) {
           this.board.getValue(pokemon.positionX, 5).atk += attackBonus;
         }
       }
 
       let sleepMalus = 0;
-      if(pokemon.effects.includes(EFFECTS.ATTRACT)){
+      if (pokemon.effects.includes(EFFECTS.ATTRACT)) {
         sleepMalus += 2000;
       }
-      if(pokemon.effects.includes(EFFECTS.BABY_DOLL_EYES)){
+      if (pokemon.effects.includes(EFFECTS.BABY_DOLL_EYES)) {
         sleepMalus += 4000;
       }
-      if(sleepMalus > 0){
-        if(this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)){
-          this.board.getValue(pokemon.positionX,  5 - pokemon.positionY).triggerSleep(sleepMalus);
+      if (sleepMalus > 0) {
+        if (this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)) {
+          this.board.getValue(pokemon.positionX, 5 - pokemon.positionY).triggerSleep(sleepMalus);
         }
       }
     });
@@ -407,30 +404,29 @@ class Simulation extends Schema {
   applyEffects(pokemon, types, allyEffects, ennemyEffects, allyTeam, ennemyTeam) {
     allyEffects.forEach((effect) => {
       switch (effect) {
-
         case EFFECTS.HONE_CLAWS:
-          if(types.includes(TYPE.DARK) && pokemon.items.length != 0){
+          if (types.includes(TYPE.DARK) && pokemon.items.length != 0) {
             pokemon.atk += 4 * pokemon.items.length;
             pokemon.shield += 20 * pokemon.items.length;
           }
           break;
 
         case EFFECTS.ASSURANCE:
-          if(types.includes(TYPE.DARK) && pokemon.items.length != 0){
+          if (types.includes(TYPE.DARK) && pokemon.items.length != 0) {
             pokemon.atk += 7 * pokemon.items.length;
             pokemon.shield += 30 * pokemon.items.length;
           }
           break;
 
         case EFFECTS.BEAT_UP:
-          if(types.includes(TYPE.DARK) && pokemon.items.length != 0){
+          if (types.includes(TYPE.DARK) && pokemon.items.length != 0) {
             pokemon.atk += 10 * pokemon.items.length;
             pokemon.shield += 50 * pokemon.items.length;
           }
           break;
 
         case EFFECTS.HISTORIC_POWER:
-          if(types.includes(TYPE.FOSSIL)){
+          if (types.includes(TYPE.FOSSIL)) {
             pokemon.critChance += 20;
             pokemon.critDamage += 0.4;
             pokemon.effects.push(EFFECTS.HISTORIC_POWER);
@@ -438,7 +434,7 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.ANCIENT_POWER:
-          if(types.includes(TYPE.FOSSIL)){
+          if (types.includes(TYPE.FOSSIL)) {
             pokemon.critChance += 40;
             pokemon.critDamage += 0.8;
             pokemon.effects.push(EFFECTS.ANCIENT_POWER);
@@ -446,7 +442,7 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.ELDER_POWER:
-          if(types.includes(TYPE.FOSSIL)){
+          if (types.includes(TYPE.FOSSIL)) {
             pokemon.critChance += 70;
             pokemon.critDamage += 1.4;
             pokemon.effects.push(EFFECTS.ELDER_POWER);
@@ -454,7 +450,7 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.UNOWN_GATHERINGS:
-          if(types.includes(TYPE.FOSSIL)){
+          if (types.includes(TYPE.FOSSIL)) {
             pokemon.critChance += 100;
             pokemon.critDamage += 2.5;
             pokemon.effects.push(EFFECTS.UNOWN_GATHERINGS);
@@ -474,10 +470,10 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.DESOLATE_LAND:
-            if (types.includes(TYPE.FIRE)) {
-                pokemon.effects.push(EFFECTS.DESOLATE_LAND);
-            }
-            break;
+          if (types.includes(TYPE.FIRE)) {
+            pokemon.effects.push(EFFECTS.DESOLATE_LAND);
+          }
+          break;
 
         case EFFECTS.INGRAIN:
           if (types.includes(TYPE.GRASS)) {
@@ -583,19 +579,19 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.PURSUIT:
-          if(types.includes(TYPE.MONSTER)){
+          if (types.includes(TYPE.MONSTER)) {
             pokemon.effects.push(EFFECTS.PURSUIT);
           }
           break;
 
         case EFFECTS.BRUTAL_SWING:
-          if(types.includes(TYPE.MONSTER)){
+          if (types.includes(TYPE.MONSTER)) {
             pokemon.effects.push(EFFECTS.BRUTAL_SWING);
           }
           break;
 
         case EFFECTS.POWER_TRIP:
-          if(types.includes(TYPE.MONSTER)){
+          if (types.includes(TYPE.MONSTER)) {
             pokemon.effects.push(EFFECTS.POWER_TRIP);
           }
           break;
@@ -604,12 +600,12 @@ class Simulation extends Schema {
           pokemon.effects.push(EFFECTS.AMNESIA);
           pokemon.speDef += 5;
           break;
-        
+
         case EFFECTS.LIGHT_SCREEN:
           pokemon.effects.push(EFFECTS.LIGHT_SCREEN);
           pokemon.speDef += 10;
           break;
-        
+
         case EFFECTS.EERIE_SPELL:
           pokemon.effects.push(EFFECTS.EERIE_SPELL);
           pokemon.speDef += 20;
@@ -634,28 +630,28 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.TAILWIND:
-          if(types.includes(TYPE.FLYING)){
+          if (types.includes(TYPE.FLYING)) {
             pokemon.flyingProtection = true;
             pokemon.effects.push(EFFECTS.TAILWIND);
           }
           break;
 
         case EFFECTS.FEATHER_DANCE:
-          if(types.includes(TYPE.FLYING)){
+          if (types.includes(TYPE.FLYING)) {
             pokemon.flyingProtection = true;
             pokemon.effects.push(EFFECTS.FEATHER_DANCE);
           }
           break;
 
         case EFFECTS.MAX_AIRSTREAM:
-          if(types.includes(TYPE.FLYING)){
+          if (types.includes(TYPE.FLYING)) {
             pokemon.flyingProtection = true;
             pokemon.effects.push(EFFECTS.MAX_AIRSTREAM);
           }
           break;
 
         case EFFECTS.MAX_GUARD:
-          if(types.includes(TYPE.FLYING)){
+          if (types.includes(TYPE.FLYING)) {
             pokemon.flyingProtection = true;
             pokemon.effects.push(EFFECTS.MAX_GUARD);
           }
@@ -712,9 +708,9 @@ class Simulation extends Schema {
             pokemon.effects.push(EFFECTS.PHANTOM_FORCE);
           }
           break;
-        
+
         case EFFECTS.CURSE:
-          if(types.includes(TYPE.AMORPH)){
+          if (types.includes(TYPE.AMORPH)) {
             pokemon.effects.push(EFFECTS.CURSE);
           }
 
@@ -737,25 +733,25 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.SNOW:
-          if(this.climate == CLIMATE.SNOW){
+          if (this.climate == CLIMATE.SNOW) {
             pokemon.effects.push(EFFECTS.SNOW);
           }
           break;
 
         case EFFECTS.SHEER_COLD:
-          if(this.climate == CLIMATE.SNOW){
+          if (this.climate == CLIMATE.SNOW) {
             pokemon.effects.push(EFFECTS.SHEER_COLD);
           }
           break;
 
         case EFFECTS.POISON_GAS:
-          if(types.includes(TYPE.POISON)){
+          if (types.includes(TYPE.POISON)) {
             pokemon.effects.push(EFFECTS.POISON_GAS);
           }
           break;
 
         case EFFECTS.TOXIC:
-          if(types.includes(TYPE.POISON)){
+          if (types.includes(TYPE.POISON)) {
             pokemon.effects.push(EFFECTS.TOXIC);
           }
           break;
@@ -788,7 +784,7 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.STICKY_WEB:
-          pokemon.atkSpeed = Math.max(400,pokemon.atkSpeed * 1.3);
+          pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 1.3);
           pokemon.effects.push(EFFECTS.STICKY_WEB);
           break;
 
@@ -839,7 +835,7 @@ class Simulation extends Schema {
     }
 
     this.blueTeam.forEach((pkm, key) => {
-      if(!pkm.life){
+      if (!pkm.life) {
         this.blueTeam.delete(key);
       }
       if (pkm.life <= 0) {
@@ -852,7 +848,7 @@ class Simulation extends Schema {
 
 
     this.redTeam.forEach((pkm, key) => {
-      if(!pkm.life){
+      if (!pkm.life) {
         this.redTeam.delete(key);
       }
       if (pkm.life <= 0) {

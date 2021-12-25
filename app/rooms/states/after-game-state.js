@@ -13,7 +13,7 @@ class AfterGameState extends schema.Schema {
 schema.defineTypes(AfterGameState, {
   users: {map: GameUser},
   players: {map: SimplePlayer}
-  
+
 });
 
 module.exports = AfterGameState;

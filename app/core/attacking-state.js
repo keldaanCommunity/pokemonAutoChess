@@ -34,10 +34,10 @@ class AttackingState extends PokemonState {
     if (target && !pokemon.sleep && !pokemon.freeze) {
       if (climate == CLIMATE.SNOW) {
         let freezeChance = 0;
-        if(pokemon.effects.includes(EFFECTS.SNOW)){
+        if (pokemon.effects.includes(EFFECTS.SNOW)) {
           freezeChance += 0.1;
         }
-        if(pokemon.effects.includes(EFFECTS.SHEER_COLD)){
+        if (pokemon.effects.includes(EFFECTS.SHEER_COLD)) {
           freezeChance += 0.3;
         }
         if (Math.random() > 1 - freezeChance) {
@@ -49,47 +49,46 @@ class AttackingState extends PokemonState {
           target.triggerFreeze(2000);
         }
       }
-       let poisonChance = 0;
-       if(pokemon.effects.includes(EFFECTS.POISON_GAS)){
-          poisonChance += 0.2;
-       }
-       if(pokemon.effects.includes(EFFECTS.TOXIC)){
-         poisonChance += 0.3;
-       }
-       if(poisonChance != 0 && !(target.types.includes(TYPE.METAL) || target.types.includes(TYPE.POISON))){
-         if(Math.random() > poisonChance){
-           target.triggerPoison(2000);
-         }
-       }
-       if(pokemon.effects.includes(EFFECTS.CURSE)){
-         target.triggerSilence(2000);
-       }
-       if(pokemon.effects.includes(EFFECTS.REVENGE)){
-         pokemon.setMana(pokemon.mana + 5);
-       }
-       if(pokemon.effects.includes(EFFECTS.PUNISHMENT)){
-         pokemon.setMana(pokemon.mana + 10);
-       }
+      let poisonChance = 0;
+      if (pokemon.effects.includes(EFFECTS.POISON_GAS)) {
+        poisonChance += 0.2;
+      }
+      if (pokemon.effects.includes(EFFECTS.TOXIC)) {
+        poisonChance += 0.3;
+      }
+      if (poisonChance != 0 && !(target.types.includes(TYPE.METAL) || target.types.includes(TYPE.POISON))) {
+        if (Math.random() > poisonChance) {
+          target.triggerPoison(2000);
+        }
+      }
+      if (pokemon.effects.includes(EFFECTS.CURSE)) {
+        target.triggerSilence(2000);
+      }
+      if (pokemon.effects.includes(EFFECTS.REVENGE)) {
+        pokemon.setMana(pokemon.mana + 5);
+      }
+      if (pokemon.effects.includes(EFFECTS.PUNISHMENT)) {
+        pokemon.setMana(pokemon.mana + 10);
+      }
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
-      if(pokemon.orientation == ORIENTATION.UNCLEAR){
-        console.log(`error orientation, was attacking, name ${pokemon.name}`)
+      if (pokemon.orientation == ORIENTATION.UNCLEAR) {
+        console.log(`error orientation, was attacking, name ${pokemon.name}`);
         pokemon.orientation = ORIENTATION.DOWNLEFT;
       }
       // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
       let damage;
       let attackType = pokemon.attackType;
 
-      if(Math.random() * 100 < pokemon.critChance){
+      if (Math.random() * 100 < pokemon.critChance) {
         damage = Math.round(pokemon.atk * pokemon.critDamage);
         target.critCount ++;
         if (pokemon.items.count(ITEMS.RAZOR_CLAW) != 0) {
           attackType = ATTACK_TYPE.TRUE;
         }
-      }
-      else{
+      } else {
         damage = pokemon.atk;
       }
-      
+
       if (pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
         attackType = ATTACK_TYPE.TRUE;
       }
@@ -107,21 +106,18 @@ class AttackingState extends PokemonState {
 
       const victim = target.handleDamage(damage, board, attackType, pokemon);
 
-      if(victim && target){
-        if (target.effects.includes(EFFECTS.ODD_FLOWER) 
-        || target.effects.includes(EFFECTS.GLOOM_FLOWER) 
-        || target.effects.includes(EFFECTS.VILE_FLOWER)){
-
-          if(!pokemon.simulation.flowerSpawn[target.team]){
+      if (victim && target) {
+        if (target.effects.includes(EFFECTS.ODD_FLOWER) ||
+        target.effects.includes(EFFECTS.GLOOM_FLOWER) ||
+        target.effects.includes(EFFECTS.VILE_FLOWER)) {
+          if (!pokemon.simulation.flowerSpawn[target.team]) {
             pokemon.simulation.flowerSpawn[target.team] = true;
-            if(target.effects.includes(EFFECTS.ODD_FLOWER)){
-              pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.ODDISH),target.positionX, target.positionY, target.team);
-            }
-            else if(target.effects.includes(EFFECTS.GLOOM_FLOWER)){
-              pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.GLOOM),target.positionX, target.positionY, target.team);
-            }
-            else if(target.effects.includes(EFFECTS.VILE_FLOWER)){
-              pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.VILEPLUME),target.positionX, target.positionY, target.team); 
+            if (target.effects.includes(EFFECTS.ODD_FLOWER)) {
+              pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.ODDISH), target.positionX, target.positionY, target.team);
+            } else if (target.effects.includes(EFFECTS.GLOOM_FLOWER)) {
+              pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.GLOOM), target.positionX, target.positionY, target.team);
+            } else if (target.effects.includes(EFFECTS.VILE_FLOWER)) {
+              pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.VILEPLUME), target.positionX, target.positionY, target.team);
             }
           }
         }

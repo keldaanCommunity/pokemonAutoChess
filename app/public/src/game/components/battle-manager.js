@@ -1,7 +1,7 @@
 import {GameObjects} from 'phaser';
 import {SPECIAL_SKILL} from '../../../../models/enum';
 import Pokemon from './pokemon';
-import { transformAttackCoordinate } from '../../pages/utils/utils';
+import {transformAttackCoordinate} from '../../pages/utils/utils';
 
 export default class BattleManager {
   constructor(scene, group, player, animationManager) {
@@ -10,12 +10,12 @@ export default class BattleManager {
     this.player = player;
     this.textStyle = {
       fontSize: '35px',
-      fontFamily: "Verdana",
+      fontFamily: 'Verdana',
       color: 'white',
       align: 'center',
       stroke: '#000',
       strokeThickness: 2,
-      wordWrap: { width: 200, useAdvancedWrap: true }
+      wordWrap: {width: 200, useAdvancedWrap: true}
     };
     this.animationManager = animationManager;
   }
@@ -61,7 +61,7 @@ export default class BattleManager {
           if (change.field == 'item0' && change.value == '') {
             const item = children[i].getFirst('place', 'item0');
             if (item) {
-              children[i].remove(item,true);
+              children[i].remove(item, true);
               item.destroy();
             }
           } else if (change.field == 'item0' && change.value != '') {
@@ -69,7 +69,7 @@ export default class BattleManager {
           } else if (change.field == 'item1' && change.value == '') {
             const item = children[i].getFirst('place', 'item1');
             if (item) {
-              children[i].remove(item,true);
+              children[i].remove(item, true);
               item.destroy();
             }
           } else if (change.field == 'item1' && change.value != '') {
@@ -77,7 +77,7 @@ export default class BattleManager {
           } else if (change.field == 'item2' && change.value == '') {
             const item = children[i].getFirst('place', 'item2');
             if (item) {
-              children[i].remove(item,true);
+              children[i].remove(item, true);
               item.destroy();
             }
           } else if (change.field == 'item2' && change.value != '') {
@@ -107,10 +107,10 @@ export default class BattleManager {
               children[i].specialAttackAnimation();
             } else {
               children[i].moveManager.setSpeed(
-                3 * Math.max(
-                  Math.abs(children[i].x - coordinates[0]),
-                  Math.abs(children[i].y - coordinates[1])
-                )
+                  3 * Math.max(
+                      Math.abs(children[i].x - coordinates[0]),
+                      Math.abs(children[i].y - coordinates[1])
+                  )
               );
               children[i].moveManager.moveTo(coordinates[0], coordinates[1]);
             }
@@ -141,24 +141,22 @@ export default class BattleManager {
             if (detail) {
               detail.hp.setText(pokemon.life);
             }
-          } else if(change.field == 'shield'){
+          } else if (change.field == 'shield') {
             if (change.value && change.previousValue) {
               this.displayDamage(children[i].x, children[i].y, change.value - change.previousValue);
             }
-            if(change.value > 0){
+            if (change.value > 0) {
               children[i].shield = pokemon.shield;
               const shieldbar = children[i].getFirst('objType', 'shieldbar');
-              if(shieldbar){
+              if (shieldbar) {
                 shieldbar.setLife(children[i].shield);
               }
-            }
-            else{
+            } else {
               const shieldbar = children[i].getFirst('objType', 'shieldbar');
-              if(shieldbar){
+              if (shieldbar) {
                 children[i].remove(shieldbar, true);
               }
             }
-
           } else if (change.field =='mana') {
             children[i].mana = pokemon.mana;
             children[i].getFirst('objType', 'manabar').setLife(children[i].mana);
@@ -257,19 +255,19 @@ export default class BattleManager {
             } else {
               children[i].removeProtect();
             }
-          } else if (change.field == 'wound'){
+          } else if (change.field == 'wound') {
             if (pokemon.wound) {
               children[i].addWound();
             } else {
               children[i].removeWound();
             }
-          } else if (change.field == 'resurection'){
+          } else if (change.field == 'resurection') {
             if (pokemon.resurection) {
               children[i].addResurection();
             } else {
               children[i].removeResurection();
             }
-          } else if (change.field == 'critCount'){
+          } else if (change.field == 'critCount') {
             if (change.value != 0 && change.value > children[i].critCount) {
               this.displayCriticalHit(children[i].x, children[i].y);
             }
@@ -280,13 +278,13 @@ export default class BattleManager {
     }
   }
 
-  displayCriticalHit(x,y){
-    let textStyle = {
+  displayCriticalHit(x, y) {
+    const textStyle = {
       fontSize: '30px',
       fontFamily: 'Verdana',
       color: '#FF0000',
       align: 'center',
-      strokeThickness:2,
+      strokeThickness: 2,
       stroke: '#000'
     };
     const crit = this.scene.add.existing(new GameObjects.Text(this.scene, x-25, y -50, 'CRIT !', textStyle));
@@ -320,12 +318,12 @@ export default class BattleManager {
       color='#FF0000';
       damageText = damage;
     }
-    let textStyle = {
+    const textStyle = {
       fontSize: '40px',
       fontFamily: 'Verdana',
       color: color,
       align: 'center',
-      strokeThickness:2,
+      strokeThickness: 2,
       stroke: '#000'
     };
     const text = this.scene.add.existing(new GameObjects.Text(this.scene, x-25, y -30, damageText, textStyle));

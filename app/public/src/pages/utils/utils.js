@@ -1,23 +1,23 @@
- import { ORIENTATION } from "../../../../models/enum";
- 
+import {ORIENTATION} from '../../../../models/enum';
+
 export const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyCjMpYJycJTjOsXPM1CJn8olntPQhpysOI",
-  authDomain: "pokemonautochess-b18fb.firebaseapp.com",
-  projectId: "pokemonautochess-b18fb",
-  storageBucket: "pokemonautochess-b18fb.appspot.com",
-  messagingSenderId: "448759785030",
-  appId: "1:448759785030:web:bc2f21a25ab9e43a894c47"
-};   
+  apiKey: 'AIzaSyCjMpYJycJTjOsXPM1CJn8olntPQhpysOI',
+  authDomain: 'pokemonautochess-b18fb.firebaseapp.com',
+  projectId: 'pokemonautochess-b18fb',
+  storageBucket: 'pokemonautochess-b18fb.appspot.com',
+  messagingSenderId: '448759785030',
+  appId: '1:448759785030:web:bc2f21a25ab9e43a894c47'
+};
 
- export function transformCoordinate(x,y){
+export function transformCoordinate(x, y) {
   return [28 * 24 + 96 * x, 808 - 120 * y];
- };
+};
 
- export function transformAttackCoordinate(x,y){
+export function transformAttackCoordinate(x, y) {
   return [28 * 24 + 96 * x, 712 - 120 * y];
- }
+}
 
- export function getOrientation(x1, y1, x2, y2){
+export function getOrientation(x1, y1, x2, y2) {
   let angle = Math.atan2(y2 - y1, x2 - x1);
   if (angle < 0) {
     angle += 2 * Math.PI;
@@ -43,9 +43,9 @@ export const FIREBASE_CONFIG = {
   } else {
     return ORIENTATION.RIGHT;
   }
- }
+}
 
- export function getAttackScale(attackSprite){
+export function getAttackScale(attackSprite) {
   switch (attackSprite) {
     case 'FLYING/range':
       return [1.5, 1.5];
@@ -92,4 +92,4 @@ export const FIREBASE_CONFIG = {
     default:
       return [2, 2];
   }
- }
+}

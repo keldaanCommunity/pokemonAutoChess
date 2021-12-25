@@ -17,8 +17,8 @@ class LobbyUser extends Schema {
       wins: wins,
       exp: exp,
       level: level,
-      donor:donor,
-      mapWin:new WinTileset(mapWin),
+      donor: donor,
+      mapWin: new WinTileset(mapWin),
       history: history
     });
   }
@@ -36,9 +36,9 @@ schema.defineTypes(LobbyUser, {
   map: MapTileset,
   langage: 'string',
   wins: 'uint16',
-  exp:'uint16',
-  level:'uint16',
-  donor:'boolean',
+  exp: 'uint16',
+  level: 'uint16',
+  donor: 'boolean',
   mapWin: WinTileset,
   history: [GameRecord]
 });

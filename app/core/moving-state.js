@@ -30,12 +30,11 @@ class MovingState extends PokemonState {
 
     let x;
     let y;
-    if(pokemon.types.includes(TYPE.FOSSIL)){
+    if (pokemon.types.includes(TYPE.FOSSIL)) {
       const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
       x = farthestCoordinate[0];
       y = farthestCoordinate[1];
-    }
-    else{
+    } else {
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
       let distance = 999;
 
@@ -53,8 +52,8 @@ class MovingState extends PokemonState {
     }
     if (x !== undefined && y !== undefined) {
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, x, y);
-      if(pokemon.orientation == ORIENTATION.UNCLEAR){
-        console.log(`error orientation, was moving, name ${pokemon.name}`)
+      if (pokemon.orientation == ORIENTATION.UNCLEAR) {
+        console.log(`error orientation, was moving, name ${pokemon.name}`);
         pokemon.orientation = ORIENTATION.DOWNLEFT;
       }
       // console.log(`pokemon moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates[0]}, ${coordinates[1]})), orientation: ${pokemon.orientation}`);

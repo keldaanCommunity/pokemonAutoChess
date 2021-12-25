@@ -1,4 +1,4 @@
-const {ITEM_TYPE, BATTLE_RESULT} = require('../models/enum');
+const {BATTLE_RESULT} = require('../models/enum');
 const PokemonFactory = require('../models/pokemon-factory');
 const BOT = require('../models/mongo-models/bot');
 
@@ -8,7 +8,7 @@ class Bot {
     this.step = 0;
     this.progress = 0;
     console.log(player.name);
-    BOT.findOne({'avatar': player.name},['steps'], null,(err, bot)=>{
+    BOT.findOne({'avatar': player.name}, ['steps'], null, (err, bot)=>{
       this.scenario = bot;
       this.updatePlayerTeam(0);
     });
@@ -39,8 +39,8 @@ class Bot {
       const pkm = PokemonFactory.createPokemonFromName(stepTeam.board[i].name);
       pkm.positionX = stepTeam.board[i].x;
       pkm.positionY = stepTeam.board[i].y;
-      if(stepTeam.board[i].items){
-        stepTeam.board[i].items.forEach(item=>{
+      if (stepTeam.board[i].items) {
+        stepTeam.board[i].items.forEach((item)=>{
           pkm.items.add(item);
         });
       }

@@ -1,5 +1,5 @@
 const Pokemon = require('./colyseus-models/pokemon');
-const {SPECIAL_SKILL, PKM, PRECOMPUTED_TYPE_POKEMONS} = require('./enum');
+const {SPECIAL_SKILL, PKM} = require('./enum');
 const Strategy = require('../core/attack-strategy');
 
 class PokemonFactory {
@@ -289,7 +289,7 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.ORIGIN_PULSE:
         return new Strategy.OriginPulseStrategy();
-        
+
       case SPECIAL_SKILL.SEED_FLARE:
         return new Strategy.SeedFlareStrategy();
 
@@ -304,7 +304,7 @@ class PokemonFactory {
 
       case SPECIAL_SKILL.ROCK_SMASH:
         return new Strategy.RockSmashStrategy();
-      
+
       case SPECIAL_SKILL.HEAD_SMASH:
         return new Strategy.HeadSmashStrategy();
 

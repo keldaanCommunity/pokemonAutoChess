@@ -4,7 +4,7 @@ import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemContainer from './item-container';
 import {SPECIAL_SKILL, EFFECTS_ICON} from '../../../../models/enum.js';
-import { transformAttackCoordinate, getAttackScale } from '../../pages/utils/utils';
+import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 
 export default class Pokemon extends Button {
   constructor(scene, x, y, pokemon, dragable, isPopup) {
@@ -42,10 +42,10 @@ export default class Pokemon extends Button {
     if (pokemon.life) {
       this.life = pokemon.life;
     }
-    if(pokemon.shield){
+    if (pokemon.shield) {
       this.shield = pokemon.shield;
     }
-    if(pokemon.critChance){
+    if (pokemon.critChance) {
       this.critChance = pokemon.critChance;
     }
     this.setDepth(5);
@@ -64,7 +64,7 @@ export default class Pokemon extends Button {
   enterButtonRestState() {
     const detail = this.getFirst('objType', 'detail');
     if (detail) {
-      this.remove(detail,true);
+      this.remove(detail, true);
     }
   }
 
@@ -596,7 +596,7 @@ export default class Pokemon extends Button {
               specialProjectile.destroy();
             });
             break;
-            
+
           default:
             break;
         }
@@ -675,7 +675,6 @@ export default class Pokemon extends Button {
   }
 
   setShieldBar(pokemon, scene, height) {
-    const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
     if (pokemon.shield !== undefined && pokemon.shield > 0) {
       const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
       const shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, height, shieldRatio * 60, pokemon.shield, 0x939393, 'shieldbar', true);
@@ -696,40 +695,38 @@ export default class Pokemon extends Button {
   setEffects(pokemon, scene, height) {
     if (pokemon.effects.length > 0) {
       pokemon.effects.forEach((effect, c) => {
-        if( effect && EFFECTS_ICON[effect]){
-          let color = 0xffffff;
-  
-          let level = "";
+        if ( effect && EFFECTS_ICON[effect]) {
+          let level = '';
           switch (EFFECTS_ICON[effect].level) {
             case 0:
-              level = "";
+              level = '';
               break;
-  
+
             case 1:
-              level = "I";
+              level = 'I';
               break;
-  
+
             case 2:
-              level = "II";
+              level = 'II';
               break;
-  
+
             case 3:
-              level = "III";
+              level = 'III';
               break;
-  
+
             case 4:
-              level = "IV";
+              level = 'IV';
               break;
-          
+
             default:
               break;
           }
-  
-          let backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5,0.5);
-          let backgroundText = new GameObjects.Text(scene, c*20 -30, height+5, level, {
+
+          const backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5, 0.5);
+          const backgroundText = new GameObjects.Text(scene, c*20 -30, height+5, level, {
             fontSize: '15px',
             fontFamily: 'Verdana',
-            color:'#000000'
+            color: '#000000'
           });
           backgroundIcon.objType = 'effect';
           scene.add.existing(backgroundIcon);
@@ -757,7 +754,7 @@ export default class Pokemon extends Button {
     this.setShieldBar(pokemon, scene, this.height/2 + 5);
     this.setLifeBar(pokemon, scene, this.height/2 + 5);
     this.setManaBar(pokemon, scene, this.height/2 + 5);
-    
+
     this.setItems(pokemon, scene);
     if (pokemon.effects) {
       this.setEffects(pokemon, scene, this.height + 30);
@@ -766,7 +763,7 @@ export default class Pokemon extends Button {
 
   setItem0(item) {
     if (this.item0) {
-      this.remove(this.item0,true);
+      this.remove(this.item0, true);
     }
     this.item0 = new ItemContainer(this.scene, this.width + 15, this.height - 50, item, false, 'item0');
     this.scene.add.existing(item);
@@ -775,7 +772,7 @@ export default class Pokemon extends Button {
 
   setItem1(item) {
     if (this.item1) {
-      this.remove(this.item1,true);
+      this.remove(this.item1, true);
     }
     this.item1 = new ItemContainer(this.scene, this.width + 15, this.height - 20, item, false, 'item1');
     this.scene.add.existing(this.item1);
@@ -784,7 +781,7 @@ export default class Pokemon extends Button {
 
   setItem2(item) {
     if (this.item2) {
-      this.remove(this.item2,true);
+      this.remove(this.item2, true);
     }
     this.item2 = new ItemContainer(this.scene, this.width + 15, this.height + 10, item, false, 'item2');
     this.scene.add.existing(this.item2);
@@ -831,7 +828,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  addWound(){
+  addWound() {
     if (!this.getFirst('objType', 'wound')) {
       const wound = new GameObjects.Sprite(this.scene, 0, -30, 'wound', '000');
       wound.setScale(2, 2);
@@ -842,9 +839,9 @@ export default class Pokemon extends Button {
     }
   }
 
-  removeWound(){
+  removeWound() {
     const sprite = this.getFirst('objType', 'wound');
-    if(sprite){
+    if (sprite) {
       this.remove(sprite, true);
     }
   }
@@ -876,7 +873,7 @@ export default class Pokemon extends Button {
       sleep.anims.play('sleep');
       this.add(sleep);
     }
-    //console.log('sleep');
+    // console.log('sleep');
     const sprite = this.getFirst('objType', 'sprite');
     sprite.anims.play(`${this.index}/2`);
   }
@@ -886,7 +883,7 @@ export default class Pokemon extends Button {
     if (sleepEffect) {
       this.remove(sleepEffect, true);
     }
-    //window.animationManager.animatePokemon(this);
+    // window.animationManager.animatePokemon(this);
   }
 
   addSilence() {

@@ -21,70 +21,70 @@ const userMetadataSchema = new Schema(
         type: Number,
         default: 0
       },
-      exp:{
+      exp: {
         type: Number,
         default: 0
       },
-      level:{
+      level: {
         type: Number,
         default: 0
       },
-      elo:{
-        type:Number,
+      elo: {
+        type: Number,
         default: 1000
       },
-      donor:{
-        type:Boolean,
+      donor: {
+        type: Boolean,
         default: false
       },
-      mapWin:{
-        ICE:{
+      mapWin: {
+        ICE: {
           type: Number,
           default: 0
         },
-        FIRE:{
+        FIRE: {
           type: Number,
           default: 0
         },
-        GROUND:{
+        GROUND: {
           type: Number,
           default: 0
         },
-        NORMAL:{
+        NORMAL: {
           type: Number,
           default: 0
         },
-        GRASS:{
+        GRASS: {
           type: Number,
           default: 0
         },
-        WATER:{
+        WATER: {
           type: Number,
           default: 0
         }
       },
-      map:{
-        ICE:{
+      map: {
+        ICE: {
           type: String,
           default: 'ICE0'
         },
-        FIRE:{
+        FIRE: {
           type: String,
           default: 'FIRE0'
         },
-        GROUND:{
+        GROUND: {
           type: String,
           default: 'GROUND0'
         },
-        NORMAL:{
+        NORMAL: {
           type: String,
           default: 'NORMAL0'
         },
-        GRASS:{
+        GRASS: {
           type: String,
           default: 'GRASS0'
         },
-        WATER:{
+        WATER: {
           type: String,
           default: 'WATER0'
         }

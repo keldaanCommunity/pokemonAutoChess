@@ -18,28 +18,23 @@ class Effects {
     if (synergies.GRASS >= 7) {
       this.list.push(EFFECTS.SPORE);
     }
-    if(synergies.FIRE >= 0){
+    if (synergies.FIRE >= 0) {
       if (synergies.FIRE >= 6) {
-          this.list.push(EFFECTS.DESOLATE_LAND);
-      }
-      else if (synergies.FIRE >= 4) {
+        this.list.push(EFFECTS.DESOLATE_LAND);
+      } else if (synergies.FIRE >= 4) {
         this.list.push(EFFECTS.DROUGHT);
-      }
-      else if (synergies.FIRE >= 2) {
+      } else if (synergies.FIRE >= 2) {
         this.list.push(EFFECTS.BLAZE);
       }
     }
-    if(synergies.FOSSIL >= 0){
+    if (synergies.FOSSIL >= 0) {
       if (synergies.FOSSIL >= 8) {
-          this.list.push(EFFECTS.UNOWN_GATHERINGS);
-      }
-      else if (synergies.FOSSIL >= 6) {
+        this.list.push(EFFECTS.UNOWN_GATHERINGS);
+      } else if (synergies.FOSSIL >= 6) {
         this.list.push(EFFECTS.ELDER_POWER);
-      }
-      else if (synergies.FOSSIL >= 4) {
+      } else if (synergies.FOSSIL >= 4) {
         this.list.push(EFFECTS.ANCIENT_POWER);
-      }
-      else if (synergies.FOSSIL >= 2) {
+      } else if (synergies.FOSSIL >= 2) {
         this.list.push(EFFECTS.HISTORIC_POWER);
       }
     }
@@ -79,14 +74,12 @@ class Effects {
     if (synergies.PSYCHIC >= 6) {
       this.list.push(EFFECTS.EERIE_SPELL);
     }
-    if(synergies.DARK >= 0){
+    if (synergies.DARK >= 0) {
       if (synergies.DARK >= 6) {
         this.list.push(EFFECTS.BEAT_UP);
-      }
-      else if(synergies.DARK >= 4){
+      } else if (synergies.DARK >= 4) {
         this.list.push(EFFECTS.ASSURANCE);
-      }
-      else if (synergies.DARK >= 2) {
+      } else if (synergies.DARK >= 2) {
         this.list.push(EFFECTS.HONE_CLAWS);
       }
     }
@@ -144,14 +137,12 @@ class Effects {
     if (synergies.HUMAN >= 6) {
       this.list.push(EFFECTS.CALM_MIND);
     }
-    if(synergies.AQUATIC >= 0){
-        if (synergies.AQUATIC >= 4) {
-            this.list.push(EFFECTS.HYDRO_CANNON);
-        }
-
-        else if (synergies.AQUATIC >= 2) {
-            this.list.push(EFFECTS.SWIFT_SWIM);
-        }
+    if (synergies.AQUATIC >= 0) {
+      if (synergies.AQUATIC >= 4) {
+        this.list.push(EFFECTS.HYDRO_CANNON);
+      } else if (synergies.AQUATIC >= 2) {
+        this.list.push(EFFECTS.SWIFT_SWIM);
+      }
     }
     if (synergies.BUG >= 2) {
       this.list.push(EFFECTS.SWARM);
@@ -159,28 +150,23 @@ class Effects {
     if (synergies.BUG >= 4) {
       this.list.push(EFFECTS.STICKY_WEB);
     }
-    if(synergies.FLYING >= 0){
+    if (synergies.FLYING >= 0) {
       if (synergies.FLYING >= 8) {
         this.list.push(EFFECTS.MAX_GUARD);
-      }
-      else if (synergies.FLYING >= 6) {
+      } else if (synergies.FLYING >= 6) {
         this.list.push(EFFECTS.MAX_AIRSTREAM);
-      }
-      else if (synergies.FLYING >= 4) {
+      } else if (synergies.FLYING >= 4) {
         this.list.push(EFFECTS.FEATHER_DANCE);
-      }
-      else if (synergies.FLYING >= 2) {
+      } else if (synergies.FLYING >= 2) {
         this.list.push(EFFECTS.TAILWIND);
       }
     }
-    if(synergies.FLORA >= 0){
+    if (synergies.FLORA >= 0) {
       if (synergies.FLORA >= 4) {
         this.list.push(EFFECTS.VILE_FLOWER);
-      }
-      else if (synergies.FLORA >= 3) {
+      } else if (synergies.FLORA >= 3) {
         this.list.push(EFFECTS.GLOOM_FLOWER);
-      }
-      else if (synergies.FLORA >= 2) {
+      } else if (synergies.FLORA >= 2) {
         this.list.push(EFFECTS.ODD_FLOWER);
       }
     }
@@ -193,7 +179,7 @@ class Effects {
     if (synergies.AMORPH >= 2) {
       this.list.push(EFFECTS.PHANTOM_FORCE);
     }
-    if(synergies.AMORPH >= 4){
+    if (synergies.AMORPH >= 4) {
       this.list.push(EFFECTS.CURSE);
     }
     if (synergies.FAIRY >= 2) {

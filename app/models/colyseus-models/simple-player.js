@@ -11,10 +11,10 @@ class SimplePlayer extends Schema {
       avatar: avatar,
       rank: rank,
       pokemons: new ArraySchema(),
-      exp:exp
+      exp: exp
     });
-    pokemons.forEach(pkm => {
-        this.pokemons.push(pkm);
+    pokemons.forEach((pkm) => {
+      this.pokemons.push(pkm);
     });
   }
 }
@@ -23,7 +23,7 @@ schema.defineTypes(SimplePlayer, {
   id: 'string',
   name: 'string',
   avatar: 'string',
-  rank : 'uint8',
+  rank: 'uint8',
   pokemons: ['string'],
   exp: 'uint16'
 });

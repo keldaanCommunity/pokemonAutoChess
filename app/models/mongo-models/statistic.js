@@ -2,25 +2,25 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const statisticSchema = new Schema(
     {
-      playerId:{
+      playerId: {
         type: String
       },
-      elo:{
+      elo: {
         type: Number
       },
-      time:{
+      time: {
         type: Number
       },
       name: {
         type: String
       },
-      rank:{
+      rank: {
         type: Number
       },
-      avatar:{
+      avatar: {
         type: String
       },
-      pokemons:[
+      pokemons: [
         {
           type: String
         }

@@ -19,7 +19,7 @@ class LeechSeedStrategy extends AttackStrategy {
   }
 }
 
-class HeadSmashStrategy extends AttackStrategy{
+class HeadSmashStrategy extends AttackStrategy {
   constructor() {
     super();
   }
@@ -45,17 +45,16 @@ class HeadSmashStrategy extends AttackStrategy{
       default:
         break;
     }
-    if(target.sleep || target.freeze){
+    if (target.sleep || target.freeze) {
       target.handleDamage(target.life, board, ATTACK_TYPE.TRUE, pokemon);
-    }
-    else{
+    } else {
       target.handleDamage(d, board, ATTACK_TYPE.PHYSICAL, pokemon);
     }
     pokemon.handleDamage(recoil, board, ATTACK_TYPE.TRUE, pokemon);
   }
 }
 
-class RockSmashStrategy extends AttackStrategy{
+class RockSmashStrategy extends AttackStrategy {
   constructor() {
     super();
   }
@@ -87,7 +86,7 @@ class RockSmashStrategy extends AttackStrategy{
   }
 }
 
-class RockTombStrategy extends AttackStrategy{
+class RockTombStrategy extends AttackStrategy {
   constructor() {
     super();
   }
@@ -111,11 +110,11 @@ class RockTombStrategy extends AttackStrategy{
     }
 
     target.handleDamage(factor, board, ATTACK_TYPE.PHYSICAL, pokemon);
-    target.atkSpeed = Math.max(400,pokemon.atkSpeed + factor * 10);
+    target.atkSpeed = Math.max(400, pokemon.atkSpeed + factor * 10);
   }
 }
 
-class RoarOfTimeStrategy extends AttackStrategy{
+class RoarOfTimeStrategy extends AttackStrategy {
   constructor() {
     super();
   }
@@ -129,7 +128,7 @@ class RoarOfTimeStrategy extends AttackStrategy{
         candidate = pkm;
       }
     });
-  
+
     candidate.resurection = true;
   }
 }
@@ -174,7 +173,7 @@ class OriginPulseStrategy extends AttackStrategy {
 
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
-    let damage = 60;
+    const damage = 60;
 
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
@@ -184,14 +183,14 @@ class OriginPulseStrategy extends AttackStrategy {
   }
 }
 
-class SeedFlareStrategy extends AttackStrategy{
-  constructor(){
+class SeedFlareStrategy extends AttackStrategy {
+  constructor() {
     super();
   }
 
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
-    let damage = 30;
+    const damage = 30;
 
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team) {
@@ -1350,7 +1349,7 @@ class StunSporeStrategy extends AttackStrategy {
         break;
     }
     target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
-    target.atkSpeed = Math.max(400,pokemon.atkSpeed * debuff);
+    target.atkSpeed = Math.max(400, pokemon.atkSpeed * debuff);
   }
 }
 
