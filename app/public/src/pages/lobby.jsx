@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import Chat from './component/chat';
 import CurrentUsers from './component/current-users';
 import RoomMenu from './component/room-menu';
 import TabMenu from './component/tab-menu';
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import { FIREBASE_CONFIG } from './utils/utils';
 import { Client } from 'colyseus.js';
 import DiscordButton from './component/discord-button';
@@ -249,7 +249,7 @@ class Lobby extends Component {
         </div>;
       }
       if(this.state.preparationRoomId != ''){
-        return <Redirect to='/preparation'/>;
+        return <Navigate to='/preparation'/>;
       }
       if(this.state.showWiki){
         return <Wiki toggleWiki={this.toggleWiki.bind(this)} content='Lobby'/>;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import GameContainer from '../game/game-container';
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import { FIREBASE_CONFIG } from './utils/utils';
 import { Client } from 'colyseus.js';
 import Modal from './component/modal';
@@ -379,10 +379,10 @@ class Game extends Component {
       </div>;
     }
     if(this.state.toLobby){
-      return <Redirect to='/lobby'/>;
+      return <Navigate to='/lobby'/>;
     }
     if(this.state.afterGameId != ''){
-      return <Redirect to='/after'/>;
+      return <Navigate to='/after'/>;
     }
     if(!this.state.connected){
       return <div style={{display:'flex', position: 'absolute', top:'50%', left:'50%', marginLeft: '-300px', marginTop: '-150px', backgroundColor: 'rgba(255, 255, 255, .6)'}}>

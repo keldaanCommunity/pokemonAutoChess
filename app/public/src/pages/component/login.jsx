@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 import { Link } from 'react-router-dom';
 import 'firebaseui/dist/firebaseui.css'
 
@@ -23,7 +23,7 @@ class Login extends Component {
           };        
           // Configure FirebaseUI.
         this.uiConfig = {
-          // Popup signin flow rather than redirect flow.
+          // Popup signin flow rather than Navigate flow.
           signInFlow: 'popup',
           // We will display Google and Facebook as auth providers.
           signInOptions: [
@@ -32,7 +32,7 @@ class Login extends Component {
             firebase.auth.FacebookAuthProvider.PROVIDER_ID
           ],
           callbacks: {
-            // Avoid redirects after sign-in.
+            // Avoid Navigates after sign-in.
             signInSuccessWithAuthResult: () => false,
           },
         };
@@ -84,7 +84,7 @@ class Login extends Component {
                 display:'flex',
                 justifyContent:'space-evenly'
             }}>
-            <Link to={'./lobby'}>
+            <Link to={'/lobby'}>
                 <button className="nes-btn is-success">
                     Join Lobby
                 </button>

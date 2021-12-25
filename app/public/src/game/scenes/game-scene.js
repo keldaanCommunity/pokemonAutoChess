@@ -8,7 +8,7 @@ import ItemsContainer from '../components/items-container';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
 import {STATE} from '../../../../models/enum';
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import { transformAttackCoordinate, getOrientation, transformCoordinate } from '../../pages/utils/utils';
 
 

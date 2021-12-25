@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import AfterMenu  from './component/after-menu';
 import { Client } from 'colyseus.js';
 import { FIREBASE_CONFIG } from './utils/utils';
@@ -76,7 +76,7 @@ class AfterGame extends Component {
     }
 
     if(this.state.toLobby){
-        return <Redirect to='/lobby'/>;
+        return <Navigate to='/lobby'/>;
     }
     else{
         return <div className='App'>

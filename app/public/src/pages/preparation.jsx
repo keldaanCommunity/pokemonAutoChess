@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Chat from './component/chat';
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import PreparationMenu from './component/preparation-menu';
-import { Redirect, Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import { Client } from 'colyseus.js';
 import { FIREBASE_CONFIG } from './utils/utils';
 
@@ -183,10 +183,10 @@ class Preparation extends Component {
         </div>;
       }
     if(this.state.gameId != ''){
-        return <Redirect to='/game'/>;
+        return <Navigate to='/game'/>;
     }
     if(this.state.toLobby){
-        return <Redirect to='/lobby'/>;
+        return <Navigate to='/lobby'/>;
     }
     if(!this.state.connected){
         return <div style={{display:'flex', position: 'absolute', top:'50%', left:'50%', marginLeft: '-300px', marginTop: '-150px', backgroundColor: 'rgba(255, 255, 255, .6)'}}>

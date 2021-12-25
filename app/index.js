@@ -39,19 +39,24 @@ const gameServer = new Colyseus.Server({
 });
 
 app.use(cors());
-app.use(helmet());
+helmet({
+  contentSecurityPolicy: false,
+});
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public', 'dist')));
 
 // set up rate limiter: maximum of five requests per minute
-var RateLimit = require('express-rate-limit');
-var limiter = new RateLimit({
-  windowMs: 1*60*1000, // 1 minute
-  max: 40
+const rateLimit = require('express-rate-limit').default;
+
+var limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
-// apply rate limiter to all requests
-app.use(limiter);
+// Apply the rate limiting middleware to all requests
+app.use(limiter)
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
