@@ -43,53 +43,77 @@ class GameRoom extends colyseus.Room {
           });
         }
         catch(error){
-          console.log(error);
+          console.log('shop error', message);
         }
       }
     });
     
     this.onMessage('item', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnItemCommand(), {
-          playerId: client.auth.uid,
-          id: message.id
-        });
+        try {
+          this.dispatcher.dispatch(new Commands.OnItemCommand(), {
+            playerId: client.auth.uid,
+            id: message.id
+          });
+        } catch (error) {
+          
+        }
       }
     });
 
     this.onMessage('dragDrop', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnDragDropCommand(), {
-          client: client,
-          detail: message.detail
-        });
+        try {
+          this.dispatcher.dispatch(new Commands.OnDragDropCommand(), {
+            client: client,
+            detail: message.detail
+          });
+        } catch (error) {
+          console.log('drag drop error', message);
+        }
       }
     });
 
     this.onMessage('sellDrop', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnSellDropCommand(), {
-          client,
-          detail: message.detail
-        });
+        try {
+          this.dispatcher.dispatch(new Commands.OnSellDropCommand(), {
+            client,
+            detail: message.detail
+          });
+        } catch (error) {
+          console.log('sell drop error', message);
+        }
       }
     });
 
     this.onMessage('refresh', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnRefreshCommand(), client.auth.uid);
+        try {
+          this.dispatcher.dispatch(new Commands.OnRefreshCommand(), client.auth.uid);
+        } catch (error) {
+          console.log('refresh error', message);
+        }
       }
     });
 
     this.onMessage('lock', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnLockCommand(), client.auth.uid);
+        try {
+          this.dispatcher.dispatch(new Commands.OnLockCommand(), client.auth.uid);
+        } catch (error) {
+          console.log('lock error', message);
+        }
       }
     });
 
     this.onMessage('levelUp', (client, message) => {
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnLevelUpCommand(), client.auth.uid);
+        try {
+          this.dispatcher.dispatch(new Commands.OnLevelUpCommand(), client.auth.uid);
+        } catch (error) {
+          console.log('level up error', message);
+        }
       }
     });
     
@@ -99,7 +123,11 @@ class GameRoom extends colyseus.Room {
 
     this.setSimulationInterval((deltaTime) =>{
       if(!this.state.gameFinished){
-        this.dispatcher.dispatch(new Commands.OnUpdateCommand(), deltaTime);
+        try {
+          this.dispatcher.dispatch(new Commands.OnUpdateCommand(), deltaTime);
+        } catch (error) {
+         console.log('update error'); 
+        }
       }
     })
   }
