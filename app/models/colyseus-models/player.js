@@ -26,7 +26,7 @@ class Player extends Schema {
       experienceManager: new ExperienceManager(),
       synergies: new Synergies(),
       effects: new Effects(),
-      money: process.env.MODE == 'dev' ? 50 : 5,
+      money: process.env.MODE == 'dev' ? 400 : 5,
       life: process.env.MODE == 'dev' ? 10 : 100,
       simulation: new Simulation(specialCells, mapType),
       shopLocked: false,

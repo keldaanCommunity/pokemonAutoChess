@@ -2924,7 +2924,7 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 6,
           title: `(6) Sandstorm`,
-          text: `All non-Ground/Steel pokemon lose 10% HP per second.`
+          text: `All ennemies lose 10% HP per second.`
         }
       ],
       esp: [

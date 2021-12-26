@@ -216,7 +216,7 @@ class PokemonState {
       }
 
       if (climate == CLIMATE.SANDSTORM) {
-        if (!pokemon.types.includes(TYPE.GROUND) && !pokemon.types.includes(TYPE.METAL) &&!pokemon.types.includes(TYPE.MINERAL)) {
+        if (pokemon.effects.includes(EFFECTS.SANDSTORM)) {
           this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
         }
       }

@@ -778,6 +778,10 @@ class Simulation extends Schema {
           pokemon.effects.push(EFFECTS.STEALTH_ROCK);
           break;
 
+        case EFFECTS.SANDSTORM:
+          pokemon.effects.push(EFFECTS.SANDSTORM);
+          break;
+
         case EFFECTS.INTIMIDATE:
           pokemon.atk -= Math.ceil(pokemon.baseAtk * 0.3);
           pokemon.effects.push(EFFECTS.INTIMIDATE);
