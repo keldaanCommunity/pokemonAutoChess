@@ -5,7 +5,8 @@ const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
 const UserMetadata = require('../models/mongo-models/user-metadata');
 const BOT = require('../models/mongo-models/bot');
-const {XP_PLACE, XP_TABLE} = require('../models/enum');
+const {XP_PLACE, XP_TABLE, PKM, TYPE, EFFECTS} = require('../models/enum');
+const PokemonFactory = require('../models/pokemon-factory');
 const EloRank = require('elo-rank');
 const admin = require('firebase-admin');
 const DetailledStatistic = require('../models/mongo-models/detailled-statistic');
@@ -41,7 +42,7 @@ class GameRoom extends colyseus.Room {
             index: message.id
           });
         } catch (error) {
-          console.log('shop error', message);
+          console.log('shop error', message, error);
         }
       }
     });
@@ -67,6 +68,12 @@ class GameRoom extends colyseus.Room {
             detail: message.detail
           });
         } catch (error) {
+          let errorInformation = {
+            'updateBoard': true,
+            'updateItems': true,
+            'field': message.place
+          };
+          client.send('DragDropFailed', errorInformation);
           console.log('drag drop error', message);
         }
       }
@@ -124,7 +131,7 @@ class GameRoom extends colyseus.Room {
         try {
           this.dispatcher.dispatch(new Commands.OnUpdateCommand(), deltaTime);
         } catch (error) {
-          console.log('update error');
+          console.log('update error', error);
         }
       }
     });
@@ -372,6 +379,147 @@ class GameRoom extends colyseus.Room {
         }
       }
     }
+  }
+
+  updateEvolution(id) {
+    let evolve = false;
+    const itemsToAdd = [];
+    const player = this.state.players.get(id);
+    player.board.forEach((pokemon, key) => {
+      let count = 0;
+      const pokemonEvolutionName = pokemon.evolution;
+
+      if (pokemonEvolutionName != '') {
+        player.board.forEach((pkm, id) => {
+          if ( pkm.index == pokemon.index) {
+            count += 1;
+          }
+        });
+
+        if (count == 3 || (pokemon.types.includes(TYPE.BUG) && count == 2 && player.effects.list.includes(EFFECTS.SWARM))) {
+          let x;
+          let y;
+
+          player.board.forEach((pkm, id) => {
+            if ( pkm.index == pokemon.index && count >= 0) {
+              if (x !== undefined && y !== undefined) {
+                if (pkm.positionY >= y) {
+                  if (pkm.positionY !== undefined) {
+                    y = pkm.positionY;
+                  }
+                  if (pkm.positionX !== undefined) {
+                    x = pkm.positionX;
+                  }
+                }
+              } else {
+                if (pkm.positionY !== undefined) {
+                  y = pkm.positionY;
+                }
+                if (pkm.positionX !== undefined) {
+                  x = pkm.positionX;
+                }
+              }
+              const temp =pkm.items.getAllItems();
+              temp.forEach((el)=>{
+                itemsToAdd.push(el);
+              });
+              player.board.delete(id);
+              count -= 1;
+            }
+          });
+          const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName);
+          for (let i = 0; i < 3; i++) {
+            const itemToAdd = itemsToAdd.pop();
+            if (itemToAdd) {
+              pokemonEvolved.items.add(itemToAdd);
+            }
+          }
+          itemsToAdd.forEach( (item) =>{
+            player.stuff.add(item);
+          });
+          pokemonEvolved.positionX = x;
+          pokemonEvolved.positionY = y;
+          player.board.set(pokemonEvolved.id, pokemonEvolved);
+          evolve = true;
+        }
+      }
+    });
+
+    if (evolve) {
+      player.synergies.update(player.board);
+      player.effects.update(player.synergies);
+      player.boardSize = this.getTeamSize(player.board);
+    }
+    return evolve;
+  }
+
+  getNumberOfPlayersAlive(players) {
+    let numberOfPlayersAlive = 0;
+    players.forEach((player, key) => {
+      if (player.alive) {
+        numberOfPlayersAlive ++;
+      }
+    });
+    return numberOfPlayersAlive;
+  }
+
+  getBoardSize(board) {
+    let boardSize = 0;
+
+    board.forEach((pokemon, key) => {
+      if (pokemon.positionY == 0) {
+        boardSize ++;
+      }
+    });
+
+    return boardSize;
+  }
+
+  getBoardSizeWithoutDitto(board) {
+    let boardSize = 0;
+
+    board.forEach((pokemon, key) => {
+      if (pokemon.positionY == 0 && pokemon.name != PKM.DITTO) {
+        boardSize ++;
+      }
+    });
+
+    return boardSize;
+  }
+
+  getPossibleEvolution(board, name) {
+    let count = 0;
+
+    board.forEach((pokemon, key) => {
+      if (pokemon.name == name) {
+        count ++;
+      }
+    });
+    return (count >= 2);
+  }
+
+  getFirstPokemonOnBoard(board) {
+    let pkm;
+    let found = false;
+    board.forEach((pokemon, key) => {
+      if (pokemon.positionY == 0 && pokemon.name != PKM.DITTO && !found) {
+        found = true;
+        pkm = pokemon;
+      }
+    });
+    return pkm;
+  }
+
+  getTeamSize(board) {
+    let size = 0;
+
+    board.forEach((pokemon, key) => {
+      if (pokemon.positionY != 0) {
+        size ++;
+      }
+    });
+
+    return size;
   }
 }
 

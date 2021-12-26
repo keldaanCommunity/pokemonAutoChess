@@ -14,8 +14,8 @@ class OnShopCommand extends Command {
         const name = player.shop[index];
         const pokemon = PokemonFactory.createPokemonFromName(name);
 
-        if (player.money >= pokemon.cost && (UtilsCommand.getBoardSize(player.board) < 8 ||
-        (UtilsCommand.getPossibleEvolution(player.board, pokemon.name) && UtilsCommand.getBoardSize(player.board) == 8))) {
+        if (player.money >= pokemon.cost && (this.room.getBoardSize(player.board) < 8 ||
+        (this.room.getPossibleEvolution(player.board, pokemon.name) && this.room.getBoardSize(player.board) == 8))) {
           player.money -= pokemon.cost;
           pokemon.positionX = this.room.getFirstAvailablePositionInBoard(player.id);
           pokemon.positionY = 0;
@@ -26,7 +26,9 @@ class OnShopCommand extends Command {
           } else {
             player.shop[index] = '';
           }
-          return [new OnEvolutionCommand().setPayload(id), new OnEvolutionCommand().setPayload(id)];
+          this.room.updateEvolution(id);
+          this.room.updateEvolution(id);
+          console.log('end of shop command', name);
         }
       }
     }
@@ -91,7 +93,7 @@ class OnDragDropCommand extends Command {
               this.room.swap(playerId, pokemon, x, y);
               success = true;
             } else if (this.state.phase == STATE.PICK) {
-              const teamSize = UtilsCommand.getTeamSize(this.state.players.get(playerId).board);
+              const teamSize = this.room.getTeamSize(this.state.players.get(playerId).board);
               if (teamSize < this.state.players.get(playerId).experienceManager.level) {
                 this.room.swap(playerId, pokemon, x, y);
                 success = true;
@@ -113,7 +115,7 @@ class OnDragDropCommand extends Command {
           }
           this.state.players.get(playerId).synergies.update(this.state.players.get(playerId).board);
           this.state.players.get(playerId).effects.update(this.state.players.get(playerId).synergies);
-          this.state.players.get(playerId).boardSize = UtilsCommand.getTeamSize(this.state.players.get(playerId).board);
+          this.state.players.get(playerId).boardSize = this.room.getTeamSize(this.state.players.get(playerId).board);
         }
       }
       if (detail.objType == 'item') {
@@ -384,7 +386,7 @@ class OnDragDropCommand extends Command {
           if (evolve) {
             this.state.players.get(playerId).synergies.update(this.state.players.get(playerId).board);
             this.state.players.get(playerId).effects.update(this.state.players.get(playerId).synergies);
-            this.state.players.get(playerId).boardSize = UtilsCommand.getTeamSize(this.state.players.get(playerId).board);
+            this.state.players.get(playerId).boardSize = this.room.getTeamSize(this.state.players.get(playerId).board);
           }
         }
       }
@@ -393,7 +395,8 @@ class OnDragDropCommand extends Command {
       client.send('DragDropFailed', message);
     }
     if (dittoReplaced) {
-      return [new OnEvolutionCommand().setPayload(playerId), new OnEvolutionCommand().setPayload(playerId)];
+      this.room.updateEvolution(playerId);
+      this.room.updateEvolution(playerId);
     }
   }
 }
@@ -415,7 +418,7 @@ class OnSellDropCommand extends Command {
 
       player.synergies.update(player.board);
       player.effects.update(player.synergies);
-      player.boardSize = UtilsCommand.getTeamSize(player.board);
+      player.boardSize = this.room.getTeamSize(player.board);
     }
   }
 }
@@ -523,77 +526,6 @@ class OnUpdateCommand extends Command {
   }
 }
 
-class UtilsCommand extends Command {
-  static getNumberOfPlayersAlive(players) {
-    let numberOfPlayersAlive = 0;
-    players.forEach((player, key) => {
-      if (player.alive) {
-        numberOfPlayersAlive ++;
-      }
-    });
-    return numberOfPlayersAlive;
-  }
-
-  static getBoardSize(board) {
-    let boardSize = 0;
-
-    board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0) {
-        boardSize ++;
-      }
-    });
-
-    return boardSize;
-  }
-
-  static getBoardSizeWithoutDitto(board) {
-    let boardSize = 0;
-
-    board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.name != PKM.DITTO) {
-        boardSize ++;
-      }
-    });
-
-    return boardSize;
-  }
-
-  static getPossibleEvolution(board, name) {
-    let count = 0;
-
-    board.forEach((pokemon, key) => {
-      if (pokemon.name == name) {
-        count ++;
-      }
-    });
-    return (count >= 2);
-  }
-
-  static getFirstPokemonOnBoard(board) {
-    let pkm;
-    let found = false;
-    board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.name != PKM.DITTO && !found) {
-        found = true;
-        pkm = pokemon;
-      }
-    });
-    return pkm;
-  }
-
-  static getTeamSize(board) {
-    let size = 0;
-
-    board.forEach((pokemon, key) => {
-      if (pokemon.positionY != 0) {
-        size ++;
-      }
-    });
-
-    return size;
-  }
-}
-
 class OnUpdatePhaseCommand extends Command {
   execute() {
     if (this.state.phase == STATE.PICK) {
@@ -617,7 +549,7 @@ class OnUpdatePhaseCommand extends Command {
 
   checkEndGame() {
     const commands = [];
-    const numberOfPlayersAlive = UtilsCommand.getNumberOfPlayersAlive(this.state.players);
+    const numberOfPlayersAlive = this.room.getNumberOfPlayersAlive(this.state.players);
 
     if (numberOfPlayersAlive <= 1) {
       this.state.gameFinished = true;
@@ -797,15 +729,15 @@ class OnUpdatePhaseCommand extends Command {
     const commands = [];
 
     this.state.players.forEach((player, key) => {
-      const teamSize = UtilsCommand.getTeamSize(player.board);
+      const teamSize = this.room.getTeamSize(player.board);
       if (teamSize < player.experienceManager.level) {
         const numberOfPokemonsToMove = player.experienceManager.level - teamSize;
         for (let i = 0; i < numberOfPokemonsToMove; i++) {
-          const boardSize = UtilsCommand.getBoardSizeWithoutDitto(player.board);
+          const boardSize = this.room.getBoardSizeWithoutDitto(player.board);
           if (boardSize > 0) {
             const coordinate = this.room.getFirstAvailablePositionInTeam(player.id);
             const detail = {
-              'id': UtilsCommand.getFirstPokemonOnBoard(player.board).id,
+              'id': this.room.getFirstPokemonOnBoard(player.board).id,
               'x': coordinate[0],
               'y': coordinate[1],
               'objType': 'pokemon'
@@ -854,80 +786,6 @@ class OnUpdatePhaseCommand extends Command {
   }
 }
 
-class OnEvolutionCommand extends Command {
-  execute(id) {
-    let evolve = false;
-    const itemsToAdd = [];
-    const player = this.state.players.get(id);
-    player.board.forEach((pokemon, key) => {
-      let count = 0;
-      const pokemonEvolutionName = pokemon.evolution;
-
-      if (pokemonEvolutionName != '') {
-        player.board.forEach((pkm, id) => {
-          if ( pkm.index == pokemon.index) {
-            count += 1;
-          }
-        });
-
-        if (count == 3 || (pokemon.types.includes(TYPE.BUG) && count == 2 && player.effects.list.includes(EFFECTS.SWARM))) {
-          let x;
-          let y;
-
-          player.board.forEach((pkm, id) => {
-            if ( pkm.index == pokemon.index && count >= 0) {
-              if (x !== undefined && y !== undefined) {
-                if (pkm.positionY >= y) {
-                  if (pkm.positionY !== undefined) {
-                    y = pkm.positionY;
-                  }
-                  if (pkm.positionX !== undefined) {
-                    x = pkm.positionX;
-                  }
-                }
-              } else {
-                if (pkm.positionY !== undefined) {
-                  y = pkm.positionY;
-                }
-                if (pkm.positionX !== undefined) {
-                  x = pkm.positionX;
-                }
-              }
-              const temp =pkm.items.getAllItems();
-              temp.forEach((el)=>{
-                itemsToAdd.push(el);
-              });
-              player.board.delete(id);
-              count -= 1;
-            }
-          });
-          const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName);
-          for (let i = 0; i < 3; i++) {
-            const itemToAdd = itemsToAdd.pop();
-            if (itemToAdd) {
-              pokemonEvolved.items.add(itemToAdd);
-            }
-          }
-          itemsToAdd.forEach( (item) =>{
-            player.stuff.add(item);
-          });
-          pokemonEvolved.positionX = x;
-          pokemonEvolved.positionY = y;
-          player.board.set(pokemonEvolved.id, pokemonEvolved);
-          evolve = true;
-        }
-      }
-    });
-
-    if (evolve) {
-      player.synergies.update(player.board);
-      player.effects.update(player.synergies);
-      player.boardSize = UtilsCommand.getTeamSize(player.board);
-    }
-    return evolve;
-  }
-}
-
 module.exports = {
   OnShopCommand: OnShopCommand,
   OnDragDropCommand: OnDragDropCommand,
@@ -938,7 +796,6 @@ module.exports = {
   OnJoinCommand: OnJoinCommand,
   OnLeaveCommand: OnLeaveCommand,
   OnUpdateCommand: OnUpdateCommand,
-  OnEvolutionCommand: OnEvolutionCommand,
   OnUpdatePhaseCommand: OnUpdatePhaseCommand,
   OnItemCommand: OnItemCommand
 };
