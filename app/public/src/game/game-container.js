@@ -42,7 +42,6 @@ class GameContainer {
 
   initializeEvents() {
     this.room.onMessage('DragDropFailed', (message) => this.handleDragDropFailed(message));
-    this.room.onMessage('info', (message)=> this.handleServerInfo(message));
     this.room.onError((err) => console.log('room error', err));
   }
 
@@ -252,11 +251,6 @@ class GameContainer {
     }
   }
 
-  handleServerInfo(message) {
-    this.showPopup(message.title, message.info);
-    // this.game.scene.getScene('gameScene').showPopup(message);
-  }
-
   handleKickOut() {
     // console.log('kicked out');
 
@@ -278,22 +272,11 @@ class GameContainer {
   }
 
   onDragDrop(event) {
-    // this.showPopup('test', 'tues sanglier');
     this.room.send('dragDrop', {'detail': event.detail});
   }
 
   onSellDrop(event) {
     this.room.send('sellDrop', {'detail': event.detail});
-  }
-
-  showPopup(title, info) {
-    document.getElementById('modal-title').textContent = title;
-    document.getElementById('modal-info').textContent = info;
-    $('#modal-popup').modal();
-  }
-
-  closePopup() {
-    $('#modal-popup').modal('hide');
   }
 
   transformToSimplePlayer(player) {

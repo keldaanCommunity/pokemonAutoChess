@@ -4,7 +4,6 @@ import GameContainer from '../game/game-container';
 import firebase from 'firebase/compat/app';
 import { FIREBASE_CONFIG } from './utils/utils';
 import { Client } from 'colyseus.js';
-import Modal from './component/modal';
 import GameShop from './component/game-shop';
 import GameInformations from './component/game-informations';
 import GamePlayers from './component/game-players';
@@ -14,6 +13,7 @@ import GameDpsMeter from './component/game-dps-meter';
 import GameSynergies from './component/game-synergies';
 import GameRarityPercentage from './component/game-rarity-percentage';
 import GameItemsProposition from './component/game-items-proposition';
+import GameModal from './component/game-modal';
 
 class Game extends Component {
 
@@ -24,6 +24,9 @@ class Game extends Component {
         this.container = React.createRef();
 
         this.state = {
+          modalBoolean: false,
+          modalTitle: '',
+          modalInfo: '',
           dpsMeter: {},
           afterGameId: '',
           isSignedIn: false,
@@ -130,6 +133,8 @@ class Game extends Component {
         connected:true
       });
 
+      this.room.onMessage('info', (message)=> this.showModal(message.title, message.info));
+
       this.room.state.players.onAdd = (player) => {
         this.gameContainer.initializePlayer(player);
         player.onChange = ((changes) => {
@@ -152,7 +157,7 @@ class Game extends Component {
                 let rankPhrase = `${WORDS.PLACE['eng']} no ${player.rank}`;
                 let titlePhrase = WORDS.RANKING['eng'];
                 if(!change.value){
-                this.gameContainer.showPopup(titlePhrase, rankPhrase);
+                this.showModal(titlePhrase, rankPhrase);
                 }
             }
           });
@@ -295,10 +300,6 @@ class Game extends Component {
       this.gameContainer = new GameContainer(this.container.current, this.uid, this.room);
       document.getElementById('game').addEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').addEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
-      document.getElementById('leave-button').addEventListener('click', ()=>{
-        this.gameContainer.closePopup();
-        setTimeout(this.leaveGame.bind(this), 500);
-      });
     }
 
     leaveGame(){
@@ -322,11 +323,25 @@ class Game extends Component {
       });
     }
 
+
+    showModal(title, info){
+      this.setState({
+        modalTitle: title,
+        modalInfo: info,
+        modalBoolean: true
+      });
+    };
+
+
+    hideModal(){
+      this.setState({
+        modalBoolean: false
+      });
+    };
+
     removeEventListeners(){
-      this.gameContainer.closePopup();
       document.getElementById('game').removeEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
       document.getElementById('game').removeEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
-      document.getElementById('leave-button').removeEventListener('click', this.leaveGame.bind(this));
     }
 
     reconnect(){
@@ -394,7 +409,14 @@ class Game extends Component {
     }
     else{
       return <div>
-        <Modal/>
+        <GameModal
+          modalBoolean={this.state.modalBoolean}
+          showModal={this.showModal.bind(this)}
+          hideModal={this.hideModal.bind(this)}
+          title={this.state.modalTitle}
+          info={this.state.modalInfo}
+          leave={this.leaveGame.bind(this)}
+        />
         <GameShop 
             levelExp={this.state.experienceManager.level} 
             experience={this.state.experienceManager.experience} 

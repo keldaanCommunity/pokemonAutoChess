@@ -27,7 +27,7 @@ class Player extends Schema {
       synergies: new Synergies(),
       effects: new Effects(),
       money: process.env.MODE == 'dev' ? 50 : 5,
-      life: 100,
+      life: process.env.MODE == 'dev' ? 10 : 100,
       simulation: new Simulation(specialCells, mapType),
       shopLocked: false,
       streak: 0,
