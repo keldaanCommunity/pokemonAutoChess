@@ -360,14 +360,12 @@ class PokemonState {
     for (let i = 0; i < pokemons.length; i++) {
       const p = pokemons[i];
       const around = board.getAdjacentCells(p.x, p.y);
-      const manhattanAround = around.filter((e)=>{
-        return board.distance(e.row, e.column, p.x, p.y) == 1;
-      });
-      manhattanAround.sort((a, b)=>{
+
+      around.sort((a, b)=>{
         return board.distance(b.row, b.column, pokemon.positionX, pokemon.positionY) -
         board.distance(a.row, a.column, pokemon.positionX, pokemon.positionY);
       });
-      manhattanAround.forEach((cell) => {
+      around.forEach((cell) => {
         if (!cell.value && x === undefined && y === undefined) {
           x = cell.row;
           y = cell.column;

@@ -17,7 +17,7 @@ export default class PokemonDetail extends GameObjects.Container {
     this.greenTextStyle= {
       fontSize: '20px',
       fontFamily: '\'Press Start 2P\'',
-      color: '#00FF00'
+      color: '#377a23'
     };
     this.redTextStyle= {
       fontSize: '20px',
