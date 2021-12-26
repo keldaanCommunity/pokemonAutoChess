@@ -1140,7 +1140,6 @@ const EFFECTS = Object.freeze({
   ICE: 'ICE',
   SNOW: 'SNOW',
   SHEER_COLD: 'SHEER_COLD',
-  HISTORIC_POWER: 'HISTORIC_POWER',
   ANCIENT_POWER: 'ANCIENT_POWER',
   ELDER_POWER: 'ELDER_POWER',
   UNOWN_GATHERINGS: 'UNOWN_GATHERINGS'
@@ -1467,23 +1466,18 @@ const EFFECTS_ICON = Object.freeze({
     positive: true,
     type: TYPE.ICE
   },
-  HISTORIC_POWER: {
+  ANCIENT_POWER: {
     level: 1,
     positive: true,
     type: TYPE.FOSSIL
   },
-  ANCIENT_POWER: {
+  ELDER_POWER: {
     level: 2,
     positive: true,
     type: TYPE.FOSSIL
   },
-  ELDER_POWER: {
-    level: 3,
-    positive: true,
-    type: TYPE.FOSSIL
-  },
   UNOWN_GATHERINGS: {
-    level: 4,
+    level: 3,
     positive: true,
     type: TYPE.FOSSIL
   }
@@ -3507,10 +3501,6 @@ const TYPE_DETAILS = Object.freeze({
     description: {
       eng: [
         {
-          trigger: 2,
-          title: `(2) Historic Power`,
-          text: `+20% Crit Chance and +40% Crit Damage.`
-        }, {
           trigger: 4,
           title: `(4) Ancient Power`,
           text: `+40% Crit Chance and +80% Crit Damage`
@@ -3590,7 +3580,7 @@ const TYPE_TRIGGER = {
   AMORPH: [2, 4],
   FAIRY: [2, 4],
   ICE: [2, 4],
-  FOSSIL: [2, 4, 6, 8]
+  FOSSIL: [2, 4, 6]
 };
 
 const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];

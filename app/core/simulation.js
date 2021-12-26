@@ -425,14 +425,6 @@ class Simulation extends Schema {
           }
           break;
 
-        case EFFECTS.HISTORIC_POWER:
-          if (types.includes(TYPE.FOSSIL)) {
-            pokemon.critChance += 20;
-            pokemon.critDamage += 0.4;
-            pokemon.effects.push(EFFECTS.HISTORIC_POWER);
-          }
-          break;
-
         case EFFECTS.ANCIENT_POWER:
           if (types.includes(TYPE.FOSSIL)) {
             pokemon.critChance += 40;
