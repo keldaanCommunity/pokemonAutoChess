@@ -9,6 +9,7 @@ class PokemonDetail extends Component {
         <div style={{display: 'flex'}}>
             <div style={{width: '30%'}}>
                 <p>name:{pokemon.name}</p>
+                <p>sprite author:{pokemon.author}</p>
                 <p style={{color:RARITY_COLOR[pokemon.rarity]}}>rarity:{pokemon.rarity}</p>
                 <div>
                     types:{pokemon.types.map(type=>{

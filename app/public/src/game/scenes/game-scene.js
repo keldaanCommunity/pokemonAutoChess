@@ -105,8 +105,6 @@ export default class GameScene extends Scene {
     this.load.image('PHYSICAL', '/assets/types/PHYSICAL.png');
     this.load.image('SPECIAL', '/assets/types/SPECIAL.png');
     this.load.image('TRUE', '/assets/types/TRUE.png');
-    this.load.image('detail', '/assets/ui/detail.png', '/assets/ui');
-    this.load.image('littleDetail', '/assets/ui/detail-little.png', '/assets/ui');
     this.load.multiatlas('sleep', '/assets/pokemons/sleep/sleep.json', '/assets/pokemons/sleep');
     this.load.multiatlas('snowflakes', '/assets/ui/snowflakes.json', '/assets/ui/');
     this.load.multiatlas('status', '/assets/status/status.json', '/assets/status/');

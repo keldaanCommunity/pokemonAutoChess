@@ -3,9 +3,9 @@ const Mongoose = require('mongoose');
 const Bot = require('../app/models/mongo-models/bot');
 
 const data = `{
-  "avatar": "cresselia",
-  "elo": 1000,
-  "author": "D L",
+  "avatar": "croconaw",
+  "elo": 711,
+  "author": "Thud",
   "steps": [
     {
       "board": [
@@ -28,80 +28,66 @@ const data = `{
       "board": [
         {
           "items": [],
-          "name": "weedle",
-          "x": 4,
-          "y": 1
-        },
-        {
-          "items": [],
-          "name": "caterpie",
+          "name": "metapod",
           "x": 3,
           "y": 1
         },
         {
-          "items": [],
-          "name": "eevee",
-          "x": 4,
-          "y": 2
+          "name": "kakuna",
+          "x": 3,
+          "y": 3
         }
       ],
       "roundsRequired": 1
     },
     {
       "board": [
-        {
-          "items": [],
-          "name": "bellsprout",
-          "x": 5,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "eevee",
-          "x": 4,
-          "y": 2
-        },
         {
           "items": [],
           "name": "metapod",
           "x": 5,
-          "y": 2
+          "y": 1
         },
         {
           "items": [],
           "name": "kakuna",
           "x": 4,
-          "y": 3
+          "y": 2
+        },
+        {
+          "name": "totodile",
+          "x": 5,
+          "y": 2,
+          "items": [
+            "SHELL_BELL"
+          ]
         }
       ],
-      "roundsRequired": 3
+      "roundsRequired": 2
     },
     {
       "board": [
         {
-          "items": [],
+          "name": "totodile",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
           "name": "butterfree",
-          "x": 4,
+          "x": 5,
           "y": 2
         },
         {
-          "items": [],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [],
-          "name": "kakuna",
-          "x": 4,
+          "name": "beedrill",
+          "x": 5,
           "y": 3
         },
         {
-          "items": [
-            "BIG_ROOT"
-          ],
           "name": "slowpoke",
-          "x": 3,
+          "x": 6,
           "y": 3
         }
       ],
@@ -110,114 +96,27 @@ const data = `{
     {
       "board": [
         {
-          "items": [],
-          "name": "butterfree",
+          "name": "croconaw",
           "x": 4,
-          "y": 2
-        },
-        {
-          "items": [],
-          "name": "espeon",
-          "x": 2,
-          "y": 2
-        },
-        {
+          "y": 3,
           "items": [
-            "METRONOME"
-          ],
-          "name": "abra",
-          "x": 3,
-          "y": 3
+            "SHELL_BELL"
+          ]
         },
         {
-          "items": [
-            "BIG_ROOT"
-          ],
           "name": "slowpoke",
-          "x": 2,
+          "x": 6,
           "y": 3
         },
         {
-          "items": [],
-          "name": "kakuna",
-          "x": 4,
-          "y": 3
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "items": [],
           "name": "butterfree",
-          "x": 4,
-          "y": 2
-        },
-        {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "abra",
-          "x": 3,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowbro",
-          "x": 2,
-          "y": 3
-        },
-        {
-          "name": "ralts",
-          "x": 1,
-          "y": 1
-        }
-      ],
-      "roundsRequired": 1
-    },
-    {
-      "board": [
-        {
-          "items": [],
-          "name": "butterfree",
-          "x": 4,
-          "y": 2
-        },
-        {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "abra",
-          "x": 3,
-          "y": 3
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowbro",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "name": "kirlia",
           "x": 5,
-          "y": 1
+          "y": 2
+        },
+        {
+          "name": "beedrill",
+          "x": 5,
+          "y": 3
         }
       ],
       "roundsRequired": 2
@@ -225,49 +124,375 @@ const data = `{
     {
       "board": [
         {
-          "items": [],
+          "name": "croconaw",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "slowpoke",
+          "x": 6,
+          "y": 3
+        },
+        {
           "name": "butterfree",
-          "x": 4,
-          "y": 2
-        },
-        {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "abra",
-          "x": 3,
-          "y": 3
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowbro",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [],
-          "name": "beldum",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "kirlia",
           "x": 5,
           "y": 2
         },
         {
-          "items": [],
-          "name": "espeon",
+          "name": "beedrill",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "spheal",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "croconaw",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "slowpoke",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "name": "butterfree",
+          "x": 5,
+          "y": 2
+        },
+        {
+          "name": "vibrava",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "spheal",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "croconaw",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "dratini",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "name": "butterfree",
+          "x": 5,
+          "y": 2
+        },
+        {
+          "name": "vibrava",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "spheal",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "croconaw",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "dratini",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "name": "butterfree",
+          "x": 5,
+          "y": 2
+        },
+        {
+          "name": "flygon",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "sealeo",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "croconaw",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "dratini",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "name": "butterfree",
+          "x": 5,
+          "y": 2
+        },
+        {
+          "name": "flygon",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "sealeo",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "lapras",
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "croconaw",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "dratini",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "name": "butterfree",
+          "x": 5,
+          "y": 2
+        },
+        {
+          "name": "flygon",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "sealeo",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "lapras",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "BLUE_ORB"
+          ]
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "croconaw",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "dragonair",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "name": "butterfree",
+          "x": 5,
+          "y": 2
+        },
+        {
+          "name": "flygon",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "sealeo",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "lapras",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "BLUE_ORB"
+          ]
+        },
+        {
+          "name": "horsea",
+          "x": 3,
+          "y": 2
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "croconaw",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "dragonair",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "name": "flygon",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "sealeo",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "lapras",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "BLUE_ORB"
+          ]
+        },
+        {
+          "name": "seadra",
           "x": 3,
           "y": 2
         },
         {
-          "name": "cresselia",
+          "name": "gible",
           "x": 2,
+          "y": 3
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "feraligatr",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "dragonair",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "name": "flygon",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "sealeo",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "lapras",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "BLUE_ORB"
+          ]
+        },
+        {
+          "name": "seadra",
+          "x": 3,
           "y": 2
+        },
+        {
+          "name": "gabite",
+          "x": 2,
+          "y": 3
         }
       ],
       "roundsRequired": 3
@@ -275,50 +500,228 @@ const data = `{
     {
       "board": [
         {
-          "items": [],
-          "name": "butterfree",
+          "name": "feraligatr",
           "x": 4,
-          "y": 2
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
         },
         {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "kadabra",
-          "x": 3,
+          "name": "dragonair",
+          "x": 6,
           "y": 3
         },
         {
-          "items": [],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowbro",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [
-            "ROCKY_HELMET"
-          ],
-          "name": "beldum",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "kirlia",
+          "name": "flygon",
           "x": 5,
+          "y": 3
+        },
+        {
+          "name": "sealeo",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "kyogre",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "BLUE_ORB"
+          ]
+        },
+        {
+          "name": "seadra",
+          "x": 3,
           "y": 2
         },
         {
-          "items": [],
-          "name": "cresselia",
+          "name": "gabite",
+          "x": 2,
+          "y": 3
+        },
+        {
+          "name": "lapras",
+          "x": 1,
+          "y": 3
+        }
+      ],
+      "roundsRequired": 3
+    },
+    {
+      "board": [
+        {
+          "name": "feraligatr",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "dragonair",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "name": "flygon",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "walrein",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "kyogre",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "BLUE_ORB"
+          ]
+        },
+        {
+          "name": "seadra",
+          "x": 3,
+          "y": 2
+        },
+        {
+          "name": "gabite",
+          "x": 2,
+          "y": 3
+        },
+        {
+          "name": "lapras",
+          "x": 1,
+          "y": 3,
+          "items": [
+            "ASSAULT_VEST"
+          ]
+        }
+      ],
+      "roundsRequired": 3
+    },
+    {
+      "board": [
+        {
+          "name": "feraligatr",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "dragonair",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "name": "flygon",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "walrein",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "kyogre",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "BLUE_ORB"
+          ]
+        },
+        {
+          "name": "kingdra",
+          "x": 3,
+          "y": 2
+        },
+        {
+          "name": "gabite",
+          "x": 2,
+          "y": 3
+        },
+        {
+          "name": "lapras",
+          "x": 1,
+          "y": 3,
+          "items": [
+            "ASSAULT_VEST"
+          ]
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "feraligatr",
+          "x": 4,
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
+        },
+        {
+          "name": "dragonair",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "name": "flygon",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "name": "walrein",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "kyogre",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "BLUE_ORB"
+          ]
+        },
+        {
+          "name": "kingdra",
+          "x": 3,
+          "y": 2
+        },
+        {
+          "name": "gabite",
+          "x": 2,
+          "y": 3
+        },
+        {
+          "name": "lapras",
+          "x": 1,
+          "y": 3,
+          "items": [
+            "ASSAULT_VEST",
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "deino",
           "x": 2,
           "y": 2
         }
@@ -328,52 +731,60 @@ const data = `{
     {
       "board": [
         {
-          "items": [],
-          "name": "magnemite",
+          "name": "feraligatr",
           "x": 4,
-          "y": 2
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
         },
         {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "kadabra",
-          "x": 3,
+          "name": "dragonair",
+          "x": 6,
           "y": 3
         },
         {
-          "items": [],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowbro",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [
-            "ROCKY_HELMET"
-          ],
-          "name": "beldum",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "kirlia",
+          "name": "flygon",
           "x": 5,
+          "y": 3
+        },
+        {
+          "name": "walrein",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "kyogre",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "BLUE_ORB"
+          ]
+        },
+        {
+          "name": "kingdra",
+          "x": 3,
           "y": 2
         },
         {
+          "name": "garchomp",
+          "x": 2,
+          "y": 3
+        },
+        {
+          "name": "lapras",
+          "x": 1,
+          "y": 3,
           "items": [
-            "DAWN_STONE"
-          ],
-          "name": "cresselia",
+            "ASSAULT_VEST",
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "zweilous",
           "x": 2,
           "y": 2
         }
@@ -383,589 +794,65 @@ const data = `{
     {
       "board": [
         {
-          "items": [],
-          "name": "magneton",
+          "name": "feraligatr",
           "x": 4,
-          "y": 2
+          "y": 3,
+          "items": [
+            "SHELL_BELL"
+          ]
         },
         {
+          "name": "dragonite",
+          "x": 6,
+          "y": 3,
           "items": [
             "METRONOME"
-          ],
-          "name": "kadabra",
-          "x": 3,
-          "y": 3
+          ]
         },
         {
-          "items": [],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "DAWN_STONE"
-          ],
-          "name": "cresselia",
-          "x": 2,
-          "y": 2
-        },
-        {
-          "items": [
-            "ROCKY_HELMET"
-          ],
-          "name": "beldum",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "kirlia",
+          "name": "flygon",
           "x": 5,
+          "y": 3
+        },
+        {
+          "name": "walrein",
+          "x": 3,
+          "y": 3,
+          "items": [
+            "ICY_ROCK"
+          ]
+        },
+        {
+          "name": "kyogre",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "BLUE_ORB"
+          ]
+        },
+        {
+          "name": "kingdra",
+          "x": 3,
           "y": 2
         },
         {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowbro",
+          "name": "garchomp",
+          "x": 2,
+          "y": 3
+        },
+        {
+          "name": "lapras",
           "x": 1,
-          "y": 2
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "items": [],
-          "name": "magneton",
-          "x": 4,
-          "y": 2
-        },
-        {
+          "y": 3,
           "items": [
-            "METRONOME"
-          ],
-          "name": "kadabra",
-          "x": 3,
-          "y": 3
+            "ASSAULT_VEST",
+            "ICY_ROCK"
+          ]
         },
         {
-          "items": [],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "DAWN_STONE"
-          ],
-          "name": "cresselia",
+          "name": "zweilous",
           "x": 2,
           "y": 2
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowbro",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [
-            "ROCKY_HELMET"
-          ],
-          "name": "metang",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "kirlia",
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "roundsRequired": 4
-    },
-    {
-      "board": [
-        {
-          "items": [],
-          "name": "magneton",
-          "x": 4,
-          "y": 2
-        },
-        {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "kadabra",
-          "x": 3,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "DAWN_STONE"
-          ],
-          "name": "cresselia",
-          "x": 2,
-          "y": 2
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowking",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [],
-          "name": "kirlia",
-          "x": 5,
-          "y": 2
-        },
-        {
-          "items": [
-            "ROCKY_HELMET",
-            "ASSAULT_VEST"
-          ],
-          "name": "metang",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "name": "solosis",
-          "x": 4,
-          "y": 1
-        }
-      ],
-      "roundsRequired": 2
-    },
-    {
-      "board": [
-        {
-          "items": [],
-          "name": "magneton",
-          "x": 4,
-          "y": 2
-        },
-        {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "kadabra",
-          "x": 3,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "DAWN_STONE"
-          ],
-          "name": "cresselia",
-          "x": 2,
-          "y": 2
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowking",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [
-            "ROCKY_HELMET",
-            "ASSAULT_VEST"
-          ],
-          "name": "metang",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "kirlia",
-          "x": 5,
-          "y": 2
-        },
-        {
-          "items": [],
-          "name": "solosis",
-          "x": 4,
-          "y": 1
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "items": [],
-          "name": "magneton",
-          "x": 4,
-          "y": 2
-        },
-        {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "alakazam",
-          "x": 3,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "DAWN_STONE"
-          ],
-          "name": "cresselia",
-          "x": 2,
-          "y": 2
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowking",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [
-            "ROCKY_HELMET",
-            "ASSAULT_VEST"
-          ],
-          "name": "metang",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "duosion",
-          "x": 4,
-          "y": 1
-        },
-        {
-          "items": [],
-          "name": "kirlia",
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "items": [],
-          "name": "magnezone",
-          "x": 4,
-          "y": 2
-        },
-        {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "alakazam",
-          "x": 3,
-          "y": 3
-        },
-        {
-          "items": [
-            "ORAN_BERRY"
-          ],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "DAWN_STONE"
-          ],
-          "name": "cresselia",
-          "x": 2,
-          "y": 2
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowking",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [],
-          "name": "onix",
-          "x": 2,
-          "y": 3
-        },
-        {
-          "items": [
-            "ROCKY_HELMET",
-            "ASSAULT_VEST"
-          ],
-          "name": "metang",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "duosion",
-          "x": 4,
-          "y": 1
-        },
-        {
-          "items": [],
-          "name": "kirlia",
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "items": [],
-          "name": "magnezone",
-          "x": 4,
-          "y": 2
-        },
-        {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "alakazam",
-          "x": 3,
-          "y": 3
-        },
-        {
-          "items": [
-            "ORAN_BERRY"
-          ],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "DAWN_STONE"
-          ],
-          "name": "cresselia",
-          "x": 2,
-          "y": 2
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowking",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [],
-          "name": "steelix",
-          "x": 2,
-          "y": 3
-        },
-        {
-          "items": [
-            "ROCKY_HELMET",
-            "ASSAULT_VEST"
-          ],
-          "name": "metang",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "duosion",
-          "x": 4,
-          "y": 1
-        },
-        {
-          "items": [],
-          "name": "kirlia",
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "items": [],
-          "name": "magnezone",
-          "x": 4,
-          "y": 2
-        },
-        {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "alakazam",
-          "x": 3,
-          "y": 3
-        },
-        {
-          "items": [
-            "ORAN_BERRY"
-          ],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "DAWN_STONE"
-          ],
-          "name": "cresselia",
-          "x": 2,
-          "y": 2
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowking",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [],
-          "name": "steelix",
-          "x": 2,
-          "y": 3
-        },
-        {
-          "items": [
-            "ROCKY_HELMET",
-            "ASSAULT_VEST"
-          ],
-          "name": "metagross",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "items": [],
-          "name": "duosion",
-          "x": 4,
-          "y": 1
-        },
-        {
-          "items": [],
-          "name": "kirlia",
-          "x": 2,
-          "y": 1
-        },
-        {
-          "items": [],
-          "name": "jirachi",
-          "x": 1,
-          "y": 1
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "items": [],
-          "name": "magnezone",
-          "x": 4,
-          "y": 2
-        },
-        {
-          "items": [
-            "METRONOME"
-          ],
-          "name": "alakazam",
-          "x": 3,
-          "y": 3
-        },
-        {
-          "items": [
-            "ORAN_BERRY"
-          ],
-          "name": "espeon",
-          "x": 3,
-          "y": 2
-        },
-        {
-          "items": [
-            "DAWN_STONE"
-          ],
-          "name": "cresselia",
-          "x": 2,
-          "y": 2
-        },
-        {
-          "items": [
-            "BIG_ROOT"
-          ],
-          "name": "slowking",
-          "x": 1,
-          "y": 2
-        },
-        {
-          "items": [],
-          "name": "steelix",
-          "x": 2,
-          "y": 3
-        },
-        {
-          "items": [
-            "ROCKY_HELMET",
-            "ASSAULT_VEST"
-          ],
-          "name": "metagross",
-          "x": 4,
-          "y": 3
-        },
-        {
-          "items": [
-            "WONDER_BOX",
-            "RAZOR_CLAW"
-          ],
-          "name": "jirachi",
-          "x": 1,
-          "y": 1
-        },
-        {
-          "items": [],
-          "name": "gardevoir",
-          "x": 2,
-          "y": 1
-        },
-        {
-          "items": [],
-          "name": "duosion",
-          "x": 4,
-          "y": 1
         }
       ],
       "roundsRequired": 3

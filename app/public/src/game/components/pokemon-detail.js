@@ -32,12 +32,7 @@ export default class PokemonDetail extends GameObjects.Container {
       wordWrap: {width: 400, useAdvancedWrap: true}
     };
 
-    let displayName;
-    if (window.langage == 'fra') {
-      displayName = this.pokemonInformation.frenchName.charAt(0).toUpperCase() + this.pokemonInformation.frenchName.slice(1);
-    } else {
-      displayName = this.pokemonInformation.name.charAt(0).toUpperCase() + this.pokemonInformation.name.slice(1);
-    }
+    let displayName = this.pokemonInformation.name.charAt(0).toUpperCase() + this.pokemonInformation.name.slice(1);
 
     this.objType = 'detail';
     this.add(new GameObjects.Rectangle(scene, 360, 100, 720, 200, 0xffffff, 0.7).setStrokeStyle(3, 0x000000, 1));
@@ -71,8 +66,9 @@ export default class PokemonDetail extends GameObjects.Container {
     this.mana = new GameObjects.Text(scene, 10, 150, this.pokemonInformation.maxMana, this.textStyle);
     this.add(this.mana);
     this.add(new GameObjects.Image(scene, 100, 160, 'icons', 'mana').setScale(2, 2));
-    this.add(new GameObjects.Text(scene, 380, 15, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].title[window.langage], this.titleTextStyle));
+    this.add(new GameObjects.Text(scene, 230, 15, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].title[window.langage], this.titleTextStyle));
     this.add(new GameObjects.Text(scene, 230, 40, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].description[window.langage], this.textStyle));
+    this.add(new GameObjects.Text(scene, 230, 175, 'by @' + this.pokemonInformation.author, this.textStyle));
   }
 
 
