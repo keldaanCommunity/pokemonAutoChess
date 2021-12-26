@@ -326,6 +326,16 @@ class PokemonState {
           x = r;
           y = c;
         }
+        else if(candidateDistance == distance){
+          if(pokemon.team == 0 && c > y){
+            x = r;
+            y = c;
+          }
+          else if(pokemon.team == 1 && c < y){
+            x = r;
+            y = c;
+          }
+        }
       }
     });
     return [x, y];

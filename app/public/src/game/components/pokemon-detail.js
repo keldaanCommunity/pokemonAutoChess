@@ -17,12 +17,12 @@ export default class PokemonDetail extends GameObjects.Container {
     this.greenTextStyle= {
       fontSize: '20px',
       fontFamily: '\'Press Start 2P\'',
-      color: '#013220'
+      color: '#00FF00'
     };
     this.redTextStyle= {
       fontSize: '20px',
       fontFamily: '\'Press Start 2P\'',
-      color: '#991701'
+      color: '#FF0000'
     };
     this.titleTextStyle = {
       fontSize: '20px',
@@ -36,7 +36,7 @@ export default class PokemonDetail extends GameObjects.Container {
 
     this.objType = 'detail';
     this.add(new GameObjects.Rectangle(scene, 360, 100, 720, 200, 0xffffff, 0.7).setStrokeStyle(3, 0x000000, 1));
-    this.add(new GameObjects.Text(scene, 45, 15, displayName, this.greenTextStyle));
+    this.add(new GameObjects.Text(scene, 45, 15, displayName, this.titleTextStyle));
     this.add(new GameObjects.Image(scene, 22, 22, this.pokemonInformation.sheet, `${this.pokemonInformation.index}/portrait`));
     for (let i = 0; i < this.pokemonInformation.types.length; i++) {
       this.add(new GameObjects.Image(scene, 40*i +25, 60, 'types', this.pokemonInformation.types[i]));
