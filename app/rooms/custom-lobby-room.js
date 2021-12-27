@@ -324,6 +324,65 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
               }
               break;
 
+            case 'archen':
+              if (lvl >= 26) {
+                changeNeeded = true;
+              }
+              break;
+
+            case 'tirtouga':
+            if (lvl >= 27) {
+                changeNeeded = true;
+              }
+              break;
+
+            case 'omanyte':
+              if (lvl >= 28) {
+                changeNeeded = true;
+              }
+              break;
+
+            case 'kabuto':
+            if (lvl >= 29) {
+              changeNeeded = true;
+            }
+            break;
+
+            case 'lileep':
+            if (lvl >= 30) {
+              changeNeeded = true;
+            }
+            break;
+
+            case 'shieldon':
+            if (lvl >= 31) {
+              changeNeeded = true;
+            }
+            break;
+
+            case 'amaura':
+            if (lvl >= 32) {
+              changeNeeded = true;
+            }
+            break;
+
+            case 'tyrunt':
+            if (lvl >= 33) {
+              changeNeeded = true;
+            }
+            break;
+
+            case 'cranidos':
+            if (lvl >= 34) {
+            changeNeeded = true;
+            }
+            break;
+            case 'aerodactyl':
+            if (lvl >= 35) {
+              changeNeeded = true;
+            }
+            break;
+
             case 'trapinch':
               if (mapWin.GROUND >= 5) {
                 changeNeeded = true;
