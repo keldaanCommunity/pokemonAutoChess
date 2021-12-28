@@ -31,7 +31,7 @@ pastebin.getPaste(id, false).then((data)=>{
         console.log(`creating bot ${json.avatar}...`);
         Bot.create({
           avatar: json.avatar,
-          elo: 1000,
+          elo: 1200,
           author: json.author,
           steps: json.steps
         });
