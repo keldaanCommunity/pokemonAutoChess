@@ -3501,16 +3501,16 @@ const TYPE_DETAILS = Object.freeze({
     description: {
       eng: [
         {
-          trigger: 4,
-          title: `(4) Ancient Power`,
+          trigger: 2,
+          title: `(2) Ancient Power`,
           text: `+40% Crit Chance and +80% Crit Damage`
         }, {
-          trigger: 6,
-          title: `(6) Elder Power`,
+          trigger: 4,
+          title: `(4) Elder Power`,
           text: `+70% Crit Chance and +140% Crit Damage`
         }, {
-          trigger: 8,
-          title: `(8) Unown Gatherings`,
+          trigger: 6,
+          title: `(6) Unown Gatherings`,
           text: `+100% Crit Chance and +250% Crit Damage`
         }
       ],
