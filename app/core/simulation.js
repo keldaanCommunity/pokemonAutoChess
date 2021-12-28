@@ -408,6 +408,7 @@ class Simulation extends Schema {
           if (types.includes(TYPE.DARK) && pokemon.items.length != 0) {
             pokemon.atk += 4 * pokemon.items.length;
             pokemon.shield += 20 * pokemon.items.length;
+            pokemon.effects.push(EFFECTS.HONE_CLAWS);
           }
           break;
 
@@ -415,6 +416,7 @@ class Simulation extends Schema {
           if (types.includes(TYPE.DARK) && pokemon.items.length != 0) {
             pokemon.atk += 7 * pokemon.items.length;
             pokemon.shield += 30 * pokemon.items.length;
+            pokemon.effects.push(EFFECTS.ASSURANCE);
           }
           break;
 
@@ -422,6 +424,7 @@ class Simulation extends Schema {
           if (types.includes(TYPE.DARK) && pokemon.items.length != 0) {
             pokemon.atk += 10 * pokemon.items.length;
             pokemon.shield += 50 * pokemon.items.length;
+            pokemons.effects.push(EFFECTS.BEAT_UP);
           }
           break;
 
