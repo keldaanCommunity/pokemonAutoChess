@@ -1835,7 +1835,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Fulmigraine'
     },
     description: {
-      eng: 'Shaymins body emits a shock wave, dealing 30 magic damage to all ennemies, and decreasing their spedef by 2.',
+      eng: 'Shaymins body emits a shock wave, dealing 30 magic damage to all ennemies, and decreasing their special defense by 2.',
       esp: 'El cuerpo de Shaymin emite una onda de choque que inflige 30 de daño mágico a todos los enemigos y reduce su velocidad en 2.',
       fra: 'Le corps de Shaymin émet une onde de choc, infligeant 30 dégâts magiques à tous les ennemis et réduisant leur vitesse de 2.'
     }

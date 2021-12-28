@@ -194,7 +194,7 @@ class SeedFlareStrategy extends AttackStrategy {
 
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team) {
-        tg.speDef -= 1;
+        tg.speDef -= 2;
         tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
     });
