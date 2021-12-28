@@ -126,7 +126,7 @@ class OnAddBotCommand extends Command {
 
 class OnRemoveBotCommand extends Command {
   execute() {
-    console.log('remove bot');
+    //console.log('remove bot');
     let botFound = false;
     this.state.users.forEach((user, key) => {
       if (user.isBot && !botFound) {

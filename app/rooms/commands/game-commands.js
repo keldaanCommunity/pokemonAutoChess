@@ -28,7 +28,7 @@ class OnShopCommand extends Command {
           }
           this.room.updateEvolution(id);
           this.room.updateEvolution(id);
-          console.log('end of shop command', name);
+          //console.log('end of shop command', name);
         }
       }
     }
