@@ -32,7 +32,8 @@ class Search extends Component{
 
             <div style={{display:'flex', alignItems: 'center', marginTop: '30px'}}>
                 <img src={"/assets/avatar/" + this.props.user.avatar + ".png"}/>
-                <h5>{this.props.user.name} (<Elo elo={this.props.user.elo}/>)</h5>
+                <h5>{this.props.user.name}</h5>
+                <Elo elo={this.props.user.elo}/>
             </div>
             <p>Level {this.props.user.level} ({this.props.user.exp} / {XP_TABLE[this.props.user.level]})</p>
             <p>Wins: {this.props.user.wins}</p>
