@@ -63,7 +63,9 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
 
     this.onMessage('new-message', (client, message) => {
-      this.state.addMessage(message.name, message.payload, message.avatar, Date.now(), true);
+      if(message.payload != ''){
+        this.state.addMessage(message.name, message.payload, message.avatar, Date.now(), true);
+      }
     });
 
     this.onMessage('bot-creation', (client, message)=>{

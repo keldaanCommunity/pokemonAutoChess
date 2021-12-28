@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Elo from './elo';
 
 class BotLeaderboard extends Component{
     render(){
@@ -22,7 +23,7 @@ class BotLeaderboard extends Component{
         return <tr key={bot.avatar}>
             <td> <img src={"assets/avatar/" + bot.avatar + ".png"} /> </td>
             <td>{bot.avatar} (@{bot.author})</td>
-            <td>{bot.elo}</td>
+            <td><Elo elo={bot.elo}/></td>
         </tr>;
     }
 }

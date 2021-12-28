@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import History from './history';
 import { XP_TABLE } from '../../../../models/enum';
+import Elo from './elo';
 
 class Search extends Component{
 
@@ -31,7 +32,7 @@ class Search extends Component{
 
             <div style={{display:'flex', alignItems: 'center', marginTop: '30px'}}>
                 <img src={"/assets/avatar/" + this.props.user.avatar + ".png"}/>
-                <h5>{this.props.user.name} ({this.props.user.elo})</h5>
+                <h5>{this.props.user.name} (<Elo elo={this.props.user.elo}/>)</h5>
             </div>
             <p>Level {this.props.user.level} ({this.props.user.exp} / {XP_TABLE[this.props.user.level]})</p>
             <p>Wins: {this.props.user.wins}</p>

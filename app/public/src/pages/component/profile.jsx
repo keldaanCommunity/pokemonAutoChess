@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { XP_TABLE } from '../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import TilesetMenu from './tileset-menu';
+import Elo from './elo';
 
 class Profile extends Component {
 
@@ -32,7 +33,7 @@ class Profile extends Component {
                 </div>
                 <p>Level {this.props.user.level} ({this.props.user.exp} / {XP_TABLE[this.props.user.level]})</p>
                 <p>Langage: {this.props.user.langage}</p>
-                <p>Elo: {this.props.user.elo}</p>
+                <p style={{display:'flex', alignItems:'center'}}>Elo: <Elo elo={this.props.user.elo}/></p>
                 <p>Wins: {this.props.user.wins}</p>
                 <p>Tipee contributor: {this.props.user.donor ? 'Yes': 'No'}</p>
     

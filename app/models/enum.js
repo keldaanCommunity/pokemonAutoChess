@@ -4284,7 +4284,31 @@ const FLYING_PROTECT_THRESHOLD = Object.freeze({
   }
 });
 
+const RANK = Object.freeze({
+  DIAMOND:{
+    id:'DIAMOND',
+    threshold: 1400
+  },
+  PLATINUM:{
+    id:'PLATINUM',
+    threshold: 1250
+  },
+  GOLD:{
+    id:'GOLD',
+    threshold:1100
+  },
+  SILVER:{
+    id:'SILVER',
+    threshold:900,
+  },
+  BRONZE:{
+    id:'BRONZE',
+    threshold:0
+  }
+});
+
 module.exports = {
+  RANK,
   FLYING_PROTECT_THRESHOLD,
   BATTLE_RESULT,
   SPECIAL_SKILL_DESCRIPTION,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Elo from './elo';
 
 class Record extends Component{
 
@@ -23,7 +24,7 @@ class Record extends Component{
             </div>
             <div style={{display:'flex', justifyContent:'space-between', marginTop:'-30px'}}>
                 <h3>Top {this.props.record.rank}</h3>
-                <p>Elo: {this.props.record.elo}</p>
+                <div style={{display:'flex',alignItems:'center'}}>Elo: <Elo elo={this.props.record.elo}/></div>
             </div>
             <div style={{display:'flex', overflowX:'scroll'}}>
                 {this.props.record.pokemons.map(this.createPokemon.bind(this))}

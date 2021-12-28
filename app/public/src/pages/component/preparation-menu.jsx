@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Elo from './elo';
 import InlineAvatar from './inline-avatar';
 
 class PreparationMenu extends Component{
@@ -41,7 +42,8 @@ class PreparationMenu extends Component{
         const v = keyValue[1];
         const ready = v.ready ? 'V' : 'X';
         return <tr key={k}>
-            <td><InlineAvatar avatar={v.avatar} name={v.name} elo={v.elo}/></td>
+            <td><InlineAvatar avatar={v.avatar} name={v.name}/></td>
+            <Elo elo={v.elo}/>
             <td>{ready}</td>
         </tr>
     }
