@@ -491,7 +491,7 @@ class GameRoom extends colyseus.Room {
     let count = 0;
 
     board.forEach((pokemon, key) => {
-      if (pokemon.name == name) {
+      if (pokemon.name == name && pokemon.evolution != '') {
         count ++;
       }
     });
