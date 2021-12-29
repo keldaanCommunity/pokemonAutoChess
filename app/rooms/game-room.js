@@ -389,7 +389,7 @@ class GameRoom extends colyseus.Room {
       let count = 0;
       const pokemonEvolutionName = pokemon.evolution;
 
-      if (pokemonEvolutionName != '') {
+      if (pokemonEvolutionName != '' && pokemon.name != PKM.DITTO) {
         player.board.forEach((pkm, id) => {
           if ( pkm.index == pokemon.index) {
             count += 1;
@@ -448,8 +448,8 @@ class GameRoom extends colyseus.Room {
     if (evolve) {
       player.synergies.update(player.board);
       player.effects.update(player.synergies);
-      player.boardSize = this.getTeamSize(player.board);
     }
+    player.boardSize = this.getTeamSize(player.board);
     return evolve;
   }
 
