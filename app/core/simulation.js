@@ -424,7 +424,7 @@ class Simulation extends Schema {
           if (types.includes(TYPE.DARK) && pokemon.items.length != 0) {
             pokemon.atk += 10 * pokemon.items.length;
             pokemon.shield += 50 * pokemon.items.length;
-            pokemons.effects.push(EFFECTS.BEAT_UP);
+            pokemon.effects.push(EFFECTS.BEAT_UP);
           }
           break;
 
