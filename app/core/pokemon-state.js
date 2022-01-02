@@ -234,11 +234,15 @@ class PokemonState {
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
-        pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
+        pokemon.handleHeal(Math.ceil(0.05 * pokemon.hp));
       }
 
       if (pokemon.effects.includes(EFFECTS.GROWTH)) {
-        pokemon.handleHeal(Math.ceil(pokemon.hp / 10));
+        pokemon.handleHeal(Math.ceil(0.1 * pokemon.hp));
+      }
+
+      if (pokemon.effects.includes(EFFECTS.SPORE)) {
+        pokemon.handleHeal(Math.ceil(0.15 * pokemon.hp));
       }
 
       if (pokemon.effects.includes(EFFECTS.GRASS)) {
@@ -325,13 +329,11 @@ class PokemonState {
           distance = candidateDistance;
           x = r;
           y = c;
-        }
-        else if(candidateDistance == distance){
-          if(pokemon.team == 0 && c > y){
+        } else if (candidateDistance == distance) {
+          if (pokemon.team == 0 && c > y) {
             x = r;
             y = c;
-          }
-          else if(pokemon.team == 1 && c < y){
+          } else if (pokemon.team == 1 && c < y) {
             x = r;
             y = c;
           }

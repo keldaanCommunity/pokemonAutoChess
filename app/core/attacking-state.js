@@ -68,7 +68,7 @@ class AttackingState extends PokemonState {
         pokemon.setMana(pokemon.mana + 5);
       }
       if (pokemon.effects.includes(EFFECTS.PUNISHMENT)) {
-        pokemon.setMana(pokemon.mana + 10);
+        pokemon.setMana(pokemon.mana + 15);
       }
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
       if (pokemon.orientation == ORIENTATION.UNCLEAR) {

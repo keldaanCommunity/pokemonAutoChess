@@ -293,10 +293,10 @@ class Simulation extends Schema {
         shieldBonus = 20;
       }
       if (pokemon.effects.includes(EFFECTS.STRENGTH)) {
-        shieldBonus += 30;
+        shieldBonus += 50;
       }
       if (pokemon.effects.includes(EFFECTS.PURE_POWER)) {
-        shieldBonus += 50;
+        shieldBonus += 100;
       }
       if (shieldBonus >= 0) {
         pokemon.shield += shieldBonus;
@@ -313,10 +313,10 @@ class Simulation extends Schema {
         attackBonus = 2;
       }
       if (pokemon.effects.includes(EFFECTS.RAGE)) {
-        attackBonus += 4;
+        attackBonus += 6;
       }
       if (pokemon.effects.includes(EFFECTS.ANGER_POINT)) {
-        attackBonus += 8;
+        attackBonus += 14;
       }
       if (attackBonus >= 0) {
         if (this.board.getValue(pokemon.positionX, 0)) {
@@ -482,17 +482,30 @@ class Simulation extends Schema {
           }
           break;
 
+        case EFFECTS.SPORE:
+          if (types.includes(TYPE.GRASS)) {
+            pokemon.effects.push(EFFECTS.SPORE);
+          }
+          break;
+
         case EFFECTS.DRIZZLE:
-          if (this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)) {
+          if (types.includes(TYPE.WATER)) {
             pokemon.effects.push(EFFECTS.DRIZZLE);
             pokemon.atk += Math.ceil(pokemon.baseAtk * 0.33);
           }
           break;
 
         case EFFECTS.RAIN_DANCE:
-          if (this.climate == CLIMATE.RAIN && types.includes(TYPE.WATER)) {
+          if (types.includes(TYPE.WATER)) {
             pokemon.effects.push(EFFECTS.RAIN_DANCE);
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.33);
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.66);
+          }
+          break;
+
+        case EFFECTS.PRIMORDIAL_SEA:
+          if (types.includes(TYPE.WATER)) {
+            pokemon.effects.push(EFFECTS.PRIMORDIAL_SEA);
+            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.66);
           }
           break;
 
@@ -598,12 +611,12 @@ class Simulation extends Schema {
 
         case EFFECTS.LIGHT_SCREEN:
           pokemon.effects.push(EFFECTS.LIGHT_SCREEN);
-          pokemon.speDef += 10;
+          pokemon.speDef += 15;
           break;
 
         case EFFECTS.EERIE_SPELL:
           pokemon.effects.push(EFFECTS.EERIE_SPELL);
-          pokemon.speDef += 20;
+          pokemon.speDef += 35;
           break;
 
         case EFFECTS.MEDITATE:
@@ -613,14 +626,14 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.FOCUS_ENERGY:
-          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-          pokemon.shield += Math.ceil(pokemon.hp * 0.2);
+          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.35);
+          pokemon.shield += Math.ceil(pokemon.hp * 0.35);
           pokemon.effects.push(EFFECTS.FOCUS_ENERGY);
           break;
 
         case EFFECTS.CALM_MIND:
-          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.3);
-          pokemon.shield += Math.ceil(pokemon.hp * 0.3);
+          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.65);
+          pokemon.shield += Math.ceil(pokemon.hp * 0.65);
           pokemon.effects.push(EFFECTS.CALM_MIND);
           break;
 
@@ -728,15 +741,11 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.SNOW:
-          if (this.climate == CLIMATE.SNOW) {
-            pokemon.effects.push(EFFECTS.SNOW);
-          }
+          pokemon.effects.push(EFFECTS.SNOW);
           break;
 
         case EFFECTS.SHEER_COLD:
-          if (this.climate == CLIMATE.SNOW) {
-            pokemon.effects.push(EFFECTS.SHEER_COLD);
-          }
+          pokemon.effects.push(EFFECTS.SHEER_COLD);
           break;
 
         case EFFECTS.POISON_GAS:
@@ -799,6 +808,12 @@ class Simulation extends Schema {
       climate = CLIMATE.SNOW;
     }
     if (this.blueEffects.includes(EFFECTS.DRIZZLE) || this.redEffects.includes(EFFECTS.DRIZZLE)) {
+      climate = CLIMATE.RAIN;
+    }
+    if (this.blueEffects.includes(EFFECTS.SHEER_COLD) || this.redEffects.includes(EFFECTS.SHEER_COLD)) {
+      climate = CLIMATE.SNOW;
+    }
+    if (this.blueEffects.includes(EFFECTS.RAIN_DANCE) || this.redEffects.includes(EFFECTS.RAIN_DANCE)) {
       climate = CLIMATE.RAIN;
     }
     if (this.blueEffects.includes(EFFECTS.SANDSTORM) || this.redEffects.includes(EFFECTS.SANDSTORM)) {

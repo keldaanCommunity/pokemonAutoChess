@@ -1158,7 +1158,7 @@ const EFFECTS_ICON = Object.freeze({
   },
   SPORE: {
     level: 3,
-    positive: false,
+    positive: true,
     type: TYPE.GRASS
   },
   BLAZE: {
@@ -2524,12 +2524,12 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 6,
           title: `(6) Strength`,
-          text: `All allies adjacent to your Normal pokemon have +30 HP.`
+          text: `All allies adjacent to your Normal pokemon have +50 HP.`
         },
         {
           trigger: 9,
           title: `(9) Pure power`,
-          text: `All allies adjacent to your Normal pokemon have +50 HP.`
+          text: `All allies adjacent to your Normal pokemon have +100 HP.`
         }
       ],
       esp: [
@@ -2568,17 +2568,17 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 3,
           title: `(3) Ingrain`,
-          text: `Grass allies restore 5% HP per second.`
+          text: `Grass allies restore 5% HP per second`
         },
         {
           trigger: 5,
           title: `(5) Growth`,
-          text: `Grass allies restore 10% extra HP per second.`
+          text: `Grass allies restore 10% extra HP per second`
         },
         {
           trigger: 7,
-          title: `(7) Stun Spore`,
-          text: `Enemies have -30% speed.`
+          title: `(7) Tree of life`,
+          text: `Grass allies restore 15% extra HP per second`
         }
       ],
       esp: [
@@ -2664,8 +2664,8 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           trigger: 6,
-          title: `(6) Crachin`,
-          text: `Your Water pokemon have +30% more Attack. (Rain)`
+          title: `(6) Drizzle`,
+          text: `Your Water pokemon have +60% more Attack. (Rain)`
         },
         {
           trigger: 8,
@@ -2737,7 +2737,7 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 4,
           title: `(4) Punishment`,
-          text: `+10 extra Mana per hit.`
+          text: `+15 extra Mana per hit.`
         }
       ],
       esp: [
@@ -2773,12 +2773,12 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 4,
           title: `(4) Light Screen`,
-          text: `All your pokemon have +10 Special Defense.`
+          text: `All your pokemon have +15 Special Defense.`
         },
         {
           trigger: 6,
           title: `(6) Eerie Spell`,
-          text: `All your pokemon have +20 Special Defense.`
+          text: `All your pokemon have +35 Special Defense.`
         }
       ],
       esp: [
@@ -3034,12 +3034,12 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 6,
           title: `(6) Rage`,
-          text: `Your pokemon on the same column have +4 Attack.`
+          text: `Your pokemon on the same column have +6 Attack.`
         },
         {
           trigger: 9,
           title: `(9) Sword Dance`,
-          text: `Your pokemon on the same column have +8 Attack.`
+          text: `Your pokemon on the same column have +14 Attack.`
         }
       ],
       esp: [
@@ -3132,12 +3132,12 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 4,
           title: `(4) Power`,
-          text: `Your pokemon have +20% Attack and HP.`
+          text: `Your pokemon have +35% Attack and HP.`
         },
         {
           trigger: 6,
           title: `(6) Calm Mind`,
-          text: `Your pokemon have +30% Attack and HP.`
+          text: `Your pokemon have +65% Attack and HP.`
         }
       ],
       esp: [
@@ -3471,7 +3471,7 @@ const TYPE_DETAILS = Object.freeze({
         },
         {
           trigger: 4,
-          title: `(4)Sheer cold`,
+          title: `(4) Sheer cold`,
           text: `Your Ice pokemon have a 30% chance to freeze an enemy for 2 seconds after a hit.`
         }
       ],
@@ -4285,25 +4285,25 @@ const FLYING_PROTECT_THRESHOLD = Object.freeze({
 });
 
 const RANK = Object.freeze({
-  DIAMOND:{
-    id:'DIAMOND',
+  DIAMOND: {
+    id: 'DIAMOND',
     threshold: 1400
   },
-  PLATINUM:{
-    id:'PLATINUM',
+  PLATINUM: {
+    id: 'PLATINUM',
     threshold: 1250
   },
-  GOLD:{
-    id:'GOLD',
-    threshold:1100
+  GOLD: {
+    id: 'GOLD',
+    threshold: 1100
   },
-  SILVER:{
-    id:'SILVER',
-    threshold:900,
+  SILVER: {
+    id: 'SILVER',
+    threshold: 900
   },
-  BRONZE:{
-    id:'BRONZE',
-    threshold:0
+  BRONZE: {
+    id: 'BRONZE',
+    threshold: 0
   }
 });
 
