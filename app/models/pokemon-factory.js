@@ -1518,6 +1518,114 @@ class PokemonFactory {
         return new Pokemon.Kabuto();
       case PKM.KABUTOPS:
         return new Pokemon.Kabutops();
+      case PKM.BUDEW:
+        return new Pokemon.Budew();
+      case PKM.ROSELIA:
+        return new Pokemon.Roselia();
+      case PKM.ROSERADE:
+        return new Pokemon.Roserade();
+      case PKM.BUNEARY:
+        return new Pokemon.Buneary();
+      case PKM.LOPUNNY:
+        return new Pokemon.Lopunny();
+      case PKM.MEGALOPUNNY:
+        return new Pokemon.MegaLopunny();
+      case PKM.AXEW:
+        return new Pokemon.Axew();
+      case PKM.FRAXURE:
+        return new Pokemon.Fraxure();
+      case PKM.HAXORUS:
+        return new Pokemon.Haxorus();
+      case PKM.VENIPEDE:
+        return new Pokemon.Venipede();
+      case PKM.WHIRLIPEDE:
+        return new Pokemon.Whirlipede();
+      case PKM.SCOLIPEDE:
+        return new Pokemon.Scolipede();
+      case PKM.PORYGON:
+        return new Pokemon.Porygon();
+      case PKM.PORYGON2:
+        return new Pokemon.Porygon2();
+      case PKM.PORYGONZ:
+        return new Pokemon.PorygonZ();
+      case PKM.KLINK:
+        return new Pokemon.Klink();
+      case PKM.KLANG:
+        return new Pokemon.Klang();
+      case PKM.KLINKLANG:
+        return new Pokemon.Klinklang();
+      case PKM.ELECTRIKE:
+        return new Pokemon.Electrike();
+      case PKM.MANECTRIC:
+        return new Pokemon.Manectric();
+      case PKM.MEGAMANECTRIC:
+        return new Pokemon.MegaManectric();
+      case PKM.SHUPPET:
+        return new Pokemon.Shuppet();
+      case PKM.BANETTE:
+        return new Pokemon.Banette();
+      case PKM.MEGABANETTE:
+        return new Pokemon.MegaBanette();
+      case PKM.HONEDGE:
+        return new Pokemon.Honedge();
+      case PKM.DOUBLADE:
+        return new Pokemon.Doublade();
+      case PKM.AEGISLASH:
+        return new Pokemon.Aegislash();
+      case PKM.CUBONE:
+        return new Pokemon.Cubone();
+      case PKM.MAROWAK:
+        return new Pokemon.Marowak();
+      case PKM.ALOLANMAROWAK:
+        return new Pokemon.AlolanMarowak();
+      case PKM.FLETCHLING:
+        return new Pokemon.Fletchling();
+      case PKM.FLETCHINDER:
+        return new Pokemon.Fletchinder();
+      case PKM.TALONFLAME:
+        return new Pokemon.Talonflame();
+      case PKM.WHISMUR:
+        return new Pokemon.Whismur();
+      case PKM.LOUDRED:
+        return new Pokemon.Loudred();
+      case PKM.EXPLOUD:
+        return new Pokemon.Exploud();
+      case PKM.TYMPOLE:
+        return new Pokemon.Tympole();
+      case PKM.PALPITOAD:
+        return new Pokemon.Palpitoad();
+      case PKM.SEISMITOAD:
+        return new Pokemon.Seismitoad();
+      case PKM.SEWADDLE:
+        return new Pokemon.Sewaddle();
+      case PKM.SWADLOON:
+        return new Pokemon.Swadloon();
+      case PKM.LEAVANNY:
+        return new Pokemon.Leavanny();
+      case PKM.PIKIPEK:
+        return new Pokemon.Pikipek();
+      case PKM.TRUMBEAK:
+        return new Pokemon.Trumbeak();
+      case PKM.TOUCANNON:
+        return new Pokemon.Toucannon();
+      case PKM.FLABEBE:
+        return new Pokemon.Flabebe();
+      case PKM.FLOETTE:
+        return new Pokemon.Floette();
+      case PKM.FLORGES:
+        return new Pokemon.Florges();
+      case PKM.JANGMOO:
+        return new Pokemon.JangmoO();
+      case PKM.HAKAMOO:
+        return new Pokemon.HakamoO();
+      case PKM.KOMMOO:
+        return new Pokemon.KommoO();
+      case PKM.MELOETTA:
+        return new Pokemon.Meloetta();
+      case PKM.ALTARIA:
+        return new Pokemon.Altaria();
+      case PKM.MEGAALTARIA:
+        return new Pokemon.MegaAltaria();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();

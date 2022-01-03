@@ -1312,10 +1312,26 @@ class ThiefStrategy extends AttackStrategy {
         break;
     }
     const items = target.items.getAllItems();
+    const l = items.length;
     items.forEach( (item) => {
       pokemon.items.add(item);
       target.items.remove(item);
     });
+
+    if (pokemon.effects.includes(EFFECTS.HONE_CLAWS)) {
+      pokemon.atk += 4 * l;
+      pokemon.shield += 20 * l;
+    }
+
+    if (pokemon.effects.includes(EFFECTS.ASSURANCE)) {
+      pokemon.atk += 7 * l;
+      pokemon.shield += 30 * l;
+    }
+
+    if (pokemon.effects.includes(EFFECTS.BEAT_UP)) {
+      pokemon.atk += 10 * l;
+      pokemon.shield += 50 * l;
+    }
 
     pokemon.simulation.applyItemsEffects(pokemon, pokemon.types);
     target.simulation.applyItemsEffects(target, target.types);

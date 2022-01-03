@@ -150,6 +150,8 @@ export default class BattleManager {
               const shieldbar = children[i].getFirst('objType', 'shieldbar');
               if (shieldbar) {
                 shieldbar.setLife(children[i].shield);
+              } else {
+                children[i].setShieldBar(pokemon, this.scene);
               }
             } else {
               const shieldbar = children[i].getFirst('objType', 'shieldbar');

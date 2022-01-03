@@ -674,10 +674,11 @@ export default class Pokemon extends Button {
     }
   }
 
-  setShieldBar(pokemon, scene, height) {
+  setShieldBar(pokemon, scene) {
+    const h = this.height/2 + 5;
     if (pokemon.shield !== undefined && pokemon.shield > 0) {
       const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
-      const shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, height, shieldRatio * 60, pokemon.shield, 0x939393, 'shieldbar', true);
+      const shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, h, shieldRatio * 60, pokemon.shield, 0x939393, 'shieldbar', true);
       shieldbar.setLife(pokemon.shield);
       this.add(shieldbar);
     }
@@ -751,7 +752,7 @@ export default class Pokemon extends Button {
     this.add(socle);
     this.add(sprite);
 
-    this.setShieldBar(pokemon, scene, this.height/2 + 5);
+    this.setShieldBar(pokemon, scene);
     this.setLifeBar(pokemon, scene, this.height/2 + 5);
     this.setManaBar(pokemon, scene, this.height/2 + 5);
 
