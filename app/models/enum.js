@@ -350,7 +350,10 @@ const PKM = Object.freeze({
   KOMMOO: 'kommo-o',
   MELOETTA: 'meloetta',
   ALTARIA: 'altaria',
-  MEGAALTARIA: 'mega-altaria'
+  MEGAALTARIA: 'mega-altaria',
+  LILLIPUP: 'lillipup',
+  HERDIER: 'herdier',
+  STOUTLAND: 'stoutland'
 });
 
 const WORDS = Object.freeze({

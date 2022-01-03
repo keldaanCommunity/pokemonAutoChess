@@ -1281,12 +1281,6 @@ class Houndour extends Pokemon {
   }
 }
 
-class Swablu extends Pokemon {
-  constructor() {
-    super('Nintendo', PKM.SWABLU, 'tylton', [TYPE.FAIRY, TYPE.FLYING], RARITY.SUMMON, 'september', 333, '', 40, 4, 1, 1, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DRAGON_TAIL);
-  }
-}
-
 class Magikarp extends Pokemon {
   constructor() {
     super('Nintendo', PKM.MAGIKARP, 'magicarpe', [TYPE.WATER], RARITY.NEUTRAL, 'NEUTRAL', 129, PKM.GYARADOS, 30, 1, 1, 1, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
@@ -1859,324 +1853,348 @@ class Aerodactyl extends Pokemon {
 
 class Budew extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.BUDEW, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.BUDEW, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 406, PKM.ROSELIA, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Roselia extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ROSELIA, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.ROSELIA, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 315, PKM.ROSERADE, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Roserade extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ROSERADE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.ROSERADE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 407, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Buneary extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.BUNEARY, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.BUNEARY, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 427, PKM.LOPUNNY, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Lopunny extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.LOPUNNY, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.LOPUNNY, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 428, PKM.MEGALOPUNNY, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class MegaLopunny extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MEGALOPUNNY, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('PMDCollab', PKM.MEGALOPUNNY, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 4280, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Axew extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.AXEW, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('PowerCrystal', PKM.AXEW, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 610, PKM.FRAXURE, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Fraxure extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.FRAXURE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('PowerCrystal', PKM.FRAXURE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 611, PKM.HAXORUS, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Haxorus extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.HAXORUS, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('PowerCrystal', PKM.HAXORUS, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 612, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Venipede extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.VENIPEDE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.VENIPEDE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 543, PKM.WHIRLIPEDE, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Whirlipede extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.WHIRLIPEDE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.WHIRLIPEDE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 544, PKM.SCOLIPEDE, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Scolipede extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SCOLIPEDE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.SCOLIPEDE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 545, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Porygon extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.PORYGON, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.PORYGON, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 137, PKM.PORYGON2, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Porygon2 extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.PORYGON2, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.PORYGON2, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 233, PKM.PORYGONZ, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class PorygonZ extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.PORYGONZ, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.PORYGONZ, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 474, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Klink extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.KLINK, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Joojishibuki', PKM.KLINK, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 599, PKM.KLANG, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Klang extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.KLANG, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Joojishibuki', PKM.KLANG, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 600, PKM.KLINKLANG, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Klinklang extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.KLINKLANG, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Joojishibuki', PKM.KLINKLANG, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 601, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Electrike extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ELECTRIKE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.ELECTRIKE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 309, PKM.MANECTRIC, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Manectric extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MANECTRIC, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.MANECTRIC, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 310, PKM.MEGAMANECTRIC, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class MegaManectric extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MEGAMANECTRIC, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.MEGAMANECTRIC, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 3100, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Shuppet extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SHUPPET, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.SHUPPET, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 353, PKM.BANETTE, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Banette extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.BANETTE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.BANETTE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 354, PKM.MEGABANETTE, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class MegaBanette extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MEGABANETTE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Junaca', PKM.MEGABANETTE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 3540, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Honedge extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.HONEDGE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('PmdCollab', PKM.HONEDGE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 679, PKM.DOUBLADE, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Doublade extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.DOUBLADE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('pokegirl4ever', PKM.DOUBLADE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 680, PKM.AEGISLASH, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Aegislash extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.AEGISLASH, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('jhony rex', PKM.AEGISLASH, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 681, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Cubone extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.CUBONE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.CUBONE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 104, PKM.MAROWAK, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Marowak extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MAROWAK, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.MAROWAK, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 105, PKM.ALOLANMAROWAK, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class AlolanMarowak extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ALOLANMAROWAK, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.ALOLANMAROWAK, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 1050, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Fletchling extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.FLETCHLING, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.FLETCHLING, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 661, PKM.FLETCHINDER, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Fletchinder extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.FLETCHINDER, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.FLETCHINDER, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 662, PKM.TALONFLAME, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Talonflame extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.TALONFLAME, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.TALONFLAME, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 663, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Whismur extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.WHISMUR, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.WHISMUR, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 293, PKM.LOUDRED, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 class Loudred extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.LOUDRED, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.LOUDRED, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 294, PKM.EXPLOUD, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Exploud extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.EXPLOUD, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.EXPLOUD, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 295, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Tympole extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.TYMPOLE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.TYMPOLE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 535, PKM.PALPITOAD, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Palpitoad extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.PALPITOAD, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.PALPITOAD, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 536, PKM.SEISMITOAD, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Seismitoad extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SEISMITOAD, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.SEISMITOAD, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 537, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Sewaddle extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SEWADDLE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Ploaj', PKM.SEWADDLE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 540, PKM.SWADLOON, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Swadloon extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SWADLOON, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Ploaj', PKM.SWADLOON, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 541, PKM.LEAVANNY, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Leavanny extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.LEAVANNY, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('PmdCollab', PKM.LEAVANNY, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 542, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Pikipek extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.PIKIPEK, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.PIKIPEK, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 731, PKM.TRUMBEAK, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Trumbeak extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.TRUMBEAK, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.TRUMBEAK, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 732, PKM.TOUCANNON, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Toucannon extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.TOUCANNON, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.TOUCANNON, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 733, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Flabebe extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.FLABEBE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('PmdCollab', PKM.FLABEBE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 669, PKM.FLOETTE, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Floette extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.FLOETTE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('PmdCollab', PKM.FLOETTE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 670, PKM.FLORGES, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Florges extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.FLORGES, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('PmdCollab', PKM.FLORGES, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 671, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class JangmoO extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.JANGMOO, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('princess phoenix', PKM.JANGMOO, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 782, PKM.HAKAMOO, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class HakamoO extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.HAKAMOO, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('princess phoenix', PKM.HAKAMOO, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 783, PKM.KOMMOO, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class KommoO extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.KOMMOO, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('princess phoenix', PKM.KOMMOO, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 784, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Meloetta extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MELOETTA, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.MELOETTA, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 648, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+  }
+}
+
+class Swablu extends Pokemon {
+  constructor() {
+    super('Nintendo', PKM.SWABLU, 'tylton', [TYPE.FAIRY, TYPE.FLYING], RARITY.SUMMON, 'sound', 333, PKM.ALTARIA, 40, 4, 1, 1, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DRAGON_TAIL);
   }
 }
 
 class Altaria extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ALTARIA, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.ALTARIA, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 334, PKM.MEGAALTARIA, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class MegaAltaria extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MEGAALTARIA, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'february', 142, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.MEGAALTARIA, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 3340, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+  }
+}
+
+class Lillipup extends Pokemon {
+  constructor() {
+    super('princess phoenix', PKM.LILLIPUP, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 506, PKM.HERDIER, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+  }
+}
+
+class Herdier extends Pokemon {
+  constructor() {
+    super('princess phoenix', PKM.HERDIER, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 507, PKM.STOUTLAND, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+  }
+}
+
+class Stoutland extends Pokemon {
+  constructor() {
+    super('princess phoenix', PKM.STOUTLAND, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 508, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
@@ -2560,5 +2578,8 @@ module.exports = {
   KommoO,
   Meloetta,
   Altaria,
-  MegaAltaria
+  MegaAltaria,
+  Lillipup,
+  Herdier,
+  Stoutland
 };

@@ -1626,6 +1626,12 @@ class PokemonFactory {
         return new Pokemon.Altaria();
       case PKM.MEGAALTARIA:
         return new Pokemon.MegaAltaria();
+      case PKM.LILLIPUP:
+        return new Pokemon.Lillipup();
+      case PKM.HERDIER:
+        return new Pokemon.Herdier();
+      case PKM.STOUTLAND:
+        return new Pokemon.Stoutland();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();
