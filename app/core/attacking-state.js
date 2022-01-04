@@ -1,6 +1,5 @@
-const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION, TYPE, PKM} = require('../models/enum');
+const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION, TYPE} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
-const PokemonFactory = require('../models/pokemon-factory');
 
 class AttackingState extends PokemonState {
   constructor() {
@@ -105,23 +104,6 @@ class AttackingState extends PokemonState {
       }
 
       const victim = target.handleDamage(damage, board, attackType, pokemon);
-
-      if (victim && target) {
-        if (target.effects.includes(EFFECTS.ODD_FLOWER) ||
-        target.effects.includes(EFFECTS.GLOOM_FLOWER) ||
-        target.effects.includes(EFFECTS.VILE_FLOWER)) {
-          if (!pokemon.simulation.flowerSpawn[target.team]) {
-            pokemon.simulation.flowerSpawn[target.team] = true;
-            if (target.effects.includes(EFFECTS.ODD_FLOWER)) {
-              pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.ODDISH), target.positionX, target.positionY, target.team);
-            } else if (target.effects.includes(EFFECTS.GLOOM_FLOWER)) {
-              pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.GLOOM), target.positionX, target.positionY, target.team);
-            } else if (target.effects.includes(EFFECTS.VILE_FLOWER)) {
-              pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.VILEPLUME), target.positionX, target.positionY, target.team);
-            }
-          }
-        }
-      }
 
       if (victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)) {
         pokemon.handleHeal(pokemon.hp);

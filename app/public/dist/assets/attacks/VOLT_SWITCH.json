@@ -1,0 +1,195 @@
+{
+	"textures": [
+		{
+			"image": "VOLT_SWITCH.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 351,
+				"h": 126
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 70,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 68,
+						"h": 124
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 68,
+						"h": 124
+					},
+					"anchor": {
+						"x": 0.48571429,
+						"y": 0.890625
+					}
+				},
+				{
+					"filename": "5",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 124
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 124
+					},
+					"frame": {
+						"x": 71,
+						"y": 1,
+						"w": 15,
+						"h": 124
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.95967742
+					}
+				},
+				{
+					"filename": "3",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 72,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 71,
+						"h": 123
+					},
+					"frame": {
+						"x": 88,
+						"y": 1,
+						"w": 71,
+						"h": 123
+					},
+					"anchor": {
+						"x": 0.48611111,
+						"y": 0.8984375
+					}
+				},
+				{
+					"filename": "1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 71,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 64,
+						"h": 123
+					},
+					"frame": {
+						"x": 161,
+						"y": 1,
+						"w": 64,
+						"h": 123
+					},
+					"anchor": {
+						"x": 0.52112676,
+						"y": 0.8671875
+					}
+				},
+				{
+					"filename": "0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 63,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 58,
+						"h": 123
+					},
+					"frame": {
+						"x": 227,
+						"y": 1,
+						"w": 58,
+						"h": 123
+					},
+					"anchor": {
+						"x": 0.47619048,
+						"y": 0.8671875
+					}
+				},
+				{
+					"filename": "4",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 55,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 49,
+						"h": 123
+					},
+					"frame": {
+						"x": 287,
+						"y": 1,
+						"w": 49,
+						"h": 123
+					},
+					"anchor": {
+						"x": 0.29090909,
+						"y": 0.90625
+					}
+				},
+				{
+					"filename": "6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 12,
+						"h": 123
+					},
+					"frame": {
+						"x": 338,
+						"y": 1,
+						"w": 12,
+						"h": 123
+					},
+					"anchor": {
+						"x": 0.5625,
+						"y": 0.921875
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:8ce4e75dad0f00ca5c6898ed5f5a5d03:d989f90e4ce0c37a45990539b3647dce:a5c6f04329b4d89d52419110ee11ef0a$"
+	}
+}

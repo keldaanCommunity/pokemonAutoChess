@@ -1961,19 +1961,19 @@ class Klinklang extends Pokemon {
 
 class Electrike extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ELECTRIKE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 309, PKM.MANECTRIC, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.ELECTRIKE, 'ptéra', [TYPE.ELECTRIC, TYPE.FIELD], RARITY.EPIC, 'sound', 309, PKM.MANECTRIC, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 50, SPECIAL_SKILL.VOLT_SWITCH);
   }
 }
 
 class Manectric extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MANECTRIC, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 310, PKM.MEGAMANECTRIC, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.MANECTRIC, 'ptéra', [TYPE.ELECTRIC, TYPE.FIELD], RARITY.EPIC, 'sound', 310, PKM.MEGAMANECTRIC, 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 50, SPECIAL_SKILL.VOLT_SWITCH);
   }
 }
 
 class MegaManectric extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MEGAMANECTRIC, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 3100, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.MEGAMANECTRIC, 'ptéra', [TYPE.ELECTRIC, TYPE.FIELD], RARITY.EPIC, 'sound', 3100, '', 300, 17, 6, 3, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 3, 50, SPECIAL_SKILL.VOLT_SWITCH);
   }
 }
 

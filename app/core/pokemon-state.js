@@ -110,6 +110,23 @@ class PokemonState {
       }
     }
 
+    if (death && pokemon) {
+      if (pokemon.effects.includes(EFFECTS.ODD_FLOWER) ||
+      pokemon.effects.includes(EFFECTS.GLOOM_FLOWER) ||
+      pokemon.effects.includes(EFFECTS.VILE_FLOWER)) {
+        if (!pokemon.simulation.flowerSpawn[pokemon.team]) {
+          pokemon.simulation.flowerSpawn[pokemon.team] = true;
+          if (pokemon.effects.includes(EFFECTS.ODD_FLOWER)) {
+            pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.ODDISH), pokemon.positionX, pokemon.positionY, pokemon.team);
+          } else if (pokemon.effects.includes(EFFECTS.GLOOM_FLOWER)) {
+            pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.GLOOM), pokemon.positionX, pokemon.positionY, pokemon.team);
+          } else if (pokemon.effects.includes(EFFECTS.VILE_FLOWER)) {
+            pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.VILEPLUME), pokemon.positionX, pokemon.positionY, pokemon.team);
+          }
+        }
+      }
+    }
+
     return death;
   }
 

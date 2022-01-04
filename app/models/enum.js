@@ -1612,10 +1612,19 @@ const SPECIAL_SKILL = Object.freeze({
   ROAR_OF_TIME: 'ROAR_OF_TIME',
   ROCK_TOMB: 'ROCK_TOMB',
   ROCK_SMASH: 'ROCK_SMASH',
-  HEAD_SMASH: 'HEAD_SMASH'
+  HEAD_SMASH: 'HEAD_SMASH',
+  VOLT_SWITCH: 'VOLT_SWITCH'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+  VOLT_SWITCH: {
+    title: {
+      eng: 'Volt Switch'
+    },
+    description: {
+      eng: 'Dash into the ennemy backline, dealing 20/40/80 special damage'
+    }
+  },
   DEFAULT: {
     title: {
       eng: '',
@@ -2507,6 +2516,19 @@ const ORIENTATION = Object.freeze({
   DOWN: 'DOWN',
   UNCLEAR: 'UNCLEAR'
 });
+
+const ORIENTATION_RAD = Object.freeze({
+  DOWNLEFT: 5 * Math.PI / 4,
+  LEFT: Math.PI,
+  UPLEFT: 3 * Math.PI / 4,
+  UP: Math.PI / 2,
+  UPRIGHT: Math.PI / 4,
+  RIGHT: 0,
+  DOWNRIGHT: 7 * Math.PI / 4,
+  DOWN: 3 * Math.PI / 2,
+  UNCLEAR: 0
+});
+
 
 const ATTACK_TYPE = Object.freeze({
   PHYSICAL: 'PHYSICAL',
@@ -4429,6 +4451,7 @@ module.exports = {
   STATE,
   STATE_TYPE,
   ORIENTATION,
+  ORIENTATION_RAD,
   EFFECTS,
   CLIMATE,
   ATTACK_TYPE,

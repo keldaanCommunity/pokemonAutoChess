@@ -17,7 +17,7 @@ class GameItem extends Component{
             <img style={{width:'96px',height:'96px',imageRendering:'pixelated'}} src={"assets/items/" + this.props.item + ".png"}></img>
             <h3>{ITEM_NAME[this.props.item].eng}</h3>
             <p>{ITEM_DESCRIPTION[this.props.item].eng}</p>
-            <button onClick={()=>{this.props.itemClick(this.props.item)}} type="button" class="nes-btn is-primary">Pick</button>
+            <button onClick={()=>{this.props.itemClick(this.props.item)}} type="button" className="nes-btn is-primary">Pick</button>
         </div>;
     }
 }

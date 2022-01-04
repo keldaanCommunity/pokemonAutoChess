@@ -586,12 +586,12 @@ export default class Pokemon extends Button {
             });
             break;
 
-          case SPECIAL_SKILL.HEAD_SMASH:
-            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ROCK_SLIDE}/000`);
+          case SPECIAL_SKILL.VOLT_SWITCH:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.VOLT_SWITCH, '0');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.HEAD_SMASH);
+            specialProjectile.anims.play(SPECIAL_SKILL.VOLT_SWITCH);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });

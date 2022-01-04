@@ -1,4 +1,4 @@
-import {ORIENTATION} from '../../../../models/enum';
+import {ORIENTATION, ORIENTATION_RAD} from '../../../../models/enum';
 
 export const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyCjMpYJycJTjOsXPM1CJn8olntPQhpysOI',
@@ -42,6 +42,36 @@ export function getOrientation(x1, y1, x2, y2) {
     return ORIENTATION.UPRIGHT;
   } else {
     return ORIENTATION.RIGHT;
+  }
+}
+
+export function getOrientationRad(r0, c0, r1, c1) {
+  const vx = r1 - r0;
+  const vy = c1 - c0;
+  if (vx > 0) {
+    if (vy == 0) {
+      return ORIENTATION_RAD.RIGHT;
+    } else if (vy < 0) {
+      return ORIENTATION_RAD.DOWNRIGHT;
+    } else {
+      return ORIENTATION_RAD.UPRIGHT;
+    }
+  } else if (vx == 0) {
+    if (vy == 0) {
+      return ORIENTATION_RAD.UNCLEAR;
+    } else if (vy < 0) {
+      return ORIENTATION_RAD.DOWN;
+    } else {
+      return ORIENTATION_RAD.UP;
+    }
+  } else {
+    if (vy == 0) {
+      return ORIENTATION_RAD.LEFT;
+    } else if (vy < 0) {
+      return ORIENTATION_RAD.DOWNLEFT;
+    } else {
+      return ORIENTATION_RAD.UPLEFT;
+    }
   }
 }
 

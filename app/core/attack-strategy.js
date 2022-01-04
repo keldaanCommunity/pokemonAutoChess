@@ -19,6 +19,42 @@ class LeechSeedStrategy extends AttackStrategy {
   }
 }
 
+class VoltSwitchStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+
+    let damage = 0;
+    switch (pokemon.stars) {
+      case 1:
+        damage = 20;
+        break;
+      case 2:
+        damage = 40;
+        break;
+      case 3:
+        damage = 80;
+        break;
+      default:
+        break;
+    }
+
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
+    const x = farthestCoordinate[0];
+    const y = farthestCoordinate[1];
+
+    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, x, y);
+    cells.forEach((cell)=>{
+      if (cell.value && cell.value != pokemon) {
+        cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+      }
+    });
+
+    board.swapValue(pokemon.positionX, pokemon.positionY, x, y);
+    pokemon.positionX = x;
+    pokemon.positionY = y;
+  }
+}
+
 class HeadSmashStrategy extends AttackStrategy {
   constructor() {
     super();
@@ -1491,7 +1527,8 @@ class MetronomeStrategy extends AttackStrategy {
       RoarOfTimeStrategy,
       RockTombStrategy,
       RockSmashStrategy,
-      HeadSmashStrategy
+      HeadSmashStrategy,
+      VoltSwitchStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1553,5 +1590,6 @@ module.exports = {
   RoarOfTimeStrategy,
   RockTombStrategy,
   RockSmashStrategy,
-  HeadSmashStrategy
+  HeadSmashStrategy,
+  VoltSwitchStrategy
 };
