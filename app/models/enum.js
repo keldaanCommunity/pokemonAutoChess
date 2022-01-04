@@ -1129,7 +1129,8 @@ const TYPE = Object.freeze({
   AMORPH: 'AMORPH',
   FAIRY: 'FAIRY',
   ICE: 'ICE',
-  FOSSIL: 'FOSSIL'
+  FOSSIL: 'FOSSIL',
+  SOUND: 'SOUND'
 });
 
 const EFFECTS = Object.freeze({
@@ -1199,7 +1200,10 @@ const EFFECTS = Object.freeze({
   SHEER_COLD: 'SHEER_COLD',
   ANCIENT_POWER: 'ANCIENT_POWER',
   ELDER_POWER: 'ELDER_POWER',
-  UNOWN_GATHERINGS: 'UNOWN_GATHERINGS'
+  UNOWN_GATHERINGS: 'UNOWN_GATHERINGS',
+  LARGO: 'LARGO',
+  ALLEGRO: 'ALLLEGRO',
+  PRESTO: 'PRESTO'
 });
 
 const EFFECTS_ICON = Object.freeze({
@@ -1537,6 +1541,21 @@ const EFFECTS_ICON = Object.freeze({
     level: 3,
     positive: true,
     type: TYPE.FOSSIL
+  },
+  LARGO: {
+    level: 1,
+    positive: true,
+    type: TYPE.SOUND
+  },
+  ALLEGRO: {
+    level: 2,
+    positive: true,
+    type: TYPE.SOUND
+  },
+  PRESTO: {
+    level: 3,
+    positive: true,
+    type: TYPE.SOUND
   }
 });
 
@@ -2463,7 +2482,8 @@ const EXP_TABLE = Object.freeze({
   5: 20,
   6: 32,
   7: 50,
-  8: 70
+  8: 70,
+  9: 9999
 });
 
 const STATE = Object.freeze({
@@ -3610,6 +3630,25 @@ const TYPE_DETAILS = Object.freeze({
         }
       ]
     }
+  },
+  SOUND: {
+    description: {
+      eng: [
+        {
+          trigger: 3,
+          title: `(3) Largo`,
+          text: `+3 attack each time a sound pokemon use its ability`
+        }, {
+          trigger: 5,
+          title: `(5) Allegro`,
+          text: `+6 attack each time a sound pokemon use its ability`
+        }, {
+          trigger: 7,
+          title: `(7) Presto`,
+          text: `+9 attack each time a sound pokemon use its ability`
+        }
+      ]
+    }
   }
 });
 
@@ -3637,7 +3676,8 @@ const TYPE_TRIGGER = {
   AMORPH: [2, 4],
   FAIRY: [2, 4],
   ICE: [2, 4],
-  FOSSIL: [2, 4, 6]
+  FOSSIL: [2, 4, 6],
+  SOUND: [3, 5, 7]
 };
 
 const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];

@@ -9,7 +9,7 @@ class GamePlayerDetail extends Component{
                 <h4>{this.props.name}</h4>
                 <div style={{display:'flex', marginLeft:'10px'}}>
                     <h4>{this.props.life}</h4>
-                    <i class="nes-icon is-small heart"></i>
+                    <i className="nes-icon is-small heart"></i>
                 </div>
                 <div style={{display:'flex', marginLeft:'10px'}}>
                     <h4>{this.props.money}</h4>
