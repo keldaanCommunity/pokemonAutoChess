@@ -63,7 +63,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
 
 
     this.onMessage('new-message', (client, message) => {
-      if(message.payload != ''){
+      if (message.payload != '') {
         this.state.addMessage(message.name, message.payload, message.avatar, Date.now(), true);
       }
     });
@@ -333,7 +333,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
               break;
 
             case 'tirtouga':
-            if (lvl >= 27) {
+              if (lvl >= 27) {
                 changeNeeded = true;
               }
               break;
@@ -345,45 +345,45 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
               break;
 
             case 'kabuto':
-            if (lvl >= 29) {
-              changeNeeded = true;
-            }
-            break;
+              if (lvl >= 29) {
+                changeNeeded = true;
+              }
+              break;
 
             case 'lileep':
-            if (lvl >= 30) {
-              changeNeeded = true;
-            }
-            break;
+              if (lvl >= 30) {
+                changeNeeded = true;
+              }
+              break;
 
             case 'shieldon':
-            if (lvl >= 31) {
-              changeNeeded = true;
-            }
-            break;
+              if (lvl >= 31) {
+                changeNeeded = true;
+              }
+              break;
 
             case 'amaura':
-            if (lvl >= 32) {
-              changeNeeded = true;
-            }
-            break;
+              if (lvl >= 32) {
+                changeNeeded = true;
+              }
+              break;
 
             case 'tyrunt':
-            if (lvl >= 33) {
-              changeNeeded = true;
-            }
-            break;
+              if (lvl >= 33) {
+                changeNeeded = true;
+              }
+              break;
 
             case 'cranidos':
-            if (lvl >= 34) {
-            changeNeeded = true;
-            }
-            break;
+              if (lvl >= 34) {
+                changeNeeded = true;
+              }
+              break;
             case 'aerodactyl':
-            if (lvl >= 35) {
-              changeNeeded = true;
-            }
-            break;
+              if (lvl >= 35) {
+                changeNeeded = true;
+              }
+              break;
 
             case 'trapinch':
               if (mapWin.GROUND >= 5) {

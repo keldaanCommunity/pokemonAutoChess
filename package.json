@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@colyseus/command": "^0.1.7",
+    "@colyseus/core": "^0.14.25",
     "@colyseus/monitor": "^0.14.22",
     "@colyseus/ws-transport": "^0.14.21",
     "bad-words": "^3.0.4",
