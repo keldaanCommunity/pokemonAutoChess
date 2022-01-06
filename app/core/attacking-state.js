@@ -40,12 +40,12 @@ class AttackingState extends PokemonState {
           freezeChance += 0.3;
         }
         if (Math.random() > 1 - freezeChance) {
-          target.triggerFreeze(2000);
+          target.status.triggerFreeze(2000);
         }
       }
       if (pokemon.items.count(ITEMS.ICY_ROCK) != 0) {
         if (Math.random() > 0.9) {
-          target.triggerFreeze(2000);
+          target.status.triggerFreeze(2000);
         }
       }
       let poisonChance = 0;
@@ -57,11 +57,11 @@ class AttackingState extends PokemonState {
       }
       if (poisonChance != 0 && !(target.types.includes(TYPE.METAL) || target.types.includes(TYPE.POISON))) {
         if (Math.random() > poisonChance) {
-          target.triggerPoison(2000);
+          target.status.triggerPoison(2000);
         }
       }
       if (pokemon.effects.includes(EFFECTS.CURSE)) {
-        target.triggerSilence(2000);
+        target.status.triggerSilence(2000);
       }
       if (pokemon.effects.includes(EFFECTS.REVENGE)) {
         pokemon.setMana(pokemon.mana + 5);

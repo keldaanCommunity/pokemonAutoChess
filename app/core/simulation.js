@@ -338,7 +338,7 @@ class Simulation extends Schema {
       }
       if (sleepMalus > 0) {
         if (this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)) {
-          this.board.getValue(pokemon.positionX, 5 - pokemon.positionY).triggerSleep(sleepMalus);
+          this.board.getValue(pokemon.positionX, 5 - pokemon.positionY).status.triggerSleep(sleepMalus);
         }
       }
     });
@@ -395,7 +395,7 @@ class Simulation extends Schema {
       }
       if (sleepMalus > 0) {
         if (this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)) {
-          this.board.getValue(pokemon.positionX, 5 - pokemon.positionY).triggerSleep(sleepMalus);
+          this.board.getValue(pokemon.positionX, 5 - pokemon.positionY).status.triggerSleep(sleepMalus);
         }
       }
     });

@@ -88,6 +88,71 @@ export default class BattleManager {
     }
   }
 
+  changeStatus(playerId, change, pokemon) {
+    if (this.player.id == playerId) {
+      const children = this.group.getChildren();
+      for (let i = 0; i < children.length; i++) {
+        if (children[i].id == pokemon.id) {
+          if (change.field == 'poison') {
+            if (pokemon.status.poison) {
+              children[i].addPoison();
+            } else {
+              children[i].removePoison();
+            }
+          } else if (change.field == 'sleep') {
+            if (pokemon.status.sleep) {
+              children[i].addSleep();
+            } else {
+              children[i].removeSleep();
+            }
+          } else if (change.field == 'burn') {
+            if (pokemon.status.burn) {
+              children[i].addBurn();
+            } else {
+              children[i].removeBurn();
+            }
+          } else if (change.field == 'silence') {
+            if (pokemon.status.silence) {
+              children[i].addSilence();
+            } else {
+              children[i].removeSilence();
+            }
+          } else if (change.field == 'confusion') {
+            if (pokemon.status.confusion) {
+              children[i].addConfusion();
+            } else {
+              children[i].removeConfusion();
+            }
+          } else if (change.field == 'freeze') {
+            if (pokemon.status.freeze) {
+              children[i].addFreeze();
+            } else {
+              children[i].removeFreeze();
+            }
+          } else if (change.field == 'protect') {
+            if (pokemon.status.protect) {
+              children[i].addProtect();
+            } else {
+              children[i].removeProtect();
+            }
+          } else if (change.field == 'wound') {
+            if (pokemon.status.wound) {
+              children[i].addWound();
+            } else {
+              children[i].removeWound();
+            }
+          } else if (change.field == 'resurection') {
+            if (pokemon.status.resurection) {
+              children[i].addResurection();
+            } else {
+              children[i].removeResurection();
+            }
+          }
+        }
+      }
+    }
+  }
+
   changePokemon(playerId, change, pokemon) {
     if (this.player.id == playerId) {
       const children = this.group.getChildren();

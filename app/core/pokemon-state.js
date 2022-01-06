@@ -60,22 +60,22 @@ class PokemonState {
             if (pokemon.flyingProtection) {
               if (pokemon.effects.includes(EFFECTS.TAILWIND)) {
                 if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.TAILWIND].threshold) {
-                  pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.TAILWIND].duration);
+                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.TAILWIND].duration);
                   pokemon.flyingProtection = false;
                 }
               } else if (pokemon.effects.includes(EFFECTS.FEATHER_DANCE)) {
                 if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.FEATHER_DANCE].threshold) {
-                  pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.FEATHER_DANCE].duration);
+                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.FEATHER_DANCE].duration);
                   pokemon.flyingProtection = false;
                 }
               } else if (pokemon.effects.includes(EFFECTS.MAX_AIRSTREAM)) {
                 if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_AIRSTREAM].threshold) {
-                  pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_AIRSTREAM].duration);
+                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_AIRSTREAM].duration);
                   pokemon.flyingProtection = false;
                 }
               } else if (pokemon.effects.includes(EFFECTS.MAX_GUARD)) {
                 if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_GUARD].threshold) {
-                  pokemon.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_GUARD].duration);
+                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_GUARD].duration);
                   pokemon.flyingProtection = false;
                 }
               }
@@ -99,8 +99,8 @@ class PokemonState {
             pokemon.life = pokemon.hp * 0.8;
             pokemon.atk += pokemon.baseAtk *0.6;
             pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.HYDRO_CANNON), 1);
-          } else if (pokemon.resurection) {
-            pokemon.resurection = false;
+          } else if (pokemon.status.resurection) {
+            pokemon.status.resurection = false;
             pokemon.life = pokemon.hp;
           } else {
             board.setValue(pokemon.positionX, pokemon.positionY, undefined);
@@ -132,36 +132,36 @@ class PokemonState {
 
   update(pokemon, dt, board, climate) {
     let updateEffects = false;
-    if (pokemon.burn) {
-      pokemon.updateBurn(dt);
+    if (pokemon.status.burn) {
+      pokemon.status.updateBurn(dt);
     }
 
-    if (pokemon.poison) {
-      pokemon.updatePoison(dt);
+    if (pokemon.status.poison) {
+      pokemon.status.updatePoison(dt);
     }
 
-    if (pokemon.sleep) {
-      pokemon.updateSleep(dt);
+    if (pokemon.status.sleep) {
+      pokemon.status.updateSleep(dt);
     }
 
-    if (pokemon.silence) {
-      pokemon.updateSilence(dt);
+    if (pokemon.status.silence) {
+      pokemon.status.updateSilence(dt);
     }
 
-    if (pokemon.protect) {
-      pokemon.updateProtect(dt);
+    if (pokemon.status.protect) {
+      pokemon.status.updateProtect(dt);
     }
 
-    if (pokemon.freeze) {
-      pokemon.updateFreeze(dt);
+    if (pokemon.status.freeze) {
+      pokemon.status.updateFreeze(dt);
     }
 
-    if (pokemon.confusion) {
-      pokemon.updateConfusion(dt);
+    if (pokemon.status.confusion) {
+      pokemon.status.updateConfusion(dt);
     }
 
-    if (pokemon.wound) {
-      pokemon.updateWound(dt);
+    if (pokemon.status.wound) {
+      pokemon.status.updateWound(dt);
     }
 
     if (pokemon.manaCooldown <= 0) {

@@ -114,6 +114,13 @@ class GameContainer {
     player.simulation.blueTeam.onAdd = (pokemon, key) => {
       // console.log('add pokemon');
       this.handlePokemonAdd(player.id, pokemon);
+
+      pokemon.status.onChange = (changes) =>{
+        changes.forEach((change) => {
+          this.handlePokemonStatusChange(player.id, change, pokemon);
+        });
+      };
+
       pokemon.onChange = (changes) => {
         // console.log('change pokemon');
         changes.forEach((change) => {
@@ -132,6 +139,13 @@ class GameContainer {
     player.simulation.redTeam.onAdd = (pokemon, key) => {
       // console.log('add pokemon');
       this.handlePokemonAdd(player.id, pokemon);
+
+      pokemon.status.onChange = (changes) =>{
+        changes.forEach((change) => {
+          this.handlePokemonStatusChange(player.id, change, pokemon);
+        });
+      };
+
       pokemon.onChange = (changes) => {
         // console.log('change pokemon');
         changes.forEach((change) => {
@@ -180,6 +194,13 @@ class GameContainer {
     // console.log('simulation change' + change.field);
     if (this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager) {
       this.game.scene.getScene('gameScene').battleManager.changePokemon(playerId, change, pokemon);
+    }
+  }
+
+  handlePokemonStatusChange(playerId, change, pokemon) {
+    // console.log('simulation change' + change.field);
+    if (this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager) {
+      this.game.scene.getScene('gameScene').battleManager.changeStatus(playerId, change, pokemon);
     }
   }
 

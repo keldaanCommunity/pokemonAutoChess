@@ -118,7 +118,7 @@ class RockSmashStrategy extends AttackStrategy {
     }
 
     target.handleDamage(d, board, ATTACK_TYPE.PHYSICAL, pokemon);
-    target.triggerSilence(s);
+    target.status.triggerSilence(s);
   }
 }
 
@@ -160,12 +160,12 @@ class RoarOfTimeStrategy extends AttackStrategy {
 
     let candidate = pokemon;
     board.forEach((x, y, pkm) => {
-      if (pkm && pokemon.team == pkm.team && pkm.items.length > candidate.items.length && !pkm.resurection) {
+      if (pkm && pokemon.team == pkm.team && pkm.items.length > candidate.items.length && !pkm.status.resurection) {
         candidate = pkm;
       }
     });
 
-    candidate.resurection = true;
+    candidate.status.resurection = true;
   }
 }
 
@@ -260,7 +260,7 @@ class BurnStrategy extends AttackStrategy {
     }
     board.forEach((x, y, value) => {
       if (value && pokemon.team != value.team) {
-        value.triggerBurn(timer);
+        value.status.triggerBurn(timer);
       }
     });
   }
@@ -289,7 +289,7 @@ class SilenceStrategy extends AttackStrategy {
     }
     board.forEach((x, y, value) => {
       if (value && pokemon.team != value.team) {
-        value.triggerSilence(timer);
+        value.status.triggerSilence(timer);
       }
     });
   }
@@ -316,7 +316,7 @@ class PoisonStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.triggerPoison(timer);
+    target.status.triggerPoison(timer);
   }
 }
 
@@ -343,7 +343,7 @@ class FreezeStrategy extends AttackStrategy {
     }
     board.forEach((x, y, value) => {
       if (value && pokemon.team != value.team) {
-        value.triggerFreeze(timer);
+        value.status.triggerFreeze(timer);
       }
     });
   }
@@ -371,7 +371,7 @@ class ProtectStrategy extends AttackStrategy {
       default:
         break;
     }
-    pokemon.triggerProtect(timer);
+    pokemon.status.triggerProtect(timer);
   }
 }
 
@@ -396,7 +396,7 @@ class SleepStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.triggerSleep(timer);
+    target.status.triggerSleep(timer);
   }
 }
 
@@ -424,7 +424,7 @@ class ConfusionStrategy extends AttackStrategy {
 
     board.forEach((x, y, value) => {
       if (value && pokemon.team != value.team) {
-        value.triggerConfusion(timer);
+        value.status.triggerConfusion(timer);
       }
     });
   }
