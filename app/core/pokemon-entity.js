@@ -6,6 +6,7 @@ const AttackingState = require('./attacking-state');
 const uniqid = require('uniqid');
 const Items = require('../models/colyseus-models/items');
 const Status = require('../models/colyseus-models/status');
+const Count = require('../models/colyseus-models/count');
 const ArraySchema = schema.ArraySchema;
 const PokemonFactory = require('../models/pokemon-factory');
 
@@ -17,6 +18,7 @@ class PokemonEntity extends schema.Schema {
     this.effects = new ArraySchema();
     this.items = new Items(pokemon.items);
     this.status = new Status();
+    this.count = new Count();
     this.simulation = simulation;
     this.strategy = PokemonFactory.createStrategyFromName(pokemon.skill);
     this.assign(
@@ -31,7 +33,6 @@ class PokemonEntity extends schema.Schema {
           index: pokemon.index,
           name: pokemon.name,
           critChance: 10,
-          critCount: 0,
           action: STATE_TYPE.MOVING,
           orientation: ORIENTATION.DOWNLEFT,
           baseAtk: pokemon.atk,
@@ -109,7 +110,6 @@ schema.defineTypes(PokemonEntity, {
   id: 'string',
   orientation: 'string',
   critChance: 'uint8',
-  critCount: 'uint8',
   hp: 'uint16',
   mana: 'uint8',
   maxMana: 'uint8',
@@ -132,7 +132,8 @@ schema.defineTypes(PokemonEntity, {
   items: Items,
   stars: 'uint8',
   skill: 'string',
-  status: Status
+  status: Status,
+  count: Count
 });
 
 module.exports = PokemonEntity;

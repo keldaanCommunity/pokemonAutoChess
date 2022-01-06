@@ -6,6 +6,7 @@ class AttackStrategy {
 
   process(pokemon, state, board, target) {
     pokemon.setMana(0);
+    pokemon.count.ult += 1;
   }
 }
 

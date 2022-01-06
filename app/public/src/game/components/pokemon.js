@@ -19,7 +19,6 @@ export default class Pokemon extends Button {
     this.hp = pokemon.hp;
     this.range = pokemon.range;
     this.critChance = 10;
-    this.critCount = 0;
     this.atk = pokemon.atk;
     this.def = pokemon.def;
     this.speDef = pokemon.speDef;

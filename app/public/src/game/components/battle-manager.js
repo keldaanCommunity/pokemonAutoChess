@@ -153,6 +153,26 @@ export default class BattleManager {
     }
   }
 
+  changeCount(playerId, change, pokemon) {
+    // console.log(change.field, change.value);
+    if (this.player.id == playerId) {
+      const children = this.group.getChildren();
+      for (let i = 0; i < children.length; i++) {
+        if (children[i].id == pokemon.id) {
+          if (change.field == 'crit') {
+            if (change.value != 0) {
+              this.displayCriticalHit(children[i].x, children[i].y);
+            }
+          } else if (change.field == 'ult') {
+            if (change.value != 0) {
+              children[i].specialAttackAnimation();
+            }
+          }
+        }
+      }
+    }
+  }
+
   changePokemon(playerId, change, pokemon) {
     if (this.player.id == playerId) {
       const children = this.group.getChildren();
@@ -228,9 +248,6 @@ export default class BattleManager {
             children[i].mana = pokemon.mana;
             children[i].getFirst('objType', 'manabar').setLife(children[i].mana);
             const detail = children[i].getFirst('objType', 'detail');
-            if (change.previousValue > change.value) {
-              children[i].specialAttackAnimation();
-            }
             if (detail) {
               detail.mana.setText(pokemon.mana);
             }
@@ -279,64 +296,6 @@ export default class BattleManager {
             if (children[i].action == 'ATTACKING' && children[i].targetX !== null && children[i].targetY !== null) {
               this.animationManager.animatePokemon(children[i]);
               children[i].attackAnimation();
-            }
-          } else if (change.field == 'poison') {
-            if (pokemon.poison) {
-              children[i].addPoison();
-            } else {
-              children[i].removePoison();
-            }
-          } else if (change.field == 'sleep') {
-            if (pokemon.sleep) {
-              children[i].addSleep();
-            } else {
-              children[i].removeSleep();
-            }
-          } else if (change.field == 'burn') {
-            if (pokemon.burn) {
-              children[i].addBurn();
-            } else {
-              children[i].removeBurn();
-            }
-          } else if (change.field == 'silence') {
-            if (pokemon.silence) {
-              children[i].addSilence();
-            } else {
-              children[i].removeSilence();
-            }
-          } else if (change.field == 'confusion') {
-            if (pokemon.confusion) {
-              children[i].addConfusion();
-            } else {
-              children[i].removeConfusion();
-            }
-          } else if (change.field == 'freeze') {
-            if (pokemon.freeze) {
-              children[i].addFreeze();
-            } else {
-              children[i].removeFreeze();
-            }
-          } else if (change.field == 'protect') {
-            if (pokemon.protect) {
-              children[i].addProtect();
-            } else {
-              children[i].removeProtect();
-            }
-          } else if (change.field == 'wound') {
-            if (pokemon.wound) {
-              children[i].addWound();
-            } else {
-              children[i].removeWound();
-            }
-          } else if (change.field == 'resurection') {
-            if (pokemon.resurection) {
-              children[i].addResurection();
-            } else {
-              children[i].removeResurection();
-            }
-          } else if (change.field == 'critCount') {
-            if (change.value != 0 && change.value > children[i].critCount) {
-              this.displayCriticalHit(children[i].x, children[i].y);
             }
           }
           break;

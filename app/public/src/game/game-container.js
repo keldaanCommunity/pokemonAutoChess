@@ -134,6 +134,12 @@ class GameContainer {
           this.handlePokemonItemsChange(player.id, change, pokemon);
         });
       };
+      pokemon.count.onChange = (changes) => {
+        // console.log('change item');
+        changes.forEach((change) => {
+          this.handlePokemonCountChange(player.id, change, pokemon);
+        });
+      };
     };
 
     player.simulation.redTeam.onAdd = (pokemon, key) => {
@@ -156,6 +162,12 @@ class GameContainer {
         // console.log('change item');
         changes.forEach((change) => {
           this.handlePokemonItemsChange(player.id, change, pokemon);
+        });
+      };
+      pokemon.count.onChange = (changes) => {
+        // console.log('change item');
+        changes.forEach((change) => {
+          this.handlePokemonCountChange(player.id, change, pokemon);
         });
       };
     };
@@ -210,6 +222,11 @@ class GameContainer {
     }
   }
 
+  handlePokemonCountChange(playerId, change, pokemon) {
+    if (this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager) {
+      this.game.scene.getScene('gameScene').battleManager.changeCount(playerId, change, pokemon);
+    }
+  }
 
   handleClimateChange(change, player) {
     if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null) {
