@@ -1,4 +1,5 @@
 const {ATTACK_TYPE, TYPE, EFFECTS} = require('../models/enum');
+const PokemonFactory = require('../models/pokemon-factory');
 
 class AttackStrategy {
   constructor() {
@@ -17,6 +18,22 @@ class LeechSeedStrategy extends AttackStrategy {
 
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
+  }
+}
+
+class ShadowCloneStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
+    const x = farthestCoordinate[0];
+    const y = farthestCoordinate[1];
+    const clone = PokemonFactory.createPokemonFromName(pokemon.name);
+    const items = pokemon.getAllItems();
+    items.forEach((item)=>{
+      clone.items.add(item);
+    });
+    const clonedCopy = pokemon.simulation.addPokemon(clone, x, y, pokemon.team);
+    clonedCopy.life = pokemon.life;
   }
 }
 
@@ -1529,7 +1546,8 @@ class MetronomeStrategy extends AttackStrategy {
       RockTombStrategy,
       RockSmashStrategy,
       HeadSmashStrategy,
-      VoltSwitchStrategy
+      VoltSwitchStrategy,
+      ShadowCloneStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1592,5 +1610,6 @@ module.exports = {
   RockTombStrategy,
   RockSmashStrategy,
   HeadSmashStrategy,
-  VoltSwitchStrategy
+  VoltSwitchStrategy,
+  ShadowCloneStrategy
 };

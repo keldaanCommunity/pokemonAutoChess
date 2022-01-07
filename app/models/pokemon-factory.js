@@ -152,6 +152,9 @@ class PokemonFactory {
 
   static createStrategyFromName(name) {
     switch (name) {
+      case SPECIAL_SKILL.SHADOW_CLONE:
+        return new Strategy.ShadowCloneStrategy();
+
       case SPECIAL_SKILL.VOLT_SWITCH:
         return new Strategy.VoltSwitchStrategy();
 
