@@ -6,7 +6,7 @@ class PokemonState {
   }
 
   handleHeal(pokemon, heal) {
-    if (pokemon.life > 0 && pokemon.life < pokemon.hp && !pokemon.wound) {
+    if (pokemon.life > 0 && pokemon.life < pokemon.hp && !pokemon.status.wound) {
       pokemon.life = Math.min(pokemon.hp, pokemon.life + heal);
     }
   }
@@ -18,7 +18,7 @@ class PokemonState {
       death = true;
     } else {
       death = false;
-      if (!pokemon.protect) {
+      if (!pokemon.status.protect) {
         let reducedDamage = damage;
         const armorFactor = 0.1;
         if (attackType == ATTACK_TYPE.PHYSICAL) {
@@ -224,11 +224,11 @@ class PokemonState {
     }
 
     if (pokemon.cooldown <= 0) {
-      if (pokemon.burn) {
+      if (pokemon.status.burn) {
         this.handleDamage(pokemon, Math.ceil(pokemon.hp / 5), board, ATTACK_TYPE.TRUE);
       }
 
-      if (pokemon.poison) {
+      if (pokemon.status.poison) {
         this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.15), board, ATTACK_TYPE.TRUE);
       }
 
