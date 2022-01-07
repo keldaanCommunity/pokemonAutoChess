@@ -16,7 +16,7 @@ class AttackingState extends PokemonState {
         pokemon.toMovingState();
       } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) > pokemon.range) {
         pokemon.toMovingState();
-      } else if (pokemon.confusion) {
+      } else if (pokemon.status.confusion) {
         pokemon.toMovingState();
       } else {
         this.attack(pokemon, board, targetCoordinate, climate);
@@ -30,7 +30,7 @@ class AttackingState extends PokemonState {
     pokemon.targetX = coordinates[0];
     pokemon.targetY = coordinates[1];
     const target = board.getValue(coordinates[0], coordinates[1]);
-    if (target && !pokemon.sleep && !pokemon.freeze) {
+    if (target && !pokemon.status.sleep && !pokemon.status.freeze) {
       if (climate == CLIMATE.SNOW) {
         let freezeChance = 0;
         if (pokemon.effects.includes(EFFECTS.SNOW)) {

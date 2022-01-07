@@ -82,7 +82,7 @@ class HeadSmashStrategy extends AttackStrategy {
       default:
         break;
     }
-    if (target.sleep || target.freeze) {
+    if (target.status.sleep || target.status.freeze) {
       target.handleDamage(target.life, board, ATTACK_TYPE.TRUE, pokemon);
     } else {
       target.handleDamage(d, board, ATTACK_TYPE.PHYSICAL, pokemon);
@@ -1201,7 +1201,7 @@ class PoisonStingStrategy extends AttackStrategy {
       default:
         break;
     }
-    if (pokemon.effects.includes(EFFECTS.POISON_GAS) || pokemon.effects.includes(EFFECTS.TOXIC)) {
+    if (pokemon.status.poison) {
       damage = damage * 2;
     }
 

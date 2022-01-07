@@ -13,10 +13,10 @@ class MovingState extends PokemonState {
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
       // no target case
       if (targetCoordinate[0] === undefined || targetCoordinate[1] === undefined) {
-      } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) <= pokemon.range && !pokemon.confusion) {
+      } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) <= pokemon.range && !pokemon.status.confusion) {
         pokemon.toAttackingState();
       } else {
-        if (!pokemon.sleep && !pokemon.freeze) {
+        if (!pokemon.status.sleep && !pokemon.status.freeze) {
           this.move(pokemon, board, targetCoordinate);
         }
       }
