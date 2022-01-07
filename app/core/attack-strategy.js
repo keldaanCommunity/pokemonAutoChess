@@ -196,7 +196,7 @@ class HealBlockStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.triggerWound(timer);
+        cell.value.status.triggerWound(timer);
       }
     });
   }
