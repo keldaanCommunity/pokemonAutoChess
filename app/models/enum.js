@@ -1613,10 +1613,19 @@ const SPECIAL_SKILL = Object.freeze({
   ROCK_TOMB: 'ROCK_TOMB',
   ROCK_SMASH: 'ROCK_SMASH',
   HEAD_SMASH: 'HEAD_SMASH',
-  VOLT_SWITCH: 'VOLT_SWITCH'
+  VOLT_SWITCH: 'VOLT_SWITCH',
+  SHADOW_CLONE: 'SHADOW_CLONE'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+  SHADOW_CLONE: {
+    title: {
+      eng: 'Shadow Clone'
+    },
+    description: {
+      eng: 'The pokemon creates an identical clone of himself next to his target. This clone inherits from the pokemon items and stats.'
+    }
+  },
   VOLT_SWITCH: {
     title: {
       eng: 'Volt Switch'

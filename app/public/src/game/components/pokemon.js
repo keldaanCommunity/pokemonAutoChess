@@ -596,6 +596,17 @@ export default class Pokemon extends Button {
             });
             break;
 
+          case SPECIAL_SKILL.SHADOW_CLONE:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.SHADOW_CLONE, '0');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.SHADOW_CLONE);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
           default:
             break;
         }

@@ -95,19 +95,19 @@ class MegaManectric extends Pokemon {
 
 class Shuppet extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SHUPPET, 'ptéra', [TYPE.DARK, TYPE.AMORPH], RARITY.LEGENDARY, 'sound', 353, PKM.BANETTE, 90, 5, 3, 3, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.SHUPPET, 'ptéra', [TYPE.DARK, TYPE.AMORPH], RARITY.LEGENDARY, 'sound', 353, PKM.BANETTE, 90, 5, 3, 3, 1, 'GHOST/range', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.SHADOW_CLONE);
   }
 }
 
 class Banette extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.BANETTE, 'ptéra', [TYPE.DARK, TYPE.AMORPH], RARITY.LEGENDARY, 'sound', 354, PKM.MEGABANETTE, 130, 11, 3, 3, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.BANETTE, 'ptéra', [TYPE.DARK, TYPE.AMORPH], RARITY.LEGENDARY, 'sound', 354, PKM.MEGABANETTE, 130, 11, 4, 4, 1, 'GHOST/range', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SHADOW_CLONE);
   }
 }
 
 class MegaBanette extends Pokemon {
   constructor() {
-    super('Junaca', PKM.MEGABANETTE, 'ptéra', [TYPE.DARK, TYPE.AMORPH], RARITY.LEGENDARY, 'sound', 3540, '', 230, 21, 3, 3, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('Junaca', PKM.MEGABANETTE, 'ptéra', [TYPE.DARK, TYPE.AMORPH], RARITY.LEGENDARY, 'sound', 3540, '', 230, 21, 5, 5, 1, 'GHOST/range', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.SHADOW_CLONE);
   }
 }
 
@@ -131,7 +131,7 @@ class MegaLucario extends Pokemon {
 
 class Swablu extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SWABLU, 'tylton', [TYPE.FAIRY, TYPE.DRAGON, TYPE.SOUND], RARITY.LEGENDARY, 'sound', 333, PKM.ALTARIA, 90, 5, 3, 3, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DRAGON_TAIL);
+    super('Nintendo', PKM.SWABLU, 'tylton', [TYPE.FAIRY, TYPE.DRAGON, TYPE.SOUND], RARITY.LEGENDARY, 'sound', 333, PKM.ALTARIA, 90, 5, 3, 3, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 

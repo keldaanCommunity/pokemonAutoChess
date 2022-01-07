@@ -90,6 +90,7 @@ class Simulation extends Schema {
       this.applyEffects(pokemonEntity, pokemon.types, this.redEffects, this.blueEffects, redTeam, blueTeam);
       this.redTeam.set(pokemonEntity.id, pokemonEntity);
     }
+    return pokemonEntity;
   }
 
   getFirstAvailablePlaceOnBoard(ascending) {
