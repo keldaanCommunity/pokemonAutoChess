@@ -26,8 +26,10 @@ class Status extends schema.Schema {
   }
 
   triggerBurn(timer) {
-    this.burn = true;
-    this.burnCooldown = timer;
+    if (!this.burn) {
+      this.burn = true;
+      this.burnCooldown = timer;
+    }
   }
 
   updateBurn(dt) {
@@ -39,8 +41,10 @@ class Status extends schema.Schema {
   }
 
   triggerSilence(timer) {
-    this.silence = true;
-    this.silenceCooldown = timer;
+    if (!this.silence) {
+      this.silence = true;
+      this.silenceCooldown = timer;
+    }
   }
 
   updateSilence(dt) {
@@ -52,8 +56,10 @@ class Status extends schema.Schema {
   }
 
   triggerPoison(timer) {
-    this.poison = true;
-    this.poisonCooldown = timer;
+    if (!this.poison) {
+      this.poison = true;
+      this.poisonCooldown = timer;
+    }
   }
 
   updatePoison(dt) {
@@ -65,8 +71,10 @@ class Status extends schema.Schema {
   }
 
   triggerFreeze(timer) {
-    this.freeze = true;
-    this.freezeCooldown = timer;
+    if (!this.freeze) {
+      this.freeze = true;
+      this.freezeCooldown = timer;
+    }
   }
 
   updateFreeze(dt) {
@@ -78,8 +86,10 @@ class Status extends schema.Schema {
   }
 
   triggerProtect(timer) {
-    this.protect = true;
-    this.protectCooldown = timer;
+    if (!this.protect) {
+      this.protect = true;
+      this.protectCooldown = timer;
+    }
   }
 
   updateProtect(dt) {
@@ -91,8 +101,10 @@ class Status extends schema.Schema {
   }
 
   triggerSleep(timer) {
-    this.sleep = true;
-    this.sleepCooldown = timer;
+    if (!this.sleep) {
+      this.sleep = true;
+      this.sleepCooldown = timer;
+    }
   }
 
   updateSleep(dt) {
@@ -104,8 +116,10 @@ class Status extends schema.Schema {
   }
 
   triggerConfusion(timer) {
-    this.confusion = true;
-    this.confusionCooldown = timer;
+    if (!this.confusion) {
+      this.confusion = true;
+      this.confusionCooldown = timer;
+    }
   }
 
   updateConfusion(dt) {
@@ -117,8 +131,10 @@ class Status extends schema.Schema {
   }
 
   triggerWound(timer) {
-    this.wound = true;
-    this.woundCooldown = timer;
+    if (!this.wound) {
+      this.wound = true;
+      this.woundCooldown = timer;
+    }
   }
 
   updateWound(dt) {

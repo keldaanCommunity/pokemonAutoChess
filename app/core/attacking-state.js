@@ -53,7 +53,7 @@ class AttackingState extends PokemonState {
         poisonChance += 0.2;
       }
       if (pokemon.effects.includes(EFFECTS.TOXIC)) {
-        poisonChance += 0.3;
+        poisonChance += 0.5;
       }
       if (poisonChance != 0 && !(target.types.includes(TYPE.METAL) || target.types.includes(TYPE.POISON))) {
         if (Math.random() > poisonChance) {
