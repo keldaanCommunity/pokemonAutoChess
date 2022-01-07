@@ -132,7 +132,7 @@
             <key>json</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename></filename>
+                <filename>types.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -151,7 +151,7 @@
         <key>autoAliasEnabled</key>
         <true/>
         <key>trimSpriteNames</key>
-        <false/>
+        <true/>
         <key>prependSmartFolderName</key>
         <false/>
         <key>autodetectAnimations</key>
@@ -344,6 +344,22 @@
                 <rect>10,11,20,21</rect>
                 <key>scale9Paddings</key>
                 <rect>10,11,20,21</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">FOSSIL.png</key>
+            <key type="filename">P2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>9,9,17,17</rect>
+                <key>scale9Paddings</key>
+                <rect>9,9,17,17</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -540,6 +556,21 @@
                 <rect>7,11,13,21</rect>
                 <key>scale9Paddings</key>
                 <rect>7,11,13,21</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">types.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>27,87,54,173</rect>
+                <key>scale9Paddings</key>
+                <rect>27,87,54,173</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
