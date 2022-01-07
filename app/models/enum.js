@@ -2672,12 +2672,12 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 5,
           title: `(5) Growth`,
-          text: `Grass allies restore 10% extra HP per second`
+          text: `Grass allies restore 10% HP per second`
         },
         {
           trigger: 7,
           title: `(7) Tree of life`,
-          text: `Grass allies restore 15% extra HP per second`
+          text: `Grass allies restore 15% HP per second`
         }
       ],
       esp: [
