@@ -1,5 +1,4 @@
 const {ATTACK_TYPE, TYPE, EFFECTS} = require('../models/enum');
-const PokemonFactory = require('../models/pokemon-factory');
 
 class AttackStrategy {
   constructor() {
@@ -27,13 +26,10 @@ class ShadowCloneStrategy extends AttackStrategy {
     const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
     const x = farthestCoordinate[0];
     const y = farthestCoordinate[1];
-    const clone = PokemonFactory.createPokemonFromName(pokemon.name);
-    const items = pokemon.getAllItems();
-    items.forEach((item)=>{
-      clone.items.add(item);
-    });
-    const clonedCopy = pokemon.simulation.addPokemon(clone, x, y, pokemon.team);
-    clonedCopy.life = pokemon.life;
+    if (x !== undefined && y !== undefined) {
+      const clone = pokemon.simulation.addPokemon(pokemon, x, y, pokemon.team);
+      clone.life = pokemon.life;
+    }
   }
 }
 
