@@ -7,7 +7,7 @@ class GameRarityPercentage extends Component{
         const style = {
             position:'absolute',
             bottom:'16%',
-            right:'10%',
+            right:'5%',
             display:'flex',
             padding:'0px',
             backgroundColor:'rgba(255,255,255,0.7)'

@@ -10,9 +10,9 @@ class GameShop extends Component{
     render(){
         const style = {
             position:'absolute',
-            left:'10%',
+            left:'5%',
             bottom:'0.5%',
-            width:'80%',
+            width:'90%',
             height:'15%',
             backgroundColor: 'rgba(255, 255, 255, 0.7)'
         }

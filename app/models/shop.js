@@ -48,7 +48,7 @@ const MYTHICAL_2 = [PKM.MELOETTA, PKM.MEWTWO, PKM.ENTEI, PKM.SUICUNE, PKM.RAIKOU
 
 class Shop {
   assignShop(player) {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       let pokemon = this.pickPokemon(player);
       const seed = Math.random();
       if (seed > 0.993) {
@@ -61,7 +61,7 @@ class Shop {
   assignDittoShop(player) {
     player.shop[0] = PKM.DITTO;
 
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 6; i++) {
       const pokemon = this.pickPokemon(player);
       player.shop[i] = pokemon;
     }
@@ -69,7 +69,7 @@ class Shop {
 
   assignFirstMythicalShop(player) {
     const mythicalCopy = JSON.parse(JSON.stringify(MYTHICAL_1));
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       const pkm = PokemonFactory.createPokemonFromName(mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]).name;
       mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1);
       player.shop[i] = pkm;
@@ -78,7 +78,7 @@ class Shop {
 
   assignSecondMythicalShop(player) {
     const mythicalCopy = JSON.parse(JSON.stringify(MYTHICAL_2));
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       const pkm = PokemonFactory.createPokemonFromName(mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]).name;
       mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1);
       player.shop[i] = pkm;
