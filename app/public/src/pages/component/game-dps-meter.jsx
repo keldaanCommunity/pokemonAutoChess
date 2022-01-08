@@ -12,13 +12,15 @@ class GameDpsMeter extends Component{
             display:'flex',
             flexFlow:'column',
             justifyContent:'space-between',
-            backgroundColor: 'rgba(255,255,255,0.7)'
+            backgroundColor: 'rgba(255,255,255,0.7)',
+            padding:'10px'
         }
         if(this.props.dpsMeter.size && this.props.dpsMeter.size > 0){
             let sortedArray = Array.from(this.props.dpsMeter).sort((a,b)=>{return b[1].damage - a[1].damage});
 
             return <div className='nes-container' style={style}>
-            <h5>Damage Dealt</h5>
+            <h5 style={{textAlign:'center'}}>Damage Dealt</h5>
+            <div style={{overflowY:'scroll'}}>
             {sortedArray.map(p=>{
                 return <GameDps 
                 key={p[0]} 
@@ -27,6 +29,7 @@ class GameDpsMeter extends Component{
                 maxDamage={sortedArray[0][1].damage}
                 />
             })}
+            </div>
         </div>
         }
         else{

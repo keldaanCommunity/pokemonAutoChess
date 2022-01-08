@@ -13,7 +13,8 @@ class GameSynergies extends Component{
             width: '12%',
             top:'8.5%',
             flexFlow: 'column',
-            maxHeight:'75%'
+            maxHeight:'75%',
+            overflowY:'scroll'
         }
 
         return <div style={style}>

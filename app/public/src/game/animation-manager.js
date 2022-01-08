@@ -516,7 +516,7 @@ export default class AnimationManager {
 
     this.game.anims.create({
       key: SPECIAL_SKILL.SHADOW_CLONE,
-      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.SHADOW_CLONE, {start: 0, end: 6}),
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.SHADOW_CLONE, {start: 0, end: 3}),
       duration: 1000,
       repeat: 0
     });
