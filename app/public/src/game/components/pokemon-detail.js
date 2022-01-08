@@ -32,7 +32,7 @@ export default class PokemonDetail extends GameObjects.Container {
       wordWrap: {width: 400, useAdvancedWrap: true}
     };
 
-    let displayName = this.pokemonInformation.name.charAt(0).toUpperCase() + this.pokemonInformation.name.slice(1);
+    const displayName = this.pokemonInformation.name.charAt(0).toUpperCase() + this.pokemonInformation.name.slice(1);
 
     this.objType = 'detail';
     this.add(new GameObjects.Rectangle(scene, 360, 100, 720, 200, 0xffffff, 0.7).setStrokeStyle(3, 0x000000, 1));
