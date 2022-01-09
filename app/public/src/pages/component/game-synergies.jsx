@@ -14,10 +14,12 @@ class GameSynergies extends Component{
             top:'8.5%',
             flexFlow: 'column',
             maxHeight:'75%',
-            overflowY:'scroll'
+            overflowY:'scroll',
+            padding:'0px',
+            backgroundColor:'rgba(255,255,255,0.6)' 
         }
-
-        return <div style={style}>
+        if(this.props.synergies && this.props.synergies.length != 0){
+            return <div style={style} className='nes-container'>
             {Object.keys(this.props.synergies).sort((a,b)=>{
                     if(this.props.synergies[a] == this.props.synergies[b]){
                         if(this.props.synergies[a] >= TYPE_TRIGGER[a][0]){
@@ -39,6 +41,10 @@ class GameSynergies extends Component{
                 }
             })}
         </div>
+        }
+        else{
+            return null;
+        }
     }
 }
 

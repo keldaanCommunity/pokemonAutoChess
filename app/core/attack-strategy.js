@@ -10,21 +10,6 @@ class AttackStrategy {
   }
 }
 
-class LeechSeedStrategy extends AttackStrategy {
-  constructor() {
-    super();
-  }
-
-  process(pokemon, state, board, target) {
-    super.process(pokemon, state, board, target);
-    board.forEach((x, y, tg) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.speDef = Math.max(0, tg.speDef - 2);
-        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
-      }
-    });
-  }
-}
 class HyperVoiceStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
@@ -1527,7 +1512,6 @@ class MetronomeStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
     const skills = [
-      LeechSeedStrategy,
       FireBlastStrategy,
       WheelOfFireStrategy,
       SeismicTossStrategy,
@@ -1591,7 +1575,6 @@ class MetronomeStrategy extends AttackStrategy {
 
 module.exports = {
   AttackStrategy,
-  LeechSeedStrategy,
   FireBlastStrategy,
   WheelOfFireStrategy,
   SeismicTossStrategy,
