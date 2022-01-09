@@ -1,5 +1,5 @@
 const Command = require('@colyseus/command').Command;
-const {STATE, COST, TYPE, EFFECTS, ITEMS, XP_PLACE, RARITY, PKM, BATTLE_RESULT, NEUTRAL_STAGE} = require('../../models/enum');
+const {STATE, COST, TYPE, ITEMS, XP_PLACE, RARITY, PKM, BATTLE_RESULT, NEUTRAL_STAGE} = require('../../models/enum');
 const Player = require('../../models/colyseus-models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
@@ -28,7 +28,6 @@ class OnShopCommand extends Command {
           }
           this.room.updateEvolution(id);
           this.room.updateEvolution(id);
-          //console.log('end of shop command', name);
         }
       }
     }

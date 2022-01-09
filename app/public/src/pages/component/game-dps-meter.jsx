@@ -20,6 +20,7 @@ class GameDpsMeter extends Component{
             let sortedArray = Array.from(this.props.dpsMeter).sort((a,b)=>{return b[1].damage - a[1].damage});
 
             return <div className='nes-container' style={style}>
+            <h5 style={{textAlign:'center'}}>Damage Dealt</h5>
             {sortedArray.map(p=>{
                 return <GameDps 
                 key={p[0]} 
