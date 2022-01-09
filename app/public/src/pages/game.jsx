@@ -28,12 +28,15 @@ class Game extends Component {
           modalTitle: '',
           modalInfo: '',
           dpsMeter: {},
+          history:[],
           afterGameId: '',
           isSignedIn: false,
           connected: false,
           shopLocked: false,
           name: '',
           money: 0,
+          streak:0,
+          interest:0,
           currentPlayerId:'',
           experienceManager:
           {
@@ -147,8 +150,11 @@ class Game extends Component {
             this.setState({
               name: player.name,
               money: player.money,
+              interest: player.interest,
+              streak: player.streak,
               shopLocked: player.shopLocked,
-              experienceManager: player.experienceManager
+              experienceManager: player.experienceManager,
+              history: player.history
             })
           }
 
@@ -417,11 +423,14 @@ class Game extends Component {
           info={this.state.modalInfo}
           leave={this.leaveGame.bind(this)}
         />
-        <GameShop 
+        <GameShop
+            history={this.state.history}
             levelExp={this.state.experienceManager.level} 
             experience={this.state.experienceManager.experience} 
             experienceNeeded={this.state.experienceManager.expNeeded} 
-            money={this.state.money} refresh={this.refreshClick.bind(this)} 
+            money={this.state.money} refresh={this.refreshClick.bind(this)}
+            interest={this.state.interest}
+            streak={this.state.streak}
             lock={this.lockClick.bind(this)} 
             shopLocked={this.state.shopLocked} 
             level={this.levelClick.bind(this)}
