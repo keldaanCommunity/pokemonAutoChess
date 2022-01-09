@@ -152,6 +152,9 @@ class PokemonFactory {
 
   static createStrategyFromName(name) {
     switch (name) {
+      case SPECIAL_SKILL.PETAL_DANCE:
+        return new Strategy.PetalDanceStrategy();
+
       case SPECIAL_SKILL.HYPER_VOICE:
         return new Strategy.HyperVoiceStrategy();
 

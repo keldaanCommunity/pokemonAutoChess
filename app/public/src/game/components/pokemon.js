@@ -88,6 +88,17 @@ export default class Pokemon extends Button {
     this.addTween();
   }
 
+  petalDanceAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.PETAL_DANCE, '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(2, 2);
+    specialProjectile.anims.play(SPECIAL_SKILL.PETAL_DANCE);
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
   specialAttackAnimation() {
     if (this.skill) {
       let coordinates;
