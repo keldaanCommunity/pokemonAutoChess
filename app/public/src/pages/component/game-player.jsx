@@ -20,7 +20,7 @@ const imgStyle={
 
 const opponentStyle={
     position: 'absolute',
-    right: '70px',
+    right: '74px',
     top: '-4px',
     bottom: '0px',
     padding: '0px',
