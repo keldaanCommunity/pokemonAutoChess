@@ -371,19 +371,19 @@ class Gardevoir extends Pokemon {
 
 class Budew extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.BUDEW, 'ptéra', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.EPIC, 'sound', 406, PKM.ROSELIA, 90, 5, 1, 1, 3, 'GRASS/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.BUDEW, 'ptéra', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.EPIC, 'sound', 406, PKM.ROSELIA, 90, 5, 1, 1, 3, 'GRASS/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.PETAL_DANCE);
   }
 }
 
 class Roselia extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ROSELIA, 'ptéra', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.EPIC, 'sound', 315, PKM.ROSERADE, 300, 17, 6, 3, 1, 'GRASS/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.ROSELIA, 'ptéra', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.EPIC, 'sound', 315, PKM.ROSERADE, 130, 9, 1, 1, 3, 'GRASS/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.PETAL_DANCE);
   }
 }
 
 class Roserade extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ROSERADE, 'ptéra', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.EPIC, 'sound', 407, '', 130, 9, 1, 1, 3, 'GRASS/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.ROSERADE, 'ptéra', [TYPE.GRASS, TYPE.POISON, TYPE.FLORA], RARITY.EPIC, 'sound', 407, '', 230, 18, 1, 1, 3, 'GRASS/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.PETAL_DANCE);
   }
 }
 

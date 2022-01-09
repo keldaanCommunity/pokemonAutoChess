@@ -167,6 +167,10 @@ export default class BattleManager {
             if (change.value != 0) {
               children[i].specialAttackAnimation();
             }
+          } else if (change.field == 'petalDanceCount') {
+            if (change.value != 0) {
+              children[i].petalDanceAnimation();
+            }
           }
         }
       }

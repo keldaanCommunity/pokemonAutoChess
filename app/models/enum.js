@@ -1615,10 +1615,19 @@ const SPECIAL_SKILL = Object.freeze({
   HEAD_SMASH: 'HEAD_SMASH',
   VOLT_SWITCH: 'VOLT_SWITCH',
   SHADOW_CLONE: 'SHADOW_CLONE',
-  HYPER_VOICE: 'HYPER_VOICE'
+  HYPER_VOICE: 'HYPER_VOICE',
+  PETAL_DANCE: 'PETAL_DANCE'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+  PETAL_DANCE: {
+    title: {
+      eng: 'Petal Dance'
+    },
+    description: {
+      eng: 'Deals 30/60/90 special damage to 2/3/4 ennemies'
+    }
+  },
   HYPER_VOICE: {
     title: {
       eng: 'Hyper Voice'
