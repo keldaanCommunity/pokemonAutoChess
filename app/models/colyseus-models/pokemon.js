@@ -131,19 +131,19 @@ class MegaLucario extends Pokemon {
 
 class Swablu extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SWABLU, 'tylton', [TYPE.FAIRY, TYPE.DRAGON, TYPE.SOUND], RARITY.LEGENDARY, 'sound', 333, PKM.ALTARIA, 90, 5, 3, 3, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.SWABLU, 'tylton', [TYPE.FAIRY, TYPE.DRAGON, TYPE.SOUND], RARITY.LEGENDARY, 'september', 333, PKM.ALTARIA, 90, 5, 3, 3, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.HYPER_VOICE);
   }
 }
 
 class Altaria extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ALTARIA, 'ptéra', [TYPE.FAIRY, TYPE.DRAGON, TYPE.SOUND], RARITY.LEGENDARY, 'sound', 334, PKM.MEGAALTARIA, 130, 11, 4, 4, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.ALTARIA, 'ptéra', [TYPE.FAIRY, TYPE.DRAGON, TYPE.SOUND], RARITY.LEGENDARY, 'sound', 334, PKM.MEGAALTARIA, 130, 11, 4, 4, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HYPER_VOICE);
   }
 }
 
 class MegaAltaria extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MEGAALTARIA, 'ptéra', [TYPE.FAIRY, TYPE.DRAGON, TYPE.SOUND], RARITY.LEGENDARY, 'sound', 3340, '', 230, 21, 5, 5, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.MEGAALTARIA, 'ptéra', [TYPE.FAIRY, TYPE.DRAGON, TYPE.SOUND], RARITY.LEGENDARY, 'sound', 3340, '', 230, 21, 5, 5, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.HYPER_VOICE);
   }
 }
 
@@ -407,19 +407,19 @@ class Slaking extends Pokemon {
 
 class Honedge extends Pokemon {
   constructor() {
-    super('PmdCollab', PKM.HONEDGE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 679, PKM.DOUBLADE, 90, 8, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('PmdCollab', PKM.HONEDGE, 'monorpale', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 679, PKM.DOUBLADE, 90, 8, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Doublade extends Pokemon {
   constructor() {
-    super('pokegirl4ever', PKM.DOUBLADE, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 680, PKM.AEGISLASH, 130, 9, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('pokegirl4ever', PKM.DOUBLADE, 'doublade', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 680, PKM.AEGISLASH, 130, 9, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 
 class Aegislash extends Pokemon {
   constructor() {
-    super('jhony rex', PKM.AEGISLASH, 'ptéra', [TYPE.FOSSIL, TYPE.FLYING], RARITY.EPIC, 'sound', 681, '', 230, 20, 8, 8, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('jhony rex', PKM.AEGISLASH, 'exagide', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 681, '', 230, 20, 8, 8, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
   }
 }
 

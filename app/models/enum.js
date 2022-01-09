@@ -1614,16 +1614,25 @@ const SPECIAL_SKILL = Object.freeze({
   ROCK_SMASH: 'ROCK_SMASH',
   HEAD_SMASH: 'HEAD_SMASH',
   VOLT_SWITCH: 'VOLT_SWITCH',
-  SHADOW_CLONE: 'SHADOW_CLONE'
+  SHADOW_CLONE: 'SHADOW_CLONE',
+  HYPER_VOICE: 'HYPER_VOICE'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+  HYPER_VOICE: {
+    title: {
+      eng: 'Hyper Voice'
+    },
+    description: {
+      eng: 'Deals 50/100/200 special damage on a row, confuse for 1/2/3 seconds'
+    }
+  },
   SHADOW_CLONE: {
     title: {
       eng: 'Shadow Clone'
     },
     description: {
-      eng: 'The pokemon creates an identical clone of himself next to his target. This clone inherits from the pokemon items and stats.'
+      eng: 'The pokemon creates an identical clone of himself next to his target. This clone inherits from the pokemon items and stats'
     }
   },
   VOLT_SWITCH: {
@@ -1631,7 +1640,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Volt Switch'
     },
     description: {
-      eng: 'Dash into the ennemy backline, dealing 20/40/80 special damage'
+      eng: 'Dash into the ennemy backline, dealing 40/80/160 special damage'
     }
   },
   DEFAULT: {

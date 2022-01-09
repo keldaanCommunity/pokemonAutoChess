@@ -596,6 +596,24 @@ export default class Pokemon extends Button {
             });
             break;
 
+          case SPECIAL_SKILL.HYPER_VOICE:
+            coordinatesTarget = transformAttackCoordinate(8, this.targetY);
+            coordinates = transformAttackCoordinate(0, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.HYPER_VOICE, '0');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.HYPER_VOICE);
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              duration: 1000,
+              onComplete: (tween, targets) => {
+                specialProjectile.destroy();
+              }
+            });
+            break;
+
           case SPECIAL_SKILL.SHADOW_CLONE:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.SHADOW_CLONE, '0');
