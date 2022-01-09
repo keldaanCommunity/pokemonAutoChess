@@ -5,8 +5,15 @@ const WinTileset = require('./win-tileset');
 const Schema = schema.Schema;
 
 class LobbyUser extends Schema {
-  constructor(id, name, elo, avatar, map, langage, wins, exp, level, mapWin, donor, history) {
+  constructor(id, name, elo, avatar, map, langage, wins, exp, level, mapWin, donor, history, honors) {
     super();
+
+    this.honors = new schema.ArraySchema();
+    if(honors && honors.length && honors.length != 0){
+      honors.forEach(h => {
+        this.honors.push(h);
+      });
+    }
     this.assign({
       id: id,
       name: name,
@@ -40,7 +47,8 @@ schema.defineTypes(LobbyUser, {
   level: 'uint16',
   donor: 'boolean',
   mapWin: WinTileset,
-  history: [GameRecord]
+  history: [GameRecord],
+  honors: ['string']
 });
 
 module.exports = LobbyUser;

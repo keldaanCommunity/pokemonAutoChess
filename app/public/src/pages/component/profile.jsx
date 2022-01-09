@@ -24,6 +24,7 @@ class Profile extends Component {
     }
 
   render() {
+      console.log(this.props.user);
       if(this.props.user.mapWin){
         return (
             <div>
@@ -133,9 +134,13 @@ class Profile extends Component {
                                     <tr>
                                     <td><button className="invisibleButton" onClick={()=>{this.props.changeAvatar('meowth')}}><img src="assets/avatar/meowth.png" alt="" style={{filter:this.props.user.donor ?'grayscale(0)':'grayscale(1)'}}  title="Unlocked after contributing to the tipee"/></button></td>
                                     <td><button className="invisibleButton" onClick={()=>{this.props.changeAvatar('persian')}}><img src="assets/avatar/persian.png" alt="" style={{filter:this.props.user.donor ?'grayscale(0)':'grayscale(1)'}}  title="Unlocked after contributing to the tipee"/></button></td>
+                                    <td><button className="invisibleButton" onClick={()=>{this.props.changeAvatar('absol')}}><img src="assets/avatar/absol.png" alt="" style={{filter:this.props.user.honors.includes('absol') ?'grayscale(0)':'grayscale(1)'}}  title="Unlocked after partipating in Tournament #1"/></button></td>
                                     </tr>
                                 </tbody>
-                                </table>
+                            </table>
+                            <div>
+                            
+                            </div>
                         </div>
                     </TabPanel>
                     <TabPanel>

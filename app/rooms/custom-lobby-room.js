@@ -153,7 +153,8 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
                   user.level,
                   user.mapWin,
                   user.donor,
-                  records));
+                  records,
+                  user.honors));
             }
           });
         } else {
@@ -539,6 +540,11 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
               if (user.donor) {
                 changeNeeded = true;
               }
+            
+            case 'absol':
+              if(user.honors.includes('absol')){
+                changeNeeded = true;
+              }
 
             default:
               break;
@@ -588,7 +594,8 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
                 user.level,
                 user.mapWin,
                 user.donor,
-                records));
+                records,
+                user.honors));
           }
         });
       } else {
@@ -622,6 +629,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
               WATER: 0
             },
             false,
+            [],
             []
         ));
       }

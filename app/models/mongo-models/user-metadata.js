@@ -88,7 +88,12 @@ const userMetadataSchema = new Schema(
           type: String,
           default: 'WATER0'
         }
-      }
+      },
+      honors:[
+        {
+          type:String
+        }
+      ]
     }
 );
 
