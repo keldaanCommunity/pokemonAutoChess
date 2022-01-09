@@ -17,9 +17,46 @@ class LeechSeedStrategy extends AttackStrategy {
 
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team) {
+        tg.speDef = Math.max(0, tg.speDef - 2);
+        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+      }
+    });
   }
 }
+class HyperVoiceStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
 
+    let damage = 0;
+    let confusion = 0;
+
+    switch (pokemon.stars) {
+      case 1:
+        damage = 50;
+        confusion = 1;
+        break;
+      case 2:
+        damage = 100;
+        confusion = 2;
+        break;
+      case 3:
+        damage = 200;
+        confusion = 3;
+        break;
+      default:
+        break;
+    }
+
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team && target.positionY == y) {
+        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        tg.status.triggerConfusion(confusion * 1000);
+      }
+    });
+  }
+}
 class ShadowCloneStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
@@ -1543,7 +1580,8 @@ class MetronomeStrategy extends AttackStrategy {
       RockSmashStrategy,
       HeadSmashStrategy,
       VoltSwitchStrategy,
-      ShadowCloneStrategy
+      ShadowCloneStrategy,
+      HyperVoiceStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1607,5 +1645,6 @@ module.exports = {
   RockSmashStrategy,
   HeadSmashStrategy,
   VoltSwitchStrategy,
-  ShadowCloneStrategy
+  ShadowCloneStrategy,
+  HyperVoiceStrategy
 };

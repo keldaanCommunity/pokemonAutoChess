@@ -522,6 +522,13 @@ export default class AnimationManager {
     });
 
     this.game.anims.create({
+      key: SPECIAL_SKILL.HYPER_VOICE,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.HYPER_VOICE, {start: 0, end: 3}),
+      duration: 300,
+      repeat: 3
+    });
+
+    this.game.anims.create({
       key: SPECIAL_SKILL.HEAD_SMASH,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 79, zeroPad: 3, prefix: `${SPECIAL_SKILL.ROCK_SLIDE}/`}),
       duration: 1000,

@@ -152,6 +152,9 @@ class PokemonFactory {
 
   static createStrategyFromName(name) {
     switch (name) {
+      case SPECIAL_SKILL.HYPER_VOICE:
+        return new Strategy.HyperVoiceStrategy();
+
       case SPECIAL_SKILL.SHADOW_CLONE:
         return new Strategy.ShadowCloneStrategy();
 
