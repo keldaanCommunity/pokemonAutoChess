@@ -663,6 +663,21 @@ export default class Pokemon extends Button {
             });
             break;
 
+          case SPECIAL_SKILL.RELIC_SONG:
+            group.getChildren().forEach((pokemon) => {
+              if (this.team != pokemon.team) {
+                const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
+                const s = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.RELIC_SONG, '000');
+                s.setDepth(7);
+                s.setScale(2, 2);
+                s.anims.play(SPECIAL_SKILL.RELIC_SONG);
+                s.once('animationcomplete', () => {
+                  s.destroy();
+                });
+              }
+            });
+            break;
+
           case SPECIAL_SKILL.HIGH_JUMP_KICK:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.HIGH_JUMP_KICK, '000');

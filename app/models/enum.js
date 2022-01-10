@@ -1621,10 +1621,19 @@ const SPECIAL_SKILL = Object.freeze({
   TRI_ATTACK: 'TRI_ATTACK',
   GRASS_WHISTLE: 'GRASS_WHISTLE',
   HIGH_JUMP_KICK: 'HIGH_JUMP_KICK',
-  DISARMING_VOICE: 'DISARMING_VOICE'
+  DISARMING_VOICE: 'DISARMING_VOICE',
+  RELIC_SONG: 'RELIC_SONG'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+  RELIC_SONG: {
+    title: {
+      eng: 'Relic Song'
+    },
+    description: {
+      eng: 'Put asleep the ennemy team for 1/2/3s'
+    }
+  },
   DISARMING_VOICE: {
     title: {
       eng: 'Disarming Voice'

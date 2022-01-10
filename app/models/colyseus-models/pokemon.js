@@ -1660,7 +1660,7 @@ class Fearow extends Pokemon {
 
 class Meloetta extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MELOETTA, 'ptéra', [TYPE.NORMAL, TYPE.SOUND], RARITY.MYTHICAL, 'sound', 648, '', 300, 30, 5, 5, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.MELOETTA, 'ptéra', [TYPE.NORMAL, TYPE.SOUND], RARITY.MYTHICAL, 'sound', 648, '', 300, 30, 5, 5, 4, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 120, SPECIAL_SKILL.RELIC_SONG);
   }
 }
 

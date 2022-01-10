@@ -152,6 +152,9 @@ class PokemonFactory {
 
   static createStrategyFromName(name) {
     switch (name) {
+      case SPECIAL_SKILL.RELIC_SONG:
+        return new Strategy.RelicSongStrategy();
+
       case SPECIAL_SKILL.DISARMING_VOICE:
         return new Strategy.DisarmingVoiceStrategy();
 

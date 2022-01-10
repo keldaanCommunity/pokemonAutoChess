@@ -27,6 +27,31 @@ class AttackStrategy {
   }
 }
 
+class RelicSongStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let d = 0;
+    switch (pokemon.stars) {
+      case 1:
+        d = 1000;
+        break;
+      case 2:
+        d = 2000;
+        break;
+      case 3:
+        d = 3000;
+        break;
+      default:
+        break;
+    }
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team) {
+        tg.status.triggerSleep(d);
+      }
+    });
+  }
+}
+
 class DisarmingVoiceStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
@@ -1757,7 +1782,8 @@ class MetronomeStrategy extends AttackStrategy {
       TriAttackStrategy,
       GrassWhistleStrategy,
       HighJumpKickStrategy,
-      DisarmingVoiceStrategy
+      DisarmingVoiceStrategy,
+      RelicSongStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1827,5 +1853,6 @@ module.exports = {
   TriAttackStrategy,
   GrassWhistleStrategy,
   HighJumpKickStrategy,
-  DisarmingVoiceStrategy
+  DisarmingVoiceStrategy,
+  RelicSongStrategy
 };
