@@ -4,6 +4,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { Link } from 'react-router-dom';
 import 'firebaseui/dist/firebaseui.css'
+import { FIREBASE_CONFIG } from '../utils/utils';
 
 
 class Login extends Component {
@@ -13,14 +14,7 @@ class Login extends Component {
         this.state = {
             isSignedIn : false
         };
-        this.firebaseConfig = {
-            apiKey: "AIzaSyCjMpYJycJTjOsXPM1CJn8olntPQhpysOI",
-            authDomain: "pokemonautochess-b18fb.firebaseapp.com",
-            projectId: "pokemonautochess-b18fb",
-            storageBucket: "pokemonautochess-b18fb.appspot.com",
-            messagingSenderId: "448759785030",
-            appId: "1:448759785030:web:bc2f21a25ab9e43a894c47"
-          };        
+        this.firebaseConfig = FIREBASE_CONFIG      
           // Configure FirebaseUI.
         this.uiConfig = {
           // Popup signin flow rather than Navigate flow.
