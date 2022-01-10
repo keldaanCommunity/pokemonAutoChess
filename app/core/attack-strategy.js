@@ -7,6 +7,13 @@ class AttackStrategy {
   process(pokemon, state, board, target) {
     pokemon.setMana(0);
     pokemon.count.ult += 1;
+    if (pokemon.effects.includes(EFFECTS.LARGO)) {
+      pokemon.atk += 3;
+    } else if (pokemon.effects.includes(EFFECTS.ALLEGRO)) {
+      pokemon.atk += 6;
+    } else if (pokemon.effects.includes(EFFECTS.PRESTO)) {
+      pokemon.atk += 9;
+    }
   }
 }
 
