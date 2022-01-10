@@ -761,6 +761,24 @@ class Simulation extends Schema {
           }
           break;
 
+        case EFFECTS.LARGO:
+          if (types.includes(TYPE.SOUND)) {
+            pokemon.effects.push(EFFECTS.LARGO);
+          }
+          break;
+
+        case EFFECTS.ALLEGRO:
+          if (types.includes(TYPE.SOUND)) {
+            pokemon.effects.push(EFFECTS.ALLEGRO);
+          }
+          break;
+
+        case EFFECTS.PRESTO:
+          if (types.includes(TYPE.SOUND)) {
+            pokemon.effects.push(EFFECTS.PRESTO);
+          }
+          break;
+
         default:
           break;
       }

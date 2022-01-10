@@ -204,6 +204,15 @@ class Effects {
         this.list.push(EFFECTS.SNOW);
       }
     }
+    if (synergies.SOUND >= 0) {
+      if (synergies.SOUND >= 7) {
+        this.list.push(EFFECTS.PRESTO);
+      } else if (synergies.SOUND >= 5) {
+        this.list.push(EFFECTS.ALLEGRO);
+      } else if (synergies.SOUND >= 3) {
+        this.list.push(EFFECTS.LARGO);
+      }
+    }
   }
 }
 

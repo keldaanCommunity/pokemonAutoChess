@@ -7,12 +7,22 @@ class AttackStrategy {
   process(pokemon, state, board, target) {
     pokemon.setMana(0);
     pokemon.count.ult += 1;
-    if (pokemon.effects.includes(EFFECTS.LARGO)) {
-      pokemon.atk += 3;
-    } else if (pokemon.effects.includes(EFFECTS.ALLEGRO)) {
-      pokemon.atk += 6;
-    } else if (pokemon.effects.includes(EFFECTS.PRESTO)) {
-      pokemon.atk += 9;
+    if (pokemon.types.includes(TYPE.SOUND)) {
+      let atk = 0;
+      if (pokemon.effects.includes(EFFECTS.LARGO)) {
+        atk += 3;
+      } else if (pokemon.effects.includes(EFFECTS.ALLEGRO)) {
+        atk += 6;
+      } else if (pokemon.effects.includes(EFFECTS.PRESTO)) {
+        atk += 9;
+      }
+      if (atk > 0) {
+        board.forEach((x, y, tg) => {
+          if (tg && pokemon.team == tg.team && tg.types.includes(TYPE.SOUND)) {
+            tg.atk += atk;
+          }
+        });
+      }
     }
   }
 }
