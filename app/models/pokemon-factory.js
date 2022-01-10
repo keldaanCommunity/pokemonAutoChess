@@ -152,6 +152,18 @@ class PokemonFactory {
 
   static createStrategyFromName(name) {
     switch (name) {
+      case SPECIAL_SKILL.DISARMING_VOICE:
+        return new Strategy.DisarmingVoiceStrategy();
+
+      case SPECIAL_SKILL.HIGH_JUMP_KICK:
+        return new Strategy.HighJumpKickStrategy();
+
+      case SPECIAL_SKILL.GRASS_WHISTLE:
+        return new Strategy.GrassWhistleStrategy();
+
+      case SPECIAL_SKILL.TRI_ATTACK:
+        return new Strategy.TriAttackStrategy();
+
       case SPECIAL_SKILL.ECHO:
         return new Strategy.EchoStrategy();
 

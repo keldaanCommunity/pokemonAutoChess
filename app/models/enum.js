@@ -1617,10 +1617,46 @@ const SPECIAL_SKILL = Object.freeze({
   SHADOW_CLONE: 'SHADOW_CLONE',
   HYPER_VOICE: 'HYPER_VOICE',
   PETAL_DANCE: 'PETAL_DANCE',
-  ECHO: 'ECHO'
+  ECHO: 'ECHO',
+  TRI_ATTACK: 'TRI_ATTACK',
+  GRASS_WHISTLE: 'GRASS_WHISTLE',
+  HIGH_JUMP_KICK: 'HIGH_JUMP_KICK',
+  DISARMING_VOICE: 'DISARMING_VOICE'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+  DISARMING_VOICE: {
+    title: {
+      eng: 'Disarming Voice'
+    },
+    description: {
+      eng: 'Heals and restore 10/20/40 points of health/mana to all allies'
+    }
+  },
+  HIGH_JUMP_KICK: {
+    title: {
+      eng: 'High Jump Kick'
+    },
+    description: {
+      eng: 'Deals 50/100/200 physical damage and steal the mana from its target'
+    }
+  },
+  GRASS_WHISTLE: {
+    title: {
+      eng: 'Grass Whistle'
+    },
+    description: {
+      eng: 'Put asleep 1/2/4 ennemies for 2 seconds'
+    }
+  },
+  TRI_ATTACK: {
+    title: {
+      eng: 'Tri Attack'
+    },
+    description: {
+      eng: 'Burn, freeze and wound the target for 2/4/8s'
+    }
+  },
   ECHO: {
     title: {
       eng: 'Echo'

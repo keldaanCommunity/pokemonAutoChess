@@ -1,0 +1,251 @@
+{
+	"textures": [
+		{
+			"image": "TRI_ATTACK.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 715,
+				"h": 253
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "010",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 192,
+						"h": 152
+					},
+					"spriteSourceSize": {
+						"x": 32,
+						"y": 2,
+						"w": 135,
+						"h": 146
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 135,
+						"h": 146
+					}
+				},
+				{
+					"filename": "004",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 192,
+						"h": 152
+					},
+					"spriteSourceSize": {
+						"x": 30,
+						"y": 10,
+						"w": 140,
+						"h": 103
+					},
+					"frame": {
+						"x": 1,
+						"y": 149,
+						"w": 140,
+						"h": 103
+					}
+				},
+				{
+					"filename": "014",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 192,
+						"h": 152
+					},
+					"spriteSourceSize": {
+						"x": 26,
+						"y": 5,
+						"w": 135,
+						"h": 144
+					},
+					"frame": {
+						"x": 138,
+						"y": 1,
+						"w": 135,
+						"h": 144
+					}
+				},
+				{
+					"filename": "018",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 192,
+						"h": 152
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 45,
+						"w": 134,
+						"h": 103
+					},
+					"frame": {
+						"x": 143,
+						"y": 147,
+						"w": 134,
+						"h": 103
+					}
+				},
+				{
+					"filename": "012",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 192,
+						"h": 152
+					},
+					"spriteSourceSize": {
+						"x": 30,
+						"y": 8,
+						"w": 130,
+						"h": 143
+					},
+					"frame": {
+						"x": 275,
+						"y": 1,
+						"w": 130,
+						"h": 143
+					}
+				},
+				{
+					"filename": "016",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 192,
+						"h": 152
+					},
+					"spriteSourceSize": {
+						"x": 22,
+						"y": 45,
+						"w": 138,
+						"h": 106
+					},
+					"frame": {
+						"x": 279,
+						"y": 146,
+						"w": 138,
+						"h": 106
+					}
+				},
+				{
+					"filename": "008",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 192,
+						"h": 152
+					},
+					"spriteSourceSize": {
+						"x": 75,
+						"y": 4,
+						"w": 98,
+						"h": 143
+					},
+					"frame": {
+						"x": 407,
+						"y": 1,
+						"w": 98,
+						"h": 143
+					}
+				},
+				{
+					"filename": "002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 192,
+						"h": 152
+					},
+					"spriteSourceSize": {
+						"x": 29,
+						"y": 12,
+						"w": 134,
+						"h": 101
+					},
+					"frame": {
+						"x": 419,
+						"y": 146,
+						"w": 134,
+						"h": 101
+					}
+				},
+				{
+					"filename": "006",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 192,
+						"h": 152
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 7,
+						"w": 143,
+						"h": 137
+					},
+					"frame": {
+						"x": 507,
+						"y": 1,
+						"w": 143,
+						"h": 137
+					}
+				},
+				{
+					"filename": "020",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 192,
+						"h": 152
+					},
+					"spriteSourceSize": {
+						"x": 25,
+						"y": 43,
+						"w": 91,
+						"h": 108
+					},
+					"frame": {
+						"x": 555,
+						"y": 140,
+						"w": 91,
+						"h": 108
+					}
+				},
+				{
+					"filename": "000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 192,
+						"h": 152
+					},
+					"spriteSourceSize": {
+						"x": 34,
+						"y": 77,
+						"w": 66,
+						"h": 34
+					},
+					"frame": {
+						"x": 648,
+						"y": 140,
+						"w": 66,
+						"h": 34
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:2467d0c1cbf0a9062fa63dce25664cb9:ca03def96d0379c4602ea1727f41d20c:992a348c3fc4330fdb914cd909c31b24$"
+	}
+}

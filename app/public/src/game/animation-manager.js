@@ -535,10 +535,30 @@ export default class AnimationManager {
       repeat: 0
     });
 
-
     this.game.anims.create({
       key: SPECIAL_SKILL.ECHO,
       frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.ECHO, {start: 0, end: 22, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.HIGH_JUMP_KICK,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.HIGH_JUMP_KICK, {start: 0, end: 21, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.TRI_ATTACK,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.TRI_ATTACK, {start: 0, end: 20, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.DISARMING_VOICE,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.DISARMING_VOICE, {start: 0, end: 43, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });

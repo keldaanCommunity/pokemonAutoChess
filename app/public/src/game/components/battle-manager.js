@@ -165,7 +165,7 @@ export default class BattleManager {
             }
           } else if (change.field == 'ult') {
             if (change.value != 0) {
-              children[i].specialAttackAnimation();
+              children[i].specialAttackAnimation(this.group);
             }
           } else if (change.field == 'petalDanceCount') {
             if (change.value != 0) {

@@ -31,6 +31,7 @@ export default class Pokemon extends Button {
     this.positionX = pokemon.positionX;
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
+    this.team = pokemon.team;
     this.setRangeType();
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
@@ -99,7 +100,7 @@ export default class Pokemon extends Button {
     });
   }
 
-  specialAttackAnimation() {
+  specialAttackAnimation(group) {
     if (this.skill) {
       let coordinates;
       let specialProjectile;
@@ -644,6 +645,49 @@ export default class Pokemon extends Button {
             specialProjectile.anims.play(SPECIAL_SKILL.ECHO);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.DISARMING_VOICE:
+            group.getChildren().forEach((pokemon) => {
+              if (this.team == pokemon.team) {
+                const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
+                const s = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.DISARMING_VOICE, '000');
+                s.setDepth(7);
+                s.setScale(2, 2);
+                s.anims.play(SPECIAL_SKILL.DISARMING_VOICE);
+                s.once('animationcomplete', () => {
+                  s.destroy();
+                });
+              }
+            });
+            break;
+
+          case SPECIAL_SKILL.HIGH_JUMP_KICK:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.HIGH_JUMP_KICK, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.HIGH_JUMP_KICK);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.TRI_ATTACK:
+            coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.TRI_ATTACK, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.anims.play(SPECIAL_SKILL.TRI_ATTACK);
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              duration: 500,
+              onComplete: (tween, targets) => {
+                specialProjectile.destroy();
+              }
             });
             break;
 

@@ -17,6 +17,104 @@ class AttackStrategy {
   }
 }
 
+class DisarmingVoiceStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let heal = 0;
+    switch (pokemon.stars) {
+      case 1:
+        heal = 10;
+        break;
+      case 2:
+        heal = 20;
+        break;
+      case 3:
+        heal = 40;
+        break;
+      default:
+        break;
+    }
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team == tg.team) {
+        tg.handleHeal(heal);
+        tg.setMana(tg.mana + heal);
+      }
+    });
+  }
+}
+class HighJumpKickStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let damage = 0;
+    switch (pokemon.stars) {
+      case 1:
+        damage = 50;
+        break;
+      case 2:
+        damage = 100;
+        break;
+      case 3:
+        damage = 200;
+        break;
+      default:
+        break;
+    }
+    pokemon.setMana(target.mana);
+    target.setMana(0);
+    target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+  }
+}
+
+class GrassWhistleStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let n = 0;
+    switch (pokemon.stars) {
+      case 1:
+        n = 1;
+        break;
+      case 2:
+        n = 2;
+        break;
+      case 3:
+        n = 4;
+        break;
+      default:
+        break;
+    }
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team && n > 0) {
+        tg.status.triggerSleep(2000);
+        n--;
+      }
+    });
+  }
+}
+
+
+class TriAttackStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let duration = 0;
+    switch (pokemon.stars) {
+      case 1:
+        duration = 2000;
+        break;
+      case 2:
+        duration = 4000;
+        break;
+      case 3:
+        duration = 8000;
+        break;
+      default:
+        break;
+    }
+    target.status.triggerFreeze(duration);
+    target.status.triggerWound(duration);
+    target.status.triggerBurn(duration);
+  }
+}
+
 class EchoStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
@@ -1645,7 +1743,11 @@ class MetronomeStrategy extends AttackStrategy {
       ShadowCloneStrategy,
       HyperVoiceStrategy,
       PetalDanceStrategy,
-      EchoStrategy
+      EchoStrategy,
+      TriAttackStrategy,
+      GrassWhistleStrategy,
+      HighJumpKickStrategy,
+      DisarmingVoiceStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1711,5 +1813,9 @@ module.exports = {
   ShadowCloneStrategy,
   HyperVoiceStrategy,
   PetalDanceStrategy,
-  EchoStrategy
+  EchoStrategy,
+  TriAttackStrategy,
+  GrassWhistleStrategy,
+  HighJumpKickStrategy,
+  DisarmingVoiceStrategy
 };
