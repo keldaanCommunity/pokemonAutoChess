@@ -1,12 +1,21 @@
 import {ORIENTATION, ORIENTATION_RAD} from '../../../../models/enum';
 
 export const FIREBASE_CONFIG = {
-  apiKey: 'AIzaSyCjMpYJycJTjOsXPM1CJn8olntPQhpysOI',
-  authDomain: 'pokemonautochess-b18fb.firebaseapp.com',
-  projectId: 'pokemonautochess-b18fb',
-  storageBucket: 'pokemonautochess-b18fb.appspot.com',
-  messagingSenderId: '448759785030',
-  appId: '1:448759785030:web:bc2f21a25ab9e43a894c47'
+  // apiKey: 'AIzaSyCjMpYJycJTjOsXPM1CJn8olntPQhpysOI',
+  // authDomain: 'pokemonautochess-b18fb.firebaseapp.com',
+  // projectId: 'pokemonautochess-b18fb',
+  // storageBucket: 'pokemonautochess-b18fb.appspot.com',
+  // messagingSenderId: '448759785030',
+  // appId: '1:448759785030:web:bc2f21a25ab9e43a894c47'
+
+  // lab keys
+  apiKey: "AIzaSyDOKnl36cy3G2JcPaJ9G-U7IrS8V4-DFhc",
+  authDomain: "pokemon-auto-chess-lab.firebaseapp.com",
+  projectId: "pokemon-auto-chess-lab",
+  storageBucket: "pokemon-auto-chess-lab.appspot.com",
+  messagingSenderId: "52895517193",
+  appId: "1:52895517193:web:c84b1f86b77bc51084c6d8",
+  measurementId: "G-JXLV4HDPB4"
 };
 
 export function transformCoordinate(x, y) {
