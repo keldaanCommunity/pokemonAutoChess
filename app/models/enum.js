@@ -1616,10 +1616,19 @@ const SPECIAL_SKILL = Object.freeze({
   VOLT_SWITCH: 'VOLT_SWITCH',
   SHADOW_CLONE: 'SHADOW_CLONE',
   HYPER_VOICE: 'HYPER_VOICE',
-  PETAL_DANCE: 'PETAL_DANCE'
+  PETAL_DANCE: 'PETAL_DANCE',
+  ECHO: 'ECHO'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+  ECHO: {
+    title: {
+      eng: 'Echo'
+    },
+    description: {
+      eng: 'Deals 5/10/20 special damage, +10/+15/+20 damage each time the pokemon uses its ability'
+    }
+  },
   PETAL_DANCE: {
     title: {
       eng: 'Petal Dance'

@@ -537,6 +537,13 @@ export default class AnimationManager {
 
 
     this.game.anims.create({
+      key: SPECIAL_SKILL.ECHO,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.ECHO, {start: 0, end: 22, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
       key: SPECIAL_SKILL.HEAD_SMASH,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 79, zeroPad: 3, prefix: `${SPECIAL_SKILL.ROCK_SLIDE}/`}),
       duration: 1000,

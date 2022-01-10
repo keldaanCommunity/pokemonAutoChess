@@ -636,6 +636,17 @@ export default class Pokemon extends Button {
             });
             break;
 
+          case SPECIAL_SKILL.ECHO:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.ECHO, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.ECHO);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
           default:
             break;
         }

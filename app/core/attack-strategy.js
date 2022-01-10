@@ -10,6 +10,43 @@ class AttackStrategy {
   }
 }
 
+class EchoStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+
+    let damage = 0;
+    let additional = 0;
+    if (pokemon.echo === undefined) {
+      pokemon.echo = 0;
+    }
+
+    switch (pokemon.stars) {
+      case 1:
+        damage = 5;
+        additional = 10;
+        break;
+      case 2:
+        damage = 10;
+        additional = 15;
+        break;
+      case 3:
+        damage = 20;
+        additional = 20;
+        break;
+      default:
+        break;
+    }
+
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team) {
+        tg.handleDamage(damage + pokemon.echo * additional, board, ATTACK_TYPE.SPECIAL, pokemon);
+      }
+    });
+
+    pokemon.echo ++;
+  }
+}
+
 class PetalDanceStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
@@ -1600,7 +1637,8 @@ class MetronomeStrategy extends AttackStrategy {
       VoltSwitchStrategy,
       ShadowCloneStrategy,
       HyperVoiceStrategy,
-      PetalDanceStrategy
+      PetalDanceStrategy,
+      EchoStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1665,5 +1703,6 @@ module.exports = {
   VoltSwitchStrategy,
   ShadowCloneStrategy,
   HyperVoiceStrategy,
-  PetalDanceStrategy
+  PetalDanceStrategy,
+  EchoStrategy
 };
