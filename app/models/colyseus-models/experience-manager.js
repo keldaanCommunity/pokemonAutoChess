@@ -13,6 +13,11 @@ class ExperienceManager extends schema.Schema {
     );
   }
 
+  canLevel()
+  {
+    return (this.level < this.maxLevel)
+  }
+
   addExperience(quantity) {
     let expToAdd = quantity;
     while (this.checkForLevelUp(expToAdd)) {
@@ -35,7 +40,7 @@ class ExperienceManager extends schema.Schema {
 schema.defineTypes(ExperienceManager, {
   level: 'uint8',
   experience: 'uint8',
-  expNeeded: 'uint8'
+  expNeeded: 'int8'
 });
 
 module.exports = ExperienceManager;
