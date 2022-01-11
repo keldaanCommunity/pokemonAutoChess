@@ -2492,7 +2492,7 @@ const EXP_TABLE = Object.freeze({
   6: 32,
   7: 50,
   8: 70,
-  9: 9999
+  9: -1
 });
 
 const STATE = Object.freeze({

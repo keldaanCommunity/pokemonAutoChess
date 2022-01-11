@@ -447,7 +447,7 @@ class OnLevelUpCommand extends Command {
   execute(id) {
     if (this.state.players.has(id)) {
       const player = this.state.players.get(id);
-      if (player.money >= 4) {
+      if (player.money >= 4 && player.experienceManager.canLevel()) {
         player.experienceManager.addExperience(4);
         player.money -= 4;
       }
