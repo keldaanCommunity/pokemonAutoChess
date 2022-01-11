@@ -74,6 +74,8 @@ class OnToggleReadyCommand extends Command {
 
 class OnAddBotCommand extends Command {
   execute() {
+    // TESTING: skip adding bots because i don't have the bot data
+    return 
     if (this.state.users.size < 8) {
       const botList = [];
       this.room.elos.forEach((value, key)=>{
