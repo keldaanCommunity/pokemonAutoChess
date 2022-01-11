@@ -2050,19 +2050,19 @@ class Persian extends Pokemon {
 
 class Oddish extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ODDISH, 'mystherbe', [TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 120, 9, 2, 2, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 1, 100, SPECIAL_SKILL.STUN_SPORE);
+    super('Nintendo', PKM.ODDISH, 'mystherbe', [TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 43, PKM.GLOOM, 90, 9, 2, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
 class Gloom extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.GLOOM, 'ortide', [TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 44, PKM.VILEPLUME, 230, 18, 3, 3, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 2, 100, SPECIAL_SKILL.STUN_SPORE);
+    super('Nintendo', PKM.GLOOM, 'ortide', [TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 44, PKM.VILEPLUME, 160, 18, 3, 3, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
 class Vileplume extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.VILEPLUME, 'rafflesia', [TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 45, '', 360, 27, 4, 4, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 3, 100, SPECIAL_SKILL.STUN_SPORE);
+    super('Nintendo', PKM.VILEPLUME, 'rafflesia', [TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 45, '', 260, 20, 4, 4, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
