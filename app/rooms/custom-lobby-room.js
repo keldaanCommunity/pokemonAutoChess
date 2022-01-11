@@ -28,8 +28,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     console.log(`create lobby`);
     const self = this;
     super.onCreate(options);
-    //TESTING: remove for testing since i don't have webhook
-    //this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
+    this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
     this.bots = new Map();
     this.setState(new LobbyState());
     this.autoDispose = false;
