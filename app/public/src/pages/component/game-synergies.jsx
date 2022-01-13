@@ -19,8 +19,8 @@ class GameSynergies extends Component{
             backgroundColor:'rgba(255,255,255,0.6)' 
         }
         if(this.props.synergies && this.props.synergies.length != 0){
-            return <div style={style} className='nes-container'>
-                <h5 style={{padding:'10px'}}>Synergies</h5>
+            return <div style={style} className='nes-container hidden-scrollable'>
+                <h5 style={{padding:'10px', textAlign: 'center'}}>Synergies</h5>
             {Object.keys(this.props.synergies).sort((a,b)=>{
                     if(this.props.synergies[a] == this.props.synergies[b]){
                         if(this.props.synergies[a] >= TYPE_TRIGGER[a][0]){
