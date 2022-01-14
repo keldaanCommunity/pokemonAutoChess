@@ -100,6 +100,19 @@ class PokemonEntity extends schema.Schema {
       this.mana = Math.min(mana, this.maxMana);
     }
   }
+
+  addCritChance(value)
+  {
+    // for every 5 crit chance > 100, +0.1 crit damage
+    this.critChance += value
+
+    if(this.critChance > 100)
+    {
+      this.critDamage += Math.floor((this.critChance - 100) / 50)
+      this.critChance = 100
+    }
+
+  }
 }
 
 schema.defineTypes(PokemonEntity, {

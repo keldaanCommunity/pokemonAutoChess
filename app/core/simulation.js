@@ -165,7 +165,7 @@ class Simulation extends Schema {
     }
 
     if (pokemon.items.count(ITEMS.SCOPE_LENS) != 0) {
-      pokemon.critChance += 50 * pokemon.items.count(ITEMS.SCOPE_LENS);
+      pokemon.addCritChance(50 * pokemon.items.count(ITEMS.SCOPE_LENS))
     }
 
     if (pokemon.items.count(ITEMS.RAZOR_FANG)) {
@@ -430,7 +430,7 @@ class Simulation extends Schema {
 
         case EFFECTS.ANCIENT_POWER:
           if (types.includes(TYPE.FOSSIL)) {
-            pokemon.critChance += 40;
+            pokemon.addCritChance(40)
             pokemon.critDamage += 0.8;
             pokemon.effects.push(EFFECTS.ANCIENT_POWER);
           }
@@ -438,7 +438,7 @@ class Simulation extends Schema {
 
         case EFFECTS.ELDER_POWER:
           if (types.includes(TYPE.FOSSIL)) {
-            pokemon.critChance += 70;
+            pokemon.addCritChance(70)
             pokemon.critDamage += 1.4;
             pokemon.effects.push(EFFECTS.ELDER_POWER);
           }
@@ -446,7 +446,7 @@ class Simulation extends Schema {
 
         case EFFECTS.UNOWN_GATHERINGS:
           if (types.includes(TYPE.FOSSIL)) {
-            pokemon.critChance += 100;
+            pokemon.addCritChance(100)
             pokemon.critDamage += 2.5;
             pokemon.effects.push(EFFECTS.UNOWN_GATHERINGS);
           }
