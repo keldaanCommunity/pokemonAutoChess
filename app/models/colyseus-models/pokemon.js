@@ -317,19 +317,19 @@ class Metagross extends Pokemon {
 
 class Tympole extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.TYMPOLE, 'ptéra', [TYPE.WATER, TYPE.GROUND, TYPE.SOUND], RARITY.EPIC, 'sound', 535, PKM.PALPITOAD, 90, 5, 4, 4, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.TYMPOLE, 'ptéra', [TYPE.WATER, TYPE.GROUND, TYPE.SOUND], RARITY.EPIC, 'sound', 535, PKM.PALPITOAD, 90, 5, 4, 4, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.EXPLOSION);
   }
 }
 
 class Palpitoad extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.PALPITOAD, 'ptéra', [TYPE.WATER, TYPE.GROUND, TYPE.SOUND], RARITY.EPIC, 'sound', 536, PKM.SEISMITOAD, 130, 9, 5, 5, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.PALPITOAD, 'ptéra', [TYPE.WATER, TYPE.GROUND, TYPE.SOUND], RARITY.EPIC, 'sound', 536, PKM.SEISMITOAD, 130, 9, 5, 5, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.EXPLOSION);
   }
 }
 
 class Seismitoad extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SEISMITOAD, 'ptéra', [TYPE.WATER, TYPE.GROUND, TYPE.SOUND], RARITY.EPIC, 'sound', 537, '', 230, 20, 6, 6, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.SEISMITOAD, 'ptéra', [TYPE.WATER, TYPE.GROUND, TYPE.SOUND], RARITY.EPIC, 'sound', 537, '', 230, 20, 6, 6, 1, 'WATER/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.EXPLOSION);
   }
 }
 
@@ -407,19 +407,19 @@ class Slaking extends Pokemon {
 
 class Honedge extends Pokemon {
   constructor() {
-    super('PmdCollab', PKM.HONEDGE, 'monorpale', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 679, PKM.DOUBLADE, 90, 8, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('PmdCollab', PKM.HONEDGE, 'monorpale', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 679, PKM.DOUBLADE, 90, 8, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.PROTECT);
   }
 }
 
 class Doublade extends Pokemon {
   constructor() {
-    super('pokegirl4ever', PKM.DOUBLADE, 'doublade', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 680, PKM.AEGISLASH, 130, 9, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('pokegirl4ever', PKM.DOUBLADE, 'doublade', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 680, PKM.AEGISLASH, 130, 9, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.PROTECT);
   }
 }
 
 class Aegislash extends Pokemon {
   constructor() {
-    super('jhony rex', PKM.AEGISLASH, 'exagide', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 681, '', 230, 20, 8, 8, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('jhony rex', PKM.AEGISLASH, 'exagide', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 681, '', 230, 20, 8, 8, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.PROTECT);
   }
 }
 
@@ -443,37 +443,37 @@ class Tyranitar extends Pokemon {
 
 class JangmoO extends Pokemon {
   constructor() {
-    super('princess phoenix', PKM.JANGMOO, 'ptéra', [TYPE.DRAGON, TYPE.FIGHTING, TYPE.SOUND], RARITY.EPIC, 'sound', 782, PKM.HAKAMOO, 90, 5, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('princess phoenix', PKM.JANGMOO, 'ptéra', [TYPE.DRAGON, TYPE.FIGHTING, TYPE.SOUND], RARITY.EPIC, 'sound', 782, PKM.HAKAMOO, 90, 5, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 110, SPECIAL_SKILL.CLANGOROUS_SOUL);
   }
 }
 
 class HakamoO extends Pokemon {
   constructor() {
-    super('princess phoenix', PKM.HAKAMOO, 'ptéra', [TYPE.DRAGON, TYPE.FIGHTING, TYPE.SOUND], RARITY.EPIC, 'sound', 783, PKM.KOMMOO, 130, 9, 5, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('princess phoenix', PKM.HAKAMOO, 'ptéra', [TYPE.DRAGON, TYPE.FIGHTING, TYPE.SOUND], RARITY.EPIC, 'sound', 783, PKM.KOMMOO, 130, 9, 5, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 110, SPECIAL_SKILL.CLANGOROUS_SOUL);
   }
 }
 
 class KommoO extends Pokemon {
   constructor() {
-    super('princess phoenix', PKM.KOMMOO, 'ptéra', [TYPE.DRAGON, TYPE.FIGHTING, TYPE.SOUND], RARITY.EPIC, 'sound', 784, '', 230, 20, 8, 8, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('princess phoenix', PKM.KOMMOO, 'ptéra', [TYPE.DRAGON, TYPE.FIGHTING, TYPE.SOUND], RARITY.EPIC, 'sound', 784, '', 230, 20, 8, 8, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 110, SPECIAL_SKILL.CLANGOROUS_SOUL);
   }
 }
 
 class Gastly extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.GASTLY, 'fantominus', [TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.LEGENDARY, 'EPIC', 92, PKM.HAUNTER, 90, 8, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DARK_PULSE);
+    super('Nintendo', PKM.GASTLY, 'fantominus', [TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.LEGENDARY, 'EPIC', 92, PKM.HAUNTER, 90, 8, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.NIGHTMARE);
   }
 }
 
 class Haunter extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.HAUNTER, 'spectrum', [TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.LEGENDARY, 'EPIC', 93, PKM.GENGAR, 130, 12, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DARK_PULSE);
+    super('Nintendo', PKM.HAUNTER, 'spectrum', [TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.LEGENDARY, 'EPIC', 93, PKM.GENGAR, 130, 12, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.NIGHTMARE);
   }
 }
 
 class Gengar extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.GENGAR, 'ectoplasma', [TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.LEGENDARY, 'EPIC', 94, '', 230, 25, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DARK_PULSE);
+    super('Nintendo', PKM.GENGAR, 'ectoplasma', [TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.LEGENDARY, 'EPIC', 94, '', 230, 25, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.NIGHTMARE);
   }
 }
 
@@ -659,37 +659,37 @@ class Luxray extends Pokemon {
 
 class Cubone extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.CUBONE, 'ptéra', [TYPE.GROUND, TYPE.MINERAL], RARITY.EPIC, 'sound', 104, PKM.MAROWAK, 80, 5, 4, 4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.CUBONE, 'ptéra', [TYPE.GROUND, TYPE.MINERAL], RARITY.EPIC, 'sound', 104, PKM.MAROWAK, 80, 5, 4, 4, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 60, SPECIAL_SKILL.BONEMERANG);
   }
 }
 
 class Marowak extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MAROWAK, 'ptéra', [TYPE.GROUND, TYPE.MINERAL], RARITY.EPIC, 'sound', 105, PKM.ALOLANMAROWAK, 120, 9, 5, 5, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.MAROWAK, 'ptéra', [TYPE.GROUND, TYPE.MINERAL], RARITY.EPIC, 'sound', 105, PKM.ALOLANMAROWAK, 120, 9, 5, 5, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 2, 60, SPECIAL_SKILL.BONEMERANG);
   }
 }
 
 class AlolanMarowak extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ALOLANMAROWAK, 'ptéra', [TYPE.FIRE, TYPE.AMORPH], RARITY.EPIC, 'sound', 1050, '', 220, 20, 6, 6, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.ALOLANMAROWAK, 'ptéra', [TYPE.FIRE, TYPE.AMORPH], RARITY.EPIC, 'sound', 1050, '', 220, 20, 6, 6, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 3, 60, SPECIAL_SKILL.BONEMERANG);
   }
 }
 
 class Axew extends Pokemon {
   constructor() {
-    super('PowerCrystal', PKM.AXEW, 'ptéra', [TYPE.DRAGON, TYPE.MONSTER], RARITY.RARE, 'sound', 610, PKM.FRAXURE, 80, 5, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('PowerCrystal', PKM.AXEW, 'ptéra', [TYPE.DRAGON, TYPE.MONSTER], RARITY.RARE, 'sound', 610, PKM.FRAXURE, 80, 5, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.HEAD_SMASH);
   }
 }
 
 class Fraxure extends Pokemon {
   constructor() {
-    super('PowerCrystal', PKM.FRAXURE, 'ptéra', [TYPE.DRAGON, TYPE.MONSTER], RARITY.RARE, 'sound', 611, PKM.HAXORUS, 120, 9, 5, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('PowerCrystal', PKM.FRAXURE, 'ptéra', [TYPE.DRAGON, TYPE.MONSTER], RARITY.RARE, 'sound', 611, PKM.HAXORUS, 120, 9, 5, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.HEAD_SMASH);
   }
 }
 
 class Haxorus extends Pokemon {
   constructor() {
-    super('PowerCrystal', PKM.HAXORUS, 'ptéra', [TYPE.DRAGON, TYPE.MONSTER], RARITY.RARE, 'sound', 612, '', 220, 20, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('PowerCrystal', PKM.HAXORUS, 'ptéra', [TYPE.DRAGON, TYPE.MONSTER], RARITY.RARE, 'sound', 612, '', 220, 20, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.HEAD_SMASH);
   }
 }
 
@@ -1359,19 +1359,19 @@ class Victreebel extends Pokemon {
 
 class Pikipek extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.PIKIPEK, 'ptéra', [TYPE.NORMAL, TYPE.FLYING, TYPE.SOUND], RARITY.UNCOMMON, 'sound', 731, PKM.TRUMBEAK, 70, 5, 2, 2, 1, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.PIKIPEK, 'ptéra', [TYPE.NORMAL, TYPE.FLYING, TYPE.SOUND], RARITY.UNCOMMON, 'sound', 731, PKM.TRUMBEAK, 70, 5, 2, 2, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.GROWL);
   }
 }
 
 class Trumbeak extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.TRUMBEAK, 'ptéra', [TYPE.NORMAL, TYPE.FLYING, TYPE.SOUND], RARITY.UNCOMMON, 'sound', 732, PKM.TOUCANNON, 120, 9, 2, 2, 1, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.TRUMBEAK, 'ptéra', [TYPE.NORMAL, TYPE.FLYING, TYPE.SOUND], RARITY.UNCOMMON, 'sound', 732, PKM.TOUCANNON, 120, 9, 2, 2, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.GROWL);
   }
 }
 
 class Toucannon extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.TOUCANNON, 'ptéra', [TYPE.NORMAL, TYPE.FLYING, TYPE.SOUND], RARITY.UNCOMMON, 'sound', 733, '', 210, 20, 2, 2, 1, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.TOUCANNON, 'ptéra', [TYPE.NORMAL, TYPE.FLYING, TYPE.SOUND], RARITY.UNCOMMON, 'sound', 733, '', 210, 20, 2, 2, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.GROWL);
   }
 }
 

@@ -111,12 +111,14 @@ class Effects {
       }
     }
 
-    if (synergies.DRAGON >= 2) {
-      this.list.push(EFFECTS.INTIMIDATE);
+    if (synergies.DRAGON >= 0) {
+      if (synergies.DRAGON >= 5) {
+        this.list.push(EFFECTS.DRAGON_DANCE);
+      } else if (synergies.DRAGON >= 3) {
+        this.list.push(EFFECTS.DRAGON_ENERGY);
+      }
     }
-    if (synergies.DRAGON >= 4) {
-      this.list.push(EFFECTS.DRAGON_DANCE);
-    }
+
     if (synergies.FIELD >= 0) {
       if (synergies.FIELD >= 9) {
         this.list.push(EFFECTS.ANGER_POINT);

@@ -152,6 +152,21 @@ class PokemonFactory {
 
   static createStrategyFromName(name) {
     switch (name) {
+      case SPECIAL_SKILL.EXPLOSION:
+        return new Strategy.ExplosionStrategy();
+
+      case SPECIAL_SKILL.NIGHTMARE:
+        return new Strategy.NightmareStrategy();
+
+      case SPECIAL_SKILL.CLANGOROUS_SOUL:
+        return new Strategy.ClangorousSoulStrategy();
+
+      case SPECIAL_SKILL.BONEMERANG:
+        return new Strategy.BonemerangStrategy();
+
+      case SPECIAL_SKILL.GROWL:
+        return new Strategy.GrowlStrategy();
+
       case SPECIAL_SKILL.RELIC_SONG:
         return new Strategy.RelicSongStrategy();
 

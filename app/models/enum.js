@@ -1162,7 +1162,7 @@ const EFFECTS = Object.freeze({
   SANDSTORM: 'SANDSTORM',
   POISON_GAS: 'POISON_GAS',
   TOXIC: 'TOXIC',
-  INTIMIDATE: 'INTIMIDATE',
+  DRAGON_ENERGY: 'DRAGON_ENERGY',
   DRAGON_DANCE: 'DRAGON_DANCE',
   WORK_UP: 'WORK_UP',
   RAGE: 'RAGE',
@@ -1347,9 +1347,9 @@ const EFFECTS_ICON = Object.freeze({
     positive: true,
     type: TYPE.POISON
   },
-  INTIMIDATE: {
+  DRAGON_ENERGY: {
     level: 1,
-    positive: false,
+    positive: true,
     type: TYPE.DRAGON
   },
   DRAGON_DANCE: {
@@ -1622,10 +1622,55 @@ const SPECIAL_SKILL = Object.freeze({
   GRASS_WHISTLE: 'GRASS_WHISTLE',
   HIGH_JUMP_KICK: 'HIGH_JUMP_KICK',
   DISARMING_VOICE: 'DISARMING_VOICE',
-  RELIC_SONG: 'RELIC_SONG'
+  RELIC_SONG: 'RELIC_SONG',
+  GROWL: 'GROWL',
+  BONEMERANG: 'BONEMERANG',
+  CLANGOROUS_SOUL: 'CLANGOROUS_SOUL',
+  NIGHTMARE: 'NIGHTMARE',
+  EXPLOSION: 'EXPLOSION'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+  EXPLOSION: {
+    title: {
+      eng: 'Explosion'
+    },
+    description: {
+      eng: 'Deals 40/80/160 physical damage. Damage also the user.'
+    }
+  },
+  NIGHTMARE: {
+    title: {
+      eng: 'Nightmare'
+    },
+    description: {
+      eng: 'Poison the ennemy team for 2/4/8s'
+    }
+  },
+  CLANGOROUS_SOUL: {
+    title: {
+      eng: 'Clangorous Soul'
+    },
+    description: {
+      eng: 'Buff the adjacent allies with 2/4/8 attack and 1/2/4 defense/special defense'
+    }
+  },
+  BONEMERANG: {
+    title: {
+      eng: 'Bonemerang'
+    },
+    description: {
+      eng: 'Throw a boomerang bone through the enemy team, dealing 30/60/120 physical damage on its way'
+    }
+  },
+  GROWL: {
+    title: {
+      eng: 'Growl'
+    },
+    description: {
+      eng: 'Apply wound status on the ennemy team for 1/2/3s'
+    }
+  },
   RELIC_SONG: {
     title: {
       eng: 'Relic Song'
@@ -3176,14 +3221,14 @@ const TYPE_DETAILS = Object.freeze({
     description: {
       eng: [
         {
-          trigger: 2,
-          title: `(2) Bullying`,
-          text: `Enemies have -30% Attack.`
+          trigger: 3,
+          title: `(3) Dragon Energy`,
+          text: `Your Dragon pokemon gain +3% attack Speed after every hit.`
         },
         {
           trigger: 4,
-          title: `(4) Dragon Dance`,
-          text: `Your Dragon pokemon gain +5 Speed after every hit.`
+          title: `(5) Dragon Dance`,
+          text: `Your Dragon pokemon gain +6% attack Speed after every hit.`
         }
       ],
       esp: [
@@ -3772,7 +3817,7 @@ const TYPE_TRIGGER = {
   METAL: [2, 4],
   GROUND: [2, 4, 6],
   POISON: [3, 6],
-  DRAGON: [2, 4],
+  DRAGON: [3, 5],
   FIELD: [3, 6, 9],
   MONSTER: [3, 5, 7],
   HUMAN: [2, 4, 6],

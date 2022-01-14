@@ -735,6 +735,12 @@ class Simulation extends Schema {
           }
           break;
 
+        case EFFECTS.DRAGON_ENERGY:
+          if (types.includes(TYPE.DRAGON)) {
+            pokemon.effects.push(EFFECTS.DRAGON_ENERGY);
+          }
+          break;
+
         case EFFECTS.DRAGON_DANCE:
           if (types.includes(TYPE.DRAGON)) {
             pokemon.effects.push(EFFECTS.DRAGON_DANCE);
@@ -803,11 +809,6 @@ class Simulation extends Schema {
 
         case EFFECTS.SANDSTORM:
           pokemon.effects.push(EFFECTS.SANDSTORM);
-          break;
-
-        case EFFECTS.INTIMIDATE:
-          pokemon.atk -= Math.ceil(pokemon.baseAtk * 0.3);
-          pokemon.effects.push(EFFECTS.INTIMIDATE);
           break;
 
         case EFFECTS.STICKY_WEB:

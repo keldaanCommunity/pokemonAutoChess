@@ -247,7 +247,11 @@ class PokemonState {
         pokemon.atk += 3;
       }
       if (pokemon.effects.includes(EFFECTS.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)) {
-        pokemon.atkSpeed = Math.max(400, Math.round(pokemon.atkSpeed * 0.95));
+        pokemon.atkSpeed = Math.max(400, Math.round(pokemon.atkSpeed - 90));
+      }
+
+      if (pokemon.effects.includes(EFFECTS.DRAGON_ENERGY) && pokemon.types.includes(TYPE.DRAGON)) {
+        pokemon.atkSpeed = Math.max(400, Math.round(pokemon.atkSpeed - 45));
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
@@ -358,6 +362,23 @@ class PokemonState {
       }
     });
     return [x, y];
+  }
+
+  getFarthestTargetCoordinate(pokemon, board) {
+    const pokemons = [];
+
+    board.forEach((r, c, value)=>{
+      if (value !== undefined && value.team != pokemon.team) {
+        const d = board.distance(pokemon.positionX, pokemon.positionY, r, c);
+        pokemons.push({distance: d, x: r, y: c});
+      }
+    });
+
+    pokemons.sort((a, b)=>{
+      return b.distance-a.distance;
+    });
+
+    return [pokemons[0].x, pokemons[0].y];
   }
 
   getFarthestTargetCoordinateAvailablePlace(pokemon, board) {

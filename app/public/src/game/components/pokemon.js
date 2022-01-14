@@ -648,6 +648,40 @@ export default class Pokemon extends Button {
             });
             break;
 
+          case SPECIAL_SKILL.EXPLOSION:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.EXPLOSION, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.EXPLOSION);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+
+          case SPECIAL_SKILL.CLANGOROUS_SOUL:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.CLANGOROUS_SOUL, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.CLANGOROUS_SOUL);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.GROWL:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.GROWL, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.GROWL);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
           case SPECIAL_SKILL.DISARMING_VOICE:
             group.getChildren().forEach((pokemon) => {
               if (this.team == pokemon.team) {
@@ -700,6 +734,26 @@ export default class Pokemon extends Button {
               x: coordinatesTarget[0],
               y: coordinatesTarget[1],
               duration: 500,
+              onComplete: (tween, targets) => {
+                specialProjectile.destroy();
+              }
+            });
+            break;
+
+          case SPECIAL_SKILL.BONEMERANG:
+            coordinatesTarget = transformAttackCoordinate(this.targetX, 6);
+            coordinates = transformAttackCoordinate(this.targetX, 0);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.BONEMERANG, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(3, 3);
+            specialProjectile.anims.play(SPECIAL_SKILL.BONEMERANG);
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: 'Power2',
+              yoyo: true,
+              duration: 1000,
               onComplete: (tween, targets) => {
                 specialProjectile.destroy();
               }

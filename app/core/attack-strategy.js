@@ -27,6 +27,121 @@ class AttackStrategy {
   }
 }
 
+class ExplosionStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let damage = 0;
+    switch (pokemon.stars) {
+      case 1:
+        damage = 40;
+        break;
+      case 2:
+        damage = 80;
+        break;
+      case 3:
+        damage = 160;
+        break;
+      default:
+        break;
+    }
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+      }
+    });
+
+    pokemon.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+  }
+}
+
+class ClangorousSoulStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let buffAtk = 0;
+    let buffDef = 0;
+    switch (pokemon.stars) {
+      case 1:
+        buffAtk = 2;
+        buffDef = 1;
+        break;
+      case 2:
+        buffAtk = 4;
+        buffDef = 2;
+        break;
+      case 3:
+        buffAtk = 8;
+        buffDef = 4;
+        break;
+      default:
+        break;
+    }
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team == cell.value.team) {
+        cell.value.atk += buffAtk;
+        cell.value.def += buffDef;
+        cell.value.speDef += buffDef;
+      }
+    });
+  }
+}
+
+class BonemerangStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let damage = 0;
+    switch (pokemon.stars) {
+      case 1:
+        damage = 30;
+        break;
+      case 2:
+        damage = 60;
+        break;
+      case 3:
+        damage = 120;
+        break;
+      default:
+        break;
+    }
+
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team && x == target.positionX) {
+        tg.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+      }
+    });
+  }
+}
+
+class GrowlStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let d = 0;
+    switch (pokemon.stars) {
+      case 1:
+        d = 1000;
+        break;
+      case 2:
+        d = 2000;
+        break;
+      case 3:
+        d = 3000;
+        break;
+      default:
+        break;
+    }
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team) {
+        tg.status.triggerWound(d);
+      }
+    });
+  }
+}
+
 class RelicSongStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
@@ -479,6 +594,35 @@ class SeedFlareStrategy extends AttackStrategy {
       if (tg && pokemon.team != tg.team) {
         tg.speDef = Math.max(0, tg.speDef - 2);
         tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+      }
+    });
+  }
+}
+
+class NightmareStrategy extends AttackStrategy {
+  constructor() {
+    super();
+  }
+
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let timer = 0;
+    switch (pokemon.stars) {
+      case 1:
+        timer = 2000;
+        break;
+      case 2:
+        timer = 4000;
+        break;
+      case 3:
+        timer = 8000;
+        break;
+      default:
+        break;
+    }
+    board.forEach((x, y, value) => {
+      if (value && pokemon.team != value.team) {
+        value.status.triggerPoison(timer);
       }
     });
   }
@@ -1783,7 +1927,12 @@ class MetronomeStrategy extends AttackStrategy {
       GrassWhistleStrategy,
       HighJumpKickStrategy,
       DisarmingVoiceStrategy,
-      RelicSongStrategy
+      RelicSongStrategy,
+      GrowlStrategy,
+      BonemerangStrategy,
+      ClangorousSoulStrategy,
+      NightmareStrategy,
+      ExplosionStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1854,5 +2003,10 @@ module.exports = {
   GrassWhistleStrategy,
   HighJumpKickStrategy,
   DisarmingVoiceStrategy,
-  RelicSongStrategy
+  RelicSongStrategy,
+  GrowlStrategy,
+  BonemerangStrategy,
+  ClangorousSoulStrategy,
+  NightmareStrategy,
+  ExplosionStrategy
 };

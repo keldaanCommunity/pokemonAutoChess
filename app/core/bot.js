@@ -7,7 +7,7 @@ class Bot {
     this.player = player;
     this.step = 0;
     this.progress = 0;
-    console.log(player.name);
+    // console.log(player.name);
     BOT.findOne({'avatar': player.name}, ['steps'], null, (err, bot)=>{
       this.scenario = bot;
       this.updatePlayerTeam(0);
@@ -22,7 +22,9 @@ class Bot {
     } else if (this.player.getLastBattleResult() == BATTLE_RESULT.WIN) {
       this.progress += 1.5;
     }
-    if (this.scenario.steps[this.step + 1] && this.progress >= this.scenario.steps[this.step + 1].roundsRequired) {
+    // console.log(this.player.name);
+    // console.log(this.scenario);
+    if (this.scenario && this.scenario.steps[this.step + 1] && this.progress >= this.scenario.steps[this.step + 1].roundsRequired) {
       this.step += 1;
       this.progress = 0;
       this.updatePlayerTeam();

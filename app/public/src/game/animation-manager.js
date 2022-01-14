@@ -537,7 +537,28 @@ export default class AnimationManager {
 
     this.game.anims.create({
       key: SPECIAL_SKILL.ECHO,
-      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.ECHO, {start: 0, end: 22, zeroPad: 3}),
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.ECHO, {start: 0, end: 36, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.EXPLOSION,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.EXPLOSION, {start: 0, end: 22, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.BONEMERANG,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.BONEMERANG, {start: 0, end: 7, zeroPad: 3}),
+      duration: 1000,
+      repeat: 3
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.GROWL,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.GROWL, {start: 0, end: 19, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
@@ -566,6 +587,13 @@ export default class AnimationManager {
     this.game.anims.create({
       key: SPECIAL_SKILL.RELIC_SONG,
       frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.RELIC_SONG, {start: 0, end: 34, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.CLANGOROUS_SOUL,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.CLANGOROUS_SOUL, {start: 0, end: 18, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
