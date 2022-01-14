@@ -4,6 +4,7 @@ const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 const PokemonEntity = require('./pokemon-entity');
 const PokemonFactory = require('../models/pokemon-factory');
+const ItemFactory = require('../models/item-factory');
 const {CLIMATE, EFFECTS, TYPE, ITEMS, ATTACK_TYPE, PKM} = require('../models/enum');
 const Dps = require('./dps');
 
@@ -156,8 +157,8 @@ class Simulation extends Schema {
   applyItemsEffects(pokemon, types) {
     if (pokemon.items.count(ITEMS.WONDER_BOX) != 0) {
       pokemon.items.remove(ITEMS.WONDER_BOX);
-      pokemon.items.add(Object.keys(ITEMS)[Math.floor(Math.random() * Object.keys(ITEMS).length)]);
-      pokemon.items.add(Object.keys(ITEMS)[Math.floor(Math.random() * Object.keys(ITEMS).length)]);
+      pokemon.items.add(ItemFactory.createRandomWonderBoxItem());
+      pokemon.items.add(ItemFactory.createRandomWonderBoxItem());
     }
 
     if (pokemon.items.count(ITEMS.ASSAULT_VEST) != 0) {
