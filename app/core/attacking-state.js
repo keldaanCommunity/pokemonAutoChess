@@ -9,7 +9,7 @@ class AttackingState extends PokemonState {
   update(pokemon, dt, board, climate) {
     super.update(pokemon, dt, board, climate);
     if (pokemon.cooldown <= 0) {
-      pokemon.cooldown = pokemon.atkSpeed;
+      pokemon.cooldown = pokemon.getAttackDelay();
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
       // no target case
       if (targetCoordinate[0] === undefined || targetCoordinate[1] === undefined) {

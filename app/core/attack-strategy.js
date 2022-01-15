@@ -508,7 +508,7 @@ class RockTombStrategy extends AttackStrategy {
     }
 
     target.handleDamage(factor, board, ATTACK_TYPE.PHYSICAL, pokemon);
-    target.atkSpeed = Math.max(400, pokemon.atkSpeed + factor * 10);
+    target.handleAttackSpeed(-factor);
   }
 }
 
@@ -1454,18 +1454,18 @@ class TormentStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        boost = 0.8;
+        boost = 20;
         break;
       case 2:
-        boost = 0.7;
+        boost = 30;
         break;
       case 3:
-        boost = 0.6;
+        boost = 40;
         break;
       default:
         break;
     }
-    pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * boost);
+    pokemon.handleAttackSpeed(boost);
   }
 }
 
@@ -1777,22 +1777,22 @@ class StunSporeStrategy extends AttackStrategy {
     let damage = 0;
     switch (pokemon.stars) {
       case 1:
-        debuff = 1.5;
+        debuff = 50;
         damage = 5;
         break;
       case 2:
-        debuff = 2;
+        debuff = 100;
         damage = 10;
         break;
       case 3:
-        debuff = 3;
+        debuff = 200;
         damage = 20;
         break;
       default:
         break;
     }
     target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
-    target.atkSpeed = Math.max(400, pokemon.atkSpeed * debuff);
+    target.handleAttackSpeed(-debuff);
   }
 }
 

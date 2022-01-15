@@ -103,6 +103,30 @@ class PokemonState {
             pokemon.status.resurection = false;
             pokemon.life = pokemon.hp;
           } else {
+            const is_WORK_UP = pokemon.effects.includes(EFFECTS.WORK_UP);
+            const is_RAGE = pokemon.effects.includes(EFFECTS.RAGE);
+            const is_ANGER_POINT = pokemon.effects.includes(EFFECTS.ANGER_POINT);
+
+            if(is_WORK_UP || is_RAGE || is_ANGER_POINT){
+              let boost = 0;
+              if(is_WORK_UP){
+                boost = 20;
+              }
+              else if(is_RAGE){
+                boost = 30;
+              }
+              else if(is_ANGER_POINT){
+                boost = 50;
+              }
+              board.forEach((r, c, value) => {
+                if (value !== undefined && value.team == pokemon.team && pokemon.types.includes(TYPE.FIELD)) {
+                  value.count.fieldCount ++;
+                  value.handleHeal(0.2 * value.hp);
+                  value.handleAttackSpeed(boost);
+                }
+              });
+            }
+            
             board.setValue(pokemon.positionX, pokemon.positionY, undefined);
             death = true;
           }
@@ -247,11 +271,11 @@ class PokemonState {
         pokemon.atk += 3;
       }
       if (pokemon.effects.includes(EFFECTS.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)) {
-        pokemon.atkSpeed = Math.max(400, Math.round(pokemon.atkSpeed - 90));
+        pokemon.handleAttackSpeed(3);
       }
 
       if (pokemon.effects.includes(EFFECTS.DRAGON_ENERGY) && pokemon.types.includes(TYPE.DRAGON)) {
-        pokemon.atkSpeed = Math.max(400, Math.round(pokemon.atkSpeed - 45));
+        pokemon.handleAttackSpeed(6);
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
@@ -276,7 +300,7 @@ class PokemonState {
 
       if (pokemon.items.count(ITEMS.SALAC_BERRY) != 0) {
         if (pokemon.life <= pokemon.hp / 2) {
-          pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed / 2);
+          pokemon.handleAttackSpeed(50);
           pokemon.items.remove(ITEMS.SALAC_BERRY);
         }
       }

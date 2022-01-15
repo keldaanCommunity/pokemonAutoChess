@@ -171,6 +171,10 @@ export default class BattleManager {
             if (change.value != 0) {
               children[i].petalDanceAnimation();
             }
+          } else if (change.field == 'fieldCount') {
+            if (change.value != 0) {
+              children[i].fieldDeathAnimation();
+            }
           }
         }
       }
@@ -218,7 +222,7 @@ export default class BattleManager {
             children[i].atkSpeed = pokemon.atkSpeed;
             const detail = children[i].getFirst('objType', 'detail');
             if (detail) {
-              detail.atkSpeed.setText(pokemon.atkSpeed);
+              detail.atkSpeed.setText(pokemon.atkSpeed.toFixed(2));
             }
           } else if (change.field =='life') {
             if (change.value && change.previousValue) {
@@ -277,7 +281,7 @@ export default class BattleManager {
             children[i].range = pokemon.range;
             const detail = children[i].getFirst('objType', 'detail');
             if (detail) {
-              detail.atkSpeed.setText(pokemon.range);
+              detail.range.setText(pokemon.range);
             }
           } else if (change.field =='targetX') {
             if (pokemon.targetX >= 0) {

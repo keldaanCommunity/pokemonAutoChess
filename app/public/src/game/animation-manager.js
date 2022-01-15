@@ -599,6 +599,13 @@ export default class AnimationManager {
     });
 
     this.game.anims.create({
+      key: 'FIELD_DEATH',
+      frames: this.game.anims.generateFrameNames('FIELD_DEATH', {start: 0, end: 8, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
       key: SPECIAL_SKILL.HEAD_SMASH,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 79, zeroPad: 3, prefix: `${SPECIAL_SKILL.ROCK_SLIDE}/`}),
       duration: 1000,

@@ -2353,14 +2353,10 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
   },
   ROCK_TOMB: {
     title: {
-      eng: 'Rock Tomb',
-      esp: 'Rock Tomb',
-      fra: 'Rock Tomb'
+      eng: 'Rock Tomb'
     },
     description: {
-      eng: 'Mono target attack that deals 30/60/90 physical damage and decrease target attack speed by 300/600/900.',
-      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
-      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
+      eng: 'Mono target attack that deals 30/60/90 physical damage and decrease target attack speed by 20/40/60%'
     }
   },
   ROCK_SMASH: {
@@ -3259,45 +3255,17 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 3,
           title: `(3) Bulk up`,
-          text: `Your pokemon on the same column have +2 Attack.`
+          text: `When a field pokemon dies, all other field pokemons gain 20% Attack Speed and are healed for 20% of their Maximum Health`
         },
         {
           trigger: 6,
           title: `(6) Rage`,
-          text: `Your pokemon on the same column have +6 Attack.`
+          text: `When a field pokemon dies, all other field pokemons gain 20% Attack Speed and are healed for 30% of their Maximum Health`
         },
         {
           trigger: 9,
           title: `(9) Sword Dance`,
-          text: `Your pokemon on the same column have +14 Attack.`
-        }
-      ],
-      esp: [
-        {
-          title: `(3) Gonflette`,
-          text: `+2 ATK para pokemons en la misma columna`
-        },
-        {
-          title: `(6) Furia`,
-          text: `+4 ATK para pokemons en la misma columna`
-        },
-        {
-          title: `(9) Cuchillas de baile`,
-          text: `+8 ATK para pokemons en la misma columna`
-        }
-      ],
-      fra: [
-        {
-          title: `(3) Gonflette`,
-          text: `+2 ATK pour les pokémons sur la même colonne`
-        },
-        {
-          title: `(6) Rage`,
-          text: `+4 ATK pour les pokémons sur la même colonne`
-        },
-        {
-          title: `(9) Danse Lames`,
-          text: `+8 ATK pour les pokémons sur la même colonne`
+          text: `When a field pokemon dies, all other field pokemons gain 20% Attack Speed and are healed for 50% of their Maximum Health`
         }
       ]
     }

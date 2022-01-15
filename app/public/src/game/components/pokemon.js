@@ -24,7 +24,7 @@ export default class Pokemon extends Button {
     this.speDef = pokemon.speDef;
     this.attackType = pokemon.attackType;
     this.type = pokemon.type;
-    this.atkSpeed = pokemon.atkSpeed ? pokemon.atkSpeed: 1500;
+    this.atkSpeed = pokemon.atkSpeed ? Number(pokemon.atkSpeed.toFixed(2)): 0.75;
     this.targetX = null;
     this.targetY = null;
     this.skill = pokemon.skill;
@@ -54,9 +54,9 @@ export default class Pokemon extends Button {
   enterButtonHoverState() {
     if (!this.getFirst('objType', 'detail') && this.isPopup) {
       if (this.life) {
-        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed, this.critChance));
+        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance));
       } else {
-        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed, this.critChance));
+        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance));
       }
     }
   }
@@ -95,6 +95,17 @@ export default class Pokemon extends Button {
     specialProjectile.setDepth(7);
     specialProjectile.setScale(2, 2);
     specialProjectile.anims.play(SPECIAL_SKILL.PETAL_DANCE);
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
+  fieldDeathAnimation(){
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'FIELD_DEATH', '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(2, 2);
+    specialProjectile.anims.play('FIELD_DEATH');
     specialProjectile.once('animationcomplete', () => {
       specialProjectile.destroy();
     });
@@ -769,6 +780,7 @@ export default class Pokemon extends Button {
 
   addTween() {
     const coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+
     if (this.scene) {
       // console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
       this.scene.tweens.add({
@@ -776,7 +788,7 @@ export default class Pokemon extends Button {
         x: coordinates[0],
         y: coordinates[1],
         ease: 'Linear',
-        duration: this.atkSpeed ? this.atkSpeed: 1500,
+        duration: this.atkSpeed ? 1000 / this.atkSpeed: 1500,
         onComplete: (tween, targets) => {
           targets[0].setVisible(false);
           if (this.checkAnimations()) {

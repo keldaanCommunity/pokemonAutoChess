@@ -73,22 +73,12 @@ export default class PokemonDetail extends GameObjects.Container {
 
 
   getColorStyle(original, actual, isAtkSpeed) {
-    if (isAtkSpeed) {
-      if (actual > original) {
-        return this.redTextStyle;
-      } else if (actual == original) {
-        return this.textStyle;
-      } else {
-        return this.greenTextStyle;
-      }
+    if (original > actual) {
+      return this.redTextStyle;
+    } else if (actual == original) {
+      return this.textStyle;
     } else {
-      if (original > actual) {
-        return this.redTextStyle;
-      } else if (actual == original) {
-        return this.textStyle;
-      } else {
-        return this.greenTextStyle;
-      }
+      return this.greenTextStyle;
     }
   }
 }
