@@ -7,7 +7,8 @@ class Count extends schema.Schema {
       crit: 0,
       ult: 0,
       petalDanceCount: 0,
-      fieldCount: 0
+      fieldCount: 0,
+      soundCount: 0
     });
   }
 }
@@ -16,7 +17,8 @@ schema.defineTypes(Count, {
   crit: 'uint8',
   ult: 'uint8',
   petalDanceCount: 'uint8',
-  fieldCount: 'uint8'
+  fieldCount: 'uint8',
+  soundCount: 'uint8'
 });
 
 module.exports = Count;

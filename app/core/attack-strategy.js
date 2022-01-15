@@ -19,6 +19,7 @@ class AttackStrategy {
       if (atk > 0) {
         board.forEach((x, y, tg) => {
           if (tg && pokemon.team == tg.team && tg.types.includes(TYPE.SOUND)) {
+            tg.count.soundCount ++;
             tg.atk += atk;
           }
         });

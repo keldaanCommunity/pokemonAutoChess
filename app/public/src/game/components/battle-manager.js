@@ -175,6 +175,10 @@ export default class BattleManager {
             if (change.value != 0) {
               children[i].fieldDeathAnimation();
             }
+          } else if (change.field == 'soundCount') {
+            if (change.value != 0) {
+              children[i].soundAnimation();
+            }
           }
         }
       }
