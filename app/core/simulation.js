@@ -654,18 +654,30 @@ class Simulation extends Schema {
           }
           break;
 
+        case EFFECTS.SUN_FLOWER:
+          if (types.includes(TYPE.FLORA)) {
+            pokemon.effects.push(EFFECTS.SUN_FLOWER);
+          }
+          break;
+
         case EFFECTS.BATTLE_ARMOR:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.def += Math.ceil(pokemon.baseDef * 0.5);
+            pokemon.shield += 75;
             pokemon.effects.push(EFFECTS.BATTLE_ARMOR);
           }
           break;
 
         case EFFECTS.MOUTAIN_RESISTANCE:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.5);
-            pokemon.shield += Math.ceil(pokemon.hp);
+            pokemon.shield += 150;
             pokemon.effects.push(EFFECTS.MOUTAIN_RESISTANCE);
+          }
+          break;
+
+        case EFFECTS.DIAMOND_STORM:
+          if (types.includes(TYPE.MINERAL)) {
+            pokemon.shield += 300;
+            pokemon.effects.push(EFFECTS.DIAMOND_STORM);
           }
           break;
 

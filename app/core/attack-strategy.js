@@ -187,7 +187,6 @@ class DisarmingVoiceStrategy extends AttackStrategy {
     }
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team == tg.team) {
-        tg.handleHeal(heal);
         tg.setMana(tg.mana + heal);
       }
     });

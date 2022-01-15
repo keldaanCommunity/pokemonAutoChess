@@ -1184,8 +1184,10 @@ const EFFECTS = Object.freeze({
   ODD_FLOWER: 'ODD_FLOWER',
   GLOOM_FLOWER: 'GLOOM_FLOWER',
   VILE_FLOWER: 'VILE_FLOWER',
+  SUN_FLOWER: 'SUN_FLOWER',
   BATTLE_ARMOR: 'BATTLE_ARMOR',
   MOUTAIN_RESISTANCE: 'MOUTAIN_RESISTANCE',
+  DIAMOND_STORM: 'DIAMOND_STORM',
   PHANTOM_FORCE: 'PHANTOM_FORCE',
   CURSE: 'CURSE',
   ATTRACT: 'ATTRACT',
@@ -1457,6 +1459,11 @@ const EFFECTS_ICON = Object.freeze({
     positive: true,
     type: TYPE.FLORA
   },
+  SUN_FLOWER: {
+    level: 4,
+    positive: true,
+    type: TYPE.FLORA
+  },
   BATTLE_ARMOR: {
     level: 1,
     positive: true,
@@ -1464,6 +1471,11 @@ const EFFECTS_ICON = Object.freeze({
   },
   MOUTAIN_RESISTANCE: {
     level: 2,
+    positive: true,
+    type: TYPE.MINERAL
+  },
+  DIAMOND_STORM: {
+    level: 3,
     positive: true,
     type: TYPE.MINERAL
   },
@@ -1490,7 +1502,7 @@ const EFFECTS_ICON = Object.freeze({
   GROUND: {
     level: 0,
     positive: true,
-    type: TYPE.MINERAL
+    type: TYPE.GROUND
   },
   GRASS: {
     level: 0,
@@ -1684,7 +1696,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Disarming Voice'
     },
     description: {
-      eng: 'Heals and restore 10/20/40 points of health/mana to all allies'
+      eng: 'Heals and restore 10/20/40 points of mana to all allies'
     }
   },
   HIGH_JUMP_KICK: {
@@ -3516,7 +3528,7 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 2,
           title: `(2) Odd Flower`,
-          text: `When an flora ally is dead, the oddish flower will rise from its grave..`
+          text: `When an flora ally is dead, the odd flower will rise from its grave..`
         },
         {
           trigger: 3,
@@ -3527,26 +3539,11 @@ const TYPE_DETAILS = Object.freeze({
           trigger: 4,
           title: `(4) Vile Flower`,
           text: `When an flora ally is dead, the vile flower will rise from its grave..`
-        }
-      ],
-      esp: [
-        {
-          title: `(2) Lavamanos`,
-          text: `Restaurar un 10% de HP/s si llueve`
         },
         {
-          title: `(4) Escudo floral`,
-          text: `Aumentar el ATK y la DEF en un 10%`
-        }
-      ],
-      fra: [
-        {
-          title: `(2) Lavabo`,
-          text: `Restaure 10% HP/s si il pleut`
-        },
-        {
-          title: `(4) Bouclier floral`,
-          text: `+50% DEF et +50%SPEDEF pour tous les pkm`
+          trigger: 5,
+          title: `(5) Sun Flower`,
+          text: `When an flora ally is dead, the sun flower will rise from its grave..`
         }
       ]
     }
@@ -3557,32 +3554,17 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 2,
           title: `(2) Harden`,
-          text: `Your Mineral pokemon have +50% Defense.`
+          text: `Mineral pokemons gains 75 bonus maximum health`
         },
         {
           trigger: 4,
           title: `(4) Solid Rock`,
-          text: `Your Mineral pokemon have +50% Defense and +100% HP.`
-        }
-      ],
-      esp: [
-        {
-          title: `(2) Bola de Armadura`,
-          text: `30% de CV de bonficacion para todos los aliados normales`
+          text: `Mineral pokemons gains 150 bonus maximum health`
         },
         {
-          title: `(4) Montañés`,
-          text: `+50% SPEDEF y +100% HP por pkm mineral`
-        }
-      ],
-      fra: [
-        {
-          title: `(2) Boul' Armure`,
-          text: `+50% DEF pour les pkm minéraux`
-        },
-        {
-          title: `(4) Montagnard`,
-          text: `+50% SPEDEF et +100% HP pour les pkm minéraux`
+          trigger: 6,
+          title: `(6) Diamond Storm`,
+          text: `Mineral pokemons gains 300 bonus maximum health`
         }
       ]
     }
@@ -3792,8 +3774,8 @@ const TYPE_TRIGGER = {
   AQUATIC: [2, 4],
   BUG: [2, 4],
   FLYING: [2, 4, 6, 8],
-  FLORA: [2, 3, 4],
-  MINERAL: [2, 4],
+  FLORA: [2, 3, 4, 5],
+  MINERAL: [2, 4, 6],
   AMORPH: [2, 4],
   FAIRY: [2, 4],
   ICE: [2, 4],
@@ -4103,7 +4085,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'leafeon', 'bellsprout',
     'weepinbell', 'victreebel',
     'shaymin', 'budew',
-    'roselia', 'roserade'
+    'roselia', 'roserade',
+    'flabebe', 'floette', 'florges'
   ],
   MINERAL: [
     'geodude', 'graveler',
@@ -4437,6 +4420,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     pokemons: [
       'hoppip',
       'chikorita',
+      'flabebe',
       'leafeon',
       'bellsprout',
       'bulbasaur',

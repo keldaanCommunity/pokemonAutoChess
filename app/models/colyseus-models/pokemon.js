@@ -1018,18 +1018,18 @@ class Kingdra extends Pokemon {
 
 class Flabebe extends Pokemon {
   constructor() {
-    super('PmdCollab', PKM.FLABEBE, 'ptéra', [TYPE.SOUND, TYPE.FAIRY], RARITY.UNCOMMON, 'sound', 669, PKM.FLOETTE, 70, 5, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DISARMING_VOICE);
+    super('PmdCollab', PKM.FLABEBE, 'ptéra', [TYPE.SOUND, TYPE.FAIRY, TYPE.FLORA], RARITY.UNCOMMON, 'sound', 669, PKM.FLOETTE, 70, 5, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DISARMING_VOICE);
   }
 }
 
 class Floette extends Pokemon {
   constructor() {
-    super('PmdCollab', PKM.FLOETTE, 'ptéra', [TYPE.SOUND, TYPE.FAIRY], RARITY.UNCOMMON, 'sound', 670, PKM.FLORGES, 120, 9, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DISARMING_VOICE);
+    super('PmdCollab', PKM.FLOETTE, 'ptéra', [TYPE.SOUND, TYPE.FAIRY, TYPE.FLORA], RARITY.UNCOMMON, 'sound', 670, PKM.FLORGES, 120, 9, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DISARMING_VOICE);
   }
 }
 class Florges extends Pokemon {
   constructor() {
-    super('PmdCollab', PKM.FLORGES, 'ptéra', [TYPE.SOUND, TYPE.FAIRY], RARITY.UNCOMMON, 'sound', 671, '', 210, 20, 2, 2, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DISARMING_VOICE);
+    super('PmdCollab', PKM.FLORGES, 'ptéra', [TYPE.SOUND, TYPE.FAIRY, TYPE.FLORA], RARITY.UNCOMMON, 'sound', 671, '', 210, 20, 2, 2, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DISARMING_VOICE);
   }
 }
 
@@ -2062,13 +2062,13 @@ class Gloom extends Pokemon {
 
 class Vileplume extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.VILEPLUME, 'rafflesia', [TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 45, '', 260, 20, 4, 4, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.STUN_SPORE);
+    super('Nintendo', PKM.VILEPLUME, 'rafflesia', [TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 45, PKM.BELLOSSOM, 260, 20, 4, 4, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
 class Bellossom extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.BELLOSSOM, 'joliflor', [TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 182, '', 360, 27, 8, 8, 2, 'GRASS/range', ATTACK_TYPE.TRUE, 3, 100, SPECIAL_SKILL.STUN_SPORE);
+    super('Nintendo', PKM.BELLOSSOM, 'joliflor', [TYPE.POISON, TYPE.GRASS], RARITY.SUMMON, 'september', 182, '', 360, 27, 5, 5, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 

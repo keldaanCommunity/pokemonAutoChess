@@ -173,7 +173,9 @@ class Effects {
       }
     }
     if (synergies.FLORA >= 0) {
-      if (synergies.FLORA >= 4) {
+      if (synergies.FLORA >= 5) {
+        this.list.push(EFFECTS.SUN_FLOWER);
+      } else if (synergies.FLORA >= 4) {
         this.list.push(EFFECTS.VILE_FLOWER);
       } else if (synergies.FLORA >= 3) {
         this.list.push(EFFECTS.GLOOM_FLOWER);
