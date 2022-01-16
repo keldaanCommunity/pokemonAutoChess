@@ -288,7 +288,17 @@ class Simulation extends Schema {
   }
 
   applyPostEffects() {
+    let blueImperialCount = 1;
     this.blueTeam.forEach((pokemon) =>{
+      if (pokemon.effects.includes(EFFECTS.IRON_DEFENSE) && blueImperialCount > 0) {
+        pokemon.atk = pokemon.atk * 2;
+        blueImperialCount --;
+      } else {
+        pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.IRON_DEFENSE), 1);
+      }
+      if (pokemon.effects.includes(EFFECTS.AUTOTOMIZE)) {
+        pokemon.atk = pokemon.atk * 2;
+      }
       let shieldBonus = 0;
       if (pokemon.effects.includes(EFFECTS.STAMINA)) {
         shieldBonus = 20;
@@ -323,7 +333,17 @@ class Simulation extends Schema {
       }
     });
 
+    let redImperialCount = 1;
     this.redTeam.forEach((pokemon) =>{
+      if (pokemon.effects.includes(EFFECTS.IRON_DEFENSE) && redImperialCount > 0) {
+        pokemon.atk = pokemon.atk * 2;
+        redImperialCount --;
+      } else {
+        pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.IRON_DEFENSE), 1);
+      }
+      if (pokemon.effects.includes(EFFECTS.AUTOTOMIZE)) {
+        pokemon.atk = pokemon.atk * 2;
+      }
       let shieldBonus = 0;
       if (pokemon.effects.includes(EFFECTS.STAMINA)) {
         shieldBonus = 20;
@@ -515,14 +535,12 @@ class Simulation extends Schema {
 
         case EFFECTS.IRON_DEFENSE:
           if (types.includes(TYPE.METAL)) {
-            pokemon.def += Math.ceil(pokemon.baseDef * 0.5);
             pokemon.effects.push(EFFECTS.IRON_DEFENSE);
           }
           break;
 
         case EFFECTS.AUTOTOMIZE:
           if (types.includes(TYPE.METAL)) {
-            pokemon.handleAttackSpeed(50);
             pokemon.effects.push(EFFECTS.AUTOTOMIZE);
           }
           break;

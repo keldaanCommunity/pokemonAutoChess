@@ -60,6 +60,7 @@ class Effects {
     if (synergies.ELECTRIC > 0) {
       this.list.push(EFFECTS.AGILITY);
     }
+
     if (synergies.FIGHTING >= 0) {
       if (synergies.FIGHTING >= 4) {
         this.list.push(EFFECTS.PUNISHMENT);
@@ -87,12 +88,15 @@ class Effects {
         this.list.push(EFFECTS.HONE_CLAWS);
       }
     }
-    if (synergies.METAL >= 2) {
-      this.list.push(EFFECTS.IRON_DEFENSE);
+
+    if (synergies.METAL >= 0) {
+      if (synergies.METAL >= 4) {
+        this.list.push(EFFECTS.AUTOTOMIZE);
+      } else if (synergies.METAL >= 2) {
+        this.list.push(EFFECTS.IRON_DEFENSE);
+      }
     }
-    if (synergies.METAL >= 4) {
-      this.list.push(EFFECTS.AUTOTOMIZE);
-    }
+
     if (synergies.GROUND >= 2) {
       this.list.push(EFFECTS.SPIKES);
     }
@@ -183,12 +187,16 @@ class Effects {
         this.list.push(EFFECTS.ODD_FLOWER);
       }
     }
-    if (synergies.MINERAL >= 2) {
-      this.list.push(EFFECTS.BATTLE_ARMOR);
+    if (synergies.MINERAL >= 0) {
+      if (synergies.MINERAL >= 6) {
+        this.list.push(EFFECTS.DIAMOND_STORM);
+      } else if (synergies.MINERAL >= 4) {
+        this.list.push(EFFECTS.MOUTAIN_RESISTANCE);
+      } else if (synergies.MINERAL >= 2) {
+        this.list.push(EFFECTS.BATTLE_ARMOR);
+      }
     }
-    if (synergies.MINERAL >= 4) {
-      this.list.push(EFFECTS.MOUTAIN_RESISTANCE);
-    }
+
     if (synergies.AMORPH >= 2) {
       this.list.push(EFFECTS.PHANTOM_FORCE);
     }

@@ -1640,7 +1640,7 @@ const SPECIAL_SKILL = Object.freeze({
   CLANGOROUS_SOUL: 'CLANGOROUS_SOUL',
   NIGHTMARE: 'NIGHTMARE',
   EXPLOSION: 'EXPLOSION',
-  KING_SHIELD:'KING_SHIELD'
+  KING_SHIELD: 'KING_SHIELD'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
@@ -2568,12 +2568,12 @@ const TYPE_TRADUCTION = Object.freeze({
     fra: 'Fleur'
   },
   MINERAL: {
-    eng: 'Mineral',
+    eng: 'Rock',
     esp: 'Roca',
     fra: 'Minéral'
   },
   AMORPH: {
-    eng: 'Amorph',
+    eng: 'Ghost',
     esp: 'Fantasma',
     fra: 'Fantome'
   },
@@ -3118,33 +3118,13 @@ const TYPE_DETAILS = Object.freeze({
       eng: [
         {
           trigger: 2,
-          title: `(2) Steel wall`,
-          text: `Your Steel pokemon have +50% Defense.`
+          title: `(2) Shift Gear`,
+          text: `One of your steel gains double attack damage`
         },
         {
           trigger: 4,
           title: `(4) Lightening`,
-          text: `Your Steel pokemon have +100% Speed.`
-        }
-      ],
-      esp: [
-        {
-          title: `(2) Muro de acero`,
-          text: `+50% DEF para pkm de acero`
-        },
-        {
-          title: `(4) Rayo`,
-          text: `+100% de velocidad ATK para pkm de acero`
-        }
-      ],
-      fra: [
-        {
-          title: `(2) Mur d'acier`,
-          text: `+50% DEF pour les pkm acier`
-        },
-        {
-          title: `(4) Allègement`,
-          text: `+100% ATK speed pour les pkm acier`
+          text: `All of your steel gains double attack damage`
         }
       ]
     }

@@ -103,19 +103,17 @@ class PokemonState {
             pokemon.status.resurection = false;
             pokemon.life = pokemon.hp;
           } else {
-            const is_WORK_UP = pokemon.effects.includes(EFFECTS.WORK_UP);
-            const is_RAGE = pokemon.effects.includes(EFFECTS.RAGE);
-            const is_ANGER_POINT = pokemon.effects.includes(EFFECTS.ANGER_POINT);
+            const isWorkUp = pokemon.effects.includes(EFFECTS.WORK_UP);
+            const isRage = pokemon.effects.includes(EFFECTS.RAGE);
+            const isAngerPoint = pokemon.effects.includes(EFFECTS.ANGER_POINT);
 
-            if(is_WORK_UP || is_RAGE || is_ANGER_POINT){
+            if (isWorkUp || isRage || isAngerPoint) {
               let boost = 0;
-              if(is_WORK_UP){
+              if (isWorkUp) {
                 boost = 20;
-              }
-              else if(is_RAGE){
+              } else if (isRage) {
                 boost = 30;
-              }
-              else if(is_ANGER_POINT){
+              } else if (isAngerPoint) {
                 boost = 50;
               }
               board.forEach((r, c, value) => {
@@ -126,7 +124,7 @@ class PokemonState {
                 }
               });
             }
-            
+
             board.setValue(pokemon.positionX, pokemon.positionY, undefined);
             death = true;
           }

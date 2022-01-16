@@ -185,7 +185,7 @@ class MegaLopunny extends Pokemon {
 
 class Onix extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ONIX, 'onix', [TYPE.MINERAL, TYPE.GROUND], RARITY.LEGENDARY, 'LEGENDARY', 95, PKM.STEELIX, 150, 5, 7, 7, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.IRON_DEFENSE);
+    super('Nintendo', PKM.ONIX, 'onix', [TYPE.MINERAL, TYPE.GROUND, TYPE.METAL], RARITY.LEGENDARY, 'LEGENDARY', 95, PKM.STEELIX, 150, 5, 7, 7, 1, 'ROCK/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.IRON_DEFENSE);
   }
 }
 
@@ -1215,19 +1215,19 @@ class Empoleon extends Pokemon {
 
 class Chimchar extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.CHIMCHAR, 'ouisticram', [TYPE.FIRE, TYPE.HUMAN], RARITY.UNCOMMON, 'UNCOMMON', 390, PKM.MONFERNO, 70, 5, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.TORMENT);
+    super('Nintendo', PKM.CHIMCHAR, 'ouisticram', [TYPE.FIRE, TYPE.FIGHTING], RARITY.UNCOMMON, 'UNCOMMON', 390, PKM.MONFERNO, 70, 5, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.TORMENT);
   }
 }
 
 class Monferno extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MONFERNO, 'chimpenfeu', [TYPE.FIRE, TYPE.HUMAN, TYPE.FIGHTING], RARITY.UNCOMMON, 'UNCOMMON', 391, PKM.INFERNAPE, 120, 9, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.TORMENT);
+    super('Nintendo', PKM.MONFERNO, 'chimpenfeu', [TYPE.FIRE, TYPE.FIGHTING], RARITY.UNCOMMON, 'UNCOMMON', 391, PKM.INFERNAPE, 120, 9, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.TORMENT);
   }
 }
 
 class Infernape extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.INFERNAPE, 'simiabraz', [TYPE.FIRE, TYPE.HUMAN, TYPE.FIGHTING], RARITY.UNCOMMON, 'UNCOMMON', 392, '', 210, 20, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.TORMENT);
+    super('Nintendo', PKM.INFERNAPE, 'simiabraz', [TYPE.FIRE, TYPE.FIGHTING], RARITY.UNCOMMON, 'UNCOMMON', 392, '', 210, 20, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.TORMENT);
   }
 }
 
@@ -1251,7 +1251,7 @@ class Swampert extends Pokemon {
 
 class Torchic extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.TORCHIC, 'poussifeu', [TYPE.FIRE, TYPE.FLYING], RARITY.UNCOMMON, 'UNCOMMON', 255, PKM.COMBUSKEN, 70, 5, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BLAZE_KICK);
+    super('Nintendo', PKM.TORCHIC, 'poussifeu', [TYPE.FIRE, TYPE.FIGHTING, TYPE.FLYING], RARITY.UNCOMMON, 'UNCOMMON', 255, PKM.COMBUSKEN, 70, 5, 3, 3, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BLAZE_KICK);
   }
 }
 
@@ -1539,19 +1539,19 @@ class Pidgeot extends Pokemon {
 
 class Hoppip extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.HOPPIP, 'granivol', [TYPE.GRASS, TYPE.FLYING, TYPE.FLORA], RARITY.COMMON, 'COMMON', 187, PKM.SKIPLOOM, 60, 5, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.STUN_SPORE);
+    super('Nintendo', PKM.HOPPIP, 'granivol', [TYPE.FLYING, TYPE.FLORA], RARITY.COMMON, 'COMMON', 187, PKM.SKIPLOOM, 60, 5, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
 class Skiploom extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SKIPLOOM, 'floravol', [TYPE.GRASS, TYPE.FLYING, TYPE.FLORA], RARITY.COMMON, 'COMMON', 188, PKM.JUMPLUFF, 110, 9, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.STUN_SPORE);
+    super('Nintendo', PKM.SKIPLOOM, 'floravol', [TYPE.FLYING, TYPE.FLORA], RARITY.COMMON, 'COMMON', 188, PKM.JUMPLUFF, 110, 9, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
 class Jumpluff extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.JUMPLUFF, 'cotovol', [TYPE.GRASS, TYPE.FLYING, TYPE.FLORA], RARITY.COMMON, 'COMMON', 189, '', 220, 18, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.STUN_SPORE);
+    super('Nintendo', PKM.JUMPLUFF, 'cotovol', [TYPE.FLYING, TYPE.FLORA], RARITY.COMMON, 'COMMON', 189, '', 220, 18, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 

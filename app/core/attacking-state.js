@@ -1,4 +1,4 @@
-const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION, TYPE} = require('../models/enum');
+const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class AttackingState extends PokemonState {
@@ -55,7 +55,7 @@ class AttackingState extends PokemonState {
       if (pokemon.effects.includes(EFFECTS.TOXIC)) {
         poisonChance += 0.5;
       }
-      if (poisonChance != 0 && !(target.types.includes(TYPE.METAL) || target.types.includes(TYPE.POISON))) {
+      if (poisonChance != 0) {
         if (Math.random() > poisonChance) {
           target.status.triggerPoison(2000);
         }

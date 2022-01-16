@@ -3,7 +3,7 @@ import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemContainer from './item-container';
-import {SPECIAL_SKILL, EFFECTS_ICON} from '../../../../models/enum.js';
+import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS} from '../../../../models/enum.js';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 
 export default class Pokemon extends Button {
@@ -100,7 +100,7 @@ export default class Pokemon extends Button {
     });
   }
 
-  fieldDeathAnimation(){
+  fieldDeathAnimation() {
     const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
     const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'FIELD_DEATH', '000');
     specialProjectile.setDepth(7);
@@ -111,7 +111,7 @@ export default class Pokemon extends Button {
     });
   }
 
-  soundAnimation(){
+  soundAnimation() {
     const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
     const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ECHO', '000');
     specialProjectile.setDepth(7);
@@ -929,7 +929,12 @@ export default class Pokemon extends Button {
     const sprite = new GameObjects.Sprite(scene, 0, 0, pokemon.sheet, `${pokemon.index}/0/1/0`);
     this.height = sprite.height;
     this.width = sprite.width;
-    sprite.setScale(2, 2);
+
+    if (pokemon.effects && (pokemon.effects.includes(EFFECTS.IRON_DEFENSE) || pokemon.effects.includes(EFFECTS.AUTOTOMIZE))) {
+      sprite.setScale(3, 3);
+    } else {
+      sprite.setScale(2, 2);
+    }
     const socle = new GameObjects.Image(scene, 0, this.height, 'socle');
     socle.objType = 'socle';
     sprite.objType = 'sprite';

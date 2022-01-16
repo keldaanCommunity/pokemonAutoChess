@@ -46,16 +46,16 @@ class KingShieldStrategy extends AttackStrategy {
         break;
     }
     pokemon.status.triggerProtect(timer);
-    let farthestTarget = state.getFarthestTargetCoordinate(pokemon, board);
+    const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board);
     const x = farthestTarget[0];
     const y = farthestTarget[1];
     const oldX = pokemon.positionX;
     const oldY = pokemon.positionY;
 
     if (x !== undefined && y !== undefined) {
-      let tg = board.getValue(x,y);
-      
-      if(tg){
+      const tg = board.getValue(x, y);
+
+      if (tg) {
         tg.positionX = oldX;
         tg.positionY = oldY;
       }
