@@ -97,6 +97,24 @@ class AttackingState extends PokemonState {
             }
           });
         }
+        if (target.effects.includes(EFFECTS.FAIRY_WIND) || target.effects.includes(EFFECTS.STRANGE_STEAM) || target.effects.includes(EFFECTS.AROMATIC_MIST)) {
+          let d = 0;
+          if (target.effects.includes(EFFECTS.AROMATIC_MIST)) {
+            d = 10;
+          } else if (target.effects.includes(EFFECTS.FAIRY_WIND)) {
+            d = 25;
+          } else if (target.effects.includes(EFFECTS.STRANGE_STEAM)) {
+            d = 50;
+          }
+          const cells = board.getAdjacentCells(target.positionX, target.positionY);
+
+          cells.forEach((cell) => {
+            if (cell.value && target.team != cell.value.team) {
+              cell.value.count.fairyCritCount ++;
+              cell.value.handleDamage(d, board, ATTACK_TYPE.SPECIAL, pokemon);
+            }
+          });
+        }
         damage = Math.round(pokemon.atk * pokemon.critDamage);
         target.count.crit ++;
         if (pokemon.items.count(ITEMS.RAZOR_CLAW) != 0) {
