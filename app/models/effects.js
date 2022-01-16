@@ -159,12 +159,15 @@ class Effects {
         this.list.push(EFFECTS.SWIFT_SWIM);
       }
     }
-    if (synergies.BUG >= 2) {
-      this.list.push(EFFECTS.SWARM);
+
+    if (synergies.BUG >= 0) {
+      if (synergies.BUG >= 4) {
+        this.list.push(EFFECTS.STICKY_WEB);
+      } else if (synergies.BUG >= 2) {
+        this.list.push(EFFECTS.SWARM);
+      }
     }
-    if (synergies.BUG >= 4) {
-      this.list.push(EFFECTS.STICKY_WEB);
-    }
+
     if (synergies.FLYING >= 0) {
       if (synergies.FLYING >= 8) {
         this.list.push(EFFECTS.MAX_GUARD);

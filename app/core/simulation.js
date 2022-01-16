@@ -64,10 +64,65 @@ class Simulation extends Schema {
       this.addPokemon(kyogre, coord[0], coord[1], 0);
     }
 
+    if (blueEffects && blueEffects.includes(EFFECTS.SWARM)) {
+      const bugTeam = [];
+      blueTeam.forEach((pkm)=>{
+        if (pkm.types.includes(TYPE.BUG)) {
+          bugTeam.push(pkm.name);
+        }
+      });
+      const randomBug = bugTeam[Math.floor(Math.random() * bugTeam.length)];
+      const bug = PokemonFactory.createPokemonFromName(randomBug);
+      const coord = this.getFirstAvailablePlaceOnBoard(true);
+      this.addPokemon(bug, coord[0], coord[1], 0);
+    }
+
+    if (blueEffects && blueEffects.includes(EFFECTS.STICKY_WEB)) {
+      const bugTeam = [];
+      blueTeam.forEach((pkm)=>{
+        if (pkm.types.includes(TYPE.BUG)) {
+          bugTeam.push(pkm.name);
+        }
+      });
+      bugTeam.forEach((b)=>{
+        const bug = PokemonFactory.createPokemonFromName(b);
+        const coord = this.getFirstAvailablePlaceOnBoard(true);
+        this.addPokemon(bug, coord[0], coord[1], 0);
+      });
+    }
+
+
     if (redEffects && redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
       const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
       const coord = this.getFirstAvailablePlaceOnBoard(false);
       this.addPokemon(kyogre, coord[0], coord[1], 1);
+    }
+
+    if (redEffects && redEffects.includes(EFFECTS.SWARM)) {
+      const bugTeam = [];
+      redTeam.forEach((pkm)=>{
+        if (pkm.types.includes(TYPE.BUG)) {
+          bugTeam.push(pkm.name);
+        }
+      });
+      const randomBug = bugTeam[Math.floor(Math.random() * bugTeam.length)];
+      const bug = PokemonFactory.createPokemonFromName(randomBug);
+      const coord = this.getFirstAvailablePlaceOnBoard(false);
+      this.addPokemon(bug, coord[0], coord[1], 1);
+    }
+
+    if (redEffects && redEffects.includes(EFFECTS.STICKY_WEB)) {
+      const bugTeam = [];
+      redTeam.forEach((pkm)=>{
+        if (pkm.types.includes(TYPE.BUG)) {
+          bugTeam.push(pkm.name);
+        }
+      });
+      bugTeam.forEach((b)=>{
+        const bug = PokemonFactory.createPokemonFromName(b);
+        const coord = this.getFirstAvailablePlaceOnBoard(false);
+        this.addPokemon(bug, coord[0], coord[1], 1);
+      });
     }
 
     this.applyPostEffects();
@@ -758,6 +813,18 @@ class Simulation extends Schema {
           }
           break;
 
+        case EFFECTS.SWARM:
+          if (types.includes(TYPE.BUG)) {
+            pokemon.effects.push(EFFECTS.SWARM);
+          }
+          break;
+
+        case EFFECTS.STICKY_WEB:
+          if (types.includes(TYPE.BUG)) {
+            pokemon.effects.push(EFFECTS.STICKY_WEB);
+          }
+          break;
+
         default:
           break;
       }
@@ -782,11 +849,6 @@ class Simulation extends Schema {
 
         case EFFECTS.SANDSTORM:
           pokemon.effects.push(EFFECTS.SANDSTORM);
-          break;
-
-        case EFFECTS.STICKY_WEB:
-          pokemon.handleAttackSpeed(-30);
-          pokemon.effects.push(EFFECTS.STICKY_WEB);
           break;
 
         default:

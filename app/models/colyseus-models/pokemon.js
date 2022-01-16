@@ -1089,19 +1089,19 @@ class Krookodile extends Pokemon {
 
 class Venipede extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.VENIPEDE, 'ptéra', [TYPE.BUG, TYPE.POISON], RARITY.UNCOMMON, 'sound', 543, PKM.WHIRLIPEDE, 70, 5, 3, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.VENIPEDE, 'ptéra', [TYPE.BUG, TYPE.POISON], RARITY.UNCOMMON, 'sound', 543, PKM.WHIRLIPEDE, 70, 5, 3, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.POISON_STING);
   }
 }
 
 class Whirlipede extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.WHIRLIPEDE, 'ptéra', [TYPE.BUG, TYPE.POISON], RARITY.UNCOMMON, 'sound', 544, PKM.SCOLIPEDE, 120, 9, 3, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.WHIRLIPEDE, 'ptéra', [TYPE.BUG, TYPE.POISON], RARITY.UNCOMMON, 'sound', 544, PKM.SCOLIPEDE, 120, 9, 3, 2, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.POISON_STING);
   }
 }
 
 class Scolipede extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SCOLIPEDE, 'ptéra', [TYPE.BUG, TYPE.POISON], RARITY.UNCOMMON, 'sound', 545, '', 210, 20, 3, 3, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.DEFAULT);
+    super('Nintendo', PKM.SCOLIPEDE, 'ptéra', [TYPE.BUG, TYPE.POISON], RARITY.UNCOMMON, 'sound', 545, '', 210, 20, 3, 3, 1, 'GRASS/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.POISON_STING);
   }
 }
 
@@ -1539,19 +1539,19 @@ class Pidgeot extends Pokemon {
 
 class Hoppip extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.HOPPIP, 'granivol', [TYPE.FLYING, TYPE.FLORA], RARITY.COMMON, 'COMMON', 187, PKM.SKIPLOOM, 60, 5, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.STUN_SPORE);
+    super('Nintendo', PKM.HOPPIP, 'granivol', [TYPE.FLYING, TYPE.FLORA, TYPE.GRASS], RARITY.COMMON, 'COMMON', 187, PKM.SKIPLOOM, 60, 5, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
 class Skiploom extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SKIPLOOM, 'floravol', [TYPE.FLYING, TYPE.FLORA], RARITY.COMMON, 'COMMON', 188, PKM.JUMPLUFF, 110, 9, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.STUN_SPORE);
+    super('Nintendo', PKM.SKIPLOOM, 'floravol', [TYPE.FLYING, TYPE.FLORA, TYPE.GRASS], RARITY.COMMON, 'COMMON', 188, PKM.JUMPLUFF, 110, 9, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 
 class Jumpluff extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.JUMPLUFF, 'cotovol', [TYPE.FLYING, TYPE.FLORA], RARITY.COMMON, 'COMMON', 189, '', 220, 18, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.STUN_SPORE);
+    super('Nintendo', PKM.JUMPLUFF, 'cotovol', [TYPE.FLYING, TYPE.FLORA, TYPE.GRASS], RARITY.COMMON, 'COMMON', 189, '', 220, 18, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.STUN_SPORE);
   }
 }
 

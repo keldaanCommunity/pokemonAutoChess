@@ -14,7 +14,8 @@ class GameDpsMeter extends Component{
             justifyContent:'space-between',
             backgroundColor: 'rgba(255,255,255,0.7)',
             padding:'10px',
-            overflowY:'scroll'
+            overflowY:'scroll',
+            maxHeight:'78%'
         }
         if(this.props.dpsMeter.size && this.props.dpsMeter.size > 0){
             let sortedArray = Array.from(this.props.dpsMeter).sort((a,b)=>{return b[1].damage - a[1].damage});

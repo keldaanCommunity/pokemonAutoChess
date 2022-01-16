@@ -1412,7 +1412,7 @@ const EFFECTS_ICON = Object.freeze({
   },
   STICKY_WEB: {
     level: 2,
-    positive: false,
+    positive: true,
     type: TYPE.BUG
   },
   SWIFT_SWIM: {
@@ -3411,33 +3411,13 @@ const TYPE_DETAILS = Object.freeze({
       eng: [
         {
           trigger: 2,
-          title: `(2) Swarm`,
-          text: `Your Bug pokemon evolve faster. (2 instead of 3)`
+          title: `(2) Fisrt Impression`,
+          text: `At the start of combat, creates a copy of one bug pokemon`
         },
         {
           trigger: 4,
           title: `(4) Sticky web`,
-          text: `Enemies have -33% Speed.`
-        }
-      ],
-      esp: [
-        {
-          title: `(2) Essaim`,
-          text: `Se necesitan 2 pkm para evolucionar (en lugar de 3)`
-        },
-        {
-          title: `(4) Web pegajosa`,
-          text: `-33% de velocidad ATK para el equipo enemigo`
-        }
-      ],
-      fra: [
-        {
-          title: `(2) Essaim`,
-          text: `2 pkm nécessaires pour évoluer (au lieu de 3)`
-        },
-        {
-          title: `(4) Toile gluante`,
-          text: `-33% ATK speed pour l'équipe ennemie`
+          text: `At the start of combat, creates a copy of all bug pokemon`
         }
       ]
     }
@@ -3804,6 +3784,7 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
   GRASS: [
     'bulbasaur', 'ivysaur', 'venusaur',
     'caterpie', 'metapod', 'butterfree',
+    'hoppip', 'skiploom', 'jumpluff',
     'seedot', 'nuzleaf', 'shiftry',
     'chikorita', 'bayleef', 'meganium',
     'treecko', 'grovyle', 'sceptile',
@@ -3942,7 +3923,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'bellsprout', 'weepinbell', 'victreebel',
     'oddish', 'gloom', 'vileplume',
     'bellossom', 'budew', 'roselia',
-    'roserade'
+    'roserade', 'venipede', 'whirlipede',
+    'scolipede'
   ],
   DRAGON: [
     'horsea', 'seadra', 'kingdra',
@@ -4026,8 +4008,9 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'scizor', 'mega-scizor',
     'volcarona', 'manaphy',
     'anorith', 'armaldo',
-    'sewaddle', 'swadloon',
-    'leavanny'
+    'venipede', 'whirlipede',
+    'scolipede', 'sewaddle',
+    'swadloon', 'leavanny'
   ],
   FLYING: [
     'charmander', 'charmeleon', 'charizard',
@@ -4157,13 +4140,14 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   GRASS: {
     pokemons: [
-      'caterpie', 'seedot',
-      'chikorita', 'treecko',
-      'leafeon', 'bellsprout',
-      'oddish', 'cradily',
-      'bulbasaur', 'turtwig',
-      'lotad', 'budew',
-      'sewaddle', 'snover'
+      'caterpie', 'hoppip',
+      'seedot', 'chikorita',
+      'treecko', 'leafeon',
+      'bellsprout', 'oddish',
+      'cradily', 'bulbasaur',
+      'turtwig', 'lotad',
+      'budew', 'sewaddle',
+      'snover'
     ],
     mythicalPokemons: ['virizion', 'celebi', 'shaymin']
   },
@@ -4291,9 +4275,9 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     pokemons: [
       'zubat', 'weedle',
       'bellsprout', 'oddish',
-      'bulbasaur', 'nidoranF',
-      'nidoranM', 'budew',
-      'gastly'
+      'venipede', 'bulbasaur',
+      'nidoranF', 'nidoranM',
+      'budew', 'gastly'
     ],
     mythicalPokemons: []
   },
@@ -4363,6 +4347,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
       'caterpie',
       'weedle',
       'anorith',
+      'venipede',
       'trapinch',
       'sewaddle',
       'scyther'
