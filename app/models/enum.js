@@ -3801,26 +3801,23 @@ const PROBABILITY = {
 
 const PRECOMPUTED_TYPE_POKEMONS_ALL = {
   NORMAL: [
-    'ditto', 'cleffa', 'clefairy',
-    'clefable', 'igglybuff', 'wygglytuff',
-    'jigglypuff', 'pidgey', 'pidgeotto',
-    'pidgeot', 'starly', 'staravia',
-    'staraptor', 'togepi', 'togetic',
-    'togekiss', 'slakoth', 'vigoroth',
-    'slaking', 'scyther', 'rattata',
-    'raticate', 'spearow', 'fearow',
-    'regigigas', 'eevee', 'meditite',
-    'medicham', 'mega-medicham', 'arceus',
-    'buneary', 'lopunny', 'mega-lopunny',
-    'porygon', 'porygon2', 'porygon-z',
-    'whismur', 'loudred', 'exploud',
-    'pikipek', 'trumbeak', 'toucannon',
-    'meloetta'
+    'cleffa', 'clefairy', 'clefable',
+    'igglybuff', 'wygglytuff', 'jigglypuff',
+    'pidgey', 'pidgeotto', 'pidgeot',
+    'starly', 'staravia', 'staraptor',
+    'togepi', 'togetic', 'togekiss',
+    'slakoth', 'vigoroth', 'slaking',
+    'scyther', 'regigigas', 'eevee',
+    'meditite', 'medicham', 'mega-medicham',
+    'arceus', 'buneary', 'lopunny',
+    'mega-lopunny', 'porygon', 'porygon2',
+    'porygon-z', 'whismur', 'loudred',
+    'exploud', 'pikipek', 'trumbeak',
+    'toucannon', 'meloetta'
   ],
   GRASS: [
     'bulbasaur', 'ivysaur', 'venusaur',
     'caterpie', 'metapod', 'butterfree',
-    'hoppip', 'skiploom', 'jumpluff',
     'seedot', 'nuzleaf', 'shiftry',
     'chikorita', 'bayleef', 'meganium',
     'treecko', 'grovyle', 'sceptile',
@@ -3856,13 +3853,13 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'horsea', 'seadra', 'kingdra',
     'lotad', 'lombre', 'ludicolo',
     'poliwag', 'poliwhirl', 'politoed',
-    'magikarp', 'gyarados', 'palkia',
-    'suicune', 'kyogre', 'vaporeon',
-    'carvanha', 'keldeo', 'manaphy',
-    'lapras', 'primal-Kyogre', 'carracosta',
-    'kabuto', 'kabutops', 'omanyte',
-    'omastar', 'tirtouga', 'tympole',
-    'palpitoad', 'seismitoad'
+    'gyarados', 'palkia', 'suicune',
+    'kyogre', 'vaporeon', 'carvanha',
+    'keldeo', 'manaphy', 'lapras',
+    'primal-Kyogre', 'carracosta', 'kabuto',
+    'kabutops', 'omanyte', 'omastar',
+    'tirtouga', 'tympole', 'palpitoad',
+    'seismitoad'
   ],
   ELECTRIC: [
     'mareep', 'flaffy',
@@ -3875,11 +3872,13 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'electivire', 'zapdos',
     'raikou', 'jolteon',
     'thundurus', 'rotom',
-    'zekrom', 'primal-Kyogre', 'electrike',
-    'manectric', 'mega-manectric'
+    'zekrom', 'primal-Kyogre',
+    'electrike', 'manectric',
+    'mega-manectric'
   ],
   FIGHTING: [
-    'combusken', 'blaziken',
+    'torchic', 'combusken',
+    'blaziken', 'chimchar',
     'monferno', 'infernape',
     'machop', 'machoke',
     'machamp', 'poliwag',
@@ -3924,12 +3923,13 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'prinplup', 'empoleon', 'aron',
     'lairon', 'aggron', 'magnemite',
     'magneton', 'magnezone', 'beldum',
-    'metang', 'metagross', 'steelix',
-    'mega-steelix', 'scizor', 'mega-scizor',
-    'lucario', 'mega-lucario', 'dialga',
-    'registeel', 'cobalion', 'jirachi',
-    'heatran', 'bastiodon', 'shieldon',
-    'honedge', 'doublade', 'aegislash'
+    'metang', 'metagross', 'onix',
+    'steelix', 'mega-steelix', 'scizor',
+    'mega-scizor', 'lucario', 'mega-lucario',
+    'dialga', 'registeel', 'cobalion',
+    'jirachi', 'heatran', 'bastiodon',
+    'shieldon', 'honedge', 'doublade',
+    'aegislash'
   ],
   GROUND: [
     'geodude', 'graveler', 'golem',
@@ -3940,11 +3940,11 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'gible', 'gabite', 'garchomp',
     'onix', 'steelix', 'mega-steelix',
     'groudon', 'numel', 'camerupt',
-    'mega-camerupt', 'sandshrew', 'swinub',
-    'piloswine', 'mamoswine', 'landorus',
-    'primal-Groudon', 'sandile', 'krokorok',
-    'krookodile', 'cubone', 'marowak',
-    'tympole', 'palpitoad', 'seismitoad'
+    'mega-camerupt', 'swinub', 'piloswine',
+    'mamoswine', 'landorus', 'primal-Groudon',
+    'sandile', 'krokorok', 'krookodile',
+    'cubone', 'marowak', 'tympole',
+    'palpitoad', 'seismitoad'
   ],
   POISON: [
     'bulbasaur', 'ivysaur', 'venusaur',
@@ -3956,8 +3956,7 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'bellsprout', 'weepinbell', 'victreebel',
     'oddish', 'gloom', 'vileplume',
     'bellossom', 'budew', 'roselia',
-    'roserade', 'venipede', 'whirlipede',
-    'scolipede'
+    'roserade'
   ],
   DRAGON: [
     'horsea', 'seadra', 'kingdra',
@@ -3987,11 +3986,11 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'vaporeon', 'jolteon', 'flareon',
     'espeon', 'umbreon', 'leafeon',
     'sylveon', 'numel', 'camerupt',
-    'mega-camerupt', 'sandshrew', 'swinub',
-    'piloswine', 'mamoswine', 'glaceon',
-    'absol', 'arceus', 'sandile',
-    'krokorok', 'krookodile', 'electrike',
-    'manectric', 'mega-manectric'
+    'mega-camerupt', 'swinub', 'piloswine',
+    'mamoswine', 'glaceon', 'absol',
+    'arceus', 'sandile', 'krokorok',
+    'krookodile', 'electrike', 'manectric',
+    'mega-manectric'
   ],
   MONSTER: [
     'charmander', 'charmeleon', 'charizard',
@@ -4008,21 +4007,19 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'axew', 'fraxure', 'haxorus'
   ],
   HUMAN: [
-    'chimchar', 'monferno',
-    'infernape', 'machop',
-    'machoke', 'machamp',
-    'abra', 'kadabra',
-    'alakazam', 'ralts',
-    'kirlia', 'gardevoir',
-    'elekid', 'electabuzz',
-    'electivire', 'magby',
-    'magmar', 'magmortar',
-    'riolu', 'lucario',
-    'mega-lucario', 'regice',
-    'regirock', 'registeel',
-    'regigigas', 'meditite',
-    'medicham', 'mega-medicham',
-    'deoxys'
+    'machop', 'machoke',
+    'machamp', 'abra',
+    'kadabra', 'alakazam',
+    'ralts', 'kirlia',
+    'gardevoir', 'elekid',
+    'electabuzz', 'electivire',
+    'magby', 'magmar',
+    'magmortar', 'riolu',
+    'lucario', 'mega-lucario',
+    'regice', 'regirock',
+    'registeel', 'regigigas',
+    'meditite', 'medicham',
+    'mega-medicham', 'deoxys'
   ],
   AQUATIC: [
     'totodile', 'croconaw',
@@ -4043,9 +4040,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'scizor', 'mega-scizor',
     'volcarona', 'manaphy',
     'anorith', 'armaldo',
-    'venipede', 'whirlipede',
-    'scolipede', 'sewaddle',
-    'swadloon', 'leavanny'
+    'sewaddle', 'swadloon',
+    'leavanny'
   ],
   FLYING: [
     'charmander', 'charmeleon', 'charizard',
@@ -4057,12 +4053,12 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'combusken', 'blaziken', 'piplup',
     'prinplup', 'empoleon', 'togetic',
     'togekiss', 'dragonite', 'salamence',
-    'spearow', 'fearow', 'lugia',
-    'zapdos', 'moltres', 'articuno',
-    'rayquaza', 'landorus', 'thundurus',
-    'tornadus', 'ho-Oh', 'aerodactyl',
-    'mega-Rayquaza', 'archen', 'archeops',
-    'pikipek', 'trumbeak', 'toucannon'
+    'lugia', 'zapdos', 'moltres',
+    'articuno', 'rayquaza', 'landorus',
+    'thundurus', 'tornadus', 'ho-Oh',
+    'aerodactyl', 'mega-Rayquaza', 'archen',
+    'archeops', 'pikipek', 'trumbeak',
+    'toucannon'
   ],
   FLORA: [
     'bulbasaur', 'ivysaur',
@@ -4075,7 +4071,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'weepinbell', 'victreebel',
     'shaymin', 'budew',
     'roselia', 'roserade',
-    'flabebe', 'floette', 'florges'
+    'flabebe', 'floette',
+    'florges'
   ],
   MINERAL: [
     'geodude', 'graveler',
@@ -4165,9 +4162,8 @@ const PRECOMPUTED_TYPE_POKEMONS = {
       'cleffa', 'igglybuff',
       'pidgey', 'starly',
       'eevee', 'pikipek',
-      'lillipup', 'togepi',
-      'slakoth', 'porygon',
-      'whismur', 'ditto',
+      'togepi', 'slakoth',
+      'porygon', 'whismur',
       'scyther', 'meditite',
       'buneary'
     ],
@@ -4175,14 +4171,13 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   GRASS: {
     pokemons: [
-      'caterpie', 'hoppip',
-      'seedot', 'chikorita',
-      'treecko', 'leafeon',
-      'bellsprout', 'oddish',
-      'cradily', 'bulbasaur',
-      'turtwig', 'lotad',
-      'budew', 'sewaddle',
-      'snover'
+      'caterpie', 'seedot',
+      'chikorita', 'treecko',
+      'leafeon', 'bellsprout',
+      'oddish', 'cradily',
+      'bulbasaur', 'turtwig',
+      'lotad', 'budew',
+      'sewaddle', 'snover'
     ],
     mythicalPokemons: ['virizion', 'celebi', 'shaymin']
   },
@@ -4233,10 +4228,13 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   ELECTRIC: {
     pokemons: [
-      'mareep', 'magnemite',
+      'mareep',
+      'magnemite',
       'jolteon',
-      'pichu', 'shinx',
-      'elekid', 'electrike'
+      'pichu',
+      'shinx',
+      'elekid',
+      'electrike'
     ],
     mythicalPokemons: [
       'zapdos',
@@ -4249,7 +4247,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   FIGHTING: {
     pokemons: [
-      'combusken', 'monferno',
+      'torchic', 'chimchar',
       'machop', 'poliwag',
       'jangmo-o', 'riolu',
       'meditite', 'buneary'
@@ -4284,10 +4282,11 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   METAL: {
     pokemons: [
-      'prinplup', 'magnemite', 'aron',
-      'beldum', 'bastiodon',
-      'honedge', 'steelix',
-      'scizor', 'lucario'
+      'prinplup', 'magnemite',
+      'aron', 'beldum',
+      'bastiodon', 'honedge',
+      'onix', 'scizor',
+      'lucario'
     ],
     mythicalPokemons: ['dialga', 'registeel', 'cobalion', 'jirachi', 'heatran']
   },
@@ -4306,9 +4305,9 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     pokemons: [
       'zubat', 'weedle',
       'bellsprout', 'oddish',
-      'venipede', 'bulbasaur',
-      'nidoranF', 'nidoranM',
-      'budew', 'gastly'
+      'bulbasaur', 'nidoranF',
+      'nidoranM', 'budew',
+      'gastly'
     ],
     mythicalPokemons: []
   },
@@ -4335,12 +4334,16 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   FIELD: {
     pokemons: [
-      'squirtle', 'mareep', 'seedot',
-      'cyndaquil', 'eevee', 'vaporeon',
-      'jolteon', 'flareon', 'espeon',
-      'umbreon', 'leafeon', 'sylveon',
-      'swinub', 'glaceon', 'sandile', 'nidoranF', 'nidoranM',
-      'shinx', 'slakoth', 'numel',
+      'squirtle', 'mareep',
+      'seedot', 'cyndaquil',
+      'eevee', 'vaporeon',
+      'jolteon', 'flareon',
+      'espeon', 'umbreon',
+      'leafeon', 'sylveon',
+      'swinub', 'glaceon',
+      'sandile', 'nidoranF',
+      'nidoranM', 'shinx',
+      'slakoth', 'numel',
       'electrike'
     ],
     mythicalPokemons: ['raikou', 'entei', 'absol', 'arceus']
@@ -4358,10 +4361,10 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   HUMAN: {
     pokemons: [
-      'chimchar', 'machop',
-      'abra', 'ralts',
-      'elekid', 'magby',
-      'riolu', 'meditite'
+      'machop', 'abra',
+      'ralts', 'elekid',
+      'magby', 'riolu',
+      'meditite'
     ],
     mythicalPokemons: ['regice', 'regirock', 'registeel', 'regigigas', 'deoxys']
   },
@@ -4374,7 +4377,6 @@ const PRECOMPUTED_TYPE_POKEMONS = {
       'caterpie',
       'weedle',
       'anorith',
-      'venipede',
       'trapinch',
       'sewaddle',
       'scyther'
@@ -4409,9 +4411,9 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     pokemons: [
       'hoppip',
       'chikorita',
-      'flabebe',
       'leafeon',
       'bellsprout',
+      'flabebe',
       'bulbasaur',
       'turtwig',
       'budew'
