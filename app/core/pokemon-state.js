@@ -233,7 +233,7 @@ class PokemonState {
               const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
               cells.forEach((cell) => {
                 if (!cell.value && !created) {
-                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.SWABLU), cell.row, cell.column, pokemon.team);
+                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.SPEAROW), cell.row, cell.column, pokemon.team);
                   created = true;
                 }
               });
