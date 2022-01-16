@@ -67,7 +67,7 @@ class Simulation extends Schema {
     if (blueEffects && blueEffects.includes(EFFECTS.SWARM)) {
       const bugTeam = [];
       blueTeam.forEach((pkm)=>{
-        if (pkm.types.includes(TYPE.BUG)) {
+        if (pkm.types.includes(TYPE.BUG) && pkm.positionY != 0) {
           bugTeam.push(pkm.name);
         }
       });
@@ -80,7 +80,7 @@ class Simulation extends Schema {
     if (blueEffects && blueEffects.includes(EFFECTS.STICKY_WEB)) {
       const bugTeam = [];
       blueTeam.forEach((pkm)=>{
-        if (pkm.types.includes(TYPE.BUG)) {
+        if (pkm.types.includes(TYPE.BUG) && pkm.positionY != 0) {
           bugTeam.push(pkm.name);
         }
       });
@@ -101,7 +101,7 @@ class Simulation extends Schema {
     if (redEffects && redEffects.includes(EFFECTS.SWARM)) {
       const bugTeam = [];
       redTeam.forEach((pkm)=>{
-        if (pkm.types.includes(TYPE.BUG)) {
+        if (pkm.types.includes(TYPE.BUG) && pkm.positionY != 0) {
           bugTeam.push(pkm.name);
         }
       });
@@ -114,7 +114,7 @@ class Simulation extends Schema {
     if (redEffects && redEffects.includes(EFFECTS.STICKY_WEB)) {
       const bugTeam = [];
       redTeam.forEach((pkm)=>{
-        if (pkm.types.includes(TYPE.BUG)) {
+        if (pkm.types.includes(TYPE.BUG) && pkm.positionY != 0) {
           bugTeam.push(pkm.name);
         }
       });
