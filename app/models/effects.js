@@ -203,12 +203,17 @@ class Effects {
     if (synergies.AMORPH >= 4) {
       this.list.push(EFFECTS.CURSE);
     }
-    if (synergies.FAIRY >= 2) {
-      this.list.push(EFFECTS.ATTRACT);
+
+    if (synergies.FAIRY >= 0) {
+      if (synergies.FAIRY >= 6) {
+        this.list.push(EFFECTS.STRANGE_STEAM);
+      } else if (synergies.FAIRY >= 4) {
+        this.list.push(EFFECTS.FAIRY_WIND);
+      } else if (synergies.FAIRY >= 2) {
+        this.list.push(EFFECTS.AROMATIC_MIST);
+      }
     }
-    if (synergies.FAIRY >= 4) {
-      this.list.push(EFFECTS.BABY_DOLL_EYES);
-    }
+
     if (synergies.ICE >= 0) {
       if (synergies.ICE >= 4) {
         this.list.push(EFFECTS.SHEER_COLD);

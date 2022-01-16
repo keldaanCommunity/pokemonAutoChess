@@ -79,6 +79,24 @@ class AttackingState extends PokemonState {
       let attackType = pokemon.attackType;
 
       if (Math.random() * 100 < pokemon.critChance) {
+        if (pokemon.effects.includes(EFFECTS.FAIRY_WIND) || pokemon.effects.includes(EFFECTS.STRANGE_STEAM) || pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
+          let d = 0;
+          if (pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
+            d = 10;
+          } else if (pokemon.effects.includes(EFFECTS.FAIRY_WIND)) {
+            d = 25;
+          } else if (pokemon.effects.includes(EFFECTS.STRANGE_STEAM)) {
+            d = 50;
+          }
+          const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+
+          cells.forEach((cell) => {
+            if (cell.value && pokemon.team != cell.value.team) {
+              cell.value.count.fairyCritCount ++;
+              cell.value.handleDamage(d, board, ATTACK_TYPE.SPECIAL, pokemon);
+            }
+          });
+        }
         damage = Math.round(pokemon.atk * pokemon.critDamage);
         target.count.crit ++;
         if (pokemon.items.count(ITEMS.RAZOR_CLAW) != 0) {

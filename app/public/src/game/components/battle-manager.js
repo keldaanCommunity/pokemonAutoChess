@@ -179,6 +179,10 @@ export default class BattleManager {
             if (change.value != 0) {
               children[i].soundAnimation();
             }
+          } else if (change.field == 'fairyCritCount') {
+            if (change.value != 0) {
+              children[i].fairyCritAnimation();
+            }
           }
         }
       }

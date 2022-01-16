@@ -111,6 +111,17 @@ export default class Pokemon extends Button {
     });
   }
 
+  fairyCritAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'FAIRY_CRIT', '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(2, 2);
+    specialProjectile.anims.play('FAIRY_CRIT');
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
   soundAnimation() {
     const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
     const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ECHO', '000');

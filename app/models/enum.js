@@ -1190,8 +1190,9 @@ const EFFECTS = Object.freeze({
   DIAMOND_STORM: 'DIAMOND_STORM',
   PHANTOM_FORCE: 'PHANTOM_FORCE',
   CURSE: 'CURSE',
-  ATTRACT: 'ATTRACT',
-  BABY_DOLL_EYES: 'BABY_DOLL_EYES',
+  AROMATIC_MIST: 'AROMATIC_MIST',
+  FAIRY_WIND: 'FAIRY_WIND',
+  STRANGE_STEAM: 'STRANGE_STEAM',
   GROUND: 'GROUND',
   GRASS: 'GRASS',
   FIRE: 'FIRE',
@@ -1489,12 +1490,12 @@ const EFFECTS_ICON = Object.freeze({
     positive: true,
     type: TYPE.AMORPH
   },
-  ATTRACT: {
+  AROMATIC_MIST: {
     level: 1,
     positive: true,
     type: TYPE.FAIRY
   },
-  BABY_DOLL_EYES: {
+  FAIRY_WIND: {
     level: 2,
     positive: true,
     type: TYPE.FAIRY
@@ -3599,33 +3600,18 @@ const TYPE_DETAILS = Object.freeze({
       eng: [
         {
           trigger: 2,
-          title: `(2) Sing`,
-          text: `Your Fairy pokemon put their front opponent to sleep for 2 seconds.`
+          title: `(2) Aromatic Mist`,
+          text: `Fairy pokemons shock nearby enemies for 10 special damages whenever they deal or receive a critical strike`
         },
         {
           trigger: 4,
-          title: `(4) Jigglypuff Microphone`,
-          text: `Your Fairy pokemon put their front opponent to sleep for 4 seconds.`
-        }
-      ],
-      esp: [
-        {
-          title: `(2) Canción de cuna`,
-          text: `Los pokemons hada duermen a su oponente en el espejo durante 2 segundos`
+          title: `(4) Fairy Wind`,
+          text: `Fairy pokemons shock nearby enemies for 25 special damages whenever they deal or receive a critical strike`
         },
         {
-          title: `(4) Jigglypuff Micrófono`,
-          text: `Los pokemons hada duermen a su oponente en el espejo durante 4 segundos`
-        }
-      ],
-      fra: [
-        {
-          title: `(2) Berceuse`,
-          text: `Les pokémons fées endorment leur adversaire miroir pendant 2 secondes.`
-        },
-        {
-          title: `(4) Micro de Rondoudou`,
-          text: `Les pokémons fées endorment leur adversaire miroir pendant 4 secondes.`
+          trigger: 6,
+          title: `(6) Strange Steam`,
+          text: `Fairy pokemons shock nearby enemies for 50 special damages whenever they deal or receive a critical strike`
         }
       ]
     }
@@ -3766,7 +3752,7 @@ const TYPE_TRIGGER = {
   FLORA: [2, 3, 4, 5],
   MINERAL: [2, 4, 6],
   AMORPH: [2, 4],
-  FAIRY: [2, 4],
+  FAIRY: [2, 4, 6],
   ICE: [2, 4],
   FOSSIL: [2, 4, 6],
   SOUND: [3, 5, 7]

@@ -290,11 +290,13 @@ class Simulation extends Schema {
   applyPostEffects() {
     let blueImperialCount = 1;
     this.blueTeam.forEach((pokemon) =>{
-      if (pokemon.effects.includes(EFFECTS.IRON_DEFENSE) && blueImperialCount > 0) {
-        pokemon.atk = pokemon.atk * 2;
-        blueImperialCount --;
-      } else {
-        pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.IRON_DEFENSE), 1);
+      if (pokemon.effects.includes(EFFECTS.IRON_DEFENSE)) {
+        if (blueImperialCount > 0) {
+          pokemon.atk = pokemon.atk * 2;
+          blueImperialCount --;
+        } else {
+          pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.IRON_DEFENSE), 1);
+        }
       }
       if (pokemon.effects.includes(EFFECTS.AUTOTOMIZE)) {
         pokemon.atk = pokemon.atk * 2;
@@ -319,27 +321,17 @@ class Simulation extends Schema {
           }
         });
       }
-      let sleepMalus = 0;
-      if (pokemon.effects.includes(EFFECTS.ATTRACT)) {
-        sleepMalus += 2000;
-      }
-      if (pokemon.effects.includes(EFFECTS.BABY_DOLL_EYES)) {
-        sleepMalus += 4000;
-      }
-      if (sleepMalus > 0) {
-        if (this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)) {
-          this.board.getValue(pokemon.positionX, 5 - pokemon.positionY).status.triggerSleep(sleepMalus);
-        }
-      }
     });
 
     let redImperialCount = 1;
     this.redTeam.forEach((pokemon) =>{
-      if (pokemon.effects.includes(EFFECTS.IRON_DEFENSE) && redImperialCount > 0) {
-        pokemon.atk = pokemon.atk * 2;
-        redImperialCount --;
-      } else {
-        pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.IRON_DEFENSE), 1);
+      if (pokemon.effects.includes(EFFECTS.IRON_DEFENSE)) {
+        if (redImperialCount > 0) {
+          pokemon.atk = pokemon.atk * 2;
+          redImperialCount --;
+        } else {
+          pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.IRON_DEFENSE), 1);
+        }
       }
       if (pokemon.effects.includes(EFFECTS.AUTOTOMIZE)) {
         pokemon.atk = pokemon.atk * 2;
@@ -363,19 +355,6 @@ class Simulation extends Schema {
             cell.value.shield += shieldBonus;
           }
         });
-      }
-
-      let sleepMalus = 0;
-      if (pokemon.effects.includes(EFFECTS.ATTRACT)) {
-        sleepMalus += 2000;
-      }
-      if (pokemon.effects.includes(EFFECTS.BABY_DOLL_EYES)) {
-        sleepMalus += 4000;
-      }
-      if (sleepMalus > 0) {
-        if (this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)) {
-          this.board.getValue(pokemon.positionX, 5 - pokemon.positionY).status.triggerSleep(sleepMalus);
-        }
       }
     });
   }
@@ -711,15 +690,21 @@ class Simulation extends Schema {
             pokemon.effects.push(EFFECTS.CURSE);
           }
 
-        case EFFECTS.ATTRACT:
+        case EFFECTS.AROMATIC_MIST:
           if (types.includes(TYPE.FAIRY)) {
-            pokemon.effects.push(EFFECTS.ATTRACT);
+            pokemon.effects.push(EFFECTS.AROMATIC_MIST);
           }
           break;
 
-        case EFFECTS.BABY_DOLL_EYES:
+        case EFFECTS.FAIRY_WIND:
           if (types.includes(TYPE.FAIRY)) {
-            pokemon.effects.push(EFFECTS.BABY_DOLL_EYES);
+            pokemon.effects.push(EFFECTS.FAIRY_WIND);
+          }
+          break;
+
+        case EFFECTS.STRANGE_STEAM:
+          if (types.includes(TYPE.FAIRY)) {
+            pokemon.effects.push(EFFECTS.STRANGE_STEAM);
           }
           break;
 

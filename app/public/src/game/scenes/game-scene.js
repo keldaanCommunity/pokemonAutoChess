@@ -149,6 +149,7 @@ export default class GameScene extends Scene {
     this.load.multiatlas('TRI_ATTACK', '/assets/attacks/TRI_ATTACK.json', '/assets/attacks');
     this.load.multiatlas('CLANGOROUS_SOUL', '/assets/attacks/CLANGOROUS_SOUL.json', '/assets/attacks');
     this.load.multiatlas('FIELD_DEATH', '/assets/attacks/FIELD_DEATH.json', '/assets/attacks');
+    this.load.multiatlas('FAIRY_CRIT', '/assets/attacks/FAIRY_CRIT.json', '/assets/attacks');
     this.load.image('transition', '/assets/ui/transition.png');
     this.load.image('money', '/assets/ui/money.png');
     this.load.multiatlas('life', '/assets/ui/life.json', '/assets/ui');
