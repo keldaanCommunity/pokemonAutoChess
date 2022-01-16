@@ -407,19 +407,19 @@ class Slaking extends Pokemon {
 
 class Honedge extends Pokemon {
   constructor() {
-    super('PmdCollab', PKM.HONEDGE, 'monorpale', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 679, PKM.DOUBLADE, 90, 8, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.PROTECT);
+    super('PmdCollab', PKM.HONEDGE, 'monorpale', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 679, PKM.DOUBLADE, 90, 8, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.KING_SHIELD);
   }
 }
 
 class Doublade extends Pokemon {
   constructor() {
-    super('pokegirl4ever', PKM.DOUBLADE, 'doublade', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 680, PKM.AEGISLASH, 130, 9, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.PROTECT);
+    super('pokegirl4ever', PKM.DOUBLADE, 'doublade', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 680, PKM.AEGISLASH, 130, 9, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.KING_SHIELD);
   }
 }
 
 class Aegislash extends Pokemon {
   constructor() {
-    super('jhony rex', PKM.AEGISLASH, 'exagide', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 681, '', 230, 20, 8, 8, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.PROTECT);
+    super('jhony rex', PKM.AEGISLASH, 'exagide', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 681, '', 230, 20, 8, 8, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.KING_SHIELD);
   }
 }
 

@@ -152,6 +152,9 @@ class PokemonFactory {
 
   static createStrategyFromName(name) {
     switch (name) {
+      case SPECIAL_SKILL.KING_SHIELD:
+        return new Strategy.KingShieldStrategy();
+
       case SPECIAL_SKILL.EXPLOSION:
         return new Strategy.ExplosionStrategy();
 

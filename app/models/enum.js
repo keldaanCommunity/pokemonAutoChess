@@ -1639,10 +1639,19 @@ const SPECIAL_SKILL = Object.freeze({
   BONEMERANG: 'BONEMERANG',
   CLANGOROUS_SOUL: 'CLANGOROUS_SOUL',
   NIGHTMARE: 'NIGHTMARE',
-  EXPLOSION: 'EXPLOSION'
+  EXPLOSION: 'EXPLOSION',
+  KING_SHIELD:'KING_SHIELD'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+  KING_SHIELD: {
+    title: {
+      eng: 'King Shield'
+    },
+    description: {
+      eng: 'Protect the user for 0.5/1/1.5s and swap his position with the farthest ennemy'
+    }
+  },
   EXPLOSION: {
     title: {
       eng: 'Explosion'

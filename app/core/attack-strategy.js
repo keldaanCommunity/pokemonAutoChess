@@ -28,6 +28,44 @@ class AttackStrategy {
   }
 }
 
+class KingShieldStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let timer = 0;
+    switch (pokemon.stars) {
+      case 1:
+        timer = 500;
+        break;
+      case 2:
+        timer = 1000;
+        break;
+      case 3:
+        timer = 2000;
+        break;
+      default:
+        break;
+    }
+    pokemon.status.triggerProtect(timer);
+    let farthestTarget = state.getFarthestTargetCoordinate(pokemon, board);
+    const x = farthestTarget[0];
+    const y = farthestTarget[1];
+    const oldX = pokemon.positionX;
+    const oldY = pokemon.positionY;
+
+    if (x !== undefined && y !== undefined) {
+      let tg = board.getValue(x,y);
+      
+      if(tg){
+        tg.positionX = oldX;
+        tg.positionY = oldY;
+      }
+      board.swapValue(pokemon.positionX, pokemon.positionY, x, y);
+      pokemon.positionX = x;
+      pokemon.positionY = y;
+    }
+  }
+}
+
 class ExplosionStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
@@ -1932,7 +1970,8 @@ class MetronomeStrategy extends AttackStrategy {
       BonemerangStrategy,
       ClangorousSoulStrategy,
       NightmareStrategy,
-      ExplosionStrategy
+      ExplosionStrategy,
+      KingShieldStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -2008,5 +2047,6 @@ module.exports = {
   BonemerangStrategy,
   ClangorousSoulStrategy,
   NightmareStrategy,
-  ExplosionStrategy
+  ExplosionStrategy,
+  KingShieldStrategy
 };
