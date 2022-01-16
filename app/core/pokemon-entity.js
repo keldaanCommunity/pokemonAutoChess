@@ -108,7 +108,7 @@ class PokemonEntity extends schema.Schema {
 
     if(this.critChance > 100)
     {
-      this.critDamage += Math.floor((this.critChance - 100) / 50)
+      this.critDamage += Math.round((this.critChance - 100) * 10) / 500
       this.critChance = 100
     }
 
