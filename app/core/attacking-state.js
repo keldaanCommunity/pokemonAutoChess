@@ -1,4 +1,4 @@
-const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION, TYPE} = require('../models/enum');
+const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class AttackingState extends PokemonState {
@@ -9,7 +9,7 @@ class AttackingState extends PokemonState {
   update(pokemon, dt, board, climate) {
     super.update(pokemon, dt, board, climate);
     if (pokemon.cooldown <= 0) {
-      pokemon.cooldown = pokemon.atkSpeed;
+      pokemon.cooldown = pokemon.getAttackDelay();
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
       // no target case
       if (targetCoordinate[0] === undefined || targetCoordinate[1] === undefined) {
@@ -53,9 +53,9 @@ class AttackingState extends PokemonState {
         poisonChance += 0.2;
       }
       if (pokemon.effects.includes(EFFECTS.TOXIC)) {
-        poisonChance += 0.3;
+        poisonChance += 0.5;
       }
-      if (poisonChance != 0 && !(target.types.includes(TYPE.METAL) || target.types.includes(TYPE.POISON))) {
+      if (poisonChance != 0) {
         if (Math.random() > poisonChance) {
           target.status.triggerPoison(2000);
         }
@@ -79,6 +79,24 @@ class AttackingState extends PokemonState {
       let attackType = pokemon.attackType;
 
       if (Math.random() * 100 < pokemon.critChance) {
+        if (pokemon.effects.includes(EFFECTS.FAIRY_WIND) || pokemon.effects.includes(EFFECTS.STRANGE_STEAM) || pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
+          let d = 0;
+          if (pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
+            d = 10;
+          } else if (pokemon.effects.includes(EFFECTS.FAIRY_WIND)) {
+            d = 25;
+          } else if (pokemon.effects.includes(EFFECTS.STRANGE_STEAM)) {
+            d = 50;
+          }
+          const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+
+          cells.forEach((cell) => {
+            if (cell.value && pokemon.team != cell.value.team) {
+              cell.value.count.fairyCritCount ++;
+              cell.value.handleDamage(d, board, ATTACK_TYPE.SPECIAL, pokemon);
+            }
+          });
+        }
         damage = Math.round(pokemon.atk * pokemon.critDamage);
         target.count.crit ++;
         if (pokemon.items.count(ITEMS.RAZOR_CLAW) != 0) {

@@ -152,6 +152,51 @@ class PokemonFactory {
 
   static createStrategyFromName(name) {
     switch (name) {
+      case SPECIAL_SKILL.KING_SHIELD:
+        return new Strategy.KingShieldStrategy();
+
+      case SPECIAL_SKILL.EXPLOSION:
+        return new Strategy.ExplosionStrategy();
+
+      case SPECIAL_SKILL.NIGHTMARE:
+        return new Strategy.NightmareStrategy();
+
+      case SPECIAL_SKILL.CLANGOROUS_SOUL:
+        return new Strategy.ClangorousSoulStrategy();
+
+      case SPECIAL_SKILL.BONEMERANG:
+        return new Strategy.BonemerangStrategy();
+
+      case SPECIAL_SKILL.GROWL:
+        return new Strategy.GrowlStrategy();
+
+      case SPECIAL_SKILL.RELIC_SONG:
+        return new Strategy.RelicSongStrategy();
+
+      case SPECIAL_SKILL.DISARMING_VOICE:
+        return new Strategy.DisarmingVoiceStrategy();
+
+      case SPECIAL_SKILL.HIGH_JUMP_KICK:
+        return new Strategy.HighJumpKickStrategy();
+
+      case SPECIAL_SKILL.GRASS_WHISTLE:
+        return new Strategy.GrassWhistleStrategy();
+
+      case SPECIAL_SKILL.TRI_ATTACK:
+        return new Strategy.TriAttackStrategy();
+
+      case SPECIAL_SKILL.ECHO:
+        return new Strategy.EchoStrategy();
+
+      case SPECIAL_SKILL.PETAL_DANCE:
+        return new Strategy.PetalDanceStrategy();
+
+      case SPECIAL_SKILL.HYPER_VOICE:
+        return new Strategy.HyperVoiceStrategy();
+
+      case SPECIAL_SKILL.SHADOW_CLONE:
+        return new Strategy.ShadowCloneStrategy();
+
       case SPECIAL_SKILL.VOLT_SWITCH:
         return new Strategy.VoltSwitchStrategy();
 

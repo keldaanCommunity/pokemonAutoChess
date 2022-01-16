@@ -7,16 +7,415 @@ class AttackStrategy {
   process(pokemon, state, board, target) {
     pokemon.setMana(0);
     pokemon.count.ult += 1;
+    if (pokemon.types.includes(TYPE.SOUND)) {
+      let atk = 0;
+      if (pokemon.effects.includes(EFFECTS.LARGO)) {
+        atk += 3;
+      } else if (pokemon.effects.includes(EFFECTS.ALLEGRO)) {
+        atk += 6;
+      } else if (pokemon.effects.includes(EFFECTS.PRESTO)) {
+        atk += 9;
+      }
+      if (atk > 0) {
+        board.forEach((x, y, tg) => {
+          if (tg && pokemon.team == tg.team && tg.types.includes(TYPE.SOUND)) {
+            tg.count.soundCount ++;
+            tg.atk += atk;
+          }
+        });
+      }
+    }
   }
 }
 
-class LeechSeedStrategy extends AttackStrategy {
-  constructor() {
-    super();
-  }
-
+class KingShieldStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
+    let timer = 0;
+    switch (pokemon.stars) {
+      case 1:
+        timer = 500;
+        break;
+      case 2:
+        timer = 1000;
+        break;
+      case 3:
+        timer = 2000;
+        break;
+      default:
+        break;
+    }
+    pokemon.status.triggerProtect(timer);
+    const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board);
+    const x = farthestTarget[0];
+    const y = farthestTarget[1];
+    const oldX = pokemon.positionX;
+    const oldY = pokemon.positionY;
+
+    if (x !== undefined && y !== undefined) {
+      const tg = board.getValue(x, y);
+
+      if (tg) {
+        tg.positionX = oldX;
+        tg.positionY = oldY;
+      }
+      board.swapValue(pokemon.positionX, pokemon.positionY, x, y);
+      pokemon.positionX = x;
+      pokemon.positionY = y;
+    }
+  }
+}
+
+class ExplosionStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let damage = 0;
+    switch (pokemon.stars) {
+      case 1:
+        damage = 40;
+        break;
+      case 2:
+        damage = 80;
+        break;
+      case 3:
+        damage = 160;
+        break;
+      default:
+        break;
+    }
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+      }
+    });
+
+    pokemon.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+  }
+}
+
+class ClangorousSoulStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let buffAtk = 0;
+    let buffDef = 0;
+    switch (pokemon.stars) {
+      case 1:
+        buffAtk = 2;
+        buffDef = 1;
+        break;
+      case 2:
+        buffAtk = 4;
+        buffDef = 2;
+        break;
+      case 3:
+        buffAtk = 8;
+        buffDef = 4;
+        break;
+      default:
+        break;
+    }
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team == cell.value.team) {
+        cell.value.atk += buffAtk;
+        cell.value.def += buffDef;
+        cell.value.speDef += buffDef;
+      }
+    });
+  }
+}
+
+class BonemerangStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let damage = 0;
+    switch (pokemon.stars) {
+      case 1:
+        damage = 30;
+        break;
+      case 2:
+        damage = 60;
+        break;
+      case 3:
+        damage = 120;
+        break;
+      default:
+        break;
+    }
+
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team && x == target.positionX) {
+        tg.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+      }
+    });
+  }
+}
+
+class GrowlStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let d = 0;
+    switch (pokemon.stars) {
+      case 1:
+        d = 1000;
+        break;
+      case 2:
+        d = 2000;
+        break;
+      case 3:
+        d = 3000;
+        break;
+      default:
+        break;
+    }
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team) {
+        tg.status.triggerWound(d);
+      }
+    });
+  }
+}
+
+class RelicSongStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let d = 0;
+    switch (pokemon.stars) {
+      case 1:
+        d = 1000;
+        break;
+      case 2:
+        d = 2000;
+        break;
+      case 3:
+        d = 3000;
+        break;
+      default:
+        break;
+    }
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team) {
+        tg.status.triggerSleep(d);
+      }
+    });
+  }
+}
+
+class DisarmingVoiceStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let heal = 0;
+    switch (pokemon.stars) {
+      case 1:
+        heal = 10;
+        break;
+      case 2:
+        heal = 20;
+        break;
+      case 3:
+        heal = 40;
+        break;
+      default:
+        break;
+    }
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team == tg.team) {
+        tg.setMana(tg.mana + heal);
+      }
+    });
+  }
+}
+class HighJumpKickStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let damage = 0;
+    switch (pokemon.stars) {
+      case 1:
+        damage = 50;
+        break;
+      case 2:
+        damage = 100;
+        break;
+      case 3:
+        damage = 200;
+        break;
+      default:
+        break;
+    }
+    pokemon.setMana(target.mana);
+    target.setMana(0);
+    target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+  }
+}
+
+class GrassWhistleStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let n = 0;
+    switch (pokemon.stars) {
+      case 1:
+        n = 1;
+        break;
+      case 2:
+        n = 2;
+        break;
+      case 3:
+        n = 4;
+        break;
+      default:
+        break;
+    }
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team && n > 0) {
+        tg.status.triggerSleep(2000);
+        n--;
+      }
+    });
+  }
+}
+
+
+class TriAttackStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let duration = 0;
+    switch (pokemon.stars) {
+      case 1:
+        duration = 2000;
+        break;
+      case 2:
+        duration = 4000;
+        break;
+      case 3:
+        duration = 8000;
+        break;
+      default:
+        break;
+    }
+    target.status.triggerFreeze(duration);
+    target.status.triggerWound(duration);
+    target.status.triggerBurn(duration);
+  }
+}
+
+class EchoStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+
+    let damage = 0;
+    let additional = 0;
+    if (pokemon.echo === undefined) {
+      pokemon.echo = 0;
+    }
+
+    switch (pokemon.stars) {
+      case 1:
+        damage = 5;
+        additional = 10;
+        break;
+      case 2:
+        damage = 10;
+        additional = 15;
+        break;
+      case 3:
+        damage = 20;
+        additional = 20;
+        break;
+      default:
+        break;
+    }
+
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team) {
+        tg.handleDamage(damage + pokemon.echo * additional, board, ATTACK_TYPE.SPECIAL, pokemon);
+      }
+    });
+
+    pokemon.echo ++;
+  }
+}
+
+class PetalDanceStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+
+    let damage = 0;
+    let count = 0;
+
+    switch (pokemon.stars) {
+      case 1:
+        damage = 30;
+        count = 2;
+        break;
+      case 2:
+        damage = 60;
+        count = 3;
+        break;
+      case 3:
+        damage = 90;
+        count = 4;
+        break;
+      default:
+        break;
+    }
+
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team && count > 0) {
+        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        count --;
+        tg.count.petalDanceCount ++;
+      }
+    });
+  }
+}
+
+class HyperVoiceStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+
+    let damage = 0;
+    let confusion = 0;
+
+    switch (pokemon.stars) {
+      case 1:
+        damage = 50;
+        confusion = 1;
+        break;
+      case 2:
+        damage = 100;
+        confusion = 2;
+        break;
+      case 3:
+        damage = 200;
+        confusion = 3;
+        break;
+      default:
+        break;
+    }
+
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team != tg.team && target.positionY == y) {
+        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        tg.status.triggerConfusion(confusion * 1000);
+      }
+    });
+  }
+}
+class ShadowCloneStrategy extends AttackStrategy {
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
+    const x = farthestCoordinate[0];
+    const y = farthestCoordinate[1];
+    if (x !== undefined && y !== undefined) {
+      const clone = pokemon.simulation.addPokemon(pokemon, x, y, pokemon.team);
+      clone.life = pokemon.life;
+    }
   }
 }
 
@@ -147,7 +546,7 @@ class RockTombStrategy extends AttackStrategy {
     }
 
     target.handleDamage(factor, board, ATTACK_TYPE.PHYSICAL, pokemon);
-    target.atkSpeed = Math.max(400, pokemon.atkSpeed + factor * 10);
+    target.handleAttackSpeed(-factor);
   }
 }
 
@@ -233,6 +632,35 @@ class SeedFlareStrategy extends AttackStrategy {
       if (tg && pokemon.team != tg.team) {
         tg.speDef = Math.max(0, tg.speDef - 2);
         tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+      }
+    });
+  }
+}
+
+class NightmareStrategy extends AttackStrategy {
+  constructor() {
+    super();
+  }
+
+  process(pokemon, state, board, target) {
+    super.process(pokemon, state, board, target);
+    let timer = 0;
+    switch (pokemon.stars) {
+      case 1:
+        timer = 2000;
+        break;
+      case 2:
+        timer = 4000;
+        break;
+      case 3:
+        timer = 8000;
+        break;
+      default:
+        break;
+    }
+    board.forEach((x, y, value) => {
+      if (value && pokemon.team != value.team) {
+        value.status.triggerPoison(timer);
       }
     });
   }
@@ -1064,18 +1492,18 @@ class TormentStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        boost = 0.8;
+        boost = 20;
         break;
       case 2:
-        boost = 0.7;
+        boost = 30;
         break;
       case 3:
-        boost = 0.6;
+        boost = 40;
         break;
       default:
         break;
     }
-    pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * boost);
+    pokemon.handleAttackSpeed(boost);
   }
 }
 
@@ -1387,22 +1815,22 @@ class StunSporeStrategy extends AttackStrategy {
     let damage = 0;
     switch (pokemon.stars) {
       case 1:
-        debuff = 1.5;
+        debuff = 50;
         damage = 5;
         break;
       case 2:
-        debuff = 2;
+        debuff = 100;
         damage = 10;
         break;
       case 3:
-        debuff = 3;
+        debuff = 200;
         damage = 20;
         break;
       default:
         break;
     }
     target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
-    target.atkSpeed = Math.max(400, pokemon.atkSpeed * debuff);
+    target.handleAttackSpeed(-debuff);
   }
 }
 
@@ -1477,7 +1905,6 @@ class MetronomeStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
     const skills = [
-      LeechSeedStrategy,
       FireBlastStrategy,
       WheelOfFireStrategy,
       SeismicTossStrategy,
@@ -1529,7 +1956,22 @@ class MetronomeStrategy extends AttackStrategy {
       RockTombStrategy,
       RockSmashStrategy,
       HeadSmashStrategy,
-      VoltSwitchStrategy
+      VoltSwitchStrategy,
+      ShadowCloneStrategy,
+      HyperVoiceStrategy,
+      PetalDanceStrategy,
+      EchoStrategy,
+      TriAttackStrategy,
+      GrassWhistleStrategy,
+      HighJumpKickStrategy,
+      DisarmingVoiceStrategy,
+      RelicSongStrategy,
+      GrowlStrategy,
+      BonemerangStrategy,
+      ClangorousSoulStrategy,
+      NightmareStrategy,
+      ExplosionStrategy,
+      KingShieldStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
@@ -1539,7 +1981,6 @@ class MetronomeStrategy extends AttackStrategy {
 
 module.exports = {
   AttackStrategy,
-  LeechSeedStrategy,
   FireBlastStrategy,
   WheelOfFireStrategy,
   SeismicTossStrategy,
@@ -1592,5 +2033,20 @@ module.exports = {
   RockTombStrategy,
   RockSmashStrategy,
   HeadSmashStrategy,
-  VoltSwitchStrategy
+  VoltSwitchStrategy,
+  ShadowCloneStrategy,
+  HyperVoiceStrategy,
+  PetalDanceStrategy,
+  EchoStrategy,
+  TriAttackStrategy,
+  GrassWhistleStrategy,
+  HighJumpKickStrategy,
+  DisarmingVoiceStrategy,
+  RelicSongStrategy,
+  GrowlStrategy,
+  BonemerangStrategy,
+  ClangorousSoulStrategy,
+  NightmareStrategy,
+  ExplosionStrategy,
+  KingShieldStrategy
 };

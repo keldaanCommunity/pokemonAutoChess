@@ -7,7 +7,7 @@ class GameLevel extends Component{
             position:'absolute',
             left:'6%',
             bottom:'7%',
-            width:'15%'
+            width:'12%'
         }
 
         return <button className="nes-btn is-warning" onClick={this.props.level} style={style}>

@@ -60,6 +60,7 @@ class Effects {
     if (synergies.ELECTRIC > 0) {
       this.list.push(EFFECTS.AGILITY);
     }
+
     if (synergies.FIGHTING >= 0) {
       if (synergies.FIGHTING >= 4) {
         this.list.push(EFFECTS.PUNISHMENT);
@@ -87,12 +88,15 @@ class Effects {
         this.list.push(EFFECTS.HONE_CLAWS);
       }
     }
-    if (synergies.METAL >= 2) {
-      this.list.push(EFFECTS.IRON_DEFENSE);
+
+    if (synergies.METAL >= 0) {
+      if (synergies.METAL >= 4) {
+        this.list.push(EFFECTS.AUTOTOMIZE);
+      } else if (synergies.METAL >= 2) {
+        this.list.push(EFFECTS.IRON_DEFENSE);
+      }
     }
-    if (synergies.METAL >= 4) {
-      this.list.push(EFFECTS.AUTOTOMIZE);
-    }
+
     if (synergies.GROUND >= 2) {
       this.list.push(EFFECTS.SPIKES);
     }
@@ -102,18 +106,23 @@ class Effects {
     if (synergies.GROUND >= 6) {
       this.list.push(EFFECTS.SANDSTORM);
     }
-    if (synergies.POISON >= 3) {
-      this.list.push(EFFECTS.POISON_GAS);
+
+    if (synergies.POISON >= 0) {
+      if (synergies.POISON >= 6) {
+        this.list.push(EFFECTS.TOXIC);
+      } else if (synergies.POISON >= 3) {
+        this.list.push(EFFECTS.POISON_GAS);
+      }
     }
-    if (synergies.POISON >= 6) {
-      this.list.push(EFFECTS.TOXIC);
+
+    if (synergies.DRAGON >= 0) {
+      if (synergies.DRAGON >= 5) {
+        this.list.push(EFFECTS.DRAGON_DANCE);
+      } else if (synergies.DRAGON >= 3) {
+        this.list.push(EFFECTS.DRAGON_ENERGY);
+      }
     }
-    if (synergies.DRAGON >= 2) {
-      this.list.push(EFFECTS.INTIMIDATE);
-    }
-    if (synergies.DRAGON >= 4) {
-      this.list.push(EFFECTS.DRAGON_DANCE);
-    }
+
     if (synergies.FIELD >= 0) {
       if (synergies.FIELD >= 9) {
         this.list.push(EFFECTS.ANGER_POINT);
@@ -150,12 +159,15 @@ class Effects {
         this.list.push(EFFECTS.SWIFT_SWIM);
       }
     }
-    if (synergies.BUG >= 2) {
-      this.list.push(EFFECTS.SWARM);
+
+    if (synergies.BUG >= 0) {
+      if (synergies.BUG >= 4) {
+        this.list.push(EFFECTS.STICKY_WEB);
+      } else if (synergies.BUG >= 2) {
+        this.list.push(EFFECTS.SWARM);
+      }
     }
-    if (synergies.BUG >= 4) {
-      this.list.push(EFFECTS.STICKY_WEB);
-    }
+
     if (synergies.FLYING >= 0) {
       if (synergies.FLYING >= 8) {
         this.list.push(EFFECTS.MAX_GUARD);
@@ -168,7 +180,9 @@ class Effects {
       }
     }
     if (synergies.FLORA >= 0) {
-      if (synergies.FLORA >= 4) {
+      if (synergies.FLORA >= 5) {
+        this.list.push(EFFECTS.SUN_FLOWER);
+      } else if (synergies.FLORA >= 4) {
         this.list.push(EFFECTS.VILE_FLOWER);
       } else if (synergies.FLORA >= 3) {
         this.list.push(EFFECTS.GLOOM_FLOWER);
@@ -176,29 +190,47 @@ class Effects {
         this.list.push(EFFECTS.ODD_FLOWER);
       }
     }
-    if (synergies.MINERAL >= 2) {
-      this.list.push(EFFECTS.BATTLE_ARMOR);
+    if (synergies.MINERAL >= 0) {
+      if (synergies.MINERAL >= 6) {
+        this.list.push(EFFECTS.DIAMOND_STORM);
+      } else if (synergies.MINERAL >= 4) {
+        this.list.push(EFFECTS.MOUTAIN_RESISTANCE);
+      } else if (synergies.MINERAL >= 2) {
+        this.list.push(EFFECTS.BATTLE_ARMOR);
+      }
     }
-    if (synergies.MINERAL >= 4) {
-      this.list.push(EFFECTS.MOUTAIN_RESISTANCE);
-    }
+
     if (synergies.AMORPH >= 2) {
       this.list.push(EFFECTS.PHANTOM_FORCE);
     }
     if (synergies.AMORPH >= 4) {
       this.list.push(EFFECTS.CURSE);
     }
-    if (synergies.FAIRY >= 2) {
-      this.list.push(EFFECTS.ATTRACT);
+
+    if (synergies.FAIRY >= 0) {
+      if (synergies.FAIRY >= 6) {
+        this.list.push(EFFECTS.STRANGE_STEAM);
+      } else if (synergies.FAIRY >= 4) {
+        this.list.push(EFFECTS.FAIRY_WIND);
+      } else if (synergies.FAIRY >= 2) {
+        this.list.push(EFFECTS.AROMATIC_MIST);
+      }
     }
-    if (synergies.FAIRY >= 4) {
-      this.list.push(EFFECTS.BABY_DOLL_EYES);
-    }
+
     if (synergies.ICE >= 0) {
       if (synergies.ICE >= 4) {
         this.list.push(EFFECTS.SHEER_COLD);
       } else if (synergies.ICE >= 2) {
         this.list.push(EFFECTS.SNOW);
+      }
+    }
+    if (synergies.SOUND >= 0) {
+      if (synergies.SOUND >= 7) {
+        this.list.push(EFFECTS.PRESTO);
+      } else if (synergies.SOUND >= 5) {
+        this.list.push(EFFECTS.ALLEGRO);
+      } else if (synergies.SOUND >= 3) {
+        this.list.push(EFFECTS.LARGO);
       }
     }
   }

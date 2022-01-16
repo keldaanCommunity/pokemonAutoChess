@@ -1162,7 +1162,7 @@ const EFFECTS = Object.freeze({
   SANDSTORM: 'SANDSTORM',
   POISON_GAS: 'POISON_GAS',
   TOXIC: 'TOXIC',
-  INTIMIDATE: 'INTIMIDATE',
+  DRAGON_ENERGY: 'DRAGON_ENERGY',
   DRAGON_DANCE: 'DRAGON_DANCE',
   WORK_UP: 'WORK_UP',
   RAGE: 'RAGE',
@@ -1184,12 +1184,15 @@ const EFFECTS = Object.freeze({
   ODD_FLOWER: 'ODD_FLOWER',
   GLOOM_FLOWER: 'GLOOM_FLOWER',
   VILE_FLOWER: 'VILE_FLOWER',
+  SUN_FLOWER: 'SUN_FLOWER',
   BATTLE_ARMOR: 'BATTLE_ARMOR',
   MOUTAIN_RESISTANCE: 'MOUTAIN_RESISTANCE',
+  DIAMOND_STORM: 'DIAMOND_STORM',
   PHANTOM_FORCE: 'PHANTOM_FORCE',
   CURSE: 'CURSE',
-  ATTRACT: 'ATTRACT',
-  BABY_DOLL_EYES: 'BABY_DOLL_EYES',
+  AROMATIC_MIST: 'AROMATIC_MIST',
+  FAIRY_WIND: 'FAIRY_WIND',
+  STRANGE_STEAM: 'STRANGE_STEAM',
   GROUND: 'GROUND',
   GRASS: 'GRASS',
   FIRE: 'FIRE',
@@ -1347,9 +1350,9 @@ const EFFECTS_ICON = Object.freeze({
     positive: true,
     type: TYPE.POISON
   },
-  INTIMIDATE: {
+  DRAGON_ENERGY: {
     level: 1,
-    positive: false,
+    positive: true,
     type: TYPE.DRAGON
   },
   DRAGON_DANCE: {
@@ -1409,7 +1412,7 @@ const EFFECTS_ICON = Object.freeze({
   },
   STICKY_WEB: {
     level: 2,
-    positive: false,
+    positive: true,
     type: TYPE.BUG
   },
   SWIFT_SWIM: {
@@ -1457,6 +1460,11 @@ const EFFECTS_ICON = Object.freeze({
     positive: true,
     type: TYPE.FLORA
   },
+  SUN_FLOWER: {
+    level: 4,
+    positive: true,
+    type: TYPE.FLORA
+  },
   BATTLE_ARMOR: {
     level: 1,
     positive: true,
@@ -1464,6 +1472,11 @@ const EFFECTS_ICON = Object.freeze({
   },
   MOUTAIN_RESISTANCE: {
     level: 2,
+    positive: true,
+    type: TYPE.MINERAL
+  },
+  DIAMOND_STORM: {
+    level: 3,
     positive: true,
     type: TYPE.MINERAL
   },
@@ -1477,12 +1490,12 @@ const EFFECTS_ICON = Object.freeze({
     positive: true,
     type: TYPE.AMORPH
   },
-  ATTRACT: {
+  AROMATIC_MIST: {
     level: 1,
     positive: true,
     type: TYPE.FAIRY
   },
-  BABY_DOLL_EYES: {
+  FAIRY_WIND: {
     level: 2,
     positive: true,
     type: TYPE.FAIRY
@@ -1490,7 +1503,7 @@ const EFFECTS_ICON = Object.freeze({
   GROUND: {
     level: 0,
     positive: true,
-    type: TYPE.MINERAL
+    type: TYPE.GROUND
   },
   GRASS: {
     level: 0,
@@ -1613,16 +1626,151 @@ const SPECIAL_SKILL = Object.freeze({
   ROCK_TOMB: 'ROCK_TOMB',
   ROCK_SMASH: 'ROCK_SMASH',
   HEAD_SMASH: 'HEAD_SMASH',
-  VOLT_SWITCH: 'VOLT_SWITCH'
+  VOLT_SWITCH: 'VOLT_SWITCH',
+  SHADOW_CLONE: 'SHADOW_CLONE',
+  HYPER_VOICE: 'HYPER_VOICE',
+  PETAL_DANCE: 'PETAL_DANCE',
+  ECHO: 'ECHO',
+  TRI_ATTACK: 'TRI_ATTACK',
+  GRASS_WHISTLE: 'GRASS_WHISTLE',
+  HIGH_JUMP_KICK: 'HIGH_JUMP_KICK',
+  DISARMING_VOICE: 'DISARMING_VOICE',
+  RELIC_SONG: 'RELIC_SONG',
+  GROWL: 'GROWL',
+  BONEMERANG: 'BONEMERANG',
+  CLANGOROUS_SOUL: 'CLANGOROUS_SOUL',
+  NIGHTMARE: 'NIGHTMARE',
+  EXPLOSION: 'EXPLOSION',
+  KING_SHIELD: 'KING_SHIELD'
 });
 
 const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+  KING_SHIELD: {
+    title: {
+      eng: 'King Shield'
+    },
+    description: {
+      eng: 'Protect the user for 0.5/1/1.5s and swap his position with the farthest ennemy'
+    }
+  },
+  EXPLOSION: {
+    title: {
+      eng: 'Explosion'
+    },
+    description: {
+      eng: 'Deals 40/80/160 physical damage. Damage also the user.'
+    }
+  },
+  NIGHTMARE: {
+    title: {
+      eng: 'Nightmare'
+    },
+    description: {
+      eng: 'Poison the ennemy team for 2/4/8s'
+    }
+  },
+  CLANGOROUS_SOUL: {
+    title: {
+      eng: 'Clangorous Soul'
+    },
+    description: {
+      eng: 'Buff the adjacent allies with 2/4/8 attack and 1/2/4 defense/special defense'
+    }
+  },
+  BONEMERANG: {
+    title: {
+      eng: 'Bonemerang'
+    },
+    description: {
+      eng: 'Throw a boomerang bone through the enemy team, dealing 30/60/120 physical damage on its way'
+    }
+  },
+  GROWL: {
+    title: {
+      eng: 'Growl'
+    },
+    description: {
+      eng: 'Apply wound status on the ennemy team for 1/2/3s'
+    }
+  },
+  RELIC_SONG: {
+    title: {
+      eng: 'Relic Song'
+    },
+    description: {
+      eng: 'Put asleep the ennemy team for 1/2/3s'
+    }
+  },
+  DISARMING_VOICE: {
+    title: {
+      eng: 'Disarming Voice'
+    },
+    description: {
+      eng: 'Heals and restore 10/20/40 points of mana to all allies'
+    }
+  },
+  HIGH_JUMP_KICK: {
+    title: {
+      eng: 'High Jump Kick'
+    },
+    description: {
+      eng: 'Deals 50/100/200 physical damage and steal the mana from its target'
+    }
+  },
+  GRASS_WHISTLE: {
+    title: {
+      eng: 'Grass Whistle'
+    },
+    description: {
+      eng: 'Put asleep 1/2/4 ennemies for 2 seconds'
+    }
+  },
+  TRI_ATTACK: {
+    title: {
+      eng: 'Tri Attack'
+    },
+    description: {
+      eng: 'Burn, freeze and wound the target for 2/4/8s'
+    }
+  },
+  ECHO: {
+    title: {
+      eng: 'Echo'
+    },
+    description: {
+      eng: 'Deals 5/10/20 special damage, +10/+15/+20 damage each time the pokemon uses its ability'
+    }
+  },
+  PETAL_DANCE: {
+    title: {
+      eng: 'Petal Dance'
+    },
+    description: {
+      eng: 'Deals 30/60/90 special damage to 2/3/4 ennemies'
+    }
+  },
+  HYPER_VOICE: {
+    title: {
+      eng: 'Hyper Voice'
+    },
+    description: {
+      eng: 'Deals 50/100/200 special damage on a row, confuse for 1/2/3 seconds'
+    }
+  },
+  SHADOW_CLONE: {
+    title: {
+      eng: 'Shadow Clone'
+    },
+    description: {
+      eng: 'The pokemon creates an identical clone of himself next to his target. This clone inherits from the pokemon items and stats'
+    }
+  },
   VOLT_SWITCH: {
     title: {
       eng: 'Volt Switch'
     },
     description: {
-      eng: 'Dash into the ennemy backline, dealing 20/40/80 special damage'
+      eng: 'Dash into the ennemy backline, dealing 40/80/160 special damage'
     }
   },
   DEFAULT: {
@@ -2227,14 +2375,10 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
   },
   ROCK_TOMB: {
     title: {
-      eng: 'Rock Tomb',
-      esp: 'Rock Tomb',
-      fra: 'Rock Tomb'
+      eng: 'Rock Tomb'
     },
     description: {
-      eng: 'Mono target attack that deals 30/60/90 physical damage and decrease target attack speed by 300/600/900.',
-      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
-      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
+      eng: 'Mono target attack that deals 30/60/90 physical damage and decrease target attack speed by 20/40/60%'
     }
   },
   ROCK_SMASH: {
@@ -2425,12 +2569,12 @@ const TYPE_TRADUCTION = Object.freeze({
     fra: 'Fleur'
   },
   MINERAL: {
-    eng: 'Mineral',
+    eng: 'Rock',
     esp: 'Roca',
     fra: 'Minéral'
   },
   AMORPH: {
-    eng: 'Amorph',
+    eng: 'Ghost',
     esp: 'Fantasma',
     fra: 'Fantome'
   },
@@ -2448,6 +2592,11 @@ const TYPE_TRADUCTION = Object.freeze({
     eng: 'Fossil',
     esp: 'Fossil',
     fra: 'Fossile'
+  },
+  SOUND: {
+    eng: 'Sound',
+    esp: 'Sound',
+    fra: 'Sound'
   }
 });
 
@@ -2970,33 +3119,13 @@ const TYPE_DETAILS = Object.freeze({
       eng: [
         {
           trigger: 2,
-          title: `(2) Steel wall`,
-          text: `Your Steel pokemon have +50% Defense.`
+          title: `(2) Shift Gear`,
+          text: `One of your steel gains double attack damage`
         },
         {
           trigger: 4,
           title: `(4) Lightening`,
-          text: `Your Steel pokemon have +100% Speed.`
-        }
-      ],
-      esp: [
-        {
-          title: `(2) Muro de acero`,
-          text: `+50% DEF para pkm de acero`
-        },
-        {
-          title: `(4) Rayo`,
-          text: `+100% de velocidad ATK para pkm de acero`
-        }
-      ],
-      fra: [
-        {
-          title: `(2) Mur d'acier`,
-          text: `+50% DEF pour les pkm acier`
-        },
-        {
-          title: `(4) Allègement`,
-          text: `+100% ATK speed pour les pkm acier`
+          text: `All of your steel gains double attack damage`
         }
       ]
     }
@@ -3090,14 +3219,14 @@ const TYPE_DETAILS = Object.freeze({
     description: {
       eng: [
         {
-          trigger: 2,
-          title: `(2) Bullying`,
-          text: `Enemies have -30% Attack.`
+          trigger: 3,
+          title: `(3) Dragon Energy`,
+          text: `Your Dragon pokemon gain +3% attack Speed after every hit.`
         },
         {
           trigger: 4,
-          title: `(4) Dragon Dance`,
-          text: `Your Dragon pokemon gain +5 Speed after every hit.`
+          title: `(5) Dragon Dance`,
+          text: `Your Dragon pokemon gain +6% attack Speed after every hit.`
         }
       ],
       esp: [
@@ -3128,45 +3257,17 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 3,
           title: `(3) Bulk up`,
-          text: `Your pokemon on the same column have +2 Attack.`
+          text: `When a field pokemon dies, all other field pokemons gain 20% Attack Speed and are healed for 20% of their Maximum Health`
         },
         {
           trigger: 6,
           title: `(6) Rage`,
-          text: `Your pokemon on the same column have +6 Attack.`
+          text: `When a field pokemon dies, all other field pokemons gain 30% Attack Speed and are healed for 30% of their Maximum Health`
         },
         {
           trigger: 9,
           title: `(9) Sword Dance`,
-          text: `Your pokemon on the same column have +14 Attack.`
-        }
-      ],
-      esp: [
-        {
-          title: `(3) Gonflette`,
-          text: `+2 ATK para pokemons en la misma columna`
-        },
-        {
-          title: `(6) Furia`,
-          text: `+4 ATK para pokemons en la misma columna`
-        },
-        {
-          title: `(9) Cuchillas de baile`,
-          text: `+8 ATK para pokemons en la misma columna`
-        }
-      ],
-      fra: [
-        {
-          title: `(3) Gonflette`,
-          text: `+2 ATK pour les pokémons sur la même colonne`
-        },
-        {
-          title: `(6) Rage`,
-          text: `+4 ATK pour les pokémons sur la même colonne`
-        },
-        {
-          title: `(9) Danse Lames`,
-          text: `+8 ATK pour les pokémons sur la même colonne`
+          text: `When a field pokemon dies, all other field pokemons gain 50% Attack Speed and are healed for 50% of their Maximum Health`
         }
       ]
     }
@@ -3310,33 +3411,13 @@ const TYPE_DETAILS = Object.freeze({
       eng: [
         {
           trigger: 2,
-          title: `(2) Swarm`,
-          text: `Your Bug pokemon evolve faster. (2 instead of 3)`
+          title: `(2) Fisrt Impression`,
+          text: `At the start of combat, creates a copy of one bug pokemon`
         },
         {
           trigger: 4,
           title: `(4) Sticky web`,
-          text: `Enemies have -33% Speed.`
-        }
-      ],
-      esp: [
-        {
-          title: `(2) Essaim`,
-          text: `Se necesitan 2 pkm para evolucionar (en lugar de 3)`
-        },
-        {
-          title: `(4) Web pegajosa`,
-          text: `-33% de velocidad ATK para el equipo enemigo`
-        }
-      ],
-      fra: [
-        {
-          title: `(2) Essaim`,
-          text: `2 pkm nécessaires pour évoluer (au lieu de 3)`
-        },
-        {
-          title: `(4) Toile gluante`,
-          text: `-33% ATK speed pour l'équipe ennemie`
+          text: `At the start of combat, creates a copy of all bug pokemon`
         }
       ]
     }
@@ -3417,7 +3498,7 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 2,
           title: `(2) Odd Flower`,
-          text: `When an flora ally is dead, the oddish flower will rise from its grave..`
+          text: `When an flora ally is dead, the odd flower will rise from its grave..`
         },
         {
           trigger: 3,
@@ -3428,26 +3509,11 @@ const TYPE_DETAILS = Object.freeze({
           trigger: 4,
           title: `(4) Vile Flower`,
           text: `When an flora ally is dead, the vile flower will rise from its grave..`
-        }
-      ],
-      esp: [
-        {
-          title: `(2) Lavamanos`,
-          text: `Restaurar un 10% de HP/s si llueve`
         },
         {
-          title: `(4) Escudo floral`,
-          text: `Aumentar el ATK y la DEF en un 10%`
-        }
-      ],
-      fra: [
-        {
-          title: `(2) Lavabo`,
-          text: `Restaure 10% HP/s si il pleut`
-        },
-        {
-          title: `(4) Bouclier floral`,
-          text: `+50% DEF et +50%SPEDEF pour tous les pkm`
+          trigger: 5,
+          title: `(5) Sun Flower`,
+          text: `When an flora ally is dead, the sun flower will rise from its grave..`
         }
       ]
     }
@@ -3458,32 +3524,17 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 2,
           title: `(2) Harden`,
-          text: `Your Mineral pokemon have +50% Defense.`
+          text: `Mineral pokemons gains 75 bonus maximum health`
         },
         {
           trigger: 4,
           title: `(4) Solid Rock`,
-          text: `Your Mineral pokemon have +50% Defense and +100% HP.`
-        }
-      ],
-      esp: [
-        {
-          title: `(2) Bola de Armadura`,
-          text: `30% de CV de bonficacion para todos los aliados normales`
+          text: `Mineral pokemons gains 150 bonus maximum health`
         },
         {
-          title: `(4) Montañés`,
-          text: `+50% SPEDEF y +100% HP por pkm mineral`
-        }
-      ],
-      fra: [
-        {
-          title: `(2) Boul' Armure`,
-          text: `+50% DEF pour les pkm minéraux`
-        },
-        {
-          title: `(4) Montagnard`,
-          text: `+50% SPEDEF et +100% HP pour les pkm minéraux`
+          trigger: 6,
+          title: `(6) Diamond Storm`,
+          text: `Mineral pokemons gains 300 bonus maximum health`
         }
       ]
     }
@@ -3529,33 +3580,18 @@ const TYPE_DETAILS = Object.freeze({
       eng: [
         {
           trigger: 2,
-          title: `(2) Sing`,
-          text: `Your Fairy pokemon put their front opponent to sleep for 2 seconds.`
+          title: `(2) Aromatic Mist`,
+          text: `Fairy pokemons shock nearby enemies for 10 special damages whenever they deal or receive a critical strike`
         },
         {
           trigger: 4,
-          title: `(4) Jigglypuff Microphone`,
-          text: `Your Fairy pokemon put their front opponent to sleep for 4 seconds.`
-        }
-      ],
-      esp: [
-        {
-          title: `(2) Canción de cuna`,
-          text: `Los pokemons hada duermen a su oponente en el espejo durante 2 segundos`
+          title: `(4) Fairy Wind`,
+          text: `Fairy pokemons shock nearby enemies for 25 special damages whenever they deal or receive a critical strike`
         },
         {
-          title: `(4) Jigglypuff Micrófono`,
-          text: `Los pokemons hada duermen a su oponente en el espejo durante 4 segundos`
-        }
-      ],
-      fra: [
-        {
-          title: `(2) Berceuse`,
-          text: `Les pokémons fées endorment leur adversaire miroir pendant 2 secondes.`
-        },
-        {
-          title: `(4) Micro de Rondoudou`,
-          text: `Les pokémons fées endorment leur adversaire miroir pendant 4 secondes.`
+          trigger: 6,
+          title: `(6) Strange Steam`,
+          text: `Fairy pokemons shock nearby enemies for 50 special damages whenever they deal or receive a critical strike`
         }
       ]
     }
@@ -3686,17 +3722,17 @@ const TYPE_TRIGGER = {
   METAL: [2, 4],
   GROUND: [2, 4, 6],
   POISON: [3, 6],
-  DRAGON: [2, 4],
+  DRAGON: [3, 5],
   FIELD: [3, 6, 9],
   MONSTER: [3, 5, 7],
   HUMAN: [2, 4, 6],
   AQUATIC: [2, 4],
   BUG: [2, 4],
   FLYING: [2, 4, 6, 8],
-  FLORA: [2, 3, 4],
-  MINERAL: [2, 4],
+  FLORA: [2, 3, 4, 5],
+  MINERAL: [2, 4, 6],
   AMORPH: [2, 4],
-  FAIRY: [2, 4],
+  FAIRY: [2, 4, 6],
   ICE: [2, 4],
   FOSSIL: [2, 4, 6],
   SOUND: [3, 5, 7]
@@ -3731,16 +3767,19 @@ const PROBABILITY = {
 
 const PRECOMPUTED_TYPE_POKEMONS_ALL = {
   NORMAL: [
-    'ditto', 'cleffa', 'clefairy',
-    'clefable', 'igglybuff', 'wygglytuff',
-    'jigglypuff', 'pidgey', 'pidgeotto',
-    'pidgeot', 'starly', 'staravia',
-    'staraptor', 'togepi', 'togetic',
-    'togekiss', 'slakoth', 'vigoroth',
-    'slaking', 'scyther', 'rattata',
-    'raticate', 'spearow', 'fearow',
-    'regigigas', 'eevee', 'meditite',
-    'medicham', 'mega-medicham', 'arceus'
+    'cleffa', 'clefairy', 'clefable',
+    'igglybuff', 'wygglytuff', 'jigglypuff',
+    'pidgey', 'pidgeotto', 'pidgeot',
+    'starly', 'staravia', 'staraptor',
+    'togepi', 'togetic', 'togekiss',
+    'slakoth', 'vigoroth', 'slaking',
+    'scyther', 'regigigas', 'eevee',
+    'meditite', 'medicham', 'mega-medicham',
+    'arceus', 'buneary', 'lopunny',
+    'mega-lopunny', 'porygon', 'porygon2',
+    'porygon-z', 'whismur', 'loudred',
+    'exploud', 'pikipek', 'trumbeak',
+    'toucannon', 'meloetta'
   ],
   GRASS: [
     'bulbasaur', 'ivysaur', 'venusaur',
@@ -3756,7 +3795,9 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'mega-abomasnow', 'virizion', 'celebi',
     'shaymin', 'oddish', 'gloom',
     'vileplume', 'bellossom', 'cradily',
-    'lileep'
+    'lileep', 'budew', 'roselia',
+    'roserade', 'sewaddle', 'swadloon',
+    'leavanny'
   ],
   FIRE: [
     'charmander', 'charmeleon', 'charizard',
@@ -3769,7 +3810,7 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'mega-camerupt', 'litwick', 'lampent',
     'chandelure', 'houndour', 'volcarona',
     'reshiram', 'victini', 'heatran',
-    'ho-Oh', 'primal-Groudon'
+    'ho-Oh', 'primal-Groudon', 'alolan-marowak'
   ],
   WATER: [
     'squirtle', 'wartortle', 'blastoise',
@@ -3779,12 +3820,13 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'horsea', 'seadra', 'kingdra',
     'lotad', 'lombre', 'ludicolo',
     'poliwag', 'poliwhirl', 'politoed',
-    'magikarp', 'gyarados', 'palkia',
-    'suicune', 'kyogre', 'vaporeon',
-    'carvanha', 'keldeo', 'manaphy',
-    'lapras', 'primal-Kyogre', 'carracosta',
-    'kabuto', 'kabutops', 'omanyte',
-    'omastar', 'tirtouga'
+    'gyarados', 'palkia', 'suicune',
+    'kyogre', 'vaporeon', 'carvanha',
+    'keldeo', 'manaphy', 'lapras',
+    'primal-Kyogre', 'carracosta', 'kabuto',
+    'kabutops', 'omanyte', 'omastar',
+    'tirtouga', 'tympole', 'palpitoad',
+    'seismitoad'
   ],
   ELECTRIC: [
     'mareep', 'flaffy',
@@ -3797,10 +3839,13 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'electivire', 'zapdos',
     'raikou', 'jolteon',
     'thundurus', 'rotom',
-    'zekrom', 'primal-Kyogre'
+    'zekrom', 'primal-Kyogre',
+    'electrike', 'manectric',
+    'mega-manectric'
   ],
   FIGHTING: [
-    'combusken', 'blaziken',
+    'torchic', 'combusken',
+    'blaziken', 'chimchar',
     'monferno', 'infernape',
     'machop', 'machoke',
     'machamp', 'poliwag',
@@ -3809,7 +3854,10 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'mega-lucario', 'meditite',
     'medicham', 'mega-medicham',
     'keldeo', 'terrakion',
-    'virizion', 'cobalion'
+    'virizion', 'cobalion',
+    'buneary', 'lopunny',
+    'mega-lopunny', 'jangmo-o',
+    'hakamo-o', 'kommo-o'
   ],
   PSYCHIC: [
     'abra', 'kadabra', 'alakazam',
@@ -3821,7 +3869,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'uxie', 'mewtwo', 'celebi',
     'victini', 'jirachi', 'deoxys',
     'cresselia', 'solosis', 'duosion',
-    'reuniclus'
+    'reuniclus', 'porygon', 'porygon2',
+    'porygon-z'
   ],
   DARK: [
     'seedot', 'nuzleaf',
@@ -3834,21 +3883,20 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'absol', 'deino',
     'zweilous', 'hydreigon',
     'sandile', 'krokorok',
-    'krookodile'
+    'krookodile', 'shuppet',
+    'banette', 'mega-banette'
   ],
   METAL: [
-    'prinplup', 'empoleon',
-    'aron', 'lairon',
-    'aggron', 'magnemite',
-    'magneton', 'magnezone',
-    'beldum', 'metang',
-    'metagross', 'steelix',
-    'mega-steelix', 'scizor',
-    'mega-scizor', 'lucario',
-    'mega-lucario', 'dialga',
-    'registeel', 'cobalion',
-    'jirachi', 'heatran',
-    'bastiodon', 'shieldon'
+    'prinplup', 'empoleon', 'aron',
+    'lairon', 'aggron', 'magnemite',
+    'magneton', 'magnezone', 'beldum',
+    'metang', 'metagross', 'onix',
+    'steelix', 'mega-steelix', 'scizor',
+    'mega-scizor', 'lucario', 'mega-lucario',
+    'dialga', 'registeel', 'cobalion',
+    'jirachi', 'heatran', 'bastiodon',
+    'shieldon', 'honedge', 'doublade',
+    'aegislash'
   ],
   GROUND: [
     'geodude', 'graveler', 'golem',
@@ -3859,10 +3907,11 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'gible', 'gabite', 'garchomp',
     'onix', 'steelix', 'mega-steelix',
     'groudon', 'numel', 'camerupt',
-    'mega-camerupt', 'sandshrew', 'swinub',
-    'piloswine', 'mamoswine', 'landorus',
-    'primal-Groudon', 'sandile', 'krokorok',
-    'krookodile'
+    'mega-camerupt', 'swinub', 'piloswine',
+    'mamoswine', 'landorus', 'primal-Groudon',
+    'sandile', 'krokorok', 'krookodile',
+    'cubone', 'marowak', 'tympole',
+    'palpitoad', 'seismitoad'
   ],
   POISON: [
     'bulbasaur', 'ivysaur', 'venusaur',
@@ -3873,7 +3922,9 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'gastly', 'haunter', 'gengar',
     'bellsprout', 'weepinbell', 'victreebel',
     'oddish', 'gloom', 'vileplume',
-    'bellossom'
+    'bellossom', 'budew', 'roselia',
+    'roserade', 'venipede', 'whirlipede',
+    'scolipede'
   ],
   DRAGON: [
     'horsea', 'seadra', 'kingdra',
@@ -3885,7 +3936,10 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'latias', 'latios', 'kyurem',
     'reshiram', 'zekrom', 'deino',
     'zweilous', 'hydreigon', 'mega-Rayquaza',
-    'tyrantrum', 'tyrunt'
+    'swablu', 'tyrantrum', 'tyrunt',
+    'axew', 'fraxure', 'haxorus',
+    'jangmo-o', 'hakamo-o', 'kommo-o',
+    'altaria', 'mega-altaria'
   ],
   FIELD: [
     'squirtle', 'wartortle', 'blastoise',
@@ -3900,9 +3954,11 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'vaporeon', 'jolteon', 'flareon',
     'espeon', 'umbreon', 'leafeon',
     'sylveon', 'numel', 'camerupt',
-    'mega-camerupt', 'sandshrew', 'glaceon',
-    'absol', 'arceus', 'sandile',
-    'krokorok', 'krookodile'
+    'mega-camerupt', 'swinub', 'piloswine',
+    'mamoswine', 'glaceon', 'absol',
+    'arceus', 'sandile', 'krokorok',
+    'krookodile', 'electrike', 'manectric',
+    'mega-manectric'
   ],
   MONSTER: [
     'charmander', 'charmeleon', 'charizard',
@@ -3915,24 +3971,23 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'bagon', 'shelgon', 'salamence',
     'gible', 'gabite', 'garchomp',
     'regigigas', 'darkrai', 'mewtwo',
-    'kyurem', 'cranidos', 'rampardos'
+    'kyurem', 'cranidos', 'rampardos',
+    'axew', 'fraxure', 'haxorus'
   ],
   HUMAN: [
-    'chimchar', 'monferno',
-    'infernape', 'machop',
-    'machoke', 'machamp',
-    'abra', 'kadabra',
-    'alakazam', 'ralts',
-    'kirlia', 'gardevoir',
-    'elekid', 'electabuzz',
-    'electivire', 'magby',
-    'magmar', 'magmortar',
-    'riolu', 'lucario',
-    'mega-lucario', 'regice',
-    'regirock', 'registeel',
-    'regigigas', 'meditite',
-    'medicham', 'mega-medicham',
-    'deoxys'
+    'machop', 'machoke',
+    'machamp', 'abra',
+    'kadabra', 'alakazam',
+    'ralts', 'kirlia',
+    'gardevoir', 'elekid',
+    'electabuzz', 'electivire',
+    'magby', 'magmar',
+    'magmortar', 'riolu',
+    'lucario', 'mega-lucario',
+    'regice', 'regirock',
+    'registeel', 'regigigas',
+    'meditite', 'medicham',
+    'mega-medicham', 'deoxys'
   ],
   AQUATIC: [
     'totodile', 'croconaw',
@@ -3952,23 +4007,27 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'flygon', 'scyther',
     'scizor', 'mega-scizor',
     'volcarona', 'manaphy',
-    'anorith', 'armaldo'
+    'anorith', 'armaldo',
+    'venipede', 'whirlipede',
+    'scolipede', 'sewaddle',
+    'swadloon', 'leavanny'
   ],
   FLYING: [
-    'charizard', 'zubat', 'golbat',
-    'crobat', 'butterfree', 'beedrill',
-    'pidgey', 'pidgeotto', 'pidgeot',
-    'hoppip', 'skiploom', 'jumpluff',
-    'starly', 'staravia', 'staraptor',
-    'torchic', 'combusken', 'blaziken',
-    'piplup', 'prinplup', 'empoleon',
-    'togetic', 'togekiss', 'dragonite',
-    'salamence', 'spearow', 'fearow',
+    'charmander', 'charmeleon', 'charizard',
+    'zubat', 'golbat', 'crobat',
+    'butterfree', 'beedrill', 'pidgey',
+    'pidgeotto', 'pidgeot', 'hoppip',
+    'skiploom', 'jumpluff', 'starly',
+    'staravia', 'staraptor', 'torchic',
+    'combusken', 'blaziken', 'piplup',
+    'prinplup', 'empoleon', 'togetic',
+    'togekiss', 'dragonite', 'salamence',
     'lugia', 'zapdos', 'moltres',
     'articuno', 'rayquaza', 'landorus',
     'thundurus', 'tornadus', 'ho-Oh',
-    'aerodactyl', 'mega-Rayquaza', 'swablu',
-    'archen', 'archeops'
+    'aerodactyl', 'mega-Rayquaza', 'archen',
+    'archeops', 'pikipek', 'trumbeak',
+    'toucannon'
   ],
   FLORA: [
     'bulbasaur', 'ivysaur',
@@ -3979,7 +4038,10 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'grotle', 'torterra',
     'leafeon', 'bellsprout',
     'weepinbell', 'victreebel',
-    'shaymin'
+    'shaymin', 'budew',
+    'roselia', 'roserade',
+    'flabebe', 'floette',
+    'florges'
   ],
   MINERAL: [
     'geodude', 'graveler',
@@ -3991,7 +4053,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'beldum', 'metang',
     'metagross', 'onix',
     'steelix', 'mega-steelix',
-    'regirock', 'terrakion'
+    'regirock', 'terrakion',
+    'cubone', 'marowak'
   ],
   AMORPH: [
     'duskull', 'dusclops',
@@ -4003,7 +4066,10 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'glalie', 'froslass',
     'rotom', 'spiritomb',
     'solosis', 'duosion',
-    'reuniclus'
+    'reuniclus', 'shuppet',
+    'banette', 'mega-banette',
+    'honedge', 'doublade',
+    'aegislash', 'alolan-marowak'
   ],
   FAIRY: [
     'azurill', 'marill', 'azumarill',
@@ -4014,7 +4080,9 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'ralts', 'kirlia', 'gardevoir',
     'sylveon', 'vanillite', 'vanillish',
     'vanilluxe', 'mesprit', 'azelf',
-    'uxie', 'cresselia', 'swablu'
+    'uxie', 'cresselia', 'swablu',
+    'flabebe', 'floette', 'florges',
+    'altaria', 'mega-altaria'
   ],
   ICE: [
     'spheal', 'sealeo',
@@ -4042,6 +4110,18 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'rampardos', 'shieldon',
     'tirtouga', 'tyrantrum',
     'tyrunt'
+  ],
+  SOUND: [
+    'zubat', 'golbat', 'crobat',
+    'igglybuff', 'wygglytuff', 'jigglypuff',
+    'swablu', 'whismur', 'loudred',
+    'exploud', 'tympole', 'palpitoad',
+    'seismitoad', 'sewaddle', 'swadloon',
+    'leavanny', 'pikipek', 'trumbeak',
+    'toucannon', 'flabebe', 'floette',
+    'florges', 'jangmo-o', 'hakamo-o',
+    'kommo-o', 'meloetta', 'altaria',
+    'mega-altaria'
   ]
 };
 
@@ -4050,30 +4130,38 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     pokemons: [
       'cleffa', 'igglybuff',
       'pidgey', 'starly',
-      'eevee', 'togepi',
-      'slakoth', 'ditto',
-      'scyther', 'meditite'
+      'eevee', 'pikipek',
+      'togepi', 'slakoth',
+      'porygon', 'whismur',
+      'scyther', 'meditite',
+      'buneary'
     ],
-    mythicalPokemons: ['regigigas', 'arceus']
+    mythicalPokemons: ['regigigas', 'arceus', 'meloetta']
   },
   GRASS: {
     pokemons: [
-      'bulbasaur', 'caterpie',
-      'hoppip', 'seedot',
-      'chikorita', 'treecko',
-      'turtwig', 'leafeon',
+      'caterpie', 'hoppip',
+      'seedot', 'chikorita',
+      'treecko', 'leafeon',
       'bellsprout', 'oddish',
-      'lotad', 'snover',
-      'cradily'
+      'cradily', 'bulbasaur',
+      'turtwig', 'lotad',
+      'budew', 'sewaddle',
+      'snover'
     ],
     mythicalPokemons: ['virizion', 'celebi', 'shaymin']
   },
   FIRE: {
     pokemons: [
-      'charmander', 'cyndaquil',
-      'torchic', 'chimchar',
-      'flareon', 'houndour',
-      'magby', 'litwick',
+      'charmander',
+      'cyndaquil',
+      'torchic',
+      'chimchar',
+      'flareon',
+      'houndour',
+      'magby',
+      'litwick',
+      'alolan-marowak',
       'numel'
     ],
     mythicalPokemons: [
@@ -4092,10 +4180,11 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     pokemons: [
       'squirtle', 'azurill',
       'mudkip', 'piplup',
-      'vaporeon', 'carvanha',
-      'horsea', 'lotad',
+      'horsea', 'vaporeon',
+      'carvanha', 'kabuto',
+      'omanyte', 'lotad',
       'poliwag', 'carracosta',
-      'kabuto', 'omanyte'
+      'tympole'
     ],
     mythicalPokemons: [
       'palkia',
@@ -4108,7 +4197,15 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     ]
   },
   ELECTRIC: {
-    pokemons: ['mareep', 'jolteon', 'pichu', 'magnemite', 'shinx', 'elekid'],
+    pokemons: [
+      'mareep',
+      'magnemite',
+      'jolteon',
+      'pichu',
+      'shinx',
+      'elekid',
+      'electrike'
+    ],
     mythicalPokemons: [
       'zapdos',
       'raikou',
@@ -4120,17 +4217,20 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   FIGHTING: {
     pokemons: [
-      'combusken',
-      'monferno',
-      'machop',
-      'poliwag',
-      'riolu',
-      'meditite'
+      'torchic', 'chimchar',
+      'machop', 'poliwag',
+      'jangmo-o', 'riolu',
+      'meditite', 'buneary'
     ],
     mythicalPokemons: ['keldeo', 'terrakion', 'virizion', 'cobalion']
   },
   PSYCHIC: {
-    pokemons: ['espeon', 'slowpoke', 'abra', 'ralts', 'beldum', 'solosis'],
+    pokemons: [
+      'espeon', 'slowpoke',
+      'abra', 'ralts',
+      'beldum', 'solosis',
+      'porygon'
+    ],
     mythicalPokemons: [
       'lugia', 'latias',
       'latios', 'mesprit',
@@ -4142,54 +4242,52 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   DARK: {
     pokemons: [
-      'seedot', 'umbreon',
-      'carvanha', 'houndour',
-      'duskull', 'larvitar',
-      'deino', 'sandile'
+      'seedot', 'duskull',
+      'umbreon', 'carvanha',
+      'houndour', 'sandile',
+      'larvitar', 'deino',
+      'shuppet'
     ],
     mythicalPokemons: ['darkrai', 'spiritomb', 'absol']
   },
   METAL: {
     pokemons: [
-      'prinplup', 'aron',
-      'magnemite', 'beldum',
-      'steelix', 'scizor',
-      'lucario', 'bastiodon'
+      'prinplup', 'magnemite',
+      'aron', 'beldum',
+      'bastiodon', 'honedge',
+      'onix', 'scizor',
+      'lucario'
     ],
     mythicalPokemons: ['dialga', 'registeel', 'cobalion', 'jirachi', 'heatran']
   },
   GROUND: {
     pokemons: [
       'geodude', 'mudkip',
-      'turtwig', 'swinub',
-      'trapinch', 'rhyhorn',
-      'gible', 'sandile',
+      'swinub', 'sandile',
+      'turtwig', 'trapinch',
+      'rhyhorn', 'gible',
+      'cubone', 'tympole',
       'onix', 'numel'
     ],
     mythicalPokemons: ['groudon', 'landorus', 'primal-Groudon']
   },
   POISON: {
     pokemons: [
-      'bulbasaur',
-      'zubat',
-      'weedle',
-      'nidoranF',
-      'nidoranM',
-      'bellsprout',
-      'oddish',
-      'gastly'
+      'zubat', 'weedle',
+      'bellsprout', 'oddish',
+      'venipede', 'bulbasaur',
+      'nidoranF', 'nidoranM',
+      'budew', 'gastly'
     ],
     mythicalPokemons: []
   },
   DRAGON: {
     pokemons: [
-      'horsea',
-      'vibrava',
-      'dratini',
-      'bagon',
-      'gible',
-      'deino',
-      'tyrantrum'
+      'horsea', 'vibrava',
+      'dratini', 'bagon',
+      'gible', 'deino',
+      'tyrantrum', 'axew',
+      'jangmo-o', 'swablu'
     ],
     mythicalPokemons: [
       'giratina',
@@ -4208,14 +4306,15 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     pokemons: [
       'squirtle', 'mareep',
       'seedot', 'cyndaquil',
-      'nidoranF', 'nidoranM',
       'eevee', 'vaporeon',
       'jolteon', 'flareon',
       'espeon', 'umbreon',
       'leafeon', 'sylveon',
-      'glaceon', 'shinx',
-      'slakoth', 'sandile',
-      'numel'
+      'swinub', 'glaceon',
+      'sandile', 'nidoranF',
+      'nidoranM', 'shinx',
+      'slakoth', 'numel',
+      'electrike'
     ],
     mythicalPokemons: ['raikou', 'entei', 'absol', 'arceus']
   },
@@ -4223,36 +4322,45 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     pokemons: [
       'charmander', 'totodile',
       'treecko', 'aron',
-      'rhyhorn', 'gastly',
-      'larvitar', 'bagon',
-      'gible', 'cranidos'
+      'rhyhorn', 'larvitar',
+      'bagon', 'gible',
+      'cranidos', 'axew',
+      'gastly'
     ],
     mythicalPokemons: ['regigigas', 'darkrai', 'mewtwo', 'kyurem']
   },
   HUMAN: {
     pokemons: [
-      'chimchar', 'machop',
-      'abra', 'ralts',
-      'elekid', 'magby',
-      'riolu', 'meditite'
+      'machop', 'abra',
+      'ralts', 'elekid',
+      'magby', 'riolu',
+      'meditite'
     ],
     mythicalPokemons: ['regice', 'regirock', 'registeel', 'regigigas', 'deoxys']
   },
   AQUATIC: {
-    pokemons: ['totodile', 'slowpoke', 'spheal', 'dratini'],
+    pokemons: ['totodile', 'spheal', 'slowpoke', 'dratini'],
     mythicalPokemons: ['lugia', 'kyogre', 'primal-Kyogre']
   },
   BUG: {
-    pokemons: ['caterpie', 'weedle', 'trapinch', 'scyther', 'anorith'],
+    pokemons: [
+      'caterpie',
+      'weedle',
+      'anorith',
+      'venipede',
+      'trapinch',
+      'sewaddle',
+      'scyther'
+    ],
     mythicalPokemons: ['volcarona', 'manaphy']
   },
   FLYING: {
     pokemons: [
-      'charizard', 'zubat',
+      'charmander', 'zubat',
       'butterfree', 'beedrill',
       'pidgey', 'hoppip',
       'starly', 'torchic',
-      'piplup', 'swablu',
+      'piplup', 'pikipek',
       'togetic', 'dragonite',
       'salamence', 'aerodactyl',
       'archen'
@@ -4272,55 +4380,81 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   FLORA: {
     pokemons: [
-      'bulbasaur',
       'hoppip',
       'chikorita',
-      'turtwig',
       'leafeon',
-      'bellsprout'
+      'bellsprout',
+      'flabebe',
+      'bulbasaur',
+      'turtwig',
+      'budew'
     ],
     mythicalPokemons: ['shaymin']
   },
   MINERAL: {
-    pokemons: ['geodude', 'aron', 'rhyhorn', 'larvitar', 'beldum', 'onix'],
+    pokemons: [
+      'geodude', 'aron',
+      'rhyhorn', 'larvitar',
+      'beldum', 'cubone',
+      'onix'
+    ],
     mythicalPokemons: ['regirock', 'terrakion']
   },
   AMORPH: {
-    pokemons: ['duskull', 'gastly', 'litwick', 'snorunt', 'solosis'],
+    pokemons: [
+      'duskull',
+      'litwick',
+      'snorunt',
+      'solosis',
+      'honedge',
+      'alolan-marowak',
+      'gastly',
+      'shuppet'
+    ],
     mythicalPokemons: ['giratina', 'darkrai', 'rotom', 'spiritomb']
   },
   FAIRY: {
     pokemons: [
       'azurill', 'cleffa',
       'igglybuff', 'sylveon',
-      'swablu', 'pichu',
+      'flabebe', 'pichu',
       'togepi', 'ralts',
-      'vanillite'
+      'vanillite', 'swablu'
     ],
     mythicalPokemons: ['mesprit', 'azelf', 'uxie', 'cresselia']
   },
   ICE: {
     pokemons: [
+      'spheal',
       'swinub',
       'glaceon',
-      'spheal',
       'snorunt',
       'vanillite',
-      'snover',
-      'amaura'
+      'amaura',
+      'snover'
     ],
     mythicalPokemons: ['articuno', 'suicune', 'regice', 'lapras', 'kyurem']
   },
   FOSSIL: {
     pokemons: [
-      'aerodactyl', 'amaura',
-      'anorith', 'archen',
-      'shieldon', 'tirtouga',
-      'cradily', 'cranidos',
+      'anorith', 'cradily',
       'kabuto', 'omanyte',
-      'tyrunt'
+      'aerodactyl', 'amaura',
+      'archen', 'bastiodon',
+      'carracosta', 'cranidos',
+      'tyrantrum'
     ],
     mythicalPokemons: []
+  },
+  SOUND: {
+    pokemons: [
+      'zubat', 'igglybuff',
+      'pikipek', 'flabebe',
+      'whismur', 'tympole',
+      'sewaddle', 'jangmo-o',
+      'swablu'
+    ],
+    mythicalPokemons: ['meloetta']
   }
 };
 

@@ -3,7 +3,7 @@ import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemContainer from './item-container';
-import {SPECIAL_SKILL, EFFECTS_ICON} from '../../../../models/enum.js';
+import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS} from '../../../../models/enum.js';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 
 export default class Pokemon extends Button {
@@ -24,13 +24,14 @@ export default class Pokemon extends Button {
     this.speDef = pokemon.speDef;
     this.attackType = pokemon.attackType;
     this.type = pokemon.type;
-    this.atkSpeed = pokemon.atkSpeed ? pokemon.atkSpeed: 1500;
+    this.atkSpeed = pokemon.atkSpeed ? Number(pokemon.atkSpeed.toFixed(2)): 0.75;
     this.targetX = null;
     this.targetY = null;
     this.skill = pokemon.skill;
     this.positionX = pokemon.positionX;
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
+    this.team = pokemon.team;
     this.setRangeType();
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
@@ -53,9 +54,9 @@ export default class Pokemon extends Button {
   enterButtonHoverState() {
     if (!this.getFirst('objType', 'detail') && this.isPopup) {
       if (this.life) {
-        this.add(new PokemonDetail(this.scene, 20, -170, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed, this.critChance));
+        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance));
       } else {
-        this.add(new PokemonDetail(this.scene, 20, -170, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed, this.critChance));
+        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance));
       }
     }
   }
@@ -88,7 +89,51 @@ export default class Pokemon extends Button {
     this.addTween();
   }
 
-  specialAttackAnimation() {
+  petalDanceAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.PETAL_DANCE, '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(2, 2);
+    specialProjectile.anims.play(SPECIAL_SKILL.PETAL_DANCE);
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
+  fieldDeathAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'FIELD_DEATH', '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(2, 2);
+    specialProjectile.anims.play('FIELD_DEATH');
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
+  fairyCritAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'FAIRY_CRIT', '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(2, 2);
+    specialProjectile.anims.play('FAIRY_CRIT');
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
+  soundAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ECHO', '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(2, 2);
+    specialProjectile.anims.play('ECHO');
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
+  specialAttackAnimation(group) {
     if (this.skill) {
       let coordinates;
       let specialProjectile;
@@ -596,6 +641,158 @@ export default class Pokemon extends Button {
             });
             break;
 
+          case SPECIAL_SKILL.HYPER_VOICE:
+            coordinatesTarget = transformAttackCoordinate(8, this.targetY);
+            coordinates = transformAttackCoordinate(0, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.HYPER_VOICE, '0');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.HYPER_VOICE);
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              duration: 1000,
+              onComplete: (tween, targets) => {
+                specialProjectile.destroy();
+              }
+            });
+            break;
+
+          case SPECIAL_SKILL.SHADOW_CLONE:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.SHADOW_CLONE, '0');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.SHADOW_CLONE);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.ECHO:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.ECHO, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.ECHO);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.EXPLOSION:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.EXPLOSION, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.EXPLOSION);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+
+          case SPECIAL_SKILL.CLANGOROUS_SOUL:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.CLANGOROUS_SOUL, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.CLANGOROUS_SOUL);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.GROWL:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.GROWL, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.GROWL);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.DISARMING_VOICE:
+            group.getChildren().forEach((pokemon) => {
+              if (this.team == pokemon.team) {
+                const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
+                const s = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.DISARMING_VOICE, '000');
+                s.setDepth(7);
+                s.setScale(2, 2);
+                s.anims.play(SPECIAL_SKILL.DISARMING_VOICE);
+                s.once('animationcomplete', () => {
+                  s.destroy();
+                });
+              }
+            });
+            break;
+
+          case SPECIAL_SKILL.RELIC_SONG:
+            group.getChildren().forEach((pokemon) => {
+              if (this.team != pokemon.team) {
+                const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
+                const s = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.RELIC_SONG, '000');
+                s.setDepth(7);
+                s.setScale(2, 2);
+                s.anims.play(SPECIAL_SKILL.RELIC_SONG);
+                s.once('animationcomplete', () => {
+                  s.destroy();
+                });
+              }
+            });
+            break;
+
+          case SPECIAL_SKILL.HIGH_JUMP_KICK:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.HIGH_JUMP_KICK, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(2, 2);
+            specialProjectile.anims.play(SPECIAL_SKILL.HIGH_JUMP_KICK);
+            specialProjectile.once('animationcomplete', () => {
+              specialProjectile.destroy();
+            });
+            break;
+
+          case SPECIAL_SKILL.TRI_ATTACK:
+            coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY);
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.TRI_ATTACK, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.anims.play(SPECIAL_SKILL.TRI_ATTACK);
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              duration: 500,
+              onComplete: (tween, targets) => {
+                specialProjectile.destroy();
+              }
+            });
+            break;
+
+          case SPECIAL_SKILL.BONEMERANG:
+            coordinatesTarget = transformAttackCoordinate(this.targetX, 6);
+            coordinates = transformAttackCoordinate(this.targetX, 0);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.BONEMERANG, '000');
+            specialProjectile.setDepth(7);
+            specialProjectile.setScale(3, 3);
+            specialProjectile.anims.play(SPECIAL_SKILL.BONEMERANG);
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: 'Power2',
+              yoyo: true,
+              duration: 1000,
+              onComplete: (tween, targets) => {
+                specialProjectile.destroy();
+              }
+            });
+            break;
+
           default:
             break;
         }
@@ -605,6 +802,7 @@ export default class Pokemon extends Button {
 
   addTween() {
     const coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+
     if (this.scene) {
       // console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
       this.scene.tweens.add({
@@ -612,7 +810,7 @@ export default class Pokemon extends Button {
         x: coordinates[0],
         y: coordinates[1],
         ease: 'Linear',
-        duration: this.atkSpeed ? this.atkSpeed: 1500,
+        duration: this.atkSpeed ? 1000 / this.atkSpeed: 1500,
         onComplete: (tween, targets) => {
           targets[0].setVisible(false);
           if (this.checkAnimations()) {
@@ -742,7 +940,12 @@ export default class Pokemon extends Button {
     const sprite = new GameObjects.Sprite(scene, 0, 0, pokemon.sheet, `${pokemon.index}/0/1/0`);
     this.height = sprite.height;
     this.width = sprite.width;
-    sprite.setScale(2, 2);
+
+    if (pokemon.effects && (pokemon.effects.includes(EFFECTS.IRON_DEFENSE) || pokemon.effects.includes(EFFECTS.AUTOTOMIZE))) {
+      sprite.setScale(3, 3);
+    } else {
+      sprite.setScale(2, 2);
+    }
     const socle = new GameObjects.Image(scene, 0, this.height, 'socle');
     socle.objType = 'socle';
     sprite.objType = 'sprite';

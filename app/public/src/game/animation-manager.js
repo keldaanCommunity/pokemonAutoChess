@@ -515,6 +515,104 @@ export default class AnimationManager {
     });
 
     this.game.anims.create({
+      key: SPECIAL_SKILL.SHADOW_CLONE,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.SHADOW_CLONE, {start: 0, end: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.HYPER_VOICE,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.HYPER_VOICE, {start: 0, end: 3}),
+      duration: 300,
+      repeat: 3
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.PETAL_DANCE,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.PETAL_DANCE, {start: 0, end: 53, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.ECHO,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.ECHO, {start: 0, end: 36, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.EXPLOSION,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.EXPLOSION, {start: 0, end: 22, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.BONEMERANG,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.BONEMERANG, {start: 0, end: 7, zeroPad: 3}),
+      duration: 1000,
+      repeat: 3
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.GROWL,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.GROWL, {start: 0, end: 19, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.HIGH_JUMP_KICK,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.HIGH_JUMP_KICK, {start: 0, end: 21, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.TRI_ATTACK,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.TRI_ATTACK, {start: 0, end: 20, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.DISARMING_VOICE,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.DISARMING_VOICE, {start: 0, end: 43, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.RELIC_SONG,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.RELIC_SONG, {start: 0, end: 34, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: SPECIAL_SKILL.CLANGOROUS_SOUL,
+      frames: this.game.anims.generateFrameNames(SPECIAL_SKILL.CLANGOROUS_SOUL, {start: 0, end: 18, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: 'FIELD_DEATH',
+      frames: this.game.anims.generateFrameNames('FIELD_DEATH', {start: 0, end: 8, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: 'FAIRY_CRIT',
+      frames: this.game.anims.generateFrameNames('FAIRY_CRIT', {start: 0, end: 19, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
       key: SPECIAL_SKILL.HEAD_SMASH,
       frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 79, zeroPad: 3, prefix: `${SPECIAL_SKILL.ROCK_SLIDE}/`}),
       duration: 1000,

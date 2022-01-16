@@ -1,5 +1,6 @@
 const RARITY = require('../app/models/enum').RARITY;
 const RARITY_HP_COST = require('../app/models/enum').RARITY_HP_COST;
+const SPECIAL_SKILL = require('../app/models/enum').SPECIAL_SKILL;
 const PKM = require('../app/models/enum').PKM;
 const TYPE = require('../app/models/enum').TYPE;
 const PokemonFactory = require('../app/models/pokemon-factory');
@@ -115,7 +116,7 @@ Object.keys(TYPE).forEach((type)=>{
   Object.values(PKM).forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm);
     const family = PokemonFactory.getPokemonFamily(pkm);
-    if (pokemon.rarity != RARITY.NEUTRAL) {
+    if (pokemon.rarity != RARITY.NEUTRAL && pokemon.skill != SPECIAL_SKILL.DEFAULT) {
       if (pokemon.types.includes(type)) {
         if (pokemon.rarity == RARITY.MYTHICAL) {
           mythicalPokemonCandidates.push(pokemon);
@@ -147,21 +148,3 @@ Object.keys(TYPE).forEach((type)=>{
 });
 
 console.log(data);
-
-/*
-const dataAll = {};
-Object.keys(TYPE).forEach((type)=>{
-  const pokemons = [];
-
-  Object.values(PKM).forEach((pkm) => {
-    const pokemon = PokemonFactory.createPokemonFromName(pkm);
-    if (pokemon.types.includes(type)) {
-      pokemons.push(pkm);
-    }
-  });
-
-  dataAll[type] = pokemons;
-});
-
-console.log(dataAll);
-*/
