@@ -117,7 +117,7 @@ class PokemonState {
                 boost = 50;
               }
               board.forEach((r, c, value) => {
-                if (value !== undefined && value.team == pokemon.team && pokemon.types.includes(TYPE.FIELD)) {
+                if (value !== undefined && value.team == pokemon.team && value.types.includes(TYPE.FIELD)) {
                   value.count.fieldCount ++;
                   value.handleHeal(0.2 * value.hp);
                   value.handleAttackSpeed(boost);

@@ -26,7 +26,7 @@ class TabMenu extends Component {
             overflowY:'scroll'
         }
         return (
-        <Tabs className="nes-container" style={tabStyle}
+        <Tabs className="nes-container hidden-scrollable" style={tabStyle}
             selectedIndex={this.props.tabIndex} onSelect={i => this.props.setTabIndex(i)}>
                 <TabList>
                     <Tab style={cursorStyle}>Players</Tab>

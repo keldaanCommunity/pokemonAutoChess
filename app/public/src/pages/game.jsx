@@ -83,7 +83,8 @@ class Game extends Component {
                 AMORPH: 0,
                 FAIRY: 0,
                 ICE: 0,
-                FOSSIL: 0
+                FOSSIL: 0,
+                SOUND: 0
             }
 
           },

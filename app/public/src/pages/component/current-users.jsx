@@ -9,11 +9,12 @@ class CurrentUsers extends Component{
             padding: '0px',
         };
 
-        return <div className="nes-container" style={{
+        return <div className="nes-container hidden-scrollable" style={{
             backgroundColor: 'rgba(255, 255, 255, .6)',
              margin:'10px',
              flexBasis:'10%',
-             height:'90vh'
+             height:'90vh',
+             overflowY:'scroll'
              }}>
             <ul style={ulStyle}>{Array.from(this.props.users).map(this.createUser.bind(this))}</ul>
             
