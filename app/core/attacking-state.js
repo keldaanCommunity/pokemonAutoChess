@@ -27,6 +27,7 @@ class AttackingState extends PokemonState {
   }
 
   attack(pokemon, board, coordinates, climate) {
+    pokemon.count.attackCount ++;
     pokemon.targetX = coordinates[0];
     pokemon.targetY = coordinates[1];
     const target = board.getValue(coordinates[0], coordinates[1]);

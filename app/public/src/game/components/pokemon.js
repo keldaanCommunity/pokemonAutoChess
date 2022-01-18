@@ -82,6 +82,10 @@ export default class Pokemon extends Button {
       y = this.targetY;
     }
     const coordinates = transformAttackCoordinate(x, y);
+    if (this.projectile) {
+      this.projectile.destroy();
+    }
+
     this.projectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'attacks', `${this.attackSprite}/000`);
     const scale = getAttackScale(this.attackSprite);
     this.projectile.setScale(scale[0], scale[1]);
@@ -812,47 +816,11 @@ export default class Pokemon extends Button {
         ease: 'Linear',
         duration: this.atkSpeed ? 1000 / this.atkSpeed: 1500,
         onComplete: (tween, targets) => {
-          targets[0].setVisible(false);
-          if (this.checkAnimations()) {
-            this.replayAnimations();
-          } else {
-            this.projectile.destroy();
-          }
+          this.projectile.destroy();
         }
       });
     } else {
       this.projectile.destroy();
-    }
-  }
-
-  replayAnimations() {
-    if (this) {
-      let x;
-      let y;
-      if (this.range > 1) {
-        x = this.positionX;
-        y = this.positionY;
-      } else {
-        x = this.targetX;
-        y = this.targetY;
-      }
-      const coordinates = transformAttackCoordinate(x, y);
-      if (this.projectile.scene) {
-        this.projectile.setPosition(coordinates[0], coordinates[1]);
-        this.projectile.setVisible(true);
-        this.projectile.setDepth(7);
-        this.addTween();
-      }
-    } else {
-      this.projectile.destroy();
-    }
-  }
-
-  checkAnimations() {
-    if (this.action == 'ATTACKING') {
-      return true;
-    } else {
-      return false;
     }
   }
 

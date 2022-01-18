@@ -183,6 +183,14 @@ export default class BattleManager {
             if (change.value != 0) {
               children[i].fairyCritAnimation();
             }
+          } else if ( change.field == 'attackCount') {
+            if (change.value != 0) {
+              // console.log(change.value, children[i].action, children[i].targetX, children[i].targetY);
+              if (children[i].action == 'ATTACKING' && children[i].targetX !== null && children[i].targetY !== null) {
+                this.animationManager.animatePokemon(children[i]);
+                children[i].attackAnimation();
+              }
+            }
           }
         }
       }
@@ -297,21 +305,11 @@ export default class BattleManager {
             } else {
               children[i].targetX = null;
             }
-
-            if (children[i].action == 'ATTACKING' && children[i].targetX !== null && children[i].targetY !== null) {
-              this.animationManager.animatePokemon(children[i]);
-              children[i].attackAnimation();
-            }
           } else if (change.field =='targetY') {
             if (pokemon.targetY >= 0) {
               children[i].targetY = pokemon.targetY;
             } else {
               children[i].targetY = null;
-            }
-
-            if (children[i].action == 'ATTACKING' && children[i].targetX !== null && children[i].targetY !== null) {
-              this.animationManager.animatePokemon(children[i]);
-              children[i].attackAnimation();
             }
           }
           break;
