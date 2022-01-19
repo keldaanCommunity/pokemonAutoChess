@@ -76,7 +76,7 @@ class OnDragDropCommand extends Command {
             const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y);
             if (pokemonToClone && pokemonToClone.rarity != RARITY.MYTHICAL && !pokemonToClone.types.includes(TYPE.FOSSIL)) {
               dittoReplaced = true;
-              const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonFamily(pokemonToClone.name));
+              const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name));
               this.state.players.get(playerId).board.delete(detail.id);
               const position = this.room.getFirstAvailablePositionInBoard(playerId);
               if (position !== undefined) {
