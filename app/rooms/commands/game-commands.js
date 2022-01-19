@@ -407,12 +407,9 @@ class OnSellDropCommand extends Command {
       const pokemon = this.state.players.get(client.auth.uid).board.get(detail.pokemonId);
       const player = this.state.players.get(client.auth.uid);
 
-      if(PokemonFactory.getPokemonBaseEvolution(pokemon.name) == PKM.EEVEE)
-      {
+      if (PokemonFactory.getPokemonBaseEvolution(pokemon.name) == PKM.EEVEE) {
         player.money += COST[pokemon.rarity];
-      }
-      else
-      {
+      } else {
         player.money += COST[pokemon.rarity] * pokemon.stars;
       }
 
@@ -436,6 +433,7 @@ class OnRefreshCommand extends Command {
       const player = this.state.players.get(id);
       if (player.money >= 2) {
         this.state.shop.assignShop(player);
+        player.money -= 2;
       }
     }
   }
