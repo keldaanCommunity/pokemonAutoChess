@@ -65,10 +65,65 @@ class Simulation extends Schema {
       this.addPokemon(kyogre, coord[0], coord[1], 0);
     }
 
+    if (blueEffects && blueEffects.includes(EFFECTS.SWARM)) {
+      const bugTeam = [];
+      blueTeam.forEach((pkm)=>{
+        if (pkm.types.includes(TYPE.BUG) && pkm.positionY != 0) {
+          bugTeam.push(pkm.name);
+        }
+      });
+      const randomBug = bugTeam[Math.floor(Math.random() * bugTeam.length)];
+      const bug = PokemonFactory.createPokemonFromName(randomBug);
+      const coord = this.getFirstAvailablePlaceOnBoard(true);
+      this.addPokemon(bug, coord[0], coord[1], 0);
+    }
+
+    if (blueEffects && blueEffects.includes(EFFECTS.STICKY_WEB)) {
+      const bugTeam = [];
+      blueTeam.forEach((pkm)=>{
+        if (pkm.types.includes(TYPE.BUG) && pkm.positionY != 0) {
+          bugTeam.push(pkm.name);
+        }
+      });
+      bugTeam.forEach((b)=>{
+        const bug = PokemonFactory.createPokemonFromName(b);
+        const coord = this.getFirstAvailablePlaceOnBoard(true);
+        this.addPokemon(bug, coord[0], coord[1], 0);
+      });
+    }
+
+
     if (redEffects && redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
       const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
       const coord = this.getFirstAvailablePlaceOnBoard(false);
       this.addPokemon(kyogre, coord[0], coord[1], 1);
+    }
+
+    if (redEffects && redEffects.includes(EFFECTS.SWARM)) {
+      const bugTeam = [];
+      redTeam.forEach((pkm)=>{
+        if (pkm.types.includes(TYPE.BUG) && pkm.positionY != 0) {
+          bugTeam.push(pkm.name);
+        }
+      });
+      const randomBug = bugTeam[Math.floor(Math.random() * bugTeam.length)];
+      const bug = PokemonFactory.createPokemonFromName(randomBug);
+      const coord = this.getFirstAvailablePlaceOnBoard(false);
+      this.addPokemon(bug, coord[0], coord[1], 1);
+    }
+
+    if (redEffects && redEffects.includes(EFFECTS.STICKY_WEB)) {
+      const bugTeam = [];
+      redTeam.forEach((pkm)=>{
+        if (pkm.types.includes(TYPE.BUG) && pkm.positionY != 0) {
+          bugTeam.push(pkm.name);
+        }
+      });
+      bugTeam.forEach((b)=>{
+        const bug = PokemonFactory.createPokemonFromName(b);
+        const coord = this.getFirstAvailablePlaceOnBoard(false);
+        this.addPokemon(bug, coord[0], coord[1], 1);
+      });
     }
 
     this.applyPostEffects();
@@ -91,6 +146,7 @@ class Simulation extends Schema {
       this.applyEffects(pokemonEntity, pokemon.types, this.redEffects, this.blueEffects, redTeam, blueTeam);
       this.redTeam.set(pokemonEntity.id, pokemonEntity);
     }
+    return pokemonEntity;
   }
 
   getFirstAvailablePlaceOnBoard(ascending) {
@@ -139,7 +195,7 @@ class Simulation extends Schema {
             break;
 
           case EFFECTS.ICE:
-            pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.9);
+            pokemon.handleAttackSpeed(10);
             break;
 
           case EFFECTS.GROUND:
@@ -193,75 +249,75 @@ class Simulation extends Schema {
       if (types.includes(TYPE.FAIRY)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.MOON_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1* pokemon.items.count(ITEMS.MOON_STONE)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.MOON_STONE));
     }
 
     if (pokemon.items.count(ITEMS.SILK_SCARF) != 0) {
       if (types.includes(TYPE.NORMAL)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.SILK_SCARF);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.SILK_SCARF)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.SILK_SCARF));
     }
 
     if (pokemon.items.count(ITEMS.SOFT_SAND) != 0) {
       if (types.includes(TYPE.GROUND)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.SOFT_SAND);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.SOFT_SAND)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.SOFT_SAND));
     }
 
     if (pokemon.items.count(ITEMS.NIGHT_STONE) != 0) {
       if (types.includes(TYPE.DARK)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.NIGHT_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.NIGHT_STONE)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.NIGHT_STONE));
     }
 
     if (pokemon.items.count(ITEMS.POISON_BARB) != 0) {
       if (types.includes(TYPE.POISON)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.POISON_BARB);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.POISON_BARB)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.POISON_BARB));
     }
 
     if (pokemon.items.count(ITEMS.DRAGON_FANG) != 0) {
       if (types.includes(TYPE.DRAGON)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.DRAGON_FANG);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.DRAGON_FANG)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.DRAGON_FANG));
     }
 
     if (pokemon.items.count(ITEMS.THUNDER_STONE) != 0) {
       if (types.includes(TYPE.ELECTRIC)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.THUNDER_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.THUNDER_STONE)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.THUNDER_STONE));
     }
 
     if (pokemon.items.count(ITEMS.METAL_SKIN) != 0) {
       if (types.includes(TYPE.METAL)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.METAL_SKIN);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.METAL_SKIN)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.METAL_SKIN));
     }
 
     if (pokemon.items.count(ITEMS.WATER_STONE) != 0) {
       if (types.includes(TYPE.WATER)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.WATER_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.WATER_STONE)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.WATER_STONE));
     }
 
     if (pokemon.items.count(ITEMS.FIRE_STONE) != 0) {
       if (types.includes(TYPE.FIRE)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.FIRE_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.FIRE_STONE)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.FIRE_STONE));
     }
 
     if (pokemon.items.count(ITEMS.ICY_ROCK) != 0) {
       if (types.includes(TYPE.ICE)) {
-        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.ICY_ROCK);
+        pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.ICY_ROCK));
       }
     }
 
@@ -269,26 +325,38 @@ class Simulation extends Schema {
       if (types.includes(TYPE.GRASS)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.LEAF_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.LEAF_STONE)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.LEAF_STONE));
     }
 
     if (pokemon.items.count(ITEMS.BLACK_BELT) != 0) {
       if (types.includes(TYPE.FIGHTING)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.BLACK_BELT);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.BLACK_BELT)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.BLACK_BELT));
     }
 
     if (pokemon.items.count(ITEMS.DAWN_STONE) != 0) {
       if (types.includes(TYPE.PSYCHIC)) {
         pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.DAWN_STONE);
       }
-      pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * (1 - 0.1 * pokemon.items.count(ITEMS.DAWN_STONE)));
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.DAWN_STONE));
     }
   }
 
   applyPostEffects() {
+    let blueImperialCount = 1;
     this.blueTeam.forEach((pokemon) =>{
+      if (pokemon.effects.includes(EFFECTS.IRON_DEFENSE)) {
+        if (blueImperialCount > 0) {
+          pokemon.atk = pokemon.atk * 2;
+          blueImperialCount --;
+        } else {
+          pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.IRON_DEFENSE), 1);
+        }
+      }
+      if (pokemon.effects.includes(EFFECTS.AUTOTOMIZE)) {
+        pokemon.atk = pokemon.atk * 2;
+      }
       let shieldBonus = 0;
       if (pokemon.effects.includes(EFFECTS.STAMINA)) {
         shieldBonus = 20;
@@ -309,42 +377,21 @@ class Simulation extends Schema {
           }
         });
       }
-      let attackBonus = 0;
-      if (pokemon.effects.includes(EFFECTS.WORK_UP)) {
-        attackBonus = 2;
-      }
-      if (pokemon.effects.includes(EFFECTS.RAGE)) {
-        attackBonus += 6;
-      }
-      if (pokemon.effects.includes(EFFECTS.ANGER_POINT)) {
-        attackBonus += 14;
-      }
-      if (attackBonus >= 0) {
-        if (this.board.getValue(pokemon.positionX, 0)) {
-          this.board.getValue(pokemon.positionX, 0).atk += attackBonus;
-        }
-        if (this.board.getValue(pokemon.positionX, 1)) {
-          this.board.getValue(pokemon.positionX, 1).atk += attackBonus;
-        }
-        if (this.board.getValue(pokemon.positionX, 2)) {
-          this.board.getValue(pokemon.positionX, 2).atk += attackBonus;
-        }
-      }
-      let sleepMalus = 0;
-      if (pokemon.effects.includes(EFFECTS.ATTRACT)) {
-        sleepMalus += 2000;
-      }
-      if (pokemon.effects.includes(EFFECTS.BABY_DOLL_EYES)) {
-        sleepMalus += 4000;
-      }
-      if (sleepMalus > 0) {
-        if (this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)) {
-          this.board.getValue(pokemon.positionX, 5 - pokemon.positionY).status.triggerSleep(sleepMalus);
-        }
-      }
     });
 
+    let redImperialCount = 1;
     this.redTeam.forEach((pokemon) =>{
+      if (pokemon.effects.includes(EFFECTS.IRON_DEFENSE)) {
+        if (redImperialCount > 0) {
+          pokemon.atk = pokemon.atk * 2;
+          redImperialCount --;
+        } else {
+          pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.IRON_DEFENSE), 1);
+        }
+      }
+      if (pokemon.effects.includes(EFFECTS.AUTOTOMIZE)) {
+        pokemon.atk = pokemon.atk * 2;
+      }
       let shieldBonus = 0;
       if (pokemon.effects.includes(EFFECTS.STAMINA)) {
         shieldBonus = 20;
@@ -364,40 +411,6 @@ class Simulation extends Schema {
             cell.value.shield += shieldBonus;
           }
         });
-      }
-      let attackBonus = 0;
-      if (pokemon.effects.includes(EFFECTS.WORK_UP)) {
-        attackBonus = 2;
-      }
-      if (pokemon.effects.includes(EFFECTS.RAGE)) {
-        attackBonus += 4;
-      }
-      if (pokemon.effects.includes(EFFECTS.ANGER_POINT)) {
-        attackBonus += 8;
-      }
-      if (attackBonus >= 0) {
-        if (this.board.getValue(pokemon.positionX, 3)) {
-          this.board.getValue(pokemon.positionX, 3).atk += attackBonus;
-        }
-        if (this.board.getValue(pokemon.positionX, 4)) {
-          this.board.getValue(pokemon.positionX, 4).atk += attackBonus;
-        }
-        if (this.board.getValue(pokemon.positionX, 5)) {
-          this.board.getValue(pokemon.positionX, 5).atk += attackBonus;
-        }
-      }
-
-      let sleepMalus = 0;
-      if (pokemon.effects.includes(EFFECTS.ATTRACT)) {
-        sleepMalus += 2000;
-      }
-      if (pokemon.effects.includes(EFFECTS.BABY_DOLL_EYES)) {
-        sleepMalus += 4000;
-      }
-      if (sleepMalus > 0) {
-        if (this.board.getValue(pokemon.positionX, 5 - pokemon.positionY)) {
-          this.board.getValue(pokemon.positionX, 5 - pokemon.positionY).status.triggerSleep(sleepMalus);
-        }
       }
     });
   }
@@ -541,8 +554,8 @@ class Simulation extends Schema {
               }
             });
 
-            const speedFactor = 1- 0.10 * pokemonNames.length;
-            pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * speedFactor);
+            const speedFactor = 10 * pokemonNames.length;
+            pokemon.handleAttackSpeed(speedFactor);
             pokemon.effects.push(EFFECTS.AGILITY);
           }
           break;
@@ -557,14 +570,12 @@ class Simulation extends Schema {
 
         case EFFECTS.IRON_DEFENSE:
           if (types.includes(TYPE.METAL)) {
-            pokemon.def += Math.ceil(pokemon.baseDef * 0.5);
             pokemon.effects.push(EFFECTS.IRON_DEFENSE);
           }
           break;
 
         case EFFECTS.AUTOTOMIZE:
           if (types.includes(TYPE.METAL)) {
-            pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.5);
             pokemon.effects.push(EFFECTS.AUTOTOMIZE);
           }
           break;
@@ -696,24 +707,36 @@ class Simulation extends Schema {
           }
           break;
 
+        case EFFECTS.SUN_FLOWER:
+          if (types.includes(TYPE.FLORA)) {
+            pokemon.effects.push(EFFECTS.SUN_FLOWER);
+          }
+          break;
+
         case EFFECTS.BATTLE_ARMOR:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.def += Math.ceil(pokemon.baseDef * 0.5);
+            pokemon.shield += 75;
             pokemon.effects.push(EFFECTS.BATTLE_ARMOR);
           }
           break;
 
         case EFFECTS.MOUTAIN_RESISTANCE:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.5);
-            pokemon.shield += Math.ceil(pokemon.hp);
+            pokemon.shield += 150;
             pokemon.effects.push(EFFECTS.MOUTAIN_RESISTANCE);
+          }
+          break;
+
+        case EFFECTS.DIAMOND_STORM:
+          if (types.includes(TYPE.MINERAL)) {
+            pokemon.shield += 300;
+            pokemon.effects.push(EFFECTS.DIAMOND_STORM);
           }
           break;
 
         case EFFECTS.PHANTOM_FORCE:
           if (types.includes(TYPE.AMORPH)) {
-            pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 0.85);
+            pokemon.handleAttackSpeed(15);
             pokemon.effects.push(EFFECTS.PHANTOM_FORCE);
           }
           break;
@@ -723,15 +746,27 @@ class Simulation extends Schema {
             pokemon.effects.push(EFFECTS.CURSE);
           }
 
-        case EFFECTS.ATTRACT:
+        case EFFECTS.AROMATIC_MIST:
           if (types.includes(TYPE.FAIRY)) {
-            pokemon.effects.push(EFFECTS.ATTRACT);
+            pokemon.effects.push(EFFECTS.AROMATIC_MIST);
           }
           break;
 
-        case EFFECTS.BABY_DOLL_EYES:
+        case EFFECTS.FAIRY_WIND:
           if (types.includes(TYPE.FAIRY)) {
-            pokemon.effects.push(EFFECTS.BABY_DOLL_EYES);
+            pokemon.effects.push(EFFECTS.FAIRY_WIND);
+          }
+          break;
+
+        case EFFECTS.STRANGE_STEAM:
+          if (types.includes(TYPE.FAIRY)) {
+            pokemon.effects.push(EFFECTS.STRANGE_STEAM);
+          }
+          break;
+
+        case EFFECTS.DRAGON_ENERGY:
+          if (types.includes(TYPE.DRAGON)) {
+            pokemon.effects.push(EFFECTS.DRAGON_ENERGY);
           }
           break;
 
@@ -761,6 +796,36 @@ class Simulation extends Schema {
           }
           break;
 
+        case EFFECTS.LARGO:
+          if (types.includes(TYPE.SOUND)) {
+            pokemon.effects.push(EFFECTS.LARGO);
+          }
+          break;
+
+        case EFFECTS.ALLEGRO:
+          if (types.includes(TYPE.SOUND)) {
+            pokemon.effects.push(EFFECTS.ALLEGRO);
+          }
+          break;
+
+        case EFFECTS.PRESTO:
+          if (types.includes(TYPE.SOUND)) {
+            pokemon.effects.push(EFFECTS.PRESTO);
+          }
+          break;
+
+        case EFFECTS.SWARM:
+          if (types.includes(TYPE.BUG)) {
+            pokemon.effects.push(EFFECTS.SWARM);
+          }
+          break;
+
+        case EFFECTS.STICKY_WEB:
+          if (types.includes(TYPE.BUG)) {
+            pokemon.effects.push(EFFECTS.STICKY_WEB);
+          }
+          break;
+
         default:
           break;
       }
@@ -769,7 +834,7 @@ class Simulation extends Schema {
     ennemyEffects.forEach((effect) => {
       switch (effect) {
         case EFFECTS.SPORE:
-          pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 1.3);
+          pokemon.handleAttackSpeed(-30);
           pokemon.effects.push(EFFECTS.SPORE);
           break;
 
@@ -785,16 +850,6 @@ class Simulation extends Schema {
 
         case EFFECTS.SANDSTORM:
           pokemon.effects.push(EFFECTS.SANDSTORM);
-          break;
-
-        case EFFECTS.INTIMIDATE:
-          pokemon.atk -= Math.ceil(pokemon.baseAtk * 0.3);
-          pokemon.effects.push(EFFECTS.INTIMIDATE);
-          break;
-
-        case EFFECTS.STICKY_WEB:
-          pokemon.atkSpeed = Math.max(400, pokemon.atkSpeed * 1.3);
-          pokemon.effects.push(EFFECTS.STICKY_WEB);
           break;
 
         default:

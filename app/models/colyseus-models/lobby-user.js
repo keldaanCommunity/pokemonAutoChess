@@ -9,8 +9,8 @@ class LobbyUser extends Schema {
     super();
 
     this.honors = new schema.ArraySchema();
-    if(honors && honors.length && honors.length != 0){
-      honors.forEach(h => {
+    if (honors && honors.length && honors.length != 0) {
+      honors.forEach((h) => {
         this.honors.push(h);
       });
     }

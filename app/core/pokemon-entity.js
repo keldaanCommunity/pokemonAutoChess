@@ -48,8 +48,9 @@ class PokemonEntity extends schema.Schema {
           shield: 0,
           life: pokemon.hp,
           atkSpeed: pokemon.atkSpeed,
+          atkSpeedBonus: 0,
           range: pokemon.range,
-          cooldown: 1000,
+          cooldown: 500,
           manaCooldown: 1000,
           team: team,
           attackSprite: pokemon.attackSprite,
@@ -71,6 +72,15 @@ class PokemonEntity extends schema.Schema {
     if (updateEffects) {
       this.simulation.applyItemsEffects(this, this.types);
     }
+  }
+
+  getAttackDelay() {
+    return 1000 / this.atkSpeed;
+  }
+
+  handleAttackSpeed(buff) {
+    this.atkSpeedBonus = this.atkSpeedBonus + buff;
+    this.atkSpeed = Number(Math.min(2.5, Math.max(0.2, 0.75 * (1 + this.atkSpeedBonus / 100))).toFixed(2));
   }
 
   handleDamage(damage, board, attackType, attacker) {
@@ -121,7 +131,8 @@ schema.defineTypes(PokemonEntity, {
   shield: 'uint16',
   team: 'uint8',
   range: 'uint8',
-  atkSpeed: 'uint16',
+  atkSpeed: 'float32',
+  atkSpeedBonus: 'int8',
   targetX: 'int8',
   targetY: 'int8',
   attackSprite: 'string',

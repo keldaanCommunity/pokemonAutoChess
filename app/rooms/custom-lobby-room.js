@@ -540,9 +540,14 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
               if (user.donor) {
                 changeNeeded = true;
               }
-            
+
             case 'absol':
-              if(user.honors.includes('absol')){
+              if (user.honors.includes('absol')) {
+                changeNeeded = true;
+              }
+
+            case 'absol':
+              if (user.honors.includes('absol')) {
                 changeNeeded = true;
               }
 

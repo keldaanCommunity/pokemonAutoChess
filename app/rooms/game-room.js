@@ -5,7 +5,7 @@ const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
 const UserMetadata = require('../models/mongo-models/user-metadata');
 const BOT = require('../models/mongo-models/bot');
-const {XP_PLACE, XP_TABLE, PKM, TYPE, EFFECTS} = require('../models/enum');
+const {XP_PLACE, XP_TABLE, PKM} = require('../models/enum');
 const PokemonFactory = require('../models/pokemon-factory');
 const EloRank = require('elo-rank');
 const admin = require('firebase-admin');
@@ -68,7 +68,7 @@ class GameRoom extends colyseus.Room {
             detail: message.detail
           });
         } catch (error) {
-          let errorInformation = {
+          const errorInformation = {
             'updateBoard': true,
             'updateItems': true,
             'field': message.place
@@ -396,7 +396,7 @@ class GameRoom extends colyseus.Room {
           }
         });
 
-        if (count == 3 || (pokemon.types.includes(TYPE.BUG) && count == 2 && player.effects.list.includes(EFFECTS.SWARM))) {
+        if (count == 3) {
           let x;
           let y;
 

@@ -6,9 +6,9 @@ class GameStore extends Component{
     render(){
         const style = {
             position: 'absolute',
-            left: '23%',
+            left: '19%',
             display: 'flex',
-            width: '60%',
+            width: '65%',
             height:'90%',
             top:'4%',
             listStyleType: 'none',

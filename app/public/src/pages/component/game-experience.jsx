@@ -6,7 +6,7 @@ class GameExperience extends Component{
         const style = {
             position:'absolute',
             right: '1%',
-            bottom: '0%',
+            bottom: '3%',
             width: '15%'
         }
 

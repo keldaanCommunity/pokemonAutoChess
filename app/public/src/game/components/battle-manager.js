@@ -165,7 +165,31 @@ export default class BattleManager {
             }
           } else if (change.field == 'ult') {
             if (change.value != 0) {
-              children[i].specialAttackAnimation();
+              children[i].specialAttackAnimation(this.group);
+            }
+          } else if (change.field == 'petalDanceCount') {
+            if (change.value != 0) {
+              children[i].petalDanceAnimation();
+            }
+          } else if (change.field == 'fieldCount') {
+            if (change.value != 0) {
+              children[i].fieldDeathAnimation();
+            }
+          } else if (change.field == 'soundCount') {
+            if (change.value != 0) {
+              children[i].soundAnimation();
+            }
+          } else if (change.field == 'fairyCritCount') {
+            if (change.value != 0) {
+              children[i].fairyCritAnimation();
+            }
+          } else if ( change.field == 'attackCount') {
+            if (change.value != 0) {
+              // console.log(change.value, children[i].action, children[i].targetX, children[i].targetY);
+              if (children[i].action == 'ATTACKING' && children[i].targetX !== null && children[i].targetY !== null) {
+                this.animationManager.animatePokemon(children[i]);
+                children[i].attackAnimation();
+              }
             }
           }
         }
@@ -214,7 +238,7 @@ export default class BattleManager {
             children[i].atkSpeed = pokemon.atkSpeed;
             const detail = children[i].getFirst('objType', 'detail');
             if (detail) {
-              detail.atkSpeed.setText(pokemon.atkSpeed);
+              detail.atkSpeed.setText(pokemon.atkSpeed.toFixed(2));
             }
           } else if (change.field =='life') {
             if (change.value && change.previousValue) {
@@ -273,7 +297,7 @@ export default class BattleManager {
             children[i].range = pokemon.range;
             const detail = children[i].getFirst('objType', 'detail');
             if (detail) {
-              detail.atkSpeed.setText(pokemon.range);
+              detail.range.setText(pokemon.range);
             }
           } else if (change.field =='targetX') {
             if (pokemon.targetX >= 0) {
@@ -281,21 +305,11 @@ export default class BattleManager {
             } else {
               children[i].targetX = null;
             }
-
-            if (children[i].action == 'ATTACKING' && children[i].targetX !== null && children[i].targetY !== null) {
-              this.animationManager.animatePokemon(children[i]);
-              children[i].attackAnimation();
-            }
           } else if (change.field =='targetY') {
             if (pokemon.targetY >= 0) {
               children[i].targetY = pokemon.targetY;
             } else {
               children[i].targetY = null;
-            }
-
-            if (children[i].action == 'ATTACKING' && children[i].targetX !== null && children[i].targetY !== null) {
-              this.animationManager.animatePokemon(children[i]);
-              children[i].attackAnimation();
             }
           }
           break;
