@@ -76,7 +76,7 @@ class OnDragDropCommand extends Command {
             const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y);
             if (pokemonToClone && pokemonToClone.rarity != RARITY.MYTHICAL && !pokemonToClone.types.includes(TYPE.FOSSIL)) {
               dittoReplaced = true;
-              const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonFamily(pokemonToClone.name));
+              const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name));
               this.state.players.get(playerId).board.delete(detail.id);
               const position = this.room.getFirstAvailablePositionInBoard(playerId);
               if (position !== undefined) {
@@ -406,7 +406,15 @@ class OnSellDropCommand extends Command {
       this.state.players.get(client.auth.uid).board.has(detail.pokemonId)) {
       const pokemon = this.state.players.get(client.auth.uid).board.get(detail.pokemonId);
       const player = this.state.players.get(client.auth.uid);
-      player.money += COST[pokemon.rarity] * pokemon.stars;
+
+      if(PokemonFactory.getPokemonBaseEvolution(pokemon.name) == PKM.EEVEE)
+      {
+        player.money += COST[pokemon.rarity];
+      }
+      else
+      {
+        player.money += COST[pokemon.rarity] * pokemon.stars;
+      }
 
       const items = pokemon.items.getAllItems();
       items.forEach((it)=>{
@@ -428,7 +436,6 @@ class OnRefreshCommand extends Command {
       const player = this.state.players.get(id);
       if (player.money >= 2) {
         this.state.shop.assignShop(player);
-        player.money -= 2;
       }
     }
   }

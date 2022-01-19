@@ -364,6 +364,29 @@ class PokemonFactory {
     }
   }
 
+  static getPokemonBaseEvolution(name){
+    switch(name) {
+      case PKM.VAPOREON:
+        return PKM.EEVEE;
+      case PKM.JOLTEON:
+        return PKM.EEVEE;
+      case PKM.FLAREON:
+        return PKM.EEVEE;
+      case PKM.ESPEON:
+        return PKM.EEVEE;
+      case PKM.UMBREON:
+        return PKM.EEVEE;
+      case PKM.LEAFEON:
+        return PKM.EEVEE;
+      case PKM.SYLVEON:
+        return PKM.EEVEE;
+      case PKM.GLACEON:
+        return PKM.EEVEE;
+      default:
+        return this.getPokemonFamily(name)
+    }
+  }
+
   static getPokemonFamily(name) {
     switch (name) {
       case PKM.BULBASAUR:
