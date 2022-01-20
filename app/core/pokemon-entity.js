@@ -111,17 +111,14 @@ class PokemonEntity extends schema.Schema {
     }
   }
 
-  addCritChance(value)
-  {
+  addCritChance(value) {
     // for every 5% crit chance > 100, +0.1 crit damage
-    this.critChance += value
+    this.critChance += value;
 
-    if(this.critChance > 100)
-    {
-      this.critDamage += Math.round((this.critChance - 100) * 10) / 500
-      this.critChance = 100
+    if (this.critChance > 100) {
+      this.critDamage += Math.round((this.critChance - 100) * 10) / 500;
+      this.critChance = 100;
     }
-
   }
 }
 

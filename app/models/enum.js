@@ -1698,7 +1698,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Relic Song'
     },
     description: {
-      eng: 'Put asleep the ennemy team for 1/2/3s'
+      eng: 'Put asleep the ennemy team for .5/1/2s'
     }
   },
   DISARMING_VOICE: {
@@ -1864,7 +1864,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Confusion'
     },
     description: {
-      eng: 'Makes the target confused for 1/2/4 seconds',
+      eng: 'Makes the target confused for .5/1.5/3 seconds',
       esp: 'Hace que todo el equipo se confunda durante 1/2/4 segundos',
       fra: 'Rend toute la team ennemie confus pendant 1/ 2 4 secondes'
     }
@@ -2957,7 +2957,7 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 1,
           title: `(-) Charge`,
-          text: `Your Electric pokemon have +10% speed. (stacks)`
+          text: `Your Electric pokemon have +12% attack speed. (stacks)`
         }
       ],
       esp: [
@@ -3581,17 +3581,17 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 2,
           title: `(2) Aromatic Mist`,
-          text: `Fairy pokemons shock nearby enemies for 10 special damages whenever they deal or receive a critical strike`
+          text: `Fairy pokemons shock nearby enemies for 15 special damages whenever they deal or receive a critical strike`
         },
         {
           trigger: 4,
           title: `(4) Fairy Wind`,
-          text: `Fairy pokemons shock nearby enemies for 25 special damages whenever they deal or receive a critical strike`
+          text: `Fairy pokemons shock nearby enemies for 30 special damages whenever they deal or receive a critical strike`
         },
         {
           trigger: 6,
           title: `(6) Strange Steam`,
-          text: `Fairy pokemons shock nearby enemies for 50 special damages whenever they deal or receive a critical strike`
+          text: `Fairy pokemons shock nearby enemies for 60 special damages whenever they deal or receive a critical strike`
         }
       ]
     }

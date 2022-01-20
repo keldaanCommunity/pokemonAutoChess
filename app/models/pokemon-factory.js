@@ -364,8 +364,8 @@ class PokemonFactory {
     }
   }
 
-  static getPokemonBaseEvolution(name){
-    switch(name) {
+  static getPokemonBaseEvolution(name) {
+    switch (name) {
       case PKM.VAPOREON:
         return PKM.EEVEE;
       case PKM.JOLTEON:
@@ -383,7 +383,7 @@ class PokemonFactory {
       case PKM.GLACEON:
         return PKM.EEVEE;
       default:
-        return this.getPokemonFamily(name)
+        return this.getPokemonFamily(name);
     }
   }
 

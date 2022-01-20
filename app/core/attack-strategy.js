@@ -187,13 +187,13 @@ class RelicSongStrategy extends AttackStrategy {
     let d = 0;
     switch (pokemon.stars) {
       case 1:
-        d = 1000;
+        d = 500;
         break;
       case 2:
-        d = 2000;
+        d = 1000;
         break;
       case 3:
-        d = 3000;
+        d = 2000;
         break;
       default:
         break;
@@ -426,13 +426,13 @@ class VoltSwitchStrategy extends AttackStrategy {
     let damage = 0;
     switch (pokemon.stars) {
       case 1:
-        damage = 20;
-        break;
-      case 2:
         damage = 40;
         break;
-      case 3:
+      case 2:
         damage = 80;
+        break;
+      case 3:
+        damage = 160;
         break;
       default:
         break;
@@ -839,13 +839,13 @@ class ConfusionStrategy extends AttackStrategy {
     let timer = 0;
     switch (pokemon.stars) {
       case 1:
-        timer = 1000;
+        timer = 500;
         break;
       case 2:
-        timer = 2000;
+        timer = 1500;
         break;
       case 3:
-        timer = 4000;
+        timer = 3000;
         break;
       default:
         break;

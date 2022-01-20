@@ -83,11 +83,11 @@ class AttackingState extends PokemonState {
         if (pokemon.effects.includes(EFFECTS.FAIRY_WIND) || pokemon.effects.includes(EFFECTS.STRANGE_STEAM) || pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
           let d = 0;
           if (pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
-            d = 10;
+            d = 15;
           } else if (pokemon.effects.includes(EFFECTS.FAIRY_WIND)) {
-            d = 25;
+            d = 30;
           } else if (pokemon.effects.includes(EFFECTS.STRANGE_STEAM)) {
-            d = 50;
+            d = 60;
           }
           const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
 
@@ -101,11 +101,11 @@ class AttackingState extends PokemonState {
         if (target.effects.includes(EFFECTS.FAIRY_WIND) || target.effects.includes(EFFECTS.STRANGE_STEAM) || target.effects.includes(EFFECTS.AROMATIC_MIST)) {
           let d = 0;
           if (target.effects.includes(EFFECTS.AROMATIC_MIST)) {
-            d = 10;
+            d = 15;
           } else if (target.effects.includes(EFFECTS.FAIRY_WIND)) {
-            d = 25;
+            d = 30;
           } else if (target.effects.includes(EFFECTS.STRANGE_STEAM)) {
-            d = 50;
+            d = 60;
           }
           const cells = board.getAdjacentCells(target.positionX, target.positionY);
 
