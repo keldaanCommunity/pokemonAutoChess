@@ -69,27 +69,31 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     });
 
     this.onMessage('bot-creation', (client, message)=>{
-      const bot = message.bot;
-      const user = this.state.users.get(client.auth.uid);
-      pastebin.createPaste({text: JSON.stringify(bot), title: `${user.name} has uploaded BOT ${bot.avatar}`, format: 'json'}).then((data) => {
-        const dsEmbed = new MessageEmbed()
-            .setTitle(`BOT ${bot.avatar} created by ${bot.author}`)
-            .setURL(data)
-            .setAuthor(user.name, `https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/dist/assets/avatar/${user.avatar}.png`)
-            .setDescription(`A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`)
-            .setThumbnail(`https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/dist/assets/avatar/${bot.avatar}.png`);
-        client.send('pastebin-url', {url: data});
-        try {
-          this.discordWebhook.send({
-            embeds: [dsEmbed]
-          });
-        } catch (error) {
-          console.log(error);
-        }
-      })
-          .catch((err) => {
-            console.log(err);
-          });
+      try {
+        const bot = message.bot;
+        const user = this.state.users.get(client.auth.uid);
+        pastebin.createPaste({text: JSON.stringify(bot), title: `${user.name} has uploaded BOT ${bot.avatar}`, format: 'json'}).then((data) => {
+          const dsEmbed = new MessageEmbed()
+              .setTitle(`BOT ${bot.avatar} created by ${bot.author}`)
+              .setURL(data)
+              .setAuthor(user.name, `https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/dist/assets/avatar/${user.avatar}.png`)
+              .setDescription(`A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`)
+              .setThumbnail(`https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/dist/assets/avatar/${bot.avatar}.png`);
+          client.send('pastebin-url', {url: data});
+          try {
+            this.discordWebhook.send({
+              embeds: [dsEmbed]
+            });
+          } catch (error) {
+            console.log(error);
+          }
+        })
+            .catch((err) => {
+              console.log(err);
+            });
+      } catch (error) {
+        console.log(error);
+      }
     });
 
     this.onMessage('map', (client, message) => {
