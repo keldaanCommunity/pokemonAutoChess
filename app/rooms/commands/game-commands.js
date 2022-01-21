@@ -579,13 +579,13 @@ class OnUpdatePhaseCommand extends Command {
     } else if (stageLevel >= 25) {
       multiplier = 2.5;
     }
-
+    damage = damage * multiplier;
     if (redTeam.size > 0) {
       redTeam.forEach((pokemon, key) => {
         damage += pokemon.stars;
       });
     }
-    damage = Math.max(Math.round(damage * multiplier), 0);
+    damage = Math.max(Math.round(damage), 0);
     return damage;
   }
 
