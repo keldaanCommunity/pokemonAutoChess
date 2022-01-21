@@ -145,7 +145,7 @@ class Lobby extends Component {
 
     createRoom() {
         firebase.auth().currentUser.getIdToken().then(token =>{
-            this.client.create('room', {idToken: token}).then((room) => {
+            this.client.create('room', {idToken: token, ownerId: this.uid}).then((room) => {
                 this.closeConnection(room);
             }).catch((e) => {
               console.error('join error', e);

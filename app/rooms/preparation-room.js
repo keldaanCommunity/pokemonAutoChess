@@ -24,8 +24,9 @@ class PreparationRoom extends colyseus.Room {
 
   onCreate(options) {
     console.log('create preparation room');
+    // console.log(options);
     const self = this;
-    this.setState(new PreparationState());
+    this.setState(new PreparationState(options.ownerId));
     this.maxClients = 8;
 
     Bot.find({}, ['avatar', 'elo'], null, (err, bots) => {

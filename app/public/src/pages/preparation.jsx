@@ -20,7 +20,9 @@ class Preparation extends Component {
             gameId: '',
             isSignedIn: false,
             toLobby: false,
-            connected: false
+            connected: false,
+            ownerId:'',
+            ownerName:''
         };
 
         // Initialize Firebase
@@ -86,6 +88,13 @@ class Preparation extends Component {
 
         this.room.state.users.onRemove = (player, key) => {
             this.setState({users: this.room.state.users});
+        };
+
+        this.room.state.onChange = changes =>{
+            this.setState({
+                ownerId: this.room.state.ownerId,
+                ownerName: this.room.state.ownerName
+            });
         };
     }
 
@@ -210,6 +219,9 @@ class Preparation extends Component {
                         removeBot={this.removeBot.bind(this)}
                         toggleReady={this.toggleReady.bind(this)}
                         startGame={this.startGame.bind(this)}
+                        ownerId={this.state.ownerId}
+                        uid={this.uid}
+                        ownerName={this.state.ownerName}
                     />
                     <Chat 
                         messages={this.state.messages}

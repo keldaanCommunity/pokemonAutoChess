@@ -3,7 +3,8 @@ import {RANK} from '../../../../models/enum';
 
 const style = {
     display:'flex',
-    alignItems:'center'
+    alignItems:'center',
+    width:'112px'
 }
 
 const imgStyle={

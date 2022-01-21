@@ -7,6 +7,12 @@ class OnJoinCommand extends Command {
     UserMetadata.findOne({'uid': auth.uid}, (err, user)=>{
       if (user) {
         this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.map));
+        console.log(user.uid);
+        console.log(this.state.ownerId);
+        if (user.uid == this.state.ownerId) {
+          console.log(user.displayName);
+          this.state.ownerName = user.displayName;
+        }
         this.room.broadcast('messages', {
           'name': 'Server',
           'payload': `${ user.displayName } joined.`,
@@ -126,7 +132,7 @@ class OnAddBotCommand extends Command {
 
 class OnRemoveBotCommand extends Command {
   execute() {
-    //console.log('remove bot');
+    // console.log('remove bot');
     let botFound = false;
     this.state.users.forEach((user, key) => {
       if (user.isBot && !botFound) {
