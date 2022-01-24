@@ -2,55 +2,86 @@ import {GameObjects} from 'phaser';
 import ItemContainer from './item-container';
 
 export default class ItemsContainer extends GameObjects.Container {
-  constructor(scene, x, y) {
+  ITEM_SIZE = 80
+
+  constructor(scene, stuff, x, y) {
     super(scene, x, y);
+
+    console.log(stuff.length)
     scene.add.existing(this);
   }
 
-  changeStuff(field, value) {
+  changeStuff(place, value) {
     if (value == '') {
-      this.removeItem(field);
-    } else {
-      switch (field) {
-        case 'item0':
-          this.add(new ItemContainer(this.scene, 0, 0, value, true, 'item0'));
-          break;
-        case 'item1':
-          this.add(new ItemContainer(this.scene, 0, 80, value, true, 'item1'));
-          break;
-        case 'item2':
-          this.add(new ItemContainer(this.scene, 0, 160, value, true, 'item2'));
-          break;
-        case 'item3':
-          this.add(new ItemContainer(this.scene, 0, 240, value, true, 'item3'));
-          break;
-        case 'item4':
-          this.add(new ItemContainer(this.scene, 0, 320, value, true, 'item4'));
-          break;
-        case 'item5':
-          this.add(new ItemContainer(this.scene, 0, 400, value, true, 'item5'));
-          break;
-        case 'item6':
-          this.add(new ItemContainer(this.scene, 0, 480, value, true, 'item6'));
-          break;
-        case 'item7':
-          this.add(new ItemContainer(this.scene, 0, 560, value, true, 'item7'));
-          break;
-        case 'item8':
-          this.add(new ItemContainer(this.scene, 0, 640, value, true, 'item8'));
-          break;
-      }
+      this.removeItem(place);
+    } 
+    else{
+      this.addAtPlace(place, value)
+    }
+    
+  }
+
+  addAtPlace(place, value)
+  {
+
+    if(!value)
+    {
+      console.warn('adding empty value at', place)
+      return
+    }
+
+    const placeInt = this.convertPlaceToInt(place)
+
+    this.add(new ItemContainer(this.scene, 0, placeInt * this.ITEM_SIZE, value, true, place));
+  }
+
+  convertPlaceToInt(place)
+  {
+    switch (place) {
+      case 'item0':
+        return 0;
+      case 'item1':
+        return 1;
+      case 'item2':
+        return 2;
+      case 'item3':
+        return 3;
+      case 'item4':
+        return 4;
+      case 'item5':
+        return 5;
+      case 'item6':
+        return 6;
+      case 'item7':
+        return 7;
+      case 'item8':
+        return 8;
     }
   }
 
-  removeItem(field) {
-    const itemContainer = this.getFirst('place', field);
-    this.remove(itemContainer, true);
+  findItem(place) {
+    return this.getFirst('place', place);
   }
 
-  updateItem(field) {
-    const name = this.getFirst('place', field).name;
-    this.removeItem(field);
-    this.add(new ItemContainer(this.scene, 0, 0, name, true, field));
+  removeItem(place) {
+    const item = this.findItem(place)
+    if(item)
+    {
+      this.remove(item, true);
+    }
+    else
+    {
+      console.warn('no item found at', place)
+    }
+  }
+
+  updateItem(place) {
+    const item = this.findItem(place)
+    if(item)
+    {
+      let y = this.convertPlaceToInt(place) * this.ITEM_SIZE
+      item.x = 0;
+      item.y = y;
+    }
   }
 }

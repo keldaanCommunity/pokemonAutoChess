@@ -181,7 +181,7 @@ export default class GameScene extends Scene {
 
     this.battle = this.add.group();
     this.animationManager = new AnimationManager(this, this.room.state.mapType);
-    this.itemsContainer = new ItemsContainer(this, 24*24 + 10, 5*24 + 10);
+    this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].stuff, 24*24 + 10, 5*24 + 10);
     this.boardManager = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
@@ -340,9 +340,10 @@ export default class GameScene extends Scene {
         if (gameObject.objType == 'pokemon') {
           window.lastDragDropPokemon = gameObject;
         }
-        if (gameObject.objType == 'item') {
-          this.itemsContainer.updateItem(gameObject.place);
-        }
+        // if (gameObject.objType == 'item') {
+        //   console.log('in game scene before update item')
+        //   this.itemsContainer.updateItem(gameObject.place);
+        // }
       }
     }, this);
 
