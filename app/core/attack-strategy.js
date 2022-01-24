@@ -14,7 +14,7 @@ class AttackStrategy {
       } else if (pokemon.effects.includes(EFFECTS.ALLEGRO)) {
         atk += 6;
       } else if (pokemon.effects.includes(EFFECTS.PRESTO)) {
-        atk += 9;
+        atk += 8;
       }
       if (atk > 0) {
         board.forEach((x, y, tg) => {
