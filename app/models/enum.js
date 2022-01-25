@@ -3703,7 +3703,7 @@ const TYPE_DETAILS = Object.freeze({
         }, {
           trigger: 7,
           title: `(7) Presto`,
-          text: `+9 attack each time a sound pokemon use its ability`
+          text: `+8 attack each time a sound pokemon use its ability`
         }
       ]
     }
