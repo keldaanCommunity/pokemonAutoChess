@@ -833,11 +833,6 @@ class Simulation extends Schema {
 
     ennemyEffects.forEach((effect) => {
       switch (effect) {
-        case EFFECTS.SPORE:
-          pokemon.handleAttackSpeed(-30);
-          pokemon.effects.push(EFFECTS.SPORE);
-          break;
-
         case EFFECTS.SPIKES:
           pokemon.handleDamage(Math.ceil(pokemon.hp * 0.1), this.board, ATTACK_TYPE.TRUE);
           pokemon.effects.push(EFFECTS.SPIKES);
