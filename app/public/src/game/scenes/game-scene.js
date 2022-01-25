@@ -181,7 +181,7 @@ export default class GameScene extends Scene {
 
     this.battle = this.add.group();
     this.animationManager = new AnimationManager(this, this.room.state.mapType);
-    this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].stuff, 24*24 + 10, 5*24 + 10);
+    this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].stuff.items, 24*24 + 10, 5*24 + 10);
     this.boardManager = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
@@ -314,9 +314,11 @@ export default class GameScene extends Scene {
     this.input.on('drop', (pointer, gameObject, dropZone) => {
       this.removeRectangles();
       // console.log(dropZone.name);
+
+      
       if (dropZone.name == 'sell-zone') {
         if (gameObject.objType == 'item') {
-          this.itemsContainer.updateItem(gameObject.place);
+          this.itemsContainer.updateItems();
         }
         document.getElementById('game').dispatchEvent(new CustomEvent('sell-drop', {
           detail: {
@@ -324,25 +326,37 @@ export default class GameScene extends Scene {
           }
         }));
       } else {
-        let place = '';
-        if (gameObject.place) {
-          place = gameObject.place;
-        }
-        document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
-          detail: {
-            'x': dropZone.name.substr(5, 1),
-            'y': dropZone.name.substr(7, 1),
-            'id': gameObject.id,
-            'objType': gameObject.objType,
-            'place': place
-          }
-        }));
         if (gameObject.objType == 'pokemon') {
+          document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
+            detail: {
+              'x': dropZone.name.substr(5, 1),
+              'y': dropZone.name.substr(7, 1),
+              'id': gameObject.id,
+              'objType': gameObject.objType
+            }
+          }))
           window.lastDragDropPokemon = gameObject;
+        }else if(gameObject.objType == 'item'){
+          
+          
+          document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
+            detail: {
+              'x': dropZone.name.substr(5, 1),
+              'y': dropZone.name.substr(7, 1),
+              'id': gameObject.name,
+              'objType': gameObject.objType
+            }
+          }));
+          
         }
+        
+        
+
+        
+        
         // if (gameObject.objType == 'item') {
         //   console.log('in game scene before update item')
-        //   this.itemsContainer.updateItem(gameObject.place);
+        //   this.itemsContainer.updateItem(gameObject.plce);
         // }
       }
     }, this);

@@ -72,9 +72,18 @@ class GameContainer {
       self.handleBoardPokemonRemove(player, pokemon);
     };
 
-    player.stuff.onChange = ((changes) =>{
-      changes.forEach((change) => this.handleStuffChange(change, player));
-    });
+    player.stuff.items.onAdd = ((value, key) => {
+      //console.log('added', value, key)
+      this.handleItemAdd(player, value)
+      
+    })
+
+    player.stuff.items.onRemove = ((value, key) => {
+      //console.log('removed', value, key)
+      this.handleItemRemove(player, value)
+    })
+
+
 
     player.simulation.onChange = ((changes) => {
       if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').entryHazardsManager) {
@@ -196,11 +205,21 @@ class GameContainer {
     }
   }
 
-  handleStuffChange(change, player) {
+  handleItemAdd(player, value) {
     if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').itemsContainer) {
-      this.game.scene.getScene('gameScene').itemsContainer.changeStuff(change.field, change.value);
+      this.game.scene.getScene('gameScene').itemsContainer.addItem(value);
     }
   }
+
+  handleItemRemove(player, value) {
+    if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').itemsContainer) {
+      this.game.scene.getScene('gameScene').itemsContainer.removeItem(value); 
+    }
+  }
+
+  
+
+
 
   handlePokemonChange(playerId, change, pokemon) {
     // console.log('simulation change' + change.field);
@@ -285,7 +304,7 @@ class GameContainer {
     }
 
     if (message.updateItems) {
-      this.game.scene.getScene('gameScene').itemsContainer.updateItem(message.field);
+      this.game.scene.getScene('gameScene').itemsContainer.updateItems();
     }
   }
 

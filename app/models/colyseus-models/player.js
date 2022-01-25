@@ -4,7 +4,7 @@ const ExperienceManager = require('./experience-manager');
 const Simulation = require('../../core/simulation');
 const Synergies = require('./synergies');
 const Effects = require('../effects');
-const Stuff = require('./stuff');
+const Inventory =  require('./inventory');
 const BattleResult = require('./battle-result');
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
@@ -21,7 +21,7 @@ class Player extends Schema {
       board: new MapSchema(),
       shop: new ArraySchema(),
       history: new ArraySchema(),
-      stuff: new Stuff(),
+      stuff: new Inventory(),
       itemsProposition: new ArraySchema(),
       experienceManager: new ExperienceManager(),
       synergies: new Synergies(),
@@ -78,7 +78,7 @@ schema.defineTypes(Player, {
   opponentName: 'string',
   opponentAvatar: 'string',
   boardSize: 'uint8',
-  stuff: Stuff,
+  stuff: Inventory,
   rank: 'uint8',
   exp: 'uint16',
   alive: 'boolean',
