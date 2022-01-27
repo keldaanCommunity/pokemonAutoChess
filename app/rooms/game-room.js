@@ -70,8 +70,7 @@ class GameRoom extends colyseus.Room {
         } catch (error) {
           const errorInformation = {
             'updateBoard': true,
-            'updateItems': true,
-            'field': message.place
+            'updateItems': true
           };
           client.send('DragDropFailed', errorInformation);
           console.log('drag drop error', message);

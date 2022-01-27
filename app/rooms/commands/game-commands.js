@@ -60,13 +60,12 @@ class OnDragDropCommand extends Command {
     let dittoReplaced = false;
     const message = {
       'updateBoard': true,
-      'updateItems': true,
-      'field': detail.place
+      'updateItems': true
     };
     const playerId = client.auth.uid; ;
-
     if (this.state.players.has(playerId)) {
       if (detail.objType == 'pokemon') {
+        
         message.updateItems = false;
         if (this.state.players.get(playerId).board.has(detail.id)) {
           const pokemon = this.state.players.get(playerId).board.get(detail.id);
@@ -119,8 +118,10 @@ class OnDragDropCommand extends Command {
       }
       if (detail.objType == 'item') {
         message.updateBoard = false;
-        const item = this.state.players.get(playerId).stuff[detail.place];
-        if ( item ) {
+        
+        const item = detail.id
+
+        if (this.state.players.get(playerId).stuff.has(item)) {
           const x = parseInt(detail.x);
           const y = parseInt(detail.y);
           let eevolution;

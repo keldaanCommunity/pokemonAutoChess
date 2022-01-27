@@ -3,7 +3,7 @@ import {GameObjects} from 'phaser';
 import ItemDetail from './item-detail';
 
 export default class ItemContainer extends Button {
-  constructor(scene, x, y, item, dragable, place) {
+  constructor(scene, x, y, item, dragable) {
     super(scene, x, y, dragable ? 70: 15, dragable ? 70: 15);
     this.objType = 'item';
     if (dragable) {
@@ -14,7 +14,6 @@ export default class ItemContainer extends Button {
     this.sprite = new GameObjects.Image(scene, 0, 0, 'items', item).setScale(dragable ? 2:1, dragable? 2:1);
     this.detail = new ItemDetail(scene, 15, 0, item);
     this.name = item;
-    this.place = place;
     this.add(this.sprite);
     this.add(this.detail);
     if (dragable) {
