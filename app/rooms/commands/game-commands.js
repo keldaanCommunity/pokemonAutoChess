@@ -676,10 +676,12 @@ class OnUpdatePhaseCommand extends Command {
     this.state.phase = STATE.PICK;
     this.state.time = process.env.MODE == 'dev' ? 20000 : 30000;
 
+    const isPVE = (this.getPVEIndex(this.state.stageLevel) >= 0)
+
     this.state.players.forEach((player, key) => {
       player.simulation.stop();
       if (player.alive) {
-        if (player.opponentName == 'PVE' && player.getLastBattleResult() == BATTLE_RESULT.WIN) {
+        if (isPVE && player.getLastBattleResult() == BATTLE_RESULT.WIN) {
           const items = ItemFactory.createRandomItems();
           // let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
           items.forEach((item)=>{
@@ -760,11 +762,21 @@ class OnUpdatePhaseCommand extends Command {
     return commands;
   }
 
+  getPVEIndex(stageLevel){
+    const result = NEUTRAL_STAGE.findIndex((stage)=>{
+      return stage.turn == stageLevel;
+    });
+
+    return result
+  }
+
   initializeFightingPhase() {
     this.state.phase = STATE.FIGHT;
     this.state.time = 40000;
     this.state.stageLevel += 1;
     this.state.botManager.updateBots();
+
+    const stageIndex = this.getPVEIndex(this.state.stageLevel)
 
     this.state.players.forEach((player, key) => {
       if (player.alive) {
@@ -773,9 +785,7 @@ class OnUpdatePhaseCommand extends Command {
             player.itemsProposition.pop();
           }
         }
-        const stageIndex = NEUTRAL_STAGE.findIndex((stage)=>{
-          return stage.turn == this.state.stageLevel;
-        });
+        
         if (stageIndex != -1) {
           player.opponentName = 'PVE';
           player.opponentAvatar = NEUTRAL_STAGE[stageIndex].avatar;
