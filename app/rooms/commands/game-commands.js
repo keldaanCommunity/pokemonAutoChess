@@ -410,7 +410,10 @@ class OnSellDropCommand extends Command {
 
       if (PokemonFactory.getPokemonBaseEvolution(pokemon.name) == PKM.EEVEE) {
         player.money += COST[pokemon.rarity];
-      } else {
+      } else if(pokemon.types.includes(TYPE.FOSSIL)){
+        player.money += 5 + COST[pokemon.rarity] * pokemon.stars
+      } 
+      else {
         player.money += COST[pokemon.rarity] * pokemon.stars;
       }
 
