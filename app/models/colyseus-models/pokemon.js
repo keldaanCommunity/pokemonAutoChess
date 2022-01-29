@@ -731,19 +731,19 @@ class Ludicolo extends Pokemon {
 
 class Togepi extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.TOGEPI, 'togépi', [TYPE.NORMAL, TYPE.FAIRY], RARITY.RARE, 'RARE', 175, PKM.TOGETIC, 80, 5, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 1, 50, SPECIAL_SKILL.WISH);
+    super('Nintendo', PKM.TOGEPI, 'togépi', [TYPE.NORMAL, TYPE.FAIRY], RARITY.RARE, 'RARE', 175, PKM.TOGETIC, 80, 5, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 1, 70, SPECIAL_SKILL.WISH);
   }
 }
 
 class Togetic extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.TOGETIC, 'togétic', [TYPE.NORMAL, TYPE.FAIRY, TYPE.FLYING], RARITY.RARE, 'RARE', 176, PKM.TOGEKISS, 120, 9, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 50, SPECIAL_SKILL.WISH);
+    super('Nintendo', PKM.TOGETIC, 'togétic', [TYPE.NORMAL, TYPE.FAIRY, TYPE.FLYING], RARITY.RARE, 'RARE', 176, PKM.TOGEKISS, 120, 9, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 2, 70, SPECIAL_SKILL.WISH);
   }
 }
 
 class Togekiss extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.TOGEKISS, 'togekiss', [TYPE.NORMAL, TYPE.FAIRY, TYPE.FLYING], RARITY.RARE, 'RARE', 468, '', 220, 18, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 3, 50, SPECIAL_SKILL.WISH);
+    super('Nintendo', PKM.TOGEKISS, 'togekiss', [TYPE.NORMAL, TYPE.FAIRY, TYPE.FLYING], RARITY.RARE, 'RARE', 468, '', 220, 18, 1, 1, 2, 'FLYING/range', ATTACK_TYPE.SPECIAL, 3, 70, SPECIAL_SKILL.WISH);
   }
 }
 
@@ -1018,18 +1018,18 @@ class Kingdra extends Pokemon {
 
 class Flabebe extends Pokemon {
   constructor() {
-    super('PmdCollab', PKM.FLABEBE, 'ptéra', [TYPE.SOUND, TYPE.FAIRY, TYPE.FLORA], RARITY.UNCOMMON, 'sound', 669, PKM.FLOETTE, 70, 5, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 80, SPECIAL_SKILL.DISARMING_VOICE);
+    super('PmdCollab', PKM.FLABEBE, 'ptéra', [TYPE.SOUND, TYPE.FAIRY, TYPE.FLORA], RARITY.UNCOMMON, 'sound', 669, PKM.FLOETTE, 70, 5, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 90, SPECIAL_SKILL.DISARMING_VOICE);
   }
 }
 
 class Floette extends Pokemon {
   constructor() {
-    super('PmdCollab', PKM.FLOETTE, 'ptéra', [TYPE.SOUND, TYPE.FAIRY, TYPE.FLORA], RARITY.UNCOMMON, 'sound', 670, PKM.FLORGES, 120, 9, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 80, SPECIAL_SKILL.DISARMING_VOICE);
+    super('PmdCollab', PKM.FLOETTE, 'ptéra', [TYPE.SOUND, TYPE.FAIRY, TYPE.FLORA], RARITY.UNCOMMON, 'sound', 670, PKM.FLORGES, 120, 9, 1, 1, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 90, SPECIAL_SKILL.DISARMING_VOICE);
   }
 }
 class Florges extends Pokemon {
   constructor() {
-    super('PmdCollab', PKM.FLORGES, 'ptéra', [TYPE.SOUND, TYPE.FAIRY, TYPE.FLORA], RARITY.UNCOMMON, 'sound', 671, '', 210, 20, 2, 2, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 80, SPECIAL_SKILL.DISARMING_VOICE);
+    super('PmdCollab', PKM.FLORGES, 'ptéra', [TYPE.SOUND, TYPE.FAIRY, TYPE.FLORA], RARITY.UNCOMMON, 'sound', 671, '', 210, 20, 2, 2, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 90, SPECIAL_SKILL.DISARMING_VOICE);
   }
 }
 
