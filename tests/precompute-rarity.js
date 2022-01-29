@@ -33,15 +33,8 @@ Object.keys(RARITY).forEach((rarity)=>{
     const family = PokemonFactory.getPokemonFamily(pkm);
     if (pokemon.rarity == rarity) {
       let included = false;
-      pokemonCandidates.forEach((candidate) =>{
-        if (PokemonFactory.getPokemonFamily(candidate.name) == family) {
-          included = true;
-        }
-      });
-      if (!included) {
-        pokemonCandidates.push(pokemon);
-        names.push(pkm);
-      }
+      pokemonCandidates.push(pokemon);
+      names.push(pkm);
     }
   });
   colyseusData[rarity] = pokemonCandidates;
