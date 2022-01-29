@@ -65,7 +65,6 @@ class OnDragDropCommand extends Command {
     const playerId = client.auth.uid; ;
     if (this.state.players.has(playerId)) {
       if (detail.objType == 'pokemon') {
-        
         message.updateItems = false;
         if (this.state.players.get(playerId).board.has(detail.id)) {
           const pokemon = this.state.players.get(playerId).board.get(detail.id);
@@ -118,8 +117,8 @@ class OnDragDropCommand extends Command {
       }
       if (detail.objType == 'item') {
         message.updateBoard = false;
-        
-        const item = detail.id
+
+        const item = detail.id;
 
         if (this.state.players.get(playerId).stuff.has(item)) {
           const x = parseInt(detail.x);
@@ -410,10 +409,9 @@ class OnSellDropCommand extends Command {
 
       if (PokemonFactory.getPokemonBaseEvolution(pokemon.name) == PKM.EEVEE) {
         player.money += COST[pokemon.rarity];
-      } else if(pokemon.types.includes(TYPE.FOSSIL)){
-        player.money += 5 + COST[pokemon.rarity] * pokemon.stars
-      } 
-      else {
+      } else if (pokemon.types.includes(TYPE.FOSSIL)) {
+        player.money += 5 + COST[pokemon.rarity] * pokemon.stars;
+      } else {
         player.money += COST[pokemon.rarity] * pokemon.stars;
       }
 
@@ -679,7 +677,7 @@ class OnUpdatePhaseCommand extends Command {
     this.state.phase = STATE.PICK;
     this.state.time = process.env.MODE == 'dev' ? 20000 : 30000;
 
-    const isPVE = (this.getPVEIndex(this.state.stageLevel) >= 0)
+    const isPVE = (this.getPVEIndex(this.state.stageLevel) >= 0);
 
     this.state.players.forEach((player, key) => {
       player.simulation.stop();
@@ -765,12 +763,12 @@ class OnUpdatePhaseCommand extends Command {
     return commands;
   }
 
-  getPVEIndex(stageLevel){
+  getPVEIndex(stageLevel) {
     const result = NEUTRAL_STAGE.findIndex((stage)=>{
       return stage.turn == stageLevel;
     });
 
-    return result
+    return result;
   }
 
   initializeFightingPhase() {
@@ -779,7 +777,7 @@ class OnUpdatePhaseCommand extends Command {
     this.state.stageLevel += 1;
     this.state.botManager.updateBots();
 
-    const stageIndex = this.getPVEIndex(this.state.stageLevel)
+    const stageIndex = this.getPVEIndex(this.state.stageLevel);
 
     this.state.players.forEach((player, key) => {
       if (player.alive) {
@@ -788,7 +786,7 @@ class OnUpdatePhaseCommand extends Command {
             player.itemsProposition.pop();
           }
         }
-        
+
         if (stageIndex != -1) {
           player.opponentName = 'PVE';
           player.opponentAvatar = NEUTRAL_STAGE[stageIndex].avatar;

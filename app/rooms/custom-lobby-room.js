@@ -53,11 +53,12 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           }
         }
       });
-      Bot.find({}, {_id: 0}, (err, bots)=>{
-        bots.forEach((bot)=>{
+      Bot.find({}, {_id: 0}, {sort: {elo: -1}}, (err, bots)=>{
+        bots.forEach((bot, i)=>{
           self.bots[bot.avatar] = bot;
+          console.log(bot.avatar, bot.elo);
+          self.state.botLeaderboard.push(new LeaderboardInfo(bot.avatar, bot.avatar, i + 1, bot.elo));
         });
-        self.broadcast('bot-data', self.bots);
       });
     });
 
@@ -94,6 +95,10 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
       } catch (error) {
         console.log(error);
       }
+    });
+
+    this.onMessage('bot-data', (client, message)=>{
+      client.send('bot-data', this.bots);
     });
 
     this.onMessage('map', (client, message) => {
@@ -579,7 +584,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
   onJoin(client, options, auth) {
     super.onJoin(client, options, auth);
     // console.log(auth);
-    client.send('bot-data', this.bots);
+    // client.send('bot-data', this.bots);
     UserMetadata.findOne({'uid': client.auth.uid}, (err, user)=>{
       if (user) {
         DetailledStatistic.find({'playerId': client.auth.uid}, ['pokemons', 'time', 'rank', 'elo'], {limit: 10, sort: {'time': -1}}, (err, stats)=>{

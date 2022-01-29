@@ -10,12 +10,13 @@ class LobbyState extends schema.Schema {
     super();
     this.messages = new schema.ArraySchema();
     this.leaderboard = new schema.ArraySchema();
+    this.botLeaderboard = new schema.ArraySchema();
     this.users = new schema.MapSchema();
     this.filter = new Filter();
   }
 
   addMessage(name, payload, avatar, time, save) {
-    if (this.messages.length > 200) {
+    if (this.messages.length > 100) {
       this.messages.splice(0, 1);
     } else {
       let safePayload = payload;
@@ -37,7 +38,8 @@ class LobbyState extends schema.Schema {
 schema.defineTypes(LobbyState, {
   messages: [Message],
   users: {map: LobbyUser},
-  leaderboard: [LeaderboardInfo]
+  leaderboard: [LeaderboardInfo],
+  botLeaderboard: [LeaderboardInfo]
 });
 
 module.exports = LobbyState;

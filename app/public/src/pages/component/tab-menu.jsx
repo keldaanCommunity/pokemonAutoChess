@@ -4,7 +4,6 @@ import Profile from './profile';
 import Search from './search';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import BotLeaderboard from './bot-leaderboard';
 
 class TabMenu extends Component {
 
@@ -42,8 +41,8 @@ class TabMenu extends Component {
                     />
                 </TabPanel>
                 <TabPanel>
-                    <BotLeaderboard
-                        botData={this.props.botData}
+                    <Leaderboard
+                        infos={this.props.botLeaderboard}
                     />
                 </TabPanel>
                 <TabPanel>

@@ -25,6 +25,7 @@ class Lobby extends Component {
             user:{},
             searchedUser:{},
             leaderboard: [],
+            botLeaderboard: [],
             currentText: '',
             allRooms: [],
             isSignedIn: false,
@@ -72,6 +73,9 @@ class Lobby extends Component {
                         this.room.state.leaderboard.onAdd = (l) => {this.setState({leaderboard: this.room.state.leaderboard})};
                         this.room.state.leaderboard.onRemove = (l) => {this.setState({leaderboard: this.room.state.leaderboard})};
                         
+                        this.room.state.botLeaderboard.onAdd = (l) => {this.setState({botLeaderboard: this.room.state.botLeaderboard})};
+                        this.room.state.botLeaderboard.onRemove = (l) => {this.setState({botLeaderboard: this.room.state.botLeaderboard})};
+
                         this.room.onMessage('pastebin-url', (json) =>{
                             this.setState({
                                 pasteBinUrl: json.url
@@ -225,6 +229,9 @@ class Lobby extends Component {
     }
 
     toggleBuilder(){
+        if(!this.state.showBuilder && !this.state.botData.size){
+            this.room.send('bot-data');     
+        }
         this.setState((prevState)=>{
             return{
                 showBuilder: !prevState.showBuilder
@@ -281,7 +288,7 @@ class Lobby extends Component {
 
                 <TabMenu
                     leaderboard={this.state.leaderboard}
-                    botData={this.state.botData}
+                    botLeaderboard={this.state.botLeaderboard}
                     user={this.state.user}
                     searchedUser={this.state.searchedUser}
                     tabIndex={this.state.tabIndex}
