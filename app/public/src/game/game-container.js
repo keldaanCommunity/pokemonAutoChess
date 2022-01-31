@@ -73,16 +73,14 @@ class GameContainer {
     };
 
     player.stuff.items.onAdd = ((value, key) => {
-      //console.log('added', value, key)
-      this.handleItemAdd(player, value)
-      
-    })
+      // console.log('added', value, key)
+      this.handleItemAdd(player, value);
+    });
 
     player.stuff.items.onRemove = ((value, key) => {
-      //console.log('removed', value, key)
-      this.handleItemRemove(player, value)
-    })
-
+      // console.log('removed', value, key)
+      this.handleItemRemove(player, value);
+    });
 
 
     player.simulation.onChange = ((changes) => {
@@ -213,12 +211,9 @@ class GameContainer {
 
   handleItemRemove(player, value) {
     if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').itemsContainer) {
-      this.game.scene.getScene('gameScene').itemsContainer.removeItem(value); 
+      this.game.scene.getScene('gameScene').itemsContainer.removeItem(value);
     }
   }
-
-  
-
 
 
   handlePokemonChange(playerId, change, pokemon) {
@@ -236,6 +231,7 @@ class GameContainer {
   }
 
   handlePokemonItemsChange(playerId, change, pokemon) {
+    // console.log('handlePokemonItemsChange');
     if (this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager) {
       this.game.scene.getScene('gameScene').battleManager.changePokemonItems(playerId, change, pokemon);
     }

@@ -315,7 +315,7 @@ export default class GameScene extends Scene {
       this.removeRectangles();
       // console.log(dropZone.name);
 
-      
+
       if (dropZone.name == 'sell-zone') {
         if (gameObject.objType == 'item') {
           this.itemsContainer.updateItems();
@@ -334,11 +334,9 @@ export default class GameScene extends Scene {
               'id': gameObject.id,
               'objType': gameObject.objType
             }
-          }))
+          }));
           window.lastDragDropPokemon = gameObject;
-        }else if(gameObject.objType == 'item'){
-          
-          
+        } else if (gameObject.objType == 'item') {
           document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
             detail: {
               'x': dropZone.name.substr(5, 1),
@@ -347,13 +345,9 @@ export default class GameScene extends Scene {
               'objType': gameObject.objType
             }
           }));
-          
         }
-        
-        
 
-        
-        
+
         // if (gameObject.objType == 'item') {
         //   console.log('in game scene before update item')
         //   this.itemsContainer.updateItem(gameObject.plce);
