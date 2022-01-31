@@ -682,6 +682,9 @@ class OnUpdatePhaseCommand extends Command {
     this.state.players.forEach((player, key) => {
       player.simulation.stop();
       if (player.alive) {
+        if (player.isBot) {
+          player.experienceManager.level = Math.min(9, Math.round(this.state.stageLevel/2));
+        }
         if (isPVE && player.getLastBattleResult() == BATTLE_RESULT.WIN) {
           const items = ItemFactory.createRandomItems();
           // let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
