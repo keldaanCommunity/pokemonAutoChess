@@ -554,7 +554,7 @@ class Simulation extends Schema {
               }
             });
 
-            const speedFactor = 12 * pokemonNames.length;
+            const speedFactor = 14 * pokemonNames.length;
             pokemon.handleAttackSpeed(speedFactor);
             pokemon.effects.push(EFFECTS.AGILITY);
           }

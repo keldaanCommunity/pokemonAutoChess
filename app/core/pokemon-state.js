@@ -272,11 +272,11 @@ class PokemonState {
       }
 
       if (pokemon.effects.includes(EFFECTS.DRAGON_ENERGY) && pokemon.types.includes(TYPE.DRAGON)) {
-        pokemon.handleAttackSpeed(5);
+        pokemon.handleAttackSpeed(6);
       }
 
       if (pokemon.effects.includes(EFFECTS.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)) {
-        pokemon.handleAttackSpeed(10);
+        pokemon.handleAttackSpeed(12);
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {

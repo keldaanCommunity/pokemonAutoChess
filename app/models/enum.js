@@ -2957,7 +2957,7 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 1,
           title: `(-) Charge`,
-          text: `Your Electric pokemon have +12% attack speed. (stacks)`
+          text: `Your Electric pokemon have +14% attack speed. (stacks)`
         }
       ],
       esp: [
@@ -3221,12 +3221,12 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 3,
           title: `(3) Dragon Energy`,
-          text: `Your Dragon pokemon gain +5% attack Speed after every hit.`
+          text: `Your Dragon pokemon gain +6% attack Speed after every hit.`
         },
         {
           trigger: 4,
           title: `(5) Dragon Dance`,
-          text: `Your Dragon pokemon gain +10% attack Speed after every hit.`
+          text: `Your Dragon pokemon gain +12% attack Speed after every hit.`
         }
       ],
       esp: [
