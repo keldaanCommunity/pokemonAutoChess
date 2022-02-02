@@ -270,12 +270,13 @@ class PokemonState {
       if (pokemon.effects.includes(EFFECTS.DESOLATE_LAND)) {
         pokemon.atk += 3;
       }
-      if (pokemon.effects.includes(EFFECTS.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)) {
-        pokemon.handleAttackSpeed(3);
-      }
 
       if (pokemon.effects.includes(EFFECTS.DRAGON_ENERGY) && pokemon.types.includes(TYPE.DRAGON)) {
-        pokemon.handleAttackSpeed(6);
+        pokemon.handleAttackSpeed(5);
+      }
+
+      if (pokemon.effects.includes(EFFECTS.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)) {
+        pokemon.handleAttackSpeed(10);
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
