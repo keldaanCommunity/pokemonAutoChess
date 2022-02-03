@@ -2957,7 +2957,7 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 1,
           title: `(-) Charge`,
-          text: `Your Electric pokemon have +12% attack speed. (stacks)`
+          text: `Your Electric pokemon have +14% attack speed. (stacks)`
         }
       ],
       esp: [
