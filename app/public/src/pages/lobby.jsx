@@ -34,7 +34,8 @@ class Lobby extends Component {
             showWiki: false,
             showBuilder: false,
             pasteBinUrl: '',
-            botData: {}
+            botData: {},
+            botList: []
         };
 
         this.client = new Client(window.endpoint);
@@ -90,9 +91,9 @@ class Lobby extends Component {
                             });
                           });
 
-                        this.room.onMessage('bot-data', (bots)=>{
+                        this.room.onMessage('bot-list', (bots)=>{
                             this.setState({
-                                botData: bots
+                                botList: bots
                             });
                         });
                       
@@ -122,6 +123,12 @@ class Lobby extends Component {
                                 searchedUser: user
                             });
                         });
+
+                        this.room.onMessage('bot-data', (data) => {
+                            this.setState({
+                                botData: data
+                            })
+                        })
                     });
                 });
             }
@@ -229,14 +236,18 @@ class Lobby extends Component {
     }
 
     toggleBuilder(){
-        if(!this.state.showBuilder && !this.state.botData.size){
-            this.room.send('bot-data');     
+        if(!this.state.showBuilder && !this.state.botList.length){
+            this.room.send('bot-list-request');     
         }
         this.setState((prevState)=>{
             return{
                 showBuilder: !prevState.showBuilder
             }
         });
+    }
+
+    requestBotData(botName){
+        this.room.send('bot-data-request', botName)
     }
 
     render() {
@@ -266,7 +277,9 @@ class Lobby extends Component {
           toggleBuilder={this.toggleBuilder.bind(this)}
           createBot={this.createBot.bind(this)}
           pasteBinUrl={this.state.pasteBinUrl}
+          botList={this.state.botList}
           botData={this.state.botData}
+          requestBotData={this.requestBotData.bind(this)}
           />
       }
       else{
