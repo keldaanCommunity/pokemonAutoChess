@@ -11,25 +11,43 @@ const buttonStyle = {
   marginRight:'10px'
 }
 
+
 class ModalMenu extends Component {
     constructor(props){
         super(props);
         this.state = {
-            textArea:''
+          textArea: ''
         };
     }
 
     handleScenariosChange(e){
-      //console.log(e.target.value);
       if(e.target.value.length !=0){
+        this.props.requestBotData(e.target.value)
+      }
+    }
+
+    handleTextAreaChange(e){
+      this.setState({
+        textArea: e.target.value
+      })
+    }
+
+    convertBotDataToJSON(){
+      return JSON.stringify(this.props.botData)
+    }
+
+    componentDidUpdate(prevProps, prevState){
+      if(prevProps.botData.avatar != this.props.botData.avatar){
+
         this.setState({
-          textArea:JSON.stringify(this.props.botData[e.target.value])
-        });
+          textArea: JSON.stringify(this.props.botData)
+        })
       }
     }
   
     render() {
-      let self = this;
+
+
       let url = this.props.pasteBinUrl.length == 0? null: <h5>URL created !:<a href={this.props.pasteBinUrl}>{this.props.pasteBinUrl}</a></h5>;
       if(this.props.modalMode == 'EXPORT'){
         return <Modal show={this.props.modalBoolean} onHide={this.props.hideModal} size="lg">
@@ -63,17 +81,17 @@ class ModalMenu extends Component {
           <div className="nes-select">
           <select defaultValue="" onChange={this.handleScenariosChange.bind(this)} id="default_select">
               <option value="" hidden>Select...</option>
-              {Object.keys(this.props.botData).sort((a,b)=>{return this.props.botData[a].avatar.localeCompare(this.props.botData[b].avatar)}).map(key=>{
-                  return <option key={key} value={key}>{this.props.botData[key].avatar}</option>;
-              })};
+              {this.props.botList.map((bot) => <option key={bot} value={bot}>{bot}</option>)}
           </select>
           </div>
         </div>
-          <textarea style={textAreaStyle} value={this.state.textArea} onChange={(e)=>{this.setState({textArea:e.target.value})}} className="nes-textarea"></textarea>
+          
+          <textarea style={textAreaStyle} value={this.state.textArea} onChange={(e)=>{this.handleTextAreaChange(e)}} className="nes-textarea"></textarea>
+        
         </Modal.Body>
         <Modal.Footer>
           <button style={buttonStyle} className='nes-btn is-error' onClick={this.props.hideModal}>Cancel</button>
-          <button style={buttonStyle} className='nes-btn is-success' onClick={()=>{this.props.import(self.state.textArea)}}>Import</button>
+          <button style={buttonStyle} className='nes-btn is-success' onClick={()=>{this.props.import(this.state.textArea)}}>Import</button>
         </Modal.Footer>
         </Modal>;
       }

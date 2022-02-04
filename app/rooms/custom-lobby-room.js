@@ -97,8 +97,19 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
       }
     });
 
-    this.onMessage('bot-data', (client, message)=>{
-      client.send('bot-data', this.bots);
+    this.onMessage('bot-list-request', (client, message)=>{
+      const botList = []
+
+      for(const bot in this.bots){
+        botList.push(bot)
+      }
+
+      client.send('bot-list', botList);
+    });
+
+    this.onMessage('bot-data-request', (client, bot)=>{
+      const botData = this.bots[bot]
+      client.send('bot-data', botData)
     });
 
     this.onMessage('map', (client, message) => {
