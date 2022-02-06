@@ -1484,12 +1484,12 @@ const EFFECTS_ICON = Object.freeze({
   },
   ROTOTILLER: {
     level: 2,
-    positive: false,
+    positive: true,
     type: TYPE.GROUND
   },
   SANDSTORM: {
     level: 3,
-    positive: false,
+    positive: true,
     type: TYPE.GROUND
   },
   POISON_GAS: {
