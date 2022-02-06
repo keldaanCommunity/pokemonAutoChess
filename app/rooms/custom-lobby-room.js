@@ -56,7 +56,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
       Bot.find({}, {_id: 0}, {sort: {elo: -1}}, (err, bots)=>{
         bots.forEach((bot, i)=>{
           self.bots[bot.avatar] = bot;
-          console.log(bot.avatar, bot.elo);
+          // console.log(bot.avatar, bot.elo);
           self.state.botLeaderboard.push(new LeaderboardInfo(bot.avatar, bot.avatar, i + 1, bot.elo));
         });
       });
@@ -98,18 +98,18 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     });
 
     this.onMessage('bot-list-request', (client, message)=>{
-      const botList = []
+      const botList = [];
 
-      for(const bot in this.bots){
-        botList.push(bot)
+      for (const bot in this.bots) {
+        botList.push(bot);
       }
 
       client.send('bot-list', botList);
     });
 
     this.onMessage('bot-data-request', (client, bot)=>{
-      const botData = this.bots[bot]
-      client.send('bot-data', botData)
+      const botData = this.bots[bot];
+      client.send('bot-data', botData);
     });
 
     this.onMessage('map', (client, message) => {
@@ -560,16 +560,19 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
               if (user.donor) {
                 changeNeeded = true;
               }
+              break;
 
             case 'absol':
               if (user.honors.includes('absol')) {
                 changeNeeded = true;
               }
+              break;
 
-            case 'absol':
-              if (user.honors.includes('absol')) {
+            case 'meloetta':
+              if (user.honors.includes('meloetta')) {
                 changeNeeded = true;
               }
+              break;
 
             default:
               break;

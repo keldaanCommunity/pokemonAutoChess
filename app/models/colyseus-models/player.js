@@ -11,7 +11,7 @@ const MapSchema = schema.MapSchema;
 const ArraySchema = schema.ArraySchema;
 
 class Player extends Schema {
-  constructor(id, name, elo, avatar, isBot, specialCells, mapType, rank, tileset) {
+  constructor(id, name, elo, avatar, isBot, rank, tileset) {
     super();
     this.opponents = [];
     this.assign({
@@ -28,7 +28,7 @@ class Player extends Schema {
       effects: new Effects(),
       money: process.env.MODE == 'dev' ? 400 : 5,
       life: process.env.MODE == 'dev' ? 50 : 100,
-      simulation: new Simulation(specialCells, mapType),
+      simulation: new Simulation(),
       shopLocked: false,
       streak: 0,
       interest: 0,

@@ -2,8 +2,7 @@
 import {SPECIAL_SKILL} from '../../../models/enum.js';
 
 export default class AnimationManager {
-  constructor(game, mapType) {
-    this.mapType = mapType;
+  constructor(game) {
     this.game = game;
     this.orientationTable = {
       'DOWN': 0,
@@ -91,7 +90,7 @@ export default class AnimationManager {
 
     this.createAttacksAnimations();
     this.createSpecialAttacksAnimations();
-    this.createSpecialCellsAnimations();
+    // this.createSpecialCellsAnimations();
     this.createStatusAnimations();
   }
 
@@ -159,7 +158,7 @@ export default class AnimationManager {
       repeat: -1
     });
   }
-
+  /*
   createSpecialCellsAnimations() {
     this.game.anims.create({
       key: `FIRE/cell`,
@@ -195,15 +194,8 @@ export default class AnimationManager {
       frameRate: 15,
       repeat: -1
     });
-
-    this.game.anims.create({
-      key: `GROUND/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'GROUND/cell/'}),
-      frameRate: 30,
-      repeat: -1
-    });
   }
-
+*/
   createSpecialAttacksAnimations() {
     this.game.anims.create({
       key: SPECIAL_SKILL.FIRE_BLAST,
@@ -618,6 +610,13 @@ export default class AnimationManager {
       duration: 1000,
       repeat: 0
     });
+
+    this.game.anims.create({
+      key: `ground-grow`,
+      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'GROUND/cell/'}),
+      duration: 800,
+      repeat: 0
+    });
   }
 
   createSleepSoundAnimations(index) {
@@ -850,10 +849,6 @@ export default class AnimationManager {
   playSleepAnimation(entity) {
     const sprite = entity.getFirst('objType', 'sprite');
     sprite.anims.play(`${entity.index}/2`);
-  }
-
-  playSpecialCells(entity) {
-    entity.anims.play(`${this.mapType}/cell`);
   }
 
   getSpriteKey(entity) {

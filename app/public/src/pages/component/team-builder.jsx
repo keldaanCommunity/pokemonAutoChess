@@ -198,7 +198,7 @@ class TeamBuilder extends Component {
               FLYING: 0,
               FLORA: 0,
               MINERAL: 0,
-              AMORPH: 0,
+              GHOST: 0,
               FAIRY: 0,
               ICE: 0,
               FOSSIL: 0
@@ -234,7 +234,7 @@ class TeamBuilder extends Component {
       FLYING: 0,
       FLORA: 0,
       MINERAL: 0,
-      AMORPH: 0,
+      GHOST: 0,
       FAIRY: 0,
       ICE: 0,
       FOSSIL: 0

@@ -137,6 +137,41 @@ export default class Pokemon extends Button {
     });
   }
 
+  growGroundAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'attacks', 'GROUND/cell/000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(1.5, 1.5);
+    specialProjectile.anims.play('ground-grow');
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
+  deathAnimation() {
+    // const sprite = this.getFirst('objType', 'sprite');
+    this.life = 0;
+    this.getFirst('objType', 'lifebar').setLife(this.life);
+    const detail = this.getFirst('objType', 'detail');
+    if (detail) {
+      detail.hp.setText(0);
+    }
+
+    this.scene.add.tween({
+      targets: [this],
+      ease: 'Linear',
+      duration: 1000,
+      delay: 0,
+      alpha: {
+        getStart: () => 1,
+        getEnd: () => 0
+      },
+      onComplete: () => {
+        this.destroy(true);
+      }
+    });
+  }
+
   specialAttackAnimation(group) {
     if (this.skill) {
       let coordinates;
@@ -862,43 +897,10 @@ export default class Pokemon extends Button {
     if (pokemon.effects.length > 0) {
       pokemon.effects.forEach((effect, c) => {
         if ( effect && EFFECTS_ICON[effect]) {
-          let level = '';
-          switch (EFFECTS_ICON[effect].level) {
-            case 0:
-              level = '';
-              break;
-
-            case 1:
-              level = 'I';
-              break;
-
-            case 2:
-              level = 'II';
-              break;
-
-            case 3:
-              level = 'III';
-              break;
-
-            case 4:
-              level = 'IV';
-              break;
-
-            default:
-              break;
-          }
-
           const backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5, 0.5);
-          const backgroundText = new GameObjects.Text(scene, c*20 -30, height+5, level, {
-            fontSize: '15px',
-            fontFamily: 'Verdana',
-            color: '#000000'
-          });
           backgroundIcon.objType = 'effect';
           scene.add.existing(backgroundIcon);
-          scene.add.existing(backgroundText);
           this.add(backgroundIcon);
-          this.add(backgroundText);
         }
       });
     }

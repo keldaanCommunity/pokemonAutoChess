@@ -9,6 +9,7 @@ class GameContainer {
     this.div = div;
     this.game = null;
     this.player = null;
+    this.tilemap = null;
     this.uid = uid;
     this.initializeEvents();
   }
@@ -37,7 +38,7 @@ class GameContainer {
       }
     };
     this.game = new Phaser.Game(config);
-    this.game.scene.start('gameScene', this.room);
+    this.game.scene.start('gameScene', {room: this.room, tilemap: this.tilemap});
   }
 
   initializeEvents() {
@@ -45,12 +46,23 @@ class GameContainer {
     this.room.onError((err) => console.log('room error', err));
   }
 
+  setTilemap(tilemap) {
+    this.tilemap = tilemap;
+    if (this.player) {
+      // console.log('setTilemap', this.player, this.tilemap);
+      this.initializeGame();
+    }
+  }
+
   initializePlayer(player) {
     // //console.log(player);
     const self = this;
     if (this.uid == player.id) {
       this.player = player;
-      this.initializeGame();
+      if (this.tilemap) {
+        // console.log('initializePlayer', this.player, this.tilemap);
+        this.initializeGame();
+      }
     }
 
     player.board.onAdd = function(pokemon, key) {
@@ -84,35 +96,11 @@ class GameContainer {
 
 
     player.simulation.onChange = ((changes) => {
-      if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').entryHazardsManager) {
+      if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene') != null) {
         changes.forEach((change) =>{
           // console.log('simulation change ', change.field, change.value);
           if (change.field == 'climate') {
             this.handleClimateChange(change, player);
-          } else if (change.field == 'redRocks') {
-            if (change.value) {
-              this.game.scene.getScene('gameScene').entryHazardsManager.addRedRocks();
-            } else {
-              this.game.scene.getScene('gameScene').entryHazardsManager.clearRedRocks();
-            }
-          } else if (change.field == 'blueRocks') {
-            if (change.value) {
-              this.game.scene.getScene('gameScene').entryHazardsManager.addBlueRocks();
-            } else {
-              this.game.scene.getScene('gameScene').entryHazardsManager.clearBlueRocks();
-            }
-          } else if (change.field == 'redSpikes') {
-            if (change.value) {
-              this.game.scene.getScene('gameScene').entryHazardsManager.addRedSpikes();
-            } else {
-              this.game.scene.getScene('gameScene').entryHazardsManager.clearRedSpikes();
-            }
-          } else if (change.field == 'blueSpikes') {
-            if (change.value) {
-              this.game.scene.getScene('gameScene').entryHazardsManager.addBlueSpikes();
-            } else {
-              this.game.scene.getScene('gameScene').entryHazardsManager.clearBlueSpikes();
-            }
           }
         });
       }
@@ -302,18 +290,6 @@ class GameContainer {
     if (message.updateItems) {
       this.game.scene.getScene('gameScene').itemsContainer.updateItems();
     }
-  }
-
-  handleKickOut() {
-    // console.log('kicked out');
-
-    _client.joinOrCreate('lobby', {}).then((room) => {
-      this.room.leave();
-      // console.log('joined room:', room);
-      document.getElementById('game').dispatchEvent(new CustomEvent('render-lobby', {detail: {room: room}}));
-    }).catch((e) => {
-      console.error('join error', e);
-    });
   }
 
   onPlayerClick(id) {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { XP_TABLE } from '../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import TilesetMenu from './tileset-menu';
 import Elo from './elo';
 
 class Profile extends Component {
@@ -42,7 +41,6 @@ class Profile extends Component {
                     <TabList>
                     <Tab>Name</Tab>
                     <Tab>Avatar</Tab>
-                    <Tab>Tileset</Tab>
                     </TabList>
     
                     <TabPanel>
@@ -135,18 +133,13 @@ class Profile extends Component {
                                     <td><button className="invisibleButton" onClick={()=>{this.props.changeAvatar('meowth')}}><img src="assets/avatar/meowth.png" alt="" style={{filter:this.props.user.donor ?'grayscale(0)':'grayscale(1)'}}  title="Unlocked after contributing to the tipee"/></button></td>
                                     <td><button className="invisibleButton" onClick={()=>{this.props.changeAvatar('persian')}}><img src="assets/avatar/persian.png" alt="" style={{filter:this.props.user.donor ?'grayscale(0)':'grayscale(1)'}}  title="Unlocked after contributing to the tipee"/></button></td>
                                     <td><button className="invisibleButton" onClick={()=>{this.props.changeAvatar('absol')}}><img src="assets/avatar/absol.png" alt="" style={{filter:this.props.user.honors.includes('absol') ?'grayscale(0)':'grayscale(1)'}}  title="Unlocked after partipating in Tournament #1"/></button></td>
+                                    <td><button className="invisibleButton" onClick={()=>{this.props.changeAvatar('meloetta')}}><img src="assets/avatar/meloetta.png" alt="" style={{filter:this.props.user.honors.includes('meloetta') ?'grayscale(0)':'grayscale(1)'}}  title="Unlocked after partipating in Tournament #2"/></button></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div>
                             
                             </div>
-                        </div>
-                    </TabPanel>
-                    <TabPanel>
-                        <div>
-                            <h5>Change Tileset</h5>
-                            <TilesetMenu mapWin={this.props.user.mapWin} changeMap={this.props.changeMap}/>
                         </div>
                     </TabPanel>
                 </Tabs>

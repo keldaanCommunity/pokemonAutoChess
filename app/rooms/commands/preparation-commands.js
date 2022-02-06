@@ -7,8 +7,7 @@ class OnJoinCommand extends Command {
     UserMetadata.findOne({'uid': auth.uid}, (err, user)=>{
       if (user) {
         this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.map));
-        console.log(user.uid);
-        console.log(this.state.ownerId);
+
         if (user.uid == this.state.ownerId) {
           console.log(user.displayName);
           this.state.ownerName = user.displayName;
@@ -47,13 +46,6 @@ class OnGameStartCommand extends Command {
 
 class OnMessageCommand extends Command {
   execute({client, message}) {
-    let safePayload = message.payload;
-    try {
-      safePayload = this.room.filter.clean(safePayload);
-    } catch (error) {
-      console.error('bad words library error');
-    }
-    message.payload = safePayload;
     this.room.broadcast('messages', message);
   }
 }

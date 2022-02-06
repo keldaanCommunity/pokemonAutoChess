@@ -23,7 +23,7 @@ class GameDps extends Component{
             <img style={imgStyle} src={`assets/avatar/${this.props.name}.png`}/>
             <div style={{display:'flex', flexFlow:'column', justifyContent:'space-around', marginLeft:'5px', width:'100%'}}>
                 <p style={{marginBottom:'0px'}}>{this.props.damage}</p>
-                <progress className="nes-progress is-error" style={progressStyle} value={this.props.damage} max={this.props.maxDamage}></progress>
+                <progress className={this.props.cssClass} style={progressStyle} value={this.props.damage} max={this.props.maxDamage}></progress>
             </div>
         </div>
     }

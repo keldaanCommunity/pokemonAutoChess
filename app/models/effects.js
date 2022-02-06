@@ -38,7 +38,7 @@ class Effects {
       }
     }
     if (synergies.WATER >= 0) {
-      if (synergies.WATER >= 8) {
+      if (synergies.WATER >= 9) {
         this.list.push(EFFECTS.PRIMORDIAL_SEA);
       } else if (synergies.WATER >= 6) {
         this.list.push(EFFECTS.RAIN_DANCE);
@@ -97,14 +97,14 @@ class Effects {
       }
     }
 
-    if (synergies.GROUND >= 2) {
-      this.list.push(EFFECTS.SPIKES);
-    }
-    if (synergies.GROUND >= 4) {
-      this.list.push(EFFECTS.STEALTH_ROCK);
-    }
-    if (synergies.GROUND >= 6) {
-      this.list.push(EFFECTS.SANDSTORM);
+    if (synergies.GROUND >= 0) {
+      if (synergies.GROUND >= 6) {
+        this.list.push(EFFECTS.SANDSTORM);
+      } else if (synergies.GROUND >= 4) {
+        this.list.push(EFFECTS.ROTOTILLER);
+      } else if (synergies.GROUND >= 2) {
+        this.list.push(EFFECTS.SHORE_UP);
+      }
     }
 
     if (synergies.POISON >= 0) {
@@ -129,19 +129,20 @@ class Effects {
       } else if (synergies.FIELD >= 6) {
         this.list.push(EFFECTS.RAGE);
       } else if (synergies.FIELD >= 3) {
-        this.list.push(EFFECTS.WORK_UP);
+        this.list.push(EFFECTS.BULK_UP);
       }
     }
 
-    if (synergies.MONSTER >= 3) {
-      this.list.push(EFFECTS.PURSUIT);
+    if (synergies.MONSTER >= 0) {
+      if (synergies.MONSTER >= 6) {
+        this.list.push(EFFECTS.POWER_TRIP);
+      } else if (synergies.MONSTER >= 4) {
+        this.list.push(EFFECTS.BRUTAL_SWING);
+      } else if (synergies.MONSTER >= 2) {
+        this.list.push(EFFECTS.PURSUIT);
+      }
     }
-    if (synergies.MONSTER >= 5) {
-      this.list.push(EFFECTS.BRUTAL_SWING);
-    }
-    if (synergies.MONSTER >= 7) {
-      this.list.push(EFFECTS.POWER_TRIP);
-    }
+
     if (synergies.HUMAN >= 0) {
       if (synergies.HUMAN >= 6) {
         this.list.push(EFFECTS.CALM_MIND);
@@ -161,7 +162,7 @@ class Effects {
     }
 
     if (synergies.BUG >= 0) {
-      if (synergies.BUG >= 4) {
+      if (synergies.BUG >= 5) {
         this.list.push(EFFECTS.STICKY_WEB);
       } else if (synergies.BUG >= 2) {
         this.list.push(EFFECTS.SWARM);
@@ -199,12 +200,12 @@ class Effects {
         this.list.push(EFFECTS.BATTLE_ARMOR);
       }
     }
-
-    if (synergies.AMORPH >= 2) {
-      this.list.push(EFFECTS.PHANTOM_FORCE);
-    }
-    if (synergies.AMORPH >= 4) {
-      this.list.push(EFFECTS.CURSE);
+    if (synergies.GHOST >= 0) {
+      if (synergies.GHOST >= 4) {
+        this.list.push(EFFECTS.CURSE);
+      } else if (synergies.GHOST >= 2) {
+        this.list.push(EFFECTS.PHANTOM_FORCE);
+      }
     }
 
     if (synergies.FAIRY >= 0) {

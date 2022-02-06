@@ -14,6 +14,7 @@ class Status extends schema.Schema {
       wound: false,
       resurection: false
     });
+    this.temporaryShield = false;
 
     this.burnCooldown = 0;
     this.silenceCooldown = 0;
@@ -23,6 +24,7 @@ class Status extends schema.Schema {
     this.sleepCooldown = 0;
     this.confusionCooldown = 0;
     this.woundCooldown = 0;
+    this.temporaryShieldCooldown = 0;
   }
 
   triggerBurn(timer) {
@@ -142,6 +144,22 @@ class Status extends schema.Schema {
       this.wound = false;
     } else {
       this.woundCooldown = this.woundCooldown - dt;
+    }
+  }
+
+  triggerShield(timer) {
+    if (!this.temporaryShield) {
+      this.temporaryShield = true;
+      this.temporaryShieldCooldown = timer;
+    }
+  }
+
+  updateShield(dt, pkm) {
+    if (this.temporaryShieldCooldown - dt <= 0) {
+      this.temporaryShield = false;
+      pkm.shield = 0;
+    } else {
+      this.temporaryShieldCooldown = this.temporaryShieldCooldown - dt;
     }
   }
 }

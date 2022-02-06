@@ -2,7 +2,6 @@ const colyseus = require('colyseus');
 const {Dispatcher} = require('@colyseus/command');
 const Bot = require('../models/mongo-models/bot');
 const PreparationState = require('./states/preparation-state');
-const Filter = require('bad-words');
 const admin = require('firebase-admin');
 const {
   OnGameStartCommand,
@@ -18,7 +17,6 @@ class PreparationRoom extends colyseus.Room {
   constructor() {
     super();
     this.dispatcher = new Dispatcher(this);
-    this.filter = new Filter();
     this.elos = new Map();
   }
 

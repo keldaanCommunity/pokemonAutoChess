@@ -47,7 +47,7 @@ export default class BattleManager {
     if (this.player.id == playerId) {
       this.group.getChildren().forEach((pkm) => {
         if (pkm.id == pokemon.id) {
-          pkm.destroy(true);
+          pkm.deathAnimation();
         }
       });
     }
@@ -155,6 +155,10 @@ export default class BattleManager {
             if (change.value != 0) {
               this.displayCriticalHit(children[i].x, children[i].y);
             }
+          } else if (change.field == 'dodgeCount') {
+            if (change.value != 0) {
+              this.displayDodge(children[i].x, children[i].y);
+            }
           } else if (change.field == 'ult') {
             if (change.value != 0) {
               children[i].specialAttackAnimation(this.group);
@@ -170,6 +174,10 @@ export default class BattleManager {
           } else if (change.field == 'soundCount') {
             if (change.value != 0) {
               children[i].soundAnimation();
+            }
+          } else if (change.field == 'growGroundCount') {
+            if (change.value != 0) {
+              children[i].growGroundAnimation();
             }
           } else if (change.field == 'fairyCritCount') {
             if (change.value != 0) {
@@ -308,6 +316,36 @@ export default class BattleManager {
         }
       }
     }
+  }
+
+  displayDodge(x, y) {
+    const textStyle = {
+      fontSize: '25px',
+      fontFamily: 'Verdana',
+      color: '#FFFFFF',
+      align: 'center',
+      strokeThickness: 2,
+      stroke: '#000'
+    };
+    const crit = this.scene.add.existing(new GameObjects.Text(this.scene, x-40, y -50, 'DODGE !', textStyle));
+    crit.setDepth(9);
+    this.scene.add.tween({
+      targets: [crit],
+      ease: 'Linear',
+      duration: 1000,
+      delay: 0,
+      alpha: {
+        getStart: () => 1,
+        getEnd: () => 0
+      },
+      y: {
+        getStart: () => y - 50,
+        getEnd: () => y - 110
+      },
+      onComplete: () => {
+        crit.destroy(true);
+      }
+    });
   }
 
   displayCriticalHit(x, y) {

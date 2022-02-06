@@ -9,26 +9,30 @@ const {CLIMATE, EFFECTS, TYPE, ITEMS, ATTACK_TYPE, PKM} = require('../models/enu
 const Dps = require('./dps');
 
 class Simulation extends Schema {
-  constructor(specialCells, mapType) {
+  constructor() {
     super();
-    this.mapType = mapType;
-    this.specialCells = specialCells;
     this.assign({
-      blueSpikes: false,
-      redSpikes: false,
-      blueRocks: false,
-      redRocks: false,
       blueEffects: [],
       redEffects: [],
       board: new Board(8, 6),
       redTeam: new MapSchema(),
       blueTeam: new MapSchema(),
-      dpsMeter: new MapSchema()
+      blueDpsMeter: new MapSchema(),
+      redDpsMeter: new MapSchema()
     });
     this.initialize();
   }
 
   initialize(blueTeam, redTeam, blueEffects, redEffects) {
+    this.blueDpsMeter.forEach((dps, key) => {
+      // console.log('deleting ' + dps.name);
+      this.blueDpsMeter.delete(key);
+    });
+
+    this.redDpsMeter.forEach((dps, key) => {
+      // console.log('deleting ' + dps.name);
+      this.redDpsMeter.delete(key);
+    });
     this.board = new Board(8, 6);
     if (blueEffects) {
       this.blueEffects = blueEffects;
@@ -39,7 +43,6 @@ class Simulation extends Schema {
     // console.log('blueEffects', blueEffects);
     // console.log('redEffects', redEffects);
     this.climate = this.getClimate();
-    this.getEntryHazards();
     this.finished = false;
     this.flowerSpawn = [false, false];
 
@@ -134,17 +137,18 @@ class Simulation extends Schema {
     // pokemonEntity.triggerSleep(5000);
     this.applyItemsEffects(pokemonEntity, pokemon.types);
     this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
-    this.applySpecialCellsEffects(pokemonEntity);
 
     if (team == 0) {
       this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects, this.redEffects, blueTeam, redTeam);
       const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
       this.blueTeam.set(pokemonEntity.id, pokemonEntity);
-      this.dpsMeter.set(pokemonEntity.id, dps);
+      this.blueDpsMeter.set(pokemonEntity.id, dps);
     }
     if (team == 1) {
       this.applyEffects(pokemonEntity, pokemon.types, this.redEffects, this.blueEffects, redTeam, blueTeam);
+      const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
       this.redTeam.set(pokemonEntity.id, pokemonEntity);
+      this.redDpsMeter.set(pokemonEntity.id, dps);
     }
     return pokemonEntity;
   }
@@ -176,38 +180,6 @@ class Simulation extends Schema {
       }
     }
     return [row, column];
-  }
-
-  applySpecialCellsEffects(pokemon) {
-    this.specialCells.forEach((cell)=>{
-      if (cell.positionX == pokemon.positionX && cell.positionY == pokemon.positionY) {
-        switch (EFFECTS[this.mapType]) {
-          case EFFECTS.FIRE:
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.2);
-            break;
-
-          case EFFECTS.WATER:
-            pokemon.speDef += Math.ceil(pokemon.baseSpeDef * 0.2);
-            break;
-
-          case EFFECTS.NORMAL:
-            pokemon.shield += Math.ceil(pokemon.hp * 0.3);
-            break;
-
-          case EFFECTS.ICE:
-            pokemon.handleAttackSpeed(10);
-            break;
-
-          case EFFECTS.GROUND:
-            pokemon.def += Math.ceil(pokemon.baseDef * 0.2);
-            break;
-
-          default:
-            break;
-        }
-        pokemon.effects.push(EFFECTS[this.mapType]);
-      }
-    });
   }
 
   applyItemsEffects(pokemon, types) {
@@ -345,6 +317,7 @@ class Simulation extends Schema {
 
   applyPostEffects() {
     let blueImperialCount = 1;
+    let blueVoidCount = 1;
     this.blueTeam.forEach((pokemon) =>{
       if (pokemon.effects.includes(EFFECTS.IRON_DEFENSE)) {
         if (blueImperialCount > 0) {
@@ -352,6 +325,14 @@ class Simulation extends Schema {
           blueImperialCount --;
         } else {
           pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.IRON_DEFENSE), 1);
+        }
+      }
+      if (pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
+        if (blueVoidCount > 0) {
+          pokemon.attackType = ATTACK_TYPE.TRUE;
+          blueVoidCount --;
+        } else {
+          pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.PHANTOM_FORCE), 1);
         }
       }
       if (pokemon.effects.includes(EFFECTS.AUTOTOMIZE)) {
@@ -504,22 +485,22 @@ class Simulation extends Schema {
 
         case EFFECTS.DRIZZLE:
           if (types.includes(TYPE.WATER)) {
+            pokemon.addDodgeChance(0.3);
             pokemon.effects.push(EFFECTS.DRIZZLE);
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.33);
           }
           break;
 
         case EFFECTS.RAIN_DANCE:
           if (types.includes(TYPE.WATER)) {
+            pokemon.addDodgeChance(0.6);
             pokemon.effects.push(EFFECTS.RAIN_DANCE);
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.66);
           }
           break;
 
         case EFFECTS.PRIMORDIAL_SEA:
           if (types.includes(TYPE.WATER)) {
+            pokemon.addDodgeChance(0.9);
             pokemon.effects.push(EFFECTS.PRIMORDIAL_SEA);
-            pokemon.atk += Math.ceil(pokemon.baseAtk * 0.66);
           }
           break;
 
@@ -580,9 +561,9 @@ class Simulation extends Schema {
           }
           break;
 
-        case EFFECTS.WORK_UP:
+        case EFFECTS.BULK_UP:
           if (types.includes(TYPE.FIELD)) {
-            pokemon.effects.push(EFFECTS.WORK_UP);
+            pokemon.effects.push(EFFECTS.BULK_UP);
           }
           break;
 
@@ -632,20 +613,14 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.MEDITATE:
-          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.15);
-          pokemon.shield += Math.ceil(pokemon.hp * 0.15);
           pokemon.effects.push(EFFECTS.MEDITATE);
           break;
 
         case EFFECTS.FOCUS_ENERGY:
-          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.35);
-          pokemon.shield += Math.ceil(pokemon.hp * 0.35);
           pokemon.effects.push(EFFECTS.FOCUS_ENERGY);
           break;
 
         case EFFECTS.CALM_MIND:
-          pokemon.atk += Math.ceil(pokemon.baseAtk * 0.65);
-          pokemon.shield += Math.ceil(pokemon.hp * 0.65);
           pokemon.effects.push(EFFECTS.CALM_MIND);
           break;
 
@@ -735,16 +710,17 @@ class Simulation extends Schema {
           break;
 
         case EFFECTS.PHANTOM_FORCE:
-          if (types.includes(TYPE.AMORPH)) {
-            pokemon.handleAttackSpeed(15);
+          if (types.includes(TYPE.GHOST)) {
             pokemon.effects.push(EFFECTS.PHANTOM_FORCE);
           }
           break;
 
         case EFFECTS.CURSE:
-          if (types.includes(TYPE.AMORPH)) {
+          if (types.includes(TYPE.GHOST)) {
+            pokemon.attackType = ATTACK_TYPE.TRUE;
             pokemon.effects.push(EFFECTS.CURSE);
           }
+          break;
 
         case EFFECTS.AROMATIC_MIST:
           if (types.includes(TYPE.FAIRY)) {
@@ -826,25 +802,22 @@ class Simulation extends Schema {
           }
           break;
 
-        default:
-          break;
-      }
-    });
-
-    ennemyEffects.forEach((effect) => {
-      switch (effect) {
-        case EFFECTS.SPIKES:
-          pokemon.handleDamage(Math.ceil(pokemon.hp * 0.1), this.board, ATTACK_TYPE.TRUE);
-          pokemon.effects.push(EFFECTS.SPIKES);
+        case EFFECTS.SHORE_UP:
+          if (types.includes(TYPE.GROUND)) {
+            pokemon.effects.push(EFFECTS.SHORE_UP);
+          }
           break;
 
-        case EFFECTS.STEALTH_ROCK:
-          pokemon.handleDamage(Math.ceil(pokemon.hp * 0.1), this.board, ATTACK_TYPE.TRUE);
-          pokemon.effects.push(EFFECTS.STEALTH_ROCK);
+        case EFFECTS.ROTOTILLER:
+          if (types.includes(TYPE.GROUND)) {
+            pokemon.effects.push(EFFECTS.ROTOTILLER);
+          }
           break;
 
         case EFFECTS.SANDSTORM:
-          pokemon.effects.push(EFFECTS.SANDSTORM);
+          if (types.includes(TYPE.GROUND)) {
+            pokemon.effects.push(EFFECTS.SANDSTORM);
+          }
           break;
 
         default:
@@ -879,21 +852,6 @@ class Simulation extends Schema {
     return climate;
   }
 
-  getEntryHazards() {
-    if (this.blueEffects.includes(EFFECTS.SPIKES)) {
-      this.redSpikes = true;
-    }
-    if (this.redEffects.includes(EFFECTS.SPIKES)) {
-      this.blueSpikes = true;
-    }
-    if (this.blueEffects.includes(EFFECTS.STEALTH_ROCK)) {
-      this.redRocks = true;
-    }
-    if (this.redEffects.includes(EFFECTS.STEALTH_ROCK)) {
-      this.blueRocks = true;
-    }
-  }
-
   update(dt) {
     if (this.blueTeam.size == 0 || this.redTeam.size == 0) {
       this.finished = true;
@@ -907,7 +865,7 @@ class Simulation extends Schema {
         this.blueTeam.delete(key);
       } else {
         pkm.update(dt, this.board, this.climate);
-        this.dpsMeter.get(key).changeDamage(pkm.damageDone);
+        this.blueDpsMeter.get(key).changeDamage(pkm.damageDone);
       }
     });
 
@@ -920,6 +878,7 @@ class Simulation extends Schema {
         this.redTeam.delete(key);
       } else {
         pkm.update(dt, this.board, this.climate);
+        this.redDpsMeter.get(key).changeDamage(pkm.damageDone);
       }
     });
   }
@@ -935,28 +894,16 @@ class Simulation extends Schema {
       this.redTeam.delete(key);
     });
 
-    this.dpsMeter.forEach((dps, key) => {
-      // console.log('deleting ' + dps.name);
-      this.dpsMeter.delete(key);
-    });
-
     this.climate = CLIMATE.NEUTRAL;
-    this.blueSpikes = false;
-    this.redSpikes = false;
-    this.blueRocks = false;
-    this.redRocks = false;
   }
 }
 
 schema.defineTypes(Simulation, {
   blueTeam: {map: PokemonEntity},
   redTeam: {map: PokemonEntity},
-  dpsMeter: {map: Dps},
-  climate: 'string',
-  blueSpikes: 'boolean',
-  redSpikes: 'boolean',
-  blueRocks: 'boolean',
-  redRocks: 'boolean'
+  blueDpsMeter: {map: Dps},
+  redDpsMeter: {map: Dps},
+  climate: 'string'
 });
 
 module.exports = Simulation;

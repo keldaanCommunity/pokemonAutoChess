@@ -10,10 +10,10 @@ class GameSynergies extends Component{
             left: '0.5%',
             display: 'flex',
             justifyContent:'space-between',
-            width: '12%',
-            top:'8.5%',
+            width: '13%',
+            top:'11%',
             flexFlow: 'column',
-            maxHeight:'75%',
+            maxHeight:'73%',
             overflowY:'scroll',
             padding:'0px',
             backgroundColor:'rgba(255,255,255,0.6)' 

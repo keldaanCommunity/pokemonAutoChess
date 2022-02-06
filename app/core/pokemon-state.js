@@ -1,4 +1,4 @@
-const {EFFECTS, ATTACK_TYPE, TYPE, CLIMATE, ITEMS, PKM, FLYING_PROTECT_THRESHOLD} = require('../models/enum');
+const {EFFECTS, ATTACK_TYPE, TYPE, ITEMS, PKM, FLYING_PROTECT_THRESHOLD} = require('../models/enum');
 const PokemonFactory = require('../models/pokemon-factory');
 
 class PokemonState {
@@ -40,7 +40,12 @@ class PokemonState {
           // console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
         }
 
-        if (attacker && attacker.team == 0) {
+        if (pokemon.dodge > Math.random()) {
+          reducedDamage = 0;
+          pokemon.count.dodgeCount += 1;
+        }
+
+        if (attacker && reducedDamage > 0) {
           attacker.damageDone += reducedDamage;
         }
         let residualDamage = reducedDamage;
@@ -85,6 +90,17 @@ class PokemonState {
 
         if (attacker) {
           attacker.setMana(attacker.mana + 5);
+          if (attacker.effects.includes(EFFECTS.CALM_MIND) || attacker.effects.includes(EFFECTS.FOCUS_ENERGY) || attacker.effects.includes(EFFECTS.MEDITATE)) {
+            let lifesteal = 0;
+            if (attacker.effects.includes(EFFECTS.MEDITATE)) {
+              lifesteal = 0.15;
+            } else if (attacker.effects.includes(EFFECTS.FOCUS_ENERGY)) {
+              lifesteal = 0.3;
+            } else if (attacker.effects.includes(EFFECTS.CALM_MIND)) {
+              lifesteal = 0.6;
+            }
+            attacker.handleHeal(Math.floor(lifesteal * residualDamage));
+          }
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
@@ -103,23 +119,23 @@ class PokemonState {
             pokemon.status.resurection = false;
             pokemon.life = pokemon.hp;
           } else {
-            const isWorkUp = pokemon.effects.includes(EFFECTS.WORK_UP);
+            const isWorkUp = pokemon.effects.includes(EFFECTS.BULK_UP);
             const isRage = pokemon.effects.includes(EFFECTS.RAGE);
             const isAngerPoint = pokemon.effects.includes(EFFECTS.ANGER_POINT);
 
             if (isWorkUp || isRage || isAngerPoint) {
               let boost = 0;
               if (isWorkUp) {
-                boost = 20;
-              } else if (isRage) {
                 boost = 30;
+              } else if (isRage) {
+                boost = 40;
               } else if (isAngerPoint) {
-                boost = 50;
+                boost = 60;
               }
               board.forEach((r, c, value) => {
                 if (value !== undefined && value.team == pokemon.team && value.types.includes(TYPE.FIELD)) {
                   value.count.fieldCount ++;
-                  value.handleHeal(0.2 * value.hp);
+                  value.handleHeal(boost / 100 * value.hp);
                   value.handleAttackSpeed(boost);
                 }
               });
@@ -156,6 +172,31 @@ class PokemonState {
 
   update(pokemon, dt, board, climate) {
     let updateEffects = false;
+    if (pokemon.effects.includes(EFFECTS.SHORE_UP) || pokemon.effects.includes(EFFECTS.ROTOTILLER) || pokemon.effects.includes(EFFECTS.SANDSTORM)) {
+      if (pokemon.growGroundTimer !== undefined && pokemon.count.growGroundCount <5) {
+        pokemon.growGroundTimer -= dt;
+        if (pokemon.growGroundTimer <= 0) {
+          pokemon.growGroundTimer = 2000;
+          pokemon.count.growGroundCount += 1;
+          if (pokemon.effects.includes(EFFECTS.SHORE_UP)) {
+            pokemon.def += 1;
+            pokemon.speDef += 1;
+            pokemon.atk += 1;
+          } else if (pokemon.effects.includes(EFFECTS.ROTOTILLER)) {
+            pokemon.def += 2;
+            pokemon.speDef += 2;
+            pokemon.atk += 2;
+          } else if (pokemon.effects.includes(EFFECTS.SANDSTORM)) {
+            pokemon.def += 3;
+            pokemon.speDef += 3;
+            pokemon.atk += 3;
+          }
+        }
+      } else {
+        pokemon.growGroundTimer = 2000;
+      }
+    }
+
     if (pokemon.status.burn) {
       pokemon.status.updateBurn(dt);
     }
@@ -186,6 +227,10 @@ class PokemonState {
 
     if (pokemon.status.wound) {
       pokemon.status.updateWound(dt);
+    }
+
+    if (pokemon.status.temporaryShield) {
+      pokemon.status.updateShield(dt, pokemon);
     }
 
     if (pokemon.manaCooldown <= 0) {
@@ -256,11 +301,6 @@ class PokemonState {
         this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.15), board, ATTACK_TYPE.TRUE);
       }
 
-      if (climate == CLIMATE.SANDSTORM) {
-        if (pokemon.effects.includes(EFFECTS.SANDSTORM)) {
-          this.handleDamage(pokemon, Math.ceil(pokemon.hp / 20), board, ATTACK_TYPE.TRUE);
-        }
-      }
       if (pokemon.effects.includes(EFFECTS.BLAZE)) {
         pokemon.atk += 1;
       }

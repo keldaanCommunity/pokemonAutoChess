@@ -27,7 +27,7 @@ class Synergies extends schema.Schema {
       FLYING: 0,
       FLORA: 0,
       MINERAL: 0,
-      AMORPH: 0,
+      GHOST: 0,
       FAIRY: 0,
       ICE: 0,
       SOUND: 0
@@ -72,7 +72,7 @@ class Synergies extends schema.Schema {
     this.FLYING = 0;
     this.FLORA = 0;
     this.MINERAL = 0;
-    this.AMORPH = 0;
+    this.GHOST = 0;
     this.FAIRY= 0;
     this.ICE = 0;
     this.FOSSIL = 0;
@@ -103,7 +103,7 @@ schema.defineTypes(Synergies, {
   FLYING: 'uint8',
   FLORA: 'uint8',
   MINERAL: 'uint8',
-  AMORPH: 'uint8',
+  GHOST: 'uint8',
   FAIRY: 'uint8',
   ICE: 'uint8',
   FOSSIL: 'uint8',

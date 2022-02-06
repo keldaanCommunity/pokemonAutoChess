@@ -2,7 +2,6 @@ const colyseus = require('colyseus');
 const SimplePlayer = require('../models/colyseus-models/simple-player');
 const {Dispatcher} = require('@colyseus/command');
 const AfterGameState = require('./states/after-game-state');
-const Filter = require('bad-words');
 const admin = require('firebase-admin');
 const {
   OnJoinCommand,
@@ -14,7 +13,6 @@ class AfterGameRoom extends colyseus.Room {
   constructor() {
     super();
     this.dispatcher = new Dispatcher(this);
-    this.filter = new Filter();
   }
 
   onCreate(options) {

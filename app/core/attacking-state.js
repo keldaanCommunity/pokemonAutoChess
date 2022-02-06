@@ -51,18 +51,18 @@ class AttackingState extends PokemonState {
       }
       let poisonChance = 0;
       if (pokemon.effects.includes(EFFECTS.POISON_GAS)) {
-        poisonChance += 0.2;
+        poisonChance += 0.1;
       }
       if (pokemon.effects.includes(EFFECTS.TOXIC)) {
-        poisonChance += 0.5;
+        poisonChance += 0.3;
       }
       if (poisonChance != 0) {
         if (Math.random() > poisonChance) {
           target.status.triggerPoison(2000);
         }
       }
-      if (pokemon.effects.includes(EFFECTS.CURSE)) {
-        target.status.triggerSilence(2000);
+      if (pokemon.effects.includes(EFFECTS.CURSE) || pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
+        target.status.triggerSilence(3000);
       }
       if (pokemon.effects.includes(EFFECTS.REVENGE)) {
         pokemon.setMana(pokemon.mana + 5);
@@ -125,9 +125,6 @@ class AttackingState extends PokemonState {
         damage = pokemon.atk;
       }
 
-      if (pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
-        attackType = ATTACK_TYPE.TRUE;
-      }
       if (target.items.count(ITEMS.ROCKY_HELMET) != 0) {
         pokemon.handleDamage(Math.ceil(pokemon.hp * 0.04) * target.items.count(ITEMS.ROCKY_HELMET), board, ATTACK_TYPE.PHYSICAL, target);
       }

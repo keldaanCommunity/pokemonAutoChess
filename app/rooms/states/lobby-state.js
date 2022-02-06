@@ -2,7 +2,6 @@ const schema = require('@colyseus/schema');
 const Message = require('../../models/colyseus-models/message');
 const LeaderboardInfo = require('../../models/colyseus-models/leaderboard-info');
 const Chat = require('../../models/mongo-models/chat');
-const Filter = require('bad-words');
 const LobbyUser = require('../../models/colyseus-models/lobby-user');
 
 class LobbyState extends schema.Schema {
@@ -12,25 +11,13 @@ class LobbyState extends schema.Schema {
     this.leaderboard = new schema.ArraySchema();
     this.botLeaderboard = new schema.ArraySchema();
     this.users = new schema.MapSchema();
-    this.filter = new Filter();
   }
 
   addMessage(name, payload, avatar, time, save) {
-    if (this.messages.length > 100) {
-      this.messages.splice(0, 1);
-    } else {
-      let safePayload = payload;
-      try {
-        safePayload = this.filter.clean(payload);
-      } catch (error) {
-        console.error('bad words library error');
-      }
-      const message = new Message(name, safePayload, avatar, time);
-      this.messages.push(message);
-      // console.log(message.name);
-      if (save) {
-        Chat.create({'name': message.name, 'avatar': message.avatar, 'payload': message.payload, 'time': message.time});
-      }
+    const message = new Message(name, payload, avatar, time);
+    this.messages.push(message);
+    if (save) {
+      Chat.create({'name': message.name, 'avatar': message.avatar, 'payload': message.payload, 'time': message.time});
     }
   }
 }

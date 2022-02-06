@@ -5,7 +5,7 @@ class InlineAvatar extends Component{
         return <div style={{
             display:'flex'
             }}>
-            <img src={"/assets/avatar/" + this.props.avatar + ".png"}/>
+            <img style={{width:'40px', height:'40px'}} src={"/assets/avatar/" + this.props.avatar + ".png"}/>
             <p>{this.props.name}</p>
         </div>;
     }

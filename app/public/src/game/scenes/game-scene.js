@@ -3,13 +3,12 @@ import AnimationManager from '../animation-manager';
 import BoardManager from '../components/board-manager';
 import BattleManager from '../components/battle-manager';
 import WeatherManager from '../components/weather-manager';
-import EntryHazardsManager from '../components/Entry-hazards-manager';
 import ItemsContainer from '../components/items-container';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
 import {STATE} from '../../../../models/enum';
 import firebase from 'firebase/compat/app';
-import {transformAttackCoordinate, getOrientation, transformCoordinate} from '../../pages/utils/utils';
+import {getOrientation, transformCoordinate} from '../../pages/utils/utils';
 
 
 export default class GameScene extends Scene {
@@ -20,8 +19,9 @@ export default class GameScene extends Scene {
     });
   }
 
-  init(room) {
-    this.room = room;
+  init(data) {
+    this.tilemap = data.tilemap;
+    this.room = data.room;
     this.uid = firebase.auth().currentUser.uid;
   }
 
@@ -92,12 +92,10 @@ export default class GameScene extends Scene {
       assetText.destroy();
     });
 
-    const chosenTileset = this.room.state.players.get(this.uid).tileset;
-
-    // console.log(chosenTileset);
-    this.load.audioSprite('sounds', `/assets/sounds/${this.room.state.mapType}.json`, [`/assets/sounds/${this.room.state.mapType}.mp3`]);
-    this.load.image('tiles', `/assets/tiles/${this.room.state.mapType}/${chosenTileset}.png`);
-    this.load.tilemapTiledJSON('map', `/assets/tiles/${this.room.state.mapType}/${this.room.state.mapType}.json`);
+    // console.log(this.tilemap);
+    this.load.audio('sound', [`https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChessMusic/main/music/${this.tilemap.tilesets[0].name}.mp3`]);
+    this.load.image('tiles', `/assets/tilesets/${this.tilemap.tilesets[0].name}.png`);
+    this.load.tilemapTiledJSON('map', this.tilemap);
     this.load.image('rain', '/assets/ui/rain.png');
     this.load.image('sand', '/assets/ui/sand.png');
     this.load.image('sun', '/assets/ui/sun.png');
@@ -176,42 +174,25 @@ export default class GameScene extends Scene {
 
     this.input.dragDistanceThreshold = 1;
     this.map = this.make.tilemap({key: 'map'});
-    const tileset = this.map.addTilesetImage(this.room.state.mapType, 'tiles', 24, 24, 1, 1);
+    const tileset = this.map.addTilesetImage(this.tilemap.tilesets[0].name, 'tiles', 24, 24, 1, 1);
     this.map.createLayer('World', tileset, 0, 0);
 
     this.battle = this.add.group();
-    this.animationManager = new AnimationManager(this, this.room.state.mapType);
+    this.animationManager = new AnimationManager(this);
     this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].stuff.items, 24*24 + 10, 5*24 + 10);
     this.boardManager = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
-    this.entryHazardsManager = new EntryHazardsManager(this, this.map, tileset);
     this.pokemon = this.add.existing(new Pokemon(this, 11*24, 19*24, PokemonFactory.createPokemonFromName(this.room.state.players[this.uid].avatar), false));
     this.animationManager.animatePokemon(this.pokemon);
 
     this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
     this.transitionScreen.setAlpha(0);
-    this.music = this.sound.addAudioSprite('sounds');
-    this.music.play(this.room.state.mapType, {
-      mute: false,
-      volume: 0.3,
-      rate: 1,
-      detune: 0,
-      seek: 0,
-      loop: true,
-      delay: 0
-    });
+    this.music = this.sound.add('sound', {loop: true});
+    this.music.setVolume(0.1);
+    this.music.play();
     this.initilizeDragAndDrop();
-
-    // console.log(this.room.state.mapType);
-    const self = this;
-    this.room.state.specialCells.forEach((cell) => {
-      const coordinates = transformAttackCoordinate(cell.positionX, cell.positionY);
-      const sprite = new GameObjects.Sprite(self, coordinates[0], coordinates[1], 'attacks', `${this.room.state.mapType}/cell/000`);
-      self.add.existing(sprite);
-      this.animationManager.playSpecialCells(sprite);
-    });
   }
 
   update() {

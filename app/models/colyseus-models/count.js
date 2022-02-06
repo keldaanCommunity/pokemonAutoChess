@@ -10,7 +10,9 @@ class Count extends schema.Schema {
       fieldCount: 0,
       soundCount: 0,
       fairyCritCount: 0,
-      attackCount: 0
+      attackCount: 0,
+      growGroundCount: 0,
+      dodgeCount: 0
     });
   }
 }
@@ -22,7 +24,9 @@ schema.defineTypes(Count, {
   fieldCount: 'uint8',
   soundCount: 'uint8',
   fairyCritCount: 'uint8',
-  attackCount: 'uint8'
+  attackCount: 'uint8',
+  growGroundCount: 'uint8',
+  dodgeCount: 'uint8'
 });
 
 module.exports = Count;

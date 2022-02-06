@@ -13,9 +13,8 @@ class ExperienceManager extends schema.Schema {
     );
   }
 
-  canLevel()
-  {
-    return (this.level < this.maxLevel)
+  canLevel() {
+    return (this.level < this.maxLevel);
   }
 
   addExperience(quantity) {

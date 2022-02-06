@@ -25,13 +25,6 @@ class OnJoinCommand extends Command {
 
 class OnMessageCommand extends Command {
   execute({client, message}) {
-    let safePayload = message.payload;
-    try {
-      safePayload = this.room.filter.clean(safePayload);
-    } catch (error) {
-      console.error('bad words library error');
-    }
-    message.payload = safePayload;
     this.room.broadcast('messages', message);
   }
 }

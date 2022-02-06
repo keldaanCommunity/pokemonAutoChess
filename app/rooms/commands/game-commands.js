@@ -471,18 +471,12 @@ class OnJoinCommand extends Command {
             user.elo,
             user.avatar,
             false,
-            this.state.specialCells,
-            this.state.mapType,
-            this.state.players.size + 1,
-            user.map[this.state.mapType]
+            this.state.players.size + 1
         ));
         if (client && client.auth && client.auth.displayName) {
           console.log(`${client.auth.displayName} ${client.id} join game room`);
         }
 
-        this.state.players.forEach((p)=>{
-          console.log(p.name);
-        });
         // console.log(this.state.players.get(client.auth.uid).tileset);
         this.state.shop.assignShop(this.state.players.get(client.auth.uid));
         if (this.state.players.size >= 8) {
@@ -579,7 +573,11 @@ class OnUpdatePhaseCommand extends Command {
     } else if (stageLevel >= 20) {
       multiplier = 2.0;
     } else if (stageLevel >= 25) {
-      multiplier = 2.5;
+      multiplier = 3;
+    } else if (stageLevel >= 30) {
+      multiplier = 5;
+    } else if (stageLevel >= 35) {
+      multiplier = 8;
     }
     damage = damage * multiplier;
     if (redTeam.size > 0) {

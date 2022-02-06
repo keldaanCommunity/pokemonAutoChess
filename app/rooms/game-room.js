@@ -28,7 +28,7 @@ class GameRoom extends colyseus.Room {
       const user = options.users[id];
       // console.log(user);
       if (user.isBot) {
-        this.state.players.set(id, new Player(user.id, user.name, user.elo, user.avatar, true, this.state.specialCells, this.state.mapType, this.state.players.size + 1, `${this.state.mapType}0`));
+        this.state.players.set(id, new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1));
         this.state.botManager.addBot(this.state.players.get(id));
         this.state.shop.assignShop(this.state.players.get(id));
       }
@@ -89,6 +89,10 @@ class GameRoom extends colyseus.Room {
           console.log('sell drop error', message);
         }
       }
+    });
+
+    this.onMessage('request-tilemap', (client, message)=>{
+      client.send('tilemap', this.state.tilemap);
     });
 
     this.onMessage('refresh', (client, message) => {
@@ -210,12 +214,6 @@ class GameRoom extends colyseus.Room {
               } else {
                 usr.exp = usr.exp + player.exp;
               }
-
-              if (player.rank == 1) {
-                usr.wins += 1;
-                usr.mapWin[self.state.mapType] += 1;
-              }
-
 
               if (usr.elo) {
                 const elo = self.computeElo(player, rank, usr.elo);

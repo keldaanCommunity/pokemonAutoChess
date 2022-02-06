@@ -27,7 +27,8 @@ class Game extends Component {
           modalBoolean: false,
           modalTitle: '',
           modalInfo: '',
-          dpsMeter: {},
+          blueDpsMeter: {},
+          redDpsMeter:{},
           history:[],
           afterGameId: '',
           isSignedIn: false,
@@ -80,7 +81,7 @@ class Game extends Component {
                 FLYING: 0,
                 FLORA: 0,
                 MINERAL: 0,
-                AMORPH: 0,
+                GHOST: 0,
                 FAIRY: 0,
                 ICE: 0,
                 FOSSIL: 0,
@@ -92,8 +93,7 @@ class Game extends Component {
             roundTime: '',
             phase: '',
             players: {},
-            stageLevel: 0,
-            mapType: ''
+            stageLevel: 0
           }
         };
 
@@ -137,7 +137,13 @@ class Game extends Component {
         connected:true
       });
 
+      this.gameContainer = new GameContainer(this.container.current, this.uid, this.room);
+      document.getElementById('game').addEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
+      document.getElementById('game').addEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
+
+      this.room.send('request-tilemap');
       this.room.onMessage('info', (message)=> this.showModal(message.title, message.info));
+      this.room.onMessage('tilemap', (tilemap) => {this.gameContainer.setTilemap(tilemap)});
 
       this.room.state.players.onAdd = (player) => {
         this.gameContainer.initializePlayer(player);
@@ -231,33 +237,53 @@ class Game extends Component {
                 });
             }
         };
-        player.simulation.dpsMeter.onAdd = (dps, key) => {
+        player.simulation.blueDpsMeter.onAdd = (dps, key) => {
             if(player.id == this.state.currentPlayerId){
                 this.setState({
-                    dpsMeter:player.simulation.dpsMeter
+                  blueDpsMeter:player.simulation.blueDpsMeter
                 });
             }
             dps.onChange = (changes) => {
                 if(player.id == this.state.currentPlayerId){
                     this.setState({
-                        dpsMeter:player.simulation.dpsMeter
+                      blueDpsMeter:player.simulation.blueDpsMeter
                     });
                 }
             };
           };
-        player.simulation.dpsMeter.onRemove = (dps, key) => {
+        player.simulation.blueDpsMeter.onRemove = (dps, key) => {
             if(player.id == this.state.currentPlayerId){
                 this.setState({
-                    dpsMeter:player.simulation.dpsMeter
+                  blueDpsMeter:player.simulation.blueDpsMeter
                 });
             }
           };
 
+          player.simulation.redDpsMeter.onAdd = (dps, key) => {
+            if(player.id == this.state.currentPlayerId){
+                this.setState({
+                  redDpsMeter:player.simulation.redDpsMeter
+                });
+            }
+            dps.onChange = (changes) => {
+                if(player.id == this.state.currentPlayerId){
+                    this.setState({
+                      redDpsMeter:player.simulation.redDpsMeter
+                    });
+                }
+            };
+          };
+        player.simulation.redDpsMeter.onRemove = (dps, key) => {
+            if(player.id == this.state.currentPlayerId){
+                this.setState({
+                  redDpsMeter:player.simulation.redDpsMeter
+                });
+            }
+          };
       };
       this.room.state.players.onRemove = (player, key) => {
         this.gameContainer.onPlayerRemove(player, key)
       };
-
       this.room.state.onChange = (changes)=>{
         if(this.gameContainer && this.gameContainer.game){
           changes.forEach(change=>{
@@ -287,12 +313,6 @@ class Game extends Component {
                 });
                 break;
 
-            case 'mapType':
-                this.setState({
-                    mapType: change.value
-                });
-                break;
-
             default:
                 break;
             }
@@ -303,10 +323,6 @@ class Game extends Component {
       this.setState({
         gameState: this.room.state
       });
-
-      this.gameContainer = new GameContainer(this.container.current, this.uid, this.room);
-      document.getElementById('game').addEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
-      document.getElementById('game').addEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
     }
 
     leaveGame(){
@@ -441,6 +457,7 @@ class Game extends Component {
         <GameInformations
           time={this.state.gameState.roundTime}
           turn={this.state.gameState.stageLevel}
+          mapName={this.state.gameState.mapName}
           click={this.leaveGame.bind(this)}
           />
         <GamePlayers 
@@ -459,7 +476,8 @@ class Game extends Component {
             life={this.state.player.life}
         />
         <GameDpsMeter
-            dpsMeter={this.state.dpsMeter}
+            blueDpsMeter={this.state.blueDpsMeter}
+            redDpsMeter={this.state.redDpsMeter}
         />
         <GameSynergies
             synergies={this.state.player.synergies}

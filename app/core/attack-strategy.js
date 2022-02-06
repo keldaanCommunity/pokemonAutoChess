@@ -7,6 +7,20 @@ class AttackStrategy {
   process(pokemon, state, board, target) {
     pokemon.setMana(0);
     pokemon.count.ult += 1;
+    if (pokemon.types.includes(TYPE.MONSTER) && pokemon.shield <= 0) {
+      let shield = 0;
+      if (pokemon.effects.includes(EFFECTS.PURSUIT)) {
+        shield = Math.floor(pokemon.hp * 0.2);
+      } else if (pokemon.effects.includes(EFFECTS.BRUTAL_SWING)) {
+        shield = Math.floor(pokemon.hp * 0.3);
+      } else if (pokemon.effects.includes(EFFECTS.POWER_TRIP)) {
+        shield = Math.floor(pokemon.hp * 0.4);
+      }
+      if (shield > 0 && !pokemon.status.temporaryShield) {
+        pokemon.status.triggerShield(4000);
+        pokemon.shield = shield;
+      }
+    }
     if (pokemon.types.includes(TYPE.SOUND)) {
       let atk = 0;
       if (pokemon.effects.includes(EFFECTS.LARGO)) {
@@ -34,13 +48,13 @@ class KingShieldStrategy extends AttackStrategy {
     let timer = 0;
     switch (pokemon.stars) {
       case 1:
-        timer = 500;
+        timer = 750;
         break;
       case 2:
-        timer = 1000;
+        timer = 1500;
         break;
       case 3:
-        timer = 2000;
+        timer = 3000;
         break;
       default:
         break;
@@ -1570,11 +1584,9 @@ class NightSlashStrategy extends AttackStrategy {
 
     target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
 
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
-
-    cells.forEach((cell) => {
-      if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.def = Math.max(0, cell.value.def - 1);
+    board.forEach((x, y, v) => {
+      if (v && pokemon.team != v.team) {
+        v.def = Math.max(0, v.def - 1);
       }
     });
   }

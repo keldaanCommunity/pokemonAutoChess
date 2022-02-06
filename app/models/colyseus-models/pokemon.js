@@ -95,19 +95,19 @@ class MegaManectric extends Pokemon {
 
 class Shuppet extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SHUPPET, 'ptéra', [TYPE.DARK, TYPE.AMORPH], RARITY.LEGENDARY, 'sound', 353, PKM.BANETTE, 100, 5, 3, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.SHADOW_CLONE);
+    super('Nintendo', PKM.SHUPPET, 'ptéra', [TYPE.DARK, TYPE.GHOST], RARITY.LEGENDARY, 'sound', 353, PKM.BANETTE, 100, 5, 3, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.SHADOW_CLONE);
   }
 }
 
 class Banette extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.BANETTE, 'ptéra', [TYPE.DARK, TYPE.AMORPH], RARITY.LEGENDARY, 'sound', 354, PKM.MEGABANETTE, 140, 11, 4, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SHADOW_CLONE);
+    super('Nintendo', PKM.BANETTE, 'ptéra', [TYPE.DARK, TYPE.GHOST], RARITY.LEGENDARY, 'sound', 354, PKM.MEGABANETTE, 140, 11, 4, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SHADOW_CLONE);
   }
 }
 
 class MegaBanette extends Pokemon {
   constructor() {
-    super('Junaca', PKM.MEGABANETTE, 'ptéra', [TYPE.DARK, TYPE.AMORPH], RARITY.LEGENDARY, 'sound', 3540, '', 240, 21, 5, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.SHADOW_CLONE);
+    super('Junaca', PKM.MEGABANETTE, 'ptéra', [TYPE.DARK, TYPE.GHOST], RARITY.LEGENDARY, 'sound', 3540, '', 240, 21, 5, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.SHADOW_CLONE);
   }
 }
 
@@ -149,19 +149,19 @@ class MegaAltaria extends Pokemon {
 
 class Scyther extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SCYTHER, 'insécatueur', [TYPE.BUG, TYPE.NORMAL], RARITY.LEGENDARY, 'LEGENDARY', 123, PKM.SCIZOR, 90, 5, 5, 5, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.PROTECT);
+    super('Nintendo', PKM.SCYTHER, 'insécatueur', [TYPE.BUG, TYPE.FLYING], RARITY.LEGENDARY, 'LEGENDARY', 123, PKM.SCIZOR, 90, 5, 5, 5, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.KING_SHIELD);
   }
 }
 
 class Scizor extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SCIZOR, 'cizayox', [TYPE.BUG, TYPE.METAL], RARITY.LEGENDARY, 'LEGENDARY', 212, PKM.MEGASCIZOR, 130, 9, 6, 6, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.PROTECT);
+    super('Nintendo', PKM.SCIZOR, 'cizayox', [TYPE.BUG, TYPE.FLYING, TYPE.METAL], RARITY.LEGENDARY, 'LEGENDARY', 212, PKM.MEGASCIZOR, 130, 9, 6, 6, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.KING_SHIELD);
   }
 }
 
 class MegaScizor extends Pokemon {
   constructor() {
-    super('Keldaan', PKM.MEGASCIZOR, 'méga-cizayox', [TYPE.BUG, TYPE.METAL], RARITY.LEGENDARY, 'LEGENDARY', 2120, '', 230, 20, 7, 7, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.PROTECT);
+    super('Keldaan', PKM.MEGASCIZOR, 'méga-cizayox', [TYPE.BUG, TYPE.FLYING, TYPE.METAL], RARITY.LEGENDARY, 'LEGENDARY', 2120, '', 230, 20, 7, 7, 1, 'NORMAL/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.KING_SHIELD);
   }
 }
 
@@ -407,19 +407,19 @@ class Slaking extends Pokemon {
 
 class Honedge extends Pokemon {
   constructor() {
-    super('PmdCollab', PKM.HONEDGE, 'monorpale', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 679, PKM.DOUBLADE, 90, 8, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.KING_SHIELD);
+    super('PmdCollab', PKM.HONEDGE, 'monorpale', [TYPE.GHOST, TYPE.METAL], RARITY.EPIC, 'sound', 679, PKM.DOUBLADE, 90, 8, 4, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.KING_SHIELD);
   }
 }
 
 class Doublade extends Pokemon {
   constructor() {
-    super('pokegirl4ever', PKM.DOUBLADE, 'doublade', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 680, PKM.AEGISLASH, 130, 9, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.KING_SHIELD);
+    super('pokegirl4ever', PKM.DOUBLADE, 'doublade', [TYPE.GHOST, TYPE.METAL], RARITY.EPIC, 'sound', 680, PKM.AEGISLASH, 130, 9, 6, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.KING_SHIELD);
   }
 }
 
 class Aegislash extends Pokemon {
   constructor() {
-    super('jhony rex', PKM.AEGISLASH, 'exagide', [TYPE.AMORPH, TYPE.METAL], RARITY.EPIC, 'sound', 681, '', 230, 20, 8, 8, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.KING_SHIELD);
+    super('jhony rex', PKM.AEGISLASH, 'exagide', [TYPE.GHOST, TYPE.METAL], RARITY.EPIC, 'sound', 681, '', 230, 20, 8, 8, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.KING_SHIELD);
   }
 }
 
@@ -461,19 +461,19 @@ class KommoO extends Pokemon {
 
 class Gastly extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.GASTLY, 'fantominus', [TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.LEGENDARY, 'EPIC', 92, PKM.HAUNTER, 90, 8, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.NIGHTMARE);
+    super('Nintendo', PKM.GASTLY, 'fantominus', [TYPE.MONSTER, TYPE.POISON, TYPE.GHOST], RARITY.LEGENDARY, 'EPIC', 92, PKM.HAUNTER, 90, 8, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 120, SPECIAL_SKILL.NIGHTMARE);
   }
 }
 
 class Haunter extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.HAUNTER, 'spectrum', [TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.LEGENDARY, 'EPIC', 93, PKM.GENGAR, 130, 12, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.NIGHTMARE);
+    super('Nintendo', PKM.HAUNTER, 'spectrum', [TYPE.MONSTER, TYPE.POISON, TYPE.GHOST], RARITY.LEGENDARY, 'EPIC', 93, PKM.GENGAR, 130, 12, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 120, SPECIAL_SKILL.NIGHTMARE);
   }
 }
 
 class Gengar extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.GENGAR, 'ectoplasma', [TYPE.MONSTER, TYPE.POISON, TYPE.AMORPH], RARITY.LEGENDARY, 'EPIC', 94, '', 230, 25, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.NIGHTMARE);
+    super('Nintendo', PKM.GENGAR, 'ectoplasma', [TYPE.MONSTER, TYPE.POISON, TYPE.GHOST], RARITY.LEGENDARY, 'EPIC', 94, '', 230, 25, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 120, SPECIAL_SKILL.NIGHTMARE);
   }
 }
 
@@ -497,19 +497,19 @@ class Alakazam extends Pokemon {
 
 class Litwick extends Pokemon {
   constructor() {
-    super('PowerCrystal', PKM.LITWICK, 'funécire', [TYPE.FIRE, TYPE.AMORPH], RARITY.EPIC, 'EPIC2', 607, PKM.LAMPENT, 90, 5, 1, 1, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.FIRE_BLAST);
+    super('PowerCrystal', PKM.LITWICK, 'funécire', [TYPE.FIRE, TYPE.GHOST], RARITY.EPIC, 'EPIC2', 607, PKM.LAMPENT, 90, 5, 1, 1, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.FIRE_BLAST);
   }
 }
 
 class Lampent extends Pokemon {
   constructor() {
-    super('PowerCrystal', PKM.LAMPENT, 'mélancolux', [TYPE.FIRE, TYPE.AMORPH], RARITY.EPIC, 'EPIC2', 608, PKM.CHANDELURE, 130, 9, 1, 1, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.FIRE_BLAST);
+    super('PowerCrystal', PKM.LAMPENT, 'mélancolux', [TYPE.FIRE, TYPE.GHOST], RARITY.EPIC, 'EPIC2', 608, PKM.CHANDELURE, 130, 9, 1, 1, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.FIRE_BLAST);
   }
 }
 
 class Chandelure extends Pokemon {
   constructor() {
-    super('PowerCrystal', PKM.CHANDELURE, 'lugulabre', [TYPE.FIRE, TYPE.AMORPH], RARITY.EPIC, 'EPIC2', 609, '', 230, 18, 1, 1, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.FIRE_BLAST);
+    super('PowerCrystal', PKM.CHANDELURE, 'lugulabre', [TYPE.FIRE, TYPE.GHOST], RARITY.EPIC, 'EPIC2', 609, '', 230, 18, 1, 1, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.FIRE_BLAST);
   }
 }
 
@@ -623,19 +623,19 @@ class Magmortar extends Pokemon {
 
 class Solosis extends Pokemon {
   constructor() {
-    super('PowerCrystal', PKM.SOLOSIS, 'nucléos', [TYPE.PSYCHIC, TYPE.AMORPH], RARITY.RARE, 'april', 577, PKM.DUOSION, 80, 5, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.LEECH_LIFE);
+    super('PowerCrystal', PKM.SOLOSIS, 'nucléos', [TYPE.PSYCHIC, TYPE.GHOST], RARITY.RARE, 'april', 577, PKM.DUOSION, 80, 5, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.LEECH_LIFE);
   }
 }
 
 class Duosion extends Pokemon {
   constructor() {
-    super('PowerCrystal', PKM.DUOSION, 'méïos', [TYPE.PSYCHIC, TYPE.AMORPH], RARITY.RARE, 'april', 578, PKM.REUNICLUS, 120, 9, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.LEECH_LIFE);
+    super('PowerCrystal', PKM.DUOSION, 'méïos', [TYPE.PSYCHIC, TYPE.GHOST], RARITY.RARE, 'april', 578, PKM.REUNICLUS, 120, 9, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.LEECH_LIFE);
   }
 }
 
 class Reuniclus extends Pokemon {
   constructor() {
-    super('PowerCrystal', PKM.REUNICLUS, 'symbios', [TYPE.PSYCHIC, TYPE.AMORPH], RARITY.RARE, 'april', 579, '', 220, 18, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.LEECH_LIFE);
+    super('PowerCrystal', PKM.REUNICLUS, 'symbios', [TYPE.PSYCHIC, TYPE.GHOST], RARITY.RARE, 'april', 579, '', 220, 18, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.LEECH_LIFE);
   }
 }
 
@@ -671,7 +671,7 @@ class Marowak extends Pokemon {
 
 class AlolanMarowak extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ALOLANMAROWAK, 'ptéra', [TYPE.FIRE, TYPE.AMORPH], RARITY.EPIC, 'sound', 1050, '', 220, 20, 6, 6, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 3, 60, SPECIAL_SKILL.BONEMERANG);
+    super('Nintendo', PKM.ALOLANMAROWAK, 'ptéra', [TYPE.GROUND, TYPE.MINERAL, TYPE.FIRE, TYPE.GHOST], RARITY.EPIC, 'sound', 1050, '', 220, 20, 6, 6, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 3, 60, SPECIAL_SKILL.BONEMERANG);
   }
 }
 
@@ -856,19 +856,19 @@ class MegaAbomasnow extends Pokemon {
 
 class Snorunt extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SNORUNT, 'stalgamin', [TYPE.AMORPH, TYPE.ICE], RARITY.EPIC, 'december', 361, PKM.GLALIE, 80, 5, 2, 2, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DARK_PULSE);
+    super('Nintendo', PKM.SNORUNT, 'stalgamin', [TYPE.GHOST, TYPE.ICE], RARITY.EPIC, 'december', 361, PKM.GLALIE, 80, 5, 2, 2, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.DARK_PULSE);
   }
 }
 
 class Glalie extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.GLALIE, 'oniglali', [TYPE.AMORPH, TYPE.ICE], RARITY.EPIC, 'december', 362, PKM.FROSLASS, 120, 9, 2, 2, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DARK_PULSE);
+    super('Nintendo', PKM.GLALIE, 'oniglali', [TYPE.GHOST, TYPE.ICE], RARITY.EPIC, 'december', 362, PKM.FROSLASS, 120, 9, 2, 2, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.DARK_PULSE);
   }
 }
 
 class Froslass extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.FROSLASS, 'momartik', [TYPE.AMORPH, TYPE.ICE], RARITY.EPIC, 'december', 478, '', 220, 20, 2, 2, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DARK_PULSE);
+    super('Nintendo', PKM.FROSLASS, 'momartik', [TYPE.GHOST, TYPE.ICE], RARITY.EPIC, 'december', 478, '', 220, 20, 2, 2, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DARK_PULSE);
   }
 }
 
@@ -964,19 +964,19 @@ class Wigglytuff extends Pokemon {
 
 class Duskull extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.DUSKULL, 'skélénox', [TYPE.DARK, TYPE.AMORPH], RARITY.UNCOMMON, 'RARE', 355, PKM.DUSCLOPS, 70, 5, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.NIGHT_SLASH);
+    super('Nintendo', PKM.DUSKULL, 'skélénox', [TYPE.DARK, TYPE.GHOST], RARITY.UNCOMMON, 'RARE', 355, PKM.DUSCLOPS, 70, 5, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 1, 100, SPECIAL_SKILL.NIGHT_SLASH);
   }
 }
 
 class Dusclops extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.DUSCLOPS, 'téraclope', [TYPE.DARK, TYPE.AMORPH], RARITY.UNCOMMON, 'RARE', 356, PKM.DUSKNOIR, 120, 9, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.NIGHT_SLASH);
+    super('Nintendo', PKM.DUSCLOPS, 'téraclope', [TYPE.DARK, TYPE.GHOST], RARITY.UNCOMMON, 'RARE', 356, PKM.DUSKNOIR, 120, 9, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.NIGHT_SLASH);
   }
 }
 
 class Dusknoir extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.DUSKNOIR, 'noctunoir', [TYPE.DARK, TYPE.AMORPH], RARITY.UNCOMMON, 'RARE', 477, '', 210, 18, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.NIGHT_SLASH);
+    super('Nintendo', PKM.DUSKNOIR, 'noctunoir', [TYPE.DARK, TYPE.GHOST], RARITY.UNCOMMON, 'RARE', 477, '', 210, 18, 1, 1, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.NIGHT_SLASH);
   }
 }
 
@@ -1593,19 +1593,19 @@ class Staraptor extends Pokemon {
 
 class Charmander extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.CHARMANDER, 'salamèche', [TYPE.FIRE, TYPE.MONSTER, TYPE.FLYING], RARITY.COMMON, 'UNCOMMON', 4, PKM.CHARMELEON, 60, 5, 2, 2, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BLAST_BURN);
+    super('Nintendo', PKM.CHARMANDER, 'salamèche', [TYPE.FIRE, TYPE.DRAGON], RARITY.COMMON, 'UNCOMMON', 4, PKM.CHARMELEON, 60, 5, 2, 2, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.BLAST_BURN);
   }
 }
 
 class Charmeleon extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.CHARMELEON, 'reptincel', [TYPE.FIRE, TYPE.MONSTER, TYPE.FLYING], RARITY.COMMON, 'UNCOMMON', 5, PKM.CHARIZARD, 110, 9, 2, 2, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.BLAST_BURN);
+    super('Nintendo', PKM.CHARMELEON, 'reptincel', [TYPE.FIRE, TYPE.DRAGON], RARITY.COMMON, 'UNCOMMON', 5, PKM.CHARIZARD, 110, 9, 2, 2, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.BLAST_BURN);
   }
 }
 
 class Charizard extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.CHARIZARD, 'dracaufeu', [TYPE.FIRE, TYPE.MONSTER, TYPE.FLYING], RARITY.COMMON, 'UNCOMMON', 6, '', 200, 20, 2, 2, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.BLAST_BURN);
+    super('Nintendo', PKM.CHARIZARD, 'dracaufeu', [TYPE.FIRE, TYPE.DRAGON], RARITY.COMMON, 'UNCOMMON', 6, '', 200, 20, 2, 2, 1, 'FIRE/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.BLAST_BURN);
   }
 }
 
@@ -1672,7 +1672,7 @@ class Lugia extends Pokemon {
 
 class Giratina extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.GIRATINA, 'giratina', [TYPE.DRAGON, TYPE.AMORPH], RARITY.MYTHICAL, 'NEUTRAL', 487, '', 300, 30, 5, 5, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.NIGHT_SLASH);
+    super('Nintendo', PKM.GIRATINA, 'giratina', [TYPE.DRAGON, TYPE.GHOST], RARITY.MYTHICAL, 'NEUTRAL', 487, '', 300, 30, 5, 5, 2, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.NIGHT_SLASH);
   }
 }
 
@@ -1828,7 +1828,7 @@ class Sandshrew extends Pokemon {
 
 class Darkrai extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.DARKRAI, 'darkrai', [TYPE.DARK, TYPE.MONSTER, TYPE.AMORPH], RARITY.MYTHICAL, 'NEUTRAL', 491, '', 300, 30, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DARK_PULSE);
+    super('Nintendo', PKM.DARKRAI, 'darkrai', [TYPE.DARK, TYPE.MONSTER, TYPE.GHOST], RARITY.MYTHICAL, 'NEUTRAL', 491, '', 300, 30, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 3, 100, SPECIAL_SKILL.DARK_PULSE);
   }
 }
 
@@ -1888,13 +1888,13 @@ class Manaphy extends Pokemon {
 
 class Rotom extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ROTOM, 'motisma', [TYPE.ELECTRIC, TYPE.AMORPH], RARITY.MYTHICAL, 'february', 479, '', 200, 12, 3, 3, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
+    super('Nintendo', PKM.ROTOM, 'motisma', [TYPE.ELECTRIC, TYPE.GHOST], RARITY.MYTHICAL, 'february', 479, '', 200, 12, 3, 3, 3, 'ELECTRIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.CALM_MIND);
   }
 }
 
 class Spiritomb extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SPIRITOMB, 'spiritomb', [TYPE.DARK, TYPE.AMORPH], RARITY.MYTHICAL, 'february', 442, '', 200, 20, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.NIGHT_SLASH);
+    super('Nintendo', PKM.SPIRITOMB, 'spiritomb', [TYPE.DARK, TYPE.GHOST], RARITY.MYTHICAL, 'february', 442, '', 200, 20, 3, 3, 3, 'GHOST/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.NIGHT_SLASH);
   }
 }
 
@@ -1948,7 +1948,7 @@ class Mewtwo extends Pokemon {
 
 class Kyurem extends Pokemon {
   constructor() {
-    super('PowerCrystal', PKM.KYUREM, 'kyurem', [TYPE.DRAGON, TYPE.MONSTER, TYPE.ICE], RARITY.MYTHICAL, 'february', 646, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.FREEZE);
+    super('PowerCrystal', PKM.KYUREM, 'kyurem', [TYPE.DRAGON, TYPE.ICE], RARITY.MYTHICAL, 'february', 646, '', 300, 30, 5, 5, 3, 'FIRE/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.FREEZE);
   }
 }
 

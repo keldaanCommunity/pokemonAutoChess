@@ -87,7 +87,7 @@ const data = {
     pokemons: [],
     mythicalPokemons: []
   },
-  AMORPH: {
+  GHOST: {
     pokemons: [],
     mythicalPokemons: []
   },

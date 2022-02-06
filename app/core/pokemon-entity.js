@@ -61,6 +61,7 @@ class PokemonEntity extends schema.Schema {
         }
     );
     this.critDamage = 2;
+    this.dodge = 0;
 
     pokemon.types.forEach((type) => {
       this.types.push(type);
@@ -119,6 +120,10 @@ class PokemonEntity extends schema.Schema {
       this.critDamage += Math.round((this.critChance - 100) * 10) / 500;
       this.critChance = 100;
     }
+  }
+
+  addDodgeChance(value) {
+    this.dodge = Math.min(0.9, this.dodge + value);
   }
 }
 
