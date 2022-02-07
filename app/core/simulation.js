@@ -62,12 +62,6 @@ class Simulation extends Schema {
       });
     }
 
-    if (blueEffects && blueEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
-      const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
-      const coord = this.getFirstAvailablePlaceOnBoard(true);
-      this.addPokemon(kyogre, coord[0], coord[1], 0);
-    }
-
     if (blueEffects && blueEffects.includes(EFFECTS.SWARM)) {
       const bugTeam = [];
       blueTeam.forEach((pkm)=>{
@@ -93,13 +87,6 @@ class Simulation extends Schema {
         const coord = this.getFirstAvailablePlaceOnBoard(true);
         this.addPokemon(bug, coord[0], coord[1], 0);
       });
-    }
-
-
-    if (redEffects && redEffects.includes(EFFECTS.PRIMORDIAL_SEA)) {
-      const kyogre = PokemonFactory.createPokemonFromName(PKM.KYOGRE);
-      const coord = this.getFirstAvailablePlaceOnBoard(false);
-      this.addPokemon(kyogre, coord[0], coord[1], 1);
     }
 
     if (redEffects && redEffects.includes(EFFECTS.SWARM)) {
