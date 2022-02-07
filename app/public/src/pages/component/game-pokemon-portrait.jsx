@@ -15,6 +15,13 @@ const COLOR_TYPE = Object.freeze({
 class GamePokemonPortrait extends Component{
 
     render(){
+        if(!this.props.name){
+            return <div style={{
+                width:'15.5%',
+                marginRight:'1%'
+            }}/>
+        }
+
         const pkm = PokemonFactory.createPokemonFromName(this.props.name);
         //console.log(pkm.rarity);
         const rarityColor = COLOR_TYPE[pkm.rarity];

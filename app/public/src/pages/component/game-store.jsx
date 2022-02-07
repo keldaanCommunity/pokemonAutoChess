@@ -21,7 +21,7 @@ class GameStore extends Component{
                     return <GamePokemonPortrait key={index} name={pokemon} shopClick={this.props.shopClick} index={index}/>
                 }
                 else{
-                    return null;
+                    return <GamePokemonPortrait/>;
                 }
             })}
         </ul>;
