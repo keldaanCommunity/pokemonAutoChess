@@ -1,4 +1,5 @@
 const Pokemon = require('./colyseus-models/pokemon');
+const Items = require('./colyseus-models/items');
 const {SPECIAL_SKILL, PKM} = require('./enum');
 const Strategy = require('../core/attack-strategy');
 
@@ -362,6 +363,17 @@ class PokemonFactory {
       default:
         return new Strategy.AttackStrategy();
     }
+  }
+
+  // transforms a pokemon into another pokemon, 
+  // transferring its items and position to
+  // the new pokemon
+  static transformPokemon(before, afterName){
+    const transformation = this.createPokemonFromName(afterName);
+    transformation.positionX = before.positionX;
+    transformation.positionY = before.positionY;
+    transformation.items = new Items(before.items);
+    return transformation
   }
 
   static getPokemonBaseEvolution(name) {
