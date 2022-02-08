@@ -9,7 +9,6 @@ app/public/dist/**/*.js
 /app/public/dist/assets/tiles/sleepBackgroundMirror.png
 /app/public/dist/index.js.LICENSE.txt
 /db-commands/old-statistic.js
-/app/public/dist/assets/tilesets/*.png
 /db-commands/*.sh
 /tests/render/*.png
 /tests/samples/*.json
