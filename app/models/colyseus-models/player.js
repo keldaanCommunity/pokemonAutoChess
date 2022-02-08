@@ -58,6 +58,15 @@ class Player extends Schema {
       return '';
     }
   }
+
+  getPokemonAt(x, y) {
+    for (let [id, pokemon] of this.board) {
+      if(pokemon.positionX == x && pokemon.positionY == y){
+        return [pokemon, id]
+      }
+    }
+    return null
+  }
 }
 
 schema.defineTypes(Player, {

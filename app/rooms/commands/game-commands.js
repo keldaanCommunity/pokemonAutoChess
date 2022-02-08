@@ -114,289 +114,145 @@ class OnDragDropCommand extends Command {
           this.state.players.get(playerId).effects.update(this.state.players.get(playerId).synergies);
           this.state.players.get(playerId).boardSize = this.room.getTeamSize(this.state.players.get(playerId).board);
         }
+
+        if (!success && client.send) {
+          client.send('DragDropFailed', message);
+        }
+        if (dittoReplaced) {
+          this.room.updateEvolution(playerId);
+          this.room.updateEvolution(playerId);
+        }
       }
       if (detail.objType == 'item') {
         message.updateBoard = false;
+        message.updateItems = true
 
         const item = detail.id;
+        const player = this.state.players.get(playerId)
 
-        if (this.state.players.get(playerId).stuff.has(item)) {
-          const x = parseInt(detail.x);
-          const y = parseInt(detail.y);
-          let eevolution;
-          let evolve = false;
+        if (!player.stuff.has(item)) {
+          client.send('DragDropFailed', message)
+          return
+        }
 
-          this.state.players.get(playerId).board.forEach((pokemon, id) => {
-            if (pokemon.positionX == x && pokemon.positionY == y && pokemon.items.length < 3) {
-              if (pokemon.name == PKM.EEVEE && item == ITEMS.WATER_STONE) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.VAPOREON);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                eevolution.items = new Items(pokemon.items);
-                eevolution.items.add(item);
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.FIRE_STONE) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.FLAREON);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                eevolution.items = new Items(pokemon.items);
-                eevolution.items.add(item);
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.THUNDER_STONE) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.JOLTEON);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                eevolution.items = new Items(pokemon.items);
-                eevolution.items.add(item);
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.NIGHT_STONE) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.UMBREON);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                eevolution.items = new Items(pokemon.items);
-                eevolution.items.add(item);
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.MOON_STONE) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.SYLVEON);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                eevolution.items = new Items(pokemon.items);
-                eevolution.items.add(item);
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.LEAF_STONE) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.LEAFEON);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                eevolution.items = new Items(pokemon.items);
-                eevolution.items.add(item);
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.DAWN_STONE) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.ESPEON);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                eevolution.items = new Items(pokemon.items);
-                eevolution.items.add(item);
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.EEVEE && item == ITEMS.ICY_ROCK) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.GLACEON);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                eevolution.items = new Items(pokemon.items);
-                eevolution.items.add(item);
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.GROUDON && item == ITEMS.RED_ORB) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.PRIMALGROUDON);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                eevolution.items = new Items(pokemon.items);
-                eevolution.items.add(item);
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.KYOGRE && item == ITEMS.BLUE_ORB) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.PRIMALKYOGRE);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                eevolution.items = new Items(pokemon.items);
-                eevolution.items.add(item);
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.RAYQUAZA && item == ITEMS.DELTA_ORB) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.MEGARAYQUAZA);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                eevolution.items = new Items(pokemon.items);
-                eevolution.items.add(item);
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.DITTO && item == ITEMS.DOME_FOSSIL) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.KABUTO);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.DITTO && item == ITEMS.HELIX_FOSSIL) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.OMANYTE);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.DITTO && item == ITEMS.OLD_AMBER) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.AERODACTYL);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.DITTO && item == ITEMS.ROOT_FOSSIL) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.LILEEP);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.DITTO && item == ITEMS.CLAW_FOSSIL) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.ANORITH);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.DITTO && item == ITEMS.SKULL_FOSSIL) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.CRANIDOS);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.DITTO && item == ITEMS.ARMOR_FOSSIL) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.SHIELDON);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.DITTO && item == ITEMS.PLUME_FOSSIL) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.ARCHEN);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.DITTO && item == ITEMS.COVER_FOSSIL) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.TIRTOUGA);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.DITTO && item == ITEMS.JAW_FOSSIL) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.TYRUNT);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else if (pokemon.name == PKM.DITTO && item == ITEMS.SAIL_FOSSIL) {
-                evolve = true;
-                const x = pokemon.positionX;
-                const y = pokemon.positionY;
-                eevolution = PokemonFactory.createPokemonFromName(PKM.AMAURA);
-                eevolution.positionX = x;
-                eevolution.positionY = y;
-                this.state.players.get(playerId).board.delete(id);
-                success = true;
-                message.updateItems = false;
-              } else {
-                pokemon.items.add(item);
-                this.state.players.get(playerId).stuff.remove(item);
-                success = true;
-                message.updateItems = false;
-              }
+        const x = parseInt(detail.x);
+        const y = parseInt(detail.y);
+
+        const [pokemon, id] = player.getPokemonAt(x, y)
+
+        // check if full items
+        if(pokemon.items.length >= 3){
+          client.send('DragDropFailed', message);
+          return
+        }
+
+        //SPECIAL CASES: create a new pokemon on item equip
+        let newItemPokemon = null
+        switch(pokemon.name){
+          case PKM.EEVEE:
+            switch(item){
+              case ITEMS.WATER_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.VAPOREON)
+                break
+              case ITEMS.FIRE_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.FLAREON)
+                break
+              case ITEMS.THUNDER_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.JOLTEON)
+                break
+              case ITEMS.NIGHT_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.UMBREON)
+                break
+              case ITEMS.MOON_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.SYLVEON)
+                break
+              case ITEMS.LEAF_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.LEAFEON)
+                break
+              case ITEMS.DAWN_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.ESPEON)
+                break
+              case ITEMS.ICY_ROCK:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.GLACEON)
+                break
             }
-          });
-          if (eevolution) {
-            this.state.players.get(playerId).board.set(eevolution.id, eevolution);
-            this.state.players.get(playerId).stuff.remove(item);
-          }
-          if (evolve) {
-            this.state.players.get(playerId).synergies.update(this.state.players.get(playerId).board);
-            this.state.players.get(playerId).effects.update(this.state.players.get(playerId).synergies);
-            this.state.players.get(playerId).boardSize = this.room.getTeamSize(this.state.players.get(playerId).board);
-          }
+            newItemPokemon.items.add(item)
+            break
+          case PKM.DITTO:
+            switch(item){
+              case ITEMS.DOME_FOSSIL:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.KABUTO)
+                break
+              case ITEMS.HELIX_FOSSIL:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.OMANYTE)
+                break
+              case ITEMS.OLD_AMBER:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.AERODACTYL)
+                break
+              case ITEMS.ROOT_FOSSIL:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.LILEEP)
+                break
+              case ITEMS.CLAW_FOSSIL:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.ANORITH)
+                break
+              case ITEMS.SKULL_FOSSIL:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.CRANIDOS)
+                break
+              case ITEMS.ARMOR_FOSSIL:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.SHIELDON)
+                break
+              case ITEMS.PLUME_FOSSIL:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.ARCHEN)
+                break
+              case ITEMS.COVER_FOSSIL:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.TIRTOUGA)
+                break
+              case ITEMS.JAW_FOSSIL:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.TYRUNT)
+                break
+              case ITEMS.SAIL_FOSSIL:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.AMAURA)
+                break
+              default:
+                client.send('DragDropFailed', message);
+                return
+            }
+            break
+          case PKM.GROUDON:
+            case ITEMS.RED_ORB:
+              newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.PRIMALGROUDON)
+              newItemPokemon.items.add(item)
+            break
+          case PKM.KYOGRE:
+            case ITEMS.BLUE_ORB:
+              newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.PRIMALKYOGRE)
+              newItemPokemon.items.add(item)
+            break
+          case PKM.RAYQUAZA:
+            case ITEMS.DELTA_ORB:
+              newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.MEGARAYQUAZA)
+              newItemPokemon.items.add(item)
+            break
+        }
+
+        if(newItemPokemon){
+          //delete the extra pokemons
+          player.board.delete(id);
+          player.board.set(newItemPokemon.id, newItemPokemon);
+          player.stuff.remove(item);
+          player.synergies.update(player.board);
+          player.effects.update(player.synergies);
+          player.boardSize = this.room.getTeamSize(player.board);
+          
+        }
+        else{
+          // regular equip
+          pokemon.items.add(item);
+          player.stuff.remove(item);
         }
       }
     }
-    if (!success && client.send) {
-      client.send('DragDropFailed', message);
-    }
-    if (dittoReplaced) {
-      this.room.updateEvolution(playerId);
-      this.room.updateEvolution(playerId);
-    }
+    
   }
 }
 
@@ -690,7 +546,7 @@ class OnUpdatePhaseCommand extends Command {
             player.itemsProposition.push(item);
           });
           // const item = ItemFactory.createRandomItem();
-          // const item = ItemFactory.createSpecificItems([ITEMS.DELTA_ORB, ITEMS.BLUE_ORB]);
+          // const item = ItemFactory.createSpecificItems([ITEMS.OLD_AMBER, ITEMS.FIRE_STONE]);
           // player.stuff.add(item);
         }
         player.opponentName = '';
