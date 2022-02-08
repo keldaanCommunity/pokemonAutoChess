@@ -365,15 +365,15 @@ class PokemonFactory {
     }
   }
 
-  // transforms a pokemon into another pokemon, 
+  // transforms a pokemon into another pokemon,
   // transferring its items and position to
   // the new pokemon
-  static transformPokemon(before, afterName){
+  static transformPokemon(before, afterName) {
     const transformation = this.createPokemonFromName(afterName);
     transformation.positionX = before.positionX;
     transformation.positionY = before.positionY;
     transformation.items = new Items(before.items);
-    return transformation
+    return transformation;
   }
 
   static getPokemonBaseEvolution(name) {

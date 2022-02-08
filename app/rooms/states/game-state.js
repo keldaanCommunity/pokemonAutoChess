@@ -19,7 +19,9 @@ class GameState extends schema.Schema {
     const keys = Object.keys(MAP);
     this.id = keys[Math.floor(Math.random() * keys.length)];
     this.design = new Design(this.id, 5, 0.1);
-    this.tilemap = this.design.exportToTiled();
+    this.design.create().then(()=>{
+      this.tilemap = this.design.exportToTiled();
+    });
 
     this.assign({
       time: time,

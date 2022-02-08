@@ -48,6 +48,7 @@
     "firebase-admin": "^10.0.1",
     "firebaseui": "^6.0.0",
     "helmet": "^4.6.0",
+    "jimp": "^0.16.1",
     "mongoose": "^6.1.3",
     "nes.css": "^2.3.0",
     "pastebin-ts": "^1.2.0",

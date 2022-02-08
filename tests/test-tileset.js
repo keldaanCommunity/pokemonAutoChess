@@ -4,8 +4,10 @@ const fs = require('fs');
 
 Object.keys(MAP).forEach((m)=>{
   const d = new Design(m, 5, 0.1);
-  const file = fs.createWriteStream(`samples/${d.id}.json`);
-  file.on('error', function(err) {/* error handling */});
-  file.write(JSON.stringify(d.exportToTiled()));
-  file.end();
+  d.create().then(()=>{
+    const file = fs.createWriteStream(`tests/samples/${d.id}.json`);
+    file.on('error', function(err) {console.log(err)});
+    file.write(JSON.stringify(d.exportToTiled()));
+    file.end();
+  });
 });

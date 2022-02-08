@@ -1,4 +1,5 @@
 const {MAP, MASK_TABLE, HDR, MASK_COORDINATE, TERRAIN} = require('../models/enum');
+const Jimp = require('jimp');
 
 class Tileset {
   constructor(id) {
@@ -9,6 +10,10 @@ class Tileset {
     this.water = new Map();
     this.wall = new Map();
     this.wallAlt = new Map();
+  }
+
+  async initialize() {
+    this.img = await Jimp.read(`app/public/dist/assets/tilesets/${this.id}.png`);
     this.computeMapping();
   }
 
@@ -17,29 +22,27 @@ class Tileset {
       this.ground.set(v, this.getId(v, HDR.GROUND));
       this.water.set(v, this.getId(v, HDR.WATER));
       this.wall.set(v, this.getId(v, HDR.WALL));
-      if (v == MASK_TABLE.A1B2C3D4) {
-        if (this.headers.includes(HDR.GROUND_ALT_1)) {
-          this.groundAlt.set(this.getId(v, HDR.GROUND_ALT_1));
+      [HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.GROUND_ALT_4].forEach((h)=>{
+        if (this.headers.includes(h) && this.isPixelValue(v, h)) {
+          const t = this.groundAlt.get(v);
+          if (t) {
+            this.groundAlt.set(v, t.concat([this.getId(v, h)]));
+          } else {
+            this.groundAlt.set(v, [this.getId(v, h)]);
+          }
         }
-        if (this.headers.includes(HDR.GROUND_ALT_2)) {
-          this.groundAlt.set(this.getId(v, HDR.GROUND_ALT_2));
+      });
+
+      [HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.WALL_ALT_3].forEach((h)=>{
+        if (this.headers.includes(h) && this.isPixelValue(v, h)) {
+          const t = this.wallAlt.get(v);
+          if (t) {
+            this.wallAlt.set(v, t.concat([this.getId(v, h)]));
+          } else {
+            this.wallAlt.set(v, [this.getId(v, h)]);
+          }
         }
-        if (this.headers.includes(HDR.GROUND_ALT_3)) {
-          this.groundAlt.set(this.getId(v, HDR.GROUND_ALT_3));
-        }
-        if (this.headers.includes(HDR.GROUND_ALT_4)) {
-          this.groundAlt.set(this.getId(v, HDR.GROUND_ALT_4));
-        }
-        if (this.headers.includes(HDR.WALL_ALT_1)) {
-          this.wallAlt.set(this.getId(v, HDR.WALL_ALT_1));
-        }
-        if (this.headers.includes(HDR.WALL_ALT_2)) {
-          this.wallAlt.set(this.getId(v, HDR.WALL_ALT_2));
-        }
-        if (this.headers.includes(HDR.WALL_ALT_3)) {
-          this.wallAlt.set(this.getId(v, HDR.WALL_ALT_3));
-        }
-      }
+      });
     });
   }
 
@@ -54,29 +57,39 @@ class Tileset {
     return y * this.headers.length * 3 + x + 1;
   }
 
+  isPixelValue(maskId, header) {
+    const headerIndex = this.headers.indexOf(header);
+    const maskCoordinate = MASK_COORDINATE[maskId];
+    const pixelX = maskCoordinate.x + headerIndex * 3;
+    const pixelY = maskCoordinate.y;
+    return (Jimp.intToRGBA(this.img.getPixelColor(pixelX * 25 + 12, pixelY * 25 + 12)).a != 0);
+  }
+
   getTilemapId(terrain, maskId) {
     // console.log(terrain, maskId);
+    let items;
     switch (terrain) {
       case TERRAIN.GROUND:
-        if (this.groundAlt.size > 0) {
-          if (Math.random() > 0.80 && maskId == MASK_TABLE.A1B2C3D4) {
-            const items = Array.from(this.groundAlt);
-            return items[Math.floor(Math.random() * items.length)][0];
+        items = this.groundAlt.get(maskId);
+        // console.log(items);
+        if (items && items.length > 0) {
+          if (Math.random() > 0.80) {
+            return items[Math.floor(Math.random() * items.length)];
           } else {
             return this.ground.get(maskId);
           }
         } else {
           return this.ground.get(maskId);
         }
-
       case TERRAIN.WATER:
         return this.water.get(maskId);
 
       case TERRAIN.WALL:
-        if (this.wallAlt.size > 0) {
-          if (Math.random() > 0.60 && maskId == MASK_TABLE.A1B2C3D4) {
-            const items = Array.from(this.wallAlt);
-            return items[Math.floor(Math.random() * items.length)][0];
+        items = this.wallAlt.get(maskId);
+        // console.log(items);
+        if (items && items.length > 0) {
+          if (Math.random() > 0.80) {
+            return items[Math.floor(Math.random() * items.length)];
           } else {
             return this.wall.get(maskId);
           }

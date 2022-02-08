@@ -18,13 +18,17 @@ class Design {
     this.maxArena = [58, 35];
     this.leftBorder = [27, 31];
     this.rightBorder = [57, 31];
-    this.create();
   }
 
-  create() {
-    this.generateTerrain();
-    this.generateMask();
-    this.generateTilemap();
+  async create() {
+    return new Promise((resolve, reject)=>{
+      this.tileset.initialize().then(()=>{
+        this.generateTerrain();
+        this.generateMask();
+        this.generateTilemap();
+        resolve();
+      });
+    });
   }
 
   generateTerrain() {
@@ -72,7 +76,7 @@ class Design {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
         const tileID = this.tileset.getTilemapId(this.terrain[i][j], this.bitmask[i][j]);
-        // console.log(tileID, ',');
+        // console.log(tileID, this.terrain[i][j], this.bitmask[i][j]);
         this.tilemap.push(tileID);
       }
     }
