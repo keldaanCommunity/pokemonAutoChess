@@ -276,8 +276,9 @@ class Simulation extends Schema {
 
     if (pokemon.items.count(ITEMS.ICY_ROCK) != 0) {
       if (types.includes(TYPE.ICE)) {
-        pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.ICY_ROCK));
+        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.5) * pokemon.items.count(ITEMS.ICY_ROCK);
       }
+      pokemon.handleAttackSpeed( 10 * pokemon.items.count(ITEMS.ICY_ROCK));
     }
 
     if (pokemon.items.count(ITEMS.LEAF_STONE) != 0) {
