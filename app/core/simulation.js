@@ -473,21 +473,21 @@ class Simulation extends Schema {
 
         case EFFECTS.DRIZZLE:
           if (types.includes(TYPE.WATER)) {
-            pokemon.addDodgeChance(0.3);
+            pokemon.addDodgeChance(0.2);
             pokemon.effects.push(EFFECTS.DRIZZLE);
           }
           break;
 
         case EFFECTS.RAIN_DANCE:
           if (types.includes(TYPE.WATER)) {
-            pokemon.addDodgeChance(0.6);
+            pokemon.addDodgeChance(0.4);
             pokemon.effects.push(EFFECTS.RAIN_DANCE);
           }
           break;
 
         case EFFECTS.PRIMORDIAL_SEA:
           if (types.includes(TYPE.WATER)) {
-            pokemon.addDodgeChance(0.9);
+            pokemon.addDodgeChance(0.6);
             pokemon.effects.push(EFFECTS.PRIMORDIAL_SEA);
           }
           break;
