@@ -148,6 +148,7 @@ class OnDragDropCommand extends Command {
 
         //SPECIAL CASES: create a new pokemon on item equip
         let newItemPokemon = null
+        let equipAfterTransform = true
         switch(pokemon.name){
           case PKM.EEVEE:
             switch(item){
@@ -176,9 +177,9 @@ class OnDragDropCommand extends Command {
                 newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.GLACEON)
                 break
             }
-            newItemPokemon.items.add(item)
             break
           case PKM.DITTO:
+            equipAfterTransform = false
             switch(item){
               case ITEMS.DOME_FOSSIL:
                 newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.KABUTO)
@@ -219,19 +220,19 @@ class OnDragDropCommand extends Command {
             }
             break
           case PKM.GROUDON:
-            case ITEMS.RED_ORB:
+            if(item == ITEMS.RED_ORB){
               newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.PRIMALGROUDON)
-              newItemPokemon.items.add(item)
+            }
             break
           case PKM.KYOGRE:
-            case ITEMS.BLUE_ORB:
+            if(item == ITEMS.BLUE_ORB){
               newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.PRIMALKYOGRE)
-              newItemPokemon.items.add(item)
+            }
             break
           case PKM.RAYQUAZA:
-            case ITEMS.DELTA_ORB:
+            if(item == ITEMS.DELTA_ORB){
               newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.MEGARAYQUAZA)
-              newItemPokemon.items.add(item)
+            }
             break
         }
 
@@ -239,20 +240,21 @@ class OnDragDropCommand extends Command {
           //delete the extra pokemons
           player.board.delete(id);
           player.board.set(newItemPokemon.id, newItemPokemon);
-          player.stuff.remove(item);
           player.synergies.update(player.board);
           player.effects.update(player.synergies);
           player.boardSize = this.room.getTeamSize(player.board);
-          
-        }
-        else{
-          // regular equip
-          pokemon.items.add(item);
+          if(equipAfterTransform){
+            newItemPokemon.items.add(item);
+          }
           player.stuff.remove(item);
+          return
         }
+        
+        // regular equip
+        pokemon.items.add(item);
+        player.stuff.remove(item);
       }
     }
-    
   }
 }
 
@@ -546,7 +548,7 @@ class OnUpdatePhaseCommand extends Command {
             player.itemsProposition.push(item);
           });
           // const item = ItemFactory.createRandomItem();
-          // const item = ItemFactory.createSpecificItems([ITEMS.OLD_AMBER, ITEMS.FIRE_STONE]);
+          // const item = ItemFactory.createSpecificItems([ITEMS.BLUE_ORB]);
           // player.stuff.add(item);
         }
         player.opponentName = '';
