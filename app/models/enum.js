@@ -770,249 +770,6 @@ const ITEMS = Object.freeze({
   SKULL_FOSSIL: 'SKULL_FOSSIL'
 });
 
-const ITEM_NAME = Object.freeze({
-  ARMOR_FOSSIL: {
-    eng: 'Armor Fossil',
-    esp: 'Armor Fossil',
-    fra: 'Armor Fossil'
-  },
-  CLAW_FOSSIL: {
-    eng: 'Claw Fossil',
-    esp: 'Claw Fossil',
-    fra: 'Claw Fossil'
-  },
-  COVER_FOSSIL: {
-    eng: 'Cover Fossil',
-    esp: 'Cover Fossil',
-    fra: 'Cover Fossil'
-  },
-  DOME_FOSSIL: {
-    eng: 'Dome Fossil',
-    esp: 'Dome Fossil',
-    fra: 'Dome Fossil'
-  },
-  HELIX_FOSSIL: {
-    eng: 'Helix Fossil',
-    esp: 'Helix Fossil',
-    fra: 'Helix Fossil'
-  },
-  JAW_FOSSIL: {
-    eng: 'Jaw Fossil',
-    esp: 'Jaw Fossil',
-    fra: 'Jaw Fossil'
-  },
-  OLD_AMBER: {
-    eng: 'Old Amber',
-    esp: 'Old Amber',
-    fra: 'Old Amber'
-  },
-  PLUME_FOSSIL: {
-    eng: 'Plume Fossil',
-    esp: 'Plume Fossil',
-    fra: 'Plume Fossil'
-  },
-  ROOT_FOSSIL: {
-    eng: 'Root Fossil',
-    esp: 'Root Fossil',
-    fra: 'Root Fossil'
-  },
-  SAIL_FOSSIL: {
-    eng: 'Sail Fossil',
-    esp: 'Sail Fossil',
-    fra: 'Sail Fossil'
-  },
-  SKULL_FOSSIL: {
-    eng: 'Skull Fossil',
-    esp: 'Skull Fossil',
-    fra: 'Skull Fossil'
-  },
-  WHITE_GLASSES: {
-    eng: 'Wise Glasses',
-    esp: 'Gafas blancas',
-    fra: 'Lunettes blanches'
-  },
-  MUSCLE_BAND: {
-    eng: 'Muscle Band',
-    esp: 'Banda Muscular',
-    fra: 'Bandeau Muscle'
-  },
-  LIFE_ORB: {
-    eng: 'Life Orb',
-    esp: 'Orbe de la Vida',
-    fra: 'Orbe Vie'
-  },
-  COIN_AMULET: {
-    eng: 'Amulet Coin',
-    esp: 'Amuleto de monedas',
-    fra: 'Piece Rune'
-  },
-  ROCKY_HELMET: {
-    eng: 'Rocky Helmet',
-    esp: 'Casco rocoso',
-    fra: 'Casque Brut'
-  },
-  SHELL_BELL: {
-    eng: 'Shell Bell',
-    esp: 'Casco Campana',
-    fra: 'Grelot Coque'
-  },
-  BIG_ROOT: {
-    eng: 'Big Root',
-    esp: 'Raíz Grande',
-    fra: 'Grosse Racine'
-  },
-  APRICOT_BERRY: {
-    eng: 'Apricot Berry',
-    esp: 'Apricot Baya',
-    fra: 'Baie Abricot'
-  },
-  LIECHI_BERRY: {
-    eng: 'Liechi Berry',
-    esp: 'Liechi Baya',
-    fra: 'Baie Lichi'
-  },
-  GANLON_BERRY: {
-    eng: 'Ganlon Berry',
-    esp: 'Ganlon Baya',
-    fra: 'Baie Ganlon'
-  },
-  PETAYA_BERRY: {
-    eng: 'Petaya Berry',
-    esp: 'Petaya Baya',
-    fra: 'Baie Pitaya'
-  },
-  SALAC_BERRY: {
-    eng: 'Salac Berry',
-    esp: 'Salac Baya',
-    fra: 'Baie Salac'
-  },
-  ORAN_BERRY: {
-    eng: 'Oran Berry',
-    esp: 'Oran Baya',
-    fra: 'Baie Oran'
-  },
-  SOFT_SAND: {
-    eng: 'Soft Sand',
-    esp: 'Arena Blanda',
-    fra: 'Sable doux'
-  },
-  MOON_STONE: {
-    eng: 'Moon Stone',
-    esp: 'Piedra lunar',
-    fra: 'Pierre lune'
-  },
-  NIGHT_STONE: {
-    eng: 'Dusk Stone',
-    esp: 'Piedra Nocturna',
-    fra: 'Pierre nuit'
-  },
-  POISON_BARB: {
-    eng: 'Poison Barb',
-    esp: 'Barra de veneno',
-    fra: 'Crochet venin'
-  },
-  DRAGON_FANG: {
-    eng: 'Dragon Fang',
-    esp: 'Colmillo de Dragón',
-    fra: 'Croc dragon'
-  },
-  THUNDER_STONE: {
-    eng: 'Thunder Stone',
-    esp: 'Piedra del Trueno',
-    fra: 'Pierre foudre'
-  },
-  METAL_SKIN: {
-    eng: 'Metal Coat',
-    esp: 'Piel de metal',
-    fra: 'Peau métal'
-  },
-  METRONOME: {
-    eng: 'Metronome',
-    esp: 'Metrónomo',
-    fra: 'Métronome'
-  },
-  WATER_STONE: {
-    eng: 'Water Stone',
-    esp: 'Piedra de agua',
-    fra: 'Pierre eau'
-  },
-  FIRE_STONE: {
-    eng: 'Fire Stone',
-    esp: 'Piedra de fuego',
-    fra: 'Pierre feu'
-  },
-  LEAF_STONE: {
-    eng: 'Leaf Stone',
-    esp: 'Piedra de la hoja',
-    fra: 'Pierre feuille'
-  },
-  BLACK_BELT: {
-    eng: 'Black Belt',
-    esp: 'Cinturón negro',
-    fra: 'Ceinture noire'
-  },
-  SILK_SCARF: {
-    eng: 'Silk Scarf',
-    esp: 'Bufanda de Seda',
-    fra: 'Mouchoir Soie'
-  },
-  DAWN_STONE: {
-    eng: 'Dawn Stone',
-    esp: 'Piedra del amanecer',
-    fra: 'Pierre aube'
-  },
-  ICY_ROCK: {
-    eng: 'Icy Rock',
-    esp: 'Roca helada',
-    fra: 'Rocher glacé'
-  },
-  RAZOR_FANG: {
-    eng: 'Razor Fang',
-    esp: 'Colmillo de afeitar',
-    fra: 'Croc Rasoir'
-  },
-  RAZOR_CLAW: {
-    eng: 'Razor Claw',
-    esp: 'Manijas rasoir',
-    fra: 'Griffe Rasoir'
-  },
-  SCOPE_LENS: {
-    eng: 'Scope Lens',
-    esp: 'lente del visor',
-    fra: 'Lentilscope'
-  },
-  REVIVER_SEED: {
-    eng: 'Revival Herb',
-    esp: 'Resugraina',
-    fra: 'Herbe Rappel'
-  },
-  ASSAULT_VEST: {
-    eng: 'Assault Vest',
-    esp: 'Chaleco de asalto',
-    fra: 'Veste de combat'
-  },
-  BLUE_ORB: {
-    eng: 'Blue Orb',
-    esp: 'Orbe azul',
-    fra: 'Gemme Bleue'
-  },
-  RED_ORB: {
-    eng: 'Red Orb',
-    esp: 'Orbe rojo',
-    fra: 'Gemme Rouge'
-  },
-  DELTA_ORB: {
-    eng: 'Delta Orb',
-    esp: 'Orbe Delta',
-    fra: 'Gemme Delta'
-  },
-  WONDER_BOX: {
-    eng: 'Wonder Box',
-    esp: 'Caja de Maravillas',
-    fra: 'Boite mystère'
-  }
-});
-
 const ITEM_DESCRIPTION = Object.freeze({
   ARMOR_FOSSIL: {
     eng: 'Give this to a Ditto to make it evolve into a Shieldon (Rare, 6 tours to evolve)',
@@ -5838,6 +5595,63 @@ const ITEM = {
   MACHO_BRACE: 'MACHO_BRACE',
   ROCKY_HELMET: 'ROCKY_HELMET'
 };
+
+const ITEM_NAME = Object.freeze({
+  FOSSIL_STONE: 'Fossil Stone',
+  TWISTED_SPOON: 'Twisted Spoon',
+  MYSTIC_WATER: 'Mystic Water',
+  MAGNET: 'Magnet',
+  BLACK_GLASSES: 'Black Glasses',
+  MIRACLE_SEED: 'Miracle Seed',
+  NEVER_MELT_ICE: 'Never Melt Ice',
+  CHARCOAL: 'Charcoal',
+  HEART_SCALE: 'Heart Scale',
+  OLD_AMBER: 'Old Amber',
+  DAWN_STONE: 'Dawn Stone',
+  WATER_STONE: 'Water Stone',
+  THUNDER_STONE: 'Thunder Stone',
+  FIRE_STONE: 'Fire Stone',
+  MOON_STONE: 'Moon Stone',
+  DUSK_STONE: 'Dusk Stone',
+  LEAF_STONE: 'Leaf Stone',
+  ICY_ROCK: 'Icy Rock',
+  CHOICE_SPECS: 'Choice Specs',
+  SOUL_DEW: 'Soul Dew',
+  UPGRADE: 'Upgrade',
+  REAPER_CLOTH: 'Reaper Cloth',
+  SHELL_BELL: 'Shell Bell',
+  WATER_INCENSE: 'Water Incense',
+  METRONOME: 'Metronome',
+  LUCKY_EGG: 'Lucky Egg',
+  ASSAULT_VEST: 'Assault Vest',
+  BLUE_ORB: 'Blue Orb',
+  ZOOM_LENS: 'Zomm Lens',
+  BRIGHT_POWDER: 'Bright Powder',
+  DELTA_ORB: 'Delta Orb',
+  EXPERT_BELT: 'Expert Belt',
+  SMOKE_BALL: 'Smoke Ball',
+  CHOICE_BAND: 'Choice Band',
+  RAZOR_FANG: 'Razor Fang',
+  LEFTOVERS: 'Leftovers',
+  CHOICE_SCARF: 'Choice Scarf',
+  FIRE_GEM: 'Fire Gem',
+  MAX_REVIVE: 'Max Revive',
+  SCOPE_LENS: 'Scope Lens',
+  MOOMOO_MILK: 'Moomoo Milk',
+  WIDE_LENS: 'Wide Lens',
+  RAZOR_CLAW: 'Razor Claw',
+  FLUFFY_TAIL: 'Fluffy Tail',
+  REVIVAL_HERB: 'Revival Herb',
+  SHINY_CHARM: 'Shiny Charm',
+  FOCUS_BAND: 'Focus Band',
+  BIG_ROOT: 'Big Root',
+  SS_TICKET: 'SS Ticket',
+  KINGS_ROCK: 'Kings Rock',
+  POKE_DOLL: 'Poke Doll',
+  RED_ORB: 'Red Orb',
+  MACHO_BRACE: 'Macho Brace',
+  ROCKY_HELMET: 'Rocky Helmet'
+});
 
 const ITEM_RECIPE = {
   OLD_AMBER: [ITEM.FOSSIL_STONE, ITEM.FOSSIL_STONE],
