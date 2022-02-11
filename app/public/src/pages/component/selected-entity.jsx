@@ -28,7 +28,7 @@ class SelectedEntity extends Component {
                     <img style={imgStyle} src={'assets/items/' + this.props.entity + '.png'}/>
                     <h3>{ITEM_NAME[this.props.entity]}</h3>
                 </div>
-                <p>{ITEM_DESCRIPTION[this.props.entity].eng}</p>
+                <p>{ITEM_DESCRIPTION[this.props.entity]}</p>
         </div>
         }
         else if(Object.values(PKM).includes(this.props.entity)){

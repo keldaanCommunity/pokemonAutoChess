@@ -770,250 +770,6 @@ const ITEMS = Object.freeze({
   SKULL_FOSSIL: 'SKULL_FOSSIL'
 });
 
-const ITEM_DESCRIPTION = Object.freeze({
-  ARMOR_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Shieldon (Rare, 6 tours to evolve)',
-    esp: 'Armor Fossil',
-    fra: 'Armor Fossil'
-  },
-  CLAW_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into an Anorith (Uncommon, 4 tours to evolve)',
-    esp: 'Claw Fossil',
-    fra: 'Claw Fossil'
-  },
-  COVER_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Tirtouga (Rare, 6 tours to evolve)',
-    esp: 'Cover Fossil',
-    fra: 'Cover Fossil'
-  },
-  DOME_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Kabuto (Uncommon, 4 tours to evolve)',
-    esp: 'Dome Fossil',
-    fra: 'Dome Fossil'
-  },
-  HELIX_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Omanyte (Uncommon, 4 tours to evolve)',
-    esp: 'Helix Fossil',
-    fra: 'Helix Fossil'
-  },
-  JAW_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Tyrunt (Epic, 8 tours to evolve)',
-    esp: 'Jaw Fossil',
-    fra: 'Jaw Fossil'
-  },
-  OLD_AMBER: {
-    eng: 'Give this to a Ditto to make it evolve into an Aerodactyl',
-    esp: 'Old Amber',
-    fra: 'Old Amber'
-  },
-  PLUME_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into an Archen (Rare, 6 tours to evolve)',
-    esp: 'Plum Fossil',
-    fra: 'Plum Fossil'
-  },
-  ROOT_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Lileep (Uncommon, 4 tours to evolve)',
-    esp: 'Root Fossil',
-    fra: 'Root Fossil'
-  },
-  SAIL_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into an Amaura (Epic, 8 tours to evolve)',
-    esp: 'Sail Fossil',
-    fra: 'Sail Fossil'
-  },
-  SKULL_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Cranidos (Rare, 6 tours to evolve)',
-    esp: 'Skull Fossil',
-    fra: 'Skull Fossil'
-  },
-  WHITE_GLASSES:
-  {
-    eng: '+30% special attack',
-    esp: '+30% de ataque especial',
-    fra: '+30% attaque spéciale'
-  },
-  MUSCLE_BAND: {
-    eng: '+30% attack',
-    esp: '+30% de ataque',
-    fra: '+30% attaque physique'
-  },
-  LIFE_ORB: {
-    eng: '+100% damage, lose 5% HP per hit.',
-    esp: '100% de daño, cuesta un 5% de vida por cada ataque',
-    fra: '+100% attaque, blesse le pokémon de 5% hp/s'
-  },
-  COIN_AMULET: {
-    eng: 'Earn 1-3 gold every round.',
-    esp: 'Oportunidad de dejar caer entre 1 y 3 monedas de oro en cada ronda',
-    fra: 'Chance de gagner entre 1 et 3 argent à chaque tour.'
-  },
-  ROCKY_HELMET: {
-    eng: 'The attacker of the wearer takes 4% HP damage per physical hit.',
-    esp: 'Cuando el usuario es atacado, el atacante recibe un 4% de daño máximo de salud.',
-    fra: 'Quand le pokémon est attaqué, l attaquant subit 4% de vie en dommage physique'
-  },
-  SHELL_BELL: {
-    eng: 'Restore 10% of the damage dealt.',
-    esp: '10% de robo de vida en cada ataque',
-    fra: '+10% vol de vie à chaque attaque'
-  },
-  BIG_ROOT: {
-    eng: 'Restore 5% of your HP per hit.',
-    esp: '+ 5% de salud / atacado restaurado',
-    fra: '+ 5% vie / seconde'
-  },
-  APRICOT_BERRY: {
-    eng: '+100% spe def when below 50% health',
-    esp: '+100% de defensa cuando está por debajo del 50% de salud',
-    fra: '+100% de défense spé quand la vie passe en dessous de 50%'
-  },
-  LIECHI_BERRY: {
-    eng: '+100% attack when health below 50%',
-    esp: '+100% de ataque cuando la salud está por debajo del 50%',
-    fra: '+100% d attaque quand la vie passe en dessous de 50%'
-  },
-  GANLON_BERRY: {
-    eng: '+100% def when health below 50%',
-    esp: '+100% def cuando la salud está por debajo del 50%',
-    fra: '+100% de défense quand la vie passe en dessous de 50%'
-  },
-  PETAYA_BERRY: {
-    eng: '+100% attack special when health below 50%',
-    esp: '+100% de ataque especial cuando la salud está por debajo del 50%',
-    fra: '+100% d attaque spéciale quand la vie passe en dessous de 50%'
-  },
-  SALAC_BERRY: {
-    eng: '+100% attack speed when health below 50%',
-    esp: '+100% de velocidad de ataque cuando la salud está por debajo del 50%',
-    fra: '+100% de vitesse d attaque quand la vie passe en dessous de 50%'
-  },
-  ORAN_BERRY: {
-    eng: 'Restore 50% health when below 50% health',
-    esp: 'Restaurar el 50% de la salud cuando está por debajo del 50% de la salud',
-    fra: 'Restaure 50% de la vie quand la vie du pokémon descend en dessous de 50%'
-  },
-  SOFT_SAND: {
-    eng: '+10% atk speed. +50% damage if pokemon has type ground.',
-    esp: '+10% de velocidad de la tinta. +50% de daño si el pokemon tiene el tipo de tierra.',
-    fra: '+10% vitesse d attaque. +50% attaque si type terre.'
-  },
-  MOON_STONE: {
-    eng: '+10% atk speed. +50% damage if type Fairy. Will evolve  Eevee into Sylveon.',
-    esp: '+10% de velocidad. +50% de daño si es del tipo Hada. Convertirá a Eevee en Sylveon.',
-    fra: '+10% vitesse d attaque. +50% attaque si type fée. Fait évoluer Evoli en Nymphali.'
-  },
-  NIGHT_STONE: {
-    eng: '+10% atk speed. +50% damage if type Dark. Will evolve Eevee into Umbreon.',
-    esp: '10% de velocidad. +50% de daño si es del tipo Oscuridad. Convertirá a Eevee en Umbreón',
-    fra: '+10% vitesse d attaque. +50% attaque si type ténèbres. Fait évoluer Evoli en Noctali.'
-  },
-  POISON_BARB: {
-    eng: '+10% atk speed. +50% damage if type poison.',
-    esp: '10% de velocidad. +50% de daño si es veneno.',
-    fra: '+10% vitesse d attaque. +50% attaque si type poison.'
-  },
-  DRAGON_FANG: {
-    eng: '+10% atk speed. +50% damage if type dragon.',
-    esp: '+10% a la velocidad de la tinta. +50% de daño si es un dragón.',
-    fra: '+10% vitesse d attaque. +50% attaque si type dragon.'
-  },
-  THUNDER_STONE: {
-    eng: '+10% atk speed. +50% damage if type electric. Will evolve Eevee into Jolteon.',
-    esp: '+10% a velocidad de corteza". +50% de daño si es de tipo eléctrico. Evolucionará Eevee a Jolteon.',
-    fra: '+10% vitesse d attaque. +50% attaque si type électrique. Fait évoluer Evoli en Voltali.'
-  },
-  METAL_SKIN: {
-    eng: '+10% atk speed. +50% damage if type metal.',
-    esp: '10% a la velocidad de la luz. +50% de daño si es de tipo metálico.',
-    fra: '+10% vitesse d attaque. +50% attaque si type métal.'
-  },
-  METRONOME: {
-    eng: '+5% damage each time the pokemon attack.',
-    esp: '5% de daño cada vez que el pokemon ataca.',
-    fra: '+5% attaque à chaque fois que le pokémon attaque'
-  },
-  WATER_STONE: {
-    eng: '+10% atk speed. +50% damage if type water. Will evolve Eeve into Vaporeon.',
-    esp: '+10% a la velocidad de ataque. +50% de daño si es de agua. Convertirá a Eeve en Vaporeon".',
-    fra: '+10% vitesse d attaque. +50% attaque si type eau. Fait évoluer Evoli en Aquali.'
-  },
-  FIRE_STONE: {
-    eng: '+10% atk speed. +50% damage if type fire. Will evolve Eevee into Flareon',
-    esp: '+10% a la velocidad de ataque. +50% de daño si se escribe "fuego". Convertirá a Eevee en Flareon',
-    fra: '+10% vitesse d attaque. +50% attaque si type feu. Fait évoluer Evoli en Pyroli.'
-  },
-  LEAF_STONE: {
-    eng: '+10% atk speed. +50% damage if type grass. Will evolve Eevee into leafeon ',
-    esp: '+10% a la velocidad de la tinta. +50% de daño si se trata de planta. Evolucionará Eevee en leafeon',
-    fra: '+10% vitesse d attaque. +50% attaque si type feuille. Fait évoluer Evoli en Phylali.'
-  },
-  BLACK_BELT: {
-    eng: '+10% atk speed. +50% damage if type fighting.',
-    esp: '+10% a la velocidad de la tinta. +50% de daño si el tipo es luchador.',
-    fra: '+10% vitesse d attaque. +50% attaque si type combat.'
-  },
-  SILK_SCARF: {
-    eng: '+10% atk speed. +50% damage if type normal.',
-    esp: '+10% de velocidad de corte. +50% de daño si el tipo es normal.',
-    fra: '+10% vitesse d attaque. +50% attaque si type normal.'
-  },
-  DAWN_STONE: {
-    eng: '+10% atk speed. +50% damage if type psychic. Will evolve Eevee into Espeon.',
-    esp: '+10% de velocidad de corte. +50% de daño si es del tipo psíquico. Evolucionará Eevee a Espeon.',
-    fra: '+10% vitesse d attaque. +50% attaque si type psy. Fait évoluer Evoli en Mentali.'
-  },
-  ICY_ROCK: {
-    eng: '10% chance to freeze. +50% damage if type ice. Will evolve Eevee into Glaceon.',
-    esp: '10% de probabilidad de congelarse.+50% de daño si es del tipo hielo. Evolucionará Eevee a Glaceon',
-    fra: '+10% vitesse d attaque. +50% attaque si type glace. Fait évoluer évoli en Givrali.'
-  },
-  RAZOR_FANG: {
-    eng: '+50% Critical Hit damage.',
-    esp: '+50% de daño por golpe crítico',
-    fra: '+50% dégâts des coups critiques'
-  },
-  RAZOR_CLAW: {
-    eng: 'Critical Hits ignore stat changes.',
-    esp: 'Los golpes críticos hacen daño verdadero',
-    fra: 'Les coups critiques font des true dégats'
-  },
-  SCOPE_LENS: {
-    eng: '+50% Critical Hit chance.',
-    esp: '+50% de golpes críticos',
-    fra: '+50% de coups critiques'
-  },
-  REVIVER_SEED: {
-    eng: 'Revives the pokemon',
-    esp: 'Revive al pokémon',
-    fra: 'Fait revivre le pokémon'
-  },
-  ASSAULT_VEST: {
-    eng: '+50% special defense',
-    esp: '+50% de defensa especial',
-    fra: '+50% défense spécial'
-  },
-  BLUE_ORB: {
-    eng: 'Team Aqua strengthens the pokemon s ability',
-    esp: 'El equipo Aqua refuerza la habilidad del pokémon',
-    fra: 'La team Aqua renforce la capacité du pokémon'
-  },
-  RED_ORB: {
-    eng: 'Team Magma strengthens the pokemon s ability',
-    esp: 'El equipo Magma refuerza la habilidad del pokémon',
-    fra: 'La team Magma renforce la capacité du pokémon'
-  },
-  DELTA_ORB: {
-    eng: 'Team Delta strengthens the pokemon s ability',
-    esp: 'El equipo Delta refuerza la habilidad del pokémon',
-    fra: 'La team Delta renforce la capacité du pokémon'
-  },
-  WONDER_BOX: {
-    eng: 'Start the game with 2 random items',
-    esp: 'Comienza el juego con 2 objetos al azar',
-    fra: 'Commence la partie avec 2 items aléatoires'
-  }
-});
-
 const TYPE = Object.freeze({
   NORMAL: 'NORMAL',
   GRASS: 'GRASS',
@@ -5651,6 +5407,63 @@ const ITEM_NAME = Object.freeze({
   RED_ORB: 'Red Orb',
   MACHO_BRACE: 'Macho Brace',
   ROCKY_HELMET: 'Rocky Helmet'
+});
+
+const ITEM_DESCRIPTION = Object.freeze({
+  FOSSIL_STONE: 'Give it to a Ditto to obtain a random fossil',
+  TWISTED_SPOON: '+1 spell attack damage',
+  MYSTIC_WATER: '+15 mana',
+  MAGNET: '+10% attack speed',
+  BLACK_GLASSES: '+5% critical hit',
+  MIRACLE_SEED: '+15 health',
+  NEVER_MELT_ICE: '+2 special defense',
+  CHARCOAL: '+1 attack',
+  HEART_SCALE: '+1 defense',
+  OLD_AMBER: 'The holder gains the fossil type',
+  DAWN_STONE: 'The holder gains the psychic type',
+  WATER_STONE: 'The holder gains the water type',
+  THUNDER_STONE: 'The holder gains the electric type',
+  FIRE_STONE: 'The holder gains the fire type',
+  MOON_STONE: 'The holder gains the fairy type',
+  DUSK_STONE: 'The holder gains the dark type',
+  LEAF_STONE: 'The holder gains the grass type',
+  ICY_ROCK: 'The holder gains the ice type',
+  CHOICE_SPECS: 'The holder gains 8 spell damage',
+  SOUL_DEW: 'During combat, the holder gains 3 spell damage every 5 seconds',
+  UPGRADE: 'Attacks grant +6% bonus Attack Speed for the rest of combat',
+  REAPER_CLOTH: 'The holder spells can critically strike (20% chance, 2x damage)',
+  SHELL_BELL: 'When the holder deals magic or true damage with their Ability, they burn the target, dealing 20% of the targets maximum Health as true damage over 10 seconds and reducing healing by 50% for the duration of the burn.',
+  WATER_INCENSE: 'When an ennemy cast an ability, they take incense damage equal to 200% of their max mana',
+  METRONOME: 'The holder spells heal for 40% of the damage dealt',
+  LUCKY_EGG: 'When combat begins, the holder and all allies within 2 hexes in the same row gain a shield that lock 30 damage',
+  ASSAULT_VEST: 'The holder gains 50 mana. After casting their ability the holder gains 20 mana',
+  BLUE_ORB: 'The holder gains 10% bonus Attack Speed. Every third attack from the holder unleashes a chain lightning that bounces to 4 enemies, dealing 8 magic damage',
+  ZOOM_LENS: 'The holder gains 4 attack damage and 4 spell damage',
+  BRIGHT_POWDER: 'Every 5 seconds, the holder throws a bright powder within 1 hex, healing them for 18% of their missing health',
+  DELTA_ORB: 'When combat begins, the holder and all allies within 1 hex in the same row gain 30 Ability Power for the rest of combat',
+  EXPERT_BELT: 'The holder attacks restore 8 additional mana',
+  SMOKE_BALL: 'Reduce the attack speed of ennemy attackers by 30%',
+  CHOICE_BAND: 'Increase the holders attack range by 1 hex and grants 55% bonus attack speed. The holder attacks can no longer miss.',
+  RAZOR_FANG: 'When the holder inflicts a critical hit, the targets Armor is reduced by 70% for 5 seconds. This effect does not stack.',
+  LEFTOVERS: 'At the start of combat, the holder taunts ennemies within 4 hexes',
+  CHOICE_SCARF: 'The holder basic attack hit a second ennemy',
+  FIRE_GEM: 'The holders Abilities and attacks do 20% bonus damage. If the target has more than 200 maximum Health, the bonus increases to 60%.',
+  MAX_REVIVE: 'When the holder takes damage, they gain attack damage, 1 defense and 1 special defense. Stacks up to 4 times',
+  SCOPE_LENS: 'At the beginning of each battle phase, the holder equips 2 temporary items',
+  MOOMOO_MILK: 'When combat begins, the holder and all allies whithin 1 hex in the same row gain a shield that block the damage and effects of the first ennemy ability',
+  WIDE_LENS: 'The holder gains 20% bonus attack speed. The holder is immune to poison/fire',
+  RAZOR_CLAW: 'The holder gains 75% Critical Strike Chance and 10% Critical Strike Damage',
+  FLUFFY_TAIL: 'When combat begins, every ennemy in the same column have their max mana increased by 30%',
+  REVIVAL_HERB: 'Grants 100 bonus hp',
+  SHINY_CHARM: 'When combat begins, every ennemy in the same column falls asleep for 3 seconds',
+  FOCUS_BAND: 'When combat begins, the holder and all allies within 1 hexes in the same row gain +30% Attack Speed for the rest of combat',
+  BIG_ROOT: 'Every 2 seconds, a random ennemy is burned for 8 seconds',
+  SS_TICKET: 'Grants 30 bonus special defense',
+  KINGS_ROCK: 'Physical damage heals the holder for 33% of the damage dealt',
+  POKE_DOLL: 'The holder gains 2 Armor and 2 Magic Resist for each enemy targeting them.',
+  RED_ORB: 'The holder gains 8 bonus Attack Damage',
+  MACHO_BRACE: 'Prevents the holder first death',
+  ROCKY_HELMET: 'Grants 7 bonus armor. Negates bonus damage from incoming critical hits. Deals 2 damage at every attacker.'
 });
 
 const ITEM_RECIPE = {
