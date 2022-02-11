@@ -16,11 +16,7 @@ class ItemFactory {
     const items = [];
     items.push(keys.pop());
     items.push(keys.pop());
-    let item = keys.pop();
-    while (this.fossils.includes(item)) {
-      item = keys.pop();
-    }
-    items.push(item);
+    items.push(keys.pop());
     return items;
   }
 

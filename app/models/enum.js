@@ -281,23 +281,23 @@ const PKM = Object.freeze({
   AMAURA: 'amaura',
   AURORUS: 'aurorus',
   ANORITH: 'anorith',
+  ARMALDO: 'armaldo',
   ARCHEN: 'archen',
   ARCHEOPS: 'archeops',
-  ARMALDO: 'armaldo',
+  SHIELDON: 'shieldon',
   BASTIODON: 'bastiodon',
+  TIRTOUGA: 'tirtouga',
   CARRACOSTA: 'carracosta',
+  LILEEP: 'lileep',
   CRADILY: 'cradily',
   CRANIDOS: 'cranidos',
+  RAMPARDOS: 'rampardos',
   KABUTO: 'kabuto',
   KABUTOPS: 'kabutops',
-  LILEEP: 'lileep',
   OMANYTE: 'omanyte',
   OMASTAR: 'omastar',
-  RAMPARDOS: 'rampardos',
-  SHIELDON: 'shieldon',
-  TIRTOUGA: 'tirtouga',
-  TYRANTRUM: 'tyrantrum',
   TYRUNT: 'tyrunt',
+  TYRANTRUM: 'tyrantrum',
   BUDEW: 'budew',
   ROSELIA: 'roselia',
   ROSERADE: 'roserade',
@@ -3368,8 +3368,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'victreebel', 'snover', 'abomasnow',
     'mega-abomasnow', 'virizion', 'celebi',
     'shaymin', 'oddish', 'gloom',
-    'vileplume', 'bellossom', 'cradily',
-    'lileep', 'budew', 'roselia',
+    'vileplume', 'bellossom', 'lileep',
+    'cradily', 'budew', 'roselia',
     'roserade', 'sewaddle', 'swadloon',
     'leavanny'
   ],
@@ -3397,9 +3397,9 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'gyarados', 'palkia', 'suicune',
     'kyogre', 'vaporeon', 'carvanha',
     'keldeo', 'manaphy', 'lapras',
-    'primal-Kyogre', 'carracosta', 'kabuto',
-    'kabutops', 'omanyte', 'omastar',
-    'tirtouga', 'tympole', 'palpitoad',
+    'primal-Kyogre', 'tirtouga', 'carracosta',
+    'kabuto', 'kabutops', 'omanyte',
+    'omastar', 'tympole', 'palpitoad',
     'seismitoad'
   ],
   ELECTRIC: [
@@ -3468,8 +3468,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'steelix', 'mega-steelix', 'scizor',
     'mega-scizor', 'lucario', 'mega-lucario',
     'dialga', 'registeel', 'cobalion',
-    'jirachi', 'heatran', 'bastiodon',
-    'shieldon', 'honedge', 'doublade',
+    'jirachi', 'heatran', 'shieldon',
+    'bastiodon', 'honedge', 'doublade',
     'aegislash'
   ],
   GROUND: [
@@ -3511,7 +3511,7 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'latias', 'latios', 'kyurem',
     'reshiram', 'zekrom', 'deino',
     'zweilous', 'hydreigon', 'mega-Rayquaza',
-    'swablu', 'tyrantrum', 'tyrunt',
+    'swablu', 'tyrunt', 'tyrantrum',
     'axew', 'fraxure', 'haxorus',
     'jangmo-o', 'hakamo-o', 'kommo-o',
     'altaria', 'mega-altaria'
@@ -3676,15 +3676,15 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
   FOSSIL: [
     'aerodactyl', 'amaura',
     'aurorus', 'anorith',
-    'archen', 'archeops',
-    'armaldo', 'bastiodon',
-    'carracosta', 'cradily',
-    'cranidos', 'kabuto',
-    'kabutops', 'lileep',
-    'omanyte', 'omastar',
-    'rampardos', 'shieldon',
-    'tirtouga', 'tyrantrum',
-    'tyrunt'
+    'armaldo', 'archen',
+    'archeops', 'shieldon',
+    'bastiodon', 'tirtouga',
+    'carracosta', 'lileep',
+    'cradily', 'cranidos',
+    'rampardos', 'kabuto',
+    'kabutops', 'omanyte',
+    'omastar', 'tyrunt',
+    'tyrantrum'
   ],
   SOUND: [
     'zubat', 'golbat', 'crobat',
@@ -3718,7 +3718,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
       'seedot', 'chikorita',
       'treecko', 'leafeon',
       'bellsprout', 'oddish',
-      'cradily', 'bulbasaur',
+      'lileep', 'bulbasaur',
       'turtwig', 'lotad',
       'budew', 'sewaddle',
       'snover'
@@ -3757,7 +3757,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
       'horsea', 'vaporeon',
       'carvanha', 'kabuto',
       'omanyte', 'lotad',
-      'poliwag', 'carracosta',
+      'poliwag', 'tirtouga',
       'tympole'
     ],
     mythicalPokemons: [
@@ -3828,7 +3828,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     pokemons: [
       'prinplup', 'magnemite',
       'aron', 'beldum',
-      'bastiodon', 'honedge',
+      'shieldon', 'honedge',
       'onix', 'scizor',
       'lucario'
     ],
@@ -3860,7 +3860,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
       'charmander', 'horsea',
       'vibrava', 'dratini',
       'bagon', 'gible',
-      'deino', 'tyrantrum',
+      'deino', 'tyrunt',
       'axew', 'jangmo-o',
       'swablu'
     ],
@@ -4011,12 +4011,12 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   FOSSIL: {
     pokemons: [
-      'anorith', 'cradily',
+      'anorith', 'lileep',
       'kabuto', 'omanyte',
       'aerodactyl', 'amaura',
-      'archen', 'bastiodon',
-      'carracosta', 'cranidos',
-      'tyrantrum'
+      'archen', 'shieldon',
+      'tirtouga', 'cranidos',
+      'tyrunt'
     ],
     mythicalPokemons: []
   },
@@ -4062,8 +4062,8 @@ const PRECOMPUTED_RARITY_POKEMONS_ALL = {
     'flareon', 'espeon', 'umbreon', 'leafeon', 'sylveon',
     'slowpoke', 'slowbro', 'slowking', 'bellsprout', 'weepinbell',
     'victreebel', 'glaceon', 'sandile', 'krokorok', 'krookodile',
-    'anorith', 'armaldo', 'cradily', 'kabuto', 'kabutops',
-    'lileep', 'omanyte', 'omastar', 'venipede', 'whirlipede',
+    'anorith', 'armaldo', 'lileep', 'cradily', 'kabuto',
+    'kabutops', 'omanyte', 'omastar', 'venipede', 'whirlipede',
     'scolipede', 'pikipek', 'trumbeak', 'toucannon', 'flabebe',
     'floette', 'florges'
   ],
@@ -4081,8 +4081,8 @@ const PRECOMPUTED_RARITY_POKEMONS_ALL = {
     'magmar', 'magmortar', 'vanillite', 'vanillish',
     'vanilluxe', 'deino', 'zweilous', 'hydreigon',
     'solosis', 'duosion', 'reuniclus', 'archen',
-    'archeops', 'bastiodon', 'carracosta', 'cranidos',
-    'rampardos', 'shieldon', 'tirtouga', 'axew',
+    'archeops', 'shieldon', 'bastiodon', 'tirtouga',
+    'carracosta', 'cranidos', 'rampardos', 'axew',
     'fraxure', 'haxorus', 'whismur', 'loudred',
     'exploud'
   ],
@@ -4098,7 +4098,7 @@ const PRECOMPUTED_RARITY_POKEMONS_ALL = {
     'litwick', 'lampent', 'chandelure',
     'snorunt', 'glalie', 'froslass',
     'aerodactyl', 'amaura', 'aurorus',
-    'tyrantrum', 'tyrunt', 'budew',
+    'tyrunt', 'tyrantrum', 'budew',
     'roselia', 'roserade', 'porygon',
     'porygon2', 'porygon-z', 'honedge',
     'doublade', 'aegislash', 'cubone',

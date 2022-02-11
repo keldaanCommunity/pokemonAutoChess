@@ -1695,10 +1695,10 @@ class PokemonFactory {
         return new Pokemon.Tirtouga();
       case PKM.CARRACOSTA:
         return new Pokemon.Carracosta();
-      case PKM.CRADILY:
-        return new Pokemon.Cradily();
       case PKM.LILEEP:
         return new Pokemon.Lileep();
+      case PKM.CRADILY:
+        return new Pokemon.Cradily();
       case PKM.OMANYTE:
         return new Pokemon.Omanyte();
       case PKM.OMASTAR:
