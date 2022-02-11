@@ -1,6 +1,6 @@
 const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
-const {ITEMS} = require('../enum');
+const {ITEM} = require('../enum');
 
 class Items extends Schema {
   constructor(items) {
@@ -34,7 +34,7 @@ class Items extends Schema {
   }
 
   add(itemToAdd) {
-    if (itemToAdd != '' && Object.keys(ITEMS).includes(itemToAdd)) {
+    if (itemToAdd != '' && Object.keys(ITEM).includes(itemToAdd)) {
       if (this.item0 == '') {
         this.item0 = itemToAdd;
         this.length ++;

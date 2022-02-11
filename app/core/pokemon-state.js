@@ -1,4 +1,4 @@
-const {EFFECTS, ATTACK_TYPE, TYPE, ITEMS, PKM, FLYING_PROTECT_THRESHOLD} = require('../models/enum');
+const {EFFECTS, ATTACK_TYPE, TYPE, PKM, FLYING_PROTECT_THRESHOLD} = require('../models/enum');
 const PokemonFactory = require('../models/pokemon-factory');
 
 class PokemonState {
@@ -104,10 +104,7 @@ class PokemonState {
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
-          if (pokemon.items.count(ITEMS.REVIVER_SEED) != 0) {
-            pokemon.life = pokemon.hp;
-            pokemon.items.remove(ITEMS.REVIVER_SEED);
-          } else if (pokemon.effects.includes(EFFECTS.SWIFT_SWIM)) {
+          if (pokemon.effects.includes(EFFECTS.SWIFT_SWIM)) {
             pokemon.life = pokemon.hp * 0.4;
             pokemon.atk += pokemon.baseAtk * 0.3;
             pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.SWIFT_SWIM), 1);
@@ -251,43 +248,6 @@ class PokemonState {
         }
         const target = board.getValue(pokemon.targetX, pokemon.targetY);
         if (target) {
-          if (pokemon.items.count(ITEMS.RED_ORB) != 0) {
-            for (let i = 0; i < pokemon.items.count(ITEMS.RED_ORB); i++) {
-              let created = false;
-              const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
-              cells.forEach((cell) => {
-                if (!cell.value && !created) {
-                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.HOUNDOUR), cell.row, cell.column, pokemon.team);
-                  created = true;
-                }
-              });
-            }
-          }
-          if (pokemon.items.count(ITEMS.BLUE_ORB) != 0) {
-            for (let i = 0; i < pokemon.items.count(ITEMS.BLUE_ORB); i++) {
-              let created = false;
-              const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
-              cells.forEach((cell) => {
-                if (!cell.value && !created) {
-                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.CARVANHA), cell.row, cell.column, pokemon.team);
-                  created = true;
-                }
-              });
-            }
-          }
-
-          if (pokemon.items.count(ITEMS.DELTA_ORB) != 0) {
-            for (let i = 0; i < pokemon.items.count(ITEMS.DELTA_ORB); i++) {
-              let created = false;
-              const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
-              cells.forEach((cell) => {
-                if (!cell.value && !created) {
-                  pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.SPEAROW), cell.row, cell.column, pokemon.team);
-                  created = true;
-                }
-              });
-            }
-          }
           pokemon.strategy.process(pokemon, this, board, target);
           updateEffects = true;
         }
@@ -336,56 +296,6 @@ class PokemonState {
       }
 
       if (pokemon.effects.includes(EFFECTS.GRASS)) {
-        pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
-      }
-
-      if (pokemon.items.count(ITEMS.METRONOME) != 0) {
-        pokemon.atk += Math.ceil(pokemon.baseAtk * 0.05) * pokemon.items.count(ITEMS.METRONOME);
-      }
-
-      if (pokemon.items.count(ITEMS.SALAC_BERRY) != 0) {
-        if (pokemon.life <= pokemon.hp / 2) {
-          pokemon.handleAttackSpeed(50);
-          pokemon.items.remove(ITEMS.SALAC_BERRY);
-        }
-      }
-
-      if (pokemon.items.count(ITEMS.LIECHI_BERRY) != 0) {
-        if (pokemon.life <= pokemon.hp / 2 && pokemon.attackType == ATTACK_TYPE.PHYSICAL) {
-          pokemon.atk = Math.ceil(pokemon.atk * 2);
-          pokemon.items.remove(ITEMS.LIECHI_BERRY);
-        }
-      }
-
-      if (pokemon.items.count(ITEMS.GANLON_BERRY) != 0) {
-        if (pokemon.life <= pokemon.hp / 2) {
-          pokemon.def = Math.ceil(pokemon.def * 2);
-          pokemon.items.remove(ITEMS.GANLON_BERRY);
-        }
-      }
-
-      if (pokemon.items.count(ITEMS.PETAYA_BERRY) != 0) {
-        if (pokemon.life <= pokemon.hp / 2 && pokemon.attackType == ATTACK_TYPE.SPECIAL) {
-          pokemon.atk = Math.ceil(pokemon.atk * 2);
-          pokemon.items.remove(ITEMS.PETAYA_BERRY);
-        }
-      }
-
-      if (pokemon.items.count(ITEMS.APRICOT_BERRY) != 0) {
-        if (pokemon.life <= pokemon.hp / 2) {
-          pokemon.speDef = Math.ceil(pokemon.speDef * 2);
-          pokemon.items.remove(ITEMS.APRICOT_BERRY);
-        }
-      }
-
-      if (pokemon.items.count(ITEMS.ORAN_BERRY) != 0) {
-        if (pokemon.life <= pokemon.hp / 2) {
-          pokemon.handleHeal(Math.ceil(pokemon.hp / 2));
-          pokemon.items.remove(ITEMS.ORAN_BERRY);
-        }
-      }
-
-      if (pokemon.items.count(ITEMS.BIG_ROOT) != 0) {
         pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
       }
     }

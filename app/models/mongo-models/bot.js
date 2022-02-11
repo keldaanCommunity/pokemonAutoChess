@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {PKM, ITEMS} = require('../enum');
+const {PKM, ITEM} = require('../enum');
 
 
 const pkm = new Schema(
@@ -24,7 +24,7 @@ const pkm = new Schema(
       },
       items: [{
         type: String,
-        enum: Object.keys(ITEMS)
+        enum: Object.keys(ITEM)
       }]
     }
 );

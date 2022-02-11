@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ITEMS } from '../../../../models/enum';
+import { ITEM } from '../../../../models/enum';
 
 const itemPoolStyle = {
     display:'flex',
@@ -19,8 +19,8 @@ const imgStyle = {
 class ItemPicker extends Component{
     render(){
         return <div className='nes-container' style={itemPoolStyle}>
-        {Object.keys(ITEMS).map(item=>{
-            return <div onClick={()=>{this.props.selectEntity(item)}} key={item}><img style={imgStyle} src={'assets/items/' + ITEMS[item] + '.png'}/></div>;
+        {Object.keys(ITEM).map(item=>{
+            return <div onClick={()=>{this.props.selectEntity(item)}} key={item}><img style={imgStyle} src={'assets/items/' + ITEM[item] + '.png'}/></div>;
         })}
       </div>
     }

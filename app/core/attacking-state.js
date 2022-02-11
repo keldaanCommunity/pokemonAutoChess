@@ -1,4 +1,4 @@
-const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION} = require('../models/enum');
+const {STATE_TYPE, EFFECTS, ATTACK_TYPE, CLIMATE, ORIENTATION} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class AttackingState extends PokemonState {
@@ -44,11 +44,6 @@ class AttackingState extends PokemonState {
           target.status.triggerFreeze(2000);
         }
       }
-      if (pokemon.items.count(ITEMS.ICY_ROCK) != 0) {
-        if (Math.random() > 0.9) {
-          target.status.triggerFreeze(2000);
-        }
-      }
       let poisonChance = 0;
       if (pokemon.effects.includes(EFFECTS.POISON_GAS)) {
         poisonChance += 0.1;
@@ -77,7 +72,7 @@ class AttackingState extends PokemonState {
       }
       // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
       let damage;
-      let attackType = pokemon.attackType;
+      const attackType = pokemon.attackType;
 
       if (Math.random() * 100 < pokemon.critChance) {
         if (pokemon.effects.includes(EFFECTS.FAIRY_WIND) || pokemon.effects.includes(EFFECTS.STRANGE_STEAM) || pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
@@ -118,23 +113,8 @@ class AttackingState extends PokemonState {
         }
         damage = Math.round(pokemon.atk * pokemon.critDamage);
         target.count.crit ++;
-        if (pokemon.items.count(ITEMS.RAZOR_CLAW) != 0) {
-          attackType = ATTACK_TYPE.TRUE;
-        }
       } else {
         damage = pokemon.atk;
-      }
-
-      if (target.items.count(ITEMS.ROCKY_HELMET) != 0) {
-        pokemon.handleDamage(Math.ceil(pokemon.hp * 0.04) * target.items.count(ITEMS.ROCKY_HELMET), board, ATTACK_TYPE.PHYSICAL, target);
-      }
-
-      if (pokemon.items.count(ITEMS.LIFE_ORB) != 0) {
-        pokemon.handleDamage(Math.ceil(pokemon.hp * 0.05) * pokemon.items.count(ITEMS.LIFE_ORB), board, ATTACK_TYPE.TRUE, pokemon);
-      }
-
-      if (pokemon.items.count(ITEMS.SHELL_BELL) != 0) {
-        pokemon.handleHeal(Math.ceil(damage / 10) * pokemon.items.count(ITEMS.SHELL_BELL));
       }
 
       const victim = target.handleDamage(damage, board, attackType, pokemon);

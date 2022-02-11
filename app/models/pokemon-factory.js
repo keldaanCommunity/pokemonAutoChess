@@ -1,6 +1,6 @@
 const Pokemon = require('./colyseus-models/pokemon');
 const Items = require('./colyseus-models/items');
-const {SPECIAL_SKILL, PKM} = require('./enum');
+const {SPECIAL_SKILL, PKM, PRECOMPUTED_TYPE_POKEMONS, TYPE} = require('./enum');
 const Strategy = require('../core/attack-strategy');
 
 class PokemonFactory {
@@ -1838,6 +1838,26 @@ class PokemonFactory {
   static getPokemonRarityFromName(name) {
     const pokemon = PokemonFactory.createPokemonFromName(name);
     return pokemon.rarity;
+  }
+
+  static getRandomFossil(board) {
+    const currentFossils = [];
+    board.forEach( (p) =>{
+      if (p.types.includes(TYPE.FOSSIL)) {
+        currentFossils.push(p.name);
+      }
+    });
+    const possibleFossils = [];
+    PRECOMPUTED_TYPE_POKEMONS[TYPE.FOSSIL].pokemons.forEach((p)=>{
+      if (!currentFossils.includes(p)) {
+        possibleFossils.push(p);
+      }
+    });
+    if (possibleFossils.length > 0) {
+      return possibleFossils[Math.floor(Math.random() * possibleFossils.length)];
+    } else {
+      return PKM.AERODACTYL;
+    }
   }
 }
 
