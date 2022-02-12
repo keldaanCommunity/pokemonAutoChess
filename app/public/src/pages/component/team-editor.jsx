@@ -148,7 +148,7 @@ class TeamEditor extends Component{
                                                         <div style={divTdStyle}>
                                                             <img style={bigImgStyle} src={'assets/avatar/'+ p.name +'.png'}></img>
                                                             {p.items ? <div style={{display:'flex', justifyContent:'space-evenly'}}>{p.items.map((it,j)=>{
-                                                                return <img key={j} style={itemImgStyle} src={'assets/items/' + it + '.png'}/>
+                                                                return <img key={j} style={itemImgStyle} src={'assets/item/' + it + '.png'}/>
                                                             })}</div>: null}
                                                         </div>
                                                     </td>

@@ -25,7 +25,7 @@ class SelectedEntity extends Component {
         if(Object.keys(ITEM).includes(this.props.entity)){
             return <div className='nes-container' style={entityStyle}>
                 <div style={{display:'flex'}}>
-                    <img style={imgStyle} src={'assets/items/' + this.props.entity + '.png'}/>
+                    <img style={imgStyle} src={'assets/item/' + this.props.entity + '.png'}/>
                     <h3>{ITEM_NAME[this.props.entity]}</h3>
                 </div>
                 <p>{ITEM_DESCRIPTION[this.props.entity]}</p>

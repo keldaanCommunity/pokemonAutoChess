@@ -20,7 +20,7 @@ class ItemPicker extends Component{
     render(){
         return <div className='nes-container' style={itemPoolStyle}>
         {Object.keys(ITEM).map(item=>{
-            return <div onClick={()=>{this.props.selectEntity(item)}} key={item}><img style={imgStyle} src={'assets/items/' + ITEM[item] + '.png'}/></div>;
+            return <div onClick={()=>{this.props.selectEntity(item)}} key={item}><img style={imgStyle} src={'assets/item/' + ITEM[item] + '.png'}/></div>;
         })}
       </div>
     }

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {ITEMS, PKM} = require('./../enum');
+const {ITEM, PKM} = require('../enum');
 
 const pokemon = new Schema({
   name: {
@@ -10,7 +10,7 @@ const pokemon = new Schema({
   items: [
     {
       type: String,
-      enum: Object.keys(ITEMS)
+      enum: Object.keys(ITEM)
     }
   ]
 });
@@ -39,5 +39,5 @@ const statisticSchema = new Schema(
     }
 );
 
-const DetailledStatistic = mongoose.model('DetailledStatistic', statisticSchema);
-module.exports = DetailledStatistic;
+const DetailledStatisticV2 = mongoose.model('DetailledStatisticV2', statisticSchema);
+module.exports = DetailledStatisticV2;
