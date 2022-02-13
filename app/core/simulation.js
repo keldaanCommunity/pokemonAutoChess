@@ -4,8 +4,9 @@ const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 const PokemonEntity = require('./pokemon-entity');
 const PokemonFactory = require('../models/pokemon-factory');
-const {CLIMATE, EFFECTS, TYPE, ATTACK_TYPE} = require('../models/enum');
+const {CLIMATE, EFFECTS, TYPE, ATTACK_TYPE, ITEM} = require('../models/enum');
 const Dps = require('./dps');
+const ItemFactory = require('../models/item-factory');
 
 class Simulation extends Schema {
   constructor() {
@@ -121,7 +122,7 @@ class Simulation extends Schema {
   addPokemon(pokemon, x, y, team, blueTeam, redTeam) {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this);
     // pokemonEntity.triggerSleep(5000);
-    this.applyItemsEffects(pokemonEntity, pokemon.types);
+    this.applyItemsEffects(pokemonEntity);
     this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
 
     if (team == 0) {
@@ -169,13 +170,11 @@ class Simulation extends Schema {
   }
 
   applyItemsEffects(pokemon, types) {
-    /*
-    if (pokemon.items.count(ITEMS.WONDER_BOX) != 0) {
-      pokemon.items.remove(ITEMS.WONDER_BOX);
-      pokemon.items.add(ItemFactory.createRandomWonderBoxItem());
-      pokemon.items.add(ItemFactory.createRandomWonderBoxItem());
+    if (pokemon.items.count(ITEM.WONDER_BOX) != 0) {
+      pokemon.items.remove(ITEM.WONDER_BOX);
+      pokemon.items.add(ItemFactory.createRandomItem());
+      pokemon.items.add(ItemFactory.createRandomItem());
     }
-    */
   }
 
   applyPostEffects() {

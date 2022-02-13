@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 
 const schema = require('@colyseus/schema');
@@ -7,7 +8,6 @@ const ArraySchema = schema.ArraySchema;
 const {SPECIAL_SKILL, TYPE, RARITY, COST, ATTACK_TYPE, PKM, ITEM} = require('../enum');
 const Items = require('./items');
 const ItemFactory = require('../item-factory');
-
 class Pokemon extends Schema {
   constructor(author, name, frenchName, types, rarity, sheet, index, evolution, hp, atk, def, speDef, range, attackSprite, attackType, stars, maxMana, skill) {
     super();
@@ -37,7 +37,7 @@ class Pokemon extends Schema {
     });
     this.author = author;
     this.frenchName = frenchName;
-    // this.items.add(ItemFactory.createSpecificItems([ITEM.FOSSIL_STONE]));
+    // this.items.add(ItemFactory.createSpecificItems([ITEM.FIRE_STONE, ITEM.LEAF_STONE, ITEM.MOON_STONE]));
     if (types) {
       types.forEach((type) => {
         this.types.push(type);

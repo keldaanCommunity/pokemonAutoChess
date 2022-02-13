@@ -220,6 +220,32 @@ class OnDragDropCommand extends Command {
         }
 
         // regular equip
+        switch (item) {
+          case ITEM.WATER_STONE:
+            pokemon.types.push(TYPE.WATER);
+            break;
+          case ITEM.FIRE_STONE:
+            pokemon.types.push(TYPE.FIRE);
+            break;
+          case ITEM.THUNDER_STONE:
+            pokemon.types.push(TYPE.ELECTRIC);
+            break;
+          case ITEM.DUSK_STONE:
+            pokemon.types.push(TYPE.DARK);
+            break;
+          case ITEM.MOON_STONE:
+            pokemon.types.push(TYPE.FAIRY);
+            break;
+          case ITEM.LEAF_STONE:
+            pokemon.types.push(TYPE.GRASS);
+            break;
+          case ITEM.DAWN_STONE:
+            pokemon.types.push(TYPE.PSYCHIC);
+            break;
+          case ITEM.ICY_ROCK:
+            pokemon.types.push(TYPE.ICE);
+            break;
+        }
         pokemon.items.add(item);
         player.stuff.remove(item);
       }
