@@ -3408,17 +3408,17 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 3,
           title: `(3) Bulk up`,
-          text: `When a field pokemon dies, all other field pokemons gain 30% Attack Speed and are healed for 30% of their Maximum Health`
+          text: `When a field pokemon dies, all other field pokemons gain 20% Attack Speed and are healed for 30% of their Maximum Health`
         },
         {
           trigger: 6,
           title: `(6) Rage`,
-          text: `When a field pokemon dies, all other field pokemons gain 40% Attack Speed and are healed for 40% of their Maximum Health`
+          text: `When a field pokemon dies, all other field pokemons gain 30% Attack Speed and are healed for 40% of their Maximum Health`
         },
         {
           trigger: 9,
           title: `(9) Sword Dance`,
-          text: `When a field pokemon dies, all other field pokemons gain 60% Attack Speed and are healed for 60% of their Maximum Health`
+          text: `When a field pokemon dies, all other field pokemons gain 50% Attack Speed and are healed for 60% of their Maximum Health`
         }
       ]
     }

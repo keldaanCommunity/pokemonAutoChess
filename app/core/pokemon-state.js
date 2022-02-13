@@ -125,18 +125,22 @@ class PokemonState {
 
             if (isWorkUp || isRage || isAngerPoint) {
               let boost = 0;
+              let speedBoost = 0;
               if (isWorkUp) {
                 boost = 30;
+                speedBoost = 20;
               } else if (isRage) {
                 boost = 40;
+                speedBoost = 30;
               } else if (isAngerPoint) {
                 boost = 60;
+                speedBoost = 50;
               }
               board.forEach((r, c, value) => {
                 if (value !== undefined && value.team == pokemon.team && value.types.includes(TYPE.FIELD)) {
                   value.count.fieldCount ++;
                   value.handleHeal(boost / 100 * value.hp);
-                  value.handleAttackSpeed(boost);
+                  value.handleAttackSpeed(speedBoost);
                 }
               });
             }
