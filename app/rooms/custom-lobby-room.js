@@ -10,7 +10,7 @@ const admin = require('firebase-admin');
 const GameRecord = require('../models/colyseus-models/game-record');
 const {MessageEmbed, WebhookClient} = require('discord.js');
 const PasteBinAPI = require('pastebin-ts');
-const DetailledStatistic = require('../models/mongo-models/detailled-statistic');
+const DetailledStatistic = require('../models/mongo-models/detailled-statistic-v2');
 const BotV2 = require('../models/mongo-models/bot-v2');
 
 const pastebin = new PasteBinAPI({

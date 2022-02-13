@@ -9,7 +9,7 @@ const {XP_PLACE, XP_TABLE, PKM} = require('../models/enum');
 const PokemonFactory = require('../models/pokemon-factory');
 const EloRank = require('elo-rank');
 const admin = require('firebase-admin');
-const DetailledStatistic = require('../models/mongo-models/detailled-statistic');
+const DetailledStatistic = require('../models/mongo-models/detailled-statistic-v2');
 
 
 class GameRoom extends colyseus.Room {
