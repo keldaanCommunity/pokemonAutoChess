@@ -2,12 +2,13 @@ const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 
 class BattleResult extends Schema {
-  constructor(name, result, avatar) {
+  constructor(name, result, avatar, isPVE=false) {
     super();
     this.assign({
       name: name,
       result: result,
-      avatar: avatar
+      avatar: avatar,
+      isPVE: isPVE 
     });
   }
 }
@@ -15,7 +16,8 @@ class BattleResult extends Schema {
 schema.defineTypes(BattleResult, {
   name: 'string',
   result: 'string',
-  avatar: 'string'
+  avatar: 'string',
+  isPVE: 'boolean'
 });
 
 module.exports = BattleResult;
