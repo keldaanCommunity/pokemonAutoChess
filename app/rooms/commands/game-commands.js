@@ -393,6 +393,7 @@ class OnUpdatePhaseCommand extends Command {
       }
       this.initializeFightingPhase();
     } else if (this.state.phase == STATE.FIGHT) {
+      this.computeStreak();
       this.computeLife();
       this.rankPlayers();
       this.checkDeath();
@@ -464,38 +465,40 @@ class OnUpdatePhaseCommand extends Command {
   }
 
   computeLife() {
+    const isPVE = this.checkForPVE()
     this.state.players.forEach((player, key) => {
-      if (player.simulation.blueTeam.size == 0) {
-        if (player.opponentName != 'PVE') {
-          if (player.getLastBattleResult() == BATTLE_RESULT.DEFEAT) {
-            player.streak = Math.min(player.streak + 1, 5);
-          } else {
-            player.streak = 0;
-          }
+      if(player.alive){
+        const currentResult = player.getCurrentBattleResult()
+
+        if(currentResult == BATTLE_RESULT.DEFEAT || currentResult == BATTLE_RESULT.DRAW){
+          player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel));
         }
-        player.addBattleResult(player.opponentName, BATTLE_RESULT.DEFEAT, player.opponentAvatar);
-        player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel));
-      } else if (player.simulation.redTeam.size == 0) {
-        if (player.opponentName != 'PVE') {
-          if (player.getLastBattleResult() == BATTLE_RESULT.WIN) {
-            player.streak = Math.min(player.streak + 1, 5);
-          } else {
-            player.streak = 0;
-          }
-        }
-        player.addBattleResult(player.opponentName, BATTLE_RESULT.WIN, player.opponentAvatar);
-      } else {
-        if (player.opponentName != 'PVE') {
-          if (player.getLastBattleResult() == BATTLE_RESULT.DRAW) {
-            player.streak = Math.min(player.streak + 1, 5);
-          } else {
-            player.streak = 0;
-          }
-        }
-        player.addBattleResult(player.opponentName, BATTLE_RESULT.DRAW, player.opponentAvatar);
-        player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel));
+        player.addBattleResult(player.opponentName, currentResult, player.opponentAvatar, isPVE);
       }
     });
+
+  }
+
+  computeStreak() {
+    if(this.checkForPVE()){
+      return
+    }
+    
+    this.state.players.forEach((player, key) => {
+      if(!player.alive){
+        return
+      }
+      const currentResult = player.getCurrentBattleResult()
+      const lastPlayerResult = player.getLastPlayerBattleResult()
+
+      if(currentResult == BATTLE_RESULT.DRAW || currentResult != lastPlayerResult){
+        player.streak = 0
+      }
+      else{
+        player.streak = Math.min(player.streak + 1, 5);
+      }
+
+    })
   }
 
   computeIncome() {
@@ -533,7 +536,7 @@ class OnUpdatePhaseCommand extends Command {
     this.state.phase = STATE.PICK;
     this.state.time = process.env.MODE == 'dev' ? 20000 : 30000;
 
-    const isPVE = (this.getPVEIndex(this.state.stageLevel) >= 0);
+    const isPVE = this.checkForPVE()
 
     this.state.players.forEach((player, key) => {
       player.simulation.stop();
@@ -628,6 +631,10 @@ class OnUpdatePhaseCommand extends Command {
     });
 
     return result;
+  }
+
+  checkForPVE() {
+    return (this.getPVEIndex(this.state.stageLevel) >= 0)
   }
 
   initializeFightingPhase() {
