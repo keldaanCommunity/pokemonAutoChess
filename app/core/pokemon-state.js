@@ -234,6 +234,10 @@ class PokemonState {
       pokemon.status.updateShield(dt, pokemon);
     }
 
+    if (pokemon.status.soulDew) {
+      pokemon.status.updateSoulDew(dt, pokemon);
+    }
+
     if (pokemon.manaCooldown <= 0) {
       pokemon.setMana(pokemon.mana + 10);
 
@@ -258,11 +262,11 @@ class PokemonState {
 
     if (pokemon.cooldown <= 0) {
       if (pokemon.status.burn) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp / 5), board, ATTACK_TYPE.TRUE);
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.05), board, ATTACK_TYPE.TRUE);
       }
 
       if (pokemon.status.poison) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.15), board, ATTACK_TYPE.TRUE);
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.10), board, ATTACK_TYPE.TRUE);
       }
 
       if (pokemon.effects.includes(EFFECTS.BLAZE)) {

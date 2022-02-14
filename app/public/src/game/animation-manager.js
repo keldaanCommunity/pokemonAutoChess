@@ -617,6 +617,20 @@ export default class AnimationManager {
       duration: 800,
       repeat: 0
     });
+
+    this.game.anims.create({
+      key: `INCENSE_DAMAGE`,
+      frames: this.game.anims.generateFrameNames('INCENSE_DAMAGE', {start: 0, end: 6, zeroPad: 3}),
+      duration: 500,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: `STATIC`,
+      frames: this.game.anims.generateFrameNames('STATIC', {start: 0, end: 13, zeroPad: 3}),
+      duration: 500,
+      repeat: 0
+    });
   }
 
   createSleepSoundAnimations(index) {

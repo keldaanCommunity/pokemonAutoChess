@@ -1,4 +1,5 @@
 const schema = require('@colyseus/schema');
+const {ITEM} = require('../enum');
 
 class Status extends schema.Schema {
   constructor() {
@@ -15,6 +16,7 @@ class Status extends schema.Schema {
       resurection: false
     });
     this.temporaryShield = false;
+    this.soulDew = false;
 
     this.burnCooldown = 0;
     this.silenceCooldown = 0;
@@ -25,6 +27,27 @@ class Status extends schema.Schema {
     this.confusionCooldown = 0;
     this.woundCooldown = 0;
     this.temporaryShieldCooldown = 0;
+    this.soulDewCoolDown = 0;
+  }
+
+  triggerSoulDew(timer) {
+    console.log('sould dew');
+    if (!this.soulDew) {
+      this.soulDew = true;
+      this.soulDewCoolDown = timer;
+    }
+  }
+
+  updateSoulDew(dt, pkm) {
+    if (this.soulDewCoolDown - dt <= 0) {
+      this.soulDew = false;
+      pkm.spellDamage += 3 * pkm.items.count(ITEM.SOUL_DEW);
+      if (pkm.items.count(ITEM.SOUL_DEW) != 0) {
+        this.triggerSoulDew(5000);
+      }
+    } else {
+      this.soulDewCoolDown = this.soulDewCoolDown - dt;
+    }
   }
 
   triggerBurn(timer) {

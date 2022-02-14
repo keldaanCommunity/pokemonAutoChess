@@ -1457,7 +1457,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Brulure'
     },
     description: {
-      eng: 'Burn the whole team for 2/4/8 seconds, dealing 5% hp / seconds',
+      eng: 'Burn the whole team for 5/10/20 seconds, dealing 5% hp/ seconds',
       esp: 'Quemar todo el equipo durante 2/4/8 segundos, repartiendo el 5% de hp/segundos',
       fra: 'Brule la cible pour 2/4/8 secondes, lui faisant perdre 5% hp/secondes'
     }
@@ -1469,7 +1469,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Poison'
     },
     description: {
-      eng: 'Poison the target for 5/10/20 seconds, dealing 15% hp/seconds',
+      eng: 'Poison the target for 5/10/20 seconds, dealing 10% hp/seconds',
       esp: 'Envenenar el objetivo durante 5/10/20 segundos, repartiendo 15% hp/segundos',
       fra: 'Empoisonne la cible durant 5/10/20 secondes, faisant 15% hp/secondes'
     }
@@ -5327,7 +5327,7 @@ const ITEM = {
   ZOOM_LENS: 'ZOOM_LENS',
   BRIGHT_POWDER: 'BRIGHT_POWDER',
   DELTA_ORB: 'DELTA_ORB',
-  EXPERT_BELT: 'EXPERT_BELT',
+  MANA_SCARF: 'MANA_SCARF',
   SMOKE_BALL: 'SMOKE_BALL',
   XRAY_VISION: 'XRAY_VISION',
   RAZOR_FANG: 'RAZOR_FANG',
@@ -5432,10 +5432,10 @@ const ITEM_DESCRIPTION = Object.freeze({
   SOUL_DEW: 'During combat, the holder gains 3 spell damage every 5 seconds',
   UPGRADE: 'Attacks grant +6% bonus Attack Speed for the rest of combat',
   REAPER_CLOTH: 'The holder spells can critically strike (20% chance, 2x damage)',
-  MAGIC_RUNE: 'When the holder deals magic or true damage with their Ability, they burn the target, dealing 20% of the targets maximum Health as true damage over 10 seconds and reducing healing by 50% for the duration of the burn.',
-  WATER_INCENSE: 'When an ennemy cast an ability, they take incense damage equal to 200% of their max mana',
+  MAGIC_RUNE: 'When the holder deals damage with their Ability, they burn and wound the target for 3 seconds',
+  WATER_INCENSE: 'When an ennemy cast an ability, they take incense damage equal to 20% of their max mana',
   SHELL_BELL: 'The holder spells heal for 40% of the damage dealt',
-  LUCKY_EGG: 'When combat begins, the holder and all allies within 2 hexes in the same row gain a shield that lock 30 damage',
+  LUCKY_EGG: 'When combat begins, the holder and all allies within 2 hexes in the same row gain 20 shield points',
   AQUA_EGG: 'The holder gains 50 mana. After casting their ability the holder gains 20 mana',
   BLUE_ORB: 'The holder gains 10% bonus Attack Speed. Every third attack from the holder unleashes a chain lightning that bounces to 4 enemies, dealing 8 magic damage',
   ZOOM_LENS: 'The holder gains 4 attack damage and 4 spell damage',

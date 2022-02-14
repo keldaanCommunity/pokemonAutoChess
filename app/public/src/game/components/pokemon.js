@@ -148,6 +148,28 @@ export default class Pokemon extends Button {
     });
   }
 
+  incenseAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'INCENSE_DAMAGE', '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(2, 2);
+    specialProjectile.anims.play('INCENSE_DAMAGE');
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
+  staticAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'STATIC', '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(3, 3);
+    specialProjectile.anims.play('STATIC');
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
   deathAnimation() {
     // const sprite = this.getFirst('objType', 'sprite');
     this.life = 0;

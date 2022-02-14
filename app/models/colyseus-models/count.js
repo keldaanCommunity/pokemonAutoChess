@@ -12,8 +12,11 @@ class Count extends schema.Schema {
       fairyCritCount: 0,
       attackCount: 0,
       growGroundCount: 0,
-      dodgeCount: 0
+      dodgeCount: 0,
+      incenseCount: 0,
+      staticCount: 0
     });
+    this.staticHolderCount = 0;
   }
 }
 
@@ -26,7 +29,9 @@ schema.defineTypes(Count, {
   fairyCritCount: 'uint8',
   attackCount: 'uint8',
   growGroundCount: 'uint8',
-  dodgeCount: 'uint8'
+  dodgeCount: 'uint8',
+  incenseCount: 'uint8',
+  staticCount: 'uint8'
 });
 
 module.exports = Count;

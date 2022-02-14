@@ -1,6 +1,5 @@
 const schema = require('@colyseus/schema');
-const STATE_TYPE = require('../models/enum').STATE_TYPE;
-const ORIENTATION = require('../models/enum').ORIENTATION;
+const {STATE_TYPE, ORIENTATION, ITEM} = require('../models/enum');
 const MovingState = require('./moving-state');
 const AttackingState = require('./attacking-state');
 const uniqid = require('uniqid');
@@ -61,6 +60,7 @@ class PokemonEntity extends schema.Schema {
         }
     );
     this.critDamage = 2;
+    this.spellDamage = 0;
     this.dodge = 0;
 
     pokemon.types.forEach((type) => {
@@ -86,6 +86,22 @@ class PokemonEntity extends schema.Schema {
 
   handleDamage(damage, board, attackType, attacker) {
     return this.state.handleDamage(this, damage, board, attackType, attacker);
+  }
+
+  handleSpellDamage(damage, board, attackType, attacker) {
+    let spellDamage = damage + this.spellDamage;
+    if (attacker && 0.2 * attacker.items.count(ITEM.REAPER_CLOTH) > Math.random()) {
+      spellDamage *= 2;
+      this.count.crit ++;
+    }
+    if (attacker && attacker.items.count(ITEM.MAGIC_RUNE) != 0) {
+      this.status.triggerBurn(3000);
+      this.status.triggerWound(3000);
+    }
+    if (attacker && attacker.items.count(ITEM.SHELL_BELL) != 0) {
+      attacker.handleHeal(0.4 * damage * attacker.items.count(ITEM.SHELL_BELL));
+    }
+    return this.state.handleDamage(this, spellDamage, board, attackType, attacker);
   }
 
   handleHeal(heal) {

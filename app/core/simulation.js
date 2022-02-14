@@ -170,10 +170,50 @@ class Simulation extends Schema {
   }
 
   applyItemsEffects(pokemon, types) {
+    if (pokemon.items.count(ITEM.TWISTED_SPOON) != 0) {
+      pokemon.spellDamage += 1 * pokemon.items.count(ITEM.TWISTED_SPOON);
+    }
+    if (pokemon.items.count(ITEM.MYSTIC_WATER) != 0) {
+      pokemon.mana += 15 * pokemon.items.count(ITEM.MYSTIC_WATER);
+    }
+    if (pokemon.items.count(ITEM.MAGNET) != 0) {
+      pokemon.handleAttackSpeed(15 * pokemon.items.count(ITEM.MAGNET));
+    }
+    if (pokemon.items.count(ITEM.BLACK_GLASSES) != 0) {
+      pokemon.addCritChance(5 * pokemon.items.count(ITEM.BLACK_GLASSES));
+    }
+    if (pokemon.items.count(ITEM.MIRACLE_SEED) != 0) {
+      pokemon.shield += 15 * pokemon.items.count(ITEM.MIRACLE_SEED);
+    }
+    if (pokemon.items.count(ITEM.NEVER_MELT_ICE) != 0) {
+      pokemon.speDef += 2 * pokemon.items.count(ITEM.NEVER_MELT_ICE);
+    }
+    if (pokemon.items.count(ITEM.CHARCOAL) != 0) {
+      pokemon.atk += 1 * pokemon.items.count(ITEM.CHARCOAL);
+    }
+    if (pokemon.items.count(ITEM.HEART_SCALE) != 0) {
+      pokemon.def += 1 * pokemon.items.count(ITEM.HEART_SCALE);
+    }
+    if (pokemon.items.count(ITEM.CHOICE_SPECS) != 0) {
+      pokemon.spellDamage += 8;
+    }
+    if (pokemon.items.count(ITEM.SOUL_DEW) != 0) {
+      pokemon.status.triggerSoulDew(5000);
+    }
     if (pokemon.items.count(ITEM.WONDER_BOX) != 0) {
       pokemon.items.remove(ITEM.WONDER_BOX);
       pokemon.items.add(ItemFactory.createRandomItem());
       pokemon.items.add(ItemFactory.createRandomItem());
+    }
+    if (pokemon.items.count(ITEM.AQUA_EGG) != 0) {
+      pokemon.setMana(pokemon.mana + 50);
+    }
+    if (pokemon.items.count(ITEM.BLUE_ORB) != 0) {
+      pokemon.handleAttackSpeed(10);
+    }
+    if (pokemon.items.count(ITEM.ZOOM_LENS) != 0) {
+      pokemon.atk += 4;
+      pokemon.spellDamage += 4;
     }
   }
 
@@ -220,6 +260,14 @@ class Simulation extends Schema {
           }
         });
       }
+      if (pokemon.items.count(ITEM.LUCKY_EGG) != 0) {
+        [-2, -1, 0, 1, 2].forEach( (offset)=>{
+          const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
+          if (value) {
+            value.shield += 30;
+          }
+        });
+      }
     });
 
     let redImperialCount = 1;
@@ -252,6 +300,14 @@ class Simulation extends Schema {
         cells.forEach((cell) => {
           if (cell.value && pokemon.team == cell.value.team) {
             cell.value.shield += shieldBonus;
+          }
+        });
+      }
+      if (pokemon.items.count(ITEM.LUCKY_EGG) != 0) {
+        [-2, -1, 0, 1, 2].forEach( (offset)=>{
+          const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
+          if (value) {
+            value.shield += 30;
           }
         });
       }

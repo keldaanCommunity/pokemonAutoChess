@@ -1,4 +1,4 @@
-const {STATE_TYPE, EFFECTS, ATTACK_TYPE, CLIMATE, ORIENTATION} = require('../models/enum');
+const {STATE_TYPE, EFFECTS, ATTACK_TYPE, CLIMATE, ORIENTATION, ITEM} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class AttackingState extends PokemonState {
@@ -32,6 +32,10 @@ class AttackingState extends PokemonState {
     pokemon.targetY = coordinates[1];
     const target = board.getValue(coordinates[0], coordinates[1]);
     if (target && !pokemon.status.sleep && !pokemon.status.freeze) {
+      if (pokemon.items.count(ITEM.UPGRADE) != 0) {
+        pokemon.handleAttackSpeed(6 * pokemon.items.count(ITEM.UPGRADE));
+      }
+
       if (climate == CLIMATE.SNOW) {
         let freezeChance = 0;
         if (pokemon.effects.includes(EFFECTS.SNOW)) {
@@ -118,6 +122,21 @@ class AttackingState extends PokemonState {
       }
 
       const victim = target.handleDamage(damage, board, attackType, pokemon);
+
+      if (pokemon.items.count(ITEM.BLUE_ORB) != 0) {
+        pokemon.count.staticHolderCount ++;
+        if (pokemon.count.staticHolderCount > 3) {
+          pokemon.count.staticHolderCount = 0;
+          let c = 4;
+          board.forEach((x, y, tg) => {
+            if (tg && pokemon.team != tg.team) {
+              tg.count.staticCount ++;
+              tg.handleDamage(8, board, ATTACK_TYPE.SPECIAL, pokemon);
+              c --;
+            }
+          });
+        }
+      }
 
       if (victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)) {
         pokemon.handleHeal(pokemon.hp);

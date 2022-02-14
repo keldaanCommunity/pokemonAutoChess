@@ -1,4 +1,4 @@
-const {ATTACK_TYPE, TYPE, EFFECTS} = require('../models/enum');
+const {ATTACK_TYPE, TYPE, EFFECTS, ITEM} = require('../models/enum');
 
 class AttackStrategy {
   constructor() {
@@ -38,6 +38,15 @@ class AttackStrategy {
           }
         });
       }
+    }
+    board.forEach((r, c, value) => {
+      if (value !== undefined && value.team != pokemon.team && value.items.count(ITEM.WATER_INCENSE) != 0) {
+        pokemon.count.incenseCount ++;
+        pokemon.handleDamage(Math.ceil(value.maxMana * 0.2), board, ATTACK_TYPE.SPECIAL, value);
+      }
+    });
+    if (pokemon.items.count(ITEM.AQUA_EGG) != 0) {
+      pokemon.setMana(pokemon.mana + 20);
     }
   }
 }
@@ -102,11 +111,11 @@ class ExplosionStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+        cell.value.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
       }
     });
 
-    pokemon.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    pokemon.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }
 
@@ -164,7 +173,7 @@ class BonemerangStrategy extends AttackStrategy {
 
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team && x == target.positionX) {
-        tg.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+        tg.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
       }
     });
   }
@@ -263,7 +272,7 @@ class HighJumpKickStrategy extends AttackStrategy {
     }
     pokemon.setMana(target.mana);
     target.setMana(0);
-    target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }
 
@@ -346,7 +355,7 @@ class EchoStrategy extends AttackStrategy {
 
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team) {
-        tg.handleDamage(damage + pokemon.echo * additional, board, ATTACK_TYPE.SPECIAL, pokemon);
+        tg.handleSpellDamage(damage + pokemon.echo * additional, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
     });
 
@@ -380,7 +389,7 @@ class PetalDanceStrategy extends AttackStrategy {
 
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team && count > 0) {
-        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        tg.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
         count --;
         tg.count.petalDanceCount ++;
       }
@@ -414,7 +423,7 @@ class HyperVoiceStrategy extends AttackStrategy {
 
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
-        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        tg.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
         tg.status.triggerConfusion(confusion * 1000);
       }
     });
@@ -459,7 +468,7 @@ class VoltSwitchStrategy extends AttackStrategy {
     const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, x, y);
     cells.forEach((cell)=>{
       if (cell.value && cell.value != pokemon) {
-        cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        cell.value.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
     });
 
@@ -496,11 +505,11 @@ class HeadSmashStrategy extends AttackStrategy {
         break;
     }
     if (target.status.sleep || target.status.freeze) {
-      target.handleDamage(target.life, board, ATTACK_TYPE.TRUE, pokemon);
+      target.handleSpellDamage(target.life, board, ATTACK_TYPE.TRUE, pokemon);
     } else {
-      target.handleDamage(d, board, ATTACK_TYPE.PHYSICAL, pokemon);
+      target.handleSpellDamage(d, board, ATTACK_TYPE.PHYSICAL, pokemon);
     }
-    pokemon.handleDamage(recoil, board, ATTACK_TYPE.TRUE, pokemon);
+    pokemon.handleSpellDamage(recoil, board, ATTACK_TYPE.TRUE, pokemon);
   }
 }
 
@@ -531,7 +540,7 @@ class RockSmashStrategy extends AttackStrategy {
         break;
     }
 
-    target.handleDamage(d, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    target.handleSpellDamage(d, board, ATTACK_TYPE.PHYSICAL, pokemon);
     target.status.triggerSilence(s);
   }
 }
@@ -559,7 +568,7 @@ class RockTombStrategy extends AttackStrategy {
         break;
     }
 
-    target.handleDamage(factor, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    target.handleSpellDamage(factor, board, ATTACK_TYPE.PHYSICAL, pokemon);
     target.handleAttackSpeed(-factor);
   }
 }
@@ -627,7 +636,7 @@ class OriginPulseStrategy extends AttackStrategy {
 
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
-        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        tg.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
     });
   }
@@ -645,7 +654,7 @@ class SeedFlareStrategy extends AttackStrategy {
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team) {
         tg.speDef = Math.max(0, tg.speDef - 2);
-        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        tg.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
     });
   }
@@ -690,13 +699,13 @@ class BurnStrategy extends AttackStrategy {
     let timer = 0;
     switch (pokemon.stars) {
       case 1:
-        timer = 2000;
+        timer = 5000;
         break;
       case 2:
-        timer = 4000;
+        timer = 10000;
         break;
       case 3:
-        timer = 8000;
+        timer = 20000;
         break;
       default:
         break;
@@ -704,6 +713,7 @@ class BurnStrategy extends AttackStrategy {
     board.forEach((x, y, value) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerBurn(timer);
+        value.status.triggerWound(timer);
       }
     });
   }
@@ -894,7 +904,7 @@ class FireBlastStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
   }
 }
 
@@ -912,7 +922,7 @@ class SeismicTossStrategy extends AttackStrategy {
       }
     });
     damage = damage * 5;
-    target.handleDamage(damage, board, ATTACK_TYPE.TRUE, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.TRUE, pokemon);
   }
 }
 
@@ -924,7 +934,7 @@ class GuillotineStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
     const damage = pokemon.atk * pokemon.stars;
-    const victim = target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    const victim = target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
     if (victim) {
       pokemon.setMana(Math.floor(pokemon.maxMana / 2));
     }
@@ -955,7 +965,7 @@ class RockSlideStrategy extends AttackStrategy {
     if (target.types.includes(TYPE.FLYING)) {
       damage = damage * 2;
     }
-    target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }
 
@@ -983,7 +993,7 @@ class WheelOfFireStrategy extends AttackStrategy {
     const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
     cells.forEach((cell)=>{
       if (cell.value && cell.value != pokemon) {
-        cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        cell.value.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
     });
   }
@@ -1010,14 +1020,14 @@ class HeatWaveStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
     const secondTarget = board.getValue(target.positionX, target.positionY + 1);
     const thirdTarget = board.getValue(target.positionX, target.positionY + 2);
     if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+      secondTarget.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
     }
     if (thirdTarget && thirdTarget != pokemon) {
-      thirdTarget.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+      thirdTarget.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
     }
   }
 }
@@ -1043,10 +1053,10 @@ class HydroPumpStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
     const secondTarget = board.getValue(target.positionX, target.positionY + 1);
     if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+      secondTarget.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
     }
   }
 }
@@ -1072,7 +1082,7 @@ class ThunderStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
   }
 }
 
@@ -1099,7 +1109,7 @@ class DracoMeteorStrategy extends AttackStrategy {
     }
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team) {
-        tg.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        tg.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
     });
   }
@@ -1113,7 +1123,7 @@ class BlazeKickStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
     const damage = 30 * pokemon.stars;
-    target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }
 
@@ -1216,7 +1226,7 @@ class SoakStrategy extends AttackStrategy {
       }
     });
 
-    target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
   }
 }
 
@@ -1246,7 +1256,7 @@ class IronTailStrategy extends AttackStrategy {
         break;
     }
     pokemon.def += buff;
-    target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
   }
 }
 
@@ -1277,7 +1287,7 @@ class BlastBurnStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        cell.value.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
     });
   }
@@ -1340,7 +1350,7 @@ class DischargeStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        cell.value.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
     });
   }
@@ -1367,7 +1377,7 @@ class BiteStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
     pokemon.handleHeal(Math.floor(damage/2));
   }
 }
@@ -1393,7 +1403,7 @@ class DragonTailStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
     pokemon.def += pokemon.stars;
     pokemon.speDef += pokemon.stars;
   }
@@ -1420,10 +1430,10 @@ class DragonBreathStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.handleDamage(damage, board, ATTACK_TYPE.TRUE, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.TRUE, pokemon);
     const secondTarget = board.getValue(target.positionX, target.positionY + 1);
     if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleDamage(damage, board, ATTACK_TYPE.TRUE, pokemon);
+      secondTarget.handleSpellDamage(damage, board, ATTACK_TYPE.TRUE, pokemon);
     }
   }
 }
@@ -1455,7 +1465,7 @@ class IcicleCrashStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        cell.value.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
     });
   }
@@ -1529,7 +1539,7 @@ class StompStrategy extends AttackStrategy {
   process(pokemon, state, board, target) {
     super.process(pokemon, state, board, target);
     const damage = pokemon.atk * pokemon.stars * 2;
-    target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }
 
@@ -1554,7 +1564,7 @@ class DarkPulseStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
     pokemon.handleHeal(damage);
   }
 }
@@ -1582,7 +1592,7 @@ class NightSlashStrategy extends AttackStrategy {
         break;
     }
 
-    target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
 
     board.forEach((x, y, v) => {
       if (v && pokemon.team != v.team) {
@@ -1615,7 +1625,7 @@ class BugBuzzStrategy extends AttackStrategy {
         break;
     }
 
-    target.handleDamage(damage, board, ATTACK_TYPE.TRUE, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.TRUE, pokemon);
   }
 }
 
@@ -1645,7 +1655,7 @@ class PoisonStingStrategy extends AttackStrategy {
       damage = damage * 2;
     }
 
-    target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }
 
@@ -1676,7 +1686,7 @@ class LeechLifeStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        cell.value.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
         pokemon.handleHeal(damage);
       }
     });
@@ -1812,7 +1822,7 @@ class ThiefStrategy extends AttackStrategy {
 
     pokemon.simulation.applyItemsEffects(pokemon);
     target.simulation.applyItemsEffects(target);
-    target.handleDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }
 
@@ -1841,7 +1851,7 @@ class StunSporeStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
     target.handleAttackSpeed(-debuff);
   }
 }
@@ -1874,7 +1884,7 @@ class MeteorMashStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+        cell.value.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
     });
   }
@@ -1901,10 +1911,10 @@ class HurricaneStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+    target.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
     const secondTarget = board.getValue(target.positionX, target.positionY + 1);
     if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
+      secondTarget.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
     }
   }
 }

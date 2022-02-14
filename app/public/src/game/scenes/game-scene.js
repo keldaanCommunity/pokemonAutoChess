@@ -138,6 +138,8 @@ export default class GameScene extends Scene {
     this.load.multiatlas('SHADOW_CLONE', '/assets/attacks/SHADOW_CLONE.json', '/assets/attacks');
     this.load.multiatlas('PETAL_DANCE', '/assets/attacks/PETAL_DANCE.json', '/assets/attacks');
     this.load.multiatlas('ECHO', '/assets/attacks/ECHO.json', '/assets/attacks');
+    this.load.multiatlas('INCENSE_DAMAGE', '/assets/attacks/INCENSE_DAMAGE.json', '/assets/attacks');
+    this.load.multiatlas('STATIC', '/assets/attacks/STATIC.json', '/assets/attacks');
     this.load.multiatlas('EXPLOSION', '/assets/attacks/EXPLOSION.json', '/assets/attacks');
     this.load.multiatlas('BONEMERANG', '/assets/attacks/BONEMERANG.json', '/assets/attacks');
     this.load.multiatlas('GROWL', '/assets/attacks/GROWL.json', '/assets/attacks');

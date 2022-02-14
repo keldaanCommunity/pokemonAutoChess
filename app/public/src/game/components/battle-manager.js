@@ -183,6 +183,14 @@ export default class BattleManager {
             if (change.value != 0) {
               children[i].fairyCritAnimation();
             }
+          } else if (change.field == 'incenseCount') {
+            if (change.value != 0) {
+              children[i].incenseAnimation();
+            }
+          } else if (change.field == 'staticCount') {
+            if (change.value != 0) {
+              children[i].staticAnimation();
+            }
           } else if ( change.field == 'attackCount') {
             if (change.value != 0) {
               // console.log(change.value, children[i].action, children[i].targetX, children[i].targetY);
