@@ -3,7 +3,7 @@ import PokemonFactory from '../../../../models/pokemon-factory';
 import {SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
 
 export default class PokemonDetail extends GameObjects.Container {
-  constructor(scene, x, y, name, hp, atk, def, speDef, attackType, range, atkSpeed, critChance) {
+  constructor(scene, x, y, name, hp, atk, def, speDef, attackType, range, atkSpeed, critChance, critDamage, spellDamage) {
     super(scene, x, y);
     this.pokemonInformation = PokemonFactory.createPokemonFromName(name);
 
@@ -45,27 +45,43 @@ export default class PokemonDetail extends GameObjects.Container {
     this.hp = new GameObjects.Text(scene, 20, 90, hp, this.getColorStyle(this.pokemonInformation.hp, hp, false));
     this.add(this.hp);
     this.add(new GameObjects.Image(scene, 100, 100, 'icons', 'hp').setScale(2, 2));
+    // atk
     this.atk = new GameObjects.Text(scene, 130, 90, atk, this.getColorStyle(this.pokemonInformation.atk, atk, false));
     this.add(this.atk);
     this.add(new GameObjects.Image(scene, 200, 100, 'icons', 'atk').setScale(2, 2));
+    // def
     this.def = new GameObjects.Text(scene, 20, 110, def, this.getColorStyle(this.pokemonInformation.def, def, false));
     this.add(this.def);
     this.add(new GameObjects.Image(scene, 100, 120, 'icons', 'def').setScale(2, 2));
+    // range
     this.range = new GameObjects.Text(scene, 130, 110, range, this.getColorStyle(this.pokemonInformation.range, range, false));
     this.add(this.range);
     this.add(new GameObjects.Image(scene, 200, 120, 'icons', 'range').setScale(2, 2));
+    // atk speed
     this.atkSpeed = new GameObjects.Text(scene, 110, 130, atkSpeed, this.getColorStyle(this.pokemonInformation.atkSpeed, atkSpeed, true));
     this.add(this.atkSpeed);
     this.add(new GameObjects.Image(scene, 200, 140, 'icons', 'atkSpeed').setScale(2, 2));
+    // spe def
     this.speDef = new GameObjects.Text(scene, 20, 130, speDef, this.getColorStyle(this.pokemonInformation.speDef, speDef, false));
     this.add(this.speDef);
     this.add(new GameObjects.Image(scene, 100, 140, 'icons', 'speDef').setScale(2, 2));
+    // crit chance
     this.critChance = new GameObjects.Text(scene, 130, 150, critChance, this.textStyle);
     this.add(this.critChance);
     this.add(new GameObjects.Image(scene, 200, 160, 'icons', 'critChance').setScale(2, 2));
+    // mana
     this.mana = new GameObjects.Text(scene, 10, 150, this.pokemonInformation.maxMana, this.textStyle);
     this.add(this.mana);
     this.add(new GameObjects.Image(scene, 100, 160, 'icons', 'mana').setScale(2, 2));
+    // crit damage
+    this.critDamage = new GameObjects.Text(scene, 10, 170, critDamage, this.textStyle);
+    this.add(this.critDamage);
+    this.add(new GameObjects.Image(scene, 100, 180, 'icons', 'critDamage').setScale(2, 2));
+    // spell damage
+    this.spellDamage = new GameObjects.Text(scene, 130, 170, spellDamage, this.textStyle);
+    this.add(this.spellDamage);
+    this.add(new GameObjects.Image(scene, 200, 180, 'icons', 'spellDamage').setScale(2, 2));
+
     this.add(new GameObjects.Text(scene, 230, 15, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].title[window.langage], this.titleTextStyle));
     this.add(new GameObjects.Text(scene, 230, 40, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].description[window.langage], this.textStyle));
     this.add(new GameObjects.Text(scene, 230, 175, 'by @' + this.pokemonInformation.author, this.textStyle));

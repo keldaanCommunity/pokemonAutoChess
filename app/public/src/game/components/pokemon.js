@@ -32,6 +32,8 @@ export default class Pokemon extends Button {
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
     this.team = pokemon.team;
+    this.critDamage = pokemon.critDamage ? Number(pokemon.critDamage.toFixed(2)): 2;
+    this.spellDamage = pokemon.spellDamage? pokemon.spellDamage: 0;
     this.setRangeType();
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
@@ -54,9 +56,9 @@ export default class Pokemon extends Button {
   enterButtonHoverState() {
     if (!this.getFirst('objType', 'detail') && this.isPopup) {
       if (this.life) {
-        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance));
+        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage));
       } else {
-        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance));
+        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage));
       }
     }
   }

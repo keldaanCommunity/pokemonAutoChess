@@ -5440,7 +5440,7 @@ const ITEM_DESCRIPTION = Object.freeze({
   BLUE_ORB: 'The holder gains 10% bonus Attack Speed. Every third attack from the holder unleashes a chain lightning that bounces to 4 enemies, dealing 8 magic damage',
   ZOOM_LENS: 'The holder gains 4 attack damage and 4 spell damage',
   BRIGHT_POWDER: 'Every 5 seconds, the holder throws a bright powder within 1 hex, healing them for 18% of their missing health',
-  DELTA_ORB: 'When combat begins, the holder and all allies within 1 hex in the same row gain 30 Ability Power for the rest of combat',
+  DELTA_ORB: 'When combat begins, the holder and all allies within 1 hex in the same row gain 3 Ability Power for the rest of combat',
   MANA_SCARF: 'The holder attacks restore 8 additional mana',
   SMOKE_BALL: 'Reduce the attack speed of ennemy attackers by 30%',
   XRAY_VISION: 'Increase the holders attack range by 1 hex and grants 55% bonus attack speed. The holder attacks can no longer miss.',

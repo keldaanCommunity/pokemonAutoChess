@@ -246,6 +246,19 @@ export default class BattleManager {
             if (detail) {
               detail.critChance.setText(pokemon.critChance);
             }
+          } else if (change.field == 'critDamage') {
+            children[i].critDamage = pokemon.critDamage;
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
+              detail.critDamage.setText(pokemon.critDamage);
+            }
+          } else if (change.field == 'spellDamage') {
+            console.log(change.value);
+            children[i].spellDamage = pokemon.spellDamage;
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
+              detail.spellDamage.setText(pokemon.spellDamage);
+            }
           } else if (change.field == 'atkSpeed') {
             children[i].atkSpeed = pokemon.atkSpeed;
             const detail = children[i].getFirst('objType', 'detail');

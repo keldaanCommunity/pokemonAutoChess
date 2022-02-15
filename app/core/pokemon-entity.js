@@ -56,11 +56,11 @@ class PokemonEntity extends schema.Schema {
           types: [],
           damageDone: 0,
           stars: pokemon.stars,
-          skill: pokemon.skill
+          skill: pokemon.skill,
+          critDamage: 2,
+          spellDamage: 0
         }
     );
-    this.critDamage = 2;
-    this.spellDamage = 0;
     this.dodge = 0;
 
     pokemon.types.forEach((type) => {
@@ -175,7 +175,9 @@ schema.defineTypes(PokemonEntity, {
   stars: 'uint8',
   skill: 'string',
   status: Status,
-  count: Count
+  count: Count,
+  critDamage: 'float32',
+  spellDamage: 'uint8'
 });
 
 module.exports = PokemonEntity;
