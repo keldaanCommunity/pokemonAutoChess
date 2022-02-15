@@ -138,6 +138,10 @@ class AttackingState extends PokemonState {
         }
       }
 
+      if (pokemon.items.count(ITEM.MANA_SCARF) != 0) {
+        pokemon.setMana(pokemon.mana + 8);
+      }
+
       if (victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)) {
         pokemon.handleHeal(pokemon.hp);
       }

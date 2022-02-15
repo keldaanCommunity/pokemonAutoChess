@@ -37,7 +37,7 @@ class Pokemon extends Schema {
     });
     this.author = author;
     this.frenchName = frenchName;
-    this.items.add(ItemFactory.createSpecificItems([ITEM.DELTA_ORB]));
+    this.items.add(ItemFactory.createSpecificItems([ITEM.MANA_SCARF]));
     if (types) {
       types.forEach((type) => {
         this.types.push(type);
