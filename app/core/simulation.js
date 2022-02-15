@@ -215,6 +215,9 @@ class Simulation extends Schema {
       pokemon.atk += 4;
       pokemon.spellDamage += 4;
     }
+    if (pokemon.items.count(ITEM.BRIGHT_POWDER) != 0) {
+      pokemon.status.triggerBrightPowder(5000);
+    }
   }
 
   applyPostEffects() {

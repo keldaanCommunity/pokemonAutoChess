@@ -14,7 +14,8 @@ class Count extends schema.Schema {
       growGroundCount: 0,
       dodgeCount: 0,
       incenseCount: 0,
-      staticCount: 0
+      staticCount: 0,
+      brightPowderCount: 0
     });
     this.staticHolderCount = 0;
   }
@@ -31,7 +32,8 @@ schema.defineTypes(Count, {
   growGroundCount: 'uint8',
   dodgeCount: 'uint8',
   incenseCount: 'uint8',
-  staticCount: 'uint8'
+  staticCount: 'uint8',
+  brightPowderCount: 'uint8'
 });
 
 module.exports = Count;

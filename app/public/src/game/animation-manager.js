@@ -631,6 +631,13 @@ export default class AnimationManager {
       duration: 500,
       repeat: 0
     });
+
+    this.game.anims.create({
+      key: `BRIGHT_POWDER`,
+      frames: this.game.anims.generateFrameNames('BRIGHT_POWDER', {start: 0, end: 18, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    });
   }
 
   createSleepSoundAnimations(index) {

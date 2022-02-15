@@ -187,6 +187,10 @@ export default class BattleManager {
             if (change.value != 0) {
               children[i].incenseAnimation();
             }
+          } else if (change.field == 'brightPowderCount') {
+            if (change.value != 0) {
+              children[i].brightPowderAnimation();
+            }
           } else if (change.field == 'staticCount') {
             if (change.value != 0) {
               children[i].staticAnimation();

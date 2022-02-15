@@ -17,6 +17,7 @@ class Status extends schema.Schema {
     });
     this.temporaryShield = false;
     this.soulDew = false;
+    this.brightPowder = false;
 
     this.burnCooldown = 0;
     this.silenceCooldown = 0;
@@ -27,26 +28,27 @@ class Status extends schema.Schema {
     this.confusionCooldown = 0;
     this.woundCooldown = 0;
     this.temporaryShieldCooldown = 0;
-    this.soulDewCoolDown = 0;
+    this.soulDewCooldown = 0;
+    this.brightPowderCooldown = 0;
   }
 
   triggerSoulDew(timer) {
-    console.log('sould dew');
+    // console.log('sould dew');
     if (!this.soulDew) {
       this.soulDew = true;
-      this.soulDewCoolDown = timer;
+      this.soulDewCooldown = timer;
     }
   }
 
   updateSoulDew(dt, pkm) {
-    if (this.soulDewCoolDown - dt <= 0) {
+    if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false;
       pkm.spellDamage += 3 * pkm.items.count(ITEM.SOUL_DEW);
       if (pkm.items.count(ITEM.SOUL_DEW) != 0) {
         this.triggerSoulDew(5000);
       }
     } else {
-      this.soulDewCoolDown = this.soulDewCoolDown - dt;
+      this.soulDewCooldown = this.soulDewCooldown - dt;
     }
   }
 
@@ -183,6 +185,35 @@ class Status extends schema.Schema {
       pkm.shield = 0;
     } else {
       this.temporaryShieldCooldown = this.temporaryShieldCooldown - dt;
+    }
+  }
+
+  triggerBrightPowder(timer) {
+    if (!this.brightPowder) {
+      this.brightPowder = true;
+      this.brightPowderCooldown = timer;
+    }
+  }
+
+  updateBrightPowder(dt, pokemon, board) {
+    if (this.brightPowderCooldown - dt <= 0) {
+      this.brightPowder = false;
+      const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+
+      cells.forEach((cell) => {
+        if (cell.value && pokemon.team == cell.value.team) {
+          cell.value.handleHeal(0.18 * pokemon.hp);
+          cell.value.count.brightPowderCount ++;
+        }
+      });
+      pokemon.handleHeal(0.18 * pokemon.hp);
+
+      if (pokemon.items.count(ITEM.BRIGHT_POWDER) != 0) {
+        pokemon.triggerBrightPowder(5000);
+        pokemon.count.brightPowderCount ++;
+      }
+    } else {
+      this.brightPowderCooldown = this.brightPowderCooldown - dt;
     }
   }
 }

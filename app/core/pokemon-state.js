@@ -7,7 +7,7 @@ class PokemonState {
 
   handleHeal(pokemon, heal) {
     if (pokemon.life > 0 && pokemon.life < pokemon.hp && !pokemon.status.wound) {
-      pokemon.life = Math.min(pokemon.hp, pokemon.life + heal);
+      pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.round(heal));
     }
   }
 
@@ -236,6 +236,10 @@ class PokemonState {
 
     if (pokemon.status.soulDew) {
       pokemon.status.updateSoulDew(dt, pokemon);
+    }
+
+    if (pokemon.status.brightPowder) {
+      pokemon.status.updateBrightPowder(dt, pokemon, board);
     }
 
     if (pokemon.manaCooldown <= 0) {

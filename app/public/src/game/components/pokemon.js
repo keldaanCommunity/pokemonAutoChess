@@ -159,6 +159,17 @@ export default class Pokemon extends Button {
     });
   }
 
+  brightPowderAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'BRIGHT_POWDER', '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(2, 2);
+    specialProjectile.anims.play('BRIGHT_POWDER');
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
   staticAnimation() {
     const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
     const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'STATIC', '000');
