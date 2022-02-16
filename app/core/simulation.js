@@ -218,6 +218,10 @@ class Simulation extends Schema {
     if (pokemon.items.count(ITEM.BRIGHT_POWDER) != 0) {
       pokemon.status.triggerBrightPowder(5000);
     }
+    if (pokemon.items.count(ITEM.XRAY_VISION) != 0) {
+      pokemon.range += 1;
+      pokemon.handleAttackSpeed(55);
+    }
   }
 
   applyPostEffects() {

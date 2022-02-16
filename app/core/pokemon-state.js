@@ -1,4 +1,4 @@
-const {EFFECTS, ATTACK_TYPE, TYPE, PKM, FLYING_PROTECT_THRESHOLD} = require('../models/enum');
+const {EFFECTS, ATTACK_TYPE, TYPE, PKM, FLYING_PROTECT_THRESHOLD, ITEM} = require('../models/enum');
 const PokemonFactory = require('../models/pokemon-factory');
 
 class PokemonState {
@@ -41,8 +41,10 @@ class PokemonState {
         }
 
         if (pokemon.dodge > Math.random()) {
-          reducedDamage = 0;
-          pokemon.count.dodgeCount += 1;
+          if (!(attacker && attacker.items.count(ITEM.XRAY_VISION) != 0)) {
+            reducedDamage = 0;
+            pokemon.count.dodgeCount += 1;
+          }
         }
 
         if (attacker && reducedDamage > 0) {

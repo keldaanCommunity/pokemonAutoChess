@@ -1149,7 +1149,7 @@ export default class Pokemon extends Button {
   }
 
   addSmoke() {
-    console.log('sp');
+    // console.log('sp');
     if (!this.getFirst('objType', 'smoke')) {
       const smoke = new GameObjects.Sprite(this.scene, 0, -40, 'smoke', '000');
       smoke.setScale(2, 2);
