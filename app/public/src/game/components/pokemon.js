@@ -1240,4 +1240,22 @@ export default class Pokemon extends Button {
       this.remove(sprite, true);
     }
   }
+
+  addRuneProtect() {
+    if (!this.getFirst('objType', 'rune_protect')) {
+      const runeProtect = new GameObjects.Sprite(this.scene, 0, -45, 'rune_protect', '000');
+      runeProtect.setScale(2, 2);
+      this.scene.add.existing(runeProtect);
+      runeProtect.objType = 'rune_protect';
+      runeProtect.anims.play('rune_protect');
+      this.add(runeProtect);
+    }
+  }
+
+  removeRuneProtect() {
+    const sprite = this.getFirst('objType', 'rune_protect');
+    if (sprite) {
+      this.remove(sprite, true);
+    }
+  }
 }

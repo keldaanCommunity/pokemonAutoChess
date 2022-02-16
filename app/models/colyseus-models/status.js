@@ -15,7 +15,8 @@ class Status extends schema.Schema {
       wound: false,
       resurection: false,
       smoke: false,
-      armorReduction: false
+      armorReduction: false,
+      runeProtect: false
     });
     this.temporaryShield = false;
     this.soulDew = false;
@@ -252,6 +253,15 @@ class Status extends schema.Schema {
       this.smokeCooldown = this.smokeCooldown - dt;
     }
   }
+
+  triggerRuneProtect() {
+    // console.log('rune pritec');
+    this.runeProtect = true;
+  }
+
+  disableRuneProtect() {
+    this.runeProtect = false;
+  }
 }
 
 schema.defineTypes(Status, {
@@ -265,7 +275,8 @@ schema.defineTypes(Status, {
   wound: 'boolean',
   resurection: 'boolean',
   smoke: 'boolean',
-  armorReduction: 'boolean'
+  armorReduction: 'boolean',
+  runeProtect: 'boolean'
 });
 
 module.exports = Status;

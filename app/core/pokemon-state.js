@@ -20,6 +20,13 @@ class PokemonState {
       death = false;
       if (!pokemon.status.protect) {
         let reducedDamage = damage;
+        if (attacker.items.count(ITEM.FIRE_GEM) != 0) {
+          if (pokemon.life > 200) {
+            reducedDamage = Math.ceil(reducedDamage * 1.6);
+          } else {
+            reducedDamage = Math.ceil(reducedDamage * 1.2);
+          }
+        }
         const armorFactor = 0.1;
         const def = attacker && attacker.items.count(ITEM.RAZOR_FANG) != 0 ? Math.round( 0.7 * pokemon.def): pokemon.def;
         const speDef = attacker && attacker.items.count(ITEM.RAZOR_FANG) != 0 ? Math.round( 0.7 * pokemon.speDef): pokemon.speDef;
@@ -64,6 +71,13 @@ class PokemonState {
 
         if (pokemon) {
           pokemon.setMana(pokemon.mana + Math.ceil(reducedDamage / 10));
+
+          if (pokemon.items.count(ITEM.DEFENSIVE_RIBBON) != 0 && pokemon.count.defensiveRibbonCount <5) {
+            pokemon.atk ++;
+            pokemon.def ++;
+            pokemon.speDef ++;
+            pokemon.count.defensiveRibbonCount ++;
+          }
 
           if (pokemon.life && pokemon.life > 0) {
             if (pokemon.flyingProtection) {

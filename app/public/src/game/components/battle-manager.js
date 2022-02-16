@@ -151,6 +151,12 @@ export default class BattleManager {
             } else {
               children[i].removeArmorReduction();
             }
+          } else if (change.field == 'runeProtect') {
+            if (pokemon.status.runeProtect) {
+              children[i].addRuneProtect();
+            } else {
+              children[i].removeRuneProtect();
+            }
           }
         }
       }

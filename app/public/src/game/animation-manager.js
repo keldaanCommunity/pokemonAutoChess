@@ -171,6 +171,13 @@ export default class AnimationManager {
       frameRate: 3,
       repeat: -1
     });
+
+    this.game.anims.create({
+      key: `rune_protect`,
+      frames: this.game.anims.generateFrameNames('rune_protect', {start: 0, end: 9, zeroPad: 3}),
+      frameRate: 6,
+      repeat: -1
+    });
   }
   /*
   createSpecialCellsAnimations() {

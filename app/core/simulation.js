@@ -283,6 +283,15 @@ class Simulation extends Schema {
           }
         });
       }
+      if (pokemon.items.count(ITEM.RUNE_PROTECT) != 0) {
+        const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+        pokemon.status.triggerRuneProtect();
+        cells.forEach((cell) => {
+          if (cell.value && pokemon.team == cell.value.team) {
+            cell.value.status.triggerRuneProtect();
+          }
+        });
+      }
     });
 
     let redImperialCount = 1;
@@ -331,6 +340,15 @@ class Simulation extends Schema {
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
             value.spellDamage += 3;
+          }
+        });
+      }
+      if (pokemon.items.count(ITEM.RUNE_PROTECT) != 0) {
+        const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+        pokemon.status.triggerRuneProtect();
+        cells.forEach((cell) => {
+          if (cell.value && pokemon.team == cell.value.team) {
+            cell.value.status.triggerRuneProtect();
           }
         });
       }

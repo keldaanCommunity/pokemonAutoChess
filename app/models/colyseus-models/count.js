@@ -18,6 +18,7 @@ class Count extends schema.Schema {
       brightPowderCount: 0
     });
     this.staticHolderCount = 0;
+    this.defensiveRibbonCount = 0;
   }
 }
 

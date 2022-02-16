@@ -146,6 +146,27 @@ class AttackingState extends PokemonState {
         target.status.triggerArmorReduction(5000);
       }
 
+      if (pokemon.items.count(ITEM.CHOICE_SCARF) != 0) {
+        const cells = board.getAdjacentCells(target.positionX, target.positionY);
+        let targetCount = 1;
+        cells.forEach((cell) => {
+          if (cell.value && pokemon.team != cell.value.team && targetCount > 0) {
+            cell.value.handleDamage(Math.ceil(0.75 * damage), board, attackType, pokemon);
+            targetCount --;
+          }
+        });
+      }
+
+      if(pokemon.items.count(ITEM.LEFTOVERS) != 0) {
+        const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+        pokemon.handleHeal(3);
+        cells.forEach((cell) => {
+          if (cell.value && pokemon.team == cell.value.team) {
+            cell.value.handleHeal(3);
+          }
+        });
+      }
+
       if (pokemon.items.count(ITEM.MANA_SCARF) != 0) {
         pokemon.setMana(pokemon.mana + 8);
       }

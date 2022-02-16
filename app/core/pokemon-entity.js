@@ -89,19 +89,24 @@ class PokemonEntity extends schema.Schema {
   }
 
   handleSpellDamage(damage, board, attackType, attacker) {
-    let spellDamage = damage + this.spellDamage;
+    let spellDamage = damage + attacker.spellDamage;
     if (attacker && 0.2 * attacker.items.count(ITEM.REAPER_CLOTH) > Math.random()) {
       spellDamage *= 2;
       this.count.crit ++;
     }
-    if (attacker && attacker.items.count(ITEM.MAGIC_RUNE) != 0) {
+    if (attacker && attacker.items.count(ITEM.POKEMONOMICON) != 0) {
       this.status.triggerBurn(3000);
       this.status.triggerWound(3000);
     }
     if (attacker && attacker.items.count(ITEM.SHELL_BELL) != 0) {
       attacker.handleHeal(0.4 * damage * attacker.items.count(ITEM.SHELL_BELL));
     }
-    return this.state.handleDamage(this, spellDamage, board, attackType, attacker);
+    if (this.status.runeProtect) {
+      this.status.disableRuneProtect();
+      return;
+    } else {
+      return this.state.handleDamage(this, spellDamage, board, attackType, attacker);
+    }
   }
 
   handleHeal(heal) {
