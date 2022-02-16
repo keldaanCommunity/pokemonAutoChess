@@ -21,11 +21,13 @@ class PokemonState {
       if (!pokemon.status.protect) {
         let reducedDamage = damage;
         const armorFactor = 0.1;
+        const def = attacker && attacker.items.count(ITEM.RAZOR_FANG) != 0 ? Math.round( 0.7 * pokemon.def): pokemon.def;
+        const speDef = attacker && attacker.items.count(ITEM.RAZOR_FANG) != 0 ? Math.round( 0.7 * pokemon.speDef): pokemon.speDef;
         if (attackType == ATTACK_TYPE.PHYSICAL) {
-          const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * pokemon.def))));
+          const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * def))));
           reducedDamage = Math.max(0, Math.round(ritodamage));
         } else if (attackType == ATTACK_TYPE.SPECIAL) {
-          const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * pokemon.speDef))));
+          const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * speDef))));
           reducedDamage = Math.max(0, Math.round(ritodamage));
         } else if (attackType == ATTACK_TYPE.TRUE) {
           reducedDamage = damage;
@@ -246,6 +248,10 @@ class PokemonState {
 
     if (pokemon.status.smoke) {
       pokemon.status.updateSmoke(dt, pokemon);
+    }
+
+    if (pokemon.status.armorReduction) {
+      pokemon.status.updateArmorReduction(dt);
     }
 
     if (pokemon.manaCooldown <= 0) {

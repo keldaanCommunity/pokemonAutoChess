@@ -142,6 +142,10 @@ class AttackingState extends PokemonState {
         pokemon.status.triggerSmoke(5000, pokemon);
       }
 
+      if (target && pokemon.items.count(ITEM.RAZOR_FANG) != 0) {
+        target.status.triggerArmorReduction(5000);
+      }
+
       if (pokemon.items.count(ITEM.MANA_SCARF) != 0) {
         pokemon.setMana(pokemon.mana + 8);
       }

@@ -164,6 +164,13 @@ export default class AnimationManager {
       frameRate: 3,
       repeat: -1
     });
+
+    this.game.anims.create({
+      key: `armorReduction`,
+      frames: this.game.anims.generateFrameNames('armorReduction', {start: 0, end: 1, zeroPad: 3}),
+      frameRate: 3,
+      repeat: -1
+    });
   }
   /*
   createSpecialCellsAnimations() {

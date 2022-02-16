@@ -14,7 +14,8 @@ class Status extends schema.Schema {
       confusion: false,
       wound: false,
       resurection: false,
-      smoke: false
+      smoke: false,
+      armorReduction: false
     });
     this.temporaryShield = false;
     this.soulDew = false;
@@ -32,6 +33,22 @@ class Status extends schema.Schema {
     this.soulDewCooldown = 0;
     this.brightPowderCooldown = 0;
     this.smokeCooldown = 0;
+    this.armorReductionCooldown = 0;
+  }
+
+  triggerArmorReduction(timer) {
+    if (!this.armorReduction) {
+      this.armorReduction = true;
+      this.armorReductionCooldown = timer;
+    }
+  }
+
+  updateArmorReduction(dt) {
+    if (this.armorReductionCooldown - dt <= 0) {
+      this.armorReduction = false;
+    } else {
+      this.armorReductionCooldown = this.armorReductionCooldown - dt;
+    }
   }
 
   triggerSoulDew(timer) {
@@ -247,7 +264,8 @@ schema.defineTypes(Status, {
   confusion: 'boolean',
   wound: 'boolean',
   resurection: 'boolean',
-  smoke: 'boolean'
+  smoke: 'boolean',
+  armorReduction: 'boolean'
 });
 
 module.exports = Status;

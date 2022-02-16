@@ -145,6 +145,12 @@ export default class BattleManager {
             } else {
               children[i].removeSmoke();
             }
+          } else if (change.field == 'armorReduction') {
+            if (pokemon.status.armorReduction) {
+              children[i].addArmorReduction();
+            } else {
+              children[i].removeArmorReduction();
+            }
           }
         }
       }

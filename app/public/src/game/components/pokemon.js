@@ -1167,6 +1167,26 @@ export default class Pokemon extends Button {
     }
   }
 
+  addArmorReduction() {
+    // console.log('sp');
+    if (!this.getFirst('objType', 'armorReduction')) {
+      const smoke = new GameObjects.Sprite(this.scene, 0, -40, 'armorReduction', '000');
+      smoke.setScale(2, 2);
+      this.scene.add.existing(smoke);
+      smoke.objType = 'armorReduction';
+      smoke.anims.play('armorReduction');
+      this.add(smoke);
+    }
+  }
+
+  removeArmorReduction() {
+    const sprite = this.getFirst('objType', 'armorReduction');
+    if (sprite) {
+      this.remove(sprite, true);
+    }
+  }
+
+
   addPoison() {
     if (!this.getFirst('objType', 'poison')) {
       const poison = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/poison/000');
