@@ -157,6 +157,13 @@ export default class AnimationManager {
       frameRate: 3,
       repeat: -1
     });
+
+    this.game.anims.create({
+      key: `smoke`,
+      frames: this.game.anims.generateFrameNames('smoke', {start: 0, end: 9, zeroPad: 3}),
+      frameRate: 3,
+      repeat: -1
+    });
   }
   /*
   createSpecialCellsAnimations() {

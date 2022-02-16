@@ -13,7 +13,8 @@ class Status extends schema.Schema {
       sleep: false,
       confusion: false,
       wound: false,
-      resurection: false
+      resurection: false,
+      smoke: false
     });
     this.temporaryShield = false;
     this.soulDew = false;
@@ -30,6 +31,7 @@ class Status extends schema.Schema {
     this.temporaryShieldCooldown = 0;
     this.soulDewCooldown = 0;
     this.brightPowderCooldown = 0;
+    this.smokeCooldown = 0;
   }
 
   triggerSoulDew(timer) {
@@ -216,6 +218,23 @@ class Status extends schema.Schema {
       this.brightPowderCooldown = this.brightPowderCooldown - dt;
     }
   }
+
+  triggerSmoke(timer, pkm) {
+    if (!this.smoke) {
+      this.smoke = true;
+      pkm.handleAttackSpeed(-30);
+      this.smokeCooldown = timer;
+    }
+  }
+
+  updateSmoke(dt, pkm) {
+    if (this.smokeCooldown - dt <= 0) {
+      this.smoke = false;
+      pkm.handleAttackSpeed(30);
+    } else {
+      this.smokeCooldown = this.smokeCooldown - dt;
+    }
+  }
 }
 
 schema.defineTypes(Status, {
@@ -227,7 +246,8 @@ schema.defineTypes(Status, {
   sleep: 'boolean',
   confusion: 'boolean',
   wound: 'boolean',
-  resurection: 'boolean'
+  resurection: 'boolean',
+  smoke: 'boolean'
 });
 
 module.exports = Status;

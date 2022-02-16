@@ -138,6 +138,10 @@ class AttackingState extends PokemonState {
         }
       }
 
+      if (target && target.items.count(ITEM.SMOKE_BALL) != 0) {
+        pokemon.status.triggerSmoke(5000, pokemon);
+      }
+
       if (pokemon.items.count(ITEM.MANA_SCARF) != 0) {
         pokemon.setMana(pokemon.mana + 8);
       }

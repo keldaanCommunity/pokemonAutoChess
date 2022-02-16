@@ -1148,6 +1148,25 @@ export default class Pokemon extends Button {
     }
   }
 
+  addSmoke() {
+    console.log('sp');
+    if (!this.getFirst('objType', 'smoke')) {
+      const smoke = new GameObjects.Sprite(this.scene, 0, -40, 'smoke', '000');
+      smoke.setScale(2, 2);
+      this.scene.add.existing(smoke);
+      smoke.objType = 'smoke';
+      smoke.anims.play('smoke');
+      this.add(smoke);
+    }
+  }
+
+  removeSmoke() {
+    const sprite = this.getFirst('objType', 'smoke');
+    if (sprite) {
+      this.remove(sprite, true);
+    }
+  }
+
   addPoison() {
     if (!this.getFirst('objType', 'poison')) {
       const poison = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/poison/000');

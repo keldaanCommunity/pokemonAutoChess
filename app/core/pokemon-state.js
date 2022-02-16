@@ -242,6 +242,10 @@ class PokemonState {
       pokemon.status.updateBrightPowder(dt, pokemon, board);
     }
 
+    if (pokemon.status.smoke) {
+      pokemon.status.updateSmoke(dt, pokemon);
+    }
+
     if (pokemon.manaCooldown <= 0) {
       pokemon.setMana(pokemon.mana + 10);
 

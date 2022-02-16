@@ -5442,7 +5442,7 @@ const ITEM_DESCRIPTION = Object.freeze({
   BRIGHT_POWDER: 'Every 5 seconds, the holder throws a bright powder within 1 hex, healing them for 18% of their missing health',
   DELTA_ORB: 'When combat begins, the holder and all allies within 1 hex in the same row gain 3 Ability Power for the rest of combat',
   MANA_SCARF: 'The holder attacks restore 8 additional mana',
-  SMOKE_BALL: 'Reduce the attack speed of ennemy attackers by 30%',
+  SMOKE_BALL: 'Reduce the attack speed of ennemy attackers by 30% for 5 seconds',
   XRAY_VISION: 'Increase the holders attack range by 1 hex and grants 55% bonus attack speed. The holder attacks can no longer miss.',
   RAZOR_FANG: 'When the holder inflicts a critical hit, the targets Armor is reduced by 70% for 5 seconds. This effect does not stack.',
   LEFTOVERS: 'During  the combat, the holder attack heals adjacent allies for 2 health point',

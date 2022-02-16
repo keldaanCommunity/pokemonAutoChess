@@ -108,6 +108,7 @@ export default class GameScene extends Scene {
     this.load.multiatlas('status', '/assets/status/status.json', '/assets/status/');
     this.load.multiatlas('wound', '/assets/status/wound.json', '/assets/status');
     this.load.multiatlas('resurection', '/assets/status/resurection.json', '/assets/status');
+    this.load.multiatlas('smoke', '/assets/status/SMOKE.json', '/assets/status');
     this.load.multiatlas('icons', '/assets/ui/icons.json', '/assets/ui/');
     this.load.multiatlas('item', '/assets/item/item.json', '/assets/item/');
     this.load.multiatlas('lock', '/assets/lock/lock.json', '/assets/lock/');

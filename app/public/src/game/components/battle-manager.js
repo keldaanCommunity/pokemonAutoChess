@@ -139,6 +139,12 @@ export default class BattleManager {
             } else {
               children[i].removeResurection();
             }
+          } else if (change.field == 'smoke') {
+            if (pokemon.status.smoke) {
+              children[i].addSmoke();
+            } else {
+              children[i].removeSmoke();
+            }
           }
         }
       }
