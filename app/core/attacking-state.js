@@ -57,7 +57,7 @@ class AttackingState extends PokemonState {
       }
       if (poisonChance != 0) {
         if (Math.random() > poisonChance) {
-          target.status.triggerPoison(2000);
+          target.status.triggerPoison(2000, target);
         }
       }
       if (pokemon.effects.includes(EFFECTS.CURSE) || pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
@@ -78,7 +78,7 @@ class AttackingState extends PokemonState {
       let damage;
       const attackType = pokemon.attackType;
 
-      if (Math.random() * 100 < pokemon.critChance) {
+      if (Math.random() * 100 < pokemon.critChance && target && target.items.count(ITEM.ROCKY_HELMET) == 0) {
         if (pokemon.effects.includes(EFFECTS.FAIRY_WIND) || pokemon.effects.includes(EFFECTS.STRANGE_STEAM) || pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
           let d = 0;
           if (pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
@@ -157,7 +157,7 @@ class AttackingState extends PokemonState {
         });
       }
 
-      if(pokemon.items.count(ITEM.LEFTOVERS) != 0) {
+      if (pokemon.items.count(ITEM.LEFTOVERS) != 0) {
         const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
         pokemon.handleHeal(3);
         cells.forEach((cell) => {

@@ -5457,13 +5457,13 @@ const ITEM_DESCRIPTION = Object.freeze({
   ORAN_BERRY: 'Grants 100 bonus hp',
   SHINY_CHARM: 'When combat begins, every ennemy in the same column falls asleep for 3 seconds',
   FOCUS_BAND: 'When combat begins, the holder and all allies within 1 hexes in the same row gain +30% Attack Speed for the rest of combat',
-  FLAME_ORB: 'Every 2 seconds, a random ennemy is burned and wounded for 8 seconds',
-  ASSAULT_VEST: 'Grants 30 bonus special defense',
+  FLAME_ORB: 'Every 2 seconds, a random ennemy is burned for 8 seconds',
+  ASSAULT_VEST: 'Grants 15 bonus special defense',
   KINGS_ROCK: 'Physical damage heals the holder for 33% of the damage dealt',
-  POKE_DOLL: 'The holder gains 2 Armor and 2 Magic Resist for each enemy targeting them.',
+  POKE_DOLL: 'The holder gains 5 Armor and 5 Magic Resist',
   RED_ORB: 'The holder gains 8 bonus Attack Damage',
   MAX_REVIVE: 'Prevents the holder first death',
-  ROCKY_HELMET: 'Grants 8 bonus armor. Negates bonus damage from incoming critical hits.'
+  ROCKY_HELMET: 'Grants 10 bonus armor. Negates bonus damage from incoming critical hits.'
 });
 
 module.exports = {

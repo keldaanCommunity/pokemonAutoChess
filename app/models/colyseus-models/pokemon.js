@@ -37,7 +37,7 @@ class Pokemon extends Schema {
     });
     this.author = author;
     this.frenchName = frenchName;
-    this.items.add(ItemFactory.createSpecificItems([ITEM.RUNE_PROTECT]));
+    this.items.add(ItemFactory.createSpecificItems([ITEM.ROCKY_HELMET]));
     if (types) {
       types.forEach((type) => {
         this.types.push(type);

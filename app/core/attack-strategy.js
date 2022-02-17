@@ -322,7 +322,7 @@ class TriAttackStrategy extends AttackStrategy {
     }
     target.status.triggerFreeze(duration);
     target.status.triggerWound(duration);
-    target.status.triggerBurn(duration);
+    target.status.triggerBurn(duration, target);
   }
 }
 
@@ -683,7 +683,7 @@ class NightmareStrategy extends AttackStrategy {
     }
     board.forEach((x, y, value) => {
       if (value && pokemon.team != value.team) {
-        value.status.triggerPoison(timer);
+        value.status.triggerPoison(timer, value);
       }
     });
   }
@@ -712,7 +712,7 @@ class BurnStrategy extends AttackStrategy {
     }
     board.forEach((x, y, value) => {
       if (value && pokemon.team != value.team) {
-        value.status.triggerBurn(timer);
+        value.status.triggerBurn(timer, value);
         value.status.triggerWound(timer);
       }
     });
@@ -769,7 +769,7 @@ class PoisonStrategy extends AttackStrategy {
       default:
         break;
     }
-    target.status.triggerPoison(timer);
+    target.status.triggerPoison(timer, target);
   }
 }
 

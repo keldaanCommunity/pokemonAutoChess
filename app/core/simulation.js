@@ -222,6 +222,32 @@ class Simulation extends Schema {
       pokemon.range += 1;
       pokemon.handleAttackSpeed(55);
     }
+    if (pokemon.items.count(ITEM.WIDE_LENS) != 0) {
+      pokemon.handleAttackSpeed(20);
+    }
+    if (pokemon.items.count(ITEM.RAZOR_CLAW) != 0) {
+      pokemon.critDamage += 0.1;
+      pokemon.addCritChance(75);
+    }
+    if (pokemon.items.count(ITEM.ORAN_BERRY) != 0) {
+      pokemon.shield += 100;
+    }
+    if (pokemon.items.count(ITEM.FLAME_ORB) != 0) {
+      pokemon.status.triggerFlameOrb(2000);
+    }
+    if (pokemon.items.count(ITEM.ASSAULT_VEST) != 0) {
+      pokemon.speDef += 15;
+    }
+    if (pokemon.items.count(ITEM.POKE_DOLL) != 0) {
+      pokemon.def += 5;
+      pokemon.speDef += 5;
+    }
+    if (pokemon.items.count(ITEM.RED_ORB) != 0) {
+      pokemon.atk += 8;
+    }
+    if (pokemon.items.count(ITEM.ROCKY_HELMET) != 0) {
+      pokemon.def += 10;
+    }
   }
 
   applyPostEffects() {
@@ -292,6 +318,28 @@ class Simulation extends Schema {
           }
         });
       }
+      if (pokemon.items.count(ITEM.FLUFFY_TAIL) != 0) {
+        this.board.forEach((x, y, value) => {
+          if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
+            value.maxMana = Math.ceil(value.maxMana * 1.3);
+          }
+        });
+      }
+      if (pokemon.items.count(ITEM.SHINY_CHARM) != 0) {
+        this.board.forEach((x, y, value) => {
+          if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
+            value.status.triggerSleep(3000);
+          }
+        });
+      }
+      if (pokemon.items.count(ITEM.FOCUS_BAND) != 0) {
+        [-1, 0, 1].forEach( (offset)=>{
+          const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
+          if (value) {
+            value.handleAttackSpeed(30);
+          }
+        });
+      }
     });
 
     let redImperialCount = 1;
@@ -349,6 +397,28 @@ class Simulation extends Schema {
         cells.forEach((cell) => {
           if (cell.value && pokemon.team == cell.value.team) {
             cell.value.status.triggerRuneProtect();
+          }
+        });
+      }
+      if (pokemon.items.count(ITEM.FLUFFY_TAIL) != 0) {
+        this.board.forEach((x, y, value) => {
+          if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
+            value.maxMana = Math.ceil(value.maxMana * 1.3);
+          }
+        });
+      }
+      if (pokemon.items.count(ITEM.SHINY_CHARM) != 0) {
+        this.board.forEach((x, y, value) => {
+          if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
+            value.status.triggerSleep(3000);
+          }
+        });
+      }
+      if (pokemon.items.count(ITEM.FOCUS_BAND) != 0) {
+        [-1, 0, 1].forEach( (offset)=>{
+          const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
+          if (value) {
+            value.handleAttackSpeed(30);
           }
         });
       }

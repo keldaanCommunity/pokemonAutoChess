@@ -20,7 +20,7 @@ class PokemonState {
       death = false;
       if (!pokemon.status.protect) {
         let reducedDamage = damage;
-        if (attacker.items.count(ITEM.FIRE_GEM) != 0) {
+        if (attacker && attacker.items.count(ITEM.FIRE_GEM) != 0) {
           if (pokemon.life > 200) {
             reducedDamage = Math.ceil(reducedDamage * 1.6);
           } else {
@@ -119,10 +119,16 @@ class PokemonState {
             }
             attacker.handleHeal(Math.floor(lifesteal * residualDamage));
           }
+          if (attacker.items.count(ITEM.KINGS_ROCK)) {
+            attacker.handleHeal(Math.floor(0.3 * residualDamage));
+          }
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
-          if (pokemon.effects.includes(EFFECTS.SWIFT_SWIM)) {
+          if (pokemon.items.count(ITEM.MAX_REVIVE) != 0) {
+            pokemon.life = pokemon.hp;
+            pokemon.items.remove(ITEM.MAX_REVIVE);
+          } else if (pokemon.effects.includes(EFFECTS.SWIFT_SWIM)) {
             pokemon.life = pokemon.hp * 0.4;
             pokemon.atk += pokemon.baseAtk * 0.3;
             pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.SWIFT_SWIM), 1);
@@ -266,6 +272,10 @@ class PokemonState {
 
     if (pokemon.status.armorReduction) {
       pokemon.status.updateArmorReduction(dt);
+    }
+
+    if (pokemon.status.flameOrb) {
+      pokemon.status.updateFlameOrb(dt, pokemon, board);
     }
 
     if (pokemon.manaCooldown <= 0) {

@@ -21,6 +21,7 @@ class Status extends schema.Schema {
     this.temporaryShield = false;
     this.soulDew = false;
     this.brightPowder = false;
+    this.flameOrb = false;
 
     this.burnCooldown = 0;
     this.silenceCooldown = 0;
@@ -35,6 +36,33 @@ class Status extends schema.Schema {
     this.brightPowderCooldown = 0;
     this.smokeCooldown = 0;
     this.armorReductionCooldown = 0;
+    this.flameOrbCooldown = 0;
+  }
+
+  triggerFlameOrb(timer) {
+    if (!this.flameOrb) {
+      this.flameOrb = true;
+      this.flameOrbCooldown = timer;
+    }
+  }
+
+  updateFlameOrb(dt, pkm, board) {
+    if (this.flameOrbCooldown - dt <= 0) {
+      this.flameOrb = false;
+      const cells = board.getAdjacentCells(pkm.positionX, pkm.positionY);
+      let flameCount = 1;
+      cells.forEach((cell) => {
+        if (cell.value && pkm.team != cell.value.team && flameCount > 0) {
+          cell.value.status.triggerBurn(8000, cell.value);
+          flameCount --;
+        }
+      });
+      if (pkm.items.count(ITEM.FLAME_ORB) != 0) {
+        pkm.status.triggerFlameOrb(2000);
+      }
+    } else {
+      this.flameOrbCooldown = this.flameOrbCooldown - dt;
+    }
   }
 
   triggerArmorReduction(timer) {
@@ -72,8 +100,8 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerBurn(timer) {
-    if (!this.burn) {
+  triggerBurn(timer, pkm) {
+    if (!this.burn && pkm.items.count(ITEM.WIDE_LENS) == 0) {
       this.burn = true;
       this.burnCooldown = timer;
     }
@@ -102,8 +130,8 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerPoison(timer) {
-    if (!this.poison) {
+  triggerPoison(timer, pkm) {
+    if (!this.poison && pkm.items.count(ITEM.WIDE_LENS) == 0) {
       this.poison = true;
       this.poisonCooldown = timer;
     }

@@ -265,10 +265,10 @@ export default class BattleManager {
               detail.critChance.setText(pokemon.critChance);
             }
           } else if (change.field == 'critDamage') {
-            children[i].critDamage = pokemon.critDamage;
+            children[i].critDamage = pokemon.critDamage.toFixed(2);
             const detail = children[i].getFirst('objType', 'detail');
             if (detail) {
-              detail.critDamage.setText(pokemon.critDamage);
+              detail.critDamage.setText(pokemon.critDamage.toFixed(2));
             }
           } else if (change.field == 'spellDamage') {
             console.log(change.value);

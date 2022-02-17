@@ -74,13 +74,14 @@ export default class PokemonDetail extends GameObjects.Container {
     this.add(this.mana);
     this.add(new GameObjects.Image(scene, 100, 160, 'icons', 'mana').setScale(2, 2));
     // crit damage
-    this.critDamage = new GameObjects.Text(scene, 10, 170, critDamage, this.textStyle);
+    this.critDamage = new GameObjects.Text(scene, 110, 170, critDamage, this.textStyle);
     this.add(this.critDamage);
-    this.add(new GameObjects.Image(scene, 100, 180, 'icons', 'critDamage').setScale(2, 2));
+    this.add(new GameObjects.Image(scene, 200, 180, 'icons', 'critDamage').setScale(2, 2));
     // spell damage
-    this.spellDamage = new GameObjects.Text(scene, 130, 170, spellDamage, this.textStyle);
+    this.spellDamage = new GameObjects.Text(scene, 10, 170, spellDamage, this.textStyle);
     this.add(this.spellDamage);
-    this.add(new GameObjects.Image(scene, 200, 180, 'icons', 'spellDamage').setScale(2, 2));
+    this.add(new GameObjects.Image(scene, 100, 180, 'icons', 'spellDamage').setScale(2, 2));
+
 
     this.add(new GameObjects.Text(scene, 230, 15, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].title[window.langage], this.titleTextStyle));
     this.add(new GameObjects.Text(scene, 230, 40, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].description[window.langage], this.textStyle));
