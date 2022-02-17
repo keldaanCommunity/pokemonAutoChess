@@ -83,12 +83,12 @@ class Player extends Schema {
   }
 
   getPokemonAt(x, y) {
-    for (let [id, pokemon] of this.board) {
-      if(pokemon.positionX == x && pokemon.positionY == y){
-        return [pokemon, id]
+    for (const [id, pokemon] of this.board) {
+      if (pokemon.positionX == x && pokemon.positionY == y) {
+        return [pokemon, id];
       }
     }
-    return null
+    return null;
   }
 }
 

@@ -539,7 +539,7 @@ class OnUpdatePhaseCommand extends Command {
           });
           // const item = ItemFactory.createRandomItem();
           // const item = ItemFactory.createSpecificItems([ITEMS.BLUE_ORB]);
-          // player.stuff.add(item);
+          player.stuff.add(ItemFactory.createBasicRandomItem());
         }
         player.opponentName = '';
         player.opponentAvatar = '';

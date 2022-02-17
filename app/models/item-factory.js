@@ -1,4 +1,4 @@
-const ITEM = require('./enum').ITEM;
+const {ITEM, BASIC_ITEM} = require('./enum');
 
 class ItemFactory {
   static createRandomItem() {
@@ -6,18 +6,23 @@ class ItemFactory {
     return keys[Math.floor(Math.random() * keys.length)];
   }
 
-  static createSpecificItems(array) {
-    return array[Math.floor(Math.random() * array.length)];
+  static createBasicRandomItem() {
+    const keys = Object.keys(BASIC_ITEM);
+    return keys[Math.floor(Math.random() * keys.length)];
   }
 
   static createRandomItems() {
-    const keys = Object.keys(ITEM);
+    const keys = Object.keys(BASIC_ITEM);
     ItemFactory.shuffleArray(keys);
     const items = [];
     items.push(keys.pop());
     items.push(keys.pop());
     items.push(keys.pop());
     return items;
+  }
+
+  static createSpecificItems(array) {
+    return array[Math.floor(Math.random() * array.length)];
   }
 
   static shuffleArray(array) {
