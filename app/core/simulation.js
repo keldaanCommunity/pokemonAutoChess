@@ -170,82 +170,82 @@ class Simulation extends Schema {
   }
 
   applyItemsEffects(pokemon, types) {
-    if (pokemon.items.count(ITEM.TWISTED_SPOON) != 0) {
-      pokemon.spellDamage += 1 * pokemon.items.count(ITEM.TWISTED_SPOON);
+    if (pokemon.items.has(ITEM.TWISTED_SPOON)) {
+      pokemon.spellDamage += 1;
     }
-    if (pokemon.items.count(ITEM.MYSTIC_WATER) != 0) {
-      pokemon.mana += 15 * pokemon.items.count(ITEM.MYSTIC_WATER);
+    if (pokemon.items.has(ITEM.MYSTIC_WATER)) {
+      pokemon.mana += 15;
     }
-    if (pokemon.items.count(ITEM.MAGNET) != 0) {
-      pokemon.handleAttackSpeed(15 * pokemon.items.count(ITEM.MAGNET));
+    if (pokemon.items.has(ITEM.MAGNET)) {
+      pokemon.handleAttackSpeed(15);
     }
-    if (pokemon.items.count(ITEM.BLACK_GLASSES) != 0) {
-      pokemon.addCritChance(5 * pokemon.items.count(ITEM.BLACK_GLASSES));
+    if (pokemon.items.has(ITEM.BLACK_GLASSES)) {
+      pokemon.addCritChance(5);
     }
-    if (pokemon.items.count(ITEM.MIRACLE_SEED) != 0) {
-      pokemon.shield += 15 * pokemon.items.count(ITEM.MIRACLE_SEED);
+    if (pokemon.items.has(ITEM.MIRACLE_SEED)) {
+      pokemon.shield += 15;
     }
-    if (pokemon.items.count(ITEM.NEVER_MELT_ICE) != 0) {
-      pokemon.speDef += 2 * pokemon.items.count(ITEM.NEVER_MELT_ICE);
+    if (pokemon.items.has(ITEM.NEVER_MELT_ICE)) {
+      pokemon.speDef += 2;
     }
-    if (pokemon.items.count(ITEM.CHARCOAL) != 0) {
-      pokemon.atk += 1 * pokemon.items.count(ITEM.CHARCOAL);
+    if (pokemon.items.has(ITEM.CHARCOAL)) {
+      pokemon.atk += 1;
     }
-    if (pokemon.items.count(ITEM.HEART_SCALE) != 0) {
-      pokemon.def += 1 * pokemon.items.count(ITEM.HEART_SCALE);
+    if (pokemon.items.has(ITEM.HEART_SCALE)) {
+      pokemon.def += 1;
     }
-    if (pokemon.items.count(ITEM.CHOICE_SPECS) != 0) {
+    if (pokemon.items.has(ITEM.CHOICE_SPECS)) {
       pokemon.spellDamage += 8;
     }
-    if (pokemon.items.count(ITEM.SOUL_DEW) != 0) {
+    if (pokemon.items.has(ITEM.SOUL_DEW)) {
       pokemon.status.triggerSoulDew(5000);
     }
-    if (pokemon.items.count(ITEM.WONDER_BOX) != 0) {
-      pokemon.items.remove(ITEM.WONDER_BOX);
+    if (pokemon.items.has(ITEM.WONDER_BOX)) {
+      pokemon.items.delete(ITEM.WONDER_BOX);
       pokemon.items.add(ItemFactory.createRandomItem());
       pokemon.items.add(ItemFactory.createRandomItem());
     }
-    if (pokemon.items.count(ITEM.AQUA_EGG) != 0) {
+    if (pokemon.items.has(ITEM.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + 50);
     }
-    if (pokemon.items.count(ITEM.BLUE_ORB) != 0) {
+    if (pokemon.items.has(ITEM.BLUE_ORB)) {
       pokemon.handleAttackSpeed(10);
     }
-    if (pokemon.items.count(ITEM.ZOOM_LENS) != 0) {
+    if (pokemon.items.has(ITEM.ZOOM_LENS)) {
       pokemon.atk += 4;
       pokemon.spellDamage += 4;
     }
-    if (pokemon.items.count(ITEM.BRIGHT_POWDER) != 0) {
+    if (pokemon.items.has(ITEM.BRIGHT_POWDER)) {
       pokemon.status.triggerBrightPowder(5000);
     }
-    if (pokemon.items.count(ITEM.XRAY_VISION) != 0) {
+    if (pokemon.items.has(ITEM.XRAY_VISION)) {
       pokemon.range += 1;
       pokemon.handleAttackSpeed(55);
     }
-    if (pokemon.items.count(ITEM.WIDE_LENS) != 0) {
+    if (pokemon.items.has(ITEM.WIDE_LENS)) {
       pokemon.handleAttackSpeed(20);
     }
-    if (pokemon.items.count(ITEM.RAZOR_CLAW) != 0) {
+    if (pokemon.items.has(ITEM.RAZOR_CLAW)) {
       pokemon.critDamage += 0.1;
       pokemon.addCritChance(75);
     }
-    if (pokemon.items.count(ITEM.ORAN_BERRY) != 0) {
+    if (pokemon.items.has(ITEM.ORAN_BERRY)) {
       pokemon.shield += 100;
     }
-    if (pokemon.items.count(ITEM.FLAME_ORB) != 0) {
+    if (pokemon.items.has(ITEM.FLAME_ORB)) {
       pokemon.status.triggerFlameOrb(2000);
     }
-    if (pokemon.items.count(ITEM.ASSAULT_VEST) != 0) {
+    if (pokemon.items.has(ITEM.ASSAULT_VEST)) {
       pokemon.speDef += 15;
     }
-    if (pokemon.items.count(ITEM.POKE_DOLL) != 0) {
+    if (pokemon.items.has(ITEM.POKE_DOLL)) {
       pokemon.def += 5;
       pokemon.speDef += 5;
     }
-    if (pokemon.items.count(ITEM.RED_ORB) != 0) {
+    if (pokemon.items.has(ITEM.RED_ORB)) {
       pokemon.atk += 8;
     }
-    if (pokemon.items.count(ITEM.ROCKY_HELMET) != 0) {
+    if (pokemon.items.has(ITEM.ROCKY_HELMET)) {
       pokemon.def += 10;
     }
   }
@@ -293,7 +293,7 @@ class Simulation extends Schema {
           }
         });
       }
-      if (pokemon.items.count(ITEM.LUCKY_EGG) != 0) {
+      if (pokemon.items.has(ITEM.LUCKY_EGG)) {
         [-2, -1, 0, 1, 2].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -301,7 +301,7 @@ class Simulation extends Schema {
           }
         });
       }
-      if (pokemon.items.count(ITEM.DELTA_ORB) != 0) {
+      if (pokemon.items.has(ITEM.DELTA_ORB)) {
         [-1, 0, 1].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -309,7 +309,7 @@ class Simulation extends Schema {
           }
         });
       }
-      if (pokemon.items.count(ITEM.RUNE_PROTECT) != 0) {
+      if (pokemon.items.has(ITEM.RUNE_PROTECT)) {
         const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
         pokemon.status.triggerRuneProtect();
         cells.forEach((cell) => {
@@ -318,21 +318,21 @@ class Simulation extends Schema {
           }
         });
       }
-      if (pokemon.items.count(ITEM.FLUFFY_TAIL) != 0) {
+      if (pokemon.items.has(ITEM.FLUFFY_TAIL)) {
         this.board.forEach((x, y, value) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.maxMana = Math.ceil(value.maxMana * 1.3);
           }
         });
       }
-      if (pokemon.items.count(ITEM.SHINY_CHARM) != 0) {
+      if (pokemon.items.has(ITEM.SHINY_CHARM)) {
         this.board.forEach((x, y, value) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.status.triggerSleep(3000);
           }
         });
       }
-      if (pokemon.items.count(ITEM.FOCUS_BAND) != 0) {
+      if (pokemon.items.has(ITEM.FOCUS_BAND)) {
         [-1, 0, 1].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -375,7 +375,7 @@ class Simulation extends Schema {
           }
         });
       }
-      if (pokemon.items.count(ITEM.LUCKY_EGG) != 0) {
+      if (pokemon.items.has(ITEM.LUCKY_EGG)) {
         [-2, -1, 0, 1, 2].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -383,7 +383,7 @@ class Simulation extends Schema {
           }
         });
       }
-      if (pokemon.items.count(ITEM.DELTA_ORB) != 0) {
+      if (pokemon.items.has(ITEM.DELTA_ORB)) {
         [-2, -1, 0, 1, 2].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -391,7 +391,7 @@ class Simulation extends Schema {
           }
         });
       }
-      if (pokemon.items.count(ITEM.RUNE_PROTECT) != 0) {
+      if (pokemon.items.has(ITEM.RUNE_PROTECT)) {
         const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
         pokemon.status.triggerRuneProtect();
         cells.forEach((cell) => {
@@ -400,21 +400,21 @@ class Simulation extends Schema {
           }
         });
       }
-      if (pokemon.items.count(ITEM.FLUFFY_TAIL) != 0) {
+      if (pokemon.items.has(ITEM.FLUFFY_TAIL)) {
         this.board.forEach((x, y, value) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.maxMana = Math.ceil(value.maxMana * 1.3);
           }
         });
       }
-      if (pokemon.items.count(ITEM.SHINY_CHARM) != 0) {
+      if (pokemon.items.has(ITEM.SHINY_CHARM)) {
         this.board.forEach((x, y, value) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.status.triggerSleep(3000);
           }
         });
       }
-      if (pokemon.items.count(ITEM.FOCUS_BAND) != 0) {
+      if (pokemon.items.has(ITEM.FOCUS_BAND)) {
         [-1, 0, 1].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -429,25 +429,25 @@ class Simulation extends Schema {
     allyEffects.forEach((effect) => {
       switch (effect) {
         case EFFECTS.HONE_CLAWS:
-          if (types.includes(TYPE.DARK) && pokemon.items.length != 0) {
-            pokemon.atk += 4 * pokemon.items.length;
-            pokemon.shield += 20 * pokemon.items.length;
+          if (types.includes(TYPE.DARK) && pokemon.items.size != 0) {
+            pokemon.atk += 4 * pokemon.items.size;
+            pokemon.shield += 20 * pokemon.items.size;
             pokemon.effects.push(EFFECTS.HONE_CLAWS);
           }
           break;
 
         case EFFECTS.ASSURANCE:
-          if (types.includes(TYPE.DARK) && pokemon.items.length != 0) {
-            pokemon.atk += 7 * pokemon.items.length;
-            pokemon.shield += 30 * pokemon.items.length;
+          if (types.includes(TYPE.DARK) && pokemon.items.size != 0) {
+            pokemon.atk += 7 * pokemon.items.size;
+            pokemon.shield += 30 * pokemon.items.size;
             pokemon.effects.push(EFFECTS.ASSURANCE);
           }
           break;
 
         case EFFECTS.BEAT_UP:
-          if (types.includes(TYPE.DARK) && pokemon.items.length != 0) {
-            pokemon.atk += 10 * pokemon.items.length;
-            pokemon.shield += 50 * pokemon.items.length;
+          if (types.includes(TYPE.DARK) && pokemon.items.size != 0) {
+            pokemon.atk += 10 * pokemon.items.size;
+            pokemon.shield += 50 * pokemon.items.size;
             pokemon.effects.push(EFFECTS.BEAT_UP);
           }
           break;

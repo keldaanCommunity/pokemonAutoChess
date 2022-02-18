@@ -40,12 +40,12 @@ class AttackStrategy {
       }
     }
     board.forEach((r, c, value) => {
-      if (value !== undefined && value.team != pokemon.team && value.items.count(ITEM.WATER_INCENSE) != 0) {
+      if (value !== undefined && value.team != pokemon.team && value.items.has(ITEM.WATER_INCENSE)) {
         pokemon.count.incenseCount ++;
         pokemon.handleDamage(Math.ceil(value.maxMana * 0.2), board, ATTACK_TYPE.SPECIAL, value);
       }
     });
-    if (pokemon.items.count(ITEM.AQUA_EGG) != 0) {
+    if (pokemon.items.has(ITEM.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + 20);
     }
   }
@@ -583,7 +583,7 @@ class RoarOfTimeStrategy extends AttackStrategy {
 
     let candidate = pokemon;
     board.forEach((x, y, pkm) => {
-      if (pkm && pokemon.team == pkm.team && pkm.items.length > candidate.items.length && !pkm.status.resurection) {
+      if (pkm && pokemon.team == pkm.team && pkm.items.size > candidate.items.size && !pkm.status.resurection) {
         candidate = pkm;
       }
     });
@@ -1798,11 +1798,10 @@ class ThiefStrategy extends AttackStrategy {
       default:
         break;
     }
-    const items = target.items.getAllItems();
-    const l = items.length;
-    items.forEach( (item) => {
+    const l = target.items.size;
+    target.items.forEach( (item) => {
       pokemon.items.add(item);
-      target.items.remove(item);
+      target.items.delete(item);
     });
 
     if (pokemon.effects.includes(EFFECTS.HONE_CLAWS)) {

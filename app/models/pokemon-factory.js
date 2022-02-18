@@ -1,5 +1,4 @@
 const Pokemon = require('./colyseus-models/pokemon');
-const Items = require('./colyseus-models/items');
 const {SPECIAL_SKILL, PKM, PRECOMPUTED_TYPE_POKEMONS, TYPE} = require('./enum');
 const Strategy = require('../core/attack-strategy');
 
@@ -372,7 +371,7 @@ class PokemonFactory {
     const transformation = this.createPokemonFromName(afterName);
     transformation.positionX = before.positionX;
     transformation.positionY = before.positionY;
-    transformation.items = new Items(before.items);
+    transformation.items = before.items;
     return transformation;
   }
 

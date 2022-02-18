@@ -2,7 +2,7 @@ import {GameObjects} from 'phaser';
 import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
-import ItemContainer from './item-container';
+import ItemsContainer from './items-container';
 import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS} from '../../../../models/enum.js';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 
@@ -963,48 +963,11 @@ export default class Pokemon extends Button {
     this.setLifeBar(pokemon, scene, this.height/2 + 5);
     this.setManaBar(pokemon, scene, this.height/2 + 5);
 
-    this.setItems(pokemon, scene);
+    this.itemsContainer = new ItemsContainer(scene, pokemon.items, this.width + 20, -this.height/2 -20, false);
+    this.add(this.itemsContainer);
+
     if (pokemon.effects) {
       this.setEffects(pokemon, scene, this.height + 30);
-    }
-  }
-
-  setItem0(item) {
-    if (this.item0) {
-      this.remove(this.item0, true);
-    }
-    this.item0 = new ItemContainer(this.scene, this.width + 15, this.height - 50, item, false, 'item0');
-    this.scene.add.existing(item);
-    this.add(this.item0);
-  }
-
-  setItem1(item) {
-    if (this.item1) {
-      this.remove(this.item1, true);
-    }
-    this.item1 = new ItemContainer(this.scene, this.width + 15, this.height - 20, item, false, 'item1');
-    this.scene.add.existing(this.item1);
-    this.add(this.item1);
-  }
-
-  setItem2(item) {
-    if (this.item2) {
-      this.remove(this.item2, true);
-    }
-    this.item2 = new ItemContainer(this.scene, this.width + 15, this.height + 10, item, false, 'item2');
-    this.scene.add.existing(this.item2);
-    this.add(this.item2);
-  }
-
-  setItems(pokemon) {
-    if (pokemon.items.item0 && pokemon.items.item0 != '') {
-      this.setItem0(pokemon.items.item0);
-    }
-    if (pokemon.items.item1 && pokemon.items.item1 != '') {
-      this.setItem1(pokemon.items.item1);
-    }
-    if (pokemon.items.item2 && pokemon.items.item2 != '') {
-      this.setItem2(pokemon.items.item2);
     }
   }
 

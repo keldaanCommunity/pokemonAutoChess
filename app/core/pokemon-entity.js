@@ -3,9 +3,9 @@ const {STATE_TYPE, ORIENTATION, ITEM} = require('../models/enum');
 const MovingState = require('./moving-state');
 const AttackingState = require('./attacking-state');
 const uniqid = require('uniqid');
-const Items = require('../models/colyseus-models/items');
 const Status = require('../models/colyseus-models/status');
 const Count = require('../models/colyseus-models/count');
+const SetSchema = schema.SetSchema;
 const ArraySchema = schema.ArraySchema;
 const PokemonFactory = require('../models/pokemon-factory');
 
@@ -15,7 +15,10 @@ class PokemonEntity extends schema.Schema {
 
     this.state = new MovingState();
     this.effects = new ArraySchema();
-    this.items = new Items(pokemon.items);
+    this.items = new SetSchema();
+    pokemon.items.forEach((it) => {
+      this.items.add(it);
+    });
     this.status = new Status();
     this.count = new Count();
     this.simulation = simulation;
@@ -90,16 +93,16 @@ class PokemonEntity extends schema.Schema {
 
   handleSpellDamage(damage, board, attackType, attacker) {
     let spellDamage = damage + attacker.spellDamage;
-    if (attacker && 0.2 * attacker.items.count(ITEM.REAPER_CLOTH) > Math.random()) {
+    if (attacker && 0.2 * attacker.items.has(ITEM.REAPER_CLOTH) > Math.random()) {
       spellDamage *= 2;
       this.count.crit ++;
     }
-    if (attacker && attacker.items.count(ITEM.POKEMONOMICON) != 0) {
+    if (attacker && attacker.items.has(ITEM.POKEMONOMICON)) {
       this.status.triggerBurn(3000, this);
       this.status.triggerWound(3000);
     }
-    if (attacker && attacker.items.count(ITEM.SHELL_BELL) != 0) {
-      attacker.handleHeal(0.4 * damage * attacker.items.count(ITEM.SHELL_BELL));
+    if (attacker && attacker.items.has(ITEM.SHELL_BELL)) {
+      attacker.handleHeal(0.4 * damage);
     }
     if (this.status.runeProtect) {
       this.status.disableRuneProtect();
@@ -176,7 +179,7 @@ schema.defineTypes(PokemonEntity, {
   rarity: 'string',
   name: 'string',
   effects: ['string'],
-  items: Items,
+  items: {set: 'string'},
   stars: 'uint8',
   skill: 'string',
   status: Status,

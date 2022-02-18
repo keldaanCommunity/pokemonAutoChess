@@ -53,28 +53,26 @@ export default class BattleManager {
     }
   }
 
-  changePokemonItems(playerId, change, pokemon) {
+  addPokemonItem(playerId, value, pokemon) {
     // console.log(change);
     if (this.player.id == playerId) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {
         if (children[i].id == pokemon.id) {
-          if (change.field == 'item0' && change.value == '' && children[i].item0) {
-            children[i].remove(children[i].item0);
-            children[i].item0.destroy();
-          } else if (change.field == 'item0' && change.value != '') {
-            children[i].setItem0(change.value);
-          } else if (change.field == 'item1' && change.value == '' && children[i].item1) {
-            children[i].remove(children[i].item1);
-            children[i].item1.destroy();
-          } else if (change.field == 'item1' && change.value != '') {
-            children[i].setItem1(change.value);
-          } else if (change.field == 'item2' && change.value == '' && children[i].item2) {
-            children[i].remove(children[i].item2);
-            children[i].item2.destroy();
-          } else if (change.field == 'item2' && change.value != '') {
-            children[i].setItem2(change.value);
-          }
+          children[i].itemsContainer.addItem(value);
+          break;
+        }
+      }
+    }
+  }
+
+  removePokemonItem(playerId, value, pokemon) {
+    if (this.player.id == playerId) {
+      const children = this.group.getChildren();
+      for (let i = 0; i < children.length; i++) {
+        if (children[i].id == pokemon.id) {
+          children[i].itemsContainer.removeItem(value);
+          break;
         }
       }
     }

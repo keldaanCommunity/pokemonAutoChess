@@ -72,11 +72,15 @@ class GameContainer {
         });
       };
 
-      pokemon.items.onChange = function(changes) {
-        changes.forEach((change) => {
-          self.handleBoardPokemonChange(player, pokemon, change);
-        });
-      };
+      pokemon.items.onAdd = ((value, key) => {
+        // console.log('added', value, key)
+        self.handleBoardPokemonItemAdd(player.id, value, pokemon);
+      });
+      pokemon.items.onRemove = ((value, key) => {
+        // console.log('removed', value, key)
+        self.handleBoardPokemonItemRemove(player.id, value, pokemon);
+      });
+
       self.handleBoardPokemonAdd(player, pokemon);
     };
 
@@ -123,12 +127,16 @@ class GameContainer {
           this.handlePokemonChange(player.id, change, pokemon);
         });
       };
-      pokemon.items.onChange = (changes) => {
-        // console.log('change item');
-        changes.forEach((change) => {
-          this.handlePokemonItemsChange(player.id, change, pokemon);
-        });
-      };
+
+      pokemon.items.onAdd = ((value, key) => {
+        // console.log('added', value, key)
+        this.handleBattleManagerPokemonItemAdd(player.id, value, pokemon);
+      });
+      pokemon.items.onRemove = ((value, key) => {
+        // console.log('removed', value, key)
+        this.handleBattleManagerPokemonItemRemove(player.id, value, pokemon);
+      });
+
       pokemon.count.onChange = (changes) => {
         // console.log('change item');
         changes.forEach((change) => {
@@ -153,12 +161,14 @@ class GameContainer {
           this.handlePokemonChange(player.id, change, pokemon);
         });
       };
-      pokemon.items.onChange = (changes) => {
-        // console.log('change item');
-        changes.forEach((change) => {
-          this.handlePokemonItemsChange(player.id, change, pokemon);
-        });
-      };
+      pokemon.items.onAdd = ((value, key) => {
+        // console.log('added', value, key)
+        this.handleBattleManagerPokemonItemAdd(player.id, value, pokemon);
+      });
+      pokemon.items.onRemove = ((value, key) => {
+        // console.log('removed', value, key)
+        this.handleBattleManagerPokemonItemRemove(player.id, value, pokemon);
+      });
       pokemon.count.onChange = (changes) => {
         // console.log('change item');
         changes.forEach((change) => {
@@ -218,10 +228,15 @@ class GameContainer {
     }
   }
 
-  handlePokemonItemsChange(playerId, change, pokemon) {
-    // console.log('handlePokemonItemsChange');
-    if (this.game && this.game.scene && this.game.scene.getScene('gameScene') && this.game.scene.getScene('gameScene').battleManager) {
-      this.game.scene.getScene('gameScene').battleManager.changePokemonItems(playerId, change, pokemon);
+  handleBattleManagerPokemonItemAdd(playerId, value, pokemon) {
+    if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').battleManager) {
+      this.game.scene.getScene('gameScene').battleManager.addPokemonItem(playerId, value, pokemon);
+    }
+  }
+
+  handleBattleManagerPokemonItemRemove(playerId, value, pokemon) {
+    if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').battleManager) {
+      this.game.scene.getScene('gameScene').battleManager.removePokemonItem(playerId, value, pokemon);
     }
   }
 
@@ -277,6 +292,18 @@ class GameContainer {
   handleBoardPokemonChange(player, pokemon, change) {
     if (this.game != null && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager && this.game.scene.getScene('gameScene').boardManager.player.id == player.id) {
       this.game.scene.getScene('gameScene').boardManager.changePokemon(pokemon, change);
+    }
+  }
+
+  handleBoardPokemonItemAdd(playerId, value, pokemon) {
+    if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager) {
+      this.game.scene.getScene('gameScene').boardManager.addPokemonItem(playerId, value, pokemon);
+    }
+  }
+
+  handleBoardPokemonItemRemove(playerId, value, pokemon) {
+    if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene') != null && this.game.scene.getScene('gameScene').boardManager) {
+      this.game.scene.getScene('gameScene').boardManager.removePokemonItem(playerId, value, pokemon);
     }
   }
 

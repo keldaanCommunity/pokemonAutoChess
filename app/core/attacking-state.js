@@ -32,8 +32,8 @@ class AttackingState extends PokemonState {
     pokemon.targetY = coordinates[1];
     const target = board.getValue(coordinates[0], coordinates[1]);
     if (target && !pokemon.status.sleep && !pokemon.status.freeze) {
-      if (pokemon.items.count(ITEM.UPGRADE) != 0) {
-        pokemon.handleAttackSpeed(6 * pokemon.items.count(ITEM.UPGRADE));
+      if (pokemon.items.has(ITEM.UPGRADE)) {
+        pokemon.handleAttackSpeed(6);
       }
 
       if (climate == CLIMATE.SNOW) {
@@ -78,7 +78,7 @@ class AttackingState extends PokemonState {
       let damage;
       const attackType = pokemon.attackType;
 
-      if (Math.random() * 100 < pokemon.critChance && target && target.items.count(ITEM.ROCKY_HELMET) == 0) {
+      if (Math.random() * 100 < pokemon.critChance && target && target.items.has(ITEM.ROCKY_HELMET)) {
         if (pokemon.effects.includes(EFFECTS.FAIRY_WIND) || pokemon.effects.includes(EFFECTS.STRANGE_STEAM) || pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
           let d = 0;
           if (pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
@@ -123,7 +123,7 @@ class AttackingState extends PokemonState {
 
       const victim = target.handleDamage(damage, board, attackType, pokemon);
 
-      if (pokemon.items.count(ITEM.BLUE_ORB) != 0) {
+      if (pokemon.items.has(ITEM.BLUE_ORB)) {
         pokemon.count.staticHolderCount ++;
         if (pokemon.count.staticHolderCount > 3) {
           pokemon.count.staticHolderCount = 0;
@@ -138,15 +138,15 @@ class AttackingState extends PokemonState {
         }
       }
 
-      if (target && target.items.count(ITEM.SMOKE_BALL) != 0) {
+      if (target && target.items.has(ITEM.SMOKE_BALL)) {
         pokemon.status.triggerSmoke(5000, pokemon);
       }
 
-      if (target && pokemon.items.count(ITEM.RAZOR_FANG) != 0) {
+      if (target && pokemon.items.has(ITEM.RAZOR_FANG)) {
         target.status.triggerArmorReduction(5000);
       }
 
-      if (pokemon.items.count(ITEM.CHOICE_SCARF) != 0) {
+      if (pokemon.items.has(ITEM.CHOICE_SCARF)) {
         const cells = board.getAdjacentCells(target.positionX, target.positionY);
         let targetCount = 1;
         cells.forEach((cell) => {
@@ -157,7 +157,7 @@ class AttackingState extends PokemonState {
         });
       }
 
-      if (pokemon.items.count(ITEM.LEFTOVERS) != 0) {
+      if (pokemon.items.has(ITEM.LEFTOVERS)) {
         const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
         pokemon.handleHeal(3);
         cells.forEach((cell) => {
@@ -167,7 +167,7 @@ class AttackingState extends PokemonState {
         });
       }
 
-      if (pokemon.items.count(ITEM.MANA_SCARF) != 0) {
+      if (pokemon.items.has(ITEM.MANA_SCARF)) {
         pokemon.setMana(pokemon.mana + 8);
       }
 

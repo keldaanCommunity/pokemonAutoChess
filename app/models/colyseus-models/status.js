@@ -57,7 +57,7 @@ class Status extends schema.Schema {
           flameCount --;
         }
       });
-      if (pkm.items.count(ITEM.FLAME_ORB) != 0) {
+      if (pkm.items.has(ITEM.FLAME_ORB)) {
         pkm.status.triggerFlameOrb(2000);
       }
     } else {
@@ -91,8 +91,8 @@ class Status extends schema.Schema {
   updateSoulDew(dt, pkm) {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false;
-      pkm.spellDamage += 3 * pkm.items.count(ITEM.SOUL_DEW);
-      if (pkm.items.count(ITEM.SOUL_DEW) != 0) {
+      pkm.spellDamage += 3;
+      if (pkm.items.has(ITEM.SOUL_DEW)) {
         this.triggerSoulDew(5000);
       }
     } else {
@@ -101,7 +101,7 @@ class Status extends schema.Schema {
   }
 
   triggerBurn(timer, pkm) {
-    if (!this.burn && pkm.items.count(ITEM.WIDE_LENS) == 0) {
+    if (!this.burn && !pkm.items.has(ITEM.WIDE_LENS)) {
       this.burn = true;
       this.burnCooldown = timer;
     }
@@ -131,7 +131,7 @@ class Status extends schema.Schema {
   }
 
   triggerPoison(timer, pkm) {
-    if (!this.poison && pkm.items.count(ITEM.WIDE_LENS) == 0) {
+    if (!this.poison && !pkm.items.has(ITEM.WIDE_LENS)) {
       this.poison = true;
       this.poisonCooldown = timer;
     }
@@ -256,8 +256,8 @@ class Status extends schema.Schema {
       });
       pokemon.handleHeal(0.18 * pokemon.hp);
 
-      if (pokemon.items.count(ITEM.BRIGHT_POWDER) != 0) {
-        pokemon.triggerBrightPowder(5000);
+      if (pokemon.items.has(ITEM.BRIGHT_POWDER)) {
+        pokemon.status.triggerBrightPowder(5000);
         pokemon.count.brightPowderCount ++;
       }
     } else {

@@ -71,6 +71,27 @@ export default class BoardManager {
     }
   }
 
+  addPokemonItem(playerId, value, pokemon) {
+    // console.log(change);
+    if (this.player.id == playerId) {
+      const pkm = this.pokemons.get(pokemon.id);
+      if (pkm) {
+        pkm.itemsContainer.addItem(value);
+      }
+    }
+  }
+
+  removePokemonItem(playerId, value, pokemon) {
+    if (this.player.id == playerId) {
+      if (this.player.id == playerId) {
+        const pkm = this.pokemons.get(pokemon.id);
+        if (pkm) {
+          pkm.itemsContainer.removeItem(value);
+        }
+      }
+    }
+  }
+
   changePokemon(pokemon, change) {
     // console.log('change', change.field, pokemon.name);
     const pokemonUI = this.pokemons.get(pokemon.id);
@@ -92,24 +113,6 @@ export default class BoardManager {
         pokemonUI.y = coordinates[1];
         if (pokemonUI.positionY != 0 && this.mode == 'battle') {
           pokemonUI.setVisible(false);
-        }
-        break;
-
-      case 'item0':
-        if (change.value != '' && change.previousValue !== undefined && change.previousValue != change.value) {
-          pokemonUI.setItem0(change.value);
-        }
-        break;
-
-      case 'item1':
-        if (change.value != '' && change.previousValue !== undefined && change.previousValue != change.value) {
-          pokemonUI.setItem1(change.value);
-        }
-        break;
-
-      case 'item2':
-        if (change.value != '' && change.previousValue !== undefined && change.previousValue != change.value) {
-          pokemonUI.setItem2(change.value);
         }
         break;
 

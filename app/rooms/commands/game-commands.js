@@ -268,8 +268,7 @@ class OnSellDropCommand extends Command {
         player.money += COST[pokemon.rarity] * pokemon.stars;
       }
 
-      const items = pokemon.items.getAllItems();
-      items.forEach((it)=>{
+      pokemon.items.forEach((it)=>{
         player.stuff.add(it);
       });
 
@@ -561,14 +560,10 @@ class OnUpdatePhaseCommand extends Command {
         player.board.forEach((pokemon, key)=>{
           if (pokemon.fossilTimer !== undefined) {
             if (pokemon.fossilTimer == 0) {
-              const itemsToAdd = pokemon.items.getAllItems();
               const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemon.evolution);
-              for (let i = 0; i < 3; i++) {
-                const itemToAdd = itemsToAdd.pop();
-                if (itemToAdd) {
-                  pokemonEvolved.items.add(itemToAdd);
-                }
-              }
+              pokemon.items.forEach((i)=>{
+                pokemonEvolved.items.add(i);
+              });
               pokemonEvolved.positionX = pokemon.positionX;
               pokemonEvolved.positionY = pokemon.positionY;
               player.board.delete(key);

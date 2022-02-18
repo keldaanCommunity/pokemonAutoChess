@@ -257,7 +257,7 @@ class GameRoom extends colyseus.Room {
       if (pokemon.positionY != 0) {
         simplePlayer.pokemons.push({
           name: pokemon.name,
-          items: pokemon.items.getAllItems()
+          items: Array.from(pokemon.items)
         });
       }
     });
@@ -416,8 +416,8 @@ class GameRoom extends colyseus.Room {
                   x = pkm.positionX;
                 }
               }
-              const temp =pkm.items.getAllItems();
-              temp.forEach((el)=>{
+
+              pkm.items.forEach((el)=>{
                 itemsToAdd.push(el);
               });
               player.board.delete(id);

@@ -20,7 +20,7 @@ class PokemonState {
       death = false;
       if (!pokemon.status.protect) {
         let reducedDamage = damage;
-        if (attacker && attacker.items.count(ITEM.FIRE_GEM) != 0) {
+        if (attacker && attacker.items.has(ITEM.FIRE_GEM)) {
           if (pokemon.life > 200) {
             reducedDamage = Math.ceil(reducedDamage * 1.6);
           } else {
@@ -28,8 +28,8 @@ class PokemonState {
           }
         }
         const armorFactor = 0.1;
-        const def = attacker && attacker.items.count(ITEM.RAZOR_FANG) != 0 ? Math.round( 0.7 * pokemon.def): pokemon.def;
-        const speDef = attacker && attacker.items.count(ITEM.RAZOR_FANG) != 0 ? Math.round( 0.7 * pokemon.speDef): pokemon.speDef;
+        const def = attacker && attacker.items.has(ITEM.RAZOR_FANG) ? Math.round( 0.7 * pokemon.def): pokemon.def;
+        const speDef = attacker && attacker.items.has(ITEM.RAZOR_FANG) ? Math.round( 0.7 * pokemon.speDef): pokemon.speDef;
         if (attackType == ATTACK_TYPE.PHYSICAL) {
           const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * def))));
           reducedDamage = Math.max(0, Math.round(ritodamage));
@@ -50,7 +50,7 @@ class PokemonState {
         }
 
         if (pokemon.dodge > Math.random()) {
-          if (!(attacker && attacker.items.count(ITEM.XRAY_VISION) != 0)) {
+          if (!(attacker && attacker.items.has(ITEM.XRAY_VISION))) {
             reducedDamage = 0;
             pokemon.count.dodgeCount += 1;
           }
@@ -72,7 +72,7 @@ class PokemonState {
         if (pokemon) {
           pokemon.setMana(pokemon.mana + Math.ceil(reducedDamage / 10));
 
-          if (pokemon.items.count(ITEM.DEFENSIVE_RIBBON) != 0 && pokemon.count.defensiveRibbonCount <5) {
+          if (pokemon.items.has(ITEM.DEFENSIVE_RIBBON) && pokemon.count.defensiveRibbonCount <5) {
             pokemon.atk ++;
             pokemon.def ++;
             pokemon.speDef ++;
@@ -119,15 +119,15 @@ class PokemonState {
             }
             attacker.handleHeal(Math.floor(lifesteal * residualDamage));
           }
-          if (attacker.items.count(ITEM.KINGS_ROCK)) {
+          if (attacker.items.has(ITEM.KINGS_ROCK)) {
             attacker.handleHeal(Math.floor(0.3 * residualDamage));
           }
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
-          if (pokemon.items.count(ITEM.MAX_REVIVE) != 0) {
+          if (pokemon.items.has(ITEM.MAX_REVIVE)) {
             pokemon.life = pokemon.hp;
-            pokemon.items.remove(ITEM.MAX_REVIVE);
+            pokemon.items.delete(ITEM.MAX_REVIVE);
           } else if (pokemon.effects.includes(EFFECTS.SWIFT_SWIM)) {
             pokemon.life = pokemon.hp * 0.4;
             pokemon.atk += pokemon.baseAtk * 0.3;

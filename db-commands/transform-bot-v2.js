@@ -29,7 +29,7 @@ const conversion = {
   WATER_STONE: I.WATER_STONE,
   FIRE_STONE: I.FIRE_STONE,
   LEAF_STONE: I.LEAF_STONE,
-  BLACK_BELT: I.MOOMOO_MILK,
+  BLACK_BELT: I.ZOOM_LENS,
   SILK_SCARF: I.POKE_DOLL,
   DAWN_STONE: I.DAWN_STONE,
   ICY_ROCK: I.ICY_ROCK,
@@ -81,6 +81,7 @@ Mongoose.connect(process.env.MONGO_URI,
               p.items.forEach((i)=>{
                 newPokemon.items.push(conversion[i]);
               });
+              console.log(newPokemon);
               newStep.board.push(newPokemon);
             });
             newBot.steps.push(newStep);
