@@ -73,7 +73,7 @@ class GameRoom extends colyseus.Room {
             'updateItems': true
           };
           client.send('DragDropFailed', errorInformation);
-          console.log('drag drop error', message);
+          console.log('drag drop error', error);
         }
       }
     });
@@ -432,7 +432,7 @@ class GameRoom extends colyseus.Room {
             }
           }
           itemsToAdd.forEach( (item) =>{
-            player.stuff.add(item);
+            player.items.add(item);
           });
           pokemonEvolved.positionX = x;
           pokemonEvolved.positionY = y;

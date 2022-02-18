@@ -38,7 +38,7 @@ class OnItemCommand extends Command {
     if (this.state.players.has(playerId)) {
       const player = this.state.players.get(playerId);
       if (player.itemsProposition.includes(id)) {
-        player.stuff.add(id);
+        player.items.add(id);
       }
       while (player.itemsProposition.length > 0) {
         player.itemsProposition.pop();
@@ -129,7 +129,7 @@ class OnDragDropCommand extends Command {
         const item = detail.id;
         const player = this.state.players.get(playerId);
 
-        if (!player.stuff.has(item)) {
+        if (!player.items.has(item)) {
           client.send('DragDropFailed', message);
           return;
         }
@@ -215,7 +215,7 @@ class OnDragDropCommand extends Command {
           if (equipAfterTransform) {
             newItemPokemon.items.add(item);
           }
-          player.stuff.remove(item);
+          player.items.delete(item);
           return;
         }
 
@@ -247,7 +247,7 @@ class OnDragDropCommand extends Command {
             break;
         }
         pokemon.items.add(item);
-        player.stuff.remove(item);
+        player.items.delete(item);
       }
     }
   }
@@ -269,7 +269,7 @@ class OnSellDropCommand extends Command {
       }
 
       pokemon.items.forEach((it)=>{
-        player.stuff.add(it);
+        player.items.add(it);
       });
 
       player.board.delete(detail.pokemonId);
@@ -538,7 +538,7 @@ class OnUpdatePhaseCommand extends Command {
           });
           // const item = ItemFactory.createRandomItem();
           // const item = ItemFactory.createSpecificItems([ITEMS.BLUE_ORB]);
-          player.stuff.add(ItemFactory.createBasicRandomItem());
+          player.items.add(ItemFactory.createBasicRandomItem());
         }
         player.opponentName = '';
         player.opponentAvatar = '';

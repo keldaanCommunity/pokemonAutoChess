@@ -88,12 +88,12 @@ class GameContainer {
       self.handleBoardPokemonRemove(player, pokemon);
     };
 
-    player.stuff.items.onAdd = ((value, key) => {
+    player.items.onAdd = ((value, key) => {
       // console.log('added', value, key)
       this.handleItemAdd(player, value);
     });
 
-    player.stuff.items.onRemove = ((value, key) => {
+    player.items.onRemove = ((value, key) => {
       // console.log('removed', value, key)
       this.handleItemRemove(player, value);
     });

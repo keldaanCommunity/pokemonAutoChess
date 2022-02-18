@@ -184,7 +184,7 @@ export default class GameScene extends Scene {
 
     this.battle = this.add.group();
     this.animationManager = new AnimationManager(this);
-    this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].stuff.items, 24*24 + 10, 5*24 + 10, true);
+    this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].items, 24*24 + 10, 5*24 + 10, true);
     this.boardManager = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
