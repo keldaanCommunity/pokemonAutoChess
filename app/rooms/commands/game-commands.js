@@ -1,5 +1,5 @@
 const Command = require('@colyseus/command').Command;
-const {STATE, COST, TYPE, ITEM, XP_PLACE, RARITY, PKM, BATTLE_RESULT, NEUTRAL_STAGE} = require('../../models/enum');
+const {STATE, COST, TYPE, ITEM, XP_PLACE, RARITY, PKM, BATTLE_RESULT, NEUTRAL_STAGE, BASIC_ITEM, ITEM_RECIPE} = require('../../models/enum');
 const Player = require('../../models/colyseus-models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
@@ -141,8 +141,16 @@ class OnDragDropCommand extends Command {
 
         // check if full items
         if (pokemon.items.length >= 3) {
-          client.send('DragDropFailed', message);
-          return;
+          let itemToCombine;
+          pokemon.items.forEach( (i)=>{
+            if (Object.keys(BASIC_ITEM).includes(i)) {
+              itemToCombine = i;
+            }
+          });
+          if (!itemToCombine) {
+            client.send('DragDropFailed', message);
+            return;
+          }
         }
 
         // SPECIAL CASES: create a new pokemon on item equip
@@ -246,8 +254,36 @@ class OnDragDropCommand extends Command {
             pokemon.types.push(TYPE.ICE);
             break;
         }
-        pokemon.items.add(item);
-        player.items.delete(item);
+
+        if (Object.keys(BASIC_ITEM).includes(item)) {
+          let itemToCombine;
+          pokemon.items.forEach( (i)=>{
+            if (Object.keys(BASIC_ITEM).includes(i)) {
+              itemToCombine = i;
+            }
+          });
+          if (itemToCombine) {
+            Object.keys(ITEM_RECIPE).forEach((name) => {
+              const recipe = ITEM_RECIPE[name];
+              if (recipe.includes(itemToCombine) && recipe.includes(item)) {
+                pokemon.items.delete(itemToCombine);
+                player.items.delete(item);
+                pokemon.items.add(name);
+              }
+            });
+          } else {
+            pokemon.items.add(item);
+            player.items.delete(item);
+          }
+        } else {
+          if (pokemon.items.has(item)) {
+            client.send('DragDropFailed', message);
+            return;
+          } else {
+            pokemon.items.add(item);
+            player.items.delete(item);
+          }
+        }
       }
     }
   }
