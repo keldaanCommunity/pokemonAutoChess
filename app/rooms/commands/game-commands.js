@@ -449,18 +449,31 @@ class OnUpdatePhaseCommand extends Command {
   }
 
   rankPlayers() {
-    const rankArray = [];
+    const rankArray = []
     this.state.players.forEach((player, key) => {
-      if (player.alive) {
-        rankArray.push({id: player.id, life: player.life});
+      if(!player.alive){
+        return
       }
+
+      rankArray.push({
+        id: player.id, 
+        life: player.life,
+        level: player.experienceManager.level
+      });
     });
-    rankArray.sort(function(a, b) {
-      return b.life - a.life;
-    });
+
+    const sortPlayers = (a, b) => {
+      let diff = b.life - a.life
+      if(diff == 0){
+        diff = b.level - a.level
+      }
+      return diff
+    }
+
+    rankArray.sort(sortPlayers)
+
     rankArray.forEach((rankPlayer, index)=>{
       this.state.players.get(rankPlayer.id).rank = index + 1;
-      this.state.players.get(rankPlayer.id).exp = XP_PLACE[index];
     });
   }
 
@@ -471,7 +484,7 @@ class OnUpdatePhaseCommand extends Command {
         const currentResult = player.getCurrentBattleResult()
 
         if(currentResult == BATTLE_RESULT.DEFEAT || currentResult == BATTLE_RESULT.DRAW){
-          player.life = Math.max(0, player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel));
+          player.life = player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel)
         }
         player.addBattleResult(player.opponentName, currentResult, player.opponentAvatar, isPVE);
       }
@@ -527,6 +540,7 @@ class OnUpdatePhaseCommand extends Command {
   checkDeath() {
     this.state.players.forEach((player, key) => {
       if (player.life <= 0) {
+        player.life = 0
         player.alive = false;
       }
     });

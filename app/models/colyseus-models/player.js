@@ -103,7 +103,7 @@ schema.defineTypes(Player, {
   synergies: Synergies,
   itemsProposition: ['string'],
   money: 'uint8',
-  life: 'uint8',
+  life: 'int8',
   shopLocked: 'boolean',
   streak: 'uint8',
   interest: 'uint8',
