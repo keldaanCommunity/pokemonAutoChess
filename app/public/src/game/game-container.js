@@ -89,12 +89,12 @@ class GameContainer {
     };
 
     player.items.onAdd = ((value, key) => {
-      // console.log('added', value, key)
+      console.log('added', value, key);
       this.handleItemAdd(player, value);
     });
 
     player.items.onRemove = ((value, key) => {
-      // console.log('removed', value, key)
+      console.log('removed', value, key);
       this.handleItemRemove(player, value);
     });
 

@@ -75,7 +75,7 @@ export default class BoardManager {
     // console.log(change);
     if (this.player.id == playerId) {
       const pkm = this.pokemons.get(pokemon.id);
-      if (pkm) {
+      if (pkm && !pkm.itemsContainer.findItem(value)) {
         pkm.itemsContainer.addItem(value);
       }
     }

@@ -13,9 +13,7 @@ export default class ItemsContainer extends GameObjects.Container {
   }
 
   addItem(value) {
-    if (!this.findItem(value)) {
-      this.add(new ItemContainer(this.scene, 0, 0, value, this.dragable));
-    }
+    this.add(new ItemContainer(this.scene, 0, 0, value, this.dragable));
     this.updateItems();
   }
 

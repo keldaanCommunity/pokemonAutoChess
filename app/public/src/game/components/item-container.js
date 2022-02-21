@@ -12,7 +12,7 @@ export default class ItemContainer extends Button {
       this.add(new GameObjects.Ellipse(scene, 0, 0, 30, 30, 0xffffff, 0.7).setStrokeStyle(1, 0x000000, 1));
     }
     this.sprite = new GameObjects.Image(scene, 0, 0, 'item', item).setScale(dragable ? 2:1, dragable? 2:1);
-    this.detail = new ItemDetail(scene, 15, 0, item);
+    this.detail = new ItemDetail(scene, 30, -100, item);
     this.name = item;
     this.add(this.sprite);
     this.add(this.detail);

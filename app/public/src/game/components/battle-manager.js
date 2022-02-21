@@ -58,7 +58,7 @@ export default class BattleManager {
     if (this.player.id == playerId) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {
-        if (children[i].id == pokemon.id) {
+        if (children[i].id == pokemon.id && !children[i].itemsContainer.findItem(value)) {
           children[i].itemsContainer.addItem(value);
           break;
         }
@@ -269,7 +269,6 @@ export default class BattleManager {
               detail.critDamage.setText(pokemon.critDamage.toFixed(2));
             }
           } else if (change.field == 'spellDamage') {
-            console.log(change.value);
             children[i].spellDamage = pokemon.spellDamage;
             const detail = children[i].getFirst('objType', 'detail');
             if (detail) {

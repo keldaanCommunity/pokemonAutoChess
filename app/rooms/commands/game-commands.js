@@ -139,6 +139,10 @@ class OnDragDropCommand extends Command {
 
         const [pokemon, id] = player.getPokemonAt(x, y);
 
+        if (pokemon === null) {
+          client.send('DragDropFailed', message);
+          return;
+        }
         // check if full items
         if (pokemon.items.length >= 3) {
           let itemToCombine;
@@ -265,7 +269,7 @@ class OnDragDropCommand extends Command {
           if (itemToCombine) {
             Object.keys(ITEM_RECIPE).forEach((name) => {
               const recipe = ITEM_RECIPE[name];
-              if (recipe.includes(itemToCombine) && recipe.includes(item)) {
+              if ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine)) {
                 pokemon.items.delete(itemToCombine);
                 player.items.delete(item);
                 pokemon.items.add(name);
@@ -283,6 +287,35 @@ class OnDragDropCommand extends Command {
             pokemon.items.add(item);
             player.items.delete(item);
           }
+        }
+      }
+      if (detail.objType == 'combine') {
+        message.updateBoard = false;
+        message.updateItems = true;
+
+        const item = detail.id;
+        const player = this.state.players.get(playerId);
+        const itemToCombine = player.items.at(parseInt(detail.y));
+
+        console.log(item, itemToCombine);
+
+        if (!player.items.has(item) || !Object.keys(ITEM).includes(itemToCombine)) {
+          client.send('DragDropFailed', message);
+          return;
+        }
+
+        let crafted = false;
+        Object.keys(ITEM_RECIPE).forEach((name) => {
+          const recipe = ITEM_RECIPE[name];
+          if ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine)) {
+            player.items.delete(itemToCombine);
+            player.items.delete(item);
+            player.items.add(name);
+            crafted = true;
+          }
+        });
+        if (!crafted) {
+          client.send('DragDropFailed', message);
         }
       }
     }

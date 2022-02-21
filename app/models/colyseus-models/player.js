@@ -88,7 +88,7 @@ class Player extends Schema {
         return [pokemon, id];
       }
     }
-    return null;
+    return [null, null];
   }
 }
 

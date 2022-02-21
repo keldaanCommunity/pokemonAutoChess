@@ -5,7 +5,7 @@ const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
 const UserMetadata = require('../models/mongo-models/user-metadata');
 const BOT = require('../models/mongo-models/bot');
-const {XP_PLACE, XP_TABLE, PKM} = require('../models/enum');
+const {XP_PLACE, XP_TABLE, PKM, BASIC_ITEM} = require('../models/enum');
 const PokemonFactory = require('../models/pokemon-factory');
 const EloRank = require('elo-rank');
 const admin = require('firebase-admin');
@@ -381,6 +381,7 @@ class GameRoom extends colyseus.Room {
   updateEvolution(id) {
     let evolve = false;
     const itemsToAdd = [];
+    const basicItemsToAdd = [];
     const player = this.state.players.get(id);
     player.board.forEach((pokemon, key) => {
       let count = 0;
@@ -418,7 +419,11 @@ class GameRoom extends colyseus.Room {
               }
 
               pkm.items.forEach((el)=>{
-                itemsToAdd.push(el);
+                if (Object.keys(BASIC_ITEM).includes(el)) {
+                  basicItemsToAdd.push(el);
+                } else {
+                  itemsToAdd.push(el);
+                }
               });
               player.board.delete(id);
               count -= 1;
@@ -428,10 +433,17 @@ class GameRoom extends colyseus.Room {
           for (let i = 0; i < 3; i++) {
             const itemToAdd = itemsToAdd.pop();
             if (itemToAdd) {
-              pokemonEvolved.items.add(itemToAdd);
+              if (pokemonEvolved.items.has(itemToAdd)) {
+                player.items.add(itemToAdd);
+              } else {
+                pokemonEvolved.items.add(itemToAdd);
+              }
             }
           }
           itemsToAdd.forEach( (item) =>{
+            player.items.add(item);
+          });
+          basicItemsToAdd.forEach( (item)=>{
             player.items.add(item);
           });
           pokemonEvolved.positionX = x;

@@ -181,7 +181,7 @@ export default class GameScene extends Scene {
     this.map = this.make.tilemap({key: 'map'});
     const tileset = this.map.addTilesetImage(this.tilemap.tilesets[0].name, 'tiles', 24, 24, 1, 1);
     this.map.createLayer('World', tileset, 0, 0);
-
+    this.initilizeDragAndDrop();
     this.battle = this.add.group();
     this.animationManager = new AnimationManager(this);
     this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].items, 24*24 + 10, 5*24 + 10, true);
@@ -197,7 +197,6 @@ export default class GameScene extends Scene {
     this.music = this.sound.add('sound', {loop: true});
     this.music.setVolume(0.1);
     this.music.play();
-    this.initilizeDragAndDrop();
   }
 
   update() {
@@ -228,6 +227,18 @@ export default class GameScene extends Scene {
   initilizeDragAndDrop() {
     this.zones = [];
     this.graphics = [];
+    for (let i=0; i<9; i++) {
+      const zone = this.add.zone(24*24 + 10, 5*24 + 10 + 80 * i, 80, 80);
+      zone.setRectangleDropZone(80, 80);
+      zone.setName('item-' + i);
+      /*
+      this.add.graphics().lineStyle(3, 0x000000, 0.3).strokeRect(
+          zone.x - zone.input.hitArea.width / 2,
+          zone.y - zone.input.hitArea.height / 2,
+          zone.input.hitArea.width,
+          zone.input.hitArea.height);
+          */
+    }
 
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 8; j++) {
@@ -299,10 +310,16 @@ export default class GameScene extends Scene {
 
     this.input.on('drop', (pointer, gameObject, dropZone) => {
       this.removeRectangles();
-      // console.log(dropZone.name);
 
-
-      if (dropZone.name == 'sell-zone') {
+      if (dropZone.name.includes('item')) {
+        document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
+          detail: {
+            'y': dropZone.name.substr(5, 1),
+            'id': gameObject.name,
+            'objType': 'combine'
+          }
+        }));
+      } else if (dropZone.name == 'sell-zone') {
         if (gameObject.objType == 'item') {
           this.itemsContainer.updateItems();
         }
