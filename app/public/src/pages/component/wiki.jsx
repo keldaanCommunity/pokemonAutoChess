@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import WikiButton from './wiki-button';
 import WikiContent from './wiki-content';
+import WikiItems from './wiki-items';
 
 class Wiki extends Component{
 
@@ -8,7 +10,19 @@ class Wiki extends Component{
         return <div>
             <WikiButton toggleWiki={this.props.toggleWiki} content='Lobby'/>
             <div className="nes-container" style={{backgroundColor:'white',opacity:0.9,margin:'10px'}}>
-                <WikiContent/>
+            <Tabs>
+                <TabList>
+                    <Tab key='title-pokemon'>POKEMONS</Tab>
+                    <Tab key='title-items'>ITEMS</Tab>
+                </TabList>
+
+                <TabPanel key='pokemon'>
+                    <WikiContent/>
+                </TabPanel>
+                <TabPanel key='items'>
+                    <WikiItems/>
+                </TabPanel>
+            </Tabs>
             </div>
         </div>
     }

@@ -5393,7 +5393,7 @@ const ITEM_NAME = Object.freeze({
   LUCKY_EGG: 'Lucky Egg',
   AQUA_EGG: 'Aqua Egg',
   BLUE_ORB: 'Blue Orb',
-  ZOOM_LENS: 'Zomm Lens',
+  ZOOM_LENS: 'Zoom Lens',
   BRIGHT_POWDER: 'Bright Powder',
   DELTA_ORB: 'Delta Orb',
   MANA_SCARF: 'Mana Scarf',
