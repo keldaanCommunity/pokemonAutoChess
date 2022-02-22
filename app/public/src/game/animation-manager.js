@@ -85,7 +85,12 @@ export default class AnimationManager {
 
     [104, 105, 137, 233, 293, 294, 295, 309, 310, 315, 334, 353, 354, 406, 407, 427, 428, 474, 506, 507, 508, 535, 536, 537, 540, 541, 542, 543, 544, 545, 599, 600, 601, 610, 611, 612, 648, 661, 662, 663, 669, 670, 671, 679, 680, 681, 731, 732, 733, 782, 783, 784, 1050, 3100, 3340, 3540, 4280].forEach((num) => {
       this.createAnimations(num, 'sound', true);
-      this.createSleepSoundAnimations(num);
+      this.createSleepAnimations('sound', num);
+    });
+
+    [351,3510,3511,3512].forEach((num) => {
+        this.createAnimations(num, 'castform', true);
+        this.createSleepAnimations('castform', num);
     });
 
     this.createAttacksAnimations();
@@ -661,10 +666,10 @@ export default class AnimationManager {
     });
   }
 
-  createSleepSoundAnimations(index) {
+  createSleepAnimations(sheet, index) {
     this.game.anims.create({
       key: `${index}/2`,
-      frames: this.game.anims.generateFrameNames('sound', {frames: [0, 1], prefix: index + '/2/'}),
+      frames: this.game.anims.generateFrameNames(sheet, {frames: [0, 1], prefix: index + '/2/'}),
       duration: 2000,
       repeat: -1
     });

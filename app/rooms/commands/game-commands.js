@@ -11,11 +11,28 @@ class OnShopCommand extends Command {
       const player = this.state.players.get(id);
       if (player.shop[index]) {
         const name = player.shop[index];
-        const pokemon = PokemonFactory.createPokemonFromName(name);
+        let pokemon = PokemonFactory.createPokemonFromName(name);
 
         if (player.money >= pokemon.cost && (this.room.getBoardSize(player.board) < 8 ||
         (this.room.getPossibleEvolution(player.board, pokemon.name) && this.room.getBoardSize(player.board) == 8))) {
           player.money -= pokemon.cost;
+          if (pokemon.name == PKM.CASTFORM) {
+            if (player.synergies.FIRE > 0 || player.synergies.WATER > 0 || player.synergies.ICE) {
+                let rankArray = [{s:TYPE.FIRE, v:player.synergies.FIRE}, {s:TYPE.WATER, v:player.synergies.WATER}, {s:TYPE.ICE, v:player.synergies.ICE}];
+                rankArray.sort((a,b)=>{return b.v -a.v});
+                switch(rankArray[0].s){
+                    case TYPE.FIRE:
+                        pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMSUN);
+                        break;
+                    case TYPE.WATER:
+                        pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMRAIN);
+                        break;
+                    case TYPE.ICE:
+                        pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMHAIL);
+                        break;
+                }
+            }
+          }
           pokemon.positionX = this.room.getFirstAvailablePositionInBoard(player.id);
           pokemon.positionY = 0;
           player.board.set(pokemon.id, pokemon);
