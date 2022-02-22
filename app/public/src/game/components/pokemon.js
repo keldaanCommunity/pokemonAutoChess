@@ -2,7 +2,7 @@ import {GameObjects} from 'phaser';
 import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
-import ItemContainer from './item-container';
+import ItemsContainer from './items-container';
 import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS} from '../../../../models/enum.js';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 
@@ -32,6 +32,8 @@ export default class Pokemon extends Button {
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
     this.team = pokemon.team;
+    this.critDamage = pokemon.critDamage ? Number(pokemon.critDamage.toFixed(2)): 2;
+    this.spellDamage = pokemon.spellDamage? pokemon.spellDamage: 0;
     this.setRangeType();
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
@@ -54,9 +56,9 @@ export default class Pokemon extends Button {
   enterButtonHoverState() {
     if (!this.getFirst('objType', 'detail') && this.isPopup) {
       if (this.life) {
-        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance));
+        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage));
       } else {
-        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance));
+        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage));
       }
     }
   }
@@ -143,6 +145,39 @@ export default class Pokemon extends Button {
     specialProjectile.setDepth(7);
     specialProjectile.setScale(1.5, 1.5);
     specialProjectile.anims.play('ground-grow');
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
+  incenseAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'INCENSE_DAMAGE', '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(2, 2);
+    specialProjectile.anims.play('INCENSE_DAMAGE');
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
+  brightPowderAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'BRIGHT_POWDER', '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(2, 2);
+    specialProjectile.anims.play('BRIGHT_POWDER');
+    specialProjectile.once('animationcomplete', () => {
+      specialProjectile.destroy();
+    });
+  }
+
+  staticAnimation() {
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'STATIC', '000');
+    specialProjectile.setDepth(7);
+    specialProjectile.setScale(3, 3);
+    specialProjectile.anims.play('STATIC');
     specialProjectile.once('animationcomplete', () => {
       specialProjectile.destroy();
     });
@@ -928,48 +963,11 @@ export default class Pokemon extends Button {
     this.setLifeBar(pokemon, scene, this.height/2 + 5);
     this.setManaBar(pokemon, scene, this.height/2 + 5);
 
-    this.setItems(pokemon, scene);
+    this.itemsContainer = new ItemsContainer(scene, pokemon.items, this.width + 20, -this.height/2 -20, false);
+    this.add(this.itemsContainer);
+
     if (pokemon.effects) {
       this.setEffects(pokemon, scene, this.height + 30);
-    }
-  }
-
-  setItem0(item) {
-    if (this.item0) {
-      this.remove(this.item0, true);
-    }
-    this.item0 = new ItemContainer(this.scene, this.width + 15, this.height - 50, item, false, 'item0');
-    this.scene.add.existing(item);
-    this.add(this.item0);
-  }
-
-  setItem1(item) {
-    if (this.item1) {
-      this.remove(this.item1, true);
-    }
-    this.item1 = new ItemContainer(this.scene, this.width + 15, this.height - 20, item, false, 'item1');
-    this.scene.add.existing(this.item1);
-    this.add(this.item1);
-  }
-
-  setItem2(item) {
-    if (this.item2) {
-      this.remove(this.item2, true);
-    }
-    this.item2 = new ItemContainer(this.scene, this.width + 15, this.height + 10, item, false, 'item2');
-    this.scene.add.existing(this.item2);
-    this.add(this.item2);
-  }
-
-  setItems(pokemon) {
-    if (pokemon.items.item0 && pokemon.items.item0 != '') {
-      this.setItem0(pokemon.items.item0);
-    }
-    if (pokemon.items.item1 && pokemon.items.item1 != '') {
-      this.setItem1(pokemon.items.item1);
-    }
-    if (pokemon.items.item2 && pokemon.items.item2 != '') {
-      this.setItem2(pokemon.items.item2);
     }
   }
 
@@ -1113,6 +1111,45 @@ export default class Pokemon extends Button {
     }
   }
 
+  addSmoke() {
+    // console.log('sp');
+    if (!this.getFirst('objType', 'smoke')) {
+      const smoke = new GameObjects.Sprite(this.scene, 0, -40, 'smoke', '000');
+      smoke.setScale(2, 2);
+      this.scene.add.existing(smoke);
+      smoke.objType = 'smoke';
+      smoke.anims.play('smoke');
+      this.add(smoke);
+    }
+  }
+
+  removeSmoke() {
+    const sprite = this.getFirst('objType', 'smoke');
+    if (sprite) {
+      this.remove(sprite, true);
+    }
+  }
+
+  addArmorReduction() {
+    // console.log('sp');
+    if (!this.getFirst('objType', 'armorReduction')) {
+      const smoke = new GameObjects.Sprite(this.scene, 0, -40, 'armorReduction', '000');
+      smoke.setScale(2, 2);
+      this.scene.add.existing(smoke);
+      smoke.objType = 'armorReduction';
+      smoke.anims.play('armorReduction');
+      this.add(smoke);
+    }
+  }
+
+  removeArmorReduction() {
+    const sprite = this.getFirst('objType', 'armorReduction');
+    if (sprite) {
+      this.remove(sprite, true);
+    }
+  }
+
+
   addPoison() {
     if (!this.getFirst('objType', 'poison')) {
       const poison = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/poison/000');
@@ -1162,6 +1199,24 @@ export default class Pokemon extends Button {
 
   removeResurection() {
     const sprite = this.getFirst('objType', 'resurection');
+    if (sprite) {
+      this.remove(sprite, true);
+    }
+  }
+
+  addRuneProtect() {
+    if (!this.getFirst('objType', 'rune_protect')) {
+      const runeProtect = new GameObjects.Sprite(this.scene, 0, -45, 'rune_protect', '000');
+      runeProtect.setScale(2, 2);
+      this.scene.add.existing(runeProtect);
+      runeProtect.objType = 'rune_protect';
+      runeProtect.anims.play('rune_protect');
+      this.add(runeProtect);
+    }
+  }
+
+  removeRuneProtect() {
+    const sprite = this.getFirst('objType', 'rune_protect');
     if (sprite) {
       this.remove(sprite, true);
     }

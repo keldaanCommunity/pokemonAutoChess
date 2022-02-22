@@ -43,7 +43,9 @@ class Bot {
       pkm.positionY = stepTeam.board[i].y;
       if (stepTeam.board[i].items) {
         stepTeam.board[i].items.forEach((item)=>{
-          pkm.items.add(item);
+          if (!pkm.items.has(item)) {
+            pkm.items.add(item);
+          }
         });
       }
       this.player.board.set(pkm.id, pkm);

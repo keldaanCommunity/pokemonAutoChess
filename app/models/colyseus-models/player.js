@@ -4,11 +4,11 @@ const ExperienceManager = require('./experience-manager');
 const Simulation = require('../../core/simulation');
 const Synergies = require('./synergies');
 const Effects = require('../effects');
-const Inventory = require('./inventory');
 const BattleResult = require('./battle-result');
 const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 const ArraySchema = schema.ArraySchema;
+const CollectionSchema = schema.CollectionSchema;
 const { BATTLE_RESULT } = require('../enum');
 
 class Player extends Schema {
@@ -22,7 +22,7 @@ class Player extends Schema {
       board: new MapSchema(),
       shop: new ArraySchema(),
       history: new ArraySchema(),
-      stuff: new Inventory(),
+      items: new CollectionSchema(),
       itemsProposition: new ArraySchema(),
       experienceManager: new ExperienceManager(),
       synergies: new Synergies(),
@@ -83,12 +83,12 @@ class Player extends Schema {
   }
 
   getPokemonAt(x, y) {
-    for (let [id, pokemon] of this.board) {
-      if(pokemon.positionX == x && pokemon.positionY == y){
-        return [pokemon, id]
+    for (const [id, pokemon] of this.board) {
+      if (pokemon.positionX == x && pokemon.positionY == y) {
+        return [pokemon, id];
       }
     }
-    return null
+    return [null, null];
   }
 }
 
@@ -110,7 +110,7 @@ schema.defineTypes(Player, {
   opponentName: 'string',
   opponentAvatar: 'string',
   boardSize: 'uint8',
-  stuff: Inventory,
+  items: {collection: 'string'},
   rank: 'uint8',
   exp: 'uint16',
   alive: 'boolean',

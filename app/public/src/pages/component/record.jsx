@@ -36,7 +36,7 @@ class Record extends Component{
         return <div key={index}>
             <img style={{width:'60px', imageRendering:'pixelated'}} src={"/assets/avatar/" + p.name + ".png"}/>
             <div style={{display:'flex'}}>
-                {p.items.map((item, i)=> {return <img key={i} style={{width:'20px', height:'20px', imageRendering:'pixelated'}} src={"/assets/items/" + item + ".png"}/>})}
+                {p.items.map((item, i)=> {return <img key={i} style={{width:'20px', height:'20px', imageRendering:'pixelated'}} src={"/assets/item/" + item + ".png"}/>})}
             </div>
         </div>
     }

@@ -108,10 +108,12 @@ export default class GameScene extends Scene {
     this.load.multiatlas('status', '/assets/status/status.json', '/assets/status/');
     this.load.multiatlas('wound', '/assets/status/wound.json', '/assets/status');
     this.load.multiatlas('resurection', '/assets/status/resurection.json', '/assets/status');
+    this.load.multiatlas('smoke', '/assets/status/SMOKE.json', '/assets/status');
+    this.load.multiatlas('rune_protect', '/assets/status/RUNE_PROTECT.json', '/assets/status');
+    this.load.multiatlas('armorReduction', '/assets/status/ARMOR_REDUCTION.json', '/assets/status');
     this.load.multiatlas('icons', '/assets/ui/icons.json', '/assets/ui/');
-    this.load.multiatlas('items', '/assets/items/items.json', '/assets/items/');
+    this.load.multiatlas('item', '/assets/item/item.json', '/assets/item/');
     this.load.multiatlas('lock', '/assets/lock/lock.json', '/assets/lock/');
-    this.load.multiatlas('rarity', '/assets/rarity/rarity.json', '/assets/rarity');
     this.load.multiatlas('types', '/assets/types/types.json', '/assets/types');
     this.load.multiatlas('fossil', '/assets/pokemons/fossil/fossil.json', '/assets/pokemons/fossil/');
     this.load.multiatlas('december', '/assets/pokemons/december/december.json', '/assets/pokemons/december/');
@@ -138,6 +140,9 @@ export default class GameScene extends Scene {
     this.load.multiatlas('SHADOW_CLONE', '/assets/attacks/SHADOW_CLONE.json', '/assets/attacks');
     this.load.multiatlas('PETAL_DANCE', '/assets/attacks/PETAL_DANCE.json', '/assets/attacks');
     this.load.multiatlas('ECHO', '/assets/attacks/ECHO.json', '/assets/attacks');
+    this.load.multiatlas('INCENSE_DAMAGE', '/assets/attacks/INCENSE_DAMAGE.json', '/assets/attacks');
+    this.load.multiatlas('BRIGHT_POWDER', '/assets/attacks/BRIGHT_POWDER.json', '/assets/attacks');
+    this.load.multiatlas('STATIC', '/assets/attacks/STATIC.json', '/assets/attacks');
     this.load.multiatlas('EXPLOSION', '/assets/attacks/EXPLOSION.json', '/assets/attacks');
     this.load.multiatlas('BONEMERANG', '/assets/attacks/BONEMERANG.json', '/assets/attacks');
     this.load.multiatlas('GROWL', '/assets/attacks/GROWL.json', '/assets/attacks');
@@ -176,10 +181,10 @@ export default class GameScene extends Scene {
     this.map = this.make.tilemap({key: 'map'});
     const tileset = this.map.addTilesetImage(this.tilemap.tilesets[0].name, 'tiles', 24, 24, 1, 1);
     this.map.createLayer('World', tileset, 0, 0);
-
+    this.initilizeDragAndDrop();
     this.battle = this.add.group();
     this.animationManager = new AnimationManager(this);
-    this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].stuff.items, 24*24 + 10, 5*24 + 10);
+    this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].items, 24*24 + 10, 5*24 + 10, true);
     this.boardManager = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
@@ -192,7 +197,6 @@ export default class GameScene extends Scene {
     this.music = this.sound.add('sound', {loop: true});
     this.music.setVolume(0.1);
     this.music.play();
-    this.initilizeDragAndDrop();
   }
 
   update() {
@@ -223,6 +227,18 @@ export default class GameScene extends Scene {
   initilizeDragAndDrop() {
     this.zones = [];
     this.graphics = [];
+    for (let i=0; i<9; i++) {
+      const zone = this.add.zone(24*24 + 10, 5*24 + 10 + 80 * i, 80, 80);
+      zone.setRectangleDropZone(80, 80);
+      zone.setName('item-' + i);
+      /*
+      this.add.graphics().lineStyle(3, 0x000000, 0.3).strokeRect(
+          zone.x - zone.input.hitArea.width / 2,
+          zone.y - zone.input.hitArea.height / 2,
+          zone.input.hitArea.width,
+          zone.input.hitArea.height);
+          */
+    }
 
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 8; j++) {
@@ -294,10 +310,16 @@ export default class GameScene extends Scene {
 
     this.input.on('drop', (pointer, gameObject, dropZone) => {
       this.removeRectangles();
-      // console.log(dropZone.name);
 
-
-      if (dropZone.name == 'sell-zone') {
+      if (dropZone.name.includes('item')) {
+        document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
+          detail: {
+            'y': dropZone.name.substr(5, 1),
+            'id': gameObject.name,
+            'objType': 'combine'
+          }
+        }));
+      } else if (dropZone.name == 'sell-zone') {
         if (gameObject.objType == 'item') {
           this.itemsContainer.updateItems();
         }

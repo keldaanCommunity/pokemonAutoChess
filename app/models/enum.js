@@ -281,23 +281,23 @@ const PKM = Object.freeze({
   AMAURA: 'amaura',
   AURORUS: 'aurorus',
   ANORITH: 'anorith',
+  ARMALDO: 'armaldo',
   ARCHEN: 'archen',
   ARCHEOPS: 'archeops',
-  ARMALDO: 'armaldo',
+  SHIELDON: 'shieldon',
   BASTIODON: 'bastiodon',
+  TIRTOUGA: 'tirtouga',
   CARRACOSTA: 'carracosta',
+  LILEEP: 'lileep',
   CRADILY: 'cradily',
   CRANIDOS: 'cranidos',
+  RAMPARDOS: 'rampardos',
   KABUTO: 'kabuto',
   KABUTOPS: 'kabutops',
-  LILEEP: 'lileep',
   OMANYTE: 'omanyte',
   OMASTAR: 'omastar',
-  RAMPARDOS: 'rampardos',
-  SHIELDON: 'shieldon',
-  TIRTOUGA: 'tirtouga',
-  TYRANTRUM: 'tyrantrum',
   TYRUNT: 'tyrunt',
+  TYRANTRUM: 'tyrantrum',
   BUDEW: 'budew',
   ROSELIA: 'roselia',
   ROSERADE: 'roserade',
@@ -768,493 +768,6 @@ const ITEMS = Object.freeze({
   ROOT_FOSSIL: 'ROOT_FOSSIL',
   SAIL_FOSSIL: 'SAIL_FOSSIL',
   SKULL_FOSSIL: 'SKULL_FOSSIL'
-});
-
-const ITEM_NAME = Object.freeze({
-  ARMOR_FOSSIL: {
-    eng: 'Armor Fossil',
-    esp: 'Armor Fossil',
-    fra: 'Armor Fossil'
-  },
-  CLAW_FOSSIL: {
-    eng: 'Claw Fossil',
-    esp: 'Claw Fossil',
-    fra: 'Claw Fossil'
-  },
-  COVER_FOSSIL: {
-    eng: 'Cover Fossil',
-    esp: 'Cover Fossil',
-    fra: 'Cover Fossil'
-  },
-  DOME_FOSSIL: {
-    eng: 'Dome Fossil',
-    esp: 'Dome Fossil',
-    fra: 'Dome Fossil'
-  },
-  HELIX_FOSSIL: {
-    eng: 'Helix Fossil',
-    esp: 'Helix Fossil',
-    fra: 'Helix Fossil'
-  },
-  JAW_FOSSIL: {
-    eng: 'Jaw Fossil',
-    esp: 'Jaw Fossil',
-    fra: 'Jaw Fossil'
-  },
-  OLD_AMBER: {
-    eng: 'Old Amber',
-    esp: 'Old Amber',
-    fra: 'Old Amber'
-  },
-  PLUME_FOSSIL: {
-    eng: 'Plume Fossil',
-    esp: 'Plume Fossil',
-    fra: 'Plume Fossil'
-  },
-  ROOT_FOSSIL: {
-    eng: 'Root Fossil',
-    esp: 'Root Fossil',
-    fra: 'Root Fossil'
-  },
-  SAIL_FOSSIL: {
-    eng: 'Sail Fossil',
-    esp: 'Sail Fossil',
-    fra: 'Sail Fossil'
-  },
-  SKULL_FOSSIL: {
-    eng: 'Skull Fossil',
-    esp: 'Skull Fossil',
-    fra: 'Skull Fossil'
-  },
-  WHITE_GLASSES: {
-    eng: 'Wise Glasses',
-    esp: 'Gafas blancas',
-    fra: 'Lunettes blanches'
-  },
-  MUSCLE_BAND: {
-    eng: 'Muscle Band',
-    esp: 'Banda Muscular',
-    fra: 'Bandeau Muscle'
-  },
-  LIFE_ORB: {
-    eng: 'Life Orb',
-    esp: 'Orbe de la Vida',
-    fra: 'Orbe Vie'
-  },
-  COIN_AMULET: {
-    eng: 'Amulet Coin',
-    esp: 'Amuleto de monedas',
-    fra: 'Piece Rune'
-  },
-  ROCKY_HELMET: {
-    eng: 'Rocky Helmet',
-    esp: 'Casco rocoso',
-    fra: 'Casque Brut'
-  },
-  SHELL_BELL: {
-    eng: 'Shell Bell',
-    esp: 'Casco Campana',
-    fra: 'Grelot Coque'
-  },
-  BIG_ROOT: {
-    eng: 'Big Root',
-    esp: 'Raíz Grande',
-    fra: 'Grosse Racine'
-  },
-  APRICOT_BERRY: {
-    eng: 'Apricot Berry',
-    esp: 'Apricot Baya',
-    fra: 'Baie Abricot'
-  },
-  LIECHI_BERRY: {
-    eng: 'Liechi Berry',
-    esp: 'Liechi Baya',
-    fra: 'Baie Lichi'
-  },
-  GANLON_BERRY: {
-    eng: 'Ganlon Berry',
-    esp: 'Ganlon Baya',
-    fra: 'Baie Ganlon'
-  },
-  PETAYA_BERRY: {
-    eng: 'Petaya Berry',
-    esp: 'Petaya Baya',
-    fra: 'Baie Pitaya'
-  },
-  SALAC_BERRY: {
-    eng: 'Salac Berry',
-    esp: 'Salac Baya',
-    fra: 'Baie Salac'
-  },
-  ORAN_BERRY: {
-    eng: 'Oran Berry',
-    esp: 'Oran Baya',
-    fra: 'Baie Oran'
-  },
-  SOFT_SAND: {
-    eng: 'Soft Sand',
-    esp: 'Arena Blanda',
-    fra: 'Sable doux'
-  },
-  MOON_STONE: {
-    eng: 'Moon Stone',
-    esp: 'Piedra lunar',
-    fra: 'Pierre lune'
-  },
-  NIGHT_STONE: {
-    eng: 'Dusk Stone',
-    esp: 'Piedra Nocturna',
-    fra: 'Pierre nuit'
-  },
-  POISON_BARB: {
-    eng: 'Poison Barb',
-    esp: 'Barra de veneno',
-    fra: 'Crochet venin'
-  },
-  DRAGON_FANG: {
-    eng: 'Dragon Fang',
-    esp: 'Colmillo de Dragón',
-    fra: 'Croc dragon'
-  },
-  THUNDER_STONE: {
-    eng: 'Thunder Stone',
-    esp: 'Piedra del Trueno',
-    fra: 'Pierre foudre'
-  },
-  METAL_SKIN: {
-    eng: 'Metal Coat',
-    esp: 'Piel de metal',
-    fra: 'Peau métal'
-  },
-  METRONOME: {
-    eng: 'Metronome',
-    esp: 'Metrónomo',
-    fra: 'Métronome'
-  },
-  WATER_STONE: {
-    eng: 'Water Stone',
-    esp: 'Piedra de agua',
-    fra: 'Pierre eau'
-  },
-  FIRE_STONE: {
-    eng: 'Fire Stone',
-    esp: 'Piedra de fuego',
-    fra: 'Pierre feu'
-  },
-  LEAF_STONE: {
-    eng: 'Leaf Stone',
-    esp: 'Piedra de la hoja',
-    fra: 'Pierre feuille'
-  },
-  BLACK_BELT: {
-    eng: 'Black Belt',
-    esp: 'Cinturón negro',
-    fra: 'Ceinture noire'
-  },
-  SILK_SCARF: {
-    eng: 'Silk Scarf',
-    esp: 'Bufanda de Seda',
-    fra: 'Mouchoir Soie'
-  },
-  DAWN_STONE: {
-    eng: 'Dawn Stone',
-    esp: 'Piedra del amanecer',
-    fra: 'Pierre aube'
-  },
-  ICY_ROCK: {
-    eng: 'Icy Rock',
-    esp: 'Roca helada',
-    fra: 'Rocher glacé'
-  },
-  RAZOR_FANG: {
-    eng: 'Razor Fang',
-    esp: 'Colmillo de afeitar',
-    fra: 'Croc Rasoir'
-  },
-  RAZOR_CLAW: {
-    eng: 'Razor Claw',
-    esp: 'Manijas rasoir',
-    fra: 'Griffe Rasoir'
-  },
-  SCOPE_LENS: {
-    eng: 'Scope Lens',
-    esp: 'lente del visor',
-    fra: 'Lentilscope'
-  },
-  REVIVER_SEED: {
-    eng: 'Revival Herb',
-    esp: 'Resugraina',
-    fra: 'Herbe Rappel'
-  },
-  ASSAULT_VEST: {
-    eng: 'Assault Vest',
-    esp: 'Chaleco de asalto',
-    fra: 'Veste de combat'
-  },
-  BLUE_ORB: {
-    eng: 'Blue Orb',
-    esp: 'Orbe azul',
-    fra: 'Gemme Bleue'
-  },
-  RED_ORB: {
-    eng: 'Red Orb',
-    esp: 'Orbe rojo',
-    fra: 'Gemme Rouge'
-  },
-  DELTA_ORB: {
-    eng: 'Delta Orb',
-    esp: 'Orbe Delta',
-    fra: 'Gemme Delta'
-  },
-  WONDER_BOX: {
-    eng: 'Wonder Box',
-    esp: 'Caja de Maravillas',
-    fra: 'Boite mystère'
-  }
-});
-
-const ITEM_DESCRIPTION = Object.freeze({
-  ARMOR_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Shieldon (Rare, 6 tours to evolve)',
-    esp: 'Armor Fossil',
-    fra: 'Armor Fossil'
-  },
-  CLAW_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into an Anorith (Uncommon, 4 tours to evolve)',
-    esp: 'Claw Fossil',
-    fra: 'Claw Fossil'
-  },
-  COVER_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Tirtouga (Rare, 6 tours to evolve)',
-    esp: 'Cover Fossil',
-    fra: 'Cover Fossil'
-  },
-  DOME_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Kabuto (Uncommon, 4 tours to evolve)',
-    esp: 'Dome Fossil',
-    fra: 'Dome Fossil'
-  },
-  HELIX_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Omanyte (Uncommon, 4 tours to evolve)',
-    esp: 'Helix Fossil',
-    fra: 'Helix Fossil'
-  },
-  JAW_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Tyrunt (Epic, 8 tours to evolve)',
-    esp: 'Jaw Fossil',
-    fra: 'Jaw Fossil'
-  },
-  OLD_AMBER: {
-    eng: 'Give this to a Ditto to make it evolve into an Aerodactyl',
-    esp: 'Old Amber',
-    fra: 'Old Amber'
-  },
-  PLUME_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into an Archen (Rare, 6 tours to evolve)',
-    esp: 'Plum Fossil',
-    fra: 'Plum Fossil'
-  },
-  ROOT_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Lileep (Uncommon, 4 tours to evolve)',
-    esp: 'Root Fossil',
-    fra: 'Root Fossil'
-  },
-  SAIL_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into an Amaura (Epic, 8 tours to evolve)',
-    esp: 'Sail Fossil',
-    fra: 'Sail Fossil'
-  },
-  SKULL_FOSSIL: {
-    eng: 'Give this to a Ditto to make it evolve into a Cranidos (Rare, 6 tours to evolve)',
-    esp: 'Skull Fossil',
-    fra: 'Skull Fossil'
-  },
-  WHITE_GLASSES:
-  {
-    eng: '+30% special attack',
-    esp: '+30% de ataque especial',
-    fra: '+30% attaque spéciale'
-  },
-  MUSCLE_BAND: {
-    eng: '+30% attack',
-    esp: '+30% de ataque',
-    fra: '+30% attaque physique'
-  },
-  LIFE_ORB: {
-    eng: '+100% damage, lose 5% HP per hit.',
-    esp: '100% de daño, cuesta un 5% de vida por cada ataque',
-    fra: '+100% attaque, blesse le pokémon de 5% hp/s'
-  },
-  COIN_AMULET: {
-    eng: 'Earn 1-3 gold every round.',
-    esp: 'Oportunidad de dejar caer entre 1 y 3 monedas de oro en cada ronda',
-    fra: 'Chance de gagner entre 1 et 3 argent à chaque tour.'
-  },
-  ROCKY_HELMET: {
-    eng: 'The attacker of the wearer takes 4% HP damage per physical hit.',
-    esp: 'Cuando el usuario es atacado, el atacante recibe un 4% de daño máximo de salud.',
-    fra: 'Quand le pokémon est attaqué, l attaquant subit 4% de vie en dommage physique'
-  },
-  SHELL_BELL: {
-    eng: 'Restore 10% of the damage dealt.',
-    esp: '10% de robo de vida en cada ataque',
-    fra: '+10% vol de vie à chaque attaque'
-  },
-  BIG_ROOT: {
-    eng: 'Restore 5% of your HP per hit.',
-    esp: '+ 5% de salud / atacado restaurado',
-    fra: '+ 5% vie / seconde'
-  },
-  APRICOT_BERRY: {
-    eng: '+100% spe def when below 50% health',
-    esp: '+100% de defensa cuando está por debajo del 50% de salud',
-    fra: '+100% de défense spé quand la vie passe en dessous de 50%'
-  },
-  LIECHI_BERRY: {
-    eng: '+100% attack when health below 50%',
-    esp: '+100% de ataque cuando la salud está por debajo del 50%',
-    fra: '+100% d attaque quand la vie passe en dessous de 50%'
-  },
-  GANLON_BERRY: {
-    eng: '+100% def when health below 50%',
-    esp: '+100% def cuando la salud está por debajo del 50%',
-    fra: '+100% de défense quand la vie passe en dessous de 50%'
-  },
-  PETAYA_BERRY: {
-    eng: '+100% attack special when health below 50%',
-    esp: '+100% de ataque especial cuando la salud está por debajo del 50%',
-    fra: '+100% d attaque spéciale quand la vie passe en dessous de 50%'
-  },
-  SALAC_BERRY: {
-    eng: '+100% attack speed when health below 50%',
-    esp: '+100% de velocidad de ataque cuando la salud está por debajo del 50%',
-    fra: '+100% de vitesse d attaque quand la vie passe en dessous de 50%'
-  },
-  ORAN_BERRY: {
-    eng: 'Restore 50% health when below 50% health',
-    esp: 'Restaurar el 50% de la salud cuando está por debajo del 50% de la salud',
-    fra: 'Restaure 50% de la vie quand la vie du pokémon descend en dessous de 50%'
-  },
-  SOFT_SAND: {
-    eng: '+10% atk speed. +50% damage if pokemon has type ground.',
-    esp: '+10% de velocidad de la tinta. +50% de daño si el pokemon tiene el tipo de tierra.',
-    fra: '+10% vitesse d attaque. +50% attaque si type terre.'
-  },
-  MOON_STONE: {
-    eng: '+10% atk speed. +50% damage if type Fairy. Will evolve  Eevee into Sylveon.',
-    esp: '+10% de velocidad. +50% de daño si es del tipo Hada. Convertirá a Eevee en Sylveon.',
-    fra: '+10% vitesse d attaque. +50% attaque si type fée. Fait évoluer Evoli en Nymphali.'
-  },
-  NIGHT_STONE: {
-    eng: '+10% atk speed. +50% damage if type Dark. Will evolve Eevee into Umbreon.',
-    esp: '10% de velocidad. +50% de daño si es del tipo Oscuridad. Convertirá a Eevee en Umbreón',
-    fra: '+10% vitesse d attaque. +50% attaque si type ténèbres. Fait évoluer Evoli en Noctali.'
-  },
-  POISON_BARB: {
-    eng: '+10% atk speed. +50% damage if type poison.',
-    esp: '10% de velocidad. +50% de daño si es veneno.',
-    fra: '+10% vitesse d attaque. +50% attaque si type poison.'
-  },
-  DRAGON_FANG: {
-    eng: '+10% atk speed. +50% damage if type dragon.',
-    esp: '+10% a la velocidad de la tinta. +50% de daño si es un dragón.',
-    fra: '+10% vitesse d attaque. +50% attaque si type dragon.'
-  },
-  THUNDER_STONE: {
-    eng: '+10% atk speed. +50% damage if type electric. Will evolve Eevee into Jolteon.',
-    esp: '+10% a velocidad de corteza". +50% de daño si es de tipo eléctrico. Evolucionará Eevee a Jolteon.',
-    fra: '+10% vitesse d attaque. +50% attaque si type électrique. Fait évoluer Evoli en Voltali.'
-  },
-  METAL_SKIN: {
-    eng: '+10% atk speed. +50% damage if type metal.',
-    esp: '10% a la velocidad de la luz. +50% de daño si es de tipo metálico.',
-    fra: '+10% vitesse d attaque. +50% attaque si type métal.'
-  },
-  METRONOME: {
-    eng: '+5% damage each time the pokemon attack.',
-    esp: '5% de daño cada vez que el pokemon ataca.',
-    fra: '+5% attaque à chaque fois que le pokémon attaque'
-  },
-  WATER_STONE: {
-    eng: '+10% atk speed. +50% damage if type water. Will evolve Eeve into Vaporeon.',
-    esp: '+10% a la velocidad de ataque. +50% de daño si es de agua. Convertirá a Eeve en Vaporeon".',
-    fra: '+10% vitesse d attaque. +50% attaque si type eau. Fait évoluer Evoli en Aquali.'
-  },
-  FIRE_STONE: {
-    eng: '+10% atk speed. +50% damage if type fire. Will evolve Eevee into Flareon',
-    esp: '+10% a la velocidad de ataque. +50% de daño si se escribe "fuego". Convertirá a Eevee en Flareon',
-    fra: '+10% vitesse d attaque. +50% attaque si type feu. Fait évoluer Evoli en Pyroli.'
-  },
-  LEAF_STONE: {
-    eng: '+10% atk speed. +50% damage if type grass. Will evolve Eevee into leafeon ',
-    esp: '+10% a la velocidad de la tinta. +50% de daño si se trata de planta. Evolucionará Eevee en leafeon',
-    fra: '+10% vitesse d attaque. +50% attaque si type feuille. Fait évoluer Evoli en Phylali.'
-  },
-  BLACK_BELT: {
-    eng: '+10% atk speed. +50% damage if type fighting.',
-    esp: '+10% a la velocidad de la tinta. +50% de daño si el tipo es luchador.',
-    fra: '+10% vitesse d attaque. +50% attaque si type combat.'
-  },
-  SILK_SCARF: {
-    eng: '+10% atk speed. +50% damage if type normal.',
-    esp: '+10% de velocidad de corte. +50% de daño si el tipo es normal.',
-    fra: '+10% vitesse d attaque. +50% attaque si type normal.'
-  },
-  DAWN_STONE: {
-    eng: '+10% atk speed. +50% damage if type psychic. Will evolve Eevee into Espeon.',
-    esp: '+10% de velocidad de corte. +50% de daño si es del tipo psíquico. Evolucionará Eevee a Espeon.',
-    fra: '+10% vitesse d attaque. +50% attaque si type psy. Fait évoluer Evoli en Mentali.'
-  },
-  ICY_ROCK: {
-    eng: '10% chance to freeze. +50% damage if type ice. Will evolve Eevee into Glaceon.',
-    esp: '10% de probabilidad de congelarse.+50% de daño si es del tipo hielo. Evolucionará Eevee a Glaceon',
-    fra: '+10% vitesse d attaque. +50% attaque si type glace. Fait évoluer évoli en Givrali.'
-  },
-  RAZOR_FANG: {
-    eng: '+50% Critical Hit damage.',
-    esp: '+50% de daño por golpe crítico',
-    fra: '+50% dégâts des coups critiques'
-  },
-  RAZOR_CLAW: {
-    eng: 'Critical Hits ignore stat changes.',
-    esp: 'Los golpes críticos hacen daño verdadero',
-    fra: 'Les coups critiques font des true dégats'
-  },
-  SCOPE_LENS: {
-    eng: '+50% Critical Hit chance.',
-    esp: '+50% de golpes críticos',
-    fra: '+50% de coups critiques'
-  },
-  REVIVER_SEED: {
-    eng: 'Revives the pokemon',
-    esp: 'Revive al pokémon',
-    fra: 'Fait revivre le pokémon'
-  },
-  ASSAULT_VEST: {
-    eng: '+50% special defense',
-    esp: '+50% de defensa especial',
-    fra: '+50% défense spécial'
-  },
-  BLUE_ORB: {
-    eng: 'Team Aqua strengthens the pokemon s ability',
-    esp: 'El equipo Aqua refuerza la habilidad del pokémon',
-    fra: 'La team Aqua renforce la capacité du pokémon'
-  },
-  RED_ORB: {
-    eng: 'Team Magma strengthens the pokemon s ability',
-    esp: 'El equipo Magma refuerza la habilidad del pokémon',
-    fra: 'La team Magma renforce la capacité du pokémon'
-  },
-  DELTA_ORB: {
-    eng: 'Team Delta strengthens the pokemon s ability',
-    esp: 'El equipo Delta refuerza la habilidad del pokémon',
-    fra: 'La team Delta renforce la capacité du pokémon'
-  },
-  WONDER_BOX: {
-    eng: 'Start the game with 2 random items',
-    esp: 'Comienza el juego con 2 objetos al azar',
-    fra: 'Commence la partie avec 2 items aléatoires'
-  }
 });
 
 const TYPE = Object.freeze({
@@ -1944,7 +1457,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Brulure'
     },
     description: {
-      eng: 'Burn the whole team for 2/4/8 seconds, dealing 5% hp / seconds',
+      eng: 'Burn the whole team for 5/10/20 seconds, dealing 5% hp/ seconds',
       esp: 'Quemar todo el equipo durante 2/4/8 segundos, repartiendo el 5% de hp/segundos',
       fra: 'Brule la cible pour 2/4/8 secondes, lui faisant perdre 5% hp/secondes'
     }
@@ -1956,7 +1469,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Poison'
     },
     description: {
-      eng: 'Poison the target for 5/10/20 seconds, dealing 15% hp/seconds',
+      eng: 'Poison the target for 5/10/20 seconds, dealing 10% hp/seconds',
       esp: 'Envenenar el objetivo durante 5/10/20 segundos, repartiendo 15% hp/segundos',
       fra: 'Empoisonne la cible durant 5/10/20 secondes, faisant 15% hp/secondes'
     }
@@ -2557,40 +2070,6 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }
   }
-});
-
-const TYPE_ITEM = Object.freeze({
-  NORMAL: 'SILK_SCARF',
-  GRASS: 'LEAF_STONE',
-  FIRE: 'FIRE_STONE',
-  WATER: 'WATER_STONE',
-  ELECTRIC: 'THUNDER_STONE',
-  FIGHTING: 'BLACK_BELT',
-  PSYCHIC: 'DAWN_STONE',
-  DARK: 'NIGHT_STONE',
-  METAL: 'METAL_SKIN',
-  GROUND: 'SOFT_SAND',
-  POISON: 'POISON_BARB',
-  DRAGON: 'DRAGON_FANG',
-  FAIRY: 'MOON_STONE',
-  ICE: 'ICY_ROCK'
-});
-
-const ITEM_TYPE = Object.freeze({
-  SILK_SCARF: 'SILK_SCARF',
-  LEAF_STONE: 'LEAF_STONE',
-  FIRE_STONE: 'FIRE_STONE',
-  WATER_STONE: 'WATER_STONE',
-  THUNDER_STONE: 'THUNDER_STONE',
-  BLACK_BELT: 'BLACK_BELT',
-  DAWN_STONE: 'DAWN_STONE',
-  NIGHT_STONE: 'NIGHT_STONE',
-  METAL_SKIN: 'METAL_SKIN',
-  SOFT_SAND: 'SOFT_SAND',
-  POISON_BARB: 'POISON_BARB',
-  DRAGON_FANG: 'DRAGON_FANG',
-  MOON_STONE: 'MOON_STONE',
-  ICY_ROCK: 'ICY_ROCK'
 });
 
 const LAST_BATTLE_RESULT_TRADUCTION = Object.freeze({
@@ -3889,8 +3368,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'victreebel', 'snover', 'abomasnow',
     'mega-abomasnow', 'virizion', 'celebi',
     'shaymin', 'oddish', 'gloom',
-    'vileplume', 'bellossom', 'cradily',
-    'lileep', 'budew', 'roselia',
+    'vileplume', 'bellossom', 'lileep',
+    'cradily', 'budew', 'roselia',
     'roserade', 'sewaddle', 'swadloon',
     'leavanny'
   ],
@@ -3918,9 +3397,9 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'gyarados', 'palkia', 'suicune',
     'kyogre', 'vaporeon', 'carvanha',
     'keldeo', 'manaphy', 'lapras',
-    'primal-Kyogre', 'carracosta', 'kabuto',
-    'kabutops', 'omanyte', 'omastar',
-    'tirtouga', 'tympole', 'palpitoad',
+    'primal-Kyogre', 'tirtouga', 'carracosta',
+    'kabuto', 'kabutops', 'omanyte',
+    'omastar', 'tympole', 'palpitoad',
     'seismitoad'
   ],
   ELECTRIC: [
@@ -3989,8 +3468,8 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'steelix', 'mega-steelix', 'scizor',
     'mega-scizor', 'lucario', 'mega-lucario',
     'dialga', 'registeel', 'cobalion',
-    'jirachi', 'heatran', 'bastiodon',
-    'shieldon', 'honedge', 'doublade',
+    'jirachi', 'heatran', 'shieldon',
+    'bastiodon', 'honedge', 'doublade',
     'aegislash'
   ],
   GROUND: [
@@ -4032,7 +3511,7 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     'latias', 'latios', 'kyurem',
     'reshiram', 'zekrom', 'deino',
     'zweilous', 'hydreigon', 'mega-Rayquaza',
-    'swablu', 'tyrantrum', 'tyrunt',
+    'swablu', 'tyrunt', 'tyrantrum',
     'axew', 'fraxure', 'haxorus',
     'jangmo-o', 'hakamo-o', 'kommo-o',
     'altaria', 'mega-altaria'
@@ -4197,15 +3676,15 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
   FOSSIL: [
     'aerodactyl', 'amaura',
     'aurorus', 'anorith',
-    'archen', 'archeops',
-    'armaldo', 'bastiodon',
-    'carracosta', 'cradily',
-    'cranidos', 'kabuto',
-    'kabutops', 'lileep',
-    'omanyte', 'omastar',
-    'rampardos', 'shieldon',
-    'tirtouga', 'tyrantrum',
-    'tyrunt'
+    'armaldo', 'archen',
+    'archeops', 'shieldon',
+    'bastiodon', 'tirtouga',
+    'carracosta', 'lileep',
+    'cradily', 'cranidos',
+    'rampardos', 'kabuto',
+    'kabutops', 'omanyte',
+    'omastar', 'tyrunt',
+    'tyrantrum'
   ],
   SOUND: [
     'zubat', 'golbat', 'crobat',
@@ -4239,7 +3718,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
       'seedot', 'chikorita',
       'treecko', 'leafeon',
       'bellsprout', 'oddish',
-      'cradily', 'bulbasaur',
+      'lileep', 'bulbasaur',
       'turtwig', 'lotad',
       'budew', 'sewaddle',
       'snover'
@@ -4278,7 +3757,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
       'horsea', 'vaporeon',
       'carvanha', 'kabuto',
       'omanyte', 'lotad',
-      'poliwag', 'carracosta',
+      'poliwag', 'tirtouga',
       'tympole'
     ],
     mythicalPokemons: [
@@ -4349,7 +3828,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
     pokemons: [
       'prinplup', 'magnemite',
       'aron', 'beldum',
-      'bastiodon', 'honedge',
+      'shieldon', 'honedge',
       'onix', 'scizor',
       'lucario'
     ],
@@ -4381,7 +3860,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
       'charmander', 'horsea',
       'vibrava', 'dratini',
       'bagon', 'gible',
-      'deino', 'tyrantrum',
+      'deino', 'tyrunt',
       'axew', 'jangmo-o',
       'swablu'
     ],
@@ -4532,12 +4011,12 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   },
   FOSSIL: {
     pokemons: [
-      'anorith', 'cradily',
+      'anorith', 'lileep',
       'kabuto', 'omanyte',
       'aerodactyl', 'amaura',
-      'archen', 'bastiodon',
-      'carracosta', 'cranidos',
-      'tyrantrum'
+      'archen', 'shieldon',
+      'tirtouga', 'cranidos',
+      'tyrunt'
     ],
     mythicalPokemons: []
   },
@@ -4583,8 +4062,8 @@ const PRECOMPUTED_RARITY_POKEMONS_ALL = {
     'flareon', 'espeon', 'umbreon', 'leafeon', 'sylveon',
     'slowpoke', 'slowbro', 'slowking', 'bellsprout', 'weepinbell',
     'victreebel', 'glaceon', 'sandile', 'krokorok', 'krookodile',
-    'anorith', 'armaldo', 'cradily', 'kabuto', 'kabutops',
-    'lileep', 'omanyte', 'omastar', 'venipede', 'whirlipede',
+    'anorith', 'armaldo', 'lileep', 'cradily', 'kabuto',
+    'kabutops', 'omanyte', 'omastar', 'venipede', 'whirlipede',
     'scolipede', 'pikipek', 'trumbeak', 'toucannon', 'flabebe',
     'floette', 'florges'
   ],
@@ -4602,8 +4081,8 @@ const PRECOMPUTED_RARITY_POKEMONS_ALL = {
     'magmar', 'magmortar', 'vanillite', 'vanillish',
     'vanilluxe', 'deino', 'zweilous', 'hydreigon',
     'solosis', 'duosion', 'reuniclus', 'archen',
-    'archeops', 'bastiodon', 'carracosta', 'cranidos',
-    'rampardos', 'shieldon', 'tirtouga', 'axew',
+    'archeops', 'shieldon', 'bastiodon', 'tirtouga',
+    'carracosta', 'cranidos', 'rampardos', 'axew',
     'fraxure', 'haxorus', 'whismur', 'loudred',
     'exploud'
   ],
@@ -4619,7 +4098,7 @@ const PRECOMPUTED_RARITY_POKEMONS_ALL = {
     'litwick', 'lampent', 'chandelure',
     'snorunt', 'glalie', 'froslass',
     'aerodactyl', 'amaura', 'aurorus',
-    'tyrantrum', 'tyrunt', 'budew',
+    'tyrunt', 'tyrantrum', 'budew',
     'roselia', 'roserade', 'porygon',
     'porygon2', 'porygon-z', 'honedge',
     'doublade', 'aegislash', 'cubone',
@@ -5816,7 +5295,241 @@ const ID_TABLE = {
   95: 'A1BC3D', 175: 'AB2CD4', 255: 'A1B2C3D4'
 };
 
+const BASIC_ITEM = {
+  FOSSIL_STONE: 'FOSSIL_STONE',
+  TWISTED_SPOON: 'TWISTED_SPOON',
+  MYSTIC_WATER: 'MYSTIC_WATER',
+  MAGNET: 'MAGNET',
+  BLACK_GLASSES: 'BLACK_GLASSES',
+  MIRACLE_SEED: 'MIRACLE_SEED',
+  NEVER_MELT_ICE: 'NEVER_MELT_ICE',
+  CHARCOAL: 'CHARCOAL',
+  HEART_SCALE: 'HEART_SCALE'
+};
+
+const ITEM = {
+  FOSSIL_STONE: 'FOSSIL_STONE',
+  TWISTED_SPOON: 'TWISTED_SPOON',
+  MYSTIC_WATER: 'MYSTIC_WATER',
+  MAGNET: 'MAGNET',
+  BLACK_GLASSES: 'BLACK_GLASSES',
+  MIRACLE_SEED: 'MIRACLE_SEED',
+  NEVER_MELT_ICE: 'NEVER_MELT_ICE',
+  CHARCOAL: 'CHARCOAL',
+  HEART_SCALE: 'HEART_SCALE',
+  OLD_AMBER: 'OLD_AMBER',
+  DAWN_STONE: 'DAWN_STONE',
+  WATER_STONE: 'WATER_STONE',
+  THUNDER_STONE: 'THUNDER_STONE',
+  FIRE_STONE: 'FIRE_STONE',
+  MOON_STONE: 'MOON_STONE',
+  DUSK_STONE: 'DUSK_STONE',
+  LEAF_STONE: 'LEAF_STONE',
+  ICY_ROCK: 'ICY_ROCK',
+  CHOICE_SPECS: 'CHOICE_SPECS',
+  SOUL_DEW: 'SOUL_DEW',
+  UPGRADE: 'UPGRADE',
+  REAPER_CLOTH: 'REAPER_CLOTH',
+  POKEMONOMICON: 'POKEMONOMICON',
+  WATER_INCENSE: 'WATER_INCENSE',
+  SHELL_BELL: 'SHELL_BELL',
+  LUCKY_EGG: 'LUCKY_EGG',
+  AQUA_EGG: 'AQUA_EGG',
+  BLUE_ORB: 'BLUE_ORB',
+  ZOOM_LENS: 'ZOOM_LENS',
+  BRIGHT_POWDER: 'BRIGHT_POWDER',
+  DELTA_ORB: 'DELTA_ORB',
+  MANA_SCARF: 'MANA_SCARF',
+  SMOKE_BALL: 'SMOKE_BALL',
+  XRAY_VISION: 'XRAY_VISION',
+  RAZOR_FANG: 'RAZOR_FANG',
+  LEFTOVERS: 'LEFTOVERS',
+  CHOICE_SCARF: 'CHOICE_SCARF',
+  FIRE_GEM: 'FIRE_GEM',
+  DEFENSIVE_RIBBON: 'DEFENSIVE_RIBBON',
+  WONDER_BOX: 'WONDER_BOX',
+  RUNE_PROTECT: 'RUNE_PROTECT',
+  WIDE_LENS: 'WIDE_LENS',
+  RAZOR_CLAW: 'RAZOR_CLAW',
+  FLUFFY_TAIL: 'FLUFFY_TAIL',
+  ORAN_BERRY: 'ORAN_BERRY',
+  SHINY_CHARM: 'SHINY_CHARM',
+  FOCUS_BAND: 'FOCUS_BAND',
+  FLAME_ORB: 'FLAME_ORB',
+  ASSAULT_VEST: 'ASSAULT_VEST',
+  KINGS_ROCK: 'KINGS_ROCK',
+  POKE_DOLL: 'POKE_DOLL',
+  RED_ORB: 'RED_ORB',
+  MAX_REVIVE: 'MAX_REVIVE',
+  ROCKY_HELMET: 'ROCKY_HELMET'
+};
+
+const ITEM_NAME = Object.freeze({
+  FOSSIL_STONE: 'Fossil Stone',
+  TWISTED_SPOON: 'Twisted Spoon',
+  MYSTIC_WATER: 'Mystic Water',
+  MAGNET: 'Magnet',
+  BLACK_GLASSES: 'Black Glasses',
+  MIRACLE_SEED: 'Miracle Seed',
+  NEVER_MELT_ICE: 'Never Melt Ice',
+  CHARCOAL: 'Charcoal',
+  HEART_SCALE: 'Heart Scale',
+  OLD_AMBER: 'Old Amber',
+  DAWN_STONE: 'Dawn Stone',
+  WATER_STONE: 'Water Stone',
+  THUNDER_STONE: 'Thunder Stone',
+  FIRE_STONE: 'Fire Stone',
+  MOON_STONE: 'Moon Stone',
+  DUSK_STONE: 'Dusk Stone',
+  LEAF_STONE: 'Leaf Stone',
+  ICY_ROCK: 'Icy Rock',
+  CHOICE_SPECS: 'Choice Specs',
+  SOUL_DEW: 'Soul Dew',
+  UPGRADE: 'Upgrade',
+  REAPER_CLOTH: 'Reaper Cloth',
+  POKEMONOMICON: 'Pokemonomicon',
+  WATER_INCENSE: 'Water Incense',
+  SHELL_BELL: 'Shell Bell',
+  LUCKY_EGG: 'Lucky Egg',
+  AQUA_EGG: 'Aqua Egg',
+  BLUE_ORB: 'Blue Orb',
+  ZOOM_LENS: 'Zoom Lens',
+  BRIGHT_POWDER: 'Bright Powder',
+  DELTA_ORB: 'Delta Orb',
+  MANA_SCARF: 'Mana Scarf',
+  SMOKE_BALL: 'Smoke Ball',
+  XRAY_VISION: 'XRay Vision',
+  RAZOR_FANG: 'Razor Fang',
+  LEFTOVERS: 'Leftovers',
+  CHOICE_SCARF: 'Choice Scarf',
+  FIRE_GEM: 'Fire Gem',
+  DEFENSIVE_RIBBON: 'Defensive Ribbon',
+  WONDER_BOX: 'Wonder Box',
+  RUNE_PROTECT: 'Rune Protect',
+  WIDE_LENS: 'Wide Lens',
+  RAZOR_CLAW: 'Razor Claw',
+  FLUFFY_TAIL: 'Fluffy Tail',
+  ORAN_BERRY: 'Oran Berry',
+  SHINY_CHARM: 'Shiny Charm',
+  FOCUS_BAND: 'Focus Band',
+  FLAME_ORB: 'Flame Orb',
+  ASSAULT_VEST: 'Assault Vest',
+  KINGS_ROCK: 'Kings Rock',
+  POKE_DOLL: 'Poke Doll',
+  RED_ORB: 'Red Orb',
+  MAX_REVIVE: 'Max Revive',
+  ROCKY_HELMET: 'Rocky Helmet'
+});
+
+const ITEM_DESCRIPTION = Object.freeze({
+  FOSSIL_STONE: 'Give it to a Ditto to obtain a random fossil',
+  TWISTED_SPOON: '+1 spell attack damage',
+  MYSTIC_WATER: '+15 mana',
+  MAGNET: '+10% attack speed',
+  BLACK_GLASSES: '+5% critical hit',
+  MIRACLE_SEED: '+15 health',
+  NEVER_MELT_ICE: '+2 special defense',
+  CHARCOAL: '+1 attack',
+  HEART_SCALE: '+1 defense',
+  OLD_AMBER: 'The holder gains the fossil type',
+  DAWN_STONE: 'The holder gains the psychic type',
+  WATER_STONE: 'The holder gains the water type',
+  THUNDER_STONE: 'The holder gains the electric type',
+  FIRE_STONE: 'The holder gains the fire type',
+  MOON_STONE: 'The holder gains the fairy type',
+  DUSK_STONE: 'The holder gains the dark type',
+  LEAF_STONE: 'The holder gains the grass type',
+  ICY_ROCK: 'The holder gains the ice type',
+  CHOICE_SPECS: 'The holder gains 8 spell damage',
+  SOUL_DEW: 'During combat, the holder gains 3 spell damage every 5 seconds',
+  UPGRADE: 'Attacks grant +6% bonus Attack Speed for the rest of combat',
+  REAPER_CLOTH: 'The holder spells can critically strike (20% chance, 2x damage)',
+  POKEMONOMICON: 'When the holder deals damage with their Ability, they burn and wound the target for 3 seconds',
+  WATER_INCENSE: 'When an ennemy cast an ability, they take incense damage equal to 20% of their max mana',
+  SHELL_BELL: 'The holder spells heal for 40% of the damage dealt',
+  LUCKY_EGG: 'When combat begins, the holder and all allies within 2 hexes in the same row gain 20 shield points',
+  AQUA_EGG: 'The holder gains 50 mana. After casting their ability the holder gains 20 mana',
+  BLUE_ORB: 'The holder gains 10% bonus Attack Speed. Every third attack from the holder unleashes a chain lightning that bounces to 4 enemies, dealing 8 magic damage',
+  ZOOM_LENS: 'The holder gains 4 attack damage and 4 spell damage',
+  BRIGHT_POWDER: 'Every 5 seconds, the holder throws a bright powder within 1 hex, healing them for 18% of their missing health',
+  DELTA_ORB: 'When combat begins, the holder and all allies within 1 hex in the same row gain 3 Ability Power for the rest of combat',
+  MANA_SCARF: 'The holder attacks restore 8 additional mana',
+  SMOKE_BALL: 'Reduce the attack speed of ennemy attackers by 30% for 5 seconds',
+  XRAY_VISION: 'Increase the holders attack range by 1 hex and grants 55% bonus attack speed. The holder attacks can no longer miss.',
+  RAZOR_FANG: 'When the holder inflicts a critical hit, the targets Armor is reduced by 70% for 5 seconds. This effect does not stack.',
+  LEFTOVERS: 'During  the combat, the holder attack heals adjacent allies for 3 health point',
+  CHOICE_SCARF: 'The holder basic attack hit a second adjacent ennemy for 75% of holder damage',
+  FIRE_GEM: 'The holders Abilities and attacks do 20% bonus damage. If the target has more than 200 maximum Health, the bonus increases to 60%.',
+  DEFENSIVE_RIBBON: 'When the holder takes damage, they gain attack damage, 1 defense and 1 special defense. Stacks up to 5 times',
+  WONDER_BOX: 'At the beginning of each battle phase, the holder equips 2 temporary items',
+  RUNE_PROTECT: 'When combat begins, the holder and all allies whithin 1 hex in the same row gain a shield that block the damage and effects of the first ennemy ability',
+  WIDE_LENS: 'The holder gains 20% bonus attack speed. The holder is immune to poison/fire',
+  RAZOR_CLAW: 'The holder gains 75% Critical Strike Chance and 10% Critical Strike Damage',
+  FLUFFY_TAIL: 'When combat begins, every ennemy in the same column have their max mana increased by 30%',
+  ORAN_BERRY: 'Grants 100 bonus hp',
+  SHINY_CHARM: 'When combat begins, every ennemy in the same column falls asleep for 3 seconds',
+  FOCUS_BAND: 'When combat begins, the holder and all allies within 1 hexes in the same row gain +30% Attack Speed for the rest of combat',
+  FLAME_ORB: 'Every 2 seconds, a random ennemy is burned for 8 seconds',
+  ASSAULT_VEST: 'Grants 15 bonus special defense',
+  KINGS_ROCK: 'Physical damage heals the holder for 33% of the damage dealt',
+  POKE_DOLL: 'The holder gains 5 Armor and 5 Magic Resist',
+  RED_ORB: 'The holder gains 8 bonus Attack Damage',
+  MAX_REVIVE: 'Prevents the holder first death',
+  ROCKY_HELMET: 'Grants 10 bonus armor. Negates bonus damage from incoming critical hits.'
+});
+
+const ITEM_RECIPE = {
+  OLD_AMBER: [ITEM.FOSSIL_STONE, ITEM.FOSSIL_STONE],
+  DAWN_STONE: [ITEM.FOSSIL_STONE, ITEM.TWISTED_SPOON],
+  WATER_STONE: [ITEM.FOSSIL_STONE, ITEM.MYSTIC_WATER],
+  THUNDER_STONE: [ITEM.FOSSIL_STONE, ITEM.MAGNET],
+  FIRE_STONE: [ITEM.FOSSIL_STONE, ITEM.CHARCOAL],
+  MOON_STONE: [ITEM.FOSSIL_STONE, ITEM.HEART_SCALE],
+  DUSK_STONE: [ITEM.FOSSIL_STONE, ITEM.BLACK_GLASSES],
+  LEAF_STONE: [ITEM.FOSSIL_STONE, ITEM.MIRACLE_SEED],
+  ICY_ROCK: [ITEM.FOSSIL_STONE, ITEM.NEVER_MELT_ICE],
+  CHOICE_SPECS: [ITEM.TWISTED_SPOON, ITEM.TWISTED_SPOON],
+  SOUL_DEW: [ITEM.TWISTED_SPOON, ITEM.MYSTIC_WATER],
+  UPGRADE: [ITEM.TWISTED_SPOON, ITEM.MAGNET],
+  REAPER_CLOTH: [ITEM.TWISTED_SPOON, ITEM.BLACK_GLASSES],
+  POKEMONOMICON: [ITEM.TWISTED_SPOON, ITEM.MIRACLE_SEED],
+  WATER_INCENSE: [ITEM.TWISTED_SPOON, ITEM.NEVER_MELT_ICE],
+  SHELL_BELL: [ITEM.TWISTED_SPOON, ITEM.CHARCOAL],
+  LUCKY_EGG: [ITEM.TWISTED_SPOON, ITEM.HEART_SCALE],
+  AQUA_EGG: [ITEM.MYSTIC_WATER, ITEM.MYSTIC_WATER],
+  BLUE_ORB: [ITEM.MYSTIC_WATER, ITEM.MAGNET],
+  ZOOM_LENS: [ITEM.MYSTIC_WATER, ITEM.BLACK_GLASSES],
+  BRIGHT_POWDER: [ITEM.MYSTIC_WATER, ITEM.MIRACLE_SEED],
+  DELTA_ORB: [ITEM.MYSTIC_WATER, ITEM.NEVER_MELT_ICE],
+  MANA_SCARF: [ITEM.MYSTIC_WATER, ITEM.CHARCOAL],
+  SMOKE_BALL: [ITEM.MYSTIC_WATER, ITEM.HEART_SCALE],
+  XRAY_VISION: [ITEM.MAGNET, ITEM.MAGNET],
+  RAZOR_FANG: [ITEM.MAGNET, ITEM.BLACK_GLASSES],
+  LEFTOVERS: [ITEM.MAGNET, ITEM.MIRACLE_SEED],
+  CHOICE_SCARF: [ITEM.MAGNET, ITEM.NEVER_MELT_ICE],
+  FIRE_GEM: [ITEM.MAGNET, ITEM.CHARCOAL],
+  DEFENSIVE_RIBBON: [ITEM.MAGNET, ITEM.HEART_SCALE],
+  WONDER_BOX: [ITEM.BLACK_GLASSES, ITEM.BLACK_GLASSES],
+  RUNE_PROTECT: [ITEM.BLACK_GLASSES, ITEM.MIRACLE_SEED],
+  WIDE_LENS: [ITEM.BLACK_GLASSES, ITEM.NEVER_MELT_ICE],
+  RAZOR_CLAW: [ITEM.BLACK_GLASSES, ITEM.CHARCOAL],
+  FLUFFY_TAIL: [ITEM.BLACK_GLASSES, ITEM.HEART_SCALE],
+  ORAN_BERRY: [ITEM.MIRACLE_SEED, ITEM.MIRACLE_SEED],
+  SHINY_CHARM: [ITEM.MIRACLE_SEED, ITEM.NEVER_MELT_ICE],
+  FOCUS_BAND: [ITEM.MIRACLE_SEED, ITEM.CHARCOAL],
+  FLAME_ORB: [ITEM.MIRACLE_SEED, ITEM.HEART_SCALE],
+  ASSAULT_VEST: [ITEM.NEVER_MELT_ICE, ITEM.NEVER_MELT_ICE],
+  KINGS_ROCK: [ITEM.NEVER_MELT_ICE, ITEM.CHARCOAL],
+  POKE_DOLL: [ITEM.NEVER_MELT_ICE, ITEM.HEART_SCALE],
+  RED_ORB: [ITEM.CHARCOAL, ITEM.CHARCOAL],
+  MAX_REVIVE: [ITEM.CHARCOAL, ITEM.HEART_SCALE],
+  ROCKY_HELMET: [ITEM.HEART_SCALE, ITEM.HEART_SCALE]
+};
+
 module.exports = {
+  BASIC_ITEM,
+  ITEM_RECIPE,
+  ITEM,
   ID_TABLE,
   TERRAIN,
   MASK_COORDINATE,
@@ -5837,8 +5550,6 @@ module.exports = {
   TYPE_TRADUCTION,
   WORDS,
   MAP_TYPE,
-  ITEM_TYPE,
-  TYPE_ITEM,
   TYPE,
   RARITY,
   RARITY_HP_COST,

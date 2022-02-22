@@ -1,4 +1,5 @@
 const schema = require('@colyseus/schema');
+const {ITEM} = require('../enum');
 
 class Status extends schema.Schema {
   constructor() {
@@ -12,9 +13,15 @@ class Status extends schema.Schema {
       sleep: false,
       confusion: false,
       wound: false,
-      resurection: false
+      resurection: false,
+      smoke: false,
+      armorReduction: false,
+      runeProtect: false
     });
     this.temporaryShield = false;
+    this.soulDew = false;
+    this.brightPowder = false;
+    this.flameOrb = false;
 
     this.burnCooldown = 0;
     this.silenceCooldown = 0;
@@ -25,10 +32,76 @@ class Status extends schema.Schema {
     this.confusionCooldown = 0;
     this.woundCooldown = 0;
     this.temporaryShieldCooldown = 0;
+    this.soulDewCooldown = 0;
+    this.brightPowderCooldown = 0;
+    this.smokeCooldown = 0;
+    this.armorReductionCooldown = 0;
+    this.flameOrbCooldown = 0;
   }
 
-  triggerBurn(timer) {
-    if (!this.burn) {
+  triggerFlameOrb(timer) {
+    if (!this.flameOrb) {
+      this.flameOrb = true;
+      this.flameOrbCooldown = timer;
+    }
+  }
+
+  updateFlameOrb(dt, pkm, board) {
+    if (this.flameOrbCooldown - dt <= 0) {
+      this.flameOrb = false;
+      const cells = board.getAdjacentCells(pkm.positionX, pkm.positionY);
+      let flameCount = 1;
+      cells.forEach((cell) => {
+        if (cell.value && pkm.team != cell.value.team && flameCount > 0) {
+          cell.value.status.triggerBurn(8000, cell.value);
+          flameCount --;
+        }
+      });
+      if (pkm.items.has(ITEM.FLAME_ORB)) {
+        pkm.status.triggerFlameOrb(2000);
+      }
+    } else {
+      this.flameOrbCooldown = this.flameOrbCooldown - dt;
+    }
+  }
+
+  triggerArmorReduction(timer) {
+    if (!this.armorReduction) {
+      this.armorReduction = true;
+      this.armorReductionCooldown = timer;
+    }
+  }
+
+  updateArmorReduction(dt) {
+    if (this.armorReductionCooldown - dt <= 0) {
+      this.armorReduction = false;
+    } else {
+      this.armorReductionCooldown = this.armorReductionCooldown - dt;
+    }
+  }
+
+  triggerSoulDew(timer) {
+    // console.log('sould dew');
+    if (!this.soulDew) {
+      this.soulDew = true;
+      this.soulDewCooldown = timer;
+    }
+  }
+
+  updateSoulDew(dt, pkm) {
+    if (this.soulDewCooldown - dt <= 0) {
+      this.soulDew = false;
+      pkm.spellDamage += 3;
+      if (pkm.items.has(ITEM.SOUL_DEW)) {
+        this.triggerSoulDew(5000);
+      }
+    } else {
+      this.soulDewCooldown = this.soulDewCooldown - dt;
+    }
+  }
+
+  triggerBurn(timer, pkm) {
+    if (!this.burn && !pkm.items.has(ITEM.WIDE_LENS)) {
       this.burn = true;
       this.burnCooldown = timer;
     }
@@ -57,8 +130,8 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerPoison(timer) {
-    if (!this.poison) {
+  triggerPoison(timer, pkm) {
+    if (!this.poison && !pkm.items.has(ITEM.WIDE_LENS)) {
       this.poison = true;
       this.poisonCooldown = timer;
     }
@@ -162,6 +235,61 @@ class Status extends schema.Schema {
       this.temporaryShieldCooldown = this.temporaryShieldCooldown - dt;
     }
   }
+
+  triggerBrightPowder(timer) {
+    if (!this.brightPowder) {
+      this.brightPowder = true;
+      this.brightPowderCooldown = timer;
+    }
+  }
+
+  updateBrightPowder(dt, pokemon, board) {
+    if (this.brightPowderCooldown - dt <= 0) {
+      this.brightPowder = false;
+      const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+
+      cells.forEach((cell) => {
+        if (cell.value && pokemon.team == cell.value.team) {
+          cell.value.handleHeal(0.18 * pokemon.hp);
+          cell.value.count.brightPowderCount ++;
+        }
+      });
+      pokemon.handleHeal(0.18 * pokemon.hp);
+
+      if (pokemon.items.has(ITEM.BRIGHT_POWDER)) {
+        pokemon.status.triggerBrightPowder(5000);
+        pokemon.count.brightPowderCount ++;
+      }
+    } else {
+      this.brightPowderCooldown = this.brightPowderCooldown - dt;
+    }
+  }
+
+  triggerSmoke(timer, pkm) {
+    if (!this.smoke) {
+      this.smoke = true;
+      pkm.handleAttackSpeed(-30);
+      this.smokeCooldown = timer;
+    }
+  }
+
+  updateSmoke(dt, pkm) {
+    if (this.smokeCooldown - dt <= 0) {
+      this.smoke = false;
+      pkm.handleAttackSpeed(30);
+    } else {
+      this.smokeCooldown = this.smokeCooldown - dt;
+    }
+  }
+
+  triggerRuneProtect() {
+    // console.log('rune pritec');
+    this.runeProtect = true;
+  }
+
+  disableRuneProtect() {
+    this.runeProtect = false;
+  }
 }
 
 schema.defineTypes(Status, {
@@ -173,7 +301,10 @@ schema.defineTypes(Status, {
   sleep: 'boolean',
   confusion: 'boolean',
   wound: 'boolean',
-  resurection: 'boolean'
+  resurection: 'boolean',
+  smoke: 'boolean',
+  armorReduction: 'boolean',
+  runeProtect: 'boolean'
 });
 
 module.exports = Status;

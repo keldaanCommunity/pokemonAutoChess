@@ -1,4 +1,4 @@
-const {STATE_TYPE, EFFECTS, ITEMS, ATTACK_TYPE, CLIMATE, ORIENTATION} = require('../models/enum');
+const {STATE_TYPE, EFFECTS, ATTACK_TYPE, CLIMATE, ORIENTATION, ITEM} = require('../models/enum');
 const PokemonState = require('./pokemon-state');
 
 class AttackingState extends PokemonState {
@@ -32,6 +32,10 @@ class AttackingState extends PokemonState {
     pokemon.targetY = coordinates[1];
     const target = board.getValue(coordinates[0], coordinates[1]);
     if (target && !pokemon.status.sleep && !pokemon.status.freeze) {
+      if (pokemon.items.has(ITEM.UPGRADE)) {
+        pokemon.handleAttackSpeed(6);
+      }
+
       if (climate == CLIMATE.SNOW) {
         let freezeChance = 0;
         if (pokemon.effects.includes(EFFECTS.SNOW)) {
@@ -44,11 +48,6 @@ class AttackingState extends PokemonState {
           target.status.triggerFreeze(2000);
         }
       }
-      if (pokemon.items.count(ITEMS.ICY_ROCK) != 0) {
-        if (Math.random() > 0.9) {
-          target.status.triggerFreeze(2000);
-        }
-      }
       let poisonChance = 0;
       if (pokemon.effects.includes(EFFECTS.POISON_GAS)) {
         poisonChance += 0.1;
@@ -58,7 +57,7 @@ class AttackingState extends PokemonState {
       }
       if (poisonChance != 0) {
         if (Math.random() > poisonChance) {
-          target.status.triggerPoison(2000);
+          target.status.triggerPoison(2000, target);
         }
       }
       if (pokemon.effects.includes(EFFECTS.CURSE) || pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
@@ -77,9 +76,9 @@ class AttackingState extends PokemonState {
       }
       // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
       let damage;
-      let attackType = pokemon.attackType;
+      const attackType = pokemon.attackType;
 
-      if (Math.random() * 100 < pokemon.critChance) {
+      if (Math.random() * 100 < pokemon.critChance && target && target.items.has(ITEM.ROCKY_HELMET)) {
         if (pokemon.effects.includes(EFFECTS.FAIRY_WIND) || pokemon.effects.includes(EFFECTS.STRANGE_STEAM) || pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
           let d = 0;
           if (pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
@@ -118,26 +117,59 @@ class AttackingState extends PokemonState {
         }
         damage = Math.round(pokemon.atk * pokemon.critDamage);
         target.count.crit ++;
-        if (pokemon.items.count(ITEMS.RAZOR_CLAW) != 0) {
-          attackType = ATTACK_TYPE.TRUE;
-        }
       } else {
         damage = pokemon.atk;
       }
 
-      if (target.items.count(ITEMS.ROCKY_HELMET) != 0) {
-        pokemon.handleDamage(Math.ceil(pokemon.hp * 0.04) * target.items.count(ITEMS.ROCKY_HELMET), board, ATTACK_TYPE.PHYSICAL, target);
-      }
-
-      if (pokemon.items.count(ITEMS.LIFE_ORB) != 0) {
-        pokemon.handleDamage(Math.ceil(pokemon.hp * 0.05) * pokemon.items.count(ITEMS.LIFE_ORB), board, ATTACK_TYPE.TRUE, pokemon);
-      }
-
-      if (pokemon.items.count(ITEMS.SHELL_BELL) != 0) {
-        pokemon.handleHeal(Math.ceil(damage / 10) * pokemon.items.count(ITEMS.SHELL_BELL));
-      }
-
       const victim = target.handleDamage(damage, board, attackType, pokemon);
+
+      if (pokemon.items.has(ITEM.BLUE_ORB)) {
+        pokemon.count.staticHolderCount ++;
+        if (pokemon.count.staticHolderCount > 3) {
+          pokemon.count.staticHolderCount = 0;
+          let c = 4;
+          board.forEach((x, y, tg) => {
+            if (tg && pokemon.team != tg.team) {
+              tg.count.staticCount ++;
+              tg.handleDamage(8, board, ATTACK_TYPE.SPECIAL, pokemon);
+              c --;
+            }
+          });
+        }
+      }
+
+      if (target && target.items.has(ITEM.SMOKE_BALL)) {
+        pokemon.status.triggerSmoke(5000, pokemon);
+      }
+
+      if (target && pokemon.items.has(ITEM.RAZOR_FANG)) {
+        target.status.triggerArmorReduction(5000);
+      }
+
+      if (pokemon.items.has(ITEM.CHOICE_SCARF)) {
+        const cells = board.getAdjacentCells(target.positionX, target.positionY);
+        let targetCount = 1;
+        cells.forEach((cell) => {
+          if (cell.value && pokemon.team != cell.value.team && targetCount > 0) {
+            cell.value.handleDamage(Math.ceil(0.75 * damage), board, attackType, pokemon);
+            targetCount --;
+          }
+        });
+      }
+
+      if (pokemon.items.has(ITEM.LEFTOVERS)) {
+        const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+        pokemon.handleHeal(3);
+        cells.forEach((cell) => {
+          if (cell.value && pokemon.team == cell.value.team) {
+            cell.value.handleHeal(3);
+          }
+        });
+      }
+
+      if (pokemon.items.has(ITEM.MANA_SCARF)) {
+        pokemon.setMana(pokemon.mana + 8);
+      }
 
       if (victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)) {
         pokemon.handleHeal(pokemon.hp);

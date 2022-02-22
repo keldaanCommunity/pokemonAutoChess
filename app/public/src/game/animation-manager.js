@@ -157,6 +157,27 @@ export default class AnimationManager {
       frameRate: 3,
       repeat: -1
     });
+
+    this.game.anims.create({
+      key: `smoke`,
+      frames: this.game.anims.generateFrameNames('smoke', {start: 0, end: 9, zeroPad: 3}),
+      frameRate: 3,
+      repeat: -1
+    });
+
+    this.game.anims.create({
+      key: `armorReduction`,
+      frames: this.game.anims.generateFrameNames('armorReduction', {start: 0, end: 1, zeroPad: 3}),
+      frameRate: 3,
+      repeat: -1
+    });
+
+    this.game.anims.create({
+      key: `rune_protect`,
+      frames: this.game.anims.generateFrameNames('rune_protect', {start: 0, end: 9, zeroPad: 3}),
+      frameRate: 6,
+      repeat: -1
+    });
   }
   /*
   createSpecialCellsAnimations() {
@@ -615,6 +636,27 @@ export default class AnimationManager {
       key: `ground-grow`,
       frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'GROUND/cell/'}),
       duration: 800,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: `INCENSE_DAMAGE`,
+      frames: this.game.anims.generateFrameNames('INCENSE_DAMAGE', {start: 0, end: 6, zeroPad: 3}),
+      duration: 500,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: `STATIC`,
+      frames: this.game.anims.generateFrameNames('STATIC', {start: 0, end: 13, zeroPad: 3}),
+      duration: 500,
+      repeat: 0
+    });
+
+    this.game.anims.create({
+      key: `BRIGHT_POWDER`,
+      frames: this.game.anims.generateFrameNames('BRIGHT_POWDER', {start: 0, end: 18, zeroPad: 3}),
+      duration: 1000,
       repeat: 0
     });
   }

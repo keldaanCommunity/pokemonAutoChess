@@ -2,7 +2,6 @@ const colyseus = require('colyseus');
 const LobbyState = require('./states/lobby-state');
 const Mongoose = require('mongoose');
 const Chat = require('../models/mongo-models/chat');
-const Bot = require('../models/mongo-models/bot');
 const UserMetadata = require('../models/mongo-models/user-metadata');
 const LeaderboardInfo = require('../models/colyseus-models/leaderboard-info');
 const schema = require('@colyseus/schema');
@@ -11,7 +10,8 @@ const admin = require('firebase-admin');
 const GameRecord = require('../models/colyseus-models/game-record');
 const {MessageEmbed, WebhookClient} = require('discord.js');
 const PasteBinAPI = require('pastebin-ts');
-const DetailledStatistic = require('../models/mongo-models/detailled-statistic');
+const DetailledStatistic = require('../models/mongo-models/detailled-statistic-v2');
+const BotV2 = require('../models/mongo-models/bot-v2');
 
 const pastebin = new PasteBinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
@@ -53,7 +53,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           }
         }
       });
-      Bot.find({}, {_id: 0}, {sort: {elo: -1}}, (err, bots)=>{
+      BotV2.find({}, {_id: 0}, {sort: {elo: -1}}, (err, bots)=>{
         bots.forEach((bot, i)=>{
           self.bots[bot.avatar] = bot;
           // console.log(bot.avatar, bot.elo);

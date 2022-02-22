@@ -5,11 +5,11 @@ const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
 const UserMetadata = require('../models/mongo-models/user-metadata');
 const BOT = require('../models/mongo-models/bot');
-const {XP_PLACE, XP_TABLE, PKM} = require('../models/enum');
+const {XP_PLACE, XP_TABLE, PKM, BASIC_ITEM} = require('../models/enum');
 const PokemonFactory = require('../models/pokemon-factory');
 const EloRank = require('elo-rank');
 const admin = require('firebase-admin');
-const DetailledStatistic = require('../models/mongo-models/detailled-statistic');
+const DetailledStatistic = require('../models/mongo-models/detailled-statistic-v2');
 
 
 class GameRoom extends colyseus.Room {
@@ -73,7 +73,7 @@ class GameRoom extends colyseus.Room {
             'updateItems': true
           };
           client.send('DragDropFailed', errorInformation);
-          console.log('drag drop error', message);
+          console.log('drag drop error', error);
         }
       }
     });
@@ -214,6 +214,9 @@ class GameRoom extends colyseus.Room {
               } else {
                 usr.exp = usr.exp + player.exp;
               }
+              if(rank == 1){
+                usr.wins += 1;
+              }
 
               if (usr.elo) {
                 const elo = self.computeElo(player, rank, usr.elo);
@@ -257,7 +260,7 @@ class GameRoom extends colyseus.Room {
       if (pokemon.positionY != 0) {
         simplePlayer.pokemons.push({
           name: pokemon.name,
-          items: pokemon.items.getAllItems()
+          items: Array.from(pokemon.items)
         });
       }
     });
@@ -381,6 +384,7 @@ class GameRoom extends colyseus.Room {
   updateEvolution(id) {
     let evolve = false;
     const itemsToAdd = [];
+    const basicItemsToAdd = [];
     const player = this.state.players.get(id);
     player.board.forEach((pokemon, key) => {
       let count = 0;
@@ -416,9 +420,13 @@ class GameRoom extends colyseus.Room {
                   x = pkm.positionX;
                 }
               }
-              const temp =pkm.items.getAllItems();
-              temp.forEach((el)=>{
-                itemsToAdd.push(el);
+
+              pkm.items.forEach((el)=>{
+                if (Object.keys(BASIC_ITEM).includes(el)) {
+                  basicItemsToAdd.push(el);
+                } else {
+                  itemsToAdd.push(el);
+                }
               });
               player.board.delete(id);
               count -= 1;
@@ -428,11 +436,18 @@ class GameRoom extends colyseus.Room {
           for (let i = 0; i < 3; i++) {
             const itemToAdd = itemsToAdd.pop();
             if (itemToAdd) {
-              pokemonEvolved.items.add(itemToAdd);
+              if (pokemonEvolved.items.has(itemToAdd)) {
+                player.items.add(itemToAdd);
+              } else {
+                pokemonEvolved.items.add(itemToAdd);
+              }
             }
           }
           itemsToAdd.forEach( (item) =>{
-            player.stuff.add(item);
+            player.items.add(item);
+          });
+          basicItemsToAdd.forEach( (item)=>{
+            player.items.add(item);
           });
           pokemonEvolved.positionX = x;
           pokemonEvolved.positionY = y;

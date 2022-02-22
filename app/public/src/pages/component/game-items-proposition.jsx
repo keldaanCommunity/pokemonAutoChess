@@ -6,11 +6,11 @@ class GameItemsProposition extends Component{
     render(){
         const style = {
             position:'absolute',
-            top:'20%',
-            left:'20%',
+            top:'30%',
+            left:'15.5%',
             width:'60%',
             display:'flex',
-            justifyContent:'space-evenly',
+            justifyContent:'space-between',
             padding:'10px'
         }
 

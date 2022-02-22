@@ -53,28 +53,26 @@ export default class BattleManager {
     }
   }
 
-  changePokemonItems(playerId, change, pokemon) {
+  addPokemonItem(playerId, value, pokemon) {
     // console.log(change);
     if (this.player.id == playerId) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {
+        if (children[i].id == pokemon.id && !children[i].itemsContainer.findItem(value)) {
+          children[i].itemsContainer.addItem(value);
+          break;
+        }
+      }
+    }
+  }
+
+  removePokemonItem(playerId, value, pokemon) {
+    if (this.player.id == playerId) {
+      const children = this.group.getChildren();
+      for (let i = 0; i < children.length; i++) {
         if (children[i].id == pokemon.id) {
-          if (change.field == 'item0' && change.value == '' && children[i].item0) {
-            children[i].remove(children[i].item0);
-            children[i].item0.destroy();
-          } else if (change.field == 'item0' && change.value != '') {
-            children[i].setItem0(change.value);
-          } else if (change.field == 'item1' && change.value == '' && children[i].item1) {
-            children[i].remove(children[i].item1);
-            children[i].item1.destroy();
-          } else if (change.field == 'item1' && change.value != '') {
-            children[i].setItem1(change.value);
-          } else if (change.field == 'item2' && change.value == '' && children[i].item2) {
-            children[i].remove(children[i].item2);
-            children[i].item2.destroy();
-          } else if (change.field == 'item2' && change.value != '') {
-            children[i].setItem2(change.value);
-          }
+          children[i].itemsContainer.removeItem(value);
+          break;
         }
       }
     }
@@ -139,6 +137,24 @@ export default class BattleManager {
             } else {
               children[i].removeResurection();
             }
+          } else if (change.field == 'smoke') {
+            if (pokemon.status.smoke) {
+              children[i].addSmoke();
+            } else {
+              children[i].removeSmoke();
+            }
+          } else if (change.field == 'armorReduction') {
+            if (pokemon.status.armorReduction) {
+              children[i].addArmorReduction();
+            } else {
+              children[i].removeArmorReduction();
+            }
+          } else if (change.field == 'runeProtect') {
+            if (pokemon.status.runeProtect) {
+              children[i].addRuneProtect();
+            } else {
+              children[i].removeRuneProtect();
+            }
           }
         }
       }
@@ -182,6 +198,18 @@ export default class BattleManager {
           } else if (change.field == 'fairyCritCount') {
             if (change.value != 0) {
               children[i].fairyCritAnimation();
+            }
+          } else if (change.field == 'incenseCount') {
+            if (change.value != 0) {
+              children[i].incenseAnimation();
+            }
+          } else if (change.field == 'brightPowderCount') {
+            if (change.value != 0) {
+              children[i].brightPowderAnimation();
+            }
+          } else if (change.field == 'staticCount') {
+            if (change.value != 0) {
+              children[i].staticAnimation();
             }
           } else if ( change.field == 'attackCount') {
             if (change.value != 0) {
@@ -233,6 +261,18 @@ export default class BattleManager {
             const detail = children[i].getFirst('objType', 'detail');
             if (detail) {
               detail.critChance.setText(pokemon.critChance);
+            }
+          } else if (change.field == 'critDamage') {
+            children[i].critDamage = pokemon.critDamage.toFixed(2);
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
+              detail.critDamage.setText(pokemon.critDamage.toFixed(2));
+            }
+          } else if (change.field == 'spellDamage') {
+            children[i].spellDamage = pokemon.spellDamage;
+            const detail = children[i].getFirst('objType', 'detail');
+            if (detail) {
+              detail.spellDamage.setText(pokemon.spellDamage);
             }
           } else if (change.field == 'atkSpeed') {
             children[i].atkSpeed = pokemon.atkSpeed;

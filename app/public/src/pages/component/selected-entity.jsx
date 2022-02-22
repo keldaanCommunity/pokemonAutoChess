@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ITEMS, PKM, RARITY_COLOR, ITEM_DESCRIPTION, ITEM_NAME } from '../../../../models/enum';
+import { ITEM, PKM, RARITY_COLOR, ITEM_DESCRIPTION, ITEM_NAME } from '../../../../models/enum';
 import PokemonFactory from '../../../../models/pokemon-factory';
 
 class SelectedEntity extends Component {
@@ -22,13 +22,13 @@ class SelectedEntity extends Component {
             imageRendering:'pixelated'
         }
 
-        if(Object.keys(ITEMS).includes(this.props.entity)){
+        if(Object.keys(ITEM).includes(this.props.entity)){
             return <div className='nes-container' style={entityStyle}>
                 <div style={{display:'flex'}}>
-                    <img style={imgStyle} src={'assets/items/' + this.props.entity + '.png'}/>
-                    <h3>{ITEM_NAME[this.props.entity].eng}</h3>
+                    <img style={imgStyle} src={'assets/item/' + this.props.entity + '.png'}/>
+                    <h3>{ITEM_NAME[this.props.entity]}</h3>
                 </div>
-                <p>{ITEM_DESCRIPTION[this.props.entity].eng}</p>
+                <p>{ITEM_DESCRIPTION[this.props.entity]}</p>
         </div>
         }
         else if(Object.values(PKM).includes(this.props.entity)){

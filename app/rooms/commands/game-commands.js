@@ -1,10 +1,9 @@
 const Command = require('@colyseus/command').Command;
-const {STATE, COST, TYPE, ITEMS, XP_PLACE, RARITY, PKM, BATTLE_RESULT, NEUTRAL_STAGE} = require('../../models/enum');
+const {STATE, COST, TYPE, ITEM, XP_PLACE, RARITY, PKM, BATTLE_RESULT, NEUTRAL_STAGE, BASIC_ITEM, ITEM_RECIPE} = require('../../models/enum');
 const Player = require('../../models/colyseus-models/player');
 const PokemonFactory = require('../../models/pokemon-factory');
 const ItemFactory = require('../../models/item-factory');
 const UserMetadata = require('../../models/mongo-models/user-metadata');
-const Items = require('../../models/colyseus-models/items');
 
 class OnShopCommand extends Command {
   execute({id, index}) {
@@ -39,7 +38,7 @@ class OnItemCommand extends Command {
     if (this.state.players.has(playerId)) {
       const player = this.state.players.get(playerId);
       if (player.itemsProposition.includes(id)) {
-        player.stuff.add(id);
+        player.items.add(id);
       }
       while (player.itemsProposition.length > 0) {
         player.itemsProposition.pop();
@@ -125,134 +124,199 @@ class OnDragDropCommand extends Command {
       }
       if (detail.objType == 'item') {
         message.updateBoard = false;
-        message.updateItems = true
+        message.updateItems = true;
 
         const item = detail.id;
-        const player = this.state.players.get(playerId)
+        const player = this.state.players.get(playerId);
 
-        if (!player.stuff.has(item)) {
-          client.send('DragDropFailed', message)
-          return
+        if (!player.items.has(item)) {
+          client.send('DragDropFailed', message);
+          return;
         }
 
         const x = parseInt(detail.x);
         const y = parseInt(detail.y);
 
-        const [pokemon, id] = player.getPokemonAt(x, y)
+        const [pokemon, id] = player.getPokemonAt(x, y);
 
-        // check if full items
-        if(pokemon.items.length >= 3){
+        if (pokemon === null) {
           client.send('DragDropFailed', message);
-          return
+          return;
+        }
+        // check if full items
+        if (pokemon.items.length >= 3) {
+          let itemToCombine;
+          pokemon.items.forEach( (i)=>{
+            if (Object.keys(BASIC_ITEM).includes(i)) {
+              itemToCombine = i;
+            }
+          });
+          if (!itemToCombine) {
+            client.send('DragDropFailed', message);
+            return;
+          }
         }
 
-        //SPECIAL CASES: create a new pokemon on item equip
-        let newItemPokemon = null
-        let equipAfterTransform = true
-        switch(pokemon.name){
+        // SPECIAL CASES: create a new pokemon on item equip
+        let newItemPokemon = null;
+        let equipAfterTransform = true;
+        switch (pokemon.name) {
           case PKM.EEVEE:
-            switch(item){
-              case ITEMS.WATER_STONE:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.VAPOREON)
-                break
-              case ITEMS.FIRE_STONE:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.FLAREON)
-                break
-              case ITEMS.THUNDER_STONE:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.JOLTEON)
-                break
-              case ITEMS.NIGHT_STONE:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.UMBREON)
-                break
-              case ITEMS.MOON_STONE:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.SYLVEON)
-                break
-              case ITEMS.LEAF_STONE:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.LEAFEON)
-                break
-              case ITEMS.DAWN_STONE:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.ESPEON)
-                break
-              case ITEMS.ICY_ROCK:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.GLACEON)
-                break
+            switch (item) {
+              case ITEM.WATER_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.VAPOREON);
+                break;
+              case ITEM.FIRE_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.FLAREON);
+                break;
+              case ITEM.THUNDER_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.JOLTEON);
+                break;
+              case ITEM.DUSK_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.UMBREON);
+                break;
+              case ITEM.MOON_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.SYLVEON);
+                break;
+              case ITEM.LEAF_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.LEAFEON);
+                break;
+              case ITEM.DAWN_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.ESPEON);
+                break;
+              case ITEM.ICY_ROCK:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.GLACEON);
+                break;
             }
-            break
+            break;
           case PKM.DITTO:
-            equipAfterTransform = false
-            switch(item){
-              case ITEMS.DOME_FOSSIL:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.KABUTO)
-                break
-              case ITEMS.HELIX_FOSSIL:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.OMANYTE)
-                break
-              case ITEMS.OLD_AMBER:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.AERODACTYL)
-                break
-              case ITEMS.ROOT_FOSSIL:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.LILEEP)
-                break
-              case ITEMS.CLAW_FOSSIL:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.ANORITH)
-                break
-              case ITEMS.SKULL_FOSSIL:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.CRANIDOS)
-                break
-              case ITEMS.ARMOR_FOSSIL:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.SHIELDON)
-                break
-              case ITEMS.PLUME_FOSSIL:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.ARCHEN)
-                break
-              case ITEMS.COVER_FOSSIL:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.TIRTOUGA)
-                break
-              case ITEMS.JAW_FOSSIL:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.TYRUNT)
-                break
-              case ITEMS.SAIL_FOSSIL:
-                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.AMAURA)
-                break
+            equipAfterTransform = false;
+            switch (item) {
+              case ITEM.FOSSIL_STONE:
+                newItemPokemon = PokemonFactory.transformPokemon(pokemon, PokemonFactory.getRandomFossil(player.board));
+                break;
               default:
                 client.send('DragDropFailed', message);
-                return
+                break;
             }
-            break
+            break;
           case PKM.GROUDON:
-            if(item == ITEMS.RED_ORB){
-              newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.PRIMALGROUDON)
+            if (item == ITEM.RED_ORB) {
+              newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.PRIMALGROUDON);
             }
-            break
+            break;
           case PKM.KYOGRE:
-            if(item == ITEMS.BLUE_ORB){
-              newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.PRIMALKYOGRE)
+            if (item == ITEM.BLUE_ORB) {
+              newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.PRIMALKYOGRE);
             }
-            break
+            break;
           case PKM.RAYQUAZA:
-            if(item == ITEMS.DELTA_ORB){
-              newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.MEGARAYQUAZA)
+            if (item == ITEM.DELTA_ORB) {
+              newItemPokemon = PokemonFactory.transformPokemon(pokemon, PKM.MEGARAYQUAZA);
             }
-            break
+            break;
         }
 
-        if(newItemPokemon){
-          //delete the extra pokemons
+        if (newItemPokemon) {
+          // delete the extra pokemons
           player.board.delete(id);
           player.board.set(newItemPokemon.id, newItemPokemon);
           player.synergies.update(player.board);
           player.effects.update(player.synergies);
           player.boardSize = this.room.getTeamSize(player.board);
-          if(equipAfterTransform){
+          if (equipAfterTransform) {
             newItemPokemon.items.add(item);
           }
-          player.stuff.remove(item);
-          return
+          player.items.delete(item);
+          return;
         }
-        
+
         // regular equip
-        pokemon.items.add(item);
-        player.stuff.remove(item);
+        switch (item) {
+          case ITEM.WATER_STONE:
+            pokemon.types.push(TYPE.WATER);
+            break;
+          case ITEM.FIRE_STONE:
+            pokemon.types.push(TYPE.FIRE);
+            break;
+          case ITEM.THUNDER_STONE:
+            pokemon.types.push(TYPE.ELECTRIC);
+            break;
+          case ITEM.DUSK_STONE:
+            pokemon.types.push(TYPE.DARK);
+            break;
+          case ITEM.MOON_STONE:
+            pokemon.types.push(TYPE.FAIRY);
+            break;
+          case ITEM.LEAF_STONE:
+            pokemon.types.push(TYPE.GRASS);
+            break;
+          case ITEM.DAWN_STONE:
+            pokemon.types.push(TYPE.PSYCHIC);
+            break;
+          case ITEM.ICY_ROCK:
+            pokemon.types.push(TYPE.ICE);
+            break;
+        }
+
+        if (Object.keys(BASIC_ITEM).includes(item)) {
+          let itemToCombine;
+          pokemon.items.forEach( (i)=>{
+            if (Object.keys(BASIC_ITEM).includes(i)) {
+              itemToCombine = i;
+            }
+          });
+          if (itemToCombine) {
+            Object.keys(ITEM_RECIPE).forEach((name) => {
+              const recipe = ITEM_RECIPE[name];
+              if ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine)) {
+                pokemon.items.delete(itemToCombine);
+                player.items.delete(item);
+                pokemon.items.add(name);
+              }
+            });
+          } else {
+            pokemon.items.add(item);
+            player.items.delete(item);
+          }
+        } else {
+          if (pokemon.items.has(item)) {
+            client.send('DragDropFailed', message);
+            return;
+          } else {
+            pokemon.items.add(item);
+            player.items.delete(item);
+          }
+        }
+      }
+      if (detail.objType == 'combine') {
+        message.updateBoard = false;
+        message.updateItems = true;
+
+        const item = detail.id;
+        const player = this.state.players.get(playerId);
+        const itemToCombine = player.items.at(parseInt(detail.y));
+
+        console.log(item, itemToCombine);
+
+        if (!player.items.has(item) || !Object.keys(ITEM).includes(itemToCombine)) {
+          client.send('DragDropFailed', message);
+          return;
+        }
+
+        let crafted = false;
+        Object.keys(ITEM_RECIPE).forEach((name) => {
+          const recipe = ITEM_RECIPE[name];
+          if ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine)) {
+            player.items.delete(itemToCombine);
+            player.items.delete(item);
+            player.items.add(name);
+            crafted = true;
+          }
+        });
+        if (!crafted) {
+          client.send('DragDropFailed', message);
+        }
       }
     }
   }
@@ -273,9 +337,8 @@ class OnSellDropCommand extends Command {
         player.money += COST[pokemon.rarity] * pokemon.stars;
       }
 
-      const items = pokemon.items.getAllItems();
-      items.forEach((it)=>{
-        player.stuff.add(it);
+      pokemon.items.forEach((it)=>{
+        player.items.add(it);
       });
 
       player.board.delete(detail.pokemonId);
@@ -525,14 +588,6 @@ class OnUpdatePhaseCommand extends Command {
         }
         player.money += 5;
         player.experienceManager.addExperience(2);
-
-        player.board.forEach((pokemon, id) => {
-          if (pokemon.positionX != 0) {
-            if (pokemon.items.count(ITEMS.COIN_AMULET) != 0) {
-              player.money += Math.round(Math.random() * 3) * pokemon.items.count(ITEMS.COIN_AMULET);
-            }
-          }
-        });
       }
     });
   }
@@ -566,7 +621,7 @@ class OnUpdatePhaseCommand extends Command {
           });
           // const item = ItemFactory.createRandomItem();
           // const item = ItemFactory.createSpecificItems([ITEMS.BLUE_ORB]);
-          // player.stuff.add(item);
+          player.items.add(ItemFactory.createBasicRandomItem());
         }
         player.opponentName = '';
         player.opponentAvatar = '';
@@ -588,14 +643,10 @@ class OnUpdatePhaseCommand extends Command {
         player.board.forEach((pokemon, key)=>{
           if (pokemon.fossilTimer !== undefined) {
             if (pokemon.fossilTimer == 0) {
-              const itemsToAdd = pokemon.items.getAllItems();
               const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemon.evolution);
-              for (let i = 0; i < 3; i++) {
-                const itemToAdd = itemsToAdd.pop();
-                if (itemToAdd) {
-                  pokemonEvolved.items.add(itemToAdd);
-                }
-              }
+              pokemon.items.forEach((i)=>{
+                pokemonEvolved.items.add(i);
+              });
               pokemonEvolved.positionX = pokemon.positionX;
               pokemonEvolved.positionY = pokemon.positionY;
               player.board.delete(key);

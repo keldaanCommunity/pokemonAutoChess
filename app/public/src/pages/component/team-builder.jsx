@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PKM, ITEMS } from '../../../../models/enum';
+import { PKM, ITEM } from '../../../../models/enum';
 import PokemonFactory from '../../../../models/pokemon-factory';
 import GameSynergies from './game-synergies';
 import SelectedEntity from './selected-entity';
@@ -290,7 +290,7 @@ class TeamBuilder extends Component {
   }
 
   write(x,y){
-    if(Object.keys(ITEMS).includes(this.state.entity)){
+    if(Object.keys(ITEM).includes(this.state.entity)){
       this.writeItem(x,y);
     }
     else if(Object.values(PKM).includes(this.state.entity)){

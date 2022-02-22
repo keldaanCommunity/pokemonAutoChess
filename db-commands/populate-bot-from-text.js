@@ -3,22 +3,22 @@ const Mongoose = require('mongoose');
 const Bot = require('../app/models/mongo-models/bot');
 
 const data = `{
-  "avatar": "tyrantrum",
+  "avatar": "deoxys",
   "author": "D L",
-  "elo": 858,
+  "elo": 1167,
   "steps": [
     {
       "board": [
         {
-          "name": "caterpie",
-          "x": 3,
+          "name": "geodude",
+          "x": 7,
           "y": 2,
           "items": []
         },
         {
-          "name": "weedle",
-          "x": 4,
-          "y": 3,
+          "name": "mareep",
+          "x": 6,
+          "y": 2,
           "items": []
         }
       ],
@@ -27,20 +27,84 @@ const data = `{
     {
       "board": [
         {
-          "name": "weedle",
-          "x": 4,
-          "y": 1,
+          "name": "geodude",
+          "x": 7,
+          "y": 2,
           "items": []
         },
         {
-          "name": "caterpie",
+          "name": "mareep",
+          "x": 6,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "shieldon",
+          "x": 3,
+          "y": 1,
+          "items": []
+        }
+      ],
+      "roundsRequired": 1
+    },
+    {
+      "board": [
+        {
+          "name": "shieldon",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "magnemite",
           "x": 3,
           "y": 1,
           "items": []
         },
         {
-          "name": "anorith",
-          "x": 4,
+          "name": "geodude",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "mareep",
+          "x": 6,
+          "y": 2,
+          "items": []
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "shieldon",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "magnemite",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "flaffy",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "geodude",
+          "x": 7,
           "y": 2,
           "items": []
         }
@@ -50,92 +114,736 @@ const data = `{
     {
       "board": [
         {
-          "name": "kabuto",
-          "x": 5,
-          "y": 3,
-          "items": []
+          "name": "shieldon",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
         },
         {
-          "name": "anorith",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "metapod",
-          "x": 5,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "kakuna",
-          "x": 4,
-          "y": 3,
-          "items": []
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "name": "butterfree",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrunt",
-          "x": 3,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "kabuto",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "anorith",
-          "x": 3,
-          "y": 3,
-          "items": []
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "name": "butterfree",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrunt",
-          "x": 3,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "kabuto",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "cradily",
+          "name": "magnemite",
           "x": 3,
           "y": 1,
           "items": []
         },
         {
-          "name": "anorith",
-          "x": 3,
-          "y": 3,
+          "name": "flaffy",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "graveler",
+          "x": 7,
+          "y": 2,
           "items": []
+        }
+      ],
+      "roundsRequired": 1
+    },
+    {
+      "board": [
+        {
+          "name": "bastiodon",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "magneton",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "flaffy",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "graveler",
+          "x": 7,
+          "y": 2,
+          "items": []
+        }
+      ],
+      "roundsRequired": 1
+    },
+    {
+      "board": [
+        {
+          "name": "bastiodon",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "magneton",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "flaffy",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "graveler",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "duskull",
+          "x": 5,
+          "y": 2,
+          "items": []
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "bastiodon",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "magneton",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "flaffy",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "graveler",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "dusclops",
+          "x": 5,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "cubone",
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "roundsRequired": 1
+    },
+    {
+      "board": [
+        {
+          "name": "magneton",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "flaffy",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "marowak",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "graveler",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "dusclops",
+          "x": 5,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "bastiodon",
+          "x": 4,
+          "y": 2,
+          "items": []
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "magneton",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "magby",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "marowak",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "bastiodon",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "ORAN_BERRY"
+          ]
+        },
+        {
+          "name": "graveler",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "dusclops",
+          "x": 5,
+          "y": 2,
+          "items": []
+        }
+      ],
+      "roundsRequired": 1
+    },
+    {
+      "board": [
+        {
+          "name": "magneton",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "magby",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "marowak",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "honedge",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "ORAN_BERRY"
+          ]
+        },
+        {
+          "name": "graveler",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "registeel",
+          "x": 3,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "dusclops",
+          "x": 5,
+          "y": 2,
+          "items": []
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "registeel",
+          "x": 5,
+          "y": 2,
+          "items": [
+            "METAL_SKIN"
+          ]
+        },
+        {
+          "name": "kadabra",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "magby",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "marowak",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "doublade",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "ORAN_BERRY"
+          ]
+        },
+        {
+          "name": "graveler",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "dusclops",
+          "x": 3,
+          "y": 2
+        }
+      ],
+      "roundsRequired": 3
+    },
+    {
+      "board": [
+        {
+          "name": "registeel",
+          "x": 5,
+          "y": 2,
+          "items": [
+            "METAL_SKIN"
+          ]
+        },
+        {
+          "name": "kadabra",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "riolu",
+          "x": 5,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "magby",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "marowak",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "doublade",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "ORAN_BERRY"
+          ]
+        },
+        {
+          "name": "graveler",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "onix",
+          "x": 3,
+          "y": 2
+        }
+      ],
+      "roundsRequired": 3
+    },
+    {
+      "board": [
+        {
+          "name": "onix",
+          "x": 3,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "registeel",
+          "x": 5,
+          "y": 2,
+          "items": [
+            "METAL_SKIN"
+          ]
+        },
+        {
+          "name": "kadabra",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "magmar",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "marowak",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "doublade",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "ORAN_BERRY"
+          ]
+        },
+        {
+          "name": "meditite",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "riolu",
+          "x": 5,
+          "y": 1,
+          "items": []
+        }
+      ],
+      "roundsRequired": 1
+    },
+    {
+      "board": [
+        {
+          "name": "steelix",
+          "x": 3,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "registeel",
+          "x": 5,
+          "y": 2,
+          "items": [
+            "METAL_SKIN"
+          ]
+        },
+        {
+          "name": "kadabra",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "riolu",
+          "x": 5,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "magmar",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "alolan-marowak",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "doublade",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "ORAN_BERRY"
+          ]
+        },
+        {
+          "name": "meditite",
+          "x": 7,
+          "y": 2,
+          "items": []
+        }
+      ],
+      "roundsRequired": 3
+    },
+    {
+      "board": [
+        {
+          "name": "steelix",
+          "x": 3,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "registeel",
+          "x": 5,
+          "y": 2,
+          "items": [
+            "METAL_SKIN"
+          ]
+        },
+        {
+          "name": "kadabra",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "riolu",
+          "x": 5,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "magmar",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "alolan-marowak",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "doublade",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "ORAN_BERRY"
+          ]
+        },
+        {
+          "name": "meditite",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "deoxys",
+          "x": 0,
+          "y": 2,
+          "items": []
+        }
+      ],
+      "roundsRequired": 3
+    },
+    {
+      "board": [
+        {
+          "name": "steelix",
+          "x": 3,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "registeel",
+          "x": 5,
+          "y": 2,
+          "items": [
+            "METAL_SKIN"
+          ]
+        },
+        {
+          "name": "alakazam",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "lucario",
+          "x": 5,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "magmar",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "alolan-marowak",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "doublade",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "ORAN_BERRY"
+          ]
+        },
+        {
+          "name": "medicham",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "deoxys",
+          "x": 0,
+          "y": 2,
+          "items": [
+            "SHELL_BELL",
+            "SALAC_BERRY"
+          ]
+        }
+      ],
+      "roundsRequired": 2
+    },
+    {
+      "board": [
+        {
+          "name": "steelix",
+          "x": 3,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "registeel",
+          "x": 5,
+          "y": 2,
+          "items": [
+            "METAL_SKIN"
+          ]
+        },
+        {
+          "name": "alakazam",
+          "x": 0,
+          "y": 1,
+          "items": [
+            "RAZOR_CLAW"
+          ]
+        },
+        {
+          "name": "mega-lucario",
+          "x": 5,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "magmar",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "alolan-marowak",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "doublade",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "ORAN_BERRY"
+          ]
+        },
+        {
+          "name": "medicham",
+          "x": 7,
+          "y": 2,
+          "items": []
+        },
+        {
+          "name": "deoxys",
+          "x": 0,
+          "y": 2,
+          "items": [
+            "SHELL_BELL",
+            "SALAC_BERRY"
+          ]
         }
       ],
       "roundsRequired": 4
@@ -143,503 +851,69 @@ const data = `{
     {
       "board": [
         {
-          "name": "butterfree",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrunt",
+          "name": "mega-steelix",
           "x": 3,
           "y": 2,
           "items": []
         },
         {
-          "name": "kabutops",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "cradily",
-          "x": 3,
-          "y": 1,
-          "items": []
-        },
-        {
-          "name": "anorith",
-          "x": 3,
-          "y": 3,
-          "items": []
-        }
-      ],
-      "roundsRequired": 2
-    },
-    {
-      "board": [
-        {
-          "name": "butterfree",
-          "x": 4,
+          "name": "registeel",
+          "x": 5,
           "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrunt",
-          "x": 3,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "kabutops",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "omanyte",
-          "x": 6,
-          "y": 1,
-          "items": []
-        },
-        {
-          "name": "cradily",
-          "x": 3,
-          "y": 1,
-          "items": []
-        },
-        {
-          "name": "armaldo",
-          "x": 3,
-          "y": 3,
-          "items": []
-        }
-      ],
-      "roundsRequired": 2
-    },
-    {
-      "board": [
-        {
-          "name": "butterfree",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrunt",
-          "x": 3,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "kabutops",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "omanyte",
-          "x": 6,
-          "y": 1,
           "items": [
-            "RAZOR_FANG"
+            "METAL_SKIN"
           ]
         },
         {
-          "name": "lotad",
-          "x": 2,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "lileep",
-          "x": 3,
+          "name": "alakazam",
+          "x": 0,
           "y": 1,
-          "items": []
-        },
-        {
-          "name": "armaldo",
-          "x": 3,
-          "y": 3,
-          "items": []
-        }
-      ],
-      "roundsRequired": 2
-    },
-    {
-      "board": [
-        {
-          "name": "butterfree",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrantrum",
-          "x": 3,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "kabutops",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "omanyte",
-          "x": 6,
-          "y": 1,
-          "items": [
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "lotad",
-          "x": 2,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "lileep",
-          "x": 3,
-          "y": 1,
-          "items": []
-        },
-        {
-          "name": "armaldo",
-          "x": 3,
-          "y": 3,
-          "items": []
-        }
-      ],
-      "roundsRequired": 2
-    },
-    {
-      "board": [
-        {
-          "name": "butterfree",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrantrum",
-          "x": 3,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "kabutops",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "armaldo",
-          "x": 3,
-          "y": 3,
-          "items": [
-            "BIG_ROOT"
-          ]
-        },
-        {
-          "name": "omanyte",
-          "x": 6,
-          "y": 1,
-          "items": [
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "lombre",
-          "x": 2,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "lileep",
-          "x": 3,
-          "y": 1,
-          "items": []
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "name": "aerodactyl",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrantrum",
-          "x": 3,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "kabutops",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "armaldo",
-          "x": 3,
-          "y": 3,
-          "items": [
-            "BIG_ROOT"
-          ]
-        },
-        {
-          "name": "omanyte",
-          "x": 6,
-          "y": 1,
-          "items": [
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "lombre",
-          "x": 2,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "lileep",
-          "x": 3,
-          "y": 1,
-          "items": []
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "name": "amaura",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrantrum",
-          "x": 3,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "kabutops",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "armaldo",
-          "x": 3,
-          "y": 3,
-          "items": [
-            "BIG_ROOT"
-          ]
-        },
-        {
-          "name": "omastar",
-          "x": 6,
-          "y": 1,
-          "items": [
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "tirtouga",
-          "x": 2,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "lileep",
-          "x": 3,
-          "y": 1,
-          "items": []
-        }
-      ],
-      "roundsRequired": 2
-    },
-    {
-      "board": [
-        {
-          "name": "dratini",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrantrum",
-          "x": 3,
-          "y": 2,
           "items": [
             "RAZOR_CLAW"
           ]
         },
         {
-          "name": "kabutops",
-          "x": 4,
-          "y": 3,
+          "name": "mega-lucario",
+          "x": 5,
+          "y": 1,
           "items": []
         },
         {
-          "name": "armaldo",
+          "name": "magmar",
           "x": 3,
-          "y": 3,
-          "items": [
-            "BIG_ROOT"
-          ]
+          "y": 1,
+          "items": []
         },
         {
-          "name": "omastar",
+          "name": "alolan-marowak",
           "x": 6,
-          "y": 1,
+          "y": 2,
           "items": [
-            "RAZOR_FANG"
+            "WONDER_BOX"
           ]
         },
         {
-          "name": "tirtouga",
-          "x": 2,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "aurorus",
-          "x": 1,
-          "y": 1,
-          "items": []
-        },
-        {
-          "name": "glalie",
-          "x": 3,
-          "y": 1,
-          "items": []
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "name": "dragonair",
+          "name": "aegislash",
           "x": 4,
           "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrantrum",
-          "x": 3,
-          "y": 2,
           "items": [
-            "RAZOR_CLAW"
+            "ORAN_BERRY"
           ]
         },
         {
-          "name": "kabutops",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "armaldo",
-          "x": 3,
-          "y": 3,
-          "items": [
-            "BIG_ROOT"
-          ]
-        },
-        {
-          "name": "omastar",
-          "x": 6,
-          "y": 1,
-          "items": [
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "tirtouga",
-          "x": 2,
+          "name": "medicham",
+          "x": 7,
           "y": 2,
           "items": []
         },
         {
-          "name": "aurorus",
-          "x": 1,
-          "y": 1,
-          "items": []
-        },
-        {
-          "name": "glalie",
-          "x": 3,
-          "y": 1,
-          "items": []
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "name": "dragonair",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "tyrantrum",
-          "x": 3,
+          "name": "deoxys",
+          "x": 0,
           "y": 2,
           "items": [
-            "RAZOR_CLAW"
+            "SHELL_BELL",
+            "SALAC_BERRY"
           ]
-        },
-        {
-          "name": "kabutops",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "aurorus",
-          "x": 3,
-          "y": 3,
-          "items": [
-            "BIG_ROOT"
-          ]
-        },
-        {
-          "name": "omastar",
-          "x": 6,
-          "y": 1,
-          "items": [
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "carracosta",
-          "x": 2,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "froslass",
-          "x": 1,
-          "y": 1,
-          "items": []
-        },
-        {
-          "name": "shieldon",
-          "x": 3,
-          "y": 1,
-          "items": []
         }
       ],
       "roundsRequired": 2
@@ -647,262 +921,72 @@ const data = `{
     {
       "board": [
         {
-          "name": "dragonair",
-          "x": 4,
+          "name": "mega-steelix",
+          "x": 3,
           "y": 2,
           "items": []
         },
         {
-          "name": "tyrantrum",
-          "x": 3,
+          "name": "registeel",
+          "x": 5,
           "y": 2,
+          "items": [
+            "METAL_SKIN"
+          ]
+        },
+        {
+          "name": "alakazam",
+          "x": 0,
+          "y": 1,
           "items": [
             "RAZOR_CLAW"
           ]
         },
         {
-          "name": "kabutops",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "aurorus",
-          "x": 3,
-          "y": 3,
-          "items": [
-            "BIG_ROOT"
-          ]
-        },
-        {
-          "name": "omastar",
-          "x": 6,
-          "y": 1,
-          "items": [
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "carracosta",
-          "x": 2,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "froslass",
-          "x": 1,
-          "y": 1,
-          "items": []
-        },
-        {
-          "name": "dialga",
+          "name": "mega-lucario",
           "x": 5,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "magmortar",
+          "x": 3,
+          "y": 1,
+          "items": []
+        },
+        {
+          "name": "alolan-marowak",
+          "x": 6,
+          "y": 2,
+          "items": [
+            "WONDER_BOX"
+          ]
+        },
+        {
+          "name": "aegislash",
+          "x": 4,
+          "y": 2,
+          "items": [
+            "ORAN_BERRY"
+          ]
+        },
+        {
+          "name": "mega-medicham",
+          "x": 7,
           "y": 2,
           "items": []
         },
         {
-          "name": "shieldon",
-          "x": 1,
+          "name": "deoxys",
+          "x": 0,
           "y": 2,
-          "items": []
+          "items": [
+            "SHELL_BELL",
+            "SALAC_BERRY"
+          ]
         }
       ],
-      "roundsRequired": 4
-    },
-    {
-      "board": [
-        {
-          "name": "carracosta",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "bastiodon",
-          "x": 3,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "dragonair",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "aurorus",
-          "x": 3,
-          "y": 3,
-          "items": [
-            "BIG_ROOT"
-          ]
-        },
-        {
-          "name": "omastar",
-          "x": 6,
-          "y": 1,
-          "items": [
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "tyrantrum",
-          "x": 2,
-          "y": 2,
-          "items": [
-            "RAZOR_CLAW",
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "archeops",
-          "x": 1,
-          "y": 1,
-          "items": []
-        },
-        {
-          "name": "dialga",
-          "x": 5,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "shelgon",
-          "x": 5,
-          "y": 3
-        }
-      ],
-      "roundsRequired": 2
-    },
-    {
-      "board": [
-        {
-          "name": "aerodactyl",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "bastiodon",
-          "x": 3,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "dragonair",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "aurorus",
-          "x": 3,
-          "y": 3,
-          "items": [
-            "BIG_ROOT"
-          ]
-        },
-        {
-          "name": "omastar",
-          "x": 6,
-          "y": 1,
-          "items": [
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "tyrantrum",
-          "x": 2,
-          "y": 2,
-          "items": [
-            "RAZOR_CLAW",
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "archeops",
-          "x": 1,
-          "y": 1,
-          "items": []
-        },
-        {
-          "name": "dialga",
-          "x": 5,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "shelgon",
-          "x": 5,
-          "y": 3
-        }
-      ],
-      "roundsRequired": 3
-    },
-    {
-      "board": [
-        {
-          "name": "aerodactyl",
-          "x": 4,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "bastiodon",
-          "x": 3,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "dragonite",
-          "x": 4,
-          "y": 3,
-          "items": []
-        },
-        {
-          "name": "aurorus",
-          "x": 3,
-          "y": 3,
-          "items": [
-            "BIG_ROOT"
-          ]
-        },
-        {
-          "name": "omastar",
-          "x": 6,
-          "y": 1,
-          "items": [
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "tyrantrum",
-          "x": 2,
-          "y": 2,
-          "items": [
-            "RAZOR_CLAW",
-            "RAZOR_FANG"
-          ]
-        },
-        {
-          "name": "archeops",
-          "x": 1,
-          "y": 1,
-          "items": []
-        },
-        {
-          "name": "dialga",
-          "x": 5,
-          "y": 2,
-          "items": []
-        },
-        {
-          "name": "salamence",
-          "x": 5,
-          "y": 3
-        }
-      ],
-      "roundsRequired": 3
+      "roundsRequired": 5
     }
   ]
 }`;
