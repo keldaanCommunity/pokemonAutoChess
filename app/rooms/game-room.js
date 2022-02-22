@@ -214,7 +214,7 @@ class GameRoom extends colyseus.Room {
               } else {
                 usr.exp = usr.exp + player.exp;
               }
-              if(rank == 1){
+              if (rank == 1) {
                 usr.wins += 1;
               }
 

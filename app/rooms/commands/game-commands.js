@@ -18,19 +18,21 @@ class OnShopCommand extends Command {
           player.money -= pokemon.cost;
           if (pokemon.name == PKM.CASTFORM) {
             if (player.synergies.FIRE > 0 || player.synergies.WATER > 0 || player.synergies.ICE) {
-                let rankArray = [{s:TYPE.FIRE, v:player.synergies.FIRE}, {s:TYPE.WATER, v:player.synergies.WATER}, {s:TYPE.ICE, v:player.synergies.ICE}];
-                rankArray.sort((a,b)=>{return b.v -a.v});
-                switch(rankArray[0].s){
-                    case TYPE.FIRE:
-                        pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMSUN);
-                        break;
-                    case TYPE.WATER:
-                        pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMRAIN);
-                        break;
-                    case TYPE.ICE:
-                        pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMHAIL);
-                        break;
-                }
+              const rankArray = [{s: TYPE.FIRE, v: player.synergies.FIRE}, {s: TYPE.WATER, v: player.synergies.WATER}, {s: TYPE.ICE, v: player.synergies.ICE}];
+              rankArray.sort((a, b)=>{
+                return b.v -a.v;
+              });
+              switch (rankArray[0].s) {
+                case TYPE.FIRE:
+                  pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMSUN);
+                  break;
+                case TYPE.WATER:
+                  pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMRAIN);
+                  break;
+                case TYPE.ICE:
+                  pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMHAIL);
+                  break;
+              }
             }
           }
           pokemon.positionX = this.room.getFirstAvailablePositionInBoard(player.id);
@@ -529,28 +531,28 @@ class OnUpdatePhaseCommand extends Command {
   }
 
   rankPlayers() {
-    const rankArray = []
+    const rankArray = [];
     this.state.players.forEach((player, key) => {
-      if(!player.alive){
-        return
+      if (!player.alive) {
+        return;
       }
 
       rankArray.push({
-        id: player.id, 
+        id: player.id,
         life: player.life,
         level: player.experienceManager.level
       });
     });
 
     const sortPlayers = (a, b) => {
-      let diff = b.life - a.life
-      if(diff == 0){
-        diff = b.level - a.level
+      let diff = b.life - a.life;
+      if (diff == 0) {
+        diff = b.level - a.level;
       }
-      return diff
-    }
+      return diff;
+    };
 
-    rankArray.sort(sortPlayers)
+    rankArray.sort(sortPlayers);
 
     rankArray.forEach((rankPlayer, index)=>{
       this.state.players.get(rankPlayer.id).rank = index + 1;
@@ -558,40 +560,37 @@ class OnUpdatePhaseCommand extends Command {
   }
 
   computeLife() {
-    const isPVE = this.checkForPVE()
+    const isPVE = this.checkForPVE();
     this.state.players.forEach((player, key) => {
-      if(player.alive){
-        const currentResult = player.getCurrentBattleResult()
+      if (player.alive) {
+        const currentResult = player.getCurrentBattleResult();
 
-        if(currentResult == BATTLE_RESULT.DEFEAT || currentResult == BATTLE_RESULT.DRAW){
-          player.life = player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel)
+        if (currentResult == BATTLE_RESULT.DEFEAT || currentResult == BATTLE_RESULT.DRAW) {
+          player.life = player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel);
         }
         player.addBattleResult(player.opponentName, currentResult, player.opponentAvatar, isPVE);
       }
     });
-
   }
 
   computeStreak() {
-    if(this.checkForPVE()){
-      return
+    if (this.checkForPVE()) {
+      return;
     }
-    
-    this.state.players.forEach((player, key) => {
-      if(!player.alive){
-        return
-      }
-      const currentResult = player.getCurrentBattleResult()
-      const lastPlayerResult = player.getLastPlayerBattleResult()
 
-      if(currentResult == BATTLE_RESULT.DRAW || currentResult != lastPlayerResult){
-        player.streak = 0
+    this.state.players.forEach((player, key) => {
+      if (!player.alive) {
+        return;
       }
-      else{
+      const currentResult = player.getCurrentBattleResult();
+      const lastPlayerResult = player.getLastPlayerBattleResult();
+
+      if (currentResult == BATTLE_RESULT.DRAW || currentResult != lastPlayerResult) {
+        player.streak = 0;
+      } else {
         player.streak = Math.min(player.streak + 1, 5);
       }
-
-    })
+    });
   }
 
   computeIncome() {
@@ -612,7 +611,7 @@ class OnUpdatePhaseCommand extends Command {
   checkDeath() {
     this.state.players.forEach((player, key) => {
       if (player.life <= 0) {
-        player.life = 0
+        player.life = 0;
         player.alive = false;
       }
     });
@@ -622,7 +621,7 @@ class OnUpdatePhaseCommand extends Command {
     this.state.phase = STATE.PICK;
     this.state.time = process.env.MODE == 'dev' ? 20000 : 30000;
 
-    const isPVE = this.checkForPVE()
+    const isPVE = this.checkForPVE();
 
     this.state.players.forEach((player, key) => {
       player.simulation.stop();
@@ -716,7 +715,7 @@ class OnUpdatePhaseCommand extends Command {
   }
 
   checkForPVE() {
-    return (this.getPVEIndex(this.state.stageLevel) >= 0)
+    return (this.getPVEIndex(this.state.stageLevel) >= 0);
   }
 
   initializeFightingPhase() {
