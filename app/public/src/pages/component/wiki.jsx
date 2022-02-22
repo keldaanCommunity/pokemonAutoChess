@@ -5,6 +5,7 @@ import WikiContent from './wiki-content';
 import WikiItems from './wiki-items';
 import WikiTypes from './wiki-types';
 import WikiFaq from './wiki-faq';
+import WikiItemsCheatSheet from './wiki-items-cheat-sheet';
 
 class Wiki extends Component{
 
@@ -17,6 +18,7 @@ class Wiki extends Component{
                     <Tab key='title-faq'>FAQ</Tab>
                     <Tab key='title-pokemon'>POKEMONS</Tab>
                     <Tab key='title-items'>ITEMS</Tab>
+                    <Tab key='title-items-cheatsheet'>ITEMS CHEATSHEET</Tab>
                     <Tab key='title-types'>SYNERGIES</Tab>
                 </TabList>
 
@@ -28,6 +30,9 @@ class Wiki extends Component{
                 </TabPanel>
                 <TabPanel key='items'>
                     <WikiItems/>
+                </TabPanel>
+                <TabPanel key='items-cheatsheet'>
+                    <WikiItemsCheatSheet/>
                 </TabPanel>
                 <TabPanel key='types'>
                     <WikiTypes/>
