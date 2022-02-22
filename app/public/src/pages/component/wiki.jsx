@@ -18,7 +18,6 @@ class Wiki extends Component{
                     <Tab key='title-faq'>FAQ</Tab>
                     <Tab key='title-pokemon'>POKEMONS</Tab>
                     <Tab key='title-items'>ITEMS</Tab>
-                    <Tab key='title-items-cheatsheet'>ITEMS CHEATSHEET</Tab>
                     <Tab key='title-types'>SYNERGIES</Tab>
                 </TabList>
 
@@ -29,10 +28,7 @@ class Wiki extends Component{
                     <WikiContent/>
                 </TabPanel>
                 <TabPanel key='items'>
-                    <WikiItems/>
-                </TabPanel>
-                <TabPanel key='items-cheatsheet'>
-                    <WikiItemsCheatSheet/>
+                <WikiItemsCheatSheet/>
                 </TabPanel>
                 <TabPanel key='types'>
                     <WikiTypes/>
