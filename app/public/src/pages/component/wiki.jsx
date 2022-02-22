@@ -4,6 +4,7 @@ import WikiButton from './wiki-button';
 import WikiContent from './wiki-content';
 import WikiItems from './wiki-items';
 import WikiTypes from './wiki-types';
+import WikiFaq from './wiki-faq';
 
 class Wiki extends Component{
 
@@ -13,11 +14,15 @@ class Wiki extends Component{
             <div className="nes-container" style={{backgroundColor:'white',opacity:0.9,margin:'10px'}}>
             <Tabs>
                 <TabList>
+                    <Tab key='title-faq'>FAQ</Tab>
                     <Tab key='title-pokemon'>POKEMONS</Tab>
                     <Tab key='title-items'>ITEMS</Tab>
                     <Tab key='title-types'>SYNERGIES</Tab>
                 </TabList>
 
+                <TabPanel key='faq'>
+                    <WikiFaq/>
+                </TabPanel>
                 <TabPanel key='pokemon'>
                     <WikiContent/>
                 </TabPanel>

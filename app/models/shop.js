@@ -51,7 +51,7 @@ class Shop {
     for (let i = 0; i < 6; i++) {
       let pokemon = this.pickPokemon(player);
       const seed = Math.random();
-      if (seed > 0.993) {
+      if (seed > 0.994) {
         pokemon = PKM.DITTO;
       }
       player.shop[i] = pokemon;
