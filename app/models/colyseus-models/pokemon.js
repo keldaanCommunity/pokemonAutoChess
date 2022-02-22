@@ -1833,27 +1833,27 @@ class Darkrai extends Pokemon {
 }
 
 class Volcarona extends Pokemon {
-    constructor() {
-      super('PowerCrystal', PKM.VOLCARONA, 'pyrax', [TYPE.FIRE, TYPE.BUG], RARITY.MYTHICAL, 'february', 637, '', 200, 20, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.FIRE_BLAST);
-    }
+  constructor() {
+    super('PowerCrystal', PKM.VOLCARONA, 'pyrax', [TYPE.FIRE, TYPE.BUG], RARITY.MYTHICAL, 'february', 637, '', 200, 20, 3, 3, 3, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.FIRE_BLAST);
   }
+}
 
 class Castform extends Pokemon {
-    constructor() {
-        super('Nintendo', PKM.CASTFORM, 'morphéo', [TYPE.NORMAL, TYPE.GHOST], RARITY.MYTHICAL, 'castform', 351, '', 200, 20, 3, 3, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 80, SPECIAL_SKILL.NASTY_PLOT);
-    }
+  constructor() {
+    super('Nintendo', PKM.CASTFORM, 'morphéo', [TYPE.NORMAL, TYPE.GHOST], RARITY.MYTHICAL, 'castform', 351, '', 200, 20, 3, 3, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 80, SPECIAL_SKILL.NASTY_PLOT);
+  }
 }
 
 class CastformSun extends Pokemon {
-    constructor() {
-        super('Nintendo', PKM.CASTFORMSUN, 'morphéo-soleil', [TYPE.NORMAL, TYPE.GHOST, TYPE.FIRE], RARITY.MYTHICAL, 'castform', 3510, '', 200, 20, 3, 3, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 2, 80, SPECIAL_SKILL.FIRE_BLAST);
-    }
+  constructor() {
+    super('Nintendo', PKM.CASTFORMSUN, 'morphéo-soleil', [TYPE.NORMAL, TYPE.GHOST, TYPE.FIRE], RARITY.MYTHICAL, 'castform', 3510, '', 200, 20, 3, 3, 2, 'DRAGON/range', ATTACK_TYPE.SPECIAL, 2, 80, SPECIAL_SKILL.FIRE_BLAST);
+  }
 }
 
 class CastformRain extends Pokemon {
-    constructor() {
-        super('Nintendo', PKM.CASTFORMRAIN, 'morphéo-pluie', [TYPE.NORMAL, TYPE.GHOST, TYPE.WATER], RARITY.MYTHICAL, 'castform', 3511, '', 200, 20, 3, 3, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 80, SPECIAL_SKILL.SOAK);
-    }
+  constructor() {
+    super('Nintendo', PKM.CASTFORMRAIN, 'morphéo-pluie', [TYPE.NORMAL, TYPE.GHOST, TYPE.WATER], RARITY.MYTHICAL, 'castform', 3511, '', 200, 20, 3, 3, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 80, SPECIAL_SKILL.SOAK);
+  }
 }
 
 class CastformHail extends Pokemon {

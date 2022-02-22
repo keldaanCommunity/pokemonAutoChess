@@ -1837,13 +1837,13 @@ class PokemonFactory {
       case PKM.STOUTLAND:
         return new Pokemon.Stoutland();
       case PKM.CASTFORM:
-          return new Pokemon.Castform();
+        return new Pokemon.Castform();
       case PKM.CASTFORMSUN:
-          return new Pokemon.CastformSun();
+        return new Pokemon.CastformSun();
       case PKM.CASTFORMRAIN:
-          return new Pokemon.CastformRain();
+        return new Pokemon.CastformRain();
       case PKM.CASTFORMHAIL:
-          return new Pokemon.CastformHail();
+        return new Pokemon.CastformHail();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();

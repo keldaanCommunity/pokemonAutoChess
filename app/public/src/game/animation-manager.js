@@ -88,9 +88,9 @@ export default class AnimationManager {
       this.createSleepAnimations('sound', num);
     });
 
-    [351,3510,3511,3512].forEach((num) => {
-        this.createAnimations(num, 'castform', true);
-        this.createSleepAnimations('castform', num);
+    [351, 3510, 3511, 3512].forEach((num) => {
+      this.createAnimations(num, 'castform', true);
+      this.createSleepAnimations('castform', num);
     });
 
     this.createAttacksAnimations();

@@ -9,7 +9,7 @@ const Schema = schema.Schema;
 const MapSchema = schema.MapSchema;
 const ArraySchema = schema.ArraySchema;
 const CollectionSchema = schema.CollectionSchema;
-const { BATTLE_RESULT } = require('../enum');
+const {BATTLE_RESULT} = require('../enum');
 
 class Player extends Schema {
   constructor(id, name, elo, avatar, isBot, rank, tileset) {
@@ -45,14 +45,13 @@ class Player extends Schema {
     });
   }
 
-  getCurrentBattleResult(){
-    if(this.simulation.blueTeam.size == 0){
-      return BATTLE_RESULT.DEFEAT
+  getCurrentBattleResult() {
+    if (this.simulation.blueTeam.size == 0) {
+      return BATTLE_RESULT.DEFEAT;
+    } else if (this.simulation.redTeam.size == 0) {
+      return BATTLE_RESULT.WIN;
     }
-    else if(this.simulation.redTeam.size == 0){
-      return BATTLE_RESULT.WIN
-    }
-    return BATTLE_RESULT.DRAW
+    return BATTLE_RESULT.DRAW;
   }
 
   addBattleResult(name, result, avatar, isPVE) {
@@ -71,15 +70,13 @@ class Player extends Schema {
   }
 
   getLastPlayerBattleResult() {
-
-
-    for(let i = this.history.length - 1; i >= 0; i--){
-      if(!this.history[i].isPVE){
-        return this.history[i].result
+    for (let i = this.history.length - 1; i >= 0; i--) {
+      if (!this.history[i].isPVE) {
+        return this.history[i].result;
       }
     }
 
-    return ''
+    return '';
   }
 
   getPokemonAt(x, y) {

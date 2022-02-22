@@ -10,7 +10,6 @@
     }],
     "comma-dangle": ["error", "never"],
     "guard-for-in": "off",
-    "linebreak-style": ["error", "windows"],
     // "max-len": ["warn", {
     //   "code": 160,
     //   "tabWidth": 2,
