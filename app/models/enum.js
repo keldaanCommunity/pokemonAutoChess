@@ -505,7 +505,11 @@ const PKM = Object.freeze({
   SABLEYE: 'sableye',
   SUDOWOODO: 'sudowoodo',
   EKANS: 'ekans',
-  ARBOK: 'arbok'
+  ARBOK: 'arbok',
+  CASTFORM: 'castform',
+  CASTFORMSUN: 'castform-sun',
+  CASTFORMRAIN: 'castform-rain',
+  CASTFORMHAIL: 'castform-hail'
 });
 
 const WORDS = Object.freeze({

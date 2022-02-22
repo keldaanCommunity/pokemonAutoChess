@@ -129,6 +129,7 @@ export default class GameScene extends Scene {
     this.load.multiatlas('UNCOMMON2', '/assets/pokemons/uncommon/uncommon2.json', '/assets/pokemons/uncommon');
     this.load.multiatlas('LEGENDARY', '/assets/pokemons/legendary/legendary.json', '/assets/pokemons/legendary');
     this.load.multiatlas('sound', 'assets/pokemons/sound/sound.json', '/assets/pokemons/sound');
+    this.load.multiatlas('castform', 'assets/pokemons/castform/castform.json', '/assets/pokemons/castform');
     this.load.multiatlas('attacks', '/assets/attacks/attacks.json', '/assets/attacks');
     this.load.multiatlas('specials', '/assets/attacks/specials.json', '/assets/attacks');
     this.load.multiatlas('june', '/assets/attacks/june.json', '/assets/attacks');

@@ -1110,6 +1110,14 @@ class PokemonFactory {
         return PKM.LILLIPUP;
       case PKM.STOUTLAND:
         return PKM.LILLIPUP;
+      case PKM.CASTFORM:
+        return PKM.CASTFORM;
+      case PKM.CASTFORMSUN:
+        return PKM.CASTFORMSUN;
+      case PKM.CASTFORMRAIN:
+        return PKM.CASTFORMRAIN;
+      case PKM.CASTFORMHAIL:
+        return PKM.CASTFORMHAIL;
       default:
         console.log(`No pokemon with name "${name}" found`);
         break;
@@ -1828,6 +1836,14 @@ class PokemonFactory {
         return new Pokemon.Herdier();
       case PKM.STOUTLAND:
         return new Pokemon.Stoutland();
+      case PKM.CASTFORM:
+          return new Pokemon.Castform();
+      case PKM.CASTFORMSUN:
+          return new Pokemon.CastformSun();
+      case PKM.CASTFORMRAIN:
+          return new Pokemon.CastformRain();
+      case PKM.CASTFORMHAIL:
+          return new Pokemon.CastformHail();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Pokemon.Magikarp();
