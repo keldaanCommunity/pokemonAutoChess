@@ -214,6 +214,9 @@ class GameRoom extends colyseus.Room {
               } else {
                 usr.exp = usr.exp + player.exp;
               }
+              if(rank == 1){
+                usr.wins += 1;
+              }
 
               if (usr.elo) {
                 const elo = self.computeElo(player, rank, usr.elo);
