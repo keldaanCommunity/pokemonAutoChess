@@ -307,6 +307,9 @@ class OnDragDropCommand extends Command {
             player.items.delete(item);
           }
         }
+
+        player.synergies.update(player.board);
+        player.effects.update(player.synergies);
       }
       if (detail.objType == 'combine') {
         message.updateBoard = false;

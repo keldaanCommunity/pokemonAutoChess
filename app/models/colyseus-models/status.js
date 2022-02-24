@@ -23,6 +23,8 @@ class Status extends schema.Schema {
     this.brightPowder = false;
     this.flameOrb = false;
 
+    this.burnOrigin = undefined;
+    this.poisonOrigin = undefined;
     this.burnCooldown = 0;
     this.silenceCooldown = 0;
     this.poisonCooldown = 0;
@@ -53,7 +55,7 @@ class Status extends schema.Schema {
       let flameCount = 1;
       cells.forEach((cell) => {
         if (cell.value && pkm.team != cell.value.team && flameCount > 0) {
-          cell.value.status.triggerBurn(8000, cell.value);
+          cell.value.status.triggerBurn(8000, cell.value, pkm);
           flameCount --;
         }
       });
@@ -100,16 +102,20 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerBurn(timer, pkm) {
+  triggerBurn(timer, pkm, origin) {
     if (!this.burn && !pkm.items.has(ITEM.WIDE_LENS)) {
       this.burn = true;
       this.burnCooldown = timer;
+      if(origin){
+        this.burnOrigin = origin;
+      }
     }
   }
 
   updateBurn(dt) {
     if (this.burnCooldown - dt <= 0) {
       this.burn = false;
+      this.burnOrigin = undefined;
     } else {
       this.burnCooldown = this.burnCooldown - dt;
     }
@@ -130,16 +136,20 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerPoison(timer, pkm) {
+  triggerPoison(timer, pkm, origin) {
     if (!this.poison && !pkm.items.has(ITEM.WIDE_LENS)) {
       this.poison = true;
       this.poisonCooldown = timer;
+      if(origin){
+        this.poisonOrigin = origin;
+      }
     }
   }
 
   updatePoison(dt) {
     if (this.poisonCooldown - dt <= 0) {
       this.poison = false;
+      this.poisonOrigin = undefined;
     } else {
       this.poisonCooldown = this.poisonCooldown - dt;
     }

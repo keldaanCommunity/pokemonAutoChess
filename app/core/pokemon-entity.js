@@ -98,7 +98,7 @@ class PokemonEntity extends schema.Schema {
       this.count.crit ++;
     }
     if (attacker && attacker.items.has(ITEM.POKEMONOMICON)) {
-      this.status.triggerBurn(3000, this);
+      this.status.triggerBurn(3000, this, attacker);
       this.status.triggerWound(3000);
     }
     if (attacker && attacker.items.has(ITEM.SHELL_BELL)) {

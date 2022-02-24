@@ -4,22 +4,30 @@ class WikiFaq extends Component{
 
     render(){
         return <div style={{overflowY: 'scroll', height: '80vh'}}>
-            <h5>How does the income works ?</h5>
+            <h5 class="nes-text is-primary">Is this an official game ?</h5>
+            <p>No, this is a fan game, made by fans for fans. All rights/credits to Pokemon Company.</p>
+            <h5 class="nes-text is-primary">Why is there field/flora/human/aquatic synergies ? They don't match any of pokemon types</h5>
+            <p>Field/Flora/Human/Aquatic are not pokemon types but egg groups. Moreover, Fairy and Amorph/Ghost are both egg groups and synergies.</p>
+            <h5 class="nes-text is-primary">How does the income works ?</h5>
             <p>You get 5 gold per round wether you draw, win or loose. You get 1 bonus income per 10 golds saved, with a maximum of 5 bonus income at 50 saved golds. You get 1 bonus gold if you win. If you win multiples times, you will also gain extra golds, one bonus gold for every victory/defeat, up to 5 bonus gold for 5 streak wins/ 5 streak defeat. Wins/Defeats against PVE are not taken into account.</p>
-            <h5>What/When is PVE ?</h5>
+            <h5 class="nes-text is-primary">What/When is PVE ?</h5>
             <p>PVE are predefined waves of ennemies. If you win against PVE, you'll get one Tier 1 item and you will have to choose one of the 3 item propositions. PVE occurs at turn 1,2,3,10,15,20,25,30,35,40.</p>
-            <h5>What are those mythical pokemons ? When can i buy them ?</h5>
+            <h5 class="nes-text is-primary">What are those mythical pokemons ? When can i buy them ?</h5>
             <p>At turn 10 and 20, you'll have to choose between 6 mythical pokemons. Those mythical pokemons are very strong.</p>
-            <h5>How does Ditto work ?</h5>
+            <h5 class="nes-text is-primary">How does Ditto work ?</h5>
             <p>Ditto creates a plain copy of the unit you hover and drop it over. Ditto can't fight. Each pokemon in shop has a 0.6% chance to be a ditto at every roll. You can 't copy fossils/legendaries.</p>
-            <h5>How does bots works ?</h5>
+            <h5 class="nes-text is-primary">How does bots works ?</h5>
             <p>Bots are created by other players. Bots are theme-based, a mewtwo bot will always have an mewtwo in its team at a certain time in the game. Bots follows a list of predefined patterns. But they will not behave the same from one game to an other. To improve their team, they need to win matchs against other bots/players. If they always loose, they'll improve much more slowly.</p>
-            <h5>Can i create my own bot ?</h5>
+            <h5 class="nes-text is-primary">Can i create my own bot ?</h5>
             <p>Sure. Go to the bot builder in the lobby and try to make your own bot. If you submit your bot, it'll be send in the #bot-creation channel for a review by the bot reviewer team.</p>
-            <h5>How does the elo system work ?</h5>
+            <h5 class="nes-text is-primary">How does the elo system work ?</h5>
             <p>The elo system in Pokemon Auto Chess works the same as in other elo based games like Chess, Lol, Starcraft etc... To gain elo points, you need to beat other bots/players. For example, if you finish 3rd, you won against the 4th,5th,6th,7th,8th and loosed to the 1st and 2nd.</p>
-            <h5>I didn't get elo points in my last game, why ?</h5>
+            <h5 class="nes-text is-primary">I didn't get elo points in my last game, why ?</h5>
             <p>The game needs to be finished in order to win/loose elo points. If someone is still in game, you need to wait. Only 8-players/bots game count are elligible to elo rating.</p>
+            <h5 class="nes-text is-primary">How can i support the game ?</h5>
+            <p>You can donate on the tipee: <a href="https://en.tipeee.com/pokemon-auto-chess">https://en.tipeee.com/pokemon-auto-chess</a>.</p>
+            <h5 class="nes-text is-primary">What language is used to code the game ?</h5>
+            <p>JavaScript.</p>
         </div>
     }
 }

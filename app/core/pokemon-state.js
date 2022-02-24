@@ -303,12 +303,12 @@ class PokemonState {
     }
 
     if (pokemon.cooldown <= 0) {
-      if (pokemon.status.burn) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.05), board, ATTACK_TYPE.TRUE);
+      if (pokemon.status.burn && pokemon.status.burnOrigin) {
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.05), board, ATTACK_TYPE.TRUE, pokemon.status.burnOrigin);
       }
 
-      if (pokemon.status.poison) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.10), board, ATTACK_TYPE.TRUE);
+      if (pokemon.status.poison && pokemon.status.poisonOrigin) {
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.10), board, ATTACK_TYPE.TRUE, pokemon.status.poisonOrigin);
       }
 
       if (pokemon.effects.includes(EFFECTS.BLAZE)) {

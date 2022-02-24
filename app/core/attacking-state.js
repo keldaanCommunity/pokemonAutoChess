@@ -57,7 +57,7 @@ class AttackingState extends PokemonState {
       }
       if (poisonChance != 0) {
         if (Math.random() > poisonChance) {
-          target.status.triggerPoison(2000, target);
+          target.status.triggerPoison(2000, target, pokemon);
         }
       }
       if (pokemon.effects.includes(EFFECTS.CURSE) || pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
