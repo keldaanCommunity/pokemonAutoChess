@@ -74,6 +74,8 @@ class OnDragDropCommand extends Command {
       info:'Tu es un sanglier'
     });
     */
+   // console.log(detail);
+    const commands = [];
     let success = false;
     let dittoReplaced = false;
     const message = {
@@ -82,6 +84,7 @@ class OnDragDropCommand extends Command {
     };
     const playerId = client.auth.uid; ;
     if (this.state.players.has(playerId)) {
+      const player = this.state.players.get(playerId);
       if (detail.objType == 'pokemon') {
         message.updateItems = false;
         if (this.state.players.get(playerId).board.has(detail.id)) {
@@ -146,9 +149,8 @@ class OnDragDropCommand extends Command {
         message.updateItems = true;
 
         const item = detail.id;
-        const player = this.state.players.get(playerId);
 
-        if (!player.items.has(item)) {
+        if (!player.items.has(item) && !detail.bypass) {
           client.send('DragDropFailed', message);
           return;
         }
@@ -291,7 +293,14 @@ class OnDragDropCommand extends Command {
               if ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine)) {
                 pokemon.items.delete(itemToCombine);
                 player.items.delete(item);
-                pokemon.items.add(name);
+                const detail = {
+                  'id': name,
+                  'x': JSON.stringify(pokemon.positionX),
+                  'y': JSON.stringify(pokemon.positionY),
+                  'objType': 'item',
+                  'bypass': true
+                };
+                commands.push(new OnDragDropCommand().setPayload({'client': client, 'detail': detail}));
               }
             });
           } else {
@@ -307,9 +316,6 @@ class OnDragDropCommand extends Command {
             player.items.delete(item);
           }
         }
-
-        player.synergies.update(player.board);
-        player.effects.update(player.synergies);
       }
       if (detail.objType == 'combine') {
         message.updateBoard = false;
@@ -340,6 +346,11 @@ class OnDragDropCommand extends Command {
           client.send('DragDropFailed', message);
         }
       }
+      player.synergies.update(player.board);
+      player.effects.update(player.synergies);
+    }
+    if(commands.length > 0){
+      return commands;
     }
   }
 }
