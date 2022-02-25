@@ -258,10 +258,14 @@ class GameRoom extends colyseus.Room {
 
     player.board.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
-        simplePlayer.pokemons.push({
+        let s = {
           name: pokemon.name,
-          items: Array.from(pokemon.items)
+          items: []
+        }
+        pokemon.items.forEach(i=>{
+          s.items.push(i);
         });
+        simplePlayer.pokemons.push(s);
       }
     });
     return simplePlayer;
