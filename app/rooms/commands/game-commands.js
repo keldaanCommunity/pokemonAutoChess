@@ -332,6 +332,19 @@ class OnDragDropCommand extends Command {
           return;
         }
 
+        if(item == itemToCombine){
+          let count = 0;
+          player.items.forEach(i=>{
+            if(i == item){
+              count ++;
+            }
+          });
+          if(count < 2){
+            client.send('DragDropFailed', message);
+            return;
+          }
+        }
+
         let crafted = false;
         Object.keys(ITEM_RECIPE).forEach((name) => {
           const recipe = ITEM_RECIPE[name];
