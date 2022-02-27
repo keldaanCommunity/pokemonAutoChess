@@ -165,14 +165,16 @@ class OnDragDropCommand extends Command {
           return;
         }
         // check if full items
-        if (pokemon.items.length >= 3) {
-          let itemToCombine;
-          pokemon.items.forEach( (i)=>{
-            if (Object.keys(BASIC_ITEM).includes(i)) {
-              itemToCombine = i;
-            }
-          });
-          if (!itemToCombine) {
+        if (pokemon.items.size >= 3) {
+          if(Object.keys(BASIC_ITEM).includes(item)){
+            let includesBasicItem = false;
+            pokemon.items.forEach(i=>{
+              if(Object.keys(BASIC_ITEM).includes(i)){
+                includesBasicItem = true;
+              }
+            });
+          }
+          else{
             client.send('DragDropFailed', message);
             return;
           }
