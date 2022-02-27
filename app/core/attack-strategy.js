@@ -1819,8 +1819,8 @@ class ThiefStrategy extends AttackStrategy {
       pokemon.shield += 50 * l;
     }
 
-    pokemon.simulation.applyItemsEffects(pokemon);
-    target.simulation.applyItemsEffects(target);
+    //pokemon.simulation.applyItemsEffects(pokemon);
+    //target.simulation.applyItemsEffects(target);
     target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }

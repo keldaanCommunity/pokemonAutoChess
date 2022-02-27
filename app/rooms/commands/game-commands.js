@@ -278,6 +278,9 @@ class OnDragDropCommand extends Command {
           case ITEM.ICY_ROCK:
             pokemon.types.push(TYPE.ICE);
             break;
+          case ITEM.OLD_AMBER:
+            pokemon.types.push(TYPE.FOSSIL);
+            break;
         }
 
         if (Object.keys(BASIC_ITEM).includes(item)) {

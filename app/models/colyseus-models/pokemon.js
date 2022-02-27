@@ -77,37 +77,37 @@ class Ditto extends Pokemon {
 
 class Electrike extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.ELECTRIKE, 'ptéra', [TYPE.ELECTRIC, TYPE.FIELD], RARITY.LEGENDARY, 'sound', 309, PKM.MANECTRIC, 110, 5, 5, 5, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 1, 50, SPECIAL_SKILL.VOLT_SWITCH);
+    super('Nintendo', PKM.ELECTRIKE, 'ptéra', [TYPE.ELECTRIC, TYPE.FIELD], RARITY.LEGENDARY, 'sound', 309, PKM.MANECTRIC, 110, 5, 5, 5, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 1, 60, SPECIAL_SKILL.VOLT_SWITCH);
   }
 }
 
 class Manectric extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MANECTRIC, 'ptéra', [TYPE.ELECTRIC, TYPE.FIELD], RARITY.LEGENDARY, 'sound', 310, PKM.MEGAMANECTRIC, 150, 11, 6, 6, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 2, 50, SPECIAL_SKILL.VOLT_SWITCH);
+    super('Nintendo', PKM.MANECTRIC, 'ptéra', [TYPE.ELECTRIC, TYPE.FIELD], RARITY.LEGENDARY, 'sound', 310, PKM.MEGAMANECTRIC, 150, 11, 6, 6, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 2, 60, SPECIAL_SKILL.VOLT_SWITCH);
   }
 }
 
 class MegaManectric extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.MEGAMANECTRIC, 'ptéra', [TYPE.ELECTRIC, TYPE.FIELD], RARITY.LEGENDARY, 'sound', 3100, '', 300, 17, 7, 7, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 3, 50, SPECIAL_SKILL.VOLT_SWITCH);
+    super('Nintendo', PKM.MEGAMANECTRIC, 'ptéra', [TYPE.ELECTRIC, TYPE.FIELD], RARITY.LEGENDARY, 'sound', 3100, '', 300, 17, 7, 7, 1, 'ELECTRIC/melee', ATTACK_TYPE.PHYSICAL, 3, 60, SPECIAL_SKILL.VOLT_SWITCH);
   }
 }
 
 class Shuppet extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.SHUPPET, 'ptéra', [TYPE.DARK, TYPE.GHOST], RARITY.LEGENDARY, 'sound', 353, PKM.BANETTE, 100, 5, 3, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.SHADOW_CLONE);
+    super('Nintendo', PKM.SHUPPET, 'ptéra', [TYPE.DARK, TYPE.GHOST], RARITY.LEGENDARY, 'sound', 353, PKM.BANETTE, 100, 5, 3, 4, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 1, 110, SPECIAL_SKILL.SHADOW_CLONE);
   }
 }
 
 class Banette extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.BANETTE, 'ptéra', [TYPE.DARK, TYPE.GHOST], RARITY.LEGENDARY, 'sound', 354, PKM.MEGABANETTE, 140, 11, 4, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.SHADOW_CLONE);
+    super('Nintendo', PKM.BANETTE, 'ptéra', [TYPE.DARK, TYPE.GHOST], RARITY.LEGENDARY, 'sound', 354, PKM.MEGABANETTE, 140, 11, 4, 5, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 2, 110, SPECIAL_SKILL.SHADOW_CLONE);
   }
 }
 
 class MegaBanette extends Pokemon {
   constructor() {
-    super('Junaca', PKM.MEGABANETTE, 'ptéra', [TYPE.DARK, TYPE.GHOST], RARITY.LEGENDARY, 'sound', 3540, '', 240, 21, 5, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.SHADOW_CLONE);
+    super('Junaca', PKM.MEGABANETTE, 'ptéra', [TYPE.DARK, TYPE.GHOST], RARITY.LEGENDARY, 'sound', 3540, '', 240, 21, 5, 6, 1, 'DRAGON/melee', ATTACK_TYPE.PHYSICAL, 3, 110, SPECIAL_SKILL.SHADOW_CLONE);
   }
 }
 
@@ -803,18 +803,18 @@ class Aggron extends Pokemon {
 
 class Whismur extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.WHISMUR, 'ptéra', [TYPE.NORMAL, TYPE.SOUND], RARITY.RARE, 'sound', 293, PKM.LOUDRED, 80, 5, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 80, SPECIAL_SKILL.ECHO);
+    super('Nintendo', PKM.WHISMUR, 'ptéra', [TYPE.NORMAL, TYPE.SOUND], RARITY.RARE, 'sound', 293, PKM.LOUDRED, 80, 5, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 1, 90, SPECIAL_SKILL.ECHO);
   }
 }
 class Loudred extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.LOUDRED, 'ptéra', [TYPE.NORMAL, TYPE.SOUND], RARITY.RARE, 'sound', 294, PKM.EXPLOUD, 120, 9, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 80, SPECIAL_SKILL.ECHO);
+    super('Nintendo', PKM.LOUDRED, 'ptéra', [TYPE.NORMAL, TYPE.SOUND], RARITY.RARE, 'sound', 294, PKM.EXPLOUD, 120, 9, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 2, 90, SPECIAL_SKILL.ECHO);
   }
 }
 
 class Exploud extends Pokemon {
   constructor() {
-    super('Nintendo', PKM.EXPLOUD, 'ptéra', [TYPE.NORMAL, TYPE.SOUND], RARITY.RARE, 'sound', 295, '', 220, 18, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 80, SPECIAL_SKILL.ECHO);
+    super('Nintendo', PKM.EXPLOUD, 'ptéra', [TYPE.NORMAL, TYPE.SOUND], RARITY.RARE, 'sound', 295, '', 220, 18, 1, 1, 2, 'PSYCHIC/range', ATTACK_TYPE.SPECIAL, 3, 90, SPECIAL_SKILL.ECHO);
   }
 }
 
