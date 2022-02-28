@@ -339,15 +339,15 @@ class EchoStrategy extends AttackStrategy {
     switch (pokemon.stars) {
       case 1:
         damage = 5;
-        additional = 10;
+        additional = 3;
         break;
       case 2:
         damage = 10;
-        additional = 15;
+        additional = 6;
         break;
       case 3:
         damage = 20;
-        additional = 20;
+        additional = 9;
         break;
       default:
         break;

@@ -330,19 +330,15 @@ class PokemonState {
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
-        pokemon.handleHeal(Math.ceil(0.05 * pokemon.hp));
+        pokemon.handleHeal(5);
       }
 
       if (pokemon.effects.includes(EFFECTS.GROWTH)) {
-        pokemon.handleHeal(Math.ceil(0.1 * pokemon.hp));
+        pokemon.handleHeal(10);
       }
 
       if (pokemon.effects.includes(EFFECTS.SPORE)) {
-        pokemon.handleHeal(Math.ceil(0.15 * pokemon.hp));
-      }
-
-      if (pokemon.effects.includes(EFFECTS.GRASS)) {
-        pokemon.handleHeal(Math.ceil(pokemon.hp / 20));
+        pokemon.handleHeal(20);
       }
     }
     return updateEffects;
