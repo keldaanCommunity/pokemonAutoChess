@@ -5,7 +5,7 @@ const Commands = require('./commands/game-commands');
 const Player = require('../models/colyseus-models/player');
 const UserMetadata = require('../models/mongo-models/user-metadata');
 const BOT = require('../models/mongo-models/bot');
-const {XP_PLACE, XP_TABLE, PKM, BASIC_ITEM} = require('../models/enum');
+const {XP_PLACE, XP_TABLE, PKM, BASIC_ITEM, ITEM, TYPE} = require('../models/enum');
 const PokemonFactory = require('../models/pokemon-factory');
 const EloRank = require('elo-rank');
 const admin = require('firebase-admin');
@@ -444,6 +444,35 @@ class GameRoom extends colyseus.Room {
                 player.items.add(itemToAdd);
               } else {
                 pokemonEvolved.items.add(itemToAdd);
+                switch (itemToAdd) {
+                  case ITEM.WATER_STONE:
+                    pokemonEvolved.types.push(TYPE.WATER);
+                    break;
+                  case ITEM.FIRE_STONE:
+                    pokemonEvolved.types.push(TYPE.FIRE);
+                    break;
+                  case ITEM.THUNDER_STONE:
+                    pokemonEvolved.types.push(TYPE.ELECTRIC);
+                    break;
+                  case ITEM.DUSK_STONE:
+                    pokemonEvolved.types.push(TYPE.DARK);
+                    break;
+                  case ITEM.MOON_STONE:
+                    pokemonEvolved.types.push(TYPE.FAIRY);
+                    break;
+                  case ITEM.LEAF_STONE:
+                    pokemonEvolved.types.push(TYPE.GRASS);
+                    break;
+                  case ITEM.DAWN_STONE:
+                    pokemonEvolved.types.push(TYPE.PSYCHIC);
+                    break;
+                  case ITEM.ICY_ROCK:
+                    pokemonEvolved.types.push(TYPE.ICE);
+                    break;
+                  case ITEM.OLD_AMBER:
+                    pokemonEvolved.types.push(TYPE.FOSSIL);
+                    break;
+                }
               }
             }
           }
