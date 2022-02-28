@@ -1,6 +1,6 @@
 require('dotenv').config();
 const Mongoose = require('mongoose');
-const Bot = require('../app/models/mongo-models/bot');
+const BotV2 = require('../app/models/mongo-models/bot-v2');
 const args = process.argv.slice(2);
 const PasteBinAPI = require('pastebin-ts');
 
@@ -22,14 +22,14 @@ pastebin.getPaste(id, false).then((data)=>{
     const json = JSON.parse(data);
     console.log(`connect to db ...`);
     Mongoose.connect(process.env.MONGO_URI, (err) => {
-      Bot.deleteMany({'avatar': json.avatar}, (err, result)=>{
+      BotV2.deleteMany({'avatar': json.avatar}, (err, result)=>{
         if (err) {
           console.log(err);
         } else {
           console.log(result);
         }
-        console.log(`creating bot ${json.avatar}...`);
-        Bot.create({
+        console.log(`creating BotV2 ${json.avatar}...`);
+        BotV2.create({
           avatar: json.avatar,
           elo: 1200,
           author: json.author,
