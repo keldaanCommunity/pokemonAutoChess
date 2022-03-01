@@ -78,7 +78,7 @@ class AttackingState extends PokemonState {
       let damage;
       const attackType = pokemon.attackType;
 
-      if (Math.random() * 100 < pokemon.critChance && target && target.items.has(ITEM.ROCKY_HELMET)) {
+      if (Math.random() * 100 < pokemon.critChance && target && !target.items.has(ITEM.ROCKY_HELMET)) {
         if (pokemon.effects.includes(EFFECTS.FAIRY_WIND) || pokemon.effects.includes(EFFECTS.STRANGE_STEAM) || pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
           let d = 0;
           if (pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
