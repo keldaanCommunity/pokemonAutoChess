@@ -761,6 +761,9 @@ class OnUpdatePhaseCommand extends Command {
     this.state.players.forEach((player, key) => {
       if (player.alive) {
         if (player.itemsProposition.length != 0) {
+          if(player.itemsProposition.length == 3) {
+            player.items.add(player.itemsProposition.pop());
+          }
           while (player.itemsProposition.length > 0) {
             player.itemsProposition.pop();
           }
