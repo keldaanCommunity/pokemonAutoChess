@@ -1407,7 +1407,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Echo'
     },
     description: {
-      eng: 'Deals 5/10/20 special damage, +10/+15/+20 damage each time the pokemon uses its ability'
+      eng: 'Deals 5/10/20 special damage, +3/+6/+9 damage each time the pokemon uses its ability'
     }
   },
   PETAL_DANCE: {
