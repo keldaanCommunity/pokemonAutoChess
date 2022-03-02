@@ -1,6 +1,7 @@
 const Command = require('@colyseus/command').Command;
 const GameUser = require('../../models/colyseus-models/game-user');
 const UserMetadata = require('../../models/mongo-models/user-metadata');
+const Bot = require('../../models/mongo-models/bot');
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
@@ -70,74 +71,138 @@ class OnToggleReadyCommand extends Command {
   }
 }
 
+class InitializeBotsCommand extends Command {
+  execute(ownerId) {
+    
+    UserMetadata.findOne({'uid': ownerId}, (err, user)=>{
+      if(!user){
+        return
+      }
+
+      const difficulty = { $gt: user.elo - 100, $lt: user.elo + 100 }
+
+      Bot.find({ elo: difficulty}, ['avatar', 'elo'], null)
+      .limit(7)
+      .exec(
+        (err, bots) => {
+          if(!bots){
+            return
+          }
+          bots.forEach((bot) => {
+            this.state.users.set(bot.avatar, new GameUser(
+              bot.avatar,
+              bot.avatar,
+              bot.elo,
+              bot.avatar,
+              true,
+              true,
+              {}
+            ));
+          })
+        }
+      )
+
+    })
+  }
+}
+
 class OnAddBotCommand extends Command {
-  execute() {
-    if (this.state.users.size < 8) {
-      const botList = [];
-      this.room.elos.forEach((value, key)=>{
-        botList.push(key);
-      });
-      let bot;
-      const actualBotList = [];
-      const potentialBotList = [];
+  execute(message) {
+    if(this.state.users.size >= 8){
+      return
+    }
 
-      this.state.users.forEach((user, key) => {
-        if (user.isBot) {
-          actualBotList.push(user.id);
-        }
-      });
-      for (let i = 0; i < botList.length; i++) {
-        if (!actualBotList.includes(botList[i])) {
-          potentialBotList.push(botList[i]);
-        }
+    const userArray = []
+
+    this.state.users.forEach((value, key) => {
+      if(value.isBot){
+        userArray.push(key)
       }
-      bot = potentialBotList[Math.floor(Math.random() * potentialBotList.length)];
-
-      if (bot === undefined) {
-        bot = botList[Math.floor(Math.random() * botList.length)];
+    })
+    
+    let difficulty = null;
+    switch(message.difficulty){
+      case 'easy':
+        difficulty = { $lt: 800 }
+        break
+      case 'normal':
+        difficulty = { $gt: 800, $lt: 1100 }
+        break
+      case 'hard':
+        difficulty = { $gt: 1100 }
+        break
+    }
+    
+    Bot.find({ avatar: {$nin: userArray}, elo: difficulty}, ['avatar', 'elo'], null, (err, bots) => {
+      if(bots.length <= 0){
+        this.room.broadcast('messages', {
+          'name': 'Server',
+          'payload': `Error: No bots found`,
+          'avatar': 'magnemite',
+          'time': Date.now()
+        });
+        return
       }
 
-      this.state.users.set(bot, new GameUser(
-          bot,
-          bot,
-          this.room.elos.get(bot),
-          bot,
-          true,
-          true,
-          {
-            FIRE: 'FIRE0',
-            ICE: 'ICE0',
-            GROUND: 'GROUND0',
-            NORMAL: 'NORMAL0',
-            GRASS: 'GRASS0',
-            WATER: 'WATER0'
-          }));
+      const bot = bots[Math.floor(Math.random() * bots.length)]
+      this.state.users.set(bot.avatar, new GameUser(
+        bot.avatar,
+        bot.avatar,
+        bot.elo,
+        bot.avatar,
+        true,
+        true,
+        {}
+      ));
+
+
       this.room.broadcast('messages', {
         'name': 'Server',
-        'payload': `Bot ${ bot } added.`,
+        'payload': `Bot ${ bot.avatar } added.`,
+        'avatar': 'magnemite',
+        'time': Date.now()
+      });
+
+    })
+  }
+}
+
+
+
+class OnRemoveBotCommand extends Command {
+  execute(message) {
+    //if no message, delete a random bot
+    if(!message){
+      let botDeleted = false
+      const keys = this.state.users.keys()
+      while(!keys.done) {
+        let key = keys.next().value
+        if(this.state.users.get(key).isBot){
+          this.room.broadcast('messages', {
+            'name': 'Server',
+            'payload': `Bot ${key} removed to make room for new player.`,
+            'avatar': 'magnemite',
+            'time': Date.now()
+          });
+          this.state.users.delete(key)
+          botDeleted = true
+          return
+        }
+      }
+      console.log('error, no bots in lobby')
+      return
+    }
+
+
+
+    if(this.state.users.delete(message.target)){
+      this.room.broadcast('messages', {
+        'name': 'Server',
+        'payload': `Bot ${message.target} removed.`,
         'avatar': 'magnemite',
         'time': Date.now()
       });
     }
-  }
-}
-
-class OnRemoveBotCommand extends Command {
-  execute() {
-    // console.log('remove bot');
-    let botFound = false;
-    this.state.users.forEach((user, key) => {
-      if (user.isBot && !botFound) {
-        this.state.users.delete(key);
-        botFound = true;
-        this.room.broadcast('messages', {
-          'name': 'Server',
-          'payload': `Bot removed.`,
-          'avatar': 'magnemite',
-          'time': Date.now()
-        });
-      }
-    });
   }
 }
 
@@ -147,6 +212,8 @@ module.exports = {
   OnLeaveCommand: OnLeaveCommand,
   OnToggleReadyCommand: OnToggleReadyCommand,
   OnMessageCommand: OnMessageCommand,
+  InitializeBotsCommand: InitializeBotsCommand,
   OnAddBotCommand: OnAddBotCommand,
   OnRemoveBotCommand: OnRemoveBotCommand
 };
+

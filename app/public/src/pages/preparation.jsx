@@ -113,12 +113,12 @@ class Preparation extends Component {
         this.room.send('new-message', {'name': this.state.user.name, 'payload': payload, 'avatar':this.state.user.avatar });
     }
 
-    addBot(){
-        this.room.send('addBot');
+    addBot(difficulty){
+        this.room.send('addBot', difficulty);
     }
 
-    removeBot(){
-        this.room.send('removeBot');
+    removeBot(target){
+        this.room.send('removeBot', target);
     }
 
     toggleReady(){

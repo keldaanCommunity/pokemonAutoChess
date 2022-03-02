@@ -15,7 +15,7 @@ class LeaderboardInfo extends Component{
             <td>
                 <img src={"assets/avatar/" + this.props.avatar + ".png"}/>    
             </td>
-            <td>
+            <td style={{overflow:'hidden', whiteSpace:'nowrap', maxWidth:'300px'}}>
                 {this.props.name}
             </td>
             <td> 
