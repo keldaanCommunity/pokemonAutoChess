@@ -47,7 +47,7 @@ class OnGameStartCommand extends Command {
 
 class OnMessageCommand extends Command {
   execute({client, message}) {
-    this.room.broadcast('messages', message);
+    this.room.broadcast('messages', {...message, time:Date.now()});
   }
 }
 
