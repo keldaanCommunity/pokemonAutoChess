@@ -10,7 +10,8 @@ const {
   OnToggleReadyCommand,
   OnMessageCommand,
   OnAddBotCommand,
-  OnRemoveBotCommand
+  OnRemoveBotCommand,
+  InitializeBotsCommand
 } = require('./commands/preparation-commands');
 
 class PreparationRoom extends colyseus.Room {
@@ -27,20 +28,7 @@ class PreparationRoom extends colyseus.Room {
     this.setState(new PreparationState(options.ownerId));
     this.maxClients = 8;
 
-    Bot.find({}, ['avatar', 'elo'], null, (err, bots) => {
-      if (bots) {
-        bots.forEach((bot) => {
-          self.elos.set(bot.avatar, bot.elo);
-        });
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
-        self.dispatcher.dispatch(new OnAddBotCommand());
-      }
-    });
+    self.dispatcher.dispatch(new InitializeBotsCommand(), options.ownerId)
 
     this.onMessage('game-start', (client, message) => {
       try {
@@ -63,16 +51,16 @@ class PreparationRoom extends colyseus.Room {
         console.log(error);
       }
     });
-    this.onMessage('addBot', (client, message) => {
+    this.onMessage('addBot', (client, difficulty) => {
       try {
-        this.dispatcher.dispatch(new OnAddBotCommand());
+        this.dispatcher.dispatch(new OnAddBotCommand(), {difficulty: difficulty});
       } catch (error) {
         console.log(error);
       }
     });
-    this.onMessage('removeBot', (client, message) => {
+    this.onMessage('removeBot', (client, target) => {
       try {
-        this.dispatcher.dispatch(new OnRemoveBotCommand());
+        this.dispatcher.dispatch(new OnRemoveBotCommand(), {target: target});
       } catch (error) {
         console.log(error);
       }

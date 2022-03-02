@@ -4,7 +4,7 @@ import {RANK} from '../../../../models/enum';
 const style = {
     display:'flex',
     alignItems:'center',
-    width:'112px'
+    width:'auto'
 }
 
 const imgStyle={
@@ -19,7 +19,9 @@ class Elo extends Component{
         let rank = this.getRank();
         return <div style={style}>
             <img style={imgStyle} src={'assets/ranks/'+ rank + '.png'}/>
-            <p>{this.props.elo}</p>
+            <div style={{marginLeft:'10px'}}>
+                <p style={{margin:'0px'}}>{this.props.elo}</p>
+            </div>
         </div>;
     }
 
