@@ -1800,7 +1800,9 @@ class ThiefStrategy extends AttackStrategy {
     }
     const l = target.items.size;
     target.items.forEach( (item) => {
-      pokemon.items.add(item);
+      if(pokemon.items.size <3){
+        pokemon.items.add(item);
+      }
       target.items.delete(item);
     });
 
