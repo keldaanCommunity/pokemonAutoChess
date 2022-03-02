@@ -11,14 +11,14 @@ class PreparationMenuUser extends Component{
             marginRight:'10px'
         };
 
-        const readyColor = this.props.data.ready ? "rgba(71, 138, 65, 0.4)" : "rgba(104, 109, 125, 0.4)";
+        const readyColor = this.props.data.ready ? "#76c442" : "#ce372b";
 
         const removeButton = this.props.data.isBot ? 
-            <button style={buttonStyle} className='nes-btn is-error' onClick={() => this.props.removeBot(this.props.data.id)}>Remove</button> :
+            <button style={buttonStyle} className='nes-btn is-error' onClick={() => this.props.removeBot(this.props.data.id)}>X</button> :
             null
 
         return <>
-            <div className='nes-container' style={{display:'flex', padding:'10px', margin:'5px', backgroundColor:readyColor, justifyContent:'space-between'}}>
+            <div className='nes-container' style={{display:'flex', backgroundColor: '#fff', padding:'10px', margin:'5px', borderColor:readyColor, justifyContent:'space-between'}}>
                 <div style={{display:'flex'}}>
                     <div style={{width:'140px'}}>
                         <Elo elo={this.props.data.elo} style={{width:'140px'}}/>
