@@ -5,9 +5,21 @@ class PokemonState {
   constructor() {
   }
 
-  handleHeal(pokemon, heal) {
+  handleHeal(pokemon, heal, caster) {
     if (pokemon.life > 0 && pokemon.life < pokemon.hp && !pokemon.status.wound) {
       pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.round(heal));
+      if(caster){
+        caster.healDone += heal;
+      }
+    }
+  }
+
+  handleShield(pokemon, shield, caster) {
+    if (pokemon.life > 0) {
+      pokemon.shield += Math.round(shield);
+      if(caster){
+        caster.shieldDone += shield;
+      }
     }
   }
 
@@ -57,7 +69,22 @@ class PokemonState {
         }
 
         if (attacker && reducedDamage > 0) {
-          attacker.damageDone += reducedDamage;
+          switch (attackType) {
+            case ATTACK_TYPE.PHYSICAL:
+              attacker.physicalDamage += reducedDamage;
+              break;
+          
+            case ATTACK_TYPE.SPECIAL:
+              attacker.specialDamage += reducedDamage;
+              break;
+
+            case ATTACK_TYPE.TRUE:
+              attacker.trueDamage += reducedDamage;
+              break;
+
+            default:
+              break;
+          }
         }
         let residualDamage = reducedDamage;
 
@@ -117,10 +144,10 @@ class PokemonState {
             } else if (attacker.effects.includes(EFFECTS.CALM_MIND)) {
               lifesteal = 0.6;
             }
-            attacker.handleHeal(Math.floor(lifesteal * residualDamage));
+            attacker.handleHeal(Math.floor(lifesteal * residualDamage), attacker);
           }
           if (attacker.items.has(ITEM.KINGS_ROCK)) {
-            attacker.handleHeal(Math.floor(0.3 * residualDamage));
+            attacker.handleHeal(Math.floor(0.3 * residualDamage), attacker);
           }
         }
 
@@ -162,7 +189,7 @@ class PokemonState {
               board.forEach((r, c, value) => {
                 if (value !== undefined && value.team == pokemon.team && value.types.includes(TYPE.FIELD)) {
                   value.count.fieldCount ++;
-                  value.handleHeal(boost / 100 * value.hp);
+                  value.handleHeal(boost / 100 * value.hp, pokemon);
                   value.handleAttackSpeed(speedBoost);
                 }
               });
@@ -330,15 +357,15 @@ class PokemonState {
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
-        pokemon.handleHeal(5);
+        pokemon.handleHeal(5, pokemon);
       }
 
       if (pokemon.effects.includes(EFFECTS.GROWTH)) {
-        pokemon.handleHeal(10);
+        pokemon.handleHeal(10, pokemon);
       }
 
       if (pokemon.effects.includes(EFFECTS.SPORE)) {
-        pokemon.handleHeal(20);
+        pokemon.handleHeal(20, pokemon);
       }
     }
     return updateEffects;

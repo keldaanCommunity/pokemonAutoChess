@@ -18,7 +18,7 @@ class AttackStrategy {
       }
       if (shield > 0 && !pokemon.status.temporaryShield) {
         pokemon.status.triggerShield(4000);
-        pokemon.shield = shield;
+        pokemon.handleShield(shield, pokemon);
       }
     }
     if (pokemon.types.includes(TYPE.SOUND)) {
@@ -1139,7 +1139,7 @@ class WishStrategy extends AttackStrategy {
 
     board.forEach((x, y, ally) => {
       if (ally && pokemon.team == ally.team && count > 0 && ally.life < ally.hp) {
-        ally.handleHeal(heal);
+        ally.handleHeal(heal, pokemon);
         count -= 1;
       }
     });
@@ -1378,7 +1378,7 @@ class BiteStrategy extends AttackStrategy {
         break;
     }
     target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
-    pokemon.handleHeal(Math.floor(damage/2));
+    pokemon.handleHeal(Math.floor(damage/2), pokemon);
   }
 }
 
@@ -1495,11 +1495,11 @@ class RootStrategy extends AttackStrategy {
     }
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
-    pokemon.handleHeal(heal);
+    pokemon.handleHeal(heal, pokemon);
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
-        cell.value.handleHeal(heal);
+        cell.value.handleHeal(heal, pokemon);
       }
     });
   }
@@ -1565,7 +1565,7 @@ class DarkPulseStrategy extends AttackStrategy {
         break;
     }
     target.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
-    pokemon.handleHeal(damage);
+    pokemon.handleHeal(damage, pokemon);
   }
 }
 
@@ -1687,7 +1687,7 @@ class LeechLifeStrategy extends AttackStrategy {
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
-        pokemon.handleHeal(damage);
+        pokemon.handleHeal(damage, pokemon);
       }
     });
   }
@@ -1808,17 +1808,17 @@ class ThiefStrategy extends AttackStrategy {
 
     if (pokemon.effects.includes(EFFECTS.HONE_CLAWS)) {
       pokemon.atk += 4 * l;
-      pokemon.shield += 20 * l;
+      pokemon.handleShield(20 * l, pokemon);
     }
 
     if (pokemon.effects.includes(EFFECTS.ASSURANCE)) {
       pokemon.atk += 7 * l;
-      pokemon.shield += 30 * l;
+      pokemon.handleShield(30 * l, pokemon);
     }
 
     if (pokemon.effects.includes(EFFECTS.BEAT_UP)) {
       pokemon.atk += 10 * l;
-      pokemon.shield += 50 * l;
+      pokemon.handleShield(50 * l, pokemon);
     }
 
     //pokemon.simulation.applyItemsEffects(pokemon);

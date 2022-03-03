@@ -6,6 +6,7 @@ const PokemonEntity = require('./pokemon-entity');
 const PokemonFactory = require('../models/pokemon-factory');
 const {CLIMATE, EFFECTS, TYPE, ATTACK_TYPE, ITEM} = require('../models/enum');
 const Dps = require('./dps');
+const DpsHeal = require('./dps-heal');
 const ItemFactory = require('../models/item-factory');
 
 class Simulation extends Schema {
@@ -18,21 +19,30 @@ class Simulation extends Schema {
       redTeam: new MapSchema(),
       blueTeam: new MapSchema(),
       blueDpsMeter: new MapSchema(),
-      redDpsMeter: new MapSchema()
+      redDpsMeter: new MapSchema(),
+      blueHealDpsMeter: new MapSchema(),
+      redHealDpsMeter: new MapSchema()
     });
     this.initialize();
   }
 
   initialize(blueTeam, redTeam, blueEffects, redEffects) {
     this.blueDpsMeter.forEach((dps, key) => {
-      // console.log('deleting ' + dps.name);
       this.blueDpsMeter.delete(key);
     });
 
     this.redDpsMeter.forEach((dps, key) => {
-      // console.log('deleting ' + dps.name);
       this.redDpsMeter.delete(key);
     });
+
+    this.blueHealDpsMeter.forEach((dps, key) => {
+      this.blueHealDpsMeter.delete(key);
+    });
+
+    this.redHealDpsMeter.forEach((dps, key) => {
+      this.redHealDpsMeter.delete(key);
+    });
+
     this.board = new Board(8, 6);
     if (blueEffects) {
       this.blueEffects = blueEffects;
@@ -128,14 +138,18 @@ class Simulation extends Schema {
     if (team == 0) {
       this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects, this.redEffects, blueTeam, redTeam);
       const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
+      const dpsHeal = new DpsHeal(pokemonEntity.id, pokemonEntity.name);
       this.blueTeam.set(pokemonEntity.id, pokemonEntity);
       this.blueDpsMeter.set(pokemonEntity.id, dps);
+      this.blueHealDpsMeter.set(pokemonEntity.id, dpsHeal);
     }
     if (team == 1) {
       this.applyEffects(pokemonEntity, pokemon.types, this.redEffects, this.blueEffects, redTeam, blueTeam);
       const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
+      const dpsHeal = new DpsHeal(pokemonEntity.id, pokemonEntity.name);
       this.redTeam.set(pokemonEntity.id, pokemonEntity);
       this.redDpsMeter.set(pokemonEntity.id, dps);
+      this.redHealDpsMeter.set(pokemonEntity.id, dpsHeal);
     }
     return pokemonEntity;
   }
@@ -183,7 +197,7 @@ class Simulation extends Schema {
       pokemon.addCritChance(5);
     }
     if (pokemon.items.has(ITEM.MIRACLE_SEED)) {
-      pokemon.shield += 15;
+      pokemon.handleShield(15, pokemon);
     }
     if (pokemon.items.has(ITEM.NEVER_MELT_ICE)) {
       pokemon.speDef += 2;
@@ -230,7 +244,7 @@ class Simulation extends Schema {
       pokemon.addCritChance(75);
     }
     if (pokemon.items.has(ITEM.ORAN_BERRY)) {
-      pokemon.shield += 100;
+      pokemon.handleShield(100, pokemon);
     }
     if (pokemon.items.has(ITEM.FLAME_ORB)) {
       pokemon.status.triggerFlameOrb(2000);
@@ -284,12 +298,12 @@ class Simulation extends Schema {
         shieldBonus += 100;
       }
       if (shieldBonus >= 0) {
-        pokemon.shield += shieldBonus;
+        pokemon.handleShield(shieldBonus, pokemon);
         const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
 
         cells.forEach((cell) => {
           if (cell.value && pokemon.team == cell.value.team) {
-            cell.value.shield += shieldBonus;
+            cell.value.handleShield(shieldBonus, pokemon);
           }
         });
       }
@@ -297,7 +311,7 @@ class Simulation extends Schema {
         [-2, -1, 0, 1, 2].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
-            value.shield += 30;
+            value.handleShield(30, pokemon);
           }
         });
       }
@@ -366,12 +380,12 @@ class Simulation extends Schema {
         shieldBonus += 50;
       }
       if (shieldBonus >= 0) {
-        pokemon.shield += shieldBonus;
+        pokemon.handleShield(shieldBonus, pokemon);
         const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
 
         cells.forEach((cell) => {
           if (cell.value && pokemon.team == cell.value.team) {
-            cell.value.shield += shieldBonus;
+            cell.value.handleShield(shieldBonus, pokemon);
           }
         });
       }
@@ -379,7 +393,7 @@ class Simulation extends Schema {
         [-2, -1, 0, 1, 2].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
-            value.shield += 30;
+            value.handleShield(30, pokemon);
           }
         });
       }
@@ -431,7 +445,7 @@ class Simulation extends Schema {
         case EFFECTS.HONE_CLAWS:
           if (types.includes(TYPE.DARK) && pokemon.items.size != 0) {
             pokemon.atk += 4 * pokemon.items.size;
-            pokemon.shield += 20 * pokemon.items.size;
+            pokemon.handleShield(20 * pokemon.items.size, pokemon);
             pokemon.effects.push(EFFECTS.HONE_CLAWS);
           }
           break;
@@ -439,7 +453,7 @@ class Simulation extends Schema {
         case EFFECTS.ASSURANCE:
           if (types.includes(TYPE.DARK) && pokemon.items.size != 0) {
             pokemon.atk += 7 * pokemon.items.size;
-            pokemon.shield += 30 * pokemon.items.size;
+            pokemon.handleShield(30 * pokemon.items.size, pokemon);
             pokemon.effects.push(EFFECTS.ASSURANCE);
           }
           break;
@@ -447,7 +461,7 @@ class Simulation extends Schema {
         case EFFECTS.BEAT_UP:
           if (types.includes(TYPE.DARK) && pokemon.items.size != 0) {
             pokemon.atk += 10 * pokemon.items.size;
-            pokemon.shield += 50 * pokemon.items.size;
+            pokemon.handleShield(50 * pokemon.items.size, pokemon);
             pokemon.effects.push(EFFECTS.BEAT_UP);
           }
           break;
@@ -719,21 +733,21 @@ class Simulation extends Schema {
 
         case EFFECTS.BATTLE_ARMOR:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.shield += 75;
+            pokemon.handleShield(75, pokemon);
             pokemon.effects.push(EFFECTS.BATTLE_ARMOR);
           }
           break;
 
         case EFFECTS.MOUTAIN_RESISTANCE:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.shield += 150;
+            pokemon.handleShield(150, pokemon);
             pokemon.effects.push(EFFECTS.MOUTAIN_RESISTANCE);
           }
           break;
 
         case EFFECTS.DIAMOND_STORM:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.shield += 300;
+            pokemon.handleShield(300, pokemon);
             pokemon.effects.push(EFFECTS.DIAMOND_STORM);
           }
           break;
@@ -894,7 +908,8 @@ class Simulation extends Schema {
         this.blueTeam.delete(key);
       } else {
         pkm.update(dt, this.board, this.climate);
-        this.blueDpsMeter.get(key).changeDamage(pkm.damageDone);
+        this.blueDpsMeter.get(key).changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage);
+        this.blueHealDpsMeter.get(key).changeHeal(pkm.healDone, pkm.shieldDone);
       }
     });
 
@@ -907,7 +922,8 @@ class Simulation extends Schema {
         this.redTeam.delete(key);
       } else {
         pkm.update(dt, this.board, this.climate);
-        this.redDpsMeter.get(key).changeDamage(pkm.damageDone);
+        this.redDpsMeter.get(key).changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage);
+        this.redHealDpsMeter.get(key).changeHeal(pkm.healDone, pkm.shieldDone);
       }
     });
   }
@@ -932,6 +948,8 @@ schema.defineTypes(Simulation, {
   redTeam: {map: PokemonEntity},
   blueDpsMeter: {map: Dps},
   redDpsMeter: {map: Dps},
+  blueHealDpsMeter: {map: DpsHeal},
+  redHealDpsMeter: {map: DpsHeal},
   climate: 'string'
 });
 

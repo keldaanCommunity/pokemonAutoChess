@@ -260,11 +260,11 @@ class Status extends schema.Schema {
 
       cells.forEach((cell) => {
         if (cell.value && pokemon.team == cell.value.team) {
-          cell.value.handleHeal(0.18 * pokemon.hp);
+          cell.value.handleHeal(0.18 * cell.value.hp, pokemon);
           cell.value.count.brightPowderCount ++;
         }
       });
-      pokemon.handleHeal(0.18 * pokemon.hp);
+      pokemon.handleHeal(0.18 * pokemon.hp, pokemon);
 
       if (pokemon.items.has(ITEM.BRIGHT_POWDER)) {
         pokemon.status.triggerBrightPowder(5000);
