@@ -672,7 +672,7 @@ class OnUpdatePhaseCommand extends Command {
           player.items.add(ItemFactory.createBasicRandomItem());
         }
         player.opponentName = '';
-        player.opponentAvatar = '';
+
         if (!player.shopLocked) {
           if (this.state.stageLevel == 10) {
             this.state.shop.assignFirstMythicalShop(player);

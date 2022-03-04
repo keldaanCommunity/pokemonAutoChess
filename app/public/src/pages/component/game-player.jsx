@@ -42,20 +42,20 @@ class GamePlayer extends Component{
             width:'70px'
         }
         
-        let opponent = this.props.opponentName != '' && this.props.opponentAvatar != ''? <img style={opponentStyle} src={`assets/avatar/${this.props.opponentAvatar}.png`}/>: null;
+        let opponent = this.props.opponent != '' && this.props.opponentAvatar != ''? <img style={opponentStyle} src={`assets/avatar/${this.props.opponentAvatar}.png`}/>: null;
 
         return  <div 
             style={style} 
-            className='nes-container' 
+            className='nes-container'
             onClick={()=>{this.props.playerClick(this.props.id)}}
             data-tip
             data-for={'detail-' + this.props.id}
         >
 
-             <ReactTooltip id={'detail-' + this.props.id} 
+             <ReactTooltip id={'detail-' + this.props.id}
                 className='customeTheme' 
                 textColor='#000000' 
-                backgroundColor='rgba(255,255,255,0.7)' 
+                backgroundColor='rgba(255,255,255,1)' 
                 effect='solid'
                 place='left'>
             <GamePlayerDetail name={this.props.name} life={this.props.life} money={this.props.money} history={this.props.history}/>

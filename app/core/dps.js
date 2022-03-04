@@ -7,14 +7,22 @@ class Dps extends schema.Schema {
         {
           id: id,
           name: name,
-          damage: 0
+          physicalDamage: 0,
+          specialDamage: 0,
+          trueDamage: 0
         }
     );
   }
 
-  changeDamage(damage) {
-    if (this.damage != damage) {
-      this.damage = damage;
+  changeDamage(physicalDamage, specialDamage, trueDamage) {
+    if (this.physicalDamage != physicalDamage) {
+      this.physicalDamage = physicalDamage;
+    }
+    if (this.specialDamage != specialDamage) {
+      this.specialDamage = specialDamage;
+    }    
+    if (this.trueDamage != trueDamage) {
+      this.trueDamage = trueDamage;
     }
   }
 }
@@ -22,7 +30,9 @@ class Dps extends schema.Schema {
 schema.defineTypes(Dps, {
   id: 'string',
   name: 'string',
-  damage: 'uint16'
+  physicalDamage: 'uint16',
+  specialDamage: 'uint16',
+  trueDamage: 'uint16'
 });
 
 module.exports = Dps;

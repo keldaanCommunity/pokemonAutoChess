@@ -29,6 +29,8 @@ class Game extends Component {
           modalInfo: '',
           blueDpsMeter: {},
           redDpsMeter:{},
+          blueHealDpsMeter: {},
+          redHealDpsMeter: {},
           history:[],
           afterGameId: '',
           isSignedIn: false,
@@ -280,6 +282,52 @@ class Game extends Component {
                 });
             }
           };
+
+          player.simulation.blueHealDpsMeter.onAdd = (dps, key) => {
+            if(player.id == this.state.currentPlayerId){
+                this.setState({
+                  blueHealDpsMeter:player.simulation.blueHealDpsMeter
+                });
+            }
+            dps.onChange = (changes) => {
+              //console.log(changes);
+                if(player.id == this.state.currentPlayerId){
+                    this.setState({
+                      blueHealDpsMeter:player.simulation.blueHealDpsMeter
+                    });
+                }
+            };
+          };
+        player.simulation.blueHealDpsMeter.onRemove = (dps, key) => {
+            if(player.id == this.state.currentPlayerId){
+                this.setState({
+                  blueHealDpsMeter:player.simulation.blueHealDpsMeter
+                });
+            }
+          };
+
+          player.simulation.redHealDpsMeter.onAdd = (dps, key) => {
+            if(player.id == this.state.currentPlayerId){
+                this.setState({
+                  redHealDpsMeter:player.simulation.redHealDpsMeter
+                });
+            }
+            dps.onChange = (changes) => {
+              //console.log(changes);
+                if(player.id == this.state.currentPlayerId){
+                    this.setState({
+                      redHealDpsMeter:player.simulation.redHealDpsMeter
+                    });
+                }
+            };
+          };
+        player.simulation.redHealDpsMeter.onRemove = (dps, key) => {
+            if(player.id == this.state.currentPlayerId){
+                this.setState({
+                  redHealDpsMeter:player.simulation.redHealDpsMeter
+                });
+            }
+          };
       };
       this.room.state.players.onRemove = (player, key) => {
         this.gameContainer.onPlayerRemove(player, key)
@@ -405,7 +453,11 @@ class Game extends Component {
     playerClick(id){
         this.setState({
             currentPlayerId:id,
-            player:this.state.gameState.players.get(id)
+            player:this.state.gameState.players.get(id),
+            blueDpsMeter: this.state.gameState.players.get(id).simulation.blueDpsMeter,
+            redDpsMeter: this.state.gameState.players.get(id).simulation.redDpsMeter,
+            blueHealDpsMeter: this.state.gameState.players.get(id).simulation.blueHealDpsMeter,
+            redHealDpsMeter: this.state.gameState.players.get(id).simulation.redHealDpsMeter,
         });
         this.gameContainer.onPlayerClick(id);
     }
@@ -478,6 +530,11 @@ class Game extends Component {
         <GameDpsMeter
             blueDpsMeter={this.state.blueDpsMeter}
             redDpsMeter={this.state.redDpsMeter}
+            blueHealDpsMeter={this.state.blueHealDpsMeter}
+            redHealDpsMeter={this.state.redHealDpsMeter}
+
+            blueAvatar={this.state.player.avatar}
+            redAvatar={this.state.player.opponentAvatar}
         />
         <GameSynergies
             synergies={this.state.player.synergies}

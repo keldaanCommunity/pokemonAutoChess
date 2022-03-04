@@ -159,23 +159,16 @@ class AttackingState extends PokemonState {
 
       if (pokemon.items.has(ITEM.LEFTOVERS)) {
         const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
-        pokemon.handleHeal(3);
+        pokemon.handleHeal(3, pokemon);
         cells.forEach((cell) => {
           if (cell.value && pokemon.team == cell.value.team) {
-            cell.value.handleHeal(3);
+            cell.value.handleHeal(3, pokemon);
           }
         });
       }
 
       if (pokemon.items.has(ITEM.MANA_SCARF)) {
         pokemon.setMana(pokemon.mana + 8);
-      }
-
-      if (victim && pokemon.effects.includes(EFFECTS.BRUTAL_SWING)) {
-        pokemon.handleHeal(pokemon.hp);
-      }
-      if (victim && pokemon.effects.includes(EFFECTS.POWER_TRIP)) {
-        pokemon.atk += pokemon.baseAtk;
       }
     }
   }

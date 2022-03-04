@@ -57,7 +57,6 @@ class PokemonEntity extends schema.Schema {
           team: team,
           attackSprite: pokemon.attackSprite,
           types: [],
-          damageDone: 0,
           stars: pokemon.stars,
           skill: pokemon.skill,
           critDamage: 2,
@@ -65,6 +64,11 @@ class PokemonEntity extends schema.Schema {
         }
     );
     this.dodge = 0;
+    this.physicalDamage = 0;
+    this.specialDamage = 0;
+    this.trueDamage = 0;
+    this.healDone = 0;
+    this.shieldDone = 0;
 
     pokemon.types.forEach((type) => {
       this.types.push(type);
@@ -102,7 +106,7 @@ class PokemonEntity extends schema.Schema {
       this.status.triggerWound(3000);
     }
     if (attacker && attacker.items.has(ITEM.SHELL_BELL)) {
-      attacker.handleHeal(0.4 * damage);
+      attacker.handleHeal(0.4 * damage, attacker);
     }
     if (this.status.runeProtect) {
       this.status.disableRuneProtect();
@@ -112,8 +116,12 @@ class PokemonEntity extends schema.Schema {
     }
   }
 
-  handleHeal(heal) {
-    return this.state.handleHeal(this, heal);
+  handleHeal(heal, caster) {
+    return this.state.handleHeal(this, heal, caster);
+  }
+
+  handleShield(shield, caster) {
+    return this.state.handleShield(this, shield, caster);
   }
 
   changeState(state) {
@@ -185,7 +193,8 @@ schema.defineTypes(PokemonEntity, {
   status: Status,
   count: Count,
   critDamage: 'float32',
-  spellDamage: 'uint8'
+  spellDamage: 'uint8',
+  healDone: 'uint16'
 });
 
 module.exports = PokemonEntity;
