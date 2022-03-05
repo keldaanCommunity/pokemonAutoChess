@@ -74,7 +74,7 @@ class OnDragDropCommand extends Command {
       info:'Tu es un sanglier'
     });
     */
-   // console.log(detail);
+    // console.log(detail);
     const commands = [];
     let success = false;
     let dittoReplaced = false;
@@ -166,15 +166,14 @@ class OnDragDropCommand extends Command {
         }
         // check if full items
         if (pokemon.items.size >= 3) {
-          if(Object.keys(BASIC_ITEM).includes(item)){
+          if (Object.keys(BASIC_ITEM).includes(item)) {
             let includesBasicItem = false;
-            pokemon.items.forEach(i=>{
-              if(Object.keys(BASIC_ITEM).includes(i)){
+            pokemon.items.forEach((i)=>{
+              if (Object.keys(BASIC_ITEM).includes(i)) {
                 includesBasicItem = true;
               }
             });
-          }
-          else{
+          } else {
             client.send('DragDropFailed', message);
             return;
           }
@@ -337,14 +336,14 @@ class OnDragDropCommand extends Command {
           return;
         }
 
-        if(item == itemToCombine){
+        if (item == itemToCombine) {
           let count = 0;
-          player.items.forEach(i=>{
-            if(i == item){
+          player.items.forEach((i)=>{
+            if (i == item) {
               count ++;
             }
           });
-          if(count < 2){
+          if (count < 2) {
             client.send('DragDropFailed', message);
             return;
           }
@@ -367,7 +366,7 @@ class OnDragDropCommand extends Command {
       player.synergies.update(player.board);
       player.effects.update(player.synergies);
     }
-    if(commands.length > 0){
+    if (commands.length > 0) {
       return commands;
     }
   }
@@ -761,7 +760,7 @@ class OnUpdatePhaseCommand extends Command {
     this.state.players.forEach((player, key) => {
       if (player.alive) {
         if (player.itemsProposition.length != 0) {
-          if(player.itemsProposition.length == 3) {
+          if (player.itemsProposition.length == 3) {
             player.items.add(player.itemsProposition.pop());
           }
           while (player.itemsProposition.length > 0) {

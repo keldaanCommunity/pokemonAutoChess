@@ -1,7 +1,7 @@
 const Command = require('@colyseus/command').Command;
 const GameUser = require('../../models/colyseus-models/game-user');
 const UserMetadata = require('../../models/mongo-models/user-metadata');
-const Bot = require('../../models/mongo-models/bot');
+const Bot = require('../../models/mongo-models/bot-v2');
 
 class OnJoinCommand extends Command {
   execute({client, options, auth}) {
