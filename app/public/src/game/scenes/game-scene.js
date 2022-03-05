@@ -178,11 +178,13 @@ export default class GameScene extends Scene {
     this.dialog = undefined;
     this.input.mouse.disableContextMenu();
 
+    this.registerKeys();
+
     this.input.dragDistanceThreshold = 1;
     this.map = this.make.tilemap({key: 'map'});
     const tileset = this.map.addTilesetImage(this.tilemap.tilesets[0].name, 'tiles', 24, 24, 1, 1);
     this.map.createLayer('World', tileset, 0, 0);
-    this.initilizeDragAndDrop();
+    this.initializeDragAndDrop();
     this.battle = this.add.group();
     this.animationManager = new AnimationManager(this);
     this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].items, 24*24 + 10, 5*24 + 10, true);
@@ -200,10 +202,46 @@ export default class GameScene extends Scene {
     this.music.play();
   }
 
+  registerKeys(){
+
+    this.input.keyboard.on('keyup-D', (event) => {
+      this.refreshShop()
+    })
+
+    this.input.keyboard.on('keyup-F', (event) => {
+      this.buyExperience()
+    })
+
+    this.input.keyboard.on('keyup-E', (event) => {
+      this.sellPokemon()
+    })
+  }
+
+  refreshShop(){
+    this.room.send('refresh');
+  }
+
+  buyExperience(){
+    this.room.send('levelUp');
+  }
+
+  sellPokemon(){
+    if(!this.targetPokemon || !this.targetPokemon.scene || !this.targetPokemon.input.draggable){
+      return
+    }
+    
+    document.getElementById('game').dispatchEvent(new CustomEvent('sell-drop', {
+      detail: {
+        'pokemonId': this.targetPokemon.id
+      }
+    }));
+  }
+
   update() {
   }
 
   updatePhase() {
+    this.targetPokemon = null
     if (this.room.state.phase == STATE.FIGHT) {
       this.boardManager.battleMode();
     } else {
@@ -225,7 +263,7 @@ export default class GameScene extends Scene {
     });
   }
 
-  initilizeDragAndDrop() {
+  initializeDragAndDrop() {
     this.zones = [];
     this.graphics = [];
     for (let i=0; i<9; i++) {
@@ -287,7 +325,6 @@ export default class GameScene extends Scene {
 
     this.input.on('pointerdown', (pointer) => {
       if (pointer.rightButtonDown()) {
-        // console.log(this.pokemon);
         this.pokemon.orientation = getOrientation(this.pokemon.x, this.pokemon.y, pointer.x, pointer.y);
         this.animationManager.animatePokemon(this.pokemon);
         this.pokemon.moveManager.moveTo(pointer.x, pointer.y);
@@ -298,6 +335,15 @@ export default class GameScene extends Scene {
         }
       }
     });
+
+    this.input.on('gameobjectover', (pointer, gameObject) => {
+      if(gameObject.objType == 'pokemon'){
+        this.targetPokemon = gameObject
+      }
+      else {
+        this.targetPokemon = null
+      }
+    })
 
     this.input.on('dragstart', (pointer, gameObject) => {
       this.drawRectangles();
@@ -311,7 +357,6 @@ export default class GameScene extends Scene {
 
     this.input.on('drop', (pointer, gameObject, dropZone) => {
       this.removeRectangles();
-
       if (dropZone.name.includes('item')) {
         document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
           detail: {
@@ -350,12 +395,6 @@ export default class GameScene extends Scene {
             }
           }));
         }
-
-
-        // if (gameObject.objType == 'item') {
-        //   console.log('in game scene before update item')
-        //   this.itemsContainer.updateItem(gameObject.plce);
-        // }
       }
     }, this);
 
