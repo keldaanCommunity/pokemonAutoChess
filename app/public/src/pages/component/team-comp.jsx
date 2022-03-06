@@ -40,7 +40,7 @@ class TeamComp extends Component{
                 <p>Average Place: {this.props.team.mean_rank.toFixed(2)}</p>
                 <p>Winrate: {this.props.team.winrate.toFixed(2)} %</p>
                 <p>Popularity: {this.props.team.ratio.toFixed(2)} %</p>
-                <p>count: {this.props.team.count}</p>
+                <p>Count: {this.props.team.count}</p>
             </div>
         </div>
     }
