@@ -121,12 +121,13 @@ class AttackingState extends PokemonState {
         damage = pokemon.atk;
       }
 
-      const victim = target.handleDamage(damage, board, attackType, pokemon);
+      target.handleDamage(damage, board, attackType, pokemon);
 
       if (pokemon.items.has(ITEM.BLUE_ORB)) {
         pokemon.count.staticHolderCount ++;
         if (pokemon.count.staticHolderCount > 3) {
           pokemon.count.staticHolderCount = 0;
+          // eslint-disable-next-line no-unused-vars
           let c = 4;
           board.forEach((x, y, tg) => {
             if (tg && pokemon.team != tg.team) {

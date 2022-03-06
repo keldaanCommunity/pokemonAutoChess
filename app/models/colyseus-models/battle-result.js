@@ -8,7 +8,7 @@ class BattleResult extends Schema {
       name: name,
       result: result,
       avatar: avatar,
-      isPVE: isPVE 
+      isPVE: isPVE
     });
   }
 }

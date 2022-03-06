@@ -106,7 +106,7 @@ class Status extends schema.Schema {
     if (!this.burn && !pkm.items.has(ITEM.WIDE_LENS)) {
       this.burn = true;
       this.burnCooldown = timer;
-      if(origin){
+      if (origin) {
         this.burnOrigin = origin;
       }
     }
@@ -140,7 +140,7 @@ class Status extends schema.Schema {
     if (!this.poison && !pkm.items.has(ITEM.WIDE_LENS)) {
       this.poison = true;
       this.poisonCooldown = timer;
-      if(origin){
+      if (origin) {
         this.poisonOrigin = origin;
       }
     }

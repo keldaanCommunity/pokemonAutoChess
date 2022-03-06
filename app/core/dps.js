@@ -20,7 +20,7 @@ class Dps extends schema.Schema {
     }
     if (this.specialDamage != specialDamage) {
       this.specialDamage = specialDamage;
-    }    
+    }
     if (this.trueDamage != trueDamage) {
       this.trueDamage = trueDamage;
     }
