@@ -38,7 +38,7 @@ class Lobby extends Component {
             botData: {},
             meta: [],
             showMeta: false,
-            botList: []
+            botList: [],
             roomCreated: false
         };
 
