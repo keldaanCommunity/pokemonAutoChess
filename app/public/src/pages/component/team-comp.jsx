@@ -12,8 +12,8 @@ class TeamComp extends Component{
       }
 
     render(){
-        let sortedTypes = Object.keys(this.props.team.types).sort((a,b)=>{return this.props.team.types[b] - this.props.team.types[a]});
-        let sortedPokemons = Object.keys(this.props.team.pokemons).sort((a,b)=>{return this.props.team.pokemons[b] - this.props.team.pokemons[a]});
+        let sortedTypes = this.props.team.types ? Object.keys(this.props.team.types).sort((a,b)=>{return this.props.team.types[b] - this.props.team.types[a]}) : [];
+        let sortedPokemons = this.props.team.pokemons ? Object.keys(this.props.team.pokemons).sort((a,b)=>{return this.props.team.pokemons[b] - this.props.team.pokemons[a]}) : [];
 
         return <div style={{backgroundColor:'rgba(255,255,255,1)', margin:'10px'}} className='nes-container'>
             <div style={{display:'flex', justifyContent:'space-between'}}>

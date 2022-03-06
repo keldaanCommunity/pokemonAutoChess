@@ -47,7 +47,7 @@ class OnGameStartCommand extends Command {
 
 class OnMessageCommand extends Command {
   execute({client, message}) {
-    this.room.broadcast('messages', {...message, time:Date.now()});
+    this.room.broadcast('messages', {...message, time: Date.now()});
   }
 }
 
@@ -73,86 +73,84 @@ class OnToggleReadyCommand extends Command {
 
 class InitializeBotsCommand extends Command {
   execute(ownerId) {
-    
     UserMetadata.findOne({'uid': ownerId}, (err, user)=>{
-      if(!user){
-        return
+      if (!user) {
+        return;
       }
 
-      const difficulty = { $gt: user.elo - 100, $lt: user.elo + 100 }
+      const difficulty = {$gt: user.elo - 100, $lt: user.elo + 100};
 
-      Bot.find({ elo: difficulty}, ['avatar', 'elo'], null)
-      .limit(7)
-      .exec(
-        (err, bots) => {
-          if(!bots){
-            return
-          }
-          bots.forEach((bot) => {
-            this.state.users.set(bot.avatar, new GameUser(
-              bot.avatar,
-              bot.avatar,
-              bot.elo,
-              bot.avatar,
-              true,
-              true,
-              {}
-            ));
-          })
-        }
-      )
-
-    })
+      Bot.find({elo: difficulty}, ['avatar', 'elo'], null)
+          .limit(7)
+          .exec(
+              (err, bots) => {
+                if (!bots) {
+                  return;
+                }
+                bots.forEach((bot) => {
+                  this.state.users.set(bot.avatar, new GameUser(
+                      bot.avatar,
+                      bot.avatar,
+                      bot.elo,
+                      bot.avatar,
+                      true,
+                      true,
+                      {}
+                  ));
+                });
+              }
+          );
+    });
   }
 }
 
 class OnAddBotCommand extends Command {
   execute(message) {
-    if(this.state.users.size >= 8){
-      return
+    if (this.state.users.size >= 8) {
+      return;
     }
 
-    const userArray = []
+    const userArray = [];
 
     this.state.users.forEach((value, key) => {
-      if(value.isBot){
-        userArray.push(key)
+      if (value.isBot) {
+        userArray.push(key);
       }
-    })
-    
+    });
+
     let difficulty = null;
-    switch(message.difficulty){
+    switch (message.difficulty) {
       case 'easy':
-        difficulty = { $lt: 800 }
-        break
+        difficulty = {$lt: 800};
+        break;
       case 'normal':
-        difficulty = { $gt: 800, $lt: 1100 }
-        break
+        difficulty = {$gt: 800, $lt: 1100};
+        break;
       case 'hard':
-        difficulty = { $gt: 1100 }
-        break
+        difficulty = {$gt: 1100};
+        break;
     }
-    
-    Bot.find({ avatar: {$nin: userArray}, elo: difficulty}, ['avatar', 'elo'], null, (err, bots) => {
-      if(bots.length <= 0){
+
+    Bot.find({avatar: {$nin: userArray}, elo: difficulty}, ['avatar', 'elo'], null, (err, bots) => {
+      if (bots.length <= 0) {
         this.room.broadcast('messages', {
           'name': 'Server',
           'payload': `Error: No bots found`,
           'avatar': 'magnemite',
           'time': Date.now()
         });
-        return
+        return;
       }
 
-      const bot = bots[Math.floor(Math.random() * bots.length)]
+      const bot = bots[Math.floor(Math.random() * bots.length)];
       this.state.users.set(bot.avatar, new GameUser(
-        bot.avatar,
-        bot.avatar,
-        bot.elo,
-        bot.avatar,
-        true,
-        true,
-        {}
+          bot.avatar,
+          bot.avatar,
+          bot.elo,
+          bot.avatar,
+          true,
+          true,
+          {}
       ));
 
 
@@ -162,40 +160,37 @@ class OnAddBotCommand extends Command {
         'avatar': 'magnemite',
         'time': Date.now()
       });
-
-    })
+    });
   }
 }
 
 
-
 class OnRemoveBotCommand extends Command {
   execute(message) {
-    //if no message, delete a random bot
-    if(!message){
-      let botDeleted = false
-      const keys = this.state.users.keys()
-      while(!keys.done) {
-        let key = keys.next().value
-        if(this.state.users.get(key).isBot){
+    // if no message, delete a random bot
+    if (!message) {
+      // let botDeleted = false;
+      const keys = this.state.users.keys();
+      while (!keys.done) {
+        const key = keys.next().value;
+        if (this.state.users.get(key).isBot) {
           this.room.broadcast('messages', {
             'name': 'Server',
             'payload': `Bot ${key} removed to make room for new player.`,
             'avatar': 'magnemite',
             'time': Date.now()
           });
-          this.state.users.delete(key)
-          botDeleted = true
-          return
+          this.state.users.delete(key);
+          // botDeleted = true;
+          return;
         }
       }
-      console.log('error, no bots in lobby')
-      return
+      console.log('error, no bots in lobby');
+      return;
     }
 
 
-
-    if(this.state.users.delete(message.target)){
+    if (this.state.users.delete(message.target)) {
       this.room.broadcast('messages', {
         'name': 'Server',
         'payload': `Bot ${message.target} removed.`,

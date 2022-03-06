@@ -3344,846 +3344,846 @@ const PROBABILITY = {
 };
 
 const PRECOMPUTED_TYPE_POKEMONS_ALL = {
-    NORMAL: [
-      'cleffa',        'clefairy',      'clefable',
-      'igglybuff',     'wygglytuff',    'jigglypuff',
-      'pidgey',        'pidgeotto',     'pidgeot',
-      'starly',        'staravia',      'staraptor',
-      'togepi',        'togetic',       'togekiss',
-      'slakoth',       'vigoroth',      'slaking',
-      'regigigas',     'eevee',         'arceus',
-      'buneary',       'lopunny',       'mega-lopunny',
-      'porygon',       'porygon2',      'porygon-z',
-      'whismur',       'loudred',       'exploud',
-      'pikipek',       'trumbeak',      'toucannon',
-      'meloetta',      'castform',      'castform-sun',
-      'castform-rain', 'castform-hail'
-    ],
-    GRASS: [
-      'bulbasaur',      'ivysaur',    'venusaur',
-      'caterpie',       'metapod',    'butterfree',
-      'hoppip',         'skiploom',   'jumpluff',
-      'seedot',         'nuzleaf',    'shiftry',
-      'chikorita',      'bayleef',    'meganium',
-      'treecko',        'grovyle',    'sceptile',
-      'turtwig',        'grotle',     'torterra',
-      'lotad',          'lombre',     'ludicolo',
-      'leafeon',        'bellsprout', 'weepinbell',
-      'victreebel',     'snover',     'abomasnow',
-      'mega-abomasnow', 'virizion',   'celebi',
-      'shaymin',        'oddish',     'gloom',
-      'vileplume',      'bellossom',  'lileep',
-      'cradily',        'budew',      'roselia',
-      'roserade',       'sewaddle',   'swadloon',
-      'leavanny'
-    ],
-    FIRE: [
-      'charmander',     'charmeleon',     'charizard',
-      'cyndaquil',      'quilava',        'typlosion',
-      'torchic',        'combusken',      'blaziken',
-      'chimchar',       'monferno',       'infernape',
-      'magby',          'magmar',         'magmortar',
-      'moltres',        'entei',          'groudon',
-      'flareon',        'numel',          'camerupt',
-      'mega-camerupt',  'litwick',        'lampent',
-      'chandelure',     'volcarona',      'reshiram',
-      'victini',        'heatran',        'ho-Oh',
-      'primal-Groudon', 'alolan-marowak', 'houndour',
-      'castform-sun'
-    ],
-    WATER: [
-      'squirtle',      'wartortle',     'blastoise',
-      'azurill',       'marill',        'azumarill',
-      'mudkip',        'marshtomp',     'swampert',
-      'piplup',        'prinplup',      'empoleon',
-      'horsea',        'seadra',        'kingdra',
-      'lotad',         'lombre',        'ludicolo',
-      'poliwag',       'poliwhirl',     'politoed',
-      'gyarados',      'palkia',        'suicune',
-      'kyogre',        'vaporeon',      'carvanha',
-      'keldeo',        'manaphy',       'lapras',
-      'primal-Kyogre', 'tirtouga',      'carracosta',
-      'kabuto',        'kabutops',      'omanyte',
-      'omastar',       'tympole',       'palpitoad',
-      'seismitoad',    'castform-rain'
-    ],
-    ELECTRIC: [
-      'mareep',         'flaffy',
-      'ampharos',       'pichu',
-      'pikachu',        'raichu',
-      'magnemite',      'magneton',
-      'magnezone',      'shinx',
-      'luxio',          'luxray',
-      'elekid',         'electabuzz',
-      'electivire',     'zapdos',
-      'raikou',         'jolteon',
-      'thundurus',      'rotom',
-      'zekrom',         'primal-Kyogre',
-      'electrike',      'manectric',
-      'mega-manectric'
-    ],
-    FIGHTING: [
-      'torchic',      'combusken',
-      'blaziken',     'chimchar',
-      'monferno',     'infernape',
-      'machop',       'machoke',
-      'machamp',      'poliwag',
-      'poliwhirl',    'politoed',
-      'riolu',        'lucario',
-      'mega-lucario', 'meditite',
-      'medicham',     'mega-medicham',
-      'keldeo',       'terrakion',
-      'virizion',     'cobalion',
-      'buneary',      'lopunny',
-      'mega-lopunny', 'jangmo-o',
-      'hakamo-o',     'kommo-o'
-    ],
-    PSYCHIC: [
-      'abra',      'kadabra',       'alakazam',
-      'ralts',     'kirlia',        'gardevoir',
-      'beldum',    'metang',        'metagross',
-      'lugia',     'espeon',        'meditite',
-      'medicham',  'mega-medicham', 'slowpoke',
-      'slowbro',   'slowking',      'latias',
-      'latios',    'mesprit',       'azelf',
-      'uxie',      'mewtwo',        'celebi',
-      'victini',   'jirachi',       'deoxys',
-      'cresselia', 'solosis',       'duosion',
-      'reuniclus', 'porygon',       'porygon2',
-      'porygon-z'
-    ],
-    DARK: [
-      'seedot',       'nuzleaf',
-      'shiftry',      'duskull',
-      'dusclops',     'dusknoir',
-      'larvitar',     'pupitar',
-      'tyranitar',    'umbreon',
-      'darkrai',      'carvanha',
-      'spiritomb',    'absol',
-      'deino',        'zweilous',
-      'hydreigon',    'sandile',
-      'krokorok',     'krookodile',
-      'shuppet',      'banette',
-      'mega-banette', 'houndour'
-    ],
-    METAL: [
-      'piplup',       'prinplup',    'empoleon',
-      'aron',         'lairon',      'aggron',
-      'magnemite',    'magneton',    'magnezone',
-      'beldum',       'metang',      'metagross',
-      'onix',         'steelix',     'mega-steelix',
-      'scizor',       'mega-scizor', 'lucario',
-      'mega-lucario', 'dialga',      'registeel',
-      'cobalion',     'jirachi',     'heatran',
-      'shieldon',     'bastiodon',   'honedge',
-      'doublade',     'aegislash'
-    ],
-    GROUND: [
-      'geodude',       'graveler',  'golem',
-      'mudkip',        'marshtomp', 'swampert',
-      'turtwig',       'grotle',    'torterra',
-      'trapinch',      'vibrava',   'flygon',
-      'rhyhorn',       'rhydon',    'rhyperior',
-      'gible',         'gabite',    'garchomp',
-      'onix',          'steelix',   'mega-steelix',
-      'groudon',       'numel',     'camerupt',
-      'mega-camerupt', 'swinub',    'piloswine',
-      'mamoswine',     'landorus',  'primal-Groudon',
-      'sandile',       'krokorok',  'krookodile',
-      'cubone',        'marowak',   'alolan-marowak',
-      'tympole',       'palpitoad', 'seismitoad'
-    ],
-    POISON: [
-      'bulbasaur',  'ivysaur',    'venusaur',
-      'zubat',      'golbat',     'crobat',
-      'weedle',     'kakuna',     'beedrill',
-      'nidoranF',   'nidorina',   'nidoqueen',
-      'nidoranM',   'nidorino',   'nidoking',
-      'gastly',     'haunter',    'gengar',
-      'bellsprout', 'weepinbell', 'victreebel',
-      'oddish',     'gloom',      'vileplume',
-      'bellossom',  'budew',      'roselia',
-      'roserade',   'venipede',   'whirlipede',
-      'scolipede'
-    ],
-    DRAGON: [
-      'charmander', 'charmeleon',   'charizard',
-      'horsea',     'seadra',       'kingdra',
-      'vibrava',    'flygon',       'dratini',
-      'dragonair',  'dragonite',    'bagon',
-      'shelgon',    'salamence',    'gible',
-      'gabite',     'garchomp',     'giratina',
-      'dialga',     'palkia',       'rayquaza',
-      'latias',     'latios',       'kyurem',
-      'reshiram',   'zekrom',       'deino',
-      'zweilous',   'hydreigon',    'mega-Rayquaza',
-      'swablu',     'tyrunt',       'tyrantrum',
-      'axew',       'fraxure',      'haxorus',
-      'jangmo-o',   'hakamo-o',     'kommo-o',
-      'altaria',    'mega-altaria'
-    ],
-    FIELD: [
-      'squirtle',       'wartortle', 'blastoise',
-      'mareep',         'flaffy',    'ampharos',
-      'seedot',         'nuzleaf',   'shiftry',
-      'cyndaquil',      'quilava',   'typlosion',
-      'nidoranF',       'nidorina',  'nidoqueen',
-      'nidoranM',       'nidorino',  'nidoking',
-      'shinx',          'luxio',     'luxray',
-      'slakoth',        'vigoroth',  'slaking',
-      'raikou',         'entei',     'eevee',
-      'vaporeon',       'jolteon',   'flareon',
-      'espeon',         'umbreon',   'leafeon',
-      'sylveon',        'numel',     'camerupt',
-      'mega-camerupt',  'swinub',    'piloswine',
-      'mamoswine',      'glaceon',   'absol',
-      'arceus',         'sandile',   'krokorok',
-      'krookodile',     'electrike', 'manectric',
-      'mega-manectric'
-    ],
-    MONSTER: [
-      'totodile',  'croconaw',  'feraligatr',
-      'treecko',   'grovyle',   'sceptile',
-      'aron',      'lairon',    'aggron',
-      'rhyhorn',   'rhydon',    'rhyperior',
-      'gastly',    'haunter',   'gengar',
-      'larvitar',  'pupitar',   'tyranitar',
-      'bagon',     'shelgon',   'salamence',
-      'gible',     'gabite',    'garchomp',
-      'regigigas', 'darkrai',   'mewtwo',
-      'cranidos',  'rampardos', 'axew',
-      'fraxure',   'haxorus'
-    ],
-    HUMAN: [
-      'machop',        'machoke',
-      'machamp',       'abra',
-      'kadabra',       'alakazam',
-      'ralts',         'kirlia',
-      'gardevoir',     'elekid',
-      'electabuzz',    'electivire',
-      'magby',         'magmar',
-      'magmortar',     'riolu',
-      'lucario',       'mega-lucario',
-      'regice',        'regirock',
-      'registeel',     'regigigas',
-      'meditite',      'medicham',
-      'mega-medicham', 'deoxys'
-    ],
-    AQUATIC: [
-      'totodile',      'croconaw',
-      'feraligatr',    'spheal',
-      'sealeo',        'walrein',
-      'dratini',       'dragonair',
-      'dragonite',     'lugia',
-      'kyogre',        'slowpoke',
-      'slowbro',       'slowking',
-      'primal-Kyogre'
-    ],
-    BUG: [
-      'caterpie',   'metapod',
-      'butterfree', 'weedle',
-      'kakuna',     'beedrill',
-      'trapinch',   'vibrava',
-      'flygon',     'scyther',
-      'scizor',     'mega-scizor',
-      'volcarona',  'manaphy',
-      'anorith',    'armaldo',
-      'venipede',   'whirlipede',
-      'scolipede',  'sewaddle',
-      'swadloon',   'leavanny'
-    ],
-    FLYING: [
-      'zubat',      'golbat',        'crobat',
-      'butterfree', 'beedrill',      'pidgey',
-      'pidgeotto',  'pidgeot',       'hoppip',
-      'skiploom',   'jumpluff',      'starly',
-      'staravia',   'staraptor',     'torchic',
-      'combusken',  'blaziken',      'piplup',
-      'prinplup',   'empoleon',      'togetic',
-      'togekiss',   'dragonite',     'salamence',
-      'scyther',    'scizor',        'mega-scizor',
-      'lugia',      'zapdos',        'moltres',
-      'articuno',   'rayquaza',      'landorus',
-      'thundurus',  'tornadus',      'ho-Oh',
-      'aerodactyl', 'mega-Rayquaza', 'archen',
-      'archeops',   'pikipek',       'trumbeak',
-      'toucannon'
-    ],
-    FLORA: [
-      'bulbasaur',  'ivysaur',
-      'venusaur',   'hoppip',
-      'skiploom',   'jumpluff',
-      'chikorita',  'bayleef',
-      'meganium',   'turtwig',
-      'grotle',     'torterra',
-      'leafeon',    'bellsprout',
-      'weepinbell', 'victreebel',
-      'shaymin',    'budew',
-      'roselia',    'roserade',
-      'flabebe',    'floette',
-      'florges'
-    ],
-    MINERAL: [
-      'geodude',        'graveler',
-      'golem',          'aron',
-      'lairon',         'aggron',
-      'rhyhorn',        'rhydon',
-      'rhyperior',      'larvitar',
-      'pupitar',        'tyranitar',
-      'beldum',         'metang',
-      'metagross',      'onix',
-      'steelix',        'mega-steelix',
-      'regirock',       'terrakion',
-      'cubone',         'marowak',
-      'alolan-marowak'
-    ],
-    GHOST: [
-      'duskull',       'dusclops',
-      'dusknoir',      'gastly',
-      'haunter',       'gengar',
-      'giratina',      'darkrai',
-      'litwick',       'lampent',
-      'chandelure',    'snorunt',
-      'glalie',        'froslass',
-      'rotom',         'spiritomb',
-      'solosis',       'duosion',
-      'reuniclus',     'shuppet',
-      'banette',       'mega-banette',
-      'honedge',       'doublade',
-      'aegislash',     'alolan-marowak',
-      'castform',      'castform-sun',
-      'castform-rain', 'castform-hail'
-    ],
-    FAIRY: [
-      'azurill',   'marill',       'azumarill',
-      'cleffa',    'clefairy',     'clefable',
-      'igglybuff', 'wygglytuff',   'jigglypuff',
-      'pichu',     'pikachu',      'raichu',
-      'togepi',    'togetic',      'togekiss',
-      'ralts',     'kirlia',       'gardevoir',
-      'sylveon',   'vanillite',    'vanillish',
-      'vanilluxe', 'mesprit',      'azelf',
-      'uxie',      'cresselia',    'swablu',
-      'flabebe',   'floette',      'florges',
-      'altaria',   'mega-altaria'
-    ],
-    ICE: [
-      'spheal',         'sealeo',
-      'walrein',        'articuno',
-      'suicune',        'regice',
-      'swinub',         'piloswine',
-      'mamoswine',      'snorunt',
-      'glalie',         'froslass',
-      'snover',         'abomasnow',
-      'mega-abomasnow', 'vanillite',
-      'vanillish',      'vanilluxe',
-      'glaceon',        'lapras',
-      'kyurem',         'amaura',
-      'aurorus',        'castform-hail'
-    ],
-    FOSSIL: [
-      'aerodactyl', 'amaura',
-      'aurorus',    'anorith',
-      'armaldo',    'archen',
-      'archeops',   'shieldon',
-      'bastiodon',  'tirtouga',
-      'carracosta', 'lileep',
-      'cradily',    'cranidos',
-      'rampardos',  'kabuto',
-      'kabutops',   'omanyte',
-      'omastar',    'tyrunt',
-      'tyrantrum'
-    ],
-    SOUND: [
-      'zubat',        'golbat',     'crobat',
-      'igglybuff',    'wygglytuff', 'jigglypuff',
-      'swablu',       'whismur',    'loudred',
-      'exploud',      'tympole',    'palpitoad',
-      'seismitoad',   'sewaddle',   'swadloon',
-      'leavanny',     'pikipek',    'trumbeak',
-      'toucannon',    'flabebe',    'floette',
-      'florges',      'jangmo-o',   'hakamo-o',
-      'kommo-o',      'meloetta',   'altaria',
-      'mega-altaria'
-    ]
+  NORMAL: [
+    'cleffa', 'clefairy', 'clefable',
+    'igglybuff', 'wygglytuff', 'jigglypuff',
+    'pidgey', 'pidgeotto', 'pidgeot',
+    'starly', 'staravia', 'staraptor',
+    'togepi', 'togetic', 'togekiss',
+    'slakoth', 'vigoroth', 'slaking',
+    'regigigas', 'eevee', 'arceus',
+    'buneary', 'lopunny', 'mega-lopunny',
+    'porygon', 'porygon2', 'porygon-z',
+    'whismur', 'loudred', 'exploud',
+    'pikipek', 'trumbeak', 'toucannon',
+    'meloetta', 'castform', 'castform-sun',
+    'castform-rain', 'castform-hail'
+  ],
+  GRASS: [
+    'bulbasaur', 'ivysaur', 'venusaur',
+    'caterpie', 'metapod', 'butterfree',
+    'hoppip', 'skiploom', 'jumpluff',
+    'seedot', 'nuzleaf', 'shiftry',
+    'chikorita', 'bayleef', 'meganium',
+    'treecko', 'grovyle', 'sceptile',
+    'turtwig', 'grotle', 'torterra',
+    'lotad', 'lombre', 'ludicolo',
+    'leafeon', 'bellsprout', 'weepinbell',
+    'victreebel', 'snover', 'abomasnow',
+    'mega-abomasnow', 'virizion', 'celebi',
+    'shaymin', 'oddish', 'gloom',
+    'vileplume', 'bellossom', 'lileep',
+    'cradily', 'budew', 'roselia',
+    'roserade', 'sewaddle', 'swadloon',
+    'leavanny'
+  ],
+  FIRE: [
+    'charmander', 'charmeleon', 'charizard',
+    'cyndaquil', 'quilava', 'typlosion',
+    'torchic', 'combusken', 'blaziken',
+    'chimchar', 'monferno', 'infernape',
+    'magby', 'magmar', 'magmortar',
+    'moltres', 'entei', 'groudon',
+    'flareon', 'numel', 'camerupt',
+    'mega-camerupt', 'litwick', 'lampent',
+    'chandelure', 'volcarona', 'reshiram',
+    'victini', 'heatran', 'ho-Oh',
+    'primal-Groudon', 'alolan-marowak', 'houndour',
+    'castform-sun'
+  ],
+  WATER: [
+    'squirtle', 'wartortle', 'blastoise',
+    'azurill', 'marill', 'azumarill',
+    'mudkip', 'marshtomp', 'swampert',
+    'piplup', 'prinplup', 'empoleon',
+    'horsea', 'seadra', 'kingdra',
+    'lotad', 'lombre', 'ludicolo',
+    'poliwag', 'poliwhirl', 'politoed',
+    'gyarados', 'palkia', 'suicune',
+    'kyogre', 'vaporeon', 'carvanha',
+    'keldeo', 'manaphy', 'lapras',
+    'primal-Kyogre', 'tirtouga', 'carracosta',
+    'kabuto', 'kabutops', 'omanyte',
+    'omastar', 'tympole', 'palpitoad',
+    'seismitoad', 'castform-rain'
+  ],
+  ELECTRIC: [
+    'mareep', 'flaffy',
+    'ampharos', 'pichu',
+    'pikachu', 'raichu',
+    'magnemite', 'magneton',
+    'magnezone', 'shinx',
+    'luxio', 'luxray',
+    'elekid', 'electabuzz',
+    'electivire', 'zapdos',
+    'raikou', 'jolteon',
+    'thundurus', 'rotom',
+    'zekrom', 'primal-Kyogre',
+    'electrike', 'manectric',
+    'mega-manectric'
+  ],
+  FIGHTING: [
+    'torchic', 'combusken',
+    'blaziken', 'chimchar',
+    'monferno', 'infernape',
+    'machop', 'machoke',
+    'machamp', 'poliwag',
+    'poliwhirl', 'politoed',
+    'riolu', 'lucario',
+    'mega-lucario', 'meditite',
+    'medicham', 'mega-medicham',
+    'keldeo', 'terrakion',
+    'virizion', 'cobalion',
+    'buneary', 'lopunny',
+    'mega-lopunny', 'jangmo-o',
+    'hakamo-o', 'kommo-o'
+  ],
+  PSYCHIC: [
+    'abra', 'kadabra', 'alakazam',
+    'ralts', 'kirlia', 'gardevoir',
+    'beldum', 'metang', 'metagross',
+    'lugia', 'espeon', 'meditite',
+    'medicham', 'mega-medicham', 'slowpoke',
+    'slowbro', 'slowking', 'latias',
+    'latios', 'mesprit', 'azelf',
+    'uxie', 'mewtwo', 'celebi',
+    'victini', 'jirachi', 'deoxys',
+    'cresselia', 'solosis', 'duosion',
+    'reuniclus', 'porygon', 'porygon2',
+    'porygon-z'
+  ],
+  DARK: [
+    'seedot', 'nuzleaf',
+    'shiftry', 'duskull',
+    'dusclops', 'dusknoir',
+    'larvitar', 'pupitar',
+    'tyranitar', 'umbreon',
+    'darkrai', 'carvanha',
+    'spiritomb', 'absol',
+    'deino', 'zweilous',
+    'hydreigon', 'sandile',
+    'krokorok', 'krookodile',
+    'shuppet', 'banette',
+    'mega-banette', 'houndour'
+  ],
+  METAL: [
+    'piplup', 'prinplup', 'empoleon',
+    'aron', 'lairon', 'aggron',
+    'magnemite', 'magneton', 'magnezone',
+    'beldum', 'metang', 'metagross',
+    'onix', 'steelix', 'mega-steelix',
+    'scizor', 'mega-scizor', 'lucario',
+    'mega-lucario', 'dialga', 'registeel',
+    'cobalion', 'jirachi', 'heatran',
+    'shieldon', 'bastiodon', 'honedge',
+    'doublade', 'aegislash'
+  ],
+  GROUND: [
+    'geodude', 'graveler', 'golem',
+    'mudkip', 'marshtomp', 'swampert',
+    'turtwig', 'grotle', 'torterra',
+    'trapinch', 'vibrava', 'flygon',
+    'rhyhorn', 'rhydon', 'rhyperior',
+    'gible', 'gabite', 'garchomp',
+    'onix', 'steelix', 'mega-steelix',
+    'groudon', 'numel', 'camerupt',
+    'mega-camerupt', 'swinub', 'piloswine',
+    'mamoswine', 'landorus', 'primal-Groudon',
+    'sandile', 'krokorok', 'krookodile',
+    'cubone', 'marowak', 'alolan-marowak',
+    'tympole', 'palpitoad', 'seismitoad'
+  ],
+  POISON: [
+    'bulbasaur', 'ivysaur', 'venusaur',
+    'zubat', 'golbat', 'crobat',
+    'weedle', 'kakuna', 'beedrill',
+    'nidoranF', 'nidorina', 'nidoqueen',
+    'nidoranM', 'nidorino', 'nidoking',
+    'gastly', 'haunter', 'gengar',
+    'bellsprout', 'weepinbell', 'victreebel',
+    'oddish', 'gloom', 'vileplume',
+    'bellossom', 'budew', 'roselia',
+    'roserade', 'venipede', 'whirlipede',
+    'scolipede'
+  ],
+  DRAGON: [
+    'charmander', 'charmeleon', 'charizard',
+    'horsea', 'seadra', 'kingdra',
+    'vibrava', 'flygon', 'dratini',
+    'dragonair', 'dragonite', 'bagon',
+    'shelgon', 'salamence', 'gible',
+    'gabite', 'garchomp', 'giratina',
+    'dialga', 'palkia', 'rayquaza',
+    'latias', 'latios', 'kyurem',
+    'reshiram', 'zekrom', 'deino',
+    'zweilous', 'hydreigon', 'mega-Rayquaza',
+    'swablu', 'tyrunt', 'tyrantrum',
+    'axew', 'fraxure', 'haxorus',
+    'jangmo-o', 'hakamo-o', 'kommo-o',
+    'altaria', 'mega-altaria'
+  ],
+  FIELD: [
+    'squirtle', 'wartortle', 'blastoise',
+    'mareep', 'flaffy', 'ampharos',
+    'seedot', 'nuzleaf', 'shiftry',
+    'cyndaquil', 'quilava', 'typlosion',
+    'nidoranF', 'nidorina', 'nidoqueen',
+    'nidoranM', 'nidorino', 'nidoking',
+    'shinx', 'luxio', 'luxray',
+    'slakoth', 'vigoroth', 'slaking',
+    'raikou', 'entei', 'eevee',
+    'vaporeon', 'jolteon', 'flareon',
+    'espeon', 'umbreon', 'leafeon',
+    'sylveon', 'numel', 'camerupt',
+    'mega-camerupt', 'swinub', 'piloswine',
+    'mamoswine', 'glaceon', 'absol',
+    'arceus', 'sandile', 'krokorok',
+    'krookodile', 'electrike', 'manectric',
+    'mega-manectric'
+  ],
+  MONSTER: [
+    'totodile', 'croconaw', 'feraligatr',
+    'treecko', 'grovyle', 'sceptile',
+    'aron', 'lairon', 'aggron',
+    'rhyhorn', 'rhydon', 'rhyperior',
+    'gastly', 'haunter', 'gengar',
+    'larvitar', 'pupitar', 'tyranitar',
+    'bagon', 'shelgon', 'salamence',
+    'gible', 'gabite', 'garchomp',
+    'regigigas', 'darkrai', 'mewtwo',
+    'cranidos', 'rampardos', 'axew',
+    'fraxure', 'haxorus'
+  ],
+  HUMAN: [
+    'machop', 'machoke',
+    'machamp', 'abra',
+    'kadabra', 'alakazam',
+    'ralts', 'kirlia',
+    'gardevoir', 'elekid',
+    'electabuzz', 'electivire',
+    'magby', 'magmar',
+    'magmortar', 'riolu',
+    'lucario', 'mega-lucario',
+    'regice', 'regirock',
+    'registeel', 'regigigas',
+    'meditite', 'medicham',
+    'mega-medicham', 'deoxys'
+  ],
+  AQUATIC: [
+    'totodile', 'croconaw',
+    'feraligatr', 'spheal',
+    'sealeo', 'walrein',
+    'dratini', 'dragonair',
+    'dragonite', 'lugia',
+    'kyogre', 'slowpoke',
+    'slowbro', 'slowking',
+    'primal-Kyogre'
+  ],
+  BUG: [
+    'caterpie', 'metapod',
+    'butterfree', 'weedle',
+    'kakuna', 'beedrill',
+    'trapinch', 'vibrava',
+    'flygon', 'scyther',
+    'scizor', 'mega-scizor',
+    'volcarona', 'manaphy',
+    'anorith', 'armaldo',
+    'venipede', 'whirlipede',
+    'scolipede', 'sewaddle',
+    'swadloon', 'leavanny'
+  ],
+  FLYING: [
+    'zubat', 'golbat', 'crobat',
+    'butterfree', 'beedrill', 'pidgey',
+    'pidgeotto', 'pidgeot', 'hoppip',
+    'skiploom', 'jumpluff', 'starly',
+    'staravia', 'staraptor', 'torchic',
+    'combusken', 'blaziken', 'piplup',
+    'prinplup', 'empoleon', 'togetic',
+    'togekiss', 'dragonite', 'salamence',
+    'scyther', 'scizor', 'mega-scizor',
+    'lugia', 'zapdos', 'moltres',
+    'articuno', 'rayquaza', 'landorus',
+    'thundurus', 'tornadus', 'ho-Oh',
+    'aerodactyl', 'mega-Rayquaza', 'archen',
+    'archeops', 'pikipek', 'trumbeak',
+    'toucannon'
+  ],
+  FLORA: [
+    'bulbasaur', 'ivysaur',
+    'venusaur', 'hoppip',
+    'skiploom', 'jumpluff',
+    'chikorita', 'bayleef',
+    'meganium', 'turtwig',
+    'grotle', 'torterra',
+    'leafeon', 'bellsprout',
+    'weepinbell', 'victreebel',
+    'shaymin', 'budew',
+    'roselia', 'roserade',
+    'flabebe', 'floette',
+    'florges'
+  ],
+  MINERAL: [
+    'geodude', 'graveler',
+    'golem', 'aron',
+    'lairon', 'aggron',
+    'rhyhorn', 'rhydon',
+    'rhyperior', 'larvitar',
+    'pupitar', 'tyranitar',
+    'beldum', 'metang',
+    'metagross', 'onix',
+    'steelix', 'mega-steelix',
+    'regirock', 'terrakion',
+    'cubone', 'marowak',
+    'alolan-marowak'
+  ],
+  GHOST: [
+    'duskull', 'dusclops',
+    'dusknoir', 'gastly',
+    'haunter', 'gengar',
+    'giratina', 'darkrai',
+    'litwick', 'lampent',
+    'chandelure', 'snorunt',
+    'glalie', 'froslass',
+    'rotom', 'spiritomb',
+    'solosis', 'duosion',
+    'reuniclus', 'shuppet',
+    'banette', 'mega-banette',
+    'honedge', 'doublade',
+    'aegislash', 'alolan-marowak',
+    'castform', 'castform-sun',
+    'castform-rain', 'castform-hail'
+  ],
+  FAIRY: [
+    'azurill', 'marill', 'azumarill',
+    'cleffa', 'clefairy', 'clefable',
+    'igglybuff', 'wygglytuff', 'jigglypuff',
+    'pichu', 'pikachu', 'raichu',
+    'togepi', 'togetic', 'togekiss',
+    'ralts', 'kirlia', 'gardevoir',
+    'sylveon', 'vanillite', 'vanillish',
+    'vanilluxe', 'mesprit', 'azelf',
+    'uxie', 'cresselia', 'swablu',
+    'flabebe', 'floette', 'florges',
+    'altaria', 'mega-altaria'
+  ],
+  ICE: [
+    'spheal', 'sealeo',
+    'walrein', 'articuno',
+    'suicune', 'regice',
+    'swinub', 'piloswine',
+    'mamoswine', 'snorunt',
+    'glalie', 'froslass',
+    'snover', 'abomasnow',
+    'mega-abomasnow', 'vanillite',
+    'vanillish', 'vanilluxe',
+    'glaceon', 'lapras',
+    'kyurem', 'amaura',
+    'aurorus', 'castform-hail'
+  ],
+  FOSSIL: [
+    'aerodactyl', 'amaura',
+    'aurorus', 'anorith',
+    'armaldo', 'archen',
+    'archeops', 'shieldon',
+    'bastiodon', 'tirtouga',
+    'carracosta', 'lileep',
+    'cradily', 'cranidos',
+    'rampardos', 'kabuto',
+    'kabutops', 'omanyte',
+    'omastar', 'tyrunt',
+    'tyrantrum'
+  ],
+  SOUND: [
+    'zubat', 'golbat', 'crobat',
+    'igglybuff', 'wygglytuff', 'jigglypuff',
+    'swablu', 'whismur', 'loudred',
+    'exploud', 'tympole', 'palpitoad',
+    'seismitoad', 'sewaddle', 'swadloon',
+    'leavanny', 'pikipek', 'trumbeak',
+    'toucannon', 'flabebe', 'floette',
+    'florges', 'jangmo-o', 'hakamo-o',
+    'kommo-o', 'meloetta', 'altaria',
+    'mega-altaria'
+  ]
 };
 
 const PRECOMPUTED_TYPE_POKEMONS = {
-    NORMAL: {
-      pokemons: [
-        'cleffa',  'igglybuff',
-        'pidgey',  'starly',
-        'eevee',   'pikipek',
-        'togepi',  'slakoth',
-        'porygon', 'whismur',
-        'buneary'
-      ],
-      mythicalPokemons: [
-        'regigigas',
-        'arceus',
-        'meloetta',
-        'castform',
-        'castform-sun',
-        'castform-rain',
-        'castform-hail'
-      ]
-    },
-    GRASS: {
-      pokemons: [
-        'caterpie',   'hoppip',
-        'seedot',     'chikorita',
-        'treecko',    'leafeon',
-        'bellsprout', 'oddish',
-        'lileep',     'bulbasaur',
-        'turtwig',    'lotad',
-        'budew',      'sewaddle',
-        'snover'
-      ],
-      mythicalPokemons: [ 'virizion', 'celebi', 'shaymin' ]
-    },
-    FIRE: {
-      pokemons: [
-        'charmander',
-        'cyndaquil',
-        'torchic',
-        'chimchar',
-        'flareon',
-        'houndour',
-        'magby',
-        'litwick',
-        'alolan-marowak',
-        'numel'
-      ],
-      mythicalPokemons: [
-        'moltres',
-        'entei',
-        'groudon',
-        'volcarona',
-        'reshiram',
-        'victini',
-        'heatran',
-        'ho-Oh',
-        'primal-Groudon',
-        'castform-sun'
-      ]
-    },
-    WATER: {
-      pokemons: [
-        'squirtle', 'azurill',
-        'mudkip',   'piplup',
-        'horsea',   'vaporeon',
-        'carvanha', 'kabuto',
-        'omanyte',  'lotad',
-        'poliwag',  'tirtouga',
-        'tympole'
-      ],
-      mythicalPokemons: [
-        'palkia',
-        'suicune',
-        'kyogre',
-        'keldeo',
-        'manaphy',
-        'lapras',
-        'primal-Kyogre',
-        'castform-rain'
-      ]
-    },
-    ELECTRIC: {
-      pokemons: [
-        'mareep',
-        'magnemite',
-        'jolteon',
-        'pichu',
-        'shinx',
-        'elekid',
-        'electrike'
-      ],
-      mythicalPokemons: [
-        'zapdos',
-        'raikou',
-        'thundurus',
-        'rotom',
-        'zekrom',
-        'primal-Kyogre'
-      ]
-    },
-    FIGHTING: {
-      pokemons: [
-        'torchic',  'chimchar',
-        'machop',   'poliwag',
-        'jangmo-o', 'riolu',
-        'meditite', 'buneary'
-      ],
-      mythicalPokemons: [ 'keldeo', 'terrakion', 'virizion', 'cobalion' ]
-    },
-    PSYCHIC: {
-      pokemons: [
-        'espeon',  'slowpoke',
-        'abra',    'ralts',
-        'beldum',  'solosis',
-        'porygon', 'meditite'
-      ],
-      mythicalPokemons: [
-        'lugia',   'latias',
-        'latios',  'mesprit',
-        'azelf',   'uxie',
-        'mewtwo',  'celebi',
-        'victini', 'jirachi',
-        'deoxys',  'cresselia'
-      ]
-    },
-    DARK: {
-      pokemons: [
-        'seedot',   'duskull',
-        'umbreon',  'carvanha',
-        'sandile',  'houndour',
-        'larvitar', 'deino',
-        'shuppet'
-      ],
-      mythicalPokemons: [ 'darkrai', 'spiritomb', 'absol' ]
-    },
-    METAL: {
-      pokemons: [
-        'piplup',   'magnemite',
-        'aron',     'beldum',
-        'shieldon', 'honedge',
-        'onix',     'scizor',
-        'lucario'
-      ],
-      mythicalPokemons: [ 'dialga', 'registeel', 'cobalion', 'jirachi', 'heatran' ]
-    },
-    GROUND: {
-      pokemons: [
-        'geodude', 'mudkip',
-        'swinub',  'sandile',
-        'turtwig', 'trapinch',
-        'rhyhorn', 'gible',
-        'cubone',  'tympole',
-        'onix',    'numel'
-      ],
-      mythicalPokemons: [ 'groudon', 'landorus', 'primal-Groudon' ]
-    },
-    POISON: {
-      pokemons: [
-        'zubat',      'weedle',
-        'bellsprout', 'oddish',
-        'venipede',   'bulbasaur',
-        'nidoranF',   'nidoranM',
-        'budew',      'gastly'
-      ],
-      mythicalPokemons: []
-    },
-    DRAGON: {
-      pokemons: [
-        'charmander', 'horsea',
-        'vibrava',    'dratini',
-        'bagon',      'gible',
-        'deino',      'tyrunt',
-        'axew',       'jangmo-o',
-        'swablu'
-      ],
-      mythicalPokemons: [
-        'giratina',
-        'dialga',
-        'palkia',
-        'rayquaza',
-        'latias',
-        'latios',
-        'kyurem',
-        'reshiram',
-        'zekrom',
-        'mega-Rayquaza'
-      ]
-    },
-    FIELD: {
-      pokemons: [
-        'squirtle',  'mareep',
-        'seedot',    'cyndaquil',
-        'eevee',     'vaporeon',
-        'jolteon',   'flareon',
-        'espeon',    'umbreon',
-        'leafeon',   'sylveon',
-        'swinub',    'glaceon',
-        'sandile',   'nidoranF',
-        'nidoranM',  'shinx',
-        'slakoth',   'numel',
-        'electrike'
-      ],
-      mythicalPokemons: [ 'raikou', 'entei', 'absol', 'arceus' ]
-    },
-    MONSTER: {
-      pokemons: [
-        'totodile', 'treecko',
-        'aron',     'rhyhorn',
-        'larvitar', 'bagon',
-        'gible',    'cranidos',
-        'axew',     'gastly'
-      ],
-      mythicalPokemons: [ 'regigigas', 'darkrai', 'mewtwo' ]
-    },
-    HUMAN: {
-      pokemons: [
-        'machop',   'abra',
-        'ralts',    'elekid',
-        'magby',    'riolu',
-        'meditite'
-      ],
-      mythicalPokemons: [ 'regice', 'regirock', 'registeel', 'regigigas', 'deoxys' ]
-    },
-    AQUATIC: {
-      pokemons: [ 'totodile', 'spheal', 'slowpoke', 'dratini' ],
-      mythicalPokemons: [ 'lugia', 'kyogre', 'primal-Kyogre' ]
-    },
-    BUG: {
-      pokemons: [
-        'caterpie',
-        'weedle',
-        'anorith',
-        'venipede',
-        'trapinch',
-        'sewaddle',
-        'scyther'
-      ],
-      mythicalPokemons: [ 'volcarona', 'manaphy' ]
-    },
-    FLYING: {
-      pokemons: [
-        'zubat',      'butterfree',
-        'beedrill',   'pidgey',
-        'hoppip',     'starly',
-        'torchic',    'piplup',
-        'pikipek',    'togetic',
-        'dragonite',  'salamence',
-        'aerodactyl', 'archen',
-        'scyther'
-      ],
-      mythicalPokemons: [
-        'lugia',
-        'zapdos',
-        'moltres',
-        'articuno',
-        'rayquaza',
-        'landorus',
-        'thundurus',
-        'tornadus',
-        'ho-Oh',
-        'mega-Rayquaza'
-      ]
-    },
-    FLORA: {
-      pokemons: [
-        'hoppip',
-        'chikorita',
-        'leafeon',
-        'bellsprout',
-        'flabebe',
-        'bulbasaur',
-        'turtwig',
-        'budew'
-      ],
-      mythicalPokemons: [ 'shaymin' ]
-    },
-    MINERAL: {
-      pokemons: [
-        'geodude', 'aron',
-        'rhyhorn', 'larvitar',
-        'beldum',  'cubone',
-        'onix'
-      ],
-      mythicalPokemons: [ 'regirock', 'terrakion' ]
-    },
-    GHOST: {
-      pokemons: [
-        'duskull',
-        'litwick',
-        'snorunt',
-        'solosis',
-        'honedge',
-        'alolan-marowak',
-        'gastly',
-        'shuppet'
-      ],
-      mythicalPokemons: [
-        'giratina',
-        'darkrai',
-        'rotom',
-        'spiritomb',
-        'castform',
-        'castform-sun',
-        'castform-rain',
-        'castform-hail'
-      ]
-    },
-    FAIRY: {
-      pokemons: [
-        'azurill',   'cleffa',
-        'igglybuff', 'sylveon',
-        'flabebe',   'pichu',
-        'togepi',    'ralts',
-        'vanillite', 'swablu'
-      ],
-      mythicalPokemons: [ 'mesprit', 'azelf', 'uxie', 'cresselia' ]
-    },
-    ICE: {
-      pokemons: [
-        'spheal',
-        'swinub',
-        'glaceon',
-        'snorunt',
-        'vanillite',
-        'amaura',
-        'snover'
-      ],
-      mythicalPokemons: [
-        'articuno',
-        'suicune',
-        'regice',
-        'lapras',
-        'kyurem',
-        'castform-hail'
-      ]
-    },
-    FOSSIL: {
-      pokemons: [
-        'anorith',    'lileep',
-        'kabuto',     'omanyte',
-        'aerodactyl', 'amaura',
-        'archen',     'shieldon',
-        'tirtouga',   'cranidos',
-        'tyrunt'
-      ],
-      mythicalPokemons: []
-    },
-    SOUND: {
-      pokemons: [
-        'zubat',    'igglybuff',
-        'pikipek',  'flabebe',
-        'whismur',  'tympole',
-        'sewaddle', 'jangmo-o',
-        'swablu'
-      ],
-      mythicalPokemons: [ 'meloetta' ]
-    }
+  NORMAL: {
+    pokemons: [
+      'cleffa', 'igglybuff',
+      'pidgey', 'starly',
+      'eevee', 'pikipek',
+      'togepi', 'slakoth',
+      'porygon', 'whismur',
+      'buneary'
+    ],
+    mythicalPokemons: [
+      'regigigas',
+      'arceus',
+      'meloetta',
+      'castform',
+      'castform-sun',
+      'castform-rain',
+      'castform-hail'
+    ]
+  },
+  GRASS: {
+    pokemons: [
+      'caterpie', 'hoppip',
+      'seedot', 'chikorita',
+      'treecko', 'leafeon',
+      'bellsprout', 'oddish',
+      'lileep', 'bulbasaur',
+      'turtwig', 'lotad',
+      'budew', 'sewaddle',
+      'snover'
+    ],
+    mythicalPokemons: ['virizion', 'celebi', 'shaymin']
+  },
+  FIRE: {
+    pokemons: [
+      'charmander',
+      'cyndaquil',
+      'torchic',
+      'chimchar',
+      'flareon',
+      'houndour',
+      'magby',
+      'litwick',
+      'alolan-marowak',
+      'numel'
+    ],
+    mythicalPokemons: [
+      'moltres',
+      'entei',
+      'groudon',
+      'volcarona',
+      'reshiram',
+      'victini',
+      'heatran',
+      'ho-Oh',
+      'primal-Groudon',
+      'castform-sun'
+    ]
+  },
+  WATER: {
+    pokemons: [
+      'squirtle', 'azurill',
+      'mudkip', 'piplup',
+      'horsea', 'vaporeon',
+      'carvanha', 'kabuto',
+      'omanyte', 'lotad',
+      'poliwag', 'tirtouga',
+      'tympole'
+    ],
+    mythicalPokemons: [
+      'palkia',
+      'suicune',
+      'kyogre',
+      'keldeo',
+      'manaphy',
+      'lapras',
+      'primal-Kyogre',
+      'castform-rain'
+    ]
+  },
+  ELECTRIC: {
+    pokemons: [
+      'mareep',
+      'magnemite',
+      'jolteon',
+      'pichu',
+      'shinx',
+      'elekid',
+      'electrike'
+    ],
+    mythicalPokemons: [
+      'zapdos',
+      'raikou',
+      'thundurus',
+      'rotom',
+      'zekrom',
+      'primal-Kyogre'
+    ]
+  },
+  FIGHTING: {
+    pokemons: [
+      'torchic', 'chimchar',
+      'machop', 'poliwag',
+      'jangmo-o', 'riolu',
+      'meditite', 'buneary'
+    ],
+    mythicalPokemons: ['keldeo', 'terrakion', 'virizion', 'cobalion']
+  },
+  PSYCHIC: {
+    pokemons: [
+      'espeon', 'slowpoke',
+      'abra', 'ralts',
+      'beldum', 'solosis',
+      'porygon', 'meditite'
+    ],
+    mythicalPokemons: [
+      'lugia', 'latias',
+      'latios', 'mesprit',
+      'azelf', 'uxie',
+      'mewtwo', 'celebi',
+      'victini', 'jirachi',
+      'deoxys', 'cresselia'
+    ]
+  },
+  DARK: {
+    pokemons: [
+      'seedot', 'duskull',
+      'umbreon', 'carvanha',
+      'sandile', 'houndour',
+      'larvitar', 'deino',
+      'shuppet'
+    ],
+    mythicalPokemons: ['darkrai', 'spiritomb', 'absol']
+  },
+  METAL: {
+    pokemons: [
+      'piplup', 'magnemite',
+      'aron', 'beldum',
+      'shieldon', 'honedge',
+      'onix', 'scizor',
+      'lucario'
+    ],
+    mythicalPokemons: ['dialga', 'registeel', 'cobalion', 'jirachi', 'heatran']
+  },
+  GROUND: {
+    pokemons: [
+      'geodude', 'mudkip',
+      'swinub', 'sandile',
+      'turtwig', 'trapinch',
+      'rhyhorn', 'gible',
+      'cubone', 'tympole',
+      'onix', 'numel'
+    ],
+    mythicalPokemons: ['groudon', 'landorus', 'primal-Groudon']
+  },
+  POISON: {
+    pokemons: [
+      'zubat', 'weedle',
+      'bellsprout', 'oddish',
+      'venipede', 'bulbasaur',
+      'nidoranF', 'nidoranM',
+      'budew', 'gastly'
+    ],
+    mythicalPokemons: []
+  },
+  DRAGON: {
+    pokemons: [
+      'charmander', 'horsea',
+      'vibrava', 'dratini',
+      'bagon', 'gible',
+      'deino', 'tyrunt',
+      'axew', 'jangmo-o',
+      'swablu'
+    ],
+    mythicalPokemons: [
+      'giratina',
+      'dialga',
+      'palkia',
+      'rayquaza',
+      'latias',
+      'latios',
+      'kyurem',
+      'reshiram',
+      'zekrom',
+      'mega-Rayquaza'
+    ]
+  },
+  FIELD: {
+    pokemons: [
+      'squirtle', 'mareep',
+      'seedot', 'cyndaquil',
+      'eevee', 'vaporeon',
+      'jolteon', 'flareon',
+      'espeon', 'umbreon',
+      'leafeon', 'sylveon',
+      'swinub', 'glaceon',
+      'sandile', 'nidoranF',
+      'nidoranM', 'shinx',
+      'slakoth', 'numel',
+      'electrike'
+    ],
+    mythicalPokemons: ['raikou', 'entei', 'absol', 'arceus']
+  },
+  MONSTER: {
+    pokemons: [
+      'totodile', 'treecko',
+      'aron', 'rhyhorn',
+      'larvitar', 'bagon',
+      'gible', 'cranidos',
+      'axew', 'gastly'
+    ],
+    mythicalPokemons: ['regigigas', 'darkrai', 'mewtwo']
+  },
+  HUMAN: {
+    pokemons: [
+      'machop', 'abra',
+      'ralts', 'elekid',
+      'magby', 'riolu',
+      'meditite'
+    ],
+    mythicalPokemons: ['regice', 'regirock', 'registeel', 'regigigas', 'deoxys']
+  },
+  AQUATIC: {
+    pokemons: ['totodile', 'spheal', 'slowpoke', 'dratini'],
+    mythicalPokemons: ['lugia', 'kyogre', 'primal-Kyogre']
+  },
+  BUG: {
+    pokemons: [
+      'caterpie',
+      'weedle',
+      'anorith',
+      'venipede',
+      'trapinch',
+      'sewaddle',
+      'scyther'
+    ],
+    mythicalPokemons: ['volcarona', 'manaphy']
+  },
+  FLYING: {
+    pokemons: [
+      'zubat', 'butterfree',
+      'beedrill', 'pidgey',
+      'hoppip', 'starly',
+      'torchic', 'piplup',
+      'pikipek', 'togetic',
+      'dragonite', 'salamence',
+      'aerodactyl', 'archen',
+      'scyther'
+    ],
+    mythicalPokemons: [
+      'lugia',
+      'zapdos',
+      'moltres',
+      'articuno',
+      'rayquaza',
+      'landorus',
+      'thundurus',
+      'tornadus',
+      'ho-Oh',
+      'mega-Rayquaza'
+    ]
+  },
+  FLORA: {
+    pokemons: [
+      'hoppip',
+      'chikorita',
+      'leafeon',
+      'bellsprout',
+      'flabebe',
+      'bulbasaur',
+      'turtwig',
+      'budew'
+    ],
+    mythicalPokemons: ['shaymin']
+  },
+  MINERAL: {
+    pokemons: [
+      'geodude', 'aron',
+      'rhyhorn', 'larvitar',
+      'beldum', 'cubone',
+      'onix'
+    ],
+    mythicalPokemons: ['regirock', 'terrakion']
+  },
+  GHOST: {
+    pokemons: [
+      'duskull',
+      'litwick',
+      'snorunt',
+      'solosis',
+      'honedge',
+      'alolan-marowak',
+      'gastly',
+      'shuppet'
+    ],
+    mythicalPokemons: [
+      'giratina',
+      'darkrai',
+      'rotom',
+      'spiritomb',
+      'castform',
+      'castform-sun',
+      'castform-rain',
+      'castform-hail'
+    ]
+  },
+  FAIRY: {
+    pokemons: [
+      'azurill', 'cleffa',
+      'igglybuff', 'sylveon',
+      'flabebe', 'pichu',
+      'togepi', 'ralts',
+      'vanillite', 'swablu'
+    ],
+    mythicalPokemons: ['mesprit', 'azelf', 'uxie', 'cresselia']
+  },
+  ICE: {
+    pokemons: [
+      'spheal',
+      'swinub',
+      'glaceon',
+      'snorunt',
+      'vanillite',
+      'amaura',
+      'snover'
+    ],
+    mythicalPokemons: [
+      'articuno',
+      'suicune',
+      'regice',
+      'lapras',
+      'kyurem',
+      'castform-hail'
+    ]
+  },
+  FOSSIL: {
+    pokemons: [
+      'anorith', 'lileep',
+      'kabuto', 'omanyte',
+      'aerodactyl', 'amaura',
+      'archen', 'shieldon',
+      'tirtouga', 'cranidos',
+      'tyrunt'
+    ],
+    mythicalPokemons: []
+  },
+  SOUND: {
+    pokemons: [
+      'zubat', 'igglybuff',
+      'pikipek', 'flabebe',
+      'whismur', 'tympole',
+      'sewaddle', 'jangmo-o',
+      'swablu'
+    ],
+    mythicalPokemons: ['meloetta']
+  }
 };
 
 const PRECOMPUTED_RARITY_POKEMONS_ALL = {
-    COMMON: [
-      'charmander', 'charmeleon', 'charizard',
-      'geodude',    'graveler',   'golem',
-      'azurill',    'marill',     'azumarill',
-      'zubat',      'golbat',     'crobat',
-      'mareep',     'flaffy',     'ampharos',
-      'cleffa',     'clefairy',   'clefable',
-      'caterpie',   'metapod',    'butterfree',
-      'weedle',     'kakuna',     'beedrill',
-      'pidgey',     'pidgeotto',  'pidgeot',
-      'hoppip',     'skiploom',   'jumpluff',
-      'seedot',     'nuzleaf',    'shiftry',
-      'starly',     'staravia',   'staraptor',
-      'totodile',   'croconaw',   'feraligatr',
-      'swinub',     'piloswine',  'mamoswine'
-    ],
-    UNCOMMON: [
-      'squirtle',   'wartortle', 'blastoise', 'igglybuff',  'wygglytuff',
-      'jigglypuff', 'chikorita', 'bayleef',   'meganium',   'cyndaquil',
-      'quilava',    'typlosion', 'treecko',   'grovyle',    'sceptile',
-      'torchic',    'combusken', 'blaziken',  'mudkip',     'marshtomp',
-      'swampert',   'chimchar',  'monferno',  'infernape',  'piplup',
-      'prinplup',   'empoleon',  'machop',    'machoke',    'machamp',
-      'horsea',     'seadra',    'kingdra',   'spheal',     'sealeo',
-      'walrein',    'magnemite', 'magneton',  'magnezone',  'duskull',
-      'dusclops',   'dusknoir',  'eevee',     'vaporeon',   'jolteon',
-      'flareon',    'espeon',    'umbreon',   'leafeon',    'sylveon',
-      'slowpoke',   'slowbro',   'slowking',  'bellsprout', 'weepinbell',
-      'victreebel', 'glaceon',   'sandile',   'krokorok',   'krookodile',
-      'anorith',    'armaldo',   'lileep',    'cradily',    'kabuto',
-      'kabutops',   'omanyte',   'omastar',   'venipede',   'whirlipede',
-      'scolipede',  'pikipek',   'trumbeak',  'toucannon',  'flabebe',
-      'floette',    'florges'
-    ],
-    RARE: [
-      'bulbasaur',  'ivysaur',   'venusaur',  'turtwig',
-      'grotle',     'torterra',  'nidoranF',  'nidorina',
-      'nidoqueen',  'nidoranM',  'nidorino',  'nidoking',
-      'pichu',      'pikachu',   'raichu',    'trapinch',
-      'vibrava',    'flygon',    'aron',      'lairon',
-      'aggron',     'rhyhorn',   'rhydon',    'rhyperior',
-      'togepi',     'togetic',   'togekiss',  'lotad',
-      'lombre',     'ludicolo',  'shinx',     'luxio',
-      'luxray',     'poliwag',   'poliwhirl', 'politoed',
-      'dratini',    'dragonair', 'dragonite', 'magby',
-      'magmar',     'magmortar', 'vanillite', 'vanillish',
-      'vanilluxe',  'deino',     'zweilous',  'hydreigon',
-      'solosis',    'duosion',   'reuniclus', 'archen',
-      'archeops',   'shieldon',  'bastiodon', 'tirtouga',
-      'carracosta', 'cranidos',  'rampardos', 'axew',
-      'fraxure',    'haxorus',   'whismur',   'loudred',
-      'exploud'
-    ],
-    EPIC: [
-      'abra',       'kadabra',        'alakazam',
-      'larvitar',   'pupitar',        'tyranitar',
-      'slakoth',    'vigoroth',       'slaking',
-      'ralts',      'kirlia',         'gardevoir',
-      'bagon',      'shelgon',        'salamence',
-      'beldum',     'metang',         'metagross',
-      'gible',      'gabite',         'garchomp',
-      'elekid',     'electabuzz',     'electivire',
-      'litwick',    'lampent',        'chandelure',
-      'snorunt',    'glalie',         'froslass',
-      'aerodactyl', 'amaura',         'aurorus',
-      'tyrunt',     'tyrantrum',      'budew',
-      'roselia',    'roserade',       'porygon',
-      'porygon2',   'porygon-z',      'honedge',
-      'doublade',   'aegislash',      'cubone',
-      'marowak',    'alolan-marowak', 'tympole',
-      'palpitoad',  'seismitoad',     'sewaddle',
-      'swadloon',   'leavanny',       'jangmo-o',
-      'hakamo-o',   'kommo-o'
-    ],
-    LEGENDARY: [
-      'gastly',         'haunter',   'gengar',
-      'onix',           'steelix',   'mega-steelix',
-      'scyther',        'scizor',    'mega-scizor',
-      'riolu',          'lucario',   'mega-lucario',
-      'meditite',       'medicham',  'mega-medicham',
-      'numel',          'camerupt',  'mega-camerupt',
-      'snover',         'abomasnow', 'mega-abomasnow',
-      'swablu',         'buneary',   'lopunny',
-      'mega-lopunny',   'electrike', 'manectric',
-      'mega-manectric', 'shuppet',   'banette',
-      'mega-banette',   'altaria',   'mega-altaria'
-    ],
-    MYTHICAL: [
-      'lugia',         'giratina',      'zapdos',
-      'moltres',       'articuno',      'dialga',
-      'palkia',        'suicune',       'raikou',
-      'entei',         'regice',        'regirock',
-      'registeel',     'kyogre',        'groudon',
-      'rayquaza',      'regigigas',     'darkrai',
-      'volcarona',     'landorus',      'thundurus',
-      'tornadus',      'keldeo',        'terrakion',
-      'virizion',      'cobalion',      'manaphy',
-      'rotom',         'spiritomb',     'absol',
-      'lapras',        'latias',        'latios',
-      'mesprit',       'azelf',         'uxie',
-      'mewtwo',        'kyurem',        'reshiram',
-      'zekrom',        'celebi',        'victini',
-      'jirachi',       'arceus',        'deoxys',
-      'shaymin',       'cresselia',     'heatran',
-      'ho-Oh',         'primal-Kyogre', 'primal-Groudon',
-      'mega-Rayquaza', 'meloetta',      'castform',
-      'castform-sun',  'castform-rain', 'castform-hail'
-    ],
-    NEUTRAL: [ 'gyarados' ],
-    SUMMON: [
-      'carvanha',
-      'oddish',
-      'gloom',
-      'vileplume',
-      'bellossom',
-      'houndour'
-    ]
+  COMMON: [
+    'charmander', 'charmeleon', 'charizard',
+    'geodude', 'graveler', 'golem',
+    'azurill', 'marill', 'azumarill',
+    'zubat', 'golbat', 'crobat',
+    'mareep', 'flaffy', 'ampharos',
+    'cleffa', 'clefairy', 'clefable',
+    'caterpie', 'metapod', 'butterfree',
+    'weedle', 'kakuna', 'beedrill',
+    'pidgey', 'pidgeotto', 'pidgeot',
+    'hoppip', 'skiploom', 'jumpluff',
+    'seedot', 'nuzleaf', 'shiftry',
+    'starly', 'staravia', 'staraptor',
+    'totodile', 'croconaw', 'feraligatr',
+    'swinub', 'piloswine', 'mamoswine'
+  ],
+  UNCOMMON: [
+    'squirtle', 'wartortle', 'blastoise', 'igglybuff', 'wygglytuff',
+    'jigglypuff', 'chikorita', 'bayleef', 'meganium', 'cyndaquil',
+    'quilava', 'typlosion', 'treecko', 'grovyle', 'sceptile',
+    'torchic', 'combusken', 'blaziken', 'mudkip', 'marshtomp',
+    'swampert', 'chimchar', 'monferno', 'infernape', 'piplup',
+    'prinplup', 'empoleon', 'machop', 'machoke', 'machamp',
+    'horsea', 'seadra', 'kingdra', 'spheal', 'sealeo',
+    'walrein', 'magnemite', 'magneton', 'magnezone', 'duskull',
+    'dusclops', 'dusknoir', 'eevee', 'vaporeon', 'jolteon',
+    'flareon', 'espeon', 'umbreon', 'leafeon', 'sylveon',
+    'slowpoke', 'slowbro', 'slowking', 'bellsprout', 'weepinbell',
+    'victreebel', 'glaceon', 'sandile', 'krokorok', 'krookodile',
+    'anorith', 'armaldo', 'lileep', 'cradily', 'kabuto',
+    'kabutops', 'omanyte', 'omastar', 'venipede', 'whirlipede',
+    'scolipede', 'pikipek', 'trumbeak', 'toucannon', 'flabebe',
+    'floette', 'florges'
+  ],
+  RARE: [
+    'bulbasaur', 'ivysaur', 'venusaur', 'turtwig',
+    'grotle', 'torterra', 'nidoranF', 'nidorina',
+    'nidoqueen', 'nidoranM', 'nidorino', 'nidoking',
+    'pichu', 'pikachu', 'raichu', 'trapinch',
+    'vibrava', 'flygon', 'aron', 'lairon',
+    'aggron', 'rhyhorn', 'rhydon', 'rhyperior',
+    'togepi', 'togetic', 'togekiss', 'lotad',
+    'lombre', 'ludicolo', 'shinx', 'luxio',
+    'luxray', 'poliwag', 'poliwhirl', 'politoed',
+    'dratini', 'dragonair', 'dragonite', 'magby',
+    'magmar', 'magmortar', 'vanillite', 'vanillish',
+    'vanilluxe', 'deino', 'zweilous', 'hydreigon',
+    'solosis', 'duosion', 'reuniclus', 'archen',
+    'archeops', 'shieldon', 'bastiodon', 'tirtouga',
+    'carracosta', 'cranidos', 'rampardos', 'axew',
+    'fraxure', 'haxorus', 'whismur', 'loudred',
+    'exploud'
+  ],
+  EPIC: [
+    'abra', 'kadabra', 'alakazam',
+    'larvitar', 'pupitar', 'tyranitar',
+    'slakoth', 'vigoroth', 'slaking',
+    'ralts', 'kirlia', 'gardevoir',
+    'bagon', 'shelgon', 'salamence',
+    'beldum', 'metang', 'metagross',
+    'gible', 'gabite', 'garchomp',
+    'elekid', 'electabuzz', 'electivire',
+    'litwick', 'lampent', 'chandelure',
+    'snorunt', 'glalie', 'froslass',
+    'aerodactyl', 'amaura', 'aurorus',
+    'tyrunt', 'tyrantrum', 'budew',
+    'roselia', 'roserade', 'porygon',
+    'porygon2', 'porygon-z', 'honedge',
+    'doublade', 'aegislash', 'cubone',
+    'marowak', 'alolan-marowak', 'tympole',
+    'palpitoad', 'seismitoad', 'sewaddle',
+    'swadloon', 'leavanny', 'jangmo-o',
+    'hakamo-o', 'kommo-o'
+  ],
+  LEGENDARY: [
+    'gastly', 'haunter', 'gengar',
+    'onix', 'steelix', 'mega-steelix',
+    'scyther', 'scizor', 'mega-scizor',
+    'riolu', 'lucario', 'mega-lucario',
+    'meditite', 'medicham', 'mega-medicham',
+    'numel', 'camerupt', 'mega-camerupt',
+    'snover', 'abomasnow', 'mega-abomasnow',
+    'swablu', 'buneary', 'lopunny',
+    'mega-lopunny', 'electrike', 'manectric',
+    'mega-manectric', 'shuppet', 'banette',
+    'mega-banette', 'altaria', 'mega-altaria'
+  ],
+  MYTHICAL: [
+    'lugia', 'giratina', 'zapdos',
+    'moltres', 'articuno', 'dialga',
+    'palkia', 'suicune', 'raikou',
+    'entei', 'regice', 'regirock',
+    'registeel', 'kyogre', 'groudon',
+    'rayquaza', 'regigigas', 'darkrai',
+    'volcarona', 'landorus', 'thundurus',
+    'tornadus', 'keldeo', 'terrakion',
+    'virizion', 'cobalion', 'manaphy',
+    'rotom', 'spiritomb', 'absol',
+    'lapras', 'latias', 'latios',
+    'mesprit', 'azelf', 'uxie',
+    'mewtwo', 'kyurem', 'reshiram',
+    'zekrom', 'celebi', 'victini',
+    'jirachi', 'arceus', 'deoxys',
+    'shaymin', 'cresselia', 'heatran',
+    'ho-Oh', 'primal-Kyogre', 'primal-Groudon',
+    'mega-Rayquaza', 'meloetta', 'castform',
+    'castform-sun', 'castform-rain', 'castform-hail'
+  ],
+  NEUTRAL: ['gyarados'],
+  SUMMON: [
+    'carvanha',
+    'oddish',
+    'gloom',
+    'vileplume',
+    'bellossom',
+    'houndour'
+  ]
 };
 
 const BATTLE_RESULT = Object.freeze({
