@@ -35,7 +35,8 @@ class Lobby extends Component {
             showBuilder: false,
             pasteBinUrl: '',
             botData: {},
-            botList: []
+            botList: [],
+            roomCreated: false
         };
 
         this.client = new Client(window.endpoint);
@@ -155,14 +156,17 @@ class Lobby extends Component {
     }
 
     createRoom() {
-        firebase.auth().currentUser.getIdToken().then(token =>{
-            this.client.create('room', {idToken: token, ownerId: this.uid}).then((room) => {
-                this.closeConnection(room);
-            }).catch((e) => {
-              console.error('join error', e);
-              alert(e);
+        if(!this.state.roomCreated){
+            firebase.auth().currentUser.getIdToken().then(token =>{
+                this.client.create('room', {idToken: token, ownerId: this.uid}).then((room) => {
+                    this.setState({roomCreated: true});
+                    this.closeConnection(room);
+                }).catch((e) => {
+                  console.error('join error', e);
+                  alert(e);
+                });
             });
-        });
+        }
     }
 
     logOut(){

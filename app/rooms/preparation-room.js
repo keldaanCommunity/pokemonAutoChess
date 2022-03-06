@@ -1,6 +1,5 @@
 const colyseus = require('colyseus');
 const {Dispatcher} = require('@colyseus/command');
-const Bot = require('../models/mongo-models/bot');
 const PreparationState = require('./states/preparation-state');
 const admin = require('firebase-admin');
 const {
@@ -28,7 +27,7 @@ class PreparationRoom extends colyseus.Room {
     this.setState(new PreparationState(options.ownerId));
     this.maxClients = 8;
 
-    self.dispatcher.dispatch(new InitializeBotsCommand(), options.ownerId)
+    self.dispatcher.dispatch(new InitializeBotsCommand(), options.ownerId);
 
     this.onMessage('game-start', (client, message) => {
       try {
@@ -90,7 +89,7 @@ class PreparationRoom extends colyseus.Room {
       }
 
       // allow disconnected client to reconnect into this room until 20 seconds
-      await this.allowReconnection(client, 60);
+      await this.allowReconnection(client, 5);
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         console.log(`${client.auth.displayName} ${client.id} leave preparation room`);
