@@ -1,6 +1,6 @@
 const {BATTLE_RESULT} = require('../models/enum');
 const PokemonFactory = require('../models/pokemon-factory');
-const BOT = require('../models/mongo-models/bot');
+const BOT = require('../models/mongo-models/bot-v2');
 
 class Bot {
   constructor(player) {
@@ -32,6 +32,7 @@ class Bot {
   }
 
   updatePlayerTeam() {
+    // console.log(this.scenario);
     this.player.board.forEach((pokemon, key) => {
       this.player.board.delete(key);
     });
