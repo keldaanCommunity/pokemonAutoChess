@@ -14,6 +14,7 @@ export default class ItemContainer extends Button {
     this.sprite = new GameObjects.Image(scene, 0, 0, 'item', item).setScale(dragable ? 2:1, dragable? 2:1);
     this.detail = new ItemDetail(scene, 30, -100, item);
     this.name = item;
+    this.detailDisabled = false;
     this.add(this.sprite);
     this.add(this.detail);
     if (dragable) {
@@ -22,7 +23,9 @@ export default class ItemContainer extends Button {
   }
 
   enterButtonHoverState() {
-    this.detail.setScale(1, 1);
+    if (!this.detailDisabled) {
+      this.detail.setScale(1, 1);
+    }
   }
 
   enterButtonRestState() {

@@ -1,12 +1,14 @@
+/* eslint-disable no-invalid-this */
 import {Scene, GameObjects} from 'phaser';
 import AnimationManager from '../animation-manager';
 import BoardManager from '../components/board-manager';
 import BattleManager from '../components/battle-manager';
 import WeatherManager from '../components/weather-manager';
 import ItemsContainer from '../components/items-container';
+import ItemDetail from '../components/item-detail';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
-import {STATE} from '../../../../models/enum';
+import {STATE, ITEM_RECIPE} from '../../../../models/enum';
 import firebase from 'firebase/compat/app';
 import {getOrientation, transformCoordinate} from '../../pages/utils/utils';
 
@@ -202,34 +204,33 @@ export default class GameScene extends Scene {
     this.music.play();
   }
 
-  registerKeys(){
-
+  registerKeys() {
     this.input.keyboard.on('keyup-D', (event) => {
-      this.refreshShop()
-    })
+      this.refreshShop();
+    });
 
     this.input.keyboard.on('keyup-F', (event) => {
-      this.buyExperience()
-    })
+      this.buyExperience();
+    });
 
     this.input.keyboard.on('keyup-E', (event) => {
-      this.sellPokemon()
-    })
+      this.sellPokemon();
+    });
   }
 
-  refreshShop(){
+  refreshShop() {
     this.room.send('refresh');
   }
 
-  buyExperience(){
+  buyExperience() {
     this.room.send('levelUp');
   }
 
-  sellPokemon(){
-    if(!this.targetPokemon || !this.targetPokemon.scene || !this.targetPokemon.input.draggable){
-      return
+  sellPokemon() {
+    if (!this.targetPokemon || !this.targetPokemon.scene || !this.targetPokemon.input.draggable) {
+      return;
     }
-    
+
     document.getElementById('game').dispatchEvent(new CustomEvent('sell-drop', {
       detail: {
         'pokemonId': this.targetPokemon.id
@@ -241,7 +242,7 @@ export default class GameScene extends Scene {
   }
 
   updatePhase() {
-    this.targetPokemon = null
+    this.targetPokemon = null;
     if (this.room.state.phase == STATE.FIGHT) {
       this.boardManager.battleMode();
     } else {
@@ -249,18 +250,20 @@ export default class GameScene extends Scene {
     }
   }
 
-  drawRectangles() {
+  drawRectangles(sellZoneVisible) {
     this.graphics.forEach((rect) => {
       rect.setVisible(true);
     });
-    this.dragDropText.setVisible(true);
+    this.dragDropText.setVisible(sellZoneVisible);
+    this.sellZoneGraphic.setVisible(sellZoneVisible);
   }
 
   removeRectangles() {
     this.graphics.forEach((rect) => {
       rect.setVisible(false);
-      this.dragDropText.setVisible(false);
     });
+    this.dragDropText.setVisible(false);
+    this.sellZoneGraphic.setVisible(false);
   }
 
   initializeDragAndDrop() {
@@ -316,7 +319,8 @@ export default class GameScene extends Scene {
             sellZone.input.hitArea.height
         );
     graphic.setVisible(false);
-    this.graphics.push(graphic);
+
+    this.sellZoneGraphic = graphic;
 
     this.dragDropText = this.add.text(sellZoneCoord[0] - 4 * 96 + 24, sellZoneCoord[1], 'Drop here to sell', this.textStyle);
     this.dragDropText.setVisible(false);
@@ -337,16 +341,19 @@ export default class GameScene extends Scene {
     });
 
     this.input.on('gameobjectover', (pointer, gameObject) => {
-      if(gameObject.objType == 'pokemon'){
-        this.targetPokemon = gameObject
+      if (gameObject.objType == 'pokemon') {
+        this.targetPokemon = gameObject;
+      } else {
+        this.targetPokemon = null;
       }
-      else {
-        this.targetPokemon = null
-      }
-    })
+    });
 
     this.input.on('dragstart', (pointer, gameObject) => {
-      this.drawRectangles();
+      if (gameObject.objType == 'item') {
+        this.drawRectangles(false);
+      } else {
+        this.drawRectangles(true);
+      }
       this.children.bringToTop(gameObject);
     });
 
@@ -354,6 +361,37 @@ export default class GameScene extends Scene {
       gameObject.x = dragX;
       gameObject.y = dragY;
     });
+
+
+    this.input.on('dragenter', function(pointer, gameObject, dropZone) {
+      const self = this;
+      if (dropZone.name.includes('item') && gameObject.objType == 'item') {
+        const item = self.itemsContainer.list[parseInt(dropZone.name.substr(5, 1))];
+        if (item && item.name && item != gameObject) {
+          Object.keys(ITEM_RECIPE).forEach((recipeName)=>{
+            const recipe = ITEM_RECIPE[recipeName];
+            if ((recipe[0] == item.name && recipe[1] == gameObject.name) || (recipe[1] == item.name && recipe[0] == gameObject.name)) {
+              item.detailDisabled = true;
+              item.detail.setScale(0, 0);
+              gameObject.sprite.setTexture('item', recipeName);
+              gameObject.remove(gameObject.detail, true);
+              gameObject.detail = new ItemDetail(self, 30, -100, recipeName);
+              gameObject.detail.setScale(1, 1);
+              gameObject.add(gameObject.detail);
+            }
+          });
+        }
+      }
+    }, this);
+
+    this.input.on('dragleave', function(pointer, gameObject, dropZone) {
+      if (gameObject.objType == 'item') {
+        gameObject.sprite.setTexture('item', gameObject.name);
+        gameObject.remove(gameObject.detail, true);
+        gameObject.detail = new ItemDetail(this, 30, -100, gameObject.name);
+        gameObject.add(gameObject.detail);
+      }
+    }, this);
 
     this.input.on('drop', (pointer, gameObject, dropZone) => {
       this.removeRectangles();
