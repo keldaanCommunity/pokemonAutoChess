@@ -94,7 +94,7 @@ class GameContainer {
     });
 
     player.items.onRemove = ((value, key) => {
-      //console.log('removed', value, key);
+      // console.log('removed', value, key);
       this.handleItemRemove(player, value);
     });
 
