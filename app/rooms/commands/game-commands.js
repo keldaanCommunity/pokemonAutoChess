@@ -693,6 +693,35 @@ class OnUpdatePhaseCommand extends Command {
               const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemon.evolution);
               pokemon.items.forEach((i)=>{
                 pokemonEvolved.items.add(i);
+                switch (i) {
+                    case ITEM.WATER_STONE:
+                      pokemonEvolved.types.push(TYPE.WATER);
+                      break;
+                    case ITEM.FIRE_STONE:
+                      pokemonEvolved.types.push(TYPE.FIRE);
+                      break;
+                    case ITEM.THUNDER_STONE:
+                      pokemonEvolved.types.push(TYPE.ELECTRIC);
+                      break;
+                    case ITEM.DUSK_STONE:
+                      pokemonEvolved.types.push(TYPE.DARK);
+                      break;
+                    case ITEM.MOON_STONE:
+                      pokemonEvolved.types.push(TYPE.FAIRY);
+                      break;
+                    case ITEM.LEAF_STONE:
+                      pokemonEvolved.types.push(TYPE.GRASS);
+                      break;
+                    case ITEM.DAWN_STONE:
+                      pokemonEvolved.types.push(TYPE.PSYCHIC);
+                      break;
+                    case ITEM.ICY_ROCK:
+                      pokemonEvolved.types.push(TYPE.ICE);
+                      break;
+                    case ITEM.OLD_AMBER:
+                      pokemonEvolved.types.push(TYPE.FOSSIL);
+                      break;
+                }
               });
               pokemonEvolved.positionX = pokemon.positionX;
               pokemonEvolved.positionY = pokemon.positionY;
