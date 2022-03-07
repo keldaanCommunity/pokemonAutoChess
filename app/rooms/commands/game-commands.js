@@ -659,9 +659,9 @@ class OnUpdatePhaseCommand extends Command {
 
   initializePickingPhase() {
     this.state.phase = STATE.PICK;
-    this.state.time = process.env.MODE == 'dev' ? 20000 : 30000;
-
     const isPVE = this.checkForPVE();
+
+    this.state.time = (isPVE && this.state.stageLevel >3) ? 35000 : 30000;
 
     this.state.players.forEach((player, key) => {
       player.simulation.stop();
