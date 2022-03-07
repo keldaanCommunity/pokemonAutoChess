@@ -301,14 +301,19 @@ class OnDragDropCommand extends Command {
               if ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine)) {
                 pokemon.items.delete(itemToCombine);
                 player.items.delete(item);
-                const detail = {
-                  'id': name,
-                  'x': JSON.stringify(pokemon.positionX),
-                  'y': JSON.stringify(pokemon.positionY),
-                  'objType': 'item',
-                  'bypass': true
-                };
-                commands.push(new OnDragDropCommand().setPayload({'client': client, 'detail': detail}));
+
+                if (pokemon.items.has(name)) {
+                  player.items.add(name);
+                } else {
+                  const detail = {
+                    'id': name,
+                    'x': JSON.stringify(pokemon.positionX),
+                    'y': JSON.stringify(pokemon.positionY),
+                    'objType': 'item',
+                    'bypass': true
+                  };
+                  commands.push(new OnDragDropCommand().setPayload({'client': client, 'detail': detail}));
+                }
               }
             });
           } else {
@@ -698,33 +703,33 @@ class OnUpdatePhaseCommand extends Command {
               pokemon.items.forEach((i)=>{
                 pokemonEvolved.items.add(i);
                 switch (i) {
-                    case ITEM.WATER_STONE:
-                      pokemonEvolved.types.push(TYPE.WATER);
-                      break;
-                    case ITEM.FIRE_STONE:
-                      pokemonEvolved.types.push(TYPE.FIRE);
-                      break;
-                    case ITEM.THUNDER_STONE:
-                      pokemonEvolved.types.push(TYPE.ELECTRIC);
-                      break;
-                    case ITEM.DUSK_STONE:
-                      pokemonEvolved.types.push(TYPE.DARK);
-                      break;
-                    case ITEM.MOON_STONE:
-                      pokemonEvolved.types.push(TYPE.FAIRY);
-                      break;
-                    case ITEM.LEAF_STONE:
-                      pokemonEvolved.types.push(TYPE.GRASS);
-                      break;
-                    case ITEM.DAWN_STONE:
-                      pokemonEvolved.types.push(TYPE.PSYCHIC);
-                      break;
-                    case ITEM.ICY_ROCK:
-                      pokemonEvolved.types.push(TYPE.ICE);
-                      break;
-                    case ITEM.OLD_AMBER:
-                      pokemonEvolved.types.push(TYPE.FOSSIL);
-                      break;
+                  case ITEM.WATER_STONE:
+                    pokemonEvolved.types.push(TYPE.WATER);
+                    break;
+                  case ITEM.FIRE_STONE:
+                    pokemonEvolved.types.push(TYPE.FIRE);
+                    break;
+                  case ITEM.THUNDER_STONE:
+                    pokemonEvolved.types.push(TYPE.ELECTRIC);
+                    break;
+                  case ITEM.DUSK_STONE:
+                    pokemonEvolved.types.push(TYPE.DARK);
+                    break;
+                  case ITEM.MOON_STONE:
+                    pokemonEvolved.types.push(TYPE.FAIRY);
+                    break;
+                  case ITEM.LEAF_STONE:
+                    pokemonEvolved.types.push(TYPE.GRASS);
+                    break;
+                  case ITEM.DAWN_STONE:
+                    pokemonEvolved.types.push(TYPE.PSYCHIC);
+                    break;
+                  case ITEM.ICY_ROCK:
+                    pokemonEvolved.types.push(TYPE.ICE);
+                    break;
+                  case ITEM.OLD_AMBER:
+                    pokemonEvolved.types.push(TYPE.FOSSIL);
+                    break;
                 }
               });
               pokemonEvolved.positionX = pokemon.positionX;
