@@ -12,6 +12,7 @@ const {MessageEmbed, WebhookClient} = require('discord.js');
 const PasteBinAPI = require('pastebin-ts');
 const DetailledStatistic = require('../models/mongo-models/detailled-statistic-v2');
 const BotV2 = require('../models/mongo-models/bot-v2');
+const Meta = require('../models/mongo-models/meta');
 
 const pastebin = new PasteBinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
@@ -30,6 +31,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     super.onCreate(options);
     this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
     this.bots = new Map();
+    this.meta = [];
     this.setState(new LobbyState());
     this.autoDispose = false;
 
@@ -59,6 +61,15 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
           // console.log(bot.avatar, bot.elo);
           self.state.botLeaderboard.push(new LeaderboardInfo(bot.avatar, bot.avatar, i + 1, bot.elo));
         });
+      });
+      Meta.find({}, (err, docs) => {
+        if (err) {
+          console.log(err);
+        } else {
+          docs.forEach((doc)=>{
+            this.meta.push(doc);
+          });
+        }
       });
     });
 
@@ -110,6 +121,10 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     this.onMessage('bot-data-request', (client, bot)=>{
       const botData = this.bots[bot];
       client.send('bot-data', botData);
+    });
+
+    this.onMessage('meta', (client, message)=>{
+      client.send('meta', this.meta);
     });
 
     this.onMessage('map', (client, message) => {

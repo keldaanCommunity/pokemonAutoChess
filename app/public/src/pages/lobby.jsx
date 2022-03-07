@@ -13,6 +13,7 @@ import PolicyButton from './component/policy-button';
 import CreditsButton from './component/credits-button';
 import Wiki from './component/wiki';
 import TeamBuilder from './component/team-builder';
+import MetaReport from './component/meta-report';
 
 class Lobby extends Component {
 
@@ -35,6 +36,8 @@ class Lobby extends Component {
             showBuilder: false,
             pasteBinUrl: '',
             botData: {},
+            meta: [],
+            showMeta: false,
             botList: [],
             roomCreated: false
         };
@@ -124,6 +127,12 @@ class Lobby extends Component {
                                 searchedUser: user
                             });
                         });
+
+                        this.room.onMessage('meta', (meta)=>{
+                            this.setState({
+                                meta: meta
+                            });
+                        })
 
                         this.room.onMessage('bot-data', (data) => {
                             this.setState({
@@ -231,6 +240,17 @@ class Lobby extends Component {
         });
     }
 
+    toggleMeta(){
+        if(this.state.meta.length == 0 && !this.state.showMeta){
+            this.room.send('meta');
+        }
+        this.setState((prevState)=>{
+            return{
+                showMeta: !prevState.showMeta
+            }
+        });
+    }
+
     toggleWiki(){
         this.setState((prevState)=>{
             return{
@@ -276,6 +296,9 @@ class Lobby extends Component {
       if(this.state.showWiki){
         return <Wiki toggleWiki={this.toggleWiki.bind(this)} content='Lobby'/>;
       }
+      if(this.state.showMeta){
+          return <MetaReport toggleMeta={this.toggleMeta.bind(this)} meta={this.state.meta}/>;
+      }
       if(this.state.showBuilder){
           return <TeamBuilder 
           toggleBuilder={this.toggleBuilder.bind(this)}
@@ -299,6 +322,7 @@ class Lobby extends Component {
                     <CreditsButton/>
                     <button className='nes-btn is-success' style={buttonStyle} onClick={this.toggleWiki.bind(this)}>Wiki</button>
                     <button className='nes-btn is-primary' style={buttonStyle} onClick={this.toggleBuilder.bind(this)}>BOT Builder</button>
+                    <button className='nes-btn is-primary' style={buttonStyle} onClick={this.toggleMeta.bind(this)}>Meta Report</button>
                 </div>
 
                 <div style={lobbyStyle}>

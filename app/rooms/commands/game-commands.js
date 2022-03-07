@@ -173,6 +173,10 @@ class OnDragDropCommand extends Command {
                 includesBasicItem = true;
               }
             });
+            if (!includesBasicItem) {
+              client.send('DragDropFailed', message);
+              return;
+            }
           } else {
             client.send('DragDropFailed', message);
             return;
