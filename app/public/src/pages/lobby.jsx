@@ -323,13 +323,13 @@ class Lobby extends Component {
                     <Link to='/auth'>
                             <button className='nes-btn is-error' style={buttonStyle} onClick={this.logOut.bind(this)}>Sign Out</button>
                     </Link>
+                    <button className='nes-btn is-success' style={buttonStyle} onClick={this.toggleWiki.bind(this)}>Wiki</button>
+                    <button className='nes-btn is-primary' style={buttonStyle} onClick={this.toggleBuilder.bind(this)}>BOT Builder</button>
+                    <button className='nes-btn is-primary' style={buttonStyle} onClick={this.toggleMeta.bind(this)}>Meta Report</button>
                     <DiscordButton/>
                     <DonateButton/>
                     <PolicyButton/>
                     <CreditsButton/>
-                    <button className='nes-btn is-success' style={buttonStyle} onClick={this.toggleWiki.bind(this)}>Wiki</button>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={this.toggleBuilder.bind(this)}>BOT Builder</button>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={this.toggleMeta.bind(this)}>Meta Report</button>
                 </div>
 
                 <div style={lobbyStyle}>

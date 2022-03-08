@@ -18,7 +18,7 @@ class WikiFaq extends Component{
             <p>At turn 10 and 20, you'll have to choose between 6 mythical pokemons. Those mythical pokemons are very strong.</p>
             <h5 class="nes-text is-primary">How does Ditto work ?</h5>
             <p>Ditto creates a plain copy of the unit you hover and drop it over. Ditto can't fight. Each pokemon in shop has a 0.6% chance to be a ditto at every roll. You can't copy fossils/mythical pokemon.</p>
-            <h5 class="nes-text is-priamry">How do the items works ?</h5>
+            <h5 class="nes-text is-primary">How do the items works ?</h5>
             <p>After winning a PVE round, you will get a random basic item and you will be able to choose from 3 choices another basic item that suits you. You can combine two basic items to create a powerfull tier 2 items. The crafting list of all items is available in the wiki, in the items section.</p>
             <h5 class="nes-text is-primary">How do the fossils works ?</h5>
             <p>Fossils are special pokemons. Give the basic item "fossil stone" to a ditto and it will create a random fossil. Fossils evolve with time. Uncommon in 4 turns, Rare in 6 turns, Epic in 8 turns.</p>
@@ -30,6 +30,8 @@ class WikiFaq extends Component{
             <p>The elo system in Pokemon Auto Chess works the same as in other elo based games like Chess, Lol, Starcraft etc... To gain elo points, you need to beat other bots/players. For example, if you finish 3rd, you won against 4th,5th,6th,7th,8th place and lost to 1st and 2nd place.</p>
             <h5 class="nes-text is-primary">I didn't get elo points in my last game, why ?</h5>
             <p>The game needs to be finished in order to win/lose elo points. If someone is still in game, you need to wait. Only 8-players/bots game count are eligible to elo rating.</p>
+            <h5 class="nes-text is-primary">What are the special damages and physical damages ?</h5>
+            <p>ranged units are usually special on their basics. 1 range are physical. Spells/abilities can however be true/special/or physical.</p>
             <h5 class="nes-text is-primary">How can i support the game ?</h5>
             <p>You can donate on the tipee: <a href="https://en.tipeee.com/pokemon-auto-chess">https://en.tipeee.com/pokemon-auto-chess</a>.</p>
             <h5 class="nes-text is-primary">What language is used to code the game ?</h5>
