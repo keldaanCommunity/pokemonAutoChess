@@ -37,6 +37,7 @@ class Lobby extends Component {
             pasteBinUrl: '',
             botData: {},
             meta: [],
+            metaItems: [],
             showMeta: false,
             botList: [],
             roomCreated: false
@@ -132,7 +133,13 @@ class Lobby extends Component {
                             this.setState({
                                 meta: meta
                             });
-                        })
+                        });
+
+                        this.room.onMessage('metaItems', (metaItems)=>{
+                            this.setState({
+                                metaItems: metaItems
+                            });
+                        });
 
                         this.room.onMessage('bot-data', (data) => {
                             this.setState({
@@ -297,7 +304,7 @@ class Lobby extends Component {
         return <Wiki toggleWiki={this.toggleWiki.bind(this)} content='Lobby'/>;
       }
       if(this.state.showMeta){
-          return <MetaReport toggleMeta={this.toggleMeta.bind(this)} meta={this.state.meta}/>;
+          return <MetaReport toggleMeta={this.toggleMeta.bind(this)} meta={this.state.meta} metaItems={this.state.metaItems}/>;
       }
       if(this.state.showBuilder){
           return <TeamBuilder 
