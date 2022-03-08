@@ -32,6 +32,8 @@ class WikiFaq extends Component{
             <p>The game needs to be finished in order to win/lose elo points. If someone is still in game, you need to wait. Only 8-players/bots game count are eligible to elo rating.</p>
             <h5 class="nes-text is-primary">What are the special damages and physical damages ?</h5>
             <p>ranged units are usually special on their basics. 1 range are physical. Spells/abilities can however be true/special/or physical.</p>
+            <h5 class="nes-text is-primary">Where do primal groudon and primal kyogre come in are they something you can get or are they just pve ?</h5>
+            <p>Give a delta orb to Rayaquaza, a red orb to Groudon or a blue orb to Kyogre.</p>
             <h5 class="nes-text is-primary">How can i support the game ?</h5>
             <p>You can donate on the tipee: <a href="https://en.tipeee.com/pokemon-auto-chess">https://en.tipeee.com/pokemon-auto-chess</a>.</p>
             <h5 class="nes-text is-primary">What language is used to code the game ?</h5>
