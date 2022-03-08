@@ -8,7 +8,7 @@ class PokemonState {
   handleHeal(pokemon, heal, caster) {
     if (pokemon.life > 0 && pokemon.life < pokemon.hp && !pokemon.status.wound) {
       pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.round(heal));
-      if(caster){
+      if (caster) {
         caster.healDone += heal;
       }
     }
@@ -17,7 +17,7 @@ class PokemonState {
   handleShield(pokemon, shield, caster) {
     if (pokemon.life > 0) {
       pokemon.shield += Math.round(shield);
-      if(caster){
+      if (caster) {
         caster.shieldDone += shield;
       }
     }
@@ -73,7 +73,7 @@ class PokemonState {
             case ATTACK_TYPE.PHYSICAL:
               attacker.physicalDamage += reducedDamage;
               break;
-          
+
             case ATTACK_TYPE.SPECIAL:
               attacker.specialDamage += reducedDamage;
               break;
