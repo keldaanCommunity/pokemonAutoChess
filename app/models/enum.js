@@ -3124,17 +3124,17 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 2,
           title: `(2) Harden`,
-          text: `Mineral pokemons gains 75 bonus maximum health`
+          text: `Mineral pokemons gains 70 bonus maximum health`
         },
         {
           trigger: 4,
           title: `(4) Solid Rock`,
-          text: `Mineral pokemons gains 150 bonus maximum health`
+          text: `Mineral pokemons gains 140 bonus maximum health`
         },
         {
           trigger: 6,
           title: `(6) Diamond Storm`,
-          text: `Mineral pokemons gains 300 bonus maximum health`
+          text: `Mineral pokemons gains 280 bonus maximum health`
         }
       ]
     }

@@ -732,21 +732,21 @@ class Simulation extends Schema {
 
         case EFFECTS.BATTLE_ARMOR:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.handleShield(75, pokemon);
+            pokemon.handleShield(70, pokemon);
             pokemon.effects.push(EFFECTS.BATTLE_ARMOR);
           }
           break;
 
         case EFFECTS.MOUTAIN_RESISTANCE:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.handleShield(150, pokemon);
+            pokemon.handleShield(140, pokemon);
             pokemon.effects.push(EFFECTS.MOUTAIN_RESISTANCE);
           }
           break;
 
         case EFFECTS.DIAMOND_STORM:
           if (types.includes(TYPE.MINERAL)) {
-            pokemon.handleShield(300, pokemon);
+            pokemon.handleShield(280, pokemon);
             pokemon.effects.push(EFFECTS.DIAMOND_STORM);
           }
           break;
