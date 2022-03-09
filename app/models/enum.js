@@ -2418,12 +2418,12 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 6,
           title: `(6) Strength`,
-          text: `All allies adjacent to your Normal pokemon have +50 HP.`
+          text: `All allies adjacent to your Normal pokemon have +40 HP.`
         },
         {
           trigger: 9,
           title: `(9) Pure power`,
-          text: `All allies adjacent to your Normal pokemon have +100 HP.`
+          text: `All allies adjacent to your Normal pokemon have +80 HP.`
         }
       ],
       esp: [
