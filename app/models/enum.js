@@ -3299,11 +3299,11 @@ const TYPE_DETAILS = Object.freeze({
         }, {
           trigger: 5,
           title: `(5) Allegro`,
-          text: `+6 attack each time a sound pokemon use its ability`
+          text: `+5 attack each time a sound pokemon use its ability`
         }, {
           trigger: 7,
           title: `(7) Presto`,
-          text: `+8 attack each time a sound pokemon use its ability`
+          text: `+7 attack each time a sound pokemon use its ability`
         }
       ]
     }
