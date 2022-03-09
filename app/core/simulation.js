@@ -216,8 +216,11 @@ class Simulation extends Schema {
     }
     if (pokemon.items.has(ITEM.WONDER_BOX)) {
       pokemon.items.delete(ITEM.WONDER_BOX);
-      pokemon.items.add(ItemFactory.createRandomItem());
-      pokemon.items.add(ItemFactory.createRandomItem());
+      for (let i = 0; i <2; i++) {
+        if (pokemon.items.size < 3) {
+          pokemon.items.add(ItemFactory.createRandomItem());
+        }
+      }
     }
     if (pokemon.items.has(ITEM.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + 50);
