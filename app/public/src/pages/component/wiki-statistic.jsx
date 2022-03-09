@@ -30,7 +30,7 @@ class WikiStatistic extends Component {
             </div>
             <div style={{display:'flex', alignItems:'center', margin: '10px'}}>
                 <img style={imgStyle} src='assets/icons/spellDamage.png'></img>
-                <p>Spell damage</p>
+                <p>Spell damage (%)</p>
             </div>
         </div>
         <div style={{display:'flex', justifyContent:'space-between', flexFlow:'column'}}>
