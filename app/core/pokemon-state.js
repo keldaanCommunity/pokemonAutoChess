@@ -357,15 +357,15 @@ class PokemonState {
       }
 
       if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
-        pokemon.handleHeal(5, pokemon);
+        pokemon.handleHeal(4, pokemon);
       }
 
       if (pokemon.effects.includes(EFFECTS.GROWTH)) {
-        pokemon.handleHeal(10, pokemon);
+        pokemon.handleHeal(8, pokemon);
       }
 
       if (pokemon.effects.includes(EFFECTS.SPORE)) {
-        pokemon.handleHeal(20, pokemon);
+        pokemon.handleHeal(16, pokemon);
       }
     }
     return updateEffects;
