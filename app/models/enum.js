@@ -815,7 +815,9 @@ const EFFECTS = Object.freeze({
   STAMINA: 'STAMINA',
   STRENGTH: 'STRENGTH',
   PURE_POWER: 'PURE_POWER',
-  AGILITY: 'AGILITY',
+  EERIE_IMPULSE: 'EERIE_IMPULSE',
+  RISING_VOLTAGE: 'RISING_VOLTAGE',
+  OVERDRIVE: 'OVERDRIVE',
   REVENGE: 'REVENGE',
   PUNISHMENT: 'PUNISHMENT',
   AMNESIA: 'AMNESIA',
@@ -939,8 +941,18 @@ const EFFECTS_ICON = Object.freeze({
     positive: true,
     type: TYPE.NORMAL
   },
-  AGILITY: {
+  EERIE_IMPULSE: {
     level: 1,
+    positive: true,
+    type: TYPE.ELECTRIC
+  },
+  RISING_VOLTAGE: {
+    level: 2,
+    positive: true,
+    type: TYPE.ELECTRIC
+  },
+  OVERDRIVE: {
+    level: 3,
     positive: true,
     type: TYPE.ELECTRIC
   },
@@ -2589,9 +2601,19 @@ const TYPE_DETAILS = Object.freeze({
     description: {
       eng: [
         {
-          trigger: 1,
-          title: `(-) Charge`,
-          text: `Your Electric pokemon have +14% attack speed. (stacks)`
+          trigger: 2,
+          title: `(2) Eerie Impulse`,
+          text: `Electric' Basic Attacks have a 20% chance to trigger two additional attacks against their target.`
+        },
+        {
+          trigger: 4,
+          title: `(4) Rising Voltage`,
+          text: `Electric' Basic Attacks have a 40% chance to trigger two additional attacks against their target.`
+        },
+        {
+          trigger: 6,
+          title: `(6) Overdrive`,
+          text: `Electric' Basic Attacks have a 60% chance to trigger two additional attacks against their target.`
         }
       ],
       esp: [
@@ -3293,7 +3315,7 @@ const TYPE_TRIGGER = {
   GRASS: [3, 5, 7],
   FIRE: [2, 4, 6],
   WATER: [3, 6, 9],
-  ELECTRIC: [1],
+  ELECTRIC: [2, 4, 6],
   FIGHTING: [2, 4],
   PSYCHIC: [2, 4, 6],
   DARK: [2, 4, 6],

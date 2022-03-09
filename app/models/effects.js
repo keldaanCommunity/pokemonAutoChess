@@ -58,7 +58,13 @@ class Effects {
     }
 
     if (synergies.ELECTRIC > 0) {
-      this.list.push(EFFECTS.AGILITY);
+      if (synergies.ELECTRIC >= 6) {
+        this.list.push(EFFECTS.OVERDRIVE);
+      } else if (synergies.ELECTRIC >= 4) {
+        this.list.push(EFFECTS.RISING_VOLTAGE);
+      } else if (synergies.ELECTRIC >= 2) {
+        this.list.push(EFFECTS.EERIE_IMPULSE);
+      }
     }
 
     if (synergies.FIGHTING >= 0) {

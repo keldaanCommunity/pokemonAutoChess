@@ -15,7 +15,8 @@ class Count extends schema.Schema {
       dodgeCount: 0,
       incenseCount: 0,
       staticCount: 0,
-      brightPowderCount: 0
+      brightPowderCount: 0,
+      doubleAttackCount: 0
     });
     this.staticHolderCount = 0;
     this.defensiveRibbonCount = 0;
@@ -34,7 +35,8 @@ schema.defineTypes(Count, {
   dodgeCount: 'uint8',
   incenseCount: 'uint8',
   staticCount: 'uint8',
-  brightPowderCount: 'uint8'
+  brightPowderCount: 'uint8',
+  doubleAttackCount: 'uint8'
 });
 
 module.exports = Count;

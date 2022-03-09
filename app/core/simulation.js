@@ -565,22 +565,21 @@ class Simulation extends Schema {
           }
           break;
 
-        case EFFECTS.AGILITY:
+        case EFFECTS.EERIE_IMPULSE:
           if (types.includes(TYPE.ELECTRIC)) {
-            const pokemonNames = [];
+            pokemon.effects.push(EFFECTS.EERIE_IMPULSE);
+          }
+          break;
 
-            allyTeam.forEach((pkm, key) => {
-              if (pkm.types.includes(TYPE.ELECTRIC) && pkm.positionY != 0) {
-                const family = PokemonFactory.getPokemonFamily(pkm.name);
-                if (!pokemonNames.includes(family)) {
-                  pokemonNames.push(family);
-                }
-              }
-            });
+        case EFFECTS.RISING_VOLTAGE:
+          if (types.includes(TYPE.ELECTRIC)) {
+            pokemon.effects.push(EFFECTS.RISING_VOLTAGE);
+          }
+          break;
 
-            const speedFactor = 14 * pokemonNames.length;
-            pokemon.handleAttackSpeed(speedFactor);
-            pokemon.effects.push(EFFECTS.AGILITY);
+        case EFFECTS.OVERDRIVE:
+          if (types.includes(TYPE.ELECTRIC)) {
+            pokemon.effects.push(EFFECTS.OVERDRIVE);
           }
           break;
 

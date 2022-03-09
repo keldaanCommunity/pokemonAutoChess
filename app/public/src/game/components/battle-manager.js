@@ -219,6 +219,10 @@ export default class BattleManager {
                 children[i].attackAnimation();
               }
             }
+          } else if (change.field == 'doubleAttackCount') {
+            if (change.value != 0) {
+              this.displayDoubleAttack(children[i].x, children[i].y);
+            }
           }
         }
       }
@@ -414,6 +418,36 @@ export default class BattleManager {
       },
       onComplete: () => {
         crit.destroy(true);
+      }
+    });
+  }
+
+  displayDoubleAttack(x, y) {
+    const textStyle = {
+      fontSize: '30px',
+      fontFamily: 'Verdana',
+      color: '#FFFF00',
+      align: 'center',
+      strokeThickness: 2,
+      stroke: '#000'
+    };
+    const doubleAttack = this.scene.add.existing(new GameObjects.Text(this.scene, x-30, y -50, 'ZAP!', textStyle));
+    doubleAttack.setDepth(9);
+    this.scene.add.tween({
+      targets: [doubleAttack],
+      ease: 'Linear',
+      duration: 1000,
+      delay: 0,
+      alpha: {
+        getStart: () => 1,
+        getEnd: () => 0
+      },
+      y: {
+        getStart: () => y - 50,
+        getEnd: () => y - 110
+      },
+      onComplete: () => {
+        doubleAttack.destroy(true);
       }
     });
   }
