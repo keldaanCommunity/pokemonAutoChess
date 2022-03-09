@@ -292,10 +292,10 @@ class Simulation extends Schema {
         shieldBonus = 20;
       }
       if (pokemon.effects.includes(EFFECTS.STRENGTH)) {
-        shieldBonus += 50;
+        shieldBonus += 40;
       }
       if (pokemon.effects.includes(EFFECTS.PURE_POWER)) {
-        shieldBonus += 100;
+        shieldBonus += 80;
       }
       if (shieldBonus >= 0) {
         pokemon.handleShield(shieldBonus, pokemon);
