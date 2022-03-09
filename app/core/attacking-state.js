@@ -20,6 +20,21 @@ class AttackingState extends PokemonState {
         pokemon.toMovingState();
       } else {
         this.attack(pokemon, board, targetCoordinate, climate);
+        if (pokemon.effects.includes(EFFECTS.EERIE_IMPULSE) || pokemon.effects.includes(EFFECTS.RISING_VOLTAGE) || pokemon.effects.includes(EFFECTS.OVERDRIVE)) {
+          let doubleAttackChance = 0;
+          if (pokemon.effects.includes(EFFECTS.EERIE_IMPULSE)) {
+            doubleAttackChance = 0.2;
+          } else if (pokemon.effects.includes(EFFECTS.RISING_VOLTAGE)) {
+            doubleAttackChance = 0.4;
+          } else if (pokemon.effects.includes(EFFECTS.OVERDRIVE)) {
+            doubleAttackChance = 0.6;
+          }
+          if (Math.random() < doubleAttackChance) {
+            pokemon.count.doubleAttackCount ++;
+            this.attack(pokemon, board, targetCoordinate, climate);
+            this.attack(pokemon, board, targetCoordinate, climate);
+          }
+        }
       }
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt);
