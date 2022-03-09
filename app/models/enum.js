@@ -2511,17 +2511,17 @@ const TYPE_DETAILS = Object.freeze({
         {
           trigger: 2,
           title: `(2) Blaze`,
-          text: `Your Fire pokemon gain +1 Attack after every hit.`
+          text: `Your Fire pokemon gain +1 Attack after every hit and 10% chance to burn for 2s.`
         },
         {
           trigger: 4,
           title: `(4) Drought`,
-          text: `Your Fire pokemon gain +2 Attack after every hit. (Sunlight)`
+          text: `Your Fire pokemon gain +2 Attack after every hit  and 20% chance to burn for 2s. (Sunlight)`
         },
         {
           trigger: 6,
           title: `(6) Desolate Land`,
-          text: `Your Fire pokemon gain +3 Attack after every hit. (Harsh Sunlight)`
+          text: `Your Fire pokemon gain +3 Attack after every hit and 30% chance to burn for 2s. (Sunlight)`
         }
       ],
       esp: [

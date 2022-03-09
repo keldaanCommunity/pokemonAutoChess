@@ -149,6 +149,20 @@ class PokemonState {
           if (attacker.items.has(ITEM.KINGS_ROCK)) {
             attacker.handleHeal(Math.floor(0.3 * residualDamage), attacker);
           }
+
+          if (attacker.effects.includes(EFFECTS.BLAZE) || attacker.effects.includes(EFFECTS.DROUGHT) || attacker.effects.includes(EFFECTS.DESOLATE_LAND)) {
+            let burnChance = 0;
+            if (attacker.effects.includes(EFFECTS.BLAZE)) {
+              burnChance = 0.1;
+            } else if (attacker.effects.includes(EFFECTS.DROUGHT)) {
+              burnChance = 0.2;
+            } else if (attacker.effects.includes(EFFECTS.DESOLATE_LAND)) {
+              burnChance = 0.3;
+            }
+            if (Math.random() < burnChance) {
+              pokemon.status.triggerBurn(2000, pokemon, attacker);
+            }
+          }
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
@@ -341,9 +355,11 @@ class PokemonState {
       if (pokemon.effects.includes(EFFECTS.BLAZE)) {
         pokemon.atk += 1;
       }
+
       if (pokemon.effects.includes(EFFECTS.DROUGHT)) {
         pokemon.atk += 2;
       }
+
       if (pokemon.effects.includes(EFFECTS.DESOLATE_LAND)) {
         pokemon.atk += 3;
       }
