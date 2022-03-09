@@ -185,7 +185,7 @@ class Simulation extends Schema {
 
   applyItemsEffects(pokemon, types) {
     if (pokemon.items.has(ITEM.TWISTED_SPOON)) {
-      pokemon.spellDamage += 1;
+      pokemon.addSpellDamage(10);
     }
     if (pokemon.items.has(ITEM.MYSTIC_WATER)) {
       pokemon.mana += 15;
@@ -209,7 +209,7 @@ class Simulation extends Schema {
       pokemon.def += 1;
     }
     if (pokemon.items.has(ITEM.CHOICE_SPECS)) {
-      pokemon.spellDamage += 8;
+      pokemon.addSpellDamage(75);
     }
     if (pokemon.items.has(ITEM.SOUL_DEW)) {
       pokemon.status.triggerSoulDew(5000);
@@ -230,7 +230,7 @@ class Simulation extends Schema {
     }
     if (pokemon.items.has(ITEM.ZOOM_LENS)) {
       pokemon.atk += 4;
-      pokemon.spellDamage += 4;
+      pokemon.addSpellDamage(40);
     }
     if (pokemon.items.has(ITEM.BRIGHT_POWDER)) {
       pokemon.status.triggerBrightPowder(5000);
@@ -322,7 +322,7 @@ class Simulation extends Schema {
         [-1, 0, 1].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
-            value.spellDamage += 3;
+            value.addSpellDamage(30);
           }
         });
       }
@@ -404,7 +404,7 @@ class Simulation extends Schema {
         [-2, -1, 0, 1, 2].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
-            value.spellDamage += 3;
+            value.addSpellDamage(30);
           }
         });
       }

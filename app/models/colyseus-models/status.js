@@ -93,7 +93,7 @@ class Status extends schema.Schema {
   updateSoulDew(dt, pkm) {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false;
-      pkm.spellDamage += 3;
+      pkm.addSpellDamage(25);
       if (pkm.items.has(ITEM.SOUL_DEW)) {
         this.triggerSoulDew(5000);
       }

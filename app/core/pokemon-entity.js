@@ -96,7 +96,7 @@ class PokemonEntity extends schema.Schema {
   }
 
   handleSpellDamage(damage, board, attackType, attacker) {
-    let spellDamage = damage + attacker.spellDamage;
+    let spellDamage = damage + damage * attacker.spellDamage / 100;
     if (attacker && 0.2 * attacker.items.has(ITEM.REAPER_CLOTH) > Math.random()) {
       spellDamage *= 2;
       this.count.crit ++;
@@ -156,6 +156,10 @@ class PokemonEntity extends schema.Schema {
 
   addDodgeChance(value) {
     this.dodge = Math.min(0.9, this.dodge + value);
+  }
+
+  addSpellDamage(value) {
+    this.spellDamage = Math.min(100, this.spellDamage + value);
   }
 }
 
