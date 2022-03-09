@@ -1800,7 +1800,7 @@ class ThiefStrategy extends AttackStrategy {
     }
     const l = target.items.size;
     target.items.forEach( (item) => {
-      if(pokemon.items.size <3){
+      if (pokemon.items.size <3) {
         pokemon.items.add(item);
       }
       target.items.delete(item);
@@ -1821,8 +1821,8 @@ class ThiefStrategy extends AttackStrategy {
       pokemon.handleShield(50 * l, pokemon);
     }
 
-    //pokemon.simulation.applyItemsEffects(pokemon);
-    //target.simulation.applyItemsEffects(target);
+    // pokemon.simulation.applyItemsEffects(pokemon);
+    // target.simulation.applyItemsEffects(target);
     target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }

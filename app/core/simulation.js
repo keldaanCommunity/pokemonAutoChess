@@ -253,7 +253,7 @@ class Simulation extends Schema {
       pokemon.status.triggerFlameOrb(2000);
     }
     if (pokemon.items.has(ITEM.ASSAULT_VEST)) {
-      pokemon.speDef += 15;
+      pokemon.speDef += 30;
     }
     if (pokemon.items.has(ITEM.POKE_DOLL)) {
       pokemon.def += 5;

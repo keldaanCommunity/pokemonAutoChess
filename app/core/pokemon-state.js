@@ -147,7 +147,7 @@ class PokemonState {
             attacker.handleHeal(Math.floor(lifesteal * residualDamage), attacker);
           }
           if (attacker.items.has(ITEM.KINGS_ROCK)) {
-            attacker.handleHeal(Math.floor(0.3 * residualDamage), attacker);
+            attacker.handleHeal(Math.floor(0.5 * residualDamage), attacker);
           }
 
           if (attacker.effects.includes(EFFECTS.BLAZE) || attacker.effects.includes(EFFECTS.DROUGHT) || attacker.effects.includes(EFFECTS.DESOLATE_LAND)) {
