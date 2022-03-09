@@ -278,7 +278,7 @@ class Status extends schema.Schema {
   triggerSmoke(timer, pkm) {
     if (!this.smoke) {
       this.smoke = true;
-      pkm.handleAttackSpeed(-30);
+      pkm.handleAttackSpeed(-50);
       this.smokeCooldown = timer;
     }
   }
