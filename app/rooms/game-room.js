@@ -289,6 +289,9 @@ class GameRoom extends colyseus.Room {
       meanGain += gain;
     });
     meanGain = Math.floor(meanGain / eloGains.length);
+    if (rank <= 4 && meanGain < elo) {
+      meanGain = elo;
+    }
     // console.log(eloGains);
     console.log(`${player.name} (was ${player.elo}) will be ${meanGain} (${rank})`);
     return meanGain;
