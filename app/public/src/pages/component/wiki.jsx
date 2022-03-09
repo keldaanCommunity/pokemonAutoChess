@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import WikiButton from './wiki-button';
 import WikiContent from './wiki-content';
-import WikiItems from './wiki-items';
+import WikiStatistic from './wiki-statistic';
 import WikiTypes from './wiki-types';
 import WikiFaq from './wiki-faq';
 import WikiItemsCheatSheet from './wiki-items-cheat-sheet';
@@ -19,6 +19,7 @@ class Wiki extends Component{
                     <Tab key='title-pokemon'>POKEMONS</Tab>
                     <Tab key='title-items'>ITEMS</Tab>
                     <Tab key='title-types'>SYNERGIES</Tab>
+                    <Tab key='title-statistic'>STATISTICS</Tab>
                 </TabList>
 
                 <TabPanel key='faq'>
@@ -32,6 +33,9 @@ class Wiki extends Component{
                 </TabPanel>
                 <TabPanel key='types'>
                     <WikiTypes/>
+                </TabPanel>
+                <TabPanel key='statistic'>
+                    <WikiStatistic/>
                 </TabPanel>
             </Tabs>
             </div>
