@@ -1,59 +1,53 @@
-const schema = require('@colyseus/schema');
-const {ITEM} = require('../enum');
+import {Schema, type} from '@colyseus/schema';
+import {ITEM} from '../enum';
 
-class Status extends schema.Schema {
-  constructor() {
-    super();
-    this.assign({
-      burn: false,
-      silence: false,
-      poison: false,
-      freeze: false,
-      protect: false,
-      sleep: false,
-      confusion: false,
-      wound: false,
-      resurection: false,
-      smoke: false,
-      armorReduction: false,
-      runeProtect: false
-    });
-    this.temporaryShield = false;
-    this.soulDew = false;
-    this.brightPowder = false;
-    this.flameOrb = false;
+export default class Status extends Schema {
+  @type('boolean') burn: boolean;
+  @type('boolean') silence: boolean;
+  @type('boolean') poison: boolean;
+  @type('boolean') freeze: boolean;
+  @type('boolean') protect: boolean;
+  @type('boolean') sleep: boolean;
+  @type('boolean') confusion: boolean;
+  @type('boolean') wound: boolean;
+  @type('boolean') resurection: boolean;
+  @type('boolean') smoke: boolean;
+  @type('boolean') armorReduction: boolean;
+  @type('boolean') runeProtect: boolean
+  temporaryShield: boolean;
+  soulDew: boolean;
+  brightPowder: boolean;
+  flameOrb: boolean;
+  burnOrigin: any;
+  poisonOrigin: any;
+  burnCooldown: number;
+  silenceCooldown: number;
+  poisonCooldown: number;
+  freezeCooldown: number;
+  protectCooldown: number;
+  sleepCooldown: number;
+  confusionCooldown: number;
+  woundCooldown: number;
+  temporaryShieldCooldown: number;
+  soulDewCooldown: number;
+  brightPowderCooldown: number;
+  smokeCooldown: number;
+  armorReductionCooldown: number;
+  flameOrbCooldown: number;
 
-    this.burnOrigin = undefined;
-    this.poisonOrigin = undefined;
-    this.burnCooldown = 0;
-    this.silenceCooldown = 0;
-    this.poisonCooldown = 0;
-    this.freezeCooldown = 0;
-    this.protectCooldown = 0;
-    this.sleepCooldown = 0;
-    this.confusionCooldown = 0;
-    this.woundCooldown = 0;
-    this.temporaryShieldCooldown = 0;
-    this.soulDewCooldown = 0;
-    this.brightPowderCooldown = 0;
-    this.smokeCooldown = 0;
-    this.armorReductionCooldown = 0;
-    this.flameOrbCooldown = 0;
-  }
-
-  triggerFlameOrb(timer) {
+  triggerFlameOrb(timer: number) {
     if (!this.flameOrb) {
       this.flameOrb = true;
       this.flameOrbCooldown = timer;
     }
   }
 
-  updateFlameOrb(dt, pkm, board) {
+  updateFlameOrb(dt: number, pkm: any, board: any) {
     if (this.flameOrbCooldown - dt <= 0) {
       this.flameOrb = false;
       const cells = board.getAdjacentCells(pkm.positionX, pkm.positionY);
       let flameCount = 1;
-      cells.forEach((cell) => {
+      cells.forEach((cell:any) => {
         if (cell.value && pkm.team != cell.value.team && flameCount > 0) {
           cell.value.status.triggerBurn(8000, cell.value, pkm);
           flameCount --;
@@ -67,14 +61,14 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerArmorReduction(timer) {
+  triggerArmorReduction(timer: number) {
     if (!this.armorReduction) {
       this.armorReduction = true;
       this.armorReductionCooldown = timer;
     }
   }
 
-  updateArmorReduction(dt) {
+  updateArmorReduction(dt: number) {
     if (this.armorReductionCooldown - dt <= 0) {
       this.armorReduction = false;
     } else {
@@ -82,7 +76,7 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerSoulDew(timer) {
+  triggerSoulDew(timer: number) {
     // console.log('sould dew');
     if (!this.soulDew) {
       this.soulDew = true;
@@ -90,7 +84,7 @@ class Status extends schema.Schema {
     }
   }
 
-  updateSoulDew(dt, pkm) {
+  updateSoulDew(dt: number, pkm: any) {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false;
       pkm.addSpellDamage(25);
@@ -102,7 +96,7 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerBurn(timer, pkm, origin) {
+  triggerBurn(timer: number, pkm: any, origin: any) {
     if (!this.burn && !pkm.items.has(ITEM.WIDE_LENS)) {
       this.burn = true;
       this.burnCooldown = timer;
@@ -112,7 +106,7 @@ class Status extends schema.Schema {
     }
   }
 
-  updateBurn(dt) {
+  updateBurn(dt: number) {
     if (this.burnCooldown - dt <= 0) {
       this.burn = false;
       this.burnOrigin = undefined;
@@ -121,14 +115,14 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerSilence(timer) {
+  triggerSilence(timer: number) {
     if (!this.silence) {
       this.silence = true;
       this.silenceCooldown = timer;
     }
   }
 
-  updateSilence(dt) {
+  updateSilence(dt: number) {
     if (this.silenceCooldown - dt <= 0) {
       this.silence = false;
     } else {
@@ -136,7 +130,7 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerPoison(timer, pkm, origin) {
+  triggerPoison(timer: number, pkm: any, origin: any) {
     if (!this.poison && !pkm.items.has(ITEM.WIDE_LENS)) {
       this.poison = true;
       this.poisonCooldown = timer;
@@ -146,7 +140,7 @@ class Status extends schema.Schema {
     }
   }
 
-  updatePoison(dt) {
+  updatePoison(dt: number) {
     if (this.poisonCooldown - dt <= 0) {
       this.poison = false;
       this.poisonOrigin = undefined;
@@ -155,14 +149,14 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerFreeze(timer) {
+  triggerFreeze(timer: number) {
     if (!this.freeze) {
       this.freeze = true;
       this.freezeCooldown = timer;
     }
   }
 
-  updateFreeze(dt) {
+  updateFreeze(dt: number) {
     if (this.freezeCooldown - dt <= 0) {
       this.freeze = false;
     } else {
@@ -170,14 +164,14 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerProtect(timer) {
+  triggerProtect(timer: number) {
     if (!this.protect) {
       this.protect = true;
       this.protectCooldown = timer;
     }
   }
 
-  updateProtect(dt) {
+  updateProtect(dt: number) {
     if (this.protectCooldown - dt <= 0) {
       this.protect = false;
     } else {
@@ -185,14 +179,14 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerSleep(timer) {
+  triggerSleep(timer: number) {
     if (!this.sleep) {
       this.sleep = true;
       this.sleepCooldown = timer;
     }
   }
 
-  updateSleep(dt) {
+  updateSleep(dt: number) {
     if (this.sleepCooldown - dt <= 0) {
       this.sleep = false;
     } else {
@@ -200,14 +194,14 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerConfusion(timer) {
+  triggerConfusion(timer: number) {
     if (!this.confusion) {
       this.confusion = true;
       this.confusionCooldown = timer;
     }
   }
 
-  updateConfusion(dt) {
+  updateConfusion(dt: number) {
     if (this.confusionCooldown - dt <= 0) {
       this.confusion = false;
     } else {
@@ -215,14 +209,14 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerWound(timer) {
+  triggerWound(timer: number) {
     if (!this.wound) {
       this.wound = true;
       this.woundCooldown = timer;
     }
   }
 
-  updateWound(dt) {
+  updateWound(dt: number) {
     if (this.woundCooldown - dt <= 0) {
       this.wound = false;
     } else {
@@ -230,14 +224,14 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerShield(timer) {
+  triggerShield(timer: number) {
     if (!this.temporaryShield) {
       this.temporaryShield = true;
       this.temporaryShieldCooldown = timer;
     }
   }
 
-  updateShield(dt, pkm) {
+  updateShield(dt: number, pkm: any) {
     if (this.temporaryShieldCooldown - dt <= 0) {
       this.temporaryShield = false;
       pkm.shield = 0;
@@ -246,14 +240,14 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerBrightPowder(timer) {
+  triggerBrightPowder(timer: number) {
     if (!this.brightPowder) {
       this.brightPowder = true;
       this.brightPowderCooldown = timer;
     }
   }
 
-  updateBrightPowder(dt, pokemon, board) {
+  updateBrightPowder(dt: number, pokemon: any, board: any) {
     if (this.brightPowderCooldown - dt <= 0) {
       this.brightPowder = false;
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
@@ -275,7 +269,7 @@ class Status extends schema.Schema {
     }
   }
 
-  triggerSmoke(timer, pkm) {
+  triggerSmoke(timer: number, pkm: any) {
     if (!this.smoke) {
       this.smoke = true;
       pkm.handleAttackSpeed(-50);
@@ -283,7 +277,7 @@ class Status extends schema.Schema {
     }
   }
 
-  updateSmoke(dt, pkm) {
+  updateSmoke(dt: number, pkm: any) {
     if (this.smokeCooldown - dt <= 0) {
       this.smoke = false;
       pkm.handleAttackSpeed(30);
@@ -301,20 +295,3 @@ class Status extends schema.Schema {
     this.runeProtect = false;
   }
 }
-
-schema.defineTypes(Status, {
-  burn: 'boolean',
-  silence: 'boolean',
-  poison: 'boolean',
-  freeze: 'boolean',
-  protect: 'boolean',
-  sleep: 'boolean',
-  confusion: 'boolean',
-  wound: 'boolean',
-  resurection: 'boolean',
-  smoke: 'boolean',
-  armorReduction: 'boolean',
-  runeProtect: 'boolean'
-});
-
-module.exports = Status;

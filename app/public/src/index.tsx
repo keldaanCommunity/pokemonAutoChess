@@ -8,13 +8,10 @@ import Preparation from './pages/preparation';
 import Game from './pages/game';
 import AfterGame from './pages/after-game';
 
-
-window.endpoint = `${window.location.protocol.replace('http', 'ws')}//${window.location.host}`;
-
 ReactDOM.render((
     <BrowserRouter>
         <Routes>
-          <Route exact path='/' element={<Home/>}/>
+          <Route path='/' element={<Home/>}/>
           <Route path='/auth' element={<Auth/>}/>
           <Route path='/lobby' element={<Lobby/>}/>
           <Route path='/preparation' element={<Preparation/>}/>

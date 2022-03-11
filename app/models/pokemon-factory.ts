@@ -1,9 +1,9 @@
-const Pokemon = require('./colyseus-models/pokemon');
-const {SPECIAL_SKILL, PKM, PRECOMPUTED_TYPE_POKEMONS, TYPE} = require('./enum');
-const Strategy = require('../core/attack-strategy');
+import {Pokemon, Bulbasaur, Abomasnow, Abra, Absol, Aegislash, Aerodactyl, Aggron, Alakazam, AlolanMarowak, Altaria, Amaura, Ampharos, Anorith, Arcanine, Arceus, Archen, Archeops, Armaldo, Aron, Articuno, Aurorus, Axew, Azelf, Azumarill, Azurill, Bagon, Banette, Bastiodon, Bayleef, Beedrill, Beldum, Bellossom, Bellsprout, Blastoise, Blaziken, Budew, Buneary, Butterfree, Camerupt, Carracosta, Carvanha, Castform, CastformHail, CastformRain, CastformSun, Caterpie, Celebi, Chandelure, Charizard, Charmander, Charmeleon, Chikorita, Chimchar, Clefable, Clefairy, Cleffa, Cobalion, Combusken, Cradily, Cranidos, Cresselia, Crobat, Croconaw, Cubone, Cyndaquil, Darkrai, Deino, Deoxys, Dialga, Ditto, Doublade, Dragonair, Dragonite, Dratini, Duosion, Dusclops, Dusknoir, Duskull, Eevee, Electabuzz, Electivire, Electrike, Elekid, Empoleon, Entei, Espeon, Exploud, Fearow, Feraligatr, Flabebe, Flaffy, Flareon, Fletchinder, Fletchling, Floette, Florges, Flygon, Fraxure, Froslass, Gabite, Garchomp, Gardevoir, Gastly, Gengar, Geodude, Gible, Giratina, Glaceon, Glalie, Gloom, Golbat, Golem, Graveler, Grotle, Groudon, Grovyle, Growlithe, Gyarados, HakamoO, Haunter, Haxorus, Heatran, Herdier, Honedge, HooH, Hoppip, Horsea, Houndour, Hydreigon, Igglybuff, Infernape, Ivysaur, JangmoO, Jigglypuff, Jirachi, Jolteon, Jumpluff, Kabuto, Kabutops, Kadabra, Kakuna, Keldeo, Kingdra, Kirlia, Klang, Klink, Klinklang, KommoO, Krookodile, Krookorok, Kyogre, Kyurem, Lairon, Lampent, Landorus, Lapras, Larvitar, Latias, Latios, Leafeon, Leavanny, Lileep, Lillipup, Litwick, Lombre, Lopunny, Lotad, Loudred, Lucario, Ludicolo, Lugia, Luxio, Luxray, Machamp, Machoke, Machop, Magby, Magikarp, Magmar, Magmortar, Magnemite, Magneton, Magnezone, Mamoswine, Manaphy, Manectric, Mareep, Marill, Marowak, Marshtomp, Medicham, Meditite, MegaAbomasnow, MegaAltaria, MegaBanette, MegaCamerupt, MegaLopunny, MegaLucario, MegaManectric, MegaMedicham, Meganium, MegaRayquaza, MegaScizor, MegaSteelix, Meloetta, Meowth, Mesprit, Metagross, Metang, Metapod, Mewtwo, Moltres, Monferno, Mudkip, Munchlax, Nidoking, Nidoqueen, NidoranF, NidoranM, Nidorina, Nidorino, Numel, Nuzleaf, Oddish, Omanyte, Omastar, Onix, Palkia, Palpitoad, Persian, Pichu, Pidgeot, Pidgeotto, Pidgey, Pikachu, Pikipek, Piloswine, Piplup, Politoed, Poliwag, Poliwhirl, Porygon, Porygon2, PorygonZ, PrimalGroudon, PrimalKyogre, Prinplup, Pupitar, Quilava, Raichu, Raikou, Ralts, Rampardos, Raticate, Rattata, Rayquaza, Regice, Regigigas, Regirock, Registeel, Reshiram, Reuniclus, Rhydon, Rhyhorn, Rhyperior, Riolu, Roselia, Roserade, Rotom, Salamence, Sandile, Sandshrew, Sceptile, Scizor, Scolipede, Scyther, Seadra, Sealeo, Seedot, Seismitoad, Sewaddle, Shaymin, Shelgon, Shieldon, Shiftry, Shinx, Shuppet, Skiploom, Slaking, Slakoth, Slowbro, Slowking, Slowpoke, Snorlax, Snorunt, Snover, Solosis, Spearow, Spheal, Spiritomb, Squirtle, Staraptor, Staravia, Starly, Steelix, Stoutland, Suicune, Swablu, Swadloon, Swampert, Swinub, Sylveon, Talonflame, Terrakion, Thundurus, Tirtouga, Togekiss, Togepi, Togetic, Torchic, Tornadus, Torterra, Totodile, Toucannon, Trapinch, Treecko, Trumbeak, Turtwig, Tympole, Typhlosion, Tyranitar, Tyrantrum, Tyrunt, Umbreon, Uxie, Vanillish, Vanillite, Vanilluxe, Vaporeon, Venipede, Venusaur, Vibrava, Victini, Victreebel, Vigoroth, Vileplume, Virizion, Volcarona, Walrein, Wartortle, Weedle, Weepinbell, Whirlipede, Whismur, Wigglytuff, Zapdos, Zekrom, Zubat, Zweilous} from './colyseus-models/pokemon';
+import {SPECIAL_SKILL, PKM, PRECOMPUTED_TYPE_POKEMONS, TYPE} from './enum';
+import Strategy from '../core/attack-strategy';
 
-class PokemonFactory {
-  static getNeutralPokemonsByLevelStage(level) {
+export default class PokemonFactory {
+  static getNeutralPokemonsByLevelStage(level: number) {
     const pokemons = new Map();
     switch (level) {
       case 1:
@@ -150,7 +150,7 @@ class PokemonFactory {
     return pokemons;
   }
 
-  static createStrategyFromName(name) {
+  static createStrategyFromName(name: string) {
     switch (name) {
       case SPECIAL_SKILL.KING_SHIELD:
         return new Strategy.KingShieldStrategy();
@@ -367,7 +367,7 @@ class PokemonFactory {
   // transforms a pokemon into another pokemon,
   // transferring its items and position to
   // the new pokemon
-  static transformPokemon(before, afterName) {
+  static transformPokemon(before: Pokemon, afterName: string) {
     const transformation = this.createPokemonFromName(afterName);
     transformation.positionX = before.positionX;
     transformation.positionY = before.positionY;
@@ -375,7 +375,7 @@ class PokemonFactory {
     return transformation;
   }
 
-  static getPokemonBaseEvolution(name) {
+  static getPokemonBaseEvolution(name: string) {
     switch (name) {
       case PKM.VAPOREON:
         return PKM.EEVEE;
@@ -398,7 +398,7 @@ class PokemonFactory {
     }
   }
 
-  static getPokemonFamily(name) {
+  static getPokemonFamily(name: string) {
     switch (name) {
       case PKM.BULBASAUR:
         return PKM.BULBASAUR;
@@ -1124,738 +1124,738 @@ class PokemonFactory {
     }
   }
 
-  static createPokemonFromName(name) {
+  static createPokemonFromName(name: string) {
     switch (name) {
       case PKM.BULBASAUR:
-        return new Pokemon.Bulbasaur();
+        return new Bulbasaur();
       case PKM.IVYSAUR:
-        return new Pokemon.Ivysaur();
+        return new Ivysaur();
       case PKM.VENUSAUR:
-        return new Pokemon.Venusaur();
+        return new Venusaur();
       case PKM.CHARMANDER:
-        return new Pokemon.Charmander();
+        return new Charmander();
       case PKM.CHARMELEON:
-        return new Pokemon.Charmeleon();
+        return new Charmeleon();
       case PKM.CHARIZARD:
-        return new Pokemon.Charizard();
+        return new Charizard();
       case PKM.SQUIRTLE:
-        return new Pokemon.Squirtle();
+        return new Squirtle();
       case PKM.WARTORTLE:
-        return new Pokemon.Wartortle();
+        return new Wartortle();
       case PKM.BLASTOISE:
-        return new Pokemon.Blastoise();
+        return new Blastoise();
       case PKM.SLOWPOKE:
-        return new Pokemon.Slowpoke();
+        return new Slowpoke();
       case PKM.SLOWBRO:
-        return new Pokemon.Slowbro();
+        return new Slowbro();
       case PKM.SLOWKING:
-        return new Pokemon.Slowking();
+        return new Slowking();
       case PKM.GEODUDE:
-        return new Pokemon.Geodude();
+        return new Geodude();
       case PKM.GRAVELER:
-        return new Pokemon.Graveler();
+        return new Graveler();
       case PKM.GOLEM:
-        return new Pokemon.Golem();
+        return new Golem();
       case PKM.AZURILL:
-        return new Pokemon.Azurill();
+        return new Azurill();
       case PKM.MARILL:
-        return new Pokemon.Marill();
+        return new Marill();
       case PKM.AZUMARILL:
-        return new Pokemon.Azumarill();
+        return new Azumarill();
       case PKM.ZUBAT:
-        return new Pokemon.Zubat();
+        return new Zubat();
       case PKM.GOLBAT:
-        return new Pokemon.Golbat();
+        return new Golbat();
       case PKM.CROBAT:
-        return new Pokemon.Crobat();
+        return new Crobat();
       case PKM.AMPHAROS:
-        return new Pokemon.Ampharos();
+        return new Ampharos();
       case PKM.MAREEP:
-        return new Pokemon.Mareep();
+        return new Mareep();
       case PKM.FLAFFY:
-        return new Pokemon.Flaffy();
+        return new Flaffy();
       case PKM.CLEFFA:
-        return new Pokemon.Cleffa();
+        return new Cleffa();
       case PKM.CLEFAIRY:
-        return new Pokemon.Clefairy();
+        return new Clefairy();
       case PKM.CLEFABLE:
-        return new Pokemon.Clefable();
+        return new Clefable();
       case PKM.IGGLYBUFF:
-        return new Pokemon.Igglybuff();
+        return new Igglybuff();
       case PKM.JIGGLYPUFF:
-        return new Pokemon.Jigglypuff();
+        return new Jigglypuff();
       case PKM.WIGGLYTUFF:
-        return new Pokemon.Wigglytuff();
+        return new Wigglytuff();
       case PKM.CATERPIE:
-        return new Pokemon.Caterpie();
+        return new Caterpie();
       case PKM.METAPOD:
-        return new Pokemon.Metapod();
+        return new Metapod();
       case PKM.BUTTERFREE:
-        return new Pokemon.Butterfree();
+        return new Butterfree();
       case PKM.WEEDLE:
-        return new Pokemon.Weedle();
+        return new Weedle();
       case PKM.KAKUNA:
-        return new Pokemon.Kakuna();
+        return new Kakuna();
       case PKM.BEEDRILL:
-        return new Pokemon.Beedrill();
+        return new Beedrill();
       case PKM.PIDGEY:
-        return new Pokemon.Pidgey();
+        return new Pidgey();
       case PKM.PIDGEOTTO:
-        return new Pokemon.Pidgeotto();
+        return new Pidgeotto();
       case PKM.PIDGEOT:
-        return new Pokemon.Pidgeot();
+        return new Pidgeot();
       case PKM.HOPPIP:
-        return new Pokemon.Hoppip();
+        return new Hoppip();
       case PKM.SKIPLOOM:
-        return new Pokemon.Skiploom();
+        return new Skiploom();
       case PKM.JUMPLUFF:
-        return new Pokemon.Jumpluff();
+        return new Jumpluff();
       case PKM.SEEDOT:
-        return new Pokemon.Seedot();
+        return new Seedot();
       case PKM.NUZLEAF:
-        return new Pokemon.Nuzleaf();
+        return new Nuzleaf();
       case PKM.SHIFTRY:
-        return new Pokemon.Shiftry();
+        return new Shiftry();
       case PKM.STARLY:
-        return new Pokemon.Starly();
+        return new Starly();
       case PKM.STARAVIA:
-        return new Pokemon.Staravia();
+        return new Staravia();
       case PKM.STARAPTOR:
-        return new Pokemon.Staraptor();
+        return new Staraptor();
       case PKM.CHIKORITA:
-        return new Pokemon.Chikorita();
+        return new Chikorita();
       case PKM.BAYLEEF:
-        return new Pokemon.Bayleef();
+        return new Bayleef();
       case PKM.MEGANIUM:
-        return new Pokemon.Meganium();
+        return new Meganium();
       case PKM.CYNDAQUIL:
-        return new Pokemon.Cyndaquil();
+        return new Cyndaquil();
       case PKM.QUILAVA:
-        return new Pokemon.Quilava();
+        return new Quilava();
       case PKM.TYPHLOSION:
-        return new Pokemon.Typhlosion();
+        return new Typhlosion();
       case PKM.TOTODILE:
-        return new Pokemon.Totodile();
+        return new Totodile();
       case PKM.CROCONAW:
-        return new Pokemon.Croconaw();
+        return new Croconaw();
       case PKM.FERALIGATR:
-        return new Pokemon.Feraligatr();
+        return new Feraligatr();
       case PKM.TREECKO:
-        return new Pokemon.Treecko();
+        return new Treecko();
       case PKM.GROVYLE:
-        return new Pokemon.Grovyle();
+        return new Grovyle();
       case PKM.SCEPTILE:
-        return new Pokemon.Sceptile();
+        return new Sceptile();
       case PKM.TORCHIC:
-        return new Pokemon.Torchic();
+        return new Torchic();
       case PKM.COMBUSKEN:
-        return new Pokemon.Combusken();
+        return new Combusken();
       case PKM.BLAZIKEN:
-        return new Pokemon.Blaziken();
+        return new Blaziken();
       case PKM.MUDKIP:
-        return new Pokemon.Mudkip();
+        return new Mudkip();
       case PKM.MARSHTOMP:
-        return new Pokemon.Marshtomp();
+        return new Marshtomp();
       case PKM.SWAMPERT:
-        return new Pokemon.Swampert();
+        return new Swampert();
       case PKM.TURTWIG:
-        return new Pokemon.Turtwig();
+        return new Turtwig();
       case PKM.GROTLE:
-        return new Pokemon.Grotle();
+        return new Grotle();
       case PKM.TORTERRA:
-        return new Pokemon.Torterra();
+        return new Torterra();
       case PKM.CHIMCHAR:
-        return new Pokemon.Chimchar();
+        return new Chimchar();
       case PKM.MONFERNO:
-        return new Pokemon.Monferno();
+        return new Monferno();
       case PKM.INFERNAPE:
-        return new Pokemon.Infernape();
+        return new Infernape();
       case PKM.PIPLUP:
-        return new Pokemon.Piplup();
+        return new Piplup();
       case PKM.PRINPLUP:
-        return new Pokemon.Prinplup();
+        return new Prinplup();
       case PKM.EMPOLEON:
-        return new Pokemon.Empoleon();
+        return new Empoleon();
       case PKM.NIDORANF:
-        return new Pokemon.NidoranF();
+        return new NidoranF();
       case PKM.NIDORINA:
-        return new Pokemon.Nidorina();
+        return new Nidorina();
       case PKM.NIDOQUEEN:
-        return new Pokemon.Nidoqueen();
+        return new Nidoqueen();
       case PKM.NIDORANM:
-        return new Pokemon.NidoranM();
+        return new NidoranM();
       case PKM.NIDORINO:
-        return new Pokemon.Nidorino();
+        return new Nidorino();
       case PKM.NIDOKING:
-        return new Pokemon.Nidoking();
+        return new Nidoking();
       case PKM.PICHU:
-        return new Pokemon.Pichu();
+        return new Pichu();
       case PKM.PIKACHU:
-        return new Pokemon.Pikachu();
+        return new Pikachu();
       case PKM.RAICHU:
-        return new Pokemon.Raichu();
+        return new Raichu();
       case PKM.MACHOP:
-        return new Pokemon.Machop();
+        return new Machop();
       case PKM.MACHOKE:
-        return new Pokemon.Machoke();
+        return new Machoke();
       case PKM.MACHAMP:
-        return new Pokemon.Machamp();
+        return new Machamp();
       case PKM.HORSEA:
-        return new Pokemon.Horsea();
+        return new Horsea();
       case PKM.SEADRA:
-        return new Pokemon.Seadra();
+        return new Seadra();
       case PKM.KINGDRA:
-        return new Pokemon.Kingdra();
+        return new Kingdra();
       case PKM.TRAPINCH:
-        return new Pokemon.Trapinch();
+        return new Trapinch();
       case PKM.VIBRAVA:
-        return new Pokemon.Vibrava();
+        return new Vibrava();
       case PKM.FLYGON:
-        return new Pokemon.Flygon();
+        return new Flygon();
       case PKM.SPHEAL:
-        return new Pokemon.Spheal();
+        return new Spheal();
       case PKM.SEALEO:
-        return new Pokemon.Sealeo();
+        return new Sealeo();
       case PKM.WALREIN:
-        return new Pokemon.Walrein();
+        return new Walrein();
       case PKM.ARON:
-        return new Pokemon.Aron();
+        return new Aron();
       case PKM.LAIRON:
-        return new Pokemon.Lairon();
+        return new Lairon();
       case PKM.AGGRON:
-        return new Pokemon.Aggron();
+        return new Aggron();
       case PKM.MAGNEMITE:
-        return new Pokemon.Magnemite();
+        return new Magnemite();
       case PKM.MAGNETON:
-        return new Pokemon.Magneton();
+        return new Magneton();
       case PKM.MAGNEZONE:
-        return new Pokemon.Magnezone();
+        return new Magnezone();
       case PKM.RHYHORN:
-        return new Pokemon.Rhyhorn();
+        return new Rhyhorn();
       case PKM.RHYDON:
-        return new Pokemon.Rhydon();
+        return new Rhydon();
       case PKM.RHYPERIOR:
-        return new Pokemon.Rhyperior();
+        return new Rhyperior();
       case PKM.TOGEPI:
-        return new Pokemon.Togepi();
+        return new Togepi();
       case PKM.TOGETIC:
-        return new Pokemon.Togetic();
+        return new Togetic();
       case PKM.TOGEKISS:
-        return new Pokemon.Togekiss();
+        return new Togekiss();
       case PKM.DUSKULL:
-        return new Pokemon.Duskull();
+        return new Duskull();
       case PKM.DUSCLOPS:
-        return new Pokemon.Dusclops();
+        return new Dusclops();
       case PKM.DUSKNOIR:
-        return new Pokemon.Dusknoir();
+        return new Dusknoir();
       case PKM.LOTAD:
-        return new Pokemon.Lotad();
+        return new Lotad();
       case PKM.LOMBRE:
-        return new Pokemon.Lombre();
+        return new Lombre();
       case PKM.LUDICOLO:
-        return new Pokemon.Ludicolo();
+        return new Ludicolo();
       case PKM.SHINX:
-        return new Pokemon.Shinx();
+        return new Shinx();
       case PKM.LUXIO:
-        return new Pokemon.Luxio();
+        return new Luxio();
       case PKM.LUXRAY:
-        return new Pokemon.Luxray();
+        return new Luxray();
       case PKM.POLIWAG:
-        return new Pokemon.Poliwag();
+        return new Poliwag();
       case PKM.POLIWHIRL:
-        return new Pokemon.Poliwhirl();
+        return new Poliwhirl();
       case PKM.POLITOED:
-        return new Pokemon.Politoed();
+        return new Politoed();
       case PKM.ABRA:
-        return new Pokemon.Abra();
+        return new Abra();
       case PKM.KADABRA:
-        return new Pokemon.Kadabra();
+        return new Kadabra();
       case PKM.ALAKAZAM:
-        return new Pokemon.Alakazam();
+        return new Alakazam();
       case PKM.GASTLY:
-        return new Pokemon.Gastly();
+        return new Gastly();
       case PKM.HAUNTER:
-        return new Pokemon.Haunter();
+        return new Haunter();
       case PKM.GENGAR:
-        return new Pokemon.Gengar();
+        return new Gengar();
       case PKM.DRATINI:
-        return new Pokemon.Dratini();
+        return new Dratini();
       case PKM.DRAGONAIR:
-        return new Pokemon.Dragonair();
+        return new Dragonair();
       case PKM.DRAGONITE:
-        return new Pokemon.Dragonite();
+        return new Dragonite();
       case PKM.LARVITAR:
-        return new Pokemon.Larvitar();
+        return new Larvitar();
       case PKM.PUPITAR:
-        return new Pokemon.Pupitar();
+        return new Pupitar();
       case PKM.TYRANITAR:
-        return new Pokemon.Tyranitar();
+        return new Tyranitar();
       case PKM.SLAKOTH:
-        return new Pokemon.Slakoth();
+        return new Slakoth();
       case PKM.VIGOROTH:
-        return new Pokemon.Vigoroth();
+        return new Vigoroth();
       case PKM.SLAKING:
-        return new Pokemon.Slaking();
+        return new Slaking();
       case PKM.RALTS:
-        return new Pokemon.Ralts();
+        return new Ralts();
       case PKM.KIRLIA:
-        return new Pokemon.Kirlia();
+        return new Kirlia();
       case PKM.GARDEVOIR:
-        return new Pokemon.Gardevoir();
+        return new Gardevoir();
       case PKM.BAGON:
-        return new Pokemon.Bagon();
+        return new Bagon();
       case PKM.SHELGON:
-        return new Pokemon.Shelgon();
+        return new Shelgon();
       case PKM.SALAMENCE:
-        return new Pokemon.Salamence();
+        return new Salamence();
       case PKM.BELDUM:
-        return new Pokemon.Beldum();
+        return new Beldum();
       case PKM.METANG:
-        return new Pokemon.Metang();
+        return new Metang();
       case PKM.METAGROSS:
-        return new Pokemon.Metagross();
+        return new Metagross();
       case PKM.GIBLE:
-        return new Pokemon.Gible();
+        return new Gible();
       case PKM.GABITE:
-        return new Pokemon.Gabite();
+        return new Gabite();
       case PKM.GARCHOMP:
-        return new Pokemon.Garchomp();
+        return new Garchomp();
       case PKM.ELEKID:
-        return new Pokemon.Elekid();
+        return new Elekid();
       case PKM.ELECTABUZZ:
-        return new Pokemon.Electabuzz();
+        return new Electabuzz();
       case PKM.ELECTIVIRE:
-        return new Pokemon.Electivire();
+        return new Electivire();
       case PKM.MAGBY:
-        return new Pokemon.Magby();
+        return new Magby();
       case PKM.MAGMAR:
-        return new Pokemon.Magmar();
+        return new Magmar();
       case PKM.MAGMORTAR:
-        return new Pokemon.Magmortar();
+        return new Magmortar();
       case PKM.MUNCHLAX:
-        return new Pokemon.Munchlax();
+        return new Munchlax();
       case PKM.SNORLAX:
-        return new Pokemon.Snorlax();
+        return new Snorlax();
       case PKM.GROWLITHE:
-        return new Pokemon.Growlithe();
+        return new Growlithe();
       case PKM.ARCANINE:
-        return new Pokemon.Arcanine();
+        return new Arcanine();
       case PKM.ONIX:
-        return new Pokemon.Onix();
+        return new Onix();
       case PKM.STEELIX:
-        return new Pokemon.Steelix();
+        return new Steelix();
       case PKM.MEGASTEELIX:
-        return new Pokemon.MegaSteelix();
+        return new MegaSteelix();
       case PKM.SCYTHER:
-        return new Pokemon.Scyther();
+        return new Scyther();
       case PKM.SCIZOR:
-        return new Pokemon.Scizor();
+        return new Scizor();
       case PKM.MEGASCIZOR:
-        return new Pokemon.MegaScizor();
+        return new MegaScizor();
       case PKM.RIOLU:
-        return new Pokemon.Riolu();
+        return new Riolu();
       case PKM.LUCARIO:
-        return new Pokemon.Lucario();
+        return new Lucario();
       case PKM.MEGALUCARIO:
-        return new Pokemon.MegaLucario();
+        return new MegaLucario();
       case PKM.MAGIKARP:
-        return new Pokemon.Magikarp();
+        return new Magikarp();
       case PKM.RATTATA:
-        return new Pokemon.Rattata();
+        return new Rattata();
       case PKM.RATICATE:
-        return new Pokemon.Raticate();
+        return new Raticate();
       case PKM.SPEAROW:
-        return new Pokemon.Spearow();
+        return new Spearow();
       case PKM.FEAROW:
-        return new Pokemon.Fearow();
+        return new Fearow();
       case PKM.GYARADOS:
-        return new Pokemon.Gyarados();
+        return new Gyarados();
       case PKM.LUGIA:
-        return new Pokemon.Lugia();
+        return new Lugia();
       case PKM.ZAPDOS:
-        return new Pokemon.Zapdos();
+        return new Zapdos();
       case PKM.MOLTRES:
-        return new Pokemon.Moltres();
+        return new Moltres();
       case PKM.ARTICUNO:
-        return new Pokemon.Articuno();
+        return new Articuno();
       case PKM.DIALGA:
-        return new Pokemon.Dialga();
+        return new Dialga();
       case PKM.PALKIA:
-        return new Pokemon.Palkia();
+        return new Palkia();
       case PKM.SUICUNE:
-        return new Pokemon.Suicune();
+        return new Suicune();
       case PKM.RAIKOU:
-        return new Pokemon.Raikou();
+        return new Raikou();
       case PKM.ENTEI:
-        return new Pokemon.Entei();
+        return new Entei();
       case PKM.KYOGRE:
-        return new Pokemon.Kyogre();
+        return new Kyogre();
       case PKM.GROUDON:
-        return new Pokemon.Groudon();
+        return new Groudon();
       case PKM.RAYQUAZA:
-        return new Pokemon.Rayquaza();
+        return new Rayquaza();
       case PKM.MEGARAYQUAZA:
-        return new Pokemon.MegaRayquaza();
+        return new MegaRayquaza();
       case PKM.REGICE:
-        return new Pokemon.Regice();
+        return new Regice();
       case PKM.REGIROCK:
-        return new Pokemon.Regirock();
+        return new Regirock();
       case PKM.REGISTEEL:
-        return new Pokemon.Registeel();
+        return new Registeel();
       case PKM.REGIGIGAS:
-        return new Pokemon.Regigigas();
+        return new Regigigas();
       case PKM.GIRATINA:
-        return new Pokemon.Giratina();
+        return new Giratina();
       case PKM.EEVEE:
-        return new Pokemon.Eevee();
+        return new Eevee();
       case PKM.VAPOREON:
-        return new Pokemon.Vaporeon();
+        return new Vaporeon();
       case PKM.JOLTEON:
-        return new Pokemon.Jolteon();
+        return new Jolteon();
       case PKM.FLAREON:
-        return new Pokemon.Flareon();
+        return new Flareon();
       case PKM.ESPEON:
-        return new Pokemon.Espeon();
+        return new Espeon();
       case PKM.UMBREON:
-        return new Pokemon.Umbreon();
+        return new Umbreon();
       case PKM.LEAFEON:
-        return new Pokemon.Leafeon();
+        return new Leafeon();
       case PKM.SYLVEON:
-        return new Pokemon.Sylveon();
+        return new Sylveon();
       case PKM.GLACEON:
-        return new Pokemon.Glaceon();
+        return new Glaceon();
       case PKM.MEDITITE:
-        return new Pokemon.Meditite();
+        return new Meditite();
       case PKM.MEDICHAM:
-        return new Pokemon.Medicham();
+        return new Medicham();
       case PKM.MEGAMEDICHAM:
-        return new Pokemon.MegaMedicham();
+        return new MegaMedicham();
       case PKM.NUMEL:
-        return new Pokemon.Numel();
+        return new Numel();
       case PKM.CAMERUPT:
-        return new Pokemon.Camerupt();
+        return new Camerupt();
       case PKM.MEGACAMERUPT:
-        return new Pokemon.MegaCamerupt();
+        return new MegaCamerupt();
       case PKM.DITTO:
-        return new Pokemon.Ditto();
+        return new Ditto();
       case PKM.SANDSHREW:
-        return new Pokemon.Sandshrew();
+        return new Sandshrew();
       case PKM.DARKRAI:
-        return new Pokemon.Darkrai();
+        return new Darkrai();
       case PKM.LITWICK:
-        return new Pokemon.Litwick();
+        return new Litwick();
       case PKM.LAMPENT:
-        return new Pokemon.Lampent();
+        return new Lampent();
       case PKM.CHANDELURE:
-        return new Pokemon.Chandelure();
+        return new Chandelure();
       case PKM.BELLSPROUT:
-        return new Pokemon.Bellsprout();
+        return new Bellsprout();
       case PKM.WEEPINBELL:
-        return new Pokemon.Weepinbell();
+        return new Weepinbell();
       case PKM.VICTREEBEL:
-        return new Pokemon.Victreebel();
+        return new Victreebel();
       case PKM.SWINUB:
-        return new Pokemon.Swinub();
+        return new Swinub();
       case PKM.PILOSWINE:
-        return new Pokemon.Piloswine();
+        return new Piloswine();
       case PKM.MAMOSWINE:
-        return new Pokemon.Mamoswine();
+        return new Mamoswine();
       case PKM.SNORUNT:
-        return new Pokemon.Snorunt();
+        return new Snorunt();
       case PKM.GLALIE:
-        return new Pokemon.Glalie();
+        return new Glalie();
       case PKM.FROSLASS:
-        return new Pokemon.Froslass();
+        return new Froslass();
       case PKM.SNOVER:
-        return new Pokemon.Snover();
+        return new Snover();
       case PKM.ABOMASNOW:
-        return new Pokemon.Abomasnow();
+        return new Abomasnow();
       case PKM.MEGAABOMASNOW:
-        return new Pokemon.MegaAbomasnow();
+        return new MegaAbomasnow();
       case PKM.VANILLITE:
-        return new Pokemon.Vanillite();
+        return new Vanillite();
       case PKM.VANILLISH:
-        return new Pokemon.Vanillish();
+        return new Vanillish();
       case PKM.VANILLUXE:
-        return new Pokemon.Vanilluxe();
+        return new Vanilluxe();
       case PKM.VOLCARONA:
-        return new Pokemon.Volcarona();
+        return new Volcarona();
       case PKM.LANDORUS:
-        return new Pokemon.Landorus();
+        return new Landorus();
       case PKM.THUNDURUS:
-        return new Pokemon.Thundurus();
+        return new Thundurus();
       case PKM.TORNADUS:
-        return new Pokemon.Tornadus();
+        return new Tornadus();
       case PKM.KELDEO:
-        return new Pokemon.Keldeo();
+        return new Keldeo();
       case PKM.TERRAKION:
-        return new Pokemon.Terrakion();
+        return new Terrakion();
       case PKM.VIRIZION:
-        return new Pokemon.Virizion();
+        return new Virizion();
       case PKM.COBALION:
-        return new Pokemon.Cobalion();
+        return new Cobalion();
       case PKM.MANAPHY:
-        return new Pokemon.Manaphy();
+        return new Manaphy();
       case PKM.SPIRITOMB:
-        return new Pokemon.Spiritomb();
+        return new Spiritomb();
       case PKM.ABSOL:
-        return new Pokemon.Absol();
+        return new Absol();
       case PKM.LAPRAS:
-        return new Pokemon.Lapras();
+        return new Lapras();
       case PKM.LATIAS:
-        return new Pokemon.Latias();
+        return new Latias();
       case PKM.LATIOS:
-        return new Pokemon.Latios();
+        return new Latios();
       case PKM.MESPRIT:
-        return new Pokemon.Mesprit();
+        return new Mesprit();
       case PKM.AZELF:
-        return new Pokemon.Azelf();
+        return new Azelf();
       case PKM.UXIE:
-        return new Pokemon.Uxie();
+        return new Uxie();
       case PKM.MEWTWO:
-        return new Pokemon.Mewtwo();
+        return new Mewtwo();
       case PKM.KYUREM:
-        return new Pokemon.Kyurem();
+        return new Kyurem();
       case PKM.RESHIRAM:
-        return new Pokemon.Reshiram();
+        return new Reshiram();
       case PKM.ZEKROM:
-        return new Pokemon.Zekrom();
+        return new Zekrom();
       case PKM.CELEBI:
-        return new Pokemon.Celebi();
+        return new Celebi();
       case PKM.VICTINI:
-        return new Pokemon.Victini();
+        return new Victini();
       case PKM.JIRACHI:
-        return new Pokemon.Jirachi();
+        return new Jirachi();
       case PKM.ARCEUS:
-        return new Pokemon.Arceus();
+        return new Arceus();
       case PKM.DEOXYS:
-        return new Pokemon.Deoxys();
+        return new Deoxys();
       case PKM.SHAYMIN:
-        return new Pokemon.Shaymin();
+        return new Shaymin();
       case PKM.CRESSELIA:
-        return new Pokemon.Cresselia();
+        return new Cresselia();
       case PKM.HEATRAN:
-        return new Pokemon.Heatran();
+        return new Heatran();
       case PKM.HOOH:
-        return new Pokemon.HooH();
+        return new HooH();
       case PKM.ROTOM:
-        return new Pokemon.Rotom();
+        return new Rotom();
       case PKM.AERODACTYL:
-        return new Pokemon.Aerodactyl();
+        return new Aerodactyl();
       case PKM.HOUNDOUR:
-        return new Pokemon.Houndour();
+        return new Houndour();
       case PKM.SWABLU:
-        return new Pokemon.Swablu();
+        return new Swablu();
       case PKM.CARVANHA:
-        return new Pokemon.Carvanha();
+        return new Carvanha();
       case PKM.PRIMALKYOGRE:
-        return new Pokemon.PrimalKyogre();
+        return new PrimalKyogre();
       case PKM.PRIMALGROUDON:
-        return new Pokemon.PrimalGroudon();
+        return new PrimalGroudon();
       case PKM.MEOWTH:
-        return new Pokemon.Meowth();
+        return new Meowth();
       case PKM.PERSIAN:
-        return new Pokemon.Persian();
+        return new Persian();
       case PKM.DEINO:
-        return new Pokemon.Deino();
+        return new Deino();
       case PKM.ZWEILOUS:
-        return new Pokemon.Zweilous();
+        return new Zweilous();
       case PKM.HYDREIGON:
-        return new Pokemon.Hydreigon();
+        return new Hydreigon();
       case PKM.SANDILE:
-        return new Pokemon.Sandile();
+        return new Sandile();
       case PKM.KROKOROK:
-        return new Pokemon.Krookorok();
+        return new Krookorok();
       case PKM.KROOKODILE:
-        return new Pokemon.Krookodile();
+        return new Krookodile();
       case PKM.SOLOSIS:
-        return new Pokemon.Solosis();
+        return new Solosis();
       case PKM.DUOSION:
-        return new Pokemon.Duosion();
+        return new Duosion();
       case PKM.REUNICLUS:
-        return new Pokemon.Reuniclus();
+        return new Reuniclus();
       case PKM.ODDISH:
-        return new Pokemon.Oddish();
+        return new Oddish();
       case PKM.GLOOM:
-        return new Pokemon.Gloom();
+        return new Gloom();
       case PKM.VILEPLUME:
-        return new Pokemon.Vileplume();
+        return new Vileplume();
       case PKM.BELLOSSOM:
-        return new Pokemon.Bellossom();
+        return new Bellossom();
       case PKM.AMAURA:
-        return new Pokemon.Amaura();
+        return new Amaura();
       case PKM.AURORUS:
-        return new Pokemon.Aurorus();
+        return new Aurorus();
       case PKM.ANORITH:
-        return new Pokemon.Anorith();
+        return new Anorith();
       case PKM.ARMALDO:
-        return new Pokemon.Armaldo();
+        return new Armaldo();
       case PKM.ARCHEN:
-        return new Pokemon.Archen();
+        return new Archen();
       case PKM.ARCHEOPS:
-        return new Pokemon.Archeops();
+        return new Archeops();
       case PKM.SHIELDON:
-        return new Pokemon.Shieldon();
+        return new Shieldon();
       case PKM.BASTIODON:
-        return new Pokemon.Bastiodon();
+        return new Bastiodon();
       case PKM.TIRTOUGA:
-        return new Pokemon.Tirtouga();
+        return new Tirtouga();
       case PKM.CARRACOSTA:
-        return new Pokemon.Carracosta();
+        return new Carracosta();
       case PKM.LILEEP:
-        return new Pokemon.Lileep();
+        return new Lileep();
       case PKM.CRADILY:
-        return new Pokemon.Cradily();
+        return new Cradily();
       case PKM.OMANYTE:
-        return new Pokemon.Omanyte();
+        return new Omanyte();
       case PKM.OMASTAR:
-        return new Pokemon.Omastar();
+        return new Omastar();
       case PKM.CRANIDOS:
-        return new Pokemon.Cranidos();
+        return new Cranidos();
       case PKM.RAMPARDOS:
-        return new Pokemon.Rampardos();
+        return new Rampardos();
       case PKM.TYRUNT:
-        return new Pokemon.Tyrunt();
+        return new Tyrunt();
       case PKM.TYRANTRUM:
-        return new Pokemon.Tyrantrum();
+        return new Tyrantrum();
       case PKM.KABUTO:
-        return new Pokemon.Kabuto();
+        return new Kabuto();
       case PKM.KABUTOPS:
-        return new Pokemon.Kabutops();
+        return new Kabutops();
       case PKM.BUDEW:
-        return new Pokemon.Budew();
+        return new Budew();
       case PKM.ROSELIA:
-        return new Pokemon.Roselia();
+        return new Roselia();
       case PKM.ROSERADE:
-        return new Pokemon.Roserade();
+        return new Roserade();
       case PKM.BUNEARY:
-        return new Pokemon.Buneary();
+        return new Buneary();
       case PKM.LOPUNNY:
-        return new Pokemon.Lopunny();
+        return new Lopunny();
       case PKM.MEGALOPUNNY:
-        return new Pokemon.MegaLopunny();
+        return new MegaLopunny();
       case PKM.AXEW:
-        return new Pokemon.Axew();
+        return new Axew();
       case PKM.FRAXURE:
-        return new Pokemon.Fraxure();
+        return new Fraxure();
       case PKM.HAXORUS:
-        return new Pokemon.Haxorus();
+        return new Haxorus();
       case PKM.VENIPEDE:
-        return new Pokemon.Venipede();
+        return new Venipede();
       case PKM.WHIRLIPEDE:
-        return new Pokemon.Whirlipede();
+        return new Whirlipede();
       case PKM.SCOLIPEDE:
-        return new Pokemon.Scolipede();
+        return new Scolipede();
       case PKM.PORYGON:
-        return new Pokemon.Porygon();
+        return new Porygon();
       case PKM.PORYGON2:
-        return new Pokemon.Porygon2();
+        return new Porygon2();
       case PKM.PORYGONZ:
-        return new Pokemon.PorygonZ();
+        return new PorygonZ();
       case PKM.KLINK:
-        return new Pokemon.Klink();
+        return new Klink();
       case PKM.KLANG:
-        return new Pokemon.Klang();
+        return new Klang();
       case PKM.KLINKLANG:
-        return new Pokemon.Klinklang();
+        return new Klinklang();
       case PKM.ELECTRIKE:
-        return new Pokemon.Electrike();
+        return new Electrike();
       case PKM.MANECTRIC:
-        return new Pokemon.Manectric();
+        return new Manectric();
       case PKM.MEGAMANECTRIC:
-        return new Pokemon.MegaManectric();
+        return new MegaManectric();
       case PKM.SHUPPET:
-        return new Pokemon.Shuppet();
+        return new Shuppet();
       case PKM.BANETTE:
-        return new Pokemon.Banette();
+        return new Banette();
       case PKM.MEGABANETTE:
-        return new Pokemon.MegaBanette();
+        return new MegaBanette();
       case PKM.HONEDGE:
-        return new Pokemon.Honedge();
+        return new Honedge();
       case PKM.DOUBLADE:
-        return new Pokemon.Doublade();
+        return new Doublade();
       case PKM.AEGISLASH:
-        return new Pokemon.Aegislash();
+        return new Aegislash();
       case PKM.CUBONE:
-        return new Pokemon.Cubone();
+        return new Cubone();
       case PKM.MAROWAK:
-        return new Pokemon.Marowak();
+        return new Marowak();
       case PKM.ALOLANMAROWAK:
-        return new Pokemon.AlolanMarowak();
+        return new AlolanMarowak();
       case PKM.FLETCHLING:
-        return new Pokemon.Fletchling();
+        return new Fletchling();
       case PKM.FLETCHINDER:
-        return new Pokemon.Fletchinder();
+        return new Fletchinder();
       case PKM.TALONFLAME:
-        return new Pokemon.Talonflame();
+        return new Talonflame();
       case PKM.WHISMUR:
-        return new Pokemon.Whismur();
+        return new Whismur();
       case PKM.LOUDRED:
-        return new Pokemon.Loudred();
+        return new Loudred();
       case PKM.EXPLOUD:
-        return new Pokemon.Exploud();
+        return new Exploud();
       case PKM.TYMPOLE:
-        return new Pokemon.Tympole();
+        return new Tympole();
       case PKM.PALPITOAD:
-        return new Pokemon.Palpitoad();
+        return new Palpitoad();
       case PKM.SEISMITOAD:
-        return new Pokemon.Seismitoad();
+        return new Seismitoad();
       case PKM.SEWADDLE:
-        return new Pokemon.Sewaddle();
+        return new Sewaddle();
       case PKM.SWADLOON:
-        return new Pokemon.Swadloon();
+        return new Swadloon();
       case PKM.LEAVANNY:
-        return new Pokemon.Leavanny();
+        return new Leavanny();
       case PKM.PIKIPEK:
-        return new Pokemon.Pikipek();
+        return new Pikipek();
       case PKM.TRUMBEAK:
-        return new Pokemon.Trumbeak();
+        return new Trumbeak();
       case PKM.TOUCANNON:
-        return new Pokemon.Toucannon();
+        return new Toucannon();
       case PKM.FLABEBE:
-        return new Pokemon.Flabebe();
+        return new Flabebe();
       case PKM.FLOETTE:
-        return new Pokemon.Floette();
+        return new Floette();
       case PKM.FLORGES:
-        return new Pokemon.Florges();
+        return new Florges();
       case PKM.JANGMOO:
-        return new Pokemon.JangmoO();
+        return new JangmoO();
       case PKM.HAKAMOO:
-        return new Pokemon.HakamoO();
+        return new HakamoO();
       case PKM.KOMMOO:
-        return new Pokemon.KommoO();
+        return new KommoO();
       case PKM.MELOETTA:
-        return new Pokemon.Meloetta();
+        return new Meloetta();
       case PKM.ALTARIA:
-        return new Pokemon.Altaria();
+        return new Altaria();
       case PKM.MEGAALTARIA:
-        return new Pokemon.MegaAltaria();
+        return new MegaAltaria();
       case PKM.LILLIPUP:
-        return new Pokemon.Lillipup();
+        return new Lillipup();
       case PKM.HERDIER:
-        return new Pokemon.Herdier();
+        return new Herdier();
       case PKM.STOUTLAND:
-        return new Pokemon.Stoutland();
+        return new Stoutland();
       case PKM.CASTFORM:
-        return new Pokemon.Castform();
+        return new Castform();
       case PKM.CASTFORMSUN:
-        return new Pokemon.CastformSun();
+        return new CastformSun();
       case PKM.CASTFORMRAIN:
-        return new Pokemon.CastformRain();
+        return new CastformRain();
       case PKM.CASTFORMHAIL:
-        return new Pokemon.CastformHail();
+        return new CastformHail();
       default:
         console.log(`No pokemon with name "${name}" found, return magikarp`);
-        return new Pokemon.Magikarp();
+        return new Magikarp();
     }
   }
 
-  static getPokemonRarityFromName(name) {
-    const pokemon = PokemonFactory.createPokemonFromName(name);
+  static getPokemonRarityFromName(name: string) {
+    const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name);
     return pokemon.rarity;
   }
 
-  static getRandomFossil(board) {
+  static getRandomFossil(board: any) {
     const currentFossils = [];
     board.forEach( (p) =>{
       if (p.types.includes(TYPE.FOSSIL)) {
@@ -1875,5 +1875,3 @@ class PokemonFactory {
     }
   }
 }
-
-module.exports = PokemonFactory;

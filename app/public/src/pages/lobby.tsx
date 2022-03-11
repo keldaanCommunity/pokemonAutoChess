@@ -15,35 +15,40 @@ import Wiki from './component/wiki';
 import TeamBuilder from './component/team-builder';
 import MetaReport from './component/meta-report';
 
-class Lobby extends Component {
+interface LobbyState {
+    messages: any[],
+    users: any,
+    user: any,
+    searchedUser: any,
+    leaderboard: any[],
+    botLeaderboard: any[],
+    currentText: string,
+    allRooms: any[],
+    isSignedIn: boolean,
+    preparationRoomId: string,
+    tabIndex: number,
+    showWiki: boolean,
+    showBuilder: boolean,
+    pasteBinUrl: string,
+    botData: any,
+    meta: any[],
+    metaItems: any[],
+    showMeta: boolean,
+    botList: any[],
+    roomCreated: boolean
+}
+
+class Lobby extends Component<{},LobbyState> {
+    client: Client;
+    uid: string;
+    room: any;
+    _ismounted: boolean;
 
     constructor(props){
         super(props);
 
-        this.state = {
-            messages: [],
-            users: {},
-            user:{},
-            searchedUser:{},
-            leaderboard: [],
-            botLeaderboard: [],
-            currentText: '',
-            allRooms: [],
-            isSignedIn: false,
-            preparationRoomId: '',
-            tabIndex: 0,
-            showWiki: false,
-            showBuilder: false,
-            pasteBinUrl: '',
-            botData: {},
-            meta: [],
-            metaItems: [],
-            showMeta: false,
-            botList: [],
-            roomCreated: false
-        };
-
-        this.client = new Client(window.endpoint);
+        const endpoint = `${window.location.protocol.replace('http', 'ws')}//${window.location.host}`;
+        this.client = new Client(endpoint);
 
         // Initialize Firebase
         if (!firebase.apps.length) {

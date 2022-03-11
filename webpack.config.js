@@ -4,8 +4,8 @@ const webpack = require('webpack');
 
 const configDev = {
   mode: 'development',
-  
-  entry: path.resolve(__dirname, 'app', 'public', 'src', 'index.js'),
+
+  entry: path.resolve(__dirname, 'app', 'public', 'src', 'index.tsx'),
   watchOptions: {
     aggregateTimeout: 1500,
     poll: 1000
@@ -28,20 +28,24 @@ const configDev = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      }
+        use: ['style-loader', 'css-loader']
+      },
+      // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+      {test: /\.tsx?$/, loader: 'ts-loader'},
+      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      {test: /\.js$/, loader: 'source-map-loader'}
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
   },
 
   plugins: [
     new webpack.ProvidePlugin({
-           process: 'process/browser',
-    }),
-    ]
-}
+      process: 'process/browser'
+    })
+  ]
+};
 
 const configProd = {
   ...configDev,
@@ -51,9 +55,9 @@ const configProd = {
     minimize: true,
     minimizer: [new TerserPlugin()]
   }
-}
+};
 
 module.exports = (env) => {
   // return configProd
-  return env.production ? configProd : configDev
-}
+  return env.production ? configProd : configDev;
+};

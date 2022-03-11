@@ -1,5 +1,5 @@
-const PokemonFactory = require('./pokemon-factory');
-const {PKM, PROBABILITY} = require('./enum');
+import PokemonFactory from './pokemon-factory';
+import {PKM, PROBABILITY} from './enum';
 
 const COMMON = [PKM.CHARMANDER, PKM.GEODUDE,
   PKM.AZURILL, PKM.ZUBAT,
@@ -46,7 +46,7 @@ const MYTHICAL_1 = [PKM.CASTFORM, PKM.VIRIZION, PKM.REGICE, PKM.REGISTEEL, PKM.R
 const MYTHICAL_2 = [PKM.MELOETTA, PKM.MEWTWO, PKM.ENTEI, PKM.SUICUNE, PKM.RAIKOU, PKM.KYUREM, PKM.RESHIRAM, PKM.ZEKROM, PKM.REGIGIGAS, PKM.CELEBI, PKM.VICTINI, PKM.JIRACHI, PKM.ARCEUS, PKM.DEOXYS, PKM.SHAYMIN, PKM.GIRATINA, PKM.DARKRAI, PKM.CRESSELIA, PKM.HEATRAN, PKM.LUGIA, PKM.HOOH, PKM.PALKIA, PKM.DIALGA, PKM.RAYQUAZA, PKM.KYOGRE, PKM.GROUDON];
 
 
-class Shop {
+export class Shop {
   assignShop(player) {
     for (let i = 0; i < 6; i++) {
       let pokemon = this.pickPokemon(player);
@@ -157,5 +157,3 @@ class Shop {
     return pokemon;
   }
 }
-
-module.exports = Shop;
