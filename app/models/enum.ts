@@ -1,4 +1,4 @@
-const PKM = Object.freeze({
+export const PKM = Object.freeze({
   DITTO: 'ditto',
   BULBASAUR: 'bulbasaur',
   IVYSAUR: 'ivysaur',
@@ -362,7 +362,6 @@ const PKM = Object.freeze({
   BIBAREL: 'bibarel',
   SENTRET: 'sentret',
   FURRET: 'furret',
-  JUMPLUFF: 'jumpluff',
   LUNATONE: 'lunatone',
   HONCHKROW: 'honchkrow',
   GLAMEOW: 'glameow',
@@ -512,7 +511,7 @@ const PKM = Object.freeze({
   CASTFORMHAIL: 'castform-hail'
 });
 
-const WORDS = Object.freeze({
+export const WORDS = Object.freeze({
   TIPEE_DONOR: {
     'eng': ' being a tipee donor',
     'esp': 'ser donante de tipee',
@@ -715,7 +714,7 @@ const WORDS = Object.freeze({
   }
 });
 
-const CLIMATE = Object.freeze({
+export const CLIMATE = Object.freeze({
   NEUTRAL: 'NEUTRAL',
   RAIN: 'RAIN',
   SUN: 'SUN',
@@ -723,7 +722,7 @@ const CLIMATE = Object.freeze({
   SNOW: 'SNOW'
 });
 
-const ITEMS = Object.freeze({
+export const ITEMS = Object.freeze({
   WHITE_GLASSES: 'WHITE_GLASSES',
   MUSCLE_BAND: 'MUSCLE_BAND',
   LIFE_ORB: 'LIFE_ORB',
@@ -774,7 +773,7 @@ const ITEMS = Object.freeze({
   SKULL_FOSSIL: 'SKULL_FOSSIL'
 });
 
-const TYPE = Object.freeze({
+export const TYPE = Object.freeze({
   NORMAL: 'NORMAL',
   GRASS: 'GRASS',
   FIRE: 'FIRE',
@@ -802,7 +801,7 @@ const TYPE = Object.freeze({
   SOUND: 'SOUND'
 });
 
-const EFFECTS = Object.freeze({
+export const EFFECTS = Object.freeze({
   INGRAIN: 'INGRAIN',
   GROWTH: 'GROWTH',
   SPORE: 'SPORE',
@@ -880,7 +879,7 @@ const EFFECTS = Object.freeze({
   PRESTO: 'PRESTO'
 });
 
-const EFFECTS_ICON = Object.freeze({
+export const EFFECTS_ICON = Object.freeze({
   INGRAIN: {
     level: 1,
     positive: true,
@@ -1253,7 +1252,7 @@ const EFFECTS_ICON = Object.freeze({
   }
 });
 
-const SPECIAL_SKILL = Object.freeze({
+export const SPECIAL_SKILL = Object.freeze({
   DEFAULT: 'DEFAULT',
   FIRE_BLAST: 'FIRE_BLAST',
   WHEEL_OF_FIRE: 'WHEEL_OF_FIRE',
@@ -1325,7 +1324,7 @@ const SPECIAL_SKILL = Object.freeze({
   KING_SHIELD: 'KING_SHIELD'
 });
 
-const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
+export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
   KING_SHIELD: {
     title: {
       eng: 'King Shield'
@@ -2088,7 +2087,7 @@ const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
   }
 });
 
-const LAST_BATTLE_RESULT_TRADUCTION = Object.freeze({
+export const LAST_BATTLE_RESULT_TRADUCTION = Object.freeze({
   WIN: {
     eng: 'Win',
     esp: 'Gana',
@@ -2106,7 +2105,7 @@ const LAST_BATTLE_RESULT_TRADUCTION = Object.freeze({
   }
 });
 
-const PHASE_TRADUCTION = Object.freeze({
+export const PHASE_TRADUCTION = Object.freeze({
   PICK: {
     eng: 'Pick',
     esp: 'Escoge',
@@ -2119,7 +2118,7 @@ const PHASE_TRADUCTION = Object.freeze({
   }
 });
 
-const TYPE_TRADUCTION = Object.freeze({
+export const TYPE_TRADUCTION = Object.freeze({
   NORMAL: {
     eng: 'Normal',
     esp: 'Normal',
@@ -2247,7 +2246,7 @@ const TYPE_TRADUCTION = Object.freeze({
   }
 });
 
-const RARITY = Object.freeze({
+export const RARITY = Object.freeze({
   COMMON: 'COMMON',
   UNCOMMON: 'UNCOMMON',
   RARE: 'RARE',
@@ -2258,7 +2257,7 @@ const RARITY = Object.freeze({
   SUMMON: 'SUMMON'
 });
 
-const RARITY_HP_COST= Object.freeze({
+export const RARITY_HP_COST= Object.freeze({
   COMMON: 1,
   UNCOMMON: 1,
   RARE: 2,
@@ -2269,7 +2268,7 @@ const RARITY_HP_COST= Object.freeze({
   SUMMON: 1
 });
 
-const COST = Object.freeze({
+export const COST = Object.freeze({
   COMMON: 1,
   UNCOMMON: 2,
   RARE: 3,
@@ -2279,7 +2278,7 @@ const COST = Object.freeze({
   SUMMON: 0
 });
 
-const EXP_TABLE = Object.freeze({
+export const EXP_TABLE = Object.freeze({
   1: 0,
   2: 2,
   3: 6,
@@ -2291,17 +2290,17 @@ const EXP_TABLE = Object.freeze({
   9: -1
 });
 
-const STATE = Object.freeze({
+export const STATE = Object.freeze({
   FIGHT: 'Fight',
   PICK: 'Pick'
 });
 
-const STATE_TYPE = Object.freeze({
+export const STATE_TYPE = Object.freeze({
   MOVING: 'MOVING',
   ATTACKING: 'ATTACKING'
 });
 
-const ORIENTATION = Object.freeze({
+export const ORIENTATION = Object.freeze({
   DOWNLEFT: 'DOWNLEFT',
   LEFT: 'LEFT',
   UPLEFT: 'UPLEFT',
@@ -2313,7 +2312,7 @@ const ORIENTATION = Object.freeze({
   UNCLEAR: 'UNCLEAR'
 });
 
-const ORIENTATION_RAD = Object.freeze({
+export const ORIENTATION_RAD = Object.freeze({
   DOWNLEFT: 5 * Math.PI / 4,
   LEFT: Math.PI,
   UPLEFT: 3 * Math.PI / 4,
@@ -2325,13 +2324,13 @@ const ORIENTATION_RAD = Object.freeze({
   UNCLEAR: 0
 });
 
-const ATTACK_TYPE = Object.freeze({
+export const ATTACK_TYPE = Object.freeze({
   PHYSICAL: 'PHYSICAL',
   SPECIAL: 'SPECIAL',
   TRUE: 'TRUE'
 });
 
-const MAP_TYPE = Object.freeze({
+export const MAP_TYPE = Object.freeze({
   WATER: 'WATER',
   NORMAL: 'NORMAL',
   FIRE: 'FIRE',
@@ -2340,7 +2339,7 @@ const MAP_TYPE = Object.freeze({
   GROUND: 'GROUND'
 });
 
-const MAP_TYPE_NAME = Object.freeze({
+export const MAP_TYPE_NAME = Object.freeze({
   WATER: {
     'eng': 'Stormy Sea',
     'esp': 'Mar Tormentoso',
@@ -2373,7 +2372,7 @@ const MAP_TYPE_NAME = Object.freeze({
   }
 });
 
-const MAP_TYPE_NAME_DESCRIPTION = Object.freeze({
+export const MAP_TYPE_NAME_DESCRIPTION = Object.freeze({
   WATER: {
     'eng': '+20% SPE DEF for pokemons placed on puddle.',
     'esp': '+20% SPE DEF para los pokemons colocados en el puddle.',
@@ -2406,7 +2405,7 @@ const MAP_TYPE_NAME_DESCRIPTION = Object.freeze({
   }
 });
 
-const TYPE_DETAILS = Object.freeze({
+export const TYPE_DETAILS = Object.freeze({
   NORMAL: {
     description: {
       eng: [
@@ -3310,7 +3309,7 @@ const TYPE_DETAILS = Object.freeze({
   }
 });
 
-const TYPE_TRIGGER = {
+export const TYPE_TRIGGER = {
   NORMAL: [3, 6, 9],
   GRASS: [3, 5, 7],
   FIRE: [2, 4, 6],
@@ -3338,11 +3337,11 @@ const TYPE_TRIGGER = {
   SOUND: [3, 5, 7]
 };
 
-const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
+export const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
 
-const XP_PLACE = [700, 500, 400, 300, 200, 150, 100, 0];
+export const XP_PLACE = [700, 500, 400, 300, 200, 150, 100, 0];
 
-const RARITY_COLOR = Object.freeze({
+export const RARITY_COLOR = Object.freeze({
   COMMON: '#686d7d',
   NEUTRAL: '#686d7d',
   UNCOMMON: '#478a41',
@@ -3353,7 +3352,7 @@ const RARITY_COLOR = Object.freeze({
   SUMMON: '#991f1f'
 });
 
-const PROBABILITY = {
+export const PROBABILITY = {
   1: [1, 0, 0, 0, 0],
   2: [1, 0, 0, 0, 0],
   3: [0.7, 0.3, 0, 0, 0],
@@ -3365,7 +3364,7 @@ const PROBABILITY = {
   9: [0.1, 0.19, 0.31, 0.30, 0.1]
 };
 
-const PRECOMPUTED_TYPE_POKEMONS_ALL = {
+export const PRECOMPUTED_TYPE_POKEMONS_ALL = {
   NORMAL: [
     'cleffa', 'clefairy', 'clefable',
     'igglybuff', 'wygglytuff', 'jigglypuff',
@@ -3730,7 +3729,7 @@ const PRECOMPUTED_TYPE_POKEMONS_ALL = {
   ]
 };
 
-const PRECOMPUTED_TYPE_POKEMONS = {
+export const PRECOMPUTED_TYPE_POKEMONS = {
   NORMAL: {
     pokemons: [
       'cleffa', 'igglybuff',
@@ -4088,7 +4087,7 @@ const PRECOMPUTED_TYPE_POKEMONS = {
   }
 };
 
-const PRECOMPUTED_RARITY_POKEMONS_ALL = {
+export const PRECOMPUTED_RARITY_POKEMONS_ALL = {
   COMMON: [
     'charmander', 'charmeleon', 'charizard',
     'geodude', 'graveler', 'golem',
@@ -4208,13 +4207,13 @@ const PRECOMPUTED_RARITY_POKEMONS_ALL = {
   ]
 };
 
-const BATTLE_RESULT = Object.freeze({
+export const BATTLE_RESULT = Object.freeze({
   WIN: 'WIN',
   DEFEAT: 'DEFEAT',
   DRAW: 'DRAW'
 });
 
-const NEUTRAL_STAGE = [
+export const NEUTRAL_STAGE = [
   {
     turn: 1,
     avatar: PKM.MAGIKARP
@@ -4268,7 +4267,7 @@ const NEUTRAL_STAGE = [
     avatar: PKM.RAYQUAZA
   }];
 
-const FLYING_PROTECT_THRESHOLD = Object.freeze({
+export const FLYING_PROTECT_THRESHOLD = Object.freeze({
   TAILWIND: {
     duration: 1000,
     threshold: 0.2
@@ -4287,7 +4286,7 @@ const FLYING_PROTECT_THRESHOLD = Object.freeze({
   }
 });
 
-const RANK = Object.freeze({
+export const RANK = Object.freeze({
   DIAMOND: {
     id: 'DIAMOND',
     threshold: 1400
@@ -4310,7 +4309,7 @@ const RANK = Object.freeze({
   }
 });
 
-const HDR = Object.freeze({
+export const HDR = Object.freeze({
   WALL: 'WALL',
   WALL_ALT_1: 'WALL_ALT_1',
   WALL_ALT_2: 'WALL_ALT_2',
@@ -4326,7 +4325,7 @@ const HDR = Object.freeze({
   ABYSS_ALT_2: 'ABYSS_ALT_2'
 });
 
-const MAP = Object.freeze({
+export const MAP = Object.freeze({
   FOURTH_STATION_PATH: {
     id: 'FOURTH_STATION_PATH',
     name: '4th Station Path',
@@ -5062,13 +5061,6 @@ const MAP = Object.freeze({
     tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
     type: TYPE.GRASS
   },
-  PURITY_FOREST_61F_79F: {
-    id: 'PURITY_FOREST_61F_79F',
-    name: 'Purity Forest',
-    pokemons: [PKM.CELEBI, PKM.DARKRAI, PKM.BULBASAUR, PKM.IVYSAUR, PKM.VENUSAUR, PKM.METAPOD, PKM.RATTATA, PKM.RATICATE, PKM.SPEAROW, PKM.NIDORANF, PKM.NIDORANM, PKM.VILEPLUME, PKM.BELLSPROUT, PKM.WEEPINBELL, PKM.VICTREEBEL, PKM.EXEGGCUTE, PKM.KOFFING, PKM.SCYTHER, PKM.CHIKORITA, PKM.BAYLEEF, PKM.MEGANIUM, PKM.TREECKO, PKM.GROVYLE, PKM.SCEPTILE, PKM.SEEDOT, PKM.NUZLEAF, PKM.ROSELIA, PKM.FLYGON, PKM.MUNCHLAX, PKM.TURTWIG, PKM.GROTLE, PKM.TORTERRA],
-    tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
-    type: TYPE.GRASS
-  },
   PURITY_FOREST_80F_99F: {
     id: 'PURITY_FOREST_80F_99F',
     name: 'Purity Forest',
@@ -5200,28 +5192,28 @@ const MAP = Object.freeze({
     name: 'Western Cave',
     pokemons: [PKM.MURKROW, PKM.BUTTERFREE, PKM.EKANS, PKM.MEOWTH, PKM.BELLOSSOM, PKM.EXPLOUD, PKM.IGGLYBUFF, PKM.TAUROS, PKM.MILTANK, PKM.ESPEON, PKM.IVYSAUR, PKM.ARBOK, PKM.AGGRON, PKM.PERSIAN, PKM.DODRIO, PKM.BAYLEEF, PKM.ALAKAZAM, PKM.TYRANITAR, PKM.SCEPTILE, PKM.ARCANINE, PKM.SWAMPERT, PKM.MACHAMP, PKM.STEELIX, PKM.CHARIZARD, PKM.BLASTOISE, PKM.MEWTWO],
     tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
-    type: TYPE.PYSCHIC
+    type: TYPE.PSYCHIC
   },
   WESTERN_CAVE_B28F_B39F: {
     id: 'WESTERN_CAVE_B28F_B39F',
     name: 'Western Cave',
     pokemons: [PKM.MURKROW, PKM.BUTTERFREE, PKM.EKANS, PKM.MEOWTH, PKM.BELLOSSOM, PKM.EXPLOUD, PKM.IGGLYBUFF, PKM.TAUROS, PKM.MILTANK, PKM.ESPEON, PKM.IVYSAUR, PKM.ARBOK, PKM.AGGRON, PKM.PERSIAN, PKM.DODRIO, PKM.BAYLEEF, PKM.ALAKAZAM, PKM.TYRANITAR, PKM.SCEPTILE, PKM.ARCANINE, PKM.SWAMPERT, PKM.MACHAMP, PKM.STEELIX, PKM.CHARIZARD, PKM.BLASTOISE, PKM.MEWTWO],
     tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
-    type: TYPE.PYSCHIC
+    type: TYPE.PSYCHIC
   },
   WISH_CAVE_01F_13F: {
     id: 'WISH_CAVE_01F_13F',
     name: 'Wish Cave',
     pokemons: [PKM.MURKROW, PKM.BUTTERFREE, PKM.EKANS, PKM.MEOWTH, PKM.BELLOSSOM, PKM.EXPLOUD, PKM.IGGLYBUFF, PKM.TAUROS, PKM.MILTANK, PKM.ESPEON, PKM.IVYSAUR, PKM.ARBOK, PKM.AGGRON, PKM.PERSIAN, PKM.DODRIO, PKM.BAYLEEF, PKM.ALAKAZAM, PKM.TYRANITAR, PKM.SCEPTILE, PKM.ARCANINE, PKM.SWAMPERT, PKM.MACHAMP, PKM.STEELIX, PKM.CHARIZARD, PKM.BLASTOISE, PKM.JIRACHI],
     tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
-    type: TYPE.PYSCHIC
+    type: TYPE.PSYCHIC
   },
   WISH_CAVE_90F_99F: {
     id: 'WISH_CAVE_90F_99F',
     name: 'Wish Cave',
     pokemons: [PKM.MURKROW, PKM.BUTTERFREE, PKM.EKANS, PKM.MEOWTH, PKM.BELLOSSOM, PKM.EXPLOUD, PKM.IGGLYBUFF, PKM.TAUROS, PKM.MILTANK, PKM.ESPEON, PKM.IVYSAUR, PKM.ARBOK, PKM.AGGRON, PKM.PERSIAN, PKM.DODRIO, PKM.BAYLEEF, PKM.ALAKAZAM, PKM.TYRANITAR, PKM.SCEPTILE, PKM.ARCANINE, PKM.SWAMPERT, PKM.MACHAMP, PKM.STEELIX, PKM.CHARIZARD, PKM.BLASTOISE, PKM.JIRACHI],
     tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
-    type: TYPE.PYSCHIC
+    type: TYPE.PSYCHIC
   },
   WYVERN_HILL: {
     id: 'WYVERN_HILL',
@@ -5232,7 +5224,7 @@ const MAP = Object.freeze({
   }
 });
 
-const MASK_COORDINATE = Object.freeze({
+export const MASK_COORDINATE = Object.freeze({
   X: {x: 1, y: 4},
   A: {x: 1, y: 8},
   B: {x: 0, y: 7},
@@ -5282,7 +5274,7 @@ const MASK_COORDINATE = Object.freeze({
   A1B2C3D4: {x: 1, y: 1}
 });
 
-const MASK_TABLE = Object.freeze({
+export const MASK_TABLE = Object.freeze({
   X: 'X',
   A: 'A',
   B: 'B',
@@ -5332,13 +5324,13 @@ const MASK_TABLE = Object.freeze({
   A1B2C3D4: 'A1B2C3D4'
 });
 
-const TERRAIN = Object.freeze({
+export const TERRAIN = Object.freeze({
   GROUND: 0,
   WALL: 1,
   WATER: 2
 });
 
-const ID_TABLE = {
+export const ID_TABLE = {
   0: 'X', 1: 'A', 2: 'B', 4: 'C', 8: 'D',
   3: 'AB', 5: 'AC', 9: 'AD', 6: 'BC', 10: 'BD', 12: 'CD',
   7: 'ABC', 11: 'ABD', 13: 'ACD', 14: 'BCD', 15: 'ABCD',
@@ -5352,7 +5344,7 @@ const ID_TABLE = {
   95: 'A1BC3D', 175: 'AB2CD4', 255: 'A1B2C3D4'
 };
 
-const BASIC_ITEM = {
+export const BASIC_ITEM = {
   FOSSIL_STONE: 'FOSSIL_STONE',
   TWISTED_SPOON: 'TWISTED_SPOON',
   MYSTIC_WATER: 'MYSTIC_WATER',
@@ -5364,7 +5356,7 @@ const BASIC_ITEM = {
   HEART_SCALE: 'HEART_SCALE'
 };
 
-const ITEM = {
+export const ITEM = {
   FOSSIL_STONE: 'FOSSIL_STONE',
   TWISTED_SPOON: 'TWISTED_SPOON',
   MYSTIC_WATER: 'MYSTIC_WATER',
@@ -5421,7 +5413,7 @@ const ITEM = {
   ROCKY_HELMET: 'ROCKY_HELMET'
 };
 
-const ITEM_NAME = Object.freeze({
+export const ITEM_NAME = Object.freeze({
   FOSSIL_STONE: 'Fossil Stone',
   TWISTED_SPOON: 'Twisted Spoon',
   MYSTIC_WATER: 'Mystic Water',
@@ -5478,7 +5470,7 @@ const ITEM_NAME = Object.freeze({
   ROCKY_HELMET: 'Rocky Helmet'
 });
 
-const ITEM_DESCRIPTION = Object.freeze({
+export const ITEM_DESCRIPTION = Object.freeze({
   FOSSIL_STONE: 'Give it to a Ditto to obtain a random fossil',
   TWISTED_SPOON: '+10% spell damage',
   MYSTIC_WATER: '+15 mana',
@@ -5535,7 +5527,7 @@ const ITEM_DESCRIPTION = Object.freeze({
   ROCKY_HELMET: 'Grants 10 bonus armor. Negates bonus damage from incoming critical hits.'
 });
 
-const ITEM_RECIPE = {
+export const ITEM_RECIPE = {
   OLD_AMBER: [ITEM.FOSSIL_STONE, ITEM.FOSSIL_STONE],
   DAWN_STONE: [ITEM.FOSSIL_STONE, ITEM.TWISTED_SPOON],
   WATER_STONE: [ITEM.FOSSIL_STONE, ITEM.MYSTIC_WATER],
@@ -5581,55 +5573,4 @@ const ITEM_RECIPE = {
   RED_ORB: [ITEM.CHARCOAL, ITEM.CHARCOAL],
   MAX_REVIVE: [ITEM.CHARCOAL, ITEM.HEART_SCALE],
   ROCKY_HELMET: [ITEM.HEART_SCALE, ITEM.HEART_SCALE]
-};
-
-module.exports = {
-  BASIC_ITEM,
-  ITEM_RECIPE,
-  ITEM,
-  ID_TABLE,
-  TERRAIN,
-  MASK_COORDINATE,
-  MASK_TABLE,
-  HDR,
-  MAP,
-  RANK,
-  FLYING_PROTECT_THRESHOLD,
-  BATTLE_RESULT,
-  SPECIAL_SKILL_DESCRIPTION,
-  SPECIAL_SKILL,
-  XP_PLACE,
-  XP_TABLE,
-  MAP_TYPE_NAME,
-  MAP_TYPE_NAME_DESCRIPTION,
-  LAST_BATTLE_RESULT_TRADUCTION,
-  PHASE_TRADUCTION,
-  TYPE_TRADUCTION,
-  WORDS,
-  MAP_TYPE,
-  TYPE,
-  RARITY,
-  RARITY_HP_COST,
-  COST,
-  EXP_TABLE,
-  STATE,
-  STATE_TYPE,
-  ORIENTATION,
-  ORIENTATION_RAD,
-  EFFECTS,
-  CLIMATE,
-  ATTACK_TYPE,
-  ITEMS,
-  ITEM_NAME,
-  ITEM_DESCRIPTION,
-  TYPE_DETAILS,
-  EFFECTS_ICON,
-  PKM,
-  RARITY_COLOR,
-  PROBABILITY,
-  TYPE_TRIGGER,
-  PRECOMPUTED_TYPE_POKEMONS,
-  NEUTRAL_STAGE,
-  PRECOMPUTED_TYPE_POKEMONS_ALL,
-  PRECOMPUTED_RARITY_POKEMONS_ALL
 };

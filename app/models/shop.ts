@@ -1,5 +1,7 @@
 import PokemonFactory from './pokemon-factory';
 import {PKM, PROBABILITY} from './enum';
+import Player from './colyseus-models/player';
+import {Pokemon} from './colyseus-models/pokemon';
 
 const COMMON = [PKM.CHARMANDER, PKM.GEODUDE,
   PKM.AZURILL, PKM.ZUBAT,
@@ -46,8 +48,8 @@ const MYTHICAL_1 = [PKM.CASTFORM, PKM.VIRIZION, PKM.REGICE, PKM.REGISTEEL, PKM.R
 const MYTHICAL_2 = [PKM.MELOETTA, PKM.MEWTWO, PKM.ENTEI, PKM.SUICUNE, PKM.RAIKOU, PKM.KYUREM, PKM.RESHIRAM, PKM.ZEKROM, PKM.REGIGIGAS, PKM.CELEBI, PKM.VICTINI, PKM.JIRACHI, PKM.ARCEUS, PKM.DEOXYS, PKM.SHAYMIN, PKM.GIRATINA, PKM.DARKRAI, PKM.CRESSELIA, PKM.HEATRAN, PKM.LUGIA, PKM.HOOH, PKM.PALKIA, PKM.DIALGA, PKM.RAYQUAZA, PKM.KYOGRE, PKM.GROUDON];
 
 
-export class Shop {
-  assignShop(player) {
+export default class Shop {
+  assignShop(player: Player) {
     for (let i = 0; i < 6; i++) {
       let pokemon = this.pickPokemon(player);
       const seed = Math.random();
@@ -58,7 +60,7 @@ export class Shop {
     }
   }
 
-  assignDittoShop(player) {
+  assignDittoShop(player: Player) {
     player.shop[0] = PKM.DITTO;
 
     for (let i = 1; i < 6; i++) {
@@ -67,7 +69,7 @@ export class Shop {
     }
   }
 
-  assignFirstMythicalShop(player) {
+  assignFirstMythicalShop(player: Player) {
     const mythicalCopy = JSON.parse(JSON.stringify(MYTHICAL_1));
     for (let i = 0; i < 6; i++) {
       const pkm = PokemonFactory.createPokemonFromName(mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]).name;
@@ -76,7 +78,7 @@ export class Shop {
     }
   }
 
-  assignSecondMythicalShop(player) {
+  assignSecondMythicalShop(player: Player) {
     const mythicalCopy = JSON.parse(JSON.stringify(MYTHICAL_2));
     for (let i = 0; i < 6; i++) {
       const pkm = PokemonFactory.createPokemonFromName(mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]).name;
@@ -85,7 +87,7 @@ export class Shop {
     }
   }
 
-  pickPokemon(player) {
+  pickPokemon(player: Player) {
     const playerProbality = PROBABILITY[player.experienceManager.level];
     const seed = Math.random();
     let pokemon = '';
@@ -97,33 +99,33 @@ export class Shop {
     const legendary = [];
     const threeStars = [];
 
-    player.board.forEach((pokemon, id) => {
+    player.board.forEach((pokemon: Pokemon, id: string) => {
       if (pokemon.stars == 3) {
         threeStars.push(PokemonFactory.getPokemonFamily(pokemon.name));
       }
     });
 
-    COMMON.forEach((name) => {
+    COMMON.forEach((name: string) => {
       if (!threeStars.includes(name)) {
         common.push(name);
       }
     });
-    UNCOMMON.forEach((name) => {
+    UNCOMMON.forEach((name: string) => {
       if (!threeStars.includes(name)) {
         uncommon.push(name);
       }
     });
-    RARE.forEach((name) => {
+    RARE.forEach((name: string) => {
       if (!threeStars.includes(name)) {
         rare.push(name);
       }
     });
-    EPIC.forEach((name) => {
+    EPIC.forEach((name: string) => {
       if (!threeStars.includes(name)) {
         epic.push(name);
       }
     });
-    LEGENDARY.forEach((name) => {
+    LEGENDARY.forEach((name: string) => {
       if (!threeStars.includes(name)) {
         legendary.push(name);
       }

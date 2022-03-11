@@ -1,40 +1,44 @@
 
-const PriorityQueue = require('./priority-queue.js');
-const ORIENTATION = require('../models/enum').ORIENTATION;
+import {ORIENTATION} from '../models/enum';
+import {Pokemon} from '../models/colyseus-models/pokemon';
 
-class Board {
-  constructor(rows, colums) {
+export default class Board {
+  rows: number;
+  columns: number;
+  cell: Pokemon[];
+  
+  constructor(rows: number, colums: number) {
     this.rows = rows;
     this.columns = colums;
     this.cell = new Array(this.rows * this.columns);
   }
 
-  getValue(row, col) {
+  getValue(row: number, col: number) {
     if (row >= 0 && row < this.rows && col >= 0 && col < this.columns) {
       return this.cell[this.columns * row + col];
     }
   }
 
-  setValue(row, col, value) {
+  setValue(row: number, col: number, value: Pokemon) {
     if (row >= 0 && row < this.rows && col >= 0 && col < this.columns) {
       this.cell[this.columns * row + col] = value;
     }
   }
 
-  moveValue(r0, c0, r1, c1) {
+  moveValue(r0: number, c0: number, r1: number, c1: number) {
     const value = this.getValue(r0, c0);
     this.setValue(r1, c1, value);
     this.setValue(r0, c0, undefined);
   }
 
-  swapValue(r0, c0, r1, c1) {
+  swapValue(r0: number, c0: number, r1: number, c1:number) {
     const v0 = this.getValue(r0, c0);
     const v1 = this.getValue(r1, c1);
     this.setValue(r1, c1, v0);
     this.setValue(r0, c0, v1);
   }
 
-  forEach(callback) {
+  forEach(callback: Function) {
     for (let r = 0; r < this.rows; r++) {
       for (let c = 0; c < this.columns; c++) {
         callback(r, c, this.cell[this.columns * r + c]);
@@ -42,17 +46,17 @@ class Board {
     }
   }
 
-  distance(r0, c0, r1, c1) {
+  distance(r0: number, c0: number, r1: number, c1: number) {
     // chebyshev distance
     return Math.max(Math.abs(r0 - r1), Math.abs(c0 - c1));
   }
 
-  distanceC(r0, c0, r1, c1) {
+  distanceC(r0: number, c0: number, r1: number, c1: number) {
     // Manhattan distance
     return Math.abs(r1 - r0) + Math.abs(c1 - c0);
   }
 
-  orientation(r0, c0, r1, c1) {
+  orientation(r0: number, c0: number, r1: number, c1: number) {
     const vx = r1 - r0;
     const vy = c1 - c0;
     if (vx > 0) {
@@ -83,7 +87,7 @@ class Board {
     }
   }
 
-  getAdjacentCells(row, col) {
+  getAdjacentCells(row: number, col: number) {
     const cells = [];
     for (let r = row - 1; r < row + 2; r++) {
       for (let c = col - 1; c < col + 2; c++) {
@@ -100,7 +104,7 @@ class Board {
     return cells;
   }
 
-  getCellsInRange(row, col, range) {
+  getCellsInRange(row: number, col: number, range: number) {
     const cells = [];
     const n = Math.floor(Math.abs(range));
     for (let r = 0; r < this.rows; r++) {
@@ -119,7 +123,7 @@ class Board {
     return cells;
   }
 
-  getCellsInRadius(row, col, radius) {
+  getCellsInRadius(row: number, col: number, radius: number) {
     const cells = [];
     const n = Math.floor(Math.abs(radius)) + 0.5; const n2 = n * n;
     for (let r = 0; r < this.rows; r++) {
@@ -138,7 +142,7 @@ class Board {
     return cells;
   }
 
-  getCellsBetween(r0, c0, r1, c1) {
+  getCellsBetween(r0: number, c0: number, r1: number, c1: number) {
     const cells = [];
     const dr = r1 - r0; const dc = c1 - c0;
     const n = Math.max(Math.abs(dr), Math.abs(dc)); const m = n == 0 ? 0 : 1 / n;
@@ -152,39 +156,6 @@ class Board {
       });
     }
     return cells;
-  }
-
-  findPath(r0, c0, r1, c1) {
-    let current = {row: r0, column: c0}; let next = {}; let adjacents = [];
-    const border = new PriorityQueue(); const link = {}; const cost = {};
-    border.push(current, 0);
-    link[current.row<<8|current.column] = null;
-    cost[current.row<<8|current.column] = 0;
-    while (border.length) {
-      current = border.pop();
-      if (current.row == r1 && current.column == c1) break;
-      adjacents = this.getAdjacentCells(current.row, current.column);
-      for (let i = 0; i < adjacents.length; i++) {
-        next = adjacents[i];
-        if (!!next.value) continue; // skip non-empty cell
-        const dist = this.distance(current.row, current.column, next.row, next.column);
-        const a = cost[current.row<<8|current.column] + dist;
-        const b = cost[next.row<<8|next.column];
-        if (b == undefined || a < b) {
-          link[next.row<<8|next.column] = current;
-          cost[next.row<<8|next.column] = a;
-          border.push(next, a + this.distance(next.row, next.column, r1, c1));
-        }
-      }
-    }
-    const path = [];
-    if (current.row == r1 && current.column == c1) {
-      do {
-        path.push({row: current.row, column: current.column});
-        current = link[current.row<<8|current.column];
-      } while (current != null);
-    }
-    return path.reverse();
   }
 }
 

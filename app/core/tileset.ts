@@ -1,15 +1,19 @@
-const {MAP, MASK_TABLE, HDR, MASK_COORDINATE, TERRAIN} = require('../models/enum');
-const Jimp = require('jimp');
+import {MAP, MASK_TABLE, HDR, MASK_COORDINATE, TERRAIN} from '../models/enum';
+import Jimp from 'jimp';
 
-class Tileset {
-  constructor(id) {
+export default class Tileset {
+  id: string;
+  headers: string[];
+  img: any;
+  ground: Map<string, number[]> = new Map();
+  groundAlt: Map<string, number[]> = new Map();
+  water: Map<string, number[]> = new Map();
+  wall: Map<string, number[]> = new Map();
+  wallAlt: Map<string, number[]> = new Map();
+
+  constructor(id: string) {
     this.id = id;
     this.headers = MAP[id].tileset;
-    this.ground = new Map();
-    this.groundAlt = new Map();
-    this.water = new Map();
-    this.wall = new Map();
-    this.wallAlt = new Map();
   }
 
   async initialize() {
@@ -46,7 +50,7 @@ class Tileset {
     });
   }
 
-  getId(maskId, header) {
+  getId(maskId: string, header: string) {
     let headerIndex = this.headers.indexOf(header);
     if (headerIndex == -1) {
       headerIndex = this.headers.indexOf(HDR.ABYSS);
@@ -57,7 +61,7 @@ class Tileset {
     return y * this.headers.length * 3 + x + 1;
   }
 
-  isPixelValue(maskId, header) {
+  isPixelValue(maskId: string, header: string) {
     const headerIndex = this.headers.indexOf(header);
     const maskCoordinate = MASK_COORDINATE[maskId];
     const pixelX = maskCoordinate.x + headerIndex * 3;
@@ -65,7 +69,7 @@ class Tileset {
     return (Jimp.intToRGBA(this.img.getPixelColor(pixelX * 25 + 12, pixelY * 25 + 12)).a != 0);
   }
 
-  getTilemapId(terrain, maskId) {
+  getTilemapId(terrain: number, maskId: string) {
     // console.log(terrain, maskId);
     let items;
     switch (terrain) {

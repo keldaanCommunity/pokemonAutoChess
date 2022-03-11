@@ -1,16 +1,23 @@
-const {BATTLE_RESULT} = require('../models/enum');
-const PokemonFactory = require('../models/pokemon-factory');
-const BOT = require('../models/mongo-models/bot-v2');
+import {BATTLE_RESULT} from '../models/enum';
+import PokemonFactory from '../models/pokemon-factory';
+import BOT from '../models/mongo-models/bot-v2';
+import Player from '../models/colyseus-models/player';
 
-class Bot {
-  constructor(player) {
+export default class Bot {
+
+  player: Player;
+  step: number;
+  progress: number;
+  scenario: any;
+
+  constructor(player: Player) {
     this.player = player;
     this.step = 0;
     this.progress = 0;
-    // console.log(player.name);
+
     BOT.findOne({'avatar': player.name}, ['steps'], null, (err, bot)=>{
       this.scenario = bot;
-      this.updatePlayerTeam(0);
+      this.updatePlayerTeam();
     });
   }
 
@@ -22,8 +29,7 @@ class Bot {
     } else if (this.player.getLastBattleResult() == BATTLE_RESULT.WIN) {
       this.progress += 1.5;
     }
-    // console.log(this.player.name);
-    // console.log(this.scenario);
+
     if (this.scenario && this.scenario.steps[this.step + 1] && this.progress >= this.scenario.steps[this.step + 1].roundsRequired) {
       this.step += 1;
       this.progress = 0;
@@ -56,5 +62,3 @@ class Bot {
     this.player.effects.update(this.player.synergies);
   }
 }
-
-module.exports = Bot;

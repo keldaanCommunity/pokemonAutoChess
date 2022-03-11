@@ -1,4 +1,5 @@
 import {Schema, type} from '@colyseus/schema';
+import Board from '../../core/board';
 import {ITEM} from '../enum';
 
 export default class Status extends Schema {
@@ -42,7 +43,7 @@ export default class Status extends Schema {
     }
   }
 
-  updateFlameOrb(dt: number, pkm: any, board: any) {
+  updateFlameOrb(dt: number, pkm: any, board: Board) {
     if (this.flameOrbCooldown - dt <= 0) {
       this.flameOrb = false;
       const cells = board.getAdjacentCells(pkm.positionX, pkm.positionY);

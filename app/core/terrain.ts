@@ -3,8 +3,14 @@ const F = (Math.sqrt(3) - 1) / 2;
 const G = (3 - Math.sqrt(3)) / 6;
 const GRAD = [[1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
 
-class Terrain {
-  constructor(width, height, frequency, persistance) {
+export default class Terrain {
+  width: number;
+  height: number;
+  frequency: number;
+  persistance: number;
+  terrain: number[][];
+
+  constructor(width: number, height: number, frequency: number, persistance: number) {
     this.width = width;
     this.height = height;
     this.frequency = frequency;
@@ -12,11 +18,11 @@ class Terrain {
     this.terrain = this.create(this.width, this.height, {frequency: this.frequency, persistance: this.persistance});
   }
 
-  newRandom(seed) {
+  newRandom(seed: number) {
     try {
       var s=seed.toString();
     } catch (_) {
-      s=[+new Date()]+Math.random();
+      s = (new Date().getTime() + Math.random()).toString();
     }
     let k=2166136261; let t=0;
     while (t<s.length) {
@@ -38,7 +44,7 @@ class Terrain {
     return r;
   }
 
-  simplexNoise(table, x, y) {
+  simplexNoise(table: any, x: number, y: number) {
     const s = (x+y)*F; let a = Math.floor(x+s); let b = Math.floor(y+s);
     const x0 = x-a + (a+b)*G; const y0 = y-b + (a+b)*G;
     const c = x0>y0?1:0; const d = x0>y0?0:1;
@@ -58,7 +64,7 @@ class Terrain {
     return 70 * (n0 + n1 + n2);
   }
 
-  createPermutationTable(seed) {
+  createPermutationTable(seed: number) {
     const rng = this.newRandom(seed); const p = []; let i; let j; let k;
     for (i = 0; i < 256; i++) p.push(i);
     for (i = 255; i > 0; i--) {
@@ -68,7 +74,7 @@ class Terrain {
     return p;
   }
 
-  createNoiseMatrix(width, height, frequency, amplitude, lacunarity, persistance, table) {
+  createNoiseMatrix(width: number, height: number, frequency: number, amplitude: number, lacunarity: number, persistance: number, table: any) {
     let y = 0; let x = 0; let min = 1; let max = -1; let a; let b; let n;
     const result = new Array(height);
     for (y = 0; y < height; y++) {
@@ -92,9 +98,9 @@ class Terrain {
     return result;
   }
 
-  create(width, height, params) {
-    width = parseInt(width) || 0;
-    height = parseInt(height) || 0;
+  create(width: number, height: number, params: any) {
+    width = width || 0;
+    height = height || 0;
     params = params || {};
     const frequency = parseFloat(params.frequency) || 1;
     const amplitude = parseFloat(params.amplitude) || 1;
@@ -105,5 +111,3 @@ class Terrain {
     return noise;
   }
 }
-
-module.exports = Terrain;

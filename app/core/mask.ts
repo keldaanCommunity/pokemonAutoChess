@@ -1,7 +1,7 @@
-const {ID_TABLE} = require('../models/enum');
+import {ID_TABLE} from '../models/enum';
 
-class Mask {
-  mask8bits(matrix, row, col) {
+export default class Mask {
+  mask8bits(matrix: any[], row: number, col:number) {
     let m = 0; const v = matrix[row][col];
     m |= this.eq(matrix, row - 1, col, v) << 0;
     m |= this.eq(matrix, row, col + 1, v) << 1;
@@ -14,9 +14,7 @@ class Mask {
     return ID_TABLE[m];
   }
 
-  eq(m, r, c, v) {
+  eq(m: any[], r: number, c: number, v: number) {
     return (r >= 0 && r < m.length && c >= 0 && c < m[r].length && m[r][c] == v) ? 1 : 0;
   }
 }
-
-module.exports = Mask;

@@ -49,12 +49,14 @@ export default class Player extends Schema {
   }
 
   getCurrentBattleResult() {
+    /*
     if (this.simulation.blueTeam.size == 0) {
       return BATTLE_RESULT.DEFEAT;
     } else if (this.simulation.redTeam.size == 0) {
       return BATTLE_RESULT.WIN;
     }
     return BATTLE_RESULT.DRAW;
+    */
   }
 
   addBattleResult(name: string, result: string, avatar: string, isPVE: boolean) {

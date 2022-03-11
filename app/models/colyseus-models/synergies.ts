@@ -1,4 +1,4 @@
-import {Schema, type} from '@colyseus/schema';
+import {Schema, type, MapSchema} from '@colyseus/schema';
 import PokemonFactory from '../pokemon-factory';
 import {Pokemon} from '../colyseus-models/pokemon';
 
@@ -29,7 +29,7 @@ export default class Synergies extends Schema {
   @type('uint8') FOSSIL: number;
   @type('uint8') SOUND: number;
 
-  update(board: any) {
+  update(board: MapSchema<Pokemon>) {
     const pokemonNames = [];
     this.setToZero();
 
