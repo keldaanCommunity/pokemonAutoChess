@@ -1,5 +1,21 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import {Schema, model} from 'mongoose';
+import MapTileset from '../colyseus-models/map-tileset';
+import WinTileset from '../colyseus-models/win-tileset';
+
+export interface UserMetadata {
+  uid: string;
+  displayName: string;
+  langage: string;
+  avatar: string;
+  wins: number;
+  exp: number;
+  level: number;
+  elo: number;
+  donor: boolean;
+  mapWin: WinTileset;
+  map: MapTileset;
+  honors: string[];
+}
 
 const userMetadataSchema = new Schema(
     {
@@ -97,5 +113,4 @@ const userMetadataSchema = new Schema(
     }
 );
 
-const UserMetadata = mongoose.model('UserMetadata', userMetadataSchema);
-module.exports = UserMetadata;
+export default model<UserMetadata>('UserMetadata', userMetadataSchema);

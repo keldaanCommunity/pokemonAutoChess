@@ -1,6 +1,20 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const {ITEMS, PKM} = require('./../enum');
+import {Schema, model} from 'mongoose';
+import {ITEM, PKM} from '../enum';
+
+export interface Pokemon {
+  name: string;
+  items: string[];
+}
+
+export interface DetailledStatistic {
+  playerId: string;
+  elo: number;
+  tome: number;
+  name: string;
+  rank: number;
+  avatar: string;
+  pokemons: Pokemon[]
+}
 
 const pokemon = new Schema({
   name: {
@@ -10,7 +24,7 @@ const pokemon = new Schema({
   items: [
     {
       type: String,
-      enum: Object.keys(ITEMS)
+      enum: Object.keys(ITEM)
     }
   ]
 });
@@ -39,5 +53,4 @@ const statisticSchema = new Schema(
     }
 );
 
-const DetailledStatistic = mongoose.model('DetailledStatistic', statisticSchema);
-module.exports = DetailledStatistic;
+export default model<DetailledStatistic>('DetailledStatisticV2', statisticSchema);

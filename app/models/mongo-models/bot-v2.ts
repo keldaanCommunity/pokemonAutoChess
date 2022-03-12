@@ -1,7 +1,24 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const {PKM, ITEMS} = require('../enum');
+import {Schema, model} from 'mongoose';
+import {PKM, ITEM} from '../enum';
 
+export interface DetailledPokemon {
+  name: string;
+  x:number;
+  y: number;
+  items: string[];
+}
+
+export interface Step {
+  board: DetailledPokemon[];
+  roundsRequired: number;
+}
+
+export interface Bot {
+  avatar: string;
+  author: string;
+  elo: number;
+  steps: Step[];
+}
 
 const pkm = new Schema(
     {
@@ -24,7 +41,7 @@ const pkm = new Schema(
       },
       items: [{
         type: String,
-        enum: Object.keys(ITEMS)
+        enum: Object.keys(ITEM)
       }]
     }
 );
@@ -71,5 +88,4 @@ const bot = new Schema(
     }
 );
 
-const Bot = mongoose.model('Bot', bot);
-module.exports = Bot;
+export default model<Bot>('BotV2', bot);

@@ -1,5 +1,12 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import {Schema, model} from 'mongoose';
+
+export interface Chat{
+  payload: string;
+  name: string;
+  avatar: string;
+  time: number;
+}
+
 const chatSchema = new Schema(
     {
       payload: {
@@ -17,5 +24,4 @@ const chatSchema = new Schema(
     }
 );
 
-const Chat = mongoose.model('Chat', chatSchema);
-module.exports = Chat;
+export default model<Chat>('Chat', chatSchema);

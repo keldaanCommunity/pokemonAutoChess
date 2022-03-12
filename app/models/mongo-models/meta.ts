@@ -1,7 +1,23 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable camelcase */
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import {Schema, model} from 'mongoose';
+
+export interface Team {
+  cluster_id: string;
+  rank: number;
+  x: number;
+  y: number;
+  pokemons: any
+}
+
+export interface Meta {
+  cluster_id: string;
+  count: number;
+  ratio: number;
+  winrate: number;
+  mean_rank: number;
+  types: any;
+  pokemons: any;
+  teams: Team[]  
+}
 
 const teamSchema = new Schema(
     {
@@ -44,6 +60,4 @@ const metaSchema = new Schema(
     }
 );
 
-
-const Meta = mongoose.model('Meta', metaSchema, 'meta');
-module.exports = Meta;
+export default model('Meta', metaSchema, 'meta');
