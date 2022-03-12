@@ -1,10 +1,10 @@
-const {ATTACK_TYPE, TYPE, EFFECTS, ITEM} = require('../models/enum');
+import {ATTACK_TYPE, TYPE, EFFECTS, ITEM} from '../models/enum';
+import Board from './board';
+import PokemonEntity from './pokemon-entity';
+import PokemonState from './pokemon-state';
 
-class AttackStrategy {
-  constructor() {
-  }
-
-  process(pokemon, state, board, target) {
+export class AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     pokemon.setMana(0);
     pokemon.count.ult += 1;
     if (pokemon.types.includes(TYPE.MONSTER) && pokemon.shield <= 0) {
@@ -31,7 +31,7 @@ class AttackStrategy {
         atk += 7;
       }
       if (atk > 0) {
-        board.forEach((x, y, tg) => {
+        board.forEach((x: number, y: number, tg: PokemonEntity) => {
           if (tg && pokemon.team == tg.team && tg.types.includes(TYPE.SOUND)) {
             tg.count.soundCount ++;
             tg.atk += atk;
@@ -39,7 +39,7 @@ class AttackStrategy {
         });
       }
     }
-    board.forEach((r, c, value) => {
+    board.forEach((r: number, c: number, value: PokemonEntity) => {
       if (value !== undefined && value.team != pokemon.team && value.items.has(ITEM.WATER_INCENSE)) {
         pokemon.count.incenseCount ++;
         pokemon.handleDamage(Math.ceil(value.maxMana * 0.2), board, ATTACK_TYPE.SPECIAL, value);
@@ -51,8 +51,8 @@ class AttackStrategy {
   }
 }
 
-class KingShieldStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class KingShieldStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let timer = 0;
     switch (pokemon.stars) {
@@ -89,8 +89,8 @@ class KingShieldStrategy extends AttackStrategy {
   }
 }
 
-class ExplosionStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class ExplosionStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -119,8 +119,8 @@ class ExplosionStrategy extends AttackStrategy {
   }
 }
 
-class ClangorousSoulStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class ClangorousSoulStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let buffAtk = 0;
     let buffDef = 0;
@@ -153,8 +153,8 @@ class ClangorousSoulStrategy extends AttackStrategy {
   }
 }
 
-class BonemerangStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class BonemerangStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -171,7 +171,7 @@ class BonemerangStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x, y, tg) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity) => {
       if (tg && pokemon.team != tg.team && x == target.positionX) {
         tg.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
       }
@@ -179,8 +179,8 @@ class BonemerangStrategy extends AttackStrategy {
   }
 }
 
-class GrowlStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class GrowlStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let d = 0;
     switch (pokemon.stars) {
@@ -196,7 +196,7 @@ class GrowlStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x, y, tg) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity) => {
       if (tg && pokemon.team != tg.team) {
         tg.status.triggerWound(d);
       }
@@ -204,8 +204,8 @@ class GrowlStrategy extends AttackStrategy {
   }
 }
 
-class RelicSongStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class RelicSongStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let d = 0;
     switch (pokemon.stars) {
@@ -221,7 +221,7 @@ class RelicSongStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x, y, tg) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity) => {
       if (tg && pokemon.team != tg.team) {
         tg.status.triggerSleep(d);
       }
@@ -229,8 +229,8 @@ class RelicSongStrategy extends AttackStrategy {
   }
 }
 
-class DisarmingVoiceStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class DisarmingVoiceStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let heal = 0;
     switch (pokemon.stars) {
@@ -246,15 +246,15 @@ class DisarmingVoiceStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x, y, tg) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity) => {
       if (tg && pokemon.team == tg.team) {
         tg.setMana(tg.mana + heal);
       }
     });
   }
 }
-class HighJumpKickStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class HighJumpKickStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -276,8 +276,8 @@ class HighJumpKickStrategy extends AttackStrategy {
   }
 }
 
-class GrassWhistleStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class GrassWhistleStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let n = 0;
     switch (pokemon.stars) {
@@ -293,7 +293,7 @@ class GrassWhistleStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x, y, tg) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity) => {
       if (tg && pokemon.team != tg.team && n > 0) {
         tg.status.triggerSleep(2000);
         n--;
@@ -303,8 +303,8 @@ class GrassWhistleStrategy extends AttackStrategy {
 }
 
 
-class TriAttackStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class TriAttackStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let duration = 0;
     switch (pokemon.stars) {
@@ -326,15 +326,12 @@ class TriAttackStrategy extends AttackStrategy {
   }
 }
 
-class EchoStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class EchoStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
 
     let damage = 0;
     let additional = 0;
-    if (pokemon.echo === undefined) {
-      pokemon.echo = 0;
-    }
 
     switch (pokemon.stars) {
       case 1:
@@ -353,7 +350,7 @@ class EchoStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x, y, tg) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpellDamage(damage + pokemon.echo * additional, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
@@ -363,8 +360,8 @@ class EchoStrategy extends AttackStrategy {
   }
 }
 
-class PetalDanceStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class PetalDanceStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
 
     let damage = 0;
@@ -387,7 +384,7 @@ class PetalDanceStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x, y, tg) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity) => {
       if (tg && pokemon.team != tg.team && count > 0) {
         tg.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
         count --;
@@ -397,8 +394,8 @@ class PetalDanceStrategy extends AttackStrategy {
   }
 }
 
-class HyperVoiceStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class HyperVoiceStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
 
     let damage = 0;
@@ -421,7 +418,7 @@ class HyperVoiceStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x, y, tg) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
         tg.status.triggerConfusion(confusion * 1000);
@@ -429,21 +426,21 @@ class HyperVoiceStrategy extends AttackStrategy {
     });
   }
 }
-class ShadowCloneStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class ShadowCloneStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
     const x = farthestCoordinate[0];
     const y = farthestCoordinate[1];
     if (x !== undefined && y !== undefined) {
-      const clone = pokemon.simulation.addPokemon(pokemon, x, y, pokemon.team);
+      const clone = pokemon.simulation.addPokemonEntity(pokemon, x, y, pokemon.team);
       clone.life = pokemon.life;
     }
   }
 }
 
-class VoltSwitchStrategy extends AttackStrategy {
-  process(pokemon, state, board, target) {
+export class VoltSwitchStrategy extends AttackStrategy {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
 
     let damage = 0;
@@ -478,12 +475,12 @@ class VoltSwitchStrategy extends AttackStrategy {
   }
 }
 
-class HeadSmashStrategy extends AttackStrategy {
+export class HeadSmashStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
 
     let d = 0;
@@ -513,12 +510,12 @@ class HeadSmashStrategy extends AttackStrategy {
   }
 }
 
-class RockSmashStrategy extends AttackStrategy {
+export class RockSmashStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
 
     let d = 0;
@@ -545,12 +542,12 @@ class RockSmashStrategy extends AttackStrategy {
   }
 }
 
-class RockTombStrategy extends AttackStrategy {
+export class RockTombStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
 
     let factor=0;
@@ -573,16 +570,16 @@ class RockTombStrategy extends AttackStrategy {
   }
 }
 
-class RoarOfTimeStrategy extends AttackStrategy {
+export class RoarOfTimeStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
 
     let candidate = pokemon;
-    board.forEach((x, y, pkm) => {
+    board.forEach((x: number, y: number, pkm: PokemonEntity) => {
       if (pkm && pokemon.team == pkm.team && pkm.items.size > candidate.items.size && !pkm.status.resurection) {
         candidate = pkm;
       }
@@ -592,12 +589,12 @@ class RoarOfTimeStrategy extends AttackStrategy {
   }
 }
 
-class HealBlockStrategy extends AttackStrategy {
+export class HealBlockStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
 
     let timer=0;
@@ -625,16 +622,16 @@ class HealBlockStrategy extends AttackStrategy {
 }
 
 
-class OriginPulseStrategy extends AttackStrategy {
+export class OriginPulseStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     const damage = 60;
 
-    board.forEach((x, y, tg) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
@@ -642,16 +639,16 @@ class OriginPulseStrategy extends AttackStrategy {
   }
 }
 
-class SeedFlareStrategy extends AttackStrategy {
+export class SeedFlareStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     const damage = 30;
 
-    board.forEach((x, y, tg) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity) => {
       if (tg && pokemon.team != tg.team) {
         tg.speDef = Math.max(0, tg.speDef - 2);
         tg.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
@@ -660,12 +657,12 @@ class SeedFlareStrategy extends AttackStrategy {
   }
 }
 
-class NightmareStrategy extends AttackStrategy {
+export class NightmareStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let timer = 0;
     switch (pokemon.stars) {
@@ -681,7 +678,7 @@ class NightmareStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x, y, value) => {
+    board.forEach((x: number, y: number, value: PokemonEntity) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerPoison(timer, value, pokemon);
       }
@@ -689,12 +686,12 @@ class NightmareStrategy extends AttackStrategy {
   }
 }
 
-class BurnStrategy extends AttackStrategy {
+export class BurnStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let timer = 0;
     switch (pokemon.stars) {
@@ -710,7 +707,7 @@ class BurnStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x, y, value) => {
+    board.forEach((x: number, y: number, value: PokemonEntity) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerBurn(timer, value, pokemon);
         value.status.triggerWound(timer);
@@ -719,12 +716,12 @@ class BurnStrategy extends AttackStrategy {
   }
 }
 
-class SilenceStrategy extends AttackStrategy {
+export class SilenceStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let timer = 0;
     switch (pokemon.stars) {
@@ -740,7 +737,7 @@ class SilenceStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x, y, value) => {
+    board.forEach((x: number, y: number, value: PokemonEntity) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerSilence(timer);
       }
@@ -748,12 +745,12 @@ class SilenceStrategy extends AttackStrategy {
   }
 }
 
-class PoisonStrategy extends AttackStrategy {
+export class PoisonStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let timer = 0;
     switch (pokemon.stars) {
@@ -773,12 +770,12 @@ class PoisonStrategy extends AttackStrategy {
   }
 }
 
-class FreezeStrategy extends AttackStrategy {
+export class FreezeStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let timer = 0;
     switch (pokemon.stars) {
@@ -794,7 +791,7 @@ class FreezeStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x, y, value) => {
+    board.forEach((x: number, y: number, value: PokemonEntity) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerFreeze(timer);
       }
@@ -803,12 +800,12 @@ class FreezeStrategy extends AttackStrategy {
 }
 
 
-class ProtectStrategy extends AttackStrategy {
+export class ProtectStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let timer = 0;
     switch (pokemon.stars) {
@@ -828,12 +825,12 @@ class ProtectStrategy extends AttackStrategy {
   }
 }
 
-class SleepStrategy extends AttackStrategy {
+export class SleepStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let timer = 0;
     switch (pokemon.stars) {
@@ -853,12 +850,12 @@ class SleepStrategy extends AttackStrategy {
   }
 }
 
-class ConfusionStrategy extends AttackStrategy {
+export class ConfusionStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let timer = 0;
     switch (pokemon.stars) {
@@ -875,7 +872,7 @@ class ConfusionStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x, y, value) => {
+    board.forEach((x: number, y: number, value: PokemonEntity) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerConfusion(timer);
       }
@@ -883,12 +880,12 @@ class ConfusionStrategy extends AttackStrategy {
   }
 }
 
-class FireBlastStrategy extends AttackStrategy {
+export class FireBlastStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -908,15 +905,15 @@ class FireBlastStrategy extends AttackStrategy {
   }
 }
 
-class SeismicTossStrategy extends AttackStrategy {
+export class SeismicTossStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
-    board.forEach((x, y, value) => {
+    board.forEach((x: number, y: number, value: PokemonEntity) => {
       if (value && pokemon.team == value.team) {
         damage += pokemon.stars;
       }
@@ -926,12 +923,12 @@ class SeismicTossStrategy extends AttackStrategy {
   }
 }
 
-class GuillotineStrategy extends AttackStrategy {
+export class GuillotineStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     const damage = pokemon.atk * pokemon.stars;
     const victim = target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
@@ -941,12 +938,12 @@ class GuillotineStrategy extends AttackStrategy {
   }
 }
 
-class RockSlideStrategy extends AttackStrategy {
+export class RockSlideStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -969,12 +966,12 @@ class RockSlideStrategy extends AttackStrategy {
   }
 }
 
-class WheelOfFireStrategy extends AttackStrategy {
+export class WheelOfFireStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -999,12 +996,12 @@ class WheelOfFireStrategy extends AttackStrategy {
   }
 }
 
-class HeatWaveStrategy extends AttackStrategy {
+export class HeatWaveStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -1032,12 +1029,12 @@ class HeatWaveStrategy extends AttackStrategy {
   }
 }
 
-class HydroPumpStrategy extends AttackStrategy {
+export class HydroPumpStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -1061,12 +1058,12 @@ class HydroPumpStrategy extends AttackStrategy {
   }
 }
 
-class ThunderStrategy extends AttackStrategy {
+export class ThunderStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -1086,12 +1083,12 @@ class ThunderStrategy extends AttackStrategy {
   }
 }
 
-class DracoMeteorStrategy extends AttackStrategy {
+export class DracoMeteorStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -1107,7 +1104,7 @@ class DracoMeteorStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x, y, tg) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
       }
@@ -1115,29 +1112,29 @@ class DracoMeteorStrategy extends AttackStrategy {
   }
 }
 
-class BlazeKickStrategy extends AttackStrategy {
+export class BlazeKickStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     const damage = 30 * pokemon.stars;
     target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }
 
-class WishStrategy extends AttackStrategy {
+export class WishStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     const heal = 50;
     let count = pokemon.stars;
 
-    board.forEach((x, y, ally) => {
+    board.forEach((x: number, y: number, ally: PokemonEntity) => {
       if (ally && pokemon.team == ally.team && count > 0 && ally.life < ally.hp) {
         ally.handleHeal(heal, pokemon);
         count -= 1;
@@ -1146,12 +1143,12 @@ class WishStrategy extends AttackStrategy {
   }
 }
 
-class CalmMindStrategy extends AttackStrategy {
+export class CalmMindStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let buff = 0;
     switch (pokemon.stars) {
@@ -1172,12 +1169,12 @@ class CalmMindStrategy extends AttackStrategy {
   }
 }
 
-class IronDefenseStrategy extends AttackStrategy {
+export class IronDefenseStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let buff = 0;
     switch (pokemon.stars) {
@@ -1198,12 +1195,12 @@ class IronDefenseStrategy extends AttackStrategy {
   }
 }
 
-class SoakStrategy extends AttackStrategy {
+export class SoakStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -1220,7 +1217,7 @@ class SoakStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x, y, ally) => {
+    board.forEach((x: number, y: number, ally: PokemonEntity) => {
       if (ally && pokemon.team == ally.team) {
         ally.setMana(ally.mana + 10);
       }
@@ -1230,12 +1227,12 @@ class SoakStrategy extends AttackStrategy {
   }
 }
 
-class IronTailStrategy extends AttackStrategy {
+export class IronTailStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     let buff = 0;
@@ -1260,12 +1257,12 @@ class IronTailStrategy extends AttackStrategy {
   }
 }
 
-class BlastBurnStrategy extends AttackStrategy {
+export class BlastBurnStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
 
@@ -1293,12 +1290,12 @@ class BlastBurnStrategy extends AttackStrategy {
   }
 }
 
-class ChargeStrategy extends AttackStrategy {
+export class ChargeStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let buff = 0;
     switch (pokemon.stars) {
@@ -1315,7 +1312,7 @@ class ChargeStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x, y, ally) => {
+    board.forEach((x: number, y: number, ally: PokemonEntity) => {
       if (ally && pokemon.team == ally.team && ally.types.includes(TYPE.ELECTRIC)) {
         ally.atk += Math.ceil(pokemon.baseAtk * buff);
       }
@@ -1323,12 +1320,12 @@ class ChargeStrategy extends AttackStrategy {
   }
 }
 
-class DischargeStrategy extends AttackStrategy {
+export class DischargeStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
 
@@ -1356,12 +1353,12 @@ class DischargeStrategy extends AttackStrategy {
   }
 }
 
-class BiteStrategy extends AttackStrategy {
+export class BiteStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -1382,12 +1379,12 @@ class BiteStrategy extends AttackStrategy {
   }
 }
 
-class DragonTailStrategy extends AttackStrategy {
+export class DragonTailStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -1409,12 +1406,12 @@ class DragonTailStrategy extends AttackStrategy {
   }
 }
 
-class DragonBreathStrategy extends AttackStrategy {
+export class DragonBreathStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -1438,12 +1435,12 @@ class DragonBreathStrategy extends AttackStrategy {
   }
 }
 
-class IcicleCrashStrategy extends AttackStrategy {
+export class IcicleCrashStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
 
@@ -1471,12 +1468,12 @@ class IcicleCrashStrategy extends AttackStrategy {
   }
 }
 
-class RootStrategy extends AttackStrategy {
+export class RootStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let heal = 0;
 
@@ -1505,12 +1502,12 @@ class RootStrategy extends AttackStrategy {
   }
 }
 
-class TormentStrategy extends AttackStrategy {
+export class TormentStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let boost = 1;
 
@@ -1531,24 +1528,24 @@ class TormentStrategy extends AttackStrategy {
   }
 }
 
-class StompStrategy extends AttackStrategy {
+export class StompStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     const damage = pokemon.atk * pokemon.stars * 2;
     target.handleSpellDamage(damage, board, ATTACK_TYPE.PHYSICAL, pokemon);
   }
 }
 
-class DarkPulseStrategy extends AttackStrategy {
+export class DarkPulseStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -1569,12 +1566,12 @@ class DarkPulseStrategy extends AttackStrategy {
   }
 }
 
-class NightSlashStrategy extends AttackStrategy {
+export class NightSlashStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
 
@@ -1594,7 +1591,7 @@ class NightSlashStrategy extends AttackStrategy {
 
     target.handleSpellDamage(damage, board, ATTACK_TYPE.SPECIAL, pokemon);
 
-    board.forEach((x, y, v) => {
+    board.forEach((x: number, y: number, v: PokemonEntity) => {
       if (v && pokemon.team != v.team) {
         v.def = Math.max(0, v.def - 1);
       }
@@ -1602,12 +1599,12 @@ class NightSlashStrategy extends AttackStrategy {
   }
 }
 
-class BugBuzzStrategy extends AttackStrategy {
+export class BugBuzzStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
 
@@ -1629,12 +1626,12 @@ class BugBuzzStrategy extends AttackStrategy {
   }
 }
 
-class PoisonStingStrategy extends AttackStrategy {
+export class PoisonStingStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
 
@@ -1659,12 +1656,12 @@ class PoisonStingStrategy extends AttackStrategy {
   }
 }
 
-class LeechLifeStrategy extends AttackStrategy {
+export class LeechLifeStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
 
@@ -1693,12 +1690,12 @@ class LeechLifeStrategy extends AttackStrategy {
   }
 }
 
-class HappyHourStrategy extends AttackStrategy {
+export class HappyHourStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let buff = 0;
     switch (pokemon.stars) {
@@ -1714,7 +1711,7 @@ class HappyHourStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x, y, ally) => {
+    board.forEach((x: number, y: number, ally: PokemonEntity) => {
       if (ally && pokemon.team == ally.team) {
         ally.atk += buff;
       }
@@ -1722,12 +1719,12 @@ class HappyHourStrategy extends AttackStrategy {
   }
 }
 
-class TeleportStrategy extends AttackStrategy {
+export class TeleportStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
 
     const potentialCells = [[0, 0], [0, 5], [7, 5], [7, 0]];
@@ -1744,7 +1741,7 @@ class TeleportStrategy extends AttackStrategy {
     }
   }
 
-  shuffleArray(array) {
+  shuffleArray(array: any[]) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -1752,12 +1749,12 @@ class TeleportStrategy extends AttackStrategy {
   }
 }
 
-class NastyPlotStrategy extends AttackStrategy {
+export class NastyPlotStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let buff = 0;
     switch (pokemon.stars) {
@@ -1777,12 +1774,12 @@ class NastyPlotStrategy extends AttackStrategy {
   }
 }
 
-class ThiefStrategy extends AttackStrategy {
+export class ThiefStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -1827,12 +1824,12 @@ class ThiefStrategy extends AttackStrategy {
   }
 }
 
-class StunSporeStrategy extends AttackStrategy {
+export class StunSporeStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let debuff = 0;
     let damage = 0;
@@ -1857,12 +1854,12 @@ class StunSporeStrategy extends AttackStrategy {
   }
 }
 
-class MeteorMashStrategy extends AttackStrategy {
+export class MeteorMashStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
 
@@ -1891,12 +1888,12 @@ class MeteorMashStrategy extends AttackStrategy {
   }
 }
 
-class HurricaneStrategy extends AttackStrategy {
+export class HurricaneStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
     switch (pokemon.stars) {
@@ -1920,12 +1917,12 @@ class HurricaneStrategy extends AttackStrategy {
   }
 }
 
-class MetronomeStrategy extends AttackStrategy {
+export class MetronomeStrategy extends AttackStrategy {
   constructor() {
     super();
   }
 
-  process(pokemon, state, board, target) {
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     const skills = [
       FireBlastStrategy,
@@ -2000,76 +1997,3 @@ class MetronomeStrategy extends AttackStrategy {
     strategy.process(pokemon, state, board, target);
   }
 }
-
-
-module.exports = {
-  AttackStrategy,
-  FireBlastStrategy,
-  WheelOfFireStrategy,
-  SeismicTossStrategy,
-  GuillotineStrategy,
-  RockSlideStrategy,
-  HeatWaveStrategy,
-  ThunderStrategy,
-  HydroPumpStrategy,
-  DracoMeteorStrategy,
-  BlazeKickStrategy,
-  WishStrategy,
-  CalmMindStrategy,
-  IronDefenseStrategy,
-  MetronomeStrategy,
-  SoakStrategy,
-  IronTailStrategy,
-  BlastBurnStrategy,
-  ChargeStrategy,
-  DischargeStrategy,
-  BiteStrategy,
-  DragonTailStrategy,
-  DragonBreathStrategy,
-  IcicleCrashStrategy,
-  RootStrategy,
-  TormentStrategy,
-  StompStrategy,
-  DarkPulseStrategy,
-  NightSlashStrategy,
-  BugBuzzStrategy,
-  PoisonStingStrategy,
-  LeechLifeStrategy,
-  HappyHourStrategy,
-  TeleportStrategy,
-  NastyPlotStrategy,
-  ThiefStrategy,
-  StunSporeStrategy,
-  MeteorMashStrategy,
-  HurricaneStrategy,
-  BurnStrategy,
-  SleepStrategy,
-  FreezeStrategy,
-  ConfusionStrategy,
-  ProtectStrategy,
-  PoisonStrategy,
-  SilenceStrategy,
-  OriginPulseStrategy,
-  SeedFlareStrategy,
-  HealBlockStrategy,
-  RoarOfTimeStrategy,
-  RockTombStrategy,
-  RockSmashStrategy,
-  HeadSmashStrategy,
-  VoltSwitchStrategy,
-  ShadowCloneStrategy,
-  HyperVoiceStrategy,
-  PetalDanceStrategy,
-  EchoStrategy,
-  TriAttackStrategy,
-  GrassWhistleStrategy,
-  HighJumpKickStrategy,
-  DisarmingVoiceStrategy,
-  RelicSongStrategy,
-  GrowlStrategy,
-  BonemerangStrategy,
-  ClangorousSoulStrategy,
-  NightmareStrategy,
-  ExplosionStrategy,
-  KingShieldStrategy
-};

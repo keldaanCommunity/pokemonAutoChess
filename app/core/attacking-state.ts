@@ -1,12 +1,11 @@
-const {STATE_TYPE, EFFECTS, ATTACK_TYPE, CLIMATE, ORIENTATION, ITEM} = require('../models/enum');
-const PokemonState = require('./pokemon-state');
+import {STATE_TYPE, EFFECTS, ATTACK_TYPE, CLIMATE, ORIENTATION, ITEM} from '../models/enum';
+import Board from './board';
+import PokemonEntity from './pokemon-entity';
+import PokemonState from './pokemon-state';
 
-class AttackingState extends PokemonState {
-  constructor() {
-    super();
-  }
+export default class AttackingState extends PokemonState {
 
-  update(pokemon, dt, board, climate) {
+  update(pokemon: PokemonEntity, dt: number, board: Board, climate: string): boolean {
     super.update(pokemon, dt, board, climate);
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = pokemon.getAttackDelay();
@@ -39,9 +38,10 @@ class AttackingState extends PokemonState {
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt);
     }
+    return false;
   }
 
-  attack(pokemon, board, coordinates, climate) {
+  attack(pokemon: PokemonEntity, board: Board, coordinates: number[], climate: string) {
     pokemon.count.attackCount ++;
     pokemon.targetX = coordinates[0];
     pokemon.targetY = coordinates[1];

@@ -1,27 +1,32 @@
-const {TERRAIN} = require('../models/enum');
-const Mask = require('./mask');
-const Terrain = require('./terrain');
-const Tileset = require('./tileset');
+import {TERRAIN} from '../models/enum';
+import Tileset from './tileset';
+import Terrain from './terrain';
+import Mask from './mask';
 
-class Design {
-  constructor(id, frequency, persistance) {
+export default class Design {
+  id: any;
+  terrain: any[];
+  bitmask: any[];
+  tilemap: any[];
+  width: number = 85;
+  height: number = 43;
+  frequency: number;
+  persistance: number;
+  tileset: Tileset;
+  minArena: number[] = [26, 4];
+  maxArena: number[] = [58, 35];
+  leftBorder: number[] = [27, 31];
+  rightBorder: number[] = [57, 31];
+
+  constructor(id: string, frequency: number, persistance: number) {
     this.id = id;
-    this.terrain = [];
-    this.bitmask = [];
-    this.tilemap = [];
-    this.width = 85;
-    this.height = 43;
     this.frequency = frequency;
     this.persistance = persistance;
     this.tileset = new Tileset(this.id);
-    this.minArena = [26, 4];
-    this.maxArena = [58, 35];
-    this.leftBorder = [27, 31];
-    this.rightBorder = [57, 31];
   }
 
   async create() {
-    return new Promise((resolve, reject)=>{
+    return new Promise<void>((resolve, reject)=>{
       this.tileset.initialize().then(()=>{
         this.generateTerrain();
         this.generateMask();
@@ -76,7 +81,6 @@ class Design {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
         const tileID = this.tileset.getTilemapId(this.terrain[i][j], this.bitmask[i][j]);
-        // console.log(tileID, this.terrain[i][j], this.bitmask[i][j]);
         this.tilemap.push(tileID);
       }
     }
@@ -114,5 +118,3 @@ class Design {
     };
   }
 };
-
-module.exports = Design;

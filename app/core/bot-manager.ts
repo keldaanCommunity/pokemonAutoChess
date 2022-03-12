@@ -1,11 +1,14 @@
-const Bot = require('./bot');
+import Player from '../models/colyseus-models/player';
+import Bot from './bot';
 
-class BotManager {
+export default class BotManager {
+  bots: Bot[];
+
   constructor() {
     this.bots = [];
   }
 
-  addBot(player) {
+  addBot(player: Player) {
     this.bots.push(new Bot(player));
   }
 

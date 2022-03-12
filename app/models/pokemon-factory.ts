@@ -1,7 +1,7 @@
 import {Pokemon, Bulbasaur, Abomasnow, Abra, Absol, Aegislash, Aerodactyl, Aggron, Alakazam, AlolanMarowak, Altaria, Amaura, Ampharos, Anorith, Arcanine, Arceus, Archen, Archeops, Armaldo, Aron, Articuno, Aurorus, Axew, Azelf, Azumarill, Azurill, Bagon, Banette, Bastiodon, Bayleef, Beedrill, Beldum, Bellossom, Bellsprout, Blastoise, Blaziken, Budew, Buneary, Butterfree, Camerupt, Carracosta, Carvanha, Castform, CastformHail, CastformRain, CastformSun, Caterpie, Celebi, Chandelure, Charizard, Charmander, Charmeleon, Chikorita, Chimchar, Clefable, Clefairy, Cleffa, Cobalion, Combusken, Cradily, Cranidos, Cresselia, Crobat, Croconaw, Cubone, Cyndaquil, Darkrai, Deino, Deoxys, Dialga, Ditto, Doublade, Dragonair, Dragonite, Dratini, Duosion, Dusclops, Dusknoir, Duskull, Eevee, Electabuzz, Electivire, Electrike, Elekid, Empoleon, Entei, Espeon, Exploud, Fearow, Feraligatr, Flabebe, Flaffy, Flareon, Fletchinder, Fletchling, Floette, Florges, Flygon, Fraxure, Froslass, Gabite, Garchomp, Gardevoir, Gastly, Gengar, Geodude, Gible, Giratina, Glaceon, Glalie, Gloom, Golbat, Golem, Graveler, Grotle, Groudon, Grovyle, Growlithe, Gyarados, HakamoO, Haunter, Haxorus, Heatran, Herdier, Honedge, HooH, Hoppip, Horsea, Houndour, Hydreigon, Igglybuff, Infernape, Ivysaur, JangmoO, Jigglypuff, Jirachi, Jolteon, Jumpluff, Kabuto, Kabutops, Kadabra, Kakuna, Keldeo, Kingdra, Kirlia, Klang, Klink, Klinklang, KommoO, Krookodile, Krookorok, Kyogre, Kyurem, Lairon, Lampent, Landorus, Lapras, Larvitar, Latias, Latios, Leafeon, Leavanny, Lileep, Lillipup, Litwick, Lombre, Lopunny, Lotad, Loudred, Lucario, Ludicolo, Lugia, Luxio, Luxray, Machamp, Machoke, Machop, Magby, Magikarp, Magmar, Magmortar, Magnemite, Magneton, Magnezone, Mamoswine, Manaphy, Manectric, Mareep, Marill, Marowak, Marshtomp, Medicham, Meditite, MegaAbomasnow, MegaAltaria, MegaBanette, MegaCamerupt, MegaLopunny, MegaLucario, MegaManectric, MegaMedicham, Meganium, MegaRayquaza, MegaScizor, MegaSteelix, Meloetta, Meowth, Mesprit, Metagross, Metang, Metapod, Mewtwo, Moltres, Monferno, Mudkip, Munchlax, Nidoking, Nidoqueen, NidoranF, NidoranM, Nidorina, Nidorino, Numel, Nuzleaf, Oddish, Omanyte, Omastar, Onix, Palkia, Palpitoad, Persian, Pichu, Pidgeot, Pidgeotto, Pidgey, Pikachu, Pikipek, Piloswine, Piplup, Politoed, Poliwag, Poliwhirl, Porygon, Porygon2, PorygonZ, PrimalGroudon, PrimalKyogre, Prinplup, Pupitar, Quilava, Raichu, Raikou, Ralts, Rampardos, Raticate, Rattata, Rayquaza, Regice, Regigigas, Regirock, Registeel, Reshiram, Reuniclus, Rhydon, Rhyhorn, Rhyperior, Riolu, Roselia, Roserade, Rotom, Salamence, Sandile, Sandshrew, Sceptile, Scizor, Scolipede, Scyther, Seadra, Sealeo, Seedot, Seismitoad, Sewaddle, Shaymin, Shelgon, Shieldon, Shiftry, Shinx, Shuppet, Skiploom, Slaking, Slakoth, Slowbro, Slowking, Slowpoke, Snorlax, Snorunt, Snover, Solosis, Spearow, Spheal, Spiritomb, Squirtle, Staraptor, Staravia, Starly, Steelix, Stoutland, Suicune, Swablu, Swadloon, Swampert, Swinub, Sylveon, Talonflame, Terrakion, Thundurus, Tirtouga, Togekiss, Togepi, Togetic, Torchic, Tornadus, Torterra, Totodile, Toucannon, Trapinch, Treecko, Trumbeak, Turtwig, Tympole, Typhlosion, Tyranitar, Tyrantrum, Tyrunt, Umbreon, Uxie, Vanillish, Vanillite, Vanilluxe, Vaporeon, Venipede, Venusaur, Vibrava, Victini, Victreebel, Vigoroth, Vileplume, Virizion, Volcarona, Walrein, Wartortle, Weedle, Weepinbell, Whirlipede, Whismur, Wigglytuff, Zapdos, Zekrom, Zubat, Zweilous} from './colyseus-models/pokemon';
 import {SPECIAL_SKILL, PKM, PRECOMPUTED_TYPE_POKEMONS, TYPE} from './enum';
-import Strategy from '../core/attack-strategy';
 import Board from '../core/board';
+import {AttackStrategy, BiteStrategy, BlastBurnStrategy, BlazeKickStrategy, BonemerangStrategy, BugBuzzStrategy, BurnStrategy, CalmMindStrategy, ChargeStrategy, ClangorousSoulStrategy, ConfusionStrategy, DarkPulseStrategy, DisarmingVoiceStrategy, DischargeStrategy, DracoMeteorStrategy, DragonBreathStrategy, DragonTailStrategy, EchoStrategy, ExplosionStrategy, FireBlastStrategy, FreezeStrategy, GrassWhistleStrategy, GrowlStrategy, GuillotineStrategy, HappyHourStrategy, HeadSmashStrategy, HealBlockStrategy, HeatWaveStrategy, HighJumpKickStrategy, HurricaneStrategy, HydroPumpStrategy, HyperVoiceStrategy, IcicleCrashStrategy, IronDefenseStrategy, IronTailStrategy, KingShieldStrategy, LeechLifeStrategy, MeteorMashStrategy, MetronomeStrategy, NastyPlotStrategy, NightmareStrategy, NightSlashStrategy, OriginPulseStrategy, PetalDanceStrategy, PoisonStingStrategy, PoisonStrategy, ProtectStrategy, RelicSongStrategy, RoarOfTimeStrategy, RockSlideStrategy, RockSmashStrategy, RockTombStrategy, RootStrategy, SeedFlareStrategy, SeismicTossStrategy, ShadowCloneStrategy, SilenceStrategy, SleepStrategy, SoakStrategy, StompStrategy, StunSporeStrategy, TeleportStrategy, ThiefStrategy, ThunderStrategy, TormentStrategy, TriAttackStrategy, VoltSwitchStrategy, WheelOfFireStrategy, WishStrategy} from '../core/attack-strategy';
 
 export default class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level: number) {
@@ -154,214 +154,214 @@ export default class PokemonFactory {
   static createStrategyFromName(name: string) {
     switch (name) {
       case SPECIAL_SKILL.KING_SHIELD:
-        return new Strategy.KingShieldStrategy();
+        return new KingShieldStrategy();
 
       case SPECIAL_SKILL.EXPLOSION:
-        return new Strategy.ExplosionStrategy();
+        return new ExplosionStrategy();
 
       case SPECIAL_SKILL.NIGHTMARE:
-        return new Strategy.NightmareStrategy();
+        return new NightmareStrategy();
 
       case SPECIAL_SKILL.CLANGOROUS_SOUL:
-        return new Strategy.ClangorousSoulStrategy();
+        return new ClangorousSoulStrategy();
 
       case SPECIAL_SKILL.BONEMERANG:
-        return new Strategy.BonemerangStrategy();
+        return new BonemerangStrategy();
 
       case SPECIAL_SKILL.GROWL:
-        return new Strategy.GrowlStrategy();
+        return new GrowlStrategy();
 
       case SPECIAL_SKILL.RELIC_SONG:
-        return new Strategy.RelicSongStrategy();
+        return new RelicSongStrategy();
 
       case SPECIAL_SKILL.DISARMING_VOICE:
-        return new Strategy.DisarmingVoiceStrategy();
+        return new DisarmingVoiceStrategy();
 
       case SPECIAL_SKILL.HIGH_JUMP_KICK:
-        return new Strategy.HighJumpKickStrategy();
+        return new HighJumpKickStrategy();
 
       case SPECIAL_SKILL.GRASS_WHISTLE:
-        return new Strategy.GrassWhistleStrategy();
+        return new GrassWhistleStrategy();
 
       case SPECIAL_SKILL.TRI_ATTACK:
-        return new Strategy.TriAttackStrategy();
+        return new TriAttackStrategy();
 
       case SPECIAL_SKILL.ECHO:
-        return new Strategy.EchoStrategy();
+        return new EchoStrategy();
 
       case SPECIAL_SKILL.PETAL_DANCE:
-        return new Strategy.PetalDanceStrategy();
+        return new PetalDanceStrategy();
 
       case SPECIAL_SKILL.HYPER_VOICE:
-        return new Strategy.HyperVoiceStrategy();
+        return new HyperVoiceStrategy();
 
       case SPECIAL_SKILL.SHADOW_CLONE:
-        return new Strategy.ShadowCloneStrategy();
+        return new ShadowCloneStrategy();
 
       case SPECIAL_SKILL.VOLT_SWITCH:
-        return new Strategy.VoltSwitchStrategy();
+        return new VoltSwitchStrategy();
 
       case SPECIAL_SKILL.FIRE_BLAST:
-        return new Strategy.FireBlastStrategy();
+        return new FireBlastStrategy();
 
       case SPECIAL_SKILL.WHEEL_OF_FIRE:
-        return new Strategy.WheelOfFireStrategy();
+        return new WheelOfFireStrategy();
 
       case SPECIAL_SKILL.SEISMIC_TOSS:
-        return new Strategy.SeismicTossStrategy();
+        return new SeismicTossStrategy();
 
       case SPECIAL_SKILL.GUILLOTINE:
-        return new Strategy.GuillotineStrategy();
+        return new GuillotineStrategy();
 
       case SPECIAL_SKILL.ROCK_SLIDE:
-        return new Strategy.RockSlideStrategy();
+        return new RockSlideStrategy();
 
       case SPECIAL_SKILL.HEAT_WAVE:
-        return new Strategy.HeatWaveStrategy();
+        return new HeatWaveStrategy();
 
       case SPECIAL_SKILL.THUNDER:
-        return new Strategy.ThunderStrategy();
+        return new ThunderStrategy();
 
       case SPECIAL_SKILL.HYDRO_PUMP:
-        return new Strategy.HydroPumpStrategy();
+        return new HydroPumpStrategy();
 
       case SPECIAL_SKILL.DRACO_METEOR:
-        return new Strategy.DracoMeteorStrategy();
+        return new DracoMeteorStrategy();
 
       case SPECIAL_SKILL.BLAZE_KICK:
-        return new Strategy.BlazeKickStrategy();
+        return new BlazeKickStrategy();
 
       case SPECIAL_SKILL.WISH:
-        return new Strategy.WishStrategy();
+        return new WishStrategy();
 
       case SPECIAL_SKILL.CALM_MIND:
-        return new Strategy.CalmMindStrategy();
+        return new CalmMindStrategy();
 
       case SPECIAL_SKILL.IRON_DEFENSE:
-        return new Strategy.IronDefenseStrategy();
+        return new IronDefenseStrategy();
 
       case SPECIAL_SKILL.METRONOME:
-        return new Strategy.MetronomeStrategy();
+        return new MetronomeStrategy();
 
       case SPECIAL_SKILL.SOAK:
-        return new Strategy.SoakStrategy();
+        return new SoakStrategy();
 
       case SPECIAL_SKILL.IRON_TAIL:
-        return new Strategy.IronTailStrategy();
+        return new IronTailStrategy();
 
       case SPECIAL_SKILL.BLAST_BURN:
-        return new Strategy.BlastBurnStrategy();
+        return new BlastBurnStrategy();
 
       case SPECIAL_SKILL.CHARGE:
-        return new Strategy.ChargeStrategy();
+        return new ChargeStrategy();
 
       case SPECIAL_SKILL.DISCHARGE:
-        return new Strategy.DischargeStrategy();
+        return new DischargeStrategy();
 
       case SPECIAL_SKILL.BITE:
-        return new Strategy.BiteStrategy();
+        return new BiteStrategy();
 
       case SPECIAL_SKILL.DRAGON_TAIL:
-        return new Strategy.DragonTailStrategy();
+        return new DragonTailStrategy();
 
       case SPECIAL_SKILL.DRAGON_BREATH:
-        return new Strategy.DragonBreathStrategy();
+        return new DragonBreathStrategy();
 
       case SPECIAL_SKILL.ICICLE_CRASH:
-        return new Strategy.IcicleCrashStrategy();
+        return new IcicleCrashStrategy();
 
       case SPECIAL_SKILL.ROOT:
-        return new Strategy.RootStrategy();
+        return new RootStrategy();
 
       case SPECIAL_SKILL.TORMENT:
-        return new Strategy.TormentStrategy();
+        return new TormentStrategy();
 
       case SPECIAL_SKILL.STOMP:
-        return new Strategy.StompStrategy();
+        return new StompStrategy();
 
       case SPECIAL_SKILL.DARK_PULSE:
-        return new Strategy.DarkPulseStrategy();
+        return new DarkPulseStrategy();
 
       case SPECIAL_SKILL.NIGHT_SLASH:
-        return new Strategy.NightSlashStrategy();
+        return new NightSlashStrategy();
 
       case SPECIAL_SKILL.BUG_BUZZ:
-        return new Strategy.BugBuzzStrategy();
+        return new BugBuzzStrategy();
 
       case SPECIAL_SKILL.POISON_STING:
-        return new Strategy.PoisonStingStrategy();
+        return new PoisonStingStrategy();
 
       case SPECIAL_SKILL.LEECH_LIFE:
-        return new Strategy.LeechLifeStrategy();
+        return new LeechLifeStrategy();
 
       case SPECIAL_SKILL.HAPPY_HOUR:
-        return new Strategy.HappyHourStrategy();
+        return new HappyHourStrategy();
 
       case SPECIAL_SKILL.TELEPORT:
-        return new Strategy.TeleportStrategy();
+        return new TeleportStrategy();
 
       case SPECIAL_SKILL.NASTY_PLOT:
-        return new Strategy.NastyPlotStrategy();
+        return new NastyPlotStrategy();
 
       case SPECIAL_SKILL.THIEF:
-        return new Strategy.ThiefStrategy();
+        return new ThiefStrategy();
 
       case SPECIAL_SKILL.STUN_SPORE:
-        return new Strategy.StunSporeStrategy();
+        return new StunSporeStrategy();
 
       case SPECIAL_SKILL.METEOR_MASH:
-        return new Strategy.MeteorMashStrategy();
+        return new MeteorMashStrategy();
 
       case SPECIAL_SKILL.HURRICANE:
-        return new Strategy.HurricaneStrategy();
+        return new HurricaneStrategy();
 
       case SPECIAL_SKILL.BURN:
-        return new Strategy.BurnStrategy();
+        return new BurnStrategy();
 
       case SPECIAL_SKILL.SLEEP:
-        return new Strategy.SleepStrategy();
+        return new SleepStrategy();
 
       case SPECIAL_SKILL.SILENCE:
-        return new Strategy.SilenceStrategy();
+        return new SilenceStrategy();
 
       case SPECIAL_SKILL.CONFUSION:
-        return new Strategy.ConfusionStrategy();
+        return new ConfusionStrategy();
 
       case SPECIAL_SKILL.FREEZE:
-        return new Strategy.FreezeStrategy();
+        return new FreezeStrategy();
 
       case SPECIAL_SKILL.PROTECT:
-        return new Strategy.ProtectStrategy();
+        return new ProtectStrategy();
 
       case SPECIAL_SKILL.POISON:
-        return new Strategy.PoisonStrategy();
+        return new PoisonStrategy();
 
       case SPECIAL_SKILL.ORIGIN_PULSE:
-        return new Strategy.OriginPulseStrategy();
+        return new OriginPulseStrategy();
 
       case SPECIAL_SKILL.SEED_FLARE:
-        return new Strategy.SeedFlareStrategy();
+        return new SeedFlareStrategy();
 
       case SPECIAL_SKILL.HEAL_BLOCK:
-        return new Strategy.HealBlockStrategy();
+        return new HealBlockStrategy();
 
       case SPECIAL_SKILL.ROAR_OF_TIME:
-        return new Strategy.RoarOfTimeStrategy();
+        return new RoarOfTimeStrategy();
 
       case SPECIAL_SKILL.ROCK_TOMB:
-        return new Strategy.RockTombStrategy();
+        return new RockTombStrategy();
 
       case SPECIAL_SKILL.ROCK_SMASH:
-        return new Strategy.RockSmashStrategy();
+        return new RockSmashStrategy();
 
       case SPECIAL_SKILL.HEAD_SMASH:
-        return new Strategy.HeadSmashStrategy();
+        return new HeadSmashStrategy();
 
       case SPECIAL_SKILL.DEFAULT:
-        return new Strategy.AttackStrategy();
+        return new AttackStrategy();
 
       default:
-        return new Strategy.AttackStrategy();
+        return new AttackStrategy();
     }
   }
 

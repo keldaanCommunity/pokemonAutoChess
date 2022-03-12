@@ -1,32 +1,28 @@
-const Board = require('./board');
-const schema = require('@colyseus/schema');
-const Schema = schema.Schema;
-const MapSchema = schema.MapSchema;
-const PokemonEntity = require('./pokemon-entity');
-const PokemonFactory = require('../models/pokemon-factory');
-const {CLIMATE, EFFECTS, TYPE, ATTACK_TYPE, ITEM} = require('../models/enum');
-const Dps = require('./dps');
-const DpsHeal = require('./dps-heal');
-const ItemFactory = require('../models/item-factory');
+import Board from './board';
+import {Schema, MapSchema, type, ArraySchema} from '@colyseus/schema';
+import PokemonEntity from './pokemon-entity';
+import {Pokemon} from '../models/colyseus-models/pokemon';
+import PokemonFactory from '../models/pokemon-factory';
+import {CLIMATE, EFFECTS, TYPE, ATTACK_TYPE, ITEM} from '../models/enum';
+import Dps from'./dps';
+import DpsHeal from './dps-heal';
+import ItemFactory from '../models/item-factory';
 
-class Simulation extends Schema {
-  constructor() {
-    super();
-    this.assign({
-      blueEffects: [],
-      redEffects: [],
-      board: new Board(8, 6),
-      redTeam: new MapSchema(),
-      blueTeam: new MapSchema(),
-      blueDpsMeter: new MapSchema(),
-      redDpsMeter: new MapSchema(),
-      blueHealDpsMeter: new MapSchema(),
-      redHealDpsMeter: new MapSchema()
-    });
-    this.initialize();
-  }
+export default class Simulation extends Schema {
+  @type('string') climate: string;
+  @type(['string']) blueEffects: string[];
+  @type(['string']) redEffects: string[];
+  @type({map: PokemonEntity}) blueTeam = new MapSchema<PokemonEntity>();
+  @type({map: PokemonEntity}) redTeam = new MapSchema<PokemonEntity>();
+  @type({map: Dps}) blueDpsMeter = new MapSchema<Dps>();
+  @type({map: Dps}) redDpsMeter = new MapSchema<Dps>();
+  @type({map: Dps}) blueHealDpsMeter = new MapSchema<DpsHeal>();
+  @type({map: Dps}) redHealDpsMeter = new MapSchema<DpsHeal>();
+  board: Board = new Board(8,6);
+  finished: boolean;
+  flowerSpawn: boolean[];
 
-  initialize(blueTeam, redTeam, blueEffects, redEffects) {
+  initialize(blueTeam: MapSchema<Pokemon>, redTeam: MapSchema<Pokemon>, blueEffects: string[], redEffects: string[]) {
     this.blueDpsMeter.forEach((dps, key) => {
       this.blueDpsMeter.delete(key);
     });
@@ -59,7 +55,7 @@ class Simulation extends Schema {
     if (blueTeam) {
       blueTeam.forEach((pokemon, key) => {
         if (pokemon.positionY != 0) {
-          this.addPokemon(pokemon, pokemon.positionX, pokemon.positionY - 1, 0, blueTeam, redTeam);
+          this.addPokemon(pokemon, pokemon.positionX, pokemon.positionY - 1, 0);
         }
       });
     }
@@ -67,7 +63,7 @@ class Simulation extends Schema {
     if (redTeam) {
       redTeam.forEach((pokemon, key) => {
         if (pokemon.positionY != 0) {
-          this.addPokemon(pokemon, pokemon.positionX, 5 - (pokemon.positionY - 1), 1, blueTeam, redTeam);
+          this.addPokemon(pokemon, pokemon.positionX, 5 - (pokemon.positionY - 1), 1);
         }
       });
     }
@@ -129,14 +125,14 @@ class Simulation extends Schema {
     this.applyPostEffects();
   }
 
-  addPokemon(pokemon, x, y, team, blueTeam, redTeam) {
+  addPokemon(pokemon: Pokemon, x: number, y: number, team: number) {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this);
     // pokemonEntity.triggerSleep(5000);
     this.applyItemsEffects(pokemonEntity);
     this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity);
 
     if (team == 0) {
-      this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects, this.redEffects, blueTeam, redTeam);
+      this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects);
       const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
       const dpsHeal = new DpsHeal(pokemonEntity.id, pokemonEntity.name);
       this.blueTeam.set(pokemonEntity.id, pokemonEntity);
@@ -144,7 +140,7 @@ class Simulation extends Schema {
       this.blueHealDpsMeter.set(pokemonEntity.id, dpsHeal);
     }
     if (team == 1) {
-      this.applyEffects(pokemonEntity, pokemon.types, this.redEffects, this.blueEffects, redTeam, blueTeam);
+      this.applyEffects(pokemonEntity, pokemon.types, this.redEffects);
       const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
       const dpsHeal = new DpsHeal(pokemonEntity.id, pokemonEntity.name);
       this.redTeam.set(pokemonEntity.id, pokemonEntity);
@@ -154,7 +150,15 @@ class Simulation extends Schema {
     return pokemonEntity;
   }
 
-  getFirstAvailablePlaceOnBoard(ascending) {
+  addPokemonEntity(p: PokemonEntity, x: number, y:number, team: number) {
+    let pokemon = PokemonFactory.createPokemonFromName(p.name);
+    p.items.forEach(i=>{
+      pokemon.items.add(i);
+    });
+    return this.addPokemon(pokemon, x, y, team);
+  }
+
+  getFirstAvailablePlaceOnBoard(ascending: boolean) {
     let row = 0;
     let column = 0;
     if (ascending) {
@@ -183,7 +187,7 @@ class Simulation extends Schema {
     return [row, column];
   }
 
-  applyItemsEffects(pokemon, types) {
+  applyItemsEffects(pokemon: PokemonEntity) {
     if (pokemon.items.has(ITEM.TWISTED_SPOON)) {
       pokemon.addSpellDamage(10);
     }
@@ -336,14 +340,14 @@ class Simulation extends Schema {
         });
       }
       if (pokemon.items.has(ITEM.FLUFFY_TAIL)) {
-        this.board.forEach((x, y, value) => {
+        this.board.forEach((x: number, y: number, value: PokemonEntity) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.maxMana = Math.ceil(value.maxMana * 1.3);
           }
         });
       }
       if (pokemon.items.has(ITEM.SHINY_CHARM)) {
-        this.board.forEach((x, y, value) => {
+        this.board.forEach((x: number, y: number, value: PokemonEntity) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.status.triggerSleep(3000);
           }
@@ -418,14 +422,14 @@ class Simulation extends Schema {
         });
       }
       if (pokemon.items.has(ITEM.FLUFFY_TAIL)) {
-        this.board.forEach((x, y, value) => {
+        this.board.forEach((x: number, y: number, value: PokemonEntity) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.maxMana = Math.ceil(value.maxMana * 1.3);
           }
         });
       }
       if (pokemon.items.has(ITEM.SHINY_CHARM)) {
-        this.board.forEach((x, y, value) => {
+        this.board.forEach((x: number, y: number, value: PokemonEntity) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.status.triggerSleep(3000);
           }
@@ -442,7 +446,7 @@ class Simulation extends Schema {
     });
   }
 
-  applyEffects(pokemon, types, allyEffects, ennemyEffects, allyTeam, ennemyTeam) {
+  applyEffects(pokemon: PokemonEntity, types: ArraySchema<string>, allyEffects: string[]) {
     allyEffects.forEach((effect) => {
       switch (effect) {
         case EFFECTS.HONE_CLAWS:
@@ -897,7 +901,7 @@ class Simulation extends Schema {
     return climate;
   }
 
-  update(dt) {
+  update(dt: number) {
     if (this.blueTeam.size == 0 || this.redTeam.size == 0) {
       this.finished = true;
     }
@@ -944,15 +948,3 @@ class Simulation extends Schema {
     this.climate = CLIMATE.NEUTRAL;
   }
 }
-
-schema.defineTypes(Simulation, {
-  blueTeam: {map: PokemonEntity},
-  redTeam: {map: PokemonEntity},
-  blueDpsMeter: {map: Dps},
-  redDpsMeter: {map: Dps},
-  blueHealDpsMeter: {map: DpsHeal},
-  redHealDpsMeter: {map: DpsHeal},
-  climate: 'string'
-});
-
-module.exports = Simulation;

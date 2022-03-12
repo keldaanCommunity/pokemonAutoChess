@@ -1,11 +1,11 @@
 
 import {ORIENTATION} from '../models/enum';
-import {Pokemon} from '../models/colyseus-models/pokemon';
+import PokemonEntity from './pokemon-entity';
 
 export default class Board {
   rows: number;
   columns: number;
-  cell: Pokemon[];
+  cell: PokemonEntity[];
   
   constructor(rows: number, colums: number) {
     this.rows = rows;
@@ -19,7 +19,7 @@ export default class Board {
     }
   }
 
-  setValue(row: number, col: number, value: Pokemon) {
+  setValue(row: number, col: number, value: PokemonEntity) {
     if (row >= 0 && row < this.rows && col >= 0 && col < this.columns) {
       this.cell[this.columns * row + col] = value;
     }

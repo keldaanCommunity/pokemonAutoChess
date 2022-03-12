@@ -68,6 +68,7 @@ export class Pokemon extends Schema {
     this.stars = stars;
     this.maxMana = maxMana;
     this.author = author;
+    this.skill = skill;
 
     types.forEach(type=>{
       this.types.push(type);

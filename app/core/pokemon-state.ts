@@ -1,11 +1,11 @@
-const {EFFECTS, ATTACK_TYPE, TYPE, PKM, FLYING_PROTECT_THRESHOLD, ITEM} = require('../models/enum');
-const PokemonFactory = require('../models/pokemon-factory');
+import {EFFECTS, ATTACK_TYPE, TYPE, PKM, FLYING_PROTECT_THRESHOLD, ITEM} from '../models/enum';
+import PokemonFactory from '../models/pokemon-factory';
+import Board from './board';
+import PokemonEntity from './pokemon-entity';
 
-class PokemonState {
-  constructor() {
-  }
+export default class PokemonState {
 
-  handleHeal(pokemon, heal, caster) {
+  handleHeal(pokemon: PokemonEntity, heal: number, caster: PokemonEntity): void {
     if (pokemon.life > 0 && pokemon.life < pokemon.hp && !pokemon.status.wound) {
       pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.round(heal));
       if (caster) {
@@ -14,7 +14,7 @@ class PokemonState {
     }
   }
 
-  handleShield(pokemon, shield, caster) {
+  handleShield(pokemon: PokemonEntity, shield: number, caster: PokemonEntity) {
     if (pokemon.life > 0) {
       pokemon.shield += Math.round(shield);
       if (caster) {
@@ -23,8 +23,8 @@ class PokemonState {
     }
   }
 
-  handleDamage(pokemon, damage, board, attackType, attacker) {
-    let death;
+  handleDamage(pokemon: PokemonEntity, damage: number, board: Board, attackType: string, attacker: PokemonEntity): boolean {
+    let death: boolean;
 
     if (pokemon.life == 0) {
       death = true;
@@ -238,7 +238,7 @@ class PokemonState {
     return death;
   }
 
-  update(pokemon, dt, board, climate) {
+  update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
     let updateEffects = false;
     if (pokemon.effects.includes(EFFECTS.SHORE_UP) || pokemon.effects.includes(EFFECTS.ROTOTILLER) || pokemon.effects.includes(EFFECTS.SANDSTORM)) {
       if (pokemon.growGroundTimer !== undefined && pokemon.count.growGroundCount <5) {
@@ -387,13 +387,13 @@ class PokemonState {
     return updateEffects;
   }
 
-  onEnter(pokemon) {
+  onEnter(pokemon: PokemonEntity) {
   }
 
-  onExit(pokemon) {
+  onExit(pokemon: PokemonEntity) {
   }
 
-  isTarget(pokemon, board) {
+  isTarget(pokemon: PokemonEntity, board: Board) {
     let target = false;
     board.forEach((x, y, value) => {
       if (value && value.team != pokemon.team) {
@@ -403,11 +403,11 @@ class PokemonState {
     return target;
   }
 
-  getNearestTargetCoordinate(pokemon, board) {
+  getNearestTargetCoordinate(pokemon: PokemonEntity, board: Board) {
     let x = undefined;
     let y = undefined;
     let distance = 999;
-    board.forEach((r, c, value) => {
+    board.forEach((r: number, c: number, value: PokemonEntity) => {
       if (value !== undefined && value.team != pokemon.team) {
         const candidateDistance = board.distance(pokemon.positionX, pokemon.positionY, r, c);
         if (candidateDistance < distance) {
@@ -428,10 +428,10 @@ class PokemonState {
     return [x, y];
   }
 
-  getFarthestTargetCoordinate(pokemon, board) {
+  getFarthestTargetCoordinate(pokemon: PokemonEntity, board: Board) {
     const pokemons = [];
 
-    board.forEach((r, c, value)=>{
+    board.forEach((r: number, c: number, value: PokemonEntity)=>{
       if (value !== undefined && value.team != pokemon.team) {
         const d = board.distance(pokemon.positionX, pokemon.positionY, r, c);
         pokemons.push({distance: d, x: r, y: c});
@@ -445,12 +445,12 @@ class PokemonState {
     return [pokemons[0].x, pokemons[0].y];
   }
 
-  getFarthestTargetCoordinateAvailablePlace(pokemon, board) {
+  getFarthestTargetCoordinateAvailablePlace(pokemon: PokemonEntity, board: Board) {
     let x = undefined;
     let y = undefined;
     const pokemons = [];
 
-    board.forEach((r, c, value)=>{
+    board.forEach((r: number, c: number, value: PokemonEntity)=>{
       if (value !== undefined && value.team != pokemon.team) {
         const d = board.distance(pokemon.positionX, pokemon.positionY, r, c);
         pokemons.push({distance: d, x: r, y: c});
@@ -481,6 +481,6 @@ class PokemonState {
     }
     return [x, y];
   }
-};
 
-module.exports = PokemonState;
+  move(pokemon: PokemonEntity, board: Board, coordinates: number[]) {}
+};

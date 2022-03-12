@@ -1,12 +1,11 @@
-const {STATE_TYPE, ORIENTATION, TYPE} = require('../models/enum');
-const PokemonState = require('./pokemon-state');
+import {STATE_TYPE, ORIENTATION, TYPE} from '../models/enum';
+import Board from './board';
+import PokemonEntity from './pokemon-entity';
+import PokemonState from './pokemon-state';
 
-class MovingState extends PokemonState {
-  constructor() {
-    super();
-  }
+export default class MovingState extends PokemonState {
 
-  update(pokemon, dt, board, climate) {
+  update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) :boolean{
     super.update(pokemon, dt, board, climate);
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 500;
@@ -23,13 +22,14 @@ class MovingState extends PokemonState {
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt);
     }
+    return false;
   }
 
-  move(pokemon, board, coordinates) {
+  move(pokemon: PokemonEntity, board: Board, coordinates: number[]) {
     // console.log('move attempt');
 
-    let x;
-    let y;
+    let x: number;
+    let y: number;
     if (pokemon.types.includes(TYPE.FOSSIL)) {
       const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
       x = farthestCoordinate[0];
@@ -63,12 +63,12 @@ class MovingState extends PokemonState {
     }
   }
 
-  onEnter(pokemon) {
+  onEnter(pokemon: PokemonEntity) {
     super.onEnter(pokemon);
     pokemon.action = STATE_TYPE.MOVING;
   }
 
-  onExit(pokemon) {
+  onExit(pokemon: PokemonEntity) {
     super.onExit(pokemon);
   }
 }
