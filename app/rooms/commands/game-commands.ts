@@ -680,7 +680,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, {}> {
   }
 
   checkDeath() {
-    this.state.players.forEach((player, key) => {
+    this.state.players.forEach((player: Player, key: string) => {
       if (player.life <= 0) {
         player.life = 0;
         player.alive = false;
@@ -694,7 +694,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, {}> {
 
     this.state.time = (isPVE && this.state.stageLevel >3) ? 35000 : 30000;
 
-    this.state.players.forEach((player, key) => {
+    this.state.players.forEach((player: Player, key: string) => {
       player.simulation.stop();
       if (player.alive) {
         if (player.isBot) {
@@ -826,7 +826,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, {}> {
 
     const stageIndex = this.getPVEIndex(this.state.stageLevel);
 
-    this.state.players.forEach((player, key) => {
+    this.state.players.forEach((player: Player, key: string) => {
       if (player.alive) {
         if (player.itemsProposition.length != 0) {
           if (player.itemsProposition.length == 3) {

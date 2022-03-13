@@ -16,8 +16,8 @@ export default class Simulation extends Schema {
   @type({map: PokemonEntity}) redTeam = new MapSchema<PokemonEntity>();
   @type({map: Dps}) blueDpsMeter = new MapSchema<Dps>();
   @type({map: Dps}) redDpsMeter = new MapSchema<Dps>();
-  @type({map: Dps}) blueHealDpsMeter = new MapSchema<DpsHeal>();
-  @type({map: Dps}) redHealDpsMeter = new MapSchema<DpsHeal>();
+  @type({map: DpsHeal}) blueHealDpsMeter = new MapSchema<DpsHeal>();
+  @type({map: DpsHeal}) redHealDpsMeter = new MapSchema<DpsHeal>();
   board: Board = new Board(8,6);
   finished: boolean;
   flowerSpawn: boolean[];

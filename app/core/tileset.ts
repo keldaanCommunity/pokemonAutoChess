@@ -17,7 +17,7 @@ export default class Tileset {
   }
 
   async initialize() {
-    this.img = await Jimp.read(`app/public/dist/assets/tilesets/${this.id}.png`);
+    this.img = await Jimp.read(`app/public/dist/client/assets/tilesets/${this.id}.png`);
     this.computeMapping();
   }
 

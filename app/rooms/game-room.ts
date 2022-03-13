@@ -300,13 +300,13 @@ export default class GameRoom extends Room {
   }
 
   computeRandomOpponent(playerId: string) {
-    const player = this.state.players.get(playerId);
+    const player: Player = this.state.players.get(playerId);
     this.checkOpponents(playerId);
     if (player.opponents.length == 0) {
       this.fillOpponents(playerId);
     }
     if (player.opponents.length > 0) {
-      const id = player.opponents.pop();
+      const id: string = player.opponents.pop();
       player.opponentName = this.state.players.get(id).name;
       player.opponentAvatar = this.state.players.get(id).avatar;
       return id;
@@ -329,8 +329,8 @@ export default class GameRoom extends Room {
   }
 
   fillOpponents(playerId: string) {
-    const player = this.state.players.get(playerId);
-    this.state.players.forEach((plyr, key) =>{
+    const player: Player = this.state.players.get(playerId);
+    this.state.players.forEach((plyr: Player, key: string) =>{
       if (plyr.alive && player.id != plyr.id) {
         player.opponents.push(key);
       }

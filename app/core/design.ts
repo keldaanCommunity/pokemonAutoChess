@@ -5,9 +5,9 @@ import Mask from './mask';
 
 export default class Design {
   id: any;
-  terrain: any[];
-  bitmask: any[];
-  tilemap: any[];
+  terrain: number[][] = [];
+  bitmask: string[][] = [];
+  tilemap: number[] = [];
   width: number = 85;
   height: number = 43;
   frequency: number;
@@ -41,7 +41,7 @@ export default class Design {
     const generation = t.terrain;
 
     for (let i = 0; i < this.height; i++) {
-      const row = [];
+      const row: number[] = [];
       for (let j = 0; j < this.width; j++) {
         const v = generation[i][j];
         if (v > 0.66) {

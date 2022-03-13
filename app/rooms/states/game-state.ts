@@ -24,7 +24,6 @@ export default class GameState extends Schema {
 
   constructor() {
     super();
-    console.log(this);
     const keys = Object.keys(MAP);
     this.id = keys[Math.floor(Math.random() * keys.length)];
     this.mapName = MAP[this.id].name;
