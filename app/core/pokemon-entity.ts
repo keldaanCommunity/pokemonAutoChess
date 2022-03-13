@@ -5,7 +5,7 @@ import uniqid from 'uniqid';
 import Status from '../models/colyseus-models/status';
 import Count from '../models/colyseus-models/count';
 import PokemonFactory from '../models/pokemon-factory';
-import {Pokemon} from '../models/colyseus-models/Pokemon';
+import {Pokemon} from '../models/colyseus-models/pokemon';
 import Simulation from './simulation';
 import {Schema, type, ArraySchema, SetSchema} from '@colyseus/schema';
 import {AttackStrategy} from './attack-strategy';

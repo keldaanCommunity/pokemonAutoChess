@@ -44,8 +44,31 @@ class Lobby extends Component<{},LobbyState> {
     room: any;
     _ismounted: boolean;
 
-    constructor(props){
+    constructor(props: any){
         super(props);
+
+        this.state = {
+            messages: [],
+            users: {},
+            user:{},
+            searchedUser:{},
+            leaderboard: [],
+            botLeaderboard: [],
+            currentText: '',
+            allRooms: [],
+            isSignedIn: false,
+            preparationRoomId: '',
+            tabIndex: 0,
+            showWiki: false,
+            showBuilder: false,
+            pasteBinUrl: '',
+            botData: {},
+            meta: [],
+            metaItems: [],
+            showMeta: false,
+            botList: [],
+            roomCreated: false
+        };
 
         const endpoint = `${window.location.protocol.replace('http', 'ws')}//${window.location.host}`;
         this.client = new Client(endpoint);

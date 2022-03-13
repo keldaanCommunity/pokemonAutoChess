@@ -1,25 +1,27 @@
-const colyseus = require('colyseus');
-const {Dispatcher} = require('@colyseus/command');
-const GameState = require('./states/game-state');
-const Commands = require('./commands/game-commands');
-const Player = require('../models/colyseus-models/player');
-const UserMetadata = require('../models/mongo-models/user-metadata');
-const BOT = require('../models/mongo-models/bot-v2');
-const {XP_PLACE, XP_TABLE, PKM, BASIC_ITEM, ITEM, TYPE} = require('../models/enum');
-const PokemonFactory = require('../models/pokemon-factory');
-const EloRank = require('elo-rank');
-const admin = require('firebase-admin');
-const DetailledStatistic = require('../models/mongo-models/detailled-statistic-v2');
+import { Client, Room } from 'colyseus';
+import {Dispatcher} from '@colyseus/command';
+import GameState from './states/game-state';
+import Player from '../models/colyseus-models/player';
+import UserMetadata, { IUserMetadata } from '../models/mongo-models/user-metadata';
+import BOT from '../models/mongo-models/bot-v2';
+import {OnShopCommand, OnItemCommand, OnSellDropCommand, OnRefreshCommand, OnLockCommand, OnLevelUpCommand, OnUpdateCommand, OnDragDropCommand, OnJoinCommand, OnLeaveCommand} from './commands/game-commands';
+import {XP_PLACE, XP_TABLE, PKM, BASIC_ITEM, ITEM, TYPE} from '../models/enum';
+import PokemonFactory from '../models/pokemon-factory';
+import EloRank from 'elo-rank';
+import admin from 'firebase-admin';
+import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2';
+import { Pokemon } from '../models/colyseus-models/pokemon';
 
-
-class GameRoom extends colyseus.Room {
+export default class GameRoom extends Room {
+  dispatcher: Dispatcher<this>;
+  eloEngine: EloRank;
   constructor() {
     super();
     this.dispatcher = new Dispatcher(this);
   }
 
   // When room is initialized
-  onCreate(options) {
+  onCreate(options: any) {
     console.log(`create game room`);
     this.setState(new GameState());
     this.maxClients = 8;
@@ -37,7 +39,7 @@ class GameRoom extends colyseus.Room {
     this.onMessage('shop', (client, message) => {
       if (!this.state.gameFinished) {
         try {
-          this.dispatcher.dispatch(new Commands.OnShopCommand(), {
+          this.dispatcher.dispatch(new OnShopCommand(), {
             id: client.auth.uid,
             index: message.id
           });
@@ -50,7 +52,7 @@ class GameRoom extends colyseus.Room {
     this.onMessage('item', (client, message) => {
       if (!this.state.gameFinished) {
         try {
-          this.dispatcher.dispatch(new Commands.OnItemCommand(), {
+          this.dispatcher.dispatch(new OnItemCommand(), {
             playerId: client.auth.uid,
             id: message.id
           });
@@ -63,7 +65,7 @@ class GameRoom extends colyseus.Room {
     this.onMessage('dragDrop', (client, message) => {
       if (!this.state.gameFinished) {
         try {
-          this.dispatcher.dispatch(new Commands.OnDragDropCommand(), {
+          this.dispatcher.dispatch(new OnDragDropCommand(), {
             client: client,
             detail: message.detail
           });
@@ -81,7 +83,7 @@ class GameRoom extends colyseus.Room {
     this.onMessage('sellDrop', (client, message) => {
       if (!this.state.gameFinished) {
         try {
-          this.dispatcher.dispatch(new Commands.OnSellDropCommand(), {
+          this.dispatcher.dispatch(new OnSellDropCommand(), {
             client,
             detail: message.detail
           });
@@ -98,7 +100,7 @@ class GameRoom extends colyseus.Room {
     this.onMessage('refresh', (client, message) => {
       if (!this.state.gameFinished) {
         try {
-          this.dispatcher.dispatch(new Commands.OnRefreshCommand(), client.auth.uid);
+          this.dispatcher.dispatch(new OnRefreshCommand(), client.auth.uid);
         } catch (error) {
           console.log('refresh error', message);
         }
@@ -108,7 +110,7 @@ class GameRoom extends colyseus.Room {
     this.onMessage('lock', (client, message) => {
       if (!this.state.gameFinished) {
         try {
-          this.dispatcher.dispatch(new Commands.OnLockCommand(), client.auth.uid);
+          this.dispatcher.dispatch(new OnLockCommand(), client.auth.uid);
         } catch (error) {
           console.log('lock error', message);
         }
@@ -118,7 +120,7 @@ class GameRoom extends colyseus.Room {
     this.onMessage('levelUp', (client, message) => {
       if (!this.state.gameFinished) {
         try {
-          this.dispatcher.dispatch(new Commands.OnLevelUpCommand(), client.auth.uid);
+          this.dispatcher.dispatch(new OnLevelUpCommand(), client.auth.uid);
         } catch (error) {
           console.log('level up error', message);
         }
@@ -129,10 +131,10 @@ class GameRoom extends colyseus.Room {
       this.state.afterGameId = message.id;
     });
 
-    this.setSimulationInterval((deltaTime) =>{
+    this.setSimulationInterval((deltaTime: number) =>{
       if (!this.state.gameFinished) {
         try {
-          this.dispatcher.dispatch(new Commands.OnUpdateCommand(), deltaTime);
+          this.dispatcher.dispatch(new OnUpdateCommand(), {deltaTime});
         } catch (error) {
           console.log('update error', error);
         }
@@ -140,17 +142,17 @@ class GameRoom extends colyseus.Room {
     });
   }
 
-  async onAuth(client, options, request) {
+  async onAuth(client: Client, options: any, request: any) {
     const token = await admin.auth().verifyIdToken(options.idToken);
     const user = await admin.auth().getUser(token.uid);
     return user;
   }
 
-  onJoin(client, options, auth) {
-    this.dispatcher.dispatch(new Commands.OnJoinCommand(), {client, options, auth});
+  onJoin(client: Client, options: any, auth: any) {
+    this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
   }
 
-  async onLeave(client, consented) {
+  async onLeave(client: Client, consented: boolean) {
     try {
       if (client && client.auth && client.auth.displayName) {
         console.log(`${client.auth.displayName} is leaving`);
@@ -164,7 +166,7 @@ class GameRoom extends colyseus.Room {
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         console.log(`${client.auth.displayName} leave game room`);
-        this.dispatcher.dispatch(new Commands.OnLeaveCommand(), {client, consented});
+        this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
       }
     }
   }
@@ -200,7 +202,7 @@ class GameRoom extends colyseus.Room {
             rank = rankOfLastPlayerAlive;
           }
 
-          UserMetadata.findOne({uid: player.id}, (err, usr)=> {
+          UserMetadata.findOne({uid: player.id}, (err: any, usr: any)=> {
             if (err) {
               console.log(err);
             } else {
@@ -224,7 +226,7 @@ class GameRoom extends colyseus.Room {
                   usr.elo = elo;
                 }
                 console.log(usr);
-                // usr.markModified('metadata');
+                // usr.markModified('metadata';
                 usr.save();
 
                 DetailledStatistic.create({
@@ -245,7 +247,7 @@ class GameRoom extends colyseus.Room {
     this.dispatcher.stop();
   }
 
-  transformToSimplePlayer(player) {
+  transformToSimplePlayer(player: Player) {
     const simplePlayer = {
       name: player.name,
       id: player.id,
@@ -256,7 +258,7 @@ class GameRoom extends colyseus.Room {
       elo: player.elo
     };
 
-    player.board.forEach((pokemon) => {
+    player.board.forEach((pokemon: Pokemon) => {
       if (pokemon.positionY != 0) {
         const s = {
           name: pokemon.name,
@@ -271,7 +273,7 @@ class GameRoom extends colyseus.Room {
     return simplePlayer;
   }
 
-  computeElo(player, rank, elo) {
+  computeElo(player: Player, rank: number, elo: number) {
     const eloGains = [];
     let meanGain = 0;
     this.state.players.forEach((plyr) =>{
@@ -297,7 +299,7 @@ class GameRoom extends colyseus.Room {
     return meanGain;
   }
 
-  computeRandomOpponent(playerId) {
+  computeRandomOpponent(playerId: string) {
     const player = this.state.players.get(playerId);
     this.checkOpponents(playerId);
     if (player.opponents.length == 0) {
@@ -313,10 +315,10 @@ class GameRoom extends colyseus.Room {
     }
   }
 
-  checkOpponents(playerId) {
+  checkOpponents(playerId: string) {
     const player = this.state.players.get(playerId);
     const indexToDelete = [];
-    player.opponents.forEach((p, i) =>{
+    player.opponents.forEach((p: string, i: number) =>{
       if (!this.state.players.get(p).alive) {
         indexToDelete.push(i);
       }
@@ -326,7 +328,7 @@ class GameRoom extends colyseus.Room {
     });
   }
 
-  fillOpponents(playerId) {
+  fillOpponents(playerId: string) {
     const player = this.state.players.get(playerId);
     this.state.players.forEach((plyr, key) =>{
       if (plyr.alive && player.id != plyr.id) {
@@ -570,5 +572,3 @@ class GameRoom extends colyseus.Room {
     return size;
   }
 }
-
-module.exports = GameRoom;

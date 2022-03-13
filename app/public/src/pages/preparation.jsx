@@ -6,31 +6,24 @@ import { Navigate, Link } from 'react-router-dom';
 import { Client } from 'colyseus.js';
 import { FIREBASE_CONFIG } from './utils/utils';
 
-interface PreparationState{
-    messages: any[],
-    users: any
-    user:any,
-    currentText: string,
-    gameId: string,
-    isSignedIn: boolean,
-    toLobby: boolean,
-    connected: boolean,
-    ownerId:string,
-    ownerName:string
-}
-
-class Preparation extends Component<{},PreparationState> {
-    client: Client;
-    uid: string;
-    id: string;
-    sessionId: string;
-    room: any;
+class Preparation extends Component {
 
     constructor(props){
         super(props);
-        
-        const endpoint = `${window.location.protocol.replace('http', 'ws')}//${window.location.host}`;
-        this.client = new Client(endpoint);
+        this.client = new Client(window.endpoint);
+
+        this.state = {
+            messages: [],
+            users: {},
+            user:{},
+            currentText: '',
+            gameId: '',
+            isSignedIn: false,
+            toLobby: false,
+            connected: false,
+            ownerId:'',
+            ownerName:''
+        };
 
         // Initialize Firebase
         if (!firebase.apps.length) {

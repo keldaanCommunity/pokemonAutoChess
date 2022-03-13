@@ -5,8 +5,6 @@ import Synergies from './synergies';
 import {Effects} from '../effects';
 import BattleResult from './battle-result';
 import ExperienceManager from './experience-manager';
-import {BATTLE_RESULT} from '../enum';
-
 export default class Player extends Schema {
   @type('string') id: string;
   @type('string') name: string;
@@ -32,12 +30,12 @@ export default class Player extends Schema {
   @type('boolean') alive = true;
   @type('string') tileset: string;
   @type([BattleResult]) history = new ArraySchema<BattleResult>();
-  effects = new Effects();
+  effects: Effects = new Effects();
   isBot: boolean;
   opponents: string[];
 
 
-  constructor(id: string, name: string, elo: number, avatar: string, isBot: boolean, rank: number, tileset: string) {
+  constructor(id: string, name: string, elo: number, avatar: string, isBot: boolean, rank: number) {
     super();
     this.id = id;
     this.name = name;
@@ -45,7 +43,6 @@ export default class Player extends Schema {
     this.avatar = avatar;
     this.isBot = isBot;
     this.rank = rank;
-    this.tileset = tileset;
   }
 
   getCurrentBattleResult() {

@@ -29,9 +29,12 @@ const gameServer = new Server({
   })
 });
 
+const viewsSrc = __dirname.includes('server') ? path.join(__dirname, '..', '..', '..', 'views', 'index.html') : path.join(__dirname, 'views', 'index.html');
+const clientSrc = __dirname.includes('server') ? path.join(__dirname, '..', 'client') : path.join(__dirname,  'public', 'dist', 'client');
+
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public', 'dist')));
+app.use(express.static(clientSrc));
 
 // set up rate limiter: maximum of five requests per minute
 import rateLimit from 'express-rate-limit';
@@ -47,27 +50,27 @@ const limiter = rateLimit({
 app.use(limiter);
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  res.sendFile(viewsSrc);
 });
 
 app.get('/auth', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  res.sendFile(viewsSrc);
 });
 
 app.get('/lobby', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  res.sendFile(viewsSrc);
 });
 
 app.get('/preparation', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  res.sendFile(viewsSrc);
 });
 
 app.get('/game', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  res.sendFile(viewsSrc);
 });
 
 app.get('/after', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  res.sendFile(viewsSrc);
 });
 
 const basicAuthMiddleware = basicAuth({
@@ -82,12 +85,12 @@ app.use('/colyseus', basicAuthMiddleware, monitor());
 
 // Room
 import AfterGameRoom from './rooms/after-game-room';
-import LobbyRoom from './rooms/custom-lobby-room';
+import CustomLobbyRoom from './rooms/custom-lobby-room';
 import PreprationRoom from './rooms/preparation-room';
 import GameRoom from './rooms/game-room';
 
 gameServer.define('after-game', AfterGameRoom);
-gameServer.define('lobby', LobbyRoom);
+gameServer.define('lobby', CustomLobbyRoom);
 gameServer.define('room', PreprationRoom).enableRealtimeListing();
 gameServer.define('game', GameRoom);
 

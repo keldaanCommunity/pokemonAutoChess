@@ -1,32 +1,33 @@
-const colyseus = require('colyseus');
-const LobbyState = require('./states/lobby-state');
-const Mongoose = require('mongoose');
-const Chat = require('../models/mongo-models/chat');
-const UserMetadata = require('../models/mongo-models/user-metadata');
-const LeaderboardInfo = require('../models/colyseus-models/leaderboard-info');
-const schema = require('@colyseus/schema');
-const LobbyUser = require('../models/colyseus-models/lobby-user');
-const admin = require('firebase-admin');
-const GameRecord = require('../models/colyseus-models/game-record');
-const {MessageEmbed, WebhookClient} = require('discord.js');
-const PasteBinAPI = require('pastebin-ts');
-const DetailledStatistic = require('../models/mongo-models/detailled-statistic-v2');
-const BotV2 = require('../models/mongo-models/bot-v2');
-const Meta = require('../models/mongo-models/meta');
-const ItemsStatistic = require('../models/mongo-models/items-statistic');
+import { Client, LobbyRoom } from "colyseus";
+import LobbyState from './states/lobby-state';
+import {connect} from 'mongoose';
+import Chat from '../models/mongo-models/chat';
+import UserMetadata, { IUserMetadata } from '../models/mongo-models/user-metadata';
+import LeaderboardInfo from '../models/colyseus-models/leaderboard-info';
+import {ArraySchema} from '@colyseus/schema';
+import LobbyUser from '../models/colyseus-models/lobby-user';
+import admin from 'firebase-admin';
+import {GameRecord} from '../models/colyseus-models/game-record';
+import {MessageEmbed, WebhookClient} from 'discord.js';
+import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2';
+import BotV2, { IBot } from '../models/mongo-models/bot-v2';
+import Meta, { IMeta } from '../models/mongo-models/meta';
+import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
+import { PastebinAPI } from 'pastebin-ts/dist/api';
 
-const pastebin = new PasteBinAPI({
+const pastebin = new PastebinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
   'api_user_name': process.env.PASTEBIN_API_USERNAME,
   'api_user_password': process.env.PASTEBIN_API_PASSWORD
 });
 
-class CustomLobbyRoom extends colyseus.LobbyRoom {
-  constructor() {
-    super();
-  }
+export default class CustomLobbyRoom extends LobbyRoom {
+  discordWebhook: WebhookClient;
+  bots: Map<string, IBot>;
+  meta: IMeta[];
+  metaItems: IItemsStatistic[];
 
-  onCreate(options) {
+  onCreate(options: any): Promise<void>{
     console.log(`create lobby`);
     const self = this;
     super.onCreate(options);
@@ -36,54 +37,6 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     this.metaItems = [];
     this.setState(new LobbyState());
     this.autoDispose = false;
-
-    Mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
-      Chat.find({'time': {$gt: Date.now() - 86400000}}, (err, messages)=> {
-        if (err) {
-          console.log(err);
-        } else {
-          messages.forEach((message) => {
-            self.state.addMessage(message.name, message.payload, message.avatar, message.time, false);
-          });
-        }
-      });
-      UserMetadata.find({}, ['displayName', 'avatar', 'elo'], {limit: 30, sort: {'elo': -1}}, (err, users)=>{
-        if (err) {
-          console.log(err);
-        } else {
-          for (let i = 0; i < users.length; i++) {
-            const user = users[i];
-            self.state.leaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.elo));
-          }
-        }
-      });
-      BotV2.find({}, {_id: 0}, {sort: {elo: -1}}, (err, bots)=>{
-        bots.forEach((bot, i)=>{
-          self.bots[bot.avatar] = bot;
-          // console.log(bot.avatar, bot.elo);
-          self.state.botLeaderboard.push(new LeaderboardInfo(bot.avatar, bot.avatar, i + 1, bot.elo));
-        });
-      });
-      Meta.find({}, (err, docs) => {
-        if (err) {
-          console.log(err);
-        } else {
-          docs.forEach((doc)=>{
-            this.meta.push(doc);
-          });
-        }
-      });
-      ItemsStatistic.find({}, (err, docs) =>{
-        if (err) {
-          console.log(err);
-        } else {
-          docs.forEach((doc)=>{
-            this.metaItems.push(doc);
-          });
-        }
-      });
-    });
-
 
     this.onMessage('new-message', (client, message) => {
       if (message.payload != '') {
@@ -95,7 +48,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
       try {
         const bot = message.bot;
         const user = this.state.users.get(client.auth.uid);
-        pastebin.createPaste({text: JSON.stringify(bot), title: `${user.name} has uploaded BOT ${bot.avatar}`, format: 'json'}).then((data) => {
+        pastebin.createPaste({text: JSON.stringify(bot), title: `${user.name} has uploaded BOT ${bot.avatar}`, format: 'json'}).then((data: any) => {
           const dsEmbed = new MessageEmbed()
               .setTitle(`BOT ${bot.avatar} created by ${bot.author}`)
               .setURL(data)
@@ -177,30 +130,23 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     });
 
     this.onMessage('search', (client, message)=>{
-      UserMetadata.findOne({'displayName': message.name}, (err, user)=>{
+      UserMetadata.findOne({'displayName': message.name}, (err: any, user: IUserMetadata)=>{
         if (user) {
           DetailledStatistic.find({'playerId': user.uid}, ['pokemons', 'time', 'rank', 'elo'], {limit: 10, sort: {'time': -1}}, (err, stats)=>{
             if (err) {
               console.log(err);
             } else {
-              const records = new schema.ArraySchema();
-              stats.forEach((record) =>{
-                records.push(new GameRecord(record.time, record.rank, record.elo, record.pokemons));
-              });
-
               client.send('user', new LobbyUser(
                   user.uid,
                   user.displayName,
                   user.elo,
                   user.avatar,
-                  user.map,
                   user.langage,
                   user.wins,
                   user.exp,
                   user.level,
-                  user.mapWin,
                   user.donor,
-                  records,
+                  stats.map(r=>{return new GameRecord(r.time, r.rank, r.elo, r.pokemons)}),
                   user.honors));
             }
           });
@@ -211,7 +157,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     });
 
     this.onMessage('avatar', (client, message) => {
-      UserMetadata.findOne({'uid': client.auth.uid}, (err, user)=>{
+      UserMetadata.findOne({'uid': client.auth.uid}, (err: any, user: any)=>{
         if (user) {
           const pokemon = message.pokemon;
           const lvl = user.level;
@@ -613,26 +559,76 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
         }
       });
     });
+
+    return new Promise(async (resolve, reject) => {
+      connect(process.env.MONGO_URI, {}, () => {
+        Chat.find({ 'time': { $gt: Date.now() - 86400000 } }, (err, messages) => {
+          if (err) {
+            console.log(err);
+          } else {
+            messages.forEach((message) => {
+              self.state.addMessage(message.name, message.payload, message.avatar, message.time, false);
+            });
+          }
+        });
+        UserMetadata.find({}, ['displayName', 'avatar', 'elo'], { limit: 30, sort: { 'elo': -1 } }, (err, users) => {
+          if (err) {
+            console.log(err);
+          } else {
+            for (let i = 0; i < users.length; i++) {
+              const user = users[i];
+              self.state.leaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.elo));
+            }
+          }
+        });
+        BotV2.find({}, { _id: 0 }, { sort: { elo: -1 } }, (_err, bots) => {
+          bots.forEach((bot, i) => {
+            self.bots[bot.avatar] = bot;
+            // console.log(bot.avatar, bot.elo);
+            self.state.botLeaderboard.push(new LeaderboardInfo(bot.avatar, bot.avatar, i + 1, bot.elo));
+          });
+        });
+        Meta.find({}, (err, docs) => {
+          if (err) {
+            console.log(err);
+          } else {
+            docs.forEach((doc) => {
+              this.meta.push(doc);
+            });
+          }
+        });
+        ItemsStatistic.find({}, (err, docs) => {
+          if (err) {
+            console.log(err);
+          } else {
+            docs.forEach((doc) => {
+              this.metaItems.push(doc);
+            });
+          }
+        });
+      });
+      resolve();
+    });
   }
 
-  async onAuth(client, options, request) {
+  async onAuth(client :Client, options: any, request: any) {
     super.onAuth(client, options, request);
     const token = await admin.auth().verifyIdToken(options.idToken);
     const user = await admin.auth().getUser(token.uid);
     return user;
   }
 
-  onJoin(client, options, auth) {
-    super.onJoin(client, options, auth);
+  onJoin(client: Client, options: any) {
+    super.onJoin(client, options);
     // console.log(auth);
     // client.send('bot-data', this.bots);
-    UserMetadata.findOne({'uid': client.auth.uid}, (err, user)=>{
+    UserMetadata.findOne({'uid': client.auth.uid}, (err: any, user: IUserMetadata)=>{
       if (user) {
         DetailledStatistic.find({'playerId': client.auth.uid}, ['pokemons', 'time', 'rank', 'elo'], {limit: 10, sort: {'time': -1}}, (err, stats)=>{
           if (err) {
             console.log(err);
           } else {
-            const records = new schema.ArraySchema();
+            const records = new ArraySchema<GameRecord>();
             stats.forEach((record) =>{
               records.push(new GameRecord(record.time, record.rank, record.elo, record.pokemons));
             });
@@ -642,12 +638,10 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
                 user.displayName,
                 user.elo,
                 user.avatar,
-                user.map,
                 user.langage,
                 user.wins,
                 user.exp,
                 user.level,
-                user.mapWin,
                 user.donor,
                 records,
                 user.honors));
@@ -663,26 +657,10 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
             client.auth.displayName,
             1000,
             'rattata',
-            {
-              FIRE: 'FIRE0',
-              ICE: 'ICE0',
-              GROUND: 'GROUND0',
-              NORMAL: 'NORMAL0',
-              GRASS: 'GRASS0',
-              WATER: 'WATER0'
-            },
             'eng',
             0,
             0,
             0,
-            {
-              FIRE: 0,
-              ICE: 0,
-              GROUND: 0,
-              NORMAL: 0,
-              GRASS: 0,
-              WATER: 0
-            },
             false,
             [],
             []
@@ -691,7 +669,7 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     });
   }
 
-  onLeave(client) {
+  onLeave(client :Client) {
     try {
       super.onLeave(client);
       if (client && client.auth && client.auth.displayName) {
@@ -712,5 +690,3 @@ class CustomLobbyRoom extends colyseus.LobbyRoom {
     }
   }
 }
-
-module.exports = CustomLobbyRoom;

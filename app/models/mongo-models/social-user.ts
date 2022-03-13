@@ -1,6 +1,6 @@
 import {Schema, model} from 'mongoose';
 
-export interface SocialUser {
+export interface ISocialUser {
   payload: string;
   name: string;
   avatar: string;
@@ -24,4 +24,4 @@ const socialUserSchema = new Schema(
     }
 );
 
-export default model<SocialUser>('SocialUser', socialUserSchema);
+export default model<ISocialUser>('SocialUser', socialUserSchema);

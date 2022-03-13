@@ -3,7 +3,7 @@ import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
-import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS} from '../../../../models/enum.js';
+import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS} from '../../../../models/enum';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 
 export default class Pokemon extends Button {

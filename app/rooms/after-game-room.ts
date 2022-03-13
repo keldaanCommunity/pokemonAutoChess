@@ -1,28 +1,29 @@
-const colyseus = require('colyseus');
-const SimplePlayer = require('../models/colyseus-models/simple-player');
-const {Dispatcher} = require('@colyseus/command');
-const AfterGameState = require('./states/after-game-state');
-const admin = require('firebase-admin');
-const {
+import {Client, Room} from 'colyseus';
+import SimplePlayer from '../models/colyseus-models/simple-player';
+import {Dispatcher} from '@colyseus/command';
+import AfterGameState from './states/after-game-state';
+import admin from'firebase-admin';
+import {
   OnJoinCommand,
   OnLeaveCommand,
   OnMessageCommand
-} = require('./commands/preparation-commands');
+} from './commands/preparation-commands';
 
-class AfterGameRoom extends colyseus.Room {
+export default class AfterGameRoom extends Room {
+  dispatcher: Dispatcher<this>;
   constructor() {
     super();
     this.dispatcher = new Dispatcher(this);
   }
 
-  onCreate(options) {
+  onCreate(options: any) {
     console.log(`create after game`);
     this.setState(new AfterGameState());
     this.maxClients = 8;
     // console.log('before', this.state.players);
     if (options.players) {
-      options.players.forEach((plyr) => {
-        const player = new SimplePlayer(plyr.id, plyr.name, plyr.avatar, plyr.rank, plyr.pokemons, plyr.exp, plyr.alive);
+      options.players.forEach((plyr: SimplePlayer) => {
+        const player = new SimplePlayer(plyr.id, plyr.name, plyr.avatar, plyr.rank, plyr.pokemons, plyr.exp);
         this.state.players.set(player.id, player);
       });
     }
@@ -32,21 +33,21 @@ class AfterGameRoom extends colyseus.Room {
     });
   }
 
-  async onAuth(client, options, request) {
+  async onAuth(client: Client, options: any, request: any) {
     const token = await admin.auth().verifyIdToken(options.idToken);
     const user = await admin.auth().getUser(token.uid);
     return user;
   }
 
-  onJoin(client, options, auth) {
+  onJoin(client: Client, options: any, auth: any) {
     console.log(`${client.auth.email} join after game`);
     if (options.players) {
-      this.state.players.forEach((value, key)=> {
+      this.state.players.forEach((value: SimplePlayer, key: string)=> {
         this.state.players.delete(key);
       });
 
-      options.players.forEach((plyr) => {
-        const player = new SimplePlayer(plyr.id, plyr.name, plyr.avatar, plyr.rank, plyr.pokemons, plyr.exp, plyr.alive);
+      options.players.forEach((plyr: SimplePlayer) => {
+        const player = new SimplePlayer(plyr.id, plyr.name, plyr.avatar, plyr.rank, plyr.pokemons, plyr.exp);
         const pokemons = [];
         player.pokemons.forEach((pkm) =>{
           pokemons.push(pkm);
@@ -57,7 +58,7 @@ class AfterGameRoom extends colyseus.Room {
     this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
   }
 
-  async onLeave(client, consented) {
+  async onLeave(client: Client, consented: boolean) {
     try {
       if (consented) {
         throw new Error('consented leave');

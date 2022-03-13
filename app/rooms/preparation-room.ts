@@ -1,8 +1,8 @@
-const colyseus = require('colyseus');
-const {Dispatcher} = require('@colyseus/command');
-const PreparationState = require('./states/preparation-state');
-const admin = require('firebase-admin');
-const {
+import {Client, Room} from 'colyseus';
+import {Dispatcher} from '@colyseus/command';
+import PreparationState from './states/preparation-state';
+import admin from 'firebase-admin';
+import {
   OnGameStartCommand,
   OnJoinCommand,
   OnLeaveCommand,
@@ -11,16 +11,19 @@ const {
   OnAddBotCommand,
   OnRemoveBotCommand,
   InitializeBotsCommand
-} = require('./commands/preparation-commands');
+} from './commands/preparation-commands';
 
-class PreparationRoom extends colyseus.Room {
+export default class PreparationRoom extends Room {
+  dispatcher: Dispatcher<this>;
+  elos: Map<any, any>;
+
   constructor() {
     super();
     this.dispatcher = new Dispatcher(this);
     this.elos = new Map();
   }
 
-  onCreate(options) {
+  onCreate(options: any) {
     console.log('create preparation room');
     // console.log(options);
     const self = this;
@@ -30,15 +33,16 @@ class PreparationRoom extends colyseus.Room {
     self.dispatcher.dispatch(new InitializeBotsCommand(), options.ownerId);
 
     this.onMessage('game-start', (client, message) => {
+      console.log(message);
       try {
         this.dispatcher.dispatch(new OnGameStartCommand(), {client, message});
       } catch (error) {
         console.log(error);
       }
     });
-    this.onMessage('toggle-ready', (client, message) => {
+    this.onMessage('toggle-ready', (c, message) => {
       try {
-        this.dispatcher.dispatch(new OnToggleReadyCommand(), client);
+        this.dispatcher.dispatch(new OnToggleReadyCommand(), {client: c});
       } catch (error) {
         console.log(error);
       }
@@ -50,36 +54,36 @@ class PreparationRoom extends colyseus.Room {
         console.log(error);
       }
     });
-    this.onMessage('addBot', (client, difficulty) => {
+    this.onMessage('addBot', (client: Client, d: string) => {
       try {
-        this.dispatcher.dispatch(new OnAddBotCommand(), {difficulty: difficulty});
+        this.dispatcher.dispatch(new OnAddBotCommand(), {difficulty: d});
       } catch (error) {
         console.log(error);
       }
     });
-    this.onMessage('removeBot', (client, target) => {
+    this.onMessage('removeBot', (client: Client, t: string) => {
       try {
-        this.dispatcher.dispatch(new OnRemoveBotCommand(), {target: target});
+        this.dispatcher.dispatch(new OnRemoveBotCommand(), {target: t});
       } catch (error) {
         console.log(error);
       }
     });
   }
 
-  async onAuth(client, options, request) {
+  async onAuth(client: Client, options: any, request: any) {
     const token = await admin.auth().verifyIdToken(options.idToken);
     const user = await admin.auth().getUser(token.uid);
     return user;
   }
 
-  onJoin(client, options, auth) {
+  onJoin(client: Client, options: any, auth: any) {
     if (client && client.auth && client.auth.displayName) {
       console.log(`${client.auth.displayName} ${client.id} join game room`);
       this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
     }
   }
 
-  async onLeave(client, consented) {
+  async onLeave(client: Client, consented: boolean) {
     if (client && client.auth && client.auth.displayName) {
       console.log(`${client.auth.displayName} ${client.id} is leaving preparation room`);
     }
@@ -103,5 +107,3 @@ class PreparationRoom extends colyseus.Room {
     this.dispatcher.stop();
   }
 }
-
-module.exports = PreparationRoom;

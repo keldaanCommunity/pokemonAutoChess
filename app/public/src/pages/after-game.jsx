@@ -1,28 +1,20 @@
 import React, { Component } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import AfterMenu  from './component/after-menu';
 import { Client } from 'colyseus.js';
 import { FIREBASE_CONFIG } from './utils/utils';
 
-
-interface AfterGameState {
-    players: any,
-    isSignedIn: boolean,
-    toLobby: boolean
-}
-
-class AfterGame extends Component<{},AfterGameState> {
-    client: Client;
-    uid: string;
-    id: string;
-    sessionId: string;
-    room: any;
+class AfterGame extends Component {
 
     constructor(props){
         super(props);
-        const endpoint = `${window.location.protocol.replace('http', 'ws')}//${window.location.host}`;
-        this.client = new Client(endpoint);
+        this.client = new Client(window.endpoint);
+
+        this.state = {
+            players:{},
+            isSignedIn: false
+        };
 
         // Initialize Firebase
         if (!firebase.apps.length) {

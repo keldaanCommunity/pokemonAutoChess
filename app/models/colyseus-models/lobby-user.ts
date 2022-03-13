@@ -23,14 +23,12 @@ export default class LobbyUser extends Schema {
     name: string,
     elo: number,
     avatar: string,
-     map:any,
     langage:string,
     wins:number,
     exp: number,
     level: number,
-    mapWin: any,
     donor: boolean,
-    history: ArraySchema<GameRecord>,
+    history: GameRecord[],
     honors: string[]) {
 
     super();
@@ -43,7 +41,12 @@ export default class LobbyUser extends Schema {
     this.exp = exp;
     this.level = level;
     this.donor = donor;
-    this.history = history;
+
+    if(history && history.length && history.length != 0) {
+      history.forEach((h)=>{
+        this.history.push(h);
+      });
+    }
 
     if (honors && honors.length && honors.length != 0) {
       honors.forEach((h) => {

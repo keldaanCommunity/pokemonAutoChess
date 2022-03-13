@@ -5,13 +5,13 @@ const webpack = require('webpack');
 const configDev = {
   mode: 'development',
 
-  entry: path.resolve(__dirname, 'app', 'public', 'src', 'index.tsx'),
+  entry: path.resolve(__dirname, 'app', 'public', 'src', 'index.jsx'),
   watchOptions: {
     aggregateTimeout: 1500,
     poll: 1000
   },
   output: {
-    path: path.join(__dirname, 'app', 'public', 'dist'),
+    path: path.join(__dirname, 'app', 'public', 'dist', 'client'),
     filename: 'index.js'
   },
   module: {
@@ -37,7 +37,7 @@ const configDev = {
     ]
   },
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.jsx']
   },
 
   plugins: [

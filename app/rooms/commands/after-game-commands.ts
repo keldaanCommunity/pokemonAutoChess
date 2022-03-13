@@ -1,7 +1,8 @@
-const Command = require('@colyseus/command').Command;
-const GameUser = require('../../models/colyseus-models/game-user');
+import {Command} from '@colyseus/command';
+import {GameUser} from '../../models/colyseus-models/game-user';
+import UserMetadata from '../../models/mongo-models/user-metadata';
 
-class OnJoinCommand extends Command {
+export class OnJoinCommand extends Command {
   execute({client, options, auth}) {
     UserMetadata.findOne({'uid': auth.uid}, (err, user)=>{
       if (user) {
@@ -10,7 +11,7 @@ class OnJoinCommand extends Command {
             user.elo,
             user.avatar,
             false,
-            ''));
+            false));
 
         this.room.broadcast('messages', {
           'name': 'Server',
@@ -23,13 +24,13 @@ class OnJoinCommand extends Command {
   }
 }
 
-class OnMessageCommand extends Command {
+export class OnMessageCommand extends Command {
   execute({client, message}) {
     this.room.broadcast('messages', message);
   }
 }
 
-class OnLeaveCommand extends Command {
+export class OnLeaveCommand extends Command {
   execute({client, consented}) {
     this.room.broadcast('messages', {
       'name': 'Server',
@@ -40,9 +41,3 @@ class OnLeaveCommand extends Command {
     this.state.users.delete(client.auth.uid);
   }
 }
-
-module.exports = {
-  OnJoinCommand: OnJoinCommand,
-  OnLeaveCommand: OnLeaveCommand,
-  OnMessageCommand: OnMessageCommand
-};

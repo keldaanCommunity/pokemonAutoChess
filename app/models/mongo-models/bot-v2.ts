@@ -1,23 +1,23 @@
 import {Schema, model} from 'mongoose';
 import {PKM, ITEM} from '../enum';
 
-export interface DetailledPokemon {
+export interface IDetailledPokemon {
   name: string;
   x:number;
   y: number;
   items: string[];
 }
 
-export interface Step {
-  board: DetailledPokemon[];
+export interface IStep {
+  board: IDetailledPokemon[];
   roundsRequired: number;
 }
 
-export interface Bot {
+export interface IBot {
   avatar: string;
   author: string;
   elo: number;
-  steps: Step[];
+  steps: IStep[];
 }
 
 const pkm = new Schema(
@@ -88,4 +88,4 @@ const bot = new Schema(
     }
 );
 
-export default model<Bot>('BotV2', bot);
+export default model<IBot>('BotV2', bot);

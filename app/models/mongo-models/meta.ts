@@ -1,6 +1,6 @@
 import {Schema, model} from 'mongoose';
 
-export interface Team {
+export interface ITeam {
   cluster_id: string;
   rank: number;
   x: number;
@@ -8,7 +8,7 @@ export interface Team {
   pokemons: any
 }
 
-export interface Meta {
+export interface IMeta {
   cluster_id: string;
   count: number;
   ratio: number;
@@ -16,7 +16,7 @@ export interface Meta {
   mean_rank: number;
   types: any;
   pokemons: any;
-  teams: Team[]  
+  teams: ITeam[]  
 }
 
 const teamSchema = new Schema(
@@ -60,4 +60,4 @@ const metaSchema = new Schema(
     }
 );
 
-export default model('Meta', metaSchema, 'meta');
+export default model<IMeta>('Meta', metaSchema, 'meta');

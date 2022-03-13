@@ -6,10 +6,10 @@ export interface Pokemon {
   items: string[];
 }
 
-export interface DetailledStatistic {
+export interface IDetailledStatistic {
   playerId: string;
   elo: number;
-  tome: number;
+  time: number;
   name: string;
   rank: number;
   avatar: string;
@@ -53,4 +53,4 @@ const statisticSchema = new Schema(
     }
 );
 
-export default model<DetailledStatistic>('DetailledStatisticV2', statisticSchema);
+export default model<IDetailledStatistic>('DetailledStatisticV2', statisticSchema);

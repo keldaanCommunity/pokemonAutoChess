@@ -1,6 +1,6 @@
 import {Schema, model} from 'mongoose';
 
-export interface Chat{
+export interface IChat{
   payload: string;
   name: string;
   avatar: string;
@@ -24,4 +24,4 @@ const chatSchema = new Schema(
     }
 );
 
-export default model<Chat>('Chat', chatSchema);
+export default model<IChat>('Chat', chatSchema);

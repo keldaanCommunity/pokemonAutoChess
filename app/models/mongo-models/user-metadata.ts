@@ -2,7 +2,7 @@ import {Schema, model} from 'mongoose';
 import MapTileset from '../colyseus-models/map-tileset';
 import WinTileset from '../colyseus-models/win-tileset';
 
-export interface UserMetadata {
+export interface IUserMetadata {
   uid: string;
   displayName: string;
   langage: string;
@@ -113,4 +113,4 @@ const userMetadataSchema = new Schema(
     }
 );
 
-export default model<UserMetadata>('UserMetadata', userMetadataSchema);
+export default model<IUserMetadata>('UserMetadata', userMetadataSchema);

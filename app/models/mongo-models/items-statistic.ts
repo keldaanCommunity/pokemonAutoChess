@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
 import {ITEM, PKM} from '../enum';
 
-export interface ItemsStatistic {
+export interface IItemsStatistic {
   rank: number;
   count: number;
   name: string;
@@ -29,4 +29,4 @@ const itemsStatistic = new Schema(
     }
 );
 
-export default model<ItemsStatistic>('ItemsStatistic', itemsStatistic, 'items-statistic');
+export default model<IItemsStatistic>('ItemsStatistic', itemsStatistic, 'items-statistic');

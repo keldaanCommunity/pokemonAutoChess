@@ -15,23 +15,12 @@ import GameRarityPercentage from './component/game-rarity-percentage';
 import GameItemsProposition from './component/game-items-proposition';
 import GameModal from './component/game-modal';
 
-interface GameState{
-  
-}
-
 class Game extends Component {
-  client: Client;
-  container: React.RefObject<unknown>;
-  uid: string;
-  id: string;
-  sessionId: string;
-  room: any;
-  gameContainer: GameContainer;
 
     constructor(props){
         super(props);
-        const endpoint = `${window.location.protocol.replace('http', 'ws')}//${window.location.host}`;
-        this.client = new Client(endpoint);
+        this.client = new Client(window.endpoint);
+        window.langage = 'eng';
         this.container = React.createRef();
 
         this.state = {
@@ -72,6 +61,8 @@ class Game extends Component {
             name:'',
             life:100,
             synergies:{
+                NORMAL: 0,
+                GRASS: 0,
                 NORMAL: 0,
                 GRASS: 0,
                 FIRE: 0,

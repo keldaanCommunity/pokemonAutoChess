@@ -10,7 +10,7 @@ export class GameUser extends Schema {
   @type('uint16') elo: number;
   @type(MapTileset) map = new MapTileset();
   
-  constructor(id: string, name: string, elo: number, avatar: string, isBot: boolean, ready: boolean, map: any) {
+  constructor(id: string, name: string, elo: number, avatar: string, isBot: boolean, ready: boolean) {
     super();
     this.id = id;
     this.name = name;
