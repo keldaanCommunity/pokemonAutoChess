@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import {SPECIAL_SKILL} from '../../../models/enum.js';
+import {SPECIAL_SKILL} from '../../../models/enum';
 
 export default class AnimationManager {
   constructor(game) {

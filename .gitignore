@@ -2,6 +2,8 @@ node_modules/
 .vscode/
 *.env
 app/public/dist/**/*.js
+app/public/dist/**/*.js.map
+app/public/dist/**/*.d.ts
 *.code-workspace
 /app/public/dist/assets/tiles/newBackground.tmx
 /app/public/dist/assets/tiles/sleepBackground.json

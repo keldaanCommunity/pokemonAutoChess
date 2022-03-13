@@ -19,15 +19,17 @@
   "contributors": [
     "ogus"
   ],
-  "main": "app/index.js",
+  "main": "dist/server/index.js",
   "scripts": {
     "reset": "rm -rf node_modules/ && rm -f app/public/js/*",
     "dev-client": "webpack --mode development --watch",
-    "dev-server": "nodemon --ignore ./app/public/src ./app/index.js",
+    "dev-server": "ts-node-dev --watch \"src/**/*\" --respawn --transpile-only ./app/index.ts",
     "dev": "npm-run-all --parallel dev-*",
     "lint": "npx eslint app/",
-    "build": "webpack --mode production",
-    "start": "node ./app/index.js",
+    "build-client": "webpack --mode production",
+    "build-server": "tsc",
+    "build": "npm-run-all --parallel build-*",
+    "start": "node ./app/public/dist/server/index.js",
     "add-bot": "node ./db-commands/populate-bot.js"
   },
   "dependencies": {
@@ -48,7 +50,6 @@
     "firebase": "^9.6.8",
     "firebase-admin": "^10.0.2",
     "firebaseui": "^6.0.1",
-    "helmet": "^5.0.2",
     "jimp": "^0.16.1",
     "mongoose": "^6.2.4",
     "nes.css": "^2.3.0",
@@ -63,18 +64,24 @@
     "react-router-dom": "^6.2.2",
     "react-tabs": "^4.0.1",
     "react-tooltip": "^4.2.21",
+    "source-map-loader": "^3.0.1",
+    "ts-loader": "^9.2.8",
     "uniqid": "^5.0.3"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@types/cors": "^2.8.12",
+    "@types/elo-rank": "^1.0.1",
+    "@types/uniqid": "^5.3.2",
     "babel-loader": "^8.1.0",
     "css-loader": "^6.7.1",
     "eslint": "^8.10.0",
     "eslint-config-google": "^0.14.0",
-    "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
     "style-loader": "^3.3.1",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.2",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2"
   }
