@@ -1,4 +1,4 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
 import path from 'path';
 import http from 'http';
 import express from 'express';
@@ -8,7 +8,7 @@ import { monitor } from '@colyseus/monitor';
 import basicAuth from 'express-basic-auth';
 import { WebSocketTransport } from '@colyseus/ws-transport';
 import admin from 'firebase-admin';
-
+dotenv.config();
 
 const port = Number(process.env.PORT) || 9000;
 
