@@ -30,7 +30,7 @@
     "build-server": "tsc",
     "build": "npm-run-all --parallel build-*",
     "start": "node ./app/public/dist/server/index.js",
-    "add-bot": "node ./db-commands/populate-bot.js"
+    "add-bot": "ts-node ./db-commands/populate-bot.ts"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
