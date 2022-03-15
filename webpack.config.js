@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const configDev = {
   mode: 'development',
 
-  entry: path.resolve(__dirname, 'app', 'public', 'src', 'index.jsx'),
+  entry: path.resolve(__dirname, 'app', 'public', 'src', 'index.tsx'),
   watchOptions: {
     aggregateTimeout: 1500,
     poll: 1000

@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import "nes.css/css/nes.min.css";
 
-
-class Home extends Component {
-  render() {
-    return (
+export default function Home() {
+  return (
     <div className="App">
       <div className="nes-container with-title is-centered" style={{height:'30%', marginLeft:'15%', marginTop:'15%', marginRight:'15%',backgroundColor: 'rgba(255, 255, 255, .6)'}}>
         <p className="title">Game</p>
@@ -16,6 +14,4 @@ class Home extends Component {
       </div>
     </div>
     );
-  }
 }
-export default Home;

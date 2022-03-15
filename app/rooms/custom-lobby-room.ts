@@ -21,7 +21,7 @@ const pastebin = new PastebinAPI({
   'api_user_password': process.env.PASTEBIN_API_PASSWORD
 });
 
-export default class CustomLobbyRoom extends LobbyRoom {
+export default class CustomLobbyRoom<LobbyState> extends LobbyRoom{
   discordWebhook: WebhookClient;
   bots: Map<string, IBot>;
   meta: IMeta[];

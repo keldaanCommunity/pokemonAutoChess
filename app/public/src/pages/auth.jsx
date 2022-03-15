@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Login from './component/login';
 import Media from './component/media';
 
-class Auth extends Component {
-  render() {
-    return (
+export default function Auth() {
+  return (
     <div className="App">
       <Login/>
       <Media/>
     </div> 
     );
-  }
 }
-export default Auth;
