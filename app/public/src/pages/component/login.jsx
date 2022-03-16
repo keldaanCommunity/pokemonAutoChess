@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom';
 import 'firebaseui/dist/firebaseui.css'
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import {logIn, logOut} from '../../stores/NetworkStore';
+import { FIREBASE_CONFIG } from '../utils/utils';
 
 export default function Login(){
   const dispatch = useAppDispatch();
-  const client = useAppSelector(state=>state.network.client);
-  const user = useAppSelector(state=>state.network.user);
+  const uid = useAppSelector(state=>state.network.uid);
+  const displayName = useAppSelector(state=>state.network.displayName);
+
   const uiConfig = {
     // Popup signin flow rather than Navigate flow.
     signInFlow: 'popup',
@@ -25,26 +27,19 @@ export default function Login(){
       signInSuccessWithAuthResult: () => false,
     },
   };
-  const firebaseConfig = {
-    apiKey: "AIzaSyCjMpYJycJTjOsXPM1CJn8olntPQhpysOI",
-    authDomain: "pokemonautochess-b18fb.firebaseapp.com",
-    projectId: "pokemonautochess-b18fb",
-    storageBucket: "pokemonautochess-b18fb.appspot.com",
-    messagingSenderId: "448759785030",
-    appId: "1:448759785030:web:bc2f21a25ab9e43a894c47"
-  };
+
   // Initialize Firebase
   if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(FIREBASE_CONFIG);
   } 
 
   useEffect(()=>{
-    firebase.auth().onAuthStateChanged(user => {
-      dispatch(logIn(user));
+    firebase.auth().onAuthStateChanged(u => {
+      dispatch(logIn(u));
     });
   });
 
-  if (!user) {
+  if (!uid) {
     return (
     <div id="play-panel" className="nes-container with-title is-centered" style={{
         backgroundColor: 'rgba(255, 255, 255, .6)',
@@ -74,7 +69,7 @@ export default function Login(){
           marginLeft:'-350px'
           }}>
           <p className="title">Authentification</p>
-          <p>Welcome {user.displayName}! You are now signed-in!</p>
+          <p>Welcome {displayName}! You are now signed-in!</p>
           <div style={{
               display:'flex',
               justifyContent:'space-evenly'
@@ -84,7 +79,7 @@ export default function Login(){
                   Join Lobby
               </button>
           </Link>
-          <button className="nes-btn is-error" onClick={() => {firebase.auth().signOut(); dispatch(logOut(user))}}>Sign-out</button>
+          <button className="nes-btn is-error" onClick={() => {firebase.auth().signOut(); dispatch(logOut(uid))}}>Sign-out</button>
           </div>
       </div>
       )

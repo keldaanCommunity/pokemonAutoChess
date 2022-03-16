@@ -16,26 +16,3 @@ export interface ICustomLobbyState {
     leaderboard : ArraySchema<LeaderboardInfo>;
     botLeaderboard : ArraySchema<LeaderboardInfo>;
 }
-
-export interface IClientLobbyState {
-    messages: any[],
-    users: any,
-    user: any,
-    searchedUser: any,
-    leaderboard: any[],
-    botLeaderboard: any[],
-    currentText: string,
-    allRooms: any[],
-    isSignedIn: boolean,
-    preparationRoomId: string,
-    tabIndex: number,
-    showWiki: boolean,
-    showBuilder: boolean,
-    pasteBinUrl: string,
-    botData: any,
-    meta: any[],
-    metaItems: any[],
-    showMeta: boolean,
-    botList: any[],
-    roomCreated: boolean
-}

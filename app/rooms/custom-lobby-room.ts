@@ -14,6 +14,7 @@ import BotV2, { IBot } from '../models/mongo-models/bot-v2';
 import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
+import { ICustomLobbyState } from "../types";
 
 const pastebin = new PastebinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
@@ -21,7 +22,7 @@ const pastebin = new PastebinAPI({
   'api_user_password': process.env.PASTEBIN_API_PASSWORD
 });
 
-export default class CustomLobbyRoom<LobbyState> extends LobbyRoom{
+export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
   discordWebhook: WebhookClient;
   bots: Map<string, IBot>;
   meta: IMeta[];

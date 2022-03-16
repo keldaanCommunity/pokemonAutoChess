@@ -2,6 +2,7 @@ import {enableMapSet} from 'immer';
 import {configureStore} from '@reduxjs/toolkit';
 import lobbyReducer from './LobbyStore';
 import networkReducer from './NetworkStore';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 enableMapSet();
 
@@ -14,13 +15,14 @@ const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore these action types
-        ignoredActions: ['network/logIn','network/logOut'],
+        ignoredActions: [],
         // Ignore these field paths in all actions
         ignoredActionPaths: [],
         // Ignore these paths in the state
-        ignoredPaths: ['network.client', 'network.user'],
+        ignoredPaths: ['network.client'],
       },
-    })
+    }),
+    enhancers: composeWithDevTools({})
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
