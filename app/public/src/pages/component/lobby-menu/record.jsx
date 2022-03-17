@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Elo from './elo';
+import Elo from '../elo';
 
 class Record extends Component{
 

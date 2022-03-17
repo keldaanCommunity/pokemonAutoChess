@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { ITEM } from '../../../../models/enum';
-import WikiItem from './wiki-item';
+import { ITEM } from '../../../../../models/enum';
+import WikiItem from '../wiki-item';
 
 class WikiItems extends Component{
 

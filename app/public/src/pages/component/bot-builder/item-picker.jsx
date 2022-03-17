@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ITEM } from '../../../../models/enum';
+import { ITEM } from '../../../../../models/enum';
 
 const itemPoolStyle = {
     display:'flex',

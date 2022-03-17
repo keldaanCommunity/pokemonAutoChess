@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Chat from './component/chat';
+import Chat from './component/chat/chat';
 import firebase from 'firebase/compat/app';
 import PreparationMenu from './component/preparation-menu';
 import { Navigate, Link } from 'react-router-dom';

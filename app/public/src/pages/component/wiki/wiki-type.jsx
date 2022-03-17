@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PRECOMPUTED_TYPE_POKEMONS_ALL, TYPE_DETAILS, TYPE_TRADUCTION } from '../../../../models/enum';
+import { PRECOMPUTED_TYPE_POKEMONS_ALL, TYPE_DETAILS, TYPE_TRADUCTION } from '../../../../../models/enum';
 
 class WikiType extends Component {
   render() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {PKM} from '../../../../models/enum';
+import {PKM} from '../../../../../models/enum';
 import ReactTooltip from 'react-tooltip';
 
 const tabStyle = {

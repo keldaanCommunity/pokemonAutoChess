@@ -1,10 +1,7 @@
-import {enableMapSet} from 'immer';
 import {configureStore} from '@reduxjs/toolkit';
 import lobbyReducer from './LobbyStore';
 import networkReducer from './NetworkStore';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
-enableMapSet();
 
 const store = configureStore({
     reducer: {
@@ -19,7 +16,7 @@ const store = configureStore({
         // Ignore these field paths in all actions
         ignoredActionPaths: [],
         // Ignore these paths in the state
-        ignoredPaths: ['network.client'],
+        ignoredPaths: ['network']
       },
     }),
     enhancers: composeWithDevTools({})

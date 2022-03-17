@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { RARITY, RARITY_COLOR } from '../../../../models/enum';
-import PokemonWiki from './pokemon-wiki';
+import { RARITY, RARITY_COLOR } from '../../../../../models/enum';
+import PokemonWiki from '../pokemon-wiki';
 
 class WikiContent extends Component{
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { PKM, ITEM } from '../../../../models/enum';
-import PokemonFactory from '../../../../models/pokemon-factory';
-import GameSynergies from './game-synergies';
+import { PKM, ITEM } from '../../../../../models/enum';
+import PokemonFactory from '../../../../../models/pokemon-factory';
+import GameSynergies from '../game-synergies';
 import SelectedEntity from './selected-entity';
-import ModalMenu from './modal-menu';
+import ModalMenu from '../modal-menu';
 import ItemPicker from './item-picker';
 import PokemonPicker from './pokemon-picker';
 import TeamEditor from './team-editor';

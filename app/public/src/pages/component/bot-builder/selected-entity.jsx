@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ITEM, PKM, RARITY_COLOR, ITEM_DESCRIPTION, ITEM_NAME } from '../../../../models/enum';
-import PokemonFactory from '../../../../models/pokemon-factory';
+import { ITEM, PKM, RARITY_COLOR, ITEM_DESCRIPTION, ITEM_NAME } from '../../../../../models/enum';
+import PokemonFactory from '../../../../../models/pokemon-factory';
 
 class SelectedEntity extends Component {
   render() {

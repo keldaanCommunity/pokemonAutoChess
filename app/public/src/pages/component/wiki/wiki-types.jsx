@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { TYPE } from '../../../../models/enum';
+import { TYPE } from '../../../../../models/enum';
 import WikiType from './wiki-type';
 
 class WikiTypes extends Component{

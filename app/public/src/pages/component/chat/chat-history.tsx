@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import Message from '../../../../models/colyseus-models/message';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import ChatMessage from './chat-message';
 import CSS from 'csstype';
+import { IMessage } from '../../../../../types';
 
 export default function ChatHistory() {
     const ulStyles: CSS.Properties = {
@@ -13,7 +13,6 @@ export default function ChatHistory() {
         maxWidth: 'inherit',
         maxHeight: 'inherit'
     };
-
     const messages = useAppSelector(state=>state.lobby.messages);
     const domRef = useRef(null);
 
@@ -26,11 +25,12 @@ export default function ChatHistory() {
     return (<div ref={domRef} style={ulStyles}>{messages.map((m,i)=>{return message(m,i)})}</div>)
 }
 
-function message(message: Message, index: number) {
+function message(message: IMessage, index: number) {
 
     const liStyles = {
         padding: '5px',
         borderBottom: '1px solid #ddd'
     };
+
     return <div key={index} style={liStyles}><ChatMessage message={message}/></div>
 }

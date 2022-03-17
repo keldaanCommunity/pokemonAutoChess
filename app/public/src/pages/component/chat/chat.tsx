@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import ChatHistory from './chat-history';
 import "nes.css/css/nes.min.css";
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { sendMessage } from '../../../stores/NetworkStore';
+import ChatHistory from './chat-history';
 
-export default function Chat(){
-  const messages = useAppSelector(state=>state.lobby.messages);
+export default function Chat() {
+  const dispatch = useAppDispatch();
   const user = useAppSelector(state=> state.lobby.user);
-  const room = useAppSelector(state=>state.network.lobby);
   const [currentText, setCurrentText] = useState<string>('');
 
   return <div className="nes-container" style={{
@@ -21,8 +21,8 @@ export default function Chat(){
     }}>
       <ChatHistory/>
       <form onSubmit={(e)=>{
-          e.preventDefault()
-          room.send('new-message', {'name': user.name, 'payload': currentText, 'avatar':user.avatar });
+          e.preventDefault();
+          dispatch(sendMessage({text: currentText, user: user}));
           setCurrentText('');
         }}
         style={{

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PRECOMPUTED_TYPE_POKEMONS_ALL } from '../../../../models/enum';
+import { PRECOMPUTED_TYPE_POKEMONS_ALL } from '../../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const pokemonPoolStyle = {
