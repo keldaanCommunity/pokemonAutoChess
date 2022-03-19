@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import Chat from './component/chat/chat';
 import CurrentUsers from './component/available-user-menu/current-users';
@@ -15,8 +15,8 @@ import Wiki from './component/wiki/wiki';
 import TeamBuilder from './component/bot-builder/team-builder';
 import MetaReport from './component/meta-report/meta-report';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { joinLobby, logIn, logOut, requestBotList, requestMeta } from '../stores/NetworkStore';
-import { addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser } from '../stores/LobbyStore';
+import { joinLobby, logIn, logOut, requestMeta, requestBotList } from '../stores/NetworkStore';
+import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser } from '../stores/LobbyStore';
 import { ICustomLobbyState } from '../../../types';
 import LobbyUser from '../../../models/colyseus-models/lobby-user';
 import { IBot } from '../../../models/mongo-models/bot-v2';
@@ -28,13 +28,11 @@ export default function Lobby(){
 
     const client: Client = useAppSelector(state=>state.network.client);
     const uid: string = useAppSelector(state=>state.network.uid);
+    const meta: IMeta[] = useAppSelector(state=>state.lobby.meta);
+    const metaItems: IItemsStatistic[] = useAppSelector(state=>state.lobby.metaItems);
+    const botList: string[] = useAppSelector(state=>state.lobby.botList);
     
     const [lobbyJoined, setLobbyJoined] = useState<boolean>(false);
-    const [pastebinUrl, setPastebinUrl] = useState<string>(undefined);
-    const [botList, setBotList] = useState<IBot[]>([]);
-    const [meta, setMeta] = useState<IMeta[]>([]);
-    const [metaItems, setMetaItems] = useState<IItemsStatistic[]>([]);
-    const [botData, setBotData] = useState<IBot>(undefined);
     const [preparationRoomId, setPreparationRoomId] = useState<string>(undefined);
     const [showWiki, toggleWiki] = useState<boolean>(false);
     const [showMeta, toggleMeta] = useState<boolean>(false);
@@ -74,11 +72,11 @@ export default function Lobby(){
                 
                 room.state.botLeaderboard.onAdd = (l) => {dispatch(pushBotLeaderboard(l))};
 
-                room.onMessage('pastebin-url', (json: { url: string; }) => {setPastebinUrl(json.url)});
+                room.onMessage('pastebin-url', (json: { url: string; }) => {dispatch(setPastebinUrl(json.url))});
 
                 room.onMessage('rooms', (rooms: RoomAvailable[]) => {rooms.forEach(room=>dispatch(addRoom(room)))});
 
-                room.onMessage('bot-list', (bots: IBot[]) => {setBotList(bots)});
+                room.onMessage('bot-list', (bots: string[]) => {dispatch(setBotList(bots))});
                 
                 room.onMessage('+', ([roomId, room]) => {if(room.name == 'room'){dispatch(addRoom(room))}});
             
@@ -86,11 +84,11 @@ export default function Lobby(){
 
                 room.onMessage('user', (user: LobbyUser) => {setSearchedUser(user)});
 
-                room.onMessage('meta', (meta: IMeta[]) => {setMeta(meta)});
+                room.onMessage('meta', (meta: IMeta[]) => {dispatch(setMeta(meta))});
 
-                room.onMessage('metaItems', (metaItems: IItemsStatistic[]) => {setMetaItems(metaItems)});
+                room.onMessage('metaItems', (metaItems: IItemsStatistic[]) => {dispatch(setMetaItems(metaItems))});
 
-                room.onMessage('bot-data', (data: IBot) => { setBotData(data)});
+                room.onMessage('bot-data', (data: IBot) => { dispatch(setBotData(data))});
 
                 dispatch(joinLobby(room));
             });
@@ -111,17 +109,12 @@ export default function Lobby(){
       if(showWiki){
         return <Wiki toggleWiki={()=>toggleWiki(!showWiki)} content='Lobby'/>;
       }
-      if(showMeta){
+      if(showMeta && meta.length > 0 && metaItems.length > 0){
           return <MetaReport toggleMeta={()=>toggleMeta(!showMeta)} meta={meta} metaItems={metaItems}/>;
       }
       if(showBuilder){
           return <TeamBuilder 
           toggleBuilder={()=>toggleBuilder(!showBuilder)}
-          //createBot={this.createBot.bind(this)}
-          pasteBinUrl={pastebinUrl}
-          botList={botList}
-          botData={botData}
-          //requestBotData={this.requestBotData.bind(this)}
           />
       }
       else{
@@ -133,12 +126,16 @@ export default function Lobby(){
                     </Link>
                     <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{toggleWiki(!showWiki)}}>Wiki</button>
                     <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{
-                        if(botList.length == 0){dispatch(requestBotList(true))}
+                        if(botList.length == 0) {
+                            dispatch(requestBotList(true));
+                        }
                         toggleBuilder(!showBuilder)
                         }}>BOT Builder</button>
                     <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{
-                        if(meta.length == 0 || metaItems.length == 0){dispatch(requestMeta(true))}
-                        toggleMeta(!showMeta)
+                        if(meta.length == 0 || metaItems.length == 0){
+                            dispatch(requestMeta(true));
+                        }
+                        toggleMeta(!showMeta);
                         }}>Meta Report</button>
                     <DiscordButton/>
                     <DonateButton/>

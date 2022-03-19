@@ -29,20 +29,22 @@ class MetaReport extends Component{
             marginTop:'10px',
             marginRight:'10px'
         }
-        // console.log(this.props.meta);
+        
+        let meta = this.props.meta.slice();
+        let metaItems = this.props.metaItems.slice();
         let sortedMeta = [];
         let sortedMetaItems = [];
         if(this.state.rankingBy == 'count' || this.state.rankingBy == 'winrate') {
-            sortedMeta = this.props.meta.sort((a,b)=>{return b[this.state.rankingBy] - a[this.state.rankingBy]});
+            sortedMeta = meta.sort((a,b)=>{return b[this.state.rankingBy] - a[this.state.rankingBy]});
         }
         else {
-            sortedMeta = this.props.meta.sort((a,b)=>{return a[this.state.rankingBy] - b[this.state.rankingBy]});
+            sortedMeta = meta.sort((a,b)=>{return a[this.state.rankingBy] - b[this.state.rankingBy]});
         }
         if(this.state.itemRankingBy == 'count'){
-            sortedMetaItems = this.props.metaItems.sort((a,b)=>{return b[this.state.itemRankingBy] - a[this.state.itemRankingBy]});
+            sortedMetaItems = metaItems.sort((a,b)=>{return b[this.state.itemRankingBy] - a[this.state.itemRankingBy]});
         }
         else{
-            sortedMetaItems = this.props.metaItems.sort((a,b)=>{return a[this.state.itemRankingBy] - b[this.state.itemRankingBy]});
+            sortedMetaItems = metaItems.sort((a,b)=>{return a[this.state.itemRankingBy] - b[this.state.itemRankingBy]});
         }
         return <div>
             <button className='nes-btn is-success' style={buttonStyle} onClick={this.props.toggleMeta}>Lobby</button>

@@ -4,6 +4,9 @@ import Message from "../../../models/colyseus-models/message";
 import LeaderboardInfo, { ILeaderboardInfo } from "../../../models/colyseus-models/leaderboard-info";
 import { RoomAvailable } from "colyseus.js";
 import { IMessage } from "../../../types";
+import { IMeta } from "../../../models/mongo-models/meta";
+import { IBot } from "../../../models/mongo-models/bot-v2";
+import { IItemsStatistic } from "../../../models/mongo-models/items-statistic";
 
 interface IUserLobbyState {
     messages: IMessage[];
@@ -14,6 +17,11 @@ interface IUserLobbyState {
     searchedUser: ILobbyUser;
     tabIndex: number;
     allRooms: RoomAvailable[];
+    botList: string[];
+    meta: IMeta[];
+    metaItems: IItemsStatistic[];
+    pastebinUrl: string;
+    botData: IBot;
 }
 
 const initialState: IUserLobbyState = {
@@ -24,7 +32,137 @@ const initialState: IUserLobbyState = {
     user: undefined,
     tabIndex: 0,
     allRooms: [],
-    searchedUser: undefined
+    searchedUser: undefined,
+    botList: [],
+    meta: [],
+    metaItems: [],
+    pastebinUrl: '',
+    botData: {
+        steps: [
+          {
+            'roundsRequired': 2,
+            'board': [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          },
+          {
+            'roundsRequired': 2,
+            'board':
+            [
+            ]
+          }
+        ],
+        avatar:'ditto',
+        author:'',
+        elo: 1200
+      }
 }
 
 export const lobbySlice = createSlice({
@@ -75,6 +213,21 @@ export const lobbySlice = createSlice({
         setSearchedUser: (state, action: PayloadAction<LobbyUser>) => {
             let u: ILobbyUser = JSON.parse(JSON.stringify(action.payload));
             state.searchedUser = u;
+        },
+        setMeta: (state, action: PayloadAction<IMeta[]>) => {
+            state.meta = action.payload;
+        },
+        setMetaItems: (state, action: PayloadAction<IItemsStatistic[]>) => {
+            state.metaItems = action.payload;
+        },
+        setBotList: (state, action: PayloadAction<string[]>) => {
+            state.botList = action.payload
+        },
+        setPastebinUrl: (state, action: PayloadAction<string>) => {
+            state.pastebinUrl = action.payload;
+        },
+        setBotData: (state, action: PayloadAction<IBot>) => {
+            state.botData = action.payload
         }
     }
 });
@@ -90,7 +243,12 @@ export const {
     setTabIndex,
     addRoom,
     removeRoom,
-    setSearchedUser
+    setSearchedUser,
+    setMeta,
+    setMetaItems,
+    setBotList,
+    setPastebinUrl,
+    setBotData
 } = lobbySlice.actions;
 
 export default lobbySlice.reducer;

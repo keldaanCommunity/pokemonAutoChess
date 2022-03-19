@@ -46,8 +46,6 @@ class ModalMenu extends Component {
     }
   
     render() {
-
-
       let url = this.props.pasteBinUrl.length == 0? null: <h5>URL created !:<a href={this.props.pasteBinUrl}>{this.props.pasteBinUrl}</a></h5>;
       if(this.props.modalMode == 'EXPORT'){
         return <Modal show={this.props.modalBoolean} onHide={this.props.hideModal} size="lg">
@@ -63,7 +61,7 @@ class ModalMenu extends Component {
         <Modal.Footer>
           <button style={buttonStyle} className='nes-btn is-error' onClick={this.props.hideModal}>Cancel</button>
           <button style={buttonStyle} className='nes-btn is-success' onClick={()=>{
-              this.props.createBot(this.props.bot);
+              this.props.createBot();
             }}>Submit your bot
           </button>
         </Modal.Footer>

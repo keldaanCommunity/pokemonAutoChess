@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Room, Client } from "colyseus.js";
 import {User} from '@firebase/auth-types';
-import LobbyUser, { ILobbyUser } from "../../../models/colyseus-models/lobby-user";
+import { ILobbyUser } from "../../../models/colyseus-models/lobby-user";
 import {ICustomLobbyState} from '../../../types';
+import {IBot} from '../../../models/mongo-models/bot-v2';
 
 interface INetwork {
     client: Client;
@@ -58,6 +59,12 @@ export const networkSlice = createSlice({
         },
         requestBotList: (state, action: PayloadAction<boolean>) => {
             state.lobby.send('bot-list-request');
+        },
+        createBot: (state, action: PayloadAction<IBot>) => {
+            state.lobby.send('bot-creation',{'bot': action.payload});
+        },
+        requestBotData: (state, action:PayloadAction<string>) => {
+            state.lobby.send('bot-data-request', action.payload);
         }
     }
 });
@@ -73,7 +80,9 @@ export const {
     changeName,
     changeAvatar,
     requestMeta,
-    requestBotList
+    requestBotList,
+    createBot,
+    requestBotData
 } = networkSlice.actions;
 
 export default networkSlice.reducer;
