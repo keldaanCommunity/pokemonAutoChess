@@ -49,7 +49,7 @@ right:'0px'
 export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   const dispatch = useAppDispatch();
   const [step, setStep] = useState<number>(0);
-  const [copyStep, setCopyStep] = useState<IStep>();
+  const [copyStep, setCopyStep] = useState<IStep>(undefined);
   const [bot, setBot] = useState<IBot>({
     steps: [
       {
@@ -253,10 +253,10 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   function writePokemon(x: number, y: number) {
     let potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y);
     if(potential >= 0) {
-      setBot(produce(draft=>draft.steps[step].board[potential].name = entity));
+      setBot(produce(draft=>{draft.steps[step].board[potential].name = entity}));
     }
     else {
-      setBot(produce(draft=>draft.steps[step].board.push({name: entity, x: x, y: y, items: []})));
+      setBot(produce(draft=>{draft.steps[step].board.push({name: entity, x: x, y: y, items: []})}));
     }
     updateSynergies(step);
   }
@@ -264,7 +264,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   function erase(x: number, y: number){
     let potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y);
     if(potential >= 0) {
-      setBot(produce(draft=>draft.steps[step].board.splice(potential, 1)));
+      setBot(produce(draft=>{draft.steps[step].board.splice(potential, 1)}));
     }
   }
 
@@ -295,7 +295,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
       Import/Load
     </button>
     <button style={buttonStyle}
-     onClick={()=>{setModalMode(MODAL_MODE.EXPORT); setModalBoolean(false)}}
+     onClick={()=>{setModalMode(MODAL_MODE.EXPORT); setModalBoolean(true)}}
      className='nes-btn is-warning'
       >
       Export
@@ -319,7 +319,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     </button>
     <button 
     style={buttonStyle}
-    onClick={()=>{setCopyStep(produce(draft=>{draft = bot.steps[step]}))}} 
+    onClick={()=>{setCopyStep(JSON.parse(JSON.stringify(bot.steps[step])))}} 
     className='nes-btn'
     data-tip
     data-for={'copy'}
@@ -336,7 +336,9 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     <button
      style={buttonStyle}
      onClick={()=>{
-       setBot(produce(draft=>{draft.steps[step] = copyStep}));
+       if(copyStep){
+        setBot(produce(draft=>{draft.steps[step] = copyStep}));
+       }
      }} 
      className='nes-btn'
      data-tip
@@ -360,7 +362,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     author={bot.author}
     handleTabClick={(i: number)=>{updateSynergies(i); setStep(i)}}
     handleEditorClick={(x,y)=>{mode == MODE.WRITE ? write(x,y): erase(x,y)}}
-    handleAuthorChange={(e)=>setBot(produce(draft=>{draft.author = e.target.value}))}
+    handleAuthorChange={(e)=>{e.preventDefault; setBot(produce(draft=>{draft.author = e.target.value}))}}
     handleAvatarChange={(e)=>setBot(produce(draft=>{draft.avatar = e.target.value}))}
     handleRoundsRequiredChange={(e)=>setBot(produce(draft=>{draft.steps[step].roundsRequired = e.target.value}))}
     />

@@ -78,10 +78,6 @@ class TeamEditor extends Component{
                 </ReactTooltip>
 
                 <div className="nes-field is-inline">
-                    <label style={labelStyle} htmlFor="inline_field">ID</label>
-                    <input onChange={this.props.handleIdChange} type="text" id="inline_field" className="nes-input" placeholder="Id" value={this.props.id}/>
-                </div>
-                <div className="nes-field is-inline">
                     <label style={labelStyle} htmlFor="default_select">Avatar</label>
                     <div style={{width:'auto'}} className="nes-select">
                     <select value={this.props.avatar} onChange={this.props.handleAvatarChange} id="default_select">
