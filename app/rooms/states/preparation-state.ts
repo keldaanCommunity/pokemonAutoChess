@@ -2,7 +2,7 @@ import {GameUser} from '../../models/colyseus-models/game-user';
 import {Schema, MapSchema, type} from '@colyseus/schema';
 
 export interface IPreparationState {
-  users: Map <string,GameUser>,
+  users: MapSchema<GameUser>,
   gameStarted: boolean,
   ownerId: string,
   ownerName: string

@@ -4,9 +4,9 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { Link } from 'react-router-dom';
 import 'firebaseui/dist/firebaseui.css'
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import {logIn, logOut} from '../../stores/NetworkStore';
-import { FIREBASE_CONFIG } from '../utils/utils';
+import { useAppSelector, useAppDispatch } from '../../../hooks';
+import {logIn, logOut} from '../../../stores/NetworkStore';
+import { FIREBASE_CONFIG } from '../../utils/utils';
 
 export default function Login(){
   const dispatch = useAppDispatch();

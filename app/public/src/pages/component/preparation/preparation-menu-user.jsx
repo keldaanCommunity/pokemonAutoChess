@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Elo from './elo';
-import InlineAvatar from './inline-avatar';
+import Elo from '../elo';
+import InlineAvatar from '../inline-avatar';
 
 class PreparationMenuUser extends Component{
     

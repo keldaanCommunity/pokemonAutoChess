@@ -170,7 +170,7 @@ export const lobbySlice = createSlice({
     initialState: initialState,
     reducers: {
         pushMessage: (state, action: PayloadAction<Message>) => {
-            let m: IMessage = JSON.parse(JSON.stringify(action.payload.toJSON()));
+            let m: IMessage = JSON.parse(JSON.stringify(action.payload));
             state.messages.push(m);
         },
         pushLeaderboard: (state, action: PayloadAction<LeaderboardInfo>) => {

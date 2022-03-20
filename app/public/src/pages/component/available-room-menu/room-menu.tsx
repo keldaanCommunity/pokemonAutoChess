@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import {ICustomLobbyState} from '../../../../../types';
 import RoomItem from './room-item';
 import { joinRoom } from '../../../stores/NetworkStore';
-import { IPreparationState } from '../../../../../rooms/states/preparation-state';
+import PreparationState from '../../../../../rooms/states/preparation-state';
 
 
 const ulStyle = {
@@ -27,16 +27,20 @@ export default function RoomMenu() {
         if(!roomCreated) {
             setRoomCreated(true);
             const token: string = await firebase.auth().currentUser.getIdToken();
-            const room: Room<IPreparationState> = await client.create('room', {idToken: token, ownerId: uid});
+            const room: Room<PreparationState> = await client.create('room', {idToken: token, ownerId: uid});
             await lobby.leave();
+            localStorage.setItem('lastRoomId', room.id);
+            localStorage.setItem('lastSessionId', room.sessionId);
             dispatch(joinRoom(room));
         }
     }
 
    async function join(id:string) {
        const token: string = await firebase.auth().currentUser.getIdToken();
-       const room: Room<IPreparationState> = await client.joinById(id, {idToken: token});
+       const room: Room<PreparationState> = await client.joinById(id, {idToken: token});
        await lobby.leave();
+       localStorage.setItem('lastRoomId', room.id);
+       localStorage.setItem('lastSessionId', room.sessionId);
        dispatch(joinRoom(room));
    }
 

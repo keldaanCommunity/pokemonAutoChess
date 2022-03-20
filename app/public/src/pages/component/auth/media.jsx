@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import CreditsButton from './credits-button';
-import DiscordButton from './discord-button';
-import DonateButton from './donate-button';
-import PolicyButton from './policy-button';
+import CreditsButton from '../credits-button';
+import DiscordButton from '../discord-button';
+import DonateButton from '../donate-button';
+import PolicyButton from '../policy-button';
 
 class Media extends Component {
   render() {

@@ -1,7 +1,15 @@
 import {Schema, type} from '@colyseus/schema';
 import MapTileset from './map-tileset';
 
-export class GameUser extends Schema {
+export interface IGameUser {
+  id: string;
+  name: string;
+  avatar: string;
+  ready: boolean;
+  isBot: boolean;
+  elo: number;
+}
+export class GameUser extends Schema implements IGameUser{
   @type('string') id: string;
   @type('string') name: string;
   @type('string') avatar: string;

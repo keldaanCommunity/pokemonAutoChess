@@ -1,6 +1,6 @@
 import React from 'react';
-import Login from './component/login';
-import Media from './component/media';
+import Login from './component/auth/login';
+import Media from './component/auth/media';
 
 export default function Auth() {
   return (

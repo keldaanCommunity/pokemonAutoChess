@@ -22,18 +22,19 @@ import LobbyUser from '../../../models/colyseus-models/lobby-user';
 import { IBot } from '../../../models/mongo-models/bot-v2';
 import { IMeta } from '../../../models/mongo-models/meta';
 import { IItemsStatistic } from '../../../models/mongo-models/items-statistic';
+import PreparationState from '../../../rooms/states/preparation-state';
 
 export default function Lobby(){
     const dispatch = useAppDispatch();
 
     const client: Client = useAppSelector(state=>state.network.client);
     const uid: string = useAppSelector(state=>state.network.uid);
+    const preparation: Room<PreparationState> = useAppSelector(state=>state.network.preparation);
     const meta: IMeta[] = useAppSelector(state=>state.lobby.meta);
     const metaItems: IItemsStatistic[] = useAppSelector(state=>state.lobby.metaItems);
     const botList: string[] = useAppSelector(state=>state.lobby.botList);
     
     const [lobbyJoined, setLobbyJoined] = useState<boolean>(false);
-    const [preparationRoomId, setPreparationRoomId] = useState<string>(undefined);
     const [showWiki, toggleWiki] = useState<boolean>(false);
     const [showMeta, toggleMeta] = useState<boolean>(false);
     const [showBuilder, toggleBuilder] = useState<boolean>(false);
@@ -103,7 +104,7 @@ export default function Lobby(){
         return <div>
         </div>;
       }
-      if(preparationRoomId){
+      if(preparation){
         return <Navigate to='/preparation'/>;
       }
       if(showWiki){

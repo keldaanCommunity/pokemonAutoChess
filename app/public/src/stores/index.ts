@@ -1,12 +1,14 @@
 import {configureStore} from '@reduxjs/toolkit';
 import lobbyReducer from './LobbyStore';
 import networkReducer from './NetworkStore';
+import preparationReducer from './PreparationStore';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = configureStore({
     reducer: {
         lobby: lobbyReducer,
-        network: networkReducer
+        network: networkReducer,
+        preparation: preparationReducer
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
