@@ -261,7 +261,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     updateSynergies(step);
   }
 
-  function erase(x: number, y: number){
+  function erase(x: number, y: number) {
     let potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y);
     if(potential >= 0) {
       setBot(produce(draft=>{draft.steps[step].board.splice(potential, 1)}));

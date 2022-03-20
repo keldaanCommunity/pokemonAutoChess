@@ -1,17 +1,44 @@
+import { Client, Room } from 'colyseus.js';
 import { RoomAvailable } from 'colyseus.js';
+import firebase from 'firebase/compat/app';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { createRoom } from '../../../stores/NetworkStore';
+import {ICustomLobbyState} from '../../../../../types';
 import RoomItem from './room-item';
+import { joinRoom } from '../../../stores/NetworkStore';
+import { IPreparationState } from '../../../../../rooms/states/preparation-state';
+
+
+const ulStyle = {
+    listStyle: 'none',
+    padding: '0px'
+};
 
 export default function RoomMenu() {
-    const ulStyle = {
-        listStyle: 'none',
-        padding: '0px'
-    };
 
+    const dispatch = useAppDispatch();
     const allRooms: RoomAvailable[] = useAppSelector(state=>state.lobby.allRooms);
-    
+    const client: Client = useAppSelector(state=>state.network.client);
+    const lobby: Room<ICustomLobbyState> = useAppSelector(state=>state.network.lobby);
+    const uid: string = useAppSelector(state=>state.network.uid);
+    const [roomCreated, setRoomCreated] = useState<boolean>(false);
+     
+    async function create() {
+        if(!roomCreated) {
+            setRoomCreated(true);
+            const token: string = await firebase.auth().currentUser.getIdToken();
+            const room: Room<IPreparationState> = await client.create('room', {idToken: token, ownerId: uid});
+            await lobby.leave();
+            dispatch(joinRoom(room));
+        }
+    }
+
+   async function join(id:string) {
+       const token: string = await firebase.auth().currentUser.getIdToken();
+       const room: Room<IPreparationState> = await client.joinById(id, {idToken: token});
+       await lobby.leave();
+       dispatch(joinRoom(room));
+   }
 
     return <div className="nes-container" style={{
         backgroundColor: 'rgba(255, 255, 255, .6)',
@@ -24,22 +51,8 @@ export default function RoomMenu() {
         <h6 style={{textAlign:'center'}}>Available Rooms:</h6>
         <h6 style={{textAlign:'center'}}>Click 'Create Room' to play</h6>
          <ul style={ulStyle}>
-             {allRooms.map(r=>createItem(r))}
+             {allRooms.map(r=><li key={r.roomId} onClick={()=>join.bind(r.roomId)}><RoomItem room={r}/></li>)}
          </ul>
         <button onClick={create} className='nes-btn is-success'>Create room</button>
     </div>;
-}
-
-function createItem(r: RoomAvailable){
-    return <li key={r.roomId}><RoomItem room={r}/></li>
-}
-
-function create() {
-    const [roomCreated, setRoomCreated] = useState<boolean>(false);
-
-    const dispatch = useAppDispatch();
-    if(!roomCreated) {
-        setRoomCreated(true);
-        dispatch(createRoom(true));
-    }
 }

@@ -202,13 +202,16 @@ export const lobbySlice = createSlice({
             state.tabIndex = action.payload;
         },
         addRoom: (state, action: PayloadAction<RoomAvailable>) => {
-            state.allRooms.push(action.payload);
+            const roomIndex = state.allRooms.findIndex((room) => room.roomId === action.payload.roomId);
+            if (roomIndex !== -1) {
+              state.allRooms[roomIndex] = action.payload;
+          
+            } else {
+              state.allRooms.push(action.payload);
+            }
         },
         removeRoom: (state, action: PayloadAction<string>) => {
-            const index = state.allRooms.findIndex(r=>r.roomId == action.payload);
-            if(index != -1){
-                state.allRooms.splice(index, 1);
-            }
+            state.allRooms = state.allRooms.filter((room) => room.roomId !== action.payload);
         },
         setSearchedUser: (state, action: PayloadAction<LobbyUser>) => {
             let u: ILobbyUser = JSON.parse(JSON.stringify(action.payload));

@@ -4,10 +4,12 @@ import {User} from '@firebase/auth-types';
 import { ILobbyUser } from "../../../models/colyseus-models/lobby-user";
 import {ICustomLobbyState} from '../../../types';
 import {IBot} from '../../../models/mongo-models/bot-v2';
+import { IPreparationState } from "../../../rooms/states/preparation-state";
 
 interface INetwork {
     client: Client;
     lobby: Room<ICustomLobbyState>;
+    preparation: Room<IPreparationState>;
     uid: string;
     displayName: string;
 }
@@ -17,6 +19,7 @@ const endpoint = `${window.location.protocol.replace('http', 'ws')}//${window.lo
 const initalState: INetwork = {
     client: new Client(endpoint),
     lobby: undefined,
+    preparation: undefined,
     uid: undefined,
     displayName: undefined,
 }
@@ -42,11 +45,11 @@ export const networkSlice = createSlice({
         searchName: (state, action: PayloadAction<string>) => {
             state.lobby.send('search', {'name':action.payload});
         },
-        createRoom: (state, action: PayloadAction<boolean>) => {
-
-        },
-        joinRoom: (state, action: PayloadAction<string>) => {
-
+        joinRoom: (state, action: PayloadAction<Room<IPreparationState>>) => {
+            state.preparation = action.payload;
+            localStorage.setItem('lastRoomId', action.payload.id);
+            localStorage.setItem('lastSessionId', action.payload.sessionId);
+            state.lobby = undefined;
         },
         changeName: (state, action: PayloadAction<string>) => {
             state.lobby.send('name', {'name': action.payload});
@@ -75,7 +78,6 @@ export const {
     joinLobby,
     sendMessage,
     searchName,
-    createRoom,
     joinRoom,
     changeName,
     changeAvatar,
