@@ -29,7 +29,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
   metaItems: IItemsStatistic[];
 
   onCreate(options: any): Promise<void>{
-    console.log(`create lobby`);
+    console.log(`create lobby`, this.roomId);
     const self = this;
     super.onCreate(options);
     this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});

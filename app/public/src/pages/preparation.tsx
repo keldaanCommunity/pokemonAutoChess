@@ -27,36 +27,31 @@ export default function Preparation() {
     const client: Client = useAppSelector(state=>state.network.client);
     const room : Room<PreparationState> = useAppSelector(state=>state.network.preparation);
     const [initialized, setInitialized] = useState<boolean>(false);
-    const [reconnectionTried, setReconnectionTried] = useState<boolean>(false);
 
     useEffect(()=>{
         const reconnect = async () => {
+            setInitialized(true);
             if(!firebase.apps.length) {
                 firebase.initializeApp(FIREBASE_CONFIG);
             }
             firebase.auth().onAuthStateChanged(async user => {
                 dispatch(logIn(user));
                 try{
-                    if(!reconnectionTried){
-                        setReconnectionTried(true);
-                        const r: Room<PreparationState> = await client.reconnect(localStorage.getItem('lastRoomId'),localStorage.getItem('lastSessionId'));
-                        dispatch(joinPreparation(r));
-                    }
+                    const r: Room<PreparationState> = await client.reconnect(localStorage.getItem('lastRoomId'),localStorage.getItem('lastSessionId'));
+                    await initialize(r);
+                    dispatch(joinPreparation(r));
                 }
-                catch(error){             
+                catch(error){
+                    console.log(error);         
                 }
             });
         }
 
-        const initialize = async () => {
-            setInitialized(true);
-            dispatch(setGameStarted(room.state.gameStarted));
-            dispatch(setOwnerId(room.state.ownerId));
-            dispatch(setOwnerName(room.state.ownerName));
-            room.state.users.forEach(u=>{
+        const initialize = async (r: Room<PreparationState>) => {
+            r.state.users.forEach(u=>{
                 dispatch(addUser(u));
             });
-            room.state.onChange = changes => {
+            r.state.onChange = changes => {
                 changes.forEach(change => {
                     if( change.field == 'gameStarted') {
                         dispatch(setGameStarted(change.value));
@@ -69,7 +64,7 @@ export default function Preparation() {
                     }
                 });
             }
-            room.state.users.onAdd = (u) => {
+            r.state.users.onAdd = (u) => {
                 dispatch(addUser(u));
 
                 u.onChange = (changes) => {
@@ -78,11 +73,11 @@ export default function Preparation() {
                     });
                 };
             };
-            room.state.users.onRemove = (u) => {dispatch(removeUser(u.id))};
-            room.onMessage('messages', (message) => {
+            r.state.users.onRemove = (u) => {dispatch(removeUser(u.id))};
+            r.onMessage('messages', (message) => {
                 dispatch(pushMessage(message));
             });
-            room.onMessage('game-start', async (message) => {
+            r.onMessage('game-start', async (message) => {
                 const token: string = await firebase.auth().currentUser.getIdToken();
                 const r: Room<GameState> = await client.joinById(message.id, {idToken: token});
                 localStorage.setItem('lastRoomId', r.id);
@@ -93,17 +88,8 @@ export default function Preparation() {
             });
         }
 
-        const onJoin = async () => {
-            if(room == undefined) {
-                await reconnect();
-            }
-            if(room != undefined && room.state != undefined) {
-                await initialize();
-            }
-        }
-
         if(!initialized){
-            onJoin();
+            reconnect();
         }
     });
 
@@ -111,7 +97,7 @@ export default function Preparation() {
         <Link to='/lobby'>
             <button className='nes-btn is-primary' style={buttonStyle} onClick={async ()=>{
                 dispatch(leavePreparation());
-                await room.leave();
+                room.connection.close();
                 }}>Lobby</button>
         </Link>
         <div style={preparationStyle}>

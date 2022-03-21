@@ -1,11 +1,10 @@
 import { Client, Room } from 'colyseus.js';
 import { RoomAvailable } from 'colyseus.js';
 import firebase from 'firebase/compat/app';
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import {ICustomLobbyState} from '../../../../../types';
 import RoomItem from './room-item';
-import { joinPreparation } from '../../../stores/NetworkStore';
 import PreparationState from '../../../../../rooms/states/preparation-state';
 import { Link, Navigate } from 'react-router-dom';
 import { leaveLobby } from '../../../stores/LobbyStore';
@@ -16,36 +15,38 @@ const ulStyle = {
     padding: '0px'
 };
 
-export default function RoomMenu() {
+export default function RoomMenu(props: { toPreparation: boolean; setToPreparation: Dispatch<SetStateAction<boolean>>; }) {
 
     const dispatch = useAppDispatch();
     const allRooms: RoomAvailable[] = useAppSelector(state=>state.lobby.allRooms);
     const client: Client = useAppSelector(state=>state.network.client);
     const lobby: Room<ICustomLobbyState> = useAppSelector(state=>state.network.lobby);
     const uid: string = useAppSelector(state=>state.network.uid);
-    const [roomCreated, setRoomCreated] = useState<boolean>(false);
      
     async function create() {
-        if(!roomCreated) {
-            setRoomCreated(true);
+        if(!props.toPreparation) {
             const token: string = await firebase.auth().currentUser.getIdToken();
             const room: Room<PreparationState> = await client.create('room', {idToken: token, ownerId: uid});
-            await lobby.leave();
             localStorage.setItem('lastRoomId', room.id);
             localStorage.setItem('lastSessionId', room.sessionId);
+            await lobby.leave();
+            room.connection.close();
             dispatch(leaveLobby());
-            dispatch(joinPreparation(room));
+            props.setToPreparation(true);
         }
     }
 
    async function join(id:string) {
-       const token: string = await firebase.auth().currentUser.getIdToken();
-       const room: Room<PreparationState> = await client.joinById(id, {idToken: token});
-       await lobby.leave();
-       localStorage.setItem('lastRoomId', room.id);
-       localStorage.setItem('lastSessionId', room.sessionId);
-       dispatch(leaveLobby());
-       dispatch(joinPreparation(room));
+       if(!props.toPreparation) {
+        const token: string = await firebase.auth().currentUser.getIdToken();
+        const room: Room<PreparationState> = await client.joinById(id, {idToken: token});
+        localStorage.setItem('lastRoomId', room.id);
+        localStorage.setItem('lastSessionId', room.sessionId);
+        await lobby.leave();
+        room.connection.close();
+        dispatch(leaveLobby());
+        props.setToPreparation(true);
+    }
    }
 
     return <div className="nes-container" style={{
@@ -64,9 +65,6 @@ export default function RoomMenu() {
                 <RoomItem room={r}/>
             </li>)}
          </ul>
-         <Link to='/preparation'>
-            <button onClick={create} className='nes-btn is-success'>Create room</button>
-        </Link>
-
+         <button onClick={create} className='nes-btn is-success'>Create room</button>
     </div>;
 }

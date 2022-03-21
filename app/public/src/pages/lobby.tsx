@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Chat from './component/chat/chat';
 import CurrentUsers from './component/available-user-menu/current-users';
 import RoomMenu from './component/available-room-menu/room-menu';
@@ -36,6 +36,7 @@ export default function Lobby(){
     const [showWiki, toggleWiki] = useState<boolean>(false);
     const [showMeta, toggleMeta] = useState<boolean>(false);
     const [showBuilder, toggleBuilder] = useState<boolean>(false);
+    const [toPreparation, setToPreparation] = useState<boolean>(false);
     
     const lobbyStyle = {display:'flex',justifyContent:'space-between'};
     const buttonStyle= {marginLeft:'10px',marginTop:'10px',marginRight:'10px'};
@@ -105,6 +106,9 @@ export default function Lobby(){
         return <div>
         </div>;
       }
+      if(toPreparation){
+          return <Navigate to='/preparation'></Navigate>
+      }
       if(showWiki){
         return <Wiki toggleWiki={()=>toggleWiki(!showWiki)} content='Lobby'/>;
       }
@@ -144,7 +148,7 @@ export default function Lobby(){
 
                 <div style={lobbyStyle}>
                     <TabMenu/>
-                    <RoomMenu/>
+                    <RoomMenu toPreparation={toPreparation} setToPreparation={setToPreparation}/>
                     <CurrentUsers/>
                     <Chat source='lobby'/>
                 </div>

@@ -18,7 +18,7 @@ export class OnJoinCommand extends Command<PreparationRoom, {
         this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false));
 
         if (user.uid == this.state.ownerId) {
-          console.log(user.displayName);
+          // console.log(user.displayName);
           this.state.ownerName = user.displayName;
         }
         this.room.broadcast('messages', {
@@ -31,7 +31,7 @@ export class OnJoinCommand extends Command<PreparationRoom, {
     });
 
     if (this.state.users.size >= 8) {
-      return [new OnRemoveBotCommand()];
+      return [new OnRemoveBotCommand().setPayload({target: undefined})];
     }
   }
 }
@@ -86,6 +86,7 @@ export class OnToggleReadyCommand extends Command<PreparationRoom, {
   client: Client
 }> {
   execute({client}) {
+    // console.log(this.state.users.get(client.auth.uid).ready);
     this.state.users.get(client.auth.uid).ready = !this.state.users.get(client.auth.uid).ready;
   }
 }
@@ -166,7 +167,12 @@ export class OnAddBotCommand extends Command<PreparationRoom, {
       }
 
       const bot = bots[Math.floor(Math.random() * bots.length)];
-      this.state.users.set(bot.avatar, new GameUser(
+
+      if (this.state.users.size >= 8) {
+        return;
+      }
+      else{
+        this.state.users.set(bot.avatar, new GameUser(
           bot.avatar,
           bot.avatar,
           bot.elo,
@@ -175,13 +181,13 @@ export class OnAddBotCommand extends Command<PreparationRoom, {
           true
       ));
 
-
       this.room.broadcast('messages', {
         'name': 'Server',
         'payload': `Bot ${ bot.avatar } added.`,
         'avatar': 'magnemite',
         'time': Date.now()
       });
+      }
     });
   }
 }

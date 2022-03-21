@@ -7,9 +7,7 @@ export default function RoomItem(props: {room: RoomAvailable}) {
     <p className='title'>Room id: {props.room.roomId}</p>
     <div style={{display: 'flex', justifyContent: 'space-around'}}>
         <h3>{props.room.clients}/{props.room.maxClients}</h3>
-        <Link to='/preparation'>
-          <button className='nes-btn is-warning'>Join</button>
-        </Link>
+        <button className='nes-btn is-warning'>Join</button>
     </div>
   </div>
 }
