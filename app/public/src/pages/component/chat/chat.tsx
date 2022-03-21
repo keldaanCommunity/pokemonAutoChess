@@ -4,9 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { sendMessage } from '../../../stores/NetworkStore';
 import ChatHistory from './chat-history';
 
-export default function Chat() {
+export default function Chat(props: {source: string}) {
   const dispatch = useAppDispatch();
-  const user = useAppSelector(state=> state.lobby.user);
   const [currentText, setCurrentText] = useState<string>('');
 
   return <div className="nes-container" style={{
@@ -19,10 +18,10 @@ export default function Chat() {
     height:'90vh',
     flexBasis: '40%'
     }}>
-      <ChatHistory/>
+      <ChatHistory source={props.source}/>
       <form onSubmit={(e)=>{
           e.preventDefault();
-          dispatch(sendMessage({text: currentText, user: user}));
+          dispatch(sendMessage(currentText));
           setCurrentText('');
         }}
         style={{

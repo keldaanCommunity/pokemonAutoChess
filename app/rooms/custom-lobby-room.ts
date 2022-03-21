@@ -41,7 +41,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
 
     this.onMessage('new-message', (client, message) => {
       if (message.payload != '') {
-        this.state.addMessage(message.name, message.payload, message.avatar, Date.now(), true);
+        this.state.addMessage(this.state.users.get(client.auth.uid).name, message.payload, this.state.users.get(client.auth.uid).avatar, Date.now(), true);
       }
     });
 
@@ -621,7 +621,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
 
   onJoin(client: Client, options: any) {
     super.onJoin(client, options);
-    // console.log(auth);
+    console.log(`${client.auth.displayName} ${client.id} join lobby room`);
     // client.send('bot-data', this.bots);
     UserMetadata.findOne({'uid': client.auth.uid}, (err: any, user: IUserMetadata)=>{
       if (user) {

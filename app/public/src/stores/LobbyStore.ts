@@ -186,10 +186,14 @@ export const lobbySlice = createSlice({
             state.users.push(u);
         },
         changeUser: (state, action: PayloadAction<{id: string, field: string, value: any}>) => {
-            if(action.payload.id == state.user.id){
+            if(state.user && action.payload.id == state.user.id){
                 state.user[action.payload.field] = action.payload.value;
             }
-            state.users[state.users.findIndex(u => u.id == action.payload.id)][action.payload.field] = action.payload.value;
+            let index = state.users.findIndex(u => u.id == action.payload.id);
+
+            if(index != -1) {
+              state.users[index][action.payload.field] = action.payload.value;
+            }
         },
         removeUser: (state, action: PayloadAction<string>) => {
             state.users.splice(state.users.findIndex(u => u.id == action.payload), 1);
@@ -231,7 +235,8 @@ export const lobbySlice = createSlice({
         },
         setBotData: (state, action: PayloadAction<IBot>) => {
             state.botData = action.payload
-        }
+        },
+        leaveLobby: () => initialState
     }
 });
 
@@ -251,7 +256,8 @@ export const {
     setMetaItems,
     setBotList,
     setPastebinUrl,
-    setBotData
+    setBotData,
+    leaveLobby
 } = lobbySlice.actions;
 
 export default lobbySlice.reducer;

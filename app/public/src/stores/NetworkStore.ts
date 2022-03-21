@@ -4,12 +4,14 @@ import {User} from '@firebase/auth-types';
 import { ILobbyUser } from "../../../models/colyseus-models/lobby-user";
 import {ICustomLobbyState} from '../../../types';
 import {IBot} from '../../../models/mongo-models/bot-v2';
-import PreparationState, { IPreparationState } from "../../../rooms/states/preparation-state";
+import PreparationState from "../../../rooms/states/preparation-state";
+import GameState from "../../../rooms/states/game-state";
 
 interface INetwork {
     client: Client;
     lobby: Room<ICustomLobbyState>;
     preparation: Room<PreparationState>;
+    game: Room<GameState>;
     uid: string;
     displayName: string;
 }
@@ -20,6 +22,7 @@ const initalState: INetwork = {
     client: new Client(endpoint),
     lobby: undefined,
     preparation: undefined,
+    game: undefined,
     uid: undefined,
     displayName: undefined,
 }
@@ -29,8 +32,10 @@ export const networkSlice = createSlice({
     initialState: initalState,
     reducers: {
         logIn: (state, action: PayloadAction<User>) => {
-            state.uid = action.payload.uid;
-            state.displayName = action.payload.displayName;
+            if(action.payload){
+                state.uid = action.payload.uid;
+                state.displayName = action.payload.displayName; 
+            }
         },
         logOut: (state, action: PayloadAction<string>) => {
             state.uid = undefined;
@@ -38,19 +43,26 @@ export const networkSlice = createSlice({
         },
         joinLobby: (state, action: PayloadAction<Room<ICustomLobbyState>>) => {
             state.lobby = action.payload;
+            state.preparation = undefined;
         },
         joinPreparation: (state, action: PayloadAction<Room<PreparationState>>) => {
             state.preparation = action.payload;
+            state.lobby = undefined;
         },
-        sendMessage: (state, action: PayloadAction<{text: string, user: ILobbyUser}>) => {
-            state.lobby.send('new-message', {'name': action.payload.user.name, 'payload': action.payload.text, 'avatar':action.payload.user.avatar });
+        sendMessage: (state, action: PayloadAction<string>) => {
+            if(state.lobby){
+                state.lobby.send('new-message', {payload: action.payload});
+            }
+            if(state.preparation){
+                state.preparation.send('new-message', {payload: action.payload});
+            }
         },
         searchName: (state, action: PayloadAction<string>) => {
             state.lobby.send('search', {'name':action.payload});
         },
-        joinRoom: (state, action: PayloadAction<Room<PreparationState>>) => {
-            state.preparation = action.payload;
-            state.lobby = undefined;
+        joinGame: (state, action: PayloadAction<Room<GameState>>) => {
+            state.game = action.payload;
+            state.preparation = undefined;
         },
         changeName: (state, action: PayloadAction<string>) => {
             state.lobby.send('name', {'name': action.payload});
@@ -69,6 +81,15 @@ export const networkSlice = createSlice({
         },
         requestBotData: (state, action:PayloadAction<string>) => {
             state.lobby.send('bot-data-request', action.payload);
+        },
+        addBot: (state, action:PayloadAction<string>) => {
+            state.preparation.send('addBot', action.payload);
+        },
+        removeBot: (state,action: PayloadAction<string>) => {
+            state.preparation.send('removeBot', action.payload);
+        },
+        toggleReady: (state, action: PayloadAction<boolean>) => {
+            state.preparation.send('toggle-ready');
         }
     }
 });
@@ -79,14 +100,17 @@ export const {
     joinLobby,
     sendMessage,
     searchName,
-    joinRoom,
     joinPreparation,
+    joinGame,
     changeName,
     changeAvatar,
     requestMeta,
     requestBotList,
     createBot,
-    requestBotData
+    requestBotData,
+    addBot,
+    removeBot,
+    toggleReady
 } = networkSlice.actions;
 
 export default networkSlice.reducer;

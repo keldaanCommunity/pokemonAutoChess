@@ -5,8 +5,10 @@ import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import {ICustomLobbyState} from '../../../../../types';
 import RoomItem from './room-item';
-import { joinRoom } from '../../../stores/NetworkStore';
+import { joinPreparation } from '../../../stores/NetworkStore';
 import PreparationState from '../../../../../rooms/states/preparation-state';
+import { Link, Navigate } from 'react-router-dom';
+import { leaveLobby } from '../../../stores/LobbyStore';
 
 
 const ulStyle = {
@@ -31,7 +33,8 @@ export default function RoomMenu() {
             await lobby.leave();
             localStorage.setItem('lastRoomId', room.id);
             localStorage.setItem('lastSessionId', room.sessionId);
-            dispatch(joinRoom(room));
+            dispatch(leaveLobby());
+            dispatch(joinPreparation(room));
         }
     }
 
@@ -41,7 +44,8 @@ export default function RoomMenu() {
        await lobby.leave();
        localStorage.setItem('lastRoomId', room.id);
        localStorage.setItem('lastSessionId', room.sessionId);
-       dispatch(joinRoom(room));
+       dispatch(leaveLobby());
+       dispatch(joinPreparation(room));
    }
 
     return <div className="nes-container" style={{
@@ -55,8 +59,14 @@ export default function RoomMenu() {
         <h6 style={{textAlign:'center'}}>Available Rooms:</h6>
         <h6 style={{textAlign:'center'}}>Click 'Create Room' to play</h6>
          <ul style={ulStyle}>
-             {allRooms.map(r=><li key={r.roomId} onClick={()=>join.bind(r.roomId)}><RoomItem room={r}/></li>)}
+             {allRooms.map(r=>
+                <li key={r.roomId} onClick={()=>{join(r.roomId)}}>
+                <RoomItem room={r}/>
+            </li>)}
          </ul>
-        <button onClick={create} className='nes-btn is-success'>Create room</button>
+         <Link to='/preparation'>
+            <button onClick={create} className='nes-btn is-success'>Create room</button>
+        </Link>
+
     </div>;
 }

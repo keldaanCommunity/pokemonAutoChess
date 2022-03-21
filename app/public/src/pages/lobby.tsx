@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Chat from './component/chat/chat';
 import CurrentUsers from './component/available-user-menu/current-users';
 import RoomMenu from './component/available-room-menu/room-menu';
@@ -16,20 +16,18 @@ import TeamBuilder from './component/bot-builder/team-builder';
 import MetaReport from './component/meta-report/meta-report';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { joinLobby, logIn, logOut, requestMeta, requestBotList } from '../stores/NetworkStore';
-import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser } from '../stores/LobbyStore';
+import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby } from '../stores/LobbyStore';
 import { ICustomLobbyState } from '../../../types';
 import LobbyUser from '../../../models/colyseus-models/lobby-user';
 import { IBot } from '../../../models/mongo-models/bot-v2';
 import { IMeta } from '../../../models/mongo-models/meta';
 import { IItemsStatistic } from '../../../models/mongo-models/items-statistic';
-import PreparationState from '../../../rooms/states/preparation-state';
 
 export default function Lobby(){
     const dispatch = useAppDispatch();
 
     const client: Client = useAppSelector(state=>state.network.client);
     const uid: string = useAppSelector(state=>state.network.uid);
-    const preparation: Room<PreparationState> = useAppSelector(state=>state.network.preparation);
     const meta: IMeta[] = useAppSelector(state=>state.lobby.meta);
     const metaItems: IItemsStatistic[] = useAppSelector(state=>state.lobby.metaItems);
     const botList: string[] = useAppSelector(state=>state.lobby.botList);
@@ -50,48 +48,51 @@ export default function Lobby(){
                 firebase.initializeApp(FIREBASE_CONFIG);
             } 
             firebase.auth().onAuthStateChanged(async user => {
-                dispatch(logIn(user));
-                const token = await user.getIdToken();
-                const room: Room<ICustomLobbyState> = await client.joinOrCreate('lobby', {idToken: token});
-                room.state.messages.onAdd = (m) => {dispatch(pushMessage(m))};
-
-                room.state.users.onAdd = (u) => {
-                    dispatch(addUser(u));
-                    if(u.id == user.uid){
-                        dispatch(setUser(u));
-                        setSearchedUser(u);
-                    }
-                    u.onChange = (changes) => {
-                        changes.forEach(change=>{
-                            dispatch(changeUser({id: u.id, field: change.field, value: change.value}));
-                        });
+                if(user) {
+                    dispatch(logIn(user));
+                    const token = await user.getIdToken();
+                    const room: Room<ICustomLobbyState> = await client.joinOrCreate('lobby', {idToken: token});
+                    room.state.messages.onAdd = (m) => {dispatch(pushMessage(m))};
+    
+                    room.state.users.onAdd = (u) => {
+                        dispatch(addUser(u));
+                        if(u.id == user.uid){
+                            dispatch(setUser(u));
+                            setSearchedUser(u);
+                        }
+                        u.onChange = (changes) => {
+                            changes.forEach(change=>{
+                                dispatch(changeUser({id: u.id, field: change.field, value: change.value}));
+                            });
+                        };
                     };
-                };
-                room.state.users.onRemove = (u) => {dispatch(removeUser(u.id))};
 
-                room.state.leaderboard.onAdd = (l) => {dispatch(pushLeaderboard(l))};
+                    room.state.users.onRemove = (u) => {dispatch(removeUser(u.id))};
+
+                    room.state.leaderboard.onAdd = (l) => {dispatch(pushLeaderboard(l))};
+                    
+                    room.state.botLeaderboard.onAdd = (l) => {dispatch(pushBotLeaderboard(l))};
+
+                    room.onMessage('pastebin-url', (json: { url: string; }) => {dispatch(setPastebinUrl(json.url))});
+
+                    room.onMessage('rooms', (rooms: RoomAvailable[]) => {rooms.forEach(room=>dispatch(addRoom(room)))});
+
+                    room.onMessage('bot-list', (bots: string[]) => {dispatch(setBotList(bots))});
+                    
+                    room.onMessage('+', ([roomId, room]) => {if(room.name == 'room'){dispatch(addRoom(room))}});
                 
-                room.state.botLeaderboard.onAdd = (l) => {dispatch(pushBotLeaderboard(l))};
+                    room.onMessage('-', (roomId: string) => dispatch(removeRoom(roomId)));
 
-                room.onMessage('pastebin-url', (json: { url: string; }) => {dispatch(setPastebinUrl(json.url))});
+                    room.onMessage('user', (user: LobbyUser) => {setSearchedUser(user)});
 
-                room.onMessage('rooms', (rooms: RoomAvailable[]) => {rooms.forEach(room=>dispatch(addRoom(room)))});
+                    room.onMessage('meta', (meta: IMeta[]) => {dispatch(setMeta(meta))});
 
-                room.onMessage('bot-list', (bots: string[]) => {dispatch(setBotList(bots))});
-                
-                room.onMessage('+', ([roomId, room]) => {if(room.name == 'room'){dispatch(addRoom(room))}});
-            
-                room.onMessage('-', (roomId: string) => dispatch(removeRoom(roomId)));
+                    room.onMessage('metaItems', (metaItems: IItemsStatistic[]) => {dispatch(setMetaItems(metaItems))});
 
-                room.onMessage('user', (user: LobbyUser) => {setSearchedUser(user)});
+                    room.onMessage('bot-data', (data: IBot) => { dispatch(setBotData(data))});
 
-                room.onMessage('meta', (meta: IMeta[]) => {dispatch(setMeta(meta))});
-
-                room.onMessage('metaItems', (metaItems: IItemsStatistic[]) => {dispatch(setMetaItems(metaItems))});
-
-                room.onMessage('bot-data', (data: IBot) => { dispatch(setBotData(data))});
-
-                dispatch(joinLobby(room));
+                    dispatch(joinLobby(room));
+                }
             });
         };
         if(!lobbyJoined){
@@ -103,9 +104,6 @@ export default function Lobby(){
     if(!uid){
         return <div>
         </div>;
-      }
-      if(preparation){
-        return <Navigate to='/preparation'/>;
       }
       if(showWiki){
         return <Wiki toggleWiki={()=>toggleWiki(!showWiki)} content='Lobby'/>;
@@ -123,7 +121,7 @@ export default function Lobby(){
             <div className='App'>
                 <div style={{display:'flex'}}>
                     <Link to='/auth'>
-                            <button className='nes-btn is-error' style={buttonStyle} onClick={()=>dispatch(logOut('bye'))}>Sign Out</button>
+                            <button className='nes-btn is-error' style={buttonStyle} onClick={()=>{firebase.auth().signOut(); dispatch(leaveLobby()); dispatch(logOut())}}>Sign Out</button>
                     </Link>
                     <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{toggleWiki(!showWiki)}}>Wiki</button>
                     <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{
@@ -148,7 +146,7 @@ export default function Lobby(){
                     <TabMenu/>
                     <RoomMenu/>
                     <CurrentUsers/>
-                    <Chat/>
+                    <Chat source='lobby'/>
                 </div>
             </div>
         );

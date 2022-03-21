@@ -44,7 +44,8 @@ export const preparationSlice = createSlice({
         },
         setOwnerName: (state, action: PayloadAction<string>) => {
             state.ownerName = action.payload;
-        }
+        },
+        leavePreparation: () => initialState
     }
 });
 
@@ -55,7 +56,8 @@ export const {
     removeUser,
     setGameStarted,
     setOwnerId,
-    setOwnerName
+    setOwnerName,
+    leavePreparation
 } = preparationSlice.actions;
 
 export default preparationSlice.reducer;

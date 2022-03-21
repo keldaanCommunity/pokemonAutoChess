@@ -4,7 +4,7 @@ import ChatMessage from './chat-message';
 import CSS from 'csstype';
 import { IMessage } from '../../../../../types';
 
-export default function ChatHistory() {
+export default function ChatHistory(props: {source: string}) {
     const ulStyles: CSS.Properties = {
         flex: '1',
         width: '100%',
@@ -13,7 +13,7 @@ export default function ChatHistory() {
         maxWidth: 'inherit',
         maxHeight: 'inherit'
     };
-    const messages = useAppSelector(state=>state.lobby.messages);
+    const messages = useAppSelector(state=>state[props.source].messages);
     const domRef = useRef(null);
 
     useEffect(()=>{

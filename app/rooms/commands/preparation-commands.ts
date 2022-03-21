@@ -4,6 +4,8 @@ import UserMetadata, { IUserMetadata } from "../../models/mongo-models/user-meta
 import BotV2 from "../../models/mongo-models/bot-v2";
 import { Client } from "colyseus";
 import PreparationRoom from "../preparation-room";
+import { IMessage } from "../../types";
+import { BOT_DIFFICULTY } from "../../models/enum";
 
 export class OnJoinCommand extends Command<PreparationRoom, {
   client: Client,
@@ -56,7 +58,7 @@ export class OnGameStartCommand extends Command<PreparationRoom, {
 
 export class OnMessageCommand extends Command<PreparationRoom, {
   client: Client,
-  message: any
+  message: IMessage
 }> {
   execute({client, message}) {
     this.room.broadcast('messages', {...message, time: Date.now()});
@@ -123,7 +125,7 @@ export class InitializeBotsCommand extends Command<PreparationRoom, {
 }
 
 export class OnAddBotCommand extends Command<PreparationRoom, {
-  difficulty: string
+  difficulty: BOT_DIFFICULTY
 }> {
   execute({difficulty}) {
     if (this.state.users.size >= 8) {
@@ -141,13 +143,13 @@ export class OnAddBotCommand extends Command<PreparationRoom, {
     let d;
     
     switch (difficulty) {
-      case 'easy':
+      case BOT_DIFFICULTY.EASY:
         d = {$lt: 800};
         break;
-      case 'normal':
+      case BOT_DIFFICULTY.MEDIUM:
         d = {$gt: 800, $lt: 1100};
         break;
-      case 'hard':
+      case BOT_DIFFICULTY.HARD:
         d = {$gt: 1100};
         break;
     }
