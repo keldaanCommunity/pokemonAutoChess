@@ -1,7 +1,7 @@
 import {Schema, type} from '@colyseus/schema';
+import { IExperienceManager } from '../../types';
 import { EXP_TABLE } from '../enum';
-
-export default class ExperienceManager extends Schema {
+export default class ExperienceManager extends Schema implements IExperienceManager{
 
   @type('uint8') level: number = 2;
   @type('uint8') experience: number = 0;

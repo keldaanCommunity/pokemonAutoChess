@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Chat from './component/chat/chat';
 import PreparationMenu from './component/preparation/preparation-menu';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import { FIREBASE_CONFIG } from './utils/utils';
 import PreparationState from '../../../rooms/states/preparation-state';
@@ -27,6 +27,7 @@ export default function Preparation() {
     const client: Client = useAppSelector(state=>state.network.client);
     const room : Room<PreparationState> = useAppSelector(state=>state.network.preparation);
     const [initialized, setInitialized] = useState<boolean>(false);
+    const [toGame, setToGame] = useState<boolean>(false);
 
     useEffect(()=>{
         const reconnect = async () => {
@@ -82,9 +83,10 @@ export default function Preparation() {
                 const r: Room<GameState> = await client.joinById(message.id, {idToken: token});
                 localStorage.setItem('lastRoomId', r.id);
                 localStorage.setItem('lastSessionId', r.sessionId);
-                dispatch(leavePreparation());
                 await room.leave();
-                joinGame(r);
+                r.connection.close();
+                dispatch(leavePreparation());
+                setToGame(true);
             });
         }
 
@@ -93,7 +95,11 @@ export default function Preparation() {
         }
     });
 
-    return (<div className="App">
+    if(toGame) {
+        return <Navigate to='/game'/>
+    }
+    else{
+        return (<div className="App">
         <Link to='/lobby'>
             <button className='nes-btn is-primary' style={buttonStyle} onClick={async ()=>{
                 dispatch(leavePreparation());
@@ -101,8 +107,9 @@ export default function Preparation() {
                 }}>Lobby</button>
         </Link>
         <div style={preparationStyle}>
-            <PreparationMenu/>
+            <PreparationMenu setToGame={setToGame}/>
             <Chat source='preparation'/>
         </div>
     </div>)
+    }
 }

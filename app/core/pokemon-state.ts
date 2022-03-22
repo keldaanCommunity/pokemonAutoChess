@@ -2,10 +2,11 @@ import {EFFECTS, ATTACK_TYPE, TYPE, PKM, FLYING_PROTECT_THRESHOLD, ITEM} from '.
 import PokemonFactory from '../models/pokemon-factory';
 import Board from './board';
 import PokemonEntity from './pokemon-entity';
+import { IPokemonEntity } from '../types';
 
 export default class PokemonState {
 
-  handleHeal(pokemon: PokemonEntity, heal: number, caster: PokemonEntity): void {
+  handleHeal(pokemon: IPokemonEntity, heal: number, caster: IPokemonEntity): void {
     if (pokemon.life > 0 && pokemon.life < pokemon.hp && !pokemon.status.wound) {
       pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.round(heal));
       if (caster) {
@@ -14,7 +15,7 @@ export default class PokemonState {
     }
   }
 
-  handleShield(pokemon: PokemonEntity, shield: number, caster: PokemonEntity) {
+  handleShield(pokemon: IPokemonEntity, shield: number, caster: IPokemonEntity) {
     if (pokemon.life > 0) {
       pokemon.shield += Math.round(shield);
       if (caster) {

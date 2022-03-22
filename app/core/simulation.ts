@@ -1,28 +1,28 @@
 import Board from './board';
-import {Schema, MapSchema, type, ArraySchema} from '@colyseus/schema';
+import {Schema, MapSchema, type} from '@colyseus/schema';
 import PokemonEntity from './pokemon-entity';
-import {Pokemon} from '../models/colyseus-models/pokemon';
 import PokemonFactory from '../models/pokemon-factory';
 import {CLIMATE, EFFECTS, TYPE, ATTACK_TYPE, ITEM} from '../models/enum';
 import Dps from'./dps';
 import DpsHeal from './dps-heal';
 import ItemFactory from '../models/item-factory';
+import { ISimulation, IPokemonEntity, IDps, IDpsHeal, IPokemon } from '../types';
 
-export default class Simulation extends Schema {
+export default class Simulation extends Schema implements ISimulation{
   @type('string') climate: string;
   @type(['string']) blueEffects: string[];
   @type(['string']) redEffects: string[];
-  @type({map: PokemonEntity}) blueTeam = new MapSchema<PokemonEntity>();
-  @type({map: PokemonEntity}) redTeam = new MapSchema<PokemonEntity>();
-  @type({map: Dps}) blueDpsMeter = new MapSchema<Dps>();
-  @type({map: Dps}) redDpsMeter = new MapSchema<Dps>();
-  @type({map: DpsHeal}) blueHealDpsMeter = new MapSchema<DpsHeal>();
-  @type({map: DpsHeal}) redHealDpsMeter = new MapSchema<DpsHeal>();
+  @type({map: PokemonEntity}) blueTeam = new MapSchema<IPokemonEntity>();
+  @type({map: PokemonEntity}) redTeam = new MapSchema<IPokemonEntity>();
+  @type({map: Dps}) blueDpsMeter = new MapSchema<IDps>();
+  @type({map: Dps}) redDpsMeter = new MapSchema<IDps>();
+  @type({map: DpsHeal}) blueHealDpsMeter = new MapSchema<IDpsHeal>();
+  @type({map: DpsHeal}) redHealDpsMeter = new MapSchema<IDpsHeal>();
   board: Board = new Board(8,6);
   finished: boolean;
   flowerSpawn: boolean[];
 
-  initialize(blueTeam: MapSchema<Pokemon>, redTeam: MapSchema<Pokemon>, blueEffects: string[], redEffects: string[]) {
+  initialize(blueTeam: MapSchema<IPokemon>, redTeam: MapSchema<IPokemon>, blueEffects: string[], redEffects: string[]) {
     this.blueDpsMeter.forEach((dps, key) => {
       this.blueDpsMeter.delete(key);
     });
@@ -53,7 +53,7 @@ export default class Simulation extends Schema {
     this.flowerSpawn = [false, false];
 
     if (blueTeam) {
-      blueTeam.forEach((pokemon, key) => {
+      blueTeam.forEach((pokemon) => {
         if (pokemon.positionY != 0) {
           this.addPokemon(pokemon, pokemon.positionX, pokemon.positionY - 1, 0);
         }
@@ -61,7 +61,7 @@ export default class Simulation extends Schema {
     }
 
     if (redTeam) {
-      redTeam.forEach((pokemon, key) => {
+      redTeam.forEach((pokemon) => {
         if (pokemon.positionY != 0) {
           this.addPokemon(pokemon, pokemon.positionX, 5 - (pokemon.positionY - 1), 1);
         }
@@ -125,7 +125,7 @@ export default class Simulation extends Schema {
     this.applyPostEffects();
   }
 
-  addPokemon(pokemon: Pokemon, x: number, y: number, team: number) {
+  addPokemon(pokemon: IPokemon, x: number, y: number, team: number) {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this);
     // pokemonEntity.triggerSleep(5000);
     this.applyItemsEffects(pokemonEntity);
@@ -151,7 +151,7 @@ export default class Simulation extends Schema {
   }
 
   addPokemonEntity(p: PokemonEntity, x: number, y:number, team: number) {
-    let pokemon = PokemonFactory.createPokemonFromName(p.name);
+    const pokemon = PokemonFactory.createPokemonFromName(p.name);
     p.items.forEach(i=>{
       pokemon.items.add(i);
     });
@@ -446,7 +446,7 @@ export default class Simulation extends Schema {
     });
   }
 
-  applyEffects(pokemon: PokemonEntity, types: ArraySchema<string>, allyEffects: string[]) {
+  applyEffects(pokemon: PokemonEntity, types: string[], allyEffects: string[]) {
     allyEffects.forEach((effect) => {
       switch (effect) {
         case EFFECTS.HONE_CLAWS:

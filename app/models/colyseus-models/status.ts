@@ -1,8 +1,9 @@
 import {Schema, type} from '@colyseus/schema';
 import Board from '../../core/board';
+import { IStatus } from '../../types';
 import {ITEM} from '../enum';
 
-export default class Status extends Schema {
+export default class Status extends Schema implements IStatus{
   @type('boolean') burn: boolean;
   @type('boolean') silence: boolean;
   @type('boolean') poison: boolean;

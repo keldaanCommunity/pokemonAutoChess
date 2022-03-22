@@ -1,3 +1,111 @@
+import { Client, Room } from "colyseus.js";
+import firebase from "firebase/compat/app";
+import React, { createRef, useEffect, useRef, useState } from "react";
+import GameState from "../../../rooms/states/game-state";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { addPlayer, setAfterGameId, setMapName, setPhase, setRoundTime, setStageLevel } from "../stores/GameStore";
+import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore";
+import { FIREBASE_CONFIG } from "./utils/utils";
+import GameContainer from '../game/game-container';
+import { Navigate } from "react-router-dom";
+
+let gameContainer: GameContainer;
+
+export default function Game() {
+  const dispatch = useAppDispatch();
+  const client: Client = useAppSelector(state=>state.network.client);
+  const room : Room<GameState> = useAppSelector(state=>state.network.game);
+  const uid : string = useAppSelector(state => state.network.uid);
+  const afterGameId: string = useAppSelector(state => state.game.afterGameId);
+
+  const [initialized, setInitialized] = useState<boolean>(false);
+  const [reconnected, setReconnected] = useState<boolean>(false);
+  const [toLobby, setToLobby] = useState<boolean>(false);
+  const [modalTitle, setModalTitle] = useState<string>('');
+  const [modalInfo, setModalInfo] = useState<string>('');
+  const [modalBoolean, setModalBoolean] = useState<boolean>(false);
+  
+  const container = useRef();
+
+  useEffect(()=>{
+    const reconnect = async () => {
+        setReconnected(true);
+        if(!firebase.apps.length) {
+            firebase.initializeApp(FIREBASE_CONFIG);
+        }
+        firebase.auth().onAuthStateChanged(async user => {
+            dispatch(logIn(user));
+            try{
+                const r: Room<GameState> = await client.reconnect(localStorage.getItem('lastRoomId'),localStorage.getItem('lastSessionId'));
+                dispatch(joinGame(r));
+            }
+            catch(error){
+                console.log(error);         
+            }
+        });
+    }
+
+    if(!reconnected){
+        reconnect();
+    }
+
+    if(!initialized && room != undefined){
+      setInitialized(true);
+
+      gameContainer = new GameContainer(container.current, uid, room);
+      document.getElementById('game').addEventListener('drag-drop', gameContainer.onDragDrop.bind(gameContainer));
+      document.getElementById('game').addEventListener('sell-drop', gameContainer.onSellDrop.bind(gameContainer));
+      dispatch(requestTilemap());
+
+      room.onMessage('info', message => {setModalTitle(message.title); setModalInfo(message.info); setModalBoolean(true)});
+      room.onMessage('tilemap', tilemap => {gameContainer.setTilemap(tilemap)});
+
+      room.state.onChange = changes => {
+        changes.forEach( change => {
+          if(change.field == 'afterGameId') {
+            dispatch(setAfterGameId(change.value));
+          }
+          else if(change.field == 'roundTime') {
+            dispatch(setRoundTime(change.value));
+          }
+          else if(change.field == 'phase') {
+            const g: any = gameContainer.game.scene.getScene('gameScene');
+            g.updatePhase();
+            dispatch(setPhase(change.value));
+          }
+          else if(change.field == 'stageLevel') {
+            dispatch(setStageLevel(change.value));
+          }
+          else if(change.field == 'mapName') {
+            dispatch(setMapName(change.value));
+          }
+        })
+      }
+
+      console.log(room.state.players);
+      room.state.players.onAdd = player => {
+        gameContainer.initializePlayer(player);
+        dispatch(addPlayer(player));
+      }
+    }
+  });
+
+  if(toLobby){
+    return <Navigate to='/lobby'/>;
+  }
+  if(afterGameId){
+    return <Navigate to='after'/>
+  }
+  else{
+    return <div>
+        <div id='game' ref={container} style={{
+          maxHeight:'100vh'
+        }}></div>
+    </div>
+  }
+}
+
+/*
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import GameContainer from '../game/game-container';
@@ -14,6 +122,7 @@ import GameSynergies from './component/game-synergies';
 import GameRarityPercentage from './component/game-rarity-percentage';
 import GameItemsProposition from './component/game-items-proposition';
 import GameModal from './component/game-modal';
+
 
 class Game extends Component {
 
@@ -556,3 +665,5 @@ class Game extends Component {
   }
 }
 export default Game;
+
+*/

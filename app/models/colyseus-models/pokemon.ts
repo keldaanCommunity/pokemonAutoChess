@@ -3,10 +3,11 @@
 
 import {Schema, type, ArraySchema, SetSchema} from '@colyseus/schema';
 import uniqid from 'uniqid';
+import { IPokemon } from '../../types';
 import {SPECIAL_SKILL, TYPE, RARITY, COST, ATTACK_TYPE, PKM, ITEM} from '../enum';
 import ItemFactory from '../item-factory';
 
-export class Pokemon extends Schema {
+export class Pokemon extends Schema implements IPokemon{
   @type('string') id: string;
   @type('string') name: string;
   @type(['string']) types = new ArraySchema<string>();

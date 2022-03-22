@@ -1,34 +1,6 @@
 import {Schema, type, MapSchema} from '@colyseus/schema';
 import PokemonFactory from '../pokemon-factory';
-import {Pokemon} from '../colyseus-models/pokemon';
-
-export interface ISynergies {
-  NORMAL: number;
-  GRASS: number;
-  FIRE: number;
-  WATER: number;
-  ELECTRIC: number;
-  FIGHTING: number;
-  PSYCHIC: number;
-  DARK: number;
-  METAL: number;
-  GROUND: number;
-  POISON: number;
-  DRAGON: number;
-  FIELD: number;
-  MONSTER: number;
-  HUMAN: number;
-  AQUATIC: number;
-  BUG: number;
-  FLYING: number;
-  FLORA: number;
-  MINERAL: number;
-  GHOST: number;
-  FAIRY: number;
-  ICE: number;
-  FOSSIL: number;
-  SOUND: number;
-}
+import { IPokemon, ISynergies } from '../../types';
 
 export default class Synergies extends Schema implements ISynergies{
   @type('uint8') NORMAL: number;
@@ -57,11 +29,11 @@ export default class Synergies extends Schema implements ISynergies{
   @type('uint8') FOSSIL: number;
   @type('uint8') SOUND: number;
 
-  update(board: MapSchema<Pokemon>) {
+  update(board: MapSchema<IPokemon>) {
     const pokemonNames = [];
     this.setToZero();
 
-    board.forEach((pkm: Pokemon) => {
+    board.forEach((pkm: IPokemon) => {
       const family = PokemonFactory.getPokemonFamily(pkm.name);
       if (!pokemonNames.includes(family) && pkm.positionY != 0) {
         pokemonNames.push(family);

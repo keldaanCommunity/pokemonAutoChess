@@ -1,6 +1,7 @@
 import {Schema, type} from '@colyseus/schema';
+import { IDpsHeal } from '../types';
 
-export default class DpsHeal extends Schema {
+export default class DpsHeal extends Schema implements IDpsHeal{
   @type('string') id: string;
   @type('string') name: string;
   @type('uint16') heal = 0;

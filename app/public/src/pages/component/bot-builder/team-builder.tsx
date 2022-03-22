@@ -9,7 +9,7 @@ import PokemonPicker from './pokemon-picker';
 import TeamEditor from './team-editor';
 import ReactTooltip from 'react-tooltip';
 import { IBot, IStep } from '../../../../../models/mongo-models/bot-v2';
-import { ISynergies } from '../../../../../models/colyseus-models/synergies';
+import { ISynergies } from '../../../../../types';
 import CSS from 'csstype';
 import produce from 'immer';
 import { useAppSelector, useAppDispatch } from '../../../hooks';
@@ -187,7 +187,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   const botData: IBot = useAppSelector(state=>state.lobby.botData);
 
   function updateSynergies(i: number) {
-    let newSynergies = {
+    const newSynergies = {
       NORMAL: 0,
       GRASS: 0,
       FIRE: 0,
@@ -214,7 +214,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
       FOSSIL: 0,
       SOUND: 0
     };
-    let pokemonNames = [];
+    const pokemonNames = [];
 
     bot.steps[i].board.forEach(pkm=>{
       const family = PokemonFactory.getPokemonFamily(pkm.name);
@@ -239,7 +239,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   }
 
   function writeItem(x: number ,y: number) {
-    let potential = bot.steps[step].board.findIndex(p=>p.x==x && p.y==y);
+    const potential = bot.steps[step].board.findIndex(p=>p.x==x && p.y==y);
     if(potential >= 0) {
       if(bot.steps[step].board[potential].items.length <3){
         setBot(produce(draft=>{draft.steps[step].board[potential].items.push(entity)}));
@@ -251,7 +251,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   }
 
   function writePokemon(x: number, y: number) {
-    let potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y);
+    const potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y);
     if(potential >= 0) {
       setBot(produce(draft=>{draft.steps[step].board[potential].name = entity}));
     }
@@ -262,7 +262,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   }
 
   function erase(x: number, y: number) {
-    let potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y);
+    const potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y);
     if(potential >= 0) {
       setBot(produce(draft=>{draft.steps[step].board.splice(potential, 1)}));
     }
@@ -270,7 +270,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
 
   function importBot(text: string) {
     try{
-      let b: IBot = JSON.parse(text);
+      const b: IBot = JSON.parse(text);
       setBot(b);
       updateSynergies(step);
       setModalBoolean(false);

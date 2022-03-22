@@ -90,6 +90,9 @@ export const networkSlice = createSlice({
         },
         toggleReady: (state, action: PayloadAction<boolean>) => {
             state.preparation.send('toggle-ready');
+        },
+        requestTilemap: (state) => {
+            state.game.send('request-tilemap');
         }
     }
 });
@@ -110,7 +113,8 @@ export const {
     requestBotData,
     addBot,
     removeBot,
-    toggleReady
+    toggleReady,
+    requestTilemap
 } = networkSlice.actions;
 
 export default networkSlice.reducer;

@@ -78,6 +78,7 @@
     "@types/elo-rank": "^1.0.1",
     "@types/react-dom": "^17.0.13",
     "@types/uniqid": "^5.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
     "babel-loader": "^8.1.0",
     "css-loader": "^6.7.1",
     "eslint": "^8.10.0",

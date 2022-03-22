@@ -1,6 +1,6 @@
 import {BATTLE_RESULT} from '../models/enum';
 import PokemonFactory from '../models/pokemon-factory';
-import BOT from '../models/mongo-models/bot-v2';
+import BOT, { IBot } from '../models/mongo-models/bot-v2';
 import Player from '../models/colyseus-models/player';
 
 export default class Bot {
@@ -8,7 +8,7 @@ export default class Bot {
   player: Player;
   step: number;
   progress: number;
-  scenario: any;
+  scenario: IBot;
 
   constructor(player: Player) {
     this.player = player;

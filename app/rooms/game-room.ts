@@ -11,6 +11,7 @@ import EloRank from 'elo-rank';
 import admin from 'firebase-admin';
 import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2';
 import { Pokemon } from '../models/colyseus-models/pokemon';
+import { IPokemon } from '../types';
 
 export default class GameRoom extends Room {
   dispatcher: Dispatcher<this>;
@@ -258,7 +259,7 @@ export default class GameRoom extends Room {
       elo: player.elo
     };
 
-    player.board.forEach((pokemon: Pokemon) => {
+    player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.positionY != 0) {
         const s = {
           name: pokemon.name,

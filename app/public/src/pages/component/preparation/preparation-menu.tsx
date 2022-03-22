@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 import PreparationMenuUser from './preparation-menu-user';
 import { IGameUser } from '../../../../../models/colyseus-models/game-user';
@@ -8,6 +8,8 @@ import firebase from 'firebase/compat/app';
 import { Client, Room } from 'colyseus.js';
 import GameState from '../../../../../rooms/states/game-state';
 import { BOT_DIFFICULTY } from '../../../../../models/enum';
+import { leavePreparation } from '../../../stores/PreparationStore';
+import PreparationState from '../../../../../rooms/states/preparation-state';
 
 const buttonStyle = {
     marginLeft:'10px',
@@ -15,13 +17,14 @@ const buttonStyle = {
 };
 
 
-export default function PreparationMenu() {
+export default function PreparationMenu(props:{setToGame: Dispatch<SetStateAction<boolean>>}) {
     const dispatch = useAppDispatch();
     const users: IGameUser[] = useAppSelector(state=>state.preparation.users);
     const ownerName: string = useAppSelector(state=>state.preparation.ownerName);
     const ownerId: string = useAppSelector(state=>state.preparation.ownerId);
     const uid: string = useAppSelector(state=>state.network.uid);
     const client: Client = useAppSelector(state=>state.network.client);
+    const room: Room<PreparationState> = useAppSelector(state=>state.network.preparation);
     const [botDifficulty, setBotDifficulty] = useState<BOT_DIFFICULTY>(BOT_DIFFICULTY.MEDIUM);
 
     async function startGame() {
@@ -29,10 +32,14 @@ export default function PreparationMenu() {
         let allUsersReady = true;
         users.forEach(user=> {if(!user.ready){allUsersReady = false}});
         if(allUsersReady){
-            const room: Room<GameState> = await client.create('game', {users: users, idToken: token});
-            localStorage.setItem('lastRoomId', room.id);
-            localStorage.setItem('lastSessionId', room.sessionId);
-            joinGame(room);
+            const token: string = await firebase.auth().currentUser.getIdToken();
+            const r: Room<GameState> = await client.create('game', {users: users, idToken: token});
+            localStorage.setItem('lastRoomId', r.id);
+            localStorage.setItem('lastSessionId', r.sessionId);
+            await room.leave();
+            r.connection.close();
+            dispatch(leavePreparation());
+            props.setToGame(true);
         }
     }
 

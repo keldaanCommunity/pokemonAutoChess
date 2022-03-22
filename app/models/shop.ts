@@ -1,7 +1,7 @@
 import PokemonFactory from './pokemon-factory';
 import {PKM, PROBABILITY} from './enum';
 import Player from './colyseus-models/player';
-import {Pokemon} from './colyseus-models/pokemon';
+import {IPokemon} from '../types';
 
 const COMMON = [PKM.CHARMANDER, PKM.GEODUDE,
   PKM.AZURILL, PKM.ZUBAT,
@@ -99,7 +99,7 @@ export default class Shop {
     const legendary = [];
     const threeStars = [];
 
-    player.board.forEach((pokemon: Pokemon, id: string) => {
+    player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.stars == 3) {
         threeStars.push(PokemonFactory.getPokemonFamily(pokemon.name));
       }
