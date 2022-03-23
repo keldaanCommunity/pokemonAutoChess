@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
 
-const textAreaStyle={
-  height:'400px'
-};
-
 const buttonStyle = {
   marginLeft:'10px',
   marginTop:'10px',

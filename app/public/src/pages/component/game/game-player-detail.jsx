@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BATTLE_RESULT } from '../../../../models/enum';
+import { BATTLE_RESULT } from '../../../../../models/enum';
 
 class GamePlayerDetail extends Component{
 

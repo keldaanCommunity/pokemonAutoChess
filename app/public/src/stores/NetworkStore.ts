@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Room, Client } from "colyseus.js";
 import {User} from '@firebase/auth-types';
-import { ILobbyUser } from "../../../models/colyseus-models/lobby-user";
 import {ICustomLobbyState} from '../../../types';
 import {IBot} from '../../../models/mongo-models/bot-v2';
 import PreparationState from "../../../rooms/states/preparation-state";
@@ -93,6 +92,21 @@ export const networkSlice = createSlice({
         },
         requestTilemap: (state) => {
             state.game.send('request-tilemap');
+        },
+        refreshClick: (state) => {
+            state.game.send('refresh');
+        },
+        lockClick: (state) => {
+            state.game.send('lock');
+        },
+        levelClick: (state) => {
+            state.game.send('levelUp');
+        },
+        shopClick: (state, action: PayloadAction<number>) => {
+            state.game.send('shop', {'id': action.payload});
+        }, 
+        itemClick: (state, action: PayloadAction<string>) => {
+            state.game.send('item', {'id': action.payload});
         }
     }
 });
@@ -114,7 +128,12 @@ export const {
     addBot,
     removeBot,
     toggleReady,
-    requestTilemap
+    requestTilemap,
+    itemClick,
+    shopClick,
+    levelClick,
+    lockClick,
+    refreshClick
 } = networkSlice.actions;
 
 export default networkSlice.reducer;

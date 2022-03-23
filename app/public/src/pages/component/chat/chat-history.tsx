@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../../hooks';
 import ChatMessage from './chat-message';
 import CSS from 'csstype';
 import { IMessage } from '../../../../../types';

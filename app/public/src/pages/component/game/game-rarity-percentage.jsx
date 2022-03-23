@@ -1,4 +1,4 @@
-import {PROBABILITY, RARITY} from '../../../../models/enum';
+import {PROBABILITY, RARITY} from '../../../../../models/enum';
 import React, { Component } from 'react';
 
 class GameRarityPercentage extends Component{

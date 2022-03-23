@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PKM, ITEM } from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
-import GameSynergies from '../game-synergies';
+import GameSynergies from '../game/game-synergies';
 import SelectedEntity from './selected-entity';
 import ModalMenu from '../modal-menu';
 import ItemPicker from './item-picker';

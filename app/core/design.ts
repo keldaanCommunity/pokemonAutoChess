@@ -8,8 +8,8 @@ export default class Design {
   terrain: number[][] = [];
   bitmask: string[][] = [];
   tilemap: number[] = [];
-  width: number = 85;
-  height: number = 43;
+  width = 85;
+  height = 43;
   frequency: number;
   persistance: number;
   tileset: Tileset;
@@ -117,4 +117,4 @@ export default class Design {
       width: this.width
     };
   }
-};
+}

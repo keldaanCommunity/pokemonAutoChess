@@ -26,7 +26,6 @@ export interface IGameState {
     stageLevel: number
     mapName: string
 }
-
 export interface IPlayer {
     id: string
     name: string
@@ -52,7 +51,6 @@ export interface IPlayer {
     alive: boolean
     tileset: string
 }
-
 export interface IPokemon {
     id: string
     name: string

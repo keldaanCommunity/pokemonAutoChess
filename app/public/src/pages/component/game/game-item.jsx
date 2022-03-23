@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ITEM_NAME, ITEM_DESCRIPTION} from '../../../../models/enum';
+import {ITEM_NAME, ITEM_DESCRIPTION} from '../../../../../models/enum';
 
 class GameItem extends Component{
 
