@@ -14,6 +14,7 @@ import CSS from 'csstype';
 import produce from 'immer';
 import { useAppSelector, useAppDispatch } from '../../../hooks';
 import {createBot, requestBotData} from "../../../stores/NetworkStore"
+import { setSynergies } from '../../../stores/LobbyStore';
 
 const MODE = Object.freeze({
   WRITE:'WRITE',
@@ -176,17 +177,18 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     author:'',
     elo: 1200
   });
-  const [synergies, setSynergies] = useState<ISynergies>();
   const [entity, setEntity] = useState<string>('');
   const [mode, setMode] = useState<string>(MODE.WRITE);
   const [modalMode, setModalMode] = useState<string>(MODAL_MODE.IMPORT)
   const [modalBoolean, setModalBoolean] = useState<boolean>(false);
 
+  const synergies: ISynergies = useAppSelector(state=>state.lobby.synergies);
   const botList: string[] = useAppSelector(state=>state.lobby.botList);
   const pastebinUrl: string = useAppSelector(state=>state.lobby.pastebinUrl);
   const botData: IBot = useAppSelector(state=>state.lobby.botData);
 
   function updateSynergies(i: number) {
+    const dispatch = useAppDispatch();
     const newSynergies = {
       NORMAL: 0,
       GRASS: 0,
@@ -226,7 +228,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
         });
       }
     });
-    setSynergies(newSynergies);
+    dispatch(setSynergies(newSynergies));
   }
 
   function write(x: number, y: number) {
@@ -354,7 +356,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
       </ReactTooltip>
        Paste Step</button>
   </div>
-  <GameSynergies synergies={synergies}/>
+  <GameSynergies source='lobby'/>
   <TeamEditor 
     step={step}
     steps={bot.steps}

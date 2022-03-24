@@ -28,7 +28,7 @@ const initialState: GameStateStore = {
     roundTime: 30,
     phase: STATE.PICK,
     players: new MapSchema<IPlayer>(),
-    player: undefined,
+    player: new Player('Loading', 'Loading...', 1000, 'rattata', false, 8),
     stageLevel: 0,
     mapName: '',
     currentPlayerId: '',

@@ -160,6 +160,8 @@ export default function Game() {
   else{
     return <div>
     <GameShop/>
+    <GameInformations/>
+    <GameSynergies source='game'/>
     <div id='game' ref={container} style={{
       maxHeight:'100vh'
     }}>
@@ -175,7 +177,7 @@ export default function Game() {
     <GamePlayers/>
     <GamePlayerInformations/>
     <GameDpsMeter/>
-    <GameSynergies/>
+    
     <GameRarityPercentage/>
     <GameItemsProposition/>
 
