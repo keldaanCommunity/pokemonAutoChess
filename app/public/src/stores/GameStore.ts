@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { STATE } from "../../../models/enum";
 import { IPlayer } from "../../../types";
-import {MapSchema, ArraySchema} from "@colyseus/schema";
+import {MapSchema, ArraySchema, DataChange} from "@colyseus/schema";
 import Player from "../../../models/colyseus-models/player";
 import ExperienceManager from "../../../models/colyseus-models/experience-manager";
+import Synergies from "../../../models/colyseus-models/synergies";
 
 interface GameStateStore {
     afterGameId: string
@@ -20,7 +21,8 @@ interface GameStateStore {
     shopLocked: boolean
     experienceManager: ExperienceManager
     shop: ArraySchema<string>
-    itemsProposition: ArraySchema<string>
+    itemsProposition: ArraySchema<string>,
+    synergies: Synergies
 }
 
 const initialState: GameStateStore = {
@@ -38,7 +40,8 @@ const initialState: GameStateStore = {
     shopLocked: false,
     experienceManager: new ExperienceManager(),
     shop: new ArraySchema<string>(),
-    itemsProposition: new ArraySchema<string>()
+    itemsProposition: new ArraySchema<string>(),
+    synergies: new Synergies()
 }
 
 export const gameSlice = createSlice({
@@ -84,22 +87,26 @@ export const gameSlice = createSlice({
         setExperienceManager: (state, action: PayloadAction<ExperienceManager>) => {
             state.experienceManager = action.payload;
         },
-        changePlayer: (state, action: PayloadAction<Player>) => {
+        changePlayer: (state, action: PayloadAction<{id: string, change: DataChange<any>}>) => {
             if(action.payload.id == state.currentPlayerId){
-                state.player = action.payload;
+                state.player[action.payload.change.field] = action.payload.change.value;
             }
-            state.players.set(action.payload.id, action.payload);
+            state.players.get(action.payload.id)[action.payload.change.field] = action.payload.change.value;
         },
         setShop: (state, action: PayloadAction<ArraySchema<string>>) => {
             state.shop = action.payload;
         },
         setItemsProposition: (state, action: PayloadAction<ArraySchema<string>>) => {
             state.itemsProposition = action.payload;
+        },
+        setSynergies: (state, action: PayloadAction<Synergies>) => {
+            state.synergies = JSON.parse(JSON.stringify(action.payload));
         }
     }
 });
 
 export const {
+    setSynergies,
     setRoundTime,
     setAfterGameId,
     setPhase,

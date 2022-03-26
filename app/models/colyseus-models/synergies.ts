@@ -29,6 +29,11 @@ export default class Synergies extends Schema implements ISynergies{
   @type('uint8') FOSSIL: number;
   @type('uint8') SOUND: number;
 
+  constructor(){
+    super();
+    this.setToZero();
+  }
+
   update(board: MapSchema<IPokemon>) {
     const pokemonNames = [];
     this.setToZero();

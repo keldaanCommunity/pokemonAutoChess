@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import React, { useEffect, useRef, useState } from "react";
 import GameState from "../../../rooms/states/game-state";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { addPlayer, changePlayer, setAfterGameId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setPlayer, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak } from "../stores/GameStore";
+import { setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setPlayer, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak } from "../stores/GameStore";
 import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore";
 import { FIREBASE_CONFIG } from "./utils/utils";
 import GameContainer from '../game/game-container';
@@ -18,7 +18,6 @@ import GamePlayers from "./component/game/game-players";
 import GameRarityPercentage from "./component/game/game-rarity-percentage";
 import GameShop from "./component/game/game-shop";
 import GameSynergies from "./component/game/game-synergies";
-
 let gameContainer: GameContainer;
 
 export default function Game() {
@@ -46,6 +45,7 @@ export default function Game() {
         }
         firebase.auth().onAuthStateChanged(async user => {
             dispatch(logIn(user));
+            dispatch(setCurrentPlayerId(user.uid));
             try{
                 const r: Room<GameState> = await client.reconnect(localStorage.getItem('lastRoomId'),localStorage.getItem('lastSessionId'));
                 dispatch(joinGame(r));
@@ -62,11 +62,11 @@ export default function Game() {
 
     if(!initialized && room != undefined){
       setInitialized(true);
+      dispatch(requestTilemap());
 
       gameContainer = new GameContainer(container.current, uid, room);
       document.getElementById('game').addEventListener('drag-drop', gameContainer.onDragDrop.bind(gameContainer));
       document.getElementById('game').addEventListener('sell-drop', gameContainer.onSellDrop.bind(gameContainer));
-      dispatch(requestTilemap());
 
       room.onMessage('info', message => {setModalTitle(message.title); setModalInfo(message.info); setModalBoolean(true)});
       room.onMessage('tilemap', tilemap => {gameContainer.setTilemap(tilemap)});
@@ -144,9 +144,18 @@ export default function Game() {
                 dispatch(setStreak(player.streak));
               }
             }
-            dispatch(changePlayer(player));
+            dispatch(changePlayer({id: player.id, change: change}));
           });
-        })
+        });
+
+        player.synergies.onChange = ((changes) => {
+          console.log(changes);
+          console.log(player.id, currentPlayerId);
+          if(player.id == currentPlayerId){
+            console.log('dispatch set synergies');
+            dispatch(setSynergies(player.synergies));
+          }
+        });
       }
     }
   });
