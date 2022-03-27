@@ -130,9 +130,6 @@ export default function Game() {
               else if (change.field == 'intereset'){
                 dispatch(setInterest(player.interest));
               }
-              else if (change.field == 'itemsProposition'){
-                dispatch(setItemsProposition(player.itemsProposition));
-              }
               else if (change.field == 'shop'){
                 dispatch(setShop(player.shop));
               }
@@ -181,6 +178,16 @@ export default function Game() {
             dispatch(setSynergies(player.synergies));
           }
         });
+        player.itemsProposition.onAdd = ((changes)=>{
+          if(player.id == uid){
+            dispatch(setItemsProposition(player.itemsProposition));
+          }
+        });
+        player.itemsProposition.onRemove = ((changes)=>{
+          if(player.id == uid){
+            dispatch(setItemsProposition(player.itemsProposition));
+          }
+        });
       }
     }
   });
@@ -199,6 +206,7 @@ export default function Game() {
     <GamePlayers click={(id: string) => playerClick(id)}/>
     <GameSynergies source='game'/>
     <GameRarityPercentage/>
+    <GameItemsProposition/>
     <div id='game' ref={container} style={{
       maxHeight:'100vh'
     }}>

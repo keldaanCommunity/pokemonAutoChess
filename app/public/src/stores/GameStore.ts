@@ -106,7 +106,7 @@ export const gameSlice = createSlice({
             state.shop = action.payload;
         },
         setItemsProposition: (state, action: PayloadAction<ArraySchema<string>>) => {
-            state.itemsProposition = action.payload;
+            state.itemsProposition = JSON.parse(JSON.stringify(action.payload));
         },
         setSynergies: (state, action: PayloadAction<Synergies>) => {
             state.currentPlayerSynergies = JSON.parse(JSON.stringify(action.payload));
