@@ -19,7 +19,7 @@ const style: CSS.Properties = {
 }
 
 export default function GameSynergies(props:{source: string}) {
-    const synergies = props.source == 'game'? useAppSelector(state=>state.game.synergies) : useAppSelector(state=>state.lobby.synergies);
+    const synergies = props.source == 'game'? useAppSelector(state=>state.game.currentPlayerSynergies) : useAppSelector(state=>state.lobby.synergies);
 
     if(synergies){
         return <div style={style} className='nes-container hidden-scrollable'>

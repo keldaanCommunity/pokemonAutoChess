@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import React, { useEffect, useRef, useState } from "react";
 import GameState from "../../../rooms/states/game-state";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setPlayer, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak } from "../stores/GameStore";
+import { setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName} from "../stores/GameStore";
 import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore";
 import { FIREBASE_CONFIG } from "./utils/utils";
 import GameContainer from '../game/game-container';
@@ -18,7 +18,12 @@ import GamePlayers from "./component/game/game-players";
 import GameRarityPercentage from "./component/game/game-rarity-percentage";
 import GameShop from "./component/game/game-shop";
 import GameSynergies from "./component/game/game-synergies";
+
 let gameContainer: GameContainer;
+
+function playerClick(id: string){
+  gameContainer.onPlayerClick(id);
+}
 
 export default function Game() {
   const dispatch = useAppDispatch();
@@ -80,8 +85,10 @@ export default function Game() {
             dispatch(setRoundTime(change.value));
           }
           else if(change.field == 'phase') {
-            const g: any = gameContainer.game.scene.getScene('gameScene');
-            g.updatePhase();
+            if(gameContainer.game){
+              const g: any = gameContainer.game.scene.getScene('gameScene');
+              g.updatePhase();
+            }
             dispatch(setPhase(change.value));
           }
           else if(change.field == 'stageLevel') {
@@ -97,16 +104,11 @@ export default function Game() {
         gameContainer.initializePlayer(player);
         dispatch(addPlayer(player));
 
-        if(player.id == currentPlayerId){
-          dispatch(setPlayer(player));
-        }
-
         if(player.id == uid){
-            dispatch(setMoney(player.money));
-            dispatch(setInterest(player.interest));
-            dispatch(setStreak(player.streak));
-            dispatch(setShopLocked(player.shopLocked));
-            dispatch(setExperienceManager(player.experienceManager));
+          setInterest(player.interest);
+          setStreak(player.streak);
+          setShopLocked(player.shopLocked);
+          dispatch(setPlayer(player));
         }
 
         player.onChange = ((changes) => {
@@ -144,15 +146,38 @@ export default function Game() {
                 dispatch(setStreak(player.streak));
               }
             }
+            if(player.id == currentPlayerId){
+              if(change.field == 'opponentName'){
+                dispatch(setOpponentName(change.value));
+              }
+              else if(change.field == 'opponentAvatar'){
+                dispatch(setOpponentAvatar(change.value));
+              }
+              else if(change.field == 'boardSize'){
+                dispatch(setBoardSize(change.value));
+              }
+              else if(change.field == 'life'){
+                dispatch(setLife(change.value));
+              }
+              else if(change.field == 'money'){
+                dispatch(setCurrentPlayerMoney(change.value));
+              }
+              else if(change.field == 'experienceManager'){
+                dispatch(setCurrentPlayerExperienceManager(change.value));
+              }
+              else if (change.field == 'avatar'){
+                dispatch(setCurrentPlayerAvatar(change.value));
+              }
+              else if (change.field == 'name'){
+                dispatch(setCurrentPlayerName(change.value));
+              }
+            }
             dispatch(changePlayer({id: player.id, change: change}));
           });
         });
 
         player.synergies.onChange = ((changes) => {
-          console.log(changes);
-          console.log(player.id, currentPlayerId);
           if(player.id == currentPlayerId){
-            console.log('dispatch set synergies');
             dispatch(setSynergies(player.synergies));
           }
         });
@@ -170,7 +195,10 @@ export default function Game() {
     return <div>
     <GameShop/>
     <GameInformations/>
+    <GamePlayerInformations/>
+    <GamePlayers click={(id: string) => playerClick(id)}/>
     <GameSynergies source='game'/>
+    <GameRarityPercentage/>
     <div id='game' ref={container} style={{
       maxHeight:'100vh'
     }}>
@@ -247,15 +275,5 @@ export default function Game() {
       });
     }
 
-    playerClick(id){
-        this.setState({
-            currentPlayerId:id,
-            player:this.state.gameState.players.get(id),
-            blueDpsMeter: this.state.gameState.players.get(id).simulation.blueDpsMeter,
-            redDpsMeter: this.state.gameState.players.get(id).simulation.redDpsMeter,
-            blueHealDpsMeter: this.state.gameState.players.get(id).simulation.blueHealDpsMeter,
-            redHealDpsMeter: this.state.gameState.players.get(id).simulation.redHealDpsMeter,
-        });
-        this.gameContainer.onPlayerClick(id);
-    }
+
 */

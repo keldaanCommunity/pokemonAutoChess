@@ -1,8 +1,11 @@
 import {ArraySchema, MapSchema, SetSchema, CollectionSchema} from '@colyseus/schema'
 import board from '../core/board'
+import BattleResult from '../models/colyseus-models/battle-result'
+import ExperienceManager from '../models/colyseus-models/experience-manager'
 import LeaderboardInfo from '../models/colyseus-models/leaderboard-info'
 import LobbyUser from '../models/colyseus-models/lobby-user'
 import Message from '../models/colyseus-models/message'
+import Synergies from '../models/colyseus-models/synergies'
 
 export interface IMessage {
     name: string
@@ -33,8 +36,8 @@ export interface IPlayer {
     board: MapSchema<IPokemon>
     shop: string[]
     simulation: ISimulation
-    experienceManager: IExperienceManager
-    synergies: ISynergies
+    experienceManager: ExperienceManager
+    synergies: Synergies
     itemsProposition: string[]
     money: number
     life: number
@@ -50,6 +53,7 @@ export interface IPlayer {
     elo: number
     alive: boolean
     tileset: string
+    history: ArraySchema<BattleResult>
 }
 export interface IPokemon {
     id: string
