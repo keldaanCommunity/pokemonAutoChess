@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import React, { useEffect, useRef, useState } from "react";
 import GameState from "../../../rooms/states/game-state";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName} from "../stores/GameStore";
+import { setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter} from "../stores/GameStore";
 import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore";
 import { FIREBASE_CONFIG } from "./utils/utils";
 import GameContainer from '../game/game-container';
@@ -188,6 +188,58 @@ export default function Game() {
             dispatch(setItemsProposition(player.itemsProposition));
           }
         });
+        player.simulation.blueDpsMeter.onAdd = ((dps, key)=>{
+          if(player.id == currentPlayerId){
+            dispatch(addBlueDpsMeter(dps));
+          }
+          dps.onChange = function(changes) {
+            if(player.id == currentPlayerId){
+              changes.forEach(change=>{
+                dispatch(changeBlueDpsMeter({id: dps.id, change: change}));
+              });  
+            }
+          }
+        });
+        player.simulation.blueDpsMeter.onRemove = (dps, key) =>{
+
+        };
+        
+        player.simulation.redDpsMeter.onAdd = ((dps, key)=>{
+          if(player.id == currentPlayerId){
+            dispatch(addRedDpsMeter(dps));
+          }
+          dps.onChange = function(changes) {
+            if(player.id == currentPlayerId){
+              changes.forEach(change=>{
+                dispatch(changeRedDpsMeter({id: dps.id, change: change}));
+              });
+            }
+          }
+        });
+        player.simulation.blueHealDpsMeter.onAdd = ((dps, key)=>{
+          if(player.id == currentPlayerId){
+            dispatch(addBlueHealDpsMeter(dps));
+          }
+          dps.onChange = function(changes) {
+            if(player.id == currentPlayerId){
+              changes.forEach(change=>{
+                dispatch(changeBlueHealDpsMeter({id: dps.id, change: change}));
+              });   
+            }
+          }
+        });
+        player.simulation.redHealDpsMeter.onAdd = ((dps, key)=>{
+          if(player.id == currentPlayerId){
+            dispatch(addRedHealDpsMeter(dps));
+          }
+          dps.onChange = function(changes) {
+            if(player.id == currentPlayerId){
+              changes.forEach(change=>{
+                dispatch(changeRedHealDpsMeter({id: dps.id, change: change}));
+              });
+            }
+          }
+        });
       }
     }
   });
@@ -207,6 +259,7 @@ export default function Game() {
     <GameSynergies source='game'/>
     <GameRarityPercentage/>
     <GameItemsProposition/>
+    <GameDpsMeter/>
     <div id='game' ref={container} style={{
       maxHeight:'100vh'
     }}>

@@ -1,5 +1,7 @@
 import {ArraySchema, MapSchema, SetSchema, CollectionSchema} from '@colyseus/schema'
 import board from '../core/board'
+import Dps from '../core/dps'
+import DpsHeal from '../core/dps-heal'
 import BattleResult from '../models/colyseus-models/battle-result'
 import ExperienceManager from '../models/colyseus-models/experience-manager'
 import LeaderboardInfo from '../models/colyseus-models/leaderboard-info'
@@ -123,10 +125,10 @@ export interface ISimulation {
     redEffects: string[]
     blueTeam: MapSchema<IPokemonEntity>
     redTeam: MapSchema<IPokemonEntity>
-    blueDpsMeter: MapSchema<IDps>
-    redDpsMeter: MapSchema<IDps>
-    blueHealDpsMeter: MapSchema<IDpsHeal>
-    redHealDpsMeter: MapSchema<IDpsHeal>
+    blueDpsMeter: MapSchema<Dps>
+    redDpsMeter: MapSchema<Dps>
+    blueHealDpsMeter: MapSchema<DpsHeal>
+    redHealDpsMeter: MapSchema<DpsHeal>
 }
 
 export interface IDps {

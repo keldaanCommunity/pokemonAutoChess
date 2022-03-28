@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { STATE } from "../../../models/enum";
-import { IPlayer } from "../../../types";
+import { IDps, IDpsHeal, IPlayer } from "../../../types";
 import {MapSchema, ArraySchema, DataChange} from "@colyseus/schema";
 import Player from "../../../models/colyseus-models/player";
 import ExperienceManager from "../../../models/colyseus-models/experience-manager";
@@ -27,9 +27,13 @@ interface GameStateStore {
     currentPlayerBoardSize: number
     currentPlayerLife: number
     currentPlayerMoney: number
-    currentPlayerExperienceManager:  ExperienceManager
+    currentPlayerExperienceManager: ExperienceManager
     currentPlayerName: string
-    currentPlayerAvatar: string
+    currentPlayerAvatar: string,
+    blueDpsMeter: IDps[],
+    redDpsMeter: IDps[],
+    blueHealDpsMeter: IDpsHeal[],
+    redHealDpsMeter: IDpsHeal[]
 }
 
 const initialState: GameStateStore = {
@@ -55,7 +59,11 @@ const initialState: GameStateStore = {
     currentPlayerMoney: 5,
     currentPlayerExperienceManager: new ExperienceManager(),
     currentPlayerName: '',
-    currentPlayerAvatar: 'rattata'
+    currentPlayerAvatar: 'rattata',
+    blueDpsMeter: [],
+    redDpsMeter: [],
+    blueHealDpsMeter: [],
+    redHealDpsMeter: []
 }
 
 export const gameSlice = createSlice({
@@ -145,11 +153,59 @@ export const gameSlice = createSlice({
             state.currentPlayerAvatar = action.payload.avatar;
             state.currentPlayerName = action.payload.name;
             state.currentPlayerBoardSize = action.payload.boardSize;
+            state.blueDpsMeter = JSON.parse(JSON.stringify(action.payload.simulation.blueDpsMeter));
+            state.redDpsMeter = JSON.parse(JSON.stringify(action.payload.simulation.redDpsMeter));
+            state.redHealDpsMeter = JSON.parse(JSON.stringify(action.payload.simulation.redHealDpsMeter));
+            state.blueHealDpsMeter = JSON.parse(JSON.stringify(action.payload.simulation.blueHealDpsMeter));
+        },
+        addRedDpsMeter: (state, action: PayloadAction<IDps>) => {
+            state.redDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+        },
+        addBlueDpsMeter: (state, action: PayloadAction<IDps>) => {
+            state.blueDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+        },
+        addRedHealDpsMeter: (state, action: PayloadAction<IDpsHeal>) => {
+            state.redHealDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+        },
+        addBlueHealDpsMeter: (state, action: PayloadAction<IDpsHeal>) => {
+            state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+        },
+        changeRedDpsMeter: (state, action: PayloadAction<{id: string, change: DataChange<any>}>) => {
+            state.redDpsMeter[state.redDpsMeter.findIndex(e=>action.payload.id == e.id)][action.payload.change.field] = action.payload.change.value;
+        },
+        changeBlueDpsMeter: (state, action: PayloadAction<{id: string, change: DataChange<any>}>) => {
+            state.blueDpsMeter[state.blueDpsMeter.findIndex(e=>action.payload.id == e.id)][action.payload.change.field] = action.payload.change.value;
+        },
+        changeRedHealDpsMeter: (state, action: PayloadAction<{id: string, change: DataChange<any>}>) => {
+            state.redHealDpsMeter[state.redHealDpsMeter.findIndex(e=>action.payload.id == e.id)][action.payload.change.field] = action.payload.change.value;
+        },
+        changeBlueHealDpsMeter: (state, action: PayloadAction<{id: string, change: DataChange<any>}>) => {
+            state.blueHealDpsMeter[state.blueHealDpsMeter.findIndex(e=>action.payload.id == e.id)][action.payload.change.field] = action.payload.change.value;
+        },
+        removeRedDpsMeter: (state, action: PayloadAction<string>) => {
+            state.redDpsMeter = state.redDpsMeter.filter(e=>e.id != action.payload);
+        },
+        removeBlueDpsMeter: (state, action: PayloadAction<string>) => {
+            state.blueDpsMeter = state.blueDpsMeter.filter(e=>e.id != action.payload);
+        },
+        removeRedHealDpsMeter: (state, action: PayloadAction<string>) => {
+            state.redHealDpsMeter = state.redHealDpsMeter.filter(e=>e.id != action.payload);
+        },
+        removeBlueHealDpsMeter: (state, action: PayloadAction<string>) => {
+            state.blueHealDpsMeter = state.blueHealDpsMeter.filter(e=>e.id != action.payload);
         }
     }
 });
 
 export const {
+    changeBlueDpsMeter,
+    changeRedDpsMeter,
+    changeBlueHealDpsMeter,
+    changeRedHealDpsMeter,
+    addRedDpsMeter,
+    addBlueDpsMeter,
+    addRedHealDpsMeter,
+    addBlueHealDpsMeter,
     setCurrentPlayerName,
     setPlayer,
     setCurrentPlayerAvatar,

@@ -6,7 +6,7 @@ import {CLIMATE, EFFECTS, TYPE, ATTACK_TYPE, ITEM} from '../models/enum';
 import Dps from'./dps';
 import DpsHeal from './dps-heal';
 import ItemFactory from '../models/item-factory';
-import { ISimulation, IPokemonEntity, IDps, IDpsHeal, IPokemon } from '../types';
+import { ISimulation, IPokemonEntity, IPokemon } from '../types';
 
 export default class Simulation extends Schema implements ISimulation{
   @type('string') climate: string;
@@ -14,10 +14,10 @@ export default class Simulation extends Schema implements ISimulation{
   @type(['string']) redEffects: string[];
   @type({map: PokemonEntity}) blueTeam = new MapSchema<IPokemonEntity>();
   @type({map: PokemonEntity}) redTeam = new MapSchema<IPokemonEntity>();
-  @type({map: Dps}) blueDpsMeter = new MapSchema<IDps>();
-  @type({map: Dps}) redDpsMeter = new MapSchema<IDps>();
-  @type({map: DpsHeal}) blueHealDpsMeter = new MapSchema<IDpsHeal>();
-  @type({map: DpsHeal}) redHealDpsMeter = new MapSchema<IDpsHeal>();
+  @type({map: Dps}) blueDpsMeter = new MapSchema<Dps>();
+  @type({map: Dps}) redDpsMeter = new MapSchema<Dps>();
+  @type({map: DpsHeal}) blueHealDpsMeter = new MapSchema<DpsHeal>();
+  @type({map: DpsHeal}) redHealDpsMeter = new MapSchema<DpsHeal>();
   board: Board = new Board(8,6);
   finished: boolean;
   flowerSpawn: boolean[];
