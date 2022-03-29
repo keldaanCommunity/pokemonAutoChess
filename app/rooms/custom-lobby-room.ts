@@ -14,6 +14,7 @@ import BotV2, { IBot } from '../models/mongo-models/bot-v2';
 import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
+import { ICustomLobbyState } from "../types";
 
 const pastebin = new PastebinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
@@ -21,14 +22,14 @@ const pastebin = new PastebinAPI({
   'api_user_password': process.env.PASTEBIN_API_PASSWORD
 });
 
-export default class CustomLobbyRoom extends LobbyRoom {
+export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
   discordWebhook: WebhookClient;
   bots: Map<string, IBot>;
   meta: IMeta[];
   metaItems: IItemsStatistic[];
 
   onCreate(options: any): Promise<void>{
-    console.log(`create lobby`);
+    console.log(`create lobby`, this.roomId);
     const self = this;
     super.onCreate(options);
     this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
@@ -40,7 +41,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage('new-message', (client, message) => {
       if (message.payload != '') {
-        this.state.addMessage(message.name, message.payload, message.avatar, Date.now(), true);
+        this.state.addMessage(this.state.users.get(client.auth.uid).name, message.payload, this.state.users.get(client.auth.uid).avatar, Date.now(), true);
       }
     });
 
@@ -620,7 +621,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
   onJoin(client: Client, options: any) {
     super.onJoin(client, options);
-    // console.log(auth);
+    console.log(`${client.auth.displayName} ${client.id} join lobby room`);
     // client.send('bot-data', this.bots);
     UserMetadata.findOne({'uid': client.auth.uid}, (err: any, user: IUserMetadata)=>{
       if (user) {

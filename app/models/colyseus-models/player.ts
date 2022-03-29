@@ -6,18 +6,20 @@ import {Effects} from '../effects';
 import BattleResult from './battle-result';
 import ExperienceManager from './experience-manager';
 import { BATTLE_RESULT } from '../enum';
-export default class Player extends Schema {
+import { IPlayer, IPokemon, ISimulation } from '../../types';
+
+export default class Player extends Schema implements IPlayer{
   @type('string') id: string;
   @type('string') name: string;
   @type('string') avatar: string;
-  @type({map: Pokemon}) board = new MapSchema<Pokemon>();
+  @type({map: Pokemon}) board = new MapSchema<IPokemon>();
   @type(['string']) shop = new ArraySchema<string>();
   @type(Simulation) simulation = new Simulation();
   @type(ExperienceManager) experienceManager = new ExperienceManager();
   @type(Synergies) synergies = new Synergies();
   @type(['string']) itemsProposition = new ArraySchema<string>();
   @type('uint8') money = process.env.MODE == 'dev' ? 400 : 5;
-  @type('uint8') life = process.env.MODE == 'dev' ? 50 : 100;
+  @type('uint8') life = process.env.MODE == 'dev' ? 10 : 100;
   @type('boolean') shopLocked: boolean = false;
   @type('uint8') streak: number = 0;
   @type('uint8') interest: number = 0;
@@ -82,7 +84,7 @@ export default class Player extends Schema {
 
   getPokemonAt(x: number, y: number) {
     let i:string = null;
-    let p:Pokemon = null;
+    let p:IPokemon = null;
 
     this.board.forEach((pokemon, id)=>{
       if (pokemon.positionX == x && pokemon.positionY == y) {

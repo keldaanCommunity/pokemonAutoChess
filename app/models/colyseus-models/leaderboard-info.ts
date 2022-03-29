@@ -1,6 +1,13 @@
 import {Schema, type} from '@colyseus/schema';
 
-export default class LeaderboardInfo extends Schema {
+
+export interface ILeaderboardInfo {
+  name: string;
+  avatar: string;
+  rank: number;
+  value: number;
+}
+export default class LeaderboardInfo extends Schema implements ILeaderboardInfo{
   @type('string') name: string;
   @type('string') avatar: string;
   @type('uint16') rank: number;

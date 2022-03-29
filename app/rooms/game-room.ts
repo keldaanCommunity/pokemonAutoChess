@@ -11,6 +11,7 @@ import EloRank from 'elo-rank';
 import admin from 'firebase-admin';
 import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2';
 import { Pokemon } from '../models/colyseus-models/pokemon';
+import { IPokemon } from '../types';
 
 export default class GameRoom extends Room {
   dispatcher: Dispatcher<this>;
@@ -23,6 +24,7 @@ export default class GameRoom extends Room {
   // When room is initialized
   onCreate(options: any) {
     console.log(`create game room`);
+    // console.log(options);
     this.setState(new GameState());
     this.maxClients = 8;
     this.eloEngine = new EloRank();
@@ -30,9 +32,9 @@ export default class GameRoom extends Room {
       const user = options.users[id];
       // console.log(user);
       if (user.isBot) {
-        this.state.players.set(id, new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1));
-        this.state.botManager.addBot(this.state.players.get(id));
-        this.state.shop.assignShop(this.state.players.get(id));
+        this.state.players.set(user.id, new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1));
+        this.state.botManager.addBot(this.state.players.get(user.id));
+        this.state.shop.assignShop(this.state.players.get(user.id));
       }
     }
 
@@ -258,7 +260,7 @@ export default class GameRoom extends Room {
       elo: player.elo
     };
 
-    player.board.forEach((pokemon: Pokemon) => {
+    player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.positionY != 0) {
         const s = {
           name: pokemon.name,

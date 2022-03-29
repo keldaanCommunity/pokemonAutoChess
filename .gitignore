@@ -14,3 +14,4 @@ app/public/dist/**/*.d.ts
 /db-commands/*.sh
 /tests/render/*.png
 /tests/samples/*.json
+/.tgitconfig

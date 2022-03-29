@@ -12,6 +12,7 @@ import {
   OnRemoveBotCommand,
   InitializeBotsCommand
 } from './commands/preparation-commands';
+import { BOT_DIFFICULTY } from '../models/enum';
 
 export default class PreparationRoom extends Room {
   dispatcher: Dispatcher<this>;
@@ -49,14 +50,21 @@ export default class PreparationRoom extends Room {
     });
     this.onMessage('new-message', (client, message) => {
       try {
-        this.dispatcher.dispatch(new OnMessageCommand(), {client, message});
+        this.dispatcher.dispatch(new OnMessageCommand(), {
+          client: client, 
+          message: {
+          name: this.state.users.get(client.auth.uid).name,
+          avatar: this.state.users.get(client.auth.uid).avatar,
+          payload: message.payload,
+          time: Date.now()
+        }});
       } catch (error) {
         console.log(error);
       }
     });
     this.onMessage('addBot', (client: Client, d: string) => {
       try {
-        this.dispatcher.dispatch(new OnAddBotCommand(), {difficulty: d});
+        this.dispatcher.dispatch(new OnAddBotCommand(), {difficulty: BOT_DIFFICULTY[d]});
       } catch (error) {
         console.log(error);
       }
@@ -78,7 +86,7 @@ export default class PreparationRoom extends Room {
 
   onJoin(client: Client, options: any, auth: any) {
     if (client && client.auth && client.auth.displayName) {
-      console.log(`${client.auth.displayName} ${client.id} join game room`);
+      console.log(`${client.auth.displayName} ${client.id} join preparation room`);
       this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth});
     }
   }

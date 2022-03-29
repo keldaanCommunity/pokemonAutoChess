@@ -3,10 +3,11 @@ import {SPECIAL_SKILL, PKM, PRECOMPUTED_TYPE_POKEMONS, TYPE} from './enum';
 import Board from '../core/board';
 import {AttackStrategy, BiteStrategy, BlastBurnStrategy, BlazeKickStrategy, BonemerangStrategy, BugBuzzStrategy, BurnStrategy, CalmMindStrategy, ChargeStrategy, ClangorousSoulStrategy, ConfusionStrategy, DarkPulseStrategy, DisarmingVoiceStrategy, DischargeStrategy, DracoMeteorStrategy, DragonBreathStrategy, DragonTailStrategy, EchoStrategy, ExplosionStrategy, FireBlastStrategy, FreezeStrategy, GrassWhistleStrategy, GrowlStrategy, GuillotineStrategy, HappyHourStrategy, HeadSmashStrategy, HealBlockStrategy, HeatWaveStrategy, HighJumpKickStrategy, HurricaneStrategy, HydroPumpStrategy, HyperVoiceStrategy, IcicleCrashStrategy, IronDefenseStrategy, IronTailStrategy, KingShieldStrategy, LeechLifeStrategy, MeteorMashStrategy, MetronomeStrategy, NastyPlotStrategy, NightmareStrategy, NightSlashStrategy, OriginPulseStrategy, PetalDanceStrategy, PoisonStingStrategy, PoisonStrategy, ProtectStrategy, RelicSongStrategy, RoarOfTimeStrategy, RockSlideStrategy, RockSmashStrategy, RockTombStrategy, RootStrategy, SeedFlareStrategy, SeismicTossStrategy, ShadowCloneStrategy, SilenceStrategy, SleepStrategy, SoakStrategy, StompStrategy, StunSporeStrategy, TeleportStrategy, ThiefStrategy, ThunderStrategy, TormentStrategy, TriAttackStrategy, VoltSwitchStrategy, WheelOfFireStrategy, WishStrategy} from '../core/attack-strategy';
 import {MapSchema} from  '@colyseus/schema';
+import {IPokemon} from '../types';
 
 export default class PokemonFactory {
-  static getNeutralPokemonsByLevelStage(level: number) {
-    const pokemons = new MapSchema<Pokemon>();
+  static getNeutralPokemonsByLevelStage(level: number): MapSchema<IPokemon> {
+    const pokemons = new MapSchema<IPokemon>();
     switch (level) {
       case 1:
         const magikarp1 = PokemonFactory.createPokemonFromName(PKM.MAGIKARP);

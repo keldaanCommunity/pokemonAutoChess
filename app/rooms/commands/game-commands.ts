@@ -626,7 +626,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, {}> {
     rankArray.sort(sortPlayers);
 
     rankArray.forEach((rankPlayer, index)=>{
-      this.state.players.get(rankPlayer.id).rank = index + 1;
+      if(this.state.players.has(rankPlayer.id)){
+        this.state.players.get(rankPlayer.id).rank = index + 1;
+      }
     });
   }
 

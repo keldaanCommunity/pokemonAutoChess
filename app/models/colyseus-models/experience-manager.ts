@@ -1,12 +1,20 @@
 import {Schema, type} from '@colyseus/schema';
+import { IExperienceManager } from '../../types';
 import { EXP_TABLE } from '../enum';
+export default class ExperienceManager extends Schema implements IExperienceManager{
 
-export default class ExperienceManager extends Schema {
+  @type('uint8') level: number;
+  @type('uint8') experience: number;
+  @type('uint8') expNeeded: number;
+  maxLevel: number;
 
-  @type('uint8') level: number = 2;
-  @type('uint8') experience: number = 0;
-  @type('uint8') expNeeded: number = EXP_TABLE[2];
-  maxLevel: number = 9;
+  constructor(){
+    super();
+    this.level = 2;
+    this.experience = 0;
+    this.expNeeded = EXP_TABLE[2];
+    this.maxLevel = 9;
+  }
 
   canLevel() {
     return (this.level < this.maxLevel);

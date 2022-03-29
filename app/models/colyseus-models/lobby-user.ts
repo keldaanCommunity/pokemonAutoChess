@@ -1,9 +1,22 @@
 import {Schema, type, ArraySchema} from '@colyseus/schema';
-import {GameRecord} from './game-record';
+import {GameRecord, IGameRecord} from './game-record';
 import MapTileset from './map-tileset';
 import WinTileset from './win-tileset';
 
-export default class LobbyUser extends Schema {
+export interface ILobbyUser {
+  id: string;
+  name: string;
+  avatar: string;
+  elo: number;
+  langage: string;
+  wins: number;
+  exp: number;
+  level: number;
+  donor: boolean;
+  honors: string[],
+  history: IGameRecord[]
+}
+export default class LobbyUser extends Schema implements ILobbyUser{
   @type('string') id: string;
   @type('string') name: string;
   @type('string') avatar: string;
@@ -16,7 +29,7 @@ export default class LobbyUser extends Schema {
   @type('boolean') donor: boolean;
   @type(WinTileset) mapWin = new WinTileset();
   @type(['string']) honors = new ArraySchema<string>();
-  @type([GameRecord]) history = new ArraySchema<GameRecord>();
+  @type([GameRecord]) history = new ArraySchema<IGameRecord>();
 
 
   constructor(id:string,

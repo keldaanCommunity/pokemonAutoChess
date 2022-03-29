@@ -1,7 +1,14 @@
 import {GameUser} from '../../models/colyseus-models/game-user';
 import {Schema, MapSchema, type} from '@colyseus/schema';
 
-export default class PreparationState extends Schema {
+export interface IPreparationState {
+  users: MapSchema<GameUser>,
+  gameStarted: boolean,
+  ownerId: string,
+  ownerName: string
+}
+
+export default class PreparationState extends Schema implements IPreparationState{
   @type({map: GameUser}) users = new MapSchema<GameUser>();
   @type('boolean') gameStarted: boolean;
   @type('string') ownerId: string;

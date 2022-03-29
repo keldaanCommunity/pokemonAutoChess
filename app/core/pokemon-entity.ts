@@ -5,14 +5,14 @@ import uniqid from 'uniqid';
 import Status from '../models/colyseus-models/status';
 import Count from '../models/colyseus-models/count';
 import PokemonFactory from '../models/pokemon-factory';
-import {Pokemon} from '../models/colyseus-models/pokemon';
 import Simulation from './simulation';
 import {Schema, type, ArraySchema, SetSchema} from '@colyseus/schema';
 import {AttackStrategy} from './attack-strategy';
 import Board from './board';
 import PokemonState from './pokemon-state';
+import { IPokemonEntity, IPokemon } from '../types';
 
-export default class PokemonEntity extends Schema {
+export default class PokemonEntity extends Schema implements IPokemonEntity{
 
   @type('uint8') positionX: number;
   @type('uint8') positionY: number;
@@ -50,8 +50,8 @@ export default class PokemonEntity extends Schema {
   @type('float32') critDamage = 2;
   @type('uint8') spellDamage = 0;
   @type('uint16') healDone: number;
-  cooldown: number = 500;
-  manaCooldown: number = 1000;
+  cooldown = 500;
+  manaCooldown = 1000;
   state: MovingState;
   simulation: Simulation;
   strategy: AttackStrategy;
@@ -67,7 +67,7 @@ export default class PokemonEntity extends Schema {
   growGroundTimer: number;
   echo: number;
 
-  constructor(pokemon: Pokemon, positionX: number, positionY: number, team: number, simulation: Simulation) {
+  constructor(pokemon: IPokemon, positionX: number, positionY: number, team: number, simulation: Simulation) {
     super();
 
     this.state = new MovingState();
@@ -160,11 +160,11 @@ export default class PokemonEntity extends Schema {
     }
   }
 
-  handleHeal(heal: number, caster: PokemonEntity) {
+  handleHeal(heal: number, caster: IPokemonEntity) {
     return this.state.handleHeal(this, heal, caster);
   }
 
-  handleShield(shield: number, caster: PokemonEntity) {
+  handleShield(shield: number, caster: IPokemonEntity) {
     return this.state.handleShield(this, shield, caster);
   }
 

@@ -1,6 +1,7 @@
 import {Schema, type} from '@colyseus/schema';
+import {IMessage} from '../../types/index';
 
-export default class Message extends Schema {
+export default class Message extends Schema implements IMessage{
   @type('string') name: string;
   @type('string') payload: string;
   @type('string') avatar: string;

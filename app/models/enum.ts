@@ -1,3 +1,9 @@
+export enum BOT_DIFFICULTY {
+  EASY = "EASY",
+  MEDIUM = "MEDIUM",
+  HARD = "HARD"
+}
+
 export const PKM = Object.freeze({
   DITTO: 'ditto',
   BULBASAUR: 'bulbasaur',

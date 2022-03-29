@@ -4,6 +4,8 @@ import UserMetadata, { IUserMetadata } from "../../models/mongo-models/user-meta
 import BotV2 from "../../models/mongo-models/bot-v2";
 import { Client } from "colyseus";
 import PreparationRoom from "../preparation-room";
+import { IMessage } from "../../types";
+import { BOT_DIFFICULTY } from "../../models/enum";
 
 export class OnJoinCommand extends Command<PreparationRoom, {
   client: Client,
@@ -16,7 +18,7 @@ export class OnJoinCommand extends Command<PreparationRoom, {
         this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false));
 
         if (user.uid == this.state.ownerId) {
-          console.log(user.displayName);
+          // console.log(user.displayName);
           this.state.ownerName = user.displayName;
         }
         this.room.broadcast('messages', {
@@ -29,7 +31,7 @@ export class OnJoinCommand extends Command<PreparationRoom, {
     });
 
     if (this.state.users.size >= 8) {
-      return [new OnRemoveBotCommand()];
+      return [new OnRemoveBotCommand().setPayload({target: undefined})];
     }
   }
 }
@@ -56,7 +58,7 @@ export class OnGameStartCommand extends Command<PreparationRoom, {
 
 export class OnMessageCommand extends Command<PreparationRoom, {
   client: Client,
-  message: any
+  message: IMessage
 }> {
   execute({client, message}) {
     this.room.broadcast('messages', {...message, time: Date.now()});
@@ -84,6 +86,7 @@ export class OnToggleReadyCommand extends Command<PreparationRoom, {
   client: Client
 }> {
   execute({client}) {
+    // console.log(this.state.users.get(client.auth.uid).ready);
     this.state.users.get(client.auth.uid).ready = !this.state.users.get(client.auth.uid).ready;
   }
 }
@@ -123,7 +126,7 @@ export class InitializeBotsCommand extends Command<PreparationRoom, {
 }
 
 export class OnAddBotCommand extends Command<PreparationRoom, {
-  difficulty: string
+  difficulty: BOT_DIFFICULTY
 }> {
   execute({difficulty}) {
     if (this.state.users.size >= 8) {
@@ -141,13 +144,13 @@ export class OnAddBotCommand extends Command<PreparationRoom, {
     let d;
     
     switch (difficulty) {
-      case 'easy':
+      case BOT_DIFFICULTY.EASY:
         d = {$lt: 800};
         break;
-      case 'normal':
+      case BOT_DIFFICULTY.MEDIUM:
         d = {$gt: 800, $lt: 1100};
         break;
-      case 'hard':
+      case BOT_DIFFICULTY.HARD:
         d = {$gt: 1100};
         break;
     }
@@ -164,7 +167,12 @@ export class OnAddBotCommand extends Command<PreparationRoom, {
       }
 
       const bot = bots[Math.floor(Math.random() * bots.length)];
-      this.state.users.set(bot.avatar, new GameUser(
+
+      if (this.state.users.size >= 8) {
+        return;
+      }
+      else{
+        this.state.users.set(bot.avatar, new GameUser(
           bot.avatar,
           bot.avatar,
           bot.elo,
@@ -173,13 +181,13 @@ export class OnAddBotCommand extends Command<PreparationRoom, {
           true
       ));
 
-
       this.room.broadcast('messages', {
         'name': 'Server',
         'payload': `Bot ${ bot.avatar } added.`,
         'avatar': 'magnemite',
         'time': Date.now()
       });
+      }
     });
   }
 }

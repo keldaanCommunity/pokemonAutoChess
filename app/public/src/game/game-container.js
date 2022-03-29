@@ -323,8 +323,8 @@ class GameContainer {
     const scene = this.game.scene.getScene('gameScene');
 
     // scene.fade();
-    scene.boardManager.setPlayer(this.room.state.players[id]);
-    scene.battleManager.setPlayer(this.room.state.players[id]);
+    scene.boardManager.setPlayer(this.room.state.players.get(id));
+    scene.battleManager.setPlayer(this.room.state.players.get(id));
   }
 
   onDragDrop(event) {

@@ -83,8 +83,8 @@ export default class PokemonDetail extends GameObjects.Container {
     this.add(new GameObjects.Image(scene, 100, 180, 'icons', 'spellDamage').setScale(2, 2));
 
 
-    this.add(new GameObjects.Text(scene, 320, 15, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].title[window.langage], this.titleTextStyle));
-    this.add(new GameObjects.Text(scene, 230, 40, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].description[window.langage], this.textStyle));
+    this.add(new GameObjects.Text(scene, 320, 15, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].title.eng, this.titleTextStyle));
+    this.add(new GameObjects.Text(scene, 230, 40, SPECIAL_SKILL_DESCRIPTION[this.pokemonInformation.skill].description.eng, this.textStyle));
     this.add(new GameObjects.Text(scene, 230, 175, 'by @' + this.pokemonInformation.author, this.textStyle));
   }
 
