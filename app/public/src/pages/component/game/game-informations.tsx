@@ -16,7 +16,7 @@ const style: CSS.Properties = {
     height:'10%'
 }
 
-export default function GameInformations() {
+export default function GameInformations(props:{leave:()=>void}) {
     const mapName = useAppSelector(state=>state.game.mapName);
     const stageLevel = useAppSelector(state=>state.game.stageLevel);
     const roundTime = useAppSelector(state=>state.game.roundTime); 
@@ -24,7 +24,7 @@ export default function GameInformations() {
     return <div style={style} className='nes-container'>
     <p style={{fontSize: '0.7vw', textAlign: 'center', marginBottom: '0px'}}>{mapName}</p>
     <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
-        <GameLeave/>
+        <GameLeave leave={props.leave}/>
         <h3>T{stageLevel}</h3>
         <h3>{roundTime}s</h3>
     </div>

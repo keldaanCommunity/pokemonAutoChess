@@ -7,10 +7,9 @@ import { FIREBASE_CONFIG } from './utils/utils';
 import PreparationState from '../../../rooms/states/preparation-state';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { Client, Room } from 'colyseus.js';
-import { joinGame, joinLobby, joinPreparation, logIn } from '../stores/NetworkStore';
+import {joinPreparation, logIn } from '../stores/NetworkStore';
 import { addUser, changeUser, leavePreparation, pushMessage, removeUser, setGameStarted, setOwnerId, setOwnerName } from '../stores/PreparationStore';
 import GameState from '../../../rooms/states/game-state';
-import { ICustomLobbyState } from '../../../types';
 
 const preparationStyle = {
     display:'flex',

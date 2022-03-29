@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { PRECOMPUTED_RARITY_POKEMONS_ALL } from '../../../../models/enum';
-import PokemonFactory from '../../../../models/pokemon-factory';
-import PokemonDetail from './pokemon-detail';
+import { PRECOMPUTED_RARITY_POKEMONS_ALL } from '../../../../../models/enum';
+import PokemonFactory from '../../../../../models/pokemon-factory';
+import PokemonDetail from '../pokemon-detail';
 
 class PokemonWiki extends Component {
   render() {

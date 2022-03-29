@@ -5,12 +5,14 @@ import {ICustomLobbyState} from '../../../types';
 import {IBot} from '../../../models/mongo-models/bot-v2';
 import PreparationState from "../../../rooms/states/preparation-state";
 import GameState from "../../../rooms/states/game-state";
+import AfterGameState from "../../../rooms/states/after-game-state";
 
 interface INetwork {
     client: Client;
     lobby: Room<ICustomLobbyState>;
     preparation: Room<PreparationState>;
     game: Room<GameState>;
+    after: Room<AfterGameState>;
     uid: string;
     displayName: string;
 }
@@ -22,6 +24,7 @@ const initalState: INetwork = {
     lobby: undefined,
     preparation: undefined,
     game: undefined,
+    after: undefined,
     uid: undefined,
     displayName: undefined,
 }
@@ -43,10 +46,26 @@ export const networkSlice = createSlice({
         joinLobby: (state, action: PayloadAction<Room<ICustomLobbyState>>) => {
             state.lobby = action.payload;
             state.preparation = undefined;
+            state.game = undefined;
+            state.after = undefined;
         },
         joinPreparation: (state, action: PayloadAction<Room<PreparationState>>) => {
             state.preparation = action.payload;
             state.lobby = undefined;
+            state.game = undefined;
+            state.after = undefined;
+        },
+        joinGame: (state, action: PayloadAction<Room<GameState>>) => {
+            state.game = action.payload;
+            state.preparation = undefined;
+            state.lobby = undefined;
+            state.after = undefined;
+        },
+        joinAfter: (state, action: PayloadAction<Room<AfterGameState>>) => {
+            state.after = action.payload;
+            state.game = undefined;
+            state.lobby = undefined;
+            state.preparation = undefined;
         },
         sendMessage: (state, action: PayloadAction<string>) => {
             if(state.lobby){
@@ -58,10 +77,6 @@ export const networkSlice = createSlice({
         },
         searchName: (state, action: PayloadAction<string>) => {
             state.lobby.send('search', {'name':action.payload});
-        },
-        joinGame: (state, action: PayloadAction<Room<GameState>>) => {
-            state.game = action.payload;
-            state.preparation = undefined;
         },
         changeName: (state, action: PayloadAction<string>) => {
             state.lobby.send('name', {'name': action.payload});
@@ -119,6 +134,7 @@ export const {
     searchName,
     joinPreparation,
     joinGame,
+    joinAfter,
     changeName,
     changeAvatar,
     requestMeta,

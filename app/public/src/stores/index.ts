@@ -3,6 +3,7 @@ import lobbyReducer from './LobbyStore';
 import networkReducer from './NetworkStore';
 import preparationReducer from './PreparationStore';
 import gameReducer from './GameStore';
+import afterReducer from './AfterGameStore';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { enableMapSet } from 'immer';
 
@@ -13,7 +14,8 @@ const store = configureStore({
         lobby: lobbyReducer,
         network: networkReducer,
         preparation: preparationReducer,
-        game: gameReducer
+        game: gameReducer,
+        after: afterReducer
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

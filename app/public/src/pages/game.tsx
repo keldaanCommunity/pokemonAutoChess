@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import React, { useEffect, useRef, useState } from "react";
 import GameState from "../../../rooms/states/game-state";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter} from "../stores/GameStore";
+import { setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter, leaveGame} from "../stores/GameStore";
 import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore";
 import { FIREBASE_CONFIG } from "./utils/utils";
 import GameContainer from '../game/game-container';
@@ -17,6 +17,8 @@ import GamePlayers from "./component/game/game-players";
 import GameRarityPercentage from "./component/game/game-rarity-percentage";
 import GameShop from "./component/game/game-shop";
 import GameSynergies from "./component/game/game-synergies";
+import GameModal from "./component/game/game-modal";
+import AfterGameState from "../../../rooms/states/after-game-state";
 
 let gameContainer: GameContainer;
 
@@ -34,12 +36,26 @@ export default function Game() {
 
   const [initialized, setInitialized] = useState<boolean>(false);
   const [reconnected, setReconnected] = useState<boolean>(false);
-  const [toLobby, setToLobby] = useState<boolean>(false);
   const [modalTitle, setModalTitle] = useState<string>('');
   const [modalInfo, setModalInfo] = useState<string>('');
-  const [modalBoolean, setModalBoolean] = useState<boolean>(false);
-  
+  const [modalBoolean, setModalBoolean] = useState<boolean>(false);  
   const container = useRef();
+
+  async function leave() {
+    const savePlayers = [];
+    document.getElementById('game').removeEventListener('drag-drop', gameContainer.onDragDrop.bind(gameContainer));
+    document.getElementById('game').removeEventListener('sell-drop', gameContainer.onSellDrop.bind(gameContainer));
+    gameContainer.game.destroy(true);
+    room.state.players.forEach(player => savePlayers.push(gameContainer.transformToSimplePlayer(player)));
+    const token: string = await firebase.auth().currentUser.getIdToken();
+    const r: Room<AfterGameState> = await client.create('after-game', {players:savePlayers, idToken:token});
+    localStorage.setItem('lastRoomId', r.id);
+    localStorage.setItem('lastSessionId', r.sessionId);
+    await room.leave();
+    r.connection.close();
+    dispatch(leaveGame());
+    dispatch(setAfterGameId(r.id));
+  }
 
   useEffect(()=>{
     const reconnect = async () => {
@@ -262,16 +278,14 @@ export default function Game() {
     }
   });
 
-  if(toLobby){
-    return <Navigate to='/lobby'/>;
-  }
   if(afterGameId){
     return <Navigate to='/after'/>
   }
   else{
     return <div>
+    <GameModal modalBoolean={modalBoolean} modalTitle={modalTitle} modalInfo={modalInfo} hideModal={setModalBoolean} leave={leave}/>
     <GameShop/>
-    <GameInformations/>
+    <GameInformations leave={leave}/>
     <GamePlayerInformations/>
     <GamePlayers click={(id: string) => playerClick(id)}/>
     <GameSynergies source='game'/>
@@ -285,74 +299,3 @@ export default function Game() {
   </div>
   }
 }
-
-/*
-    <GameModal/>
-    <GameShop/>
-    <GameInformations/>
-    <GamePlayers/>
-    <GamePlayerInformations/>
-    <GameDpsMeter/>
-    
-    <GameRarityPercentage/>
-    <GameItemsProposition/>
-
-    leaveGame(){
-      this.removeEventListeners();
-      let savePlayers = [];
-      this.gameContainer.game.destroy(true);
-      this.room.state.players.forEach(player => savePlayers.push(this.gameContainer.transformToSimplePlayer(player)));
-
-      firebase.auth().currentUser.getIdToken().then(token =>{
-        this.client.create('after-game', {players:savePlayers, idToken:token}).then((room) => {
-          this.room.leave();
-          let id = room.id;
-          localStorage.setItem('lastRoomId', id);
-          localStorage.setItem('lastSessionId', room.sessionId);
-          room.connection.close();
-          this.setState({afterGameId: room.id});
-          });
-          //console.log('joined room:', room);
-      }).catch((e) => {
-        console.error('join error', e);
-      });
-    }
-
-
-    showModal(title, info){
-      this.setState({
-        modalTitle: title,
-        modalInfo: info,
-        modalBoolean: true
-      });
-    };
-
-
-    hideModal(){
-      this.setState({
-        modalBoolean: false
-      });
-    };
-
-    removeEventListeners(){
-      document.getElementById('game').removeEventListener('drag-drop', this.gameContainer.onDragDrop.bind(this.gameContainer));
-      document.getElementById('game').removeEventListener('sell-drop', this.gameContainer.onSellDrop.bind(this.gameContainer));
-    }
-
-    reconnect(){
-      firebase.auth().currentUser.getIdToken().then(token =>{
-        this.client.reconnect(this.id, this.sessionId)
-        .then(room=>{
-            this.initializeRoom(room);
-        })
-        .catch(err=>{
-          this.setState({
-            toLobby: true
-          });
-          console.log(err);
-        });
-      });
-    }
-
-
-*/

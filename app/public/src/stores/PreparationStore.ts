@@ -23,11 +23,11 @@ export const preparationSlice = createSlice({
     initialState: initialState,
     reducers: {
         pushMessage: (state, action: PayloadAction<IMessage>) => {
-            let m: IMessage = JSON.parse(JSON.stringify(action.payload));
+            const m: IMessage = JSON.parse(JSON.stringify(action.payload));
             state.messages.push(m);
         },
         addUser: (state, action: PayloadAction<IGameUser>) => {
-            let u: IGameUser = JSON.parse(JSON.stringify(action.payload));
+            const u: IGameUser = JSON.parse(JSON.stringify(action.payload));
             state.users.push(u);
         },
         changeUser: (state, action: PayloadAction<{id: string, field: string, value: any}>) => {

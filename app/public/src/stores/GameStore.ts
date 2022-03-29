@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { STATE } from "../../../models/enum";
 import { IDps, IDpsHeal, IPlayer } from "../../../types";
-import {MapSchema, ArraySchema, DataChange} from "@colyseus/schema";
-import Player from "../../../models/colyseus-models/player";
+import {ArraySchema, DataChange} from "@colyseus/schema";
 import ExperienceManager from "../../../models/colyseus-models/experience-manager";
 import Synergies from "../../../models/colyseus-models/synergies";
 
@@ -37,7 +36,7 @@ interface GameStateStore {
 }
 
 const initialState: GameStateStore = {
-    afterGameId: '',
+    afterGameId: undefined,
     roundTime: 30,
     phase: STATE.PICK,
     players: [],
@@ -210,11 +209,13 @@ export const gameSlice = createSlice({
         },
         removeBlueHealDpsMeter: (state, action: PayloadAction<string>) => {
             state.blueHealDpsMeter = new Array<IDpsHeal>();
-        }
+        },
+        leaveGame: () => initialState
     }
 });
 
 export const {
+    leaveGame,
     removeBlueDpsMeter,
     removeRedDpsMeter,
     removeBlueHealDpsMeter,
