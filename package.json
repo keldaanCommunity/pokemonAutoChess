@@ -5,7 +5,7 @@
   "keywords": [],
   "license": "MIT",
   "engines": {
-    "node": "17.2"
+    "node": "17.8"
   },
   "homepage": "https://github.com/arnaudgregoire/pokemonAutoChess#readme",
   "repository": {

@@ -47,7 +47,6 @@ export default function GamePlayer(props:{player: IPlayer, color: string, click:
 
     function playerClick(){
         props.click(props.player.id);
-        dispatch(setCurrentPlayerId(props.player.id));
         dispatch(setPlayer(props.player));
     }
 

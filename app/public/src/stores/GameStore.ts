@@ -60,10 +60,10 @@ const initialState: GameStateStore = {
     currentPlayerExperienceManager: new ExperienceManager(),
     currentPlayerName: '',
     currentPlayerAvatar: 'rattata',
-    blueDpsMeter: [],
-    redDpsMeter: [],
-    blueHealDpsMeter: [],
-    redHealDpsMeter: []
+    blueDpsMeter: new Array<IDps>(),
+    redDpsMeter: new Array<IDps>(),
+    blueHealDpsMeter: new Array<IDpsHeal>(),
+    redHealDpsMeter: new Array<IDpsHeal>()
 }
 
 export const gameSlice = createSlice({
@@ -144,6 +144,7 @@ export const gameSlice = createSlice({
             state.currentPlayerAvatar = action.payload;
         },
         setPlayer: (state, action: PayloadAction<IPlayer>) => {
+            state.currentPlayerId = action.payload.id;
             state.currentPlayerMoney = action.payload.money;
             state.currentPlayerExperienceManager = action.payload.experienceManager;
             state.currentPlayerOpponentName = action.payload.opponentName;
@@ -153,10 +154,14 @@ export const gameSlice = createSlice({
             state.currentPlayerAvatar = action.payload.avatar;
             state.currentPlayerName = action.payload.name;
             state.currentPlayerBoardSize = action.payload.boardSize;
-            state.blueDpsMeter = JSON.parse(JSON.stringify(action.payload.simulation.blueDpsMeter));
-            state.redDpsMeter = JSON.parse(JSON.stringify(action.payload.simulation.redDpsMeter));
-            state.redHealDpsMeter = JSON.parse(JSON.stringify(action.payload.simulation.redHealDpsMeter));
-            state.blueHealDpsMeter = JSON.parse(JSON.stringify(action.payload.simulation.blueHealDpsMeter));
+            state.blueDpsMeter = new Array<IDps>();
+            state.redDpsMeter = new Array<IDps>();
+            state.blueHealDpsMeter = new Array<IDpsHeal>();
+            state.redHealDpsMeter = new Array<IDpsHeal>();
+            action.payload.simulation.blueDpsMeter.forEach(dps=>{state.blueDpsMeter.push(JSON.parse(JSON.stringify(dps)))});
+            action.payload.simulation.redDpsMeter.forEach(dps=>{state.redDpsMeter.push(JSON.parse(JSON.stringify(dps)))});
+            action.payload.simulation.redHealDpsMeter.forEach(dps=>{state.redHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))});
+            action.payload.simulation.blueHealDpsMeter.forEach(dps=>{state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))});
         },
         addRedDpsMeter: (state, action: PayloadAction<IDps>) => {
             state.redDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
@@ -171,33 +176,49 @@ export const gameSlice = createSlice({
             state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
         },
         changeRedDpsMeter: (state, action: PayloadAction<{id: string, change: DataChange<any>}>) => {
-            state.redDpsMeter[state.redDpsMeter.findIndex(e=>action.payload.id == e.id)][action.payload.change.field] = action.payload.change.value;
+            const index = state.redDpsMeter.findIndex(e=>action.payload.id == e.id);
+            if(index >= 0){
+                state.redDpsMeter[index][action.payload.change.field] = action.payload.change.value;
+            }
         },
         changeBlueDpsMeter: (state, action: PayloadAction<{id: string, change: DataChange<any>}>) => {
-            state.blueDpsMeter[state.blueDpsMeter.findIndex(e=>action.payload.id == e.id)][action.payload.change.field] = action.payload.change.value;
+            const index = state.blueDpsMeter.findIndex(e=>action.payload.id == e.id);
+            if(index >= 0){
+                state.blueDpsMeter[state.blueDpsMeter.findIndex(e=>action.payload.id == e.id)][action.payload.change.field] = action.payload.change.value;
+            }
         },
         changeRedHealDpsMeter: (state, action: PayloadAction<{id: string, change: DataChange<any>}>) => {
-            state.redHealDpsMeter[state.redHealDpsMeter.findIndex(e=>action.payload.id == e.id)][action.payload.change.field] = action.payload.change.value;
+            const index = state.redHealDpsMeter.findIndex(e=>action.payload.id == e.id);
+            if(index >= 0){
+                state.redHealDpsMeter[state.redHealDpsMeter.findIndex(e=>action.payload.id == e.id)][action.payload.change.field] = action.payload.change.value;
+            }
         },
         changeBlueHealDpsMeter: (state, action: PayloadAction<{id: string, change: DataChange<any>}>) => {
-            state.blueHealDpsMeter[state.blueHealDpsMeter.findIndex(e=>action.payload.id == e.id)][action.payload.change.field] = action.payload.change.value;
+            const index = state.blueHealDpsMeter.findIndex(e=>action.payload.id == e.id);
+            if(index >= 0){
+                state.blueHealDpsMeter[state.blueHealDpsMeter.findIndex(e=>action.payload.id == e.id)][action.payload.change.field] = action.payload.change.value;
+            }
         },
         removeRedDpsMeter: (state, action: PayloadAction<string>) => {
-            state.redDpsMeter = state.redDpsMeter.filter(e=>e.id != action.payload);
+            state.redDpsMeter = new Array<IDps>();
         },
         removeBlueDpsMeter: (state, action: PayloadAction<string>) => {
-            state.blueDpsMeter = state.blueDpsMeter.filter(e=>e.id != action.payload);
+            state.blueDpsMeter = new Array<IDps>();
         },
         removeRedHealDpsMeter: (state, action: PayloadAction<string>) => {
-            state.redHealDpsMeter = state.redHealDpsMeter.filter(e=>e.id != action.payload);
+            state.redHealDpsMeter = new Array<IDpsHeal>();
         },
         removeBlueHealDpsMeter: (state, action: PayloadAction<string>) => {
-            state.blueHealDpsMeter = state.blueHealDpsMeter.filter(e=>e.id != action.payload);
+            state.blueHealDpsMeter = new Array<IDpsHeal>();
         }
     }
 });
 
 export const {
+    removeBlueDpsMeter,
+    removeRedDpsMeter,
+    removeBlueHealDpsMeter,
+    removeRedHealDpsMeter,
     changeBlueDpsMeter,
     changeRedDpsMeter,
     changeBlueHealDpsMeter,

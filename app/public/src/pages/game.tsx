@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import React, { useEffect, useRef, useState } from "react";
 import GameState from "../../../rooms/states/game-state";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter} from "../stores/GameStore";
+import { setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter} from "../stores/GameStore";
 import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore";
 import { FIREBASE_CONFIG } from "./utils/utils";
 import GameContainer from '../game/game-container';
@@ -12,7 +12,6 @@ import { WORDS } from "../../../models/enum";
 import GameDpsMeter from "./component/game/game-dps-meter";
 import GameInformations from "./component/game/game-informations";
 import GameItemsProposition from "./component/game/game-items-proposition";
-import GameModal from "./component/game/game-modal";
 import GamePlayerInformations from "./component/game/game-player-informations";
 import GamePlayers from "./component/game/game-players";
 import GameRarityPercentage from "./component/game/game-rarity-percentage";
@@ -201,7 +200,9 @@ export default function Game() {
           }
         });
         player.simulation.blueDpsMeter.onRemove = (dps, key) =>{
-
+            if(player.id == currentPlayerId) {
+                dispatch(removeBlueDpsMeter(key));
+            }
         };
         
         player.simulation.redDpsMeter.onAdd = ((dps, key)=>{
@@ -216,6 +217,12 @@ export default function Game() {
             }
           }
         });
+        player.simulation.redDpsMeter.onRemove = (dps, key) =>{
+            if(player.id == currentPlayerId) {
+                dispatch(removeRedDpsMeter(key));
+            }
+        };
+
         player.simulation.blueHealDpsMeter.onAdd = ((dps, key)=>{
           if(player.id == currentPlayerId){
             dispatch(addBlueHealDpsMeter(dps));
@@ -228,6 +235,12 @@ export default function Game() {
             }
           }
         });
+        player.simulation.blueHealDpsMeter.onRemove = (dps, key) =>{
+            if(player.id == currentPlayerId) {
+                dispatch(removeBlueHealDpsMeter(key));
+            }
+        };
+
         player.simulation.redHealDpsMeter.onAdd = ((dps, key)=>{
           if(player.id == currentPlayerId){
             dispatch(addRedHealDpsMeter(dps));
@@ -240,6 +253,11 @@ export default function Game() {
             }
           }
         });
+        player.simulation.redHealDpsMeter.onRemove = (dps, key) =>{
+            if(player.id == currentPlayerId) {
+                dispatch(removeRedHealDpsMeter(key));
+            }
+        };
       }
     }
   });
