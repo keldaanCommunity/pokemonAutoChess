@@ -79,11 +79,11 @@ export default function Preparation() {
             });
             r.onMessage('game-start', async (message) => {
                 const token: string = await firebase.auth().currentUser.getIdToken();
-                const r: Room<GameState> = await client.joinById(message.id, {idToken: token});
-                localStorage.setItem('lastRoomId', r.id);
-                localStorage.setItem('lastSessionId', r.sessionId);
-                await room.leave();
-                r.connection.close();
+                const game: Room<GameState> = await client.joinById(message.id, {idToken: token});
+                localStorage.setItem('lastRoomId', game.id);
+                localStorage.setItem('lastSessionId', game.sessionId);
+                await r.leave();
+                game.connection.close();
                 dispatch(leavePreparation());
                 setToGame(true);
             });

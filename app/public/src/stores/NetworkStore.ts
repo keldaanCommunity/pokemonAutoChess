@@ -122,11 +122,15 @@ export const networkSlice = createSlice({
         }, 
         itemClick: (state, action: PayloadAction<string>) => {
             state.game.send('item', {'id': action.payload});
+        },
+        gameStart: (state, action: PayloadAction<string>) => {
+            state.preparation.send('game-start', {'id': action.payload});
         }
     }
 });
 
 export const {
+    gameStart,
     logIn,
     logOut,
     joinLobby,

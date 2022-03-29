@@ -3,7 +3,7 @@ import ReactTooltip from 'react-tooltip';
 import PreparationMenuUser from './preparation-menu-user';
 import { IGameUser } from '../../../../../models/colyseus-models/game-user';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { addBot, joinGame, toggleReady } from '../../../stores/NetworkStore';
+import { addBot, gameStart, toggleReady } from '../../../stores/NetworkStore';
 import firebase from 'firebase/compat/app';
 import { Client, Room } from 'colyseus.js';
 import GameState from '../../../../../rooms/states/game-state';
@@ -34,6 +34,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
         if(allUsersReady){
             const token: string = await firebase.auth().currentUser.getIdToken();
             const r: Room<GameState> = await client.create('game', {users: users, idToken: token});
+            dispatch(gameStart(r.id));
             localStorage.setItem('lastRoomId', r.id);
             localStorage.setItem('lastSessionId', r.sessionId);
             await room.leave();
