@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import AfterMenu  from './component/after/after-menu';
 import { Client, Room } from 'colyseus.js';
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -26,6 +26,7 @@ export default function AfterGame(){
     const client: Client = useAppSelector(state=>state.network.client);
     const room : Room<AfterGameState> = useAppSelector(state=>state.network.after);
     const [initialized, setInitialized] = useState<boolean>(false);
+    const [toLobby, setToLobby] = useState<boolean>(false);
 
     useEffect(()=>{
         const reconnect = async () => {
@@ -57,16 +58,20 @@ export default function AfterGame(){
         }
     });
 
-    return <div className='App'>
-        <Link to='/lobby'>
-            <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{
-                room.connection.close();
-                dispatch(leaveAfter());
-            }}>Lobby</button>
-        </Link>
-
+    if(toLobby){
+        return <Navigate to='/lobby'/>
+    }
+    else{
+        return <div className='App'>
+        <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{
+            room.connection.close();
+            dispatch(leaveAfter());
+            setToLobby(true);
+        }}>Lobby
+        </button>
         <div className="nes-container with-title is-centered" style={style}>
             <AfterMenu/>
         </div>
     </div>
+    }
 }

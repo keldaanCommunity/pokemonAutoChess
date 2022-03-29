@@ -67,7 +67,7 @@ export default class BattleManager {
   }
 
   removePokemonItem(playerId, value, pokemon) {
-    if (this.player.id == playerId) {
+    if (this.player.id == playerId && this.group) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {
         if (children[i].id == pokemon.id) {
@@ -79,7 +79,7 @@ export default class BattleManager {
   }
 
   changeStatus(playerId, change, pokemon) {
-    if (this.player.id == playerId) {
+    if (this.player.id == playerId && this.group) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {
         if (children[i].id == pokemon.id) {
@@ -163,7 +163,7 @@ export default class BattleManager {
 
   changeCount(playerId, change, pokemon) {
     // console.log(change.field, change.value);
-    if (this.player.id == playerId) {
+    if (this.player.id == playerId && this.group) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {
         if (children[i].id == pokemon.id) {
@@ -230,7 +230,7 @@ export default class BattleManager {
   }
 
   changePokemon(playerId, change, pokemon) {
-    if (this.player.id == playerId) {
+    if (this.player.id == playerId && this.group) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {
         if (children[i].id == pokemon.id) {
