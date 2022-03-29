@@ -37,7 +37,7 @@ class WikiFaq extends Component{
             <h5 className="nes-text is-primary">How can i support the game ?</h5>
             <p>You can donate on the tipee: <a href="https://en.tipeee.com/pokemon-auto-chess">https://en.tipeee.com/pokemon-auto-chess</a>.</p>
             <h5 className="nes-text is-primary">What language is used to code the game ?</h5>
-            <p>JavaScript.</p>
+            <p>TypeScript.</p>
         </div>
     }
 }
