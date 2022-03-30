@@ -70,9 +70,6 @@ export default class Pokemon extends Button {
     }
   }
 
-  enterButtonActiveState() {
-  }
-
   attackAnimation() {
     let x;
     let y;
