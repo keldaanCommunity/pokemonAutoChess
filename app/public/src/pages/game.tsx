@@ -142,7 +142,7 @@ export default function Game() {
               else if (change.field == 'experienceManager'){
                 dispatch(setExperienceManager(player.experienceManager));
               }
-              else if (change.field == 'intereset'){
+              else if (change.field == 'interest'){
                 dispatch(setInterest(player.interest));
               }
               else if (change.field == 'shop'){

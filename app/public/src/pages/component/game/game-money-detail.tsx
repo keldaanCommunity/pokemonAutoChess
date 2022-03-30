@@ -7,7 +7,7 @@ export default function GameMoneyDetail(){
     return <div>
     <div>
         <div style={{display:'flex', justifyContent:'space-between'}}>
-            <p>Streak:</p>
+            <p>Streak: </p>
             <div>
                 {streak}
                 <img style={{width:'20px', height:'20px', marginBottom:'5px'}} src="/assets/ui/money.png"/>
@@ -15,7 +15,7 @@ export default function GameMoneyDetail(){
             
         </div>
         <div style={{display:'flex', justifyContent:'space-between'}}>
-            <p>Interest:</p>
+            <p>Interest: </p>
             <div>
                 {interest}
                 <img style={{width:'20px', height:'20px', marginBottom:'5px'}} src="/assets/ui/money.png"/>
