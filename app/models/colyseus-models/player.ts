@@ -7,7 +7,7 @@ import {Effects} from '../effects';
 import BattleResult from './battle-result';
 import ExperienceManager from './experience-manager';
 import { BATTLE_RESULT } from '../enum';
-import { IPlayer, IPokemon, ISimulation } from '../../types';
+import { IPlayer, IPokemon } from '../../types';
 
 export default class Player extends Schema implements IPlayer{
   @type('string') id: string;

@@ -118,6 +118,7 @@ export default function Profile() {
                             <td><button className="invisibleButton" onClick={()=>{dispatch(changeAvatar('persian'))}}><img src="assets/avatar/persian.png" alt="" style={{filter:user.donor ?'grayscale(0)':'grayscale(1)'}}  title="Unlocked after contributing to the tipee"/></button></td>
                             <td><button className="invisibleButton" onClick={()=>{dispatch(changeAvatar('absol'))}}><img src="assets/avatar/absol.png" alt="" style={{filter:user.honors.includes('absol') ?'grayscale(0)':'grayscale(1)'}}  title="Unlocked after partipating in Tournament #1"/></button></td>
                             <td><button className="invisibleButton" onClick={()=>{dispatch(changeAvatar('meloetta'))}}><img src="assets/avatar/meloetta.png" alt="" style={{filter:user.honors.includes('meloetta') ?'grayscale(0)':'grayscale(1)'}}  title="Unlocked after partipating in Tournament #2"/></button></td>
+                            <td><button className="invisibleButton" onClick={()=>{dispatch(changeAvatar('zapdos'))}}><img src="assets/avatar/zapdos.png" alt="" style={{filter:user.honors.includes('zapdos') ?'grayscale(0)':'grayscale(1)'}}  title="Unlocked after partipating in Tournament #3"/></button></td>
                             </tr>
                         </tbody>
                     </table>

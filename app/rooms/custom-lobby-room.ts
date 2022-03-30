@@ -548,6 +548,12 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
               }
               break;
 
+            case 'zapdos':
+              if (user.honors.includes('zapdos')) {
+                changeNeeded = true;
+              }
+              break;
+
             default:
               break;
           }
