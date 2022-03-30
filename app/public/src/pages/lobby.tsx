@@ -84,7 +84,7 @@ export default function Lobby(){
                 
                     room.onMessage('-', (roomId: string) => dispatch(removeRoom(roomId)));
 
-                    room.onMessage('user', (user: LobbyUser) => {setSearchedUser(user)});
+                    room.onMessage('user', (user: LobbyUser) => dispatch(setSearchedUser(user)));
 
                     room.onMessage('meta', (meta: IMeta[]) => {dispatch(setMeta(meta))});
 
@@ -154,5 +154,5 @@ export default function Lobby(){
                 </div>
             </div>
         );
-    };
+    }
 }

@@ -7,7 +7,7 @@ import { searchName } from '../../../stores/NetworkStore';
 
 export default function Search() {
     const dispatch = useAppDispatch();
-    const user = useAppSelector(state=>state.lobby.user);
+    const user = useAppSelector(state=>state.lobby.searchedUser);
     const [currentText, setCurrentText] = useState<string>('');
 
     if(user){

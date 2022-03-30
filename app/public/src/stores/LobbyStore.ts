@@ -172,26 +172,26 @@ export const lobbySlice = createSlice({
     initialState: initialState,
     reducers: {
         pushMessage: (state, action: PayloadAction<Message>) => {
-            let m: IMessage = JSON.parse(JSON.stringify(action.payload));
+            const m: IMessage = JSON.parse(JSON.stringify(action.payload));
             state.messages.push(m);
         },
         pushLeaderboard: (state, action: PayloadAction<LeaderboardInfo>) => {
-            let l: ILeaderboardInfo = JSON.parse(JSON.stringify(action.payload));
+            const l: ILeaderboardInfo = JSON.parse(JSON.stringify(action.payload));
             state.leaderboard.push(l);
         },
         pushBotLeaderboard: (state, action: PayloadAction<LeaderboardInfo>) => {
-            let l: ILeaderboardInfo = JSON.parse(JSON.stringify(action.payload));
+            const l: ILeaderboardInfo = JSON.parse(JSON.stringify(action.payload));
             state.botLeaderboard.push(l);
         },
         addUser: (state, action: PayloadAction<LobbyUser>) => {
-            let u: ILobbyUser = JSON.parse(JSON.stringify(action.payload));
+            const u: ILobbyUser = JSON.parse(JSON.stringify(action.payload));
             state.users.push(u);
         },
         changeUser: (state, action: PayloadAction<{id: string, field: string, value: any}>) => {
             if(state.user && action.payload.id == state.user.id){
                 state.user[action.payload.field] = action.payload.value;
             }
-            let index = state.users.findIndex(u => u.id == action.payload.id);
+            const index = state.users.findIndex(u => u.id == action.payload.id);
 
             if(index != -1) {
               state.users[index][action.payload.field] = action.payload.value;
@@ -201,7 +201,7 @@ export const lobbySlice = createSlice({
             state.users.splice(state.users.findIndex(u => u.id == action.payload), 1);
         },
         setUser: (state, action: PayloadAction<LobbyUser>) => {
-            let u: ILobbyUser = JSON.parse(JSON.stringify(action.payload));
+            const u: ILobbyUser = JSON.parse(JSON.stringify(action.payload));
             state.user = u;
         },
         setTabIndex: (state, action: PayloadAction<number>) => {
@@ -220,7 +220,7 @@ export const lobbySlice = createSlice({
             state.allRooms = state.allRooms.filter((room) => room.roomId !== action.payload);
         },
         setSearchedUser: (state, action: PayloadAction<LobbyUser>) => {
-            let u: ILobbyUser = JSON.parse(JSON.stringify(action.payload));
+            const u: ILobbyUser = JSON.parse(JSON.stringify(action.payload));
             state.searchedUser = u;
         },
         setMeta: (state, action: PayloadAction<IMeta[]>) => {
