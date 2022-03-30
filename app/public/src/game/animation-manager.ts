@@ -894,17 +894,15 @@ export default class AnimationManager {
   }
 
   playAnimation(entity: Pokemon, spriteKey: string) {
-    const sprite: Phaser.GameObjects.Sprite = entity.getFirst('objType', 'sprite');
-    sprite.flipX = this.flipxTable[entity.orientation];
-    sprite.anims.play(spriteKey);
+    entity.sprite.flipX = this.flipxTable[entity.orientation];
+    entity.sprite.anims.play(spriteKey);
   }
 
   playSleepAnimation(entity: Pokemon) {
-    const sprite: Phaser.GameObjects.Sprite = entity.getFirst('objType', 'sprite');
-    sprite.anims.play(`${entity.index}/2`);
+    entity.sprite.anims.play(`${entity.index}/2`);
   }
 
-  getSpriteKey(entity) {
+  getSpriteKey(entity: Pokemon) {
     return `${entity.index}/${this.actionTable[entity.action]}/${this.orientationTable[entity.orientation]}`;
   }
 }

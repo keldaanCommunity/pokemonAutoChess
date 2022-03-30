@@ -5,9 +5,65 @@ import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
 import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS} from '../../../../models/enum';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
+import { IPokemonEntity } from '../../../../types';
+import GameScene from '../scenes/game-scene';
+import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
+import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
 
 export default class Pokemon extends Button {
-  constructor(scene, x, y, pokemon, dragable, isPopup) {
+  isPopup: boolean;
+  objType: string;
+  index: number;
+  id: string;
+  hp: number;
+  range: number;
+  critChance: number;
+  atk: number;
+  def: number;
+  speDef: number;
+  attackType: string;
+  atkSpeed: number;
+  targetX: number;
+  targetY: number;
+  skill: string;
+  positionX: number;
+  positionY: number;
+  attackSprite: string;
+  team: number;
+  critDamage: number;
+  spellDamage: number;
+  life: number;
+  shield: number;
+  projectile: GameObjects.Sprite;
+  itemsContainer: ItemsContainer;
+  orientation: string;
+  action: string;
+  moveManager: MoveTo;
+  rangeType: string;
+  types: string[];
+  lifebar: Lifebar;
+  detail: PokemonDetail;
+  shieldbar: Lifebar;
+  mana: number;
+  maxMana: number;
+  manabar: Lifebar;
+  backgroundIcon: GameObjects.Image;
+  sprite: GameObjects.Sprite;
+  socle: GameObjects.Image;
+  wound: GameObjects.Sprite;
+  burn: GameObjects.Sprite;
+  sleep: GameObjects.Sprite;
+  silence: GameObjects.Sprite;
+  freeze: GameObjects.Sprite;
+  confusion: GameObjects.Sprite;
+  smoke: GameObjects.Sprite;
+  armorReduction: GameObjects.Sprite;
+  poison: GameObjects.Sprite;
+  protect: GameObjects.Sprite;
+  resurection: GameObjects.Sprite;
+  runeProtect: GameObjects.Sprite;
+
+  constructor(scene: GameScene, x: number, y: number, pokemon: IPokemonEntity, dragable: boolean, isPopup: boolean) {
     super(scene, x, y, 75, 75);
     this.isPopup = isPopup;
     this.objType = 'pokemon';
@@ -23,7 +79,7 @@ export default class Pokemon extends Button {
     this.def = pokemon.def;
     this.speDef = pokemon.speDef;
     this.attackType = pokemon.attackType;
-    this.type = pokemon.type;
+    this.types = pokemon.types;
     this.atkSpeed = pokemon.atkSpeed ? Number(pokemon.atkSpeed.toFixed(2)): 0.75;
     this.targetX = null;
     this.targetY = null;
@@ -54,25 +110,27 @@ export default class Pokemon extends Button {
   }
 
   enterButtonHoverState() {
-    if (!this.getFirst('objType', 'detail') && this.isPopup) {
+    if (!this.detail && this.isPopup) {
       if (this.life) {
-        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage));
+        this.detail = new PokemonDetail(this.scene, 40, -200, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage);
+        this.add(this.detail);
       } else {
-        this.add(new PokemonDetail(this.scene, 40, -200, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage));
+        this.detail = new PokemonDetail(this.scene, 40, -200, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage);
+        this.add(this.detail);
       }
     }
   }
 
   enterButtonRestState() {
-    const detail = this.getFirst('objType', 'detail');
-    if (detail) {
-      this.remove(detail, true);
+    if (this.detail) {
+      this.remove(this.detail, true);
+      this.detail = undefined;
     }
   }
 
   attackAnimation() {
-    let x;
-    let y;
+    let x: number;
+    let y: number;
     if (this.range > 1) {
       x = this.positionX;
       y = this.positionY;
@@ -181,13 +239,8 @@ export default class Pokemon extends Button {
   }
 
   deathAnimation() {
-    // const sprite = this.getFirst('objType', 'sprite');
     this.life = 0;
-    this.getFirst('objType', 'lifebar').setLife(this.life);
-    const detail = this.getFirst('objType', 'detail');
-    if (detail) {
-      detail.hp.setText(0);
-    }
+    this.lifebar.setLife(this.life);
 
     this.scene.add.tween({
       targets: [this],
@@ -204,11 +257,11 @@ export default class Pokemon extends Button {
     });
   }
 
-  specialAttackAnimation(group) {
+  specialAttackAnimation(group: Phaser.GameObjects.Group) {
     if (this.skill) {
-      let coordinates;
-      let specialProjectile;
-      let coordinatesTarget;
+      let coordinates: number[];
+      let specialProjectile: GameObjects.Sprite;
+      let coordinatesTarget: number[];
 
       if (this.targetX != -1 && this.targetY != -1) {
         switch (this.skill) {
@@ -237,7 +290,7 @@ export default class Pokemon extends Button {
               ease: 'Power2',
               yoyo: true,
               duration: 500,
-              onComplete: (tween, targets) => {
+              onComplete: () => {
                 specialProjectile.destroy();
               }
             });
@@ -255,7 +308,7 @@ export default class Pokemon extends Button {
               x: coordinatesTarget[0],
               y: coordinatesTarget[1],
               duration: 2000,
-              onComplete: (tween, targets) => {
+              onComplete: () => {
                 specialProjectile.destroy();
               }
             });
@@ -724,7 +777,7 @@ export default class Pokemon extends Button {
               x: coordinatesTarget[0],
               y: coordinatesTarget[1],
               duration: 1000,
-              onComplete: (tween, targets) => {
+              onComplete: () => {
                 specialProjectile.destroy();
               }
             });
@@ -787,7 +840,8 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.DISARMING_VOICE:
-            group.getChildren().forEach((pokemon) => {
+            group.getChildren().forEach((p) => {
+              const pokemon = <Pokemon> p;
               if (this.team == pokemon.team) {
                 const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
                 const s = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.DISARMING_VOICE, '000');
@@ -802,7 +856,8 @@ export default class Pokemon extends Button {
             break;
 
           case SPECIAL_SKILL.RELIC_SONG:
-            group.getChildren().forEach((pokemon) => {
+            group.getChildren().forEach((p) => {
+              const pokemon = <Pokemon> p;
               if (this.team != pokemon.team) {
                 const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
                 const s = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.RELIC_SONG, '000');
@@ -838,7 +893,7 @@ export default class Pokemon extends Button {
               x: coordinatesTarget[0],
               y: coordinatesTarget[1],
               duration: 500,
-              onComplete: (tween, targets) => {
+              onComplete: () => {
                 specialProjectile.destroy();
               }
             });
@@ -858,7 +913,7 @@ export default class Pokemon extends Button {
               ease: 'Power2',
               yoyo: true,
               duration: 1000,
-              onComplete: (tween, targets) => {
+              onComplete: () => {
                 specialProjectile.destroy();
               }
             });
@@ -882,7 +937,7 @@ export default class Pokemon extends Button {
         y: coordinates[1],
         ease: 'Linear',
         duration: this.atkSpeed ? 1000 / this.atkSpeed: 1500,
-        onComplete: (tween, targets) => {
+        onComplete: () => {
           this.projectile.destroy();
         }
       });
@@ -891,70 +946,66 @@ export default class Pokemon extends Button {
     }
   }
 
-  setLifeBar(pokemon, scene, height) {
+  setLifeBar(pokemon: IPokemonEntity, scene: GameScene, height: number) {
     if (pokemon.life !== undefined) {
-      let color;
+      let color: number;
       if (pokemon.team == 0) {
         color = 0x00ff00;
       } else {
         color = 0xff0000;
       }
       const lifeRatio = pokemon.life / (pokemon.life + pokemon.shield);
-      const lifebar = new Lifebar(scene, -15, height, lifeRatio * 60, pokemon.hp, color, 'lifebar', true);
-      lifebar.setLife(pokemon.life);
-      this.add(lifebar);
+      this.lifebar = new Lifebar(scene, -15, height, lifeRatio * 60, pokemon.hp, color, 'lifebar', true);
+      this.lifebar.setLife(pokemon.life);
+      this.add(this.lifebar);
     }
   }
 
-  setShieldBar(pokemon, scene) {
+  setShieldBar(pokemon: IPokemonEntity, scene: GameScene) {
     const h = this.height/2 + 5;
     if (pokemon.shield !== undefined && pokemon.shield > 0) {
       const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
-      const shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, h, shieldRatio * 60, pokemon.shield, 0x939393, 'shieldbar', true);
-      shieldbar.setLife(pokemon.shield);
-      this.add(shieldbar);
+      this.shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, h, shieldRatio * 60, pokemon.shield, 0x939393, 'shieldbar', true);
+      this.shieldbar.setLife(pokemon.shield);
+      this.add(this.shieldbar);
     }
   }
 
-  setManaBar(pokemon, scene, height) {
+  setManaBar(pokemon: IPokemonEntity, scene: GameScene, height: number) {
     if (pokemon.mana !== undefined) {
       const color = 0x01b8fe;
-      const manabar = new Lifebar(scene, -15, height + 5, 60, pokemon.maxMana, color, 'manabar', true);
-      manabar.setLife(pokemon.mana);
-      this.add(manabar);
+      this.manabar = new Lifebar(scene, -15, height + 5, 60, pokemon.maxMana, color, 'manabar', true);
+      this.manabar.setLife(pokemon.mana);
+      this.add(this.manabar);
     }
   }
 
-  setEffects(pokemon, scene, height) {
+  setEffects(pokemon: IPokemonEntity, scene: GameScene, height: number) {
     if (pokemon.effects.length > 0) {
       pokemon.effects.forEach((effect, c) => {
         if ( effect && EFFECTS_ICON[effect]) {
-          const backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5, 0.5);
-          backgroundIcon.objType = 'effect';
-          scene.add.existing(backgroundIcon);
-          this.add(backgroundIcon);
+          this.backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5, 0.5);
+          this.add(this.backgroundIcon);
         }
       });
     }
   }
 
-  setSprite(pokemon, scene) {
-    const sprite = new GameObjects.Sprite(scene, 0, 0, pokemon.sheet, `${pokemon.index}/0/1/0`);
-    this.height = sprite.height;
-    this.width = sprite.width;
+  setSprite(pokemon: IPokemonEntity, scene: GameScene) {
+    this.sprite = new GameObjects.Sprite(scene, 0, 0, pokemon.sheet, `${pokemon.index}/0/1/0`);
+    this.height = this.sprite.height;
+    this.width = this.sprite.width;
 
     if (pokemon.effects && (pokemon.effects.includes(EFFECTS.IRON_DEFENSE) || pokemon.effects.includes(EFFECTS.AUTOTOMIZE))) {
-      sprite.setScale(3, 3);
+      this.sprite.setScale(3, 3);
     } else {
-      sprite.setScale(2, 2);
+      this.sprite.setScale(2, 2);
     }
-    const socle = new GameObjects.Image(scene, 0, this.height, 'socle');
-    socle.objType = 'socle';
-    sprite.objType = 'sprite';
-    scene.add.existing(socle);
-    scene.add.existing(sprite);
-    this.add(socle);
-    this.add(sprite);
+    this.socle = new GameObjects.Image(scene, 0, this.height, 'socle');
+    scene.add.existing(this.socle);
+    scene.add.existing(this.sprite);
+    this.add(this.socle);
+    this.add(this.sprite);
 
     this.setShieldBar(pokemon, scene);
     this.setLifeBar(pokemon, scene, this.height/2 + 5);
@@ -968,7 +1019,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setParameters(pokemon) {
+  setParameters(pokemon: IPokemonEntity) {
     if (pokemon.orientation) {
       this.orientation = pokemon.orientation;
     } else {
@@ -981,8 +1032,9 @@ export default class Pokemon extends Button {
     }
   }
 
-  setMovingFunction(scene) {
-    this.moveManager = scene.plugins.get('rexMoveTo').add(this, {
+  setMovingFunction(scene: GameScene) {
+    const p = <MoveToPlugin> scene.plugins.get('rexMoveTo');
+    this.moveManager = p.add(this, {
       speed: 300,
       rotateToTarget: false
     });
@@ -997,225 +1049,208 @@ export default class Pokemon extends Button {
   }
 
   addWound() {
-    if (!this.getFirst('objType', 'wound')) {
-      const wound = new GameObjects.Sprite(this.scene, 0, -30, 'wound', '000');
-      wound.setScale(2, 2);
-      this.scene.add.existing(wound);
-      wound.objType = 'wound';
-      wound.anims.play('wound');
-      this.add(wound);
+    if (!this.wound) {
+      this.wound = new GameObjects.Sprite(this.scene, 0, -30, 'wound', '000');
+      this.wound.setScale(2, 2);
+      this.scene.add.existing(this.wound);
+      this.wound.anims.play('wound');
+      this.add(this.wound);
     }
   }
 
   removeWound() {
-    const sprite = this.getFirst('objType', 'wound');
-    if (sprite) {
-      this.remove(sprite, true);
+    if (this.wound) {
+      this.remove(this.wound, true);
+      this.wound = undefined;
     }
   }
 
   addBurn() {
-    if (!this.getFirst('objType', 'burn')) {
-      const burn = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/burn/000');
-      burn.setScale(2, 2);
-      this.scene.add.existing(burn);
-      burn.objType = 'burn';
-      burn.anims.play('burn');
-      this.add(burn);
+    if (!this.burn) {
+      this.burn = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/burn/000');
+      this.burn.setScale(2, 2);
+      this.scene.add.existing(this.burn);
+      this.burn.anims.play('burn');
+      this.add(this.burn);
     }
   }
 
   removeBurn() {
-    const sprite = this.getFirst('objType', 'burn');
-    if (sprite) {
-      this.remove(sprite, true);
+    if (this.burn) {
+      this.remove(this.burn, true);
+      this.burn = undefined;
     }
   }
 
   addSleep() {
-    if (!this.getFirst('objType', 'sleep')) {
-      const sleep = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/sleep/000');
-      sleep.setScale(2, 2);
-      this.scene.add.existing(sleep);
-      sleep.objType = 'sleep';
-      sleep.anims.play('sleep');
-      this.add(sleep);
+    if (!this.sleep) {
+      this.sleep = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/sleep/000');
+      this.sleep.setScale(2, 2);
+      this.scene.add.existing(this.sleep);
+      this.sleep.anims.play('sleep');
+      this.add(this.sleep);
     }
-    // console.log('sleep');
-    const sprite = this.getFirst('objType', 'sprite');
-    sprite.anims.play(`${this.index}/2`);
+    this.sprite.anims.play(`${this.index}/2`);
   }
 
   removeSleep() {
-    const sleepEffect = this.getFirst('objType', 'sleep');
-    if (sleepEffect) {
-      this.remove(sleepEffect, true);
+    if (this.sleep) {
+      this.remove(this.sleep, true);
+      this.sleep = undefined;
     }
-    // window.animationManager.animatePokemon(this);
   }
 
   addSilence() {
-    if (!this.getFirst('objType', 'silence')) {
-      const silence = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/silence/000');
-      silence.setScale(2, 2);
-      this.scene.add.existing(silence);
-      silence.objType = 'silence';
-      silence.anims.play('silence');
-      this.add(silence);
+    if (!this.silence) {
+      this.silence = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/silence/000');
+      this.silence.setScale(2, 2);
+      this.scene.add.existing(this.silence);
+      this.silence.anims.play('silence');
+      this.add(this.silence);
     }
   }
 
   removeSilence() {
-    const sprite = this.getFirst('objType', 'silence');
-    if (sprite) {
-      this.remove(sprite, true);
+    if (this.silence) {
+      this.remove(this.silence, true);
+      this.silence = undefined;
     }
   }
 
   addFreeze() {
-    if (!this.getFirst('objType', 'freeze')) {
-      const freeze = new GameObjects.Sprite(this.scene, 0, 0, 'status', 'status/freeze/000');
-      freeze.setScale(2, 2);
-      this.scene.add.existing(freeze);
-      freeze.objType = 'freeze';
-      freeze.anims.play('freeze');
-      this.add(freeze);
+    if (!this.freeze) {
+      this.freeze = new GameObjects.Sprite(this.scene, 0, 0, 'status', 'status/freeze/000');
+      this.freeze.setScale(2, 2);
+      this.scene.add.existing(this.freeze);
+      this.freeze.anims.play('freeze');
+      this.add(this.freeze);
     }
   }
 
   removeFreeze() {
-    const sprite = this.getFirst('objType', 'freeze');
-    if (sprite) {
-      this.remove(sprite, true);
+    if (this.freeze) {
+      this.remove(this.freeze, true);
+      this.freeze = undefined;
     }
   }
 
   addConfusion() {
-    if (!this.getFirst('objType', 'confusion')) {
-      const confusion = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/confusion/000');
-      confusion.setScale(2, 2);
-      this.scene.add.existing(confusion);
-      confusion.objType = 'confusion';
-      confusion.anims.play('confusion');
-      this.add(confusion);
+    if (!this.confusion) {
+      this.confusion = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/confusion/000');
+      this.confusion.setScale(2, 2);
+      this.scene.add.existing(this.confusion);
+      this.confusion.anims.play('confusion');
+      this.add(this.confusion);
     }
   }
 
   removeConfusion() {
-    const sprite = this.getFirst('objType', 'confusion');
-    if (sprite) {
-      this.remove(sprite, true);
+    if (this.confusion) {
+      this.remove(this.confusion, true);
+      this.confusion = undefined;
     }
   }
 
   addSmoke() {
-    // console.log('sp');
-    if (!this.getFirst('objType', 'smoke')) {
-      const smoke = new GameObjects.Sprite(this.scene, 0, -40, 'smoke', '000');
-      smoke.setScale(2, 2);
-      this.scene.add.existing(smoke);
-      smoke.objType = 'smoke';
-      smoke.anims.play('smoke');
-      this.add(smoke);
+    if (!this.smoke) {
+      this.smoke = new GameObjects.Sprite(this.scene, 0, -40, 'smoke', '000');
+      this.smoke.setScale(2, 2);
+      this.scene.add.existing(this.smoke);
+      this.smoke.anims.play('smoke');
+      this.add(this.smoke);
     }
   }
 
   removeSmoke() {
-    const sprite = this.getFirst('objType', 'smoke');
-    if (sprite) {
-      this.remove(sprite, true);
+    if (this.smoke) {
+      this.remove(this.smoke, true);
+      this.smoke = undefined;
     }
   }
 
   addArmorReduction() {
-    // console.log('sp');
-    if (!this.getFirst('objType', 'armorReduction')) {
-      const smoke = new GameObjects.Sprite(this.scene, 0, -40, 'armorReduction', '000');
-      smoke.setScale(2, 2);
-      this.scene.add.existing(smoke);
-      smoke.objType = 'armorReduction';
-      smoke.anims.play('armorReduction');
-      this.add(smoke);
+    if (this.armorReduction) {
+      this.armorReduction = new GameObjects.Sprite(this.scene, 0, -40, 'armorReduction', '000');
+      this.armorReduction.setScale(2, 2);
+      this.scene.add.existing(this.armorReduction);
+      this.armorReduction.anims.play('armorReduction');
+      this.add(this.armorReduction);
     }
   }
 
   removeArmorReduction() {
-    const sprite = this.getFirst('objType', 'armorReduction');
-    if (sprite) {
-      this.remove(sprite, true);
+    if (this.armorReduction) {
+      this.remove(this.armorReduction, true);
+      this.armorReduction = undefined;
     }
   }
 
 
   addPoison() {
-    if (!this.getFirst('objType', 'poison')) {
-      const poison = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/poison/000');
-      poison.setScale(2, 2);
-      this.scene.add.existing(poison);
-      poison.objType = 'poison';
-      poison.anims.play('poison');
-      this.add(poison);
+    if (this.poison) {
+      this.poison = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/poison/000');
+      this.poison.setScale(2, 2);
+      this.scene.add.existing(this.poison);
+      this.poison.anims.play('poison');
+      this.add(this.poison);
     }
   }
 
   removePoison() {
-    const sprite = this.getFirst('objType', 'poison');
-    if (sprite) {
-      this.remove(sprite, true);
+    if (this.poison) {
+      this.remove(this.poison, true);
+      this.poison = undefined;
     }
   }
 
   addProtect() {
-    if (!this.getFirst('objType', 'protect')) {
-      const protect = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/protect/000');
-      protect.setScale(2, 2);
-      this.scene.add.existing(protect);
-      protect.objType = 'protect';
-      protect.anims.play('protect');
-      this.add(protect);
+    if (!this.protect) {
+      this.protect = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/protect/000');
+      this.protect.setScale(2, 2);
+      this.scene.add.existing(this.protect);
+      this.protect.anims.play('protect');
+      this.add(this.protect);
     }
   }
 
   removeProtect() {
-    const sprite = this.getFirst('objType', 'protect');
-    if (sprite) {
-      this.remove(sprite, true);
+    if (this.protect) {
+      this.remove(this.protect, true);
+      this.protect = undefined;
     }
   }
 
   addResurection() {
-    if (!this.getFirst('objType', 'resurection')) {
-      const resurection = new GameObjects.Sprite(this.scene, 0, -45, 'resurection', '000');
-      resurection.setScale(2, 2);
-      this.scene.add.existing(resurection);
-      resurection.objType = 'resurection';
-      resurection.anims.play('resurection');
-      this.add(resurection);
+    if (!this.resurection) {
+      this.resurection = new GameObjects.Sprite(this.scene, 0, -45, 'resurection', '000');
+      this.resurection.setScale(2, 2);
+      this.scene.add.existing(this.resurection);
+      this.resurection.anims.play('resurection');
+      this.add(this.resurection);
     }
   }
 
   removeResurection() {
-    const sprite = this.getFirst('objType', 'resurection');
-    if (sprite) {
-      this.remove(sprite, true);
+    if (this.resurection) {
+      this.remove(this.resurection, true);
+      this.resurection = undefined;
     }
   }
 
   addRuneProtect() {
-    if (!this.getFirst('objType', 'rune_protect')) {
-      const runeProtect = new GameObjects.Sprite(this.scene, 0, -45, 'rune_protect', '000');
-      runeProtect.setScale(2, 2);
-      this.scene.add.existing(runeProtect);
-      runeProtect.objType = 'rune_protect';
-      runeProtect.anims.play('rune_protect');
-      this.add(runeProtect);
+    if (!this.runeProtect) {
+      this.runeProtect = new GameObjects.Sprite(this.scene, 0, -45, 'rune_protect', '000');
+      this.runeProtect.setScale(2, 2);
+      this.scene.add.existing(this.runeProtect);
+      this.runeProtect.anims.play('rune_protect');
+      this.add(this.runeProtect);
     }
   }
 
   removeRuneProtect() {
-    const sprite = this.getFirst('objType', 'rune_protect');
-    if (sprite) {
-      this.remove(sprite, true);
+    if (this.runeProtect) {
+      this.remove(this.runeProtect, true);
+      this.runeProtect = undefined;
     }
   }
 }
