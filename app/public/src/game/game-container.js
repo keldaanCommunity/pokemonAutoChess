@@ -2,6 +2,7 @@ import GameScene from './scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
 import WebFontLoaderPlugin from 'phaser3-rex-plugins/plugins/webfontloader-plugin.js';
 import {transformCoordinate} from '../pages/utils/utils';
+import Phaser from 'phaser';
 
 class GameContainer {
   constructor(div, uid, room) {

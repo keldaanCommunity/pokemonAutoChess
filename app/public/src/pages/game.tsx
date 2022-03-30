@@ -292,9 +292,7 @@ export default function Game() {
     <GameRarityPercentage/>
     <GameItemsProposition/>
     <GameDpsMeter/>
-    <div id='game' ref={container} style={{
-      maxHeight:'100vh'
-    }}>
+    <div id='game' ref={container}>
     </div>
   </div>
   }

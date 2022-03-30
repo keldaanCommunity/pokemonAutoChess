@@ -133,4 +133,9 @@ input[type=range]:focus::-ms-fill-upper {
 .hidden-scrollable {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-} 
+}
+
+#game{
+  height: 100vh;
+  width: 100vw;
+}

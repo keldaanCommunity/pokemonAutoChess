@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import History from './history';
 import { XP_TABLE } from '../../../../../models/enum';
 import Elo from '../elo';
