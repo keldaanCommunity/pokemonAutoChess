@@ -3,7 +3,7 @@ import ReactTooltip from 'react-tooltip';
 import GamePlayerDetail from './game-player-detail';
 import CSS from 'csstype';
 import { IPlayer } from '../../../../../types';
-import { useAppDispatch } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { setCurrentPlayerId, setPlayer, setSynergies } from '../../../stores/GameStore';
 
 const progressStyle: CSS.Properties = {
@@ -43,11 +43,12 @@ export default function GamePlayer(props:{player: IPlayer, color: string, click:
         width:'70px'
     }
     const dispatch = useAppDispatch();
+    const players = useAppSelector(state=>state.network.game.state.players);
     const opponent = props.player.opponentName != '' && props.player.opponentAvatar != ''? <img style={opponentStyle} src={`assets/avatar/${props.player.opponentAvatar}.png`}/>: null;
 
     function playerClick(){
         props.click(props.player.id);
-        dispatch(setPlayer(props.player));
+        dispatch(setPlayer(players.get(props.player.id)));
     }
 
     return  <div 

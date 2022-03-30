@@ -107,7 +107,7 @@ export const gameSlice = createSlice({
         },
         changePlayer: (state, action: PayloadAction<{id: string, change: DataChange<any>}>) => {
             const index = state.players.findIndex((e)=>action.payload.id == e.id);
-            if(['money','history','life'].includes(action.payload.change.field)){
+            if(['money','history','life','rank'].includes(action.payload.change.field)){
                 state.players[index][action.payload.change.field] = action.payload.change.value;
             }
         },
