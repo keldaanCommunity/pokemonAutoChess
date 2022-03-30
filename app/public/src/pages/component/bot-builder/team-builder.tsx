@@ -9,7 +9,6 @@ import PokemonPicker from './pokemon-picker';
 import TeamEditor from './team-editor';
 import ReactTooltip from 'react-tooltip';
 import { IBot, IStep } from '../../../../../models/mongo-models/bot-v2';
-import { ISynergies } from '../../../../../types';
 import CSS from 'csstype';
 import produce from 'immer';
 import { useAppSelector, useAppDispatch } from '../../../hooks';
@@ -182,13 +181,11 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   const [modalMode, setModalMode] = useState<string>(MODAL_MODE.IMPORT)
   const [modalBoolean, setModalBoolean] = useState<boolean>(false);
 
-  const synergies: ISynergies = useAppSelector(state=>state.lobby.synergies);
   const botList: string[] = useAppSelector(state=>state.lobby.botList);
   const pastebinUrl: string = useAppSelector(state=>state.lobby.pastebinUrl);
   const botData: IBot = useAppSelector(state=>state.lobby.botData);
 
   function updateSynergies(i: number) {
-    const dispatch = useAppDispatch();
     const newSynergies = {
       NORMAL: 0,
       GRASS: 0,
