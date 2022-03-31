@@ -101,7 +101,7 @@ export default class PreparationRoom extends Room {
       }
 
       // allow disconnected client to reconnect into this room until 20 seconds
-      await this.allowReconnection(client, 5);
+      await this.allowReconnection(client, 2);
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         console.log(`${client.auth.displayName} ${client.id} leave preparation room`);
