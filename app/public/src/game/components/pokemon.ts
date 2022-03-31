@@ -957,7 +957,7 @@ export default class Pokemon extends Button {
         color = 0xff0000;
       }
       const lifeRatio = pokemon.life / (pokemon.life + pokemon.shield);
-      this.lifebar = new Lifebar(scene, -15, height, lifeRatio * 60, pokemon.hp, color, 'lifebar', true);
+      this.lifebar = new Lifebar(scene, -15, height, lifeRatio * 60, pokemon.hp, color, true);
       this.lifebar.setLife(pokemon.life);
       this.add(this.lifebar);
     }
@@ -967,7 +967,7 @@ export default class Pokemon extends Button {
     const h = this.height/2 + 5;
     if (pokemon.shield !== undefined && pokemon.shield > 0) {
       const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
-      this.shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, h, shieldRatio * 60, pokemon.shield, 0x939393, 'shieldbar', true);
+      this.shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, h, shieldRatio * 60, pokemon.shield, 0x939393, true);
       this.shieldbar.setLife(pokemon.shield);
       this.add(this.shieldbar);
     }
@@ -976,7 +976,7 @@ export default class Pokemon extends Button {
   setManaBar(pokemon: IPokemonEntity, scene: GameScene, height: number) {
     if (pokemon.mana !== undefined) {
       const color = 0x01b8fe;
-      this.manabar = new Lifebar(scene, -15, height + 5, 60, pokemon.maxMana, color, 'manabar', true);
+      this.manabar = new Lifebar(scene, -15, height + 5, 60, pokemon.maxMana, color, true);
       this.manabar.setLife(pokemon.mana);
       this.add(this.manabar);
     }
