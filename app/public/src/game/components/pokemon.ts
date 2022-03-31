@@ -80,6 +80,8 @@ export default class Pokemon extends Button {
     this.speDef = pokemon.speDef;
     this.attackType = pokemon.attackType;
     this.types = pokemon.types;
+    this.mana = pokemon.mana;
+    this.maxMana = pokemon.maxMana;
     this.atkSpeed = pokemon.atkSpeed ? Number(pokemon.atkSpeed.toFixed(2)): 0.75;
     this.targetX = null;
     this.targetY = null;
@@ -112,10 +114,10 @@ export default class Pokemon extends Button {
   enterButtonHoverState() {
     if (!this.detail && this.isPopup) {
       if (this.life) {
-        this.detail = new PokemonDetail(this.scene, 40, -200, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage);
+        this.detail = new PokemonDetail(this.scene, 150, -100, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill);
         this.add(this.detail);
       } else {
-        this.detail = new PokemonDetail(this.scene, 40, -200, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage);
+        this.detail = new PokemonDetail(this.scene, 150, -100, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill);
         this.add(this.detail);
       }
     }

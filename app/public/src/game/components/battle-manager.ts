@@ -281,22 +281,22 @@ export default class BattleManager {
           } else if (change.field == 'critChance') {
             pkm.critChance = pokemon.critChance;
             if (pkm.detail) {
-              pkm.detail.critChance.setText(pokemon.critChance.toString());
+              pkm.detail.critChance.innerHTML = pokemon.critChance.toString();
             }
           } else if (change.field == 'critDamage') {
             pkm.critDamage = parseFloat(pokemon.critDamage.toFixed(2));
             if (pkm.detail) {
-              pkm.detail.critDamage.setText(pokemon.critDamage.toFixed(2));
+              pkm.detail.critDamage.innerHTML = pokemon.critDamage.toFixed(2);
             }
           } else if (change.field == 'spellDamage') {
             pkm.spellDamage = pokemon.spellDamage;
             if (pkm.detail) {
-              pkm.detail.spellDamage.setText(pokemon.spellDamage.toString());
+              pkm.detail.spellDamage.innerHTML = pokemon.spellDamage.toString();
             }
           } else if (change.field == 'atkSpeed') {
             pkm.atkSpeed = pokemon.atkSpeed;
             if (pkm.detail) {
-              pkm.detail.atkSpeed.setText(pokemon.atkSpeed.toFixed(2));
+              pkm.detail.atkSpeed.innerHTML = pokemon.atkSpeed.toFixed(2);
             }
           } else if (change.field =='life') {
             if (change.value && change.previousValue) {
@@ -305,7 +305,7 @@ export default class BattleManager {
             pkm.life = pokemon.life;
             pkm.lifebar.setLife(pkm.life);
             if (pkm.detail) {
-              pkm.detail.hp.setText(pokemon.life.toString());
+              pkm.detail.hp.innerHTML = pokemon.life.toString();
             }
           } else if (change.field == 'shield') {
             if (change.value && change.previousValue) {
@@ -327,27 +327,27 @@ export default class BattleManager {
             pkm.mana = pokemon.mana;
             pkm.manabar.setLife(pkm.mana);
             if (pkm.detail) {
-              pkm.detail.mana.setText(pokemon.mana.toString());
+              pkm.detail.mana.innerHTML = pokemon.mana.toString();
             }
           } else if (change.field == 'atk') {
             pkm.atk = pokemon.atk;
             if (pkm.detail) {
-              pkm.detail.atk.setText(pokemon.atk.toString());
+              pkm.detail.atk.innerHTML = pokemon.atk.toString();
             }
           } else if (change.field == 'def') {
             pkm.def = pokemon.def;
             if (pkm.detail) {
-              pkm.detail.def.setText(pokemon.def.toString());
+              pkm.detail.def.innerHTML = pokemon.def.toString();
             }
           } else if (change.field == 'speDef') {
             pkm.speDef = pokemon.speDef;
             if (pkm.detail) {
-              pkm.detail.speDef.setText(pokemon.speDef.toString());
+              pkm.detail.speDef.innerHTML = pokemon.speDef.toString();
             }
           } else if (change.field == 'range') {
             pkm.range = pokemon.range;
             if (pkm.detail) {
-              pkm.detail.range.setText(pokemon.range.toString());
+              pkm.detail.range.innerHTML = pokemon.range.toString();
             }
           } else if (change.field =='targetX') {
             if (pokemon.targetX >= 0) {

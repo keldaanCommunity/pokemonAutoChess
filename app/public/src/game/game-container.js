@@ -25,6 +25,9 @@ class GameContainer {
       pixelArt: true,
       scene: [GameScene],
       scale: {mode: Phaser.Scale.FIT},
+      dom: {
+        createContainer: true
+      },
       plugins: {
         global: [{
           key: 'rexMoveTo',
