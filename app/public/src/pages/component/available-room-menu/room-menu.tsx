@@ -8,11 +8,20 @@ import RoomItem from './room-item';
 import PreparationState from '../../../../../rooms/states/preparation-state';
 import { Link, Navigate } from 'react-router-dom';
 import { leaveLobby } from '../../../stores/LobbyStore';
-
+import CSS from 'csstype';
 
 const ulStyle = {
     listStyle: 'none',
     padding: '0px'
+};
+
+const liStyle = {
+    marginBottom: '20px'
+}
+
+const scrollStyle : CSS.Properties = {
+    height:'100%',
+    overflowY:'auto'
 };
 
 export default function RoomMenu(props: { toPreparation: boolean; setToPreparation: Dispatch<SetStateAction<boolean>>; }) {
@@ -57,14 +66,18 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
          flexBasis: '15%',
          height: '90vh'
          }}>
-        <h6 style={{textAlign:'center'}}>Available Rooms:</h6>
         <h6 style={{textAlign:'center'}}>Click 'Create Room' to play</h6>
-         <ul style={ulStyle}>
-             {allRooms.map(r=>
-                <li key={r.roomId} onClick={()=>{join(r.roomId)}}>
-                <RoomItem room={r}/>
-            </li>)}
-         </ul>
-         <button onClick={create} className='nes-btn is-success'>Create room</button>
-    </div>;
+        <button onClick={create} className='nes-btn is-success'>Create room</button>
+        <h6 style={{textAlign:'center', marginTop: '20px'}}>Available Rooms:</h6>
+
+        <div className="hidden-scrollable" style={scrollStyle}>
+            <ul style={ulStyle}>
+                {allRooms.map(r=>
+                    <li style={liStyle} key={r.roomId} onClick={()=>{join(r.roomId)}}>
+                    <RoomItem room={r}/>
+                    
+                </li>)}
+            </ul>
+        </div>
+    </div>
 }
