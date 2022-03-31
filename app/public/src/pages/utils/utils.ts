@@ -9,15 +9,15 @@ export const FIREBASE_CONFIG = {
   appId: '1:448759785030:web:bc2f21a25ab9e43a894c47'
 };
 
-export function transformCoordinate(x, y) {
+export function transformCoordinate(x: number, y: number) {
   return [28 * 24 + 96 * x, 808 - 120 * y];
-};
+}
 
-export function transformAttackCoordinate(x, y) {
+export function transformAttackCoordinate(x: number, y: number) {
   return [28 * 24 + 96 * x, 712 - 120 * y];
 }
 
-export function getOrientation(x1, y1, x2, y2) {
+export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
   let angle = Math.atan2(y2 - y1, x2 - x1);
   if (angle < 0) {
     angle += 2 * Math.PI;
@@ -45,7 +45,7 @@ export function getOrientation(x1, y1, x2, y2) {
   }
 }
 
-export function getOrientationRad(r0, c0, r1, c1) {
+export function getOrientationRad(r0: number, c0: number, r1: number, c1: number) {
   const vx = r1 - r0;
   const vy = c1 - c0;
   if (vx > 0) {
@@ -75,7 +75,7 @@ export function getOrientationRad(r0, c0, r1, c1) {
   }
 }
 
-export function getAttackScale(attackSprite) {
+export function getAttackScale(attackSprite: string) {
   switch (attackSprite) {
     case 'FLYING/range':
       return [1.5, 1.5];

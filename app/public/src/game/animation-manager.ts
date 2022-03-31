@@ -1,8 +1,15 @@
 /* eslint-disable max-len */
 import {SPECIAL_SKILL} from '../../../models/enum';
+import Pokemon from './components/pokemon';
+import GameScene from './scenes/game-scene';
 
 export default class AnimationManager {
-  constructor(game) {
+  game: GameScene;
+  orientationTable: { DOWN: number; DOWNLEFT: number; LEFT: number; UPLEFT: number; UP: number; UPRIGHT: number; RIGHT: number; DOWNRIGHT: number; };
+  actionTable: { MOVING: number; ATTACKING: number; };
+  flipxTable: { DOWNRIGHT: boolean; DOWNLEFT: boolean; LEFT: boolean; UPLEFT: boolean; UP: boolean; UPRIGHT: boolean; RIGHT: boolean; };
+
+  constructor(game: GameScene) {
     this.game = game;
     this.orientationTable = {
       'DOWN': 0,
@@ -27,60 +34,59 @@ export default class AnimationManager {
       'UPLEFT': false,
       'UP': false,
       'UPRIGHT': true,
-      'RIGHT': true,
-      'DOWNRIGHT': true
+      'RIGHT': true
     };
 
     [10, 11, 12, 13, 14, 15, 16, 17, 18, 74, 75, 76, 298, 183, 184, 41, 42, 169, 179, 180, 181, 173, 35, 36, 174, 39, 40, 187, 188, 189, 273, 274, 275, 396, 397, 398].forEach((num) => {
-      this.createAnimations(num, 'COMMON');
+      this.createAnimations(num, 'COMMON', false);
     });
 
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 29, 30, 31, 32, 33, 34, 133, 134, 135, 136, 152, 153, 154, 155, 156, 157, 158, 159, 160, 196, 197, 252, 253, 254, 255, 256, 257, 258, 259, 260, 387, 388, 389, 390, 391, 392, 393, 394, 395, 470, 700].forEach((num) => {
-      this.createAnimations(num, 'UNCOMMON');
+      this.createAnimations(num, 'UNCOMMON', false);
     });
 
     [25, 26, 60, 61, 66, 67, 68, 81, 82, 111, 112, 116, 117, 172, 175, 176, 186, 230, 270, 271, 272, 304, 305, 306, 328, 329, 330, 355, 356, 363, 364, 365, 403, 404, 405, 462, 464, 468, 477].forEach((num) => {
-      this.createAnimations(num, 'RARE');
+      this.createAnimations(num, 'RARE', false);
     });
 
     [63, 64, 65, 92, 93, 94, 125, 126, 147, 148, 149, 239, 240, 246, 247, 248, 280, 281, 282, 287, 288, 289, 371, 372, 373, 374, 375, 376, 443, 444, 445, 466, 467].forEach((num) => {
-      this.createAnimations(num, 'EPIC');
+      this.createAnimations(num, 'EPIC', false);
     });
 
     [58, 59, 95, 123, 132, 143, 208, 212, 446, 447, 448, 2080, 2120, 4480, 322, 323, 3230, 307, 308, 3080].forEach((num) => {
-      this.createAnimations(num, 'LEGENDARY');
+      this.createAnimations(num, 'LEGENDARY', false);
     });
 
     [129, 130, 19, 20, 21, 22, 27, 249, 487, 144, 145, 146, 483, 484, 243, 244, 245, 377, 378, 379, 486, 382, 383, 384, 491].forEach((num) => {
-      this.createAnimations(num, 'NEUTRAL');
+      this.createAnimations(num, 'NEUTRAL', false);
     });
 
     [607, 608, 609].forEach((num) => {
-      this.createAnimations(num, 'EPIC2');
+      this.createAnimations(num, 'EPIC2', false);
     });
 
     [79, 80, 199].forEach((num) => {
-      this.createAnimations(num, 'UNCOMMON2');
+      this.createAnimations(num, 'UNCOMMON2', false);
     });
 
     [69, 70, 71, 220, 221, 361, 362, 459, 460, 471, 473, 478, 582, 583, 584, 4600].forEach((num) => {
-      this.createAnimations(num, 'december');
+      this.createAnimations(num, 'december', false);
     });
 
     [551, 552, 553, 633, 634, 635, 52, 53, 3820, 3830, 228, 318, 637, 638, 639, 640, 641, 641, 642, 643, 644, 645, 646, 647, 490, 479, 480, 481, 482, 483, 484, 485, 488, 492, 493, 494, 442, 359, 142, 131, 380, 381, 150, 250, 251, 385, 386].forEach((num) => {
-      this.createAnimations(num, 'february');
+      this.createAnimations(num, 'february', false);
     });
 
     [577, 578, 579].forEach((num) => {
-      this.createAnimations(num, 'april');
+      this.createAnimations(num, 'april', false);
     });
 
     [333, 3840, 43, 44, 45, 182].forEach((num) => {
-      this.createAnimations(num, 'september');
+      this.createAnimations(num, 'september', false);
     });
 
     [138, 139, 140, 141, 345, 346, 347, 348, 408, 409, 410, 411, 564, 565, 566, 567, 696, 697, 698, 699].forEach((num) => {
-      this.createAnimations(num, 'fossil');
+      this.createAnimations(num, 'fossil', false);
     });
 
     [104, 105, 137, 233, 293, 294, 295, 309, 310, 315, 334, 353, 354, 406, 407, 427, 428, 474, 506, 507, 508, 535, 536, 537, 540, 541, 542, 543, 544, 545, 599, 600, 601, 610, 611, 612, 648, 661, 662, 663, 669, 670, 671, 679, 680, 681, 731, 732, 733, 782, 783, 784, 1050, 3100, 3340, 3540, 4280].forEach((num) => {
@@ -845,7 +851,7 @@ export default class AnimationManager {
     });
   }
 
-  createAnimations(index, sheet, sleep) {
+  createAnimations(index: number, sheet: string, sleep: boolean) {
     /*
       0 : down
       1 : down left
@@ -882,23 +888,21 @@ export default class AnimationManager {
     }
   }
 
-  animatePokemon(entity) {
+  animatePokemon(entity: Pokemon) {
     const key = this.getSpriteKey(entity);
     this.playAnimation(entity, key);
   }
 
-  playAnimation(entity, spriteKey) {
-    const sprite = entity.getFirst('objType', 'sprite');
-    sprite.flipX = this.flipxTable[entity.orientation];
-    sprite.anims.play(spriteKey);
+  playAnimation(entity: Pokemon, spriteKey: string) {
+    entity.sprite.flipX = this.flipxTable[entity.orientation];
+    entity.sprite.anims.play(spriteKey);
   }
 
-  playSleepAnimation(entity) {
-    const sprite = entity.getFirst('objType', 'sprite');
-    sprite.anims.play(`${entity.index}/2`);
+  playSleepAnimation(entity: Pokemon) {
+    entity.sprite.anims.play(`${entity.index}/2`);
   }
 
-  getSpriteKey(entity) {
+  getSpriteKey(entity: Pokemon) {
     return `${entity.index}/${this.actionTable[entity.action]}/${this.orientationTable[entity.orientation]}`;
   }
 }

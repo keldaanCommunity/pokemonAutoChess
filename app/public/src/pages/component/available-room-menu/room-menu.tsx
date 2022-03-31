@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import {ICustomLobbyState} from '../../../../../types';
 import RoomItem from './room-item';
 import PreparationState from '../../../../../rooms/states/preparation-state';
-import { Link, Navigate } from 'react-router-dom';
 import { leaveLobby } from '../../../stores/LobbyStore';
 
 
@@ -22,9 +21,11 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
     const client: Client = useAppSelector(state=>state.network.client);
     const lobby: Room<ICustomLobbyState> = useAppSelector(state=>state.network.lobby);
     const uid: string = useAppSelector(state=>state.network.uid);
+    const [isJoining, setJoining] = useState<boolean>(false);
      
     async function create() {
-        if(!props.toPreparation) {
+        if(!props.toPreparation && !isJoining) {
+            setJoining(true);
             const token: string = await firebase.auth().currentUser.getIdToken();
             const room: Room<PreparationState> = await client.create('room', {idToken: token, ownerId: uid});
             localStorage.setItem('lastRoomId', room.id);
@@ -37,7 +38,8 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
     }
 
    async function join(id:string) {
-       if(!props.toPreparation) {
+       if(!props.toPreparation && !isJoining) {
+        setJoining(true);
         const token: string = await firebase.auth().currentUser.getIdToken();
         const room: Room<PreparationState> = await client.joinById(id, {idToken: token});
         localStorage.setItem('lastRoomId', room.id);
@@ -54,17 +56,18 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
          margin:'10px',
          display: 'flex',
          flexFlow: 'column',
-         flexBasis: '15%',
+         flexBasis: '20%',
          height: '90vh'
          }}>
-        <h6 style={{textAlign:'center'}}>Available Rooms:</h6>
-        <h6 style={{textAlign:'center'}}>Click 'Create Room' to play</h6>
-         <ul style={ulStyle}>
+        
+        <h4 style={{textAlign:'center'}}>Available Rooms</h4>
+        <p style={{textAlign:'center'}}>Click Create Room to play!</p>
+         <ul style={ulStyle} className="hidden-scrollable">
              {allRooms.map(r=>
-                <li key={r.roomId} onClick={()=>{join(r.roomId)}}>
-                <RoomItem room={r}/>
+                <li key={r.roomId}>
+                <RoomItem room={r} click={join}/>
             </li>)}
          </ul>
-         <button onClick={create} className='nes-btn is-success'>Create room</button>
+         <button style={{position:'absolute', bottom:'20px', left:'8%', width:'80%'}} onClick={create} className='nes-btn is-success'>Create Room</button>
     </div>;
 }
