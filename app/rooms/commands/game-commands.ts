@@ -81,13 +81,8 @@ export class OnDragDropCommand extends Command<GameRoom, {
   detail: any
 }> {
   execute({client, detail}) {
-    /*
-    client.send('info', {
-      title:'Information',
-      info:'Tu es un sanglier'
-    });
-    */
-    // console.log(detail);
+
+    console.log(detail);
     const commands = [];
     let success = false;
     let dittoReplaced = false;
@@ -95,7 +90,7 @@ export class OnDragDropCommand extends Command<GameRoom, {
       'updateBoard': true,
       'updateItems': true
     };
-    const playerId = client.auth.uid; ;
+    const playerId = client.auth.uid;
     if (this.state.players.has(playerId)) {
       const player = this.state.players.get(playerId);
       if (detail.objType == 'pokemon') {
@@ -344,14 +339,13 @@ export class OnDragDropCommand extends Command<GameRoom, {
         }
       }
       if (detail.objType == 'combine') {
+
         message.updateBoard = false;
         message.updateItems = true;
 
         const item = detail.id;
         const player = this.state.players.get(playerId);
         const itemToCombine = player.items.at(parseInt(detail.y));
-
-        console.log(item, itemToCombine);
 
         if (!player.items.has(item) || !Object.keys(ITEM).includes(itemToCombine)) {
           client.send('DragDropFailed', message);

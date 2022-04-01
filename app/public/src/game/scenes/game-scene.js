@@ -363,36 +363,6 @@ export default class GameScene extends Scene {
     });
 
 
-    this.input.on('dragenter', function(pointer, gameObject, dropZone) {
-      const self = this;
-      if (dropZone.name.includes('item') && gameObject.objType == 'item') {
-        const item = self.itemsContainer.list[parseInt(dropZone.name.substr(5, 1))];
-        if (item && item.name && item != gameObject) {
-          Object.keys(ITEM_RECIPE).forEach((recipeName)=>{
-            const recipe = ITEM_RECIPE[recipeName];
-            if ((recipe[0] == item.name && recipe[1] == gameObject.name) || (recipe[1] == item.name && recipe[0] == gameObject.name)) {
-              item.detailDisabled = true;
-              item.detail.setScale(0, 0);
-              gameObject.sprite.setTexture('item', recipeName);
-              gameObject.remove(gameObject.detail, true);
-              gameObject.detail = new ItemDetail(self, 30, -100, recipeName);
-              gameObject.detail.setScale(1, 1);
-              gameObject.add(gameObject.detail);
-            }
-          });
-        }
-      }
-    }, this);
-
-    this.input.on('dragleave', function(pointer, gameObject, dropZone) {
-      if (gameObject.objType == 'item') {
-        gameObject.sprite.setTexture('item', gameObject.name);
-        gameObject.remove(gameObject.detail, true);
-        gameObject.detail = new ItemDetail(this, 30, -100, gameObject.name);
-        gameObject.add(gameObject.detail);
-      }
-    }, this);
-
     this.input.on('drop', (pointer, gameObject, dropZone) => {
       this.removeRectangles();
       if (dropZone.name.includes('item')) {

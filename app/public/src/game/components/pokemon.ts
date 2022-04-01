@@ -114,10 +114,10 @@ export default class Pokemon extends Button {
   enterButtonHoverState() {
     if (!this.detail && this.isPopup) {
       if (this.life) {
-        this.detail = new PokemonDetail(this.scene, 150, -100, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill);
+        this.detail = new PokemonDetail(this.scene, 130, -180, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill);
         this.add(this.detail);
       } else {
-        this.detail = new PokemonDetail(this.scene, 150, -100, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill);
+        this.detail = new PokemonDetail(this.scene, 130, -180, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill);
         this.add(this.detail);
       }
     }
