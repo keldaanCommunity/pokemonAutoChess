@@ -5,15 +5,37 @@ import BoardManager from '../components/board-manager';
 import BattleManager from '../components/battle-manager';
 import WeatherManager from '../components/weather-manager';
 import ItemsContainer from '../components/items-container';
-import ItemDetail from '../components/item-detail';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
-import {STATE, ITEM_RECIPE} from '../../../../models/enum';
+import {STATE} from '../../../../models/enum';
 import firebase from 'firebase/compat/app';
 import {getOrientation, transformCoordinate} from '../../pages/utils/utils';
-
+import { Room } from "colyseus.js";
+import GameState from "../../../../rooms/states/game-state";
 
 export default class GameScene extends Scene {
+  tilemap: any;
+  room: Room<GameState>;
+  uid: string;
+  textStyle: { fontSize: string; fontFamily: string; color: string; align: string; };
+  bigTextStyle: { fontSize: string; fontFamily: string; color: string; align: string; stroke: string; strokeThickness: number; };
+  map: Phaser.Tilemaps.Tilemap;
+  battle: GameObjects.Group;
+  animationManager: AnimationManager;
+  itemsContainer: ItemsContainer;
+  boardManager: BoardManager;
+  battleManager: BattleManager;
+  weatherManager: WeatherManager;
+  pokemon: Pokemon;
+  transitionImage: GameObjects.Image;
+  transitionScreen: GameObjects.Container;
+  music: Phaser.Sound.BaseSound;
+  targetPokemon: Pokemon;
+  graphics: Phaser.GameObjects.Graphics[];
+  dragDropText: Phaser.GameObjects.Text;
+  sellZoneGraphic: Phaser.GameObjects.Graphics;
+  zones: Phaser.GameObjects.Zone[];
+
   constructor() {
     super({
       key: 'gameScene',
@@ -28,12 +50,6 @@ export default class GameScene extends Scene {
   }
 
   preload() {
-    this.load.rexWebFont({
-      google: {
-        families: ['Press Start 2P']
-      }
-    });
-
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
     progressBox.fillStyle(0x222222, 0.8);
@@ -46,8 +62,7 @@ export default class GameScene extends Scene {
       y: (height / 2) - 50,
       text: 'Loading...',
       style: {
-        font: '30px monospace',
-        fill: '#ffffff'
+        font: '30px monospace'
       }
     });
     loadingText.setOrigin(0.5, 0.5);
@@ -57,8 +72,7 @@ export default class GameScene extends Scene {
       y: (height / 2) + 10,
       text: '0%',
       style: {
-        font: '28px monospace',
-        fill: '#ffffff'
+        font: '28px monospace'
       }
     });
     percentText.setOrigin(0.5, 0.5);
@@ -68,15 +82,14 @@ export default class GameScene extends Scene {
       y: (height / 2) + 70,
       text: '',
       style: {
-        font: '28px monospace',
-        fill: '#ffffff'
+        font: '28px monospace'
       }
     });
 
     assetText.setOrigin(0.5, 0.5);
 
-    this.load.on('progress', (value) => {
-      percentText.setText(parseInt(value * 100) + '%');
+    this.load.on('progress', (value: number) => {
+      percentText.setText((value * 100).toString() + '%');
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
       progressBar.fillRect(500, 510, 1000 * value, 30);
@@ -177,7 +190,6 @@ export default class GameScene extends Scene {
       stroke: '#000',
       strokeThickness: 3
     };
-    this.dialog = undefined;
     this.input.mouse.disableContextMenu();
 
     this.registerKeys();
@@ -193,27 +205,27 @@ export default class GameScene extends Scene {
     this.boardManager = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
-    this.pokemon = this.add.existing(new Pokemon(this, 11*24, 19*24, PokemonFactory.createPokemonFromName(this.room.state.players[this.uid].avatar), false));
+    this.pokemon = this.add.existing(new Pokemon(this, 11*24, 19*24, PokemonFactory.createPokemonFromName(this.room.state.players[this.uid].avatar), false, false));
     this.animationManager.animatePokemon(this.pokemon);
 
     this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
     this.transitionScreen.setAlpha(0);
     this.music = this.sound.add('sound', {loop: true});
-    this.music.setVolume(0.1);
+    // this.music.setVolume(0.1);
     this.music.play();
   }
 
   registerKeys() {
-    this.input.keyboard.on('keyup-D', (event) => {
+    this.input.keyboard.on('keyup-D', () => {
       this.refreshShop();
     });
 
-    this.input.keyboard.on('keyup-F', (event) => {
+    this.input.keyboard.on('keyup-F', () => {
       this.buyExperience();
     });
 
-    this.input.keyboard.on('keyup-E', (event) => {
+    this.input.keyboard.on('keyup-E', () => {
       this.sellPokemon();
     });
   }
@@ -236,9 +248,6 @@ export default class GameScene extends Scene {
         'pokemonId': this.targetPokemon.id
       }
     }));
-  }
-
-  update() {
   }
 
   updatePhase() {
@@ -332,11 +341,6 @@ export default class GameScene extends Scene {
         this.pokemon.orientation = getOrientation(this.pokemon.x, this.pokemon.y, pointer.x, pointer.y);
         this.animationManager.animatePokemon(this.pokemon);
         this.pokemon.moveManager.moveTo(pointer.x, pointer.y);
-      } else {
-        if (this.dialog && !this.dialog.isInTouching(pointer)) {
-          this.dialog.scaleDownDestroy(100);
-          this.dialog = undefined;
-        }
       }
     });
 
@@ -392,7 +396,7 @@ export default class GameScene extends Scene {
               'objType': gameObject.objType
             }
           }));
-          window.lastDragDropPokemon = gameObject;
+          // window.lastDragDropPokemon = gameObject;
         } else if (gameObject.objType == 'item') {
           document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
             detail: {

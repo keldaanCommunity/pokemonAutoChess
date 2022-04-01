@@ -118,6 +118,6 @@ export default class Tileset {
       tilewidth: 24
     };
   }
-};
+}
 
 module.exports = Tileset;

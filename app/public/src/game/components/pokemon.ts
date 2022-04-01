@@ -5,10 +5,11 @@ import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
 import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS} from '../../../../models/enum';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
-import { IPokemonEntity } from '../../../../types';
+import { IPokemon } from '../../../../types';
 import GameScene from '../scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
+import PokemonEntity from '../../../../core/pokemon-entity';
 
 export default class Pokemon extends Button {
   isPopup: boolean;
@@ -63,7 +64,7 @@ export default class Pokemon extends Button {
   resurection: GameObjects.Sprite;
   runeProtect: GameObjects.Sprite;
 
-  constructor(scene: GameScene, x: number, y: number, pokemon: IPokemonEntity, dragable: boolean, isPopup: boolean) {
+  constructor(scene: GameScene, x: number, y: number, pokemon: PokemonEntity | IPokemon, dragable: boolean, isPopup: boolean) {
     super(scene, x, y, 75, 75);
     this.isPopup = isPopup;
     this.objType = 'pokemon';
@@ -80,18 +81,14 @@ export default class Pokemon extends Button {
     this.speDef = pokemon.speDef;
     this.attackType = pokemon.attackType;
     this.types = pokemon.types;
-    this.mana = pokemon.mana;
     this.maxMana = pokemon.maxMana;
-    this.atkSpeed = pokemon.atkSpeed ? Number(pokemon.atkSpeed.toFixed(2)): 0.75;
+    this.atkSpeed = pokemon.atkSpeed;
     this.targetX = null;
     this.targetY = null;
     this.skill = pokemon.skill;
     this.positionX = pokemon.positionX;
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
-    this.team = pokemon.team;
-    this.critDamage = pokemon.critDamage ? Number(pokemon.critDamage.toFixed(2)): 2;
-    this.spellDamage = pokemon.spellDamage? pokemon.spellDamage: 0;
     this.setRangeType();
     this.setMovingFunction(scene);
     this.setParameters(pokemon);
@@ -99,14 +96,19 @@ export default class Pokemon extends Button {
     if (dragable) {
       scene.input.setDraggable(this);
     }
-    if (pokemon.life) {
-      this.life = pokemon.life;
-    }
-    if (pokemon.shield) {
+    if(pokemon instanceof PokemonEntity){
+      this.mana = pokemon.mana;
+      this.team = pokemon.team;
       this.shield = pokemon.shield;
-    }
-    if (pokemon.critChance) {
+      this.life = pokemon.life;
+      this.critDamage = pokemon.critDamage;
+      this.spellDamage = pokemon.spellDamage;
       this.critChance = pokemon.critChance;
+    }
+    else{
+      this.critDamage = 2;
+      this.spellDamage = 0;
+      this.critChance = 10;
     }
     this.setDepth(5);
   }
@@ -948,7 +950,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setLifeBar(pokemon: IPokemonEntity, scene: GameScene, height: number) {
+  setLifeBar(pokemon: PokemonEntity, scene: GameScene, height: number) {
     if (pokemon.life !== undefined) {
       let color: number;
       if (pokemon.team == 0) {
@@ -963,7 +965,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setShieldBar(pokemon: IPokemonEntity, scene: GameScene) {
+  setShieldBar(pokemon: PokemonEntity, scene: GameScene) {
     const h = this.height/2 + 5;
     if (pokemon.shield !== undefined && pokemon.shield > 0) {
       const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
@@ -973,7 +975,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setManaBar(pokemon: IPokemonEntity, scene: GameScene, height: number) {
+  setManaBar(pokemon: PokemonEntity, scene: GameScene, height: number) {
     if (pokemon.mana !== undefined) {
       const color = 0x01b8fe;
       this.manabar = new Lifebar(scene, -15, height + 5, 60, pokemon.maxMana, color, true);
@@ -982,7 +984,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setEffects(pokemon: IPokemonEntity, scene: GameScene, height: number) {
+  setEffects(pokemon: PokemonEntity, scene: GameScene, height: number) {
     if (pokemon.effects.length > 0) {
       pokemon.effects.forEach((effect, c) => {
         if ( effect && EFFECTS_ICON[effect]) {
@@ -993,43 +995,36 @@ export default class Pokemon extends Button {
     }
   }
 
-  setSprite(pokemon: IPokemonEntity, scene: GameScene) {
+  setSprite(pokemon: PokemonEntity | IPokemon, scene: GameScene) {
     this.sprite = new GameObjects.Sprite(scene, 0, 0, pokemon.sheet, `${pokemon.index}/0/1/0`);
+    this.itemsContainer = new ItemsContainer(scene, pokemon.items, this.width + 20, -this.height/2 -20, false);
+    this.socle = new GameObjects.Image(scene, 0, this.height, 'socle');
     this.height = this.sprite.height;
     this.width = this.sprite.width;
-
-    if (pokemon.effects && (pokemon.effects.includes(EFFECTS.IRON_DEFENSE) || pokemon.effects.includes(EFFECTS.AUTOTOMIZE))) {
-      this.sprite.setScale(3, 3);
-    } else {
-      this.sprite.setScale(2, 2);
-    }
-    this.socle = new GameObjects.Image(scene, 0, this.height, 'socle');
     scene.add.existing(this.socle);
     scene.add.existing(this.sprite);
     this.add(this.socle);
     this.add(this.sprite);
-
-    this.setShieldBar(pokemon, scene);
-    this.setLifeBar(pokemon, scene, this.height/2 + 5);
-    this.setManaBar(pokemon, scene, this.height/2 + 5);
-
-    this.itemsContainer = new ItemsContainer(scene, pokemon.items, this.width + 20, -this.height/2 -20, false);
     this.add(this.itemsContainer);
 
-    if (pokemon.effects) {
+    if(pokemon instanceof PokemonEntity){
+      if (pokemon.effects && (pokemon.effects.includes(EFFECTS.IRON_DEFENSE) || pokemon.effects.includes(EFFECTS.AUTOTOMIZE))) {
+        this.sprite.setScale(3, 3);
+      }
+      this.setShieldBar(pokemon, scene);
+      this.setLifeBar(pokemon, scene, this.height/2 + 5);
+      this.setManaBar(pokemon, scene, this.height/2 + 5);
       this.setEffects(pokemon, scene, this.height + 30);
     }
   }
 
-  setParameters(pokemon: IPokemonEntity) {
-    if (pokemon.orientation) {
+  setParameters(pokemon: PokemonEntity | IPokemon) {
+    if(pokemon instanceof PokemonEntity){
       this.orientation = pokemon.orientation;
-    } else {
-      this.orientation = 'DOWNLEFT';
-    }
-    if (pokemon.action) {
       this.action = pokemon.action;
-    } else {
+    }
+    else{
+      this.orientation = 'DOWNLEFT';
       this.action = 'MOVING';
     }
   }
