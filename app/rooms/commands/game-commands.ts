@@ -81,8 +81,6 @@ export class OnDragDropCommand extends Command<GameRoom, {
   detail: any
 }> {
   execute({client, detail}) {
-
-    console.log(detail);
     const commands = [];
     let success = false;
     let dittoReplaced = false;
@@ -488,14 +486,6 @@ export class OnJoinCommand extends Command<GameRoom, {
   }
 }
 
-export class OnLeaveCommand extends Command<GameRoom, {
-  client: Client,
-  consented: boolean
-}> {
-  execute({client, consented}) {
-  }
-}
-
 export class OnUpdateCommand extends Command<GameRoom, {
   deltaTime: number
 }> {
@@ -531,7 +521,7 @@ export class OnUpdateCommand extends Command<GameRoom, {
   }
 }
 
-export class OnUpdatePhaseCommand extends Command<GameRoom, {}> {
+export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   execute() {
     if (this.state.phase == STATE.PICK) {
       const commands = this.checkForLazyTeam();
@@ -769,7 +759,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, {}> {
           }
         });
       }
-    }); ;
+    });
   }
 
   checkForLazyTeam() {

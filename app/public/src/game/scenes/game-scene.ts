@@ -12,6 +12,7 @@ import firebase from 'firebase/compat/app';
 import {getOrientation, transformCoordinate} from '../../pages/utils/utils';
 import { Room } from "colyseus.js";
 import GameState from "../../../../rooms/states/game-state";
+import ItemContainer from '../components/item-container';
 
 export default class GameScene extends Scene {
   tilemap: any;
@@ -20,11 +21,11 @@ export default class GameScene extends Scene {
   textStyle: { fontSize: string; fontFamily: string; color: string; align: string; };
   bigTextStyle: { fontSize: string; fontFamily: string; color: string; align: string; stroke: string; strokeThickness: number; };
   map: Phaser.Tilemaps.Tilemap;
-  battle: GameObjects.Group;
+  battleGroup: GameObjects.Group;
   animationManager: AnimationManager;
   itemsContainer: ItemsContainer;
-  boardManager: BoardManager;
-  battleManager: BattleManager;
+  board: BoardManager;
+  battle: BattleManager;
   weatherManager: WeatherManager;
   pokemon: Pokemon;
   transitionImage: GameObjects.Image;
@@ -35,6 +36,7 @@ export default class GameScene extends Scene {
   dragDropText: Phaser.GameObjects.Text;
   sellZoneGraphic: Phaser.GameObjects.Graphics;
   zones: Phaser.GameObjects.Zone[];
+  lastDragDropPokemon: Pokemon;
 
   constructor() {
     super({
@@ -199,11 +201,11 @@ export default class GameScene extends Scene {
     const tileset = this.map.addTilesetImage(this.tilemap.tilesets[0].name, 'tiles', 24, 24, 1, 1);
     this.map.createLayer('World', tileset, 0, 0);
     this.initializeDragAndDrop();
-    this.battle = this.add.group();
+    this.battleGroup = this.add.group();
     this.animationManager = new AnimationManager(this);
     this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].items, 24*24 + 10, 5*24 + 10, true);
-    this.boardManager = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
-    this.battleManager = new BattleManager(this, this.battle, this.room.state.players[this.uid], this.animationManager);
+    this.board = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
+    this.battle = new BattleManager(this, this.battleGroup, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
     this.pokemon = this.add.existing(new Pokemon(this, 11*24, 19*24, PokemonFactory.createPokemonFromName(this.room.state.players[this.uid].avatar), false, false));
     this.animationManager.animatePokemon(this.pokemon);
@@ -253,13 +255,13 @@ export default class GameScene extends Scene {
   updatePhase() {
     this.targetPokemon = null;
     if (this.room.state.phase == STATE.FIGHT) {
-      this.boardManager.battleMode();
+      this.board.battleMode();
     } else {
-      this.boardManager.pickMode();
+      this.board.pickMode();
     }
   }
 
-  drawRectangles(sellZoneVisible) {
+  drawRectangles(sellZoneVisible: boolean) {
     this.graphics.forEach((rect) => {
       rect.setVisible(true);
     });
@@ -344,32 +346,30 @@ export default class GameScene extends Scene {
       }
     });
 
-    this.input.on('gameobjectover', (pointer, gameObject) => {
-      if (gameObject.objType == 'pokemon') {
+    this.input.on('gameobjectover', (pointer, gameObject: Phaser.GameObjects.GameObject) => {
+      if(gameObject instanceof Pokemon){
         this.targetPokemon = gameObject;
-      } else {
+      }
+      else{
         this.targetPokemon = null;
       }
     });
 
-    this.input.on('dragstart', (pointer, gameObject) => {
-      if (gameObject.objType == 'item') {
-        this.drawRectangles(false);
-      } else {
-        this.drawRectangles(true);
-      }
-      this.children.bringToTop(gameObject);
+    this.input.on('dragstart', (pointer, gameObject: Phaser.GameObjects.GameObject) => {
+      gameObject instanceof Pokemon ? this.drawRectangles(true) : this.drawRectangles(false);
+      // this.children.bringToTop(gameObject);
     });
 
-    this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
-      gameObject.x = dragX;
-      gameObject.y = dragY;
+    this.input.on('drag', (pointer, gameObject: Phaser.GameObjects.GameObject, dragX: number, dragY: number) => {
+      const g = <Phaser.GameObjects.Container> gameObject;
+      g.x = dragX;
+      g.y = dragY;
     });
 
 
-    this.input.on('drop', (pointer, gameObject, dropZone) => {
+    this.input.on('drop', (pointer, gameObject: Phaser.GameObjects.GameObject, dropZone: Phaser.GameObjects.Zone) => {
       this.removeRectangles();
-      if (dropZone.name.includes('item')) {
+      if (dropZone.name.includes('item') && gameObject instanceof ItemContainer) {
         document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
           detail: {
             'y': dropZone.name.substr(5, 1),
@@ -378,32 +378,34 @@ export default class GameScene extends Scene {
           }
         }));
       } else if (dropZone.name == 'sell-zone') {
-        if (gameObject.objType == 'item') {
+        if (gameObject instanceof ItemContainer) {
           this.itemsContainer.updateItems();
         }
-        document.getElementById('game').dispatchEvent(new CustomEvent('sell-drop', {
-          detail: {
-            'pokemonId': gameObject.id
-          }
-        }));
+        else if (gameObject instanceof Pokemon) {
+          document.getElementById('game').dispatchEvent(new CustomEvent('sell-drop', {
+            detail: {
+              'pokemonId': gameObject.id
+            }
+          }));
+        }
       } else {
-        if (gameObject.objType == 'pokemon') {
+        if (gameObject instanceof Pokemon) {
           document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
             detail: {
               'x': dropZone.name.substr(5, 1),
               'y': dropZone.name.substr(7, 1),
               'id': gameObject.id,
-              'objType': gameObject.objType
+              'objType': 'pokemon'
             }
           }));
-          // window.lastDragDropPokemon = gameObject;
-        } else if (gameObject.objType == 'item') {
+          this.lastDragDropPokemon = gameObject;
+        } else if (gameObject instanceof ItemContainer) {
           document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
             detail: {
               'x': dropZone.name.substr(5, 1),
               'y': dropZone.name.substr(7, 1),
               'id': gameObject.name,
-              'objType': gameObject.objType
+              'objType': 'item'
             }
           }));
         }

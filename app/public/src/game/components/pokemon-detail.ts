@@ -37,10 +37,15 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     this.dom = document.createElement('div');
     this.dom.className = 'nes-container';
     this.dom.style.backgroundColor = 'rgba(255,255,255,.7)';
-    this.dom.style.display = 'flex';
-    this.dom.style.flexFlow = 'column';
     this.dom.style.padding = '10px';
-    this.dom.style.minWidth = '200px';
+
+    const wrap = document.createElement('div');
+    wrap.style.display = 'flex';
+
+    const infos = document.createElement('div');
+    infos.style.display = 'flex';
+    infos.style.flexFlow = 'column';
+    infos.style.minWidth = '200px';
 
     this.hp = document.createElement('p');
     this.hp.innerHTML = hp.toString();
@@ -74,10 +79,6 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
     const pokemonName = document.createElement('p');
     pokemonName.innerHTML = capitalizeFirstLetter(name);
-
-    this.skill = document.createElement('p');
-    this.skill.style.textAlign = 'center';
-    this.skill.innerHTML = SPECIAL_SKILL_DESCRIPTION[skill].title.eng;
   
     const avatar = document.createElement('img');
     avatar.src = 'assets/avatar/' + name + '.png';
@@ -92,22 +93,25 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     types.forEach(type=>{
         const ty = document.createElement('img');
         ty.src = 'assets/types/' + type + '.png';
+        ty.style.width = '34px';
+        ty.style.height = '34px';
         t.appendChild(ty);
       }
     );
 
-    const a = document.createElement('img');
-    a.style.width = '20px';
-    a.style.height = '20px';
+    const a = document.createElement('p');
     switch(attackType){
         case ATTACK_TYPE.PHYSICAL:
-          a.src = 'assets/icons/atk.png';
+          a.innerHTML = 'Physical';
+          a.className = 'nes-text is-error';
           break;
         case ATTACK_TYPE.SPECIAL:
-          a.src = 'assets/icons/mana.png';
+          a.innerHTML = 'Special';
+          a.className = 'nes-text is-primary';
           break;
         case ATTACK_TYPE.TRUE:
-          a.src = 'assets/icons/critDamage.png';
+          a.innerHTML = 'True';
+          a.className = 'nes-text is-success';
           break;
         default:
           break;
@@ -255,15 +259,38 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     profile.appendChild(avatar);
     profile.appendChild(pokemonName);
 
-    this.dom.appendChild(profile);
-    this.dom.appendChild(at);
-    this.dom.appendChild(f1);
-    this.dom.appendChild(f2);
-    this.dom.appendChild(f3);
-    this.dom.appendChild(f4);
-    this.dom.appendChild(f5);
-    this.dom.appendChild(this.skill);
+    const ult = document.createElement('p');
+    ult.innerHTML = SPECIAL_SKILL_DESCRIPTION[skill].title.eng;
+
+    const description = document.createElement('p');
+    description.innerHTML = SPECIAL_SKILL_DESCRIPTION[skill].description.eng;
+
+    const ultDiv = document.createElement('div');
+    ultDiv.style.display = 'flex';
+    ultDiv.style.flexFlow = 'column';
+    ultDiv.style.textAlign = 'justify';
+    ultDiv.style.maxWidth = '200px';
+    ultDiv.style.marginLeft = '10px';
+
+    ultDiv.appendChild(ult);
+    ultDiv.appendChild(description);
+
+    infos.appendChild(profile);
+    infos.appendChild(at);
+    infos.appendChild(f1);
+    infos.appendChild(f2);
+    infos.appendChild(f3);
+    infos.appendChild(f4);
+    infos.appendChild(f5);
+
+    wrap.appendChild(infos);
+    wrap.appendChild(ultDiv);
+    this.dom.appendChild(wrap);
     this.setElement(this.dom);
+  }
+
+  updateValue(el: HTMLElement, previousValue: number, value: number){
+    el.innerHTML = value.toString();
   }
 }
 

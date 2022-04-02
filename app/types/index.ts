@@ -3,6 +3,8 @@ import board from '../core/board'
 import Dps from '../core/dps'
 import DpsHeal from '../core/dps-heal'
 import BattleResult from '../models/colyseus-models/battle-result'
+import Count from '../models/colyseus-models/count'
+import Status from '../models/colyseus-models/status'
 import ExperienceManager from '../models/colyseus-models/experience-manager'
 import LeaderboardInfo from '../models/colyseus-models/leaderboard-info'
 import LobbyUser from '../models/colyseus-models/lobby-user'
@@ -148,6 +150,10 @@ export interface IDpsHeal {
     shield: number
 }
 
+export function instanceofPokemonEntity(obj: IPokemon | IPokemonEntity){
+    return 'mana' in obj;
+}
+
 export interface IPokemonEntity {
   handleShield(shieldBonus: number, pokemon: IPokemonEntity)
   update(dt: number, board: board, climate: string)
@@ -186,8 +192,8 @@ export interface IPokemonEntity {
   types: string[]
   stars: number
   skill: string
-  status: IStatus
-  count: ICount
+  status: Status
+  count: Count
   critDamage: number
   spellDamage: number
   healDone: number

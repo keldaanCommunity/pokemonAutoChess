@@ -5,7 +5,7 @@ import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
 import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS} from '../../../../models/enum';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
-import { IPokemon } from '../../../../types';
+import { IPokemon, IPokemonEntity, instanceofPokemonEntity } from '../../../../types';
 import GameScene from '../scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
@@ -64,7 +64,7 @@ export default class Pokemon extends Button {
   resurection: GameObjects.Sprite;
   runeProtect: GameObjects.Sprite;
 
-  constructor(scene: GameScene, x: number, y: number, pokemon: PokemonEntity | IPokemon, dragable: boolean, isPopup: boolean) {
+  constructor(scene: Phaser.Scene, x: number, y: number, pokemon: IPokemonEntity | IPokemon, dragable: boolean, isPopup: boolean) {
     super(scene, x, y, 75, 75);
     this.isPopup = isPopup;
     this.objType = 'pokemon';
@@ -96,14 +96,15 @@ export default class Pokemon extends Button {
     if (dragable) {
       scene.input.setDraggable(this);
     }
-    if(pokemon instanceof PokemonEntity){
-      this.mana = pokemon.mana;
-      this.team = pokemon.team;
-      this.shield = pokemon.shield;
-      this.life = pokemon.life;
-      this.critDamage = pokemon.critDamage;
-      this.spellDamage = pokemon.spellDamage;
-      this.critChance = pokemon.critChance;
+    if(instanceofPokemonEntity(pokemon)){
+      const p = <IPokemonEntity> pokemon;
+      this.mana = p.mana;
+      this.team = p.team;
+      this.shield = p.shield;
+      this.life = p.life;
+      this.critDamage = p.critDamage;
+      this.spellDamage = p.spellDamage;
+      this.critChance = p.critChance;
     }
     else{
       this.critDamage = 2;
@@ -116,17 +117,18 @@ export default class Pokemon extends Button {
   enterButtonHoverState() {
     if (!this.detail && this.isPopup) {
       if (this.life) {
-        this.detail = new PokemonDetail(this.scene, 130, -180, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill);
-        this.add(this.detail);
+        this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill);
       } else {
-        this.detail = new PokemonDetail(this.scene, 130, -180, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill);
-        this.add(this.detail);
+        this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill);
       }
+      this.detail.setPosition(this.detail.width / 2 + 40, -this.detail.height / 2 - 40);
+      this.add(this.detail);
     }
   }
 
   enterButtonRestState() {
     if (this.detail) {
+      this.detail.dom.remove();
       this.remove(this.detail, true);
       this.detail = undefined;
     }
@@ -950,7 +952,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setLifeBar(pokemon: PokemonEntity, scene: GameScene, height: number) {
+  setLifeBar(pokemon: IPokemonEntity, scene: Phaser.Scene, height: number) {
     if (pokemon.life !== undefined) {
       let color: number;
       if (pokemon.team == 0) {
@@ -965,7 +967,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setShieldBar(pokemon: PokemonEntity, scene: GameScene) {
+  setShieldBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
     const h = this.height/2 + 5;
     if (pokemon.shield !== undefined && pokemon.shield > 0) {
       const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
@@ -975,7 +977,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setManaBar(pokemon: PokemonEntity, scene: GameScene, height: number) {
+  setManaBar(pokemon: IPokemonEntity, scene: Phaser.Scene, height: number) {
     if (pokemon.mana !== undefined) {
       const color = 0x01b8fe;
       this.manabar = new Lifebar(scene, -15, height + 5, 60, pokemon.maxMana, color, true);
@@ -984,7 +986,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setEffects(pokemon: PokemonEntity, scene: GameScene, height: number) {
+  setEffects(pokemon: IPokemonEntity, scene: Phaser.Scene, height: number) {
     if (pokemon.effects.length > 0) {
       pokemon.effects.forEach((effect, c) => {
         if ( effect && EFFECTS_ICON[effect]) {
@@ -995,33 +997,37 @@ export default class Pokemon extends Button {
     }
   }
 
-  setSprite(pokemon: PokemonEntity | IPokemon, scene: GameScene) {
-    this.sprite = new GameObjects.Sprite(scene, 0, 0, pokemon.sheet, `${pokemon.index}/0/1/0`);
-    this.itemsContainer = new ItemsContainer(scene, pokemon.items, this.width + 20, -this.height/2 -20, false);
-    this.socle = new GameObjects.Image(scene, 0, this.height, 'socle');
+  setSprite(pokemon: IPokemonEntity | IPokemon, scene: Phaser.Scene) {
+    const p = <IPokemonEntity> pokemon;
+    this.sprite = new GameObjects.Sprite(scene, 0, 0, p.sheet, `${p.index}/0/1/0`);
+    this.sprite.setScale(2, 2);
     this.height = this.sprite.height;
     this.width = this.sprite.width;
+    this.itemsContainer = new ItemsContainer(scene, p.items, this.width + 20, -this.height/2 -20, false);
+    this.socle = new GameObjects.Image(scene, 0, this.height, 'socle');
     scene.add.existing(this.socle);
     scene.add.existing(this.sprite);
     this.add(this.socle);
     this.add(this.sprite);
     this.add(this.itemsContainer);
 
-    if(pokemon instanceof PokemonEntity){
-      if (pokemon.effects && (pokemon.effects.includes(EFFECTS.IRON_DEFENSE) || pokemon.effects.includes(EFFECTS.AUTOTOMIZE))) {
+    if(instanceofPokemonEntity(pokemon)){
+      const p = <IPokemonEntity> pokemon;
+      if (p.effects && (p.effects.includes(EFFECTS.IRON_DEFENSE) || p.effects.includes(EFFECTS.AUTOTOMIZE))) {
         this.sprite.setScale(3, 3);
       }
-      this.setShieldBar(pokemon, scene);
-      this.setLifeBar(pokemon, scene, this.height/2 + 5);
-      this.setManaBar(pokemon, scene, this.height/2 + 5);
-      this.setEffects(pokemon, scene, this.height + 30);
+      this.setShieldBar(p, scene);
+      this.setLifeBar(p, scene, this.height/2 + 5);
+      this.setManaBar(p, scene, this.height/2 + 5);
+      this.setEffects(p, scene, this.height + 30);
     }
   }
 
-  setParameters(pokemon: PokemonEntity | IPokemon) {
-    if(pokemon instanceof PokemonEntity){
-      this.orientation = pokemon.orientation;
-      this.action = pokemon.action;
+  setParameters(pokemon: IPokemonEntity | IPokemon) {
+    const p = <IPokemonEntity> pokemon;
+    if(p.orientation){
+      this.orientation = p.orientation;
+      this.action = p.action;
     }
     else{
       this.orientation = 'DOWNLEFT';
@@ -1029,7 +1035,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setMovingFunction(scene: GameScene) {
+  setMovingFunction(scene: Phaser.Scene) {
     const p = <MoveToPlugin> scene.plugins.get('rexMoveTo');
     this.moveManager = p.add(this, {
       speed: 300,

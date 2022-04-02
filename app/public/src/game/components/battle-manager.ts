@@ -1,6 +1,7 @@
 import {GameObjects} from 'phaser';
 import {SPECIAL_SKILL} from '../../../../models/enum';
 import Pokemon from './pokemon';
+import PokemonEntity from '../../../../core/pokemon-entity';
 import {transformAttackCoordinate} from '../../pages/utils/utils';
 import GameScene from '../scenes/game-scene';
 import { IPlayer, IPokemonEntity } from '../../../../types';
@@ -43,7 +44,8 @@ export default class BattleManager {
   addPokemon(playerId: string, pokemon: IPokemonEntity) {
     if (this.player.id == playerId) {
       const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
-      const pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false, true);
+      const p = <IPokemonEntity> pokemon;
+      const pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], p, false, true);
       this.animationManager.animatePokemon(pokemonUI);
       this.group.add(pokemonUI);
     }
@@ -327,27 +329,27 @@ export default class BattleManager {
             pkm.mana = pokemon.mana;
             pkm.manabar.setLife(pkm.mana);
             if (pkm.detail) {
-              pkm.detail.mana.innerHTML = pokemon.mana.toString();
+              pkm.detail.updateValue(pkm.detail.mana, change.previousValue, change.value);
             }
           } else if (change.field == 'atk') {
             pkm.atk = pokemon.atk;
             if (pkm.detail) {
-              pkm.detail.atk.innerHTML = pokemon.atk.toString();
+              pkm.detail.updateValue(pkm.detail.atk, change.previousValue, change.value);
             }
           } else if (change.field == 'def') {
             pkm.def = pokemon.def;
             if (pkm.detail) {
-              pkm.detail.def.innerHTML = pokemon.def.toString();
+              pkm.detail.updateValue(pkm.detail.def, change.previousValue, change.value);
             }
           } else if (change.field == 'speDef') {
             pkm.speDef = pokemon.speDef;
             if (pkm.detail) {
-              pkm.detail.speDef.innerHTML = pokemon.speDef.toString();
+              pkm.detail.updateValue(pkm.detail.speDef, change.previousValue, change.value);
             }
           } else if (change.field == 'range') {
             pkm.range = pokemon.range;
             if (pkm.detail) {
-              pkm.detail.range.innerHTML = pokemon.range.toString();
+              pkm.detail.updateValue(pkm.detail.range, change.previousValue, change.value);
             }
           } else if (change.field =='targetX') {
             if (pokemon.targetX >= 0) {

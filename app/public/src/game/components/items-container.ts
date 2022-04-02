@@ -1,6 +1,7 @@
 import { SetSchema } from '@colyseus/schema';
 import {GameObjects} from 'phaser';
 import ItemContainer from './item-container';
+import GameScene from '../scenes/game-scene';
 
 export default class ItemsContainer extends GameObjects.Container {
   itemSize: number;
