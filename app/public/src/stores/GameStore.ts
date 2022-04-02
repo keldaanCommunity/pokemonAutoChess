@@ -165,16 +165,24 @@ export const gameSlice = createSlice({
             action.payload.simulation.blueHealDpsMeter.forEach(dps=>{state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))});
         },
         addRedDpsMeter: (state, action: PayloadAction<IDps>) => {
-            state.redDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+            if(state.redDpsMeter.find(d=> d.id == action.payload.id) === undefined){
+                state.redDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+            }
         },
         addBlueDpsMeter: (state, action: PayloadAction<IDps>) => {
-            state.blueDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+            if(state.blueDpsMeter.find(d=> d.id == action.payload.id) === undefined){
+                state.blueDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+            }
         },
         addRedHealDpsMeter: (state, action: PayloadAction<IDpsHeal>) => {
-            state.redHealDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+            if(state.redHealDpsMeter.find(d=> d.id == action.payload.id) === undefined){
+                state.redHealDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+            }
         },
         addBlueHealDpsMeter: (state, action: PayloadAction<IDpsHeal>) => {
-            state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+            if(state.blueHealDpsMeter.find(d=> d.id == action.payload.id) === undefined){
+                state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(action.payload)));
+            }
         },
         changeRedDpsMeter: (state, action: PayloadAction<{id: string, change: DataChange<any>}>) => {
             const index = state.redDpsMeter.findIndex(e=>action.payload.id == e.id);
