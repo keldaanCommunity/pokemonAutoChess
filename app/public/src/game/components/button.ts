@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import {GameObjects} from 'phaser';
 
 export default class Button extends GameObjects.Container {
-  constructor(scene, x, y, width, height) {
+  constructor(scene: Phaser.Scene, x: number, y: number, width: number, height: number) {
     super(scene, x, y);
     this.setSize(width, height);
     this.setInteractive({
@@ -14,15 +15,9 @@ export default class Button extends GameObjects.Container {
     this.scene.add.existing(this);
   }
 
-  enterButtonHoverState() {
+  enterButtonHoverState() {}
 
-  }
+  enterButtonRestState() {}
 
-  enterButtonRestState() {
-
-  }
-
-  enterButtonActiveState() {
-
-  }
+  enterButtonActiveState() {}
 }

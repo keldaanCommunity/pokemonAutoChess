@@ -4,7 +4,7 @@ import GameState from './states/game-state';
 import Player from '../models/colyseus-models/player';
 import UserMetadata, { IUserMetadata } from '../models/mongo-models/user-metadata';
 import BOT from '../models/mongo-models/bot-v2';
-import {OnShopCommand, OnItemCommand, OnSellDropCommand, OnRefreshCommand, OnLockCommand, OnLevelUpCommand, OnUpdateCommand, OnDragDropCommand, OnJoinCommand, OnLeaveCommand} from './commands/game-commands';
+import {OnShopCommand, OnItemCommand, OnSellDropCommand, OnRefreshCommand, OnLockCommand, OnLevelUpCommand, OnUpdateCommand, OnDragDropCommand, OnJoinCommand} from './commands/game-commands';
 import {XP_PLACE, XP_TABLE, PKM, BASIC_ITEM, ITEM, TYPE} from '../models/enum';
 import PokemonFactory from '../models/pokemon-factory';
 import EloRank from 'elo-rank';
@@ -59,7 +59,7 @@ export default class GameRoom extends Room {
             id: message.id
           });
         } catch (error) {
-
+          console.log(error);
         }
       }
     });
@@ -168,7 +168,6 @@ export default class GameRoom extends Room {
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         console.log(`${client.auth.displayName} leave game room`);
-        this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented});
       }
     }
   }

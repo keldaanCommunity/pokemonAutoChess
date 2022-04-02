@@ -1,9 +1,21 @@
 import Pokemon from './pokemon';
 import {transformCoordinate} from '../../pages/utils/utils';
+import { IPlayer, IPokemon } from '../../../../types';
+import { DataChange } from '@colyseus/schema';
+import AnimationManager from '../animation-manager';
+import GameScene from '../scenes/game-scene';
 
 export default class BoardManager {
-  constructor(scene, player, animationManager, uid) {
-    this.pokemons = new Map();
+
+  pokemons: Map<string, Pokemon>;
+  uid: string;
+  scene: GameScene;
+  player: IPlayer;
+  mode: string;
+  animationManager: AnimationManager;
+
+  constructor(scene: GameScene, player: IPlayer, animationManager: AnimationManager, uid: string) {
+    this.pokemons = new Map<string, Pokemon>();
     this.uid = uid;
     this.scene = scene;
     this.player = player;
@@ -12,7 +24,7 @@ export default class BoardManager {
     this.buildPokemons();
   }
 
-  addPokemon(pokemon) {
+  addPokemon(pokemon: IPokemon) {
     // console.log(pokemon.name, this.mode);
     const coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY);
     let pokemonUI;
@@ -30,7 +42,7 @@ export default class BoardManager {
   }
 
 
-  removePokemon(pokemonToRemove) {
+  removePokemon(pokemonToRemove: IPokemon) {
     const pokemonUI = this.pokemons.get(pokemonToRemove.id);
     if (pokemonUI) {
       pokemonUI.destroy(true);
@@ -61,7 +73,7 @@ export default class BoardManager {
     });
   }
 
-  setPlayer(player) {
+  setPlayer(player: IPlayer) {
     if (player.id != this.player.id) {
       this.pokemons.forEach((pokemon, key) => {
         pokemon.destroy(true);
@@ -71,7 +83,7 @@ export default class BoardManager {
     }
   }
 
-  addPokemonItem(playerId, value, pokemon) {
+  addPokemonItem(playerId: string, value: string, pokemon: IPokemon) {
     // console.log(change);
     if (this.player.id == playerId) {
       const pkm = this.pokemons.get(pokemon.id);
@@ -81,7 +93,7 @@ export default class BoardManager {
     }
   }
 
-  removePokemonItem(playerId, value, pokemon) {
+  removePokemonItem(playerId: string, value: string, pokemon: IPokemon) {
     if (this.player.id == playerId) {
       if (this.player.id == playerId) {
         const pkm = this.pokemons.get(pokemon.id);
@@ -92,7 +104,7 @@ export default class BoardManager {
     }
   }
 
-  changePokemon(pokemon, change) {
+  changePokemon(pokemon: IPokemon, change: DataChange<any>) {
     // console.log('change', change.field, pokemon.name);
     const pokemonUI = this.pokemons.get(pokemon.id);
     let coordinates;
