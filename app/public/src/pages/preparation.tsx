@@ -8,7 +8,7 @@ import PreparationState from '../../../rooms/states/preparation-state';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { Client, Room } from 'colyseus.js';
 import {joinPreparation, logIn } from '../stores/NetworkStore';
-import { addUser, changeUser, leavePreparation, pushMessage, removeUser, setGameStarted, setOwnerId, setOwnerName } from '../stores/PreparationStore';
+import { addUser, changeUser, leavePreparation, pushMessage, removeUser, setGameStarted, setName, setOwnerId, setOwnerName } from '../stores/PreparationStore';
 import GameState from '../../../rooms/states/game-state';
 
 const preparationStyle = {
@@ -61,6 +61,9 @@ export default function Preparation() {
                     }
                     else if (change.field == 'ownerName') {
                         dispatch(setOwnerName(change.value));
+                    }
+                    else if (change.field == 'name') {
+                        dispatch(setName(change.value));
                     }
                 });
             }

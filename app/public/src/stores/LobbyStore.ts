@@ -3,7 +3,7 @@ import LobbyUser, {ILobbyUser} from "../../../models/colyseus-models/lobby-user"
 import Message from "../../../models/colyseus-models/message";
 import LeaderboardInfo, { ILeaderboardInfo } from "../../../models/colyseus-models/leaderboard-info";
 import { RoomAvailable } from "colyseus.js";
-import { IMessage, ISynergies } from "../../../types";
+import { IMessage, IPreparationMetadata, ISynergies } from "../../../types";
 import { IMeta } from "../../../models/mongo-models/meta";
 import { IBot } from "../../../models/mongo-models/bot-v2";
 import { IItemsStatistic } from "../../../models/mongo-models/items-statistic";
@@ -208,6 +208,8 @@ export const lobbySlice = createSlice({
             state.tabIndex = action.payload;
         },
         addRoom: (state, action: PayloadAction<RoomAvailable>) => {
+          const metadata : IPreparationMetadata = action.payload.metadata;
+          if(metadata && metadata.name) {
             const roomIndex = state.allRooms.findIndex((room) => room.roomId === action.payload.roomId);
             if (roomIndex !== -1) {
               state.allRooms[roomIndex] = action.payload;
@@ -215,6 +217,7 @@ export const lobbySlice = createSlice({
             } else {
               state.allRooms.push(action.payload);
             }
+          }
         },
         removeRoom: (state, action: PayloadAction<string>) => {
             state.allRooms = state.allRooms.filter((room) => room.roomId !== action.payload);

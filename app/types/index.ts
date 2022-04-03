@@ -232,3 +232,9 @@ export interface ICount {
     staticHolderCount: number
     defensiveRibbonCount: number
 }
+
+export interface IPreparationMetadata {
+    name: string,
+    type: string
+}
+  
