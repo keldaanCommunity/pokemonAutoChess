@@ -2559,17 +2559,17 @@ export const TYPE_DETAILS = Object.freeze({
         {
           trigger: 3,
           title: `(3) Rain dance`,
-          text: `Water pokemons gain 20% chance to dodge enemy attacks`
+          text: `Water pokemons gain 25% chance to dodge enemy attacks & spells`
         },
         {
           trigger: 6,
           title: `(6) Drizzle`,
-          text: `Water pokemons gain 40% chance to dodge enemy attacks`
+          text: `Water pokemons gain 50% chance to dodge enemy attacks & spells`
         },
         {
           trigger: 9,
           title: `(9) Primordial sea`,
-          text: `Water pokemons gain 60% chance to dodge enemy attacks`
+          text: `Water pokemons gain 75% chance to dodge enemy attacks & spells`
         }
       ],
       esp: [
