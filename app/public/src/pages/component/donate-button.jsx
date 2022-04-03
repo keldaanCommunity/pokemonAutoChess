@@ -9,7 +9,7 @@ class DonateButton extends Component{
             marginRight:'10px'
         }
 
-        return <button type="button" style={buttonStyle} className="nes-btn is-warning" onClick={this.handleTipeeClick.bind(this)}>Donate</button>;
+        return <button type="button" style={buttonStyle} className="nes-btn is-primary" onClick={this.handleTipeeClick.bind(this)}>Donate</button>;
     }
 
     handleTipeeClick(){

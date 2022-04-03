@@ -7,7 +7,7 @@ export default function RoomItem(props: {room: RoomAvailable<IPreparationMetadat
       <h5 style={{textAlign:'center'}}>{props.room.metadata.name}</h5>
       <div style={{display:'flex', flexFlow: 'column', alignItems: 'center'}}>
         <h5>{props.room.clients}/{props.room.maxClients}</h5>
-        <button className='nes-btn is-primary'  onClick={()=>{props.click(props.room.roomId)}}>Join</button>
+        <button className='nes-btn is-success'  onClick={()=>{props.click(props.room.roomId)}}>Join</button>
       </div>
   </div>
 }
