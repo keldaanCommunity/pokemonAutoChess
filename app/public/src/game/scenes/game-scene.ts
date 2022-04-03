@@ -7,12 +7,14 @@ import WeatherManager from '../components/weather-manager';
 import ItemsContainer from '../components/items-container';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
-import {STATE} from '../../../../models/enum';
+import {STATE, ITEM_RECIPE} from '../../../../models/enum';
 import firebase from 'firebase/compat/app';
 import {getOrientation, transformCoordinate} from '../../pages/utils/utils';
 import { Room } from "colyseus.js";
 import GameState from "../../../../rooms/states/game-state";
 import ItemContainer from '../components/item-container';
+
+import ItemDetail from '../components/item-detail';
 
 export default class GameScene extends Scene {
   tilemap: any;
@@ -280,25 +282,14 @@ export default class GameScene extends Scene {
   initializeDragAndDrop() {
     this.zones = [];
     this.graphics = [];
-    for (let i=0; i<9; i++) {
-      const zone = this.add.zone(24*24 + 10, 5*24 + 10 + 80 * i, 80, 80);
-      zone.setRectangleDropZone(80, 80);
-      zone.setName('item-' + i);
-      /*
-      this.add.graphics().lineStyle(3, 0x000000, 0.3).strokeRect(
-          zone.x - zone.input.hitArea.width / 2,
-          zone.y - zone.input.hitArea.height / 2,
-          zone.input.hitArea.width,
-          zone.input.hitArea.height);
-          */
-    }
 
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 8; j++) {
         const coord = transformCoordinate(j, i);
         const zone = this.add.zone(coord[0], coord[1], 96, 120);
         zone.setRectangleDropZone(96, 120);
-        zone.setName('zone-' + j + '-' + i);
+        zone.setName('board-zone');
+        zone.setData({'x': j, 'y': i})
         this.zones.push(zone);
         const graphic = this.add.graphics().lineStyle(3, 0x000000, 0.3).strokeRect(
             this.zones[i * 8 + j].x - this.zones[i * 8 + j].input.hitArea.width / 2,
@@ -369,45 +360,62 @@ export default class GameScene extends Scene {
 
     this.input.on('drop', (pointer, gameObject: Phaser.GameObjects.GameObject, dropZone: Phaser.GameObjects.Zone) => {
       this.removeRectangles();
-      if (dropZone.name.includes('item') && gameObject instanceof ItemContainer) {
-        document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
-          detail: {
-            'y': dropZone.name.substr(5, 1),
-            'id': gameObject.name,
-            'objType': 'combine'
-          }
-        }));
-      } else if (dropZone.name == 'sell-zone') {
-        if (gameObject instanceof ItemContainer) {
-          this.itemsContainer.updateItems();
+
+      if(gameObject instanceof Pokemon){
+        // POKEMON -> BOARD-ZONE = PLACE POKEMON
+        if(dropZone.name == 'board-zone'){
+          document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
+            detail: {
+              'x': dropZone.getData('x'),
+              'y': dropZone.getData('y'),
+              'id': gameObject.id,
+              'objType': 'pokemon'
+            }
+          }));
+          this.lastDragDropPokemon = gameObject;
         }
-        else if (gameObject instanceof Pokemon) {
+        // POKEMON -> SELL-ZONE = SELL POKEMON
+        else if(dropZone.name == 'sell-zone'){
           document.getElementById('game').dispatchEvent(new CustomEvent('sell-drop', {
             detail: {
               'pokemonId': gameObject.id
             }
           }));
         }
-      } else {
-        if (gameObject instanceof Pokemon) {
+        // RETURN TO ORIGINAL SPOT
+        else{
+            gameObject.x = gameObject.input.dragStartX
+            gameObject.y = gameObject.input.dragStartY
+        }
+      }
+      else if(gameObject instanceof ItemContainer){
+        // ITEM -> ITEM = COMBINE
+        if(dropZone instanceof ItemContainer){
           document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
             detail: {
-              'x': dropZone.name.substr(5, 1),
-              'y': dropZone.name.substr(7, 1),
-              'id': gameObject.id,
-              'objType': 'pokemon'
+              'itemA': dropZone.name,
+              'itemB': gameObject.name,
+              'objType': 'combine'
             }
           }));
-          this.lastDragDropPokemon = gameObject;
-        } else if (gameObject instanceof ItemContainer) {
+        }
+        // ITEM -> POKEMON(board zone) = EQUIP
+        else if(dropZone.name == 'board-zone'){
           document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
             detail: {
-              'x': dropZone.name.substr(5, 1),
-              'y': dropZone.name.substr(7, 1),
+              'x': dropZone.getData('x'),
+              'y': dropZone.getData('y'),
               'id': gameObject.name,
               'objType': 'item'
             }
           }));
+        }
+        // RETURN TO ORIGINAL SPOT
+        else{
+          this.itemsContainer.updateItems();
+          // gameObject.x = gameObject.input.dragStartX
+          // gameObject.y = gameObject.input.dragStartY
+
         }
       }
     }, this);
@@ -419,5 +427,41 @@ export default class GameScene extends Scene {
         gameObject.y = gameObject.input.dragStartY;
       }
     });
+
+    this.input.on('dragenter', (pointer, gameObject, dropZone) => {
+
+      if (gameObject instanceof ItemContainer && dropZone instanceof ItemContainer) {
+        // find the resulting item
+        for (const [key, value] of Object.entries(ITEM_RECIPE)) {
+          if ((value[0] == gameObject.name && value[1] == dropZone.name) || (value[0] == dropZone.name && value[1] == gameObject.name)) {
+            this.itemsContainer.sendToBack(dropZone)
+            gameObject.showTempDetail(key)
+            break;
+          }
+        }
+      }  
+    }, this);
+
+    this.input.on('dragleave', (pointer, gameObject, dropZone) => {
+      if (gameObject instanceof ItemContainer && dropZone instanceof ItemContainer) {
+        gameObject.closeDetail()
+      }  
+    }, this);
   }
 }
+
+
+// if (item && item.name && item != gameObject) {
+//   Object.keys(ITEM_RECIPE).forEach((recipeName)=>{
+//     const recipe = ITEM_RECIPE[recipeName];
+//     if ((recipe[0] == item.name && recipe[1] == gameObject.name) || (recipe[1] == item.name && recipe[0] == gameObject.name)) {
+//       item.detailDisabled = true;
+//       item.detail.setScale(0, 0);
+//       gameObject.sprite.setTexture('item', recipeName);
+//       gameObject.remove(gameObject.detail, true);
+//       gameObject.detail = new ItemDetail(this, 30, -100, recipeName);
+//       gameObject.detail.setScale(1, 1);
+//       gameObject.add(gameObject.detail);
+//     }
+//   });
+// }
