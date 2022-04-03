@@ -1,4 +1,4 @@
-import {BATTLE_RESULT} from '../models/enum';
+import {BATTLE_RESULT, ITEM, TYPE} from '../models/enum';
 import PokemonFactory from '../models/pokemon-factory';
 import BOT, { IBot } from '../models/mongo-models/bot-v2';
 import Player from '../models/colyseus-models/player';
@@ -51,6 +51,37 @@ export default class Bot {
       if (stepTeam.board[i].items) {
         stepTeam.board[i].items.forEach((item)=>{
           if (!pkm.items.has(item)) {
+              switch (item) {
+                case ITEM.WATER_STONE:
+                  pkm.types.push(TYPE.WATER);
+                  break;
+                case ITEM.FIRE_STONE:
+                  pkm.types.push(TYPE.FIRE);
+                  break;
+                case ITEM.THUNDER_STONE:
+                  pkm.types.push(TYPE.ELECTRIC);
+                  break;
+                case ITEM.DUSK_STONE:
+                  pkm.types.push(TYPE.DARK);
+                  break;
+                case ITEM.MOON_STONE:
+                  pkm.types.push(TYPE.FAIRY);
+                  break;
+                case ITEM.LEAF_STONE:
+                  pkm.types.push(TYPE.GRASS);
+                  break;
+                case ITEM.DAWN_STONE:
+                  pkm.types.push(TYPE.PSYCHIC);
+                  break;
+                case ITEM.ICY_ROCK:
+                  pkm.types.push(TYPE.ICE);
+                  break;
+                case ITEM.OLD_AMBER:
+                  pkm.types.push(TYPE.FOSSIL);
+                  break;
+                default:
+                  break;
+              }
             pkm.items.add(item);
           }
         });
