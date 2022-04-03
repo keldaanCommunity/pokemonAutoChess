@@ -146,8 +146,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
       this.count.crit ++;
     }
     if (attacker && attacker.items.has(ITEM.POKEMONOMICON)) {
-      this.status.triggerBurn(3000, this, attacker);
-      this.status.triggerWound(3000);
+      this.status.triggerBurn(2000, this, attacker);
+      this.status.triggerWound(2000);
     }
     if (attacker && attacker.items.has(ITEM.SHELL_BELL)) {
       attacker.handleHeal(0.4 * damage, attacker);

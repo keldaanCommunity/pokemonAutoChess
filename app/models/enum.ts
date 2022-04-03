@@ -5499,7 +5499,7 @@ export const ITEM_DESCRIPTION = Object.freeze({
   SOUL_DEW: 'During combat, the holder gains 30% spell damage every 5 seconds',
   UPGRADE: 'Attacks grant +6% bonus Attack Speed for the rest of combat',
   REAPER_CLOTH: 'The holder spells can critically strike (20% chance, 2x damage)',
-  POKEMONOMICON: 'When the holder deals damage with their Ability, they burn and wound the target for 3 seconds',
+  POKEMONOMICON: 'When the holder deals damage with their Ability, they burn and wound the target for 2 seconds',
   WATER_INCENSE: 'When an ennemy cast an ability, they take incense damage equal to 20% of their max mana',
   SHELL_BELL: 'The holder spells heal for 40% of the damage dealt',
   LUCKY_EGG: 'When combat begins, the holder and all allies within 2 hexes in the same row gain 20 shield points',
