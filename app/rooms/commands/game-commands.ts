@@ -341,41 +341,55 @@ export class OnDragDropCommand extends Command<GameRoom, {
         message.updateBoard = false;
         message.updateItems = true;
 
-        const item = detail.id;
-        const player = this.state.players.get(playerId);
-        const itemToCombine = player.items.at(parseInt(detail.y));
+        // { 
+        //  itemA: 'item-name',
+        //  itemB: 'item-name'
+        // }
 
-        if (!player.items.has(item) || !Object.keys(ITEM).includes(itemToCombine)) {
+        const itemA = detail.itemA
+        const itemB = detail.itemB
+
+        //verify player has both items
+        
+        const player = this.state.players.get(playerId);
+        if(!player.items.has(itemA) || !player.items.has(itemB)){
           client.send('DragDropFailed', message);
           return;
         }
-
-        if (item == itemToCombine) {
+        // check for two if both items are same
+        else if(itemA == itemB){
           let count = 0;
-          player.items.forEach((i)=>{
-            if (i == item) {
-              count ++;
+          player.items.forEach((item) => {
+            if(item == itemA){
+              count++;
             }
-          });
-          if (count < 2) {
+          })
+
+          if(count < 2){
             client.send('DragDropFailed', message);
             return;
           }
         }
 
-        let crafted = false;
-        Object.keys(ITEM_RECIPE).forEach((name) => {
-          const recipe = ITEM_RECIPE[name];
-          if ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine)) {
-            player.items.delete(itemToCombine);
-            player.items.delete(item);
-            player.items.add(name);
-            crafted = true;
+
+        // find recipe result
+        let result = null;
+        for (const [key, value] of Object.entries(ITEM_RECIPE)) {
+          if ((value[0] == itemA && value[1] == itemB) || (value[0] == itemB && value[1] == itemA)) {
+            result = key;
+            break;
           }
-        });
-        if (!crafted) {
-          client.send('DragDropFailed', message);
         }
+
+        if(!result){
+          client.send('DragDropFailed', message);
+          return;
+        }
+
+        // schema changes
+        player.items.add(result)
+        player.items.delete(itemA)
+        player.items.delete(itemB)
       }
       player.synergies.update(player.board);
       player.effects.update(player.synergies);
@@ -678,7 +692,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.state.phase = STATE.PICK;
     const isPVE = this.checkForPVE();
 
-    this.state.time = (isPVE && this.state.stageLevel >3) ? 35000 : 30000;
+    this.state.time = (isPVE && this.state.stageLevel >3) ? 10000 : 10000;
 
     this.state.players.forEach((player: Player, key: string) => {
       player.simulation.stop();
