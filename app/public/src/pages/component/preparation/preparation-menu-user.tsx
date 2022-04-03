@@ -19,7 +19,7 @@ export default function PreparationMenuUser(props: {key: string, user: IGameUser
         <button style={buttonStyle} className='nes-btn is-error' onClick={() => {dispatch(removeBot(props.user.id))}}>X</button> :
         null
 
-    return <div className='nes-container' style={{display:'flex', backgroundColor: '#fff', padding:'10px', margin:'5px', borderColor:readyColor, justifyContent:'space-between'}}>
+    return <div className='nes-container' style={{display:'flex', backgroundColor: '#fff', padding:'5px', margin:'5px', borderColor:readyColor, justifyContent:'space-between'}}>
     <div style={{display:'flex'}}>
         <div style={{width:'140px'}}>
             <Elo elo={props.user.elo} style={{width:'140px'}}/>

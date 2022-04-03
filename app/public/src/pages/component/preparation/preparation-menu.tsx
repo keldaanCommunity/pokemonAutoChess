@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, ReactElement, SetStateAction, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 import PreparationMenuUser from './preparation-menu-user';
 import { IGameUser } from '../../../../../models/colyseus-models/game-user';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { addBot, gameStart, toggleReady } from '../../../stores/NetworkStore';
+import { addBot, changeRoomName, gameStart, toggleReady } from '../../../stores/NetworkStore';
 import firebase from 'firebase/compat/app';
 import { Client, Room } from 'colyseus.js';
 import GameState from '../../../../../rooms/states/game-state';
@@ -19,8 +19,10 @@ const buttonStyle = {
 
 export default function PreparationMenu(props:{setToGame: Dispatch<SetStateAction<boolean>>}) {
     const dispatch = useAppDispatch();
+    const [inputValue, setInputValue] = useState<string>('');
     const users: IGameUser[] = useAppSelector(state=>state.preparation.users);
     const ownerName: string = useAppSelector(state=>state.preparation.ownerName);
+    const name: string = useAppSelector(state=>state.preparation.name);
     const ownerId: string = useAppSelector(state=>state.preparation.ownerId);
     const uid: string = useAppSelector(state=>state.network.uid);
     const client: Client = useAppSelector(state=>state.network.client);
@@ -44,6 +46,13 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
         }
     }
 
+    let input: ReactElement = null;
+    if(uid == ownerId){
+        input = <div className="nes-field is-inline" style={{margin:'5px'}}>
+        <input maxLength={30} type="text" id="inline_field" className="nes-input" placeholder={name} onChange={e=>{setInputValue(e.target.value)}}/>
+        <button className="nes-btn is-primary" onClick={()=>dispatch(changeRoomName(inputValue))}>Change</button>
+    </div>;
+    }
     return <div className="nes-container with-title is-centered" style={{
         backgroundColor: 'rgba(255, 255, 255, .6)',
          margin:'10px',
@@ -52,7 +61,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
          justifyContent: 'space-between',
          flexBasis:'50%'
          }}>
-            <p className="title">{ownerName}'s Room</p>
+             <p className="title">{name}</p>
             <div>
                 {users.map((u) => {
                 return <PreparationMenuUser 
@@ -61,8 +70,9 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                 />})}
             </div>
 
-
-            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <div>
+                {input}
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <div style={{display: 'flex'}}>
                     <button data-tip data-for={'difficulty-select'} style={buttonStyle} className='nes-btn is-primary' onClick={() => {dispatch(addBot(botDifficulty))}}>
                         <ReactTooltip id={'difficulty-select'} 
@@ -108,6 +118,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                         </ReactTooltip>
                     </button>
                 </div>
+            </div>
             </div>
         </div>
 }

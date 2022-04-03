@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Leaderboard from './leaderboard';
 import Profile from './profile';
 import Search from './search';

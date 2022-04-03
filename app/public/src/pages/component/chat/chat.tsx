@@ -16,7 +16,7 @@ export default function Chat(props: {source: string}) {
     backgroundColor: 'rgba(255, 255, 255, .6)',
     margin:'10px',
     height:'90vh',
-    flexBasis: '40%'
+    flexBasis: '30%'
     }}>
       <ChatHistory source={props.source}/>
       <form onSubmit={(e)=>{

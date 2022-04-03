@@ -65,6 +65,20 @@ export class OnMessageCommand extends Command<PreparationRoom, {
   }
 }
 
+export class OnRoomNameCommand extends Command<PreparationRoom, {
+  client: Client,
+  message: string
+}> {
+  execute({client, message}) {
+    // console.log(client.auth.uid, this.state.ownerId);
+    if(client.auth.uid == this.state.ownerId && this.state.name != message){
+      this.room.setName(message);
+      this.state.name = message;
+    }
+  }
+}
+
+
 export class OnLeaveCommand extends Command<PreparationRoom, {
   client: Client,
   consented: boolean

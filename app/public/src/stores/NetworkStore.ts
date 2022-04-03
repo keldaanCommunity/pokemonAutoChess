@@ -125,11 +125,15 @@ export const networkSlice = createSlice({
         },
         gameStart: (state, action: PayloadAction<string>) => {
             state.preparation.send('game-start', {'id': action.payload});
+        },
+        changeRoomName: (state, action: PayloadAction<string>) => {
+            state.preparation.send('room-name', action.payload);
         }
     }
 });
 
 export const {
+    changeRoomName,
     gameStart,
     logIn,
     logOut,

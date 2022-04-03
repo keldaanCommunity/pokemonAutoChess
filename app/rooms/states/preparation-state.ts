@@ -5,7 +5,8 @@ export interface IPreparationState {
   users: MapSchema<GameUser>,
   gameStarted: boolean,
   ownerId: string,
-  ownerName: string
+  ownerName: string,
+  name: string
 }
 
 export default class PreparationState extends Schema implements IPreparationState{
@@ -13,9 +14,11 @@ export default class PreparationState extends Schema implements IPreparationStat
   @type('boolean') gameStarted: boolean;
   @type('string') ownerId: string;
   @type('string') ownerName: string;
+  @type('string') name: string
 
-  constructor(ownerId: string) {
+  constructor(ownerId: string, name: string) {
     super();
     this.ownerId = ownerId;
+    this.name = name;
   }
 }

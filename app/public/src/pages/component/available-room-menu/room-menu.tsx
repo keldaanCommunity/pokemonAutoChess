@@ -56,7 +56,7 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
          margin:'10px',
          display: 'flex',
          flexFlow: 'column',
-         flexBasis: '20%',
+         flexBasis: '30%',
          height: '90vh'
          }}>
         

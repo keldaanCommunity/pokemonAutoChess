@@ -1,4 +1,4 @@
-import {Client, Room} from 'colyseus';
+import {Client, Room, updateLobby} from 'colyseus';
 import {Dispatcher} from '@colyseus/command';
 import PreparationState from './states/preparation-state';
 import admin from 'firebase-admin';
@@ -10,9 +10,11 @@ import {
   OnMessageCommand,
   OnAddBotCommand,
   OnRemoveBotCommand,
-  InitializeBotsCommand
+  InitializeBotsCommand,
+  OnRoomNameCommand
 } from './commands/preparation-commands';
 import { BOT_DIFFICULTY } from '../models/enum';
+import { IPreparationMetadata } from '../types';
 
 export default class PreparationRoom extends Room {
   dispatcher: Dispatcher<this>;
@@ -24,17 +26,27 @@ export default class PreparationRoom extends Room {
     this.elos = new Map();
   }
 
+  async setName(name: string){
+    await this.setMetadata(<IPreparationMetadata> {name: name.slice(0,30), type: 'preparation'})
+    updateLobby(this);
+    console.log(this.metadata);
+  }
+
   onCreate(options: any) {
     console.log('create preparation room');
     // console.log(options);
-    const self = this;
-    this.setState(new PreparationState(options.ownerId));
+    const defaultRoomName = 'Default title id#' + this.roomId;
+    // console.log(defaultRoomName);
+    this.setState(new PreparationState(options.ownerId, defaultRoomName));
     this.maxClients = 8;
+    this.dispatcher.dispatch(new InitializeBotsCommand(), options.ownerId);
+    this.setName(defaultRoomName);
 
-    self.dispatcher.dispatch(new InitializeBotsCommand(), options.ownerId);
+    this.onMessage('room-name', (client, message) => {
+      this.dispatcher.dispatch(new OnRoomNameCommand(), {client, message});
+    });
 
     this.onMessage('game-start', (client, message) => {
-      console.log(message);
       try {
         this.dispatcher.dispatch(new OnGameStartCommand(), {client, message});
       } catch (error) {
