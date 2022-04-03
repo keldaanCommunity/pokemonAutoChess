@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { IGameUser } from '../../../../../models/colyseus-models/game-user';
 import { useAppDispatch } from '../../../hooks';
 import { removeBot } from '../../../stores/NetworkStore';

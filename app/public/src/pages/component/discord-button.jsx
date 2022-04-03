@@ -9,7 +9,7 @@ class DiscordButton extends Component{
             marginRight:'10px'
         }
 
-        return <button type="button" style={buttonStyle} className="nes-btn is-warning" onClick={this.handleDiscordClick.bind(this)}>Join Discord</button>;
+        return <button type="button" style={buttonStyle} className="nes-btn is-primary" onClick={this.handleDiscordClick.bind(this)}>Join Discord</button>;
     }
 
     handleDiscordClick(){
