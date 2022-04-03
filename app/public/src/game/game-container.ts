@@ -360,8 +360,10 @@ class GameContainer {
   }
 
   handleDragDropFailed(message: any) {
+    const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+
     if (message.updateBoard) {
-      const tg = this.game.scene.getScene('gameScene').lastDragDropPokemon;
+      const tg = g.lastDragDropPokemon;
       if(tg){
         const coordinates = transformCoordinate(tg.positionX, tg.positionY);
         tg.x = coordinates[0];
@@ -370,7 +372,7 @@ class GameContainer {
     }
 
     if (message.updateItems) {
-      this.game.scene.getScene('gameScene').itemsContainer.updateItems();
+      g.itemsContainer.updateItems();
     }
   }
 

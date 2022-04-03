@@ -290,7 +290,7 @@ export default class GameScene extends Scene {
           zone.y - zone.input.hitArea.height / 2,
           zone.input.hitArea.width,
           zone.input.hitArea.height);
-          */
+        */  
     }
 
     for (let i = 0; i < 4; i++) {
@@ -298,7 +298,8 @@ export default class GameScene extends Scene {
         const coord = transformCoordinate(j, i);
         const zone = this.add.zone(coord[0], coord[1], 96, 120);
         zone.setRectangleDropZone(96, 120);
-        zone.setName('zone-' + j + '-' + i);
+        zone.setName('board-zone');
+        zone.setData({'x': j, 'y': i})
         this.zones.push(zone);
         const graphic = this.add.graphics().lineStyle(3, 0x000000, 0.3).strokeRect(
             this.zones[i * 8 + j].x - this.zones[i * 8 + j].input.hitArea.width / 2,
@@ -392,8 +393,8 @@ export default class GameScene extends Scene {
         if (gameObject instanceof Pokemon) {
           document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
             detail: {
-              'x': dropZone.name.substr(5, 1),
-              'y': dropZone.name.substr(7, 1),
+              'x': dropZone.getData('x'),
+              'y': dropZone.getData('y'),
               'id': gameObject.id,
               'objType': 'pokemon'
             }
@@ -402,8 +403,8 @@ export default class GameScene extends Scene {
         } else if (gameObject instanceof ItemContainer) {
           document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
             detail: {
-              'x': dropZone.name.substr(5, 1),
-              'y': dropZone.name.substr(7, 1),
+              'x': dropZone.getData('x'),
+              'y': dropZone.getData('y'),
               'id': gameObject.name,
               'objType': 'item'
             }
