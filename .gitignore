@@ -15,3 +15,5 @@ app/public/dist/**/*.d.ts
 /tests/render/*.png
 /tests/samples/*.json
 /.tgitconfig
+edit/split/*
+edit/sheet/*
