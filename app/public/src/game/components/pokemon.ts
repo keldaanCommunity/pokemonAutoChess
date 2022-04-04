@@ -114,23 +114,22 @@ export default class Pokemon extends Button {
     this.setDepth(5);
   }
 
-  enterButtonHoverState() {
-    if (!this.detail && this.isPopup) {
-      if (this.life) {
-        this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill, AUTHOR[this.name]);
-      } else {
-        this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill, AUTHOR[this.name]);
+  enterButtonActiveState(pointer: Phaser.Input.Pointer){
+    if(pointer.rightButtonDown()){
+      if (this.detail) {
+        this.detail.dom.remove();
+        this.remove(this.detail, true);
+        this.detail = undefined;
       }
-      this.detail.setPosition(this.detail.width / 2 + 40, -this.detail.height / 2 - 40);
-      this.add(this.detail);
-    }
-  }
-
-  enterButtonRestState() {
-    if (this.detail) {
-      this.detail.dom.remove();
-      this.remove(this.detail, true);
-      this.detail = undefined;
+      else{
+        if (this.life) {
+          this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill, AUTHOR[this.name]);
+        } else {
+          this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill, AUTHOR[this.name]);
+        }
+        this.detail.setPosition(this.detail.width / 2 + 40, -this.detail.height / 2 - 40);
+        this.add(this.detail);
+      }
     }
   }
 
