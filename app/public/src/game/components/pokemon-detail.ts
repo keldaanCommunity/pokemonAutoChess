@@ -1,5 +1,5 @@
 import {GameObjects} from 'phaser';
-import {ATTACK_TYPE, SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
+import {ATTACK_TYPE, SPECIAL_SKILL_DESCRIPTION, AUTHOR} from '../../../../models/enum';
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -31,7 +31,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     spellDamage: number,
     mana: number,
     types: string[],
-    skill: string) {
+    skill: string,
+    author: string) {
     super(scene, x, y);
 
     this.dom = document.createElement('div');
@@ -250,6 +251,10 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     f5.appendChild(af5);
     f5.appendChild(bf5);
 
+    const aut = document.createElement('div');
+    aut.style.textAlign = 'center';
+    aut.innerHTML = `by @${author}`;
+
     f1.style.height = '25px';
     f2.style.height = '25px';
     f3.style.height = '25px';
@@ -282,6 +287,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     infos.appendChild(f3);
     infos.appendChild(f4);
     infos.appendChild(f5);
+    infos.appendChild(aut);
 
     wrap.appendChild(infos);
     wrap.appendChild(ultDiv);
