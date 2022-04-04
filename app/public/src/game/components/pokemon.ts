@@ -3,7 +3,7 @@ import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
-import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS} from '../../../../models/enum';
+import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS, AUTHOR} from '../../../../models/enum';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 import { IPokemon, IPokemonEntity, instanceofPokemonEntity } from '../../../../types';
 import GameScene from '../scenes/game-scene';
@@ -117,9 +117,9 @@ export default class Pokemon extends Button {
   enterButtonHoverState() {
     if (!this.detail && this.isPopup) {
       if (this.life) {
-        this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill);
+        this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill, AUTHOR[this.name]);
       } else {
-        this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill);
+        this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill, AUTHOR[this.name]);
       }
       this.detail.setPosition(this.detail.width / 2 + 40, -this.detail.height / 2 - 40);
       this.add(this.detail);
