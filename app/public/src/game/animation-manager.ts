@@ -2,20 +2,20 @@
 import {SPECIAL_SKILL} from '../../../models/enum';
 import Pokemon from './components/pokemon';
 import GameScene from './scenes/game-scene';
-
+import durations from '../../dist/client/assets/pokemons/durations.json';
 export default class AnimationManager {
   game: GameScene;
   orientationTable: { DOWN: number; DOWNLEFT: number; LEFT: number; UPLEFT: number; UP: number; UPRIGHT: number; RIGHT: number; DOWNRIGHT: number; };
-  actionTable: { MOVING: number; ATTACKING: number; };
+  actionTable: { MOVING: string; ATTACKING: string; };
   flipxTable: { DOWNRIGHT: boolean; DOWNLEFT: boolean; LEFT: boolean; UPLEFT: boolean; UP: boolean; UPRIGHT: boolean; RIGHT: boolean; };
 
   constructor(game: GameScene) {
     this.game = game;
     this.orientationTable = {
       'DOWN': 0,
-      'DOWNLEFT': 1,
-      'LEFT': 2,
-      'UPLEFT': 3,
+      'DOWNLEFT': 7,
+      'LEFT': 6,
+      'UPLEFT': 5,
       'UP': 4,
       'UPRIGHT': 3,
       'RIGHT': 2,
@@ -23,8 +23,8 @@ export default class AnimationManager {
     };
 
     this.actionTable ={
-      'MOVING': 0,
-      'ATTACKING': 1
+      'MOVING': 'Walk',
+      'ATTACKING': 'Attack'
     };
 
     this.flipxTable = {
@@ -37,71 +37,35 @@ export default class AnimationManager {
       'RIGHT': true
     };
 
-    [10, 11, 12, 13, 14, 15, 16, 17, 18, 74, 75, 76, 298, 183, 184, 41, 42, 169, 179, 180, 181, 173, 35, 36, 174, 39, 40, 187, 188, 189, 273, 274, 275, 396, 397, 398].forEach((num) => {
-      this.createAnimations(num, 'COMMON', false);
-    });
-
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 29, 30, 31, 32, 33, 34, 133, 134, 135, 136, 152, 153, 154, 155, 156, 157, 158, 159, 160, 196, 197, 252, 253, 254, 255, 256, 257, 258, 259, 260, 387, 388, 389, 390, 391, 392, 393, 394, 395, 470, 700].forEach((num) => {
-      this.createAnimations(num, 'UNCOMMON', false);
-    });
-
-    [25, 26, 60, 61, 66, 67, 68, 81, 82, 111, 112, 116, 117, 172, 175, 176, 186, 230, 270, 271, 272, 304, 305, 306, 328, 329, 330, 355, 356, 363, 364, 365, 403, 404, 405, 462, 464, 468, 477].forEach((num) => {
-      this.createAnimations(num, 'RARE', false);
-    });
-
-    [63, 64, 65, 92, 93, 94, 125, 126, 147, 148, 149, 239, 240, 246, 247, 248, 280, 281, 282, 287, 288, 289, 371, 372, 373, 374, 375, 376, 443, 444, 445, 466, 467].forEach((num) => {
-      this.createAnimations(num, 'EPIC', false);
-    });
-
-    [58, 59, 95, 123, 132, 143, 208, 212, 446, 447, 448, 2080, 2120, 4480, 322, 323, 3230, 307, 308, 3080].forEach((num) => {
-      this.createAnimations(num, 'LEGENDARY', false);
-    });
-
-    [129, 130, 19, 20, 21, 22, 27, 249, 487, 144, 145, 146, 483, 484, 243, 244, 245, 377, 378, 379, 486, 382, 383, 384, 491].forEach((num) => {
-      this.createAnimations(num, 'NEUTRAL', false);
-    });
-
-    [607, 608, 609].forEach((num) => {
-      this.createAnimations(num, 'EPIC2', false);
-    });
-
-    [79, 80, 199].forEach((num) => {
-      this.createAnimations(num, 'UNCOMMON2', false);
-    });
-
-    [69, 70, 71, 220, 221, 361, 362, 459, 460, 471, 473, 478, 582, 583, 584, 4600].forEach((num) => {
-      this.createAnimations(num, 'december', false);
-    });
-
-    [551, 552, 553, 633, 634, 635, 52, 53, 3820, 3830, 228, 318, 637, 638, 639, 640, 641, 641, 642, 643, 644, 645, 646, 647, 490, 479, 480, 481, 482, 483, 484, 485, 488, 492, 493, 494, 442, 359, 142, 131, 380, 381, 150, 250, 251, 385, 386].forEach((num) => {
-      this.createAnimations(num, 'february', false);
-    });
-
-    [577, 578, 579].forEach((num) => {
-      this.createAnimations(num, 'april', false);
-    });
-
-    [333, 3840, 43, 44, 45, 182].forEach((num) => {
-      this.createAnimations(num, 'september', false);
-    });
-
-    [138, 139, 140, 141, 345, 346, 347, 348, 408, 409, 410, 411, 564, 565, 566, 567, 696, 697, 698, 699].forEach((num) => {
-      this.createAnimations(num, 'fossil', false);
-    });
-
-    [104, 105, 137, 233, 293, 294, 295, 309, 310, 315, 334, 353, 354, 406, 407, 427, 428, 474, 506, 507, 508, 535, 536, 537, 540, 541, 542, 543, 544, 545, 599, 600, 601, 610, 611, 612, 648, 661, 662, 663, 669, 670, 671, 679, 680, 681, 731, 732, 733, 782, 783, 784, 1050, 3100, 3340, 3540, 4280].forEach((num) => {
-      this.createAnimations(num, 'sound', true);
-      this.createSleepAnimations('sound', num);
-    });
-
-    [351, 3510, 3511, 3512].forEach((num) => {
-      this.createAnimations(num, 'castform', true);
-      this.createSleepAnimations('castform', num);
-    });
-
+    ["0132","0001","0002","0003","0004","0005","0006","0007","0008","0009","0074","0075","0076","0298","0183","0184","0041","0042","0169","0179","0180","0181","0173","0035","0036","0174","0040","0039","0010","0011","0012","0013","0014","0015","0016","0017","0018","0187","0188","0189","0273","0274","0275","0396","0397","0398","0152","0153","0154","0155","0156","0157","0158","0159","0160","0252","0253","0254","0255","0256","0257","0258","0259","0260","0387","0388","0389","0390","0391","0392","0393","0394","0395","0029","0030","0031","0032","0033","0034","0172","0025","0026","0066","0067","0068","0116","0117","0230","0328","0329","0330","0363","0364","0129","0365","0304","0305","0306","0081","0082","0462","0111","0112","0464","0175","0176","0468","0355","0356","0477","0270","0271","0272","0403","0404","0405","0060","0061","0186","0063","0064","0065","0092","0093","0094","0147","0148","0149","0246","0247","0248","0287","0288","0289","0280","0281","0282","0371","0372","0373","0374","0375","0376","0443","0444","0445","0239","0125","0466","0240","0126","0467","0446","0143","0058","0059","0095","0208","0123","0212","0447","0448","0019","0020","0021","0022","0130","0249","0487","0145","0146","0144","0483","0484","0245","0243","0244","0378","0377","0379","0382","0383","0384","0486","0133","0134","0135","0136","0196","0197","0470","0700","0307","0308","0322","0323","0027","0491","0607","0609","0079","0080","0199","0069","0070","0071","0318","0220","0221","0473","0361","0362","0478","0459","0460","0582","0583","0471","0637","0641","0647","0638","0490","0479","0442","0359","0131","0380","0381","0481","0482","0480","0150","0251","0494","0385","0493","0386","0492","0488","0485","0250","0142","0052","0053","0578","0333","0043","0044","0045","0182","0698","0699","0347","0348","0566","0410","0411","0345","0346","0408","0409","0140","0141","0138","0139","0406","0315","0407","0427","0428","0610","0137","0233","0474","0309","0310","0353","0354","0679","0104","0105","0293","0294","0295","0542","0669","0670","0671","0648","0334","0506","0508","0228","0351"].forEach(index=>{
+      ["Normal","Shiny"].forEach(shiny=>{
+        ["Attack","Walk"].forEach(anim=>{ // TODO add sleep
+          ["Anim","Shadow"].forEach(mode=>{
+            [0,1,2,3,4,5,6,7].forEach(direction=>{
+              const durationArray: number[] = durations[`${index}/${shiny}/${anim}/${mode}`];
+              if(durationArray){
+                const frameArray = this.game.anims.generateFrameNames(index,{start: 0, end: durationArray.length -1, zeroPad: 4, prefix: `${shiny}/${anim}/${mode}/${direction}/`})
+                for (let i = 0; i < durationArray.length; i++) {
+                  if(frameArray[i]){
+                    frameArray[i]['duration'] = durationArray[i] * 10;
+                  }
+                }
+                this.game.anims.create({
+                  key: `${index}/${shiny}/${anim}/${mode}/${direction}`,
+                  frames: frameArray,
+                  repeat: -1
+                });
+              }
+              else{
+                console.log('duration array missing for ', `${index}/${shiny}/${anim}/${mode}`);
+              }
+            })
+          })
+        })
+      })
+    })
     this.createAttacksAnimations();
     this.createSpecialAttacksAnimations();
-    // this.createSpecialCellsAnimations();
     this.createStatusAnimations();
   }
 
@@ -190,44 +154,7 @@ export default class AnimationManager {
       repeat: -1
     });
   }
-  /*
-  createSpecialCellsAnimations() {
-    this.game.anims.create({
-      key: `FIRE/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'FIRE/cell/'}),
-      frameRate: 30,
-      repeat: -1
-    });
 
-    this.game.anims.create({
-      key: `GRASS/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 19, zeroPad: 3, prefix: 'GRASS/cell/'}),
-      frameRate: 15,
-      repeat: -1
-    });
-
-    this.game.anims.create({
-      key: `WATER/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 6, zeroPad: 3, prefix: 'WATER/cell/'}),
-      frameRate: 15,
-      repeat: -1
-    });
-
-    this.game.anims.create({
-      key: `NORMAL/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 51, zeroPad: 3, prefix: 'NORMAL/cell/'}),
-      frameRate: 15,
-      repeat: -1
-    });
-
-    this.game.anims.create({
-      key: `ICE/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 14, zeroPad: 3, prefix: 'ICE/cell/'}),
-      frameRate: 15,
-      repeat: -1
-    });
-  }
-*/
   createSpecialAttacksAnimations() {
     this.game.anims.create({
       key: SPECIAL_SKILL.FIRE_BLAST,
@@ -672,15 +599,6 @@ export default class AnimationManager {
     });
   }
 
-  createSleepAnimations(sheet, index) {
-    this.game.anims.create({
-      key: `${index}/2`,
-      frames: this.game.anims.generateFrameNames(sheet, {frames: [0, 1], prefix: index + '/2/'}),
-      duration: 2000,
-      repeat: -1
-    });
-  }
-
   createAttacksAnimations() {
     this.game.anims.create({
       key: `GRASS/range`,
@@ -851,43 +769,6 @@ export default class AnimationManager {
     });
   }
 
-  createAnimations(index: number, sheet: string, sleep: boolean) {
-    /*
-      0 : down
-      1 : down left
-      2 : left
-      3 : up left
-      4 : up
-      */
-    ['0', '1', '2', '3', '4'].forEach((orientation) => {
-      this.game.anims.create({
-        key: `${index}/0/${orientation}`,
-        frames: this.game.anims.generateFrameNames(sheet, {frames: [0, 1, 2], prefix: index + '/0/' + orientation + '/'}),
-        duration: 400,
-        repeatDelay: 300,
-        repeat: -1,
-        yoyo: true
-      });
-      // attack
-      this.game.anims.create({
-        key: `${index}/1/${orientation}`,
-        frames: this.game.anims.generateFrameNames(sheet, {frames: [0, 1, 2], prefix: index + '/1/' + orientation + '/'}).concat(
-            this.game.anims.generateFrameNames(sheet, {frames: [0, 1, 2], prefix: index + '/0/' + orientation + '/'})
-        ),
-        duration: 1000,
-        repeat: -1
-      });
-    });
-    if (!sleep) {
-      this.game.anims.create({
-        key: `${index}/2`,
-        frames: this.game.anims.generateFrameNames('sleep', {frames: [0, 1], prefix: index + '/2/'}),
-        duration: 2000,
-        repeat: -1
-      });
-    }
-  }
-
   animatePokemon(entity: Pokemon) {
     const key = this.getSpriteKey(entity);
     this.playAnimation(entity, key);
@@ -899,10 +780,10 @@ export default class AnimationManager {
   }
 
   playSleepAnimation(entity: Pokemon) {
-    entity.sprite.anims.play(`${entity.index}/2`);
+    entity.sprite.anims.play(`${entity.padIndex}/2`);
   }
 
   getSpriteKey(entity: Pokemon) {
-    return `${entity.index}/${this.actionTable[entity.action]}/${this.orientationTable[entity.orientation]}`;
+    return `${entity.padIndex}/Normal/${this.actionTable[entity.action]}/Anim/${this.orientationTable[entity.orientation]}`;
   }
 }

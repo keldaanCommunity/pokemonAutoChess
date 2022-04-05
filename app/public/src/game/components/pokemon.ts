@@ -15,6 +15,7 @@ export default class Pokemon extends Button {
   isPopup: boolean;
   objType: string;
   index: number;
+  padIndex: string;
   id: string;
   hp: number;
   range: number;
@@ -71,6 +72,7 @@ export default class Pokemon extends Button {
     this.height = 0;
     this.width = 0;
     this.index = pokemon.index;
+    this.padIndex = this.zeroPad(pokemon.index);
     this.name = pokemon.name;
     this.id = pokemon.id;
     this.hp = pokemon.hp;
@@ -996,9 +998,14 @@ export default class Pokemon extends Button {
     }
   }
 
+  zeroPad(num: number) {
+    return ('0000'+num).slice(-4);
+  }
+
   setSprite(pokemon: IPokemonEntity | IPokemon, scene: Phaser.Scene) {
     const p = <IPokemonEntity> pokemon;
-    this.sprite = new GameObjects.Sprite(scene, 0, 0, p.sheet, `${p.index}/0/1/0`);
+    const zeroPaddedValue = this.zeroPad(p.index);
+    this.sprite = new GameObjects.Sprite(scene, 0, 0, p.sheet, `${zeroPaddedValue}/Normal/Walk/Anim/1/0000`);
     this.sprite.setScale(2, 2);
     this.height = this.sprite.height;
     this.width = this.sprite.width;
