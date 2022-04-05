@@ -328,14 +328,6 @@ export default class GameScene extends Scene {
 
     this.input.mouse.disableContextMenu();
 
-    this.input.on('pointerdown', (pointer) => {
-      if (pointer.rightButtonDown()) {
-        this.pokemon.orientation = getOrientation(this.pokemon.x, this.pokemon.y, pointer.x, pointer.y);
-        this.animationManager.animatePokemon(this.pokemon);
-        this.pokemon.moveManager.moveTo(pointer.x, pointer.y);
-      }
-    });
-
     this.input.on('gameobjectover', (pointer, gameObject: Phaser.GameObjects.GameObject) => {
       if(gameObject instanceof Pokemon){
         this.targetPokemon = gameObject;
