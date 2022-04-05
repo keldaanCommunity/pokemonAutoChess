@@ -16,4 +16,6 @@ app/public/dist/**/*.d.ts
 /tests/samples/*.json
 /.tgitconfig
 edit/split/*
-edit/sheet/*
+edit/sheets/*
+edit/credits.json
+edit/durations.json
