@@ -118,7 +118,7 @@ async function split(){
                                         frameWidth,
                                         frameHeight);
                                     
-                                    const writePath = `split/${zeroPaddedValue}/${shiny}/${mode}/${anim}/${zeroPad(y*x + x)}.png`;
+                                    const writePath = `split/${zeroPaddedValue}/${shiny}/${mode}/${anim}/${y}/${zeroPad(x)}.png`;
                                     console.log(writePath);
                                     await cropImg.writeAsync(writePath);
                                 }
