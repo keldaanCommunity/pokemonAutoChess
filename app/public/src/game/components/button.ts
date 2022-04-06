@@ -10,7 +10,7 @@ export default class Button extends GameObjects.Container {
     })
         .on('pointerover', () => this.enterButtonHoverState())
         .on('pointerout', () => this.enterButtonRestState())
-        .on('pointerdown', () => this.enterButtonActiveState())
+        .on('pointerdown', (pointer) => this.enterButtonActiveState(pointer))
         .on('pointerup', () => this.enterButtonHoverState());
     this.scene.add.existing(this);
   }
@@ -19,5 +19,6 @@ export default class Button extends GameObjects.Container {
 
   enterButtonRestState() {}
 
-  enterButtonActiveState() {}
+  enterButtonActiveState(pointer) {
+  }
 }
