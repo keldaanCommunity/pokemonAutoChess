@@ -22,14 +22,14 @@ export enum PKM_ACTION {
 }
 
 export enum PKM_ORIENTATION {
-    DOWN = 0,
-    DOWNLEFT = 7,
-    LEFT = 6,
-    UPLEFT = 5,
-    UP = 4,
-    UPRIGHT = 3,
-    RIGHT = 2,
-    DOWNRIGHT = 1
+    DOWN = "0",
+    DOWNLEFT = "7",
+    LEFT = "6",
+    UPLEFT = "5",
+    UP = "4",
+    UPRIGHT = "3",
+    RIGHT = "2",
+    DOWNRIGHT = "1"
 }
 
 export const PKM = Object.freeze({

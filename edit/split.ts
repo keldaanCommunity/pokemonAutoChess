@@ -1,7 +1,7 @@
 import Jimp from 'jimp';
 import {XMLParser} from 'fast-xml-parser';
 import fs from 'fs';
-import { PKM, PKM_TINT, PKM_ANIM } from '../app/models/enum';
+import { PKM, PKM_TINT, PKM_ANIM, PKM_ACTION } from '../app/models/enum';
 import PokemonFactory from '../app/models/pokemon-factory';
 
 const args = process.argv.slice(2);
@@ -77,34 +77,16 @@ async function split(){
                                 
                                     if(anim == PKM_ANIM.SHADOW){
                                         const shadow = xmlData.AnimData.ShadowSize;
-                                        cropImg.scan(0,0,cropImg.bitmap.width,cropImg.bitmap.height, (x,y,idx)=> {
-                                            if (cropImg.bitmap.data[idx] != 0 && cropImg.bitmap.data[idx + 1] != 0 && cropImg.bitmap.data[idx + 2] != 0) {
-                                                cropImg.bitmap.data[idx] = 0;
-                                                cropImg.bitmap.data[idx + 1] = 0;
-                                                cropImg.bitmap.data[idx + 2] = 0;
-                                            }
-                                        });
-                                        if(shadow == 1){
-                                            cropImg.scan(0,0,cropImg.bitmap.width,cropImg.bitmap.height, (x,y,idx)=> {
-                                                if (cropImg.bitmap.data[idx] != 0 || cropImg.bitmap.data[idx + 2] != 0) {
-                                                    cropImg.bitmap.data[idx] = 0;
-                                                    cropImg.bitmap.data[idx + 2] = 0;
-                                                    cropImg.bitmap.data[idx + 3] = 0; 
-                                                }
-                                            });
+                                        if(shadow == 0){
+                                            removeRed(cropImg);
+                                            removeBlue(cropImg);
                                         }
-                                        else if(shadow == 2){
-                                            cropImg.scan(0,0,cropImg.bitmap.width,cropImg.bitmap.height, (x,y,idx)=> {
-                                                if (cropImg.bitmap.data[idx + 2]) {
-                                                    cropImg.bitmap.data[idx + 2] = 0;
-                                                }
-                                            });
+                                        else if(shadow == 1){
+                                            removeBlue(cropImg);
                                         }
+                                        // transform to black
                                         cropImg.scan(0,0,cropImg.bitmap.width,cropImg.bitmap.height, (x,y,idx)=> {
-                                            if (cropImg.bitmap.data[idx + 2]) {
-                                                cropImg.bitmap.data[idx + 2] = 0;
-                                            }
-                                            if (cropImg.bitmap.data[idx + 3] != 0){
+                                            if (cropImg.bitmap.data[idx + 3] != 0) {
                                                 cropImg.bitmap.data[idx] = 0;
                                                 cropImg.bitmap.data[idx + 1] = 0;
                                                 cropImg.bitmap.data[idx + 2] = 0;
@@ -136,19 +118,45 @@ async function split(){
         }));
     }));
 
-    const file = fs.createWriteStream(`credits.json`);
+    const file = fs.createWriteStream(`sheets/credits.json`);
     file.on('error', function(err) {
       console.log(err);
     });
     file.write(JSON.stringify(credits));
     file.end();
 
-    const fileA = fs.createWriteStream(`durations.json`);
+    const fileA = fs.createWriteStream(`sheets/durations.json`);
     fileA.on('error', function(err) {
       console.log(err);
     });
     fileA.write(JSON.stringify(durations));
     fileA.end();
+}
+
+function removeBlue(cropImg){
+    cropImg.scan(0,0,cropImg.bitmap.width,cropImg.bitmap.height, (x,y,idx)=> {
+        if (cropImg.bitmap.data[idx] == 0 
+            && cropImg.bitmap.data[idx + 1] == 0
+            && cropImg.bitmap.data[idx + 2] != 0) {
+            cropImg.bitmap.data[idx] = 0;
+            cropImg.bitmap.data[idx + 1] = 0;
+            cropImg.bitmap.data[idx + 2] = 0;
+            cropImg.bitmap.data[idx + 3] = 0;
+        }
+    });
+}
+
+function removeRed(cropImg){
+    cropImg.scan(0,0,cropImg.bitmap.width,cropImg.bitmap.height, (x,y,idx)=> {
+        if (cropImg.bitmap.data[idx] != 0 
+            && cropImg.bitmap.data[idx + 1] == 0
+            && cropImg.bitmap.data[idx + 2] == 0) {
+            cropImg.bitmap.data[idx] = 0;
+            cropImg.bitmap.data[idx + 1] = 0;
+            cropImg.bitmap.data[idx + 2] = 0;
+            cropImg.bitmap.data[idx + 3] = 0;
+        }
+    });
 }
 
 function zeroPad(num: number) {
