@@ -1,5 +1,5 @@
 import { Synergy } from "./enum/Synergy";
-import { Pokemon } from "./enum/Pokemon";
+import { Pkmn } from "./enum/Pokemon";
 import { Item } from "./enum/Item";
 import { Effect } from "./enum/Effect";
 import { Rarity } from "./enum/Game";
@@ -467,486 +467,486 @@ export const EFFECTS_ICON = Object.freeze({
   
   export const PRECOMPUTED_TYPE_POKEMONS_ALL = {
     [Synergy.NORMAL] : [
-      Pokemon.CLEFFA, Pokemon.CLEFAIRY, Pokemon.CLEFABLE,
-      Pokemon.IGGLYBUFF, Pokemon.WIGGLYTUFF, Pokemon.JIGGLYPUFF,
-      Pokemon.PIDGEY, Pokemon.PIDGEOTTO, Pokemon.PIDGEOT,
-      Pokemon.STARLY, Pokemon.STARAVIA, Pokemon.STARAPTOR,
-      Pokemon.TOGEPI, Pokemon.TOGETIC, Pokemon.TOGEKISS,
-      Pokemon.SLAKOTH, Pokemon.VIGOROTH, Pokemon.SLAKING,
-      Pokemon.REGIGIGAS, Pokemon.EEVEE, Pokemon.ARCEUS,
-      Pokemon.BUNEARY, Pokemon.LOPUNNY, Pokemon.MEGALOPUNNY,
-      Pokemon.PORYGON, Pokemon.PORYGON2, Pokemon.PORYGONZ,
-      Pokemon.WHISMUR, Pokemon.LOUDRED, Pokemon.EXPLOUD,
-      Pokemon.PIKIPEK, Pokemon.TRUMBEAK, Pokemon.TOUCANNON,
-      Pokemon.MELOETTA, Pokemon.CASTFORM, Pokemon.CASTFORMSUN,
-      Pokemon.CASTFORMRAIN, Pokemon.CASTFORMHAIL
+      Pkmn.CLEFFA, Pkmn.CLEFAIRY, Pkmn.CLEFABLE,
+      Pkmn.IGGLYBUFF, Pkmn.WIGGLYTUFF, Pkmn.JIGGLYPUFF,
+      Pkmn.PIDGEY, Pkmn.PIDGEOTTO, Pkmn.PIDGEOT,
+      Pkmn.STARLY, Pkmn.STARAVIA, Pkmn.STARAPTOR,
+      Pkmn.TOGEPI, Pkmn.TOGETIC, Pkmn.TOGEKISS,
+      Pkmn.SLAKOTH, Pkmn.VIGOROTH, Pkmn.SLAKING,
+      Pkmn.REGIGIGAS, Pkmn.EEVEE, Pkmn.ARCEUS,
+      Pkmn.BUNEARY, Pkmn.LOPUNNY, Pkmn.MEGALOPUNNY,
+      Pkmn.PORYGON, Pkmn.PORYGON2, Pkmn.PORYGONZ,
+      Pkmn.WHISMUR, Pkmn.LOUDRED, Pkmn.EXPLOUD,
+      Pkmn.PIKIPEK, Pkmn.TRUMBEAK, Pkmn.TOUCANNON,
+      Pkmn.MELOETTA, Pkmn.CASTFORM, Pkmn.CASTFORMSUN,
+      Pkmn.CASTFORMRAIN, Pkmn.CASTFORMHAIL
     ],
     [Synergy.GRASS] : [
-      Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR,
-      Pokemon.CATERPIE, Pokemon.METAPOD, Pokemon.BUTTERFREE,
-      Pokemon.HOPPIP, Pokemon.SKIPLOOM, Pokemon.JUMPLUFF,
-      Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.SHIFTRY,
-      Pokemon.CHIKORITA, Pokemon.BAYLEEF, Pokemon.MEGANIUM,
-      Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE,
-      Pokemon.TURTWIG, Pokemon.GROTLE, Pokemon.TORTERRA,
-      Pokemon.LOTAD, Pokemon.LOMBRE, Pokemon.LUDICOLO,
-      Pokemon.LEAFEON, Pokemon.BELLSPROUT, Pokemon.WEEPINBELL,
-      Pokemon.VICTREEBEL, Pokemon.SNOVER, Pokemon.ABOMASNOW,
-      Pokemon.MEGAABOMASNOW, Pokemon.VIRIZION, Pokemon.CELEBI,
-      Pokemon.SHAYMIN, Pokemon.ODDISH, Pokemon.GLOOM,
-      Pokemon.VILEPLUME, Pokemon.BELLOSSOM, Pokemon.LILEEP,
-      Pokemon.CRADILY, Pokemon.BUDEW, Pokemon.ROSELIA,
-      Pokemon.ROSERADE, Pokemon.SEWADDLE, Pokemon.SWADLOON,
-      Pokemon.LEAVANNY
+      Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR,
+      Pkmn.CATERPIE, Pkmn.METAPOD, Pkmn.BUTTERFREE,
+      Pkmn.HOPPIP, Pkmn.SKIPLOOM, Pkmn.JUMPLUFF,
+      Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.SHIFTRY,
+      Pkmn.CHIKORITA, Pkmn.BAYLEEF, Pkmn.MEGANIUM,
+      Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE,
+      Pkmn.TURTWIG, Pkmn.GROTLE, Pkmn.TORTERRA,
+      Pkmn.LOTAD, Pkmn.LOMBRE, Pkmn.LUDICOLO,
+      Pkmn.LEAFEON, Pkmn.BELLSPROUT, Pkmn.WEEPINBELL,
+      Pkmn.VICTREEBEL, Pkmn.SNOVER, Pkmn.ABOMASNOW,
+      Pkmn.MEGAABOMASNOW, Pkmn.VIRIZION, Pkmn.CELEBI,
+      Pkmn.SHAYMIN, Pkmn.ODDISH, Pkmn.GLOOM,
+      Pkmn.VILEPLUME, Pkmn.BELLOSSOM, Pkmn.LILEEP,
+      Pkmn.CRADILY, Pkmn.BUDEW, Pkmn.ROSELIA,
+      Pkmn.ROSERADE, Pkmn.SEWADDLE, Pkmn.SWADLOON,
+      Pkmn.LEAVANNY
     ],
     [Synergy.FIRE] : [
-      Pokemon.CHARMANDER, Pokemon.CHARMELEON, Pokemon.CHARIZARD,
-      Pokemon.CYNDAQUIL, Pokemon.QUILAVA, Pokemon.TYPHLOSION,
-      Pokemon.TORCHIC, Pokemon.COMBUSKEN, Pokemon.BLAZIKEN,
-      Pokemon.CHIMCHAR, Pokemon.MONFERNO, Pokemon.INFERNAPE,
-      Pokemon.MAGBY, Pokemon.MAGMAR, Pokemon.MAGMORTAR,
-      Pokemon.MOLTRES, Pokemon.ENTEI, Pokemon.GROUDON,
-      Pokemon.FLAREON, Pokemon.NUMEL, Pokemon.CAMERUPT,
-      Pokemon.MEGACAMERUPT, Pokemon.LITWICK, Pokemon.LAMPENT,
-      Pokemon.CHANDELURE, Pokemon.VOLCARONA, Pokemon.RESHIRAM,
-      Pokemon.VICTINI, Pokemon.HEATRAN, Pokemon.HOOH,
-      Pokemon.PRIMALGROUDON, Pokemon.ALOLANMAROWAK, Pokemon.HOUNDOUR,
-      Pokemon.CASTFORMSUN
+      Pkmn.CHARMANDER, Pkmn.CHARMELEON, Pkmn.CHARIZARD,
+      Pkmn.CYNDAQUIL, Pkmn.QUILAVA, Pkmn.TYPHLOSION,
+      Pkmn.TORCHIC, Pkmn.COMBUSKEN, Pkmn.BLAZIKEN,
+      Pkmn.CHIMCHAR, Pkmn.MONFERNO, Pkmn.INFERNAPE,
+      Pkmn.MAGBY, Pkmn.MAGMAR, Pkmn.MAGMORTAR,
+      Pkmn.MOLTRES, Pkmn.ENTEI, Pkmn.GROUDON,
+      Pkmn.FLAREON, Pkmn.NUMEL, Pkmn.CAMERUPT,
+      Pkmn.MEGACAMERUPT, Pkmn.LITWICK, Pkmn.LAMPENT,
+      Pkmn.CHANDELURE, Pkmn.VOLCARONA, Pkmn.RESHIRAM,
+      Pkmn.VICTINI, Pkmn.HEATRAN, Pkmn.HOOH,
+      Pkmn.PRIMALGROUDON, Pkmn.ALOLANMAROWAK, Pkmn.HOUNDOUR,
+      Pkmn.CASTFORMSUN
     ],
     [Synergy.WATER] : [
-      Pokemon.SQUIRTLE, Pokemon.WARTORTLE, Pokemon.BLASTOISE,
-      Pokemon.AZURILL, Pokemon.MARILL, Pokemon.AZUMARILL,
-      Pokemon.MUDKIP, Pokemon.MARSHTOMP, Pokemon.SWAMPERT,
-      Pokemon.PIPLUP, Pokemon.PRINPLUP, Pokemon.EMPOLEON,
-      Pokemon.HORSEA, Pokemon.SEADRA, Pokemon.KINGDRA,
-      Pokemon.LOTAD, Pokemon.LOMBRE, Pokemon.LUDICOLO,
-      Pokemon.POLIWAG, Pokemon.POLIWHIRL, Pokemon.POLITOED,
-      Pokemon.GYARADOS, Pokemon.PALKIA, Pokemon.SUICUNE,
-      Pokemon.KYOGRE, Pokemon.VAPOREON, Pokemon.CARVANHA,
-      Pokemon.KELDEO, Pokemon.MANAPHY, Pokemon.LAPRAS,
-      Pokemon.PRIMALKYOGRE, Pokemon.TIRTOUGA, Pokemon.CARRACOSTA,
-      Pokemon.KABUTO, Pokemon.KABUTOPS, Pokemon.OMANYTE,
-      Pokemon.OMASTAR, Pokemon.TYMPOLE, Pokemon.PALPITOAD,
-      Pokemon.SEISMITOAD, Pokemon.CASTFORMRAIN
+      Pkmn.SQUIRTLE, Pkmn.WARTORTLE, Pkmn.BLASTOISE,
+      Pkmn.AZURILL, Pkmn.MARILL, Pkmn.AZUMARILL,
+      Pkmn.MUDKIP, Pkmn.MARSHTOMP, Pkmn.SWAMPERT,
+      Pkmn.PIPLUP, Pkmn.PRINPLUP, Pkmn.EMPOLEON,
+      Pkmn.HORSEA, Pkmn.SEADRA, Pkmn.KINGDRA,
+      Pkmn.LOTAD, Pkmn.LOMBRE, Pkmn.LUDICOLO,
+      Pkmn.POLIWAG, Pkmn.POLIWHIRL, Pkmn.POLITOED,
+      Pkmn.GYARADOS, Pkmn.PALKIA, Pkmn.SUICUNE,
+      Pkmn.KYOGRE, Pkmn.VAPOREON, Pkmn.CARVANHA,
+      Pkmn.KELDEO, Pkmn.MANAPHY, Pkmn.LAPRAS,
+      Pkmn.PRIMALKYOGRE, Pkmn.TIRTOUGA, Pkmn.CARRACOSTA,
+      Pkmn.KABUTO, Pkmn.KABUTOPS, Pkmn.OMANYTE,
+      Pkmn.OMASTAR, Pkmn.TYMPOLE, Pkmn.PALPITOAD,
+      Pkmn.SEISMITOAD, Pkmn.CASTFORMRAIN
     ],
     [Synergy.ELECTRIC] : [
-      Pokemon.MAREEP, Pokemon.FLAFFY,
-      Pokemon.AMPHAROS, Pokemon.PICHU,
-      Pokemon.PIKACHU, Pokemon.RAICHU,
-      Pokemon.MAGNEMITE, Pokemon.MAGNETON,
-      Pokemon.MAGNEZONE, Pokemon.SHINX,
-      Pokemon.LUXIO, Pokemon.LUXRAY,
-      Pokemon.ELEKID, Pokemon.ELECTABUZZ,
-      Pokemon.ELECTIVIRE, Pokemon.ZAPDOS,
-      Pokemon.RAIKOU, Pokemon.JOLTEON,
-      Pokemon.THUNDURUS, Pokemon.ROTOM,
-      Pokemon.ZEKROM, Pokemon.PRIMALKYOGRE,
-      Pokemon.ELECTRIKE, Pokemon.MANECTRIC,
-      Pokemon.MEGAMANECTRIC
+      Pkmn.MAREEP, Pkmn.FLAFFY,
+      Pkmn.AMPHAROS, Pkmn.PICHU,
+      Pkmn.PIKACHU, Pkmn.RAICHU,
+      Pkmn.MAGNEMITE, Pkmn.MAGNETON,
+      Pkmn.MAGNEZONE, Pkmn.SHINX,
+      Pkmn.LUXIO, Pkmn.LUXRAY,
+      Pkmn.ELEKID, Pkmn.ELECTABUZZ,
+      Pkmn.ELECTIVIRE, Pkmn.ZAPDOS,
+      Pkmn.RAIKOU, Pkmn.JOLTEON,
+      Pkmn.THUNDURUS, Pkmn.ROTOM,
+      Pkmn.ZEKROM, Pkmn.PRIMALKYOGRE,
+      Pkmn.ELECTRIKE, Pkmn.MANECTRIC,
+      Pkmn.MEGAMANECTRIC
     ],
     [Synergy.FIGHTING] : [
-      Pokemon.TORCHIC, Pokemon.COMBUSKEN,
-      Pokemon.BLAZIKEN, Pokemon.CHIMCHAR,
-      Pokemon.MONFERNO, Pokemon.INFERNAPE,
-      Pokemon.MACHOP, Pokemon.MACHOKE,
-      Pokemon.MACHAMP, Pokemon.POLIWAG,
-      Pokemon.POLIWHIRL, Pokemon.POLITOED,
-      Pokemon.RIOLU, Pokemon.LUCARIO,
-      Pokemon.MEGALUCARIO, Pokemon.MEDITITE,
-      Pokemon.MEDICHAM, Pokemon.MEGAMEDICHAM,
-      Pokemon.KELDEO, Pokemon.TERRAKION,
-      Pokemon.VIRIZION, Pokemon.COBALION,
-      Pokemon.BUNEARY, Pokemon.LOPUNNY,
-      Pokemon.MEGALOPUNNY, Pokemon.JANGMOO,
-      Pokemon.HAKAMOO, Pokemon.KOMMOO
+      Pkmn.TORCHIC, Pkmn.COMBUSKEN,
+      Pkmn.BLAZIKEN, Pkmn.CHIMCHAR,
+      Pkmn.MONFERNO, Pkmn.INFERNAPE,
+      Pkmn.MACHOP, Pkmn.MACHOKE,
+      Pkmn.MACHAMP, Pkmn.POLIWAG,
+      Pkmn.POLIWHIRL, Pkmn.POLITOED,
+      Pkmn.RIOLU, Pkmn.LUCARIO,
+      Pkmn.MEGALUCARIO, Pkmn.MEDITITE,
+      Pkmn.MEDICHAM, Pkmn.MEGAMEDICHAM,
+      Pkmn.KELDEO, Pkmn.TERRAKION,
+      Pkmn.VIRIZION, Pkmn.COBALION,
+      Pkmn.BUNEARY, Pkmn.LOPUNNY,
+      Pkmn.MEGALOPUNNY, Pkmn.JANGMOO,
+      Pkmn.HAKAMOO, Pkmn.KOMMOO
     ],
     [Synergy.PSYCHIC] : [
-      Pokemon.ABRA, Pokemon.KADABRA, Pokemon.ALAKAZAM,
-      Pokemon.RALTS, Pokemon.KIRLIA, Pokemon.GARDEVOIR,
-      Pokemon.BELDUM, Pokemon.METANG, Pokemon.METAGROSS,
-      Pokemon.LUGIA, Pokemon.ESPEON, Pokemon.MEDITITE,
-      Pokemon.MEDICHAM, Pokemon.MEGAMEDICHAM, Pokemon.SLOWPOKE,
-      Pokemon.SLOWBRO, Pokemon.SLOWKING, Pokemon.LATIAS,
-      Pokemon.LATIOS, Pokemon.MESPRIT, Pokemon.AZELF,
-      Pokemon.UXIE, Pokemon.MEWTWO, Pokemon.CELEBI,
-      Pokemon.VICTINI, Pokemon.JIRACHI, Pokemon.DEOXYS,
-      Pokemon.CRESSELIA, Pokemon.SOLOSIS, Pokemon.DUOSION,
-      Pokemon.REUNICLUS, Pokemon.PORYGON, Pokemon.PORYGON2,
-      Pokemon.PORYGONZ
+      Pkmn.ABRA, Pkmn.KADABRA, Pkmn.ALAKAZAM,
+      Pkmn.RALTS, Pkmn.KIRLIA, Pkmn.GARDEVOIR,
+      Pkmn.BELDUM, Pkmn.METANG, Pkmn.METAGROSS,
+      Pkmn.LUGIA, Pkmn.ESPEON, Pkmn.MEDITITE,
+      Pkmn.MEDICHAM, Pkmn.MEGAMEDICHAM, Pkmn.SLOWPOKE,
+      Pkmn.SLOWBRO, Pkmn.SLOWKING, Pkmn.LATIAS,
+      Pkmn.LATIOS, Pkmn.MESPRIT, Pkmn.AZELF,
+      Pkmn.UXIE, Pkmn.MEWTWO, Pkmn.CELEBI,
+      Pkmn.VICTINI, Pkmn.JIRACHI, Pkmn.DEOXYS,
+      Pkmn.CRESSELIA, Pkmn.SOLOSIS, Pkmn.DUOSION,
+      Pkmn.REUNICLUS, Pkmn.PORYGON, Pkmn.PORYGON2,
+      Pkmn.PORYGONZ
     ],
     [Synergy.DARK] : [
-      Pokemon.SEEDOT, Pokemon.NUZLEAF,
-      Pokemon.SHIFTRY, Pokemon.DUSKULL,
-      Pokemon.DUSCLOPS, Pokemon.DUSKNOIR,
-      Pokemon.LARVITAR, Pokemon.PUPITAR,
-      Pokemon.TYRANITAR, Pokemon.UMBREON,
-      Pokemon.DARKRAI, Pokemon.CARVANHA,
-      Pokemon.SPIRITOMB, Pokemon.ABSOL,
-      Pokemon.DEINO, Pokemon.ZWEILOUS,
-      Pokemon.HYDREIGON, Pokemon.SANDILE,
-      Pokemon.KROKOROK, Pokemon.KROOKODILE,
-      Pokemon.SHUPPET, Pokemon.BANETTE,
-      Pokemon.MEGABANETTE, Pokemon.HOUNDOUR
+      Pkmn.SEEDOT, Pkmn.NUZLEAF,
+      Pkmn.SHIFTRY, Pkmn.DUSKULL,
+      Pkmn.DUSCLOPS, Pkmn.DUSKNOIR,
+      Pkmn.LARVITAR, Pkmn.PUPITAR,
+      Pkmn.TYRANITAR, Pkmn.UMBREON,
+      Pkmn.DARKRAI, Pkmn.CARVANHA,
+      Pkmn.SPIRITOMB, Pkmn.ABSOL,
+      Pkmn.DEINO, Pkmn.ZWEILOUS,
+      Pkmn.HYDREIGON, Pkmn.SANDILE,
+      Pkmn.KROKOROK, Pkmn.KROOKODILE,
+      Pkmn.SHUPPET, Pkmn.BANETTE,
+      Pkmn.MEGABANETTE, Pkmn.HOUNDOUR
     ],
     [Synergy.METAL] : [
-      Pokemon.PIPLUP, Pokemon.PRINPLUP, Pokemon.EMPOLEON,
-      Pokemon.ARON, Pokemon.LAIRON, Pokemon.AGGRON,
-      Pokemon.MAGNEMITE, Pokemon.MAGNETON, Pokemon.MAGNEZONE,
-      Pokemon.BELDUM, Pokemon.METANG, Pokemon.METAGROSS,
-      Pokemon.ONIX, Pokemon.STEELIX, Pokemon.MEGASTEELIX,
-      Pokemon.SCIZOR, Pokemon.MEGASCIZOR, Pokemon.LUCARIO,
-      Pokemon.MEGALUCARIO, Pokemon.DIALGA, Pokemon.REGISTEEL,
-      Pokemon.COBALION, Pokemon.JIRACHI, Pokemon.HEATRAN,
-      Pokemon.SHIELDON, Pokemon.BASTIODON, Pokemon.HONEDGE,
-      Pokemon.DOUBLADE, Pokemon.AEGISLASH
+      Pkmn.PIPLUP, Pkmn.PRINPLUP, Pkmn.EMPOLEON,
+      Pkmn.ARON, Pkmn.LAIRON, Pkmn.AGGRON,
+      Pkmn.MAGNEMITE, Pkmn.MAGNETON, Pkmn.MAGNEZONE,
+      Pkmn.BELDUM, Pkmn.METANG, Pkmn.METAGROSS,
+      Pkmn.ONIX, Pkmn.STEELIX, Pkmn.MEGASTEELIX,
+      Pkmn.SCIZOR, Pkmn.MEGASCIZOR, Pkmn.LUCARIO,
+      Pkmn.MEGALUCARIO, Pkmn.DIALGA, Pkmn.REGISTEEL,
+      Pkmn.COBALION, Pkmn.JIRACHI, Pkmn.HEATRAN,
+      Pkmn.SHIELDON, Pkmn.BASTIODON, Pkmn.HONEDGE,
+      Pkmn.DOUBLADE, Pkmn.AEGISLASH
     ],
     [Synergy.GROUND] : [
-      Pokemon.GEODUDE, Pokemon.GRAVELER, Pokemon.GOLEM,
-      Pokemon.MUDKIP, Pokemon.MARSHTOMP, Pokemon.SWAMPERT,
-      Pokemon.TURTWIG, Pokemon.GROTLE, Pokemon.TORTERRA,
-      Pokemon.TRAPINCH, Pokemon.VIBRAVA, Pokemon.FLYGON,
-      Pokemon.RHYHORN, Pokemon.RHYDON, Pokemon.RHYPERIOR,
-      Pokemon.GIBLE, Pokemon.GABITE, Pokemon.GARCHOMP,
-      Pokemon.ONIX, Pokemon.STEELIX, Pokemon.MEGASTEELIX,
-      Pokemon.GROUDON, Pokemon.NUMEL, Pokemon.CAMERUPT,
-      Pokemon.MEGACAMERUPT, Pokemon.SWINUB, Pokemon.PILOSWINE,
-      Pokemon.MAMOSWINE, Pokemon.LANDORUS, Pokemon.PRIMALGROUDON,
-      Pokemon.SANDILE, Pokemon.KROKOROK, Pokemon.KROOKODILE,
-      Pokemon.CUBONE, Pokemon.MAROWAK, Pokemon.ALOLANMAROWAK,
-      Pokemon.TYMPOLE, Pokemon.PALPITOAD, Pokemon.SEISMITOAD
+      Pkmn.GEODUDE, Pkmn.GRAVELER, Pkmn.GOLEM,
+      Pkmn.MUDKIP, Pkmn.MARSHTOMP, Pkmn.SWAMPERT,
+      Pkmn.TURTWIG, Pkmn.GROTLE, Pkmn.TORTERRA,
+      Pkmn.TRAPINCH, Pkmn.VIBRAVA, Pkmn.FLYGON,
+      Pkmn.RHYHORN, Pkmn.RHYDON, Pkmn.RHYPERIOR,
+      Pkmn.GIBLE, Pkmn.GABITE, Pkmn.GARCHOMP,
+      Pkmn.ONIX, Pkmn.STEELIX, Pkmn.MEGASTEELIX,
+      Pkmn.GROUDON, Pkmn.NUMEL, Pkmn.CAMERUPT,
+      Pkmn.MEGACAMERUPT, Pkmn.SWINUB, Pkmn.PILOSWINE,
+      Pkmn.MAMOSWINE, Pkmn.LANDORUS, Pkmn.PRIMALGROUDON,
+      Pkmn.SANDILE, Pkmn.KROKOROK, Pkmn.KROOKODILE,
+      Pkmn.CUBONE, Pkmn.MAROWAK, Pkmn.ALOLANMAROWAK,
+      Pkmn.TYMPOLE, Pkmn.PALPITOAD, Pkmn.SEISMITOAD
     ],
     [Synergy.POISON] : [
-      Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR,
-      Pokemon.ZUBAT, Pokemon.GOLBAT, Pokemon.CROBAT,
-      Pokemon.WEEDLE, Pokemon.KAKUNA, Pokemon.BEEDRILL,
-      Pokemon.NIDORANF, Pokemon.NIDORINA, Pokemon.NIDOQUEEN,
-      Pokemon.NIDORANM, Pokemon.NIDORINO, Pokemon.NIDOKING,
-      Pokemon.GASTLY, Pokemon.HAUNTER, Pokemon.GENGAR,
-      Pokemon.BELLSPROUT, Pokemon.WEEPINBELL, Pokemon.VICTREEBEL,
-      Pokemon.ODDISH, Pokemon.GLOOM, Pokemon.VILEPLUME,
-      Pokemon.BELLOSSOM, Pokemon.BUDEW, Pokemon.ROSELIA,
-      Pokemon.ROSERADE, Pokemon.VENIPEDE, Pokemon.WHIRLIPEDE,
-      Pokemon.SCOLIPEDE
+      Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR,
+      Pkmn.ZUBAT, Pkmn.GOLBAT, Pkmn.CROBAT,
+      Pkmn.WEEDLE, Pkmn.KAKUNA, Pkmn.BEEDRILL,
+      Pkmn.NIDORANF, Pkmn.NIDORINA, Pkmn.NIDOQUEEN,
+      Pkmn.NIDORANM, Pkmn.NIDORINO, Pkmn.NIDOKING,
+      Pkmn.GASTLY, Pkmn.HAUNTER, Pkmn.GENGAR,
+      Pkmn.BELLSPROUT, Pkmn.WEEPINBELL, Pkmn.VICTREEBEL,
+      Pkmn.ODDISH, Pkmn.GLOOM, Pkmn.VILEPLUME,
+      Pkmn.BELLOSSOM, Pkmn.BUDEW, Pkmn.ROSELIA,
+      Pkmn.ROSERADE, Pkmn.VENIPEDE, Pkmn.WHIRLIPEDE,
+      Pkmn.SCOLIPEDE
     ],
     [Synergy.DRAGON] : [
-      Pokemon.CHARMANDER, Pokemon.CHARMELEON, Pokemon.CHARIZARD,
-      Pokemon.HORSEA, Pokemon.SEADRA, Pokemon.KINGDRA,
-      Pokemon.VIBRAVA, Pokemon.FLYGON, Pokemon.DRATINI,
-      Pokemon.DRAGONAIR, Pokemon.DRAGONITE, Pokemon.BAGON,
-      Pokemon.SHELGON, Pokemon.SALAMENCE, Pokemon.GIBLE,
-      Pokemon.GABITE, Pokemon.GARCHOMP, Pokemon.GIRATINA,
-      Pokemon.DIALGA, Pokemon.PALKIA, Pokemon.RAYQUAZA,
-      Pokemon.LATIAS, Pokemon.LATIOS, Pokemon.KYUREM,
-      Pokemon.RESHIRAM, Pokemon.ZEKROM, Pokemon.DEINO,
-      Pokemon.ZWEILOUS, Pokemon.HYDREIGON, Pokemon.MEGARAYQUAZA,
-      Pokemon.SWABLU, Pokemon.TYRUNT, Pokemon.TYRANTRUM,
-      Pokemon.AXEW, Pokemon.FRAXURE, Pokemon.HAXORUS,
-      Pokemon.JANGMOO, Pokemon.HAKAMOO, Pokemon.KOMMOO,
-      Pokemon.ALTARIA, Pokemon.MEGAALTARIA
+      Pkmn.CHARMANDER, Pkmn.CHARMELEON, Pkmn.CHARIZARD,
+      Pkmn.HORSEA, Pkmn.SEADRA, Pkmn.KINGDRA,
+      Pkmn.VIBRAVA, Pkmn.FLYGON, Pkmn.DRATINI,
+      Pkmn.DRAGONAIR, Pkmn.DRAGONITE, Pkmn.BAGON,
+      Pkmn.SHELGON, Pkmn.SALAMENCE, Pkmn.GIBLE,
+      Pkmn.GABITE, Pkmn.GARCHOMP, Pkmn.GIRATINA,
+      Pkmn.DIALGA, Pkmn.PALKIA, Pkmn.RAYQUAZA,
+      Pkmn.LATIAS, Pkmn.LATIOS, Pkmn.KYUREM,
+      Pkmn.RESHIRAM, Pkmn.ZEKROM, Pkmn.DEINO,
+      Pkmn.ZWEILOUS, Pkmn.HYDREIGON, Pkmn.MEGARAYQUAZA,
+      Pkmn.SWABLU, Pkmn.TYRUNT, Pkmn.TYRANTRUM,
+      Pkmn.AXEW, Pkmn.FRAXURE, Pkmn.HAXORUS,
+      Pkmn.JANGMOO, Pkmn.HAKAMOO, Pkmn.KOMMOO,
+      Pkmn.ALTARIA, Pkmn.MEGAALTARIA
     ],
     [Synergy.FIELD] : [
-      Pokemon.SQUIRTLE, Pokemon.WARTORTLE, Pokemon.BLASTOISE,
-      Pokemon.MAREEP, Pokemon.FLAFFY, Pokemon.AMPHAROS,
-      Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.SHIFTRY,
-      Pokemon.CYNDAQUIL, Pokemon.QUILAVA, Pokemon.TYPHLOSION,
-      Pokemon.NIDORANF, Pokemon.NIDORINA, Pokemon.NIDOQUEEN,
-      Pokemon.NIDORANM, Pokemon.NIDORINO, Pokemon.NIDOKING,
-      Pokemon.SHINX, Pokemon.LUXIO, Pokemon.LUXRAY,
-      Pokemon.SLAKOTH, Pokemon.VIGOROTH, Pokemon.SLAKING,
-      Pokemon.RAIKOU, Pokemon.ENTEI, Pokemon.EEVEE,
-      Pokemon.VAPOREON, Pokemon.JOLTEON, Pokemon.FLAREON,
-      Pokemon.ESPEON, Pokemon.UMBREON, Pokemon.LEAFEON,
-      Pokemon.SYLVEON, Pokemon.NUMEL, Pokemon.CAMERUPT,
-      Pokemon.MEGACAMERUPT, Pokemon.SWINUB, Pokemon.PILOSWINE,
-      Pokemon.MAMOSWINE, Pokemon.GLACEON, Pokemon.ABSOL,
-      Pokemon.ARCEUS, Pokemon.SANDILE, Pokemon.KROKOROK,
-      Pokemon.KROOKODILE, Pokemon.ELECTRIKE, Pokemon.MANECTRIC,
-      Pokemon.MEGAMANECTRIC
+      Pkmn.SQUIRTLE, Pkmn.WARTORTLE, Pkmn.BLASTOISE,
+      Pkmn.MAREEP, Pkmn.FLAFFY, Pkmn.AMPHAROS,
+      Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.SHIFTRY,
+      Pkmn.CYNDAQUIL, Pkmn.QUILAVA, Pkmn.TYPHLOSION,
+      Pkmn.NIDORANF, Pkmn.NIDORINA, Pkmn.NIDOQUEEN,
+      Pkmn.NIDORANM, Pkmn.NIDORINO, Pkmn.NIDOKING,
+      Pkmn.SHINX, Pkmn.LUXIO, Pkmn.LUXRAY,
+      Pkmn.SLAKOTH, Pkmn.VIGOROTH, Pkmn.SLAKING,
+      Pkmn.RAIKOU, Pkmn.ENTEI, Pkmn.EEVEE,
+      Pkmn.VAPOREON, Pkmn.JOLTEON, Pkmn.FLAREON,
+      Pkmn.ESPEON, Pkmn.UMBREON, Pkmn.LEAFEON,
+      Pkmn.SYLVEON, Pkmn.NUMEL, Pkmn.CAMERUPT,
+      Pkmn.MEGACAMERUPT, Pkmn.SWINUB, Pkmn.PILOSWINE,
+      Pkmn.MAMOSWINE, Pkmn.GLACEON, Pkmn.ABSOL,
+      Pkmn.ARCEUS, Pkmn.SANDILE, Pkmn.KROKOROK,
+      Pkmn.KROOKODILE, Pkmn.ELECTRIKE, Pkmn.MANECTRIC,
+      Pkmn.MEGAMANECTRIC
     ],
     [Synergy.MONSTER] : [
-      Pokemon.TOTODILE, Pokemon.CROCONAW, Pokemon.FERALIGATR,
-      Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE,
-      Pokemon.ARON, Pokemon.LAIRON, Pokemon.AGGRON,
-      Pokemon.RHYHORN, Pokemon.RHYDON, Pokemon.RHYPERIOR,
-      Pokemon.GASTLY, Pokemon.HAUNTER, Pokemon.GENGAR,
-      Pokemon.LARVITAR, Pokemon.PUPITAR, Pokemon.TYRANITAR,
-      Pokemon.BAGON, Pokemon.SHELGON, Pokemon.SALAMENCE,
-      Pokemon.GIBLE, Pokemon.GABITE, Pokemon.GARCHOMP,
-      Pokemon.REGIGIGAS, Pokemon.DARKRAI, Pokemon.MEWTWO,
-      Pokemon.CRANIDOS, Pokemon.RAMPARDOS, Pokemon.AXEW,
-      Pokemon.FRAXURE, Pokemon.HAXORUS
+      Pkmn.TOTODILE, Pkmn.CROCONAW, Pkmn.FERALIGATR,
+      Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE,
+      Pkmn.ARON, Pkmn.LAIRON, Pkmn.AGGRON,
+      Pkmn.RHYHORN, Pkmn.RHYDON, Pkmn.RHYPERIOR,
+      Pkmn.GASTLY, Pkmn.HAUNTER, Pkmn.GENGAR,
+      Pkmn.LARVITAR, Pkmn.PUPITAR, Pkmn.TYRANITAR,
+      Pkmn.BAGON, Pkmn.SHELGON, Pkmn.SALAMENCE,
+      Pkmn.GIBLE, Pkmn.GABITE, Pkmn.GARCHOMP,
+      Pkmn.REGIGIGAS, Pkmn.DARKRAI, Pkmn.MEWTWO,
+      Pkmn.CRANIDOS, Pkmn.RAMPARDOS, Pkmn.AXEW,
+      Pkmn.FRAXURE, Pkmn.HAXORUS
     ],
     [Synergy.HUMAN] : [
-      Pokemon.MACHOP, Pokemon.MACHOKE,
-      Pokemon.MACHAMP, Pokemon.ABRA,
-      Pokemon.KADABRA, Pokemon.ALAKAZAM,
-      Pokemon.RALTS, Pokemon.KIRLIA,
-      Pokemon.GARDEVOIR, Pokemon.ELEKID,
-      Pokemon.ELECTABUZZ, Pokemon.ELECTIVIRE,
-      Pokemon.MAGBY, Pokemon.MAGMAR,
-      Pokemon.MAGMORTAR, Pokemon.RIOLU,
-      Pokemon.LUCARIO, Pokemon.MEGALUCARIO,
-      Pokemon.REGICE, Pokemon.REGIROCK,
-      Pokemon.REGISTEEL, Pokemon.REGIGIGAS,
-      Pokemon.MEDITITE, Pokemon.MEDICHAM,
-      Pokemon.MEGAMEDICHAM, Pokemon.DEOXYS
+      Pkmn.MACHOP, Pkmn.MACHOKE,
+      Pkmn.MACHAMP, Pkmn.ABRA,
+      Pkmn.KADABRA, Pkmn.ALAKAZAM,
+      Pkmn.RALTS, Pkmn.KIRLIA,
+      Pkmn.GARDEVOIR, Pkmn.ELEKID,
+      Pkmn.ELECTABUZZ, Pkmn.ELECTIVIRE,
+      Pkmn.MAGBY, Pkmn.MAGMAR,
+      Pkmn.MAGMORTAR, Pkmn.RIOLU,
+      Pkmn.LUCARIO, Pkmn.MEGALUCARIO,
+      Pkmn.REGICE, Pkmn.REGIROCK,
+      Pkmn.REGISTEEL, Pkmn.REGIGIGAS,
+      Pkmn.MEDITITE, Pkmn.MEDICHAM,
+      Pkmn.MEGAMEDICHAM, Pkmn.DEOXYS
     ],
     [Synergy.AQUATIC] : [
-      Pokemon.TOTODILE, Pokemon.CROCONAW,
-      Pokemon.FERALIGATR, Pokemon.SPHEAL,
-      Pokemon.SEALEO, Pokemon.WALREIN,
-      Pokemon.DRATINI, Pokemon.DRAGONAIR,
-      Pokemon.DRAGONITE, Pokemon.LUGIA,
-      Pokemon.KYOGRE, Pokemon.SLOWPOKE,
-      Pokemon.SLOWBRO, Pokemon.SLOWKING,
-      Pokemon.PRIMALKYOGRE
+      Pkmn.TOTODILE, Pkmn.CROCONAW,
+      Pkmn.FERALIGATR, Pkmn.SPHEAL,
+      Pkmn.SEALEO, Pkmn.WALREIN,
+      Pkmn.DRATINI, Pkmn.DRAGONAIR,
+      Pkmn.DRAGONITE, Pkmn.LUGIA,
+      Pkmn.KYOGRE, Pkmn.SLOWPOKE,
+      Pkmn.SLOWBRO, Pkmn.SLOWKING,
+      Pkmn.PRIMALKYOGRE
     ],
     [Synergy.BUG] : [
-      Pokemon.CATERPIE, Pokemon.METAPOD,
-      Pokemon.BUTTERFREE, Pokemon.WEEDLE,
-      Pokemon.KAKUNA, Pokemon.BEEDRILL,
-      Pokemon.TRAPINCH, Pokemon.VIBRAVA,
-      Pokemon.FLYGON, Pokemon.SCYTHER,
-      Pokemon.SCIZOR, Pokemon.MEGASCIZOR,
-      Pokemon.VOLCARONA, Pokemon.MANAPHY,
-      Pokemon.ANORITH, Pokemon.ARMALDO,
-      Pokemon.VENIPEDE, Pokemon.WHIRLIPEDE,
-      Pokemon.SCOLIPEDE, Pokemon.SEWADDLE,
-      Pokemon.SWADLOON, Pokemon.LEAVANNY
+      Pkmn.CATERPIE, Pkmn.METAPOD,
+      Pkmn.BUTTERFREE, Pkmn.WEEDLE,
+      Pkmn.KAKUNA, Pkmn.BEEDRILL,
+      Pkmn.TRAPINCH, Pkmn.VIBRAVA,
+      Pkmn.FLYGON, Pkmn.SCYTHER,
+      Pkmn.SCIZOR, Pkmn.MEGASCIZOR,
+      Pkmn.VOLCARONA, Pkmn.MANAPHY,
+      Pkmn.ANORITH, Pkmn.ARMALDO,
+      Pkmn.VENIPEDE, Pkmn.WHIRLIPEDE,
+      Pkmn.SCOLIPEDE, Pkmn.SEWADDLE,
+      Pkmn.SWADLOON, Pkmn.LEAVANNY
     ],
     [Synergy.FLYING] : [
-      Pokemon.ZUBAT, Pokemon.GOLBAT, Pokemon.CROBAT,
-      Pokemon.BUTTERFREE, Pokemon.BEEDRILL, Pokemon.PIDGEY,
-      Pokemon.PIDGEOTTO, Pokemon.PIDGEOT, Pokemon.HOPPIP,
-      Pokemon.SKIPLOOM, Pokemon.JUMPLUFF, Pokemon.STARLY,
-      Pokemon.STARAVIA, Pokemon.STARAPTOR, Pokemon.TORCHIC,
-      Pokemon.COMBUSKEN, Pokemon.BLAZIKEN, Pokemon.PIPLUP,
-      Pokemon.PRINPLUP, Pokemon.EMPOLEON, Pokemon.TOGETIC,
-      Pokemon.TOGEKISS, Pokemon.DRAGONITE, Pokemon.SALAMENCE,
-      Pokemon.SCYTHER, Pokemon.SCIZOR, Pokemon.MEGASCIZOR,
-      Pokemon.LUGIA, Pokemon.ZAPDOS, Pokemon.MOLTRES,
-      Pokemon.ARTICUNO, Pokemon.RAYQUAZA, Pokemon.LANDORUS,
-      Pokemon.THUNDURUS, Pokemon.TORNADUS, Pokemon.HOOH,
-      Pokemon.AERODACTYL, Pokemon.MEGARAYQUAZA, Pokemon.ARCHEN,
-      Pokemon.ARCHEOPS, Pokemon.PIKIPEK, Pokemon.TRUMBEAK,
-      Pokemon.TOUCANNON
+      Pkmn.ZUBAT, Pkmn.GOLBAT, Pkmn.CROBAT,
+      Pkmn.BUTTERFREE, Pkmn.BEEDRILL, Pkmn.PIDGEY,
+      Pkmn.PIDGEOTTO, Pkmn.PIDGEOT, Pkmn.HOPPIP,
+      Pkmn.SKIPLOOM, Pkmn.JUMPLUFF, Pkmn.STARLY,
+      Pkmn.STARAVIA, Pkmn.STARAPTOR, Pkmn.TORCHIC,
+      Pkmn.COMBUSKEN, Pkmn.BLAZIKEN, Pkmn.PIPLUP,
+      Pkmn.PRINPLUP, Pkmn.EMPOLEON, Pkmn.TOGETIC,
+      Pkmn.TOGEKISS, Pkmn.DRAGONITE, Pkmn.SALAMENCE,
+      Pkmn.SCYTHER, Pkmn.SCIZOR, Pkmn.MEGASCIZOR,
+      Pkmn.LUGIA, Pkmn.ZAPDOS, Pkmn.MOLTRES,
+      Pkmn.ARTICUNO, Pkmn.RAYQUAZA, Pkmn.LANDORUS,
+      Pkmn.THUNDURUS, Pkmn.TORNADUS, Pkmn.HOOH,
+      Pkmn.AERODACTYL, Pkmn.MEGARAYQUAZA, Pkmn.ARCHEN,
+      Pkmn.ARCHEOPS, Pkmn.PIKIPEK, Pkmn.TRUMBEAK,
+      Pkmn.TOUCANNON
     ],
     [Synergy.FLORA] : [
-      Pokemon.BULBASAUR, Pokemon.IVYSAUR,
-      Pokemon.VENUSAUR, Pokemon.HOPPIP,
-      Pokemon.SKIPLOOM, Pokemon.JUMPLUFF,
-      Pokemon.CHIKORITA, Pokemon.BAYLEEF,
-      Pokemon.MEGANIUM, Pokemon.TURTWIG,
-      Pokemon.GROTLE, Pokemon.TORTERRA,
-      Pokemon.LEAFEON, Pokemon.BELLSPROUT,
-      Pokemon.WEEPINBELL, Pokemon.VICTREEBEL,
-      Pokemon.SHAYMIN, Pokemon.BUDEW,
-      Pokemon.ROSELIA, Pokemon.ROSERADE,
-      Pokemon.FLABEBE, Pokemon.FLOETTE,
-      Pokemon.FLORGES
+      Pkmn.BULBASAUR, Pkmn.IVYSAUR,
+      Pkmn.VENUSAUR, Pkmn.HOPPIP,
+      Pkmn.SKIPLOOM, Pkmn.JUMPLUFF,
+      Pkmn.CHIKORITA, Pkmn.BAYLEEF,
+      Pkmn.MEGANIUM, Pkmn.TURTWIG,
+      Pkmn.GROTLE, Pkmn.TORTERRA,
+      Pkmn.LEAFEON, Pkmn.BELLSPROUT,
+      Pkmn.WEEPINBELL, Pkmn.VICTREEBEL,
+      Pkmn.SHAYMIN, Pkmn.BUDEW,
+      Pkmn.ROSELIA, Pkmn.ROSERADE,
+      Pkmn.FLABEBE, Pkmn.FLOETTE,
+      Pkmn.FLORGES
     ],
     [Synergy.MINERAL] : [
-      Pokemon.GEODUDE, Pokemon.GRAVELER,
-      Pokemon.GOLEM, Pokemon.ARON,
-      Pokemon.LAIRON, Pokemon.AGGRON,
-      Pokemon.RHYHORN, Pokemon.RHYDON,
-      Pokemon.RHYPERIOR, Pokemon.LARVITAR,
-      Pokemon.PUPITAR, Pokemon.TYRANITAR,
-      Pokemon.BELDUM, Pokemon.METANG,
-      Pokemon.METAGROSS, Pokemon.ONIX,
-      Pokemon.STEELIX, Pokemon.MEGASTEELIX,
-      Pokemon.REGIROCK, Pokemon.TERRAKION,
-      Pokemon.CUBONE, Pokemon.MAROWAK,
-      Pokemon.ALOLANMAROWAK
+      Pkmn.GEODUDE, Pkmn.GRAVELER,
+      Pkmn.GOLEM, Pkmn.ARON,
+      Pkmn.LAIRON, Pkmn.AGGRON,
+      Pkmn.RHYHORN, Pkmn.RHYDON,
+      Pkmn.RHYPERIOR, Pkmn.LARVITAR,
+      Pkmn.PUPITAR, Pkmn.TYRANITAR,
+      Pkmn.BELDUM, Pkmn.METANG,
+      Pkmn.METAGROSS, Pkmn.ONIX,
+      Pkmn.STEELIX, Pkmn.MEGASTEELIX,
+      Pkmn.REGIROCK, Pkmn.TERRAKION,
+      Pkmn.CUBONE, Pkmn.MAROWAK,
+      Pkmn.ALOLANMAROWAK
     ],
     [Synergy.GHOST] : [
-      Pokemon.DUSKULL, Pokemon.DUSCLOPS,
-      Pokemon.DUSKNOIR, Pokemon.GASTLY,
-      Pokemon.HAUNTER, Pokemon.GENGAR,
-      Pokemon.GIRATINA, Pokemon.DARKRAI,
-      Pokemon.LITWICK, Pokemon.LAMPENT,
-      Pokemon.CHANDELURE, Pokemon.SNORUNT,
-      Pokemon.GLALIE, Pokemon.FROSLASS,
-      Pokemon.ROTOM, Pokemon.SPIRITOMB,
-      Pokemon.SOLOSIS, Pokemon.DUOSION,
-      Pokemon.REUNICLUS, Pokemon.SHUPPET,
-      Pokemon.BANETTE, Pokemon.MEGABANETTE,
-      Pokemon.HONEDGE, Pokemon.DOUBLADE,
-      Pokemon.AEGISLASH, Pokemon.ALOLANMAROWAK,
-      Pokemon.CASTFORM, Pokemon.CASTFORMSUN,
-      Pokemon.CASTFORMRAIN, Pokemon.CASTFORMHAIL
+      Pkmn.DUSKULL, Pkmn.DUSCLOPS,
+      Pkmn.DUSKNOIR, Pkmn.GASTLY,
+      Pkmn.HAUNTER, Pkmn.GENGAR,
+      Pkmn.GIRATINA, Pkmn.DARKRAI,
+      Pkmn.LITWICK, Pkmn.LAMPENT,
+      Pkmn.CHANDELURE, Pkmn.SNORUNT,
+      Pkmn.GLALIE, Pkmn.FROSLASS,
+      Pkmn.ROTOM, Pkmn.SPIRITOMB,
+      Pkmn.SOLOSIS, Pkmn.DUOSION,
+      Pkmn.REUNICLUS, Pkmn.SHUPPET,
+      Pkmn.BANETTE, Pkmn.MEGABANETTE,
+      Pkmn.HONEDGE, Pkmn.DOUBLADE,
+      Pkmn.AEGISLASH, Pkmn.ALOLANMAROWAK,
+      Pkmn.CASTFORM, Pkmn.CASTFORMSUN,
+      Pkmn.CASTFORMRAIN, Pkmn.CASTFORMHAIL
     ],
     [Synergy.FAIRY] : [
-      Pokemon.AZURILL, Pokemon.MARILL, Pokemon.AZUMARILL,
-      Pokemon.CLEFFA, Pokemon.CLEFAIRY, Pokemon.CLEFABLE,
-      Pokemon.IGGLYBUFF, Pokemon.WIGGLYTUFF, Pokemon.JIGGLYPUFF,
-      Pokemon.PICHU, Pokemon.PIKACHU, Pokemon.RAICHU,
-      Pokemon.TOGEPI, Pokemon.TOGETIC, Pokemon.TOGEKISS,
-      Pokemon.RALTS, Pokemon.KIRLIA, Pokemon.GARDEVOIR,
-      Pokemon.SYLVEON, Pokemon.VANILLITE, Pokemon.VANILLISH,
-      Pokemon.VANILLUXE, Pokemon.MESPRIT, Pokemon.AZELF,
-      Pokemon.UXIE, Pokemon.CRESSELIA, Pokemon.SWABLU,
-      Pokemon.FLABEBE, Pokemon.FLOETTE, Pokemon.FLORGES,
-      Pokemon.ALTARIA, Pokemon.MEGAALTARIA
+      Pkmn.AZURILL, Pkmn.MARILL, Pkmn.AZUMARILL,
+      Pkmn.CLEFFA, Pkmn.CLEFAIRY, Pkmn.CLEFABLE,
+      Pkmn.IGGLYBUFF, Pkmn.WIGGLYTUFF, Pkmn.JIGGLYPUFF,
+      Pkmn.PICHU, Pkmn.PIKACHU, Pkmn.RAICHU,
+      Pkmn.TOGEPI, Pkmn.TOGETIC, Pkmn.TOGEKISS,
+      Pkmn.RALTS, Pkmn.KIRLIA, Pkmn.GARDEVOIR,
+      Pkmn.SYLVEON, Pkmn.VANILLITE, Pkmn.VANILLISH,
+      Pkmn.VANILLUXE, Pkmn.MESPRIT, Pkmn.AZELF,
+      Pkmn.UXIE, Pkmn.CRESSELIA, Pkmn.SWABLU,
+      Pkmn.FLABEBE, Pkmn.FLOETTE, Pkmn.FLORGES,
+      Pkmn.ALTARIA, Pkmn.MEGAALTARIA
     ],
     [Synergy.ICE] : [
-      Pokemon.SPHEAL, Pokemon.SEALEO,
-      Pokemon.WALREIN, Pokemon.ARTICUNO,
-      Pokemon.SUICUNE, Pokemon.REGICE,
-      Pokemon.SWINUB, Pokemon.PILOSWINE,
-      Pokemon.MAMOSWINE, Pokemon.SNORUNT,
-      Pokemon.GLALIE, Pokemon.FROSLASS,
-      Pokemon.SNOVER, Pokemon.ABOMASNOW,
-      Pokemon.MEGAABOMASNOW, Pokemon.VANILLITE,
-      Pokemon.VANILLISH, Pokemon.VANILLUXE,
-      Pokemon.GLACEON, Pokemon.LAPRAS,
-      Pokemon.KYUREM, Pokemon.AMAURA,
-      Pokemon.AURORUS, Pokemon.CASTFORMHAIL
+      Pkmn.SPHEAL, Pkmn.SEALEO,
+      Pkmn.WALREIN, Pkmn.ARTICUNO,
+      Pkmn.SUICUNE, Pkmn.REGICE,
+      Pkmn.SWINUB, Pkmn.PILOSWINE,
+      Pkmn.MAMOSWINE, Pkmn.SNORUNT,
+      Pkmn.GLALIE, Pkmn.FROSLASS,
+      Pkmn.SNOVER, Pkmn.ABOMASNOW,
+      Pkmn.MEGAABOMASNOW, Pkmn.VANILLITE,
+      Pkmn.VANILLISH, Pkmn.VANILLUXE,
+      Pkmn.GLACEON, Pkmn.LAPRAS,
+      Pkmn.KYUREM, Pkmn.AMAURA,
+      Pkmn.AURORUS, Pkmn.CASTFORMHAIL
     ],
     [Synergy.FOSSIL] : [
-      Pokemon.AERODACTYL, Pokemon.AMAURA,
-      Pokemon.AURORUS, Pokemon.ANORITH,
-      Pokemon.ARMALDO, Pokemon.ARCHEN,
-      Pokemon.ARCHEOPS, Pokemon.SHIELDON,
-      Pokemon.BASTIODON, Pokemon.TIRTOUGA,
-      Pokemon.CARRACOSTA, Pokemon.LILEEP,
-      Pokemon.CRADILY, Pokemon.CRANIDOS,
-      Pokemon.RAMPARDOS, Pokemon.KABUTO,
-      Pokemon.KABUTOPS, Pokemon.OMANYTE,
-      Pokemon.OMASTAR, Pokemon.TYRUNT,
-      Pokemon.TYRANTRUM
+      Pkmn.AERODACTYL, Pkmn.AMAURA,
+      Pkmn.AURORUS, Pkmn.ANORITH,
+      Pkmn.ARMALDO, Pkmn.ARCHEN,
+      Pkmn.ARCHEOPS, Pkmn.SHIELDON,
+      Pkmn.BASTIODON, Pkmn.TIRTOUGA,
+      Pkmn.CARRACOSTA, Pkmn.LILEEP,
+      Pkmn.CRADILY, Pkmn.CRANIDOS,
+      Pkmn.RAMPARDOS, Pkmn.KABUTO,
+      Pkmn.KABUTOPS, Pkmn.OMANYTE,
+      Pkmn.OMASTAR, Pkmn.TYRUNT,
+      Pkmn.TYRANTRUM
     ],
     [Synergy.SOUND] : [
-      Pokemon.ZUBAT, Pokemon.GOLBAT, Pokemon.CROBAT,
-      Pokemon.IGGLYBUFF, Pokemon.WIGGLYTUFF, Pokemon.JIGGLYPUFF,
-      Pokemon.SWABLU, Pokemon.WHISMUR, Pokemon.LOUDRED,
-      Pokemon.EXPLOUD, Pokemon.TYMPOLE, Pokemon.PALPITOAD,
-      Pokemon.SEISMITOAD, Pokemon.SEWADDLE, Pokemon.SWADLOON,
-      Pokemon.LEAVANNY, Pokemon.PIKIPEK, Pokemon.TRUMBEAK,
-      Pokemon.TOUCANNON, Pokemon.FLABEBE, Pokemon.FLOETTE,
-      Pokemon.FLORGES, Pokemon.JANGMOO, Pokemon.HAKAMOO,
-      Pokemon.KOMMOO, Pokemon.MELOETTA, Pokemon.ALTARIA,
-      Pokemon.MEGAALTARIA
+      Pkmn.ZUBAT, Pkmn.GOLBAT, Pkmn.CROBAT,
+      Pkmn.IGGLYBUFF, Pkmn.WIGGLYTUFF, Pkmn.JIGGLYPUFF,
+      Pkmn.SWABLU, Pkmn.WHISMUR, Pkmn.LOUDRED,
+      Pkmn.EXPLOUD, Pkmn.TYMPOLE, Pkmn.PALPITOAD,
+      Pkmn.SEISMITOAD, Pkmn.SEWADDLE, Pkmn.SWADLOON,
+      Pkmn.LEAVANNY, Pkmn.PIKIPEK, Pkmn.TRUMBEAK,
+      Pkmn.TOUCANNON, Pkmn.FLABEBE, Pkmn.FLOETTE,
+      Pkmn.FLORGES, Pkmn.JANGMOO, Pkmn.HAKAMOO,
+      Pkmn.KOMMOO, Pkmn.MELOETTA, Pkmn.ALTARIA,
+      Pkmn.MEGAALTARIA
     ]
   };
   
   export const PRECOMPUTED_RARITY_POKEMONS_ALL = {
     [Rarity.COMMON] : [
-      Pokemon.CHARMANDER, Pokemon.CHARMELEON, Pokemon.CHARIZARD,
-      Pokemon.GEODUDE, Pokemon.GRAVELER, Pokemon.GOLEM,
-      Pokemon.AZURILL, Pokemon.MARILL, Pokemon.AZUMARILL,
-      Pokemon.ZUBAT, Pokemon.GOLBAT, Pokemon.CROBAT,
-      Pokemon.MAREEP, Pokemon.FLAFFY, Pokemon.AMPHAROS,
-      Pokemon.CLEFFA, Pokemon.CLEFAIRY, Pokemon.CLEFABLE,
-      Pokemon.CATERPIE, Pokemon.METAPOD, Pokemon.BUTTERFREE,
-      Pokemon.WEEDLE, Pokemon.KAKUNA, Pokemon.BEEDRILL,
-      Pokemon.PIDGEY, Pokemon.PIDGEOTTO, Pokemon.PIDGEOT,
-      Pokemon.HOPPIP, Pokemon.SKIPLOOM, Pokemon.JUMPLUFF,
-      Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.SHIFTRY,
-      Pokemon.STARLY, Pokemon.STARAVIA, Pokemon.STARAPTOR,
-      Pokemon.TOTODILE, Pokemon.CROCONAW, Pokemon.FERALIGATR,
-      Pokemon.SWINUB, Pokemon.PILOSWINE, Pokemon.MAMOSWINE
+      Pkmn.CHARMANDER, Pkmn.CHARMELEON, Pkmn.CHARIZARD,
+      Pkmn.GEODUDE, Pkmn.GRAVELER, Pkmn.GOLEM,
+      Pkmn.AZURILL, Pkmn.MARILL, Pkmn.AZUMARILL,
+      Pkmn.ZUBAT, Pkmn.GOLBAT, Pkmn.CROBAT,
+      Pkmn.MAREEP, Pkmn.FLAFFY, Pkmn.AMPHAROS,
+      Pkmn.CLEFFA, Pkmn.CLEFAIRY, Pkmn.CLEFABLE,
+      Pkmn.CATERPIE, Pkmn.METAPOD, Pkmn.BUTTERFREE,
+      Pkmn.WEEDLE, Pkmn.KAKUNA, Pkmn.BEEDRILL,
+      Pkmn.PIDGEY, Pkmn.PIDGEOTTO, Pkmn.PIDGEOT,
+      Pkmn.HOPPIP, Pkmn.SKIPLOOM, Pkmn.JUMPLUFF,
+      Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.SHIFTRY,
+      Pkmn.STARLY, Pkmn.STARAVIA, Pkmn.STARAPTOR,
+      Pkmn.TOTODILE, Pkmn.CROCONAW, Pkmn.FERALIGATR,
+      Pkmn.SWINUB, Pkmn.PILOSWINE, Pkmn.MAMOSWINE
     ],
     [Rarity.UNCOMMON] : [
-      Pokemon.SQUIRTLE, Pokemon.WARTORTLE, Pokemon.BLASTOISE, Pokemon.IGGLYBUFF, Pokemon.WIGGLYTUFF,
-      Pokemon.JIGGLYPUFF, Pokemon.CHIKORITA, Pokemon.BAYLEEF, Pokemon.MEGANIUM, Pokemon.CYNDAQUIL,
-      Pokemon.QUILAVA, Pokemon.TYPHLOSION, Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE,
-      Pokemon.TORCHIC, Pokemon.COMBUSKEN, Pokemon.BLAZIKEN, Pokemon.MUDKIP, Pokemon.MARSHTOMP,
-      Pokemon.SWAMPERT, Pokemon.CHIMCHAR, Pokemon.MONFERNO, Pokemon.INFERNAPE, Pokemon.PIPLUP,
-      Pokemon.PRINPLUP, Pokemon.EMPOLEON, Pokemon.MACHOP, Pokemon.MACHOKE, Pokemon.MACHAMP,
-      Pokemon.HORSEA, Pokemon.SEADRA, Pokemon.KINGDRA, Pokemon.SPHEAL, Pokemon.SEALEO,
-      Pokemon.WALREIN, Pokemon.MAGNEMITE, Pokemon.MAGNETON, Pokemon.MAGNEZONE, Pokemon.DUSKULL,
-      Pokemon.DUSCLOPS, Pokemon.DUSKNOIR, Pokemon.EEVEE, Pokemon.VAPOREON, Pokemon.JOLTEON,
-      Pokemon.FLAREON, Pokemon.ESPEON, Pokemon.UMBREON, Pokemon.LEAFEON, Pokemon.SYLVEON,
-      Pokemon.SLOWPOKE, Pokemon.SLOWBRO, Pokemon.SLOWKING, Pokemon.BELLSPROUT, Pokemon.WEEPINBELL,
-      Pokemon.VICTREEBEL, Pokemon.GLACEON, Pokemon.SANDILE, Pokemon.KROKOROK, Pokemon.KROOKODILE,
-      Pokemon.ANORITH, Pokemon.ARMALDO, Pokemon.LILEEP, Pokemon.CRADILY, Pokemon.KABUTO,
-      Pokemon.KABUTOPS, Pokemon.OMANYTE, Pokemon.OMASTAR, Pokemon.VENIPEDE, Pokemon.WHIRLIPEDE,
-      Pokemon.SCOLIPEDE, Pokemon.PIKIPEK, Pokemon.TRUMBEAK, Pokemon.TOUCANNON, Pokemon.FLABEBE,
-      Pokemon.FLOETTE, Pokemon.FLORGES
+      Pkmn.SQUIRTLE, Pkmn.WARTORTLE, Pkmn.BLASTOISE, Pkmn.IGGLYBUFF, Pkmn.WIGGLYTUFF,
+      Pkmn.JIGGLYPUFF, Pkmn.CHIKORITA, Pkmn.BAYLEEF, Pkmn.MEGANIUM, Pkmn.CYNDAQUIL,
+      Pkmn.QUILAVA, Pkmn.TYPHLOSION, Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE,
+      Pkmn.TORCHIC, Pkmn.COMBUSKEN, Pkmn.BLAZIKEN, Pkmn.MUDKIP, Pkmn.MARSHTOMP,
+      Pkmn.SWAMPERT, Pkmn.CHIMCHAR, Pkmn.MONFERNO, Pkmn.INFERNAPE, Pkmn.PIPLUP,
+      Pkmn.PRINPLUP, Pkmn.EMPOLEON, Pkmn.MACHOP, Pkmn.MACHOKE, Pkmn.MACHAMP,
+      Pkmn.HORSEA, Pkmn.SEADRA, Pkmn.KINGDRA, Pkmn.SPHEAL, Pkmn.SEALEO,
+      Pkmn.WALREIN, Pkmn.MAGNEMITE, Pkmn.MAGNETON, Pkmn.MAGNEZONE, Pkmn.DUSKULL,
+      Pkmn.DUSCLOPS, Pkmn.DUSKNOIR, Pkmn.EEVEE, Pkmn.VAPOREON, Pkmn.JOLTEON,
+      Pkmn.FLAREON, Pkmn.ESPEON, Pkmn.UMBREON, Pkmn.LEAFEON, Pkmn.SYLVEON,
+      Pkmn.SLOWPOKE, Pkmn.SLOWBRO, Pkmn.SLOWKING, Pkmn.BELLSPROUT, Pkmn.WEEPINBELL,
+      Pkmn.VICTREEBEL, Pkmn.GLACEON, Pkmn.SANDILE, Pkmn.KROKOROK, Pkmn.KROOKODILE,
+      Pkmn.ANORITH, Pkmn.ARMALDO, Pkmn.LILEEP, Pkmn.CRADILY, Pkmn.KABUTO,
+      Pkmn.KABUTOPS, Pkmn.OMANYTE, Pkmn.OMASTAR, Pkmn.VENIPEDE, Pkmn.WHIRLIPEDE,
+      Pkmn.SCOLIPEDE, Pkmn.PIKIPEK, Pkmn.TRUMBEAK, Pkmn.TOUCANNON, Pkmn.FLABEBE,
+      Pkmn.FLOETTE, Pkmn.FLORGES
     ],
     [Rarity.RARE] : [
-      Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR, Pokemon.TURTWIG,
-      Pokemon.GROTLE, Pokemon.TORTERRA, Pokemon.NIDORANF, Pokemon.NIDORINA,
-      Pokemon.NIDOQUEEN, Pokemon.NIDORANM, Pokemon.NIDORINO, Pokemon.NIDOKING,
-      Pokemon.PICHU, Pokemon.PIKACHU, Pokemon.RAICHU, Pokemon.TRAPINCH,
-      Pokemon.VIBRAVA, Pokemon.FLYGON, Pokemon.ARON, Pokemon.LAIRON,
-      Pokemon.AGGRON, Pokemon.RHYHORN, Pokemon.RHYDON, Pokemon.RHYPERIOR,
-      Pokemon.TOGEPI, Pokemon.TOGETIC, Pokemon.TOGEKISS, Pokemon.LOTAD,
-      Pokemon.LOMBRE, Pokemon.LUDICOLO, Pokemon.SHINX, Pokemon.LUXIO,
-      Pokemon.LUXRAY, Pokemon.POLIWAG, Pokemon.POLIWHIRL, Pokemon.POLITOED,
-      Pokemon.DRATINI, Pokemon.DRAGONAIR, Pokemon.DRAGONITE, Pokemon.MAGBY,
-      Pokemon.MAGMAR, Pokemon.MAGMORTAR, Pokemon.VANILLITE, Pokemon.VANILLISH,
-      Pokemon.VANILLUXE, Pokemon.DEINO, Pokemon.ZWEILOUS, Pokemon.HYDREIGON,
-      Pokemon.SOLOSIS, Pokemon.DUOSION, Pokemon.REUNICLUS, Pokemon.ARCHEN,
-      Pokemon.ARCHEOPS, Pokemon.SHIELDON, Pokemon.BASTIODON, Pokemon.TIRTOUGA,
-      Pokemon.CARRACOSTA, Pokemon.CRANIDOS, Pokemon.RAMPARDOS, Pokemon.AXEW,
-      Pokemon.FRAXURE, Pokemon.HAXORUS, Pokemon.WHISMUR, Pokemon.LOUDRED,
-      Pokemon.EXPLOUD
+      Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR, Pkmn.TURTWIG,
+      Pkmn.GROTLE, Pkmn.TORTERRA, Pkmn.NIDORANF, Pkmn.NIDORINA,
+      Pkmn.NIDOQUEEN, Pkmn.NIDORANM, Pkmn.NIDORINO, Pkmn.NIDOKING,
+      Pkmn.PICHU, Pkmn.PIKACHU, Pkmn.RAICHU, Pkmn.TRAPINCH,
+      Pkmn.VIBRAVA, Pkmn.FLYGON, Pkmn.ARON, Pkmn.LAIRON,
+      Pkmn.AGGRON, Pkmn.RHYHORN, Pkmn.RHYDON, Pkmn.RHYPERIOR,
+      Pkmn.TOGEPI, Pkmn.TOGETIC, Pkmn.TOGEKISS, Pkmn.LOTAD,
+      Pkmn.LOMBRE, Pkmn.LUDICOLO, Pkmn.SHINX, Pkmn.LUXIO,
+      Pkmn.LUXRAY, Pkmn.POLIWAG, Pkmn.POLIWHIRL, Pkmn.POLITOED,
+      Pkmn.DRATINI, Pkmn.DRAGONAIR, Pkmn.DRAGONITE, Pkmn.MAGBY,
+      Pkmn.MAGMAR, Pkmn.MAGMORTAR, Pkmn.VANILLITE, Pkmn.VANILLISH,
+      Pkmn.VANILLUXE, Pkmn.DEINO, Pkmn.ZWEILOUS, Pkmn.HYDREIGON,
+      Pkmn.SOLOSIS, Pkmn.DUOSION, Pkmn.REUNICLUS, Pkmn.ARCHEN,
+      Pkmn.ARCHEOPS, Pkmn.SHIELDON, Pkmn.BASTIODON, Pkmn.TIRTOUGA,
+      Pkmn.CARRACOSTA, Pkmn.CRANIDOS, Pkmn.RAMPARDOS, Pkmn.AXEW,
+      Pkmn.FRAXURE, Pkmn.HAXORUS, Pkmn.WHISMUR, Pkmn.LOUDRED,
+      Pkmn.EXPLOUD
     ],
     [Rarity.EPIC] : [
-      Pokemon.ABRA, Pokemon.KADABRA, Pokemon.ALAKAZAM,
-      Pokemon.LARVITAR, Pokemon.PUPITAR, Pokemon.TYRANITAR,
-      Pokemon.SLAKOTH, Pokemon.VIGOROTH, Pokemon.SLAKING,
-      Pokemon.RALTS, Pokemon.KIRLIA, Pokemon.GARDEVOIR,
-      Pokemon.BAGON, Pokemon.SHELGON, Pokemon.SALAMENCE,
-      Pokemon.BELDUM, Pokemon.METANG, Pokemon.METAGROSS,
-      Pokemon.GIBLE, Pokemon.GABITE, Pokemon.GARCHOMP,
-      Pokemon.ELEKID, Pokemon.ELECTABUZZ, Pokemon.ELECTIVIRE,
-      Pokemon.LITWICK, Pokemon.LAMPENT, Pokemon.CHANDELURE,
-      Pokemon.SNORUNT, Pokemon.GLALIE, Pokemon.FROSLASS,
-      Pokemon.AERODACTYL, Pokemon.AMAURA, Pokemon.AURORUS,
-      Pokemon.TYRUNT, Pokemon.TYRANTRUM, Pokemon.BUDEW,
-      Pokemon.ROSELIA, Pokemon.ROSERADE, Pokemon.PORYGON,
-      Pokemon.PORYGON2, Pokemon.PORYGONZ, Pokemon.HONEDGE,
-      Pokemon.DOUBLADE, Pokemon.AEGISLASH, Pokemon.CUBONE,
-      Pokemon.MAROWAK, Pokemon.ALOLANMAROWAK, Pokemon.TYMPOLE,
-      Pokemon.PALPITOAD, Pokemon.SEISMITOAD, Pokemon.SEWADDLE,
-      Pokemon.SWADLOON, Pokemon.LEAVANNY, Pokemon.JANGMOO,
-      Pokemon.HAKAMOO, Pokemon.KOMMOO
+      Pkmn.ABRA, Pkmn.KADABRA, Pkmn.ALAKAZAM,
+      Pkmn.LARVITAR, Pkmn.PUPITAR, Pkmn.TYRANITAR,
+      Pkmn.SLAKOTH, Pkmn.VIGOROTH, Pkmn.SLAKING,
+      Pkmn.RALTS, Pkmn.KIRLIA, Pkmn.GARDEVOIR,
+      Pkmn.BAGON, Pkmn.SHELGON, Pkmn.SALAMENCE,
+      Pkmn.BELDUM, Pkmn.METANG, Pkmn.METAGROSS,
+      Pkmn.GIBLE, Pkmn.GABITE, Pkmn.GARCHOMP,
+      Pkmn.ELEKID, Pkmn.ELECTABUZZ, Pkmn.ELECTIVIRE,
+      Pkmn.LITWICK, Pkmn.LAMPENT, Pkmn.CHANDELURE,
+      Pkmn.SNORUNT, Pkmn.GLALIE, Pkmn.FROSLASS,
+      Pkmn.AERODACTYL, Pkmn.AMAURA, Pkmn.AURORUS,
+      Pkmn.TYRUNT, Pkmn.TYRANTRUM, Pkmn.BUDEW,
+      Pkmn.ROSELIA, Pkmn.ROSERADE, Pkmn.PORYGON,
+      Pkmn.PORYGON2, Pkmn.PORYGONZ, Pkmn.HONEDGE,
+      Pkmn.DOUBLADE, Pkmn.AEGISLASH, Pkmn.CUBONE,
+      Pkmn.MAROWAK, Pkmn.ALOLANMAROWAK, Pkmn.TYMPOLE,
+      Pkmn.PALPITOAD, Pkmn.SEISMITOAD, Pkmn.SEWADDLE,
+      Pkmn.SWADLOON, Pkmn.LEAVANNY, Pkmn.JANGMOO,
+      Pkmn.HAKAMOO, Pkmn.KOMMOO
     ],
     [Rarity.LEGENDARY] : [
-      Pokemon.GASTLY, Pokemon.HAUNTER, Pokemon.GENGAR,
-      Pokemon.ONIX, Pokemon.STEELIX, Pokemon.MEGASTEELIX,
-      Pokemon.SCYTHER, Pokemon.SCIZOR, Pokemon.MEGASCIZOR,
-      Pokemon.RIOLU, Pokemon.LUCARIO, Pokemon.MEGALUCARIO,
-      Pokemon.MEDITITE, Pokemon.MEDICHAM, Pokemon.MEGAMEDICHAM,
-      Pokemon.NUMEL, Pokemon.CAMERUPT, Pokemon.MEGACAMERUPT,
-      Pokemon.SNOVER, Pokemon.ABOMASNOW, Pokemon.MEGAABOMASNOW,
-      Pokemon.SWABLU, Pokemon.BUNEARY, Pokemon.LOPUNNY,
-      Pokemon.MEGALOPUNNY, Pokemon.ELECTRIKE, Pokemon.MANECTRIC,
-      Pokemon.MEGAMANECTRIC, Pokemon.SHUPPET, Pokemon.BANETTE,
-      Pokemon.MEGABANETTE, Pokemon.ALTARIA, Pokemon.MEGAALTARIA
+      Pkmn.GASTLY, Pkmn.HAUNTER, Pkmn.GENGAR,
+      Pkmn.ONIX, Pkmn.STEELIX, Pkmn.MEGASTEELIX,
+      Pkmn.SCYTHER, Pkmn.SCIZOR, Pkmn.MEGASCIZOR,
+      Pkmn.RIOLU, Pkmn.LUCARIO, Pkmn.MEGALUCARIO,
+      Pkmn.MEDITITE, Pkmn.MEDICHAM, Pkmn.MEGAMEDICHAM,
+      Pkmn.NUMEL, Pkmn.CAMERUPT, Pkmn.MEGACAMERUPT,
+      Pkmn.SNOVER, Pkmn.ABOMASNOW, Pkmn.MEGAABOMASNOW,
+      Pkmn.SWABLU, Pkmn.BUNEARY, Pkmn.LOPUNNY,
+      Pkmn.MEGALOPUNNY, Pkmn.ELECTRIKE, Pkmn.MANECTRIC,
+      Pkmn.MEGAMANECTRIC, Pkmn.SHUPPET, Pkmn.BANETTE,
+      Pkmn.MEGABANETTE, Pkmn.ALTARIA, Pkmn.MEGAALTARIA
     ],
     [Rarity.MYTHICAL] : [
-      Pokemon.LUGIA, Pokemon.GIRATINA, Pokemon.ZAPDOS,
-      Pokemon.MOLTRES, Pokemon.ARTICUNO, Pokemon.DIALGA,
-      Pokemon.PALKIA, Pokemon.SUICUNE, Pokemon.RAIKOU,
-      Pokemon.ENTEI, Pokemon.REGICE, Pokemon.REGIROCK,
-      Pokemon.REGISTEEL, Pokemon.KYOGRE, Pokemon.GROUDON,
-      Pokemon.RAYQUAZA, Pokemon.REGIGIGAS, Pokemon.DARKRAI,
-      Pokemon.VOLCARONA, Pokemon.LANDORUS, Pokemon.THUNDURUS,
-      Pokemon.TORNADUS, Pokemon.KELDEO, Pokemon.TERRAKION,
-      Pokemon.VIRIZION, Pokemon.COBALION, Pokemon.MANAPHY,
-      Pokemon.ROTOM, Pokemon.SPIRITOMB, Pokemon.ABSOL,
-      Pokemon.LAPRAS, Pokemon.LATIAS, Pokemon.LATIOS,
-      Pokemon.MESPRIT, Pokemon.AZELF, Pokemon.UXIE,
-      Pokemon.MEWTWO, Pokemon.KYUREM, Pokemon.RESHIRAM,
-      Pokemon.ZEKROM, Pokemon.CELEBI, Pokemon.VICTINI,
-      Pokemon.JIRACHI, Pokemon.ARCEUS, Pokemon.DEOXYS,
-      Pokemon.SHAYMIN, Pokemon.CRESSELIA, Pokemon.HEATRAN,
-      Pokemon.HOOH, Pokemon.PRIMALKYOGRE, Pokemon.PRIMALGROUDON,
-      Pokemon.MEGARAYQUAZA, Pokemon.MELOETTA, Pokemon.CASTFORM,
-      Pokemon.CASTFORMSUN, Pokemon.CASTFORMRAIN, Pokemon.CASTFORMHAIL
+      Pkmn.LUGIA, Pkmn.GIRATINA, Pkmn.ZAPDOS,
+      Pkmn.MOLTRES, Pkmn.ARTICUNO, Pkmn.DIALGA,
+      Pkmn.PALKIA, Pkmn.SUICUNE, Pkmn.RAIKOU,
+      Pkmn.ENTEI, Pkmn.REGICE, Pkmn.REGIROCK,
+      Pkmn.REGISTEEL, Pkmn.KYOGRE, Pkmn.GROUDON,
+      Pkmn.RAYQUAZA, Pkmn.REGIGIGAS, Pkmn.DARKRAI,
+      Pkmn.VOLCARONA, Pkmn.LANDORUS, Pkmn.THUNDURUS,
+      Pkmn.TORNADUS, Pkmn.KELDEO, Pkmn.TERRAKION,
+      Pkmn.VIRIZION, Pkmn.COBALION, Pkmn.MANAPHY,
+      Pkmn.ROTOM, Pkmn.SPIRITOMB, Pkmn.ABSOL,
+      Pkmn.LAPRAS, Pkmn.LATIAS, Pkmn.LATIOS,
+      Pkmn.MESPRIT, Pkmn.AZELF, Pkmn.UXIE,
+      Pkmn.MEWTWO, Pkmn.KYUREM, Pkmn.RESHIRAM,
+      Pkmn.ZEKROM, Pkmn.CELEBI, Pkmn.VICTINI,
+      Pkmn.JIRACHI, Pkmn.ARCEUS, Pkmn.DEOXYS,
+      Pkmn.SHAYMIN, Pkmn.CRESSELIA, Pkmn.HEATRAN,
+      Pkmn.HOOH, Pkmn.PRIMALKYOGRE, Pkmn.PRIMALGROUDON,
+      Pkmn.MEGARAYQUAZA, Pkmn.MELOETTA, Pkmn.CASTFORM,
+      Pkmn.CASTFORMSUN, Pkmn.CASTFORMRAIN, Pkmn.CASTFORMHAIL
     ],
-    [Rarity.NEUTRAL] : [Pokemon.GYARADOS],
+    [Rarity.NEUTRAL] : [Pkmn.GYARADOS],
     [Rarity.SUMMON] : [
-      Pokemon.CARVANHA,
-      Pokemon.ODDISH,
-      Pokemon.GLOOM,
-      Pokemon.VILEPLUME,
-      Pokemon.BELLOSSOM,
-      Pokemon.HOUNDOUR
+      Pkmn.CARVANHA,
+      Pkmn.ODDISH,
+      Pkmn.GLOOM,
+      Pkmn.VILEPLUME,
+      Pkmn.BELLOSSOM,
+      Pkmn.HOUNDOUR
     ]
   };
 
@@ -954,55 +954,55 @@ export const EFFECTS_ICON = Object.freeze({
   export const NEUTRAL_STAGE = [
     {
       turn: 1,
-      avatar: Pokemon.MAGIKARP
+      avatar: Pkmn.MAGIKARP
     },
     {
       turn: 2,
-      avatar: Pokemon.RATICATE
+      avatar: Pkmn.RATICATE
     },
     {
       turn: 3,
-      avatar: Pokemon.FEAROW
+      avatar: Pkmn.FEAROW
     },
     {
       turn: 10,
-      avatar: Pokemon.GYARADOS
+      avatar: Pkmn.GYARADOS
     },
     {
       turn: 15,
-      avatar: Pokemon.LUGIA
+      avatar: Pkmn.LUGIA
     },
     {
       turn: 20,
-      avatar: Pokemon.GIRATINA
+      avatar: Pkmn.GIRATINA
     },
     {
       turn: 25,
-      avatar: Pokemon.ZAPDOS
+      avatar: Pkmn.ZAPDOS
     },
     {
       turn: 30,
-      avatar: Pokemon.DIALGA
+      avatar: Pkmn.DIALGA
     },
     {
       turn: 35,
-      avatar: Pokemon.SUICUNE
+      avatar: Pkmn.SUICUNE
     },
     {
       turn: 40,
-      avatar: Pokemon.REGICE
+      avatar: Pkmn.REGICE
     },
     {
       turn: 45,
-      avatar: Pokemon.RAYQUAZA
+      avatar: Pkmn.RAYQUAZA
     },
     {
       turn: 50,
-      avatar: Pokemon.RAYQUAZA
+      avatar: Pkmn.RAYQUAZA
     },
     {
       turn: 55,
-      avatar: Pokemon.RAYQUAZA
+      avatar: Pkmn.RAYQUAZA
     }];
 
 
@@ -1068,896 +1068,896 @@ export const EFFECTS_ICON = Object.freeze({
       FOURTH_STATION_PATH: {
         id: 'FOURTH_STATION_PATH',
         name: '4th Station Path',
-        pokemons: [Pokemon.IVYSAUR, Pokemon.METAPOD, Pokemon.RATICATE, Pokemon.WEEPINBELL, Pokemon.BAYLEEF, Pokemon.ROSELIA, Pokemon.FLYGON, Pokemon.TORTERRA, Pokemon.SKUNTANK, Pokemon.URSARING, Pokemon.BIBAREL],
+        pokemons: [Pkmn.IVYSAUR, Pkmn.METAPOD, Pkmn.RATICATE, Pkmn.WEEPINBELL, Pkmn.BAYLEEF, Pkmn.ROSELIA, Pkmn.FLYGON, Pkmn.TORTERRA, Pkmn.SKUNTANK, Pkmn.URSARING, Pkmn.BIBAREL],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.GRASS
       },
       SEVEN_STATION_PATH: {
         id: 'SEVEN_STATION_PATH',
         name: '7th Station Path',
-        pokemons: [Pokemon.SKUNTANK, Pokemon.FEAROW, Pokemon.PRIMEAPE, Pokemon.MAROWAK, Pokemon.HITMONCHAN, Pokemon.FURRET, Pokemon.URSARING, Pokemon.SHEDNINJA, Pokemon.BIBAREL],
+        pokemons: [Pkmn.SKUNTANK, Pkmn.FEAROW, Pkmn.PRIMEAPE, Pkmn.MAROWAK, Pkmn.HITMONCHAN, Pkmn.FURRET, Pkmn.URSARING, Pkmn.SHEDNINJA, Pkmn.BIBAREL],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.FIGHTING
       },
       BARREN_VALLEY: {
         id: 'BARREN_VALLEY',
         name: 'Barren Valley',
-        pokemons: [Pokemon.JUMPLUFF, Pokemon.FLYGON, Pokemon.LUNATONE, Pokemon.HONCHKROW, Pokemon.GLAMEOW, Pokemon.TOXICROAK],
+        pokemons: [Pkmn.JUMPLUFF, Pkmn.FLYGON, Pkmn.LUNATONE, Pkmn.HONCHKROW, Pkmn.GLAMEOW, Pkmn.TOXICROAK],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.DARK
       },
       DARK_ICE_MOUNTAIN_PEAK: {
         id: 'DARK_ICE_MOUNTAIN_PEAK',
         name: 'Dark Ice Mountain Peak',
-        pokemons: [Pokemon.GENGAR, Pokemon.SKARMORY, Pokemon.DUSKULL, Pokemon.METANG, Pokemon.LICKILICKY, Pokemon.TANGROWTH],
+        pokemons: [Pkmn.GENGAR, Pkmn.SKARMORY, Pkmn.DUSKULL, Pkmn.METANG, Pkmn.LICKILICKY, Pkmn.TANGROWTH],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GHOST
       },
       DARK_ICE_MOUNTAIN: {
         id: 'DARK_ICE_MOUNTAIN',
         name: 'Dark Ice Mountain',
-        pokemons: [Pokemon.BANETTE, Pokemon.GENGAR, Pokemon.SKARMORY, Pokemon.DUSKULL, Pokemon.METANG, Pokemon.LICKILICKY, Pokemon.TANGROWTH],
+        pokemons: [Pkmn.BANETTE, Pkmn.GENGAR, Pkmn.SKARMORY, Pkmn.DUSKULL, Pkmn.METANG, Pkmn.LICKILICKY, Pkmn.TANGROWTH],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GHOST
       },
       DARK_WASTELAND: {
         id: 'DARK_WASTELAND',
         name: 'Dark Wasteland',
-        pokemons: [Pokemon.GASTLY, Pokemon.ONIX, Pokemon.MISDREAVUS, Pokemon.SHIFTRY, Pokemon.SOLROCK, Pokemon.SKORUPI],
+        pokemons: [Pkmn.GASTLY, Pkmn.ONIX, Pkmn.MISDREAVUS, Pkmn.SHIFTRY, Pkmn.SOLROCK, Pkmn.SKORUPI],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GHOST
       },
       DEEP_BOULDER_QUARRY: {
         id: 'DEEP_BOULDER_QUARRY',
         name: 'Deep Boulder Quarry',
-        pokemons: [Pokemon.CLAYDOL, Pokemon.GLISCOR, Pokemon.NINJASK, Pokemon.MUK, Pokemon.PROBOPASS, Pokemon.SHELGON, Pokemon.RHYDON, Pokemon.TANGROWTH, Pokemon.METANG, Pokemon.STEELIX],
+        pokemons: [Pkmn.CLAYDOL, Pkmn.GLISCOR, Pkmn.NINJASK, Pkmn.MUK, Pkmn.PROBOPASS, Pkmn.SHELGON, Pkmn.RHYDON, Pkmn.TANGROWTH, Pkmn.METANG, Pkmn.STEELIX],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.GROUND
       },
       LIMESTONE_CAVERN: {
         id: 'LIMESTONE_CAVERN',
         name: 'Limestone Cavern',
-        pokemons: [Pokemon.KINGLER, Pokemon.MARILL, Pokemon.SLOWKING, Pokemon.VOLBEAT, Pokemon.ILLUMISE, Pokemon.SEVIPER, Pokemon.DRAGONAIR],
+        pokemons: [Pkmn.KINGLER, Pkmn.MARILL, Pkmn.SLOWKING, Pkmn.VOLBEAT, Pkmn.ILLUMISE, Pkmn.SEVIPER, Pkmn.DRAGONAIR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.WATER
       },
       DEEP_LIMESTONE_CAVERN: {
         id: 'DEEP_LIMESTONE_CAVERN',
         name: 'Deep Limestone Cavern',
-        pokemons: [Pokemon.DRAGONAIR, Pokemon.AERODACTYL, Pokemon.MASQUERAIN, Pokemon.VOLBEAT, Pokemon.ILLUMISE, Pokemon.SEVIPER, Pokemon.POLIWHIRL, Pokemon.DUGTRIO],
+        pokemons: [Pkmn.DRAGONAIR, Pkmn.AERODACTYL, Pkmn.MASQUERAIN, Pkmn.VOLBEAT, Pkmn.ILLUMISE, Pkmn.SEVIPER, Pkmn.POLIWHIRL, Pkmn.DUGTRIO],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.WATER
       },
       ICICLE_FOREST: {
         id: 'ICICLE_FOREST',
         name: 'Icicle Forest',
-        pokemons: [Pokemon.GENGAR, Pokemon.WEEZING, Pokemon.CACTURNE, Pokemon.METAGROSS, Pokemon.LICKILICKY, Pokemon.GLISCOR, Pokemon.DRIFBLIM],
+        pokemons: [Pkmn.GENGAR, Pkmn.WEEZING, Pkmn.CACTURNE, Pkmn.METAGROSS, Pkmn.LICKILICKY, Pkmn.GLISCOR, Pkmn.DRIFBLIM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.ICE
       },
       MURKY_FOREST: {
         id: 'MURKY_FOREST',
         name: 'Murky Forest',
-        pokemons: [Pokemon.EXEGGCUTE, Pokemon.HOOTHOOT, Pokemon.HOPPIP, Pokemon.DODUO, Pokemon.WEEDLE, Pokemon.BURMY, Pokemon.SPINARAK, Pokemon.WURMPLE],
+        pokemons: [Pkmn.EXEGGCUTE, Pkmn.HOOTHOOT, Pkmn.HOPPIP, Pkmn.DODUO, Pkmn.WEEDLE, Pkmn.BURMY, Pkmn.SPINARAK, Pkmn.WURMPLE],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.BUG
       },
       SPACIAL_CLIFFS: {
         id: 'SPACIAL_CLIFFS',
         name: 'Spacial Cliffs',
-        pokemons: [Pokemon.HAUNTER, Pokemon.BELDUM, Pokemon.MISDREAVUS, Pokemon.KOFFING, Pokemon.SHEDNINJA, Pokemon.BANETTE, Pokemon.MISMAGIUS],
+        pokemons: [Pkmn.HAUNTER, Pkmn.BELDUM, Pkmn.MISDREAVUS, Pkmn.KOFFING, Pkmn.SHEDNINJA, Pkmn.BANETTE, Pkmn.MISMAGIUS],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GHOST
       },
       TEMPORAL_SPIRE_FUTURE: {
         id: 'TEMPORAL_SPIRE_FUTURE',
         name: 'Temporal Spire Future',
-        pokemons: [Pokemon.GOLBAT, Pokemon.ALAKAZAM, Pokemon.MAGNETON, Pokemon.GASTLY, Pokemon.HYPNO, Pokemon.CLAYDOL, Pokemon.MISMAGIUS, Pokemon.BRONZONG, Pokemon.PORYGON2, Pokemon.CROBAT],
+        pokemons: [Pkmn.GOLBAT, Pkmn.ALAKAZAM, Pkmn.MAGNETON, Pkmn.GASTLY, Pkmn.HYPNO, Pkmn.CLAYDOL, Pkmn.MISMAGIUS, Pkmn.BRONZONG, Pkmn.PORYGON2, Pkmn.CROBAT],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       TEMPORAL_TOWER_FUTURE: {
         id: 'TEMPORAL_TOWER_FUTURE',
         name: 'Temporal Tower Future',
-        pokemons: [Pokemon.ZUBAT, Pokemon.KADABRA, Pokemon.MAGNEMITE, Pokemon.GASTLY, Pokemon.DROWZEE, Pokemon.CLAYDOL, Pokemon.MISMAGIUS, Pokemon.BRONZONG, Pokemon.GOLBAT],
+        pokemons: [Pkmn.ZUBAT, Pkmn.KADABRA, Pkmn.MAGNEMITE, Pkmn.GASTLY, Pkmn.DROWZEE, Pkmn.CLAYDOL, Pkmn.MISMAGIUS, Pkmn.BRONZONG, Pkmn.GOLBAT],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       VAST_ICE_MOUNTAIN_PEAK: {
         id: 'VAST_ICE_MOUNTAIN_PEAK',
         name: 'Vast Ice Mountain Peak',
-        pokemons: [Pokemon.GENGAR, Pokemon.AERODACTYL, Pokemon.SMOOCHUM, Pokemon.DUSCLOPS, Pokemon.ABSOL, Pokemon.METAGROSS, Pokemon.MAGNEZONE, Pokemon.GLISCOR],
+        pokemons: [Pkmn.GENGAR, Pkmn.AERODACTYL, Pkmn.SMOOCHUM, Pkmn.DUSCLOPS, Pkmn.ABSOL, Pkmn.METAGROSS, Pkmn.MAGNEZONE, Pkmn.GLISCOR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GHOST
       },
       VAST_ICE_MOUNTAIN: {
         id: 'VAST_ICE_MOUNTAIN',
         name: 'Vast Ice Mountain',
-        pokemons: [Pokemon.GENGAR, Pokemon.AERODACTYL, Pokemon.SMOOCHUM, Pokemon.DUSCLOPS, Pokemon.ABSOL, Pokemon.METAGROSS, Pokemon.MAGNEZONE, Pokemon.GLISCOR],
+        pokemons: [Pkmn.GENGAR, Pkmn.AERODACTYL, Pkmn.SMOOCHUM, Pkmn.DUSCLOPS, Pkmn.ABSOL, Pkmn.METAGROSS, Pkmn.MAGNEZONE, Pkmn.GLISCOR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GHOST
       },
       AMP_PLAINS: {
         id: 'AMP_PLAINS',
         name: 'Amp Plains',
-        pokemons: [Pokemon.PLUSLE, Pokemon.MINUN, Pokemon.MAREEP, Pokemon.PHANPY, Pokemon.ELEKID, Pokemon.SHINX, Pokemon.GIRAFARIG, Pokemon.ZAPDOS, Pokemon.FLAFFY, Pokemon.PIKACHU, Pokemon.PICHU, Pokemon.YANMEGA, Pokemon.ELECTABUZZ],
+        pokemons: [Pkmn.PLUSLE, Pkmn.MINUN, Pkmn.MAREEP, Pkmn.PHANPY, Pkmn.ELEKID, Pkmn.SHINX, Pkmn.GIRAFARIG, Pkmn.ZAPDOS, Pkmn.FLAFFY, Pkmn.PIKACHU, Pkmn.PICHU, Pkmn.YANMEGA, Pkmn.ELECTABUZZ],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.ELECTRIC
       },
       FAR_AMP_PLAINS: {
         id: 'FAR_AMP_PLAINS',
         name: 'Far Amp Plains',
-        pokemons: [Pokemon.SHINX, Pokemon.GIRAFARIG, Pokemon.PIKACHU, Pokemon.PICHU, Pokemon.YANMEGA, Pokemon.FLAFFY, Pokemon.ELECTABUZZ, Pokemon.TAUROS, Pokemon.DODRIO, Pokemon.ELECTRIKE, Pokemon.LUXIO, Pokemon.LUXRAY, Pokemon.AMPHAROS],
+        pokemons: [Pkmn.SHINX, Pkmn.GIRAFARIG, Pkmn.PIKACHU, Pkmn.PICHU, Pkmn.YANMEGA, Pkmn.FLAFFY, Pkmn.ELECTABUZZ, Pkmn.TAUROS, Pkmn.DODRIO, Pkmn.ELECTRIKE, Pkmn.LUXIO, Pkmn.LUXRAY, Pkmn.AMPHAROS],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.ELECTRIC
       },
       FINAL_MAZE_B23F: {
         id: 'FINAL_MAZE_B23F',
         name: 'Final Maze',
-        pokemons: [Pokemon.MACHOP, Pokemon.MAGNEMITE, Pokemon.DODUO, Pokemon.OMANYTE, Pokemon.KABUTO, Pokemon.SPINARAK, Pokemon.MAREEP, Pokemon.MISDREAVUS, Pokemon.SWINUB, Pokemon.HOUNDOUR, Pokemon.PHANPY, Pokemon.MAGBY, Pokemon. POOCHYENA, Pokemon.SHROOMISH, Pokemon.MAWILE, Pokemon.MEDITITE, Pokemon.BAGON, Pokemon.STARAVIA, Pokemon.SKORUPI, Pokemon.CARNIVINE, Pokemon.JIRACHI, Pokemon.MOLTRES, Pokemon.SUICUNE],
+        pokemons: [Pkmn.MACHOP, Pkmn.MAGNEMITE, Pkmn.DODUO, Pkmn.OMANYTE, Pkmn.KABUTO, Pkmn.SPINARAK, Pkmn.MAREEP, Pkmn.MISDREAVUS, Pkmn.SWINUB, Pkmn.HOUNDOUR, Pkmn.PHANPY, Pkmn.MAGBY, Pkmn. POOCHYENA, Pkmn.SHROOMISH, Pkmn.MAWILE, Pkmn.MEDITITE, Pkmn.BAGON, Pkmn.STARAVIA, Pkmn.SKORUPI, Pkmn.CARNIVINE, Pkmn.JIRACHI, Pkmn.MOLTRES, Pkmn.SUICUNE],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.GRASS
       },
       FOGGY_FOREST: {
         id: 'FOGGY_FOREST',
         name: 'Foggy Forest',
-        pokemons: [Pokemon.HOOTHOOT, Pokemon.DUNSPARCE, Pokemon.SMEARGLE, Pokemon.CHERUBI, Pokemon.SKIPLOOM, Pokemon.ZIGZAGOON, Pokemon.PACHIRISU, Pokemon.NOCTOWL, Pokemon.STANTLER, Pokemon.BUNEARY, Pokemon.PINSIR, Pokemon. BRELOOM],
+        pokemons: [Pkmn.HOOTHOOT, Pkmn.DUNSPARCE, Pkmn.SMEARGLE, Pkmn.CHERUBI, Pkmn.SKIPLOOM, Pkmn.ZIGZAGOON, Pkmn.PACHIRISU, Pkmn.NOCTOWL, Pkmn.STANTLER, Pkmn.BUNEARY, Pkmn.PINSIR, Pkmn. BRELOOM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.NORMAL
       },
       FOREST_PATH: {
         id: 'FOREST_PATH',
         name: 'Forest Path',
-        pokemons: [Pokemon.PINSIR, Pokemon.DUNSPARCE, Pokemon.SWINUB, Pokemon.HOUNDOUR, Pokemon.LINOONE, Pokemon.KRICKEROT],
+        pokemons: [Pkmn.PINSIR, Pkmn.DUNSPARCE, Pkmn.SWINUB, Pkmn.HOUNDOUR, Pkmn.LINOONE, Pkmn.KRICKEROT],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GRASS
       },
       GOLD_CHAMBER: {
         id: 'GOLD_CHAMBER',
         name: 'Gold Chamber',
-        pokemons: [Pokemon.MACHOP, Pokemon.MAGNEMITE, Pokemon.DODUO, Pokemon.OMANYTE, Pokemon.KABUTO, Pokemon.SPINARAK, Pokemon.MAREEP, Pokemon.MISDREAVUS, Pokemon.SWINUB, Pokemon.HOUNDOUR, Pokemon.PHANPY, Pokemon.MAGBY, Pokemon. POOCHYENA, Pokemon.SHROOMISH, Pokemon.MAWILE, Pokemon.MEDITITE, Pokemon.BAGON, Pokemon.STARAVIA, Pokemon.SKORUPI, Pokemon.CARNIVINE, Pokemon.JIRACHI, Pokemon.MOLTRES, Pokemon.SUICUNE],
+        pokemons: [Pkmn.MACHOP, Pkmn.MAGNEMITE, Pkmn.DODUO, Pkmn.OMANYTE, Pkmn.KABUTO, Pkmn.SPINARAK, Pkmn.MAREEP, Pkmn.MISDREAVUS, Pkmn.SWINUB, Pkmn.HOUNDOUR, Pkmn.PHANPY, Pkmn.MAGBY, Pkmn. POOCHYENA, Pkmn.SHROOMISH, Pkmn.MAWILE, Pkmn.MEDITITE, Pkmn.BAGON, Pkmn.STARAVIA, Pkmn.SKORUPI, Pkmn.CARNIVINE, Pkmn.JIRACHI, Pkmn.MOLTRES, Pkmn.SUICUNE],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.NORMAL
       },
       HIDDEN_HIGHLAND: {
         id: 'HIDDEN_HIGHLAND',
         name: 'Hidden Highland',
-        pokemons: [Pokemon.DRAGONITE, Pokemon.MANECTRIC, Pokemon.TROPIUS, Pokemon.RAMPARDOS, Pokemon.BASTIODON, Pokemon.PURUGLY, Pokemon.GARCHOMP, Pokemon.ABOMASNOW, Pokemon.MAGMORTAR],
+        pokemons: [Pkmn.DRAGONITE, Pkmn.MANECTRIC, Pkmn.TROPIUS, Pkmn.RAMPARDOS, Pkmn.BASTIODON, Pkmn.PURUGLY, Pkmn.GARCHOMP, Pkmn.ABOMASNOW, Pkmn.MAGMORTAR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GRASS
       },
       MYSTERY_JUNGLE_01F_15F: {
         id: 'MYSTERY_JUNGLE_01F_15F',
         name: 'Mystery Jungle',
-        pokemons: [Pokemon.MEW, Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR, Pokemon.METAPOD, Pokemon.RATTATA, Pokemon.RATICATE, Pokemon.SPEAROW, Pokemon.NIDORANF, Pokemon.NIDORANM, Pokemon.VILEPLUME, Pokemon.BELLSPROUT, Pokemon.WEEPINBELL, Pokemon.VICTREEBEL, Pokemon.EXEGGCUTE, Pokemon.KOFFING, Pokemon.SCYTHER, Pokemon.CHIKORITA, Pokemon.BAYLEEF, Pokemon.MEGANIUM, Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE, Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.ROSELIA, Pokemon.FLYGON, Pokemon.MUNCHLAX, Pokemon.TURTWIG, Pokemon.GROTLE, Pokemon.TORTERRA],
+        pokemons: [Pkmn.MEW, Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR, Pkmn.METAPOD, Pkmn.RATTATA, Pkmn.RATICATE, Pkmn.SPEAROW, Pkmn.NIDORANF, Pkmn.NIDORANM, Pkmn.VILEPLUME, Pkmn.BELLSPROUT, Pkmn.WEEPINBELL, Pkmn.VICTREEBEL, Pkmn.EXEGGCUTE, Pkmn.KOFFING, Pkmn.SCYTHER, Pkmn.CHIKORITA, Pkmn.BAYLEEF, Pkmn.MEGANIUM, Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE, Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.ROSELIA, Pkmn.FLYGON, Pkmn.MUNCHLAX, Pkmn.TURTWIG, Pkmn.GROTLE, Pkmn.TORTERRA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.WALL_ALT_3, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GRASS
       },
       MYSTERY_JUNGLE_16F_30F: {
         id: 'MYSTERY_JUNGLE_16F_30F',
         name: 'Mystery Jungle',
-        pokemons: [Pokemon.MEW, Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR, Pokemon.METAPOD, Pokemon.RATTATA, Pokemon.RATICATE, Pokemon.SPEAROW, Pokemon.NIDORANF, Pokemon.NIDORANM, Pokemon.VILEPLUME, Pokemon.BELLSPROUT, Pokemon.WEEPINBELL, Pokemon.VICTREEBEL, Pokemon.EXEGGCUTE, Pokemon.KOFFING, Pokemon.SCYTHER, Pokemon.CHIKORITA, Pokemon.BAYLEEF, Pokemon.MEGANIUM, Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE, Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.ROSELIA, Pokemon.FLYGON, Pokemon.MUNCHLAX, Pokemon.TURTWIG, Pokemon.GROTLE, Pokemon.TORTERRA],
+        pokemons: [Pkmn.MEW, Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR, Pkmn.METAPOD, Pkmn.RATTATA, Pkmn.RATICATE, Pkmn.SPEAROW, Pkmn.NIDORANF, Pkmn.NIDORANM, Pkmn.VILEPLUME, Pkmn.BELLSPROUT, Pkmn.WEEPINBELL, Pkmn.VICTREEBEL, Pkmn.EXEGGCUTE, Pkmn.KOFFING, Pkmn.SCYTHER, Pkmn.CHIKORITA, Pkmn.BAYLEEF, Pkmn.MEGANIUM, Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE, Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.ROSELIA, Pkmn.FLYGON, Pkmn.MUNCHLAX, Pkmn.TURTWIG, Pkmn.GROTLE, Pkmn.TORTERRA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GRASS
       },
       MYSTIFYING_FOREST: {
         id: 'MYSTIFYING_FOREST',
         name: 'Mystifying Forest',
-        pokemons: [Pokemon.CELEBI, Pokemon.DARKRAI, Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR, Pokemon.METAPOD, Pokemon.RATTATA, Pokemon.RATICATE, Pokemon.SPEAROW, Pokemon.NIDORANF, Pokemon.NIDORANM, Pokemon.VILEPLUME, Pokemon.BELLSPROUT, Pokemon.WEEPINBELL, Pokemon.VICTREEBEL, Pokemon.EXEGGCUTE, Pokemon.KOFFING, Pokemon.SCYTHER, Pokemon.CHIKORITA, Pokemon.BAYLEEF, Pokemon.MEGANIUM, Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE, Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.ROSELIA, Pokemon.FLYGON, Pokemon.MUNCHLAX, Pokemon.TURTWIG, Pokemon.GROTLE, Pokemon.TORTERRA],
+        pokemons: [Pkmn.CELEBI, Pkmn.DARKRAI, Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR, Pkmn.METAPOD, Pkmn.RATTATA, Pkmn.RATICATE, Pkmn.SPEAROW, Pkmn.NIDORANF, Pkmn.NIDORANM, Pkmn.VILEPLUME, Pkmn.BELLSPROUT, Pkmn.WEEPINBELL, Pkmn.VICTREEBEL, Pkmn.EXEGGCUTE, Pkmn.KOFFING, Pkmn.SCYTHER, Pkmn.CHIKORITA, Pkmn.BAYLEEF, Pkmn.MEGANIUM, Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE, Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.ROSELIA, Pkmn.FLYGON, Pkmn.MUNCHLAX, Pkmn.TURTWIG, Pkmn.GROTLE, Pkmn.TORTERRA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GRASS
       },
       BEACH_CAVE: {
         id: 'BEACH_CAVE',
         name: 'Beach Cave',
-        pokemons: [Pokemon.SHELLDER, Pokemon.SHELLOS, Pokemon.KABUTO, Pokemon.CORSOLA],
+        pokemons: [Pkmn.SHELLDER, Pkmn.SHELLOS, Pkmn.KABUTO, Pkmn.CORSOLA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.GROUND_ALT_4, HDR.WATER],
         type: Synergy.WATER
       },
       BOTTOMLESS_SEA: {
         id: 'BOTTOMLESS_SEA',
         name: 'Bottomless Sea',
-        pokemons: [Pokemon.KYOGRE, Pokemon.GYARADOS, Pokemon.REMORAID, Pokemon.KINGDRA, Pokemon.WAILMER, Pokemon.CLAMPERL, Pokemon.FINNEON, Pokemon.TENTACRUEL, Pokemon.SLOWBRO, Pokemon.HORSEA, Pokemon.SEADRA, Pokemon.STARMIE, Pokemon.SLOWKING, Pokemon.LAPRAS, Pokemon.WAILORD],
+        pokemons: [Pkmn.KYOGRE, Pkmn.GYARADOS, Pkmn.REMORAID, Pkmn.KINGDRA, Pkmn.WAILMER, Pkmn.CLAMPERL, Pkmn.FINNEON, Pkmn.TENTACRUEL, Pkmn.SLOWBRO, Pkmn.HORSEA, Pkmn.SEADRA, Pkmn.STARMIE, Pkmn.SLOWKING, Pkmn.LAPRAS, Pkmn.WAILORD],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.WATER],
         type: Synergy.WATER
       },
       BRINE_CAVE: {
         id: 'BRINE_CAVE',
         name: 'Brine Cave',
-        pokemons: [Pokemon.SEEL, Pokemon.OMANYTE, Pokemon.KINGLER, Pokemon.PELIPPER, Pokemon.GASTRODON, Pokemon.TENTACOOL, Pokemon.DEWGONG, Pokemon.STARYU, Pokemon.DRAGONAIR],
+        pokemons: [Pkmn.SEEL, Pkmn.OMANYTE, Pkmn.KINGLER, Pkmn.PELIPPER, Pkmn.GASTRODON, Pkmn.TENTACOOL, Pkmn.DEWGONG, Pkmn.STARYU, Pkmn.DRAGONAIR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.WATER
       },
       CONCEALED_RUINS: {
         id: 'CONCEALED_RUINS',
         name: 'Concealed Ruins',
-        pokemons: [Pokemon.PIDGEY, Pokemon.VOLTORB, Pokemon.POOCHYENA, Pokemon.TAILOW, Pokemon.LOUDRED, Pokemon.NIDOQUEEN, Pokemon.WEEZING, Pokemon.MURKROW, Pokemon.DELCATTY, Pokemon.PIDGEOTTO, Pokemon.SHUPPET, Pokemon.ELECTRODE, Pokemon.EXPLOUD, Pokemon.RAIKOU, Pokemon.PIDGEOT],
+        pokemons: [Pkmn.PIDGEY, Pkmn.VOLTORB, Pkmn.POOCHYENA, Pkmn.TAILOW, Pkmn.LOUDRED, Pkmn.NIDOQUEEN, Pkmn.WEEZING, Pkmn.MURKROW, Pkmn.DELCATTY, Pkmn.PIDGEOTTO, Pkmn.SHUPPET, Pkmn.ELECTRODE, Pkmn.EXPLOUD, Pkmn.RAIKOU, Pkmn.PIDGEOT],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.NORMAL
       },
       CRAGGY_COAST: {
         id: 'CRAGGY_COAST',
         name: 'Craggy Coast',
-        pokemons: [Pokemon.SPHEAL, Pokemon.KRABBY, Pokemon.DRATINI, Pokemon.WINGULL, Pokemon.GASTRODON, Pokemon.SEALEO],
+        pokemons: [Pkmn.SPHEAL, Pkmn.KRABBY, Pkmn.DRATINI, Pkmn.WINGULL, Pkmn.GASTRODON, Pkmn.SEALEO],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.WATER
       },
       CRYSTAL_CAVE_01F_05F: {
         id: 'CRYSTAL_CAVE_01F_05F',
         name: 'Crystal Cave',
-        pokemons: [Pokemon.GRAVELER, Pokemon.SEVIPER, Pokemon.BELDUM, Pokemon.WORMADAN, Pokemon.RIOLU, Pokemon.CRANIDOS, Pokemon.DONPHAN, Pokemon.SHIELDON, Pokemon.GOLEM],
+        pokemons: [Pkmn.GRAVELER, Pkmn.SEVIPER, Pkmn.BELDUM, Pkmn.WORMADAN, Pkmn.RIOLU, Pkmn.CRANIDOS, Pkmn.DONPHAN, Pkmn.SHIELDON, Pkmn.GOLEM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       CRYSTAL_CAVE_06F_11F: {
         id: 'CRYSTAL_CAVE_06F_11F',
         name: 'Crystal Cave',
-        pokemons: [Pokemon.GRAVELER, Pokemon.SEVIPER, Pokemon.BELDUM, Pokemon.WORMADAN, Pokemon.RIOLU, Pokemon.CRANIDOS, Pokemon.DONPHAN, Pokemon.SHIELDON, Pokemon.GOLEM],
+        pokemons: [Pkmn.GRAVELER, Pkmn.SEVIPER, Pkmn.BELDUM, Pkmn.WORMADAN, Pkmn.RIOLU, Pkmn.CRANIDOS, Pkmn.DONPHAN, Pkmn.SHIELDON, Pkmn.GOLEM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       CRYSTAL_CROSSING: {
         id: 'CRYSTAL_CROSSING',
         name: 'Crystal Crossing',
-        pokemons: [Pokemon.FLOATZEL, Pokemon.BAGON, Pokemon.WORMADAN, Pokemon.GLAMEOW, Pokemon.ABSOL, Pokemon.GLALIE, Pokemon.FROSLASS, Pokemon.AZELF],
+        pokemons: [Pkmn.FLOATZEL, Pkmn.BAGON, Pkmn.WORMADAN, Pkmn.GLAMEOW, Pkmn.ABSOL, Pkmn.GLALIE, Pkmn.FROSLASS, Pkmn.AZELF],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       DARK_CRATER: {
         id: 'DARK_CRATER',
         name: 'Dark Crater',
-        pokemons: [Pokemon.CHARMANDER, Pokemon.CYNDAQUIL, Pokemon.HIPPOWDON, Pokemon.NUMEL, Pokemon.SLUGMA, Pokemon.GROWLITHE, Pokemon.PONYTA, Pokemon.TORCHIC, Pokemon.FLAREON, Pokemon.COMBUSKEN, Pokemon.RAPIDASH, Pokemon.MEWTWO, Pokemon.ARCANINE, Pokemon.QUILAVA, Pokemon.MAGCARGO],
+        pokemons: [Pkmn.CHARMANDER, Pkmn.CYNDAQUIL, Pkmn.HIPPOWDON, Pkmn.NUMEL, Pkmn.SLUGMA, Pkmn.GROWLITHE, Pkmn.PONYTA, Pkmn.TORCHIC, Pkmn.FLAREON, Pkmn.COMBUSKEN, Pkmn.RAPIDASH, Pkmn.MEWTWO, Pkmn.ARCANINE, Pkmn.QUILAVA, Pkmn.MAGCARGO],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.FIRE
       },
       DEEP_DARK_CRATER: {
         id: 'DEEP_DARK_CRATER',
         name: 'Deep Dark Crater',
-        pokemons: [Pokemon.CHARMELEON, Pokemon.QUILAVA, Pokemon.MONFERNO, Pokemon.CAMERUPT, Pokemon.COMBUSKEN, Pokemon.ARCANINE, Pokemon.RAPIDASH, Pokemon.FLAREON, Pokemon.MAGCARGO, Pokemon.RHYPERIOR, Pokemon.MAGMORTAR, Pokemon.CHARIZARD, Pokemon.TYPHLOSION, Pokemon.INFERNAPE, Pokemon.MISMAGIUS, Pokemon.BLAZIKEN, Pokemon.AGGRON, Pokemon.ENTEI],
+        pokemons: [Pkmn.CHARMELEON, Pkmn.QUILAVA, Pkmn.MONFERNO, Pkmn.CAMERUPT, Pkmn.COMBUSKEN, Pkmn.ARCANINE, Pkmn.RAPIDASH, Pkmn.FLAREON, Pkmn.MAGCARGO, Pkmn.RHYPERIOR, Pkmn.MAGMORTAR, Pkmn.CHARIZARD, Pkmn.TYPHLOSION, Pkmn.INFERNAPE, Pkmn.MISMAGIUS, Pkmn.BLAZIKEN, Pkmn.AGGRON, Pkmn.ENTEI],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.FIRE
       },
       DARK_HILL_01F_06F: {
         id: 'DARK_HILL_01F_06F',
         name: 'Dark Hill',
-        pokemons: [Pokemon.GASTLY, Pokemon.HAUNTER, Pokemon.GENGAR, Pokemon.BANETTE, Pokemon.DUSCLOPS, Pokemon.CLAYDOL, Pokemon.MISMAGIUS, Pokemon.GLISCOR, Pokemon.MISDREAVUS],
+        pokemons: [Pkmn.GASTLY, Pkmn.HAUNTER, Pkmn.GENGAR, Pkmn.BANETTE, Pkmn.DUSCLOPS, Pkmn.CLAYDOL, Pkmn.MISMAGIUS, Pkmn.GLISCOR, Pkmn.MISDREAVUS],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GHOST
       },
       DARK_HILL_07F_15F: {
         id: 'DARK_HILL_07F_15F',
         name: 'Dark Hill',
-        pokemons: [Pokemon.GASTLY, Pokemon.HAUNTER, Pokemon.GENGAR, Pokemon.BANETTE, Pokemon.DUSCLOPS, Pokemon.CLAYDOL, Pokemon.MISMAGIUS, Pokemon.GLISCOR, Pokemon.MISDREAVUS],
+        pokemons: [Pkmn.GASTLY, Pkmn.HAUNTER, Pkmn.GENGAR, Pkmn.BANETTE, Pkmn.DUSCLOPS, Pkmn.CLAYDOL, Pkmn.MISMAGIUS, Pkmn.GLISCOR, Pkmn.MISDREAVUS],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GHOST
       },
       DEEP_DUSK_FOREST_01F_06F: {
         id: 'DEEP_DUSK_FOREST_01F_06F',
         name: 'Deep Dusk Forest',
-        pokemons: [Pokemon.VULPIX, Pokemon.RHYDON, Pokemon.STEELIX, Pokemon.AGGRON, Pokemon.LEAFEON, Pokemon.HIPPOWDON],
+        pokemons: [Pkmn.VULPIX, Pkmn.RHYDON, Pkmn.STEELIX, Pkmn.AGGRON, Pkmn.LEAFEON, Pkmn.HIPPOWDON],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       DEEP_DUSK_FOREST_07F_12F: {
         id: 'DEEP_DUSK_FOREST_07F_12F',
         name: 'Deep Dusk Forest',
-        pokemons: [Pokemon.VULPIX, Pokemon.RHYDON, Pokemon.STEELIX, Pokemon.AGGRON, Pokemon.LEAFEON, Pokemon.HIPPOWDON],
+        pokemons: [Pkmn.VULPIX, Pkmn.RHYDON, Pkmn.STEELIX, Pkmn.AGGRON, Pkmn.LEAFEON, Pkmn.HIPPOWDON],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       DEEP_SEALED_RUIN: {
         id: 'DEEP_SEALED_RUIN',
         name: 'Deep Sealed Ruin',
-        pokemons: [Pokemon.MUK, Pokemon.FORETRESS, Pokemon.SHELGON, Pokemon.METANG, Pokemon.TANGROWTH, Pokemon.PROBOPASS],
+        pokemons: [Pkmn.MUK, Pkmn.FORETRESS, Pkmn.SHELGON, Pkmn.METANG, Pkmn.TANGROWTH, Pkmn.PROBOPASS],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.METAL
       },
       DRENCHED_BLUFF: {
         id: 'DRENCHED_BLUFF',
         name: 'Drenched Bluff',
-        pokemons: [Pokemon.LILEEP, Pokemon.ANORITH, Pokemon.SHELLOS, Pokemon.CHINGLING],
+        pokemons: [Pkmn.LILEEP, Pkmn.ANORITH, Pkmn.SHELLOS, Pkmn.CHINGLING],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.WATER
       },
       DUSK_FOREST_01F_04F: {
         id: 'DUSK_FOREST_01F_04F',
         name: 'Dusk Forest',
-        pokemons: [Pokemon.JUMPLUFF, Pokemon.MOTHIM, Pokemon.MISMAGIUS, Pokemon.GABITE, Pokemon.HAUNTER, Pokemon.LICKITUNG, Pokemon.CLAYDOL, Pokemon.SALAMENCE, Pokemon.MISMAGIUS, Pokemon.HIPPOWDON, Pokemon.RHYPERIOR, Pokemon.DRIFLOON],
+        pokemons: [Pkmn.JUMPLUFF, Pkmn.MOTHIM, Pkmn.MISMAGIUS, Pkmn.GABITE, Pkmn.HAUNTER, Pkmn.LICKITUNG, Pkmn.CLAYDOL, Pkmn.SALAMENCE, Pkmn.MISMAGIUS, Pkmn.HIPPOWDON, Pkmn.RHYPERIOR, Pkmn.DRIFLOON],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GHOST
       },
       DUSK_FOREST_05F_08F: {
         id: 'DUSK_FOREST_05F_08F',
         name: 'Dusk Forest',
-        pokemons: [Pokemon.JUMPLUFF, Pokemon.MOTHIM, Pokemon.MISMAGIUS, Pokemon.GABITE, Pokemon.HAUNTER, Pokemon.LICKITUNG, Pokemon.CLAYDOL, Pokemon.SALAMENCE, Pokemon.MISMAGIUS, Pokemon.HIPPOWDON, Pokemon.RHYPERIOR, Pokemon.DRIFLOON],
+        pokemons: [Pkmn.JUMPLUFF, Pkmn.MOTHIM, Pkmn.MISMAGIUS, Pkmn.GABITE, Pkmn.HAUNTER, Pkmn.LICKITUNG, Pkmn.CLAYDOL, Pkmn.SALAMENCE, Pkmn.MISMAGIUS, Pkmn.HIPPOWDON, Pkmn.RHYPERIOR, Pkmn.DRIFLOON],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GHOST
       },
       NORTHERN_DESERT_01F_07F: {
         id: 'NORTHERN_DESERT_01F_07F',
         name: 'Northern Desert',
-        pokemons: [Pokemon.BALTOY, Pokemon.CUBONE, Pokemon.ARON, Pokemon.CACNEA, Pokemon.LARVITAR, Pokemon.SANDSHREW, Pokemon.TRAPINCH, Pokemon.CARNIVINE, Pokemon.RHYHORN, Pokemon.LAIRON, Pokemon.CACTURNE],
+        pokemons: [Pkmn.BALTOY, Pkmn.CUBONE, Pkmn.ARON, Pkmn.CACNEA, Pkmn.LARVITAR, Pkmn.SANDSHREW, Pkmn.TRAPINCH, Pkmn.CARNIVINE, Pkmn.RHYHORN, Pkmn.LAIRON, Pkmn.CACTURNE],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       QUICKSAND_CAVE: {
         id: 'QUICKSAND_CAVE',
         name: 'Quicksand Cave',
-        pokemons: [Pokemon.NINCADA, Pokemon.VIBRAVA, Pokemon.PUPITAR, Pokemon.SKORUPI, Pokemon.SANDSLASH, Pokemon.MAWILE],
+        pokemons: [Pkmn.NINCADA, Pkmn.VIBRAVA, Pkmn.PUPITAR, Pkmn.SKORUPI, Pkmn.SANDSLASH, Pkmn.MAWILE],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       QUICKSAND_PIT: {
         id: 'QUICKSAND_PIT',
         name: 'Quicksand Pit',
-        pokemons: [Pokemon.MESPRIT, Pokemon.PUPITAR, Pokemon.SKORUPI, Pokemon.MAWILE, Pokemon.SANDSLASH, Pokemon.TYRANITAR, Pokemon.HIPPOPOTAS, Pokemon.NINJASK],
+        pokemons: [Pkmn.MESPRIT, Pkmn.PUPITAR, Pkmn.SKORUPI, Pkmn.MAWILE, Pkmn.SANDSLASH, Pkmn.TYRANITAR, Pkmn.HIPPOPOTAS, Pkmn.NINJASK],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       ROCK_AEGIS_CAVE: {
         id: 'ROCK_AEGIS_CAVE',
         name: 'Rock Aegis Cave',
-        pokemons: [Pokemon.ZUBAT, Pokemon.GOLBAT, Pokemon.UNOWN, Pokemon.MACHOKE, Pokemon.MACHAMP, Pokemon.REGIROCK],
+        pokemons: [Pkmn.ZUBAT, Pkmn.GOLBAT, Pkmn.UNOWN, Pkmn.MACHOKE, Pkmn.MACHAMP, Pkmn.REGIROCK],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.MINERAL
       },
       SURROUNDED_SEA: {
         id: 'SURROUNDED_SEA',
         name: 'Surrounded Sea',
-        pokemons: [Pokemon.SHELLDER, Pokemon.CARVANHA, Pokemon.WAILMER, Pokemon.SLOWBRO, Pokemon.TENTACRUEL, Pokemon.STARMIE, Pokemon.QWILFISH, Pokemon.HORSEA, Pokemon.SEADRA, Pokemon.SLOWKING, Pokemon.REMORAID, Pokemon.OCTIRELLY, Pokemon.KINGDRA, Pokemon.CLAMPERL, Pokemon.FINNEON, Pokemon.LAPRAS, Pokemon.WAILORD, Pokemon.LUGIA],
+        pokemons: [Pkmn.SHELLDER, Pkmn.CARVANHA, Pkmn.WAILMER, Pkmn.SLOWBRO, Pkmn.TENTACRUEL, Pkmn.STARMIE, Pkmn.QWILFISH, Pkmn.HORSEA, Pkmn.SEADRA, Pkmn.SLOWKING, Pkmn.REMORAID, Pkmn.OCTIRELLY, Pkmn.KINGDRA, Pkmn.CLAMPERL, Pkmn.FINNEON, Pkmn.LAPRAS, Pkmn.WAILORD, Pkmn.LUGIA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.WATER],
         type: Synergy.WATER
       },
       TEMPORAL_SPIRE: {
         id: 'TEMPORAL_SPIRE',
         name: 'Temporal Spire',
-        pokemons: [Pokemon.DIALGA, Pokemon.DEOXYS, Pokemon.BRONZONG, Pokemon.PORYGON, Pokemon.SALAMENCE, Pokemon.PORYGONZ, Pokemon.METAGROSS],
+        pokemons: [Pkmn.DIALGA, Pkmn.DEOXYS, Pkmn.BRONZONG, Pkmn.PORYGON, Pkmn.SALAMENCE, Pkmn.PORYGONZ, Pkmn.METAGROSS],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.METAL
       },
       TEMPORAL_TOWER: {
         id: 'TEMPORAL_TOWER',
         name: 'Temporal Tower',
-        pokemons: [Pokemon.PORYGON, Pokemon.LUNATONE, Pokemon.SOLROCK, Pokemon.BRONZOR],
+        pokemons: [Pkmn.PORYGON, Pkmn.LUNATONE, Pkmn.SOLROCK, Pkmn.BRONZOR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       TEST_DUNGEON: {
         id: 'TEST_DUNGEON',
         name: 'Test Dungeon',
-        pokemons: [Pokemon.PORYGON, Pokemon.UNOWN],
+        pokemons: [Pkmn.PORYGON, Pkmn.UNOWN],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.GROUND, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       THE_NIGHTMARE: {
         id: 'THE_NIGHTMARE',
         name: 'The Nightmare',
-        pokemons: [Pokemon.SPOINK, Pokemon.CLEFFA, Pokemon.CLEFAIRY, Pokemon.JIGGLYPUFF, Pokemon.WYNAUT, Pokemon.SPINDA, Pokemon.LICKITUNG, Pokemon.ESPEON, Pokemon.WOOBUFFET, Pokemon.MILTANK, Pokemon.BLISSEY, Pokemon.WHISMUR, Pokemon.SKITTY, Pokemon.PERSIAN, Pokemon.IGGLYBUFF, Pokemon.CLEFABLE, Pokemon.WIGGLYTUFF, Pokemon.CHANSEY],
+        pokemons: [Pkmn.SPOINK, Pkmn.CLEFFA, Pkmn.CLEFAIRY, Pkmn.JIGGLYPUFF, Pkmn.WYNAUT, Pkmn.SPINDA, Pkmn.LICKITUNG, Pkmn.ESPEON, Pkmn.WOOBUFFET, Pkmn.MILTANK, Pkmn.BLISSEY, Pkmn.WHISMUR, Pkmn.SKITTY, Pkmn.PERSIAN, Pkmn.IGGLYBUFF, Pkmn.CLEFABLE, Pkmn.WIGGLYTUFF, Pkmn.CHANSEY],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.NORMAL
       },
       TINY_MEADOW: {
         id: 'TINY_MEADOW',
         name: 'Tiny Meadow',
-        pokemons: [Pokemon.SKIPLOOM, Pokemon.BRELOOM, Pokemon.STARAVIA],
+        pokemons: [Pkmn.SKIPLOOM, Pkmn.BRELOOM, Pkmn.STARAVIA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GRASS
       },
       TREESHROUD_FOREST_01F_08F: {
         id: 'TREESHROUD_FOREST_01F_08F',
         name: 'Treeshroud Forest',
-        pokemons: [Pokemon.KADABRA, Pokemon.RALTS, Pokemon.CHERIM, Pokemon.HOUNDOOM, Pokemon.NINETALES, Pokemon.ALAKAZAM, Pokemon.KIRLIA, Pokemon.VESPIQUEEN],
+        pokemons: [Pkmn.KADABRA, Pkmn.RALTS, Pkmn.CHERIM, Pkmn.HOUNDOOM, Pkmn.NINETALES, Pkmn.ALAKAZAM, Pkmn.KIRLIA, Pkmn.VESPIQUEEN],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       TREESHROUD_FOREST_09F_21F: {
         id: 'TREESHROUD_FOREST_09F_21F',
         name: 'Treeshroud Forest',
-        pokemons: [Pokemon.KADABRA, Pokemon.RALTS, Pokemon.CHERIM, Pokemon.HOUNDOOM, Pokemon.NINETALES, Pokemon.ALAKAZAM, Pokemon.KIRLIA, Pokemon.VESPIQUEEN],
+        pokemons: [Pkmn.KADABRA, Pkmn.RALTS, Pkmn.CHERIM, Pkmn.HOUNDOOM, Pkmn.NINETALES, Pkmn.ALAKAZAM, Pkmn.KIRLIA, Pkmn.VESPIQUEEN],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       STEAM_CAVE: {
         id: 'STEAM_CAVE',
         name: 'Steam Cave',
-        pokemons: [Pokemon.SNUBULL, Pokemon.SLUGMA, Pokemon.MAGBY, Pokemon.NUMEL, Pokemon.FARFETCH, Pokemon.YANMEGA, Pokemon.KRICKETUNE],
+        pokemons: [Pkmn.SNUBULL, Pkmn.SLUGMA, Pkmn.MAGBY, Pkmn.NUMEL, Pkmn.FARFETCH, Pkmn.YANMEGA, Pkmn.KRICKETUNE],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.FIRE
       },
       QUICKSAND_PIT_2: {
         id: 'QUICKSAND_PIT_2',
         name: 'Quicksand Pit',
-        pokemons: [Pokemon.MESPRIT, Pokemon.PUPITAR, Pokemon.SKORUPI, Pokemon.MAWILE, Pokemon.SANDSLASH, Pokemon.TYRANITAR, Pokemon.HIPPOPOTAS, Pokemon.NINJASK],
+        pokemons: [Pkmn.MESPRIT, Pkmn.PUPITAR, Pkmn.SKORUPI, Pkmn.MAWILE, Pkmn.SANDSLASH, Pkmn.TYRANITAR, Pkmn.HIPPOPOTAS, Pkmn.NINJASK],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       LOWER_BRINE_CAVE: {
         id: 'LOWER_BRINE_CAVE',
         name: 'Lower Brine Cave',
-        pokemons: [Pokemon.WALREIN, Pokemon.DRAGONAIR, Pokemon.STARYU, Pokemon.TENTACOOL, Pokemon.DEWGONG, Pokemon.GASTRODON],
+        pokemons: [Pkmn.WALREIN, Pkmn.DRAGONAIR, Pkmn.STARYU, Pkmn.TENTACOOL, Pkmn.DEWGONG, Pkmn.GASTRODON],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.WATER
       },
       HIDDEN_LAND: {
         id: 'HIDDEN_LAND',
         name: 'Hidden land',
-        pokemons: [Pokemon.DRAGONITE, Pokemon.MANECTRIC, Pokemon.TROPIUS, Pokemon.RAMPARDOS, Pokemon.BASTIODON, Pokemon.PURUGLY, Pokemon.GARCHOMP, Pokemon.ABOMASNOW, Pokemon.MAGMORTAR],
+        pokemons: [Pkmn.DRAGONITE, Pkmn.MANECTRIC, Pkmn.TROPIUS, Pkmn.RAMPARDOS, Pkmn.BASTIODON, Pkmn.PURUGLY, Pkmn.GARCHOMP, Pkmn.ABOMASNOW, Pkmn.MAGMORTAR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GRASS
       },
       TEMPORAL_TOWER_2: {
         id: 'TEMPORAL_TOWER_2',
         name: 'Temporal Tower',
-        pokemons: [Pokemon.PORYGON, Pokemon.LUNATONE, Pokemon.SOLROCK, Pokemon.BRONZOR],
+        pokemons: [Pkmn.PORYGON, Pkmn.LUNATONE, Pkmn.SOLROCK, Pkmn.BRONZOR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       CRYSTAL_CAVE_2: {
         id: 'CRYSTAL_CAVE_2',
         name: 'Crystal Cave',
-        pokemons: [Pokemon.GRAVELER, Pokemon.SEVIPER, Pokemon.BELDUM, Pokemon.WORMADAN, Pokemon.RIOLU, Pokemon.CRANIDOS, Pokemon.DONPHAN, Pokemon.SHIELDON, Pokemon.GOLEM],
+        pokemons: [Pkmn.GRAVELER, Pkmn.SEVIPER, Pkmn.BELDUM, Pkmn.WORMADAN, Pkmn.RIOLU, Pkmn.CRANIDOS, Pkmn.DONPHAN, Pkmn.SHIELDON, Pkmn.GOLEM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.GROUND
       },
       WATERFALL_CAVE: {
         id: 'WATERFALL_CAVE',
         name: 'Waterfall Cave',
-        pokemons: [Pokemon.PSYDUCK, Pokemon.POLIWAG, Pokemon.GRIMER, Pokemon.TANGELA, Pokemon.WOOPER, Pokemon.LOTAD, Pokemon.SURSKIT, Pokemon.BARBOACH, Pokemon.WHISCASH],
+        pokemons: [Pkmn.PSYDUCK, Pkmn.POLIWAG, Pkmn.GRIMER, Pkmn.TANGELA, Pkmn.WOOPER, Pkmn.LOTAD, Pkmn.SURSKIT, Pkmn.BARBOACH, Pkmn.WHISCASH],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.WATER
       },
       WORLD_ABYSS: {
         id: 'WORLD_ABYSS',
         name: 'World Abyss',
-        pokemons: [Pokemon.GIRATINA, Pokemon.TAILOW, Pokemon.PIDGEY, Pokemon.MURKROW, Pokemon.VOLTORB, Pokemon.POOCHYENA, Pokemon.LOUDRED, Pokemon.PIDGEOTTO, Pokemon.NIDOQUEEN, Pokemon.ELECTRODE, Pokemon.WEEZING, Pokemon.UMBREON, Pokemon.DELCATTY, Pokemon.SWELLOW, Pokemon.EXPLOUD, Pokemon.MIGHTYENA, Pokemon.PIDGEOT],
+        pokemons: [Pkmn.GIRATINA, Pkmn.TAILOW, Pkmn.PIDGEY, Pkmn.MURKROW, Pkmn.VOLTORB, Pkmn.POOCHYENA, Pkmn.LOUDRED, Pkmn.PIDGEOTTO, Pkmn.NIDOQUEEN, Pkmn.ELECTRODE, Pkmn.WEEZING, Pkmn.UMBREON, Pkmn.DELCATTY, Pkmn.SWELLOW, Pkmn.EXPLOUD, Pkmn.MIGHTYENA, Pkmn.PIDGEOT],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.NORMAL
       },
       ZERO_ISLE_EAST_15F_25F: {
         id: 'ZERO_ISLE_EAST_15F_25F',
         name: 'Zero Isle East',
-        pokemons: [Pokemon.DEWGONG, Pokemon.SHELLDER, Pokemon.CORSOLA, Pokemon.KABUTO, Pokemon.AZUMARILL, Pokemon.SLOWPOKE, Pokemon.YANMA, Pokemon.TENTACRUEL, Pokemon.VOLTORB, Pokemon.SPEAROW, Pokemon.SEEDOT, Pokemon.GOLBAT, Pokemon.HOOTHOOT, Pokemon.WYNAUT, Pokemon.HOUNDOUR, Pokemon.WAILMER, Pokemon.MAGNETON, Pokemon.BEEDRILL, Pokemon.VULPIX, Pokemon.FERALIGATR, Pokemon.SPINARAK, Pokemon.SLUGMA, Pokemon.CHANSEY, Pokemon.KRABBY, Pokemon.MAGMAR],
+        pokemons: [Pkmn.DEWGONG, Pkmn.SHELLDER, Pkmn.CORSOLA, Pkmn.KABUTO, Pkmn.AZUMARILL, Pkmn.SLOWPOKE, Pkmn.YANMA, Pkmn.TENTACRUEL, Pkmn.VOLTORB, Pkmn.SPEAROW, Pkmn.SEEDOT, Pkmn.GOLBAT, Pkmn.HOOTHOOT, Pkmn.WYNAUT, Pkmn.HOUNDOUR, Pkmn.WAILMER, Pkmn.MAGNETON, Pkmn.BEEDRILL, Pkmn.VULPIX, Pkmn.FERALIGATR, Pkmn.SPINARAK, Pkmn.SLUGMA, Pkmn.CHANSEY, Pkmn.KRABBY, Pkmn.MAGMAR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.WATER
       },
       ZERO_ISLE_EAST_26F_40F: {
         id: 'ZERO_ISLE_EAST_26F_40F',
         name: 'Zero Isle East',
-        pokemons: [Pokemon.DEWGONG, Pokemon.SHELLDER, Pokemon.CORSOLA, Pokemon.KABUTO, Pokemon.AZUMARILL, Pokemon.SLOWPOKE, Pokemon.YANMA, Pokemon.TENTACRUEL, Pokemon.VOLTORB, Pokemon.SPEAROW, Pokemon.SEEDOT, Pokemon.GOLBAT, Pokemon.HOOTHOOT, Pokemon.WYNAUT, Pokemon.HOUNDOUR, Pokemon.WAILMER, Pokemon.MAGNETON, Pokemon.BEEDRILL, Pokemon.VULPIX, Pokemon.FERALIGATR, Pokemon.SPINARAK, Pokemon.SLUGMA, Pokemon.CHANSEY, Pokemon.KRABBY, Pokemon.MAGMAR],
+        pokemons: [Pkmn.DEWGONG, Pkmn.SHELLDER, Pkmn.CORSOLA, Pkmn.KABUTO, Pkmn.AZUMARILL, Pkmn.SLOWPOKE, Pkmn.YANMA, Pkmn.TENTACRUEL, Pkmn.VOLTORB, Pkmn.SPEAROW, Pkmn.SEEDOT, Pkmn.GOLBAT, Pkmn.HOOTHOOT, Pkmn.WYNAUT, Pkmn.HOUNDOUR, Pkmn.WAILMER, Pkmn.MAGNETON, Pkmn.BEEDRILL, Pkmn.VULPIX, Pkmn.FERALIGATR, Pkmn.SPINARAK, Pkmn.SLUGMA, Pkmn.CHANSEY, Pkmn.KRABBY, Pkmn.MAGMAR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.WATER
       },
       ZERO_ISLE_SOUTH_01F_03F: {
         id: 'ZERO_ISLE_SOUTH_01F_03F',
         name: 'Zero Isle South',
-        pokemons: [Pokemon.PIDGEY, Pokemon.JIGGLYPUFF, Pokemon.SHELLDER, Pokemon.SEADRA, Pokemon.STARYU, Pokemon.STARMIE, Pokemon.CHINGLING, Pokemon.CLEFFA, Pokemon.BELLSPROUT, Pokemon.EXEGGCUTE, Pokemon.CHINCHOU, Pokemon.POOCHYENA, Pokemon.NIDORANM, Pokemon.LARVITAR, Pokemon.RATTATA, Pokemon.TOGEPI, Pokemon.EEVEE, Pokemon.RALTS, Pokemon.BALTOY],
+        pokemons: [Pkmn.PIDGEY, Pkmn.JIGGLYPUFF, Pkmn.SHELLDER, Pkmn.SEADRA, Pkmn.STARYU, Pkmn.STARMIE, Pkmn.CHINGLING, Pkmn.CLEFFA, Pkmn.BELLSPROUT, Pkmn.EXEGGCUTE, Pkmn.CHINCHOU, Pkmn.POOCHYENA, Pkmn.NIDORANM, Pkmn.LARVITAR, Pkmn.RATTATA, Pkmn.TOGEPI, Pkmn.EEVEE, Pkmn.RALTS, Pkmn.BALTOY],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.NORMAL
       },
       ZERO_ISLE_SOUTH_04F_08F: {
         id: 'ZERO_ISLE_SOUTH_04F_08F',
         name: 'Zero Isle East',
-        pokemons: [Pokemon.PIDGEY, Pokemon.JIGGLYPUFF, Pokemon.SHELLDER, Pokemon.SEADRA, Pokemon.STARYU, Pokemon.STARMIE, Pokemon.CHINGLING, Pokemon.CLEFFA, Pokemon.BELLSPROUT, Pokemon.EXEGGCUTE, Pokemon.CHINCHOU, Pokemon.POOCHYENA, Pokemon.NIDORANM, Pokemon.LARVITAR, Pokemon.RATTATA, Pokemon.TOGEPI, Pokemon.EEVEE, Pokemon.RALTS, Pokemon.BALTOY],
+        pokemons: [Pkmn.PIDGEY, Pkmn.JIGGLYPUFF, Pkmn.SHELLDER, Pkmn.SEADRA, Pkmn.STARYU, Pkmn.STARMIE, Pkmn.CHINGLING, Pkmn.CLEFFA, Pkmn.BELLSPROUT, Pkmn.EXEGGCUTE, Pkmn.CHINCHOU, Pkmn.POOCHYENA, Pkmn.NIDORANM, Pkmn.LARVITAR, Pkmn.RATTATA, Pkmn.TOGEPI, Pkmn.EEVEE, Pkmn.RALTS, Pkmn.BALTOY],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.NORMAL
       },
       BURIED_RELIC_1F_20F: {
         id: 'BURIED_RELIC_1F_20F',
         name: 'Buried Relic',
-        pokemons: [Pokemon.GOLBAT, Pokemon.SNEASEL, Pokemon.WYNAUT, Pokemon.RATICATE, Pokemon.MACHOP, Pokemon.WHISMUR, Pokemon.HOOTHOOT, Pokemon.PORYGON, Pokemon.PORYGON2, Pokemon.ARON, Pokemon.REGIROCK, Pokemon.GEODUDE, Pokemon.REGISTEEL, Pokemon.REGICE, Pokemon.KADABRA, Pokemon.MEW, Pokemon.SHEDNINJA, Pokemon.SANDSHREW, Pokemon.MAWILE, Pokemon.GRAVELER, Pokemon.HAUNTER, Pokemon.GOLEM],
+        pokemons: [Pkmn.GOLBAT, Pkmn.SNEASEL, Pkmn.WYNAUT, Pkmn.RATICATE, Pkmn.MACHOP, Pkmn.WHISMUR, Pkmn.HOOTHOOT, Pkmn.PORYGON, Pkmn.PORYGON2, Pkmn.ARON, Pkmn.REGIROCK, Pkmn.GEODUDE, Pkmn.REGISTEEL, Pkmn.REGICE, Pkmn.KADABRA, Pkmn.MEW, Pkmn.SHEDNINJA, Pkmn.SANDSHREW, Pkmn.MAWILE, Pkmn.GRAVELER, Pkmn.HAUNTER, Pkmn.GOLEM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.NORMAL
       },
       BURIED_RELIC_21F_50F: {
         id: 'BURIED_RELIC_21F_50F',
         name: 'Buried Relic',
-        pokemons: [Pokemon.GOLBAT, Pokemon.SNEASEL, Pokemon.WYNAUT, Pokemon.RATICATE, Pokemon.MACHOP, Pokemon.WHISMUR, Pokemon.HOOTHOOT, Pokemon.PORYGON, Pokemon.PORYGON2, Pokemon.ARON, Pokemon.REGIROCK, Pokemon.GEODUDE, Pokemon.REGISTEEL, Pokemon.REGICE, Pokemon.KADABRA, Pokemon.MEW, Pokemon.SHEDNINJA, Pokemon.SANDSHREW, Pokemon.MAWILE, Pokemon.GRAVELER, Pokemon.HAUNTER, Pokemon.GOLEM],
+        pokemons: [Pkmn.GOLBAT, Pkmn.SNEASEL, Pkmn.WYNAUT, Pkmn.RATICATE, Pkmn.MACHOP, Pkmn.WHISMUR, Pkmn.HOOTHOOT, Pkmn.PORYGON, Pkmn.PORYGON2, Pkmn.ARON, Pkmn.REGIROCK, Pkmn.GEODUDE, Pkmn.REGISTEEL, Pkmn.REGICE, Pkmn.KADABRA, Pkmn.MEW, Pkmn.SHEDNINJA, Pkmn.SANDSHREW, Pkmn.MAWILE, Pkmn.GRAVELER, Pkmn.HAUNTER, Pkmn.GOLEM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       BURIED_RELIC_51F_99F: {
         id: 'BURIED_RELIC_51F_99F',
         name: 'Buried Relic',
-        pokemons: [Pokemon.GOLBAT, Pokemon.SNEASEL, Pokemon.WYNAUT, Pokemon.RATICATE, Pokemon.MACHOP, Pokemon.WHISMUR, Pokemon.HOOTHOOT, Pokemon.PORYGON, Pokemon.PORYGON2, Pokemon.ARON, Pokemon.REGIROCK, Pokemon.GEODUDE, Pokemon.REGISTEEL, Pokemon.REGICE, Pokemon.KADABRA, Pokemon.MEW, Pokemon.SHEDNINJA, Pokemon.SANDSHREW, Pokemon.MAWILE, Pokemon.GRAVELER, Pokemon.HAUNTER, Pokemon.GOLEM],
+        pokemons: [Pkmn.GOLBAT, Pkmn.SNEASEL, Pkmn.WYNAUT, Pkmn.RATICATE, Pkmn.MACHOP, Pkmn.WHISMUR, Pkmn.HOOTHOOT, Pkmn.PORYGON, Pkmn.PORYGON2, Pkmn.ARON, Pkmn.REGIROCK, Pkmn.GEODUDE, Pkmn.REGISTEEL, Pkmn.REGICE, Pkmn.KADABRA, Pkmn.MEW, Pkmn.SHEDNINJA, Pkmn.SANDSHREW, Pkmn.MAWILE, Pkmn.GRAVELER, Pkmn.HAUNTER, Pkmn.GOLEM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       DARKNIGHT_RELIC: {
         id: 'DARKNIGHT_RELIC',
         name: 'Darknight Relic',
-        pokemons: [Pokemon.SHUPPET, Pokemon.GASTLY, Pokemon.MISDREAVUS, Pokemon.SHEDNINJA, Pokemon.SABLEYE, Pokemon.BANETTE, Pokemon.HAUNTER, Pokemon.DUSKULL, Pokemon.GENGAR],
+        pokemons: [Pkmn.SHUPPET, Pkmn.GASTLY, Pkmn.MISDREAVUS, Pkmn.SHEDNINJA, Pkmn.SABLEYE, Pkmn.BANETTE, Pkmn.HAUNTER, Pkmn.DUSKULL, Pkmn.GENGAR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.GHOST
       },
       SHIMMER_DESERT: {
         id: 'SHIMMER_DESERT',
         name: 'Shimmer Desert',
-        pokemons: [Pokemon.EKANS, Pokemon.ARBOK, Pokemon.SANDSHREW, Pokemon.SANDSLASH, Pokemon.NIDOKING, Pokemon.DIGLETT, Pokemon.DUGTRIO, Pokemon.SUDOWOODO, Pokemon.GARCHOMP, Pokemon.RHYPERIOR, Pokemon.GROUDON],
+        pokemons: [Pkmn.EKANS, Pkmn.ARBOK, Pkmn.SANDSHREW, Pkmn.SANDSLASH, Pkmn.NIDOKING, Pkmn.DIGLETT, Pkmn.DUGTRIO, Pkmn.SUDOWOODO, Pkmn.GARCHOMP, Pkmn.RHYPERIOR, Pkmn.GROUDON],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       UNOWN_RELIC: {
         id: 'UNOWN_RELIC',
         name: 'Unown Relic',
-        pokemons: [Pokemon.UNOWN],
+        pokemons: [Pkmn.UNOWN],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       FROSTY_FOREST: {
         id: 'FROSTY_FOREST',
         name: 'Frosty Forest',
-        pokemons: [Pokemon.AZURILL, Pokemon.FURRET, Pokemon.NOSEPASS, Pokemon.PILOSWINE, Pokemon.MIGHTYENA, Pokemon.LAIRON, Pokemon.SNORUNT, Pokemon.ARTICUNO],
+        pokemons: [Pkmn.AZURILL, Pkmn.FURRET, Pkmn.NOSEPASS, Pkmn.PILOSWINE, Pkmn.MIGHTYENA, Pkmn.LAIRON, Pkmn.SNORUNT, Pkmn.ARTICUNO],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.ICE
       },
       GREAT_CANYON: {
         id: 'GREAT_CANYON',
         name: 'Great Canyon',
-        pokemons: [Pokemon.SKIPLOOM, Pokemon.DUNSPARCE, Pokemon.PHANPY, Pokemon.DODUO, Pokemon.VILEPLUME, Pokemon.BRELOOM, Pokemon.MURKROW, Pokemon.CACTURNE, Pokemon.NOCTOWL, Pokemon.ARIADOS, Pokemon.TAUROS, Pokemon.HOUNDOOM],
+        pokemons: [Pkmn.SKIPLOOM, Pkmn.DUNSPARCE, Pkmn.PHANPY, Pkmn.DODUO, Pkmn.VILEPLUME, Pkmn.BRELOOM, Pkmn.MURKROW, Pkmn.CACTURNE, Pkmn.NOCTOWL, Pkmn.ARIADOS, Pkmn.TAUROS, Pkmn.HOUNDOOM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.NORMAL
       },
       HOWLING_FOREST_01F_06F: {
         id: 'HOWLING_FOREST_01F_06F',
         name: 'Howling Forest',
-        pokemons: [Pokemon.AZURILL, Pokemon.HOUNDOUR, Pokemon.POOCHYENA, Pokemon.WHISMUR, Pokemon.SPOINK, Pokemon.FURRET, Pokemon.PIDGEY, Pokemon.LOUDRED, Pokemon.HOUNDOOM, Pokemon.MIGHTYENA, Pokemon.GRUMPIG, Pokemon.SNORLAX, Pokemon.EXEGGCUTE],
+        pokemons: [Pkmn.AZURILL, Pkmn.HOUNDOUR, Pkmn.POOCHYENA, Pkmn.WHISMUR, Pkmn.SPOINK, Pkmn.FURRET, Pkmn.PIDGEY, Pkmn.LOUDRED, Pkmn.HOUNDOOM, Pkmn.MIGHTYENA, Pkmn.GRUMPIG, Pkmn.SNORLAX, Pkmn.EXEGGCUTE],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.NORMAL
       },
       HOWLING_FOREST_07F_15F: {
         id: 'HOWLING_FOREST_07F_15F',
         name: 'Howling Forest',
-        pokemons: [Pokemon.AZURILL, Pokemon.HOUNDOUR, Pokemon.POOCHYENA, Pokemon.WHISMUR, Pokemon.SPOINK, Pokemon.FURRET, Pokemon.PIDGEY, Pokemon.LOUDRED, Pokemon.HOUNDOOM, Pokemon.MIGHTYENA, Pokemon.GRUMPIG, Pokemon.SNORLAX, Pokemon.EXEGGCUTE],
+        pokemons: [Pkmn.AZURILL, Pkmn.HOUNDOUR, Pkmn.POOCHYENA, Pkmn.WHISMUR, Pkmn.SPOINK, Pkmn.FURRET, Pkmn.PIDGEY, Pkmn.LOUDRED, Pkmn.HOUNDOOM, Pkmn.MIGHTYENA, Pkmn.GRUMPIG, Pkmn.SNORLAX, Pkmn.EXEGGCUTE],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.NORMAL
       },
       MT_FARAWAY: {
         id: 'MT_FARAWAY',
         name: 'Mt Faraway',
-        pokemons: [Pokemon.LUNATONE, Pokemon.SNORUNT, Pokemon.SOLROCK, Pokemon.AZUMARILL, Pokemon.GOLEM, Pokemon.MARSHTOMP, Pokemon.VIGOROTH, Pokemon.GRANBULL, Pokemon.WEEZING, Pokemon.DUGTRIO, Pokemon.GLALIE, Pokemon.HOOH],
+        pokemons: [Pkmn.LUNATONE, Pkmn.SNORUNT, Pkmn.SOLROCK, Pkmn.AZUMARILL, Pkmn.GOLEM, Pkmn.MARSHTOMP, Pkmn.VIGOROTH, Pkmn.GRANBULL, Pkmn.WEEZING, Pkmn.DUGTRIO, Pkmn.GLALIE, Pkmn.HOOH],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.ICE
       },
       MT_FARAWAY_10F_20F: {
         id: 'MT_FARAWAY_10F_20F',
         name: 'Mt Faraway',
-        pokemons: [Pokemon.LUNATONE, Pokemon.SNORUNT, Pokemon.SOLROCK, Pokemon.AZUMARILL, Pokemon.GOLEM, Pokemon.MARSHTOMP, Pokemon.VIGOROTH, Pokemon.GRANBULL, Pokemon.WEEZING, Pokemon.DUGTRIO, Pokemon.GLALIE, Pokemon.HOOH],
+        pokemons: [Pkmn.LUNATONE, Pkmn.SNORUNT, Pkmn.SOLROCK, Pkmn.AZUMARILL, Pkmn.GOLEM, Pkmn.MARSHTOMP, Pkmn.VIGOROTH, Pkmn.GRANBULL, Pkmn.WEEZING, Pkmn.DUGTRIO, Pkmn.GLALIE, Pkmn.HOOH],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.ICE
       },
       MT_FARAWAY_30F_39F: {
         id: 'MT_FARAWAY_30F_39F',
         name: 'Mt Faraway',
-        pokemons: [Pokemon.LUNATONE, Pokemon.SNORUNT, Pokemon.SOLROCK, Pokemon.AZUMARILL, Pokemon.GOLEM, Pokemon.MARSHTOMP, Pokemon.VIGOROTH, Pokemon.GRANBULL, Pokemon.WEEZING, Pokemon.DUGTRIO, Pokemon.GLALIE, Pokemon.HOOH],
+        pokemons: [Pkmn.LUNATONE, Pkmn.SNORUNT, Pkmn.SOLROCK, Pkmn.AZUMARILL, Pkmn.GOLEM, Pkmn.MARSHTOMP, Pkmn.VIGOROTH, Pkmn.GRANBULL, Pkmn.WEEZING, Pkmn.DUGTRIO, Pkmn.GLALIE, Pkmn.HOOH],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.ICE
       },
       JOYOUS_TOWER: {
         id: 'JOYOUS_TOWER',
         name: 'Joyous Tower',
-        pokemons: [Pokemon.JIGGLYPUFF, Pokemon.TREECKO, Pokemon.BULBASAUR, Pokemon.TAILOW, Pokemon.PICHU, Pokemon.DIGLETT, Pokemon.SPINDA, Pokemon.PLUSLE, Pokemon.MINUN, Pokemon.METAPOD, Pokemon.CHIKORITA, Pokemon.PSYDUCK, Pokemon.KAKUNA, Pokemon.CLEFAIRY, Pokemon.TORCHIC, Pokemon.EEVEE, Pokemon.CYNDAQUIL, Pokemon.BELDUM, Pokemon.SCYTHER, Pokemon.SLAKOTH, Pokemon.TRAPINCH, Pokemon.CLEFABLE, Pokemon.HOUNDOUR, Pokemon.SPINARAK, Pokemon.GARDEVOIR, Pokemon.BELLOSSOM],
+        pokemons: [Pkmn.JIGGLYPUFF, Pkmn.TREECKO, Pkmn.BULBASAUR, Pkmn.TAILOW, Pkmn.PICHU, Pkmn.DIGLETT, Pkmn.SPINDA, Pkmn.PLUSLE, Pkmn.MINUN, Pkmn.METAPOD, Pkmn.CHIKORITA, Pkmn.PSYDUCK, Pkmn.KAKUNA, Pkmn.CLEFAIRY, Pkmn.TORCHIC, Pkmn.EEVEE, Pkmn.CYNDAQUIL, Pkmn.BELDUM, Pkmn.SCYTHER, Pkmn.SLAKOTH, Pkmn.TRAPINCH, Pkmn.CLEFABLE, Pkmn.HOUNDOUR, Pkmn.SPINARAK, Pkmn.GARDEVOIR, Pkmn.BELLOSSOM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.NORMAL
       },
       LAPIS_CAVE: {
         id: 'LAPIS_CAVE',
         name: 'Lapis Cave',
-        pokemons: [Pokemon.ZUBAT, Pokemon.NINCADA, Pokemon.NIDORINA, Pokemon.NIDORINO, Pokemon.TANGELA, Pokemon.BAGON, Pokemon.GOLBAT],
+        pokemons: [Pkmn.ZUBAT, Pkmn.NINCADA, Pkmn.NIDORINA, Pkmn.NIDORINO, Pkmn.TANGELA, Pkmn.BAGON, Pkmn.GOLBAT],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.POISON
       },
       LIGHTNING_FIELD: {
         id: 'LIGHTNING_FIELD',
         name: 'Lightning Field',
-        pokemons: [Pokemon.MAREEP, Pokemon.ELECTRIKE, Pokemon.MAGNEMITE, Pokemon.PIKACHU, Pokemon.FLAFFY, Pokemon.PLUSLE, Pokemon.MINUN, Pokemon.JOLTEON, Pokemon.CACTURNE, Pokemon.ELECTRODE, Pokemon.ELEKID, Pokemon.MAGNETON, Pokemon.AMPHAROS, Pokemon.MANECTRIC, Pokemon.RAICHU, Pokemon.RAIKOU],
+        pokemons: [Pkmn.MAREEP, Pkmn.ELECTRIKE, Pkmn.MAGNEMITE, Pkmn.PIKACHU, Pkmn.FLAFFY, Pkmn.PLUSLE, Pkmn.MINUN, Pkmn.JOLTEON, Pkmn.CACTURNE, Pkmn.ELECTRODE, Pkmn.ELEKID, Pkmn.MAGNETON, Pkmn.AMPHAROS, Pkmn.MANECTRIC, Pkmn.RAICHU, Pkmn.RAIKOU],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.ELECTRIC
       },
       MAGMA_CAVERN_08F_17F: {
         id: 'MAGMA_CAVERN_08F_17F',
         name: 'Magma Cavern',
-        pokemons: [Pokemon.RATICATE, Pokemon.SANDSHREW, Pokemon.NIDOQUEEN, Pokemon.NIDOKING, Pokemon.GRAVELER, Pokemon.MAGMAR, Pokemon.MAWILE, Pokemon.ARBOK, Pokemon.MAGCARGO, Pokemon.SANDSLASH, Pokemon.GOLEM, Pokemon.GRIMER, Pokemon.ONIX],
+        pokemons: [Pkmn.RATICATE, Pkmn.SANDSHREW, Pkmn.NIDOQUEEN, Pkmn.NIDOKING, Pkmn.GRAVELER, Pkmn.MAGMAR, Pkmn.MAWILE, Pkmn.ARBOK, Pkmn.MAGCARGO, Pkmn.SANDSLASH, Pkmn.GOLEM, Pkmn.GRIMER, Pkmn.ONIX],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.FIRE
       },
       MAGMA_CAVERN_18F_23F: {
         id: 'MAGMA_CAVERN_18F_23F',
         name: 'Magma Cavern',
-        pokemons: [Pokemon.GROUDON, Pokemon.RATICATE, Pokemon.SANDSHREW, Pokemon.NIDOQUEEN, Pokemon.NIDOKING, Pokemon.GRAVELER, Pokemon.MAGMAR, Pokemon.MAWILE, Pokemon.ARBOK, Pokemon.MAGCARGO, Pokemon.SANDSLASH, Pokemon.GOLEM, Pokemon.GRIMER, Pokemon.ONIX],
+        pokemons: [Pkmn.GROUDON, Pkmn.RATICATE, Pkmn.SANDSHREW, Pkmn.NIDOQUEEN, Pkmn.NIDOKING, Pkmn.GRAVELER, Pkmn.MAGMAR, Pkmn.MAWILE, Pkmn.ARBOK, Pkmn.MAGCARGO, Pkmn.SANDSLASH, Pkmn.GOLEM, Pkmn.GRIMER, Pkmn.ONIX],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.FIRE
       },
       METEOR_CAVE: {
         id: 'METEOR_CAVE',
         name: 'Meteor Cave',
-        pokemons: [Pokemon.DEOXYS],
+        pokemons: [Pkmn.DEOXYS],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       MT_BLAZE: {
         id: 'MT_BLAZE',
         name: 'Mt Blaze',
-        pokemons: [Pokemon.PIDGEOT, Pokemon.MAGBY, Pokemon.NUMEL, Pokemon.SLUGMA, Pokemon.RAPIDASH, Pokemon.FEAROW, Pokemon.ARCANINE, Pokemon.MOLTRES],
+        pokemons: [Pkmn.PIDGEOT, Pkmn.MAGBY, Pkmn.NUMEL, Pkmn.SLUGMA, Pkmn.RAPIDASH, Pkmn.FEAROW, Pkmn.ARCANINE, Pkmn.MOLTRES],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.FIRE
       },
       MT_STEEL_01F_05F: {
         id: 'MT_STEEL_01F_05F',
         name: 'Mt Steel',
-        pokemons: [Pokemon.SPEAROW, Pokemon.BALTOY, Pokemon.ZIGZAGOON, Pokemon.ARON, Pokemon.GEODUDE, Pokemon.MEDITITE, Pokemon.BELDUM],
+        pokemons: [Pkmn.SPEAROW, Pkmn.BALTOY, Pkmn.ZIGZAGOON, Pkmn.ARON, Pkmn.GEODUDE, Pkmn.MEDITITE, Pkmn.BELDUM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.METAL
       },
       MT_STEEL_06F_08F: {
         id: 'MT_STEEL_06F_08F',
         name: 'Mt Steel',
-        pokemons: [Pokemon.SPEAROW, Pokemon.BALTOY, Pokemon.ZIGZAGOON, Pokemon.ARON, Pokemon.GEODUDE, Pokemon.MEDITITE, Pokemon.BELDUM],
+        pokemons: [Pkmn.SPEAROW, Pkmn.BALTOY, Pkmn.ZIGZAGOON, Pkmn.ARON, Pkmn.GEODUDE, Pkmn.MEDITITE, Pkmn.BELDUM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.METAL
       },
       MT_FREEZE: {
         id: 'MT_FREEZE',
         name: 'Mt Freeze',
-        pokemons: [Pokemon.SWABLU, Pokemon.SHELGON, Pokemon.PUPITAR, Pokemon.SEEL, Pokemon.VIGOROTH, Pokemon.SLAKING, Pokemon.SEVIPER],
+        pokemons: [Pkmn.SWABLU, Pkmn.SHELGON, Pkmn.PUPITAR, Pkmn.SEEL, Pkmn.VIGOROTH, Pkmn.SLAKING, Pkmn.SEVIPER],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.ICE
       },
       MT_THUNDER_PEAK: {
         id: 'MT_THUNDER_PEAK',
         name: 'Mt Thunder Peak',
-        pokemons: [Pokemon.WEEDLE, Pokemon.NIDORANM, Pokemon.ELECTRIKE, Pokemon.CACNEA, Pokemon.PIDGEOTTO, Pokemon.BEEDRILL, Pokemon.ELECTABUZZ, Pokemon.STANTLER, Pokemon.AMPHAROS, Pokemon.MANECTRIC, Pokemon.GROWLITHE, Pokemon.ZAPDOS],
+        pokemons: [Pkmn.WEEDLE, Pkmn.NIDORANM, Pkmn.ELECTRIKE, Pkmn.CACNEA, Pkmn.PIDGEOTTO, Pkmn.BEEDRILL, Pkmn.ELECTABUZZ, Pkmn.STANTLER, Pkmn.AMPHAROS, Pkmn.MANECTRIC, Pkmn.GROWLITHE, Pkmn.ZAPDOS],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.ELECTRIC
       },
       MT_THUNDER: {
         id: 'MT_THUNDER',
         name: 'Mt Thunder',
-        pokemons: [Pokemon.WEEDLE, Pokemon.NIDORANM, Pokemon.ELECTRIKE, Pokemon.CACNEA, Pokemon.PIDGEOTTO, Pokemon.BEEDRILL, Pokemon.ELECTABUZZ, Pokemon.STANTLER, Pokemon.AMPHAROS, Pokemon.MANECTRIC, Pokemon.GROWLITHE, Pokemon.ZAPDOS],
+        pokemons: [Pkmn.WEEDLE, Pkmn.NIDORANM, Pkmn.ELECTRIKE, Pkmn.CACNEA, Pkmn.PIDGEOTTO, Pkmn.BEEDRILL, Pkmn.ELECTABUZZ, Pkmn.STANTLER, Pkmn.AMPHAROS, Pkmn.MANECTRIC, Pkmn.GROWLITHE, Pkmn.ZAPDOS],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.ELECTRIC
       },
       MURKY_CAVE: {
         id: 'MURKY_CAVE',
         name: 'Murky Cave',
-        pokemons: [Pokemon.ZUBAT, Pokemon.SEVIPER, Pokemon.GRIMER, Pokemon.GOLBAT, Pokemon.SHEDNINJA, Pokemon.SHUPPET, Pokemon.CROBAT, Pokemon.MISDREAVUS, Pokemon.MUK],
+        pokemons: [Pkmn.ZUBAT, Pkmn.SEVIPER, Pkmn.GRIMER, Pkmn.GOLBAT, Pkmn.SHEDNINJA, Pkmn.SHUPPET, Pkmn.CROBAT, Pkmn.MISDREAVUS, Pkmn.MUK],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.POISON
       },
       NORMAL_MAZE: {
         id: 'NORMAL_MAZE',
         name: 'Normal Maze',
-        pokemons: [Pokemon.RATICATE, Pokemon.FARFETCH, Pokemon.FURRET],
+        pokemons: [Pkmn.RATICATE, Pkmn.FARFETCH, Pkmn.FURRET],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.NORMAL
       },
       NORTHERN_RANGE_01F_07F: {
         id: 'NORTHERN_RANGE_01F_07F',
         name: 'Northern Range',
-        pokemons: [Pokemon.HOOTHOOT, Pokemon.DODRIO, Pokemon.NINJASK, Pokemon.SPINARAK, Pokemon.SWELLOW, Pokemon.PIDGEOT, Pokemon.FEAROW, Pokemon.TOGETIC, Pokemon.LATIOS, Pokemon.SEVIPER],
+        pokemons: [Pkmn.HOOTHOOT, Pkmn.DODRIO, Pkmn.NINJASK, Pkmn.SPINARAK, Pkmn.SWELLOW, Pkmn.PIDGEOT, Pkmn.FEAROW, Pkmn.TOGETIC, Pkmn.LATIOS, Pkmn.SEVIPER],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.FLYING
       },
       NORTHERN_RANGE_08F_16F: {
         id: 'NORTHERN_RANGE_08F_16F',
         name: 'Northern Range',
-        pokemons: [Pokemon.HOOTHOOT, Pokemon.DODRIO, Pokemon.NINJASK, Pokemon.SPINARAK, Pokemon.SWELLOW, Pokemon.PIDGEOT, Pokemon.FEAROW, Pokemon.TOGETIC, Pokemon.LATIOS, Pokemon.SEVIPER],
+        pokemons: [Pkmn.HOOTHOOT, Pkmn.DODRIO, Pkmn.NINJASK, Pkmn.SPINARAK, Pkmn.SWELLOW, Pkmn.PIDGEOT, Pkmn.FEAROW, Pkmn.TOGETIC, Pkmn.LATIOS, Pkmn.SEVIPER],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.FLYING
       },
       NORTHWIND_FIELD: {
         id: 'NORTHWIND_FIELD',
         name: 'Northwind Field',
-        pokemons: [Pokemon.AZUMARILL, Pokemon.DELCATTY, Pokemon.VAPOREON, Pokemon.POLIWHIRL, Pokemon.MUK, Pokemon.POLITOED, Pokemon.ABSOL, Pokemon.CROCONAW, Pokemon.WARTORTLE, Pokemon.SUICUNE],
+        pokemons: [Pkmn.AZUMARILL, Pkmn.DELCATTY, Pkmn.VAPOREON, Pkmn.POLIWHIRL, Pkmn.MUK, Pkmn.POLITOED, Pkmn.ABSOL, Pkmn.CROCONAW, Pkmn.WARTORTLE, Pkmn.SUICUNE],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.WATER
       },
       PITFALL_VALLEY: {
         id: 'PITFALL_VALLEY',
         name: 'Pitfall Valley',
-        pokemons: [Pokemon.PIDGEOT, Pokemon.FARFETCH, Pokemon.SWELLOW, Pokemon.HOPPIP, Pokemon.BUTTERFREE, Pokemon.RATICATE, Pokemon.DODUO, Pokemon.SWABLU, Pokemon.YANMA, Pokemon.MASQUERAIN, Pokemon.SKIPLOOM, Pokemon.AERODACTYL],
+        pokemons: [Pkmn.PIDGEOT, Pkmn.FARFETCH, Pkmn.SWELLOW, Pkmn.HOPPIP, Pkmn.BUTTERFREE, Pkmn.RATICATE, Pkmn.DODUO, Pkmn.SWABLU, Pkmn.YANMA, Pkmn.MASQUERAIN, Pkmn.SKIPLOOM, Pkmn.AERODACTYL],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.FLYING
       },
       POISON_MAZE: {
         id: 'POISON_MAZE',
         name: 'Poison Maze',
-        pokemons: [Pokemon.NIDORANF, Pokemon.NIDORANM, Pokemon.NIDORINO, Pokemon.NIDORINA],
+        pokemons: [Pkmn.NIDORANF, Pkmn.NIDORANM, Pkmn.NIDORINO, Pkmn.NIDORINA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.POISON
       },
       PURITY_FOREST_04F_07F: {
         id: 'PURITY_FOREST_04F_07F',
         name: 'Purity Forest',
-        pokemons: [Pokemon.CELEBI, Pokemon.DARKRAI, Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR, Pokemon.METAPOD, Pokemon.RATTATA, Pokemon.RATICATE, Pokemon.SPEAROW, Pokemon.NIDORANF, Pokemon.NIDORANM, Pokemon.VILEPLUME, Pokemon.BELLSPROUT, Pokemon.WEEPINBELL, Pokemon.VICTREEBEL, Pokemon.EXEGGCUTE, Pokemon.KOFFING, Pokemon.SCYTHER, Pokemon.CHIKORITA, Pokemon.BAYLEEF, Pokemon.MEGANIUM, Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE, Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.ROSELIA, Pokemon.FLYGON, Pokemon.MUNCHLAX, Pokemon.TURTWIG, Pokemon.GROTLE, Pokemon.TORTERRA],
+        pokemons: [Pkmn.CELEBI, Pkmn.DARKRAI, Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR, Pkmn.METAPOD, Pkmn.RATTATA, Pkmn.RATICATE, Pkmn.SPEAROW, Pkmn.NIDORANF, Pkmn.NIDORANM, Pkmn.VILEPLUME, Pkmn.BELLSPROUT, Pkmn.WEEPINBELL, Pkmn.VICTREEBEL, Pkmn.EXEGGCUTE, Pkmn.KOFFING, Pkmn.SCYTHER, Pkmn.CHIKORITA, Pkmn.BAYLEEF, Pkmn.MEGANIUM, Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE, Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.ROSELIA, Pkmn.FLYGON, Pkmn.MUNCHLAX, Pkmn.TURTWIG, Pkmn.GROTLE, Pkmn.TORTERRA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.GRASS
       },
       PURITY_FOREST_13F_20F: {
         id: 'PURITY_FOREST_13F_20F',
         name: 'Purity Forest',
-        pokemons: [Pokemon.CELEBI, Pokemon.DARKRAI, Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR, Pokemon.METAPOD, Pokemon.RATTATA, Pokemon.RATICATE, Pokemon.SPEAROW, Pokemon.NIDORANF, Pokemon.NIDORANM, Pokemon.VILEPLUME, Pokemon.BELLSPROUT, Pokemon.WEEPINBELL, Pokemon.VICTREEBEL, Pokemon.EXEGGCUTE, Pokemon.KOFFING, Pokemon.SCYTHER, Pokemon.CHIKORITA, Pokemon.BAYLEEF, Pokemon.MEGANIUM, Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE, Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.ROSELIA, Pokemon.FLYGON, Pokemon.MUNCHLAX, Pokemon.TURTWIG, Pokemon.GROTLE, Pokemon.TORTERRA],
+        pokemons: [Pkmn.CELEBI, Pkmn.DARKRAI, Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR, Pkmn.METAPOD, Pkmn.RATTATA, Pkmn.RATICATE, Pkmn.SPEAROW, Pkmn.NIDORANF, Pkmn.NIDORANM, Pkmn.VILEPLUME, Pkmn.BELLSPROUT, Pkmn.WEEPINBELL, Pkmn.VICTREEBEL, Pkmn.EXEGGCUTE, Pkmn.KOFFING, Pkmn.SCYTHER, Pkmn.CHIKORITA, Pkmn.BAYLEEF, Pkmn.MEGANIUM, Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE, Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.ROSELIA, Pkmn.FLYGON, Pkmn.MUNCHLAX, Pkmn.TURTWIG, Pkmn.GROTLE, Pkmn.TORTERRA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.GRASS
       },
       PURITY_FOREST_30F_43F: {
         id: 'PURITY_FOREST_30F_43F',
         name: 'Purity Forest',
-        pokemons: [Pokemon.CELEBI, Pokemon.DARKRAI, Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR, Pokemon.METAPOD, Pokemon.RATTATA, Pokemon.RATICATE, Pokemon.SPEAROW, Pokemon.NIDORANF, Pokemon.NIDORANM, Pokemon.VILEPLUME, Pokemon.BELLSPROUT, Pokemon.WEEPINBELL, Pokemon.VICTREEBEL, Pokemon.EXEGGCUTE, Pokemon.KOFFING, Pokemon.SCYTHER, Pokemon.CHIKORITA, Pokemon.BAYLEEF, Pokemon.MEGANIUM, Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE, Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.ROSELIA, Pokemon.FLYGON, Pokemon.MUNCHLAX, Pokemon.TURTWIG, Pokemon.GROTLE, Pokemon.TORTERRA],
+        pokemons: [Pkmn.CELEBI, Pkmn.DARKRAI, Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR, Pkmn.METAPOD, Pkmn.RATTATA, Pkmn.RATICATE, Pkmn.SPEAROW, Pkmn.NIDORANF, Pkmn.NIDORANM, Pkmn.VILEPLUME, Pkmn.BELLSPROUT, Pkmn.WEEPINBELL, Pkmn.VICTREEBEL, Pkmn.EXEGGCUTE, Pkmn.KOFFING, Pkmn.SCYTHER, Pkmn.CHIKORITA, Pkmn.BAYLEEF, Pkmn.MEGANIUM, Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE, Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.ROSELIA, Pkmn.FLYGON, Pkmn.MUNCHLAX, Pkmn.TURTWIG, Pkmn.GROTLE, Pkmn.TORTERRA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.GRASS
       },
       PURITY_FOREST_44F_60F: {
         id: 'PURITY_FOREST_44F_60F',
         name: 'Purity Forest',
-        pokemons: [Pokemon.CELEBI, Pokemon.DARKRAI, Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR, Pokemon.METAPOD, Pokemon.RATTATA, Pokemon.RATICATE, Pokemon.SPEAROW, Pokemon.NIDORANF, Pokemon.NIDORANM, Pokemon.VILEPLUME, Pokemon.BELLSPROUT, Pokemon.WEEPINBELL, Pokemon.VICTREEBEL, Pokemon.EXEGGCUTE, Pokemon.KOFFING, Pokemon.SCYTHER, Pokemon.CHIKORITA, Pokemon.BAYLEEF, Pokemon.MEGANIUM, Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE, Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.ROSELIA, Pokemon.FLYGON, Pokemon.MUNCHLAX, Pokemon.TURTWIG, Pokemon.GROTLE, Pokemon.TORTERRA],
+        pokemons: [Pkmn.CELEBI, Pkmn.DARKRAI, Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR, Pkmn.METAPOD, Pkmn.RATTATA, Pkmn.RATICATE, Pkmn.SPEAROW, Pkmn.NIDORANF, Pkmn.NIDORANM, Pkmn.VILEPLUME, Pkmn.BELLSPROUT, Pkmn.WEEPINBELL, Pkmn.VICTREEBEL, Pkmn.EXEGGCUTE, Pkmn.KOFFING, Pkmn.SCYTHER, Pkmn.CHIKORITA, Pkmn.BAYLEEF, Pkmn.MEGANIUM, Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE, Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.ROSELIA, Pkmn.FLYGON, Pkmn.MUNCHLAX, Pkmn.TURTWIG, Pkmn.GROTLE, Pkmn.TORTERRA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.GRASS
       },
       PURITY_FOREST_61F_79F: {
         id: 'PURITY_FOREST_61F_79F',
         name: 'Purity Forest',
-        pokemons: [Pokemon.CELEBI, Pokemon.DARKRAI, Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR, Pokemon.METAPOD, Pokemon.RATTATA, Pokemon.RATICATE, Pokemon.SPEAROW, Pokemon.NIDORANF, Pokemon.NIDORANM, Pokemon.VILEPLUME, Pokemon.BELLSPROUT, Pokemon.WEEPINBELL, Pokemon.VICTREEBEL, Pokemon.EXEGGCUTE, Pokemon.KOFFING, Pokemon.SCYTHER, Pokemon.CHIKORITA, Pokemon.BAYLEEF, Pokemon.MEGANIUM, Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE, Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.ROSELIA, Pokemon.FLYGON, Pokemon.MUNCHLAX, Pokemon.TURTWIG, Pokemon.GROTLE, Pokemon.TORTERRA],
+        pokemons: [Pkmn.CELEBI, Pkmn.DARKRAI, Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR, Pkmn.METAPOD, Pkmn.RATTATA, Pkmn.RATICATE, Pkmn.SPEAROW, Pkmn.NIDORANF, Pkmn.NIDORANM, Pkmn.VILEPLUME, Pkmn.BELLSPROUT, Pkmn.WEEPINBELL, Pkmn.VICTREEBEL, Pkmn.EXEGGCUTE, Pkmn.KOFFING, Pkmn.SCYTHER, Pkmn.CHIKORITA, Pkmn.BAYLEEF, Pkmn.MEGANIUM, Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE, Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.ROSELIA, Pkmn.FLYGON, Pkmn.MUNCHLAX, Pkmn.TURTWIG, Pkmn.GROTLE, Pkmn.TORTERRA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.GRASS
       },
       PURITY_FOREST_80F_99F: {
         id: 'PURITY_FOREST_80F_99F',
         name: 'Purity Forest',
-        pokemons: [Pokemon.CELEBI, Pokemon.DARKRAI, Pokemon.BULBASAUR, Pokemon.IVYSAUR, Pokemon.VENUSAUR, Pokemon.METAPOD, Pokemon.RATTATA, Pokemon.RATICATE, Pokemon.SPEAROW, Pokemon.NIDORANF, Pokemon.NIDORANM, Pokemon.VILEPLUME, Pokemon.BELLSPROUT, Pokemon.WEEPINBELL, Pokemon.VICTREEBEL, Pokemon.EXEGGCUTE, Pokemon.KOFFING, Pokemon.SCYTHER, Pokemon.CHIKORITA, Pokemon.BAYLEEF, Pokemon.MEGANIUM, Pokemon.TREECKO, Pokemon.GROVYLE, Pokemon.SCEPTILE, Pokemon.SEEDOT, Pokemon.NUZLEAF, Pokemon.ROSELIA, Pokemon.FLYGON, Pokemon.MUNCHLAX, Pokemon.TURTWIG, Pokemon.GROTLE, Pokemon.TORTERRA],
+        pokemons: [Pkmn.CELEBI, Pkmn.DARKRAI, Pkmn.BULBASAUR, Pkmn.IVYSAUR, Pkmn.VENUSAUR, Pkmn.METAPOD, Pkmn.RATTATA, Pkmn.RATICATE, Pkmn.SPEAROW, Pkmn.NIDORANF, Pkmn.NIDORANM, Pkmn.VILEPLUME, Pkmn.BELLSPROUT, Pkmn.WEEPINBELL, Pkmn.VICTREEBEL, Pkmn.EXEGGCUTE, Pkmn.KOFFING, Pkmn.SCYTHER, Pkmn.CHIKORITA, Pkmn.BAYLEEF, Pkmn.MEGANIUM, Pkmn.TREECKO, Pkmn.GROVYLE, Pkmn.SCEPTILE, Pkmn.SEEDOT, Pkmn.NUZLEAF, Pkmn.ROSELIA, Pkmn.FLYGON, Pkmn.MUNCHLAX, Pkmn.TURTWIG, Pkmn.GROTLE, Pkmn.TORTERRA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GRASS
       },
       RESCUE_TEAM_MAZE: {
         id: 'RESCUE_TEAM_MAZE',
         name: 'Rescue Team Maze',
-        pokemons: [Pokemon.PIDGEY, Pokemon.RATTATA, Pokemon.VOLTORB, Pokemon.EXEGGCUTE],
+        pokemons: [Pkmn.PIDGEY, Pkmn.RATTATA, Pkmn.VOLTORB, Pkmn.EXEGGCUTE],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.NORMAL
       },
       ROCK_PATH: {
         id: 'ROCK_PATH',
         name: 'Rock Path',
-        pokemons: [Pokemon.PIDGEOT, Pokemon.NIDORINA, Pokemon.NIDORINO, Pokemon.ZUBAT, Pokemon.NUMEL],
+        pokemons: [Pkmn.PIDGEOT, Pkmn.NIDORINA, Pkmn.NIDORINO, Pkmn.ZUBAT, Pkmn.NUMEL],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.POISON
       },
       SILENT_CHASM: {
         id: 'SILENT_CHASM',
         name: 'Silent Chasm',
-        pokemons: [Pokemon.FARFETCH, Pokemon.WEEDLE, Pokemon.YANMA, Pokemon.GLOOM, Pokemon.HOUNDOUR, Pokemon.POLIWAG, Pokemon.SPINARAK, Pokemon.TRAPINCH, Pokemon.BEEDRILL],
+        pokemons: [Pkmn.FARFETCH, Pkmn.WEEDLE, Pkmn.YANMA, Pkmn.GLOOM, Pkmn.HOUNDOUR, Pkmn.POLIWAG, Pkmn.SPINARAK, Pkmn.TRAPINCH, Pkmn.BEEDRILL],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.BUG
       },
       SILVER_TRENCH: {
         id: 'SILVER_TRENCH',
         name: 'Silver Trench',
-        pokemons: [Pokemon.LUGIA, Pokemon.DEWGONG, Pokemon.SHELLDER, Pokemon.CORSOLA, Pokemon.KABUTO, Pokemon.AZUMARILL, Pokemon.SLOWPOKE, Pokemon.YANMA, Pokemon.TENTACRUEL, Pokemon.VOLTORB, Pokemon.SPEAROW, Pokemon.SEEDOT, Pokemon.GOLBAT, Pokemon.HOOTHOOT, Pokemon.WYNAUT, Pokemon.HOUNDOUR, Pokemon.WAILMER, Pokemon.MAGNETON, Pokemon.BEEDRILL, Pokemon.VULPIX, Pokemon.FERALIGATR, Pokemon.SPINARAK, Pokemon.SLUGMA, Pokemon.CHANSEY, Pokemon.KRABBY, Pokemon.MAGMAR],
+        pokemons: [Pkmn.LUGIA, Pkmn.DEWGONG, Pkmn.SHELLDER, Pkmn.CORSOLA, Pkmn.KABUTO, Pkmn.AZUMARILL, Pkmn.SLOWPOKE, Pkmn.YANMA, Pkmn.TENTACRUEL, Pkmn.VOLTORB, Pkmn.SPEAROW, Pkmn.SEEDOT, Pkmn.GOLBAT, Pkmn.HOOTHOOT, Pkmn.WYNAUT, Pkmn.HOUNDOUR, Pkmn.WAILMER, Pkmn.MAGNETON, Pkmn.BEEDRILL, Pkmn.VULPIX, Pkmn.FERALIGATR, Pkmn.SPINARAK, Pkmn.SLUGMA, Pkmn.CHANSEY, Pkmn.KRABBY, Pkmn.MAGMAR],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.WATER],
         type: Synergy.WATER
       },
       SINISTER_WOODS: {
         id: 'SINISTER_WOODS',
         name: 'Sinister Woods',
-        pokemons: [Pokemon.SWINUB, Pokemon.ODDISH, Pokemon.SUDOWOODO, Pokemon.SENTRET, Pokemon.SHROOMISH, Pokemon.WOOPER, Pokemon.SCYTHER, Pokemon.HOOTHOOT, Pokemon.SLAKOTH, Pokemon.EKANS, Pokemon.GENGAR, Pokemon.MEDICHAM],
+        pokemons: [Pkmn.SWINUB, Pkmn.ODDISH, Pkmn.SUDOWOODO, Pkmn.SENTRET, Pkmn.SHROOMISH, Pkmn.WOOPER, Pkmn.SCYTHER, Pkmn.HOOTHOOT, Pkmn.SLAKOTH, Pkmn.EKANS, Pkmn.GENGAR, Pkmn.MEDICHAM],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.BUG
       },
       SKY_TOWER: {
         id: 'SKY_TOWER',
         name: 'Sky Tower',
-        pokemons: [Pokemon.SHEDNINJA, Pokemon.SHUPPET, Pokemon.LUNATONE, Pokemon.RAYQUAZA, Pokemon.DUSKULL, Pokemon.KOFFING, Pokemon.ALTARIA, Pokemon.SOLROCK, Pokemon.SCIZOR, Pokemon.DUSCLOPS, Pokemon.FLYGON, Pokemon.TROPIUS],
+        pokemons: [Pkmn.SHEDNINJA, Pkmn.SHUPPET, Pkmn.LUNATONE, Pkmn.RAYQUAZA, Pkmn.DUSKULL, Pkmn.KOFFING, Pkmn.ALTARIA, Pkmn.SOLROCK, Pkmn.SCIZOR, Pkmn.DUSCLOPS, Pkmn.FLYGON, Pkmn.TROPIUS],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.FLYING
       },
       SNOW_PATH: {
         id: 'SNOW_PATH',
         name: 'Snow Path',
-        pokemons: [Pokemon.AZURILL, Pokemon.FURRET, Pokemon.NOSEPASS],
+        pokemons: [Pkmn.AZURILL, Pkmn.FURRET, Pkmn.NOSEPASS],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.ICE
       },
       SOLAR_CAVE: {
         id: 'SOLAR_CAVE',
         name: 'Solar Cave',
-        pokemons: [Pokemon.WYNAUT, Pokemon.GIRAFARIG, Pokemon.BELDUM, Pokemon.DROWZEE, Pokemon.SPOINK, Pokemon.ABRA, Pokemon.MEDITITE, Pokemon.LUNATONE, Pokemon.METANG, Pokemon.HYPNO, Pokemon.KIRLIA, Pokemon.KADABRA, Pokemon.MEDICHAM, Pokemon.GRUMPIG, Pokemon.CLAYDOL],
+        pokemons: [Pkmn.WYNAUT, Pkmn.GIRAFARIG, Pkmn.BELDUM, Pkmn.DROWZEE, Pkmn.SPOINK, Pkmn.ABRA, Pkmn.MEDITITE, Pkmn.LUNATONE, Pkmn.METANG, Pkmn.HYPNO, Pkmn.KIRLIA, Pkmn.KADABRA, Pkmn.MEDICHAM, Pkmn.GRUMPIG, Pkmn.CLAYDOL],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       SOUTHERN_CAVERN_01F_23F: {
         id: 'SOUTHERN_CAVERN_01F_23F',
         name: 'Southern Cavern',
-        pokemons: [Pokemon.GEODUDE, Pokemon.DIGLETT, Pokemon.SEEDOT, Pokemon.CUBONE, Pokemon.NIDOKING, Pokemon.PHANPY, Pokemon.VIBRAVA, Pokemon.BALTOY, Pokemon.LARVITAR, Pokemon.ARIADOS, Pokemon.DUGTRIO, Pokemon.MAROWAK, Pokemon.GRAVELER, Pokemon.RHYHORN, Pokemon.FLYGON, Pokemon.DONPHAN, Pokemon.PUPITAR, Pokemon.GOLEM, Pokemon.ONIX, Pokemon.RHYDON],
+        pokemons: [Pkmn.GEODUDE, Pkmn.DIGLETT, Pkmn.SEEDOT, Pkmn.CUBONE, Pkmn.NIDOKING, Pkmn.PHANPY, Pkmn.VIBRAVA, Pkmn.BALTOY, Pkmn.LARVITAR, Pkmn.ARIADOS, Pkmn.DUGTRIO, Pkmn.MAROWAK, Pkmn.GRAVELER, Pkmn.RHYHORN, Pkmn.FLYGON, Pkmn.DONPHAN, Pkmn.PUPITAR, Pkmn.GOLEM, Pkmn.ONIX, Pkmn.RHYDON],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.GROUND
       },
       SOUTHERN_CAVERN_24F_50F: {
         id: 'SOUTHERN_CAVERN_24F_50F',
         name: 'Southern Cavern',
-        pokemons: [Pokemon.GEODUDE, Pokemon.DIGLETT, Pokemon.SEEDOT, Pokemon.CUBONE, Pokemon.NIDOKING, Pokemon.PHANPY, Pokemon.VIBRAVA, Pokemon.BALTOY, Pokemon.LARVITAR, Pokemon.ARIADOS, Pokemon.DUGTRIO, Pokemon.MAROWAK, Pokemon.GRAVELER, Pokemon.RHYHORN, Pokemon.FLYGON, Pokemon.DONPHAN, Pokemon.PUPITAR, Pokemon.GOLEM, Pokemon.ONIX, Pokemon.RHYDON],
+        pokemons: [Pkmn.GEODUDE, Pkmn.DIGLETT, Pkmn.SEEDOT, Pkmn.CUBONE, Pkmn.NIDOKING, Pkmn.PHANPY, Pkmn.VIBRAVA, Pkmn.BALTOY, Pkmn.LARVITAR, Pkmn.ARIADOS, Pkmn.DUGTRIO, Pkmn.MAROWAK, Pkmn.GRAVELER, Pkmn.RHYHORN, Pkmn.FLYGON, Pkmn.DONPHAN, Pkmn.PUPITAR, Pkmn.GOLEM, Pkmn.ONIX, Pkmn.RHYDON],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.GROUND
       },
       STORMY_SEA_01F_16F: {
         id: 'STORMY_SEA_01F_16F',
         name: 'Stormy Sea',
-        pokemons: [Pokemon.WINGULL, Pokemon.TENTACRUEL, Pokemon.TENTACOOL, Pokemon.SHELLDER, Pokemon.OMANYTE, Pokemon.OMASTAR, Pokemon.SLOWPOKE, Pokemon.SPHEAL, Pokemon.OMASTAR, Pokemon.GRIMER, Pokemon.KABUTOPS, Pokemon.ARMALDO, Pokemon.SEADRA, Pokemon.STARMIE, Pokemon.SEALEO, Pokemon.KYOGRE, Pokemon.CARVANHA],
+        pokemons: [Pkmn.WINGULL, Pkmn.TENTACRUEL, Pkmn.TENTACOOL, Pkmn.SHELLDER, Pkmn.OMANYTE, Pkmn.OMASTAR, Pkmn.SLOWPOKE, Pkmn.SPHEAL, Pkmn.OMASTAR, Pkmn.GRIMER, Pkmn.KABUTOPS, Pkmn.ARMALDO, Pkmn.SEADRA, Pkmn.STARMIE, Pkmn.SEALEO, Pkmn.KYOGRE, Pkmn.CARVANHA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.WATER],
         type: Synergy.WATER
       },
       STORMY_SEA_16F_39F: {
         id: 'STORMY_SEA_16F_39F',
         name: 'Stormy Sea',
-        pokemons: [Pokemon.WINGULL, Pokemon.TENTACRUEL, Pokemon.TENTACOOL, Pokemon.SHELLDER, Pokemon.OMANYTE, Pokemon.OMASTAR, Pokemon.SLOWPOKE, Pokemon.SPHEAL, Pokemon.OMASTAR, Pokemon.GRIMER, Pokemon.KABUTOPS, Pokemon.ARMALDO, Pokemon.SEADRA, Pokemon.STARMIE, Pokemon.SEALEO, Pokemon.KYOGRE, Pokemon.CARVANHA],
+        pokemons: [Pkmn.WINGULL, Pkmn.TENTACRUEL, Pkmn.TENTACOOL, Pkmn.SHELLDER, Pkmn.OMANYTE, Pkmn.OMASTAR, Pkmn.SLOWPOKE, Pkmn.SPHEAL, Pkmn.OMASTAR, Pkmn.GRIMER, Pkmn.KABUTOPS, Pkmn.ARMALDO, Pkmn.SEADRA, Pkmn.STARMIE, Pkmn.SEALEO, Pkmn.KYOGRE, Pkmn.CARVANHA],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.WATER],
         type: Synergy.WATER
       },
       THUNDERWAVE_CAVE: {
         id: 'THUNDERWAVE_CAVE',
         name: 'Thunderwave Cave',
-        pokemons: [Pokemon.RATTATA, Pokemon.NIDORANM, Pokemon.POOCHYENA, Pokemon.VOLTORB, Pokemon.ELEKID, Pokemon.PLUSLE, Pokemon.MINUN],
+        pokemons: [Pkmn.RATTATA, Pkmn.NIDORANM, Pkmn.POOCHYENA, Pkmn.VOLTORB, Pkmn.ELEKID, Pkmn.PLUSLE, Pkmn.MINUN],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.ELECTRIC
       },
       TINY_WOODS: {
         id: 'TINY_WOODS',
         name: 'Tiny Woods',
-        pokemons: [Pokemon.RATTATA, Pokemon.RATTATA, Pokemon.SANDSHREW, Pokemon.SPINARAK],
+        pokemons: [Pkmn.RATTATA, Pkmn.RATTATA, Pkmn.SANDSHREW, Pkmn.SPINARAK],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.NORMAL
       },
       UPROAR_FOREST: {
         id: 'UPROAR_FOREST',
         name: 'Uproar Forest',
-        pokemons: [Pokemon.ROSELIA, Pokemon.NUZLEAF, Pokemon.LOTAD, Pokemon.RATICATE, Pokemon.GRIMER, Pokemon.NOCTOWL, Pokemon.KOFFING],
+        pokemons: [Pkmn.ROSELIA, Pkmn.NUZLEAF, Pkmn.LOTAD, Pkmn.RATICATE, Pkmn.GRIMER, Pkmn.NOCTOWL, Pkmn.KOFFING],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
         type: Synergy.GRASS
       },
       SERENITY_RIVER: {
         id: 'SERENITY_RIVER',
         name: 'Serenity River',
-        pokemons: [Pokemon.POLIWAG, Pokemon.WOOPER, Pokemon.LOTAD, Pokemon.BARBOACH, Pokemon.MASQUERAIN],
+        pokemons: [Pkmn.POLIWAG, Pkmn.WOOPER, Pkmn.LOTAD, Pkmn.BARBOACH, Pkmn.MASQUERAIN],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.WATER
       },
       WATERFALL_POND: {
         id: 'WATERFALL_POND',
         name: 'Waterfall Pond',
-        pokemons: [Pokemon.MUDKIP, Pokemon.LOTAD, Pokemon.POLIWAG, Pokemon.BARBOACH, Pokemon.WOOPER, Pokemon.TOTODILE, Pokemon.SURSKIT, Pokemon.MAGIKARP, Pokemon.SQUIRTLE, Pokemon.LOMBRE, Pokemon.MARSHTOMP, Pokemon.WHISCASH, Pokemon.MASQUERAIN],
+        pokemons: [Pkmn.MUDKIP, Pkmn.LOTAD, Pkmn.POLIWAG, Pkmn.BARBOACH, Pkmn.WOOPER, Pkmn.TOTODILE, Pkmn.SURSKIT, Pkmn.MAGIKARP, Pkmn.SQUIRTLE, Pkmn.LOMBRE, Pkmn.MARSHTOMP, Pkmn.WHISCASH, Pkmn.MASQUERAIN],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.WATER
       },
       WESTERN_CAVE_B01F_B27F: {
         id: 'WESTERN_CAVE_B01F_B27F',
         name: 'Western Cave',
-        pokemons: [Pokemon.MURKROW, Pokemon.BUTTERFREE, Pokemon.EKANS, Pokemon.MEOWTH, Pokemon.BELLOSSOM, Pokemon.EXPLOUD, Pokemon.IGGLYBUFF, Pokemon.TAUROS, Pokemon.MILTANK, Pokemon.ESPEON, Pokemon.IVYSAUR, Pokemon.ARBOK, Pokemon.AGGRON, Pokemon.PERSIAN, Pokemon.DODRIO, Pokemon.BAYLEEF, Pokemon.ALAKAZAM, Pokemon.TYRANITAR, Pokemon.SCEPTILE, Pokemon.ARCANINE, Pokemon.SWAMPERT, Pokemon.MACHAMP, Pokemon.STEELIX, Pokemon.CHARIZARD, Pokemon.BLASTOISE, Pokemon.MEWTWO],
+        pokemons: [Pkmn.MURKROW, Pkmn.BUTTERFREE, Pkmn.EKANS, Pkmn.MEOWTH, Pkmn.BELLOSSOM, Pkmn.EXPLOUD, Pkmn.IGGLYBUFF, Pkmn.TAUROS, Pkmn.MILTANK, Pkmn.ESPEON, Pkmn.IVYSAUR, Pkmn.ARBOK, Pkmn.AGGRON, Pkmn.PERSIAN, Pkmn.DODRIO, Pkmn.BAYLEEF, Pkmn.ALAKAZAM, Pkmn.TYRANITAR, Pkmn.SCEPTILE, Pkmn.ARCANINE, Pkmn.SWAMPERT, Pkmn.MACHAMP, Pkmn.STEELIX, Pkmn.CHARIZARD, Pkmn.BLASTOISE, Pkmn.MEWTWO],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       WESTERN_CAVE_B28F_B39F: {
         id: 'WESTERN_CAVE_B28F_B39F',
         name: 'Western Cave',
-        pokemons: [Pokemon.MURKROW, Pokemon.BUTTERFREE, Pokemon.EKANS, Pokemon.MEOWTH, Pokemon.BELLOSSOM, Pokemon.EXPLOUD, Pokemon.IGGLYBUFF, Pokemon.TAUROS, Pokemon.MILTANK, Pokemon.ESPEON, Pokemon.IVYSAUR, Pokemon.ARBOK, Pokemon.AGGRON, Pokemon.PERSIAN, Pokemon.DODRIO, Pokemon.BAYLEEF, Pokemon.ALAKAZAM, Pokemon.TYRANITAR, Pokemon.SCEPTILE, Pokemon.ARCANINE, Pokemon.SWAMPERT, Pokemon.MACHAMP, Pokemon.STEELIX, Pokemon.CHARIZARD, Pokemon.BLASTOISE, Pokemon.MEWTWO],
+        pokemons: [Pkmn.MURKROW, Pkmn.BUTTERFREE, Pkmn.EKANS, Pkmn.MEOWTH, Pkmn.BELLOSSOM, Pkmn.EXPLOUD, Pkmn.IGGLYBUFF, Pkmn.TAUROS, Pkmn.MILTANK, Pkmn.ESPEON, Pkmn.IVYSAUR, Pkmn.ARBOK, Pkmn.AGGRON, Pkmn.PERSIAN, Pkmn.DODRIO, Pkmn.BAYLEEF, Pkmn.ALAKAZAM, Pkmn.TYRANITAR, Pkmn.SCEPTILE, Pkmn.ARCANINE, Pkmn.SWAMPERT, Pkmn.MACHAMP, Pkmn.STEELIX, Pkmn.CHARIZARD, Pkmn.BLASTOISE, Pkmn.MEWTWO],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       WISH_CAVE_01F_13F: {
         id: 'WISH_CAVE_01F_13F',
         name: 'Wish Cave',
-        pokemons: [Pokemon.MURKROW, Pokemon.BUTTERFREE, Pokemon.EKANS, Pokemon.MEOWTH, Pokemon.BELLOSSOM, Pokemon.EXPLOUD, Pokemon.IGGLYBUFF, Pokemon.TAUROS, Pokemon.MILTANK, Pokemon.ESPEON, Pokemon.IVYSAUR, Pokemon.ARBOK, Pokemon.AGGRON, Pokemon.PERSIAN, Pokemon.DODRIO, Pokemon.BAYLEEF, Pokemon.ALAKAZAM, Pokemon.TYRANITAR, Pokemon.SCEPTILE, Pokemon.ARCANINE, Pokemon.SWAMPERT, Pokemon.MACHAMP, Pokemon.STEELIX, Pokemon.CHARIZARD, Pokemon.BLASTOISE, Pokemon.JIRACHI],
+        pokemons: [Pkmn.MURKROW, Pkmn.BUTTERFREE, Pkmn.EKANS, Pkmn.MEOWTH, Pkmn.BELLOSSOM, Pkmn.EXPLOUD, Pkmn.IGGLYBUFF, Pkmn.TAUROS, Pkmn.MILTANK, Pkmn.ESPEON, Pkmn.IVYSAUR, Pkmn.ARBOK, Pkmn.AGGRON, Pkmn.PERSIAN, Pkmn.DODRIO, Pkmn.BAYLEEF, Pkmn.ALAKAZAM, Pkmn.TYRANITAR, Pkmn.SCEPTILE, Pkmn.ARCANINE, Pkmn.SWAMPERT, Pkmn.MACHAMP, Pkmn.STEELIX, Pkmn.CHARIZARD, Pkmn.BLASTOISE, Pkmn.JIRACHI],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       WISH_CAVE_90F_99F: {
         id: 'WISH_CAVE_90F_99F',
         name: 'Wish Cave',
-        pokemons: [Pokemon.MURKROW, Pokemon.BUTTERFREE, Pokemon.EKANS, Pokemon.MEOWTH, Pokemon.BELLOSSOM, Pokemon.EXPLOUD, Pokemon.IGGLYBUFF, Pokemon.TAUROS, Pokemon.MILTANK, Pokemon.ESPEON, Pokemon.IVYSAUR, Pokemon.ARBOK, Pokemon.AGGRON, Pokemon.PERSIAN, Pokemon.DODRIO, Pokemon.BAYLEEF, Pokemon.ALAKAZAM, Pokemon.TYRANITAR, Pokemon.SCEPTILE, Pokemon.ARCANINE, Pokemon.SWAMPERT, Pokemon.MACHAMP, Pokemon.STEELIX, Pokemon.CHARIZARD, Pokemon.BLASTOISE, Pokemon.JIRACHI],
+        pokemons: [Pkmn.MURKROW, Pkmn.BUTTERFREE, Pkmn.EKANS, Pkmn.MEOWTH, Pkmn.BELLOSSOM, Pkmn.EXPLOUD, Pkmn.IGGLYBUFF, Pkmn.TAUROS, Pkmn.MILTANK, Pkmn.ESPEON, Pkmn.IVYSAUR, Pkmn.ARBOK, Pkmn.AGGRON, Pkmn.PERSIAN, Pkmn.DODRIO, Pkmn.BAYLEEF, Pkmn.ALAKAZAM, Pkmn.TYRANITAR, Pkmn.SCEPTILE, Pkmn.ARCANINE, Pkmn.SWAMPERT, Pkmn.MACHAMP, Pkmn.STEELIX, Pkmn.CHARIZARD, Pkmn.BLASTOISE, Pkmn.JIRACHI],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.PSYCHIC
       },
       WYVERN_HILL: {
         id: 'WYVERN_HILL',
         name: 'Wyvern Hill',
-        pokemons: [Pokemon.BAGON, Pokemon.DRATINI, Pokemon.ALTARIA, Pokemon.TOTODILE, Pokemon.LUDICOLO, Pokemon.SHELGON, Pokemon.VIBRAVA, Pokemon.DRAGONAIR, Pokemon.SALAMENCE, Pokemon.FLYGON, Pokemon.DRAGONITE],
+        pokemons: [Pkmn.BAGON, Pkmn.DRATINI, Pkmn.ALTARIA, Pkmn.TOTODILE, Pkmn.LUDICOLO, Pkmn.SHELGON, Pkmn.VIBRAVA, Pkmn.DRAGONAIR, Pkmn.SALAMENCE, Pkmn.FLYGON, Pkmn.DRAGONITE],
         tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
         type: Synergy.DRAGON
       }

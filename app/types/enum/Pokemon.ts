@@ -1,6 +1,6 @@
 //
 
-export enum Pokemon {
+export enum Pkmn {
     DITTO,
     BULBASAUR,
     IVYSAUR,
