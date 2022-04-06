@@ -3,13 +3,11 @@ import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
-import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS, AUTHOR} from '../../../../models/enum';
+import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS, AUTHOR, PKM_ACTION, PKM_TINT, PKM_ORIENTATION, PKM_ANIM} from '../../../../models/enum';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 import { IPokemon, IPokemonEntity, instanceofPokemonEntity } from '../../../../types';
-import GameScene from '../scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
-import PokemonEntity from '../../../../core/pokemon-entity';
 
 export default class Pokemon extends Button {
   isPopup: boolean;
@@ -51,7 +49,7 @@ export default class Pokemon extends Button {
   manabar: Lifebar;
   backgroundIcon: GameObjects.Image;
   sprite: GameObjects.Sprite;
-  socle: GameObjects.Image;
+  shadow: GameObjects.Sprite;
   wound: GameObjects.Sprite;
   burn: GameObjects.Sprite;
   sleep: GameObjects.Sprite;
@@ -1004,16 +1002,16 @@ export default class Pokemon extends Button {
 
   setSprite(pokemon: IPokemonEntity | IPokemon, scene: Phaser.Scene) {
     const p = <IPokemonEntity> pokemon;
-    const zeroPaddedValue = this.zeroPad(p.index);
-    this.sprite = new GameObjects.Sprite(scene, 0, 0, p.sheet, `${zeroPaddedValue}/Normal/Walk/Anim/1/0000`);
+    this.sprite = new GameObjects.Sprite(scene, 0, 0, this.padIndex, `${PKM_TINT.NORMAL}/${PKM_ACTION.IDLE}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION.DOWN}/0000`);
     this.sprite.setScale(2, 2);
     this.height = this.sprite.height;
     this.width = this.sprite.width;
     this.itemsContainer = new ItemsContainer(scene, p.items, this.width + 20, -this.height/2 -20, false);
-    this.socle = new GameObjects.Image(scene, 0, this.height, 'socle');
-    scene.add.existing(this.socle);
+    this.shadow = new GameObjects.Sprite(scene, 0, 8, this.padIndex);
+    this.shadow.setScale(2, 2);
+    scene.add.existing(this.shadow);
     scene.add.existing(this.sprite);
-    this.add(this.socle);
+    this.add(this.shadow);
     this.add(this.sprite);
     this.add(this.itemsContainer);
 
