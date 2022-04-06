@@ -17,5 +17,6 @@ app/public/dist/**/*.d.ts
 /.tgitconfig
 edit/split/*
 edit/sheets/*
+edit/dist/*
 edit/credits.json
 edit/durations.json

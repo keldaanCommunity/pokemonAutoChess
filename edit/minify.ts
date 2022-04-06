@@ -21,7 +21,7 @@ pkmaIndexes.forEach(id=>{
     try{
         const buffer = fs.readFileSync(`sheets/${id}.json`);
         const json = JSON.parse(buffer.toString());
-        // fs.writeFileSync(`dist/${id}.json`, JSON.stringify(json, null, 0));
+        fs.writeFileSync(`sheets/${id}.json`, JSON.stringify(json, null, 0));
         indexes.push(id);
     }
     catch(error){

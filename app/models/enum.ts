@@ -4,6 +4,34 @@ export enum BOT_DIFFICULTY {
   HARD = "HARD"
 }
 
+export enum PKM_TINT {
+    NORMAL = "Normal",
+    SHINY = "Shiny"
+}
+
+export enum PKM_ANIM {
+    ANIM = "Anim",
+    SHADOW = "Shadow"
+}
+
+export enum PKM_ACTION {
+    IDLE = "Idle",
+    ATTACK = "Attack",
+    WALK = "Walk",
+    SLEEP = "Sleep"
+}
+
+export enum PKM_ORIENTATION {
+    DOWN = 0,
+    DOWNLEFT = 7,
+    LEFT = 6,
+    UPLEFT = 5,
+    UP = 4,
+    UPRIGHT = 3,
+    RIGHT = 2,
+    DOWNRIGHT = 1
+}
+
 export const PKM = Object.freeze({
   DITTO: 'ditto',
   BULBASAUR: 'bulbasaur',

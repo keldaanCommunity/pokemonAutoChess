@@ -212,8 +212,8 @@ export default class GameScene extends Scene {
     this.board = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battle = new BattleManager(this, this.battleGroup, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
-    this.pokemon = this.add.existing(new Pokemon(this, 11*24, 19*24, PokemonFactory.createPokemonFromName(this.room.state.players[this.uid].avatar), false, false));
-    this.animationManager.animatePokemon(this.pokemon);
+    // this.pokemon = this.add.existing(new Pokemon(this, 11*24, 19*24, PokemonFactory.createPokemonFromName(this.room.state.players[this.uid].avatar), false, false));
+    // this.animationManager.animatePokemon(this.pokemon);
 
     this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
     this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
