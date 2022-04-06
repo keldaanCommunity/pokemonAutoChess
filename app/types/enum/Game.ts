@@ -54,3 +54,9 @@ export enum BattleResult {
     DEFEAT,
     DRAW
 }
+
+export enum BotDifficulty {
+    EASY,
+    MEDIUM,
+    HARD
+}
