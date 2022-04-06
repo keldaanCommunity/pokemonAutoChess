@@ -1,7 +1,7 @@
 import Jimp from 'jimp';
 import {XMLParser} from 'fast-xml-parser';
 import fs from 'fs';
-import { PKM } from '../app/models/enum';
+import { PKM, PKM_TINT, PKM_ANIM } from '../app/models/enum';
 import PokemonFactory from '../app/models/pokemon-factory';
 
 const args = process.argv.slice(2);
@@ -48,7 +48,7 @@ async function split(){
         const zeroPaddedValue = zeroPad(index);
         await Promise.all([zeroPaddedValue, `${zeroPaddedValue}/0000/0001`].map(async pad => {
             try{
-                const shiny = zeroPaddedValue == pad ? 'Normal' : 'Shiny';
+                const shiny = zeroPaddedValue == pad ? PKM_TINT.NORMAL : PKM_TINT.SHINY;
                 const creditFile = fs.readFileSync(`${path}/sprite/${pad}/credits.txt`);
                 const splitted = creditFile.toString().split('\t');
                 credits[`${zeroPaddedValue}-${shiny}`] = {date:'', author: ''};
@@ -59,23 +59,23 @@ async function split(){
                 const xmlFile = fs.readFileSync(`${path}/sprite/${pad}/AnimData.xml`);
                 const parser = new XMLParser();
                 const xmlData = <IPMDCollab> parser.parse(xmlFile);
-                await Promise.all(['Anim', 'Shadow'].map(async anim => {
-                    await Promise.all(['Attack', 'Walk', 'Sleep'].map(async mode => {
+                await Promise.all(Object.values(PKM_ANIM).map(async anim => {
+                    await Promise.all(Object.values(PKM_ACTION).map(async action => {
                         try{
-                            const img = await Jimp.read(`${path}/sprite/${pad}/${mode}-${anim}.png`);
-                            const metadata = xmlData.AnimData.Anims.Anim.find(m=>m.Name==mode);
-                            durations[`${zeroPaddedValue}/${shiny}/${mode}/${anim}`] = [...metadata.Durations.Duration];
+                            const img = await Jimp.read(`${path}/sprite/${pad}/${action}-${anim}.png`);
+                            const metadata = xmlData.AnimData.Anims.Anim.find(m=>m.Name==action);
+                            durations[`${zeroPaddedValue}/${shiny}/${action}/${anim}`] = [...metadata.Durations.Duration];
                             // console.log(durations);
                             const frameHeight = metadata.FrameHeight;
                             const frameWidth = metadata.FrameWidth;
                             const width = img.getWidth() / frameWidth;
                             const height = img.getHeight() / frameHeight;
-                            // console.log('img', zeroPaddedValue, 'mode', mode, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
+                            // console.log('img', zeroPaddedValue, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
                             for (let x = 0; x < width; x++) {
                                 for (let y = 0; y < height; y++) {
                                     const cropImg = img.clone();
                                 
-                                    if(anim == 'Shadow'){
+                                    if(anim == PKM_ANIM.SHADOW){
                                         const shadow = xmlData.AnimData.ShadowSize;
                                         cropImg.scan(0,0,cropImg.bitmap.width,cropImg.bitmap.height, (x,y,idx)=> {
                                             if (cropImg.bitmap.data[idx] != 0 && cropImg.bitmap.data[idx + 1] != 0 && cropImg.bitmap.data[idx + 2] != 0) {
@@ -118,14 +118,14 @@ async function split(){
                                         frameWidth,
                                         frameHeight);
                                     
-                                    const writePath = `split/${zeroPaddedValue}/${shiny}/${mode}/${anim}/${y}/${zeroPad(x)}.png`;
+                                    const writePath = `split/${zeroPaddedValue}/${shiny}/${action}/${anim}/${y}/${zeroPad(x)}.png`;
                                     console.log(writePath);
                                     await cropImg.writeAsync(writePath);
                                 }
                             }
                         }
                         catch(error){
-                            console.log('mode', mode, 'is missing for index', index, mapName.get(index));
+                            console.log('action', action, 'is missing for index', index, mapName.get(index));
                         }
                     }));
                 }));

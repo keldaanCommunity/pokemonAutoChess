@@ -1,5 +1,5 @@
 import {GameObjects} from 'phaser';
-import {SPECIAL_SKILL} from '../../../../models/enum';
+import {SPECIAL_SKILL, PKM_ACTION} from '../../../../models/enum';
 import Pokemon from './pokemon';
 import PokemonEntity from '../../../../core/pokemon-entity';
 import {transformAttackCoordinate} from '../../pages/utils/utils';
@@ -46,7 +46,7 @@ export default class BattleManager {
       const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
       const p = <IPokemonEntity> pokemon;
       const pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], p, false, true);
-      this.animationManager.animatePokemon(pokemonUI);
+      this.animationManager.animatePokemon(pokemonUI, PKM_ACTION.WALK);
       this.group.add(pokemonUI);
     }
   }
@@ -234,7 +234,7 @@ export default class BattleManager {
             if (change.value != 0) {
               // console.log(change.value, pkm.action, pkm.targetX, pkm.targetY);
               if (pkm.action == 'ATTACKING' && pkm.targetX !== null && pkm.targetY !== null) {
-                this.animationManager.animatePokemon(pkm);
+                this.animationManager.animatePokemon(pkm, PKM_ACTION.ATTACK);
                 pkm.attackAnimation();
               }
             }
@@ -277,7 +277,12 @@ export default class BattleManager {
             }
           } else if (change.field == 'orientation') {
             pkm.orientation = pokemon.orientation;
-            this.animationManager.animatePokemon(pkm);
+            if (pkm.action == 'ATTACKING'){
+                this.animationManager.animatePokemon(pkm, PKM_ACTION.ATTACK);
+            }
+            else{
+                this.animationManager.animatePokemon(pkm, PKM_ACTION.WALK);
+            }
           } else if (change.field =='action') {
             pkm.action = pokemon.action;
           } else if (change.field == 'critChance') {
