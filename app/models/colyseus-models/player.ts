@@ -20,7 +20,7 @@ export default class Player extends Schema implements IPlayer{
   @type(Synergies) synergies = new Synergies();
   @type(['string']) itemsProposition = new ArraySchema<string>();
   @type('uint8') money = process.env.MODE == 'dev' ? 400 : 5;
-  @type('uint8') life = process.env.MODE == 'dev' ? 5 : 100;
+  @type('uint8') life = process.env.MODE == 'dev' ? 50 : 100;
   @type('boolean') shopLocked: boolean = false;
   @type('uint8') streak: number = 0;
   @type('uint8') interest: number = 0;

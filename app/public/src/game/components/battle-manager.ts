@@ -277,12 +277,7 @@ export default class BattleManager {
             }
           } else if (change.field == 'orientation') {
             pkm.orientation = pokemon.orientation;
-            if (pkm.action == 'ATTACKING'){
-                this.animationManager.animatePokemon(pkm, PKM_ACTION.ATTACK);
-            }
-            else{
-                this.animationManager.animatePokemon(pkm, PKM_ACTION.WALK);
-            }
+            this.animationManager.animatePokemon(pkm, PKM_ACTION.WALK);
           } else if (change.field =='action') {
             pkm.action = pokemon.action;
           } else if (change.field == 'critChance') {

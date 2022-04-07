@@ -6,7 +6,8 @@ export default class LifeBar extends GameObjects.Graphics {
   width: number;
   p: number;
   drawBg: boolean;
-  constructor(scene: Phaser.Scene, x: number, y: number, width: number, life: number, color: number, drawBg: boolean) {
+  smallRatio: boolean;
+  constructor(scene: Phaser.Scene, x: number, y: number, width: number, life: number, color: number, drawBg: boolean, smallRatio: boolean) {
     super(scene);
     this.x = x;
     this.y = y;
@@ -15,6 +16,7 @@ export default class LifeBar extends GameObjects.Graphics {
     this.width = width;
     this.p = (this.width - 4) / this.value;
     this.drawBg = drawBg;
+    this.smallRatio = smallRatio;
 
     this.draw();
 
@@ -36,20 +38,21 @@ export default class LifeBar extends GameObjects.Graphics {
 
   draw() {
     this.clear();
+    const h = this.smallRatio ? 2:4;
 
     if (this.drawBg) {
     //  BG
-      this.fillStyle(0x000000);
-      this.fillRect(this.x, this.y, this.width, 10);
+      this.fillStyle(0xffffff);
+      this.fillRect(this.x, this.y, this.width, h);
 
       //  Health
 
-      this.fillStyle(0xffffff);
-      this.fillRect(this.x + 2, this.y + 2, this.width - 4, 6);
+      // this.fillStyle(0xffffff);
+      // this.fillRect(this.x + 2, this.y + 2, this.width - 4, 4);
     }
 
     this.fillStyle(this.color);
     const d = Math.floor(this.p * this.value);
-    this.fillRect(this.x + 2, this.y + 2, d, 6);
+    this.fillRect(this.x, this.y, d, h);
   }
 }

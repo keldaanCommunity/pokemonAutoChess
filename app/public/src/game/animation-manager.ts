@@ -24,11 +24,20 @@ export default class AnimationManager {
                     frameArray[i]['duration'] = durationArray[i] * 10;
                   }
                 }
-                this.game.anims.create({
-                  key: `${index}/${shiny}/${action}/${mode}/${direction}`,
-                  frames: frameArray,
-                  repeat: -1
-                });
+                if(action == PKM_ACTION.ATTACK){
+                  this.game.anims.create({
+                    key: `${index}/${shiny}/${action}/${mode}/${direction}`,
+                    frames: frameArray,
+                    repeat: 0,
+                  });
+                }
+                else{
+                  this.game.anims.create({
+                    key: `${index}/${shiny}/${action}/${mode}/${direction}`,
+                    frames: frameArray,
+                    repeat: -1
+                  });
+                }
               }
               else{
                 console.log('duration array missing for ', `${index}/${shiny}/${action}/${mode}`);
@@ -744,8 +753,8 @@ export default class AnimationManager {
   }
 
   animatePokemon(entity: Pokemon, action: PKM_ACTION) {
-    const animKey = `${entity.padIndex}/Normal/${action}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION[entity.orientation]}`;
-    const shadowKey = `${entity.padIndex}/Normal/${action}/${PKM_ANIM.SHADOW}/${PKM_ORIENTATION[entity.orientation]}`;
+    const animKey = `${entity.padIndex}/${PKM_TINT.NORMAL}/${action}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION[entity.orientation]}`;
+    const shadowKey = `${entity.padIndex}/${PKM_TINT.NORMAL}/${action}/${PKM_ANIM.SHADOW}/${PKM_ORIENTATION[entity.orientation]}`;
     // console.log(animKey);
     entity.sprite.anims.play(animKey);
     entity.shadow.anims.play(shadowKey);
