@@ -11,17 +11,17 @@ export default class ItemContainer extends Button {
   scene: Phaser.Scene;
   dragable: boolean
   constructor(scene: Phaser.Scene, x: number, y: number, item: string, dragable: boolean) {
-    super(scene, x, y, dragable ? 70: 15, dragable ? 70: 15);
+    super(scene, x, y, dragable ? 70: 25, dragable ? 70: 25);
     this.scene = scene;
     this.dragable = dragable
     if (this.dragable) {
       this.add(new GameObjects.Ellipse(scene, 0, 0, 70, 70, 0xffffff, 0.7).setStrokeStyle(3, 0x000000, 1));
     } else {
-      this.add(new GameObjects.Ellipse(scene, 0, 0, 30, 30, 0xffffff, 0.7).setStrokeStyle(1, 0x000000, 1));
+      this.add(new GameObjects.Ellipse(scene, 0, 0, 25, 25, 0xffffff, 0.7));
     }
     this.sprite = new GameObjects.Image(scene, 0, 0, 'item', item).setScale(this.dragable ? 2:1, this.dragable? 2:1);
     this.detail = new ItemDetail(scene, 0, 0, item);
-    this.detail.setPosition(this.detail.width /2 + 40, this.detail.height/2 + 40);
+    this.detail.setPosition(-this.detail.width/2 -40, -this.detail.height/2 - 40);
     this.detail.setScale(0, 0);
     this.name = item;
     this.add(this.sprite);

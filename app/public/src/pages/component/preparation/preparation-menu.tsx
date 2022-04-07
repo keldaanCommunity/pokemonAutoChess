@@ -50,7 +50,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
     if(uid == ownerId){
         input = <div className="nes-field is-inline" style={{margin:'5px'}}>
         <input maxLength={30} type="text" id="inline_field" className="nes-input" placeholder={name} onChange={e=>{setInputValue(e.target.value)}}/>
-        <button className="nes-btn is-primary" onClick={()=>dispatch(changeRoomName(inputValue))}>Change</button>
+        <button style={{marginLeft:'10px'}} className="nes-btn is-primary" onClick={()=>dispatch(changeRoomName(inputValue))}>Change</button>
     </div>;
     }
     return <div className="nes-container with-title is-centered" style={{

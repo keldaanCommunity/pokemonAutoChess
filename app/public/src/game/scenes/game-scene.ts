@@ -63,7 +63,7 @@ export default class GameScene extends Scene {
     const height = this.cameras.main.height;
     const loadingText = this.make.text({
       x: width / 2,
-      y: (height / 2) - 50,
+      y: (height / 2) - 100,
       text: 'Loading...',
       style: {
         font: '30px monospace'
@@ -73,7 +73,7 @@ export default class GameScene extends Scene {
 
     const percentText = this.make.text({
       x: width / 2,
-      y: (height / 2) + 10,
+      y: (height / 2) -50,
       text: '0%',
       style: {
         font: '28px monospace'
@@ -93,7 +93,7 @@ export default class GameScene extends Scene {
     assetText.setOrigin(0.5, 0.5);
 
     this.load.on('progress', (value: number) => {
-      percentText.setText((value * 100).toString() + '%');
+      percentText.setText((value * 100).toFixed(1) + '%');
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
       progressBar.fillRect(500, 510, 1000 * value, 30);

@@ -3,11 +3,12 @@ import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
-import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS, AUTHOR, PKM_ACTION, PKM_TINT, PKM_ORIENTATION, PKM_ANIM} from '../../../../models/enum';
+import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS, AUTHOR, PKM_ACTION, PKM_TINT, PKM_ORIENTATION, PKM_ANIM, PKM} from '../../../../models/enum';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 import { IPokemon, IPokemonEntity, instanceofPokemonEntity } from '../../../../types';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
+import GameScene from '../scenes/game-scene';
 
 export default class Pokemon extends Button {
   isPopup: boolean;
@@ -951,7 +952,7 @@ export default class Pokemon extends Button {
     }
   }
 
-  setLifeBar(pokemon: IPokemonEntity, scene: Phaser.Scene, height: number) {
+  setLifeBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
     if (pokemon.life !== undefined) {
       let color: number;
       if (pokemon.team == 0) {
@@ -960,36 +961,36 @@ export default class Pokemon extends Button {
         color = 0xff0000;
       }
       const lifeRatio = pokemon.life / (pokemon.life + pokemon.shield);
-      this.lifebar = new Lifebar(scene, -15, height, lifeRatio * 60, pokemon.hp, color, true);
+      this.lifebar = new Lifebar(scene, -15, -this.height/2-7, lifeRatio * 60, pokemon.hp, color, true, false);
       this.lifebar.setLife(pokemon.life);
       this.add(this.lifebar);
     }
   }
 
   setShieldBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
-    const h = this.height/2 + 5;
+    
     if (pokemon.shield !== undefined && pokemon.shield > 0) {
       const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
-      this.shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, h, shieldRatio * 60, pokemon.shield, 0x939393, true);
+      this.shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, -this.height/2-7, shieldRatio * 60, pokemon.shield, 0x939393, true, false);
       this.shieldbar.setLife(pokemon.shield);
       this.add(this.shieldbar);
     }
   }
 
-  setManaBar(pokemon: IPokemonEntity, scene: Phaser.Scene, height: number) {
+  setManaBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
     if (pokemon.mana !== undefined) {
       const color = 0x01b8fe;
-      this.manabar = new Lifebar(scene, -15, height + 5, 60, pokemon.maxMana, color, true);
+      this.manabar = new Lifebar(scene, -15, -this.height/2-5, 60, pokemon.maxMana, color, true, true);
       this.manabar.setLife(pokemon.mana);
       this.add(this.manabar);
     }
   }
 
-  setEffects(pokemon: IPokemonEntity, scene: Phaser.Scene, height: number) {
+  setEffects(pokemon: IPokemonEntity, scene: Phaser.Scene) {
     if (pokemon.effects.length > 0) {
       pokemon.effects.forEach((effect, c) => {
         if ( effect && EFFECTS_ICON[effect]) {
-          this.backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5, 0.5);
+          this.backgroundIcon = new GameObjects.Image(scene, c*20 -20, this.height/2+4 +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5, 0.5);
           this.add(this.backgroundIcon);
         }
       });
@@ -1003,11 +1004,14 @@ export default class Pokemon extends Button {
   setSprite(pokemon: IPokemonEntity | IPokemon, scene: Phaser.Scene) {
     const p = <IPokemonEntity> pokemon;
     this.sprite = new GameObjects.Sprite(scene, 0, 0, this.padIndex, `${PKM_TINT.NORMAL}/${PKM_ACTION.IDLE}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION.DOWN}/0000`);
+    //this.sprite.setOrigin(0,0);
     this.sprite.setScale(2, 2);
+    this.sprite.on('animationcomplete', ()=>{const g = <GameScene> scene; g.animationManager.animatePokemon(this, PKM_ACTION.IDLE)});
     this.height = this.sprite.height;
     this.width = this.sprite.width;
-    this.itemsContainer = new ItemsContainer(scene, p.items, this.width + 20, -this.height/2 -20, false);
-    this.shadow = new GameObjects.Sprite(scene, 0, 8, this.padIndex);
+    this.itemsContainer = new ItemsContainer(scene, p.items, -25, -this.height/2 -25, false);
+    this.shadow = new GameObjects.Sprite(scene, 0, 5, this.padIndex);
+    //this.shadow.setOrigin(0,0);
     this.shadow.setScale(2, 2);
     scene.add.existing(this.shadow);
     scene.add.existing(this.sprite);
@@ -1021,9 +1025,9 @@ export default class Pokemon extends Button {
         this.sprite.setScale(3, 3);
       }
       this.setShieldBar(p, scene);
-      this.setLifeBar(p, scene, this.height/2 + 5);
-      this.setManaBar(p, scene, this.height/2 + 5);
-      this.setEffects(p, scene, this.height + 30);
+      this.setLifeBar(p, scene);
+      this.setManaBar(p, scene);
+      this.setEffects(p, scene);
     }
   }
 
