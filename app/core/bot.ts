@@ -1,7 +1,8 @@
-import {BATTLE_RESULT, ITEM, TYPE} from '../models/enum';
+import {ITEM, TYPE} from '../models/enum';
 import PokemonFactory from '../models/pokemon-factory';
 import BOT, { IBot } from '../models/mongo-models/bot-v2';
 import Player from '../models/colyseus-models/player';
+import { BattleResults } from '../types/enum/Game';
 
 export default class Bot {
 
@@ -22,11 +23,11 @@ export default class Bot {
   }
 
   updateProgress() {
-    if (this.player.getLastBattleResult() == BATTLE_RESULT.DEFEAT) {
+    if (this.player.getLastBattleResult() == BattleResults.DEFEAT) {
       this.progress += 1;
-    } else if (this.player.getLastBattleResult() == BATTLE_RESULT.DRAW) {
+    } else if (this.player.getLastBattleResult() == BattleResults.DRAW) {
       this.progress += 1;
-    } else if (this.player.getLastBattleResult() == BATTLE_RESULT.WIN) {
+    } else if (this.player.getLastBattleResult() == BattleResults.WIN) {
       this.progress += 1.5;
     }
 

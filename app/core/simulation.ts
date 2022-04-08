@@ -2,7 +2,8 @@ import Board from './board';
 import {Schema, MapSchema, type} from '@colyseus/schema';
 import PokemonEntity from './pokemon-entity';
 import PokemonFactory from '../models/pokemon-factory';
-import {CLIMATE, EFFECTS, TYPE, ATTACK_TYPE, ITEM} from '../models/enum';
+import {CLIMATE, EFFECTS, TYPE, ITEM} from '../models/enum';
+import { AttackType } from '../types/enum/Game';
 import Dps from'./dps';
 import DpsHeal from './dps-heal';
 import ItemFactory from '../models/item-factory';
@@ -285,7 +286,7 @@ export default class Simulation extends Schema implements ISimulation{
       }
       if (pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
         if (blueVoidCount > 0) {
-          pokemon.attackType = ATTACK_TYPE.TRUE;
+          pokemon.attackType = AttackType.TRUE;
           blueVoidCount --;
         } else {
           pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.PHANTOM_FORCE), 1);
@@ -766,7 +767,7 @@ export default class Simulation extends Schema implements ISimulation{
 
         case EFFECTS.CURSE:
           if (types.includes(TYPE.GHOST)) {
-            pokemon.attackType = ATTACK_TYPE.TRUE;
+            pokemon.attackType = AttackType.TRUE;
             pokemon.effects.push(EFFECTS.CURSE);
           }
           break;

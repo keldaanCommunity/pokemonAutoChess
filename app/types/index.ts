@@ -10,6 +10,7 @@ import LeaderboardInfo from '../models/colyseus-models/leaderboard-info'
 import LobbyUser from '../models/colyseus-models/lobby-user'
 import Message from '../models/colyseus-models/message'
 import Synergies from '../models/colyseus-models/synergies'
+import { AttackType, Orientation, PokemonActionState, Rarity } from './enum/Game'
 
 export interface IMessage {
     name: string
@@ -63,7 +64,7 @@ export interface IPokemon {
     id: string
     name: string
     types: string[]
-    rarity: string
+    rarity: Rarity
     sheet: string
     index: number
     evolution:string
@@ -74,7 +75,7 @@ export interface IPokemon {
     atkSpeed: number
     def: number
     speDef: number
-    attackType: string
+    attackType: AttackType
     atk: number
     hp: number
     range: number
@@ -163,10 +164,10 @@ export interface IPokemonEntity {
   shieldDone: number
   positionX: number
   positionY: number
-  action: string
+  action: PokemonActionState
   index: number
   id: string
-  orientation: string
+  orientation: Orientation
   critChance: number
   hp: number
   mana: number
@@ -174,7 +175,7 @@ export interface IPokemonEntity {
   atk: number
   def: number
   speDef: number
-  attackType: string
+  attackType: AttackType
   life: number
   shield: number
   team: number
@@ -185,7 +186,7 @@ export interface IPokemonEntity {
   targetY: number
   attackSprite: string
   sheet: string
-  rarity: string
+  rarity: Rarity
   name: string
   effects: string[]
   items: SetSchema<string>

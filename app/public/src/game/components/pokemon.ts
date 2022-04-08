@@ -10,6 +10,7 @@ import GameScene from '../scenes/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
 import PokemonEntity from '../../../../core/pokemon-entity';
+import { AttackType, Orientation, PokemonActionState } from '../../../../types/enum/Game';
 
 export default class Pokemon extends Button {
   isPopup: boolean;
@@ -22,7 +23,7 @@ export default class Pokemon extends Button {
   atk: number;
   def: number;
   speDef: number;
-  attackType: string;
+  attackType: AttackType;
   atkSpeed: number;
   targetX: number;
   targetY: number;
@@ -37,8 +38,8 @@ export default class Pokemon extends Button {
   shield: number;
   projectile: GameObjects.Sprite;
   itemsContainer: ItemsContainer;
-  orientation: string;
-  action: string;
+  orientation: Orientation;
+  action: PokemonActionState;
   moveManager: MoveTo;
   rangeType: string;
   types: string[];
@@ -1029,8 +1030,8 @@ export default class Pokemon extends Button {
       this.action = p.action;
     }
     else{
-      this.orientation = 'DOWNLEFT';
-      this.action = 'MOVING';
+      this.orientation = Orientation.DOWNLEFT;
+      this.action = PokemonActionState.MOVING;
     }
   }
 

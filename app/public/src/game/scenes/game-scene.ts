@@ -7,13 +7,13 @@ import WeatherManager from '../components/weather-manager';
 import ItemsContainer from '../components/items-container';
 import Pokemon from '../components/pokemon';
 import PokemonFactory from '../../../../models/pokemon-factory';
-import {STATE, ITEM_RECIPE} from '../../../../models/enum';
+import {ITEM_RECIPE} from '../../../../models/enum';
 import firebase from 'firebase/compat/app';
 import {getOrientation, transformCoordinate} from '../../pages/utils/utils';
 import { Room } from "colyseus.js";
 import GameState from "../../../../rooms/states/game-state";
 import ItemContainer from '../components/item-container';
-
+import { GamePhaseState } from '../../../../types/enum/Game';
 import ItemDetail from '../components/item-detail';
 
 export default class GameScene extends Scene {
@@ -255,7 +255,7 @@ export default class GameScene extends Scene {
 
   updatePhase() {
     this.targetPokemon = null;
-    if (this.room.state.phase == STATE.FIGHT) {
+    if (this.room.state.phase == GamePhaseState.FIGHT) {
       this.board.battleMode();
     } else {
       this.board.pickMode();

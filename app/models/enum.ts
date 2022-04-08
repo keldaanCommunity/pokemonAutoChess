@@ -1,8 +1,10 @@
-export enum BOT_DIFFICULTY {
-  EASY = "EASY",
-  MEDIUM = "MEDIUM",
-  HARD = "HARD"
-}
+// export enum BOT_DIFFICULTY {
+//   EASY = "EASY",
+//   MEDIUM = "MEDIUM",
+//   HARD = "HARD"
+// }
+
+import { Rarity } from "../types/enum/Game";
 
 export const PKM = Object.freeze({
   DITTO: 'ditto',
@@ -2252,36 +2254,37 @@ export const TYPE_TRADUCTION = Object.freeze({
   }
 });
 
-export const RARITY = Object.freeze({
-  COMMON: 'COMMON',
-  UNCOMMON: 'UNCOMMON',
-  RARE: 'RARE',
-  EPIC: 'EPIC',
-  LEGENDARY: 'LEGENDARY',
-  MYTHICAL: 'MYTHICAL',
-  NEUTRAL: 'NEUTRAL',
-  SUMMON: 'SUMMON'
-});
+// export const RARITY = Object.freeze({
+//   COMMON: 'COMMON',
+//   UNCOMMON: 'UNCOMMON',
+//   RARE: 'RARE',
+//   EPIC: 'EPIC',
+//   LEGENDARY: 'LEGENDARY',
+//   MYTHICAL: 'MYTHICAL',
+//   NEUTRAL: 'NEUTRAL',
+//   SUMMON: 'SUMMON'
+// });
 
 export const RARITY_HP_COST= Object.freeze({
-  COMMON: 1,
-  UNCOMMON: 1,
-  RARE: 2,
-  EPIC: 2,
-  LEGENDARY: 3,
-  MYTHICAL: 4,
-  NEUTRAL: 2,
-  SUMMON: 1
+  [Rarity.COMMON] : 1,
+  [Rarity.UNCOMMON] : 1,
+  [Rarity.RARE] : 2,
+  [Rarity.EPIC] : 2,
+  [Rarity.LEGENDARY] : 3,
+  [Rarity.MYTHICAL] : 4,
+  [Rarity.NEUTRAL] : 2,
+  [Rarity.SUMMON] : 1
 });
 
 export const COST = Object.freeze({
-  COMMON: 1,
-  UNCOMMON: 2,
-  RARE: 3,
-  EPIC: 4,
-  MYTHICAL: 6,
-  LEGENDARY: 5,
-  SUMMON: 0
+  [Rarity.COMMON] : 1,
+  [Rarity.UNCOMMON] : 2,
+  [Rarity.RARE] : 3,
+  [Rarity.EPIC] : 4,
+  [Rarity.MYTHICAL] : 6,
+  [Rarity.LEGENDARY] : 5,
+  [Rarity.SUMMON] : 0,
+  [Rarity.NEUTRAL] : 0
 });
 
 export const EXP_TABLE = Object.freeze({
@@ -2296,27 +2299,27 @@ export const EXP_TABLE = Object.freeze({
   9: -1
 });
 
-export const STATE = Object.freeze({
-  FIGHT: 'Fight',
-  PICK: 'Pick'
-});
+// export const STATE = Object.freeze({
+//   FIGHT: 'Fight',
+//   PICK: 'Pick'
+// });
 
-export const STATE_TYPE = Object.freeze({
-  MOVING: 'MOVING',
-  ATTACKING: 'ATTACKING'
-});
+// export const STATE_TYPE = Object.freeze({
+//   MOVING: 'MOVING',
+//   ATTACKING: 'ATTACKING'
+// });
 
-export const ORIENTATION = Object.freeze({
-  DOWNLEFT: 'DOWNLEFT',
-  LEFT: 'LEFT',
-  UPLEFT: 'UPLEFT',
-  UP: 'UP',
-  UPRIGHT: 'UPRIGHT',
-  RIGHT: 'RIGHT',
-  DOWNRIGHT: 'DOWNRIGHT',
-  DOWN: 'DOWN',
-  UNCLEAR: 'UNCLEAR'
-});
+// export const ORIENTATION = Object.freeze({
+//   DOWNLEFT: 'DOWNLEFT',
+//   LEFT: 'LEFT',
+//   UPLEFT: 'UPLEFT',
+//   UP: 'UP',
+//   UPRIGHT: 'UPRIGHT',
+//   RIGHT: 'RIGHT',
+//   DOWNRIGHT: 'DOWNRIGHT',
+//   DOWN: 'DOWN',
+//   UNCLEAR: 'UNCLEAR'
+// });
 
 export const ORIENTATION_RAD = Object.freeze({
   DOWNLEFT: 5 * Math.PI / 4,
@@ -2330,11 +2333,11 @@ export const ORIENTATION_RAD = Object.freeze({
   UNCLEAR: 0
 });
 
-export const ATTACK_TYPE = Object.freeze({
-  PHYSICAL: 'PHYSICAL',
-  SPECIAL: 'SPECIAL',
-  TRUE: 'TRUE'
-});
+// export const ATTACK_TYPE = Object.freeze({
+//   PHYSICAL: 'PHYSICAL',
+//   SPECIAL: 'SPECIAL',
+//   TRUE: 'TRUE'
+// });
 
 export const MAP_TYPE = Object.freeze({
   WATER: 'WATER',
@@ -3348,14 +3351,14 @@ export const XP_TABLE = [1000, 1500, 2000, 2500, 2500, 2500, 2500, 2500, 2500, 2
 export const XP_PLACE = [700, 500, 400, 300, 200, 150, 100, 0];
 
 export const RARITY_COLOR = Object.freeze({
-  COMMON: '#686d7d',
-  NEUTRAL: '#686d7d',
-  UNCOMMON: '#478a41',
-  RARE: '#5062ab',
-  EPIC: '#7b469c',
-  LEGENDARY: '#a6802e',
-  MYTHICAL: '#ffc0cb',
-  SUMMON: '#991f1f'
+  [Rarity.COMMON]: '#686d7d',
+  [Rarity.NEUTRAL]: '#686d7d',
+  [Rarity.UNCOMMON]: '#478a41',
+  [Rarity.RARE]: '#5062ab',
+  [Rarity.EPIC]: '#7b469c',
+  [Rarity.LEGENDARY]: '#a6802e',
+  [Rarity.MYTHICAL]: '#ffc0cb',
+  [Rarity.SUMMON]: '#991f1f'
 });
 
 export const PROBABILITY = {
@@ -4213,11 +4216,11 @@ export const PRECOMPUTED_RARITY_POKEMONS_ALL = {
   ]
 };
 
-export const BATTLE_RESULT = Object.freeze({
-  WIN: 'WIN',
-  DEFEAT: 'DEFEAT',
-  DRAW: 'DRAW'
-});
+// export const BATTLE_RESULT = Object.freeze({
+//   WIN: 'WIN',
+//   DEFEAT: 'DEFEAT',
+//   DRAW: 'DRAW'
+// });
 
 export const NEUTRAL_STAGE = [
   {

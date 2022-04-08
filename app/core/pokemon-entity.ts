@@ -1,4 +1,5 @@
-import {STATE_TYPE, ORIENTATION, ITEM} from '../models/enum';
+import { ITEM } from '../models/enum';
+import { Orientation, PokemonActionState } from '../types/enum/Game';
 import MovingState from './moving-state';
 import AttackingState from './attacking-state';
 import uniqid from 'uniqid';
@@ -11,15 +12,16 @@ import {AttackStrategy} from './attack-strategy';
 import Board from './board';
 import PokemonState from './pokemon-state';
 import { IPokemonEntity, IPokemon } from '../types';
+import { AttackType, Rarity } from '../types/enum/Game';
 
 export default class PokemonEntity extends Schema implements IPokemonEntity{
 
   @type('uint8') positionX: number;
   @type('uint8') positionY: number;
-  @type('string') action = STATE_TYPE.MOVING;
+  @type('uint8') action = PokemonActionState.MOVING;
   @type('uint16') index: number;
   @type('string') id: string;
-  @type('string') orientation = ORIENTATION.DOWNLEFT;
+  @type('uint8') orientation = Orientation.DOWNLEFT;
   @type('uint8') critChance = 10;
   @type('uint16') hp: number;
   @type('uint8') mana = 0;
@@ -27,7 +29,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('uint16') atk: number;
   @type('uint16') def: number;
   @type('uint16') speDef: number;
-  @type('string') attackType: string;
+  @type('uint8') attackType: AttackType;
   @type('uint16') life: number;
   @type('uint16') shield = 0;
   @type('uint8') team: number;
@@ -38,7 +40,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('int8') targetY = -1;
   @type('string') attackSprite: string;
   @type('string') sheet: string;
-  @type('string') rarity: string;
+  @type('uint8') rarity: Rarity;
   @type('string') name: string;
   @type(['string']) effects = new ArraySchema<string>();
   @type({set: 'string'}) items = new SetSchema<string>();
@@ -88,8 +90,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
     this.positionY = positionY;
     this.index = pokemon.index;
     this.name = pokemon.name;
-    this.action = STATE_TYPE.MOVING;
-    this.orientation = ORIENTATION.DOWNLEFT;
+    this.action = PokemonActionState.MOVING;
+    this.orientation = Orientation.DOWNLEFT;
     this.baseAtk = pokemon.atk;
     this.baseDef = pokemon.def;
     this.baseSpeDef = pokemon.speDef;
@@ -135,11 +137,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
     this.atkSpeed = Number(Math.min(2.5, Math.max(0.2, 0.75 * (1 + this.atkSpeedBonus / 100))).toFixed(2));
   }
 
-  handleDamage(damage: number, board: Board, attackType: string, attacker: PokemonEntity) {
+  handleDamage(damage: number, board: Board, attackType: AttackType, attacker: PokemonEntity) {
     return this.state.handleDamage(this, damage, board, attackType, attacker);
   }
 
-  handleSpellDamage(damage: number, board: Board, attackType: string, attacker: PokemonEntity) {
+  handleSpellDamage(damage: number, board: Board, attackType: AttackType, attacker: PokemonEntity) {
     let spellDamage = damage + damage * attacker.spellDamage / 100;
     if (attacker && attacker.items.has(ITEM.REAPER_CLOTH) &&  Math.random() > 0.8) {
       spellDamage *= 2;

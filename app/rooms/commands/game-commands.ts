@@ -1,5 +1,6 @@
 import {Command} from '@colyseus/command';
-import {STATE, COST, TYPE, ITEM, RARITY, PKM, BATTLE_RESULT, NEUTRAL_STAGE, BASIC_ITEM, ITEM_RECIPE} from '../../models/enum';
+import { COST, TYPE, ITEM, PKM, NEUTRAL_STAGE, BASIC_ITEM, ITEM_RECIPE } from '../../models/enum';
+import { BattleResults } from '../../types/enum/Game';
 import Player from '../../models/colyseus-models/player';
 import PokemonFactory from '../../models/pokemon-factory';
 import ItemFactory from '../../models/item-factory';
@@ -8,18 +9,21 @@ import GameRoom from '../game-room';
 import { Client } from "colyseus";
 import {MapSchema} from '@colyseus/schema';
 import PokemonEntity from '../../core/pokemon-entity';
-
+import { GamePhaseState, Rarity } from '../../types/enum/Game';
 export class OnShopCommand extends Command<GameRoom, {
   id: string,
   index: number
 }> {
   execute({id, index}) {
     if (id !== true && index !== true && this.state.players.has(id)) {
+      
+
       const player = this.state.players.get(id);
       if (player.shop[index]) {
+        
+        
         const name = player.shop[index];
         let pokemon = PokemonFactory.createPokemonFromName(name);
-
         if (player.money >= pokemon.cost && (this.room.getBoardSize(player.board) < 8 ||
         (this.room.getPossibleEvolution(player.board, pokemon.name) && this.room.getBoardSize(player.board) == 8))) {
           player.money -= pokemon.cost;
@@ -45,8 +49,7 @@ export class OnShopCommand extends Command<GameRoom, {
           pokemon.positionX = this.room.getFirstAvailablePositionInBoard(player.id);
           pokemon.positionY = 0;
           player.board.set(pokemon.id, pokemon);
-
-          if (pokemon.rarity == RARITY.MYTHICAL) {
+          if (pokemon.rarity == Rarity.MYTHICAL) {
             this.state.shop.assignShop(player);
           } else {
             player.shop[index] = '';
@@ -99,7 +102,7 @@ export class OnDragDropCommand extends Command<GameRoom, {
           const y = parseInt(detail.y);
           if (pokemon.name == PKM.DITTO) {
             const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y);
-            if (pokemonToClone && pokemonToClone.rarity != RARITY.MYTHICAL && !pokemonToClone.types.includes(TYPE.FOSSIL)) {
+            if (pokemonToClone && pokemonToClone.rarity != Rarity.MYTHICAL && !pokemonToClone.types.includes(TYPE.FOSSIL)) {
               dittoReplaced = true;
               const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name));
               this.state.players.get(playerId).board.delete(detail.id);
@@ -116,7 +119,7 @@ export class OnDragDropCommand extends Command<GameRoom, {
             if ( y == 0 && pokemon.positionY == 0) {
               this.room.swap(playerId, pokemon, x, y);
               success = true;
-            } else if (this.state.phase == STATE.PICK) {
+            } else if (this.state.phase == GamePhaseState.PICK) {
               const teamSize = this.room.getTeamSize(this.state.players.get(playerId).board);
               if (teamSize < this.state.players.get(playerId).experienceManager.level) {
                 this.room.swap(playerId, pokemon, x, y);
@@ -512,7 +515,7 @@ export class OnUpdateCommand extends Command<GameRoom, {
       }
       if (this.state.time < 0) {
         updatePhaseNeeded = true;
-      } else if (this.state.phase == STATE.FIGHT) {
+      } else if (this.state.phase == GamePhaseState.FIGHT) {
         let everySimulationFinished = true;
 
         this.state.players.forEach((player, key) => {
@@ -537,13 +540,13 @@ export class OnUpdateCommand extends Command<GameRoom, {
 
 export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   execute() {
-    if (this.state.phase == STATE.PICK) {
+    if (this.state.phase == GamePhaseState.PICK) {
       const commands = this.checkForLazyTeam();
       if (commands.length != 0) {
         return commands;
       }
       this.initializeFightingPhase();
-    } else if (this.state.phase == STATE.FIGHT) {
+    } else if (this.state.phase == GamePhaseState.FIGHT) {
       this.computeStreak();
       this.computeLife();
       this.rankPlayers();
@@ -636,7 +639,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       if (player.alive) {
         const currentResult = player.getCurrentBattleResult();
 
-        if (currentResult == BATTLE_RESULT.DEFEAT || currentResult == BATTLE_RESULT.DRAW) {
+        if (currentResult == BattleResults.DEFEAT || currentResult == BattleResults.DRAW) {
           player.life = player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel);
         }
         player.addBattleResult(player.opponentName, currentResult, player.opponentAvatar, isPVE);
@@ -656,7 +659,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       const currentResult = player.getCurrentBattleResult();
       const lastPlayerResult = player.getLastPlayerBattleResult();
 
-      if (currentResult == BATTLE_RESULT.DRAW || currentResult != lastPlayerResult) {
+      if (currentResult == BattleResults.DRAW || currentResult != lastPlayerResult) {
         player.streak = 0;
       } else {
         player.streak = Math.min(player.streak + 1, 5);
@@ -670,7 +673,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         player.interest = Math.min(Math.floor(player.money / 10), 5);
         player.money += player.interest;
         player.money += player.streak;
-        if (player.getLastBattleResult() == BATTLE_RESULT.WIN) {
+        if (player.getLastBattleResult() == BattleResults.WIN) {
           player.money += 1;
         }
         player.money += 5;
@@ -689,7 +692,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   initializePickingPhase() {
-    this.state.phase = STATE.PICK;
+    this.state.phase = GamePhaseState.PICK;
     const isPVE = this.checkForPVE();
 
     this.state.time = 30000;
@@ -700,7 +703,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         if (player.isBot) {
           player.experienceManager.level = Math.min(9, Math.round(this.state.stageLevel/2));
         }
-        if (isPVE && player.getLastBattleResult() == BATTLE_RESULT.WIN) {
+        if (isPVE && player.getLastBattleResult() == BattleResults.WIN) {
           const items = ItemFactory.createRandomItems();
           // let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
           items.forEach((item)=>{
@@ -819,7 +822,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   initializeFightingPhase() {
-    this.state.phase = STATE.FIGHT;
+    this.state.phase = GamePhaseState.FIGHT;
     this.state.time = 40000;
     this.state.stageLevel += 1;
     this.state.botManager.updateBots();

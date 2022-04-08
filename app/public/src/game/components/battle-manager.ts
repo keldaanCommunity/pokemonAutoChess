@@ -7,6 +7,7 @@ import GameScene from '../scenes/game-scene';
 import { IPlayer, IPokemonEntity } from '../../../../types';
 import AnimationManager from '../animation-manager';
 import {DataChange} from '@colyseus/schema';
+import { PokemonActionState } from '../../../../types/enum/Game';
 
 export default class BattleManager {
   group: GameObjects.Group;
@@ -233,7 +234,7 @@ export default class BattleManager {
           } else if ( change.field == 'attackCount') {
             if (change.value != 0) {
               // console.log(change.value, pkm.action, pkm.targetX, pkm.targetY);
-              if (pkm.action == 'ATTACKING' && pkm.targetX !== null && pkm.targetY !== null) {
+              if (pkm.action == PokemonActionState.ATTACKING && pkm.targetX !== null && pkm.targetY !== null) {
                 this.animationManager.animatePokemon(pkm);
                 pkm.attackAnimation();
               }

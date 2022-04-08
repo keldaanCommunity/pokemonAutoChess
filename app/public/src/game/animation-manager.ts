@@ -1,40 +1,41 @@
 /* eslint-disable max-len */
+import { Orientation, PokemonActionState } from '../../../types/enum/Game';
 import {SPECIAL_SKILL} from '../../../models/enum';
 import Pokemon from './components/pokemon';
 import GameScene from './scenes/game-scene';
 
 export default class AnimationManager {
   game: GameScene;
-  orientationTable: { DOWN: number; DOWNLEFT: number; LEFT: number; UPLEFT: number; UP: number; UPRIGHT: number; RIGHT: number; DOWNRIGHT: number; };
-  actionTable: { MOVING: number; ATTACKING: number; };
-  flipxTable: { DOWNRIGHT: boolean; DOWNLEFT: boolean; LEFT: boolean; UPLEFT: boolean; UP: boolean; UPRIGHT: boolean; RIGHT: boolean; };
+  orientationTable: Object;
+  actionTable: Object;
+  flipxTable: Object;
 
   constructor(game: GameScene) {
     this.game = game;
     this.orientationTable = {
-      'DOWN': 0,
-      'DOWNLEFT': 1,
-      'LEFT': 2,
-      'UPLEFT': 3,
-      'UP': 4,
-      'UPRIGHT': 3,
-      'RIGHT': 2,
-      'DOWNRIGHT': 1
+      [Orientation.DOWN] : 0,
+      [Orientation.DOWNLEFT] : 1,
+      [Orientation.LEFT] : 2,
+      [Orientation.UPLEFT] : 3,
+      [Orientation.UP] : 4,
+      [Orientation.UPRIGHT] : 3,
+      [Orientation.RIGHT] : 2,
+      [Orientation.DOWNRIGHT] : 1
     };
 
-    this.actionTable ={
-      'MOVING': 0,
-      'ATTACKING': 1
+    this.actionTable = {
+      [PokemonActionState.MOVING]: 0,
+      [PokemonActionState.ATTACKING]: 1
     };
 
     this.flipxTable = {
-      'DOWNRIGHT': false,
-      'DOWNLEFT': false,
-      'LEFT': false,
-      'UPLEFT': false,
-      'UP': false,
-      'UPRIGHT': true,
-      'RIGHT': true
+      [Orientation.DOWNRIGHT]: false,
+      [Orientation.DOWNLEFT]: false,
+      [Orientation.LEFT]: false,
+      [Orientation.UPLEFT]: false,
+      [Orientation.UP]: false,
+      [Orientation.UPRIGHT]: true,
+      [Orientation.RIGHT]: true
     };
 
     [10, 11, 12, 13, 14, 15, 16, 17, 18, 74, 75, 76, 298, 183, 184, 41, 42, 169, 179, 180, 181, 173, 35, 36, 174, 39, 40, 187, 188, 189, 273, 274, 275, 396, 397, 398].forEach((num) => {

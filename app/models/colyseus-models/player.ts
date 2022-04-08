@@ -6,7 +6,7 @@ import Synergies from './synergies';
 import {Effects} from '../effects';
 import BattleResult from './battle-result';
 import ExperienceManager from './experience-manager';
-import { BATTLE_RESULT } from '../enum';
+import { BattleResults } from '../../types/enum/Game';
 import { IPlayer, IPokemon } from '../../types';
 
 export default class Player extends Schema implements IPlayer{
@@ -51,14 +51,14 @@ export default class Player extends Schema implements IPlayer{
 
   getCurrentBattleResult() {
     if (this.simulation.blueTeam.size == 0) {
-      return BATTLE_RESULT.DEFEAT;
+      return BattleResults.DEFEAT;
     } else if (this.simulation.redTeam.size == 0) {
-      return BATTLE_RESULT.WIN;
+      return BattleResults.WIN;
     }
-    return BATTLE_RESULT.DRAW;
+    return BattleResults.DRAW;
   }
 
-  addBattleResult(name: string, result: string, avatar: string, isPVE: boolean) {
+  addBattleResult(name: string, result: BattleResults, avatar: string, isPVE: boolean) {
     if (this.history.length >= 5) {
       this.history.shift();
     }

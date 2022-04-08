@@ -3,15 +3,16 @@ import PokemonFactory from '../../../../../models/pokemon-factory';
 import { COST } from '../../../../../models/enum';
 import { useAppDispatch } from '../../../hooks';
 import { shopClick } from '../../../stores/NetworkStore';
+import { Rarity } from '../../../../../types/enum/Game';
 
 const COLOR_TYPE = Object.freeze({
-    COMMON: "rgba(104, 109, 125, 0.6)",
-    UNCOMMON: "rgba(71, 138, 65, 0.6)",
-    RARE: "rgba(80, 98, 171, 0.6)",
-    EPIC: "rgba(123, 70, 156,0.6)",
-    LEGENDARY: "rgba(166, 128, 46, 0.6)",
-    MYTHICAL: "rgba(255, 222, 255, 0.6)",
-    SUMMON: "#rgba(153, 31, 31, 0.6)"
+    [Rarity.COMMON] : "rgba(104, 109, 125, 0.6)",
+    [Rarity.UNCOMMON] : "rgba(71, 138, 65, 0.6)",
+    [Rarity.RARE] : "rgba(80, 98, 171, 0.6)",
+    [Rarity.EPIC] : "rgba(123, 70, 156,0.6)",
+    [Rarity.LEGENDARY] : "rgba(166, 128, 46, 0.6)",
+    [Rarity.MYTHICAL] : "rgba(255, 222, 255, 0.6)",
+    [Rarity.SUMMON] : "#rgba(153, 31, 31, 0.6)"
   });
 
 export default function GamePokemonPortrait(props: {index: number, pokemonName: string}) {
@@ -25,7 +26,7 @@ export default function GamePokemonPortrait(props: {index: number, pokemonName: 
     }
     else{
         const pkm = PokemonFactory.createPokemonFromName(props.pokemonName);
-        //console.log(pkm.rarity);
+        // console.log(pkm.rarity);
         const rarityColor = COLOR_TYPE[pkm.rarity];
         return <div className="nes-container" style={{
             width:'15.5%',
