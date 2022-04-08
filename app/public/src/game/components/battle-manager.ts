@@ -20,7 +20,7 @@ export default class BattleManager {
     this.scene = scene;
     this.player = player;
     this.textStyle = {
-      fontSize: '35px',
+      fontSize: '25px',
       fontFamily: 'Verdana',
       color: 'white',
       align: 'center',
@@ -402,7 +402,7 @@ export default class BattleManager {
 
   displayCriticalHit(x: number, y: number) {
     const textStyle = {
-      fontSize: '30px',
+      fontSize: '25px',
       fontFamily: 'Verdana',
       color: '#FF0000',
       align: 'center',
@@ -432,7 +432,7 @@ export default class BattleManager {
 
   displayDoubleAttack(x: number, y: number) {
     const textStyle = {
-      fontSize: '30px',
+      fontSize: '25px',
       fontFamily: 'Verdana',
       color: '#FFFF00',
       align: 'center',
@@ -471,7 +471,7 @@ export default class BattleManager {
       damageText = damage;
     }
     const textStyle = {
-      fontSize: '40px',
+      fontSize: '25px',
       fontFamily: 'Verdana',
       color: color,
       align: 'center',

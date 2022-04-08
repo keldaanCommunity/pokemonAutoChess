@@ -3,17 +3,12 @@ import fs from 'fs';
 import PokemonFactory from '../app/models/pokemon-factory';
 
 const pkmaIndexes = [];
-const indexes = [];
-
-function zeroPad(num: number) {
-    return ('0000'+num).slice(-4);
-}
+const indexes = ["0000"];
 
 Object.values(PKM).forEach(pkm => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm);
-    const zeroPaddedIndex = zeroPad(pokemon.index);
-    if(!pkmaIndexes.includes(zeroPaddedIndex)){
-        pkmaIndexes.push(zeroPaddedIndex);
+    if(!pkmaIndexes.includes(pokemon.index)){
+        pkmaIndexes.push(pokemon.index);
     }
 });
 
@@ -29,4 +24,9 @@ pkmaIndexes.forEach(id=>{
     }
 });
 
-console.log(JSON.stringify(indexes));
+const file = fs.createWriteStream(`sheets/indexList.json`);
+file.on('error', function(err) {
+  console.log(err);
+});
+file.write(JSON.stringify(indexes));
+file.end();

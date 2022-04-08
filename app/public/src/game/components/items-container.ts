@@ -37,15 +37,8 @@ export default class ItemsContainer extends GameObjects.Container {
   updateItems() {
     for (let i = 0; i < this.list.length; i++) {
       const it = <ItemContainer> this.list[i];
-      if(this.dragable){
-        it.x = 0;
-        it.y = i * this.itemSize;
-      }
-      else{
-        it.x = i * this.itemSize;
-        it.y = 0;
-      }
-
+      it.x = 0;
+      it.y = i * this.itemSize;
     }
   }
 

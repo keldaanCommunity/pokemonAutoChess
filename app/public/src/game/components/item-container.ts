@@ -21,7 +21,7 @@ export default class ItemContainer extends Button {
     }
     this.sprite = new GameObjects.Image(scene, 0, 0, 'item', item).setScale(this.dragable ? 2:1, this.dragable? 2:1);
     this.detail = new ItemDetail(scene, 0, 0, item);
-    this.detail.setPosition(-this.detail.width/2 -40, -this.detail.height/2 - 40);
+    this.detail.setPosition(this.detail.width * 0.5 + 40, this.detail.height * 0.5 + 40);
     this.detail.setScale(0, 0);
     this.name = item;
     this.add(this.sprite);
@@ -35,18 +35,21 @@ export default class ItemContainer extends Button {
     }
   }
 
-  enterButtonHoverState() {
-    this.openDetail()
-    this.input.dropZone = false;
-  }
-
   enterButtonRestState() {
-    this.closeDetail()
     this.input.dropZone = true;
   }
-  
-  enterButtonActiveState() {
-    this.parentContainer.bringToTop(this)
+
+  enterButtonActiveState(pointer: Phaser.Input.Pointer){
+    this.input.dropZone = false;
+    this.parentContainer.bringToTop(this);
+    if(pointer.rightButtonDown()){
+      if (this.detail.scaleX == 0) {
+        this.openDetail();
+      }
+      else{
+        this.closeDetail()
+      }
+    }
   }
 
   openDetail(){
