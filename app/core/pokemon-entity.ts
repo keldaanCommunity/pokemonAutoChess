@@ -14,10 +14,11 @@ import { IPokemonEntity, IPokemon } from '../types';
 
 export default class PokemonEntity extends Schema implements IPokemonEntity{
 
+  @type('boolean') shiny: boolean;
   @type('uint8') positionX: number;
   @type('uint8') positionY: number;
   @type('string') action = STATE_TYPE.MOVING;
-  @type('uint16') index: number;
+  @type('string') index: string;
   @type('string') id: string;
   @type('string') orientation = ORIENTATION.DOWNLEFT;
   @type('uint8') critChance = 10;
@@ -37,7 +38,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('int8') targetX = -1;
   @type('int8') targetY = -1;
   @type('string') attackSprite: string;
-  @type('string') sheet: string;
   @type('string') rarity: string;
   @type('string') name: string;
   @type(['string']) effects = new ArraySchema<string>();
@@ -83,7 +83,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
 
     this.id= uniqid();
     this.rarity = pokemon.rarity;
-    this.sheet = pokemon.sheet;
     this.positionX = positionX;
     this.positionY = positionY;
     this.index = pokemon.index;
@@ -106,6 +105,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
     this.attackSprite = pokemon.attackSprite;
     this.stars = pokemon.stars;
     this.skill = pokemon.skill;
+    this.shiny = pokemon.shiny;
 
     this.dodge = 0;
     this.physicalDamage = 0;

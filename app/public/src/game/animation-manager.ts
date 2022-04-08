@@ -3,6 +3,7 @@ import {SPECIAL_SKILL, PKM_ORIENTATION, PKM_ACTION, PKM_ANIM, PKM_TINT} from '..
 import Pokemon from './components/pokemon';
 import GameScene from './scenes/game-scene';
 import durations from '../../dist/client/assets/pokemons/durations.json';
+import indexList from '../../dist/client/assets/pokemons/indexList.json';
 export default class AnimationManager {
   game: GameScene;
 
@@ -10,7 +11,7 @@ export default class AnimationManager {
   constructor(game: GameScene) {
     this.game = game;
 
-    ["0132","0001","0002","0003","0004","0005","0006","0007","0008","0009","0074","0075","0076","0298","0183","0184","0041","0042","0169","0179","0180","0181","0173","0035","0036","0174","0040","0039","0010","0011","0012","0013","0014","0015","0016","0017","0018","0187","0188","0189","0273","0274","0275","0396","0397","0398","0152","0153","0154","0155","0156","0157","0158","0159","0160","0252","0253","0254","0255","0256","0257","0258","0259","0260","0387","0388","0389","0390","0391","0392","0393","0394","0395","0029","0030","0031","0032","0033","0034","0172","0025","0026","0066","0067","0068","0116","0117","0230","0328","0329","0330","0363","0364","0129","0365","0304","0305","0306","0081","0082","0462","0111","0112","0464","0175","0176","0468","0355","0356","0477","0270","0271","0272","0403","0404","0405","0060","0061","0186","0063","0064","0065","0092","0093","0094","0147","0148","0149","0246","0247","0248","0287","0288","0289","0280","0281","0282","0371","0372","0373","0374","0375","0376","0443","0444","0445","0239","0125","0466","0240","0126","0467","0446","0143","0058","0059","0095","0208","0123","0212","0447","0448","0019","0020","0021","0022","0130","0249","0487","0145","0146","0144","0483","0484","0245","0243","0244","0378","0377","0379","0382","0383","0384","0486","0133","0134","0135","0136","0196","0197","0470","0700","0307","0308","0322","0323","0027","0491","0607","0609","0079","0080","0199","0069","0070","0071","0318","0220","0221","0473","0361","0362","0478","0459","0460","0582","0583","0471","0637","0641","0647","0638","0490","0479","0442","0359","0131","0380","0381","0481","0482","0480","0150","0251","0494","0385","0493","0386","0492","0488","0485","0250","0142","0052","0053","0578","0333","0043","0044","0045","0182","0698","0699","0347","0348","0566","0410","0411","0345","0346","0408","0409","0140","0141","0138","0139","0406","0315","0407","0427","0428","0610","0137","0233","0474","0309","0310","0353","0354","0679","0104","0105","0293","0294","0295","0542","0669","0670","0671","0648","0334","0506","0508","0228","0351"].forEach(index=>{
+    indexList.forEach(index=>{
       Object.values(PKM_TINT).forEach(shiny=>{
         Object.values(PKM_ACTION).forEach(action=>{
           Object.values(PKM_ANIM).forEach(mode=>{
@@ -753,14 +754,14 @@ export default class AnimationManager {
   }
 
   animatePokemon(entity: Pokemon, action: PKM_ACTION) {
-    const animKey = `${entity.padIndex}/${PKM_TINT.NORMAL}/${action}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION[entity.orientation]}`;
-    const shadowKey = `${entity.padIndex}/${PKM_TINT.NORMAL}/${action}/${PKM_ANIM.SHADOW}/${PKM_ORIENTATION[entity.orientation]}`;
-    // console.log(animKey);
+    const animKey = `${entity.index}/${PKM_TINT.NORMAL}/${action}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION[entity.orientation]}`;
+    const shadowKey = `${entity.index}/${PKM_TINT.NORMAL}/${action}/${PKM_ANIM.SHADOW}/${PKM_ORIENTATION[entity.orientation]}`;
+
     entity.sprite.anims.play(animKey);
     entity.shadow.anims.play(shadowKey);
   }
 
   playSleepAnimation(entity: Pokemon) {
-    entity.sprite.anims.play(`${entity.padIndex}/2`);
+    entity.sprite.anims.play(`${entity.index}/2`);
   }
 }

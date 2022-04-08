@@ -3,7 +3,7 @@ import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
-import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS, AUTHOR, PKM_ACTION, PKM_TINT, PKM_ORIENTATION, PKM_ANIM, PKM} from '../../../../models/enum';
+import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS, PKM_ACTION, PKM_TINT, PKM_ORIENTATION, PKM_ANIM, PKM} from '../../../../models/enum';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 import { IPokemon, IPokemonEntity, instanceofPokemonEntity } from '../../../../types';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
@@ -13,8 +13,7 @@ import GameScene from '../scenes/game-scene';
 export default class Pokemon extends Button {
   isPopup: boolean;
   objType: string;
-  index: number;
-  padIndex: string;
+  index: string;
   id: string;
   hp: number;
   range: number;
@@ -71,7 +70,7 @@ export default class Pokemon extends Button {
     this.height = 0;
     this.width = 0;
     this.index = pokemon.index;
-    this.padIndex = this.zeroPad(pokemon.index);
+    if(!scene.textures.exists(this.index)){this.index = "0000"}
     this.name = pokemon.name;
     this.id = pokemon.id;
     this.hp = pokemon.hp;
@@ -115,18 +114,24 @@ export default class Pokemon extends Button {
     this.setDepth(5);
   }
 
+  closeDetail(){
+    if(this.detail){
+      this.detail.dom.remove();
+      this.remove(this.detail, true);
+      this.detail = undefined;
+    }
+  }
+
   enterButtonActiveState(pointer: Phaser.Input.Pointer){
     if(pointer.rightButtonDown()){
       if (this.detail) {
-        this.detail.dom.remove();
-        this.remove(this.detail, true);
-        this.detail = undefined;
+        this.closeDetail();
       }
       else{
         if (this.life) {
-          this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill, AUTHOR[this.name]);
+          this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill);
         } else {
-          this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill, AUTHOR[this.name]);
+          this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill);
         }
         this.detail.setPosition(this.detail.width / 2 + 40, -this.detail.height / 2 - 40);
         this.add(this.detail);
@@ -961,7 +966,7 @@ export default class Pokemon extends Button {
         color = 0xff0000;
       }
       const lifeRatio = pokemon.life / (pokemon.life + pokemon.shield);
-      this.lifebar = new Lifebar(scene, -15, -this.height/2-7, lifeRatio * 60, pokemon.hp, color, true, false);
+      this.lifebar = new Lifebar(scene, -15, this.height/2-7, lifeRatio * 60, pokemon.hp, color, true, false);
       this.lifebar.setLife(pokemon.life);
       this.add(this.lifebar);
     }
@@ -971,7 +976,7 @@ export default class Pokemon extends Button {
     
     if (pokemon.shield !== undefined && pokemon.shield > 0) {
       const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
-      this.shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, -this.height/2-7, shieldRatio * 60, pokemon.shield, 0x939393, true, false);
+      this.shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, this.height/2-7, shieldRatio * 60, pokemon.shield, 0x939393, true, false);
       this.shieldbar.setLife(pokemon.shield);
       this.add(this.shieldbar);
     }
@@ -980,7 +985,7 @@ export default class Pokemon extends Button {
   setManaBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
     if (pokemon.mana !== undefined) {
       const color = 0x01b8fe;
-      this.manabar = new Lifebar(scene, -15, -this.height/2-5, 60, pokemon.maxMana, color, true, true);
+      this.manabar = new Lifebar(scene, -15, this.height/2 -5, 60, pokemon.maxMana, color, true, true);
       this.manabar.setLife(pokemon.mana);
       this.add(this.manabar);
     }
@@ -997,26 +1002,21 @@ export default class Pokemon extends Button {
     }
   }
 
-  zeroPad(num: number) {
-    return ('0000'+num).slice(-4);
-  }
-
   setSprite(pokemon: IPokemonEntity | IPokemon, scene: Phaser.Scene) {
     const p = <IPokemonEntity> pokemon;
-    this.sprite = new GameObjects.Sprite(scene, 0, 0, this.padIndex, `${PKM_TINT.NORMAL}/${PKM_ACTION.IDLE}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION.DOWN}/0000`);
+    this.sprite = new GameObjects.Sprite(scene, 0, 0, this.index, `${PKM_TINT.NORMAL}/${PKM_ACTION.IDLE}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION.DOWN}/0000`);
     //this.sprite.setOrigin(0,0);
     this.sprite.setScale(2, 2);
     this.sprite.on('animationcomplete', ()=>{const g = <GameScene> scene; g.animationManager.animatePokemon(this, PKM_ACTION.IDLE)});
     this.height = this.sprite.height;
     this.width = this.sprite.width;
-    this.itemsContainer = new ItemsContainer(scene, p.items, -25, -this.height/2 -25, false);
-    this.shadow = new GameObjects.Sprite(scene, 0, 5, this.padIndex);
+    this.itemsContainer = new ItemsContainer(scene, p.items, this.width/2 + 25, -35, false);
+    this.shadow = new GameObjects.Sprite(scene, 0, 5, this.index);
     //this.shadow.setOrigin(0,0);
     this.shadow.setScale(2, 2);
     scene.add.existing(this.shadow);
     scene.add.existing(this.sprite);
     this.add(this.shadow);
-    this.add(this.sprite);
     this.add(this.itemsContainer);
 
     if(instanceofPokemonEntity(pokemon)){
@@ -1027,8 +1027,9 @@ export default class Pokemon extends Button {
       this.setShieldBar(p, scene);
       this.setLifeBar(p, scene);
       this.setManaBar(p, scene);
-      this.setEffects(p, scene);
+      //this.setEffects(p, scene);
     }
+    this.add(this.sprite);
   }
 
   setParameters(pokemon: IPokemonEntity | IPokemon) {

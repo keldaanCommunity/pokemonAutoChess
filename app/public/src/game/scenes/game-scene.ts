@@ -6,15 +6,13 @@ import BattleManager from '../components/battle-manager';
 import WeatherManager from '../components/weather-manager';
 import ItemsContainer from '../components/items-container';
 import Pokemon from '../components/pokemon';
-import PokemonFactory from '../../../../models/pokemon-factory';
 import {STATE, ITEM_RECIPE} from '../../../../models/enum';
 import firebase from 'firebase/compat/app';
-import {getOrientation, transformCoordinate} from '../../pages/utils/utils';
+import {transformCoordinate} from '../../pages/utils/utils';
 import { Room } from "colyseus.js";
 import GameState from "../../../../rooms/states/game-state";
 import ItemContainer from '../components/item-container';
-
-import ItemDetail from '../components/item-detail';
+import indexList from '../../../dist/client/assets/pokemons/indexList.json';
 
 export default class GameScene extends Scene {
   tilemap: any;
@@ -111,7 +109,7 @@ export default class GameScene extends Scene {
       assetText.destroy();
     });
 
-    ["0132","0001","0002","0003","0004","0005","0006","0007","0008","0009","0074","0075","0076","0298","0183","0184","0041","0042","0169","0179","0180","0181","0173","0035","0036","0174","0040","0039","0010","0011","0012","0013","0014","0015","0016","0017","0018","0187","0188","0189","0273","0274","0275","0396","0397","0398","0152","0153","0154","0155","0156","0157","0158","0159","0160","0252","0253","0254","0255","0256","0257","0258","0259","0260","0387","0388","0389","0390","0391","0392","0393","0394","0395","0029","0030","0031","0032","0033","0034","0172","0025","0026","0066","0067","0068","0116","0117","0230","0328","0329","0330","0363","0364","0129","0365","0304","0305","0306","0081","0082","0462","0111","0112","0464","0175","0176","0468","0355","0356","0477","0270","0271","0272","0403","0404","0405","0060","0061","0186","0063","0064","0065","0092","0093","0094","0147","0148","0149","0246","0247","0248","0287","0288","0289","0280","0281","0282","0371","0372","0373","0374","0375","0376","0443","0444","0445","0239","0125","0466","0240","0126","0467","0446","0143","0058","0059","0095","0208","0123","0212","0447","0448","0019","0020","0021","0022","0130","0249","0487","0145","0146","0144","0483","0484","0245","0243","0244","0378","0377","0379","0382","0383","0384","0486","0133","0134","0135","0136","0196","0197","0470","0700","0307","0308","0322","0323","0027","0491","0607","0609","0079","0080","0199","0069","0070","0071","0318","0220","0221","0473","0361","0362","0478","0459","0460","0582","0583","0471","0637","0641","0647","0638","0490","0479","0442","0359","0131","0380","0381","0481","0482","0480","0150","0251","0494","0385","0493","0386","0492","0488","0485","0250","0142","0052","0053","0578","0333","0043","0044","0045","0182","0698","0699","0347","0348","0566","0410","0411","0345","0346","0408","0409","0140","0141","0138","0139","0406","0315","0407","0427","0428","0610","0137","0233","0474","0309","0310","0353","0354","0679","0104","0105","0293","0294","0295","0542","0669","0670","0671","0648","0334","0506","0508","0228","0351"].forEach(id=>{
+    indexList.forEach(id=>{
       this.load.multiatlas(id, `/assets/pokemons/${id}.json`, '/assets/pokemons');
     });
 
@@ -122,11 +120,6 @@ export default class GameScene extends Scene {
     this.load.image('rain', '/assets/ui/rain.png');
     this.load.image('sand', '/assets/ui/sand.png');
     this.load.image('sun', '/assets/ui/sun.png');
-    this.load.image('socle', '/assets/ui/socle.png');
-    this.load.image('PHYSICAL', '/assets/types/PHYSICAL.png');
-    this.load.image('SPECIAL', '/assets/types/SPECIAL.png');
-    this.load.image('TRUE', '/assets/types/TRUE.png');
-    this.load.multiatlas('sleep', '/assets/pokemons/sleep/sleep.json', '/assets/pokemons/sleep');
     this.load.multiatlas('snowflakes', '/assets/ui/snowflakes.json', '/assets/ui/');
     this.load.multiatlas('status', '/assets/status/status.json', '/assets/status/');
     this.load.multiatlas('wound', '/assets/status/wound.json', '/assets/status');
@@ -137,21 +130,6 @@ export default class GameScene extends Scene {
     this.load.multiatlas('item', '/assets/item/item.json', '/assets/item/');
     this.load.multiatlas('lock', '/assets/lock/lock.json', '/assets/lock/');
     this.load.multiatlas('types', '/assets/types/types.json', '/assets/types');
-    this.load.multiatlas('fossil', '/assets/pokemons/fossil/fossil.json', '/assets/pokemons/fossil/');
-    this.load.multiatlas('december', '/assets/pokemons/december/december.json', '/assets/pokemons/december/');
-    this.load.multiatlas('february', '/assets/pokemons/february/february.json', '/assets/pokemons/february/');
-    this.load.multiatlas('april', '/assets/pokemons/april/april.json', '/assets/pokemons/april/');
-    this.load.multiatlas('september', '/assets/pokemons/september/september.json', '/assets/pokemons/september/');
-    this.load.multiatlas('COMMON', '/assets/pokemons/common/common.json', '/assets/pokemons/common');
-    this.load.multiatlas('NEUTRAL', '/assets/pokemons/neutral/neutral.json', '/assets/pokemons/neutral');
-    this.load.multiatlas('UNCOMMON', '/assets/pokemons/uncommon/uncommon.json', '/assets/pokemons/uncommon');
-    this.load.multiatlas('RARE', '/assets/pokemons/rare/rare.json', '/assets/pokemons/rare');
-    this.load.multiatlas('EPIC', '/assets/pokemons/epic/epic.json', '/assets/pokemons/epic');
-    this.load.multiatlas('EPIC2', '/assets/pokemons/epic/epic2.json', '/assets/pokemons/epic');
-    this.load.multiatlas('UNCOMMON2', '/assets/pokemons/uncommon/uncommon2.json', '/assets/pokemons/uncommon');
-    this.load.multiatlas('LEGENDARY', '/assets/pokemons/legendary/legendary.json', '/assets/pokemons/legendary');
-    this.load.multiatlas('sound', 'assets/pokemons/sound/sound.json', '/assets/pokemons/sound');
-    this.load.multiatlas('castform', 'assets/pokemons/castform/castform.json', '/assets/pokemons/castform');
     this.load.multiatlas('attacks', '/assets/attacks/attacks.json', '/assets/attacks');
     this.load.multiatlas('specials', '/assets/attacks/specials.json', '/assets/attacks');
     this.load.multiatlas('june', '/assets/attacks/june.json', '/assets/attacks');
@@ -212,15 +190,8 @@ export default class GameScene extends Scene {
     this.board = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battle = new BattleManager(this, this.battleGroup, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
-    // this.pokemon = this.add.existing(new Pokemon(this, 11*24, 19*24, PokemonFactory.createPokemonFromName(this.room.state.players[this.uid].avatar), false, false));
-    // this.animationManager.animatePokemon(this.pokemon);
-
-    this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
-    this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
-    this.transitionScreen.setAlpha(0);
     this.music = this.sound.add('sound', {loop: true});
-    // this.music.setVolume(0.1);
-    this.music.play();
+    this.music.play('',{volume: 0.3, loop: true});
   }
 
   registerKeys() {

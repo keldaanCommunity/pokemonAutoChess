@@ -64,8 +64,7 @@ export interface IPokemon {
     name: string
     types: string[]
     rarity: string
-    sheet: string
-    index: number
+    index: string
     evolution:string
     positionX: number
     positionY: number
@@ -82,8 +81,8 @@ export interface IPokemon {
     maxMana: number
     skill: string
     items: SetSchema<string>
-    author: string,
     fossilTimer: number
+    shiny: boolean
 }
 
 export interface ISynergies {
@@ -164,7 +163,7 @@ export interface IPokemonEntity {
   positionX: number
   positionY: number
   action: string
-  index: number
+  index: string
   id: string
   orientation: string
   critChance: number
@@ -184,7 +183,6 @@ export interface IPokemonEntity {
   targetX: number
   targetY: number
   attackSprite: string
-  sheet: string
   rarity: string
   name: string
   effects: string[]
@@ -197,6 +195,7 @@ export interface IPokemonEntity {
   critDamage: number
   spellDamage: number
   healDone: number
+  shiny: boolean
 }
 
 export interface IStatus {

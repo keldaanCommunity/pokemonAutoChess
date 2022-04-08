@@ -24,17 +24,20 @@ interface IAnim {
     FrameWidth: number
     FrameHeight: number
     Durations: IDuration
+    CopyOf: string
 }
 
 interface IDuration{
-    Duration: any[]
+    Duration: any
 }
 
 async function split(){
-    const pkmaIndexes = [];
-    const mapName = new Map<number, string>();
+    const pkmaIndexes = ['0000'];
+    const mapName = new Map<string, string>();
+    mapName.set('0000','default');
     const credits = {};
     const durations = {};
+    let missing = '';
 
     Object.values(PKM).forEach(pkm => {
         const pokemon = PokemonFactory.createPokemonFromName(pkm);
@@ -45,16 +48,17 @@ async function split(){
     });
 
     await Promise.all(pkmaIndexes.map(async index =>{
-        const zeroPaddedValue = zeroPad(index);
-        await Promise.all([zeroPaddedValue, `${zeroPaddedValue}/0000/0001`].map(async pad => {
+        const pathIndex = index.replace('-','/');
+        const shinyPad = pathIndex.length == 4 ? `${pathIndex}/0000/0001`:  `${pathIndex}/0001`;
+        await Promise.all([pathIndex, shinyPad].map(async pad => {
             try{
-                const shiny = zeroPaddedValue == pad ? PKM_TINT.NORMAL : PKM_TINT.SHINY;
+                const shiny = pathIndex == pad ? PKM_TINT.NORMAL : PKM_TINT.SHINY;
                 const creditFile = fs.readFileSync(`${path}/sprite/${pad}/credits.txt`);
                 const splitted = creditFile.toString().split('\t');
-                credits[`${zeroPaddedValue}-${shiny}`] = {date:'', author: ''};
-                credits[`${zeroPaddedValue}-${shiny}`]['date'] = splitted[0];
-                credits[`${zeroPaddedValue}-${shiny}`]['author'] = splitted[1].split(`\n`)[0];
-                console.log('add', creditFile, 'to the credits for', mapName.get(index));
+                credits[`${index}_${shiny}`] = {date:'', author: ''};
+                credits[`${index}_${shiny}`]['date'] = splitted[0].slice(0,10);
+                credits[`${index}_${shiny}`]['author'] = splitted[1].split(`\n`)[0].split(`\r`)[0];
+                //console.log('add', creditFile, 'to the credits for', mapName.get(index));
                 
                 const xmlFile = fs.readFileSync(`${path}/sprite/${pad}/AnimData.xml`);
                 const parser = new XMLParser();
@@ -62,15 +66,25 @@ async function split(){
                 await Promise.all(Object.values(PKM_ANIM).map(async anim => {
                     await Promise.all(Object.values(PKM_ACTION).map(async action => {
                         try{
-                            const img = await Jimp.read(`${path}/sprite/${pad}/${action}-${anim}.png`);
-                            const metadata = xmlData.AnimData.Anims.Anim.find(m=>m.Name==action);
-                            durations[`${zeroPaddedValue}/${shiny}/${action}/${anim}`] = [...metadata.Durations.Duration];
+                            let img;
+                            let metadata = xmlData.AnimData.Anims.Anim.find(m=>m.Name==action);
+
+                            if(metadata.CopyOf){
+                                img = await Jimp.read(`${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`);
+                                metadata = xmlData.AnimData.Anims.Anim.find(m=>m.Name==metadata.CopyOf);
+                            }
+                            else{
+                                img = await Jimp.read(`${path}/sprite/${pad}/${action}-${anim}.png`);
+                            }
+
+
+                            durations[`${index}/${shiny}/${action}/${anim}`] = metadata.Durations.Duration.length !== undefined ?[...metadata.Durations.Duration]: [metadata.Durations.Duration];
                             // console.log(durations);
                             const frameHeight = metadata.FrameHeight;
                             const frameWidth = metadata.FrameWidth;
                             const width = img.getWidth() / frameWidth;
                             const height = img.getHeight() / frameHeight;
-                            // console.log('img', zeroPaddedValue, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
+                            // console.log('img', index, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
                             for (let x = 0; x < width; x++) {
                                 for (let y = 0; y < height; y++) {
                                     const cropImg = img.clone();
@@ -100,7 +114,7 @@ async function split(){
                                         frameWidth,
                                         frameHeight);
                                     
-                                    const writePath = `split/${zeroPaddedValue}/${shiny}/${action}/${anim}/${y}/${zeroPad(x)}.png`;
+                                    const writePath = `split/${index}/${shiny}/${action}/${anim}/${y}/${zeroPad(x)}.png`;
                                     console.log(writePath);
                                     await cropImg.writeAsync(writePath);
                                 }
@@ -113,7 +127,8 @@ async function split(){
                 }));
             }
             catch(error){
-                console.log('pokemon with index', index, 'not found', mapName.get(index));
+                console.log('pokemon with index', index, 'not found', mapName.get(index), 'path: ', `${path}/sprite/${pad}/AnimData.xml`);
+                missing += `${mapName.get(index)},${pad}/AnimData.xml\n`;
             }
         }));
     }));
@@ -131,6 +146,13 @@ async function split(){
     });
     fileA.write(JSON.stringify(durations));
     fileA.end();
+
+    const fileB = fs.createWriteStream(`sheets/missing.txt`);
+    fileB.on('error', function(err) {
+      console.log(err);
+    });
+    fileB.write(missing);
+    fileB.end();
 }
 
 function removeBlue(cropImg){
@@ -162,6 +184,5 @@ function removeRed(cropImg){
 function zeroPad(num: number) {
     return ('0000'+num).slice(-4);
 }
-
 
 split();
