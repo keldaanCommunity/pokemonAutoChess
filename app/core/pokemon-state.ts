@@ -1,4 +1,5 @@
-import {EFFECTS, TYPE, PKM, FLYING_PROTECT_THRESHOLD, ITEM} from '../models/enum';
+import {TYPE, PKM, FLYING_PROTECT_THRESHOLD, ITEM} from '../models/enum';
+import { Effect } from '../types/enum/Effect';
 import { AttackType } from '../types/enum/Game';
 import PokemonFactory from '../models/pokemon-factory';
 import Board from './board';
@@ -54,7 +55,7 @@ export default class PokemonState {
           reducedDamage = damage;
         }
 
-        if (attacker && attacker.effects.includes(EFFECTS.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
+        if (attacker && attacker.effects.includes(Effect.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
           reducedDamage = pokemon.life + 1;
         }
 
@@ -110,24 +111,24 @@ export default class PokemonState {
 
           if (pokemon.life && pokemon.life > 0) {
             if (pokemon.flyingProtection) {
-              if (pokemon.effects.includes(EFFECTS.TAILWIND)) {
-                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.TAILWIND].threshold) {
-                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.TAILWIND].duration);
+              if (pokemon.effects.includes(Effect.TAILWIND)) {
+                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[Effect.TAILWIND].threshold) {
+                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[Effect.TAILWIND].duration);
                   pokemon.flyingProtection = false;
                 }
-              } else if (pokemon.effects.includes(EFFECTS.FEATHER_DANCE)) {
-                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.FEATHER_DANCE].threshold) {
-                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.FEATHER_DANCE].duration);
+              } else if (pokemon.effects.includes(Effect.FEATHER_DANCE)) {
+                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[Effect.FEATHER_DANCE].threshold) {
+                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[Effect.FEATHER_DANCE].duration);
                   pokemon.flyingProtection = false;
                 }
-              } else if (pokemon.effects.includes(EFFECTS.MAX_AIRSTREAM)) {
-                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_AIRSTREAM].threshold) {
-                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_AIRSTREAM].duration);
+              } else if (pokemon.effects.includes(Effect.MAX_AIRSTREAM)) {
+                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[Effect.MAX_AIRSTREAM].threshold) {
+                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[Effect.MAX_AIRSTREAM].duration);
                   pokemon.flyingProtection = false;
                 }
-              } else if (pokemon.effects.includes(EFFECTS.MAX_GUARD)) {
-                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_GUARD].threshold) {
-                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[EFFECTS.MAX_GUARD].duration);
+              } else if (pokemon.effects.includes(Effect.MAX_GUARD)) {
+                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[Effect.MAX_GUARD].threshold) {
+                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[Effect.MAX_GUARD].duration);
                   pokemon.flyingProtection = false;
                 }
               }
@@ -137,13 +138,13 @@ export default class PokemonState {
 
         if (attacker) {
           attacker.setMana(attacker.mana + 5);
-          if (attacker.effects.includes(EFFECTS.CALM_MIND) || attacker.effects.includes(EFFECTS.FOCUS_ENERGY) || attacker.effects.includes(EFFECTS.MEDITATE)) {
+          if (attacker.effects.includes(Effect.CALM_MIND) || attacker.effects.includes(Effect.FOCUS_ENERGY) || attacker.effects.includes(Effect.MEDITATE)) {
             let lifesteal = 0;
-            if (attacker.effects.includes(EFFECTS.MEDITATE)) {
+            if (attacker.effects.includes(Effect.MEDITATE)) {
               lifesteal = 0.15;
-            } else if (attacker.effects.includes(EFFECTS.FOCUS_ENERGY)) {
+            } else if (attacker.effects.includes(Effect.FOCUS_ENERGY)) {
               lifesteal = 0.3;
-            } else if (attacker.effects.includes(EFFECTS.CALM_MIND)) {
+            } else if (attacker.effects.includes(Effect.CALM_MIND)) {
               lifesteal = 0.6;
             }
             attacker.handleHeal(Math.floor(lifesteal * residualDamage), attacker);
@@ -152,13 +153,13 @@ export default class PokemonState {
             attacker.handleHeal(Math.floor(0.5 * residualDamage), attacker);
           }
 
-          if (attacker.effects.includes(EFFECTS.BLAZE) || attacker.effects.includes(EFFECTS.DROUGHT) || attacker.effects.includes(EFFECTS.DESOLATE_LAND)) {
+          if (attacker.effects.includes(Effect.BLAZE) || attacker.effects.includes(Effect.DROUGHT) || attacker.effects.includes(Effect.DESOLATE_LAND)) {
             let burnChance = 0;
-            if (attacker.effects.includes(EFFECTS.BLAZE)) {
+            if (attacker.effects.includes(Effect.BLAZE)) {
               burnChance = 0.1;
-            } else if (attacker.effects.includes(EFFECTS.DROUGHT)) {
+            } else if (attacker.effects.includes(Effect.DROUGHT)) {
               burnChance = 0.2;
-            } else if (attacker.effects.includes(EFFECTS.DESOLATE_LAND)) {
+            } else if (attacker.effects.includes(Effect.DESOLATE_LAND)) {
               burnChance = 0.3;
             }
             if (Math.random() < burnChance) {
@@ -171,23 +172,23 @@ export default class PokemonState {
           if (pokemon.items.has(ITEM.MAX_REVIVE)) {
             pokemon.life = pokemon.hp;
             pokemon.items.delete(ITEM.MAX_REVIVE);
-          } else if (pokemon.effects.includes(EFFECTS.SWIFT_SWIM)) {
+          } else if (pokemon.effects.includes(Effect.SWIFT_SWIM)) {
             pokemon.status.triggerProtect(1000);
             pokemon.life = pokemon.hp * 0.4;
             pokemon.atk += pokemon.baseAtk * 0.3;
-            pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.SWIFT_SWIM), 1);
-          } else if (pokemon.effects.includes(EFFECTS.HYDRO_CANNON)) {
+            pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.SWIFT_SWIM), 1);
+          } else if (pokemon.effects.includes(Effect.HYDRO_CANNON)) {
             pokemon.status.triggerProtect(1000);
             pokemon.life = pokemon.hp * 0.8;
             pokemon.atk += pokemon.baseAtk *0.6;
-            pokemon.effects.splice(pokemon.effects.findIndex((e) => e === EFFECTS.HYDRO_CANNON), 1);
+            pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.HYDRO_CANNON), 1);
           } else if (pokemon.status.resurection) {
             pokemon.status.resurection = false;
             pokemon.life = pokemon.hp;
           } else {
-            const isWorkUp = pokemon.effects.includes(EFFECTS.BULK_UP);
-            const isRage = pokemon.effects.includes(EFFECTS.RAGE);
-            const isAngerPoint = pokemon.effects.includes(EFFECTS.ANGER_POINT);
+            const isWorkUp = pokemon.effects.includes(Effect.BULK_UP);
+            const isRage = pokemon.effects.includes(Effect.RAGE);
+            const isAngerPoint = pokemon.effects.includes(Effect.ANGER_POINT);
 
             if (isWorkUp || isRage || isAngerPoint) {
               let boost = 0;
@@ -219,19 +220,19 @@ export default class PokemonState {
     }
 
     if (death && pokemon) {
-      if (pokemon.effects.includes(EFFECTS.ODD_FLOWER) ||
-      pokemon.effects.includes(EFFECTS.GLOOM_FLOWER) ||
-      pokemon.effects.includes(EFFECTS.VILE_FLOWER) ||
-      pokemon.effects.includes(EFFECTS.SUN_FLOWER)) {
+      if (pokemon.effects.includes(Effect.ODD_FLOWER) ||
+      pokemon.effects.includes(Effect.GLOOM_FLOWER) ||
+      pokemon.effects.includes(Effect.VILE_FLOWER) ||
+      pokemon.effects.includes(Effect.SUN_FLOWER)) {
         if (!pokemon.simulation.flowerSpawn[pokemon.team]) {
           pokemon.simulation.flowerSpawn[pokemon.team] = true;
-          if (pokemon.effects.includes(EFFECTS.ODD_FLOWER)) {
+          if (pokemon.effects.includes(Effect.ODD_FLOWER)) {
             pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.ODDISH), pokemon.positionX, pokemon.positionY, pokemon.team);
-          } else if (pokemon.effects.includes(EFFECTS.GLOOM_FLOWER)) {
+          } else if (pokemon.effects.includes(Effect.GLOOM_FLOWER)) {
             pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.GLOOM), pokemon.positionX, pokemon.positionY, pokemon.team);
-          } else if (pokemon.effects.includes(EFFECTS.VILE_FLOWER)) {
+          } else if (pokemon.effects.includes(Effect.VILE_FLOWER)) {
             pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.VILEPLUME), pokemon.positionX, pokemon.positionY, pokemon.team);
-          } else if (pokemon.effects.includes(EFFECTS.SUN_FLOWER)) {
+          } else if (pokemon.effects.includes(Effect.SUN_FLOWER)) {
             pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.BELLOSSOM), pokemon.positionX, pokemon.positionY, pokemon.team);
           }
         }
@@ -242,21 +243,21 @@ export default class PokemonState {
 
   update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
     let updateEffects = false;
-    if (pokemon.effects.includes(EFFECTS.SHORE_UP) || pokemon.effects.includes(EFFECTS.ROTOTILLER) || pokemon.effects.includes(EFFECTS.SANDSTORM)) {
+    if (pokemon.effects.includes(Effect.SHORE_UP) || pokemon.effects.includes(Effect.ROTOTILLER) || pokemon.effects.includes(Effect.SANDSTORM)) {
       if (pokemon.growGroundTimer !== undefined && pokemon.count.growGroundCount <5) {
         pokemon.growGroundTimer -= dt;
         if (pokemon.growGroundTimer <= 0) {
           pokemon.growGroundTimer = 2000;
           pokemon.count.growGroundCount += 1;
-          if (pokemon.effects.includes(EFFECTS.SHORE_UP)) {
+          if (pokemon.effects.includes(Effect.SHORE_UP)) {
             pokemon.def += 1;
             pokemon.speDef += 1;
             pokemon.atk += 1;
-          } else if (pokemon.effects.includes(EFFECTS.ROTOTILLER)) {
+          } else if (pokemon.effects.includes(Effect.ROTOTILLER)) {
             pokemon.def += 2;
             pokemon.speDef += 2;
             pokemon.atk += 2;
-          } else if (pokemon.effects.includes(EFFECTS.SANDSTORM)) {
+          } else if (pokemon.effects.includes(Effect.SANDSTORM)) {
             pokemon.def += 3;
             pokemon.speDef += 3;
             pokemon.atk += 3;
@@ -354,35 +355,35 @@ export default class PokemonState {
         this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.10), board, AttackType.TRUE, pokemon.status.poisonOrigin);
       }
 
-      if (pokemon.effects.includes(EFFECTS.BLAZE)) {
+      if (pokemon.effects.includes(Effect.BLAZE)) {
         pokemon.atk += 1;
       }
 
-      if (pokemon.effects.includes(EFFECTS.DROUGHT)) {
+      if (pokemon.effects.includes(Effect.DROUGHT)) {
         pokemon.atk += 2;
       }
 
-      if (pokemon.effects.includes(EFFECTS.DESOLATE_LAND)) {
+      if (pokemon.effects.includes(Effect.DESOLATE_LAND)) {
         pokemon.atk += 3;
       }
 
-      if (pokemon.effects.includes(EFFECTS.DRAGON_ENERGY) && pokemon.types.includes(TYPE.DRAGON)) {
+      if (pokemon.effects.includes(Effect.DRAGON_ENERGY) && pokemon.types.includes(TYPE.DRAGON)) {
         pokemon.handleAttackSpeed(3);
       }
 
-      if (pokemon.effects.includes(EFFECTS.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)) {
+      if (pokemon.effects.includes(Effect.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)) {
         pokemon.handleAttackSpeed(6);
       }
 
-      if (pokemon.effects.includes(EFFECTS.INGRAIN)) {
+      if (pokemon.effects.includes(Effect.INGRAIN)) {
         pokemon.handleHeal(4, pokemon);
       }
 
-      if (pokemon.effects.includes(EFFECTS.GROWTH)) {
+      if (pokemon.effects.includes(Effect.GROWTH)) {
         pokemon.handleHeal(8, pokemon);
       }
 
-      if (pokemon.effects.includes(EFFECTS.SPORE)) {
+      if (pokemon.effects.includes(Effect.SPORE)) {
         pokemon.handleHeal(16, pokemon);
       }
     }

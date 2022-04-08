@@ -1,6 +1,6 @@
-import {EFFECTS, CLIMATE, ITEM} from '../models/enum';
-import { Orientation } from '../types/enum/Game';
-import { AttackType } from '../types/enum/Game';
+import { CLIMATE, ITEM } from '../models/enum';
+import { Orientation, AttackType } from '../types/enum/Game';
+import { Effect } from '../types/enum/Effect';
 import Board from './board';
 import PokemonEntity from './pokemon-entity';
 import PokemonState from './pokemon-state';
@@ -22,13 +22,13 @@ export default class AttackingState extends PokemonState {
         pokemon.toMovingState();
       } else {
         this.attack(pokemon, board, targetCoordinate, climate);
-        if (pokemon.effects.includes(EFFECTS.EERIE_IMPULSE) || pokemon.effects.includes(EFFECTS.RISING_VOLTAGE) || pokemon.effects.includes(EFFECTS.OVERDRIVE)) {
+        if (pokemon.effects.includes(Effect.EERIE_IMPULSE) || pokemon.effects.includes(Effect.RISING_VOLTAGE) || pokemon.effects.includes(Effect.OVERDRIVE)) {
           let doubleAttackChance = 0;
-          if (pokemon.effects.includes(EFFECTS.EERIE_IMPULSE)) {
+          if (pokemon.effects.includes(Effect.EERIE_IMPULSE)) {
             doubleAttackChance = 0.2;
-          } else if (pokemon.effects.includes(EFFECTS.RISING_VOLTAGE)) {
+          } else if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
             doubleAttackChance = 0.4;
-          } else if (pokemon.effects.includes(EFFECTS.OVERDRIVE)) {
+          } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
             doubleAttackChance = 0.6;
           }
           if (Math.random() < doubleAttackChance) {
@@ -56,10 +56,10 @@ export default class AttackingState extends PokemonState {
 
       if (climate == CLIMATE.SNOW) {
         let freezeChance = 0;
-        if (pokemon.effects.includes(EFFECTS.SNOW)) {
+        if (pokemon.effects.includes(Effect.SNOW)) {
           freezeChance += 0.1;
         }
-        if (pokemon.effects.includes(EFFECTS.SHEER_COLD)) {
+        if (pokemon.effects.includes(Effect.SHEER_COLD)) {
           freezeChance += 0.3;
         }
         if (Math.random() > 1 - freezeChance) {
@@ -67,10 +67,10 @@ export default class AttackingState extends PokemonState {
         }
       }
       let poisonChance = 0;
-      if (pokemon.effects.includes(EFFECTS.POISON_GAS)) {
+      if (pokemon.effects.includes(Effect.POISON_GAS)) {
         poisonChance += 0.1;
       }
-      if (pokemon.effects.includes(EFFECTS.TOXIC)) {
+      if (pokemon.effects.includes(Effect.TOXIC)) {
         poisonChance += 0.3;
       }
       if (poisonChance != 0) {
@@ -78,13 +78,13 @@ export default class AttackingState extends PokemonState {
           target.status.triggerPoison(2000, target, pokemon);
         }
       }
-      if (pokemon.effects.includes(EFFECTS.CURSE) || pokemon.effects.includes(EFFECTS.PHANTOM_FORCE)) {
+      if (pokemon.effects.includes(Effect.CURSE) || pokemon.effects.includes(Effect.PHANTOM_FORCE)) {
         target.status.triggerSilence(3000);
       }
-      if (pokemon.effects.includes(EFFECTS.REVENGE)) {
+      if (pokemon.effects.includes(Effect.REVENGE)) {
         pokemon.setMana(pokemon.mana + 5);
       }
-      if (pokemon.effects.includes(EFFECTS.PUNISHMENT)) {
+      if (pokemon.effects.includes(Effect.PUNISHMENT)) {
         pokemon.setMana(pokemon.mana + 15);
       }
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
@@ -97,13 +97,13 @@ export default class AttackingState extends PokemonState {
       const attackType = pokemon.attackType;
 
       if (Math.random() * 100 < pokemon.critChance && target && !target.items.has(ITEM.ROCKY_HELMET)) {
-        if (pokemon.effects.includes(EFFECTS.FAIRY_WIND) || pokemon.effects.includes(EFFECTS.STRANGE_STEAM) || pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
+        if (pokemon.effects.includes(Effect.FAIRY_WIND) || pokemon.effects.includes(Effect.STRANGE_STEAM) || pokemon.effects.includes(Effect.AROMATIC_MIST)) {
           let d = 0;
-          if (pokemon.effects.includes(EFFECTS.AROMATIC_MIST)) {
+          if (pokemon.effects.includes(Effect.AROMATIC_MIST)) {
             d = 15;
-          } else if (pokemon.effects.includes(EFFECTS.FAIRY_WIND)) {
+          } else if (pokemon.effects.includes(Effect.FAIRY_WIND)) {
             d = 30;
-          } else if (pokemon.effects.includes(EFFECTS.STRANGE_STEAM)) {
+          } else if (pokemon.effects.includes(Effect.STRANGE_STEAM)) {
             d = 60;
           }
           const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
@@ -115,13 +115,13 @@ export default class AttackingState extends PokemonState {
             }
           });
         }
-        if (target.effects.includes(EFFECTS.FAIRY_WIND) || target.effects.includes(EFFECTS.STRANGE_STEAM) || target.effects.includes(EFFECTS.AROMATIC_MIST)) {
+        if (target.effects.includes(Effect.FAIRY_WIND) || target.effects.includes(Effect.STRANGE_STEAM) || target.effects.includes(Effect.AROMATIC_MIST)) {
           let d = 0;
-          if (target.effects.includes(EFFECTS.AROMATIC_MIST)) {
+          if (target.effects.includes(Effect.AROMATIC_MIST)) {
             d = 15;
-          } else if (target.effects.includes(EFFECTS.FAIRY_WIND)) {
+          } else if (target.effects.includes(Effect.FAIRY_WIND)) {
             d = 30;
-          } else if (target.effects.includes(EFFECTS.STRANGE_STEAM)) {
+          } else if (target.effects.includes(Effect.STRANGE_STEAM)) {
             d = 60;
           }
           const cells = board.getAdjacentCells(target.positionX, target.positionY);

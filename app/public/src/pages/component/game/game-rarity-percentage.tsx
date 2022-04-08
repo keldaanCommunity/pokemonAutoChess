@@ -14,11 +14,11 @@ const style: CSS.Properties = {
 }
 
 const RARITY_RGB= {
-    COMMON:'rgba(104, 109, 125,0.7)',
-    UNCOMMON:'rgba(71, 138, 65, 0.7)',
-    RARE:'rgba(80, 98, 171, 0.7)',
-    EPIC:'rgba(123, 70, 156, 0.7)',
-    LEGENDARY:'rgb(166, 128, 46, 0.7)'
+    [Rarity.COMMON] :'rgba(104, 109, 125,0.7)',
+    [Rarity.UNCOMMON] :'rgba(71, 138, 65, 0.7)',
+    [Rarity.RARE] :'rgba(80, 98, 171, 0.7)',
+    [Rarity.EPIC] :'rgba(123, 70, 156, 0.7)',
+    [Rarity.LEGENDARY] :'rgb(166, 128, 46, 0.7)'
 }
 
 export default function GameRarityPercentage() {

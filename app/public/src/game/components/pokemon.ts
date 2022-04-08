@@ -999,7 +999,9 @@ export default class Pokemon extends Button {
   setEffects(pokemon: IPokemonEntity, scene: Phaser.Scene) {
     if (pokemon.effects.length > 0) {
       pokemon.effects.forEach((effect, c) => {
-        if ( effect && EFFECTS_ICON[effect]) {
+        
+        if (EFFECTS_ICON[effect]) {
+          
           this.backgroundIcon = new GameObjects.Image(scene, c*20 -20, this.height/2+4 +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5, 0.5);
           this.add(this.backgroundIcon);
         }
@@ -1026,7 +1028,7 @@ export default class Pokemon extends Button {
 
     if(instanceofPokemonEntity(pokemon)){
       const p = <IPokemonEntity> pokemon;
-      if (p.effects && (p.effects.includes(EFFECTS.IRON_DEFENSE) || p.effects.includes(EFFECTS.AUTOTOMIZE))) {
+      if (p.effects && (p.effects.includes(Effect.IRON_DEFENSE) || p.effects.includes(Effect.AUTOTOMIZE))) {
         this.sprite.setScale(3, 3);
       }
       this.setShieldBar(p, scene);
