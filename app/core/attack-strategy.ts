@@ -1,4 +1,5 @@
-import {TYPE, EFFECTS, ITEM} from '../models/enum';
+import {TYPE, ITEM} from '../models/enum';
+import { Effect } from '../types/enum/Effect'
 import { AttackType } from '../types/enum/Game';
 import Board from './board';
 import PokemonEntity from './pokemon-entity';
@@ -10,11 +11,11 @@ export class AttackStrategy {
     pokemon.count.ult += 1;
     if (pokemon.types.includes(TYPE.MONSTER) && pokemon.shield <= 0) {
       let shield = 0;
-      if (pokemon.effects.includes(EFFECTS.PURSUIT)) {
+      if (pokemon.effects.includes(Effect.PURSUIT)) {
         shield = Math.floor(pokemon.hp * 0.2);
-      } else if (pokemon.effects.includes(EFFECTS.BRUTAL_SWING)) {
+      } else if (pokemon.effects.includes(Effect.BRUTAL_SWING)) {
         shield = Math.floor(pokemon.hp * 0.3);
-      } else if (pokemon.effects.includes(EFFECTS.POWER_TRIP)) {
+      } else if (pokemon.effects.includes(Effect.POWER_TRIP)) {
         shield = Math.floor(pokemon.hp * 0.4);
       }
       if (shield > 0 && !pokemon.status.temporaryShield) {
@@ -24,11 +25,11 @@ export class AttackStrategy {
     }
     if (pokemon.types.includes(TYPE.SOUND)) {
       let atk = 0;
-      if (pokemon.effects.includes(EFFECTS.LARGO)) {
+      if (pokemon.effects.includes(Effect.LARGO)) {
         atk += 3;
-      } else if (pokemon.effects.includes(EFFECTS.ALLEGRO)) {
+      } else if (pokemon.effects.includes(Effect.ALLEGRO)) {
         atk += 5;
-      } else if (pokemon.effects.includes(EFFECTS.PRESTO)) {
+      } else if (pokemon.effects.includes(Effect.PRESTO)) {
         atk += 7;
       }
       if (atk > 0) {
@@ -1804,17 +1805,17 @@ export class ThiefStrategy extends AttackStrategy {
       target.items.delete(item);
     });
 
-    if (pokemon.effects.includes(EFFECTS.HONE_CLAWS)) {
+    if (pokemon.effects.includes(Effect.HONE_CLAWS)) {
       pokemon.atk += 4 * l;
       pokemon.handleShield(20 * l, pokemon);
     }
 
-    if (pokemon.effects.includes(EFFECTS.ASSURANCE)) {
+    if (pokemon.effects.includes(Effect.ASSURANCE)) {
       pokemon.atk += 7 * l;
       pokemon.handleShield(30 * l, pokemon);
     }
 
-    if (pokemon.effects.includes(EFFECTS.BEAT_UP)) {
+    if (pokemon.effects.includes(Effect.BEAT_UP)) {
       pokemon.atk += 10 * l;
       pokemon.handleShield(50 * l, pokemon);
     }

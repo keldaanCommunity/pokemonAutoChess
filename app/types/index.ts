@@ -11,6 +11,7 @@ import LobbyUser from '../models/colyseus-models/lobby-user'
 import Message from '../models/colyseus-models/message'
 import Synergies from '../models/colyseus-models/synergies'
 import { AttackType, Orientation, PokemonActionState, Rarity } from './enum/Game'
+import { Effect } from './enum/Effect'
 
 export interface IMessage {
     name: string
@@ -124,8 +125,8 @@ export interface IExperienceManager {
 
 export interface ISimulation {
     climate: string
-    blueEffects: string[]
-    redEffects: string[]
+    blueEffects: Effect[]
+    redEffects: Effect[]
     blueTeam: MapSchema<IPokemonEntity>
     redTeam: MapSchema<IPokemonEntity>
     blueDpsMeter: MapSchema<Dps>
@@ -188,7 +189,7 @@ export interface IPokemonEntity {
   sheet: string
   rarity: Rarity
   name: string
-  effects: string[]
+  effects: Effect[]
   items: SetSchema<string>
   types: string[]
   stars: number

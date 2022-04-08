@@ -13,6 +13,7 @@ import Board from './board';
 import PokemonState from './pokemon-state';
 import { IPokemonEntity, IPokemon } from '../types';
 import { AttackType, Rarity } from '../types/enum/Game';
+import { Effect } from '../types/enum/Effect';
 
 export default class PokemonEntity extends Schema implements IPokemonEntity{
 
@@ -42,7 +43,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('string') sheet: string;
   @type('uint8') rarity: Rarity;
   @type('string') name: string;
-  @type(['string']) effects = new ArraySchema<string>();
+  @type(['uint8']) effects = new ArraySchema<Effect>();
   @type({set: 'string'}) items = new SetSchema<string>();
   @type(['string']) types = new ArraySchema<string>();
   @type('uint8') stars: number;

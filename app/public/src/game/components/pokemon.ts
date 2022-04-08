@@ -3,7 +3,8 @@ import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
-import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS, AUTHOR} from '../../../../models/enum';
+import {SPECIAL_SKILL, EFFECTS_ICON, AUTHOR} from '../../../../models/enum';
+import { Effect } from '../../../../types/enum/Effect';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 import { IPokemon, IPokemonEntity, instanceofPokemonEntity } from '../../../../types';
 import GameScene from '../scenes/game-scene';
@@ -989,7 +990,9 @@ export default class Pokemon extends Button {
   setEffects(pokemon: IPokemonEntity, scene: Phaser.Scene, height: number) {
     if (pokemon.effects.length > 0) {
       pokemon.effects.forEach((effect, c) => {
-        if ( effect && EFFECTS_ICON[effect]) {
+        
+        if (EFFECTS_ICON[effect]) {
+          
           this.backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5, 0.5);
           this.add(this.backgroundIcon);
         }
@@ -1013,7 +1016,7 @@ export default class Pokemon extends Button {
 
     if(instanceofPokemonEntity(pokemon)){
       const p = <IPokemonEntity> pokemon;
-      if (p.effects && (p.effects.includes(EFFECTS.IRON_DEFENSE) || p.effects.includes(EFFECTS.AUTOTOMIZE))) {
+      if (p.effects && (p.effects.includes(Effect.IRON_DEFENSE) || p.effects.includes(Effect.AUTOTOMIZE))) {
         this.sprite.setScale(3, 3);
       }
       this.setShieldBar(p, scene);

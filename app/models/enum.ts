@@ -5,6 +5,7 @@
 // }
 
 import { Rarity } from "../types/enum/Game";
+import { Effect } from "../types/enum/Effect"
 
 export const PKM = Object.freeze({
   DITTO: 'ditto',
@@ -809,451 +810,451 @@ export const TYPE = Object.freeze({
   SOUND: 'SOUND'
 });
 
-export const EFFECTS = Object.freeze({
-  INGRAIN: 'INGRAIN',
-  GROWTH: 'GROWTH',
-  SPORE: 'SPORE',
-  BLAZE: 'BLAZE',
-  DROUGHT: 'DROUGHT',
-  DESOLATE_LAND: 'DESOLATE_LAND',
-  DRIZZLE: 'DRIZZLE',
-  RAIN_DANCE: 'RAIN_DANCE',
-  PRIMORDIAL_SEA: 'PRIMORDIAL_SEA',
-  STAMINA: 'STAMINA',
-  STRENGTH: 'STRENGTH',
-  PURE_POWER: 'PURE_POWER',
-  EERIE_IMPULSE: 'EERIE_IMPULSE',
-  RISING_VOLTAGE: 'RISING_VOLTAGE',
-  OVERDRIVE: 'OVERDRIVE',
-  REVENGE: 'REVENGE',
-  PUNISHMENT: 'PUNISHMENT',
-  AMNESIA: 'AMNESIA',
-  LIGHT_SCREEN: 'LIGHT_SCREEN',
-  EERIE_SPELL: 'EERIE_SPELL',
-  HONE_CLAWS: 'HONE_CLAWS',
-  ASSURANCE: 'ASSURANCE',
-  BEAT_UP: 'BEAT_UP',
-  IRON_DEFENSE: 'IRON_DEFENSE',
-  AUTOTOMIZE: 'AUTOTOMIZE',
-  SHORE_UP: 'SHORE_UP',
-  ROTOTILLER: 'ROTOTILLER',
-  SANDSTORM: 'SANDSTORM',
-  POISON_GAS: 'POISON_GAS',
-  TOXIC: 'TOXIC',
-  DRAGON_ENERGY: 'DRAGON_ENERGY',
-  DRAGON_DANCE: 'DRAGON_DANCE',
-  BULK_UP: 'BULK_UP',
-  RAGE: 'RAGE',
-  ANGER_POINT: 'ANGER_POINT',
-  PURSUIT: 'PURSUIT',
-  BRUTAL_SWING: 'BRUTAL_SWING',
-  POWER_TRIP: 'POWER_TRIP',
-  MEDITATE: 'MEDITATE',
-  FOCUS_ENERGY: 'FOCUS_ENERGY',
-  CALM_MIND: 'CALM_MIND',
-  SWARM: 'SWARM',
-  STICKY_WEB: 'STICKY_WEB',
-  SWIFT_SWIM: 'SWIFT_SWIM',
-  HYDRO_CANNON: 'HYDRO_CANNON',
-  TAILWIND: 'TAILWIND',
-  FEATHER_DANCE: 'FEATHER_DANCE',
-  MAX_AIRSTREAM: 'MAX_AIRSTREAM',
-  MAX_GUARD: 'MAX_GUARD',
-  ODD_FLOWER: 'ODD_FLOWER',
-  GLOOM_FLOWER: 'GLOOM_FLOWER',
-  VILE_FLOWER: 'VILE_FLOWER',
-  SUN_FLOWER: 'SUN_FLOWER',
-  BATTLE_ARMOR: 'BATTLE_ARMOR',
-  MOUTAIN_RESISTANCE: 'MOUTAIN_RESISTANCE',
-  DIAMOND_STORM: 'DIAMOND_STORM',
-  PHANTOM_FORCE: 'PHANTOM_FORCE',
-  CURSE: 'CURSE',
-  AROMATIC_MIST: 'AROMATIC_MIST',
-  FAIRY_WIND: 'FAIRY_WIND',
-  STRANGE_STEAM: 'STRANGE_STEAM',
-  GROUND: 'GROUND',
-  GRASS: 'GRASS',
-  FIRE: 'FIRE',
-  WATER: 'WATER',
-  NORMAL: 'NORMAL',
-  ICE: 'ICE',
-  SNOW: 'SNOW',
-  SHEER_COLD: 'SHEER_COLD',
-  ANCIENT_POWER: 'ANCIENT_POWER',
-  ELDER_POWER: 'ELDER_POWER',
-  UNOWN_GATHERINGS: 'UNOWN_GATHERINGS',
-  LARGO: 'LARGO',
-  ALLEGRO: 'ALLLEGRO',
-  PRESTO: 'PRESTO'
-});
+// export const EFFECTS = Object.freeze({
+//   INGRAIN: 'INGRAIN',
+//   GROWTH: 'GROWTH',
+//   SPORE: 'SPORE',
+//   BLAZE: 'BLAZE',
+//   DROUGHT: 'DROUGHT',
+//   DESOLATE_LAND: 'DESOLATE_LAND',
+//   DRIZZLE: 'DRIZZLE',
+//   RAIN_DANCE: 'RAIN_DANCE',
+//   PRIMORDIAL_SEA: 'PRIMORDIAL_SEA',
+//   STAMINA: 'STAMINA',
+//   STRENGTH: 'STRENGTH',
+//   PURE_POWER: 'PURE_POWER',
+//   EERIE_IMPULSE: 'EERIE_IMPULSE',
+//   RISING_VOLTAGE: 'RISING_VOLTAGE',
+//   OVERDRIVE: 'OVERDRIVE',
+//   REVENGE: 'REVENGE',
+//   PUNISHMENT: 'PUNISHMENT',
+//   AMNESIA: 'AMNESIA',
+//   LIGHT_SCREEN: 'LIGHT_SCREEN',
+//   EERIE_SPELL: 'EERIE_SPELL',
+//   HONE_CLAWS: 'HONE_CLAWS',
+//   ASSURANCE: 'ASSURANCE',
+//   BEAT_UP: 'BEAT_UP',
+//   IRON_DEFENSE: 'IRON_DEFENSE',
+//   AUTOTOMIZE: 'AUTOTOMIZE',
+//   SHORE_UP: 'SHORE_UP',
+//   ROTOTILLER: 'ROTOTILLER',
+//   SANDSTORM: 'SANDSTORM',
+//   POISON_GAS: 'POISON_GAS',
+//   TOXIC: 'TOXIC',
+//   DRAGON_ENERGY: 'DRAGON_ENERGY',
+//   DRAGON_DANCE: 'DRAGON_DANCE',
+//   BULK_UP: 'BULK_UP',
+//   RAGE: 'RAGE',
+//   ANGER_POINT: 'ANGER_POINT',
+//   PURSUIT: 'PURSUIT',
+//   BRUTAL_SWING: 'BRUTAL_SWING',
+//   POWER_TRIP: 'POWER_TRIP',
+//   MEDITATE: 'MEDITATE',
+//   FOCUS_ENERGY: 'FOCUS_ENERGY',
+//   CALM_MIND: 'CALM_MIND',
+//   SWARM: 'SWARM',
+//   STICKY_WEB: 'STICKY_WEB',
+//   SWIFT_SWIM: 'SWIFT_SWIM',
+//   HYDRO_CANNON: 'HYDRO_CANNON',
+//   TAILWIND: 'TAILWIND',
+//   FEATHER_DANCE: 'FEATHER_DANCE',
+//   MAX_AIRSTREAM: 'MAX_AIRSTREAM',
+//   MAX_GUARD: 'MAX_GUARD',
+//   ODD_FLOWER: 'ODD_FLOWER',
+//   GLOOM_FLOWER: 'GLOOM_FLOWER',
+//   VILE_FLOWER: 'VILE_FLOWER',
+//   SUN_FLOWER: 'SUN_FLOWER',
+//   BATTLE_ARMOR: 'BATTLE_ARMOR',
+//   MOUTAIN_RESISTANCE: 'MOUTAIN_RESISTANCE',
+//   DIAMOND_STORM: 'DIAMOND_STORM',
+//   PHANTOM_FORCE: 'PHANTOM_FORCE',
+//   CURSE: 'CURSE',
+//   AROMATIC_MIST: 'AROMATIC_MIST',
+//   FAIRY_WIND: 'FAIRY_WIND',
+//   STRANGE_STEAM: 'STRANGE_STEAM',
+//   GROUND: 'GROUND',
+//   GRASS: 'GRASS',
+//   FIRE: 'FIRE',
+//   WATER: 'WATER',
+//   NORMAL: 'NORMAL',
+//   ICE: 'ICE',
+//   SNOW: 'SNOW',
+//   SHEER_COLD: 'SHEER_COLD',
+//   ANCIENT_POWER: 'ANCIENT_POWER',
+//   ELDER_POWER: 'ELDER_POWER',
+//   UNOWN_GATHERINGS: 'UNOWN_GATHERINGS',
+//   LARGO: 'LARGO',
+//   ALLEGRO: 'ALLLEGRO',
+//   PRESTO: 'PRESTO'
+// });
 
 export const EFFECTS_ICON = Object.freeze({
-  INGRAIN: {
+  [Effect.INGRAIN] : {
     level: 1,
     positive: true,
     type: TYPE.GRASS
   },
-  GROWTH: {
+  [Effect.GROWTH] : {
     level: 2,
     positive: true,
     type: TYPE.GRASS
   },
-  SPORE: {
+  [Effect.SPORE] : {
     level: 3,
     positive: true,
     type: TYPE.GRASS
   },
-  BLAZE: {
+  [Effect.BLAZE] : {
     level: 1,
     positive: true,
     type: TYPE.FIRE
   },
-  DROUGHT: {
+  [Effect.DROUGHT] : {
     level: 2,
     positive: true,
     type: TYPE.FIRE
   },
-  DESOLATE_LAND: {
+  [Effect.DESOLATE_LAND] : {
     level: 3,
     positive: true,
     type: TYPE.FIRE
   },
-  DRIZZLE: {
+  [Effect.DRIZZLE] : {
     level: 1,
     positive: true,
     type: TYPE.WATER
   },
-  RAIN_DANCE: {
+  [Effect.RAIN_DANCE] : {
     level: 2,
     positive: true,
     type: TYPE.WATER
   },
-  PRIMORDIAL_SEA: {
+  [Effect.PRIMORDIAL_SEA] : {
     level: 3,
     positive: true,
     type: TYPE.WATER
   },
-  STAMINA: {
+  [Effect.STAMINA] : {
     level: 1,
     positive: true,
     type: TYPE.NORMAL
   },
-  STRENGTH: {
+  [Effect.STRENGTH] : {
     level: 2,
     positive: true,
     type: TYPE.NORMAL
   },
-  PURE_POWER: {
+  [Effect.PURE_POWER] : {
     level: 3,
     positive: true,
     type: TYPE.NORMAL
   },
-  EERIE_IMPULSE: {
+  [Effect.EERIE_IMPULSE] : {
     level: 1,
     positive: true,
     type: TYPE.ELECTRIC
   },
-  RISING_VOLTAGE: {
+  [Effect.RISING_VOLTAGE] : {
     level: 2,
     positive: true,
     type: TYPE.ELECTRIC
   },
-  OVERDRIVE: {
+  [Effect.OVERDRIVE] : {
     level: 3,
     positive: true,
     type: TYPE.ELECTRIC
   },
-  REVENGE: {
+  [Effect.REVENGE] : {
     level: 1,
     positive: true,
     type: TYPE.FIGHTING
   },
-  PUNISHMENT: {
+  [Effect.PUNISHMENT] : {
     level: 2,
     positive: true,
     type: TYPE.FIGHTING
   },
-  AMNESIA: {
+  [Effect.AMNESIA] : {
     level: 1,
     positive: true,
     type: TYPE.PSYCHIC
   },
-  LIGHT_SCREEN: {
+  [Effect.LIGHT_SCREEN] : {
     level: 2,
     positive: true,
     type: TYPE.PSYCHIC
   },
-  EERIE_SPELL: {
+  [Effect.EERIE_SPELL] : {
     level: 3,
     positive: true,
     type: TYPE.PSYCHIC
   },
-  HONE_CLAWS: {
+  [Effect.HONE_CLAWS] : {
     level: 1,
     positive: true,
     type: TYPE.DARK
   },
-  ASSURANCE: {
+  [Effect.ASSURANCE] : {
     level: 2,
     positive: true,
     type: TYPE.DARK
   },
-  BEAT_UP: {
+  [Effect.BEAT_UP] : {
     level: 3,
     positive: true,
     type: TYPE.DARK
   },
-  IRON_DEFENSE: {
+  [Effect.IRON_DEFENSE] : {
     level: 1,
     positive: true,
     type: TYPE.METAL
   },
-  AUTOTOMIZE: {
+  [Effect.AUTOTOMIZE] : {
     level: 2,
     positive: true,
     type: TYPE.METAL
   },
-  SHORE_UP: {
+  [Effect.SHORE_UP] : {
     level: 1,
     positive: true,
     type: TYPE.GROUND
   },
-  ROTOTILLER: {
+  [Effect.ROTOTILLER] : {
     level: 2,
     positive: true,
     type: TYPE.GROUND
   },
-  SANDSTORM: {
+  [Effect.SANDSTORM] : {
     level: 3,
     positive: true,
     type: TYPE.GROUND
   },
-  POISON_GAS: {
+  [Effect.POISON_GAS] : {
     level: 1,
     positive: true,
     type: TYPE.POISON
   },
-  TOXIC: {
+  [Effect.TOXIC] : {
     level: 2,
     positive: true,
     type: TYPE.POISON
   },
-  DRAGON_ENERGY: {
+  [Effect.DRAGON_ENERGY] : {
     level: 1,
     positive: true,
     type: TYPE.DRAGON
   },
-  DRAGON_DANCE: {
+  [Effect.DRAGON_DANCE] : {
     level: 2,
     positive: true,
     type: TYPE.DRAGON
   },
-  BULK_UP: {
+  [Effect.BULK_UP] : {
     level: 1,
     positive: true,
     type: TYPE.FIELD
   },
-  RAGE: {
+  [Effect.RAGE] : {
     level: 2,
     positive: true,
     type: TYPE.FIELD
   },
-  ANGER_POINT: {
+  [Effect.ANGER_POINT] : {
     level: 3,
     positive: true,
     type: TYPE.FIELD
   },
-  PURSUIT: {
+  [Effect.PURSUIT] : {
     level: 1,
     positive: true,
     type: TYPE.MONSTER
   },
-  BRUTAL_SWING: {
+  [Effect.BRUTAL_SWING] : {
     level: 2,
     positive: true,
     type: TYPE.MONSTER
   },
-  POWER_TRIP: {
+  [Effect.POWER_TRIP] : {
     level: 3,
     positive: true,
     type: TYPE.MONSTER
   },
-  MEDITATE: {
+  [Effect.MEDITATE] : {
     level: 1,
     positive: true,
     type: TYPE.HUMAN
   },
-  FOCUS_ENERGY: {
+  [Effect.FOCUS_ENERGY] : {
     level: 2,
     positive: true,
     type: TYPE.HUMAN
   },
-  CALM_MIND: {
+  [Effect.CALM_MIND] : {
     level: 3,
     positive: true,
     type: TYPE.HUMAN
   },
-  SWARM: {
+  [Effect.SWARM] : {
     level: 1,
     positive: true,
     type: TYPE.BUG
   },
-  STICKY_WEB: {
+  [Effect.STICKY_WEB] : {
     level: 2,
     positive: true,
     type: TYPE.BUG
   },
-  SWIFT_SWIM: {
+  [Effect.SWIFT_SWIM] : {
     level: 1,
     positive: true,
     type: TYPE.AQUATIC
   },
-  HYDRO_CANNON: {
+  [Effect.HYDRO_CANNON] : {
     level: 2,
     positive: true,
     type: TYPE.AQUATIC
   },
-  TAILWIND: {
+  [Effect.TAILWIND] : {
     level: 1,
     positive: true,
     type: TYPE.FLYING
   },
-  FEATHER_DANCE: {
+  [Effect.FEATHER_DANCE] : {
     level: 2,
     positive: true,
     type: TYPE.FLYING
   },
-  MAX_AIRSTREAM: {
+  [Effect.MAX_AIRSTREAM] : {
     level: 3,
     positive: true,
     type: TYPE.FLYING
   },
-  MAX_GUARD: {
+  [Effect.MAX_GUARD] : {
     level: 4,
     positive: true,
     type: TYPE.FLYING
   },
-  ODD_FLOWER: {
+  [Effect.ODD_FLOWER] : {
     level: 1,
     positive: true,
     type: TYPE.FLORA
   },
-  GLOOM_FLOWER: {
+  [Effect.GLOOM_FLOWER] : {
     level: 2,
     positive: true,
     type: TYPE.FLORA
   },
-  VILE_FLOWER: {
+  [Effect.VILE_FLOWER] : {
     level: 3,
     positive: true,
     type: TYPE.FLORA
   },
-  SUN_FLOWER: {
+  [Effect.SUN_FLOWER] : {
     level: 4,
     positive: true,
     type: TYPE.FLORA
   },
-  BATTLE_ARMOR: {
+  [Effect.BATTLE_ARMOR] : {
     level: 1,
     positive: true,
     type: TYPE.MINERAL
   },
-  MOUTAIN_RESISTANCE: {
+  [Effect.MOUTAIN_RESISTANCE] : {
     level: 2,
     positive: true,
     type: TYPE.MINERAL
   },
-  DIAMOND_STORM: {
+  [Effect.DIAMOND_STORM] : {
     level: 3,
     positive: true,
     type: TYPE.MINERAL
   },
-  PHANTOM_FORCE: {
+  [Effect.PHANTOM_FORCE] : {
     level: 1,
     positive: true,
     type: TYPE.GHOST
   },
-  CURSE: {
+  [Effect.CURSE] : {
     level: 2,
     positive: true,
     type: TYPE.GHOST
   },
-  AROMATIC_MIST: {
+  [Effect.AROMATIC_MIST] : {
     level: 1,
     positive: true,
     type: TYPE.FAIRY
   },
-  FAIRY_WIND: {
+  [Effect.FAIRY_WIND] : {
     level: 2,
     positive: true,
     type: TYPE.FAIRY
   },
-  GROUND: {
+  [Effect.GROUND] : {
     level: 0,
     positive: true,
     type: TYPE.GROUND
   },
-  GRASS: {
+  [Effect.GRASS] : {
     level: 0,
     positive: true,
     type: TYPE.GRASS
   },
-  FIRE: {
+  [Effect.FIRE] : {
     level: 0,
     positive: true,
     type: TYPE.FIRE
   },
-  WATER: {
+  [Effect.WATER] : {
     level: 0,
     positive: true,
     type: TYPE.WATER
   },
-  NORMAL: {
+  [Effect.NORMAL] : {
     level: 0,
     positive: true,
     type: TYPE.NORMAL
   },
-  ICE: {
+  [Effect.ICE] : {
     level: 0,
     positive: true,
     type: TYPE.ICE
   },
-  SNOW: {
+  [Effect.SNOW] : {
     level: 1,
     positive: true,
     type: TYPE.ICE
   },
-  SHEER_COLD: {
+  [Effect.SHEER_COLD] : {
     level: 2,
     positive: true,
     type: TYPE.ICE
   },
-  ANCIENT_POWER: {
+  [Effect.ANCIENT_POWER] : {
     level: 1,
     positive: true,
     type: TYPE.FOSSIL
   },
-  ELDER_POWER: {
+  [Effect.ELDER_POWER] : {
     level: 2,
     positive: true,
     type: TYPE.FOSSIL
   },
-  UNOWN_GATHERINGS: {
+  [Effect.UNOWN_GATHERINGS] : {
     level: 3,
     positive: true,
     type: TYPE.FOSSIL
   },
-  LARGO: {
+  [Effect.LARGO] : {
     level: 1,
     positive: true,
     type: TYPE.SOUND
   },
-  ALLEGRO: {
+  [Effect.ALLEGRO] : {
     level: 2,
     positive: true,
     type: TYPE.SOUND
   },
-  PRESTO: {
+  [Effect.PRESTO] : {
     level: 3,
     positive: true,
     type: TYPE.SOUND
@@ -4277,19 +4278,19 @@ export const NEUTRAL_STAGE = [
   }];
 
 export const FLYING_PROTECT_THRESHOLD = Object.freeze({
-  TAILWIND: {
+  [Effect.TAILWIND]: {
     duration: 1000,
     threshold: 0.2
   },
-  FEATHER_DANCE: {
+  [Effect.FEATHER_DANCE]: {
     duration: 2000,
     threshold: 0.4
   },
-  MAX_AIRSTREAM: {
+  [Effect.MAX_AIRSTREAM]: {
     duration: 3000,
     threshold: 0.5
   },
-  MAX_GUARD: {
+  [Effect.MAX_GUARD]: {
     duration: 4000,
     threshold: 0.5
   }
