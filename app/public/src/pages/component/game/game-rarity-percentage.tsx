@@ -1,4 +1,5 @@
-import {PROBABILITY, RARITY} from '../../../../../models/enum';
+import {PROBABILITY} from '../../../../../models/enum';
+import { Rarity } from '../../../../../types/enum/Game';
 import React from 'react';
 import CSS from 'csstype';
 import { useAppSelector } from '../../../hooks';
@@ -23,7 +24,7 @@ const RARITY_RGB= {
 export default function GameRarityPercentage() {
     const level = useAppSelector(state=>state.game.experienceManager.level);
     return <div style={style} className='nes-container'>
-        {[RARITY.COMMON, RARITY.UNCOMMON, RARITY.RARE, RARITY.EPIC, RARITY.LEGENDARY].map((rarity,index)=>{
+        {[Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.EPIC, Rarity.LEGENDARY].map((rarity,index)=>{
             return <div key={rarity}
                 style={{
                     backgroundColor:RARITY_RGB[rarity],

@@ -2,14 +2,15 @@ import Player from '../../models/colyseus-models/player';
 import Shop from '../../models/shop';
 import Design from '../../core/design';
 import BotManager from '../../core/bot-manager';
-import {MAP, STATE} from '../../models/enum';
+import {MAP} from '../../models/enum';
+import { GamePhaseState } from '../../types/enum/Game';
 import {Schema, MapSchema, type} from '@colyseus/schema';
 
 export default class GameState extends Schema {
 
   @type('string') afterGameId: string;
   @type('uint8') roundTime = 30;
-  @type('string') phase = STATE.PICK;
+  @type('uint8') phase = GamePhaseState.PICK;
   @type({map: Player}) players = new MapSchema<Player>();
   @type('uint8') stageLevel = 0;
   @type('string') mapName: string;

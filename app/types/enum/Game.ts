@@ -9,12 +9,12 @@ export enum Rarity {
     SUMMON
 }
 
-export enum State {
+export enum GamePhaseState {
     PICK,
     FIGHT
 }
 
-export enum PokemonState {
+export enum PokemonActionState {
     MOVING,
     ATTACKING
 }
@@ -31,17 +31,17 @@ export enum Orientation {
     UNCLEAR
 }
 
-export const ORIENTATION_RAD = Object.freeze({
-    DOWNLEFT: 5 * Math.PI / 4,
-    LEFT: Math.PI,
-    UPLEFT: 3 * Math.PI / 4,
-    UP: Math.PI / 2,
-    UPRIGHT: Math.PI / 4,
-    RIGHT: 0,
-    DOWNRIGHT: 7 * Math.PI / 4,
-    DOWN: 3 * Math.PI / 2,
-    UNCLEAR: 0
-  });
+// export enum OrientationRad {
+//     DOWNLEFT = 5 * Math.PI * 0.25,
+//     LEFT: Math.PI,
+//     UPLEFT: 3 * Math.PI * 0.25,
+//     UP: Math.PI * 0.5,
+//     UPRIGHT: Math.PI * 0.25,
+//     RIGHT: 0,
+//     DOWNRIGHT: 7 * Math.PI * 0.25,
+//     DOWN: 3 * Math.PI * 0.5,
+//     UNCLEAR: 0
+//   }
 
 export enum AttackType {
     PHYSICAL,
@@ -49,7 +49,7 @@ export enum AttackType {
     TRUE
 }
 
-export enum BattleResult {
+export enum BattleResults {
     WIN,
     DEFEAT,
     DRAW

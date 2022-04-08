@@ -1,4 +1,5 @@
-import {EFFECTS, ATTACK_TYPE, TYPE, PKM, FLYING_PROTECT_THRESHOLD, ITEM} from '../models/enum';
+import {EFFECTS, TYPE, PKM, FLYING_PROTECT_THRESHOLD, ITEM} from '../models/enum';
+import { AttackType } from '../types/enum/Game';
 import PokemonFactory from '../models/pokemon-factory';
 import Board from './board';
 import PokemonEntity from './pokemon-entity';
@@ -24,7 +25,7 @@ export default class PokemonState {
     }
   }
 
-  handleDamage(pokemon: PokemonEntity, damage: number, board: Board, attackType: string, attacker: PokemonEntity): boolean {
+  handleDamage(pokemon: PokemonEntity, damage: number, board: Board, attackType: AttackType, attacker: PokemonEntity): boolean {
     let death: boolean;
 
     if (pokemon.life == 0) {
@@ -43,13 +44,13 @@ export default class PokemonState {
         const armorFactor = 0.1;
         const def = attacker && attacker.items.has(ITEM.RAZOR_FANG) ? Math.round( 0.7 * pokemon.def): pokemon.def;
         const speDef = attacker && attacker.items.has(ITEM.RAZOR_FANG) ? Math.round( 0.7 * pokemon.speDef): pokemon.speDef;
-        if (attackType == ATTACK_TYPE.PHYSICAL) {
+        if (attackType == AttackType.PHYSICAL) {
           const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * def))));
           reducedDamage = Math.max(0, Math.round(ritodamage));
-        } else if (attackType == ATTACK_TYPE.SPECIAL) {
+        } else if (attackType == AttackType.SPECIAL) {
           const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * speDef))));
           reducedDamage = Math.max(0, Math.round(ritodamage));
-        } else if (attackType == ATTACK_TYPE.TRUE) {
+        } else if (attackType == AttackType.TRUE) {
           reducedDamage = damage;
         }
 
@@ -71,15 +72,15 @@ export default class PokemonState {
 
         if (attacker && reducedDamage > 0) {
           switch (attackType) {
-            case ATTACK_TYPE.PHYSICAL:
+            case AttackType.PHYSICAL:
               attacker.physicalDamage += reducedDamage;
               break;
 
-            case ATTACK_TYPE.SPECIAL:
+            case AttackType.SPECIAL:
               attacker.specialDamage += reducedDamage;
               break;
 
-            case ATTACK_TYPE.TRUE:
+            case AttackType.TRUE:
               attacker.trueDamage += reducedDamage;
               break;
 
@@ -346,11 +347,11 @@ export default class PokemonState {
 
     if (pokemon.cooldown <= 0) {
       if (pokemon.status.burn && pokemon.status.burnOrigin) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.05), board, ATTACK_TYPE.TRUE, pokemon.status.burnOrigin);
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.05), board, AttackType.TRUE, pokemon.status.burnOrigin);
       }
 
       if (pokemon.status.poison && pokemon.status.poisonOrigin) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.10), board, ATTACK_TYPE.TRUE, pokemon.status.poisonOrigin);
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.10), board, AttackType.TRUE, pokemon.status.poisonOrigin);
       }
 
       if (pokemon.effects.includes(EFFECTS.BLAZE)) {

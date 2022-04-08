@@ -1,30 +1,32 @@
-import {PKM, RARITY, SPECIAL_SKILL} from '../app/models/enum';
-import PokemonFactory from '../app/models/pokemon-factory';
+const PKM = require('../app/models/enum').PKM;
+const SPECIAL_SKILL =require('../app/models/enum').SPECIAL_SKILL;
+const PokemonFactory = require('../app/models/pokemon-factory');
 import fs from 'fs';
 
+import { Rarity } from '../app/types/enum/Game';
 const data = {
-  COMMON: [],
-  UNCOMMON: [],
-  RARE: [],
-  EPIC: [],
-  LEGENDARY: [],
-  MYTHICAL: [],
-  NEUTRAL: [],
-  SUMMON: []
+  [Rarity.COMMON]: [],
+  [Rarity.UNCOMMON]: [],
+  [Rarity.RARE]: [],
+  [Rarity.EPIC]: [],
+  [Rarity.LEGENDARY]: [],
+  [Rarity.MYTHICAL]: [],
+  [Rarity.NEUTRAL]: [],
+  [Rarity.SUMMON]: []
 };
 
 const colyseusData = {
-  COMMON: [],
-  UNCOMMON: [],
-  RARE: [],
-  EPIC: [],
-  LEGENDARY: [],
-  MYTHICAL: [],
-  NEUTRAL: [],
-  SUMMON: []
+  [Rarity.COMMON]: [],
+  [Rarity.UNCOMMON]: [],
+  [Rarity.RARE]: [],
+  [Rarity.EPIC]: [],
+  [Rarity.LEGENDARY]: [],
+  [Rarity.MYTHICAL]: [],
+  [Rarity.NEUTRAL]: [],
+  [Rarity.SUMMON]: []
 };
 
-Object.keys(RARITY).forEach((rarity)=>{
+Object.keys(Rarity).forEach((rarity)=>{
   const pokemonCandidates = [];
   const names = [];
 

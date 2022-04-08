@@ -6,15 +6,14 @@ import BattleManager from '../components/battle-manager';
 import WeatherManager from '../components/weather-manager';
 import ItemsContainer from '../components/items-container';
 import Pokemon from '../components/pokemon';
-import {STATE, ITEM_RECIPE} from '../../../../models/enum';
+import {ITEM_RECIPE} from '../../../../models/enum';
 import firebase from 'firebase/compat/app';
 import {transformCoordinate} from '../../pages/utils/utils';
 import { Room } from "colyseus.js";
 import GameState from "../../../../rooms/states/game-state";
 import ItemContainer from '../components/item-container';
-import indexList from '../../../dist/client/assets/pokemons/indexList.json';
-
-export default class GameScene extends Scene {
+import { GamePhaseState } from '../../../../types/enum/Game';
+import indexList from '../../../dist/client/assets/pokemons/indexList.json';export default class GameScene extends Scene {
   tilemap: any;
   room: Room<GameState>;
   uid: string;
@@ -230,7 +229,7 @@ export default class GameScene extends Scene {
 
   updatePhase() {
     this.targetPokemon = null;
-    if (this.room.state.phase == STATE.FIGHT) {
+    if (this.room.state.phase == GamePhaseState.FIGHT) {
       this.board.battleMode();
     } else {
       this.board.pickMode();

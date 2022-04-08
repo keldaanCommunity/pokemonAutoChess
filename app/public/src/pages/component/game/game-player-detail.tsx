@@ -1,6 +1,7 @@
 import React from 'react';
 import BattleResult from '../../../../../models/colyseus-models/battle-result';
-import { BATTLE_RESULT, CDN_URL } from '../../../../../models/enum';
+import { BattleResults } from '../../../../../types/enum/Game';
+import { CDN_URL } from '../../../../../models/enum';
 import { ArraySchema } from '@colyseus/schema';
 
 export default function GamePlayerDetail(props:{name: string, life: number, money: number, history: ArraySchema<BattleResult>}) {
@@ -25,7 +26,7 @@ export default function GamePlayerDetail(props:{name: string, life: number, mone
             flexFlow:'column'
         }}>
                 <img style={{
-                    border:record.result == BATTLE_RESULT.WIN ? '4px solid #4aa52e' : '4px solid #8c2022',
+                    border:record.result == BattleResults.WIN ? '4px solid #4aa52e' : '4px solid #8c2022',
                     marginLeft:'6px'
                 }} src={`${CDN_URL}${record.avatar}.png`}/>
             <p style={{

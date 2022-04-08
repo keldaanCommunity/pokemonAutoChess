@@ -1,5 +1,4 @@
-
-import {ORIENTATION} from '../models/enum';
+import { Orientation } from '../types/enum/Game';
 import PokemonEntity from './pokemon-entity';
 
 export default class Board {
@@ -61,28 +60,28 @@ export default class Board {
     const vy = c1 - c0;
     if (vx > 0) {
       if (vy == 0) {
-        return ORIENTATION.RIGHT;
+        return Orientation.RIGHT;
       } else if (vy < 0) {
-        return ORIENTATION.DOWNRIGHT;
+        return Orientation.DOWNRIGHT;
       } else {
-        return ORIENTATION.UPRIGHT;
+        return Orientation.UPRIGHT;
       }
     } else if (vx == 0) {
       if (vy == 0) {
         console.log('error orientation', r0, c0, r1, c1);
-        return ORIENTATION.UNCLEAR;
+        return Orientation.UNCLEAR;
       } else if (vy < 0) {
-        return ORIENTATION.DOWN;
+        return Orientation.DOWN;
       } else {
-        return ORIENTATION.UP;
+        return Orientation.UP;
       }
     } else {
       if (vy == 0) {
-        return ORIENTATION.LEFT;
+        return Orientation.LEFT;
       } else if (vy < 0) {
-        return ORIENTATION.DOWNLEFT;
+        return Orientation.DOWNLEFT;
       } else {
-        return ORIENTATION.UPLEFT;
+        return Orientation.UPLEFT;
       }
     }
   }

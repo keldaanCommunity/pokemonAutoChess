@@ -6,6 +6,7 @@ import {IBot} from '../../../models/mongo-models/bot-v2';
 import PreparationState from "../../../rooms/states/preparation-state";
 import GameState from "../../../rooms/states/game-state";
 import AfterGameState from "../../../rooms/states/after-game-state";
+import { BotDifficulty } from "../../../types/enum/Game"
 
 interface INetwork {
     client: Client;
@@ -93,10 +94,10 @@ export const networkSlice = createSlice({
         createBot: (state, action: PayloadAction<IBot>) => {
             state.lobby.send('bot-creation',{'bot': action.payload});
         },
-        requestBotData: (state, action:PayloadAction<string>) => {
+        requestBotData: (state, action:PayloadAction<BotDifficulty>) => {
             state.lobby.send('bot-data-request', action.payload);
         },
-        addBot: (state, action:PayloadAction<string>) => {
+        addBot: (state, action:PayloadAction<BotDifficulty>) => {
             state.preparation.send('addBot', action.payload);
         },
         removeBot: (state,action: PayloadAction<string>) => {

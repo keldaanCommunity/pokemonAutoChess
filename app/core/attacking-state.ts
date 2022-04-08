@@ -1,7 +1,10 @@
-import {STATE_TYPE, EFFECTS, ATTACK_TYPE, CLIMATE, ORIENTATION, ITEM} from '../models/enum';
+import {EFFECTS, CLIMATE, ITEM} from '../models/enum';
+import { Orientation } from '../types/enum/Game';
+import { AttackType } from '../types/enum/Game';
 import Board from './board';
 import PokemonEntity from './pokemon-entity';
 import PokemonState from './pokemon-state';
+import { PokemonActionState } from '../types/enum/Game';
 
 export default class AttackingState extends PokemonState {
 
@@ -85,9 +88,9 @@ export default class AttackingState extends PokemonState {
         pokemon.setMana(pokemon.mana + 15);
       }
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
-      if (pokemon.orientation == ORIENTATION.UNCLEAR) {
+      if (pokemon.orientation == Orientation.UNCLEAR) {
         console.log(`error orientation, was attacking, name ${pokemon.name}`);
-        pokemon.orientation = ORIENTATION.DOWNLEFT;
+        pokemon.orientation = Orientation.DOWNLEFT;
       }
       // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
       let damage;
@@ -108,7 +111,7 @@ export default class AttackingState extends PokemonState {
           cells.forEach((cell) => {
             if (cell.value && pokemon.team != cell.value.team) {
               cell.value.count.fairyCritCount ++;
-              cell.value.handleDamage(d, board, ATTACK_TYPE.SPECIAL, pokemon);
+              cell.value.handleDamage(d, board, AttackType.SPECIAL, pokemon);
             }
           });
         }
@@ -126,7 +129,7 @@ export default class AttackingState extends PokemonState {
           cells.forEach((cell) => {
             if (cell.value && target.team != cell.value.team) {
               cell.value.count.fairyCritCount ++;
-              cell.value.handleDamage(d, board, ATTACK_TYPE.SPECIAL, pokemon);
+              cell.value.handleDamage(d, board, AttackType.SPECIAL, pokemon);
             }
           });
         }
@@ -147,7 +150,7 @@ export default class AttackingState extends PokemonState {
           board.forEach((x, y, tg) => {
             if (tg && pokemon.team != tg.team) {
               tg.count.staticCount ++;
-              tg.handleDamage(8, board, ATTACK_TYPE.SPECIAL, pokemon);
+              tg.handleDamage(8, board, AttackType.SPECIAL, pokemon);
               c --;
             }
           });
@@ -191,7 +194,7 @@ export default class AttackingState extends PokemonState {
 
   onEnter(pokemon) {
     super.onEnter(pokemon);
-    pokemon.action = STATE_TYPE.ATTACKING;
+    pokemon.action = PokemonActionState.MOVING;
     pokemon.cooldown = 0;
   }
 

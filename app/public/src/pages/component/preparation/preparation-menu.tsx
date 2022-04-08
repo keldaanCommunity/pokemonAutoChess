@@ -7,7 +7,7 @@ import { addBot, changeRoomName, gameStart, toggleReady } from '../../../stores/
 import firebase from 'firebase/compat/app';
 import { Client, Room } from 'colyseus.js';
 import GameState from '../../../../../rooms/states/game-state';
-import { BOT_DIFFICULTY } from '../../../../../models/enum';
+import { BotDifficulty } from '../../../../../types/enum/Game'
 import { leavePreparation } from '../../../stores/PreparationStore';
 import PreparationState from '../../../../../rooms/states/preparation-state';
 
@@ -27,7 +27,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
     const uid: string = useAppSelector(state=>state.network.uid);
     const client: Client = useAppSelector(state=>state.network.client);
     const room: Room<PreparationState> = useAppSelector(state=>state.network.preparation);
-    const [botDifficulty, setBotDifficulty] = useState<BOT_DIFFICULTY>(BOT_DIFFICULTY.MEDIUM);
+    const [botDifficulty, setBotDifficulty] = useState<BotDifficulty>(BotDifficulty.MEDIUM);
 
     async function startGame() {
         const token: string = await firebase.auth().currentUser.getIdToken();
@@ -90,10 +90,10 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
 
                     <div className="nes-select" style={{width: 'auto'}}>
                         
-                        <select defaultValue={botDifficulty}  onChange={(e)=>{if(e.target.value.length != 0){setBotDifficulty(BOT_DIFFICULTY[e.target.value])}}}>
-                            <option value={BOT_DIFFICULTY.EASY}>Easy</option>
-                            <option value={BOT_DIFFICULTY.MEDIUM}>Normal</option>
-                            <option value={BOT_DIFFICULTY.HARD}>Hard</option>
+                        <select defaultValue={botDifficulty}  onChange={(e)=>{ setBotDifficulty(parseInt(e.target.value)) }}>
+                            <option value={BotDifficulty.EASY}>Easy</option>
+                            <option value={BotDifficulty.MEDIUM}>Normal</option>
+                            <option value={BotDifficulty.HARD}>Hard</option>
                         </select>
                     </div>
                     

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { STATE } from "../../../models/enum";
+import { GamePhaseState } from "../../../types/enum/Game";
 import { IDps, IDpsHeal, IPlayer } from "../../../types";
 import {ArraySchema, DataChange, MapSchema} from "@colyseus/schema";
 import ExperienceManager from "../../../models/colyseus-models/experience-manager";
@@ -10,7 +10,7 @@ import PokemonCollection from "../../../models/colyseus-models/pokemon-collectio
 interface GameStateStore {
     afterGameId: string
     roundTime: number
-    phase: string
+    phase: GamePhaseState
     players: IPlayer[]
     stageLevel: number
     mapName: string
@@ -41,7 +41,7 @@ interface GameStateStore {
 const initialState: GameStateStore = {
     afterGameId: undefined,
     roundTime: 30,
-    phase: STATE.PICK,
+    phase: GamePhaseState.PICK,
     players: [],
     stageLevel: 0,
     mapName: '',
@@ -79,7 +79,7 @@ export const gameSlice = createSlice({
         setAfterGameId: (state, action: PayloadAction<string>) => {
             state.afterGameId = action.payload;
         },
-        setPhase: (state, action: PayloadAction<string>) => {
+        setPhase: (state, action: PayloadAction<GamePhaseState>) => {
             state.phase = action.payload;
         },
         setStageLevel: (state, action: PayloadAction<number>) => {

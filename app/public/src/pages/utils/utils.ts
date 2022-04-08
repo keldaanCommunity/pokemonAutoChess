@@ -1,4 +1,5 @@
-import {ORIENTATION, ORIENTATION_RAD} from '../../../../models/enum';
+import { Orientation } from '../../../../types/enum/Game'
+import { ORIENTATION_RAD } from '../../../../models/enum';
 
 export const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyCjMpYJycJTjOsXPM1CJn8olntPQhpysOI',
@@ -25,23 +26,23 @@ export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
   const quarterPi = Math.PI / 4;
   // console.log(angle);
   if (angle < quarterPi) {
-    return ORIENTATION.RIGHT;
+    return Orientation.RIGHT;
   } else if (angle < 2 * quarterPi) {
-    return ORIENTATION.DOWNRIGHT;
+    return Orientation.DOWNRIGHT;
   } else if (angle < 3 * quarterPi) {
-    return ORIENTATION.DOWN;
+    return Orientation.DOWN;
   } else if (angle < 4 * quarterPi) {
-    return ORIENTATION.DOWNLEFT;
+    return Orientation.DOWNLEFT;
   } else if (angle < 5 * quarterPi) {
-    return ORIENTATION.LEFT;
+    return Orientation.LEFT;
   } else if (angle < 6 * quarterPi) {
-    return ORIENTATION.UPLEFT;
+    return Orientation.UPLEFT;
   } else if (angle < 7 * quarterPi) {
-    return ORIENTATION.UP;
+    return Orientation.UP;
   } else if (angle < 8 * quarterPi) {
-    return ORIENTATION.UPRIGHT;
+    return Orientation.UPRIGHT;
   } else {
-    return ORIENTATION.RIGHT;
+    return Orientation.RIGHT;
   }
 }
 

@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
-import {SPECIAL_SKILL, PKM_ORIENTATION, PKM_ACTION, PKM_ANIM, PKM_TINT} from '../../../models/enum';
+import { Orientation, PokemonActionState, PKM_ANIM, PKM_TINT } from '../../../types/enum/Game';
+import {SPECIAL_SKILL} from '../../../models/enum';
 import Pokemon from './components/pokemon';
 import GameScene from './scenes/game-scene';
 import durations from '../../dist/client/assets/pokemons/durations.json';
@@ -7,15 +8,14 @@ import indexList from '../../dist/client/assets/pokemons/indexList.json';
 export default class AnimationManager {
   game: GameScene;
 
-
   constructor(game: GameScene) {
     this.game = game;
 
     indexList.forEach(index=>{
       Object.values(PKM_TINT).forEach(shiny=>{
-        Object.values(PKM_ACTION).forEach(action=>{
+        Object.values(PokemonActionState).forEach(action=>{
           Object.values(PKM_ANIM).forEach(mode=>{
-            const directionArray = action == PKM_ACTION.SLEEP? [PKM_ORIENTATION.DOWN] : Object.values(PKM_ORIENTATION);
+            const directionArray = action == PokemonActionState.SLEEP? [Orientation.DOWN] : Object.values(Orientation);
             directionArray.forEach(direction=>{
               const durationArray: number[] = durations[`${index}/${shiny}/${action}/${mode}`];
               if(durationArray){
@@ -25,7 +25,7 @@ export default class AnimationManager {
                     frameArray[i]['duration'] = durationArray[i] * 10;
                   }
                 }
-                if(action == PKM_ACTION.ATTACK){
+                if(action == PokemonActionState.ATTACK){
                   this.game.anims.create({
                     key: `${index}/${shiny}/${action}/${mode}/${direction}`,
                     frames: frameArray,
@@ -753,10 +753,10 @@ export default class AnimationManager {
     });
   }
 
-  animatePokemon(entity: Pokemon, action: PKM_ACTION) {
+  animatePokemon(entity: Pokemon, action: PokemonActionState) {
     const tint = entity.shiny ? PKM_TINT.SHINY : PKM_TINT.NORMAL;
-    const animKey = `${entity.index}/${tint}/${action}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION[entity.orientation]}`;
-    const shadowKey = `${entity.index}/${tint}/${action}/${PKM_ANIM.SHADOW}/${PKM_ORIENTATION[entity.orientation]}`;
+    const animKey = `${entity.index}/${tint}/${action}/${PKM_ANIM.ANIM}/${Orientation[entity.orientation]}`;
+    const shadowKey = `${entity.index}/${tint}/${action}/${PKM_ANIM.SHADOW}/${Orientation[entity.orientation]}`;
 
     entity.sprite.anims.play(animKey);
     entity.shadow.anims.play(shadowKey);
