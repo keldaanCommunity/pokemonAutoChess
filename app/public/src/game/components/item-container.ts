@@ -36,7 +36,7 @@ export default class ItemContainer extends Button {
   }
 
   enterButtonHoverState() {
-    this.openDetail()
+    //this.openDetail()
     this.input.dropZone = false;
   }
 
@@ -44,10 +44,21 @@ export default class ItemContainer extends Button {
     this.closeDetail()
     this.input.dropZone = true;
   }
-  
-  enterButtonActiveState() {
-    this.parentContainer.bringToTop(this)
+
+  enterButtonActiveState(pointer: Phaser.Input.Pointer){
+    this.parentContainer.bringToTop(this);
+    if(pointer.rightButtonDown()){
+      if (this.detail.scaleX == 0) {
+        this.openDetail();
+        this.input.dropZone = false;
+      }
+      else{
+        this.closeDetail()
+        this.input.dropZone = true;
+      }
+    }
   }
+
 
   openDetail(){
     this.detail.setScale(1, 1);
