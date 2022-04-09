@@ -1,5 +1,4 @@
 import {GameObjects} from 'phaser';
-import {SPECIAL_SKILL} from '../../../../models/enum';
 import Pokemon from './pokemon';
 import PokemonEntity from '../../../../core/pokemon-entity';
 import {transformAttackCoordinate} from '../../pages/utils/utils';
@@ -8,6 +7,7 @@ import { IPlayer, IPokemonEntity } from '../../../../types';
 import AnimationManager from '../animation-manager';
 import {DataChange} from '@colyseus/schema';
 import { PokemonActionState } from '../../../../types/enum/Game';
+import { Ability } from '../../../../types/enum/Ability';
 
 export default class BattleManager {
   group: GameObjects.Group;
@@ -263,7 +263,7 @@ export default class BattleManager {
               pkm.positionY = pokemon.positionY;
             }
             const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
-            if (pokemon.skill == SPECIAL_SKILL.TELEPORT) {
+            if (pokemon.skill == Ability.TELEPORT) {
               pkm.x = coordinates[0];
               pkm.y = coordinates[1];
               pkm.specialAttackAnimation(this.group);

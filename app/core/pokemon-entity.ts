@@ -14,6 +14,7 @@ import PokemonState from './pokemon-state';
 import { IPokemonEntity, IPokemon } from '../types';
 import { AttackType, Rarity } from '../types/enum/Game';
 import { Effect } from '../types/enum/Effect';
+import { Ability } from '../types/enum/Ability';
 
 export default class PokemonEntity extends Schema implements IPokemonEntity{
 
@@ -47,7 +48,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type({set: 'string'}) items = new SetSchema<string>();
   @type(['string']) types = new ArraySchema<string>();
   @type('uint8') stars: number;
-  @type('string')  skill: string;
+  @type('uint8')  skill: Ability;
   @type(Status) status: Status;
   @type(Count) count: Count;
   @type('float32') critDamage = 2;

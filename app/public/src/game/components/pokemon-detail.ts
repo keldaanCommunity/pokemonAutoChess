@@ -1,6 +1,7 @@
 import {GameObjects} from 'phaser';
 import {SPECIAL_SKILL_DESCRIPTION, AUTHOR} from '../../../../models/enum';
 import { AttackType } from '../../../../types/enum/Game'
+import { Ability } from '../../../../types/enum/Ability';
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -32,7 +33,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     spellDamage: number,
     mana: number,
     types: string[],
-    skill: string,
+    skill: Ability,
     author: string) {
     super(scene, x, y);
 

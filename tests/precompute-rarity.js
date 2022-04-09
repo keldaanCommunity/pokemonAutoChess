@@ -1,8 +1,9 @@
 const PKM = require('../app/models/enum').PKM;
-const SPECIAL_SKILL =require('../app/models/enum').SPECIAL_SKILL;
 const PokemonFactory = require('../app/models/pokemon-factory');
 
 import { Rarity } from '../app/types/enum/Game';
+import { Ability } from '../app/types/enum/Ability';
+
 const data = {
   [Rarity.COMMON]: [],
   [Rarity.UNCOMMON]: [],
@@ -32,7 +33,7 @@ Object.keys(Rarity).forEach((rarity)=>{
   Object.values(PKM).forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm);
     const family = PokemonFactory.getPokemonFamily(pkm);
-    if (pokemon.rarity == rarity && pokemon.skill != SPECIAL_SKILL.DEFAULT) {
+    if (pokemon.rarity == rarity && pokemon.skill != Ability.DEFAULT) {
       let included = false;
       pokemonCandidates.push(pokemon);
       names.push(pkm);

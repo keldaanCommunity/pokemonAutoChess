@@ -194,7 +194,7 @@ export default class AttackingState extends PokemonState {
 
   onEnter(pokemon) {
     super.onEnter(pokemon);
-    pokemon.action = PokemonActionState.MOVING;
+    pokemon.action = PokemonActionState.ATTACKING;
     pokemon.cooldown = 0;
   }
 

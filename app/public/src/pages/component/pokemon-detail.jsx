@@ -4,7 +4,9 @@ import {RARITY_COLOR, SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
 
 class PokemonDetail extends Component {
   render() {
-      let pokemon = PokemonFactory.createPokemonFromName(this.props.pokemon);
+    let pokemon = PokemonFactory.createPokemonFromName(this.props.pokemon);
+    console.log('pokemon', pokemon, pokemon.skill, SPECIAL_SKILL_DESCRIPTION[pokemon.skill])
+
     return (            
         <div style={{display: 'flex'}}>
             <div style={{width: '30%'}}>
