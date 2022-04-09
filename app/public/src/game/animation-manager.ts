@@ -754,14 +754,11 @@ export default class AnimationManager {
   }
 
   animatePokemon(entity: Pokemon, action: PKM_ACTION) {
-    const animKey = `${entity.index}/${PKM_TINT.NORMAL}/${action}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION[entity.orientation]}`;
-    const shadowKey = `${entity.index}/${PKM_TINT.NORMAL}/${action}/${PKM_ANIM.SHADOW}/${PKM_ORIENTATION[entity.orientation]}`;
+    const tint = entity.shiny ? PKM_TINT.SHINY : PKM_TINT.NORMAL;
+    const animKey = `${entity.index}/${tint}/${action}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION[entity.orientation]}`;
+    const shadowKey = `${entity.index}/${tint}/${action}/${PKM_ANIM.SHADOW}/${PKM_ORIENTATION[entity.orientation]}`;
 
     entity.sprite.anims.play(animKey);
     entity.shadow.anims.play(shadowKey);
-  }
-
-  playSleepAnimation(entity: Pokemon) {
-    entity.sprite.anims.play(`${entity.index}/2`);
   }
 }

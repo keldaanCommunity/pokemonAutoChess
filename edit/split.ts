@@ -32,10 +32,11 @@ interface IDuration{
 }
 
 async function split(){
+
     const pkmaIndexes = ['0000'];
     const mapName = new Map<string, string>();
     mapName.set('0000','default');
-    const credits = {};
+    // const credits = {};
     const durations = {};
     let missing = '';
 
@@ -53,11 +54,11 @@ async function split(){
         await Promise.all([pathIndex, shinyPad].map(async pad => {
             try{
                 const shiny = pathIndex == pad ? PKM_TINT.NORMAL : PKM_TINT.SHINY;
-                const creditFile = fs.readFileSync(`${path}/sprite/${pad}/credits.txt`);
-                const splitted = creditFile.toString().split('\t');
-                credits[`${index}_${shiny}`] = {date:'', author: ''};
-                credits[`${index}_${shiny}`]['date'] = splitted[0].slice(0,10);
-                credits[`${index}_${shiny}`]['author'] = splitted[1].split(`\n`)[0].split(`\r`)[0];
+                // const creditFile = fs.readFileSync(`${path}/sprite/${pad}/credits.txt`);
+                // const splitted = creditFile.toString().split('\t');
+                // credits[`${index}_${shiny}`] = {date:'', author: ''};
+                // credits[`${index}_${shiny}`]['date'] = splitted[0].slice(0,10);
+                // credits[`${index}_${shiny}`]['author'] = splitted[1].split(`\n`)[0].split(`\r`)[0];
                 //console.log('add', creditFile, 'to the credits for', mapName.get(index));
                 
                 const xmlFile = fs.readFileSync(`${path}/sprite/${pad}/AnimData.xml`);
@@ -133,12 +134,12 @@ async function split(){
         }));
     }));
 
-    const file = fs.createWriteStream(`sheets/credits.json`);
-    file.on('error', function(err) {
-      console.log(err);
-    });
-    file.write(JSON.stringify(credits));
-    file.end();
+    // const file = fs.createWriteStream(`sheets/credits.json`);
+    // file.on('error', function(err) {
+    //   console.log(err);
+    // });
+    // file.write(JSON.stringify(credits));
+    // file.end();
 
     const fileA = fs.createWriteStream(`sheets/durations.json`);
     fileA.on('error', function(err) {

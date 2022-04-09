@@ -11,6 +11,7 @@ import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
 import GameScene from '../scenes/game-scene';
 
 export default class Pokemon extends Button {
+  shiny: boolean;
   isPopup: boolean;
   objType: string;
   index: string;
@@ -65,6 +66,7 @@ export default class Pokemon extends Button {
 
   constructor(scene: Phaser.Scene, x: number, y: number, pokemon: IPokemonEntity | IPokemon, dragable: boolean, isPopup: boolean) {
     super(scene, x, y, 75, 75);
+    this.shiny = pokemon.shiny;
     this.isPopup = isPopup;
     this.objType = 'pokemon';
     this.height = 0;
@@ -1102,7 +1104,8 @@ export default class Pokemon extends Button {
       this.sleep.anims.play('sleep');
       this.add(this.sleep);
     }
-    this.sprite.anims.play(`${this.index}/2`);
+    const s = <GameScene> this.scene;
+    s.animationManager.animatePokemon(this, PKM_ACTION.SLEEP);
   }
 
   removeSleep() {
