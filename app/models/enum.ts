@@ -6,6 +6,7 @@
 
 import { Rarity } from "../types/enum/Game";
 import { Effect } from "../types/enum/Effect"
+import { Ability } from "../types/enum/Ability"
 
 export const PKM = Object.freeze({
   DITTO: 'ditto',
@@ -1261,80 +1262,80 @@ export const EFFECTS_ICON = Object.freeze({
   }
 });
 
-export const SPECIAL_SKILL = Object.freeze({
-  DEFAULT: 'DEFAULT',
-  FIRE_BLAST: 'FIRE_BLAST',
-  WHEEL_OF_FIRE: 'WHEEL_OF_FIRE',
-  SEISMIC_TOSS: 'SEISMIC_TOSS',
-  GUILLOTINE: 'GUILLOTINE',
-  ROCK_SLIDE: 'ROCK_SLIDE',
-  HEAT_WAVE: 'HEAT_WAVE',
-  THUNDER: 'THUNDER',
-  HYDRO_PUMP: 'HYDRO_PUMP',
-  DRACO_METEOR: 'DRACO_METEOR',
-  BLAZE_KICK: 'BLAZE_KICK',
-  WISH: 'WISH',
-  CALM_MIND: 'CALM_MIND',
-  IRON_DEFENSE: 'IRON_DEFENSE',
-  METRONOME: 'METRONOME',
-  SOAK: 'SOAK',
-  IRON_TAIL: 'IRON_TAIL',
-  BLAST_BURN: 'BLAST_BURN',
-  CHARGE: 'CHARGE',
-  DISCHARGE: 'DISCHARGE',
-  BITE: 'BITE',
-  DRAGON_TAIL: 'DRAGON_TAIL',
-  DRAGON_BREATH: 'DRAGON_BREATH',
-  ICICLE_CRASH: 'ICICLE_CRASH',
-  ROOT: 'ROOT',
-  TORMENT: 'TORMENT',
-  STOMP: 'STOMP',
-  DARK_PULSE: 'DARK_PULSE',
-  NIGHT_SLASH: 'NIGHT_SLASH',
-  BUG_BUZZ: 'BUG_BUZZ',
-  POISON_STING: 'POISON_STING',
-  LEECH_LIFE: 'LEECH_LIFE',
-  HAPPY_HOUR: 'HAPPY_HOUR',
-  TELEPORT: 'TELEPORT',
-  NASTY_PLOT: 'NASTY_PLOT',
-  THIEF: 'THIEF',
-  STUN_SPORE: 'STUN_SPORE',
-  METEOR_MASH: 'METEOR_MASH',
-  HURRICANE: 'HURRICANE',
-  BURN: 'BURN',
-  SILENCE: 'SILENCE',
-  SLEEP: 'SLEEP',
-  FREEZE: 'FREEZE',
-  PROTECT: 'PROTECT',
-  POISON: 'POISON',
-  CONFUSION: 'CONFUSION',
-  ORIGIN_PULSE: 'ORIGIN_PULSE',
-  SEED_FLARE: 'SEED_FLARE',
-  HEAL_BLOCK: 'HEAL_BLOCK',
-  ROAR_OF_TIME: 'ROAR_OF_TIME',
-  ROCK_TOMB: 'ROCK_TOMB',
-  ROCK_SMASH: 'ROCK_SMASH',
-  HEAD_SMASH: 'HEAD_SMASH',
-  VOLT_SWITCH: 'VOLT_SWITCH',
-  SHADOW_CLONE: 'SHADOW_CLONE',
-  HYPER_VOICE: 'HYPER_VOICE',
-  PETAL_DANCE: 'PETAL_DANCE',
-  ECHO: 'ECHO',
-  TRI_ATTACK: 'TRI_ATTACK',
-  GRASS_WHISTLE: 'GRASS_WHISTLE',
-  HIGH_JUMP_KICK: 'HIGH_JUMP_KICK',
-  DISARMING_VOICE: 'DISARMING_VOICE',
-  RELIC_SONG: 'RELIC_SONG',
-  GROWL: 'GROWL',
-  BONEMERANG: 'BONEMERANG',
-  CLANGOROUS_SOUL: 'CLANGOROUS_SOUL',
-  NIGHTMARE: 'NIGHTMARE',
-  EXPLOSION: 'EXPLOSION',
-  KING_SHIELD: 'KING_SHIELD'
-});
+// export const SPECIAL_SKILL = Object.freeze({
+//   DEFAULT: 'DEFAULT',
+//   FIRE_BLAST: 'FIRE_BLAST',
+//   WHEEL_OF_FIRE: 'WHEEL_OF_FIRE',
+//   SEISMIC_TOSS: 'SEISMIC_TOSS',
+//   GUILLOTINE: 'GUILLOTINE',
+//   ROCK_SLIDE: 'ROCK_SLIDE',
+//   HEAT_WAVE: 'HEAT_WAVE',
+//   THUNDER: 'THUNDER',
+//   HYDRO_PUMP: 'HYDRO_PUMP',
+//   DRACO_METEOR: 'DRACO_METEOR',
+//   BLAZE_KICK: 'BLAZE_KICK',
+//   WISH: 'WISH',
+//   CALM_MIND: 'CALM_MIND',
+//   IRON_DEFENSE: 'IRON_DEFENSE',
+//   METRONOME: 'METRONOME',
+//   SOAK: 'SOAK',
+//   IRON_TAIL: 'IRON_TAIL',
+//   BLAST_BURN: 'BLAST_BURN',
+//   CHARGE: 'CHARGE',
+//   DISCHARGE: 'DISCHARGE',
+//   BITE: 'BITE',
+//   DRAGON_TAIL: 'DRAGON_TAIL',
+//   DRAGON_BREATH: 'DRAGON_BREATH',
+//   ICICLE_CRASH: 'ICICLE_CRASH',
+//   ROOT: 'ROOT',
+//   TORMENT: 'TORMENT',
+//   STOMP: 'STOMP',
+//   DARK_PULSE: 'DARK_PULSE',
+//   NIGHT_SLASH: 'NIGHT_SLASH',
+//   BUG_BUZZ: 'BUG_BUZZ',
+//   POISON_STING: 'POISON_STING',
+//   LEECH_LIFE: 'LEECH_LIFE',
+//   HAPPY_HOUR: 'HAPPY_HOUR',
+//   TELEPORT: 'TELEPORT',
+//   NASTY_PLOT: 'NASTY_PLOT',
+//   THIEF: 'THIEF',
+//   STUN_SPORE: 'STUN_SPORE',
+//   METEOR_MASH: 'METEOR_MASH',
+//   HURRICANE: 'HURRICANE',
+//   BURN: 'BURN',
+//   SILENCE: 'SILENCE',
+//   SLEEP: 'SLEEP',
+//   FREEZE: 'FREEZE',
+//   PROTECT: 'PROTECT',
+//   POISON: 'POISON',
+//   CONFUSION: 'CONFUSION',
+//   ORIGIN_PULSE: 'ORIGIN_PULSE',
+//   SEED_FLARE: 'SEED_FLARE',
+//   HEAL_BLOCK: 'HEAL_BLOCK',
+//   ROAR_OF_TIME: 'ROAR_OF_TIME',
+//   ROCK_TOMB: 'ROCK_TOMB',
+//   ROCK_SMASH: 'ROCK_SMASH',
+//   HEAD_SMASH: 'HEAD_SMASH',
+//   VOLT_SWITCH: 'VOLT_SWITCH',
+//   SHADOW_CLONE: 'SHADOW_CLONE',
+//   HYPER_VOICE: 'HYPER_VOICE',
+//   PETAL_DANCE: 'PETAL_DANCE',
+//   ECHO: 'ECHO',
+//   TRI_ATTACK: 'TRI_ATTACK',
+//   GRASS_WHISTLE: 'GRASS_WHISTLE',
+//   HIGH_JUMP_KICK: 'HIGH_JUMP_KICK',
+//   DISARMING_VOICE: 'DISARMING_VOICE',
+//   RELIC_SONG: 'RELIC_SONG',
+//   GROWL: 'GROWL',
+//   BONEMERANG: 'BONEMERANG',
+//   CLANGOROUS_SOUL: 'CLANGOROUS_SOUL',
+//   NIGHTMARE: 'NIGHTMARE',
+//   EXPLOSION: 'EXPLOSION',
+//   KING_SHIELD: 'KING_SHIELD'
+// });
 
 export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
-  KING_SHIELD: {
+  [Ability.KING_SHIELD] : {
     title: {
       eng: 'King Shield'
     },
@@ -1342,7 +1343,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Protect the user for 0.75/1.5/3s and swap his position with the farthest ennemy'
     }
   },
-  EXPLOSION: {
+  [Ability.EXPLOSION] : {
     title: {
       eng: 'Explosion'
     },
@@ -1350,7 +1351,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Deals 40/80/160 physical damage. Damage also the user.'
     }
   },
-  NIGHTMARE: {
+  [Ability.NIGHTMARE] : {
     title: {
       eng: 'Nightmare'
     },
@@ -1358,7 +1359,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Poison the ennemy team for 2/4/8s'
     }
   },
-  CLANGOROUS_SOUL: {
+  [Ability.CLANGOROUS_SOUL] : {
     title: {
       eng: 'Clangorous Soul'
     },
@@ -1366,7 +1367,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Buff the adjacent allies with 2/4/8 attack and 1/2/4 defense/special defense'
     }
   },
-  BONEMERANG: {
+  [Ability.BONEMERANG] : {
     title: {
       eng: 'Bonemerang'
     },
@@ -1374,7 +1375,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Throw a boomerang bone through the enemy team, dealing 30/60/120 physical damage on its way'
     }
   },
-  GROWL: {
+  [Ability.GROWL] : {
     title: {
       eng: 'Growl'
     },
@@ -1382,7 +1383,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Apply wound status on the ennemy team for 1/2/3s'
     }
   },
-  RELIC_SONG: {
+  [Ability.RELIC_SONG] : {
     title: {
       eng: 'Relic Song'
     },
@@ -1390,7 +1391,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Put asleep the ennemy team for .5/1/2s'
     }
   },
-  DISARMING_VOICE: {
+  [Ability.DISARMING_VOICE] : {
     title: {
       eng: 'Disarming Voice'
     },
@@ -1398,7 +1399,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Heals and restore 10/20/40 points of mana to all allies'
     }
   },
-  HIGH_JUMP_KICK: {
+  [Ability.HIGH_JUMP_KICK] : {
     title: {
       eng: 'High Jump Kick'
     },
@@ -1406,7 +1407,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Deals 50/100/200 physical damage and steal the mana from its target'
     }
   },
-  GRASS_WHISTLE: {
+  [Ability.GRASS_WHISTLE] : {
     title: {
       eng: 'Grass Whistle'
     },
@@ -1414,7 +1415,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Put asleep 1/2/4 ennemies for 2 seconds'
     }
   },
-  TRI_ATTACK: {
+  [Ability.TRI_ATTACK] : {
     title: {
       eng: 'Tri Attack'
     },
@@ -1422,7 +1423,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Burn, freeze and wound the target for 2/4/8s'
     }
   },
-  ECHO: {
+  [Ability.ECHO] : {
     title: {
       eng: 'Echo'
     },
@@ -1430,7 +1431,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Deals 5/10/20 special damage, +3/+6/+9 damage each time the pokemon uses its ability'
     }
   },
-  PETAL_DANCE: {
+  [Ability.PETAL_DANCE] : {
     title: {
       eng: 'Petal Dance'
     },
@@ -1438,7 +1439,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Deals 30/60/90 special damage to 2/3/4 ennemies'
     }
   },
-  HYPER_VOICE: {
+  [Ability.HYPER_VOICE] : {
     title: {
       eng: 'Hyper Voice'
     },
@@ -1446,7 +1447,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Deals 50/100/200 special damage on a row, confuse for 1/2/3 seconds'
     }
   },
-  SHADOW_CLONE: {
+  [Ability.SHADOW_CLONE] : {
     title: {
       eng: 'Shadow Clone'
     },
@@ -1454,7 +1455,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'The pokemon creates an identical clone of himself next to his target. This clone inherits from the pokemon items and stats'
     }
   },
-  VOLT_SWITCH: {
+  [Ability.VOLT_SWITCH] : {
     title: {
       eng: 'Volt Switch'
     },
@@ -1462,7 +1463,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Dash into the ennemy backline, dealing 40/80/160 special damage'
     }
   },
-  DEFAULT: {
+  [Ability.DEFAULT] : {
     title: {
       eng: '',
       esp: '',
@@ -1474,7 +1475,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: ''
     }
   },
-  BURN: {
+  [Ability.BURN] : {
     title: {
       eng: 'Burn',
       esp: 'Quemado',
@@ -1486,7 +1487,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Brule la cible pour 2/4/8 secondes, lui faisant perdre 5% hp/secondes'
     }
   },
-  POISON: {
+  [Ability.POISON] : {
     title: {
       eng: 'Poison',
       esp: 'Veneno',
@@ -1498,7 +1499,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Empoisonne la cible durant 5/10/20 secondes, faisant 15% hp/secondes'
     }
   },
-  SLEEP: {
+  [Ability.SLEEP] : {
     title: {
       eng: 'Sleep',
       esp: 'Duerme',
@@ -1510,7 +1511,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Endors la cible durant 3/5/7 secondes'
     }
   },
-  SILENCE: {
+  [Ability.SILENCE] : {
     title: {
       eng: 'Silence',
       esp: 'Silencio',
@@ -1522,7 +1523,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Silence toute l équipe ennemie durant 2/4/8 secondes'
     }
   },
-  PROTECT: {
+  [Ability.PROTECT] : {
     title: {
       eng: 'Protect',
       esp: 'Proteja',
@@ -1534,7 +1535,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Rend le pokémon invulnérable durant 3/5/7 secondes'
     }
   },
-  FREEZE: {
+  [Ability.FREEZE] : {
     title: {
       eng: 'Freeze',
       esp: 'Congelar',
@@ -1546,7 +1547,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Gèle la cible durant 1/2/4 secondes'
     }
   },
-  CONFUSION: {
+  [Ability.CONFUSION] : {
     title: {
       eng: 'Confusion',
       esp: 'Confusión',
@@ -1558,7 +1559,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Rend toute la team ennemie confus pendant 1/ 2 4 secondes'
     }
   },
-  FIRE_BLAST: {
+  [Ability.FIRE_BLAST] : {
     title: {
       eng: 'Fire Blast',
       esp: 'Ráfaga de fuego',
@@ -1570,7 +1571,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Lance une déflagration infligeant 30/50/100 dégats spéciaux'
     }
   },
-  WHEEL_OF_FIRE: {
+  [Ability.WHEEL_OF_FIRE] : {
     title: {
       eng: 'Flame Wheel',
       esp: 'Rueda de fuego',
@@ -1582,7 +1583,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Envoie une boule de feu faisant un aller retour, endommageant les pokémons pour 30/40/50 dégats spéciaux'
     }
   },
-  SEISMIC_TOSS: {
+  [Ability.SEISMIC_TOSS] : {
     title: {
       eng: 'Seismic toss',
       esp: 'Lanzamiento sísmico',
@@ -1594,7 +1595,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque mono cible dont les dégats varient en fonction de la taille de l équipe.'
     }
   },
-  GUILLOTINE: {
+  [Ability.GUILLOTINE] : {
     title: {
       eng: 'Guillotine',
       esp: 'Guillotina',
@@ -1606,7 +1607,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque mono cible qui fait des dégats physiques. Restaure la moitié du mana si la cible est tué.'
     }
   },
-  ROCK_SLIDE: {
+  [Ability.ROCK_SLIDE] : {
     title: {
       eng: 'Rock Slide',
       esp: 'Deslizamiento de rocas',
@@ -1618,7 +1619,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque mono cible qui fait des dégats physiques. Double les dégats si type vol.'
     }
   },
-  HEAT_WAVE: {
+  [Ability.HEAT_WAVE] : {
     title: {
       eng: 'Heat wave',
       esp: 'Ola de calor',
@@ -1630,7 +1631,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque AOE qui infique 30/40/50 dégats spéciaux dans une ligne derrière la cible.'
     }
   },
-  THUNDER: {
+  [Ability.THUNDER] : {
     title: {
       eng: 'Thunder',
       esp: 'Trueno',
@@ -1642,7 +1643,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque monocibe infligeant 30/50/70 dégats spéciaux.'
     }
   },
-  HYDRO_PUMP: {
+  [Ability.HYDRO_PUMP] : {
     title: {
       eng: 'Hydro Cannon',
       esp: 'Hidrobomba',
@@ -1654,7 +1655,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque AOE qui infique 30/40/50 dégats spéciaux dans une ligne derrière la cible.'
     }
   },
-  DRACO_METEOR: {
+  [Ability.DRACO_METEOR] : {
     title: {
       eng: 'Draco meteor',
       esp: 'Meteoro Draco',
@@ -1666,7 +1667,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Inflige 10/20/40 dégats spéciaux à tous les pokémons ennemis.'
     }
   },
-  BLAZE_KICK: {
+  [Ability.BLAZE_KICK] : {
     title: {
       eng: 'Blaze kick',
       esp: 'Patada de fuego',
@@ -1678,7 +1679,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque monocinle faisant 30/60/90 dégats physiques'
     }
   },
-  WISH: {
+  [Ability.WISH] : {
     title: {
       eng: 'Wish',
       esp: 'Deseo',
@@ -1690,7 +1691,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Soigne 50 hp à 1/2/3 pokémons alliés'
     }
   },
-  CALM_MIND: {
+  [Ability.CALM_MIND] : {
     title: {
       eng: 'Calm mind',
       esp: 'Mente tranquila',
@@ -1702,7 +1703,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Augmente l attaque du pokémon de 50/100/150%.'
     }
   },
-  IRON_DEFENSE: {
+  [Ability.IRON_DEFENSE] : {
     title: {
       eng: 'Defense Curl',
       esp: 'Defensa del hierro',
@@ -1714,7 +1715,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Augmente la défense du pokémon de 4/6/8 points'
     }
   },
-  METRONOME: {
+  [Ability.METRONOME] : {
     title: {
       eng: 'Metronome',
       esp: 'Métrónomo',
@@ -1726,7 +1727,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Execute une capacité au hasard'
     }
   },
-  SOAK: {
+  [Ability.SOAK] : {
     title: {
       eng: 'Soak',
       esp: 'Empápate',
@@ -1738,7 +1739,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Fait 20/30/40 dégats spéciaux et restaure 10 mana à chaque pokémon allié.'
     }
   },
-  ORIGIN_PULSE: {
+  [Ability.ORIGIN_PULSE] : {
     title: {
       eng: 'Origin Pulse',
       esp: 'Fogonazo',
@@ -1750,7 +1751,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Une vague parcourt horizontalement le champ de bataille faisant 60 dégats magiques'
     }
   },
-  SEED_FLARE: {
+  [Ability.SEED_FLARE] : {
     title: {
       eng: 'Seed Flare',
       esp: 'Pulso Primigenio',
@@ -1762,7 +1763,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Le corps de Shaymin émet une onde de choc, infligeant 30 dégâts magiques à tous les ennemis et réduisant leur vitesse de 2.'
     }
   },
-  IRON_TAIL: {
+  [Ability.IRON_TAIL] : {
     title: {
       eng: 'Iron tail',
       esp: 'Cola de hierro',
@@ -1774,7 +1775,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque monocible faisant 20/30/40 dégats physique. Booste la défense de 1/3/5 points.'
     }
   },
-  BLAST_BURN: {
+  [Ability.BLAST_BURN] : {
     title: {
       eng: 'Blast Burn',
       esp: 'Quemadura por ráfaga',
@@ -1786,7 +1787,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque AOE en cercle faisant 30/50/80 dégats spéciaux.'
     }
   },
-  CHARGE: {
+  [Ability.CHARGE] : {
     title: {
       eng: 'Charge',
       esp: 'Carga',
@@ -1798,7 +1799,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Augmente l attaque des alliés electrique de 10/20/30%'
     }
   },
-  DISCHARGE: {
+  [Ability.DISCHARGE] : {
     title: {
       eng: 'Discharge',
       esp: 'Descarga',
@@ -1810,7 +1811,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque AOE en cercle faisant 40/60/80 dégats spéciaux.'
     }
   },
-  BITE: {
+  [Ability.BITE] : {
     title: {
       eng: 'Bite',
       esp: 'Mordida',
@@ -1822,7 +1823,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque monocible avec 50% de vol de vie faisant 30/50/70 dégats spéciaux.'
     }
   },
-  DRAGON_TAIL: {
+  [Ability.DRAGON_TAIL] : {
     title: {
       eng: 'Dragon Tail',
       esp: 'Cola de Dragón',
@@ -1834,7 +1835,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque mono-cible faisant 30/40/50 dégats physique et boostant les défenses de 1/2/3 points.'
     }
   },
-  DRAGON_BREATH: {
+  [Ability.DRAGON_BREATH] : {
     title: {
       eng: 'Dragon Breath',
       esp: 'Aliento de Dragón',
@@ -1846,7 +1847,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque AOE faisant 30/40/50 dégats spéciaux dans une ligne derrière la cible'
     }
   },
-  ICICLE_CRASH: {
+  [Ability.ICICLE_CRASH] : {
     title: {
       eng: 'Icicle Crash',
       esp: 'Choque de carámbanos',
@@ -1858,7 +1859,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque AOE en cercle faisant 30/40/50 dégats physiques'
     }
   },
-  ROOT: {
+  [Ability.ROOT] : {
     title: {
       eng: 'Root',
       esp: 'Raíz',
@@ -1870,7 +1871,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Soigne les alliés autour de 20/30/40 hp.'
     }
   },
-  TORMENT: {
+  [Ability.TORMENT] : {
     title: {
       eng: 'Torment',
       esp: 'Viaje',
@@ -1882,7 +1883,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Augmente la vitesse d attaque de 20/30/40%'
     }
   },
-  STOMP: {
+  [Ability.STOMP] : {
     title: {
       eng: 'Stomp',
       esp: 'Pisotón',
@@ -1894,7 +1895,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque mono cible faisant 2*atk*stars dégats physiques'
     }
   },
-  DARK_PULSE: {
+  [Ability.DARK_PULSE] : {
     title: {
       eng: 'Dark Pulse',
       esp: 'Pulso oscuro',
@@ -1906,7 +1907,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque vol de vie faisant 30/50/70 dégats spéciaux.'
     }
   },
-  NIGHT_SLASH: {
+  [Ability.NIGHT_SLASH] : {
     title: {
       eng: 'Night Slash',
       esp: 'Tajo nocturno',
@@ -1918,7 +1919,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque spéciale faisant 40/60/80 points de dégats. Diminue la défense de toute la team ennemie de 1 point.'
     }
   },
-  BUG_BUZZ: {
+  [Ability.BUG_BUZZ] : {
     title: {
       eng: 'Bug Buzz',
       esp: 'Bichos',
@@ -1930,7 +1931,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque mono cible faisant 20/30/40 dégats spéciaux'
     }
   },
-  POISON_STING: {
+  [Ability.POISON_STING] : {
     title: {
       eng: 'Poison Sting',
       esp: 'Picadura de veneno',
@@ -1942,7 +1943,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque physique mono cible faisant 30/40/50 dégats. Double les dégats si la cible est empoisonné.'
     }
   },
-  LEECH_LIFE: {
+  [Ability.LEECH_LIFE] : {
     title: {
       eng: 'Leech Life',
       esp: 'Vampirismo',
@@ -1954,7 +1955,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque vol de vie en AOE faisant 10/20/30 points de dégats.'
     }
   },
-  HAPPY_HOUR: {
+  [Ability.HAPPY_HOUR] : {
     title: {
       eng: 'Happy hour',
       esp: 'La hora feliz',
@@ -1966,7 +1967,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Augmente l attaque de toute l équipe de 3/6/9 points.'
     }
   },
-  TELEPORT: {
+  [Ability.TELEPORT] : {
     title: {
       eng: 'Teleport',
       esp: 'Teletransporte',
@@ -1978,7 +1979,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Téléporte le pokémon sur un coin de la carte.'
     }
   },
-  NASTY_PLOT: {
+  [Ability.NASTY_PLOT] : {
     title: {
       eng: 'Nasty Plot',
       esp: 'Trama desagradable',
@@ -1990,7 +1991,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Booste l attaque du pokémon de 5/10/20 points'
     }
   },
-  THIEF: {
+  [Ability.THIEF] : {
     title: {
       eng: 'Thief',
       esp: 'Ladrón',
@@ -2002,7 +2003,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Vole l item du pokémon ennemi et inflige 5/10/20 dégats physiques'
     }
   },
-  STUN_SPORE: {
+  [Ability.STUN_SPORE] : {
     title: {
       eng: 'Stun Spore',
       esp: 'Espora de aturdimiento',
@@ -2014,7 +2015,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Diminue la vitesse d attaque du pokémon de 50/100/200% et inflige 5/10/20 dégats physiques'
     }
   },
-  METEOR_MASH: {
+  [Ability.METEOR_MASH] : {
     title: {
       eng: 'Meteor mash',
       esp: 'Puré de meteoritos',
@@ -2026,7 +2027,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque en AOE faisant 30/50/40 dégats spéciaux. Booste l attaque du pokémon de 5 points.'
     }
   },
-  HURRICANE: {
+  [Ability.HURRICANE] : {
     title: {
       eng: 'Hurricane',
       esp: 'Huracán',
@@ -2038,7 +2039,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }
   },
-  HEAL_BLOCK: {
+  [Ability.HEAL_BLOCK] : {
     title: {
       eng: 'Heal Block',
       esp: 'Heal Block',
@@ -2050,7 +2051,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }
   },
-  ROAR_OF_TIME: {
+  [Ability.ROAR_OF_TIME] : {
     title: {
       eng: 'Roar of time',
       esp: 'Roar of time',
@@ -2062,7 +2063,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }
   },
-  ROCK_TOMB: {
+  [Ability.ROCK_TOMB] : {
     title: {
       eng: 'Rock Tomb'
     },
@@ -2070,7 +2071,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       eng: 'Mono target attack that deals 30/60/90 physical damage and decrease target attack speed by 20/40/60%'
     }
   },
-  ROCK_SMASH: {
+  [Ability.ROCK_SMASH] : {
     title: {
       eng: 'Rock Smash',
       esp: 'Rock Smash',
@@ -2082,7 +2083,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
     }
   },
-  HEAD_SMASH: {
+  [Ability.HEAD_SMASH] : {
     title: {
       eng: 'Head Smash',
       esp: 'Head Smash',

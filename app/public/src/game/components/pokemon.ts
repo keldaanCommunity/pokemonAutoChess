@@ -3,13 +3,15 @@ import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
-import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS, PKM_ACTION, PKM_TINT, PKM_ORIENTATION, PKM_ANIM, PKM} from '../../../../models/enum';
+import {EFFECTS_ICON} from '../../../../models/enum';
+import { Effect } from '../../../../types/enum/Effect';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 import { IPokemon, IPokemonEntity, instanceofPokemonEntity, Emotion } from '../../../../types';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
 import GameScene from '../scenes/game-scene';
 import { AttackType, Orientation, PokemonActionState } from '../../../../types/enum/Game';
+import { Ability } from '../../../../types/enum/Ability';
 
 export default class Pokemon extends Button {
   emotion: Emotion;
@@ -28,7 +30,7 @@ export default class Pokemon extends Button {
   atkSpeed: number;
   targetX: number;
   targetY: number;
-  skill: string;
+  skill: Ability;
   positionX: number;
   positionY: number;
   attackSprite: string;
@@ -158,7 +160,6 @@ export default class Pokemon extends Button {
     if (this.projectile) {
       this.projectile.destroy();
     }
-
     this.projectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'attacks', `${this.attackSprite}/000`);
     const scale = getAttackScale(this.attackSprite);
     this.projectile.setScale(scale[0], scale[1]);
@@ -168,10 +169,10 @@ export default class Pokemon extends Button {
 
   petalDanceAnimation() {
     const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.PETAL_DANCE, '000');
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.PETAL_DANCE], '000');
     specialProjectile.setDepth(7);
     specialProjectile.setScale(2, 2);
-    specialProjectile.anims.play(SPECIAL_SKILL.PETAL_DANCE);
+    specialProjectile.anims.play(Ability[Ability.PETAL_DANCE]);
     specialProjectile.once('animationcomplete', () => {
       specialProjectile.destroy();
     });
@@ -281,24 +282,24 @@ export default class Pokemon extends Button {
 
       if (this.targetX != -1 && this.targetY != -1) {
         switch (this.skill) {
-          case SPECIAL_SKILL.FIRE_BLAST:
+          case Ability.FIRE_BLAST:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.FIRE_BLAST}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.FIRE_BLAST}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.FIRE_BLAST);
+            specialProjectile.anims.play(Ability[Ability.FIRE_BLAST]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.WHEEL_OF_FIRE:
+          case Ability.WHEEL_OF_FIRE:
             coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY);
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.WHEEL_OF_FIRE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.WHEEL_OF_FIRE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.WHEEL_OF_FIRE);
+            specialProjectile.anims.play(Ability[Ability.WHEEL_OF_FIRE]);
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],
@@ -312,13 +313,13 @@ export default class Pokemon extends Button {
             });
             break;
 
-          case SPECIAL_SKILL.ORIGIN_PULSE:
+          case Ability.ORIGIN_PULSE:
             coordinatesTarget = transformAttackCoordinate(0, this.targetY);
             coordinates = transformAttackCoordinate(8, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ORIGIN_PULSE}/0`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.ORIGIN_PULSE}/0`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.ORIGIN_PULSE);
+            specialProjectile.anims.play(Ability[Ability.ORIGIN_PULSE]);
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],
@@ -330,464 +331,464 @@ export default class Pokemon extends Button {
             });
             break;
 
-          case SPECIAL_SKILL.SEED_FLARE:
+          case Ability.SEED_FLARE:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SEED_FLARE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.SEED_FLARE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(5, 5);
-            specialProjectile.anims.play(SPECIAL_SKILL.SEED_FLARE);
+            specialProjectile.anims.play(Ability[Ability.SEED_FLARE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.SEISMIC_TOSS:
+          case Ability.SEISMIC_TOSS:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SEISMIC_TOSS}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.SEISMIC_TOSS}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.SEISMIC_TOSS);
+            specialProjectile.anims.play(Ability[Ability.SEISMIC_TOSS]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.GUILLOTINE:
+          case Ability.GUILLOTINE:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.GUILLOTINE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.GUILLOTINE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(SPECIAL_SKILL.GUILLOTINE);
+            specialProjectile.anims.play(Ability[Ability.GUILLOTINE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.ROCK_SLIDE:
+          case Ability.ROCK_SLIDE:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ROCK_SLIDE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.ROCK_SLIDE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.ROCK_SLIDE);
+            specialProjectile.anims.play(Ability[Ability.ROCK_SLIDE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.HEAT_WAVE:
+          case Ability.HEAT_WAVE:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HEAT_WAVE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.HEAT_WAVE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.HEAT_WAVE);
+            specialProjectile.anims.play(Ability[Ability.HEAT_WAVE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.THUNDER:
+          case Ability.THUNDER:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.THUNDER}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.THUNDER}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.THUNDER);
+            specialProjectile.anims.play(Ability[Ability.THUNDER]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.HYDRO_PUMP:
+          case Ability.HYDRO_PUMP:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HYDRO_PUMP}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.HYDRO_PUMP}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.HYDRO_PUMP);
+            specialProjectile.anims.play(Ability[Ability.HYDRO_PUMP]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.DRACO_METEOR:
+          case Ability.DRACO_METEOR:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DRACO_METEOR}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.DRACO_METEOR}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.DRACO_METEOR);
+            specialProjectile.anims.play(Ability[Ability.DRACO_METEOR]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.BLAZE_KICK:
+          case Ability.BLAZE_KICK:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BLAZE_KICK}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.BLAZE_KICK}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.BLAZE_KICK);
+            specialProjectile.anims.play(Ability[Ability.BLAZE_KICK]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.WISH:
+          case Ability.WISH:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.WISH}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.WISH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(SPECIAL_SKILL.WISH);
+            specialProjectile.anims.play(Ability[Ability.WISH]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.CALM_MIND:
+          case Ability.CALM_MIND:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.CALM_MIND}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.CALM_MIND}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.CALM_MIND);
+            specialProjectile.anims.play(Ability[Ability.CALM_MIND]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.IRON_DEFENSE:
+          case Ability.IRON_DEFENSE:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.IRON_DEFENSE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.IRON_DEFENSE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.IRON_DEFENSE);
+            specialProjectile.anims.play(Ability[Ability.IRON_DEFENSE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.METRONOME:
+          case Ability.METRONOME:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.METRONOME}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.METRONOME}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.METRONOME);
+            specialProjectile.anims.play(Ability[Ability.METRONOME]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.SOAK:
+          case Ability.SOAK:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.SOAK}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.SOAK}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.SOAK);
+            specialProjectile.anims.play(Ability[Ability.SOAK]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.IRON_TAIL:
+          case Ability.IRON_TAIL:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.IRON_TAIL}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.IRON_TAIL}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.IRON_TAIL);
+            specialProjectile.anims.play(Ability[Ability.IRON_TAIL]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.BLAST_BURN:
+          case Ability.BLAST_BURN:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BLAST_BURN}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.BLAST_BURN}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(SPECIAL_SKILL.BLAST_BURN);
+            specialProjectile.anims.play(Ability[Ability.BLAST_BURN]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.CHARGE:
+          case Ability.CHARGE:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.CHARGE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.CHARGE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.CHARGE);
+            specialProjectile.anims.play(Ability[Ability.CHARGE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.DISCHARGE:
+          case Ability.DISCHARGE:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DISCHARGE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.DISCHARGE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(SPECIAL_SKILL.DISCHARGE);
+            specialProjectile.anims.play(Ability[Ability.DISCHARGE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.BITE:
+          case Ability.BITE:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BITE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.BITE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.BITE);
+            specialProjectile.anims.play(Ability[Ability.BITE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.DRAGON_TAIL:
+          case Ability.DRAGON_TAIL:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DRAGON_TAIL}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.DRAGON_TAIL}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.DRAGON_TAIL);
+            specialProjectile.anims.play(Ability[Ability.DRAGON_TAIL]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.DRAGON_BREATH:
+          case Ability.DRAGON_BREATH:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DRAGON_BREATH}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.DRAGON_BREATH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.DRAGON_BREATH);
+            specialProjectile.anims.play(Ability[Ability.DRAGON_BREATH]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.ICICLE_CRASH:
+          case Ability.ICICLE_CRASH:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ICICLE_CRASH}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.ICICLE_CRASH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(SPECIAL_SKILL.ICICLE_CRASH);
+            specialProjectile.anims.play(Ability[Ability.ICICLE_CRASH]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.ROOT:
+          case Ability.ROOT:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.ROOT}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.ROOT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.ROOT);
+            specialProjectile.anims.play(Ability[Ability.ROOT]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.TORMENT:
+          case Ability.TORMENT:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.TORMENT}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.TORMENT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.TORMENT);
+            specialProjectile.anims.play(Ability[Ability.TORMENT]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.STOMP:
+          case Ability.STOMP:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.STOMP}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.STOMP}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(SPECIAL_SKILL.STOMP);
+            specialProjectile.anims.play(Ability[Ability.STOMP]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.DARK_PULSE:
+          case Ability.DARK_PULSE:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.DARK_PULSE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.DARK_PULSE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.DARK_PULSE);
+            specialProjectile.anims.play(Ability[Ability.DARK_PULSE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.NIGHT_SLASH:
+          case Ability.NIGHT_SLASH:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.NIGHT_SLASH}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.NIGHT_SLASH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.NIGHT_SLASH);
+            specialProjectile.anims.play(Ability[Ability.NIGHT_SLASH]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.BUG_BUZZ:
+          case Ability.BUG_BUZZ:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.BUG_BUZZ}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.BUG_BUZZ}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.BUG_BUZZ);
+            specialProjectile.anims.play(Ability[Ability.BUG_BUZZ]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.POISON_STING:
+          case Ability.POISON_STING:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.POISON_STING}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.POISON_STING}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.POISON_STING);
+            specialProjectile.anims.play(Ability[Ability.POISON_STING]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.LEECH_LIFE:
+          case Ability.LEECH_LIFE:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.LEECH_LIFE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.LEECH_LIFE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.LEECH_LIFE);
+            specialProjectile.anims.play(Ability[Ability.LEECH_LIFE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.HAPPY_HOUR:
+          case Ability.HAPPY_HOUR:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HAPPY_HOUR}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.HAPPY_HOUR}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.HAPPY_HOUR);
+            specialProjectile.anims.play(Ability[Ability.HAPPY_HOUR]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.TELEPORT:
+          case Ability.TELEPORT:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.TELEPORT}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.TELEPORT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.TELEPORT);
+            specialProjectile.anims.play(Ability[Ability.TELEPORT]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.NASTY_PLOT:
+          case Ability.NASTY_PLOT:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.NASTY_PLOT}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.NASTY_PLOT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.NASTY_PLOT);
+            specialProjectile.anims.play(Ability[Ability.NASTY_PLOT]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.THIEF:
+          case Ability.THIEF:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.THIEF}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.THIEF}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.THIEF);
+            specialProjectile.anims.play(Ability[Ability.THIEF]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.STUN_SPORE:
+          case Ability.STUN_SPORE:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.STUN_SPORE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.STUN_SPORE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.STUN_SPORE);
+            specialProjectile.anims.play(Ability[Ability.STUN_SPORE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.METEOR_MASH:
+          case Ability.METEOR_MASH:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.METEOR_MASH}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.METEOR_MASH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(SPECIAL_SKILL.METEOR_MASH);
+            specialProjectile.anims.play(Ability[Ability.METEOR_MASH]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.HURRICANE:
+          case Ability.HURRICANE:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${SPECIAL_SKILL.HURRICANE}/000`);
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.HURRICANE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.HURRICANE);
+            specialProjectile.anims.play(Ability[Ability.HURRICANE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.ROAR_OF_TIME:
+          case Ability.ROAR_OF_TIME:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ROAR_OF_TIME', `000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.ROAR_OF_TIME);
+            specialProjectile.anims.play(Ability[Ability.ROAR_OF_TIME]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.ROCK_TOMB:
+          case Ability.ROCK_TOMB:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ROCK_TOMB', `000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.ROCK_TOMB);
+            specialProjectile.anims.play(Ability[Ability.ROCK_TOMB]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.ROCK_SMASH:
+          case Ability.ROCK_SMASH:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ROCK_SMASH', `000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.ROCK_SMASH);
+            specialProjectile.anims.play(Ability[Ability.ROCK_SMASH]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.VOLT_SWITCH:
+          case Ability.VOLT_SWITCH:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.VOLT_SWITCH, '0');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.VOLT_SWITCH], '0');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.VOLT_SWITCH);
+            specialProjectile.anims.play(Ability[Ability.VOLT_SWITCH]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.HYPER_VOICE:
+          case Ability.HYPER_VOICE:
             coordinatesTarget = transformAttackCoordinate(8, this.targetY);
             coordinates = transformAttackCoordinate(0, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.HYPER_VOICE, '0');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.HYPER_VOICE], '0');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.HYPER_VOICE);
+            specialProjectile.anims.play(Ability[Ability.HYPER_VOICE]);
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],
@@ -799,71 +800,71 @@ export default class Pokemon extends Button {
             });
             break;
 
-          case SPECIAL_SKILL.SHADOW_CLONE:
+          case Ability.SHADOW_CLONE:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.SHADOW_CLONE, '0');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.SHADOW_CLONE], '0');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.SHADOW_CLONE);
+            specialProjectile.anims.play(Ability[Ability.SHADOW_CLONE]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.ECHO:
+          case Ability.ECHO:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.ECHO, '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.ECHO], '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.ECHO);
+            specialProjectile.anims.play(Ability[Ability.ECHO]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.EXPLOSION:
+          case Ability.EXPLOSION:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.EXPLOSION, '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.EXPLOSION], '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.EXPLOSION);
+            specialProjectile.anims.play(Ability[Ability.EXPLOSION]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
 
-          case SPECIAL_SKILL.CLANGOROUS_SOUL:
+          case Ability.CLANGOROUS_SOUL:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.CLANGOROUS_SOUL, '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.CLANGOROUS_SOUL], '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.CLANGOROUS_SOUL);
+            specialProjectile.anims.play(Ability[Ability.CLANGOROUS_SOUL]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.GROWL:
+          case Ability.GROWL:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.GROWL, '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.GROWL], '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.GROWL);
+            specialProjectile.anims.play(Ability[Ability.GROWL]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.DISARMING_VOICE:
+          case Ability.DISARMING_VOICE:
             group.getChildren().forEach((p) => {
               const pokemon = <Pokemon> p;
               if (this.team == pokemon.team) {
                 const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
-                const s = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.DISARMING_VOICE, '000');
+                const s = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.DISARMING_VOICE], '000');
                 s.setDepth(7);
                 s.setScale(2, 2);
-                s.anims.play(SPECIAL_SKILL.DISARMING_VOICE);
+                s.anims.play(Ability[Ability.DISARMING_VOICE]);
                 s.once('animationcomplete', () => {
                   s.destroy();
                 });
@@ -871,15 +872,15 @@ export default class Pokemon extends Button {
             });
             break;
 
-          case SPECIAL_SKILL.RELIC_SONG:
+          case Ability.RELIC_SONG:
             group.getChildren().forEach((p) => {
               const pokemon = <Pokemon> p;
               if (this.team != pokemon.team) {
                 const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
-                const s = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.RELIC_SONG, '000');
+                const s = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.RELIC_SONG], '000');
                 s.setDepth(7);
                 s.setScale(2, 2);
-                s.anims.play(SPECIAL_SKILL.RELIC_SONG);
+                s.anims.play(Ability[Ability.RELIC_SONG]);
                 s.once('animationcomplete', () => {
                   s.destroy();
                 });
@@ -887,23 +888,23 @@ export default class Pokemon extends Button {
             });
             break;
 
-          case SPECIAL_SKILL.HIGH_JUMP_KICK:
+          case Ability.HIGH_JUMP_KICK:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.HIGH_JUMP_KICK, '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.HIGH_JUMP_KICK], '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(SPECIAL_SKILL.HIGH_JUMP_KICK);
+            specialProjectile.anims.play(Ability[Ability.HIGH_JUMP_KICK]);
             specialProjectile.once('animationcomplete', () => {
               specialProjectile.destroy();
             });
             break;
 
-          case SPECIAL_SKILL.TRI_ATTACK:
+          case Ability.TRI_ATTACK:
             coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY);
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.TRI_ATTACK, '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.TRI_ATTACK], '000');
             specialProjectile.setDepth(7);
-            specialProjectile.anims.play(SPECIAL_SKILL.TRI_ATTACK);
+            specialProjectile.anims.play(Ability[Ability.TRI_ATTACK]);
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],
@@ -915,13 +916,13 @@ export default class Pokemon extends Button {
             });
             break;
 
-          case SPECIAL_SKILL.BONEMERANG:
+          case Ability.BONEMERANG:
             coordinatesTarget = transformAttackCoordinate(this.targetX, 6);
             coordinates = transformAttackCoordinate(this.targetX, 0);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], SPECIAL_SKILL.BONEMERANG, '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.BONEMERANG], '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(SPECIAL_SKILL.BONEMERANG);
+            specialProjectile.anims.play(Ability[Ability.BONEMERANG]);
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],

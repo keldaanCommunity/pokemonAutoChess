@@ -1,5 +1,4 @@
 import {GameObjects} from 'phaser';
-import {SPECIAL_SKILL, PKM_ACTION} from '../../../../models/enum';
 import Pokemon from './pokemon';
 import PokemonEntity from '../../../../core/pokemon-entity';
 import {transformAttackCoordinate} from '../../pages/utils/utils';
@@ -8,6 +7,7 @@ import { IPlayer, IPokemonEntity } from '../../../../types';
 import AnimationManager from '../animation-manager';
 import {DataChange} from '@colyseus/schema';
 import { PokemonActionState } from '../../../../types/enum/Game';
+import { Ability } from '../../../../types/enum/Ability';
 
 export default class BattleManager {
   group: GameObjects.Group;
@@ -47,7 +47,7 @@ export default class BattleManager {
       const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
       const p = <IPokemonEntity> pokemon;
       const pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], p, false, true);
-      this.animationManager.animatePokemon(pokemonUI, PKM_ACTION.WALK);
+      this.animationManager.animatePokemon(pokemonUI, PokemonActionState.WALK);
       this.group.add(pokemonUI);
     }
   }
@@ -235,7 +235,7 @@ export default class BattleManager {
             if (change.value != 0) {
               // console.log(change.value, pkm.action, pkm.targetX, pkm.targetY);
               if (pkm.action == PokemonActionState.ATTACKING && pkm.targetX !== null && pkm.targetY !== null) {
-                this.animationManager.animatePokemon(pkm, PKM_ACTION.ATTACK);
+                this.animationManager.animatePokemon(pkm, PokemonActionState.ATTACK);
                 pkm.attackAnimation();
               }
             }
@@ -263,7 +263,7 @@ export default class BattleManager {
               pkm.positionY = pokemon.positionY;
             }
             const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
-            if (pokemon.skill == SPECIAL_SKILL.TELEPORT) {
+            if (pokemon.skill == Ability.TELEPORT) {
               pkm.x = coordinates[0];
               pkm.y = coordinates[1];
               pkm.specialAttackAnimation(this.group);
@@ -278,7 +278,7 @@ export default class BattleManager {
             }
           } else if (change.field == 'orientation') {
             pkm.orientation = pokemon.orientation;
-            this.animationManager.animatePokemon(pkm, PKM_ACTION.WALK);
+            this.animationManager.animatePokemon(pkm, PokemonActionState.WALK);
           } else if (change.field =='action') {
             pkm.action = pokemon.action;
           } else if (change.field == 'critChance') {

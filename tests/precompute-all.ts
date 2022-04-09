@@ -1,6 +1,7 @@
-import {PKM, TYPE, SPECIAL_SKILL} from '../app/models/enum';
-import PokemonFactory from '../app/models/pokemon-factory';
-import fs from 'fs';
+const PKM = require('../app/models/enum').PKM;
+const TYPE = require('../app/models/enum').TYPE;
+const PokemonFactory = require('../app/models/pokemon-factory');
+import { Ability } from '../app/types/enum/Ability';
 
 const dataAll = {};
 Object.keys(TYPE).forEach((type)=>{
@@ -8,7 +9,7 @@ Object.keys(TYPE).forEach((type)=>{
 
   Object.values(PKM).forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm);
-    if (pokemon.types.includes(type) && pokemon.skill != SPECIAL_SKILL.DEFAULT) {
+    if (pokemon.types.includes(type) && pokemon.skill != Ability.DEFAULT) {
       pokemons.push(pkm);
     }
   });

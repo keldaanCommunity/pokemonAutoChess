@@ -1,9 +1,9 @@
 const RARITY_HP_COST = require('../app/models/enum').RARITY_HP_COST;
-const SPECIAL_SKILL = require('../app/models/enum').SPECIAL_SKILL;
 const PKM = require('../app/models/enum').PKM;
 const TYPE = require('../app/models/enum').TYPE;
 const PokemonFactory = require('../app/models/pokemon-factory');
 
+import { Ability } from '../app/types/enum/Ability';
 import { Rarity } from '../app/types/enum/Game';
 
 import {PKM, RARITY, SPECIAL_SKILL, RARITY_HP_COST, TYPE} from '../app/models/enum';
@@ -120,7 +120,7 @@ Object.keys(TYPE).forEach((type)=>{
   Object.values(PKM).forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm);
     const family = PokemonFactory.getPokemonFamily(pkm);
-    if (pokemon.rarity != Rarity.NEUTRAL && pokemon.skill != SPECIAL_SKILL.DEFAULT) {
+    if (pokemon.rarity != Rarity.NEUTRAL && pokemon.skill != Ability.DEFAULT) {
       if (pokemon.types.includes(type)) {
         if (pokemon.rarity == Rarity.MYTHICAL) {
           mythicalPokemonCandidates.push(pokemon);

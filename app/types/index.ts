@@ -14,6 +14,7 @@ import { IPokemonConfig } from '../models/mongo-models/user-metadata'
 import PokemonCollection from '../models/colyseus-models/pokemon-collection'
 import { AttackType, Orientation, PokemonActionState, Rarity } from './enum/Game'
 import { Effect } from './enum/Effect'
+import { Ability } from './enum/Ability'
 
 export interface IMessage {
     name: string
@@ -84,7 +85,7 @@ export interface IPokemon {
     range: number
     stars: number
     maxMana: number
-    skill: string
+    skill: Ability
     items: SetSchema<string>
     fossilTimer: number
     shiny: boolean
@@ -195,7 +196,7 @@ export interface IPokemonEntity {
   items: SetSchema<string>
   types: string[]
   stars: number
-  skill: string
+  skill: Ability
   status: Status
   count: Count
   critDamage: number
