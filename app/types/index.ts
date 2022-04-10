@@ -237,7 +237,7 @@ export interface IPreparationMetadata {
     type: string
 }
 
-export enum Emotions {
+export enum Emotion {
     NORMAL = "Normal",
     HAPPY = "Happy",
     PAIN = "Pain",

@@ -2,6 +2,9 @@ import {Schema, type, ArraySchema} from '@colyseus/schema';
 import {GameRecord, IGameRecord} from './game-record';
 import MapTileset from './map-tileset';
 import WinTileset from './win-tileset';
+import PokemonCollection from './pokemon-collection';
+import PokemonConfig from './pokemon-config';
+import { IPokemonConfig } from '../mongo-models/user-metadata';
 
 export interface ILobbyUser {
   id: string;
@@ -30,6 +33,7 @@ export default class LobbyUser extends Schema implements ILobbyUser{
   @type(WinTileset) mapWin = new WinTileset();
   @type(['string']) honors = new ArraySchema<string>();
   @type([GameRecord]) history = new ArraySchema<IGameRecord>();
+  @type({map: PokemonConfig}) pokemonCollection = new PokemonCollection();
 
 
   constructor(id:string,
@@ -42,7 +46,8 @@ export default class LobbyUser extends Schema implements ILobbyUser{
     level: number,
     donor: boolean,
     history: GameRecord[],
-    honors: string[]) {
+    honors: string[],
+    pokemonCollection: Map<string,IPokemonConfig>) {
 
     super();
     this.id = id;
@@ -66,9 +71,11 @@ export default class LobbyUser extends Schema implements ILobbyUser{
         this.honors.push(h);
       });
     }
-  }
 
-  toString() {
-    return `id: ${this.id} name:${this.name}`;
+    if(pokemonCollection && pokemonCollection.size) {
+      pokemonCollection.forEach((value, key) => {
+          this.pokemonCollection.set(key, new PokemonConfig(value));
+      });
+    }
   }
 }

@@ -1,4 +1,5 @@
 import {Schema, model} from 'mongoose';
+import { Emotion } from '../../types';
 import MapTileset from '../colyseus-models/map-tileset';
 import WinTileset from '../colyseus-models/win-tileset';
 
@@ -15,6 +16,14 @@ export interface IUserMetadata {
   mapWin: WinTileset;
   map: MapTileset;
   honors: string[];
+  pokemonCollection: Map<string, IPokemonConfig>;
+}
+
+export interface IPokemonConfig {
+  dust: number,
+  emotions: Emotion[],
+  shinyEmotions: Emotion[],
+  selectedEmotion: Emotion
 }
 
 const userMetadataSchema = new Schema(
@@ -109,7 +118,32 @@ const userMetadataSchema = new Schema(
         {
           type: String
         }
-      ]
+      ],
+      pokemonCollection: {
+        type: Map,
+        of:          
+        {
+          dust: {
+            type: Number
+          },
+          selectedEmotion: {
+            type: String,
+            enum: Emotion
+          },
+          emotions: [
+            {
+              type: String,
+              enum: Emotion
+            }
+          ],
+          shinyEmotions: [
+            {
+              type: String,
+              enum: Emotion
+            }
+          ]
+        }       
+      }
     }
 );
 

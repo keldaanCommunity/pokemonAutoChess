@@ -2,7 +2,7 @@ import { Client, LobbyRoom } from "colyseus";
 import LobbyState from './states/lobby-state';
 import {connect} from 'mongoose';
 import Chat from '../models/mongo-models/chat';
-import UserMetadata, { IUserMetadata } from '../models/mongo-models/user-metadata';
+import UserMetadata, { IPokemonConfig, IUserMetadata } from '../models/mongo-models/user-metadata';
 import LeaderboardInfo from '../models/colyseus-models/leaderboard-info';
 import {ArraySchema} from '@colyseus/schema';
 import LobbyUser from '../models/colyseus-models/lobby-user';
@@ -14,7 +14,7 @@ import BotV2, { IBot } from '../models/mongo-models/bot-v2';
 import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
-import { ICustomLobbyState } from "../types";
+import { Emotion, ICustomLobbyState } from "../types";
 
 const pastebin = new PastebinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
@@ -148,7 +148,8 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
                   user.level,
                   user.donor,
                   stats.map(r=>{return new GameRecord(r.time, r.rank, r.elo, r.pokemons)}),
-                  user.honors));
+                  user.honors,
+                  user.pokemonCollection));
             }
           });
         } else {
@@ -651,13 +652,15 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
                 user.level,
                 user.donor,
                 records,
-                user.honors));
+                user.honors,
+                user.pokemonCollection));
           }
         });
       } else {
         UserMetadata.create({
           uid: client.auth.uid,
-          displayName: client.auth.displayName
+          displayName: client.auth.displayName,
+          pokemonCollection: new Map<string,IPokemonConfig>([["0004",{dust: 200, selectedEmotion: Emotion.NORMAL, emotions: [Emotion.ANGRY, Emotion.DETERMINED], shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}]])
         });
         this.state.users.set(client.auth.uid, new LobbyUser(
             client.auth.uid,
@@ -670,7 +673,8 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
             0,
             false,
             [],
-            []
+            [],
+            new Map<string,IPokemonConfig>([["0004",{dust: 200, selectedEmotion: Emotion.NORMAL, emotions: [Emotion.ANGRY, Emotion.DETERMINED], shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}]])
         ));
       }
     });
