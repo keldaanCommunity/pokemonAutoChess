@@ -16,8 +16,9 @@ export interface ILobbyUser {
   exp: number;
   level: number;
   donor: boolean;
-  honors: string[],
-  history: IGameRecord[]
+  honors: string[];
+  history: IGameRecord[];
+  pokemonCollection: Map<string, IPokemonConfig>
 }
 export default class LobbyUser extends Schema implements ILobbyUser{
   @type('string') id: string;

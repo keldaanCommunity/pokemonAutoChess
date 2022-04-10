@@ -22,6 +22,7 @@ import LobbyUser from '../../../models/colyseus-models/lobby-user';
 import { IBot } from '../../../models/mongo-models/bot-v2';
 import { IMeta } from '../../../models/mongo-models/meta';
 import { IItemsStatistic } from '../../../models/mongo-models/items-statistic';
+import PokemonCollection from './component/collection/pokemon-collection';
 
 export default function Lobby(){
     const dispatch = useAppDispatch();
@@ -36,6 +37,7 @@ export default function Lobby(){
     const [showWiki, toggleWiki] = useState<boolean>(false);
     const [showMeta, toggleMeta] = useState<boolean>(false);
     const [showBuilder, toggleBuilder] = useState<boolean>(false);
+    const [showCollection, toggleCollection] = useState<boolean>(false);
     const [toPreparation, setToPreparation] = useState<boolean>(false);
     
     const lobbyStyle = {display:'flex',justifyContent:'space-between'};
@@ -109,6 +111,9 @@ export default function Lobby(){
       if(toPreparation){
           return <Navigate to='/preparation'></Navigate>
       }
+      if(showCollection){
+          return <PokemonCollection toggleCollection={()=>toggleCollection(!showCollection)}/>;
+      }
       if(showWiki){
         return <Wiki toggleWiki={()=>toggleWiki(!showWiki)} content='Lobby'/>;
       }
@@ -127,20 +132,21 @@ export default function Lobby(){
                     <Link to='/auth'>
                             <button className='nes-btn is-error' style={buttonStyle} onClick={()=>{firebase.auth().signOut(); dispatch(leaveLobby()); dispatch(logOut())}}>Sign Out</button>
                     </Link>
+                    <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{toggleCollection(!showCollection)}}>Collection</button>
+                    <DiscordButton/>
                     <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{toggleWiki(!showWiki)}}>Wiki</button>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{
+                    <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{
                         if(botList.length == 0) {
                             dispatch(requestBotList(true));
                         }
                         toggleBuilder(!showBuilder)
                         }}>BOT Builder</button>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{
+                    <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{
                         if(meta.length == 0 || metaItems.length == 0){
                             dispatch(requestMeta(true));
                         }
                         toggleMeta(!showMeta);
                         }}>Meta Report</button>
-                    <DiscordButton/>
                     <DonateButton/>
                     <PolicyButton/>
                     <CreditsButton/>

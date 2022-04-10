@@ -1866,7 +1866,7 @@ export default class PokemonFactory {
       case PKM.CASTFORMHAIL:
         return new CastformHail(s);
       default:
-        console.log(`No pokemon with name "${name}" found, return magikarp`);
+        // console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Magikarp(s);
     }
   }
