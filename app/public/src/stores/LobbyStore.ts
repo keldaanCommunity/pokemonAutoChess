@@ -244,11 +244,15 @@ export const lobbySlice = createSlice({
         setSynergies: (state, action: PayloadAction<ISynergies>) => {
             state.synergies = action.payload;
         },
+        changePokemonConfig: (state, action: PayloadAction<{id:string, field:string, value: any}>) => {
+            state.user.pokemonCollection.get(action.payload.id)[action.payload.field] = action.payload.value;
+        },
         leaveLobby: () => initialState
     }
 });
 
 export const {
+    changePokemonConfig,
     pushMessage,
     pushLeaderboard,
     pushBotLeaderboard,

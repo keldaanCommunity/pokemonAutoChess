@@ -8,11 +8,19 @@ export default class PokemonConfig extends Schema implements IPokemonConfig{
     @type(['string']) shinyEmotions = new ArraySchema<Emotion>();
     @type('string') selectedEmotion: Emotion
 
-    constructor(p: IPokemonConfig){
+    constructor(p?: IPokemonConfig){
         super();
-        this.dust = p.dust;
-        p.emotions.forEach(e=>this.emotions.push(e));
-        p.shinyEmotions.forEach(e=>this.shinyEmotions.push(e));
-        this.selectedEmotion = p.selectedEmotion;
+        if(p){
+            this.dust = p.dust;
+            p.emotions.forEach(e=>this.emotions.push(e));
+            p.shinyEmotions.forEach(e=>this.shinyEmotions.push(e));
+            this.selectedEmotion = p.selectedEmotion;
+        }
+        else{
+            this.dust = 0;
+            p.emotions = [];
+            p.shinyEmotions = [];
+            p.selectedEmotion = Emotion.NORMAL;
+        }
     }
 }

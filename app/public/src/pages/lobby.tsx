@@ -16,13 +16,14 @@ import TeamBuilder from './component/bot-builder/team-builder';
 import MetaReport from './component/meta-report/meta-report';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { joinLobby, logIn, logOut, requestMeta, requestBotList } from '../stores/NetworkStore';
-import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby } from '../stores/LobbyStore';
+import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig } from '../stores/LobbyStore';
 import { ICustomLobbyState } from '../../../types';
 import LobbyUser from '../../../models/colyseus-models/lobby-user';
 import { IBot } from '../../../models/mongo-models/bot-v2';
 import { IMeta } from '../../../models/mongo-models/meta';
 import { IItemsStatistic } from '../../../models/mongo-models/items-statistic';
 import PokemonCollection from './component/collection/pokemon-collection';
+import PokemonConfig from '../../../models/colyseus-models/pokemon-config';
 
 export default function Lobby(){
     const dispatch = useAppDispatch();
@@ -60,6 +61,14 @@ export default function Lobby(){
                     room.state.users.onAdd = (u) => {
                         dispatch(addUser(u));
                         if(u.id == user.uid){
+                            u.pokemonCollection.onAdd = (pokemonConfig, key) => {
+                                const p = pokemonConfig as PokemonConfig;
+                                p.onChange = (changes) => {
+                                    changes.forEach(change=>{
+                                        dispatch(changePokemonConfig({id: key, field: change.field, value: change.value}));
+                                    });
+                                }
+                            }
                             dispatch(setUser(u));
                             setSearchedUser(u);
                         }

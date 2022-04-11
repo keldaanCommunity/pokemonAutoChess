@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import {ITracker} from '../../../../../types/ITracker';
 import {IPokemonConfig} from '../../../../../models/mongo-models/user-metadata';
 import { Emotion } from '../../../../../types';
@@ -10,7 +10,7 @@ const cursorStyle = {
     margin: '10px'
 }
 
-export default function PokemonCollectionItem(props: {index: string, metadata: ITracker, config: IPokemonConfig}) {
+export default function PokemonCollectionItem(props: {name: string, index: string, metadata: ITracker, config: IPokemonConfig, setPokemon:Dispatch<SetStateAction<string>>}) {
     let emotion: Emotion;
     
     if(!props.metadata || Object.keys(props.metadata.portrait_files).length == 0){
@@ -24,8 +24,10 @@ export default function PokemonCollectionItem(props: {index: string, metadata: I
         emotion = Emotion.NORMAL;
     }
 
-    return <div style={cursorStyle} className='nes-container'>
+    return <div style={cursorStyle} className='nes-container' onClick={()=>{props.setPokemon(props.name)}}>
         <img style={{filter: props.config ? 'grayscale(0)':'grayscale(1)', width:'80px', height:'80px', imageRendering:'pixelated'}}
          src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${props.index.replace('-','/')}/${emotion}.png`}/>
+         <div style={{display:'flex', marginTop:'5px', marginBottom:'-10px', justifyContent:'center'}}>{props.config ? props.config.dust: 0}<img style={{width:'20px',height:'20px',imageRendering:'pixelated'}} 
+         src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${props.index.replace('-','/')}/Normal.png`}/></div>
     </div>;
 }

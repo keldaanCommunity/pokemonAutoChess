@@ -1,15 +1,12 @@
 import PokemonCollectionItem from './pokemon-collection-item';
 import PokemonFactory from '../../../../../models/pokemon-factory';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { PKM, SPECIAL_SKILL } from '../../../../../models/enum';
 import {useAppSelector} from '../../../hooks';
-import tracker from '../../../../dist/client/assets/pokemons/tracker.json';
-import { Convert } from '../../../../../types/ITracker';
-import { Pokemon } from '../../../../../models/colyseus-models/pokemon';
+import { ITracker } from '../../../../../types/ITracker';
 
-const metadata = Convert.toITracker(JSON.stringify(tracker));
 
-export default function PokemonCarousel(props: {type: string}){
+export default function PokemonCarousel(props: {type: string, setPokemon:Dispatch<SetStateAction<string>>, metadata:{[key: string]: ITracker}}){
     const pokemonCollection = useAppSelector(state=>state.lobby.user.pokemonCollection);
     const elligiblePokemons = [];
     Object.values(PKM).forEach(v=>{
@@ -24,12 +21,12 @@ export default function PokemonCarousel(props: {type: string}){
         const pathIndex = pkm.index.split('-');
         let m;
             if(pathIndex.length == 1){
-                m = metadata[pkm.index];
+                m = props.metadata[pkm.index];
             }
             else if(pathIndex.length == 2){
-                m = metadata[pathIndex[0]].subgroups[pathIndex[1]];
+                m = props.metadata[pathIndex[0]].subgroups[pathIndex[1]];
             }
-            return <PokemonCollectionItem key={`${pkm.index}-${props.type}`} index={pkm.index} metadata={m} config={pokemonCollection.get(pkm.index)}/>;
+            return <PokemonCollectionItem key={`${pkm.index}-${props.type}`} name={pkm.name} index={pkm.index} metadata={m} config={pokemonCollection.get(pkm.index)} setPokemon={props.setPokemon}/>;
         })}
     </div>
 }

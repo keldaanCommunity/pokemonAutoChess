@@ -15,6 +15,7 @@ import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
 import { Emotion, ICustomLobbyState } from "../types";
+import PokemonConfig from "../models/colyseus-models/pokemon-config";
 
 const pastebin = new PastebinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
@@ -128,6 +129,30 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
           user.save();
         }
       });
+    });
+
+    this.onMessage('change-selected-emotion', (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
+        const user: LobbyUser = this.state.users.get(client.auth.uid);
+        if(user.pokemonCollection.has(message.index)){
+            const pokemonConfig = user.pokemonCollection.get(message.index);
+            const emotionsToCheck = message.shiny ? pokemonConfig.shinyEmotions: pokemonConfig.emotions;
+            if(emotionsToCheck.includes(message.emotion) && message.emotion != pokemonConfig.selectedEmotion){
+                pokemonConfig.selectedEmotion = message.emotion;
+                UserMetadata.findOne({'uid': client.auth.uid}, (err, u)=>{
+                    if (u) {
+                        if(u.pokemonCollection.get(message.index)){
+                            u.pokemonCollection.get(message.index).selectedEmotion = message.emotion;
+                            //u.markModified('pokemonCollection');
+                            u.save();
+                        }
+                    }
+                  });
+            }
+        }
+    });
+
+    this.onMessage('buy-emotion', (client, message)=>{
+
     });
 
     this.onMessage('search', (client, message)=>{
@@ -660,7 +685,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName,
-          pokemonCollection: new Map<string,IPokemonConfig>([["0004",{dust: 200, selectedEmotion: Emotion.NORMAL, emotions: [Emotion.ANGRY, Emotion.DETERMINED], shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}]])
+          pokemonCollection: new Map<string,IPokemonConfig>([["0004",{dust: 200, selectedEmotion: Emotion.INSPIRED, emotions: [Emotion.ANGRY, Emotion.DETERMINED], shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}]])
         });
         this.state.users.set(client.auth.uid, new LobbyUser(
             client.auth.uid,
@@ -674,7 +699,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
             false,
             [],
             [],
-            new Map<string,IPokemonConfig>([["0004",{dust: 200, selectedEmotion: Emotion.NORMAL, emotions: [Emotion.ANGRY, Emotion.DETERMINED], shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}]])
+            new Map<string,IPokemonConfig>([["0004",{dust: 200, selectedEmotion: Emotion.INSPIRED, emotions: [Emotion.ANGRY, Emotion.DETERMINED], shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}]])
         ));
       }
     });

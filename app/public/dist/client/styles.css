@@ -139,3 +139,7 @@ input[type=range]:focus::-ms-fill-upper {
   height: 100vh;
   width: 100vw;
 }
+
+.modalClass{
+    max-width: 80%;
+}
