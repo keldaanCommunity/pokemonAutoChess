@@ -7,6 +7,8 @@ import { IMessage, IPreparationMetadata, ISynergies } from "../../../types";
 import { IMeta } from "../../../models/mongo-models/meta";
 import { IBot } from "../../../models/mongo-models/bot-v2";
 import { IItemsStatistic } from "../../../models/mongo-models/items-statistic";
+import { IPokemonConfig } from "../../../models/mongo-models/user-metadata";
+import PokemonConfig from "../../../models/colyseus-models/pokemon-config";
 
 interface IUserLobbyState {
     messages: IMessage[];
@@ -23,9 +25,11 @@ interface IUserLobbyState {
     pastebinUrl: string;
     botData: IBot;
     synergies: ISynergies;
+    pokemonCollection: IPokemonConfig[];
 }
 
 const initialState: IUserLobbyState = {
+    pokemonCollection: [],
     messages : [],
     users : [],
     leaderboard : [],
@@ -183,6 +187,15 @@ export const lobbySlice = createSlice({
             const l: ILeaderboardInfo = JSON.parse(JSON.stringify(action.payload));
             state.botLeaderboard.push(l);
         },
+        addPokemonConfig: (state, action: PayloadAction<PokemonConfig>) => {
+          state.pokemonCollection.push(action.payload);
+        },
+        changePokemonConfig: (state, action: PayloadAction<{id: string, field: string, value: any}>) => {
+          const index = state.pokemonCollection.findIndex(p => p.id == action.payload.id);
+          if(index != -1) {
+            state.pokemonCollection[index][action.payload.field] = action.payload.value;
+          }
+        },
         addUser: (state, action: PayloadAction<LobbyUser>) => {
             const u: ILobbyUser = JSON.parse(JSON.stringify(action.payload));
             state.users.push(u);
@@ -244,14 +257,12 @@ export const lobbySlice = createSlice({
         setSynergies: (state, action: PayloadAction<ISynergies>) => {
             state.synergies = action.payload;
         },
-        changePokemonConfig: (state, action: PayloadAction<{id:string, field:string, value: any}>) => {
-            state.user.pokemonCollection.get(action.payload.id)[action.payload.field] = action.payload.value;
-        },
         leaveLobby: () => initialState
     }
 });
 
 export const {
+    addPokemonConfig,
     changePokemonConfig,
     pushMessage,
     pushLeaderboard,

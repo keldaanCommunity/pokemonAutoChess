@@ -16,7 +16,7 @@ import TeamBuilder from './component/bot-builder/team-builder';
 import MetaReport from './component/meta-report/meta-report';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { joinLobby, logIn, logOut, requestMeta, requestBotList } from '../stores/NetworkStore';
-import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig } from '../stores/LobbyStore';
+import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig } from '../stores/LobbyStore';
 import { ICustomLobbyState } from '../../../types';
 import LobbyUser from '../../../models/colyseus-models/lobby-user';
 import { IBot } from '../../../models/mongo-models/bot-v2';
@@ -63,6 +63,7 @@ export default function Lobby(){
                         if(u.id == user.uid){
                             u.pokemonCollection.onAdd = (pokemonConfig, key) => {
                                 const p = pokemonConfig as PokemonConfig;
+                                dispatch(addPokemonConfig(p));
                                 p.onChange = (changes) => {
                                     changes.forEach(change=>{
                                         dispatch(changePokemonConfig({id: key, field: change.field, value: change.value}));

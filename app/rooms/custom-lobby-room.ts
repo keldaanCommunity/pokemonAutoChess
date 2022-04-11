@@ -142,7 +142,6 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
                     if (u) {
                         if(u.pokemonCollection.get(message.index)){
                             u.pokemonCollection.get(message.index).selectedEmotion = message.emotion;
-                            //u.markModified('pokemonCollection');
                             u.save();
                         }
                     }
@@ -685,7 +684,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName,
-          pokemonCollection: new Map<string,IPokemonConfig>([["0004",{dust: 200, selectedEmotion: Emotion.INSPIRED, emotions: [Emotion.ANGRY, Emotion.DETERMINED], shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}]])
+          pokemonCollection: new Map<string,IPokemonConfig>([["0004",{id:"0004", dust: 200, selectedShiny: false, selectedEmotion: Emotion.INSPIRED, emotions: [Emotion.ANGRY, Emotion.DETERMINED], shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}]])
         });
         this.state.users.set(client.auth.uid, new LobbyUser(
             client.auth.uid,
@@ -699,7 +698,18 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
             false,
             [],
             [],
-            new Map<string,IPokemonConfig>([["0004",{dust: 200, selectedEmotion: Emotion.INSPIRED, emotions: [Emotion.ANGRY, Emotion.DETERMINED], shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}]])
+            new Map<string,IPokemonConfig>(
+              [
+                ["0004",{
+                  id:"0004",
+                  dust: 200,
+                  selectedShiny: false,
+                  selectedEmotion: Emotion.INSPIRED,
+                  emotions: [Emotion.ANGRY, Emotion.DETERMINED],
+                  shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}
+                ]
+              ]
+            )
         ));
       }
     });

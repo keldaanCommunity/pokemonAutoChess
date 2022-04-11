@@ -24,7 +24,7 @@ const buttonStyle: CSS.Properties = {
 export default function PokemonCollection(props: {toggleCollection :()=>void}){
     const metadata = Convert.toITracker(JSON.stringify(tracker));
     const [pokemon, setPokemon] =  useState<string>(undefined);
-    const pokemonCollection = useAppSelector(state=>state.lobby.user.pokemonCollection);
+    const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection);
     let p: Pokemon;
     let pConfig: IPokemonConfig;
     let pMetadata;

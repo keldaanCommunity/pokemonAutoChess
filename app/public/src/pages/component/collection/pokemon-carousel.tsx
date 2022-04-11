@@ -7,7 +7,7 @@ import { ITracker } from '../../../../../types/ITracker';
 
 
 export default function PokemonCarousel(props: {type: string, setPokemon:Dispatch<SetStateAction<string>>, metadata:{[key: string]: ITracker}}){
-    const pokemonCollection = useAppSelector(state=>state.lobby.user.pokemonCollection);
+    const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection);
     const elligiblePokemons = [];
     Object.values(PKM).forEach(v=>{
         const pkm = PokemonFactory.createPokemonFromName(v);

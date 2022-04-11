@@ -75,7 +75,7 @@ export default class LobbyUser extends Schema implements ILobbyUser{
 
     if(pokemonCollection && pokemonCollection.size) {
       pokemonCollection.forEach((value, key) => {
-          this.pokemonCollection.set(key, new PokemonConfig(value));
+          this.pokemonCollection.set(key, new PokemonConfig(value.id, value));
       });
     }
   }

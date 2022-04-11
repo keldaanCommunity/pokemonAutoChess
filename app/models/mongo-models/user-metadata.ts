@@ -23,7 +23,9 @@ export interface IPokemonConfig {
   dust: number,
   emotions: Emotion[],
   shinyEmotions: Emotion[],
-  selectedEmotion: Emotion
+  selectedEmotion: Emotion,
+  selectedShiny: boolean,
+  id: string
 }
 
 const userMetadataSchema = new Schema(
@@ -141,7 +143,13 @@ const userMetadataSchema = new Schema(
               type: String,
               enum: Emotion
             }
-          ]
+          ],
+          selectedShiny: {
+            type: Boolean
+          },
+          id:{
+            type: String
+          }
         }       
       }
     }
