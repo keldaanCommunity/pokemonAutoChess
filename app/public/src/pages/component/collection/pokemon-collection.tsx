@@ -33,7 +33,7 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
     let modalElement = null;
     if(pokemon){
         p = PokemonFactory.createPokemonFromName(pokemon);
-        pConfig = pokemonCollection.get(p.index);
+        pConfig = pokemonCollection.find(c=>c.id == p.index);
         const pathIndex = p.index.split('-');
         if(pathIndex.length == 1){
             pMetadata = metadata[p.index];

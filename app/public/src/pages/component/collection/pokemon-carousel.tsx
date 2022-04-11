@@ -26,7 +26,7 @@ export default function PokemonCarousel(props: {type: string, setPokemon:Dispatc
             else if(pathIndex.length == 2){
                 m = props.metadata[pathIndex[0]].subgroups[pathIndex[1]];
             }
-            return <PokemonCollectionItem key={`${pkm.index}-${props.type}`} name={pkm.name} index={pkm.index} metadata={m} config={pokemonCollection.get(pkm.index)} setPokemon={props.setPokemon}/>;
+            return <PokemonCollectionItem key={`${pkm.index}-${props.type}`} name={pkm.name} index={pkm.index} metadata={m} config={pokemonCollection.find(p=>p.id == pkm.index)} setPokemon={props.setPokemon}/>;
         })}
     </div>
 }
