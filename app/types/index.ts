@@ -86,6 +86,7 @@ export interface IPokemon {
     items: SetSchema<string>
     fossilTimer: number
     shiny: boolean
+    emotion: Emotion
 }
 
 export interface ISynergies {
@@ -199,6 +200,7 @@ export interface IPokemonEntity {
   spellDamage: number
   healDone: number
   shiny: boolean
+  emotion: Emotion
 }
 
 export interface IStatus {

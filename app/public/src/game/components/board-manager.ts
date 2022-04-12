@@ -26,7 +26,6 @@ export default class BoardManager {
   }
 
   addPokemon(pokemon: IPokemon) {
-    // console.log(pokemon.name, this.mode);
     const coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY);
     let pokemonUI;
 

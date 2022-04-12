@@ -1,5 +1,6 @@
 import {GameObjects} from 'phaser';
 import {ATTACK_TYPE, SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
+import { Emotion } from '../../../../types';
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -31,7 +32,10 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     spellDamage: number,
     mana: number,
     types: string[],
-    skill: string) {
+    skill: string,
+    emotion: Emotion,
+    shiny: boolean,
+    index: string) {
     super(scene, x, y);
 
     this.dom = document.createElement('div');
@@ -81,7 +85,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     pokemonName.innerHTML = capitalizeFirstLetter(name);
   
     const avatar = document.createElement('img');
-    avatar.src = 'assets/avatar/' + name + '.png';
+    const shinyPad = shiny ? '/0000/0001/' : '';
+    avatar.src = `https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${index.replace('-','/')}${shinyPad}/${emotion}.png`;
 
     const profile = document.createElement('div');
     profile.style.display = 'flex';

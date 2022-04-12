@@ -3,7 +3,8 @@ import {SPECIAL_SKILL, PKM, PRECOMPUTED_TYPE_POKEMONS, TYPE} from './enum';
 import Board from '../core/board';
 import {AttackStrategy, BiteStrategy, BlastBurnStrategy, BlazeKickStrategy, BonemerangStrategy, BugBuzzStrategy, BurnStrategy, CalmMindStrategy, ChargeStrategy, ClangorousSoulStrategy, ConfusionStrategy, DarkPulseStrategy, DisarmingVoiceStrategy, DischargeStrategy, DracoMeteorStrategy, DragonBreathStrategy, DragonTailStrategy, EchoStrategy, ExplosionStrategy, FireBlastStrategy, FreezeStrategy, GrassWhistleStrategy, GrowlStrategy, GuillotineStrategy, HappyHourStrategy, HeadSmashStrategy, HealBlockStrategy, HeatWaveStrategy, HighJumpKickStrategy, HurricaneStrategy, HydroPumpStrategy, HyperVoiceStrategy, IcicleCrashStrategy, IronDefenseStrategy, IronTailStrategy, KingShieldStrategy, LeechLifeStrategy, MeteorMashStrategy, MetronomeStrategy, NastyPlotStrategy, NightmareStrategy, NightSlashStrategy, OriginPulseStrategy, PetalDanceStrategy, PoisonStingStrategy, PoisonStrategy, ProtectStrategy, RelicSongStrategy, RoarOfTimeStrategy, RockSlideStrategy, RockSmashStrategy, RockTombStrategy, RootStrategy, SeedFlareStrategy, SeismicTossStrategy, ShadowCloneStrategy, SilenceStrategy, SleepStrategy, SoakStrategy, StompStrategy, StunSporeStrategy, TeleportStrategy, ThiefStrategy, ThunderStrategy, TormentStrategy, TriAttackStrategy, VoltSwitchStrategy, WheelOfFireStrategy, WishStrategy} from '../core/attack-strategy';
 import {MapSchema} from  '@colyseus/schema';
-import {IPokemon} from '../types';
+import {IPokemon, Emotion} from '../types';
+import { IPokemonConfig } from './mongo-models/user-metadata';
 
 export default class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level: number): MapSchema<IPokemon> {
@@ -1144,736 +1145,742 @@ export default class PokemonFactory {
     }
   }
 
-  static createPokemonFromName(name: string, shiny?: boolean) {
-    const s = typeof(shiny) !== undefined ? shiny: false;
+  static createPokemonFromName(name: string, config?: IPokemonConfig) {
+    const s = config && config.selectedShiny ? true: false;
+    const e = config && config.selectedEmotion ? config.selectedEmotion: Emotion.NORMAL;
     switch (name) {
       case PKM.BULBASAUR:
-        return new Bulbasaur(s);
+        return new Bulbasaur(s,e);
       case PKM.IVYSAUR:
-        return new Ivysaur(s);
+        return new Ivysaur(s,e);
       case PKM.VENUSAUR:
-        return new Venusaur(s);
+        return new Venusaur(s,e);
       case PKM.CHARMANDER:
-        return new Charmander(s);
+        return new Charmander(s,e);
       case PKM.CHARMELEON:
-        return new Charmeleon(s);
+        return new Charmeleon(s,e);
       case PKM.CHARIZARD:
-        return new Charizard(s);
+        return new Charizard(s,e);
       case PKM.SQUIRTLE:
-        return new Squirtle(s);
+        return new Squirtle(s,e);
       case PKM.WARTORTLE:
-        return new Wartortle(s);
+        return new Wartortle(s,e);
       case PKM.BLASTOISE:
-        return new Blastoise(s);
+        return new Blastoise(s,e);
       case PKM.SLOWPOKE:
-        return new Slowpoke(s);
+        return new Slowpoke(s,e);
       case PKM.SLOWBRO:
-        return new Slowbro(s);
+        return new Slowbro(s,e);
       case PKM.SLOWKING:
-        return new Slowking(s);
+        return new Slowking(s,e);
       case PKM.GEODUDE:
-        return new Geodude(s);
+        return new Geodude(s,e);
       case PKM.GRAVELER:
-        return new Graveler(s);
+        return new Graveler(s,e);
       case PKM.GOLEM:
-        return new Golem(s);
+        return new Golem(s,e);
       case PKM.AZURILL:
-        return new Azurill(s);
+        return new Azurill(s,e);
       case PKM.MARILL:
-        return new Marill(s);
+        return new Marill(s,e);
       case PKM.AZUMARILL:
-        return new Azumarill(s);
+        return new Azumarill(s,e);
       case PKM.ZUBAT:
-        return new Zubat(s);
+        return new Zubat(s,e);
       case PKM.GOLBAT:
-        return new Golbat(s);
+        return new Golbat(s,e);
       case PKM.CROBAT:
-        return new Crobat(s);
+        return new Crobat(s,e);
       case PKM.AMPHAROS:
-        return new Ampharos(s);
+        return new Ampharos(s,e);
       case PKM.MAREEP:
-        return new Mareep(s);
+        return new Mareep(s,e);
       case PKM.FLAFFY:
-        return new Flaffy(s);
+        return new Flaffy(s,e);
       case PKM.CLEFFA:
-        return new Cleffa(s);
+        return new Cleffa(s,e);
       case PKM.CLEFAIRY:
-        return new Clefairy(s);
+        return new Clefairy(s,e);
       case PKM.CLEFABLE:
-        return new Clefable(s);
+        return new Clefable(s,e);
       case PKM.IGGLYBUFF:
-        return new Igglybuff(s);
+        return new Igglybuff(s,e);
       case PKM.JIGGLYPUFF:
-        return new Jigglypuff(s);
+        return new Jigglypuff(s,e);
       case PKM.WIGGLYTUFF:
-        return new Wigglytuff(s);
+        return new Wigglytuff(s,e);
       case PKM.CATERPIE:
-        return new Caterpie(s);
+        return new Caterpie(s,e);
       case PKM.METAPOD:
-        return new Metapod(s);
+        return new Metapod(s,e);
       case PKM.BUTTERFREE:
-        return new Butterfree(s);
+        return new Butterfree(s,e);
       case PKM.WEEDLE:
-        return new Weedle(s);
+        return new Weedle(s,e);
       case PKM.KAKUNA:
-        return new Kakuna(s);
+        return new Kakuna(s,e);
       case PKM.BEEDRILL:
-        return new Beedrill(s);
+        return new Beedrill(s,e);
       case PKM.PIDGEY:
-        return new Pidgey(s);
+        return new Pidgey(s,e);
       case PKM.PIDGEOTTO:
-        return new Pidgeotto(s);
+        return new Pidgeotto(s,e);
       case PKM.PIDGEOT:
-        return new Pidgeot(s);
+        return new Pidgeot(s,e);
       case PKM.HOPPIP:
-        return new Hoppip(s);
+        return new Hoppip(s,e);
       case PKM.SKIPLOOM:
-        return new Skiploom(s);
+        return new Skiploom(s,e);
       case PKM.JUMPLUFF:
-        return new Jumpluff(s);
+        return new Jumpluff(s,e);
       case PKM.SEEDOT:
-        return new Seedot(s);
+        return new Seedot(s,e);
       case PKM.NUZLEAF:
-        return new Nuzleaf(s);
+        return new Nuzleaf(s,e);
       case PKM.SHIFTRY:
-        return new Shiftry(s);
+        return new Shiftry(s,e);
       case PKM.STARLY:
-        return new Starly(s);
+        return new Starly(s,e);
       case PKM.STARAVIA:
-        return new Staravia(s);
+        return new Staravia(s,e);
       case PKM.STARAPTOR:
-        return new Staraptor(s);
+        return new Staraptor(s,e);
       case PKM.CHIKORITA:
-        return new Chikorita(s);
+        return new Chikorita(s,e);
       case PKM.BAYLEEF:
-        return new Bayleef(s);
+        return new Bayleef(s,e);
       case PKM.MEGANIUM:
-        return new Meganium(s);
+        return new Meganium(s,e);
       case PKM.CYNDAQUIL:
-        return new Cyndaquil(s);
+        return new Cyndaquil(s,e);
       case PKM.QUILAVA:
-        return new Quilava(s);
+        return new Quilava(s,e);
       case PKM.TYPHLOSION:
-        return new Typhlosion(s);
+        return new Typhlosion(s,e);
       case PKM.TOTODILE:
-        return new Totodile(s);
+        return new Totodile(s,e);
       case PKM.CROCONAW:
-        return new Croconaw(s);
+        return new Croconaw(s,e);
       case PKM.FERALIGATR:
-        return new Feraligatr(s);
+        return new Feraligatr(s,e);
       case PKM.TREECKO:
-        return new Treecko(s);
+        return new Treecko(s,e);
       case PKM.GROVYLE:
-        return new Grovyle(s);
+        return new Grovyle(s,e);
       case PKM.SCEPTILE:
-        return new Sceptile(s);
+        return new Sceptile(s,e);
       case PKM.TORCHIC:
-        return new Torchic(s);
+        return new Torchic(s,e);
       case PKM.COMBUSKEN:
-        return new Combusken(s);
+        return new Combusken(s,e);
       case PKM.BLAZIKEN:
-        return new Blaziken(s);
+        return new Blaziken(s,e);
       case PKM.MUDKIP:
-        return new Mudkip(s);
+        return new Mudkip(s,e);
       case PKM.MARSHTOMP:
-        return new Marshtomp(s);
+        return new Marshtomp(s,e);
       case PKM.SWAMPERT:
-        return new Swampert(s);
+        return new Swampert(s,e);
       case PKM.TURTWIG:
-        return new Turtwig(s);
+        return new Turtwig(s,e);
       case PKM.GROTLE:
-        return new Grotle(s);
+        return new Grotle(s,e);
       case PKM.TORTERRA:
-        return new Torterra(s);
+        return new Torterra(s,e);
       case PKM.CHIMCHAR:
-        return new Chimchar(s);
+        return new Chimchar(s,e);
       case PKM.MONFERNO:
-        return new Monferno(s);
+        return new Monferno(s,e);
       case PKM.INFERNAPE:
-        return new Infernape(s);
+        return new Infernape(s,e);
       case PKM.PIPLUP:
-        return new Piplup(s);
+        return new Piplup(s,e);
       case PKM.PRINPLUP:
-        return new Prinplup(s);
+        return new Prinplup(s,e);
       case PKM.EMPOLEON:
-        return new Empoleon(s);
+        return new Empoleon(s,e);
       case PKM.NIDORANF:
-        return new NidoranF(s);
+        return new NidoranF(s,e);
       case PKM.NIDORINA:
-        return new Nidorina(s);
+        return new Nidorina(s,e);
       case PKM.NIDOQUEEN:
-        return new Nidoqueen(s);
+        return new Nidoqueen(s,e);
       case PKM.NIDORANM:
-        return new NidoranM(s);
+        return new NidoranM(s,e);
       case PKM.NIDORINO:
-        return new Nidorino(s);
+        return new Nidorino(s,e);
       case PKM.NIDOKING:
-        return new Nidoking(s);
+        return new Nidoking(s,e);
       case PKM.PICHU:
-        return new Pichu(s);
+        return new Pichu(s,e);
       case PKM.PIKACHU:
-        return new Pikachu(s);
+        return new Pikachu(s,e);
       case PKM.RAICHU:
-        return new Raichu(s);
+        return new Raichu(s,e);
       case PKM.MACHOP:
-        return new Machop(s);
+        return new Machop(s,e);
       case PKM.MACHOKE:
-        return new Machoke(s);
+        return new Machoke(s,e);
       case PKM.MACHAMP:
-        return new Machamp(s);
+        return new Machamp(s,e);
       case PKM.HORSEA:
-        return new Horsea(s);
+        return new Horsea(s,e);
       case PKM.SEADRA:
-        return new Seadra(s);
+        return new Seadra(s,e);
       case PKM.KINGDRA:
-        return new Kingdra(s);
+        return new Kingdra(s,e);
       case PKM.TRAPINCH:
-        return new Trapinch(s);
+        return new Trapinch(s,e);
       case PKM.VIBRAVA:
-        return new Vibrava(s);
+        return new Vibrava(s,e);
       case PKM.FLYGON:
-        return new Flygon(s);
+        return new Flygon(s,e);
       case PKM.SPHEAL:
-        return new Spheal(s);
+        return new Spheal(s,e);
       case PKM.SEALEO:
-        return new Sealeo(s);
+        return new Sealeo(s,e);
       case PKM.WALREIN:
-        return new Walrein(s);
+        return new Walrein(s,e);
       case PKM.ARON:
-        return new Aron(s);
+        return new Aron(s,e);
       case PKM.LAIRON:
-        return new Lairon(s);
+        return new Lairon(s,e);
       case PKM.AGGRON:
-        return new Aggron(s);
+        return new Aggron(s,e);
       case PKM.MAGNEMITE:
-        return new Magnemite(s);
+        return new Magnemite(s,e);
       case PKM.MAGNETON:
-        return new Magneton(s);
+        return new Magneton(s,e);
       case PKM.MAGNEZONE:
-        return new Magnezone(s);
+        return new Magnezone(s,e);
       case PKM.RHYHORN:
-        return new Rhyhorn(s);
+        return new Rhyhorn(s,e);
       case PKM.RHYDON:
-        return new Rhydon(s);
+        return new Rhydon(s,e);
       case PKM.RHYPERIOR:
-        return new Rhyperior(s);
+        return new Rhyperior(s,e);
       case PKM.TOGEPI:
-        return new Togepi(s);
+        return new Togepi(s,e);
       case PKM.TOGETIC:
-        return new Togetic(s);
+        return new Togetic(s,e);
       case PKM.TOGEKISS:
-        return new Togekiss(s);
+        return new Togekiss(s,e);
       case PKM.DUSKULL:
-        return new Duskull(s);
+        return new Duskull(s,e);
       case PKM.DUSCLOPS:
-        return new Dusclops(s);
+        return new Dusclops(s,e);
       case PKM.DUSKNOIR:
-        return new Dusknoir(s);
+        return new Dusknoir(s,e);
       case PKM.LOTAD:
-        return new Lotad(s);
+        return new Lotad(s,e);
       case PKM.LOMBRE:
-        return new Lombre(s);
+        return new Lombre(s,e);
       case PKM.LUDICOLO:
-        return new Ludicolo(s);
+        return new Ludicolo(s,e);
       case PKM.SHINX:
-        return new Shinx(s);
+        return new Shinx(s,e);
       case PKM.LUXIO:
-        return new Luxio(s);
+        return new Luxio(s,e);
       case PKM.LUXRAY:
-        return new Luxray(s);
+        return new Luxray(s,e);
       case PKM.POLIWAG:
-        return new Poliwag(s);
+        return new Poliwag(s,e);
       case PKM.POLIWHIRL:
-        return new Poliwhirl(s);
+        return new Poliwhirl(s,e);
       case PKM.POLITOED:
-        return new Politoed(s);
+        return new Politoed(s,e);
       case PKM.ABRA:
-        return new Abra(s);
+        return new Abra(s,e);
       case PKM.KADABRA:
-        return new Kadabra(s);
+        return new Kadabra(s,e);
       case PKM.ALAKAZAM:
-        return new Alakazam(s);
+        return new Alakazam(s,e);
       case PKM.GASTLY:
-        return new Gastly(s);
+        return new Gastly(s,e);
       case PKM.HAUNTER:
-        return new Haunter(s);
+        return new Haunter(s,e);
       case PKM.GENGAR:
-        return new Gengar(s);
+        return new Gengar(s,e);
       case PKM.DRATINI:
-        return new Dratini(s);
+        return new Dratini(s,e);
       case PKM.DRAGONAIR:
-        return new Dragonair(s);
+        return new Dragonair(s,e);
       case PKM.DRAGONITE:
-        return new Dragonite(s);
+        return new Dragonite(s,e);
       case PKM.LARVITAR:
-        return new Larvitar(s);
+        return new Larvitar(s,e);
       case PKM.PUPITAR:
-        return new Pupitar(s);
+        return new Pupitar(s,e);
       case PKM.TYRANITAR:
-        return new Tyranitar(s);
+        return new Tyranitar(s,e);
       case PKM.SLAKOTH:
-        return new Slakoth(s);
+        return new Slakoth(s,e);
       case PKM.VIGOROTH:
-        return new Vigoroth(s);
+        return new Vigoroth(s,e);
       case PKM.SLAKING:
-        return new Slaking(s);
+        return new Slaking(s,e);
       case PKM.RALTS:
-        return new Ralts(s);
+        return new Ralts(s,e);
       case PKM.KIRLIA:
-        return new Kirlia(s);
+        return new Kirlia(s,e);
       case PKM.GARDEVOIR:
-        return new Gardevoir(s);
+        return new Gardevoir(s,e);
       case PKM.BAGON:
-        return new Bagon(s);
+        return new Bagon(s,e);
       case PKM.SHELGON:
-        return new Shelgon(s);
+        return new Shelgon(s,e);
       case PKM.SALAMENCE:
-        return new Salamence(s);
+        return new Salamence(s,e);
       case PKM.BELDUM:
-        return new Beldum(s);
+        return new Beldum(s,e);
       case PKM.METANG:
-        return new Metang(s);
+        return new Metang(s,e);
       case PKM.METAGROSS:
-        return new Metagross(s);
+        return new Metagross(s,e);
       case PKM.GIBLE:
-        return new Gible(s);
+        return new Gible(s,e);
       case PKM.GABITE:
-        return new Gabite(s);
+        return new Gabite(s,e);
       case PKM.GARCHOMP:
-        return new Garchomp(s);
+        return new Garchomp(s,e);
       case PKM.ELEKID:
-        return new Elekid(s);
+        return new Elekid(s,e);
       case PKM.ELECTABUZZ:
-        return new Electabuzz(s);
+        return new Electabuzz(s,e);
       case PKM.ELECTIVIRE:
-        return new Electivire(s);
+        return new Electivire(s,e);
       case PKM.MAGBY:
-        return new Magby(s);
+        return new Magby(s,e);
       case PKM.MAGMAR:
-        return new Magmar(s);
+        return new Magmar(s,e);
       case PKM.MAGMORTAR:
-        return new Magmortar(s);
+        return new Magmortar(s,e);
       case PKM.MUNCHLAX:
-        return new Munchlax(s);
+        return new Munchlax(s,e);
       case PKM.SNORLAX:
-        return new Snorlax(s);
+        return new Snorlax(s,e);
       case PKM.GROWLITHE:
-        return new Growlithe(s);
+        return new Growlithe(s,e);
       case PKM.ARCANINE:
-        return new Arcanine(s);
+        return new Arcanine(s,e);
       case PKM.ONIX:
-        return new Onix(s);
+        return new Onix(s,e);
       case PKM.STEELIX:
-        return new Steelix(s);
+        return new Steelix(s,e);
       case PKM.MEGASTEELIX:
-        return new MegaSteelix(s);
+        return new MegaSteelix(s,e);
       case PKM.SCYTHER:
-        return new Scyther(s);
+        return new Scyther(s,e);
       case PKM.SCIZOR:
-        return new Scizor(s);
+        return new Scizor(s,e);
       case PKM.MEGASCIZOR:
-        return new MegaScizor(s);
+        return new MegaScizor(s,e);
       case PKM.RIOLU:
-        return new Riolu(s);
+        return new Riolu(s,e);
       case PKM.LUCARIO:
-        return new Lucario(s);
+        return new Lucario(s,e);
       case PKM.MEGALUCARIO:
-        return new MegaLucario(s);
+        return new MegaLucario(s,e);
       case PKM.MAGIKARP:
-        return new Magikarp(s);
+        return new Magikarp(s,e);
       case PKM.RATTATA:
-        return new Rattata(s);
+        return new Rattata(s,e);
       case PKM.RATICATE:
-        return new Raticate(s);
+        return new Raticate(s,e);
       case PKM.SPEAROW:
-        return new Spearow(s);
+        return new Spearow(s,e);
       case PKM.FEAROW:
-        return new Fearow(s);
+        return new Fearow(s,e);
       case PKM.GYARADOS:
-        return new Gyarados(s);
+        return new Gyarados(s,e);
       case PKM.LUGIA:
-        return new Lugia(s);
+        return new Lugia(s,e);
       case PKM.ZAPDOS:
-        return new Zapdos(s);
+        return new Zapdos(s,e);
       case PKM.MOLTRES:
-        return new Moltres(s);
+        return new Moltres(s,e);
       case PKM.ARTICUNO:
-        return new Articuno(s);
+        return new Articuno(s,e);
       case PKM.DIALGA:
-        return new Dialga(s);
+        return new Dialga(s,e);
       case PKM.PALKIA:
-        return new Palkia(s);
+        return new Palkia(s,e);
       case PKM.SUICUNE:
-        return new Suicune(s);
+        return new Suicune(s,e);
       case PKM.RAIKOU:
-        return new Raikou(s);
+        return new Raikou(s,e);
       case PKM.ENTEI:
-        return new Entei(s);
+        return new Entei(s,e);
       case PKM.KYOGRE:
-        return new Kyogre(s);
+        return new Kyogre(s,e);
       case PKM.GROUDON:
-        return new Groudon(s);
+        return new Groudon(s,e);
       case PKM.RAYQUAZA:
-        return new Rayquaza(s);
+        return new Rayquaza(s,e);
       case PKM.MEGARAYQUAZA:
-        return new MegaRayquaza(s);
+        return new MegaRayquaza(s,e);
       case PKM.REGICE:
-        return new Regice(s);
+        return new Regice(s,e);
       case PKM.REGIROCK:
-        return new Regirock(s);
+        return new Regirock(s,e);
       case PKM.REGISTEEL:
-        return new Registeel(s);
+        return new Registeel(s,e);
       case PKM.REGIGIGAS:
-        return new Regigigas(s);
+        return new Regigigas(s,e);
       case PKM.GIRATINA:
-        return new Giratina(s);
+        return new Giratina(s,e);
       case PKM.EEVEE:
-        return new Eevee(s);
+        return new Eevee(s,e);
       case PKM.VAPOREON:
-        return new Vaporeon(s);
+        return new Vaporeon(s,e);
       case PKM.JOLTEON:
-        return new Jolteon(s);
+        return new Jolteon(s,e);
       case PKM.FLAREON:
-        return new Flareon(s);
+        return new Flareon(s,e);
       case PKM.ESPEON:
-        return new Espeon(s);
+        return new Espeon(s,e);
       case PKM.UMBREON:
-        return new Umbreon(s);
+        return new Umbreon(s,e);
       case PKM.LEAFEON:
-        return new Leafeon(s);
+        return new Leafeon(s,e);
       case PKM.SYLVEON:
-        return new Sylveon(s);
+        return new Sylveon(s,e);
       case PKM.GLACEON:
-        return new Glaceon(s);
+        return new Glaceon(s,e);
       case PKM.MEDITITE:
-        return new Meditite(s);
+        return new Meditite(s,e);
       case PKM.MEDICHAM:
-        return new Medicham(s);
+        return new Medicham(s,e);
       case PKM.MEGAMEDICHAM:
-        return new MegaMedicham(s);
+        return new MegaMedicham(s,e);
       case PKM.NUMEL:
-        return new Numel(s);
+        return new Numel(s,e);
       case PKM.CAMERUPT:
-        return new Camerupt(s);
+        return new Camerupt(s,e);
       case PKM.MEGACAMERUPT:
-        return new MegaCamerupt(s);
+        return new MegaCamerupt(s,e);
       case PKM.DITTO:
-        return new Ditto(s);
+        return new Ditto(s,e);
       case PKM.SANDSHREW:
-        return new Sandshrew(s);
+        return new Sandshrew(s,e);
       case PKM.DARKRAI:
-        return new Darkrai(s);
+        return new Darkrai(s,e);
       case PKM.LITWICK:
-        return new Litwick(s);
+        return new Litwick(s,e);
       case PKM.LAMPENT:
-        return new Lampent(s);
+        return new Lampent(s,e);
       case PKM.CHANDELURE:
-        return new Chandelure(s);
+        return new Chandelure(s,e);
       case PKM.BELLSPROUT:
-        return new Bellsprout(s);
+        return new Bellsprout(s,e);
       case PKM.WEEPINBELL:
-        return new Weepinbell(s);
+        return new Weepinbell(s,e);
       case PKM.VICTREEBEL:
-        return new Victreebel(s);
+        return new Victreebel(s,e);
       case PKM.SWINUB:
-        return new Swinub(s);
+        return new Swinub(s,e);
       case PKM.PILOSWINE:
-        return new Piloswine(s);
+        return new Piloswine(s,e);
       case PKM.MAMOSWINE:
-        return new Mamoswine(s);
+        return new Mamoswine(s,e);
       case PKM.SNORUNT:
-        return new Snorunt(s);
+        return new Snorunt(s,e);
       case PKM.GLALIE:
-        return new Glalie(s);
+        return new Glalie(s,e);
       case PKM.FROSLASS:
-        return new Froslass(s);
+        return new Froslass(s,e);
       case PKM.SNOVER:
-        return new Snover(s);
+        return new Snover(s,e);
       case PKM.ABOMASNOW:
-        return new Abomasnow(s);
+        return new Abomasnow(s,e);
       case PKM.MEGAABOMASNOW:
-        return new MegaAbomasnow(s);
+        return new MegaAbomasnow(s,e);
       case PKM.VANILLITE:
-        return new Vanillite(s);
+        return new Vanillite(s,e);
       case PKM.VANILLISH:
-        return new Vanillish(s);
+        return new Vanillish(s,e);
       case PKM.VANILLUXE:
-        return new Vanilluxe(s);
+        return new Vanilluxe(s,e);
       case PKM.VOLCARONA:
-        return new Volcarona(s);
+        return new Volcarona(s,e);
       case PKM.LANDORUS:
-        return new Landorus(s);
+        return new Landorus(s,e);
       case PKM.THUNDURUS:
-        return new Thundurus(s);
+        return new Thundurus(s,e);
       case PKM.TORNADUS:
-        return new Tornadus(s);
+        return new Tornadus(s,e);
       case PKM.KELDEO:
-        return new Keldeo(s);
+        return new Keldeo(s,e);
       case PKM.TERRAKION:
-        return new Terrakion(s);
+        return new Terrakion(s,e);
       case PKM.VIRIZION:
-        return new Virizion(s);
+        return new Virizion(s,e);
       case PKM.COBALION:
-        return new Cobalion(s);
+        return new Cobalion(s,e);
       case PKM.MANAPHY:
-        return new Manaphy(s);
+        return new Manaphy(s,e);
       case PKM.SPIRITOMB:
-        return new Spiritomb(s);
+        return new Spiritomb(s,e);
       case PKM.ABSOL:
-        return new Absol(s);
+        return new Absol(s,e);
       case PKM.LAPRAS:
-        return new Lapras(s);
+        return new Lapras(s,e);
       case PKM.LATIAS:
-        return new Latias(s);
+        return new Latias(s,e);
       case PKM.LATIOS:
-        return new Latios(s);
+        return new Latios(s,e);
       case PKM.MESPRIT:
-        return new Mesprit(s);
+        return new Mesprit(s,e);
       case PKM.AZELF:
-        return new Azelf(s);
+        return new Azelf(s,e);
       case PKM.UXIE:
-        return new Uxie(s);
+        return new Uxie(s,e);
       case PKM.MEWTWO:
-        return new Mewtwo(s);
+        return new Mewtwo(s,e);
       case PKM.KYUREM:
-        return new Kyurem(s);
+        return new Kyurem(s,e);
       case PKM.RESHIRAM:
-        return new Reshiram(s);
+        return new Reshiram(s,e);
       case PKM.ZEKROM:
-        return new Zekrom(s);
+        return new Zekrom(s,e);
       case PKM.CELEBI:
-        return new Celebi(s);
+        return new Celebi(s,e);
       case PKM.VICTINI:
-        return new Victini(s);
+        return new Victini(s,e);
       case PKM.JIRACHI:
-        return new Jirachi(s);
+        return new Jirachi(s,e);
       case PKM.ARCEUS:
-        return new Arceus(s);
+        return new Arceus(s,e);
       case PKM.DEOXYS:
-        return new Deoxys(s);
+        return new Deoxys(s,e);
       case PKM.SHAYMIN:
-        return new Shaymin(s);
+        return new Shaymin(s,e);
       case PKM.CRESSELIA:
-        return new Cresselia(s);
+        return new Cresselia(s,e);
       case PKM.HEATRAN:
-        return new Heatran(s);
+        return new Heatran(s,e);
       case PKM.HOOH:
-        return new HooH(s);
+        return new HooH(s,e);
       case PKM.ROTOM:
-        return new Rotom(s);
+        return new Rotom(s,e);
       case PKM.AERODACTYL:
-        return new Aerodactyl(s);
+        return new Aerodactyl(s,e);
       case PKM.HOUNDOUR:
-        return new Houndour(s);
+        return new Houndour(s,e);
       case PKM.SWABLU:
-        return new Swablu(s);
+        return new Swablu(s,e);
       case PKM.CARVANHA:
-        return new Carvanha(s);
+        return new Carvanha(s,e);
       case PKM.PRIMALKYOGRE:
-        return new PrimalKyogre(s);
+        return new PrimalKyogre(s,e);
       case PKM.PRIMALGROUDON:
-        return new PrimalGroudon(s);
+        return new PrimalGroudon(s,e);
       case PKM.MEOWTH:
-        return new Meowth(s);
+        return new Meowth(s,e);
       case PKM.PERSIAN:
-        return new Persian(s);
+        return new Persian(s,e);
       case PKM.DEINO:
-        return new Deino(s);
+        return new Deino(s,e);
       case PKM.ZWEILOUS:
-        return new Zweilous(s);
+        return new Zweilous(s,e);
       case PKM.HYDREIGON:
-        return new Hydreigon(s);
+        return new Hydreigon(s,e);
       case PKM.SANDILE:
-        return new Sandile(s);
+        return new Sandile(s,e);
       case PKM.KROKOROK:
-        return new Krookorok(s);
+        return new Krookorok(s,e);
       case PKM.KROOKODILE:
-        return new Krookodile(s);
+        return new Krookodile(s,e);
       case PKM.SOLOSIS:
-        return new Solosis(s);
+        return new Solosis(s,e);
       case PKM.DUOSION:
-        return new Duosion(s);
+        return new Duosion(s,e);
       case PKM.REUNICLUS:
-        return new Reuniclus(s);
+        return new Reuniclus(s,e);
       case PKM.ODDISH:
-        return new Oddish(s);
+        return new Oddish(s,e);
       case PKM.GLOOM:
-        return new Gloom(s);
+        return new Gloom(s,e);
       case PKM.VILEPLUME:
-        return new Vileplume(s);
+        return new Vileplume(s,e);
       case PKM.BELLOSSOM:
-        return new Bellossom(s);
+        return new Bellossom(s,e);
       case PKM.AMAURA:
-        return new Amaura(s);
+        return new Amaura(s,e);
       case PKM.AURORUS:
-        return new Aurorus(s);
+        return new Aurorus(s,e);
       case PKM.ANORITH:
-        return new Anorith(s);
+        return new Anorith(s,e);
       case PKM.ARMALDO:
-        return new Armaldo(s);
+        return new Armaldo(s,e);
       case PKM.ARCHEN:
-        return new Archen(s);
+        return new Archen(s,e);
       case PKM.ARCHEOPS:
-        return new Archeops(s);
+        return new Archeops(s,e);
       case PKM.SHIELDON:
-        return new Shieldon(s);
+        return new Shieldon(s,e);
       case PKM.BASTIODON:
-        return new Bastiodon(s);
+        return new Bastiodon(s,e);
       case PKM.TIRTOUGA:
-        return new Tirtouga(s);
+        return new Tirtouga(s,e);
       case PKM.CARRACOSTA:
-        return new Carracosta(s);
+        return new Carracosta(s,e);
       case PKM.LILEEP:
-        return new Lileep(s);
+        return new Lileep(s,e);
       case PKM.CRADILY:
-        return new Cradily(s);
+        return new Cradily(s,e);
       case PKM.OMANYTE:
-        return new Omanyte(s);
+        return new Omanyte(s,e);
       case PKM.OMASTAR:
-        return new Omastar(s);
+        return new Omastar(s,e);
       case PKM.CRANIDOS:
-        return new Cranidos(s);
+        return new Cranidos(s,e);
       case PKM.RAMPARDOS:
-        return new Rampardos(s);
+        return new Rampardos(s,e);
       case PKM.TYRUNT:
-        return new Tyrunt(s);
+        return new Tyrunt(s,e);
       case PKM.TYRANTRUM:
-        return new Tyrantrum(s);
+        return new Tyrantrum(s,e);
       case PKM.KABUTO:
-        return new Kabuto(s);
+        return new Kabuto(s,e);
       case PKM.KABUTOPS:
-        return new Kabutops(s);
+        return new Kabutops(s,e);
       case PKM.BUDEW:
-        return new Budew(s);
+        return new Budew(s,e);
       case PKM.ROSELIA:
-        return new Roselia(s);
+        return new Roselia(s,e);
       case PKM.ROSERADE:
-        return new Roserade(s);
+        return new Roserade(s,e);
       case PKM.BUNEARY:
-        return new Buneary(s);
+        return new Buneary(s,e);
       case PKM.LOPUNNY:
-        return new Lopunny(s);
+        return new Lopunny(s,e);
       case PKM.MEGALOPUNNY:
-        return new MegaLopunny(s);
+        return new MegaLopunny(s,e);
       case PKM.AXEW:
-        return new Axew(s);
+        return new Axew(s,e);
       case PKM.FRAXURE:
-        return new Fraxure(s);
+        return new Fraxure(s,e);
       case PKM.HAXORUS:
-        return new Haxorus(s);
+        return new Haxorus(s,e);
       case PKM.VENIPEDE:
-        return new Venipede(s);
+        return new Venipede(s,e);
       case PKM.WHIRLIPEDE:
-        return new Whirlipede(s);
+        return new Whirlipede(s,e);
       case PKM.SCOLIPEDE:
-        return new Scolipede(s);
+        return new Scolipede(s,e);
       case PKM.PORYGON:
-        return new Porygon(s);
+        return new Porygon(s,e);
       case PKM.PORYGON2:
-        return new Porygon2(s);
+        return new Porygon2(s,e);
       case PKM.PORYGONZ:
-        return new PorygonZ(s);
+        return new PorygonZ(s,e);
       case PKM.KLINK:
-        return new Klink(s);
+        return new Klink(s,e);
       case PKM.KLANG:
-        return new Klang(s);
+        return new Klang(s,e);
       case PKM.KLINKLANG:
-        return new Klinklang(s);
+        return new Klinklang(s,e);
       case PKM.ELECTRIKE:
-        return new Electrike(s);
+        return new Electrike(s,e);
       case PKM.MANECTRIC:
-        return new Manectric(s);
+        return new Manectric(s,e);
       case PKM.MEGAMANECTRIC:
-        return new MegaManectric(s);
+        return new MegaManectric(s,e);
       case PKM.SHUPPET:
-        return new Shuppet(s);
+        return new Shuppet(s,e);
       case PKM.BANETTE:
-        return new Banette(s);
+        return new Banette(s,e);
       case PKM.MEGABANETTE:
-        return new MegaBanette(s);
+        return new MegaBanette(s,e);
       case PKM.HONEDGE:
-        return new Honedge(s);
+        return new Honedge(s,e);
       case PKM.DOUBLADE:
-        return new Doublade(s);
+        return new Doublade(s,e);
       case PKM.AEGISLASH:
-        return new Aegislash(s);
+        return new Aegislash(s,e);
       case PKM.CUBONE:
-        return new Cubone(s);
+        return new Cubone(s,e);
       case PKM.MAROWAK:
-        return new Marowak(s);
+        return new Marowak(s,e);
       case PKM.ALOLANMAROWAK:
-        return new AlolanMarowak(s);
+        return new AlolanMarowak(s,e);
       case PKM.FLETCHLING:
-        return new Fletchling(s);
+        return new Fletchling(s,e);
       case PKM.FLETCHINDER:
-        return new Fletchinder(s);
+        return new Fletchinder(s,e);
       case PKM.TALONFLAME:
-        return new Talonflame(s);
+        return new Talonflame(s,e);
       case PKM.WHISMUR:
-        return new Whismur(s);
+        return new Whismur(s,e);
       case PKM.LOUDRED:
-        return new Loudred(s);
+        return new Loudred(s,e);
       case PKM.EXPLOUD:
-        return new Exploud(s);
+        return new Exploud(s,e);
       case PKM.TYMPOLE:
-        return new Tympole(s);
+        return new Tympole(s,e);
       case PKM.PALPITOAD:
-        return new Palpitoad(s);
+        return new Palpitoad(s,e);
       case PKM.SEISMITOAD:
-        return new Seismitoad(s);
+        return new Seismitoad(s,e);
       case PKM.SEWADDLE:
-        return new Sewaddle(s);
+        return new Sewaddle(s,e);
       case PKM.SWADLOON:
-        return new Swadloon(s);
+        return new Swadloon(s,e);
       case PKM.LEAVANNY:
-        return new Leavanny(s);
+        return new Leavanny(s,e);
       case PKM.PIKIPEK:
-        return new Pikipek(s);
+        return new Pikipek(s,e);
       case PKM.TRUMBEAK:
-        return new Trumbeak(s);
+        return new Trumbeak(s,e);
       case PKM.TOUCANNON:
-        return new Toucannon(s);
+        return new Toucannon(s,e);
       case PKM.FLABEBE:
-        return new Flabebe(s);
+        return new Flabebe(s,e);
       case PKM.FLOETTE:
-        return new Floette(s);
+        return new Floette(s,e);
       case PKM.FLORGES:
-        return new Florges(s);
+        return new Florges(s,e);
       case PKM.JANGMOO:
-        return new JangmoO(s);
+        return new JangmoO(s,e);
       case PKM.HAKAMOO:
-        return new HakamoO(s);
+        return new HakamoO(s,e);
       case PKM.KOMMOO:
-        return new KommoO(s);
+        return new KommoO(s,e);
       case PKM.MELOETTA:
-        return new Meloetta(s);
+        return new Meloetta(s,e);
       case PKM.ALTARIA:
-        return new Altaria(s);
+        return new Altaria(s,e);
       case PKM.MEGAALTARIA:
-        return new MegaAltaria(s);
+        return new MegaAltaria(s,e);
       case PKM.LILLIPUP:
-        return new Lillipup(s);
+        return new Lillipup(s,e);
       case PKM.HERDIER:
-        return new Herdier(s);
+        return new Herdier(s,e);
       case PKM.STOUTLAND:
-        return new Stoutland(s);
+        return new Stoutland(s,e);
       case PKM.CASTFORM:
-        return new Castform(s);
+        return new Castform(s,e);
       case PKM.CASTFORMSUN:
-        return new CastformSun(s);
+        return new CastformSun(s,e);
       case PKM.CASTFORMRAIN:
-        return new CastformRain(s);
+        return new CastformRain(s,e);
       case PKM.CASTFORMHAIL:
-        return new CastformHail(s);
+        return new CastformHail(s,e);
       default:
         // console.log(`No pokemon with name "${name}" found, return magikarp`);
-        return new Magikarp(s);
+        return new Magikarp(s,e);
     }
   }
 
   static getPokemonRarityFromName(name: string) {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name);
     return pokemon.rarity;
+  }
+
+  static getPokemonIndexFromName(name: string) {
+      const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name);
+      return pokemon.index;
   }
 
   static getRandomFossil(board: Board) {

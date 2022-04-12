@@ -10,7 +10,7 @@ import {Schema, type, ArraySchema, SetSchema} from '@colyseus/schema';
 import {AttackStrategy} from './attack-strategy';
 import Board from './board';
 import PokemonState from './pokemon-state';
-import { IPokemonEntity, IPokemon } from '../types';
+import { IPokemonEntity, IPokemon, Emotion } from '../types';
 
 export default class PokemonEntity extends Schema implements IPokemonEntity{
 
@@ -50,6 +50,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('float32') critDamage = 2;
   @type('uint8') spellDamage = 0;
   @type('uint16') healDone: number;
+  @type('string') emotion: Emotion;
   cooldown = 500;
   manaCooldown = 1000;
   state: MovingState;
@@ -106,6 +107,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
     this.stars = pokemon.stars;
     this.skill = pokemon.skill;
     this.shiny = pokemon.shiny;
+    this.emotion = pokemon.emotion;
 
     this.dodge = 0;
     this.physicalDamage = 0;

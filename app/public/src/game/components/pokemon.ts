@@ -5,12 +5,13 @@ import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
 import {SPECIAL_SKILL, EFFECTS_ICON, EFFECTS, PKM_ACTION, PKM_TINT, PKM_ORIENTATION, PKM_ANIM, PKM} from '../../../../models/enum';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
-import { IPokemon, IPokemonEntity, instanceofPokemonEntity } from '../../../../types';
+import { IPokemon, IPokemonEntity, instanceofPokemonEntity, Emotion } from '../../../../types';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
 import GameScene from '../scenes/game-scene';
 
 export default class Pokemon extends Button {
+  emotion: Emotion;
   shiny: boolean;
   isPopup: boolean;
   objType: string;
@@ -66,6 +67,7 @@ export default class Pokemon extends Button {
 
   constructor(scene: Phaser.Scene, x: number, y: number, pokemon: IPokemonEntity | IPokemon, dragable: boolean, isPopup: boolean) {
     super(scene, x, y, 75, 75);
+    this.emotion = pokemon.emotion;
     this.shiny = pokemon.shiny;
     this.isPopup = isPopup;
     this.objType = 'pokemon';
@@ -131,9 +133,9 @@ export default class Pokemon extends Button {
       }
       else{
         if (this.life) {
-          this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill);
+          this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill, this.emotion, this.shiny, this.index);
         } else {
-          this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill);
+          this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill, this.emotion, this.shiny, this.index);
         }
         this.detail.setPosition(this.detail.width / 2 + 40, -this.detail.height / 2 - 40);
         this.add(this.detail);
