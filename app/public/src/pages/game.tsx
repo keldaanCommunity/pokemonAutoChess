@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import React, { useEffect, useRef, useState } from "react";
 import GameState from "../../../rooms/states/game-state";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter, leaveGame} from "../stores/GameStore";
+import { setPokemonCollection, setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter, leaveGame} from "../stores/GameStore";
 import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore";
 import { FIREBASE_CONFIG } from "./utils/utils";
 import GameContainer from '../game/game-container';
@@ -120,10 +120,11 @@ export default function Game() {
         dispatch(addPlayer(player));
 
         if(player.id == uid){
-          setInterest(player.interest);
-          setStreak(player.streak);
-          setShopLocked(player.shopLocked);
-          dispatch(setPlayer(player));
+            dispatch(setInterest(player.interest));
+            dispatch(setStreak(player.streak));
+            dispatch(setShopLocked(player.shopLocked));
+            dispatch(setPokemonCollection(player.pokemonCollection));
+            dispatch(setPlayer(player));
         }
 
         player.onChange = ((changes) => {

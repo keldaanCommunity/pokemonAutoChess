@@ -5,6 +5,7 @@ import {ArraySchema, DataChange, MapSchema} from "@colyseus/schema";
 import ExperienceManager from "../../../models/colyseus-models/experience-manager";
 import Synergies from "../../../models/colyseus-models/synergies";
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata";
+import PokemonCollection from "../../../models/colyseus-models/pokemon-collection";
 
 interface GameStateStore {
     afterGameId: string
@@ -149,7 +150,6 @@ export const gameSlice = createSlice({
         },
         setPlayer: (state, action: PayloadAction<IPlayer>) => {
             state.currentPlayerId = action.payload.id;
-            state.pokemonCollection = action.payload.pokemonCollection;
             state.currentPlayerMoney = action.payload.money;
             state.currentPlayerExperienceManager = action.payload.experienceManager;
             state.currentPlayerOpponentName = action.payload.opponentName;
@@ -224,11 +224,15 @@ export const gameSlice = createSlice({
         removeBlueHealDpsMeter: (state, action: PayloadAction<string>) => {
             state.blueHealDpsMeter = new Array<IDpsHeal>();
         },
+        setPokemonCollection: (state, action: PayloadAction<PokemonCollection>) => {
+            state.pokemonCollection = action.payload;
+        },
         leaveGame: () => initialState
     }
 });
 
 export const {
+    setPokemonCollection,
     leaveGame,
     removeBlueDpsMeter,
     removeRedDpsMeter,
