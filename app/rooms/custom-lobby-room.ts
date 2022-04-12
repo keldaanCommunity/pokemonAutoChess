@@ -30,7 +30,6 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
 
   onCreate(options: any): Promise<void>{
     console.log(`create lobby`, this.roomId);
-    const self = this;
     super.onCreate(options);
     this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
     this.bots = new Map();
@@ -146,7 +145,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
                             u.save();
                         }
                     }
-                  });
+                });
             }
         }
     });
@@ -160,6 +159,19 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
             if(!emotionsToCheck.includes(message.emotion) && pokemonConfig.dust > cost){
                 emotionsToCheck.push(message.emotion);
                 pokemonConfig.dust -= cost;
+                pokemonConfig.selectedEmotion = message.emotion;
+                pokemonConfig.selectedShiny = message.shiny;
+                UserMetadata.findOne({'uid': client.auth.uid}, (err, u)=>{
+                    if (u) {
+                        if(u.pokemonCollection.get(message.index)){
+                            message.shiny ? u.pokemonCollection.get(message.index).shinyEmotions.push(message.emotion) : u.pokemonCollection.get(message.index).emotions.push(message.emotion);
+                            u.pokemonCollection.get(message.index).dust -= cost;
+                            u.pokemonCollection.get(message.index).selectedEmotion = message.emotion;
+                            u.pokemonCollection.get(message.index).selectedShiny = message.shiny;
+                            u.save();
+                        }
+                    }
+                });
             }
         }
     });
@@ -602,14 +614,14 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       });
     });
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       connect(process.env.MONGO_URI, {}, () => {
         Chat.find({ 'time': { $gt: Date.now() - 86400000 } }, (err, messages) => {
           if (err) {
             console.log(err);
           } else {
             messages.forEach((message) => {
-              self.state.addMessage(message.name, message.payload, message.avatar, message.time, false);
+              this.state.addMessage(message.name, message.payload, message.avatar, message.time, false);
             });
           }
         });
@@ -619,15 +631,15 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
           } else {
             for (let i = 0; i < users.length; i++) {
               const user = users[i];
-              self.state.leaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.elo));
+              this.state.leaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.elo));
             }
           }
         });
         BotV2.find({}, { _id: 0 }, { sort: { elo: -1 } }, (_err, bots) => {
           bots.forEach((bot, i) => {
-            self.bots[bot.avatar] = bot;
+            this.bots[bot.avatar] = bot;
             // console.log(bot.avatar, bot.elo);
-            self.state.botLeaderboard.push(new LeaderboardInfo(bot.avatar, bot.avatar, i + 1, bot.elo));
+            this.state.botLeaderboard.push(new LeaderboardInfo(bot.avatar, bot.avatar, i + 1, bot.elo));
           });
         });
         Meta.find({}, (err, docs) => {

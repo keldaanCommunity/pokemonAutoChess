@@ -8,6 +8,9 @@ import BattleResult from './battle-result';
 import ExperienceManager from './experience-manager';
 import { BATTLE_RESULT } from '../enum';
 import { IPlayer, IPokemon } from '../../types';
+import PokemonConfig from './pokemon-config';
+import { IPokemonConfig } from '../mongo-models/user-metadata';
+import PokemonCollection from './pokemon-collection';
 
 export default class Player extends Schema implements IPlayer{
   @type('string') id: string;
@@ -34,12 +37,13 @@ export default class Player extends Schema implements IPlayer{
   @type('boolean') alive = true;
   @type('string') tileset: string;
   @type([BattleResult]) history = new ArraySchema<BattleResult>();
+  @type({map: PokemonConfig}) pokemonCollection;
   effects: Effects = new Effects();
   isBot: boolean;
   opponents: string[] = [];
 
 
-  constructor(id: string, name: string, elo: number, avatar: string, isBot: boolean, rank: number) {
+  constructor(id: string, name: string, elo: number, avatar: string, isBot: boolean, rank: number, pokemonCollection: Map<string,IPokemonConfig>) {
     super();
     this.id = id;
     this.name = name;
@@ -47,6 +51,7 @@ export default class Player extends Schema implements IPlayer{
     this.avatar = avatar;
     this.isBot = isBot;
     this.rank = rank;
+    this.pokemonCollection = new PokemonCollection(pokemonCollection);
   }
 
   getCurrentBattleResult() {

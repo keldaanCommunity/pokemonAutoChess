@@ -1,8 +1,11 @@
 import React from 'react';
 import PokemonFactory from '../../../../../models/pokemon-factory';
+import {Pokemon} from '../../../../../models/colyseus-models/pokemon';
 import { COST } from '../../../../../models/enum';
 import { useAppDispatch } from '../../../hooks';
 import { shopClick } from '../../../stores/NetworkStore';
+import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata';
+import { Emotion } from '../../../../../types';
 
 const COLOR_TYPE = Object.freeze({
     COMMON: "rgba(104, 109, 125, 0.6)",
@@ -14,19 +17,17 @@ const COLOR_TYPE = Object.freeze({
     SUMMON: "#rgba(153, 31, 31, 0.6)"
   });
 
-export default function GamePokemonPortrait(props: {index: number, pokemonName: string}) {
+export default function GamePokemonPortrait(props: {index: number, pokemon: Pokemon, pokemonConfig: IPokemonConfig}) {
     const dispatch = useAppDispatch();
     
-    if(!props.pokemonName){
+    if(!props.pokemon){
         return <div style={{
             width:'15.5%',
             marginRight:'1%'
         }}/>
     }
     else{
-        const pkm = PokemonFactory.createPokemonFromName(props.pokemonName);
-        //console.log(pkm.rarity);
-        const rarityColor = COLOR_TYPE[pkm.rarity];
+        const rarityColor = COLOR_TYPE[props.pokemon.rarity];
         return <div className="nes-container" style={{
             width:'15.5%',
             backgroundColor: rarityColor,
@@ -38,16 +39,16 @@ export default function GamePokemonPortrait(props: {index: number, pokemonName: 
             position:'absolute',
             bottom:'-10%',
             left:'1%',
-            }}>{capitalizeFirstLetter(props.pokemonName)}</p>
+            }}>{capitalizeFirstLetter(props.pokemon.name)}</p>
         <img style={{
             position:'absolute',
             left:'0%',
             top:'0%',
             width:'30%',
             imageRendering: 'crisp-edges'
-            }} src={'/assets/avatar/' + props.pokemonName + '.png'} />
+            }} src={getPath(props.pokemon, props.pokemonConfig)} />
         <div style={{position:'absolute', right:'5%', top:'5%'}}>
-            {COST[pkm.rarity]}<img style={{width:'20px', marginBottom:'5px'}} src="/assets/ui/money.png"/>
+            {COST[props.pokemon.rarity]}<img style={{width:'20px', marginBottom:'5px'}} src="/assets/ui/money.png"/>
         </div>
         <ul style={{
             listStyleType:'none',
@@ -57,12 +58,32 @@ export default function GamePokemonPortrait(props: {index: number, pokemonName: 
             left:'35%',
             top:'30%'
             }}>
-            {pkm.types.map(type=>{
+            {props.pokemon.types.map(type=>{
                 return <li key={type}><img src={'assets/types/'+ type +'.png'}/></li>;
             })}
         </ul>
         </div>;
     }
+}
+
+function getPath(pokemon: Pokemon, config: IPokemonConfig) {
+    const index = pokemon.index;
+    
+    let pokemonPath = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/';
+    pokemonPath += index + '/';
+
+    if(config && config.selectedShiny){
+        pokemonPath += '0000/0001/';
+    }
+
+    if( config && config.selectedEmotion){
+        pokemonPath += config.selectedEmotion;
+    }
+    else{
+        pokemonPath += Emotion.NORMAL;
+    }
+    pokemonPath += '.png';
+    return pokemonPath;
 }
 
 function capitalizeFirstLetter(s: string) {

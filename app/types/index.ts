@@ -10,6 +10,8 @@ import LeaderboardInfo from '../models/colyseus-models/leaderboard-info'
 import LobbyUser from '../models/colyseus-models/lobby-user'
 import Message from '../models/colyseus-models/message'
 import Synergies from '../models/colyseus-models/synergies'
+import { IPokemonConfig } from '../models/mongo-models/user-metadata'
+import PokemonCollection from '../models/colyseus-models/pokemon-collection'
 
 export interface IMessage {
     name: string
@@ -58,6 +60,7 @@ export interface IPlayer {
     alive: boolean
     tileset: string
     history: ArraySchema<BattleResult>
+    pokemonCollection: PokemonCollection
 }
 export interface IPokemon {
     id: string

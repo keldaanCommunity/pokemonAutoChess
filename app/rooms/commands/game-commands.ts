@@ -483,7 +483,8 @@ export class OnJoinCommand extends Command<GameRoom, {
             user.elo,
             user.avatar,
             false,
-            this.state.players.size + 1
+            this.state.players.size + 1,
+            user.pokemonCollection
         ));
         if (client && client.auth && client.auth.displayName) {
           console.log(`${client.auth.displayName} ${client.id} join game room`);
