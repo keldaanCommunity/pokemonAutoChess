@@ -14,8 +14,7 @@ import BotV2, { IBot } from '../models/mongo-models/bot-v2';
 import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
-import { Emotion, ICustomLobbyState } from "../types";
-import PokemonConfig from "../models/colyseus-models/pokemon-config";
+import { Emotion, EmotionCost } from "../types";
 
 const pastebin = new PastebinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
@@ -138,10 +137,12 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
             const emotionsToCheck = message.shiny ? pokemonConfig.shinyEmotions: pokemonConfig.emotions;
             if(emotionsToCheck.includes(message.emotion) && message.emotion != pokemonConfig.selectedEmotion){
                 pokemonConfig.selectedEmotion = message.emotion;
+                pokemonConfig.selectedShiny = message.shiny;
                 UserMetadata.findOne({'uid': client.auth.uid}, (err, u)=>{
                     if (u) {
                         if(u.pokemonCollection.get(message.index)){
                             u.pokemonCollection.get(message.index).selectedEmotion = message.emotion;
+                            u.pokemonCollection.get(message.index).selectedShiny = message.shiny;
                             u.save();
                         }
                     }
@@ -150,8 +151,17 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
         }
     });
 
-    this.onMessage('buy-emotion', (client, message)=>{
-
+    this.onMessage('buy-emotion', (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
+        const user: LobbyUser = this.state.users.get(client.auth.uid);
+        if(user.pokemonCollection.has(message.index)){
+            const pokemonConfig = user.pokemonCollection.get(message.index);
+            const emotionsToCheck = message.shiny ? pokemonConfig.shinyEmotions: pokemonConfig.emotions;
+            const cost = message.shiny ? EmotionCost[message.emotion] * 3: EmotionCost[message.emotion];
+            if(!emotionsToCheck.includes(message.emotion) && pokemonConfig.dust > cost){
+                emotionsToCheck.push(message.emotion);
+                pokemonConfig.dust -= cost;
+            }
+        }
     });
 
     this.onMessage('search', (client, message)=>{

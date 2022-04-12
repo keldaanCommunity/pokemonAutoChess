@@ -188,7 +188,7 @@ export const lobbySlice = createSlice({
             state.botLeaderboard.push(l);
         },
         addPokemonConfig: (state, action: PayloadAction<PokemonConfig>) => {
-          state.pokemonCollection.push(action.payload);
+          state.pokemonCollection.push(JSON.parse(JSON.stringify(action.payload)));
         },
         changePokemonConfig: (state, action: PayloadAction<{id: string, field: string, value: any}>) => {
           const index = state.pokemonCollection.findIndex(p => p.id == action.payload.id);

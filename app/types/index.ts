@@ -259,4 +259,26 @@ export enum Emotion {
     SPECIAL2 = "Special2",
     SPECIAL3 = "Special3"
 }
-  
+
+export const EmotionCost: {[key in Emotion] : number} = {
+    [Emotion.NORMAL] : 50,
+    [Emotion.HAPPY] : 100,
+    [Emotion.PAIN] : 110,
+    [Emotion.ANGRY] : 120,
+    [Emotion.WORRIED] : 130,
+    [Emotion.SAD] : 140,
+    [Emotion.CRYING] : 150,
+    [Emotion.SHOUTING] : 160,
+    [Emotion.TEARY_EYED] : 170,
+    [Emotion.DETERMINED] : 180,
+    [Emotion.JOYOUS] : 190,
+    [Emotion.INSPIRED] : 200,
+    [Emotion.SURPRISED] : 210,
+    [Emotion.DIZZY] : 220,
+    [Emotion.SPECIAL0] : 230,
+    [Emotion.SPECIAL1] : 240,
+    [Emotion.SIGH] : 250,
+    [Emotion.STUNNED] : 260,
+    [Emotion.SPECIAL2] : 270,
+    [Emotion.SPECIAL3] : 280
+}

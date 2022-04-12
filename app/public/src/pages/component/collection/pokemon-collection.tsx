@@ -9,7 +9,7 @@ import { Pokemon } from '../../../../../models/colyseus-models/pokemon';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata';
 import tracker from '../../../../dist/client/assets/pokemons/tracker.json';
-import { Convert, ITracker } from '../../../../../types/ITracker';
+import { Convert } from '../../../../../types/ITracker';
 import { Emotion } from '../../../../../types';
 import PokemonEmotion from './pokemon-emotion';
 
@@ -27,6 +27,7 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
     const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection);
     let p: Pokemon;
     let pConfig: IPokemonConfig;
+    let pShinyPad = '';
     let pMetadata;
     let emotion: Emotion;
     const availableEmotions: Emotion[] = [];
@@ -44,6 +45,7 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
         
         if(pConfig && pConfig.selectedEmotion){
             emotion = pConfig.selectedEmotion;
+            pShinyPad = pConfig.selectedShiny ? '/0000/0001': ''; 
         }
         else{
             emotion = Emotion.NORMAL;
@@ -64,9 +66,9 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
                 src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${p.index.replace('-','/')}/Normal.png`}/></div>
             </Modal.Title>
             <Modal.Title>
-                <img 
-                src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${p.index.replace('-','/')}/${emotion}.png`}
-                style={{filter: pConfig ? 'grayscale(0)':'grayscale(1)', width:'80px', height:'80px', imageRendering:'pixelated'}}/>
+            <img 
+            src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${p.index.replace('-','/')}${pShinyPad}/${emotion}.png`}
+            style={{filter: pConfig ? 'grayscale(0)':'grayscale(1)', width:'80px', height:'80px', imageRendering:'pixelated'}}/>
             </Modal.Title>
         </Modal.Header>
         <Modal.Body>

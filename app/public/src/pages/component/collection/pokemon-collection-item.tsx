@@ -12,13 +12,15 @@ const cursorStyle = {
 
 export default function PokemonCollectionItem(props: {name: string, index: string, metadata: ITracker, config: IPokemonConfig, setPokemon:Dispatch<SetStateAction<string>>}) {
     let emotion: Emotion;
-    
+    let shinyPad = '';
+
     if(!props.metadata || Object.keys(props.metadata.portrait_files).length == 0){
         return null;
     }
 
     if(props.config && props.config.selectedEmotion){
-        emotion = props.config.selectedEmotion;   
+        emotion = props.config.selectedEmotion;
+        shinyPad = props.config.selectedShiny ? '/0000/0001' : '';
     }
     else{
         emotion = Emotion.NORMAL;
@@ -26,7 +28,7 @@ export default function PokemonCollectionItem(props: {name: string, index: strin
 
     return <div style={cursorStyle} className='nes-container' onClick={()=>{props.setPokemon(props.name)}}>
         <img style={{filter: props.config ? 'grayscale(0)':'grayscale(1)', width:'80px', height:'80px', imageRendering:'pixelated'}}
-         src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${props.index.replace('-','/')}/${emotion}.png`}/>
+         src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${props.index.replace('-','/')}${shinyPad}/${emotion}.png`}/>
          <div style={{display:'flex', marginTop:'5px', marginBottom:'-10px', justifyContent:'center'}}>{props.config ? props.config.dust: 0}<img style={{width:'20px',height:'20px',imageRendering:'pixelated'}} 
          src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${props.index.replace('-','/')}/Normal.png`}/></div>
     </div>;
