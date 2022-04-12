@@ -21,7 +21,7 @@ const style = {
 
 export default function GameDpsHeal(props:{maxHeal: number, dpsHeal: IDpsHeal}) {
     return  <div style={style}>
-    <img style={imgStyle} src={`assets/avatar/${props.dpsHeal.name}.png`}/>
+    <img style={imgStyle} src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${props.dpsHeal.name}.png`}/>
     <div style={{display:'flex', flexFlow:'column', justifyContent:'space-around', marginLeft:'5px', width:'100%'}}>
         <p style={{marginBottom:'-5px', marginLeft:'3px'}}>{props.dpsHeal.heal + props.dpsHeal.shield}</p>
         <ProgressBar className="nes-progress is-primary" style={progressStyle}>
