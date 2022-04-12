@@ -35,9 +35,9 @@ export default function GameDpsMeter() {
     else{
         return <div className='nes-container hidden-scrollable' style={style}>
         <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
-            <img style={imgStyle} src={'assets/avatar/'+ avatar + '.png'}></img>
+            <img style={imgStyle} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/'+ avatar + '.png'}></img>
             <h2>Vs</h2>
-            <img style={imgStyle} src={'assets/avatar/'+ opponentAvatar + '.png'}></img>
+            <img style={imgStyle} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/'+ opponentAvatar + '.png'}></img>
         </div>
         <Tabs>
             <TabList style={{display:'flex', justifyContent:'space-evenly'}}>

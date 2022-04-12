@@ -33,7 +33,7 @@ class PokemonPicker extends Component{
         {Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL).map((key)=>{
           return <TabPanel key={key} style={{display:'flex', flexWrap:'wrap'}}>
                 {PRECOMPUTED_TYPE_POKEMONS_ALL[key].map((pkm)=>{
-                  return <div onClick={()=>{this.props.selectEntity(pkm)}} key={pkm}><img style={imgStyle} src={'assets/avatar/' + pkm + '.png'}/></div>;
+                  return <div onClick={()=>{this.props.selectEntity(pkm)}} key={pkm}><img style={imgStyle} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/' + pkm + '.png'}/></div>;
                 })}
             </TabPanel>
         })}

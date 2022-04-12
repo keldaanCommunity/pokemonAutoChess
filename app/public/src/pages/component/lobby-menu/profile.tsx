@@ -18,7 +18,7 @@ export default function Profile() {
     return(
         <div>
         <div style={{display:'flex', alignItems: 'center'}}>
-            <img src={"/assets/avatar/" + user.avatar + ".png"}/>
+            <img src={"https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/" + user.avatar + ".png"}/>
             <h5>{user.name}</h5>
         </div>
         <p>Level {user.level} ({user.exp} / {XP_TABLE[user.level]})</p>

@@ -11,7 +11,7 @@ export default function Team(props:{team: string[]}){
     return <ul style={ulStyle}>
         {props.team.map((v, index)=>{        
             return <li key={index}>
-            <img src={"/assets/avatar/" + v + ".png"}/>
+            <img src={"https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/" + v + ".png"}/>
         </li>})}
     </ul>
 }

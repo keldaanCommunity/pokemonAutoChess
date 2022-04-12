@@ -142,7 +142,7 @@ class TeamEditor extends Component{
                                                     if(p.x == x && p.y == y){
                                                         r = <td style={tdStyle} onClick={()=>{this.props.handleEditorClick(x,y)}} key={x}>
                                                         <div style={divTdStyle}>
-                                                            <img style={bigImgStyle} src={'assets/avatar/'+ p.name +'.png'}></img>
+                                                            <img style={bigImgStyle} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/'+ p.name +'.png'}></img>
                                                             {p.items ? <div style={{display:'flex', justifyContent:'space-evenly'}}>{p.items.map((it,j)=>{
                                                                 return <img key={j} style={itemImgStyle} src={'assets/item/' + it + '.png'}/>
                                                             })}</div>: null}

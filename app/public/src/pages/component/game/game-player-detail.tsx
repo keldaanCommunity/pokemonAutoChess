@@ -27,7 +27,7 @@ export default function GamePlayerDetail(props:{name: string, life: number, mone
                 <img style={{
                     border:record.result == BATTLE_RESULT.WIN ? '4px solid #4aa52e' : '4px solid #8c2022',
                     marginLeft:'6px'
-                }} src={`assets/avatar/${record.avatar}.png`}/>
+                }} src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${record.avatar}.png`}/>
             <p style={{
             }}>{record.name.slice(0,4)}</p>
             </div>;

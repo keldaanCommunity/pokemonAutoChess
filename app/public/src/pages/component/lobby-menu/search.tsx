@@ -18,7 +18,7 @@ export default function Search() {
         </div>
 
         <div style={{display:'flex', alignItems: 'center', marginTop: '30px'}}>
-            <img src={"/assets/avatar/" + user.avatar + ".png"}/>
+            <img src={"https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/" + user.avatar + ".png"}/>
             <h5>{user.name}</h5>
             <Elo elo={user.elo}/>
         </div>

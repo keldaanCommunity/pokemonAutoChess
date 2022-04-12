@@ -12,7 +12,7 @@ class Avatar extends Component{
             alignItems:'center',
             flexFlow:'column'
             }}>
-            <img src={"/assets/avatar/" + this.props.avatar + ".png"}/>
+            <img src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${this.props.avatar}.png`}/>
             <p style={{margin:'0px'}}>{this.props.name}</p>
             {elo}
         </div>;

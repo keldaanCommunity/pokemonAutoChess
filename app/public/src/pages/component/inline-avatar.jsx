@@ -5,7 +5,7 @@ class InlineAvatar extends Component{
         return <div style={{
             display:'flex', alignItems:'center'
             }}>
-            <img style={{width:'40px', height:'40px'}} src={"/assets/avatar/" + this.props.avatar + ".png"}/>
+            <img style={{width:'40px', height:'40px'}} src={"" + this.props.avatar + ".png"}/>
             <p style={{margin:'0px', marginLeft:'10px', maxWidth:'350px', overflow:'hidden', whiteSpace:'nowrap'}}>{this.props.name}</p>
         </div>;
     }

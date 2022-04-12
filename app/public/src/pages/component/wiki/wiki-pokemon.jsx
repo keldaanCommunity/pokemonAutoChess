@@ -12,7 +12,7 @@ class PokemonWiki extends Component {
             {PRECOMPUTED_RARITY_POKEMONS_ALL[this.props.rarity].map((pkm=>{
                 let pokemon = PokemonFactory.createPokemonFromName(pkm);
                 return <Tab key={'title-' + pkm}>
-                    <img src={"assets/avatar/" + pokemon.name + ".png"}></img>
+                    <img src={"https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/" + pokemon.name + ".png"}></img>
                 </Tab>
             }))}
         </TabList>

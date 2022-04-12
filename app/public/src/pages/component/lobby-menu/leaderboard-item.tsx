@@ -22,7 +22,7 @@ export default function LeaderboardItem(props: {item: ILeaderboardInfo, isBot: b
             {props.item.rank}
         </td>
         <td>
-            <img src={"assets/avatar/" + props.item.avatar + ".png"}/>    
+            <img src={"https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/" + props.item.avatar + ".png"}/>    
         </td>
         <td style={{overflow:'hidden', whiteSpace:'nowrap', maxWidth:'300px'}}>
             {props.item.name}

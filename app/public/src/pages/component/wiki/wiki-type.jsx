@@ -20,7 +20,7 @@ class WikiType extends Component {
         })}
         <div style={{display:'flex', flexWrap:'wrap'}}>
             {PRECOMPUTED_TYPE_POKEMONS_ALL[this.props.type].map(p=>{
-                return <img key={p} src={"assets/avatar/" + p + ".png"}></img>
+                return <img key={p} src={"https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/" + p + ".png"}></img>
             })}
         </div>
     </div>;

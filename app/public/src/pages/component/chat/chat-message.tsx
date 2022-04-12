@@ -22,7 +22,7 @@ export default function ChatMessage(props: {message: IMessage}) {
                 dispatch(setTabIndex(3));
             }}
             >
-                <img style={{marginRight: '10px'}} src={`assets/avatar/${props.message.avatar}.png`} />
+                <img style={{marginRight: '10px'}} src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${props.message.avatar}.png`} />
                 <span>{props.message.name}</span>
                 <span>{formatDate(props.message.time)}</span>
             </div>

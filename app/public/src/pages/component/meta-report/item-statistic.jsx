@@ -24,7 +24,7 @@ class ItemStatistic extends Component{
                 <div style={{display:'flex'}}>
                     {this.props.item.pokemons.map(pokemon=>{
                         return <div style={{display:'flex', flexFlow:'column', alignItems: 'center'}} key={pokemon}>
-                        <img style={imgStyle} src={'assets/avatar/' + pokemon + '.png'}/>
+                        <img style={imgStyle} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/' + pokemon + '.png'}/>
                     </div> 
                     })}
                 </div>

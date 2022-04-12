@@ -29,7 +29,7 @@ class TeamComp extends Component{
                 <div style={{display:'flex'}}>
                     {sortedPokemons.map(pokemon=>{
                         return <div style={{display:'flex', flexFlow:'column', alignItems: 'center'}} key={pokemon}>
-                        <img style={{width:'60px', height:'60px', imageRendering:'pixelated'}} src={'assets/avatar/' + pokemon + '.png'}/>
+                        <img style={{width:'60px', height:'60px', imageRendering:'pixelated'}} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/' + pokemon + '.png'}/>
                         <p>{this.props.team.pokemons[pokemon].toFixed(1)}</p>
                     </div> 
                     })}

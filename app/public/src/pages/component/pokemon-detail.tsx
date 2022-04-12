@@ -28,7 +28,7 @@ export default function PokemonDetail(props:{pokemon: string}) {
                       return <img key={'img'+type} src={'assets/types/'+type+'.png'}/>
                   })}
               </div>
-              <div>evolution: {pokemon.evolution == ''? 'No evolution': <img src={'assets/avatar/'+pokemon.evolution+'.png'}/>}</div>
+              <div>evolution: {pokemon.evolution == ''? 'No evolution': <img src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/'+pokemon.evolution+'.png'}/>}</div>
           </div>
           <div style={{width: '30%'}}>
               <p>Health: {pokemon.hp}</p>

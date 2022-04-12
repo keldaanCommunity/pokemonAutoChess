@@ -35,7 +35,7 @@ class SelectedEntity extends Component {
             let pokemon = PokemonFactory.createPokemonFromName(this.props.entity);
             return <div className='nes-container' style={entityStyle}>
                 <div style={{display:'flex'}}>
-                    <img style={imgStyle} src={'assets/avatar/' + pokemon.name + '.png'}/>
+                    <img style={imgStyle} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/' + pokemon.name + '.png'}/>
                     <h3>{pokemon.name}</h3>
                 </div>
                 <p style={{color:RARITY_COLOR[pokemon.rarity]}}>rarity:{pokemon.rarity}</p>

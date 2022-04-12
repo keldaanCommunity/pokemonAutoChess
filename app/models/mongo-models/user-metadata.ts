@@ -42,7 +42,7 @@ const userMetadataSchema = new Schema(
       },
       avatar: {
         type: String,
-        default: 'rattata'
+        default: '0019/Normal'
       },
       wins: {
         type: Number,
