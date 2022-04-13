@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ITEM_NAME} from '../../../../../models/enum';
+import {ITEM_NAME, CDN_URL} from '../../../../../models/enum';
 
 class ItemStatistic extends Component{
 
@@ -24,7 +24,7 @@ class ItemStatistic extends Component{
                 <div style={{display:'flex'}}>
                     {this.props.item.pokemons.map(pokemon=>{
                         return <div style={{display:'flex', flexFlow:'column', alignItems: 'center'}} key={pokemon}>
-                        <img style={imgStyle} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/' + pokemon + '.png'}/>
+                        <img style={imgStyle} src={CDN_URL + pokemon + '.png'}/>
                     </div> 
                     })}
                 </div>

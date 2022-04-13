@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PRECOMPUTED_TYPE_POKEMONS_ALL } from '../../../../../models/enum';
+import { PRECOMPUTED_TYPE_POKEMONS_ALL, CDN_URL } from '../../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const pokemonPoolStyle = {
@@ -33,7 +33,7 @@ class PokemonPicker extends Component{
         {Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL).map((key)=>{
           return <TabPanel key={key} style={{display:'flex', flexWrap:'wrap'}}>
                 {PRECOMPUTED_TYPE_POKEMONS_ALL[key].map((pkm)=>{
-                  return <div onClick={()=>{this.props.selectEntity(pkm)}} key={pkm}><img style={imgStyle} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/' + pkm + '.png'}/></div>;
+                  return <div onClick={()=>{this.props.selectEntity(pkm)}} key={pkm}><img style={imgStyle} src={CDN_URL + pkm + '.png'}/></div>;
                 })}
             </TabPanel>
         })}

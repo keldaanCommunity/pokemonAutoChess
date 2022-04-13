@@ -82,7 +82,7 @@ export const networkSlice = createSlice({
             state.lobby.send('name', {'name': action.payload});
         },
         changeAvatar: (state, action: PayloadAction<{index: string, emotion: Emotion, shiny: boolean}>) => {
-            state.lobby.send('avatar', {'pokemon': action.payload});
+            state.lobby.send('avatar', action.payload);
         },
         requestMeta: (state, action: PayloadAction<boolean>) => {
             state.lobby.send('meta');

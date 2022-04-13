@@ -2,6 +2,7 @@ import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import CSS from 'csstype';
 import { IDps } from '../../../../../types';
+import { CDN_URL } from '../../../../../models/enum';
 
 const imgStyle: CSS.Properties = {
     width:'40px',
@@ -22,7 +23,7 @@ const style: CSS.Properties = {
 
 export default function GameDps(props:{maxDamage: number, dps: IDps}) {
     return  <div style={style}>
-    <img style={imgStyle} src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${props.dps.name}.png`}/>
+    <img style={imgStyle} src={`${CDN_URL}${props.dps.name}.png`}/>
     <div style={{display:'flex', flexFlow:'column', justifyContent:'space-around', marginLeft:'5px', width:'100%'}}>
         <p style={{marginBottom:'-5px', marginLeft:'3px'}}>{props.dps.physicalDamage + props.dps.specialDamage + props.dps.trueDamage}</p>
         <ProgressBar className="nes-progress is-primary" style={progressStyle}>

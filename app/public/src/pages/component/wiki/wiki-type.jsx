@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PRECOMPUTED_TYPE_POKEMONS_ALL, TYPE_DETAILS, TYPE_TRADUCTION } from '../../../../../models/enum';
+import { PRECOMPUTED_TYPE_POKEMONS_ALL, TYPE_DETAILS, TYPE_TRADUCTION, CDN_URL } from '../../../../../models/enum';
 
 class WikiType extends Component {
   render() {
@@ -20,7 +20,7 @@ class WikiType extends Component {
         })}
         <div style={{display:'flex', flexWrap:'wrap'}}>
             {PRECOMPUTED_TYPE_POKEMONS_ALL[this.props.type].map(p=>{
-                return <img key={p} src={"https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/" + p + ".png"}></img>
+                return <img key={p} src={CDN_URL + p + ".png"}></img>
             })}
         </div>
     </div>;

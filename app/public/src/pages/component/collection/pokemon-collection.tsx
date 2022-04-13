@@ -1,6 +1,6 @@
 import CSS from 'csstype';
 import React, { useState } from 'react';
-import { TYPE } from '../../../../../models/enum';
+import { TYPE, CDN_URL } from '../../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import PokemonCarousel from './pokemon-carousel';
 import Modal from 'react-bootstrap/esm/Modal';
@@ -63,11 +63,11 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
             </Modal.Title>
             <Modal.Title>
                 <div style={{display:'flex', marginTop:'5px', marginBottom:'-10px', justifyContent:'center'}}><h3>{pConfig ? pConfig.dust: 0}</h3><img style={{width:'80px',height:'80px',imageRendering:'pixelated'}} 
-                src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${p.index.replace('-','/')}/Normal.png`}/></div>
+                src={`${CDN_URL}${p.index.replace('-','/')}/Normal.png`}/></div>
             </Modal.Title>
             <Modal.Title>
             <img 
-            src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${p.index.replace('-','/')}${pShinyPad}/${emotion}.png`}
+            src={`${CDN_URL}${p.index.replace('-','/')}${pShinyPad}/${emotion}.png`}
             style={{filter: pConfig ? 'grayscale(0)':'grayscale(1)', width:'80px', height:'80px', imageRendering:'pixelated'}}/>
             </Modal.Title>
         </Modal.Header>

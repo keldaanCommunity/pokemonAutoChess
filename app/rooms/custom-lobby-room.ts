@@ -15,6 +15,7 @@ import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
 import { Emotion, EmotionCost } from "../types";
+import { CDN_URL } from "../models/enum";
 
 const pastebin = new PastebinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
@@ -52,9 +53,9 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
           const dsEmbed = new MessageEmbed()
               .setTitle(`BOT ${bot.avatar} created by ${bot.author}`)
               .setURL(data)
-              .setAuthor(user.name, `https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/disthttps://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${user.avatar}.png`)
+              .setAuthor(user.name, `${CDN_URL}${user.avatar}.png`)
               .setDescription(`A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`)
-              .setThumbnail(`https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/disthttps://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${bot.avatar}.png`);
+              .setThumbnail(`${CDN_URL}${bot.avatar}.png`);
           client.send('pastebin-url', {url: data});
           try {
             this.discordWebhook.send({
@@ -210,10 +211,11 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       if(config){
         const emotionsToCheck = message.shiny ? config.shinyEmotions: config.emotions;
         if(emotionsToCheck.includes(message.emotion)){
-          UserMetadata.findOne({'uid': client.auth.uid}, (err: any, user: FilterQuery<IUserMetadata>)=>{
-            const shinyPad = message.shiny ? '0000/0001/' : '';
-            user.avatar = `${message.index}/${shinyPad}/${message.emotion}`;
-            user.save();
+          const shinyPad = message.shiny ? '0000/0001' : '';
+          user.avatar = `${message.index}/${shinyPad}/${message.emotion}`;
+          UserMetadata.findOne({'uid': client.auth.uid}, (err: any, u: FilterQuery<IUserMetadata>)=>{
+            u.avatar = `${message.index}/${shinyPad}/${message.emotion}`;
+            u.save();
           });
         }
       }
@@ -244,7 +246,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
           bots.forEach((bot, i) => {
             this.bots[bot.avatar] = bot;
             // console.log(bot.avatar, bot.elo);
-            this.state.botLeaderboard.push(new LeaderboardInfo(bot.avatar, bot.avatar, i + 1, bot.elo));
+            this.state.botLeaderboard.push(new LeaderboardInfo(bot.author, bot.avatar, i + 1, bot.elo));
           });
         });
         Meta.find({}, (err, docs) => {

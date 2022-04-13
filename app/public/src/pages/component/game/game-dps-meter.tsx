@@ -6,6 +6,7 @@ import GameRedDpsMeter from './game-red-dps-meter';
 import GameBlueHealDpsMeter from './game-blue-heal-dps-meter';
 import GameRedHealDpsMeter from './game-red-heal-dps-meter';
 import { useAppSelector } from '../../../hooks';
+import { CDN_URL } from '../../../../../models/enum';
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -35,9 +36,9 @@ export default function GameDpsMeter() {
     else{
         return <div className='nes-container hidden-scrollable' style={style}>
         <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
-            <img style={imgStyle} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/'+ avatar + '.png'}></img>
+            <img style={imgStyle} src={CDN_URL + avatar + '.png'}></img>
             <h2>Vs</h2>
-            <img style={imgStyle} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/'+ opponentAvatar + '.png'}></img>
+            <img style={imgStyle} src={CDN_URL + opponentAvatar + '.png'}></img>
         </div>
         <Tabs>
             <TabList style={{display:'flex', justifyContent:'space-evenly'}}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import PokemonFactory from '../../../../models/pokemon-factory';
-import {RARITY_COLOR, SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
+import {RARITY_COLOR, SPECIAL_SKILL_DESCRIPTION, CDN_URL} from '../../../../models/enum';
 import { Convert } from '../../../../types/ITracker';
 import tracker from '../../../../public/dist/client/assets/pokemons/tracker.json';
 const metadata = Convert.toITracker(JSON.stringify(tracker));
@@ -28,7 +28,7 @@ export default function PokemonDetail(props:{pokemon: string}) {
                       return <img key={'img'+type} src={'assets/types/'+type+'.png'}/>
                   })}
               </div>
-              <div>evolution: {pokemon.evolution == ''? 'No evolution': <img src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/'+pokemon.evolution+'.png'}/>}</div>
+              <div>evolution: {pokemon.evolution == ''? 'No evolution': <img src={CDN_URL+pokemon.evolution+'.png'}/>}</div>
           </div>
           <div style={{width: '30%'}}>
               <p>Health: {pokemon.hp}</p>

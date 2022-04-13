@@ -4,7 +4,7 @@ import UserMetadata, { IUserMetadata } from "../../models/mongo-models/user-meta
 import BotV2 from "../../models/mongo-models/bot-v2";
 import { Client } from "colyseus";
 import PreparationRoom from "../preparation-room";
-import { IMessage } from "../../types";
+import { Emotion, IMessage } from "../../types";
 import { BOT_DIFFICULTY } from "../../models/enum";
 
 export class OnJoinCommand extends Command<PreparationRoom, {
@@ -198,7 +198,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, {
       this.room.broadcast('messages', {
         'name': 'Server',
         'payload': `Bot ${ bot.avatar } added.`,
-        'avatar': 'magnemite',
+        'avatar': `0081/${Emotion.NORMAL}`,
         'time': Date.now()
       });
       }

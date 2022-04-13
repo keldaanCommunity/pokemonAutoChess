@@ -5,6 +5,7 @@ import CSS from 'csstype';
 import { IPlayer } from '../../../../../types';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { setCurrentPlayerId, setPlayer, setSynergies } from '../../../stores/GameStore';
+import { CDN_URL } from '../../../../../models/enum';
 
 const progressStyle: CSS.Properties = {
     height: '15px',
@@ -44,7 +45,7 @@ export default function GamePlayer(props:{player: IPlayer, color: string, click:
     }
     const dispatch = useAppDispatch();
     const players = useAppSelector(state=>state.network.game.state.players);
-    const opponent = props.player.opponentName != '' && props.player.opponentAvatar != ''? <img style={opponentStyle} src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${props.player.opponentAvatar}.png`}/>: null;
+    const opponent = props.player.opponentName != '' && props.player.opponentAvatar != ''? <img style={opponentStyle} src={`${CDN_URL}${props.player.opponentAvatar}.png`}/>: null;
 
     function playerClick(){
         props.click(props.player.id);
@@ -67,7 +68,7 @@ export default function GamePlayer(props:{player: IPlayer, color: string, click:
             place='left'>
         <GamePlayerDetail name={props.player.name} life={props.player.life} money={props.player.money} history={props.player.history}/>
     </ReactTooltip>
-        <img style={imgStyle} src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${props.player.avatar}.png`}/>
+        <img style={imgStyle} src={`${CDN_URL}${props.player.avatar}.png`}/>
         <progress style={progressStyle} className="nes-progress is-error" value={props.player.life} max="100"></progress>
         {opponent}
     </div>

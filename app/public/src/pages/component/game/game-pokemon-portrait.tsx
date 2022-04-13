@@ -1,7 +1,6 @@
 import React from 'react';
-import PokemonFactory from '../../../../../models/pokemon-factory';
 import {Pokemon} from '../../../../../models/colyseus-models/pokemon';
-import { COST } from '../../../../../models/enum';
+import { COST, CDN_URL } from '../../../../../models/enum';
 import { useAppDispatch } from '../../../hooks';
 import { shopClick } from '../../../stores/NetworkStore';
 import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata';
@@ -69,7 +68,7 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
 function getPath(pokemon: Pokemon, config: IPokemonConfig) {
     const index = pokemon.index;
     
-    let pokemonPath = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/';
+    let pokemonPath = CDN_URL;
     pokemonPath += index + '/';
 
     if(config && config.selectedShiny){

@@ -1,5 +1,5 @@
 import React from 'react';
-import {TYPE_DETAILS, TYPE_TRADUCTION, PRECOMPUTED_TYPE_POKEMONS, RARITY_COLOR} from '../../../../../models/enum';
+import {TYPE_DETAILS, TYPE_TRADUCTION, PRECOMPUTED_TYPE_POKEMONS, RARITY_COLOR, CDN_URL} from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 
 export default function GameSynergyDetail(props:{type: string, value: number}) {
@@ -20,13 +20,13 @@ export default function GameSynergyDetail(props:{type: string, value: number}) {
    <div style={{display:'flex'}}>
    {PRECOMPUTED_TYPE_POKEMONS[props.type].pokemons.map(p=>{
        const s = {border : '3px solid ' + RARITY_COLOR[PokemonFactory.getPokemonRarityFromName(p)]};
-       return <img key={p} style={s} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/' + p + '.png'}/>    
+       return <img key={p} style={s} src={CDN_URL + p + '.png'}/>    
    })}
    </div>
    <div style={{display:'flex', marginTop:'10px'}}>
    {PRECOMPUTED_TYPE_POKEMONS[props.type].mythicalPokemons.map(p=>{
        const s = {border : '3px solid ' + RARITY_COLOR[PokemonFactory.getPokemonRarityFromName(p)]};
-       return <img key={p} style={s} src={'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/' + p + '.png'}/>    
+       return <img key={p} style={s} src={CDN_URL + p + '.png'}/>    
    })}
    </div>
 </div>

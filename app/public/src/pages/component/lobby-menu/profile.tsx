@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { XP_TABLE } from '../../../../../models/enum';
+import { XP_TABLE, CDN_URL } from '../../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Elo from '../elo';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
@@ -18,7 +18,7 @@ export default function Profile() {
     return(
         <div>
         <div style={{display:'flex', alignItems: 'center'}}>
-            <img src={"https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/" + user.avatar + ".png"}/>
+            <img src={CDN_URL + user.avatar + ".png"}/>
             <h5>{user.name}</h5>
         </div>
         <p>Level {user.level} ({user.exp} / {XP_TABLE[user.level]})</p>
@@ -50,7 +50,7 @@ export default function Profile() {
                             (pokemonConfig)=>{
                                 return pokemonConfig.emotions.map(
                                     (emotion) => {
-                                        return <img style={cursorStyle} onClick={()=>{dispatch(changeAvatar({index: pokemonConfig.id, emotion: emotion, shiny: false}))}} src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${pokemonConfig.id.replace('-','/')}/${emotion}.png`}></img>
+                                        return <img key={`normal-${pokemonConfig.id}${emotion}`} style={cursorStyle} onClick={()=>{dispatch(changeAvatar({index: pokemonConfig.id, emotion: emotion, shiny: false}))}} src={`${CDN_URL}${pokemonConfig.id.replace('-','/')}/${emotion}.png`}></img>
                                     }
                                 )
                             }
@@ -59,7 +59,7 @@ export default function Profile() {
                             (pokemonConfig)=>{
                                 return pokemonConfig.shinyEmotions.map(
                                     (emotion) => {
-                                        return <img style={cursorStyle} onClick={()=>{dispatch(changeAvatar({index: pokemonConfig.id, emotion: emotion, shiny: false}))}} src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${pokemonConfig.id.replace('-','/')}/0000/0001/${emotion}.png`}></img>
+                                        return <img key={`shiny-${pokemonConfig.id}${emotion}`} style={cursorStyle} onClick={()=>{dispatch(changeAvatar({index: pokemonConfig.id, emotion: emotion, shiny: true}))}} src={`${CDN_URL}${pokemonConfig.id.replace('-','/')}/0000/0001/${emotion}.png`}></img>
                                     }
                                 )
                             }

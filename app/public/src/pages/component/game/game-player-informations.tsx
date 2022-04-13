@@ -1,6 +1,7 @@
 import React from 'react';
 import CSS from 'csstype';
 import { useAppSelector } from '../../../hooks';
+import { CDN_URL } from '../../../../../models/enum';
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -46,7 +47,7 @@ export default function GamePlayerInformations(){
         opponent = 
         <div style={{display:'flex'}}>
             <p>Vs</p>
-            <img src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${opponentAvatar}.png`}/>
+            <img src={`${CDN_URL}${opponentAvatar}.png`}/>
             <p style={{marginLeft:'5px'}}>{opponentName}</p>
         </div>;
     }
@@ -62,7 +63,7 @@ export default function GamePlayerInformations(){
                 <img style={{width:'25px', height:'25px', marginBottom:'5px'}} src={`assets/ui/${getLifePngName()}.png`}/>
             </div>
             <div style={{display:'flex'}}>
-                <img src={`https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${avatar}.png`}/>
+                <img src={`${CDN_URL}${avatar}.png`}/>
                 <p style={{marginLeft:'5px'}}>{name}</p>
             </div>
             {opponent}

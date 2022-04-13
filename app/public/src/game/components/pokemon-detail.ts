@@ -1,5 +1,5 @@
 import {GameObjects} from 'phaser';
-import {ATTACK_TYPE, SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
+import {ATTACK_TYPE, CDN_URL, SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
 import { Emotion } from '../../../../types';
 
 export default class PokemonDetail extends GameObjects.DOMElement {
@@ -86,7 +86,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   
     const avatar = document.createElement('img');
     const shinyPad = shiny ? '/0000/0001/' : '';
-    avatar.src = `https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/${index.replace('-','/')}${shinyPad}/${emotion}.png`;
+    avatar.src = `${CDN_URL}${index.replace('-','/')}${shinyPad}/${emotion}.png`;
 
     const profile = document.createElement('div');
     profile.style.display = 'flex';

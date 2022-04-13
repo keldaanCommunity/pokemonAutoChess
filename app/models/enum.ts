@@ -5608,3 +5608,5 @@ export const ITEM_RECIPE = {
   MAX_REVIVE: [ITEM.CHARCOAL, ITEM.HEART_SCALE],
   ROCKY_HELMET: [ITEM.HEART_SCALE, ITEM.HEART_SCALE]
 };
+
+export const CDN_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/';

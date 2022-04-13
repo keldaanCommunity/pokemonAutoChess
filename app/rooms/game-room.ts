@@ -262,8 +262,11 @@ export default class GameRoom extends Room {
 
     player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.positionY != 0) {
+        const shinyPad = pokemon.shiny ? '/0000/0001' : ''; 
+        const avatar = `${pokemon.index}${shinyPad}/${pokemon.emotion}`;
         const s = {
           name: pokemon.name,
+          avatar: avatar,
           items: []
         };
         pokemon.items.forEach((i)=>{

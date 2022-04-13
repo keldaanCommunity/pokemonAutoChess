@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { PRECOMPUTED_RARITY_POKEMONS_ALL } from '../../../../../models/enum';
+import { PRECOMPUTED_RARITY_POKEMONS_ALL, CDN_URL } from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import PokemonDetail from '../pokemon-detail';
 
@@ -12,7 +12,7 @@ class PokemonWiki extends Component {
             {PRECOMPUTED_RARITY_POKEMONS_ALL[this.props.rarity].map((pkm=>{
                 let pokemon = PokemonFactory.createPokemonFromName(pkm);
                 return <Tab key={'title-' + pkm}>
-                    <img src={"https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/" + pokemon.name + ".png"}></img>
+                    <img src={CDN_URL + pokemon.name + ".png"}></img>
                 </Tab>
             }))}
         </TabList>
