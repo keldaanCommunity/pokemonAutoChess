@@ -1,6 +1,7 @@
 import React from 'react';
 import {TYPE_DETAILS, TYPE_TRADUCTION, PRECOMPUTED_TYPE_POKEMONS, RARITY_COLOR, CDN_URL} from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
+import { Emotion } from '../../../../../types';
 
 export default function GameSynergyDetail(props:{type: string, value: number}) {
     return <div>
@@ -19,14 +20,16 @@ export default function GameSynergyDetail(props:{type: string, value: number}) {
     })}
    <div style={{display:'flex'}}>
    {PRECOMPUTED_TYPE_POKEMONS[props.type].pokemons.map(p=>{
-       const s = {border : '3px solid ' + RARITY_COLOR[PokemonFactory.getPokemonRarityFromName(p)]};
-       return <img key={p} style={s} src={CDN_URL + p + '.png'}/>    
+       const pokemon = PokemonFactory.createPokemonFromName(p);
+       const s = {border : '3px solid ' + RARITY_COLOR[pokemon.rarity]};
+       return <img key={p} style={s} src={`${CDN_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>    
    })}
    </div>
    <div style={{display:'flex', marginTop:'10px'}}>
    {PRECOMPUTED_TYPE_POKEMONS[props.type].mythicalPokemons.map(p=>{
-       const s = {border : '3px solid ' + RARITY_COLOR[PokemonFactory.getPokemonRarityFromName(p)]};
-       return <img key={p} style={s} src={CDN_URL + p + '.png'}/>    
+       const pokemon = PokemonFactory.createPokemonFromName(p);
+       const s = {border : '3px solid ' + RARITY_COLOR[pokemon.rarity]};
+       return <img key={p} style={s} src={`${CDN_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>   
    })}
    </div>
 </div>

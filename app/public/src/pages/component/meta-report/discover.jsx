@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
 import {CDN_URL} from '../../../../../models/enum';
+import PokemonFactory from '../../../../../models/pokemon-factory';
+import { Emotion } from '../../../../../types';
 
 class Discover extends Component{
 
@@ -44,7 +46,7 @@ class Discover extends Component{
                         <p>Rank: ${self.props.meta[seriesIndex].teams[dataPointIndex].rank}</p>
                         <p>Cluster Size: ${self.props.meta[seriesIndex].count}</p>
                         <div style='display:flex'><p>Cluster</p> ${Object.keys(self.props.meta[seriesIndex].types).reduce((prev, curr)=>{return prev + '<div style=' + self.typeStyle + '><img src="assets/types/'+ curr.toUpperCase() +'.png"/><p>'+ self.props.meta[seriesIndex].types[curr] +'</p></div>'},'')}</div>
-                        ${Object.keys(self.props.meta[seriesIndex].teams[dataPointIndex].pokemons).reduce((prev, curr)=>{return prev + '<img src=' + CDN_URL + curr +'.png"/>'},'')}
+                        ${Object.keys(self.props.meta[seriesIndex].teams[dataPointIndex].pokemons).reduce((prev, curr)=>{return prev + '<img src=' + `"${CDN_URL}${PokemonFactory.createPokemonFromName(curr).index.replace('-','/')}/${Emotion.NORMAL}.png"` + '/>'},'')}
                         </div>
                     </div>`)
                 }

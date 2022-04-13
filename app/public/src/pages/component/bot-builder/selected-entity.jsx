@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ITEM, PKM, RARITY_COLOR, ITEM_DESCRIPTION, ITEM_NAME, CDN_URL } from '../../../../../models/enum';
+import {Emotion} from '../../../../../types';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 
 class SelectedEntity extends Component {
@@ -35,7 +36,7 @@ class SelectedEntity extends Component {
             let pokemon = PokemonFactory.createPokemonFromName(this.props.entity);
             return <div className='nes-container' style={entityStyle}>
                 <div style={{display:'flex'}}>
-                    <img style={imgStyle} src={CDN_URL + pokemon.name + '.png'}/>
+                    <img style={imgStyle} src={`${CDN_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>
                     <h3>{pokemon.name}</h3>
                 </div>
                 <p style={{color:RARITY_COLOR[pokemon.rarity]}}>rarity:{pokemon.rarity}</p>
