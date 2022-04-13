@@ -26,9 +26,11 @@ interface IUserLobbyState {
     botData: IBot;
     synergies: ISynergies;
     pokemonCollection: IPokemonConfig[];
+    boosterContent: string[];
 }
 
 const initialState: IUserLobbyState = {
+    boosterContent: [],
     pokemonCollection: [],
     messages : [],
     users : [],
@@ -257,11 +259,15 @@ export const lobbySlice = createSlice({
         setSynergies: (state, action: PayloadAction<ISynergies>) => {
             state.synergies = action.payload;
         },
+        setBoosterContent: (state, action: PayloadAction<string[]>) => {
+          state.boosterContent = action.payload;
+        },
         leaveLobby: () => initialState
     }
 });
 
 export const {
+    setBoosterContent,
     addPokemonConfig,
     changePokemonConfig,
     pushMessage,

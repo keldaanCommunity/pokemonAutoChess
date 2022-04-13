@@ -21,7 +21,7 @@ export default function Profile() {
             <img src={CDN_URL + user.avatar + ".png"}/>
             <h5>{user.name}</h5>
         </div>
-        <p>Level {user.level} ({user.exp} / {XP_TABLE[user.level]})</p>
+        <p>Level {user.level} ({user.exp} / 1000)</p>
         <p>Langage: {user.langage}</p>
         <div style={{display:'flex', alignItems:'center'}}>Elo: <Elo elo={user.elo}/></div>
         <p>Wins: {user.wins}</p>

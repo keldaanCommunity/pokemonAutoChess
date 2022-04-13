@@ -15,7 +15,9 @@ import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
 import { Emotion, EmotionCost } from "../types";
-import { CDN_URL } from "../models/enum";
+import { CDN_URL, PKM } from "../models/enum";
+import PokemonFactory from "../models/pokemon-factory";
+import PokemonConfig from "../models/colyseus-models/pokemon-config";
 
 const pastebin = new PastebinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
@@ -91,6 +93,35 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
     this.onMessage('meta', (client, message)=>{
       client.send('meta', this.meta);
       client.send('metaItems', this.metaItems);
+    });
+
+    this.onMessage('open-booster', (client, message)=>{
+      const user: LobbyUser = this.state.users.get(client.auth.uid);
+      if(user.booster && user.booster > 0) {
+        user.booster -= 1;
+        const keys = Object.keys(PKM);
+        const boosterIndex: string[] = [];
+        let i = 5;
+        while(i > 0){
+          const k = keys[Math.floor(Math.random() * keys.length)];
+          const p = PokemonFactory.createPokemonFromName(PKM[k]);
+          if(p.name != PKM.MAGIKARP){
+            boosterIndex.push(p.index);     
+            i--;
+          }
+        }
+
+        boosterIndex.forEach(i=>{
+          if(user.pokemonCollection.has(i)){
+            user.pokemonCollection.get(i).dust += 40;
+          }
+          else{
+            user.pokemonCollection.set(i, new PokemonConfig(i));
+            user.pokemonCollection.get(i).dust += 40;
+          }
+        });
+        client.send('booster-content',boosterIndex);
+      }
     });
 
     this.onMessage('map', (client, message) => {
@@ -196,7 +227,8 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
                   user.donor,
                   stats.map(r=>{return new GameRecord(r.time, r.rank, r.elo, r.pokemons)}),
                   user.honors,
-                  user.pokemonCollection));
+                  user.pokemonCollection,
+                  user.booster));
             }
           });
         } else {
@@ -306,13 +338,15 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
                 user.donor,
                 records,
                 user.honors,
-                user.pokemonCollection));
+                user.pokemonCollection,
+                user.booster));
           }
         });
       } else {
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName,
+          booster: 10,
           pokemonCollection: new Map<string,IPokemonConfig>([["0004",{id:"0004", dust: 200, selectedShiny: false, selectedEmotion: Emotion.INSPIRED, emotions: [Emotion.ANGRY, Emotion.DETERMINED], shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}]])
         });
         this.state.users.set(client.auth.uid, new LobbyUser(
@@ -338,7 +372,8 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
                   shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}
                 ]
               ]
-            )
+            ),
+            10
         ));
       }
     });

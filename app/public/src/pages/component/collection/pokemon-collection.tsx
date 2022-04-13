@@ -13,8 +13,6 @@ import { Convert } from '../../../../../types/ITracker';
 import { Emotion } from '../../../../../types';
 import PokemonEmotion from './pokemon-emotion';
 
-
-
 const buttonStyle: CSS.Properties = {
     marginLeft:'10px',
     marginTop:'10px',

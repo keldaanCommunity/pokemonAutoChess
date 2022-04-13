@@ -18,7 +18,8 @@ export interface ILobbyUser {
   donor: boolean;
   honors: string[];
   history: IGameRecord[];
-  pokemonCollection: Map<string, IPokemonConfig>
+  pokemonCollection: Map<string, IPokemonConfig>;
+  booster: number;
 }
 export default class LobbyUser extends Schema implements ILobbyUser{
   @type('string') id: string;
@@ -35,6 +36,7 @@ export default class LobbyUser extends Schema implements ILobbyUser{
   @type(['string']) honors = new ArraySchema<string>();
   @type([GameRecord]) history = new ArraySchema<IGameRecord>();
   @type({map: PokemonConfig}) pokemonCollection = new PokemonCollection();
+  @type('uint16') booster: number;
 
 
   constructor(id:string,
@@ -48,7 +50,8 @@ export default class LobbyUser extends Schema implements ILobbyUser{
     donor: boolean,
     history: GameRecord[],
     honors: string[],
-    pokemonCollection: Map<string,IPokemonConfig>) {
+    pokemonCollection: Map<string,IPokemonConfig>,
+    booster: number) {
 
     super();
     this.id = id;
@@ -60,6 +63,7 @@ export default class LobbyUser extends Schema implements ILobbyUser{
     this.exp = exp;
     this.level = level;
     this.donor = donor;
+    this.booster = booster;
 
     if(history && history.length && history.length != 0) {
       history.forEach((h)=>{

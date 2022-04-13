@@ -208,12 +208,10 @@ export default class GameRoom extends Room {
             if (err) {
               console.log(err);
             } else {
-              let expThreshold = XP_TABLE[usr.level];
-              if (expThreshold === undefined) {
-                expThreshold = XP_TABLE[XP_TABLE.length - 1];
-              }
+              const expThreshold = 1000;
               if (usr.exp + player.exp >= expThreshold) {
                 usr.level += 1;
+                usr.booster += 1;
                 usr.exp = usr.exp + player.exp - expThreshold;
               } else {
                 usr.exp = usr.exp + player.exp;

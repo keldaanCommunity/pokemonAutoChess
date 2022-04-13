@@ -134,11 +134,15 @@ export const networkSlice = createSlice({
         },
         buyEmotion: (state, action: PayloadAction<{index: string, emotion:Emotion, shiny: boolean}>) => {
             state.lobby.send('buy-emotion', action.payload);
+        },
+        openBooster: (state) => {
+            state.lobby.send('open-booster');
         }
     }
 });
 
 export const {
+    openBooster,
     changeSelectedEmotion,
     buyEmotion,
     changeRoomName,

@@ -17,6 +17,7 @@ export interface IUserMetadata {
   map: MapTileset;
   honors: string[];
   pokemonCollection: Map<string, IPokemonConfig>;
+  booster: number;
 }
 
 export interface IPokemonConfig {
@@ -63,6 +64,10 @@ const userMetadataSchema = new Schema(
       donor: {
         type: Boolean,
         default: false
+      },
+      booster: {
+        type: Number,
+        default: 0
       },
       mapWin: {
         ICE: {
