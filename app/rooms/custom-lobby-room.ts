@@ -120,6 +120,20 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
             user.pokemonCollection.get(i).dust += 40;
           }
         });
+
+        UserMetadata.findOne({'uid': client.auth.uid}, (err, u: FilterQuery<IUserMetadata>)=>{
+          u.booster = user.booster;
+          boosterIndex.forEach(i=>{
+            if(u.pokemonCollection.has(i)){
+              u.pokemonCollection.get(i).dust += 40;
+            }
+            else{
+              u.pokemonCollection.set(i, {id: i, emotions:[], shinyEmotions:[], dust: 0, selectedEmotion: Emotion.NORMAL, selectedShiny: false });
+              u.pokemonCollection.get(i).dust += 40;
+            }
+          });
+          u.save();
+        });
         client.send('booster-content',boosterIndex);
       }
     });
@@ -346,8 +360,8 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName,
-          booster: 10,
-          pokemonCollection: new Map<string,IPokemonConfig>([["0004",{id:"0004", dust: 200, selectedShiny: false, selectedEmotion: Emotion.INSPIRED, emotions: [Emotion.ANGRY, Emotion.DETERMINED], shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}]])
+          booster: 30,
+          pokemonCollection: new Map<string,IPokemonConfig>()
         });
         this.state.users.set(client.auth.uid, new LobbyUser(
             client.auth.uid,
@@ -361,19 +375,8 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
             false,
             [],
             [],
-            new Map<string,IPokemonConfig>(
-              [
-                ["0004",{
-                  id:"0004",
-                  dust: 200,
-                  selectedShiny: false,
-                  selectedEmotion: Emotion.INSPIRED,
-                  emotions: [Emotion.ANGRY, Emotion.DETERMINED],
-                  shinyEmotions: [Emotion.DIZZY, Emotion.HAPPY]}
-                ]
-              ]
-            ),
-            10
+            new Map<string,IPokemonConfig>(),
+            30
         ));
       }
     });
