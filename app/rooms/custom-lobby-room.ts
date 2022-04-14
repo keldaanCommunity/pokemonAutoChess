@@ -202,7 +202,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
             const pokemonConfig = user.pokemonCollection.get(message.index);
             const emotionsToCheck = message.shiny ? pokemonConfig.shinyEmotions: pokemonConfig.emotions;
             const cost = message.shiny ? EmotionCost[message.emotion] * 3: EmotionCost[message.emotion];
-            if(!emotionsToCheck.includes(message.emotion) && pokemonConfig.dust > cost){
+            if(!emotionsToCheck.includes(message.emotion) && pokemonConfig.dust >= cost){
                 emotionsToCheck.push(message.emotion);
                 pokemonConfig.dust -= cost;
                 pokemonConfig.selectedEmotion = message.emotion;
@@ -357,10 +357,11 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
           }
         });
       } else {
+        const numberOfBoosters = 3;
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName,
-          booster: 30,
+          booster: numberOfBoosters,
           pokemonCollection: new Map<string,IPokemonConfig>()
         });
         this.state.users.set(client.auth.uid, new LobbyUser(
@@ -376,7 +377,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
             [],
             [],
             new Map<string,IPokemonConfig>(),
-            30
+            numberOfBoosters
         ));
       }
     });

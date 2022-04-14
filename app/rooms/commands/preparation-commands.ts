@@ -4,8 +4,9 @@ import UserMetadata, { IUserMetadata } from "../../models/mongo-models/user-meta
 import BotV2 from "../../models/mongo-models/bot-v2";
 import { Client } from "colyseus";
 import PreparationRoom from "../preparation-room";
-import { Emotion, IMessage } from "../../types";
+import { Emotion, IMessage, PokemonIndex } from "../../types";
 import { BOT_DIFFICULTY } from "../../models/enum";
+import PokemonFactory from '../../models/pokemon-factory';
 
 export class OnJoinCommand extends Command<PreparationRoom, {
   client: Client,
@@ -123,10 +124,15 @@ export class InitializeBotsCommand extends Command<PreparationRoom, {
                 if (!bots) {
                   return;
                 }
+                console.log(bots.length);
                 bots.forEach((bot) => {
+                  const index = bot.avatar.split('/')[0];
+                  const v = Object.values(PokemonIndex);
+                  const vIndex = v.findIndex(e=>e==index);
+                  const k = Object.keys(PokemonIndex)[vIndex];
                   this.state.users.set(bot.avatar, new GameUser(
-                      bot.avatar,
-                      bot.avatar,
+                      k,
+                      k,
                       bot.elo,
                       bot.avatar,
                       true,
@@ -186,9 +192,14 @@ export class OnAddBotCommand extends Command<PreparationRoom, {
         return;
       }
       else{
+        const index = bot.avatar.split('/')[0];
+        const v = Object.values(PokemonIndex);
+        const vIndex = v.findIndex(e=>e==index);
+        const k = Object.keys(PokemonIndex)[vIndex];
+
         this.state.users.set(bot.avatar, new GameUser(
-          bot.avatar,
-          bot.avatar,
+          k,
+          k,
           bot.elo,
           bot.avatar,
           true,

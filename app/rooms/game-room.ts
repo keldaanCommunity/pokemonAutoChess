@@ -11,7 +11,7 @@ import EloRank from 'elo-rank';
 import admin from 'firebase-admin';
 import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2';
 import { Pokemon } from '../models/colyseus-models/pokemon';
-import { IPokemon } from '../types';
+import { IPokemon, PokemonIndex } from '../types';
 import PokemonConfig from '../models/colyseus-models/pokemon-config';
 
 export default class GameRoom extends Room {
@@ -225,7 +225,7 @@ export default class GameRoom extends Room {
                 if (elo) {
                   usr.elo = elo;
                 }
-                console.log(usr);
+                //console.log(usr);
                 // usr.markModified('metadata';
                 usr.save();
 
@@ -444,7 +444,7 @@ export default class GameRoom extends Room {
               count -= 1;
             }
           });
-          const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName);
+          const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName, player.pokemonCollection.get(PokemonIndex[pokemonEvolutionName]));
           for (let i = 0; i < 3; i++) {
             const itemToAdd = itemsToAdd.pop();
             if (itemToAdd) {

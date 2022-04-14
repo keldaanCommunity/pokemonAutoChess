@@ -39,7 +39,7 @@ export default function GameDpsMeter() {
         <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
             <img style={imgStyle} src={CDN_URL + avatar + '.png'}></img>
             <h2>Vs</h2>
-            <img style={imgStyle} src={`${CDN_URL}${PokemonIndex[opponentAvatar]}/${Emotion.NORMAL}.png`}></img>
+            <img style={imgStyle} src={CDN_URL + opponentAvatar + '.png'}></img>
         </div>
         <Tabs>
             <TabList style={{display:'flex', justifyContent:'space-evenly'}}>

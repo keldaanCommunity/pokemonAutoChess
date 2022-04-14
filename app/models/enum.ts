@@ -1,3 +1,6 @@
+import PokemonFactory from "./pokemon-factory";
+import {Emotion} from "../types";
+
 export enum BOT_DIFFICULTY {
   EASY = "EASY",
   MEDIUM = "MEDIUM",
@@ -4250,55 +4253,55 @@ export const BATTLE_RESULT = Object.freeze({
 export const NEUTRAL_STAGE = [
   {
     turn: 1,
-    avatar: PKM.MAGIKARP
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.MAGIKARP).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 2,
-    avatar: PKM.RATICATE
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.RATICATE).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 3,
-    avatar: PKM.FEAROW
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.FEAROW).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 10,
-    avatar: PKM.GYARADOS
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.GYARADOS).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 15,
-    avatar: PKM.LUGIA
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.LUGIA).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 20,
-    avatar: PKM.GIRATINA
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.GIRATINA).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 25,
-    avatar: PKM.ZAPDOS
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.ZAPDOS).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 30,
-    avatar: PKM.DIALGA
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.DIALGA).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 35,
-    avatar: PKM.SUICUNE
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.SUICUNE).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 40,
-    avatar: PKM.REGICE
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.REGICE).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 45,
-    avatar: PKM.RAYQUAZA
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.RAYQUAZA).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 50,
-    avatar: PKM.RAYQUAZA
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.RAYQUAZA).index.replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 55,
-    avatar: PKM.RAYQUAZA
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.RAYQUAZA).index.replace('-','/')}/${Emotion.NORMAL}`
   }];
 
 export const FLYING_PROTECT_THRESHOLD = Object.freeze({
