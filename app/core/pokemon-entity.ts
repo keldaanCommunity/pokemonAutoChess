@@ -15,6 +15,7 @@ import { IPokemonEntity, IPokemon } from '../types';
 import { AttackType, Rarity } from '../types/enum/Game';
 import { Effect } from '../types/enum/Effect';
 import { Ability } from '../types/enum/Ability';
+import { Synergy } from '../types/enum/Synergy';
 
 export default class PokemonEntity extends Schema implements IPokemonEntity{
 
@@ -46,7 +47,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('string') name: string;
   @type(['uint8']) effects = new ArraySchema<Effect>();
   @type({set: 'string'}) items = new SetSchema<string>();
-  @type(['string']) types = new ArraySchema<string>();
+  @type(['string']) types = new ArraySchema<Synergy>();
   @type('uint8') stars: number;
   @type('uint8')  skill: Ability;
   @type(Status) status: Status;

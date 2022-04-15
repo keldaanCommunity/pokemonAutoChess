@@ -13,6 +13,7 @@ import Synergies from '../models/colyseus-models/synergies'
 import { AttackType, Orientation, PokemonActionState, Rarity } from './enum/Game'
 import { Effect } from './enum/Effect'
 import { Ability } from './enum/Ability'
+import { Synergy } from './enum/Synergy'
 
 export interface IMessage {
     name: string
@@ -65,7 +66,7 @@ export interface IPlayer {
 export interface IPokemon {
     id: string
     name: string
-    types: string[]
+    types: Synergy[]
     rarity: Rarity
     sheet: string
     index: number
@@ -89,32 +90,9 @@ export interface IPokemon {
     fossilTimer: number
 }
 
-export interface ISynergies {
-    NORMAL: number;
-    GRASS: number;
-    FIRE: number;
-    WATER: number;
-    ELECTRIC: number;
-    FIGHTING: number;
-    PSYCHIC: number;
-    DARK: number;
-    METAL: number;
-    GROUND: number;
-    POISON: number;
-    DRAGON: number;
-    FIELD: number;
-    MONSTER: number;
-    HUMAN: number;
-    AQUATIC: number;
-    BUG: number;
-    FLYING: number;
-    FLORA: number;
-    MINERAL: number;
-    GHOST: number;
-    FAIRY: number;
-    ICE: number;
-    FOSSIL: number;
-    SOUND: number;
+export interface ISynergies {  
+    syns: MapSchema<number>
+    
   }
 
 export interface IExperienceManager {
@@ -192,7 +170,7 @@ export interface IPokemonEntity {
   name: string
   effects: Effect[]
   items: SetSchema<string>
-  types: string[]
+  types: Synergy[]
   stars: number
   skill: Ability
   status: Status

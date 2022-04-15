@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { GamePhaseState } from "../../../types/enum/Game";
-import { IDps, IDpsHeal, IPlayer } from "../../../types";
+import { IDps, IDpsHeal, IPlayer, ISynergies } from "../../../types";
 import {ArraySchema, DataChange} from "@colyseus/schema";
 import ExperienceManager from "../../../models/colyseus-models/experience-manager";
 import Synergies from "../../../models/colyseus-models/synergies";
+
 
 interface GameStateStore {
     afterGameId: string
@@ -20,7 +21,7 @@ interface GameStateStore {
     experienceManager: ExperienceManager
     shop: ArraySchema<string>
     itemsProposition: ArraySchema<string>
-    currentPlayerSynergies: Synergies
+    currentPlayerSynergies: ISynergies
     currentPlayerOpponentName: string
     currentPlayerOpponentAvatar: string
     currentPlayerBoardSize: number
@@ -117,8 +118,8 @@ export const gameSlice = createSlice({
         setItemsProposition: (state, action: PayloadAction<ArraySchema<string>>) => {
             state.itemsProposition = JSON.parse(JSON.stringify(action.payload));
         },
-        setSynergies: (state, action: PayloadAction<Synergies>) => {
-            state.currentPlayerSynergies = JSON.parse(JSON.stringify(action.payload));
+        setSynergies: (state, action: PayloadAction<Synergies>) => {            
+            state.currentPlayerSynergies = JSON.parse(JSON.stringify(action.payload.syns));
         },
         setOpponentName: (state, action: PayloadAction<string>) => {
             state.currentPlayerOpponentName = action.payload;

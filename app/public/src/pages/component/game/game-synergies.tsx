@@ -22,6 +22,8 @@ export default function GameSynergies(props:{source: string}) {
     const synergies = props.source == 'game'? useAppSelector(state=>state.game.currentPlayerSynergies) : useAppSelector(state=>state.lobby.synergies);
 
     if(synergies){
+        // console.log(Object.keys(synergies))
+
         return <div style={style} className='nes-container hidden-scrollable'>
             <h5 style={{padding:'10px', textAlign: 'center'}}>Synergies</h5>
         {Object.keys(synergies).sort((a,b)=>{

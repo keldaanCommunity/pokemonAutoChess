@@ -5,13 +5,14 @@ import Player from '../models/colyseus-models/player';
 import UserMetadata, { IUserMetadata } from '../models/mongo-models/user-metadata';
 import BOT from '../models/mongo-models/bot-v2';
 import {OnShopCommand, OnItemCommand, OnSellDropCommand, OnRefreshCommand, OnLockCommand, OnLevelUpCommand, OnUpdateCommand, OnDragDropCommand, OnJoinCommand} from './commands/game-commands';
-import {XP_PLACE, XP_TABLE, PKM, BASIC_ITEM, ITEM, TYPE} from '../models/enum';
+import {XP_PLACE, XP_TABLE, PKM, BASIC_ITEM, ITEM} from '../models/enum';
 import PokemonFactory from '../models/pokemon-factory';
 import EloRank from 'elo-rank';
 import admin from 'firebase-admin';
 import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2';
 import { Pokemon } from '../models/colyseus-models/pokemon';
 import { IPokemon } from '../types';
+import { Synergy } from '../types/enum/Synergy';
 
 export default class GameRoom extends Room {
   dispatcher: Dispatcher<this>;
@@ -452,31 +453,31 @@ export default class GameRoom extends Room {
                 pokemonEvolved.items.add(itemToAdd);
                 switch (itemToAdd) {
                   case ITEM.WATER_STONE:
-                    pokemonEvolved.types.push(TYPE.WATER);
+                    pokemonEvolved.types.push(Synergy.WATER);
                     break;
                   case ITEM.FIRE_STONE:
-                    pokemonEvolved.types.push(TYPE.FIRE);
+                    pokemonEvolved.types.push(Synergy.FIRE);
                     break;
                   case ITEM.THUNDER_STONE:
-                    pokemonEvolved.types.push(TYPE.ELECTRIC);
+                    pokemonEvolved.types.push(Synergy.ELECTRIC);
                     break;
                   case ITEM.DUSK_STONE:
-                    pokemonEvolved.types.push(TYPE.DARK);
+                    pokemonEvolved.types.push(Synergy.DARK);
                     break;
                   case ITEM.MOON_STONE:
-                    pokemonEvolved.types.push(TYPE.FAIRY);
+                    pokemonEvolved.types.push(Synergy.FAIRY);
                     break;
                   case ITEM.LEAF_STONE:
-                    pokemonEvolved.types.push(TYPE.GRASS);
+                    pokemonEvolved.types.push(Synergy.GRASS);
                     break;
                   case ITEM.DAWN_STONE:
-                    pokemonEvolved.types.push(TYPE.PSYCHIC);
+                    pokemonEvolved.types.push(Synergy.PSYCHIC);
                     break;
                   case ITEM.ICY_ROCK:
-                    pokemonEvolved.types.push(TYPE.ICE);
+                    pokemonEvolved.types.push(Synergy.ICE);
                     break;
                   case ITEM.OLD_AMBER:
-                    pokemonEvolved.types.push(TYPE.FOSSIL);
+                    pokemonEvolved.types.push(Synergy.FOSSIL);
                     break;
                 }
               }

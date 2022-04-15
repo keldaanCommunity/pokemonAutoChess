@@ -1,9 +1,9 @@
-import {TYPE} from '../models/enum';
 import { Orientation } from '../types/enum/Game';
 import Board from './board';
 import PokemonEntity from './pokemon-entity';
 import PokemonState from './pokemon-state';
 import { PokemonActionState } from '../types/enum/Game';
+import { Synergy } from '../types/enum/Synergy';
 
 export default class MovingState extends PokemonState {
 
@@ -32,7 +32,7 @@ export default class MovingState extends PokemonState {
 
     let x: number;
     let y: number;
-    if (pokemon.types.includes(TYPE.FOSSIL)) {
+    if (pokemon.types.includes(Synergy.FOSSIL)) {
       const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
       x = farthestCoordinate[0];
       y = farthestCoordinate[1];

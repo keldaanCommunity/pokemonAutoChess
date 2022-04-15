@@ -992,8 +992,8 @@ export default class Pokemon extends Button {
       pokemon.effects.forEach((effect, c) => {
         
         if (EFFECTS_ICON[effect]) {
-          
-          this.backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type).setScale(0.5, 0.5);
+
+          this.backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type.toUpperCase()).setScale(0.5, 0.5);
           this.add(this.backgroundIcon);
         }
       });
