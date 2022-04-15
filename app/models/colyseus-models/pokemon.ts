@@ -30,7 +30,7 @@ export class Pokemon extends Schema implements IPokemon{
   @type('uint8') maxMana: number;
   @type('string') skill: string;
   @type({set: 'string'}) items = new SetSchema<string>();
-  @type('string') author: string;
+  author: string;
   fossilTimer: number;
 
   constructor(author:string,

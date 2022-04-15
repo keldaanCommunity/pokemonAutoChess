@@ -692,7 +692,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.state.phase = STATE.PICK;
     const isPVE = this.checkForPVE();
 
-    this.state.time = (isPVE && this.state.stageLevel >3) ? 10000 : 10000;
+    this.state.time = 30000;
 
     this.state.players.forEach((player: Player, key: string) => {
       player.simulation.stop();
