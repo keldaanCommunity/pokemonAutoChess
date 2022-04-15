@@ -12,6 +12,19 @@ class WikiFaq extends Component{
             <p>Field/Flora/Human/Aquatic are not pokemon types, but egg groups. Moreover, Fairy and Amorph/Ghost are both egg groups and synergies.</p>
             <h5 className="nes-text is-primary">How does the income works ?</h5>
             <p>You get 5 gold per round whether you draw, win or lose. You get 1 bonus income per 10 gold saved. A maximum of 5 bonus income accrued at 50 saved gold. You get 1 bonus gold if you win. If you win multiple times, you will also gain extra gold; one bonus gold for every victory/defeat, up to 5 bonus gold for 5 streak wins/ 5 streak defeat. Wins/Defeats against PVE are not taken into account.</p>
+            <h5 className="nes-text is-primary">What is the purpose of the collection/booster ?</h5>
+            <p>When opening boosters, you get pokemon shards. Those shards are specific to every pokemon. In the collection tab, you can buy pokemon emotions with those shards.
+            You can see pokemon emotions as a detailled customization. When selecting an emotion pokemon portrait, the pokemon will appear everywhere with the same emotion portrait that you have selected.
+            Eveyone will see the emotion that you picked for this pokemon. Moreover, if you have selected a shiny emotion, the pokemon will appear shiny to everyone else.
+            </p>
+            <h5 className="nes-text is-primary">How do i get more profile icons ?</h5>
+            <p>When buying a pokemon emotion, it'll be available in the profile icon list.</p>
+            <h5 className="nes-text is-primary">How do i gain boosters ?</h5>
+            <p>You gain boosters each time you level up.</p>
+            <h5 className="nes-text is-primary">How do i level up ?</h5>
+            <p>You gain experience each time you finish a game. If you finish first, you'll get 900 xp, if you finish last, you'll get 100 xp.</p>
+            <h5 className="nes-text is-primary">It seems some sprites are missing ?</h5>
+            <p>Sprites of pokemon auto chess are based on the collaborative project: <a href='https://github.com/PMDCollab/SpriteCollab'>https://github.com/PMDCollab/SpriteCollab</a>. If you want the missing sprites to be added, please consider donating to pokemon autochess. Every donation will be used to pay spriters to make sprites for everyone.</p>
             <h5 className="nes-text is-primary">What/When is PVE ?</h5>
             <p>PVE are predefined waves of enemies. If you win against PVE, you'll get one Tier 1 item and you will have to choose one of the 3 item propositions. PVE occurs at turn 1,2,3,10,15,20,25,30,35,40.</p>
             <h5 className="nes-text is-primary">What are those mythical pokemons ? When can I buy them ?</h5>
