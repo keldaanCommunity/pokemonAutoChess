@@ -13,7 +13,8 @@ export class Pokemon extends Schema implements IPokemon{
   @type('string') id: string;
   @type('string') name: string;
   @type(['string']) types = new ArraySchema<string>();
-  @type('string') Rarity: string;
+  @type('uint8') rarity: Rarity;
+
   @type('string') index: string;
   @type('string') evolution:string;
   @type('int8') positionX = -1;
@@ -38,7 +39,7 @@ export class Pokemon extends Schema implements IPokemon{
   constructor(
      name: string,
       types: string[],
-      Rarity: string,
+      rarity: Rarity,
       index: string,
       evolution: string,
       hp: number,
@@ -56,10 +57,10 @@ export class Pokemon extends Schema implements IPokemon{
     super();
     this.id = uniqid();
     this.name = name;
-    this.Rarity = Rarity;
+    this.rarity = rarity;
     this.index = index;
     this.evolution = evolution;
-    this.cost = COST[Rarity];
+    this.cost = COST[rarity];
     this.hp = hp;
     this.atk = atk;
     this.def = def;

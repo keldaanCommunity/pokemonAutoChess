@@ -189,11 +189,15 @@ export default function Game() {
           });
         });
 
-        player.synergies.onChange = ((changes) => {
+
+        player.synergies.syns.onChange = (value, key) => {
+
           if(player.id == currentPlayerId){
             dispatch(setSynergies(player.synergies));
           }
-        });
+        }
+
+        
         player.itemsProposition.onAdd = ((changes)=>{
           if(player.id == uid){
             dispatch(setItemsProposition(player.itemsProposition));

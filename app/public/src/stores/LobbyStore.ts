@@ -9,6 +9,7 @@ import { IBot } from "../../../models/mongo-models/bot-v2";
 import { IItemsStatistic } from "../../../models/mongo-models/items-statistic";
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata";
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config";
+import Synergies from "../../../models/colyseus-models/synergies";
 
 interface IUserLobbyState {
     messages: IMessage[];
@@ -256,8 +257,8 @@ export const lobbySlice = createSlice({
         setBotData: (state, action: PayloadAction<IBot>) => {
             state.botData = action.payload
         },
-        setSynergies: (state, action: PayloadAction<ISynergies>) => {
-            state.synergies = action.payload;
+        setBotCreatorSynergies: (state, action: PayloadAction<Object>) => {
+            state.synergies = JSON.parse(JSON.stringify(action.payload));
         },
         setBoosterContent: (state, action: PayloadAction<string[]>) => {
           state.boosterContent = action.payload;
@@ -287,7 +288,7 @@ export const {
     setPastebinUrl,
     setBotData,
     leaveLobby,
-    setSynergies
+    setBotCreatorSynergies
 } = lobbySlice.actions;
 
 export default lobbySlice.reducer;

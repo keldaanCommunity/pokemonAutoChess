@@ -1,15 +1,16 @@
-import {TYPE, ITEM} from '../models/enum';
+import {ITEM} from '../models/enum';
 import { Effect } from '../types/enum/Effect'
 import { AttackType } from '../types/enum/Game';
 import Board from './board';
 import PokemonEntity from './pokemon-entity';
 import PokemonState from './pokemon-state';
+import { Synergy } from '../types/enum/Synergy';
 
 export class AttackStrategy {
   process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     pokemon.setMana(0);
     pokemon.count.ult += 1;
-    if (pokemon.types.includes(TYPE.MONSTER) && pokemon.shield <= 0) {
+    if (pokemon.types.includes(Synergy.MONSTER) && pokemon.shield <= 0) {
       let shield = 0;
       if (pokemon.effects.includes(Effect.PURSUIT)) {
         shield = Math.floor(pokemon.hp * 0.2);
@@ -23,7 +24,7 @@ export class AttackStrategy {
         pokemon.handleShield(shield, pokemon);
       }
     }
-    if (pokemon.types.includes(TYPE.SOUND)) {
+    if (pokemon.types.includes(Synergy.SOUND)) {
       let atk = 0;
       if (pokemon.effects.includes(Effect.LARGO)) {
         atk += 3;
@@ -34,7 +35,7 @@ export class AttackStrategy {
       }
       if (atk > 0) {
         board.forEach((x: number, y: number, tg: PokemonEntity) => {
-          if (tg && pokemon.team == tg.team && tg.types.includes(TYPE.SOUND)) {
+          if (tg && pokemon.team == tg.team && tg.types.includes(Synergy.SOUND)) {
             tg.count.soundCount ++;
             tg.atk += atk;
           }
@@ -961,7 +962,7 @@ export class RockSlideStrategy extends AttackStrategy {
       default:
         break;
     }
-    if (target.types.includes(TYPE.FLYING)) {
+    if (target.types.includes(Synergy.FLYING)) {
       damage = damage * 2;
     }
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon);
@@ -1315,7 +1316,7 @@ export class ChargeStrategy extends AttackStrategy {
     }
 
     board.forEach((x: number, y: number, ally: PokemonEntity) => {
-      if (ally && pokemon.team == ally.team && ally.types.includes(TYPE.ELECTRIC)) {
+      if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.ELECTRIC)) {
         ally.atk += Math.ceil(pokemon.baseAtk * buff);
       }
     });

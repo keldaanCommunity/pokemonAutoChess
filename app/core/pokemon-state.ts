@@ -1,10 +1,11 @@
-import {TYPE, PKM, FLYING_PROTECT_THRESHOLD, ITEM} from '../models/enum';
+import {PKM, FLYING_PROTECT_THRESHOLD, ITEM} from '../models/enum';
 import { Effect } from '../types/enum/Effect';
 import { AttackType } from '../types/enum/Game';
 import PokemonFactory from '../models/pokemon-factory';
 import Board from './board';
 import PokemonEntity from './pokemon-entity';
 import { IPokemonEntity } from '../types';
+import { Synergy } from '../types/enum/Synergy';
 
 export default class PokemonState {
 
@@ -204,7 +205,7 @@ export default class PokemonState {
                 speedBoost = 50;
               }
               board.forEach((r, c, value) => {
-                if (value !== undefined && value.team == pokemon.team && value.types.includes(TYPE.FIELD)) {
+                if (value !== undefined && value.team == pokemon.team && value.types.includes(Synergy.FIELD)) {
                   value.count.fieldCount ++;
                   value.handleHeal(boost / 100 * value.hp, pokemon);
                   value.handleAttackSpeed(speedBoost);
@@ -367,11 +368,11 @@ export default class PokemonState {
         pokemon.atk += 3;
       }
 
-      if (pokemon.effects.includes(Effect.DRAGON_ENERGY) && pokemon.types.includes(TYPE.DRAGON)) {
+      if (pokemon.effects.includes(Effect.DRAGON_ENERGY) && pokemon.types.includes(Synergy.DRAGON)) {
         pokemon.handleAttackSpeed(3);
       }
 
-      if (pokemon.effects.includes(Effect.DRAGON_DANCE) && pokemon.types.includes(TYPE.DRAGON)) {
+      if (pokemon.effects.includes(Effect.DRAGON_DANCE) && pokemon.types.includes(Synergy.DRAGON)) {
         pokemon.handleAttackSpeed(6);
       }
 

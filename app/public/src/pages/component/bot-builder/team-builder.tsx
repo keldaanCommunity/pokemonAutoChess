@@ -13,7 +13,7 @@ import CSS from 'csstype';
 import produce from 'immer';
 import { useAppSelector, useAppDispatch } from '../../../hooks';
 import {createBot, requestBotData} from "../../../stores/NetworkStore"
-import { setSynergies } from '../../../stores/LobbyStore';
+import { setBotCreatorSynergies } from '../../../stores/LobbyStore';
 
 const MODE = Object.freeze({
   WRITE:'WRITE',
@@ -186,33 +186,10 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   const botData: IBot = useAppSelector(state=>state.lobby.botData);
 
   function updateSynergies(i: number) {
-    const newSynergies = {
-      NORMAL: 0,
-      GRASS: 0,
-      FIRE: 0,
-      WATER: 0,
-      ELECTRIC: 0,
-      FIGHTING: 0,
-      PSYCHIC: 0,
-      DARK: 0,
-      METAL: 0,
-      GROUND: 0,
-      POISON: 0,
-      DRAGON: 0,
-      FIELD: 0,
-      MONSTER: 0,
-      HUMAN: 0,
-      AQUATIC: 0,
-      BUG: 0,
-      FLYING: 0,
-      FLORA: 0,
-      MINERAL: 0,
-      GHOST: 0,
-      FAIRY: 0,
-      ICE: 0,
-      FOSSIL: 0,
-      SOUND: 0
-    };
+    const newSynergies = {}
+
+
+
     const pokemonNames = [];
 
     bot.steps[i].board.forEach(pkm=>{
@@ -221,11 +198,17 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
       if (!pokemonNames.includes(family)) {
         pokemonNames.push(family);
         pkmTypes.forEach( (type) => {
-          newSynergies[type] += 1;
+          if(type in newSynergies){
+            newSynergies[type] += 1;
+          }
+          else{
+            newSynergies[type] = 1;
+          }
+          
         });
       }
     });
-    dispatch(setSynergies(newSynergies));
+    dispatch(setBotCreatorSynergies(newSynergies));
   }
 
   function write(x: number, y: number) {
