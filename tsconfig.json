@@ -14,6 +14,7 @@
       "allowJs": true,
       "strictNullChecks": false,
       "forceConsistentCasingInFileNames": true,
+      "resolveJsonModule": true,
       "jsx": "react"
     },
     "include": ["./app/*"]

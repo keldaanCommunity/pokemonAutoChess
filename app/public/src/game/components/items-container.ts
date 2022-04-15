@@ -8,7 +8,7 @@ export default class ItemsContainer extends GameObjects.Container {
   dragable: boolean;
   constructor(scene: Phaser.Scene, inventory: SetSchema<string>, x: number, y: number, dragable: boolean) {
     super(scene, x, y);
-    this.itemSize = dragable ? 80: 30;
+    this.itemSize = dragable ? 80: 25;
     this.dragable = dragable;
     scene.add.existing(this);
 

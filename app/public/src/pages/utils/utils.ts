@@ -93,7 +93,7 @@ export function getAttackScale(attackSprite: string) {
       return [3, 3];
 
     case 'GRASS/melee':
-      return [2, 2];
+      return [1.5, 1.5];
 
     case 'POISON/range':
       return [1.5, 1.5];
@@ -105,13 +105,13 @@ export function getAttackScale(attackSprite: string) {
       return [3, 3];
 
     case 'FIRE/melee':
-      return [2, 2];
+      return [1.5, 1.5];
 
     case 'ROCK/melee':
-      return [2, 2];
+    return [1.5, 1.5];
 
     case 'ELECTRIC/melee':
-      return [2, 2];
+    return [1.5, 1.5];
 
     case 'PSYCHIC/range':
       return [2, 2];

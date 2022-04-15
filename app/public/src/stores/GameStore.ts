@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { STATE } from "../../../models/enum";
 import { IDps, IDpsHeal, IPlayer } from "../../../types";
-import {ArraySchema, DataChange} from "@colyseus/schema";
+import {ArraySchema, DataChange, MapSchema} from "@colyseus/schema";
 import ExperienceManager from "../../../models/colyseus-models/experience-manager";
 import Synergies from "../../../models/colyseus-models/synergies";
+import { IPokemonConfig } from "../../../models/mongo-models/user-metadata";
+import PokemonCollection from "../../../models/colyseus-models/pokemon-collection";
 
 interface GameStateStore {
     afterGameId: string
@@ -32,7 +34,8 @@ interface GameStateStore {
     blueDpsMeter: IDps[],
     redDpsMeter: IDps[],
     blueHealDpsMeter: IDpsHeal[],
-    redHealDpsMeter: IDpsHeal[]
+    redHealDpsMeter: IDpsHeal[],
+    pokemonCollection: MapSchema<IPokemonConfig>
 }
 
 const initialState: GameStateStore = {
@@ -52,17 +55,18 @@ const initialState: GameStateStore = {
     itemsProposition: new ArraySchema<string>(),
     currentPlayerSynergies: new Synergies(),
     currentPlayerOpponentName: '',
-    currentPlayerOpponentAvatar: 'rattata',
+    currentPlayerOpponentAvatar: '0019/Normal',
     currentPlayerBoardSize: 0,
     currentPlayerLife: 100,
     currentPlayerMoney: 5,
     currentPlayerExperienceManager: new ExperienceManager(),
     currentPlayerName: '',
-    currentPlayerAvatar: 'rattata',
+    currentPlayerAvatar: '0019/Normal',
     blueDpsMeter: new Array<IDps>(),
     redDpsMeter: new Array<IDps>(),
     blueHealDpsMeter: new Array<IDpsHeal>(),
-    redHealDpsMeter: new Array<IDpsHeal>()
+    redHealDpsMeter: new Array<IDpsHeal>(),
+    pokemonCollection: new MapSchema<IPokemonConfig>()
 }
 
 export const gameSlice = createSlice({
@@ -220,11 +224,15 @@ export const gameSlice = createSlice({
         removeBlueHealDpsMeter: (state, action: PayloadAction<string>) => {
             state.blueHealDpsMeter = new Array<IDpsHeal>();
         },
+        setPokemonCollection: (state, action: PayloadAction<PokemonCollection>) => {
+            state.pokemonCollection = action.payload;
+        },
         leaveGame: () => initialState
     }
 });
 
 export const {
+    setPokemonCollection,
     leaveGame,
     removeBlueDpsMeter,
     removeRedDpsMeter,

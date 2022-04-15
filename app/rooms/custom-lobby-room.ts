@@ -1,8 +1,8 @@
 import { Client, LobbyRoom } from "colyseus";
 import LobbyState from './states/lobby-state';
-import {connect} from 'mongoose';
+import {connect, FilterQuery} from 'mongoose';
 import Chat from '../models/mongo-models/chat';
-import UserMetadata, { IUserMetadata } from '../models/mongo-models/user-metadata';
+import UserMetadata, { IPokemonConfig, IUserMetadata } from '../models/mongo-models/user-metadata';
 import LeaderboardInfo from '../models/colyseus-models/leaderboard-info';
 import {ArraySchema} from '@colyseus/schema';
 import LobbyUser from '../models/colyseus-models/lobby-user';
@@ -14,7 +14,10 @@ import BotV2, { IBot } from '../models/mongo-models/bot-v2';
 import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
-import { ICustomLobbyState } from "../types";
+import { Emotion, EmotionCost } from "../types";
+import { CDN_URL, PKM } from "../models/enum";
+import PokemonFactory from "../models/pokemon-factory";
+import PokemonConfig from "../models/colyseus-models/pokemon-config";
 
 const pastebin = new PastebinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
@@ -30,7 +33,6 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
 
   onCreate(options: any): Promise<void>{
     console.log(`create lobby`, this.roomId);
-    const self = this;
     super.onCreate(options);
     this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
     this.bots = new Map();
@@ -53,9 +55,9 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
           const dsEmbed = new MessageEmbed()
               .setTitle(`BOT ${bot.avatar} created by ${bot.author}`)
               .setURL(data)
-              .setAuthor(user.name, `https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/dist/assets/avatar/${user.avatar}.png`)
+              .setAuthor(user.name, `${CDN_URL}${user.avatar}.png`)
               .setDescription(`A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`)
-              .setThumbnail(`https://raw.githubusercontent.com/arnaudgregoire/pokemonAutoChess/master/app/public/dist/assets/avatar/${bot.avatar}.png`);
+              .setThumbnail(`${CDN_URL}${bot.avatar}.png`);
           client.send('pastebin-url', {url: data});
           try {
             this.discordWebhook.send({
@@ -91,6 +93,49 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
     this.onMessage('meta', (client, message)=>{
       client.send('meta', this.meta);
       client.send('metaItems', this.metaItems);
+    });
+
+    this.onMessage('open-booster', (client, message)=>{
+      const user: LobbyUser = this.state.users.get(client.auth.uid);
+      if(user.booster && user.booster > 0) {
+        user.booster -= 1;
+        const keys = Object.keys(PKM);
+        const boosterIndex: string[] = [];
+        let i = 5;
+        while(i > 0){
+          const k = keys[Math.floor(Math.random() * keys.length)];
+          const p = PokemonFactory.createPokemonFromName(PKM[k]);
+          if(p.name != PKM.MAGIKARP){
+            boosterIndex.push(p.index);     
+            i--;
+          }
+        }
+
+        boosterIndex.forEach(i=>{
+          if(user.pokemonCollection.has(i)){
+            user.pokemonCollection.get(i).dust += 40;
+          }
+          else{
+            user.pokemonCollection.set(i, new PokemonConfig(i));
+            user.pokemonCollection.get(i).dust += 40;
+          }
+        });
+
+        UserMetadata.findOne({'uid': client.auth.uid}, (err, u: FilterQuery<IUserMetadata>)=>{
+          u.booster = user.booster;
+          boosterIndex.forEach(i=>{
+            if(u.pokemonCollection.has(i)){
+              u.pokemonCollection.get(i).dust += 40;
+            }
+            else{
+              u.pokemonCollection.set(i, {id: i, emotions:[], shinyEmotions:[], dust: 0, selectedEmotion: Emotion.NORMAL, selectedShiny: false });
+              u.pokemonCollection.get(i).dust += 40;
+            }
+          });
+          u.save();
+        });
+        client.send('booster-content',boosterIndex);
+      }
     });
 
     this.onMessage('map', (client, message) => {
@@ -130,6 +175,53 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       });
     });
 
+    this.onMessage('change-selected-emotion', (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
+        const user: LobbyUser = this.state.users.get(client.auth.uid);
+        if(user.pokemonCollection.has(message.index)){
+            const pokemonConfig = user.pokemonCollection.get(message.index);
+            const emotionsToCheck = message.shiny ? pokemonConfig.shinyEmotions: pokemonConfig.emotions;
+            if(emotionsToCheck.includes(message.emotion) && message.emotion != pokemonConfig.selectedEmotion){
+                pokemonConfig.selectedEmotion = message.emotion;
+                pokemonConfig.selectedShiny = message.shiny;
+                UserMetadata.findOne({'uid': client.auth.uid}, (err, u)=>{
+                    if (u) {
+                        if(u.pokemonCollection.get(message.index)){
+                            u.pokemonCollection.get(message.index).selectedEmotion = message.emotion;
+                            u.pokemonCollection.get(message.index).selectedShiny = message.shiny;
+                            u.save();
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+    this.onMessage('buy-emotion', (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
+        const user: LobbyUser = this.state.users.get(client.auth.uid);
+        if(user.pokemonCollection.has(message.index)){
+            const pokemonConfig = user.pokemonCollection.get(message.index);
+            const emotionsToCheck = message.shiny ? pokemonConfig.shinyEmotions: pokemonConfig.emotions;
+            const cost = message.shiny ? EmotionCost[message.emotion] * 3: EmotionCost[message.emotion];
+            if(!emotionsToCheck.includes(message.emotion) && pokemonConfig.dust >= cost){
+                emotionsToCheck.push(message.emotion);
+                pokemonConfig.dust -= cost;
+                pokemonConfig.selectedEmotion = message.emotion;
+                pokemonConfig.selectedShiny = message.shiny;
+                UserMetadata.findOne({'uid': client.auth.uid}, (err, u)=>{
+                    if (u) {
+                        if(u.pokemonCollection.get(message.index)){
+                            message.shiny ? u.pokemonCollection.get(message.index).shinyEmotions.push(message.emotion) : u.pokemonCollection.get(message.index).emotions.push(message.emotion);
+                            u.pokemonCollection.get(message.index).dust -= cost;
+                            u.pokemonCollection.get(message.index).selectedEmotion = message.emotion;
+                            u.pokemonCollection.get(message.index).selectedShiny = message.shiny;
+                            u.save();
+                        }
+                    }
+                });
+            }
+        }
+    });
+
     this.onMessage('search', (client, message)=>{
       UserMetadata.findOne({'displayName': message.name}, (err: any, user: IUserMetadata)=>{
         if (user) {
@@ -148,7 +240,9 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
                   user.level,
                   user.donor,
                   stats.map(r=>{return new GameRecord(r.time, r.rank, r.elo, r.pokemons)}),
-                  user.honors));
+                  user.honors,
+                  user.pokemonCollection,
+                  user.booster));
             }
           });
         } else {
@@ -157,424 +251,30 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       });
     });
 
-    this.onMessage('avatar', (client, message) => {
-      UserMetadata.findOne({'uid': client.auth.uid}, (err: any, user: any)=>{
-        if (user) {
-          const pokemon = message.pokemon;
-          const lvl = user.level;
-          const mapWin = user.mapWin;
-          let changeNeeded = false;
-          switch (pokemon) {
-            case 'rattata':
-              if (lvl >= 0) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'pidgey':
-              if (lvl >= 1) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'spearow':
-              if (lvl >= 2) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'caterpie':
-              if (lvl >= 3) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'weedle':
-              if (lvl >= 4) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'igglybuff':
-              if (lvl >= 5) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'seedot':
-              if (lvl >= 6) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'zubat':
-              if (lvl >= 7) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'sandshrew':
-              if (lvl >= 8) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'pikachu':
-              if (lvl >= 9) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'nidoranF':
-              if (lvl >= 10) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'machop':
-              if (lvl >= 11) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'geodude':
-              if (lvl >= 12) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'eevee':
-              if (lvl >= 13) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'poliwag':
-              if (lvl >= 14) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'turtwig':
-              if (lvl >= 15) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'togepi':
-              if (lvl >= 16) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'ralts':
-              if (lvl >= 17) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'nidoranM':
-              if (lvl >= 18) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'slakoth':
-              if (lvl >= 19) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'growlithe':
-              if (lvl >= 20) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'numel':
-              if (lvl >= 21) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'abra':
-              if (lvl >= 22) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'horsea':
-              if (lvl >= 23) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'gastly':
-              if (lvl >= 24) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'mudkip':
-              if (lvl >= 25) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'archen':
-              if (lvl >= 26) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'tirtouga':
-              if (lvl >= 27) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'omanyte':
-              if (lvl >= 28) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'kabuto':
-              if (lvl >= 29) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'lileep':
-              if (lvl >= 30) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'shieldon':
-              if (lvl >= 31) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'amaura':
-              if (lvl >= 32) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'tyrunt':
-              if (lvl >= 33) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'cranidos':
-              if (lvl >= 34) {
-                changeNeeded = true;
-              }
-              break;
-            case 'aerodactyl':
-              if (lvl >= 35) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'trapinch':
-              if (mapWin.GROUND >= 5) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'vibrava':
-              if (mapWin.GROUND >= 10) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'flygon':
-              if (mapWin.GROUND >= 25) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'regirock':
-              if (mapWin.GROUND >= 100) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'bagon':
-              if (mapWin.NORMAL >= 5) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'shelgon':
-              if (mapWin.NORMAL >= 10) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'salamence':
-              if (mapWin.NORMAL >= 25) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'rayquaza':
-              if (mapWin.NORMAL >= 100) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'spheal':
-              if (mapWin.ICE >= 5) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'sealeo':
-              if (mapWin.ICE >= 10) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'walrein':
-              if (mapWin.ICE >= 25) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'articuno':
-              if (mapWin.ICE >= 100) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'bulbasaur':
-              if (mapWin.GRASS >= 5) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'ivysaur':
-              if (mapWin.GRASS >= 10) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'venusaur':
-              if (mapWin.GRASS >= 25) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'shaymin':
-              if (mapWin.GRASS >= 100) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'squirtle':
-              if (mapWin.WATER >= 5) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'wartortle':
-              if (mapWin.WATER >= 10) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'blastoise':
-              if (mapWin.WATER >= 25) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'kyogre':
-              if (mapWin.WATER >= 100) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'cyndaquil':
-              if (mapWin.FIRE >= 5) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'quilava':
-              if (mapWin.FIRE >= 10) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'typlosion':
-              if (mapWin.FIRE >= 25) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'entei':
-              if (mapWin.FIRE >= 100) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'meowth':
-              if (user.donor) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'persian':
-              if (user.donor) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'absol':
-              if (user.honors.includes('absol')) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'meloetta':
-              if (user.honors.includes('meloetta')) {
-                changeNeeded = true;
-              }
-              break;
-
-            case 'zapdos':
-              if (user.honors.includes('zapdos')) {
-                changeNeeded = true;
-              }
-              break;
-
-            default:
-              break;
-          }
-
-          if (changeNeeded && user.avatar != pokemon) {
-            user.avatar = pokemon;
-            user.save();
-            this.state.users.get(user.uid).avatar = user.avatar;
-          }
+    this.onMessage('avatar', (client, message: {index: string, emotion: Emotion, shiny: boolean}) => {
+      const user: LobbyUser = this.state.users.get(client.auth.uid);
+      const config = user.pokemonCollection.get(message.index);
+      if(config){
+        const emotionsToCheck = message.shiny ? config.shinyEmotions: config.emotions;
+        if(emotionsToCheck.includes(message.emotion)){
+          const shinyPad = message.shiny ? '0000/0001' : '';
+          user.avatar = `${message.index}/${shinyPad}/${message.emotion}`;
+          UserMetadata.findOne({'uid': client.auth.uid}, (err: any, u: FilterQuery<IUserMetadata>)=>{
+            u.avatar = `${message.index}/${shinyPad}/${message.emotion}`;
+            u.save();
+          });
         }
-      });
+      }
     });
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       connect(process.env.MONGO_URI, {}, () => {
         Chat.find({ 'time': { $gt: Date.now() - 86400000 } }, (err, messages) => {
           if (err) {
             console.log(err);
           } else {
             messages.forEach((message) => {
-              self.state.addMessage(message.name, message.payload, message.avatar, message.time, false);
+              this.state.addMessage(message.name, message.payload, message.avatar, message.time, false);
             });
           }
         });
@@ -584,15 +284,15 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
           } else {
             for (let i = 0; i < users.length; i++) {
               const user = users[i];
-              self.state.leaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.elo));
+              this.state.leaderboard.push(new LeaderboardInfo(user.displayName, user.avatar, i + 1, user.elo));
             }
           }
         });
         BotV2.find({}, { _id: 0 }, { sort: { elo: -1 } }, (_err, bots) => {
           bots.forEach((bot, i) => {
-            self.bots[bot.avatar] = bot;
+            this.bots[bot.avatar] = bot;
             // console.log(bot.avatar, bot.elo);
-            self.state.botLeaderboard.push(new LeaderboardInfo(bot.avatar, bot.avatar, i + 1, bot.elo));
+            this.state.botLeaderboard.push(new LeaderboardInfo(bot.author, bot.avatar, i + 1, bot.elo));
           });
         });
         Meta.find({}, (err, docs) => {
@@ -651,26 +351,33 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
                 user.level,
                 user.donor,
                 records,
-                user.honors));
+                user.honors,
+                user.pokemonCollection,
+                user.booster));
           }
         });
       } else {
+        const numberOfBoosters = 3;
         UserMetadata.create({
           uid: client.auth.uid,
-          displayName: client.auth.displayName
+          displayName: client.auth.displayName,
+          booster: numberOfBoosters,
+          pokemonCollection: new Map<string,IPokemonConfig>()
         });
         this.state.users.set(client.auth.uid, new LobbyUser(
             client.auth.uid,
             client.auth.displayName,
             1000,
-            'rattata',
+            '0019/Normal',
             'eng',
             0,
             0,
             0,
             false,
             [],
-            []
+            [],
+            new Map<string,IPokemonConfig>(),
+            numberOfBoosters
         ));
       }
     });

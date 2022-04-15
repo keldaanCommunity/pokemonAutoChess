@@ -4,6 +4,7 @@ import { IPlayer, IPokemon } from '../../../../types';
 import { DataChange } from '@colyseus/schema';
 import AnimationManager from '../animation-manager';
 import GameScene from '../scenes/game-scene';
+import { PKM_ACTION } from '../../../../models/enum';
 
 export default class BoardManager {
 
@@ -25,7 +26,6 @@ export default class BoardManager {
   }
 
   addPokemon(pokemon: IPokemon) {
-    // console.log(pokemon.name, this.mode);
     const coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY);
     let pokemonUI;
 
@@ -34,7 +34,7 @@ export default class BoardManager {
     } else {
       pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false, true);
     }
-    this.animationManager.animatePokemon(pokemonUI);
+    this.animationManager.animatePokemon(pokemonUI, PKM_ACTION.IDLE);
     this.pokemons.set(pokemonUI.id, pokemonUI);
     if (pokemon.positionY != 0 && this.mode == 'battle') {
       pokemonUI.setVisible(false);
@@ -61,6 +61,9 @@ export default class BoardManager {
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
         pokemon.setVisible(false);
+        if(pokemon.detail){
+          pokemon.closeDetail();
+        }
       }
     });
   }

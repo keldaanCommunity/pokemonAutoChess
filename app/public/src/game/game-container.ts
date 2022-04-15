@@ -401,9 +401,11 @@ class GameContainer {
       pokemons: [],
       exp: player.exp
     };
+
     player.board.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
-        simplePlayer.pokemons.push(pokemon.name);
+        const shinyPad = pokemon.shiny ? '/0000/0001' : ''; 
+        simplePlayer.pokemons.push(`${pokemon.index}${shinyPad}/${pokemon.emotion}`);
       }
     });
     return simplePlayer;
