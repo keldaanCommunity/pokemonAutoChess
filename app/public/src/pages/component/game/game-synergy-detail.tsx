@@ -1,7 +1,9 @@
 import React from 'react';
-import {TYPE_DETAILS, TYPE_TRADUCTION, PRECOMPUTED_TYPE_POKEMONS, RARITY_COLOR, CDN_URL} from '../../../../../models/enum';
+import {TYPE_DETAILS, TYPE_TRADUCTION, RARITY_COLOR, CDN_URL} from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import { Emotion } from '../../../../../types';
+import PRECOMPUTED_TYPE_POKEMONS from '../../../../../models/precomputed/type-pokemons.json';
+
 
 export default function GameSynergyDetail(props:{type: string, value: number}) {
     return <div>

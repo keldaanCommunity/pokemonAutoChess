@@ -1,7 +1,6 @@
-const RARITY = require('../app/models/enum').RARITY;
-const PKM = require('../app/models/enum').PKM;
-const SPECIAL_SKILL =require('../app/models/enum').SPECIAL_SKILL;
-const PokemonFactory = require('../app/models/pokemon-factory');
+import {PKM, RARITY, SPECIAL_SKILL} from '../app/models/enum';
+import PokemonFactory from '../app/models/pokemon-factory';
+import fs from 'fs';
 
 const data = {
   COMMON: [],
@@ -31,9 +30,7 @@ Object.keys(RARITY).forEach((rarity)=>{
 
   Object.values(PKM).forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm);
-    const family = PokemonFactory.getPokemonFamily(pkm);
     if (pokemon.rarity == rarity && pokemon.skill != SPECIAL_SKILL.DEFAULT) {
-      let included = false;
       pokemonCandidates.push(pokemon);
       names.push(pkm);
     }
@@ -44,3 +41,5 @@ Object.keys(RARITY).forEach((rarity)=>{
 
 
 console.log(data);
+
+fs.writeFileSync('../app/models/precomputed/type-rarity-all.json', JSON.stringify(data));

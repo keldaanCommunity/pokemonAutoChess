@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { PRECOMPUTED_RARITY_POKEMONS_ALL, CDN_URL } from '../../../../../models/enum';
+import { CDN_URL } from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import PokemonDetail from '../pokemon-detail';
 import { Emotion } from '../../../../../types';
+import PRECOMPUTED_RARITY_POKEMONS_ALL from '../../../../../models/precomputed/type-rarity-all.json';
+
 
 class PokemonWiki extends Component {
   render() {

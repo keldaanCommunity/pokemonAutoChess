@@ -1,8 +1,6 @@
-const PKM = require('../app/models/enum').PKM;
-const TYPE = require('../app/models/enum').TYPE;
-const SPECIAL_SKILL = require('../app/models/enum').SPECIAL_SKILL;
-const PokemonFactory = require('../app/models/pokemon-factory');
-
+import {PKM, TYPE, SPECIAL_SKILL} from '../app/models/enum';
+import PokemonFactory from '../app/models/pokemon-factory';
+import fs from 'fs';
 
 const dataAll = {};
 Object.keys(TYPE).forEach((type)=>{
@@ -18,5 +16,4 @@ Object.keys(TYPE).forEach((type)=>{
   dataAll[type] = pokemons;
 });
 
-console.log(dataAll);
-
+fs.writeFileSync('../app/models/precomputed/type-pokemons-all.json', JSON.stringify(dataAll));
