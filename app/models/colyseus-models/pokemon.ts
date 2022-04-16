@@ -1168,37 +1168,37 @@ export class Stoutland extends Pokemon {
 
 export class NidoranF extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(PKM.NIDORANF, [TYPE.POISON, TYPE.FIELD], RARITY.RARE, '0029', PKM.NIDORINA, 70, 5, 3, 3, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.POISON_STING,shiny, emotion);
+    super(PKM.NIDORANF, [TYPE.POISON, TYPE.FIELD, TYPE.GROUND], RARITY.RARE, '0029', PKM.NIDORINA, 70, 5, 3, 3, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.POISON_STING,shiny, emotion);
   }
 }
 
 export class Nidorina extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(PKM.NIDORINA, [TYPE.POISON, TYPE.FIELD], RARITY.RARE, '0030', PKM.NIDOQUEEN, 120, 9, 3, 3, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.POISON_STING,shiny, emotion);
+    super(PKM.NIDORINA, [TYPE.POISON, TYPE.FIELD, TYPE.GROUND], RARITY.RARE, '0030', PKM.NIDOQUEEN, 120, 9, 3, 3, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.POISON_STING,shiny, emotion);
   }
 }
 
 export class Nidoqueen extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(PKM.NIDOQUEEN, [TYPE.POISON, TYPE.FIELD], RARITY.RARE, '0031', '', 210, 20, 5, 5, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.POISON_STING,shiny, emotion);
+    super(PKM.NIDOQUEEN, [TYPE.POISON, TYPE.FIELD, TYPE.GROUND], RARITY.RARE, '0031', '', 210, 20, 5, 5, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.POISON_STING,shiny, emotion);
   }
 }
 
 export class NidoranM extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(PKM.NIDORANM, [TYPE.POISON, TYPE.FIELD], RARITY.RARE, '0032', PKM.NIDORINO, 70, 5, 3, 3, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.POISON,shiny, emotion);
+    super(PKM.NIDORANM, [TYPE.POISON, TYPE.FIELD, TYPE.GROUND], RARITY.RARE, '0032', PKM.NIDORINO, 70, 5, 3, 3, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 1, 100, SPECIAL_SKILL.POISON,shiny, emotion);
   }
 }
 
 export class Nidorino extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(PKM.NIDORINO, [TYPE.POISON, TYPE.FIELD], RARITY.RARE, '0033', PKM.NIDOKING, 120, 9, 3, 3, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.POISON,shiny, emotion);
+    super(PKM.NIDORINO, [TYPE.POISON, TYPE.FIELD, TYPE.GROUND], RARITY.RARE, '0033', PKM.NIDOKING, 120, 9, 3, 3, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 2, 100, SPECIAL_SKILL.POISON,shiny, emotion);
   }
 }
 
 export class Nidoking extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(PKM.NIDOKING, [TYPE.POISON, TYPE.FIELD], RARITY.RARE, '0034', '', 210, 20, 5, 5, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.POISON,shiny, emotion);
+    super(PKM.NIDOKING, [TYPE.POISON, TYPE.FIELD, TYPE.GROUND], RARITY.RARE, '0034', '', 210, 20, 5, 5, 1, 'POISON/melee', ATTACK_TYPE.PHYSICAL, 3, 100, SPECIAL_SKILL.POISON,shiny, emotion);
   }
 }
 
@@ -1799,7 +1799,7 @@ export class Eevee extends Pokemon {
 
 export class Vaporeon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(PKM.VAPOREON, [TYPE.WATER, TYPE.FIELD], RARITY.UNCOMMON, '0134', '', 130, 9, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HAPPY_HOUR,shiny, emotion);
+    super(PKM.VAPOREON, [TYPE.WATER, TYPE.FIELD, TYPE.AQUATIC], RARITY.UNCOMMON, '0134', '', 130, 9, 1, 1, 2, 'WATER/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HAPPY_HOUR,shiny, emotion);
   }
 }
 
@@ -1835,7 +1835,7 @@ export class Leafeon extends Pokemon {
 
 export class Sylveon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(PKM.SYLVEON, [TYPE.FAIRY, TYPE.FIELD], RARITY.UNCOMMON, '0700', '', 130, 9, 1, 1, 2, 'FAIRY/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HAPPY_HOUR,shiny, emotion);
+    super(PKM.SYLVEON, [TYPE.FAIRY, TYPE.FIELD, TYPE.SOUND], RARITY.UNCOMMON, '0700', '', 130, 9, 1, 1, 2, 'FAIRY/range', ATTACK_TYPE.SPECIAL, 2, 100, SPECIAL_SKILL.HAPPY_HOUR,shiny, emotion);
   }
 }
 

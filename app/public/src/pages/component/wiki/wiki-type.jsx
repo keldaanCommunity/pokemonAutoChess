@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { PRECOMPUTED_TYPE_POKEMONS_ALL, TYPE_DETAILS, TYPE_TRADUCTION, CDN_URL } from '../../../../../models/enum';
+import { TYPE_DETAILS, TYPE_TRADUCTION, CDN_URL } from '../../../../../models/enum';
 import { Emotion } from '../../../../../types';
 import PokemonFactory from '../../../../../models/pokemon-factory';
+import PRECOMPUTED_TYPE_POKEMONS_ALL from '../../../../../models/precomputed/type-pokemons-all.json';
 
 class WikiType extends Component {
   render() {

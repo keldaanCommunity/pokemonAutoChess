@@ -10,7 +10,7 @@ connect(process.env.MONGO_URI, (err) => {
              doc.booster = doc.level * 6;
              doc.avatar = `0019/${Emotion.NORMAL}`;
              doc.pokemonCollection = new Map<string, IPokemonConfig>();
-             doc.pokemonCollection.set('0019', {id: '0019', dust: 100, emotions:[Emotion.NORMAL], shinyEmotions:[], selectedEmotion: Emotion.NORMAL, selectedShiny: false});
+             // doc.pokemonCollection.set('0019', {id: '0019', dust: 100, emotions:[Emotion.NORMAL], shinyEmotions:[], selectedEmotion: Emotion.NORMAL, selectedShiny: false});
              doc.save();
              console.log(doc);
         });
