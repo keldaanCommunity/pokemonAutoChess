@@ -4,13 +4,13 @@ import {Pokemon} from './pokemon';
 import Simulation from '../../core/simulation';
 import Synergies from './synergies';
 import {Effects} from '../effects';
-import BattleResult from './battle-result';
 import ExperienceManager from './experience-manager';
-import { BattleResults } from '../../types/enum/Game';
+import { BattleResult } from '../../types/enum/Game';
 import { IPlayer, IPokemon } from '../../types';
 import PokemonConfig from './pokemon-config';
 import { IPokemonConfig } from '../mongo-models/user-metadata';
 import PokemonCollection from './pokemon-collection';
+import HistoryItem from './history-item';
 
 export default class Player extends Schema implements IPlayer{
   @type('string') id: string;
@@ -36,7 +36,7 @@ export default class Player extends Schema implements IPlayer{
   @type('uint16') elo: number;
   @type('boolean') alive = true;
   @type('string') tileset: string;
-  @type([BattleResult]) history = new ArraySchema<BattleResult>();
+  @type([HistoryItem]) history = new ArraySchema<HistoryItem>();
   @type({map: PokemonConfig}) pokemonCollection;
   effects: Effects = new Effects();
   isBot: boolean;
@@ -56,18 +56,18 @@ export default class Player extends Schema implements IPlayer{
 
   getCurrentBattleResult() {
     if (this.simulation.blueTeam.size == 0) {
-      return BattleResults.DEFEAT;
+      return BattleResult.DEFEAT;
     } else if (this.simulation.redTeam.size == 0) {
-      return BattleResults.WIN;
+      return BattleResult.WIN;
     }
-    return BattleResults.DRAW;
+    return BattleResult.DRAW;
   }
 
-  addBattleResult(name: string, result: BattleResults, avatar: string, isPVE: boolean) {
+  addBattleResult(name: string, result: BattleResult, avatar: string, isPVE: boolean) {
     if (this.history.length >= 5) {
       this.history.shift();
     }
-    this.history.push(new BattleResult(name, result, avatar, isPVE));
+    this.history.push(new HistoryItem(name, result, avatar, isPVE));
   }
 
   getLastBattleResult() {

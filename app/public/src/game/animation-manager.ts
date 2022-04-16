@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Orientation, PokemonActionState, PKM_ANIM, PKM_TINT } from '../../../types/enum/Game';
+import { Orientation, PokemonActionState, SpriteType, PokemonTint } from '../../../types/enum/Game';
 import { Ability } from '../../../types/enum/Ability';
 import Pokemon from './components/pokemon';
 import GameScene from './scenes/game-scene';
@@ -12,9 +12,9 @@ export default class AnimationManager {
     this.game = game;
 
     indexList.forEach(index=>{
-      Object.values(PKM_TINT).forEach(shiny=>{
+      Object.values(PokemonTint).forEach(shiny=>{
         Object.values(PokemonActionState).forEach(action=>{
-          Object.values(PKM_ANIM).forEach(mode=>{
+          Object.values(SpriteType).forEach(mode=>{
             const directionArray = action == PokemonActionState.SLEEP? [Orientation.DOWN] : Object.values(Orientation);
             directionArray.forEach(direction=>{
               const durationArray: number[] = durations[`${index}/${shiny}/${action}/${mode}`];
@@ -754,9 +754,9 @@ export default class AnimationManager {
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {
-    const tint = entity.shiny ? PKM_TINT.SHINY : PKM_TINT.NORMAL;
-    const animKey = `${entity.index}/${tint}/${action}/${PKM_ANIM.ANIM}/${Orientation[entity.orientation]}`;
-    const shadowKey = `${entity.index}/${tint}/${action}/${PKM_ANIM.SHADOW}/${Orientation[entity.orientation]}`;
+    const tint = entity.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL;
+    const animKey = `${entity.index}/${tint}/${action}/${SpriteType.ANIM}/${Orientation[entity.orientation]}`;
+    const shadowKey = `${entity.index}/${tint}/${action}/${SpriteType.SHADOW}/${Orientation[entity.orientation]}`;
 
     entity.sprite.anims.play(animKey);
     entity.shadow.anims.play(shadowKey);

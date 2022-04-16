@@ -2,7 +2,7 @@ import { ITEM } from '../models/enum';
 import PokemonFactory from '../models/pokemon-factory';
 import BOT, { IBot } from '../models/mongo-models/bot-v2';
 import Player from '../models/colyseus-models/player';
-import { BattleResults } from '../types/enum/Game';
+import { BattleResult } from '../types/enum/Game';
 import { Synergy } from '../types/enum/Synergy';
 
 export default class Bot {
@@ -24,11 +24,11 @@ export default class Bot {
   }
 
   updateProgress() {
-    if (this.player.getLastBattleResult() == BattleResults.DEFEAT) {
+    if (this.player.getLastBattleResult() == BattleResult.DEFEAT) {
       this.progress += 1;
-    } else if (this.player.getLastBattleResult() == BattleResults.DRAW) {
+    } else if (this.player.getLastBattleResult() == BattleResult.DRAW) {
       this.progress += 1;
-    } else if (this.player.getLastBattleResult() == BattleResults.WIN) {
+    } else if (this.player.getLastBattleResult() == BattleResult.WIN) {
       this.progress += 1.5;
     }
 

@@ -234,7 +234,7 @@ export default class BattleManager {
           } else if ( change.field == 'attackCount') {
             if (change.value != 0) {
               // console.log(change.value, pkm.action, pkm.targetX, pkm.targetY);
-              if (pkm.action == PokemonActionState.ATTACKING && pkm.targetX !== null && pkm.targetY !== null) {
+              if (pkm.action == PokemonActionState.ATTACK && pkm.targetX !== null && pkm.targetY !== null) {
                 this.animationManager.animatePokemon(pkm, PokemonActionState.ATTACK);
                 pkm.attackAnimation();
               }

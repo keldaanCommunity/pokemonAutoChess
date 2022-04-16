@@ -1,6 +1,6 @@
 import CSS from 'csstype';
 import React, { useState } from 'react';
-import { TYPE, CDN_URL } from '../../../../../models/enum';
+import { CDN_URL } from '../../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import PokemonCarousel from './pokemon-carousel';
 import Modal from 'react-bootstrap/esm/Modal';
@@ -11,6 +11,7 @@ import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata
 import tracker from '../../../../dist/client/assets/pokemons/tracker.json';
 import { Convert } from '../../../../../types/ITracker';
 import { Emotion } from '../../../../../types';
+import {Synergy} from '../../../../../types/enum/Synergy';
 import PokemonEmotion from './pokemon-emotion';
 
 const buttonStyle: CSS.Properties = {
@@ -96,12 +97,12 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
             <h5>Collection</h5>
             <Tabs>
                 <TabList>
-                    {Object.keys(TYPE).map((r=>{
+                    {(Object.keys(Synergy) as Synergy[]).map((r =>{
                         return <Tab key={'title-' + r}> <img src={"assets/types/" + r + ".png"}></img></Tab>
                     }))}
                 </TabList>
 
-                {Object.keys(TYPE).map((r=>{
+                {(Object.keys(Synergy) as Synergy[]).map((r =>{
                     return <TabPanel key={r}>
                         <div style={{display: 'flex', flexWrap:'wrap'}}>
                             <PokemonCarousel type={r} setPokemon={setPokemon} metadata={metadata}/>

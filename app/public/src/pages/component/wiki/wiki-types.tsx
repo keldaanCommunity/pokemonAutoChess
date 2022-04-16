@@ -8,15 +8,15 @@ class WikiTypes extends Component{
     render(){
         return <Tabs>
         <TabList>
-            {Object.keys(Synergy).map((r=>{
-                console.log('synergies', r)
+            {(Object.keys(Synergy) as Synergy[]).map((r=>{
+                // console.log('synergies', r)
                 return <Tab key={'title-' + r}> <img src={"assets/types/" + r + ".png"}></img></Tab>
             }))}
         </TabList>
 
         {Object.keys(Synergy).map((r=>{
             return <TabPanel key={r}>
-                <WikiType type={Synergy[r]}/>
+                <WikiType type={r}/>
             </TabPanel>
         }))}
     </Tabs>

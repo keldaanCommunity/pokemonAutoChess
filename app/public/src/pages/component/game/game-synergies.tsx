@@ -1,8 +1,9 @@
 import React from 'react';
-import { TYPE_TRIGGER } from '../../../../../models/enum';
+import { TYPE_TRIGGER } from '../../../../../types/Config';
 import GameSynergy from './game-synergy';
 import CSS from 'csstype';
 import { useAppSelector } from '../../../hooks';
+import {Synergy} from '../../../../../types/enum/Synergy';
 
 const style: CSS.Properties = {
     position: 'absolute',
@@ -40,7 +41,7 @@ export default function GameSynergies(props:{source: string}) {
                 }
             }).map((type, index)=>{
             if(synergies[type] > 0){
-                return <GameSynergy key={type} type={type} isFirst={index==0} value={synergies[type]}/>;
+                return <GameSynergy key={type} type={type as Synergy} isFirst={index==0} value={Synergy[synergies[type]]}/>;
             }
             else{
                 return null;

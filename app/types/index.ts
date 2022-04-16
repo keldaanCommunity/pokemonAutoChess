@@ -2,7 +2,7 @@ import {ArraySchema, MapSchema, SetSchema, CollectionSchema} from '@colyseus/sch
 import board from '../core/board'
 import Dps from '../core/dps'
 import DpsHeal from '../core/dps-heal'
-import BattleResult from '../models/colyseus-models/battle-result'
+import BattleResult from '../models/colyseus-models/history-item'
 import Count from '../models/colyseus-models/count'
 import Status from '../models/colyseus-models/status'
 import ExperienceManager from '../models/colyseus-models/experience-manager'
@@ -16,6 +16,7 @@ import { AttackType, Orientation, PokemonActionState, Rarity } from './enum/Game
 import { Effect } from './enum/Effect'
 import { Ability } from './enum/Ability'
 import { Synergy } from './enum/Synergy'
+import HistoryItem from '../models/colyseus-models/history-item'
 
 export interface IMessage {
     name: string
@@ -63,7 +64,7 @@ export interface IPlayer {
     elo: number
     alive: boolean
     tileset: string
-    history: ArraySchema<BattleResult>
+    history: ArraySchema<HistoryItem>
     pokemonCollection: PokemonCollection
 }
 export interface IPokemon {

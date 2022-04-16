@@ -10,7 +10,7 @@ import { IPokemon, IPokemonEntity, instanceofPokemonEntity, Emotion } from '../.
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
 import GameScene from '../scenes/game-scene';
-import { AttackType, Orientation, PokemonActionState } from '../../../../types/enum/Game';
+import { AttackType, Orientation, PokemonActionState, SpriteType, PokemonTint } from '../../../../types/enum/Game';
 import { Ability } from '../../../../types/enum/Ability';
 
 export default class Pokemon extends Button {
@@ -1003,7 +1003,7 @@ export default class Pokemon extends Button {
         
         if (EFFECTS_ICON[effect]) {
 
-          this.backgroundIcon = new GameObjects.Image(scene, c*20 -20, height +10, 'types', EFFECTS_ICON[effect].type.toUpperCase()).setScale(0.5, 0.5);
+          this.backgroundIcon = new GameObjects.Image(scene, c*20 -20, this.height +10, 'types', EFFECTS_ICON[effect].type.toUpperCase()).setScale(0.5, 0.5);
           this.add(this.backgroundIcon);
         }
       });
@@ -1012,10 +1012,10 @@ export default class Pokemon extends Button {
 
   setSprite(pokemon: IPokemonEntity | IPokemon, scene: Phaser.Scene) {
     const p = <IPokemonEntity> pokemon;
-    this.sprite = new GameObjects.Sprite(scene, 0, 0, this.index, `${PKM_TINT.NORMAL}/${PKM_ACTION.IDLE}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION.DOWN}/0000`);
+    this.sprite = new GameObjects.Sprite(scene, 0, 0, this.index, `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`);
     //this.sprite.setOrigin(0,0);
     this.sprite.setScale(2, 2);
-    this.sprite.on('animationcomplete', ()=>{const g = <GameScene> scene; g.animationManager.animatePokemon(this, PKM_ACTION.IDLE)});
+    this.sprite.on('animationcomplete', ()=>{const g = <GameScene> scene; g.animationManager.animatePokemon(this, PokemonActionState.IDLE)});
     this.height = this.sprite.height;
     this.width = this.sprite.width;
     this.itemsContainer = new ItemsContainer(scene, p.items, this.width/2 + 25, -35, false);
@@ -1048,7 +1048,7 @@ export default class Pokemon extends Button {
     }
     else{
       this.orientation = Orientation.DOWNLEFT;
-      this.action = PokemonActionState.MOVING;
+      this.action = PokemonActionState.WALK;
     }
   }
 
@@ -1111,7 +1111,7 @@ export default class Pokemon extends Button {
       this.add(this.sleep);
     }
     const s = <GameScene> this.scene;
-    s.animationManager.animatePokemon(this, PKM_ACTION.SLEEP);
+    s.animationManager.animatePokemon(this, PokemonActionState.SLEEP);
   }
 
   removeSleep() {

@@ -22,10 +22,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('boolean') shiny: boolean;
   @type('uint8') positionX: number;
   @type('uint8') positionY: number;
-  @type('uint8') action = PokemonActionState.MOVING;
+  @type('string') action = PokemonActionState.WALK;
   @type('string') index: string;
   @type('string') id: string;
-  @type('uint8') orientation = Orientation.DOWNLEFT;
+  @type('string') orientation = Orientation.DOWNLEFT;
   @type('uint8') critChance = 10;
   @type('uint16') hp: number;
   @type('uint8') mana = 0;
@@ -93,7 +93,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
     this.positionY = positionY;
     this.index = pokemon.index;
     this.name = pokemon.name;
-    this.action = PokemonActionState.MOVING;
+    this.action = PokemonActionState.WALK;
     this.orientation = Orientation.DOWNLEFT;
     this.baseAtk = pokemon.atk;
     this.baseDef = pokemon.def;

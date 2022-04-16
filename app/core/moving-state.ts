@@ -67,7 +67,7 @@ export default class MovingState extends PokemonState {
 
   onEnter(pokemon: PokemonEntity) {
     super.onEnter(pokemon);
-    pokemon.action = PokemonActionState.MOVING;
+    pokemon.action = PokemonActionState.WALK;
   }
 
   onExit(pokemon: PokemonEntity) {

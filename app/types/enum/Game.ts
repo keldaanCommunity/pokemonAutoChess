@@ -15,20 +15,22 @@ export enum GamePhaseState {
 }
 
 export enum PokemonActionState {
-    MOVING,
-    ATTACKING
+    IDLE = "Idle",
+    ATTACK = "Attack",
+    WALK = "Walk",
+    SLEEP = "Sleep"
 }
 
 export enum Orientation {
-    DOWNLEFT,
-    LEFT,
-    UPLEFT,
-    UP,
-    UPRIGHT,
-    RIGHT,
-    DOWNRIGHT,
-    DOWN,
-    UNCLEAR
+    DOWN = "0",
+    DOWNLEFT = "7",
+    LEFT = "6",
+    UPLEFT = "5",
+    UP = "4",
+    UPRIGHT = "3",
+    RIGHT = "2",
+    DOWNRIGHT = "1",
+    UNCLEAR = "-1"
 }
 
 // export enum OrientationRad {
@@ -49,7 +51,7 @@ export enum AttackType {
     TRUE
 }
 
-export enum BattleResults {
+export enum BattleResult {
     WIN,
     DEFEAT,
     DRAW
@@ -60,3 +62,13 @@ export enum BotDifficulty {
     MEDIUM,
     HARD
 }
+
+export enum PokemonTint {
+    NORMAL = "Normal",
+    SHINY = "Shiny"
+  }
+  
+  export enum SpriteType {
+    ANIM = "Anim",
+    SHADOW = "Shadow"
+  }

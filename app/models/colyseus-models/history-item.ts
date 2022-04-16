@@ -1,13 +1,13 @@
 import {Schema, type} from '@colyseus/schema';
-import { BattleResults } from '../../types/enum/Game';
+import { BattleResult } from '../../types/enum/Game';
 
-export default class BattleResult extends Schema {
+export default class HistoryItem extends Schema {
   @type('string') name: string;
-  @type('number') result: BattleResults;
+  @type('uint8') result: BattleResult;
   @type('string') avatar: string;
   @type('boolean') isPVE: boolean;
   
-  constructor(name: string, result: BattleResults, avatar: string, isPVE: boolean) {
+  constructor(name: string, result: BattleResult, avatar: string, isPVE: boolean) {
     super();
     this.name = name;
     this.result = result;

@@ -1,6 +1,6 @@
 import {Command} from '@colyseus/command';
 import { COST, ITEM, PKM, NEUTRAL_STAGE, BASIC_ITEM, ITEM_RECIPE } from '../../models/enum';
-import { BattleResults } from '../../types/enum/Game';
+import { BattleResult } from '../../types/enum/Game';
 import Player from '../../models/colyseus-models/player';
 import PokemonFactory from '../../models/pokemon-factory';
 import ItemFactory from '../../models/item-factory';
@@ -9,7 +9,8 @@ import GameRoom from '../game-room';
 import { Client } from "colyseus";
 import {MapSchema} from '@colyseus/schema';
 import PokemonEntity from '../../core/pokemon-entity';
-import { GamePhaseState, Rarity, PokemonIndex } from '../../types/enum/Game';
+import { GamePhaseState, Rarity } from '../../types/enum/Game';
+import {PokemonIndex} from '../../types';
 import { Synergy } from '../../types/enum/Synergy';
 
 export class OnShopCommand extends Command<GameRoom, {
@@ -642,7 +643,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       if (player.alive) {
         const currentResult = player.getCurrentBattleResult();
 
-        if (currentResult == BattleResults.DEFEAT || currentResult == BattleResults.DRAW) {
+        if (currentResult == BattleResult.DEFEAT || currentResult == BattleResult.DRAW) {
           player.life = player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel);
         }
         player.addBattleResult(player.opponentName, currentResult, player.opponentAvatar, isPVE);
@@ -662,7 +663,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       const currentResult = player.getCurrentBattleResult();
       const lastPlayerResult = player.getLastPlayerBattleResult();
 
-      if (currentResult == BattleResults.DRAW || currentResult != lastPlayerResult) {
+      if (currentResult == BattleResult.DRAW || currentResult != lastPlayerResult) {
         player.streak = 0;
       } else {
         player.streak = Math.min(player.streak + 1, 5);
@@ -676,7 +677,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         player.interest = Math.min(Math.floor(player.money / 10), 5);
         player.money += player.interest;
         player.money += player.streak;
-        if (player.getLastBattleResult() == BattleResults.WIN) {
+        if (player.getLastBattleResult() == BattleResult.WIN) {
           player.money += 1;
         }
         player.money += 5;
@@ -706,7 +707,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         if (player.isBot) {
           player.experienceManager.level = Math.min(9, Math.round(this.state.stageLevel/2));
         }
-        if (isPVE && player.getLastBattleResult() == BattleResults.WIN) {
+        if (isPVE && player.getLastBattleResult() == BattleResult.WIN) {
           const items = ItemFactory.createRandomItems();
           // let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
           items.forEach((item)=>{
