@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Room, Client } from "colyseus.js";
 import {User} from '@firebase/auth-types';
-import {ICustomLobbyState} from '../../../types';
+import {Emotion, ICustomLobbyState} from '../../../types';
 import {IBot} from '../../../models/mongo-models/bot-v2';
 import PreparationState from "../../../rooms/states/preparation-state";
 import GameState from "../../../rooms/states/game-state";
@@ -81,8 +81,8 @@ export const networkSlice = createSlice({
         changeName: (state, action: PayloadAction<string>) => {
             state.lobby.send('name', {'name': action.payload});
         },
-        changeAvatar: (state, action: PayloadAction<string>) => {
-            state.lobby.send('avatar', {'pokemon': action.payload});
+        changeAvatar: (state, action: PayloadAction<{index: string, emotion: Emotion, shiny: boolean}>) => {
+            state.lobby.send('avatar', action.payload);
         },
         requestMeta: (state, action: PayloadAction<boolean>) => {
             state.lobby.send('meta');
@@ -128,11 +128,23 @@ export const networkSlice = createSlice({
         },
         changeRoomName: (state, action: PayloadAction<string>) => {
             state.preparation.send('room-name', action.payload);
+        },
+        changeSelectedEmotion:(state, action: PayloadAction<{index: string, emotion: Emotion, shiny: boolean}>) => {
+            state.lobby.send('change-selected-emotion',action.payload);
+        },
+        buyEmotion: (state, action: PayloadAction<{index: string, emotion:Emotion, shiny: boolean}>) => {
+            state.lobby.send('buy-emotion', action.payload);
+        },
+        openBooster: (state) => {
+            state.lobby.send('open-booster');
         }
     }
 });
 
 export const {
+    openBooster,
+    changeSelectedEmotion,
+    buyEmotion,
     changeRoomName,
     gameStart,
     logIn,

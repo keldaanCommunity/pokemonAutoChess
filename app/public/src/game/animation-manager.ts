@@ -1,107 +1,55 @@
 /* eslint-disable max-len */
-import {SPECIAL_SKILL} from '../../../models/enum';
+import {SPECIAL_SKILL, PKM_ORIENTATION, PKM_ACTION, PKM_ANIM, PKM_TINT} from '../../../models/enum';
 import Pokemon from './components/pokemon';
 import GameScene from './scenes/game-scene';
-
+import durations from '../../dist/client/assets/pokemons/durations.json';
+import indexList from '../../dist/client/assets/pokemons/indexList.json';
 export default class AnimationManager {
   game: GameScene;
-  orientationTable: { DOWN: number; DOWNLEFT: number; LEFT: number; UPLEFT: number; UP: number; UPRIGHT: number; RIGHT: number; DOWNRIGHT: number; };
-  actionTable: { MOVING: number; ATTACKING: number; };
-  flipxTable: { DOWNRIGHT: boolean; DOWNLEFT: boolean; LEFT: boolean; UPLEFT: boolean; UP: boolean; UPRIGHT: boolean; RIGHT: boolean; };
+
 
   constructor(game: GameScene) {
     this.game = game;
-    this.orientationTable = {
-      'DOWN': 0,
-      'DOWNLEFT': 1,
-      'LEFT': 2,
-      'UPLEFT': 3,
-      'UP': 4,
-      'UPRIGHT': 3,
-      'RIGHT': 2,
-      'DOWNRIGHT': 1
-    };
 
-    this.actionTable ={
-      'MOVING': 0,
-      'ATTACKING': 1
-    };
-
-    this.flipxTable = {
-      'DOWNRIGHT': false,
-      'DOWNLEFT': false,
-      'LEFT': false,
-      'UPLEFT': false,
-      'UP': false,
-      'UPRIGHT': true,
-      'RIGHT': true
-    };
-
-    [10, 11, 12, 13, 14, 15, 16, 17, 18, 74, 75, 76, 298, 183, 184, 41, 42, 169, 179, 180, 181, 173, 35, 36, 174, 39, 40, 187, 188, 189, 273, 274, 275, 396, 397, 398].forEach((num) => {
-      this.createAnimations(num, 'COMMON', false);
-    });
-
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 29, 30, 31, 32, 33, 34, 133, 134, 135, 136, 152, 153, 154, 155, 156, 157, 158, 159, 160, 196, 197, 252, 253, 254, 255, 256, 257, 258, 259, 260, 387, 388, 389, 390, 391, 392, 393, 394, 395, 470, 700].forEach((num) => {
-      this.createAnimations(num, 'UNCOMMON', false);
-    });
-
-    [25, 26, 60, 61, 66, 67, 68, 81, 82, 111, 112, 116, 117, 172, 175, 176, 186, 230, 270, 271, 272, 304, 305, 306, 328, 329, 330, 355, 356, 363, 364, 365, 403, 404, 405, 462, 464, 468, 477].forEach((num) => {
-      this.createAnimations(num, 'RARE', false);
-    });
-
-    [63, 64, 65, 92, 93, 94, 125, 126, 147, 148, 149, 239, 240, 246, 247, 248, 280, 281, 282, 287, 288, 289, 371, 372, 373, 374, 375, 376, 443, 444, 445, 466, 467].forEach((num) => {
-      this.createAnimations(num, 'EPIC', false);
-    });
-
-    [58, 59, 95, 123, 132, 143, 208, 212, 446, 447, 448, 2080, 2120, 4480, 322, 323, 3230, 307, 308, 3080].forEach((num) => {
-      this.createAnimations(num, 'LEGENDARY', false);
-    });
-
-    [129, 130, 19, 20, 21, 22, 27, 249, 487, 144, 145, 146, 483, 484, 243, 244, 245, 377, 378, 379, 486, 382, 383, 384, 491].forEach((num) => {
-      this.createAnimations(num, 'NEUTRAL', false);
-    });
-
-    [607, 608, 609].forEach((num) => {
-      this.createAnimations(num, 'EPIC2', false);
-    });
-
-    [79, 80, 199].forEach((num) => {
-      this.createAnimations(num, 'UNCOMMON2', false);
-    });
-
-    [69, 70, 71, 220, 221, 361, 362, 459, 460, 471, 473, 478, 582, 583, 584, 4600].forEach((num) => {
-      this.createAnimations(num, 'december', false);
-    });
-
-    [551, 552, 553, 633, 634, 635, 52, 53, 3820, 3830, 228, 318, 637, 638, 639, 640, 641, 641, 642, 643, 644, 645, 646, 647, 490, 479, 480, 481, 482, 483, 484, 485, 488, 492, 493, 494, 442, 359, 142, 131, 380, 381, 150, 250, 251, 385, 386].forEach((num) => {
-      this.createAnimations(num, 'february', false);
-    });
-
-    [577, 578, 579].forEach((num) => {
-      this.createAnimations(num, 'april', false);
-    });
-
-    [333, 3840, 43, 44, 45, 182].forEach((num) => {
-      this.createAnimations(num, 'september', false);
-    });
-
-    [138, 139, 140, 141, 345, 346, 347, 348, 408, 409, 410, 411, 564, 565, 566, 567, 696, 697, 698, 699].forEach((num) => {
-      this.createAnimations(num, 'fossil', false);
-    });
-
-    [104, 105, 137, 233, 293, 294, 295, 309, 310, 315, 334, 353, 354, 406, 407, 427, 428, 474, 506, 507, 508, 535, 536, 537, 540, 541, 542, 543, 544, 545, 599, 600, 601, 610, 611, 612, 648, 661, 662, 663, 669, 670, 671, 679, 680, 681, 731, 732, 733, 782, 783, 784, 1050, 3100, 3340, 3540, 4280].forEach((num) => {
-      this.createAnimations(num, 'sound', true);
-      this.createSleepAnimations('sound', num);
-    });
-
-    [351, 3510, 3511, 3512].forEach((num) => {
-      this.createAnimations(num, 'castform', true);
-      this.createSleepAnimations('castform', num);
-    });
-
+    indexList.forEach(index=>{
+      Object.values(PKM_TINT).forEach(shiny=>{
+        Object.values(PKM_ACTION).forEach(action=>{
+          Object.values(PKM_ANIM).forEach(mode=>{
+            const directionArray = action == PKM_ACTION.SLEEP? [PKM_ORIENTATION.DOWN] : Object.values(PKM_ORIENTATION);
+            directionArray.forEach(direction=>{
+              const durationArray: number[] = durations[`${index}/${shiny}/${action}/${mode}`];
+              if(durationArray){
+                const frameArray = this.game.anims.generateFrameNames(index,{start: 0, end: durationArray.length -1, zeroPad: 4, prefix: `${shiny}/${action}/${mode}/${direction}/`})
+                for (let i = 0; i < durationArray.length; i++) {
+                  if(frameArray[i]){
+                    frameArray[i]['duration'] = durationArray[i] * 10;
+                  }
+                }
+                if(action == PKM_ACTION.ATTACK){
+                  this.game.anims.create({
+                    key: `${index}/${shiny}/${action}/${mode}/${direction}`,
+                    frames: frameArray,
+                    repeat: 0,
+                  });
+                }
+                else{
+                  this.game.anims.create({
+                    key: `${index}/${shiny}/${action}/${mode}/${direction}`,
+                    frames: frameArray,
+                    repeat: -1
+                  });
+                }
+              }
+              else{
+                console.log('duration array missing for ', `${index}/${shiny}/${action}/${mode}`);
+              }
+            })
+          })
+        })
+      })
+    })
     this.createAttacksAnimations();
     this.createSpecialAttacksAnimations();
-    // this.createSpecialCellsAnimations();
     this.createStatusAnimations();
   }
 
@@ -190,44 +138,7 @@ export default class AnimationManager {
       repeat: -1
     });
   }
-  /*
-  createSpecialCellsAnimations() {
-    this.game.anims.create({
-      key: `FIRE/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 56, zeroPad: 3, prefix: 'FIRE/cell/'}),
-      frameRate: 30,
-      repeat: -1
-    });
 
-    this.game.anims.create({
-      key: `GRASS/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 19, zeroPad: 3, prefix: 'GRASS/cell/'}),
-      frameRate: 15,
-      repeat: -1
-    });
-
-    this.game.anims.create({
-      key: `WATER/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 6, zeroPad: 3, prefix: 'WATER/cell/'}),
-      frameRate: 15,
-      repeat: -1
-    });
-
-    this.game.anims.create({
-      key: `NORMAL/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 51, zeroPad: 3, prefix: 'NORMAL/cell/'}),
-      frameRate: 15,
-      repeat: -1
-    });
-
-    this.game.anims.create({
-      key: `ICE/cell`,
-      frames: this.game.anims.generateFrameNames('attacks', {start: 0, end: 14, zeroPad: 3, prefix: 'ICE/cell/'}),
-      frameRate: 15,
-      repeat: -1
-    });
-  }
-*/
   createSpecialAttacksAnimations() {
     this.game.anims.create({
       key: SPECIAL_SKILL.FIRE_BLAST,
@@ -672,15 +583,6 @@ export default class AnimationManager {
     });
   }
 
-  createSleepAnimations(sheet, index) {
-    this.game.anims.create({
-      key: `${index}/2`,
-      frames: this.game.anims.generateFrameNames(sheet, {frames: [0, 1], prefix: index + '/2/'}),
-      duration: 2000,
-      repeat: -1
-    });
-  }
-
   createAttacksAnimations() {
     this.game.anims.create({
       key: `GRASS/range`,
@@ -851,58 +753,12 @@ export default class AnimationManager {
     });
   }
 
-  createAnimations(index: number, sheet: string, sleep: boolean) {
-    /*
-      0 : down
-      1 : down left
-      2 : left
-      3 : up left
-      4 : up
-      */
-    ['0', '1', '2', '3', '4'].forEach((orientation) => {
-      this.game.anims.create({
-        key: `${index}/0/${orientation}`,
-        frames: this.game.anims.generateFrameNames(sheet, {frames: [0, 1, 2], prefix: index + '/0/' + orientation + '/'}),
-        duration: 400,
-        repeatDelay: 300,
-        repeat: -1,
-        yoyo: true
-      });
-      // attack
-      this.game.anims.create({
-        key: `${index}/1/${orientation}`,
-        frames: this.game.anims.generateFrameNames(sheet, {frames: [0, 1, 2], prefix: index + '/1/' + orientation + '/'}).concat(
-            this.game.anims.generateFrameNames(sheet, {frames: [0, 1, 2], prefix: index + '/0/' + orientation + '/'})
-        ),
-        duration: 1000,
-        repeat: -1
-      });
-    });
-    if (!sleep) {
-      this.game.anims.create({
-        key: `${index}/2`,
-        frames: this.game.anims.generateFrameNames('sleep', {frames: [0, 1], prefix: index + '/2/'}),
-        duration: 2000,
-        repeat: -1
-      });
-    }
-  }
+  animatePokemon(entity: Pokemon, action: PKM_ACTION) {
+    const tint = entity.shiny ? PKM_TINT.SHINY : PKM_TINT.NORMAL;
+    const animKey = `${entity.index}/${tint}/${action}/${PKM_ANIM.ANIM}/${PKM_ORIENTATION[entity.orientation]}`;
+    const shadowKey = `${entity.index}/${tint}/${action}/${PKM_ANIM.SHADOW}/${PKM_ORIENTATION[entity.orientation]}`;
 
-  animatePokemon(entity: Pokemon) {
-    const key = this.getSpriteKey(entity);
-    this.playAnimation(entity, key);
-  }
-
-  playAnimation(entity: Pokemon, spriteKey: string) {
-    entity.sprite.flipX = this.flipxTable[entity.orientation];
-    entity.sprite.anims.play(spriteKey);
-  }
-
-  playSleepAnimation(entity: Pokemon) {
-    entity.sprite.anims.play(`${entity.index}/2`);
-  }
-
-  getSpriteKey(entity: Pokemon) {
-    return `${entity.index}/${this.actionTable[entity.action]}/${this.orientationTable[entity.orientation]}`;
+    entity.sprite.anims.play(animKey);
+    entity.shadow.anims.play(shadowKey);
   }
 }

@@ -16,12 +16,15 @@ import TeamBuilder from './component/bot-builder/team-builder';
 import MetaReport from './component/meta-report/meta-report';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { joinLobby, logIn, logOut, requestMeta, requestBotList } from '../stores/NetworkStore';
-import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby } from '../stores/LobbyStore';
+import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent } from '../stores/LobbyStore';
 import { ICustomLobbyState } from '../../../types';
 import LobbyUser from '../../../models/colyseus-models/lobby-user';
 import { IBot } from '../../../models/mongo-models/bot-v2';
 import { IMeta } from '../../../models/mongo-models/meta';
 import { IItemsStatistic } from '../../../models/mongo-models/items-statistic';
+import PokemonCollection from './component/collection/pokemon-collection';
+import PokemonConfig from '../../../models/colyseus-models/pokemon-config';
+import Booster from './component/booster/booster';
 
 export default function Lobby(){
     const dispatch = useAppDispatch();
@@ -36,6 +39,8 @@ export default function Lobby(){
     const [showWiki, toggleWiki] = useState<boolean>(false);
     const [showMeta, toggleMeta] = useState<boolean>(false);
     const [showBuilder, toggleBuilder] = useState<boolean>(false);
+    const [showCollection, toggleCollection] = useState<boolean>(false);
+    const [showBooster, toggleBooster] = useState<boolean>(false);
     const [toPreparation, setToPreparation] = useState<boolean>(false);
     
     const lobbyStyle = {display:'flex',justifyContent:'space-between'};
@@ -58,6 +63,15 @@ export default function Lobby(){
                     room.state.users.onAdd = (u) => {
                         dispatch(addUser(u));
                         if(u.id == user.uid){
+                            u.pokemonCollection.onAdd = (pokemonConfig, key) => {
+                                const p = pokemonConfig as PokemonConfig;
+                                dispatch(addPokemonConfig(p));
+                                p.onChange = (changes) => {
+                                    changes.forEach(change=>{
+                                        dispatch(changePokemonConfig({id: key, field: change.field, value: change.value}));
+                                    });
+                                }
+                            }
                             dispatch(setUser(u));
                             setSearchedUser(u);
                         }
@@ -92,6 +106,8 @@ export default function Lobby(){
 
                     room.onMessage('bot-data', (data: IBot) => { dispatch(setBotData(data))});
 
+                    room.onMessage('booster-content', (boosterContent: string[]) => {dispatch(setBoosterContent(boosterContent))});
+
                     dispatch(joinLobby(room));
                 }
             });
@@ -108,6 +124,12 @@ export default function Lobby(){
       }
       if(toPreparation){
           return <Navigate to='/preparation'></Navigate>
+      }
+      if(showCollection){
+          return <PokemonCollection toggleCollection={()=>toggleCollection(!showCollection)}/>;
+      }
+      if(showBooster){
+          return <Booster toggle={()=>{toggleBooster(!showBooster)}}/>;
       }
       if(showWiki){
         return <Wiki toggleWiki={()=>toggleWiki(!showWiki)} content='Lobby'/>;
@@ -127,20 +149,22 @@ export default function Lobby(){
                     <Link to='/auth'>
                             <button className='nes-btn is-error' style={buttonStyle} onClick={()=>{firebase.auth().signOut(); dispatch(leaveLobby()); dispatch(logOut())}}>Sign Out</button>
                     </Link>
+                    <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{toggleCollection(!showCollection)}}>Collection</button>
+                    <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{toggleBooster(!showBooster)}}>Booster</button>
+                    <DiscordButton/>
                     <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{toggleWiki(!showWiki)}}>Wiki</button>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{
+                    <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{
                         if(botList.length == 0) {
                             dispatch(requestBotList(true));
                         }
                         toggleBuilder(!showBuilder)
                         }}>BOT Builder</button>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{
+                    <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{
                         if(meta.length == 0 || metaItems.length == 0){
                             dispatch(requestMeta(true));
                         }
                         toggleMeta(!showMeta);
                         }}>Meta Report</button>
-                    <DiscordButton/>
                     <DonateButton/>
                     <PolicyButton/>
                     <CreditsButton/>

@@ -3,6 +3,7 @@ import {ITEM, PKM} from '../enum';
 
 export interface Pokemon {
   name: string;
+  avatar:string;
   items: string[];
 }
 
@@ -20,6 +21,9 @@ const pokemon = new Schema({
   name: {
     type: String,
     enum: Object.values(PKM)
+  },
+  avatar:{
+    type: String,
   },
   items: [
     {

@@ -6,15 +6,13 @@ import BattleManager from '../components/battle-manager';
 import WeatherManager from '../components/weather-manager';
 import ItemsContainer from '../components/items-container';
 import Pokemon from '../components/pokemon';
-import PokemonFactory from '../../../../models/pokemon-factory';
 import {STATE, ITEM_RECIPE} from '../../../../models/enum';
 import firebase from 'firebase/compat/app';
-import {getOrientation, transformCoordinate} from '../../pages/utils/utils';
+import {transformCoordinate} from '../../pages/utils/utils';
 import { Room } from "colyseus.js";
 import GameState from "../../../../rooms/states/game-state";
 import ItemContainer from '../components/item-container';
-
-import ItemDetail from '../components/item-detail';
+import indexList from '../../../dist/client/assets/pokemons/indexList.json';
 
 export default class GameScene extends Scene {
   tilemap: any;
@@ -63,7 +61,7 @@ export default class GameScene extends Scene {
     const height = this.cameras.main.height;
     const loadingText = this.make.text({
       x: width / 2,
-      y: (height / 2) - 50,
+      y: (height / 2) - 100,
       text: 'Loading...',
       style: {
         font: '30px monospace'
@@ -73,7 +71,7 @@ export default class GameScene extends Scene {
 
     const percentText = this.make.text({
       x: width / 2,
-      y: (height / 2) + 10,
+      y: (height / 2) -50,
       text: '0%',
       style: {
         font: '28px monospace'
@@ -93,7 +91,7 @@ export default class GameScene extends Scene {
     assetText.setOrigin(0.5, 0.5);
 
     this.load.on('progress', (value: number) => {
-      percentText.setText((value * 100).toString() + '%');
+      percentText.setText((value * 100).toFixed(1) + '%');
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
       progressBar.fillRect(500, 510, 1000 * value, 30);
@@ -111,6 +109,10 @@ export default class GameScene extends Scene {
       assetText.destroy();
     });
 
+    indexList.forEach(id=>{
+      this.load.multiatlas(id, `/assets/pokemons/${id}.json`, '/assets/pokemons');
+    });
+
     // console.log(this.tilemap);
     this.load.audio('sound', [`https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChessMusic/main/music/${this.tilemap.tilesets[0].name}.mp3`]);
     this.load.image('tiles', `/assets/tilesets/${this.tilemap.tilesets[0].name}.png`);
@@ -118,11 +120,6 @@ export default class GameScene extends Scene {
     this.load.image('rain', '/assets/ui/rain.png');
     this.load.image('sand', '/assets/ui/sand.png');
     this.load.image('sun', '/assets/ui/sun.png');
-    this.load.image('socle', '/assets/ui/socle.png');
-    this.load.image('PHYSICAL', '/assets/types/PHYSICAL.png');
-    this.load.image('SPECIAL', '/assets/types/SPECIAL.png');
-    this.load.image('TRUE', '/assets/types/TRUE.png');
-    this.load.multiatlas('sleep', '/assets/pokemons/sleep/sleep.json', '/assets/pokemons/sleep');
     this.load.multiatlas('snowflakes', '/assets/ui/snowflakes.json', '/assets/ui/');
     this.load.multiatlas('status', '/assets/status/status.json', '/assets/status/');
     this.load.multiatlas('wound', '/assets/status/wound.json', '/assets/status');
@@ -133,21 +130,6 @@ export default class GameScene extends Scene {
     this.load.multiatlas('item', '/assets/item/item.json', '/assets/item/');
     this.load.multiatlas('lock', '/assets/lock/lock.json', '/assets/lock/');
     this.load.multiatlas('types', '/assets/types/types.json', '/assets/types');
-    this.load.multiatlas('fossil', '/assets/pokemons/fossil/fossil.json', '/assets/pokemons/fossil/');
-    this.load.multiatlas('december', '/assets/pokemons/december/december.json', '/assets/pokemons/december/');
-    this.load.multiatlas('february', '/assets/pokemons/february/february.json', '/assets/pokemons/february/');
-    this.load.multiatlas('april', '/assets/pokemons/april/april.json', '/assets/pokemons/april/');
-    this.load.multiatlas('september', '/assets/pokemons/september/september.json', '/assets/pokemons/september/');
-    this.load.multiatlas('COMMON', '/assets/pokemons/common/common.json', '/assets/pokemons/common');
-    this.load.multiatlas('NEUTRAL', '/assets/pokemons/neutral/neutral.json', '/assets/pokemons/neutral');
-    this.load.multiatlas('UNCOMMON', '/assets/pokemons/uncommon/uncommon.json', '/assets/pokemons/uncommon');
-    this.load.multiatlas('RARE', '/assets/pokemons/rare/rare.json', '/assets/pokemons/rare');
-    this.load.multiatlas('EPIC', '/assets/pokemons/epic/epic.json', '/assets/pokemons/epic');
-    this.load.multiatlas('EPIC2', '/assets/pokemons/epic/epic2.json', '/assets/pokemons/epic');
-    this.load.multiatlas('UNCOMMON2', '/assets/pokemons/uncommon/uncommon2.json', '/assets/pokemons/uncommon');
-    this.load.multiatlas('LEGENDARY', '/assets/pokemons/legendary/legendary.json', '/assets/pokemons/legendary');
-    this.load.multiatlas('sound', 'assets/pokemons/sound/sound.json', '/assets/pokemons/sound');
-    this.load.multiatlas('castform', 'assets/pokemons/castform/castform.json', '/assets/pokemons/castform');
     this.load.multiatlas('attacks', '/assets/attacks/attacks.json', '/assets/attacks');
     this.load.multiatlas('specials', '/assets/attacks/specials.json', '/assets/attacks');
     this.load.multiatlas('june', '/assets/attacks/june.json', '/assets/attacks');
@@ -208,15 +190,8 @@ export default class GameScene extends Scene {
     this.board = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
     this.battle = new BattleManager(this, this.battleGroup, this.room.state.players[this.uid], this.animationManager);
     this.weatherManager = new WeatherManager(this);
-    this.pokemon = this.add.existing(new Pokemon(this, 11*24, 19*24, PokemonFactory.createPokemonFromName(this.room.state.players[this.uid].avatar), false, false));
-    this.animationManager.animatePokemon(this.pokemon);
-
-    this.transitionImage = new GameObjects.Image(this, 720, 450, 'transition').setScale(1.5, 1.5);
-    this.transitionScreen = this.add.container(0, 0, this.transitionImage).setDepth(10);
-    this.transitionScreen.setAlpha(0);
     this.music = this.sound.add('sound', {loop: true});
-    // this.music.setVolume(0.1);
-    this.music.play();
+    this.music.play('',{volume: 0.3, loop: true});
   }
 
   registerKeys() {

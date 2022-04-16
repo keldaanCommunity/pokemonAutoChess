@@ -11,7 +11,8 @@ import EloRank from 'elo-rank';
 import admin from 'firebase-admin';
 import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2';
 import { Pokemon } from '../models/colyseus-models/pokemon';
-import { IPokemon } from '../types';
+import { IPokemon, PokemonIndex } from '../types';
+import PokemonConfig from '../models/colyseus-models/pokemon-config';
 
 export default class GameRoom extends Room {
   dispatcher: Dispatcher<this>;
@@ -32,7 +33,7 @@ export default class GameRoom extends Room {
       const user = options.users[id];
       // console.log(user);
       if (user.isBot) {
-        this.state.players.set(user.id, new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1));
+        this.state.players.set(user.id, new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1, new Map<string,PokemonConfig>()));
         this.state.botManager.addBot(this.state.players.get(user.id));
         this.state.shop.assignShop(this.state.players.get(user.id));
       }
@@ -207,12 +208,10 @@ export default class GameRoom extends Room {
             if (err) {
               console.log(err);
             } else {
-              let expThreshold = XP_TABLE[usr.level];
-              if (expThreshold === undefined) {
-                expThreshold = XP_TABLE[XP_TABLE.length - 1];
-              }
+              const expThreshold = 1000;
               if (usr.exp + player.exp >= expThreshold) {
                 usr.level += 1;
+                usr.booster += 1;
                 usr.exp = usr.exp + player.exp - expThreshold;
               } else {
                 usr.exp = usr.exp + player.exp;
@@ -226,7 +225,7 @@ export default class GameRoom extends Room {
                 if (elo) {
                   usr.elo = elo;
                 }
-                console.log(usr);
+                //console.log(usr);
                 // usr.markModified('metadata';
                 usr.save();
 
@@ -261,8 +260,11 @@ export default class GameRoom extends Room {
 
     player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.positionY != 0) {
+        const shinyPad = pokemon.shiny ? '/0000/0001' : ''; 
+        const avatar = `${pokemon.index}${shinyPad}/${pokemon.emotion}`;
         const s = {
           name: pokemon.name,
+          avatar: avatar,
           items: []
         };
         pokemon.items.forEach((i)=>{
@@ -442,7 +444,7 @@ export default class GameRoom extends Room {
               count -= 1;
             }
           });
-          const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName);
+          const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName, player.pokemonCollection.get(PokemonIndex[pokemonEvolutionName]));
           for (let i = 0; i < 3; i++) {
             const itemToAdd = itemsToAdd.pop();
             if (itemToAdd) {

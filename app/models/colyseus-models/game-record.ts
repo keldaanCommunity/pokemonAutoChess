@@ -1,16 +1,22 @@
 import {Schema, ArraySchema, type} from '@colyseus/schema';
+import { Emotion, PokemonIndex } from '../../types';
+import PokemonFactory from '../pokemon-factory';
 
 export interface IPokemonRecord {
   name: string;
   items: string[];
+  avatar: string;
 }
 export class PokemonRecord extends Schema implements IPokemonRecord{
   @type('string') name:string;
+  @type('string') avatar:string;
   @type(['string']) items = new ArraySchema<string>();
 
   constructor(mongoPokemon: any) {
     super();
     this.name = mongoPokemon.name;
+    this.avatar = mongoPokemon.avatar ? mongoPokemon.avatar: `${PokemonIndex[this.name]}/${Emotion.NORMAL}`;
+
     mongoPokemon.items.forEach((it: string)=>{
       this.items.push(it);
     });

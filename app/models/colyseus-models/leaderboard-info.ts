@@ -16,7 +16,7 @@ export default class LeaderboardInfo extends Schema implements ILeaderboardInfo{
   constructor(name: string, avatar: string, rank: number, value: number) {
     super();
     if (!avatar) {
-      this.avatar = 'rattata';
+      this.avatar = '0019/Normal';
     }
     else{
       this.avatar = avatar;

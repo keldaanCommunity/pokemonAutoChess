@@ -2,6 +2,9 @@ import {Schema, type, ArraySchema} from '@colyseus/schema';
 import {GameRecord, IGameRecord} from './game-record';
 import MapTileset from './map-tileset';
 import WinTileset from './win-tileset';
+import PokemonCollection from './pokemon-collection';
+import PokemonConfig from './pokemon-config';
+import { IPokemonConfig } from '../mongo-models/user-metadata';
 
 export interface ILobbyUser {
   id: string;
@@ -13,8 +16,10 @@ export interface ILobbyUser {
   exp: number;
   level: number;
   donor: boolean;
-  honors: string[],
-  history: IGameRecord[]
+  honors: string[];
+  history: IGameRecord[];
+  pokemonCollection: Map<string, IPokemonConfig>;
+  booster: number;
 }
 export default class LobbyUser extends Schema implements ILobbyUser{
   @type('string') id: string;
@@ -30,6 +35,8 @@ export default class LobbyUser extends Schema implements ILobbyUser{
   @type(WinTileset) mapWin = new WinTileset();
   @type(['string']) honors = new ArraySchema<string>();
   @type([GameRecord]) history = new ArraySchema<IGameRecord>();
+  @type({map: PokemonConfig}) pokemonCollection = new PokemonCollection();
+  @type('uint16') booster: number;
 
 
   constructor(id:string,
@@ -42,7 +49,9 @@ export default class LobbyUser extends Schema implements ILobbyUser{
     level: number,
     donor: boolean,
     history: GameRecord[],
-    honors: string[]) {
+    honors: string[],
+    pokemonCollection: Map<string,IPokemonConfig>,
+    booster: number) {
 
     super();
     this.id = id;
@@ -54,6 +63,7 @@ export default class LobbyUser extends Schema implements ILobbyUser{
     this.exp = exp;
     this.level = level;
     this.donor = donor;
+    this.booster = booster;
 
     if(history && history.length && history.length != 0) {
       history.forEach((h)=>{
@@ -66,9 +76,11 @@ export default class LobbyUser extends Schema implements ILobbyUser{
         this.honors.push(h);
       });
     }
-  }
 
-  toString() {
-    return `id: ${this.id} name:${this.name}`;
+    if(pokemonCollection && pokemonCollection.size) {
+      pokemonCollection.forEach((value, key) => {
+          this.pokemonCollection.set(key, new PokemonConfig(value.id, value));
+      });
+    }
   }
 }

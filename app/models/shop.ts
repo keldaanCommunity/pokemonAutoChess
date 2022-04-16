@@ -1,7 +1,7 @@
 import PokemonFactory from './pokemon-factory';
 import {PKM, PROBABILITY} from './enum';
 import Player from './colyseus-models/player';
-import {IPokemon} from '../types';
+import {Emotion, IPokemon} from '../types';
 
 const COMMON = [PKM.CHARMANDER, PKM.GEODUDE,
   PKM.AZURILL, PKM.ZUBAT,
@@ -49,6 +49,7 @@ const MYTHICAL_2 = [PKM.MELOETTA, PKM.MEWTWO, PKM.ENTEI, PKM.SUICUNE, PKM.RAIKOU
 
 
 export default class Shop {
+
   assignShop(player: Player) {
     for (let i = 0; i < 6; i++) {
       let pokemon = this.pickPokemon(player);

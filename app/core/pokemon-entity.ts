@@ -10,14 +10,15 @@ import {Schema, type, ArraySchema, SetSchema} from '@colyseus/schema';
 import {AttackStrategy} from './attack-strategy';
 import Board from './board';
 import PokemonState from './pokemon-state';
-import { IPokemonEntity, IPokemon } from '../types';
+import { IPokemonEntity, IPokemon, Emotion } from '../types';
 
 export default class PokemonEntity extends Schema implements IPokemonEntity{
 
+  @type('boolean') shiny: boolean;
   @type('uint8') positionX: number;
   @type('uint8') positionY: number;
   @type('string') action = STATE_TYPE.MOVING;
-  @type('uint16') index: number;
+  @type('string') index: string;
   @type('string') id: string;
   @type('string') orientation = ORIENTATION.DOWNLEFT;
   @type('uint8') critChance = 10;
@@ -37,7 +38,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('int8') targetX = -1;
   @type('int8') targetY = -1;
   @type('string') attackSprite: string;
-  @type('string') sheet: string;
   @type('string') rarity: string;
   @type('string') name: string;
   @type(['string']) effects = new ArraySchema<string>();
@@ -50,6 +50,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('float32') critDamage = 2;
   @type('uint8') spellDamage = 0;
   @type('uint16') healDone: number;
+  @type('string') emotion: Emotion;
   cooldown = 500;
   manaCooldown = 1000;
   state: MovingState;
@@ -83,7 +84,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
 
     this.id= uniqid();
     this.rarity = pokemon.rarity;
-    this.sheet = pokemon.sheet;
     this.positionX = positionX;
     this.positionY = positionY;
     this.index = pokemon.index;
@@ -106,6 +106,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
     this.attackSprite = pokemon.attackSprite;
     this.stars = pokemon.stars;
     this.skill = pokemon.skill;
+    this.shiny = pokemon.shiny;
+    this.emotion = pokemon.emotion;
 
     this.dodge = 0;
     this.physicalDamage = 0;

@@ -8,6 +8,7 @@ import GameRoom from '../game-room';
 import { Client } from "colyseus";
 import {MapSchema} from '@colyseus/schema';
 import PokemonEntity from '../../core/pokemon-entity';
+import {PokemonIndex} from '../../types';
 
 export class OnShopCommand extends Command<GameRoom, {
   id: string,
@@ -18,7 +19,7 @@ export class OnShopCommand extends Command<GameRoom, {
       const player = this.state.players.get(id);
       if (player.shop[index]) {
         const name = player.shop[index];
-        let pokemon = PokemonFactory.createPokemonFromName(name);
+        let pokemon = PokemonFactory.createPokemonFromName(name, player.pokemonCollection.get(PokemonIndex[name]));
 
         if (player.money >= pokemon.cost && (this.room.getBoardSize(player.board) < 8 ||
         (this.room.getPossibleEvolution(player.board, pokemon.name) && this.room.getBoardSize(player.board) == 8))) {
@@ -31,13 +32,13 @@ export class OnShopCommand extends Command<GameRoom, {
               });
               switch (rankArray[0].s) {
                 case TYPE.FIRE:
-                  pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMSUN);
+                  pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMSUN, player.pokemonCollection.get(PokemonIndex[PKM.CASTFORMSUN]));
                   break;
                 case TYPE.WATER:
-                  pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMRAIN);
+                  pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMRAIN, player.pokemonCollection.get(PokemonIndex[PKM.CASTFORMRAIN]));
                   break;
                 case TYPE.ICE:
-                  pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMHAIL);
+                  pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMHAIL, player.pokemonCollection.get(PokemonIndex[PKM.CASTFORMHAIL]));
                   break;
               }
             }
@@ -101,7 +102,7 @@ export class OnDragDropCommand extends Command<GameRoom, {
             const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y);
             if (pokemonToClone && pokemonToClone.rarity != RARITY.MYTHICAL && !pokemonToClone.types.includes(TYPE.FOSSIL)) {
               dittoReplaced = true;
-              const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name));
+              const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name), player.pokemonCollection.get(PokemonIndex[pokemonToClone.name]));
               this.state.players.get(playerId).board.delete(detail.id);
               const position = this.room.getFirstAvailablePositionInBoard(playerId);
               if (position !== undefined) {
@@ -483,7 +484,8 @@ export class OnJoinCommand extends Command<GameRoom, {
             user.elo,
             user.avatar,
             false,
-            this.state.players.size + 1
+            this.state.players.size + 1,
+            user.pokemonCollection
         ));
         if (client && client.auth && client.auth.displayName) {
           console.log(`${client.auth.displayName} ${client.id} join game room`);
@@ -730,7 +732,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         player.board.forEach((pokemon, key)=>{
           if (pokemon.fossilTimer !== undefined) {
             if (pokemon.fossilTimer == 0) {
-              const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemon.evolution);
+              const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemon.evolution, player.pokemonCollection.get(pokemon.index));
               pokemon.items.forEach((i)=>{
                 pokemonEvolved.items.add(i);
                 switch (i) {

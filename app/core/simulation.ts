@@ -133,22 +133,35 @@ export default class Simulation extends Schema implements ISimulation{
 
     if (team == 0) {
       this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects);
-      const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
-      const dpsHeal = new DpsHeal(pokemonEntity.id, pokemonEntity.name);
+      const dps = new Dps(pokemonEntity.id, this.getPath(pokemonEntity));
+      const dpsHeal = new DpsHeal(pokemonEntity.id, this.getPath(pokemonEntity));
       this.blueTeam.set(pokemonEntity.id, pokemonEntity);
       this.blueDpsMeter.set(pokemonEntity.id, dps);
       this.blueHealDpsMeter.set(pokemonEntity.id, dpsHeal);
     }
     if (team == 1) {
       this.applyEffects(pokemonEntity, pokemon.types, this.redEffects);
-      const dps = new Dps(pokemonEntity.id, pokemonEntity.name);
-      const dpsHeal = new DpsHeal(pokemonEntity.id, pokemonEntity.name);
+      const dps = new Dps(pokemonEntity.id, this.getPath(pokemonEntity));
+      const dpsHeal = new DpsHeal(pokemonEntity.id, this.getPath(pokemonEntity));
       this.redTeam.set(pokemonEntity.id, pokemonEntity);
       this.redDpsMeter.set(pokemonEntity.id, dps);
       this.redHealDpsMeter.set(pokemonEntity.id, dpsHeal);
     }
     return pokemonEntity;
   }
+
+  getPath(pokemon: IPokemonEntity) {
+    let pokemonPath = '';
+    const index = pokemon.index;
+    pokemonPath += index + '/';
+
+    if(pokemon.shiny){
+        pokemonPath += '0000/0001/';
+    }
+    pokemonPath += pokemon.emotion;
+    return pokemonPath;
+}
+
 
   addPokemonEntity(p: PokemonEntity, x: number, y:number, team: number) {
     const pokemon = PokemonFactory.createPokemonFromName(p.name);

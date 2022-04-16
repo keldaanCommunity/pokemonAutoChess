@@ -15,7 +15,7 @@ export default class Bot {
     this.step = 0;
     this.progress = 0;
 
-    BOT.findOne({'avatar': player.name}, ['steps'], null, (err, bot)=>{
+    BOT.findOne({'avatar': player.avatar}, ['steps'], null, (err, bot)=>{
       this.scenario = bot;
       this.updatePlayerTeam();
     });
