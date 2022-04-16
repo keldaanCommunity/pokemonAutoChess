@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { PRECOMPUTED_TYPE_POKEMONS_ALL, CDN_URL } from '../../../../../models/enum';
+import { CDN_URL } from '../../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { Emotion, PokemonIndex } from '../../../../../types';
 import PokemonFactory from '../../../../../models/pokemon-factory';
+import PRECOMPUTED_TYPE_POKEMONS_ALL from '../../../../../models/precomputed/type-pokemons-all.json';
 
 const pokemonPoolStyle = {
     display:'flex',

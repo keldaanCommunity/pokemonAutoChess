@@ -198,7 +198,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, {
         const k = Object.keys(PokemonIndex)[vIndex];
 
         this.state.users.set(bot.avatar, new GameUser(
-          k,
+          bot.avatar,
           k,
           bot.elo,
           bot.avatar,
@@ -208,7 +208,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, {
 
       this.room.broadcast('messages', {
         'name': 'Server',
-        'payload': `Bot ${ bot.avatar } added.`,
+        'payload': `Bot ${ k } added.`,
         'avatar': `0081/${Emotion.NORMAL}`,
         'time': Date.now()
       });
@@ -222,6 +222,7 @@ export class OnRemoveBotCommand extends Command<PreparationRoom, {
   target: string
   }> {
   execute({target}) {
+    console.log(target);
     // if no message, delete a random bot
     if (!target) {
       // let botDeleted = false;
