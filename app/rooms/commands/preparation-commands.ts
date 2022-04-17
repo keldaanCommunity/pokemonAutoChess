@@ -179,7 +179,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         break;
     }
 
-    BotV2.find({avatar: {$nin: userArray}, elo: d}, ['avatar', 'elo'], null, (err, bots) => {
+    BotV2.find({avatar: {$nin: userArray}, elo: d}, ['avatar', 'elo', 'name'], null, (err, bots) => {
       if (bots.length <= 0) {
         this.room.broadcast('messages', {
           'name': 'Server',
@@ -196,14 +196,9 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         return;
       }
       else{
-        const index = bot.avatar.split('/')[0];
-        const v = Object.values(PokemonIndex);
-        const vIndex = v.findIndex(e=>e==index);
-        const k = Object.keys(PokemonIndex)[vIndex];
-
         this.state.users.set(bot.avatar, new GameUser(
           bot.avatar,
-          k,
+          bot.name,
           bot.elo,
           bot.avatar,
           true,
@@ -212,7 +207,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
 
       this.room.broadcast('messages', {
         'name': 'Server',
-        'payload': `Bot ${ k } added.`,
+        'payload': `Bot ${ bot.name } added.`,
         'avatar': `0081/${Emotion.NORMAL}`,
         'time': Date.now()
       });

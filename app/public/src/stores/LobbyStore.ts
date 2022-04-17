@@ -170,7 +170,8 @@ const initialState: IUserLobbyState = {
         ],
         avatar:'ditto',
         author:'',
-        elo: 1200
+        elo: 1200,
+        name: 'ditto'
       }
 }
 
