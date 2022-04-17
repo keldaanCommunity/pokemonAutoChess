@@ -36,7 +36,10 @@ export default function PokemonEmotion(props:{index: string, shiny: boolean, unl
             className='customeTheme'
             backgroundColor='rgba(255,255,255,1)' 
             effect='solid'>
-            <p>{props.unlocked ? `Click to select the ${props.emotion} emotion for you pokemon` : `Click to unlock the ${props.emotion} emotion for you pokemon`}</p>
+            <div style={{display:'flex', alignItems: 'center'}}>
+                <img style={{width:'80px', height:'80px', imageRendering:'pixelated'}} src={`${CDN_URL}${props.path}/${props.emotion}.png`}></img>
+                <p>{props.unlocked ? `Click to select the ${props.emotion} emotion for you pokemon` : `Click to unlock the ${props.emotion} emotion for you pokemon`}</p>
+            </div>
         </ReactTooltip>
     </div>
 }
