@@ -189,11 +189,15 @@ export default function Game() {
           });
         });
 
-        player.synergies.onChange = ((changes) => {
+
+        player.synergies.onChange = (value, key) => {
+
           if(player.id == currentPlayerId){
             dispatch(setSynergies(player.synergies));
           }
-        });
+        }
+
+        
         player.itemsProposition.onAdd = ((changes)=>{
           if(player.id == uid){
             dispatch(setItemsProposition(player.itemsProposition));
@@ -289,7 +293,7 @@ export default function Game() {
     <GameInformations leave={leave}/>
     <GamePlayerInformations/>
     <GamePlayers click={(id: string) => playerClick(id)}/>
-    <GameSynergies source='game'/>
+    <GameSynergies/>
     <GameRarityPercentage/>
     <GameItemsProposition/>
     <GameDpsMeter/>

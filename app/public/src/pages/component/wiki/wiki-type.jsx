@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { TYPE_DETAILS, TYPE_TRADUCTION, CDN_URL } from '../../../../../models/enum';
+import { CDN_URL } from '../../../../../models/enum';
 import { Emotion } from '../../../../../types';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import PRECOMPUTED_TYPE_POKEMONS_ALL from '../../../../../models/precomputed/type-pokemons-all.json';
+import {SynergyName, SynergyDetail} from '../../../../../types/strings/Synergy';
 
 class WikiType extends Component {
   render() {
     return <div>
         <div style={{display:'flex'}}>
             <img src={"assets/types/" + this.props.type + ".png"}></img>
-            <p>{TYPE_TRADUCTION[this.props.type].eng}</p>
+            <p>{SynergyName[this.props.type].eng}</p>
         </div>
-        {TYPE_DETAILS[this.props.type].description.eng.map(info=>{
+        {SynergyDetail[this.props.type].description.eng.map(info=>{
             return <div key={info.title} style={{display:'flex'}}>
                 <p>
                     {info.title}: 

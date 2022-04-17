@@ -1,5 +1,6 @@
 import {Command} from '@colyseus/command';
-import {STATE, COST, TYPE, ITEM, RARITY, PKM, BATTLE_RESULT, NEUTRAL_STAGE, BASIC_ITEM, ITEM_RECIPE} from '../../models/enum';
+import { COST, ITEM, PKM, BASIC_ITEM, ITEM_RECIPE, NEUTRAL_STAGE } from '../../models/enum';
+import { BattleResult } from '../../types/enum/Game';
 import Player from '../../models/colyseus-models/player';
 import PokemonFactory from '../../models/pokemon-factory';
 import ItemFactory from '../../models/item-factory';
@@ -8,7 +9,9 @@ import GameRoom from '../game-room';
 import { Client } from "colyseus";
 import {MapSchema} from '@colyseus/schema';
 import PokemonEntity from '../../core/pokemon-entity';
+import { GamePhaseState, Rarity } from '../../types/enum/Game';
 import {PokemonIndex} from '../../types';
+import { Synergy } from '../../types/enum/Synergy';
 
 export class OnShopCommand extends Command<GameRoom, {
   id: string,
@@ -16,28 +19,31 @@ export class OnShopCommand extends Command<GameRoom, {
 }> {
   execute({id, index}) {
     if (id !== true && index !== true && this.state.players.has(id)) {
+      
+
       const player = this.state.players.get(id);
       if (player.shop[index]) {
+        
+        
         const name = player.shop[index];
         let pokemon = PokemonFactory.createPokemonFromName(name, player.pokemonCollection.get(PokemonIndex[name]));
-
         if (player.money >= pokemon.cost && (this.room.getBoardSize(player.board) < 8 ||
         (this.room.getPossibleEvolution(player.board, pokemon.name) && this.room.getBoardSize(player.board) == 8))) {
           player.money -= pokemon.cost;
           if (pokemon.name == PKM.CASTFORM) {
             if (player.synergies.FIRE > 0 || player.synergies.WATER > 0 || player.synergies.ICE) {
-              const rankArray = [{s: TYPE.FIRE, v: player.synergies.FIRE}, {s: TYPE.WATER, v: player.synergies.WATER}, {s: TYPE.ICE, v: player.synergies.ICE}];
+              const rankArray = [{s: Synergy.FIRE, v: player.synergies.FIRE}, {s: Synergy.WATER, v: player.synergies.WATER}, {s: Synergy.ICE, v: player.synergies.ICE}];
               rankArray.sort((a, b)=>{
                 return b.v -a.v;
               });
               switch (rankArray[0].s) {
-                case TYPE.FIRE:
+                case Synergy.FIRE:
                   pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMSUN, player.pokemonCollection.get(PokemonIndex[PKM.CASTFORMSUN]));
                   break;
-                case TYPE.WATER:
+                case Synergy.WATER:
                   pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMRAIN, player.pokemonCollection.get(PokemonIndex[PKM.CASTFORMRAIN]));
                   break;
-                case TYPE.ICE:
+                case Synergy.ICE:
                   pokemon = PokemonFactory.createPokemonFromName(PKM.CASTFORMHAIL, player.pokemonCollection.get(PokemonIndex[PKM.CASTFORMHAIL]));
                   break;
               }
@@ -46,8 +52,7 @@ export class OnShopCommand extends Command<GameRoom, {
           pokemon.positionX = this.room.getFirstAvailablePositionInBoard(player.id);
           pokemon.positionY = 0;
           player.board.set(pokemon.id, pokemon);
-
-          if (pokemon.rarity == RARITY.MYTHICAL) {
+          if (pokemon.rarity == Rarity.MYTHICAL) {
             this.state.shop.assignShop(player);
           } else {
             player.shop[index] = '';
@@ -100,7 +105,7 @@ export class OnDragDropCommand extends Command<GameRoom, {
           const y = parseInt(detail.y);
           if (pokemon.name == PKM.DITTO) {
             const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y);
-            if (pokemonToClone && pokemonToClone.rarity != RARITY.MYTHICAL && !pokemonToClone.types.includes(TYPE.FOSSIL)) {
+            if (pokemonToClone && pokemonToClone.rarity != Rarity.MYTHICAL && !pokemonToClone.types.includes(Synergy.FOSSIL)) {
               dittoReplaced = true;
               const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name), player.pokemonCollection.get(PokemonIndex[pokemonToClone.name]));
               this.state.players.get(playerId).board.delete(detail.id);
@@ -117,7 +122,7 @@ export class OnDragDropCommand extends Command<GameRoom, {
             if ( y == 0 && pokemon.positionY == 0) {
               this.room.swap(playerId, pokemon, x, y);
               success = true;
-            } else if (this.state.phase == STATE.PICK) {
+            } else if (this.state.phase == GamePhaseState.PICK) {
               const teamSize = this.room.getTeamSize(this.state.players.get(playerId).board);
               if (teamSize < this.state.players.get(playerId).experienceManager.level) {
                 this.room.swap(playerId, pokemon, x, y);
@@ -267,31 +272,31 @@ export class OnDragDropCommand extends Command<GameRoom, {
         // regular equip
         switch (item) {
           case ITEM.WATER_STONE:
-            pokemon.types.push(TYPE.WATER);
+            pokemon.types.push(Synergy.WATER);
             break;
           case ITEM.FIRE_STONE:
-            pokemon.types.push(TYPE.FIRE);
+            pokemon.types.push(Synergy.FIRE);
             break;
           case ITEM.THUNDER_STONE:
-            pokemon.types.push(TYPE.ELECTRIC);
+            pokemon.types.push(Synergy.ELECTRIC);
             break;
           case ITEM.DUSK_STONE:
-            pokemon.types.push(TYPE.DARK);
+            pokemon.types.push(Synergy.DARK);
             break;
           case ITEM.MOON_STONE:
-            pokemon.types.push(TYPE.FAIRY);
+            pokemon.types.push(Synergy.FAIRY);
             break;
           case ITEM.LEAF_STONE:
-            pokemon.types.push(TYPE.GRASS);
+            pokemon.types.push(Synergy.GRASS);
             break;
           case ITEM.DAWN_STONE:
-            pokemon.types.push(TYPE.PSYCHIC);
+            pokemon.types.push(Synergy.PSYCHIC);
             break;
           case ITEM.ICY_ROCK:
-            pokemon.types.push(TYPE.ICE);
+            pokemon.types.push(Synergy.ICE);
             break;
           case ITEM.OLD_AMBER:
-            pokemon.types.push(TYPE.FOSSIL);
+            pokemon.types.push(Synergy.FOSSIL);
             break;
         }
 
@@ -413,7 +418,7 @@ export class OnSellDropCommand extends Command<GameRoom, {
 
       if (PokemonFactory.getPokemonBaseEvolution(pokemon.name) == PKM.EEVEE) {
         player.money += COST[pokemon.rarity];
-      } else if (pokemon.types.includes(TYPE.FOSSIL)) {
+      } else if (pokemon.types.includes(Synergy.FOSSIL)) {
         player.money += 5 + COST[pokemon.rarity] * pokemon.stars;
       } else {
         player.money += COST[pokemon.rarity] * pokemon.stars;
@@ -514,7 +519,7 @@ export class OnUpdateCommand extends Command<GameRoom, {
       }
       if (this.state.time < 0) {
         updatePhaseNeeded = true;
-      } else if (this.state.phase == STATE.FIGHT) {
+      } else if (this.state.phase == GamePhaseState.FIGHT) {
         let everySimulationFinished = true;
 
         this.state.players.forEach((player, key) => {
@@ -539,13 +544,13 @@ export class OnUpdateCommand extends Command<GameRoom, {
 
 export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   execute() {
-    if (this.state.phase == STATE.PICK) {
+    if (this.state.phase == GamePhaseState.PICK) {
       const commands = this.checkForLazyTeam();
       if (commands.length != 0) {
         return commands;
       }
       this.initializeFightingPhase();
-    } else if (this.state.phase == STATE.FIGHT) {
+    } else if (this.state.phase == GamePhaseState.FIGHT) {
       this.computeStreak();
       this.computeLife();
       this.rankPlayers();
@@ -638,7 +643,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       if (player.alive) {
         const currentResult = player.getCurrentBattleResult();
 
-        if (currentResult == BATTLE_RESULT.DEFEAT || currentResult == BATTLE_RESULT.DRAW) {
+        if (currentResult == BattleResult.DEFEAT || currentResult == BattleResult.DRAW) {
           player.life = player.life - this.computePlayerDamage(player.simulation.redTeam, player.experienceManager.level, this.state.stageLevel);
         }
         player.addBattleResult(player.opponentName, currentResult, player.opponentAvatar, isPVE);
@@ -658,7 +663,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       const currentResult = player.getCurrentBattleResult();
       const lastPlayerResult = player.getLastPlayerBattleResult();
 
-      if (currentResult == BATTLE_RESULT.DRAW || currentResult != lastPlayerResult) {
+      if (currentResult == BattleResult.DRAW || currentResult != lastPlayerResult) {
         player.streak = 0;
       } else {
         player.streak = Math.min(player.streak + 1, 5);
@@ -672,7 +677,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         player.interest = Math.min(Math.floor(player.money / 10), 5);
         player.money += player.interest;
         player.money += player.streak;
-        if (player.getLastBattleResult() == BATTLE_RESULT.WIN) {
+        if (player.getLastBattleResult() == BattleResult.WIN) {
           player.money += 1;
         }
         player.money += 5;
@@ -691,7 +696,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   initializePickingPhase() {
-    this.state.phase = STATE.PICK;
+    this.state.phase = GamePhaseState.PICK;
     const isPVE = this.checkForPVE();
 
     this.state.time = 30000;
@@ -702,7 +707,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         if (player.isBot) {
           player.experienceManager.level = Math.min(9, Math.round(this.state.stageLevel/2));
         }
-        if (isPVE && player.getLastBattleResult() == BATTLE_RESULT.WIN) {
+        if (isPVE && player.getLastBattleResult() == BattleResult.WIN) {
           const items = ItemFactory.createRandomItems();
           // let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
           items.forEach((item)=>{
@@ -737,31 +742,31 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
                 pokemonEvolved.items.add(i);
                 switch (i) {
                   case ITEM.WATER_STONE:
-                    pokemonEvolved.types.push(TYPE.WATER);
+                    pokemonEvolved.types.push(Synergy.WATER);
                     break;
                   case ITEM.FIRE_STONE:
-                    pokemonEvolved.types.push(TYPE.FIRE);
+                    pokemonEvolved.types.push(Synergy.FIRE);
                     break;
                   case ITEM.THUNDER_STONE:
-                    pokemonEvolved.types.push(TYPE.ELECTRIC);
+                    pokemonEvolved.types.push(Synergy.ELECTRIC);
                     break;
                   case ITEM.DUSK_STONE:
-                    pokemonEvolved.types.push(TYPE.DARK);
+                    pokemonEvolved.types.push(Synergy.DARK);
                     break;
                   case ITEM.MOON_STONE:
-                    pokemonEvolved.types.push(TYPE.FAIRY);
+                    pokemonEvolved.types.push(Synergy.FAIRY);
                     break;
                   case ITEM.LEAF_STONE:
-                    pokemonEvolved.types.push(TYPE.GRASS);
+                    pokemonEvolved.types.push(Synergy.GRASS);
                     break;
                   case ITEM.DAWN_STONE:
-                    pokemonEvolved.types.push(TYPE.PSYCHIC);
+                    pokemonEvolved.types.push(Synergy.PSYCHIC);
                     break;
                   case ITEM.ICY_ROCK:
-                    pokemonEvolved.types.push(TYPE.ICE);
+                    pokemonEvolved.types.push(Synergy.ICE);
                     break;
                   case ITEM.OLD_AMBER:
-                    pokemonEvolved.types.push(TYPE.FOSSIL);
+                    pokemonEvolved.types.push(Synergy.FOSSIL);
                     break;
                 }
               });
@@ -821,7 +826,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   initializeFightingPhase() {
-    this.state.phase = STATE.FIGHT;
+    this.state.phase = GamePhaseState.FIGHT;
     this.state.time = 40000;
     this.state.stageLevel += 1;
     this.state.botManager.updateBots();

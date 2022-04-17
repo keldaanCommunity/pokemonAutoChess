@@ -1,8 +1,9 @@
 import Jimp from 'jimp';
 import {XMLParser} from 'fast-xml-parser';
 import fs from 'fs';
-import { PKM, PKM_TINT, PKM_ANIM, PKM_ACTION } from '../app/models/enum';
+import { PKM, PokemonTint, SpriteType } from '../app/models/enum';
 import PokemonFactory from '../app/models/pokemon-factory';
+import { PokemonActionState } from '../app/types/enum/Game';
 
 const args = process.argv.slice(2);
 const path = args[0];
@@ -53,7 +54,7 @@ async function split(){
         const shinyPad = pathIndex.length == 4 ? `${pathIndex}/0000/0001`:  `${pathIndex}/0001`;
         await Promise.all([pathIndex, shinyPad].map(async pad => {
             try{
-                const shiny = pathIndex == pad ? PKM_TINT.NORMAL : PKM_TINT.SHINY;
+                const shiny = pathIndex == pad ? PokemonTint.NORMAL : PokemonTint.SHINY;
                 // const creditFile = fs.readFileSync(`${path}/sprite/${pad}/credits.txt`);
                 // const splitted = creditFile.toString().split('\t');
                 // credits[`${index}_${shiny}`] = {date:'', author: ''};
@@ -64,8 +65,8 @@ async function split(){
                 const xmlFile = fs.readFileSync(`${path}/sprite/${pad}/AnimData.xml`);
                 const parser = new XMLParser();
                 const xmlData = <IPMDCollab> parser.parse(xmlFile);
-                await Promise.all(Object.values(PKM_ANIM).map(async anim => {
-                    await Promise.all(Object.values(PKM_ACTION).map(async action => {
+                await Promise.all(Object.values(SpriteType).map(async anim => {
+                    await Promise.all(Object.values(PokemonActionState).map(async action => {
                         try{
                             let img;
                             let metadata = xmlData.AnimData.Anims.Anim.find(m=>m.Name==action);
@@ -90,7 +91,7 @@ async function split(){
                                 for (let y = 0; y < height; y++) {
                                     const cropImg = img.clone();
                                 
-                                    if(anim == PKM_ANIM.SHADOW){
+                                    if(anim == SpriteType.SHADOW){
                                         const shadow = xmlData.AnimData.ShadowSize;
                                         if(shadow == 0){
                                             removeRed(cropImg);

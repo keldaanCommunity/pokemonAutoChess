@@ -5,7 +5,7 @@ import BotV2 from "../../models/mongo-models/bot-v2";
 import { Client } from "colyseus";
 import PreparationRoom from "../preparation-room";
 import { Emotion, IMessage, PokemonIndex } from "../../types";
-import { BOT_DIFFICULTY } from "../../models/enum";
+import { BotDifficulty } from "../../types/enum/Game";
 import PokemonFactory from '../../models/pokemon-factory';
 
 export class OnJoinCommand extends Command<PreparationRoom, {
@@ -145,10 +145,12 @@ export class InitializeBotsCommand extends Command<PreparationRoom, {
   }
 }
 
-export class OnAddBotCommand extends Command<PreparationRoom, {
-  difficulty: BOT_DIFFICULTY
-}> {
-  execute({difficulty}) {
+type OnAddBotPayload = {
+  difficulty: BotDifficulty
+}
+
+export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
+  execute(data: OnAddBotPayload) {
     if (this.state.users.size >= 8) {
       return;
     }
@@ -161,16 +163,18 @@ export class OnAddBotCommand extends Command<PreparationRoom, {
       }
     });
 
-    let d;
+    const { difficulty } = data
+
+    let d;  
     
     switch (difficulty) {
-      case BOT_DIFFICULTY.EASY:
+      case BotDifficulty.EASY:
         d = {$lt: 800};
         break;
-      case BOT_DIFFICULTY.MEDIUM:
+      case BotDifficulty.MEDIUM:
         d = {$gt: 800, $lt: 1100};
         break;
-      case BOT_DIFFICULTY.HARD:
+      case BotDifficulty.HARD:
         d = {$gt: 1100};
         break;
     }

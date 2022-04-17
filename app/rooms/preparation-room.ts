@@ -13,7 +13,7 @@ import {
   InitializeBotsCommand,
   OnRoomNameCommand
 } from './commands/preparation-commands';
-import { BOT_DIFFICULTY } from '../models/enum';
+import { BotDifficulty } from '../types/enum/Game';
 import { IPreparationMetadata } from '../types';
 
 export default class PreparationRoom extends Room {
@@ -74,9 +74,9 @@ export default class PreparationRoom extends Room {
         console.log(error);
       }
     });
-    this.onMessage('addBot', (client: Client, d: string) => {
+    this.onMessage('addBot', (client: Client, difficulty: BotDifficulty) => {
       try {
-        this.dispatcher.dispatch(new OnAddBotCommand(), {difficulty: BOT_DIFFICULTY[d]});
+        this.dispatcher.dispatch(new OnAddBotCommand(), { difficulty });
       } catch (error) {
         console.log(error);
       }

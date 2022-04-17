@@ -4,13 +4,13 @@ import {Pokemon} from './pokemon';
 import Simulation from '../../core/simulation';
 import Synergies from './synergies';
 import {Effects} from '../effects';
-import BattleResult from './battle-result';
 import ExperienceManager from './experience-manager';
-import { BATTLE_RESULT } from '../enum';
+import { BattleResult } from '../../types/enum/Game';
 import { IPlayer, IPokemon } from '../../types';
 import PokemonConfig from './pokemon-config';
 import { IPokemonConfig } from '../mongo-models/user-metadata';
 import PokemonCollection from './pokemon-collection';
+import HistoryItem from './history-item';
 
 export default class Player extends Schema implements IPlayer{
   @type('string') id: string;
@@ -20,7 +20,7 @@ export default class Player extends Schema implements IPlayer{
   @type(['string']) shop = new ArraySchema<string>();
   @type(Simulation) simulation = new Simulation();
   @type(ExperienceManager) experienceManager = new ExperienceManager();
-  @type(Synergies) synergies = new Synergies();
+  @type({map: 'uint8'}) synergies = new Synergies();
   @type(['string']) itemsProposition = new ArraySchema<string>();
   @type('uint8') money = process.env.MODE == 'dev' ? 400 : 5;
   @type('uint8') life = process.env.MODE == 'dev' ? 50 : 100;
@@ -36,7 +36,7 @@ export default class Player extends Schema implements IPlayer{
   @type('uint16') elo: number;
   @type('boolean') alive = true;
   @type('string') tileset: string;
-  @type([BattleResult]) history = new ArraySchema<BattleResult>();
+  @type([HistoryItem]) history = new ArraySchema<HistoryItem>();
   @type({map: PokemonConfig}) pokemonCollection;
   effects: Effects = new Effects();
   isBot: boolean;
@@ -56,18 +56,18 @@ export default class Player extends Schema implements IPlayer{
 
   getCurrentBattleResult() {
     if (this.simulation.blueTeam.size == 0) {
-      return BATTLE_RESULT.DEFEAT;
+      return BattleResult.DEFEAT;
     } else if (this.simulation.redTeam.size == 0) {
-      return BATTLE_RESULT.WIN;
+      return BattleResult.WIN;
     }
-    return BATTLE_RESULT.DRAW;
+    return BattleResult.DRAW;
   }
 
-  addBattleResult(name: string, result: string, avatar: string, isPVE: boolean) {
+  addBattleResult(name: string, result: BattleResult, avatar: string, isPVE: boolean) {
     if (this.history.length >= 5) {
       this.history.shift();
     }
-    this.history.push(new BattleResult(name, result, avatar, isPVE));
+    this.history.push(new HistoryItem(name, result, avatar, isPVE));
   }
 
   getLastBattleResult() {

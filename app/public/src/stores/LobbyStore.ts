@@ -3,12 +3,13 @@ import LobbyUser, {ILobbyUser} from "../../../models/colyseus-models/lobby-user"
 import Message from "../../../models/colyseus-models/message";
 import LeaderboardInfo, { ILeaderboardInfo } from "../../../models/colyseus-models/leaderboard-info";
 import { RoomAvailable } from "colyseus.js";
-import { IMessage, IPreparationMetadata, ISynergies } from "../../../types";
+import { IMessage, IPreparationMetadata } from "../../../types";
 import { IMeta } from "../../../models/mongo-models/meta";
 import { IBot } from "../../../models/mongo-models/bot-v2";
 import { IItemsStatistic } from "../../../models/mongo-models/items-statistic";
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata";
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config";
+import { Synergy } from "../../../types/enum/Synergy";
 
 interface IUserLobbyState {
     messages: IMessage[];
@@ -24,7 +25,7 @@ interface IUserLobbyState {
     metaItems: IItemsStatistic[];
     pastebinUrl: string;
     botData: IBot;
-    synergies: ISynergies;
+    synergies: [string, number][];
     pokemonCollection: IPokemonConfig[];
     boosterContent: string[];
 }
@@ -256,8 +257,8 @@ export const lobbySlice = createSlice({
         setBotData: (state, action: PayloadAction<IBot>) => {
             state.botData = action.payload
         },
-        setSynergies: (state, action: PayloadAction<ISynergies>) => {
-            state.synergies = action.payload;
+        setBotCreatorSynergies: (state, action: PayloadAction<Map<Synergy,number>>) => {
+            state.synergies = Array.from(action.payload);
         },
         setBoosterContent: (state, action: PayloadAction<string[]>) => {
           state.boosterContent = action.payload;
@@ -287,7 +288,7 @@ export const {
     setPastebinUrl,
     setBotData,
     leaveLobby,
-    setSynergies
+    setBotCreatorSynergies
 } = lobbySlice.actions;
 
 export default lobbySlice.reducer;
