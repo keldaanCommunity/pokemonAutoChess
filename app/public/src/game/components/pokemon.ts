@@ -131,6 +131,11 @@ export default class Pokemon extends Button {
 
   enterButtonActiveState(pointer: Phaser.Input.Pointer){
     if(pointer.rightButtonDown()){
+      const s = <GameScene> this.scene;
+      if(s.lastPokemonDetail && s.lastPokemonDetail != this){
+        s.lastPokemonDetail.closeDetail();
+        s.lastPokemonDetail = undefined;
+      }
       if (this.detail) {
         this.closeDetail();
       }
@@ -142,6 +147,7 @@ export default class Pokemon extends Button {
         }
         this.detail.setPosition(this.detail.width / 2 + 40, -this.detail.height / 2 - 40);
         this.add(this.detail);
+        s.lastPokemonDetail = this;
       }
     }
   }
