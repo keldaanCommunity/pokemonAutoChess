@@ -49,7 +49,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type({set: 'string'}) items = new SetSchema<string>();
   @type(['string']) types = new ArraySchema<Synergy>();
   @type('uint8') stars: number;
-  @type('uint8')  skill: Ability;
+  @type('string')  skill: Ability;
   @type(Status) status: Status;
   @type(Count) count: Count;
   @type('float32') critDamage = 2;

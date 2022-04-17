@@ -1,19 +1,13 @@
 import {Schema, type, MapSchema} from '@colyseus/schema';
 import PokemonFactory from '../pokemon-factory';
-import { IPokemon, ISynergies } from '../../types';
+import { IPokemon } from '../../types';
 import { Synergy } from '../../types/enum/Synergy';
 
-export default class Synergies extends Schema implements ISynergies{
-
-  @type({map: 'uint8'}) syns = new MapSchema<number>();
+export default class Synergies extends MapSchema<number> implements Map<string,number>{
 
   constructor(){
     super();
-
-    Object.values(Synergy).forEach((key) => {
-      this.syns.set(key, 0)
-    })
-    this.setToZero();
+    Object.keys(Synergy).forEach((key) => {this.set(key,0)});
   }
 
   update(board: MapSchema<IPokemon>) {
@@ -26,7 +20,7 @@ export default class Synergies extends Schema implements ISynergies{
       if (!pokemonNames.includes(family) && pkm.positionY != 0) {
         pokemonNames.push(family);
         pkm.types.forEach( (type) => {
-          this.syns.set(type, this.syns.get(type) + 1)
+          this.set(type, this.get(type) + 1)
         });
       }
     });
@@ -34,28 +28,7 @@ export default class Synergies extends Schema implements ISynergies{
   }
 
   setToZero() {
-    this.syns.forEach((value, key) => {
-      this.syns.set(key, 0)
-    })
+    this.forEach((value, key) => {this.set(key, 0)});
   }
 
-  get(synergy: Synergy){
-    return this.syns.get(synergy)
-  }
-
-  printSynergies() {
-    this.syns.forEach((value, key) => {
-      console.log('synergies: ', key, value)
-    })
-  }
-
-  getSynergies() {
-    const result = {}
-
-    this.syns.forEach((value, key) => {
-      result[key] = value
-    })
-
-    return result
-  }
 }

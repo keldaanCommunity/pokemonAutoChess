@@ -94,11 +94,6 @@ export interface IPokemon {
     emotion: Emotion
 }
 
-export interface ISynergies {  
-    syns: MapSchema<number>
-    
-  }
-
 export interface IExperienceManager {
     level: number
     experience: number

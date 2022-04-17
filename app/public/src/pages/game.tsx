@@ -190,7 +190,7 @@ export default function Game() {
         });
 
 
-        player.synergies.syns.onChange = (value, key) => {
+        player.synergies.onChange = (value, key) => {
 
           if(player.id == currentPlayerId){
             dispatch(setSynergies(player.synergies));
@@ -293,7 +293,7 @@ export default function Game() {
     <GameInformations leave={leave}/>
     <GamePlayerInformations/>
     <GamePlayers click={(id: string) => playerClick(id)}/>
-    <GameSynergies source='game'/>
+    <GameSynergies/>
     <GameRarityPercentage/>
     <GameItemsProposition/>
     <GameDpsMeter/>

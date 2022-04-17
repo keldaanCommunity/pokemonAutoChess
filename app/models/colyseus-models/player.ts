@@ -20,7 +20,7 @@ export default class Player extends Schema implements IPlayer{
   @type(['string']) shop = new ArraySchema<string>();
   @type(Simulation) simulation = new Simulation();
   @type(ExperienceManager) experienceManager = new ExperienceManager();
-  @type(Synergies) synergies = new Synergies();
+  @type({map: 'uint8'}) synergies = new Synergies();
   @type(['string']) itemsProposition = new ArraySchema<string>();
   @type('uint8') money = process.env.MODE == 'dev' ? 400 : 5;
   @type('uint8') life = process.env.MODE == 'dev' ? 50 : 100;

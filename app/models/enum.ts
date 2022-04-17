@@ -2,6 +2,8 @@ import { Rarity } from "../types/enum/Game";
 import { Effect } from "../types/enum/Effect"
 import { Ability } from "../types/enum/Ability"
 import { Synergy } from "../types/enum/Synergy";
+import { Emotion } from "../types";
+import PokemonFactory from "./pokemon-factory";
 
 export enum BOT_DIFFICULTY {
   EASY = "EASY",
@@ -2100,8 +2102,6 @@ export const PROBABILITY = {
   9: [0.1, 0.19, 0.31, 0.30, 0.1]
 };
 
-export const NEUTRAL_STAGE = [];
-
 export const FLYING_PROTECT_THRESHOLD = Object.freeze({
   [Effect.TAILWIND]: {
     duration: 1000,
@@ -3409,5 +3409,60 @@ export const ITEM_RECIPE = {
   MAX_REVIVE: [ITEM.CHARCOAL, ITEM.HEART_SCALE],
   ROCKY_HELMET: [ITEM.HEART_SCALE, ITEM.HEART_SCALE]
 };
+
+export const NEUTRAL_STAGE = [
+  {
+    turn: 1,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.MAGIKARP).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 2,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.RATICATE).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 3,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.FEAROW).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 10,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.GYARADOS).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 15,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.LUGIA).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 20,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.GIRATINA).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 25,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.ZAPDOS).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 30,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.DIALGA).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 35,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.SUICUNE).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 40,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.REGICE).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 45,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.RAYQUAZA).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 50,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.RAYQUAZA).index.replace('-','/')}/${Emotion.NORMAL}`
+  },
+  {
+    turn: 55,
+    avatar: `${PokemonFactory.createPokemonFromName(PKM.RAYQUAZA).index.replace('-','/')}/${Emotion.NORMAL}`
+  }];
+
 
 export const CDN_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/';

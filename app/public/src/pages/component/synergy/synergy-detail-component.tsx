@@ -7,8 +7,7 @@ import { SynergyName, SynergyDetail } from '../../../../../types/strings/Synergy
 import PRECOMPUTED_TYPE_POKEMONS from '../../../../../models/precomputed/type-pokemons.json';
 
 
-export default function GameSynergyDetail(props:{type: Synergy, value: number}) {
-    console.log(props.type);
+export default function SynergyDetailComponent(props:{type: Synergy, value: number}) {
     return <div>
     <div style={{display:'flex'}}>
        <img style={{width:'40px', height:'40px', marginRight:'10%'}} src={'assets/types/' + props.type + '.png'}/>

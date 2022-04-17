@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PKM, ITEM } from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
-import GameSynergies from '../game/game-synergies';
 import SelectedEntity from './selected-entity';
 import ModalMenu from '../modal-menu';
 import ItemPicker from './item-picker';
@@ -14,6 +13,8 @@ import produce from 'immer';
 import { useAppSelector, useAppDispatch } from '../../../hooks';
 import {createBot, requestBotData} from "../../../stores/NetworkStore"
 import { setBotCreatorSynergies } from '../../../stores/LobbyStore';
+import BuilderSynergies from './builder-synergies';
+import { Synergy } from '../../../../../types/enum/Synergy';
 
 const MODE = Object.freeze({
   WRITE:'WRITE',
@@ -186,10 +187,10 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   const botData: IBot = useAppSelector(state=>state.lobby.botData);
 
   function updateSynergies(i: number) {
-    const newSynergies = {}
-
-
-
+    const newSynergies = new Map<Synergy,number>();
+    (Object.keys(Synergy) as Synergy[]).forEach(s=>{
+      newSynergies.set(s, 0);
+    });
     const pokemonNames = [];
 
     bot.steps[i].board.forEach(pkm=>{
@@ -198,13 +199,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
       if (!pokemonNames.includes(family)) {
         pokemonNames.push(family);
         pkmTypes.forEach( (type) => {
-          if(type in newSynergies){
-            newSynergies[type] += 1;
-          }
-          else{
-            newSynergies[type] = 1;
-          }
-          
+          newSynergies.set(type, 1);
         });
       }
     });
@@ -336,7 +331,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
       </ReactTooltip>
        Paste Step</button>
   </div>
-  <GameSynergies source='lobby'/>
+  <BuilderSynergies/>
   <TeamEditor 
     step={step}
     steps={bot.steps}
