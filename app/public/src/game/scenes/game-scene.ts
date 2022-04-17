@@ -13,7 +13,8 @@ import { Room } from "colyseus.js";
 import GameState from "../../../../rooms/states/game-state";
 import ItemContainer from '../components/item-container';
 import { GamePhaseState } from '../../../../types/enum/Game';
-import indexList from '../../../dist/client/assets/pokemons/indexList.json';export default class GameScene extends Scene {
+import indexList from '../../../dist/client/assets/pokemons/indexList.json';import PokemonDetail from '../components/pokemon-detail';
+export default class GameScene extends Scene {
   tilemap: any;
   room: Room<GameState>;
   uid: string;
@@ -36,6 +37,7 @@ import indexList from '../../../dist/client/assets/pokemons/indexList.json';expo
   sellZoneGraphic: Phaser.GameObjects.Graphics;
   zones: Phaser.GameObjects.Zone[];
   lastDragDropPokemon: Pokemon;
+  lastPokemonDetail: Pokemon;
 
   constructor() {
     super({
