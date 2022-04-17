@@ -14,7 +14,7 @@ export default class GameState extends Schema {
   @type({map: Player}) players = new MapSchema<Player>();
   @type('uint8') stageLevel = 0;
   @type('string') mapName: string;
-  time = 30000;
+  time = 50000;
   botManager: BotManager = new BotManager();
   shop: Shop = new Shop();
   elligibleToXP: boolean;
