@@ -292,7 +292,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
           bots.forEach((bot, i) => {
             this.bots[bot.avatar] = bot;
             // console.log(bot.avatar, bot.elo);
-            this.state.botLeaderboard.push(new LeaderboardInfo(bot.author, bot.avatar, i + 1, bot.elo));
+            this.state.botLeaderboard.push(new LeaderboardInfo(`${bot.name} by @${bot.author}`, bot.avatar, i + 1, bot.elo));
           });
         });
         Meta.find({}, (err, docs) => {

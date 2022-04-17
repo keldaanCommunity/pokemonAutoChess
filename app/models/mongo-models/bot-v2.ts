@@ -18,6 +18,7 @@ export interface IBot {
   author: string;
   elo: number;
   steps: IStep[];
+  name: string;
 }
 
 const pkm = new Schema(
@@ -58,6 +59,9 @@ const step = new Schema(
 
 const bot = new Schema(
     {
+      name: {
+        type: String
+      },
       avatar: {
         type: String,
         required: true

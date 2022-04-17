@@ -15,6 +15,7 @@ import {createBot, requestBotData} from "../../../stores/NetworkStore"
 import { setBotCreatorSynergies } from '../../../stores/LobbyStore';
 import BuilderSynergies from './builder-synergies';
 import { Synergy } from '../../../../../types/enum/Synergy';
+import { Emotion } from '../../../../../types';
 
 const MODE = Object.freeze({
   WRITE:'WRITE',
@@ -175,7 +176,8 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     ],
     avatar:'ditto',
     author:'',
-    elo: 1200
+    elo: 1200,
+    name: 'ditto'
   });
   const [entity, setEntity] = useState<string>('');
   const [mode, setMode] = useState<string>(MODE.WRITE);
@@ -340,7 +342,10 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     handleTabClick={(i: number)=>{updateSynergies(i); setStep(i)}}
     handleEditorClick={(x,y)=>{mode == MODE.WRITE ? write(x,y): erase(x,y)}}
     handleAuthorChange={(e)=>{e.preventDefault; setBot(produce(draft=>{draft.author = e.target.value}))}}
-    handleAvatarChange={(e)=>setBot(produce(draft=>{draft.avatar = e.target.value}))}
+    handleAvatarChange={(e)=>setBot(produce(draft=>{
+      draft.name = e.target.value;
+      draft.avatar = `${PokemonFactory.createPokemonFromName(e.target.value).index}${Emotion.NORMAL}`;
+    }))}
     handleRoundsRequiredChange={(e)=>setBot(produce(draft=>{draft.steps[step].roundsRequired = e.target.value}))}
     />
   <SelectedEntity entity={entity}/>
