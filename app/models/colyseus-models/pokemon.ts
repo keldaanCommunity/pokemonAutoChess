@@ -14,7 +14,7 @@ export class Pokemon extends Schema implements IPokemon{
   @type('string') id: string;
   @type('string') name: string;
   @type(['string']) types = new ArraySchema<Synergy>();
-  @type('uint8') rarity: Rarity;
+  @type('string') rarity: Rarity;
 
   @type('string') index: string;
   @type('string') evolution:string;

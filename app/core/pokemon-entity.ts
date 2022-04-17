@@ -43,7 +43,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('int8') targetX = -1;
   @type('int8') targetY = -1;
   @type('string') attackSprite: string;
-  @type('uint8') rarity: Rarity;
+  @type('string') rarity: Rarity;
   @type('string') name: string;
   @type(['uint8']) effects = new ArraySchema<Effect>();
   @type({set: 'string'}) items = new SetSchema<string>();
