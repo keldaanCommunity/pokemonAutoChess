@@ -28,7 +28,7 @@ export default function PokemonCollectionItem(props: {name: string, index: strin
     }
 
     return <div style={cursorStyle} className='nes-container' onClick={()=>{props.setPokemon(props.name)}}>
-        <img style={{filter: props.config ? 'grayscale(0)':'grayscale(1)', width:'80px', height:'80px', imageRendering:'pixelated'}}
+        <img style={{filter: props.config && (props.config.emotions.length != 0 || props.config.shinyEmotions.length != 0) ? 'grayscale(0)':'grayscale(1)', width:'80px', height:'80px', imageRendering:'pixelated'}}
          src={`${CDN_URL}${props.index.replace('-','/')}${shinyPad}/${emotion}.png`}/>
          <div style={{display:'flex', marginTop:'5px', marginBottom:'-10px', justifyContent:'center'}}>{props.config ? props.config.dust: 0}<img style={{width:'20px',height:'20px',imageRendering:'pixelated'}} 
          src={`${CDN_URL}${props.index.replace('-','/')}/Normal.png`}/></div>
