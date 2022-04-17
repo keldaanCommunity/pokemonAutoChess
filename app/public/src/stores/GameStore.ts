@@ -1,16 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { STATE } from "../../../models/enum";
+import { GamePhaseState } from "../../../types/enum/Game";
 import { IDps, IDpsHeal, IPlayer } from "../../../types";
 import {ArraySchema, DataChange, MapSchema} from "@colyseus/schema";
 import ExperienceManager from "../../../models/colyseus-models/experience-manager";
 import Synergies from "../../../models/colyseus-models/synergies";
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata";
 import PokemonCollection from "../../../models/colyseus-models/pokemon-collection";
+import {Synergy} from '../../../types/enum/Synergy';
+
 
 interface GameStateStore {
     afterGameId: string
     roundTime: number
-    phase: string
+    phase: GamePhaseState
     players: IPlayer[]
     stageLevel: number
     mapName: string
@@ -20,9 +22,9 @@ interface GameStateStore {
     streak: number
     shopLocked: boolean
     experienceManager: ExperienceManager
-    shop: ArraySchema<string>
-    itemsProposition: ArraySchema<string>
-    currentPlayerSynergies: Synergies
+    shop: string[]
+    itemsProposition: string[]
+    currentPlayerSynergies: [string, number][]
     currentPlayerOpponentName: string
     currentPlayerOpponentAvatar: string
     currentPlayerBoardSize: number
@@ -41,8 +43,8 @@ interface GameStateStore {
 const initialState: GameStateStore = {
     afterGameId: undefined,
     roundTime: 30,
-    phase: STATE.PICK,
-    players: [],
+    phase: GamePhaseState.PICK,
+    players: new Array<IPlayer>(),
     stageLevel: 0,
     mapName: '',
     currentPlayerId: '',
@@ -51,9 +53,9 @@ const initialState: GameStateStore = {
     streak: 0,
     shopLocked: false,
     experienceManager: new ExperienceManager(),
-    shop: new ArraySchema<string>(),
-    itemsProposition: new ArraySchema<string>(),
-    currentPlayerSynergies: new Synergies(),
+    shop: new Array<string>(),
+    itemsProposition: new Array<string>(),
+    currentPlayerSynergies: new Array<[string, number]>(),
     currentPlayerOpponentName: '',
     currentPlayerOpponentAvatar: '0019/Normal',
     currentPlayerBoardSize: 0,
@@ -79,7 +81,7 @@ export const gameSlice = createSlice({
         setAfterGameId: (state, action: PayloadAction<string>) => {
             state.afterGameId = action.payload;
         },
-        setPhase: (state, action: PayloadAction<string>) => {
+        setPhase: (state, action: PayloadAction<GamePhaseState>) => {
             state.phase = action.payload;
         },
         setStageLevel: (state, action: PayloadAction<number>) => {
@@ -122,7 +124,7 @@ export const gameSlice = createSlice({
             state.itemsProposition = JSON.parse(JSON.stringify(action.payload));
         },
         setSynergies: (state, action: PayloadAction<Synergies>) => {
-            state.currentPlayerSynergies = JSON.parse(JSON.stringify(action.payload));
+            state.currentPlayerSynergies = Array.from(action.payload);
         },
         setOpponentName: (state, action: PayloadAction<string>) => {
             state.currentPlayerOpponentName = action.payload;
@@ -155,7 +157,7 @@ export const gameSlice = createSlice({
             state.currentPlayerOpponentName = action.payload.opponentName;
             state.currentPlayerOpponentAvatar = action.payload.opponentAvatar;
             state.currentPlayerLife = action.payload.life;
-            state.currentPlayerSynergies = JSON.parse(JSON.stringify(action.payload.synergies));
+            state.currentPlayerSynergies = Array.from(action.payload.synergies);
             state.currentPlayerAvatar = action.payload.avatar;
             state.currentPlayerName = action.payload.name;
             state.currentPlayerBoardSize = action.payload.boardSize;

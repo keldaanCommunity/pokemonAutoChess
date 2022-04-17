@@ -1,9 +1,11 @@
 import React from 'react';
-import {TYPE_TRADUCTION, TYPE_TRIGGER} from '../../../../../models/enum';
+import {TYPE_TRIGGER} from '../../../../../types/Config';
 import ReactTooltip from 'react-tooltip';
-import GameSynergyDetail from './game-synergy-detail';
+import SynergyDetailComponent from './synergy-detail-component';
+import { Synergy } from '../../../../../types/enum/Synergy';
+import { SynergyName } from '../../../../../types/strings/Synergy';
 
-export default function GameSynergy(props:{type: string, isFirst: boolean, value: number}) {
+export default function SynergyComponent(props:{type: Synergy, isFirst: boolean, value: number}) {
     return <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -23,7 +25,7 @@ export default function GameSynergy(props:{type: string, isFirst: boolean, value
     effect='solid'
     place='right'
     offset={{bottom: props.isFirst ? 100: 0}}>
-        <GameSynergyDetail type={props.type} value={props.value}/>
+        <SynergyDetailComponent type={props.type} value={props.value}/>
     </ReactTooltip>
 
         <img style={{
@@ -45,7 +47,7 @@ export default function GameSynergy(props:{type: string, isFirst: boolean, value
                         </span>;
                 })}
             </div>
-            <p style={{margin:'0px'}}>{TYPE_TRADUCTION[props.type]['eng']}</p>
+            <p style={{margin:'0px'}}>{SynergyName[props.type]['eng']}</p>
         </div>
     </div>
 }

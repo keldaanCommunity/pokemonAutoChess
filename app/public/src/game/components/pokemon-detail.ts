@@ -1,6 +1,8 @@
 import {GameObjects} from 'phaser';
-import {ATTACK_TYPE, CDN_URL, SPECIAL_SKILL_DESCRIPTION} from '../../../../models/enum';
+import {SPECIAL_SKILL_DESCRIPTION, CDN_URL} from '../../../../models/enum';
+import { AttackType } from '../../../../types/enum/Game'
 import { Emotion } from '../../../../types';
+import { Ability } from '../../../../types/enum/Ability';
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -24,7 +26,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     atk: number,
     def: number,
     speDef: number,
-    attackType: string,
+    attackType: AttackType,
     range: number,
     atkSpeed: string,
     critChance: number,
@@ -32,7 +34,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     spellDamage: number,
     mana: number,
     types: string[],
-    skill: string,
+    skill: Ability,
     emotion: Emotion,
     shiny: boolean,
     index: string) {
@@ -106,15 +108,15 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
     const a = document.createElement('p');
     switch(attackType){
-        case ATTACK_TYPE.PHYSICAL:
+        case AttackType.PHYSICAL:
           a.innerHTML = 'Physical';
           a.className = 'nes-text is-error';
           break;
-        case ATTACK_TYPE.SPECIAL:
+        case AttackType.SPECIAL:
           a.innerHTML = 'Special';
           a.className = 'nes-text is-primary';
           break;
-        case ATTACK_TYPE.TRUE:
+        case AttackType.TRUE:
           a.innerHTML = 'True';
           a.className = 'nes-text is-success';
           break;

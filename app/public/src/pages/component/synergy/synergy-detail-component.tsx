@@ -1,18 +1,20 @@
 import React from 'react';
-import {TYPE_DETAILS, TYPE_TRADUCTION, RARITY_COLOR, CDN_URL} from '../../../../../models/enum';
+import {RARITY_COLOR, CDN_URL} from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import { Emotion } from '../../../../../types';
+import { Synergy } from '../../../../../types/enum/Synergy';
+import { SynergyName, SynergyDetail } from '../../../../../types/strings/Synergy';
 import PRECOMPUTED_TYPE_POKEMONS from '../../../../../models/precomputed/type-pokemons.json';
 
 
-export default function GameSynergyDetail(props:{type: string, value: number}) {
+export default function SynergyDetailComponent(props:{type: Synergy, value: number}) {
     return <div>
     <div style={{display:'flex'}}>
        <img style={{width:'40px', height:'40px', marginRight:'10%'}} src={'assets/types/' + props.type + '.png'}/>
-       <h3>{TYPE_TRADUCTION[props.type].eng}</h3>
+       <h3>{SynergyName[props.type].eng}</h3>
    </div>
     
-    {TYPE_DETAILS[props.type].description.eng.map((d,i)=>{
+    {SynergyDetail[props.type].description.eng.map((d,i)=>{
         return <div key={i} style={{
             color: d.trigger <= props.value ? '#000000' : '#808080'
         }}>

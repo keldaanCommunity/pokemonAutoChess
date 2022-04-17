@@ -2,7 +2,7 @@ import {ArraySchema, MapSchema, SetSchema, CollectionSchema} from '@colyseus/sch
 import board from '../core/board'
 import Dps from '../core/dps'
 import DpsHeal from '../core/dps-heal'
-import BattleResult from '../models/colyseus-models/battle-result'
+import BattleResult from '../models/colyseus-models/history-item'
 import Count from '../models/colyseus-models/count'
 import Status from '../models/colyseus-models/status'
 import ExperienceManager from '../models/colyseus-models/experience-manager'
@@ -12,6 +12,11 @@ import Message from '../models/colyseus-models/message'
 import Synergies from '../models/colyseus-models/synergies'
 import { IPokemonConfig } from '../models/mongo-models/user-metadata'
 import PokemonCollection from '../models/colyseus-models/pokemon-collection'
+import { AttackType, Orientation, PokemonActionState, Rarity } from './enum/Game'
+import { Effect } from './enum/Effect'
+import { Ability } from './enum/Ability'
+import { Synergy } from './enum/Synergy'
+import HistoryItem from '../models/colyseus-models/history-item'
 
 export interface IMessage {
     name: string
@@ -59,14 +64,14 @@ export interface IPlayer {
     elo: number
     alive: boolean
     tileset: string
-    history: ArraySchema<BattleResult>
+    history: ArraySchema<HistoryItem>
     pokemonCollection: PokemonCollection
 }
 export interface IPokemon {
     id: string
     name: string
-    types: string[]
-    rarity: string
+    types: Synergy[]
+    rarity: Rarity
     index: string
     evolution:string
     positionX: number
@@ -76,46 +81,18 @@ export interface IPokemon {
     atkSpeed: number
     def: number
     speDef: number
-    attackType: string
+    attackType: AttackType
     atk: number
     hp: number
     range: number
     stars: number
     maxMana: number
-    skill: string
+    skill: Ability
     items: SetSchema<string>
     fossilTimer: number
     shiny: boolean
     emotion: Emotion
 }
-
-export interface ISynergies {
-    NORMAL: number;
-    GRASS: number;
-    FIRE: number;
-    WATER: number;
-    ELECTRIC: number;
-    FIGHTING: number;
-    PSYCHIC: number;
-    DARK: number;
-    METAL: number;
-    GROUND: number;
-    POISON: number;
-    DRAGON: number;
-    FIELD: number;
-    MONSTER: number;
-    HUMAN: number;
-    AQUATIC: number;
-    BUG: number;
-    FLYING: number;
-    FLORA: number;
-    MINERAL: number;
-    GHOST: number;
-    FAIRY: number;
-    ICE: number;
-    FOSSIL: number;
-    SOUND: number;
-  }
 
 export interface IExperienceManager {
     level: number
@@ -126,8 +103,8 @@ export interface IExperienceManager {
 
 export interface ISimulation {
     climate: string
-    blueEffects: string[]
-    redEffects: string[]
+    blueEffects: Effect[]
+    redEffects: Effect[]
     blueTeam: MapSchema<IPokemonEntity>
     redTeam: MapSchema<IPokemonEntity>
     blueDpsMeter: MapSchema<Dps>
@@ -166,10 +143,10 @@ export interface IPokemonEntity {
   shieldDone: number
   positionX: number
   positionY: number
-  action: string
+  action: PokemonActionState
   index: string
   id: string
-  orientation: string
+  orientation: Orientation
   critChance: number
   hp: number
   mana: number
@@ -177,7 +154,7 @@ export interface IPokemonEntity {
   atk: number
   def: number
   speDef: number
-  attackType: string
+  attackType: AttackType
   life: number
   shield: number
   team: number
@@ -187,13 +164,13 @@ export interface IPokemonEntity {
   targetX: number
   targetY: number
   attackSprite: string
-  rarity: string
+  rarity: Rarity
   name: string
-  effects: string[]
+  effects: Effect[]
   items: SetSchema<string>
-  types: string[]
+  types: Synergy[]
   stars: number
-  skill: string
+  skill: Ability
   status: Status
   count: Count
   critDamage: number
