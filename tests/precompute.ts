@@ -1,14 +1,9 @@
-const RARITY_HP_COST = require('../app/models/enum').RARITY_HP_COST;
-const PKM = require('../app/models/enum').PKM;
-const Synergy = require('../app/models/enum').Synergy;
-const PokemonFactory = require('../app/models/pokemon-factory');
-
 import { Ability } from '../app/types/enum/Ability';
 import { Rarity } from '../app/types/enum/Game';
-
-import {PKM, RARITY, Ability, RARITY_HP_COST, Synergy} from '../app/models/enum';
+import {PKM, RARITY_HP_COST} from '../app/models/enum';
 import PokemonFactory from '../app/models/pokemon-factory';
 import fs from 'fs';
+import { Synergy } from '../app/types/enum/Synergy';
 
 const data = {
   NORMAL: {
@@ -113,7 +108,7 @@ const data = {
   }
 };
 
-Object.keys(Synergy).forEach((type)=>{
+(Object.keys(Synergy) as Synergy[]).forEach((type)=>{
   const pokemonCandidates = [];
   const mythicalPokemonCandidates = [];
 

@@ -1,12 +1,12 @@
 export enum Rarity {
-    COMMON,
-    UNCOMMON,
-    RARE,
-    EPIC,
-    LEGENDARY,
-    MYTHICAL,
-    NEUTRAL,
-    SUMMON
+    COMMON = "COMMON",
+    UNCOMMON = "UNCOMMON",
+    RARE = "RARE",
+    EPIC = "EPIC",
+    LEGENDARY = "LEGENDARY",
+    MYTHICAL = "MYTHICAL",
+    NEUTRAL = "NEUTRAL",
+    SUMMON = "SUMMON"
 }
 
 export enum GamePhaseState {

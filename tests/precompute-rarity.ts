@@ -1,9 +1,9 @@
-const PKM = require('../app/models/enum').PKM;
-const PokemonFactory = require('../app/models/pokemon-factory');
+import {PKM} from '../app/models/enum';
+import PokemonFactory from '../app/models/pokemon-factory';
 import fs from 'fs';
-
-import { Rarity } from '../app/types/enum/Game';
 import { Ability } from '../app/types/enum/Ability';
+import {Synergy} from '../app/types/enum/Synergy';
+import { Rarity } from '../app/types/enum/Game';
 
 const data = {
   [Rarity.COMMON]: [],

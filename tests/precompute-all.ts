@@ -1,10 +1,11 @@
-const PKM = require('../app/models/enum').PKM;
-const Synergy = require('../app/models/enum').Synergy;
-const PokemonFactory = require('../app/models/pokemon-factory');
+import {PKM} from '../app/models/enum';
+import PokemonFactory from '../app/models/pokemon-factory';
+import fs from 'fs';
 import { Ability } from '../app/types/enum/Ability';
+import {Synergy} from '../app/types/enum/Synergy';
 
 const dataAll = {};
-Object.keys(Synergy).forEach((type)=>{
+(Object.keys(Synergy) as Synergy[]).forEach((type)=>{
   const pokemons = [];
 
   Object.values(PKM).forEach((pkm) => {
