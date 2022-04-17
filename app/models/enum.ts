@@ -1427,7 +1427,7 @@ export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
       fra: 'Guillotine'
     },
     description: {
-      eng: 'Mono target attack that deals physical damage. Restores half mana if target killed',
+      eng: 'Mono target attack that deals physical damage. Restores full mana if target killed',
       esp: 'Ataque de objetivo mono que causa daño físico. Restaura la mitad de maná si el objetivo muere',
       fra: 'Attaque mono cible qui fait des dégats physiques. Restaure la moitié du mana si la cible est tué.'
     }
