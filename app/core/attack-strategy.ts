@@ -936,7 +936,7 @@ export class GuillotineStrategy extends AttackStrategy {
     const damage = pokemon.atk * pokemon.stars;
     const victim = target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon);
     if (victim) {
-      pokemon.setMana(Math.floor(pokemon.maxMana / 2));
+      pokemon.setMana(pokemon.maxMana);
     }
   }
 }
