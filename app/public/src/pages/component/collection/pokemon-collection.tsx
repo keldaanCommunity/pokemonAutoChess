@@ -9,7 +9,7 @@ import { Pokemon } from '../../../../../models/colyseus-models/pokemon';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata';
 import tracker from '../../../../dist/client/assets/pokemons/tracker.json';
-import { Convert } from '../../../../../types/ITracker';
+import { Convert } from '../../../../../public/dist/client/assets/pokemons/ITracker';
 import { Emotion } from '../../../../../types';
 import {Synergy} from '../../../../../types/enum/Synergy';
 import PokemonEmotion from './pokemon-emotion';
