@@ -18,7 +18,7 @@ export default function ChatHistory(props: {source: string}) {
 
     useEffect(()=>{
         if(messages.length > 0) {
-            domRef.current.scollTop = domRef.current.scrollHeight;
+            domRef.current.scrollTop = domRef.current.scrollHeight;
         }
     });
  
