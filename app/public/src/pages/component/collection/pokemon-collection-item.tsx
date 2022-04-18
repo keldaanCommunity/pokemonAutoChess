@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import {ITracker} from '../../../../../types/ITracker';
+import {ITracker} from '../../../../../public/dist/client/assets/pokemons/ITracker';
 import {IPokemonConfig} from '../../../../../models/mongo-models/user-metadata';
 import { Emotion } from '../../../../../types';
 import { CDN_URL } from '../../../../../models/enum';
