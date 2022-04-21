@@ -8,15 +8,15 @@ export default class Design {
   terrain: number[][] = [];
   bitmask: string[][] = [];
   tilemap: number[] = [];
-  width = 85;
-  height = 43;
+  width = 42;
+  height = 22;
   frequency: number;
   persistance: number;
   tileset: Tileset;
-  minArena: number[] = [26, 4];
-  maxArena: number[] = [58, 35];
-  leftBorder: number[] = [27, 31];
-  rightBorder: number[] = [57, 31];
+  minArena: number[] = [13, 2];
+  maxArena: number[] = [29, 18];
+  leftBorder: number[] = [14, 15];
+  rightBorder: number[] = [28, 15];
 
   constructor(id: string, frequency: number, persistance: number) {
     this.id = id;
