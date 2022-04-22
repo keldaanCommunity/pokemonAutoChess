@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {PKM, CDN_URL} from '../../../../../models/enum';
+import {PKM, CDN_PORTRAIT_URL} from '../../../../../models/enum';
 import {Emotion} from '../../../../../types';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import ReactTooltip from 'react-tooltip';
@@ -144,7 +144,7 @@ class TeamEditor extends Component{
                                                     if(p.x == x && p.y == y){
                                                         r = <td style={tdStyle} onClick={()=>{this.props.handleEditorClick(x,y)}} key={x}>
                                                         <div style={divTdStyle}>
-                                                            <img style={bigImgStyle} src={`${CDN_URL}${PokemonFactory.createPokemonFromName(p.name).index.replace('-','/')}/${Emotion.NORMAL}.png`}></img>
+                                                            <img style={bigImgStyle} src={`${CDN_PORTRAIT_URL}${PokemonFactory.createPokemonFromName(p.name).index.replace('-','/')}/${Emotion.NORMAL}.png`}></img>
                                                             {p.items ? <div style={{display:'flex', justifyContent:'space-evenly'}}>{p.items.map((it,j)=>{
                                                                 return <img key={j} style={itemImgStyle} src={'assets/item/' + it + '.png'}/>
                                                             })}</div>: null}

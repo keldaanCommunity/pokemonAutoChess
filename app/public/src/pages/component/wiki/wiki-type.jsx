@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CDN_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import { Emotion } from '../../../../../types';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import PRECOMPUTED_TYPE_POKEMONS_ALL from '../../../../../models/precomputed/type-pokemons-all.json';
@@ -25,7 +25,7 @@ class WikiType extends Component {
         <div style={{display:'flex', flexWrap:'wrap'}}>
             {PRECOMPUTED_TYPE_POKEMONS_ALL[this.props.type].map(p=>{
                 const pokemon = PokemonFactory.createPokemonFromName(p);
-                return <img key={p} src={`${CDN_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}></img>
+                return <img key={p} src={`${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}></img>
             })}
         </div>
     </div>;

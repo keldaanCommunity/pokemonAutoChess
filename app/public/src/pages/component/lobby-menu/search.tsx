@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import History from './history';
-import { XP_TABLE, CDN_URL } from '../../../../../models/enum';
+import { XP_TABLE, CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import Elo from '../elo';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { searchName } from '../../../stores/NetworkStore';
@@ -18,7 +18,7 @@ export default function Search() {
         </div>
 
         <div style={{display:'flex', alignItems: 'center', marginTop: '30px'}}>
-            <img src={CDN_URL + user.avatar + ".png"}/>
+            <img src={CDN_PORTRAIT_URL + user.avatar + ".png"}/>
             <h5>{user.name}</h5>
             <Elo elo={user.elo}/>
         </div>

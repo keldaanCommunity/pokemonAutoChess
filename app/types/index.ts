@@ -18,6 +18,12 @@ import { Ability } from './enum/Ability'
 import { Synergy } from './enum/Synergy'
 import HistoryItem from '../models/colyseus-models/history-item'
 
+export interface ICreditNames{
+    Contact: string[],
+    Discord: string[],
+    Name: string[]
+}
+
 export interface IMessage {
     name: string
     payload: string

@@ -42,6 +42,7 @@
     "colyseus": "^0.14.23",
     "colyseus.js": "^0.14.13",
     "cors": "^2.8.5",
+    "dataframe-js": "^1.4.4",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "elo-rank": "^1.0.4",
