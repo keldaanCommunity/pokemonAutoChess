@@ -30,6 +30,7 @@ pastebin.getPaste(id, false).then((data)=>{
         }
         console.log(`creating BotV2 ${json.avatar}...`);
         BotV2.create({
+          name: json.name,
           avatar: json.avatar,
           elo: 1200,
           author: json.author,
