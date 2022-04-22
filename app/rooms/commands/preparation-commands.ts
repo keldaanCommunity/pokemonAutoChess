@@ -117,26 +117,21 @@ export class InitializeBotsCommand extends Command<PreparationRoom, {
 
       const difficulty = {$gt: user.elo - 100, $lt: user.elo + 100};
 
-      BotV2.find({elo: difficulty}, ['avatar', 'elo'], null)
+      BotV2.find({elo: difficulty}, ['avatar', 'elo', 'name'], null)
           .limit(7)
           .exec(
               (err, bots) => {
                 if (!bots) {
                   return;
                 }
-                console.log(bots.length);
                 bots.forEach((bot) => {
-                  const index = bot.avatar.split('/')[0];
-                  const v = Object.values(PokemonIndex);
-                  const vIndex = v.findIndex(e=>e==index);
-                  const k = Object.keys(PokemonIndex)[vIndex];
                   this.state.users.set(bot.avatar, new GameUser(
-                      k,
-                      k,
-                      bot.elo,
-                      bot.avatar,
-                      true,
-                      true
+                    bot.avatar,
+                    bot.name,
+                    bot.elo,
+                    bot.avatar,
+                    true,
+                    true
                   ));
                 });
               }
@@ -232,7 +227,7 @@ export class OnRemoveBotCommand extends Command<PreparationRoom, {
           this.room.broadcast('messages', {
             'name': 'Server',
             'payload': `Bot ${key} removed to make room for new player.`,
-            'avatar': 'magnemite',
+            'avatar': `0081/${Emotion.NORMAL}`,
             'time': Date.now()
           });
           this.state.users.delete(key);
@@ -244,12 +239,12 @@ export class OnRemoveBotCommand extends Command<PreparationRoom, {
       return;
     }
 
-
+    const name = this.state.users.get(target).name;
     if (this.state.users.delete(target)) {
       this.room.broadcast('messages', {
         'name': 'Server',
-        'payload': `Bot ${target} removed.`,
-        'avatar': 'magnemite',
+        'payload': `Bot ${name} removed.`,
+        'avatar': `0081/${Emotion.NORMAL}`,
         'time': Date.now()
       });
     }
