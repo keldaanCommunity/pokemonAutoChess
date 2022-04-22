@@ -1,7 +1,7 @@
 import React from 'react';
 import HistoryItem from '../../../../../models/colyseus-models/history-item';
 import { BattleResult } from '../../../../../types/enum/Game';
-import { CDN_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import { ArraySchema } from '@colyseus/schema';
 
 export default function GamePlayerDetail(props:{name: string, life: number, money: number, history: ArraySchema<HistoryItem>}) {
@@ -28,7 +28,7 @@ export default function GamePlayerDetail(props:{name: string, life: number, mone
                 <img style={{
                     border:record.result == BattleResult.WIN ? '4px solid #4aa52e' : '4px solid #8c2022',
                     marginLeft:'6px'
-                }} src={`${CDN_URL}${record.avatar}.png`}/>
+                }} src={`${CDN_PORTRAIT_URL}${record.avatar}.png`}/>
             <p style={{
             }}>{record.name.slice(0,4)}</p>
             </div>;

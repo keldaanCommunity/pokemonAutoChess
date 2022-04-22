@@ -15,7 +15,7 @@ import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
 import { Emotion, EmotionCost } from "../types";
-import { CDN_URL, PKM } from "../models/enum";
+import { CDN_PORTRAIT_URL, PKM } from "../models/enum";
 import PokemonFactory from "../models/pokemon-factory";
 import PokemonConfig from "../models/colyseus-models/pokemon-config";
 
@@ -55,9 +55,9 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
           const dsEmbed = new MessageEmbed()
               .setTitle(`BOT ${bot.avatar} created by ${bot.author}`)
               .setURL(data)
-              .setAuthor(user.name, `${CDN_URL}${user.avatar}.png`)
+              .setAuthor(user.name, `${CDN_PORTRAIT_URL}${user.avatar}.png`)
               .setDescription(`A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`)
-              .setThumbnail(`${CDN_URL}${bot.avatar}.png`);
+              .setThumbnail(`${CDN_PORTRAIT_URL}${bot.avatar}.png`);
           client.send('pastebin-url', {url: data});
           try {
             this.discordWebhook.send({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { CDN_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import PokemonDetail from './wiki-pokemon-detail';
 import { Emotion } from '../../../../../types';
@@ -19,7 +19,7 @@ export default function PokemonWiki(props: {rarity: Rarity}){
                 {PRECOMPUTED_RARITY_POKEMONS_ALL[props.rarity].map((pkm=>{
                     const pokemon = PokemonFactory.createPokemonFromName(pkm);
                     return <Tab key={'title-' + pkm}>
-                        <img src={`${CDN_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}></img>
+                        <img src={`${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}></img>
                     </Tab>
                 }))}
             </TabList>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Elo from './elo';
-import {CDN_URL} from '../../../../models/enum';
+import {CDN_PORTRAIT_URL} from '../../../../models/enum';
 
 class Avatar extends Component{
     render(){
@@ -13,7 +13,7 @@ class Avatar extends Component{
             alignItems:'center',
             flexFlow:'column'
             }}>
-            <img src={`${CDN_URL}${this.props.avatar}.png`}/>
+            <img src={`${CDN_PORTRAIT_URL}${this.props.avatar}.png`}/>
             <p style={{margin:'0px'}}>{this.props.name}</p>
             {elo}
         </div>;

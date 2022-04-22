@@ -3389,4 +3389,6 @@ export const NEUTRAL_STAGE = [
   }];
 
 
-export const CDN_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/';
+export const CDN_PORTRAIT_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/';
+
+export const CDN_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master';

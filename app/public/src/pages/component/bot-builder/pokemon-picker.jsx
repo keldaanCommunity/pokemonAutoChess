@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CDN_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { Emotion, PokemonIndex } from '../../../../../types';
 import PokemonFactory from '../../../../../models/pokemon-factory';
@@ -36,7 +36,7 @@ class PokemonPicker extends Component{
         {Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL).map((key)=>{
           return <TabPanel key={key} style={{display:'flex', flexWrap:'wrap'}}>
                 {PRECOMPUTED_TYPE_POKEMONS_ALL[key].map((pkm)=>{
-                  return <div onClick={()=>{this.props.selectEntity(pkm)}} key={pkm}><img style={imgStyle} src={`${CDN_URL}${PokemonFactory.createPokemonFromName(pkm).index.replace('-','/')}/${Emotion.NORMAL}.png`}/></div>;
+                  return <div onClick={()=>{this.props.selectEntity(pkm)}} key={pkm}><img style={imgStyle} src={`${CDN_PORTRAIT_URL}${PokemonFactory.createPokemonFromName(pkm).index.replace('-','/')}/${Emotion.NORMAL}.png`}/></div>;
                 })}
             </TabPanel>
         })}
