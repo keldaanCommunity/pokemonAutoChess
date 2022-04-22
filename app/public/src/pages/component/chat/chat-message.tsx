@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../../hooks';
 import { searchName } from '../../../stores/NetworkStore';
 import { setTabIndex } from '../../../stores/LobbyStore';
 import { IMessage } from '../../../../../types';
-import {CDN_URL} from '../../../../../models/enum';
+import {CDN_PORTRAIT_URL} from '../../../../../models/enum';
 
 export default function ChatMessage(props: {message: IMessage}) {
     const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export default function ChatMessage(props: {message: IMessage}) {
                 dispatch(setTabIndex(3));
             }}
             >
-                <img style={{marginRight: '10px'}} src={`${CDN_URL}${props.message.avatar}.png`} />
+                <img style={{marginRight: '10px'}} src={`${CDN_PORTRAIT_URL}${props.message.avatar}.png`} />
                 <span>{props.message.name}</span>
                 <span>{formatDate(props.message.time)}</span>
             </div>

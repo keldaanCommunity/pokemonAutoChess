@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CDN_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import { Emotion } from '../../../../../types';
 
@@ -32,7 +32,7 @@ class TeamComp extends Component{
                 <div style={{display:'flex'}}>
                     {sortedPokemons.map(pokemon=>{
                         return <div style={{display:'flex', flexFlow:'column', alignItems: 'center'}} key={pokemon}>
-                        <img style={{width:'60px', height:'60px', imageRendering:'pixelated'}} src={`${CDN_URL}${PokemonFactory.createPokemonFromName(pokemon).index.replace('-','/')}/${Emotion.NORMAL}.png`}/>
+                        <img style={{width:'60px', height:'60px', imageRendering:'pixelated'}} src={`${CDN_PORTRAIT_URL}${PokemonFactory.createPokemonFromName(pokemon).index.replace('-','/')}/${Emotion.NORMAL}.png`}/>
                         <p>{this.props.team.pokemons[pokemon].toFixed(1)}</p>
                     </div> 
                     })}

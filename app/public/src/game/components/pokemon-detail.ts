@@ -1,5 +1,5 @@
 import {GameObjects} from 'phaser';
-import {SPECIAL_SKILL_DESCRIPTION, CDN_URL} from '../../../../models/enum';
+import {SPECIAL_SKILL_DESCRIPTION, CDN_PORTRAIT_URL} from '../../../../models/enum';
 import { AttackType } from '../../../../types/enum/Game'
 import { Emotion } from '../../../../types';
 import { Ability } from '../../../../types/enum/Ability';
@@ -88,7 +88,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   
     const avatar = document.createElement('img');
     const shinyPad = shiny ? '/0000/0001/' : '';
-    avatar.src = `${CDN_URL}${index.replace('-','/')}${shinyPad}/${emotion}.png`;
+    avatar.src = `${CDN_PORTRAIT_URL}${index.replace('-','/')}${shinyPad}/${emotion}.png`;
 
     const profile = document.createElement('div');
     profile.style.display = 'flex';

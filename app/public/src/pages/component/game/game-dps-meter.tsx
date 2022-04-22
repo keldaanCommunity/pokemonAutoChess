@@ -6,7 +6,7 @@ import GameRedDpsMeter from './game-red-dps-meter';
 import GameBlueHealDpsMeter from './game-blue-heal-dps-meter';
 import GameRedHealDpsMeter from './game-red-heal-dps-meter';
 import { useAppSelector } from '../../../hooks';
-import { CDN_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import { Emotion, PokemonIndex } from '../../../../../types';
 
 const style: CSS.Properties = {
@@ -37,9 +37,9 @@ export default function GameDpsMeter() {
     else{
         return <div className='nes-container hidden-scrollable' style={style}>
         <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
-            <img style={imgStyle} src={CDN_URL + avatar + '.png'}></img>
+            <img style={imgStyle} src={CDN_PORTRAIT_URL + avatar + '.png'}></img>
             <h2>Vs</h2>
-            <img style={imgStyle} src={CDN_URL + opponentAvatar + '.png'}></img>
+            <img style={imgStyle} src={CDN_PORTRAIT_URL + opponentAvatar + '.png'}></img>
         </div>
         <Tabs>
             <TabList style={{display:'flex', justifyContent:'space-evenly'}}>
