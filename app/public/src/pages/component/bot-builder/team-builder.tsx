@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PKM, ITEM } from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import SelectedEntity from './selected-entity';
-import ModalMenu from '../modal-menu';
+import ModalMenu from './modal-menu';
 import ItemPicker from './item-picker';
 import PokemonPicker from './pokemon-picker';
 import TeamEditor from './team-editor';
@@ -15,17 +15,7 @@ import {createBot, requestBotData} from "../../../stores/NetworkStore"
 import { setBotCreatorSynergies } from '../../../stores/LobbyStore';
 import BuilderSynergies from './builder-synergies';
 import { Synergy } from '../../../../../types/enum/Synergy';
-import { Emotion } from '../../../../../types';
-
-const MODE = Object.freeze({
-  WRITE:'WRITE',
-  ERASE:'ERASE'
-});
-
-const MODAL_MODE = Object.freeze({
-  EXPORT:'EXPORT',
-  IMPORT:'IMPORT'
-});
+import { Emotion, ModalMode, PokemonIndex, ReadWriteMode } from '../../../../../types';
 
 const buttonsStyle: CSS.Properties = {
   top:'10px',
@@ -180,11 +170,10 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     name: 'ditto'
   });
   const [entity, setEntity] = useState<string>('');
-  const [mode, setMode] = useState<string>(MODE.WRITE);
-  const [modalMode, setModalMode] = useState<string>(MODAL_MODE.IMPORT)
+  const [mode, setMode] = useState<ReadWriteMode>(ReadWriteMode.WRITE);
+  const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
   const [modalBoolean, setModalBoolean] = useState<boolean>(false);
 
-  const botList: string[] = useAppSelector(state=>state.lobby.botList);
   const pastebinUrl: string = useAppSelector(state=>state.lobby.pastebinUrl);
   const botData: IBot = useAppSelector(state=>state.lobby.botData);
 
@@ -268,20 +257,20 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     <button style={buttonStyle} onClick={()=>{props.toggleBuilder()}} className='nes-btn is-primary'>Lobby</button>
     <button 
       style={buttonStyle}
-      onClick={()=>{setModalMode(MODAL_MODE.IMPORT); setModalBoolean(true)}}
+      onClick={()=>{setModalMode(ModalMode.IMPORT); setModalBoolean(true)}}
       className='nes-btn is-warning'
     >
       Import/Load
     </button>
     <button style={buttonStyle}
-     onClick={()=>{setModalMode(MODAL_MODE.EXPORT); setModalBoolean(true)}}
+     onClick={()=>{setModalMode(ModalMode.EXPORT); setModalBoolean(true)}}
      className='nes-btn is-warning'
       >
       Export
     </button>
     <button 
     style={buttonStyle} 
-    onClick={()=>setMode(mode == MODE.WRITE ? MODE.ERASE: MODE.WRITE)} 
+    onClick={()=>setMode(mode == ReadWriteMode.WRITE ? ReadWriteMode.ERASE: ReadWriteMode.WRITE)} 
     className='nes-btn'
     data-tip
     data-for={'mode'}
@@ -339,12 +328,13 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     steps={bot.steps}
     avatar={bot.avatar}
     author={bot.author}
+    name={bot.name}
     handleTabClick={(i: number)=>{updateSynergies(i); setStep(i)}}
-    handleEditorClick={(x,y)=>{mode == MODE.WRITE ? write(x,y): erase(x,y)}}
+    handleEditorClick={(x,y)=>{mode == ReadWriteMode.WRITE ? write(x,y): erase(x,y)}}
     handleAuthorChange={(e)=>{e.preventDefault; setBot(produce(draft=>{draft.author = e.target.value}))}}
     handleAvatarChange={(e)=>setBot(produce(draft=>{
       draft.name = e.target.value;
-      draft.avatar = `${PokemonFactory.createPokemonFromName(e.target.value).index}${Emotion.NORMAL}`;
+      draft.avatar = `${PokemonIndex[e.target.value]}/${Emotion.NORMAL}`;
     }))}
     handleRoundsRequiredChange={(e)=>setBot(produce(draft=>{draft.steps[step].roundsRequired = e.target.value}))}
     />
@@ -357,16 +347,14 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
 
   <ModalMenu 
     modalBoolean={modalBoolean}
-    botList={botList}
-    showModal={(mode: string)=>{setModalMode(mode); setModalBoolean(true)}}
+    showModal={(mode: ModalMode)=>{setModalMode(mode); setModalBoolean(true)}}
     bot={bot} 
     hideModal={()=>{setModalBoolean(false)}}
     modalMode={modalMode}
-    import={importBot}
+    importBot={importBot}
     pasteBinUrl={pastebinUrl}
     createBot={create}
     botData={botData}
-    requestBotData={(botName)=>{dispatch(requestBotData(botName))}}
   />
 </div>
 }

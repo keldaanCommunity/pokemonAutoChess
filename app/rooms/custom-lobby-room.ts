@@ -51,9 +51,9 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       try {
         const bot = message.bot;
         const user = this.state.users.get(client.auth.uid);
-        pastebin.createPaste({text: JSON.stringify(bot), title: `${user.name} has uploaded BOT ${bot.avatar}`, format: 'json'}).then((data: any) => {
+        pastebin.createPaste({text: JSON.stringify(bot), title: `${user.name} has uploaded BOT ${bot.name}`, format: 'json'}).then((data: any) => {
           const dsEmbed = new MessageEmbed()
-              .setTitle(`BOT ${bot.avatar} created by ${bot.author}`)
+              .setTitle(`BOT ${bot.name} created by ${bot.author}`)
               .setURL(data)
               .setAuthor(user.name, `${CDN_PORTRAIT_URL}${user.avatar}.png`)
               .setDescription(`A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`)
@@ -78,15 +78,15 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
     this.onMessage('bot-list-request', (client, message)=>{
       const botList = [];
 
-      for (const bot in this.bots) {
-        botList.push(bot);
-      }
+      this.bots.forEach(b=>{
+        botList.push({name: b.name, avatar: b.avatar});
+      });
 
       client.send('bot-list', botList);
     });
 
     this.onMessage('bot-data-request', (client, bot)=>{
-      const botData = this.bots[bot];
+      const botData = this.bots.get(bot);
       client.send('bot-data', botData);
     });
 
@@ -290,7 +290,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
         });
         BotV2.find({}, { _id: 0 }, { sort: { elo: -1 } }, (_err, bots) => {
           bots.forEach((bot, i) => {
-            this.bots[bot.avatar] = bot;
+            this.bots.set(bot.avatar, bot);
             // console.log(bot.avatar, bot.elo);
             this.state.botLeaderboard.push(new LeaderboardInfo(`${bot.name} by @${bot.author}`, bot.avatar, i + 1, bot.elo));
           });

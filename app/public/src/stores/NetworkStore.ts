@@ -94,7 +94,7 @@ export const networkSlice = createSlice({
         createBot: (state, action: PayloadAction<IBot>) => {
             state.lobby.send('bot-creation',{'bot': action.payload});
         },
-        requestBotData: (state, action:PayloadAction<BotDifficulty>) => {
+        requestBotData: (state, action:PayloadAction<string>) => {
             state.lobby.send('bot-data-request', action.payload);
         },
         addBot: (state, action:PayloadAction<BotDifficulty>) => {
