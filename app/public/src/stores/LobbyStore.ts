@@ -20,7 +20,7 @@ interface IUserLobbyState {
     searchedUser: ILobbyUser;
     tabIndex: number;
     allRooms: RoomAvailable[];
-    botList: string[];
+    botList: {name :string, avatar: string}[];
     meta: IMeta[];
     metaItems: IItemsStatistic[];
     pastebinUrl: string;
@@ -249,7 +249,7 @@ export const lobbySlice = createSlice({
         setMetaItems: (state, action: PayloadAction<IItemsStatistic[]>) => {
             state.metaItems = action.payload;
         },
-        setBotList: (state, action: PayloadAction<string[]>) => {
+        setBotList: (state, action: PayloadAction<{name: string, avatar: string}[]>) => {
             state.botList = action.payload
         },
         setPastebinUrl: (state, action: PayloadAction<string>) => {

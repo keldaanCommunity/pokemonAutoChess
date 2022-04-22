@@ -33,7 +33,7 @@ export default function Lobby(){
     const uid: string = useAppSelector(state=>state.network.uid);
     const meta: IMeta[] = useAppSelector(state=>state.lobby.meta);
     const metaItems: IItemsStatistic[] = useAppSelector(state=>state.lobby.metaItems);
-    const botList: string[] = useAppSelector(state=>state.lobby.botList);
+    const botList: {name: string, avatar: string}[] = useAppSelector(state=>state.lobby.botList);
     
     const [lobbyJoined, setLobbyJoined] = useState<boolean>(false);
     const [showWiki, toggleWiki] = useState<boolean>(false);
@@ -92,7 +92,7 @@ export default function Lobby(){
 
                     room.onMessage('rooms', (rooms: RoomAvailable[]) => {rooms.forEach(room=>dispatch(addRoom(room)))});
 
-                    room.onMessage('bot-list', (bots: string[]) => {dispatch(setBotList(bots))});
+                    room.onMessage('bot-list', (bots: {name: string, avatar: string}[]) => {dispatch(setBotList(bots))});
                     
                     room.onMessage('+', ([roomId, room]) => {if(room.name == 'room'){dispatch(addRoom(room))}});
                 

@@ -2,7 +2,6 @@ import {ArraySchema, MapSchema, SetSchema, CollectionSchema} from '@colyseus/sch
 import board from '../core/board'
 import Dps from '../core/dps'
 import DpsHeal from '../core/dps-heal'
-import BattleResult from '../models/colyseus-models/history-item'
 import Count from '../models/colyseus-models/count'
 import Status from '../models/colyseus-models/status'
 import ExperienceManager from '../models/colyseus-models/experience-manager'
@@ -10,7 +9,6 @@ import LeaderboardInfo from '../models/colyseus-models/leaderboard-info'
 import LobbyUser from '../models/colyseus-models/lobby-user'
 import Message from '../models/colyseus-models/message'
 import Synergies from '../models/colyseus-models/synergies'
-import { IPokemonConfig } from '../models/mongo-models/user-metadata'
 import PokemonCollection from '../models/colyseus-models/pokemon-collection'
 import { AttackType, Orientation, PokemonActionState, Rarity } from './enum/Game'
 import { Effect } from './enum/Effect'
@@ -18,7 +16,17 @@ import { Ability } from './enum/Ability'
 import { Synergy } from './enum/Synergy'
 import HistoryItem from '../models/colyseus-models/history-item'
 
-export interface ICreditNames{
+export enum ModalMode {
+    EXPORT = 'EXPORT',
+    IMPORT = 'IMPORT'
+}
+
+export enum ReadWriteMode {
+    WRITE = 'WRITE',
+    ERASE = 'ERASE'
+}
+
+export interface ICreditNames {
     Contact: string[],
     Discord: string[],
     Name: string[]
