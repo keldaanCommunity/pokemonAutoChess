@@ -12,6 +12,7 @@ import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
 import GameScene from '../scenes/game-scene';
 import { AttackType, Orientation, PokemonActionState, SpriteType, PokemonTint } from '../../../../types/enum/Game';
 import { Ability } from '../../../../types/enum/Ability';
+import ManaBar from './mana-bar';
 
 export default class Pokemon extends Button {
   emotion: Emotion;
@@ -48,10 +49,9 @@ export default class Pokemon extends Button {
   types: string[];
   lifebar: Lifebar;
   detail: PokemonDetail;
-  shieldbar: Lifebar;
   mana: number;
   maxMana: number;
-  manabar: Lifebar;
+  manabar: ManaBar;
   backgroundIcon: GameObjects.Image;
   sprite: GameObjects.Sprite;
   shadow: GameObjects.Sprite;
@@ -263,7 +263,7 @@ export default class Pokemon extends Button {
 
   deathAnimation() {
     this.life = 0;
-    this.lifebar.setLife(this.life);
+    this.lifebar.setAmount(this.life);
 
     this.scene.add.tween({
       targets: [this],
@@ -971,34 +971,17 @@ export default class Pokemon extends Button {
 
   setLifeBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
     if (pokemon.life !== undefined) {
-      let color: number;
-      if (pokemon.team == 0) {
-        color = 0x00ff00;
-      } else {
-        color = 0xff0000;
-      }
-      const lifeRatio = pokemon.life / (pokemon.life + pokemon.shield);
-      this.lifebar = new Lifebar(scene, -15, this.height/2-7, lifeRatio * 60, pokemon.hp, color, true, false);
-      this.lifebar.setLife(pokemon.life);
+      this.lifebar = new Lifebar(scene, 0, this.height/2 + 6, 60, pokemon.life + pokemon.shield, pokemon.shield);
+      this.lifebar.setAmount(pokemon.life);
+      this.lifebar.setShieldAmount(pokemon.shield);
       this.add(this.lifebar);
-    }
-  }
-
-  setShieldBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
-    
-    if (pokemon.shield !== undefined && pokemon.shield > 0) {
-      const shieldRatio = pokemon.shield / (pokemon.life + pokemon.shield);
-      this.shieldbar = new Lifebar(scene, -15 + (1-shieldRatio) * 30, this.height/2-7, shieldRatio * 60, pokemon.shield, 0x939393, true, false);
-      this.shieldbar.setLife(pokemon.shield);
-      this.add(this.shieldbar);
     }
   }
 
   setManaBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
     if (pokemon.mana !== undefined) {
-      const color = 0x01b8fe;
-      this.manabar = new Lifebar(scene, -15, this.height/2 -5, 60, pokemon.maxMana, color, true, true);
-      this.manabar.setLife(pokemon.mana);
+      this.manabar = new ManaBar(scene, 0, this.height/2 + 13, 60, pokemon.maxMana);
+      this.manabar.setAmount(pokemon.mana);
       this.add(this.manabar);
     }
   }
@@ -1038,7 +1021,6 @@ export default class Pokemon extends Button {
       if (p.effects && (p.effects.includes(Effect.IRON_DEFENSE) || p.effects.includes(Effect.AUTOTOMIZE))) {
         this.sprite.setScale(3, 3);
       }
-      this.setShieldBar(p, scene);
       this.setLifeBar(p, scene);
       this.setManaBar(p, scene);
       //this.setEffects(p, scene);
