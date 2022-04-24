@@ -38,6 +38,7 @@
     "@colyseus/monitor": "^0.14.22",
     "@colyseus/ws-transport": "^0.14.21",
     "@reduxjs/toolkit": "^1.8.0",
+    "@types/bootstrap": "^5.1.10",
     "apexcharts": "^3.33.2",
     "colyseus": "^0.14.23",
     "colyseus.js": "^0.14.13",

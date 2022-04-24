@@ -306,7 +306,7 @@ export default class BattleManager {
               this.displayDamage(pkm.x, pkm.y, change.value - change.previousValue);
             }
             pkm.life = pokemon.life;
-            pkm.lifebar.setLife(pkm.life);
+            pkm.lifebar.setAmount(pkm.life);
             if (pkm.detail) {
               pkm.detail.hp.innerHTML = pokemon.life.toString();
             }
@@ -316,19 +316,11 @@ export default class BattleManager {
             }
             if (change.value > 0) {
               pkm.shield = pokemon.shield;
-              if (pkm.shieldbar) {
-                pkm.shieldbar.setLife(pkm.shield);
-              } else {
-                pkm.setShieldBar(pokemon, this.scene);
-              }
-            } else {
-              if (pkm.shieldbar) {
-                pkm.remove(pkm.shieldbar, true);
-              }
+              pkm.lifebar.setShieldAmount(pkm.shield);
             }
           } else if (change.field =='mana') {
             pkm.mana = pokemon.mana;
-            pkm.manabar.setLife(pkm.mana);
+            pkm.manabar.setAmount(pkm.mana);
             if (pkm.detail) {
               pkm.detail.updateValue(pkm.detail.mana, change.previousValue, change.value);
             }
