@@ -2,8 +2,8 @@ import Bar from "./bar";
 
 export default class LifeBar extends Bar {
   shieldProgress: HTMLDivElement;
-  constructor(scene: Phaser.Scene, x: number, y: number, width: number, max: number, maxShield: number) {
-    super(scene, x, y, width, 7, max, max, '#e76e55');
+  constructor(scene: Phaser.Scene, x: number, y: number, width: number, max: number, maxShield: number, team: number) {
+    super(scene, x, y, width, 7, max, max, team === 1 ? '#e76e55': '#76c442');
 
     this.shieldProgress = document.createElement('div');
     this.shieldProgress.className = `progress-bar`;
