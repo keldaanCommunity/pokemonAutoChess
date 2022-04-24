@@ -980,7 +980,7 @@ export default class Pokemon extends Button {
 
   setManaBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
     if (pokemon.mana !== undefined) {
-      this.manabar = new ManaBar(scene, 0, this.height/2 + 13, 60, pokemon.maxMana);
+      this.manabar = new ManaBar(scene, 0, this.height/2 + 12, 60, pokemon.maxMana);
       this.manabar.setAmount(pokemon.mana);
       this.add(this.manabar);
     }
