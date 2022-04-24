@@ -272,31 +272,49 @@ export class OnDragDropCommand extends Command<GameRoom, {
         // regular equip
         switch (item) {
           case ITEM.WATER_STONE:
-            pokemon.types.push(Synergy.WATER);
+            if(!pokemon.types.includes(Synergy.WATER)){
+              pokemon.types.push(Synergy.WATER)
+            }
             break;
           case ITEM.FIRE_STONE:
-            pokemon.types.push(Synergy.FIRE);
+            if(!pokemon.types.includes(Synergy.FIRE)){
+              pokemon.types.push(Synergy.FIRE)
+            }
             break;
           case ITEM.THUNDER_STONE:
-            pokemon.types.push(Synergy.ELECTRIC);
+            if(!pokemon.types.includes(Synergy.ELECTRIC)){
+              pokemon.types.push(Synergy.ELECTRIC)
+            }
             break;
           case ITEM.DUSK_STONE:
-            pokemon.types.push(Synergy.DARK);
+            if(!pokemon.types.includes(Synergy.DARK)){
+              pokemon.types.push(Synergy.DARK)
+            }
             break;
           case ITEM.MOON_STONE:
-            pokemon.types.push(Synergy.FAIRY);
+            if(!pokemon.types.includes(Synergy.FAIRY)){
+              pokemon.types.push(Synergy.FAIRY)
+            }
             break;
           case ITEM.LEAF_STONE:
-            pokemon.types.push(Synergy.GRASS);
+            if(!pokemon.types.includes(Synergy.GRASS)){
+              pokemon.types.push(Synergy.GRASS)
+            }
             break;
           case ITEM.DAWN_STONE:
-            pokemon.types.push(Synergy.PSYCHIC);
+            if(!pokemon.types.includes(Synergy.PSYCHIC)){
+              pokemon.types.push(Synergy.PSYCHIC)
+            }
             break;
           case ITEM.ICY_ROCK:
-            pokemon.types.push(Synergy.ICE);
+            if(!pokemon.types.includes(Synergy.ICE)){
+              pokemon.types.push(Synergy.ICE)
+            }
             break;
           case ITEM.OLD_AMBER:
-            pokemon.types.push(Synergy.FOSSIL);
+            if(!pokemon.types.includes(Synergy.FOSSIL)){
+              pokemon.types.push(Synergy.FOSSIL)
+            }
             break;
         }
 
