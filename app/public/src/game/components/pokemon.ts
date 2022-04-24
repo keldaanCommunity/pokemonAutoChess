@@ -971,7 +971,7 @@ export default class Pokemon extends Button {
 
   setLifeBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
     if (pokemon.life !== undefined) {
-      this.lifebar = new Lifebar(scene, 0, this.height/2 + 6, 60, pokemon.life + pokemon.shield, pokemon.shield);
+      this.lifebar = new Lifebar(scene, 0, this.height/2 + 6, 60, pokemon.life + pokemon.shield, pokemon.shield, pokemon.team);
       this.lifebar.setAmount(pokemon.life);
       this.lifebar.setShieldAmount(pokemon.shield);
       this.add(this.lifebar);
