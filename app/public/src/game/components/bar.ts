@@ -23,9 +23,9 @@ export default class Bar extends GameObjects.DOMElement {
         this.progress = document.createElement('div');
         this.progress.className = `progress-bar`;
         this.progress.ariaRoleDescription = 'progressbar';
-        this.progress.ariaValueNow = this.max.toString();
+        this.progress.ariaValueNow = value.toString();
         this.progress.ariaValueMin = '0';
-        this.progress.ariaValueMax = value.toString();
+        this.progress.ariaValueMax = max.toString();
         this.progress.style.width = '100%';
         this.progress.style.backgroundColor = color;
         this.progress.style.height = `${height -2}px!important`;
