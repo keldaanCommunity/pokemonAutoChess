@@ -11,17 +11,19 @@ import PokemonConfig from './pokemon-config';
 import { IPokemonConfig } from '../mongo-models/user-metadata';
 import PokemonCollection from './pokemon-collection';
 import HistoryItem from './history-item';
+import { Item } from '../../types/enum/Item';
+import { Pkm } from '../../types/enum/Pokemon';
 
 export default class Player extends Schema implements IPlayer{
   @type('string') id: string;
   @type('string') name: string;
   @type('string') avatar: string;
   @type({map: Pokemon}) board = new MapSchema<IPokemon>();
-  @type(['string']) shop = new ArraySchema<string>();
+  @type(['string']) shop = new ArraySchema<Pkm>();
   @type(Simulation) simulation = new Simulation();
   @type(ExperienceManager) experienceManager = new ExperienceManager();
   @type({map: 'uint8'}) synergies = new Synergies();
-  @type(['string']) itemsProposition = new ArraySchema<string>();
+  @type(['string']) itemsProposition = new ArraySchema<Item>();
   @type('uint8') money = process.env.MODE == 'dev' ? 400 : 5;
   @type('uint8') life = process.env.MODE == 'dev' ? 50 : 100;
   @type('boolean') shopLocked: boolean = false;
@@ -30,7 +32,7 @@ export default class Player extends Schema implements IPlayer{
   @type('string') opponentName: string = '';
   @type('string') opponentAvatar: string = '';
   @type('uint8') boardSize: number = 0;
-  @type({collection: 'string'}) items = new CollectionSchema<string>();
+  @type({collection: 'string'}) items = new CollectionSchema<Item>();
   @type('uint8') rank: number;
   @type('uint16') exp: number;
   @type('uint16') elo: number;

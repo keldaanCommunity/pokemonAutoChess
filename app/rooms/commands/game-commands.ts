@@ -53,7 +53,7 @@ export class OnShopCommand extends Command<GameRoom, {
           if (pokemon.rarity == Rarity.MYTHICAL) {
             this.state.shop.assignShop(player);
           } else {
-            player.shop[index] = '';
+            player.shop[index] = Pkm.DEFAULT;
           }
           this.room.updateEvolution(id);
           this.room.updateEvolution(id);
@@ -221,6 +221,9 @@ export class OnDragDropCombineCommand extends Command<GameRoom, {
             player.items.add(result)
             player.items.delete(itemA)
             player.items.delete(itemB)
+
+            player.synergies.update(player.board);
+            player.effects.update(player.synergies);
         }
     }
 
@@ -407,7 +410,7 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                 }
                 });
                 if (itemToCombine) {
-                Object.keys(ITEM_RECIPE).forEach((name) => {
+                (Object.keys(ITEM_RECIPE) as Item[]).forEach((name) => {
                     const recipe = ITEM_RECIPE[name];
                     if ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine)) {
                     pokemon.items.delete(itemToCombine);
@@ -432,14 +435,20 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                 }
             } else {
                 if (pokemon.items.has(item)) {
-                client.send('DragDropFailed', message);
-                return;
+                    client.send('DragDropFailed', message);
+                    return;
                 } 
                 else {
-                pokemon.items.add(item);
-                player.items.delete(item);
+                    pokemon.items.add(item);
+                    player.items.delete(item);
                 }
-            }     
+            }
+
+            player.synergies.update(player.board);
+            player.effects.update(player.synergies);
+            if (commands.length > 0) {
+                return commands;
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ import { AttackType, Rarity } from '../types/enum/Game';
 import { Effect } from '../types/enum/Effect';
 import { Ability } from '../types/enum/Ability';
 import { Synergy } from '../types/enum/Synergy';
+import { Pkm } from '../types/enum/Pokemon';
 
 export default class PokemonEntity extends Schema implements IPokemonEntity{
 
@@ -44,9 +45,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('int8') targetY = -1;
   @type('string') attackSprite: string;
   @type('string') rarity: Rarity;
-  @type('string') name: string;
+  @type('string') name: Pkm;
   @type(['uint8']) effects = new ArraySchema<Effect>();
-  @type({set: 'string'}) items = new SetSchema<string>();
+  @type({set: 'string'}) items = new SetSchema<Item>();
   @type(['string']) types = new ArraySchema<Synergy>();
   @type('uint8') stars: number;
   @type('string')  skill: Ability;

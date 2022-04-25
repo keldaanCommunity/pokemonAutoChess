@@ -171,7 +171,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     elo: 1200,
     name: 'ditto'
   });
-  const [entity, setEntity] = useState<string | Pkm>('');
+  const [entity, setEntity] = useState<Item | Pkm>(Pkm.DEFAULT);
   const [mode, setMode] = useState<ReadWriteMode>(ReadWriteMode.WRITE);
   const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
   const [modalBoolean, setModalBoolean] = useState<boolean>(false);
@@ -210,23 +210,25 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
 
   function writeItem(x: number ,y: number) {
     const potential = bot.steps[step].board.findIndex(p=>p.x==x && p.y==y);
+    const e = entity as Item;
     if(potential >= 0) {
       if(bot.steps[step].board[potential].items.length <3){
-        setBot(produce(draft=>{draft.steps[step].board[potential].items.push(entity)}));
+        setBot(produce(draft=>{draft.steps[step].board[potential].items.push(e)}));
       }
       else{
-        setBot(produce(draft=>{draft.steps[step].board[potential].items = [entity]}));
+        setBot(produce(draft=>{draft.steps[step].board[potential].items = [e]}));
       }
     }
   }
 
   function writePokemon(x: number, y: number) {
     const potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y);
+    const e = entity as Pkm;
     if(potential >= 0) {
-      setBot(produce(draft=>{draft.steps[step].board[potential].name = entity}));
+      setBot(produce(draft=>{draft.steps[step].board[potential].name = e}));
     }
     else {
-      setBot(produce(draft=>{draft.steps[step].board.push({name: entity, x: x, y: y, items: []})}));
+      setBot(produce(draft=>{draft.steps[step].board.push({name: e, x: x, y: y, items: []})}));
     }
     updateSynergies(step);
   }

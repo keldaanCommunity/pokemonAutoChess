@@ -16,6 +16,7 @@ import { GamePhaseState } from '../../../../types/enum/Game';
 import indexList from '../../../dist/client/assets/pokemons/indexList.json';
 import PokemonDetail from '../components/pokemon-detail';
 import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer } from '../../../../types';
+import { Item } from '../../../../types/enum/Item';
 export default class GameScene extends Scene {
   tilemap: any;
   room: Room<GameState>;

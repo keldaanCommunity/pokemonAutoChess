@@ -14,7 +14,7 @@ import ItemFactory from '../item-factory';
 
 export class Pokemon extends Schema implements IPokemon{
   @type('string') id: string;
-  @type('string') name: string;
+  @type('string') name: Pkm;
   @type(['string']) types = new ArraySchema<Synergy>();
   @type('string') rarity: Rarity;
 
@@ -34,13 +34,13 @@ export class Pokemon extends Schema implements IPokemon{
   @type('uint8') stars: number;
   @type('uint8') maxMana: number;
   @type('string') skill: Ability;
-  @type({set: 'string'}) items = new SetSchema<string>();
+  @type({set: 'string'}) items = new SetSchema<Item>();
   @type('boolean') shiny: boolean;
   @type('string') emotion: Emotion;
   fossilTimer: number;
 
   constructor(
-     name: string,
+     name: Pkm,
       types: Synergy[],
       rarity: Rarity,
       index: string,

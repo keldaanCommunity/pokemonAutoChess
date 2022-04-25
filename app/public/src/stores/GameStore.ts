@@ -7,6 +7,8 @@ import Synergies from "../../../models/colyseus-models/synergies";
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata";
 import PokemonCollection from "../../../models/colyseus-models/pokemon-collection";
 import {Synergy} from '../../../types/enum/Synergy';
+import { Pkm } from "../../../types/enum/Pokemon";
+import { Item } from "../../../types/enum/Item";
 
 
 interface GameStateStore {
@@ -22,7 +24,7 @@ interface GameStateStore {
     streak: number
     shopLocked: boolean
     experienceManager: ExperienceManager
-    shop: string[]
+    shop: Pkm[]
     itemsProposition: string[]
     currentPlayerSynergies: [string, number][]
     currentPlayerOpponentName: string
@@ -53,9 +55,9 @@ const initialState: GameStateStore = {
     streak: 0,
     shopLocked: false,
     experienceManager: new ExperienceManager(),
-    shop: new Array<string>(),
-    itemsProposition: new Array<string>(),
-    currentPlayerSynergies: new Array<[string, number]>(),
+    shop: new Array<Pkm>(),
+    itemsProposition: new Array<Item>(),
+    currentPlayerSynergies: new Array<[Synergy, number]>(),
     currentPlayerOpponentName: '',
     currentPlayerOpponentAvatar: '0019/Normal',
     currentPlayerBoardSize: 0,
@@ -117,10 +119,10 @@ export const gameSlice = createSlice({
                 state.players[index][action.payload.change.field] = action.payload.change.value;
             }
         },
-        setShop: (state, action: PayloadAction<ArraySchema<string>>) => {
+        setShop: (state, action: PayloadAction<ArraySchema<Pkm>>) => {
             state.shop = action.payload;
         },
-        setItemsProposition: (state, action: PayloadAction<ArraySchema<string>>) => {
+        setItemsProposition: (state, action: PayloadAction<ArraySchema<Item>>) => {
             state.itemsProposition = JSON.parse(JSON.stringify(action.payload));
         },
         setSynergies: (state, action: PayloadAction<Synergies>) => {

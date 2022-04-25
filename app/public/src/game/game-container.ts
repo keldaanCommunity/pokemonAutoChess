@@ -9,6 +9,7 @@ import {Pokemon} from '../../../models/colyseus-models/pokemon';
 import {DataChange} from '@colyseus/schema';
 import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, IPlayer, IPokemon, IPokemonEntity, Transfer } from '../../../types';
 import PokemonEntity from '../../../core/pokemon-entity';
+import { Item } from '../../../types/enum/Item';
 
 class GameContainer {
   room: Room<GameState>;
@@ -220,7 +221,7 @@ class GameContainer {
     }
   }
 
-  handleItemAdd(player: Player, value: string) {
+  handleItemAdd(player: Player, value: Item) {
     if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene')) {
       const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
       if(g.itemsContainer){
@@ -229,7 +230,7 @@ class GameContainer {
     }
   }
 
-  handleItemRemove(player: Player, value: string) {
+  handleItemRemove(player: Player, value: Item) {
     if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene')) {
       const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
       if(g.itemsContainer){
@@ -259,7 +260,7 @@ class GameContainer {
     }
   }
 
-  handleBattleManagerPokemonItemAdd(playerId: string, value: string, pokemon: IPokemonEntity) {
+  handleBattleManagerPokemonItemAdd(playerId: string, value: Item, pokemon: IPokemonEntity) {
     if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene')) {
       const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
       if(g.battle){
@@ -268,7 +269,7 @@ class GameContainer {
     }
   }
 
-  handleBattleManagerPokemonItemRemove(playerId: string, value: string, pokemon: IPokemonEntity) {
+  handleBattleManagerPokemonItemRemove(playerId: string, value: Item, pokemon: IPokemonEntity) {
     if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene')) {
       const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
       if(g.battle){
@@ -345,14 +346,14 @@ class GameContainer {
     }
   }
 
-  handleBoardPokemonItemAdd(playerId: string, value: string, pokemon: IPokemon) {
+  handleBoardPokemonItemAdd(playerId: string, value: Item, pokemon: IPokemon) {
     if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene')) {
       const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
       g.board.addPokemonItem(playerId, value, pokemon);
     }
   }
 
-  handleBoardPokemonItemRemove(playerId: string, value: string, pokemon: IPokemon) {
+  handleBoardPokemonItemRemove(playerId: string, value: Item, pokemon: IPokemon) {
     if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene')) {
       const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
       g.board.removePokemonItem(playerId, value, pokemon);

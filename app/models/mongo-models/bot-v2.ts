@@ -5,7 +5,7 @@ export interface IDetailledPokemon {
   name: string;
   x:number;
   y: number;
-  items: string[];
+  items: Item[];
 }
 
 export interface IStep {
