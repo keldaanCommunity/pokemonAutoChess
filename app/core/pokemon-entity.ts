@@ -1,4 +1,4 @@
-import { ITEM } from '../models/enum';
+import { Item } from '../types/enum/Item';
 import { Orientation, PokemonActionState } from '../types/enum/Game';
 import MovingState from './moving-state';
 import AttackingState from './attacking-state';
@@ -16,6 +16,7 @@ import { AttackType, Rarity } from '../types/enum/Game';
 import { Effect } from '../types/enum/Effect';
 import { Ability } from '../types/enum/Ability';
 import { Synergy } from '../types/enum/Synergy';
+import { Pkm } from '../types/enum/Pokemon';
 
 export default class PokemonEntity extends Schema implements IPokemonEntity{
 
@@ -44,9 +45,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   @type('int8') targetY = -1;
   @type('string') attackSprite: string;
   @type('string') rarity: Rarity;
-  @type('string') name: string;
+  @type('string') name: Pkm;
   @type(['uint8']) effects = new ArraySchema<Effect>();
-  @type({set: 'string'}) items = new SetSchema<string>();
+  @type({set: 'string'}) items = new SetSchema<Item>();
   @type(['string']) types = new ArraySchema<Synergy>();
   @type('uint8') stars: number;
   @type('string')  skill: Ability;
@@ -148,15 +149,15 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
 
   handleSpellDamage(damage: number, board: Board, attackType: AttackType, attacker: PokemonEntity) {
     let spellDamage = damage + damage * attacker.spellDamage / 100;
-    if (attacker && attacker.items.has(ITEM.REAPER_CLOTH) &&  Math.random() > 0.8) {
+    if (attacker && attacker.items.has(Item.REAPER_CLOTH) &&  Math.random() > 0.8) {
       spellDamage *= 2;
       this.count.crit ++;
     }
-    if (attacker && attacker.items.has(ITEM.POKEMONOMICON)) {
+    if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
       this.status.triggerBurn(2000, this, attacker);
       this.status.triggerWound(2000);
     }
-    if (attacker && attacker.items.has(ITEM.SHELL_BELL)) {
+    if (attacker && attacker.items.has(Item.SHELL_BELL)) {
       attacker.handleHeal(0.4 * damage, attacker);
     }
     if (this.status.runeProtect) {

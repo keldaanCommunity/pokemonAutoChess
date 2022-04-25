@@ -6,15 +6,17 @@ import BattleManager from '../components/battle-manager';
 import WeatherManager from '../components/weather-manager';
 import ItemsContainer from '../components/items-container';
 import Pokemon from '../components/pokemon';
-import {ITEM_RECIPE} from '../../../../models/enum';
+import { ITEM_RECIPE } from '../../../../types/Config';
 import firebase from 'firebase/compat/app';
 import {transformCoordinate} from '../../pages/utils/utils';
 import { Room } from "colyseus.js";
 import GameState from "../../../../rooms/states/game-state";
 import ItemContainer from '../components/item-container';
 import { GamePhaseState } from '../../../../types/enum/Game';
-import indexList from '../../../dist/client/assets/pokemons/indexList.json';import PokemonDetail from '../components/pokemon-detail';
+import indexList from '../../../dist/client/assets/pokemons/indexList.json';
+import PokemonDetail from '../components/pokemon-detail';
 import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer } from '../../../../types';
+import { Item } from '../../../../types/enum/Item';
 export default class GameScene extends Scene {
   tilemap: any;
   room: Room<GameState>;
@@ -356,7 +358,7 @@ export default class GameScene extends Scene {
         }
       }
       else if(gameObject instanceof ItemContainer){
-        // ITEM -> ITEM = COMBINE
+        // Item -> Item = COMBINE
         if(dropZone instanceof ItemContainer){
           document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropCombineMessage>(Transfer.DRAG_DROP_COMBINE, {
             detail: {
@@ -365,7 +367,7 @@ export default class GameScene extends Scene {
             }
           }));
         }
-        // ITEM -> POKEMON(board zone) = EQUIP
+        // Item -> POKEMON(board zone) = EQUIP
         else if(dropZone.name == 'board-zone'){
           document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
             detail: {

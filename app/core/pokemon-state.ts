@@ -1,4 +1,5 @@
-import {FLYING_PROTECT_THRESHOLD, ITEM} from '../models/enum';
+import {FLYING_PROTECT_THRESHOLD} from '../models/enum';
+import { Item } from '../types/enum/Item';
 import { Pkm } from '../types/enum/Pokemon';
 import { Effect } from '../types/enum/Effect';
 import { AttackType } from '../types/enum/Game';
@@ -37,7 +38,7 @@ export default class PokemonState {
       death = false;
       if (!pokemon.status.protect) {
         let reducedDamage = damage;
-        if (attacker && attacker.items.has(ITEM.FIRE_GEM)) {
+        if (attacker && attacker.items.has(Item.FIRE_GEM)) {
           if (pokemon.life > 200) {
             reducedDamage = Math.ceil(reducedDamage * 1.6);
           } else {
@@ -45,8 +46,8 @@ export default class PokemonState {
           }
         }
         const armorFactor = 0.1;
-        const def = attacker && attacker.items.has(ITEM.RAZOR_FANG) ? Math.round( 0.7 * pokemon.def): pokemon.def;
-        const speDef = attacker && attacker.items.has(ITEM.RAZOR_FANG) ? Math.round( 0.7 * pokemon.speDef): pokemon.speDef;
+        const def = attacker && attacker.items.has(Item.RAZOR_FANG) ? Math.round( 0.7 * pokemon.def): pokemon.def;
+        const speDef = attacker && attacker.items.has(Item.RAZOR_FANG) ? Math.round( 0.7 * pokemon.speDef): pokemon.speDef;
         if (attackType == AttackType.PHYSICAL) {
           const ritodamage = damage * (pokemon.life / (pokemon.life * (1 + (armorFactor * def))));
           reducedDamage = Math.max(0, Math.round(ritodamage));
@@ -67,7 +68,7 @@ export default class PokemonState {
         }
 
         if (pokemon.dodge > Math.random()) {
-          if (!(attacker && attacker.items.has(ITEM.XRAY_VISION))) {
+          if (!(attacker && attacker.items.has(Item.XRAY_VISION))) {
             reducedDamage = 0;
             pokemon.count.dodgeCount += 1;
           }
@@ -104,7 +105,7 @@ export default class PokemonState {
         if (pokemon) {
           pokemon.setMana(pokemon.mana + Math.ceil(reducedDamage / 10));
 
-          if (pokemon.items.has(ITEM.DEFENSIVE_RIBBON) && pokemon.count.defensiveRibbonCount <5) {
+          if (pokemon.items.has(Item.DEFENSIVE_RIBBON) && pokemon.count.defensiveRibbonCount <5) {
             pokemon.atk ++;
             pokemon.def ++;
             pokemon.speDef ++;
@@ -151,7 +152,7 @@ export default class PokemonState {
             }
             attacker.handleHeal(Math.floor(lifesteal * residualDamage), attacker);
           }
-          if (attacker.items.has(ITEM.KINGS_ROCK)) {
+          if (attacker.items.has(Item.KINGS_ROCK)) {
             attacker.handleHeal(Math.floor(0.5 * residualDamage), attacker);
           }
 
@@ -171,9 +172,9 @@ export default class PokemonState {
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
-          if (pokemon.items.has(ITEM.MAX_REVIVE)) {
+          if (pokemon.items.has(Item.MAX_REVIVE)) {
             pokemon.life = pokemon.hp;
-            pokemon.items.delete(ITEM.MAX_REVIVE);
+            pokemon.items.delete(Item.MAX_REVIVE);
           } else if (pokemon.effects.includes(Effect.SWIFT_SWIM)) {
             pokemon.status.triggerProtect(1000);
             pokemon.life = pokemon.hp * 0.4;

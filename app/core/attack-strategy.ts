@@ -1,4 +1,4 @@
-import {ITEM} from '../models/enum';
+import {Item} from '../types/enum/Item';
 import { Effect } from '../types/enum/Effect'
 import { AttackType } from '../types/enum/Game';
 import Board from './board';
@@ -43,12 +43,12 @@ export class AttackStrategy {
       }
     }
     board.forEach((r: number, c: number, value: PokemonEntity) => {
-      if (value !== undefined && value.team != pokemon.team && value.items.has(ITEM.WATER_INCENSE)) {
+      if (value !== undefined && value.team != pokemon.team && value.items.has(Item.WATER_INCENSE)) {
         pokemon.count.incenseCount ++;
         pokemon.handleDamage(Math.ceil(value.maxMana * 0.2), board, AttackType.SPECIAL, value);
       }
     });
-    if (pokemon.items.has(ITEM.AQUA_EGG)) {
+    if (pokemon.items.has(Item.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + 20);
     }
   }

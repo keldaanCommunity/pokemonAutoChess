@@ -1,16 +1,18 @@
 import Button from './button';
 import { GameObjects } from 'phaser';
 import ItemDetail from './item-detail';
+import { Item } from '../../../../types/enum/Item';
 
 export default class ItemContainer extends Button {
   detail: ItemDetail;
   sprite: GameObjects.Image;
   tempDetail: ItemDetail;
   tempSprite: GameObjects.Image;
+  name: Item;
 
   scene: Phaser.Scene;
   dragable: boolean
-  constructor(scene: Phaser.Scene, x: number, y: number, item: string, dragable: boolean) {
+  constructor(scene: Phaser.Scene, x: number, y: number, item: Item, dragable: boolean) {
     super(scene, x, y, dragable ? 70: 25, dragable ? 70: 25);
     this.scene = scene;
     this.dragable = dragable

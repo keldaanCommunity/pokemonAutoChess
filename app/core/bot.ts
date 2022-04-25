@@ -1,4 +1,4 @@
-import { ITEM } from '../models/enum';
+import { Item } from '../types/enum/Item';
 import PokemonFactory from '../models/pokemon-factory';
 import BOT, { IBot } from '../models/mongo-models/bot-v2';
 import Player from '../models/colyseus-models/player';
@@ -54,31 +54,31 @@ export default class Bot {
         stepTeam.board[i].items.forEach((item)=>{
           if (!pkm.items.has(item)) {
               switch (item) {
-                case ITEM.WATER_STONE:
+                case Item.WATER_STONE:
                   pkm.types.push(Synergy.WATER);
                   break;
-                case ITEM.FIRE_STONE:
+                case Item.FIRE_STONE:
                   pkm.types.push(Synergy.FIRE);
                   break;
-                case ITEM.THUNDER_STONE:
+                case Item.THUNDER_STONE:
                   pkm.types.push(Synergy.ELECTRIC);
                   break;
-                case ITEM.DUSK_STONE:
+                case Item.DUSK_STONE:
                   pkm.types.push(Synergy.DARK);
                   break;
-                case ITEM.MOON_STONE:
+                case Item.MOON_STONE:
                   pkm.types.push(Synergy.FAIRY);
                   break;
-                case ITEM.LEAF_STONE:
+                case Item.LEAF_STONE:
                   pkm.types.push(Synergy.GRASS);
                   break;
-                case ITEM.DAWN_STONE:
+                case Item.DAWN_STONE:
                   pkm.types.push(Synergy.PSYCHIC);
                   break;
-                case ITEM.ICY_ROCK:
+                case Item.ICY_ROCK:
                   pkm.types.push(Synergy.ICE);
                   break;
-                case ITEM.OLD_AMBER:
+                case Item.OLD_AMBER:
                   pkm.types.push(Synergy.FOSSIL);
                   break;
                 default:

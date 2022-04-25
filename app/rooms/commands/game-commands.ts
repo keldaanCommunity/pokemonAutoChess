@@ -1,5 +1,7 @@
 import {Command} from '@colyseus/command';
-import { COST, ITEM, BASIC_ITEM, ITEM_RECIPE, NEUTRAL_STAGE } from '../../models/enum';
+import { COST, NEUTRAL_STAGE } from '../../models/enum';
+import { ITEM_RECIPE } from '../../types/Config';
+import { Item, BasicItem } from '../../types/enum/Item';
 import { BattleResult } from '../../types/enum/Game';
 import Player from '../../models/colyseus-models/player';
 import PokemonFactory from '../../models/pokemon-factory';
@@ -51,7 +53,7 @@ export class OnShopCommand extends Command<GameRoom, {
           if (pokemon.rarity == Rarity.MYTHICAL) {
             this.state.shop.assignShop(player);
           } else {
-            player.shop[index] = '';
+            player.shop[index] = Pkm.DEFAULT;
           }
           this.room.updateEvolution(id);
           this.room.updateEvolution(id);
@@ -219,6 +221,9 @@ export class OnDragDropCombineCommand extends Command<GameRoom, {
             player.items.add(result)
             player.items.delete(itemA)
             player.items.delete(itemB)
+
+            player.synergies.update(player.board);
+            player.effects.update(player.synergies);
         }
     }
 
@@ -257,10 +262,10 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
             }
             // check if full items
             if (pokemon.items.size >= 3) {
-                if (Object.keys(BASIC_ITEM).includes(item)) {
+                if (Object.keys(BasicItem).includes(item)) {
                 let includesBasicItem = false;
                 pokemon.items.forEach((i)=>{
-                    if (Object.keys(BASIC_ITEM).includes(i)) {
+                    if (Object.keys(BasicItem).includes(i)) {
                     includesBasicItem = true;
                     }
                 });
@@ -280,28 +285,28 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
             switch (pokemon.name) {
                 case Pkm.EEVEE:
                 switch (item) {
-                    case ITEM.WATER_STONE:
+                    case Item.WATER_STONE:
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.VAPOREON);
                     break;
-                    case ITEM.FIRE_STONE:
+                    case Item.FIRE_STONE:
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.FLAREON);
                     break;
-                    case ITEM.THUNDER_STONE:
+                    case Item.THUNDER_STONE:
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.JOLTEON);
                     break;
-                    case ITEM.DUSK_STONE:
+                    case Item.DUSK_STONE:
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.UMBREON);
                     break;
-                    case ITEM.MOON_STONE:
+                    case Item.MOON_STONE:
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.SYLVEON);
                     break;
-                    case ITEM.LEAF_STONE:
+                    case Item.LEAF_STONE:
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.LEAFEON);
                     break;
-                    case ITEM.DAWN_STONE:
+                    case Item.DAWN_STONE:
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.ESPEON);
                     break;
-                    case ITEM.ICY_ROCK:
+                    case Item.ICY_ROCK:
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.GLACEON);
                     break;
                 }
@@ -309,7 +314,7 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                 case Pkm.DITTO:
                 equipAfterTransform = false;
                 switch (item) {
-                    case ITEM.FOSSIL_STONE:
+                    case Item.FOSSIL_STONE:
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, PokemonFactory.getRandomFossil(player.board));
                     break;
                     default:
@@ -318,17 +323,17 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                 }
                 break;
                 case Pkm.GROUDON:
-                if (item == ITEM.RED_ORB) {
+                if (item == Item.RED_ORB) {
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.PRIMAL_GROUDON);
                 }
                 break;
                 case Pkm.KYOGRE:
-                if (item == ITEM.BLUE_ORB) {
+                if (item == Item.BLUE_ORB) {
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.PRIMAL_KYOGRE);
                 }
                 break;
                 case Pkm.RAYQUAZA:
-                if (item == ITEM.DELTA_ORB) {
+                if (item == Item.DELTA_ORB) {
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.MEGA_RAYQUAZA);
                 }
                 break;
@@ -350,62 +355,62 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
 
             // regular equip
             switch (item) {
-                case ITEM.WATER_STONE:
+                case Item.WATER_STONE:
                 if(!pokemon.types.includes(Synergy.WATER)){
                     pokemon.types.push(Synergy.WATER)
                 }
                 break;
-                case ITEM.FIRE_STONE:
+                case Item.FIRE_STONE:
                 if(!pokemon.types.includes(Synergy.FIRE)){
                     pokemon.types.push(Synergy.FIRE)
                 }
                 break;
-                case ITEM.THUNDER_STONE:
+                case Item.THUNDER_STONE:
                 if(!pokemon.types.includes(Synergy.ELECTRIC)){
                     pokemon.types.push(Synergy.ELECTRIC)
                 }
                 break;
-                case ITEM.DUSK_STONE:
+                case Item.DUSK_STONE:
                 if(!pokemon.types.includes(Synergy.DARK)){
                     pokemon.types.push(Synergy.DARK)
                 }
                 break;
-                case ITEM.MOON_STONE:
+                case Item.MOON_STONE:
                 if(!pokemon.types.includes(Synergy.FAIRY)){
                     pokemon.types.push(Synergy.FAIRY)
                 }
                 break;
-                case ITEM.LEAF_STONE:
+                case Item.LEAF_STONE:
                 if(!pokemon.types.includes(Synergy.GRASS)){
                     pokemon.types.push(Synergy.GRASS)
                 }
                 break;
-                case ITEM.DAWN_STONE:
+                case Item.DAWN_STONE:
                 if(!pokemon.types.includes(Synergy.PSYCHIC)){
                     pokemon.types.push(Synergy.PSYCHIC)
                 }
                 break;
-                case ITEM.ICY_ROCK:
+                case Item.ICY_ROCK:
                 if(!pokemon.types.includes(Synergy.ICE)){
                     pokemon.types.push(Synergy.ICE)
                 }
                 break;
-                case ITEM.OLD_AMBER:
+                case Item.OLD_AMBER:
                 if(!pokemon.types.includes(Synergy.FOSSIL)){
                     pokemon.types.push(Synergy.FOSSIL)
                 }
                 break;
             }
 
-            if (Object.keys(BASIC_ITEM).includes(item)) {
+            if (Object.keys(BasicItem).includes(item)) {
                 let itemToCombine;
                 pokemon.items.forEach( (i)=>{
-                if (Object.keys(BASIC_ITEM).includes(i)) {
+                if (Object.keys(BasicItem).includes(i)) {
                     itemToCombine = i;
                 }
                 });
                 if (itemToCombine) {
-                Object.keys(ITEM_RECIPE).forEach((name) => {
+                (Object.keys(ITEM_RECIPE) as Item[]).forEach((name) => {
                     const recipe = ITEM_RECIPE[name];
                     if ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine)) {
                     pokemon.items.delete(itemToCombine);
@@ -430,14 +435,20 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                 }
             } else {
                 if (pokemon.items.has(item)) {
-                client.send('DragDropFailed', message);
-                return;
+                    client.send('DragDropFailed', message);
+                    return;
                 } 
                 else {
-                pokemon.items.add(item);
-                player.items.delete(item);
+                    pokemon.items.add(item);
+                    player.items.delete(item);
                 }
-            }     
+            }
+
+            player.synergies.update(player.board);
+            player.effects.update(player.synergies);
+            if (commands.length > 0) {
+                return commands;
+            }
         }
     }
 }
@@ -750,7 +761,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             player.itemsProposition.push(item);
           });
           // const item = ItemFactory.createRandomItem();
-          // const item = ItemFactory.createSpecificItems([ITEMS.BLUE_ORB]);
+          // const item = ItemFactory.createSpecificItems([ItemS.BLUE_ORB]);
           player.items.add(ItemFactory.createBasicRandomItem());
         }
         player.opponentName = '';
@@ -777,31 +788,31 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               pokemon.items.forEach((i)=>{
                 pokemonEvolved.items.add(i);
                 switch (i) {
-                  case ITEM.WATER_STONE:
+                  case Item.WATER_STONE:
                     pokemonEvolved.types.push(Synergy.WATER);
                     break;
-                  case ITEM.FIRE_STONE:
+                  case Item.FIRE_STONE:
                     pokemonEvolved.types.push(Synergy.FIRE);
                     break;
-                  case ITEM.THUNDER_STONE:
+                  case Item.THUNDER_STONE:
                     pokemonEvolved.types.push(Synergy.ELECTRIC);
                     break;
-                  case ITEM.DUSK_STONE:
+                  case Item.DUSK_STONE:
                     pokemonEvolved.types.push(Synergy.DARK);
                     break;
-                  case ITEM.MOON_STONE:
+                  case Item.MOON_STONE:
                     pokemonEvolved.types.push(Synergy.FAIRY);
                     break;
-                  case ITEM.LEAF_STONE:
+                  case Item.LEAF_STONE:
                     pokemonEvolved.types.push(Synergy.GRASS);
                     break;
-                  case ITEM.DAWN_STONE:
+                  case Item.DAWN_STONE:
                     pokemonEvolved.types.push(Synergy.PSYCHIC);
                     break;
-                  case ITEM.ICY_ROCK:
+                  case Item.ICY_ROCK:
                     pokemonEvolved.types.push(Synergy.ICE);
                     break;
-                  case ITEM.OLD_AMBER:
+                  case Item.OLD_AMBER:
                     pokemonEvolved.types.push(Synergy.FOSSIL);
                     break;
                 }

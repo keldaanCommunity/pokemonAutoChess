@@ -5,7 +5,8 @@ import Player from '../models/colyseus-models/player';
 import UserMetadata from '../models/mongo-models/user-metadata';
 import BOT from '../models/mongo-models/bot-v2';
 import {OnShopCommand, OnItemCommand, OnSellDropCommand, OnRefreshCommand, OnLockCommand, OnLevelUpCommand, OnUpdateCommand, OnDragDropCommand, OnJoinCommand, OnDragDropItemCommand, OnDragDropCombineCommand} from './commands/game-commands';
-import {XP_PLACE, BASIC_ITEM, ITEM} from '../models/enum';
+import {XP_PLACE} from '../models/enum';
+import { Item, BasicItem } from '../types/enum/Item';
 import PokemonFactory from '../models/pokemon-factory';
 import EloRank from 'elo-rank';
 import admin from 'firebase-admin';
@@ -470,7 +471,7 @@ export default class GameRoom extends Room<GameState> {
               }
 
               pkm.items.forEach((el)=>{
-                if (Object.keys(BASIC_ITEM).includes(el)) {
+                if (Object.keys(BasicItem).includes(el)) {
                   basicItemsToAdd.push(el);
                 } else {
                   itemsToAdd.push(el);
@@ -489,31 +490,31 @@ export default class GameRoom extends Room<GameState> {
               } else {
                 pokemonEvolved.items.add(itemToAdd);
                 switch (itemToAdd) {
-                  case ITEM.WATER_STONE:
+                  case Item.WATER_STONE:
                     pokemonEvolved.types.push(Synergy.WATER);
                     break;
-                  case ITEM.FIRE_STONE:
+                  case Item.FIRE_STONE:
                     pokemonEvolved.types.push(Synergy.FIRE);
                     break;
-                  case ITEM.THUNDER_STONE:
+                  case Item.THUNDER_STONE:
                     pokemonEvolved.types.push(Synergy.ELECTRIC);
                     break;
-                  case ITEM.DUSK_STONE:
+                  case Item.DUSK_STONE:
                     pokemonEvolved.types.push(Synergy.DARK);
                     break;
-                  case ITEM.MOON_STONE:
+                  case Item.MOON_STONE:
                     pokemonEvolved.types.push(Synergy.FAIRY);
                     break;
-                  case ITEM.LEAF_STONE:
+                  case Item.LEAF_STONE:
                     pokemonEvolved.types.push(Synergy.GRASS);
                     break;
-                  case ITEM.DAWN_STONE:
+                  case Item.DAWN_STONE:
                     pokemonEvolved.types.push(Synergy.PSYCHIC);
                     break;
-                  case ITEM.ICY_ROCK:
+                  case Item.ICY_ROCK:
                     pokemonEvolved.types.push(Synergy.ICE);
                     break;
-                  case ITEM.OLD_AMBER:
+                  case Item.OLD_AMBER:
                     pokemonEvolved.types.push(Synergy.FOSSIL);
                     break;
                 }

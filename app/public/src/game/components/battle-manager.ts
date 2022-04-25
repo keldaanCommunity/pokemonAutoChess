@@ -8,6 +8,7 @@ import AnimationManager from '../animation-manager';
 import {DataChange} from '@colyseus/schema';
 import { PokemonActionState } from '../../../../types/enum/Game';
 import { Ability } from '../../../../types/enum/Ability';
+import { Item } from '../../../../types/enum/Item';
 
 export default class BattleManager {
   group: GameObjects.Group;
@@ -67,7 +68,7 @@ export default class BattleManager {
     }
   }
 
-  addPokemonItem(playerId: string, value: string, pokemon: IPokemonEntity) {
+  addPokemonItem(playerId: string, value: Item, pokemon: IPokemonEntity) {
     // console.log(change);
     if (this.player.id == playerId) {
       const children = this.group.getChildren();
@@ -81,7 +82,7 @@ export default class BattleManager {
     }
   }
 
-  removePokemonItem(playerId: string, value: string, pokemon: IPokemonEntity) {
+  removePokemonItem(playerId: string, value: Item, pokemon: IPokemonEntity) {
     if (this.player.id == playerId && this.group) {
       const children = this.group.getChildren();
       for (let i = 0; i < children.length; i++) {

@@ -2,11 +2,12 @@ import { SetSchema } from '@colyseus/schema';
 import {GameObjects} from 'phaser';
 import ItemContainer from './item-container';
 import GameScene from '../scenes/game-scene';
+import { Item } from '../../../../types/enum/Item';
 
 export default class ItemsContainer extends GameObjects.Container {
   itemSize: number;
   dragable: boolean;
-  constructor(scene: Phaser.Scene, inventory: SetSchema<string>, x: number, y: number, dragable: boolean) {
+  constructor(scene: Phaser.Scene, inventory: SetSchema<Item>, x: number, y: number, dragable: boolean) {
     super(scene, x, y);
     this.itemSize = dragable ? 80: 25;
     this.dragable = dragable;
@@ -17,7 +18,7 @@ export default class ItemsContainer extends GameObjects.Container {
     });
   }
 
-  addItem(value: string) {
+  addItem(value: Item) {
     this.add(new ItemContainer(this.scene, 0, 0, value, this.dragable));
     this.updateItems();
   }

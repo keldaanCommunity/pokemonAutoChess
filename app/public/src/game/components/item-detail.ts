@@ -1,5 +1,6 @@
 import {GameObjects} from 'phaser';
-import {ITEM_NAME, ITEM_DESCRIPTION, ITEM_RECIPE} from '../../../../models/enum';
+import { ItemDescription, ItemName } from '../../../../types/strings/Item';
+import {ITEM_RECIPE} from '../../../../types/Config';
 
 export default class ItemDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement;
@@ -14,9 +15,9 @@ export default class ItemDetail extends GameObjects.DOMElement {
     this.dom.innerHTML = `
       <div style='display:flex; align-items:baseline; justify-content: space-around'>
         <img style='width:40px; height:40px; image-rendering: pixelated' src='assets/item/${name}.png'/>
-        <h5>${ITEM_NAME[name]}</h5>
+        <h5>${ItemName[name]}</h5>
       </div>
-      <p>${ITEM_DESCRIPTION[name]}</p>
+      <p>${ItemDescription[name]}</p>
       <div style='display:flex; justify-content:space-between'>
       ${Object.keys(ITEM_RECIPE).reduce((prev, item, idx)=>{
         const recipe: string[] = ITEM_RECIPE[item];

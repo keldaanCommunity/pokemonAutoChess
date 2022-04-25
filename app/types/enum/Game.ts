@@ -54,9 +54,17 @@ export enum BotDifficulty {
 export enum PokemonTint {
     NORMAL = "Normal",
     SHINY = "Shiny"
-  }
-  
-  export enum SpriteType {
+}
+
+export enum SpriteType {
     ANIM = "Anim",
     SHADOW = "Shadow"
-  }
+}
+
+export enum Climate {
+    NEUTRAL = 'NEUTRAL',
+    RAIN = 'RAIN',
+    SUN = 'SUN',
+    SANDSTORM = 'SANDSTORM',
+    SNOW = 'SNOW'
+}

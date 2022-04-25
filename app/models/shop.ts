@@ -92,14 +92,14 @@ export default class Shop {
   pickPokemon(player: Player) {
     const playerProbality = PROBABILITY[player.experienceManager.level];
     const seed = Math.random();
-    let pokemon = '';
+    let pokemon: Pkm;
     let threshold = 0;
-    const common = [];
-    const uncommon = [];
-    const rare = [];
-    const epic = [];
-    const legendary = [];
-    const threeStars = [];
+    const common = new Array<Pkm>();
+    const uncommon = new Array<Pkm>();
+    const rare = new Array<Pkm>();
+    const epic = new Array<Pkm>();
+    const legendary = new Array<Pkm>();
+    const threeStars = new Array<Pkm>();
 
     player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.stars == 3) {
@@ -107,27 +107,27 @@ export default class Shop {
       }
     });
 
-    COMMON.forEach((name: string) => {
+    COMMON.forEach((name: Pkm) => {
       if (!threeStars.includes(name)) {
         common.push(name);
       }
     });
-    UNCOMMON.forEach((name: string) => {
+    UNCOMMON.forEach((name: Pkm) => {
       if (!threeStars.includes(name)) {
         uncommon.push(name);
       }
     });
-    RARE.forEach((name: string) => {
+    RARE.forEach((name: Pkm) => {
       if (!threeStars.includes(name)) {
         rare.push(name);
       }
     });
-    EPIC.forEach((name: string) => {
+    EPIC.forEach((name: Pkm) => {
       if (!threeStars.includes(name)) {
         epic.push(name);
       }
     });
-    LEGENDARY.forEach((name: string) => {
+    LEGENDARY.forEach((name: Pkm) => {
       if (!threeStars.includes(name)) {
         legendary.push(name);
       }

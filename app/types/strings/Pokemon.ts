@@ -1,2043 +1,2043 @@
 //
-import { Pkmn } from '../enum/Pokemon'
+import { Pkm } from '../enum/Pokemon'
 export const PokemonNames = {
-    [Pkmn.DITTO] : {
+    [Pkm.DITTO] : {
         'eng' : "ditto",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BULBASAUR] : {
+    [Pkm.BULBASAUR] : {
         'eng' : "bulbasaur",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.IVYSAUR] : {
+    [Pkm.IVYSAUR] : {
         'eng' : "ivysaur",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VENUSAUR] : {
+    [Pkm.VENUSAUR] : {
         'eng' : "venusaur",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CHARMANDER] : {
+    [Pkm.CHARMANDER] : {
         'eng' : "charmander",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CHARMELEON] : {
+    [Pkm.CHARMELEON] : {
         'eng' : "charmeleon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CHARIZARD] : {
+    [Pkm.CHARIZARD] : {
         'eng' : "charizard",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SQUIRTLE] : {
+    [Pkm.SQUIRTLE] : {
         'eng' : "squirtle",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WARTORTLE] : {
+    [Pkm.WARTORTLE] : {
         'eng' : "wartortle",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BLASTOISE] : {
+    [Pkm.BLASTOISE] : {
         'eng' : "blastoise",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GEODUDE] : {
+    [Pkm.GEODUDE] : {
         'eng' : "geodude",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GRAVELER] : {
+    [Pkm.GRAVELER] : {
         'eng' : "graveler",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GOLEM] : {
+    [Pkm.GOLEM] : {
         'eng' : "golem",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.AZURILL] : {
+    [Pkm.AZURILL] : {
         'eng' : "azurill",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MARILL] : {
+    [Pkm.MARILL] : {
         'eng' : "marill",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.AZUMARILL] : {
+    [Pkm.AZUMARILL] : {
         'eng' : "azumarill",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ZUBAT] : {
+    [Pkm.ZUBAT] : {
         'eng' : "zubat",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GOLBAT] : {
+    [Pkm.GOLBAT] : {
         'eng' : "golbat",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CROBAT] : {
+    [Pkm.CROBAT] : {
         'eng' : "crobat",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAREEP] : {
+    [Pkm.MAREEP] : {
         'eng' : "mareep",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FLAFFY] : {
+    [Pkm.FLAFFY] : {
         'eng' : "flaffy",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.AMPHAROS] : {
+    [Pkm.AMPHAROS] : {
         'eng' : "ampharos",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CLEFFA] : {
+    [Pkm.CLEFFA] : {
         'eng' : "cleffa",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CLEFAIRY] : {
+    [Pkm.CLEFAIRY] : {
         'eng' : "clefairy",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CLEFABLE] : {
+    [Pkm.CLEFABLE] : {
         'eng' : "clefable",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.IGGLYBUFF] : {
+    [Pkm.IGGLYBUFF] : {
         'eng' : "igglybuff",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WIGGLYTUFF] : {
+    [Pkm.WIGGLYTUFF] : {
         'eng' : "wigglytuff",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.JIGGLYPUFF] : {
+    [Pkm.JIGGLYPUFF] : {
         'eng' : "jigglypuff",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CATERPIE] : {
+    [Pkm.CATERPIE] : {
         'eng' : "caterpie",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.METAPOD] : {
+    [Pkm.METAPOD] : {
         'eng' : "metapod",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BUTTERFREE] : {
+    [Pkm.BUTTERFREE] : {
         'eng' : "butterfree",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WEEDLE] : {
+    [Pkm.WEEDLE] : {
         'eng' : "weedle",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KAKUNA] : {
+    [Pkm.KAKUNA] : {
         'eng' : "kakuna",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BEEDRILL] : {
+    [Pkm.BEEDRILL] : {
         'eng' : "beedrill",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PIDGEY] : {
+    [Pkm.PIDGEY] : {
         'eng' : "pidgey",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PIDGEOTTO] : {
+    [Pkm.PIDGEOTTO] : {
         'eng' : "pidgeotto",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PIDGEOT] : {
+    [Pkm.PIDGEOT] : {
         'eng' : "pidgeot",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HOPPIP] : {
+    [Pkm.HOPPIP] : {
         'eng' : "hoppip",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SKIPLOOM] : {
+    [Pkm.SKIPLOOM] : {
         'eng' : "skiploom",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.JUMPLUFF] : {
+    [Pkm.JUMPLUFF] : {
         'eng' : "jumpluff",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SEEDOT] : {
+    [Pkm.SEEDOT] : {
         'eng' : "seedot",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NUZLEAF] : {
+    [Pkm.NUZLEAF] : {
         'eng' : "nuzleaf",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SHIFTRY] : {
+    [Pkm.SHIFTRY] : {
         'eng' : "shiftry",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.STARLY] : {
+    [Pkm.STARLY] : {
         'eng' : "starly",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.STARAVIA] : {
+    [Pkm.STARAVIA] : {
         'eng' : "staravia",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.STARAPTOR] : {
+    [Pkm.STARAPTOR] : {
         'eng' : "staraptor",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CHIKORITA] : {
+    [Pkm.CHIKORITA] : {
         'eng' : "chikorita",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BAYLEEF] : {
+    [Pkm.BAYLEEF] : {
         'eng' : "bayleef",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGANIUM] : {
+    [Pkm.MEGANIUM] : {
         'eng' : "meganium",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CYNDAQUIL] : {
+    [Pkm.CYNDAQUIL] : {
         'eng' : "cyndaquil",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.QUILAVA] : {
+    [Pkm.QUILAVA] : {
         'eng' : "quilava",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TYPHLOSION] : {
+    [Pkm.TYPHLOSION] : {
         'eng' : "typhlosion",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TOTODILE] : {
+    [Pkm.TOTODILE] : {
         'eng' : "totodile",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CROCONAW] : {
+    [Pkm.CROCONAW] : {
         'eng' : "croconaw",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FERALIGATR] : {
+    [Pkm.FERALIGATR] : {
         'eng' : "feraligatr",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TREECKO] : {
+    [Pkm.TREECKO] : {
         'eng' : "treecko",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GROVYLE] : {
+    [Pkm.GROVYLE] : {
         'eng' : "grovyle",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SCEPTILE] : {
+    [Pkm.SCEPTILE] : {
         'eng' : "sceptile",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TORCHIC] : {
+    [Pkm.TORCHIC] : {
         'eng' : "torchic",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.COMBUSKEN] : {
+    [Pkm.COMBUSKEN] : {
         'eng' : "combusken",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BLAZIKEN] : {
+    [Pkm.BLAZIKEN] : {
         'eng' : "blaziken",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MUDKIP] : {
+    [Pkm.MUDKIP] : {
         'eng' : "mudkip",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MARSHTOMP] : {
+    [Pkm.MARSHTOMP] : {
         'eng' : "marshtomp",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SWAMPERT] : {
+    [Pkm.SWAMPERT] : {
         'eng' : "swampert",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TURTWIG] : {
+    [Pkm.TURTWIG] : {
         'eng' : "turtwig",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GROTLE] : {
+    [Pkm.GROTLE] : {
         'eng' : "grotle",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TORTERRA] : {
+    [Pkm.TORTERRA] : {
         'eng' : "torterra",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CHIMCHAR] : {
+    [Pkm.CHIMCHAR] : {
         'eng' : "chimchar",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MONFERNO] : {
+    [Pkm.MONFERNO] : {
         'eng' : "monferno",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.INFERNAPE] : {
+    [Pkm.INFERNAPE] : {
         'eng' : "infernape",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PIPLUP] : {
+    [Pkm.PIPLUP] : {
         'eng' : "piplup",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PRINPLUP] : {
+    [Pkm.PRINPLUP] : {
         'eng' : "prinplup",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.EMPOLEON] : {
+    [Pkm.EMPOLEON] : {
         'eng' : "empoleon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NIDORANF] : {
+    [Pkm.NIDORANF] : {
         'eng' : "nidoranf",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NIDORINA] : {
+    [Pkm.NIDORINA] : {
         'eng' : "nidorina",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NIDOQUEEN] : {
+    [Pkm.NIDOQUEEN] : {
         'eng' : "nidoqueen",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NIDORANM] : {
+    [Pkm.NIDORANM] : {
         'eng' : "nidoranm",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NIDORINO] : {
+    [Pkm.NIDORINO] : {
         'eng' : "nidorino",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NIDOKING] : {
+    [Pkm.NIDOKING] : {
         'eng' : "nidoking",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PICHU] : {
+    [Pkm.PICHU] : {
         'eng' : "pichu",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PIKACHU] : {
+    [Pkm.PIKACHU] : {
         'eng' : "pikachu",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RAICHU] : {
+    [Pkm.RAICHU] : {
         'eng' : "raichu",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MACHOP] : {
+    [Pkm.MACHOP] : {
         'eng' : "machop",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MACHOKE] : {
+    [Pkm.MACHOKE] : {
         'eng' : "machoke",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MACHAMP] : {
+    [Pkm.MACHAMP] : {
         'eng' : "machamp",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HORSEA] : {
+    [Pkm.HORSEA] : {
         'eng' : "horsea",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SEADRA] : {
+    [Pkm.SEADRA] : {
         'eng' : "seadra",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KINGDRA] : {
+    [Pkm.KINGDRA] : {
         'eng' : "kingdra",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TRAPINCH] : {
+    [Pkm.TRAPINCH] : {
         'eng' : "trapinch",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VIBRAVA] : {
+    [Pkm.VIBRAVA] : {
         'eng' : "vibrava",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FLYGON] : {
+    [Pkm.FLYGON] : {
         'eng' : "flygon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SPHEAL] : {
+    [Pkm.SPHEAL] : {
         'eng' : "spheal",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SEALEO] : {
+    [Pkm.SEALEO] : {
         'eng' : "sealeo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CHINCHOU] : {
+    [Pkm.CHINCHOU] : {
         'eng' : "chinchou",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WALREIN] : {
+    [Pkm.WALREIN] : {
         'eng' : "walrein",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ARON] : {
+    [Pkm.ARON] : {
         'eng' : "aron",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LAIRON] : {
+    [Pkm.LAIRON] : {
         'eng' : "lairon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.AGGRON] : {
+    [Pkm.AGGRON] : {
         'eng' : "aggron",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAGNEMITE] : {
+    [Pkm.MAGNEMITE] : {
         'eng' : "magnemite",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAGNETON] : {
+    [Pkm.MAGNETON] : {
         'eng' : "magneton",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAGNEZONE] : {
+    [Pkm.MAGNEZONE] : {
         'eng' : "magnezone",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RHYHORN] : {
+    [Pkm.RHYHORN] : {
         'eng' : "rhyhorn",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RHYDON] : {
+    [Pkm.RHYDON] : {
         'eng' : "rhydon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RHYPERIOR] : {
+    [Pkm.RHYPERIOR] : {
         'eng' : "rhyperior",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TOGEPI] : {
+    [Pkm.TOGEPI] : {
         'eng' : "togepi",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TOGETIC] : {
+    [Pkm.TOGETIC] : {
         'eng' : "togetic",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TOGEKISS] : {
+    [Pkm.TOGEKISS] : {
         'eng' : "togekiss",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DUSKULL] : {
+    [Pkm.DUSKULL] : {
         'eng' : "duskull",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DUSCLOPS] : {
+    [Pkm.DUSCLOPS] : {
         'eng' : "dusclops",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DUSKNOIR] : {
+    [Pkm.DUSKNOIR] : {
         'eng' : "dusknoir",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LOTAD] : {
+    [Pkm.LOTAD] : {
         'eng' : "lotad",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LOMBRE] : {
+    [Pkm.LOMBRE] : {
         'eng' : "lombre",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LUDICOLO] : {
+    [Pkm.LUDICOLO] : {
         'eng' : "ludicolo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SHINX] : {
+    [Pkm.SHINX] : {
         'eng' : "shinx",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LUXIO] : {
+    [Pkm.LUXIO] : {
         'eng' : "luxio",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LUXRAY] : {
+    [Pkm.LUXRAY] : {
         'eng' : "luxray",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.POLIWAG] : {
+    [Pkm.POLIWAG] : {
         'eng' : "poliwag",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.POLIWHIRL] : {
+    [Pkm.POLIWHIRL] : {
         'eng' : "poliwhirl",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.POLITOED] : {
+    [Pkm.POLITOED] : {
         'eng' : "politoed",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ABRA] : {
+    [Pkm.ABRA] : {
         'eng' : "abra",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KADABRA] : {
+    [Pkm.KADABRA] : {
         'eng' : "kadabra",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ALAKAZAM] : {
+    [Pkm.ALAKAZAM] : {
         'eng' : "alakazam",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GASTLY] : {
+    [Pkm.GASTLY] : {
         'eng' : "gastly",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HAUNTER] : {
+    [Pkm.HAUNTER] : {
         'eng' : "haunter",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GENGAR] : {
+    [Pkm.GENGAR] : {
         'eng' : "gengar",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DRATINI] : {
+    [Pkm.DRATINI] : {
         'eng' : "dratini",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DRAGONAIR] : {
+    [Pkm.DRAGONAIR] : {
         'eng' : "dragonair",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DRAGONITE] : {
+    [Pkm.DRAGONITE] : {
         'eng' : "dragonite",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LARVITAR] : {
+    [Pkm.LARVITAR] : {
         'eng' : "larvitar",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PUPITAR] : {
+    [Pkm.PUPITAR] : {
         'eng' : "pupitar",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TYRANITAR] : {
+    [Pkm.TYRANITAR] : {
         'eng' : "tyranitar",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SLAKOTH] : {
+    [Pkm.SLAKOTH] : {
         'eng' : "slakoth",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VIGOROTH] : {
+    [Pkm.VIGOROTH] : {
         'eng' : "vigoroth",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SLAKING] : {
+    [Pkm.SLAKING] : {
         'eng' : "slaking",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RALTS] : {
+    [Pkm.RALTS] : {
         'eng' : "ralts",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KIRLIA] : {
+    [Pkm.KIRLIA] : {
         'eng' : "kirlia",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GARDEVOIR] : {
+    [Pkm.GARDEVOIR] : {
         'eng' : "gardevoir",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BAGON] : {
+    [Pkm.BAGON] : {
         'eng' : "bagon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SHELGON] : {
+    [Pkm.SHELGON] : {
         'eng' : "shelgon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SALAMENCE] : {
+    [Pkm.SALAMENCE] : {
         'eng' : "salamence",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BELDUM] : {
+    [Pkm.BELDUM] : {
         'eng' : "beldum",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.METANG] : {
+    [Pkm.METANG] : {
         'eng' : "metang",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.METAGROSS] : {
+    [Pkm.METAGROSS] : {
         'eng' : "metagross",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GIBLE] : {
+    [Pkm.GIBLE] : {
         'eng' : "gible",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GABITE] : {
+    [Pkm.GABITE] : {
         'eng' : "gabite",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GARCHOMP] : {
+    [Pkm.GARCHOMP] : {
         'eng' : "garchomp",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ELEKID] : {
+    [Pkm.ELEKID] : {
         'eng' : "elekid",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ELECTABUZZ] : {
+    [Pkm.ELECTABUZZ] : {
         'eng' : "electabuzz",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ELECTIVIRE] : {
+    [Pkm.ELECTIVIRE] : {
         'eng' : "electivire",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAGBY] : {
+    [Pkm.MAGBY] : {
         'eng' : "magby",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAGMAR] : {
+    [Pkm.MAGMAR] : {
         'eng' : "magmar",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAGMORTAR] : {
+    [Pkm.MAGMORTAR] : {
         'eng' : "magmortar",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MUNCHLAX] : {
+    [Pkm.MUNCHLAX] : {
         'eng' : "munchlax",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SNORLAX] : {
+    [Pkm.SNORLAX] : {
         'eng' : "snorlax",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GROWLITHE] : {
+    [Pkm.GROWLITHE] : {
         'eng' : "growlithe",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ARCANINE] : {
+    [Pkm.ARCANINE] : {
         'eng' : "arcanine",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ONIX] : {
+    [Pkm.ONIX] : {
         'eng' : "onix",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.STEELIX] : {
+    [Pkm.STEELIX] : {
         'eng' : "steelix",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGA_STEELIX] : {
+    [Pkm.MEGA_STEELIX] : {
         'eng' : "megasteelix",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SCYTHER] : {
+    [Pkm.SCYTHER] : {
         'eng' : "scyther",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SCIZOR] : {
+    [Pkm.SCIZOR] : {
         'eng' : "scizor",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGA_SCIZOR] : {
+    [Pkm.MEGA_SCIZOR] : {
         'eng' : "megascizor",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RIOLU] : {
+    [Pkm.RIOLU] : {
         'eng' : "riolu",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LUCARIO] : {
+    [Pkm.LUCARIO] : {
         'eng' : "lucario",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGA_LUCARIO] : {
+    [Pkm.MEGA_LUCARIO] : {
         'eng' : "megalucario",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAGIKARP] : {
+    [Pkm.MAGIKARP] : {
         'eng' : "magikarp",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RATTATA] : {
+    [Pkm.RATTATA] : {
         'eng' : "rattata",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RATICATE] : {
+    [Pkm.RATICATE] : {
         'eng' : "raticate",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SPEAROW] : {
+    [Pkm.SPEAROW] : {
         'eng' : "spearow",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FEAROW] : {
+    [Pkm.FEAROW] : {
         'eng' : "fearow",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GYARADOS] : {
+    [Pkm.GYARADOS] : {
         'eng' : "gyarados",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LUGIA] : {
+    [Pkm.LUGIA] : {
         'eng' : "lugia",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GIRATINA] : {
+    [Pkm.GIRATINA] : {
         'eng' : "giratina",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ZAPDOS] : {
+    [Pkm.ZAPDOS] : {
         'eng' : "zapdos",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MOLTRES] : {
+    [Pkm.MOLTRES] : {
         'eng' : "moltres",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ARTICUNO] : {
+    [Pkm.ARTICUNO] : {
         'eng' : "articuno",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DIALGA] : {
+    [Pkm.DIALGA] : {
         'eng' : "dialga",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PALKIA] : {
+    [Pkm.PALKIA] : {
         'eng' : "palkia",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SUICUNE] : {
+    [Pkm.SUICUNE] : {
         'eng' : "suicune",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RAIKOU] : {
+    [Pkm.RAIKOU] : {
         'eng' : "raikou",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ENTEI] : {
+    [Pkm.ENTEI] : {
         'eng' : "entei",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.REGICE] : {
+    [Pkm.REGICE] : {
         'eng' : "regice",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.REGIROCK] : {
+    [Pkm.REGIROCK] : {
         'eng' : "regirock",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.REGISTEEL] : {
+    [Pkm.REGISTEEL] : {
         'eng' : "registeel",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KYOGRE] : {
+    [Pkm.KYOGRE] : {
         'eng' : "kyogre",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GROUDON] : {
+    [Pkm.GROUDON] : {
         'eng' : "groudon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RAYQUAZA] : {
+    [Pkm.RAYQUAZA] : {
         'eng' : "rayquaza",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.REGIGIGAS] : {
+    [Pkm.REGIGIGAS] : {
         'eng' : "regigigas",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.EEVEE] : {
+    [Pkm.EEVEE] : {
         'eng' : "eevee",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VAPOREON] : {
+    [Pkm.VAPOREON] : {
         'eng' : "vaporeon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.JOLTEON] : {
+    [Pkm.JOLTEON] : {
         'eng' : "jolteon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FLAREON] : {
+    [Pkm.FLAREON] : {
         'eng' : "flareon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ESPEON] : {
+    [Pkm.ESPEON] : {
         'eng' : "espeon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.UMBREON] : {
+    [Pkm.UMBREON] : {
         'eng' : "umbreon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LEAFEON] : {
+    [Pkm.LEAFEON] : {
         'eng' : "leafeon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SYLVEON] : {
+    [Pkm.SYLVEON] : {
         'eng' : "sylveon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEDITITE] : {
+    [Pkm.MEDITITE] : {
         'eng' : "meditite",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEDICHAM] : {
+    [Pkm.MEDICHAM] : {
         'eng' : "medicham",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGA_MEDICHAM] : {
+    [Pkm.MEGA_MEDICHAM] : {
         'eng' : "megamedicham",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NUMEL] : {
+    [Pkm.NUMEL] : {
         'eng' : "numel",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CAMERUPT] : {
+    [Pkm.CAMERUPT] : {
         'eng' : "camerupt",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGA_CAMERUPT] : {
+    [Pkm.MEGA_CAMERUPT] : {
         'eng' : "megacamerupt",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SANDSHREW] : {
+    [Pkm.SANDSHREW] : {
         'eng' : "sandshrew",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SANDSLASH] : {
+    [Pkm.SANDSLASH] : {
         'eng' : "sandslash",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DARKRAI] : {
+    [Pkm.DARKRAI] : {
         'eng' : "darkrai",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LITWICK] : {
+    [Pkm.LITWICK] : {
         'eng' : "litwick",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LAMPENT] : {
+    [Pkm.LAMPENT] : {
         'eng' : "lampent",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CHANDELURE] : {
+    [Pkm.CHANDELURE] : {
         'eng' : "chandelure",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SLOWPOKE] : {
+    [Pkm.SLOWPOKE] : {
         'eng' : "slowpoke",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SLOWBRO] : {
+    [Pkm.SLOWBRO] : {
         'eng' : "slowbro",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SLOWKING] : {
+    [Pkm.SLOWKING] : {
         'eng' : "slowking",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BELLSPROUT] : {
+    [Pkm.BELLSPROUT] : {
         'eng' : "bellsprout",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WEEPINBELL] : {
+    [Pkm.WEEPINBELL] : {
         'eng' : "weepinbell",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VICTREEBEL] : {
+    [Pkm.VICTREEBEL] : {
         'eng' : "victreebel",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CARVANHA] : {
+    [Pkm.CARVANHA] : {
         'eng' : "carvanha",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SWINUB] : {
+    [Pkm.SWINUB] : {
         'eng' : "swinub",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PILOSWINE] : {
+    [Pkm.PILOSWINE] : {
         'eng' : "piloswine",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAMOSWINE] : {
+    [Pkm.MAMOSWINE] : {
         'eng' : "mamoswine",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SNORUNT] : {
+    [Pkm.SNORUNT] : {
         'eng' : "snorunt",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GLALIE] : {
+    [Pkm.GLALIE] : {
         'eng' : "glalie",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FROSLASS] : {
+    [Pkm.FROSLASS] : {
         'eng' : "froslass",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SNOVER] : {
+    [Pkm.SNOVER] : {
         'eng' : "snover",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ABOMASNOW] : {
+    [Pkm.ABOMASNOW] : {
         'eng' : "abomasnow",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGA_ABOMASNOW] : {
+    [Pkm.MEGA_ABOMASNOW] : {
         'eng' : "megaabomasnow",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VANILLITE] : {
+    [Pkm.VANILLITE] : {
         'eng' : "vanillite",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VANILLISH] : {
+    [Pkm.VANILLISH] : {
         'eng' : "vanillish",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VANILLUXE] : {
+    [Pkm.VANILLUXE] : {
         'eng' : "vanilluxe",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GLACEON] : {
+    [Pkm.GLACEON] : {
         'eng' : "glaceon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VOLCARONA] : {
+    [Pkm.VOLCARONA] : {
         'eng' : "volcarona",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LANDORUS] : {
+    [Pkm.LANDORUS] : {
         'eng' : "landorus",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.THUNDURUS] : {
+    [Pkm.THUNDURUS] : {
         'eng' : "thundurus",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TORNADUS] : {
+    [Pkm.TORNADUS] : {
         'eng' : "tornadus",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KELDEO] : {
+    [Pkm.KELDEO] : {
         'eng' : "keldeo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TERRAKION] : {
+    [Pkm.TERRAKION] : {
         'eng' : "terrakion",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VIRIZION] : {
+    [Pkm.VIRIZION] : {
         'eng' : "virizion",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.COBALION] : {
+    [Pkm.COBALION] : {
         'eng' : "cobalion",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MANAPHY] : {
+    [Pkm.MANAPHY] : {
         'eng' : "manaphy",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ROTOM] : {
+    [Pkm.ROTOM] : {
         'eng' : "rotom",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SPIRITOMB] : {
+    [Pkm.SPIRITOMB] : {
         'eng' : "spiritomb",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ABSOL] : {
+    [Pkm.ABSOL] : {
         'eng' : "absol",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LAPRAS] : {
+    [Pkm.LAPRAS] : {
         'eng' : "lapras",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LATIAS] : {
+    [Pkm.LATIAS] : {
         'eng' : "latias",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LATIOS] : {
+    [Pkm.LATIOS] : {
         'eng' : "latios",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MESPRIT] : {
+    [Pkm.MESPRIT] : {
         'eng' : "mesprit",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.AZELF] : {
+    [Pkm.AZELF] : {
         'eng' : "azelf",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.UXIE] : {
+    [Pkm.UXIE] : {
         'eng' : "uxie",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEWTWO] : {
+    [Pkm.MEWTWO] : {
         'eng' : "mewtwo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KYUREM] : {
+    [Pkm.KYUREM] : {
         'eng' : "kyurem",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RESHIRAM] : {
+    [Pkm.RESHIRAM] : {
         'eng' : "reshiram",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ZEKROM] : {
+    [Pkm.ZEKROM] : {
         'eng' : "zekrom",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CELEBI] : {
+    [Pkm.CELEBI] : {
         'eng' : "celebi",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VICTINI] : {
+    [Pkm.VICTINI] : {
         'eng' : "victini",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.JIRACHI] : {
+    [Pkm.JIRACHI] : {
         'eng' : "jirachi",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ARCEUS] : {
+    [Pkm.ARCEUS] : {
         'eng' : "arceus",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DEOXYS] : {
+    [Pkm.DEOXYS] : {
         'eng' : "deoxys",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SHAYMIN] : {
+    [Pkm.SHAYMIN] : {
         'eng' : "shaymin",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CRESSELIA] : {
+    [Pkm.CRESSELIA] : {
         'eng' : "cresselia",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HEATRAN] : {
+    [Pkm.HEATRAN] : {
         'eng' : "heatran",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HO_OH] : {
+    [Pkm.HO_OH] : {
         'eng' : "hooh",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.AERODACTYL] : {
+    [Pkm.AERODACTYL] : {
         'eng' : "aerodactyl",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PRIMAL_KYOGRE] : {
+    [Pkm.PRIMAL_KYOGRE] : {
         'eng' : "primalkyogre",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PRIMAL_GROUDON] : {
+    [Pkm.PRIMAL_GROUDON] : {
         'eng' : "primalgroudon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEOWTH] : {
+    [Pkm.MEOWTH] : {
         'eng' : "meowth",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PERSIAN] : {
+    [Pkm.PERSIAN] : {
         'eng' : "persian",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DEINO] : {
+    [Pkm.DEINO] : {
         'eng' : "deino",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ZWEILOUS] : {
+    [Pkm.ZWEILOUS] : {
         'eng' : "zweilous",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HYDREIGON] : {
+    [Pkm.HYDREIGON] : {
         'eng' : "hydreigon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SANDILE] : {
+    [Pkm.SANDILE] : {
         'eng' : "sandile",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KROKOROK] : {
+    [Pkm.KROKOROK] : {
         'eng' : "krokorok",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KROOKODILE] : {
+    [Pkm.KROOKODILE] : {
         'eng' : "krookodile",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SOLOSIS] : {
+    [Pkm.SOLOSIS] : {
         'eng' : "solosis",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DUOSION] : {
+    [Pkm.DUOSION] : {
         'eng' : "duosion",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.REUNICLUS] : {
+    [Pkm.REUNICLUS] : {
         'eng' : "reuniclus",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGA_RAYQUAZA] : {
+    [Pkm.MEGA_RAYQUAZA] : {
         'eng' : "megarayquaza",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SWABLU] : {
+    [Pkm.SWABLU] : {
         'eng' : "swablu",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ODDISH] : {
+    [Pkm.ODDISH] : {
         'eng' : "oddish",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GLOOM] : {
+    [Pkm.GLOOM] : {
         'eng' : "gloom",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VILEPLUME] : {
+    [Pkm.VILEPLUME] : {
         'eng' : "vileplume",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BELLOSSOM] : {
+    [Pkm.BELLOSSOM] : {
         'eng' : "bellossom",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.AMAURA] : {
+    [Pkm.AMAURA] : {
         'eng' : "amaura",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.AURORUS] : {
+    [Pkm.AURORUS] : {
         'eng' : "aurorus",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ANORITH] : {
+    [Pkm.ANORITH] : {
         'eng' : "anorith",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ARMALDO] : {
+    [Pkm.ARMALDO] : {
         'eng' : "armaldo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ARCHEN] : {
+    [Pkm.ARCHEN] : {
         'eng' : "archen",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ARCHEOPS] : {
+    [Pkm.ARCHEOPS] : {
         'eng' : "archeops",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SHIELDON] : {
+    [Pkm.SHIELDON] : {
         'eng' : "shieldon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BASTIODON] : {
+    [Pkm.BASTIODON] : {
         'eng' : "bastiodon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TIRTOUGA] : {
+    [Pkm.TIRTOUGA] : {
         'eng' : "tirtouga",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CARRACOSTA] : {
+    [Pkm.CARRACOSTA] : {
         'eng' : "carracosta",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LILEEP] : {
+    [Pkm.LILEEP] : {
         'eng' : "lileep",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CRADILY] : {
+    [Pkm.CRADILY] : {
         'eng' : "cradily",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CRANIDOS] : {
+    [Pkm.CRANIDOS] : {
         'eng' : "cranidos",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RAMPARDOS] : {
+    [Pkm.RAMPARDOS] : {
         'eng' : "rampardos",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KABUTO] : {
+    [Pkm.KABUTO] : {
         'eng' : "kabuto",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KABUTOPS] : {
+    [Pkm.KABUTOPS] : {
         'eng' : "kabutops",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.OMANYTE] : {
+    [Pkm.OMANYTE] : {
         'eng' : "omanyte",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.OMASTAR] : {
+    [Pkm.OMASTAR] : {
         'eng' : "omastar",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TYRUNT] : {
+    [Pkm.TYRUNT] : {
         'eng' : "tyrunt",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TYRANTRUM] : {
+    [Pkm.TYRANTRUM] : {
         'eng' : "tyrantrum",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BUDEW] : {
+    [Pkm.BUDEW] : {
         'eng' : "budew",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ROSELIA] : {
+    [Pkm.ROSELIA] : {
         'eng' : "roselia",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ROSERADE] : {
+    [Pkm.ROSERADE] : {
         'eng' : "roserade",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BUNEARY] : {
+    [Pkm.BUNEARY] : {
         'eng' : "buneary",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LOPUNNY] : {
+    [Pkm.LOPUNNY] : {
         'eng' : "lopunny",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGA_LOPUNNY] : {
+    [Pkm.MEGA_LOPUNNY] : {
         'eng' : "megalopunny",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.AXEW] : {
+    [Pkm.AXEW] : {
         'eng' : "axew",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FRAXURE] : {
+    [Pkm.FRAXURE] : {
         'eng' : "fraxure",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HAXORUS] : {
+    [Pkm.HAXORUS] : {
         'eng' : "haxorus",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VENIPEDE] : {
+    [Pkm.VENIPEDE] : {
         'eng' : "venipede",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WHIRLIPEDE] : {
+    [Pkm.WHIRLIPEDE] : {
         'eng' : "whirlipede",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SCOLIPEDE] : {
+    [Pkm.SCOLIPEDE] : {
         'eng' : "scolipede",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PORYGON] : {
+    [Pkm.PORYGON] : {
         'eng' : "porygon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PORYGON_2] : {
+    [Pkm.PORYGON_2] : {
         'eng' : "porygon2",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PORYGON_Z] : {
+    [Pkm.PORYGON_Z] : {
         'eng' : "porygonz",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KLINK] : {
+    [Pkm.KLINK] : {
         'eng' : "klink",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KLANG] : {
+    [Pkm.KLANG] : {
         'eng' : "klang",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KLINKLANG] : {
+    [Pkm.KLINKLANG] : {
         'eng' : "klinklang",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ELECTRIKE] : {
+    [Pkm.ELECTRIKE] : {
         'eng' : "electrike",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MANECTRIC] : {
+    [Pkm.MANECTRIC] : {
         'eng' : "manectric",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGA_MANECTRIC] : {
+    [Pkm.MEGA_MANECTRIC] : {
         'eng' : "megamanectric",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SHUPPET] : {
+    [Pkm.SHUPPET] : {
         'eng' : "shuppet",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BANETTE] : {
+    [Pkm.BANETTE] : {
         'eng' : "banette",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGA_BANETTE] : {
+    [Pkm.MEGA_BANETTE] : {
         'eng' : "megabanette",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HONEDGE] : {
+    [Pkm.HONEDGE] : {
         'eng' : "honedge",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DOUBLADE] : {
+    [Pkm.DOUBLADE] : {
         'eng' : "doublade",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.AEGISLASH] : {
+    [Pkm.AEGISLASH] : {
         'eng' : "aegislash",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CUBONE] : {
+    [Pkm.CUBONE] : {
         'eng' : "cubone",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAROWAK] : {
+    [Pkm.MAROWAK] : {
         'eng' : "marowak",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ALOLAN_MAROWAK] : {
+    [Pkm.ALOLAN_MAROWAK] : {
         'eng' : "alolanmarowak",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FLETCHLING] : {
+    [Pkm.FLETCHLING] : {
         'eng' : "fletchling",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FLETCHINDER] : {
+    [Pkm.FLETCHINDER] : {
         'eng' : "fletchinder",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TALONFLAME] : {
+    [Pkm.TALONFLAME] : {
         'eng' : "talonflame",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WHISMUR] : {
+    [Pkm.WHISMUR] : {
         'eng' : "whismur",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LOUDRED] : {
+    [Pkm.LOUDRED] : {
         'eng' : "loudred",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.EXPLOUD] : {
+    [Pkm.EXPLOUD] : {
         'eng' : "exploud",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TYMPOLE] : {
+    [Pkm.TYMPOLE] : {
         'eng' : "tympole",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PALPITOAD] : {
+    [Pkm.PALPITOAD] : {
         'eng' : "palpitoad",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SEISMITOAD] : {
+    [Pkm.SEISMITOAD] : {
         'eng' : "seismitoad",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SEWADDLE] : {
+    [Pkm.SEWADDLE] : {
         'eng' : "sewaddle",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SWADLOON] : {
+    [Pkm.SWADLOON] : {
         'eng' : "swadloon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LEAVANNY] : {
+    [Pkm.LEAVANNY] : {
         'eng' : "leavanny",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PIKIPEK] : {
+    [Pkm.PIKIPEK] : {
         'eng' : "pikipek",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TRUMBEAK] : {
+    [Pkm.TRUMBEAK] : {
         'eng' : "trumbeak",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TOUCANNON] : {
+    [Pkm.TOUCANNON] : {
         'eng' : "toucannon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FLABEBE] : {
+    [Pkm.FLABEBE] : {
         'eng' : "flabebe",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FLOETTE] : {
+    [Pkm.FLOETTE] : {
         'eng' : "floette",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FLORGES] : {
+    [Pkm.FLORGES] : {
         'eng' : "florges",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.JANGMO_O] : {
+    [Pkm.JANGMO_O] : {
         'eng' : "jangmoo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HAKAMO_O] : {
+    [Pkm.HAKAMO_O] : {
         'eng' : "hakamoo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KOMMO_O] : {
+    [Pkm.KOMMO_O] : {
         'eng' : "kommoo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MELOETTA] : {
+    [Pkm.MELOETTA] : {
         'eng' : "meloetta",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ALTARIA] : {
+    [Pkm.ALTARIA] : {
         'eng' : "altaria",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGA_ALTARIA] : {
+    [Pkm.MEGA_ALTARIA] : {
         'eng' : "megaaltaria",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LILLIPUP] : {
+    [Pkm.LILLIPUP] : {
         'eng' : "lillipup",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HERDIER] : {
+    [Pkm.HERDIER] : {
         'eng' : "herdier",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.STOUTLAND] : {
+    [Pkm.STOUTLAND] : {
         'eng' : "stoutland",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HITMONCHAN] : {
+    [Pkm.HITMONCHAN] : {
         'eng' : "hitmonchan",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SKUNTANK] : {
+    [Pkm.SKUNTANK] : {
         'eng' : "skuntank",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PRIMEAPE] : {
+    [Pkm.PRIMEAPE] : {
         'eng' : "primeape",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.URSARING] : {
+    [Pkm.URSARING] : {
         'eng' : "ursaring",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BIBAREL] : {
+    [Pkm.BIBAREL] : {
         'eng' : "bibarel",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SENTRET] : {
+    [Pkm.SENTRET] : {
         'eng' : "sentret",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FURRET] : {
+    [Pkm.FURRET] : {
         'eng' : "furret",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LUNATONE] : {
+    [Pkm.LUNATONE] : {
         'eng' : "lunatone",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HONCHKROW] : {
+    [Pkm.HONCHKROW] : {
         'eng' : "honchkrow",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GLAMEOW] : {
+    [Pkm.GLAMEOW] : {
         'eng' : "glameow",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PURUGLY] : {
+    [Pkm.PURUGLY] : {
         'eng' : "purugly",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TOXICROAK] : {
+    [Pkm.TOXICROAK] : {
         'eng' : "toxicroak",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SKARMORY] : {
+    [Pkm.SKARMORY] : {
         'eng' : "skarmory",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LICKILICKY] : {
+    [Pkm.LICKILICKY] : {
         'eng' : "lickilicky",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LICKITUNG] : {
+    [Pkm.LICKITUNG] : {
         'eng' : "lickitung",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TANGELA] : {
+    [Pkm.TANGELA] : {
         'eng' : "tangela",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TANGROWTH] : {
+    [Pkm.TANGROWTH] : {
         'eng' : "tangrowth",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MISDREAVUS] : {
+    [Pkm.MISDREAVUS] : {
         'eng' : "misdreavus",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MISMAGIUS] : {
+    [Pkm.MISMAGIUS] : {
         'eng' : "mismagius",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SOLROCK] : {
+    [Pkm.SOLROCK] : {
         'eng' : "solrock",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SKORUPI] : {
+    [Pkm.SKORUPI] : {
         'eng' : "skorupi",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CLAYDOL] : {
+    [Pkm.CLAYDOL] : {
         'eng' : "claydol",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BALTOY] : {
+    [Pkm.BALTOY] : {
         'eng' : "baltoy",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GLISCOR] : {
+    [Pkm.GLISCOR] : {
         'eng' : "gliscor",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MUK] : {
+    [Pkm.MUK] : {
         'eng' : "muk",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NOSEPASS] : {
+    [Pkm.NOSEPASS] : {
         'eng' : "nosepass",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PROBOPASS] : {
+    [Pkm.PROBOPASS] : {
         'eng' : "probopass",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SURSKIT] : {
+    [Pkm.SURSKIT] : {
         'eng' : "surskit",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MASQUERAIN] : {
+    [Pkm.MASQUERAIN] : {
         'eng' : "masquerain",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VOLBEAT] : {
+    [Pkm.VOLBEAT] : {
         'eng' : "volbeat",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ILLUMISE] : {
+    [Pkm.ILLUMISE] : {
         'eng' : "illumise",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DIGLETT] : {
+    [Pkm.DIGLETT] : {
         'eng' : "diglett",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DUGTRIO] : {
+    [Pkm.DUGTRIO] : {
         'eng' : "dugtrio",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SEVIPER] : {
+    [Pkm.SEVIPER] : {
         'eng' : "seviper",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WEEZING] : {
+    [Pkm.WEEZING] : {
         'eng' : "weezing",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KOFFING] : {
+    [Pkm.KOFFING] : {
         'eng' : "koffing",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CACTURNE] : {
+    [Pkm.CACTURNE] : {
         'eng' : "cacturne",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CACNEA] : {
+    [Pkm.CACNEA] : {
         'eng' : "cacnea",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DRIFBLIM] : {
+    [Pkm.DRIFBLIM] : {
         'eng' : "drifblim",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DRIFLOON] : {
+    [Pkm.DRIFLOON] : {
         'eng' : "drifloon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KINGLER] : {
+    [Pkm.KINGLER] : {
         'eng' : "kingler",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KRABBY] : {
+    [Pkm.KRABBY] : {
         'eng' : "krabby",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.EXEGGCUTE] : {
+    [Pkm.EXEGGCUTE] : {
         'eng' : "exeggcute",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HOOTHOOT] : {
+    [Pkm.HOOTHOOT] : {
         'eng' : "hoothoot",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NOCTOWL] : {
+    [Pkm.NOCTOWL] : {
         'eng' : "noctowl",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DODUO] : {
+    [Pkm.DODUO] : {
         'eng' : "doduo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DODRIO] : {
+    [Pkm.DODRIO] : {
         'eng' : "dodrio",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TAUROS] : {
+    [Pkm.TAUROS] : {
         'eng' : "tauros",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BURMY] : {
+    [Pkm.BURMY] : {
         'eng' : "burmy",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WORMADAN] : {
+    [Pkm.WORMADAN] : {
         'eng' : "wormadan",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SPINARAK] : {
+    [Pkm.SPINARAK] : {
         'eng' : "spinarak",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ARIADOS] : {
+    [Pkm.ARIADOS] : {
         'eng' : "ariados",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WURMPLE] : {
+    [Pkm.WURMPLE] : {
         'eng' : "wurmple",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BRONZONG] : {
+    [Pkm.BRONZONG] : {
         'eng' : "bronzong",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BRONZOR] : {
+    [Pkm.BRONZOR] : {
         'eng' : "bronzor",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DROWZEE] : {
+    [Pkm.DROWZEE] : {
         'eng' : "drowzee",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HYPNO] : {
+    [Pkm.HYPNO] : {
         'eng' : "hypno",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SMOOCHUM] : {
+    [Pkm.SMOOCHUM] : {
         'eng' : "smoochum",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PLUSLE] : {
+    [Pkm.PLUSLE] : {
         'eng' : "plusle",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MINUN] : {
+    [Pkm.MINUN] : {
         'eng' : "minun",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PHANPY] : {
+    [Pkm.PHANPY] : {
         'eng' : "phanpy",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GIRAFARIG] : {
+    [Pkm.GIRAFARIG] : {
         'eng' : "girafarig",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.YANMA] : {
+    [Pkm.YANMA] : {
         'eng' : "yanma",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.YANMEGA] : {
+    [Pkm.YANMEGA] : {
         'eng' : "yanmega",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.POOCHYENA] : {
+    [Pkm.POOCHYENA] : {
         'eng' : "poochyena",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MIGHTYENA] : {
+    [Pkm.MIGHTYENA] : {
         'eng' : "mightyena",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SHROOMISH] : {
+    [Pkm.SHROOMISH] : {
         'eng' : "shroomish",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CARNIVINE] : {
+    [Pkm.CARNIVINE] : {
         'eng' : "carnivine",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAWILE] : {
+    [Pkm.MAWILE] : {
         'eng' : "mawile",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DUNSPARCE] : {
+    [Pkm.DUNSPARCE] : {
         'eng' : "dunsparce",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SMEARGLE] : {
+    [Pkm.SMEARGLE] : {
         'eng' : "smeargle",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CHERUBI] : {
+    [Pkm.CHERUBI] : {
         'eng' : "cherubi",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CHERIM] : {
+    [Pkm.CHERIM] : {
         'eng' : "cherim",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ZIGZAGOON] : {
+    [Pkm.ZIGZAGOON] : {
         'eng' : "zigzagoon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PACHIRISU] : {
+    [Pkm.PACHIRISU] : {
         'eng' : "pachirisu",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.STANTLER] : {
+    [Pkm.STANTLER] : {
         'eng' : "stantler",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PINSIR] : {
+    [Pkm.PINSIR] : {
         'eng' : "pinsir",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BRELOOM] : {
+    [Pkm.BRELOOM] : {
         'eng' : "breloom",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.LINOONE] : {
+    [Pkm.LINOONE] : {
         'eng' : "linoone",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KRICKEROT] : {
+    [Pkm.KRICKEROT] : {
         'eng' : "krickerot",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TROPIUS] : {
+    [Pkm.TROPIUS] : {
         'eng' : "tropius",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEW] : {
+    [Pkm.MEW] : {
         'eng' : "mew",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SHELLDER] : {
+    [Pkm.SHELLDER] : {
         'eng' : "shellder",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CORSOLA] : {
+    [Pkm.CORSOLA] : {
         'eng' : "corsola",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SHELLOS] : {
+    [Pkm.SHELLOS] : {
         'eng' : "shellos",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GASTRODON] : {
+    [Pkm.GASTRODON] : {
         'eng' : "gastrodon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WAILMER] : {
+    [Pkm.WAILMER] : {
         'eng' : "wailmer",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WAILORD] : {
+    [Pkm.WAILORD] : {
         'eng' : "wailord",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CLAMPERL] : {
+    [Pkm.CLAMPERL] : {
         'eng' : "clamperl",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FINNEON] : {
+    [Pkm.FINNEON] : {
         'eng' : "finneon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TENTACOOL] : {
+    [Pkm.TENTACOOL] : {
         'eng' : "tentacool",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TENTACRUEL] : {
+    [Pkm.TENTACRUEL] : {
         'eng' : "tentacruel",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.REMORAID] : {
+    [Pkm.REMORAID] : {
         'eng' : "remoraid",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SEEL] : {
+    [Pkm.SEEL] : {
         'eng' : "seel",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DEWGONG] : {
+    [Pkm.DEWGONG] : {
         'eng' : "dewgong",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PELIPPER] : {
+    [Pkm.PELIPPER] : {
         'eng' : "pelipper",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.STARYU] : {
+    [Pkm.STARYU] : {
         'eng' : "staryu",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.STARMIE] : {
+    [Pkm.STARMIE] : {
         'eng' : "starmie",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SPOINK] : {
+    [Pkm.SPOINK] : {
         'eng' : "spoink",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GRUMPIG] : {
+    [Pkm.GRUMPIG] : {
         'eng' : "grumpig",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VOLTORB] : {
+    [Pkm.VOLTORB] : {
         'eng' : "voltorb",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ELECTRODE] : {
+    [Pkm.ELECTRODE] : {
         'eng' : "electrode",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MURKROW] : {
+    [Pkm.MURKROW] : {
         'eng' : "murkrow",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SKITTY] : {
+    [Pkm.SKITTY] : {
         'eng' : "skitty",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DELCATTY] : {
+    [Pkm.DELCATTY] : {
         'eng' : "delcatty",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.TAILOW] : {
+    [Pkm.TAILOW] : {
         'eng' : "tailow",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SWELLOW] : {
+    [Pkm.SWELLOW] : {
         'eng' : "swellow",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WINGULL] : {
+    [Pkm.WINGULL] : {
         'eng' : "wingull",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.DONPHAN] : {
+    [Pkm.DONPHAN] : {
         'eng' : "donphan",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FLOATZEL] : {
+    [Pkm.FLOATZEL] : {
         'eng' : "floatzel",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PONYTA] : {
+    [Pkm.PONYTA] : {
         'eng' : "ponyta",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.RAPIDASH] : {
+    [Pkm.RAPIDASH] : {
         'eng' : "rapidash",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SLUGMA] : {
+    [Pkm.SLUGMA] : {
         'eng' : "slugma",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MAGCARGO] : {
+    [Pkm.MAGCARGO] : {
         'eng' : "magcargo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HIPPOWDON] : {
+    [Pkm.HIPPOWDON] : {
         'eng' : "hippowdon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HIPPOPOTAS] : {
+    [Pkm.HIPPOPOTAS] : {
         'eng' : "hippopotas",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VULPIX] : {
+    [Pkm.VULPIX] : {
         'eng' : "vulpix",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NINETALES] : {
+    [Pkm.NINETALES] : {
         'eng' : "ninetales",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FORETRESS] : {
+    [Pkm.FORETRESS] : {
         'eng' : "foretress",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CHINGLING] : {
+    [Pkm.CHINGLING] : {
         'eng' : "chingling",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MOTHIM] : {
+    [Pkm.MOTHIM] : {
         'eng' : "mothim",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NINCADA] : {
+    [Pkm.NINCADA] : {
         'eng' : "nincada",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.NINJASK] : {
+    [Pkm.NINJASK] : {
         'eng' : "ninjask",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SHEDNINJA] : {
+    [Pkm.SHEDNINJA] : {
         'eng' : "shedninja",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.UNOWN] : {
+    [Pkm.UNOWN] : {
         'eng' : "unown",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.OCTIRELLY] : {
+    [Pkm.OCTIRELLY] : {
         'eng' : "octirelly",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.QWILFISH] : {
+    [Pkm.QWILFISH] : {
         'eng' : "qwilfish",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CHANSEY] : {
+    [Pkm.CHANSEY] : {
         'eng' : "chansey",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BLISSEY] : {
+    [Pkm.BLISSEY] : {
         'eng' : "blissey",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WYNAUT] : {
+    [Pkm.WYNAUT] : {
         'eng' : "wynaut",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WOOBUFFET] : {
+    [Pkm.WOOBUFFET] : {
         'eng' : "woobuffet",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SPINDA] : {
+    [Pkm.SPINDA] : {
         'eng' : "spinda",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MILTANK] : {
+    [Pkm.MILTANK] : {
         'eng' : "miltank",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.VESPIQUEEN] : {
+    [Pkm.VESPIQUEEN] : {
         'eng' : "vespiqueen",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HOUNDOUR] : {
+    [Pkm.HOUNDOUR] : {
         'eng' : "houndour",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HOUNDOOM] : {
+    [Pkm.HOUNDOOM] : {
         'eng' : "houndoom",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SNUBULL] : {
+    [Pkm.SNUBULL] : {
         'eng' : "snubull",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GRANBULL] : {
+    [Pkm.GRANBULL] : {
         'eng' : "granbull",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.FARFETCH] : {
+    [Pkm.FARFETCH] : {
         'eng' : "farfetch",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KRICKETUNE] : {
+    [Pkm.KRICKETUNE] : {
         'eng' : "kricketune",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.GRIMER] : {
+    [Pkm.GRIMER] : {
         'eng' : "grimer",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PSYDUCK] : {
+    [Pkm.PSYDUCK] : {
         'eng' : "psyduck",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WOOPER] : {
+    [Pkm.WOOPER] : {
         'eng' : "wooper",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.BARBOACH] : {
+    [Pkm.BARBOACH] : {
         'eng' : "barboach",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.WHISCASH] : {
+    [Pkm.WHISCASH] : {
         'eng' : "whiscash",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SNEASEL] : {
+    [Pkm.SNEASEL] : {
         'eng' : "sneasel",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SABLEYE] : {
+    [Pkm.SABLEYE] : {
         'eng' : "sableye",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.SUDOWOODO] : {
+    [Pkm.SUDOWOODO] : {
         'eng' : "sudowoodo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.EKANS] : {
+    [Pkm.EKANS] : {
         'eng' : "ekans",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ARBOK] : {
+    [Pkm.ARBOK] : {
         'eng' : "arbok",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CASTFORM] : {
+    [Pkm.CASTFORM] : {
         'eng' : "castform",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CASTFORM_SUN] : {
+    [Pkm.CASTFORM_SUN] : {
         'eng' : "castformsun",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CASTFORM_RAIN] : {
+    [Pkm.CASTFORM_RAIN] : {
         'eng' : "castformrain",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CASTFORM_HAIL] : {
+    [Pkm.CASTFORM_HAIL] : {
         'eng' : "castformhail",
         'esp' : "",
         'fra' : "" },

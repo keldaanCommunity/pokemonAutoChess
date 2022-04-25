@@ -1,7 +1,7 @@
 import {Schema, type} from '@colyseus/schema';
 import Board from '../../core/board';
 import { IStatus } from '../../types';
-import {ITEM} from '../enum';
+import { Item } from '../../types/enum/Item';
 
 export default class Status extends Schema implements IStatus{
   @type('boolean') burn: boolean;
@@ -55,7 +55,7 @@ export default class Status extends Schema implements IStatus{
           flameCount --;
         }
       });
-      if (pkm.items.has(ITEM.FLAME_ORB)) {
+      if (pkm.items.has(Item.FLAME_ORB)) {
         pkm.status.triggerFlameOrb(2000);
       }
     } else {
@@ -90,7 +90,7 @@ export default class Status extends Schema implements IStatus{
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false;
       pkm.addSpellDamage(25);
-      if (pkm.items.has(ITEM.SOUL_DEW)) {
+      if (pkm.items.has(Item.SOUL_DEW)) {
         this.triggerSoulDew(5000);
       }
     } else {
@@ -99,7 +99,7 @@ export default class Status extends Schema implements IStatus{
   }
 
   triggerBurn(timer: number, pkm: any, origin: any) {
-    if (!this.burn && !pkm.items.has(ITEM.WIDE_LENS)) {
+    if (!this.burn && !pkm.items.has(Item.WIDE_LENS)) {
       this.burn = true;
       this.burnCooldown = timer;
       if (origin) {
@@ -133,7 +133,7 @@ export default class Status extends Schema implements IStatus{
   }
 
   triggerPoison(timer: number, pkm: any, origin: any) {
-    if (!this.poison && !pkm.items.has(ITEM.WIDE_LENS)) {
+    if (!this.poison && !pkm.items.has(Item.WIDE_LENS)) {
       this.poison = true;
       this.poisonCooldown = timer;
       if (origin) {
@@ -262,7 +262,7 @@ export default class Status extends Schema implements IStatus{
       });
       pokemon.handleHeal(0.18 * pokemon.hp, pokemon);
 
-      if (pokemon.items.has(ITEM.BRIGHT_POWDER)) {
+      if (pokemon.items.has(Item.BRIGHT_POWDER)) {
         pokemon.status.triggerBrightPowder(5000);
         pokemon.count.brightPowderCount ++;
       }

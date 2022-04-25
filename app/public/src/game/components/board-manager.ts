@@ -5,6 +5,7 @@ import { DataChange } from '@colyseus/schema';
 import AnimationManager from '../animation-manager';
 import GameScene from '../scenes/game-scene';
 import { PokemonActionState } from '../../../../types/enum/Game';
+import { Item } from '../../../../types/enum/Item';
 
 export default class BoardManager {
 
@@ -90,7 +91,7 @@ export default class BoardManager {
     }
   }
 
-  addPokemonItem(playerId: string, value: string, pokemon: IPokemon) {
+  addPokemonItem(playerId: string, value: Item, pokemon: IPokemon) {
     // console.log(change);
     if (this.player.id == playerId) {
       const pkm = this.pokemons.get(pokemon.id);
@@ -100,7 +101,7 @@ export default class BoardManager {
     }
   }
 
-  removePokemonItem(playerId: string, value: string, pokemon: IPokemon) {
+  removePokemonItem(playerId: string, value: Item, pokemon: IPokemon) {
     if (this.player.id == playerId) {
       if (this.player.id == playerId) {
         const pkm = this.pokemons.get(pokemon.id);

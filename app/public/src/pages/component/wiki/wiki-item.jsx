@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {BASIC_ITEM, ITEM_DESCRIPTION, ITEM_NAME, ITEM_RECIPE} from '../../../../models/enum';
+import {BasicItem, ItemDescription, ItemName, ITEM_RECIPE} from '../../../../models/enum';
 
 class WikiItem extends Component {
   render() {
       let recipe;
-      if(Object.keys(BASIC_ITEM).includes(this.props.item)){
+      if(Object.keys(BasicItem).includes(this.props.item)){
           recipe = <div>
               {
                   Object.keys(ITEM_RECIPE).map(recipeName=>{
@@ -15,8 +15,8 @@ class WikiItem extends Component {
                             <img style={{imageRendering:'pixelated', width:'40px', height:'40px'}} src={"assets/item/" + ITEM_RECIPE[recipeName][1] + ".png"}></img>
                             =
                             <img style={{imageRendering:'pixelated', width:'40px', height:'40px'}} src={"assets/item/" + recipeName + ".png"}></img>
-                            <p>{ITEM_NAME[recipeName]}:</p>
-                            <p>{ITEM_DESCRIPTION[recipeName]}</p>
+                            <p>{ItemName[recipeName]}:</p>
+                            <p>{ItemDescription[recipeName]}</p>
                         </div>
                     }
                     else{
@@ -39,9 +39,9 @@ class WikiItem extends Component {
         <div>
             <div style={{display:'flex'}}>
                 <img style={{imageRendering:'pixelated', width:'40px', height:'40px'}} src={"assets/item/" + this.props.item + ".png"}></img>
-                <p>{ITEM_NAME[this.props.item]}</p>
+                <p>{ItemName[this.props.item]}</p>
             </div>
-            <p>{ITEM_DESCRIPTION[this.props.item]}</p>
+            <p>{ItemDescription[this.props.item]}</p>
             {recipe}
         </div>
     );

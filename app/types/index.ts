@@ -15,6 +15,8 @@ import { Effect } from './enum/Effect'
 import { Ability } from './enum/Ability'
 import { Synergy } from './enum/Synergy'
 import HistoryItem from '../models/colyseus-models/history-item'
+import { Item } from './enum/Item'
+import { Pkm } from './enum/Pokemon'
 
 export enum Transfer {
     DRAG_DROP = 'DRAG_DROP',
@@ -61,13 +63,13 @@ export interface IDragDropMessage{
 export interface IDragDropItemMessage{
     x: number
     y: number
-    id: string
+    id: Item
     bypass?: boolean
 }
 
 export interface IDragDropCombineMessage{
-    itemA: string
-    itemB: string
+    itemA: Item
+    itemB: Item
 }
 
 export interface ICustomLobbyState {
@@ -90,11 +92,11 @@ export interface IPlayer {
     name: string
     avatar: string
     board: MapSchema<IPokemon>
-    shop: string[]
+    shop: Pkm[]
     simulation: ISimulation
     experienceManager: ExperienceManager
     synergies: Synergies
-    itemsProposition: string[]
+    itemsProposition: Item[]
     money: number
     life: number
     shopLocked: boolean
@@ -103,7 +105,7 @@ export interface IPlayer {
     opponentName: string
     opponentAvatar: string
     boardSize: number
-    items: CollectionSchema<string>
+    items: CollectionSchema<Item>
     rank: number
     exp: number
     elo: number
@@ -114,7 +116,7 @@ export interface IPlayer {
 }
 export interface IPokemon {
     id: string
-    name: string
+    name: Pkm
     types: Synergy[]
     rarity: Rarity
     index: string
@@ -133,7 +135,7 @@ export interface IPokemon {
     stars: number
     maxMana: number
     skill: Ability
-    items: SetSchema<string>
+    items: SetSchema<Item>
     fossilTimer: number
     shiny: boolean
     emotion: Emotion
@@ -210,9 +212,9 @@ export interface IPokemonEntity {
   targetY: number
   attackSprite: string
   rarity: Rarity
-  name: string
+  name: Pkm
   effects: Effect[]
-  items: SetSchema<string>
+  items: SetSchema<Item>
   types: Synergy[]
   stars: number
   skill: Ability

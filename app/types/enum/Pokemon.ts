@@ -508,10 +508,12 @@ export enum Pkm {
     CASTFORM = 'castform',
     CASTFORM_SUN = 'castform-sun',
     CASTFORM_RAIN = 'castform-rain',
-    CASTFORM_HAIL = 'castform-hail'
+    CASTFORM_HAIL = 'castform-hail',
+    DEFAULT = 'default'
 }
 
 export const PokemonIndex: {[key in Pkm] : string} = {
+   [Pkm.DEFAULT]: "0000",
    [Pkm.DITTO]: "0132",
    [Pkm.BULBASAUR]: "0001",
    [Pkm.IVYSAUR]: "0002",
