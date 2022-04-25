@@ -1,18 +1,18 @@
-import {ITEM, BASIC_ITEM} from './enum';
+import {Item, BasicItem} from '../types/enum/Item';
 
 export default class ItemFactory {
   static createRandomItem() {
-    const keys = Object.keys(ITEM);
+    const keys = Object.keys(Item);
     return keys[Math.floor(Math.random() * keys.length)];
   }
 
   static createBasicRandomItem() {
-    const keys = Object.keys(BASIC_ITEM);
+    const keys = Object.keys(BasicItem);
     return keys[Math.floor(Math.random() * keys.length)];
   }
 
   static createRandomItems() {
-    const keys = Object.keys(BASIC_ITEM);
+    const keys = Object.keys(BasicItem);
     ItemFactory.shuffleArray(keys);
     const items = [];
     items.push(keys.pop());

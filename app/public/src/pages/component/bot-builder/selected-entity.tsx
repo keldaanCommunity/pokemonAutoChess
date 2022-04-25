@@ -1,5 +1,7 @@
 import React from 'react';
-import { ITEM, RARITY_COLOR, ITEM_DESCRIPTION, ITEM_NAME, CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import {RARITY_COLOR, CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { Item } from '../../../../../types/enum/Item';
+import {ItemDescription, ItemName} from '../../../../../types/strings/Item';
 import {Emotion} from '../../../../../types';
 import {Pkm} from '../../../../../types/enum/Pokemon';
 import PokemonFactory from '../../../../../models/pokemon-factory';
@@ -24,13 +26,13 @@ const imgStyle: CSS.Properties = {
 }
 
 export default function SelectedEntity(props: {entity: string | Pkm}) {
-    if(Object.keys(ITEM).includes(props.entity)){
+    if(Object.keys(Item).includes(props.entity)){
         return <div className='nes-container' style={entityStyle}>
             <div style={{display:'flex'}}>
                 <img style={imgStyle} src={'assets/item/' + props.entity + '.png'}/>
-                <h3>{ITEM_NAME[props.entity]}</h3>
+                <h3>{ItemName[props.entity]}</h3>
             </div>
-            <p>{ITEM_DESCRIPTION[props.entity]}</p>
+            <p>{ItemDescription[props.entity]}</p>
     </div>
     }
     else if(Object.values(Pkm).includes(props.entity as Pkm)){

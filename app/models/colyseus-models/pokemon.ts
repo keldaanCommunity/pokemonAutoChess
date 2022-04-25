@@ -4,7 +4,8 @@
 import {Schema, type, ArraySchema, SetSchema} from '@colyseus/schema';
 import uniqid from 'uniqid';
 import { Emotion, IPokemon } from '../../types';
-import {COST, ITEM} from '../enum';
+import {COST} from '../enum';
+import { Item } from '../../types/enum/Item';
 import {Pkm} from '../../types/enum/Pokemon';
 import { Rarity, AttackType } from '../../types/enum/Game';
 import { Ability } from '../../types/enum/Ability';

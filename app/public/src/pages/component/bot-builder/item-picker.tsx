@@ -1,5 +1,5 @@
 import React from 'react';
-import { ITEM } from '../../../../../models/enum';
+import { Item } from '../../../../../types/enum/Item';
 import CSS from 'csstype';
 
 const itemPoolStyle: CSS.Properties = {
@@ -19,8 +19,8 @@ const imgStyle: CSS.Properties = {
 
 export default function ItemPicker(props:{selectEntity: React.Dispatch<React.SetStateAction<string>>}){
     return <div className='nes-container' style={itemPoolStyle}>
-    {Object.keys(ITEM).map(item=>{
-        return <div onClick={()=>{props.selectEntity(item)}} key={item}><img style={imgStyle} src={'assets/item/' + ITEM[item] + '.png'}/></div>;
+    {Object.keys(Item).map(item=>{
+        return <div onClick={()=>{props.selectEntity(item)}} key={item}><img style={imgStyle} src={'assets/item/' + Item[item] + '.png'}/></div>;
     })}
   </div>
 }

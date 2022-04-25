@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {BASIC_ITEM, ITEM_DESCRIPTION, ITEM_NAME, ITEM_RECIPE} from '../../../../../models/enum';
+import { ITEM_RECIPE } from '../../../../../types/Config';
+import { ItemDescription, ItemName } from '../../../../../types/strings/Item';
+import { BasicItem } from '../../../../../types/enum/Item';
 import ReactTooltip from 'react-tooltip';
 
 class WikiItemsCheatSheet extends Component {
@@ -10,14 +12,14 @@ class WikiItemsCheatSheet extends Component {
             <tbody>
                 <tr>
                     <td></td>
-                    {Object.keys(BASIC_ITEM).map(i=>{
+                    {Object.keys(BasicItem).map(i=>{
                         return <th key={i} style={{paddingBottom:'30px'}}><img style={imgStyle} src={"assets/item/" + i + ".png"}></img></th>
                     })}
                 </tr>
-                {Object.keys(BASIC_ITEM).map(i=>{
+                {Object.keys(BasicItem).map(i=>{
                     return <tr key={'tr-'+i}>
                         <th style={{paddingRight:'30px'}}><img style={imgStyle} src={"assets/item/" + i + ".png"}></img></th>
-                        {Object.keys(BASIC_ITEM).map(j=>{
+                        {Object.keys(BasicItem).map(j=>{
                             let tier2Item;
                             Object.keys(ITEM_RECIPE).forEach(recipeName=>{
                                 if((ITEM_RECIPE[recipeName][0] == i && ITEM_RECIPE[recipeName][1] == j) || (ITEM_RECIPE[recipeName][0] == j && ITEM_RECIPE[recipeName][1] == i)){
@@ -35,8 +37,8 @@ class WikiItemsCheatSheet extends Component {
                                 textColor='#000000' 
                                 backgroundColor='rgba(255,255,255,1)' 
                                 effect='solid'>
-                                    <p>{ITEM_NAME[tier2Item]}</p>
-                                    <p>{ITEM_DESCRIPTION[tier2Item]}</p>
+                                    <p>{ItemName[tier2Item]}</p>
+                                    <p>{ItemDescription[tier2Item]}</p>
                                 </ReactTooltip>
                                 </td>
                         })}

@@ -1,10 +1,10 @@
-import { CLIMATE, ITEM } from '../models/enum';
+import { Item } from '../types/enum/Item';
 import { Orientation, AttackType } from '../types/enum/Game';
 import { Effect } from '../types/enum/Effect';
 import Board from './board';
 import PokemonEntity from './pokemon-entity';
 import PokemonState from './pokemon-state';
-import { PokemonActionState } from '../types/enum/Game';
+import { PokemonActionState, Climate } from '../types/enum/Game';
 
 export default class AttackingState extends PokemonState {
 
@@ -50,11 +50,11 @@ export default class AttackingState extends PokemonState {
     pokemon.targetY = coordinates[1];
     const target = board.getValue(coordinates[0], coordinates[1]);
     if (target && !pokemon.status.sleep && !pokemon.status.freeze) {
-      if (pokemon.items.has(ITEM.UPGRADE)) {
+      if (pokemon.items.has(Item.UPGRADE)) {
         pokemon.handleAttackSpeed(6);
       }
 
-      if (climate == CLIMATE.SNOW) {
+      if (climate == Climate.SNOW) {
         let freezeChance = 0;
         if (pokemon.effects.includes(Effect.SNOW)) {
           freezeChance += 0.1;
@@ -96,7 +96,7 @@ export default class AttackingState extends PokemonState {
       let damage;
       const attackType = pokemon.attackType;
 
-      if (Math.random() * 100 < pokemon.critChance && target && !target.items.has(ITEM.ROCKY_HELMET)) {
+      if (Math.random() * 100 < pokemon.critChance && target && !target.items.has(Item.ROCKY_HELMET)) {
         if (pokemon.effects.includes(Effect.FAIRY_WIND) || pokemon.effects.includes(Effect.STRANGE_STEAM) || pokemon.effects.includes(Effect.AROMATIC_MIST)) {
           let d = 0;
           if (pokemon.effects.includes(Effect.AROMATIC_MIST)) {
@@ -141,7 +141,7 @@ export default class AttackingState extends PokemonState {
 
       target.handleDamage(damage, board, attackType, pokemon);
 
-      if (pokemon.items.has(ITEM.BLUE_ORB)) {
+      if (pokemon.items.has(Item.BLUE_ORB)) {
         pokemon.count.staticHolderCount ++;
         if (pokemon.count.staticHolderCount > 3) {
           pokemon.count.staticHolderCount = 0;
@@ -157,15 +157,15 @@ export default class AttackingState extends PokemonState {
         }
       }
 
-      if (target && target.items.has(ITEM.SMOKE_BALL)) {
+      if (target && target.items.has(Item.SMOKE_BALL)) {
         pokemon.status.triggerSmoke(5000, pokemon);
       }
 
-      if (target && pokemon.items.has(ITEM.RAZOR_FANG)) {
+      if (target && pokemon.items.has(Item.RAZOR_FANG)) {
         target.status.triggerArmorReduction(5000);
       }
 
-      if (pokemon.items.has(ITEM.CHOICE_SCARF)) {
+      if (pokemon.items.has(Item.CHOICE_SCARF)) {
         const cells = board.getAdjacentCells(target.positionX, target.positionY);
         let targetCount = 1;
         cells.forEach((cell) => {
@@ -176,7 +176,7 @@ export default class AttackingState extends PokemonState {
         });
       }
 
-      if (pokemon.items.has(ITEM.LEFTOVERS)) {
+      if (pokemon.items.has(Item.LEFTOVERS)) {
         const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
         pokemon.handleHeal(3, pokemon);
         cells.forEach((cell) => {
@@ -186,7 +186,7 @@ export default class AttackingState extends PokemonState {
         });
       }
 
-      if (pokemon.items.has(ITEM.MANA_SCARF)) {
+      if (pokemon.items.has(Item.MANA_SCARF)) {
         pokemon.setMana(pokemon.mana + 8);
       }
     }

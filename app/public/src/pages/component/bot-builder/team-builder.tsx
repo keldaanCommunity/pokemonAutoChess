@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ITEM } from '../../../../../models/enum';
+import { Item } from '../../../../../types/enum/Item';
 import {Pkm} from '../../../../../types/enum/Pokemon';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import SelectedEntity from './selected-entity';
@@ -203,7 +203,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     if(Object.values(Pkm).includes(entity as Pkm)){
         writePokemon(x, y);
       }
-    if(Object.keys(ITEM).includes(entity)){
+    if(Object.keys(Item).includes(entity)){
       writeItem(x, y);
     }
   }

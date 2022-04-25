@@ -1,14 +1,14 @@
 import Synergies from "./colyseus-models/synergies";
-import { CLIMATE } from "./enum";
 import { Effect } from "../types/enum/Effect";
 import { Synergy } from "../types/enum/Synergy";
+import { Climate } from "../types/enum/Game";
 
 export class Effects {
   climate: string;
-  list: any[];
+  list: Effect[];
 
   constructor() {
-    this.climate = CLIMATE.NEUTRAL;
+    this.climate = Climate.NEUTRAL;
     this.list = [];
   }
 

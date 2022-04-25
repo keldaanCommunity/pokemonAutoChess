@@ -2,9 +2,9 @@ import Board from './board';
 import {Schema, MapSchema, type} from '@colyseus/schema';
 import PokemonEntity from './pokemon-entity';
 import PokemonFactory from '../models/pokemon-factory';
-import {CLIMATE, ITEM} from '../models/enum';
+import { Item } from '../types/enum/Item';
 import { Effect } from '../types/enum/Effect';
-import { AttackType } from '../types/enum/Game';
+import { AttackType, Climate } from '../types/enum/Game';
 import Dps from'./dps';
 import DpsHeal from './dps-heal';
 import ItemFactory from '../models/item-factory';
@@ -204,85 +204,85 @@ export default class Simulation extends Schema implements ISimulation{
   }
 
   applyItemsEffects(pokemon: PokemonEntity) {
-    if (pokemon.items.has(ITEM.TWISTED_SPOON)) {
+    if (pokemon.items.has(Item.TWISTED_SPOON)) {
       pokemon.addSpellDamage(10);
     }
-    if (pokemon.items.has(ITEM.MYSTIC_WATER)) {
+    if (pokemon.items.has(Item.MYSTIC_WATER)) {
       pokemon.mana += 15;
     }
-    if (pokemon.items.has(ITEM.MAGNET)) {
+    if (pokemon.items.has(Item.MAGNET)) {
       pokemon.handleAttackSpeed(15);
     }
-    if (pokemon.items.has(ITEM.BLACK_GLASSES)) {
+    if (pokemon.items.has(Item.BLACK_GLASSES)) {
       pokemon.addCritChance(5);
     }
-    if (pokemon.items.has(ITEM.MIRACLE_SEED)) {
+    if (pokemon.items.has(Item.MIRACLE_SEED)) {
       pokemon.handleShield(15, pokemon);
     }
-    if (pokemon.items.has(ITEM.NEVER_MELT_ICE)) {
+    if (pokemon.items.has(Item.NEVER_MELT_ICE)) {
       pokemon.speDef += 2;
     }
-    if (pokemon.items.has(ITEM.CHARCOAL)) {
+    if (pokemon.items.has(Item.CHARCOAL)) {
       pokemon.atk += 1;
     }
-    if (pokemon.items.has(ITEM.HEART_SCALE)) {
+    if (pokemon.items.has(Item.HEART_SCALE)) {
       pokemon.def += 1;
     }
-    if (pokemon.items.has(ITEM.CHOICE_SPECS)) {
+    if (pokemon.items.has(Item.CHOICE_SPECS)) {
       pokemon.addSpellDamage(75);
     }
-    if (pokemon.items.has(ITEM.SOUL_DEW)) {
+    if (pokemon.items.has(Item.SOUL_DEW)) {
       pokemon.status.triggerSoulDew(5000);
     }
-    if (pokemon.items.has(ITEM.WONDER_BOX)) {
-      pokemon.items.delete(ITEM.WONDER_BOX);
+    if (pokemon.items.has(Item.WONDER_BOX)) {
+      pokemon.items.delete(Item.WONDER_BOX);
       for (let i = 0; i <2; i++) {
         if (pokemon.items.size < 3) {
           pokemon.items.add(ItemFactory.createRandomItem());
         }
       }
     }
-    if (pokemon.items.has(ITEM.AQUA_EGG)) {
+    if (pokemon.items.has(Item.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + 50);
     }
-    if (pokemon.items.has(ITEM.BLUE_ORB)) {
+    if (pokemon.items.has(Item.BLUE_ORB)) {
       pokemon.handleAttackSpeed(10);
     }
-    if (pokemon.items.has(ITEM.ZOOM_LENS)) {
+    if (pokemon.items.has(Item.ZOOM_LENS)) {
       pokemon.atk += 4;
       pokemon.addSpellDamage(40);
     }
-    if (pokemon.items.has(ITEM.BRIGHT_POWDER)) {
+    if (pokemon.items.has(Item.BRIGHT_POWDER)) {
       pokemon.status.triggerBrightPowder(5000);
     }
-    if (pokemon.items.has(ITEM.XRAY_VISION)) {
+    if (pokemon.items.has(Item.XRAY_VISION)) {
       pokemon.range += 1;
       pokemon.handleAttackSpeed(55);
     }
-    if (pokemon.items.has(ITEM.WIDE_LENS)) {
+    if (pokemon.items.has(Item.WIDE_LENS)) {
       pokemon.handleAttackSpeed(20);
     }
-    if (pokemon.items.has(ITEM.RAZOR_CLAW)) {
+    if (pokemon.items.has(Item.RAZOR_CLAW)) {
       pokemon.critDamage += 0.1;
       pokemon.addCritChance(75);
     }
-    if (pokemon.items.has(ITEM.ORAN_BERRY)) {
+    if (pokemon.items.has(Item.ORAN_BERRY)) {
       pokemon.handleShield(100, pokemon);
     }
-    if (pokemon.items.has(ITEM.FLAME_ORB)) {
+    if (pokemon.items.has(Item.FLAME_ORB)) {
       pokemon.status.triggerFlameOrb(2000);
     }
-    if (pokemon.items.has(ITEM.ASSAULT_VEST)) {
+    if (pokemon.items.has(Item.ASSAULT_VEST)) {
       pokemon.speDef += 30;
     }
-    if (pokemon.items.has(ITEM.POKE_DOLL)) {
+    if (pokemon.items.has(Item.POKE_DOLL)) {
       pokemon.def += 5;
       pokemon.speDef += 5;
     }
-    if (pokemon.items.has(ITEM.RED_ORB)) {
+    if (pokemon.items.has(Item.RED_ORB)) {
       pokemon.atk += 8;
     }
-    if (pokemon.items.has(ITEM.ROCKY_HELMET)) {
+    if (pokemon.items.has(Item.ROCKY_HELMET)) {
       pokemon.def += 10;
     }
   }
@@ -330,7 +330,7 @@ export default class Simulation extends Schema implements ISimulation{
           }
         });
       }
-      if (pokemon.items.has(ITEM.LUCKY_EGG)) {
+      if (pokemon.items.has(Item.LUCKY_EGG)) {
         [-2, -1, 0, 1, 2].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -338,7 +338,7 @@ export default class Simulation extends Schema implements ISimulation{
           }
         });
       }
-      if (pokemon.items.has(ITEM.DELTA_ORB)) {
+      if (pokemon.items.has(Item.DELTA_ORB)) {
         [-1, 0, 1].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -346,7 +346,7 @@ export default class Simulation extends Schema implements ISimulation{
           }
         });
       }
-      if (pokemon.items.has(ITEM.RUNE_PROTECT)) {
+      if (pokemon.items.has(Item.RUNE_PROTECT)) {
         const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
         pokemon.status.triggerRuneProtect();
         cells.forEach((cell) => {
@@ -355,21 +355,21 @@ export default class Simulation extends Schema implements ISimulation{
           }
         });
       }
-      if (pokemon.items.has(ITEM.FLUFFY_TAIL)) {
+      if (pokemon.items.has(Item.FLUFFY_TAIL)) {
         this.board.forEach((x: number, y: number, value: PokemonEntity) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.maxMana = Math.ceil(value.maxMana * 1.3);
           }
         });
       }
-      if (pokemon.items.has(ITEM.SHINY_CHARM)) {
+      if (pokemon.items.has(Item.SHINY_CHARM)) {
         this.board.forEach((x: number, y: number, value: PokemonEntity) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.status.triggerSleep(3000);
           }
         });
       }
-      if (pokemon.items.has(ITEM.FOCUS_BAND)) {
+      if (pokemon.items.has(Item.FOCUS_BAND)) {
         [-1, 0, 1].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -412,7 +412,7 @@ export default class Simulation extends Schema implements ISimulation{
           }
         });
       }
-      if (pokemon.items.has(ITEM.LUCKY_EGG)) {
+      if (pokemon.items.has(Item.LUCKY_EGG)) {
         [-2, -1, 0, 1, 2].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -420,7 +420,7 @@ export default class Simulation extends Schema implements ISimulation{
           }
         });
       }
-      if (pokemon.items.has(ITEM.DELTA_ORB)) {
+      if (pokemon.items.has(Item.DELTA_ORB)) {
         [-2, -1, 0, 1, 2].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -428,7 +428,7 @@ export default class Simulation extends Schema implements ISimulation{
           }
         });
       }
-      if (pokemon.items.has(ITEM.RUNE_PROTECT)) {
+      if (pokemon.items.has(Item.RUNE_PROTECT)) {
         const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
         pokemon.status.triggerRuneProtect();
         cells.forEach((cell) => {
@@ -437,21 +437,21 @@ export default class Simulation extends Schema implements ISimulation{
           }
         });
       }
-      if (pokemon.items.has(ITEM.FLUFFY_TAIL)) {
+      if (pokemon.items.has(Item.FLUFFY_TAIL)) {
         this.board.forEach((x: number, y: number, value: PokemonEntity) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.maxMana = Math.ceil(value.maxMana * 1.3);
           }
         });
       }
-      if (pokemon.items.has(ITEM.SHINY_CHARM)) {
+      if (pokemon.items.has(Item.SHINY_CHARM)) {
         this.board.forEach((x: number, y: number, value: PokemonEntity) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.status.triggerSleep(3000);
           }
         });
       }
-      if (pokemon.items.has(ITEM.FOCUS_BAND)) {
+      if (pokemon.items.has(Item.FOCUS_BAND)) {
         [-1, 0, 1].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
@@ -892,27 +892,27 @@ export default class Simulation extends Schema implements ISimulation{
   }
 
   getClimate() {
-    let climate = CLIMATE.NEUTRAL;
+    let climate = Climate.NEUTRAL;
     if (this.blueEffects.includes(Effect.SNOW) || this.redEffects.includes(Effect.SNOW)) {
-      climate = CLIMATE.SNOW;
+      climate = Climate.SNOW;
     }
     if (this.blueEffects.includes(Effect.DRIZZLE) || this.redEffects.includes(Effect.DRIZZLE)) {
-      climate = CLIMATE.RAIN;
+      climate = Climate.RAIN;
     }
     if (this.blueEffects.includes(Effect.SHEER_COLD) || this.redEffects.includes(Effect.SHEER_COLD)) {
-      climate = CLIMATE.SNOW;
+      climate = Climate.SNOW;
     }
     if (this.blueEffects.includes(Effect.RAIN_DANCE) || this.redEffects.includes(Effect.RAIN_DANCE)) {
-      climate = CLIMATE.RAIN;
+      climate = Climate.RAIN;
     }
     if (this.blueEffects.includes(Effect.SANDSTORM) || this.redEffects.includes(Effect.SANDSTORM)) {
-      climate = CLIMATE.SANDSTORM;
+      climate = Climate.SANDSTORM;
     }
     if (this.blueEffects.includes(Effect.DROUGHT) || this.redEffects.includes(Effect.DROUGHT)) {
-      climate = CLIMATE.SUN;
+      climate = Climate.SUN;
     }
     if (this.blueEffects.includes(Effect.PRIMORDIAL_SEA) || this.redEffects.includes(Effect.PRIMORDIAL_SEA)) {
-      climate = CLIMATE.RAIN;
+      climate = Climate.RAIN;
     }
     return climate;
   }
@@ -961,6 +961,6 @@ export default class Simulation extends Schema implements ISimulation{
       this.redTeam.delete(key);
     });
 
-    this.climate = CLIMATE.NEUTRAL;
+    this.climate = Climate.NEUTRAL;
   }
 }
