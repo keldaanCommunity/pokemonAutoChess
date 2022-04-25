@@ -1,6 +1,7 @@
 import React from 'react';
-import { ITEM, PKM, RARITY_COLOR, ITEM_DESCRIPTION, ITEM_NAME, CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { ITEM, RARITY_COLOR, ITEM_DESCRIPTION, ITEM_NAME, CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import {Emotion} from '../../../../../types';
+import {Pkm} from '../../../../../types/enum/Pokemon';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import CSS from 'csstype';
 
@@ -22,7 +23,7 @@ const imgStyle: CSS.Properties = {
     imageRendering:'pixelated'
 }
 
-export default function SelectedEntity(props: {entity: string}) {
+export default function SelectedEntity(props: {entity: string | Pkm}) {
     if(Object.keys(ITEM).includes(props.entity)){
         return <div className='nes-container' style={entityStyle}>
             <div style={{display:'flex'}}>
@@ -32,7 +33,7 @@ export default function SelectedEntity(props: {entity: string}) {
             <p>{ITEM_DESCRIPTION[props.entity]}</p>
     </div>
     }
-    else if(Object.values(PKM).includes(props.entity)){
+    else if(Object.values(Pkm).includes(props.entity as Pkm)){
         const pokemon = PokemonFactory.createPokemonFromName(props.entity);
         return <div className='nes-container' style={entityStyle}>
             <div style={{display:'flex'}}>

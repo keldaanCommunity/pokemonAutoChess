@@ -14,6 +14,7 @@ import GameState from "../../../../rooms/states/game-state";
 import ItemContainer from '../components/item-container';
 import { GamePhaseState } from '../../../../types/enum/Game';
 import indexList from '../../../dist/client/assets/pokemons/indexList.json';import PokemonDetail from '../components/pokemon-detail';
+import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer } from '../../../../types';
 export default class GameScene extends Scene {
   tilemap: any;
   room: Room<GameState>;
@@ -331,21 +332,20 @@ export default class GameScene extends Scene {
       if(gameObject instanceof Pokemon){
         // POKEMON -> BOARD-ZONE = PLACE POKEMON
         if(dropZone.name == 'board-zone'){
-          document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
+          document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
             detail: {
-              'x': dropZone.getData('x'),
-              'y': dropZone.getData('y'),
-              'id': gameObject.id,
-              'objType': 'pokemon'
+              x: dropZone.getData('x'),
+              y: dropZone.getData('y'),
+              id: gameObject.id
             }
           }));
           this.lastDragDropPokemon = gameObject;
         }
         // POKEMON -> SELL-ZONE = SELL POKEMON
         else if(dropZone.name == 'sell-zone'){
-          document.getElementById('game').dispatchEvent(new CustomEvent('sell-drop', {
+          document.getElementById('game').dispatchEvent(new CustomEvent(Transfer.SELL_DROP, {
             detail: {
-              'pokemonId': gameObject.id
+              pokemonId: gameObject.id
             }
           }));
         }
@@ -358,22 +358,20 @@ export default class GameScene extends Scene {
       else if(gameObject instanceof ItemContainer){
         // ITEM -> ITEM = COMBINE
         if(dropZone instanceof ItemContainer){
-          document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
+          document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropCombineMessage>(Transfer.DRAG_DROP_COMBINE, {
             detail: {
-              'itemA': dropZone.name,
-              'itemB': gameObject.name,
-              'objType': 'combine'
+              itemA: dropZone.name,
+              itemB: gameObject.name
             }
           }));
         }
         // ITEM -> POKEMON(board zone) = EQUIP
         else if(dropZone.name == 'board-zone'){
-          document.getElementById('game').dispatchEvent(new CustomEvent('drag-drop', {
+          document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
             detail: {
-              'x': dropZone.getData('x'),
-              'y': dropZone.getData('y'),
-              'id': gameObject.name,
-              'objType': 'item'
+              x: dropZone.getData('x'),
+              y: dropZone.getData('y'),
+              id: gameObject.name
             }
           }));
         }

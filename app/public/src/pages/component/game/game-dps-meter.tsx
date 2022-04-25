@@ -7,7 +7,6 @@ import GameBlueHealDpsMeter from './game-blue-heal-dps-meter';
 import GameRedHealDpsMeter from './game-red-heal-dps-meter';
 import { useAppSelector } from '../../../hooks';
 import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
-import { Emotion, PokemonIndex } from '../../../../../types';
 
 const style: CSS.Properties = {
     position:'absolute',

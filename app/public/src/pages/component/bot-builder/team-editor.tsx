@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {PKM, CDN_PORTRAIT_URL} from '../../../../../models/enum';
-import {Emotion, PokemonIndex} from '../../../../../types';
-import PokemonFactory from '../../../../../models/pokemon-factory';
+import {CDN_PORTRAIT_URL} from '../../../../../models/enum';
+import {Pkm, PokemonIndex} from '../../../../../types/enum/Pokemon';
+import {Emotion} from '../../../../../types';
 import ReactTooltip from 'react-tooltip';
 import CSS from 'csstype';
 import { IStep } from '../../../../../models/mongo-models/bot-v2';
@@ -95,8 +95,8 @@ export default function TeamEditor(props:{
             <label style={labelStyle} htmlFor="default_select">Avatar</label>
             <div style={{width:'auto'}} className="nes-select">
             <select value={props.name} onChange={props.handleAvatarChange} id="default_select">
-                {Object.keys(PKM).sort((a,b)=>{return PKM[a].localeCompare(PKM[b])}).map(key=>{
-                    return <option key={key} value={PKM[key]}>{PKM[key]}</option>;
+                {Object.keys(Pkm).sort((a,b)=>{return Pkm[a].localeCompare(Pkm[b])}).map(key=>{
+                    return <option key={key} value={Pkm[key]}>{Pkm[key]}</option>;
                 })};
             </select>
         </div>
@@ -156,7 +156,7 @@ export default function TeamEditor(props:{
                                             if(p.x == x && p.y == y){
                                                 r = <td style={tdStyle} onClick={()=>{props.handleEditorClick(x,y)}} key={x}>
                                                 <div style={divTdStyle}>
-                                                    <img style={bigImgStyle} src={`${CDN_PORTRAIT_URL}${PokemonFactory.createPokemonFromName(p.name).index.replace('-','/')}/${Emotion.NORMAL}.png`}></img>
+                                                    <img style={bigImgStyle} src={`${CDN_PORTRAIT_URL}${PokemonIndex[p.name].replace('-','/')}/${Emotion.NORMAL}.png`}></img>
                                                     {p.items ? <div style={{display:'flex', justifyContent:'space-evenly'}}>{p.items.map((it,j)=>{
                                                         return <img key={j} style={itemImgStyle} src={'assets/item/' + it + '.png'}/>
                                                     })}</div>: null}

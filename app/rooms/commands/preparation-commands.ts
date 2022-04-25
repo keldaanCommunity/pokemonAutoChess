@@ -4,9 +4,8 @@ import UserMetadata, { IUserMetadata } from "../../models/mongo-models/user-meta
 import BotV2 from "../../models/mongo-models/bot-v2";
 import { Client } from "colyseus";
 import PreparationRoom from "../preparation-room";
-import { Emotion, IMessage, PokemonIndex } from "../../types";
+import { Emotion, IMessage } from "../../types";
 import { BotDifficulty } from "../../types/enum/Game";
-import PokemonFactory from '../../models/pokemon-factory';
 
 export class OnJoinCommand extends Command<PreparationRoom, {
   client: Client,

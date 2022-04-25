@@ -1,11 +1,11 @@
-import { PKM } from '../app/models/enum';
+import {Pkm} from '../app/types/enum/Pokemon';
 import fs from 'fs';
 import PokemonFactory from '../app/models/pokemon-factory';
 
 const pkmaIndexes = [];
 const indexes = ["0000"];
 
-Object.values(PKM).forEach(pkm => {
+Object.values(Pkm).forEach(pkm => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm);
     if(!pkmaIndexes.includes(pokemon.index)){
         pkmaIndexes.push(pokemon.index);

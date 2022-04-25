@@ -33,18 +33,6 @@ export enum Orientation {
     UNCLEAR = "-1"
 }
 
-// export enum OrientationRad {
-//     DOWNLEFT = 5 * Math.PI * 0.25,
-//     LEFT: Math.PI,
-//     UPLEFT: 3 * Math.PI * 0.25,
-//     UP: Math.PI * 0.5,
-//     UPRIGHT: Math.PI * 0.25,
-//     RIGHT: 0,
-//     DOWNRIGHT: 7 * Math.PI * 0.25,
-//     DOWN: 3 * Math.PI * 0.5,
-//     UNCLEAR: 0
-//   }
-
 export enum AttackType {
     PHYSICAL,
     SPECIAL,

@@ -2,20 +2,20 @@ import { Client, Room } from 'colyseus';
 import {Dispatcher} from '@colyseus/command';
 import GameState from './states/game-state';
 import Player from '../models/colyseus-models/player';
-import UserMetadata, { IUserMetadata } from '../models/mongo-models/user-metadata';
+import UserMetadata from '../models/mongo-models/user-metadata';
 import BOT from '../models/mongo-models/bot-v2';
-import {OnShopCommand, OnItemCommand, OnSellDropCommand, OnRefreshCommand, OnLockCommand, OnLevelUpCommand, OnUpdateCommand, OnDragDropCommand, OnJoinCommand} from './commands/game-commands';
-import {XP_PLACE, XP_TABLE, PKM, BASIC_ITEM, ITEM} from '../models/enum';
+import {OnShopCommand, OnItemCommand, OnSellDropCommand, OnRefreshCommand, OnLockCommand, OnLevelUpCommand, OnUpdateCommand, OnDragDropCommand, OnJoinCommand, OnDragDropItemCommand, OnDragDropCombineCommand} from './commands/game-commands';
+import {XP_PLACE, BASIC_ITEM, ITEM} from '../models/enum';
 import PokemonFactory from '../models/pokemon-factory';
 import EloRank from 'elo-rank';
 import admin from 'firebase-admin';
 import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2';
-import { Pokemon } from '../models/colyseus-models/pokemon';
-import { IPokemon, PokemonIndex } from '../types';
+import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, IPokemon, Transfer } from '../types';
+import {Pkm, PokemonIndex} from '../types/enum/Pokemon';
 import PokemonConfig from '../models/colyseus-models/pokemon-config';
 import { Synergy } from '../types/enum/Synergy';
 
-export default class GameRoom extends Room {
+export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>;
   eloEngine: EloRank;
   constructor() {
@@ -66,12 +66,12 @@ export default class GameRoom extends Room {
       }
     });
 
-    this.onMessage('dragDrop', (client, message) => {
+    this.onMessage(Transfer.DRAG_DROP, (client, message: IDragDropMessage) => {
       if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new OnDragDropCommand(), {
             client: client,
-            detail: message.detail
+            detail: message
           });
         } catch (error) {
           const errorInformation = {
@@ -84,12 +84,48 @@ export default class GameRoom extends Room {
       }
     });
 
-    this.onMessage('sellDrop', (client, message) => {
+    this.onMessage(Transfer.DRAG_DROP_ITEM, (client, message: IDragDropItemMessage) => {
+        if (!this.state.gameFinished) {
+          try {
+            this.dispatcher.dispatch(new OnDragDropItemCommand(), {
+              client: client,
+              detail: message
+            });
+          } catch (error) {
+            const errorInformation = {
+              'updateBoard': true,
+              'updateItems': true
+            };
+            client.send('DragDropFailed', errorInformation);
+            console.log('drag drop error', error);
+          }
+        }
+      });
+
+      this.onMessage(Transfer.DRAG_DROP_COMBINE, (client, message: IDragDropCombineMessage) => {
+        if (!this.state.gameFinished) {
+          try {
+            this.dispatcher.dispatch(new OnDragDropCombineCommand(), {
+              client: client,
+              detail: message
+            });
+          } catch (error) {
+            const errorInformation = {
+              'updateBoard': true,
+              'updateItems': true
+            };
+            client.send('DragDropFailed', errorInformation);
+            console.log('drag drop error', error);
+          }
+        }
+      });
+
+    this.onMessage(Transfer.SELL_DROP, (client, message: {pokemonId: string}) => {
       if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new OnSellDropCommand(), {
             client,
-            detail: message.detail
+            detail: message
           });
         } catch (error) {
           console.log('sell drop error', message);
@@ -176,7 +212,6 @@ export default class GameRoom extends Room {
 
   onDispose() {
     // console.log(`dispose game room`);
-    const self = this;
     const requiredStageLevel = process.env.MODE == 'dev' ? 0: 10;
 
     if (this.state.stageLevel >= requiredStageLevel && this.state.elligibleToXP) {
@@ -185,11 +220,11 @@ export default class GameRoom extends Room {
           BOT.find({'avatar': player.id}, (err, bots)=>{
             if (bots) {
               bots.forEach((bot) =>{
-                bot.elo = self.computeElo(player, player.rank, player.elo);
+                bot.elo = this.computeElo(player, player.rank, player.elo);
                 bot.save();
               });
             }
-          });
+          })
         } else {
           const dbrecord = this.transformToSimplePlayer(player);
           player.exp = XP_PLACE[player.rank - 1];
@@ -222,7 +257,7 @@ export default class GameRoom extends Room {
               }
 
               if (usr.elo) {
-                const elo = self.computeElo(player, rank, usr.elo);
+                const elo = this.computeElo(player, rank, usr.elo);
                 if (elo) {
                   usr.elo = elo;
                 }
@@ -241,9 +276,9 @@ export default class GameRoom extends Room {
                 });
               }
             }
-          });
+          })
         }
-      });
+      })
     }
     this.dispatcher.stop();
   }
@@ -403,7 +438,7 @@ export default class GameRoom extends Room {
       let count = 0;
       const pokemonEvolutionName = pokemon.evolution;
 
-      if (pokemonEvolutionName != '' && pokemon.name != PKM.DITTO) {
+      if (pokemonEvolutionName != '' && pokemon.name != Pkm.DITTO) {
         player.board.forEach((pkm, id) => {
           if ( pkm.index == pokemon.index) {
             count += 1;
@@ -533,7 +568,7 @@ export default class GameRoom extends Room {
     let boardSize = 0;
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.name != PKM.DITTO) {
+      if (pokemon.positionY == 0 && pokemon.name != Pkm.DITTO) {
         boardSize ++;
       }
     });
@@ -556,7 +591,7 @@ export default class GameRoom extends Room {
     let pkm;
     let found = false;
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.name != PKM.DITTO && !found) {
+      if (pokemon.positionY == 0 && pokemon.name != Pkm.DITTO && !found) {
         found = true;
         pkm = pokemon;
       }

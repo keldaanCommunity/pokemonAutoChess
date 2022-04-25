@@ -633,7 +633,7 @@ export const PokemonNames = {
         'eng' : "steelix",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGASTEELIX] : {
+    [Pkmn.MEGA_STEELIX] : {
         'eng' : "megasteelix",
         'esp' : "",
         'fra' : "" },
@@ -645,7 +645,7 @@ export const PokemonNames = {
         'eng' : "scizor",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGASCIZOR] : {
+    [Pkmn.MEGA_SCIZOR] : {
         'eng' : "megascizor",
         'esp' : "",
         'fra' : "" },
@@ -657,7 +657,7 @@ export const PokemonNames = {
         'eng' : "lucario",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGALUCARIO] : {
+    [Pkmn.MEGA_LUCARIO] : {
         'eng' : "megalucario",
         'esp' : "",
         'fra' : "" },
@@ -793,7 +793,7 @@ export const PokemonNames = {
         'eng' : "medicham",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGAMEDICHAM] : {
+    [Pkmn.MEGA_MEDICHAM] : {
         'eng' : "megamedicham",
         'esp' : "",
         'fra' : "" },
@@ -805,7 +805,7 @@ export const PokemonNames = {
         'eng' : "camerupt",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGACAMERUPT] : {
+    [Pkmn.MEGA_CAMERUPT] : {
         'eng' : "megacamerupt",
         'esp' : "",
         'fra' : "" },
@@ -893,7 +893,7 @@ export const PokemonNames = {
         'eng' : "abomasnow",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGAABOMASNOW] : {
+    [Pkmn.MEGA_ABOMASNOW] : {
         'eng' : "megaabomasnow",
         'esp' : "",
         'fra' : "" },
@@ -1033,7 +1033,7 @@ export const PokemonNames = {
         'eng' : "heatran",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HOOH] : {
+    [Pkmn.HO_OH] : {
         'eng' : "hooh",
         'esp' : "",
         'fra' : "" },
@@ -1041,11 +1041,11 @@ export const PokemonNames = {
         'eng' : "aerodactyl",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PRIMALKYOGRE] : {
+    [Pkmn.PRIMAL_KYOGRE] : {
         'eng' : "primalkyogre",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PRIMALGROUDON] : {
+    [Pkmn.PRIMAL_GROUDON] : {
         'eng' : "primalgroudon",
         'esp' : "",
         'fra' : "" },
@@ -1093,7 +1093,7 @@ export const PokemonNames = {
         'eng' : "reuniclus",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGARAYQUAZA] : {
+    [Pkmn.MEGA_RAYQUAZA] : {
         'eng' : "megarayquaza",
         'esp' : "",
         'fra' : "" },
@@ -1217,7 +1217,7 @@ export const PokemonNames = {
         'eng' : "lopunny",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGALOPUNNY] : {
+    [Pkmn.MEGA_LOPUNNY] : {
         'eng' : "megalopunny",
         'esp' : "",
         'fra' : "" },
@@ -1249,11 +1249,11 @@ export const PokemonNames = {
         'eng' : "porygon",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PORYGON2] : {
+    [Pkmn.PORYGON_2] : {
         'eng' : "porygon2",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.PORYGONZ] : {
+    [Pkmn.PORYGON_Z] : {
         'eng' : "porygonz",
         'esp' : "",
         'fra' : "" },
@@ -1277,7 +1277,7 @@ export const PokemonNames = {
         'eng' : "manectric",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGAMANECTRIC] : {
+    [Pkmn.MEGA_MANECTRIC] : {
         'eng' : "megamanectric",
         'esp' : "",
         'fra' : "" },
@@ -1289,7 +1289,7 @@ export const PokemonNames = {
         'eng' : "banette",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGABANETTE] : {
+    [Pkmn.MEGA_BANETTE] : {
         'eng' : "megabanette",
         'esp' : "",
         'fra' : "" },
@@ -1313,7 +1313,7 @@ export const PokemonNames = {
         'eng' : "marowak",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.ALOLANMAROWAK] : {
+    [Pkmn.ALOLAN_MAROWAK] : {
         'eng' : "alolanmarowak",
         'esp' : "",
         'fra' : "" },
@@ -1389,15 +1389,15 @@ export const PokemonNames = {
         'eng' : "florges",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.JANGMOO] : {
+    [Pkmn.JANGMO_O] : {
         'eng' : "jangmoo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.HAKAMOO] : {
+    [Pkmn.HAKAMO_O] : {
         'eng' : "hakamoo",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.KOMMOO] : {
+    [Pkmn.KOMMO_O] : {
         'eng' : "kommoo",
         'esp' : "",
         'fra' : "" },
@@ -1409,7 +1409,7 @@ export const PokemonNames = {
         'eng' : "altaria",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.MEGAALTARIA] : {
+    [Pkmn.MEGA_ALTARIA] : {
         'eng' : "megaaltaria",
         'esp' : "",
         'fra' : "" },
@@ -2029,15 +2029,15 @@ export const PokemonNames = {
         'eng' : "castform",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CASTFORMSUN] : {
+    [Pkmn.CASTFORM_SUN] : {
         'eng' : "castformsun",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CASTFORMRAIN] : {
+    [Pkmn.CASTFORM_RAIN] : {
         'eng' : "castformrain",
         'esp' : "",
         'fra' : "" },
-    [Pkmn.CASTFORMHAIL] : {
+    [Pkmn.CASTFORM_HAIL] : {
         'eng' : "castformhail",
         'esp' : "",
         'fra' : "" },

@@ -1,7 +1,8 @@
 import React from 'react';
 import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { Emotion, PokemonIndex } from '../../../../../types';
+import { Emotion } from '../../../../../types';
+import { PokemonIndex } from '../../../../../types/enum/Pokemon';
 import CSS from 'csstype';
 import PRECOMPUTED_TYPE_POKEMONS_ALL from '../../../../../models/precomputed/type-pokemons-all.json';
 

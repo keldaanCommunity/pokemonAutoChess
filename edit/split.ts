@@ -1,9 +1,9 @@
 import Jimp from 'jimp';
 import {XMLParser} from 'fast-xml-parser';
 import fs from 'fs';
-import { PKM, PokemonTint, SpriteType } from '../app/models/enum';
+import {Pkm} from '../app/types/enum/Pokemon';
 import PokemonFactory from '../app/models/pokemon-factory';
-import { PokemonActionState } from '../app/types/enum/Game';
+import { PokemonActionState, PokemonTint, SpriteType } from '../app/types/enum/Game';
 
 const args = process.argv.slice(2);
 const path = args[0];
@@ -41,7 +41,7 @@ async function split(){
     const durations = {};
     let missing = '';
 
-    Object.values(PKM).forEach(pkm => {
+    Object.values(Pkm).forEach(pkm => {
         const pokemon = PokemonFactory.createPokemonFromName(pkm);
         if(!pkmaIndexes.includes(pokemon.index)){
             pkmaIndexes.push(pokemon.index);

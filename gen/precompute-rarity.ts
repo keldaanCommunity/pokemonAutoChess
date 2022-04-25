@@ -1,4 +1,4 @@
-import {PKM} from '../app/models/enum';
+import {Pkm} from '../app/types/enum/Pokemon';
 import PokemonFactory from '../app/models/pokemon-factory';
 import fs from 'fs';
 import { Ability } from '../app/types/enum/Ability';
@@ -31,7 +31,7 @@ Object.keys(Rarity).forEach((rarity)=>{
   const pokemonCandidates = [];
   const names = [];
 
-  Object.values(PKM).forEach((pkm) => {
+  Object.values(Pkm).forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm);
     if (pokemon.rarity == rarity && pokemon.skill != Ability.DEFAULT) {
       pokemonCandidates.push(pokemon);
