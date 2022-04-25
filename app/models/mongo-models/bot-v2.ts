@@ -1,6 +1,6 @@
 import {Schema, model} from 'mongoose';
-import {PKM, ITEM} from '../enum';
-
+import {ITEM} from '../enum';
+import {Pkm} from '../../types/enum/Pokemon';
 export interface IDetailledPokemon {
   name: string;
   x:number;
@@ -25,7 +25,7 @@ const pkm = new Schema(
     {
       name: {
         type: String,
-        enum: Object.values(PKM),
+        enum: Object.values(Pkm),
         required: true
       },
       x: {

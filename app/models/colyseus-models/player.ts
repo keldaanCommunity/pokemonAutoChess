@@ -89,15 +89,13 @@ export default class Player extends Schema implements IPlayer{
   }
 
   getPokemonAt(x: number, y: number) {
-    let i:string = null;
     let p:IPokemon = null;
 
-    this.board.forEach((pokemon, id)=>{
+    this.board.forEach((pokemon)=>{
       if (pokemon.positionX == x && pokemon.positionY == y) {
         p = pokemon;
-        i = id;
       }
     });
-    return [p,i];
+    return p;
   }
 }

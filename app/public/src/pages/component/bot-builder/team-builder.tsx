@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { PKM, ITEM } from '../../../../../models/enum';
+import { ITEM } from '../../../../../models/enum';
+import {Pkm} from '../../../../../types/enum/Pokemon';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import SelectedEntity from './selected-entity';
 import ModalMenu from './modal-menu';
@@ -15,7 +16,8 @@ import {createBot, requestBotData} from "../../../stores/NetworkStore"
 import { setBotCreatorSynergies } from '../../../stores/LobbyStore';
 import BuilderSynergies from './builder-synergies';
 import { Synergy } from '../../../../../types/enum/Synergy';
-import { Emotion, ModalMode, PokemonIndex, ReadWriteMode } from '../../../../../types';
+import { Emotion, ModalMode, ReadWriteMode } from '../../../../../types';
+import {PokemonIndex} from '../../../../../types/enum/Pokemon';
 
 const buttonsStyle: CSS.Properties = {
   top:'10px',
@@ -169,7 +171,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     elo: 1200,
     name: 'ditto'
   });
-  const [entity, setEntity] = useState<string>('');
+  const [entity, setEntity] = useState<string | Pkm>('');
   const [mode, setMode] = useState<ReadWriteMode>(ReadWriteMode.WRITE);
   const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
   const [modalBoolean, setModalBoolean] = useState<boolean>(false);
@@ -198,11 +200,11 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   }
 
   function write(x: number, y: number) {
+    if(Object.values(Pkm).includes(entity as Pkm)){
+        writePokemon(x, y);
+      }
     if(Object.keys(ITEM).includes(entity)){
       writeItem(x, y);
-    }
-    else if(Object.values(PKM).includes(entity)){
-      writePokemon(x, y);
     }
   }
 

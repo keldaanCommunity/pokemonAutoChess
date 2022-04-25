@@ -1,7 +1,6 @@
 import {Schema, ArraySchema, type} from '@colyseus/schema';
-import { Emotion, PokemonIndex } from '../../types';
-import PokemonFactory from '../pokemon-factory';
-
+import { Emotion } from '../../types';
+import { PokemonIndex } from '../../types/enum/Pokemon';
 export interface IPokemonRecord {
   name: string;
   items: string[];

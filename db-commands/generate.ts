@@ -1,7 +1,7 @@
 import PokemonFactory from '../app/models/pokemon-factory';
-import {PKM} from '../app/models/enum';
+import {Pkm} from '../app/types/enum/Pokemon';
 
-Object.keys(PKM).forEach(k=>{
-    const p = PokemonFactory.createPokemonFromName(PKM[k]);
-    console.log(`"${PKM[k]}" = "${p.index}",`);
+Object.keys(Pkm).forEach(k=>{
+    const p = PokemonFactory.createPokemonFromName(Pkm[k]);
+    console.log(`"${Pkm[k]}" = "${p.index}",`);
 });

@@ -15,7 +15,8 @@ import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
 import { Emotion, EmotionCost } from "../types";
-import { CDN_PORTRAIT_URL, PKM } from "../models/enum";
+import {Pkm} from '../types/enum/Pokemon';
+import { CDN_PORTRAIT_URL } from "../models/enum";
 import PokemonFactory from "../models/pokemon-factory";
 import PokemonConfig from "../models/colyseus-models/pokemon-config";
 
@@ -99,13 +100,13 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       const user: LobbyUser = this.state.users.get(client.auth.uid);
       if(user.booster && user.booster > 0) {
         user.booster -= 1;
-        const keys = Object.keys(PKM);
+        const keys = Object.keys(Pkm);
         const boosterIndex: string[] = [];
         let i = 5;
         while(i > 0){
           const k = keys[Math.floor(Math.random() * keys.length)];
-          const p = PokemonFactory.createPokemonFromName(PKM[k]);
-          if(p.name != PKM.MAGIKARP){
+          const p = PokemonFactory.createPokemonFromName(Pkm[k]);
+          if(p.name != Pkm.MAGIKARP){
             boosterIndex.push(p.index);     
             i--;
           }

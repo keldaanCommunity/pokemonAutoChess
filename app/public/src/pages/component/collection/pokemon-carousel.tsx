@@ -1,17 +1,17 @@
 import PokemonCollectionItem from './pokemon-collection-item';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import React, { Dispatch, SetStateAction } from 'react';
-import { PKM } from '../../../../../models/enum';
 import {useAppSelector} from '../../../hooks';
 import { ITracker } from '../../../../../public/dist/client/assets/pokemons/ITracker';
 import { Ability } from '../../../../../types/enum/Ability';
 import { Synergy } from '../../../../../types/enum/Synergy';
+import {Pkm} from '../../../../../types/enum/Pokemon';
 
 
 export default function PokemonCarousel(props: {type: Synergy, setPokemon:Dispatch<SetStateAction<string>>, metadata:{[key: string]: ITracker}}){
     const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection);
     const elligiblePokemons = [];
-    Object.values(PKM).forEach(v=>{
+    Object.values(Pkm).forEach(v=>{
         const pkm = PokemonFactory.createPokemonFromName(v);
         if(pkm.skill !== Ability.DEFAULT && pkm.types.includes(Synergy[props.type])){
             elligiblePokemons.push(pkm);

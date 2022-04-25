@@ -7,7 +7,7 @@ import { Room } from 'colyseus.js';
 import GameState from '../../../rooms/states/game-state';
 import {Pokemon} from '../../../models/colyseus-models/pokemon';
 import {DataChange} from '@colyseus/schema';
-import { IPlayer, IPokemon, IPokemonEntity } from '../../../types';
+import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, IPlayer, IPokemon, IPokemonEntity, Transfer } from '../../../types';
 import PokemonEntity from '../../../core/pokemon-entity';
 
 class GameContainer {
@@ -384,12 +384,20 @@ class GameContainer {
     }
   }
 
-  onDragDrop(event) {
-    this.room.send('dragDrop', {'detail': event.detail});
+  onDragDrop(event: CustomEvent<IDragDropMessage>) {
+    this.room.send(Transfer.DRAG_DROP, event.detail);
   }
 
-  onSellDrop(event) {
-    this.room.send('sellDrop', {'detail': event.detail});
+  onDragDropCombine(event: CustomEvent<IDragDropCombineMessage>) {
+      this.room.send(Transfer.DRAG_DROP_COMBINE, event.detail);
+  }
+
+  onDragDropItem(event: CustomEvent<IDragDropItemMessage>) {
+    this.room.send(Transfer.DRAG_DROP_ITEM, event.detail);
+  }
+
+  onSellDrop(event: CustomEvent<{pokemonId: string}>) {
+    this.room.send(Transfer.SELL_DROP, event.detail);
   }
 
   transformToSimplePlayer(player: IPlayer) {

@@ -1,6 +1,7 @@
 import { Ability } from '../app/types/enum/Ability';
 import { Rarity } from '../app/types/enum/Game';
-import {PKM, RARITY_HP_COST} from '../app/models/enum';
+import {Pkm} from '../app/types/enum/Pokemon';
+import {RARITY_HP_COST} from '../app/models/enum';
 import PokemonFactory from '../app/models/pokemon-factory';
 import fs from 'fs';
 import { Synergy } from '../app/types/enum/Synergy';
@@ -112,7 +113,7 @@ const data = {
   const pokemonCandidates = [];
   const mythicalPokemonCandidates = [];
 
-  Object.values(PKM).forEach((pkm) => {
+  Object.values(Pkm).forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm);
     const family = PokemonFactory.getPokemonFamily(pkm);
     if (pokemon.rarity != Rarity.NEUTRAL && pokemon.skill != Ability.DEFAULT) {

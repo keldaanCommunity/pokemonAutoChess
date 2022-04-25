@@ -1,5 +1,6 @@
 import {Schema, model} from 'mongoose';
-import {ITEM, PKM} from '../enum';
+import {ITEM} from '../enum';
+import {Pkm} from '../../types/enum/Pokemon';
 
 export interface IItemsStatistic {
   rank: number;
@@ -23,7 +24,7 @@ const itemsStatistic = new Schema(
       pokemons: [
         {
           type: String,
-          enum: Object.values(PKM)
+          enum: Object.values(Pkm)
         }
       ]
     }

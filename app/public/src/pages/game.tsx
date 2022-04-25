@@ -19,6 +19,7 @@ import GameShop from "./component/game/game-shop";
 import GameSynergies from "./component/game/game-synergies";
 import GameModal from "./component/game/game-modal";
 import AfterGameState from "../../../rooms/states/after-game-state";
+import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer } from "../../../types";
 
 let gameContainer: GameContainer;
 
@@ -43,8 +44,12 @@ export default function Game() {
 
   async function leave() {
     const savePlayers = [];
-    document.getElementById('game').removeEventListener('drag-drop', gameContainer.onDragDrop.bind(gameContainer));
-    document.getElementById('game').removeEventListener('sell-drop', gameContainer.onSellDrop.bind(gameContainer));
+
+    document.getElementById('game').removeEventListener(Transfer.DRAG_DROP, ((event: CustomEvent<IDragDropMessage>) => {gameContainer.onDragDrop(event)}) as EventListener);
+    document.getElementById('game').removeEventListener(Transfer.DRAG_DROP_ITEM, ((event: CustomEvent<IDragDropItemMessage>) => {gameContainer.onDragDropItem(event)}) as EventListener);
+    document.getElementById('game').removeEventListener(Transfer.DRAG_DROP_COMBINE, ((event: CustomEvent<IDragDropCombineMessage>) => {gameContainer.onDragDropCombine(event)}) as EventListener);
+    document.getElementById('game').removeEventListener(Transfer.SELL_DROP, ((event: CustomEvent<{pokemonId: string}>) => {gameContainer.onSellDrop(event)}) as EventListener);
+
     gameContainer.game.destroy(true);
     room.state.players.forEach(player => savePlayers.push(gameContainer.transformToSimplePlayer(player)));
     const token: string = await firebase.auth().currentUser.getIdToken();
@@ -85,9 +90,10 @@ export default function Game() {
       dispatch(requestTilemap());
 
       gameContainer = new GameContainer(container.current, uid, room);
-      document.getElementById('game').addEventListener('drag-drop', gameContainer.onDragDrop.bind(gameContainer));
-      document.getElementById('game').addEventListener('sell-drop', gameContainer.onSellDrop.bind(gameContainer));
-
+      document.getElementById('game').addEventListener(Transfer.DRAG_DROP, ((event: CustomEvent<IDragDropMessage>) => {gameContainer.onDragDrop(event)}) as EventListener);
+      document.getElementById('game').addEventListener(Transfer.DRAG_DROP_ITEM, ((event: CustomEvent<IDragDropItemMessage>) => {gameContainer.onDragDropItem(event)}) as EventListener);
+      document.getElementById('game').addEventListener(Transfer.DRAG_DROP_COMBINE, ((event: CustomEvent<IDragDropCombineMessage>) => {gameContainer.onDragDropCombine(event)}) as EventListener);
+      document.getElementById('game').addEventListener(Transfer.SELL_DROP, ((event: CustomEvent<{pokemonId: string}>) => {gameContainer.onSellDrop(event)}) as EventListener);
       room.onMessage('info', message => {setModalTitle(message.title); setModalInfo(message.info); setModalBoolean(true)});
       room.onMessage('tilemap', tilemap => {gameContainer.setTilemap(tilemap)});
 

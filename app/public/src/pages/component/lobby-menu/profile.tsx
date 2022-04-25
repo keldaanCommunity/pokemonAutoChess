@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { XP_TABLE, CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Elo from '../elo';
 import { useAppDispatch, useAppSelector } from '../../../hooks';

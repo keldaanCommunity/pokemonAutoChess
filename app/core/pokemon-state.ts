@@ -1,4 +1,5 @@
-import {PKM, FLYING_PROTECT_THRESHOLD, ITEM} from '../models/enum';
+import {FLYING_PROTECT_THRESHOLD, ITEM} from '../models/enum';
+import { Pkm } from '../types/enum/Pokemon';
 import { Effect } from '../types/enum/Effect';
 import { AttackType } from '../types/enum/Game';
 import PokemonFactory from '../models/pokemon-factory';
@@ -228,13 +229,13 @@ export default class PokemonState {
         if (!pokemon.simulation.flowerSpawn[pokemon.team]) {
           pokemon.simulation.flowerSpawn[pokemon.team] = true;
           if (pokemon.effects.includes(Effect.ODD_FLOWER)) {
-            pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.ODDISH), pokemon.positionX, pokemon.positionY, pokemon.team);
+            pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(Pkm.ODDISH), pokemon.positionX, pokemon.positionY, pokemon.team);
           } else if (pokemon.effects.includes(Effect.GLOOM_FLOWER)) {
-            pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.GLOOM), pokemon.positionX, pokemon.positionY, pokemon.team);
+            pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(Pkm.GLOOM), pokemon.positionX, pokemon.positionY, pokemon.team);
           } else if (pokemon.effects.includes(Effect.VILE_FLOWER)) {
-            pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.VILEPLUME), pokemon.positionX, pokemon.positionY, pokemon.team);
+            pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(Pkm.VILEPLUME), pokemon.positionX, pokemon.positionY, pokemon.team);
           } else if (pokemon.effects.includes(Effect.SUN_FLOWER)) {
-            pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(PKM.BELLOSSOM), pokemon.positionX, pokemon.positionY, pokemon.team);
+            pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM), pokemon.positionX, pokemon.positionY, pokemon.team);
           }
         }
       }
