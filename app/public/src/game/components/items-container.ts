@@ -1,7 +1,6 @@
 import { SetSchema } from '@colyseus/schema';
 import {GameObjects} from 'phaser';
 import ItemContainer from './item-container';
-import GameScene from '../scenes/game-scene';
 import { Item } from '../../../../types/enum/Item';
 
 export default class ItemsContainer extends GameObjects.Container {
@@ -27,8 +26,6 @@ export default class ItemsContainer extends GameObjects.Container {
     const target = this.findItem(item);
     if (target) {
       this.remove(target, true);
-      target.destroy();
-
       this.updateItems();
     } else {
       console.warn('no item found looking for', item);
@@ -38,6 +35,7 @@ export default class ItemsContainer extends GameObjects.Container {
   updateItems() {
     for (let i = 0; i < this.list.length; i++) {
       const it = <ItemContainer> this.list[i];
+      it.closeDetail();
       it.x = 0;
       it.y = i * this.itemSize;
     }
