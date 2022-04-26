@@ -29,8 +29,7 @@ export enum Orientation {
     UP = "4",
     UPRIGHT = "3",
     RIGHT = "2",
-    DOWNRIGHT = "1",
-    UNCLEAR = "-1"
+    DOWNRIGHT = "1"
 }
 
 export enum AttackType {

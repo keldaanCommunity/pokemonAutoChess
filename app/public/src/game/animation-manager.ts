@@ -12,9 +12,9 @@ export default class AnimationManager {
     this.game = game;
 
     indexList.forEach(index=>{
-      Object.values(PokemonTint).forEach(shiny=>{
-        Object.values(PokemonActionState).forEach(action=>{
-          Object.values(SpriteType).forEach(mode=>{
+      (Object.values(PokemonTint) as PokemonTint[]).forEach(shiny=>{
+        (Object.values(PokemonActionState) as PokemonActionState[]).forEach(action=>{
+          (Object.values(SpriteType) as SpriteType[]).forEach(mode=>{
             const directionArray = action == PokemonActionState.SLEEP? [Orientation.DOWN] : Object.values(Orientation);
             directionArray.forEach(direction=>{
               const durationArray: number[] = durations[`${index}/${shiny}/${action}/${mode}`];

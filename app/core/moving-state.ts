@@ -54,10 +54,6 @@ export default class MovingState extends PokemonState {
     }
     if (x !== undefined && y !== undefined) {
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, x, y);
-      if (pokemon.orientation == Orientation.UNCLEAR) {
-        console.log(`error orientation, was moving, name ${pokemon.name}`);
-        pokemon.orientation = Orientation.DOWNLEFT;
-      }
       // console.log(`pokemon moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates[0]}, ${coordinates[1]})), orientation: ${pokemon.orientation}`);
       board.swapValue(pokemon.positionX, pokemon.positionY, x, y);
       pokemon.positionX = x;
