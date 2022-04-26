@@ -43,6 +43,10 @@ export const networkSlice = createSlice({
         logOut: (state, action: PayloadAction<string>) => {
             state.uid = undefined;
             state.displayName = undefined;
+            state.preparation = undefined;
+            state.lobby = undefined;
+            state.game = undefined;
+            state.after = undefined;
         },
         joinLobby: (state, action: PayloadAction<Room<ICustomLobbyState>>) => {
             state.lobby = action.payload;
