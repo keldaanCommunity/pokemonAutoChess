@@ -88,11 +88,7 @@ export default class AttackingState extends PokemonState {
         pokemon.setMana(pokemon.mana + 15);
       }
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY);
-      if (pokemon.orientation == Orientation.UNCLEAR) {
-        console.log(`error orientation, was attacking, name ${pokemon.name}`);
-        pokemon.orientation = Orientation.DOWNLEFT;
-      }
-      // console.log(`pokemon attack from (${pokemon.positionX},${pokemon.positionY}) to (${pokemon.targetX},${pokemon.targetY}), orientation: ${pokemon.orientation}`);
+
       let damage;
       const attackType = pokemon.attackType;
 

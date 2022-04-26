@@ -69,7 +69,7 @@ export default class Board {
     } else if (vx == 0) {
       if (vy == 0) {
         console.log('error orientation', r0, c0, r1, c1);
-        return Orientation.UNCLEAR;
+        return Orientation.DOWNRIGHT;
       } else if (vy < 0) {
         return Orientation.DOWN;
       } else {
