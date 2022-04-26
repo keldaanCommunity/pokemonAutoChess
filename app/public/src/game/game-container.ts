@@ -204,7 +204,7 @@ class GameContainer {
   handlePokemonAdd(playerId: string, pokemon: IPokemonEntity) {
     // console.log('simulation add' + pokemon.name);
     if (this.game && this.game.scene && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if(g.battle){
         g.battle.addPokemon(playerId, pokemon);
       }
@@ -214,7 +214,7 @@ class GameContainer {
   handlePokemonRemove(playerId: string, pokemon: IPokemonEntity) {
     // console.log('simulation remove' + pokemon.name);
     if (this.game && this.game.scene && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if(g.battle){
         g.battle.removePokemon(playerId, pokemon);
       }
@@ -223,7 +223,7 @@ class GameContainer {
 
   handleItemAdd(player: Player, value: Item) {
     if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if(g.itemsContainer){
         g.itemsContainer.addItem(value);
       }
@@ -232,7 +232,7 @@ class GameContainer {
 
   handleItemRemove(player: Player, value: Item) {
     if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if(g.itemsContainer){
         g.itemsContainer.removeItem(value);
       }
@@ -243,7 +243,7 @@ class GameContainer {
   handlePokemonChange(playerId:string, change: DataChange<any>, pokemon: IPokemonEntity) {
     // console.log('simulation change' + change.field);
     if (this.game && this.game.scene && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if(g.battle){
         g.battle.changePokemon(playerId, change, pokemon);
       }
@@ -253,7 +253,7 @@ class GameContainer {
   handlePokemonStatusChange(playerId: string, change: DataChange<any>, pokemon: IPokemonEntity) {
     // console.log('simulation change' + change.field);
     if (this.game && this.game.scene && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if(g.battle){
         g.battle.changeStatus(playerId, change, pokemon);
       }
@@ -262,7 +262,7 @@ class GameContainer {
 
   handleBattleManagerPokemonItemAdd(playerId: string, value: Item, pokemon: IPokemonEntity) {
     if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if(g.battle){
         g.battle.addPokemonItem(playerId, value, pokemon);
       }
@@ -271,7 +271,7 @@ class GameContainer {
 
   handleBattleManagerPokemonItemRemove(playerId: string, value: Item, pokemon: IPokemonEntity) {
     if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if(g.battle){
         g.battle.removePokemonItem(playerId, value, pokemon);
       }
@@ -280,7 +280,7 @@ class GameContainer {
 
   handlePokemonCountChange(playerId: string, change: DataChange<any>, pokemon: IPokemonEntity) {
     if (this.game && this.game.scene && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if(g.battle){
         g.battle.changeCount(playerId, change, pokemon);
       }
@@ -289,7 +289,7 @@ class GameContainer {
 
   handleClimateChange(change: DataChange<any>, player: Player) {
     if (this.game != null && player.id == this.uid && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if(g.weatherManager){
         switch (change.value) {
           case 'RAIN':
@@ -321,7 +321,7 @@ class GameContainer {
 
   handleBoardPokemonAdd(player: IPlayer, pokemon: IPokemon) {
     if (this.game != null && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if (g.board && g.board.player && g.board.player.id == player.id) {
         g.board.addPokemon(pokemon);
       }
@@ -330,7 +330,7 @@ class GameContainer {
 
   handleBoardPokemonRemove(player: IPlayer, pokemon: IPokemon) {
     if (this.game != null && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if (g.board && g.board.player && g.board.player.id == player.id) {
         g.board.removePokemon(pokemon);
       }
@@ -339,7 +339,7 @@ class GameContainer {
 
   handleBoardPokemonChange(player: IPlayer, pokemon: IPokemon, change: DataChange<any>) {
     if (this.game != null && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       if (g.board && g.board.player && g.board.player.id == player.id) {
         g.board.changePokemon(pokemon, change);
       }
@@ -348,20 +348,20 @@ class GameContainer {
 
   handleBoardPokemonItemAdd(playerId: string, value: Item, pokemon: IPokemon) {
     if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       g.board.addPokemonItem(playerId, value, pokemon);
     }
   }
 
   handleBoardPokemonItemRemove(playerId: string, value: Item, pokemon: IPokemon) {
     if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene')) {
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       g.board.removePokemonItem(playerId, value, pokemon);
     }
   }
 
   handleDragDropFailed(message: any) {
-    const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+    const g = <GameScene> this.game.scene.getScene('gameScene');
 
     if (message.updateBoard) {
       const tg = g.lastDragDropPokemon;
@@ -379,7 +379,7 @@ class GameContainer {
 
   onPlayerClick(id: string) {
     if(this.game && this.game.scene.getScene('gameScene')){
-      const g = <GameScene> <unknown> this.game.scene.getScene('gameScene');
+      const g = <GameScene> this.game.scene.getScene('gameScene');
       g.board.setPlayer(this.room.state.players.get(id));
       g.battle.setPlayer(this.room.state.players.get(id));
     }

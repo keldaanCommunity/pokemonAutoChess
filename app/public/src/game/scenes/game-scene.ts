@@ -14,9 +14,7 @@ import GameState from "../../../../rooms/states/game-state";
 import ItemContainer from '../components/item-container';
 import { GamePhaseState } from '../../../../types/enum/Game';
 import indexList from '../../../dist/client/assets/pokemons/indexList.json';
-import PokemonDetail from '../components/pokemon-detail';
 import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer } from '../../../../types';
-import { Item } from '../../../../types/enum/Item';
 export default class GameScene extends Scene {
   tilemap: any;
   room: Room<GameState>;
@@ -396,7 +394,6 @@ export default class GameScene extends Scene {
     });
 
     this.input.on('dragenter', (pointer, gameObject, dropZone) => {
-
       if (gameObject instanceof ItemContainer && dropZone instanceof ItemContainer) {
         // find the resulting item
         for (const [key, value] of Object.entries(ITEM_RECIPE)) {
