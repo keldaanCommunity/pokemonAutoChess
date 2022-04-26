@@ -175,11 +175,11 @@ export default class Pokemon extends Button {
 
   petalDanceAnimation() {
     const coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.PETAL_DANCE], '000');
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.PETAL_DANCE, '000');
     specialProjectile.setDepth(7);
     specialProjectile.setScale(2, 2);
-    specialProjectile.anims.play(Ability[Ability.PETAL_DANCE]);
-    specialProjectile.once('animationcomplete', () => {
+    specialProjectile.anims.play(Ability.PETAL_DANCE);
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       specialProjectile.destroy();
     });
   }
@@ -190,7 +190,7 @@ export default class Pokemon extends Button {
     specialProjectile.setDepth(7);
     specialProjectile.setScale(2, 2);
     specialProjectile.anims.play('FIELD_DEATH');
-    specialProjectile.once('animationcomplete', () => {
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       specialProjectile.destroy();
     });
   }
@@ -201,7 +201,7 @@ export default class Pokemon extends Button {
     specialProjectile.setDepth(7);
     specialProjectile.setScale(2, 2);
     specialProjectile.anims.play('FAIRY_CRIT');
-    specialProjectile.once('animationcomplete', () => {
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       specialProjectile.destroy();
     });
   }
@@ -212,7 +212,7 @@ export default class Pokemon extends Button {
     specialProjectile.setDepth(7);
     specialProjectile.setScale(2, 2);
     specialProjectile.anims.play('ECHO');
-    specialProjectile.once('animationcomplete', () => {
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       specialProjectile.destroy();
     });
   }
@@ -223,7 +223,7 @@ export default class Pokemon extends Button {
     specialProjectile.setDepth(7);
     specialProjectile.setScale(1.5, 1.5);
     specialProjectile.anims.play('ground-grow');
-    specialProjectile.once('animationcomplete', () => {
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       specialProjectile.destroy();
     });
   }
@@ -234,7 +234,7 @@ export default class Pokemon extends Button {
     specialProjectile.setDepth(7);
     specialProjectile.setScale(2, 2);
     specialProjectile.anims.play('INCENSE_DAMAGE');
-    specialProjectile.once('animationcomplete', () => {
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       specialProjectile.destroy();
     });
   }
@@ -245,7 +245,7 @@ export default class Pokemon extends Button {
     specialProjectile.setDepth(7);
     specialProjectile.setScale(2, 2);
     specialProjectile.anims.play('BRIGHT_POWDER');
-    specialProjectile.once('animationcomplete', () => {
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       specialProjectile.destroy();
     });
   }
@@ -256,7 +256,7 @@ export default class Pokemon extends Button {
     specialProjectile.setDepth(7);
     specialProjectile.setScale(3, 3);
     specialProjectile.anims.play('STATIC');
-    specialProjectile.once('animationcomplete', () => {
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       specialProjectile.destroy();
     });
   }
@@ -288,16 +288,171 @@ export default class Pokemon extends Button {
 
       if (this.targetX != -1 && this.targetY != -1) {
         switch (this.skill) {
-          case Ability.FIRE_BLAST:
-            coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.FIRE_BLAST}/000`);
-            specialProjectile.setDepth(7);
-            specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.FIRE_BLAST]);
-            specialProjectile.once('animationcomplete', () => {
-              specialProjectile.destroy();
-            });
-            break;
+            case Ability.FIRE_BLAST:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.FIRE_BLAST}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.FIRE_BLAST);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                  specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.CORRUPTED_NATURE:
+                coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.CORRUPTED_NATURE}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.CORRUPTED_NATURE);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.CRABHAMMER:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.CRABHAMMER}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.CRABHAMMER);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.DIAMOND_STORM:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.DIAMOND_STORM}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.DIAMOND_STORM);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.DRACO_ENERGY:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.DRACO_ENERGY}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.DRACO_ENERGY);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.DYNAMAX_CANNON:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.DYNAMAX_CANNON}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.DYNAMAX_CANNON);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.DYNAMIC_PUNCH:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.DYNAMIC_PUNCH}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.DYNAMIC_PUNCH);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.ELECTRO_WEB:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.ELECTRO_WEB}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.ELECTRO_WEB);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.FIRE_TRICK:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.FIRE_TRICK}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.FIRE_TRICK);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.FLAME_CHARGE:
+                coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.FLAME_CHARGE}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.FLAME_CHARGE);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.LEECH_SEED:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.LEECH_SEED}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.LEECH_SEED);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.LOCK_ON:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.LOCK_ON}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.LOCK_ON);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.PSYCH_UP:
+                coordinates = transformAttackCoordinate(this.positionX, this.positionY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.PSYCH_UP}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.PSYCH_UP);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+          case Ability.RAZOR_WIND:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.RAZOR_WIND}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.RAZOR_WIND);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+
+            case Ability.TWISTING_NEITHER:
+                coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+                specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.TWISTING_NEITHER}/000`);
+                specialProjectile.setDepth(7);
+                specialProjectile.setScale(2, 2);
+                specialProjectile.anims.play(Ability.TWISTING_NEITHER);
+                specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                specialProjectile.destroy();
+                });
+                break;
+    
 
           case Ability.WHEEL_OF_FIRE:
             coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY);
@@ -305,7 +460,7 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.WHEEL_OF_FIRE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.WHEEL_OF_FIRE]);
+            specialProjectile.anims.play(Ability.WHEEL_OF_FIRE);
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],
@@ -325,7 +480,7 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.ORIGIN_PULSE}/0`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.ORIGIN_PULSE]);
+            specialProjectile.anims.play(Ability.ORIGIN_PULSE);
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],
@@ -342,8 +497,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.SEED_FLARE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(5, 5);
-            specialProjectile.anims.play(Ability[Ability.SEED_FLARE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.SEED_FLARE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -353,8 +508,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.SEISMIC_TOSS}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.SEISMIC_TOSS]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.SEISMIC_TOSS);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -364,8 +519,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.GUILLOTINE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(Ability[Ability.GUILLOTINE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.GUILLOTINE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -375,8 +530,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.ROCK_SLIDE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.ROCK_SLIDE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.ROCK_SLIDE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -386,8 +541,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.HEAT_WAVE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.HEAT_WAVE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.HEAT_WAVE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -397,8 +552,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.THUNDER}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.THUNDER]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.THUNDER);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -408,8 +563,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.HYDRO_PUMP}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.HYDRO_PUMP]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.HYDRO_PUMP);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -419,8 +574,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.DRACO_METEOR}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.DRACO_METEOR]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.DRACO_METEOR);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -430,8 +585,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.BLAZE_KICK}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.BLAZE_KICK]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.BLAZE_KICK);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -441,8 +596,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.WISH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(Ability[Ability.WISH]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.WISH);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -452,8 +607,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.CALM_MIND}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.CALM_MIND]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.CALM_MIND);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -463,8 +618,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.IRON_DEFENSE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.IRON_DEFENSE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.IRON_DEFENSE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -474,8 +629,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.METRONOME}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.METRONOME]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.METRONOME);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -485,8 +640,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.SOAK}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.SOAK]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.SOAK);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -496,8 +651,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.IRON_TAIL}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.IRON_TAIL]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.IRON_TAIL);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -507,8 +662,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.BLAST_BURN}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(Ability[Ability.BLAST_BURN]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.BLAST_BURN);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -518,8 +673,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.CHARGE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.CHARGE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.CHARGE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -529,8 +684,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.DISCHARGE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(Ability[Ability.DISCHARGE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.DISCHARGE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -540,8 +695,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.BITE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.BITE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.BITE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -551,8 +706,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.DRAGON_TAIL}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.DRAGON_TAIL]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.DRAGON_TAIL);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -562,8 +717,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.DRAGON_BREATH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.DRAGON_BREATH]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.DRAGON_BREATH);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -573,8 +728,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.ICICLE_CRASH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(Ability[Ability.ICICLE_CRASH]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.ICICLE_CRASH);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -584,8 +739,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.ROOT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.ROOT]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.ROOT);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -595,8 +750,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.TORMENT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.TORMENT]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.TORMENT);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -606,8 +761,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.STOMP}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(Ability[Ability.STOMP]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.STOMP);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -617,8 +772,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.DARK_PULSE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.DARK_PULSE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.DARK_PULSE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -628,8 +783,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.NIGHT_SLASH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.NIGHT_SLASH]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.NIGHT_SLASH);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -639,8 +794,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.BUG_BUZZ}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.BUG_BUZZ]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.BUG_BUZZ);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -650,8 +805,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.POISON_STING}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.POISON_STING]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.POISON_STING);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -661,8 +816,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.LEECH_LIFE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.LEECH_LIFE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.LEECH_LIFE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -672,8 +827,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.HAPPY_HOUR}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.HAPPY_HOUR]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.HAPPY_HOUR);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -683,8 +838,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.TELEPORT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.TELEPORT]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.TELEPORT);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -694,8 +849,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.NASTY_PLOT}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.NASTY_PLOT]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.NASTY_PLOT);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -705,8 +860,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.THIEF}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.THIEF]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.THIEF);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -716,8 +871,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.STUN_SPORE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.STUN_SPORE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.STUN_SPORE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -727,8 +882,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.METEOR_MASH}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(Ability[Ability.METEOR_MASH]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.METEOR_MASH);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -738,8 +893,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'specials', `${Ability.HURRICANE}/000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.HURRICANE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.HURRICANE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -749,8 +904,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ROAR_OF_TIME', `000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.ROAR_OF_TIME]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.ROAR_OF_TIME);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -760,8 +915,8 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ROCK_TOMB', `000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.ROCK_TOMB]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.ROCK_TOMB);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -771,19 +926,19 @@ export default class Pokemon extends Button {
             specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'ROCK_SMASH', `000`);
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.ROCK_SMASH]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.ROCK_SMASH);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
 
           case Ability.VOLT_SWITCH:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.VOLT_SWITCH], '0');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.VOLT_SWITCH, '0');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.VOLT_SWITCH]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.VOLT_SWITCH);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -791,10 +946,10 @@ export default class Pokemon extends Button {
           case Ability.HYPER_VOICE:
             coordinatesTarget = transformAttackCoordinate(8, this.targetY);
             coordinates = transformAttackCoordinate(0, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.HYPER_VOICE], '0');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.HYPER_VOICE, '0');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.HYPER_VOICE]);
+            specialProjectile.anims.play(Ability.HYPER_VOICE);
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],
@@ -808,33 +963,33 @@ export default class Pokemon extends Button {
 
           case Ability.SHADOW_CLONE:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.SHADOW_CLONE], '0');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.SHADOW_CLONE, '0');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.SHADOW_CLONE]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.SHADOW_CLONE);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
 
           case Ability.ECHO:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.ECHO], '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.ECHO, '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.ECHO]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.ECHO);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
 
           case Ability.EXPLOSION:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.EXPLOSION], '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.EXPLOSION, '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.EXPLOSION]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.EXPLOSION);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -842,22 +997,22 @@ export default class Pokemon extends Button {
 
           case Ability.CLANGOROUS_SOUL:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.CLANGOROUS_SOUL], '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.CLANGOROUS_SOUL, '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.CLANGOROUS_SOUL]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.CLANGOROUS_SOUL);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
 
           case Ability.GROWL:
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.GROWL], '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.GROWL, '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.GROWL]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.GROWL);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -867,11 +1022,11 @@ export default class Pokemon extends Button {
               const pokemon = <Pokemon> p;
               if (this.team == pokemon.team) {
                 const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
-                const s = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.DISARMING_VOICE], '000');
+                const s = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.DISARMING_VOICE, '000');
                 s.setDepth(7);
                 s.setScale(2, 2);
-                s.anims.play(Ability[Ability.DISARMING_VOICE]);
-                s.once('animationcomplete', () => {
+                s.anims.play(Ability.DISARMING_VOICE);
+                s.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
                   s.destroy();
                 });
               }
@@ -883,11 +1038,11 @@ export default class Pokemon extends Button {
               const pokemon = <Pokemon> p;
               if (this.team != pokemon.team) {
                 const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY);
-                const s = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.RELIC_SONG], '000');
+                const s = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.RELIC_SONG, '000');
                 s.setDepth(7);
                 s.setScale(2, 2);
-                s.anims.play(Ability[Ability.RELIC_SONG]);
-                s.once('animationcomplete', () => {
+                s.anims.play(Ability.RELIC_SONG);
+                s.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
                   s.destroy();
                 });
               }
@@ -896,11 +1051,11 @@ export default class Pokemon extends Button {
 
           case Ability.HIGH_JUMP_KICK:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.HIGH_JUMP_KICK], '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.HIGH_JUMP_KICK, '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(2, 2);
-            specialProjectile.anims.play(Ability[Ability.HIGH_JUMP_KICK]);
-            specialProjectile.once('animationcomplete', () => {
+            specialProjectile.anims.play(Ability.HIGH_JUMP_KICK);
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               specialProjectile.destroy();
             });
             break;
@@ -908,9 +1063,9 @@ export default class Pokemon extends Button {
           case Ability.TRI_ATTACK:
             coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY);
             coordinates = transformAttackCoordinate(this.positionX, this.positionY);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.TRI_ATTACK], '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.TRI_ATTACK, '000');
             specialProjectile.setDepth(7);
-            specialProjectile.anims.play(Ability[Ability.TRI_ATTACK]);
+            specialProjectile.anims.play(Ability.TRI_ATTACK);
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],
@@ -925,10 +1080,10 @@ export default class Pokemon extends Button {
           case Ability.BONEMERANG:
             coordinatesTarget = transformAttackCoordinate(this.targetX, 6);
             coordinates = transformAttackCoordinate(this.targetX, 0);
-            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability[Ability.BONEMERANG], '000');
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.BONEMERANG, '000');
             specialProjectile.setDepth(7);
             specialProjectile.setScale(3, 3);
-            specialProjectile.anims.play(Ability[Ability.BONEMERANG]);
+            specialProjectile.anims.play(Ability.BONEMERANG);
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],
@@ -1004,7 +1159,7 @@ export default class Pokemon extends Button {
     this.sprite = new GameObjects.Sprite(scene, 0, 0, this.index, `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`);
     //this.sprite.setOrigin(0,0);
     this.sprite.setScale(2, 2);
-    this.sprite.on('animationcomplete', ()=>{const g = <GameScene> scene; g.animationManager.animatePokemon(this, PokemonActionState.IDLE)});
+    this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, ()=>{const g = <GameScene> scene; g.animationManager.animatePokemon(this, PokemonActionState.IDLE)});
     this.height = this.sprite.height;
     this.width = this.sprite.width;
     this.itemsContainer = new ItemsContainer(scene, p.items, this.width/2 + 25, -35, false);

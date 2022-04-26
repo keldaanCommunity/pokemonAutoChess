@@ -54,6 +54,95 @@ export class AttackStrategy {
   }
 }
 
+export class CorruptedNatureStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class CrabHammerStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class DiamondStormStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class DracoEnergyStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class DynamaxCannonStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class DynamicPunchStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class ElectroBoostStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class ElectroWebStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class FireTrickStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class FlameChargeStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class LeechSeedStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class LockOnStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class PsychUpStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class RazorWindStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
+
+export class TwistingNeitherStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+    }
+}
 export class KingShieldStrategy extends AttackStrategy {
   process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);

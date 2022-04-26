@@ -141,394 +141,492 @@ export default class AnimationManager {
 
   createSpecialAttacksAnimations() {
     this.game.anims.create({
-      key: Ability[Ability.FIRE_BLAST],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 16, zeroPad: 3, prefix: `${Ability[Ability.FIRE_BLAST]}/`}),
+        key: Ability.CORRUPTED_NATURE,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 48, zeroPad: 3, prefix: `${Ability.CORRUPTED_NATURE}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.CRABHAMMER,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 5, zeroPad: 3, prefix: `${Ability.CRABHAMMER}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.DIAMOND_STORM,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 16, zeroPad: 3, prefix: `${Ability.DIAMOND_STORM}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.DRACO_ENERGY,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 14, zeroPad: 3, prefix: `${Ability.DRACO_ENERGY}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.DYNAMAX_CANNON,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 38, zeroPad: 3, prefix: `${Ability.DYNAMAX_CANNON}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.ELECTRO_BOOST,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 12, zeroPad: 3, prefix: `${Ability.ELECTRO_BOOST}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.ELECTRO_WEB,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 10, zeroPad: 3, prefix: `${Ability.ELECTRO_WEB}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.FIRE_TRICK,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 11, zeroPad: 3, prefix: `${Ability.FIRE_TRICK}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.FLAME_CHARGE,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 40, zeroPad: 3, prefix: `${Ability.FLAME_CHARGE}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.LEECH_SEED,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 10, zeroPad: 3, prefix: `${Ability.LEECH_SEED}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.LOCK_ON,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 26, zeroPad: 3, prefix: `${Ability.LOCK_ON}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.PSYCH_UP,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 26, zeroPad: 3, prefix: `${Ability.PSYCH_UP}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.RAZOR_WIND,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 7, zeroPad: 3, prefix: `${Ability.RAZOR_WIND}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+      this.game.anims.create({
+        key: Ability.TWISTING_NEITHER,
+        frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 59, zeroPad: 3, prefix: `${Ability.TWISTING_NEITHER}/`}),
+        duration: 1000,
+        repeat: 0
+      });
+
+    this.game.anims.create({
+      key: Ability.FIRE_BLAST,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 16, zeroPad: 3, prefix: `${Ability.FIRE_BLAST}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.WHEEL_OF_FIRE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${Ability[Ability.WHEEL_OF_FIRE]}/`}),
+      key: Ability.WHEEL_OF_FIRE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${Ability.WHEEL_OF_FIRE}/`}),
       duration: 1000,
       repeat: -1
     });
 
     this.game.anims.create({
-      key: Ability[Ability.SEISMIC_TOSS],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${Ability[Ability.SEISMIC_TOSS]}/`}),
+      key: Ability.SEISMIC_TOSS,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${Ability.SEISMIC_TOSS}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.GUILLOTINE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${Ability[Ability.GUILLOTINE]}/`}),
+      key: Ability.GUILLOTINE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${Ability.GUILLOTINE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.ROCK_SLIDE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 79, zeroPad: 3, prefix: `${Ability[Ability.ROCK_SLIDE]}/`}),
+      key: Ability.ROCK_SLIDE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 79, zeroPad: 3, prefix: `${Ability.ROCK_SLIDE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.HEAT_WAVE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 49, zeroPad: 3, prefix: `${Ability[Ability.HEAT_WAVE]}/`}),
+      key: Ability.HEAT_WAVE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 49, zeroPad: 3, prefix: `${Ability.HEAT_WAVE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.THUNDER],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 12, zeroPad: 3, prefix: `${Ability[Ability.THUNDER]}/`}),
+      key: Ability.THUNDER,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 12, zeroPad: 3, prefix: `${Ability.THUNDER}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.HYDRO_PUMP],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${Ability[Ability.HYDRO_PUMP]}/`}),
+      key: Ability.HYDRO_PUMP,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${Ability.HYDRO_PUMP}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.DRACO_METEOR],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 34, zeroPad: 3, prefix: `${Ability[Ability.DRACO_METEOR]}/`}),
+      key: Ability.DRACO_METEOR,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 34, zeroPad: 3, prefix: `${Ability.DRACO_METEOR}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.BLAZE_KICK],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 15, zeroPad: 3, prefix: `${Ability[Ability.BLAZE_KICK]}/`}),
+      key: Ability.BLAZE_KICK,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 15, zeroPad: 3, prefix: `${Ability.BLAZE_KICK}/`}),
       duration: 1000,
       repeat: 2
     });
 
     this.game.anims.create({
-      key: Ability[Ability.WISH],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 14, zeroPad: 3, prefix: `${Ability[Ability.WISH]}/`}),
+      key: Ability.WISH,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 14, zeroPad: 3, prefix: `${Ability.WISH}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.CALM_MIND],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 45, zeroPad: 3, prefix: `${Ability[Ability.CALM_MIND]}/`}),
+      key: Ability.CALM_MIND,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 45, zeroPad: 3, prefix: `${Ability.CALM_MIND}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.IRON_DEFENSE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 17, zeroPad: 3, prefix: `${Ability[Ability.IRON_DEFENSE]}/`}),
+      key: Ability.IRON_DEFENSE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 17, zeroPad: 3, prefix: `${Ability.IRON_DEFENSE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.METRONOME],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 36, zeroPad: 3, prefix: `${Ability[Ability.METRONOME]}/`}),
+      key: Ability.METRONOME,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 36, zeroPad: 3, prefix: `${Ability.METRONOME}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.SOAK],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 45, zeroPad: 3, prefix: `${Ability[Ability.SOAK]}/`}),
+      key: Ability.SOAK,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 45, zeroPad: 3, prefix: `${Ability.SOAK}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.BLAST_BURN],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 16, zeroPad: 3, prefix: `${Ability[Ability.BLAST_BURN]}/`}),
+      key: Ability.BLAST_BURN,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 16, zeroPad: 3, prefix: `${Ability.BLAST_BURN}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.CHARGE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 7, zeroPad: 3, prefix: `${Ability[Ability.CHARGE]}/`}),
+      key: Ability.CHARGE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 7, zeroPad: 3, prefix: `${Ability.CHARGE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.DISCHARGE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 3, zeroPad: 3, prefix: `${Ability[Ability.DISCHARGE]}/`}),
+      key: Ability.DISCHARGE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 3, zeroPad: 3, prefix: `${Ability.DISCHARGE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.BITE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 11, zeroPad: 3, prefix: `${Ability[Ability.BITE]}/`}),
+      key: Ability.BITE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 11, zeroPad: 3, prefix: `${Ability.BITE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.DRAGON_TAIL],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 25, zeroPad: 3, prefix: `${Ability[Ability.DRAGON_TAIL]}/`}),
+      key: Ability.DRAGON_TAIL,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 25, zeroPad: 3, prefix: `${Ability.DRAGON_TAIL}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.DRAGON_BREATH],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 9, zeroPad: 3, prefix: `${Ability[Ability.DRAGON_BREATH]}/`}),
+      key: Ability.DRAGON_BREATH,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 9, zeroPad: 3, prefix: `${Ability.DRAGON_BREATH}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.ICICLE_CRASH],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 26, zeroPad: 3, prefix: `${Ability[Ability.ICICLE_CRASH]}/`}),
+      key: Ability.ICICLE_CRASH,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 26, zeroPad: 3, prefix: `${Ability.ICICLE_CRASH}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.ROOT],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 48, zeroPad: 3, prefix: `${Ability[Ability.ROOT]}/`}),
+      key: Ability.ROOT,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 48, zeroPad: 3, prefix: `${Ability.ROOT}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.TORMENT],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${Ability[Ability.TORMENT]}/`}),
+      key: Ability.TORMENT,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${Ability.TORMENT}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.STOMP],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 12, zeroPad: 3, prefix: `${Ability[Ability.STOMP]}/`}),
+      key: Ability.STOMP,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 12, zeroPad: 3, prefix: `${Ability.STOMP}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.DARK_PULSE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 31, zeroPad: 3, prefix: `${Ability[Ability.DARK_PULSE]}/`}),
+      key: Ability.DARK_PULSE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 31, zeroPad: 3, prefix: `${Ability.DARK_PULSE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.NIGHT_SLASH],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 6, zeroPad: 3, prefix: `${Ability[Ability.NIGHT_SLASH]}/`}),
+      key: Ability.NIGHT_SLASH,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 6, zeroPad: 3, prefix: `${Ability.NIGHT_SLASH}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.BUG_BUZZ],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 28, zeroPad: 3, prefix: `${Ability[Ability.BUG_BUZZ]}/`}),
+      key: Ability.BUG_BUZZ,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 28, zeroPad: 3, prefix: `${Ability.BUG_BUZZ}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.POISON_STING],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 12, zeroPad: 3, prefix: `${Ability[Ability.POISON_STING]}/`}),
+      key: Ability.POISON_STING,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 12, zeroPad: 3, prefix: `${Ability.POISON_STING}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.LEECH_LIFE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${Ability[Ability.LEECH_LIFE]}/`}),
+      key: Ability.LEECH_LIFE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 19, zeroPad: 3, prefix: `${Ability.LEECH_LIFE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.HAPPY_HOUR],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 20, zeroPad: 3, prefix: `${Ability[Ability.HAPPY_HOUR]}/`}),
+      key: Ability.HAPPY_HOUR,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 20, zeroPad: 3, prefix: `${Ability.HAPPY_HOUR}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.TELEPORT],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${Ability[Ability.TELEPORT]}/`}),
+      key: Ability.TELEPORT,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${Ability.TELEPORT}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.NASTY_PLOT],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${Ability[Ability.NASTY_PLOT]}/`}),
+      key: Ability.NASTY_PLOT,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 5, zeroPad: 3, prefix: `${Ability.NASTY_PLOT}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.THIEF],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 7, zeroPad: 3, prefix: `${Ability[Ability.THIEF]}/`}),
+      key: Ability.THIEF,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 7, zeroPad: 3, prefix: `${Ability.THIEF}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.STUN_SPORE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 21, zeroPad: 3, prefix: `${Ability[Ability.STUN_SPORE]}/`}),
+      key: Ability.STUN_SPORE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 21, zeroPad: 3, prefix: `${Ability.STUN_SPORE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.METEOR_MASH],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 45, zeroPad: 3, prefix: `${Ability[Ability.METEOR_MASH]}/`}),
+      key: Ability.METEOR_MASH,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 45, zeroPad: 3, prefix: `${Ability.METEOR_MASH}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.HURRICANE],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 51, zeroPad: 3, prefix: `${Ability[Ability.HURRICANE]}/`}),
+      key: Ability.HURRICANE,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 51, zeroPad: 3, prefix: `${Ability.HURRICANE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.IRON_TAIL],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 6, zeroPad: 3, prefix: `${Ability[Ability.IRON_TAIL]}/`}),
+      key: Ability.IRON_TAIL,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 6, zeroPad: 3, prefix: `${Ability.IRON_TAIL}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.ORIGIN_PULSE],
-      frames: this.game.anims.generateFrameNames('june', {start: 0, end: 6, prefix: `${Ability[Ability.ORIGIN_PULSE]}/`}),
+      key: Ability.ORIGIN_PULSE,
+      frames: this.game.anims.generateFrameNames('june', {start: 0, end: 6, prefix: `${Ability.ORIGIN_PULSE}/`}),
       duration: 1000,
       repeat: -1,
       yoyo: true
     });
 
     this.game.anims.create({
-      key: Ability[Ability.SEED_FLARE],
-      frames: this.game.anims.generateFrameNames('june', {start: 0, end: 9, prefix: `${Ability[Ability.SEED_FLARE]}/`}),
+      key: Ability.SEED_FLARE,
+      frames: this.game.anims.generateFrameNames('june', {start: 0, end: 9, prefix: `${Ability.SEED_FLARE}/`}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.ROAR_OF_TIME],
+      key: Ability.ROAR_OF_TIME,
       frames: this.game.anims.generateFrameNames('ROAR_OF_TIME', {start: 0, end: 28, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.ROCK_TOMB],
+      key: Ability.ROCK_TOMB,
       frames: this.game.anims.generateFrameNames('ROCK_TOMB', {start: 0, end: 21, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.ROCK_SMASH],
+      key: Ability.ROCK_SMASH,
       frames: this.game.anims.generateFrameNames('ROCK_SMASH', {start: 0, end: 8, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.VOLT_SWITCH],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.VOLT_SWITCH], {start: 0, end: 6}),
+      key: Ability.VOLT_SWITCH,
+      frames: this.game.anims.generateFrameNames(Ability.VOLT_SWITCH, {start: 0, end: 6}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.SHADOW_CLONE],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.SHADOW_CLONE], {start: 0, end: 3}),
+      key: Ability.SHADOW_CLONE,
+      frames: this.game.anims.generateFrameNames(Ability.SHADOW_CLONE, {start: 0, end: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.HYPER_VOICE],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.HYPER_VOICE], {start: 0, end: 3}),
+      key: Ability.HYPER_VOICE,
+      frames: this.game.anims.generateFrameNames(Ability.HYPER_VOICE, {start: 0, end: 3}),
       duration: 300,
       repeat: 3
     });
 
     this.game.anims.create({
-      key: Ability[Ability.PETAL_DANCE],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.PETAL_DANCE], {start: 0, end: 53, zeroPad: 3}),
+      key: Ability.PETAL_DANCE,
+      frames: this.game.anims.generateFrameNames(Ability.PETAL_DANCE, {start: 0, end: 53, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.ECHO],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.ECHO], {start: 0, end: 36, zeroPad: 3}),
+      key: Ability.ECHO,
+      frames: this.game.anims.generateFrameNames(Ability.ECHO, {start: 0, end: 36, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.EXPLOSION],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.EXPLOSION], {start: 0, end: 22, zeroPad: 3}),
+      key: Ability.EXPLOSION,
+      frames: this.game.anims.generateFrameNames(Ability.EXPLOSION, {start: 0, end: 22, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.BONEMERANG],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.BONEMERANG], {start: 0, end: 7, zeroPad: 3}),
+      key: Ability.BONEMERANG,
+      frames: this.game.anims.generateFrameNames(Ability.BONEMERANG, {start: 0, end: 7, zeroPad: 3}),
       duration: 1000,
       repeat: 3
     });
 
     this.game.anims.create({
-      key: Ability[Ability.GROWL],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.GROWL], {start: 0, end: 19, zeroPad: 3}),
+      key: Ability.GROWL,
+      frames: this.game.anims.generateFrameNames(Ability.GROWL, {start: 0, end: 19, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.HIGH_JUMP_KICK],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.HIGH_JUMP_KICK], {start: 0, end: 21, zeroPad: 3}),
+      key: Ability.HIGH_JUMP_KICK,
+      frames: this.game.anims.generateFrameNames(Ability.HIGH_JUMP_KICK, {start: 0, end: 21, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.TRI_ATTACK],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.TRI_ATTACK], {start: 0, end: 20, zeroPad: 3}),
+      key: Ability.TRI_ATTACK,
+      frames: this.game.anims.generateFrameNames(Ability.TRI_ATTACK, {start: 0, end: 20, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.DISARMING_VOICE],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.DISARMING_VOICE], {start: 0, end: 43, zeroPad: 3}),
+      key: Ability.DISARMING_VOICE,
+      frames: this.game.anims.generateFrameNames(Ability.DISARMING_VOICE, {start: 0, end: 43, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.RELIC_SONG],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.RELIC_SONG], {start: 0, end: 34, zeroPad: 3}),
+      key: Ability.RELIC_SONG,
+      frames: this.game.anims.generateFrameNames(Ability.RELIC_SONG, {start: 0, end: 34, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
 
     this.game.anims.create({
-      key: Ability[Ability.CLANGOROUS_SOUL],
-      frames: this.game.anims.generateFrameNames(Ability[Ability.CLANGOROUS_SOUL], {start: 0, end: 18, zeroPad: 3}),
+      key: Ability.CLANGOROUS_SOUL,
+      frames: this.game.anims.generateFrameNames(Ability.CLANGOROUS_SOUL, {start: 0, end: 18, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     });
@@ -548,8 +646,8 @@ export default class AnimationManager {
     });
 
     this.game.anims.create({
-      key: Ability[Ability.HEAD_SMASH],
-      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 79, zeroPad: 3, prefix: `${Ability[Ability.ROCK_SLIDE]}/`}),
+      key: Ability.HEAD_SMASH,
+      frames: this.game.anims.generateFrameNames('specials', {start: 0, end: 79, zeroPad: 3, prefix: `${Ability.ROCK_SLIDE}/`}),
       duration: 1000,
       repeat: 0
     });

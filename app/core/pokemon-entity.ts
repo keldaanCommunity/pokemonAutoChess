@@ -5,7 +5,6 @@ import AttackingState from './attacking-state';
 import uniqid from 'uniqid';
 import Status from '../models/colyseus-models/status';
 import Count from '../models/colyseus-models/count';
-import PokemonFactory from '../models/pokemon-factory';
 import Simulation from './simulation';
 import {Schema, type, ArraySchema, SetSchema} from '@colyseus/schema';
 import {AttackStrategy} from './attack-strategy';
@@ -14,7 +13,7 @@ import PokemonState from './pokemon-state';
 import { IPokemonEntity, IPokemon, Emotion } from '../types';
 import { AttackType, Rarity } from '../types/enum/Game';
 import { Effect } from '../types/enum/Effect';
-import { Ability } from '../types/enum/Ability';
+import { Ability, AbilityStrategy } from '../types/enum/Ability';
 import { Synergy } from '../types/enum/Synergy';
 import { Pkm } from '../types/enum/Pokemon';
 
@@ -86,7 +85,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
     this.status = new Status();
     this.count = new Count();
     this.simulation = simulation;
-    this.strategy = PokemonFactory.createStrategyFromName(pokemon.skill);
+    this.strategy = AbilityStrategy[pokemon.skill];
 
     this.id= uniqid();
     this.rarity = pokemon.rarity;
