@@ -1870,6 +1870,8 @@ export default class PokemonFactory {
         return new CastformRain(s,e);
       case Pkm.CASTFORM_HAIL:
         return new CastformHail(s,e);
+      case Pkm.DEFAULT:
+        return new Magikarp(s,e);
       default:
         // console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Magikarp(s,e);

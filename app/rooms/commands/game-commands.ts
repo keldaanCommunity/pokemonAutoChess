@@ -20,13 +20,14 @@ export class OnShopCommand extends Command<GameRoom, {
   index: number
 }> {
   execute({id, index}) {
-    if (id !== true && index !== true && this.state.players.has(id)) {
+    if (id !== undefined && index !== undefined && this.state.players.has(id)) {
       const player = this.state.players.get(id);
       if (player.shop[index]) {
         const name = player.shop[index];
         let pokemon = PokemonFactory.createPokemonFromName(name, player.pokemonCollection.get(PokemonIndex[name]));
-        if (player.money >= pokemon.cost && (this.room.getBoardSize(player.board) < 8 ||
-        (this.room.getPossibleEvolution(player.board, pokemon.name) && this.room.getBoardSize(player.board) == 8))) {
+        if (pokemon.name !== Pkm.MAGIKARP &&
+          (player.money >= pokemon.cost && (this.room.getBoardSize(player.board) < 8 ||
+        (this.room.getPossibleEvolution(player.board, pokemon.name) && this.room.getBoardSize(player.board) == 8)))) {
           player.money -= pokemon.cost;
           if (pokemon.name == Pkm.CASTFORM) {
             if (player.synergies.get(Synergy.FIRE) > 0 || player.synergies.get(Synergy.WATER) > 0 || player.synergies.get(Synergy.ICE)) {
