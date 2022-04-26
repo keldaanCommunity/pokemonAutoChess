@@ -58,8 +58,9 @@ export default function Game() {
     localStorage.setItem('lastSessionId', r.sessionId);
     await room.leave();
     r.connection.close();
-    dispatch(setAfterGameId(r.id));
     dispatch(leaveGame());
+    dispatch(setAfterGameId(r.id));
+
   }
 
   useEffect(()=>{
