@@ -18,6 +18,21 @@ import HistoryItem from '../models/colyseus-models/history-item'
 import { Item } from './enum/Item'
 import { Pkm } from './enum/Pokemon'
 
+export type PrecomputedTypePokemon = {
+    [key in Synergy] : {
+        pokemons: Pkm[],
+        mythicalPokemons: Pkm[]
+    }
+}
+
+export type PrecomputedRaritPokemonyAll = {
+    [key in Rarity]: Pkm[]
+}
+
+export type PrecomputedTypePokemonAll = {
+    [key in Synergy]: Pkm[]
+}
+
 export enum Transfer {
     DRAG_DROP = 'DRAG_DROP',
     DRAG_DROP_COMBINE = 'DRAG_DROP_COMBINE',
@@ -120,7 +135,7 @@ export interface IPokemon {
     types: Synergy[]
     rarity: Rarity
     index: string
-    evolution:string
+    evolution: Pkm
     positionX: number
     positionY: number
     cost: number

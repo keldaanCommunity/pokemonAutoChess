@@ -1,5 +1,5 @@
 import PokemonFactory from './pokemon-factory';
-import {Pkm} from '../types/enum/Pokemon';
+import {Pkm, PkmFamily} from '../types/enum/Pokemon';
 import Player from './colyseus-models/player';
 import {IPokemon} from '../types';
 import {PROBABILITY} from '../types/Config';
@@ -103,7 +103,7 @@ export default class Shop {
 
     player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.stars == 3) {
-        threeStars.push(PokemonFactory.getPokemonFamily(pokemon.name));
+        threeStars.push(PkmFamily[pokemon.name]);
       }
     });
 

@@ -3,7 +3,7 @@ import { Effect } from "../types/enum/Effect"
 import { Ability } from "../types/enum/Ability"
 import { Synergy } from "../types/enum/Synergy";
 import { Emotion } from "../types";
-import { Pkm, PokemonIndex } from '../types/enum/Pokemon';
+import { Pkm, PkmIndex } from '../types/enum/Pokemon';
 
 export const WORDS = Object.freeze({
   TIPEE_DONOR: {
@@ -2529,55 +2529,55 @@ export const ID_TABLE = {
 export const NEUTRAL_STAGE = [
   {
     turn: 1,
-    avatar: `${PokemonIndex[Pkm.MAGIKARP].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.MAGIKARP].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 2,
-    avatar: `${PokemonIndex[Pkm.RATICATE].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.RATICATE].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 3,
-    avatar: `${PokemonIndex[Pkm.FEAROW].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.FEAROW].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 10,
-    avatar: `${PokemonIndex[Pkm.GYARADOS].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.GYARADOS].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 15,
-    avatar: `${PokemonIndex[Pkm.LUGIA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.LUGIA].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 20,
-    avatar: `${PokemonIndex[Pkm.GIRATINA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.GIRATINA].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 25,
-    avatar: `${PokemonIndex[Pkm.ZAPDOS].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.ZAPDOS].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 30,
-    avatar: `${PokemonIndex[Pkm.DIALGA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.DIALGA].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 35,
-    avatar: `${PokemonIndex[Pkm.SUICUNE].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.SUICUNE].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 40,
-    avatar: `${PokemonIndex[Pkm.REGICE].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.REGICE].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 45,
-    avatar: `${PokemonIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 50,
-    avatar: `${PokemonIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 55,
-    avatar: `${PokemonIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
   }];
 
 

@@ -5,8 +5,9 @@ import { Emotion, ICreditNames } from '../../../../../types';
 import {ITracker} from '../../../../../types/ITracker';
 import DataFrame from 'dataframe-js';
 import Credits from './Credits';
+import { Pkm } from '../../../../../types/enum/Pokemon';
 
-export default function WikiPokemonDetail(props:{pokemon: string, m: ITracker}) {
+export default function WikiPokemonDetail(props:{pokemon: Pkm, m: ITracker}) {
     const pokemon = PokemonFactory.createPokemonFromName(props.pokemon);
     const [df, setDf] = useState<ICreditNames>();
     const [initialized, setInitialized] = useState<boolean>(false);
@@ -31,7 +32,7 @@ export default function WikiPokemonDetail(props:{pokemon: string, m: ITracker}) 
                             return <img key={'img'+type} src={'assets/types/'+type+'.png'}/>
                         })}
                     </div>
-                    <div>evolution: {pokemon.evolution == ''? 'No evolution': <img src={`${CDN_PORTRAIT_URL}${PokemonFactory.createPokemonFromName(pokemon.evolution).index.replace('-','/')}/${Emotion.NORMAL}.png`}/>}</div>
+                    <div>evolution: {pokemon.evolution == Pkm.DEFAULT ? 'No evolution': <img src={`${CDN_PORTRAIT_URL}${PokemonFactory.createPokemonFromName(pokemon.evolution as Pkm).index.replace('-','/')}/${Emotion.NORMAL}.png`}/>}</div>
                 </div>
                 <div style={{width: '30%'}}>
                     <p>Health: {pokemon.hp}</p>

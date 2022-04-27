@@ -12,7 +12,7 @@ import EloRank from 'elo-rank';
 import admin from 'firebase-admin';
 import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2';
 import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, IPokemon, Transfer } from '../types';
-import {Pkm, PokemonIndex} from '../types/enum/Pokemon';
+import {Pkm, PkmIndex} from '../types/enum/Pokemon';
 import PokemonConfig from '../models/colyseus-models/pokemon-config';
 import { Synergy } from '../types/enum/Synergy';
 
@@ -439,7 +439,7 @@ export default class GameRoom extends Room<GameState> {
       let count = 0;
       const pokemonEvolutionName = pokemon.evolution;
 
-      if (pokemonEvolutionName != '' && pokemon.name != Pkm.DITTO) {
+      if (pokemonEvolutionName !== Pkm.DEFAULT && pokemon.name !== Pkm.DITTO) {
         player.board.forEach((pkm, id) => {
           if ( pkm.index == pokemon.index) {
             count += 1;
@@ -481,7 +481,7 @@ export default class GameRoom extends Room<GameState> {
               count -= 1;
             }
           });
-          const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName, player.pokemonCollection.get(PokemonIndex[pokemonEvolutionName]));
+          const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName, player.pokemonCollection.get(PkmIndex[pokemonEvolutionName]));
           for (let i = 0; i < 3; i++) {
             const itemToAdd = itemsToAdd.pop();
             if (itemToAdd) {

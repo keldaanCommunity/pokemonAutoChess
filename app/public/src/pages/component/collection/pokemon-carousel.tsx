@@ -8,7 +8,7 @@ import { Synergy } from '../../../../../types/enum/Synergy';
 import {Pkm} from '../../../../../types/enum/Pokemon';
 
 
-export default function PokemonCarousel(props: {type: Synergy, setPokemon:Dispatch<SetStateAction<string>>, metadata:{[key: string]: ITracker}}){
+export default function PokemonCarousel(props: {type: Synergy, setPokemon:Dispatch<SetStateAction<Pkm>>, metadata:{[key: string]: ITracker}}){
     const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection);
     const elligiblePokemons = [];
     Object.values(Pkm).forEach(v=>{

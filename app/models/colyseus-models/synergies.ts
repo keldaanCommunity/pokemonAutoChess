@@ -1,6 +1,6 @@
-import {Schema, type, MapSchema} from '@colyseus/schema';
-import PokemonFactory from '../pokemon-factory';
+import {MapSchema} from '@colyseus/schema';
 import { IPokemon } from '../../types';
+import { PkmFamily } from '../../types/enum/Pokemon';
 import { Synergy } from '../../types/enum/Synergy';
 
 export default class Synergies extends MapSchema<number> implements Map<string,number>{
@@ -16,7 +16,7 @@ export default class Synergies extends MapSchema<number> implements Map<string,n
 
 
     board.forEach((pkm: IPokemon) => {
-      const family = PokemonFactory.getPokemonFamily(pkm.name);
+      const family = PkmFamily[pkm.name];
       if (!pokemonNames.includes(family) && pkm.positionY != 0) {
         pokemonNames.push(family);
         pkm.types.forEach( (type) => {

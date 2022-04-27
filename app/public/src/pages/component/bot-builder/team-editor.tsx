@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {CDN_PORTRAIT_URL} from '../../../../../models/enum';
-import {Pkm, PokemonIndex} from '../../../../../types/enum/Pokemon';
+import {Pkm, PkmIndex} from '../../../../../types/enum/Pokemon';
 import {Emotion} from '../../../../../types';
 import ReactTooltip from 'react-tooltip';
 import CSS from 'csstype';
@@ -156,7 +156,7 @@ export default function TeamEditor(props:{
                                             if(p.x == x && p.y == y){
                                                 r = <td style={tdStyle} onClick={()=>{props.handleEditorClick(x,y)}} key={x}>
                                                 <div style={divTdStyle}>
-                                                    <img style={bigImgStyle} src={`${CDN_PORTRAIT_URL}${PokemonIndex[p.name].replace('-','/')}/${Emotion.NORMAL}.png`}></img>
+                                                    <img style={bigImgStyle} src={`${CDN_PORTRAIT_URL}${PkmIndex[p.name].replace('-','/')}/${Emotion.NORMAL}.png`}></img>
                                                     {p.items ? <div style={{display:'flex', justifyContent:'space-evenly'}}>{p.items.map((it,j)=>{
                                                         return <img key={j} style={itemImgStyle} src={'assets/item/' + it + '.png'}/>
                                                     })}</div>: null}

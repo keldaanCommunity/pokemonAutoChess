@@ -13,6 +13,7 @@ import { Emotion } from '../../../../../types';
 import {Synergy} from '../../../../../types/enum/Synergy';
 import {ITracker} from '../../../../../types/ITracker';
 import PokemonEmotion from './pokemon-emotion';
+import { Pkm } from '../../../../../types/enum/Pokemon';
 
 const buttonStyle: CSS.Properties = {
     marginLeft:'10px',
@@ -22,7 +23,7 @@ const buttonStyle: CSS.Properties = {
 
 export default function PokemonCollection(props: {toggleCollection :()=>void}){
     const metadata = tracker as unknown as { [key: string]: ITracker };
-    const [pokemon, setPokemon] =  useState<string>(undefined);
+    const [pokemon, setPokemon] =  useState<Pkm>(undefined);
     const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection);
     let p: Pokemon;
     let pConfig: IPokemonConfig;
