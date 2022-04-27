@@ -420,13 +420,13 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                     if (pokemon.items.has(name)) {
                         player.items.add(name);
                     } else {
-                        const detail = {
-                        'id': name,
-                        'x': pokemon.positionX,
-                        'y': pokemon.positionY,
-                        'bypass': true
+                        const detail: IDragDropItemMessage = {
+                        id: name,
+                        x: pokemon.positionX,
+                        y: pokemon.positionY,
+                        bypass: true
                         };
-                        commands.push(new OnDragDropCommand().setPayload({'client': client, 'detail': detail}));
+                        commands.push(new OnDragDropItemCommand().setPayload({client: client, detail: detail}));
                     }
                     }
                 });
