@@ -282,6 +282,7 @@ export default class BattleManager {
             this.animationManager.animatePokemon(pkm, PokemonActionState.WALK);
           } else if (change.field =='action') {
             pkm.action = pokemon.action;
+            this.animationManager.animatePokemon(pkm, change.value);
           } else if (change.field == 'critChance') {
             pkm.critChance = pokemon.critChance;
             if (pkm.detail) {

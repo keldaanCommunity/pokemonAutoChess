@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import {RARITY_COLOR, SPECIAL_SKILL_DESCRIPTION, CDN_PORTRAIT_URL, CDN_URL} from '../../../../../models/enum';
 import { Emotion, ICreditNames } from '../../../../../types';
-import {ITracker} from '../../../../../public/dist/client/assets/pokemons/ITracker';
+import {ITracker} from '../../../../../types/ITracker';
 import DataFrame from 'dataframe-js';
 import Credits from './Credits';
 

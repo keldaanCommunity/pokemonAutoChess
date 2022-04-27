@@ -4,12 +4,12 @@ import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import PokemonDetail from './wiki-pokemon-detail';
 import { Emotion } from '../../../../../types';
+import { ITracker } from '../../../../../types/ITracker';
 import PRECOMPUTED_RARITY_POKEMONS_ALL from '../../../../../models/precomputed/type-rarity-all.json';
 import tracker from '../../../../dist/client/assets/pokemons/tracker.json';
-import { Convert } from '../../../../../public/dist/client/assets/pokemons/ITracker';
 import { Rarity } from '../../../../../types/enum/Game';
 
-const metadata = Convert.toITracker(JSON.stringify(tracker));
+const metadata = tracker as unknown as { [key: string]: ITracker };
 let credits;
 
 export default function PokemonWiki(props: {rarity: Rarity}){

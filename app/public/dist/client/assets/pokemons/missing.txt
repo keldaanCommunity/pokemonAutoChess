@@ -48,7 +48,6 @@ krookodile,0553/AnimData.xml
 krookodile,0553/0000/0001/AnimData.xml
 solosis,0577/AnimData.xml
 solosis,0577/0000/0001/AnimData.xml
-duosion,0578/0000/0001/AnimData.xml
 reuniclus,0579/AnimData.xml
 reuniclus,0579/0000/0001/AnimData.xml
 mega-Rayquaza,0384/0001/AnimData.xml
@@ -93,7 +92,6 @@ fletchinder,0662/AnimData.xml
 fletchinder,0662/0000/0001/AnimData.xml
 talonflame,0663/AnimData.xml
 talonflame,0663/0000/0001/AnimData.xml
-tympole,0535/AnimData.xml
 tympole,0535/0000/0001/AnimData.xml
 palpitoad,0536/AnimData.xml
 palpitoad,0536/0000/0001/AnimData.xml

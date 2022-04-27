@@ -34,9 +34,8 @@ interface IDuration{
 
 async function split(){
 
-    const pkmaIndexes = ['0000'];
+    const pkmaIndexes = ["0000"];
     const mapName = new Map<string, string>();
-    mapName.set('0000','default');
     // const credits = {};
     const durations = {};
     let missing = '';

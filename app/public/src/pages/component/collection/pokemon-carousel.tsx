@@ -2,7 +2,7 @@ import PokemonCollectionItem from './pokemon-collection-item';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import React, { Dispatch, SetStateAction } from 'react';
 import {useAppSelector} from '../../../hooks';
-import { ITracker } from '../../../../../public/dist/client/assets/pokemons/ITracker';
+import { ITracker } from '../../../../../types/ITracker';
 import { Ability } from '../../../../../types/enum/Ability';
 import { Synergy } from '../../../../../types/enum/Synergy';
 import {Pkm} from '../../../../../types/enum/Pokemon';
