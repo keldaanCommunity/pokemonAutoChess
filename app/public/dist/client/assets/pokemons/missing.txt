@@ -118,3 +118,6 @@ mega-altaria,0334/0001/AnimData.xml
 mega-altaria,0334/0001/0001/AnimData.xml
 herdier,0507/AnimData.xml
 herdier,0507/0000/0001/AnimData.xml
+hatterene,0858/0000/0001/AnimData.xml
+pumpkaboo,0710/0000/0001/AnimData.xml
+gourgeist,0711/0000/0001/AnimData.xml

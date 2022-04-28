@@ -25,7 +25,7 @@ export default class AnimationManager {
                     frameArray[i]['duration'] = durationArray[i] * 10;
                   }
                 }
-                if(action == PokemonActionState.ATTACK){
+                if(action == PokemonActionState.ATTACK || action == PokemonActionState.HURT){
                   this.game.anims.create({
                     key: `${index}/${shiny}/${action}/${mode}/${direction}`,
                     frames: frameArray,

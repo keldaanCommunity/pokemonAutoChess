@@ -6,7 +6,7 @@ import ItemsContainer from './items-container';
 import {EFFECTS_ICON} from '../../../../models/enum';
 import { Effect } from '../../../../types/enum/Effect';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
-import { IPokemon, IPokemonEntity, instanceofPokemonEntity, Emotion } from '../../../../types';
+import { IPokemon, IPokemonEntity, instanceofPokemonEntity, Emotion, AttackSprite } from '../../../../types';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import MoveTo from 'phaser3-rex-plugins/plugins/moveto';
 import GameScene from '../scenes/game-scene';
@@ -34,7 +34,7 @@ export default class Pokemon extends Button {
   skill: Ability;
   positionX: number;
   positionY: number;
-  attackSprite: string;
+  attackSprite: AttackSprite;
   team: number;
   critDamage: number;
   spellDamage: number;
@@ -268,7 +268,7 @@ export default class Pokemon extends Button {
     this.scene.add.tween({
       targets: [this],
       ease: 'Linear',
-      duration: 1000,
+      duration: 1500,
       delay: 0,
       alpha: {
         getStart: () => 1,
@@ -1159,7 +1159,7 @@ export default class Pokemon extends Button {
     this.sprite = new GameObjects.Sprite(scene, 0, 0, this.index, `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`);
     //this.sprite.setOrigin(0,0);
     this.sprite.setScale(2, 2);
-    this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, ()=>{const g = <GameScene> scene; g.animationManager.animatePokemon(this, PokemonActionState.IDLE)});
+    this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, (animation, frame, gameObject, frameKey: string)=>{const g = <GameScene> scene; if(frameKey.includes(PokemonActionState.ATTACK)){g.animationManager.animatePokemon(this, PokemonActionState.IDLE)}});
     this.height = this.sprite.height;
     this.width = this.sprite.width;
     this.itemsContainer = new ItemsContainer(scene, p.items, this.width/2 + 25, -35, false);
