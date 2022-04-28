@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import PokemonFactory from '../../../../../models/pokemon-factory';
-import {RARITY_COLOR, SPECIAL_SKILL_DESCRIPTION, CDN_PORTRAIT_URL, CDN_URL} from '../../../../../models/enum';
+import {RARITY_COLOR, CDN_PORTRAIT_URL, CDN_URL} from '../../../../../models/enum';
 import { Emotion, ICreditNames } from '../../../../../types';
+import { AbilityName, AbilityDescription } from '../../../../../types/strings/Ability';
 import {ITracker} from '../../../../../types/ITracker';
 import DataFrame from 'dataframe-js';
 import Credits from './Credits';
@@ -43,8 +44,8 @@ export default function WikiPokemonDetail(props:{pokemon: Pkm, m: ITracker}) {
                     <p>Mana: {pokemon.maxMana}</p>
                 </div>
                 <div style={{width: '30%'}}>
-                    <p>Ability: {SPECIAL_SKILL_DESCRIPTION[pokemon.skill].title.eng}</p>
-                    <p>Description:{SPECIAL_SKILL_DESCRIPTION[pokemon.skill].description.eng}</p>
+                    <p>Ability: {AbilityName[pokemon.skill].eng}</p>
+                    <p>Description:{AbilityDescription[pokemon.skill].eng}</p>
                 </div>
             </div>
         )

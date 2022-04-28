@@ -1,6 +1,6 @@
 import { Item } from "../enum/Item";
 
-  export const ItemName = {
+  export const ItemName: {[key in Item]: string} = {
     [Item.FOSSIL_STONE]: 'Fossil Stone',
     [Item.TWISTED_SPOON]: 'Twisted Spoon',
     [Item.MYSTIC_WATER]: 'Mystic Water',
@@ -57,7 +57,7 @@ import { Item } from "../enum/Item";
     [Item.ROCKY_HELMET]: 'Rocky Helmet'
   }
 
-  export const ItemDescription = Object.freeze({
+  export const ItemDescription: {[key in Item]: string} = Object.freeze({
     [Item.FOSSIL_STONE]: 'Give it to a Ditto to obtain a random fossil',
     [Item.TWISTED_SPOON]: '+10% spell damage',
     [Item.MYSTIC_WATER]: '+15 mana',

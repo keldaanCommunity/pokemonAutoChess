@@ -33,6 +33,13 @@ export type PrecomputedTypePokemonAll = {
     [key in Synergy]: Pkm[]
 }
 
+export type Langage = {
+    eng: string,
+    esp: string,
+    prt: string,
+    fra: string
+}
+
 export enum Transfer {
     DRAG_DROP = 'DRAG_DROP',
     DRAG_DROP_COMBINE = 'DRAG_DROP_COMBINE',
