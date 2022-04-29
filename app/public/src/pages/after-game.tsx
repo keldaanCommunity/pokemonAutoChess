@@ -64,7 +64,9 @@ export default function AfterGame(){
     else{
         return <div className='App'>
         <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{
-            room.connection.close();
+            if(room) {
+                room.connection.close();
+            }
             dispatch(leaveAfter());
             setToLobby(true);
         }}>Lobby

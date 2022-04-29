@@ -13,6 +13,7 @@ export default class AfterGameRoom extends Room {
 
   onCreate(options: any) {
     console.log(`create after game`, this.roomId);
+    
     this.setState(new AfterGameState());
     this.maxClients = 8;
     // console.log('before', this.state.players);

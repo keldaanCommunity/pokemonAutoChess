@@ -2091,13 +2091,13 @@ export class Armaldo extends Pokemon {
 
 export class Archen extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.ARCHEN, [Synergy.FOSSIL, Synergy.FLYING], Rarity.RARE, '0566', Pkm.ARCHEOPS, 100, 12, 2, 1, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 1, 100, Ability.ROCK_SMASH,shiny, emotion);
+    super(Pkm.ARCHEN, [Synergy.FOSSIL, Synergy.FLYING], Rarity.RARE, '0566', Pkm.ARCHEOPS, 100, 12, 2, 1, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 1, 100, Ability.DEFAULT,shiny, emotion);
   }
 }
 
 export class Archeops extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.ARCHEOPS, [Synergy.FOSSIL, Synergy.FLYING], Rarity.RARE, '0567', Pkm.DEFAULT, 180, 20, 3, 2, 2, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 2, 100, Ability.ROCK_SMASH,shiny, emotion);
+    super(Pkm.ARCHEOPS, [Synergy.FOSSIL, Synergy.FLYING], Rarity.RARE, '0567', Pkm.DEFAULT, 180, 20, 3, 2, 2, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 2, 100, Ability.DEFAULT,shiny, emotion);
   }
 }
 
@@ -2115,13 +2115,13 @@ export class Bastiodon extends Pokemon {
 
 export class Tirtouga extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.TIRTOUGA, [Synergy.FOSSIL, Synergy.WATER], Rarity.RARE, '0564', Pkm.CARRACOSTA, 120, 7, 4, 2, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 1, 100, Ability.ROCK_TOMB,shiny, emotion);
+    super(Pkm.TIRTOUGA, [Synergy.FOSSIL, Synergy.WATER], Rarity.RARE, '0564', Pkm.CARRACOSTA, 120, 7, 4, 2, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 1, 100, Ability.DEFAULT,shiny, emotion);
   }
 }
 
 export class Carracosta extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.CARRACOSTA, [Synergy.FOSSIL, Synergy.WATER], Rarity.RARE, '0565', Pkm.DEFAULT, 240, 14, 7, 4, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 2, 100, Ability.ROCK_TOMB,shiny, emotion);
+    super(Pkm.CARRACOSTA, [Synergy.FOSSIL, Synergy.WATER], Rarity.RARE, '0565', Pkm.DEFAULT, 240, 14, 7, 4, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 2, 100, Ability.DEFAULT,shiny, emotion);
   }
 }
 
@@ -2175,13 +2175,13 @@ export class Omastar extends Pokemon {
 
 export class Tyrunt extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.TYRUNT, [Synergy.FOSSIL, Synergy.DRAGON], Rarity.EPIC, '0696', Pkm.TYRANTRUM, 135, 10, 4, 2, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 1, 100, Ability.HEAD_SMASH,shiny, emotion);
+    super(Pkm.TYRUNT, [Synergy.FOSSIL, Synergy.DRAGON], Rarity.EPIC, '0696', Pkm.TYRANTRUM, 135, 10, 4, 2, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 1, 100, Ability.DEFAULT,shiny, emotion);
   }
 }
 
 export class Tyrantrum extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.TYRANTRUM, [Synergy.FOSSIL, Synergy.DRAGON], Rarity.EPIC, '0697', Pkm.DEFAULT, 290, 22, 7, 4, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 2, 100, Ability.HEAD_SMASH,shiny, emotion);
+    super(Pkm.TYRANTRUM, [Synergy.FOSSIL, Synergy.DRAGON], Rarity.EPIC, '0697', Pkm.DEFAULT, 290, 22, 7, 4, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 2, 100, Ability.DEFAULT,shiny, emotion);
   }
 }
 
@@ -2199,7 +2199,19 @@ export class Corphish extends Pokemon {
 
 export class Crawdaunt extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.CRAWDAUNT, [Synergy.WATER, Synergy.DARK], Rarity.UNCOMMON, PkmIndex[Pkm.CRAWDAUNT], Pkm.DEFAULT, 170, 16, 5, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 110, Ability.CRABHAMMER,shiny, emotion);
+    super(Pkm.CRAWDAUNT, [Synergy.GRASS, Synergy.DARK], Rarity.UNCOMMON, PkmIndex[Pkm.CRAWDAUNT], Pkm.DEFAULT, 170, 16, 5, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 110, Ability.CRABHAMMER,shiny, emotion);
+  }
+}
+
+export class Cacnea extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(Pkm.CACNEA, [Synergy.GRASS, Synergy.DARK], Rarity.RARE, PkmIndex[Pkm.CACNEA], Pkm.CACTURNE, 100, 8, 4, 3, 1, AttackSprite.GRASS_MELEE, AttackType.PHYSICAL, 1, 70, Ability.LEECH_SEED,shiny, emotion);
+  }
+}
+
+export class Cacturne extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(Pkm.CACTURNE, [Synergy.WATER, Synergy.DARK], Rarity.RARE, PkmIndex[Pkm.CACTURNE], Pkm.DEFAULT, 170, 16, 6, 5, 1, AttackSprite.GRASS_MELEE, AttackType.PHYSICAL, 2, 70, Ability.LEECH_SEED,shiny, emotion);
   }
 }
 
@@ -2215,12 +2227,17 @@ export class Galvantula extends Pokemon {
 }
 export class Genesect extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.GENESECT, [Synergy.BUG, Synergy.METAL], Rarity.MYTHICAL, PkmIndex[Pkm.GENESECT], Pkm.GENESECT, 270, 17, 6, 3, 1, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 3, 100, Ability.LOCK_ON,shiny, emotion);
+    super(Pkm.GENESECT, [Synergy.BUG, Synergy.METAL], Rarity.MYTHICAL, PkmIndex[Pkm.GENESECT], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 3, 100, Ability.LOCK_ON,shiny, emotion);
   }
 }
 export class Diancie extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.DIANCIE, [Synergy.FOSSIL, Synergy.FAIRY], Rarity.MYTHICAL, PkmIndex[Pkm.DIANCIE], Pkm.DIANCIE, 270, 17, 6, 3, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 2, 100, Ability.DIAMOND_STORM,shiny, emotion);
+    super(Pkm.DIANCIE, [Synergy.FOSSIL, Synergy.FAIRY], Rarity.MYTHICAL, PkmIndex[Pkm.DIANCIE], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 2, 100, Ability.DIAMOND_STORM,shiny, emotion);
+  }
+}
+export class Relicanth extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(Pkm.RELICANTH, [Synergy.FOSSIL, Synergy.WATER], Rarity.MYTHICAL, PkmIndex[Pkm.RELICANTH], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 70, Ability.ROCK_TOMB,shiny, emotion);
   }
 }
 export class Hatenna extends Pokemon {
