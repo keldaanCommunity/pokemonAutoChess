@@ -30,7 +30,6 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
     const [botDifficulty, setBotDifficulty] = useState<BotDifficulty>(BotDifficulty.MEDIUM);
 
     async function startGame() {
-        const token: string = await firebase.auth().currentUser.getIdToken();
         let allUsersReady = true;
         users.forEach(user=> {if(!user.ready){allUsersReady = false}});
         if(allUsersReady){

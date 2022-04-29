@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Item } from '../../../../../types/enum/Item';
-import {Pkm} from '../../../../../types/enum/Pokemon';
+import {Pkm, PkmFamily} from '../../../../../types/enum/Pokemon';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import SelectedEntity from './selected-entity';
 import ModalMenu from './modal-menu';
@@ -12,12 +12,12 @@ import { IBot, IStep } from '../../../../../models/mongo-models/bot-v2';
 import CSS from 'csstype';
 import produce from 'immer';
 import { useAppSelector, useAppDispatch } from '../../../hooks';
-import {createBot, requestBotData} from "../../../stores/NetworkStore"
+import {createBot} from "../../../stores/NetworkStore"
 import { setBotCreatorSynergies } from '../../../stores/LobbyStore';
 import BuilderSynergies from './builder-synergies';
 import { Synergy } from '../../../../../types/enum/Synergy';
 import { Emotion, ModalMode, ReadWriteMode } from '../../../../../types';
-import {PokemonIndex} from '../../../../../types/enum/Pokemon';
+import {PkmIndex} from '../../../../../types/enum/Pokemon';
 
 const buttonsStyle: CSS.Properties = {
   top:'10px',
@@ -166,10 +166,10 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
         ]
       }
     ],
-    avatar:'ditto',
+    avatar:PkmIndex[Pkm.DITTO],
     author:'',
     elo: 1200,
-    name: 'ditto'
+    name: Pkm.DITTO
   });
   const [entity, setEntity] = useState<Item | Pkm>(Pkm.DEFAULT);
   const [mode, setMode] = useState<ReadWriteMode>(ReadWriteMode.WRITE);
@@ -187,7 +187,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     const pokemonNames = [];
 
     bot.steps[i].board.forEach(pkm=>{
-      const family = PokemonFactory.getPokemonFamily(pkm.name);
+      const family = PkmFamily[pkm.name];
       const pkmTypes = PokemonFactory.createPokemonFromName(pkm.name).types;
       if (!pokemonNames.includes(family)) {
         pokemonNames.push(family);
@@ -338,7 +338,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     handleAuthorChange={(e)=>{e.preventDefault; setBot(produce(draft=>{draft.author = e.target.value}))}}
     handleAvatarChange={(e)=>setBot(produce(draft=>{
       draft.name = e.target.value;
-      draft.avatar = `${PokemonIndex[e.target.value]}/${Emotion.NORMAL}`;
+      draft.avatar = `${PkmIndex[e.target.value]}/${Emotion.NORMAL}`;
     }))}
     handleRoundsRequiredChange={(e)=>setBot(produce(draft=>{draft.steps[step].roundsRequired = e.target.value}))}
     />

@@ -62,6 +62,7 @@ export default class BattleManager {
       this.group.getChildren().forEach((p) => {
         const pkm = <Pokemon> p;
         if (pkm.id == pokemon.id) {
+          this.animationManager.animatePokemon(pkm, PokemonActionState.HURT);
           pkm.deathAnimation();
         }
       });
@@ -282,6 +283,7 @@ export default class BattleManager {
             this.animationManager.animatePokemon(pkm, PokemonActionState.WALK);
           } else if (change.field =='action') {
             pkm.action = pokemon.action;
+            this.animationManager.animatePokemon(pkm, change.value);
           } else if (change.field == 'critChance') {
             pkm.critChance = pokemon.critChance;
             if (pkm.detail) {

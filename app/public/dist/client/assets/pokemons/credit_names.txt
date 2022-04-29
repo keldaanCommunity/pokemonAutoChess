@@ -45,7 +45,7 @@ Palika	<@!118458522685014017>	https://twitter.com/_Palika_
 Vex	<@!157339721729572864>	
 	<@!288402314253959169>	
 Child-Of-Hades	CHILD_OF_HADES	https://www.deviantart.com/child-of-hades
-	<@!136476806055198720>	
+smartini	<@!136476806055198720>	smartini#1851
 JemDragons	<@!408301000445788180>	https://twitter.com/JemDragons?s=09
 Sunny	<@!273341077874802689>	https://twitter.com/temporalsunrise
 Deleca7755	<@!273958644788363265>	Deleca7755#2927
@@ -154,3 +154,4 @@ FlarosOverfield	<@!207815740399681538>	FlarosOverfield#2468
 Jeongsugi	<@!537560911716810763>	정수기#1834
 	<@!776403448220483615>	
 	<@!940303989680009339>	
+	<@!315528859921678336>	

@@ -1,9 +1,8 @@
 import { Rarity } from "../types/enum/Game";
 import { Effect } from "../types/enum/Effect"
-import { Ability } from "../types/enum/Ability"
 import { Synergy } from "../types/enum/Synergy";
 import { Emotion } from "../types";
-import { Pkm, PokemonIndex } from '../types/enum/Pokemon';
+import { Pkm, PkmIndex } from '../types/enum/Pokemon';
 
 export const WORDS = Object.freeze({
   TIPEE_DONOR: {
@@ -581,769 +580,6 @@ export const EFFECTS_ICON = Object.freeze({
   }
 });
 
-export const SPECIAL_SKILL_DESCRIPTION = Object.freeze({
-  [Ability.KING_SHIELD] : {
-    title: {
-      eng: 'King Shield'
-    },
-    description: {
-      eng: 'Protect the user for 0.75/1.5/3s and swap his position with the farthest ennemy'
-    }
-  },
-  [Ability.EXPLOSION] : {
-    title: {
-      eng: 'Explosion'
-    },
-    description: {
-      eng: 'Deals 40/80/160 physical damage. Damage also the user.'
-    }
-  },
-  [Ability.NIGHTMARE] : {
-    title: {
-      eng: 'Nightmare'
-    },
-    description: {
-      eng: 'Poison the ennemy team for 2/4/8s'
-    }
-  },
-  [Ability.CLANGOROUS_SOUL] : {
-    title: {
-      eng: 'Clangorous Soul'
-    },
-    description: {
-      eng: 'Buff the adjacent allies with 2/4/8 attack and 1/2/4 defense/special defense'
-    }
-  },
-  [Ability.BONEMERANG] : {
-    title: {
-      eng: 'Bonemerang'
-    },
-    description: {
-      eng: 'Throw a boomerang bone through the enemy team, dealing 30/60/120 physical damage on its way'
-    }
-  },
-  [Ability.GROWL] : {
-    title: {
-      eng: 'Growl'
-    },
-    description: {
-      eng: 'Apply wound status on the ennemy team for 1/2/3s'
-    }
-  },
-  [Ability.RELIC_SONG] : {
-    title: {
-      eng: 'Relic Song'
-    },
-    description: {
-      eng: 'Put asleep the ennemy team for .5/1/2s'
-    }
-  },
-  [Ability.DISARMING_VOICE] : {
-    title: {
-      eng: 'Disarming Voice'
-    },
-    description: {
-      eng: 'Heals and restore 10/20/40 points of mana to all allies'
-    }
-  },
-  [Ability.HIGH_JUMP_KICK] : {
-    title: {
-      eng: 'High Jump Kick'
-    },
-    description: {
-      eng: 'Deals 50/100/200 physical damage and steal the mana from its target'
-    }
-  },
-  [Ability.GRASS_WHISTLE] : {
-    title: {
-      eng: 'Grass Whistle'
-    },
-    description: {
-      eng: 'Put asleep 1/2/4 ennemies for 2 seconds'
-    }
-  },
-  [Ability.TRI_ATTACK] : {
-    title: {
-      eng: 'Tri Attack'
-    },
-    description: {
-      eng: 'Burn, freeze and wound the target for 2/4/8s'
-    }
-  },
-  [Ability.ECHO] : {
-    title: {
-      eng: 'Echo'
-    },
-    description: {
-      eng: 'Deals 5/10/20 special damage, +3/+6/+9 damage each time the pokemon uses its ability'
-    }
-  },
-  [Ability.PETAL_DANCE] : {
-    title: {
-      eng: 'Petal Dance'
-    },
-    description: {
-      eng: 'Deals 30/60/90 special damage to 2/3/4 ennemies'
-    }
-  },
-  [Ability.HYPER_VOICE] : {
-    title: {
-      eng: 'Hyper Voice'
-    },
-    description: {
-      eng: 'Deals 50/100/200 special damage on a row, confuse for 1/2/3 seconds'
-    }
-  },
-  [Ability.SHADOW_CLONE] : {
-    title: {
-      eng: 'Shadow Clone'
-    },
-    description: {
-      eng: 'The pokemon creates an identical clone of himself next to his target. This clone inherits from the pokemon items and stats'
-    }
-  },
-  [Ability.VOLT_SWITCH] : {
-    title: {
-      eng: 'Volt Switch'
-    },
-    description: {
-      eng: 'Dash into the ennemy backline, dealing 40/80/160 special damage'
-    }
-  },
-  [Ability.DEFAULT] : {
-    title: {
-      eng: '',
-      esp: '',
-      fra: ''
-    },
-    description: {
-      eng: '',
-      esp: '',
-      fra: ''
-    }
-  },
-  [Ability.BURN] : {
-    title: {
-      eng: 'Burn',
-      esp: 'Quemado',
-      fra: 'Brulure'
-    },
-    description: {
-      eng: 'Burn the whole team for 5/10/20 seconds, dealing 5% hp/ seconds',
-      esp: 'Quemar todo el equipo durante 2/4/8 segundos, repartiendo el 5% de hp/segundos',
-      fra: 'Brule la cible pour 2/4/8 secondes, lui faisant perdre 5% hp/secondes'
-    }
-  },
-  [Ability.POISON] : {
-    title: {
-      eng: 'Poison',
-      esp: 'Veneno',
-      fra: 'Poison'
-    },
-    description: {
-      eng: 'Poison the target for 5/10/20 seconds, dealing 10% hp/seconds',
-      esp: 'Envenenar el objetivo durante 5/10/20 segundos, repartiendo 15% hp/segundos',
-      fra: 'Empoisonne la cible durant 5/10/20 secondes, faisant 15% hp/secondes'
-    }
-  },
-  [Ability.SLEEP] : {
-    title: {
-      eng: 'Sleep',
-      esp: 'Duerme',
-      fra: 'Dormir'
-    },
-    description: {
-      eng: 'Sleeps the target for 3/5/7 seconds',
-      esp: 'Duerme el objetivo durante 3/5/7 segundos',
-      fra: 'Endors la cible durant 3/5/7 secondes'
-    }
-  },
-  [Ability.SILENCE] : {
-    title: {
-      eng: 'Silence',
-      esp: 'Silencio',
-      fra: 'Silence'
-    },
-    description: {
-      eng: 'Silence the whole team for 2/4/8 seconds',
-      esp: 'Silenciar todo el equipo durante 2/4/8 segundos',
-      fra: 'Silence toute l équipe ennemie durant 2/4/8 secondes'
-    }
-  },
-  [Ability.PROTECT] : {
-    title: {
-      eng: 'Protect',
-      esp: 'Proteja',
-      fra: 'Abri'
-    },
-    description: {
-      eng: 'Makes the pokemon invulnerable for 3/5/7 seconds.',
-      esp: 'Hace que el pokemon sea invulnerable durante 3/5/7 segundos.',
-      fra: 'Rend le pokémon invulnérable durant 3/5/7 secondes'
-    }
-  },
-  [Ability.FREEZE] : {
-    title: {
-      eng: 'Freeze',
-      esp: 'Congelar',
-      fra: 'Gelé'
-    },
-    description: {
-      eng: 'Freeze the whole ennemy team for 1/2/4 seconds',
-      esp: 'Congela todo el equipo durante 1/2/4 segundos',
-      fra: 'Gèle la cible durant 1/2/4 secondes'
-    }
-  },
-  [Ability.CONFUSION] : {
-    title: {
-      eng: 'Confusion',
-      esp: 'Confusión',
-      fra: 'Confusion'
-    },
-    description: {
-      eng: 'Makes the target confused for .5/1.5/3 seconds',
-      esp: 'Hace que todo el equipo se confunda durante 1/2/4 segundos',
-      fra: 'Rend toute la team ennemie confus pendant 1/ 2 4 secondes'
-    }
-  },
-  [Ability.FIRE_BLAST] : {
-    title: {
-      eng: 'Fire Blast',
-      esp: 'Ráfaga de fuego',
-      fra: 'Déflagration'
-    },
-    description: {
-      eng: 'Throw a fire blast for 30/50/100 special damage',
-      esp: 'Lanza una ráfaga de fuego para 30/50/100 de daño especial',
-      fra: 'Lance une déflagration infligeant 30/50/100 dégats spéciaux'
-    }
-  },
-  [Ability.WHEEL_OF_FIRE] : {
-    title: {
-      eng: 'Flame Wheel',
-      esp: 'Rueda de fuego',
-      fra: 'Roue de feu'
-    },
-    description: {
-      eng: 'Sends a fire wheel that makes a round trip doing 30/40/50 special damages.',
-      esp: 'Envía una rueda de fuego que hace un viaje de ida y vuelta haciendo 30/40/50 de daño especial.',
-      fra: 'Envoie une boule de feu faisant un aller retour, endommageant les pokémons pour 30/40/50 dégats spéciaux'
-    }
-  },
-  [Ability.SEISMIC_TOSS] : {
-    title: {
-      eng: 'Seismic toss',
-      esp: 'Lanzamiento sísmico',
-      fra: 'Frappe Atlas'
-    },
-    description: {
-      eng: 'Mono target attack that deals true damage function of how big is your team',
-      esp: 'Ataque de objetivo mono que inflige daño real en función de lo grande que sea tu equipo.',
-      fra: 'Attaque mono cible dont les dégats varient en fonction de la taille de l équipe.'
-    }
-  },
-  [Ability.GUILLOTINE] : {
-    title: {
-      eng: 'Guillotine',
-      esp: 'Guillotina',
-      fra: 'Guillotine'
-    },
-    description: {
-      eng: 'Mono target attack that deals physical damage. Restores full mana if target killed',
-      esp: 'Ataque de objetivo mono que causa daño físico. Restaura la mitad de maná si el objetivo muere',
-      fra: 'Attaque mono cible qui fait des dégats physiques. Restaure la moitié du mana si la cible est tué.'
-    }
-  },
-  [Ability.ROCK_SLIDE] : {
-    title: {
-      eng: 'Rock Slide',
-      esp: 'Deslizamiento de rocas',
-      fra: 'Eboulement'
-    },
-    description: {
-      eng: 'Mono target attack that deals physical damage. Doubles damage if target is type flying.',
-      esp: 'Ataque de objetivo mono que causa daño físico. Duplica el daño si el objetivo es de tipo volador.',
-      fra: 'Attaque mono cible qui fait des dégats physiques. Double les dégats si type vol.'
-    }
-  },
-  [Ability.HEAT_WAVE] : {
-    title: {
-      eng: 'Heat wave',
-      esp: 'Ola de calor',
-      fra: 'Canicule'
-    },
-    description: {
-      eng: 'Area of effect attack that deals 30/40/50 special damage in all ennemies in a line behind the target.',
-      esp: 'Ataque de área de efecto que inflige 30/40/50 de daño especial a todos los enemigos en una línea detrás del objetivo.',
-      fra: 'Attaque AOE qui infique 30/40/50 dégats spéciaux dans une ligne derrière la cible.'
-    }
-  },
-  [Ability.THUNDER] : {
-    title: {
-      eng: 'Thunder',
-      esp: 'Trueno',
-      fra: 'Fatal-Foudre'
-    },
-    description: {
-      eng: 'Mono target damage that deals 30/50/70 special damage.',
-      esp: 'Daño de objetivo mono que inflige 30/50/70 de daño especial.',
-      fra: 'Attaque monocibe infligeant 30/50/70 dégats spéciaux.'
-    }
-  },
-  [Ability.HYDRO_PUMP] : {
-    title: {
-      eng: 'Hydro Cannon',
-      esp: 'Hidrobomba',
-      fra: 'Hydrocanon'
-    },
-    description: {
-      eng: 'Area of effect attack that deals 30/40/50 special damage in all ennemies in a line behind the target.',
-      esp: 'Ataque de área de efecto que inflige 30/40/50 de daño especial a todos los enemigos en una línea detrás del objetivo.',
-      fra: 'Attaque AOE qui infique 30/40/50 dégats spéciaux dans une ligne derrière la cible.'
-    }
-  },
-  [Ability.DRACO_METEOR] : {
-    title: {
-      eng: 'Draco meteor',
-      esp: 'Meteoro Draco',
-      fra: 'Draco meteor'
-    },
-    description: {
-      eng: 'Area of effect attack that deals 10/20/40 special damages to all ennemies',
-      esp: 'Ataque de área de efecto que causa 10/20/40 de daño especial a todos los enemigos',
-      fra: 'Inflige 10/20/40 dégats spéciaux à tous les pokémons ennemis.'
-    }
-  },
-  [Ability.BLAZE_KICK] : {
-    title: {
-      eng: 'Blaze kick',
-      esp: 'Patada de fuego',
-      fra: 'Pied de feu'
-    },
-    description: {
-      eng: 'Mono target that deals 30/60/90 physical damage.',
-      esp: 'Objetivo mono que causa 30/60/90 de daño físico',
-      fra: 'Attaque monocinle faisant 30/60/90 dégats physiques'
-    }
-  },
-  [Ability.WISH] : {
-    title: {
-      eng: 'Wish',
-      esp: 'Deseo',
-      fra: 'Voeu'
-    },
-    description: {
-      eng: 'Restores 50 hp to 1/2/3 ally pokemon',
-      esp: 'Restaura 50 hp a 1/2/3 de pokemon aliado',
-      fra: 'Soigne 50 hp à 1/2/3 pokémons alliés'
-    }
-  },
-  [Ability.CALM_MIND] : {
-    title: {
-      eng: 'Calm mind',
-      esp: 'Mente tranquila',
-      fra: 'Plénitude'
-    },
-    description: {
-      eng: 'Buff pokemon attack by 50/100/150%',
-      esp: 'Ataque de pokemón de la Buff en un 50/100/150%.',
-      fra: 'Augmente l attaque du pokémon de 50/100/150%.'
-    }
-  },
-  [Ability.IRON_DEFENSE] : {
-    title: {
-      eng: 'Defense Curl',
-      esp: 'Defensa del hierro',
-      fra: 'Mur de fer'
-    },
-    description: {
-      eng: 'Buff pokemon defense / special defense by 4/6/8 points',
-      esp: 'Defensa pokemon buff / defensa especial por 4/6/8 puntos',
-      fra: 'Augmente la défense du pokémon de 4/6/8 points'
-    }
-  },
-  [Ability.METRONOME] : {
-    title: {
-      eng: 'Metronome',
-      esp: 'Métrónomo',
-      fra: 'Metronome'
-    },
-    description: {
-      eng: 'Shoot a random capacity',
-      esp: 'Disparar una capacidad aleatoria',
-      fra: 'Execute une capacité au hasard'
-    }
-  },
-  [Ability.SOAK] : {
-    title: {
-      eng: 'Soak',
-      esp: 'Empápate',
-      fra: 'Lessivage'
-    },
-    description: {
-      eng: 'Deals 20/30/40 special damage and restores 10 mana to friendly pokemons',
-      esp: 'Hace 20/30/40 de daño especial y devuelve 10 de maná a los pokemons amistosos.',
-      fra: 'Fait 20/30/40 dégats spéciaux et restaure 10 mana à chaque pokémon allié.'
-    }
-  },
-  [Ability.ORIGIN_PULSE] : {
-    title: {
-      eng: 'Origin Pulse',
-      esp: 'Fogonazo',
-      fra: 'Onde Originelle'
-    },
-    description: {
-      eng: 'A wave travels horizontally across the battlefield doing 60 magic damage',
-      esp: 'Una ola viaja horizontalmente por el campo de batalla haciendo 60 de daño mágico.',
-      fra: 'Une vague parcourt horizontalement le champ de bataille faisant 60 dégats magiques'
-    }
-  },
-  [Ability.SEED_FLARE] : {
-    title: {
-      eng: 'Seed Flare',
-      esp: 'Pulso Primigenio',
-      fra: 'Fulmigraine'
-    },
-    description: {
-      eng: 'Shaymins body emits a shock wave, dealing 30 magic damage to all ennemies, and decreasing their special defense by 2.',
-      esp: 'El cuerpo de Shaymin emite una onda de choque que inflige 30 de daño mágico a todos los enemigos y reduce su velocidad en 2.',
-      fra: 'Le corps de Shaymin émet une onde de choc, infligeant 30 dégâts magiques à tous les ennemis et réduisant leur vitesse de 2.'
-    }
-  },
-  [Ability.IRON_TAIL] : {
-    title: {
-      eng: 'Iron tail',
-      esp: 'Cola de hierro',
-      fra: 'Queue de fer'
-    },
-    description: {
-      eng: 'Mono target damage attack that deals 20/30/40. Buff defense by 1/3/5 points.',
-      esp: 'Ataque de daño al objetivo mono que reparte 20/30/40. Pulveriza la defensa por 1/3/5 puntos.',
-      fra: 'Attaque monocible faisant 20/30/40 dégats physique. Booste la défense de 1/3/5 points.'
-    }
-  },
-  [Ability.BLAST_BURN] : {
-    title: {
-      eng: 'Blast Burn',
-      esp: 'Quemadura por ráfaga',
-      fra: 'Aire de feu'
-    },
-    description: {
-      eng: 'Area of effect attack that deals 30/50/80 special damages.',
-      esp: 'Ataque en el área de efecto que causa 30/50/80 daños especiales.',
-      fra: 'Attaque AOE en cercle faisant 30/50/80 dégats spéciaux.'
-    }
-  },
-  [Ability.CHARGE] : {
-    title: {
-      eng: 'Charge',
-      esp: 'Carga',
-      fra: 'Chargeur'
-    },
-    description: {
-      eng: 'Buff all electric ally pokemons attack by 10/20/30 %',
-      esp: 'Pulir todos los pokemones aliados eléctricos atacan en un 10/20/30 %.',
-      fra: 'Augmente l attaque des alliés electrique de 10/20/30%'
-    }
-  },
-  [Ability.DISCHARGE] : {
-    title: {
-      eng: 'Discharge',
-      esp: 'Descarga',
-      fra: 'Coud Jus'
-    },
-    description: {
-      eng: 'Area of effect attack that deals 40/60/80 special damages.',
-      esp: 'Ataque en el área de efecto que causa 40/60/80 daños especiales.',
-      fra: 'Attaque AOE en cercle faisant 40/60/80 dégats spéciaux.'
-    }
-  },
-  [Ability.BITE] : {
-    title: {
-      eng: 'Bite',
-      esp: 'Mordida',
-      fra: 'Morsure'
-    },
-    description: {
-      eng: '50% Life steal mono target physical attack that deals 30/50/70 damage.',
-      esp: '50% Vida robar mono objetivo de ataque físico que inflige 30/50/70 de daño.',
-      fra: 'Attaque monocible avec 50% de vol de vie faisant 30/50/70 dégats spéciaux.'
-    }
-  },
-  [Ability.DRAGON_TAIL] : {
-    title: {
-      eng: 'Dragon Tail',
-      esp: 'Cola de Dragón',
-      fra: 'Draco Queue'
-    },
-    description: {
-      eng: 'Mono target physical attack that deals 30/40/50 damage and buff defenses by 1/2/3 points',
-      esp: 'El ataque físico de un monoobjetivo que inflige 30/40/50 de daño y mejora las defensas en 1/2/3 puntos',
-      fra: 'Attaque mono-cible faisant 30/40/50 dégats physique et boostant les défenses de 1/2/3 points.'
-    }
-  },
-  [Ability.DRAGON_BREATH] : {
-    title: {
-      eng: 'Dragon Breath',
-      esp: 'Aliento de Dragón',
-      fra: 'Draco Souffle'
-    },
-    description: {
-      eng: 'Area of effect attack that deals 30/40/50 special damage in a line behind the target',
-      esp: 'Ataque de área de efecto que inflige 30/40/50 de daño especial en una línea detrás del objetivo',
-      fra: 'Attaque AOE faisant 30/40/50 dégats spéciaux dans une ligne derrière la cible'
-    }
-  },
-  [Ability.ICICLE_CRASH] : {
-    title: {
-      eng: 'Icicle Crash',
-      esp: 'Choque de carámbanos',
-      fra: 'Chute glace'
-    },
-    description: {
-      eng: 'Area of effect attack that deals 30/40/50 physical damage around the target',
-      esp: 'Ataque de área de efecto que causa 30/40/50 de daño físico alrededor del objetivo',
-      fra: 'Attaque AOE en cercle faisant 30/40/50 dégats physiques'
-    }
-  },
-  [Ability.ROOT] : {
-    title: {
-      eng: 'Root',
-      esp: 'Raíz',
-      fra: 'Racine'
-    },
-    description: {
-      eng: 'Heal all nearby ally pokemons by 20/30/40 hp.',
-      esp: 'Curar a todos los pokemons aliados cercanos con 20/30/40 hp.',
-      fra: 'Soigne les alliés autour de 20/30/40 hp.'
-    }
-  },
-  [Ability.TORMENT] : {
-    title: {
-      eng: 'Torment',
-      esp: 'Viaje',
-      fra: 'Tourment'
-    },
-    description: {
-      eng: 'Increase attack speed by 20/30/40 %',
-      esp: 'Aumenta la velocidad de ataque en un 20/30/40 %.',
-      fra: 'Augmente la vitesse d attaque de 20/30/40%'
-    }
-  },
-  [Ability.STOMP] : {
-    title: {
-      eng: 'Stomp',
-      esp: 'Pisotón',
-      fra: 'Ecrasement'
-    },
-    description: {
-      eng: 'Mono target physical damage (2*atk*stars)',
-      esp: 'Daño físico del objetivo mono (2*atk*stars)',
-      fra: 'Attaque mono cible faisant 2*atk*stars dégats physiques'
-    }
-  },
-  [Ability.DARK_PULSE] : {
-    title: {
-      eng: 'Dark Pulse',
-      esp: 'Pulso oscuro',
-      fra: 'Vibrobscur'
-    },
-    description: {
-      eng: 'Life drain target attack that deals 30/50/70 special damage',
-      esp: 'Ataque al objetivo de drenaje de vida que causa 30/50/70 de daño especial',
-      fra: 'Attaque vol de vie faisant 30/50/70 dégats spéciaux.'
-    }
-  },
-  [Ability.NIGHT_SLASH] : {
-    title: {
-      eng: 'Night Slash',
-      esp: 'Tajo nocturno',
-      fra: 'Tranche Nuit'
-    },
-    description: {
-      eng: 'Special one-target attack that does 40/60/80. Decreases the defence of all enemies by 1 point',
-      esp: 'Ataque especial de objetivo mono que hace 40/60/80. Disminuye la defensa de todos los enemigos en 1 punto.',
-      fra: 'Attaque spéciale faisant 40/60/80 points de dégats. Diminue la défense de toute la team ennemie de 1 point.'
-    }
-  },
-  [Ability.BUG_BUZZ] : {
-    title: {
-      eng: 'Bug Buzz',
-      esp: 'Bichos',
-      fra: 'Bourdon'
-    },
-    description: {
-      eng: 'Mono target special damage attack that does 20/30/40.',
-      esp: 'Ataque de daño especial de un mono objetivo que hace 20/30/40.',
-      fra: 'Attaque mono cible faisant 20/30/40 dégats spéciaux'
-    }
-  },
-  [Ability.POISON_STING] : {
-    title: {
-      eng: 'Poison Sting',
-      esp: 'Picadura de veneno',
-      fra: 'Dard Venin'
-    },
-    description: {
-      eng: 'Physical mono target damage that deals 30/40/50. Doubles damage if target is poisoned.',
-      esp: 'Daño físico de un solo objetivo que reparte 30/40/50. Duplica el daño si el objetivo está envenenado.',
-      fra: 'Attaque physique mono cible faisant 30/40/50 dégats. Double les dégats si la cible est empoisonné.'
-    }
-  },
-  [Ability.LEECH_LIFE] : {
-    title: {
-      eng: 'Leech Life',
-      esp: 'Vampirismo',
-      fra: 'Vampirisme'
-    },
-    description: {
-      eng: 'Area of effect life steal special damage attack 10/20/30 around the target',
-      esp: 'Área de efecto robo de vida daño especial ataque 10/20/30 alrededor del objetivo',
-      fra: 'Attaque vol de vie en AOE faisant 10/20/30 points de dégats.'
-    }
-  },
-  [Ability.HAPPY_HOUR] : {
-    title: {
-      eng: 'Happy hour',
-      esp: 'La hora feliz',
-      fra: 'Happy hour'
-    },
-    description: {
-      eng: 'Buff all ally attacks by 3/6/9 points.',
-      esp: 'Pulir todos los ataques de los aliados por 3/6/9 puntos.',
-      fra: 'Augmente l attaque de toute l équipe de 3/6/9 points.'
-    }
-  },
-  [Ability.TELEPORT] : {
-    title: {
-      eng: 'Teleport',
-      esp: 'Teletransporte',
-      fra: 'Teleport'
-    },
-    description: {
-      eng: 'Teleport the pokemon on one edge of the map',
-      esp: 'Teletransportar el pokemon en un borde del mapa',
-      fra: 'Téléporte le pokémon sur un coin de la carte.'
-    }
-  },
-  [Ability.NASTY_PLOT] : {
-    title: {
-      eng: 'Nasty Plot',
-      esp: 'Trama desagradable',
-      fra: 'Machination'
-    },
-    description: {
-      eng: 'Buff pokemon attack by 5/10/20 points',
-      esp: 'Buff pokemon ataque por 5/10/20 puntos',
-      fra: 'Booste l attaque du pokémon de 5/10/20 points'
-    }
-  },
-  [Ability.THIEF] : {
-    title: {
-      eng: 'Thief',
-      esp: 'Ladrón',
-      fra: 'Larcin'
-    },
-    description: {
-      eng: 'Steal ennemy target item and deals 5/10/20 physical damage',
-      esp: 'Roba el objeto del enemigo e inflige 5/10/20 de daño físico',
-      fra: 'Vole l item du pokémon ennemi et inflige 5/10/20 dégats physiques'
-    }
-  },
-  [Ability.STUN_SPORE] : {
-    title: {
-      eng: 'Stun Spore',
-      esp: 'Espora de aturdimiento',
-      fra: 'Poudre para'
-    },
-    description: {
-      eng: 'Decrease target attack speed by 50/100/200% and deals 5/10/20 physical damage',
-      esp: 'Disminuir la velocidad de ataque del objetivo en un 50/100/200% e inflige 5/10/20 de daño físico',
-      fra: 'Diminue la vitesse d attaque du pokémon de 50/100/200% et inflige 5/10/20 dégats physiques'
-    }
-  },
-  [Ability.METEOR_MASH] : {
-    title: {
-      eng: 'Meteor mash',
-      esp: 'Puré de meteoritos',
-      fra: 'Poing Meteor'
-    },
-    description: {
-      eng: 'Area of effect around the target that deals 30/50/70 damages. Buff pokemon attack by 5 points.',
-      esp: 'Área de efecto alrededor del objetivo que produce 30/50/70 daños. Buff pokemon ataque por 5 puntos.',
-      fra: 'Attaque en AOE faisant 30/50/40 dégats spéciaux. Booste l attaque du pokémon de 5 points.'
-    }
-  },
-  [Ability.HURRICANE] : {
-    title: {
-      eng: 'Hurricane',
-      esp: 'Huracán',
-      fra: 'Vent Violent'
-    },
-    description: {
-      eng: 'Area of effect attack that deals 10/20/30 damages in a line behind the target',
-      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
-      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
-    }
-  },
-  [Ability.HEAL_BLOCK] : {
-    title: {
-      eng: 'Heal Block',
-      esp: 'Heal Block',
-      fra: 'Heal Block'
-    },
-    description: {
-      eng: 'Apply wound status (target cannot heal) to all adjacent ennemies for 5s/10s/15s.',
-      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
-      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
-    }
-  },
-  [Ability.ROAR_OF_TIME] : {
-    title: {
-      eng: 'Roar of time',
-      esp: 'Roar of time',
-      fra: 'Roar of time'
-    },
-    description: {
-      eng: 'Add a second life to the pokemon that has the most items.',
-      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
-      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
-    }
-  },
-  [Ability.ROCK_TOMB] : {
-    title: {
-      eng: 'Rock Tomb'
-    },
-    description: {
-      eng: 'Mono target attack that deals 30/60/90 physical damage and decrease target attack speed by 20/40/60%'
-    }
-  },
-  [Ability.ROCK_SMASH] : {
-    title: {
-      eng: 'Rock Smash',
-      esp: 'Rock Smash',
-      fra: 'Rock Smash'
-    },
-    description: {
-      eng: 'Mono target attack that deals 20/40/60 damage and silence target for 3/6/9s.',
-      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
-      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
-    }
-  },
-  [Ability.HEAD_SMASH] : {
-    title: {
-      eng: 'Head Smash',
-      esp: 'Head Smash',
-      fra: 'Head Smash'
-    },
-    description: {
-      eng: 'The pokemon hurt itself for 5/10/15 hp, and deals 40/80/150 physical damage. Execute if the target is asleep/frozen.',
-      esp: 'Ataque de área de efecto que causa 10/20/30 de daño en una línea detrás del objetivo',
-      fra: 'Attaque AOE faisant 10/20/30 dégats spéciaux dans une ligne derrière la cible'
-    }
-  }
-});
-
 export const LAST_BATTLE_RESULT_TRADUCTION = Object.freeze({
   WIN: {
     eng: 'Win',
@@ -1510,602 +746,602 @@ export const MAP = Object.freeze({
     FOURTH_STATION_PATH: {
       id: 'FOURTH_STATION_PATH',
       name: '4th Station Path',
-      pokemons: [Pkm.IVYSAUR, Pkm.METAPOD, Pkm.RATICATE, Pkm.WEEPINBELL, Pkm.BAYLEEF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.TORTERRA, Pkm.SKUNTANK, Pkm.URSARING, Pkm.BIBAREL],
+      pokemons: [],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.GRASS
     },
     SEVEN_STATION_PATH: {
       id: 'SEVEN_STATION_PATH',
       name: '7th Station Path',
-      pokemons: [Pkm.SKUNTANK, Pkm.FEAROW, Pkm.PRIMEAPE, Pkm.MAROWAK, Pkm.HITMONCHAN, Pkm.FURRET, Pkm.URSARING, Pkm.SHEDNINJA, Pkm.BIBAREL],
+      pokemons: [],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.FIGHTING
     },
     BARREN_VALLEY: {
       id: 'BARREN_VALLEY',
       name: 'Barren Valley',
-      pokemons: [Pkm.JUMPLUFF, Pkm.FLYGON, Pkm.LUNATONE, Pkm.HONCHKROW, Pkm.GLAMEOW, Pkm.TOXICROAK],
+      pokemons: [],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.DARK
     },
     DARK_ICE_MOUNTAIN_PEAK: {
       id: 'DARK_ICE_MOUNTAIN_PEAK',
       name: 'Dark Ice Mountain Peak',
-      pokemons: [Pkm.GENGAR, Pkm.SKARMORY, Pkm.DUSKULL, Pkm.METANG, Pkm.LICKILICKY, Pkm.TANGROWTH],
+      pokemons: [Pkm.GENGAR, Pkm.DUSKULL, Pkm.METANG],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GHOST
     },
     DARK_ICE_MOUNTAIN: {
       id: 'DARK_ICE_MOUNTAIN',
       name: 'Dark Ice Mountain',
-      pokemons: [Pkm.BANETTE, Pkm.GENGAR, Pkm.SKARMORY, Pkm.DUSKULL, Pkm.METANG, Pkm.LICKILICKY, Pkm.TANGROWTH],
+      pokemons: [Pkm.BANETTE, Pkm.GENGAR, Pkm.DUSKULL, Pkm.METANG],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GHOST
     },
     DARK_WASTELAND: {
       id: 'DARK_WASTELAND',
       name: 'Dark Wasteland',
-      pokemons: [Pkm.GASTLY, Pkm.ONIX, Pkm.MISDREAVUS, Pkm.SHIFTRY, Pkm.SOLROCK, Pkm.SKORUPI],
+      pokemons: [Pkm.GASTLY, Pkm.ONIX, Pkm.SHIFTRY],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GHOST
     },
     DEEP_BOULDER_QUARRY: {
       id: 'DEEP_BOULDER_QUARRY',
       name: 'Deep Boulder Quarry',
-      pokemons: [Pkm.CLAYDOL, Pkm.GLISCOR, Pkm.NINJASK, Pkm.MUK, Pkm.PROBOPASS, Pkm.SHELGON, Pkm.RHYDON, Pkm.TANGROWTH, Pkm.METANG, Pkm.STEELIX],
+      pokemons: [Pkm.NINJASK, Pkm.SHELGON, Pkm.RHYDON, Pkm.METANG, Pkm.STEELIX],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.GROUND
     },
     LIMESTONE_CAVERN: {
       id: 'LIMESTONE_CAVERN',
       name: 'Limestone Cavern',
-      pokemons: [Pkm.KINGLER, Pkm.MARILL, Pkm.SLOWKING, Pkm.VOLBEAT, Pkm.ILLUMISE, Pkm.SEVIPER, Pkm.DRAGONAIR],
+      pokemons: [Pkm.MARILL, Pkm.SLOWKING, Pkm.DRAGONAIR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.WATER
     },
     DEEP_LIMESTONE_CAVERN: {
       id: 'DEEP_LIMESTONE_CAVERN',
       name: 'Deep Limestone Cavern',
-      pokemons: [Pkm.DRAGONAIR, Pkm.AERODACTYL, Pkm.MASQUERAIN, Pkm.VOLBEAT, Pkm.ILLUMISE, Pkm.SEVIPER, Pkm.POLIWHIRL, Pkm.DUGTRIO],
+      pokemons: [Pkm.DRAGONAIR, Pkm.AERODACTYL, Pkm.POLIWHIRL],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.WATER
     },
     ICICLE_FOREST: {
       id: 'ICICLE_FOREST',
       name: 'Icicle Forest',
-      pokemons: [Pkm.GENGAR, Pkm.WEEZING, Pkm.CACTURNE, Pkm.METAGROSS, Pkm.LICKILICKY, Pkm.GLISCOR, Pkm.DRIFBLIM],
+      pokemons: [Pkm.GENGAR, Pkm.CACTURNE, Pkm.METAGROSS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.ICE
     },
     MURKY_FOREST: {
       id: 'MURKY_FOREST',
       name: 'Murky Forest',
-      pokemons: [Pkm.EXEGGCUTE, Pkm.HOOTHOOT, Pkm.HOPPIP, Pkm.DODUO, Pkm.WEEDLE, Pkm.BURMY, Pkm.SPINARAK, Pkm.WURMPLE],
+      pokemons: [Pkm.HOPPIP, Pkm.WEEDLE],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.BUG
     },
     SPACIAL_CLIFFS: {
       id: 'SPACIAL_CLIFFS',
       name: 'Spacial Cliffs',
-      pokemons: [Pkm.HAUNTER, Pkm.BELDUM, Pkm.MISDREAVUS, Pkm.KOFFING, Pkm.SHEDNINJA, Pkm.BANETTE, Pkm.MISMAGIUS],
+      pokemons: [Pkm.HAUNTER, Pkm.BELDUM, Pkm.SHEDNINJA, Pkm.BANETTE],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GHOST
     },
     TEMPORAL_SPIRE_FUTURE: {
       id: 'TEMPORAL_SPIRE_FUTURE',
       name: 'Temporal Spire Future',
-      pokemons: [Pkm.GOLBAT, Pkm.ALAKAZAM, Pkm.MAGNETON, Pkm.GASTLY, Pkm.HYPNO, Pkm.CLAYDOL, Pkm.MISMAGIUS, Pkm.BRONZONG, Pkm.PORYGON_2, Pkm.CROBAT],
+      pokemons: [Pkm.GOLBAT, Pkm.ALAKAZAM, Pkm.MAGNETON, Pkm.GASTLY, Pkm.PORYGON_2, Pkm.CROBAT],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     TEMPORAL_TOWER_FUTURE: {
       id: 'TEMPORAL_TOWER_FUTURE',
       name: 'Temporal Tower Future',
-      pokemons: [Pkm.ZUBAT, Pkm.KADABRA, Pkm.MAGNEMITE, Pkm.GASTLY, Pkm.DROWZEE, Pkm.CLAYDOL, Pkm.MISMAGIUS, Pkm.BRONZONG, Pkm.GOLBAT],
+      pokemons: [Pkm.ZUBAT, Pkm.KADABRA, Pkm.MAGNEMITE, Pkm.GASTLY, Pkm.GOLBAT],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     VAST_ICE_MOUNTAIN_PEAK: {
       id: 'VAST_ICE_MOUNTAIN_PEAK',
       name: 'Vast Ice Mountain Peak',
-      pokemons: [Pkm.GENGAR, Pkm.AERODACTYL, Pkm.SMOOCHUM, Pkm.DUSCLOPS, Pkm.ABSOL, Pkm.METAGROSS, Pkm.MAGNEZONE, Pkm.GLISCOR],
+      pokemons: [Pkm.GENGAR, Pkm.AERODACTYL, Pkm.DUSCLOPS, Pkm.ABSOL, Pkm.METAGROSS, Pkm.MAGNEZONE],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GHOST
     },
     VAST_ICE_MOUNTAIN: {
       id: 'VAST_ICE_MOUNTAIN',
       name: 'Vast Ice Mountain',
-      pokemons: [Pkm.GENGAR, Pkm.AERODACTYL, Pkm.SMOOCHUM, Pkm.DUSCLOPS, Pkm.ABSOL, Pkm.METAGROSS, Pkm.MAGNEZONE, Pkm.GLISCOR],
+      pokemons: [Pkm.GENGAR, Pkm.AERODACTYL, Pkm.DUSCLOPS, Pkm.ABSOL, Pkm.METAGROSS, Pkm.MAGNEZONE],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GHOST
     },
     AMP_PLAINS: {
       id: 'AMP_PLAINS',
       name: 'Amp Plains',
-      pokemons: [Pkm.PLUSLE, Pkm.MINUN, Pkm.MAREEP, Pkm.PHANPY, Pkm.ELEKID, Pkm.SHINX, Pkm.GIRAFARIG, Pkm.ZAPDOS, Pkm.FLAFFY, Pkm.PIKACHU, Pkm.PICHU, Pkm.YANMEGA, Pkm.ELECTABUZZ],
+      pokemons: [Pkm.MAREEP, Pkm.ELEKID, Pkm.SHINX, Pkm.ZAPDOS, Pkm.FLAFFY, Pkm.PIKACHU, Pkm.PICHU, Pkm.ELECTABUZZ],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.ELECTRIC
     },
     FAR_AMP_PLAINS: {
       id: 'FAR_AMP_PLAINS',
       name: 'Far Amp Plains',
-      pokemons: [Pkm.SHINX, Pkm.GIRAFARIG, Pkm.PIKACHU, Pkm.PICHU, Pkm.YANMEGA, Pkm.FLAFFY, Pkm.ELECTABUZZ, Pkm.TAUROS, Pkm.DODRIO, Pkm.ELECTRIKE, Pkm.LUXIO, Pkm.LUXRAY, Pkm.AMPHAROS],
+      pokemons: [Pkm.SHINX, Pkm.PIKACHU, Pkm.PICHU, Pkm.FLAFFY, Pkm.ELECTABUZZ, Pkm.ELECTRIKE, Pkm.LUXIO, Pkm.LUXRAY, Pkm.AMPHAROS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.ELECTRIC
     },
     FINAL_MAZE_B23F: {
       id: 'FINAL_MAZE_B23F',
       name: 'Final Maze',
-      pokemons: [Pkm.MACHOP, Pkm.MAGNEMITE, Pkm.DODUO, Pkm.OMANYTE, Pkm.KABUTO, Pkm.SPINARAK, Pkm.MAREEP, Pkm.MISDREAVUS, Pkm.SWINUB, Pkm.HOUNDOUR, Pkm.PHANPY, Pkm.MAGBY, Pkm. POOCHYENA, Pkm.SHROOMISH, Pkm.MAWILE, Pkm.MEDITITE, Pkm.BAGON, Pkm.STARAVIA, Pkm.SKORUPI, Pkm.CARNIVINE, Pkm.JIRACHI, Pkm.MOLTRES, Pkm.SUICUNE],
+      pokemons: [Pkm.MACHOP, Pkm.MAGNEMITE, Pkm.OMANYTE, Pkm.KABUTO, Pkm.MAREEP, Pkm.SWINUB, Pkm.HOUNDOUR, Pkm.MAGBY, Pkm.MEDITITE, Pkm.BAGON, Pkm.STARAVIA, Pkm.JIRACHI, Pkm.MOLTRES, Pkm.SUICUNE],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.GRASS
     },
     FOGGY_FOREST: {
       id: 'FOGGY_FOREST',
       name: 'Foggy Forest',
-      pokemons: [Pkm.HOOTHOOT, Pkm.DUNSPARCE, Pkm.SMEARGLE, Pkm.CHERUBI, Pkm.SKIPLOOM, Pkm.ZIGZAGOON, Pkm.PACHIRISU, Pkm.NOCTOWL, Pkm.STANTLER, Pkm.BUNEARY, Pkm.PINSIR, Pkm. BRELOOM],
+      pokemons: [Pkm.SKIPLOOM, Pkm.BUNEARY],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.NORMAL
     },
     FOREST_PATH: {
       id: 'FOREST_PATH',
       name: 'Forest Path',
-      pokemons: [Pkm.PINSIR, Pkm.DUNSPARCE, Pkm.SWINUB, Pkm.HOUNDOUR, Pkm.LINOONE, Pkm.KRICKEROT],
+      pokemons: [Pkm.SWINUB, Pkm.HOUNDOUR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GRASS
     },
     GOLD_CHAMBER: {
       id: 'GOLD_CHAMBER',
       name: 'Gold Chamber',
-      pokemons: [Pkm.MACHOP, Pkm.MAGNEMITE, Pkm.DODUO, Pkm.OMANYTE, Pkm.KABUTO, Pkm.SPINARAK, Pkm.MAREEP, Pkm.MISDREAVUS, Pkm.SWINUB, Pkm.HOUNDOUR, Pkm.PHANPY, Pkm.MAGBY, Pkm. POOCHYENA, Pkm.SHROOMISH, Pkm.MAWILE, Pkm.MEDITITE, Pkm.BAGON, Pkm.STARAVIA, Pkm.SKORUPI, Pkm.CARNIVINE, Pkm.JIRACHI, Pkm.MOLTRES, Pkm.SUICUNE],
+      pokemons: [Pkm.MACHOP, Pkm.MAGNEMITE, Pkm.OMANYTE, Pkm.KABUTO, Pkm.MAREEP, Pkm.SWINUB, Pkm.HOUNDOUR, Pkm.MAGBY,  Pkm.MEDITITE, Pkm.BAGON, Pkm.STARAVIA, Pkm.JIRACHI, Pkm.MOLTRES, Pkm.SUICUNE],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.NORMAL
     },
     HIDDEN_HIGHLAND: {
       id: 'HIDDEN_HIGHLAND',
       name: 'Hidden Highland',
-      pokemons: [Pkm.DRAGONITE, Pkm.MANECTRIC, Pkm.TROPIUS, Pkm.RAMPARDOS, Pkm.BASTIODON, Pkm.PURUGLY, Pkm.GARCHOMP, Pkm.ABOMASNOW, Pkm.MAGMORTAR],
+      pokemons: [Pkm.DRAGONITE, Pkm.MANECTRIC, Pkm.RAMPARDOS, Pkm.BASTIODON, Pkm.GARCHOMP, Pkm.ABOMASNOW, Pkm.MAGMORTAR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GRASS
     },
     MYSTERY_JUNGLE_01F_15F: {
       id: 'MYSTERY_JUNGLE_01F_15F',
       name: 'Mystery Jungle',
-      pokemons: [Pkm.MEW, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.EXEGGCUTE, Pkm.KOFFING, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
+      pokemons: [Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.WALL_ALT_3, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GRASS
     },
     MYSTERY_JUNGLE_16F_30F: {
       id: 'MYSTERY_JUNGLE_16F_30F',
       name: 'Mystery Jungle',
-      pokemons: [Pkm.MEW, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.EXEGGCUTE, Pkm.KOFFING, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
+      pokemons: [Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GRASS
     },
     MYSTIFYING_FOREST: {
       id: 'MYSTIFYING_FOREST',
       name: 'Mystifying Forest',
-      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.EXEGGCUTE, Pkm.KOFFING, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
+      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GRASS
     },
     BEACH_CAVE: {
       id: 'BEACH_CAVE',
       name: 'Beach Cave',
-      pokemons: [Pkm.SHELLDER, Pkm.SHELLOS, Pkm.KABUTO, Pkm.CORSOLA],
+      pokemons: [Pkm.KABUTO],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.GROUND_ALT_4, HDR.WATER],
       type: Synergy.WATER
     },
     BOTTOMLESS_SEA: {
       id: 'BOTTOMLESS_SEA',
       name: 'Bottomless Sea',
-      pokemons: [Pkm.KYOGRE, Pkm.GYARADOS, Pkm.REMORAID, Pkm.KINGDRA, Pkm.WAILMER, Pkm.CLAMPERL, Pkm.FINNEON, Pkm.TENTACRUEL, Pkm.SLOWBRO, Pkm.HORSEA, Pkm.SEADRA, Pkm.STARMIE, Pkm.SLOWKING, Pkm.LAPRAS, Pkm.WAILORD],
+      pokemons: [Pkm.KYOGRE, Pkm.GYARADOS, Pkm.KINGDRA, Pkm.SLOWBRO, Pkm.HORSEA, Pkm.SEADRA, Pkm.SLOWKING, Pkm.LAPRAS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.WATER],
       type: Synergy.WATER
     },
     BRINE_CAVE: {
       id: 'BRINE_CAVE',
       name: 'Brine Cave',
-      pokemons: [Pkm.SEEL, Pkm.OMANYTE, Pkm.KINGLER, Pkm.PELIPPER, Pkm.GASTRODON, Pkm.TENTACOOL, Pkm.DEWGONG, Pkm.STARYU, Pkm.DRAGONAIR],
+      pokemons: [Pkm.OMANYTE, Pkm.DRAGONAIR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.WATER
     },
     CONCEALED_RUINS: {
       id: 'CONCEALED_RUINS',
       name: 'Concealed Ruins',
-      pokemons: [Pkm.PIDGEY, Pkm.VOLTORB, Pkm.POOCHYENA, Pkm.TAILOW, Pkm.LOUDRED, Pkm.NIDOQUEEN, Pkm.WEEZING, Pkm.MURKROW, Pkm.DELCATTY, Pkm.PIDGEOTTO, Pkm.SHUPPET, Pkm.ELECTRODE, Pkm.EXPLOUD, Pkm.RAIKOU, Pkm.PIDGEOT],
+      pokemons: [Pkm.PIDGEY, Pkm.LOUDRED, Pkm.NIDOQUEEN, Pkm.SHUPPET, Pkm.RAIKOU, Pkm.PIDGEOT],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.NORMAL
     },
     CRAGGY_COAST: {
       id: 'CRAGGY_COAST',
       name: 'Craggy Coast',
-      pokemons: [Pkm.SPHEAL, Pkm.KRABBY, Pkm.DRATINI, Pkm.WINGULL, Pkm.GASTRODON, Pkm.SEALEO],
+      pokemons: [Pkm.SPHEAL, Pkm.DRATINI, Pkm.SEALEO],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.WATER
     },
     CRYSTAL_CAVE_01F_05F: {
       id: 'CRYSTAL_CAVE_01F_05F',
       name: 'Crystal Cave',
-      pokemons: [Pkm.GRAVELER, Pkm.SEVIPER, Pkm.BELDUM, Pkm.WORMADAN, Pkm.RIOLU, Pkm.CRANIDOS, Pkm.DONPHAN, Pkm.SHIELDON, Pkm.GOLEM],
+      pokemons: [Pkm.GRAVELER, Pkm.BELDUM, Pkm.CRANIDOS, Pkm.SHIELDON, Pkm.GOLEM],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     CRYSTAL_CAVE_06F_11F: {
       id: 'CRYSTAL_CAVE_06F_11F',
       name: 'Crystal Cave',
-      pokemons: [Pkm.GRAVELER, Pkm.SEVIPER, Pkm.BELDUM, Pkm.WORMADAN, Pkm.RIOLU, Pkm.CRANIDOS, Pkm.DONPHAN, Pkm.SHIELDON, Pkm.GOLEM],
+      pokemons: [Pkm.GRAVELER, Pkm.BELDUM, Pkm.CRANIDOS, Pkm.SHIELDON, Pkm.GOLEM],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     CRYSTAL_CROSSING: {
       id: 'CRYSTAL_CROSSING',
       name: 'Crystal Crossing',
-      pokemons: [Pkm.FLOATZEL, Pkm.BAGON, Pkm.WORMADAN, Pkm.GLAMEOW, Pkm.ABSOL, Pkm.GLALIE, Pkm.FROSLASS, Pkm.AZELF],
+      pokemons: [Pkm.BAGON, Pkm.ABSOL, Pkm.GLALIE, Pkm.FROSLASS, Pkm.AZELF],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     DARK_CRATER: {
       id: 'DARK_CRATER',
       name: 'Dark Crater',
-      pokemons: [Pkm.CHARMANDER, Pkm.CYNDAQUIL, Pkm.HIPPOWDON, Pkm.NUMEL, Pkm.SLUGMA, Pkm.GROWLITHE, Pkm.PONYTA, Pkm.TORCHIC, Pkm.FLAREON, Pkm.COMBUSKEN, Pkm.RAPIDASH, Pkm.MEWTWO, Pkm.ARCANINE, Pkm.QUILAVA, Pkm.MAGCARGO],
+      pokemons: [Pkm.CHARMANDER, Pkm.CYNDAQUIL, Pkm.NUMEL, Pkm.GROWLITHE, Pkm.PONYTA, Pkm.TORCHIC, Pkm.FLAREON, Pkm.COMBUSKEN, Pkm.RAPIDASH, Pkm.MEWTWO, Pkm.ARCANINE, Pkm.QUILAVA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.FIRE
     },
     DEEP_DARK_CRATER: {
       id: 'DEEP_DARK_CRATER',
       name: 'Deep Dark Crater',
-      pokemons: [Pkm.CHARMELEON, Pkm.QUILAVA, Pkm.MONFERNO, Pkm.CAMERUPT, Pkm.COMBUSKEN, Pkm.ARCANINE, Pkm.RAPIDASH, Pkm.FLAREON, Pkm.MAGCARGO, Pkm.RHYPERIOR, Pkm.MAGMORTAR, Pkm.CHARIZARD, Pkm.TYPHLOSION, Pkm.INFERNAPE, Pkm.MISMAGIUS, Pkm.BLAZIKEN, Pkm.AGGRON, Pkm.ENTEI],
+      pokemons: [Pkm.CHARMELEON, Pkm.QUILAVA, Pkm.MONFERNO, Pkm.CAMERUPT, Pkm.COMBUSKEN, Pkm.ARCANINE, Pkm.RAPIDASH, Pkm.FLAREON, Pkm.RHYPERIOR, Pkm.MAGMORTAR, Pkm.CHARIZARD, Pkm.TYPHLOSION, Pkm.INFERNAPE, Pkm.BLAZIKEN, Pkm.AGGRON, Pkm.ENTEI],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.FIRE
     },
     DARK_HILL_01F_06F: {
       id: 'DARK_HILL_01F_06F',
       name: 'Dark Hill',
-      pokemons: [Pkm.GASTLY, Pkm.HAUNTER, Pkm.GENGAR, Pkm.BANETTE, Pkm.DUSCLOPS, Pkm.CLAYDOL, Pkm.MISMAGIUS, Pkm.GLISCOR, Pkm.MISDREAVUS],
+      pokemons: [Pkm.GASTLY, Pkm.HAUNTER, Pkm.GENGAR, Pkm.BANETTE, Pkm.DUSCLOPS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GHOST
     },
     DARK_HILL_07F_15F: {
       id: 'DARK_HILL_07F_15F',
       name: 'Dark Hill',
-      pokemons: [Pkm.GASTLY, Pkm.HAUNTER, Pkm.GENGAR, Pkm.BANETTE, Pkm.DUSCLOPS, Pkm.CLAYDOL, Pkm.MISMAGIUS, Pkm.GLISCOR, Pkm.MISDREAVUS],
+      pokemons: [Pkm.GASTLY, Pkm.HAUNTER, Pkm.GENGAR, Pkm.BANETTE, Pkm.DUSCLOPS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GHOST
     },
     DEEP_DUSK_FOREST_01F_06F: {
       id: 'DEEP_DUSK_FOREST_01F_06F',
       name: 'Deep Dusk Forest',
-      pokemons: [Pkm.VULPIX, Pkm.RHYDON, Pkm.STEELIX, Pkm.AGGRON, Pkm.LEAFEON, Pkm.HIPPOWDON],
+      pokemons: [Pkm.RHYDON, Pkm.STEELIX, Pkm.AGGRON, Pkm.LEAFEON],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     DEEP_DUSK_FOREST_07F_12F: {
       id: 'DEEP_DUSK_FOREST_07F_12F',
       name: 'Deep Dusk Forest',
-      pokemons: [Pkm.VULPIX, Pkm.RHYDON, Pkm.STEELIX, Pkm.AGGRON, Pkm.LEAFEON, Pkm.HIPPOWDON],
+      pokemons: [Pkm.RHYDON, Pkm.STEELIX, Pkm.AGGRON, Pkm.LEAFEON],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     DEEP_SEALED_RUIN: {
       id: 'DEEP_SEALED_RUIN',
       name: 'Deep Sealed Ruin',
-      pokemons: [Pkm.MUK, Pkm.FORETRESS, Pkm.SHELGON, Pkm.METANG, Pkm.TANGROWTH, Pkm.PROBOPASS],
+      pokemons: [Pkm.SHELGON, Pkm.METANG],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.METAL
     },
     DRENCHED_BLUFF: {
       id: 'DRENCHED_BLUFF',
       name: 'Drenched Bluff',
-      pokemons: [Pkm.LILEEP, Pkm.ANORITH, Pkm.SHELLOS, Pkm.CHINGLING],
+      pokemons: [Pkm.LILEEP, Pkm.ANORITH],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.WATER
     },
     DUSK_FOREST_01F_04F: {
       id: 'DUSK_FOREST_01F_04F',
       name: 'Dusk Forest',
-      pokemons: [Pkm.JUMPLUFF, Pkm.MOTHIM, Pkm.MISMAGIUS, Pkm.GABITE, Pkm.HAUNTER, Pkm.LICKITUNG, Pkm.CLAYDOL, Pkm.SALAMENCE, Pkm.MISMAGIUS, Pkm.HIPPOWDON, Pkm.RHYPERIOR, Pkm.DRIFLOON],
+      pokemons: [Pkm.JUMPLUFF, Pkm.GABITE, Pkm.HAUNTER, Pkm.SALAMENCE, Pkm.RHYPERIOR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GHOST
     },
     DUSK_FOREST_05F_08F: {
       id: 'DUSK_FOREST_05F_08F',
       name: 'Dusk Forest',
-      pokemons: [Pkm.JUMPLUFF, Pkm.MOTHIM, Pkm.MISMAGIUS, Pkm.GABITE, Pkm.HAUNTER, Pkm.LICKITUNG, Pkm.CLAYDOL, Pkm.SALAMENCE, Pkm.MISMAGIUS, Pkm.HIPPOWDON, Pkm.RHYPERIOR, Pkm.DRIFLOON],
+      pokemons: [Pkm.JUMPLUFF, Pkm.GABITE, Pkm.HAUNTER, Pkm.SALAMENCE, Pkm.RHYPERIOR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GHOST
     },
     NORTHERN_DESERT_01F_07F: {
       id: 'NORTHERN_DESERT_01F_07F',
       name: 'Northern Desert',
-      pokemons: [Pkm.BALTOY, Pkm.CUBONE, Pkm.ARON, Pkm.CACNEA, Pkm.LARVITAR, Pkm.SANDSHREW, Pkm.TRAPINCH, Pkm.CARNIVINE, Pkm.RHYHORN, Pkm.LAIRON, Pkm.CACTURNE],
+      pokemons: [Pkm.CUBONE, Pkm.ARON, Pkm.CACNEA, Pkm.LARVITAR, Pkm.TRAPINCH, Pkm.RHYHORN, Pkm.LAIRON, Pkm.CACTURNE],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     QUICKSAND_CAVE: {
       id: 'QUICKSAND_CAVE',
       name: 'Quicksand Cave',
-      pokemons: [Pkm.NINCADA, Pkm.VIBRAVA, Pkm.PUPITAR, Pkm.SKORUPI, Pkm.SANDSLASH, Pkm.MAWILE],
+      pokemons: [Pkm.NINCADA, Pkm.VIBRAVA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     QUICKSAND_PIT: {
       id: 'QUICKSAND_PIT',
       name: 'Quicksand Pit',
-      pokemons: [Pkm.MESPRIT, Pkm.PUPITAR, Pkm.SKORUPI, Pkm.MAWILE, Pkm.SANDSLASH, Pkm.TYRANITAR, Pkm.HIPPOPOTAS, Pkm.NINJASK],
+      pokemons: [Pkm.MESPRIT, Pkm.TYRANITAR, Pkm.NINJASK],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     ROCK_AEGIS_CAVE: {
       id: 'ROCK_AEGIS_CAVE',
       name: 'Rock Aegis Cave',
-      pokemons: [Pkm.ZUBAT, Pkm.GOLBAT, Pkm.UNOWN, Pkm.MACHOKE, Pkm.MACHAMP, Pkm.REGIROCK],
+      pokemons: [Pkm.ZUBAT, Pkm.GOLBAT, Pkm.MACHOKE, Pkm.MACHAMP, Pkm.REGIROCK],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.MINERAL
     },
     SURROUNDED_SEA: {
       id: 'SURROUNDED_SEA',
       name: 'Surrounded Sea',
-      pokemons: [Pkm.SHELLDER, Pkm.CARVANHA, Pkm.WAILMER, Pkm.SLOWBRO, Pkm.TENTACRUEL, Pkm.STARMIE, Pkm.QWILFISH, Pkm.HORSEA, Pkm.SEADRA, Pkm.SLOWKING, Pkm.REMORAID, Pkm.OCTIRELLY, Pkm.KINGDRA, Pkm.CLAMPERL, Pkm.FINNEON, Pkm.LAPRAS, Pkm.WAILORD, Pkm.LUGIA],
+      pokemons: [Pkm.CARVANHA, Pkm.SLOWBRO, Pkm.HORSEA, Pkm.SEADRA, Pkm.SLOWKING, Pkm.KINGDRA, Pkm.LAPRAS, Pkm.LUGIA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.WATER],
       type: Synergy.WATER
     },
     TEMPORAL_SPIRE: {
       id: 'TEMPORAL_SPIRE',
       name: 'Temporal Spire',
-      pokemons: [Pkm.DIALGA, Pkm.DEOXYS, Pkm.BRONZONG, Pkm.PORYGON, Pkm.SALAMENCE, Pkm.PORYGON_Z, Pkm.METAGROSS],
+      pokemons: [Pkm.DIALGA, Pkm.DEOXYS, Pkm.PORYGON, Pkm.SALAMENCE, Pkm.PORYGON_Z, Pkm.METAGROSS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.METAL
     },
     TEMPORAL_TOWER: {
       id: 'TEMPORAL_TOWER',
       name: 'Temporal Tower',
-      pokemons: [Pkm.PORYGON, Pkm.LUNATONE, Pkm.SOLROCK, Pkm.BRONZOR],
+      pokemons: [Pkm.PORYGON],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     TEST_DUNGEON: {
       id: 'TEST_DUNGEON',
       name: 'Test Dungeon',
-      pokemons: [Pkm.PORYGON, Pkm.UNOWN],
+      pokemons: [Pkm.PORYGON],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.GROUND, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     THE_NIGHTMARE: {
       id: 'THE_NIGHTMARE',
       name: 'The Nightmare',
-      pokemons: [Pkm.SPOINK, Pkm.CLEFFA, Pkm.CLEFAIRY, Pkm.JIGGLYPUFF, Pkm.WYNAUT, Pkm.SPINDA, Pkm.LICKITUNG, Pkm.ESPEON, Pkm.WOOBUFFET, Pkm.MILTANK, Pkm.BLISSEY, Pkm.WHISMUR, Pkm.SKITTY, Pkm.PERSIAN, Pkm.IGGLYBUFF, Pkm.CLEFABLE, Pkm.WIGGLYTUFF, Pkm.CHANSEY],
+      pokemons: [Pkm.CLEFFA, Pkm.CLEFAIRY, Pkm.JIGGLYPUFF, Pkm.ESPEON, Pkm.WHISMUR, Pkm.PERSIAN, Pkm.IGGLYBUFF, Pkm.CLEFABLE, Pkm.WIGGLYTUFF],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.NORMAL
     },
     TINY_MEADOW: {
       id: 'TINY_MEADOW',
       name: 'Tiny Meadow',
-      pokemons: [Pkm.SKIPLOOM, Pkm.BRELOOM, Pkm.STARAVIA],
+      pokemons: [Pkm.SKIPLOOM, Pkm.STARAVIA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GRASS
     },
     TREESHROUD_FOREST_01F_08F: {
       id: 'TREESHROUD_FOREST_01F_08F',
       name: 'Treeshroud Forest',
-      pokemons: [Pkm.KADABRA, Pkm.RALTS, Pkm.CHERIM, Pkm.HOUNDOOM, Pkm.NINETALES, Pkm.ALAKAZAM, Pkm.KIRLIA, Pkm.VESPIQUEEN],
+      pokemons: [Pkm.KADABRA, Pkm.RALTS, Pkm.ALAKAZAM, Pkm.KIRLIA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     TREESHROUD_FOREST_09F_21F: {
       id: 'TREESHROUD_FOREST_09F_21F',
       name: 'Treeshroud Forest',
-      pokemons: [Pkm.KADABRA, Pkm.RALTS, Pkm.CHERIM, Pkm.HOUNDOOM, Pkm.NINETALES, Pkm.ALAKAZAM, Pkm.KIRLIA, Pkm.VESPIQUEEN],
+      pokemons: [Pkm.KADABRA, Pkm.RALTS, Pkm.ALAKAZAM, Pkm.KIRLIA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     STEAM_CAVE: {
       id: 'STEAM_CAVE',
       name: 'Steam Cave',
-      pokemons: [Pkm.SNUBULL, Pkm.SLUGMA, Pkm.MAGBY, Pkm.NUMEL, Pkm.FARFETCH, Pkm.YANMEGA, Pkm.KRICKETUNE],
+      pokemons: [Pkm.MAGBY, Pkm.NUMEL],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.FIRE
     },
     QUICKSAND_PIT_2: {
       id: 'QUICKSAND_PIT_2',
       name: 'Quicksand Pit',
-      pokemons: [Pkm.MESPRIT, Pkm.PUPITAR, Pkm.SKORUPI, Pkm.MAWILE, Pkm.SANDSLASH, Pkm.TYRANITAR, Pkm.HIPPOPOTAS, Pkm.NINJASK],
+      pokemons: [Pkm.MESPRIT, Pkm.TYRANITAR, Pkm.NINJASK],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     LOWER_BRINE_CAVE: {
       id: 'LOWER_BRINE_CAVE',
       name: 'Lower Brine Cave',
-      pokemons: [Pkm.WALREIN, Pkm.DRAGONAIR, Pkm.STARYU, Pkm.TENTACOOL, Pkm.DEWGONG, Pkm.GASTRODON],
+      pokemons: [Pkm.WALREIN, Pkm.DRAGONAIR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.WATER
     },
     HIDDEN_LAND: {
       id: 'HIDDEN_LAND',
       name: 'Hidden land',
-      pokemons: [Pkm.DRAGONITE, Pkm.MANECTRIC, Pkm.TROPIUS, Pkm.RAMPARDOS, Pkm.BASTIODON, Pkm.PURUGLY, Pkm.GARCHOMP, Pkm.ABOMASNOW, Pkm.MAGMORTAR],
+      pokemons: [Pkm.DRAGONITE, Pkm.MANECTRIC, Pkm.RAMPARDOS, Pkm.BASTIODON, Pkm.GARCHOMP, Pkm.ABOMASNOW, Pkm.MAGMORTAR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GRASS
     },
     TEMPORAL_TOWER_2: {
       id: 'TEMPORAL_TOWER_2',
       name: 'Temporal Tower',
-      pokemons: [Pkm.PORYGON, Pkm.LUNATONE, Pkm.SOLROCK, Pkm.BRONZOR],
+      pokemons: [Pkm.PORYGON],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     CRYSTAL_CAVE_2: {
       id: 'CRYSTAL_CAVE_2',
       name: 'Crystal Cave',
-      pokemons: [Pkm.GRAVELER, Pkm.SEVIPER, Pkm.BELDUM, Pkm.WORMADAN, Pkm.RIOLU, Pkm.CRANIDOS, Pkm.DONPHAN, Pkm.SHIELDON, Pkm.GOLEM],
+      pokemons: [Pkm.GRAVELER, Pkm.BELDUM, Pkm.CRANIDOS, Pkm.SHIELDON, Pkm.GOLEM],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.GROUND
     },
     WATERFALL_CAVE: {
       id: 'WATERFALL_CAVE',
       name: 'Waterfall Cave',
-      pokemons: [Pkm.PSYDUCK, Pkm.POLIWAG, Pkm.GRIMER, Pkm.TANGELA, Pkm.WOOPER, Pkm.LOTAD, Pkm.SURSKIT, Pkm.BARBOACH, Pkm.WHISCASH],
+      pokemons: [Pkm.POLIWAG, Pkm.LOTAD],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.WATER
     },
     WORLD_ABYSS: {
       id: 'WORLD_ABYSS',
       name: 'World Abyss',
-      pokemons: [Pkm.GIRATINA, Pkm.TAILOW, Pkm.PIDGEY, Pkm.MURKROW, Pkm.VOLTORB, Pkm.POOCHYENA, Pkm.LOUDRED, Pkm.PIDGEOTTO, Pkm.NIDOQUEEN, Pkm.ELECTRODE, Pkm.WEEZING, Pkm.UMBREON, Pkm.DELCATTY, Pkm.SWELLOW, Pkm.EXPLOUD, Pkm.MIGHTYENA, Pkm.PIDGEOT],
+      pokemons: [Pkm.GIRATINA, Pkm.PIDGEY, Pkm.LOUDRED, Pkm.NIDOQUEEN, Pkm.UMBREON, Pkm.PIDGEOT],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.NORMAL
     },
     ZERO_ISLE_EAST_15F_25F: {
       id: 'ZERO_ISLE_EAST_15F_25F',
       name: 'Zero Isle East',
-      pokemons: [Pkm.DEWGONG, Pkm.SHELLDER, Pkm.CORSOLA, Pkm.KABUTO, Pkm.AZUMARILL, Pkm.SLOWPOKE, Pkm.YANMA, Pkm.TENTACRUEL, Pkm.VOLTORB, Pkm.SPEAROW, Pkm.SEEDOT, Pkm.GOLBAT, Pkm.HOOTHOOT, Pkm.WYNAUT, Pkm.HOUNDOUR, Pkm.WAILMER, Pkm.MAGNETON, Pkm.BEEDRILL, Pkm.VULPIX, Pkm.FERALIGATR, Pkm.SPINARAK, Pkm.SLUGMA, Pkm.CHANSEY, Pkm.KRABBY, Pkm.MAGMAR],
+      pokemons: [Pkm.KABUTO, Pkm.AZUMARILL, Pkm.SLOWPOKE, Pkm.SPEAROW, Pkm.SEEDOT, Pkm.GOLBAT, Pkm.HOUNDOUR, Pkm.MAGNETON, Pkm.BEEDRILL, Pkm.FERALIGATR, Pkm.MAGMAR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.WATER
     },
     ZERO_ISLE_EAST_26F_40F: {
       id: 'ZERO_ISLE_EAST_26F_40F',
       name: 'Zero Isle East',
-      pokemons: [Pkm.DEWGONG, Pkm.SHELLDER, Pkm.CORSOLA, Pkm.KABUTO, Pkm.AZUMARILL, Pkm.SLOWPOKE, Pkm.YANMA, Pkm.TENTACRUEL, Pkm.VOLTORB, Pkm.SPEAROW, Pkm.SEEDOT, Pkm.GOLBAT, Pkm.HOOTHOOT, Pkm.WYNAUT, Pkm.HOUNDOUR, Pkm.WAILMER, Pkm.MAGNETON, Pkm.BEEDRILL, Pkm.VULPIX, Pkm.FERALIGATR, Pkm.SPINARAK, Pkm.SLUGMA, Pkm.CHANSEY, Pkm.KRABBY, Pkm.MAGMAR],
+      pokemons: [Pkm.KABUTO, Pkm.AZUMARILL, Pkm.SLOWPOKE, Pkm.SPEAROW, Pkm.SEEDOT, Pkm.GOLBAT, Pkm.HOUNDOUR, Pkm.MAGNETON, Pkm.BEEDRILL, Pkm.FERALIGATR, Pkm.MAGMAR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.WATER
     },
     ZERO_ISLE_SOUTH_01F_03F: {
       id: 'ZERO_ISLE_SOUTH_01F_03F',
       name: 'Zero Isle South',
-      pokemons: [Pkm.PIDGEY, Pkm.JIGGLYPUFF, Pkm.SHELLDER, Pkm.SEADRA, Pkm.STARYU, Pkm.STARMIE, Pkm.CHINGLING, Pkm.CLEFFA, Pkm.BELLSPROUT, Pkm.EXEGGCUTE, Pkm.CHINCHOU, Pkm.POOCHYENA, Pkm.NIDORANM, Pkm.LARVITAR, Pkm.RATTATA, Pkm.TOGEPI, Pkm.EEVEE, Pkm.RALTS, Pkm.BALTOY],
+      pokemons: [Pkm.PIDGEY, Pkm.JIGGLYPUFF, Pkm.SEADRA, Pkm.CLEFFA, Pkm.BELLSPROUT, Pkm.NIDORANM, Pkm.LARVITAR, Pkm.RATTATA, Pkm.TOGEPI, Pkm.EEVEE, Pkm.RALTS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.NORMAL
     },
     ZERO_ISLE_SOUTH_04F_08F: {
       id: 'ZERO_ISLE_SOUTH_04F_08F',
       name: 'Zero Isle East',
-      pokemons: [Pkm.PIDGEY, Pkm.JIGGLYPUFF, Pkm.SHELLDER, Pkm.SEADRA, Pkm.STARYU, Pkm.STARMIE, Pkm.CHINGLING, Pkm.CLEFFA, Pkm.BELLSPROUT, Pkm.EXEGGCUTE, Pkm.CHINCHOU, Pkm.POOCHYENA, Pkm.NIDORANM, Pkm.LARVITAR, Pkm.RATTATA, Pkm.TOGEPI, Pkm.EEVEE, Pkm.RALTS, Pkm.BALTOY],
+      pokemons: [Pkm.PIDGEY, Pkm.JIGGLYPUFF, Pkm.SEADRA, Pkm.CLEFFA, Pkm.BELLSPROUT, Pkm.NIDORANM, Pkm.LARVITAR, Pkm.RATTATA, Pkm.TOGEPI, Pkm.EEVEE, Pkm.RALTS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.NORMAL
     },
     BURIED_RELIC_1F_20F: {
       id: 'BURIED_RELIC_1F_20F',
       name: 'Buried Relic',
-      pokemons: [Pkm.GOLBAT, Pkm.SNEASEL, Pkm.WYNAUT, Pkm.RATICATE, Pkm.MACHOP, Pkm.WHISMUR, Pkm.HOOTHOOT, Pkm.PORYGON, Pkm.PORYGON_2, Pkm.ARON, Pkm.REGIROCK, Pkm.GEODUDE, Pkm.REGISTEEL, Pkm.REGICE, Pkm.KADABRA, Pkm.MEW, Pkm.SHEDNINJA, Pkm.SANDSHREW, Pkm.MAWILE, Pkm.GRAVELER, Pkm.HAUNTER, Pkm.GOLEM],
+      pokemons: [Pkm.GOLBAT, Pkm.RATICATE, Pkm.MACHOP, Pkm.WHISMUR, Pkm.PORYGON, Pkm.PORYGON_2, Pkm.ARON, Pkm.REGIROCK, Pkm.GEODUDE, Pkm.REGISTEEL, Pkm.REGICE, Pkm.KADABRA, Pkm.SHEDNINJA, Pkm.GRAVELER, Pkm.HAUNTER, Pkm.GOLEM],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.NORMAL
     },
     BURIED_RELIC_21F_50F: {
       id: 'BURIED_RELIC_21F_50F',
       name: 'Buried Relic',
-      pokemons: [Pkm.GOLBAT, Pkm.SNEASEL, Pkm.WYNAUT, Pkm.RATICATE, Pkm.MACHOP, Pkm.WHISMUR, Pkm.HOOTHOOT, Pkm.PORYGON, Pkm.PORYGON_2, Pkm.ARON, Pkm.REGIROCK, Pkm.GEODUDE, Pkm.REGISTEEL, Pkm.REGICE, Pkm.KADABRA, Pkm.MEW, Pkm.SHEDNINJA, Pkm.SANDSHREW, Pkm.MAWILE, Pkm.GRAVELER, Pkm.HAUNTER, Pkm.GOLEM],
+      pokemons: [Pkm.GOLBAT, Pkm.RATICATE, Pkm.MACHOP, Pkm.WHISMUR, Pkm.PORYGON, Pkm.PORYGON_2, Pkm.ARON, Pkm.REGIROCK, Pkm.GEODUDE, Pkm.REGISTEEL, Pkm.REGICE, Pkm.KADABRA, Pkm.SHEDNINJA, Pkm.GRAVELER, Pkm.HAUNTER, Pkm.GOLEM],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     BURIED_RELIC_51F_99F: {
       id: 'BURIED_RELIC_51F_99F',
       name: 'Buried Relic',
-      pokemons: [Pkm.GOLBAT, Pkm.SNEASEL, Pkm.WYNAUT, Pkm.RATICATE, Pkm.MACHOP, Pkm.WHISMUR, Pkm.HOOTHOOT, Pkm.PORYGON, Pkm.PORYGON_2, Pkm.ARON, Pkm.REGIROCK, Pkm.GEODUDE, Pkm.REGISTEEL, Pkm.REGICE, Pkm.KADABRA, Pkm.MEW, Pkm.SHEDNINJA, Pkm.SANDSHREW, Pkm.MAWILE, Pkm.GRAVELER, Pkm.HAUNTER, Pkm.GOLEM],
+      pokemons: [Pkm.GOLBAT, Pkm.RATICATE, Pkm.MACHOP, Pkm.WHISMUR, Pkm.PORYGON, Pkm.PORYGON_2, Pkm.ARON, Pkm.REGIROCK, Pkm.GEODUDE, Pkm.REGISTEEL, Pkm.REGICE, Pkm.KADABRA, Pkm.SHEDNINJA, Pkm.GRAVELER, Pkm.HAUNTER, Pkm.GOLEM],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     DARKNIGHT_RELIC: {
       id: 'DARKNIGHT_RELIC',
       name: 'Darknight Relic',
-      pokemons: [Pkm.SHUPPET, Pkm.GASTLY, Pkm.MISDREAVUS, Pkm.SHEDNINJA, Pkm.SABLEYE, Pkm.BANETTE, Pkm.HAUNTER, Pkm.DUSKULL, Pkm.GENGAR],
+      pokemons: [Pkm.SHUPPET, Pkm.GASTLY, Pkm.SHEDNINJA, Pkm.BANETTE, Pkm.HAUNTER, Pkm.DUSKULL, Pkm.GENGAR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.GHOST
     },
     SHIMMER_DESERT: {
       id: 'SHIMMER_DESERT',
       name: 'Shimmer Desert',
-      pokemons: [Pkm.EKANS, Pkm.ARBOK, Pkm.SANDSHREW, Pkm.SANDSLASH, Pkm.NIDOKING, Pkm.DIGLETT, Pkm.DUGTRIO, Pkm.SUDOWOODO, Pkm.GARCHOMP, Pkm.RHYPERIOR, Pkm.GROUDON],
+      pokemons: [Pkm.NIDOKING, Pkm.GARCHOMP, Pkm.RHYPERIOR, Pkm.GROUDON],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     UNOWN_RELIC: {
       id: 'UNOWN_RELIC',
       name: 'Unown Relic',
-      pokemons: [Pkm.UNOWN],
+      pokemons: [],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     FROSTY_FOREST: {
       id: 'FROSTY_FOREST',
       name: 'Frosty Forest',
-      pokemons: [Pkm.AZURILL, Pkm.FURRET, Pkm.NOSEPASS, Pkm.PILOSWINE, Pkm.MIGHTYENA, Pkm.LAIRON, Pkm.SNORUNT, Pkm.ARTICUNO],
+      pokemons: [Pkm.AZURILL, Pkm.PILOSWINE, Pkm.LAIRON, Pkm.SNORUNT, Pkm.ARTICUNO],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.ICE
     },
     GREAT_CANYON: {
       id: 'GREAT_CANYON',
       name: 'Great Canyon',
-      pokemons: [Pkm.SKIPLOOM, Pkm.DUNSPARCE, Pkm.PHANPY, Pkm.DODUO, Pkm.VILEPLUME, Pkm.BRELOOM, Pkm.MURKROW, Pkm.CACTURNE, Pkm.NOCTOWL, Pkm.ARIADOS, Pkm.TAUROS, Pkm.HOUNDOOM],
+      pokemons: [Pkm.SKIPLOOM, Pkm.VILEPLUME, Pkm.CACTURNE],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.NORMAL
     },
     HOWLING_FOREST_01F_06F: {
       id: 'HOWLING_FOREST_01F_06F',
       name: 'Howling Forest',
-      pokemons: [Pkm.AZURILL, Pkm.HOUNDOUR, Pkm.POOCHYENA, Pkm.WHISMUR, Pkm.SPOINK, Pkm.FURRET, Pkm.PIDGEY, Pkm.LOUDRED, Pkm.HOUNDOOM, Pkm.MIGHTYENA, Pkm.GRUMPIG, Pkm.SNORLAX, Pkm.EXEGGCUTE],
+      pokemons: [Pkm.AZURILL, Pkm.HOUNDOUR, Pkm.WHISMUR, Pkm.PIDGEY, Pkm.LOUDRED, Pkm.SNORLAX],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.NORMAL
     },
     HOWLING_FOREST_07F_15F: {
       id: 'HOWLING_FOREST_07F_15F',
       name: 'Howling Forest',
-      pokemons: [Pkm.AZURILL, Pkm.HOUNDOUR, Pkm.POOCHYENA, Pkm.WHISMUR, Pkm.SPOINK, Pkm.FURRET, Pkm.PIDGEY, Pkm.LOUDRED, Pkm.HOUNDOOM, Pkm.MIGHTYENA, Pkm.GRUMPIG, Pkm.SNORLAX, Pkm.EXEGGCUTE],
+      pokemons: [Pkm.AZURILL, Pkm.HOUNDOUR, Pkm.WHISMUR, Pkm.PIDGEY, Pkm.LOUDRED, Pkm.SNORLAX],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.NORMAL
     },
     MT_FARAWAY: {
       id: 'MT_FARAWAY',
       name: 'Mt Faraway',
-      pokemons: [Pkm.LUNATONE, Pkm.SNORUNT, Pkm.SOLROCK, Pkm.AZUMARILL, Pkm.GOLEM, Pkm.MARSHTOMP, Pkm.VIGOROTH, Pkm.GRANBULL, Pkm.WEEZING, Pkm.DUGTRIO, Pkm.GLALIE, Pkm.HO_OH],
+      pokemons: [Pkm.SNORUNT, Pkm.AZUMARILL, Pkm.GOLEM, Pkm.MARSHTOMP, Pkm.VIGOROTH, Pkm.GLALIE, Pkm.HO_OH],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.ICE
     },
     MT_FARAWAY_10F_20F: {
       id: 'MT_FARAWAY_10F_20F',
       name: 'Mt Faraway',
-      pokemons: [Pkm.LUNATONE, Pkm.SNORUNT, Pkm.SOLROCK, Pkm.AZUMARILL, Pkm.GOLEM, Pkm.MARSHTOMP, Pkm.VIGOROTH, Pkm.GRANBULL, Pkm.WEEZING, Pkm.DUGTRIO, Pkm.GLALIE, Pkm.HO_OH],
+      pokemons: [Pkm.SNORUNT, Pkm.AZUMARILL, Pkm.GOLEM, Pkm.MARSHTOMP, Pkm.VIGOROTH, Pkm.GLALIE, Pkm.HO_OH],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.ICE
     },
     MT_FARAWAY_30F_39F: {
       id: 'MT_FARAWAY_30F_39F',
       name: 'Mt Faraway',
-      pokemons: [Pkm.LUNATONE, Pkm.SNORUNT, Pkm.SOLROCK, Pkm.AZUMARILL, Pkm.GOLEM, Pkm.MARSHTOMP, Pkm.VIGOROTH, Pkm.GRANBULL, Pkm.WEEZING, Pkm.DUGTRIO, Pkm.GLALIE, Pkm.HO_OH],
+      pokemons: [Pkm.SNORUNT, Pkm.AZUMARILL, Pkm.GOLEM, Pkm.MARSHTOMP, Pkm.VIGOROTH, Pkm.GLALIE, Pkm.HO_OH],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.ICE
     },
     JOYOUS_TOWER: {
       id: 'JOYOUS_TOWER',
       name: 'Joyous Tower',
-      pokemons: [Pkm.JIGGLYPUFF, Pkm.TREECKO, Pkm.BULBASAUR, Pkm.TAILOW, Pkm.PICHU, Pkm.DIGLETT, Pkm.SPINDA, Pkm.PLUSLE, Pkm.MINUN, Pkm.METAPOD, Pkm.CHIKORITA, Pkm.PSYDUCK, Pkm.KAKUNA, Pkm.CLEFAIRY, Pkm.TORCHIC, Pkm.EEVEE, Pkm.CYNDAQUIL, Pkm.BELDUM, Pkm.SCYTHER, Pkm.SLAKOTH, Pkm.TRAPINCH, Pkm.CLEFABLE, Pkm.HOUNDOUR, Pkm.SPINARAK, Pkm.GARDEVOIR, Pkm.BELLOSSOM],
+      pokemons: [Pkm.JIGGLYPUFF, Pkm.TREECKO, Pkm.BULBASAUR, Pkm.PICHU, Pkm.METAPOD, Pkm.CHIKORITA, Pkm.KAKUNA, Pkm.CLEFAIRY, Pkm.TORCHIC, Pkm.EEVEE, Pkm.CYNDAQUIL, Pkm.BELDUM, Pkm.SCYTHER, Pkm.SLAKOTH, Pkm.TRAPINCH, Pkm.CLEFABLE, Pkm.HOUNDOUR, Pkm.GARDEVOIR, Pkm.BELLOSSOM],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.NORMAL
     },
     LAPIS_CAVE: {
       id: 'LAPIS_CAVE',
       name: 'Lapis Cave',
-      pokemons: [Pkm.ZUBAT, Pkm.NINCADA, Pkm.NIDORINA, Pkm.NIDORINO, Pkm.TANGELA, Pkm.BAGON, Pkm.GOLBAT],
+      pokemons: [Pkm.ZUBAT, Pkm.NINCADA, Pkm.NIDORINA, Pkm.NIDORINO, Pkm.BAGON, Pkm.GOLBAT],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.POISON
     },
     LIGHTNING_FIELD: {
       id: 'LIGHTNING_FIELD',
       name: 'Lightning Field',
-      pokemons: [Pkm.MAREEP, Pkm.ELECTRIKE, Pkm.MAGNEMITE, Pkm.PIKACHU, Pkm.FLAFFY, Pkm.PLUSLE, Pkm.MINUN, Pkm.JOLTEON, Pkm.CACTURNE, Pkm.ELECTRODE, Pkm.ELEKID, Pkm.MAGNETON, Pkm.AMPHAROS, Pkm.MANECTRIC, Pkm.RAICHU, Pkm.RAIKOU],
+      pokemons: [Pkm.MAREEP, Pkm.ELECTRIKE, Pkm.MAGNEMITE, Pkm.PIKACHU, Pkm.FLAFFY, Pkm.JOLTEON, Pkm.CACTURNE, Pkm.ELEKID, Pkm.MAGNETON, Pkm.AMPHAROS, Pkm.MANECTRIC, Pkm.RAICHU, Pkm.RAIKOU],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.ELECTRIC
     },
     MAGMA_CAVERN_08F_17F: {
       id: 'MAGMA_CAVERN_08F_17F',
       name: 'Magma Cavern',
-      pokemons: [Pkm.RATICATE, Pkm.SANDSHREW, Pkm.NIDOQUEEN, Pkm.NIDOKING, Pkm.GRAVELER, Pkm.MAGMAR, Pkm.MAWILE, Pkm.ARBOK, Pkm.MAGCARGO, Pkm.SANDSLASH, Pkm.GOLEM, Pkm.GRIMER, Pkm.ONIX],
+      pokemons: [Pkm.RATICATE, Pkm.NIDOQUEEN, Pkm.NIDOKING, Pkm.GRAVELER, Pkm.MAGMAR, Pkm.GOLEM, Pkm.ONIX],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.FIRE
     },
     MAGMA_CAVERN_18F_23F: {
       id: 'MAGMA_CAVERN_18F_23F',
       name: 'Magma Cavern',
-      pokemons: [Pkm.GROUDON, Pkm.RATICATE, Pkm.SANDSHREW, Pkm.NIDOQUEEN, Pkm.NIDOKING, Pkm.GRAVELER, Pkm.MAGMAR, Pkm.MAWILE, Pkm.ARBOK, Pkm.MAGCARGO, Pkm.SANDSLASH, Pkm.GOLEM, Pkm.GRIMER, Pkm.ONIX],
+      pokemons: [Pkm.GROUDON, Pkm.RATICATE, Pkm.NIDOQUEEN, Pkm.NIDOKING, Pkm.GRAVELER, Pkm.MAGMAR, Pkm.GOLEM, Pkm.ONIX],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.FIRE
     },
@@ -2119,84 +1355,84 @@ export const MAP = Object.freeze({
     MT_BLAZE: {
       id: 'MT_BLAZE',
       name: 'Mt Blaze',
-      pokemons: [Pkm.PIDGEOT, Pkm.MAGBY, Pkm.NUMEL, Pkm.SLUGMA, Pkm.RAPIDASH, Pkm.FEAROW, Pkm.ARCANINE, Pkm.MOLTRES],
+      pokemons: [Pkm.PIDGEOT, Pkm.MAGBY, Pkm.NUMEL, Pkm.RAPIDASH, Pkm.FEAROW, Pkm.ARCANINE, Pkm.MOLTRES],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.FIRE
     },
     MT_STEEL_01F_05F: {
       id: 'MT_STEEL_01F_05F',
       name: 'Mt Steel',
-      pokemons: [Pkm.SPEAROW, Pkm.BALTOY, Pkm.ZIGZAGOON, Pkm.ARON, Pkm.GEODUDE, Pkm.MEDITITE, Pkm.BELDUM],
+      pokemons: [Pkm.SPEAROW, Pkm.ARON, Pkm.GEODUDE, Pkm.MEDITITE, Pkm.BELDUM],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.METAL
     },
     MT_STEEL_06F_08F: {
       id: 'MT_STEEL_06F_08F',
       name: 'Mt Steel',
-      pokemons: [Pkm.SPEAROW, Pkm.BALTOY, Pkm.ZIGZAGOON, Pkm.ARON, Pkm.GEODUDE, Pkm.MEDITITE, Pkm.BELDUM],
+      pokemons: [Pkm.SPEAROW, Pkm.ARON, Pkm.GEODUDE, Pkm.MEDITITE, Pkm.BELDUM],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.METAL
     },
     MT_FREEZE: {
       id: 'MT_FREEZE',
       name: 'Mt Freeze',
-      pokemons: [Pkm.SWABLU, Pkm.SHELGON, Pkm.PUPITAR, Pkm.SEEL, Pkm.VIGOROTH, Pkm.SLAKING, Pkm.SEVIPER],
+      pokemons: [Pkm.SWABLU, Pkm.SHELGON, Pkm.VIGOROTH, Pkm.SLAKING],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.ICE
     },
     MT_THUNDER_PEAK: {
       id: 'MT_THUNDER_PEAK',
       name: 'Mt Thunder Peak',
-      pokemons: [Pkm.WEEDLE, Pkm.NIDORANM, Pkm.ELECTRIKE, Pkm.CACNEA, Pkm.PIDGEOTTO, Pkm.BEEDRILL, Pkm.ELECTABUZZ, Pkm.STANTLER, Pkm.AMPHAROS, Pkm.MANECTRIC, Pkm.GROWLITHE, Pkm.ZAPDOS],
+      pokemons: [Pkm.WEEDLE, Pkm.NIDORANM, Pkm.ELECTRIKE, Pkm.CACNEA, Pkm.BEEDRILL, Pkm.ELECTABUZZ, Pkm.AMPHAROS, Pkm.MANECTRIC, Pkm.GROWLITHE, Pkm.ZAPDOS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.ELECTRIC
     },
     MT_THUNDER: {
       id: 'MT_THUNDER',
       name: 'Mt Thunder',
-      pokemons: [Pkm.WEEDLE, Pkm.NIDORANM, Pkm.ELECTRIKE, Pkm.CACNEA, Pkm.PIDGEOTTO, Pkm.BEEDRILL, Pkm.ELECTABUZZ, Pkm.STANTLER, Pkm.AMPHAROS, Pkm.MANECTRIC, Pkm.GROWLITHE, Pkm.ZAPDOS],
+      pokemons: [Pkm.WEEDLE, Pkm.NIDORANM, Pkm.ELECTRIKE, Pkm.CACNEA, Pkm.BEEDRILL, Pkm.ELECTABUZZ, Pkm.AMPHAROS, Pkm.MANECTRIC, Pkm.GROWLITHE, Pkm.ZAPDOS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.ELECTRIC
     },
     MURKY_CAVE: {
       id: 'MURKY_CAVE',
       name: 'Murky Cave',
-      pokemons: [Pkm.ZUBAT, Pkm.SEVIPER, Pkm.GRIMER, Pkm.GOLBAT, Pkm.SHEDNINJA, Pkm.SHUPPET, Pkm.CROBAT, Pkm.MISDREAVUS, Pkm.MUK],
+      pokemons: [Pkm.ZUBAT, Pkm.GOLBAT, Pkm.SHEDNINJA, Pkm.SHUPPET, Pkm.CROBAT],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.POISON
     },
     NORMAL_MAZE: {
       id: 'NORMAL_MAZE',
       name: 'Normal Maze',
-      pokemons: [Pkm.RATICATE, Pkm.FARFETCH, Pkm.FURRET],
+      pokemons: [Pkm.RATICATE],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.NORMAL
     },
     NORTHERN_RANGE_01F_07F: {
       id: 'NORTHERN_RANGE_01F_07F',
       name: 'Northern Range',
-      pokemons: [Pkm.HOOTHOOT, Pkm.DODRIO, Pkm.NINJASK, Pkm.SPINARAK, Pkm.SWELLOW, Pkm.PIDGEOT, Pkm.FEAROW, Pkm.TOGETIC, Pkm.LATIOS, Pkm.SEVIPER],
+      pokemons: [Pkm.NINJASK, Pkm.PIDGEOT, Pkm.FEAROW, Pkm.TOGETIC, Pkm.LATIOS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.FLYING
     },
     NORTHERN_RANGE_08F_16F: {
       id: 'NORTHERN_RANGE_08F_16F',
       name: 'Northern Range',
-      pokemons: [Pkm.HOOTHOOT, Pkm.DODRIO, Pkm.NINJASK, Pkm.SPINARAK, Pkm.SWELLOW, Pkm.PIDGEOT, Pkm.FEAROW, Pkm.TOGETIC, Pkm.LATIOS, Pkm.SEVIPER],
+      pokemons: [Pkm.NINJASK, Pkm.PIDGEOT, Pkm.FEAROW, Pkm.TOGETIC, Pkm.LATIOS],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.FLYING
     },
     NORTHWIND_FIELD: {
       id: 'NORTHWIND_FIELD',
       name: 'Northwind Field',
-      pokemons: [Pkm.AZUMARILL, Pkm.DELCATTY, Pkm.VAPOREON, Pkm.POLIWHIRL, Pkm.MUK, Pkm.POLITOED, Pkm.ABSOL, Pkm.CROCONAW, Pkm.WARTORTLE, Pkm.SUICUNE],
+      pokemons: [Pkm.AZUMARILL, Pkm.VAPOREON, Pkm.POLIWHIRL, Pkm.POLITOED, Pkm.ABSOL, Pkm.CROCONAW, Pkm.WARTORTLE, Pkm.SUICUNE],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.WATER
     },
     PITFALL_VALLEY: {
       id: 'PITFALL_VALLEY',
       name: 'Pitfall Valley',
-      pokemons: [Pkm.PIDGEOT, Pkm.FARFETCH, Pkm.SWELLOW, Pkm.HOPPIP, Pkm.BUTTERFREE, Pkm.RATICATE, Pkm.DODUO, Pkm.SWABLU, Pkm.YANMA, Pkm.MASQUERAIN, Pkm.SKIPLOOM, Pkm.AERODACTYL],
+      pokemons: [Pkm.PIDGEOT, Pkm.HOPPIP, Pkm.BUTTERFREE, Pkm.RATICATE, Pkm.SWABLU, Pkm.SKIPLOOM, Pkm.AERODACTYL],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.FLYING
     },
@@ -2210,49 +1446,49 @@ export const MAP = Object.freeze({
     PURITY_FOREST_04F_07F: {
       id: 'PURITY_FOREST_04F_07F',
       name: 'Purity Forest',
-      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.EXEGGCUTE, Pkm.KOFFING, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
+      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.GRASS
     },
     PURITY_FOREST_13F_20F: {
       id: 'PURITY_FOREST_13F_20F',
       name: 'Purity Forest',
-      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.EXEGGCUTE, Pkm.KOFFING, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
+      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.GRASS
     },
     PURITY_FOREST_30F_43F: {
       id: 'PURITY_FOREST_30F_43F',
       name: 'Purity Forest',
-      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.EXEGGCUTE, Pkm.KOFFING, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
+      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.GRASS
     },
     PURITY_FOREST_44F_60F: {
       id: 'PURITY_FOREST_44F_60F',
       name: 'Purity Forest',
-      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.EXEGGCUTE, Pkm.KOFFING, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
+      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.GRASS
     },
     PURITY_FOREST_61F_79F: {
       id: 'PURITY_FOREST_61F_79F',
       name: 'Purity Forest',
-      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.EXEGGCUTE, Pkm.KOFFING, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
+      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.GRASS
     },
     PURITY_FOREST_80F_99F: {
       id: 'PURITY_FOREST_80F_99F',
       name: 'Purity Forest',
-      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.EXEGGCUTE, Pkm.KOFFING, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
+      pokemons: [Pkm.CELEBI, Pkm.DARKRAI, Pkm.BULBASAUR, Pkm.IVYSAUR, Pkm.VENUSAUR, Pkm.METAPOD, Pkm.RATTATA, Pkm.RATICATE, Pkm.SPEAROW, Pkm.NIDORANF, Pkm.NIDORANM, Pkm.VILEPLUME, Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL, Pkm.SCYTHER, Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM, Pkm.TREECKO, Pkm.GROVYLE, Pkm.SCEPTILE, Pkm.SEEDOT, Pkm.NUZLEAF, Pkm.ROSELIA, Pkm.FLYGON, Pkm.MUNCHLAX, Pkm.TURTWIG, Pkm.GROTLE, Pkm.TORTERRA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GRASS
     },
     RESCUE_TEAM_MAZE: {
       id: 'RESCUE_TEAM_MAZE',
       name: 'Rescue Team Maze',
-      pokemons: [Pkm.PIDGEY, Pkm.RATTATA, Pkm.VOLTORB, Pkm.EXEGGCUTE],
+      pokemons: [Pkm.PIDGEY, Pkm.RATTATA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.NORMAL
     },
@@ -2266,133 +1502,133 @@ export const MAP = Object.freeze({
     SILENT_CHASM: {
       id: 'SILENT_CHASM',
       name: 'Silent Chasm',
-      pokemons: [Pkm.FARFETCH, Pkm.WEEDLE, Pkm.YANMA, Pkm.GLOOM, Pkm.HOUNDOUR, Pkm.POLIWAG, Pkm.SPINARAK, Pkm.TRAPINCH, Pkm.BEEDRILL],
+      pokemons: [Pkm.WEEDLE, Pkm.GLOOM, Pkm.HOUNDOUR, Pkm.POLIWAG, Pkm.TRAPINCH, Pkm.BEEDRILL],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.BUG
     },
     SILVER_TRENCH: {
       id: 'SILVER_TRENCH',
       name: 'Silver Trench',
-      pokemons: [Pkm.LUGIA, Pkm.DEWGONG, Pkm.SHELLDER, Pkm.CORSOLA, Pkm.KABUTO, Pkm.AZUMARILL, Pkm.SLOWPOKE, Pkm.YANMA, Pkm.TENTACRUEL, Pkm.VOLTORB, Pkm.SPEAROW, Pkm.SEEDOT, Pkm.GOLBAT, Pkm.HOOTHOOT, Pkm.WYNAUT, Pkm.HOUNDOUR, Pkm.WAILMER, Pkm.MAGNETON, Pkm.BEEDRILL, Pkm.VULPIX, Pkm.FERALIGATR, Pkm.SPINARAK, Pkm.SLUGMA, Pkm.CHANSEY, Pkm.KRABBY, Pkm.MAGMAR],
+      pokemons: [Pkm.LUGIA, Pkm.KABUTO, Pkm.AZUMARILL, Pkm.SLOWPOKE, Pkm.SPEAROW, Pkm.SEEDOT, Pkm.GOLBAT, Pkm.HOUNDOUR, Pkm.MAGNETON, Pkm.BEEDRILL, Pkm.FERALIGATR, Pkm.MAGMAR],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.WATER],
       type: Synergy.WATER
     },
     SINISTER_WOODS: {
       id: 'SINISTER_WOODS',
       name: 'Sinister Woods',
-      pokemons: [Pkm.SWINUB, Pkm.ODDISH, Pkm.SUDOWOODO, Pkm.SENTRET, Pkm.SHROOMISH, Pkm.WOOPER, Pkm.SCYTHER, Pkm.HOOTHOOT, Pkm.SLAKOTH, Pkm.EKANS, Pkm.GENGAR, Pkm.MEDICHAM],
+      pokemons: [Pkm.SWINUB, Pkm.ODDISH, Pkm.SCYTHER, Pkm.SLAKOTH, Pkm.GENGAR, Pkm.MEDICHAM],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.BUG
     },
     SKY_TOWER: {
       id: 'SKY_TOWER',
       name: 'Sky Tower',
-      pokemons: [Pkm.SHEDNINJA, Pkm.SHUPPET, Pkm.LUNATONE, Pkm.RAYQUAZA, Pkm.DUSKULL, Pkm.KOFFING, Pkm.ALTARIA, Pkm.SOLROCK, Pkm.SCIZOR, Pkm.DUSCLOPS, Pkm.FLYGON, Pkm.TROPIUS],
+      pokemons: [Pkm.SHEDNINJA, Pkm.SHUPPET, Pkm.RAYQUAZA, Pkm.DUSKULL, Pkm.ALTARIA, Pkm.SCIZOR, Pkm.DUSCLOPS, Pkm.FLYGON],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.FLYING
     },
     SNOW_PATH: {
       id: 'SNOW_PATH',
       name: 'Snow Path',
-      pokemons: [Pkm.AZURILL, Pkm.FURRET, Pkm.NOSEPASS],
+      pokemons: [Pkm.AZURILL],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.ICE
     },
     SOLAR_CAVE: {
       id: 'SOLAR_CAVE',
       name: 'Solar Cave',
-      pokemons: [Pkm.WYNAUT, Pkm.GIRAFARIG, Pkm.BELDUM, Pkm.DROWZEE, Pkm.SPOINK, Pkm.ABRA, Pkm.MEDITITE, Pkm.LUNATONE, Pkm.METANG, Pkm.HYPNO, Pkm.KIRLIA, Pkm.KADABRA, Pkm.MEDICHAM, Pkm.GRUMPIG, Pkm.CLAYDOL],
+      pokemons: [Pkm.BELDUM, Pkm.ABRA, Pkm.MEDITITE, Pkm.METANG, Pkm.KIRLIA, Pkm.KADABRA, Pkm.MEDICHAM],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     SOUTHERN_CAVERN_01F_23F: {
       id: 'SOUTHERN_CAVERN_01F_23F',
       name: 'Southern Cavern',
-      pokemons: [Pkm.GEODUDE, Pkm.DIGLETT, Pkm.SEEDOT, Pkm.CUBONE, Pkm.NIDOKING, Pkm.PHANPY, Pkm.VIBRAVA, Pkm.BALTOY, Pkm.LARVITAR, Pkm.ARIADOS, Pkm.DUGTRIO, Pkm.MAROWAK, Pkm.GRAVELER, Pkm.RHYHORN, Pkm.FLYGON, Pkm.DONPHAN, Pkm.PUPITAR, Pkm.GOLEM, Pkm.ONIX, Pkm.RHYDON],
+      pokemons: [Pkm.GEODUDE, Pkm.SEEDOT, Pkm.CUBONE, Pkm.NIDOKING, Pkm.VIBRAVA, Pkm.LARVITAR, Pkm.MAROWAK, Pkm.GRAVELER, Pkm.RHYHORN, Pkm.FLYGON, Pkm.GOLEM, Pkm.ONIX, Pkm.RHYDON],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.GROUND
     },
     SOUTHERN_CAVERN_24F_50F: {
       id: 'SOUTHERN_CAVERN_24F_50F',
       name: 'Southern Cavern',
-      pokemons: [Pkm.GEODUDE, Pkm.DIGLETT, Pkm.SEEDOT, Pkm.CUBONE, Pkm.NIDOKING, Pkm.PHANPY, Pkm.VIBRAVA, Pkm.BALTOY, Pkm.LARVITAR, Pkm.ARIADOS, Pkm.DUGTRIO, Pkm.MAROWAK, Pkm.GRAVELER, Pkm.RHYHORN, Pkm.FLYGON, Pkm.DONPHAN, Pkm.PUPITAR, Pkm.GOLEM, Pkm.ONIX, Pkm.RHYDON],
+      pokemons: [Pkm.GEODUDE, Pkm.SEEDOT, Pkm.CUBONE, Pkm.NIDOKING, Pkm.VIBRAVA, Pkm.LARVITAR, Pkm.MAROWAK, Pkm.GRAVELER, Pkm.RHYHORN, Pkm.FLYGON, Pkm.GOLEM, Pkm.ONIX, Pkm.RHYDON],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.GROUND
     },
     STORMY_SEA_01F_16F: {
       id: 'STORMY_SEA_01F_16F',
       name: 'Stormy Sea',
-      pokemons: [Pkm.WINGULL, Pkm.TENTACRUEL, Pkm.TENTACOOL, Pkm.SHELLDER, Pkm.OMANYTE, Pkm.OMASTAR, Pkm.SLOWPOKE, Pkm.SPHEAL, Pkm.OMASTAR, Pkm.GRIMER, Pkm.KABUTOPS, Pkm.ARMALDO, Pkm.SEADRA, Pkm.STARMIE, Pkm.SEALEO, Pkm.KYOGRE, Pkm.CARVANHA],
+      pokemons: [Pkm.OMANYTE, Pkm.OMASTAR, Pkm.SLOWPOKE, Pkm.SPHEAL, Pkm.OMASTAR, Pkm.KABUTOPS, Pkm.ARMALDO, Pkm.SEADRA, Pkm.SEALEO, Pkm.KYOGRE, Pkm.CARVANHA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.WATER],
       type: Synergy.WATER
     },
     STORMY_SEA_16F_39F: {
       id: 'STORMY_SEA_16F_39F',
       name: 'Stormy Sea',
-      pokemons: [Pkm.WINGULL, Pkm.TENTACRUEL, Pkm.TENTACOOL, Pkm.SHELLDER, Pkm.OMANYTE, Pkm.OMASTAR, Pkm.SLOWPOKE, Pkm.SPHEAL, Pkm.OMASTAR, Pkm.GRIMER, Pkm.KABUTOPS, Pkm.ARMALDO, Pkm.SEADRA, Pkm.STARMIE, Pkm.SEALEO, Pkm.KYOGRE, Pkm.CARVANHA],
+      pokemons: [Pkm.OMANYTE, Pkm.OMASTAR, Pkm.SLOWPOKE, Pkm.SPHEAL, Pkm.OMASTAR, Pkm.KABUTOPS, Pkm.ARMALDO, Pkm.SEADRA, Pkm.SEALEO, Pkm.KYOGRE, Pkm.CARVANHA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.WATER],
       type: Synergy.WATER
     },
     THUNDERWAVE_CAVE: {
       id: 'THUNDERWAVE_CAVE',
       name: 'Thunderwave Cave',
-      pokemons: [Pkm.RATTATA, Pkm.NIDORANM, Pkm.POOCHYENA, Pkm.VOLTORB, Pkm.ELEKID, Pkm.PLUSLE, Pkm.MINUN],
+      pokemons: [Pkm.RATTATA, Pkm.NIDORANM, Pkm.ELEKID],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.ELECTRIC
     },
     TINY_WOODS: {
       id: 'TINY_WOODS',
       name: 'Tiny Woods',
-      pokemons: [Pkm.RATTATA, Pkm.RATTATA, Pkm.SANDSHREW, Pkm.SPINARAK],
+      pokemons: [Pkm.RATTATA, Pkm.RATTATA],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.NORMAL
     },
     UPROAR_FOREST: {
       id: 'UPROAR_FOREST',
       name: 'Uproar Forest',
-      pokemons: [Pkm.ROSELIA, Pkm.NUZLEAF, Pkm.LOTAD, Pkm.RATICATE, Pkm.GRIMER, Pkm.NOCTOWL, Pkm.KOFFING],
+      pokemons: [Pkm.ROSELIA, Pkm.NUZLEAF, Pkm.LOTAD, Pkm.RATICATE],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.WATER],
       type: Synergy.GRASS
     },
     SERENITY_RIVER: {
       id: 'SERENITY_RIVER',
       name: 'Serenity River',
-      pokemons: [Pkm.POLIWAG, Pkm.WOOPER, Pkm.LOTAD, Pkm.BARBOACH, Pkm.MASQUERAIN],
+      pokemons: [Pkm.POLIWAG, Pkm.LOTAD],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.WATER
     },
     WATERFALL_POND: {
       id: 'WATERFALL_POND',
       name: 'Waterfall Pond',
-      pokemons: [Pkm.MUDKIP, Pkm.LOTAD, Pkm.POLIWAG, Pkm.BARBOACH, Pkm.WOOPER, Pkm.TOTODILE, Pkm.SURSKIT, Pkm.MAGIKARP, Pkm.SQUIRTLE, Pkm.LOMBRE, Pkm.MARSHTOMP, Pkm.WHISCASH, Pkm.MASQUERAIN],
+      pokemons: [Pkm.MUDKIP, Pkm.LOTAD, Pkm.POLIWAG, Pkm.TOTODILE, Pkm.MAGIKARP, Pkm.SQUIRTLE, Pkm.LOMBRE, Pkm.MARSHTOMP],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.WATER
     },
     WESTERN_CAVE_B01F_B27F: {
       id: 'WESTERN_CAVE_B01F_B27F',
       name: 'Western Cave',
-      pokemons: [Pkm.MURKROW, Pkm.BUTTERFREE, Pkm.EKANS, Pkm.MEOWTH, Pkm.BELLOSSOM, Pkm.EXPLOUD, Pkm.IGGLYBUFF, Pkm.TAUROS, Pkm.MILTANK, Pkm.ESPEON, Pkm.IVYSAUR, Pkm.ARBOK, Pkm.AGGRON, Pkm.PERSIAN, Pkm.DODRIO, Pkm.BAYLEEF, Pkm.ALAKAZAM, Pkm.TYRANITAR, Pkm.SCEPTILE, Pkm.ARCANINE, Pkm.SWAMPERT, Pkm.MACHAMP, Pkm.STEELIX, Pkm.CHARIZARD, Pkm.BLASTOISE, Pkm.MEWTWO],
+      pokemons: [Pkm.BUTTERFREE, Pkm.MEOWTH, Pkm.BELLOSSOM, Pkm.IGGLYBUFF, Pkm.ESPEON, Pkm.IVYSAUR, Pkm.AGGRON, Pkm.PERSIAN, Pkm.BAYLEEF, Pkm.ALAKAZAM, Pkm.TYRANITAR, Pkm.SCEPTILE, Pkm.ARCANINE, Pkm.SWAMPERT, Pkm.MACHAMP, Pkm.STEELIX, Pkm.CHARIZARD, Pkm.BLASTOISE, Pkm.MEWTWO],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     WESTERN_CAVE_B28F_B39F: {
       id: 'WESTERN_CAVE_B28F_B39F',
       name: 'Western Cave',
-      pokemons: [Pkm.MURKROW, Pkm.BUTTERFREE, Pkm.EKANS, Pkm.MEOWTH, Pkm.BELLOSSOM, Pkm.EXPLOUD, Pkm.IGGLYBUFF, Pkm.TAUROS, Pkm.MILTANK, Pkm.ESPEON, Pkm.IVYSAUR, Pkm.ARBOK, Pkm.AGGRON, Pkm.PERSIAN, Pkm.DODRIO, Pkm.BAYLEEF, Pkm.ALAKAZAM, Pkm.TYRANITAR, Pkm.SCEPTILE, Pkm.ARCANINE, Pkm.SWAMPERT, Pkm.MACHAMP, Pkm.STEELIX, Pkm.CHARIZARD, Pkm.BLASTOISE, Pkm.MEWTWO],
+      pokemons: [Pkm.BUTTERFREE, Pkm.MEOWTH, Pkm.BELLOSSOM, Pkm.IGGLYBUFF, Pkm.ESPEON, Pkm.IVYSAUR, Pkm.AGGRON, Pkm.PERSIAN, Pkm.BAYLEEF, Pkm.ALAKAZAM, Pkm.TYRANITAR, Pkm.SCEPTILE, Pkm.ARCANINE, Pkm.SWAMPERT, Pkm.MACHAMP, Pkm.STEELIX, Pkm.CHARIZARD, Pkm.BLASTOISE, Pkm.MEWTWO],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     WISH_CAVE_01F_13F: {
       id: 'WISH_CAVE_01F_13F',
       name: 'Wish Cave',
-      pokemons: [Pkm.MURKROW, Pkm.BUTTERFREE, Pkm.EKANS, Pkm.MEOWTH, Pkm.BELLOSSOM, Pkm.EXPLOUD, Pkm.IGGLYBUFF, Pkm.TAUROS, Pkm.MILTANK, Pkm.ESPEON, Pkm.IVYSAUR, Pkm.ARBOK, Pkm.AGGRON, Pkm.PERSIAN, Pkm.DODRIO, Pkm.BAYLEEF, Pkm.ALAKAZAM, Pkm.TYRANITAR, Pkm.SCEPTILE, Pkm.ARCANINE, Pkm.SWAMPERT, Pkm.MACHAMP, Pkm.STEELIX, Pkm.CHARIZARD, Pkm.BLASTOISE, Pkm.JIRACHI],
+      pokemons: [Pkm.BUTTERFREE, Pkm.MEOWTH, Pkm.BELLOSSOM, Pkm.IGGLYBUFF, Pkm.ESPEON, Pkm.IVYSAUR, Pkm.AGGRON, Pkm.PERSIAN, Pkm.BAYLEEF, Pkm.ALAKAZAM, Pkm.TYRANITAR, Pkm.SCEPTILE, Pkm.ARCANINE, Pkm.SWAMPERT, Pkm.MACHAMP, Pkm.STEELIX, Pkm.CHARIZARD, Pkm.BLASTOISE, Pkm.JIRACHI],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.WATER],
       type: Synergy.PSYCHIC
     },
     WISH_CAVE_90F_99F: {
       id: 'WISH_CAVE_90F_99F',
       name: 'Wish Cave',
-      pokemons: [Pkm.MURKROW, Pkm.BUTTERFREE, Pkm.EKANS, Pkm.MEOWTH, Pkm.BELLOSSOM, Pkm.EXPLOUD, Pkm.IGGLYBUFF, Pkm.TAUROS, Pkm.MILTANK, Pkm.ESPEON, Pkm.IVYSAUR, Pkm.ARBOK, Pkm.AGGRON, Pkm.PERSIAN, Pkm.DODRIO, Pkm.BAYLEEF, Pkm.ALAKAZAM, Pkm.TYRANITAR, Pkm.SCEPTILE, Pkm.ARCANINE, Pkm.SWAMPERT, Pkm.MACHAMP, Pkm.STEELIX, Pkm.CHARIZARD, Pkm.BLASTOISE, Pkm.JIRACHI],
+      pokemons: [Pkm.BUTTERFREE, Pkm.MEOWTH, Pkm.BELLOSSOM, Pkm.IGGLYBUFF, Pkm.ESPEON, Pkm.IVYSAUR, Pkm.AGGRON, Pkm.PERSIAN, Pkm.BAYLEEF, Pkm.ALAKAZAM, Pkm.TYRANITAR, Pkm.SCEPTILE, Pkm.ARCANINE, Pkm.SWAMPERT, Pkm.MACHAMP, Pkm.STEELIX, Pkm.CHARIZARD, Pkm.BLASTOISE, Pkm.JIRACHI],
       tileset: [HDR.WALL, HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.GROUND, HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.WATER],
       type: Synergy.PSYCHIC
     },
@@ -2529,55 +1765,55 @@ export const ID_TABLE = {
 export const NEUTRAL_STAGE = [
   {
     turn: 1,
-    avatar: `${PokemonIndex[Pkm.MAGIKARP].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.MAGIKARP].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 2,
-    avatar: `${PokemonIndex[Pkm.RATICATE].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.RATICATE].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 3,
-    avatar: `${PokemonIndex[Pkm.FEAROW].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.FEAROW].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 10,
-    avatar: `${PokemonIndex[Pkm.GYARADOS].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.GYARADOS].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 15,
-    avatar: `${PokemonIndex[Pkm.LUGIA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.LUGIA].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 20,
-    avatar: `${PokemonIndex[Pkm.GIRATINA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.GIRATINA].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 25,
-    avatar: `${PokemonIndex[Pkm.ZAPDOS].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.ZAPDOS].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 30,
-    avatar: `${PokemonIndex[Pkm.DIALGA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.DIALGA].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 35,
-    avatar: `${PokemonIndex[Pkm.SUICUNE].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.SUICUNE].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 40,
-    avatar: `${PokemonIndex[Pkm.REGICE].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.REGICE].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 45,
-    avatar: `${PokemonIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 50,
-    avatar: `${PokemonIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
   },
   {
     turn: 55,
-    avatar: `${PokemonIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
   }];
 
 

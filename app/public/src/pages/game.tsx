@@ -33,13 +33,13 @@ export default function Game() {
   const room : Room<GameState> = useAppSelector(state=>state.network.game);
   const uid : string = useAppSelector(state=>state.network.uid);
   const currentPlayerId: string = useAppSelector(state=>state.game.currentPlayerId);
-  const afterGameId: string = useAppSelector(state=>state.game.afterGameId);
 
   const [initialized, setInitialized] = useState<boolean>(false);
   const [reconnected, setReconnected] = useState<boolean>(false);
   const [modalTitle, setModalTitle] = useState<string>('');
   const [modalInfo, setModalInfo] = useState<string>('');
-  const [modalBoolean, setModalBoolean] = useState<boolean>(false);  
+  const [modalBoolean, setModalBoolean] = useState<boolean>(false);
+  const [toAfter, setToAfter] = useState<boolean>(false);
   const container = useRef();
 
   async function leave() {
@@ -50,17 +50,24 @@ export default function Game() {
     document.getElementById('game').removeEventListener(Transfer.DRAG_DROP_COMBINE, ((event: CustomEvent<IDragDropCombineMessage>) => {gameContainer.onDragDropCombine(event)}) as EventListener);
     document.getElementById('game').removeEventListener(Transfer.SELL_DROP, ((event: CustomEvent<{pokemonId: string}>) => {gameContainer.onSellDrop(event)}) as EventListener);
 
-    gameContainer.game.destroy(true);
-    room.state.players.forEach(player => savePlayers.push(gameContainer.transformToSimplePlayer(player)));
     const token: string = await firebase.auth().currentUser.getIdToken();
+
+    if(gameContainer && gameContainer.game){
+      gameContainer.game.destroy(true);
+      
+    }
+
+    if(room && room.state && room.state.players && room.state.players.size > 0){
+      room.state.players.forEach(player => savePlayers.push(gameContainer.transformToSimplePlayer(player)));
+    }
+    
     const r: Room<AfterGameState> = await client.create('after-game', {players:savePlayers, idToken:token});
     localStorage.setItem('lastRoomId', r.id);
     localStorage.setItem('lastSessionId', r.sessionId);
     await room.leave();
     r.connection.close();
     dispatch(leaveGame());
-    dispatch(setAfterGameId(r.id));
-
+    setToAfter(true);
   }
 
   useEffect(()=>{
@@ -100,10 +107,7 @@ export default function Game() {
 
       room.state.onChange = changes => {
         changes.forEach( change => {
-          if(change.field == 'afterGameId') {
-            dispatch(setAfterGameId(change.value));
-          }
-          else if(change.field == 'roundTime') {
+          if(change.field == 'roundTime') {
             dispatch(setRoundTime(change.value));
           }
           else if(change.field == 'phase') {
@@ -290,7 +294,7 @@ export default function Game() {
     }
   });
 
-  if(afterGameId){
+  if(toAfter){
     return <Navigate to='/after'/>
   }
   else{

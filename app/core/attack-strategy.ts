@@ -54,6 +54,254 @@ export class AttackStrategy {
   }
 }
 
+export class WonderGuardStrategy extends AttackStrategy{
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+      super.process(pokemon, state, board, target);
+  }
+}
+
+export class CorruptedNatureStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        let damage = 10;
+        if(pokemon.stars == 2){
+          damage = 20;
+        }
+        else if(pokemon.stars == 3){
+          damage = 40;
+        }
+        const cells = board.getAdjacentCells(target.positionX, target.positionY);
+        cells.forEach(cell => {
+          if(cell.value && cell.value.team !== pokemon.team){
+            cell.value.status.triggerWound(4000);
+            cell.value.handleDamage(damage, board, AttackType.PHYSICAL, pokemon);
+          }
+        });
+    }
+}
+
+export class CrabHammerStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        let damage = 30;
+        if(pokemon.stars == 2){
+          damage = 60;
+        }
+        else if(pokemon.stars == 3){
+          damage = 120;
+        }
+        if(target.life / target.hp < 0.3){
+          damage = target.life;
+        }
+        target.handleDamage(damage, board, AttackType.PHYSICAL, pokemon);
+    }
+}
+
+export class DiamondStormStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
+        pokemon.def += 5;
+        cells.forEach(cell => {
+          if(cell.value && cell.value.team === pokemon.team){
+            cell.value.def += 5;
+          }
+        });
+    }
+}
+
+export class DracoEnergyStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        target.handleDamage(pokemon.life, board, AttackType.SPECIAL, pokemon);
+    }
+}
+
+export class DynamaxCannonStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+
+        board.forEach((x: number, y: number, tg: PokemonEntity) => {
+          if (tg && pokemon.team != tg.team && x == target.positionX) {
+            tg.handleSpellDamage(Math.ceil(tg.life * 0.8), board, AttackType.SPECIAL, pokemon);
+          }
+        });
+    }
+}
+
+export class DynamicPunchStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        let duration = 1500;
+        let damage = 20;
+        if(pokemon.stars == 2){
+          damage = 40;
+          duration = 3000;
+        }
+        else if(pokemon.stars == 3){
+          damage = 80;
+          duration = 6000;
+        }
+        target.status.triggerConfusion(duration);
+        target.handleDamage(damage, board, AttackType.PHYSICAL, pokemon);
+    }
+}
+
+export class ElectroBoostStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        board.forEach((x,y,tg)=>{
+          if(tg && pokemon.team == tg.team && tg.types.includes(Synergy.ELECTRIC)){
+            tg.status.triggerRuneProtect();
+          }
+        });
+    }
+}
+
+export class ElectroWebStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        let steal = 15;
+        if(pokemon.stars == 2){
+          steal = 30;
+        }
+        else if(pokemon.stars == 3){
+          steal = 60;
+        }
+        board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach(cell => {
+          if(cell.value && cell.value.team !== pokemon.team){
+            cell.value.handleAttackSpeed(-steal);
+            pokemon.handleAttackSpeed(steal);
+          }
+        });
+    }
+}
+
+export class FireTrickStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        let damage = 20;
+        if(pokemon.stars == 2){
+          damage = 40;
+        }
+        else if(pokemon.stars == 3){
+          damage = 80;
+        }
+        target.handleDamage(damage, board, AttackType.SPECIAL, pokemon);
+        const teleportationCell = board.getTeleportationCell(target.positionX, target.positionY);
+        if(teleportationCell){
+          board.swapValue(target.positionX, target.positionY, teleportationCell.row, teleportationCell.column);
+          target.positionX = teleportationCell.row;
+          target.positionY = teleportationCell.column;
+        }
+    }
+}
+
+export class FlameChargeStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        let damage = 20;
+        if(pokemon.stars == 2){
+          damage = 40;
+        }
+        else if (pokemon.stars == 3){
+          damage = 80;
+        }
+        const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
+        const x = farthestCoordinate[0];
+        const y = farthestCoordinate[1];
+    
+        const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, x, y);
+        cells.forEach((cell)=>{
+          if (cell.value && cell.value != pokemon) {
+            cell.value.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon);
+          }
+        });
+    
+        board.swapValue(pokemon.positionX, pokemon.positionY, x, y);
+        pokemon.positionX = x;
+        pokemon.positionY = y;
+    }
+}
+
+export class LeechSeedStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        let duration = 3000;
+        let heal = 10;
+        if(pokemon.stars == 2){
+          duration = 6000;
+          heal = 20;
+        }
+        else if (pokemon.stars == 3){
+          duration = 6000;
+          heal = 40;
+        }
+        pokemon.handleHeal(heal, pokemon);
+        target.status.triggerPoison(duration, target, pokemon);
+    }
+}
+
+export class LockOnStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        target.status.triggerArmorReduction(8000);
+    }
+}
+
+export class PsychUpStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        let damage = 10;
+        let duration = 2000;
+        if(pokemon.stars == 2){
+          damage = 20;
+          duration = 4000;
+        }
+        else if(pokemon.stars == 3){
+          damage = 80;
+          duration = 8000;
+        }
+        target.handleDamage(damage, board, AttackType.SPECIAL, pokemon);
+        target.status.triggerSilence(duration);
+        const cells = board.getAdjacentCells(target.positionX, target.positionY);
+        cells.forEach(cell=>{
+          if(cell && cell.value && cell.value.team !== pokemon.team){
+            cell.value.status.triggerSilence(duration);
+          }
+        });
+    }
+}
+
+export class RazorWindStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        const cells = board.getAdjacentCells(target.positionX, target.positionY);
+        cells.forEach(cell=>{
+          if(cell && cell.value && cell.value.team !== pokemon.team){
+            cell.value.status.triggerSmoke(7000, cell.value);
+          }
+        });
+    }
+}
+
+export class TwistingNeitherStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target);
+        const cells = board.getCellsInRadius(pokemon.positionX, pokemon.positionY, 2);
+        cells.forEach(cell=>{
+          if(cell && cell.value){
+            if(cell.value.team !== pokemon.team){
+              cell.value.handleDamage(80, board, AttackType.SPECIAL, pokemon);
+            }
+            const teleportationCell = board.getTeleportationCell(cell.value.positionX, cell.value.positionY);
+            board.swapValue(cell.value.positionX, cell.value.positionY, teleportationCell.row, teleportationCell.column);
+            cell.value.positionX = teleportationCell.row;
+            cell.value.positionY = teleportationCell.column;
+          }
+        });
+    }
+}
 export class KingShieldStrategy extends AttackStrategy {
   process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);

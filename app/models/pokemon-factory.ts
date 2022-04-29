@@ -1,13 +1,10 @@
-import {Pokemon, Bulbasaur, Abomasnow, Abra, Absol, Aegislash, Aerodactyl, Aggron, Alakazam, AlolanMarowak, Altaria, Amaura, Ampharos, Anorith, Arcanine, Arceus, Archen, Archeops, Armaldo, Aron, Articuno, Aurorus, Axew, Azelf, Azumarill, Azurill, Bagon, Banette, Bastiodon, Bayleef, Beedrill, Beldum, Bellossom, Bellsprout, Blastoise, Blaziken, Budew, Buneary, Butterfree, Camerupt, Carracosta, Carvanha, Castform, CastformHail, CastformRain, CastformSun, Caterpie, Celebi, Chandelure, Charizard, Charmander, Charmeleon, Chikorita, Chimchar, Clefable, Clefairy, Cleffa, Cobalion, Combusken, Cradily, Cranidos, Cresselia, Crobat, Croconaw, Cubone, Cyndaquil, Darkrai, Deino, Deoxys, Dialga, Ditto, Doublade, Dragonair, Dragonite, Dratini, Duosion, Dusclops, Dusknoir, Duskull, Eevee, Electabuzz, Electivire, Electrike, Elekid, Empoleon, Entei, Espeon, Exploud, Fearow, Feraligatr, Flabebe, Flaffy, Flareon, Fletchinder, Fletchling, Floette, Florges, Flygon, Fraxure, Froslass, Gabite, Garchomp, Gardevoir, Gastly, Gengar, Geodude, Gible, Giratina, Glaceon, Glalie, Gloom, Golbat, Golem, Graveler, Grotle, Groudon, Grovyle, Growlithe, Gyarados, HakamoO, Haunter, Haxorus, Heatran, Herdier, Honedge, HooH, Hoppip, Horsea, Houndour, Hydreigon, Igglybuff, Infernape, Ivysaur, JangmoO, Jigglypuff, Jirachi, Jolteon, Jumpluff, Kabuto, Kabutops, Kadabra, Kakuna, Keldeo, Kingdra, Kirlia, Klang, Klink, Klinklang, KommoO, Krookodile, Krookorok, Kyogre, Kyurem, Lairon, Lampent, Landorus, Lapras, Larvitar, Latias, Latios, Leafeon, Leavanny, Lileep, Lillipup, Litwick, Lombre, Lopunny, Lotad, Loudred, Lucario, Ludicolo, Lugia, Luxio, Luxray, Machamp, Machoke, Machop, Magby, Magikarp, Magmar, Magmortar, Magnemite, Magneton, Magnezone, Mamoswine, Manaphy, Manectric, Mareep, Marill, Marowak, Marshtomp, Medicham, Meditite, MegaAbomasnow, MegaAltaria, MegaBanette, MegaCamerupt, MegaLopunny, MegaLucario, MegaManectric, MegaMedicham, Meganium, MegaRayquaza, MegaScizor, MegaSteelix, Meloetta, Meowth, Mesprit, Metagross, Metang, Metapod, Mewtwo, Moltres, Monferno, Mudkip, Munchlax, Nidoking, Nidoqueen, NidoranF, NidoranM, Nidorina, Nidorino, Numel, Nuzleaf, Oddish, Omanyte, Omastar, Onix, Palkia, Palpitoad, Persian, Pichu, Pidgeot, Pidgeotto, Pidgey, Pikachu, Pikipek, Piloswine, Piplup, Politoed, Poliwag, Poliwhirl, Porygon, Porygon2, PorygonZ, PrimalGroudon, PrimalKyogre, Prinplup, Pupitar, Quilava, Raichu, Raikou, Ralts, Rampardos, Raticate, Rattata, Rayquaza, Regice, Regigigas, Regirock, Registeel, Reshiram, Reuniclus, Rhydon, Rhyhorn, Rhyperior, Riolu, Roselia, Roserade, Rotom, Salamence, Sandile, Sandshrew, Sceptile, Scizor, Scolipede, Scyther, Seadra, Sealeo, Seedot, Seismitoad, Sewaddle, Shaymin, Shelgon, Shieldon, Shiftry, Shinx, Shuppet, Skiploom, Slaking, Slakoth, Slowbro, Slowking, Slowpoke, Snorlax, Snorunt, Snover, Solosis, Spearow, Spheal, Spiritomb, Squirtle, Staraptor, Staravia, Starly, Steelix, Stoutland, Suicune, Swablu, Swadloon, Swampert, Swinub, Sylveon, Talonflame, Terrakion, Thundurus, Tirtouga, Togekiss, Togepi, Togetic, Torchic, Tornadus, Torterra, Totodile, Toucannon, Trapinch, Treecko, Trumbeak, Turtwig, Tympole, Typhlosion, Tyranitar, Tyrantrum, Tyrunt, Umbreon, Uxie, Vanillish, Vanillite, Vanilluxe, Vaporeon, Venipede, Venusaur, Vibrava, Victini, Victreebel, Vigoroth, Vileplume, Virizion, Volcarona, Walrein, Wartortle, Weedle, Weepinbell, Whirlipede, Whismur, Wigglytuff, Zapdos, Zekrom, Zubat, Zweilous} from './colyseus-models/pokemon';
-import Board from '../core/board';
-import {AttackStrategy, BiteStrategy, BlastBurnStrategy, BlazeKickStrategy, BonemerangStrategy, BugBuzzStrategy, BurnStrategy, CalmMindStrategy, ChargeStrategy, ClangorousSoulStrategy, ConfusionStrategy, DarkPulseStrategy, DisarmingVoiceStrategy, DischargeStrategy, DracoMeteorStrategy, DragonBreathStrategy, DragonTailStrategy, EchoStrategy, ExplosionStrategy, FireBlastStrategy, FreezeStrategy, GrassWhistleStrategy, GrowlStrategy, GuillotineStrategy, HappyHourStrategy, HeadSmashStrategy, HealBlockStrategy, HeatWaveStrategy, HighJumpKickStrategy, HurricaneStrategy, HydroPumpStrategy, HyperVoiceStrategy, IcicleCrashStrategy, IronDefenseStrategy, IronTailStrategy, KingShieldStrategy, LeechLifeStrategy, MeteorMashStrategy, MetronomeStrategy, NastyPlotStrategy, NightmareStrategy, NightSlashStrategy, OriginPulseStrategy, PetalDanceStrategy, PoisonStingStrategy, PoisonStrategy, ProtectStrategy, RelicSongStrategy, RoarOfTimeStrategy, RockSlideStrategy, RockSmashStrategy, RockTombStrategy, RootStrategy, SeedFlareStrategy, SeismicTossStrategy, ShadowCloneStrategy, SilenceStrategy, SleepStrategy, SoakStrategy, StompStrategy, StunSporeStrategy, TeleportStrategy, ThiefStrategy, ThunderStrategy, TormentStrategy, TriAttackStrategy, VoltSwitchStrategy, WheelOfFireStrategy, WishStrategy} from '../core/attack-strategy';
+import { Abomasnow, Abra, Absol, Aegislash, Aerodactyl, Aggron, Alakazam, AlolanMarowak, Altaria, Amaura, Ampharos, Anorith, Arcanine, Arceus, Archen, Archeops, Armaldo, Aron, Articuno, Aurorus, Axew, Azelf, Azumarill, Azurill, Bagon, Banette, Bastiodon, Bayleef, Beedrill, Beldum, Bellossom, Bellsprout, Blastoise, Blaziken, Braixen, Budew, Bulbasaur, Buneary, Butterfree, Cacnea, Cacturne, Camerupt, Carracosta, Carvanha, Castform, CastformHail, CastformRain, CastformSun, Caterpie, Celebi, Chandelure, Charizard, Charmander, Charmeleon, Chikorita, Chimchar, Clefable, Clefairy, Cleffa, Cobalion, Combusken, Corphish, Cradily, Cranidos, Crawdaunt, Cresselia, Crobat, Croconaw, Cubone, Cyndaquil, Darkrai, Deino, Delphox, Deoxys, Dialga, Diancie, Ditto, Doublade, Dragonair, Dragonite, Dratini, Duosion, Dusclops, Dusknoir, Duskull, Eevee, Electabuzz, Electivire, Electrike, Elekid, Empoleon, Entei, Espeon, Eternatus, Exploud, Fearow, Fennekin, Feraligatr, Flabebe, Flaffy, Flareon, Floette, Florges, Flygon, Fraxure, Froslass, Gabite, Galvantula, Garchomp, Gardevoir, Gastly, Genesect, Gengar, Geodude, Gible, Giratina, Glaceon, Glalie, Gloom, Golbat, Golem, Gourgeist, Graveler, Grotle, Groudon, Grovyle, Growlithe, Guzzlord, Gyarados, HakamoO, Hariyama, Hatenna, Hatterene, Hattrem, Haunter, Haxorus, Heatran, Honedge, HooH, Hoppip, Horsea, Houndour, Hydreigon, Igglybuff, Infernape, Ivysaur, JangmoO, Jigglypuff, Jirachi, Jolteon, Joltik, Jumpluff, Kabuto, Kabutops, Kadabra, Kakuna, Keldeo, Kingdra, Kirlia, KommoO, Krookodile, Krookorok, Kyogre, Kyurem, Lairon, Lampent, Landorus, Lapras, Larvitar, Latias, Latios, Leafeon, Leavanny, Lileep, Litwick, Lombre, Lopunny, Lotad, Loudred, Lucario, Ludicolo, Lugia, Luxio, Luxray, Machamp, Machoke, Machop, Magby, Magikarp, Magmar, Magmortar, Magnemite, Magneton, Magnezone, Makuhita, Mamoswine, Manaphy, Manectric, Mareep, Marill, Marowak, Marshtomp, Medicham, Meditite, MegaAbomasnow, MegaAltaria, MegaBanette, MegaCamerupt, MegaLopunny, MegaLucario, MegaManectric, MegaMedicham, Meganium, MegaRayquaza, MegaScizor, MegaSteelix, Meloetta, Meowth, Mesprit, Metagross, Metang, Metapod, Mewtwo, Moltres, Monferno, Mudkip, Munchlax, Nidoking, Nidoqueen, NidoranF, NidoranM, Nidorina, Nidorino, Nincada, Ninjask, Noibat, Noivern, Numel, Nuzleaf, Oddish, Omanyte, Omastar, Onix, Palkia, Palpitoad, Persian, Pichu, Pidgeot, Pidgeotto, Pidgey, Pikachu, Pikipek, Piloswine, Piplup, Pokemon, Politoed, Poliwag, Poliwhirl, Ponyta, Porygon, Porygon2, PorygonZ, PrimalGroudon, PrimalKyogre, Prinplup, Pumpkaboo, Pupitar, Quilava, Raichu, Raikou, Ralts, Rampardos, Rapidash, Raticate, Rattata, Rayquaza, Regice, Regidrago, Regieleki, Regigigas, Regirock, Registeel, Relicanth, Reshiram, Reuniclus, Rhydon, Rhyhorn, Rhyperior, Riolu, Roselia, Roserade, Rotom, Salamence, Sandile, Sceptile, Scizor, Scolipede, Scyther, Seadra, Sealeo, Seedot, Seismitoad, Sewaddle, Shaymin, Shedninja, Shelgon, Shieldon, Shiftry, Shinx, Shuppet, Skiploom, Slaking, Slakoth, Slowbro, Slowking, Slowpoke, Snorlax, Snorunt, Snover, Solosis, Spearow, Spheal, Spiritomb, Squirtle, Staraptor, Staravia, Starly, Steelix, Suicune, Swablu, Swadloon, Swampert, Swinub, Sylveon, Terrakion, Thundurus, Tirtouga, Togekiss, Togepi, Togetic, Torchic, Tornadus, Torterra, Totodile, Toucannon, Trapinch, Treecko, Trumbeak, Turtwig, Tympole, Typhlosion, Tyranitar, Tyrantrum, Tyrunt, Umbreon, Uxie, Vanillish, Vanillite, Vanilluxe, Vaporeon, Venipede, Venusaur, Vibrava, Victini, Victreebel, Vigoroth, Vileplume, Virizion, Volcarona, Walrein, Wartortle, Weedle, Weepinbell, Whirlipede, Whismur, Wigglytuff, Zapdos, Zekrom, Zubat, Zweilous } from './colyseus-models/pokemon';
 import {MapSchema} from  '@colyseus/schema';
 import {IPokemon, Emotion} from '../types';
 import { IPokemonConfig } from './mongo-models/user-metadata';
 import PRECOMPUTED_TYPE_POKEMONS from './precomputed/type-pokemons.json';
-import { Ability } from '../types/enum/Ability'
 import { Synergy } from '../types/enum/Synergy';
-import { Pkm } from '../types/enum/Pokemon';
+import { Pkm, PkmFamily } from '../types/enum/Pokemon';
 
 export default class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level: number): MapSchema<IPokemon> {
@@ -174,224 +171,10 @@ export default class PokemonFactory {
     return pokemons;
   }
 
-  static createStrategyFromName(name: Ability) {
-    switch (name) {
-      case Ability.KING_SHIELD:
-        return new KingShieldStrategy();
-
-      case Ability.EXPLOSION:
-        return new ExplosionStrategy();
-
-      case Ability.NIGHTMARE:
-        return new NightmareStrategy();
-
-      case Ability.CLANGOROUS_SOUL:
-        return new ClangorousSoulStrategy();
-
-      case Ability.BONEMERANG:
-        return new BonemerangStrategy();
-
-      case Ability.GROWL:
-        return new GrowlStrategy();
-
-      case Ability.RELIC_SONG:
-        return new RelicSongStrategy();
-
-      case Ability.DISARMING_VOICE:
-        return new DisarmingVoiceStrategy();
-
-      case Ability.HIGH_JUMP_KICK:
-        return new HighJumpKickStrategy();
-
-      case Ability.GRASS_WHISTLE:
-        return new GrassWhistleStrategy();
-
-      case Ability.TRI_ATTACK:
-        return new TriAttackStrategy();
-
-      case Ability.ECHO:
-        return new EchoStrategy();
-
-      case Ability.PETAL_DANCE:
-        return new PetalDanceStrategy();
-
-      case Ability.HYPER_VOICE:
-        return new HyperVoiceStrategy();
-
-      case Ability.SHADOW_CLONE:
-        return new ShadowCloneStrategy();
-
-      case Ability.VOLT_SWITCH:
-        return new VoltSwitchStrategy();
-
-      case Ability.FIRE_BLAST:
-        return new FireBlastStrategy();
-
-      case Ability.WHEEL_OF_FIRE:
-        return new WheelOfFireStrategy();
-
-      case Ability.SEISMIC_TOSS:
-        return new SeismicTossStrategy();
-
-      case Ability.GUILLOTINE:
-        return new GuillotineStrategy();
-
-      case Ability.ROCK_SLIDE:
-        return new RockSlideStrategy();
-
-      case Ability.HEAT_WAVE:
-        return new HeatWaveStrategy();
-
-      case Ability.THUNDER:
-        return new ThunderStrategy();
-
-      case Ability.HYDRO_PUMP:
-        return new HydroPumpStrategy();
-
-      case Ability.DRACO_METEOR:
-        return new DracoMeteorStrategy();
-
-      case Ability.BLAZE_KICK:
-        return new BlazeKickStrategy();
-
-      case Ability.WISH:
-        return new WishStrategy();
-
-      case Ability.CALM_MIND:
-        return new CalmMindStrategy();
-
-      case Ability.IRON_DEFENSE:
-        return new IronDefenseStrategy();
-
-      case Ability.METRONOME:
-        return new MetronomeStrategy();
-
-      case Ability.SOAK:
-        return new SoakStrategy();
-
-      case Ability.IRON_TAIL:
-        return new IronTailStrategy();
-
-      case Ability.BLAST_BURN:
-        return new BlastBurnStrategy();
-
-      case Ability.CHARGE:
-        return new ChargeStrategy();
-
-      case Ability.DISCHARGE:
-        return new DischargeStrategy();
-
-      case Ability.BITE:
-        return new BiteStrategy();
-
-      case Ability.DRAGON_TAIL:
-        return new DragonTailStrategy();
-
-      case Ability.DRAGON_BREATH:
-        return new DragonBreathStrategy();
-
-      case Ability.ICICLE_CRASH:
-        return new IcicleCrashStrategy();
-
-      case Ability.ROOT:
-        return new RootStrategy();
-
-      case Ability.TORMENT:
-        return new TormentStrategy();
-
-      case Ability.STOMP:
-        return new StompStrategy();
-
-      case Ability.DARK_PULSE:
-        return new DarkPulseStrategy();
-
-      case Ability.NIGHT_SLASH:
-        return new NightSlashStrategy();
-
-      case Ability.BUG_BUZZ:
-        return new BugBuzzStrategy();
-
-      case Ability.POISON_STING:
-        return new PoisonStingStrategy();
-
-      case Ability.LEECH_LIFE:
-        return new LeechLifeStrategy();
-
-      case Ability.HAPPY_HOUR:
-        return new HappyHourStrategy();
-
-      case Ability.TELEPORT:
-        return new TeleportStrategy();
-
-      case Ability.NASTY_PLOT:
-        return new NastyPlotStrategy();
-
-      case Ability.THIEF:
-        return new ThiefStrategy();
-
-      case Ability.STUN_SPORE:
-        return new StunSporeStrategy();
-
-      case Ability.METEOR_MASH:
-        return new MeteorMashStrategy();
-
-      case Ability.HURRICANE:
-        return new HurricaneStrategy();
-
-      case Ability.BURN:
-        return new BurnStrategy();
-
-      case Ability.SLEEP:
-        return new SleepStrategy();
-
-      case Ability.SILENCE:
-        return new SilenceStrategy();
-
-      case Ability.CONFUSION:
-        return new ConfusionStrategy();
-
-      case Ability.FREEZE:
-        return new FreezeStrategy();
-
-      case Ability.PROTECT:
-        return new ProtectStrategy();
-
-      case Ability.POISON:
-        return new PoisonStrategy();
-
-      case Ability.ORIGIN_PULSE:
-        return new OriginPulseStrategy();
-
-      case Ability.SEED_FLARE:
-        return new SeedFlareStrategy();
-
-      case Ability.HEAL_BLOCK:
-        return new HealBlockStrategy();
-
-      case Ability.ROAR_OF_TIME:
-        return new RoarOfTimeStrategy();
-
-      case Ability.ROCK_TOMB:
-        return new RockTombStrategy();
-
-      case Ability.ROCK_SMASH:
-        return new RockSmashStrategy();
-
-      case Ability.HEAD_SMASH:
-        return new HeadSmashStrategy();
-
-      case Ability.DEFAULT:
-        return new AttackStrategy();
-
-      default:
-        return new AttackStrategy();
-    }
-  }
-
   // transforms a pokemon into another pokemon,
   // transferring its items and position to
   // the new pokemon
-  static transformPokemon(before: Pokemon, afterName: string) {
+  static transformPokemon(before: Pokemon, afterName: Pkm) {
     const transformation = this.createPokemonFromName(afterName);
     transformation.positionX = before.positionX;
     transformation.positionY = before.positionY;
@@ -399,7 +182,7 @@ export default class PokemonFactory {
     return transformation;
   }
 
-  static getPokemonBaseEvolution(name: string) {
+  static getPokemonBaseEvolution(name: Pkm) {
     switch (name) {
       case Pkm.VAPOREON:
         return Pkm.EEVEE;
@@ -418,737 +201,11 @@ export default class PokemonFactory {
       case Pkm.GLACEON:
         return Pkm.EEVEE;
       default:
-        return this.getPokemonFamily(name);
+        return PkmFamily[name];
     }
   }
 
-  static getPokemonFamily(name: string) {
-    switch (name) {
-      case Pkm.BULBASAUR:
-        return Pkm.BULBASAUR;
-      case Pkm.IVYSAUR:
-        return Pkm.BULBASAUR;
-      case Pkm.VENUSAUR:
-        return Pkm.BULBASAUR;
-      case Pkm.CHARMANDER:
-        return Pkm.CHARMANDER;
-      case Pkm.CHARMELEON:
-        return Pkm.CHARMANDER;
-      case Pkm.CHARIZARD:
-        return Pkm.CHARMANDER;
-      case Pkm.SQUIRTLE:
-        return Pkm.SQUIRTLE;
-      case Pkm.WARTORTLE:
-        return Pkm.SQUIRTLE;
-      case Pkm.BLASTOISE:
-        return Pkm.SQUIRTLE;
-      case Pkm.SLOWPOKE:
-        return Pkm.SLOWPOKE;
-      case Pkm.SLOWBRO:
-        return Pkm.SLOWPOKE;
-      case Pkm.SLOWKING:
-        return Pkm.SLOWPOKE;
-      case Pkm.GEODUDE:
-        return Pkm.GEODUDE;
-      case Pkm.GRAVELER:
-        return Pkm.GEODUDE;
-      case Pkm.GOLEM:
-        return Pkm.GEODUDE;
-      case Pkm.AZURILL:
-        return Pkm.AZURILL;
-      case Pkm.MARILL:
-        return Pkm.AZURILL;
-      case Pkm.AZUMARILL:
-        return Pkm.AZURILL;
-      case Pkm.ZUBAT:
-        return Pkm.ZUBAT;
-      case Pkm.GOLBAT:
-        return Pkm.ZUBAT;
-      case Pkm.CROBAT:
-        return Pkm.ZUBAT;
-      case Pkm.AMPHAROS:
-        return Pkm.MAREEP;
-      case Pkm.MAREEP:
-        return Pkm.MAREEP;
-      case Pkm.FLAFFY:
-        return Pkm.MAREEP;
-      case Pkm.CLEFFA:
-        return Pkm.CLEFFA;
-      case Pkm.CLEFAIRY:
-        return Pkm.CLEFFA;
-      case Pkm.CLEFABLE:
-        return Pkm.CLEFFA;
-      case Pkm.IGGLYBUFF:
-        return Pkm.IGGLYBUFF;
-      case Pkm.JIGGLYPUFF:
-        return Pkm.IGGLYBUFF;
-      case Pkm.WIGGLYTUFF:
-        return Pkm.IGGLYBUFF;
-      case Pkm.CATERPIE:
-        return Pkm.CATERPIE;
-      case Pkm.METAPOD:
-        return Pkm.CATERPIE;
-      case Pkm.BUTTERFREE:
-        return Pkm.CATERPIE;
-      case Pkm.WEEDLE:
-        return Pkm.WEEDLE;
-      case Pkm.KAKUNA:
-        return Pkm.WEEDLE;
-      case Pkm.BEEDRILL:
-        return Pkm.WEEDLE;
-      case Pkm.PIDGEY:
-        return Pkm.PIDGEY;
-      case Pkm.PIDGEOTTO:
-        return Pkm.PIDGEY;
-      case Pkm.PIDGEOT:
-        return Pkm.PIDGEY;
-      case Pkm.HOPPIP:
-        return Pkm.HOPPIP;
-      case Pkm.SKIPLOOM:
-        return Pkm.HOPPIP;
-      case Pkm.JUMPLUFF:
-        return Pkm.HOPPIP;
-      case Pkm.SEEDOT:
-        return Pkm.SEEDOT;
-      case Pkm.NUZLEAF:
-        return Pkm.SEEDOT;
-      case Pkm.SHIFTRY:
-        return Pkm.SEEDOT;
-      case Pkm.STARLY:
-        return Pkm.STARLY;
-      case Pkm.STARAVIA:
-        return Pkm.STARLY;
-      case Pkm.STARAPTOR:
-        return Pkm.STARLY;
-      case Pkm.CHIKORITA:
-        return Pkm.CHIKORITA;
-      case Pkm.BAYLEEF:
-        return Pkm.CHIKORITA;
-      case Pkm.MEGANIUM:
-        return Pkm.CHIKORITA;
-      case Pkm.CYNDAQUIL:
-        return Pkm.CYNDAQUIL;
-      case Pkm.QUILAVA:
-        return Pkm.CYNDAQUIL;
-      case Pkm.TYPHLOSION:
-        return Pkm.CYNDAQUIL;
-      case Pkm.TOTODILE:
-        return Pkm.TOTODILE;
-      case Pkm.CROCONAW:
-        return Pkm.TOTODILE;
-      case Pkm.FERALIGATR:
-        return Pkm.TOTODILE;
-      case Pkm.TREECKO:
-        return Pkm.TREECKO;
-      case Pkm.GROVYLE:
-        return Pkm.TREECKO;
-      case Pkm.SCEPTILE:
-        return Pkm.TREECKO;
-      case Pkm.TORCHIC:
-        return Pkm.TORCHIC;
-      case Pkm.COMBUSKEN:
-        return Pkm.TORCHIC;
-      case Pkm.BLAZIKEN:
-        return Pkm.TORCHIC;
-      case Pkm.MUDKIP:
-        return Pkm.MUDKIP;
-      case Pkm.MARSHTOMP:
-        return Pkm.MUDKIP;
-      case Pkm.SWAMPERT:
-        return Pkm.MUDKIP;
-      case Pkm.TURTWIG:
-        return Pkm.TURTWIG;
-      case Pkm.GROTLE:
-        return Pkm.TURTWIG;
-      case Pkm.TORTERRA:
-        return Pkm.TURTWIG;
-      case Pkm.CHIMCHAR:
-        return Pkm.CHIMCHAR;
-      case Pkm.MONFERNO:
-        return Pkm.CHIMCHAR;
-      case Pkm.INFERNAPE:
-        return Pkm.CHIMCHAR;
-      case Pkm.PIPLUP:
-        return Pkm.PIPLUP;
-      case Pkm.PRINPLUP:
-        return Pkm.PIPLUP;
-      case Pkm.EMPOLEON:
-        return Pkm.PIPLUP;
-      case Pkm.NIDORANF:
-        return Pkm.NIDORANF;
-      case Pkm.NIDORINA:
-        return Pkm.NIDORANF;
-      case Pkm.NIDOQUEEN:
-        return Pkm.NIDORANF;
-      case Pkm.NIDORANM:
-        return Pkm.NIDORANM;
-      case Pkm.NIDORINO:
-        return Pkm.NIDORANM;
-      case Pkm.NIDOKING:
-        return Pkm.NIDORANM;
-      case Pkm.PICHU:
-        return Pkm.PICHU;
-      case Pkm.PIKACHU:
-        return Pkm.PICHU;
-      case Pkm.RAICHU:
-        return Pkm.PICHU;
-      case Pkm.MACHOP:
-        return Pkm.MACHOP;
-      case Pkm.MACHOKE:
-        return Pkm.MACHOP;
-      case Pkm.MACHAMP:
-        return Pkm.MACHOP;
-      case Pkm.HORSEA:
-        return Pkm.HORSEA;
-      case Pkm.SEADRA:
-        return Pkm.HORSEA;
-      case Pkm.KINGDRA:
-        return Pkm.HORSEA;
-      case Pkm.TRAPINCH:
-        return Pkm.TRAPINCH;
-      case Pkm.VIBRAVA:
-        return Pkm.TRAPINCH;
-      case Pkm.FLYGON:
-        return Pkm.TRAPINCH;
-      case Pkm.SPHEAL:
-        return Pkm.SPHEAL;
-      case Pkm.SEALEO:
-        return Pkm.SPHEAL;
-      case Pkm.WALREIN:
-        return Pkm.SPHEAL;
-      case Pkm.ARON:
-        return Pkm.ARON;
-      case Pkm.LAIRON:
-        return Pkm.ARON;
-      case Pkm.AGGRON:
-        return Pkm.ARON;
-      case Pkm.MAGNEMITE:
-        return Pkm.MAGNEMITE;
-      case Pkm.MAGNETON:
-        return Pkm.MAGNEMITE;
-      case Pkm.MAGNEZONE:
-        return Pkm.MAGNEMITE;
-      case Pkm.RHYHORN:
-        return Pkm.RHYHORN;
-      case Pkm.RHYDON:
-        return Pkm.RHYHORN;
-      case Pkm.RHYPERIOR:
-        return Pkm.RHYHORN;
-      case Pkm.TOGEPI:
-        return Pkm.TOGEPI;
-      case Pkm.TOGETIC:
-        return Pkm.TOGEPI;
-      case Pkm.TOGEKISS:
-        return Pkm.TOGEPI;
-      case Pkm.DUSKULL:
-        return Pkm.DUSKULL;
-      case Pkm.DUSCLOPS:
-        return Pkm.DUSKULL;
-      case Pkm.DUSKNOIR:
-        return Pkm.DUSKULL;
-      case Pkm.LOTAD:
-        return Pkm.LOTAD;
-      case Pkm.LOMBRE:
-        return Pkm.LOTAD;
-      case Pkm.LUDICOLO:
-        return Pkm.LOTAD;
-      case Pkm.SHINX:
-        return Pkm.SHINX;
-      case Pkm.LUXIO:
-        return Pkm.SHINX;
-      case Pkm.LUXRAY:
-        return Pkm.SHINX;
-      case Pkm.POLIWAG:
-        return Pkm.POLIWAG;
-      case Pkm.POLIWHIRL:
-        return Pkm.POLIWAG;
-      case Pkm.POLITOED:
-        return Pkm.POLIWAG;
-      case Pkm.ABRA:
-        return Pkm.ABRA;
-      case Pkm.KADABRA:
-        return Pkm.ABRA;
-      case Pkm.ALAKAZAM:
-        return Pkm.ABRA;
-      case Pkm.GASTLY:
-        return Pkm.GASTLY;
-      case Pkm.HAUNTER:
-        return Pkm.GASTLY;
-      case Pkm.GENGAR:
-        return Pkm.GASTLY;
-      case Pkm.DRATINI:
-        return Pkm.DRATINI;
-      case Pkm.DRAGONAIR:
-        return Pkm.DRATINI;
-      case Pkm.DRAGONITE:
-        return Pkm.DRATINI;
-      case Pkm.LARVITAR:
-        return Pkm.LARVITAR;
-      case Pkm.PUPITAR:
-        return Pkm.LARVITAR;
-      case Pkm.TYRANITAR:
-        return Pkm.LARVITAR;
-      case Pkm.SLAKOTH:
-        return Pkm.SLAKOTH;
-      case Pkm.VIGOROTH:
-        return Pkm.SLAKOTH;
-      case Pkm.SLAKING:
-        return Pkm.SLAKOTH;
-      case Pkm.RALTS:
-        return Pkm.RALTS;
-      case Pkm.KIRLIA:
-        return Pkm.RALTS;
-      case Pkm.GARDEVOIR:
-        return Pkm.RALTS;
-      case Pkm.BAGON:
-        return Pkm.BAGON;
-      case Pkm.SHELGON:
-        return Pkm.BAGON;
-      case Pkm.SALAMENCE:
-        return Pkm.BAGON;
-      case Pkm.BELDUM:
-        return Pkm.BELDUM;
-      case Pkm.METANG:
-        return Pkm.BELDUM;
-      case Pkm.METAGROSS:
-        return Pkm.BELDUM;
-      case Pkm.GIBLE:
-        return Pkm.GIBLE;
-      case Pkm.GABITE:
-        return Pkm.GIBLE;
-      case Pkm.GARCHOMP:
-        return Pkm.GIBLE;
-      case Pkm.ELEKID:
-        return Pkm.ELEKID;
-      case Pkm.ELECTABUZZ:
-        return Pkm.ELEKID;
-      case Pkm.ELECTIVIRE:
-        return Pkm.ELEKID;
-      case Pkm.MAGBY:
-        return Pkm.MAGBY;
-      case Pkm.MAGMAR:
-        return Pkm.MAGBY;
-      case Pkm.MAGMORTAR:
-        return Pkm.MAGBY;
-      case Pkm.MUNCHLAX:
-        return Pkm.MUNCHLAX;
-      case Pkm.SNORLAX:
-        return Pkm.MUNCHLAX;
-      case Pkm.GROWLITHE:
-        return Pkm.GROWLITHE;
-      case Pkm.ARCANINE:
-        return Pkm.GROWLITHE;
-      case Pkm.ONIX:
-        return Pkm.ONIX;
-      case Pkm.STEELIX:
-        return Pkm.ONIX;
-      case Pkm.MEGA_STEELIX:
-        return Pkm.ONIX;
-      case Pkm.SCYTHER:
-        return Pkm.SCYTHER;
-      case Pkm.SCIZOR:
-        return Pkm.SCYTHER;
-      case Pkm.MEGA_SCIZOR:
-        return Pkm.SCYTHER;
-      case Pkm.RIOLU:
-        return Pkm.RIOLU;
-      case Pkm.LUCARIO:
-        return Pkm.RIOLU;
-      case Pkm.MEGA_LUCARIO:
-        return Pkm.RIOLU;
-      case Pkm.EEVEE:
-        return Pkm.EEVEE;
-      case Pkm.VAPOREON:
-        return Pkm.VAPOREON;
-      case Pkm.JOLTEON:
-        return Pkm.JOLTEON;
-      case Pkm.FLAREON:
-        return Pkm.FLAREON;
-      case Pkm.ESPEON:
-        return Pkm.ESPEON;
-      case Pkm.UMBREON:
-        return Pkm.UMBREON;
-      case Pkm.LEAFEON:
-        return Pkm.LEAFEON;
-      case Pkm.SYLVEON:
-        return Pkm.SYLVEON;
-      case Pkm.GLACEON:
-        return Pkm.GLACEON;
-      case Pkm.MEDITITE:
-        return Pkm.MEDITITE;
-      case Pkm.MEDICHAM:
-        return Pkm.MEDITITE;
-      case Pkm.MEGA_MEDICHAM:
-        return Pkm.MEDITITE;
-      case Pkm.NUMEL:
-        return Pkm.NUMEL;
-      case Pkm.CAMERUPT:
-        return Pkm.NUMEL;
-      case Pkm.MEGA_CAMERUPT:
-        return Pkm.NUMEL;
-      case Pkm.DITTO:
-        return Pkm.DITTO;
-      case Pkm.SANDSHREW:
-        return Pkm.SANDSHREW;
-      case Pkm.DARKRAI:
-        return Pkm.DARKRAI;
-      case Pkm.LITWICK:
-        return Pkm.LITWICK;
-      case Pkm.LAMPENT:
-        return Pkm.LITWICK;
-      case Pkm.CHANDELURE:
-        return Pkm.LITWICK;
-      case Pkm.BELLSPROUT:
-        return Pkm.BELLSPROUT;
-      case Pkm.WEEPINBELL:
-        return Pkm.BELLSPROUT;
-      case Pkm.VICTREEBEL:
-        return Pkm.BELLSPROUT;
-      case Pkm.SWINUB:
-        return Pkm.SWINUB;
-      case Pkm.PILOSWINE:
-        return Pkm.SWINUB;
-      case Pkm.MAMOSWINE:
-        return Pkm.SWINUB;
-      case Pkm.SNORUNT:
-        return Pkm.SNORUNT;
-      case Pkm.GLALIE:
-        return Pkm.SNORUNT;
-      case Pkm.FROSLASS:
-        return Pkm.SNORUNT;
-      case Pkm.SNOVER:
-        return Pkm.SNOVER;
-      case Pkm.ABOMASNOW:
-        return Pkm.SNOVER;
-      case Pkm.MEGA_ABOMASNOW:
-        return Pkm.SNOVER;
-      case Pkm.VANILLITE:
-        return Pkm.VANILLITE;
-      case Pkm.VANILLISH:
-        return Pkm.VANILLITE;
-      case Pkm.VANILLUXE:
-        return Pkm.VANILLITE;
-      case Pkm.VOLCARONA:
-        return Pkm.VOLCARONA;
-      case Pkm.LANDORUS:
-        return Pkm.LANDORUS;
-      case Pkm.TORNADUS:
-        return Pkm.TORNADUS;
-      case Pkm.THUNDURUS:
-        return Pkm.THUNDURUS;
-      case Pkm.KELDEO:
-        return Pkm.KELDEO;
-      case Pkm.TERRAKION:
-        return Pkm.TERRAKION;
-      case Pkm.VIRIZION:
-        return Pkm.VIRIZION;
-      case Pkm.COBALION:
-        return Pkm.COBALION;
-      case Pkm.MANAPHY:
-        return Pkm.MANAPHY;
-      case Pkm.ROTOM:
-        return Pkm.ROTOM;
-      case Pkm.SPIRITOMB:
-        return Pkm.SPIRITOMB;
-      case Pkm.ABSOL:
-        return Pkm.ABSOL;
-      case Pkm.LAPRAS:
-        return Pkm.LAPRAS;
-      case Pkm.LATIAS:
-        return Pkm.LATIAS;
-      case Pkm.LATIOS:
-        return Pkm.LATIOS;
-      case Pkm.MESPRIT:
-        return Pkm.MESPRIT;
-      case Pkm.AZELF:
-        return Pkm.AZELF;
-      case Pkm.UXIE:
-        return Pkm.UXIE;
-      case Pkm.MEWTWO:
-        return Pkm.MEWTWO;
-      case Pkm.KYUREM:
-        return Pkm.KYUREM;
-      case Pkm.RESHIRAM:
-        return Pkm.RESHIRAM;
-      case Pkm.ZEKROM:
-        return Pkm.ZEKROM;
-      case Pkm.CELEBI:
-        return Pkm.CELEBI;
-      case Pkm.VICTINI:
-        return Pkm.VICTINI;
-      case Pkm.JIRACHI:
-        return Pkm.JIRACHI;
-      case Pkm.ARCEUS:
-        return Pkm.ARCEUS;
-      case Pkm.DEOXYS:
-        return Pkm.DEOXYS;
-      case Pkm.SHAYMIN:
-        return Pkm.SHAYMIN;
-      case Pkm.CRESSELIA:
-        return Pkm.CRESSELIA;
-      case Pkm.HEATRAN:
-        return Pkm.HEATRAN;
-      case Pkm.HO_OH:
-        return Pkm.HO_OH;
-      case Pkm.REGICE:
-        return Pkm.REGICE;
-      case Pkm.REGISTEEL:
-        return Pkm.REGISTEEL;
-      case Pkm.REGIROCK:
-        return Pkm.REGIROCK;
-      case Pkm.ARTICUNO:
-        return Pkm.ARTICUNO;
-      case Pkm.ZAPDOS:
-        return Pkm.ZAPDOS;
-      case Pkm.MOLTRES:
-        return Pkm.MOLTRES;
-      case Pkm.AERODACTYL:
-        return Pkm.AERODACTYL;
-      case Pkm.GROUDON:
-        return Pkm.GROUDON;
-      case Pkm.KYOGRE:
-        return Pkm.KYOGRE;
-      case Pkm.RAYQUAZA:
-        return Pkm.RAYQUAZA;
-      case Pkm.MEGA_RAYQUAZA:
-        return Pkm.MEGA_RAYQUAZA;
-      case Pkm.PALKIA:
-        return Pkm.PALKIA;
-      case Pkm.DIALGA:
-        return Pkm.DIALGA;
-      case Pkm.GIRATINA:
-        return Pkm.GIRATINA;
-      case Pkm.SUICUNE:
-        return Pkm.SUICUNE;
-      case Pkm.ENTEI:
-        return Pkm.ENTEI;
-      case Pkm.RAIKOU:
-        return Pkm.RAIKOU;
-      case Pkm.REGIGIGAS:
-        return Pkm.REGIGIGAS;
-      case Pkm.MAGIKARP:
-        return Pkm.MAGIKARP;
-      case Pkm.GYARADOS:
-        return Pkm.GYARADOS;
-      case Pkm.RATTATA:
-        return Pkm.RATTATA;
-      case Pkm.RATICATE:
-        return Pkm.RATTATA;
-      case Pkm.LUGIA:
-        return Pkm.LUGIA;
-      case Pkm.CARVANHA:
-        return Pkm.CARVANHA;
-      case Pkm.HOUNDOUR:
-        return Pkm.HOUNDOUR;
-      case Pkm.SWABLU:
-        return Pkm.SWABLU;
-      case Pkm.PRIMAL_GROUDON:
-        return Pkm.GROUDON;
-      case Pkm.PRIMAL_KYOGRE:
-        return Pkm.KYOGRE;
-      case Pkm.FEAROW:
-        return Pkm.SPEAROW;
-      case Pkm.SPEAROW:
-        return Pkm.SPEAROW;
-      case Pkm.MEOWTH:
-        return Pkm.MEOWTH;
-      case Pkm.PERSIAN:
-        return Pkm.MEOWTH;
-      case Pkm.DEINO:
-        return Pkm.DEINO;
-      case Pkm.ZWEILOUS:
-        return Pkm.DEINO;
-      case Pkm.HYDREIGON:
-        return Pkm.DEINO;
-      case Pkm.SANDILE:
-        return Pkm.SANDILE;
-      case Pkm.KROKOROK:
-        return Pkm.SANDILE;
-      case Pkm.KROOKODILE:
-        return Pkm.SANDILE;
-      case Pkm.SOLOSIS:
-        return Pkm.SOLOSIS;
-      case Pkm.DUOSION:
-        return Pkm.SOLOSIS;
-      case Pkm.REUNICLUS:
-        return Pkm.SOLOSIS;
-      case Pkm.ODDISH:
-        return Pkm.ODDISH;
-      case Pkm.GLOOM:
-        return Pkm.ODDISH;
-      case Pkm.VILEPLUME:
-        return Pkm.ODDISH;
-      case Pkm.BELLOSSOM:
-        return Pkm.ODDISH;
-      case Pkm.AMAURA:
-        return Pkm.AMAURA;
-      case Pkm.AURORUS:
-        return Pkm.AMAURA;
-      case Pkm.ANORITH:
-        return Pkm.ANORITH;
-      case Pkm.ARMALDO:
-        return Pkm.ANORITH;
-      case Pkm.ARCHEN:
-        return Pkm.ARCHEN;
-      case Pkm.ARCHEOPS:
-        return Pkm.ARCHEN;
-      case Pkm.SHIELDON:
-        return Pkm.SHIELDON;
-      case Pkm.BASTIODON:
-        return Pkm.SHIELDON;
-      case Pkm.TIRTOUGA:
-        return Pkm.TIRTOUGA;
-      case Pkm.CARRACOSTA:
-        return Pkm.TIRTOUGA;
-      case Pkm.LILEEP:
-        return Pkm.LILEEP;
-      case Pkm.CRADILY:
-        return Pkm.LILEEP;
-      case Pkm.KABUTO:
-        return Pkm.KABUTO;
-      case Pkm.KABUTOPS:
-        return Pkm.KABUTO;
-      case Pkm.OMANYTE:
-        return Pkm.OMANYTE;
-      case Pkm.OMASTAR:
-        return Pkm.OMANYTE;
-      case Pkm.CRANIDOS:
-        return Pkm.CRANIDOS;
-      case Pkm.RAMPARDOS:
-        return Pkm.CRANIDOS;
-      case Pkm.TYRUNT:
-        return Pkm.TYRUNT;
-      case Pkm.TYRANTRUM:
-        return Pkm.TYRUNT;
-      case Pkm.BUDEW:
-        return Pkm.BUDEW;
-      case Pkm.ROSELIA:
-        return Pkm.BUDEW;
-      case Pkm.ROSERADE:
-        return Pkm.BUDEW;
-      case Pkm.BUNEARY:
-        return Pkm.BUNEARY;
-      case Pkm.LOPUNNY:
-        return Pkm.BUNEARY;
-      case Pkm.MEGA_LOPUNNY:
-        return Pkm.BUNEARY;
-      case Pkm.AXEW:
-        return Pkm.AXEW;
-      case Pkm.FRAXURE:
-        return Pkm.AXEW;
-      case Pkm.HAXORUS:
-        return Pkm.AXEW;
-      case Pkm.VENIPEDE:
-        return Pkm.VENIPEDE;
-      case Pkm.WHIRLIPEDE:
-        return Pkm.VENIPEDE;
-      case Pkm.SCOLIPEDE:
-        return Pkm.VENIPEDE;
-      case Pkm.PORYGON:
-        return Pkm.PORYGON;
-      case Pkm.PORYGON_2:
-        return Pkm.PORYGON;
-      case Pkm.PORYGON_Z:
-        return Pkm.PORYGON;
-      case Pkm.KLINK:
-        return Pkm.KLINK;
-      case Pkm.KLANG:
-        return Pkm.KLINK;
-      case Pkm.KLINKLANG:
-        return Pkm.KLINK;
-      case Pkm.ELECTRIKE:
-        return Pkm.ELECTRIKE;
-      case Pkm.MANECTRIC:
-        return Pkm.ELECTRIKE;
-      case Pkm.MEGA_MANECTRIC:
-        return Pkm.ELECTRIKE;
-      case Pkm.SHUPPET:
-        return Pkm.SHUPPET;
-      case Pkm.BANETTE:
-        return Pkm.SHUPPET;
-      case Pkm.MEGA_BANETTE:
-        return Pkm.SHUPPET;
-      case Pkm.HONEDGE:
-        return Pkm.HONEDGE;
-      case Pkm.DOUBLADE:
-        return Pkm.HONEDGE;
-      case Pkm.AEGISLASH:
-        return Pkm.HONEDGE;
-      case Pkm.CUBONE:
-        return Pkm.CUBONE;
-      case Pkm.MAROWAK:
-        return Pkm.CUBONE;
-      case Pkm.ALOLAN_MAROWAK:
-        return Pkm.CUBONE;
-      case Pkm.FLETCHLING:
-        return Pkm.FLETCHLING;
-      case Pkm.FLETCHINDER:
-        return Pkm.FLETCHLING;
-      case Pkm.TALONFLAME:
-        return Pkm.FLETCHLING;
-      case Pkm.WHISMUR:
-        return Pkm.WHISMUR;
-      case Pkm.LOUDRED:
-        return Pkm.WHISMUR;
-      case Pkm.EXPLOUD:
-        return Pkm.WHISMUR;
-      case Pkm.TYMPOLE:
-        return Pkm.TYMPOLE;
-      case Pkm.PALPITOAD:
-        return Pkm.TYMPOLE;
-      case Pkm.SEISMITOAD:
-        return Pkm.TYMPOLE;
-      case Pkm.SEWADDLE:
-        return Pkm.SEWADDLE;
-      case Pkm.SWADLOON:
-        return Pkm.SEWADDLE;
-      case Pkm.LEAVANNY:
-        return Pkm.SEWADDLE;
-      case Pkm.PIKIPEK:
-        return Pkm.PIKIPEK;
-      case Pkm.TRUMBEAK:
-        return Pkm.PIKIPEK;
-      case Pkm.TOUCANNON:
-        return Pkm.PIKIPEK;
-      case Pkm.FLABEBE:
-        return Pkm.FLABEBE;
-      case Pkm.FLOETTE:
-        return Pkm.FLABEBE;
-      case Pkm.FLORGES:
-        return Pkm.FLABEBE;
-      case Pkm.JANGMO_O:
-        return Pkm.JANGMO_O;
-      case Pkm.HAKAMO_O:
-        return Pkm.JANGMO_O;
-      case Pkm.KOMMO_O:
-        return Pkm.JANGMO_O;
-      case Pkm.MELOETTA:
-        return Pkm.MELOETTA;
-      case Pkm.ALTARIA:
-        return Pkm.SWABLU;
-      case Pkm.MEGA_ALTARIA:
-        return Pkm.SWABLU;
-      case Pkm.LILLIPUP:
-        return Pkm.LILLIPUP;
-      case Pkm.HERDIER:
-        return Pkm.LILLIPUP;
-      case Pkm.STOUTLAND:
-        return Pkm.LILLIPUP;
-      case Pkm.CASTFORM:
-        return Pkm.CASTFORM;
-      case Pkm.CASTFORM_SUN:
-        return Pkm.CASTFORM_SUN;
-      case Pkm.CASTFORM_RAIN:
-        return Pkm.CASTFORM_RAIN;
-      case Pkm.CASTFORM_HAIL:
-        return Pkm.CASTFORM_HAIL;
-      default:
-        console.log(`No pokemon with name "${name}" found`);
-        break;
-    }
-  }
-
-  static createPokemonFromName(name: string, config?: IPokemonConfig) {
+  static createPokemonFromName(name: Pkm, config?: IPokemonConfig) {
     const s = config && config.selectedShiny ? true: false;
     const e = config && config.selectedEmotion ? config.selectedEmotion: Emotion.NORMAL;
     switch (name) {
@@ -1564,8 +621,6 @@ export default class PokemonFactory {
         return new MegaCamerupt(s,e);
       case Pkm.DITTO:
         return new Ditto(s,e);
-      case Pkm.SANDSHREW:
-        return new Sandshrew(s,e);
       case Pkm.DARKRAI:
         return new Darkrai(s,e);
       case Pkm.LITWICK:
@@ -1778,12 +833,6 @@ export default class PokemonFactory {
         return new Porygon2(s,e);
       case Pkm.PORYGON_Z:
         return new PorygonZ(s,e);
-      case Pkm.KLINK:
-        return new Klink(s,e);
-      case Pkm.KLANG:
-        return new Klang(s,e);
-      case Pkm.KLINKLANG:
-        return new Klinklang(s,e);
       case Pkm.ELECTRIKE:
         return new Electrike(s,e);
       case Pkm.MANECTRIC:
@@ -1808,12 +857,6 @@ export default class PokemonFactory {
         return new Marowak(s,e);
       case Pkm.ALOLAN_MAROWAK:
         return new AlolanMarowak(s,e);
-      case Pkm.FLETCHLING:
-        return new Fletchling(s,e);
-      case Pkm.FLETCHINDER:
-        return new Fletchinder(s,e);
-      case Pkm.TALONFLAME:
-        return new Talonflame(s,e);
       case Pkm.WHISMUR:
         return new Whismur(s,e);
       case Pkm.LOUDRED:
@@ -1856,12 +899,6 @@ export default class PokemonFactory {
         return new Altaria(s,e);
       case Pkm.MEGA_ALTARIA:
         return new MegaAltaria(s,e);
-      case Pkm.LILLIPUP:
-        return new Lillipup(s,e);
-      case Pkm.HERDIER:
-        return new Herdier(s,e);
-      case Pkm.STOUTLAND:
-        return new Stoutland(s,e);
       case Pkm.CASTFORM:
         return new Castform(s,e);
       case Pkm.CASTFORM_SUN:
@@ -1870,6 +907,66 @@ export default class PokemonFactory {
         return new CastformRain(s,e);
       case Pkm.CASTFORM_HAIL:
         return new CastformHail(s,e);
+      case Pkm.CORPHISH:
+        return new Corphish(s,e);
+      case Pkm.CRAWDAUNT:
+        return new Crawdaunt(s,e);
+      case Pkm.JOLTIK:
+        return new Joltik(s,e);
+      case Pkm.GALVANTULA:
+        return new Galvantula(s,e);
+      case Pkm.GENESECT:
+        return new Genesect(s,e);
+      case Pkm.DIANCIE:
+        return new Diancie(s,e);
+      case Pkm.HATENNA:
+        return new Hatenna(s,e);
+      case Pkm.HATTREM:
+        return new Hattrem(s,e);
+      case Pkm.HATTERENE:
+        return new Hatterene(s,e);
+      case Pkm.FENNEKIN:
+        return new Fennekin(s,e);
+      case Pkm.BRAIXEN:
+        return new Braixen(s,e);
+      case Pkm.DELPHOX:
+        return new Delphox(s,e);
+      case Pkm.MAKUHITA:
+        return new Makuhita(s,e);
+      case Pkm.HARIYAMA:
+        return new Hariyama(s,e);
+      case Pkm.REGIELEKI:
+        return new Regieleki(s,e);
+      case Pkm.REGIDRAGO:
+        return new Regidrago(s,e);
+      case Pkm.GUZZLORD:
+        return new Guzzlord(s,e);
+      case Pkm.ETERNATUS:
+        return new Eternatus(s,e);
+      case Pkm.PONYTA:
+        return new Ponyta(s,e);
+      case Pkm.RAPIDASH:
+        return new Rapidash(s,e);
+      case Pkm.NINCADA:
+        return new Nincada(s,e);
+      case Pkm.NINJASK:
+        return new Ninjask(s,e);
+      case Pkm.SHEDNINJA:
+        return new Shedninja(s,e);
+      case Pkm.NOIBAT:
+        return new Noibat(s,e);
+      case Pkm.NOIVERN:
+        return new Noivern(s,e);
+      case Pkm.PUMPKABOO:
+        return new Pumpkaboo(s,e);
+      case Pkm.GOURGEIST:
+        return new Gourgeist(s,e);
+      case Pkm.CACNEA:
+        return new Cacnea(s,e);
+      case Pkm.CACTURNE:
+        return new Cacturne(s,e);
+      case Pkm.RELICANTH:
+        return new Relicanth(s,e);
       case Pkm.DEFAULT:
         return new Magikarp(s,e);
       default:
@@ -1878,12 +975,12 @@ export default class PokemonFactory {
     }
   }
 
-  static getPokemonRarityFromName(name: string) {
+  static getPokemonRarityFromName(name: Pkm) {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name);
     return pokemon.rarity;
   }
 
-  static getPokemonIndexFromName(name: string) {
+  static getPkmIndexFromName(name: Pkm) {
       const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name);
       return pokemon.index;
   }

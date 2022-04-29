@@ -18,11 +18,60 @@ import HistoryItem from '../models/colyseus-models/history-item'
 import { Item } from './enum/Item'
 import { Pkm } from './enum/Pokemon'
 
+export type PrecomputedTypePokemon = {
+    [key in Synergy] : {
+        pokemons: Pkm[],
+        mythicalPokemons: Pkm[]
+    }
+}
+
+export type PrecomputedRaritPokemonyAll = {
+    [key in Rarity]: Pkm[]
+}
+
+export type PrecomputedTypePokemonAll = {
+    [key in Synergy]: Pkm[]
+}
+
+export type Langage = {
+    eng: string,
+    esp: string,
+    prt: string,
+    fra: string
+}
+
 export enum Transfer {
     DRAG_DROP = 'DRAG_DROP',
     DRAG_DROP_COMBINE = 'DRAG_DROP_COMBINE',
     DRAG_DROP_ITEM = 'DRAG_DROP_ITEM',
     SELL_DROP = 'SELL_DROP'
+}
+
+export enum AttackSprite {
+    WATER_MELEE = 'WATER/melee',
+    ROCK_MELEE = 'ROCK/melee',
+    NORMAL_MELEE = 'NORMAL/melee',
+    ELECTRIC_MELEE = 'ELECTRIC/melee',
+    DRAGON_MELEE = 'DRAGON/melee',
+    FIGHTING_RANGE = 'FIGHTING/range',
+    DRAGON_RANGE = 'DRAGON/range',
+    FIGHTING_MELEE = 'FIGHTING/melee',
+    FIRE_MELEE = 'FIRE/melee',
+    PSYCHIC_RANGE = 'PSYCHIC/range',
+    FIRE_RANGE = 'FIRE/range',
+    GRASS_RANGE = 'GRASS/range',
+    WATER_RANGE = 'WATER/range',
+    FLYING_RANGE = 'FLYING/range',
+    ICE_MELEE = 'ICE/melee',
+    GHOST_RANGE = 'GHOST/range',
+    FAIRY_RANGE = 'FAIRY/range',
+    ELECTRIC_RANGE = 'ELECTRIC/range',
+    POISON_MELEE = 'POISON/melee',
+    GRASS_MELEE = 'GRASS/melee',
+    FAIRY_MELEE = 'FAIRY/melee',
+    POISON_RANGE = 'POISON/range',
+    BUG_MELEE = 'BUG/melee',
+    FLYING_MELEE = 'FLYING/melee'
 }
 
 export enum ModalMode {
@@ -120,11 +169,11 @@ export interface IPokemon {
     types: Synergy[]
     rarity: Rarity
     index: string
-    evolution:string
+    evolution: Pkm
     positionX: number
     positionY: number
     cost: number
-    attackSprite: string
+    attackSprite: AttackSprite
     atkSpeed: number
     def: number
     speDef: number
@@ -210,7 +259,7 @@ export interface IPokemonEntity {
   atkSpeedBonus: number
   targetX: number
   targetY: number
-  attackSprite: string
+  attackSprite: AttackSprite
   rarity: Rarity
   name: Pkm
   effects: Effect[]

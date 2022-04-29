@@ -1,5 +1,5 @@
 import PokemonFactory from './pokemon-factory';
-import {Pkm} from '../types/enum/Pokemon';
+import {Pkm, PkmFamily} from '../types/enum/Pokemon';
 import Player from './colyseus-models/player';
 import {IPokemon} from '../types';
 import {PROBABILITY} from '../types/Config';
@@ -10,43 +10,37 @@ const COMMON = [Pkm.CHARMANDER, Pkm.GEODUDE,
   Pkm.CATERPIE, Pkm.WEEDLE,
   Pkm.PIDGEY, Pkm.HOPPIP,
   Pkm.SEEDOT, Pkm.STARLY,
-  Pkm.TOTODILE, Pkm.SWINUB];
+  Pkm.TOTODILE, Pkm.SWINUB, Pkm.NOIBAT, Pkm.FENNEKIN, Pkm.HATENNA];
 
 const UNCOMMON = [Pkm.SQUIRTLE, Pkm.IGGLYBUFF, Pkm.CHIKORITA,
   Pkm.CYNDAQUIL, Pkm.TREECKO, Pkm.TORCHIC,
   Pkm.MUDKIP, Pkm.CHIMCHAR, Pkm.PIPLUP,
   Pkm.MACHOP, Pkm.HORSEA, Pkm.SPHEAL,
-  Pkm.MAGNEMITE, Pkm.DUSKULL, Pkm.EEVEE, Pkm.SANDILE,
-  Pkm.VENIPEDE, Pkm.PIKIPEK,
-  Pkm.FLABEBE, Pkm.BELLSPROUT, Pkm.SLOWPOKE];
+  Pkm.MAGNEMITE, Pkm.DUSKULL, Pkm.EEVEE,
+  Pkm.FLABEBE, Pkm.BELLSPROUT, Pkm.SLOWPOKE, Pkm.CORPHISH];
 
 const RARE = [Pkm.BULBASAUR, Pkm.TURTWIG, Pkm.NIDORANF,
   Pkm.NIDORANM, Pkm.PICHU, Pkm.TRAPINCH,
   Pkm.ARON, Pkm.RHYHORN, Pkm.TOGEPI,
   Pkm.LOTAD, Pkm.SHINX, Pkm.POLIWAG,
-  Pkm.DRATINI, Pkm.MAGBY, Pkm.VANILLITE,
-  Pkm.DEINO, Pkm.SOLOSIS,
-  Pkm.AXEW, Pkm.WHISMUR];
+  Pkm.DRATINI, Pkm.MAGBY, Pkm.WHISMUR, Pkm.PUMPKABOO, Pkm.MAKUHITA, Pkm.JOLTIK, Pkm.CACNEA];
 
 const EPIC = [Pkm.ABRA, Pkm.LARVITAR,
   Pkm.SLAKOTH, Pkm.RALTS,
   Pkm.BAGON, Pkm.BELDUM,
   Pkm.GIBLE, Pkm.ELEKID,
   Pkm.LITWICK, Pkm.SNORUNT, Pkm.BUDEW,
-  Pkm.PORYGON,
-  Pkm.HONEDGE, Pkm.CUBONE,
-  Pkm.TYMPOLE, Pkm.SEWADDLE,
-  Pkm.JANGMO_O];
+  Pkm.PORYGON, Pkm.CUBONE, Pkm.PONYTA];
 
 const LEGENDARY = [Pkm.GASTLY,
   Pkm.ONIX, Pkm.SCYTHER,
   Pkm.RIOLU, Pkm.MEDITITE,
   Pkm.NUMEL, Pkm.SNOVER,
   Pkm.SWABLU, Pkm.BUNEARY,
-  Pkm.ELECTRIKE, Pkm.SHUPPET];
+  Pkm.ELECTRIKE, Pkm.SHUPPET, Pkm.NINCADA];
 
-const MYTHICAL_1 = [Pkm.CASTFORM, Pkm.VIRIZION, Pkm.REGICE, Pkm.REGISTEEL, Pkm.REGIROCK, Pkm.UXIE, Pkm.MESPRIT, Pkm.AZELF, Pkm.LATIAS, Pkm.LATIOS, Pkm.ZAPDOS, Pkm.MOLTRES, Pkm.ARTICUNO, Pkm.LAPRAS, Pkm.ABSOL, Pkm.SPIRITOMB, Pkm.ROTOM, Pkm.MANAPHY, Pkm.COBALION, Pkm.TERRAKION, Pkm.KELDEO, Pkm.TORNADUS, Pkm.THUNDURUS, Pkm.LANDORUS, Pkm.VOLCARONA];
-const MYTHICAL_2 = [Pkm.MELOETTA, Pkm.MEWTWO, Pkm.ENTEI, Pkm.SUICUNE, Pkm.RAIKOU, Pkm.KYUREM, Pkm.RESHIRAM, Pkm.ZEKROM, Pkm.REGIGIGAS, Pkm.CELEBI, Pkm.VICTINI, Pkm.JIRACHI, Pkm.ARCEUS, Pkm.DEOXYS, Pkm.SHAYMIN, Pkm.GIRATINA, Pkm.DARKRAI, Pkm.CRESSELIA, Pkm.HEATRAN, Pkm.LUGIA, Pkm.HO_OH, Pkm.PALKIA, Pkm.DIALGA, Pkm.RAYQUAZA, Pkm.KYOGRE, Pkm.GROUDON];
+const MYTHICAL_1 = [Pkm.REGIDRAGO, Pkm.REGIELEKI, Pkm.CASTFORM, Pkm.VIRIZION, Pkm.REGICE, Pkm.REGISTEEL, Pkm.REGIROCK, Pkm.UXIE, Pkm.MESPRIT, Pkm.AZELF, Pkm.LATIAS, Pkm.LATIOS, Pkm.ZAPDOS, Pkm.MOLTRES, Pkm.ARTICUNO, Pkm.LAPRAS, Pkm.ABSOL, Pkm.SPIRITOMB, Pkm.ROTOM, Pkm.MANAPHY, Pkm.COBALION, Pkm.TERRAKION, Pkm.KELDEO, Pkm.TORNADUS, Pkm.THUNDURUS, Pkm.LANDORUS, Pkm.VOLCARONA];
+const MYTHICAL_2 = [Pkm.GUZZLORD, Pkm.ETERNATUS, Pkm.MELOETTA, Pkm.MEWTWO, Pkm.ENTEI, Pkm.SUICUNE, Pkm.RAIKOU, Pkm.KYUREM, Pkm.RESHIRAM, Pkm.ZEKROM, Pkm.REGIGIGAS, Pkm.CELEBI, Pkm.VICTINI, Pkm.JIRACHI, Pkm.ARCEUS, Pkm.DEOXYS, Pkm.SHAYMIN, Pkm.GIRATINA, Pkm.DARKRAI, Pkm.CRESSELIA, Pkm.HEATRAN, Pkm.LUGIA, Pkm.HO_OH, Pkm.PALKIA, Pkm.DIALGA, Pkm.RAYQUAZA, Pkm.KYOGRE, Pkm.GROUDON];
 
 
 export default class Shop {
@@ -103,7 +97,7 @@ export default class Shop {
 
     player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.stars == 3) {
-        threeStars.push(PokemonFactory.getPokemonFamily(pokemon.name));
+        threeStars.push(PkmFamily[pokemon.name]);
       }
     });
 

@@ -13,7 +13,7 @@ import {MapSchema} from '@colyseus/schema';
 import { GamePhaseState, Rarity } from '../../types/enum/Game';
 import {IDragDropMessage, IDragDropItemMessage, IDragDropCombineMessage, IClient, IPokemonEntity} from '../../types';
 import { Synergy } from '../../types/enum/Synergy';
-import {Pkm, PokemonIndex} from '../../types/enum/Pokemon';
+import {Pkm, PkmIndex} from '../../types/enum/Pokemon';
 import { Pokemon } from '../../models/colyseus-models/pokemon';
 export class OnShopCommand extends Command<GameRoom, {
   id: string,
@@ -24,7 +24,7 @@ export class OnShopCommand extends Command<GameRoom, {
       const player = this.state.players.get(id);
       if (player.shop[index]) {
         const name = player.shop[index];
-        let pokemon = PokemonFactory.createPokemonFromName(name, player.pokemonCollection.get(PokemonIndex[name]));
+        let pokemon = PokemonFactory.createPokemonFromName(name, player.pokemonCollection.get(PkmIndex[name]));
         if (pokemon.name !== Pkm.MAGIKARP &&
           (player.money >= pokemon.cost && (this.room.getBoardSize(player.board) < 8 ||
         (this.room.getPossibleEvolution(player.board, pokemon.name) && this.room.getBoardSize(player.board) == 8)))) {
@@ -37,13 +37,13 @@ export class OnShopCommand extends Command<GameRoom, {
               });
               switch (rankArray[0].s) {
                 case Synergy.FIRE:
-                  pokemon = PokemonFactory.createPokemonFromName(Pkm.CASTFORM_SUN, player.pokemonCollection.get(PokemonIndex[Pkm.CASTFORM_SUN]));
+                  pokemon = PokemonFactory.createPokemonFromName(Pkm.CASTFORM_SUN, player.pokemonCollection.get(PkmIndex[Pkm.CASTFORM_SUN]));
                   break;
                 case Synergy.WATER:
-                  pokemon = PokemonFactory.createPokemonFromName(Pkm.CASTFORM_RAIN, player.pokemonCollection.get(PokemonIndex[Pkm.CASTFORM_RAIN]));
+                  pokemon = PokemonFactory.createPokemonFromName(Pkm.CASTFORM_RAIN, player.pokemonCollection.get(PkmIndex[Pkm.CASTFORM_RAIN]));
                   break;
                 case Synergy.ICE:
-                  pokemon = PokemonFactory.createPokemonFromName(Pkm.CASTFORM_HAIL, player.pokemonCollection.get(PokemonIndex[Pkm.CASTFORM_HAIL]));
+                  pokemon = PokemonFactory.createPokemonFromName(Pkm.CASTFORM_HAIL, player.pokemonCollection.get(PkmIndex[Pkm.CASTFORM_HAIL]));
                   break;
               }
             }
@@ -105,7 +105,7 @@ export class OnDragDropCommand extends Command<GameRoom, {
           const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y);
           if (pokemonToClone && pokemonToClone.rarity != Rarity.MYTHICAL && !pokemonToClone.types.includes(Synergy.FOSSIL)) {
             dittoReplaced = true;
-            const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name), player.pokemonCollection.get(PokemonIndex[pokemonToClone.name]));
+            const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name), player.pokemonCollection.get(PkmIndex[pokemonToClone.name]));
             this.state.players.get(playerId).board.delete(detail.id);
             const position = this.room.getFirstAvailablePositionInBoard(playerId);
             if (position !== undefined) {

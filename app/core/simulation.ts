@@ -4,7 +4,7 @@ import PokemonEntity from './pokemon-entity';
 import PokemonFactory from '../models/pokemon-factory';
 import { Item } from '../types/enum/Item';
 import { Effect } from '../types/enum/Effect';
-import { AttackType, Climate } from '../types/enum/Game';
+import { AttackType, Climate, PokemonActionState } from '../types/enum/Game';
 import Dps from'./dps';
 import DpsHeal from './dps-heal';
 import ItemFactory from '../models/item-factory';
@@ -920,6 +920,16 @@ export default class Simulation extends Schema implements ISimulation{
   update(dt: number) {
     if (this.blueTeam.size == 0 || this.redTeam.size == 0) {
       this.finished = true;
+      if(this.blueTeam.size == 0){
+        this.redTeam.forEach(p=>{
+          p.action = PokemonActionState.HOP;
+        });
+      }
+      else{
+        this.blueTeam.forEach(p=>{
+          p.action = PokemonActionState.HOP;
+        });
+      }
     }
 
     this.blueTeam.forEach((pkm, key) => {

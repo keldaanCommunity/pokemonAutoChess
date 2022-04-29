@@ -1,5 +1,6 @@
 import { Orientation } from '../../../../types/enum/Game'
 import { ORIENTATION_RAD } from '../../../../models/enum';
+import { AttackSprite } from '../../../../types';
 
 export const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyCjMpYJycJTjOsXPM1CJn8olntPQhpysOI',
@@ -76,48 +77,48 @@ export function getOrientationRad(r0: number, c0: number, r1: number, c1: number
   }
 }
 
-export function getAttackScale(attackSprite: string) {
+export function getAttackScale(attackSprite: AttackSprite) {
   switch (attackSprite) {
-    case 'FLYING/range':
+    case AttackSprite.FLYING_RANGE:
       return [1.5, 1.5];
 
-    case 'FLYING/melee':
+    case AttackSprite.FLYING_MELEE:
       return [1.5, 1.5];
 
-    case 'BUG/melee':
+    case AttackSprite.BUG_MELEE:
       return [1.5, 1.5];
 
-    case 'FAIRY/range':
+    case AttackSprite.FAIRY_RANGE:
       return [1.5, 1.5];
 
-    case 'GRASS/range':
+    case AttackSprite.GRASS_RANGE:
       return [3, 3];
 
-    case 'GRASS/melee':
+    case AttackSprite.GRASS_MELEE:
       return [1.5, 1.5];
 
-    case 'POISON/range':
+    case AttackSprite.POISON_RANGE:
       return [1.5, 1.5];
 
-    case 'POISON/melee':
+    case AttackSprite.POISON_MELEE:
       return [1, 1];
 
-    case 'WATER/range':
+    case AttackSprite.WATER_RANGE:
       return [3, 3];
 
-    case 'FIRE/melee':
+    case AttackSprite.FIRE_MELEE:
       return [1.5, 1.5];
 
-    case 'ROCK/melee':
+    case AttackSprite.ROCK_MELEE:
     return [1.5, 1.5];
 
-    case 'ELECTRIC/melee':
+    case AttackSprite.ELECTRIC_MELEE:
     return [1.5, 1.5];
 
-    case 'PSYCHIC/range':
+    case AttackSprite.PSYCHIC_RANGE:
       return [2, 2];
 
-    case 'DRAGON/melee':
+    case AttackSprite.DRAGON_MELEE:
       return [2, 2];
 
     default:

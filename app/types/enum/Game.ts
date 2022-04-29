@@ -18,7 +18,9 @@ export enum PokemonActionState {
     IDLE = "Idle",
     ATTACK = "Attack",
     WALK = "Walk",
-    SLEEP = "Sleep"
+    SLEEP = "Sleep",
+    HOP = "Hop",
+    HURT = "Hurt"
 }
 
 export enum Orientation {

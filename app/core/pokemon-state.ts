@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import {FLYING_PROTECT_THRESHOLD} from '../models/enum';
 import { Item } from '../types/enum/Item';
 import { Pkm } from '../types/enum/Pokemon';
@@ -8,6 +9,7 @@ import Board from './board';
 import PokemonEntity from './pokemon-entity';
 import { IPokemonEntity } from '../types';
 import { Synergy } from '../types/enum/Synergy';
+import { Ability } from '../types/enum/Ability';
 
 export default class PokemonState {
 
@@ -45,6 +47,9 @@ export default class PokemonState {
             reducedDamage = Math.ceil(reducedDamage * 1.2);
           }
         }
+        if(attacker && attacker.name == Pkm.GENESECT && pokemon.status.armorReduction){
+          reducedDamage *= 3;
+        }
         const armorFactor = 0.1;
         const def = attacker && attacker.items.has(Item.RAZOR_FANG) ? Math.round( 0.7 * pokemon.def): pokemon.def;
         const speDef = attacker && attacker.items.has(Item.RAZOR_FANG) ? Math.round( 0.7 * pokemon.speDef): pokemon.speDef;
@@ -65,6 +70,10 @@ export default class PokemonState {
         if (!reducedDamage) {
           reducedDamage = 0;
           // console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
+        }
+
+        if(pokemon.skill == Ability.WONDER_GUARD){
+          reducedDamage = 1;
         }
 
         if (pokemon.dodge > Math.random()) {
@@ -393,11 +402,9 @@ export default class PokemonState {
     return updateEffects;
   }
 
-  onEnter(pokemon: PokemonEntity) {
-  }
+  onEnter(pokemon: PokemonEntity) {}
 
-  onExit(pokemon: PokemonEntity) {
-  }
+  onExit(pokemon: PokemonEntity) {}
 
   isTarget(pokemon: PokemonEntity, board: Board) {
     let target = false;
@@ -489,4 +496,4 @@ export default class PokemonState {
   }
 
   move(pokemon: PokemonEntity, board: Board, coordinates: number[]) {}
-};
+}

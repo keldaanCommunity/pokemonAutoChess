@@ -17,7 +17,7 @@ class Wiki extends Component{
                 <TabList>
                     <Tab key='title-faq'>FAQ</Tab>
                     <Tab key='title-pokemon'>POKEMONS</Tab>
-                    <Tab key='title-items'>ItemS</Tab>
+                    <Tab key='title-items'>ITEMS</Tab>
                     <Tab key='title-types'>SYNERGIES</Tab>
                     <Tab key='title-statistic'>STATISTICS</Tab>
                 </TabList>

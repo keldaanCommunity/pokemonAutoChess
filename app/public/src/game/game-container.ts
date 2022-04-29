@@ -411,12 +411,15 @@ class GameContainer {
       exp: player.exp
     };
 
-    player.board.forEach((pokemon) => {
-      if (pokemon.positionY != 0) {
-        const shinyPad = pokemon.shiny ? '/0000/0001' : ''; 
-        simplePlayer.pokemons.push(`${pokemon.index}${shinyPad}/${pokemon.emotion}`);
-      }
-    });
+    if(player.board && player.board.size > 0){
+      player.board.forEach((pokemon) => {
+        if (pokemon.positionY != 0) {
+          const shinyPad = pokemon.shiny ? '/0000/0001' : ''; 
+          simplePlayer.pokemons.push(`${pokemon.index}${shinyPad}/${pokemon.emotion}`);
+        }
+      });
+    }
+
     return simplePlayer;
   }
 }

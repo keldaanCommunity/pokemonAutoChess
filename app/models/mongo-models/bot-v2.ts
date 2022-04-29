@@ -2,7 +2,7 @@ import {Schema, model} from 'mongoose';
 import { Item } from '../../types/enum/Item';
 import {Pkm} from '../../types/enum/Pokemon';
 export interface IDetailledPokemon {
-  name: string;
+  name: Pkm;
   x:number;
   y: number;
   items: Item[];

@@ -25,7 +25,7 @@ const imgStyle: CSS.Properties = {
     imageRendering:'pixelated'
 }
 
-export default function SelectedEntity(props: {entity: string | Pkm}) {
+export default function SelectedEntity(props: {entity: Item | Pkm}) {
     if(Object.keys(Item).includes(props.entity)){
         return <div className='nes-container' style={entityStyle}>
             <div style={{display:'flex'}}>
@@ -36,7 +36,7 @@ export default function SelectedEntity(props: {entity: string | Pkm}) {
     </div>
     }
     else if(Object.values(Pkm).includes(props.entity as Pkm)){
-        const pokemon = PokemonFactory.createPokemonFromName(props.entity);
+        const pokemon = PokemonFactory.createPokemonFromName(props.entity as Pkm);
         return <div className='nes-container' style={entityStyle}>
             <div style={{display:'flex'}}>
                 <img style={imgStyle} src={`${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>

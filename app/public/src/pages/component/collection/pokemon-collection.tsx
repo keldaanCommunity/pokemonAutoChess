@@ -9,10 +9,11 @@ import { Pokemon } from '../../../../../models/colyseus-models/pokemon';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata';
 import tracker from '../../../../dist/client/assets/pokemons/tracker.json';
-import { Convert } from '../../../../../public/dist/client/assets/pokemons/ITracker';
 import { Emotion } from '../../../../../types';
 import {Synergy} from '../../../../../types/enum/Synergy';
+import {ITracker} from '../../../../../types/ITracker';
 import PokemonEmotion from './pokemon-emotion';
+import { Pkm } from '../../../../../types/enum/Pokemon';
 
 const buttonStyle: CSS.Properties = {
     marginLeft:'10px',
@@ -21,8 +22,8 @@ const buttonStyle: CSS.Properties = {
 }
 
 export default function PokemonCollection(props: {toggleCollection :()=>void}){
-    const metadata = Convert.toITracker(JSON.stringify(tracker));
-    const [pokemon, setPokemon] =  useState<string>(undefined);
+    const metadata = tracker as unknown as { [key: string]: ITracker };
+    const [pokemon, setPokemon] =  useState<Pkm>(undefined);
     const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection);
     let p: Pokemon;
     let pConfig: IPokemonConfig;

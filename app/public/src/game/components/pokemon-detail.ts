@@ -1,7 +1,8 @@
 import {GameObjects} from 'phaser';
-import {SPECIAL_SKILL_DESCRIPTION, CDN_PORTRAIT_URL} from '../../../../models/enum';
+import {CDN_PORTRAIT_URL} from '../../../../models/enum';
 import { AttackType } from '../../../../types/enum/Game'
 import { Emotion } from '../../../../types';
+import { AbilityName, AbilityDescription } from '../../../../types/strings/Ability';
 import { Ability } from '../../../../types/enum/Ability';
 
 export default class PokemonDetail extends GameObjects.DOMElement {
@@ -267,10 +268,10 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     profile.appendChild(pokemonName);
 
     const ult = document.createElement('p');
-    ult.innerHTML = SPECIAL_SKILL_DESCRIPTION[skill].title.eng;
+    ult.innerHTML = AbilityName[skill].eng;
 
     const description = document.createElement('p');
-    description.innerHTML = SPECIAL_SKILL_DESCRIPTION[skill].description.eng;
+    description.innerHTML = AbilityDescription[skill].eng;
 
     const ultDiv = document.createElement('div');
     ultDiv.style.display = 'flex';
