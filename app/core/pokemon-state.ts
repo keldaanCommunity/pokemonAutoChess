@@ -9,6 +9,7 @@ import Board from './board';
 import PokemonEntity from './pokemon-entity';
 import { IPokemonEntity } from '../types';
 import { Synergy } from '../types/enum/Synergy';
+import { Ability } from '../types/enum/Ability';
 
 export default class PokemonState {
 
@@ -69,6 +70,10 @@ export default class PokemonState {
         if (!reducedDamage) {
           reducedDamage = 0;
           // console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
+        }
+
+        if(pokemon.skill == Ability.WONDER_GUARD){
+          reducedDamage = 1;
         }
 
         if (pokemon.dodge > Math.random()) {
