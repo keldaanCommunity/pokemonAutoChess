@@ -930,7 +930,7 @@ export const AbilityDescription: {[key in Ability]: Langage} = {
         prt: ''
     },
     CORRUPTED_NATURE: {
-        eng: "Wound adjacent ennemies and deals 10/20/40 physical life steal damage",
+        eng: "Wound adjacent ennemies for 4 seconds and deals 10/20/40 physical life steal damage",
         esp: "",
         prt: "",
         fra: ""
@@ -954,7 +954,7 @@ export const AbilityDescription: {[key in Ability]: Langage} = {
         fra: ""
     },
     DYNAMAX_CANNON: {
-        eng: "Shoot a dynamax beam on a straight line, dealing 80% target life as special damage",
+        eng: "Shoot a dynamax beam on a straight line, dealing 80% hp to every pokemon as special damage",
         esp: "",
         prt: "",
         fra: ""
@@ -966,7 +966,7 @@ export const AbilityDescription: {[key in Ability]: Langage} = {
         fra: ""
     },
     ELECTRO_BOOST: {
-        eng: "The attacker attacks an additional target (stacks)",
+        eng: "All electric allies gains a rune protect effect",
         esp: "",
         prt: "",
         fra: ""
@@ -990,31 +990,31 @@ export const AbilityDescription: {[key in Ability]: Langage} = {
         fra: ""
     },
     LEECH_SEED: {
-        eng: "Seed the target, stealing 10% hp/seconds",
+        eng: "Poison the target for 3/6/12s, healing for 10/20/40 hp",
         esp: "",
         prt: "",
         fra: ""
     },
     LOCK_ON: {
-        eng: "Lock the target. Genesect deals 3x more damage to it.",
+        eng: "Lock the target and shred its defenses for 8s. Genesect deals 3x more damage to it.",
         esp: "",
         prt: "",
         fra: ""
     },
     PSYCH_UP: {
-        eng: "Give true damage to the nearest ally",
+        eng: "Silence the target and every ennemies around for 2/4/8s, dealing 10/20/40 special damage",
         esp: "",
         prt: "",
         fra: ""
     },
     RAZOR_WIND: {
-        eng: "Silence the target and every ennemies around for 2/4/8s, dealing 10/2/40 special damage",
+        eng: "Apply Smoke effect (-50% attack speed) on the target and around it",
         esp: "",
         prt: "",
         fra: ""
     },
     TWISTING_NEITHER: {
-        eng: "Deals 80 special damage to adjacent ennemies. Every affected pokemons is teleported somewhere",
+        eng: "Deals 80 special damage to around ennemies. Every affected pokemons is teleported somewhere",
         esp: "",
         prt: "",
         fra: ""

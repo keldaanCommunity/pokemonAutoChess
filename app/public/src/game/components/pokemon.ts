@@ -446,7 +446,7 @@ export default class Pokemon extends Button {
                 coordinates = transformAttackCoordinate(this.targetX, this.targetY);
                 specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'pmd-replace', `${Ability.TWISTING_NEITHER}/000`);
                 specialProjectile.setDepth(7);
-                specialProjectile.setScale(2, 2);
+                specialProjectile.setScale(4, 4);
                 specialProjectile.anims.play(Ability.TWISTING_NEITHER);
                 specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
                 specialProjectile.destroy();

@@ -1,6 +1,12 @@
 import { Orientation } from '../types/enum/Game';
 import PokemonEntity from './pokemon-entity';
 
+
+export type Cell = {
+  row: number,
+  column: number,
+  value: PokemonEntity | undefined
+}
 export default class Board {
   rows: number;
   columns: number;
@@ -37,7 +43,7 @@ export default class Board {
     this.setValue(r0, c0, v1);
   }
 
-  forEach(callback: Function) {
+  forEach(callback: (x: number, y: number, tg: PokemonEntity) => void) {
     for (let r = 0; r < this.rows; r++) {
       for (let c = 0; c < this.columns; c++) {
         callback(r, c, this.cell[this.columns * r + c]);
@@ -87,7 +93,7 @@ export default class Board {
   }
 
   getAdjacentCells(row: number, col: number) {
-    const cells = [];
+    const cells = new Array<Cell>();
     for (let r = row - 1; r < row + 2; r++) {
       for (let c = col - 1; c < col + 2; c++) {
         if (r == row && c == col) continue;
@@ -104,7 +110,7 @@ export default class Board {
   }
 
   getCellsInRange(row: number, col: number, range: number) {
-    const cells = [];
+    const cells = new Array<Cell>();
     const n = Math.floor(Math.abs(range));
     for (let r = 0; r < this.rows; r++) {
       for (let c = 0; c < this.columns; c++) {
@@ -123,7 +129,7 @@ export default class Board {
   }
 
   getCellsInRadius(row: number, col: number, radius: number) {
-    const cells = [];
+    const cells = new Array<Cell>();
     const n = Math.floor(Math.abs(radius)) + 0.5; const n2 = n * n;
     for (let r = 0; r < this.rows; r++) {
       for (let c = 0; c < this.columns; c++) {
@@ -142,7 +148,7 @@ export default class Board {
   }
 
   getCellsBetween(r0: number, c0: number, r1: number, c1: number) {
-    const cells = [];
+    const cells = new Array<Cell>();
     const dr = r1 - r0; const dc = c1 - c0;
     const n = Math.max(Math.abs(dr), Math.abs(dc)); const m = n == 0 ? 0 : 1 / n;
     const rs = dr * m; const cs = dc * m;
@@ -155,6 +161,25 @@ export default class Board {
       });
     }
     return cells;
+  }
+
+  getTeleportationCell(r: number, c: number) {
+    const candidates = new Array<Cell>();
+    [{r: 0, c: 0}, {r: this.rows - 1, c: 0}, {r: this.rows - 1, c: this.columns -1}, {r: 0, c: this.columns - 1}].forEach(coord => {
+      const cells = this.getCellsBetween(r, c, coord.r, coord.c);
+      cells.forEach(cell=>{
+        if(cell.value === undefined){
+          candidates.push(cell);
+        }
+      });
+    });
+    if(candidates.length > 0){
+      candidates.sort((a,b) => this.distance(r, c, b.row, b.column) - this.distance(r, c, a.row, a.column));
+      return candidates[0];
+    }
+    else{
+      return undefined;
+    }
   }
 }
 

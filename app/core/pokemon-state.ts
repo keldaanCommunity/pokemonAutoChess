@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import {FLYING_PROTECT_THRESHOLD} from '../models/enum';
 import { Item } from '../types/enum/Item';
 import { Pkm } from '../types/enum/Pokemon';
@@ -44,6 +45,9 @@ export default class PokemonState {
           } else {
             reducedDamage = Math.ceil(reducedDamage * 1.2);
           }
+        }
+        if(attacker && attacker.name == Pkm.GENESECT && pokemon.status.armorReduction){
+          reducedDamage *= 3;
         }
         const armorFactor = 0.1;
         const def = attacker && attacker.items.has(Item.RAZOR_FANG) ? Math.round( 0.7 * pokemon.def): pokemon.def;
@@ -393,11 +397,9 @@ export default class PokemonState {
     return updateEffects;
   }
 
-  onEnter(pokemon: PokemonEntity) {
-  }
+  onEnter(pokemon: PokemonEntity) {}
 
-  onExit(pokemon: PokemonEntity) {
-  }
+  onExit(pokemon: PokemonEntity) {}
 
   isTarget(pokemon: PokemonEntity, board: Board) {
     let target = false;
@@ -489,4 +491,4 @@ export default class PokemonState {
   }
 
   move(pokemon: PokemonEntity, board: Board, coordinates: number[]) {}
-};
+}

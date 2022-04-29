@@ -141,6 +141,13 @@ export default class AnimationManager {
 
   createSpecialAttacksAnimations() {
     this.game.anims.create({
+      key: Ability.DYNAMIC_PUNCH,
+      frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 12, zeroPad: 3, prefix: `${Ability.DYNAMIC_PUNCH}/`}),
+      duration: 1000,
+      repeat: 0
+    });
+
+    this.game.anims.create({
         key: Ability.CORRUPTED_NATURE,
         frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 48, zeroPad: 3, prefix: `${Ability.CORRUPTED_NATURE}/`}),
         duration: 1000,
@@ -234,7 +241,7 @@ export default class AnimationManager {
       this.game.anims.create({
         key: Ability.TWISTING_NEITHER,
         frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 59, zeroPad: 3, prefix: `${Ability.TWISTING_NEITHER}/`}),
-        duration: 1000,
+        duration: 2000,
         repeat: 0
       });
 

@@ -72,12 +72,6 @@ whirlipede,0544/AnimData.xml
 whirlipede,0544/0000/0001/AnimData.xml
 scolipede,0545/AnimData.xml
 scolipede,0545/0000/0001/AnimData.xml
-klink,0599/AnimData.xml
-klink,0599/0000/0001/AnimData.xml
-klang,0600/AnimData.xml
-klang,0600/0000/0001/AnimData.xml
-klinklang,0601/AnimData.xml
-klinklang,0601/0000/0001/AnimData.xml
 mega-manectric,0310/0001/AnimData.xml
 mega-manectric,0310/0001/0001/AnimData.xml
 mega-banette,0354/0001/AnimData.xml
@@ -86,12 +80,6 @@ doublade,0680/AnimData.xml
 doublade,0680/0000/0001/AnimData.xml
 aegislash,0681/AnimData.xml
 aegislash,0681/0000/0001/AnimData.xml
-fletchling,0661/AnimData.xml
-fletchling,0661/0000/0001/AnimData.xml
-fletchinder,0662/AnimData.xml
-fletchinder,0662/0000/0001/AnimData.xml
-talonflame,0663/AnimData.xml
-talonflame,0663/0000/0001/AnimData.xml
 tympole,0535/0000/0001/AnimData.xml
 palpitoad,0536/AnimData.xml
 palpitoad,0536/0000/0001/AnimData.xml
@@ -116,8 +104,6 @@ kommo-o,0784/0000/0001/AnimData.xml
 meloetta,0648/0000/0001/AnimData.xml
 mega-altaria,0334/0001/AnimData.xml
 mega-altaria,0334/0001/0001/AnimData.xml
-herdier,0507/AnimData.xml
-herdier,0507/0000/0001/AnimData.xml
 hatterene,0858/0000/0001/AnimData.xml
 pumpkaboo,0710/0000/0001/AnimData.xml
 gourgeist,0711/0000/0001/AnimData.xml

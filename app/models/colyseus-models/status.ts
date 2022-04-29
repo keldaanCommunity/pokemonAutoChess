@@ -1,5 +1,6 @@
 import {Schema, type} from '@colyseus/schema';
-import Board from '../../core/board';
+import Board, { Cell } from '../../core/board';
+import PokemonEntity from '../../core/pokemon-entity';
 import { IStatus } from '../../types';
 import { Item } from '../../types/enum/Item';
 
@@ -20,8 +21,8 @@ export default class Status extends Schema implements IStatus{
   soulDew: boolean;
   brightPowder: boolean;
   flameOrb: boolean;
-  burnOrigin: any;
-  poisonOrigin: any;
+  burnOrigin: PokemonEntity;
+  poisonOrigin: PokemonEntity;
   burnCooldown: number;
   silenceCooldown: number;
   poisonCooldown: number;
@@ -44,12 +45,12 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  updateFlameOrb(dt: number, pkm: any, board: Board) {
+  updateFlameOrb(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.flameOrbCooldown - dt <= 0) {
       this.flameOrb = false;
       const cells = board.getAdjacentCells(pkm.positionX, pkm.positionY);
       let flameCount = 1;
-      cells.forEach((cell:any) => {
+      cells.forEach((cell:Cell) => {
         if (cell.value && pkm.team != cell.value.team && flameCount > 0) {
           cell.value.status.triggerBurn(8000, cell.value, pkm);
           flameCount --;
@@ -86,7 +87,7 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  updateSoulDew(dt: number, pkm: any) {
+  updateSoulDew(dt: number, pkm: PokemonEntity) {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false;
       pkm.addSpellDamage(25);
@@ -98,7 +99,7 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  triggerBurn(timer: number, pkm: any, origin: any) {
+  triggerBurn(timer: number, pkm: PokemonEntity, origin: PokemonEntity | undefined) {
     if (!this.burn && !pkm.items.has(Item.WIDE_LENS)) {
       this.burn = true;
       this.burnCooldown = timer;
@@ -132,7 +133,7 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  triggerPoison(timer: number, pkm: any, origin: any) {
+  triggerPoison(timer: number, pkm: PokemonEntity, origin: PokemonEntity | undefined) {
     if (!this.poison && !pkm.items.has(Item.WIDE_LENS)) {
       this.poison = true;
       this.poisonCooldown = timer;
@@ -233,7 +234,7 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  updateShield(dt: number, pkm: any) {
+  updateShield(dt: number, pkm: PokemonEntity) {
     if (this.temporaryShieldCooldown - dt <= 0) {
       this.temporaryShield = false;
       pkm.shield = 0;
@@ -249,7 +250,7 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  updateBrightPowder(dt: number, pokemon: any, board: any) {
+  updateBrightPowder(dt: number, pokemon: PokemonEntity, board: Board) {
     if (this.brightPowderCooldown - dt <= 0) {
       this.brightPowder = false;
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
@@ -271,7 +272,7 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  triggerSmoke(timer: number, pkm: any) {
+  triggerSmoke(timer: number, pkm: PokemonEntity) {
     if (!this.smoke) {
       this.smoke = true;
       pkm.handleAttackSpeed(-50);
@@ -279,7 +280,7 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  updateSmoke(dt: number, pkm: any) {
+  updateSmoke(dt: number, pkm: PokemonEntity) {
     if (this.smokeCooldown - dt <= 0) {
       this.smoke = false;
       pkm.handleAttackSpeed(30);
@@ -289,7 +290,6 @@ export default class Status extends Schema implements IStatus{
   }
 
   triggerRuneProtect() {
-    // console.log('rune pritec');
     this.runeProtect = true;
   }
 
