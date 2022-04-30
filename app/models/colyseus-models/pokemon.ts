@@ -2199,7 +2199,7 @@ export class Corphish extends Pokemon {
 
 export class Crawdaunt extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.CRAWDAUNT, [Synergy.GRASS, Synergy.DARK], Rarity.UNCOMMON, PkmIndex[Pkm.CRAWDAUNT], Pkm.DEFAULT, 170, 16, 5, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 110, Ability.CRABHAMMER,shiny, emotion);
+    super(Pkm.CRAWDAUNT, [Synergy.WATER, Synergy.DARK], Rarity.UNCOMMON, PkmIndex[Pkm.CRAWDAUNT], Pkm.DEFAULT, 170, 16, 5, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 110, Ability.CRABHAMMER,shiny, emotion);
   }
 }
 
@@ -2211,7 +2211,7 @@ export class Cacnea extends Pokemon {
 
 export class Cacturne extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.CACTURNE, [Synergy.WATER, Synergy.DARK], Rarity.RARE, PkmIndex[Pkm.CACTURNE], Pkm.DEFAULT, 170, 16, 6, 5, 1, AttackSprite.GRASS_MELEE, AttackType.PHYSICAL, 2, 70, Ability.LEECH_SEED,shiny, emotion);
+    super(Pkm.CACTURNE, [Synergy.GRASS, Synergy.DARK], Rarity.RARE, PkmIndex[Pkm.CACTURNE], Pkm.DEFAULT, 170, 16, 6, 5, 1, AttackSprite.GRASS_MELEE, AttackType.PHYSICAL, 2, 70, Ability.LEECH_SEED,shiny, emotion);
   }
 }
 

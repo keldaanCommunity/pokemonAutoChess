@@ -185,14 +185,13 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
       newSynergies.set(s, 0);
     });
     const pokemonNames = [];
-
     bot.steps[i].board.forEach(pkm=>{
       const family = PkmFamily[pkm.name];
       const pkmTypes = PokemonFactory.createPokemonFromName(pkm.name).types;
       if (!pokemonNames.includes(family)) {
         pokemonNames.push(family);
         pkmTypes.forEach( (type) => {
-          newSynergies.set(type, 1);
+          newSynergies.set(type, newSynergies.get(type) + 1);
         });
       }
     });
