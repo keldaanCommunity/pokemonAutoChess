@@ -367,15 +367,15 @@ export default class GameScene extends Scene {
           }));
         }
         // Item -> POKEMON(board zone) = EQUIP
-        else if(dropZone.name == 'board-zone'){
-          document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
-            detail: {
-              x: dropZone.getData('x'),
-              y: dropZone.getData('y'),
-              id: gameObject.name
-            }
-          }));
-        }
+        else if(dropZone.name == 'board-zone' && !(this.room.state.phase == GamePhaseState.FIGHT && dropZone.getData('y') != 0)){
+            document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
+              detail: {
+                x: dropZone.getData('x'),
+                y: dropZone.getData('y'),
+                id: gameObject.name
+              }
+            }));
+          }
         // RETURN TO ORIGINAL SPOT
         else{
           this.itemsContainer.updateItems();
