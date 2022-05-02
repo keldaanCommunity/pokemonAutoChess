@@ -84,6 +84,10 @@ export default function Game() {
                 dispatch(joinGame(r));
             }
             catch(error){
+                setTimeout(async()=>{
+                    const r: Room<GameState> = await client.reconnect(localStorage.getItem('lastRoomId'),localStorage.getItem('lastSessionId'));
+                    dispatch(joinGame(r));
+                });
                 console.log(error);         
             }
         });

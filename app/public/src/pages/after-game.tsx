@@ -42,6 +42,11 @@ export default function AfterGame(){
                     dispatch(joinAfter(r));
                 }
                 catch(error){
+                    setTimeout(async ()=>{
+                        const r: Room<AfterGameState> = await client.reconnect(localStorage.getItem('lastRoomId'),localStorage.getItem('lastSessionId'));
+                        await initialize(r);
+                        dispatch(joinAfter(r));
+                    }, 1000);
                     console.log(error);         
                 }
             });
