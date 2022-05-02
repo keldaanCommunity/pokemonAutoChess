@@ -208,19 +208,17 @@ export class FlameChargeStrategy extends AttackStrategy{
           damage = 80;
         }
         const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
-        const x = farthestCoordinate[0];
-        const y = farthestCoordinate[1];
     
-        const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, x, y);
+        const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
         cells.forEach((cell)=>{
           if (cell.value && cell.value != pokemon) {
             cell.value.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon);
           }
         });
     
-        board.swapValue(pokemon.positionX, pokemon.positionY, x, y);
-        pokemon.positionX = x;
-        pokemon.positionY = y;
+        board.swapValue(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
+        pokemon.positionX = farthestCoordinate.x;
+        pokemon.positionY = farthestCoordinate.y;
     }
 }
 
@@ -321,8 +319,8 @@ export class KingShieldStrategy extends AttackStrategy {
     }
     pokemon.status.triggerProtect(timer);
     const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board);
-    const x = farthestTarget[0];
-    const y = farthestTarget[1];
+    const x = farthestTarget.x;
+    const y = farthestTarget.y;
     const oldX = pokemon.positionX;
     const oldY = pokemon.positionY;
 
@@ -681,10 +679,9 @@ export class ShadowCloneStrategy extends AttackStrategy {
   process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
-    const x = farthestCoordinate[0];
-    const y = farthestCoordinate[1];
-    if (x !== undefined && y !== undefined) {
-      const clone = pokemon.simulation.addPokemonEntity(pokemon, x, y, pokemon.team);
+
+    if (farthestCoordinate.x !== undefined && farthestCoordinate.y !== undefined) {
+      const clone = pokemon.simulation.addPokemonEntity(pokemon, farthestCoordinate.x, farthestCoordinate.y, pokemon.team);
       clone.life = pokemon.life;
     }
   }
@@ -710,19 +707,17 @@ export class VoltSwitchStrategy extends AttackStrategy {
     }
 
     const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
-    const x = farthestCoordinate[0];
-    const y = farthestCoordinate[1];
 
-    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, x, y);
+    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
     cells.forEach((cell)=>{
       if (cell.value && cell.value != pokemon) {
         cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
       }
     });
 
-    board.swapValue(pokemon.positionX, pokemon.positionY, x, y);
-    pokemon.positionX = x;
-    pokemon.positionY = y;
+    board.swapValue(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
+    pokemon.positionX = farthestCoordinate.x;
+    pokemon.positionY = farthestCoordinate.y;
   }
 }
 

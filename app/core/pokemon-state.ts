@@ -343,9 +343,9 @@ export default class PokemonState {
       if (pokemon.mana >= pokemon.maxMana) {
         if (pokemon.targetX == -1 || pokemon.targetY == -1) {
           const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
-          if (targetCoordinate[0] !== undefined && targetCoordinate[1] !== undefined) {
-            pokemon.targetX = targetCoordinate[0];
-            pokemon.targetY = targetCoordinate[1];
+          if (targetCoordinate.x !== undefined && targetCoordinate.y !== undefined) {
+            pokemon.targetX = targetCoordinate.x;
+            pokemon.targetY = targetCoordinate.y;
           }
         }
         const target = board.getValue(pokemon.targetX, pokemon.targetY);
@@ -416,32 +416,31 @@ export default class PokemonState {
     return target;
   }
 
-  getNearestTargetCoordinate(pokemon: PokemonEntity, board: Board) {
-    let x = undefined;
-    let y = undefined;
+  getNearestTargetCoordinate(pokemon: PokemonEntity, board: Board): {x:number, y:number} {
     let distance = 999;
+    let candidatesCoordinates: {x: number, y:number}[] = new Array<{x:number, y:number}>();
+
     board.forEach((r: number, c: number, value: PokemonEntity) => {
       if (value !== undefined && value.team != pokemon.team) {
         const candidateDistance = board.distance(pokemon.positionX, pokemon.positionY, r, c);
         if (candidateDistance < distance) {
           distance = candidateDistance;
-          x = r;
-          y = c;
+          candidatesCoordinates = [{x:r, y:c}];
+
         } else if (candidateDistance == distance) {
-          if (pokemon.team == 0 && c > y) {
-            x = r;
-            y = c;
-          } else if (pokemon.team == 1 && c < y) {
-            x = r;
-            y = c;
-          }
+            candidatesCoordinates.push({x:r, y:c});
         }
       }
     });
-    return [x, y];
+    if(candidatesCoordinates.length > 0){
+        return candidatesCoordinates[Math.floor(Math.random() * candidatesCoordinates.length)];
+    }
+    else{
+        return {x: undefined, y: undefined};
+    }
   }
 
-  getFarthestTargetCoordinate(pokemon: PokemonEntity, board: Board) {
+  getFarthestTargetCoordinate(pokemon: PokemonEntity, board: Board): {x:number, y:number} {
     const pokemons = [];
 
     board.forEach((r: number, c: number, value: PokemonEntity)=>{
@@ -455,10 +454,15 @@ export default class PokemonState {
       return b.distance-a.distance;
     });
 
-    return [pokemons[0].x, pokemons[0].y];
+    if(pokemons.length > 0){
+        return {x: pokemons[0].x, y: pokemons[0].y}
+    }
+    else{
+        return {x: undefined, y: undefined};
+    }
   }
 
-  getFarthestTargetCoordinateAvailablePlace(pokemon: PokemonEntity, board: Board) {
+  getFarthestTargetCoordinateAvailablePlace(pokemon: PokemonEntity, board: Board): {x:number, y:number} {
     let x = undefined;
     let y = undefined;
     const pokemons = [];
@@ -492,8 +496,8 @@ export default class PokemonState {
         break;
       }
     }
-    return [x, y];
+    return {x: x, y:y};
   }
 
-  move(pokemon: PokemonEntity, board: Board, coordinates: number[]) {}
+  move(pokemon: PokemonEntity, board: Board, coordinates: {x:number, y:number}) {}
 }
