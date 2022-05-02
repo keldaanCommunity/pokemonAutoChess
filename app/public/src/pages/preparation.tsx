@@ -10,6 +10,7 @@ import { Client, Room } from 'colyseus.js';
 import {joinPreparation, logIn } from '../stores/NetworkStore';
 import { addUser, changeUser, leavePreparation, pushMessage, removeUser, setGameStarted, setName, setOwnerId, setOwnerName } from '../stores/PreparationStore';
 import GameState from '../../../rooms/states/game-state';
+import {Transfer} from '../../../types';
 
 const preparationStyle = {
     display:'flex',
@@ -77,10 +78,10 @@ export default function Preparation() {
                 };
             };
             r.state.users.onRemove = (u) => {dispatch(removeUser(u.id))};
-            r.onMessage('messages', (message) => {
+            r.onMessage(Transfer.MESSAGES, (message) => {
                 dispatch(pushMessage(message));
             });
-            r.onMessage('game-start', async (message) => {
+            r.onMessage(Transfer.GAME_START, async (message) => {
                 const token: string = await firebase.auth().currentUser.getIdToken();
                 const game: Room<GameState> = await client.joinById(message.id, {idToken: token});
                 localStorage.setItem('lastRoomId', game.id);

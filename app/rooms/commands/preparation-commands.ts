@@ -4,7 +4,7 @@ import UserMetadata, { IUserMetadata } from "../../models/mongo-models/user-meta
 import BotV2 from "../../models/mongo-models/bot-v2";
 import { Client } from "colyseus";
 import PreparationRoom from "../preparation-room";
-import { Emotion, IMessage } from "../../types";
+import { Emotion, IMessage, Transfer } from "../../types";
 import { BotDifficulty } from "../../types/enum/Game";
 
 export class OnJoinCommand extends Command<PreparationRoom, {
@@ -21,7 +21,7 @@ export class OnJoinCommand extends Command<PreparationRoom, {
           // console.log(user.displayName);
           this.state.ownerName = user.displayName;
         }
-        this.room.broadcast('messages', {
+        this.room.broadcast(Transfer.MESSAGES, {
           'name': 'Server',
           'payload': `${ user.displayName } joined.`,
           'avatar': user.avatar,
@@ -51,7 +51,7 @@ export class OnGameStartCommand extends Command<PreparationRoom, {
 
     if (allUsersReady && !this.state.gameStarted) {
       this.state.gameStarted = true;
-      this.room.broadcast('game-start', message, {except: client});
+      this.room.broadcast(Transfer.GAME_START, message, {except: client});
     }
   }
 }
@@ -61,7 +61,7 @@ export class OnMessageCommand extends Command<PreparationRoom, {
   message: IMessage
 }> {
   execute({client, message}) {
-    this.room.broadcast('messages', {...message, time: Date.now()});
+    this.room.broadcast(Transfer.MESSAGES, {...message, time: Date.now()});
   }
 }
 
@@ -85,7 +85,7 @@ export class OnLeaveCommand extends Command<PreparationRoom, {
 }> {
   execute({client, consented}) {
     if (client && client.auth && client.auth.displayName) {
-      this.room.broadcast('messages', {
+      this.room.broadcast(Transfer.MESSAGES, {
         'name': 'Server',
         'payload': `${ client.auth.displayName } left.`,
         'avatar': 'magnemite',
@@ -175,7 +175,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
 
     BotV2.find({avatar: {$nin: userArray}, elo: d}, ['avatar', 'elo', 'name'], null, (err, bots) => {
       if (bots.length <= 0) {
-        this.room.broadcast('messages', {
+        this.room.broadcast(Transfer.MESSAGES, {
           'name': 'Server',
           'payload': `Error: No bots found`,
           'avatar': 'magnemite',
@@ -199,7 +199,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
           true
       ));
 
-      this.room.broadcast('messages', {
+      this.room.broadcast(Transfer.MESSAGES, {
         'name': 'Server',
         'payload': `Bot ${ bot.name } added.`,
         'avatar': `0081/${Emotion.NORMAL}`,
@@ -223,7 +223,7 @@ export class OnRemoveBotCommand extends Command<PreparationRoom, {
       while (!keys.done) {
         const key = keys.next().value;
         if (this.state.users.get(key).isBot) {
-          this.room.broadcast('messages', {
+          this.room.broadcast(Transfer.MESSAGES, {
             'name': 'Server',
             'payload': `Bot ${key} removed to make room for new player.`,
             'avatar': `0081/${Emotion.NORMAL}`,
@@ -240,7 +240,7 @@ export class OnRemoveBotCommand extends Command<PreparationRoom, {
 
     const name = this.state.users.get(target).name;
     if (this.state.users.delete(target)) {
-      this.room.broadcast('messages', {
+      this.room.broadcast(Transfer.MESSAGES, {
         'name': 'Server',
         'payload': `Bot ${name} removed.`,
         'avatar': `0081/${Emotion.NORMAL}`,
