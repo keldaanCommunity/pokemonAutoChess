@@ -668,7 +668,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       });
     });
 
-    const sortPlayers = (a, b) => {
+    const sortPlayers = (a: {id: string, life: number, level: number}, b: {id: string, life: number, level: number}) => {
       let diff = b.life - a.life;
       if (diff == 0) {
         diff = b.level - a.level;
