@@ -212,11 +212,11 @@ export default class GameScene extends Scene {
   }
 
   refreshShop() {
-    this.room.send('refresh');
+    this.room.send(Transfer.REFRESH);
   }
 
   buyExperience() {
-    this.room.send('levelUp');
+    this.room.send(Transfer.LEVEL_UP);
   }
 
   sellPokemon() {

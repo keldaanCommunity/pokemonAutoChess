@@ -13,7 +13,7 @@ export class OnJoinCommand extends Command {
             false,
             false));
 
-        this.room.broadcast('messages', {
+        this.room.broadcast(Transfer.MESSAGES, {
           'name': 'Server',
           'payload': `${ user.displayName } joined.`,
           'avatar': user.avatar,
@@ -26,13 +26,13 @@ export class OnJoinCommand extends Command {
 
 export class OnMessageCommand extends Command {
   execute({client, message}) {
-    this.room.broadcast('messages', message);
+    this.room.broadcast(Transfer.MESSAGES, message);
   }
 }
 
 export class OnLeaveCommand extends Command {
   execute({client, consented}) {
-    this.room.broadcast('messages', {
+    this.room.broadcast(Transfer.MESSAGES, {
       'name': 'Server',
       'payload': `${ this.state.users.get(client.auth.uid).name } left.`,
       'avatar': 'magnemite',

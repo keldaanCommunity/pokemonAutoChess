@@ -14,7 +14,7 @@ import BotV2, { IBot } from '../models/mongo-models/bot-v2';
 import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
-import { Emotion, EmotionCost } from "../types";
+import { Emotion, EmotionCost, Transfer } from "../types";
 import {Pkm} from '../types/enum/Pokemon';
 import { CDN_PORTRAIT_URL } from "../models/enum";
 import PokemonFactory from "../models/pokemon-factory";
@@ -42,13 +42,13 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
     this.setState(new LobbyState());
     this.autoDispose = false;
 
-    this.onMessage('new-message', (client, message) => {
+    this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       if (message.payload != '') {
         this.state.addMessage(this.state.users.get(client.auth.uid).name, message.payload, this.state.users.get(client.auth.uid).avatar, Date.now(), true);
       }
     });
 
-    this.onMessage('bot-creation', (client, message)=>{
+    this.onMessage(Transfer.BOT_CREATION, (client, message)=>{
       try {
         const bot = message.bot;
         const user = this.state.users.get(client.auth.uid);
@@ -59,7 +59,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
               .setAuthor(user.name, `${CDN_PORTRAIT_URL}${user.avatar}.png`)
               .setDescription(`A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`)
               .setThumbnail(`${CDN_PORTRAIT_URL}${bot.avatar}.png`);
-          client.send('pastebin-url', {url: data});
+          client.send(Transfer.PASTEBIN_URL, {url: data});
           try {
             this.discordWebhook.send({
               embeds: [dsEmbed]
@@ -76,27 +76,27 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       }
     });
 
-    this.onMessage('bot-list-request', (client, message)=>{
+    this.onMessage(Transfer.REQUEST_BOT_LIST, (client, message)=>{
       const botList = [];
 
       this.bots.forEach(b=>{
         botList.push({name: b.name, avatar: b.avatar});
       });
 
-      client.send('bot-list', botList);
+      client.send(Transfer.REQUEST_BOT_LIST, botList);
     });
 
-    this.onMessage('bot-data-request', (client, bot)=>{
+    this.onMessage(Transfer.REQUEST_BOT_DATA, (client, bot)=>{
       const botData = this.bots.get(bot);
-      client.send('bot-data', botData);
+      client.send(Transfer.REQUEST_BOT_DATA, botData);
     });
 
-    this.onMessage('meta', (client, message)=>{
-      client.send('meta', this.meta);
-      client.send('metaItems', this.metaItems);
+    this.onMessage(Transfer.REQUEST_META, (client, message)=>{
+      client.send(Transfer.REQUEST_META, this.meta);
+      client.send(Transfer.REQUEST_META_ITEMS, this.metaItems);
     });
 
-    this.onMessage('open-booster', (client, message)=>{
+    this.onMessage(Transfer.OPEN_BOOSTER, (client, message)=>{
       const user: LobbyUser = this.state.users.get(client.auth.uid);
       if(user.booster && user.booster > 0) {
         user.booster -= 1;
@@ -135,7 +135,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
           });
           u.save();
         });
-        client.send('booster-content',boosterIndex);
+        client.send(Transfer.BOOSTER_CONTENT,boosterIndex);
       }
     });
 
@@ -166,7 +166,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       });
     });
 
-    this.onMessage('name', (client, message)=>{
+    this.onMessage(Transfer.CHANGE_NAME, (client, message)=>{
       this.state.users.get(client.auth.uid).name = message.name;
       UserMetadata.findOne({'uid': client.auth.uid}, (err, user)=>{
         if (user) {
@@ -176,7 +176,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       });
     });
 
-    this.onMessage('change-selected-emotion', (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
+    this.onMessage(Transfer.CHANGE_SELECTED_EMOTION, (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
         const user: LobbyUser = this.state.users.get(client.auth.uid);
         if(user.pokemonCollection.has(message.index)){
             const pokemonConfig = user.pokemonCollection.get(message.index);
@@ -197,7 +197,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
         }
     });
 
-    this.onMessage('buy-emotion', (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
+    this.onMessage(Transfer.BUY_EMOTION, (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
         const user: LobbyUser = this.state.users.get(client.auth.uid);
         if(user.pokemonCollection.has(message.index)){
             const pokemonConfig = user.pokemonCollection.get(message.index);
@@ -223,14 +223,14 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
         }
     });
 
-    this.onMessage('search', (client, message)=>{
+    this.onMessage(Transfer.SEARCH, (client, message)=>{
       UserMetadata.findOne({'displayName': message.name}, (err: any, user: IUserMetadata)=>{
         if (user) {
           DetailledStatistic.find({'playerId': user.uid}, ['pokemons', 'time', 'rank', 'elo'], {limit: 10, sort: {'time': -1}}, (err, stats)=>{
             if (err) {
               console.log(err);
             } else {
-              client.send('user', new LobbyUser(
+              client.send(Transfer.USER, new LobbyUser(
                   user.uid,
                   user.displayName,
                   user.elo,
@@ -247,12 +247,12 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
             }
           });
         } else {
-          client.send('user', {});
+          client.send(Transfer.USER, {});
         }
       });
     });
 
-    this.onMessage('avatar', (client, message: {index: string, emotion: Emotion, shiny: boolean}) => {
+    this.onMessage(Transfer.CHANGE_AVATAR, (client, message: {index: string, emotion: Emotion, shiny: boolean}) => {
       const user: LobbyUser = this.state.users.get(client.auth.uid);
       const config = user.pokemonCollection.get(message.index);
       if(config){
@@ -329,7 +329,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
   onJoin(client: Client, options: any) {
     super.onJoin(client, options);
     console.log(`${client.auth.displayName} ${client.id} join lobby room`);
-    // client.send('bot-data', this.bots);
+    // client.send(Transfer.REQUEST_BOT_DATA, this.bots);
     UserMetadata.findOne({'uid': client.auth.uid}, (err: any, user: IUserMetadata)=>{
       if (user) {
         DetailledStatistic.find({'playerId': client.auth.uid}, ['pokemons', 'time', 'rank', 'elo'], {limit: 10, sort: {'time': -1}}, (err, stats)=>{

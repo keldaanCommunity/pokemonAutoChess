@@ -17,7 +17,7 @@ import MetaReport from './component/meta-report/meta-report';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { joinLobby, logIn, logOut, requestMeta, requestBotList } from '../stores/NetworkStore';
 import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent } from '../stores/LobbyStore';
-import { ICustomLobbyState } from '../../../types';
+import { ICustomLobbyState, Transfer } from '../../../types';
 import LobbyUser from '../../../models/colyseus-models/lobby-user';
 import { IBot } from '../../../models/mongo-models/bot-v2';
 import { IMeta } from '../../../models/mongo-models/meta';
@@ -88,25 +88,25 @@ export default function Lobby(){
                     
                     room.state.botLeaderboard.onAdd = (l) => {dispatch(pushBotLeaderboard(l))};
 
-                    room.onMessage('pastebin-url', (json: { url: string; }) => {dispatch(setPastebinUrl(json.url))});
+                    room.onMessage(Transfer.PASTEBIN_URL, (json: { url: string; }) => {dispatch(setPastebinUrl(json.url))});
 
                     room.onMessage('rooms', (rooms: RoomAvailable[]) => {rooms.forEach(room=>dispatch(addRoom(room)))});
 
-                    room.onMessage('bot-list', (bots: {name: string, avatar: string}[]) => {dispatch(setBotList(bots))});
+                    room.onMessage(Transfer.REQUEST_BOT_LIST, (bots: {name: string, avatar: string}[]) => {dispatch(setBotList(bots))});
                     
                     room.onMessage('+', ([roomId, room]) => {if(room.name == 'room'){dispatch(addRoom(room))}});
                 
                     room.onMessage('-', (roomId: string) => dispatch(removeRoom(roomId)));
 
-                    room.onMessage('user', (user: LobbyUser) => dispatch(setSearchedUser(user)));
+                    room.onMessage(Transfer.USER, (user: LobbyUser) => dispatch(setSearchedUser(user)));
 
-                    room.onMessage('meta', (meta: IMeta[]) => {dispatch(setMeta(meta))});
+                    room.onMessage(Transfer.REQUEST_META, (meta: IMeta[]) => {dispatch(setMeta(meta))});
 
-                    room.onMessage('metaItems', (metaItems: IItemsStatistic[]) => {dispatch(setMetaItems(metaItems))});
+                    room.onMessage(Transfer.REQUEST_META_ITEMS, (metaItems: IItemsStatistic[]) => {dispatch(setMetaItems(metaItems))});
 
-                    room.onMessage('bot-data', (data: IBot) => { dispatch(setBotData(data))});
+                    room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => { dispatch(setBotData(data))});
 
-                    room.onMessage('booster-content', (boosterContent: string[]) => {dispatch(setBoosterContent(boosterContent))});
+                    room.onMessage(Transfer.BOOSTER_CONTENT, (boosterContent: string[]) => {dispatch(setBoosterContent(boosterContent))});
 
                     dispatch(joinLobby(room));
                 }

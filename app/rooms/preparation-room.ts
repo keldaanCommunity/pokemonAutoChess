@@ -14,7 +14,7 @@ import {
   OnRoomNameCommand
 } from './commands/preparation-commands';
 import { BotDifficulty } from '../types/enum/Game';
-import { IPreparationMetadata } from '../types';
+import { IPreparationMetadata, Transfer } from '../types';
 
 export default class PreparationRoom extends Room {
   dispatcher: Dispatcher<this>;
@@ -42,25 +42,25 @@ export default class PreparationRoom extends Room {
     this.dispatcher.dispatch(new InitializeBotsCommand(), options.ownerId);
     this.setName(defaultRoomName);
 
-    this.onMessage('room-name', (client, message) => {
+    this.onMessage(Transfer.CHANGE_ROOM_NAME, (client, message) => {
       this.dispatcher.dispatch(new OnRoomNameCommand(), {client, message});
     });
 
-    this.onMessage('game-start', (client, message) => {
+    this.onMessage(Transfer.GAME_START, (client, message) => {
       try {
         this.dispatcher.dispatch(new OnGameStartCommand(), {client, message});
       } catch (error) {
         console.log(error);
       }
     });
-    this.onMessage('toggle-ready', (c, message) => {
+    this.onMessage(Transfer.TOGGLE_READY, (c, message) => {
       try {
         this.dispatcher.dispatch(new OnToggleReadyCommand(), {client: c});
       } catch (error) {
         console.log(error);
       }
     });
-    this.onMessage('new-message', (client, message) => {
+    this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       try {
         this.dispatcher.dispatch(new OnMessageCommand(), {
           client: client, 
@@ -74,14 +74,14 @@ export default class PreparationRoom extends Room {
         console.log(error);
       }
     });
-    this.onMessage('addBot', (client: Client, difficulty: BotDifficulty) => {
+    this.onMessage(Transfer.ADD_BOT, (client: Client, difficulty: BotDifficulty) => {
       try {
         this.dispatcher.dispatch(new OnAddBotCommand(), { difficulty });
       } catch (error) {
         console.log(error);
       }
     });
-    this.onMessage('removeBot', (client: Client, t: string) => {
+    this.onMessage(Transfer.REMOVE_BOT, (client: Client, t: string) => {
       try {
         this.dispatcher.dispatch(new OnRemoveBotCommand(), {target: t});
       } catch (error) {

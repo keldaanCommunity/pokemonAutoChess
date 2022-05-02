@@ -41,7 +41,7 @@ export default class GameRoom extends Room<GameState> {
       }
     }
 
-    this.onMessage('shop', (client, message) => {
+    this.onMessage(Transfer.SHOP, (client, message) => {
       if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new OnShopCommand(), {
@@ -54,7 +54,7 @@ export default class GameRoom extends Room<GameState> {
       }
     });
 
-    this.onMessage('item', (client, message) => {
+    this.onMessage(Transfer.ITEM, (client, message) => {
       if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new OnItemCommand(), {
@@ -134,11 +134,11 @@ export default class GameRoom extends Room<GameState> {
       }
     });
 
-    this.onMessage('request-tilemap', (client, message)=>{
+    this.onMessage(Transfer.REQUEST_TILEMAP, (client, message)=>{
       client.send('tilemap', this.state.tilemap);
     });
 
-    this.onMessage('refresh', (client, message) => {
+    this.onMessage(Transfer.REFRESH, (client, message) => {
       if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new OnRefreshCommand(), client.auth.uid);
@@ -148,7 +148,7 @@ export default class GameRoom extends Room<GameState> {
       }
     });
 
-    this.onMessage('lock', (client, message) => {
+    this.onMessage(Transfer.LOCK, (client, message) => {
       if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new OnLockCommand(), client.auth.uid);
@@ -158,7 +158,7 @@ export default class GameRoom extends Room<GameState> {
       }
     });
 
-    this.onMessage('levelUp', (client, message) => {
+    this.onMessage(Transfer.LEVEL_UP, (client, message) => {
       if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new OnLevelUpCommand(), client.auth.uid);
