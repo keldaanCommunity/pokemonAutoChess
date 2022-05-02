@@ -13,8 +13,8 @@ export default class MovingState extends PokemonState {
       pokemon.cooldown = 500;
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
       // no target case
-      if (targetCoordinate[0] === undefined || targetCoordinate[1] === undefined) {
-      } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) <= pokemon.range && !pokemon.status.confusion) {
+      if (targetCoordinate.x === undefined || targetCoordinate.y === undefined) {
+      } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate.x, targetCoordinate.y) <= pokemon.range && !pokemon.status.confusion) {
         pokemon.toAttackingState();
       } else {
         if (!pokemon.status.sleep && !pokemon.status.freeze) {
@@ -27,22 +27,22 @@ export default class MovingState extends PokemonState {
     return false;
   }
 
-  move(pokemon: PokemonEntity, board: Board, coordinates: number[]) {
+  move(pokemon: PokemonEntity, board: Board, coordinates: {x: number, y: number}) {
     // console.log('move attempt');
 
     let x: number;
     let y: number;
     if (pokemon.types.includes(Synergy.FOSSIL)) {
       const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
-      x = farthestCoordinate[0];
-      y = farthestCoordinate[1];
+      x = farthestCoordinate.x;
+      y = farthestCoordinate.y;
     } else {
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
       let distance = 999;
 
       cells.forEach((cell) => {
         if (cell.value === undefined) {
-          const candidateDistance = board.distance(coordinates[0], coordinates[1], cell.row, cell.column);
+          const candidateDistance = board.distance(coordinates.x, coordinates.y, cell.row, cell.column);
           // console.log(`Candidate (${cell.row},${cell.column}) to ${coordinates}, distance: ${candidateDistance}`);
           if (candidateDistance < distance) {
             distance = candidateDistance;

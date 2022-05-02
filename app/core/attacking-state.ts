@@ -12,11 +12,17 @@ export default class AttackingState extends PokemonState {
     super.update(pokemon, dt, board, climate);
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = pokemon.getAttackDelay();
-      const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
+      const target = board.getValue(pokemon.targetX, pokemon.targetY);
+      let targetCoordinate = {x: pokemon.targetX, y: pokemon.targetY};
+
+      if(!(target && target.team !== pokemon.team && board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate.x, targetCoordinate.y) < pokemon.range)){
+        targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
+      }
+
       // no target case
-      if (targetCoordinate[0] === undefined || targetCoordinate[1] === undefined) {
+      if (targetCoordinate.x === undefined || targetCoordinate.y === undefined) {
         pokemon.toMovingState();
-      } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate[0], targetCoordinate[1]) > pokemon.range) {
+      } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate.x, targetCoordinate.y) > pokemon.range) {
         pokemon.toMovingState();
       } else if (pokemon.status.confusion) {
         pokemon.toMovingState();
@@ -44,11 +50,11 @@ export default class AttackingState extends PokemonState {
     return false;
   }
 
-  attack(pokemon: PokemonEntity, board: Board, coordinates: number[], climate: string) {
+  attack(pokemon: PokemonEntity, board: Board, coordinates: {x:number, y:number}, climate: string) {
     pokemon.count.attackCount ++;
-    pokemon.targetX = coordinates[0];
-    pokemon.targetY = coordinates[1];
-    const target = board.getValue(coordinates[0], coordinates[1]);
+    pokemon.targetX = coordinates.x;
+    pokemon.targetY = coordinates.y;
+    const target = board.getValue(coordinates.x, coordinates.y);
     if (target && !pokemon.status.sleep && !pokemon.status.freeze) {
       if (pokemon.items.has(Item.UPGRADE)) {
         pokemon.handleAttackSpeed(6);

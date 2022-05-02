@@ -81,7 +81,7 @@ export default class Simulation extends Schema implements ISimulation{
       const randomBug = bugTeam[Math.floor(Math.random() * bugTeam.length)];
       const bug = PokemonFactory.createPokemonFromName(randomBug);
       const coord = this.getFirstAvailablePlaceOnBoard(true);
-      this.addPokemon(bug, coord[0], coord[1], 0);
+      this.addPokemon(bug, coord.x, coord.y, 0);
     }
 
     if (blueEffects && blueEffects.includes(Effect.STICKY_WEB)) {
@@ -94,7 +94,7 @@ export default class Simulation extends Schema implements ISimulation{
       bugTeam.forEach((b)=>{
         const bug = PokemonFactory.createPokemonFromName(b);
         const coord = this.getFirstAvailablePlaceOnBoard(true);
-        this.addPokemon(bug, coord[0], coord[1], 0);
+        this.addPokemon(bug, coord.x, coord.y, 0);
       });
     }
 
@@ -108,7 +108,7 @@ export default class Simulation extends Schema implements ISimulation{
       const randomBug = bugTeam[Math.floor(Math.random() * bugTeam.length)];
       const bug = PokemonFactory.createPokemonFromName(randomBug);
       const coord = this.getFirstAvailablePlaceOnBoard(false);
-      this.addPokemon(bug, coord[0], coord[1], 1);
+      this.addPokemon(bug, coord.x, coord.y, 1);
     }
 
     if (redEffects && redEffects.includes(Effect.STICKY_WEB)) {
@@ -121,7 +121,7 @@ export default class Simulation extends Schema implements ISimulation{
       bugTeam.forEach((b)=>{
         const bug = PokemonFactory.createPokemonFromName(b);
         const coord = this.getFirstAvailablePlaceOnBoard(false);
-        this.addPokemon(bug, coord[0], coord[1], 1);
+        this.addPokemon(bug, coord.x, coord.y, 1);
       });
     }
 
@@ -200,7 +200,7 @@ export default class Simulation extends Schema implements ISimulation{
         }
       }
     }
-    return [row, column];
+    return {x: row, y: column};
   }
 
   applyItemsEffects(pokemon: PokemonEntity) {
