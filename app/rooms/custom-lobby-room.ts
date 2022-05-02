@@ -181,7 +181,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
         if(user.pokemonCollection.has(message.index)){
             const pokemonConfig = user.pokemonCollection.get(message.index);
             const emotionsToCheck = message.shiny ? pokemonConfig.shinyEmotions: pokemonConfig.emotions;
-            if(emotionsToCheck.includes(message.emotion) && message.emotion != pokemonConfig.selectedEmotion){
+            if(emotionsToCheck.includes(message.emotion) && (message.emotion != pokemonConfig.selectedEmotion || message.shiny != pokemonConfig.selectedShiny)){
                 pokemonConfig.selectedEmotion = message.emotion;
                 pokemonConfig.selectedShiny = message.shiny;
                 UserMetadata.findOne({'uid': client.auth.uid}, (err, u)=>{
