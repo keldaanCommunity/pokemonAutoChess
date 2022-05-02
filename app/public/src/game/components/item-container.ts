@@ -24,7 +24,7 @@ export default class ItemContainer extends Button {
     this.sprite = new GameObjects.Image(scene, 0, 0, 'item', item).setScale(this.dragable ? 2:1, this.dragable? 2:1);
     this.detail = new ItemDetail(scene, 0, 0, item);
     this.detail.setPosition(this.detail.width * 0.5 + 40, this.detail.height * 0.5 + 40);
-    this.detail.setScale(0, 0);
+    this.detail.setVisible(false);
     this.name = item;
     this.add(this.sprite);
     this.add(this.detail);
@@ -49,7 +49,7 @@ export default class ItemContainer extends Button {
   enterButtonActiveState(pointer: Phaser.Input.Pointer){
     this.parentContainer.bringToTop(this);
     if(pointer.rightButtonDown()){
-      if (this.detail.scaleX == 0) {
+      if (!this.detail.visible) {
         this.openDetail();
         this.input.dropZone = false;
       }
@@ -62,7 +62,9 @@ export default class ItemContainer extends Button {
 
 
   openDetail(){
-    this.detail.setScale(1, 1);
+    if(this.parentContainer.visible){
+        this.detail.setVisible(true);
+    }
   }
   
   closeDetail(){
@@ -71,17 +73,17 @@ export default class ItemContainer extends Button {
       this.tempDetail.destroy()
       this.tempSprite.destroy()
     }
-    this.detail.setScale(0, 0);
+    this.detail.setVisible(false);
   }
 
   showTempDetail(item: string){
-    this.detail.setScale(0, 0)
+    this.detail.setVisible(false);
     this.sprite.setVisible(false)
     this.tempSprite = new GameObjects.Image(this.scene, 0, 0, 'item', item).setScale(this.dragable ? 2:1, this.dragable? 2:1);
     this.tempDetail = new ItemDetail(this.scene, 0, 0, item);
     this.tempDetail.setPosition(this.tempDetail.width * 0.5 + 40, this.tempDetail.height * 0.5 + 40);
     this.add(this.tempSprite);
     this.add(this.tempDetail);
-    this.tempDetail.setScale(1, 1);
+    this.tempDetail.setVisible(true);
   }
 }
