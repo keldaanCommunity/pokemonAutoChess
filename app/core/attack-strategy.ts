@@ -45,7 +45,7 @@ export class AttackStrategy {
     board.forEach((r: number, c: number, value: PokemonEntity) => {
       if (value !== undefined && value.team != pokemon.team && value.items.has(Item.WATER_INCENSE)) {
         pokemon.count.incenseCount ++;
-        pokemon.handleDamage(Math.ceil(value.maxMana * 0.2), board, AttackType.SPECIAL, value);
+        pokemon.handleSpellDamage(Math.ceil(value.maxMana * 0.2), board, AttackType.SPECIAL, value);
       }
     });
     if (pokemon.items.has(Item.AQUA_EGG)) {
@@ -74,7 +74,7 @@ export class CorruptedNatureStrategy extends AttackStrategy{
         cells.forEach(cell => {
           if(cell.value && cell.value.team !== pokemon.team){
             cell.value.status.triggerWound(4000);
-            cell.value.handleDamage(damage, board, AttackType.PHYSICAL, pokemon);
+            cell.value.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon);
           }
         });
     }
@@ -93,7 +93,7 @@ export class CrabHammerStrategy extends AttackStrategy{
         if(target.life / target.hp < 0.3){
           damage = target.life;
         }
-        target.handleDamage(damage, board, AttackType.PHYSICAL, pokemon);
+        target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon);
     }
 }
 
@@ -113,7 +113,7 @@ export class DiamondStormStrategy extends AttackStrategy{
 export class DracoEnergyStrategy extends AttackStrategy{
     process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
         super.process(pokemon, state, board, target);
-        target.handleDamage(pokemon.life, board, AttackType.SPECIAL, pokemon);
+        target.handleSpellDamage(pokemon.life, board, AttackType.SPECIAL, pokemon);
     }
 }
 
@@ -143,7 +143,7 @@ export class DynamicPunchStrategy extends AttackStrategy{
           duration = 6000;
         }
         target.status.triggerConfusion(duration);
-        target.handleDamage(damage, board, AttackType.PHYSICAL, pokemon);
+        target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon);
     }
 }
 
@@ -187,7 +187,7 @@ export class FireTrickStrategy extends AttackStrategy{
         else if(pokemon.stars == 3){
           damage = 80;
         }
-        target.handleDamage(damage, board, AttackType.SPECIAL, pokemon);
+        target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
         const teleportationCell = board.getTeleportationCell(target.positionX, target.positionY);
         if(teleportationCell){
           board.swapValue(target.positionX, target.positionY, teleportationCell.row, teleportationCell.column);
@@ -262,7 +262,7 @@ export class PsychUpStrategy extends AttackStrategy{
           damage = 80;
           duration = 8000;
         }
-        target.handleDamage(damage, board, AttackType.SPECIAL, pokemon);
+        target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
         target.status.triggerSilence(duration);
         const cells = board.getAdjacentCells(target.positionX, target.positionY);
         cells.forEach(cell=>{
@@ -292,7 +292,7 @@ export class TwistingNeitherStrategy extends AttackStrategy{
         cells.forEach(cell=>{
           if(cell && cell.value){
             if(cell.value.team !== pokemon.team){
-              cell.value.handleDamage(80, board, AttackType.SPECIAL, pokemon);
+              cell.value.handleSpellDamage(80, board, AttackType.SPECIAL, pokemon);
             }
             const teleportationCell = board.getTeleportationCell(cell.value.positionX, cell.value.positionY);
             board.swapValue(cell.value.positionX, cell.value.positionY, teleportationCell.row, teleportationCell.column);
