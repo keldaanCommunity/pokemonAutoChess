@@ -1,4 +1,3 @@
-import { Orientation } from '../types/enum/Game';
 import Board from './board';
 import PokemonEntity from './pokemon-entity';
 import PokemonState from './pokemon-state';
@@ -13,6 +12,7 @@ export default class MovingState extends PokemonState {
       pokemon.cooldown = 500;
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
       // no target case
+      // eslint-disable-next-line no-empty
       if (targetCoordinate.x === undefined || targetCoordinate.y === undefined) {
       } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate.x, targetCoordinate.y) <= pokemon.range && !pokemon.status.confusion) {
         pokemon.toAttackingState();

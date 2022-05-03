@@ -1,5 +1,5 @@
 import { Item } from '../types/enum/Item';
-import { Orientation, AttackType } from '../types/enum/Game';
+import { AttackType } from '../types/enum/Game';
 import { Effect } from '../types/enum/Effect';
 import Board from './board';
 import PokemonEntity from './pokemon-entity';
@@ -15,7 +15,7 @@ export default class AttackingState extends PokemonState {
       const target = board.getValue(pokemon.targetX, pokemon.targetY);
       let targetCoordinate = {x: pokemon.targetX, y: pokemon.targetY};
 
-      if(!(target && target.team !== pokemon.team && board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate.x, targetCoordinate.y) < pokemon.range)){
+      if(!(target && target.team !== pokemon.team && board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate.x, targetCoordinate.y) <= pokemon.range)){
         targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
       }
 
