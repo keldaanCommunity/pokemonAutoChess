@@ -29,8 +29,8 @@ const gameServer = new Server({
   })
 });
 
-const viewsSrc = __dirname.includes('server') ? path.join(__dirname, '..', '..', '..', 'views', 'index.html') : path.join(__dirname, 'views', 'index.html');
-const clientSrc = __dirname.includes('server') ? path.join(__dirname, '..', 'client') : path.join(__dirname,  'public', 'dist', 'client');
+const viewsSrc = __dirname.includes('server') ? path.join(__dirname, '..', '..', '..', '..', 'views', 'index.html') : path.join(__dirname, 'views', 'index.html');
+const clientSrc = __dirname.includes('server') ? path.join(__dirname, '..', '..', 'client') : path.join(__dirname,  'public', 'dist', 'client');
 
 app.use(cors());
 app.use(express.json());

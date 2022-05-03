@@ -29,7 +29,7 @@
     "build-client": "webpack --mode production",
     "build-server": "tsc",
     "build": "npm-run-all --parallel build-*",
-    "start": "node ./app/public/dist/server/index.js",
+    "start": "node ./app/public/dist/server/app/index.js",
     "add-bot": "ts-node ./db-commands/populate-bot.ts",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js"
   },
