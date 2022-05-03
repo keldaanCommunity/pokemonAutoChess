@@ -1,11 +1,13 @@
 import {Schema, model} from 'mongoose';
+import { Pkm } from '../../types/enum/Pokemon';
+import { Synergy } from '../../types/enum/Synergy';
 
 export interface ITeam {
   cluster_id: string;
   rank: number;
   x: number;
   y: number;
-  pokemons: any
+  pokemons: {[key in Pkm]?: number}
 }
 
 export interface IMeta {
@@ -14,8 +16,8 @@ export interface IMeta {
   ratio: number;
   winrate: number;
   mean_rank: number;
-  types: any;
-  pokemons: any;
+  types: {[key in Synergy]?: number};
+  pokemons: {[key in Pkm]?: number};
   teams: ITeam[]  
 }
 
