@@ -31,7 +31,7 @@
     "build": "npm-run-all --parallel build-*",
     "start": "node ./app/public/dist/server/index.js",
     "add-bot": "ts-node ./db-commands/populate-bot.ts",
-    "monitor-bot": "ts-node ./scheduled/monitor-bot.ts"
+    "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
