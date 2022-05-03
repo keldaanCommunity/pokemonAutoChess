@@ -263,21 +263,21 @@ export default class GameScene extends Scene {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 8; j++) {
         const coord = transformCoordinate(j, i);
-        const zone = this.add.zone(coord[0], coord[1], 96, 120);
-        zone.setRectangleDropZone(96, 120);
+        const zone = this.add.zone(coord[0], coord[1], 96, 96);
+        zone.setRectangleDropZone(96, 96);
         zone.setName('board-zone');
         zone.setData({'x': j, 'y': i})
         this.zones.push(zone);
-        const graphic = this.add.graphics().lineStyle(3, 0x000000, 0.3).strokeRect(
-            this.zones[i * 8 + j].x - this.zones[i * 8 + j].input.hitArea.width / 2,
-            this.zones[i * 8 + j].y - this.zones[i * 8 + j].input.hitArea.height / 2,
-            this.zones[i * 8 + j].input.hitArea.width,
-            this.zones[i * 8 + j].input.hitArea.height);
+        const graphic = this.add.graphics()
+        .fillStyle(0xffffff, 0.4)
+        .fillCircle(zone.x, zone.y, zone.input.hitArea.width / 2)
+        .lineStyle(2, 0x000000, 0.4)
+        .strokeCircle(zone.x, zone.y, zone.input.hitArea.width / 2);
         graphic.setVisible(false);
         this.graphics.push(graphic);
       }
     }
-    const sellZoneCoord = transformCoordinate(4, 5);
+    const sellZoneCoord = transformCoordinate(4, 5.5);
     const sellZone = this.add.zone(sellZoneCoord[0] -48, sellZoneCoord[1] + 24, 8 * 96, 240);
     sellZone.setRectangleDropZone(8 * 96, 240);
     sellZone.setName('sell-zone');
@@ -290,7 +290,7 @@ export default class GameScene extends Scene {
             sellZone.y - sellZone.input.hitArea.height / 2,
             sellZone.input.hitArea.width,
             sellZone.input.hitArea.height
-        ).lineStyle(4, 0x000000)
+        ).lineStyle(2, 0x000000, 0.6)
         .strokeRect(
             sellZone.x - sellZone.input.hitArea.width / 2,
             sellZone.y - sellZone.input.hitArea.height / 2,
