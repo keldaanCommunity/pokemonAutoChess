@@ -19,6 +19,7 @@ import {Pkm} from '../types/enum/Pokemon';
 import { CDN_PORTRAIT_URL } from "../models/enum";
 import PokemonFactory from "../models/pokemon-factory";
 import PokemonConfig from "../models/colyseus-models/pokemon-config";
+import { IBotMonitoring } from "../models/mongo-models/bot-monitoring";
 
 const pastebin = new PastebinAPI({
   'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
@@ -31,6 +32,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
   bots: Map<string, IBot>;
   meta: IMeta[];
   metaItems: IItemsStatistic[];
+  botMonitor: IBotMonitoring[];
 
   onCreate(options: any): Promise<void>{
     console.log(`create lobby`, this.roomId);
@@ -39,6 +41,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
     this.bots = new Map();
     this.meta = [];
     this.metaItems = [];
+    this.botMonitor = new Array<IBotMonitoring>();
     this.setState(new LobbyState());
     this.autoDispose = false;
 
