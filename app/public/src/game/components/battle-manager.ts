@@ -1,6 +1,5 @@
 import {GameObjects} from 'phaser';
 import Pokemon from './pokemon';
-import PokemonEntity from '../../../../core/pokemon-entity';
 import {transformAttackCoordinate} from '../../pages/utils/utils';
 import GameScene from '../scenes/game-scene';
 import { IPlayer, IPokemonEntity } from '../../../../types';
