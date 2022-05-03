@@ -25,7 +25,7 @@ const pkm = new Schema(
     {
       name: {
         type: String,
-        enum: Object.values(Pkm),
+        enum: Pkm,
         required: true
       },
       x: {
