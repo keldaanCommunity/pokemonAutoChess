@@ -12,11 +12,16 @@ export const FIREBASE_CONFIG = {
 };
 
 export function transformCoordinate(x: number, y: number) {
-  return [28 * 24 + 96 * x, 808 - 120 * y];
+    if(y === 0){
+        return [28 * 24 + 96 * x, 808];
+    }
+    else{
+        return [28 * 24 + 96 * x, 760 - 96 * y];
+    }
 }
 
 export function transformAttackCoordinate(x: number, y: number) {
-  return [28 * 24 + 96 * x, 712 - 120 * y];
+  return [28 * 24 + 96 * x, 664 - 96 * y];
 }
 
 export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
