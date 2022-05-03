@@ -10,6 +10,7 @@ import { IItemsStatistic } from "../../../models/mongo-models/items-statistic";
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata";
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config";
 import { Synergy } from "../../../types/enum/Synergy";
+import { IBotMonitoring } from "../../../models/mongo-models/bot-monitoring";
 
 interface IUserLobbyState {
     messages: IMessage[];
@@ -28,9 +29,11 @@ interface IUserLobbyState {
     synergies: [string, number][];
     pokemonCollection: IPokemonConfig[];
     boosterContent: string[];
+    botMonitor: IBotMonitoring[];
 }
 
 const initialState: IUserLobbyState = {
+    botMonitor: [],
     boosterContent: [],
     pokemonCollection: [],
     messages : [],
@@ -252,6 +255,9 @@ export const lobbySlice = createSlice({
         setBotList: (state, action: PayloadAction<{name: string, avatar: string}[]>) => {
             state.botList = action.payload
         },
+        setBotMonitor: (state, action: PayloadAction<IBotMonitoring[]>) => {
+          state.botMonitor = action.payload;
+        },
         setPastebinUrl: (state, action: PayloadAction<string>) => {
             state.pastebinUrl = action.payload;
         },
@@ -269,6 +275,7 @@ export const lobbySlice = createSlice({
 });
 
 export const {
+    setBotMonitor,
     setBoosterContent,
     addPokemonConfig,
     changePokemonConfig,

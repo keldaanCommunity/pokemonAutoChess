@@ -1,0 +1,86 @@
+import { ApexOptions } from "apexcharts";
+import Chart from 'react-apexcharts';
+import { useAppSelector } from "../../../hooks";
+import React from 'react';
+import { CDN_PORTRAIT_URL } from "../../../../../models/enum";
+import { PkmIndex } from "../../../../../types/enum/Pokemon";
+import { Emotion } from "../../../../../types";
+
+export default function BotReport(){
+    const botMonitor = useAppSelector(state=>state.lobby.botMonitor);
+    const botSeries: ApexAxisChartSeries = [];
+    botMonitor.forEach(b=>{
+        const data: [number, number][] = [];
+        b.data.forEach(d=>{
+            data.push([d.time, d.elo]);
+        });
+        botSeries.push({name: b.name, data: data});
+    });
+    const options: ApexOptions = {
+        chart: {
+            id: 'bot-report',
+            zoom: {
+                enabled: true
+            }
+        },
+        colors: ['#e6194B', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#42d4f4', '#f032e6', '#bfef45', '#fabed4', '#469990', '#dcbeff', '#9A6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#a9a9a9', '#ffffff', '#000000'],
+        dataLabels: {
+            enabled: false
+        },
+        markers: {
+            size: 4
+        },
+        yaxis: {
+            labels: {
+            offsetX: 0,
+            },
+            axisBorder: {
+            show: false
+            },
+            axisTicks: {
+            show: false
+            }
+        },
+        xaxis: {
+            type: "datetime",
+            labels: {
+            rotateAlways: true,
+            formatter: function(val, timestamp) {
+                return formatDate(timestamp)
+            }
+            }
+        },
+        tooltip: {
+            custom: function({series, seriesIndex, dataPointIndex, w}) {
+                return (`<div class='nes-container' style='padding:10px; display:flex; flex-flow:column; justify-content:center;text-align:center'>
+                    <img style='width:40px;height:40px;' src='${CDN_PORTRAIT_URL}${botMonitor[seriesIndex].avatar}.png' />
+                    <p>${botMonitor[seriesIndex].name}</p>
+                    <p>@${botMonitor[seriesIndex].author}</p>
+                    <p>Elo: ${series[seriesIndex][dataPointIndex]}</p>
+                </div>`)
+            }
+        },
+        legend: {
+            fontFamily: 'Press Start 2P'
+        }
+    }
+    return <div style={{backgroundColor:'rgba(255,255,255,1)'}} className='nes-container'>
+        <Chart options={options} series={botSeries} height={680} />
+    </div>;
+}
+
+function pad(number: number) {
+    if ( number < 10 ) {
+        return '0' + number;
+        }
+    return number;
+}
+
+
+function formatDate(n: number) {
+    const date = new Date(n);
+    return  pad( date.getMonth() + 1 ) +
+        '/' + pad( date.getDate() ) +
+        ' ' + pad( date.getHours() ) +
+        ':' + pad( date.getMinutes() )
+}

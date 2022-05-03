@@ -1,11 +1,12 @@
 import React from 'react';
 import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
 import { IMeta } from '../../../../../models/mongo-models/meta';
-import PokemonFactory from '../../../../../models/pokemon-factory';
 import { Emotion } from '../../../../../types';
+import { Pkm, PkmIndex } from '../../../../../types/enum/Pokemon';
+import { Synergy } from '../../../../../types/enum/Synergy';
 
 
-function capitalizeFirstLetter(string) {
+function capitalizeFirstLetter(string: string) {
     if(string){
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
@@ -15,8 +16,8 @@ function capitalizeFirstLetter(string) {
 }
 
 export default function TeamComp(props:{team:IMeta}){
-    const sortedTypes = props.team.types ? (Object.keys(props.team.types) as Synergy[]).sort((a,b)=>{return props.team.types[b] - props.team.types[a]}) : [];
-    const sortedPokemons = props.team.pokemons ? (Object.keys(props.team.pokemons) as Pkm[]).sort((a,b)=>{return props.team.pokemons[b] - props.team.pokemons[a]}) : [];
+    const sortedTypes = props.team.types ? (Object.keys(props.team.types) as Synergy[]).sort((a,b)=>{return props.team.types[b] - props.team.types[a]}) : new Array<Synergy>();
+    const sortedPokemons = props.team.pokemons ? (Object.keys(props.team.pokemons) as Pkm[]).sort((a,b)=>{return props.team.pokemons[b] - props.team.pokemons[a]}) : new Array<Pkm>();
 
     return <div style={{backgroundColor:'rgba(255,255,255,1)', margin:'10px'}} className='nes-container'>
         <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
@@ -32,7 +33,7 @@ export default function TeamComp(props:{team:IMeta}){
             <div style={{display:'flex'}}>
                 {sortedPokemons.map(pokemon=>{
                     return <div style={{display:'flex', flexFlow:'column', alignItems: 'center'}} key={pokemon}>
-                    <img style={{width:'60px', height:'60px', imageRendering:'pixelated'}} src={`${CDN_PORTRAIT_URL}${PokemonFactory.createPokemonFromName(pokemon).index.replace('-','/')}/${Emotion.NORMAL}.png`}/>
+                    <img style={{width:'60px', height:'60px', imageRendering:'pixelated'}} src={`${CDN_PORTRAIT_URL}${PkmIndex[pokemon].replace('-','/')}/${Emotion.NORMAL}.png`}/>
                     <p>{props.team.pokemons[pokemon].toFixed(1)}</p>
                 </div> 
                 })}

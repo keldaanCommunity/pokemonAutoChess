@@ -16,7 +16,7 @@ import TeamBuilder from './component/bot-builder/team-builder';
 import MetaReport from './component/meta-report/meta-report';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { joinLobby, logIn, logOut, requestMeta, requestBotList } from '../stores/NetworkStore';
-import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent } from '../stores/LobbyStore';
+import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent, setBotMonitor } from '../stores/LobbyStore';
 import { ICustomLobbyState, Transfer } from '../../../types';
 import LobbyUser from '../../../models/colyseus-models/lobby-user';
 import { IBot } from '../../../models/mongo-models/bot-v2';
@@ -25,6 +25,7 @@ import { IItemsStatistic } from '../../../models/mongo-models/items-statistic';
 import PokemonCollection from './component/collection/pokemon-collection';
 import PokemonConfig from '../../../models/colyseus-models/pokemon-config';
 import Booster from './component/booster/booster';
+import { IBotMonitoring } from '../../../models/mongo-models/bot-monitoring';
 
 export default function Lobby(){
     const dispatch = useAppDispatch();
@@ -103,6 +104,8 @@ export default function Lobby(){
                     room.onMessage(Transfer.REQUEST_META, (meta: IMeta[]) => {dispatch(setMeta(meta))});
 
                     room.onMessage(Transfer.REQUEST_META_ITEMS, (metaItems: IItemsStatistic[]) => {dispatch(setMetaItems(metaItems))});
+
+                    room.onMessage(Transfer.REQUEST_BOT_MONITOR, (botMonitor: IBotMonitoring[]) => {dispatch(setBotMonitor(botMonitor))});
 
                     room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => { dispatch(setBotData(data))});
 

@@ -7,7 +7,7 @@ export interface ITeam {
   rank: number;
   x: number;
   y: number;
-  pokemons: {[Property in keyof Pkm]: number}
+  pokemons: {[key in Pkm]?: number}
 }
 
 export interface IMeta {
@@ -16,8 +16,8 @@ export interface IMeta {
   ratio: number;
   winrate: number;
   mean_rank: number;
-  types: {[Property in keyof Synergy]: number};
-  pokemons: {[Property in keyof Pkm]: number};
+  types: {[key in Synergy]?: number};
+  pokemons: {[key in Pkm]?: number};
   teams: ITeam[]  
 }
 

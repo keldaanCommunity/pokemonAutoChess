@@ -5,6 +5,7 @@ import Discover from './discover';
 import ItemStatistic from './item-statistic';
 import { IMeta } from '../../../../../models/mongo-models/meta';
 import { IItemsStatistic } from '../../../../../models/mongo-models/items-statistic';
+import BotReport from './bot-report';
 
 const buttonStyle= {
     marginLeft:'10px',
@@ -39,6 +40,7 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
                 <TabList>
                     <Tab key='team-comps'><p>Meta Report</p></Tab>
                     <Tab key='items'>Item Report</Tab>
+                    <Tab key='bots'>Bot Report</Tab>
                     <Tab key='discover'><p>Discover</p></Tab>
                 </TabList>
 
@@ -77,6 +79,9 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
                         return <ItemStatistic item={item} key={item.name}/>;
                     })}
                 </div>
+                </TabPanel>
+                <TabPanel key='bot-report-panel'>
+                    <BotReport/>
                 </TabPanel>
                 <TabPanel key='discover-panel'>
                     <Discover meta={sortedMeta}/>
