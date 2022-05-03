@@ -42,8 +42,8 @@ function pad(number: number) {
 
 function formatDate(n: number) {
     const date = new Date(n);
-    return  pad( date.getUTCMonth() + 1 ) +
-        '/' + pad( date.getUTCDate() ) +
-        ' ' + pad( date.getUTCHours() ) +
-        ':' + pad( date.getUTCMinutes() )
+    return  pad( date.getMonth() + 1 ) +
+        '/' + pad( date.getDate() ) +
+        ' ' + pad( date.getHours() ) +
+        ':' + pad( date.getMinutes() )
 }
