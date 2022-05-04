@@ -2227,7 +2227,7 @@ export class Galvantula extends Pokemon {
 }
 export class Genesect extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.GENESECT, [Synergy.BUG, Synergy.METAL], Rarity.MYTHICAL, PkmIndex[Pkm.GENESECT], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 3, 100, Ability.LOCK_ON,shiny, emotion);
+    super(Pkm.GENESECT, [Synergy.BUG, Synergy.METAL], Rarity.MYTHICAL, PkmIndex[Pkm.GENESECT], Pkm.DEFAULT, 270, 22, 6, 3, 1, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 3, 100, Ability.LOCK_ON,shiny, emotion);
   }
 }
 export class Diancie extends Pokemon {
@@ -2294,7 +2294,7 @@ export class Regidrago extends Pokemon {
 }
 export class Guzzlord extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.GUZZLORD, [Synergy.DRAGON, Synergy.DARK], Rarity.MYTHICAL, PkmIndex[Pkm.GUZZLORD], Pkm.DEFAULT, 270, 17, 3, 3, 2, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 3, 110, Ability.TWISTING_NEITHER,shiny, emotion);
+    super(Pkm.GUZZLORD, [Synergy.DRAGON, Synergy.DARK], Rarity.MYTHICAL, PkmIndex[Pkm.GUZZLORD], Pkm.DEFAULT, 270, 22, 3, 3, 2, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 3, 110, Ability.TWISTING_NEITHER,shiny, emotion);
   }
 }
 export class Eternatus extends Pokemon {
