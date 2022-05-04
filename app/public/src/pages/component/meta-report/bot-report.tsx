@@ -30,6 +30,14 @@ export default function BotReport(){
         markers: {
             size: 4
         },
+        stroke: {
+            show: true,
+            curve: 'smooth',
+            lineCap: 'butt',
+            colors: undefined,
+            width: 2,
+            dashArray: 0,      
+        },        
         yaxis: {
             labels: {
             offsetX: 0,
