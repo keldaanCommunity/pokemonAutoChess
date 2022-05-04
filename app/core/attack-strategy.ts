@@ -1868,7 +1868,7 @@ export class BugBuzzStrategy extends AttackStrategy {
         break;
     }
 
-    target.handleSpellDamage(damage, board, AttackType.TRUE, pokemon);
+    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
   }
 }
 

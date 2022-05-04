@@ -2299,7 +2299,7 @@ export class Guzzlord extends Pokemon {
 }
 export class Eternatus extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.ETERNATUS, [Synergy.DRAGON, Synergy.POISON], Rarity.MYTHICAL, PkmIndex[Pkm.ETERNATUS], Pkm.DEFAULT, 270, 17, 3, 3, 2, AttackSprite.POISON_RANGE, AttackType.SPECIAL, 3, 110, Ability.DYNAMAX_CANNON,shiny, emotion);
+    super(Pkm.ETERNATUS, [Synergy.DRAGON, Synergy.POISON], Rarity.MYTHICAL, PkmIndex[Pkm.ETERNATUS], Pkm.DEFAULT, 270, 22, 3, 3, 2, AttackSprite.POISON_RANGE, AttackType.SPECIAL, 3, 110, Ability.DYNAMAX_CANNON,shiny, emotion);
   }
 }
 export class Ponyta extends Pokemon {
