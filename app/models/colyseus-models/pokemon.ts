@@ -2232,12 +2232,12 @@ export class Genesect extends Pokemon {
 }
 export class Diancie extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.DIANCIE, [Synergy.FOSSIL, Synergy.FAIRY], Rarity.MYTHICAL, PkmIndex[Pkm.DIANCIE], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 2, 100, Ability.DIAMOND_STORM,shiny, emotion);
+    super(Pkm.DIANCIE, [Synergy.FOSSIL, Synergy.FAIRY], Rarity.EPIC, PkmIndex[Pkm.DIANCIE], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 2, 100, Ability.DIAMOND_STORM,shiny, emotion);
   }
 }
 export class Relicanth extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.RELICANTH, [Synergy.FOSSIL, Synergy.WATER], Rarity.MYTHICAL, PkmIndex[Pkm.RELICANTH], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 70, Ability.ROCK_TOMB,shiny, emotion);
+    super(Pkm.RELICANTH, [Synergy.FOSSIL, Synergy.WATER], Rarity.EPIC, PkmIndex[Pkm.RELICANTH], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 70, Ability.ROCK_TOMB,shiny, emotion);
   }
 }
 export class Hatenna extends Pokemon {
