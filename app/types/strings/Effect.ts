@@ -179,15 +179,15 @@
         'esp' : "?NONE?",
         'fra' : "?NONE?" },
     [Effect.SHORE_UP] : {
-        'eng' : "Every two seconds all ground pokemons gains 1 defense/special defense and 1 attack bonus stats. This effect stacks up to five times",
+        'eng' : "Every three seconds all ground pokemons gains 1 defense/special defense and 1 attack bonus stats. This effect stacks up to four times",
         'esp' : "-10% de HP para los enemigos al comienzo del combate",
         'fra' : "-10% HP pour les ennemis au début du combat" },
     [Effect.ROTOTILLER] : {
-        'eng' : "Every two seconds all ground pokemons gains 2 defense/special defense and 2 attack bonus stats. This effect stacks up to five times",
+        'eng' : "Every three seconds all ground pokemons gains 2 defense/special defense and 2 attack bonus stats. This effect stacks up to four times",
         'esp' : "-10% de HP para los enemigos al comienzo del combate",
         'fra' : "-10% HP pour les ennemis au début du combat" },
     [Effect.SANDSTORM] : {
-        'eng' : "Every two seconds all ground pokemons gains 3 defense/special defense and 3 attack bonus stats. This effect stacks up to five times",
+        'eng' : "Every three seconds all ground pokemons gains 3 defense/special defense and 3 attack bonus stats. This effect stacks up to four times",
         'esp' : "Se desata una tormenta de arena que produce un 10% de HP/s por pkm de tierra/acero/mineral",
         'fra' : "Une tempête de sable fait rage, faisant 10% HP/s aux pkm non sol/acier/mineral" },
     [Effect.POISON_GAS] : {

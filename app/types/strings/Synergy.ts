@@ -374,12 +374,12 @@ export const SynergyDetail = Object.freeze({
           {
             trigger: 4,
             title: `(4) Light Screen`,
-            text: `All your pokemon have +15 Special Defense.`
+            text: `All your pokemon have +10 Special Defense.`
           },
           {
             trigger: 6,
             title: `(6) Eerie Spell`,
-            text: `All your pokemon have +35 Special Defense.`
+            text: `All your pokemon have +20 Special Defense.`
           }
         ],
         esp: [
@@ -489,17 +489,17 @@ export const SynergyDetail = Object.freeze({
           {
             trigger: 2,
             title: `(2) Shore Up`,
-            text: `Every two seconds all ground pokemons gains 1 defense/special defense and 1 attack bonus stats. This effect stacks up to five times`
+            text: `Every three seconds all ground pokemons gains 1 defense/special defense and 1 attack bonus stats. This effect stacks up to four times`
           },
           {
             trigger: 4,
             title: `(4) Rototiller`,
-            text: `Every two seconds all ground pokemons gains 2 defense/special defense and 2 attack bonus stats. This effect stacks up to five times`
+            text: `Every three seconds all ground pokemons gains 2 defense/special defense and 2 attack bonus stats. This effect stacks up to four times`
           },
           {
             trigger: 6,
             title: `(6) Sandstorm`,
-            text: `Every two seconds all ground pokemons gains 3 defense/special defense and 3 attack bonus stats. This effect stacks up to five times`
+            text: `Every three seconds all ground pokemons gains 3 defense/special defense and 3 attack bonus stats. This effect stacks up to four times`
           }
         ],
         esp: [

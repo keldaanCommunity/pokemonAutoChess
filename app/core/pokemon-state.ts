@@ -256,10 +256,10 @@ export default class PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
     let updateEffects = false;
     if (pokemon.effects.includes(Effect.SHORE_UP) || pokemon.effects.includes(Effect.ROTOTILLER) || pokemon.effects.includes(Effect.SANDSTORM)) {
-      if (pokemon.growGroundTimer !== undefined && pokemon.count.growGroundCount <5) {
+      if (pokemon.growGroundTimer !== undefined && pokemon.count.growGroundCount <4) {
         pokemon.growGroundTimer -= dt;
         if (pokemon.growGroundTimer <= 0) {
-          pokemon.growGroundTimer = 2000;
+          pokemon.growGroundTimer = 3000;
           pokemon.count.growGroundCount += 1;
           if (pokemon.effects.includes(Effect.SHORE_UP)) {
             pokemon.def += 1;
@@ -276,7 +276,7 @@ export default class PokemonState {
           }
         }
       } else {
-        pokemon.growGroundTimer = 2000;
+        pokemon.growGroundTimer = 3000;
       }
     }
 
