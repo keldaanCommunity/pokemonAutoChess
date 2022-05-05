@@ -165,6 +165,7 @@ export default class PokemonState {
             attacker.handleHeal(Math.floor(0.5 * residualDamage), attacker);
           }
 
+          /*
           if (attacker.effects.includes(Effect.BLAZE) || attacker.effects.includes(Effect.DROUGHT) || attacker.effects.includes(Effect.DESOLATE_LAND)) {
             let burnChance = 0;
             if (attacker.effects.includes(Effect.BLAZE)) {
@@ -178,6 +179,7 @@ export default class PokemonState {
               pokemon.status.triggerBurn(2000, pokemon, attacker);
             }
           }
+          */
         }
 
         if (!pokemon.life || pokemon.life <= 0) {

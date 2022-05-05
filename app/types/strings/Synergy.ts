@@ -208,17 +208,17 @@ export const SynergyDetail = Object.freeze({
           {
             trigger: 2,
             title: `(2) Blaze`,
-            text: `Your Fire pokemon gain +1 Attack after every hit and 10% chance to burn for 2s.`
+            text: `Your Fire pokemon gain +1 Attack after every hit`
           },
           {
             trigger: 4,
             title: `(4) Drought`,
-            text: `Your Fire pokemon gain +2 Attack after every hit  and 20% chance to burn for 2s. (Sunlight)`
+            text: `Your Fire pokemon gain +2 Attack after every hit (Sunlight)`
           },
           {
             trigger: 6,
             title: `(6) Desolate Land`,
-            text: `Your Fire pokemon gain +3 Attack after every hit and 30% chance to burn for 2s. (Sunlight)`
+            text: `Your Fire pokemon gain +3 Attack after every hit (Sunlight)`
           }
         ],
         esp: [

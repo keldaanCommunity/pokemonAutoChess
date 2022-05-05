@@ -103,15 +103,15 @@
         'esp' : "Los ennemigos que no son de Planta tienen un 30% ATK speed",
         'fra' : "-30% ATK speed pour tous les ennemis" },
     [Effect.BLAZE] : {
-        'eng' : "Your Fire pokemon gain +1 Attack after every hit and 10% chance to burn for 2s.",
+        'eng' : "Your Fire pokemon gain +1 Attack after every hit",
         'esp' : "Fire pkm gana un 5% de dano en cada ataque",
         'fra' : "Les pkm feu gagnent 5% d'ATK à chaque attaque" },
     [Effect.DROUGHT] : {
-        'eng' : "Your Fire pokemon gain +2 Attack after every hit  and 20% chance to burn for 2s. (Sunlight)",
+        'eng' : "Your Fire pokemon gain +2 Attack after every hit (Sunlight)",
         'esp' : "El so se intensifica, los pkm de fuego gana +50% ATK",
         'fra' : "Le soleil s'intensifie, augmentant l'ATK des pkm feu de 50%" },
     [Effect.DESOLATE_LAND] : {
-        'eng' : "Your Fire pokemon gain +3 Attack after every hit and 30% chance to burn for 2s. (Sunlight)",
+        'eng' : "Your Fire pokemon gain +3 Attack after every hit (Sunlight)",
         'esp' : "?NONE?",
         'fra' : "?NONE?" },
     [Effect.RAIN_DANCE] : {
