@@ -312,10 +312,10 @@ export default class Simulation extends Schema implements ISimulation{
       }
       let shieldBonus = 0;
       if (pokemon.effects.includes(Effect.STAMINA)) {
-        shieldBonus = 20;
+        shieldBonus = 25;
       }
       if (pokemon.effects.includes(Effect.STRENGTH)) {
-        shieldBonus += 40;
+        shieldBonus += 50;
       }
       if (pokemon.effects.includes(Effect.PURE_POWER)) {
         shieldBonus += 80;

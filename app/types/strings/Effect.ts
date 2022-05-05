@@ -79,11 +79,11 @@
 
  export const EffectDescriptions = {
     [Effect.STAMINA] : {
-        'eng' : "All allies adjacent to your Normal pokemon have +20 HP.",
+        'eng' : "All allies adjacent to your Normal pokemon have +25 HP.",
         'esp' : "+20 HP por cada pokemon que esté cerca",
         'fra' : "+20 HP pour tous les pokémons autours" },
     [Effect.STRENGTH] : {
-        'eng' : "All allies adjacent to your Normal pokemon have +40 HP.",
+        'eng' : "All allies adjacent to your Normal pokemon have +50 HP.",
         'esp' : "+30 HP por cada pokemon que esté cerca",
         'fra' : "+30 HP pour tous les pokémons autours" },
     [Effect.PURE_POWER] : {

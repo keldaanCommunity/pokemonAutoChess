@@ -110,12 +110,12 @@ export const SynergyDetail = Object.freeze({
           {
             trigger: 3,
             title: `(3) Stamina`,
-            text: `All allies adjacent to your Normal pokemon have +20 HP.`
+            text: `All allies adjacent to your Normal pokemon have +25 HP.`
           },
           {
             trigger: 6,
             title: `(6) Strength`,
-            text: `All allies adjacent to your Normal pokemon have +40 HP.`
+            text: `All allies adjacent to your Normal pokemon have +50 HP.`
           },
           {
             trigger: 9,
