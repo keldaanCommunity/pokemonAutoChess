@@ -617,19 +617,19 @@ export class Hydreigon extends Pokemon {
 
 export class Poliwag extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.POLIWAG, [Synergy.WATER, Synergy.FIGHTING], Rarity.RARE, '0060', Pkm.POLIWHIRL, 80, 5, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 1, 100, Ability.SOAK,shiny, emotion);
+    super(Pkm.POLIWAG, [Synergy.WATER, Synergy.FIGHTING], Rarity.COMMON, '0060', Pkm.POLIWHIRL, 80, 5, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 1, 100, Ability.SOAK,shiny, emotion);
   }
 }
 
 export class Poliwhirl extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.POLIWHIRL, [Synergy.WATER, Synergy.FIGHTING], Rarity.RARE, '0061', Pkm.POLITOED, 120, 9, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 2, 100, Ability.SOAK,shiny, emotion);
+    super(Pkm.POLIWHIRL, [Synergy.WATER, Synergy.FIGHTING], Rarity.COMMON, '0061', Pkm.POLITOED, 120, 9, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 2, 100, Ability.SOAK,shiny, emotion);
   }
 }
 
 export class Politoed extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.POLITOED, [Synergy.WATER, Synergy.FIGHTING], Rarity.RARE, '0186', Pkm.DEFAULT, 220, 18, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 3, 100, Ability.SOAK,shiny, emotion);
+    super(Pkm.POLITOED, [Synergy.WATER, Synergy.FIGHTING], Rarity.COMMON, '0186', Pkm.DEFAULT, 220, 18, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 3, 100, Ability.SOAK,shiny, emotion);
   }
 }
 
@@ -994,19 +994,19 @@ export class Dusknoir extends Pokemon {
 
 export class Magnemite extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MAGNEMITE, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0081', Pkm.MAGNETON, 70, 5, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.CHARGE,shiny, emotion);
+    super(Pkm.MAGNEMITE, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0081', Pkm.MAGNETON, 70, 5, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.TORMENT,shiny, emotion);
   }
 }
 
 export class Magneton extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MAGNETON, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0082', Pkm.MAGNEZONE, 120, 9, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.CHARGE,shiny, emotion);
+    super(Pkm.MAGNETON, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0082', Pkm.MAGNEZONE, 120, 9, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.TORMENT,shiny, emotion);
   }
 }
 
 export class Magnezone extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MAGNEZONE, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0462', Pkm.DEFAULT, 210, 20, 2, 2, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 3, 100, Ability.CHARGE,shiny, emotion);
+    super(Pkm.MAGNEZONE, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0462', Pkm.DEFAULT, 210, 20, 2, 2, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 3, 100, Ability.TORMENT,shiny, emotion);
   }
 }
 
@@ -1371,19 +1371,19 @@ export class Golem extends Pokemon {
 
 export class Totodile extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.TOTODILE, [Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0158', Pkm.CROCONAW, 60, 5, 2, 2, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 1, 100, Ability.BITE,shiny, emotion);
+    super(Pkm.TOTODILE, [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0158', Pkm.CROCONAW, 60, 5, 2, 2, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 1, 100, Ability.BITE,shiny, emotion);
   }
 }
 
 export class Croconaw extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.CROCONAW, [Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0159', Pkm.FERALIGATR, 110, 9, 3, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 100, Ability.BITE,shiny, emotion);
+    super(Pkm.CROCONAW, [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0159', Pkm.FERALIGATR, 110, 9, 3, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 100, Ability.BITE,shiny, emotion);
   }
 }
 
 export class Feraligatr extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.FERALIGATR, [Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0160', Pkm.DEFAULT, 200, 20, 5, 5, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 3, 100, Ability.BITE,shiny, emotion);
+    super(Pkm.FERALIGATR, [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0160', Pkm.DEFAULT, 200, 20, 5, 5, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 3, 100, Ability.BITE,shiny, emotion);
   }
 }
 
@@ -2232,12 +2232,12 @@ export class Genesect extends Pokemon {
 }
 export class Diancie extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.DIANCIE, [Synergy.FOSSIL, Synergy.FAIRY], Rarity.MYTHICAL, PkmIndex[Pkm.DIANCIE], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 2, 100, Ability.DIAMOND_STORM,shiny, emotion);
+    super(Pkm.DIANCIE, [Synergy.FOSSIL, Synergy.FAIRY], Rarity.EPIC, PkmIndex[Pkm.DIANCIE], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 2, 100, Ability.DIAMOND_STORM,shiny, emotion);
   }
 }
 export class Relicanth extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.RELICANTH, [Synergy.FOSSIL, Synergy.WATER], Rarity.MYTHICAL, PkmIndex[Pkm.RELICANTH], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 70, Ability.ROCK_TOMB,shiny, emotion);
+    super(Pkm.RELICANTH, [Synergy.FOSSIL, Synergy.WATER], Rarity.EPIC, PkmIndex[Pkm.RELICANTH], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 70, Ability.ROCK_TOMB,shiny, emotion);
   }
 }
 export class Hatenna extends Pokemon {
@@ -2284,7 +2284,7 @@ export class Hariyama extends Pokemon {
 }
 export class Regieleki extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.REGIELEKI, [Synergy.ELECTRIC, Synergy.HUMAN], Rarity.MYTHICAL, PkmIndex[Pkm.REGIELEKI], Pkm.DEFAULT, 270, 17, 3, 3, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 80, Ability.ELECTRO_BOOST,shiny, emotion);
+    super(Pkm.REGIELEKI, [Synergy.ELECTRIC, Synergy.HUMAN], Rarity.MYTHICAL, PkmIndex[Pkm.REGIELEKI], Pkm.DEFAULT, 270, 17, 3, 3, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 70, Ability.VOLT_SWITCH,shiny, emotion);
   }
 }
 export class Regidrago extends Pokemon {

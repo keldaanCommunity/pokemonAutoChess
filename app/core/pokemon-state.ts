@@ -63,10 +63,6 @@ export default class PokemonState {
           reducedDamage = damage;
         }
 
-        if (attacker && attacker.effects.includes(Effect.PURSUIT) && pokemon.life/pokemon.hp < 0.3) {
-          reducedDamage = pokemon.life + 1;
-        }
-
         if (!reducedDamage) {
           reducedDamage = 0;
           // console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
@@ -165,6 +161,7 @@ export default class PokemonState {
             attacker.handleHeal(Math.floor(0.5 * residualDamage), attacker);
           }
 
+          /*
           if (attacker.effects.includes(Effect.BLAZE) || attacker.effects.includes(Effect.DROUGHT) || attacker.effects.includes(Effect.DESOLATE_LAND)) {
             let burnChance = 0;
             if (attacker.effects.includes(Effect.BLAZE)) {
@@ -178,6 +175,7 @@ export default class PokemonState {
               pokemon.status.triggerBurn(2000, pokemon, attacker);
             }
           }
+          */
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
@@ -232,6 +230,35 @@ export default class PokemonState {
     }
 
     if (death && pokemon) {
+      if(attacker && (attacker.effects.includes(Effect.PURSUIT) || attacker.effects.includes(Effect.BRUTAL_SWING) || attacker.effects.includes(Effect.POWER_TRIP))){
+        const isPursuit = attacker.effects.includes(Effect.PURSUIT);
+        const isBrutalSwing = attacker.effects.includes(Effect.BRUTAL_SWING);
+        const isPowerTrip = attacker.effects.includes(Effect.POWER_TRIP);
+
+        if (isPursuit || isBrutalSwing || isPowerTrip) {
+          let defBoost = 0;
+          let shieldBoost = 0;
+          let attackBoost = 0;
+          if (isPursuit) {
+            defBoost = 2;
+            shieldBoost = 30;
+            attackBoost = 3;
+          } else if (isBrutalSwing) {
+            defBoost = 4;
+            shieldBoost = 60;
+            attackBoost = 6;
+          } else if (isPowerTrip) {
+            defBoost = 6;
+            shieldBoost = 120;
+            attackBoost = 12;
+          }
+          attacker.def += defBoost;
+          attacker.handleShield(shieldBoost, attacker);
+          attacker.atk += attackBoost;
+          attacker.count.monsterExecutionCount ++;
+        }
+      }
+
       if (pokemon.effects.includes(Effect.ODD_FLOWER) ||
       pokemon.effects.includes(Effect.GLOOM_FLOWER) ||
       pokemon.effects.includes(Effect.VILE_FLOWER) ||
@@ -256,10 +283,10 @@ export default class PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
     let updateEffects = false;
     if (pokemon.effects.includes(Effect.SHORE_UP) || pokemon.effects.includes(Effect.ROTOTILLER) || pokemon.effects.includes(Effect.SANDSTORM)) {
-      if (pokemon.growGroundTimer !== undefined && pokemon.count.growGroundCount <5) {
+      if (pokemon.growGroundTimer !== undefined && pokemon.count.growGroundCount <4) {
         pokemon.growGroundTimer -= dt;
         if (pokemon.growGroundTimer <= 0) {
-          pokemon.growGroundTimer = 2000;
+          pokemon.growGroundTimer = 3000;
           pokemon.count.growGroundCount += 1;
           if (pokemon.effects.includes(Effect.SHORE_UP)) {
             pokemon.def += 1;
@@ -276,7 +303,7 @@ export default class PokemonState {
           }
         }
       } else {
-        pokemon.growGroundTimer = 2000;
+        pokemon.growGroundTimer = 3000;
       }
     }
 
@@ -380,11 +407,11 @@ export default class PokemonState {
       }
 
       if (pokemon.effects.includes(Effect.DRAGON_ENERGY) && pokemon.types.includes(Synergy.DRAGON)) {
-        pokemon.handleAttackSpeed(3);
+        pokemon.handleAttackSpeed(4);
       }
 
       if (pokemon.effects.includes(Effect.DRAGON_DANCE) && pokemon.types.includes(Synergy.DRAGON)) {
-        pokemon.handleAttackSpeed(6);
+        pokemon.handleAttackSpeed(7);
       }
 
       if (pokemon.effects.includes(Effect.INGRAIN)) {

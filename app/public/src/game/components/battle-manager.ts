@@ -244,6 +244,10 @@ export default class BattleManager {
             if (change.value != 0) {
               this.displayDoubleAttack(pkm.x, pkm.y);
             }
+          } else if( change.field == 'monsterExecutionCount') {
+            if(change.value != 0) {
+              pkm.sprite.setScale(2 + change.value, 2 + change.value);
+            }
           }
         }
       }

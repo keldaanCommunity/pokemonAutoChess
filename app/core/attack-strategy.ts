@@ -10,20 +10,7 @@ export class AttackStrategy {
   process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     pokemon.setMana(0);
     pokemon.count.ult += 1;
-    if (pokemon.types.includes(Synergy.MONSTER) && pokemon.shield <= 0) {
-      let shield = 0;
-      if (pokemon.effects.includes(Effect.PURSUIT)) {
-        shield = Math.floor(pokemon.hp * 0.2);
-      } else if (pokemon.effects.includes(Effect.BRUTAL_SWING)) {
-        shield = Math.floor(pokemon.hp * 0.3);
-      } else if (pokemon.effects.includes(Effect.POWER_TRIP)) {
-        shield = Math.floor(pokemon.hp * 0.4);
-      }
-      if (shield > 0 && !pokemon.status.temporaryShield) {
-        pokemon.status.triggerShield(4000);
-        pokemon.handleShield(shield, pokemon);
-      }
-    }
+
     if (pokemon.types.includes(Synergy.SOUND)) {
       let atk = 0;
       if (pokemon.effects.includes(Effect.LARGO)) {

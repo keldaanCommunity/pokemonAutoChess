@@ -4,7 +4,7 @@ import Player from './colyseus-models/player';
 import {IPokemon} from '../types';
 import {PROBABILITY} from '../types/Config';
 
-const COMMON = [Pkm.CHARMANDER, Pkm.GEODUDE,
+const COMMON = [Pkm.POLIWAG, Pkm.CHARMANDER, Pkm.GEODUDE,
   Pkm.AZURILL, Pkm.ZUBAT,
   Pkm.MAREEP, Pkm.CLEFFA,
   Pkm.CATERPIE, Pkm.WEEDLE,
@@ -22,7 +22,7 @@ const UNCOMMON = [Pkm.SQUIRTLE, Pkm.IGGLYBUFF, Pkm.CHIKORITA,
 const RARE = [Pkm.BULBASAUR, Pkm.TURTWIG, Pkm.NIDORANF,
   Pkm.NIDORANM, Pkm.PICHU, Pkm.TRAPINCH,
   Pkm.ARON, Pkm.RHYHORN, Pkm.TOGEPI,
-  Pkm.LOTAD, Pkm.SHINX, Pkm.POLIWAG,
+  Pkm.LOTAD, Pkm.SHINX,
   Pkm.DRATINI, Pkm.MAGBY, Pkm.WHISMUR, Pkm.PUMPKABOO, Pkm.MAKUHITA, Pkm.JOLTIK, Pkm.CACNEA];
 
 const EPIC = [Pkm.ABRA, Pkm.LARVITAR,

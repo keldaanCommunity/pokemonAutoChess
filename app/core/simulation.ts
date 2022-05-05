@@ -71,58 +71,68 @@ export default class Simulation extends Schema implements ISimulation{
       });
     }
 
-    if (blueEffects && blueEffects.includes(Effect.SWARM)) {
-      const bugTeam = [];
+    if (blueEffects && (blueEffects.includes(Effect.INFESTATION) || blueEffects.includes(Effect.HORDE) || blueEffects.includes(Effect.HEART_OF_THE_SWARM))) {
+      const bugTeam = new Array<IPokemon>();
       blueTeam.forEach((pkm)=>{
         if (pkm.types.includes(Synergy.BUG) && pkm.positionY != 0) {
-          bugTeam.push(pkm.name);
+          bugTeam.push(pkm);
         }
       });
-      const randomBug = bugTeam[Math.floor(Math.random() * bugTeam.length)];
-      const bug = PokemonFactory.createPokemonFromName(randomBug);
-      const coord = this.getFirstAvailablePlaceOnBoard(true);
-      this.addPokemon(bug, coord.x, coord.y, 0);
-    }
+      bugTeam.sort((a,b)=>b.hp - a.hp);
 
-    if (blueEffects && blueEffects.includes(Effect.STICKY_WEB)) {
-      const bugTeam = [];
-      blueTeam.forEach((pkm)=>{
-        if (pkm.types.includes(Synergy.BUG) && pkm.positionY != 0) {
-          bugTeam.push(pkm.name);
-        }
-      });
-      bugTeam.forEach((b)=>{
-        const bug = PokemonFactory.createPokemonFromName(b);
+      if(blueEffects.includes(Effect.INFESTATION)){
+        const bug = PokemonFactory.createPokemonFromName(bugTeam[0].name);
         const coord = this.getFirstAvailablePlaceOnBoard(true);
         this.addPokemon(bug, coord.x, coord.y, 0);
-      });
+      }
+
+      else if(blueEffects.includes(Effect.HORDE)){
+        for (let i = 0; i < 1; i++) {
+          const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name);
+          const coord = this.getFirstAvailablePlaceOnBoard(true);
+          this.addPokemon(bug, coord.x, coord.y, 0);
+        }
+      }
+
+      else if(blueEffects.includes(Effect.HEART_OF_THE_SWARM)){
+        for (let i = 0; i < 4; i++) {
+          const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name);
+          const coord = this.getFirstAvailablePlaceOnBoard(true);
+          this.addPokemon(bug, coord.x, coord.y, 0);
+        }
+      }
     }
 
-    if (redEffects && redEffects.includes(Effect.SWARM)) {
-      const bugTeam = [];
+    if (redEffects && (redEffects.includes(Effect.INFESTATION) || redEffects.includes(Effect.HORDE) || redEffects.includes(Effect.HEART_OF_THE_SWARM))) {
+      const bugTeam = new Array<IPokemon>();
       redTeam.forEach((pkm)=>{
         if (pkm.types.includes(Synergy.BUG) && pkm.positionY != 0) {
-          bugTeam.push(pkm.name);
+          bugTeam.push(pkm);
         }
       });
-      const randomBug = bugTeam[Math.floor(Math.random() * bugTeam.length)];
-      const bug = PokemonFactory.createPokemonFromName(randomBug);
-      const coord = this.getFirstAvailablePlaceOnBoard(false);
-      this.addPokemon(bug, coord.x, coord.y, 1);
-    }
+      bugTeam.sort((a,b)=>b.hp - a.hp);
 
-    if (redEffects && redEffects.includes(Effect.STICKY_WEB)) {
-      const bugTeam = [];
-      redTeam.forEach((pkm)=>{
-        if (pkm.types.includes(Synergy.BUG) && pkm.positionY != 0) {
-          bugTeam.push(pkm.name);
-        }
-      });
-      bugTeam.forEach((b)=>{
-        const bug = PokemonFactory.createPokemonFromName(b);
+      if(redEffects.includes(Effect.INFESTATION)){
+        const bug = PokemonFactory.createPokemonFromName(bugTeam[0].name);
         const coord = this.getFirstAvailablePlaceOnBoard(false);
         this.addPokemon(bug, coord.x, coord.y, 1);
-      });
+      }
+
+      else if(redEffects.includes(Effect.HORDE)){
+        for (let i = 0; i < 1; i++) {
+          const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name);
+          const coord = this.getFirstAvailablePlaceOnBoard(false);
+          this.addPokemon(bug, coord.x, coord.y, 1);
+        }
+      }
+
+      else if(redEffects.includes(Effect.HEART_OF_THE_SWARM)){
+        for (let i = 0; i < 4; i++) {
+          const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name);
+          const coord = this.getFirstAvailablePlaceOnBoard(false);
+          this.addPokemon(bug, coord.x, coord.y, 1);
+        }
+      }
     }
 
     this.applyPostEffects();
@@ -312,10 +322,10 @@ export default class Simulation extends Schema implements ISimulation{
       }
       let shieldBonus = 0;
       if (pokemon.effects.includes(Effect.STAMINA)) {
-        shieldBonus = 20;
+        shieldBonus = 25;
       }
       if (pokemon.effects.includes(Effect.STRENGTH)) {
-        shieldBonus += 40;
+        shieldBonus += 50;
       }
       if (pokemon.effects.includes(Effect.PURE_POWER)) {
         shieldBonus += 80;
@@ -669,12 +679,12 @@ export default class Simulation extends Schema implements ISimulation{
 
         case Effect.LIGHT_SCREEN:
           pokemon.effects.push(Effect.LIGHT_SCREEN);
-          pokemon.speDef += 15;
+          pokemon.speDef += 10;
           break;
 
         case Effect.EERIE_SPELL:
           pokemon.effects.push(Effect.EERIE_SPELL);
-          pokemon.speDef += 35;
+          pokemon.speDef += 20;
           break;
 
         case Effect.MEDITATE:
@@ -855,15 +865,21 @@ export default class Simulation extends Schema implements ISimulation{
           }
           break;
 
-        case Effect.SWARM:
+        case Effect.INFESTATION:
           if (types.includes(Synergy.BUG)) {
-            pokemon.effects.push(Effect.SWARM);
+            pokemon.effects.push(Effect.INFESTATION);
           }
           break;
 
-        case Effect.STICKY_WEB:
+        case Effect.HORDE:
           if (types.includes(Synergy.BUG)) {
-            pokemon.effects.push(Effect.STICKY_WEB);
+            pokemon.effects.push(Effect.HORDE);
+          }
+          break;
+
+        case Effect.HEART_OF_THE_SWARM:
+          if (types.includes(Synergy.BUG)) {
+            pokemon.effects.push(Effect.HEART_OF_THE_SWARM);
           }
           break;
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import {Schema, type} from '@colyseus/schema';
 import { ICount } from '../../types';
 
@@ -17,4 +18,5 @@ export default class Count extends Schema implements ICount{
   @type('uint8') doubleAttackCount: number = 0;
   @type('uint8') staticHolderCount: number = 0;
   @type('uint8') defensiveRibbonCount: number = 0;
+  @type('uint8') monsterExecutionCount: number = 0;
 }

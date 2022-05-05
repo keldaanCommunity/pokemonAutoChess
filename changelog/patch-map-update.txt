@@ -52,7 +52,7 @@ Each map will have its own music.
 
 **Nerf Bug**
 
-(~~4~~5) Swarm: At the start of combat, creates a copy of all bug pokemo
+(~~4~~5) INFESTATION: At the start of combat, creates a copy of all bug pokemo
 
 **Scyther change**
 

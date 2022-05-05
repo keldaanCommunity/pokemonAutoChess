@@ -6,22 +6,24 @@ import { Synergy } from '../../../../../types/enum/Synergy';
 import { SynergyName, SynergyDetail } from '../../../../../types/strings/Synergy';
 import PRECOMPUTED_TYPE_POKEMONS from '../../../../../models/precomputed/type-pokemons.json';
 import { Pkm } from '../../../../../types/enum/Pokemon';
+import { EffectDescription, EffectName } from '../../../../../types/strings/Effect';
+import { TypeTrigger } from '../../../../../types/Config';
 
 const precomputed = PRECOMPUTED_TYPE_POKEMONS as PrecomputedTypePokemon;
 
 export default function SynergyDetailComponent(props:{type: Synergy, value: number}) {
     return <div>
     <div style={{display:'flex'}}>
-       <img style={{width:'40px', height:'40px', marginRight:'10%'}} src={'assets/types/' + props.type + '.png'}/>
+       <img style={{width:'40px', height:'40px', marginRight:'1%'}} src={'assets/types/' + props.type + '.png'}/>
        <h3>{SynergyName[props.type].eng}</h3>
    </div>
     
-    {SynergyDetail[props.type].description.eng.map((d,i)=>{
-        return <div key={i} style={{
-            color: d.trigger <= props.value ? '#000000' : '#808080'
+    {SynergyDetail[props.type].map((d,i)=>{
+        return <div key={EffectName[d]} style={{
+            color: TypeTrigger[props.type][i] <= props.value ? '#000000' : '#808080'
         }}>
-               <h5>{d.title}</h5>
-               <p>{d.text}</p>
+               <h5>({TypeTrigger[props.type][i]}) {EffectName[d]}</h5>
+               <p>{EffectDescription[d].eng}</p>
             </div>
     })}
    <div style={{display:'flex'}}>

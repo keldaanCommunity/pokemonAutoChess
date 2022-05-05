@@ -3,7 +3,6 @@ import Lifebar from './life-bar';
 import Button from './button';
 import PokemonDetail from './pokemon-detail';
 import ItemsContainer from './items-container';
-import {EFFECTS_ICON} from '../../../../models/enum';
 import { Effect } from '../../../../types/enum/Effect';
 import {transformAttackCoordinate, getAttackScale} from '../../pages/utils/utils';
 import { IPokemon, IPokemonEntity, instanceofPokemonEntity, Emotion, AttackSprite } from '../../../../types';
@@ -1138,19 +1137,6 @@ export default class Pokemon extends Button {
       this.manabar = new ManaBar(scene, 0, this.height/2 + 12, 60, pokemon.maxMana);
       this.manabar.setAmount(pokemon.mana);
       this.add(this.manabar);
-    }
-  }
-
-  setEffects(pokemon: IPokemonEntity, scene: Phaser.Scene) {
-    if (pokemon.effects.length > 0) {
-      pokemon.effects.forEach((effect, c) => {
-        
-        if (EFFECTS_ICON[effect]) {
-
-          this.backgroundIcon = new GameObjects.Image(scene, c*20 -20, this.height +10, 'types', EFFECTS_ICON[effect].type.toUpperCase()).setScale(0.5, 0.5);
-          this.add(this.backgroundIcon);
-        }
-      });
     }
   }
 

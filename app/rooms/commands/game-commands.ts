@@ -491,9 +491,9 @@ export class OnRefreshCommand extends Command<GameRoom, {
   execute(id) {
     if (this.state.players.has(id)) {
       const player = this.state.players.get(id);
-      if (player.money >= 2) {
+      if (player.money >= 1) {
         this.state.shop.assignShop(player);
-        player.money -= 2;
+        player.money -= 1;
       }
     }
   }
