@@ -199,11 +199,11 @@
         'esp' : "+30% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo",
         'fra' : "+30% de chances d'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes" },
     [Effect.DRAGON_ENERGY] : {
-        'eng' : "Your Dragon pokemon gain +3% attack Speed after every hit.",
+        'eng' : "Your Dragon pokemon gain +4% attack Speed after every hit.",
         'esp' : "-30% ATK para el equipo enemigo",
         'fra' : "-30% ATK pour l'équipe ennemie" },
     [Effect.DRAGON_DANCE] : {
-        'eng' : "Your Dragon pokemon gain +6% attack Speed after every hit.",
+        'eng' : "Your Dragon pokemon gain +7% attack Speed after every hit.",
         'esp' : "+5% velocidad de ataque para dragones pkm en cada ataque",
         'fra' : "+5% vitesse d'attaque pour les pkm dragons à chaque attaque" },
     [Effect.BULK_UP] : {

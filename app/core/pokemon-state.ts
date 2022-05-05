@@ -380,11 +380,11 @@ export default class PokemonState {
       }
 
       if (pokemon.effects.includes(Effect.DRAGON_ENERGY) && pokemon.types.includes(Synergy.DRAGON)) {
-        pokemon.handleAttackSpeed(3);
+        pokemon.handleAttackSpeed(4);
       }
 
       if (pokemon.effects.includes(Effect.DRAGON_DANCE) && pokemon.types.includes(Synergy.DRAGON)) {
-        pokemon.handleAttackSpeed(6);
+        pokemon.handleAttackSpeed(7);
       }
 
       if (pokemon.effects.includes(Effect.INGRAIN)) {
