@@ -994,19 +994,19 @@ export class Dusknoir extends Pokemon {
 
 export class Magnemite extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MAGNEMITE, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0081', Pkm.MAGNETON, 70, 5, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.CHARGE,shiny, emotion);
+    super(Pkm.MAGNEMITE, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0081', Pkm.MAGNETON, 70, 5, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.TORMENT,shiny, emotion);
   }
 }
 
 export class Magneton extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MAGNETON, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0082', Pkm.MAGNEZONE, 120, 9, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.CHARGE,shiny, emotion);
+    super(Pkm.MAGNETON, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0082', Pkm.MAGNEZONE, 120, 9, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.TORMENT,shiny, emotion);
   }
 }
 
 export class Magnezone extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MAGNEZONE, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0462', Pkm.DEFAULT, 210, 20, 2, 2, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 3, 100, Ability.CHARGE,shiny, emotion);
+    super(Pkm.MAGNEZONE, [Synergy.ELECTRIC, Synergy.METAL], Rarity.UNCOMMON, '0462', Pkm.DEFAULT, 210, 20, 2, 2, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 3, 100, Ability.TORMENT,shiny, emotion);
   }
 }
 
