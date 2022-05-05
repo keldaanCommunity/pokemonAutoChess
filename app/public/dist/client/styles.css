@@ -143,3 +143,18 @@ input[type=range]:focus::-ms-fill-upper {
 .modalClass{
     max-width: 80%;
 }
+
+.multi-range{
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.multi-range .thumb * {
+  display: inherit !important;
+  color: black !important;
+  border: 2px solid black !important;
+  border-radius: 0px !important;
+  background-color: white !important;
+  width: 60px !important;
+  box-shadow: none !important;
+}

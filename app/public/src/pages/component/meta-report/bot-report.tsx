@@ -1,21 +1,36 @@
 import { ApexOptions } from "apexcharts";
 import Chart from 'react-apexcharts';
 import { useAppSelector } from "../../../hooks";
-import React from 'react';
+import React, { useState } from 'react';
 import { CDN_PORTRAIT_URL } from "../../../../../models/enum";
+import { BotDifficulty } from "../../../../../types/enum/Game";
 import { PkmIndex } from "../../../../../types/enum/Pokemon";
 import { Emotion } from "../../../../../types";
+import MultiRangeSlider from "multi-range-slider-react";
+
+const maxEloValue = 1600;
 
 export default function BotReport(){
     const botMonitor = useAppSelector(state=>state.lobby.botMonitor);
+    const [minValue, set_minValue] = useState(1200);
+    const [maxValue, set_maxValue] = useState(1400);
+
+    const handleInput = (e) => {
+        set_minValue(e.minValue);
+        set_maxValue(e.maxValue);
+    };
+    
+    
     const botSeries: ApexAxisChartSeries = [];
     botMonitor.forEach(b=>{
         const data: [number, number][] = [];
-        b.data.forEach(d=>{
-            data.push([d.time, d.elo]);
-        });
-        botSeries.push({name: b.name, data: data});
+        const e = b.data[b.data.length -1].elo;
+        if(e > minValue && e < maxValue){
+            b.data.forEach(d=>{data.push([d.time, d.elo])});
+            botSeries.push({name: b.name, data: data});
+        }
     });
+
     const options: ApexOptions = {
         chart: {
             id: 'bot-report',
@@ -28,7 +43,7 @@ export default function BotReport(){
             enabled: false
         },
         markers: {
-            size: 4
+            size: 4,
         },
         stroke: {
             show: true,
@@ -58,22 +73,29 @@ export default function BotReport(){
             }
             }
         },
-        tooltip: {
-            custom: function({series, seriesIndex, dataPointIndex, w}) {
-                return (`<div class='nes-container' style='padding:10px; display:flex; flex-flow:column; justify-content:center;text-align:center'>
-                    <img style='width:40px;height:40px;' src='${CDN_PORTRAIT_URL}${botMonitor[seriesIndex].avatar}.png' />
-                    <p>${botMonitor[seriesIndex].name}</p>
-                    <p>@${botMonitor[seriesIndex].author}</p>
-                    <p>Elo: ${series[seriesIndex][dataPointIndex]}</p>
-                </div>`)
-            }
-        },
         legend: {
             fontFamily: 'Press Start 2P'
         }
     }
     return <div style={{backgroundColor:'rgba(255,255,255,1)'}} className='nes-container'>
-        <Chart options={options} series={botSeries} height={680} />
+        <MultiRangeSlider
+			min={0}
+			max={maxEloValue}
+			step={10}
+			ruler={false}
+			label={false}
+			preventWheel={false}
+			minValue={minValue}
+			maxValue={maxValue}
+			onInput={(e) => {
+				handleInput(e);
+			}}
+            baseClassName='multi-range-slider multi-range'
+		/>
+        <div style={{height: '30px'}}>
+            {botMonitor.map(b=><div style={{position: "absolute", left:`${b.data[b.data.length -1].elo * 100 / maxEloValue}%`}} key={b.avatar}><img style={{width:'40px',height:'40px'}} src={`${CDN_PORTRAIT_URL}${b.avatar}.png`}/></div>)}
+        </div>
+        <Chart options={options} series={botSeries} height={600} />
     </div>;
 }
 

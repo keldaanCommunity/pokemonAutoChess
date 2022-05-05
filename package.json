@@ -58,6 +58,7 @@
     "immer": "^9.0.12",
     "jimp": "^0.16.1",
     "mongoose": "^6.2.4",
+    "multi-range-slider-react": "^1.0.7",
     "nes.css": "^2.3.0",
     "pastebin-ts": "^1.2.0",
     "phaser": "^3.55.2",
