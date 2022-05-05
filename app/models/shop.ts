@@ -4,7 +4,7 @@ import Player from './colyseus-models/player';
 import {IPokemon} from '../types';
 import {PROBABILITY} from '../types/Config';
 
-const COMMON = [Pkm.CHARMANDER, Pkm.GEODUDE,
+const COMMON = [Pkm.POLIWAG, Pkm.CHARMANDER, Pkm.GEODUDE,
   Pkm.AZURILL, Pkm.ZUBAT,
   Pkm.MAREEP, Pkm.CLEFFA,
   Pkm.CATERPIE, Pkm.WEEDLE,
@@ -22,7 +22,7 @@ const UNCOMMON = [Pkm.SQUIRTLE, Pkm.IGGLYBUFF, Pkm.CHIKORITA,
 const RARE = [Pkm.BULBASAUR, Pkm.TURTWIG, Pkm.NIDORANF,
   Pkm.NIDORANM, Pkm.PICHU, Pkm.TRAPINCH,
   Pkm.ARON, Pkm.RHYHORN, Pkm.TOGEPI,
-  Pkm.LOTAD, Pkm.SHINX, Pkm.POLIWAG,
+  Pkm.LOTAD, Pkm.SHINX,
   Pkm.DRATINI, Pkm.MAGBY, Pkm.WHISMUR, Pkm.PUMPKABOO, Pkm.MAKUHITA, Pkm.JOLTIK, Pkm.CACNEA];
 
 const EPIC = [Pkm.ABRA, Pkm.LARVITAR,
@@ -46,7 +46,7 @@ const MYTHICAL_2 = [Pkm.GUZZLORD, Pkm.ETERNATUS, Pkm.MELOETTA, Pkm.MEWTWO, Pkm.E
 export default class Shop {
 
   assignShop(player: Player) {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
       let pokemon = this.pickPokemon(player);
       const seed = Math.random();
       if (seed > 0.994) {
@@ -59,7 +59,7 @@ export default class Shop {
   assignDittoShop(player: Player) {
     player.shop[0] = Pkm.DITTO;
 
-    for (let i = 1; i < 6; i++) {
+    for (let i = 1; i < 5; i++) {
       const pokemon = this.pickPokemon(player);
       player.shop[i] = pokemon;
     }
@@ -67,7 +67,7 @@ export default class Shop {
 
   assignFirstMythicalShop(player: Player) {
     const mythicalCopy = JSON.parse(JSON.stringify(MYTHICAL_1));
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
       const pkm = PokemonFactory.createPokemonFromName(mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]).name;
       mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1);
       player.shop[i] = pkm;
@@ -76,7 +76,7 @@ export default class Shop {
 
   assignSecondMythicalShop(player: Player) {
     const mythicalCopy = JSON.parse(JSON.stringify(MYTHICAL_2));
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
       const pkm = PokemonFactory.createPokemonFromName(mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]).name;
       mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1);
       player.shop[i] = pkm;

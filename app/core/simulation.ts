@@ -669,12 +669,12 @@ export default class Simulation extends Schema implements ISimulation{
 
         case Effect.LIGHT_SCREEN:
           pokemon.effects.push(Effect.LIGHT_SCREEN);
-          pokemon.speDef += 15;
+          pokemon.speDef += 10;
           break;
 
         case Effect.EERIE_SPELL:
           pokemon.effects.push(Effect.EERIE_SPELL);
-          pokemon.speDef += 35;
+          pokemon.speDef += 20;
           break;
 
         case Effect.MEDITATE:

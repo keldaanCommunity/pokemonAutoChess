@@ -617,19 +617,19 @@ export class Hydreigon extends Pokemon {
 
 export class Poliwag extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.POLIWAG, [Synergy.WATER, Synergy.FIGHTING], Rarity.RARE, '0060', Pkm.POLIWHIRL, 80, 5, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 1, 100, Ability.SOAK,shiny, emotion);
+    super(Pkm.POLIWAG, [Synergy.WATER, Synergy.FIGHTING], Rarity.COMMON, '0060', Pkm.POLIWHIRL, 80, 5, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 1, 100, Ability.SOAK,shiny, emotion);
   }
 }
 
 export class Poliwhirl extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.POLIWHIRL, [Synergy.WATER, Synergy.FIGHTING], Rarity.RARE, '0061', Pkm.POLITOED, 120, 9, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 2, 100, Ability.SOAK,shiny, emotion);
+    super(Pkm.POLIWHIRL, [Synergy.WATER, Synergy.FIGHTING], Rarity.COMMON, '0061', Pkm.POLITOED, 120, 9, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 2, 100, Ability.SOAK,shiny, emotion);
   }
 }
 
 export class Politoed extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.POLITOED, [Synergy.WATER, Synergy.FIGHTING], Rarity.RARE, '0186', Pkm.DEFAULT, 220, 18, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 3, 100, Ability.SOAK,shiny, emotion);
+    super(Pkm.POLITOED, [Synergy.WATER, Synergy.FIGHTING], Rarity.COMMON, '0186', Pkm.DEFAULT, 220, 18, 1, 1, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 3, 100, Ability.SOAK,shiny, emotion);
   }
 }
 
@@ -1371,19 +1371,19 @@ export class Golem extends Pokemon {
 
 export class Totodile extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.TOTODILE, [Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0158', Pkm.CROCONAW, 60, 5, 2, 2, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 1, 100, Ability.BITE,shiny, emotion);
+    super(Pkm.TOTODILE, [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0158', Pkm.CROCONAW, 60, 5, 2, 2, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 1, 100, Ability.BITE,shiny, emotion);
   }
 }
 
 export class Croconaw extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.CROCONAW, [Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0159', Pkm.FERALIGATR, 110, 9, 3, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 100, Ability.BITE,shiny, emotion);
+    super(Pkm.CROCONAW, [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0159', Pkm.FERALIGATR, 110, 9, 3, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 100, Ability.BITE,shiny, emotion);
   }
 }
 
 export class Feraligatr extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.FERALIGATR, [Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0160', Pkm.DEFAULT, 200, 20, 5, 5, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 3, 100, Ability.BITE,shiny, emotion);
+    super(Pkm.FERALIGATR, [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC], Rarity.COMMON, '0160', Pkm.DEFAULT, 200, 20, 5, 5, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 3, 100, Ability.BITE,shiny, emotion);
   }
 }
 
