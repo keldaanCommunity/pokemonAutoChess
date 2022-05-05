@@ -40,8 +40,9 @@ export enum Effect {
     MEDITATE,
     FOCUS_ENERGY,
     CALM_MIND,
-    SWARM,
-    STICKY_WEB,
+    INFESTATION,
+    HORDE,
+    HEART_OF_THE_SWARM,
     SWIFT_SWIM,
     HYDRO_CANNON,
     TAILWIND,
@@ -60,12 +61,6 @@ export enum Effect {
     AROMATIC_MIST,
     FAIRY_WIND,
     STRANGE_STEAM,
-    GROUND,
-    GRASS,
-    FIRE,
-    WATER,
-    NORMAL,
-    ICE,
     SNOW,
     SHEER_COLD,
     ANCIENT_POWER,
@@ -74,5 +69,4 @@ export enum Effect {
     LARGO,
     ALLEGRO,
     PRESTO
-      
 }
