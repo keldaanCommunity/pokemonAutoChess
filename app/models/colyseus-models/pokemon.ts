@@ -2284,7 +2284,7 @@ export class Hariyama extends Pokemon {
 }
 export class Regieleki extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.REGIELEKI, [Synergy.ELECTRIC, Synergy.HUMAN], Rarity.MYTHICAL, PkmIndex[Pkm.REGIELEKI], Pkm.DEFAULT, 270, 17, 3, 3, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 80, Ability.ELECTRO_BOOST,shiny, emotion);
+    super(Pkm.REGIELEKI, [Synergy.ELECTRIC, Synergy.HUMAN], Rarity.MYTHICAL, PkmIndex[Pkm.REGIELEKI], Pkm.DEFAULT, 270, 17, 3, 3, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 70, Ability.VOLT_SWITCH,shiny, emotion);
   }
 }
 export class Regidrago extends Pokemon {
