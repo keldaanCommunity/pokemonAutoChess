@@ -1144,5 +1144,5 @@ export const PkmFamily : {[key in Pkm]: Pkm} = {
     [Pkm.PUMPKABOO]: Pkm.PUMPKABOO,
     [Pkm.GOURGEIST]: Pkm.PUMPKABOO,
     cacnea: Pkm.CACNEA,
-    cacturne:  Pkm.CACTURNE
+    cacturne:  Pkm.CACNEA
 }
