@@ -250,17 +250,17 @@
          'fra': "?NONE?"
      },
      [Effect.PURSUIT]: {
-         'eng': "Monster pokemons shield themselves for 20% max health 4 seconds whenever they cast a spell. This shield doesn't stack.",
+         'eng': "Upon kill, grants 2 armor, 2 magic resistance, 30 shield and 3 attack damage",
          'esp': "?NONE?",
          'fra': "?NONE?"
      },
      [Effect.BRUTAL_SWING]: {
-         'eng': "Monster pokemons shield themselves for 30% max health 4 seconds whenever they cast a spell. This shield doesn't stack.",
+         'eng': "Upon kill, grants 4 armor, 4 magic resistance, 60 shield and 6 attack damage",
          'esp': "?NONE?",
          'fra': "?NONE?"
      },
      [Effect.POWER_TRIP]: {
-         'eng': "Monster pokemons shield themselves for 40% max health 4 seconds whenever they cast a spell. This shield doesn't stack.",
+         'eng': "Upon kill, grants 6 armor, 6 magic resistance, 120 shield and 12 attack damage",
          'esp': "?NONE?",
          'fra': "?NONE?"
      },
