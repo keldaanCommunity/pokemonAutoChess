@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {BasicItem, ItemDescription, ItemName, ITEM_RECIPE} from '../../../../models/enum';
+import {BasicItems, ItemDescription, ItemName, ITEM_RECIPE} from '../../../../models/enum';
 
 class WikiItem extends Component {
   render() {
       let recipe;
-      if(Object.keys(BasicItem).includes(this.props.item)){
+      if(BasicItems.includes(this.props.item)){
           recipe = <div>
               {
                   Object.keys(ITEM_RECIPE).map(recipeName=>{

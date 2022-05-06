@@ -1,6 +1,6 @@
 import {MapSchema} from '@colyseus/schema';
 import { IPokemon } from '../../types';
-import { PkmFamily } from '../../types/enum/Pokemon';
+import { Pkm, PkmFamily } from '../../types/enum/Pokemon';
 import { Synergy } from '../../types/enum/Synergy';
 
 export default class Synergies extends MapSchema<number> implements Map<string,number>{
@@ -11,7 +11,7 @@ export default class Synergies extends MapSchema<number> implements Map<string,n
   }
 
   update(board: MapSchema<IPokemon>) {
-    const pokemonNames = [];
+    const pokemonNames = new Array<Pkm>();
     this.setToZero();
 
 
@@ -20,7 +20,10 @@ export default class Synergies extends MapSchema<number> implements Map<string,n
       if (!pokemonNames.includes(family) && pkm.positionY != 0) {
         pokemonNames.push(family);
         pkm.types.forEach( (type) => {
-          this.set(type, this.get(type) + 1)
+          const t = this.get(type);
+          if(t){
+            this.set(type, t + 1)
+          }
         });
       }
     });

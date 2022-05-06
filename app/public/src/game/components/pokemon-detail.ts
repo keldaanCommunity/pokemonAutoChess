@@ -17,7 +17,6 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   critDamage: HTMLDivElement
   spellDamage: HTMLDivElement
   mana: HTMLDivElement
-  skill: HTMLDivElement
 
   constructor(scene: Phaser.Scene,
     x: number,

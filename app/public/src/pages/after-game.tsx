@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import AfterMenu  from './component/after/after-menu';
 import { Client, Room } from 'colyseus.js';
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -24,9 +24,10 @@ const buttonStyle = {
 export default function AfterGame(){
     const dispatch = useAppDispatch();
     const client: Client = useAppSelector(state=>state.network.client);
-    const room : Room<AfterGameState> = useAppSelector(state=>state.network.after);
+    const room : Room<AfterGameState> | undefined = useAppSelector(state=>state.network.after);
     const [initialized, setInitialized] = useState<boolean>(false);
     const [toLobby, setToLobby] = useState<boolean>(false);
+    const [toAuth, setToAuth] = useState<boolean>(false);
 
     useEffect(()=>{
         const reconnect = async () => {
@@ -35,25 +36,46 @@ export default function AfterGame(){
                 firebase.initializeApp(FIREBASE_CONFIG);
             }
             firebase.auth().onAuthStateChanged(async user => {
-                dispatch(logIn(user));
-                try{
-                    const r: Room<AfterGameState> = await client.reconnect(localStorage.getItem('lastRoomId'),localStorage.getItem('lastSessionId'));
-                    await initialize(r);
-                    dispatch(joinAfter(r));
+                if(user){
+                    dispatch(logIn(user));
+                    try{
+                        const lastRoomId = localStorage.getItem('lastRoomId');
+                        const lastSessionId = localStorage.getItem('lastSessionId');
+                        if(lastRoomId && lastSessionId){
+                            const r: Room<AfterGameState> = await client.reconnect(lastRoomId, lastSessionId);
+                            await initialize(r);
+                            dispatch(joinAfter(r));
+                        }
+                        else{
+                            setToLobby(true);
+                        }
+
+                    }
+                    catch(error){
+                        setTimeout(async ()=>{
+                            const lastRoomId = localStorage.getItem('lastRoomId');
+                            const lastSessionId = localStorage.getItem('lastSessionId');
+                            if(lastRoomId && lastSessionId){
+                                const r: Room<AfterGameState> = await client.reconnect(lastRoomId, lastSessionId);
+                                await initialize(r);
+                                dispatch(joinAfter(r));
+                            }
+                            else{
+                                setToLobby(true);
+                            }
+                        }, 1000);
+                        console.log(error);         
+                    }
                 }
-                catch(error){
-                    setTimeout(async ()=>{
-                        const r: Room<AfterGameState> = await client.reconnect(localStorage.getItem('lastRoomId'),localStorage.getItem('lastSessionId'));
-                        await initialize(r);
-                        dispatch(joinAfter(r));
-                    }, 1000);
-                    console.log(error);         
+                else{
+                    setToAuth(true);
                 }
+
             });
         }
     
         const initialize = async (r: Room<AfterGameState>) => {
-            r.state.players.onAdd = (player, key) => {
+            r.state.players.onAdd = (player) => {
                 dispatch(addPlayer(player));
             }
         }
@@ -65,6 +87,9 @@ export default function AfterGame(){
 
     if(toLobby){
         return <Navigate to='/lobby'/>
+    }
+    if(toAuth){
+        return <Navigate to='/auth'/>
     }
     else{
         return <div className='App'>

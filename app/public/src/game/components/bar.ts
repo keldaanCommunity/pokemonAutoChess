@@ -3,7 +3,6 @@ import { GameObjects } from "phaser";
 export default class Bar extends GameObjects.DOMElement {
     max: number;
     color: string;
-    value: number;
     progress: HTMLDivElement;
     dom: HTMLDivElement;
     wrap: HTMLDivElement;

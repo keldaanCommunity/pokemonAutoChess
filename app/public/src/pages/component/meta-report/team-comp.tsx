@@ -15,9 +15,25 @@ function capitalizeFirstLetter(string: string) {
     }
 }
 
+function rankType(a: Synergy, b: Synergy, types: {[key in Synergy]?: number}){
+    const sa = types[a];
+    const sb = types[b];
+    const va = sa ? sa : 0;
+    const vb = sb ? sb : 0; 
+    return vb - va;
+}
+
+function rankPokemon(a: Pkm, b: Pkm, pokemons: {[key in Pkm]?: number}){
+    const pa = pokemons[a];
+    const pb = pokemons[b];
+    const va = pa ? pa : 0;
+    const vb = pb ? pb : 0;
+    return vb - va;
+}
+
 export default function TeamComp(props:{team:IMeta}){
-    const sortedTypes = props.team.types ? (Object.keys(props.team.types) as Synergy[]).sort((a,b)=>{return props.team.types[b] - props.team.types[a]}) : new Array<Synergy>();
-    const sortedPokemons = props.team.pokemons ? (Object.keys(props.team.pokemons) as Pkm[]).sort((a,b)=>{return props.team.pokemons[b] - props.team.pokemons[a]}) : new Array<Pkm>();
+    const sortedTypes = props.team.types ? (Object.keys(props.team.types) as Synergy[]).sort((a,b)=>{return rankType(a, b, props.team.types)}) : new Array<Synergy>();
+    const sortedPokemons = props.team.pokemons ? (Object.keys(props.team.pokemons) as Pkm[]).sort((a,b)=>{return rankPokemon(a, b, props.team.pokemons)}) : new Array<Pkm>();
 
     return <div style={{backgroundColor:'rgba(255,255,255,1)', margin:'10px'}} className='nes-container'>
         <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
@@ -34,7 +50,7 @@ export default function TeamComp(props:{team:IMeta}){
                 {sortedPokemons.map(pokemon=>{
                     return <div style={{display:'flex', flexFlow:'column', alignItems: 'center'}} key={pokemon}>
                     <img style={{width:'60px', height:'60px', imageRendering:'pixelated'}} src={`${CDN_PORTRAIT_URL}${PkmIndex[pokemon].replace('-','/')}/${Emotion.NORMAL}.png`}/>
-                    <p>{props.team.pokemons[pokemon].toFixed(1)}</p>
+                    <p>{props.team.pokemons[pokemon]?.toFixed(1)}</p>
                 </div> 
                 })}
             </div>

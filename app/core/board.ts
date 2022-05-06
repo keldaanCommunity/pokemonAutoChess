@@ -10,12 +10,12 @@ export type Cell = {
 export default class Board {
   rows: number;
   columns: number;
-  cell: PokemonEntity[];
+  cell: Array<PokemonEntity | undefined>;
   
   constructor(rows: number, colums: number) {
     this.rows = rows;
     this.columns = colums;
-    this.cell = new Array(this.rows * this.columns);
+    this.cell = new Array<PokemonEntity | undefined>(this.rows * this.columns);
   }
 
   getValue(row: number, col: number) {
@@ -24,7 +24,7 @@ export default class Board {
     }
   }
 
-  setValue(row: number, col: number, value: PokemonEntity) {
+  setValue(row: number, col: number, value: PokemonEntity | undefined) {
     if (row >= 0 && row < this.rows && col >= 0 && col < this.columns) {
       this.cell[this.columns * row + col] = value;
     }
@@ -43,7 +43,7 @@ export default class Board {
     this.setValue(r0, c0, v1);
   }
 
-  forEach(callback: (x: number, y: number, tg: PokemonEntity) => void) {
+  forEach(callback: (x: number, y: number, tg: PokemonEntity | undefined) => void) {
     for (let r = 0; r < this.rows; r++) {
       for (let c = 0; c < this.columns; c++) {
         callback(r, c, this.cell[this.columns * r + c]);

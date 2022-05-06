@@ -6,7 +6,7 @@ import UserMetadata from '../models/mongo-models/user-metadata';
 import BOT from '../models/mongo-models/bot-v2';
 import {OnShopCommand, OnItemCommand, OnSellDropCommand, OnRefreshCommand, OnLockCommand, OnLevelUpCommand, OnUpdateCommand, OnDragDropCommand, OnJoinCommand, OnDragDropItemCommand, OnDragDropCombineCommand} from './commands/game-commands';
 import {XP_PLACE} from '../models/enum';
-import { Item, BasicItem } from '../types/enum/Item';
+import { Item, BasicItems } from '../types/enum/Item';
 import PokemonFactory from '../models/pokemon-factory';
 import EloRank from 'elo-rank';
 import admin from 'firebase-admin';
@@ -15,6 +15,7 @@ import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, IPokem
 import {Pkm, PkmIndex} from '../types/enum/Pokemon';
 import PokemonConfig from '../models/colyseus-models/pokemon-config';
 import { Synergy } from '../types/enum/Synergy';
+import { Pokemon } from '../models/colyseus-models/pokemon';
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>;
@@ -22,6 +23,7 @@ export default class GameRoom extends Room<GameState> {
   constructor() {
     super();
     this.dispatcher = new Dispatcher(this);
+    this.eloEngine = new EloRank();
   }
 
   // When room is initialized
@@ -30,14 +32,14 @@ export default class GameRoom extends Room<GameState> {
     // console.log(options);
     this.setState(new GameState());
     this.maxClients = 8;
-    this.eloEngine = new EloRank();
     for (const id in options.users) {
       const user = options.users[id];
       // console.log(user);
       if (user.isBot) {
-        this.state.players.set(user.id, new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1, new Map<string,PokemonConfig>()));
-        this.state.botManager.addBot(this.state.players.get(user.id));
-        this.state.shop.assignShop(this.state.players.get(user.id));
+        const player = new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1, new Map<string,PokemonConfig>());
+        this.state.players.set(user.id, player);
+        this.state.botManager.addBot(player);
+        this.state.shop.assignShop(player);
       }
     }
 
@@ -290,7 +292,7 @@ export default class GameRoom extends Room<GameState> {
       id: player.id,
       rank: player.rank,
       avatar: player.avatar,
-      pokemons: [],
+      pokemons: new Array<{name: string, avatar: string, items: Item[]}>(),
       exp: player.exp,
       elo: player.elo
     };
@@ -302,7 +304,7 @@ export default class GameRoom extends Room<GameState> {
         const s = {
           name: pokemon.name,
           avatar: avatar,
-          items: []
+          items: new Array<Item>()
         };
         pokemon.items.forEach((i)=>{
           s.items.push(i);
@@ -314,7 +316,7 @@ export default class GameRoom extends Room<GameState> {
   }
 
   computeElo(player: Player, rank: number, elo: number) {
-    const eloGains = [];
+    const eloGains = new Array<number>();
     let meanGain = 0;
     this.state.players.forEach((plyr) =>{
       if (player.name != plyr.name) {
@@ -340,79 +342,94 @@ export default class GameRoom extends Room<GameState> {
   }
 
   computeRandomOpponent(playerId: string) {
-    const player: Player = this.state.players.get(playerId);
-    this.checkOpponents(playerId);
-    if (player.opponents.length == 0) {
-      this.fillOpponents(playerId);
-    }
-    if (player.opponents.length > 0) {
-      const id: string = player.opponents.pop();
-      player.opponentName = this.state.players.get(id).name;
-      player.opponentAvatar = this.state.players.get(id).avatar;
-      return id;
-    } else {
-      return;
+    const player = this.state.players.get(playerId);
+    if(player){
+      this.checkOpponents(playerId);
+      if (player.opponents.length == 0) {
+        this.fillOpponents(playerId);
+      }
+      if (player.opponents.length > 0) {
+        const id = player.opponents.pop();
+        if(id){
+          const opponent = this.state.players.get(id);
+          if(opponent){
+            player.opponentName = opponent.name;
+            player.opponentAvatar = opponent.avatar;
+            return id;
+          }
+        }
+      }
     }
   }
 
   checkOpponents(playerId: string) {
     const player = this.state.players.get(playerId);
-    const indexToDelete = [];
-    player.opponents.forEach((p: string, i: number) =>{
-      if (!this.state.players.get(p).alive) {
-        indexToDelete.push(i);
-      }
-    });
-    indexToDelete.forEach((index) =>{
-      player.opponents.splice(index, 1);
-    });
+    const indexToDelete = new Array<number>();
+    if(player){
+      player.opponents.forEach((p: string, i: number) =>{
+        const opponent = this.state.players.get(p);
+        if (opponent && !opponent.alive) {
+          indexToDelete.push(i);
+        }
+      });
+      indexToDelete.forEach((index) =>{
+        player.opponents.splice(index, 1);
+      });
+    }
   }
 
   fillOpponents(playerId: string) {
-    const player: Player = this.state.players.get(playerId);
-    this.state.players.forEach((plyr: Player, key: string) =>{
-      if (plyr.alive && player.id != plyr.id) {
-        player.opponents.push(key);
-      }
-    });
-    player.opponents.sort(() => Math.random() - 0.5);
+    const player = this.state.players.get(playerId);
+    if(player){
+      this.state.players.forEach((plyr: Player, key: string) =>{
+        if (plyr.alive && player.id != plyr.id) {
+          player.opponents.push(key);
+        }
+      });
+      player.opponents.sort(() => Math.random() - 0.5);
+    }
   }
 
-  swap(playerId, pokemon, x, y) {
+  swap(playerId: string, pokemon: IPokemon, x: number, y: number) {
     if (!this.isPositionEmpty(playerId, x, y)) {
       const pokemonToSwap = this.getPokemonByPosition(playerId, x, y);
-
-      pokemonToSwap.positionX = pokemon.positionX;
-      pokemonToSwap.positionY = pokemon.positionY;
+      if(pokemonToSwap){
+        pokemonToSwap.positionX = pokemon.positionX;
+        pokemonToSwap.positionY = pokemon.positionY;
+        pokemon.positionX = x;
+        pokemon.positionY = y;
+      }
     }
-    pokemon.positionX = x;
-    pokemon.positionY = y;
   }
 
 
-  getPokemonByPosition(playerId, x, y) {
-    let pkm;
-    this.state.players.get(playerId).board.forEach((pokemon, key) => {
-      if (pokemon.positionX == x && pokemon.positionY == y) {
-        pkm = pokemon;
-      }
-    });
-    return pkm;
+  getPokemonByPosition(playerId: string, x: number, y: number) {
+    let pkm: IPokemon | undefined;
+    const player = this.state.players.get(playerId);
+    if(player){
+      player.board.forEach((pokemon, key) => {
+        if (pokemon.positionX == x && pokemon.positionY == y) {
+          pkm = pokemon;
+        }
+      });
+      return pkm;
+    }
   }
 
-  isPositionEmpty(playerId, x, y) {
+  isPositionEmpty(playerId: string, x: number, y: number) {
     let empty = true;
-
-    this.state.players.get(playerId).board.forEach((pokemon, key) => {
-      if (pokemon.positionX == x && pokemon.positionY == y) {
-        empty = false;
-      }
-    });
-
+    const player = this.state.players.get(playerId);
+    if(player){
+      player.board.forEach((pokemon, key) => {
+        if (pokemon.positionX == x && pokemon.positionY == y) {
+          empty = false;
+        }
+      });
+    }
     return empty;
   }
 
-  getFirstAvailablePositionInBoard(playerId) {
+  getFirstAvailablePositionInBoard(playerId: string) {
     for (let i = 0; i < 8; i++) {
       if (this.isPositionEmpty(playerId, i, 0)) {
         return i;
@@ -420,7 +437,7 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  getFirstAvailablePositionInTeam(playerId) {
+  getFirstAvailablePositionInTeam(playerId: string) {
     for (let x = 0; x < 8; x++) {
       for (let y = 1; y < 4; y++) {
         if (this.isPositionEmpty(playerId, x, y)) {
@@ -430,30 +447,39 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  updateEvolution(id) {
+  updateEvolution(id: string) {
     let evolve = false;
-    const itemsToAdd = [];
-    const basicItemsToAdd = [];
+    const itemsToAdd = new Array<Item>();
+    const basicItemsToAdd = new Array<Item>();
     const player = this.state.players.get(id);
-    player.board.forEach((pokemon, key) => {
-      let count = 0;
-      const pokemonEvolutionName = pokemon.evolution;
-
-      if (pokemonEvolutionName !== Pkm.DEFAULT && pokemon.name !== Pkm.DITTO) {
-        player.board.forEach((pkm, id) => {
-          if ( pkm.index == pokemon.index) {
-            count += 1;
-          }
-        });
-
-        if (count == 3) {
-          let x;
-          let y;
-
+    if(player){
+      player.board.forEach((pokemon, key) => {
+        let count = 0;
+        const pokemonEvolutionName = pokemon.evolution;
+  
+        if (pokemonEvolutionName !== Pkm.DEFAULT && pokemon.name !== Pkm.DITTO) {
           player.board.forEach((pkm, id) => {
-            if ( pkm.index == pokemon.index && count >= 0) {
-              if (x !== undefined && y !== undefined) {
-                if (pkm.positionY >= y) {
+            if ( pkm.index == pokemon.index) {
+              count += 1;
+            }
+          });
+  
+          if (count == 3) {
+            let x;
+            let y;
+  
+            player.board.forEach((pkm, id) => {
+              if ( pkm.index == pokemon.index && count >= 0) {
+                if (x !== undefined && y !== undefined) {
+                  if (pkm.positionY >= y) {
+                    if (pkm.positionY !== undefined) {
+                      y = pkm.positionY;
+                    }
+                    if (pkm.positionX !== undefined) {
+                      x = pkm.positionX;
+                    }
+                  }
+                } else {
                   if (pkm.positionY !== undefined) {
                     y = pkm.positionY;
                   }
@@ -461,85 +487,79 @@ export default class GameRoom extends Room<GameState> {
                     x = pkm.positionX;
                   }
                 }
-              } else {
-                if (pkm.positionY !== undefined) {
-                  y = pkm.positionY;
-                }
-                if (pkm.positionX !== undefined) {
-                  x = pkm.positionX;
-                }
+  
+                pkm.items.forEach((el)=>{
+                  if (BasicItems.includes(el)) {
+                    basicItemsToAdd.push(el);
+                  } else {
+                    itemsToAdd.push(el);
+                  }
+                });
+                player.board.delete(id);
+                count -= 1;
               }
-
-              pkm.items.forEach((el)=>{
-                if (Object.keys(BasicItem).includes(el)) {
-                  basicItemsToAdd.push(el);
+            });
+            const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName, player.pokemonCollection.get(PkmIndex[pokemonEvolutionName]));
+            for (let i = 0; i < 3; i++) {
+              const itemToAdd = itemsToAdd.pop();
+              if (itemToAdd) {
+                if (pokemonEvolved.items.has(itemToAdd)) {
+                  player.items.add(itemToAdd);
                 } else {
-                  itemsToAdd.push(el);
-                }
-              });
-              player.board.delete(id);
-              count -= 1;
-            }
-          });
-          const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName, player.pokemonCollection.get(PkmIndex[pokemonEvolutionName]));
-          for (let i = 0; i < 3; i++) {
-            const itemToAdd = itemsToAdd.pop();
-            if (itemToAdd) {
-              if (pokemonEvolved.items.has(itemToAdd)) {
-                player.items.add(itemToAdd);
-              } else {
-                pokemonEvolved.items.add(itemToAdd);
-                switch (itemToAdd) {
-                  case Item.WATER_STONE:
-                    pokemonEvolved.types.push(Synergy.WATER);
-                    break;
-                  case Item.FIRE_STONE:
-                    pokemonEvolved.types.push(Synergy.FIRE);
-                    break;
-                  case Item.THUNDER_STONE:
-                    pokemonEvolved.types.push(Synergy.ELECTRIC);
-                    break;
-                  case Item.DUSK_STONE:
-                    pokemonEvolved.types.push(Synergy.DARK);
-                    break;
-                  case Item.MOON_STONE:
-                    pokemonEvolved.types.push(Synergy.FAIRY);
-                    break;
-                  case Item.LEAF_STONE:
-                    pokemonEvolved.types.push(Synergy.GRASS);
-                    break;
-                  case Item.DAWN_STONE:
-                    pokemonEvolved.types.push(Synergy.PSYCHIC);
-                    break;
-                  case Item.ICY_ROCK:
-                    pokemonEvolved.types.push(Synergy.ICE);
-                    break;
-                  case Item.OLD_AMBER:
-                    pokemonEvolved.types.push(Synergy.FOSSIL);
-                    break;
+                  pokemonEvolved.items.add(itemToAdd);
+                  switch (itemToAdd) {
+                    case Item.WATER_STONE:
+                      pokemonEvolved.types.push(Synergy.WATER);
+                      break;
+                    case Item.FIRE_STONE:
+                      pokemonEvolved.types.push(Synergy.FIRE);
+                      break;
+                    case Item.THUNDER_STONE:
+                      pokemonEvolved.types.push(Synergy.ELECTRIC);
+                      break;
+                    case Item.DUSK_STONE:
+                      pokemonEvolved.types.push(Synergy.DARK);
+                      break;
+                    case Item.MOON_STONE:
+                      pokemonEvolved.types.push(Synergy.FAIRY);
+                      break;
+                    case Item.LEAF_STONE:
+                      pokemonEvolved.types.push(Synergy.GRASS);
+                      break;
+                    case Item.DAWN_STONE:
+                      pokemonEvolved.types.push(Synergy.PSYCHIC);
+                      break;
+                    case Item.ICY_ROCK:
+                      pokemonEvolved.types.push(Synergy.ICE);
+                      break;
+                    case Item.OLD_AMBER:
+                      pokemonEvolved.types.push(Synergy.FOSSIL);
+                      break;
+                  }
                 }
               }
             }
+            itemsToAdd.forEach( (item) =>{
+              player.items.add(item);
+            });
+            basicItemsToAdd.forEach( (item)=>{
+              player.items.add(item);
+            });
+            pokemonEvolved.positionX = x;
+            pokemonEvolved.positionY = y;
+            player.board.set(pokemonEvolved.id, pokemonEvolved);
+            evolve = true;
           }
-          itemsToAdd.forEach( (item) =>{
-            player.items.add(item);
-          });
-          basicItemsToAdd.forEach( (item)=>{
-            player.items.add(item);
-          });
-          pokemonEvolved.positionX = x;
-          pokemonEvolved.positionY = y;
-          player.board.set(pokemonEvolved.id, pokemonEvolved);
-          evolve = true;
         }
+      });
+  
+      if (evolve) {
+        player.synergies.update(player.board);
+        player.effects.update(player.synergies);
       }
-    });
-
-    if (evolve) {
-      player.synergies.update(player.board);
-      player.effects.update(player.synergies);
+      player.boardSize = this.getTeamSize(player.board);
     }
-    player.boardSize = this.getTeamSize(player.board);
+
     return evolve;
   }
 

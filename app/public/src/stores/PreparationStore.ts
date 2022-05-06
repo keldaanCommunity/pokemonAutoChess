@@ -14,10 +14,10 @@ interface IUserPreparationState {
 const initialState: IUserPreparationState = {
     users: [],
     gameStarted: false,
-    ownerId: undefined,
-    ownerName: undefined,
+    ownerId: '',
+    ownerName: '',
     messages: [],
-    name: undefined
+    name: ''
 }
 
 export const preparationSlice = createSlice({

@@ -12,7 +12,7 @@
       "esModuleInterop": true,
       "strict": true,
       "allowJs": true,
-      "strictNullChecks": false,
+      "strictNullChecks": true,
       "forceConsistentCasingInFileNames": true,
       "resolveJsonModule": true,
       "jsx": "react"

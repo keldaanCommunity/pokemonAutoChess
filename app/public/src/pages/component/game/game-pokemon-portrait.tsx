@@ -14,10 +14,10 @@ const COLOR_TYPE = Object.freeze({
     [Rarity.EPIC] : "rgba(123, 70, 156,0.6)",
     [Rarity.LEGENDARY] : "rgba(166, 128, 46, 0.6)",
     [Rarity.MYTHICAL] : "rgba(255, 222, 255, 0.6)",
-    [Rarity.SUMMON] : "#rgba(153, 31, 31, 0.6)"
+    [Rarity.SUMMON] : "rgba(153, 31, 31, 0.6)"
   });
 
-export default function GamePokemonPortrait(props: {index: number, pokemon: Pokemon, pokemonConfig: IPokemonConfig}) {
+export default function GamePokemonPortrait(props: {index: number, pokemon: Pokemon | undefined, pokemonConfig: IPokemonConfig | undefined}) {
     const dispatch = useAppDispatch();
     
     if(!props.pokemon){
@@ -66,7 +66,7 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
     }
 }
 
-function getPath(pokemon: Pokemon, config: IPokemonConfig) {
+function getPath(pokemon: Pokemon, config: IPokemonConfig | undefined) {
     const index = pokemon.index;
     
     let pokemonPath = CDN_PORTRAIT_URL;

@@ -65,7 +65,7 @@ export default class Terrain {
   }
 
   createPermutationTable(seed: number) {
-    const rng = this.newRandom(seed); const p = []; let i; let j; let k;
+    const rng = this.newRandom(seed); const p = new Array<number>(); let i: number; let j: number; let k: number;
     for (i = 0; i < 256; i++) p.push(i);
     for (i = 255; i > 0; i--) {
       j = Math.floor(rng() * (i + 1));

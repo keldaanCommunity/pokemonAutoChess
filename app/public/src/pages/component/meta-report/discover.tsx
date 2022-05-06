@@ -10,6 +10,12 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+type xyz = {
+    x: number,
+    y: number,
+    z: number
+}
+
 export default function Discover(props:{meta: IMeta[]}){
     const typeStyle = useState<string>('"display:flex; flex-flow:column;align-items:center"');
     const options: ApexOptions = {
@@ -52,9 +58,9 @@ export default function Discover(props:{meta: IMeta[]}){
         }
     }
 
-    const series = [];
+    const series = new Array<{name: string, data: xyz[]}>();
     props.meta.forEach(team=>{
-        const data = [];
+        const data = new Array<xyz>();
         team.teams.forEach(t=>{
             data.push({
                 x: t.x,
