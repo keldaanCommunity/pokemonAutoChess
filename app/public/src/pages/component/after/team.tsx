@@ -1,5 +1,5 @@
 import React from 'react';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 
 const ulStyle = {
     listStyle: 'none',

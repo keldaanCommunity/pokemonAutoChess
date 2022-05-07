@@ -1,6 +1,5 @@
 import {Command} from '@colyseus/command';
-import { COST, NEUTRAL_STAGE } from '../../models/enum';
-import { ITEM_RECIPE } from '../../types/Config';
+import { ItemRecipe, PkmCost, NeutralStage } from '../../types/Config';
 import { Item, BasicItems } from '../../types/enum/Item';
 import { BattleResult } from '../../types/enum/Game';
 import Player from '../../models/colyseus-models/player';
@@ -216,7 +215,7 @@ export class OnDragDropCombineCommand extends Command<GameRoom, {
     
             // find recipe result
             let result: Item | undefined = undefined;
-            for (const [key, value] of Object.entries(ITEM_RECIPE) as [Item, Item[]][]) {
+            for (const [key, value] of Object.entries(ItemRecipe) as [Item, Item[]][]) {
                 if ((value[0] == itemA && value[1] == itemB) || (value[0] == itemB && value[1] == itemA)) {
                 result = key;
                 break;
@@ -422,8 +421,8 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                 }
                 });
                 if (itemToCombine) {
-                (Object.keys(ITEM_RECIPE) as Item[]).forEach((name) => {
-                    const recipe = ITEM_RECIPE[name];
+                (Object.keys(ItemRecipe) as Item[]).forEach((name) => {
+                    const recipe = ItemRecipe[name];
                     if ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine)) {
                     pokemon.items.delete(itemToCombine);
                     player.items.delete(item);
@@ -476,11 +475,11 @@ export class OnSellDropCommand extends Command<GameRoom, {
       const pokemon = player.board.get(detail.pokemonId);
       if(pokemon){
         if (PokemonFactory.getPokemonBaseEvolution(pokemon.name) == Pkm.EEVEE) {
-          player.money += COST[pokemon.rarity];
+          player.money += PkmCost[pokemon.rarity];
         } else if (pokemon.types.includes(Synergy.FOSSIL)) {
-          player.money += 5 + COST[pokemon.rarity] * pokemon.stars;
+          player.money += 5 + PkmCost[pokemon.rarity] * pokemon.stars;
         } else {
-          player.money += COST[pokemon.rarity] * pokemon.stars;
+          player.money += PkmCost[pokemon.rarity] * pokemon.stars;
         }
   
         pokemon.items.forEach((it)=>{
@@ -877,7 +876,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   getPVEIndex(stageLevel) {
-    const result = NEUTRAL_STAGE.findIndex((stage)=>{
+    const result = NeutralStage.findIndex((stage)=>{
       return stage.turn == stageLevel;
     });
 
@@ -912,7 +911,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
         if (stageIndex != -1) {
           player.opponentName = 'PVE';
-          player.opponentAvatar = NEUTRAL_STAGE[stageIndex].avatar;
+          player.opponentAvatar = NeutralStage[stageIndex].avatar;
           player.simulation.initialize(player.board, PokemonFactory.getNeutralPokemonsByLevelStage(this.state.stageLevel), player.effects.list, []);
         } else {
           const opponentId = this.room.computeRandomOpponent(key);

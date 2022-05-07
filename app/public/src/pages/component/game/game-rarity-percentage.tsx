@@ -1,8 +1,8 @@
-import {PROBABILITY} from '../../../../../models/enum';
 import { Rarity } from '../../../../../types/enum/Game';
 import React from 'react';
 import CSS from 'csstype';
 import { useAppSelector } from '../../../hooks';
+import { Probability } from '../../../../../types/Config';
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -31,7 +31,7 @@ export default function GameRarityPercentage() {
                     padding:'3px'
                 }}
             >
-                {Math.floor(PROBABILITY[level][index] * 100)}%
+                {Math.floor(Probability[level][index] * 100)}%
             </div>
         })}
     </div>;

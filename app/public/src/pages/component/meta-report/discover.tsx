@@ -1,7 +1,7 @@
 import { ApexOptions } from 'apexcharts';
 import React, { useState } from 'react';
 import Chart from 'react-apexcharts';
-import {CDN_PORTRAIT_URL} from '../../../../../models/enum';
+import {CDN_PORTRAIT_URL} from '../../../../../types';
 import { IMeta } from '../../../../../models/mongo-models/meta';
 import { Emotion } from '../../../../../types';
 import { PkmIndex } from '../../../../../types/enum/Pokemon';

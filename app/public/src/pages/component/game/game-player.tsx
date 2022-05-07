@@ -5,7 +5,7 @@ import CSS from 'csstype';
 import { IPlayer } from '../../../../../types';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { setCurrentPlayerId, setPlayer, setSynergies } from '../../../stores/GameStore';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 
 const progressStyle: CSS.Properties = {
     height: '15px',
@@ -44,12 +44,18 @@ export default function GamePlayer(props:{player: IPlayer, color: string, click:
         width:'70px'
     }
     const dispatch = useAppDispatch();
-    const players = useAppSelector(state=>state.network.game.state.players);
+    const game = useAppSelector(state=>state.network.game);
+
     const opponent = props.player.opponentName != '' && props.player.opponentAvatar != ''? <img style={opponentStyle} src={`${CDN_PORTRAIT_URL}${props.player.opponentAvatar}.png`}/>: null;
 
     function playerClick(){
         props.click(props.player.id);
-        dispatch(setPlayer(players.get(props.player.id)));
+        if(game && game.state.players){
+            const player = game.state.players.get(props.player.id);
+            if(player){
+                dispatch(setPlayer(player));
+            }
+        }
     }
 
     return  <div 

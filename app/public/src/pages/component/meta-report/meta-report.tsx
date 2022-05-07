@@ -19,8 +19,8 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
 
     const meta = props.meta.slice();
     const metaItems = props.metaItems.slice();
-    let sortedMeta = [];
-    let sortedMetaItems = [];
+    let sortedMeta = new Array<IMeta>();
+    let sortedMetaItems = new Array<IItemsStatistic>();
     if(rankingBy == 'count' || rankingBy == 'winrate') {
         sortedMeta = meta.sort((a,b)=>{return b[rankingBy] - a[rankingBy]});
     }

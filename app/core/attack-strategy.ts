@@ -21,7 +21,7 @@ export class AttackStrategy {
         atk += 7;
       }
       if (atk > 0) {
-        board.forEach((x: number, y: number, tg: PokemonEntity) => {
+        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
           if (tg && pokemon.team == tg.team && tg.types.includes(Synergy.SOUND)) {
             tg.count.soundCount ++;
             tg.atk += atk;
@@ -29,7 +29,7 @@ export class AttackStrategy {
         });
       }
     }
-    board.forEach((r: number, c: number, value: PokemonEntity) => {
+    board.forEach((r: number, c: number, value: PokemonEntity | undefined) =>{
       if (value !== undefined && value.team != pokemon.team && value.items.has(Item.WATER_INCENSE)) {
         pokemon.count.incenseCount ++;
         pokemon.handleSpellDamage(Math.ceil(value.maxMana * 0.2), board, AttackType.SPECIAL, value);
@@ -108,7 +108,7 @@ export class DynamaxCannonStrategy extends AttackStrategy{
     process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
         super.process(pokemon, state, board, target);
 
-        board.forEach((x: number, y: number, tg: PokemonEntity) => {
+        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
           if (tg && pokemon.team != tg.team && x == target.positionX) {
             tg.handleSpellDamage(Math.ceil(tg.life * 0.8), board, AttackType.SPECIAL, pokemon);
           }
@@ -407,7 +407,7 @@ export class BonemerangStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x: number, y: number, tg: PokemonEntity) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team && x == target.positionX) {
         tg.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon);
       }
@@ -432,7 +432,7 @@ export class GrowlStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x: number, y: number, tg: PokemonEntity) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team) {
         tg.status.triggerWound(d);
       }
@@ -457,7 +457,7 @@ export class RelicSongStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x: number, y: number, tg: PokemonEntity) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team) {
         tg.status.triggerSleep(d);
       }
@@ -482,7 +482,7 @@ export class DisarmingVoiceStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x: number, y: number, tg: PokemonEntity) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team == tg.team) {
         tg.setMana(tg.mana + heal);
       }
@@ -529,7 +529,7 @@ export class GrassWhistleStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x: number, y: number, tg: PokemonEntity) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team && n > 0) {
         tg.status.triggerSleep(2000);
         n--;
@@ -586,7 +586,7 @@ export class EchoStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x: number, y: number, tg: PokemonEntity) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team) {
         tg.handleSpellDamage(damage + pokemon.echo * additional, board, AttackType.SPECIAL, pokemon);
       }
@@ -620,7 +620,7 @@ export class PetalDanceStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x: number, y: number, tg: PokemonEntity) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team && count > 0) {
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
         count --;
@@ -654,7 +654,7 @@ export class HyperVoiceStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x: number, y: number, tg: PokemonEntity) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
         tg.status.triggerConfusion(confusion * 1000);
@@ -812,7 +812,7 @@ export class RoarOfTimeStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target);
 
     let candidate = pokemon;
-    board.forEach((x: number, y: number, pkm: PokemonEntity) => {
+    board.forEach((x: number, y: number, pkm: PokemonEntity | undefined) =>{
       if (pkm && pokemon.team == pkm.team && pkm.items.size > candidate.items.size && !pkm.status.resurection) {
         candidate = pkm;
       }
@@ -864,7 +864,7 @@ export class OriginPulseStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target);
     const damage = 60;
 
-    board.forEach((x: number, y: number, tg: PokemonEntity) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
       }
@@ -881,7 +881,7 @@ export class SeedFlareStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target);
     const damage = 30;
 
-    board.forEach((x: number, y: number, tg: PokemonEntity) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team) {
         tg.speDef = Math.max(0, tg.speDef - 2);
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
@@ -911,7 +911,7 @@ export class NightmareStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x: number, y: number, value: PokemonEntity) => {
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
       if (value && pokemon.team != value.team) {
         value.status.triggerPoison(timer, value, pokemon);
       }
@@ -940,7 +940,7 @@ export class BurnStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x: number, y: number, value: PokemonEntity) => {
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
       if (value && pokemon.team != value.team) {
         value.status.triggerBurn(timer, value, pokemon);
         value.status.triggerWound(timer);
@@ -970,7 +970,7 @@ export class SilenceStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x: number, y: number, value: PokemonEntity) => {
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
       if (value && pokemon.team != value.team) {
         value.status.triggerSilence(timer);
       }
@@ -1024,7 +1024,7 @@ export class FreezeStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x: number, y: number, value: PokemonEntity) => {
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
       if (value && pokemon.team != value.team) {
         value.status.triggerFreeze(timer);
       }
@@ -1105,7 +1105,7 @@ export class ConfusionStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x: number, y: number, value: PokemonEntity) => {
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
       if (value && pokemon.team != value.team) {
         value.status.triggerConfusion(timer);
       }
@@ -1146,7 +1146,7 @@ export class SeismicTossStrategy extends AttackStrategy {
   process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target);
     let damage = 0;
-    board.forEach((x: number, y: number, value: PokemonEntity) => {
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
       if (value && pokemon.team == value.team) {
         damage += pokemon.stars;
       }
@@ -1337,7 +1337,7 @@ export class DracoMeteorStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x: number, y: number, tg: PokemonEntity) => {
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team) {
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
       }
@@ -1367,7 +1367,7 @@ export class WishStrategy extends AttackStrategy {
     const heal = 50;
     let count = pokemon.stars;
 
-    board.forEach((x: number, y: number, ally: PokemonEntity) => {
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) =>{
       if (ally && pokemon.team == ally.team && count > 0 && ally.life < ally.hp) {
         ally.handleHeal(heal, pokemon);
         count -= 1;
@@ -1450,7 +1450,7 @@ export class SoakStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x: number, y: number, ally: PokemonEntity) => {
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) =>{
       if (ally && pokemon.team == ally.team) {
         ally.setMana(ally.mana + 10);
       }
@@ -1545,7 +1545,7 @@ export class ChargeStrategy extends AttackStrategy {
         break;
     }
 
-    board.forEach((x: number, y: number, ally: PokemonEntity) => {
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) =>{
       if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.ELECTRIC)) {
         ally.atk += Math.ceil(pokemon.baseAtk * buff);
       }
@@ -1824,7 +1824,7 @@ export class NightSlashStrategy extends AttackStrategy {
 
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
 
-    board.forEach((x: number, y: number, v: PokemonEntity) => {
+    board.forEach((x: number, y: number, v: PokemonEntity | undefined) =>{
       if (v && pokemon.team != v.team) {
         v.def = Math.max(0, v.def - 1);
       }
@@ -1944,7 +1944,7 @@ export class HappyHourStrategy extends AttackStrategy {
       default:
         break;
     }
-    board.forEach((x: number, y: number, ally: PokemonEntity) => {
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) =>{
       if (ally && pokemon.team == ally.team) {
         ally.atk += buff;
       }

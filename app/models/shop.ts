@@ -2,7 +2,7 @@ import PokemonFactory from './pokemon-factory';
 import {Pkm, PkmFamily} from '../types/enum/Pokemon';
 import Player from './colyseus-models/player';
 import {IPokemon} from '../types';
-import {PROBABILITY} from '../types/Config';
+import {Probability} from '../types/Config';
 
 const COMMON = [Pkm.POLIWAG, Pkm.CHARMANDER, Pkm.GEODUDE,
   Pkm.AZURILL, Pkm.ZUBAT,
@@ -84,9 +84,9 @@ export default class Shop {
   }
 
   pickPokemon(player: Player) {
-    const playerProbality = PROBABILITY[player.experienceManager.level];
+    const playerProbality = Probability[player.experienceManager.level];
     const seed = Math.random();
-    let pokemon: Pkm;
+    let pokemon = Pkm.MAGIKARP;
     let threshold = 0;
     const common = new Array<Pkm>();
     const uncommon = new Array<Pkm>();

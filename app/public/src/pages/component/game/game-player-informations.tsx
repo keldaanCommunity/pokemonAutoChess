@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component, ReactElement} from 'react';
 import CSS from 'csstype';
 import { useAppSelector } from '../../../hooks';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -42,7 +42,7 @@ export default function GamePlayerInformations(){
     const life = useAppSelector(state=>state.game.currentPlayerLife);
     const money = useAppSelector(state=>state.game.currentPlayerMoney);
 
-    let opponent = null;
+    let opponent: {null | Component} = null;
     if(opponentName != '' && opponentAvatar !=''){
         opponent = 
         <div style={{display:'flex'}}>

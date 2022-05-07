@@ -1,5 +1,5 @@
 import Board from './board';
-import {Schema, MapSchema, type} from '@colyseus/schema';
+import {Schema, ArraySchema, MapSchema, type} from '@colyseus/schema';
 import PokemonEntity from './pokemon-entity';
 import PokemonFactory from '../models/pokemon-factory';
 import { Item } from '../types/enum/Item';
@@ -12,20 +12,20 @@ import { ISimulation, IPokemonEntity, IPokemon } from '../types';
 import { Synergy } from '../types/enum/Synergy';
 
 export default class Simulation extends Schema implements ISimulation{
-  @type('string') climate: string;
-  @type(['uint8']) blueEffects: Effect[];
-  @type(['uint8']) redEffects: Effect[];
+  @type('string') climate: Climate = Climate.NEUTRAL;
   @type({map: PokemonEntity}) blueTeam = new MapSchema<IPokemonEntity>();
   @type({map: PokemonEntity}) redTeam = new MapSchema<IPokemonEntity>();
   @type({map: Dps}) blueDpsMeter = new MapSchema<Dps>();
   @type({map: Dps}) redDpsMeter = new MapSchema<Dps>();
   @type({map: DpsHeal}) blueHealDpsMeter = new MapSchema<DpsHeal>();
   @type({map: DpsHeal}) redHealDpsMeter = new MapSchema<DpsHeal>();
+  blueEffects = new Array<Effect>();
+  redEffects = new Array<Effect>();
   board: Board = new Board(8,6);
-  finished: boolean;
-  flowerSpawn: boolean[];
+  finished = false;
+  flowerSpawn: boolean[]= [false, false];
 
-  initialize(blueTeam: MapSchema<IPokemon>, redTeam: MapSchema<IPokemon>, blueEffects: number[], redEffects: number[]) {
+  initialize(blueTeam: MapSchema<IPokemon>, redTeam: MapSchema<IPokemon>, blueEffects: Effect[], redEffects: Effect[]) {
     this.blueDpsMeter.forEach((dps, key) => {
       this.blueDpsMeter.delete(key);
     });
@@ -366,14 +366,14 @@ export default class Simulation extends Schema implements ISimulation{
         });
       }
       if (pokemon.items.has(Item.FLUFFY_TAIL)) {
-        this.board.forEach((x: number, y: number, value: PokemonEntity) => {
+        this.board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.maxMana = Math.ceil(value.maxMana * 1.3);
           }
         });
       }
       if (pokemon.items.has(Item.SHINY_CHARM)) {
-        this.board.forEach((x: number, y: number, value: PokemonEntity) => {
+        this.board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.status.triggerSleep(3000);
           }
@@ -448,14 +448,14 @@ export default class Simulation extends Schema implements ISimulation{
         });
       }
       if (pokemon.items.has(Item.FLUFFY_TAIL)) {
-        this.board.forEach((x: number, y: number, value: PokemonEntity) => {
+        this.board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.maxMana = Math.ceil(value.maxMana * 1.3);
           }
         });
       }
       if (pokemon.items.has(Item.SHINY_CHARM)) {
-        this.board.forEach((x: number, y: number, value: PokemonEntity) => {
+        this.board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
             value.status.triggerSleep(3000);
           }
@@ -956,8 +956,8 @@ export default class Simulation extends Schema implements ISimulation{
         this.blueTeam.delete(key);
       } else {
         pkm.update(dt, this.board, this.climate);
-        this.blueDpsMeter.get(key).changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage);
-        this.blueHealDpsMeter.get(key).changeHeal(pkm.healDone, pkm.shieldDone);
+        this.blueDpsMeter.get(key)?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage);
+        this.blueHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone);
       }
     });
 
@@ -970,8 +970,8 @@ export default class Simulation extends Schema implements ISimulation{
         this.redTeam.delete(key);
       } else {
         pkm.update(dt, this.board, this.climate);
-        this.redDpsMeter.get(key).changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage);
-        this.redHealDpsMeter.get(key).changeHeal(pkm.healDone, pkm.shieldDone);
+        this.redDpsMeter.get(key)?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage);
+        this.redHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone);
       }
     });
   }

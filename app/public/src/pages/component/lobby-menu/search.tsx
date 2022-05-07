@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import History from './history';
-import { XP_TABLE, CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import Elo from '../elo';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { searchName } from '../../../stores/NetworkStore';
@@ -22,7 +22,7 @@ export default function Search() {
             <h5>{user.name}</h5>
             <Elo elo={user.elo}/>
         </div>
-        <p>Level {user.level} ({user.exp} / {XP_TABLE[user.level]})</p>
+        <p>Level {user.level} ({user.exp} / 1000)</p>
         <p>Wins: {user.wins}</p>
         <p>Tipee contributor: {user.donor ? 'Yes': 'No'}</p>
         <h5>Game History</h5>

@@ -1,6 +1,6 @@
 import CSS from 'csstype';
 import React, { useState } from 'react';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import PokemonCarousel from './pokemon-carousel';
 import Modal from 'react-bootstrap/esm/Modal';

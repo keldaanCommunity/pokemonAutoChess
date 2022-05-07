@@ -1,7 +1,6 @@
 import {GameObjects} from 'phaser';
-import {CDN_PORTRAIT_URL} from '../../../../models/enum';
 import { AttackType } from '../../../../types/enum/Game'
-import { Emotion } from '../../../../types';
+import { Emotion, CDN_PORTRAIT_URL } from '../../../../types';
 import { AbilityName, AbilityDescription } from '../../../../types/strings/Ability';
 import { Ability } from '../../../../types/enum/Ability';
 

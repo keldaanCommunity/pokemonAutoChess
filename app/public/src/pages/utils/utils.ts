@@ -1,5 +1,4 @@
 import { Orientation } from '../../../../types/enum/Game'
-import { ORIENTATION_RAD } from '../../../../models/enum';
 import { AttackSprite } from '../../../../types';
 
 export const FIREBASE_CONFIG = {
@@ -49,36 +48,6 @@ export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
     return Orientation.UPRIGHT;
   } else {
     return Orientation.RIGHT;
-  }
-}
-
-export function getOrientationRad(r0: number, c0: number, r1: number, c1: number) {
-  const vx = r1 - r0;
-  const vy = c1 - c0;
-  if (vx > 0) {
-    if (vy == 0) {
-      return ORIENTATION_RAD.RIGHT;
-    } else if (vy < 0) {
-      return ORIENTATION_RAD.DOWNRIGHT;
-    } else {
-      return ORIENTATION_RAD.UPRIGHT;
-    }
-  } else if (vx == 0) {
-    if (vy == 0) {
-      return ORIENTATION_RAD.UNCLEAR;
-    } else if (vy < 0) {
-      return ORIENTATION_RAD.DOWN;
-    } else {
-      return ORIENTATION_RAD.UP;
-    }
-  } else {
-    if (vy == 0) {
-      return ORIENTATION_RAD.LEFT;
-    } else if (vy < 0) {
-      return ORIENTATION_RAD.DOWNLEFT;
-    } else {
-      return ORIENTATION_RAD.UPLEFT;
-    }
   }
 }
 

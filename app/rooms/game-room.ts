@@ -5,7 +5,7 @@ import Player from '../models/colyseus-models/player';
 import UserMetadata from '../models/mongo-models/user-metadata';
 import BOT from '../models/mongo-models/bot-v2';
 import {OnShopCommand, OnItemCommand, OnSellDropCommand, OnRefreshCommand, OnLockCommand, OnLevelUpCommand, OnUpdateCommand, OnDragDropCommand, OnJoinCommand, OnDragDropItemCommand, OnDragDropCombineCommand} from './commands/game-commands';
-import {XP_PLACE} from '../models/enum';
+import { ExpPlace } from '../types/Config';
 import { Item, BasicItems } from '../types/enum/Item';
 import PokemonFactory from '../models/pokemon-factory';
 import EloRank from 'elo-rank';
@@ -230,7 +230,7 @@ export default class GameRoom extends Room<GameState> {
           })
         } else {
           const dbrecord = this.transformToSimplePlayer(player);
-          player.exp = XP_PLACE[player.rank - 1];
+          player.exp = ExpPlace[player.rank - 1];
           let rank = player.rank;
 
           if (!this.state.gameFinished && player.life != 0) {

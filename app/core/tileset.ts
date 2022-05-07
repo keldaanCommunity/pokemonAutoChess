@@ -1,19 +1,33 @@
-import {MAP, MASK_TABLE, HDR, MASK_COORDINATE, TERRAIN} from '../models/enum';
 import Jimp from 'jimp';
+import {Dungeon, DungeonData, Header, MaskCoordinate, Mask, TerrainType} from '../types/Config';
+
+export type TilesetTiled = {
+  columns: number,
+  firstgid: number,
+  image: string,
+  imageheight: number,
+  imagewidth: number,
+  margin: number,
+  name: string,
+  spacing: number,
+  tilecount: number,
+  tileheight: number,
+  tilewidth: number
+}
 
 export default class Tileset {
-  id: string;
-  headers: string[];
+  id: Dungeon;
+  headers: Header[];
   img: any;
-  ground: Map<string, number[]> = new Map();
-  groundAlt: Map<string, number[]> = new Map();
-  water: Map<string, number[]> = new Map();
-  wall: Map<string, number[]> = new Map();
-  wallAlt: Map<string, number[]> = new Map();
+  ground: Map<Mask, number[]> = new Map();
+  groundAlt: Map<Mask, number[]> = new Map();
+  water: Map<Mask, number[]> = new Map();
+  wall: Map<Mask, number[]> = new Map();
+  wallAlt: Map<Mask, number[]> = new Map();
 
-  constructor(id: string) {
+  constructor(id: Dungeon) {
     this.id = id;
-    this.headers = MAP[id].tileset;
+    this.headers = DungeonData[id].tileset;
   }
 
   async initialize() {
@@ -22,11 +36,11 @@ export default class Tileset {
   }
 
   computeMapping() {
-    Object.keys(MASK_TABLE).forEach((v)=>{
-      this.ground.set(v, this.getId(v, HDR.GROUND));
-      this.water.set(v, this.getId(v, HDR.WATER));
-      this.wall.set(v, this.getId(v, HDR.WALL));
-      [HDR.GROUND_ALT_1, HDR.GROUND_ALT_2, HDR.GROUND_ALT_3, HDR.GROUND_ALT_4].forEach((h)=>{
+    (Object.values(Mask) as Mask[]).forEach((v)=>{
+      this.ground.set(v, [this.getId(v, Header.GROUND)]);
+      this.water.set(v, [this.getId(v, Header.WATER)]);
+      this.wall.set(v, [this.getId(v, Header.WALL)]);
+      [Header.GROUND_ALT_1, Header.GROUND_ALT_2, Header.GROUND_ALT_3, Header.GROUND_ALT_4].forEach((h)=>{
         if (this.headers.includes(h) && this.isPixelValue(v, h)) {
           const t = this.groundAlt.get(v);
           if (t) {
@@ -37,7 +51,7 @@ export default class Tileset {
         }
       });
 
-      [HDR.WALL_ALT_1, HDR.WALL_ALT_2, HDR.WALL_ALT_3].forEach((h)=>{
+      [Header.WALL_ALT_1, Header.WALL_ALT_2, Header.WALL_ALT_3].forEach((h)=>{
         if (this.headers.includes(h) && this.isPixelValue(v, h)) {
           const t = this.wallAlt.get(v);
           if (t) {
@@ -50,30 +64,30 @@ export default class Tileset {
     });
   }
 
-  getId(maskId: string, header: string) {
+  getId(maskId: Mask, header: Header) {
     let headerIndex = this.headers.indexOf(header);
     if (headerIndex == -1) {
-      headerIndex = this.headers.indexOf(HDR.ABYSS);
+      headerIndex = this.headers.indexOf(Header.ABYSS);
     }
-    const maskCoordinate = MASK_COORDINATE[maskId];
+    const maskCoordinate = MaskCoordinate[maskId];
     const x = maskCoordinate.x + headerIndex * 3;
     const y = maskCoordinate.y;
     return y * this.headers.length * 3 + x + 1;
   }
 
-  isPixelValue(maskId: string, header: string) {
+  isPixelValue(maskId: Mask, header: Header) {
     const headerIndex = this.headers.indexOf(header);
-    const maskCoordinate = MASK_COORDINATE[maskId];
+    const maskCoordinate = MaskCoordinate[maskId];
     const pixelX = maskCoordinate.x + headerIndex * 3;
     const pixelY = maskCoordinate.y;
     return (Jimp.intToRGBA(this.img.getPixelColor(pixelX * 25 + 12, pixelY * 25 + 12)).a != 0);
   }
 
-  getTilemapId(terrain: number, maskId: string) {
+  getTilemapId(terrain: TerrainType, maskId: Mask) {
     // console.log(terrain, maskId);
     let items;
     switch (terrain) {
-      case TERRAIN.GROUND:
+      case TerrainType.GROUND:
         items = this.groundAlt.get(maskId);
         // console.log(items);
         if (items && items.length > 0) {
@@ -85,10 +99,10 @@ export default class Tileset {
         } else {
           return this.ground.get(maskId);
         }
-      case TERRAIN.WATER:
+      case TerrainType.WATER:
         return this.water.get(maskId);
 
-      case TERRAIN.WALL:
+      case TerrainType.WALL:
         items = this.wallAlt.get(maskId);
         // console.log(items);
         if (items && items.length > 0) {
@@ -116,7 +130,7 @@ export default class Tileset {
       tilecount: 3 * this.headers.length * 24,
       tileheight: 24,
       tilewidth: 24
-    };
+    } as TilesetTiled
   }
 }
 

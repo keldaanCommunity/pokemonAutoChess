@@ -1,5 +1,5 @@
 import React from 'react';
-import {CDN_PORTRAIT_URL} from '../../../../../models/enum';
+import {CDN_PORTRAIT_URL} from '../../../../../types';
 import { ItemName } from '../../../../../types/strings/Item';
 import { Emotion } from '../../../../../types';
 import { PkmIndex } from '../../../../../types/enum/Pokemon';

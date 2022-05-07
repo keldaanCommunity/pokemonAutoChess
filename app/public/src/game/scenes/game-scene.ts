@@ -6,7 +6,7 @@ import BattleManager from '../components/battle-manager';
 import WeatherManager from '../components/weather-manager';
 import ItemsContainer from '../components/items-container';
 import Pokemon from '../components/pokemon';
-import { ITEM_RECIPE } from '../../../../types/Config';
+import { ItemRecipe } from '../../../../types/Config';
 import firebase from 'firebase/compat/app';
 import {transformCoordinate} from '../../pages/utils/utils';
 import { Room } from "colyseus.js";
@@ -18,7 +18,7 @@ import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transf
 export default class GameScene extends Scene {
   tilemap: any;
   room: Room<GameState>;
-  uid: string;
+  uid: string | undefined;
   textStyle: { fontSize: string; fontFamily: string; color: string; align: string; };
   bigTextStyle: { fontSize: string; fontFamily: string; color: string; align: string; stroke: string; strokeThickness: number; };
   map: Phaser.Tilemaps.Tilemap;
@@ -32,13 +32,13 @@ export default class GameScene extends Scene {
   transitionImage: GameObjects.Image;
   transitionScreen: GameObjects.Container;
   music: Phaser.Sound.BaseSound;
-  targetPokemon: Pokemon;
+  targetPokemon: Pokemon | undefined;
   graphics: Phaser.GameObjects.Graphics[];
   dragDropText: Phaser.GameObjects.Text;
   sellZoneGraphic: Phaser.GameObjects.Graphics;
   zones: Phaser.GameObjects.Zone[];
-  lastDragDropPokemon: Pokemon;
-  lastPokemonDetail: Pokemon;
+  lastDragDropPokemon: Pokemon | undefined;
+  lastPokemonDetail: Pokemon | undefined;
 
   constructor() {
     super({
@@ -50,7 +50,7 @@ export default class GameScene extends Scene {
   init(data) {
     this.tilemap = data.tilemap;
     this.room = data.room;
-    this.uid = firebase.auth().currentUser.uid;
+    this.uid = firebase.auth().currentUser?.uid;
   }
 
   preload() {
@@ -163,38 +163,40 @@ export default class GameScene extends Scene {
   }
 
   create() {
-    this.textStyle = {
-      fontSize: '35px',
-      fontFamily: '\'Press Start 2P\'',
-      color: 'black',
-      align: 'center'
-    };
-
-    this.bigTextStyle = {
-      fontSize: '80px',
-      fontFamily: '\'Press Start 2P\'',
-      color: 'white',
-      align: 'center',
-      stroke: '#000',
-      strokeThickness: 3
-    };
-    this.input.mouse.disableContextMenu();
-
-    this.registerKeys();
-
-    this.input.dragDistanceThreshold = 1;
-    this.map = this.make.tilemap({key: 'map'});
-    const tileset = this.map.addTilesetImage(this.tilemap.tilesets[0].name, 'tiles', 24, 24, 1, 1);
-    this.map.createLayer('World', tileset, 0, 0).setScale(2,2);
-    this.initializeDragAndDrop();
-    this.battleGroup = this.add.group();
-    this.animationManager = new AnimationManager(this);
-    this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].items, 24*24 + 10, 5*24 + 10, true);
-    this.board = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
-    this.battle = new BattleManager(this, this.battleGroup, this.room.state.players[this.uid], this.animationManager);
-    this.weatherManager = new WeatherManager(this);
-    this.music = this.sound.add('sound', {loop: true});
-    this.music.play('',{volume: 0.3, loop: true});
+    if(this.uid){
+      this.textStyle = {
+        fontSize: '35px',
+        fontFamily: '\'Press Start 2P\'',
+        color: 'black',
+        align: 'center'
+      };
+  
+      this.bigTextStyle = {
+        fontSize: '80px',
+        fontFamily: '\'Press Start 2P\'',
+        color: 'white',
+        align: 'center',
+        stroke: '#000',
+        strokeThickness: 3
+      };
+      this.input.mouse.disableContextMenu();
+  
+      this.registerKeys();
+  
+      this.input.dragDistanceThreshold = 1;
+      this.map = this.make.tilemap({key: 'map'});
+      const tileset = this.map.addTilesetImage(this.tilemap.tilesets[0].name, 'tiles', 24, 24, 1, 1);
+      this.map.createLayer('World', tileset, 0, 0).setScale(2,2);
+      this.initializeDragAndDrop();
+      this.battleGroup = this.add.group();
+      this.animationManager = new AnimationManager(this);
+      this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].items, 24*24 + 10, 5*24 + 10, true);
+      this.board = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
+      this.battle = new BattleManager(this, this.battleGroup, this.room.state.players[this.uid], this.animationManager);
+      this.weatherManager = new WeatherManager(this);
+      this.music = this.sound.add('sound', {loop: true});
+      this.music.play('',{volume: 0.3, loop: true});
+    }
   }
 
   registerKeys() {
@@ -223,16 +225,18 @@ export default class GameScene extends Scene {
     if (!this.targetPokemon || !this.targetPokemon.scene || !this.targetPokemon.input.draggable) {
       return;
     }
-
-    document.getElementById('game').dispatchEvent(new CustomEvent('sell-drop', {
-      detail: {
-        'pokemonId': this.targetPokemon.id
-      }
-    }));
+    const d = document.getElementById('game');
+    if(d){
+      d.dispatchEvent(new CustomEvent('sell-drop', {
+        detail: {
+          'pokemonId': this.targetPokemon.id
+        }
+      }));
+    }
   }
 
   updatePhase() {
-    this.targetPokemon = null;
+    this.targetPokemon = undefined;
     if (this.room.state.phase == GamePhaseState.FIGHT) {
       this.board.battleMode();
     } else {
@@ -311,7 +315,7 @@ export default class GameScene extends Scene {
         this.targetPokemon = gameObject;
       }
       else{
-        this.targetPokemon = null;
+        this.targetPokemon = undefined;
       }
     });
 
@@ -333,7 +337,8 @@ export default class GameScene extends Scene {
       if(gameObject instanceof Pokemon){
         // POKEMON -> BOARD-ZONE = PLACE POKEMON
         if(dropZone.name == 'board-zone'){
-          document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
+
+          document.getElementById('game')?.dispatchEvent(new CustomEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
             detail: {
               x: dropZone.getData('x'),
               y: dropZone.getData('y'),
@@ -344,7 +349,7 @@ export default class GameScene extends Scene {
         }
         // POKEMON -> SELL-ZONE = SELL POKEMON
         else if(dropZone.name == 'sell-zone'){
-          document.getElementById('game').dispatchEvent(new CustomEvent(Transfer.SELL_DROP, {
+          document.getElementById('game')?.dispatchEvent(new CustomEvent(Transfer.SELL_DROP, {
             detail: {
               pokemonId: gameObject.id
             }
@@ -359,7 +364,7 @@ export default class GameScene extends Scene {
       else if(gameObject instanceof ItemContainer){
         // Item -> Item = COMBINE
         if(dropZone instanceof ItemContainer){
-          document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropCombineMessage>(Transfer.DRAG_DROP_COMBINE, {
+          document.getElementById('game')?.dispatchEvent(new CustomEvent<IDragDropCombineMessage>(Transfer.DRAG_DROP_COMBINE, {
             detail: {
               itemA: dropZone.name,
               itemB: gameObject.name
@@ -368,7 +373,7 @@ export default class GameScene extends Scene {
         }
         // Item -> POKEMON(board zone) = EQUIP
         else if(dropZone.name == 'board-zone' && !(this.room.state.phase == GamePhaseState.FIGHT && dropZone.getData('y') != 0)){
-            document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
+            document.getElementById('game')?.dispatchEvent(new CustomEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
               detail: {
                 x: dropZone.getData('x'),
                 y: dropZone.getData('y'),
@@ -397,7 +402,7 @@ export default class GameScene extends Scene {
     this.input.on('dragenter', (pointer, gameObject, dropZone) => {
       if (gameObject instanceof ItemContainer && dropZone instanceof ItemContainer) {
         // find the resulting item
-        for (const [key, value] of Object.entries(ITEM_RECIPE)) {
+        for (const [key, value] of Object.entries(ItemRecipe)) {
           if ((value[0] == gameObject.name && value[1] == dropZone.name) || (value[0] == dropZone.name && value[1] == gameObject.name)) {
             this.itemsContainer.sendToBack(dropZone)
             gameObject.showTempDetail(key)
@@ -417,8 +422,8 @@ export default class GameScene extends Scene {
 
 
 // if (item && item.name && item != gameObject) {
-//   Object.keys(ITEM_RECIPE).forEach((recipeName)=>{
-//     const recipe = ITEM_RECIPE[recipeName];
+//   Object.keys(ItemRecipe).forEach((recipeName)=>{
+//     const recipe = ItemRecipe[recipeName];
 //     if ((recipe[0] == item.name && recipe[1] == gameObject.name) || (recipe[1] == item.name && recipe[0] == gameObject.name)) {
 //       item.detailDisabled = true;
 //       item.detail.setScale(0, 0);

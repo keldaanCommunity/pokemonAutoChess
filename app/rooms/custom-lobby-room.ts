@@ -14,9 +14,8 @@ import BotV2, { IBot } from '../models/mongo-models/bot-v2';
 import Meta, { IMeta } from '../models/mongo-models/meta';
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic';
 import { PastebinAPI } from 'pastebin-ts/dist/api';
-import { Emotion, EmotionCost, Transfer } from "../types";
+import { Emotion, EmotionCost, Transfer, CDN_PORTRAIT_URL } from "../types";
 import {Pkm} from '../types/enum/Pokemon';
-import { CDN_PORTRAIT_URL } from "../models/enum";
 import PokemonFactory from "../models/pokemon-factory";
 import PokemonConfig from "../models/colyseus-models/pokemon-config";
 import BotMonitoring, { IBotMonitoring } from "../models/mongo-models/bot-monitoring";
@@ -34,14 +33,18 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
   metaItems: IItemsStatistic[];
   botMonitor: IBotMonitoring[];
 
+  constructor(){
+    super();
+    this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
+    this.bots = new Map<string, IBot>();
+    this.meta = new Array<IMeta>();
+    this.metaItems = new Array<IItemsStatistic>();
+    this.botMonitor = new Array<IBotMonitoring>();
+  }
+
   onCreate(options: any): Promise<void>{
     console.log(`create lobby`, this.roomId);
     super.onCreate(options);
-    this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
-    this.bots = new Map();
-    this.meta = [];
-    this.metaItems = [];
-    this.botMonitor = new Array<IBotMonitoring>();
     this.setState(new LobbyState());
     this.autoDispose = false;
 
@@ -80,7 +83,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
     });
 
     this.onMessage(Transfer.REQUEST_BOT_LIST, (client, message)=>{
-      const botList = [];
+      const botList = new Array<{name: string, avatar: string}>();
 
       this.bots.forEach(b=>{
         botList.push({name: b.name, avatar: b.avatar});
@@ -102,7 +105,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
 
     this.onMessage(Transfer.OPEN_BOOSTER, (client, message)=>{
       const user: LobbyUser = this.state.users.get(client.auth.uid);
-      if(user.booster && user.booster > 0) {
+      if(user && user.booster && user.booster > 0) {
         user.booster -= 1;
         const keys = Object.keys(Pkm);
         const boosterIndex: string[] = [];

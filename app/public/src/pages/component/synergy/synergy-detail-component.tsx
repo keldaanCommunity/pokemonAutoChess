@@ -1,5 +1,5 @@
 import React from 'react';
-import {RARITY_COLOR, CDN_PORTRAIT_URL} from '../../../../../models/enum';
+import {CDN_PORTRAIT_URL} from '../../../../../types';
 import PokemonFactory  from '../../../../../models/pokemon-factory';
 import { Emotion, PrecomputedTypePokemon } from '../../../../../types';
 import { Synergy } from '../../../../../types/enum/Synergy';
@@ -7,7 +7,7 @@ import { SynergyName, SynergyDetail } from '../../../../../types/strings/Synergy
 import PRECOMPUTED_TYPE_POKEMONS from '../../../../../models/precomputed/type-pokemons.json';
 import { Pkm } from '../../../../../types/enum/Pokemon';
 import { EffectDescription, EffectName } from '../../../../../types/strings/Effect';
-import { TypeTrigger } from '../../../../../types/Config';
+import { TypeTrigger, RarityColor } from '../../../../../types/Config';
 
 const precomputed = PRECOMPUTED_TYPE_POKEMONS as PrecomputedTypePokemon;
 
@@ -29,14 +29,14 @@ export default function SynergyDetailComponent(props:{type: Synergy, value: numb
    <div style={{display:'flex'}}>
    {precomputed[props.type].pokemons.map(p=>{
        const pokemon = PokemonFactory.createPokemonFromName(p as Pkm);
-       const s = {border : '3px solid ' + RARITY_COLOR[pokemon.rarity]};
+       const s = {border : '3px solid ' + RarityColor[pokemon.rarity]};
        return <img key={p} style={s} src={`${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>    
    })}
    </div>
    <div style={{display:'flex', marginTop:'10px'}}>
    {precomputed[props.type].mythicalPokemons.map(p=>{
        const pokemon = PokemonFactory.createPokemonFromName(p as Pkm);
-       const s = {border : '3px solid ' + RARITY_COLOR[pokemon.rarity]};
+       const s = {border : '3px solid ' + RarityColor[pokemon.rarity]};
        return <img key={p} style={s} src={`${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>   
    })}
    </div>

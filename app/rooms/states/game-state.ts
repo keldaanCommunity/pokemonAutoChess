@@ -2,7 +2,7 @@ import Player from '../../models/colyseus-models/player';
 import Shop from '../../models/shop';
 import Design from '../../core/design';
 import BotManager from '../../core/bot-manager';
-import {MAP} from '../../models/enum';
+import {DungeonData, Dungeon} from '../../types/Config';
 import { GamePhaseState } from '../../types/enum/Game';
 import {Schema, MapSchema, type} from '@colyseus/schema';
 
@@ -18,16 +18,16 @@ export default class GameState extends Schema {
   botManager: BotManager = new BotManager();
   shop: Shop = new Shop();
   elligibleToXP: boolean;
-  id: string;
+  id: Dungeon;
   design: Design;
   tilemap: any;
   gameFinished: boolean;
 
   constructor() {
     super();
-    const keys = Object.keys(MAP);
+    const keys = Object.values(Dungeon) as Dungeon[];
     this.id = keys[Math.floor(Math.random() * keys.length)];
-    this.mapName = MAP[this.id].name;
+    this.mapName = DungeonData[this.id].name;
     this.design = new Design(this.id, 5, 0.1);
     this.design.create().then(()=>{
       this.tilemap = this.design.exportToTiled();

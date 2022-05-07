@@ -8,7 +8,6 @@ import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore";
 import { FIREBASE_CONFIG } from "./utils/utils";
 import GameContainer from '../game/game-container';
 import { Navigate } from "react-router-dom";
-import { WORDS } from "../../../models/enum";
 import GameDpsMeter from "./component/game/game-dps-meter";
 import GameInformations from "./component/game/game-informations";
 import GameItemsProposition from "./component/game/game-items-proposition";
@@ -147,8 +146,8 @@ export default function Game() {
           changes.forEach((change) => {
             if(player.id == uid){
               if(change.field == 'alive') {
-                const rankPhrase = `${WORDS.PLACE['eng']} no ${player.rank}`;
-                const titlePhrase = WORDS.RANKING['eng'];
+                const rankPhrase = `Place no ${player.rank}`;
+                const titlePhrase = 'Rank';
                 if(!change.value){
                   setModalTitle(titlePhrase);
                   setModalInfo(rankPhrase);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ITEM_RECIPE } from '../../../../../types/Config';
+import { ItemRecipe } from '../../../../../types/Config';
 import { ItemDescription, ItemName } from '../../../../../types/strings/Item';
 import { BasicItems } from '../../../../../types/enum/Item';
 import ReactTooltip from 'react-tooltip';
@@ -21,8 +21,8 @@ class WikiItemsCheatSheet extends Component {
                         <th style={{paddingRight:'30px'}}><img style={imgStyle} src={"assets/item/" + i + ".png"}></img></th>
                         {BasicItems.map(j=>{
                             let tier2Item;
-                            Object.keys(ITEM_RECIPE).forEach(recipeName=>{
-                                if((ITEM_RECIPE[recipeName][0] == i && ITEM_RECIPE[recipeName][1] == j) || (ITEM_RECIPE[recipeName][0] == j && ITEM_RECIPE[recipeName][1] == i)){
+                            Object.keys(ItemRecipe).forEach(recipeName=>{
+                                if((ItemRecipe[recipeName][0] == i && ItemRecipe[recipeName][1] == j) || (ItemRecipe[recipeName][0] == j && ItemRecipe[recipeName][1] == i)){
                                     tier2Item = recipeName;
                                 }
                             });

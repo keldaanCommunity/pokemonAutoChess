@@ -18,6 +18,11 @@ import HistoryItem from '../models/colyseus-models/history-item'
 import { Item } from './enum/Item'
 import { Pkm } from './enum/Pokemon'
 
+
+export const CDN_PORTRAIT_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/';
+
+export const CDN_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master';
+
 export type PrecomputedTypePokemon = {
     [key in Synergy] : {
         pokemons: Pkm[],
@@ -184,10 +189,8 @@ export interface IPlayer {
     boardSize: number
     items: CollectionSchema<Item>
     rank: number
-    exp: number
     elo: number
     alive: boolean
-    tileset: string
     history: ArraySchema<HistoryItem>
     pokemonCollection: PokemonCollection
 }

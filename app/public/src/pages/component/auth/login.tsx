@@ -35,7 +35,9 @@ export default function Login(){
 
   useEffect(()=>{
     firebase.auth().onAuthStateChanged(u => {
-      dispatch(logIn(u));
+      if(u){
+        dispatch(logIn(u));
+      }
     });
   });
 

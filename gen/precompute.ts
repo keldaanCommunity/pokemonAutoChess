@@ -1,10 +1,10 @@
 import { Ability } from '../app/types/enum/Ability';
 import { Rarity } from '../app/types/enum/Game';
 import {Pkm, PkmFamily} from '../app/types/enum/Pokemon';
-import {RARITY_HP_COST} from '../app/models/enum';
 import PokemonFactory from '../app/models/pokemon-factory';
 import fs from 'fs';
 import { Synergy } from '../app/types/enum/Synergy';
+import { RarityHpCost } from '../app/types/Config';
 
 const data = {
   NORMAL: {
@@ -136,7 +136,7 @@ const data = {
   });
 
   pokemonCandidates.sort(function(a, b) {
-    return RARITY_HP_COST[a.rarity] - RARITY_HP_COST[b.rarity];
+    return RarityHpCost[a.rarity] - RarityHpCost[b.rarity];
   });
 
   pokemonCandidates.forEach((p)=>{

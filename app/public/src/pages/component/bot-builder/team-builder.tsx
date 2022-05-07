@@ -184,14 +184,15 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     (Object.keys(Synergy) as Synergy[]).forEach(s=>{
       newSynergies.set(s, 0);
     });
-    const pokemonNames = [];
+    const pokemonNames = new Array<Pkm>();
     bot.steps[i].board.forEach(pkm=>{
       const family = PkmFamily[pkm.name];
       const pkmTypes = PokemonFactory.createPokemonFromName(pkm.name).types;
       if (!pokemonNames.includes(family)) {
         pokemonNames.push(family);
         pkmTypes.forEach( (type) => {
-          newSynergies.set(type, newSynergies.get(type) + 1);
+          const v = newSynergies.get(type) ? newSynergies.get(type) : 0;
+          newSynergies.set(type, v + 1);
         });
       }
     });

@@ -34,10 +34,8 @@ export default class Player extends Schema implements IPlayer{
   @type('uint8') boardSize: number = 0;
   @type({collection: 'string'}) items = new CollectionSchema<Item>();
   @type('uint8') rank: number;
-  @type('uint16') exp: number;
   @type('uint16') elo: number;
   @type('boolean') alive = true;
-  @type('string') tileset: string;
   @type([HistoryItem]) history = new ArraySchema<HistoryItem>();
   @type({map: PokemonConfig}) pokemonCollection;
   effects: Effects = new Effects();
@@ -91,7 +89,7 @@ export default class Player extends Schema implements IPlayer{
   }
 
   getPokemonAt(x: number, y: number) {
-    let p:IPokemon = null;
+    let p: IPokemon | undefined = undefined;
 
     this.board.forEach((pokemon)=>{
       if (pokemon.positionX == x && pokemon.positionY == y) {

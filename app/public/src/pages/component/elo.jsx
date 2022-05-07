@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {RANK} from '../../../../models/enum';
+import { EloRankThreshold, EloRank } from '../../../../types/Config';
 
 const style = {
     display:'flex',
@@ -26,14 +26,12 @@ class Elo extends Component{
     }
 
     getRank(){
-        let rank = RANK.BRONZE.id;
-        let keys = Object.keys(RANK);
-        for (let i = 0; i < keys.length; i++) {
-            if(this.props.elo > RANK[keys[i]].threshold){
-                rank = keys[i];
-                break;
+        let rank = EloRank.BRONZE;
+        Object.keys(EloRankThreshold).forEach(e =>{
+            if(this.props.elo > EloRankThreshold[e]){
+                rank = e;
             }
-        }
+        });
         return rank;
     }
 }

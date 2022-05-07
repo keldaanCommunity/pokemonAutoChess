@@ -12,6 +12,7 @@ import GameScene from '../scenes/game-scene';
 import { AttackType, Orientation, PokemonActionState, SpriteType, PokemonTint } from '../../../../types/enum/Game';
 import { Ability } from '../../../../types/enum/Ability';
 import ManaBar from './mana-bar';
+import { Synergy } from '../../../../types/enum/Synergy';
 
 export default class Pokemon extends Button {
   emotion: Emotion;
@@ -28,8 +29,8 @@ export default class Pokemon extends Button {
   speDef: number;
   attackType: AttackType;
   atkSpeed: number;
-  targetX: number;
-  targetY: number;
+  targetX: number | null;
+  targetY: number | null;
   skill: Ability;
   positionX: number;
   positionY: number;
@@ -45,27 +46,27 @@ export default class Pokemon extends Button {
   action: PokemonActionState;
   moveManager: MoveTo;
   rangeType: string;
-  types: string[];
+  types: Synergy[];
   lifebar: Lifebar;
-  detail: PokemonDetail;
+  detail: PokemonDetail | undefined;
   mana: number;
   maxMana: number;
   manabar: ManaBar;
   backgroundIcon: GameObjects.Image;
   sprite: GameObjects.Sprite;
   shadow: GameObjects.Sprite;
-  wound: GameObjects.Sprite;
-  burn: GameObjects.Sprite;
-  sleep: GameObjects.Sprite;
-  silence: GameObjects.Sprite;
-  freeze: GameObjects.Sprite;
-  confusion: GameObjects.Sprite;
-  smoke: GameObjects.Sprite;
-  armorReduction: GameObjects.Sprite;
-  poison: GameObjects.Sprite;
-  protect: GameObjects.Sprite;
-  resurection: GameObjects.Sprite;
-  runeProtect: GameObjects.Sprite;
+  wound: GameObjects.Sprite | undefined;
+  burn: GameObjects.Sprite | undefined;
+  sleep: GameObjects.Sprite | undefined;
+  silence: GameObjects.Sprite | undefined;
+  freeze: GameObjects.Sprite | undefined;
+  confusion: GameObjects.Sprite | undefined;
+  smoke: GameObjects.Sprite | undefined;
+  armorReduction: GameObjects.Sprite | undefined;
+  poison: GameObjects.Sprite | undefined;
+  protect: GameObjects.Sprite | undefined;
+  resurection: GameObjects.Sprite | undefined;
+  runeProtect: GameObjects.Sprite | undefined;
 
   constructor(scene: Phaser.Scene, x: number, y: number, pokemon: IPokemonEntity | IPokemon, dragable: boolean, isPopup: boolean) {
     super(scene, x, y, 75, 75);
@@ -152,8 +153,8 @@ export default class Pokemon extends Button {
   }
 
   attackAnimation() {
-    let x: number;
-    let y: number;
+    let x: number | null;
+    let y: number | null;
     if (this.range > 1) {
       x = this.positionX;
       y = this.positionY;
@@ -161,15 +162,18 @@ export default class Pokemon extends Button {
       x = this.targetX;
       y = this.targetY;
     }
-    const coordinates = transformAttackCoordinate(x, y);
-    if (this.projectile) {
-      this.projectile.destroy();
+
+    if(x && y){
+      const coordinates = transformAttackCoordinate(x, y);
+      if (this.projectile) {
+        this.projectile.destroy();
+      }
+      this.projectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'attacks', `${this.attackSprite}/000`);
+      const scale = getAttackScale(this.attackSprite);
+      this.projectile.setScale(scale[0], scale[1]);
+      this.projectile.anims.play(`${this.attackSprite}`);
+      this.addTween();
     }
-    this.projectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'attacks', `${this.attackSprite}/000`);
-    const scale = getAttackScale(this.attackSprite);
-    this.projectile.setScale(scale[0], scale[1]);
-    this.projectile.anims.play(`${this.attackSprite}`);
-    this.addTween();
   }
 
   petalDanceAnimation() {
@@ -285,7 +289,7 @@ export default class Pokemon extends Button {
       let specialProjectile: GameObjects.Sprite;
       let coordinatesTarget: number[];
 
-      if (this.targetX != -1 && this.targetY != -1) {
+      if (this.targetX && this.targetY && this.targetX != -1 && this.targetY != -1) {
         switch (this.skill) {
             case Ability.FIRE_BLAST:
                 coordinates = transformAttackCoordinate(this.targetX, this.targetY);
@@ -1104,22 +1108,24 @@ export default class Pokemon extends Button {
   }
 
   addTween() {
-    const coordinates = transformAttackCoordinate(this.targetX, this.targetY);
+    if (this.targetX && this.targetY && this.targetX != -1 && this.targetY != -1) {
+      const coordinates = transformAttackCoordinate(this.targetX, this.targetY);
 
-    if (this.scene) {
-      // console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
-      this.scene.tweens.add({
-        targets: this.projectile,
-        x: coordinates[0],
-        y: coordinates[1],
-        ease: 'Linear',
-        duration: this.atkSpeed ? 1000 / this.atkSpeed: 1500,
-        onComplete: () => {
-          this.projectile.destroy();
-        }
-      });
-    } else {
-      this.projectile.destroy();
+      if (this.scene) {
+        // console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
+        this.scene.tweens.add({
+          targets: this.projectile,
+          x: coordinates[0],
+          y: coordinates[1],
+          ease: 'Linear',
+          duration: this.atkSpeed ? 1000 / this.atkSpeed: 1500,
+          onComplete: () => {
+            this.projectile.destroy();
+          }
+        });
+      } else {
+        this.projectile.destroy();
+      }
     }
   }
 

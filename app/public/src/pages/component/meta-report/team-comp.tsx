@@ -1,5 +1,5 @@
 import React from 'react';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import { IMeta } from '../../../../../models/mongo-models/meta';
 import { Emotion } from '../../../../../types';
 import { Pkm, PkmIndex } from '../../../../../types/enum/Pokemon';

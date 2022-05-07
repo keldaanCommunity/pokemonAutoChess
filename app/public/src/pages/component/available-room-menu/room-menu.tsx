@@ -24,10 +24,27 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
     const [isJoining, setJoining] = useState<boolean>(false);
      
     async function create() {
-        if(!props.toPreparation && !isJoining) {
+        if(lobby && !props.toPreparation && !isJoining) {
             setJoining(true);
-            const token: string = await firebase.auth().currentUser.getIdToken();
-            const room: Room<PreparationState> = await client.create('room', {idToken: token, ownerId: uid});
+            const token = await firebase.auth().currentUser.getIdToken();
+            if(token){
+                const room: Room<PreparationState> = await client.create('room', {idToken: token, ownerId: uid});
+                localStorage.setItem('lastRoomId', room.id);
+                localStorage.setItem('lastSessionId', room.sessionId);
+                await lobby.leave();
+                room.connection.close();
+                dispatch(leaveLobby());
+                props.setToPreparation(true);
+            }
+        }
+    }
+
+   async function join(id:string) {
+       if(lobby && !props.toPreparation && !isJoining) {
+        setJoining(true);
+        const token = await firebase.auth().currentUser.getIdToken();
+        if(token){
+            const room: Room<PreparationState> = await client.joinById(id, {idToken: token});
             localStorage.setItem('lastRoomId', room.id);
             localStorage.setItem('lastSessionId', room.sessionId);
             await lobby.leave();
@@ -35,19 +52,6 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
             dispatch(leaveLobby());
             props.setToPreparation(true);
         }
-    }
-
-   async function join(id:string) {
-       if(!props.toPreparation && !isJoining) {
-        setJoining(true);
-        const token: string = await firebase.auth().currentUser.getIdToken();
-        const room: Room<PreparationState> = await client.joinById(id, {idToken: token});
-        localStorage.setItem('lastRoomId', room.id);
-        localStorage.setItem('lastSessionId', room.sessionId);
-        await lobby.leave();
-        room.connection.close();
-        dispatch(leaveLobby());
-        props.setToPreparation(true);
     }
    }
 

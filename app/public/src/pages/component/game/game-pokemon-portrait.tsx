@@ -1,11 +1,12 @@
 import React from 'react';
 import {Pokemon} from '../../../../../models/colyseus-models/pokemon';
-import { COST, CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import { useAppDispatch } from '../../../hooks';
 import { shopClick } from '../../../stores/NetworkStore';
 import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata';
 import { Emotion } from '../../../../../types';
 import { Rarity } from '../../../../../types/enum/Game';
+import {PkmCost} from '../../../../../types/Config';
 
 const COLOR_TYPE = Object.freeze({
     [Rarity.COMMON] : "rgba(104, 109, 125, 0.6)",
@@ -48,7 +49,7 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
             imageRendering: 'crisp-edges'
             }} src={getPath(props.pokemon, props.pokemonConfig)} />
         <div style={{position:'absolute', right:'5%', top:'5%'}}>
-            {COST[props.pokemon.rarity]}<img style={{width:'20px', marginBottom:'5px'}} src="/assets/ui/money.png"/>
+            {PkmCost[props.pokemon.rarity]}<img style={{width:'20px', marginBottom:'5px'}} src="/assets/ui/money.png"/>
         </div>
         <ul style={{
             listStyleType:'none',

@@ -6,12 +6,13 @@ import { ITracker } from '../../../../../types/ITracker';
 import { Ability } from '../../../../../types/enum/Ability';
 import { Synergy } from '../../../../../types/enum/Synergy';
 import {Pkm} from '../../../../../types/enum/Pokemon';
+import { Pokemon } from '../../../../../models/colyseus-models/pokemon';
 
 
 export default function PokemonCarousel(props: {type: Synergy, setPokemon:Dispatch<SetStateAction<Pkm>>, metadata:{[key: string]: ITracker}}){
     const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection);
-    const elligiblePokemons = [];
-    Object.values(Pkm).forEach(v=>{
+    const elligiblePokemons = new Array<Pokemon>();
+    (Object.values(Pkm) as Pkm[]).forEach(v=>{
         const pkm = PokemonFactory.createPokemonFromName(v);
         if(pkm.skill !== Ability.DEFAULT && pkm.types.includes(Synergy[props.type])){
             elligiblePokemons.push(pkm);

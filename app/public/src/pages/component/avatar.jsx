@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Elo from './elo';
-import {CDN_PORTRAIT_URL} from '../../../../models/enum';
+import {CDN_PORTRAIT_URL} from '../../../../types';
 
 class Avatar extends Component{
     render(){

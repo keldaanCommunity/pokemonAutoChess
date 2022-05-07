@@ -19,7 +19,8 @@ export class Effects {
     (Object.values(Synergy) as Synergy[]).forEach(synergy => {
       for (let i = TypeTrigger[synergy].length; i >= 0; i--) {
         const v = TypeTrigger[synergy][i];
-        if(synergies.get(synergy) >= v){
+        const s = synergies.get(synergy);
+        if( s && s >= v){
           this.list.push(SynergyDetail[synergy][i]);
           break;
         }

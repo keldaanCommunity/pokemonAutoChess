@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import {FLYING_PROTECT_THRESHOLD} from '../models/enum';
 import { Item } from '../types/enum/Item';
 import { Pkm } from '../types/enum/Pokemon';
 import { Effect } from '../types/enum/Effect';
@@ -10,6 +9,7 @@ import PokemonEntity from './pokemon-entity';
 import { IPokemonEntity } from '../types';
 import { Synergy } from '../types/enum/Synergy';
 import { Ability } from '../types/enum/Ability';
+import {FlyingProtectThreshold} from '../types/Config';
 
 export default class PokemonState {
 
@@ -120,23 +120,23 @@ export default class PokemonState {
           if (pokemon.life && pokemon.life > 0) {
             if (pokemon.flyingProtection) {
               if (pokemon.effects.includes(Effect.TAILWIND)) {
-                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[Effect.TAILWIND].threshold) {
-                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[Effect.TAILWIND].duration);
+                if (pokemon.life/pokemon.hp < FlyingProtectThreshold[Effect.TAILWIND].threshold) {
+                  pokemon.status.triggerProtect(FlyingProtectThreshold[Effect.TAILWIND].duration);
                   pokemon.flyingProtection = false;
                 }
               } else if (pokemon.effects.includes(Effect.FEATHER_DANCE)) {
-                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[Effect.FEATHER_DANCE].threshold) {
-                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[Effect.FEATHER_DANCE].duration);
+                if (pokemon.life/pokemon.hp < FlyingProtectThreshold[Effect.FEATHER_DANCE].threshold) {
+                  pokemon.status.triggerProtect(FlyingProtectThreshold[Effect.FEATHER_DANCE].duration);
                   pokemon.flyingProtection = false;
                 }
               } else if (pokemon.effects.includes(Effect.MAX_AIRSTREAM)) {
-                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[Effect.MAX_AIRSTREAM].threshold) {
-                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[Effect.MAX_AIRSTREAM].duration);
+                if (pokemon.life/pokemon.hp < FlyingProtectThreshold[Effect.MAX_AIRSTREAM].threshold) {
+                  pokemon.status.triggerProtect(FlyingProtectThreshold[Effect.MAX_AIRSTREAM].duration);
                   pokemon.flyingProtection = false;
                 }
               } else if (pokemon.effects.includes(Effect.MAX_GUARD)) {
-                if (pokemon.life/pokemon.hp < FLYING_PROTECT_THRESHOLD[Effect.MAX_GUARD].threshold) {
-                  pokemon.status.triggerProtect(FLYING_PROTECT_THRESHOLD[Effect.MAX_GUARD].duration);
+                if (pokemon.life/pokemon.hp < FlyingProtectThreshold[Effect.MAX_GUARD].threshold) {
+                  pokemon.status.triggerProtect(FlyingProtectThreshold[Effect.MAX_GUARD].duration);
                   pokemon.flyingProtection = false;
                 }
               }

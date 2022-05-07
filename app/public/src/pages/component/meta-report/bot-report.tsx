@@ -69,7 +69,9 @@ export default function BotReport(){
             labels: {
             rotateAlways: true,
             formatter: function(val, timestamp) {
-                return formatDate(timestamp)
+                if(timestamp){
+                    return formatDate(timestamp)
+                }
             }
             }
         },

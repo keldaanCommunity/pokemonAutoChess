@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import PokemonDetail from './wiki-pokemon-detail';
 import { Emotion, PrecomputedRaritPokemonyAll } from '../../../../../types';
