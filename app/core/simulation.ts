@@ -87,7 +87,7 @@ export default class Simulation extends Schema implements ISimulation{
       }
 
       else if(blueEffects.includes(Effect.HORDE)){
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 2; i++) {
           const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name);
           const coord = this.getFirstAvailablePlaceOnBoard(true);
           this.addPokemon(bug, coord.x, coord.y, 0);
@@ -119,7 +119,7 @@ export default class Simulation extends Schema implements ISimulation{
       }
 
       else if(redEffects.includes(Effect.HORDE)){
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 2; i++) {
           const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name);
           const coord = this.getFirstAvailablePlaceOnBoard(false);
           this.addPokemon(bug, coord.x, coord.y, 1);
