@@ -35,24 +35,23 @@ export default class Pokemon extends Button {
   positionX: number;
   positionY: number;
   attackSprite: AttackSprite;
-  team: number;
+  team: number | undefined;
   critDamage: number;
   spellDamage: number;
-  life: number;
-  shield: number;
-  projectile: GameObjects.Sprite;
+  life: number | undefined;
+  shield: number | undefined;
+  projectile: GameObjects.Sprite | undefined;
   itemsContainer: ItemsContainer;
   orientation: Orientation;
   action: PokemonActionState;
   moveManager: MoveTo;
   rangeType: string;
   types: Synergy[];
-  lifebar: Lifebar;
+  lifebar: Lifebar | undefined;
   detail: PokemonDetail | undefined;
-  mana: number;
+  mana: number | undefined;
   maxMana: number;
-  manabar: ManaBar;
-  backgroundIcon: GameObjects.Image;
+  manabar: ManaBar | undefined;
   sprite: GameObjects.Sprite;
   shadow: GameObjects.Sprite;
   wound: GameObjects.Sprite | undefined;
@@ -96,10 +95,49 @@ export default class Pokemon extends Button {
     this.positionX = pokemon.positionX;
     this.positionY = pokemon.positionY;
     this.attackSprite = pokemon.attackSprite;
-    this.setRangeType();
-    this.setMovingFunction(scene);
-    this.setParameters(pokemon);
-    this.setSprite(pokemon, scene);
+    if (this.range > 1) {
+      this.rangeType = 'range';
+    } else {
+      this.rangeType = 'melee';
+    }
+    const m = <MoveToPlugin> scene.plugins.get('rexMoveTo');
+    this.moveManager = m.add(this, {
+      speed: 300,
+      rotateToTarget: false
+    });
+    const p = <IPokemonEntity> pokemon;
+    if(p.orientation){
+      this.orientation = p.orientation;
+      this.action = p.action;
+    }
+    else{
+      this.orientation = Orientation.DOWNLEFT;
+      this.action = PokemonActionState.WALK;
+    }
+    this.sprite = new GameObjects.Sprite(scene, 0, 0, this.index, `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`);
+    //this.sprite.setOrigin(0,0);
+    this.sprite.setScale(2, 2);
+    this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, (animation, frame, gameObject, frameKey: string)=>{const g = <GameScene> scene; if(frameKey.includes(PokemonActionState.ATTACK)){g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)}});
+    this.height = this.sprite.height;
+    this.width = this.sprite.width;
+    this.itemsContainer = new ItemsContainer(scene, p.items, this.width/2 + 25, -35, false);
+    this.shadow = new GameObjects.Sprite(scene, 0, 5, this.index);
+    //this.shadow.setOrigin(0,0);
+    this.shadow.setScale(2, 2);
+    scene.add.existing(this.shadow);
+    scene.add.existing(this.sprite);
+    this.add(this.shadow);
+    this.add(this.itemsContainer);
+
+    if(instanceofPokemonEntity(pokemon)){
+      if (p.effects && (p.effects.includes(Effect.IRON_DEFENSE) || p.effects.includes(Effect.AUTOTOMIZE))) {
+        this.sprite.setScale(3, 3);
+      }
+      this.setLifeBar(p, scene);
+      this.setManaBar(p, scene);
+      //this.setEffects(p, scene);
+    }
+    this.add(this.sprite);
     if (dragable) {
       scene.input.setDraggable(this);
     }
@@ -140,7 +178,7 @@ export default class Pokemon extends Button {
         this.closeDetail();
       }
       else{
-        if (this.life) {
+        if (this.life && this.mana) {
           this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.life, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.mana, this.types, this.skill, this.emotion, this.shiny, this.index);
         } else {
           this.detail = new PokemonDetail(this.scene, 0, 0, this.name, this.hp, this.atk, this.def, this.speDef, this.attackType, this.range, this.atkSpeed.toFixed(2), this.critChance, this.critDamage, this.spellDamage, this.maxMana, this.types, this.skill, this.emotion, this.shiny, this.index);
@@ -266,7 +304,9 @@ export default class Pokemon extends Button {
 
   deathAnimation() {
     this.life = 0;
-    this.lifebar.setAmount(this.life);
+    if(this.lifebar){
+      this.lifebar.setAmount(this.life);
+    }
 
     this.scene.add.tween({
       targets: [this],
@@ -1120,11 +1160,17 @@ export default class Pokemon extends Button {
           ease: 'Linear',
           duration: this.atkSpeed ? 1000 / this.atkSpeed: 1500,
           onComplete: () => {
-            this.projectile.destroy();
+            if(this.projectile){
+              this.projectile.destroy();
+              this.projectile = undefined;
+            }
           }
         });
       } else {
-        this.projectile.destroy();
+        if(this.projectile){
+          this.projectile.destroy();
+          this.projectile = undefined;
+        }
       }
     }
   }
@@ -1143,63 +1189,6 @@ export default class Pokemon extends Button {
       this.manabar = new ManaBar(scene, 0, this.height/2 + 12, 60, pokemon.maxMana);
       this.manabar.setAmount(pokemon.mana);
       this.add(this.manabar);
-    }
-  }
-
-  setSprite(pokemon: IPokemonEntity | IPokemon, scene: Phaser.Scene) {
-    const p = <IPokemonEntity> pokemon;
-    this.sprite = new GameObjects.Sprite(scene, 0, 0, this.index, `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`);
-    //this.sprite.setOrigin(0,0);
-    this.sprite.setScale(2, 2);
-    this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, (animation, frame, gameObject, frameKey: string)=>{const g = <GameScene> scene; if(frameKey.includes(PokemonActionState.ATTACK)){g.animationManager.animatePokemon(this, PokemonActionState.IDLE)}});
-    this.height = this.sprite.height;
-    this.width = this.sprite.width;
-    this.itemsContainer = new ItemsContainer(scene, p.items, this.width/2 + 25, -35, false);
-    this.shadow = new GameObjects.Sprite(scene, 0, 5, this.index);
-    //this.shadow.setOrigin(0,0);
-    this.shadow.setScale(2, 2);
-    scene.add.existing(this.shadow);
-    scene.add.existing(this.sprite);
-    this.add(this.shadow);
-    this.add(this.itemsContainer);
-
-    if(instanceofPokemonEntity(pokemon)){
-      const p = <IPokemonEntity> pokemon;
-      if (p.effects && (p.effects.includes(Effect.IRON_DEFENSE) || p.effects.includes(Effect.AUTOTOMIZE))) {
-        this.sprite.setScale(3, 3);
-      }
-      this.setLifeBar(p, scene);
-      this.setManaBar(p, scene);
-      //this.setEffects(p, scene);
-    }
-    this.add(this.sprite);
-  }
-
-  setParameters(pokemon: IPokemonEntity | IPokemon) {
-    const p = <IPokemonEntity> pokemon;
-    if(p.orientation){
-      this.orientation = p.orientation;
-      this.action = p.action;
-    }
-    else{
-      this.orientation = Orientation.DOWNLEFT;
-      this.action = PokemonActionState.WALK;
-    }
-  }
-
-  setMovingFunction(scene: Phaser.Scene) {
-    const p = <MoveToPlugin> scene.plugins.get('rexMoveTo');
-    this.moveManager = p.add(this, {
-      speed: 300,
-      rotateToTarget: false
-    });
-  }
-
-  setRangeType() {
-    if (this.range > 1) {
-      this.rangeType = 'range';
-    } else {
-      this.rangeType = 'melee';
     }
   }
 
@@ -1246,7 +1235,7 @@ export default class Pokemon extends Button {
       this.add(this.sleep);
     }
     const s = <GameScene> this.scene;
-    s.animationManager.animatePokemon(this, PokemonActionState.SLEEP);
+    s.animationManager?.animatePokemon(this, PokemonActionState.SLEEP);
   }
 
   removeSleep() {

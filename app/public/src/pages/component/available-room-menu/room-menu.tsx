@@ -19,14 +19,14 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
     const dispatch = useAppDispatch();
     const allRooms: RoomAvailable[] = useAppSelector(state=>state.lobby.allRooms);
     const client: Client = useAppSelector(state=>state.network.client);
-    const lobby: Room<ICustomLobbyState> = useAppSelector(state=>state.network.lobby);
+    const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(state=>state.network.lobby);
     const uid: string = useAppSelector(state=>state.network.uid);
     const [isJoining, setJoining] = useState<boolean>(false);
      
     async function create() {
         if(lobby && !props.toPreparation && !isJoining) {
             setJoining(true);
-            const token = await firebase.auth().currentUser.getIdToken();
+            const token = await firebase.auth().currentUser?.getIdToken();
             if(token){
                 const room: Room<PreparationState> = await client.create('room', {idToken: token, ownerId: uid});
                 localStorage.setItem('lastRoomId', room.id);
@@ -42,7 +42,7 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
    async function join(id:string) {
        if(lobby && !props.toPreparation && !isJoining) {
         setJoining(true);
-        const token = await firebase.auth().currentUser.getIdToken();
+        const token = await firebase.auth().currentUser?.getIdToken();
         if(token){
             const room: Room<PreparationState> = await client.joinById(id, {idToken: token});
             localStorage.setItem('lastRoomId', room.id);

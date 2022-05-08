@@ -18,7 +18,7 @@ import GameShop from "./component/game/game-shop";
 import GameSynergies from "./component/game/game-synergies";
 import GameModal from "./component/game/game-modal";
 import AfterGameState from "../../../rooms/states/after-game-state";
-import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer } from "../../../types";
+import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer, ISimplePlayer } from "../../../types";
 
 let gameContainer: GameContainer;
 
@@ -29,8 +29,8 @@ function playerClick(id: string){
 export default function Game() {
   const dispatch = useAppDispatch();
   const client: Client = useAppSelector(state=>state.network.client);
-  const room : Room<GameState> = useAppSelector(state=>state.network.game);
-  const uid : string = useAppSelector(state=>state.network.uid);
+  const room: Room<GameState>|undefined = useAppSelector(state=>state.network.game);
+  const uid: string = useAppSelector(state=>state.network.uid);
   const currentPlayerId: string = useAppSelector(state=>state.game.currentPlayerId);
 
   const [initialized, setInitialized] = useState<boolean>(false);
@@ -39,17 +39,17 @@ export default function Game() {
   const [modalInfo, setModalInfo] = useState<string>('');
   const [modalBoolean, setModalBoolean] = useState<boolean>(false);
   const [toAfter, setToAfter] = useState<boolean>(false);
-  const container = useRef();
+  const container = useRef<HTMLDivElement>(null);
 
   async function leave() {
-    const savePlayers = [];
+    const savePlayers = new Array<ISimplePlayer>();
 
-    document.getElementById('game').removeEventListener(Transfer.DRAG_DROP, ((event: CustomEvent<IDragDropMessage>) => {gameContainer.onDragDrop(event)}) as EventListener);
-    document.getElementById('game').removeEventListener(Transfer.DRAG_DROP_ITEM, ((event: CustomEvent<IDragDropItemMessage>) => {gameContainer.onDragDropItem(event)}) as EventListener);
-    document.getElementById('game').removeEventListener(Transfer.DRAG_DROP_COMBINE, ((event: CustomEvent<IDragDropCombineMessage>) => {gameContainer.onDragDropCombine(event)}) as EventListener);
-    document.getElementById('game').removeEventListener(Transfer.SELL_DROP, ((event: CustomEvent<{pokemonId: string}>) => {gameContainer.onSellDrop(event)}) as EventListener);
+    document.getElementById('game')?.removeEventListener(Transfer.DRAG_DROP, ((event: CustomEvent<IDragDropMessage>) => {gameContainer.onDragDrop(event)}) as EventListener);
+    document.getElementById('game')?.removeEventListener(Transfer.DRAG_DROP_ITEM, ((event: CustomEvent<IDragDropItemMessage>) => {gameContainer.onDragDropItem(event)}) as EventListener);
+    document.getElementById('game')?.removeEventListener(Transfer.DRAG_DROP_COMBINE, ((event: CustomEvent<IDragDropCombineMessage>) => {gameContainer.onDragDropCombine(event)}) as EventListener);
+    document.getElementById('game')?.removeEventListener(Transfer.SELL_DROP, ((event: CustomEvent<{pokemonId: string}>) => {gameContainer.onSellDrop(event)}) as EventListener);
 
-    const token: string = await firebase.auth().currentUser.getIdToken();
+    const token = await firebase.auth().currentUser?.getIdToken();
 
     if(gameContainer && gameContainer.game){
       gameContainer.game.destroy(true);
@@ -63,7 +63,7 @@ export default function Game() {
     const r: Room<AfterGameState> = await client.create('after-game', {players:savePlayers, idToken:token});
     localStorage.setItem('lastRoomId', r.id);
     localStorage.setItem('lastSessionId', r.sessionId);
-    await room.leave();
+    await room?.leave();
     r.connection.close();
     dispatch(leaveGame());
     setToAfter(true);
@@ -76,19 +76,29 @@ export default function Game() {
             firebase.initializeApp(FIREBASE_CONFIG);
         }
         firebase.auth().onAuthStateChanged(async user => {
+          if(user){
             dispatch(logIn(user));
             dispatch(setCurrentPlayerId(user.uid));
             try{
-                const r: Room<GameState> = await client.reconnect(localStorage.getItem('lastRoomId'),localStorage.getItem('lastSessionId'));
-                dispatch(joinGame(r));
+                const lastRoomId = localStorage.getItem('lastRoomId');
+                const lastSessionId = localStorage.getItem('lastSessionId');
+                if(lastRoomId && lastSessionId){
+                  const r: Room<GameState> = await client.reconnect(lastRoomId,lastSessionId);
+                  dispatch(joinGame(r));
+                }
             }
             catch(error){
                 setTimeout(async()=>{
-                    const r: Room<GameState> = await client.reconnect(localStorage.getItem('lastRoomId'),localStorage.getItem('lastSessionId'));
+                  const lastRoomId = localStorage.getItem('lastRoomId');
+                  const lastSessionId = localStorage.getItem('lastSessionId');
+                  if(lastRoomId && lastSessionId){
+                    const r: Room<GameState> = await client.reconnect(lastRoomId,lastSessionId);
                     dispatch(joinGame(r));
+                  }
                 });
                 console.log(error);         
             }
+          }
         });
     }
 
@@ -96,15 +106,15 @@ export default function Game() {
         reconnect();
     }
 
-    if(!initialized && room != undefined){
+    if(!initialized && room != undefined && container?.current){
       setInitialized(true);
       dispatch(requestTilemap());
 
       gameContainer = new GameContainer(container.current, uid, room);
-      document.getElementById('game').addEventListener(Transfer.DRAG_DROP, ((event: CustomEvent<IDragDropMessage>) => {gameContainer.onDragDrop(event)}) as EventListener);
-      document.getElementById('game').addEventListener(Transfer.DRAG_DROP_ITEM, ((event: CustomEvent<IDragDropItemMessage>) => {gameContainer.onDragDropItem(event)}) as EventListener);
-      document.getElementById('game').addEventListener(Transfer.DRAG_DROP_COMBINE, ((event: CustomEvent<IDragDropCombineMessage>) => {gameContainer.onDragDropCombine(event)}) as EventListener);
-      document.getElementById('game').addEventListener(Transfer.SELL_DROP, ((event: CustomEvent<{pokemonId: string}>) => {gameContainer.onSellDrop(event)}) as EventListener);
+      document.getElementById('game')?.addEventListener(Transfer.DRAG_DROP, ((event: CustomEvent<IDragDropMessage>) => {gameContainer.onDragDrop(event)}) as EventListener);
+      document.getElementById('game')?.addEventListener(Transfer.DRAG_DROP_ITEM, ((event: CustomEvent<IDragDropItemMessage>) => {gameContainer.onDragDropItem(event)}) as EventListener);
+      document.getElementById('game')?.addEventListener(Transfer.DRAG_DROP_COMBINE, ((event: CustomEvent<IDragDropCombineMessage>) => {gameContainer.onDragDropCombine(event)}) as EventListener);
+      document.getElementById('game')?.addEventListener(Transfer.SELL_DROP, ((event: CustomEvent<{pokemonId: string}>) => {gameContainer.onSellDrop(event)}) as EventListener);
       room.onMessage('info', message => {setModalTitle(message.title); setModalInfo(message.info); setModalBoolean(true)});
       room.onMessage('tilemap', tilemap => {gameContainer.setTilemap(tilemap)});
 

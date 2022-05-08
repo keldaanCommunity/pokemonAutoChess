@@ -35,7 +35,7 @@ export class Pokemon extends Schema implements IPokemon{
   @type({set: 'string'}) items = new SetSchema<Item>();
   @type('boolean') shiny: boolean;
   @type('string') emotion: Emotion;
-  fossilTimer: number;
+  fossilTimer: number | undefined;
 
   constructor(
      name: Pkm,

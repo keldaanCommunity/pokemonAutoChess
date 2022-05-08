@@ -115,30 +115,32 @@ export default class BoardManager {
   changePokemon(pokemon: IPokemon, change: DataChange<any>) {
     // console.log('change', change.field, pokemon.name);
     const pokemonUI = this.pokemons.get(pokemon.id);
-    let coordinates;
-    switch (change.field) {
-      case 'positionX':
-        pokemonUI.positionX = change.value;
-        pokemonUI.positionY = pokemon.positionY;
-        coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY);
-        pokemonUI.x = coordinates[0];
-        pokemonUI.y = coordinates[1];
-        break;
-
-      case 'positionY':
-        pokemonUI.positionY = change.value;
-        pokemonUI.positionX = pokemon.positionX;
-        coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY);
-        pokemonUI.x = coordinates[0];
-        pokemonUI.y = coordinates[1];
-        if (pokemonUI.positionY != 0 && this.mode == 'battle') {
-          pokemonUI.setVisible(false);
-        }
-        break;
-
-      default:
-        pokemonUI[change.field] = change.value;
-        break;
+    let coordinates: number[];
+    if(pokemonUI){
+      switch (change.field) {
+        case 'positionX':
+          pokemonUI.positionX = change.value;
+          pokemonUI.positionY = pokemon.positionY;
+          coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY);
+          pokemonUI.x = coordinates[0];
+          pokemonUI.y = coordinates[1];
+          break;
+  
+        case 'positionY':
+          pokemonUI.positionY = change.value;
+          pokemonUI.positionX = pokemon.positionX;
+          coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY);
+          pokemonUI.x = coordinates[0];
+          pokemonUI.y = coordinates[1];
+          if (pokemonUI.positionY != 0 && this.mode == 'battle') {
+            pokemonUI.setVisible(false);
+          }
+          break;
+  
+        default:
+          pokemonUI[change.field] = change.value;
+          break;
+      }
     }
   }
 }

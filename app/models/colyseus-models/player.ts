@@ -18,7 +18,7 @@ export default class Player extends Schema implements IPlayer{
   @type('string') id: string;
   @type('string') name: string;
   @type('string') avatar: string;
-  @type({map: Pokemon}) board = new MapSchema<IPokemon>();
+  @type({map: Pokemon}) board = new MapSchema<Pokemon>();
   @type(['string']) shop = new ArraySchema<Pkm>();
   @type(Simulation) simulation = new Simulation();
   @type(ExperienceManager) experienceManager = new ExperienceManager();
@@ -84,12 +84,11 @@ export default class Player extends Schema implements IPlayer{
         return this.history[i].result;
       }
     }
-
     return '';
   }
 
-  getPokemonAt(x: number, y: number) {
-    let p: IPokemon | undefined = undefined;
+  getPokemonAt(x: number, y: number): Pokemon | undefined {
+    let p: Pokemon | undefined = undefined;
 
     this.board.forEach((pokemon)=>{
       if (pokemon.positionX == x && pokemon.positionY == y) {

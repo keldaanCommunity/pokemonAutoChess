@@ -35,7 +35,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
 
   constructor(){
     super();
-    this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL});
+    this.discordWebhook = new WebhookClient({url: process.env.WEBHOOK_URL? process.env.WEBHOOK_URL : 'Default Webhook URL'});
     this.bots = new Map<string, IBot>();
     this.meta = new Array<IMeta>();
     this.metaItems = new Array<IItemsStatistic>();
@@ -121,11 +121,11 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
 
         boosterIndex.forEach(i=>{
           if(user.pokemonCollection.has(i)){
-            user.pokemonCollection.get(i).dust += 40;
+            user.pokemonCollection.get(i)?.dust += 40;
           }
           else{
             user.pokemonCollection.set(i, new PokemonConfig(i));
-            user.pokemonCollection.get(i).dust += 40;
+            user.pokemonCollection.get(i)?.dust += 40;
           }
         });
 
@@ -133,11 +133,11 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
           u.booster = user.booster;
           boosterIndex.forEach(i=>{
             if(u.pokemonCollection.has(i)){
-              u.pokemonCollection.get(i).dust += 40;
+              u.pokemonCollection.get(i)?.dust += 40;
             }
             else{
               u.pokemonCollection.set(i, {id: i, emotions:[], shinyEmotions:[], dust: 0, selectedEmotion: Emotion.NORMAL, selectedShiny: false });
-              u.pokemonCollection.get(i).dust += 40;
+              u.pokemonCollection.get(i)?.dust += 40;
             }
           });
           u.save();
@@ -185,29 +185,29 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
 
     this.onMessage(Transfer.CHANGE_SELECTED_EMOTION, (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
         const user: LobbyUser = this.state.users.get(client.auth.uid);
-        if(user.pokemonCollection.has(message.index)){
-            const pokemonConfig = user.pokemonCollection.get(message.index);
-            const emotionsToCheck = message.shiny ? pokemonConfig.shinyEmotions: pokemonConfig.emotions;
-            if(emotionsToCheck.includes(message.emotion) && (message.emotion != pokemonConfig.selectedEmotion || message.shiny != pokemonConfig.selectedShiny)){
-                pokemonConfig.selectedEmotion = message.emotion;
-                pokemonConfig.selectedShiny = message.shiny;
-                UserMetadata.findOne({'uid': client.auth.uid}, (err, u)=>{
-                    if (u) {
-                        if(u.pokemonCollection.get(message.index)){
-                            u.pokemonCollection.get(message.index).selectedEmotion = message.emotion;
-                            u.pokemonCollection.get(message.index).selectedShiny = message.shiny;
-                            u.save();
-                        }
-                    }
-                });
-            }
+        const pokemonConfig = user.pokemonCollection.get(message.index);
+        if(pokemonConfig){
+          const emotionsToCheck = message.shiny ? pokemonConfig.shinyEmotions: pokemonConfig.emotions;
+          if(emotionsToCheck.includes(message.emotion) && (message.emotion != pokemonConfig.selectedEmotion || message.shiny != pokemonConfig.selectedShiny)){
+              pokemonConfig.selectedEmotion = message.emotion;
+              pokemonConfig.selectedShiny = message.shiny;
+              UserMetadata.findOne({'uid': client.auth.uid}, (err, u)=>{
+                  if (u) {
+                      if(u.pokemonCollection.get(message.index)){
+                          u.pokemonCollection.get(message.index).selectedEmotion = message.emotion;
+                          u.pokemonCollection.get(message.index).selectedShiny = message.shiny;
+                          u.save();
+                      }
+                  }
+              });
+          }
         }
     });
 
     this.onMessage(Transfer.BUY_EMOTION, (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
         const user: LobbyUser = this.state.users.get(client.auth.uid);
-        if(user.pokemonCollection.has(message.index)){
-            const pokemonConfig = user.pokemonCollection.get(message.index);
+        const pokemonConfig = user.pokemonCollection.get(message.index);
+        if(pokemonConfig){
             const emotionsToCheck = message.shiny ? pokemonConfig.shinyEmotions: pokemonConfig.emotions;
             const cost = message.shiny ? EmotionCost[message.emotion] * 3: EmotionCost[message.emotion];
             if(!emotionsToCheck.includes(message.emotion) && pokemonConfig.dust >= cost){
@@ -276,7 +276,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
     });
 
     return new Promise((resolve, reject) => {
-      connect(process.env.MONGO_URI, {}, () => {
+      connect(process.env.MONGO_URI? process.env.MONGO_URI : 'Default Mongo URI', {}, () => {
         Chat.find({ 'time': { $gt: Date.now() - 86400000 } }, (err, messages) => {
           if (err) {
             console.log(err);

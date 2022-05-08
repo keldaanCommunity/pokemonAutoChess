@@ -119,24 +119,29 @@ export default class PokemonState {
 
           if (pokemon.life && pokemon.life > 0) {
             if (pokemon.flyingProtection) {
-              if (pokemon.effects.includes(Effect.TAILWIND)) {
-                if (pokemon.life/pokemon.hp < FlyingProtectThreshold[Effect.TAILWIND].threshold) {
-                  pokemon.status.triggerProtect(FlyingProtectThreshold[Effect.TAILWIND].duration);
+              const t = FlyingProtectThreshold[Effect.TAILWIND];
+              const f = FlyingProtectThreshold[Effect.FEATHER_DANCE];
+              const ma = FlyingProtectThreshold[Effect.MAX_AIRSTREAM];
+              const mg = FlyingProtectThreshold[Effect.MAX_GUARD];
+
+              if (pokemon.effects.includes(Effect.TAILWIND) && t) {
+                if (pokemon.life/pokemon.hp < t.threshold) {
+                  pokemon.status.triggerProtect(t.duration);
                   pokemon.flyingProtection = false;
                 }
-              } else if (pokemon.effects.includes(Effect.FEATHER_DANCE)) {
-                if (pokemon.life/pokemon.hp < FlyingProtectThreshold[Effect.FEATHER_DANCE].threshold) {
-                  pokemon.status.triggerProtect(FlyingProtectThreshold[Effect.FEATHER_DANCE].duration);
+              } else if (pokemon.effects.includes(Effect.FEATHER_DANCE) && f) {
+                if (pokemon.life/pokemon.hp < f.threshold) {
+                  pokemon.status.triggerProtect(f.duration);
                   pokemon.flyingProtection = false;
                 }
-              } else if (pokemon.effects.includes(Effect.MAX_AIRSTREAM)) {
-                if (pokemon.life/pokemon.hp < FlyingProtectThreshold[Effect.MAX_AIRSTREAM].threshold) {
-                  pokemon.status.triggerProtect(FlyingProtectThreshold[Effect.MAX_AIRSTREAM].duration);
+              } else if (pokemon.effects.includes(Effect.MAX_AIRSTREAM) && ma) {
+                if (pokemon.life/pokemon.hp < ma.threshold) {
+                  pokemon.status.triggerProtect(ma.duration);
                   pokemon.flyingProtection = false;
                 }
-              } else if (pokemon.effects.includes(Effect.MAX_GUARD)) {
-                if (pokemon.life/pokemon.hp < FlyingProtectThreshold[Effect.MAX_GUARD].threshold) {
-                  pokemon.status.triggerProtect(FlyingProtectThreshold[Effect.MAX_GUARD].duration);
+              } else if (pokemon.effects.includes(Effect.MAX_GUARD) && mg) {
+                if (pokemon.life/pokemon.hp < mg.threshold) {
+                  pokemon.status.triggerProtect(mg.duration);
                   pokemon.flyingProtection = false;
                 }
               }
@@ -443,11 +448,11 @@ export default class PokemonState {
     return target;
   }
 
-  getNearestTargetCoordinate(pokemon: PokemonEntity, board: Board): {x:number, y:number} {
+  getNearestTargetCoordinate(pokemon: PokemonEntity, board: Board): {x:number, y:number}|undefined {
     let distance = 999;
     let candidatesCoordinates: {x: number, y:number}[] = new Array<{x:number, y:number}>();
 
-    board.forEach((r: number, c: number, value: PokemonEntity) => {
+    board.forEach((r: number, c: number, value: PokemonEntity | undefined) => {
       if (value !== undefined && value.team != pokemon.team) {
         const candidateDistance = board.distance(pokemon.positionX, pokemon.positionY, r, c);
         if (candidateDistance < distance) {
@@ -463,14 +468,14 @@ export default class PokemonState {
         return candidatesCoordinates[Math.floor(Math.random() * candidatesCoordinates.length)];
     }
     else{
-        return {x: undefined, y: undefined};
+        return undefined;
     }
   }
 
-  getFarthestTargetCoordinate(pokemon: PokemonEntity, board: Board): {x:number, y:number} {
-    const pokemons = [];
+  getFarthestTargetCoordinate(pokemon: PokemonEntity, board: Board): {x:number, y:number}|undefined {
+    const pokemons = new Array<{distance :number, x: number, y: number}>();
 
-    board.forEach((r: number, c: number, value: PokemonEntity)=>{
+    board.forEach((r: number, c: number, value:PokemonEntity | undefined) => {
       if (value !== undefined && value.team != pokemon.team) {
         const d = board.distance(pokemon.positionX, pokemon.positionY, r, c);
         pokemons.push({distance: d, x: r, y: c});
@@ -485,16 +490,16 @@ export default class PokemonState {
         return {x: pokemons[0].x, y: pokemons[0].y}
     }
     else{
-        return {x: undefined, y: undefined};
+        return undefined;
     }
   }
 
-  getFarthestTargetCoordinateAvailablePlace(pokemon: PokemonEntity, board: Board): {x:number, y:number} {
-    let x = undefined;
-    let y = undefined;
-    const pokemons = [];
+  getFarthestTargetCoordinateAvailablePlace(pokemon: PokemonEntity, board: Board): {x:number, y:number}|undefined {
+    let x: number | undefined = undefined;
+    let y: number | undefined = undefined;
+    const pokemons = new Array<{distance :number, x: number, y: number}>();
 
-    board.forEach((r: number, c: number, value: PokemonEntity)=>{
+    board.forEach((r: number, c: number, value:PokemonEntity | undefined) => {
       if (value !== undefined && value.team != pokemon.team) {
         const d = board.distance(pokemon.positionX, pokemon.positionY, r, c);
         pokemons.push({distance: d, x: r, y: c});
@@ -523,7 +528,12 @@ export default class PokemonState {
         break;
       }
     }
-    return {x: x, y:y};
+    if(x && y){
+      return {x: x, y:y};
+    }
+    else{
+      return undefined;
+    }
   }
 
   move(pokemon: PokemonEntity, board: Board, coordinates: {x:number, y:number}) {}

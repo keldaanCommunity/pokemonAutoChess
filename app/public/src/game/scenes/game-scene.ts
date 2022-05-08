@@ -1,4 +1,3 @@
-/* eslint-disable no-invalid-this */
 import {Scene, GameObjects} from 'phaser';
 import AnimationManager from '../animation-manager';
 import BoardManager from '../components/board-manager';
@@ -15,28 +14,27 @@ import ItemContainer from '../components/item-container';
 import { GamePhaseState } from '../../../../types/enum/Game';
 import indexList from '../../../dist/client/assets/pokemons/indexList.json';
 import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer } from '../../../../types';
+import { DesignTiled } from '../../../../core/design';
+
 export default class GameScene extends Scene {
-  tilemap: any;
-  room: Room<GameState>;
+  tilemap: DesignTiled | undefined;
+  room: Room<GameState> | undefined;
   uid: string | undefined;
-  textStyle: { fontSize: string; fontFamily: string; color: string; align: string; };
-  bigTextStyle: { fontSize: string; fontFamily: string; color: string; align: string; stroke: string; strokeThickness: number; };
-  map: Phaser.Tilemaps.Tilemap;
-  battleGroup: GameObjects.Group;
-  animationManager: AnimationManager;
-  itemsContainer: ItemsContainer;
-  board: BoardManager;
-  battle: BattleManager;
-  weatherManager: WeatherManager;
-  pokemon: Pokemon;
-  transitionImage: GameObjects.Image;
-  transitionScreen: GameObjects.Container;
-  music: Phaser.Sound.BaseSound;
+  textStyle: { fontSize: string; fontFamily: string; color: string; align: string; } | undefined;
+  bigTextStyle: { fontSize: string; fontFamily: string; color: string; align: string; stroke: string; strokeThickness: number; } | undefined;
+  map: Phaser.Tilemaps.Tilemap | undefined;
+  battleGroup: GameObjects.Group | undefined;
+  animationManager: AnimationManager | undefined;
+  itemsContainer: ItemsContainer | undefined;
+  board: BoardManager | undefined;
+  battle: BattleManager | undefined;
+  weatherManager: WeatherManager | undefined;
+  music: Phaser.Sound.BaseSound | undefined;
   targetPokemon: Pokemon | undefined;
-  graphics: Phaser.GameObjects.Graphics[];
-  dragDropText: Phaser.GameObjects.Text;
-  sellZoneGraphic: Phaser.GameObjects.Graphics;
-  zones: Phaser.GameObjects.Zone[];
+  graphics: Phaser.GameObjects.Graphics[] = [];
+  dragDropText: Phaser.GameObjects.Text | undefined;
+  sellZoneGraphic: Phaser.GameObjects.Graphics | undefined;
+  zones: Phaser.GameObjects.Zone[] = [];
   lastDragDropPokemon: Pokemon | undefined;
   lastPokemonDetail: Pokemon | undefined;
 
@@ -116,9 +114,11 @@ export default class GameScene extends Scene {
     });
 
     // console.log(this.tilemap);
-    this.load.audio('sound', [`https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChessMusic/main/music/${this.tilemap.tilesets[0].name}.mp3`]);
-    this.load.image('tiles', `/assets/tilesets/${this.tilemap.tilesets[0].name}.png`);
-    this.load.tilemapTiledJSON('map', this.tilemap);
+    if(this.tilemap){
+      this.load.audio('sound', [`https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChessMusic/main/music/${this.tilemap.tilesets[0].name}.mp3`]);
+      this.load.image('tiles', `/assets/tilesets/${this.tilemap.tilesets[0].name}.png`);
+      this.load.tilemapTiledJSON('map', this.tilemap);
+    }
     this.load.image('rain', '/assets/ui/rain.png');
     this.load.image('sand', '/assets/ui/sand.png');
     this.load.image('sun', '/assets/ui/sun.png');
@@ -163,7 +163,7 @@ export default class GameScene extends Scene {
   }
 
   create() {
-    if(this.uid){
+    if(this.uid && this.tilemap && this.room){
       this.textStyle = {
         fontSize: '35px',
         fontFamily: '\'Press Start 2P\'',
@@ -214,11 +214,11 @@ export default class GameScene extends Scene {
   }
 
   refreshShop() {
-    this.room.send(Transfer.REFRESH);
+    this.room?.send(Transfer.REFRESH);
   }
 
   buyExperience() {
-    this.room.send(Transfer.LEVEL_UP);
+    this.room?.send(Transfer.LEVEL_UP);
   }
 
   sellPokemon() {
@@ -237,10 +237,10 @@ export default class GameScene extends Scene {
 
   updatePhase() {
     this.targetPokemon = undefined;
-    if (this.room.state.phase == GamePhaseState.FIGHT) {
-      this.board.battleMode();
+    if (this.room?.state.phase == GamePhaseState.FIGHT) {
+      this.board?.battleMode();
     } else {
-      this.board.pickMode();
+      this.board?.pickMode();
     }
   }
 
@@ -248,16 +248,16 @@ export default class GameScene extends Scene {
     this.graphics.forEach((rect) => {
       rect.setVisible(true);
     });
-    this.dragDropText.setVisible(sellZoneVisible);
-    this.sellZoneGraphic.setVisible(sellZoneVisible);
+    this.dragDropText?.setVisible(sellZoneVisible);
+    this.sellZoneGraphic?.setVisible(sellZoneVisible);
   }
 
   removeRectangles() {
     this.graphics.forEach((rect) => {
       rect.setVisible(false);
     });
-    this.dragDropText.setVisible(false);
-    this.sellZoneGraphic.setVisible(false);
+    this.dragDropText?.setVisible(false);
+    this.sellZoneGraphic?.setVisible(false);
   }
 
   initializeDragAndDrop() {
@@ -372,7 +372,7 @@ export default class GameScene extends Scene {
           }));
         }
         // Item -> POKEMON(board zone) = EQUIP
-        else if(dropZone.name == 'board-zone' && !(this.room.state.phase == GamePhaseState.FIGHT && dropZone.getData('y') != 0)){
+        else if(dropZone.name == 'board-zone' && !(this.room?.state.phase == GamePhaseState.FIGHT && dropZone.getData('y') != 0)){
             document.getElementById('game')?.dispatchEvent(new CustomEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
               detail: {
                 x: dropZone.getData('x'),
@@ -383,7 +383,7 @@ export default class GameScene extends Scene {
           }
         // RETURN TO ORIGINAL SPOT
         else{
-          this.itemsContainer.updateItems();
+          this.itemsContainer?.updateItems();
           // gameObject.x = gameObject.input.dragStartX
           // gameObject.y = gameObject.input.dragStartY
 
@@ -404,7 +404,7 @@ export default class GameScene extends Scene {
         // find the resulting item
         for (const [key, value] of Object.entries(ItemRecipe)) {
           if ((value[0] == gameObject.name && value[1] == dropZone.name) || (value[0] == dropZone.name && value[1] == gameObject.name)) {
-            this.itemsContainer.sendToBack(dropZone)
+            this.itemsContainer?.sendToBack(dropZone)
             gameObject.showTempDetail(key)
             break;
           }

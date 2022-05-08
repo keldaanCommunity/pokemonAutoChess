@@ -1,7 +1,38 @@
 import {Dungeon, TerrainType, Mask} from '../types/Config';
-import Tileset from './tileset';
+import Tileset, { TilesetTiled } from './tileset';
 import Terrain from './terrain';
 import Masker from './masker';
+
+export type LayerTiled = {
+  data: number[],
+  height: number,
+  id: number,
+  name: string,
+  opacity: number,
+  type: string,
+  visible: boolean,
+  width: number,
+  x: number,
+  y: number
+}
+
+export type DesignTiled = {
+  compressionlevel: number,
+  height: number,
+  infinite: boolean,
+  layers: LayerTiled[],
+  nextlayerid: number,
+  nextobjectid: number,
+  orientation: string,
+  renderorder: string,
+  tiledversion: string,
+  tileheight: number,
+  tilesets: TilesetTiled[],
+  tilewidth: number,
+  type: string,
+  version: string,
+  width: number
+}
 
 export default class Design {
   id: Dungeon;

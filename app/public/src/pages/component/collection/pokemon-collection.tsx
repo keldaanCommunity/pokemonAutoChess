@@ -1,5 +1,5 @@
 import CSS from 'csstype';
-import React, { useState } from 'react';
+import React, { useState, ReactElement } from 'react';
 import { CDN_PORTRAIT_URL } from '../../../../../types';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import PokemonCarousel from './pokemon-carousel';
@@ -23,15 +23,15 @@ const buttonStyle: CSS.Properties = {
 
 export default function PokemonCollection(props: {toggleCollection :()=>void}){
     const metadata = tracker as unknown as { [key: string]: ITracker };
-    const [pokemon, setPokemon] =  useState<Pkm>(undefined);
+    const [pokemon, setPokemon] =  useState<Pkm | undefined>(undefined);
     const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection);
     let p: Pokemon;
-    let pConfig: IPokemonConfig;
+    let pConfig: IPokemonConfig | undefined;
     let pShinyPad = '';
-    let pMetadata;
+    let pMetadata: ITracker;
     let emotion: Emotion;
     const availableEmotions: Emotion[] = [];
-    let modalElement = null;
+    let modalElement: ReactElement | null = null;
     if(pokemon){
         p = PokemonFactory.createPokemonFromName(pokemon);
         pConfig = pokemonCollection.find(c=>c.id == p.index);

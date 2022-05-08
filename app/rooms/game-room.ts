@@ -81,7 +81,7 @@ export default class GameRoom extends Room<GameState> {
             'updateBoard': true,
             'updateItems': true
           };
-          client.send('DragDropFailed', errorInformation);
+          client.send(Transfer.DRAG_DROP_FAILED, errorInformation);
           console.log('drag drop error', error);
         }
       }
@@ -99,7 +99,7 @@ export default class GameRoom extends Room<GameState> {
               'updateBoard': true,
               'updateItems': true
             };
-            client.send('DragDropFailed', errorInformation);
+            client.send(Transfer.DRAG_DROP_FAILED, errorInformation);
             console.log('drag drop error', error);
           }
         }
@@ -117,7 +117,7 @@ export default class GameRoom extends Room<GameState> {
               'updateBoard': true,
               'updateItems': true
             };
-            client.send('DragDropFailed', errorInformation);
+            client.send(Transfer.DRAG_DROP_FAILED, errorInformation);
             console.log('drag drop error', error);
           }
         }
@@ -230,7 +230,7 @@ export default class GameRoom extends Room<GameState> {
           })
         } else {
           const dbrecord = this.transformToSimplePlayer(player);
-          player.exp = ExpPlace[player.rank - 1];
+          const exp = ExpPlace[player.rank - 1];
           let rank = player.rank;
 
           if (!this.state.gameFinished && player.life != 0) {
@@ -248,12 +248,12 @@ export default class GameRoom extends Room<GameState> {
               console.log(err);
             } else {
               const expThreshold = 1000;
-              if (usr.exp + player.exp >= expThreshold) {
+              if (usr.exp + exp >= expThreshold) {
                 usr.level += 1;
                 usr.booster += 1;
-                usr.exp = usr.exp + player.exp - expThreshold;
+                usr.exp = usr.exp + exp - expThreshold;
               } else {
-                usr.exp = usr.exp + player.exp;
+                usr.exp = usr.exp + exp;
               }
               if (rank == 1) {
                 usr.wins += 1;
@@ -293,7 +293,6 @@ export default class GameRoom extends Room<GameState> {
       rank: player.rank,
       avatar: player.avatar,
       pokemons: new Array<{name: string, avatar: string, items: Item[]}>(),
-      exp: player.exp,
       elo: player.elo
     };
 

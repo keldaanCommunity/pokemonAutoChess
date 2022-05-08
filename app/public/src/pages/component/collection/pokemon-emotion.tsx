@@ -1,9 +1,8 @@
 import React from 'react';
-import { Emotion, EmotionCost } from '../../../../../types';
+import { Emotion, EmotionCost, CDN_PORTRAIT_URL } from '../../../../../types';
 import ReactTooltip from 'react-tooltip';
 import { useAppDispatch } from '../../../hooks';
 import { buyEmotion, changeSelectedEmotion } from '../../../stores/NetworkStore';
-import {CDN_PORTRAIT_URL} from '../../../../../types';
 
 const cursorStyle={
     padding:'10px',

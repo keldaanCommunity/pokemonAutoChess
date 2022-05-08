@@ -12,7 +12,7 @@ const cursorStyle = {
     margin: '10px'
 }
 
-export default function PokemonCollectionItem(props: {name: Pkm, index: string, metadata: ITracker, config: IPokemonConfig, setPokemon:Dispatch<SetStateAction<Pkm>>}) {
+export default function PokemonCollectionItem(props: {name: Pkm, index: string, metadata: ITracker, config: IPokemonConfig | undefined, setPokemon:Dispatch<SetStateAction<Pkm|undefined>>}) {
     let emotion: Emotion;
     let shinyPad = '';
 

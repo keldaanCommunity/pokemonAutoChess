@@ -1,7 +1,8 @@
 import Board from './board';
-import {Schema, ArraySchema, MapSchema, type} from '@colyseus/schema';
+import {Schema, MapSchema, type} from '@colyseus/schema';
 import PokemonEntity from './pokemon-entity';
 import PokemonFactory from '../models/pokemon-factory';
+import {Pokemon} from '../models/colyseus-models/pokemon';
 import { Item } from '../types/enum/Item';
 import { Effect } from '../types/enum/Effect';
 import { AttackType, Climate, PokemonActionState } from '../types/enum/Game';
@@ -25,7 +26,7 @@ export default class Simulation extends Schema implements ISimulation{
   finished = false;
   flowerSpawn: boolean[]= [false, false];
 
-  initialize(blueTeam: MapSchema<IPokemon>, redTeam: MapSchema<IPokemon>, blueEffects: Effect[], redEffects: Effect[]) {
+  initialize(blueTeam: MapSchema<Pokemon>, redTeam: MapSchema<Pokemon>, blueEffects: Effect[], redEffects: Effect[]) {
     this.blueDpsMeter.forEach((dps, key) => {
       this.blueDpsMeter.delete(key);
     });

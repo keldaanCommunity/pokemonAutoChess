@@ -195,17 +195,18 @@ export class FlameChargeStrategy extends AttackStrategy{
           damage = 80;
         }
         const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
-    
-        const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
-        cells.forEach((cell)=>{
-          if (cell.value && cell.value != pokemon) {
-            cell.value.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon);
-          }
-        });
-    
-        board.swapValue(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
-        pokemon.positionX = farthestCoordinate.x;
-        pokemon.positionY = farthestCoordinate.y;
+        if(farthestCoordinate){
+          const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
+          cells.forEach((cell)=>{
+            if (cell.value && cell.value != pokemon) {
+              cell.value.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon);
+            }
+          });
+      
+          board.swapValue(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
+          pokemon.positionX = farthestCoordinate.x;
+          pokemon.positionY = farthestCoordinate.y;
+        }
     }
 }
 
@@ -280,9 +281,14 @@ export class TwistingNeitherStrategy extends AttackStrategy{
               cell.value.handleSpellDamage(80, board, AttackType.SPECIAL, pokemon);
             }
             const teleportationCell = board.getTeleportationCell(cell.value.positionX, cell.value.positionY);
-            board.swapValue(cell.value.positionX, cell.value.positionY, teleportationCell.row, teleportationCell.column);
-            cell.value.positionX = teleportationCell.row;
-            cell.value.positionY = teleportationCell.column;
+            if(teleportationCell){
+              board.swapValue(cell.value.positionX, cell.value.positionY, teleportationCell.row, teleportationCell.column);
+              cell.value.positionX = teleportationCell.row;
+              cell.value.positionY = teleportationCell.column;
+            }
+            else{
+              console.log('ERROR: unable to teleport pokemon');
+            }
           }
         });
     }
@@ -306,14 +312,14 @@ export class KingShieldStrategy extends AttackStrategy {
     }
     pokemon.status.triggerProtect(timer);
     const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board);
-    const x = farthestTarget.x;
-    const y = farthestTarget.y;
-    const oldX = pokemon.positionX;
-    const oldY = pokemon.positionY;
-
-    if (x !== undefined && y !== undefined) {
+    if(farthestTarget){
+      const x = farthestTarget.x;
+      const y = farthestTarget.y;
+      const oldX = pokemon.positionX;
+      const oldY = pokemon.positionY;
+  
       const tg = board.getValue(x, y);
-
+  
       if (tg) {
         tg.positionX = oldX;
         tg.positionY = oldY;
@@ -667,7 +673,7 @@ export class ShadowCloneStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target);
     const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
 
-    if (farthestCoordinate.x !== undefined && farthestCoordinate.y !== undefined) {
+    if (farthestCoordinate) {
       const clone = pokemon.simulation.addPokemonEntity(pokemon, farthestCoordinate.x, farthestCoordinate.y, pokemon.team);
       clone.life = pokemon.life;
     }
@@ -695,16 +701,18 @@ export class VoltSwitchStrategy extends AttackStrategy {
 
     const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
 
-    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
-    cells.forEach((cell)=>{
-      if (cell.value && cell.value != pokemon) {
-        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
-      }
-    });
-
-    board.swapValue(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
-    pokemon.positionX = farthestCoordinate.x;
-    pokemon.positionY = farthestCoordinate.y;
+    if(farthestCoordinate){
+      const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
+      cells.forEach((cell)=>{
+        if (cell.value && cell.value != pokemon) {
+          cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon);
+        }
+      });
+  
+      board.swapValue(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y);
+      pokemon.positionX = farthestCoordinate.x;
+      pokemon.positionY = farthestCoordinate.y;
+    }
   }
 }
 

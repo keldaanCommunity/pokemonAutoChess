@@ -17,6 +17,7 @@ import { Synergy } from './enum/Synergy'
 import HistoryItem from '../models/colyseus-models/history-item'
 import { Item } from './enum/Item'
 import { Pkm } from './enum/Pokemon'
+import { Pokemon } from '../models/colyseus-models/pokemon'
 
 
 export const CDN_PORTRAIT_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/';
@@ -77,7 +78,8 @@ export enum Transfer {
     BOOSTER_CONTENT = 'BOOSTER_CONTENT',
     PASTEBIN_URL = 'PASTEBIN_URL',
     USER = 'USER',
-    MESSAGES = 'MESSAGES'
+    MESSAGES = 'MESSAGES',
+    DRAG_DROP_FAILED = 'DRAG_DROP_FAILED'
 }
 
 export enum AttackSprite {
@@ -169,11 +171,20 @@ export interface IGameState {
     stageLevel: number
     mapName: string
 }
+
+export interface ISimplePlayer {
+    name: string
+    id: string
+    rank: number
+    avatar: string
+    pokemons: string[]
+}
+
 export interface IPlayer {
     id: string
     name: string
     avatar: string
-    board: MapSchema<IPokemon>
+    board: MapSchema<Pokemon>
     shop: Pkm[]
     simulation: ISimulation
     experienceManager: ExperienceManager
@@ -216,7 +227,7 @@ export interface IPokemon {
     maxMana: number
     skill: Ability
     items: SetSchema<Item>
-    fossilTimer: number
+    fossilTimer: number | undefined
     shiny: boolean
     emotion: Emotion
 }

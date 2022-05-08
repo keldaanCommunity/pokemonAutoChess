@@ -1,6 +1,6 @@
 import Player from '../../models/colyseus-models/player';
 import Shop from '../../models/shop';
-import Design from '../../core/design';
+import Design, { DesignTiled } from '../../core/design';
 import BotManager from '../../core/bot-manager';
 import {DungeonData, Dungeon} from '../../types/Config';
 import { GamePhaseState } from '../../types/enum/Game';
@@ -8,7 +8,7 @@ import {Schema, MapSchema, type} from '@colyseus/schema';
 
 export default class GameState extends Schema {
 
-  @type('string') afterGameId: string;
+  @type('string') afterGameId = '';
   @type('uint8') roundTime = 30;
   @type('uint8') phase = GamePhaseState.PICK;
   @type({map: Player}) players = new MapSchema<Player>();
@@ -17,11 +17,11 @@ export default class GameState extends Schema {
   time = 50000;
   botManager: BotManager = new BotManager();
   shop: Shop = new Shop();
-  elligibleToXP: boolean;
+  elligibleToXP = false;
   id: Dungeon;
   design: Design;
-  tilemap: any;
-  gameFinished: boolean;
+  tilemap: DesignTiled | undefined;
+  gameFinished = false;
 
   constructor() {
     super();

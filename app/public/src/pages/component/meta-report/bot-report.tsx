@@ -2,10 +2,7 @@ import { ApexOptions } from "apexcharts";
 import Chart from 'react-apexcharts';
 import { useAppSelector } from "../../../hooks";
 import React, { useState } from 'react';
-import { CDN_PORTRAIT_URL } from "../../../../../models/enum";
-import { BotDifficulty } from "../../../../../types/enum/Game";
-import { PkmIndex } from "../../../../../types/enum/Pokemon";
-import { Emotion } from "../../../../../types";
+import { CDN_PORTRAIT_URL } from "../../../../../types";
 import MultiRangeSlider from "multi-range-slider-react";
 
 const maxEloValue = 1600;
@@ -71,6 +68,9 @@ export default function BotReport(){
             formatter: function(val, timestamp) {
                 if(timestamp){
                     return formatDate(timestamp)
+                }
+                else{
+                    return ''
                 }
             }
             }

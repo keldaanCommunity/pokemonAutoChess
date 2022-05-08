@@ -10,7 +10,7 @@ import GameRoom from '../game-room';
 import { Client } from "colyseus";
 import {MapSchema} from '@colyseus/schema';
 import { GamePhaseState, Rarity } from '../../types/enum/Game';
-import {IDragDropMessage, IDragDropItemMessage, IDragDropCombineMessage, IClient, IPokemonEntity} from '../../types';
+import {IDragDropMessage, IDragDropItemMessage, IDragDropCombineMessage, IClient, IPokemonEntity, Transfer} from '../../types';
 import { Synergy } from '../../types/enum/Synergy';
 import {Pkm, PkmIndex} from '../../types/enum/Pokemon';
 import { Pokemon } from '../../models/colyseus-models/pokemon';
@@ -156,7 +156,7 @@ export class OnDragDropCommand extends Command<GameRoom, {
       }
 
       if (!success && client.send) {
-        client.send('DragDropFailed', message);
+        client.send(Transfer.DRAG_DROP_FAILED, message);
       }
       if (dittoReplaced) {
         this.room.updateEvolution(playerId);
@@ -194,7 +194,7 @@ export class OnDragDropCombineCommand extends Command<GameRoom, {
     
             //verify player has both items    
             if(!player.items.has(itemA) || !player.items.has(itemB)){
-                client.send('DragDropFailed', message);
+                client.send(Transfer.DRAG_DROP_FAILED, message);
                 return;
             }
             // check for two if both items are same
@@ -207,7 +207,7 @@ export class OnDragDropCombineCommand extends Command<GameRoom, {
                 })
     
                 if(count < 2){
-                client.send('DragDropFailed', message);
+                client.send(Transfer.DRAG_DROP_FAILED, message);
                 return;
                 }
             }
@@ -223,7 +223,7 @@ export class OnDragDropCombineCommand extends Command<GameRoom, {
             }
     
             if(!result){
-                client.send('DragDropFailed', message);
+                client.send(Transfer.DRAG_DROP_FAILED, message);
                 return;
             }
             else{
@@ -258,17 +258,17 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
             const item = detail.id;
 
             if (!player.items.has(item) && !detail.bypass) {
-                client.send('DragDropFailed', message);
+                client.send(Transfer.DRAG_DROP_FAILED, message);
                 return;
             }
 
             const x = parseInt(detail.x);
             const y = parseInt(detail.y);
 
-            const pokemon = player.getPokemonAt(x, y) as Pokemon;
+            const pokemon = player.getPokemonAt(x, y);
 
-            if (pokemon === null) {
-                client.send('DragDropFailed', message);
+            if (pokemon === undefined) {
+                client.send(Transfer.DRAG_DROP_FAILED, message);
                 return;
             }
             // check if full items
@@ -281,11 +281,11 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                     }
                 });
                 if (!includesBasicItem) {
-                    client.send('DragDropFailed', message);
+                    client.send(Transfer.DRAG_DROP_FAILED, message);
                     return;
                 }
                 } else {
-                client.send('DragDropFailed', message);
+                client.send(Transfer.DRAG_DROP_FAILED, message);
                 return;
                 }
             }
@@ -329,7 +329,7 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                     newItemPokemon = PokemonFactory.transformPokemon(pokemon, PokemonFactory.getRandomFossil(player.board));
                     break;
                     default:
-                    client.send('DragDropFailed', message);
+                    client.send(Transfer.DRAG_DROP_FAILED, message);
                     break;
                 }
                 break;
@@ -421,23 +421,23 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                 }
                 });
                 if (itemToCombine) {
-                (Object.keys(ItemRecipe) as Item[]).forEach((name) => {
-                    const recipe = ItemRecipe[name];
-                    if ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine)) {
-                    pokemon.items.delete(itemToCombine);
-                    player.items.delete(item);
+                  (Object.keys(ItemRecipe) as Item[]).forEach((name) => {
+                      const recipe = ItemRecipe[name];
+                      if (recipe && ((recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine))) {
+                      pokemon.items.delete(itemToCombine);
+                      player.items.delete(item);
 
-                    if (pokemon.items.has(name)) {
-                        player.items.add(name);
-                    } else {
-                        const detail: IDragDropItemMessage = {
-                        id: name,
-                        x: pokemon.positionX,
-                        y: pokemon.positionY,
-                        bypass: true
-                        };
-                        commands.push(new OnDragDropItemCommand().setPayload({client: client, detail: detail}));
-                    }
+                      if (pokemon.items.has(name)) {
+                          player.items.add(name);
+                      } else {
+                          const detail: IDragDropItemMessage = {
+                          id: name,
+                          x: pokemon.positionX,
+                          y: pokemon.positionY,
+                          bypass: true
+                          };
+                          commands.push(new OnDragDropItemCommand().setPayload({client: client, detail: detail}));
+                      }
                     }
                 });
                 } else {
@@ -446,7 +446,7 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                 }
             } else {
                 if (pokemon.items.has(item)) {
-                    client.send('DragDropFailed', message);
+                    client.send(Transfer.DRAG_DROP_FAILED, message);
                     return;
                 } 
                 else {

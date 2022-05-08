@@ -10,20 +10,22 @@ import {DataChange} from '@colyseus/schema';
 import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, IPlayer, IPokemon, IPokemonEntity, Transfer } from '../../../types';
 import PokemonEntity from '../../../core/pokemon-entity';
 import { Item } from '../../../types/enum/Item';
+import { DesignTiled } from '../../../core/design';
+import { Pkm } from '../../../types/enum/Pokemon';
 
 class GameContainer {
   room: Room<GameState>;
   div: HTMLDivElement;
-  game: Phaser.Game;
-  player: Player;
-  tilemap: any;
+  game: Phaser.Game | undefined;
+  player: Player | undefined;
+  tilemap: DesignTiled | undefined;
   uid: string;
-  constructor(div, uid, room) {
+  constructor(div: HTMLDivElement, uid: string, room: Room<GameState>) {
     this.room = room;
     this.div = div;
-    this.game = null;
-    this.player = null;
-    this.tilemap = null;
+    this.game = undefined;
+    this.player = undefined;
+    this.tilemap = undefined;
     this.uid = uid;
     this.initializeEvents();
   }
@@ -54,7 +56,7 @@ class GameContainer {
   }
 
   initializeEvents() {
-    this.room.onMessage('DragDropFailed', (message) => this.handleDragDropFailed(message));
+    this.room.onMessage(Transfer.DRAG_DROP_FAILED, (message) => this.handleDragDropFailed(message));
     this.room.onError((err) => console.log('room error', err));
   }
 
@@ -349,21 +351,21 @@ class GameContainer {
   handleBoardPokemonItemAdd(playerId: string, value: Item, pokemon: IPokemon) {
     if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene')) {
       const g = <GameScene> this.game.scene.getScene('gameScene');
-      g.board.addPokemonItem(playerId, value, pokemon);
+      g.board?.addPokemonItem(playerId, value, pokemon);
     }
   }
 
   handleBoardPokemonItemRemove(playerId: string, value: Item, pokemon: IPokemon) {
     if (this.game != null && playerId == this.uid && this.game.scene.getScene('gameScene')) {
       const g = <GameScene> this.game.scene.getScene('gameScene');
-      g.board.removePokemonItem(playerId, value, pokemon);
+      g.board?.removePokemonItem(playerId, value, pokemon);
     }
   }
 
   handleDragDropFailed(message: any) {
-    const g = <GameScene> this.game.scene.getScene('gameScene');
+    const g = <GameScene> this.game?.scene.getScene('gameScene');
 
-    if (message.updateBoard) {
+    if (g && message.updateBoard) {
       const tg = g.lastDragDropPokemon;
       if(tg){
         const coordinates = transformCoordinate(tg.positionX, tg.positionY);
@@ -372,16 +374,19 @@ class GameContainer {
       }
     }
 
-    if (message.updateItems) {
-      g.itemsContainer.updateItems();
+    if (g && message.updateItems) {
+      g.itemsContainer?.updateItems();
     }
   }
 
   onPlayerClick(id: string) {
     if(this.game && this.game.scene.getScene('gameScene')){
       const g = <GameScene> this.game.scene.getScene('gameScene');
-      g.board.setPlayer(this.room.state.players.get(id));
-      g.battle.setPlayer(this.room.state.players.get(id));
+      const player = this.room.state.players.get(id);
+      if(player){
+        g.board?.setPlayer(player);
+        g.battle?.setPlayer(player);
+      }
     }
   }
 
@@ -407,8 +412,7 @@ class GameContainer {
       id: player.id,
       rank: player.rank,
       avatar: player.avatar,
-      pokemons: [],
-      exp: player.exp
+      pokemons: new Array<string>()
     };
 
     if(player.board && player.board.size > 0){

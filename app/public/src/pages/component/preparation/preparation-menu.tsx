@@ -47,7 +47,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
         }
     }
 
-    let input: {ReactElement|null} = null;
+    let input: ReactElement|null = null;
     if(uid == ownerId){
         input = <div className="nes-field is-inline" style={{margin:'5px'}}>
         <input maxLength={30} type="text" id="inline_field" className="nes-input" placeholder={name} onChange={e=>{setInputValue(e.target.value)}}/>

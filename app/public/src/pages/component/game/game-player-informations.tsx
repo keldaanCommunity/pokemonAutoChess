@@ -42,7 +42,7 @@ export default function GamePlayerInformations(){
     const life = useAppSelector(state=>state.game.currentPlayerLife);
     const money = useAppSelector(state=>state.game.currentPlayerMoney);
 
-    let opponent: {null | Component} = null;
+    let opponent: null | ReactElement = null;
     if(opponentName != '' && opponentAvatar !=''){
         opponent = 
         <div style={{display:'flex'}}>
