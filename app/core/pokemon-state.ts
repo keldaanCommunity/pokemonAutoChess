@@ -68,7 +68,7 @@ export default class PokemonState {
           // console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
         }
 
-        if(pokemon.skill == Ability.WONDER_GUARD){
+        if(pokemon.skill == Ability.WONDER_GUARD && pokemon.shield == 0){
           reducedDamage = 1;
         }
 
