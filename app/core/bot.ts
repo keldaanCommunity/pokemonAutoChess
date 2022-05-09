@@ -10,7 +10,7 @@ export default class Bot {
   player: Player;
   step: number;
   progress: number;
-  scenario: IBot;
+  scenario: IBot | undefined;
 
   constructor(player: Player) {
     this.player = player;
@@ -18,8 +18,13 @@ export default class Bot {
     this.progress = 0;
 
     BOT.findOne({'avatar': player.avatar}, ['steps'], null, (err, bot)=>{
-      this.scenario = bot;
-      this.updatePlayerTeam();
+      if(bot){
+        this.scenario = bot;
+        this.updatePlayerTeam();
+      }
+      else{
+        console.log('error, bot not found');
+      }
     });
   }
 
@@ -45,71 +50,73 @@ export default class Bot {
       this.player.board.delete(key);
     });
 
-    const stepTeam = this.scenario.steps[this.step];
-    for (let i = 0; i < stepTeam.board.length; i++) {
-      const pkm = PokemonFactory.createPokemonFromName(stepTeam.board[i].name);
-      pkm.positionX = stepTeam.board[i].x;
-      pkm.positionY = stepTeam.board[i].y;
-      if (stepTeam.board[i].items) {
-        stepTeam.board[i].items.forEach((item)=>{
-          if (!pkm.items.has(item)) {
-              switch (item) {
-                case Item.WATER_STONE:
-                    if(!pkm.types.includes(Synergy.WATER)){
-                        pkm.types.push(Synergy.WATER);
-                    }
-                    break;
-                case Item.FIRE_STONE:
-                    if(!pkm.types.includes(Synergy.FIRE)){
-                        pkm.types.push(Synergy.FIRE);
+    if(this.scenario){
+      const stepTeam = this.scenario.steps[this.step];
+      for (let i = 0; i < stepTeam.board.length; i++) {
+        const pkm = PokemonFactory.createPokemonFromName(stepTeam.board[i].name);
+        pkm.positionX = stepTeam.board[i].x;
+        pkm.positionY = stepTeam.board[i].y;
+        if (stepTeam.board[i].items) {
+          stepTeam.board[i].items.forEach((item)=>{
+            if (!pkm.items.has(item)) {
+                switch (item) {
+                  case Item.WATER_STONE:
+                      if(!pkm.types.includes(Synergy.WATER)){
+                          pkm.types.push(Synergy.WATER);
                       }
+                      break;
+                  case Item.FIRE_STONE:
+                      if(!pkm.types.includes(Synergy.FIRE)){
+                          pkm.types.push(Synergy.FIRE);
+                        }
+                      break;
+                  case Item.THUNDER_STONE:
+                      if(!pkm.types.includes(Synergy.ELECTRIC)){
+                          pkm.types.push(Synergy.ELECTRIC);
+                        }
+                      break;
+                  case Item.DUSK_STONE:
+                      if(!pkm.types.includes(Synergy.DARK)){
+                          pkm.types.push(Synergy.DARK);
+                        }
+                      break;
+                  case Item.MOON_STONE:
+                      if(!pkm.types.includes(Synergy.FAIRY)){
+                          pkm.types.push(Synergy.FAIRY);
+                        }
+                      break;
+                  case Item.LEAF_STONE:
+                      if(!pkm.types.includes(Synergy.GRASS)){
+                          pkm.types.push(Synergy.GRASS);
+                        }
+                      break;
+                  case Item.DAWN_STONE:
+                      if(!pkm.types.includes(Synergy.PSYCHIC)){
+                          pkm.types.push(Synergy.PSYCHIC);
+                        }
+                      break;
+                  case Item.ICY_ROCK:
+                      if(!pkm.types.includes(Synergy.ICE)){
+                          pkm.types.push(Synergy.ICE);
+                        }
+                      break;
+                  case Item.OLD_AMBER:
+                      if(!pkm.types.includes(Synergy.FOSSIL)){
+                          pkm.types.push(Synergy.FOSSIL);
+                        }
+                      break;
+                  default:
                     break;
-                case Item.THUNDER_STONE:
-                    if(!pkm.types.includes(Synergy.ELECTRIC)){
-                        pkm.types.push(Synergy.ELECTRIC);
-                      }
-                    break;
-                case Item.DUSK_STONE:
-                    if(!pkm.types.includes(Synergy.DARK)){
-                        pkm.types.push(Synergy.DARK);
-                      }
-                    break;
-                case Item.MOON_STONE:
-                    if(!pkm.types.includes(Synergy.FAIRY)){
-                        pkm.types.push(Synergy.FAIRY);
-                      }
-                    break;
-                case Item.LEAF_STONE:
-                    if(!pkm.types.includes(Synergy.GRASS)){
-                        pkm.types.push(Synergy.GRASS);
-                      }
-                    break;
-                case Item.DAWN_STONE:
-                    if(!pkm.types.includes(Synergy.PSYCHIC)){
-                        pkm.types.push(Synergy.PSYCHIC);
-                      }
-                    break;
-                case Item.ICY_ROCK:
-                    if(!pkm.types.includes(Synergy.ICE)){
-                        pkm.types.push(Synergy.ICE);
-                      }
-                    break;
-                case Item.OLD_AMBER:
-                    if(!pkm.types.includes(Synergy.FOSSIL)){
-                        pkm.types.push(Synergy.FOSSIL);
-                      }
-                    break;
-                default:
-                  break;
-              }
-            pkm.items.add(item);
-          }
-        });
+                }
+              pkm.items.add(item);
+            }
+          });
+        }
+        this.player.board.set(pkm.id, pkm);
       }
-      this.player.board.set(pkm.id, pkm);
+  
+      this.player.synergies.update(this.player.board);
+      this.player.effects.update(this.player.synergies);
     }
-
-    this.player.synergies.update(this.player.board);
-    this.player.effects.update(this.player.synergies);
   }
 }

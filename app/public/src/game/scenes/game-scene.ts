@@ -1,4 +1,3 @@
-/* eslint-disable no-invalid-this */
 import {Scene, GameObjects} from 'phaser';
 import AnimationManager from '../animation-manager';
 import BoardManager from '../components/board-manager';
@@ -6,7 +5,7 @@ import BattleManager from '../components/battle-manager';
 import WeatherManager from '../components/weather-manager';
 import ItemsContainer from '../components/items-container';
 import Pokemon from '../components/pokemon';
-import { ITEM_RECIPE } from '../../../../types/Config';
+import { ItemRecipe } from '../../../../types/Config';
 import firebase from 'firebase/compat/app';
 import {transformCoordinate} from '../../pages/utils/utils';
 import { Room } from "colyseus.js";
@@ -15,30 +14,29 @@ import ItemContainer from '../components/item-container';
 import { GamePhaseState } from '../../../../types/enum/Game';
 import indexList from '../../../dist/client/assets/pokemons/indexList.json';
 import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer } from '../../../../types';
+import { DesignTiled } from '../../../../core/design';
+
 export default class GameScene extends Scene {
-  tilemap: any;
-  room: Room<GameState>;
-  uid: string;
-  textStyle: { fontSize: string; fontFamily: string; color: string; align: string; };
-  bigTextStyle: { fontSize: string; fontFamily: string; color: string; align: string; stroke: string; strokeThickness: number; };
-  map: Phaser.Tilemaps.Tilemap;
-  battleGroup: GameObjects.Group;
-  animationManager: AnimationManager;
-  itemsContainer: ItemsContainer;
-  board: BoardManager;
-  battle: BattleManager;
-  weatherManager: WeatherManager;
-  pokemon: Pokemon;
-  transitionImage: GameObjects.Image;
-  transitionScreen: GameObjects.Container;
-  music: Phaser.Sound.BaseSound;
-  targetPokemon: Pokemon;
-  graphics: Phaser.GameObjects.Graphics[];
-  dragDropText: Phaser.GameObjects.Text;
-  sellZoneGraphic: Phaser.GameObjects.Graphics;
-  zones: Phaser.GameObjects.Zone[];
-  lastDragDropPokemon: Pokemon;
-  lastPokemonDetail: Pokemon;
+  tilemap: DesignTiled | undefined;
+  room: Room<GameState> | undefined;
+  uid: string | undefined;
+  textStyle: { fontSize: string; fontFamily: string; color: string; align: string; } | undefined;
+  bigTextStyle: { fontSize: string; fontFamily: string; color: string; align: string; stroke: string; strokeThickness: number; } | undefined;
+  map: Phaser.Tilemaps.Tilemap | undefined;
+  battleGroup: GameObjects.Group | undefined;
+  animationManager: AnimationManager | undefined;
+  itemsContainer: ItemsContainer | undefined;
+  board: BoardManager | undefined;
+  battle: BattleManager | undefined;
+  weatherManager: WeatherManager | undefined;
+  music: Phaser.Sound.BaseSound | undefined;
+  targetPokemon: Pokemon | undefined;
+  graphics: Phaser.GameObjects.Graphics[] = [];
+  dragDropText: Phaser.GameObjects.Text | undefined;
+  sellZoneGraphic: Phaser.GameObjects.Graphics | undefined;
+  zones: Phaser.GameObjects.Zone[] = [];
+  lastDragDropPokemon: Pokemon | undefined;
+  lastPokemonDetail: Pokemon | undefined;
 
   constructor() {
     super({
@@ -50,7 +48,7 @@ export default class GameScene extends Scene {
   init(data) {
     this.tilemap = data.tilemap;
     this.room = data.room;
-    this.uid = firebase.auth().currentUser.uid;
+    this.uid = firebase.auth().currentUser?.uid;
   }
 
   preload() {
@@ -116,9 +114,11 @@ export default class GameScene extends Scene {
     });
 
     // console.log(this.tilemap);
-    this.load.audio('sound', [`https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChessMusic/main/music/${this.tilemap.tilesets[0].name}.mp3`]);
-    this.load.image('tiles', `/assets/tilesets/${this.tilemap.tilesets[0].name}.png`);
-    this.load.tilemapTiledJSON('map', this.tilemap);
+    if(this.tilemap){
+      this.load.audio('sound', [`https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChessMusic/main/music/${this.tilemap.tilesets[0].name}.mp3`]);
+      this.load.image('tiles', `/assets/tilesets/${this.tilemap.tilesets[0].name}.png`);
+      this.load.tilemapTiledJSON('map', this.tilemap);
+    }
     this.load.image('rain', '/assets/ui/rain.png');
     this.load.image('sand', '/assets/ui/sand.png');
     this.load.image('sun', '/assets/ui/sun.png');
@@ -163,38 +163,40 @@ export default class GameScene extends Scene {
   }
 
   create() {
-    this.textStyle = {
-      fontSize: '35px',
-      fontFamily: '\'Press Start 2P\'',
-      color: 'black',
-      align: 'center'
-    };
-
-    this.bigTextStyle = {
-      fontSize: '80px',
-      fontFamily: '\'Press Start 2P\'',
-      color: 'white',
-      align: 'center',
-      stroke: '#000',
-      strokeThickness: 3
-    };
-    this.input.mouse.disableContextMenu();
-
-    this.registerKeys();
-
-    this.input.dragDistanceThreshold = 1;
-    this.map = this.make.tilemap({key: 'map'});
-    const tileset = this.map.addTilesetImage(this.tilemap.tilesets[0].name, 'tiles', 24, 24, 1, 1);
-    this.map.createLayer('World', tileset, 0, 0).setScale(2,2);
-    this.initializeDragAndDrop();
-    this.battleGroup = this.add.group();
-    this.animationManager = new AnimationManager(this);
-    this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].items, 24*24 + 10, 5*24 + 10, true);
-    this.board = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
-    this.battle = new BattleManager(this, this.battleGroup, this.room.state.players[this.uid], this.animationManager);
-    this.weatherManager = new WeatherManager(this);
-    this.music = this.sound.add('sound', {loop: true});
-    this.music.play('',{volume: 0.3, loop: true});
+    if(this.uid && this.tilemap && this.room){
+      this.textStyle = {
+        fontSize: '35px',
+        fontFamily: '\'Press Start 2P\'',
+        color: 'black',
+        align: 'center'
+      };
+  
+      this.bigTextStyle = {
+        fontSize: '80px',
+        fontFamily: '\'Press Start 2P\'',
+        color: 'white',
+        align: 'center',
+        stroke: '#000',
+        strokeThickness: 3
+      };
+      this.input.mouse.disableContextMenu();
+  
+      this.registerKeys();
+  
+      this.input.dragDistanceThreshold = 1;
+      this.map = this.make.tilemap({key: 'map'});
+      const tileset = this.map.addTilesetImage(this.tilemap.tilesets[0].name, 'tiles', 24, 24, 1, 1);
+      this.map.createLayer('World', tileset, 0, 0).setScale(2,2);
+      this.initializeDragAndDrop();
+      this.battleGroup = this.add.group();
+      this.animationManager = new AnimationManager(this);
+      this.itemsContainer = new ItemsContainer(this, this.room.state.players[this.uid].items, 24*24 + 10, 5*24 + 10, true);
+      this.board = new BoardManager(this, this.room.state.players[this.uid], this.animationManager, this.uid);
+      this.battle = new BattleManager(this, this.battleGroup, this.room.state.players[this.uid], this.animationManager);
+      this.weatherManager = new WeatherManager(this);
+      this.music = this.sound.add('sound', {loop: true});
+      this.music.play('',{volume: 0.3, loop: true});
+    }
   }
 
   registerKeys() {
@@ -212,31 +214,33 @@ export default class GameScene extends Scene {
   }
 
   refreshShop() {
-    this.room.send(Transfer.REFRESH);
+    this.room?.send(Transfer.REFRESH);
   }
 
   buyExperience() {
-    this.room.send(Transfer.LEVEL_UP);
+    this.room?.send(Transfer.LEVEL_UP);
   }
 
   sellPokemon() {
     if (!this.targetPokemon || !this.targetPokemon.scene || !this.targetPokemon.input.draggable) {
       return;
     }
-
-    document.getElementById('game').dispatchEvent(new CustomEvent('sell-drop', {
-      detail: {
-        'pokemonId': this.targetPokemon.id
-      }
-    }));
+    const d = document.getElementById('game');
+    if(d){
+      d.dispatchEvent(new CustomEvent('sell-drop', {
+        detail: {
+          'pokemonId': this.targetPokemon.id
+        }
+      }));
+    }
   }
 
   updatePhase() {
-    this.targetPokemon = null;
-    if (this.room.state.phase == GamePhaseState.FIGHT) {
-      this.board.battleMode();
+    this.targetPokemon = undefined;
+    if (this.room?.state.phase == GamePhaseState.FIGHT) {
+      this.board?.battleMode();
     } else {
-      this.board.pickMode();
+      this.board?.pickMode();
     }
   }
 
@@ -244,16 +248,16 @@ export default class GameScene extends Scene {
     this.graphics.forEach((rect) => {
       rect.setVisible(true);
     });
-    this.dragDropText.setVisible(sellZoneVisible);
-    this.sellZoneGraphic.setVisible(sellZoneVisible);
+    this.dragDropText?.setVisible(sellZoneVisible);
+    this.sellZoneGraphic?.setVisible(sellZoneVisible);
   }
 
   removeRectangles() {
     this.graphics.forEach((rect) => {
       rect.setVisible(false);
     });
-    this.dragDropText.setVisible(false);
-    this.sellZoneGraphic.setVisible(false);
+    this.dragDropText?.setVisible(false);
+    this.sellZoneGraphic?.setVisible(false);
   }
 
   initializeDragAndDrop() {
@@ -311,7 +315,7 @@ export default class GameScene extends Scene {
         this.targetPokemon = gameObject;
       }
       else{
-        this.targetPokemon = null;
+        this.targetPokemon = undefined;
       }
     });
 
@@ -333,7 +337,8 @@ export default class GameScene extends Scene {
       if(gameObject instanceof Pokemon){
         // POKEMON -> BOARD-ZONE = PLACE POKEMON
         if(dropZone.name == 'board-zone'){
-          document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
+
+          document.getElementById('game')?.dispatchEvent(new CustomEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
             detail: {
               x: dropZone.getData('x'),
               y: dropZone.getData('y'),
@@ -344,7 +349,7 @@ export default class GameScene extends Scene {
         }
         // POKEMON -> SELL-ZONE = SELL POKEMON
         else if(dropZone.name == 'sell-zone'){
-          document.getElementById('game').dispatchEvent(new CustomEvent(Transfer.SELL_DROP, {
+          document.getElementById('game')?.dispatchEvent(new CustomEvent(Transfer.SELL_DROP, {
             detail: {
               pokemonId: gameObject.id
             }
@@ -359,7 +364,7 @@ export default class GameScene extends Scene {
       else if(gameObject instanceof ItemContainer){
         // Item -> Item = COMBINE
         if(dropZone instanceof ItemContainer){
-          document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropCombineMessage>(Transfer.DRAG_DROP_COMBINE, {
+          document.getElementById('game')?.dispatchEvent(new CustomEvent<IDragDropCombineMessage>(Transfer.DRAG_DROP_COMBINE, {
             detail: {
               itemA: dropZone.name,
               itemB: gameObject.name
@@ -367,8 +372,8 @@ export default class GameScene extends Scene {
           }));
         }
         // Item -> POKEMON(board zone) = EQUIP
-        else if(dropZone.name == 'board-zone' && !(this.room.state.phase == GamePhaseState.FIGHT && dropZone.getData('y') != 0)){
-            document.getElementById('game').dispatchEvent(new CustomEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
+        else if(dropZone.name == 'board-zone' && !(this.room?.state.phase == GamePhaseState.FIGHT && dropZone.getData('y') != 0)){
+            document.getElementById('game')?.dispatchEvent(new CustomEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
               detail: {
                 x: dropZone.getData('x'),
                 y: dropZone.getData('y'),
@@ -378,7 +383,7 @@ export default class GameScene extends Scene {
           }
         // RETURN TO ORIGINAL SPOT
         else{
-          this.itemsContainer.updateItems();
+          this.itemsContainer?.updateItems();
           // gameObject.x = gameObject.input.dragStartX
           // gameObject.y = gameObject.input.dragStartY
 
@@ -397,9 +402,9 @@ export default class GameScene extends Scene {
     this.input.on('dragenter', (pointer, gameObject, dropZone) => {
       if (gameObject instanceof ItemContainer && dropZone instanceof ItemContainer) {
         // find the resulting item
-        for (const [key, value] of Object.entries(ITEM_RECIPE)) {
+        for (const [key, value] of Object.entries(ItemRecipe)) {
           if ((value[0] == gameObject.name && value[1] == dropZone.name) || (value[0] == dropZone.name && value[1] == gameObject.name)) {
-            this.itemsContainer.sendToBack(dropZone)
+            this.itemsContainer?.sendToBack(dropZone)
             gameObject.showTempDetail(key)
             break;
           }
@@ -417,8 +422,8 @@ export default class GameScene extends Scene {
 
 
 // if (item && item.name && item != gameObject) {
-//   Object.keys(ITEM_RECIPE).forEach((recipeName)=>{
-//     const recipe = ITEM_RECIPE[recipeName];
+//   Object.keys(ItemRecipe).forEach((recipeName)=>{
+//     const recipe = ItemRecipe[recipeName];
 //     if ((recipe[0] == item.name && recipe[1] == gameObject.name) || (recipe[1] == item.name && recipe[0] == gameObject.name)) {
 //       item.detailDisabled = true;
 //       item.detail.setScale(0, 0);

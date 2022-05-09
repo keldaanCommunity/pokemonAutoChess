@@ -149,7 +149,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
       return;
     }
 
-    const userArray = [];
+    const userArray = new Array<string>();
 
     this.state.users.forEach((value: GameUser, key: string) => {
       if (value.isBot) {
@@ -212,7 +212,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
 
 
 export class OnRemoveBotCommand extends Command<PreparationRoom, {
-  target: string
+  target: string | undefined
   }> {
   execute({target}) {
     console.log(target);

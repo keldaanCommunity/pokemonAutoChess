@@ -7,8 +7,8 @@ import { Synergy } from '../types/enum/Synergy';
 import { Pkm, PkmFamily } from '../types/enum/Pokemon';
 
 export default class PokemonFactory {
-  static getNeutralPokemonsByLevelStage(level: number): MapSchema<IPokemon> {
-    const pokemons = new MapSchema<IPokemon>();
+  static getNeutralPokemonsByLevelStage(level: number): MapSchema<Pokemon> {
+    const pokemons = new MapSchema<Pokemon>();
     switch (level) {
       case 1:{
         const magikarp1 = PokemonFactory.createPokemonFromName(Pkm.MAGIKARP);
@@ -985,15 +985,15 @@ export default class PokemonFactory {
       return pokemon.index;
   }
 
-  static getRandomFossil(board: MapSchema<IPokemon>) {
-    const currentFossils = [];
+  static getRandomFossil(board: MapSchema<Pokemon>) {
+    const currentFossils = new Array<Pkm>();
     board.forEach( (p) =>{
       if (p.types.includes(Synergy.FOSSIL)) {
         currentFossils.push(p.name);
       }
     });
-    const possibleFossils = [];
-    PRECOMPUTED_TYPE_POKEMONS[Synergy.FOSSIL].pokemons.forEach((p)=>{
+    const possibleFossils = new Array<Pkm>();
+    (PRECOMPUTED_TYPE_POKEMONS[Synergy.FOSSIL].pokemons as Pkm[]).forEach((p)=>{
       if (!currentFossils.includes(p)) {
         possibleFossils.push(p);
       }

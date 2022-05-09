@@ -43,7 +43,7 @@ right:'0px'
 export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
   const dispatch = useAppDispatch();
   const [step, setStep] = useState<number>(0);
-  const [copyStep, setCopyStep] = useState<IStep>(undefined);
+  const [copyStep, setCopyStep] = useState<IStep | undefined>(undefined);
   const [bot, setBot] = useState<IBot>({
     steps: [
       {
@@ -184,14 +184,20 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     (Object.keys(Synergy) as Synergy[]).forEach(s=>{
       newSynergies.set(s, 0);
     });
-    const pokemonNames = [];
+    const pokemonNames = new Array<Pkm>();
     bot.steps[i].board.forEach(pkm=>{
       const family = PkmFamily[pkm.name];
       const pkmTypes = PokemonFactory.createPokemonFromName(pkm.name).types;
       if (!pokemonNames.includes(family)) {
         pokemonNames.push(family);
-        pkmTypes.forEach( (type) => {
-          newSynergies.set(type, newSynergies.get(type) + 1);
+        pkmTypes.forEach( (type: Synergy) => {
+          const v = newSynergies.get(type);
+          if(v){
+            newSynergies.set(type, v + 1);
+          }
+          else{
+            newSynergies.set(type, 1);
+          }
         });
       }
     });

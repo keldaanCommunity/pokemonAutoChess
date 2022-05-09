@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import {ITracker} from '../../../../../types/ITracker';
 import {IPokemonConfig} from '../../../../../models/mongo-models/user-metadata';
 import { Emotion } from '../../../../../types';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import { Pkm } from '../../../../../types/enum/Pokemon';
 
 const cursorStyle = {
@@ -12,7 +12,7 @@ const cursorStyle = {
     margin: '10px'
 }
 
-export default function PokemonCollectionItem(props: {name: Pkm, index: string, metadata: ITracker, config: IPokemonConfig, setPokemon:Dispatch<SetStateAction<Pkm>>}) {
+export default function PokemonCollectionItem(props: {name: Pkm, index: string, metadata: ITracker, config: IPokemonConfig | undefined, setPokemon:Dispatch<SetStateAction<Pkm|undefined>>}) {
     let emotion: Emotion;
     let shinyPad = '';
 

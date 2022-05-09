@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../../hooks';
 import { searchName } from '../../../stores/NetworkStore';
 import { setTabIndex } from '../../../stores/LobbyStore';
 import { IMessage } from '../../../../../types';
-import {CDN_PORTRAIT_URL} from '../../../../../models/enum';
+import {CDN_PORTRAIT_URL} from '../../../../../types';
 
 export default function ChatMessage(props: {message: IMessage}) {
     const dispatch = useAppDispatch();

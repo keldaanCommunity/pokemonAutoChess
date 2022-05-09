@@ -1,6 +1,6 @@
 import CSS from 'csstype';
-import React, { useState } from 'react';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import React, { useState, ReactElement } from 'react';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import PokemonCarousel from './pokemon-carousel';
 import Modal from 'react-bootstrap/esm/Modal';
@@ -23,15 +23,15 @@ const buttonStyle: CSS.Properties = {
 
 export default function PokemonCollection(props: {toggleCollection :()=>void}){
     const metadata = tracker as unknown as { [key: string]: ITracker };
-    const [pokemon, setPokemon] =  useState<Pkm>(undefined);
+    const [pokemon, setPokemon] =  useState<Pkm | undefined>(undefined);
     const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection);
     let p: Pokemon;
-    let pConfig: IPokemonConfig;
+    let pConfig: IPokemonConfig | undefined;
     let pShinyPad = '';
-    let pMetadata;
+    let pMetadata: ITracker | undefined = undefined;
     let emotion: Emotion;
     const availableEmotions: Emotion[] = [];
-    let modalElement = null;
+    let modalElement: ReactElement | null = null;
     if(pokemon){
         p = PokemonFactory.createPokemonFromName(pokemon);
         pConfig = pokemonCollection.find(c=>c.id == p.index);
@@ -50,12 +50,15 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
         else{
             emotion = Emotion.NORMAL;
         }
-        Object.keys(pMetadata.portrait_files).forEach(k=>{
-            const possibleEmotion = k as Emotion;
-            if(Object.values(Emotion).includes(possibleEmotion)){
-                availableEmotions.push(possibleEmotion);
-            }
-        });
+        if(pMetadata){
+            Object.keys(pMetadata.portrait_files).forEach(k=>{
+                const possibleEmotion = k as Emotion;
+                if(Object.values(Emotion).includes(possibleEmotion)){
+                    availableEmotions.push(possibleEmotion);
+                }
+            });
+        }
+
         modalElement = <Modal show={pokemon !== undefined} onHide={()=>{setPokemon(undefined)}} dialogClassName="modalClass">
         <Modal.Header>
             <Modal.Title>

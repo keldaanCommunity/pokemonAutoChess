@@ -25,8 +25,10 @@ export default function Synergies(props:{synergies: [string, number][]}) {
         return <div style={style} className='nes-container hidden-scrollable'>
             <h5 style={{padding:'10px', textAlign: 'center'}}>Synergies</h5>
         {Object.keys(Synergy).sort((a,b)=>{
-                const sa = props.synergies.find(e=>e[0] == a);
-                const sb = props.synergies.find(e=>e[0] == b);
+                const fa = props.synergies.find(e=>e[0] == a);
+                const fb = props.synergies.find(e=>e[0] == b);
+                const sa = fa ? fa : 0;
+                const sb = fb ? fb : 0;
                 if(sa[1] == sb[1]){
                     if(sa[1] >= TypeTrigger[a][0]){
                         return -1;
@@ -42,7 +44,7 @@ export default function Synergies(props:{synergies: [string, number][]}) {
             // console.log(type);
             const s = props.synergies.find(e=>e[0] == type);
             // console.log(s);
-            if(s[1] > 0){
+            if(s &&  s[1] > 0){
                 return <SynergyComponent key={type} type={type as Synergy} isFirst={index==0} value={s[1]}/>;
             }
             else{

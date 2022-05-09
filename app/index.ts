@@ -17,7 +17,7 @@ admin.initializeApp({
   credential: admin.credential.cert({
     projectId: process.env.PROJECT_ID,
     clientEmail: process.env.CLIENT_EMAIL,
-    privateKey: process.env.PRIVATE_KEY.replace(/\\n/g, '\n')
+    privateKey: process.env.PRIVATE_KEY?.replace(/\\n/g, '\n')
   })
 });
 
@@ -76,7 +76,7 @@ app.get('/after', (req, res) => {
 const basicAuthMiddleware = basicAuth({
   // list of users and passwords
   users: {
-    'admin': process.env.ADMIN_PASSWORD
+    'admin': process.env.ADMIN_PASSWORD? process.env.ADMIN_PASSWORD: 'Default Admin Password'
   },
   challenge: true
 });

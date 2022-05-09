@@ -1,6 +1,6 @@
 import {Schema, type} from '@colyseus/schema';
 import { IExperienceManager } from '../../types';
-import { EXP_TABLE } from '../enum';
+import { ExpTable } from '../../types/Config';
 export default class ExperienceManager extends Schema implements IExperienceManager{
 
   @type('uint8') level: number;
@@ -12,7 +12,7 @@ export default class ExperienceManager extends Schema implements IExperienceMana
     super();
     this.level = 2;
     this.experience = 0;
-    this.expNeeded = EXP_TABLE[2];
+    this.expNeeded = ExpTable[2];
     this.maxLevel = 9;
   }
 
@@ -23,14 +23,14 @@ export default class ExperienceManager extends Schema implements IExperienceMana
   addExperience(quantity: number) {
     let expToAdd = quantity;
     while (this.checkForLevelUp(expToAdd)) {
-      expToAdd -= EXP_TABLE[this.level];
+      expToAdd -= ExpTable[this.level];
       this.level += 1;
-      this.expNeeded = EXP_TABLE[this.level];
+      this.expNeeded = ExpTable[this.level];
     }
   }
 
   checkForLevelUp(quantity: number) {
-    if (this.experience + quantity >= EXP_TABLE[this.level] && this.level < this.maxLevel) {
+    if (this.experience + quantity >= ExpTable[this.level] && this.level < this.maxLevel) {
       return true;
     } else {
       this.experience += quantity;

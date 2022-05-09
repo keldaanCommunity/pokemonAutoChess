@@ -1,13 +1,19 @@
 import { ApexOptions } from 'apexcharts';
 import React, { useState } from 'react';
 import Chart from 'react-apexcharts';
-import {CDN_PORTRAIT_URL} from '../../../../../models/enum';
+import {CDN_PORTRAIT_URL} from '../../../../../types';
 import { IMeta } from '../../../../../models/mongo-models/meta';
 import { Emotion } from '../../../../../types';
 import { PkmIndex } from '../../../../../types/enum/Pokemon';
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+type xyz = {
+    x: number,
+    y: number,
+    z: number
 }
 
 export default function Discover(props:{meta: IMeta[]}){
@@ -52,9 +58,9 @@ export default function Discover(props:{meta: IMeta[]}){
         }
     }
 
-    const series = [];
+    const series = new Array<{name: string, data: xyz[]}>();
     props.meta.forEach(team=>{
-        const data = [];
+        const data = new Array<xyz>();
         team.teams.forEach(t=>{
             data.push({
                 x: t.x,

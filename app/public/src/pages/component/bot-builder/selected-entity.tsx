@@ -1,10 +1,11 @@
 import React from 'react';
-import {RARITY_COLOR, CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import {CDN_PORTRAIT_URL } from '../../../../../types';
 import { Item } from '../../../../../types/enum/Item';
 import {ItemDescription, ItemName} from '../../../../../types/strings/Item';
 import {Emotion} from '../../../../../types';
 import {Pkm} from '../../../../../types/enum/Pokemon';
 import PokemonFactory from '../../../../../models/pokemon-factory';
+import {RarityColor} from '../../../../../types/Config';
 import CSS from 'csstype';
 
 const entityStyle: CSS.Properties = {
@@ -42,7 +43,7 @@ export default function SelectedEntity(props: {entity: Item | Pkm}) {
                 <img style={imgStyle} src={`${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>
                 <h3>{pokemon.name}</h3>
             </div>
-            <p style={{color:RARITY_COLOR[pokemon.rarity]}}>rarity:{pokemon.rarity}</p>
+            <p style={{color:RarityColor[pokemon.rarity]}}>rarity:{pokemon.rarity}</p>
             <div>
                 types:{pokemon.types.map(type=>{
                     return <img key={'img'+type} src={'assets/types/'+type+'.png'}/>

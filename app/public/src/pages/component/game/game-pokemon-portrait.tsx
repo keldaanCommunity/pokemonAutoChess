@@ -1,11 +1,12 @@
 import React from 'react';
 import {Pokemon} from '../../../../../models/colyseus-models/pokemon';
-import { COST, CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import { useAppDispatch } from '../../../hooks';
 import { shopClick } from '../../../stores/NetworkStore';
 import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata';
 import { Emotion } from '../../../../../types';
 import { Rarity } from '../../../../../types/enum/Game';
+import {PkmCost} from '../../../../../types/Config';
 
 const COLOR_TYPE = Object.freeze({
     [Rarity.COMMON] : "rgba(104, 109, 125, 0.6)",
@@ -14,10 +15,10 @@ const COLOR_TYPE = Object.freeze({
     [Rarity.EPIC] : "rgba(123, 70, 156,0.6)",
     [Rarity.LEGENDARY] : "rgba(166, 128, 46, 0.6)",
     [Rarity.MYTHICAL] : "rgba(255, 222, 255, 0.6)",
-    [Rarity.SUMMON] : "#rgba(153, 31, 31, 0.6)"
+    [Rarity.SUMMON] : "rgba(153, 31, 31, 0.6)"
   });
 
-export default function GamePokemonPortrait(props: {index: number, pokemon: Pokemon, pokemonConfig: IPokemonConfig}) {
+export default function GamePokemonPortrait(props: {index: number, pokemon: Pokemon | undefined, pokemonConfig: IPokemonConfig | undefined}) {
     const dispatch = useAppDispatch();
     
     if(!props.pokemon){
@@ -48,7 +49,7 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
             imageRendering: 'crisp-edges'
             }} src={getPath(props.pokemon, props.pokemonConfig)} />
         <div style={{position:'absolute', right:'5%', top:'5%'}}>
-            {COST[props.pokemon.rarity]}<img style={{width:'20px', marginBottom:'5px'}} src="/assets/ui/money.png"/>
+            {PkmCost[props.pokemon.rarity]}<img style={{width:'20px', marginBottom:'5px'}} src="/assets/ui/money.png"/>
         </div>
         <ul style={{
             listStyleType:'none',
@@ -66,7 +67,7 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
     }
 }
 
-function getPath(pokemon: Pokemon, config: IPokemonConfig) {
+function getPath(pokemon: Pokemon, config: IPokemonConfig | undefined) {
     const index = pokemon.index;
     
     let pokemonPath = CDN_PORTRAIT_URL;

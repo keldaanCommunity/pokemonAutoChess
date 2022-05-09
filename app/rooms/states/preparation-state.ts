@@ -20,5 +20,7 @@ export default class PreparationState extends Schema implements IPreparationStat
     super();
     this.ownerId = ownerId;
     this.name = name;
+    this.gameStarted = false;
+    this.ownerName = '';
   }
 }

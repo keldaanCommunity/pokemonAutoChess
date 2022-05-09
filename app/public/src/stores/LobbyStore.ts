@@ -17,8 +17,8 @@ interface IUserLobbyState {
     users: ILobbyUser[];
     leaderboard: ILeaderboardInfo[];
     botLeaderboard: ILeaderboardInfo[];
-    user: ILobbyUser;
-    searchedUser: ILobbyUser;
+    user: ILobbyUser | undefined;
+    searchedUser: ILobbyUser | undefined;
     tabIndex: number;
     allRooms: RoomAvailable[];
     botList: {name :string, avatar: string}[];
@@ -26,7 +26,7 @@ interface IUserLobbyState {
     metaItems: IItemsStatistic[];
     pastebinUrl: string;
     botData: IBot;
-    synergies: [string, number][];
+    synergies: [Synergy, number][];
     pokemonCollection: IPokemonConfig[];
     boosterContent: string[];
     botMonitor: IBotMonitoring[];
@@ -48,7 +48,7 @@ const initialState: IUserLobbyState = {
     meta: [],
     metaItems: [],
     pastebinUrl: '',
-    synergies: undefined,
+    synergies: [],
     botData: {
         steps: [
           {

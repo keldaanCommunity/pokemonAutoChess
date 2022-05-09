@@ -1,6 +1,6 @@
 import {GameObjects} from 'phaser';
 import { ItemDescription, ItemName } from '../../../../types/strings/Item';
-import {ITEM_RECIPE} from '../../../../types/Config';
+import {ItemRecipe} from '../../../../types/Config';
 
 export default class ItemDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement;
@@ -19,8 +19,8 @@ export default class ItemDetail extends GameObjects.DOMElement {
       </div>
       <p>${ItemDescription[name]}</p>
       <div style='display:flex; justify-content:space-between'>
-      ${Object.keys(ITEM_RECIPE).reduce((prev, item, idx)=>{
-        const recipe: string[] = ITEM_RECIPE[item];
+      ${Object.keys(ItemRecipe).reduce((prev, item, idx)=>{
+        const recipe: string[] = ItemRecipe[item];
         let content = '';
         if(recipe[0] == name){
           content += '<div style="display:flex; flex-flow: column; justify-content:space-between;"><img style="height:18px; width:18px;" src="assets/item/'+ recipe[1] +'.png"/><p style="margin-bottom:0px">=</p><img style="height:18px; width:18px;" src="assets/item/'+ item +'.png"/></div>';

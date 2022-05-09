@@ -14,10 +14,10 @@ export default function ChatHistory(props: {source: string}) {
         maxHeight: 'inherit'
     };
     const messages = useAppSelector(state=>state[props.source].messages);
-    const domRef = useRef(null);
+    const domRef = useRef<HTMLDivElement>(null);
 
     useEffect(()=>{
-        if(messages.length > 0) {
+        if(messages.length > 0 && domRef && domRef.current) {
             domRef.current.scrollTop = domRef.current.scrollHeight;
         }
     });

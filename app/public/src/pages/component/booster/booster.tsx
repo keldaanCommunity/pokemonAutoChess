@@ -3,7 +3,7 @@ import CSS from 'csstype';
 import ReactCardFlip from 'react-card-flip';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { openBooster } from '../../../stores/NetworkStore';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import { Emotion } from '../../../../../types';
 
 const buttonStyle: CSS.Properties = {
@@ -14,7 +14,8 @@ const buttonStyle: CSS.Properties = {
 
 export default function Booster(props: {toggle :()=>void}){
     const dispatch = useAppDispatch();
-    const numberOfBooster = useAppSelector(state=>state.lobby.user.booster);
+    const user = useAppSelector(state=>state.lobby.user);
+    const numberOfBooster = user? user.booster: 0;
     const boosterContent = useAppSelector(state=>state.lobby.boosterContent);
     const [flipArray, setFlipArray] = useState<boolean[]>([false, false, false, false, false]);
     return <div>

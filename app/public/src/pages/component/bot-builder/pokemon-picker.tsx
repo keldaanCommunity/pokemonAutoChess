@@ -1,5 +1,5 @@
 import React from 'react';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { Emotion } from '../../../../../types';
 import { Pkm, PkmIndex } from '../../../../../types/enum/Pokemon';

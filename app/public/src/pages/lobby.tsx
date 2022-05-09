@@ -158,13 +158,13 @@ export default function Lobby(){
                     <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{toggleWiki(!showWiki)}}>Wiki</button>
                     <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{
                         if(botList.length == 0) {
-                            dispatch(requestBotList(true));
+                            dispatch(requestBotList());
                         }
                         toggleBuilder(!showBuilder)
                         }}>BOT Builder</button>
                     <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{
                         if(meta.length == 0 || metaItems.length == 0){
-                            dispatch(requestMeta(true));
+                            dispatch(requestMeta());
                         }
                         toggleMeta(!showMeta);
                         }}>Meta Report</button>

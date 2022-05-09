@@ -4,7 +4,7 @@
 import {Schema, type, ArraySchema, SetSchema} from '@colyseus/schema';
 import uniqid from 'uniqid';
 import { Emotion, IPokemon, AttackSprite } from '../../types';
-import {COST} from '../enum';
+import {PkmCost} from '../../types/Config';
 import { Item } from '../../types/enum/Item';
 import {Pkm, PkmIndex} from '../../types/enum/Pokemon';
 import { Rarity, AttackType } from '../../types/enum/Game';
@@ -35,7 +35,7 @@ export class Pokemon extends Schema implements IPokemon{
   @type({set: 'string'}) items = new SetSchema<Item>();
   @type('boolean') shiny: boolean;
   @type('string') emotion: Emotion;
-  fossilTimer: number;
+  fossilTimer: number | undefined;
 
   constructor(
      name: Pkm,
@@ -61,7 +61,7 @@ export class Pokemon extends Schema implements IPokemon{
     this.rarity = rarity;
     this.index = index;
     this.evolution = evolution;
-    this.cost = COST[rarity];
+    this.cost = PkmCost[rarity];
     this.hp = hp;
     this.atk = atk;
     this.def = def;

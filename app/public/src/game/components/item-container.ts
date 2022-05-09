@@ -6,8 +6,8 @@ import { Item } from '../../../../types/enum/Item';
 export default class ItemContainer extends Button {
   detail: ItemDetail;
   sprite: GameObjects.Image;
-  tempDetail: ItemDetail;
-  tempSprite: GameObjects.Image;
+  tempDetail: ItemDetail | undefined;
+  tempSprite: GameObjects.Image | undefined;
   name: Item;
 
   scene: Phaser.Scene;
@@ -70,8 +70,12 @@ export default class ItemContainer extends Button {
   closeDetail(){
     if(this.tempDetail || this.tempSprite){
       this.sprite.setVisible(true)
-      this.tempDetail.destroy()
-      this.tempSprite.destroy()
+      if(this.tempDetail){
+        this.tempDetail.destroy()
+      }
+      if(this.tempSprite){
+        this.tempSprite.destroy()
+      }
     }
     this.detail.setVisible(false);
   }

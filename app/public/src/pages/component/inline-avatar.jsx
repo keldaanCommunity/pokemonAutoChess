@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CDN_PORTRAIT_URL } from '../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../types';
 
 class InlineAvatar extends Component{
     render(){

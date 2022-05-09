@@ -25,7 +25,7 @@ const buttonStyle= {
 export default function Preparation() {
     const dispatch = useAppDispatch();
     const client: Client = useAppSelector(state=>state.network.client);
-    const room : Room<PreparationState> = useAppSelector(state=>state.network.preparation);
+    const room : Room<PreparationState>|undefined = useAppSelector(state=>state.network.preparation);
     const [initialized, setInitialized] = useState<boolean>(false);
     const [toGame, setToGame] = useState<boolean>(false);
 
@@ -36,14 +36,20 @@ export default function Preparation() {
                 firebase.initializeApp(FIREBASE_CONFIG);
             }
             firebase.auth().onAuthStateChanged(async user => {
-                dispatch(logIn(user));
-                try{
-                    const r: Room<PreparationState> = await client.reconnect(localStorage.getItem('lastRoomId'),localStorage.getItem('lastSessionId'));
-                    await initialize(r);
-                    dispatch(joinPreparation(r));
-                }
-                catch(error){
-                    console.log(error);         
+                if(user){
+                    dispatch(logIn(user));
+                    try{
+                        const lastRoomId = localStorage.getItem('lastRoomId');
+                        const lastSessionId = localStorage.getItem('lastSessionId');
+                        if(lastRoomId && lastSessionId){
+                            const r: Room<PreparationState> = await client.reconnect(lastRoomId,lastSessionId);
+                            await initialize(r);
+                            dispatch(joinPreparation(r));
+                        }
+                    }
+                    catch(error){
+                        console.log(error);         
+                    }
                 }
             });
         }
@@ -82,14 +88,16 @@ export default function Preparation() {
                 dispatch(pushMessage(message));
             });
             r.onMessage(Transfer.GAME_START, async (message) => {
-                const token: string = await firebase.auth().currentUser.getIdToken();
-                const game: Room<GameState> = await client.joinById(message.id, {idToken: token});
-                localStorage.setItem('lastRoomId', game.id);
-                localStorage.setItem('lastSessionId', game.sessionId);
-                await r.leave();
-                game.connection.close();
-                dispatch(leavePreparation());
-                setToGame(true);
+                const token = await firebase.auth().currentUser?.getIdToken();
+                if(token){
+                    const game: Room<GameState> = await client.joinById(message.id, {idToken: token});
+                    localStorage.setItem('lastRoomId', game.id);
+                    localStorage.setItem('lastSessionId', game.sessionId);
+                    await r.leave();
+                    game.connection.close();
+                    dispatch(leavePreparation());
+                    setToGame(true);
+                }
             });
         }
 
@@ -106,7 +114,7 @@ export default function Preparation() {
         <Link to='/lobby'>
             <button className='nes-btn is-primary' style={buttonStyle} onClick={async ()=>{
                 dispatch(leavePreparation());
-                room.connection.close();
+                room?.connection.close();
                 }}>Lobby</button>
         </Link>
         <div style={preparationStyle}>

@@ -13,14 +13,14 @@ export default class AttackingState extends PokemonState {
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = pokemon.getAttackDelay();
       const target = board.getValue(pokemon.targetX, pokemon.targetY);
-      let targetCoordinate = {x: pokemon.targetX, y: pokemon.targetY};
+      let targetCoordinate: {x: number, y: number} | undefined = {x: pokemon.targetX, y: pokemon.targetY};
 
       if(!(target && target.team !== pokemon.team && board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate.x, targetCoordinate.y) <= pokemon.range)){
         targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
       }
 
       // no target case
-      if (targetCoordinate.x === undefined || targetCoordinate.y === undefined) {
+      if (!targetCoordinate) {
         pokemon.toMovingState();
       } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate.x, targetCoordinate.y) > pokemon.range) {
         pokemon.toMovingState();

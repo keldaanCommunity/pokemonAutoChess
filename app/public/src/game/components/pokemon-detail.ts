@@ -1,7 +1,6 @@
 import {GameObjects} from 'phaser';
-import {CDN_PORTRAIT_URL} from '../../../../models/enum';
 import { AttackType } from '../../../../types/enum/Game'
-import { Emotion } from '../../../../types';
+import { Emotion, CDN_PORTRAIT_URL } from '../../../../types';
 import { AbilityName, AbilityDescription } from '../../../../types/strings/Ability';
 import { Ability } from '../../../../types/enum/Ability';
 
@@ -17,7 +16,6 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   critDamage: HTMLDivElement
   spellDamage: HTMLDivElement
   mana: HTMLDivElement
-  skill: HTMLDivElement
 
   constructor(scene: Phaser.Scene,
     x: number,

@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 
 export default class WeatherManager {
   scene: Phaser.Scene;
@@ -5,9 +6,9 @@ export default class WeatherManager {
   screen: Phaser.Geom.Rectangle;
   leftscreen: Phaser.Geom.Rectangle;
   rightscreen: Phaser.Geom.Rectangle;
-  rectangle: Phaser.GameObjects.Rectangle;
-  particles: Phaser.GameObjects.Particles.ParticleEmitterManager;
-  image: Phaser.GameObjects.Image;
+  rectangle: Phaser.GameObjects.Rectangle | undefined;
+  particles: Phaser.GameObjects.Particles.ParticleEmitterManager | undefined;
+  image: Phaser.GameObjects.Image | undefined;
   
   constructor(scene: Phaser.Scene) {
     this.scene = scene;

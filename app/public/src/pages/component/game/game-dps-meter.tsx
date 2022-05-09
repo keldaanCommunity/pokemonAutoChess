@@ -6,7 +6,7 @@ import GameRedDpsMeter from './game-red-dps-meter';
 import GameBlueHealDpsMeter from './game-blue-heal-dps-meter';
 import GameRedHealDpsMeter from './game-red-heal-dps-meter';
 import { useAppSelector } from '../../../hooks';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 
 const style: CSS.Properties = {
     position:'absolute',

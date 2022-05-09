@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import { Emotion } from '../../../../../types';
 import PokemonFactory from '../../../../../models/pokemon-factory';
 import PRECOMPUTED_TYPE_POKEMONS_ALL from '../../../../../models/precomputed/type-pokemons-all.json';

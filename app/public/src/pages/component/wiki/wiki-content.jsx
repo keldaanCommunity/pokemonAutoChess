@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { RARITY_COLOR } from '../../../../../models/enum';
+import {RarityColor} from '../../../../../types/Config';
 import { Rarity } from '../../../../../types/enum/Game';
 import PokemonWiki from './wiki-pokemon';
 
@@ -13,7 +13,7 @@ class WikiContent extends Component{
             <Tabs>
                 <TabList>
                     {Object.keys(Rarity).filter((v) => isNaN(Number(v))).map( (r)=>{                        
-                        return <Tab key={'title-' + r} style={{color:RARITY_COLOR[Rarity[r]]}}>{r}</Tab>
+                        return <Tab key={'title-' + r} style={{color:RarityColor[Rarity[r]]}}>{r}</Tab>
                     })}
                 </TabList>
 

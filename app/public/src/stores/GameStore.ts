@@ -43,7 +43,7 @@ interface GameStateStore {
 }
 
 const initialState: GameStateStore = {
-    afterGameId: undefined,
+    afterGameId: '',
     roundTime: 30,
     phase: GamePhaseState.PICK,
     players: new Array<IPlayer>(),

@@ -69,9 +69,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   specialDamage: number;
   trueDamage: number;
   shieldDone: number;
-  flyingProtection: boolean;
-  growGroundTimer: number;
-  echo: number;
+  flyingProtection = false;
+  growGroundTimer = 0;
+  echo = 0;
 
   constructor(pokemon: IPokemon, positionX: number, positionY: number, team: number, simulation: Simulation) {
     super();

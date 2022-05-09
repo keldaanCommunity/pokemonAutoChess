@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {CDN_PORTRAIT_URL} from '../../../../../models/enum';
+import {CDN_PORTRAIT_URL} from '../../../../../types';
 import {Pkm, PkmIndex} from '../../../../../types/enum/Pokemon';
 import {Emotion} from '../../../../../types';
 import ReactTooltip from 'react-tooltip';

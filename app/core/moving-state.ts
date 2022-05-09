@@ -13,7 +13,7 @@ export default class MovingState extends PokemonState {
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
       // no target case
       // eslint-disable-next-line no-empty
-      if (targetCoordinate.x === undefined || targetCoordinate.y === undefined) {
+      if (!targetCoordinate) {
       } else if (board.distance(pokemon.positionX, pokemon.positionY, targetCoordinate.x, targetCoordinate.y) <= pokemon.range && !pokemon.status.confusion) {
         pokemon.toAttackingState();
       } else {
@@ -30,12 +30,12 @@ export default class MovingState extends PokemonState {
   move(pokemon: PokemonEntity, board: Board, coordinates: {x: number, y: number}) {
     // console.log('move attempt');
 
-    let x: number;
-    let y: number;
+    let x: number | undefined = undefined;
+    let y: number | undefined = undefined;
     if (pokemon.types.includes(Synergy.FOSSIL)) {
       const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(pokemon, board);
-      x = farthestCoordinate.x;
-      y = farthestCoordinate.y;
+      x = farthestCoordinate?.x;
+      y = farthestCoordinate?.y;
     } else {
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY);
       let distance = 999;

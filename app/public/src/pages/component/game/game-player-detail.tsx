@@ -1,7 +1,7 @@
 import React from 'react';
 import HistoryItem from '../../../../../models/colyseus-models/history-item';
 import { BattleResult } from '../../../../../types/enum/Game';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 import { ArraySchema } from '@colyseus/schema';
 
 export default function GamePlayerDetail(props:{name: string, life: number, money: number, history: ArraySchema<HistoryItem>}) {

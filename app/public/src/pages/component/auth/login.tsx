@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -35,7 +35,9 @@ export default function Login(){
 
   useEffect(()=>{
     firebase.auth().onAuthStateChanged(u => {
-      dispatch(logIn(u));
+      if(u){
+        dispatch(logIn(u));
+      }
     });
   });
 
@@ -79,7 +81,7 @@ export default function Login(){
                   Join Lobby
               </button>
           </Link>
-          <button className="nes-btn is-error" onClick={() => {firebase.auth().signOut(); dispatch(logOut(uid))}}>Sign-out</button>
+          <button className="nes-btn is-error" onClick={() => {firebase.auth().signOut(); dispatch(logOut())}}>Sign-out</button>
           </div>
       </div>
       )

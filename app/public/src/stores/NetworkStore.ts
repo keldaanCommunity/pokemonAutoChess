@@ -10,10 +10,10 @@ import { BotDifficulty } from "../../../types/enum/Game"
 
 interface INetwork {
     client: Client;
-    lobby: Room<ICustomLobbyState>;
-    preparation: Room<PreparationState>;
-    game: Room<GameState>;
-    after: Room<AfterGameState>;
+    lobby: Room<ICustomLobbyState> | undefined;
+    preparation: Room<PreparationState> | undefined;
+    game: Room<GameState> | undefined;
+    after: Room<AfterGameState> | undefined;
     uid: string;
     displayName: string;
 }
@@ -26,8 +26,8 @@ const initalState: INetwork = {
     preparation: undefined,
     game: undefined,
     after: undefined,
-    uid: undefined,
-    displayName: undefined,
+    uid: '',
+    displayName: '',
 }
 
 export const networkSlice = createSlice({
@@ -37,12 +37,12 @@ export const networkSlice = createSlice({
         logIn: (state, action: PayloadAction<User>) => {
             if(action.payload){
                 state.uid = action.payload.uid;
-                state.displayName = action.payload.displayName; 
+                state.displayName = action.payload.displayName ? action.payload.displayName : ''; 
             }
         },
-        logOut: (state, action: PayloadAction<string>) => {
-            state.uid = undefined;
-            state.displayName = undefined;
+        logOut: (state) => {
+            state.uid = '';
+            state.displayName = '';
             state.preparation = undefined;
             state.lobby = undefined;
             state.game = undefined;
@@ -81,67 +81,67 @@ export const networkSlice = createSlice({
             }
         },
         searchName: (state, action: PayloadAction<string>) => {
-            state.lobby.send(Transfer.SEARCH, {name:action.payload});
+            state.lobby?.send(Transfer.SEARCH, {name:action.payload});
         },
         changeName: (state, action: PayloadAction<string>) => {
-            state.lobby.send(Transfer.CHANGE_NAME, {name: action.payload});
+            state.lobby?.send(Transfer.CHANGE_NAME, {name: action.payload});
         },
         changeAvatar: (state, action: PayloadAction<{index: string, emotion: Emotion, shiny: boolean}>) => {
-            state.lobby.send(Transfer.CHANGE_AVATAR, action.payload);
+            state.lobby?.send(Transfer.CHANGE_AVATAR, action.payload);
         },
-        requestMeta: (state, action: PayloadAction<boolean>) => {
-            state.lobby.send(Transfer.REQUEST_META);
+        requestMeta: (state) => {
+            state.lobby?.send(Transfer.REQUEST_META);
         },
-        requestBotList: (state, action: PayloadAction<boolean>) => {
-            state.lobby.send(Transfer.REQUEST_BOT_LIST);
+        requestBotList: (state) => {
+            state.lobby?.send(Transfer.REQUEST_BOT_LIST);
         },
         createBot: (state, action: PayloadAction<IBot>) => {
-            state.lobby.send(Transfer.BOT_CREATION,{bot: action.payload});
+            state.lobby?.send(Transfer.BOT_CREATION,{bot: action.payload});
         },
         requestBotData: (state, action:PayloadAction<string>) => {
-            state.lobby.send(Transfer.REQUEST_BOT_DATA, action.payload);
+            state.lobby?.send(Transfer.REQUEST_BOT_DATA, action.payload);
         },
         addBot: (state, action:PayloadAction<BotDifficulty>) => {
-            state.preparation.send(Transfer.ADD_BOT, action.payload);
+            state.preparation?.send(Transfer.ADD_BOT, action.payload);
         },
         removeBot: (state,action: PayloadAction<string>) => {
-            state.preparation.send(Transfer.REMOVE_BOT, action.payload);
+            state.preparation?.send(Transfer.REMOVE_BOT, action.payload);
         },
-        toggleReady: (state, action: PayloadAction<boolean>) => {
-            state.preparation.send(Transfer.TOGGLE_READY);
+        toggleReady: (state) => {
+            state.preparation?.send(Transfer.TOGGLE_READY);
         },
         requestTilemap: (state) => {
-            state.game.send(Transfer.REQUEST_TILEMAP);
+            state.game?.send(Transfer.REQUEST_TILEMAP);
         },
         refreshClick: (state) => {
-            state.game.send(Transfer.REFRESH);
+            state.game?.send(Transfer.REFRESH);
         },
         lockClick: (state) => {
-            state.game.send(Transfer.LOCK);
+            state.game?.send(Transfer.LOCK);
         },
         levelClick: (state) => {
-            state.game.send(Transfer.LEVEL_UP);
+            state.game?.send(Transfer.LEVEL_UP);
         },
         shopClick: (state, action: PayloadAction<number>) => {
-            state.game.send(Transfer.SHOP, {id: action.payload});
+            state.game?.send(Transfer.SHOP, {id: action.payload});
         }, 
         itemClick: (state, action: PayloadAction<string>) => {
-            state.game.send(Transfer.ITEM, {id: action.payload});
+            state.game?.send(Transfer.ITEM, {id: action.payload});
         },
         gameStart: (state, action: PayloadAction<string>) => {
-            state.preparation.send(Transfer.GAME_START, {id: action.payload});
+            state.preparation?.send(Transfer.GAME_START, {id: action.payload});
         },
         changeRoomName: (state, action: PayloadAction<string>) => {
-            state.preparation.send(Transfer.CHANGE_ROOM_NAME, action.payload);
+            state.preparation?.send(Transfer.CHANGE_ROOM_NAME, action.payload);
         },
         changeSelectedEmotion:(state, action: PayloadAction<{index: string, emotion: Emotion, shiny: boolean}>) => {
-            state.lobby.send(Transfer.CHANGE_SELECTED_EMOTION ,action.payload);
+            state.lobby?.send(Transfer.CHANGE_SELECTED_EMOTION ,action.payload);
         },
         buyEmotion: (state, action: PayloadAction<{index: string, emotion:Emotion, shiny: boolean}>) => {
-            state.lobby.send(Transfer.BUY_EMOTION, action.payload);
+            state.lobby?.send(Transfer.BUY_EMOTION, action.payload);
         },
         openBooster: (state) => {
-            state.lobby.send(Transfer.OPEN_BOOSTER);
+            state.lobby?.send(Transfer.OPEN_BOOSTER);
         }
     }
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { IDpsHeal } from '../../../../../types';
-import { CDN_PORTRAIT_URL } from '../../../../../models/enum';
+import { CDN_PORTRAIT_URL } from '../../../../../types';
 
 const imgStyle = {
     width:'40px',
