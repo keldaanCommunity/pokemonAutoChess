@@ -2294,7 +2294,7 @@ export class Regidrago extends Pokemon {
 }
 export class Guzzlord extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.GUZZLORD, [Synergy.DRAGON, Synergy.DARK], Rarity.MYTHICAL, PkmIndex[Pkm.GUZZLORD], Pkm.DEFAULT, 270, 22, 3, 3, 2, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 3, 110, Ability.TWISTING_NEITHER,shiny, emotion);
+    super(Pkm.GUZZLORD, [Synergy.DRAGON, Synergy.DARK], Rarity.MYTHICAL, PkmIndex[Pkm.GUZZLORD], Pkm.DEFAULT, 400, 22, 3, 3, 2, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 3, 110, Ability.TWISTING_NEITHER,shiny, emotion);
   }
 }
 export class Eternatus extends Pokemon {
