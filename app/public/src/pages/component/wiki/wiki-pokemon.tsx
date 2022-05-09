@@ -2,7 +2,7 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { CDN_PORTRAIT_URL } from '../../../../../types';
 import PokemonFactory from '../../../../../models/pokemon-factory';
-import PokemonDetail from './wiki-pokemon-detail';
+import WikiPokemonDetail from './wiki-pokemon-detail';
 import { Emotion, PrecomputedRaritPokemonyAll } from '../../../../../types';
 import { ITracker } from '../../../../../types/ITracker';
 import PRECOMPUTED_RARITY_POKEMONS_ALL from '../../../../../models/precomputed/type-rarity-all.json';
@@ -11,9 +11,8 @@ import { Rarity } from '../../../../../types/enum/Game';
 
 const metadata = tracker as unknown as { [key: string]: ITracker };
 const precomputed = PRECOMPUTED_RARITY_POKEMONS_ALL as PrecomputedRaritPokemonyAll;
-let credits;
 
-export default function PokemonWiki(props: {rarity: Rarity}){
+export default function WikiPokemon(props: {rarity: Rarity}){
     return (            
         <Tabs>
             <TabList>
@@ -26,7 +25,7 @@ export default function PokemonWiki(props: {rarity: Rarity}){
             </TabList>
     
             {precomputed[props.rarity].map((pkm=>{
-                let m;
+                let m: ITracker | undefined = undefined;
                 const pokemon = PokemonFactory.createPokemonFromName(pkm);
                 const pathIndex = pokemon.index.split('-');
                 if(pathIndex.length == 1){
@@ -36,7 +35,7 @@ export default function PokemonWiki(props: {rarity: Rarity}){
                     m = metadata[pathIndex[0]].subgroups[pathIndex[1]];
                 }
                 return <TabPanel key={pkm}>
-                    <PokemonDetail pokemon={pkm} m={m}/>
+                    <WikiPokemonDetail pokemon={pkm} m={m}/>
                 </TabPanel>
             }))}
         </Tabs>

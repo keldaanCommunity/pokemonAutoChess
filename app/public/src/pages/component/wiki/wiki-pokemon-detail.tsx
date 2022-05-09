@@ -9,7 +9,7 @@ import Credits from './Credits';
 import {RarityColor} from '../../../../../types/Config';
 import { Pkm } from '../../../../../types/enum/Pokemon';
 
-export default function WikiPokemonDetail(props:{pokemon: Pkm, m: ITracker}) {
+export default function WikiPokemonDetail(props:{pokemon: Pkm, m: ITracker | undefined}) {
     const pokemon = PokemonFactory.createPokemonFromName(props.pokemon);
     const [df, setDf] = useState<ICreditNames>();
     const [initialized, setInitialized] = useState<boolean>(false);
