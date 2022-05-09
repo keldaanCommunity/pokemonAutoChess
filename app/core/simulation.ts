@@ -345,7 +345,7 @@ export default class Simulation extends Schema implements ISimulation{
         [-2, -1, 0, 1, 2].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
-            value.handleShield(30, pokemon);
+            value.handleShield(30, value);
           }
         });
       }
@@ -427,7 +427,7 @@ export default class Simulation extends Schema implements ISimulation{
         [-2, -1, 0, 1, 2].forEach( (offset)=>{
           const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY);
           if (value) {
-            value.handleShield(30, pokemon);
+            value.handleShield(30, value);
           }
         });
       }
