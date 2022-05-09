@@ -53,7 +53,7 @@ export class OnShopCommand extends Command<GameRoom, {
             }
           }
           const x = this.room.getFirstAvailablePositionInBoard(player.id);
-          if(x){
+          if(x !== undefined){
             pokemon.positionX = x;
             pokemon.positionY = 0;
             player.board.set(pokemon.id, pokemon);
@@ -117,7 +117,7 @@ export class OnDragDropCommand extends Command<GameRoom, {
             const replaceDitto = PokemonFactory.createPokemonFromName(PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name), player.pokemonCollection.get(PkmIndex[pokemonToClone.name]));
             player.board.delete(detail.id);
             const position = this.room.getFirstAvailablePositionInBoard(playerId);
-            if (position) {
+            if (position !== undefined) {
               replaceDitto.positionX = position;
               replaceDitto.positionY = 0;
               player.board.set(replaceDitto.id, replaceDitto);

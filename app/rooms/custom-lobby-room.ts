@@ -120,24 +120,26 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
         }
 
         boosterIndex.forEach(i=>{
-          if(user.pokemonCollection.has(i)){
-            user.pokemonCollection.get(i)?.dust += 40;
+            const c = user.pokemonCollection.get(i);
+          if(c){
+            c.dust += 40;
           }
           else{
-            user.pokemonCollection.set(i, new PokemonConfig(i));
-            user.pokemonCollection.get(i)?.dust += 40;
+            const newConfig = new PokemonConfig(i);
+            newConfig.dust += 40;
+            user.pokemonCollection.set(i, newConfig);
           }
         });
 
         UserMetadata.findOne({'uid': client.auth.uid}, (err, u: FilterQuery<IUserMetadata>)=>{
           u.booster = user.booster;
           boosterIndex.forEach(i=>{
-            if(u.pokemonCollection.has(i)){
-              u.pokemonCollection.get(i)?.dust += 40;
+            const c = u.pokemonCollection.get(i);
+            if(c){
+              c.dust += 40;
             }
             else{
-              u.pokemonCollection.set(i, {id: i, emotions:[], shinyEmotions:[], dust: 0, selectedEmotion: Emotion.NORMAL, selectedShiny: false });
-              u.pokemonCollection.get(i)?.dust += 40;
+              u.pokemonCollection.set(i, {id: i, emotions:[], shinyEmotions:[], dust: 40, selectedEmotion: Emotion.NORMAL, selectedShiny: false });
             }
           });
           u.save();

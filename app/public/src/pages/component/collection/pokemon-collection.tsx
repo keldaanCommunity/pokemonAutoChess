@@ -28,7 +28,7 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
     let p: Pokemon;
     let pConfig: IPokemonConfig | undefined;
     let pShinyPad = '';
-    let pMetadata: ITracker;
+    let pMetadata: ITracker | undefined = undefined;
     let emotion: Emotion;
     const availableEmotions: Emotion[] = [];
     let modalElement: ReactElement | null = null;
@@ -50,12 +50,15 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
         else{
             emotion = Emotion.NORMAL;
         }
-        Object.keys(pMetadata.portrait_files).forEach(k=>{
-            const possibleEmotion = k as Emotion;
-            if(Object.values(Emotion).includes(possibleEmotion)){
-                availableEmotions.push(possibleEmotion);
-            }
-        });
+        if(pMetadata){
+            Object.keys(pMetadata.portrait_files).forEach(k=>{
+                const possibleEmotion = k as Emotion;
+                if(Object.values(Emotion).includes(possibleEmotion)){
+                    availableEmotions.push(possibleEmotion);
+                }
+            });
+        }
+
         modalElement = <Modal show={pokemon !== undefined} onHide={()=>{setPokemon(undefined)}} dialogClassName="modalClass">
         <Modal.Header>
             <Modal.Title>

@@ -26,7 +26,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
     const ownerId: string = useAppSelector(state=>state.preparation.ownerId);
     const uid: string = useAppSelector(state=>state.network.uid);
     const client: Client = useAppSelector(state=>state.network.client);
-    const room: Room<PreparationState> = useAppSelector(state=>state.network.preparation);
+    const room: Room<PreparationState> | undefined = useAppSelector(state=>state.network.preparation);
     const [botDifficulty, setBotDifficulty] = useState<BotDifficulty>(BotDifficulty.MEDIUM);
 
     async function startGame() {
@@ -34,15 +34,17 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
             let allUsersReady = true;
             users.forEach(user=> {if(!user.ready){allUsersReady = false}});
             if(allUsersReady){
-                const token: string = await firebase.auth().currentUser.getIdToken();
-                const r: Room<GameState> = await client.create('game', {users: users, idToken: token});
-                dispatch(gameStart(r.id));
-                localStorage.setItem('lastRoomId', r.id);
-                localStorage.setItem('lastSessionId', r.sessionId);
-                await room.leave();
-                r.connection.close();
-                dispatch(leavePreparation());
-                props.setToGame(true);
+                const token = await firebase.auth().currentUser?.getIdToken();
+                if(token) {
+                    const r: Room<GameState> = await client.create('game', {users: users, idToken: token});
+                    dispatch(gameStart(r.id));
+                    localStorage.setItem('lastRoomId', r.id);
+                    localStorage.setItem('lastSessionId', r.sessionId);
+                    await room.leave();
+                    r.connection.close();
+                    dispatch(leavePreparation());
+                    props.setToGame(true);
+                }
             }
         }
     }
@@ -100,11 +102,11 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                     
                 </div>
                 <div>
-                    <button style={buttonStyle} className='nes-btn is-warning' onClick={()=>{dispatch(toggleReady(true))}}>Ready</button>
+                    <button style={buttonStyle} className='nes-btn is-warning' onClick={()=>{dispatch(toggleReady())}}>Ready</button>
                     <button 
                         style={buttonStyle} 
                         className={ownerId == uid ? 'nes-btn is-success':'nes-btn is-disabled'} 
-                        onClick={ownerId == uid ? startGame: null}
+                        onClick={ownerId == uid ? startGame: undefined}
                         data-tip
                         data-for={'start-game'}
                         >

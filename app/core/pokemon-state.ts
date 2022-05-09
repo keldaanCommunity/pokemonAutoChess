@@ -288,7 +288,7 @@ export default class PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
     let updateEffects = false;
     if (pokemon.effects.includes(Effect.SHORE_UP) || pokemon.effects.includes(Effect.ROTOTILLER) || pokemon.effects.includes(Effect.SANDSTORM)) {
-      if (pokemon.growGroundTimer !== undefined && pokemon.count.growGroundCount <4) {
+      if ( pokemon.count.growGroundCount <4) {
         pokemon.growGroundTimer -= dt;
         if (pokemon.growGroundTimer <= 0) {
           pokemon.growGroundTimer = 3000;
@@ -375,7 +375,7 @@ export default class PokemonState {
       if (pokemon.mana >= pokemon.maxMana) {
         if (pokemon.targetX == -1 || pokemon.targetY == -1) {
           const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board);
-          if (targetCoordinate.x !== undefined && targetCoordinate.y !== undefined) {
+          if (targetCoordinate) {
             pokemon.targetX = targetCoordinate.x;
             pokemon.targetY = targetCoordinate.y;
           }

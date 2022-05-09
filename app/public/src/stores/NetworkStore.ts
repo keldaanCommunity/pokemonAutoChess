@@ -40,7 +40,7 @@ export const networkSlice = createSlice({
                 state.displayName = action.payload.displayName ? action.payload.displayName : ''; 
             }
         },
-        logOut: (state, action: PayloadAction<string>) => {
+        logOut: (state) => {
             state.uid = '';
             state.displayName = '';
             state.preparation = undefined;
@@ -89,10 +89,10 @@ export const networkSlice = createSlice({
         changeAvatar: (state, action: PayloadAction<{index: string, emotion: Emotion, shiny: boolean}>) => {
             state.lobby?.send(Transfer.CHANGE_AVATAR, action.payload);
         },
-        requestMeta: (state, action: PayloadAction<boolean>) => {
+        requestMeta: (state) => {
             state.lobby?.send(Transfer.REQUEST_META);
         },
-        requestBotList: (state, action: PayloadAction<boolean>) => {
+        requestBotList: (state) => {
             state.lobby?.send(Transfer.REQUEST_BOT_LIST);
         },
         createBot: (state, action: PayloadAction<IBot>) => {
@@ -107,7 +107,7 @@ export const networkSlice = createSlice({
         removeBot: (state,action: PayloadAction<string>) => {
             state.preparation?.send(Transfer.REMOVE_BOT, action.payload);
         },
-        toggleReady: (state, action: PayloadAction<boolean>) => {
+        toggleReady: (state) => {
             state.preparation?.send(Transfer.TOGGLE_READY);
         },
         requestTilemap: (state) => {
