@@ -181,11 +181,11 @@ export enum EloRank {
 }
 
 export const EloRankThreshold: {[key in EloRank]: number} = {
-  [EloRank.DIAMOND] : 1400,
-  [EloRank.PLATINUM] : 1250,
-  [EloRank.GOLD] : 1100,
-  [EloRank.SILVER] : 900,
-  [EloRank.BRONZE] : 0
+    [EloRank.BRONZE] : 0,
+    [EloRank.SILVER] : 900,
+    [EloRank.GOLD] : 1100,
+    [EloRank.PLATINUM] : 1250,
+    [EloRank.DIAMOND] : 1400
 }
 
 export enum Header {
