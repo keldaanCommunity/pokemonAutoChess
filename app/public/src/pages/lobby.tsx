@@ -135,7 +135,7 @@ export default function Lobby(){
           return <Booster toggle={()=>{toggleBooster(!showBooster)}}/>;
       }
       if(showWiki){
-        return <Wiki toggleWiki={()=>toggleWiki(!showWiki)} content='Lobby'/>;
+        return <Wiki toggleWiki={()=>toggleWiki(!showWiki)}/>;
       }
       if(showMeta && meta.length > 0 && metaItems.length > 0){
           return <MetaReport toggleMeta={()=>toggleMeta(!showMeta)} meta={meta} metaItems={metaItems}/>;

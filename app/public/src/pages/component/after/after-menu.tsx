@@ -18,7 +18,7 @@ export default function AfterMenu() {
         {players.map((v)=>{
             return <tr key={v.id}>
             <td>{v.rank}</td>
-            <td><Avatar avatar={v.avatar} name={v.name}/></td>
+            <td><Avatar avatar={v.avatar} name={v.name} elo={undefined}/></td>
             <td><Team team={v.pokemons}/></td>
         </tr>})}
     </tbody>
