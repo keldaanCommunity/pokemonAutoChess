@@ -16,6 +16,7 @@ const imgStyle: CSS.Properties = {
 
 export default function Elo(props:{elo:number}){
     const rank = getRank(props.elo);
+    console.log(rank);
     return <div style={style}>
         <img style={imgStyle} src={'assets/ranks/'+ rank + '.png'}/>
         <div style={{marginLeft:'10px'}}>
