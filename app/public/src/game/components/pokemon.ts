@@ -18,7 +18,6 @@ export default class Pokemon extends Button {
   emotion: Emotion;
   shiny: boolean;
   isPopup: boolean;
-  objType: string;
   index: string;
   id: string;
   hp: number;
@@ -72,7 +71,6 @@ export default class Pokemon extends Button {
     this.emotion = pokemon.emotion;
     this.shiny = pokemon.shiny;
     this.isPopup = isPopup;
-    this.objType = 'pokemon';
     this.height = 0;
     this.width = 0;
     this.index = pokemon.index;

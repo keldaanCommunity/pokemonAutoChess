@@ -53,11 +53,9 @@ export class OnShopCommand extends Command<GameRoom, {
             }
           }
           const x = this.room.getFirstAvailablePositionInBoard(player.id);
-          if(x !== undefined){
-            pokemon.positionX = x;
-            pokemon.positionY = 0;
-            player.board.set(pokemon.id, pokemon);
-          }
+          pokemon.positionX = x !== undefined ? x : -1; 
+          pokemon.positionY = 0;
+          player.board.set(pokemon.id, pokemon);
 
           if (pokemon.rarity == Rarity.MYTHICAL) {
             this.state.shop.assignShop(player);
@@ -854,12 +852,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           const boardSize = this.room.getBoardSizeWithoutDitto(player.board);
           if (boardSize > 0) {
             const coordinate = this.room.getFirstAvailablePositionInTeam(player.id);
-            if(coordinate){
-              const detail: {id: string, x:number, y:number, objType: string} = {
-                id: this.room.getFirstPokemonOnBoard(player.board).id,
+            const p = this.room.getFirstPokemonOnBench(player.board);
+            if(coordinate && p){
+              const detail: {id: string, x:number, y:number} = {
+                id: p.id,
                 x: coordinate[0],
-                y: coordinate[1],
-                objType: 'pokemon'
+                y: coordinate[1]
               };
               const client: IClient = {
                 auth: {
@@ -875,7 +873,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     return commands;
   }
 
-  getPVEIndex(stageLevel) {
+  getPVEIndex(stageLevel: number) {
     const result = NeutralStage.findIndex((stage)=>{
       return stage.turn == stageLevel;
     });

@@ -24,6 +24,9 @@ export default class Synergies extends MapSchema<number> implements Map<string,n
           if(t){
             this.set(type, t + 1)
           }
+          else{
+            this.set(type, 1);
+          }
         });
       }
     });

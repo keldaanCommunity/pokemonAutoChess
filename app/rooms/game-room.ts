@@ -2,6 +2,7 @@ import { Client, Room } from 'colyseus';
 import {Dispatcher} from '@colyseus/command';
 import GameState from './states/game-state';
 import Player from '../models/colyseus-models/player';
+import {MapSchema} from '@colyseus/schema';
 import UserMetadata from '../models/mongo-models/user-metadata';
 import BOT from '../models/mongo-models/bot-v2';
 import {OnShopCommand, OnItemCommand, OnSellDropCommand, OnRefreshCommand, OnLockCommand, OnLevelUpCommand, OnUpdateCommand, OnDragDropCommand, OnJoinCommand, OnDragDropItemCommand, OnDragDropCombineCommand} from './commands/game-commands';
@@ -11,7 +12,7 @@ import PokemonFactory from '../models/pokemon-factory';
 import EloRank from 'elo-rank';
 import admin from 'firebase-admin';
 import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2';
-import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, IPokemon, Transfer } from '../types';
+import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, IPlayer, IPokemon, Transfer } from '../types';
 import {Pkm, PkmIndex} from '../types/enum/Pokemon';
 import PokemonConfig from '../models/colyseus-models/pokemon-config';
 import { Synergy } from '../types/enum/Synergy';
@@ -390,15 +391,13 @@ export default class GameRoom extends Room<GameState> {
   }
 
   swap(playerId: string, pokemon: IPokemon, x: number, y: number) {
-    if (!this.isPositionEmpty(playerId, x, y)) {
-      const pokemonToSwap = this.getPokemonByPosition(playerId, x, y);
-      if(pokemonToSwap){
-        pokemonToSwap.positionX = pokemon.positionX;
-        pokemonToSwap.positionY = pokemon.positionY;
-        pokemon.positionX = x;
-        pokemon.positionY = y;
-      }
+    const pokemonToSwap = this.getPokemonByPosition(playerId, x, y);
+    if(pokemonToSwap){
+      pokemonToSwap.positionX = pokemon.positionX;
+      pokemonToSwap.positionY = pokemon.positionY;
     }
+    pokemon.positionX = x;
+    pokemon.positionY = y;
   }
 
 
@@ -464,27 +463,20 @@ export default class GameRoom extends Room<GameState> {
           });
   
           if (count == 3) {
-            let x;
-            let y;
+            let coord: {x: number, y: number} | undefined;
   
             player.board.forEach((pkm, id) => {
-              if ( pkm.index == pokemon.index && count >= 0) {
-                if (x !== undefined && y !== undefined) {
-                  if (pkm.positionY >= y) {
-                    if (pkm.positionY !== undefined) {
-                      y = pkm.positionY;
+              if (pkm.index == pokemon.index) {
+                if (coord) {
+                    if(pkm.positionY >= coord.y){
+                        coord.x = pokemon.positionX;
+                        coord.y = pokemon.positionY;
                     }
-                    if (pkm.positionX !== undefined) {
-                      x = pkm.positionX;
+                }
+                else {
+                    if(pkm.positionX !== -1){
+                        coord = {x: pokemon.positionX, y: pokemon.positionY};
                     }
-                  }
-                } else {
-                  if (pkm.positionY !== undefined) {
-                    y = pkm.positionY;
-                  }
-                  if (pkm.positionX !== undefined) {
-                    x = pkm.positionX;
-                  }
                 }
   
                 pkm.items.forEach((el)=>{
@@ -495,7 +487,6 @@ export default class GameRoom extends Room<GameState> {
                   }
                 });
                 player.board.delete(id);
-                count -= 1;
               }
             });
             const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName, player.pokemonCollection.get(PkmIndex[pokemonEvolutionName]));
@@ -544,10 +535,15 @@ export default class GameRoom extends Room<GameState> {
             basicItemsToAdd.forEach( (item)=>{
               player.items.add(item);
             });
-            pokemonEvolved.positionX = x;
-            pokemonEvolved.positionY = y;
-            player.board.set(pokemonEvolved.id, pokemonEvolved);
-            evolve = true;
+            if(coord){
+                pokemonEvolved.positionX = coord.x;
+                pokemonEvolved.positionY = coord.y;
+                player.board.set(pokemonEvolved.id, pokemonEvolved);
+                evolve = true;
+            }
+            else{
+                console.log('error, no coordinate found for new evolution');
+            }
           }
         }
       });
@@ -562,7 +558,7 @@ export default class GameRoom extends Room<GameState> {
     return evolve;
   }
 
-  getNumberOfPlayersAlive(players) {
+  getNumberOfPlayersAlive(players :MapSchema<Player>) {
     let numberOfPlayersAlive = 0;
     players.forEach((player, key) => {
       if (player.alive) {
@@ -572,7 +568,7 @@ export default class GameRoom extends Room<GameState> {
     return numberOfPlayersAlive;
   }
 
-  getBoardSize(board) {
+  getBoardSize(board: MapSchema<Pokemon>) {
     let boardSize = 0;
 
     board.forEach((pokemon, key) => {
@@ -584,7 +580,7 @@ export default class GameRoom extends Room<GameState> {
     return boardSize;
   }
 
-  getBoardSizeWithoutDitto(board) {
+  getBoardSizeWithoutDitto(board: MapSchema<Pokemon>) {
     let boardSize = 0;
 
     board.forEach((pokemon, key) => {
@@ -596,19 +592,19 @@ export default class GameRoom extends Room<GameState> {
     return boardSize;
   }
 
-  getPossibleEvolution(board, name) {
+  getPossibleEvolution(board: MapSchema<Pokemon>, name: Pkm) {
     let count = 0;
 
     board.forEach((pokemon, key) => {
-      if (pokemon.name == name && pokemon.evolution != '') {
+      if (pokemon.name == name && pokemon.evolution != Pkm.DEFAULT) {
         count ++;
       }
     });
     return (count >= 2);
   }
 
-  getFirstPokemonOnBoard(board) {
-    let pkm;
+  getFirstPokemonOnBench(board: MapSchema<Pokemon>): Pokemon|undefined  {
+    let pkm: Pokemon | undefined = undefined;
     let found = false;
     board.forEach((pokemon, key) => {
       if (pokemon.positionY == 0 && pokemon.name != Pkm.DITTO && !found) {
@@ -619,7 +615,7 @@ export default class GameRoom extends Room<GameState> {
     return pkm;
   }
 
-  getTeamSize(board) {
+  getTeamSize(board: MapSchema<Pokemon>) {
     let size = 0;
 
     board.forEach((pokemon, key) => {
