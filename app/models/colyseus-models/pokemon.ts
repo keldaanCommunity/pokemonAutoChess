@@ -2242,7 +2242,7 @@ export class Relicanth extends Pokemon {
 }
 export class Hatenna extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.HATENNA, [Synergy.FAIRY, Synergy.PSYCHIC], Rarity.COMMON, PkmIndex[Pkm.HATENNA], Pkm.HATTREM, 70, 8, 3, 3, 1, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.PSYCH_UP,shiny, emotion);
+    super(Pkm.HATENNA, [Synergy.FAIRY, Synergy.PSYCHIC], Rarity.COMMON, PkmIndex[Pkm.HATENNA], Pkm.HATTREM, 60, 5, 1, 2, 1, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.PSYCH_UP,shiny, emotion);
   }
 }
 
