@@ -2224,7 +2224,21 @@ export class MetronomeStrategy extends AttackStrategy {
       ClangorousSoulStrategy,
       NightmareStrategy,
       ExplosionStrategy,
-      KingShieldStrategy
+      KingShieldStrategy,
+      CorruptedNatureStrategy,
+      TwistingNeitherStrategy,
+      PsychUpStrategy,
+      RazorWindStrategy,
+      LeechSeedStrategy,
+      FlameChargeStrategy,
+      FireTrickStrategy,
+      ElectroWebStrategy,
+      ElectroBoostStrategy,
+      DynamaxCannonStrategy,
+      DynamicPunchStrategy,
+      DracoEnergyStrategy,
+      CrabHammerStrategy,
+      DiamondStormStrategy
     ];
     const strategy = new skills[Math.floor(Math.random() * skills.length)]();
     strategy.process(pokemon, state, board, target);
