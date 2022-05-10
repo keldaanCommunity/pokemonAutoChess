@@ -199,11 +199,13 @@ export default class Pokemon extends Button {
       y = this.targetY;
     }
 
+    if (this.projectile) {
+        this.projectile.destroy();
+    }
+
     if(x && y){
       const coordinates = transformAttackCoordinate(x, y);
-      if (this.projectile) {
-        this.projectile.destroy();
-      }
+
       this.projectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'attacks', `${this.attackSprite}/000`);
       const scale = getAttackScale(this.attackSprite);
       this.projectile.setScale(scale[0], scale[1]);
@@ -304,6 +306,10 @@ export default class Pokemon extends Button {
     this.life = 0;
     if(this.lifebar){
       this.lifebar.setAmount(this.life);
+    }
+
+    if (this.projectile) {
+        this.projectile.destroy();
     }
 
     this.scene.add.tween({

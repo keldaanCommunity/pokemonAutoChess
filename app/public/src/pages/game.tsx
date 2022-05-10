@@ -18,7 +18,12 @@ import GameShop from "./component/game/game-shop";
 import GameSynergies from "./component/game/game-synergies";
 import GameModal from "./component/game/game-modal";
 import AfterGameState from "../../../rooms/states/after-game-state";
-import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer, ISimplePlayer } from "../../../types";
+import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer, ISimplePlayer, CDN_PORTRAIT_URL, Emotion } from "../../../types";
+import GameToasts from "./component/game/game-toasts";
+import { toast } from "react-toastify";
+import { PkmIndex } from "../../../types/enum/Pokemon";
+import PokemonCollection from "../../../models/colyseus-models/pokemon-collection";
+import PokemonConfig from "../../../models/colyseus-models/pokemon-config";
 
 let gameContainer: GameContainer;
 
@@ -220,7 +225,6 @@ export default function Game() {
             dispatch(setSynergies(player.synergies));
           }
         }
-
         
         player.itemsProposition.onAdd = ((changes)=>{
           if(player.id == uid){
@@ -321,6 +325,7 @@ export default function Game() {
     <GameRarityPercentage/>
     <GameItemsProposition/>
     <GameDpsMeter/>
+    <GameToasts/>
     <div id='game' ref={container}>
     </div>
   </div>

@@ -10,7 +10,7 @@ import { CDN_PORTRAIT_URL } from '../../../../../types';
 
 const style: CSS.Properties = {
     position:'absolute',
-    right: '6.5%',
+    right: '9.5%',
     top: '.5%',
     width:'15%',
     display:'flex',

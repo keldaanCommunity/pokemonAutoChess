@@ -4,7 +4,7 @@ import GamePlayerDetail from './game-player-detail';
 import CSS from 'csstype';
 import { IPlayer } from '../../../../../types';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { setCurrentPlayerId, setPlayer, setSynergies } from '../../../stores/GameStore';
+import { setPlayer } from '../../../stores/GameStore';
 import { CDN_PORTRAIT_URL } from '../../../../../types';
 
 const progressStyle: CSS.Properties = {
@@ -23,30 +23,18 @@ const imgStyle: CSS.Properties = {
     top:'5%'
 }
 
-const opponentStyle: CSS.Properties = {
-    position: 'absolute',
-    right: '74px',
-    top: '-4px',
-    bottom: '0px',
-    padding: '0px',
-    width: '30px',
-    height: '30px',
-    margin: '0px',
-    border: '2px solid black',
-    imageRendering:'pixelated'
-};
-
-export default function GamePlayer(props:{player: IPlayer, color: string, click: (id: string)=>void}) {
+export default function GamePlayer(props:{player: IPlayer, color: string, click: (id: string)=>void, index: number}) {
     const style: CSS.Properties = {
         backgroundColor: props.color,
         cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`,
         height:'70px',
-        width:'70px'
+        width:'70px',
+        position: 'absolute',
+        right:'0.5%',
+        top:`${0.5 + props.index*12.5}%`
     }
     const dispatch = useAppDispatch();
     const game = useAppSelector(state=>state.network.game);
-
-    const opponent = props.player.opponentName != '' && props.player.opponentAvatar != ''? <img style={opponentStyle} src={`${CDN_PORTRAIT_URL}${props.player.opponentAvatar}.png`}/>: null;
 
     function playerClick(){
         props.click(props.player.id);
@@ -76,6 +64,5 @@ export default function GamePlayer(props:{player: IPlayer, color: string, click:
     </ReactTooltip>
         <img style={imgStyle} src={`${CDN_PORTRAIT_URL}${props.player.avatar}.png`}/>
         <progress style={progressStyle} className="nes-progress is-error" value={props.player.life} max="100"></progress>
-        {opponent}
     </div>
 }

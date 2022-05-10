@@ -11,7 +11,7 @@ import { useAppSelector } from '../../../hooks';
 
 const style: CSS.Properties = {
     position:'absolute',
-    left:'5%',
+    left:'0.5%',
     bottom:'0.5%',
     width:'90%',
     height:'15%',

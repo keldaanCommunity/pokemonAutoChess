@@ -158,3 +158,17 @@ input[type=range]:focus::-ms-fill-upper {
   width: 60px !important;
   box-shadow: none !important;
 }
+
+.Toastify__toast {
+    border-radius: 0px !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    border: 4px solid black !important;
+    background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.toast{
+    width: 84px !important;
+    height: 64px !important;
+    right: 80px !important;
+}
