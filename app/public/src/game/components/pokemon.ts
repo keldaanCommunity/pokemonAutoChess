@@ -1160,14 +1160,12 @@ export default class Pokemon extends Button {
           onComplete: () => {
             if(this.projectile){
               this.projectile.destroy();
-              this.projectile = undefined;
             }
           }
         });
       } else {
         if(this.projectile){
           this.projectile.destroy();
-          this.projectile = undefined;
         }
       }
     }
