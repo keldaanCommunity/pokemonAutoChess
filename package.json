@@ -72,6 +72,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.2",
     "react-tabs": "^4.0.1",
+    "react-toastify": "^9.0.1",
     "react-tooltip": "^4.2.21",
     "source-map-loader": "^3.0.1",
     "ts-loader": "^9.2.8",

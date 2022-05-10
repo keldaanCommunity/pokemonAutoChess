@@ -7,11 +7,14 @@ import { Room } from 'colyseus.js';
 import GameState from '../../../rooms/states/game-state';
 import {Pokemon} from '../../../models/colyseus-models/pokemon';
 import {DataChange} from '@colyseus/schema';
-import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, IPlayer, IPokemon, IPokemonEntity, Transfer } from '../../../types';
+import { CDN_PORTRAIT_URL, Emotion, IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, IPlayer, IPokemon, IPokemonEntity, Transfer } from '../../../types';
 import PokemonEntity from '../../../core/pokemon-entity';
 import { Item } from '../../../types/enum/Item';
 import { DesignTiled } from '../../../core/design';
 import { Pkm } from '../../../types/enum/Pokemon';
+import { toast } from 'react-toastify';
+import React from 'react';
+import { IPokemonConfig } from '../../../models/mongo-models/user-metadata';
 
 class GameContainer {
   room: Room<GameState>;
@@ -80,6 +83,16 @@ class GameContainer {
 
     player.board.onAdd = ((pokemon, key) => {
       const p = <Pokemon> pokemon;
+      const config: IPokemonConfig|undefined = player.pokemonCollection.get(pokemon.index);
+      let emotion: Emotion = Emotion.NORMAL;
+      let shinyPad = '';
+      if(config && config.selectedEmotion){
+          emotion = config.selectedEmotion;
+          shinyPad = config.selectedShiny ? '/0000/0001' : '';
+      }
+      const i = React.createElement('img',{src: `${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}${shinyPad}/${emotion}.png`}, null);
+      toast(i,{containerId: player.rank.toString()});
+
       p.onChange = (changes: DataChange<any>[]) => {
         changes.forEach((change) => {
           this.handleBoardPokemonChange(player, p, change);
