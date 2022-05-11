@@ -142,11 +142,15 @@ export const networkSlice = createSlice({
         },
         openBooster: (state) => {
             state.lobby?.send(Transfer.OPEN_BOOSTER);
+        },
+        broadcastEmote:(state, action: PayloadAction<string>) => {
+            state.game?.send(Transfer.BROADCAST_EMOTE, action.payload);
         }
     }
 });
 
 export const {
+    broadcastEmote,
     openBooster,
     changeSelectedEmotion,
     buyEmotion,

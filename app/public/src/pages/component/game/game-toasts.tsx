@@ -12,7 +12,7 @@ function GameToasts() {
             containerId={`${i}`}
             enableMultiContainer
             position="bottom-right"
-            autoClose={1000}
+            autoClose={500}
             hideProgressBar
             newestOnTop
             closeOnClick
@@ -21,6 +21,7 @@ function GameToasts() {
             draggable
             pauseOnHover
             limit={1}
+            closeButton={false}
             style={{top:`${0.5 + (i-1)*12.5}%`}}
             />)}
         </div>

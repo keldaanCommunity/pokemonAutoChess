@@ -103,6 +103,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       client.send(Transfer.REQUEST_BOT_MONITOR, this.botMonitor);
     });
 
+
     this.onMessage(Transfer.OPEN_BOOSTER, (client, message)=>{
       const user: LobbyUser = this.state.users.get(client.auth.uid);
       if(user && user.booster && user.booster > 0) {

@@ -3,8 +3,8 @@ import firebase from "firebase/compat/app";
 import React, { useEffect, useRef, useState } from "react";
 import GameState from "../../../rooms/states/game-state";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { setPokemonCollection, setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter, leaveGame} from "../stores/GameStore";
-import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore";
+import { setPokemonCollection, setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter, leaveGame, displayEmote} from "../stores/GameStore";
+import { logIn, joinGame, requestTilemap, broadcastEmote } from "../stores/NetworkStore";
 import { FIREBASE_CONFIG } from "./utils/utils";
 import GameContainer from '../game/game-container';
 import { Navigate } from "react-router-dom";
@@ -24,6 +24,7 @@ import { toast } from "react-toastify";
 import { PkmIndex } from "../../../types/enum/Pokemon";
 import PokemonCollection from "../../../models/colyseus-models/pokemon-collection";
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config";
+import Emotes from "./component/collection/emotes";
 
 let gameContainer: GameContainer;
 
@@ -120,8 +121,9 @@ export default function Game() {
       document.getElementById('game')?.addEventListener(Transfer.DRAG_DROP_ITEM, ((event: CustomEvent<IDragDropItemMessage>) => {gameContainer.onDragDropItem(event)}) as EventListener);
       document.getElementById('game')?.addEventListener(Transfer.DRAG_DROP_COMBINE, ((event: CustomEvent<IDragDropCombineMessage>) => {gameContainer.onDragDropCombine(event)}) as EventListener);
       document.getElementById('game')?.addEventListener(Transfer.SELL_DROP, ((event: CustomEvent<{pokemonId: string}>) => {gameContainer.onSellDrop(event)}) as EventListener);
-      room.onMessage('info', message => {setModalTitle(message.title); setModalInfo(message.info); setModalBoolean(true)});
-      room.onMessage('tilemap', tilemap => {gameContainer.setTilemap(tilemap)});
+      room.onMessage(Transfer.BROADCAST_INFO, message => {setModalTitle(message.title); setModalInfo(message.info); setModalBoolean(true)});
+      room.onMessage(Transfer.REQUEST_TILEMAP, tilemap => {gameContainer.setTilemap(tilemap)});
+      room.onMessage(Transfer.BROADCAST_EMOTE, message => {dispatch(displayEmote({id: message.id, emote: message.emote}))});
 
       room.state.onChange = changes => {
         changes.forEach( change => {
@@ -326,6 +328,7 @@ export default function Game() {
     <GameItemsProposition/>
     <GameDpsMeter/>
     <GameToasts/>
+    <Emotes/>
     <div id='game' ref={container}>
     </div>
   </div>
