@@ -7,7 +7,7 @@ import { Probability } from '../../../../../types/Config';
 const style: CSS.Properties = {
     position:'absolute',
     bottom:'16%',
-    right:'9.5%',
+    right:'12.3%',
     display:'flex',
     padding:'0px',
     backgroundColor:'rgba(255,255,255,0.7)'

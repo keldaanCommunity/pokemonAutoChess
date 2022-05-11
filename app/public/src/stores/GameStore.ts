@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { GamePhaseState } from "../../../types/enum/Game";
-import { IDps, IDpsHeal, IPlayer } from "../../../types";
+import { CDN_PORTRAIT_URL, IDps, IDpsHeal, IPlayer } from "../../../types";
 import {ArraySchema, DataChange, MapSchema} from "@colyseus/schema";
 import ExperienceManager from "../../../models/colyseus-models/experience-manager";
 import Synergies from "../../../models/colyseus-models/synergies";
@@ -10,7 +10,7 @@ import {Synergy} from '../../../types/enum/Synergy';
 import { Pkm } from "../../../types/enum/Pokemon";
 import { Item } from "../../../types/enum/Item";
 import { toast } from "react-toastify";
-
+import React from "react";
 
 interface GameStateStore {
     afterGameId: string
@@ -78,6 +78,11 @@ export const gameSlice = createSlice({
     name: 'game',
     initialState: initialState,
     reducers: {
+        displayEmote: (state, action:PayloadAction<{id: string, emote: string}>) => {
+            const index = state.players.findIndex((e)=>action.payload.id == e.id);
+            const i = React.createElement('img',{src: `${CDN_PORTRAIT_URL}${action.payload.emote}.png`}, null);
+            toast(i,{containerId: state.players[index].rank.toString(), className:'toast-no-border'});
+        },
         setRoundTime: (state, action: PayloadAction<number>) => {
             state.roundTime = action.payload;
         },
@@ -237,6 +242,7 @@ export const gameSlice = createSlice({
 });
 
 export const {
+    displayEmote,
     setPokemonCollection,
     leaveGame,
     removeBlueDpsMeter,

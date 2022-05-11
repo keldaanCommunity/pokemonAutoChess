@@ -138,7 +138,7 @@ export default class GameRoom extends Room<GameState> {
     });
 
     this.onMessage(Transfer.REQUEST_TILEMAP, (client, message)=>{
-      client.send('tilemap', this.state.tilemap);
+      client.send(Transfer.REQUEST_TILEMAP, this.state.tilemap);
     });
 
     this.onMessage(Transfer.REFRESH, (client, message) => {
@@ -171,8 +171,10 @@ export default class GameRoom extends Room<GameState> {
       }
     });
 
-    this.onMessage('set-afterGameId', (client, message) => {
-      this.state.afterGameId = message.id;
+    this.onMessage(Transfer.BROADCAST_EMOTE, (client: Client, message: string) => {
+      if(client.auth){
+        this.broadcast(Transfer.BROADCAST_EMOTE, {id: client.auth.uid, emote: message});
+      }
     });
 
     this.setSimulationInterval((deltaTime: number) =>{

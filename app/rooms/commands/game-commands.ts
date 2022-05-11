@@ -627,7 +627,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
     if (numberOfPlayersAlive <= 1) {
       this.state.gameFinished = true;
-      this.room.broadcast('info',
+      this.room.broadcast(Transfer.BROADCAST_INFO,
           {
             title: 'End of the game',
             info: 'We have a winner !'
