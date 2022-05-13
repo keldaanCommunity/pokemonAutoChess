@@ -1,0 +1,229 @@
+openapi: 3.0.0
+info:
+  title: Pokemon Auto Chess API
+  description: Pokemon Auto Chess API is free. Don't abuse it. Theres also rate limits that you can't exceed.
+  version: 0.1.0
+servers:
+  - url: https://pokemon-auto-chess.com/v1
+    description:  Main server
+  - url: http://localhost:9000/v1
+    description: Local server
+paths:
+  /history/gameById/{id}:
+    get:
+      operationId: 'getGameById'
+      summary: Returns a game by id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the game to return.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Game informations about the request game id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameHistory'
+        '400':
+          description: The specified id is invalid (not a string).
+        '404':
+          description: No game found with the specific id.
+        default:
+          description: Unexpected error
+  /history/gamesByName/{name}:
+    get:
+      operationId: 'getGamesByName'
+      summary: Return an array of games by name.
+      parameters:
+        - name : name
+          in: path
+          required: true
+          description: The name of the game to return.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Game informations about the request game id
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameHistory'
+        '400':
+          description: The specified name is invalid (not a string).
+        '404':
+          description: A user with the specified ID was not found.
+        default:
+          description: Unexpected error
+  /history/gamesByTime:
+    get:
+      operationId: 'getGamesByTime'
+      summary: Return an array of games that were played between startTime and endTime.
+      parameters:
+        - name : startTime
+          in: query
+          required: true
+          description: The startTime (in UNIX Epoch) threshold
+          schema:
+            type: number
+        - name : endTime
+          in: query
+          required: true
+          description: The endtime (in UNIX Epoch) threshold
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Game informations about the request game id
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameHistory'
+        '400':
+          description: The specified startTime or endTime is invalid
+        '404':
+          description: No games found between startTime and endTime
+        default:
+          description: Unexpected error
+  /game/create/{name}:
+    get:
+      operationId: 'createGame'
+      summary: Create a preparation room with the given name.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the room
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Game informations about the request game id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: the name of the created preparation room
+                  id:
+                    type: string
+                    description: the id of the created preparation room
+        '400':
+          description: The specified name was invalid.
+        '404':
+          description: The preparation room was not created.
+  /game/status/{id}:
+    get:
+      operationId: 'getGameStatus'
+      summary: Returns a game status by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the room (same as the one returned in  /game/create)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Game informations about the request game id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: the name of the created preparation room
+                  id:
+                    type: string
+                    description: the id of the created preparation room
+                  players:
+                    type: array
+                    description: The current list of players
+                    items:
+                      $ref: '#/components/schemas/Player'
+        '400':
+          description: The specified name was invalid.
+        '404':
+          description: The preparation room was not created.
+components:
+  schemas:
+    Pokemon:
+      type: object
+      properties:
+        name:
+          description: the name of the pokemon
+          type: string
+        avatar:
+          description: the avatar of the pokemon (path including emotes/shiny user configuration)
+          type: string
+        inventory:
+          description: All the items of the pokemons
+          type: array
+          items:
+            type: string
+    GameHistory:
+      type: object
+      properties:
+        id:
+          type: string
+          description: the game id (same as you sent)
+        name:
+          type: string
+          description: the game name (Name is specified by owner of preparation room)
+        startTime:
+          type: number
+          description: the start time of the game (in UNIX Epoch)
+        endTime:
+          type: number
+          description: the end time of the game (in UNIX Epoch)
+        players:
+          type: array
+          description: All the game informations related to players
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The player id
+              avatar:
+                type: string
+                description: The player avatar when the game was played
+              name:
+                type: string
+                description: The player name when the game was played
+              elo:
+                type: number
+                description: The elo of the player at the end of the game  
+              rank:
+                type: number
+                description: The rank of the player at the end of the game
+              pokemons:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pokemon'
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The player id
+        avatar:
+          type: string
+          description: The player avatar
+        name:
+          type: string
+          description: The player name
+        elo:
+          type: number
+          description: The player elo
+              
+        

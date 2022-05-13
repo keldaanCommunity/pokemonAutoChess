@@ -15,6 +15,8 @@ import {
 } from './commands/preparation-commands';
 import { BotDifficulty } from '../types/enum/Game';
 import { IPreparationMetadata, Transfer } from '../types';
+import { components, operations } from '../api-v1/openapi';
+import { GameUser } from '../models/colyseus-models/game-user';
 
 export default class PreparationRoom extends Room {
   dispatcher: Dispatcher<this>;
@@ -32,15 +34,17 @@ export default class PreparationRoom extends Room {
     console.log(this.metadata);
   }
 
-  onCreate(options: any) {
+  onCreate(options: {ownerId?: string, idToken: string, name?: string}) {
     console.log('create preparation room');
     // console.log(options);
-    const defaultRoomName = 'Default title id#' + this.roomId;
+    const n = options.name ? options.name : 'Default title id ' + this.roomId;
     // console.log(defaultRoomName);
-    this.setState(new PreparationState(options.ownerId, defaultRoomName));
+    this.setState(new PreparationState(options.ownerId, n));
     this.maxClients = 8;
-    this.dispatcher.dispatch(new InitializeBotsCommand(), options.ownerId);
-    this.setName(defaultRoomName);
+    if(options.ownerId){
+      this.dispatcher.dispatch(new InitializeBotsCommand(), {ownerId: options.ownerId});
+    }
+    this.setName(n);
 
     this.onMessage(Transfer.CHANGE_ROOM_NAME, (client, message) => {
       this.dispatcher.dispatch(new OnRoomNameCommand(), {client, message});
@@ -125,5 +129,24 @@ export default class PreparationRoom extends Room {
   onDispose() {
     console.log('Dispose preparation room');
     this.dispatcher.stop();
+  }
+
+  status(){
+    const players = new Array<components["schemas"]["Player"]>();
+    this.state.users.forEach((user: GameUser)=>{
+      if(!user.isBot){
+        players.push({
+          id: user.id,
+          avatar: user.avatar,
+          name: user.name,
+          elo: user.elo
+        });
+      }
+    });
+    return {
+      players: players,
+      name: this.state.name,
+      id: this.roomId
+    };
   }
 }

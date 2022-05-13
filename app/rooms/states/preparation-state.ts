@@ -16,9 +16,9 @@ export default class PreparationState extends Schema implements IPreparationStat
   @type('string') ownerName: string;
   @type('string') name: string
 
-  constructor(ownerId: string, name: string) {
+  constructor(ownerId: string | undefined, name: string) {
     super();
-    this.ownerId = ownerId;
+    this.ownerId = ownerId ? ownerId : '';
     this.name = name;
     this.gameStarted = false;
     this.ownerName = '';

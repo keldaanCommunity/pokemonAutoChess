@@ -22,9 +22,16 @@ export default class GameState extends Schema {
   design: Design;
   tilemap: DesignTiled | undefined;
   gameFinished = false;
+  name: string;
+  startTime: number;
+  endTime: number | undefined = undefined;
+  preparationId: string;
 
-  constructor() {
+  constructor(preparationId: string, name: string) {
     super();
+    this.preparationId = preparationId;
+    this.startTime = Date.now();
+    this.name = name;
     const keys = Object.values(Dungeon) as Dungeon[];
     this.id = keys[Math.floor(Math.random() * keys.length)];
     this.mapName = DungeonData[this.id].name;

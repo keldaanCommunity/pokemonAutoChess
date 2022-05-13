@@ -1,6 +1,6 @@
 import { Client, LobbyRoom } from "colyseus";
 import LobbyState from './states/lobby-state';
-import {connect, FilterQuery} from 'mongoose';
+import {connect, FilterQuery, CallbackError} from 'mongoose';
 import Chat from '../models/mongo-models/chat';
 import UserMetadata, { IPokemonConfig, IUserMetadata } from '../models/mongo-models/user-metadata';
 import LeaderboardInfo from '../models/colyseus-models/leaderboard-info';
@@ -26,7 +26,7 @@ const pastebin = new PastebinAPI({
   'api_user_password': process.env.PASTEBIN_API_PASSWORD
 });
 
-export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
+export default class CustomLobbyRoom extends LobbyRoom{
   discordWebhook: WebhookClient;
   bots: Map<string, IBot>;
   meta: IMeta[];
@@ -42,9 +42,9 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
     this.botMonitor = new Array<IBotMonitoring>();
   }
 
-  onCreate(options: any): Promise<void>{
+  onCreate(): Promise<void>{
     console.log(`create lobby`, this.roomId);
-    super.onCreate(options);
+    super.onCreate({});
     this.setState(new LobbyState());
     this.autoDispose = false;
 
@@ -58,14 +58,14 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       try {
         const bot = message.bot;
         const user = this.state.users.get(client.auth.uid);
-        pastebin.createPaste({text: JSON.stringify(bot), title: `${user.name} has uploaded BOT ${bot.name}`, format: 'json'}).then((data: any) => {
+        pastebin.createPaste({text: JSON.stringify(bot), title: `${user.name} has uploaded BOT ${bot.name}`, format: 'json'}).then((data: unknown) => {
           const dsEmbed = new MessageEmbed()
               .setTitle(`BOT ${bot.name} created by ${bot.author}`)
-              .setURL(data)
+              .setURL(data as string)
               .setAuthor(user.name, `${CDN_PORTRAIT_URL}${user.avatar}.png`)
               .setDescription(`A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`)
               .setThumbnail(`${CDN_PORTRAIT_URL}${bot.avatar}.png`);
-          client.send(Transfer.PASTEBIN_URL, {url: data});
+          client.send(Transfer.PASTEBIN_URL, {url: data as string});
           try {
             this.discordWebhook.send({
               embeds: [dsEmbed]
@@ -82,7 +82,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       }
     });
 
-    this.onMessage(Transfer.REQUEST_BOT_LIST, (client, message)=>{
+    this.onMessage(Transfer.REQUEST_BOT_LIST, (client)=>{
       const botList = new Array<{name: string, avatar: string}>();
 
       this.bots.forEach(b=>{
@@ -97,14 +97,14 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       client.send(Transfer.REQUEST_BOT_DATA, botData);
     });
 
-    this.onMessage(Transfer.REQUEST_META, (client, message)=>{
+    this.onMessage(Transfer.REQUEST_META, (client)=>{
       client.send(Transfer.REQUEST_META, this.meta);
       client.send(Transfer.REQUEST_META_ITEMS, this.metaItems);
       client.send(Transfer.REQUEST_BOT_MONITOR, this.botMonitor);
     });
 
 
-    this.onMessage(Transfer.OPEN_BOOSTER, (client, message)=>{
+    this.onMessage(Transfer.OPEN_BOOSTER, (client)=>{
       const user: LobbyUser = this.state.users.get(client.auth.uid);
       if(user && user.booster && user.booster > 0) {
         user.booster -= 1;
@@ -234,7 +234,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
     });
 
     this.onMessage(Transfer.SEARCH, (client, message)=>{
-      UserMetadata.findOne({'displayName': message.name}, (err: any, user: IUserMetadata)=>{
+      UserMetadata.findOne({'displayName': message.name}, (err, user)=>{
         if (user) {
           DetailledStatistic.find({'playerId': user.uid}, ['pokemons', 'time', 'rank', 'elo'], {limit: 10, sort: {'time': -1}}, (err, stats)=>{
             if (err) {
@@ -270,7 +270,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
         if(emotionsToCheck.includes(message.emotion)){
           const shinyPad = message.shiny ? '0000/0001' : '';
           user.avatar = `${message.index}/${shinyPad}/${message.emotion}`;
-          UserMetadata.findOne({'uid': client.auth.uid}, (err: any, u: FilterQuery<IUserMetadata>)=>{
+          UserMetadata.findOne({'uid': client.auth.uid}, (err: CallbackError, u: FilterQuery<IUserMetadata>)=>{
             u.avatar = `${message.index}/${shinyPad}/${message.emotion}`;
             u.save();
           });
@@ -278,7 +278,7 @@ export default class CustomLobbyRoom<ICustomLobbyState> extends LobbyRoom{
       }
     });
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       connect(process.env.MONGO_URI? process.env.MONGO_URI : 'Default Mongo URI', {}, () => {
         Chat.find({ 'time': { $gt: Date.now() - 86400000 } }, (err, messages) => {
           if (err) {

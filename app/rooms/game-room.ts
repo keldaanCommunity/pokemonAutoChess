@@ -17,6 +17,9 @@ import {Pkm, PkmIndex} from '../types/enum/Pokemon';
 import PokemonConfig from '../models/colyseus-models/pokemon-config';
 import { Synergy } from '../types/enum/Synergy';
 import { Pokemon } from '../models/colyseus-models/pokemon';
+import { IGameUser } from '../models/colyseus-models/game-user';
+import History from '../models/mongo-models/history';
+import { components } from '../api-v1/openapi';
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>;
@@ -28,10 +31,10 @@ export default class GameRoom extends Room<GameState> {
   }
 
   // When room is initialized
-  onCreate(options: any) {
+  onCreate(options: {users: {[key: string]: IGameUser}, preparationId: string, name: string, idToken: string}) {
     console.log(`create game room`);
     // console.log(options);
-    this.setState(new GameState());
+    this.setState(new GameState(options.preparationId, options.name));
     this.maxClients = 8;
     for (const id in options.users) {
       const user = options.users[id];
@@ -219,6 +222,21 @@ export default class GameRoom extends Room<GameState> {
   onDispose() {
     // console.log(`dispose game room`);
     const requiredStageLevel = process.env.MODE == 'dev' ? 0: 10;
+    this.state.endTime = Date.now();
+    const ps = new Array<components["schemas"]["GameHistory"]>();
+    this.state.players.forEach(p=> {
+      if(!p.isBot){
+        ps.push(this.transformToSimplePlayer(p)
+        )
+      }
+    });
+    History.create({
+      id: this.state.preparationId,
+      name: this.state.name,
+      startTime: this.state.startTime,
+      endTime: this.state.endTime,
+      players: ps
+    });
 
     if (this.state.stageLevel >= requiredStageLevel && this.state.elligibleToXP) {
       this.state.players.forEach((player) =>{
@@ -295,7 +313,7 @@ export default class GameRoom extends Room<GameState> {
       id: player.id,
       rank: player.rank,
       avatar: player.avatar,
-      pokemons: new Array<{name: string, avatar: string, items: Item[]}>(),
+      pokemons: new Array<{name: string, avatar: string, items: Item[], inventory: Item[]}>(),
       elo: player.elo
     };
 
@@ -306,10 +324,12 @@ export default class GameRoom extends Room<GameState> {
         const s = {
           name: pokemon.name,
           avatar: avatar,
-          items: new Array<Item>()
+          items: new Array<Item>(),
+          inventory: new Array<Item>()
         };
         pokemon.items.forEach((i)=>{
           s.items.push(i);
+          s.inventory.push(i)
         });
         simplePlayer.pokemons.push(s);
       }
