@@ -36,7 +36,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
             if(allUsersReady){
                 const token = await firebase.auth().currentUser?.getIdToken();
                 if(token) {
-                    const r: Room<GameState> = await client.create('game', {users: users, idToken: token});
+                    const r: Room<GameState> = await client.create('game', {users: users, idToken: token, name: name, preparationId: room.id});
                     dispatch(gameStart(r.id));
                     localStorage.setItem('lastRoomId', r.id);
                     localStorage.setItem('lastSessionId', r.sessionId);

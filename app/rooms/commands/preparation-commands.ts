@@ -13,6 +13,9 @@ export class OnJoinCommand extends Command<PreparationRoom, {
   auth: any
 }> {
   execute({client, options, auth}) {
+    if(this.state.ownerId == ''){
+      this.state.ownerId = auth.uid;
+    }
     UserMetadata.findOne({'uid': auth.uid}, (err: any, user: IUserMetadata)=>{
       if (user) {
         this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false));
