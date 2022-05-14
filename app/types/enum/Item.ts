@@ -55,4 +55,4 @@ export enum Item {
     ROCKY_HELMET = 'ROCKY_HELMET'
 }
 
-export const BasicItems: Item[] = [Item.FOSSIL_STONE, Item.TWISTED_SPOON, Item.MAGNET, Item.BLACK_GLASSES, Item.MIRACLE_SEED, Item.CHARCOAL, Item.NEVER_MELT_ICE, Item.HEART_SCALE];
+export const BasicItems: Item[] = [Item.FOSSIL_STONE, Item.TWISTED_SPOON, Item.MAGNET, Item.BLACK_GLASSES, Item.MIRACLE_SEED, Item.CHARCOAL, Item.NEVER_MELT_ICE, Item.HEART_SCALE, Item.MYSTIC_WATER];
