@@ -1,7 +1,7 @@
-import React from 'react';
-import GameItem from './game-item';
-import CSS from 'csstype';
-import { useAppSelector } from '../../../hooks';
+import React from 'react'
+import GameItem from './game-item'
+import CSS from 'csstype'
+import { useAppSelector } from '../../../hooks'
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -15,15 +15,15 @@ const style: CSS.Properties = {
 
 
 export default function GameItemsProposition(){
-    const itemsProposition = useAppSelector(state=>state.game.itemsProposition);
+    const itemsProposition = useAppSelector(state=>state.game.itemsProposition)
     if(itemsProposition.length >0){
         return <div style={style}>
             {itemsProposition.map((e,i)=>{
                 return <GameItem key={i} item={e}/>
             })}
-    </div>;
+    </div>
     }
     else{
-        return null;
+        return null
     }
 }

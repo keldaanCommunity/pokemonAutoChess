@@ -1,12 +1,12 @@
-import React from 'react';
-import {CDN_PORTRAIT_URL } from '../../../../../types';
-import { Item } from '../../../../../types/enum/Item';
-import {ItemDescription, ItemName} from '../../../../../types/strings/Item';
-import {Emotion} from '../../../../../types';
-import {Pkm} from '../../../../../types/enum/Pokemon';
-import PokemonFactory from '../../../../../models/pokemon-factory';
-import {RarityColor} from '../../../../../types/Config';
-import CSS from 'csstype';
+import React from 'react'
+import {CDN_PORTRAIT_URL } from '../../../../../types'
+import { Item } from '../../../../../types/enum/Item'
+import {ItemDescription, ItemName} from '../../../../../types/strings/Item'
+import {Emotion} from '../../../../../types'
+import {Pkm} from '../../../../../types/enum/Pokemon'
+import PokemonFactory from '../../../../../models/pokemon-factory'
+import {RarityColor} from '../../../../../types/Config'
+import CSS from 'csstype'
 
 const entityStyle: CSS.Properties = {
     display: 'flex',
@@ -18,7 +18,7 @@ const entityStyle: CSS.Properties = {
     backgroundColor:'rgba(255,255,255,0.7)',
     flexFlow:'column',
     width:'20%'
-};
+}
 
 const imgStyle: CSS.Properties = {
     height:'80px',
@@ -37,7 +37,7 @@ export default function SelectedEntity(props: {entity: Item | Pkm}) {
     </div>
     }
     else if(Object.values(Pkm).includes(props.entity as Pkm)){
-        const pokemon = PokemonFactory.createPokemonFromName(props.entity as Pkm);
+        const pokemon = PokemonFactory.createPokemonFromName(props.entity as Pkm)
         return <div className='nes-container' style={entityStyle}>
             <div style={{display:'flex'}}>
                 <img style={imgStyle} src={`${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>
@@ -55,9 +55,9 @@ export default function SelectedEntity(props: {entity: Item | Pkm}) {
             <p>Special Defense: {pokemon.speDef}</p>
             <p>Range: {pokemon.range}</p>
             <p>Mana: {pokemon.maxMana}</p>
-        </div>;
+        </div>
     }
     else{
-        return null;
+        return null
     }
 }

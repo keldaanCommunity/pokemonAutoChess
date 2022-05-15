@@ -1,12 +1,12 @@
-import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import CSS from 'csstype';
-import GameBlueDpsMeter from './game-blue-dps-meter';
-import GameRedDpsMeter from './game-red-dps-meter';
-import GameBlueHealDpsMeter from './game-blue-heal-dps-meter';
-import GameRedHealDpsMeter from './game-red-heal-dps-meter';
-import { useAppSelector } from '../../../hooks';
-import { CDN_PORTRAIT_URL } from '../../../../../types';
+import React from 'react'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import CSS from 'csstype'
+import GameBlueDpsMeter from './game-blue-dps-meter'
+import GameRedDpsMeter from './game-red-dps-meter'
+import GameBlueHealDpsMeter from './game-blue-heal-dps-meter'
+import GameRedHealDpsMeter from './game-red-heal-dps-meter'
+import { useAppSelector } from '../../../hooks'
+import { CDN_PORTRAIT_URL } from '../../../../../types'
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -25,13 +25,13 @@ const imgStyle: CSS.Properties = {
     width:'60px',
     height:'60px',
     imageRendering:'pixelated'
-};
+}
 
 export default function GameDpsMeter() {
-    const opponentAvatar = useAppSelector(state=>state.game.currentPlayerOpponentAvatar);
-    const avatar = useAppSelector(state=>state.game.currentPlayerAvatar);
+    const opponentAvatar = useAppSelector(state=>state.game.currentPlayerOpponentAvatar)
+    const avatar = useAppSelector(state=>state.game.currentPlayerAvatar)
     if(opponentAvatar == ''){
-        return null;
+        return null
     }
     else{
         return <div className='nes-container hidden-scrollable' style={style}>

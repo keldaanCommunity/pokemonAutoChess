@@ -1,11 +1,11 @@
-import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {CDN_PORTRAIT_URL} from '../../../../../types';
-import {Pkm, PkmIndex} from '../../../../../types/enum/Pokemon';
-import {Emotion} from '../../../../../types';
-import ReactTooltip from 'react-tooltip';
-import CSS from 'csstype';
-import { IStep } from '../../../../../models/mongo-models/bot-v2';
+import React from 'react'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import {CDN_PORTRAIT_URL} from '../../../../../types'
+import {Pkm, PkmIndex} from '../../../../../types/enum/Pokemon'
+import {Emotion} from '../../../../../types'
+import ReactTooltip from 'react-tooltip'
+import CSS from 'csstype'
+import { IStep } from '../../../../../models/mongo-models/bot-v2'
 
 const tabStyle: CSS.Properties = {
     backgroundColor: 'rgba(255, 255, 255, .7)',
@@ -18,13 +18,13 @@ const tabStyle: CSS.Properties = {
 }
 
 const cursorStyle: CSS.Properties = {
-    cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
+    cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer'
 }
 
 const tdStyle: CSS.Properties = {
     width:'80px',
     height:'80px',
-    cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`,
+    cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer',
     padding:'0px'
 }
 
@@ -40,7 +40,7 @@ const bigImgStyle: CSS.Properties = {
   width:'80px',
   height:'80px',
   imageRendering:'pixelated',
-  cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
+  cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer'
 }
 
 const tabPaneStyle: CSS.Properties = {
@@ -96,7 +96,7 @@ export default function TeamEditor(props:{
             <div style={{width:'auto'}} className="nes-select">
             <select value={props.name} onChange={props.handleAvatarChange} id="default_select">
                 {Object.keys(Pkm).sort((a,b)=>{return Pkm[a].localeCompare(Pkm[b])}).map(key=>{
-                    return <option key={key} value={Pkm[key]}>{Pkm[key]}</option>;
+                    return <option key={key} value={Pkm[key]}>{Pkm[key]}</option>
                 })};
             </select>
         </div>
@@ -151,7 +151,7 @@ export default function TeamEditor(props:{
                             {[3,2,1,0].map(y => {
                                 return <tr key={y}>
                                     {[0,1,2,3,4,5,6,7].map(x=>{
-                                        let r = <td style={tdStyle} onClick={()=>{props.handleEditorClick(x,y)}} key={x}></td>;
+                                        let r = <td style={tdStyle} onClick={()=>{props.handleEditorClick(x,y)}} key={x}></td>
                                         props.steps[i].board.forEach(p=>{
                                             if(p.x == x && p.y == y){
                                                 r = <td style={tdStyle} onClick={()=>{props.handleEditorClick(x,y)}} key={x}>
@@ -163,8 +163,8 @@ export default function TeamEditor(props:{
                                                 </div>
                                             </td>
                                             }
-                                        });
-                                        return r;
+                                        })
+                                        return r
                                     })}  
                                 </tr>
                             })}
@@ -175,5 +175,5 @@ export default function TeamEditor(props:{
         </TabPanel>
     })}
     </Tabs>
-    </div>;
+    </div>
 }

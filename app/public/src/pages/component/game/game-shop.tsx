@@ -1,13 +1,13 @@
-import React from 'react';
-import GameRefresh from './game-refresh';
-import GameLock from './game-lock';
-import GameLevel from './game-level';
-import GameExperience from './game-experience';
-import GameStore from './game-store';
-import GameMoneyDetail from './game-money-detail';
-import ReactTooltip from 'react-tooltip';
-import CSS from 'csstype';
-import { useAppSelector } from '../../../hooks';
+import React from 'react'
+import GameRefresh from './game-refresh'
+import GameLock from './game-lock'
+import GameLevel from './game-level'
+import GameExperience from './game-experience'
+import GameStore from './game-store'
+import GameMoneyDetail from './game-money-detail'
+import ReactTooltip from 'react-tooltip'
+import CSS from 'csstype'
+import { useAppSelector } from '../../../hooks'
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -20,7 +20,7 @@ const style: CSS.Properties = {
 
 export default function GameShop() {
 
-    const money = useAppSelector(state=>state.game.money);
+    const money = useAppSelector(state=>state.game.money)
 
     return <div style={style} className='nes-container'>
     <div style={{position: 'absolute', bottom:'15%', left:'1%', fontSize: '22px'}}
@@ -42,5 +42,5 @@ export default function GameShop() {
     <GameLevel/>
     <GameExperience/>
     <GameStore/>
-</div>;
+</div>
 }

@@ -20,9 +20,9 @@ import { Pkm } from './enum/Pokemon'
 import { Pokemon } from '../models/colyseus-models/pokemon'
 
 
-export const CDN_PORTRAIT_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/';
+export const CDN_PORTRAIT_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/'
 
-export const CDN_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master';
+export const CDN_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master'
 
 export type PrecomputedTypePokemon = {
     [key in Synergy] : {
@@ -271,7 +271,7 @@ export interface IDpsHeal {
 }
 
 export function instanceofPokemonEntity(obj: IPokemon | IPokemonEntity){
-    return 'mana' in obj;
+    return 'mana' in obj
 }
 
 export interface IPokemonEntity {
@@ -360,26 +360,26 @@ export interface IPreparationMetadata {
 }
 
 export enum Emotion {
-    NORMAL = "Normal",
-    HAPPY = "Happy",
-    PAIN = "Pain",
-    ANGRY = "Angry",
-    WORRIED = "Worried",
-    SAD = "Sad",
-    CRYING = "Crying",
-    SHOUTING = "Shouting",
-    TEARY_EYED = "Teary-Eyed",
-    DETERMINED = "Determined",
-    JOYOUS = "Joyous",
-    INSPIRED = "Inspired",
-    SURPRISED = "Surprised",
-    DIZZY = "Dizzy",
-    SPECIAL0 = "Special0",
-    SPECIAL1 = "Special1",
-    SIGH = "Sigh",
-    STUNNED = "Stunned",
-    SPECIAL2 = "Special2",
-    SPECIAL3 = "Special3"
+    NORMAL = 'Normal',
+    HAPPY = 'Happy',
+    PAIN = 'Pain',
+    ANGRY = 'Angry',
+    WORRIED = 'Worried',
+    SAD = 'Sad',
+    CRYING = 'Crying',
+    SHOUTING = 'Shouting',
+    TEARY_EYED = 'Teary-Eyed',
+    DETERMINED = 'Determined',
+    JOYOUS = 'Joyous',
+    INSPIRED = 'Inspired',
+    SURPRISED = 'Surprised',
+    DIZZY = 'Dizzy',
+    SPECIAL0 = 'Special0',
+    SPECIAL1 = 'Special1',
+    SIGH = 'Sigh',
+    STUNNED = 'Stunned',
+    SPECIAL2 = 'Special2',
+    SPECIAL3 = 'Special3'
 }
 
 export const EmotionCost: {[key in Emotion] : number} = {

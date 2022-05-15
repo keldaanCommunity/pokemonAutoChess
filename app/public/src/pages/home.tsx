@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import "nes.css/css/nes.min.css";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import 'nes.css/css/nes.min.css'
 
 export default function Home() {
   return (
@@ -13,5 +13,5 @@ export default function Home() {
         </Link>
       </div>
     </div>
-    );
+    )
 }

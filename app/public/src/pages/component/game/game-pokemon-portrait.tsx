@@ -1,25 +1,25 @@
-import React from 'react';
-import {Pokemon} from '../../../../../models/colyseus-models/pokemon';
-import { CDN_PORTRAIT_URL } from '../../../../../types';
-import { useAppDispatch } from '../../../hooks';
-import { shopClick } from '../../../stores/NetworkStore';
-import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata';
-import { Emotion } from '../../../../../types';
-import { Rarity } from '../../../../../types/enum/Game';
-import {PkmCost} from '../../../../../types/Config';
+import React from 'react'
+import {Pokemon} from '../../../../../models/colyseus-models/pokemon'
+import { CDN_PORTRAIT_URL } from '../../../../../types'
+import { useAppDispatch } from '../../../hooks'
+import { shopClick } from '../../../stores/NetworkStore'
+import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata'
+import { Emotion } from '../../../../../types'
+import { Rarity } from '../../../../../types/enum/Game'
+import {PkmCost} from '../../../../../types/Config'
 
 const COLOR_TYPE = Object.freeze({
-    [Rarity.COMMON] : "rgba(104, 109, 125, 0.6)",
-    [Rarity.UNCOMMON] : "rgba(71, 138, 65, 0.6)",
-    [Rarity.RARE] : "rgba(80, 98, 171, 0.6)",
-    [Rarity.EPIC] : "rgba(123, 70, 156,0.6)",
-    [Rarity.LEGENDARY] : "rgba(166, 128, 46, 0.6)",
-    [Rarity.MYTHICAL] : "rgba(255, 222, 255, 0.6)",
-    [Rarity.SUMMON] : "rgba(153, 31, 31, 0.6)"
-  });
+    [Rarity.COMMON] : 'rgba(104, 109, 125, 0.6)',
+    [Rarity.UNCOMMON] : 'rgba(71, 138, 65, 0.6)',
+    [Rarity.RARE] : 'rgba(80, 98, 171, 0.6)',
+    [Rarity.EPIC] : 'rgba(123, 70, 156,0.6)',
+    [Rarity.LEGENDARY] : 'rgba(166, 128, 46, 0.6)',
+    [Rarity.MYTHICAL] : 'rgba(255, 222, 255, 0.6)',
+    [Rarity.SUMMON] : 'rgba(153, 31, 31, 0.6)'
+  })
 
 export default function GamePokemonPortrait(props: {index: number, pokemon: Pokemon | undefined, pokemonConfig: IPokemonConfig | undefined}) {
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch()
     
     if(!props.pokemon){
         return <div style={{
@@ -28,12 +28,12 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
         }}/>
     }
     else{
-        const rarityColor = COLOR_TYPE[props.pokemon.rarity];
+        const rarityColor = COLOR_TYPE[props.pokemon.rarity]
         return <div className="nes-container" style={{
             width:'15.5%',
             backgroundColor: rarityColor,
             marginRight:'1%',
-            cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
+            cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer'
         }}
         onClick={()=>{dispatch(shopClick(props.index))}}>
         <p style={{
@@ -60,33 +60,33 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
             top:'30%'
             }}>
             {props.pokemon.types.map(type=>{
-                return <li key={type}><img src={'assets/types/'+ type +'.png'}/></li>;
+                return <li key={type}><img src={'assets/types/'+ type +'.png'}/></li>
             })}
         </ul>
-        </div>;
+        </div>
     }
 }
 
 function getPath(pokemon: Pokemon, config: IPokemonConfig | undefined) {
-    const index = pokemon.index;
+    const index = pokemon.index
     
-    let pokemonPath = CDN_PORTRAIT_URL;
-    pokemonPath += index + '/';
+    let pokemonPath = CDN_PORTRAIT_URL
+    pokemonPath += index + '/'
 
     if(config && config.selectedShiny){
-        pokemonPath += '0000/0001/';
+        pokemonPath += '0000/0001/'
     }
 
     if( config && config.selectedEmotion){
-        pokemonPath += config.selectedEmotion;
+        pokemonPath += config.selectedEmotion
     }
     else{
-        pokemonPath += Emotion.NORMAL;
+        pokemonPath += Emotion.NORMAL
     }
-    pokemonPath += '.png';
-    return pokemonPath;
+    pokemonPath += '.png'
+    return pokemonPath
 }
 
 function capitalizeFirstLetter(s: string) {
-    return s.charAt(0).toUpperCase() + s.slice(1);
+    return s.charAt(0).toUpperCase() + s.slice(1)
 }

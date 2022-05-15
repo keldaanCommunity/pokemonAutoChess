@@ -1,6 +1,6 @@
-import React from 'react';
-import CSS from 'csstype';
-import { useAppSelector } from '../../../hooks';
+import React from 'react'
+import CSS from 'csstype'
+import { useAppSelector } from '../../../hooks'
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -17,7 +17,7 @@ const styleProgress: CSS.Properties = {
 }
 
 export default function GameExperience() {
-    const experienceManager = useAppSelector(state=>state.game.experienceManager);
+    const experienceManager = useAppSelector(state=>state.game.experienceManager)
     
     let progressString = ''
     if(Number(experienceManager.expNeeded) == -1)
@@ -26,7 +26,7 @@ export default function GameExperience() {
     }
     else
     {
-        progressString = experienceManager.experience + "/" + experienceManager.expNeeded
+        progressString = experienceManager.experience + '/' + experienceManager.expNeeded
     }
     
 
@@ -37,5 +37,5 @@ export default function GameExperience() {
             <p style={styleProgress}>
                 {progressString}</p>
         </div>
-    </div>;
+    </div>
 }

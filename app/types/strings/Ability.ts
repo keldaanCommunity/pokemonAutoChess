@@ -1,5 +1,5 @@
-import { Langage } from ".."
-import { Ability } from "../enum/Ability"
+import { Langage } from '..'
+import { Ability } from '../enum/Ability'
 
 export const AbilityName: {[key in Ability]: Langage} = {
     [Ability.KING_SHIELD]: {
@@ -417,100 +417,100 @@ export const AbilityName: {[key in Ability]: Langage} = {
         prt: ''
     },
     CORRUPTED_NATURE: {
-        eng: "Corrupted Nature",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Corrupted Nature',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     CRABHAMMER: {
-        eng: "Crabhammer",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Crabhammer',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     DIAMOND_STORM: {
-        eng: "Diamond Storm",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Diamond Storm',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     DRACO_ENERGY: {
-        eng: "Draco Energy",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Draco Energy',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     DYNAMAX_CANNON: {
-        eng: "Dynamax Cannon",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Dynamax Cannon',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     DYNAMIC_PUNCH: {
-        eng: "Dynamic Punch",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Dynamic Punch',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     ELECTRO_BOOST: {
-        eng: "Electro Boost",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Electro Boost',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     ELECTRO_WEB: {
-        eng: "Electro Web",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Electro Web',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     FIRE_TRICK: {
-        eng: "Fire Trick",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Fire Trick',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     FLAME_CHARGE: {
-        eng: "Flame Charge",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Flame Charge',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     LEECH_SEED: {
-        eng: "Leech Seed",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Leech Seed',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     LOCK_ON: {
-        eng: "Lock On",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Lock On',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     PSYCH_UP: {
-        eng: "Psych Up",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Psych Up',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     RAZOR_WIND: {
-        eng: "Razor Wind",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Razor Wind',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     TWISTING_NEITHER: {
-        eng: "Twisting Neither",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Twisting Neither',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     WONDER_GUARD: {
-        eng: "Wonder Guard",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Wonder Guard',
+        esp: '',
+        prt: '',
+        fra: ''
     }
 }
 
@@ -930,99 +930,99 @@ export const AbilityDescription: {[key in Ability]: Langage} = {
         prt: ''
     },
     CORRUPTED_NATURE: {
-        eng: "Wound adjacent ennemies for 4 seconds and deals 10/20/40 physical life steal damage",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Wound adjacent ennemies for 4 seconds and deals 10/20/40 physical life steal damage',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     CRABHAMMER: {
-        eng: "Deals 30/60/120 physical damage. Execute the target if below 30%",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Deals 30/60/120 physical damage. Execute the target if below 30%',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     DIAMOND_STORM: {
-        eng: "+5 defense to adjacent allies",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: '+5 defense to adjacent allies',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     DRACO_ENERGY: {
-        eng: "Deals 100% regidraco hp as special damage",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Deals 100% regidraco hp as special damage',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     DYNAMAX_CANNON: {
-        eng: "Shoot a dynamax beam on a straight line, dealing 80% hp to every pokemon as special damage",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Shoot a dynamax beam on a straight line, dealing 80% hp to every pokemon as special damage',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     DYNAMIC_PUNCH: {
-        eng: "Deals 20/40/80 physical damage and confuse the target for 1.5/3/6s",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Deals 20/40/80 physical damage and confuse the target for 1.5/3/6s',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     ELECTRO_BOOST: {
-        eng: "All electric allies gains a rune protect effect",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'All electric allies gains a rune protect effect',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     ELECTRO_WEB: {
-        eng: "Steal 15/30/60% attack speed to adjacent ennemies",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Steal 15/30/60% attack speed to adjacent ennemies',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     FIRE_TRICK: {
-        eng: "Deals 20/40/80 special damage and teleports the target to a corner of the map",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Deals 20/40/80 special damage and teleports the target to a corner of the map',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     FLAME_CHARGE: {
-        eng: "Dash into the ennemy backline, dealing 30/60/120 physical damage",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Dash into the ennemy backline, dealing 30/60/120 physical damage',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     LEECH_SEED: {
-        eng: "Poison the target for 3/6/12s, healing for 10/20/40 hp",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Poison the target for 3/6/12s, healing for 10/20/40 hp',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     LOCK_ON: {
-        eng: "Lock the target and shred its defenses for 8s. Genesect deals 3x more damage to it",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Lock the target and shred its defenses for 8s. Genesect deals 3x more damage to it',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     PSYCH_UP: {
-        eng: "Silence the target and every ennemies around for 2/4/8s, dealing 10/20/40 special damage",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Silence the target and every ennemies around for 2/4/8s, dealing 10/20/40 special damage',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     RAZOR_WIND: {
-        eng: "Apply Smoke effect (-50% attack speed) on the target and around it",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Apply Smoke effect (-50% attack speed) on the target and around it',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     TWISTING_NEITHER: {
-        eng: "Deals 80 special damage to around ennemies. Every affected pokemons is teleported somewhere",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Deals 80 special damage to around ennemies. Every affected pokemons is teleported somewhere',
+        esp: '',
+        prt: '',
+        fra: ''
     },
     WONDER_GUARD: {
-        eng: "Passive: Reduce received damage to 1.",
-        esp: "",
-        prt: "",
-        fra: ""
+        eng: 'Passive: Reduce received damage to 1.',
+        esp: '',
+        prt: '',
+        fra: ''
     }
 }

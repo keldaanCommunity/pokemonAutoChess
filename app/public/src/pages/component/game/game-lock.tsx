@@ -1,7 +1,7 @@
-import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import CSS from 'csstype';
-import { lockClick } from '../../../stores/NetworkStore';
+import React from 'react'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import CSS from 'csstype'
+import { lockClick } from '../../../stores/NetworkStore'
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -10,10 +10,10 @@ const style: CSS.Properties = {
 }
 
 export default function GameLock() {
-    const dispatch = useAppDispatch();
-    const shopLocked = useAppSelector(state=>state.game.shopLocked);
+    const dispatch = useAppDispatch()
+    const shopLocked = useAppSelector(state=>state.game.shopLocked)
 
-    return <button className= {shopLocked ? "nes-btn is-error": "nes-btn is-success"} onClick={()=>{dispatch(lockClick())}} style={style}>
+    return <button className= {shopLocked ? 'nes-btn is-error': 'nes-btn is-success'} onClick={()=>{dispatch(lockClick())}} style={style}>
     <img style={{width:'25px', marginLeft:'-1px'}} src="/assets/ui/lock.png"/>
-</button>;
+</button>
 }

@@ -1,19 +1,20 @@
-import React from 'react';
-import Leaderboard from './leaderboard';
-import Profile from './profile';
-import Search from './search';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { setTabIndex } from '../../../stores/LobbyStore';
+import React from 'react'
+import Profile from './profile'
+import Search from './search'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import { setTabIndex } from '../../../stores/LobbyStore'
+import BotLeaderboard from './bot-leaderboard'
+import PlayerLeaderboard from './player-leaderboard'
 
 export default function TabMenu() {
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch()
 
-    const tabIndex: number = useAppSelector(state=>state.lobby.tabIndex);
+    const tabIndex: number = useAppSelector(state=>state.lobby.tabIndex)
 
     const cursorStyle = {
-        cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`
+        cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer'
     }
 
     const tabStyle = {
@@ -34,10 +35,10 @@ export default function TabMenu() {
                 <Tab style={cursorStyle}>Search</Tab>
             </TabList>
             <TabPanel>
-                <Leaderboard isBot={false}/>
+                <PlayerLeaderboard/>
             </TabPanel>
             <TabPanel>
-                <Leaderboard isBot={true}/>
+                <BotLeaderboard/>
             </TabPanel>
             <TabPanel>
                 <Profile/>

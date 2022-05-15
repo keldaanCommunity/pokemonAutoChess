@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import Modal from "react-bootstrap/Modal";
-import { IBot } from '../../../../../models/mongo-models/bot-v2';
-import { ModalMode } from '../../../../../types';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { requestBotData } from '../../../stores/NetworkStore';
+import React, { useState, useEffect } from 'react'
+import Modal from 'react-bootstrap/Modal'
+import { IBot } from '../../../../../models/mongo-models/bot-v2'
+import { ModalMode } from '../../../../../types'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import { requestBotData } from '../../../stores/NetworkStore'
 
 const textAreaStyle={
   height:'400px'
-};
+}
 
 const buttonStyle = {
   marginLeft:'10px',
@@ -30,11 +30,11 @@ export default function ModalMenu(  props:{
       if(props.botData?.avatar){
         handleTextAreaChange(JSON.stringify(props.botData))
       }
-    },[props.botData]);
-    const dispatch = useAppDispatch();
-    const botList: {name: string, avatar: string}[] = useAppSelector(state=>state.lobby.botList);
-    const url = props.pasteBinUrl.length == 0? null: <h5>URL created !:<a href={props.pasteBinUrl}>{props.pasteBinUrl}</a></h5>;
-    const [textArea, handleTextAreaChange] = useState<string>('');
+    },[props.botData])
+    const dispatch = useAppDispatch()
+    const botList: {name: string, avatar: string}[] = useAppSelector(state=>state.lobby.botList)
+    const url = props.pasteBinUrl.length == 0? null: <h5>URL created !:<a href={props.pasteBinUrl}>{props.pasteBinUrl}</a></h5>
+    const [textArea, handleTextAreaChange] = useState<string>('')
     if(props.modalMode == ModalMode.EXPORT){
       return <Modal show={props.modalBoolean} onHide={props.hideModal} size="lg">
       <Modal.Header>
@@ -49,11 +49,11 @@ export default function ModalMenu(  props:{
       <Modal.Footer>
         <button style={buttonStyle} className='nes-btn is-error' onClick={props.hideModal}>Cancel</button>
         <button style={buttonStyle} className='nes-btn is-success' onClick={()=>{
-            props.createBot();
+            props.createBot()
           }}>Submit your bot
         </button>
       </Modal.Footer>
-      </Modal>;
+      </Modal>
     }
     else if(props.modalMode == ModalMode.IMPORT){
       return <Modal show={props.modalBoolean} onHide={props.hideModal} size="lg">
@@ -83,10 +83,10 @@ export default function ModalMenu(  props:{
         <button style={buttonStyle} className='nes-btn is-error' onClick={props.hideModal}>Cancel</button>
         <button style={buttonStyle} className='nes-btn is-success' onClick={()=>{props.importBot(textArea)}}>Import</button>
       </Modal.Footer>
-      </Modal>;
+      </Modal>
     }
     else{
-        return null;
+        return null
     }
 }
 /*

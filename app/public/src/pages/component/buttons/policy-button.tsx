@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const buttonStyle = {
     marginLeft:'10px',
@@ -8,7 +8,7 @@ const buttonStyle = {
 
 export default function PolicyButton(){
     function handlePrivacyPolicyClick(){
-        window.location.href = 'https://pokemonautochess-b18fb.web.app/privacy-policy.html';
+        window.location.href = 'https://pokemonautochess-b18fb.web.app/privacy-policy.html'
     }
-    return <button type="button" style={buttonStyle} className="nes-btn" onClick={()=>{handlePrivacyPolicyClick()}}>Policy</button>;
+    return <button type="button" style={buttonStyle} className="nes-btn" onClick={()=>{handlePrivacyPolicyClick()}}>Policy</button>
 }

@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose';
+import {Schema, model} from 'mongoose'
 
 export interface IChat{
   payload: string;
@@ -22,6 +22,6 @@ const chatSchema = new Schema(
         type: Number
       }
     }
-);
+)
 
-export default model<IChat>('Chat', chatSchema);
+export default model<IChat>('Chat', chatSchema)

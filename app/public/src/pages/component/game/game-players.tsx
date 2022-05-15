@@ -1,7 +1,7 @@
-import React from 'react';
-import GamePlayer from './game-player';
-import CSS from 'csstype';
-import { useAppSelector } from '../../../hooks';
+import React from 'react'
+import GamePlayer from './game-player'
+import CSS from 'csstype'
+import { useAppSelector } from '../../../hooks'
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -12,9 +12,9 @@ const style: CSS.Properties = {
 }
 
 export default function GamePlayers(props: {click: (id: string)=>void}) {
-    const players = useAppSelector(state=>state.game.players);
-    const uid = useAppSelector(state=>state.network.uid);
-    const sortedPlayers = [...players];
+    const players = useAppSelector(state=>state.game.players)
+    const uid = useAppSelector(state=>state.network.uid)
+    const sortedPlayers = [...players]
     return <div style={style}>
     {sortedPlayers.sort((a,b)=>{return a.rank - b.rank}).map((p,i)=>{
         return <GamePlayer 

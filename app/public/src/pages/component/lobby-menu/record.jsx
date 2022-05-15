@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import Elo from '../elo';
-import {CDN_PORTRAIT_URL} from '../../../../../types';
+import React, { Component } from 'react'
+import Elo from '../elo'
+import {CDN_PORTRAIT_URL} from '../../../../../types'
 
 class Record extends Component{
 
     constructor(){
-        super();
+        super()
         this.ulStyle = {
             listStyle: 'none',
             padding: '0px',
             display:'flex',
             flexFlow:'column'
-        };
+        }
     }
     render(){
         return <div style={{marginBottom:'10px',
@@ -35,29 +35,29 @@ class Record extends Component{
 
     createPokemon(p, index){
         return <div key={index}>
-            <img style={{width:'60px', imageRendering:'pixelated'}} src={CDN_PORTRAIT_URL + p.avatar + ".png"}/>
+            <img style={{width:'60px', imageRendering:'pixelated'}} src={CDN_PORTRAIT_URL + p.avatar + '.png'}/>
             <div style={{display:'flex'}}>
-                {p.items.map((item, i)=> {return <img key={i} style={{width:'20px', height:'20px', imageRendering:'pixelated'}} src={"/assets/item/" + item + ".png"}/>})}
+                {p.items.map((item, i)=> {return <img key={i} style={{width:'20px', height:'20px', imageRendering:'pixelated'}} src={'/assets/item/' + item + '.png'}/>})}
             </div>
         </div>
     }
 
     
     formatDate(n) {
-        let date = new Date(n);
+        let date = new Date(n)
         return  this.pad( date.getUTCMonth() + 1 ) +
             '/' + this.pad( date.getUTCDate() ) +
             ' ' + this.pad( date.getUTCHours() ) +
             ':' + this.pad( date.getUTCMinutes() )
-    };
+    }
 
     pad(number) {
         if ( number < 10 ) {
-            return '0' + number;
+            return '0' + number
             }
-        return number;
+        return number
     }
     
 }
 
-export default Record;
+export default Record

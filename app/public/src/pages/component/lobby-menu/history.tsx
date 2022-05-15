@@ -1,13 +1,13 @@
-import React from 'react';
-import { IGameRecord } from '../../../../../models/colyseus-models/game-record';
-import Record from './record';
+import React from 'react'
+import { IGameRecord } from '../../../../../models/colyseus-models/game-record'
+import Record from './record'
 
 const ulStyle = {
     listStyle: 'none',
     padding: '0px',
     display:'flex',
     flexFlow:'column'
-};
+}
 
 export default function History(props: {history: IGameRecord[]}) {
     if(props.history){
@@ -24,7 +24,7 @@ export default function History(props: {history: IGameRecord[]}) {
     </ul>
     }
     else{
-        return null;
+        return null
     }
 }
 

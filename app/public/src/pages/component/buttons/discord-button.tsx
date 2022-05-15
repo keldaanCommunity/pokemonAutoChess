@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const buttonStyle= {
     marginLeft:'10px',
@@ -8,7 +8,7 @@ const buttonStyle= {
 
 export default function DiscordButton(){
     function handleDiscordClick(){
-        window.location.href = 'https://discord.gg/6JMS7tr';
+        window.location.href = 'https://discord.gg/6JMS7tr'
     }
-    return <button type="button" style={buttonStyle} className="nes-btn is-primary" onClick={()=>{handleDiscordClick()}}>Discord</button>;
+    return <button type="button" style={buttonStyle} className="nes-btn is-primary" onClick={()=>{handleDiscordClick()}}>Discord</button>
 }

@@ -1,13 +1,13 @@
-import {configureStore} from '@reduxjs/toolkit';
-import lobbyReducer from './LobbyStore';
-import networkReducer from './NetworkStore';
-import preparationReducer from './PreparationStore';
-import gameReducer from './GameStore';
-import afterReducer from './AfterGameStore';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { enableMapSet } from 'immer';
+import {configureStore} from '@reduxjs/toolkit'
+import lobbyReducer from './LobbyStore'
+import networkReducer from './NetworkStore'
+import preparationReducer from './PreparationStore'
+import gameReducer from './GameStore'
+import afterReducer from './AfterGameStore'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { enableMapSet } from 'immer'
 
-enableMapSet();
+enableMapSet()
 
 const store = configureStore({
     reducer: {
@@ -22,11 +22,11 @@ const store = configureStore({
       serializableCheck: false
     }),
     enhancers: composeWithDevTools({})
-});
+})
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch
 
-export default store;
+export default store

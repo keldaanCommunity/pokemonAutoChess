@@ -1,6 +1,6 @@
-import {Schema, model} from 'mongoose';
-import { Item } from '../../types/enum/Item';
-import {Pkm} from '../../types/enum/Pokemon';
+import {Schema, model} from 'mongoose'
+import { Item } from '../../types/enum/Item'
+import {Pkm} from '../../types/enum/Pokemon'
 export interface IDetailledPokemon {
   name: Pkm;
   x:number;
@@ -45,7 +45,7 @@ const pkm = new Schema(
         enum: Item
       }]
     }
-);
+)
 
 const step = new Schema(
     {
@@ -55,7 +55,7 @@ const step = new Schema(
         required: true
       }
     }
-);
+)
 
 const bot = new Schema(
     {
@@ -79,17 +79,17 @@ const bot = new Schema(
     {
       toJSON: {
         transform: function(doc, ret) {
-          delete ret._id;
-          delete ret.__v;
+          delete ret._id
+          delete ret.__v
           ret.steps.forEach((step)=>{
             step.board.forEach((board)=>{
-              delete board._id;
-            });
-            delete step._id;
-          });
+              delete board._id
+            })
+            delete step._id
+          })
         }
       }
     }
-);
+)
 
-export default model<IBot>('BotV2', bot);
+export default model<IBot>('BotV2', bot)

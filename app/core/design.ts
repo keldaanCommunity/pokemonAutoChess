@@ -1,7 +1,7 @@
-import {Dungeon, TerrainType, Mask} from '../types/Config';
-import Tileset, { TilesetTiled } from './tileset';
-import Terrain from './terrain';
-import Masker from './masker';
+import {Dungeon, TerrainType, Mask} from '../types/Config'
+import Tileset, { TilesetTiled } from './tileset'
+import Terrain from './terrain'
+import Masker from './masker'
 
 export type LayerTiled = {
   data: number[],
@@ -35,84 +35,84 @@ export type DesignTiled = {
 }
 
 export default class Design {
-  id: Dungeon;
-  terrain: TerrainType[][] = [];
-  bitmask: Mask[][] = [];
-  tilemap: number[] = [];
-  width = 42;
-  height = 22;
-  frequency: number;
-  persistance: number;
-  tileset: Tileset;
-  minArena: number[] = [13, 2];
-  maxArena: number[] = [29, 18];
-  leftBorder: number[] = [14, 15];
-  rightBorder: number[] = [28, 15];
+  id: Dungeon
+  terrain: TerrainType[][] = []
+  bitmask: Mask[][] = []
+  tilemap: number[] = []
+  width = 42
+  height = 22
+  frequency: number
+  persistance: number
+  tileset: Tileset
+  minArena: number[] = [13, 2]
+  maxArena: number[] = [29, 18]
+  leftBorder: number[] = [14, 15]
+  rightBorder: number[] = [28, 15]
 
   constructor(id: Dungeon, frequency: number, persistance: number) {
-    this.id = id;
-    this.frequency = frequency;
-    this.persistance = persistance;
-    this.tileset = new Tileset(this.id);
+    this.id = id
+    this.frequency = frequency
+    this.persistance = persistance
+    this.tileset = new Tileset(this.id)
   }
 
   async create() {
     return new Promise<void>((resolve, reject)=>{
       this.tileset.initialize().then(()=>{
-        this.generateTerrain();
-        this.generateMask();
-        this.generateTilemap();
-        resolve();
-      });
-    });
+        this.generateTerrain()
+        this.generateMask()
+        this.generateTilemap()
+        resolve()
+      })
+    })
   }
 
   generateTerrain() {
-    const t = new Terrain(this.width, this.height, this.frequency, this.persistance);
-    const generation = t.terrain;
+    const t = new Terrain(this.width, this.height, this.frequency, this.persistance)
+    const generation = t.terrain
 
     for (let i = 0; i < this.height; i++) {
-      const row: number[] = [];
+      const row: number[] = []
       for (let j = 0; j < this.width; j++) {
-        const v = generation[i][j];
+        const v = generation[i][j]
         if (v > 0.66) {
-          row.push(TerrainType.WALL);
+          row.push(TerrainType.WALL)
         } else if (v>0.33) {
-          row.push(TerrainType.GROUND);
+          row.push(TerrainType.GROUND)
         } else {
-          row.push(TerrainType.WATER);
+          row.push(TerrainType.WATER)
         }
       }
-      this.terrain.push(row);
+      this.terrain.push(row)
     }
 
     for (let i = this.minArena[0]; i < this.maxArena[0]; i++) {
       for (let j = this.minArena[1]; j < this.maxArena[1]; j++) {
-        this.terrain[j][i] = TerrainType.GROUND;
+        this.terrain[j][i] = TerrainType.GROUND
       }
     }
 
     for (let i = this.leftBorder[0]; i < this.rightBorder[0]; i++) {
-      this.terrain[this.leftBorder[1]][i] = TerrainType.WALL;
+      this.terrain[this.leftBorder[1]][i] = TerrainType.WALL
     }
   }
 
   generateMask() {
-    const masker = new Masker();
+    const masker = new Masker()
     for (let i = 0; i < this.height; i++) {
-      const row = new Array<Mask>();
+      const row = new Array<Mask>()
       for (let j = 0; j < this.width; j++) {
-        row.push(masker.mask8bits(this.terrain, i, j));
+        row.push(masker.mask8bits(this.terrain, i, j))
       }
-      this.bitmask.push(row);
+      this.bitmask.push(row)
     }
   }
 
   generateTilemap() {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
-        const tileID = this.tileset.getTilemapId(this.terrain[i][j], this.bitmask[i][j]);
-        this.tilemap.push(tileID);
+        const tileID = this.tileset.getTilemapId(this.terrain[i][j], this.bitmask[i][j])
+        this.tilemap.push(tileID)
       }
     }
   }
@@ -146,6 +146,6 @@ export default class Design {
       type: 'map',
       version: '1.6',
       width: this.width
-    };
+    }
   }
 }

@@ -1,8 +1,8 @@
-import React from 'react';
-import HistoryItem from '../../../../../models/colyseus-models/history-item';
-import { BattleResult } from '../../../../../types/enum/Game';
-import { CDN_PORTRAIT_URL } from '../../../../../types';
-import { ArraySchema } from '@colyseus/schema';
+import React from 'react'
+import HistoryItem from '../../../../../models/colyseus-models/history-item'
+import { BattleResult } from '../../../../../types/enum/Game'
+import { CDN_PORTRAIT_URL } from '../../../../../types'
+import { ArraySchema } from '@colyseus/schema'
 
 export default function GamePlayerDetail(props:{name: string, life: number, money: number, history: ArraySchema<HistoryItem>}) {
     return <div>
@@ -31,7 +31,7 @@ export default function GamePlayerDetail(props:{name: string, life: number, mone
                 }} src={`${CDN_PORTRAIT_URL}${record.avatar}.png`}/>
             <p style={{
             }}>{record.name.slice(0,4)}</p>
-            </div>;
+            </div>
     })}</div>
     </div>
 }

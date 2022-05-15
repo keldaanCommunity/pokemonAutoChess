@@ -1,9 +1,9 @@
-import { Synergy } from "./enum/Synergy";
-import { Pkm, PkmIndex } from "./enum/Pokemon";
-import { Item } from "./enum/Item";
-import { Effect } from "./enum/Effect";
-import { Rarity } from "./enum/Game";
-import { Emotion } from ".";
+import { Synergy } from './enum/Synergy'
+import { Pkm, PkmIndex } from './enum/Pokemon'
+import { Item } from './enum/Item'
+import { Effect } from './enum/Effect'
+import { Rarity } from './enum/Game'
+import { Emotion } from '.'
 
 export const RarityHpCost: {[key in Rarity]: number}= Object.freeze({
   [Rarity.COMMON]: 1,
@@ -14,7 +14,7 @@ export const RarityHpCost: {[key in Rarity]: number}= Object.freeze({
   [Rarity.MYTHICAL]: 4,
   [Rarity.NEUTRAL]: 2,
   [Rarity.SUMMON]: 1
-});
+})
 
 
 export const PkmCost: {[key in Rarity]: number} = Object.freeze({
@@ -26,7 +26,7 @@ export const PkmCost: {[key in Rarity]: number} = Object.freeze({
   [Rarity.LEGENDARY]: 5,
   [Rarity.SUMMON]: 1,
   [Rarity.NEUTRAL]: 1,
-});
+})
 
 export const ExpTable: {[key: number]: number} = Object.freeze({
   1: 0,
@@ -38,7 +38,7 @@ export const ExpTable: {[key: number]: number} = Object.freeze({
   7: 50,
   8: 70,
   9: -1
-});
+})
 
 export const TypeTrigger: {[key in Synergy]: number[]} = {
   [Synergy.NORMAL]: [3, 6, 9],
@@ -66,10 +66,10 @@ export const TypeTrigger: {[key in Synergy]: number[]} = {
   [Synergy.ICE]: [2, 4],
   [Synergy.FOSSIL]: [2, 4, 6],
   [Synergy.SOUND]: [3, 5, 7]
-};
+}
 
 
-export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0];
+export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
 
 export const RarityColor: {[key in Rarity]: string} = {
   [Rarity.COMMON]: '#686d7d',
@@ -80,7 +80,7 @@ export const RarityColor: {[key in Rarity]: string} = {
   [Rarity.LEGENDARY]: '#a6802e',
   [Rarity.MYTHICAL]: '#ffc0cb',
   [Rarity.SUMMON]: '#991f1f'
-};
+}
 export const Probability: {[key: number]: number[]} = {
   1: [1, 0, 0, 0, 0],
   2: [1, 0, 0, 0, 0],
@@ -91,7 +91,7 @@ export const Probability: {[key: number]: number[]} = {
   7: [0.24, 0.28, 0.31, 0.15, 0.02],
   8: [0.2, 0.24, 0.31, 0.2, 0.05],
   9: [0.1, 0.19, 0.31, 0.30, 0.1]
-};
+}
 
 
 export const NeutralStage: {turn: number, avatar: string}[] = [
@@ -146,7 +146,7 @@ export const NeutralStage: {turn: number, avatar: string}[] = [
   {
     turn: 55,
     avatar: `${PkmIndex[Pkm.RAYQUAZA].replace('-','/')}/${Emotion.NORMAL}`
-  }];
+  }]
 
 type ThresholdDuration = {
   duration: number,
@@ -170,7 +170,7 @@ export const FlyingProtectThreshold: {[key in Effect]?: ThresholdDuration} = {
     duration: 4000,
     threshold: 0.5
   }
-};
+}
 
 export enum EloRank {
   DIAMOND = 'DIAMOND',
@@ -252,7 +252,7 @@ export const MaskCoordinate: {[key in Mask]: {x: number, y: number}} = Object.fr
   A1BC3D: {x: 0, y: 23},
   AB2CD4: {x: 1, y: 23},
   A1B2C3D4: {x: 1, y: 1}
-});
+})
 
 export enum Mask {
   X= 'X',
@@ -322,7 +322,7 @@ export const IdTable: {[key: number]: Mask} = {
   63: Mask.A1B2CD, 111: Mask.AB2C3D, 207: Mask.ABC3D4, 159: Mask.A1BCD4,
   127: Mask.A1B2C3D, 239: Mask.AB2C3D4, 223: Mask.A1BC3D4, 191: Mask.A1B2CD4,
   95: Mask.A1BC3D, 175: Mask.AB2CD4, 255: Mask.A1B2C3D4
-};
+}
 
 
 export const ItemRecipe: {[key in Item]?: Item[]} = {
@@ -371,7 +371,7 @@ export const ItemRecipe: {[key in Item]?: Item[]} = {
   [Item.RED_ORB] : [Item.CHARCOAL, Item.CHARCOAL],
   [Item.MAX_REVIVE] : [Item.CHARCOAL, Item.HEART_SCALE],
   [Item.ROCKY_HELMET] : [Item.HEART_SCALE, Item.HEART_SCALE]
-};
+}
 
 export type DungeonInfo = {
   id: string,
@@ -1407,4 +1407,4 @@ export const DungeonData: {[key in Dungeon]: DungeonInfo}  = Object.freeze({
     tileset: [Header.WALL, Header.WALL_ALT_1, Header.WALL_ALT_2, Header.GROUND, Header.GROUND_ALT_1, Header.GROUND_ALT_2, Header.WATER],
     type: Synergy.DRAGON
   }
-});
+})

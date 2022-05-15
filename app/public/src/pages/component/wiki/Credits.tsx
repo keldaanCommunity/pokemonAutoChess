@@ -1,18 +1,18 @@
-import { ICreditNames } from '../../../../../types';
-import React from 'react';
+import { ICreditNames } from '../../../../../types'
+import React from 'react'
 
 export default function Credits(props:{df:ICreditNames|undefined, primary: string, secondary: string[]}){
     function findCredits(id:string){
-        let contact = '';
-        let name = '';
+        let contact = ''
+        let name = ''
         if(props.df){
-            const i = props.df.Discord.findIndex(e=>e===id);
+            const i = props.df.Discord.findIndex(e=>e===id)
             if(i !== -1){
-                contact = props.df.Contact[i];
-                name = props.df.Name[i];
+                contact = props.df.Contact[i]
+                name = props.df.Name[i]
             }
         }
-        return <a className='nes-text is-primary' style={{marginRight:'20px'}} key={id} href={contact}>{name}</a>;
+        return <a className='nes-text is-primary' style={{marginRight:'20px'}} key={id} href={contact}>{name}</a>
     }
 
     return  <div style={{display:'flex', flexGrow: '.3', justifyContent: 'space-around'}}>
