@@ -17,5 +17,5 @@
       "resolveJsonModule": true,
       "jsx": "react"
     },
-    "include": ["./app/*","./scheduled/*"]
+    "include": ["./app/*","./scheduled/*","./edit/*"]
   }

@@ -95,7 +95,6 @@ trumbeak,0732/AnimData.xml
 trumbeak,0732/0000/0001/AnimData.xml
 toucannon,0733/AnimData.xml
 toucannon,0733/0000/0001/AnimData.xml
-jangmo-o,0782/AnimData.xml
 jangmo-o,0782/0000/0001/AnimData.xml
 hakamo-o,0783/AnimData.xml
 hakamo-o,0783/0000/0001/AnimData.xml
