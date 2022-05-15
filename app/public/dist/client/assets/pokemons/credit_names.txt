@@ -137,15 +137,15 @@ A_Lettuce	<@!655868413251551235>
 Kevin0itachi	KEVIN0ITACHI	https://www.deviantart.com/kevin0itachi
 FunnyKecleonMeme	<@!276369635304275968>	FunnyKecleonMeme#1075
 Mond	<@!799737881538723891>	
-nataniel-sama	NATANIEL-SAMA	https://pokemon-reloaded.el-foro.net/
-Jhony-Rex	JHONY-REX	https://www.deviantart.com/jhony-rex
+nataniel-sama	NATANIEL_SAMA	https://pokemon-reloaded.el-foro.net/
+Jhony-Rex	JHONY_REX	https://www.deviantart.com/jhony-rex
 	<@!632712420778836009>	
 	<@!306802821087625216>	
 KCN015	<@!358038459237138432>	
 AikoMaiko	<@!582978575486156821>	
 SirViolet	<@!262696514294513664>	
 Ichor	<@!779213287576436746>	
-	<@!479305531522154507>	
+JuanmaSG	<@!479305531522154507>	https://twitter.com/JuanmaSG55
 Caitemis	<@!330751862590406656>	https://www.deviantart.com/caitemis
 Ray2064	<@!540823632054714388>	Ray2064#5222
 	<@!783493257506062387>	
@@ -155,3 +155,5 @@ Jeongsugi	<@!537560911716810763>	정수기#1834
 	<@!776403448220483615>	
 	<@!940303989680009339>	
 	<@!315528859921678336>	
+	<@!967585139485999154>	
+PikaNiko	<@!675870876532736010>	https://github.com/PikAsriel
