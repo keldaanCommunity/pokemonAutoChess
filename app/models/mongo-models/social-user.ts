@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose';
+import {Schema, model} from 'mongoose'
 
 export interface ISocialUser {
   payload: string;
@@ -22,6 +22,6 @@ const socialUserSchema = new Schema(
         type: Number
       }
     }
-);
+)
 
-export default model<ISocialUser>('SocialUser', socialUserSchema);
+export default model<ISocialUser>('SocialUser', socialUserSchema)

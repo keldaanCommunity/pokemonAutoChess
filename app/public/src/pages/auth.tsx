@@ -1,6 +1,6 @@
-import React from 'react';
-import Login from './component/auth/login';
-import Media from './component/auth/media';
+import React from 'react'
+import Login from './component/auth/login'
+import Media from './component/auth/media'
 
 export default function Auth() {
   return (
@@ -8,5 +8,5 @@ export default function Auth() {
       <Login/>
       <Media/>
     </div> 
-    );
+    )
 }

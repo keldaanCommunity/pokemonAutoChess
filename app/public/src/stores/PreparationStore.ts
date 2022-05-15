@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IGameUser } from "../../../models/colyseus-models/game-user";
-import { IMessage } from "../../../types";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { IGameUser } from '../../../models/colyseus-models/game-user'
+import { IMessage } from '../../../types'
 
 interface IUserPreparationState {
     users: IGameUser[],
@@ -25,34 +25,34 @@ export const preparationSlice = createSlice({
     initialState: initialState,
     reducers: {
         pushMessage: (state, action: PayloadAction<IMessage>) => {
-            const m: IMessage = JSON.parse(JSON.stringify(action.payload));
-            state.messages.push(m);
+            const m: IMessage = JSON.parse(JSON.stringify(action.payload))
+            state.messages.push(m)
         },
         addUser: (state, action: PayloadAction<IGameUser>) => {
-            const u: IGameUser = JSON.parse(JSON.stringify(action.payload));
-            state.users.push(u);
+            const u: IGameUser = JSON.parse(JSON.stringify(action.payload))
+            state.users.push(u)
         },
         changeUser: (state, action: PayloadAction<{id: string, field: string, value: any}>) => {
-            state.users[state.users.findIndex(u => u.id == action.payload.id)][action.payload.field] = action.payload.value;
+            state.users[state.users.findIndex(u => u.id == action.payload.id)][action.payload.field] = action.payload.value
         },
         removeUser: (state, action: PayloadAction<string>) => {
-            state.users.splice(state.users.findIndex(u => u.id == action.payload), 1);
+            state.users.splice(state.users.findIndex(u => u.id == action.payload), 1)
         },
         setGameStarted: (state, action: PayloadAction<boolean>) => {
-            state.gameStarted = action.payload;
+            state.gameStarted = action.payload
         },
         setOwnerId: (state, action: PayloadAction<string>) => {
-            state.ownerId = action.payload;
+            state.ownerId = action.payload
         },
         setOwnerName: (state, action: PayloadAction<string>) => {
-            state.ownerName = action.payload;
+            state.ownerName = action.payload
         },
         setName: (state, action: PayloadAction<string>) => {
-            state.name = action.payload;
+            state.name = action.payload
         },
         leavePreparation: () => initialState
     }
-});
+})
 
 export const {
     setName,
@@ -64,6 +64,6 @@ export const {
     setOwnerId,
     setOwnerName,
     leavePreparation
-} = preparationSlice.actions;
+} = preparationSlice.actions
 
-export default preparationSlice.reducer;
+export default preparationSlice.reducer

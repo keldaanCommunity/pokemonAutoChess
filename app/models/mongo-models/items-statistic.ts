@@ -1,6 +1,6 @@
-import {Schema, model} from 'mongoose';
-import {Item} from '../../types/enum/Item';
-import {Pkm} from '../../types/enum/Pokemon';
+import {Schema, model} from 'mongoose'
+import {Item} from '../../types/enum/Item'
+import {Pkm} from '../../types/enum/Pokemon'
 
 export interface IItemsStatistic {
   rank: number;
@@ -28,6 +28,6 @@ const itemsStatistic = new Schema(
         }
       ]
     }
-);
+)
 
-export default model<IItemsStatistic>('ItemsStatistic', itemsStatistic, 'items-statistic');
+export default model<IItemsStatistic>('ItemsStatistic', itemsStatistic, 'items-statistic')

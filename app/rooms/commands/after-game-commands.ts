@@ -1,6 +1,7 @@
-import {Command} from '@colyseus/command';
-import {GameUser} from '../../models/colyseus-models/game-user';
-import UserMetadata from '../../models/mongo-models/user-metadata';
+import {Command} from '@colyseus/command'
+import {GameUser} from '../../models/colyseus-models/game-user'
+import UserMetadata from '../../models/mongo-models/user-metadata'
+import { Transfer } from '../../types'
 
 export class OnJoinCommand extends Command {
   execute({client, options, auth}) {
@@ -11,22 +12,22 @@ export class OnJoinCommand extends Command {
             user.elo,
             user.avatar,
             false,
-            false));
+            false))
 
         this.room.broadcast(Transfer.MESSAGES, {
           'name': 'Server',
           'payload': `${ user.displayName } joined.`,
           'avatar': user.avatar,
           'time': Date.now()
-        });
+        })
       }
-    });
+    })
   }
 }
 
 export class OnMessageCommand extends Command {
   execute({client, message}) {
-    this.room.broadcast(Transfer.MESSAGES, message);
+    this.room.broadcast(Transfer.MESSAGES, message)
   }
 }
 
@@ -37,7 +38,7 @@ export class OnLeaveCommand extends Command {
       'payload': `${ this.state.users.get(client.auth.uid).name } left.`,
       'avatar': 'magnemite',
       'time': Date.now()
-    });
-    this.state.users.delete(client.auth.uid);
+    })
+    this.state.users.delete(client.auth.uid)
   }
 }

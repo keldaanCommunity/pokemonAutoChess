@@ -1,4 +1,4 @@
-import { Item } from "../enum/Item";
+import { Item } from '../enum/Item'
 
   export const ItemName: {[key in Item]: string} = {
     [Item.FOSSIL_STONE]: 'Fossil Stone',
@@ -112,4 +112,4 @@ import { Item } from "../enum/Item";
     [Item.RED_ORB]: 'The holder gains 8 bonus Attack Damage',
     [Item.MAX_REVIVE]: 'Prevents the holder first death',
     [Item.ROCKY_HELMET]: 'Grants 10 bonus armor. Negates bonus damage from incoming critical hits.'
-  });
+  })

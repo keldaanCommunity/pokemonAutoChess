@@ -1,11 +1,11 @@
-import React, { useState} from 'react';
-import TeamComp from './team-comp';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import Discover from './discover';
-import ItemStatistic from './item-statistic';
-import { IMeta } from '../../../../../models/mongo-models/meta';
-import { IItemsStatistic } from '../../../../../models/mongo-models/items-statistic';
-import BotReport from './bot-report';
+import React, { useState} from 'react'
+import TeamComp from './team-comp'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import Discover from './discover'
+import ItemStatistic from './item-statistic'
+import { IMeta } from '../../../../../models/mongo-models/meta'
+import { IItemsStatistic } from '../../../../../models/mongo-models/items-statistic'
+import BotReport from './bot-report'
 
 const buttonStyle= {
     marginLeft:'10px',
@@ -14,24 +14,24 @@ const buttonStyle= {
 }
 
 export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStatistic[], toggleMeta: () => void}){
-    const [rankingBy, setRanking] = useState<string>('count');
-    const [itemRankingBy, setItemRanking] = useState<string>('count');
+    const [rankingBy, setRanking] = useState<string>('count')
+    const [itemRankingBy, setItemRanking] = useState<string>('count')
 
-    const meta = props.meta.slice();
-    const metaItems = props.metaItems.slice();
-    let sortedMeta = new Array<IMeta>();
-    let sortedMetaItems = new Array<IItemsStatistic>();
+    const meta = props.meta.slice()
+    const metaItems = props.metaItems.slice()
+    let sortedMeta = new Array<IMeta>()
+    let sortedMetaItems = new Array<IItemsStatistic>()
     if(rankingBy == 'count' || rankingBy == 'winrate') {
-        sortedMeta = meta.sort((a,b)=>{return b[rankingBy] - a[rankingBy]});
+        sortedMeta = meta.sort((a,b)=>{return b[rankingBy] - a[rankingBy]})
     }
     else {
-        sortedMeta = meta.sort((a,b)=>{return a[rankingBy] - b[rankingBy]});
+        sortedMeta = meta.sort((a,b)=>{return a[rankingBy] - b[rankingBy]})
     }
     if(itemRankingBy == 'count'){
-        sortedMetaItems = metaItems.sort((a,b)=>{return b[itemRankingBy] - a[itemRankingBy]});
+        sortedMetaItems = metaItems.sort((a,b)=>{return b[itemRankingBy] - a[itemRankingBy]})
     }
     else{
-        sortedMetaItems = metaItems.sort((a,b)=>{return a[itemRankingBy] - b[itemRankingBy]});
+        sortedMetaItems = metaItems.sort((a,b)=>{return a[itemRankingBy] - b[itemRankingBy]})
     }
     return <div>
         <button className='nes-btn is-success' style={buttonStyle} onClick={props.toggleMeta}>Lobby</button>
@@ -59,7 +59,7 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
 
                     <div style={{height:'70vh', overflowY:'scroll'}}>
                         {sortedMeta.map(team=>{
-                            return <TeamComp team={team} key={team.cluster_id}/>;
+                            return <TeamComp team={team} key={team.cluster_id}/>
                         })}
                     </div>
                 </TabPanel>
@@ -76,7 +76,7 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
                 </div>
                 <div style={{height:'70vh', overflowY:'scroll'}}>
                     {sortedMetaItems.map(item=>{
-                        return <ItemStatistic item={item} key={item.name}/>;
+                        return <ItemStatistic item={item} key={item.name}/>
                     })}
                 </div>
                 </TabPanel>

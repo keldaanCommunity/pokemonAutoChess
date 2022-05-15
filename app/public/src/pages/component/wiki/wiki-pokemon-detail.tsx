@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
-import PokemonFactory from '../../../../../models/pokemon-factory';
-import {CDN_PORTRAIT_URL, CDN_URL} from '../../../../../types';
-import { Emotion, ICreditNames } from '../../../../../types';
-import { AbilityName, AbilityDescription } from '../../../../../types/strings/Ability';
-import {ITracker} from '../../../../../types/ITracker';
-import DataFrame from 'dataframe-js';
-import Credits from './Credits';
-import {RarityColor} from '../../../../../types/Config';
-import { Pkm } from '../../../../../types/enum/Pokemon';
+import React, {useState} from 'react'
+import PokemonFactory from '../../../../../models/pokemon-factory'
+import {CDN_PORTRAIT_URL, CDN_URL} from '../../../../../types'
+import { Emotion, ICreditNames } from '../../../../../types'
+import { AbilityName, AbilityDescription } from '../../../../../types/strings/Ability'
+import {ITracker} from '../../../../../types/ITracker'
+import DataFrame from 'dataframe-js'
+import Credits from './Credits'
+import {RarityColor} from '../../../../../types/Config'
+import { Pkm } from '../../../../../types/enum/Pokemon'
 
 export default function WikiPokemonDetail(props:{pokemon: Pkm, m: ITracker | undefined}) {
-    const pokemon = PokemonFactory.createPokemonFromName(props.pokemon);
-    const [df, setDf] = useState<ICreditNames>();
-    const [initialized, setInitialized] = useState<boolean>(false);
+    const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
+    const [df, setDf] = useState<ICreditNames>()
+    const [initialized, setInitialized] = useState<boolean>(false)
     if(!initialized){
-        setInitialized(true);
+        setInitialized(true)
         DataFrame.fromText(`${CDN_URL}/credit_names.txt`,'\t',true)
-        .then(df=>{setDf(df.toDict())});
+        .then(df=>{setDf(df.toDict())})
     }
 
     if(props.m){
@@ -52,6 +52,6 @@ export default function WikiPokemonDetail(props:{pokemon: Pkm, m: ITracker | und
         )
     }
     else{
-        return null;
+        return null
     }
 }

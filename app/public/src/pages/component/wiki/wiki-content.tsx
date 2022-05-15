@@ -1,8 +1,8 @@
-import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {RarityColor} from '../../../../../types/Config';
-import { Rarity } from '../../../../../types/enum/Game';
-import WikiPokemon from './wiki-pokemon';
+import React from 'react'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import {RarityColor} from '../../../../../types/Config'
+import { Rarity } from '../../../../../types/enum/Game'
+import WikiPokemon from './wiki-pokemon'
 
 export default function WikiContent(){
     return (

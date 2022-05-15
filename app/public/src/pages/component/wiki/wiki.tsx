@@ -1,11 +1,11 @@
-import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import WikiButton from './wiki-button';
-import WikiContent from './wiki-content';
-import WikiStatistic from './wiki-statistic';
-import WikiTypes from './wiki-types';
-import WikiFaq from './wiki-faq';
-import WikiItemsCheatSheet from './wiki-items-cheat-sheet';
+import React from 'react'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import WikiButton from './wiki-button'
+import WikiContent from './wiki-content'
+import WikiStatistic from './wiki-statistic'
+import WikiTypes from './wiki-types'
+import WikiFaq from './wiki-faq'
+import WikiItemsCheatSheet from './wiki-items-cheat-sheet'
 
 export default function Wiki(props: {toggleWiki: () => void}){
     return <div>

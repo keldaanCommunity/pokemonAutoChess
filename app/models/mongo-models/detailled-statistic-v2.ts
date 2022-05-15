@@ -1,6 +1,6 @@
-import {Schema, model} from 'mongoose';
-import { Item } from '../../types/enum/Item';
-import {Pkm} from '../../types/enum/Pokemon';
+import {Schema, model} from 'mongoose'
+import { Item } from '../../types/enum/Item'
+import {Pkm} from '../../types/enum/Pokemon'
 
 export interface Pokemon {
   name: string;
@@ -32,7 +32,7 @@ const pokemon = new Schema({
       enum: Item
     }
   ]
-});
+})
 
 const statisticSchema = new Schema(
     {
@@ -56,6 +56,6 @@ const statisticSchema = new Schema(
       },
       pokemons: [pokemon]
     }
-);
+)
 
-export default model<IDetailledStatistic>('DetailledStatisticV2', statisticSchema);
+export default model<IDetailledStatistic>('DetailledStatisticV2', statisticSchema)

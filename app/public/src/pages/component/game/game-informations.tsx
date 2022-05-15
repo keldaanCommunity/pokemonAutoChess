@@ -1,7 +1,7 @@
-import React from 'react';
-import GameLeave from './game-leave';
-import CSS from 'csstype';
-import { useAppSelector } from '../../../hooks';
+import React from 'react'
+import GameLeave from './game-leave'
+import CSS from 'csstype'
+import { useAppSelector } from '../../../hooks'
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -17,9 +17,9 @@ const style: CSS.Properties = {
 }
 
 export default function GameInformations(props:{leave:()=>void}) {
-    const mapName = useAppSelector(state=>state.game.mapName);
-    const stageLevel = useAppSelector(state=>state.game.stageLevel);
-    const roundTime = useAppSelector(state=>state.game.roundTime); 
+    const mapName = useAppSelector(state=>state.game.mapName)
+    const stageLevel = useAppSelector(state=>state.game.stageLevel)
+    const roundTime = useAppSelector(state=>state.game.roundTime) 
 
     return <div style={style} className='nes-container'>
     <p style={{fontSize: '0.7vw', textAlign: 'center', marginBottom: '0px'}}>{mapName}</p>
@@ -28,5 +28,5 @@ export default function GameInformations(props:{leave:()=>void}) {
         <h3>T{stageLevel}</h3>
         <h3>{roundTime}s</h3>
     </div>
-</div>;
+</div>
 }

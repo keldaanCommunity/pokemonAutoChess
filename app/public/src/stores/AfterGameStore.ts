@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import SimplePlayer from "../../../models/colyseus-models/simple-player";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import SimplePlayer from '../../../models/colyseus-models/simple-player'
 
 interface IUserAfterState {
     players: SimplePlayer[]
@@ -14,15 +14,15 @@ export const afterSlice = createSlice({
     initialState: initialState,
     reducers: {
         addPlayer: (state, action: PayloadAction<SimplePlayer>) => {
-            state.players.push(JSON.parse(JSON.stringify(action.payload)));
+            state.players.push(JSON.parse(JSON.stringify(action.payload)))
         },
         leaveAfter: () => initialState
     }
-});
+})
 
 export const {
     addPlayer,
     leaveAfter
-} = afterSlice.actions;
+} = afterSlice.actions
 
-export default afterSlice.reducer;
+export default afterSlice.reducer

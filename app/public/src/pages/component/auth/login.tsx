@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
+import { Link } from 'react-router-dom'
 import 'firebaseui/dist/firebaseui.css'
-import { useAppSelector, useAppDispatch } from '../../../hooks';
-import {logIn, logOut} from '../../../stores/NetworkStore';
-import { FIREBASE_CONFIG } from '../../utils/utils';
+import { useAppSelector, useAppDispatch } from '../../../hooks'
+import {logIn, logOut} from '../../../stores/NetworkStore'
+import { FIREBASE_CONFIG } from '../../utils/utils'
 
 export default function Login(){
-  const dispatch = useAppDispatch();
-  const uid = useAppSelector(state=>state.network.uid);
-  const displayName = useAppSelector(state=>state.network.displayName);
+  const dispatch = useAppDispatch()
+  const uid = useAppSelector(state=>state.network.uid)
+  const displayName = useAppSelector(state=>state.network.displayName)
 
   const uiConfig = {
     // Popup signin flow rather than Navigate flow.
@@ -26,20 +26,20 @@ export default function Login(){
       // Avoid Navigates after sign-in.
       signInSuccessWithAuthResult: () => false,
     },
-  };
+  }
 
   // Initialize Firebase
   if (!firebase.apps.length) {
-    firebase.initializeApp(FIREBASE_CONFIG);
+    firebase.initializeApp(FIREBASE_CONFIG)
   } 
 
   useEffect(()=>{
     firebase.auth().onAuthStateChanged(u => {
       if(u){
-        dispatch(logIn(u));
+        dispatch(logIn(u))
       }
-    });
-  });
+    })
+  })
 
   if (!uid) {
     return (
@@ -56,7 +56,7 @@ export default function Login(){
         <p className="title">Authentification</p>
         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
     </div> 
-    );
+    )
   }
   else{
       return(

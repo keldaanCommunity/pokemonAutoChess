@@ -1,6 +1,6 @@
-import { RoomAvailable } from 'colyseus.js';
-import React from 'react';
-import { IPreparationMetadata } from '../../../../../types';
+import { RoomAvailable } from 'colyseus.js'
+import React from 'react'
+import { IPreparationMetadata } from '../../../../../types'
 
 export default function RoomItem(props: {room: RoomAvailable<IPreparationMetadata>, click: (id: string)=>Promise<void>}) {
   return <div className='nes-container' style={{display:'flex', padding:'10px', backgroundColor:'rgba(255,255,255,1)', alignItems:'center', justifyContent: 'space-between', marginTop:'10px'}}>

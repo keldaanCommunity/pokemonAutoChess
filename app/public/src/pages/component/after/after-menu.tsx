@@ -1,11 +1,11 @@
-import React from 'react';
-import SimplePlayer from '../../../../../models/colyseus-models/simple-player';
-import { useAppSelector } from '../../../hooks';
-import Avatar from '../avatar';
-import Team from './team';
+import React from 'react'
+import SimplePlayer from '../../../../../models/colyseus-models/simple-player'
+import { useAppSelector } from '../../../hooks'
+import Avatar from '../avatar'
+import Team from './team'
 
 export default function AfterMenu() {
-    const players = useAppSelector(state=>state.after.players);
+    const players = useAppSelector(state=>state.after.players)
     return <table>
     <thead>
         <tr>

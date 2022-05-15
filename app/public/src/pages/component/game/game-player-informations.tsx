@@ -1,7 +1,7 @@
-import React, {Component, ReactElement} from 'react';
-import CSS from 'csstype';
-import { useAppSelector } from '../../../hooks';
-import { CDN_PORTRAIT_URL } from '../../../../../types';
+import React, {Component, ReactElement} from 'react'
+import CSS from 'csstype'
+import { useAppSelector } from '../../../hooks'
+import { CDN_PORTRAIT_URL } from '../../../../../types'
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -17,39 +17,39 @@ const style: CSS.Properties = {
 
 export default function GamePlayerInformations(){
     function getLifePngName() {
-        let lifePngName = 'life_100';
+        let lifePngName = 'life_100'
         if(life > 80){
-            lifePngName = 'life_100';
+            lifePngName = 'life_100'
         } else if(life > 60 && life <= 80){
-            lifePngName = 'life_80';
+            lifePngName = 'life_80'
         } else if(life > 40 && life <= 60){
-            lifePngName = 'life_60';            
+            lifePngName = 'life_60'            
         } else if(life > 20 && life <= 40){
-            lifePngName = 'life_40';
+            lifePngName = 'life_40'
         } else if(life > 0 && life <= 20){
-            lifePngName = 'life_20';
+            lifePngName = 'life_20'
         } else {
-            lifePngName = 'life_0';
+            lifePngName = 'life_0'
         }
-        return lifePngName;
+        return lifePngName
     }
-    const opponentName = useAppSelector(state=>state.game.currentPlayerOpponentName);
-    const opponentAvatar = useAppSelector(state=>state.game.currentPlayerOpponentAvatar);
-    const experienceManager = useAppSelector(state=>state.game.currentPlayerExperienceManager);
-    const boardSize = useAppSelector(state=>state.game.currentPlayerBoardSize);
-    const name = useAppSelector(state=>state.game.currentPlayerName);
-    const avatar = useAppSelector(state=>state.game.currentPlayerAvatar);
-    const life = useAppSelector(state=>state.game.currentPlayerLife);
-    const money = useAppSelector(state=>state.game.currentPlayerMoney);
+    const opponentName = useAppSelector(state=>state.game.currentPlayerOpponentName)
+    const opponentAvatar = useAppSelector(state=>state.game.currentPlayerOpponentAvatar)
+    const experienceManager = useAppSelector(state=>state.game.currentPlayerExperienceManager)
+    const boardSize = useAppSelector(state=>state.game.currentPlayerBoardSize)
+    const name = useAppSelector(state=>state.game.currentPlayerName)
+    const avatar = useAppSelector(state=>state.game.currentPlayerAvatar)
+    const life = useAppSelector(state=>state.game.currentPlayerLife)
+    const money = useAppSelector(state=>state.game.currentPlayerMoney)
 
-    let opponent: null | ReactElement = null;
+    let opponent: null | ReactElement = null
     if(opponentName != '' && opponentAvatar !=''){
         opponent = 
         <div style={{display:'flex'}}>
             <p>Vs</p>
             <img src={`${CDN_PORTRAIT_URL}${opponentAvatar}.png`}/>
             <p style={{marginLeft:'5px'}}>{opponentName}</p>
-        </div>;
+        </div>
     }
 
     return <div style={style} className='nes-container'>
@@ -67,5 +67,5 @@ export default function GamePlayerInformations(){
                 <p style={{marginLeft:'5px'}}>{name}</p>
             </div>
             {opponent}
-            </div>;
+            </div>
 }

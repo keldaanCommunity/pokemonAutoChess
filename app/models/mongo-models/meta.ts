@@ -1,6 +1,6 @@
-import {Schema, model} from 'mongoose';
-import { Pkm } from '../../types/enum/Pokemon';
-import { Synergy } from '../../types/enum/Synergy';
+import {Schema, model} from 'mongoose'
+import { Pkm } from '../../types/enum/Pokemon'
+import { Synergy } from '../../types/enum/Synergy'
 
 export interface ITeam {
   cluster_id: string;
@@ -37,7 +37,7 @@ const teamSchema = new Schema(
       },
       pokemons: Object
     }
-);
+)
 
 const metaSchema = new Schema(
     {
@@ -60,6 +60,6 @@ const metaSchema = new Schema(
       pokemons: Object,
       teams: [teamSchema]
     }
-);
+)
 
-export default model<IMeta>('Meta', metaSchema, 'meta');
+export default model<IMeta>('Meta', metaSchema, 'meta')

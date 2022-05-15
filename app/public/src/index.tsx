@@ -1,14 +1,14 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/home';
-import Auth from './pages/auth';
-import Lobby from './pages/lobby';
-import Preparation from './pages/preparation';
-import Game from './pages/game';
-import AfterGame from './pages/after-game';
-import {Provider} from 'react-redux';
-import store from './stores/index';
+import ReactDOM from 'react-dom'
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from './pages/home'
+import Auth from './pages/auth'
+import Lobby from './pages/lobby'
+import Preparation from './pages/preparation'
+import Game from './pages/game'
+import AfterGame from './pages/after-game'
+import {Provider} from 'react-redux'
+import store from './stores/index'
 
 ReactDOM.render((
   <Provider store = {store}>
@@ -26,4 +26,4 @@ ReactDOM.render((
     </React.StrictMode>
   </Provider>
 
-), document.getElementById('root'));
+), document.getElementById('root'))

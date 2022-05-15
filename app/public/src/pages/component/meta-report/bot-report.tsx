@@ -1,32 +1,32 @@
-import { ApexOptions } from "apexcharts";
-import Chart from 'react-apexcharts';
-import { useAppSelector } from "../../../hooks";
-import React, { useState } from 'react';
-import { CDN_PORTRAIT_URL } from "../../../../../types";
-import MultiRangeSlider from "multi-range-slider-react";
+import { ApexOptions } from 'apexcharts'
+import Chart from 'react-apexcharts'
+import { useAppSelector } from '../../../hooks'
+import React, { useState } from 'react'
+import { CDN_PORTRAIT_URL } from '../../../../../types'
+import MultiRangeSlider from 'multi-range-slider-react'
 
-const maxEloValue = 1600;
+const maxEloValue = 1600
 
 export default function BotReport(){
-    const botMonitor = useAppSelector(state=>state.lobby.botMonitor);
-    const [minValue, set_minValue] = useState(1200);
-    const [maxValue, set_maxValue] = useState(1400);
+    const botMonitor = useAppSelector(state=>state.lobby.botMonitor)
+    const [minValue, set_minValue] = useState(1200)
+    const [maxValue, set_maxValue] = useState(1400)
 
     const handleInput = (e) => {
-        set_minValue(e.minValue);
-        set_maxValue(e.maxValue);
-    };
+        set_minValue(e.minValue)
+        set_maxValue(e.maxValue)
+    }
     
     
-    const botSeries: ApexAxisChartSeries = [];
+    const botSeries: ApexAxisChartSeries = []
     botMonitor.forEach(b=>{
-        const data: [number, number][] = [];
-        const e = b.data[b.data.length -1].elo;
+        const data: [number, number][] = []
+        const e = b.data[b.data.length -1].elo
         if(e > minValue && e < maxValue){
-            b.data.forEach(d=>{data.push([d.time, d.elo])});
-            botSeries.push({name: b.name, data: data});
+            b.data.forEach(d=>{data.push([d.time, d.elo])})
+            botSeries.push({name: b.name, data: data})
         }
-    });
+    })
 
     const options: ApexOptions = {
         chart: {
@@ -46,7 +46,6 @@ export default function BotReport(){
             show: true,
             curve: 'smooth',
             lineCap: 'butt',
-            colors: undefined,
             width: 2,
             dashArray: 0,      
         },        
@@ -62,7 +61,7 @@ export default function BotReport(){
             }
         },
         xaxis: {
-            type: "datetime",
+            type: 'datetime',
             labels: {
             rotateAlways: true,
             formatter: function(val, timestamp) {
@@ -90,27 +89,27 @@ export default function BotReport(){
 			minValue={minValue}
 			maxValue={maxValue}
 			onInput={(e) => {
-				handleInput(e);
+				handleInput(e)
 			}}
             baseClassName='multi-range-slider multi-range'
 		/>
         <div style={{height: '30px'}}>
-            {botMonitor.map(b=><div style={{position: "absolute", left:`${b.data[b.data.length -1].elo * 100 / maxEloValue}%`}} key={b.avatar}><img style={{width:'40px',height:'40px'}} src={`${CDN_PORTRAIT_URL}${b.avatar}.png`}/></div>)}
+            {botMonitor.map(b=><div style={{position: 'absolute', left:`${b.data[b.data.length -1].elo * 100 / maxEloValue}%`}} key={b.avatar}><img style={{width:'40px',height:'40px'}} src={`${CDN_PORTRAIT_URL}${b.avatar}.png`}/></div>)}
         </div>
         <Chart options={options} series={botSeries} height={600} />
-    </div>;
+    </div>
 }
 
 function pad(number: number) {
     if ( number < 10 ) {
-        return '0' + number;
+        return '0' + number
         }
-    return number;
+    return number
 }
 
 
 function formatDate(n: number) {
-    const date = new Date(n);
+    const date = new Date(n)
     return  pad( date.getMonth() + 1 ) +
         '/' + pad( date.getDate() ) +
         ' ' + pad( date.getHours() ) +

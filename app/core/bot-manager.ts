@@ -1,22 +1,22 @@
-import Player from '../models/colyseus-models/player';
-import Bot from './bot';
+import Player from '../models/colyseus-models/player'
+import Bot from './bot'
 
 export default class BotManager {
-  bots: Bot[];
+  bots: Bot[]
 
   constructor() {
-    this.bots = [];
+    this.bots = []
   }
 
   addBot(player: Player) {
-    this.bots.push(new Bot(player));
+    this.bots.push(new Bot(player))
   }
 
   updateBots() {
     this.bots.forEach((bot) => {
-      bot.updateProgress();
-    });
+      bot.updateProgress()
+    })
   }
 }
 
-module.exports = BotManager;
+module.exports = BotManager

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import CSS from 'csstype';
-import ReactCardFlip from 'react-card-flip';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { openBooster } from '../../../stores/NetworkStore';
-import { CDN_PORTRAIT_URL } from '../../../../../types';
-import { Emotion } from '../../../../../types';
+import React, { useState } from 'react'
+import CSS from 'csstype'
+import ReactCardFlip from 'react-card-flip'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import { openBooster } from '../../../stores/NetworkStore'
+import { CDN_PORTRAIT_URL } from '../../../../../types'
+import { Emotion } from '../../../../../types'
 
 const buttonStyle: CSS.Properties = {
     marginLeft:'10px',
@@ -13,11 +13,11 @@ const buttonStyle: CSS.Properties = {
 }
 
 export default function Booster(props: {toggle :()=>void}){
-    const dispatch = useAppDispatch();
-    const user = useAppSelector(state=>state.lobby.user);
-    const numberOfBooster = user? user.booster: 0;
-    const boosterContent = useAppSelector(state=>state.lobby.boosterContent);
-    const [flipArray, setFlipArray] = useState<boolean[]>([false, false, false, false, false]);
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(state=>state.lobby.user)
+    const numberOfBooster = user? user.booster: 0
+    const boosterContent = useAppSelector(state=>state.lobby.boosterContent)
+    const [flipArray, setFlipArray] = useState<boolean[]>([false, false, false, false, false])
     return <div>
         <button style={buttonStyle} onClick={()=>{props.toggle()}} className='nes-btn is-primary'>Lobby</button>
         <div className='nes-container' style={{margin:'10px', backgroundColor:'rgba(255,255,255,0.7)', display:'flex', justifyContent:'center', flexFlow:'column', alignItems:'center', height:'90vh'}}>
@@ -30,11 +30,11 @@ export default function Booster(props: {toggle :()=>void}){
             {boosterContent.map((i,index)=>{
                 return <ReactCardFlip key={index} isFlipped={flipArray[index]} flipDirection="horizontal">
 
-                <div className='nes-container' onClick={()=>{handleClick(flipArray, setFlipArray, index)}} style={{width:'188px', height:'188px', padding:'10px', backgroundColor:'rgba(255,255,255,1)',cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`}}>
+                <div className='nes-container' onClick={()=>{handleClick(flipArray, setFlipArray, index)}} style={{width:'188px', height:'188px', padding:'10px', backgroundColor:'rgba(255,255,255,1)',cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer'}}>
                     <h1 style={{fontSize: '100px', position: 'absolute', left: '40px', top: '30px'}}>?</h1>
                 </div>   
 
-                <div className='nes-container' onClick={()=>{handleClick(flipArray, setFlipArray, index)}} style={{width:'188px', height:'188px', padding:'10px', backgroundColor:'rgba(255,255,255,1)', cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`}}>
+                <div className='nes-container' onClick={()=>{handleClick(flipArray, setFlipArray, index)}} style={{width:'188px', height:'188px', padding:'10px', backgroundColor:'rgba(255,255,255,1)', cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer'}}>
                     <h2 style={{position:'absolute', bottom:'0px', backgroundColor:'#fff'}}>40x</h2>
                     <img style={{width:'160px',height:'160px', imageRendering:'pixelated'}} src={`${CDN_PORTRAIT_URL}${i.replace('-','/')}/${Emotion.NORMAL}.png`}/>
                 </div>    
@@ -46,7 +46,7 @@ export default function Booster(props: {toggle :()=>void}){
 }
 
 function handleClick(flipArray: boolean[], setFlipArray: React.Dispatch<React.SetStateAction<boolean[]>>, index: number){
-    const actualFlipArray = [...flipArray];
-    actualFlipArray[index] = !actualFlipArray[index];
-    setFlipArray(actualFlipArray);
+    const actualFlipArray = [...flipArray]
+    actualFlipArray[index] = !actualFlipArray[index]
+    setFlipArray(actualFlipArray)
 }

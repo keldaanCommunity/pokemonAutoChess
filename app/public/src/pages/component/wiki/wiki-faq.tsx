@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class WikiFaq extends Component{
 
@@ -55,4 +55,4 @@ class WikiFaq extends Component{
     }
 }
 
-export default WikiFaq;
+export default WikiFaq

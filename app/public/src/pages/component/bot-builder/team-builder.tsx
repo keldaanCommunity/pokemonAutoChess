@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { Item } from '../../../../../types/enum/Item';
-import {Pkm, PkmFamily} from '../../../../../types/enum/Pokemon';
-import PokemonFactory from '../../../../../models/pokemon-factory';
-import SelectedEntity from './selected-entity';
-import ModalMenu from './modal-menu';
-import ItemPicker from './item-picker';
-import PokemonPicker from './pokemon-picker';
-import TeamEditor from './team-editor';
-import ReactTooltip from 'react-tooltip';
-import { IBot, IStep } from '../../../../../models/mongo-models/bot-v2';
-import CSS from 'csstype';
-import produce from 'immer';
-import { useAppSelector, useAppDispatch } from '../../../hooks';
-import {createBot} from "../../../stores/NetworkStore"
-import { setBotCreatorSynergies } from '../../../stores/LobbyStore';
-import BuilderSynergies from './builder-synergies';
-import { Synergy } from '../../../../../types/enum/Synergy';
-import { Emotion, ModalMode, ReadWriteMode } from '../../../../../types';
-import {PkmIndex} from '../../../../../types/enum/Pokemon';
+import React, { useState } from 'react'
+import { Item } from '../../../../../types/enum/Item'
+import {Pkm, PkmFamily} from '../../../../../types/enum/Pokemon'
+import PokemonFactory from '../../../../../models/pokemon-factory'
+import SelectedEntity from './selected-entity'
+import ModalMenu from './modal-menu'
+import ItemPicker from './item-picker'
+import PokemonPicker from './pokemon-picker'
+import TeamEditor from './team-editor'
+import ReactTooltip from 'react-tooltip'
+import { IBot, IStep } from '../../../../../models/mongo-models/bot-v2'
+import CSS from 'csstype'
+import produce from 'immer'
+import { useAppSelector, useAppDispatch } from '../../../hooks'
+import {createBot} from '../../../stores/NetworkStore'
+import { setBotCreatorSynergies } from '../../../stores/LobbyStore'
+import BuilderSynergies from './builder-synergies'
+import { Synergy } from '../../../../../types/enum/Synergy'
+import { Emotion, ModalMode, ReadWriteMode } from '../../../../../types'
+import {PkmIndex} from '../../../../../types/enum/Pokemon'
 
 const buttonsStyle: CSS.Properties = {
   top:'10px',
@@ -41,9 +41,9 @@ right:'0px'
 }
 
 export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
-  const dispatch = useAppDispatch();
-  const [step, setStep] = useState<number>(0);
-  const [copyStep, setCopyStep] = useState<IStep | undefined>(undefined);
+  const dispatch = useAppDispatch()
+  const [step, setStep] = useState<number>(0)
+  const [copyStep, setCopyStep] = useState<IStep | undefined>(undefined)
   const [bot, setBot] = useState<IBot>({
     steps: [
       {
@@ -170,95 +170,95 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     author:'',
     elo: 1200,
     name: Pkm.DITTO
-  });
-  const [entity, setEntity] = useState<Item | Pkm>(Pkm.DEFAULT);
-  const [mode, setMode] = useState<ReadWriteMode>(ReadWriteMode.WRITE);
+  })
+  const [entity, setEntity] = useState<Item | Pkm>(Pkm.DEFAULT)
+  const [mode, setMode] = useState<ReadWriteMode>(ReadWriteMode.WRITE)
   const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
-  const [modalBoolean, setModalBoolean] = useState<boolean>(false);
+  const [modalBoolean, setModalBoolean] = useState<boolean>(false)
 
-  const pastebinUrl: string = useAppSelector(state=>state.lobby.pastebinUrl);
-  const botData: IBot = useAppSelector(state=>state.lobby.botData);
+  const pastebinUrl: string = useAppSelector(state=>state.lobby.pastebinUrl)
+  const botData: IBot = useAppSelector(state=>state.lobby.botData)
 
   function updateSynergies(i: number) {
     const newSynergies = new Map<Synergy,number>();
     (Object.keys(Synergy) as Synergy[]).forEach(s=>{
-      newSynergies.set(s, 0);
-    });
-    const pokemonNames = new Array<Pkm>();
+      newSynergies.set(s, 0)
+    })
+    const pokemonNames = new Array<Pkm>()
     bot.steps[i].board.forEach(pkm=>{
-      const family = PkmFamily[pkm.name];
-      const pkmTypes = PokemonFactory.createPokemonFromName(pkm.name).types;
+      const family = PkmFamily[pkm.name]
+      const pkmTypes = PokemonFactory.createPokemonFromName(pkm.name).types
       if (!pokemonNames.includes(family)) {
-        pokemonNames.push(family);
+        pokemonNames.push(family)
         pkmTypes.forEach( (type: Synergy) => {
-          const v = newSynergies.get(type);
+          const v = newSynergies.get(type)
           if(v){
-            newSynergies.set(type, v + 1);
+            newSynergies.set(type, v + 1)
           }
           else{
-            newSynergies.set(type, 1);
+            newSynergies.set(type, 1)
           }
-        });
+        })
       }
-    });
-    dispatch(setBotCreatorSynergies(newSynergies));
+    })
+    dispatch(setBotCreatorSynergies(newSynergies))
   }
 
   function write(x: number, y: number) {
     if(Object.values(Pkm).includes(entity as Pkm)){
-        writePokemon(x, y);
+        writePokemon(x, y)
       }
     if(Object.keys(Item).includes(entity)){
-      writeItem(x, y);
+      writeItem(x, y)
     }
   }
 
   function writeItem(x: number ,y: number) {
-    const potential = bot.steps[step].board.findIndex(p=>p.x==x && p.y==y);
-    const e = entity as Item;
+    const potential = bot.steps[step].board.findIndex(p=>p.x==x && p.y==y)
+    const e = entity as Item
     if(potential >= 0) {
       if(bot.steps[step].board[potential].items.length <3){
-        setBot(produce(draft=>{draft.steps[step].board[potential].items.push(e)}));
+        setBot(produce(draft=>{draft.steps[step].board[potential].items.push(e)}))
       }
       else{
-        setBot(produce(draft=>{draft.steps[step].board[potential].items = [e]}));
+        setBot(produce(draft=>{draft.steps[step].board[potential].items = [e]}))
       }
     }
   }
 
   function writePokemon(x: number, y: number) {
-    const potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y);
-    const e = entity as Pkm;
+    const potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y)
+    const e = entity as Pkm
     if(potential >= 0) {
-      setBot(produce(draft=>{draft.steps[step].board[potential].name = e}));
+      setBot(produce(draft=>{draft.steps[step].board[potential].name = e}))
     }
     else {
-      setBot(produce(draft=>{draft.steps[step].board.push({name: e, x: x, y: y, items: []})}));
+      setBot(produce(draft=>{draft.steps[step].board.push({name: e, x: x, y: y, items: []})}))
     }
-    updateSynergies(step);
+    updateSynergies(step)
   }
 
   function erase(x: number, y: number) {
-    const potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y);
+    const potential = bot.steps[step].board.findIndex(p=>p.x == x && p.y == y)
     if(potential >= 0) {
-      setBot(produce(draft=>{draft.steps[step].board.splice(potential, 1)}));
+      setBot(produce(draft=>{draft.steps[step].board.splice(potential, 1)}))
     }
   }
 
   function importBot(text: string) {
     try{
-      const b: IBot = JSON.parse(text);
-      setBot(b);
-      updateSynergies(step);
-      setModalBoolean(false);
+      const b: IBot = JSON.parse(text)
+      setBot(b)
+      updateSynergies(step)
+      setModalBoolean(false)
     }
     catch(e){
-      alert(e);
+      alert(e)
     }
   }
 
   function create() {
-    dispatch(createBot(bot));
+    dispatch(createBot(bot))
   }
 
   return <div>
@@ -314,7 +314,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
      style={buttonStyle}
      onClick={()=>{
        if(copyStep){
-        setBot(produce(draft=>{draft.steps[step] = copyStep}));
+        setBot(produce(draft=>{draft.steps[step] = copyStep}))
        }
      }} 
      className='nes-btn'
@@ -342,8 +342,8 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     handleEditorClick={(x,y)=>{mode == ReadWriteMode.WRITE ? write(x,y): erase(x,y)}}
     handleAuthorChange={(e)=>{e.preventDefault; setBot(produce(draft=>{draft.author = e.target.value}))}}
     handleAvatarChange={(e)=>setBot(produce(draft=>{
-      draft.name = e.target.value;
-      draft.avatar = `${PkmIndex[e.target.value]}/${Emotion.NORMAL}`;
+      draft.name = e.target.value
+      draft.avatar = `${PkmIndex[e.target.value]}/${Emotion.NORMAL}`
     }))}
     handleRoundsRequiredChange={(e)=>setBot(produce(draft=>{draft.steps[step].roundsRequired = e.target.value}))}
     />

@@ -1,12 +1,12 @@
-import React from 'react';
-import CSS from 'csstype';
+import React from 'react'
+import CSS from 'csstype'
 
 const imgStyle: CSS.Properties = {
     width:'60px',
     height:'60px',
     imageRendering:'pixelated',
     marginRight:'10px'
-};
+}
 
 
 export default function WikiStatistic(){
@@ -55,5 +55,5 @@ export default function WikiStatistic(){
             <p>Critical hit damage (x multiplier)</p>
         </div>
     </div>
-</div>;
+</div>
 }

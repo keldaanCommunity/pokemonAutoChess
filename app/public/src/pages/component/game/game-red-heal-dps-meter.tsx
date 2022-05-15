@@ -1,12 +1,12 @@
-import React from 'react';
-import { useAppSelector } from '../../../hooks';
-import GameDpsHeal from './game-dps-heal';
+import React from 'react'
+import { useAppSelector } from '../../../hooks'
+import GameDpsHeal from './game-dps-heal'
 
 export default function GameRedHealDpsMeter() {
-    const redHealDpsMeter = useAppSelector(state=>state.game.redHealDpsMeter);
+    const redHealDpsMeter = useAppSelector(state=>state.game.redHealDpsMeter)
     if(redHealDpsMeter.length > 0){
-        const redHealSortedArray = [...redHealDpsMeter].sort((a,b)=>{return (b.shield + b.heal) - (a.shield + a.heal)});
-        const redHealMaxDamage = redHealSortedArray[0].shield + redHealSortedArray[0].heal;
+        const redHealSortedArray = [...redHealDpsMeter].sort((a,b)=>{return (b.shield + b.heal) - (a.shield + a.heal)})
+        const redHealMaxDamage = redHealSortedArray[0].shield + redHealSortedArray[0].heal
         return <div>
             {redHealSortedArray.map(p=>{
                 return <GameDpsHeal
@@ -19,6 +19,6 @@ export default function GameRedHealDpsMeter() {
         </div>
     }
     else{
-        return null;
+        return null
     }
 }

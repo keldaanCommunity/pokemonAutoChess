@@ -14,7 +14,7 @@ export interface Credit {
 }
 
 export enum Name {
-    Empty = "",
-    Female = "Female",
-    Shiny = "Shiny",
+    Empty = '',
+    Female = 'Female',
+    Shiny = 'Shiny',
 }

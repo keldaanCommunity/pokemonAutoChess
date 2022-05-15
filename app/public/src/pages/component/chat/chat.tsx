@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import "nes.css/css/nes.min.css";
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { sendMessage } from '../../../stores/NetworkStore';
-import ChatHistory from './chat-history';
+import React, { useState } from 'react'
+import 'nes.css/css/nes.min.css'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import { sendMessage } from '../../../stores/NetworkStore'
+import ChatHistory from './chat-history'
 
 export default function Chat(props: {source: string}) {
-  const dispatch = useAppDispatch();
-  const [currentText, setCurrentText] = useState<string>('');
+  const dispatch = useAppDispatch()
+  const [currentText, setCurrentText] = useState<string>('')
 
   return <div className="nes-container" style={{
     display: 'flex',
@@ -20,9 +20,9 @@ export default function Chat(props: {source: string}) {
     }}>
       <ChatHistory source={props.source}/>
       <form onSubmit={(e)=>{
-          e.preventDefault();
-          dispatch(sendMessage(currentText));
-          setCurrentText('');
+          e.preventDefault()
+          dispatch(sendMessage(currentText))
+          setCurrentText('')
         }}
         style={{
         display:'flex',

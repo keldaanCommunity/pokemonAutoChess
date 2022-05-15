@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose';
+import {Schema, model} from 'mongoose'
 
 export interface IEloBot {
   name: string;
@@ -14,6 +14,6 @@ const eloBot = new Schema(
         type: Number
       }
     }
-);
+)
 
-export default model<IEloBot>('EloBot', eloBot);
+export default model<IEloBot>('EloBot', eloBot)

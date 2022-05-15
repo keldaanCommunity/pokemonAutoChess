@@ -1,5 +1,5 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import Modal from "react-bootstrap/Modal";
+import React, { Dispatch, SetStateAction } from 'react'
+import Modal from 'react-bootstrap/Modal'
 
 const buttonStyle = {
   marginLeft:'10px',
@@ -19,5 +19,5 @@ export default function GameModal(props:{modalInfo: string, modalTitle: string, 
       <button style={buttonStyle} className='nes-btn is-primary' onClick={()=>{props.hideModal(false)}}>Cancel</button>
       <button style={buttonStyle} className='nes-btn is-error' onClick={props.leave}>Leave</button>
     </Modal.Footer>
-    </Modal>;
+    </Modal>
 }

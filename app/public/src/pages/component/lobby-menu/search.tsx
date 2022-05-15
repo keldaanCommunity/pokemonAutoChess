@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import History from './history';
-import { CDN_PORTRAIT_URL } from '../../../../../types';
-import Elo from '../elo';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { searchName } from '../../../stores/NetworkStore';
+import React, { useState } from 'react'
+import History from './history'
+import { CDN_PORTRAIT_URL } from '../../../../../types'
+import Elo from '../elo'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import { searchName } from '../../../stores/NetworkStore'
 
 export default function Search() {
-    const dispatch = useAppDispatch();
-    const user = useAppSelector(state=>state.lobby.searchedUser);
-    const [currentText, setCurrentText] = useState<string>('');
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(state=>state.lobby.searchedUser)
+    const [currentText, setCurrentText] = useState<string>('')
 
     if(user){
         return <div>
@@ -18,7 +18,7 @@ export default function Search() {
         </div>
 
         <div style={{display:'flex', alignItems: 'center', marginTop: '30px'}}>
-            <img src={CDN_PORTRAIT_URL + user.avatar + ".png"}/>
+            <img src={CDN_PORTRAIT_URL + user.avatar + '.png'}/>
             <h5>{user.name}</h5>
             <Elo elo={user.elo}/>
         </div>

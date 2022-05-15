@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { memo } from 'react'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
   
   
 function GameToasts() {
@@ -25,9 +25,9 @@ function GameToasts() {
             style={{top:`${0.5 + (i-1)*12.5}%`}}
             />)}
         </div>
-        );
+        )
     }
 
-export default memo(GameToasts);
+export default memo(GameToasts)
 
   

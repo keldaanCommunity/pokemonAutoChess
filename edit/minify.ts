@@ -2,7 +2,7 @@ import {Pkm} from '../app/types/enum/Pokemon';
 import fs from 'fs';
 import PokemonFactory from '../app/models/pokemon-factory';
 
-const pkmaIndexes = [];
+const pkmaIndexes = new Array<string>();
 const indexes = ["0000"];
 
 Object.values(Pkm).forEach(pkm => {

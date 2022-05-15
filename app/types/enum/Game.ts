@@ -1,12 +1,12 @@
 export enum Rarity {
-    COMMON = "COMMON",
-    UNCOMMON = "UNCOMMON",
-    RARE = "RARE",
-    EPIC = "EPIC",
-    LEGENDARY = "LEGENDARY",
-    MYTHICAL = "MYTHICAL",
-    NEUTRAL = "NEUTRAL",
-    SUMMON = "SUMMON"
+    COMMON = 'COMMON',
+    UNCOMMON = 'UNCOMMON',
+    RARE = 'RARE',
+    EPIC = 'EPIC',
+    LEGENDARY = 'LEGENDARY',
+    MYTHICAL = 'MYTHICAL',
+    NEUTRAL = 'NEUTRAL',
+    SUMMON = 'SUMMON'
 }
 
 export enum GamePhaseState {
@@ -15,23 +15,23 @@ export enum GamePhaseState {
 }
 
 export enum PokemonActionState {
-    IDLE = "Idle",
-    ATTACK = "Attack",
-    WALK = "Walk",
-    SLEEP = "Sleep",
-    HOP = "Hop",
-    HURT = "Hurt"
+    IDLE = 'Idle',
+    ATTACK = 'Attack',
+    WALK = 'Walk',
+    SLEEP = 'Sleep',
+    HOP = 'Hop',
+    HURT = 'Hurt'
 }
 
 export enum Orientation {
-    DOWN = "0",
-    DOWNLEFT = "7",
-    LEFT = "6",
-    UPLEFT = "5",
-    UP = "4",
-    UPRIGHT = "3",
-    RIGHT = "2",
-    DOWNRIGHT = "1"
+    DOWN = '0',
+    DOWNLEFT = '7',
+    LEFT = '6',
+    UPLEFT = '5',
+    UP = '4',
+    UPRIGHT = '3',
+    RIGHT = '2',
+    DOWNRIGHT = '1'
 }
 
 export enum AttackType {
@@ -53,13 +53,13 @@ export enum BotDifficulty {
 }
 
 export enum PokemonTint {
-    NORMAL = "Normal",
-    SHINY = "Shiny"
+    NORMAL = 'Normal',
+    SHINY = 'Shiny'
 }
 
 export enum SpriteType {
-    ANIM = "Anim",
-    SHADOW = "Shadow"
+    ANIM = 'Anim',
+    SHADOW = 'Shadow'
 }
 
 export enum Climate {

@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose';
+import {Schema, model} from 'mongoose'
 
 export interface IBotMonitoring{
     avatar: string,
@@ -20,6 +20,6 @@ const botMonitoring = new Schema({
         time:{type:Number},
         elo:{type:Number}
     }]
-});
+})
 
-export default model<IBotMonitoring>('BotMonitoring', botMonitoring);
+export default model<IBotMonitoring>('BotMonitoring', botMonitoring)

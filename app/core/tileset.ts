@@ -1,5 +1,5 @@
-import Jimp from 'jimp';
-import {Dungeon, DungeonData, Header, MaskCoordinate, Mask, TerrainType} from '../types/Config';
+import Jimp from 'jimp'
+import {Dungeon, DungeonData, Header, MaskCoordinate, Mask, TerrainType} from '../types/Config'
 
 export type TilesetTiled = {
   columns: number,
@@ -16,103 +16,103 @@ export type TilesetTiled = {
 }
 
 export default class Tileset {
-  id: Dungeon;
-  headers: Header[];
-  img: any;
-  ground: Map<Mask, number[]> = new Map();
-  groundAlt: Map<Mask, number[]> = new Map();
-  water: Map<Mask, number[]> = new Map();
-  wall: Map<Mask, number[]> = new Map();
-  wallAlt: Map<Mask, number[]> = new Map();
+  id: Dungeon
+  headers: Header[]
+  img: any
+  ground: Map<Mask, number[]> = new Map()
+  groundAlt: Map<Mask, number[]> = new Map()
+  water: Map<Mask, number[]> = new Map()
+  wall: Map<Mask, number[]> = new Map()
+  wallAlt: Map<Mask, number[]> = new Map()
 
   constructor(id: Dungeon) {
-    this.id = id;
-    this.headers = DungeonData[id].tileset;
+    this.id = id
+    this.headers = DungeonData[id].tileset
   }
 
   async initialize() {
-    this.img = await Jimp.read(`app/public/dist/client/assets/tilesets/${this.id}.png`);
-    this.computeMapping();
+    this.img = await Jimp.read(`app/public/dist/client/assets/tilesets/${this.id}.png`)
+    this.computeMapping()
   }
 
   computeMapping() {
     (Object.values(Mask) as Mask[]).forEach((v)=>{
-      this.ground.set(v, [this.getId(v, Header.GROUND)]);
-      this.water.set(v, [this.getId(v, Header.WATER)]);
+      this.ground.set(v, [this.getId(v, Header.GROUND)])
+      this.water.set(v, [this.getId(v, Header.WATER)])
       this.wall.set(v, [this.getId(v, Header.WALL)]);
       [Header.GROUND_ALT_1, Header.GROUND_ALT_2, Header.GROUND_ALT_3, Header.GROUND_ALT_4].forEach((h)=>{
         if (this.headers.includes(h) && this.isPixelValue(v, h)) {
-          const t = this.groundAlt.get(v);
+          const t = this.groundAlt.get(v)
           if (t) {
-            this.groundAlt.set(v, t.concat([this.getId(v, h)]));
+            this.groundAlt.set(v, t.concat([this.getId(v, h)]))
           } else {
-            this.groundAlt.set(v, [this.getId(v, h)]);
+            this.groundAlt.set(v, [this.getId(v, h)])
           }
         }
       });
 
       [Header.WALL_ALT_1, Header.WALL_ALT_2, Header.WALL_ALT_3].forEach((h)=>{
         if (this.headers.includes(h) && this.isPixelValue(v, h)) {
-          const t = this.wallAlt.get(v);
+          const t = this.wallAlt.get(v)
           if (t) {
-            this.wallAlt.set(v, t.concat([this.getId(v, h)]));
+            this.wallAlt.set(v, t.concat([this.getId(v, h)]))
           } else {
-            this.wallAlt.set(v, [this.getId(v, h)]);
+            this.wallAlt.set(v, [this.getId(v, h)])
           }
         }
-      });
-    });
+      })
+    })
   }
 
   getId(maskId: Mask, header: Header) {
-    let headerIndex = this.headers.indexOf(header);
+    let headerIndex = this.headers.indexOf(header)
     if (headerIndex == -1) {
-      headerIndex = this.headers.indexOf(Header.ABYSS);
+      headerIndex = this.headers.indexOf(Header.ABYSS)
     }
-    const maskCoordinate = MaskCoordinate[maskId];
-    const x = maskCoordinate.x + headerIndex * 3;
-    const y = maskCoordinate.y;
-    return y * this.headers.length * 3 + x + 1;
+    const maskCoordinate = MaskCoordinate[maskId]
+    const x = maskCoordinate.x + headerIndex * 3
+    const y = maskCoordinate.y
+    return y * this.headers.length * 3 + x + 1
   }
 
   isPixelValue(maskId: Mask, header: Header) {
-    const headerIndex = this.headers.indexOf(header);
-    const maskCoordinate = MaskCoordinate[maskId];
-    const pixelX = maskCoordinate.x + headerIndex * 3;
-    const pixelY = maskCoordinate.y;
-    return (Jimp.intToRGBA(this.img.getPixelColor(pixelX * 25 + 12, pixelY * 25 + 12)).a != 0);
+    const headerIndex = this.headers.indexOf(header)
+    const maskCoordinate = MaskCoordinate[maskId]
+    const pixelX = maskCoordinate.x + headerIndex * 3
+    const pixelY = maskCoordinate.y
+    return (Jimp.intToRGBA(this.img.getPixelColor(pixelX * 25 + 12, pixelY * 25 + 12)).a != 0)
   }
 
   getTilemapId(terrain: TerrainType, maskId: Mask) {
     // console.log(terrain, maskId);
-    let items;
+    let items
     switch (terrain) {
       case TerrainType.GROUND:
-        items = this.groundAlt.get(maskId);
+        items = this.groundAlt.get(maskId)
         // console.log(items);
         if (items && items.length > 0) {
           if (Math.random() > 0.80) {
-            return items[Math.floor(Math.random() * items.length)];
+            return items[Math.floor(Math.random() * items.length)]
           } else {
-            return this.ground.get(maskId);
+            return this.ground.get(maskId)
           }
         } else {
-          return this.ground.get(maskId);
+          return this.ground.get(maskId)
         }
       case TerrainType.WATER:
-        return this.water.get(maskId);
+        return this.water.get(maskId)
 
       case TerrainType.WALL:
-        items = this.wallAlt.get(maskId);
+        items = this.wallAlt.get(maskId)
         // console.log(items);
         if (items && items.length > 0) {
           if (Math.random() > 0.80) {
-            return items[Math.floor(Math.random() * items.length)];
+            return items[Math.floor(Math.random() * items.length)]
           } else {
-            return this.wall.get(maskId);
+            return this.wall.get(maskId)
           }
         } else {
-          return this.wall.get(maskId);
+          return this.wall.get(maskId)
         }
     }
   }
@@ -134,4 +134,4 @@ export default class Tileset {
   }
 }
 
-module.exports = Tileset;
+module.exports = Tileset

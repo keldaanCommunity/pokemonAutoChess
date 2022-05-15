@@ -1,7 +1,7 @@
-import {Schema, model} from 'mongoose';
-import { Emotion } from '../../types';
-import MapTileset from '../colyseus-models/map-tileset';
-import WinTileset from '../colyseus-models/win-tileset';
+import {Schema, model} from 'mongoose'
+import { Emotion } from '../../types'
+import MapTileset from '../colyseus-models/map-tileset'
+import WinTileset from '../colyseus-models/win-tileset'
 
 export interface IUserMetadata {
   uid: string;
@@ -158,6 +158,6 @@ const userMetadataSchema = new Schema(
         }       
       }
     }
-);
+)
 
-export default model<IUserMetadata>('UserMetadata', userMetadataSchema);
+export default model<IUserMetadata>('UserMetadata', userMetadataSchema)

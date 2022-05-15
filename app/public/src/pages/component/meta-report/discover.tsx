@@ -1,13 +1,13 @@
-import { ApexOptions } from 'apexcharts';
-import React, { useState } from 'react';
-import Chart from 'react-apexcharts';
-import {CDN_PORTRAIT_URL} from '../../../../../types';
-import { IMeta } from '../../../../../models/mongo-models/meta';
-import { Emotion } from '../../../../../types';
-import { PkmIndex } from '../../../../../types/enum/Pokemon';
+import { ApexOptions } from 'apexcharts'
+import React, { useState } from 'react'
+import Chart from 'react-apexcharts'
+import {CDN_PORTRAIT_URL} from '../../../../../types'
+import { IMeta } from '../../../../../models/mongo-models/meta'
+import { Emotion } from '../../../../../types'
+import { PkmIndex } from '../../../../../types/enum/Pokemon'
 
 function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 type xyz = {
@@ -17,7 +17,7 @@ type xyz = {
 }
 
 export default function Discover(props:{meta: IMeta[]}){
-    const typeStyle = useState<string>('"display:flex; flex-flow:column;align-items:center"');
+    const typeStyle = useState<string>('"display:flex; flex-flow:column;align-items:center"')
     const options: ApexOptions = {
         grid:{
             show:false
@@ -58,19 +58,19 @@ export default function Discover(props:{meta: IMeta[]}){
         }
     }
 
-    const series = new Array<{name: string, data: xyz[]}>();
+    const series = new Array<{name: string, data: xyz[]}>()
     props.meta.forEach(team=>{
-        const data = new Array<xyz>();
+        const data = new Array<xyz>()
         team.teams.forEach(t=>{
             data.push({
                 x: t.x,
                 y: t.y,
                 z: 10,
-            });
-        });
+            })
+        })
 
-        let name = '';
-        const types = Object.keys(team.types).sort((a,b)=>{return team.types[b] - team.types[a]});
+        let name = ''
+        const types = Object.keys(team.types).sort((a,b)=>{return team.types[b] - team.types[a]})
         if(types[0]){
             name += capitalizeFirstLetter(types[0]) + ' ' + team.types[types[0]] + '/'
         }
@@ -80,8 +80,8 @@ export default function Discover(props:{meta: IMeta[]}){
         series.push({
             name: name,
             data: data
-        });
-    });
+        })
+    })
     
     return (
         <div id="chart" style={{backgroundColor:'rgba(255,255,255,1)', border:'4px solid'}}>

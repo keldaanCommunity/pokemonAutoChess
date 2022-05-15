@@ -1,19 +1,19 @@
-import CSS from 'csstype';
-import React, { useState, ReactElement } from 'react';
-import { CDN_PORTRAIT_URL } from '../../../../../types';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import PokemonCarousel from './pokemon-carousel';
-import Modal from 'react-bootstrap/esm/Modal';
-import { useAppSelector } from '../../../hooks';
-import { Pokemon } from '../../../../../models/colyseus-models/pokemon';
-import PokemonFactory from '../../../../../models/pokemon-factory';
-import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata';
-import tracker from '../../../../dist/client/assets/pokemons/tracker.json';
-import { Emotion } from '../../../../../types';
-import {Synergy} from '../../../../../types/enum/Synergy';
-import {ITracker} from '../../../../../types/ITracker';
-import PokemonEmotion from './pokemon-emotion';
-import { Pkm } from '../../../../../types/enum/Pokemon';
+import CSS from 'csstype'
+import React, { useState, ReactElement } from 'react'
+import { CDN_PORTRAIT_URL } from '../../../../../types'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import PokemonCarousel from './pokemon-carousel'
+import Modal from 'react-bootstrap/esm/Modal'
+import { useAppSelector } from '../../../hooks'
+import { Pokemon } from '../../../../../models/colyseus-models/pokemon'
+import PokemonFactory from '../../../../../models/pokemon-factory'
+import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata'
+import tracker from '../../../../dist/client/assets/pokemons/tracker.json'
+import { Emotion } from '../../../../../types'
+import {Synergy} from '../../../../../types/enum/Synergy'
+import {ITracker} from '../../../../../types/ITracker'
+import PokemonEmotion from './pokemon-emotion'
+import { Pkm } from '../../../../../types/enum/Pokemon'
 
 const buttonStyle: CSS.Properties = {
     marginLeft:'10px',
@@ -22,41 +22,41 @@ const buttonStyle: CSS.Properties = {
 }
 
 export default function PokemonCollection(props: {toggleCollection :()=>void}){
-    const metadata = tracker as unknown as { [key: string]: ITracker };
-    const [pokemon, setPokemon] =  useState<Pkm | undefined>(undefined);
-    const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection);
-    let p: Pokemon;
-    let pConfig: IPokemonConfig | undefined;
-    let pShinyPad = '';
-    let pMetadata: ITracker | undefined = undefined;
-    let emotion: Emotion;
-    const availableEmotions: Emotion[] = [];
-    let modalElement: ReactElement | null = null;
+    const metadata = tracker as unknown as { [key: string]: ITracker }
+    const [pokemon, setPokemon] =  useState<Pkm | undefined>(undefined)
+    const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection)
+    let p: Pokemon
+    let pConfig: IPokemonConfig | undefined
+    let pShinyPad = ''
+    let pMetadata: ITracker | undefined = undefined
+    let emotion: Emotion
+    const availableEmotions: Emotion[] = []
+    let modalElement: ReactElement | null = null
     if(pokemon){
-        p = PokemonFactory.createPokemonFromName(pokemon);
-        pConfig = pokemonCollection.find(c=>c.id == p.index);
-        const pathIndex = p.index.split('-');
+        p = PokemonFactory.createPokemonFromName(pokemon)
+        pConfig = pokemonCollection.find(c=>c.id == p.index)
+        const pathIndex = p.index.split('-')
         if(pathIndex.length == 1){
-            pMetadata = metadata[p.index];
+            pMetadata = metadata[p.index]
         }
         else if(pathIndex.length == 2){
-            pMetadata = metadata[pathIndex[0]].subgroups[pathIndex[1]];
+            pMetadata = metadata[pathIndex[0]].subgroups[pathIndex[1]]
         }
         
         if(pConfig && pConfig.selectedEmotion){
-            emotion = pConfig.selectedEmotion;
-            pShinyPad = pConfig.selectedShiny ? '/0000/0001': ''; 
+            emotion = pConfig.selectedEmotion
+            pShinyPad = pConfig.selectedShiny ? '/0000/0001': '' 
         }
         else{
-            emotion = Emotion.NORMAL;
+            emotion = Emotion.NORMAL
         }
         if(pMetadata){
             Object.keys(pMetadata.portrait_files).forEach(k=>{
-                const possibleEmotion = k as Emotion;
+                const possibleEmotion = k as Emotion
                 if(Object.values(Emotion).includes(possibleEmotion)){
-                    availableEmotions.push(possibleEmotion);
+                    availableEmotions.push(possibleEmotion)
                 }
-            });
+            })
         }
 
         modalElement = <Modal show={pokemon !== undefined} onHide={()=>{setPokemon(undefined)}} dialogClassName="modalClass">
@@ -102,7 +102,7 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
             <Tabs>
                 <TabList>
                     {(Object.keys(Synergy) as Synergy[]).map((r =>{
-                        return <Tab key={'title-' + r}> <img src={"assets/types/" + r + ".png"}></img></Tab>
+                        return <Tab key={'title-' + r}> <img src={'assets/types/' + r + '.png'}></img></Tab>
                     }))}
                 </TabList>
 

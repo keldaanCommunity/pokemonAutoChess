@@ -1,19 +1,19 @@
-import React from 'react';
-import { IGameUser } from '../../../../../models/colyseus-models/game-user';
-import { useAppDispatch } from '../../../hooks';
-import { removeBot } from '../../../stores/NetworkStore';
-import Elo from '../elo';
-import InlineAvatar from '../inline-avatar';
+import React from 'react'
+import { IGameUser } from '../../../../../models/colyseus-models/game-user'
+import { useAppDispatch } from '../../../hooks'
+import { removeBot } from '../../../stores/NetworkStore'
+import Elo from '../elo'
+import InlineAvatar from '../inline-avatar'
 
 const buttonStyle = {
     marginLeft:'10px',
     marginRight:'10px'
-};
+}
 
 export default function PreparationMenuUser(props: {key: string, user: IGameUser}){
 
-    const dispatch = useAppDispatch();
-    const readyColor = props.user.ready ? "#76c442" : "#ce372b";
+    const dispatch = useAppDispatch()
+    const readyColor = props.user.ready ? '#76c442' : '#ce372b'
 
     const removeButton = props.user.isBot ? 
         <button style={buttonStyle} className='nes-btn is-error' onClick={() => {dispatch(removeBot(props.user.id))}}>X</button> :
