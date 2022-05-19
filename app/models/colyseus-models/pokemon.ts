@@ -1497,7 +1497,7 @@ export class Beedrill extends Pokemon {
 
 export class Pidgey extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.PIDGEY, [Synergy.NORMAL, Synergy.FLYING], Rarity.COMMON, '0016', Pkm.PIDGEOTTO, 60, 5, 1, 1, 2, AttackSprite.FLYING_RANGE, AttackType.SPECIAL, 1, 100, Ability.KNOWLEDGE_THIEF,shiny, emotion)
+    super(Pkm.PIDGEY, [Synergy.NORMAL, Synergy.FLYING], Rarity.COMMON, '0016', Pkm.PIDGEOTTO, 60, 5, 1, 1, 2, AttackSprite.FLYING_RANGE, AttackType.SPECIAL, 1, 100, Ability.HURRICANE,shiny, emotion)
   }
 }
 
@@ -1515,7 +1515,7 @@ export class Pidgeot extends Pokemon {
 
 export class Hoppip extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.HOPPIP, [Synergy.FLYING, Synergy.FLORA, Synergy.GRASS], Rarity.COMMON, '0187', Pkm.SKIPLOOM, 60, 5, 1, 1, 2, AttackSprite.FLYING_RANGE, AttackType.SPECIAL, 1, 100, Ability.CONFUSING_MIND,shiny, emotion)
+    super(Pkm.HOPPIP, [Synergy.FLYING, Synergy.FLORA, Synergy.GRASS], Rarity.COMMON, '0187', Pkm.SKIPLOOM, 60, 5, 1, 1, 2, AttackSprite.FLYING_RANGE, AttackType.SPECIAL, 1, 100, Ability.STUN_SPORE,shiny, emotion)
   }
 }
 
@@ -1533,7 +1533,7 @@ export class Jumpluff extends Pokemon {
 
 export class Seedot extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.SEEDOT, [Synergy.GRASS, Synergy.DARK, Synergy.FIELD], Rarity.COMMON, '0273', Pkm.NUZLEAF, 60, 5, 2, 2, 1, AttackSprite.GRASS_MELEE, AttackType.PHYSICAL, 1, 100, Ability.SONG_OF_DESIRE,shiny, emotion)
+    super(Pkm.SEEDOT, [Synergy.GRASS, Synergy.DARK, Synergy.FIELD], Rarity.COMMON, '0273', Pkm.NUZLEAF, 60, 5, 2, 2, 1, AttackSprite.GRASS_MELEE, AttackType.PHYSICAL, 1, 100, Ability.THIEF,shiny, emotion)
   }
 }
 
