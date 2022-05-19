@@ -5,6 +5,7 @@ import Board from './board'
 import PokemonEntity from './pokemon-entity'
 import PokemonState from './pokemon-state'
 import { Synergy } from '../types/enum/Synergy'
+import { AbilityStrategy } from '../types/enum/Ability'
 
 export class AttackStrategy {
   process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
@@ -38,6 +39,51 @@ export class AttackStrategy {
     if (pokemon.items.has(Item.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + 20)
     }
+  }
+}
+
+export class SongOfDesireStrategy extends AttackStrategy{
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+      super.process(pokemon, state, board, target)
+      let duration = 3000
+      if(pokemon.stars == 2){
+        duration = 6000
+      }
+      else if(pokemon.stars == 3){
+        duration = 9000
+      }
+      target.status.triggerConfusion(duration)
+  }
+}
+
+
+export class ConfusingMindStrategy extends AttackStrategy{
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+      super.process(pokemon, state, board, target)
+      const cells = board.getAdjacentCells(target.positionX, target.positionY)
+      let damage = 10
+      let confusion = 0.5
+      if(pokemon.stars == 2){
+        damage = 20
+        confusion = 1
+      }
+      else if(pokemon.stars == 3){
+        damage = 40
+        confusion = 2
+      }
+      cells.forEach(cell => {
+        if(cell.value && cell.value.team !== pokemon.team){
+          cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+          cell.value.status.triggerConfusion(confusion * 1000)
+        }
+      })
+  }
+}
+
+export class KnowledgeThiefStrategy extends AttackStrategy{
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+      super.process(pokemon, state, board, target)
+      AbilityStrategy[target.skill].process(pokemon, state, board, target)
   }
 }
 
@@ -2246,7 +2292,9 @@ export class MetronomeStrategy extends AttackStrategy {
       DynamicPunchStrategy,
       DracoEnergyStrategy,
       CrabHammerStrategy,
-      DiamondStormStrategy
+      DiamondStormStrategy,
+      ConfusingMindStrategy,
+      SongOfDesireStrategy
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)

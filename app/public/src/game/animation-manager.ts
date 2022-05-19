@@ -590,6 +590,20 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.SONG_OF_DESIRE,
+      frames: this.game.anims.generateFrameNames(Ability.SONG_OF_DESIRE, {start: 0, end: 43, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.CONFUSING_MIND,
+      frames: this.game.anims.generateFrameNames(Ability.CONFUSING_MIND, {start: 0, end: 36, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.BONEMERANG,
       frames: this.game.anims.generateFrameNames(Ability.BONEMERANG, {start: 0, end: 7, zeroPad: 3}),
       duration: 1000,

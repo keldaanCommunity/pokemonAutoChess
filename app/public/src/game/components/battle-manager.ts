@@ -362,6 +362,10 @@ export default class BattleManager {
             } else {
               pkm.targetY = null
             }
+          } else if(change.field == 'team') {
+            if(pkm.lifebar && pkm.lifebar.progress){
+              pkm.lifebar.progress.style.backgroundColor = change.value === 1 ? '#e76e55': '#76c442'
+            }
           }
           break
         }

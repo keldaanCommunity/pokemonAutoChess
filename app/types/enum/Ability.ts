@@ -1,4 +1,4 @@
-import { AttackStrategy, BiteStrategy, BlastBurnStrategy, BlazeKickStrategy, BonemerangStrategy, BugBuzzStrategy, BurnStrategy, CalmMindStrategy, ChargeStrategy, ClangorousSoulStrategy, ConfusionStrategy, CorruptedNatureStrategy, CrabHammerStrategy, DarkPulseStrategy, DiamondStormStrategy, DisarmingVoiceStrategy, DischargeStrategy, DracoEnergyStrategy, DracoMeteorStrategy, DragonBreathStrategy, DragonTailStrategy, DynamaxCannonStrategy, DynamicPunchStrategy, EchoStrategy, ElectroBoostStrategy, ElectroWebStrategy, ExplosionStrategy, FireBlastStrategy, FireTrickStrategy, FlameChargeStrategy, FreezeStrategy, GrassWhistleStrategy, GrowlStrategy, GuillotineStrategy, HappyHourStrategy, HeadSmashStrategy, HealBlockStrategy, HeatWaveStrategy, HighJumpKickStrategy, HurricaneStrategy, HydroPumpStrategy, HyperVoiceStrategy, IcicleCrashStrategy, IronDefenseStrategy, IronTailStrategy, KingShieldStrategy, LeechLifeStrategy, LeechSeedStrategy, LockOnStrategy, MeteorMashStrategy, MetronomeStrategy, NastyPlotStrategy, NightmareStrategy, NightSlashStrategy, OriginPulseStrategy, PetalDanceStrategy, PoisonStingStrategy, PoisonStrategy, ProtectStrategy, PsychUpStrategy, RazorWindStrategy, RelicSongStrategy, RoarOfTimeStrategy, RockSlideStrategy, RockSmashStrategy, RockTombStrategy, RootStrategy, SeedFlareStrategy, SeismicTossStrategy, ShadowCloneStrategy, SilenceStrategy, SleepStrategy, SoakStrategy, StompStrategy, StunSporeStrategy, TeleportStrategy, ThiefStrategy, ThunderStrategy, TormentStrategy, TriAttackStrategy, TwistingNeitherStrategy, VoltSwitchStrategy, WheelOfFireStrategy, WishStrategy, WonderGuardStrategy } from '../../core/attack-strategy'
+import { AttackStrategy, BiteStrategy, BlastBurnStrategy, BlazeKickStrategy, BonemerangStrategy, BugBuzzStrategy, BurnStrategy, CalmMindStrategy, ChargeStrategy, ClangorousSoulStrategy, ConfusingMindStrategy, ConfusionStrategy, CorruptedNatureStrategy, CrabHammerStrategy, DarkPulseStrategy, DiamondStormStrategy, DisarmingVoiceStrategy, DischargeStrategy, DracoEnergyStrategy, DracoMeteorStrategy, DragonBreathStrategy, DragonTailStrategy, DynamaxCannonStrategy, DynamicPunchStrategy, EchoStrategy, ElectroBoostStrategy, ElectroWebStrategy, ExplosionStrategy, FireBlastStrategy, FireTrickStrategy, FlameChargeStrategy, FreezeStrategy, GrassWhistleStrategy, GrowlStrategy, GuillotineStrategy, HappyHourStrategy, HeadSmashStrategy, HealBlockStrategy, HeatWaveStrategy, HighJumpKickStrategy, HurricaneStrategy, HydroPumpStrategy, HyperVoiceStrategy, IcicleCrashStrategy, IronDefenseStrategy, IronTailStrategy, KingShieldStrategy, KnowledgeThiefStrategy, LeechLifeStrategy, LeechSeedStrategy, LockOnStrategy, MeteorMashStrategy, MetronomeStrategy, NastyPlotStrategy, NightmareStrategy, NightSlashStrategy, OriginPulseStrategy, PetalDanceStrategy, PoisonStingStrategy, PoisonStrategy, ProtectStrategy, PsychUpStrategy, RazorWindStrategy, RelicSongStrategy, RoarOfTimeStrategy, RockSlideStrategy, RockSmashStrategy, RockTombStrategy, RootStrategy, SeedFlareStrategy, SeismicTossStrategy, ShadowCloneStrategy, SilenceStrategy, SleepStrategy, SoakStrategy, SongOfDesireStrategy, StompStrategy, StunSporeStrategy, TeleportStrategy, ThiefStrategy, ThunderStrategy, TormentStrategy, TriAttackStrategy, TwistingNeitherStrategy, VoltSwitchStrategy, WheelOfFireStrategy, WishStrategy, WonderGuardStrategy } from '../../core/attack-strategy'
 
 export enum Ability {
     DEFAULT = 'DEFAULT',
@@ -85,10 +85,16 @@ export enum Ability {
     PSYCH_UP = 'PSYCH_UP',
     RAZOR_WIND = 'RAZOR_WIND',
     TWISTING_NEITHER = 'TWISTING_NEITHER',
-    WONDER_GUARD = 'WONDER_GUARD'
+    WONDER_GUARD = 'WONDER_GUARD',
+    SONG_OF_DESIRE = 'SONG_OF_DESIRE',
+    CONFUSING_MIND = 'CONFUSING_MIND',
+    KNOWLEDGE_THIEF = 'KNOWLEDGE_THIEF'
 }
 
 export const AbilityStrategy: {[key in Ability]: AttackStrategy} = {
+    [Ability.SONG_OF_DESIRE]: new SongOfDesireStrategy(),
+    [Ability.CONFUSING_MIND]: new ConfusingMindStrategy(),
+    [Ability.KNOWLEDGE_THIEF]: new KnowledgeThiefStrategy(),
     [Ability.WONDER_GUARD]: new WonderGuardStrategy(),
     [Ability.CORRUPTED_NATURE]: new CorruptedNatureStrategy(),
     [Ability.CRABHAMMER]: new CrabHammerStrategy(),

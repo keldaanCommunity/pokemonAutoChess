@@ -1497,7 +1497,7 @@ export class Beedrill extends Pokemon {
 
 export class Pidgey extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.PIDGEY, [Synergy.NORMAL, Synergy.FLYING], Rarity.COMMON, '0016', Pkm.PIDGEOTTO, 60, 5, 1, 1, 2, AttackSprite.FLYING_RANGE, AttackType.SPECIAL, 1, 100, Ability.HURRICANE,shiny, emotion)
+    super(Pkm.PIDGEY, [Synergy.NORMAL, Synergy.FLYING], Rarity.COMMON, '0016', Pkm.PIDGEOTTO, 60, 5, 1, 1, 2, AttackSprite.FLYING_RANGE, AttackType.SPECIAL, 1, 100, Ability.KNOWLEDGE_THIEF,shiny, emotion)
   }
 }
 
@@ -1515,7 +1515,7 @@ export class Pidgeot extends Pokemon {
 
 export class Hoppip extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.HOPPIP, [Synergy.FLYING, Synergy.FLORA, Synergy.GRASS], Rarity.COMMON, '0187', Pkm.SKIPLOOM, 60, 5, 1, 1, 2, AttackSprite.FLYING_RANGE, AttackType.SPECIAL, 1, 100, Ability.STUN_SPORE,shiny, emotion)
+    super(Pkm.HOPPIP, [Synergy.FLYING, Synergy.FLORA, Synergy.GRASS], Rarity.COMMON, '0187', Pkm.SKIPLOOM, 60, 5, 1, 1, 2, AttackSprite.FLYING_RANGE, AttackType.SPECIAL, 1, 100, Ability.CONFUSING_MIND,shiny, emotion)
   }
 }
 
@@ -1533,7 +1533,7 @@ export class Jumpluff extends Pokemon {
 
 export class Seedot extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.SEEDOT, [Synergy.GRASS, Synergy.DARK, Synergy.FIELD], Rarity.COMMON, '0273', Pkm.NUZLEAF, 60, 5, 2, 2, 1, AttackSprite.GRASS_MELEE, AttackType.PHYSICAL, 1, 100, Ability.THIEF,shiny, emotion)
+    super(Pkm.SEEDOT, [Synergy.GRASS, Synergy.DARK, Synergy.FIELD], Rarity.COMMON, '0273', Pkm.NUZLEAF, 60, 5, 2, 2, 1, AttackSprite.GRASS_MELEE, AttackType.PHYSICAL, 1, 100, Ability.SONG_OF_DESIRE,shiny, emotion)
   }
 }
 
@@ -1917,19 +1917,19 @@ export class Latios extends Pokemon {
 
 export class Uxie extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.UXIE, [Synergy.PSYCHIC, Synergy.FAIRY], Rarity.MYTHICAL, '0480', Pkm.DEFAULT, 200, 12, 3, 3, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.CALM_MIND,shiny, emotion)
+    super(Pkm.UXIE, [Synergy.PSYCHIC, Synergy.FAIRY], Rarity.MYTHICAL, '0480', Pkm.DEFAULT, 200, 12, 3, 3, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 55, Ability.KNOWLEDGE_THIEF,shiny, emotion)
   }
 }
 
 export class Mesprit extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MESPRIT, [Synergy.PSYCHIC, Synergy.FAIRY], Rarity.MYTHICAL, '0481', Pkm.DEFAULT, 200, 12, 3, 3, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.CALM_MIND,shiny, emotion)
+    super(Pkm.MESPRIT, [Synergy.PSYCHIC, Synergy.FAIRY], Rarity.MYTHICAL, '0481', Pkm.DEFAULT, 200, 12, 3, 3, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 90, Ability.CONFUSING_MIND,shiny, emotion)
   }
 }
 
 export class Azelf extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.AZELF, [Synergy.PSYCHIC, Synergy.FAIRY], Rarity.MYTHICAL, '0482', Pkm.DEFAULT, 200, 12, 3, 3, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.CALM_MIND,shiny, emotion)
+    super(Pkm.AZELF, [Synergy.PSYCHIC, Synergy.FAIRY], Rarity.MYTHICAL, '0482', Pkm.DEFAULT, 200, 12, 3, 3, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 110, Ability.SONG_OF_DESIRE,shiny, emotion)
   }
 }
 
