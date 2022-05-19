@@ -244,7 +244,7 @@ export default class GameRoom extends Room<GameState> {
           BOT.find({'avatar': player.id}, (err, bots)=>{
             if (bots) {
               bots.forEach((bot) =>{
-                bot.elo = this.computeElo(player, player.rank, player.elo)
+                bot.elo = Math.max(0, this.computeElo(player, player.rank, player.elo))
                 bot.save()
               })
             }
@@ -281,7 +281,7 @@ export default class GameRoom extends Room<GameState> {
               }
 
               if (usr.elo) {
-                const elo = this.computeElo(player, rank, usr.elo)
+                const elo = Math.max(0, this.computeElo(player, rank, usr.elo))
                 if (elo) {
                   usr.elo = elo
                 }

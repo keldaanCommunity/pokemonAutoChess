@@ -6,9 +6,9 @@ const args = process.argv.slice(2)
 dotenv.config()
 
 const pastebin = new PastebinAPI({
-  'api_dev_key': process.env.PASTEBIN_API_DEV_KEY,
-  'api_user_name': process.env.PASTEBIN_API_USERNAME,
-  'api_user_password': process.env.PASTEBIN_API_PASSWORD
+  'api_dev_key': process.env.PASTEBIN_API_DEV_KEY!,
+  'api_user_name': process.env.PASTEBIN_API_USERNAME!,
+  'api_user_password': process.env.PASTEBIN_API_PASSWORD!
 })
 
 const url = args[0]
