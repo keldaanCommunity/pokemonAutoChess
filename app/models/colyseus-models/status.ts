@@ -21,6 +21,7 @@ export default class Status extends Schema implements IStatus{
   soulDew = false
   brightPowder = false
   flameOrb = false
+  changeTeam = false
   burnOrigin: PokemonEntity | undefined = undefined
   poisonOrigin: PokemonEntity | undefined = undefined
   burnCooldown = 0
@@ -37,6 +38,7 @@ export default class Status extends Schema implements IStatus{
   smokeCooldown = 0
   armorReductionCooldown = 0
   flameOrbCooldown = 0
+  changeTeamCooldown = 0
 
   triggerFlameOrb(timer: number) {
     if (!this.flameOrb) {

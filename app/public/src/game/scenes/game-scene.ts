@@ -154,6 +154,8 @@ export default class GameScene extends Scene {
     this.load.multiatlas('HIGH_JUMP_KICK', '/assets/attacks/HIGH_JUMP_KICK.json', '/assets/attacks')
     this.load.multiatlas('TRI_ATTACK', '/assets/attacks/TRI_ATTACK.json', '/assets/attacks')
     this.load.multiatlas('CLANGOROUS_SOUL', '/assets/attacks/CLANGOROUS_SOUL.json', '/assets/attacks')
+    this.load.multiatlas('CONFUSING_MIND', '/assets/attacks/CONFUSING_MIND.json', '/assets/attacks')
+    this.load.multiatlas('SONG_OF_DESIRE', '/assets/attacks/SONG_OF_DESIRE.json', '/assets/attacks')
     this.load.multiatlas('FIELD_DEATH', '/assets/attacks/FIELD_DEATH.json', '/assets/attacks')
     this.load.multiatlas('FAIRY_CRIT', '/assets/attacks/FAIRY_CRIT.json', '/assets/attacks')
     this.load.multiatlas('pmd-replace','/assets/attacks/pmd-replace.json', '/assets/attacks')

@@ -331,6 +331,7 @@ export default class Pokemon extends Button {
     if (this.skill) {
       let coordinates: number[]
       let specialProjectile: GameObjects.Sprite
+      let additionalProjectile: GameObjects.Sprite
       let coordinatesTarget: number[]
 
       if (this.targetX && this.targetY && this.targetX != -1 && this.targetY != -1) {
@@ -1141,6 +1142,44 @@ export default class Pokemon extends Button {
               onComplete: () => {
                 specialProjectile.destroy()
               }
+            })
+            break
+
+          case Ability.SONG_OF_DESIRE:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.SONG_OF_DESIRE, '000')
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.SONG_OF_DESIRE)
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+              specialProjectile.destroy()
+            })
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            additionalProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.SONG_OF_DESIRE, '000')
+            additionalProjectile.setDepth(7)
+            additionalProjectile.setScale(2, 2)
+            additionalProjectile.anims.play(Ability.SONG_OF_DESIRE)
+            additionalProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+              additionalProjectile.destroy()
+            })
+            break
+
+          case Ability.CONFUSING_MIND:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.CONFUSING_MIND, '000')
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.CONFUSING_MIND)
+            specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+              specialProjectile.destroy()
+            })
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            additionalProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.CONFUSING_MIND, '000')
+            additionalProjectile.setDepth(7)
+            additionalProjectile.setScale(2, 2)
+            additionalProjectile.anims.play(Ability.CONFUSING_MIND)
+            additionalProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+              additionalProjectile.destroy()
             })
             break
 

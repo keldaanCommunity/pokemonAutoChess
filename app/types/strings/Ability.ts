@@ -2,6 +2,24 @@ import { Langage } from '..'
 import { Ability } from '../enum/Ability'
 
 export const AbilityName: {[key in Ability]: Langage} = {
+    [Ability.SONG_OF_DESIRE]: {
+        eng: 'Song of Desire',
+        esp: '',
+        fra: '',
+        prt: ''
+    },
+    [Ability.CONFUSING_MIND]: {
+        eng: 'Confusing Mind',
+        esp: '',
+        fra: '',
+        prt: ''
+    },
+    [Ability.KNOWLEDGE_THIEF]: {
+        eng: 'Knowledge Thief',
+        esp: '',
+        fra: '',
+        prt: ''
+    },
     [Ability.KING_SHIELD]: {
         eng: 'King Shield',
         esp: '',
@@ -515,6 +533,24 @@ export const AbilityName: {[key in Ability]: Langage} = {
 }
 
 export const AbilityDescription: {[key in Ability]: Langage} = {
+    [Ability.SONG_OF_DESIRE]: {
+        eng: 'The target is confused for 3/6/9s',
+        esp: '',
+        fra: '',
+        prt: ''
+    },
+    [Ability.CONFUSING_MIND]: {
+        eng: 'Deals 10/20/40 to the target and confuse adjcacent pokemons 0.5/1/2s',
+        esp: '',
+        fra: '',
+        prt: ''
+    },
+    [Ability.KNOWLEDGE_THIEF]: {
+        eng: 'Launch the ultimate of the target',
+        esp: '',
+        fra: '',
+        prt: ''
+    },
     [Ability.KING_SHIELD]: {
         eng: 'Protect the user for 0.75/1.5/3s and swap his position with the farthest enemy',
         esp: '',
