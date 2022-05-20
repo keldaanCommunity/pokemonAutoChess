@@ -121,7 +121,7 @@ export default class Tileset {
     return {
       columns: this.headers.length * 3,
       firstgid: 1,
-      image: `assets/tilesets/${this.id}.png`,
+      image: `C:/Users/arnau/Desktop/pokemonAutoChess/app/public/dist/client/assets/tilesets/${this.id}.png`,
       imageheight: 601,
       imagewidth: 3 * this.headers.length * 25 + 1,
       margin: 1,
