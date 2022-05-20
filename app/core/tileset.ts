@@ -83,7 +83,7 @@ export default class Tileset {
     return (Jimp.intToRGBA(this.img.getPixelColor(pixelX * 25 + 12, pixelY * 25 + 12)).a != 0)
   }
 
-  getTilemapId(terrain: TerrainType, maskId: Mask) {
+  getTilemapId(terrain: TerrainType, maskId: Mask): number {
     // console.log(terrain, maskId);
     let items
     switch (terrain) {
@@ -94,13 +94,13 @@ export default class Tileset {
           if (Math.random() > 0.80) {
             return items[Math.floor(Math.random() * items.length)]
           } else {
-            return this.ground.get(maskId)
+            return this.ground.get(maskId)![0]
           }
         } else {
-          return this.ground.get(maskId)
+          return this.ground.get(maskId)![0]
         }
       case TerrainType.WATER:
-        return this.water.get(maskId)
+        return this.water.get(maskId)![0]
 
       case TerrainType.WALL:
         items = this.wallAlt.get(maskId)
@@ -109,10 +109,10 @@ export default class Tileset {
           if (Math.random() > 0.80) {
             return items[Math.floor(Math.random() * items.length)]
           } else {
-            return this.wall.get(maskId)
+            return this.wall.get(maskId)![0]
           }
         } else {
-          return this.wall.get(maskId)
+          return this.wall.get(maskId)![0]
         }
     }
   }

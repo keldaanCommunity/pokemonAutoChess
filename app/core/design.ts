@@ -49,10 +49,14 @@ export default class Design {
   leftBorder: number[] = [14, 15]
   rightBorder: number[] = [28, 15]
 
-  constructor(id: Dungeon, frequency: number, persistance: number) {
+  constructor(id: Dungeon, frequency: number, persistance: number, width?: number, height?: number, minArena?: number[], maxArena?: number[]) {
     this.id = id
     this.frequency = frequency
     this.persistance = persistance
+    this.width = width ? width : this.width
+    this.height = height ? height : this.height
+    this.minArena = minArena ? minArena : this.minArena
+    this.maxArena = maxArena ? maxArena : this.maxArena
     this.tileset = new Tileset(this.id)
   }
 
@@ -62,6 +66,7 @@ export default class Design {
         this.generateTerrain()
         this.generateMask()
         this.generateTilemap()
+        console.log(this.tilemap)
         resolve()
       })
     })
@@ -93,7 +98,9 @@ export default class Design {
     }
 
     for (let i = this.leftBorder[0]; i < this.rightBorder[0]; i++) {
-      this.terrain[this.leftBorder[1]][i] = TerrainType.WALL
+      if(this.terrain[this.leftBorder[1]]){
+        this.terrain[this.leftBorder[1]][i] = TerrainType.WALL
+      }
     }
   }
 
