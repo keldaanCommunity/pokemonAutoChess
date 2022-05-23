@@ -43,34 +43,16 @@ export default function Login(){
 
   if (!uid) {
     return (
-    <div id="play-panel" className="nes-container with-title is-centered" style={{
-        backgroundColor: 'rgba(255, 255, 255, .6)',
-        width:'400px',
-        height:'250px',
-        position:'absolute',
-        top:'50%',
-        left:'50%',
-        marginLeft:'-200px',
-        marginTop:'-125px'
-        }}>
-        <p className="title">Authentification</p>
+    <div id="play-panel">
+        <p>Login</p>
         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
     </div> 
     )
   }
   else{
       return(
-      <div id="play-panel" className="nes-container with-title is-centered" style={{
-          backgroundColor: 'rgba(255, 255, 255, .6)',
-          position:'absolute',
-          top:'50%',
-          left:'50%',
-          width:'700px',
-          height:'170px',
-          marginTop:'-85px',
-          marginLeft:'-350px'
-          }}>
-          <p className="title">Authentification</p>
+      <div id="play-panel">
+          <p>Login</p>
           <p>Welcome {displayName}! You are now signed-in!</p>
           <div style={{
               display:'flex',

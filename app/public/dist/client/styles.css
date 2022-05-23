@@ -3,7 +3,8 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("assets/ui/background.png");
+  background-image: url("assets/ui/newBackground.png");
+  background-repeat: round;
 }
 
 #root{
