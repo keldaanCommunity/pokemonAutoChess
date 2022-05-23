@@ -7,7 +7,7 @@ export default function Emotes(){
     const [collectionVisible, setCollectionVisible] = useState<boolean>(false)
     return <div style={{position:'absolute', right:'9.5%', bottom:'16%', borderColor: 'black'}}>
         <EmoteCollection visible={collectionVisible}/>
-        <button className='nes-btn' style={{height:'30px', padding:'0px'}} onClick={()=>{setCollectionVisible(!collectionVisible)}}>{':)'}</button>
+        <button className='bubbly-success' style={{height:'30px', padding:'0px'}} onClick={()=>{setCollectionVisible(!collectionVisible)}}>{':)'}</button>
     </div>
 }
 

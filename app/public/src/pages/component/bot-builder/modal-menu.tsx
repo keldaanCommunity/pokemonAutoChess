@@ -47,8 +47,8 @@ export default function ModalMenu(  props:{
         {url}
       </Modal.Body>
       <Modal.Footer>
-        <button style={buttonStyle} className='nes-btn is-error' onClick={props.hideModal}>Cancel</button>
-        <button style={buttonStyle} className='nes-btn is-success' onClick={()=>{
+        <button style={buttonStyle} className='bubbly-success is-error' onClick={props.hideModal}>Cancel</button>
+        <button style={buttonStyle} className='bubbly-success is-success' onClick={()=>{
             props.createBot()
           }}>Submit your bot
         </button>
@@ -80,8 +80,8 @@ export default function ModalMenu(  props:{
       
       </Modal.Body>
       <Modal.Footer>
-        <button style={buttonStyle} className='nes-btn is-error' onClick={props.hideModal}>Cancel</button>
-        <button style={buttonStyle} className='nes-btn is-success' onClick={()=>{props.importBot(textArea)}}>Import</button>
+        <button style={buttonStyle} className='bubbly-success is-error' onClick={props.hideModal}>Cancel</button>
+        <button style={buttonStyle} className='bubbly-success is-success' onClick={()=>{props.importBot(textArea)}}>Import</button>
       </Modal.Footer>
       </Modal>
     }

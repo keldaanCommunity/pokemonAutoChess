@@ -1,10 +1,19 @@
+@font-face {
+  font-family: brandonGrotesque;
+  src: url("assets/ui/brandon-grotesque-black.otf") format("opentype");
+}
+
 body {
   margin: 0;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("assets/ui/newBackground.png");
-  background-repeat: round;
+  background: url("assets/ui/chessboardpattern.svg");
+  background-size: 240px;
+  background-repeat: repeat;
+  background-position: top right;
+  background-color: #68829E;
+  font-family: brandonGrotesque !important;
 }
 
 #root{
@@ -195,4 +204,115 @@ input[type=range]:focus::-ms-fill-upper {
   width: 80px;
   height: 80px;
   image-rendering: pixelated;
+}
+
+.bubbly-success {
+  display: block;
+  padding: 8px 30px;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  background: #92cc41;
+  color: white;
+  box-shadow: inset -6px -6px 0px 0px #65a013;
+  transform: translateY(-6px);
+  border: solid;
+  border-color: black;
+  border-width: 4px;
+}
+
+.bubbly-success:hover {
+background: #76c442;
+}
+.bubbly-success:active {
+  background: #92cc41;
+  box-shadow: inset 6px 6px 0px 0px #65a013;
+}
+
+.bubbly-warning {
+  display: block;
+  padding: 8px 30px;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  background: #f7d51d;
+  box-shadow: inset -6px -6px 0px 0px #c9ae17;
+  color: black;
+  transform: translateY(-6px);
+  border: solid;
+  border-color: black;
+  border-width: 4px;
+}
+
+.bubbly-warning:hover {
+background: #e7c819;
+}
+.bubbly-warning:active {
+  background: #f7d51d;
+  box-shadow: inset 6px 6px 0px 0px #c9ae17;
+}
+
+.bubbly-primary {
+  display: block;
+  padding: 8px 30px;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  background: #109fff;
+  box-shadow: inset -6px -6px 0px 0px #006bb3;
+  color: white;
+  transform: translateY(-6px);
+  border: solid;
+  border-color: black;
+  border-width: 4px;
+}
+
+.bubbly-primary:hover {
+background: #1195ec;
+}
+.bubbly-primary:active {
+  background: #109fff;
+  box-shadow: inset 6px 6px 0px 0px #108de0;
+}
+
+.bubbly {
+  display: block;
+  padding: 8px 30px;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  background: #ffffff;
+  box-shadow: inset -6px -6px 0px 0px #adafbc;
+  color: black;
+  transform: translateY(-6px);
+  border: solid;
+  border-color: black;
+  border-width: 4px;
+}
+
+.bubbly:hover {
+background: #e7e7e7;
+}
+.bubbly:active {
+  background: #cfcfcf;
+  box-shadow: inset 6px 6px 0px 0px #e7e7e7;
+}
+
+.firebaseui-idp-button{
+  border: solid !important;
+  padding: 8px 30px !important;
+  border-radius: 12px !important;
+  border-color: black !important;
+  border-width: 4px !important;
+  font-family: brandonGrotesque !important;
+  max-width: 700px !important;
+}
+
+.firebaseui-idp-text{
+  font-size: 2em !important;
+}
+
+.firebaseui-container{
+  max-width: 20vw !important;
+  margin-left: 0px !important;
+}
+
+.firebaseui-card-content{
+  padding: 0px !important;
 }

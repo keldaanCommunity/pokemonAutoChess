@@ -112,7 +112,7 @@ export default function Preparation() {
     else{
         return (<div className="App">
         <Link to='/lobby'>
-            <button className='nes-btn is-primary' style={buttonStyle} onClick={async ()=>{
+            <button className='bubbly-primary' style={buttonStyle} onClick={async ()=>{
                 dispatch(leavePreparation())
                 room?.connection.close()
                 }}>Lobby</button>

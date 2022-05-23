@@ -34,7 +34,7 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
         sortedMetaItems = metaItems.sort((a,b)=>{return a[itemRankingBy] - b[itemRankingBy]})
     }
     return <div>
-        <button className='nes-btn is-success' style={buttonStyle} onClick={props.toggleMeta}>Lobby</button>
+        <button className='bubbly-success is-success' style={buttonStyle} onClick={props.toggleMeta}>Lobby</button>
         <div className='nes-container' style={{backgroundColor:'rgba(255,255,255,0.7)', margin:'10px', height: '90vh'}}>
             <Tabs>
                 <TabList>

@@ -9,7 +9,7 @@ export default function Home() {
         <p className="title">Game</p>
         <h1 style={{fontSize:'50px', marginBottom:'40px'}}>Pokemon Auto Chess</h1>
         <Link to={'./auth'}>
-          <button id="button-play" type="button" className="nes-btn is-success"><h3>Play !</h3></button>
+          <button id="button-play" type="button" className="bubbly-success is-success"><h3>Play !</h3></button>
         </Link>
       </div>
     </div>

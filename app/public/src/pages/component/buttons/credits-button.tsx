@@ -10,5 +10,5 @@ export default function CreditsButton(){
     function handleCreditsClick(){
         window.location.href = 'https://pokemonautochess-b18fb.web.app/'
     }
-    return <button type="button" style={buttonStyle} className="nes-btn" onClick={()=>{handleCreditsClick()}}>Credits</button>
+    return <button type="button" style={buttonStyle} className="bubbly" onClick={()=>{handleCreditsClick()}}>Credits</button>
 }

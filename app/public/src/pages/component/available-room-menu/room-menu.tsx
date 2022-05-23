@@ -72,6 +72,6 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
                 <RoomItem room={r} click={join}/>
             </li>)}
          </ul>
-         <button style={{position:'absolute', bottom:'20px', left:'8%', width:'80%'}} onClick={create} className='nes-btn is-success'>Create Room</button>
+         <button style={{position:'absolute', bottom:'20px', left:'8%', width:'80%'}} onClick={create} className='bubbly-success is-success'>Create Room</button>
     </div>
 }

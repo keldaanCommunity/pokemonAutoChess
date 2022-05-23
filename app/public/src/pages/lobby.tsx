@@ -150,19 +150,19 @@ export default function Lobby(){
             <div className='App'>
                 <div style={{display:'flex'}}>
                     <Link to='/auth'>
-                            <button className='nes-btn is-error' style={buttonStyle} onClick={()=>{firebase.auth().signOut(); dispatch(leaveLobby()); dispatch(logOut())}}>Sign Out</button>
+                            <button className='bubbly-success is-error' style={buttonStyle} onClick={()=>{firebase.auth().signOut(); dispatch(leaveLobby()); dispatch(logOut())}}>Sign Out</button>
                     </Link>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{toggleCollection(!showCollection)}}>Collection</button>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{toggleBooster(!showBooster)}}>Booster</button>
+                    <button className='bubbly-primary' style={buttonStyle} onClick={()=>{toggleCollection(!showCollection)}}>Collection</button>
+                    <button className='bubbly-primary' style={buttonStyle} onClick={()=>{toggleBooster(!showBooster)}}>Booster</button>
                     <DiscordButton/>
-                    <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{toggleWiki(!showWiki)}}>Wiki</button>
-                    <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{
+                    <button className='bubbly-success is-success' style={buttonStyle} onClick={()=>{toggleWiki(!showWiki)}}>Wiki</button>
+                    <button className='bubbly-success is-success' style={buttonStyle} onClick={()=>{
                         if(botList.length == 0) {
                             dispatch(requestBotList())
                         }
                         toggleBuilder(!showBuilder)
                         }}>BOT Builder</button>
-                    <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{
+                    <button className='bubbly-success is-success' style={buttonStyle} onClick={()=>{
                         if(meta.length == 0 || metaItems.length == 0){
                             dispatch(requestMeta())
                         }

@@ -33,7 +33,7 @@ export default function Chat(props: {source: string}) {
         <div className="nes-field" style={{width: '80%'}}>
           <input id="name_field" type="text" className="nes-input" onChange={(e)=>{setCurrentText(e.target.value)}} value={currentText} />
         </div>
-        <button className="nes-btn is-primary" style={{width: '20%'}}>Send</button>
+        <button className="bubbly-primary" style={{width: '20%'}}>Send</button>
       </form>
     </div>
 }

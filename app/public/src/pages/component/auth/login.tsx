@@ -44,7 +44,6 @@ export default function Login(){
   if (!uid) {
     return (
     <div id="play-panel">
-        <p>Login</p>
         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
     </div> 
     )
@@ -52,18 +51,17 @@ export default function Login(){
   else{
       return(
       <div id="play-panel">
-          <p>Login</p>
           <p>Welcome {displayName}! You are now signed-in!</p>
           <div style={{
               display:'flex',
               justifyContent:'space-evenly'
           }}>
           <Link to={'/lobby'}>
-              <button className="nes-btn is-success">
+              <button className="bubbly-success is-success">
                   Join Lobby
               </button>
           </Link>
-          <button className="nes-btn is-error" onClick={() => {firebase.auth().signOut(); dispatch(logOut())}}>Sign-out</button>
+          <button className="bubbly-success is-error" onClick={() => {firebase.auth().signOut(); dispatch(logOut())}}>Sign-out</button>
           </div>
       </div>
       )

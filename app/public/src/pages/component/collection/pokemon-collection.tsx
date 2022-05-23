@@ -91,12 +91,12 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
             </div>
         </Modal.Body>
         <Modal.Footer>
-            <button style={buttonStyle} className='nes-btn is-error' onClick={()=>{setPokemon(undefined)}}>Close</button>
+            <button style={buttonStyle} className='bubbly-success is-error' onClick={()=>{setPokemon(undefined)}}>Close</button>
         </Modal.Footer>
     </Modal>
     }
     return <div>
-        <button style={buttonStyle} onClick={()=>{props.toggleCollection()}} className='nes-btn is-primary'>Lobby</button>
+        <button style={buttonStyle} onClick={()=>{props.toggleCollection()}} className='bubbly-primary'>Lobby</button>
         <div style={{margin:'10px', backgroundColor:'rgba(255,255,255,0.7)'}} className='nes-container'>
             <h5>Collection</h5>
             <Tabs>

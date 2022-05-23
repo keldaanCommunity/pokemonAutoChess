@@ -263,24 +263,24 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
 
   return <div>
   <div style={buttonsStyle}>
-    <button style={buttonStyle} onClick={()=>{props.toggleBuilder()}} className='nes-btn is-primary'>Lobby</button>
+    <button style={buttonStyle} onClick={()=>{props.toggleBuilder()}} className='bubbly-primary'>Lobby</button>
     <button 
       style={buttonStyle}
       onClick={()=>{setModalMode(ModalMode.IMPORT); setModalBoolean(true)}}
-      className='nes-btn is-warning'
+      className='bubbly-warning'
     >
       Import/Load
     </button>
     <button style={buttonStyle}
      onClick={()=>{setModalMode(ModalMode.EXPORT); setModalBoolean(true)}}
-     className='nes-btn is-warning'
+     className='bubbly-warning'
       >
       Export
     </button>
     <button 
     style={buttonStyle} 
     onClick={()=>setMode(mode == ReadWriteMode.WRITE ? ReadWriteMode.ERASE: ReadWriteMode.WRITE)} 
-    className='nes-btn'
+    className='bubbly-success'
     data-tip
     data-for={'mode'}
     >
@@ -297,7 +297,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     <button 
     style={buttonStyle}
     onClick={()=>{setCopyStep(JSON.parse(JSON.stringify(bot.steps[step])))}} 
-    className='nes-btn'
+    className='bubbly-success'
     data-tip
     data-for={'copy'}
     >
@@ -317,7 +317,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
         setBot(produce(draft=>{draft.steps[step] = copyStep}))
        }
      }} 
-     className='nes-btn'
+     className='bubbly-success'
      data-tip
      data-for={'paste'}
      >

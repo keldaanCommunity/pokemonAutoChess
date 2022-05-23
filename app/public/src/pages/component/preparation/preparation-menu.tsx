@@ -53,7 +53,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
     if(uid == ownerId){
         input = <div className="nes-field is-inline" style={{margin:'5px'}}>
         <input maxLength={30} type="text" id="inline_field" className="nes-input" placeholder={name} onChange={e=>{setInputValue(e.target.value)}}/>
-        <button style={{marginLeft:'10px'}} className="nes-btn is-primary" onClick={()=>dispatch(changeRoomName(inputValue))}>Change</button>
+        <button style={{marginLeft:'10px'}} className="bubbly-primary" onClick={()=>dispatch(changeRoomName(inputValue))}>Change</button>
     </div>
     }
     return <div className="nes-container with-title is-centered" style={{
@@ -77,7 +77,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                 {input}
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <div style={{display: 'flex'}}>
-                    <button data-tip data-for={'difficulty-select'} style={buttonStyle} className='nes-btn is-primary' onClick={() => {dispatch(addBot(botDifficulty))}}>
+                    <button data-tip data-for={'difficulty-select'} style={buttonStyle} className='bubbly-primary' onClick={() => {dispatch(addBot(botDifficulty))}}>
                         <ReactTooltip id={'difficulty-select'} 
                             className='customeTheme' 
                             textColor='#000000' 
@@ -102,10 +102,10 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                     
                 </div>
                 <div>
-                    <button style={buttonStyle} className='nes-btn is-warning' onClick={()=>{dispatch(toggleReady())}}>Ready</button>
+                    <button style={buttonStyle} className='bubbly-warning' onClick={()=>{dispatch(toggleReady())}}>Ready</button>
                     <button 
                         style={buttonStyle} 
-                        className={ownerId == uid ? 'nes-btn is-success':'nes-btn is-disabled'} 
+                        className={ownerId == uid ? 'bubbly-success is-success':'bubbly-success is-disabled'} 
                         onClick={ownerId == uid ? startGame: undefined}
                         data-tip
                         data-for={'start-game'}

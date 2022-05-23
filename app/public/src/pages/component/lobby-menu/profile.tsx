@@ -39,7 +39,7 @@ export default function Profile() {
                         <h5>Change Name</h5>
                         <div className="nes-field is-inline">
                             <input type="text" id="inline_field" className="nes-input" placeholder={user.name} onChange={e=>{setInputValue(e.target.value)}}/>
-                            <button className="nes-btn is-primary" onClick={()=>dispatch(changeName(inputValue))}>Change</button>
+                            <button className="bubbly-primary" onClick={()=>dispatch(changeName(inputValue))}>Change</button>
                         </div>
                     </div>
                 </TabPanel>

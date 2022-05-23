@@ -16,7 +16,7 @@ export default function PreparationMenuUser(props: {key: string, user: IGameUser
     const readyColor = props.user.ready ? '#76c442' : '#ce372b'
 
     const removeButton = props.user.isBot ? 
-        <button style={buttonStyle} className='nes-btn is-error' onClick={() => {dispatch(removeBot(props.user.id))}}>X</button> :
+        <button style={buttonStyle} className='bubbly-success is-error' onClick={() => {dispatch(removeBot(props.user.id))}}>X</button> :
         null
 
     return <div className='nes-container' style={{display:'flex', backgroundColor: '#fff', padding:'5px', margin:'5px', borderColor:readyColor, justifyContent:'space-between'}}>
