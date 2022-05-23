@@ -66,7 +66,6 @@ export default class Design {
         this.generateTerrain()
         this.generateMask()
         this.generateTilemap()
-        console.log(this.tilemap)
         resolve()
       })
     })

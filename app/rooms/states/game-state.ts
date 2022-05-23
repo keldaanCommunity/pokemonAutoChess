@@ -38,7 +38,6 @@ export default class GameState extends Schema {
     this.design = new Design(this.id, 5, 0.1)
     this.design.create().then(()=>{
       this.tilemap = this.design.exportToTiled()
-      console.log(this.tilemap)
     })
   }
 }

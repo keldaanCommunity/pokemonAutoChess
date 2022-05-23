@@ -113,7 +113,6 @@ export default class GameScene extends Scene {
       this.load.multiatlas(id, `/assets/pokemons/${id}.json`, '/assets/pokemons')
     })
 
-    // console.log(this.tilemap);
     if(this.tilemap){
       this.load.audio('sound', [`https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChessMusic/main/music/${this.tilemap.tilesets[0].name}.mp3`])
       this.load.image('tiles', `/assets/tilesets/${this.tilemap.tilesets[0].name}.png`)
