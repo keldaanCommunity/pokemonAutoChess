@@ -1,11 +1,10 @@
 import React from 'react'
-import LobbyUser, { ILobbyUser } from '../../../../../models/colyseus-models/lobby-user'
+import { ILobbyUser } from '../../../../../models/colyseus-models/lobby-user'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { setTabIndex } from '../../../stores/LobbyStore'
 import { searchName } from '../../../stores/NetworkStore'
 import Avatar from '../avatar'
 import CSS from 'csstype'
-import { shallowEqual } from 'react-redux'
 
 const ulStyle = {
     listStyle: 'none',
@@ -17,7 +16,11 @@ const style : CSS.Properties = {
      margin:'10px',
      flexBasis:'10%',
      height:'90vh',
-     overflowY:'scroll'
+     overflowY:'scroll',
+     backgroundImage:'url("assets/ui/shen.jpg")',
+     backgroundSize: 'cover',
+     backgroundPositionX: 'right',
+     color:'white'
 }
 
 export default function CurrentUsers () {

@@ -91,7 +91,7 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
             </div>
         </Modal.Body>
         <Modal.Footer>
-            <button style={buttonStyle} className='bubbly-success is-error' onClick={()=>{setPokemon(undefined)}}>Close</button>
+            <button style={buttonStyle} className='bubbly-error' onClick={()=>{setPokemon(undefined)}}>Close</button>
         </Modal.Footer>
     </Modal>
     }

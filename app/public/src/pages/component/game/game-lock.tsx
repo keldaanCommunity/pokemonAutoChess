@@ -13,7 +13,7 @@ export default function GameLock() {
     const dispatch = useAppDispatch()
     const shopLocked = useAppSelector(state=>state.game.shopLocked)
 
-    return <button className= {shopLocked ? 'bubbly-success is-error': 'bubbly-success is-success'} onClick={()=>{dispatch(lockClick())}} style={style}>
+    return <button className= {shopLocked ? 'bubbly-error': 'bubbly-success is-success'} onClick={()=>{dispatch(lockClick())}} style={style}>
     <img style={{width:'25px', marginLeft:'-1px'}} src="/assets/ui/lock.png"/>
 </button>
 }

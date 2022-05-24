@@ -51,17 +51,19 @@ export default function Login(){
   else{
       return(
       <div id="play-panel">
-          <p>Welcome {displayName}! You are now signed-in!</p>
+          <p style={{fontSize:'4vw', textShadow: '2px 4px 3px rgba(0,0,0,0.3)', color:'white'}}>Welcome {displayName}</p>
           <div style={{
               display:'flex',
-              justifyContent:'space-evenly'
+              justifyContent:'space-around',
+              flexFlow:'column',
+              alignItems:'start'
           }}>
-          <Link to={'/lobby'}>
-              <button className="bubbly-success is-success">
+          <Link to={'/lobby'} style={{textDecoration:'none'}}>
+              <button className="bubbly-success is-success" style={{width: '11vw'}}>
                   Join Lobby
               </button>
           </Link>
-          <button className="bubbly-success is-error" onClick={() => {firebase.auth().signOut(); dispatch(logOut())}}>Sign-out</button>
+          <button className="bubbly-error" style={{width: '11vw'}} onClick={() => {firebase.auth().signOut(); dispatch(logOut())}}>Sign-out</button>
           </div>
       </div>
       )

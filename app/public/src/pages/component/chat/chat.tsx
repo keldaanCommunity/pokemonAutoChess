@@ -13,7 +13,9 @@ export default function Chat(props: {source: string}) {
     flexFlow: 'column nowrap',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    backgroundColor: 'rgba(255, 255, 255, .6)',
+    backgroundImage:'url("assets/ui/back2.jpg")',
+    backgroundSize: 'cover',
+    backgroundPositionX: 'right',
     margin:'10px',
     height:'90vh',
     flexBasis: '30%'

@@ -17,7 +17,7 @@ export default function GameModal(props:{modalInfo: string, modalTitle: string, 
     </Modal.Body>
     <Modal.Footer>
       <button style={buttonStyle} className='bubbly-primary' onClick={()=>{props.hideModal(false)}}>Cancel</button>
-      <button style={buttonStyle} className='bubbly-success is-error' onClick={props.leave}>Leave</button>
+      <button style={buttonStyle} className='bubbly-error' onClick={props.leave}>Leave</button>
     </Modal.Footer>
     </Modal>
 }

@@ -207,10 +207,11 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .bubbly-success {
+  margin: 10px;
   display: block;
   padding: 8px 30px;
   border-radius: 12px;
-  font-size: 1.25rem;
+  font-size: 1.5vw;
   background: #92cc41;
   color: white;
   box-shadow: inset -6px -6px 0px 0px #65a013;
@@ -218,6 +219,7 @@ input[type=range]:focus::-ms-fill-upper {
   border: solid;
   border-color: black;
   border-width: 4px;
+  max-height: 65px;
 }
 
 .bubbly-success:hover {
@@ -229,10 +231,11 @@ background: #76c442;
 }
 
 .bubbly-warning {
+  margin: 10px;
   display: block;
   padding: 8px 30px;
   border-radius: 12px;
-  font-size: 1.25rem;
+  font-size: 1.5vw;
   background: #f7d51d;
   box-shadow: inset -6px -6px 0px 0px #c9ae17;
   color: black;
@@ -250,11 +253,36 @@ background: #e7c819;
   box-shadow: inset 6px 6px 0px 0px #c9ae17;
 }
 
-.bubbly-primary {
+.bubbly-error {
+  margin: 10px;
   display: block;
   padding: 8px 30px;
   border-radius: 12px;
-  font-size: 1.25rem;
+  font-size: 1.5vw;
+  background: #e76e55;
+  box-shadow: inset -6px -6px 0px 0px #8c2022;
+  color: white;
+  transform: translateY(-6px);
+  border: solid;
+  border-color: black;
+  border-width: 4px;
+  max-height: 65px;
+}
+
+.bubbly-error:hover {
+background: #c25c48;
+}
+.bubbly-error:active {
+  background: #761c1e;
+  box-shadow: inset 6px 6px 0px 0px #8c2022;
+}
+
+.bubbly-primary {
+  margin: 10px;
+  display: block;
+  padding: 8px 30px;
+  border-radius: 12px;
+  font-size: 1.5vw;
   background: #109fff;
   box-shadow: inset -6px -6px 0px 0px #006bb3;
   color: white;
@@ -262,6 +290,7 @@ background: #e7c819;
   border: solid;
   border-color: black;
   border-width: 4px;
+  max-height: 65px;
 }
 
 .bubbly-primary:hover {
@@ -274,16 +303,19 @@ background: #1195ec;
 
 .bubbly {
   display: block;
+  text-align: center;
   padding: 8px 30px;
   border-radius: 12px;
-  font-size: 1.25rem;
+  font-size: 1.5vw;
   background: #ffffff;
   box-shadow: inset -6px -6px 0px 0px #adafbc;
-  color: black;
+  color: #757575;
   transform: translateY(-6px);
   border: solid;
   border-color: black;
   border-width: 4px;
+  margin: 10px;
+  max-height: 65px;
 }
 
 .bubbly:hover {
@@ -302,10 +334,11 @@ background: #e7e7e7;
   border-width: 4px !important;
   font-family: brandonGrotesque !important;
   max-width: 700px !important;
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer !important;
 }
 
 .firebaseui-idp-text{
-  font-size: 2em !important;
+  font-size: 1.5vw !important;
 }
 
 .firebaseui-container{
@@ -315,4 +348,20 @@ background: #e7e7e7;
 
 .firebaseui-card-content{
   padding: 0px !important;
+}
+
+.firebaseui-idp-google{
+  box-shadow: inset -6px -6px 0px 0px #adafbc !important;
+}
+
+.firebaseui-idp-password{
+  box-shadow: inset -6px -6px 0px 0px #a33329 !important;
+}
+
+.firebaseui-idp-facebook{
+  box-shadow: inset -6px -6px 0px 0px #293e6b !important;
+}
+
+.nes-container{
+  border-radius: 12px !important;
 }

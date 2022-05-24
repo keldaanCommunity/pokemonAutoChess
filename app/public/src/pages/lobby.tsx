@@ -44,7 +44,7 @@ export default function Lobby(){
     const [showBooster, toggleBooster] = useState<boolean>(false)
     const [toPreparation, setToPreparation] = useState<boolean>(false)
     
-    const lobbyStyle = {display:'flex',justifyContent:'space-between'}
+    const lobbyStyle = {display:'flex',justifyContent:'space-between', marginTop:'-10px'}
     const buttonStyle= {marginLeft:'10px',marginTop:'10px',marginRight:'10px'}
     
 
@@ -148,13 +148,12 @@ export default function Lobby(){
       else{
         return (
             <div className='App'>
-                <div style={{display:'flex'}}>
-                    <Link to='/auth'>
-                            <button className='bubbly-success is-error' style={buttonStyle} onClick={()=>{firebase.auth().signOut(); dispatch(leaveLobby()); dispatch(logOut())}}>Sign Out</button>
+                <div style={{display:'flex', justifyContent:'space-between'}}>
+                    <Link to='/'>
+                            <button className='bubbly-error' style={buttonStyle} onClick={()=>{firebase.auth().signOut(); dispatch(leaveLobby()); dispatch(logOut())}}>Sign Out</button>
                     </Link>
                     <button className='bubbly-primary' style={buttonStyle} onClick={()=>{toggleCollection(!showCollection)}}>Collection</button>
                     <button className='bubbly-primary' style={buttonStyle} onClick={()=>{toggleBooster(!showBooster)}}>Booster</button>
-                    <DiscordButton/>
                     <button className='bubbly-success is-success' style={buttonStyle} onClick={()=>{toggleWiki(!showWiki)}}>Wiki</button>
                     <button className='bubbly-success is-success' style={buttonStyle} onClick={()=>{
                         if(botList.length == 0) {
@@ -167,7 +166,8 @@ export default function Lobby(){
                             dispatch(requestMeta())
                         }
                         toggleMeta(!showMeta)
-                        }}>Meta Report</button>
+                        }}>Meta</button>
+                    <DiscordButton/>
                     <DonateButton/>
                     <PolicyButton/>
                     <CreditsButton/>

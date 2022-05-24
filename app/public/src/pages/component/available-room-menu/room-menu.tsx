@@ -56,12 +56,13 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
    }
 
     return <div className="nes-container" style={{
-        backgroundColor: 'rgba(255, 255, 255, .6)',
          margin:'10px',
          display: 'flex',
          flexFlow: 'column',
          flexBasis: '30%',
-         height: '90vh'
+         height: '90vh',
+         background:'url("assets/ui/back2.jpg")',
+         backgroundSize: 'cover'
          }}>
         
         <h4 style={{textAlign:'center'}}>Available Rooms</h4>
