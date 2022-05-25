@@ -28,8 +28,7 @@ export default function ChatHistory(props: {source: string}) {
 function message(message: IMessage, index: number) {
 
     const liStyles = {
-        padding: '5px',
-        borderBottom: '1px solid #ddd'
+        padding: '5px'
     }
 
     return <div key={index} style={liStyles}><ChatMessage message={message}/></div>

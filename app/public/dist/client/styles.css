@@ -215,7 +215,6 @@ input[type=range]:focus::-ms-fill-upper {
   background: #92cc41;
   color: white;
   box-shadow: inset -6px -6px 0px 0px #65a013;
-  transform: translateY(-6px);
   border: solid;
   border-color: black;
   border-width: 4px;
@@ -239,7 +238,6 @@ background: #76c442;
   background: #f7d51d;
   box-shadow: inset -6px -6px 0px 0px #c9ae17;
   color: black;
-  transform: translateY(-6px);
   border: solid;
   border-color: black;
   border-width: 4px;
@@ -262,7 +260,6 @@ background: #e7c819;
   background: #e76e55;
   box-shadow: inset -6px -6px 0px 0px #8c2022;
   color: white;
-  transform: translateY(-6px);
   border: solid;
   border-color: black;
   border-width: 4px;
@@ -277,6 +274,28 @@ background: #c25c48;
   box-shadow: inset 6px 6px 0px 0px #8c2022;
 }
 
+.bubbly-close {
+  display: block;
+  padding: 0px 10px;
+  border-radius: 12px;
+  font-size: 1.5vw;
+  background: #e76e55;
+  box-shadow: inset -6px -6px 0px 0px #8c2022;
+  color: white;
+  border: solid;
+  border-color: black;
+  border-width: 4px;
+  max-height: 65px;
+}
+
+.bubbly-close:hover {
+background: #c25c48;
+}
+.bubbly-close:active {
+  background: #761c1e;
+  box-shadow: inset 6px 6px 0px 0px #8c2022;
+}
+
 .bubbly-primary {
   margin: 10px;
   display: block;
@@ -286,7 +305,6 @@ background: #c25c48;
   background: #109fff;
   box-shadow: inset -6px -6px 0px 0px #006bb3;
   color: white;
-  transform: translateY(-6px);
   border: solid;
   border-color: black;
   border-width: 4px;
@@ -310,7 +328,6 @@ background: #1195ec;
   background: #ffffff;
   box-shadow: inset -6px -6px 0px 0px #adafbc;
   color: #757575;
-  transform: translateY(-6px);
   border: solid;
   border-color: black;
   border-width: 4px;
@@ -324,6 +341,31 @@ background: #e7e7e7;
 .bubbly:active {
   background: #cfcfcf;
   box-shadow: inset 6px 6px 0px 0px #e7e7e7;
+}
+
+.bubblyTip {
+  display: flex;
+      padding: 0px 0px 0px 21px;
+      border-radius: 12px;
+      font-size: 1.25rem;
+      background: #EE2097;
+      color: white;
+      box-shadow: inset -6px -6px 0px 0px #902c74;
+      max-height: 65px;
+      border: solid;
+      border-color: black;
+      border-width: 4px;
+      align-items: center;
+      margin: 10px;
+}
+
+.bubblyTip:active {
+  background: #EE2097;
+  box-shadow: inset 6px 6px 0px 0px #902C74;
+transform: translateY(-1px);
+}
+.btn-txt {
+  transform: translateY(-2px);
 }
 
 .firebaseui-idp-button{
@@ -364,4 +406,73 @@ background: #e7e7e7;
 
 .nes-container{
   border-radius: 12px !important;
+  background: #AEB6C0;
 }
+
+.chatbg{
+  background: #AEB6C0;
+  border-radius: 8px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+  border: solid;
+  border-color: black;
+}
+.chat{
+  display: block;
+  padding: 12px 42px;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  border: solid;
+  border-color: black;
+  background: #61738A;
+  color: white;
+  transform: translateY(-8px) translateX(-8px);
+}
+.my-h1{
+  text-align: center;
+  color: white;
+  font-size: 2vw;
+}
+
+  .playerBox{
+    background: #54596b;
+    border-radius: 12px;
+    border: solid;
+    border-color: black;
+    padding: 12px 42px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    border-width: 4px;
+    color: white;
+    box-shadow: #2d334b 4px 4px 0px;
+  }
+
+  .my-input{
+    max-height: 65px;
+    border-radius: 12px;
+    width: 100%;
+    border: 4px solid black;
+    height: 7vh;
+    padding-left: 1vw;
+  }
+
+  .my-tab{
+    cursor:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    outline:none;
+    color:white;
+    font-size:1.5vw;
+  }
+
+  .my-select{
+    margin: 10px;
+    border-radius: 12px;
+    border: 4px solid black;
+    height: 7vh;
+    font-size:1.5vw;
+    padding: 12px 42px;
+  }

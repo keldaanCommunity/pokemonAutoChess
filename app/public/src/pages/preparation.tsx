@@ -14,7 +14,8 @@ import {Transfer} from '../../../types'
 
 const preparationStyle = {
     display:'flex',
-    justifyContent:'space-between'
+    justifyContent:'space-between',
+    marginTop:'-10px'
 }
 
 const buttonStyle= {

@@ -4,5 +4,8 @@ export default function DonateButton(){
     function handleTipeeClick(){
         window.location.href = 'https://en.tipeee.com/pokemon-auto-chess'
     }
-    return <button type="button" className="bubbly" onClick={()=>{handleTipeeClick()}}><img style={{height:'4vh', marginTop:'-0.5vh'}} src='assets/ui/tipeee.svg'/></button>
+    return <button className="bubblyTip" onClick={()=>{handleTipeeClick()}}>
+    <span className="btn-txt">Donate</span>
+    <div><img  src='assets/ui/tipeee.svg' style={{width:'auto', height:'40px', display:'flex'}}/></div>
+  </button>
 }

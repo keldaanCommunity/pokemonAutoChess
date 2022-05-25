@@ -20,7 +20,6 @@ import { Emotion, ModalMode, ReadWriteMode } from '../../../../../types'
 import {PkmIndex} from '../../../../../types/enum/Pokemon'
 
 const buttonsStyle: CSS.Properties = {
-  top:'10px',
   left:'10px',
   position:'absolute',
   display:'flex'

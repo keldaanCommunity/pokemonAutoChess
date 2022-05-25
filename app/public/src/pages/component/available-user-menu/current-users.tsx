@@ -14,10 +14,10 @@ const ulStyle = {
 const style : CSS.Properties = {
     backgroundColor: 'rgba(255, 255, 255, .6)',
      margin:'10px',
-     flexBasis:'10%',
+     flexBasis:'15%',
      height:'90vh',
      overflowY:'scroll',
-     backgroundImage:'url("assets/ui/shen.jpg")',
+     backgroundImage:'url("assets/ui/back2.png")',
      backgroundSize: 'cover',
      backgroundPositionX: 'right',
      color:'white'
@@ -27,6 +27,7 @@ export default function CurrentUsers () {
     const users: ILobbyUser[] = useAppSelector(state=>state.lobby.users)
 
     return <div className="nes-container hidden-scrollable" style={style}>
+        <h1 className='my-h1'>Online</h1>
         <ul style={ulStyle}>{users.map((v, i)=><User key={i} v={v}/>)}</ul>
     </div>
 

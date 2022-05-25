@@ -9,8 +9,7 @@ const style: CSS.Properties = {
     bottom:'16%',
     right:'12.3%',
     display:'flex',
-    padding:'0px',
-    backgroundColor:'rgba(255,255,255,0.7)'
+    padding:'0px'
 }
 
 const RARITY_RGB= {

@@ -59,14 +59,14 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
          margin:'10px',
          display: 'flex',
          flexFlow: 'column',
-         flexBasis: '30%',
+         flexBasis: '25%',
          height: '90vh',
-         background:'url("assets/ui/back2.jpg")',
+         background:'url("assets/ui/back1.png")',
          backgroundSize: 'cover'
          }}>
         
-        <h4 style={{textAlign:'center'}}>Available Rooms</h4>
-        <p style={{textAlign:'center'}}>Click Create Room to play!</p>
+        <h1 className='my-h1'>Available Rooms</h1>
+        <p style={{textAlign:'center', color:'white', fontSize:'1.5vw'}}>Click Create Room to play!</p>
          <ul style={ulStyle} className="hidden-scrollable">
              {allRooms.map(r=>
                 <li key={r.roomId}>

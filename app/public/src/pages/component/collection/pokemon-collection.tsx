@@ -97,8 +97,7 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
     }
     return <div>
         <button style={buttonStyle} onClick={()=>{props.toggleCollection()}} className='bubbly-primary'>Lobby</button>
-        <div style={{margin:'10px', backgroundColor:'rgba(255,255,255,0.7)'}} className='nes-container'>
-            <h5>Collection</h5>
+        <div style={{margin:'10px'}} className='nes-container'>
             <Tabs>
                 <TabList>
                     {(Object.keys(Synergy) as Synergy[]).map((r =>{

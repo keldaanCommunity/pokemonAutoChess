@@ -15,7 +15,6 @@ const entityStyle: CSS.Properties = {
     top:'8.5%',
     margin:'10px',
     marginTop:'0px',
-    backgroundColor:'rgba(255,255,255,0.7)',
     flexFlow:'column',
     width:'20%'
 }

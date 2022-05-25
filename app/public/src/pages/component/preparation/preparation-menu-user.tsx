@@ -16,10 +16,10 @@ export default function PreparationMenuUser(props: {key: string, user: IGameUser
     const readyColor = props.user.ready ? '#76c442' : '#ce372b'
 
     const removeButton = props.user.isBot ? 
-        <button style={buttonStyle} className='bubbly-error' onClick={() => {dispatch(removeBot(props.user.id))}}>X</button> :
+        <button style={buttonStyle} className='bubbly-close' onClick={() => {dispatch(removeBot(props.user.id))}}><p style={{fontSize:'0.5em', margin:'0px'}}>X</p></button> :
         null
 
-    return <div className='nes-container' style={{display:'flex', backgroundColor: '#fff', padding:'5px', margin:'5px', borderColor:readyColor, justifyContent:'space-between'}}>
+    return <div className='nes-container' style={{ width:'40%', display:'flex', backgroundColor: '#fff', padding:'5px', margin:'5px', borderColor:readyColor, justifyContent:'space-between'}}>
     <div style={{display:'flex'}}>
         <div style={{width:'140px'}}>
             <Elo elo={props.user.elo}/>

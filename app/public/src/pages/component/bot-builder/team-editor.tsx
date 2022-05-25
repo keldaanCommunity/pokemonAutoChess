@@ -93,7 +93,7 @@ export default function TeamEditor(props:{
 
         <div className="nes-field is-inline">
             <label style={labelStyle} htmlFor="default_select">Avatar</label>
-            <div style={{width:'auto'}} className="nes-select">
+            <div style={{width:'auto'}} className="my-select">
             <select value={props.name} onChange={props.handleAvatarChange} id="default_select">
                 {Object.keys(Pkm).sort((a,b)=>{return Pkm[a].localeCompare(Pkm[b])}).map(key=>{
                     return <option key={key} value={Pkm[key]}>{Pkm[key]}</option>

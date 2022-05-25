@@ -52,20 +52,22 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
     let input: ReactElement|null = null
     if(uid == ownerId){
         input = <div className="nes-field is-inline" style={{margin:'5px'}}>
-        <input maxLength={30} type="text" id="inline_field" className="nes-input" placeholder={name} onChange={e=>{setInputValue(e.target.value)}}/>
+        <input maxLength={30} type="text" id="inline_field" className="my-input" placeholder={name} onChange={e=>{setInputValue(e.target.value)}}/>
         <button style={{marginLeft:'10px'}} className="bubbly-primary" onClick={()=>dispatch(changeRoomName(inputValue))}>Change</button>
     </div>
     }
     return <div className="nes-container with-title is-centered" style={{
-        backgroundColor: 'rgba(255, 255, 255, .6)',
+        backgroundImage:'url("assets/ui/back1.png")',
+        backgroundSize: 'cover',
+        backgroundPositionX: 'left',
          margin:'10px',
          display: 'flex',
          flexFlow: 'column',
          justifyContent: 'space-between',
          flexBasis:'50%'
          }}>
-             <p className="title">{name}</p>
-            <div>
+             <h3 className='my-h1'>{name}</h3>
+            <div style={{display:'flex', flexWrap:'wrap', alignItems:'center', justifyContent:'space-between'}}>
                 {users.map((u) => {
                 return <PreparationMenuUser 
                     key={u.id} 
@@ -76,8 +78,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
             <div>
                 {input}
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                <div style={{display: 'flex'}}>
-                    <button data-tip data-for={'difficulty-select'} style={buttonStyle} className='bubbly-primary' onClick={() => {dispatch(addBot(botDifficulty))}}>
+                <button data-tip data-for={'difficulty-select'} style={buttonStyle} className='bubbly-primary' onClick={() => {dispatch(addBot(botDifficulty))}}>
                         <ReactTooltip id={'difficulty-select'} 
                             className='customeTheme' 
                             textColor='#000000' 
@@ -91,17 +92,11 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                         Add Bot
                     </button>
 
-                    <div className="nes-select" style={{width: 'auto'}}>
-                        
-                        <select defaultValue={botDifficulty}  onChange={(e)=>{ setBotDifficulty(parseInt(e.target.value)) }}>
+                    <select className="my-select" defaultValue={botDifficulty}  onChange={(e)=>{ setBotDifficulty(parseInt(e.target.value)) }}>
                             <option value={BotDifficulty.EASY}>Easy</option>
                             <option value={BotDifficulty.MEDIUM}>Normal</option>
                             <option value={BotDifficulty.HARD}>Hard</option>
-                        </select>
-                    </div>
-                    
-                </div>
-                <div>
+                    </select>
                     <button style={buttonStyle} className='bubbly-warning' onClick={()=>{dispatch(toggleReady())}}>Ready</button>
                     <button 
                         style={buttonStyle} 
@@ -120,7 +115,6 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                             <p>Owner: ({ownerName})</p>
                         </ReactTooltip>
                     </button>
-                </div>
             </div>
             </div>
         </div>

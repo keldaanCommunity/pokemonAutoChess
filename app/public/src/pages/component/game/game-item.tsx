@@ -5,7 +5,6 @@ import { useAppDispatch } from '../../../hooks'
 import { itemClick } from '../../../stores/NetworkStore'
 
 const style: CSS.Properties={
-    backgroundColor:'rgba(255,255,255,0.7)',
     width:'30%',
     display:'flex',
     flexFlow:'column',

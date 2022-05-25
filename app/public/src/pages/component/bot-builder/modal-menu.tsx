@@ -64,7 +64,7 @@ export default function ModalMenu(  props:{
       <p>Get started with an existing BOT or paste your own BOT data</p>
       <div className="nes-field is-inline" style={{marginBottom:'10px'}}>
         <label htmlFor="default_select">Existing BOT</label>
-        <div className="nes-select">
+        <div className="my-select">
         <select defaultValue="" onChange={(e)=>{
           if(e.target.value.length !=0){
             dispatch(requestBotData(e.target.value))

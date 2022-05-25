@@ -19,11 +19,12 @@ export default function TabMenu() {
         borderTopLeftRadius: '12px',
         borderTopRightRadius: '12px',
         outline:'none',
-        color:'white'
+        color:'white',
+        fontSize:'1.5vw'
     }
 
     const tabStyle = {
-        background:'url("assets/ui/shen.jpg")',
+        background:'url("assets/ui/back2.png")',
         margin:'10px',
         flexBasis:'30%',
         height:'90vh',

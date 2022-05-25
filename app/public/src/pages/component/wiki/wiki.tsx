@@ -10,7 +10,7 @@ import WikiItemsCheatSheet from './wiki-items-cheat-sheet'
 export default function Wiki(props: {toggleWiki: () => void}){
     return <div>
     <WikiButton toggleWiki={props.toggleWiki}/>
-    <div className="nes-container" style={{backgroundColor:'white',opacity:0.9,margin:'10px'}}>
+    <div className="nes-container" style={{backgroundColor:'white',opacity:0.9,margin:'10px', marginBottom:'30px'}}>
     <Tabs>
         <TabList>
             <Tab key='title-faq'>FAQ</Tab>

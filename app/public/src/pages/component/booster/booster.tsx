@@ -20,7 +20,7 @@ export default function Booster(props: {toggle :()=>void}){
     const [flipArray, setFlipArray] = useState<boolean[]>([false, false, false, false, false])
     return <div>
         <button style={buttonStyle} onClick={()=>{props.toggle()}} className='bubbly-primary'>Lobby</button>
-        <div className='nes-container' style={{margin:'10px', backgroundColor:'rgba(255,255,255,0.7)', display:'flex', justifyContent:'center', flexFlow:'column', alignItems:'center', height:'90vh'}}>
+        <div className='nes-container' style={{margin:'10px', display:'flex', justifyContent:'center', flexFlow:'column', alignItems:'center', height:'90vh'}}>
             <div style={{display:'flex', justifyContent:'space-around', alignItems:'center', width:'30%'}}>
                 <h1>{numberOfBooster}</h1>
                 <i className="nes-pokeball"></i>
