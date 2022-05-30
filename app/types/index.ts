@@ -352,6 +352,7 @@ export interface ICount {
     doubleAttackCount: number
     staticHolderCount: number
     defensiveRibbonCount: number
+    earthquakeCount: number
 }
 
 export interface IPreparationMetadata {

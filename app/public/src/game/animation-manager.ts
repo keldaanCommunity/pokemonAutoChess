@@ -653,6 +653,13 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+        key: Ability.EARTHQUAKE,
+        frames: this.game.anims.generateFrameNames(Ability.EARTHQUAKE, {start: 0, end: 10, zeroPad: 3}),
+        duration: 1000,
+        repeat: 0
+      })
+
+    this.game.anims.create({
       key: 'FIELD_DEATH',
       frames: this.game.anims.generateFrameNames('FIELD_DEATH', {start: 0, end: 8, zeroPad: 3}),
       duration: 1000,

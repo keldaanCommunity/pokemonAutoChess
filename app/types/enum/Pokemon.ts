@@ -378,6 +378,7 @@ export enum Pkm {
     GOURGEIST = 'gourgeist',
     CACNEA = 'cacnea',
     CACTURNE = 'cacturne',
+    TAUROS = 'tauros',
     DEFAULT = 'default'
 }
 
@@ -705,7 +706,7 @@ export const PkmIndex: {[key in Pkm] : string} = {
     [Pkm.AEGISLASH]: '0681',
     [Pkm.CUBONE]: '0104',
     [Pkm.MAROWAK]: '0105',
-    [Pkm.ALOLAN_MAROWAK]: '0105/0001',
+    [Pkm.ALOLAN_MAROWAK]: '0105-0001',
     [Pkm.WHISMUR]: '0293',
     [Pkm.LOUDRED]: '0294',
     [Pkm.EXPLOUD]: '0295',
@@ -761,7 +762,8 @@ export const PkmIndex: {[key in Pkm] : string} = {
     [Pkm.RAPIDASH]: '0078',
     houndour: '0228',
     cacnea: '0331',
-    cacturne: '0332'
+    cacturne: '0332',
+    tauros: '0128'
 }
 
 export const PkmFamily : {[key in Pkm]: Pkm} = {
@@ -1144,5 +1146,6 @@ export const PkmFamily : {[key in Pkm]: Pkm} = {
     [Pkm.PUMPKABOO]: Pkm.PUMPKABOO,
     [Pkm.GOURGEIST]: Pkm.PUMPKABOO,
     cacnea: Pkm.CACNEA,
-    cacturne:  Pkm.CACNEA
+    cacturne:  Pkm.CACNEA,
+    tauros: Pkm.TAUROS
 }

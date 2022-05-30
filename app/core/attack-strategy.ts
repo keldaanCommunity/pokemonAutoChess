@@ -42,6 +42,25 @@ export class AttackStrategy {
   }
 }
 
+export class EarthquakeStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target)
+        let damage = 50
+        if(pokemon.stars == 2){
+          damage = 100
+        }
+        else if(pokemon.stars == 3){
+          damage = 200
+        }
+        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+            if ((tg && pokemon.team != tg.team && target.positionY == y) || (tg && pokemon.team != tg.team && target.positionX == x)) {
+              tg.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
+              tg.count.earthquakeCount ++
+            }
+        })
+    }
+}
+
 export class SongOfDesireStrategy extends AttackStrategy{
   process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
       super.process(pokemon, state, board, target)

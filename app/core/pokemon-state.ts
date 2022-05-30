@@ -257,6 +257,7 @@ export default class PokemonState {
             shieldBoost = 120
             attackBoost = 12
           }
+          attacker.speDef += defBoost
           attacker.def += defBoost
           attacker.handleShield(shieldBoost, attacker)
           attacker.atk += attackBoost

@@ -302,6 +302,17 @@ export default class Pokemon extends Button {
     })
   }
 
+  earthquakeAnimation(){
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.EARTHQUAKE, '000')
+    specialProjectile.setDepth(7)
+    specialProjectile.setScale(3, 3)
+    specialProjectile.anims.play(Ability.EARTHQUAKE)
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      specialProjectile.destroy()
+    })
+  }
+
   deathAnimation() {
     this.life = 0
     if(this.lifebar){
