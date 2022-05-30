@@ -1,4 +1,4 @@
-import { AttackStrategy, BiteStrategy, BlastBurnStrategy, BlazeKickStrategy, BonemerangStrategy, BugBuzzStrategy, BurnStrategy, CalmMindStrategy, ChargeStrategy, ClangorousSoulStrategy, ConfusingMindStrategy, ConfusionStrategy, CorruptedNatureStrategy, CrabHammerStrategy, DarkPulseStrategy, DiamondStormStrategy, DisarmingVoiceStrategy, DischargeStrategy, DracoEnergyStrategy, DracoMeteorStrategy, DragonBreathStrategy, DragonTailStrategy, DynamaxCannonStrategy, DynamicPunchStrategy, EchoStrategy, ElectroBoostStrategy, ElectroWebStrategy, ExplosionStrategy, FireBlastStrategy, FireTrickStrategy, FlameChargeStrategy, FreezeStrategy, GrassWhistleStrategy, GrowlStrategy, GuillotineStrategy, HappyHourStrategy, HeadSmashStrategy, HealBlockStrategy, HeatWaveStrategy, HighJumpKickStrategy, HurricaneStrategy, HydroPumpStrategy, HyperVoiceStrategy, IcicleCrashStrategy, IronDefenseStrategy, IronTailStrategy, KingShieldStrategy, KnowledgeThiefStrategy, LeechLifeStrategy, LeechSeedStrategy, LockOnStrategy, MeteorMashStrategy, MetronomeStrategy, NastyPlotStrategy, NightmareStrategy, NightSlashStrategy, OriginPulseStrategy, PetalDanceStrategy, PoisonStingStrategy, PoisonStrategy, ProtectStrategy, PsychUpStrategy, RazorWindStrategy, RelicSongStrategy, RoarOfTimeStrategy, RockSlideStrategy, RockSmashStrategy, RockTombStrategy, RootStrategy, SeedFlareStrategy, SeismicTossStrategy, ShadowCloneStrategy, SilenceStrategy, SleepStrategy, SoakStrategy, SongOfDesireStrategy, StompStrategy, StunSporeStrategy, TeleportStrategy, ThiefStrategy, ThunderStrategy, TormentStrategy, TriAttackStrategy, TwistingNeitherStrategy, VoltSwitchStrategy, WheelOfFireStrategy, WishStrategy, WonderGuardStrategy } from '../../core/attack-strategy'
+import { AttackStrategy, BiteStrategy, BlastBurnStrategy, BlazeKickStrategy, BonemerangStrategy, BugBuzzStrategy, BurnStrategy, CalmMindStrategy, ChargeStrategy, ClangorousSoulStrategy, ConfusingMindStrategy, ConfusionStrategy, CorruptedNatureStrategy, CrabHammerStrategy, DarkPulseStrategy, DiamondStormStrategy, DisarmingVoiceStrategy, DischargeStrategy, DracoEnergyStrategy, DracoMeteorStrategy, DragonBreathStrategy, DragonTailStrategy, DynamaxCannonStrategy, DynamicPunchStrategy, EarthquakeStrategy, EchoStrategy, ElectroBoostStrategy, ElectroWebStrategy, ExplosionStrategy, FireBlastStrategy, FireTrickStrategy, FlameChargeStrategy, FreezeStrategy, GrassWhistleStrategy, GrowlStrategy, GuillotineStrategy, HappyHourStrategy, HeadSmashStrategy, HealBlockStrategy, HeatWaveStrategy, HighJumpKickStrategy, HurricaneStrategy, HydroPumpStrategy, HyperVoiceStrategy, IcicleCrashStrategy, IronDefenseStrategy, IronTailStrategy, KingShieldStrategy, KnowledgeThiefStrategy, LeechLifeStrategy, LeechSeedStrategy, LockOnStrategy, MeteorMashStrategy, MetronomeStrategy, NastyPlotStrategy, NightmareStrategy, NightSlashStrategy, OriginPulseStrategy, PetalDanceStrategy, PoisonStingStrategy, PoisonStrategy, ProtectStrategy, PsychUpStrategy, RazorWindStrategy, RelicSongStrategy, RoarOfTimeStrategy, RockSlideStrategy, RockSmashStrategy, RockTombStrategy, RootStrategy, SeedFlareStrategy, SeismicTossStrategy, ShadowCloneStrategy, SilenceStrategy, SleepStrategy, SoakStrategy, SongOfDesireStrategy, StompStrategy, StunSporeStrategy, TeleportStrategy, ThiefStrategy, ThunderStrategy, TormentStrategy, TriAttackStrategy, TwistingNeitherStrategy, VoltSwitchStrategy, WheelOfFireStrategy, WishStrategy, WonderGuardStrategy } from '../../core/attack-strategy'
 
 export enum Ability {
     DEFAULT = 'DEFAULT',
@@ -88,7 +88,8 @@ export enum Ability {
     WONDER_GUARD = 'WONDER_GUARD',
     SONG_OF_DESIRE = 'SONG_OF_DESIRE',
     CONFUSING_MIND = 'CONFUSING_MIND',
-    KNOWLEDGE_THIEF = 'KNOWLEDGE_THIEF'
+    KNOWLEDGE_THIEF = 'KNOWLEDGE_THIEF',
+    EARTHQUAKE = 'EARTHQUAKE'
 }
 
 export const AbilityStrategy: {[key in Ability]: AttackStrategy} = {
@@ -179,5 +180,6 @@ export const AbilityStrategy: {[key in Ability]: AttackStrategy} = {
     LOCK_ON: new LockOnStrategy(),
     PSYCH_UP: new PsychUpStrategy(),
     RAZOR_WIND: new RazorWindStrategy(),
-    TWISTING_NEITHER: new TwistingNeitherStrategy()
+    TWISTING_NEITHER: new TwistingNeitherStrategy(),
+    EARTHQUAKE: new EarthquakeStrategy()
 }

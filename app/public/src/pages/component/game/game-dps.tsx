@@ -23,7 +23,7 @@ const style: CSS.Properties = {
 
 export default function GameDps(props:{maxDamage: number, dps: IDps}) {
     return  <div style={style}>
-    <img style={imgStyle} src={`${CDN_PORTRAIT_URL}${props.dps.name}.png`}/>
+    <img style={imgStyle} src={`${CDN_PORTRAIT_URL}${props.dps.name.replace('-','/')}.png`}/>
     <div style={{display:'flex', flexFlow:'column', justifyContent:'space-around', marginLeft:'5px', width:'100%'}}>
         <p style={{marginBottom:'-5px', marginLeft:'3px'}}>{props.dps.physicalDamage + props.dps.specialDamage + props.dps.trueDamage}</p>
         <ProgressBar className="nes-progress is-primary" style={progressStyle}>

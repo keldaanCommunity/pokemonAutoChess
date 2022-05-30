@@ -345,6 +345,12 @@ export class Metagross extends Pokemon {
   }
 }
 
+export class Tauros extends Pokemon{
+    constructor(shiny: boolean, emotion: Emotion) {
+        super(Pkm.TAUROS, [Synergy.NORMAL, Synergy.FIELD], Rarity.EPIC, '0128', Pkm.DEFAULT, 145, 10, 5, 2, 1, AttackSprite.NORMAL_MELEE, AttackType.PHYSICAL, 2, 125, Ability.EARTHQUAKE,shiny, emotion)
+      }
+}
+
 export class Tympole extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(Pkm.TYMPOLE, [Synergy.WATER, Synergy.GROUND, Synergy.SOUND], Rarity.EPIC, '0535', Pkm.PALPITOAD, 90, 5, 4, 4, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 1, 90, Ability.EXPLOSION,shiny, emotion)
@@ -701,7 +707,7 @@ export class Marowak extends Pokemon {
 
 export class AlolanMarowak extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.ALOLAN_MAROWAK, [Synergy.GROUND, Synergy.MINERAL, Synergy.FIRE, Synergy.GHOST], Rarity.EPIC, '0105/0001', Pkm.DEFAULT, 220, 20, 6, 6, 1, AttackSprite.FIRE_MELEE, AttackType.PHYSICAL, 3, 60, Ability.BONEMERANG,shiny, emotion)
+    super(Pkm.ALOLAN_MAROWAK, [Synergy.GROUND, Synergy.MINERAL, Synergy.FIRE, Synergy.GHOST], Rarity.EPIC, '0105-0001', Pkm.DEFAULT, 220, 20, 6, 6, 1, AttackSprite.FIRE_MELEE, AttackType.PHYSICAL, 3, 60, Ability.BONEMERANG,shiny, emotion)
   }
 }
 

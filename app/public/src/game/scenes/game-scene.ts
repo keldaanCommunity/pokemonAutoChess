@@ -146,6 +146,7 @@ export default class GameScene extends Scene {
     this.load.multiatlas('BRIGHT_POWDER', '/assets/attacks/BRIGHT_POWDER.json', '/assets/attacks')
     this.load.multiatlas('STATIC', '/assets/attacks/STATIC.json', '/assets/attacks')
     this.load.multiatlas('EXPLOSION', '/assets/attacks/EXPLOSION.json', '/assets/attacks')
+    this.load.multiatlas('EARTHQUAKE', '/assets/attacks/EARTHQUAKE.json', '/assets/attacks')
     this.load.multiatlas('BONEMERANG', '/assets/attacks/BONEMERANG.json', '/assets/attacks')
     this.load.multiatlas('GROWL', '/assets/attacks/GROWL.json', '/assets/attacks')
     this.load.multiatlas('RELIC_SONG', '/assets/attacks/RELIC_SONG.json', '/assets/attacks')
@@ -223,14 +224,14 @@ export default class GameScene extends Scene {
   }
 
   sellPokemon() {
-    if (!this.targetPokemon || !this.targetPokemon.scene || !this.targetPokemon.input.draggable) {
+    if (!this.targetPokemon) {
       return
     }
     const d = document.getElementById('game')
     if(d){
-      d.dispatchEvent(new CustomEvent('sell-drop', {
+      d.dispatchEvent(new CustomEvent(Transfer.SELL_DROP, {
         detail: {
-          'pokemonId': this.targetPokemon.id
+          pokemonId: this.targetPokemon.id
         }
       }))
     }

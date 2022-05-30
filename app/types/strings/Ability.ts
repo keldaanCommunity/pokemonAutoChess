@@ -2,6 +2,12 @@ import { Langage } from '..'
 import { Ability } from '../enum/Ability'
 
 export const AbilityName: {[key in Ability]: Langage} = {
+    [Ability.EARTHQUAKE]:{
+        eng: 'Earthquake',
+        esp: '',
+        fra: '',
+        prt: ''
+    },
     [Ability.SONG_OF_DESIRE]: {
         eng: 'Song of Desire',
         esp: '',
@@ -533,6 +539,12 @@ export const AbilityName: {[key in Ability]: Langage} = {
 }
 
 export const AbilityDescription: {[key in Ability]: Langage} = {
+    [Ability.EARTHQUAKE]: {
+        eng: 'Deals damage 50/100/200 physical damage to all ennemy units in the same column/line',
+        esp: '',
+        fra: '',
+        prt: ''
+    },
     [Ability.SONG_OF_DESIRE]: {
         eng: 'The target is confused for 3/6/9s',
         esp: '',
