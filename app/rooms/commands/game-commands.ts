@@ -63,7 +63,6 @@ export class OnShopCommand extends Command<GameRoom, {
             player.shop[index] = Pkm.DEFAULT
           }
           this.room.updateEvolution(id)
-          this.room.updateEvolution(id)
         }
       }
     }
@@ -157,7 +156,6 @@ export class OnDragDropCommand extends Command<GameRoom, {
         client.send(Transfer.DRAG_DROP_FAILED, message)
       }
       if (dittoReplaced) {
-        this.room.updateEvolution(playerId)
         this.room.updateEvolution(playerId)
       }
 

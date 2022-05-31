@@ -354,7 +354,7 @@ export default class GameRoom extends Room<GameState> {
     eloGains.forEach((gain) => {
       meanGain += gain
     })
-    meanGain = Math.floor(meanGain / eloGains.length)
+    meanGain = Math.max(0,Math.floor(meanGain / eloGains.length))
     if (rank <= 4 && meanGain < elo) {
       meanGain = elo
     }
@@ -489,16 +489,17 @@ export default class GameRoom extends Room<GameState> {
   
             player.board.forEach((pkm, id) => {
               if (pkm.index == pokemon.index) {
+                // console.log(pkm.name, pokemon.name)
                 if (coord) {
                     if(pkm.positionY >= coord.y){
-                        coord.x = pokemon.positionX
-                        coord.y = pokemon.positionY
+                        coord.x = pkm.positionX
+                        coord.y = pkm.positionY
+                        // console.log('better coord', coord)
                     }
                 }
                 else {
-                    if(pkm.positionX !== -1){
-                        coord = {x: pokemon.positionX, y: pokemon.positionY}
-                    }
+                    coord = {x: pkm.positionX, y: pkm.positionY}
+                    // console.log('first coord', coord)
                 }
   
                 pkm.items.forEach((el)=>{
@@ -558,6 +559,7 @@ export default class GameRoom extends Room<GameState> {
               player.items.add(item)
             })
             if(coord){
+                // console.log(coord, pokemonEvolved.name)
                 pokemonEvolved.positionX = coord.x
                 pokemonEvolved.positionY = coord.y
                 player.board.set(pokemonEvolved.id, pokemonEvolved)
