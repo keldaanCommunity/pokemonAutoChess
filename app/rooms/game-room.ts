@@ -491,14 +491,17 @@ export default class GameRoom extends Room<GameState> {
               if (pkm.index == pokemon.index) {
                 // console.log(pkm.name, pokemon.name)
                 if (coord) {
-                    if(pkm.positionY >= coord.y){
+                    if(pkm.positionY > coord.y){
                         coord.x = pkm.positionX
                         coord.y = pkm.positionY
                         // console.log('better coord', coord)
                     }
                 }
                 else {
-                    coord = {x: pkm.positionX, y: pkm.positionY}
+                    if(pkm.positionX !== -1){
+                        coord = {x: pkm.positionX, y: pkm.positionY}
+                    }
+
                     // console.log('first coord', coord)
                 }
   
