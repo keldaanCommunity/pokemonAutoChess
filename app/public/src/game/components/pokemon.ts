@@ -1366,7 +1366,7 @@ export default class Pokemon extends Button {
   }
 
   addArmorReduction() {
-    if (this.armorReduction) {
+    if (!this.armorReduction) {
       this.armorReduction = new GameObjects.Sprite(this.scene, 0, -40, 'armorReduction', '000')
       this.armorReduction.setScale(2, 2)
       this.scene.add.existing(this.armorReduction)
@@ -1384,7 +1384,7 @@ export default class Pokemon extends Button {
 
 
   addPoison() {
-    if (this.poison) {
+    if (!this.poison) {
       this.poison = new GameObjects.Sprite(this.scene, 0, -30, 'status', 'status/poison/000')
       this.poison.setScale(2, 2)
       this.scene.add.existing(this.poison)

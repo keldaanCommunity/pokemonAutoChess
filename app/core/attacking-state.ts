@@ -80,7 +80,7 @@ export default class AttackingState extends PokemonState {
         poisonChance += 0.3
       }
       if (poisonChance != 0) {
-        if (Math.random() > poisonChance) {
+        if (Math.random() > 1 - poisonChance) {
           target.status.triggerPoison(2000, target, pokemon)
         }
       }
