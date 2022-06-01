@@ -232,6 +232,7 @@ export interface IPokemon {
     fossilTimer: number | undefined
     shiny: boolean
     emotion: Emotion
+    final: boolean
 }
 
 export interface IExperienceManager {

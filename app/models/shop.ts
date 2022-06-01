@@ -92,36 +92,36 @@ export default class Shop {
     const rare = new Array<Pkm>()
     const epic = new Array<Pkm>()
     const legendary = new Array<Pkm>()
-    const threeStars = new Array<Pkm>()
+    const finals = new Array<Pkm>()
 
     player.board.forEach((pokemon: IPokemon) => {
-      if (pokemon.stars == 3) {
-        threeStars.push(PkmFamily[pokemon.name])
+      if (pokemon.final) {
+        finals.push(PkmFamily[pokemon.name])
       }
     })
 
     COMMON.forEach((name: Pkm) => {
-      if (!threeStars.includes(name)) {
+      if (!finals.includes(name)) {
         common.push(name)
       }
     })
     UNCOMMON.forEach((name: Pkm) => {
-      if (!threeStars.includes(name)) {
+      if (!finals.includes(name)) {
         uncommon.push(name)
       }
     })
     RARE.forEach((name: Pkm) => {
-      if (!threeStars.includes(name)) {
+      if (!finals.includes(name)) {
         rare.push(name)
       }
     })
     EPIC.forEach((name: Pkm) => {
-      if (!threeStars.includes(name)) {
+      if (!finals.includes(name)) {
         epic.push(name)
       }
     })
     LEGENDARY.forEach((name: Pkm) => {
-      if (!threeStars.includes(name)) {
+      if (!finals.includes(name)) {
         legendary.push(name)
       }
     })
