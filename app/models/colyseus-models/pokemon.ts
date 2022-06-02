@@ -1944,7 +1944,7 @@ export class Azelf extends Pokemon {
 
 export class Mewtwo extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MEWTWO, [Synergy.PSYCHIC, Synergy.MONSTER], Rarity.MYTHICAL, '0150', Pkm.DEFAULT, 300, 30, 5, 5, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.TORMENT,shiny, emotion, true)
+    super(Pkm.MEWTWO, [Synergy.PSYCHIC, Synergy.MONSTER], Rarity.MYTHICAL, '0150', Pkm.DEFAULT, 300, 30, 5, 5, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 110, Ability.DYNAMAX_CANNON,shiny, emotion, true)
   }
 }
 
