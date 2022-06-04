@@ -72,12 +72,12 @@ export const TypeTrigger: {[key in Synergy]: number[]} = {
 export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
 
 export const RarityColor: {[key in Rarity]: string} = {
-  [Rarity.COMMON]: '#686d7d',
+  [Rarity.COMMON]: '#9f9f9f',
   [Rarity.NEUTRAL]: '#686d7d',
-  [Rarity.UNCOMMON]: '#478a41',
-  [Rarity.RARE]: '#5062ab',
-  [Rarity.EPIC]: '#7b469c',
-  [Rarity.LEGENDARY]: '#a6802e',
+  [Rarity.UNCOMMON]: '#3bc95e',
+  [Rarity.RARE]: '#41bfcc',
+  [Rarity.EPIC]: '#ca6cee',
+  [Rarity.LEGENDARY]: '#e6cb49',
   [Rarity.MYTHICAL]: '#ffc0cb',
   [Rarity.SUMMON]: '#991f1f'
 }

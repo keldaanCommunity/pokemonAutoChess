@@ -405,8 +405,9 @@ transform: translateY(-1px);
 }
 
 .nes-container{
-  border-radius: 12px !important;
-  background: #AEB6C0;
+  border-radius: 12px;
+  background: #61738a;
+  box-shadow: #2d334b 2px 2px 0px;
 }
 
 .chatbg{
@@ -475,4 +476,15 @@ transform: translateY(-1px);
     height: 7vh;
     font-size:1.5vw;
     padding: 12px 42px;
+  }
+
+  .nes-progress{
+    border-image-slice: none !important;
+    border-image-width: none !important;
+    border-image-repeat: none !important;
+    border-image-source: none !important;
+    border-image-outset: none !important;
+    border-radius: 12px;
+    border: 4px solid black;
+    margin: 0px !important;
   }

@@ -2,22 +2,12 @@ import { Rarity } from '../../../../../types/enum/Game'
 import React from 'react'
 import CSS from 'csstype'
 import { useAppSelector } from '../../../hooks'
-import { Probability } from '../../../../../types/Config'
+import { Probability, RarityColor } from '../../../../../types/Config'
 
 const style: CSS.Properties = {
-    position:'absolute',
-    bottom:'16%',
-    right:'12.3%',
     display:'flex',
-    padding:'0px'
-}
-
-const RARITY_RGB= {
-    [Rarity.COMMON] :'rgba(104, 109, 125,0.7)',
-    [Rarity.UNCOMMON] :'rgba(71, 138, 65, 0.7)',
-    [Rarity.RARE] :'rgba(80, 98, 171, 0.7)',
-    [Rarity.EPIC] :'rgba(123, 70, 156, 0.7)',
-    [Rarity.LEGENDARY] :'rgb(166, 128, 46, 0.7)'
+    padding:'0px',
+    borderRadius: '5px'
 }
 
 export default function GameRarityPercentage() {
@@ -26,8 +16,10 @@ export default function GameRarityPercentage() {
         {[Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.EPIC, Rarity.LEGENDARY].map((rarity,index)=>{
             return <div key={rarity}
                 style={{
-                    backgroundColor:RARITY_RGB[rarity],
-                    padding:'3px'
+                    backgroundColor:RarityColor[rarity],
+                    width:'20%',
+                    display:'flex',
+                    justifyContent:'center'
                 }}
             >
                 {Math.floor(Probability[level][index] * 100)}%

@@ -1,19 +1,13 @@
 import React from 'react'
 import CSS from 'csstype'
 import { useAppSelector } from '../../../hooks'
+import GameLevel from './game-level'
 
 const style: CSS.Properties = {
-    position:'absolute',
-    right: '1%',
-    bottom: '3%',
-    width: '15%'
 }
 
 const styleProgress: CSS.Properties = {
-    position: 'absolute',
-    color: 'darkgray',
-    left: '25%',
-    bottom: '3%'
+    color: 'darkgray'
 }
 
 export default function GameExperience() {
@@ -31,7 +25,11 @@ export default function GameExperience() {
     
 
     return <div style={style}>
-        <h1>Lvl {experienceManager.level}</h1>
+        <div style={{display:'flex', alignItems:'center'}}>
+            <h1 style={{fontSize:'1.3vw', color:'white'}}>Lvl {experienceManager.level}</h1>
+            <GameLevel/>
+        </div>
+        
         <div>
             <progress className="nes-progress" value={experienceManager.experience} max={experienceManager.expNeeded}></progress>
             <p style={styleProgress}>

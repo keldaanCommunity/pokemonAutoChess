@@ -324,7 +324,6 @@ export default function Game() {
     <GamePlayerInformations/>
     <GamePlayers click={(id: string) => playerClick(id)}/>
     <GameSynergies/>
-    <GameRarityPercentage/>
     <GameItemsProposition/>
     <GameDpsMeter/>
     <GameToasts/>

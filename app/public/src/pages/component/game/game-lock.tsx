@@ -4,9 +4,7 @@ import CSS from 'csstype'
 import { lockClick } from '../../../stores/NetworkStore'
 
 const style: CSS.Properties = {
-    position:'absolute',
-    top:'5%',
-    left:'1%'
+    margin:'5px'
 }
 
 export default function GameLock() {
@@ -14,6 +12,9 @@ export default function GameLock() {
     const shopLocked = useAppSelector(state=>state.game.shopLocked)
 
     return <button className= {shopLocked ? 'bubbly-error': 'bubbly-success is-success'} onClick={()=>{dispatch(lockClick())}} style={style}>
-    <img style={{width:'25px', marginLeft:'-1px'}} src="/assets/ui/lock.png"/>
+    <img style={{
+        width:'25px',     
+        marginLeft: '-4px',
+        marginTop: '-10px'}} src="/assets/ui/lock.png"/>
 </button>
 }

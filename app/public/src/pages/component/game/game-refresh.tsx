@@ -4,10 +4,8 @@ import { useAppDispatch } from '../../../hooks'
 import { refreshClick } from '../../../stores/NetworkStore'
 
 const style: CSS.Properties = {
-    position:'absolute',
-    left:'6%',
-    top: '5%',
-    width:'12%'
+    margin:'5px',
+    fontSize:'1.1vw'
 }
 
 

@@ -4,10 +4,8 @@ import { useAppDispatch } from '../../../hooks'
 import { levelClick } from '../../../stores/NetworkStore'
 
 const style: CSS.Properties = {
-    position:'absolute',
-    left:'6%',
-    bottom:'7%',
-    width:'12%'
+    margin:'5px',
+    fontSize:'1.1vw'
 }
 
 export default function GameLevel() {
