@@ -42,8 +42,9 @@ body {
     border-style:solid !important;
     border-width:4px !important;
     border-radius: 12px !important;
-    background-color: #54596b !important;
+    background-color: #61738a !important;
     color:#fff !important;
+    margin-left: 20px !important;
 }
 
 input[type=range] {

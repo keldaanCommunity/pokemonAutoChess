@@ -16,7 +16,7 @@ const style: CSS.Properties = {
     overflowY:'scroll',
     padding:'0px',
     color:'#fff',
-    backgroundColor:'#54596b' 
+    backgroundColor:'#61738a' 
 }
 
 export default function Synergies(props:{synergies: [string, number][]}) {
