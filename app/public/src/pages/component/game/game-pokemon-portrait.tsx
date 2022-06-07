@@ -47,9 +47,11 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
             padding:'0px',
             display:'flex',
             position: 'absolute',
-            right: '5px',
+            justifyContent:'center',
+            right: '0px',
             flexFlow: 'column',
-            top: '5px'
+            top: '0px',
+            backgroundColor:rarityColor
             }}>
             {props.pokemon.types.map(type=>{
                 return <li key={type}><img src={'assets/types/'+ type +'.png'}/></li>

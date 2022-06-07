@@ -407,7 +407,6 @@ transform: translateY(-1px);
 .nes-container{
   border-radius: 12px;
   background: #61738a;
-  box-shadow: #2d334b 2px 2px 0px;
 }
 
 .chatbg{
@@ -437,55 +436,55 @@ transform: translateY(-1px);
   font-size: 2vw;
 }
 
-  .playerBox{
-    background: #54596b;
-    border-radius: 12px;
-    border: solid;
-    border-color: black;
-    padding: 12px 42px;
-    border-radius: 12px;
-    font-size: 1.25rem;
-    border-width: 4px;
-    color: white;
-    box-shadow: #2d334b 4px 4px 0px;
-  }
+.playerBox{
+background: #54596b;
+border-radius: 12px;
+border: solid;
+border-color: black;
+padding: 12px 42px;
+border-radius: 12px;
+font-size: 1.25rem;
+border-width: 4px;
+color: white;
+box-shadow: #2d334b 4px 4px 0px;
+}
 
-  .my-input{
-    max-height: 65px;
-    border-radius: 12px;
-    width: 100%;
-    border: 4px solid black;
-    height: 7vh;
-    padding-left: 1vw;
-  }
+.my-input{
+max-height: 65px;
+border-radius: 12px;
+width: 100%;
+border: 4px solid black;
+height: 7vh;
+padding-left: 1vw;
+}
 
-  .my-tab{
-    cursor:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    outline:none;
-    color:white;
-    font-size:1.5vw;
-  }
+.my-tab{
+cursor:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer;
+background-color: rgba(255, 255, 255, 0.3);
+border-top-left-radius: 12px;
+border-top-right-radius: 12px;
+outline:none;
+color:white;
+font-size:1.5vw;
+}
 
-  .my-select{
-    margin: 10px;
-    border-radius: 12px;
-    border: 4px solid black;
-    height: 7vh;
-    font-size:1.5vw;
-    padding: 12px 42px;
-  }
+.my-select{
+margin: 10px;
+border-radius: 12px;
+border: 4px solid black;
+height: 7vh;
+font-size:1.5vw;
+padding: 12px 42px;
+}
 
-  .nes-progress{
-    border-image-slice: none !important;
-    border-image-width: none !important;
-    border-image-repeat: none !important;
-    border-image-source: none !important;
-    border-image-outset: none !important;
-    border-radius: 12px;
-    border: 4px solid black;
-    margin: 0px !important;
-    background-color: #61738a !important;
-  }
+.nes-progress{
+border-image-slice: none !important;
+border-image-width: none !important;
+border-image-repeat: none !important;
+border-image-source: none !important;
+border-image-outset: none !important;
+border-radius: 12px;
+border: 4px solid black;
+margin: 0px !important;
+background-color: #61738a !important;
+}

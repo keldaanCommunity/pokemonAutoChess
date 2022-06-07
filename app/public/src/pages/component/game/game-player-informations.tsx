@@ -7,12 +7,13 @@ const style: CSS.Properties = {
     position:'absolute',
     top:'.5%',
     left:'30%',
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     display:'flex',
     justifyContent:'space-evenly',
-    padding:'10px',
+    padding:'5px',
     minWidth:'40%',
-    height:'7%'
+    height:'8%',
+    alignItems:'center',
+    color:'white'
 }
 
 export default function GamePlayerInformations(){
@@ -45,27 +46,38 @@ export default function GamePlayerInformations(){
     let opponent: null | ReactElement = null
     if(opponentName != '' && opponentAvatar !=''){
         opponent = 
-        <div style={{display:'flex'}}>
-            <p>Vs</p>
+        <div className='nes-container' style={{backgroundColor:'#54596b', padding:'5px', display:'flex', height:'100%'}}>
             <img src={`${CDN_PORTRAIT_URL}${opponentAvatar}.png`}/>
-            <p style={{marginLeft:'5px'}}>{opponentName}</p>
+            <p style={{marginLeft:'5px', color:'white'}}>{opponentName}</p>      
         </div>
     }
 
     return <div style={style} className='nes-container'>
-            <h4>{boardSize}/{experienceManager.level}</h4>
-            <div style={{display:'flex'}}>
-                <h4>{money}</h4>
-                <img style={{width:'25px', height:'25px', marginBottom:'5px'}} src='assets/ui/money.png'/>
+            <div className='nes-container' style={{backgroundColor:'#54596b', padding:'.001px', display:'flex', width:'15%', height:'100%', backgroundImage:'url("assets/ui/pokeball-bg.png"', backgroundSize:'cover'}}>
+                <div style={{ background:'#54596b', display:'flex', alignItems:'center', borderRadius:'7px', height:'100%'}}>
+                    <h4 style={{color:'white'}}>{boardSize}/{experienceManager.level}</h4>
+                    <img style={{width:'25px', height:'25px', marginBottom:'5px'}} src='assets/ui/pokeball.png'/>
+                </div>
             </div>
-            <div style={{display:'flex'}}>
-                <h4 style={{marginLeft:'5px'}}>{life}</h4>
-                <img style={{width:'25px', height:'25px', marginBottom:'5px'}} src={`assets/ui/${getLifePngName()}.png`}/>
+
+            <div className='nes-container' style={{backgroundColor:'#54596b', padding:'.001px', display:'flex', width:'15%', height:'100%',  backgroundImage:'url("assets/ui/money-bg.png"', backgroundSize:'cover'}}>
+                <div style={{ background:'#54596b', display:'flex', alignItems:'center', borderRadius:'7px', height:'100%'}}>
+                    <h4 style={{color:'white'}}>{money}</h4>
+                    <img style={{width:'25px', height:'25px', marginBottom:'5px'}} src='assets/ui/money.png'/>
+                </div>
             </div>
-            <div style={{display:'flex'}}>
+
+            <div className='nes-container' style={{backgroundColor:'#54596b', padding:'.001px', display:'flex', width:'15%', height:'100%',  backgroundImage:'url("assets/ui/heart-bg.png"', backgroundSize:'cover'}}>
+                <div style={{ background:'#54596b', display:'flex', alignItems:'center', borderRadius:'7px', height:'100%'}}>
+                    <h4 style={{marginLeft:'5px'}}>{life}</h4>
+                    <img style={{width:'25px', height:'25px', marginBottom:'5px'}} src={'assets/ui/heart.png'}/>
+                </div>
+            </div>
+            <div className='nes-container' style={{backgroundColor:'#54596b', padding:'5px', display:'flex', width:'15%', height:'100%'}}>
                 <img src={`${CDN_PORTRAIT_URL}${avatar}.png`}/>
-                <p style={{marginLeft:'5px'}}>{name}</p>
+                <p style={{marginLeft:'5px', color:'white'}}>{name}</p>
             </div>
+            <p style={{color:'white', fontSize:'1.3vw'}}>Vs</p>
             {opponent}
             </div>
 }

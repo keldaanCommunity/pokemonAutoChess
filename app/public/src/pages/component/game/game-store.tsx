@@ -16,7 +16,7 @@ const style: CSS.Properties = {
 export default function GameStore() {
     const shop = useAppSelector(state=>state.game.shop)
     const pokemonCollection = useAppSelector(state=>state.game.pokemonCollection)
-    console.log(shop)
+    // console.log(pokemonCollection);
     return <ul style={style}>
     {shop.map((pokemon,index)=>{
         if(pokemon != Pkm.DEFAULT){

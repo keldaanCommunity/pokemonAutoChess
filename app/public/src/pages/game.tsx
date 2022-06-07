@@ -327,7 +327,6 @@ export default function Game() {
     <GameItemsProposition/>
     <GameDpsMeter/>
     <GameToasts/>
-    <Emotes/>
     <div id='game' ref={container}>
     </div>
   </div>

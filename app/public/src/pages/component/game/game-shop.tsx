@@ -1,10 +1,10 @@
 import React from 'react'
 import GameRefresh from './game-refresh'
 import GameLock from './game-lock'
-import GameLevel from './game-level'
 import GameExperience from './game-experience'
 import GameStore from './game-store'
 import CSS from 'csstype'
+import { useAppSelector } from '../../../hooks'
 import GameRarityPercentage from './game-rarity-percentage'
 
 const style: CSS.Properties = {
@@ -18,7 +18,10 @@ const style: CSS.Properties = {
     padding:'5px'
 }
 
+
 export default function GameShop() {
+
+    const money = useAppSelector(state=>state.game.money)
 
     return <div style={style} className='nes-container'>
     <div className='nes-container' style={{display:'flex', flexFlow:'column', padding:'5px', background:'#61738a', justifyContent:'space-between'}}>
@@ -27,10 +30,8 @@ export default function GameShop() {
             <GameLock/>
             <GameRefresh/>
         </div>
-    </div>
-        <GameStore/>
-    <div className='nes-container' style={{padding:'5px'}}>
-        <GameExperience/>
-    </div>
+    </div>   
+    <GameStore/>
+    <GameExperience/>
 </div>
 }

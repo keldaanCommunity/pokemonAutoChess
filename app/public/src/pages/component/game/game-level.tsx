@@ -5,6 +5,8 @@ import { levelClick } from '../../../stores/NetworkStore'
 
 const style: CSS.Properties = {
     margin:'5px',
+    marginTop:'0px',
+    marginRight:'0px',
     fontSize:'1.1vw'
 }
 
