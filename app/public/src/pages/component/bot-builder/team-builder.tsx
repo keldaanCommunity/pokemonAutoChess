@@ -285,9 +285,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     >
       {mode} Mode
       <ReactTooltip id={'mode'} 
-        className='customeTheme' 
-        textColor='#000000' 
-        backgroundColor='rgba(255,255,255,1)' 
+        className='customeTheme'
         effect='solid'
         place='bottom'>
         <p>Click to change the current edition mode.</p><p> The WRITE mode allow you to place pokemons and items on the board.</p><p> The ERASE mode allow you to erase pokemons from the board.</p>
@@ -301,9 +299,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     data-for={'copy'}
     >
       <ReactTooltip id={'copy'} 
-        className='customeTheme' 
-        textColor='#000000' 
-        backgroundColor='rgba(255,255,255,1)' 
+        className='customeTheme'
         effect='solid'
         place='bottom'>
         <p>Click to copy the current step.</p><p> You can then paste this step later elsewhere.</p>
@@ -321,9 +317,7 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
      data-for={'paste'}
      >
       <ReactTooltip id={'paste'} 
-        className='customeTheme' 
-        textColor='#000000' 
-        backgroundColor='rgba(255,255,255,1)' 
+        className='customeTheme'
         effect='solid'
         place='bottom'>
         <p>Click to paste the copied step on your current step.</p><p> It will replace the board of the current step with the one you copied.</p>

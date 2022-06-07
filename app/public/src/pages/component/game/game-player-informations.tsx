@@ -44,6 +44,7 @@ export default function GamePlayerInformations(){
     const money = useAppSelector(state=>state.game.currentPlayerMoney)
 
     let opponent: null | ReactElement = null
+    const vs = opponentAvatar != '' && opponentName != '' ? <p style={{color:'white', fontSize:'1.3vw'}}>Vs</p> : null
     if(opponentName != '' && opponentAvatar !=''){
         opponent = 
         <div className='nes-container' style={{backgroundColor:'#54596b', padding:'5px', display:'flex', height:'100%'}}>
@@ -77,7 +78,7 @@ export default function GamePlayerInformations(){
                 <img src={`${CDN_PORTRAIT_URL}${avatar}.png`}/>
                 <p style={{marginLeft:'5px', color:'white'}}>{name}</p>
             </div>
-            <p style={{color:'white', fontSize:'1.3vw'}}>Vs</p>
+            {vs}
             {opponent}
             </div>
 }

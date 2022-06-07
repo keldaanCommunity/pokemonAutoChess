@@ -33,9 +33,7 @@ export default function WikiItemsCheatSheet() {
                             data-for={'detail-' + i + '-' + j}>
                                 <img style={imgStyle} src={'assets/item/' + tier2Item + '.png'}></img>
                                 <ReactTooltip id={'detail-' + i + '-' + j} 
-                                className='customeTheme' 
-                                textColor='#000000' 
-                                backgroundColor='rgba(255,255,255,1)' 
+                                className='customeTheme'
                                 effect='solid'>
                                     <p>{ItemName[tier2Item]}</p>
                                     <p>{ItemDescription[tier2Item]}</p>

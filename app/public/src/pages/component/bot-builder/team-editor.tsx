@@ -81,8 +81,6 @@ export default function TeamEditor(props:{
         <p data-tip data-for={'help'}>Help</p>
         <ReactTooltip id={'help'}
         className='customeTheme' 
-        textColor='#000000' 
-        backgroundColor='rgba(255,255,255,1)' 
         effect='solid'>
         <p>To create a bot, you need to fill a certain number of steps.</p>
         <p>Each step represents the state of your bot at a moment in the game</p>
@@ -126,8 +124,7 @@ export default function TeamEditor(props:{
                         data-for={'step-' + i}>
                         <ReactTooltip id={'step-' + i}
                             className='customeTheme' 
-                            textColor='#000000' 
-                            backgroundColor='rgba(255,255,255,1)' 
+                            textColor='#000000'
                             effect='solid'>
                             <p>Points required represent how much your bot needs to work to get to the next step</p>
                             <p>Once your bot has acquired enough points, it will go to the next step</p>

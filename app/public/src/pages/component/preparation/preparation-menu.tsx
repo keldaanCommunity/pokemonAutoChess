@@ -80,9 +80,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <button data-tip data-for={'difficulty-select'} style={buttonStyle} className='bubbly-primary' onClick={() => {dispatch(addBot(botDifficulty))}}>
                         <ReactTooltip id={'difficulty-select'} 
-                            className='customeTheme' 
-                            textColor='#000000' 
-                            backgroundColor='rgba(255,255,255,1) !important' 
+                            className='customeTheme'
                             effect='solid'
                             place='top'>
                             <p>Easy: &lt;800</p>
@@ -107,9 +105,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                         >
                         Start Game
                         <ReactTooltip id={'start-game'} 
-                            className='customeTheme' 
-                            textColor='#000000' 
-                            backgroundColor='rgba(255,255,255,1) !important' 
+                            className='customeTheme'
                             effect='solid'
                             place='top'>
                             <p>Owner: ({ownerName})</p>

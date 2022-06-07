@@ -20,10 +20,10 @@ export default function SynergyDetailComponent(props:{type: Synergy, value: numb
     
     {SynergyDetail[props.type].map((d,i)=>{
         return <div key={EffectName[d]} style={{
-            color: TypeTrigger[props.type][i] <= props.value ? '#000000' : '#808080'
+            color: TypeTrigger[props.type][i] <= props.value ? '#fff' : '#68829E'
         }}>
-               <h5>({TypeTrigger[props.type][i]}) {EffectName[d]}</h5>
-               <p>{EffectDescription[d].eng}</p>
+               <h5 style={{fontSize:'1.3vw'}}>({TypeTrigger[props.type][i]}) {EffectName[d]}</h5>
+               <p style={{fontSize:'1vw'}}>{EffectDescription[d].eng}</p>
             </div>
     })}
    <div style={{display:'flex'}}>

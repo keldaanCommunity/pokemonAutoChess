@@ -40,7 +40,10 @@ body {
     opacity:1 !important;
     border-color:#000 !important;
     border-style:solid !important;
-    border-width:4px !important
+    border-width:4px !important;
+    border-radius: 12px !important;
+    background-color: #54596b !important;
+    color:#fff !important;
 }
 
 input[type=range] {

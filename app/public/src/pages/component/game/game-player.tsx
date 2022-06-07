@@ -56,8 +56,7 @@ export default function GamePlayer(props:{player: IPlayer, color: string, click:
 
          <ReactTooltip id={'detail-' + props.player.id}
             className='customeTheme' 
-            textColor='#000000' 
-            backgroundColor='rgba(255,255,255,1)' 
+            textColor='#000000'
             effect='solid'
             place='left'>
         <GamePlayerDetail name={props.player.name} life={props.player.life} money={props.player.money} history={props.player.history}/>
