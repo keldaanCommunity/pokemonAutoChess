@@ -278,19 +278,19 @@ export class Snorlax extends Pokemon {
 
 export class Meditite extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MEDITITE, [Synergy.PSYCHIC, Synergy.HUMAN, Synergy.FIGHTING], Rarity.LEGENDARY, '0307', Pkm.MEDICHAM, 90, 5, 5, 5, 2, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 1, 80, Ability.CONFUSION,shiny, emotion)
+    super(Pkm.MEDITITE, [Synergy.PSYCHIC, Synergy.HUMAN, Synergy.FIGHTING], Rarity.LEGENDARY, '0307', Pkm.MEDICHAM, 90, 5, 5, 5, 2, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 1, 80, Ability.CONFUSION,shiny, emotion, false)
   }
 }
 
 export class Medicham extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MEDICHAM, [Synergy.PSYCHIC, Synergy.HUMAN, Synergy.FIGHTING], Rarity.LEGENDARY, '0308', Pkm.MEGA_MEDICHAM, 130, 9, 6, 6, 1, AttackSprite.NORMAL_MELEE, AttackType.PHYSICAL, 2, 80, Ability.CONFUSION,shiny, emotion)
+    super(Pkm.MEDICHAM, [Synergy.PSYCHIC, Synergy.HUMAN, Synergy.FIGHTING], Rarity.LEGENDARY, '0308', Pkm.MEGA_MEDICHAM, 130, 9, 6, 6, 1, AttackSprite.NORMAL_MELEE, AttackType.PHYSICAL, 2, 80, Ability.CONFUSION,shiny, emotion, false)
   }
 }
 
 export class MegaMedicham extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MEGA_MEDICHAM, [Synergy.PSYCHIC, Synergy.HUMAN, Synergy.FIGHTING], Rarity.LEGENDARY, '0308-0001', Pkm.DEFAULT, 230, 20, 7, 7, 1, AttackSprite.NORMAL_MELEE, AttackType.PHYSICAL, 3, 80, Ability.CONFUSION,shiny, emotion)
+    super(Pkm.MEGA_MEDICHAM, [Synergy.PSYCHIC, Synergy.HUMAN, Synergy.FIGHTING], Rarity.LEGENDARY, '0308-0001', Pkm.DEFAULT, 230, 20, 7, 7, 1, AttackSprite.NORMAL_MELEE, AttackType.PHYSICAL, 3, 80, Ability.CONFUSION,shiny, emotion, true)
   }
 }
 
