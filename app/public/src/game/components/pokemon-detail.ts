@@ -41,7 +41,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
     this.dom = document.createElement('div')
     this.dom.className = 'nes-container'
-    this.dom.style.backgroundColor = 'rgba(255,255,255,.7)'
+    this.dom.style.color = '#fff'
     this.dom.style.padding = '10px'
 
     const wrap = document.createElement('div')

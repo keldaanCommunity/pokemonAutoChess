@@ -498,11 +498,17 @@ color:'#fff' !important;
   stroke: #92cc41 !important;
 }
 .CircularProgressbar-trail {
-  stroke: #000 !important;
+  stroke: #2d334b !important;
 }
 .CircularProgressbar-text {
   fill: yellow;
 }
 .CircularProgressbar-background {
   fill: green;
+}
+
+.react-tabs__tab--selected{
+  border-radius: 12px 12px 0px 0px !important;
+  color: #fff !important;
+  background-color: rgb(84, 89, 107) !important;
 }

@@ -18,7 +18,8 @@ const style: CSS.Properties = {
     justifyContent:'space-between',
     padding:'10px',
     overflowY:'scroll',
-    maxHeight:'78%'
+    maxHeight:'78%',
+    color:'#fff'
 }
 const imgStyle: CSS.Properties = {
     width:'60px',

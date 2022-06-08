@@ -9,7 +9,7 @@ export default class ItemDetail extends GameObjects.DOMElement {
     this.dom = document.createElement('div')
     this.dom.className = 'nes-container'
     this.dom.style.padding = '10px'
-    this.dom.style.backgroundColor = 'rgba(255,255,255,.7)'
+    this.dom.style.color = '#fff'
     this.dom.style.maxWidth = '400px'
     this.dom.style.minHeight = '200px'
     this.dom.innerHTML = `
