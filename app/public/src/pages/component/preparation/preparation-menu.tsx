@@ -85,8 +85,8 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                             effect='solid'
                             place='top'>
                             <p>Easy: &lt;800</p>
-                            <p>Normal: 800-1100</p>
-                            <p>Hard: &gt;1100</p>
+                            <p>Normal: 800-1099</p>
+                            <p>Hard: &gt;=1100</p>
                         </ReactTooltip>
                         Add Bot
                     </button>
