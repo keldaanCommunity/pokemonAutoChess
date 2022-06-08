@@ -169,10 +169,10 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         d = {$lt: 800}
         break
       case BotDifficulty.MEDIUM:
-        d = {$gt: 800, $lt: 1100}
+        d = {$gte: 800, $lt: 1100}
         break
       case BotDifficulty.HARD:
-        d = {$gt: 1100}
+        d = {$gte: 1100}
         break
     }
 
