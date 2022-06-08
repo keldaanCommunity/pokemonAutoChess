@@ -91,7 +91,7 @@ export class OnLeaveCommand extends Command<PreparationRoom, {
       this.room.broadcast(Transfer.MESSAGES, {
         'name': 'Server',
         'payload': `${ client.auth.displayName } left.`,
-        'avatar': 'magnemite',
+        'avatar': this.state.users.get(client.auth.uid)?.avatar,
         'time': Date.now()
       })
       this.state.users.delete(client.auth.uid)

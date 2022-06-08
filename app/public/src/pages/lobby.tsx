@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import Chat from './component/chat/chat'
 import CurrentUsers from './component/available-user-menu/current-users'
@@ -35,6 +35,7 @@ export default function Lobby(){
     const meta: IMeta[] = useAppSelector(state=>state.lobby.meta)
     const metaItems: IItemsStatistic[] = useAppSelector(state=>state.lobby.metaItems)
     const botList: {name: string, avatar: string}[] = useAppSelector(state=>state.lobby.botList)
+    const audio = useRef(new Audio('assets/sounds/notification.mp3'))
     
     const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
     const [showWiki, toggleWiki] = useState<boolean>(false)
@@ -63,6 +64,7 @@ export default function Lobby(){
     
                     room.state.users.onAdd = (u) => {
                         dispatch(addUser(u))
+
                         if(u.id == user.uid){
                             u.pokemonCollection.onAdd = (pokemonConfig, key) => {
                                 const p = pokemonConfig as PokemonConfig
@@ -75,6 +77,9 @@ export default function Lobby(){
                             }
                             dispatch(setUser(u))
                             setSearchedUser(u)
+                        }
+                        else{
+                            audio.current?.play()
                         }
                         u.onChange = (changes) => {
                             changes.forEach(change=>{
@@ -119,7 +124,7 @@ export default function Lobby(){
             join()
             setLobbyJoined(true)
         }
-    })
+    }, [lobbyJoined, dispatch, client, audio])
 
     if(!uid){
         return <div>
