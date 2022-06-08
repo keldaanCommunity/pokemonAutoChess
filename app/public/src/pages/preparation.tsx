@@ -11,6 +11,7 @@ import {joinPreparation, logIn } from '../stores/NetworkStore'
 import { addUser, changeUser, leavePreparation, pushMessage, removeUser, setGameStarted, setName, setOwnerId, setOwnerName } from '../stores/PreparationStore'
 import GameState from '../../../rooms/states/game-state'
 import {Transfer} from '../../../types'
+import { CDN_SOUNDS_URL } from '../../../types'
 
 const preparationStyle = {
     display:'flex',
@@ -29,6 +30,10 @@ export default function Preparation() {
     const [initialized, setInitialized] = useState<boolean>(false)
     const [toGame, setToGame] = useState<boolean>(false)
 
+    // need to replace filename (abutton.mp3) when hosted on CDN
+    const filename = "gotitem.mp3"
+    const audio = new Audio(CDN_SOUNDS_URL + "/" + filename)
+    
     useEffect(()=>{
         const reconnect = async () => {
             setInitialized(true)
@@ -76,6 +81,10 @@ export default function Preparation() {
             }
             r.state.users.onAdd = (u) => {
                 dispatch(addUser(u))
+                
+                if(!u.isBot){
+                    audio.play()
+                }
 
                 u.onChange = (changes) => {
                     changes.forEach(change=>{

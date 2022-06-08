@@ -21,8 +21,10 @@ import { Pokemon } from '../models/colyseus-models/pokemon'
 
 
 export const CDN_PORTRAIT_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/'
-
 export const CDN_URL = 'https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master'
+
+// need to replace with keldaan's url after hosting the sound on CDN
+export const CDN_SOUNDS_URL = 'http://codeskulptor-demos.commondatastorage.googleapis.com/descent'
 
 export type PrecomputedTypePokemon = {
     [key in Synergy] : {
