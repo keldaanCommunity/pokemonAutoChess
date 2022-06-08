@@ -7,13 +7,13 @@ const style: CSS.Properties = {
     position:'absolute',
     top:'.5%',
     left:'.5%',
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     display:'flex',
-    justifyContent:'space-evenly',
-    padding:'10px',
+    justifyContent:'space-around',
+    padding:'5px',
     flexFlow: 'column',
-    width:'13%',
-    height:'10%'
+    width:'8%',
+    height:'10%',
+    color:'#fff'
 }
 
 export default function GameInformations(props:{leave:()=>void}) {
@@ -22,7 +22,7 @@ export default function GameInformations(props:{leave:()=>void}) {
     const roundTime = useAppSelector(state=>state.game.roundTime) 
 
     return <div style={style} className='nes-container'>
-    <p style={{fontSize: '0.7vw', textAlign: 'center', marginBottom: '0px'}}>{mapName}</p>
+    <p style={{fontSize: '0.9vw', textAlign: 'center', marginBottom: '0px'}}>{mapName}</p>
     <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
         <GameLeave leave={props.leave}/>
         <h3>T{stageLevel}</h3>
