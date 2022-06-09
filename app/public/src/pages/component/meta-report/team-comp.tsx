@@ -40,7 +40,7 @@ export default function TeamComp(props:{team:IMeta}){
             <div style={{display:'flex'}}>
                 {sortedTypes.map(type=>{
                     return <div style={{display:'flex', flexFlow:'column', alignItems: 'center'}} key={type}>
-                        <img style={{width:'51px', height:'51px', imageRendering:'pixelated', marginRight:'4px'}} src={'assets/types/' + type.toUpperCase() + '.png'}/>
+                        <img style={{width:'51px', height:'51px', imageRendering:'pixelated', marginRight:'4px'}} src={'assets/types/' + type.toUpperCase() + '.svg'}/>
                         <p>{props.team.types[type]}</p>
                     </div> 
                 })}

@@ -31,7 +31,7 @@ export default function WikiPokemonDetail(props:{pokemon: Pkm, m: ITracker | und
                     <p style={{color:RarityColor[pokemon.rarity]}}>rarity:{pokemon.rarity}</p>
                     <div>
                         types:{pokemon.types.map(type=>{
-                            return <img key={'img'+type} src={'assets/types/'+type+'.png'}/>
+                            return <img key={'img'+type} src={'assets/types/'+type+'.svg'}/>
                         })}
                     </div>
                     <div>evolution: {pokemon.evolution == Pkm.DEFAULT ? 'No evolution': <img src={`${CDN_PORTRAIT_URL}${PokemonFactory.createPokemonFromName(pokemon.evolution as Pkm).index.replace('-','/')}/${Emotion.NORMAL}.png`}/>}</div>

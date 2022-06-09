@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<svg width="34" height="34" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+ <g class="layer">
+  <title>Layer 1</title>
+  <ellipse cx="17.1" cy="16.95" fill="#fdff4a" id="svg_4" rx="17" ry="17" stroke="#b79a00" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" transform="matrix(1, 0, 0, 1, 0, 0)"/>
+  <path d="m18.16,2.55c6.52,-4.16 -9.6,7.82 -9.48,11.48c0.12,3.66 23.09,-0.02 19.99,1.42l-12.89,15.55c-4.96,3.93 12.24,-14.1 4.16,-13.76l-16.17,1.01c-2.54,0.92 7.88,-11.54 14.4,-15.7z" fill="#000000" fill-opacity="null" id="svg_6" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-opacity="null"/>
+  <ellipse cx="18.04" cy="28" fill="#000000" fill-opacity="null" id="svg_7" rx="0" ry="0.05" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-opacity="null"/>
+  <ellipse cx="18.18" cy="28.14" fill="#000000" fill-opacity="null" id="svg_8" rx="0" ry="0.05" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-opacity="null" transform="matrix(1, 0, 0, 1, 0, 0)"/>
+ </g>
+</svg>

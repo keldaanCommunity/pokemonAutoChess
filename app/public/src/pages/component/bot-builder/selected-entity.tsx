@@ -45,7 +45,7 @@ export default function SelectedEntity(props: {entity: Item | Pkm}) {
             <p style={{color:RarityColor[pokemon.rarity]}}>rarity:{pokemon.rarity}</p>
             <div>
                 types:{pokemon.types.map(type=>{
-                    return <img key={'img'+type} src={'assets/types/'+type+'.png'}/>
+                    return <img key={'img'+type} src={'assets/types/'+type+'.svg'}/>
              })}
              </div>
             <p>Health: {pokemon.hp}</p>

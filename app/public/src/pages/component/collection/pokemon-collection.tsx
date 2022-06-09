@@ -101,7 +101,7 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
             <Tabs>
                 <TabList>
                     {(Object.keys(Synergy) as Synergy[]).map((r =>{
-                        return <Tab key={'title-' + r}> <img src={'assets/types/' + r + '.png'}></img></Tab>
+                        return <Tab key={'title-' + r}> <img src={'assets/types/' + r + '.svg'}></img></Tab>
                     }))}
                 </TabList>
 

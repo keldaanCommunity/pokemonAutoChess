@@ -13,7 +13,7 @@ import {Pkm} from '../../../../../types/enum/Pokemon'
 export default function WikiType(props:{type:Synergy}) {
     return <div>
         <div style={{display:'flex'}}>
-            <img src={'assets/types/' + props.type + '.png'}></img>
+            <img src={'assets/types/' + props.type + '.svg'}></img>
             <p>{SynergyName[props.type].eng}</p>
         </div>
         {SynergyDetail[props.type].map((effect,i)=>{

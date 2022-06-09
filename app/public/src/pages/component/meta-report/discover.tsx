@@ -50,7 +50,7 @@ export default function Discover(props:{meta: IMeta[]}){
                     <div>
                     <p>Rank: ${props.meta[seriesIndex].teams[dataPointIndex].rank}</p>
                     <p>Cluster Size: ${props.meta[seriesIndex].count}</p>
-                    <div style='display:flex'><p>Cluster</p> ${Object.keys(props.meta[seriesIndex].types).reduce((prev, curr)=>{return prev + '<div style=' + typeStyle + '><img src="assets/types/'+ curr.toUpperCase() +'.png"/><p>'+ props.meta[seriesIndex].types[curr] +'</p></div>'},'')}</div>
+                    <div style='display:flex'><p>Cluster</p> ${Object.keys(props.meta[seriesIndex].types).reduce((prev, curr)=>{return prev + '<div style=' + typeStyle + '><img src="assets/types/'+ curr.toUpperCase() +'.svg"/><p>'+ props.meta[seriesIndex].types[curr] +'</p></div>'},'')}</div>
                     ${Object.keys(props.meta[seriesIndex].teams[dataPointIndex].pokemons).reduce((prev, curr)=>{return prev + '<img src=' + `"${CDN_PORTRAIT_URL}${PkmIndex[curr].replace('-','/')}/${Emotion.NORMAL}.png"` + '/>'},'')}
                     </div>
                 </div>`)

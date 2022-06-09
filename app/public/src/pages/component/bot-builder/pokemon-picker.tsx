@@ -30,7 +30,7 @@ export default function PokemonPicker(props:{selectEntity: React.Dispatch<React.
   return <Tabs className='nes-container' style={pokemonPoolStyle}>
   <TabList>
     {Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL).map((t)=>{
-        return <Tab style={cursorStyle} key={t}><img src={'assets/types/' + t + '.png'}></img></Tab>
+        return <Tab style={cursorStyle} key={t}><img src={'assets/types/' + t + '.svg'}></img></Tab>
     })}
   </TabList>
   

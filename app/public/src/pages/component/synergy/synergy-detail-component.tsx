@@ -14,7 +14,7 @@ const precomputed = PRECOMPUTED_TYPE_POKEMONS as PrecomputedTypePokemon
 export default function SynergyDetailComponent(props:{type: Synergy, value: number}) {
     return <div>
     <div style={{display:'flex'}}>
-       <img style={{width:'40px', height:'40px', marginRight:'1%'}} src={'assets/types/' + props.type + '.png'}/>
+       <img style={{width:'40px', height:'40px', marginRight:'1%'}} src={'assets/types/' + props.type + '.svg'}/>
        <h3>{SynergyName[props.type].eng}</h3>
    </div>
     
