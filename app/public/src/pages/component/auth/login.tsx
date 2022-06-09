@@ -7,6 +7,7 @@ import 'firebaseui/dist/firebaseui.css'
 import { useAppSelector, useAppDispatch } from '../../../hooks'
 import {logIn, logOut} from '../../../stores/NetworkStore'
 import { FIREBASE_CONFIG } from '../../utils/utils'
+import AnonymousButton from './anonymous-button'
 
 export default function Login(){
   const dispatch = useAppDispatch()
@@ -17,14 +18,19 @@ export default function Login(){
     // Popup signin flow rather than Navigate flow.
     signInFlow: 'popup',
     // We will display Google and Facebook as auth providers.
+    signInSuccessUrl: window.location.href + 'lobby',
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      firebase.auth.FacebookAuthProvider.PROVIDER_ID
+      {
+        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        requireDisplayName: true
+      },      
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.TwitterAuthProvider.PROVIDER_ID
     ],
     callbacks: {
       // Avoid Navigates after sign-in.
-      signInSuccessWithAuthResult: () => false,
+      signInSuccessWithAuthResult: () => true,
     },
   }
 
@@ -45,6 +51,7 @@ export default function Login(){
     return (
     <div id="play-panel">
         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        <AnonymousButton/>
     </div> 
     )
   }

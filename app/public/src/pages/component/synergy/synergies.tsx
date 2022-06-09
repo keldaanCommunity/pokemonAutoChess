@@ -10,7 +10,7 @@ const style: CSS.Properties = {
     display: 'flex',
     justifyContent:'space-between',
     width: '8%',
-    top:'11%',
+    top:'9%',
     flexFlow: 'column',
     maxHeight:'73%',
     overflowY:'scroll',

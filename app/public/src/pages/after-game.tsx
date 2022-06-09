@@ -15,7 +15,6 @@ const buttonStyle = {
 }
 
  const style = {
-    backgroundColor: 'rgba(255, 255, 255, .6)',
     margin:'10px',
     display: 'flex',
     flexFlow: 'column'

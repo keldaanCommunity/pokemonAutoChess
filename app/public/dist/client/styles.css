@@ -379,7 +379,7 @@ transform: translateY(-1px);
   border-color: black !important;
   border-width: 4px !important;
   font-family: brandonGrotesque !important;
-  max-width: 700px !important;
+  max-width: 360px !important;
   cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer !important;
 }
 
@@ -388,7 +388,6 @@ transform: translateY(-1px);
 }
 
 .firebaseui-container{
-  max-width: 20vw !important;
   margin-left: 0px !important;
 }
 
@@ -406,6 +405,10 @@ transform: translateY(-1px);
 
 .firebaseui-idp-facebook{
   box-shadow: inset -6px -6px 0px 0px #293e6b !important;
+}
+
+.firebaseui-idp-twitter{
+  box-shadow: inset -6px -6px 0px 0px #4181b3 !important;
 }
 
 .nes-container{
@@ -511,4 +514,10 @@ color:'#fff' !important;
   border-radius: 12px 12px 0px 0px !important;
   color: #fff !important;
   background-color: rgb(84, 89, 107) !important;
+}
+
+.anonymous{
+  min-height: 40px;
+  background-color: #18f299;
+  box-shadow: inset -6px -6px 0px 0px #0e9b61 !important;
 }

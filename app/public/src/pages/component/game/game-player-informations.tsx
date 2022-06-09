@@ -48,9 +48,9 @@ export default function GamePlayerInformations(){
 
     <GameMoney money={money}/>
     <GameLife life={life}/>
-    <div className='nes-container' style={{backgroundColor:'#54596b', padding:'5px', display:'flex', width:'15%', height:'100%'}}>
+    <div className='nes-container' style={{backgroundColor:'#54596b', padding:'5px', display:'flex', minWidth:'15%', height:'100%'}}>
         <img src={`${CDN_PORTRAIT_URL}${avatar}.png`}/>
-        <p style={{marginLeft:'5px', color:'white'}}>{name}</p>
+        <p style={{marginLeft:'5px', color:'white', textAlign:'center'}}>{name}</p>
     </div>
     {vs}
     {opponent}
