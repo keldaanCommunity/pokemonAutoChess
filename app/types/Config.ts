@@ -65,7 +65,7 @@ export const TypeTrigger: {[key in Synergy]: number[]} = {
   [Synergy.FAIRY]: [2, 4, 6],
   [Synergy.ICE]: [2, 4],
   [Synergy.FOSSIL]: [2, 4, 6],
-  [Synergy.SOUND]: [3, 5, 7]
+  [Synergy.SOUND]: [2, 4, 6]
 }
 
 
