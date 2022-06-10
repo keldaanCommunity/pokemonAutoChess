@@ -32,7 +32,7 @@ export default function SynergyComponent(props:{type: Synergy, isFirst: boolean,
             height:'40px',
             width:'40px'
         }}
-        src={'assets/types/' + props.type + '.svg'}/>
+        src={'assets/types/' + props.type + '.png'}/>
         <h4>{props.value}</h4>
         <div style={{
             display:'flex',

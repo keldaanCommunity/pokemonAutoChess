@@ -8,7 +8,7 @@ export default function WikiTypes(){
     <TabList>
         {(Object.keys(Synergy) as Synergy[]).map((r=>{
             // console.log('synergies', r)
-            return <Tab key={'title-' + r}> <img src={'assets/types/' + r + '.svg'}></img></Tab>
+            return <Tab key={'title-' + r}> <img src={'assets/types/' + r + '.png'}></img></Tab>
         }))}
     </TabList>
 

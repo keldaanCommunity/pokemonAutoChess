@@ -43,7 +43,7 @@ export const ExpTable: {[key: number]: number} = Object.freeze({
 export const TypeTrigger: {[key in Synergy]: number[]} = {
   [Synergy.NORMAL]: [3, 6, 9],
   [Synergy.GRASS]: [3, 5, 7],
-  [Synergy.FIRE]: [2, 4, 6],
+  [Synergy.FIRE]: [2, 4, 6, 8],
   [Synergy.WATER]: [3, 6, 9],
   [Synergy.ELECTRIC]: [2, 4, 6],
   [Synergy.FIGHTING]: [2, 4],

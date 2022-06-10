@@ -54,7 +54,7 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
             backgroundColor:rarityColor
             }}>
             {props.pokemon.types.map(type=>{
-                return <li key={type}><img src={'assets/types/'+ type +'.svg'}/></li>
+                return <li key={type}><img src={'assets/types/'+ type +'.png'}/></li>
             })}
         </ul>
         </div>

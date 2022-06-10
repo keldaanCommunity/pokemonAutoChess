@@ -3,6 +3,7 @@ export enum Effect {
     GROWTH,
     SPORE,
     BLAZE,
+    VICTORY_STAR,
     DROUGHT,
     DESOLATE_LAND,
     DRIZZLE,

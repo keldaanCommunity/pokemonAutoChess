@@ -98,7 +98,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     t.style.display = 'flex'
     types.forEach(type=>{
         const ty = document.createElement('img')
-        ty.src = 'assets/types/' + type + '.svg'
+        ty.src = 'assets/types/' + type + '.png'
         ty.style.width = '34px'
         ty.style.height = '34px'
         t.appendChild(ty)

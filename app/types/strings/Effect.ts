@@ -5,6 +5,7 @@
      [Effect.GROWTH]: 'Growth',
      [Effect.SPORE]: 'Spore',
      [Effect.BLAZE]: 'Blaze',
+     [Effect.VICTORY_STAR]: 'Victory Star',
      [Effect.DROUGHT]: 'Drought',
      [Effect.DESOLATE_LAND]: 'Desolate Land',
      [Effect.DRIZZLE]: 'Drizzle',
@@ -105,17 +106,22 @@
          'fra': '-30% ATK speed pour tous les ennemis'
      },
      [Effect.BLAZE]: {
-         'eng': 'Your Fire pokemon gain +1 Attack after every hit',
+         'eng': 'Your Fire pokemon have 20% chance to burn ennemy on every hit',
          'esp': 'Fire pkm gana un 5% de dano en cada ataque',
          'fra': 'Les pkm feu gagnent 5% d\'ATK à chaque attaque'
      },
+     [Effect.VICTORY_STAR]:{
+        'eng': 'Your Fire pokemon have 20% chance to burn ennemy on every hit and gain +1 Attack after every hit (Sunlight).',
+        'esp': 'Fire pkm gana un 5% de dano en cada ataque',
+        'fra': 'Les pkm feu gagnent 5% d\'ATK à chaque attaque'
+     },
      [Effect.DROUGHT]: {
-         'eng': 'Your Fire pokemon gain +2 Attack after every hit (Sunlight)',
+         'eng': 'Your Fire pokemon have 30% chance to burn ennemy on every hit and gain +2 Attack after every hit (Sunlight).',
          'esp': 'El so se intensifica, los pkm de fuego gana +50% ATK',
          'fra': 'Le soleil s\'intensifie, augmentant l\'ATK des pkm feu de 50%'
      },
      [Effect.DESOLATE_LAND]: {
-         'eng': 'Your Fire pokemon gain +3 Attack after every hit (Sunlight)',
+         'eng': 'Your Fire pokemon have 40% chance to burn ennemy on every hit and gain +3 Attack after every hit (Sunlight).',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },

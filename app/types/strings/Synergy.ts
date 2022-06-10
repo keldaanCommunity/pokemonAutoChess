@@ -107,7 +107,7 @@ export const SynergyName: {[key in Synergy]: {eng: string, esp: string, fra: str
 export const SynergyDetail:{[key in Synergy]: Effect[]} = Object.freeze({
     [Synergy.NORMAL]: [Effect.STAMINA, Effect.STRENGTH, Effect.PURE_POWER],
     [Synergy.GRASS]: [Effect.INGRAIN, Effect.GROWTH, Effect.SPORE],
-    [Synergy.FIRE]: [Effect.BLAZE, Effect.DROUGHT, Effect.DESOLATE_LAND],
+    [Synergy.FIRE]: [Effect.BLAZE, Effect.VICTORY_STAR, Effect.DROUGHT, Effect.DESOLATE_LAND],
     [Synergy.WATER]: [Effect.RAIN_DANCE, Effect.DRIZZLE, Effect.PRIMORDIAL_SEA],
     [Synergy.ELECTRIC]: [Effect.EERIE_IMPULSE, Effect.RISING_VOLTAGE, Effect.OVERDRIVE],
     [Synergy.FIGHTING]: [Effect.REVENGE, Effect.PUNISHMENT],

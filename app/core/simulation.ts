@@ -530,6 +530,12 @@ export default class Simulation extends Schema implements ISimulation{
           }
           break
 
+        case Effect.VICTORY_STAR:
+          if (types.includes(Synergy.FIRE)) {
+            pokemon.effects.push(Effect.VICTORY_STAR)
+          }
+          break
+
         case Effect.DROUGHT:
           if (types.includes(Synergy.FIRE)) {
             pokemon.effects.push(Effect.DROUGHT)
