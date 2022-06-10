@@ -166,17 +166,17 @@
          'fra': '+10 mana / attaque pour tous les pkm'
      },
      [Effect.AMNESIA]: {
-         'eng': 'All your pokemon have +5 Special Defense.',
+         'eng': 'All your pokemon have +4 Special Defense.',
          'esp': 'Ally gana +5 SPEDEF',
          'fra': 'Les alliés gagnent +5 SPEDEF'
      },
      [Effect.LIGHT_SCREEN]: {
-         'eng': 'All your pokemon have +10 Special Defense.',
+         'eng': 'All your pokemon have +8 Special Defense.',
          'esp': 'Ally gana +10 SPEDEF adicionales',
          'fra': 'Les alliés gagnent un additionel +10 SPEDEF'
      },
      [Effect.EERIE_SPELL]: {
-         'eng': 'All your pokemon have +20 Special Defense.',
+         'eng': 'All your pokemon have +16 Special Defense.',
          'esp': 'Ally gana +20 SPEDEF adicionales',
          'fra': 'Les alliés gagnent un additionel +20 SPEDEF'
      },

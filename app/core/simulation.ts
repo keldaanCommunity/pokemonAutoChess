@@ -681,17 +681,17 @@ export default class Simulation extends Schema implements ISimulation{
 
         case Effect.AMNESIA:
           pokemon.effects.push(Effect.AMNESIA)
-          pokemon.speDef += 5
+          pokemon.speDef += 4
           break
 
         case Effect.LIGHT_SCREEN:
           pokemon.effects.push(Effect.LIGHT_SCREEN)
-          pokemon.speDef += 10
+          pokemon.speDef += 8
           break
 
         case Effect.EERIE_SPELL:
           pokemon.effects.push(Effect.EERIE_SPELL)
-          pokemon.speDef += 20
+          pokemon.speDef += 16
           break
 
         case Effect.MEDITATE:
