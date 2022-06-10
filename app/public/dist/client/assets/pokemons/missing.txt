@@ -33,7 +33,6 @@ primal-Kyogre,0382/0001/AnimData.xml
 primal-Kyogre,0382/0001/0001/AnimData.xml
 primal-Groudon,0383/0001/AnimData.xml
 primal-Groudon,0383/0001/0001/AnimData.xml
-deino,0633/0000/0001/AnimData.xml
 zweilous,0634/AnimData.xml
 zweilous,0634/0000/0001/AnimData.xml
 hydreigon,0635/AnimData.xml
@@ -92,7 +91,6 @@ trumbeak,0732/AnimData.xml
 trumbeak,0732/0000/0001/AnimData.xml
 toucannon,0733/AnimData.xml
 toucannon,0733/0000/0001/AnimData.xml
-jangmo-o,0782/0000/0001/AnimData.xml
 hakamo-o,0783/AnimData.xml
 hakamo-o,0783/0000/0001/AnimData.xml
 kommo-o,0784/AnimData.xml

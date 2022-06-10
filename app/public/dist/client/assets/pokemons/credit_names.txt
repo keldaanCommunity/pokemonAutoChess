@@ -30,7 +30,7 @@ DasK	<@!294668186219970562>	http://reddit.com/u/thedask
 	<@!589906152708505648>	
 Deltex12	<@!513590747694497792>	/u/Deltex12
 Fire_Scyther	<@!637407338772299776>	https://www.reddit.com/u/FireScyther
-	<@!496039052370509824>	
+Akai	<@!496039052370509824>	Akai#2823
 	<@!557599571170033664>	
 felis_licht	FELIS_LICHT	https://www.deviantart.com/felis-licht
 C_Pariah	<@!322382592202637322>	
@@ -161,3 +161,6 @@ VGStar	<@!229363481852379136>	VGStar#7739
 3Monika4	<@!270755102178934785>	Monika#7381
 Pepper	<@!304391035209908244>	https://twitter.com/thesaltypepper8
 	VGSTAR	
+	<@!861005464682889266>	
+Keldaan	<@!153547941401853952>	https://github.com/keldaan-ag
+	<@!970782000363474944>	
