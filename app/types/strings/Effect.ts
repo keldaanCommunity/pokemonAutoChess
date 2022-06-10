@@ -351,17 +351,17 @@
          'fra': '?NONE?'
      },
      [Effect.BATTLE_ARMOR]: {
-         'eng': 'Mineral pokemons gains 70 bonus maximum health',
+         'eng': 'Mineral pokemons gains 50 bonus maximum health',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
      [Effect.MOUTAIN_RESISTANCE]: {
-         'eng': 'Mineral pokemons gains 140 bonus maximum health',
+         'eng': 'Mineral pokemons gains 100 bonus maximum health',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
      [Effect.DIAMOND_STORM]: {
-         'eng': 'Mineral pokemons gains 280 bonus maximum health',
+         'eng': 'Mineral pokemons gains 200 bonus maximum health',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
