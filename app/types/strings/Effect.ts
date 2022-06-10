@@ -161,7 +161,7 @@
          'fra': '+5 mana / attaque pour tous les pkm'
      },
      [Effect.PUNISHMENT]: {
-         'eng': '+15 extra Mana per hit.',
+         'eng': '+10 extra Mana per hit.',
          'esp': '+10 maná/ataque para todos los pkm',
          'fra': '+10 mana / attaque pour tous les pkm'
      },
