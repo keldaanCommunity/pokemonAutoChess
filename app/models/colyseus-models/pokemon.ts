@@ -1806,7 +1806,7 @@ export class Glaceon extends Pokemon {
 }
 export class Darkrai extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.DARKRAI, [Synergy.DARK, Synergy.MONSTER, Synergy.GHOST], Rarity.MYTHICAL, '0491', Pkm.DEFAULT, 300, 30, 3, 3, 2, AttackSprite.GHOST_RANGE, AttackType.SPECIAL, 3, 120, Ability.TWISTING_NEITHER,shiny, emotion, true)
+    super(Pkm.DARKRAI, [Synergy.DARK, Synergy.MONSTER, Synergy.GHOST], Rarity.MYTHICAL, '0491', Pkm.DEFAULT, 300, 30, 2, 2, 2, AttackSprite.GHOST_RANGE, AttackType.SPECIAL, 3, 120, Ability.TWISTING_NEITHER,shiny, emotion, true)
   }
 }
 
