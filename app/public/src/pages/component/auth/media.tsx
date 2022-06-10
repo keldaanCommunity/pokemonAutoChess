@@ -11,7 +11,7 @@ export default function Media(){
         <DonateButton/>
         <PolicyButton/>
         <CreditsButton/>
-       <p>V2.0</p>
+       <p>V2.1</p>
     </div>
   )
 }
