@@ -15,17 +15,12 @@ class Record extends Component{
     }
     render(){
         return <div style={{marginBottom:'10px',
-        backgroundColor:'#ffffff',
-        paddingBottom:'10px',
-        paddingLeft:'10px',
-        paddingRight:'10px'
-        }} className='nes-container with-title'>
-            <div className='title'>
-                <p>{this.formatDate(this.props.record.time)}</p>
-            </div>
-            <div style={{display:'flex', justifyContent:'space-between', marginTop:'-30px'}}>
+        padding:'10px'
+        }} className='nes-container'>
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                 <h3>Top {this.props.record.rank}</h3>
-                <div style={{display:'flex',alignItems:'center'}}>Elo: <Elo elo={this.props.record.elo}/></div>
+                <p>{this.formatDate(this.props.record.time)}</p>
+                <div style={{display:'flex',alignItems:'center'}}><Elo elo={this.props.record.elo}/></div>
             </div>
             <div style={{display:'flex', overflowX:'scroll'}}>
                 {this.props.record.pokemons.map(this.createPokemon.bind(this))}
