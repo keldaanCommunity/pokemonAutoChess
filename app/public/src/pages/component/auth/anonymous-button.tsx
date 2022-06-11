@@ -29,7 +29,7 @@ export default function AnonymousButton(){
         <button className='firebaseui-idp-button anonymous' style={{marginBottom:'10px', display:'flex'}}
         onClick={signIn}>
             <img style={{width:'30px'}} src='assets/ui/unown.svg'/>
-            <span style={{color:'#464646'}} className='firebaseui-idp-text'>Join as Guest</span>
+            <span style={{color:'#464646', paddingLeft:'5px'}} className='firebaseui-idp-text'>Join as Guest</span>
         </button>
     </div>
 </div>
