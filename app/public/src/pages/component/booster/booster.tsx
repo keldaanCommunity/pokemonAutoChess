@@ -19,12 +19,12 @@ export default function Booster(props: {toggle :()=>void}){
     const boosterContent = useAppSelector(state=>state.lobby.boosterContent)
     const [flipArray, setFlipArray] = useState<boolean[]>([false, false, false, false, false])
     return <div>
-        <button style={buttonStyle} onClick={()=>{props.toggle()}} className='nes-btn is-primary'>Lobby</button>
-        <div className='nes-container' style={{margin:'10px', backgroundColor:'rgba(255,255,255,0.7)', display:'flex', justifyContent:'center', flexFlow:'column', alignItems:'center', height:'90vh'}}>
+        <button style={buttonStyle} onClick={()=>{props.toggle()}} className='bubbly-primary'>Lobby</button>
+        <div className='nes-container' style={{margin:'10px', display:'flex', justifyContent:'center', flexFlow:'column', alignItems:'center', height:'90vh'}}>
             <div style={{display:'flex', justifyContent:'space-around', alignItems:'center', width:'30%'}}>
                 <h1>{numberOfBooster}</h1>
                 <i className="nes-pokeball"></i>
-                <button onClick={()=>{setFlipArray([false,false,false,false,false]);dispatch(openBooster())}} className={numberOfBooster > 0 ? 'nes-btn is-primary': 'nes-btn is-disabled'}>Open Booster !</button>
+                <button onClick={()=>{setFlipArray([false,false,false,false,false]);dispatch(openBooster())}} className={numberOfBooster > 0 ? 'bubbly-primary': 'bubbly-success is-disabled'}>Open Booster !</button>
             </div>
         <div style={{display:'flex', justifyContent:'space-evenly', width:'100%', flexGrow:'8', alignItems: 'center'}}>
             {boosterContent.map((i,index)=>{

@@ -16,10 +16,10 @@ const style: CSS.Properties = {
     display:'flex',
     flexFlow:'column',
     justifyContent:'space-between',
-    backgroundColor: 'rgba(255,255,255,0.7)',
     padding:'10px',
     overflowY:'scroll',
-    maxHeight:'78%'
+    maxHeight:'78%',
+    color:'#fff'
 }
 const imgStyle: CSS.Properties = {
     width:'60px',

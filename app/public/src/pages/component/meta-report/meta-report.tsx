@@ -34,8 +34,8 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
         sortedMetaItems = metaItems.sort((a,b)=>{return a[itemRankingBy] - b[itemRankingBy]})
     }
     return <div>
-        <button className='nes-btn is-success' style={buttonStyle} onClick={props.toggleMeta}>Lobby</button>
-        <div className='nes-container' style={{backgroundColor:'rgba(255,255,255,0.7)', margin:'10px', height: '90vh'}}>
+        <button className='bubbly-success is-success' style={buttonStyle} onClick={props.toggleMeta}>Lobby</button>
+        <div className='nes-container' style={{margin:'10px', height: '90vh'}}>
             <Tabs>
                 <TabList>
                     <Tab key='team-comps'><p>Meta Report</p></Tab>
@@ -47,7 +47,7 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
                 <TabPanel key='team-comps-panel'>
                     <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', paddingRight:'27px', paddingLeft:'15px'}}>
                         <h3>Best Team Compositions</h3>
-                        <div style={{display:'flex', width:'23%',alignItems:'center'}} className='nes-select'>
+                        <div style={{display:'flex', width:'23%',alignItems:'center'}} className='my-select'>
                             <p style={{marginRight:'20px'}}>Rank</p>
                             <select value={rankingBy} onChange={(e)=>{setRanking(e.target.value)}}>
                                 <option value="count">by popularity</option>
@@ -66,7 +66,7 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
                 <TabPanel>
                 <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', paddingRight:'27px', paddingLeft:'15px'}}>
                     <h3>Best Items</h3>
-                    <div style={{display:'flex', width:'23%',alignItems:'center'}} className='nes-select'>
+                    <div style={{display:'flex', width:'23%',alignItems:'center'}} className='my-select'>
                         <p style={{marginRight:'20px'}}>Rank</p>
                         <select value={itemRankingBy} onChange={(e)=>{setItemRanking(e.target.value)}}>
                             <option value="count">by popularity</option>

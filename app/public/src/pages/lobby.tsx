@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import Chat from './component/chat/chat'
 import CurrentUsers from './component/available-user-menu/current-users'
@@ -35,6 +35,7 @@ export default function Lobby(){
     const meta: IMeta[] = useAppSelector(state=>state.lobby.meta)
     const metaItems: IItemsStatistic[] = useAppSelector(state=>state.lobby.metaItems)
     const botList: {name: string, avatar: string}[] = useAppSelector(state=>state.lobby.botList)
+    const audio = useRef(new Audio('assets/sounds/notification.mp3'))
     
     const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
     const [showWiki, toggleWiki] = useState<boolean>(false)
@@ -44,7 +45,7 @@ export default function Lobby(){
     const [showBooster, toggleBooster] = useState<boolean>(false)
     const [toPreparation, setToPreparation] = useState<boolean>(false)
     
-    const lobbyStyle = {display:'flex',justifyContent:'space-between'}
+    const lobbyStyle = {display:'flex',justifyContent:'space-between', marginTop:'-10px'}
     const buttonStyle= {marginLeft:'10px',marginTop:'10px',marginRight:'10px'}
     
 
@@ -63,6 +64,7 @@ export default function Lobby(){
     
                     room.state.users.onAdd = (u) => {
                         dispatch(addUser(u))
+
                         if(u.id == user.uid){
                             u.pokemonCollection.onAdd = (pokemonConfig, key) => {
                                 const p = pokemonConfig as PokemonConfig
@@ -75,6 +77,9 @@ export default function Lobby(){
                             }
                             dispatch(setUser(u))
                             setSearchedUser(u)
+                        }
+                        else{
+                            audio.current?.play()
                         }
                         u.onChange = (changes) => {
                             changes.forEach(change=>{
@@ -119,7 +124,7 @@ export default function Lobby(){
             join()
             setLobbyJoined(true)
         }
-    })
+    }, [lobbyJoined, dispatch, client, audio])
 
     if(!uid){
         return <div>
@@ -148,26 +153,26 @@ export default function Lobby(){
       else{
         return (
             <div className='App'>
-                <div style={{display:'flex'}}>
-                    <Link to='/auth'>
-                            <button className='nes-btn is-error' style={buttonStyle} onClick={()=>{firebase.auth().signOut(); dispatch(leaveLobby()); dispatch(logOut())}}>Sign Out</button>
+                <div style={{display:'flex', justifyContent:'space-between'}}>
+                    <Link to='/'>
+                            <button className='bubbly-error' style={buttonStyle} onClick={()=>{firebase.auth().signOut(); dispatch(leaveLobby()); dispatch(logOut())}}>Sign Out</button>
                     </Link>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{toggleCollection(!showCollection)}}>Collection</button>
-                    <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{toggleBooster(!showBooster)}}>Booster</button>
-                    <DiscordButton/>
-                    <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{toggleWiki(!showWiki)}}>Wiki</button>
-                    <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{
+                    <button className='bubbly-primary' style={buttonStyle} onClick={()=>{toggleCollection(!showCollection)}}>Collection</button>
+                    <button className='bubbly-primary' style={buttonStyle} onClick={()=>{toggleBooster(!showBooster)}}>Booster</button>
+                    <button className='bubbly-success is-success' style={buttonStyle} onClick={()=>{toggleWiki(!showWiki)}}>Wiki</button>
+                    <button className='bubbly-success is-success' style={buttonStyle} onClick={()=>{
                         if(botList.length == 0) {
                             dispatch(requestBotList())
                         }
                         toggleBuilder(!showBuilder)
                         }}>BOT Builder</button>
-                    <button className='nes-btn is-success' style={buttonStyle} onClick={()=>{
+                    <button className='bubbly-success is-success' style={buttonStyle} onClick={()=>{
                         if(meta.length == 0 || metaItems.length == 0){
                             dispatch(requestMeta())
                         }
                         toggleMeta(!showMeta)
-                        }}>Meta Report</button>
+                        }}>Meta</button>
+                    <DiscordButton/>
                     <DonateButton/>
                     <PolicyButton/>
                     <CreditsButton/>

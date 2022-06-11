@@ -5,18 +5,7 @@ import { useAppDispatch } from '../../../hooks'
 import { shopClick } from '../../../stores/NetworkStore'
 import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata'
 import { Emotion } from '../../../../../types'
-import { Rarity } from '../../../../../types/enum/Game'
-import {PkmCost} from '../../../../../types/Config'
-
-const COLOR_TYPE = Object.freeze({
-    [Rarity.COMMON] : 'rgba(104, 109, 125, 0.6)',
-    [Rarity.UNCOMMON] : 'rgba(71, 138, 65, 0.6)',
-    [Rarity.RARE] : 'rgba(80, 98, 171, 0.6)',
-    [Rarity.EPIC] : 'rgba(123, 70, 156,0.6)',
-    [Rarity.LEGENDARY] : 'rgba(166, 128, 46, 0.6)',
-    [Rarity.MYTHICAL] : 'rgba(255, 222, 255, 0.6)',
-    [Rarity.SUMMON] : 'rgba(153, 31, 31, 0.6)'
-  })
+import {PkmCost, RarityColor} from '../../../../../types/Config'
 
 export default function GamePokemonPortrait(props: {index: number, pokemon: Pokemon | undefined, pokemonConfig: IPokemonConfig | undefined}) {
     const dispatch = useAppDispatch()
@@ -24,40 +13,45 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
     if(!props.pokemon){
         return <div style={{
             width:'15.5%',
-            marginRight:'1%'
+            marginRight:'1%',
+            padding:'0px'
         }}/>
     }
     else{
-        const rarityColor = COLOR_TYPE[props.pokemon.rarity]
+        const rarityColor = RarityColor[props.pokemon.rarity]
         return <div className="nes-container" style={{
+            imageRendering:'pixelated',
             width:'15.5%',
             backgroundColor: rarityColor,
+            backgroundImage:`url("${getPath(props.pokemon, props.pokemonConfig)}")`,
             marginRight:'1%',
+            padding:'0px',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'contain',
             cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer'
         }}
         onClick={()=>{dispatch(shopClick(props.index))}}>
-        <p style={{
-            position:'absolute',
-            bottom:'-10%',
-            left:'1%',
-            }}>{capitalizeFirstLetter(props.pokemon.name)}</p>
-        <img style={{
-            position:'absolute',
-            left:'0%',
-            top:'0%',
-            width:'30%',
-            imageRendering: 'crisp-edges'
-            }} src={getPath(props.pokemon, props.pokemonConfig)} />
-        <div style={{position:'absolute', right:'5%', top:'5%'}}>
-            {PkmCost[props.pokemon.rarity]}<img style={{width:'20px', marginBottom:'5px'}} src="/assets/ui/money.png"/>
+
+        <div style={{position:'absolute', left:'5px', bottom:'5px', display:'flex', alignItems:'center'}}>
+            <p style={{fontSize:'1.2vw',
+             textShadow:`
+               -1px -1px 0 #fff,  
+               1px -1px 0 #fff,
+               -1px 1px 0 #fff,
+                1px 1px 0 #fff`,
+             margin:'0px'}}>{PkmCost[props.pokemon.rarity]}</p>
+            <img style={{width:'20px', height:'20px'}} src="/assets/ui/money.png"/>
         </div>
         <ul style={{
             listStyleType:'none',
             padding:'0px',
-            position:'absolute',
             display:'flex',
-            left:'35%',
-            top:'30%'
+            position: 'absolute',
+            justifyContent:'center',
+            right: '0px',
+            flexFlow: 'column',
+            top: '0px',
+            backgroundColor:rarityColor
             }}>
             {props.pokemon.types.map(type=>{
                 return <li key={type}><img src={'assets/types/'+ type +'.png'}/></li>

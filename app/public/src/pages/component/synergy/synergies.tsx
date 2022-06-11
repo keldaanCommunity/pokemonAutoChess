@@ -9,13 +9,14 @@ const style: CSS.Properties = {
     left: '0.5%',
     display: 'flex',
     justifyContent:'space-between',
-    width: '13%',
-    top:'11%',
+    width: '8%',
+    top:'9%',
     flexFlow: 'column',
     maxHeight:'73%',
     overflowY:'scroll',
     padding:'0px',
-    backgroundColor:'rgba(255,255,255,0.6)' 
+    color:'#fff',
+    backgroundColor:'#61738a' 
 }
 
 export default function Synergies(props:{synergies: [string, number][]}) {
@@ -23,7 +24,7 @@ export default function Synergies(props:{synergies: [string, number][]}) {
     if(props.synergies && props.synergies.length > 0){
 
         return <div style={style} className='nes-container hidden-scrollable'>
-            <h5 style={{padding:'10px', textAlign: 'center'}}>Synergies</h5>
+            <h5 style={{padding:'10px', textAlign: 'center', fontSize:'1.3vw'}}>Synergies</h5>
         {Object.keys(Synergy).sort((a,b)=>{
                 const fa = props.synergies.find(e=>e[0] == a)
                 const fb = props.synergies.find(e=>e[0] == b)

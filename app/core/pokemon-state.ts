@@ -166,21 +166,26 @@ export default class PokemonState {
             attacker.handleHeal(Math.floor(0.5 * residualDamage), attacker)
           }
 
-          /*
+          
           if (attacker.effects.includes(Effect.BLAZE) || attacker.effects.includes(Effect.DROUGHT) || attacker.effects.includes(Effect.DESOLATE_LAND)) {
-            let burnChance = 0;
+            let burnChance = 0
             if (attacker.effects.includes(Effect.BLAZE)) {
-              burnChance = 0.1;
-            } else if (attacker.effects.includes(Effect.DROUGHT)) {
-              burnChance = 0.2;
-            } else if (attacker.effects.includes(Effect.DESOLATE_LAND)) {
-              burnChance = 0.3;
+              burnChance = 0.2
+            }
+            if (attacker.effects.includes(Effect.VICTORY_STAR)) {
+              burnChance = 0.2
+            }
+            else if (attacker.effects.includes(Effect.DROUGHT)) {
+              burnChance = 0.3
+            } 
+            else if (attacker.effects.includes(Effect.DESOLATE_LAND)) {
+              burnChance = 0.4
             }
             if (Math.random() < burnChance) {
-              pokemon.status.triggerBurn(2000, pokemon, attacker);
+              pokemon.status.triggerBurn(2000, pokemon, attacker)
             }
           }
-          */
+          
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
@@ -400,7 +405,7 @@ export default class PokemonState {
         this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.10), board, AttackType.TRUE, pokemon.status.poisonOrigin)
       }
 
-      if (pokemon.effects.includes(Effect.BLAZE)) {
+      if(pokemon.effects.includes(Effect.VICTORY_STAR)){
         pokemon.atk += 1
       }
 

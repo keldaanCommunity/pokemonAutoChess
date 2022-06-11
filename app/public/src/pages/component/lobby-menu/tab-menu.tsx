@@ -14,15 +14,23 @@ export default function TabMenu() {
     const tabIndex: number = useAppSelector(state=>state.lobby.tabIndex)
 
     const cursorStyle = {
-        cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer'
+        cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer',
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        borderTopLeftRadius: '12px',
+        borderTopRightRadius: '12px',
+        outline:'none',
+        color:'white',
+        fontSize:'1.5vw'
     }
 
     const tabStyle = {
-        backgroundColor: 'rgba(255, 255, 255, .6)',
+        background:'url("assets/ui/back2.png")',
         margin:'10px',
         flexBasis:'30%',
         height:'90vh',
-        overflowY:'scroll'
+        overflowY:'scroll',
+        backgroundSize: 'cover',
+        color:'white'
     }
 
     return (

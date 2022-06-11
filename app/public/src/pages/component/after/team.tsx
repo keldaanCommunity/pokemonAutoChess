@@ -3,7 +3,6 @@ import { CDN_PORTRAIT_URL } from '../../../../../types'
 
 const ulStyle = {
     listStyle: 'none',
-    padding: '0px',
     display: 'flex'
 }
 

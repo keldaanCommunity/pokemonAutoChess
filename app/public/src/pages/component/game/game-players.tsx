@@ -20,7 +20,6 @@ export default function GamePlayers(props: {click: (id: string)=>void}) {
         return <GamePlayer 
         key={p.id} 
         player={p}
-        color={uid == p.id ? 'rgba(247, 213, 29, 0.7)':'rgba(255, 255, 255, 0.7)'}
         click={(id: string)=>props.click(id)}
         index={i}
         />

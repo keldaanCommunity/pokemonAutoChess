@@ -323,10 +323,10 @@ export default class Simulation extends Schema implements ISimulation{
       }
       let shieldBonus = 0
       if (pokemon.effects.includes(Effect.STAMINA)) {
-        shieldBonus = 25
+        shieldBonus = 20
       }
       if (pokemon.effects.includes(Effect.STRENGTH)) {
-        shieldBonus += 50
+        shieldBonus += 40
       }
       if (pokemon.effects.includes(Effect.PURE_POWER)) {
         shieldBonus += 80
@@ -530,6 +530,12 @@ export default class Simulation extends Schema implements ISimulation{
           }
           break
 
+        case Effect.VICTORY_STAR:
+          if (types.includes(Synergy.FIRE)) {
+            pokemon.effects.push(Effect.VICTORY_STAR)
+          }
+          break
+
         case Effect.DROUGHT:
           if (types.includes(Synergy.FIRE)) {
             pokemon.effects.push(Effect.DROUGHT)
@@ -675,17 +681,17 @@ export default class Simulation extends Schema implements ISimulation{
 
         case Effect.AMNESIA:
           pokemon.effects.push(Effect.AMNESIA)
-          pokemon.speDef += 5
+          pokemon.speDef += 4
           break
 
         case Effect.LIGHT_SCREEN:
           pokemon.effects.push(Effect.LIGHT_SCREEN)
-          pokemon.speDef += 10
+          pokemon.speDef += 8
           break
 
         case Effect.EERIE_SPELL:
           pokemon.effects.push(Effect.EERIE_SPELL)
-          pokemon.speDef += 20
+          pokemon.speDef += 16
           break
 
         case Effect.MEDITATE:
@@ -766,21 +772,21 @@ export default class Simulation extends Schema implements ISimulation{
 
         case Effect.BATTLE_ARMOR:
           if (types.includes(Synergy.MINERAL)) {
-            pokemon.handleShield(60, pokemon)
+            pokemon.handleShield(50, pokemon)
             pokemon.effects.push(Effect.BATTLE_ARMOR)
           }
           break
 
         case Effect.MOUTAIN_RESISTANCE:
           if (types.includes(Synergy.MINERAL)) {
-            pokemon.handleShield(130, pokemon)
+            pokemon.handleShield(100, pokemon)
             pokemon.effects.push(Effect.MOUTAIN_RESISTANCE)
           }
           break
 
         case Effect.DIAMOND_STORM:
           if (types.includes(Synergy.MINERAL)) {
-            pokemon.handleShield(240, pokemon)
+            pokemon.handleShield(200, pokemon)
             pokemon.effects.push(Effect.DIAMOND_STORM)
           }
           break

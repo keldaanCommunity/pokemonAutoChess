@@ -33,7 +33,6 @@ export default function PokemonEmotion(props:{index: string, shiny: boolean, unl
         <ReactTooltip id={`${props.path}-${props.emotion}`}
             textColor='#000000'
             className='customeTheme'
-            backgroundColor='rgba(255,255,255,1)' 
             effect='solid'>
             <div style={{display:'flex', alignItems: 'center'}}>
                 <img style={{width:'80px', height:'80px', imageRendering:'pixelated'}} src={`${CDN_PORTRAIT_URL}${props.path}/${props.emotion}.png`}></img>

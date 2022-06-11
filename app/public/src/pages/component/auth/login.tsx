@@ -7,6 +7,7 @@ import 'firebaseui/dist/firebaseui.css'
 import { useAppSelector, useAppDispatch } from '../../../hooks'
 import {logIn, logOut} from '../../../stores/NetworkStore'
 import { FIREBASE_CONFIG } from '../../utils/utils'
+import AnonymousButton from './anonymous-button'
 
 export default function Login(){
   const dispatch = useAppDispatch()
@@ -17,14 +18,19 @@ export default function Login(){
     // Popup signin flow rather than Navigate flow.
     signInFlow: 'popup',
     // We will display Google and Facebook as auth providers.
+    signInSuccessUrl: window.location.href + 'lobby',
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      firebase.auth.FacebookAuthProvider.PROVIDER_ID
+      {
+        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        requireDisplayName: true
+      },      
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.TwitterAuthProvider.PROVIDER_ID
     ],
     callbacks: {
       // Avoid Navigates after sign-in.
-      signInSuccessWithAuthResult: () => false,
+      signInSuccessWithAuthResult: () => true,
     },
   }
 
@@ -43,45 +49,28 @@ export default function Login(){
 
   if (!uid) {
     return (
-    <div id="play-panel" className="nes-container with-title is-centered" style={{
-        backgroundColor: 'rgba(255, 255, 255, .6)',
-        width:'400px',
-        height:'250px',
-        position:'absolute',
-        top:'50%',
-        left:'50%',
-        marginLeft:'-200px',
-        marginTop:'-125px'
-        }}>
-        <p className="title">Authentification</p>
+    <div id="play-panel">
         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        <AnonymousButton/>
     </div> 
     )
   }
   else{
       return(
-      <div id="play-panel" className="nes-container with-title is-centered" style={{
-          backgroundColor: 'rgba(255, 255, 255, .6)',
-          position:'absolute',
-          top:'50%',
-          left:'50%',
-          width:'700px',
-          height:'170px',
-          marginTop:'-85px',
-          marginLeft:'-350px'
-          }}>
-          <p className="title">Authentification</p>
-          <p>Welcome {displayName}! You are now signed-in!</p>
+      <div id="play-panel">
+          <p style={{fontSize:'4vw', textShadow: '2px 4px 3px rgba(0,0,0,0.3)', color:'white'}}>Welcome {displayName}</p>
           <div style={{
               display:'flex',
-              justifyContent:'space-evenly'
+              justifyContent:'space-around',
+              flexFlow:'column',
+              alignItems:'start'
           }}>
-          <Link to={'/lobby'}>
-              <button className="nes-btn is-success">
+          <Link to={'/lobby'} style={{textDecoration:'none'}}>
+              <button className="bubbly-success is-success" style={{width: '11vw'}}>
                   Join Lobby
               </button>
           </Link>
-          <button className="nes-btn is-error" onClick={() => {firebase.auth().signOut(); dispatch(logOut())}}>Sign-out</button>
+          <button className="bubbly-error" style={{width: '11vw'}} onClick={() => {firebase.auth().signOut(); dispatch(logOut())}}>Sign-out</button>
           </div>
       </div>
       )

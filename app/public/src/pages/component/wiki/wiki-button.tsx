@@ -7,5 +7,5 @@ const buttonStyle= {
 }
 
 export default function WikiButton(props:{toggleWiki: ()=>void}){
-    return <button type="button" style={buttonStyle} className="nes-btn is-success" onClick={props.toggleWiki}>Lobby</button>
+    return <button type="button" style={buttonStyle} className="bubbly-success is-success" onClick={props.toggleWiki}>Lobby</button>
 }

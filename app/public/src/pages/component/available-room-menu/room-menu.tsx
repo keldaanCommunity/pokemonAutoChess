@@ -56,22 +56,23 @@ export default function RoomMenu(props: { toPreparation: boolean; setToPreparati
    }
 
     return <div className="nes-container" style={{
-        backgroundColor: 'rgba(255, 255, 255, .6)',
          margin:'10px',
          display: 'flex',
          flexFlow: 'column',
-         flexBasis: '30%',
-         height: '90vh'
+         flexBasis: '25%',
+         height: '90vh',
+         background:'url("assets/ui/back1.png")',
+         backgroundSize: 'cover'
          }}>
         
-        <h4 style={{textAlign:'center'}}>Available Rooms</h4>
-        <p style={{textAlign:'center'}}>Click Create Room to play!</p>
+        <h1 className='my-h1'>Available Rooms</h1>
+        <p style={{textAlign:'center', color:'white', fontSize:'1.5vw'}}>Click Create Room to play!</p>
          <ul style={ulStyle} className="hidden-scrollable">
              {allRooms.map(r=>
                 <li key={r.roomId}>
                 <RoomItem room={r} click={join}/>
             </li>)}
          </ul>
-         <button style={{position:'absolute', bottom:'20px', left:'8%', width:'80%'}} onClick={create} className='nes-btn is-success'>Create Room</button>
+         <button style={{position:'absolute', bottom:'20px', left:'8%', width:'80%'}} onClick={create} className='bubbly-success is-success'>Create Room</button>
     </div>
 }

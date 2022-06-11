@@ -6,14 +6,11 @@ import PokemonFactory from '../../../../../models/pokemon-factory'
 import { Pkm } from '../../../../../types/enum/Pokemon'
 
 const style: CSS.Properties = {
-    position: 'absolute',
-    left: '19%',
     display: 'flex',
-    width: '65%',
-    height:'90%',
-    top:'4%',
     listStyleType: 'none',
-    padding: '0px'
+    padding: '0px',
+    margin:'5px',
+    width:'50vw'
 }
 
 export default function GameStore() {

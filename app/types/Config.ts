@@ -43,7 +43,7 @@ export const ExpTable: {[key: number]: number} = Object.freeze({
 export const TypeTrigger: {[key in Synergy]: number[]} = {
   [Synergy.NORMAL]: [3, 6, 9],
   [Synergy.GRASS]: [3, 5, 7],
-  [Synergy.FIRE]: [2, 4, 6],
+  [Synergy.FIRE]: [2, 4, 6, 8],
   [Synergy.WATER]: [3, 6, 9],
   [Synergy.ELECTRIC]: [2, 4, 6],
   [Synergy.FIGHTING]: [2, 4],
@@ -65,19 +65,19 @@ export const TypeTrigger: {[key in Synergy]: number[]} = {
   [Synergy.FAIRY]: [2, 4, 6],
   [Synergy.ICE]: [2, 4],
   [Synergy.FOSSIL]: [2, 4, 6],
-  [Synergy.SOUND]: [3, 5, 7]
+  [Synergy.SOUND]: [2, 4, 6]
 }
 
 
 export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
 
 export const RarityColor: {[key in Rarity]: string} = {
-  [Rarity.COMMON]: '#686d7d',
+  [Rarity.COMMON]: '#9f9f9f',
   [Rarity.NEUTRAL]: '#686d7d',
-  [Rarity.UNCOMMON]: '#478a41',
-  [Rarity.RARE]: '#5062ab',
-  [Rarity.EPIC]: '#7b469c',
-  [Rarity.LEGENDARY]: '#a6802e',
+  [Rarity.UNCOMMON]: '#3bc95e',
+  [Rarity.RARE]: '#41bfcc',
+  [Rarity.EPIC]: '#ca6cee',
+  [Rarity.LEGENDARY]: '#e6cb49',
   [Rarity.MYTHICAL]: '#ffc0cb',
   [Rarity.SUMMON]: '#991f1f'
 }

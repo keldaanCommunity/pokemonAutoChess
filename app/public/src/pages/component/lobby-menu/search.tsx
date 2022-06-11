@@ -13,8 +13,8 @@ export default function Search() {
     if(user){
         return <div>
         <div className="nes-field is-inline">
-            <input type="text" id="inline_field" className="nes-input" placeholder="Player Name..." onChange={(e)=>{setCurrentText(e.target.value)}}/>
-            <button className="nes-btn is-primary" onClick={()=>dispatch(searchName(currentText))}>Search</button>
+            <input type="text" id="inline_field" className="my-input" placeholder="Player Name..." onChange={(e)=>{setCurrentText(e.target.value)}}/>
+            <button className="bubbly-primary" onClick={()=>dispatch(searchName(currentText))}>Search</button>
         </div>
 
         <div style={{display:'flex', alignItems: 'center', marginTop: '30px'}}>
@@ -32,8 +32,8 @@ export default function Search() {
     else{
         return <div>
             <div className="nes-field is-inline">
-                <input type="text" id="inline_field" className="nes-input" placeholder="Player Name..." onChange={(e)=>{setCurrentText(e.target.value)}}/>
-                <button className="nes-btn is-primary" onClick={()=>dispatch(searchName(currentText))}>Search</button>
+                <input type="text" id="inline_field" className="my-input" placeholder="Player Name..." onChange={(e)=>{setCurrentText(e.target.value)}}/>
+                <button className="bubbly-primary" onClick={()=>dispatch(searchName(currentText))}>Search</button>
             </div>
 
             <h5>No player found</h5>

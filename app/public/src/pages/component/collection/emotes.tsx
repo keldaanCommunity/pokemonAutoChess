@@ -7,7 +7,7 @@ export default function Emotes(){
     const [collectionVisible, setCollectionVisible] = useState<boolean>(false)
     return <div style={{position:'absolute', right:'9.5%', bottom:'16%', borderColor: 'black'}}>
         <EmoteCollection visible={collectionVisible}/>
-        <button className='nes-btn' style={{height:'30px', padding:'0px'}} onClick={()=>{setCollectionVisible(!collectionVisible)}}>{':)'}</button>
+        <button className='bubbly-success' style={{height:'30px', padding:'0px'}} onClick={()=>{setCollectionVisible(!collectionVisible)}}>{':)'}</button>
     </div>
 }
 
@@ -21,7 +21,7 @@ export function EmoteCollection(props: {visible: boolean}){
             co.shinyEmotions.forEach(e=>c.push( {id:k, emotion:e, shiny:false} ))
         }
     })
-    return <div className='nes-container' style={{display: props.visible ? 'inherit' : 'none', position:'absolute', right:'0%', bottom:'120%', padding: '10px', backgroundColor:'rgba(255,255,255,0.7)', width:'600px'}}>
+    return <div className='nes-container' style={{display: props.visible ? 'inherit' : 'none', position:'absolute', right:'0%', bottom:'120%', padding: '10px', width:'600px'}}>
             <p style={{textAlign:'center'}}>Emotes</p>
             <div style={{display:'flex', flexWrap:'wrap'}}>
                 {c.map(conf=><Emote key={`${conf.id}-${conf.emotion}-${conf.shiny}`} id={conf.id} emotion={conf.emotion} shiny={conf.shiny}/>)}

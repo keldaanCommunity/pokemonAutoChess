@@ -91,7 +91,7 @@ export default class AttackingState extends PokemonState {
         pokemon.setMana(pokemon.mana + 5)
       }
       if (pokemon.effects.includes(Effect.PUNISHMENT)) {
-        pokemon.setMana(pokemon.mana + 15)
+        pokemon.setMana(pokemon.mana + 10)
       }
       pokemon.orientation = board.orientation(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
 

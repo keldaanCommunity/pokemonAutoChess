@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Chat from './component/chat/chat'
 import PreparationMenu from './component/preparation/preparation-menu'
 import { Link, Navigate } from 'react-router-dom'
@@ -14,7 +14,8 @@ import {Transfer} from '../../../types'
 
 const preparationStyle = {
     display:'flex',
-    justifyContent:'space-between'
+    justifyContent:'space-between',
+    marginTop:'-10px'
 }
 
 const buttonStyle= {
@@ -28,6 +29,7 @@ export default function Preparation() {
     const room : Room<PreparationState>|undefined = useAppSelector(state=>state.network.preparation)
     const [initialized, setInitialized] = useState<boolean>(false)
     const [toGame, setToGame] = useState<boolean>(false)
+    const audio = useRef(new Audio('assets/sounds/notification.mp3'))
 
     useEffect(()=>{
         const reconnect = async () => {
@@ -77,6 +79,11 @@ export default function Preparation() {
             r.state.users.onAdd = (u) => {
                 dispatch(addUser(u))
 
+                if(!u.isBot){
+                    console.log('audio')
+                    audio.current?.play()
+                }
+
                 u.onChange = (changes) => {
                     changes.forEach(change=>{
                         dispatch(changeUser({id: u.id, field: change.field, value: change.value}))
@@ -112,7 +119,7 @@ export default function Preparation() {
     else{
         return (<div className="App">
         <Link to='/lobby'>
-            <button className='nes-btn is-primary' style={buttonStyle} onClick={async ()=>{
+            <button className='bubbly-primary' style={buttonStyle} onClick={async ()=>{
                 dispatch(leavePreparation())
                 room?.connection.close()
                 }}>Lobby</button>

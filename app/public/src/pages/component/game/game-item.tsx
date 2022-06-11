@@ -5,7 +5,6 @@ import { useAppDispatch } from '../../../hooks'
 import { itemClick } from '../../../stores/NetworkStore'
 
 const style: CSS.Properties={
-    backgroundColor:'rgba(255,255,255,0.7)',
     width:'30%',
     display:'flex',
     flexFlow:'column',
@@ -20,6 +19,6 @@ export default function GameItem(props:{item: string}){
     <img style={{width:'96px',height:'96px',imageRendering:'pixelated'}} src={'assets/item/' + props.item + '.png'}></img>
     <h3>{ItemName[props.item]}</h3>
     <p>{ItemDescription[props.item]}</p>
-    <button onClick={()=>{dispatch(itemClick(props.item))}} type="button" className="nes-btn is-primary">Pick</button>
+    <button onClick={()=>{dispatch(itemClick(props.item))}} type="button" className="bubbly-primary">Pick</button>
 </div>
 }

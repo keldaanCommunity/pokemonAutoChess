@@ -20,7 +20,6 @@ import { Emotion, ModalMode, ReadWriteMode } from '../../../../../types'
 import {PkmIndex} from '../../../../../types/enum/Pokemon'
 
 const buttonsStyle: CSS.Properties = {
-  top:'10px',
   left:'10px',
   position:'absolute',
   display:'flex'
@@ -263,32 +262,30 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
 
   return <div>
   <div style={buttonsStyle}>
-    <button style={buttonStyle} onClick={()=>{props.toggleBuilder()}} className='nes-btn is-primary'>Lobby</button>
+    <button style={buttonStyle} onClick={()=>{props.toggleBuilder()}} className='bubbly-primary'>Lobby</button>
     <button 
       style={buttonStyle}
       onClick={()=>{setModalMode(ModalMode.IMPORT); setModalBoolean(true)}}
-      className='nes-btn is-warning'
+      className='bubbly-warning'
     >
       Import/Load
     </button>
     <button style={buttonStyle}
      onClick={()=>{setModalMode(ModalMode.EXPORT); setModalBoolean(true)}}
-     className='nes-btn is-warning'
+     className='bubbly-warning'
       >
       Export
     </button>
     <button 
     style={buttonStyle} 
     onClick={()=>setMode(mode == ReadWriteMode.WRITE ? ReadWriteMode.ERASE: ReadWriteMode.WRITE)} 
-    className='nes-btn'
+    className='bubbly-success'
     data-tip
     data-for={'mode'}
     >
       {mode} Mode
       <ReactTooltip id={'mode'} 
-        className='customeTheme' 
-        textColor='#000000' 
-        backgroundColor='rgba(255,255,255,1)' 
+        className='customeTheme'
         effect='solid'
         place='bottom'>
         <p>Click to change the current edition mode.</p><p> The WRITE mode allow you to place pokemons and items on the board.</p><p> The ERASE mode allow you to erase pokemons from the board.</p>
@@ -297,14 +294,12 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
     <button 
     style={buttonStyle}
     onClick={()=>{setCopyStep(JSON.parse(JSON.stringify(bot.steps[step])))}} 
-    className='nes-btn'
+    className='bubbly-success'
     data-tip
     data-for={'copy'}
     >
       <ReactTooltip id={'copy'} 
-        className='customeTheme' 
-        textColor='#000000' 
-        backgroundColor='rgba(255,255,255,1)' 
+        className='customeTheme'
         effect='solid'
         place='bottom'>
         <p>Click to copy the current step.</p><p> You can then paste this step later elsewhere.</p>
@@ -317,14 +312,12 @@ export default function TeamBuilder(props: {toggleBuilder: ()=>void}) {
         setBot(produce(draft=>{draft.steps[step] = copyStep}))
        }
      }} 
-     className='nes-btn'
+     className='bubbly-success'
      data-tip
      data-for={'paste'}
      >
       <ReactTooltip id={'paste'} 
-        className='customeTheme' 
-        textColor='#000000' 
-        backgroundColor='rgba(255,255,255,1)' 
+        className='customeTheme'
         effect='solid'
         place='bottom'>
         <p>Click to paste the copied step on your current step.</p><p> It will replace the board of the current step with the one you copied.</p>

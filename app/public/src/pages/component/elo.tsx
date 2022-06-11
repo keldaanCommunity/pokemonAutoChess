@@ -5,7 +5,8 @@ import CSS from 'csstype'
 const style: CSS.Properties = {
     display:'flex',
     alignItems:'center',
-    width:'auto'
+    width:'auto',
+    gap: '1em'
 }
 
 const imgStyle: CSS.Properties = {
@@ -18,8 +19,8 @@ export default function Elo(props:{elo:number}){
     const rank = getRank(props.elo)
     return <div style={style}>
         <img style={imgStyle} src={'assets/ranks/'+ rank + '.png'}/>
-        <div style={{marginLeft:'10px'}}>
-            <p style={{margin:'0px'}}>{props.elo}</p>
+        <div>
+            <p style={{margin:'0px', fontSize:'1vw'}}>{props.elo}</p>
         </div>
     </div>
 }

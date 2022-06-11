@@ -5,6 +5,7 @@
      [Effect.GROWTH]: 'Growth',
      [Effect.SPORE]: 'Spore',
      [Effect.BLAZE]: 'Blaze',
+     [Effect.VICTORY_STAR]: 'Victory Star',
      [Effect.DROUGHT]: 'Drought',
      [Effect.DESOLATE_LAND]: 'Desolate Land',
      [Effect.DRIZZLE]: 'Drizzle',
@@ -75,12 +76,12 @@
 
  export const EffectDescription: {[key in Effect]: {eng: string, esp: string, fra: string}} = {
      [Effect.STAMINA]: {
-         'eng': 'All allies adjacent to your Normal pokemon have +25 HP.',
+         'eng': 'All allies adjacent to your Normal pokemon have +20 HP.',
          'esp': '+20 HP por cada pokemon que esté cerca',
          'fra': '+20 HP pour tous les pokémons autours'
      },
      [Effect.STRENGTH]: {
-         'eng': 'All allies adjacent to your Normal pokemon have +50 HP.',
+         'eng': 'All allies adjacent to your Normal pokemon have +40 HP.',
          'esp': '+30 HP por cada pokemon que esté cerca',
          'fra': '+30 HP pour tous les pokémons autours'
      },
@@ -105,17 +106,22 @@
          'fra': '-30% ATK speed pour tous les ennemis'
      },
      [Effect.BLAZE]: {
-         'eng': 'Your Fire pokemon gain +1 Attack after every hit',
+         'eng': 'Your Fire pokemon have 20% chance to burn ennemy on every hit',
          'esp': 'Fire pkm gana un 5% de dano en cada ataque',
          'fra': 'Les pkm feu gagnent 5% d\'ATK à chaque attaque'
      },
+     [Effect.VICTORY_STAR]:{
+        'eng': 'Your Fire pokemon have 20% chance to burn ennemy on every hit and gain +1 Attack after every hit (Sunlight)',
+        'esp': 'Fire pkm gana un 5% de dano en cada ataque',
+        'fra': 'Les pkm feu gagnent 5% d\'ATK à chaque attaque'
+     },
      [Effect.DROUGHT]: {
-         'eng': 'Your Fire pokemon gain +2 Attack after every hit (Sunlight)',
+         'eng': 'Your Fire pokemon have 30% chance to burn ennemy on every hit and gain +2 Attack after every hit (Sunlight)',
          'esp': 'El so se intensifica, los pkm de fuego gana +50% ATK',
          'fra': 'Le soleil s\'intensifie, augmentant l\'ATK des pkm feu de 50%'
      },
      [Effect.DESOLATE_LAND]: {
-         'eng': 'Your Fire pokemon gain +3 Attack after every hit (Sunlight)',
+         'eng': 'Your Fire pokemon have 40% chance to burn ennemy on every hit and gain +3 Attack after every hit (Sunlight)',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
@@ -155,22 +161,22 @@
          'fra': '+5 mana / attaque pour tous les pkm'
      },
      [Effect.PUNISHMENT]: {
-         'eng': '+15 extra Mana per hit.',
+         'eng': '+10 extra Mana per hit.',
          'esp': '+10 maná/ataque para todos los pkm',
          'fra': '+10 mana / attaque pour tous les pkm'
      },
      [Effect.AMNESIA]: {
-         'eng': 'All your pokemon have +5 Special Defense.',
+         'eng': 'All your pokemon have +4 Special Defense.',
          'esp': 'Ally gana +5 SPEDEF',
          'fra': 'Les alliés gagnent +5 SPEDEF'
      },
      [Effect.LIGHT_SCREEN]: {
-         'eng': 'All your pokemon have +10 Special Defense.',
+         'eng': 'All your pokemon have +8 Special Defense.',
          'esp': 'Ally gana +10 SPEDEF adicionales',
          'fra': 'Les alliés gagnent un additionel +10 SPEDEF'
      },
      [Effect.EERIE_SPELL]: {
-         'eng': 'All your pokemon have +20 Special Defense.',
+         'eng': 'All your pokemon have +16 Special Defense.',
          'esp': 'Ally gana +20 SPEDEF adicionales',
          'fra': 'Les alliés gagnent un additionel +20 SPEDEF'
      },
@@ -345,17 +351,17 @@
          'fra': '?NONE?'
      },
      [Effect.BATTLE_ARMOR]: {
-         'eng': 'Mineral pokemons gains 70 bonus maximum health',
+         'eng': 'Mineral pokemons gains 50 bonus maximum health',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
      [Effect.MOUTAIN_RESISTANCE]: {
-         'eng': 'Mineral pokemons gains 140 bonus maximum health',
+         'eng': 'Mineral pokemons gains 100 bonus maximum health',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
      [Effect.DIAMOND_STORM]: {
-         'eng': 'Mineral pokemons gains 280 bonus maximum health',
+         'eng': 'Mineral pokemons gains 200 bonus maximum health',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },

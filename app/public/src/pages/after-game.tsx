@@ -15,7 +15,6 @@ const buttonStyle = {
 }
 
  const style = {
-    backgroundColor: 'rgba(255, 255, 255, .6)',
     margin:'10px',
     display: 'flex',
     flexFlow: 'column'
@@ -93,7 +92,7 @@ export default function AfterGame(){
     }
     else{
         return <div className='App'>
-        <button className='nes-btn is-primary' style={buttonStyle} onClick={()=>{
+        <button className='bubbly-primary' style={buttonStyle} onClick={()=>{
             if(room) {
                 room.connection.close()
             }

@@ -1178,11 +1178,7 @@ export class ConfusionStrategy extends AttackStrategy {
         break
     }
 
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
-      if (value && pokemon.team != value.team) {
-        value.status.triggerConfusion(timer)
-      }
-    })
+    target.status.triggerConfusion(timer)
   }
 }
 
