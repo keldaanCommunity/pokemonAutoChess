@@ -9,7 +9,7 @@ import { CDN_PORTRAIT_URL } from '../../../../../types'
 
 export default function LeaderboardItem(props: {item: ILeaderboardInfo, isBot: boolean}){
     const dispatch = useAppDispatch()
-    return <div className='playerBox' style={{ display: 'flex', justifyContent:'space-between', alignItems:'center'}} onClick={()=>{
+    return <div className='playerBox my-cursor' style={{ display: 'flex', justifyContent:'space-between', alignItems:'center'}} onClick={()=>{
         if(!props.isBot) {
             dispatch(searchName(props.item.name))
             dispatch(setTabIndex(3))
