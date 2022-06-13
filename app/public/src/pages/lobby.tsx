@@ -44,6 +44,7 @@ export default function Lobby(){
     const [showCollection, toggleCollection] = useState<boolean>(false)
     const [showBooster, toggleBooster] = useState<boolean>(false)
     const [toPreparation, setToPreparation] = useState<boolean>(false)
+    const [toAuth, setToAuth] = useState<boolean>(false)
     
     const lobbyStyle = {display:'flex',justifyContent:'space-between', marginTop:'-10px'}
     const buttonStyle= {marginLeft:'10px',marginTop:'10px',marginRight:'10px'}
@@ -54,69 +55,78 @@ export default function Lobby(){
         const join = async () => {
             if (!firebase.apps.length) {
                 firebase.initializeApp(FIREBASE_CONFIG)
-            } 
+            }
+
+
             firebase.auth().onAuthStateChanged(async user => {
                 if(user) {
                     dispatch(logIn(user))
-                    const token = await user.getIdToken()
-                    const room: Room<ICustomLobbyState> = await client.joinOrCreate('lobby', {idToken: token})
-                    room.state.messages.onAdd = (m) => {dispatch(pushMessage(m))}
+                    try {
+                        const token = await user.getIdToken()
+                        const room: Room<ICustomLobbyState> = await client.joinOrCreate('lobby', {idToken: token})
+                        room.state.messages.onAdd = (m) => {dispatch(pushMessage(m))}
+        
+                        room.state.users.onAdd = (u) => {
+                            dispatch(addUser(u))
     
-                    room.state.users.onAdd = (u) => {
-                        dispatch(addUser(u))
-
-                        if(u.id == user.uid){
-                            u.pokemonCollection.onAdd = (pokemonConfig, key) => {
-                                const p = pokemonConfig as PokemonConfig
-                                dispatch(addPokemonConfig(p))
-                                p.onChange = (changes) => {
-                                    changes.forEach(change=>{
-                                        dispatch(changePokemonConfig({id: key, field: change.field, value: change.value}))
-                                    })
+                            if(u.id == user.uid){
+                                u.pokemonCollection.onAdd = (pokemonConfig, key) => {
+                                    const p = pokemonConfig as PokemonConfig
+                                    dispatch(addPokemonConfig(p))
+                                    p.onChange = (changes) => {
+                                        changes.forEach(change=>{
+                                            dispatch(changePokemonConfig({id: key, field: change.field, value: change.value}))
+                                        })
+                                    }
                                 }
+                                dispatch(setUser(u))
+                                setSearchedUser(u)
                             }
-                            dispatch(setUser(u))
-                            setSearchedUser(u)
+                            else{
+                                audio.current?.play()
+                            }
+                            u.onChange = (changes) => {
+                                changes.forEach(change=>{
+                                    dispatch(changeUser({id: u.id, field: change.field, value: change.value}))
+                                })
+                            }
                         }
-                        else{
-                            audio.current?.play()
-                        }
-                        u.onChange = (changes) => {
-                            changes.forEach(change=>{
-                                dispatch(changeUser({id: u.id, field: change.field, value: change.value}))
-                            })
-                        }
+    
+                        room.state.users.onRemove = (u) => {dispatch(removeUser(u.id))}
+    
+                        room.state.leaderboard.onAdd = (l) => {dispatch(pushLeaderboard(l))}
+                        
+                        room.state.botLeaderboard.onAdd = (l) => {dispatch(pushBotLeaderboard(l))}
+    
+                        room.onMessage(Transfer.PASTEBIN_URL, (json: { url: string; }) => {dispatch(setPastebinUrl(json.url))})
+    
+                        room.onMessage('rooms', (rooms: RoomAvailable[]) => {rooms.forEach(room=>dispatch(addRoom(room)))})
+    
+                        room.onMessage(Transfer.REQUEST_BOT_LIST, (bots: {name: string, avatar: string}[]) => {dispatch(setBotList(bots))})
+                        
+                        room.onMessage('+', ([roomId, room]) => {if(room.name == 'room'){dispatch(addRoom(room))}})
+                    
+                        room.onMessage('-', (roomId: string) => dispatch(removeRoom(roomId)))
+    
+                        room.onMessage(Transfer.USER, (user: LobbyUser) => dispatch(setSearchedUser(user)))
+    
+                        room.onMessage(Transfer.REQUEST_META, (meta: IMeta[]) => {dispatch(setMeta(meta))})
+    
+                        room.onMessage(Transfer.REQUEST_META_ITEMS, (metaItems: IItemsStatistic[]) => {dispatch(setMetaItems(metaItems))})
+    
+                        room.onMessage(Transfer.REQUEST_BOT_MONITOR, (botMonitor: IBotMonitoring[]) => {dispatch(setBotMonitor(botMonitor))})
+    
+                        room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => { dispatch(setBotData(data))})
+    
+                        room.onMessage(Transfer.BOOSTER_CONTENT, (boosterContent: string[]) => {dispatch(setBoosterContent(boosterContent))})
+    
+                        dispatch(joinLobby(room))
+                    } catch (error) {
+                        setToAuth(true)
                     }
-
-                    room.state.users.onRemove = (u) => {dispatch(removeUser(u.id))}
-
-                    room.state.leaderboard.onAdd = (l) => {dispatch(pushLeaderboard(l))}
-                    
-                    room.state.botLeaderboard.onAdd = (l) => {dispatch(pushBotLeaderboard(l))}
-
-                    room.onMessage(Transfer.PASTEBIN_URL, (json: { url: string; }) => {dispatch(setPastebinUrl(json.url))})
-
-                    room.onMessage('rooms', (rooms: RoomAvailable[]) => {rooms.forEach(room=>dispatch(addRoom(room)))})
-
-                    room.onMessage(Transfer.REQUEST_BOT_LIST, (bots: {name: string, avatar: string}[]) => {dispatch(setBotList(bots))})
-                    
-                    room.onMessage('+', ([roomId, room]) => {if(room.name == 'room'){dispatch(addRoom(room))}})
-                
-                    room.onMessage('-', (roomId: string) => dispatch(removeRoom(roomId)))
-
-                    room.onMessage(Transfer.USER, (user: LobbyUser) => dispatch(setSearchedUser(user)))
-
-                    room.onMessage(Transfer.REQUEST_META, (meta: IMeta[]) => {dispatch(setMeta(meta))})
-
-                    room.onMessage(Transfer.REQUEST_META_ITEMS, (metaItems: IItemsStatistic[]) => {dispatch(setMetaItems(metaItems))})
-
-                    room.onMessage(Transfer.REQUEST_BOT_MONITOR, (botMonitor: IBotMonitoring[]) => {dispatch(setBotMonitor(botMonitor))})
-
-                    room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => { dispatch(setBotData(data))})
-
-                    room.onMessage(Transfer.BOOSTER_CONTENT, (boosterContent: string[]) => {dispatch(setBoosterContent(boosterContent))})
-
-                    dispatch(joinLobby(room))
+                }
+                else{
+                    setToAuth(true)
                 }
             })
         }
@@ -126,9 +136,8 @@ export default function Lobby(){
         }
     }, [lobbyJoined, dispatch, client, audio])
 
-    if(!uid){
-        return <div>
-        </div>
+      if(toAuth){
+        return <Navigate to={'/'}/>
       }
       if(toPreparation){
           return <Navigate to='/preparation'></Navigate>

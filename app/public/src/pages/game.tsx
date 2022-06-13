@@ -3,8 +3,8 @@ import firebase from 'firebase/compat/app'
 import React, { useEffect, useRef, useState } from 'react'
 import GameState from '../../../rooms/states/game-state'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { setPokemonCollection, setSynergies, addPlayer, changePlayer, setAfterGameId, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter, leaveGame, displayEmote} from '../stores/GameStore'
-import { logIn, joinGame, requestTilemap, broadcastEmote } from '../stores/NetworkStore'
+import { setPokemonCollection, setSynergies, addPlayer, changePlayer, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter, leaveGame, displayEmote} from '../stores/GameStore'
+import { logIn, joinGame, requestTilemap } from '../stores/NetworkStore'
 import { FIREBASE_CONFIG } from './utils/utils'
 import GameContainer from '../game/game-container'
 import { Navigate } from 'react-router-dom'
@@ -13,19 +13,12 @@ import GameInformations from './component/game/game-informations'
 import GameItemsProposition from './component/game/game-items-proposition'
 import GamePlayerInformations from './component/game/game-player-informations'
 import GamePlayers from './component/game/game-players'
-import GameRarityPercentage from './component/game/game-rarity-percentage'
 import GameShop from './component/game/game-shop'
 import GameSynergies from './component/game/game-synergies'
 import GameModal from './component/game/game-modal'
 import AfterGameState from '../../../rooms/states/after-game-state'
-import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer, ISimplePlayer, CDN_PORTRAIT_URL, Emotion } from '../../../types'
+import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer, ISimplePlayer } from '../../../types'
 import GameToasts from './component/game/game-toasts'
-import { toast } from 'react-toastify'
-import { PkmIndex } from '../../../types/enum/Pokemon'
-import PokemonCollection from '../../../models/colyseus-models/pokemon-collection'
-import PokemonConfig from '../../../models/colyseus-models/pokemon-config'
-import Emotes from './component/collection/emotes'
-
 let gameContainer: GameContainer
 
 function playerClick(id: string){
@@ -45,6 +38,7 @@ export default function Game() {
   const [modalInfo, setModalInfo] = useState<string>('')
   const [modalBoolean, setModalBoolean] = useState<boolean>(false)
   const [toAfter, setToAfter] = useState<boolean>(false)
+  const [toAuth, setToAuth] = useState<boolean>(false)
   const container = useRef<HTMLDivElement>(null)
 
   async function leave() {
@@ -81,6 +75,7 @@ export default function Game() {
         if(!firebase.apps.length) {
             firebase.initializeApp(FIREBASE_CONFIG)
         }
+
         firebase.auth().onAuthStateChanged(async user => {
           if(user){
             dispatch(logIn(user))
@@ -94,17 +89,24 @@ export default function Game() {
                 }
             }
             catch(error){
-                setTimeout(async()=>{
-                  const lastRoomId = localStorage.getItem('lastRoomId')
-                  const lastSessionId = localStorage.getItem('lastSessionId')
-                  if(lastRoomId && lastSessionId){
-                    const r: Room<GameState> = await client.reconnect(lastRoomId,lastSessionId)
-                    dispatch(joinGame(r))
-                  }
-                })
-                console.log(error)         
+                try {
+                    setTimeout(async()=>{
+                        const lastRoomId = localStorage.getItem('lastRoomId')
+                        const lastSessionId = localStorage.getItem('lastSessionId')
+                        if(lastRoomId && lastSessionId){
+                          const r: Room<GameState> = await client.reconnect(lastRoomId,lastSessionId)
+                          dispatch(joinGame(r))
+                        }
+                      })     
+                } catch (error) {
+                    setToAuth(true)
+                }
+  
             }
           }
+          else{
+            setToAuth(true)
+            }
         })
     }
 
@@ -311,7 +313,11 @@ export default function Game() {
         }
       }
     }
-  })
+  }, [reconnected, initialized, room, dispatch, client, uid, currentPlayerId])
+
+  if(toAuth){
+      return <Navigate to={'/'}/>
+  }
 
   if(toAfter){
     return <Navigate to='/after'/>

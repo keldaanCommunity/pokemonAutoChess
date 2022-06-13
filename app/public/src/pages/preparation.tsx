@@ -29,6 +29,7 @@ export default function Preparation() {
     const room : Room<PreparationState>|undefined = useAppSelector(state=>state.network.preparation)
     const [initialized, setInitialized] = useState<boolean>(false)
     const [toGame, setToGame] = useState<boolean>(false)
+    const [toAuth, setToAuth] = useState<boolean>(false)
     const audio = useRef(new Audio('assets/sounds/notification.mp3'))
 
     useEffect(()=>{
@@ -37,6 +38,7 @@ export default function Preparation() {
             if(!firebase.apps.length) {
                 firebase.initializeApp(FIREBASE_CONFIG)
             }
+
             firebase.auth().onAuthStateChanged(async user => {
                 if(user){
                     dispatch(logIn(user))
@@ -50,8 +52,12 @@ export default function Preparation() {
                         }
                     }
                     catch(error){
+                        setToAuth(true)
                         console.log(error)         
                     }
+                }
+                else{
+                    setToAuth(true)
                 }
             })
         }
@@ -115,6 +121,9 @@ export default function Preparation() {
 
     if(toGame) {
         return <Navigate to='/game'/>
+    }
+    if(toAuth){
+        return <Navigate to='/'/>
     }
     else{
         return (<div className="App">
