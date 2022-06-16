@@ -767,9 +767,9 @@ export const PkmIndex: {[key in Pkm] : string} = {
     cacnea: '0331',
     cacturne: '0332',
     tauros: '0128',
-    happiny: '440',
-    chansey: '113',
-    blissey: '242'
+    happiny: '0440',
+    chansey: '0113',
+    blissey: '0242'
 }
 
 export const PkmFamily : {[key in Pkm]: Pkm} = {
