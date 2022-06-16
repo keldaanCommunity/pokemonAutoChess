@@ -1194,6 +1194,22 @@ export default class Pokemon extends Button {
             })
             break
 
+          case Ability.SOFT_BOILED:
+            group.getChildren().forEach((p) => {
+              const pokemon = <Pokemon> p
+              if (this.team == pokemon.team) {
+                const coordinates = transformAttackCoordinate(pokemon.positionX, pokemon.positionY)
+                const s = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.SOFT_BOILED, '000')
+                s.setDepth(7)
+                s.setScale(2, 2)
+                s.anims.play(Ability.SOFT_BOILED)
+                s.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                  s.destroy()
+                })
+              }
+            })
+            break
+
           default:
             break
         }

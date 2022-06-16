@@ -356,19 +356,19 @@ export class Tauros extends Pokemon{
 
 export class Tympole extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.TYMPOLE, [Synergy.WATER, Synergy.GROUND, Synergy.SOUND], Rarity.EPIC, '0535', Pkm.PALPITOAD, 90, 5, 4, 4, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 1, 90, Ability.EXPLOSION,shiny, emotion, false)
+    super(Pkm.TYMPOLE, [Synergy.WATER, Synergy.GROUND, Synergy.SOUND], Rarity.EPIC, '0535', Pkm.PALPITOAD, 90, 5, 4, 4, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 1, 90, Ability.DEFAULT,shiny, emotion, false)
   }
 }
 
 export class Palpitoad extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.PALPITOAD, [Synergy.WATER, Synergy.GROUND, Synergy.SOUND], Rarity.EPIC, '0536', Pkm.SEISMITOAD, 130, 9, 5, 5, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 90, Ability.EXPLOSION,shiny, emotion, false)
+    super(Pkm.PALPITOAD, [Synergy.WATER, Synergy.GROUND, Synergy.SOUND], Rarity.EPIC, '0536', Pkm.SEISMITOAD, 130, 9, 5, 5, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 90, Ability.DEFAULT,shiny, emotion, false)
   }
 }
 
 export class Seismitoad extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.SEISMITOAD, [Synergy.WATER, Synergy.GROUND, Synergy.SOUND], Rarity.EPIC, '0537', Pkm.DEFAULT, 230, 20, 6, 6, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 3, 90, Ability.EXPLOSION,shiny, emotion, true)
+    super(Pkm.SEISMITOAD, [Synergy.WATER, Synergy.GROUND, Synergy.SOUND], Rarity.EPIC, '0537', Pkm.DEFAULT, 230, 20, 6, 6, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 3, 90, Ability.DEFAULT,shiny, emotion, true)
   }
 }
 
@@ -2354,5 +2354,22 @@ export class Pumpkaboo extends Pokemon {
 export class Gourgeist extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(Pkm.GOURGEIST, [Synergy.GHOST, Synergy.GRASS], Rarity.RARE, PkmIndex[Pkm.GOURGEIST], Pkm.DEFAULT, 130, 10, 4, 4, 1, AttackSprite.GRASS_MELEE, AttackType.PHYSICAL, 2, 80, Ability.CORRUPTED_NATURE,shiny, emotion, true)
+  }
+}
+export class Happiny extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(Pkm.HAPPINY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.HAPPINY], Pkm.CHANSEY, 120, 5, 5, 3, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 1, 130, Ability.VOLT_SWITCH,shiny, emotion, false)
+  }
+}
+
+export class Chansey extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(Pkm.CHANSEY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.CHANSEY], Pkm.BLISSEY, 240, 11, 6, 4, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 2, 130, Ability.VOLT_SWITCH,shiny, emotion, false)
+  }
+}
+
+export class Blissey extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(Pkm.BLISSEY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.CHANSEY], Pkm.DEFAULT, 480, 17, 7, 5, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 3, 130, Ability.VOLT_SWITCH,shiny, emotion, true)
   }
 }

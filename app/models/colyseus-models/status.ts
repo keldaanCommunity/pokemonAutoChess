@@ -40,6 +40,18 @@ export default class Status extends Schema implements IStatus{
   flameOrbCooldown = 0
   changeTeamCooldown = 0
 
+  clearNegativeStatus(){
+    this.burnCooldown = 0
+    this.silenceCooldown = 0
+    this.poisonCooldown = 0
+    this.freezeCooldown = 0
+    this.sleepCooldown = 0
+    this.confusionCooldown = 0
+    this.woundCooldown = 0
+    this.smokeCooldown = 0
+    this.changeTeamCooldown = 0
+  }
+
   triggerFlameOrb(timer: number) {
     if (!this.flameOrb) {
       this.flameOrb = true

@@ -141,6 +141,13 @@ export default class AnimationManager {
 
   createSpecialAttacksAnimations() {
     this.game.anims.create({
+      key: Ability.SOFT_BOILED,
+      frames: this.game.anims.generateFrameNames('SOFT_BOILED', {start: 0, end: 32, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.DYNAMIC_PUNCH,
       frames: this.game.anims.generateFrameNames('pmd-replace', {start: 0, end: 12, zeroPad: 3, prefix: `${Ability.DYNAMIC_PUNCH}/`}),
       duration: 1000,

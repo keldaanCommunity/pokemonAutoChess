@@ -2,6 +2,12 @@ import { Langage } from '..'
 import { Ability } from '../enum/Ability'
 
 export const AbilityName: {[key in Ability]: Langage} = {
+    [Ability.SOFT_BOILED]:{
+        eng: 'Soft Boiled',
+        esp: '',
+        fra: '',
+        prt: ''
+    },
     [Ability.EARTHQUAKE]:{
         eng: 'Earthquake',
         esp: '',
@@ -539,6 +545,12 @@ export const AbilityName: {[key in Ability]: Langage} = {
 }
 
 export const AbilityDescription: {[key in Ability]: Langage} = {
+    [Ability.SOFT_BOILED]: {
+        eng: 'Cures every status effects and grants 30/60/120 shield for every ally',
+        esp: '',
+        fra: '',
+        prt: ''
+    },
     [Ability.EARTHQUAKE]: {
         eng: 'Deals damage 50/100/200 physical damage to all ennemy units in the same column/line',
         esp: '',
