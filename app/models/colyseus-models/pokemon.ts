@@ -2358,18 +2358,18 @@ export class Gourgeist extends Pokemon {
 }
 export class Happiny extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.HAPPINY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.HAPPINY], Pkm.CHANSEY, 120, 5, 5, 3, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 1, 130, Ability.VOLT_SWITCH,shiny, emotion, false)
+    super(Pkm.HAPPINY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.HAPPINY], Pkm.CHANSEY, 120, 5, 5, 3, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 1, 130, Ability.SOFT_BOILED,shiny, emotion, false)
   }
 }
 
 export class Chansey extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.CHANSEY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.CHANSEY], Pkm.BLISSEY, 240, 11, 6, 4, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 2, 130, Ability.VOLT_SWITCH,shiny, emotion, false)
+    super(Pkm.CHANSEY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.CHANSEY], Pkm.BLISSEY, 240, 11, 6, 4, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 2, 130, Ability.SOFT_BOILED,shiny, emotion, false)
   }
 }
 
 export class Blissey extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.BLISSEY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.BLISSEY], Pkm.DEFAULT, 480, 17, 7, 5, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 3, 130, Ability.VOLT_SWITCH,shiny, emotion, true)
+    super(Pkm.BLISSEY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.BLISSEY], Pkm.DEFAULT, 480, 17, 7, 5, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 3, 130, Ability.SOFT_BOILED,shiny, emotion, true)
   }
 }
