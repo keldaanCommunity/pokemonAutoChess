@@ -2370,6 +2370,6 @@ export class Chansey extends Pokemon {
 
 export class Blissey extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.BLISSEY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.CHANSEY], Pkm.DEFAULT, 480, 17, 7, 5, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 3, 130, Ability.VOLT_SWITCH,shiny, emotion, true)
+    super(Pkm.BLISSEY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.BLISSEY], Pkm.DEFAULT, 480, 17, 7, 5, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 3, 130, Ability.VOLT_SWITCH,shiny, emotion, true)
   }
 }
