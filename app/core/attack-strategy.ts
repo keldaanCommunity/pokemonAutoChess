@@ -42,6 +42,25 @@ export class AttackStrategy {
   }
 }
 
+export class SoftBoiledStrategy extends AttackStrategy{
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+    super.process(pokemon, state, board, target)
+    let shield = 30
+    if(pokemon.stars == 2){
+      shield = 60
+    }
+    else if(pokemon.stars == 3){
+      shield = 120
+    }
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+        if (tg && pokemon.team == tg.team) {
+          tg.handleShield(shield, pokemon)
+          tg.status.clearNegativeStatus()
+        }
+    })
+  }
+}
+
 export class EarthquakeStrategy extends AttackStrategy{
     process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
         super.process(pokemon, state, board, target)

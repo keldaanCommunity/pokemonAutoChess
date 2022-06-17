@@ -81,8 +81,6 @@ palpitoad,0536/AnimData.xml
 palpitoad,0536/0000/0001/AnimData.xml
 seismitoad,0537/AnimData.xml
 seismitoad,0537/0000/0001/AnimData.xml
-sewaddle,0540/AnimData.xml
-sewaddle,0540/0000/0001/AnimData.xml
 swadloon,0541/AnimData.xml
 swadloon,0541/0000/0001/AnimData.xml
 pikipek,0731/AnimData.xml
@@ -98,5 +96,4 @@ kommo-o,0784/0000/0001/AnimData.xml
 mega-altaria,0334/0001/AnimData.xml
 mega-altaria,0334/0001/0001/AnimData.xml
 hatterene,0858/0000/0001/AnimData.xml
-pumpkaboo,0710/0000/0001/AnimData.xml
 gourgeist,0711/0000/0001/AnimData.xml
