@@ -10,14 +10,14 @@ import WikiItemsCheatSheet from './wiki-items-cheat-sheet'
 export default function Wiki(props: {toggleWiki: () => void}){
     return <div>
     <WikiButton toggleWiki={props.toggleWiki}/>
-    <div className="nes-container" style={{backgroundColor:'white',opacity:0.9,margin:'10px', marginBottom:'30px'}}>
+    <div className="nes-container" style={{color:'white', margin:'10px', marginBottom:'30px', backgroundColor:'#54596b'}}>
     <Tabs>
         <TabList>
-            <Tab key='title-faq'>FAQ</Tab>
-            <Tab key='title-pokemon'>POKEMONS</Tab>
-            <Tab key='title-items'>ITEMS</Tab>
-            <Tab key='title-types'>SYNERGIES</Tab>
-            <Tab key='title-statistic'>STATISTICS</Tab>
+            <Tab key='title-faq'><p className='my-cursor'>FAQ</p></Tab>
+            <Tab key='title-pokemon'><p className='my-cursor'>POKEMONS</p></Tab>
+            <Tab key='title-items'><p className='my-cursor'>ITEMS</p></Tab>
+            <Tab key='title-types'><p className='my-cursor'>SYNERGIES</p></Tab>
+            <Tab key='title-statistic'><p className='my-cursor'>STATISTICS</p></Tab>
         </TabList>
 
         <TabPanel key='faq'>

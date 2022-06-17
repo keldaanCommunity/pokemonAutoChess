@@ -34,6 +34,7 @@ export default function Discover(props:{meta: IMeta[]}){
             fontFamily: 'Press Start 2P'
         },
         chart: {
+            foreColor:'#ffffff',
             height: 350,
             type: 'bubble',
             },
@@ -84,7 +85,7 @@ export default function Discover(props:{meta: IMeta[]}){
     })
     
     return (
-        <div id="chart" style={{backgroundColor:'rgba(255,255,255,1)', border:'4px solid'}}>
+        <div id="chart" style={{backgroundColor:'rgb(84, 89, 107)', padding:'20px'}} className='nes-container'>
             <Chart options={options} series={series} type="bubble" height={700} />
         </div>)
 }

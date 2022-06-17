@@ -13,6 +13,14 @@ const buttonStyle= {
     marginRight:'10px'
 }
 
+const optStyle={
+    color:'black'
+}
+
+const tabStyle={
+    fontSize:'1.2vw'
+}
+
 export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStatistic[], toggleMeta: () => void}){
     const [rankingBy, setRanking] = useState<string>('count')
     const [itemRankingBy, setItemRanking] = useState<string>('count')
@@ -35,24 +43,24 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
     }
     return <div>
         <button className='bubbly-success is-success' style={buttonStyle} onClick={props.toggleMeta}>Lobby</button>
-        <div className='nes-container' style={{margin:'10px', height: '90vh'}}>
+        <div className='nes-container' style={{margin:'10px', height: '90vh', color:'white'}}>
             <Tabs>
                 <TabList>
-                    <Tab key='team-comps'><p>Meta Report</p></Tab>
-                    <Tab key='items'>Item Report</Tab>
-                    <Tab key='bots'>Bot Report</Tab>
-                    <Tab key='discover'><p>Discover</p></Tab>
+                    <Tab key='team-comps'><p className='my-cursor' style={tabStyle}>Meta Report</p></Tab>
+                    <Tab key='items'><p className='my-cursor' style={tabStyle}>Item Report</p></Tab>
+                    <Tab key='bots'><p className='my-cursor' style={tabStyle}>Bot Report</p></Tab>
+                    <Tab key='discover'><p className='my-cursor' style={tabStyle}>Discover</p></Tab>
                 </TabList>
 
                 <TabPanel key='team-comps-panel'>
                     <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', paddingRight:'27px', paddingLeft:'15px'}}>
                         <h3>Best Team Compositions</h3>
-                        <div style={{display:'flex', width:'23%',alignItems:'center'}} className='my-select'>
-                            <p style={{marginRight:'20px'}}>Rank</p>
-                            <select value={rankingBy} onChange={(e)=>{setRanking(e.target.value)}}>
-                                <option value="count">by popularity</option>
-                                <option value="mean_rank">by average place</option>
-                                <option value="winrate">by winrate</option>
+                        <div style={{display:'flex', width:'23%',alignItems:'center', justifyContent:'space-around',backgroundColor:'rgb(84, 89, 107)'}} className='my-select'>
+                            <p style={{margin:'0px'}}>Rank</p>
+                            <select className='my-cursor' value={rankingBy} onChange={(e)=>{setRanking(e.target.value)}} style={{background:'none', border:'none', color:'white'}}>
+                                <option style={optStyle} value="count">by popularity</option>
+                                <option style={optStyle} value="mean_rank">by average place</option>
+                                <option style={optStyle} value="winrate">by winrate</option>
                             </select>
                         </div>
                     </div>
@@ -66,11 +74,11 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
                 <TabPanel>
                 <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', paddingRight:'27px', paddingLeft:'15px'}}>
                     <h3>Best Items</h3>
-                    <div style={{display:'flex', width:'23%',alignItems:'center'}} className='my-select'>
-                        <p style={{marginRight:'20px'}}>Rank</p>
-                        <select value={itemRankingBy} onChange={(e)=>{setItemRanking(e.target.value)}}>
-                            <option value="count">by popularity</option>
-                            <option value="rank">by average place</option>
+                    <div style={{display:'flex', width:'23%',alignItems:'center', justifyContent:'space-around',backgroundColor:'rgb(84, 89, 107)'}} className='my-select'>
+                        <p style={{margin:'0px'}}>Rank</p>
+                        <select className='my-cursor' value={itemRankingBy} onChange={(e)=>{setItemRanking(e.target.value)}} style={{background:'none', border:'none', color:'white'}}>
+                            <option style={optStyle} value="count">by popularity</option>
+                            <option style={optStyle} value="rank">by average place</option>
                         </select>
                     </div>
                 </div>

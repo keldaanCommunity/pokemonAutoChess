@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { CDN_PORTRAIT_URL } from '../../../../../types'
 import MultiRangeSlider from 'multi-range-slider-react'
 
-const maxEloValue = 1600
+const maxEloValue = 1700
 
 export default function BotReport(){
     const botMonitor = useAppSelector(state=>state.lobby.botMonitor)
@@ -30,6 +30,7 @@ export default function BotReport(){
 
     const options: ApexOptions = {
         chart: {
+            foreColor:'#ffffff',
             id: 'bot-report',
             zoom: {
                 enabled: true
@@ -76,9 +77,12 @@ export default function BotReport(){
         },
         legend: {
             fontFamily: 'Press Start 2P'
+        },
+        tooltip:{
+            theme:'dark'
         }
     }
-    return <div style={{backgroundColor:'rgba(255,255,255,1)'}} className='nes-container'>
+    return <div style={{backgroundColor:'#54596b', padding:'20px'}} className='nes-container'>
         <MultiRangeSlider
 			min={0}
 			max={maxEloValue}

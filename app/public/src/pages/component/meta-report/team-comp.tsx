@@ -35,7 +35,7 @@ export default function TeamComp(props:{team:IMeta}){
     const sortedTypes = props.team.types ? (Object.keys(props.team.types) as Synergy[]).sort((a,b)=>{return rankType(a, b, props.team.types)}) : new Array<Synergy>()
     const sortedPokemons = props.team.pokemons ? (Object.keys(props.team.pokemons) as Pkm[]).sort((a,b)=>{return rankPokemon(a, b, props.team.pokemons)}) : new Array<Pkm>()
 
-    return <div style={{backgroundColor:'rgba(255,255,255,1)', margin:'10px'}} className='nes-container'>
+    return <div style={{backgroundColor:'rgb(84, 89, 107)', margin:'10px', color:'white'}} className='nes-container'>
         <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
             <div style={{display:'flex'}}>
                 {sortedTypes.map(type=>{
