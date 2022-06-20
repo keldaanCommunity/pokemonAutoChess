@@ -60,18 +60,17 @@ export default class AttackingState extends PokemonState {
         pokemon.handleAttackSpeed(6)
       }
 
-      if (climate == Climate.SNOW) {
-        let freezeChance = 0
-        if (pokemon.effects.includes(Effect.SNOW)) {
-          freezeChance += 0.1
-        }
-        if (pokemon.effects.includes(Effect.SHEER_COLD)) {
-          freezeChance += 0.3
-        }
-        if (Math.random() > 1 - freezeChance) {
-          target.status.triggerFreeze(2000)
-        }
+      let freezeChance = 0
+      if (pokemon.effects.includes(Effect.SNOW)) {
+        freezeChance += 0.1
       }
+      if (pokemon.effects.includes(Effect.SHEER_COLD)) {
+        freezeChance += 0.3
+      }
+      if (Math.random() > 1 - freezeChance) {
+        target.status.triggerFreeze(2000)
+      }
+      
       let poisonChance = 0
       if (pokemon.effects.includes(Effect.POISON_GAS)) {
         poisonChance += 0.1
