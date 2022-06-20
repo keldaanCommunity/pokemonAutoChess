@@ -2,7 +2,7 @@ import { Abomasnow, Abra, Absol, Aegislash, Aerodactyl, Aggron, Alakazam, Alolan
 import {MapSchema} from  '@colyseus/schema'
 import {IPokemon, Emotion} from '../types'
 import { IPokemonConfig } from './mongo-models/user-metadata'
-import PRECOMPUTED_TYPE_POKEMONS_ALL from './precomputed/type-pokemons-all.json'
+import PRECOMPUTED_TYPE_POKEMONS from './precomputed/type-pokemons.json'
 import { Synergy } from '../types/enum/Synergy'
 import { Pkm, PkmFamily } from '../types/enum/Pokemon'
 
@@ -997,11 +997,11 @@ export default class PokemonFactory {
     const currentFossils = new Array<Pkm>()
     board.forEach( (p) =>{
       if (p.types.includes(Synergy.FOSSIL)) {
-        currentFossils.push(p.name)
+        currentFossils.push(PkmFamily[p.name])
       }
     })
     const possibleFossils = new Array<Pkm>();
-    (PRECOMPUTED_TYPE_POKEMONS_ALL[Synergy.FOSSIL] as Pkm[]).forEach((p)=>{
+    (PRECOMPUTED_TYPE_POKEMONS[Synergy.FOSSIL].pokemons as Pkm[]).forEach((p)=>{
       if (!currentFossils.includes(p)) {
         possibleFossils.push(p)
       }
