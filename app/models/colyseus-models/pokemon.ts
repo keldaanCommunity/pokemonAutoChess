@@ -734,7 +734,7 @@ export class Haxorus extends Pokemon {
 
 export class Dratini extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.DRATINI, [Synergy.DRAGON, Synergy.AQUATIC], Rarity.RARE, '0147', Pkm.DRAGONAIR, 80, 5, 4, 4, 1, AttackSprite.DRAGON_MELEE, AttackType.PHYSICAL, 1, 100, Ability.DEFAULT,shiny, emotion, false)
+    super(Pkm.DRATINI, [Synergy.DRAGON, Synergy.AQUATIC], Rarity.RARE, '0147', Pkm.DRAGONAIR, 80, 5, 4, 4, 1, AttackSprite.DRAGON_MELEE, AttackType.PHYSICAL, 1, 100, Ability.DRAGON_BREATH,shiny, emotion, false)
   }
 }
 
