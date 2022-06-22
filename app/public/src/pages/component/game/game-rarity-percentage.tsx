@@ -22,7 +22,7 @@ export default function GameRarityPercentage() {
                     justifyContent:'center'
                 }}
             >
-                {Math.floor(Probability[level][index] * 100)}%
+                {Math.ceil(Probability[level][index] * 100)}%
             </div>
         })}
     </div>
