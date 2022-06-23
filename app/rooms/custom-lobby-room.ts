@@ -13,6 +13,7 @@ import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2'
 import BotV2, { IBot } from '../models/mongo-models/bot-v2'
 import Meta, { IMeta } from '../models/mongo-models/meta'
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic'
+import PokemonsStatistic, {IPokemonsStatistic} from '../models/mongo-models/pokemons-statistic'
 import { PastebinAPI } from 'pastebin-ts/dist/api'
 import { Emotion, EmotionCost, Transfer, CDN_PORTRAIT_URL } from '../types'
 import {Pkm} from '../types/enum/Pokemon'
@@ -34,6 +35,7 @@ export default class CustomLobbyRoom extends LobbyRoom{
   bots: Map<string, IBot>
   meta: IMeta[]
   metaItems: IItemsStatistic[]
+  metaPokemons: IPokemonsStatistic[]
   botMonitor: IBotMonitoring[]
 
   constructor(){
@@ -42,6 +44,7 @@ export default class CustomLobbyRoom extends LobbyRoom{
     this.bots = new Map<string, IBot>()
     this.meta = new Array<IMeta>()
     this.metaItems = new Array<IItemsStatistic>()
+    this.metaPokemons = new Array<IPokemonsStatistic>()
     this.botMonitor = new Array<IBotMonitoring>()
   }
 
@@ -103,6 +106,7 @@ export default class CustomLobbyRoom extends LobbyRoom{
     this.onMessage(Transfer.REQUEST_META, (client)=>{
       client.send(Transfer.REQUEST_META, this.meta)
       client.send(Transfer.REQUEST_META_ITEMS, this.metaItems)
+      client.send(Transfer.REQUEST_META_POKEMONS, this.metaPokemons)
       client.send(Transfer.REQUEST_BOT_MONITOR, this.botMonitor)
     })
 
@@ -327,6 +331,16 @@ export default class CustomLobbyRoom extends LobbyRoom{
             })
           }
         })
+        PokemonsStatistic.find({}, (err, docs) => {
+          if (err) {
+            console.log(err)
+          } else {
+            docs.forEach((doc) => {
+              this.metaPokemons.push(doc)
+            })
+          }
+        })
+        
         BotMonitoring.find({}, (err, docs) => {
           if (err) {
             console.log(err)
