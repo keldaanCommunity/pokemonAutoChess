@@ -46,6 +46,7 @@ export type Langage = {
     fra: string
 }
 
+
 export enum Transfer {
     DRAG_DROP = 'DRAG_DROP',
     DRAG_DROP_COMBINE = 'DRAG_DROP_COMBINE',
@@ -81,7 +82,8 @@ export enum Transfer {
     MESSAGES = 'MESSAGES',
     DRAG_DROP_FAILED = 'DRAG_DROP_FAILED',
     BROADCAST_EMOTE = 'BROADCAST_EMOTE',
-    BROADCAST_INFO = 'BROADCAST_INFO'
+    BROADCAST_INFO = 'BROADCAST_INFO',
+    REQUEST_META_POKEMONS = 'REQUEST_META_POKEMONS'
 }
 
 export enum AttackSprite {

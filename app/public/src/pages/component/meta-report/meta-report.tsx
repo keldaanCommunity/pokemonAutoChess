@@ -6,6 +6,8 @@ import ItemStatistic from './item-statistic'
 import { IMeta } from '../../../../../models/mongo-models/meta'
 import { IItemsStatistic } from '../../../../../models/mongo-models/items-statistic'
 import BotReport from './bot-report'
+import PokemonStatistic from './pokemon-statistic'
+import { IPokemonsStatistic } from '../../../../../models/mongo-models/pokemons-statistic'
 
 const buttonStyle= {
     marginLeft:'10px',
@@ -21,14 +23,18 @@ const tabStyle={
     fontSize:'1.2vw'
 }
 
-export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStatistic[], toggleMeta: () => void}){
+export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStatistic[], metaPokemons: IPokemonsStatistic[], toggleMeta: () => void}){
     const [rankingBy, setRanking] = useState<string>('count')
     const [itemRankingBy, setItemRanking] = useState<string>('count')
+    const [pokemonRankingBy, setPokemonRanking] = useState<string>('count')
 
     const meta = props.meta.slice()
     const metaItems = props.metaItems.slice()
+    const metaPokemons = props.metaPokemons.slice()
+
     let sortedMeta = new Array<IMeta>()
     let sortedMetaItems = new Array<IItemsStatistic>()
+    let sortedMetaPokemons = new Array<IPokemonsStatistic>()
     if(rankingBy == 'count' || rankingBy == 'winrate') {
         sortedMeta = meta.sort((a,b)=>{return b[rankingBy] - a[rankingBy]})
     }
@@ -41,6 +47,12 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
     else{
         sortedMetaItems = metaItems.sort((a,b)=>{return a[itemRankingBy] - b[itemRankingBy]})
     }
+    if(pokemonRankingBy == 'count'){
+        sortedMetaPokemons = metaPokemons.sort((a,b)=>{return b[pokemonRankingBy] - a[pokemonRankingBy]})
+    }
+    else{
+        sortedMetaPokemons = metaPokemons.sort((a,b)=>{return a[pokemonRankingBy] - b[pokemonRankingBy]})
+    }
     return <div>
         <button className='bubbly-success is-success' style={buttonStyle} onClick={props.toggleMeta}>Lobby</button>
         <div className='nes-container' style={{margin:'10px', height: '90vh', color:'white'}}>
@@ -48,6 +60,7 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
                 <TabList>
                     <Tab key='team-comps'><p className='my-cursor' style={tabStyle}>Meta Report</p></Tab>
                     <Tab key='items'><p className='my-cursor' style={tabStyle}>Item Report</p></Tab>
+                    <Tab key='pokemons'><p className='my-cursor' style={tabStyle}>Pokemon Report</p></Tab>
                     <Tab key='bots'><p className='my-cursor' style={tabStyle}>Bot Report</p></Tab>
                     <Tab key='discover'><p className='my-cursor' style={tabStyle}>Discover</p></Tab>
                 </TabList>
@@ -85,6 +98,23 @@ export default function MetaReport(props: {meta: IMeta[], metaItems: IItemsStati
                 <div style={{height:'70vh', overflowY:'scroll'}}>
                     {sortedMetaItems.map(item=>{
                         return <ItemStatistic item={item} key={item.name}/>
+                    })}
+                </div>
+                </TabPanel>
+                <TabPanel>
+                <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', paddingRight:'27px', paddingLeft:'15px'}}>
+                    <h3>Best Pokemons</h3>
+                    <div style={{display:'flex', width:'23%',alignItems:'center', justifyContent:'space-around',backgroundColor:'rgb(84, 89, 107)'}} className='my-select'>
+                        <p style={{margin:'0px'}}>Rank</p>
+                        <select className='my-cursor' value={pokemonRankingBy} onChange={(e)=>{setPokemonRanking(e.target.value)}} style={{background:'none', border:'none', color:'white'}}>
+                            <option style={optStyle} value="count">by popularity</option>
+                            <option style={optStyle} value="rank">by average place</option>
+                        </select>
+                    </div>
+                </div>
+                <div style={{height:'70vh', overflowY:'scroll'}}>
+                    {sortedMetaPokemons.map(pokemon=>{
+                        return <PokemonStatistic pokemon={pokemon} key={pokemon.name}/>
                     })}
                 </div>
                 </TabPanel>

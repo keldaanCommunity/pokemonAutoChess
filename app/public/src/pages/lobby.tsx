@@ -16,7 +16,7 @@ import TeamBuilder from './component/bot-builder/team-builder'
 import MetaReport from './component/meta-report/meta-report'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { joinLobby, logIn, logOut, requestMeta, requestBotList } from '../stores/NetworkStore'
-import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent, setBotMonitor } from '../stores/LobbyStore'
+import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent, setBotMonitor, setMetaPokemons } from '../stores/LobbyStore'
 import { ICustomLobbyState, Transfer } from '../../../types'
 import LobbyUser from '../../../models/colyseus-models/lobby-user'
 import { IBot } from '../../../models/mongo-models/bot-v2'
@@ -26,6 +26,7 @@ import PokemonCollection from './component/collection/pokemon-collection'
 import PokemonConfig from '../../../models/colyseus-models/pokemon-config'
 import Booster from './component/booster/booster'
 import { IBotMonitoring } from '../../../models/mongo-models/bot-monitoring'
+import { IPokemonsStatistic } from '../../../models/mongo-models/pokemons-statistic'
 
 export default function Lobby(){
     const dispatch = useAppDispatch()
@@ -34,6 +35,7 @@ export default function Lobby(){
     const uid: string = useAppSelector(state=>state.network.uid)
     const meta: IMeta[] = useAppSelector(state=>state.lobby.meta)
     const metaItems: IItemsStatistic[] = useAppSelector(state=>state.lobby.metaItems)
+    const metaPokemons: IPokemonsStatistic[] = useAppSelector(state=>state.lobby.metaPokemons)
     const botList: {name: string, avatar: string}[] = useAppSelector(state=>state.lobby.botList)
     const audio = useRef(new Audio('assets/sounds/notification.mp3'))
     
@@ -113,6 +115,8 @@ export default function Lobby(){
                         room.onMessage(Transfer.REQUEST_META, (meta: IMeta[]) => {dispatch(setMeta(meta))})
     
                         room.onMessage(Transfer.REQUEST_META_ITEMS, (metaItems: IItemsStatistic[]) => {dispatch(setMetaItems(metaItems))})
+
+                        room.onMessage(Transfer.REQUEST_META_POKEMONS, (metaPokemons: IPokemonsStatistic[]) => {dispatch(setMetaPokemons(metaPokemons))})
     
                         room.onMessage(Transfer.REQUEST_BOT_MONITOR, (botMonitor: IBotMonitoring[]) => {dispatch(setBotMonitor(botMonitor))})
     
@@ -152,7 +156,12 @@ export default function Lobby(){
         return <Wiki toggleWiki={()=>toggleWiki(!showWiki)}/>
       }
       if(showMeta && meta.length > 0 && metaItems.length > 0){
-          return <MetaReport toggleMeta={()=>toggleMeta(!showMeta)} meta={meta} metaItems={metaItems}/>
+          return <MetaReport
+            toggleMeta={()=>toggleMeta(!showMeta)}
+            meta={meta} 
+            metaItems={metaItems}
+            metaPokemons={metaPokemons}
+            />
       }
       if(showBuilder){
           return <TeamBuilder 

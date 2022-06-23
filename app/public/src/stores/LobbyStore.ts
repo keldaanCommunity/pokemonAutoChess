@@ -11,6 +11,7 @@ import { IPokemonConfig } from '../../../models/mongo-models/user-metadata'
 import PokemonConfig from '../../../models/colyseus-models/pokemon-config'
 import { Synergy } from '../../../types/enum/Synergy'
 import { IBotMonitoring } from '../../../models/mongo-models/bot-monitoring'
+import { IPokemonsStatistic } from '../../../models/mongo-models/pokemons-statistic'
 
 interface IUserLobbyState {
     messages: IMessage[];
@@ -24,6 +25,7 @@ interface IUserLobbyState {
     botList: {name :string, avatar: string}[];
     meta: IMeta[];
     metaItems: IItemsStatistic[];
+    metaPokemons: IPokemonsStatistic[];
     pastebinUrl: string;
     botData: IBot;
     synergies: [Synergy, number][];
@@ -47,6 +49,7 @@ const initialState: IUserLobbyState = {
     botList: [],
     meta: [],
     metaItems: [],
+    metaPokemons: [],
     pastebinUrl: '',
     synergies: [],
     botData: {
@@ -252,6 +255,9 @@ export const lobbySlice = createSlice({
         setMetaItems: (state, action: PayloadAction<IItemsStatistic[]>) => {
             state.metaItems = action.payload
         },
+        setMetaPokemons: (state, action: PayloadAction<IPokemonsStatistic[]>) => {
+          state.metaPokemons = action.payload
+      },
         setBotList: (state, action: PayloadAction<{name: string, avatar: string}[]>) => {
             state.botList = action.payload
         },
@@ -292,6 +298,7 @@ export const {
     setSearchedUser,
     setMeta,
     setMetaItems,
+    setMetaPokemons,
     setBotList,
     setPastebinUrl,
     setBotData,
