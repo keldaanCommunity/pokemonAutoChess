@@ -451,15 +451,15 @@ export default class PokemonState {
       }
 
       if (pokemon.effects.includes(Effect.INGRAIN)) {
-        pokemon.handleHeal(5, pokemon)
+        pokemon.handleHeal(4, pokemon)
       }
 
       if (pokemon.effects.includes(Effect.GROWTH)) {
-        pokemon.handleHeal(10, pokemon)
+        pokemon.handleHeal(8, pokemon)
       }
 
       if (pokemon.effects.includes(Effect.SPORE)) {
-        pokemon.handleHeal(20, pokemon)
+        pokemon.handleHeal(16, pokemon)
       }
     }
     return updateEffects
