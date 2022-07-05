@@ -221,12 +221,12 @@
          'fra': 'Une tempête de sable fait rage, faisant 10% HP/s aux pkm non sol/acier/mineral'
      },
      [Effect.POISON_GAS]: {
-         'eng': 'Your Poison pokemon have a 10% chance to poison the target for 2 seconds. (15% HP per second)',
+         'eng': 'Your Poison pokemon have a 20% chance to poison the target for 3 seconds. (15% HP per second)',
          'esp': '+20% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo',
          'fra': '+20% de chances d\'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes'
      },
      [Effect.TOXIC]: {
-         'eng': 'Your Poison pokemon have an extra 30% chance to poison the target for 2 seconds. (15% HP per second)',
+         'eng': 'Your Poison pokemon have an extra 40% chance to poison the target for 3 seconds. (15% HP per second)',
          'esp': '+30% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo',
          'fra': '+30% de chances d\'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes'
      },
