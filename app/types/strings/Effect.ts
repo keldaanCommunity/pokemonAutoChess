@@ -141,17 +141,17 @@
          'fra': 'Invoque Kyogre, le roi des océans'
      },
      [Effect.EERIE_IMPULSE]: {
-         'eng': 'Electric\' Basic Attacks have a 20% chance to trigger two additional attacks against their target.',
+         'eng': 'Electric\' Basic Attacks have a 30% chance to trigger two additional attacks against their target.',
          'esp': '+10% de velocidad ATK por cada aliado eléctrico del equipo',
          'fra': '+10% ATK speed pour chaque allié elec dans l\'équipe'
      },
      [Effect.RISING_VOLTAGE]: {
-         'eng': 'Electric\' Basic Attacks have a 40% chance to trigger two additional attacks against their target.',
+         'eng': 'Electric\' Basic Attacks have a 50% chance to trigger two additional attacks against their target.',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
      [Effect.OVERDRIVE]: {
-         'eng': 'Electric\' Basic Attacks have a 60% chance to trigger two additional attacks against their target.',
+         'eng': 'Electric\' Basic Attacks have a 70% chance to trigger two additional attacks against their target.',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
@@ -221,22 +221,22 @@
          'fra': 'Une tempête de sable fait rage, faisant 10% HP/s aux pkm non sol/acier/mineral'
      },
      [Effect.POISON_GAS]: {
-         'eng': 'Your Poison pokemon have a 10% chance to poison the target for 2 seconds. (15% HP per second)',
+         'eng': 'Your Poison pokemon have a 20% chance to poison the target for 3 seconds. (15% HP per second)',
          'esp': '+20% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo',
          'fra': '+20% de chances d\'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes'
      },
      [Effect.TOXIC]: {
-         'eng': 'Your Poison pokemon have an extra 30% chance to poison the target for 2 seconds. (15% HP per second)',
+         'eng': 'Your Poison pokemon have an extra 40% chance to poison the target for 3 seconds. (15% HP per second)',
          'esp': '+30% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo',
          'fra': '+30% de chances d\'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes'
      },
      [Effect.DRAGON_ENERGY]: {
-         'eng': 'Your Dragon pokemon gain +4% attack Speed after every hit.',
+         'eng': 'Your Dragon pokemon gain +5% attack Speed after every hit.',
          'esp': '-30% ATK para el equipo enemigo',
          'fra': '-30% ATK pour l\'équipe ennemie'
      },
      [Effect.DRAGON_DANCE]: {
-         'eng': 'Your Dragon pokemon gain +7% attack Speed after every hit.',
+         'eng': 'Your Dragon pokemon gain +8% attack Speed after every hit.',
          'esp': '+5% velocidad de ataque para dragones pkm en cada ataque',
          'fra': '+5% vitesse d\'attaque pour les pkm dragons à chaque attaque'
      },

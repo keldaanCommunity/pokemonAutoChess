@@ -427,7 +427,7 @@ export default class PokemonState {
       }
 
       if (pokemon.status.poison && pokemon.status.poisonOrigin) {
-        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.10), board, AttackType.TRUE, pokemon.status.poisonOrigin)
+        this.handleDamage(pokemon, Math.ceil(pokemon.hp *0.15), board, AttackType.TRUE, pokemon.status.poisonOrigin)
       }
 
       if(pokemon.effects.includes(Effect.VICTORY_STAR)){
@@ -443,11 +443,11 @@ export default class PokemonState {
       }
 
       if (pokemon.effects.includes(Effect.DRAGON_ENERGY) && pokemon.types.includes(Synergy.DRAGON)) {
-        pokemon.handleAttackSpeed(4)
+        pokemon.handleAttackSpeed(5)
       }
 
       if (pokemon.effects.includes(Effect.DRAGON_DANCE) && pokemon.types.includes(Synergy.DRAGON)) {
-        pokemon.handleAttackSpeed(7)
+        pokemon.handleAttackSpeed(8)
       }
 
       if (pokemon.effects.includes(Effect.INGRAIN)) {

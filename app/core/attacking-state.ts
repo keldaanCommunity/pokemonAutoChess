@@ -31,11 +31,11 @@ export default class AttackingState extends PokemonState {
         if (pokemon.effects.includes(Effect.EERIE_IMPULSE) || pokemon.effects.includes(Effect.RISING_VOLTAGE) || pokemon.effects.includes(Effect.OVERDRIVE)) {
           let doubleAttackChance = 0
           if (pokemon.effects.includes(Effect.EERIE_IMPULSE)) {
-            doubleAttackChance = 0.2
+            doubleAttackChance = 0.3
           } else if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
-            doubleAttackChance = 0.4
+            doubleAttackChance = 0.5
           } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
-            doubleAttackChance = 0.6
+            doubleAttackChance = 0.7
           }
           if (Math.random() < doubleAttackChance) {
             pokemon.count.doubleAttackCount ++
@@ -73,10 +73,10 @@ export default class AttackingState extends PokemonState {
       
       let poisonChance = 0
       if (pokemon.effects.includes(Effect.POISON_GAS)) {
-        poisonChance += 0.1
+        poisonChance += 0.2
       }
       if (pokemon.effects.includes(Effect.TOXIC)) {
-        poisonChance += 0.3
+        poisonChance += 0.4
       }
       if (poisonChance != 0) {
         if (Math.random() > 1 - poisonChance) {
