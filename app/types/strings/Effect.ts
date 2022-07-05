@@ -141,17 +141,17 @@
          'fra': 'Invoque Kyogre, le roi des océans'
      },
      [Effect.EERIE_IMPULSE]: {
-         'eng': 'Electric\' Basic Attacks have a 20% chance to trigger two additional attacks against their target.',
+         'eng': 'Electric\' Basic Attacks have a 30% chance to trigger two additional attacks against their target.',
          'esp': '+10% de velocidad ATK por cada aliado eléctrico del equipo',
          'fra': '+10% ATK speed pour chaque allié elec dans l\'équipe'
      },
      [Effect.RISING_VOLTAGE]: {
-         'eng': 'Electric\' Basic Attacks have a 40% chance to trigger two additional attacks against their target.',
+         'eng': 'Electric\' Basic Attacks have a 50% chance to trigger two additional attacks against their target.',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
      [Effect.OVERDRIVE]: {
-         'eng': 'Electric\' Basic Attacks have a 60% chance to trigger two additional attacks against their target.',
+         'eng': 'Electric\' Basic Attacks have a 70% chance to trigger two additional attacks against their target.',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
