@@ -47,6 +47,15 @@ export default class PokemonState {
             reducedDamage = Math.ceil(reducedDamage * 1.2)
           }
         }
+
+        if(attacker && attacker.status.electricField){
+            reducedDamage = Math.ceil(reducedDamage * 1.3)
+        }
+
+        if(attacker && attacker.status.psychicField){
+            reducedDamage = Math.ceil(reducedDamage * 1.3)
+        }
+
         if(attacker && attacker.name == Pkm.GENESECT && pokemon.status.armorReduction){
           reducedDamage *= 3
         }
@@ -286,6 +295,22 @@ export default class PokemonState {
             pokemon.simulation.addPokemon(PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM), pokemon.positionX, pokemon.positionY, pokemon.team)
           }
         }
+      }
+
+      if(pokemon.name === Pkm.TAPU_KOKO){
+        board.forEach((x,y,v)=>{
+            if(v && v.status.electricField){
+                v.status.electricField = false
+            }
+        })
+      }
+
+      if(pokemon.name === Pkm.TAPU_LELE){
+        board.forEach((x,y,v)=>{
+            if(v && v.status.psychicField){
+                v.status.psychicField = false
+            }
+        })
       }
     }
     return death

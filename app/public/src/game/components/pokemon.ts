@@ -65,6 +65,8 @@ export default class Pokemon extends Button {
   protect: GameObjects.Sprite | undefined
   resurection: GameObjects.Sprite | undefined
   runeProtect: GameObjects.Sprite | undefined
+  electricField: GameObjects.Sprite | undefined
+  psychicField: GameObjects.Sprite | undefined
 
   constructor(scene: Phaser.Scene, x: number, y: number, pokemon: IPokemonEntity | IPokemon, dragable: boolean, isPopup: boolean) {
     super(scene, x, y, 75, 75)
@@ -113,6 +115,7 @@ export default class Pokemon extends Button {
       this.action = PokemonActionState.WALK
     }
     this.sprite = new GameObjects.Sprite(scene, 0, 0, this.index, `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`)
+    this.sprite.setDepth(3)
     //this.sprite.setOrigin(0,0);
     this.sprite.setScale(2, 2)
     this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, (animation, frame, gameObject, frameKey: string)=>{const g = <GameScene> scene; if(frameKey.includes(PokemonActionState.ATTACK)){g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)}})
@@ -123,8 +126,16 @@ export default class Pokemon extends Button {
     //this.shadow.setOrigin(0,0);
     this.shadow.setScale(2, 2)
     scene.add.existing(this.shadow)
-    scene.add.existing(this.sprite)
     this.add(this.shadow)
+    if(instanceofPokemonEntity(pokemon)){
+        if(p.status.electricField){
+            this.addElectricField()
+        }
+        if(p.status.psychicField){
+            this.addPsychicField()
+        }
+    }
+    scene.add.existing(this.sprite)
     this.add(this.itemsContainer)
 
     if(instanceofPokemonEntity(pokemon)){
@@ -1465,5 +1476,40 @@ export default class Pokemon extends Button {
       this.remove(this.runeProtect, true)
       this.runeProtect = undefined
     }
+  }
+
+  addElectricField(){
+    if (!this.electricField) {
+        this.electricField = new GameObjects.Sprite(this.scene, 0, 10, 'ELECTRIC_SURGE', '000')
+        this.electricField.setDepth(0)
+        this.electricField.setScale(1.5, 1.5)
+        this.scene.add.existing(this.electricField)
+        this.electricField.anims.play('ELECTRIC_SURGE')
+        this.add(this.electricField)
+      }
+  }
+
+  removeElectricField(){
+    if (this.electricField) {
+        this.remove(this.electricField, true)
+        this.electricField = undefined
+      }
+  }
+
+  addPsychicField(){
+    if (!this.psychicField) {
+        this.psychicField = new GameObjects.Sprite(this.scene, 0, 10, 'PSYCHIC_SURGE', '000')
+        this.psychicField.setDepth(0)
+        this.scene.add.existing(this.psychicField)
+        this.psychicField.anims.play('PSYCHIC_SURGE')
+        this.add(this.psychicField)
+      }
+  }
+
+  removePsychicField(){
+    if (this.psychicField) {
+        this.remove(this.psychicField, true)
+        this.psychicField = undefined
+      }
   }
 }

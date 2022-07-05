@@ -131,6 +131,19 @@ export class WonderGuardStrategy extends AttackStrategy{
   }
 }
 
+export class ElectricSurgeStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target)
+    }
+}
+
+export class PsychicSurgeStrategy extends AttackStrategy{
+    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+        super.process(pokemon, state, board, target)
+    }
+}
+
+
 export class CorruptedNatureStrategy extends AttackStrategy{
     process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
         super.process(pokemon, state, board, target)

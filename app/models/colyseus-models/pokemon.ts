@@ -2373,3 +2373,15 @@ export class Blissey extends Pokemon {
     super(Pkm.BLISSEY, [Synergy.NORMAL, Synergy.FAIRY, Synergy.HUMAN], Rarity.LEGENDARY, PkmIndex[Pkm.BLISSEY], Pkm.DEFAULT, 480, 17, 7, 5, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 3, 130, Ability.SOFT_BOILED,shiny, emotion, true)
   }
 }
+
+export class TapuKoko extends Pokemon {
+    constructor(shiny: boolean, emotion: Emotion) {
+      super(Pkm.TAPU_KOKO, [Synergy.ELECTRIC, Synergy.FAIRY], Rarity.MYTHICAL, PkmIndex[Pkm.TAPU_KOKO], Pkm.DEFAULT, 270, 17, 3, 3, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 70, Ability.VOLT_SWITCH,shiny, emotion, true)
+    }
+}
+
+export class TapuLele extends Pokemon {
+    constructor(shiny: boolean, emotion: Emotion) {
+      super(Pkm.TAPU_LELE, [Synergy.PSYCHIC, Synergy.FAIRY], Rarity.MYTHICAL, PkmIndex[Pkm.TAPU_LELE], Pkm.DEFAULT, 270, 17, 3, 3, 2, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 70, Ability.DISARMING_VOICE,shiny, emotion, true)
+    }
+}

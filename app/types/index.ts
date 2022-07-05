@@ -337,6 +337,8 @@ export interface IStatus {
     smoke: boolean
     armorReduction: boolean
     runeProtect: boolean
+    electricField: boolean
+    psychicField: boolean
 }
 
 export interface ICount {

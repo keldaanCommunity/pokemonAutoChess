@@ -2,13 +2,13 @@ import { Langage } from '..'
 import { Ability } from '../enum/Ability'
 
 export const AbilityName: {[key in Ability]: Langage} = {
-    [Ability.SOFT_BOILED]:{
+    [Ability.SOFT_BOILED]: {
         eng: 'Soft Boiled',
         esp: '',
         fra: '',
         prt: ''
     },
-    [Ability.EARTHQUAKE]:{
+    [Ability.EARTHQUAKE]: {
         eng: 'Earthquake',
         esp: '',
         fra: '',
@@ -538,6 +538,18 @@ export const AbilityName: {[key in Ability]: Langage} = {
     },
     WONDER_GUARD: {
         eng: 'Wonder Guard',
+        esp: '',
+        prt: '',
+        fra: ''
+    },
+    ELECTRIC_SURGE: {
+        eng: 'Electric Surge',
+        esp: '',
+        prt: '',
+        fra: ''
+    },
+    PSYCHIC_SURGE: {
+        eng: 'Psychic Surge',
         esp: '',
         prt: '',
         fra: ''
@@ -1081,6 +1093,18 @@ export const AbilityDescription: {[key in Ability]: Langage} = {
     },
     WONDER_GUARD: {
         eng: 'Passive: Reduce received damage to 1.',
+        esp: '',
+        prt: '',
+        fra: ''
+    },
+    ELECTRIC_SURGE: {
+        eng: 'Passive: Electric-type damage are boosted by 30%',
+        esp: '',
+        prt: '',
+        fra: ''
+    },
+    PSYCHIC_SURGE: {
+        eng: 'Passive: Psychic-type damage are boosted by 30%',
         esp: '',
         prt: '',
         fra: ''
