@@ -17,6 +17,8 @@ export default class Status extends Schema implements IStatus{
   @type('boolean') smoke = false
   @type('boolean') armorReduction = false
   @type('boolean') runeProtect = false
+  @type('boolean') electricField = false
+  @type('boolean') psychicField = false
   temporaryShield = false
   soulDew = false
   brightPowder = false

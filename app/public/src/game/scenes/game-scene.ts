@@ -128,6 +128,8 @@ export default class GameScene extends Scene {
     this.load.multiatlas('smoke', '/assets/status/SMOKE.json', '/assets/status')
     this.load.multiatlas('rune_protect', '/assets/status/RUNE_PROTECT.json', '/assets/status')
     this.load.multiatlas('armorReduction', '/assets/status/ARMOR_REDUCTION.json', '/assets/status')
+    this.load.multiatlas('ELECTRIC_SURGE', '/assets/status/ELECTRIC_SURGE.json', '/assets/status')
+    this.load.multiatlas('PSYCHIC_SURGE', '/assets/status/PSYCHIC_SURGE.json', '/assets/status')
     this.load.multiatlas('item', '/assets/item/item.json', '/assets/item/')
     this.load.multiatlas('lock', '/assets/lock/lock.json', '/assets/lock/')
     this.load.multiatlas('types', '/assets/types/types.json', '/assets/types')

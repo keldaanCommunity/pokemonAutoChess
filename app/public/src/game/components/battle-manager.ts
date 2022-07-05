@@ -174,6 +174,18 @@ export default class BattleManager {
             } else {
               pkm.removeRuneProtect()
             }
+          } else if (change.field == 'electricField') {
+            if (pokemon.status.electricField) {
+              pkm.addElectricField()
+            } else {
+              pkm.removeElectricField()
+            }
+          } else if (change.field == 'psychicField') {
+            if (pokemon.status.psychicField) {
+              pkm.addPsychicField()
+            } else {
+              pkm.removePsychicField()
+            }
           }
         }
       }

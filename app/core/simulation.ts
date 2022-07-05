@@ -11,6 +11,7 @@ import DpsHeal from './dps-heal'
 import ItemFactory from '../models/item-factory'
 import { ISimulation, IPokemonEntity, IPokemon } from '../types'
 import { Synergy } from '../types/enum/Synergy'
+import { Pkm } from '../types/enum/Pokemon'
 
 export default class Simulation extends Schema implements ISimulation{
   @type('string') climate: Climate = Climate.NEUTRAL
@@ -470,6 +471,44 @@ export default class Simulation extends Schema implements ISimulation{
           }
         })
       }
+    })
+
+    let isTapuKoko = false
+    let isTapuLele = false
+
+    this.blueTeam.forEach((pokemon)=>{
+        if(pokemon.name == Pkm.TAPU_KOKO){
+            isTapuKoko = true
+        }
+        if(pokemon.name == Pkm.TAPU_LELE){
+            isTapuLele = true
+        }
+    })
+    this.redTeam.forEach((pokemon)=>{
+        if(pokemon.name == Pkm.TAPU_KOKO){
+            isTapuKoko = true
+        }
+        if(pokemon.name == Pkm.TAPU_LELE){
+            isTapuLele = true
+        }
+    })
+
+    this.blueTeam.forEach((pokemon)=>{
+        if(isTapuKoko && pokemon.types.includes(Synergy.ELECTRIC)){
+            pokemon.status.electricField = true
+        }
+        if(isTapuLele && pokemon.types.includes(Synergy.PSYCHIC)){
+            pokemon.status.psychicField = true
+        }
+    })
+
+    this.redTeam.forEach((pokemon)=>{
+        if(isTapuKoko && pokemon.types.includes(Synergy.ELECTRIC)){
+            pokemon.status.electricField = true
+        }
+        if(isTapuLele && pokemon.types.includes(Synergy.PSYCHIC)){
+            pokemon.status.psychicField = true
+        }
     })
   }
 
