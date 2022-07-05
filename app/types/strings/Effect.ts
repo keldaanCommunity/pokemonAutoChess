@@ -91,17 +91,17 @@
          'fra': '+50 HP pour tous les pokémons autours'
      },
      [Effect.INGRAIN]: {
-         'eng': 'Grass allies restore 4 HP per second',
+         'eng': 'Grass allies restore 5 HP per second',
          'esp': '+5% HP/s para los tipos de Planta',
          'fra': '+5% HP/s pour tous les alliés plante'
      },
      [Effect.GROWTH]: {
-         'eng': 'Grass allies restore 8 HP per second',
+         'eng': 'Grass allies restore 10 HP per second',
          'esp': '+10% HP/s para los tipos de Planta',
          'fra': '+10% HP/s pour tous les alliés plante'
      },
      [Effect.SPORE]: {
-         'eng': 'Grass allies restore 16 HP per second',
+         'eng': 'Grass allies restore 20 HP per second',
          'esp': 'Los ennemigos que no son de Planta tienen un 30% ATK speed',
          'fra': '-30% ATK speed pour tous les ennemis'
      },
