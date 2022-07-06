@@ -68,7 +68,7 @@ export default class AttackingState extends PokemonState {
         freezeChance += 0.3
       }
       if (Math.random() > 1 - freezeChance) {
-        target.status.triggerFreeze(2000)
+        target.status.triggerFreeze(2000, target)
       }
       
       let poisonChance = 0

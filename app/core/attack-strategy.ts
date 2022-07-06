@@ -90,7 +90,7 @@ export class SongOfDesireStrategy extends AttackStrategy{
       else if(pokemon.stars == 3){
         duration = 9000
       }
-      target.status.triggerConfusion(duration)
+      target.status.triggerConfusion(duration, target)
   }
 }
 
@@ -112,7 +112,7 @@ export class ConfusingMindStrategy extends AttackStrategy{
       cells.forEach(cell => {
         if(cell.value && cell.value.team !== pokemon.team){
           cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-          cell.value.status.triggerConfusion(confusion * 1000)
+          cell.value.status.triggerConfusion(confusion * 1000, cell.value)
         }
       })
   }
@@ -226,7 +226,7 @@ export class DynamicPunchStrategy extends AttackStrategy{
           damage = 80
           duration = 6000
         }
-        target.status.triggerConfusion(duration)
+        target.status.triggerConfusion(duration, target)
         target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
     }
 }
@@ -562,7 +562,7 @@ export class RelicSongStrategy extends AttackStrategy {
     }
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team) {
-        tg.status.triggerSleep(d)
+        tg.status.triggerSleep(d, tg)
       }
     })
   }
@@ -634,7 +634,7 @@ export class GrassWhistleStrategy extends AttackStrategy {
     }
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team && n > 0) {
-        tg.status.triggerSleep(2000)
+        tg.status.triggerSleep(2000, tg)
         n--
       }
     })
@@ -659,7 +659,7 @@ export class TriAttackStrategy extends AttackStrategy {
       default:
         break
     }
-    target.status.triggerFreeze(duration)
+    target.status.triggerFreeze(duration, target)
     target.status.triggerWound(duration)
     target.status.triggerBurn(duration, target, pokemon)
   }
@@ -760,7 +760,7 @@ export class HyperVoiceStrategy extends AttackStrategy {
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-        tg.status.triggerConfusion(confusion * 1000)
+        tg.status.triggerConfusion(confusion * 1000, tg)
       }
     })
   }
@@ -1131,7 +1131,7 @@ export class FreezeStrategy extends AttackStrategy {
     }
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
       if (value && pokemon.team != value.team) {
-        value.status.triggerFreeze(timer)
+        value.status.triggerFreeze(timer, value)
       }
     })
   }
@@ -1184,7 +1184,7 @@ export class SleepStrategy extends AttackStrategy {
       default:
         break
     }
-    target.status.triggerSleep(timer)
+    target.status.triggerSleep(timer, target)
   }
 }
 
@@ -1210,7 +1210,7 @@ export class ConfusionStrategy extends AttackStrategy {
         break
     }
 
-    target.status.triggerConfusion(timer)
+    target.status.triggerConfusion(timer, target)
   }
 }
 

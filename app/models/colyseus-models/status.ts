@@ -168,8 +168,8 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  triggerFreeze(timer: number) {
-    if (!this.freeze) {
+  triggerFreeze(timer: number, pkm: PokemonEntity) {
+    if (!this.freeze && !pkm.items.has(Item.FLUFFY_TAIL)) {
       this.freeze = true
       this.freezeCooldown = timer
     }
@@ -198,8 +198,8 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  triggerSleep(timer: number) {
-    if (!this.sleep) {
+  triggerSleep(timer: number, pkm: PokemonEntity) {
+    if (!this.sleep && !pkm.items.has(Item.FLUFFY_TAIL)) {
       this.sleep = true
       this.sleepCooldown = timer
     }
@@ -213,8 +213,8 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  triggerConfusion(timer: number) {
-    if (!this.confusion) {
+  triggerConfusion(timer: number, pkm: PokemonEntity) {
+    if (!this.confusion && !pkm.items.has(Item.FLUFFY_TAIL)) {
       this.confusion = true
       this.confusionCooldown = timer
     }

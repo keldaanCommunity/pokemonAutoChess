@@ -367,17 +367,10 @@ export default class Simulation extends Schema implements ISimulation{
           }
         })
       }
-      if (pokemon.items.has(Item.FLUFFY_TAIL)) {
-        this.board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-          if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
-            value.maxMana = Math.ceil(value.maxMana * 1.3)
-          }
-        })
-      }
       if (pokemon.items.has(Item.SHINY_CHARM)) {
         this.board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
-            value.status.triggerSleep(3000)
+            value.status.triggerSleep(3000, value)
           }
         })
       }
@@ -449,17 +442,10 @@ export default class Simulation extends Schema implements ISimulation{
           }
         })
       }
-      if (pokemon.items.has(Item.FLUFFY_TAIL)) {
-        this.board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-          if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
-            value.maxMana = Math.ceil(value.maxMana * 1.3)
-          }
-        })
-      }
       if (pokemon.items.has(Item.SHINY_CHARM)) {
         this.board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
           if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
-            value.status.triggerSleep(3000)
+            value.status.triggerSleep(3000, value)
           }
         })
       }

@@ -101,7 +101,7 @@ import { Item } from '../enum/Item'
     [Item.RUNE_PROTECT]: 'When combat begins, the holder and all allies whithin 1 hex in the same row gain a shield that block the damage and effects of the first ennemy ability',
     [Item.WIDE_LENS]: 'The holder gains 20% bonus attack speed. The holder is immune to poison/fire',
     [Item.RAZOR_CLAW]: 'The holder gains 75% Critical Strike Chance and 10% Critical Strike Damage',
-    [Item.FLUFFY_TAIL]: 'When combat begins, every ennemy in the same column have their max mana increased by 30%',
+    [Item.FLUFFY_TAIL]: 'The holder is immune to freeze/sleep/confusion',
     [Item.ORAN_BERRY]: 'Grants 100 bonus hp',
     [Item.SHINY_CHARM]: 'When combat begins, every ennemy in the same column falls asleep for 3 seconds',
     [Item.FOCUS_BAND]: 'When combat begins, the holder and all allies within 1 hexes in the same row gain +30% Attack Speed for the rest of combat',
