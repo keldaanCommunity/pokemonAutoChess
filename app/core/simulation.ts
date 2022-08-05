@@ -593,21 +593,21 @@ export default class Simulation extends Schema implements ISimulation{
 
         case Effect.RAIN_DANCE:
           if (types.includes(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.25)
+            pokemon.addDodgeChance(0.2)
             pokemon.effects.push(Effect.RAIN_DANCE)
           }
           break
 
         case Effect.DRIZZLE:
           if (types.includes(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.5)
+            pokemon.addDodgeChance(0.45)
             pokemon.effects.push(Effect.DRIZZLE)
           }
           break
 
         case Effect.PRIMORDIAL_SEA:
           if (types.includes(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.75)
+            pokemon.addDodgeChance(0.70)
             pokemon.effects.push(Effect.PRIMORDIAL_SEA)
           }
           break

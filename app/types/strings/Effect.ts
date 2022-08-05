@@ -126,17 +126,17 @@
          'fra': '?NONE?'
      },
      [Effect.RAIN_DANCE]: {
-         'eng': 'Water pokemons gain 25% chance to dodge enemy attacks & spells',
+         'eng': 'Water pokemons gain 20% chance to dodge enemy attacks & spells',
          'esp': 'Cae la lluvia, 30% de ATK para los aliados del agua',
          'fra': 'La pluie tombe, 30% d\'ATK pour les alliés eau'
      },
      [Effect.DRIZZLE]: {
-         'eng': 'Water pokemons gain 50% chance to dodge enemy attacks & spells',
+         'eng': 'Water pokemons gain 45% chance to dodge enemy attacks & spells',
          'esp': 'La lluvia es cada vez más intensa, un 30% más de ATK.',
          'fra': 'La pluie s\'intensifie, 30% d\'ATK en plus'
      },
      [Effect.PRIMORDIAL_SEA]: {
-         'eng': 'Water pokemons gain 75% chance to dodge enemy attacks & spells',
+         'eng': 'Water pokemons gain 70% chance to dodge enemy attacks & spells',
          'esp': 'Invoca a Kyogre, el rey de los océanos',
          'fra': 'Invoque Kyogre, le roi des océans'
      },
