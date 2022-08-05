@@ -376,17 +376,17 @@
          'fra': 'Les attaques des fantomes réduisent aux silences leurs cibles'
      },
      [Effect.AROMATIC_MIST]: {
-         'eng': 'Fairy pokemons shock nearby enemies for 15 special damages whenever they deal or receive a critical strike',
+         'eng': 'Fairy pokemons shock nearby enemies for 10 special damages whenever they deal or receive a critical strike',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
      [Effect.FAIRY_WIND]: {
-         'eng': 'Fairy pokemons shock nearby enemies for 30 special damages whenever they deal or receive a critical strike',
+         'eng': 'Fairy pokemons shock nearby enemies for 25 special damages whenever they deal or receive a critical strike',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
      [Effect.STRANGE_STEAM]: {
-         'eng': 'Fairy pokemons shock nearby enemies for 60 special damages whenever they deal or receive a critical strike',
+         'eng': 'Fairy pokemons shock nearby enemies for 50 special damages whenever they deal or receive a critical strike',
          'esp': '?NONE?',
          'fra': '?NONE?'
      },
