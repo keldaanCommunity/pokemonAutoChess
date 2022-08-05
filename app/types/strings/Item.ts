@@ -90,7 +90,7 @@ import { Item } from '../enum/Item'
     [Item.BRIGHT_POWDER]: 'Every 5 seconds, the holder throws a bright powder within 1 hex, healing them for 18% of their missing health',
     [Item.DELTA_ORB]: 'When combat begins, the holder and all allies within 1 hex in the same row gain 30% Spell damage for the rest of combat',
     [Item.MANA_SCARF]: 'The holder attacks restore 8 additional mana',
-    [Item.SMOKE_BALL]: 'Reduce the attack speed of ennemy attackers by 50% for 5 seconds',
+    [Item.SMOKE_BALL]: 'Reduce the attack speed of ennemy attackers by 40% for 5 seconds',
     [Item.XRAY_VISION]: 'Increase the holders attack range by 1 hex and grants 55% bonus attack speed. The holder attacks can no longer miss.',
     [Item.RAZOR_FANG]: 'When the holder inflicts a critical hit, the targets Armor is reduced by 70% for 5 seconds. This effect does not stack.',
     [Item.LEFTOVERS]: 'During  the combat, the holder attack heals adjacent allies for 3 health point',

@@ -291,7 +291,7 @@ export default class Status extends Schema implements IStatus{
   triggerSmoke(timer: number, pkm: PokemonEntity) {
     if (!this.smoke) {
       this.smoke = true
-      pkm.handleAttackSpeed(-50)
+      pkm.handleAttackSpeed(-40)
       this.smokeCooldown = timer
     }
   }
