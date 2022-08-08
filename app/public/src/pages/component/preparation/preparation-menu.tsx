@@ -85,7 +85,8 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                             place='top'>
                             <p>Easy: &lt;800</p>
                             <p>Normal: 800-1099</p>
-                            <p>Hard: &gt;=1100</p>
+                            <p>Hard: 1100-1400</p>
+                            <p>Extreme: &gt;1400</p>
                         </ReactTooltip>
                         Add Bot
                     </button>
@@ -94,6 +95,7 @@ export default function PreparationMenu(props:{setToGame: Dispatch<SetStateActio
                             <option value={BotDifficulty.EASY}>Easy</option>
                             <option value={BotDifficulty.MEDIUM}>Normal</option>
                             <option value={BotDifficulty.HARD}>Hard</option>
+                            <option value={BotDifficulty.EXTREME}>Extreme</option>
                     </select>
                     <button style={buttonStyle} className='bubbly-warning' onClick={()=>{dispatch(toggleReady())}}>Ready</button>
                     <button 
