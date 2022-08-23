@@ -2385,3 +2385,10 @@ export class TapuLele extends Pokemon {
       super(Pkm.TAPU_LELE, [Synergy.PSYCHIC, Synergy.FAIRY], Rarity.MYTHICAL, PkmIndex[Pkm.TAPU_LELE], Pkm.DEFAULT, 270, 17, 3, 3, 2, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 70, Ability.PSYCHIC_SURGE,shiny, emotion, true)
     }
 }
+
+export class Stakataka extends Pokemon {
+    constructor(shiny: boolean, emotion: Emotion) {
+      super(Pkm.STAKATAKA, [Synergy.MINERAL, Synergy.METAL], Rarity.MYTHICAL, PkmIndex[Pkm.STAKATAKA], Pkm.DEFAULT, 300, 20, 15, 15, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 3, 100, Ability.IRON_DEFENSE,shiny, emotion, true)
+    }
+  }
+  

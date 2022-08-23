@@ -37,7 +37,6 @@ zweilous,0634/AnimData.xml
 zweilous,0634/0000/0001/AnimData.xml
 hydreigon,0635/AnimData.xml
 hydreigon,0635/0000/0001/AnimData.xml
-sandile,0551/AnimData.xml
 sandile,0551/0000/0001/AnimData.xml
 krokorok,0552/AnimData.xml
 krokorok,0552/0000/0001/AnimData.xml
@@ -75,8 +74,6 @@ mega-banette,0354/0001/AnimData.xml
 mega-banette,0354/0001/0001/AnimData.xml
 doublade,0680/AnimData.xml
 doublade,0680/0000/0001/AnimData.xml
-aegislash,0681/AnimData.xml
-aegislash,0681/0000/0001/AnimData.xml
 palpitoad,0536/AnimData.xml
 palpitoad,0536/0000/0001/AnimData.xml
 seismitoad,0537/AnimData.xml
