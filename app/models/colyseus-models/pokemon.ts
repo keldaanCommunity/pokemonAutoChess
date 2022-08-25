@@ -2390,5 +2390,11 @@ export class Stakataka extends Pokemon {
     constructor(shiny: boolean, emotion: Emotion) {
       super(Pkm.STAKATAKA, [Synergy.MINERAL, Synergy.METAL], Rarity.MYTHICAL, PkmIndex[Pkm.STAKATAKA], Pkm.DEFAULT, 300, 20, 15, 15, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 3, 100, Ability.IRON_DEFENSE,shiny, emotion, true)
     }
+}
+
+export class Blacephalon extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(Pkm.BLACEPHALON, [Synergy.FIRE, Synergy.GHOST], Rarity.MYTHICAL, PkmIndex[Pkm.BLACEPHALON], Pkm.DEFAULT, 200, 18, 3, 3, 3, AttackSprite.GHOST_RANGE, AttackType.SPECIAL, 2, 70, Ability.MIND_BLOWN,shiny, emotion, true)
   }
+}
   
