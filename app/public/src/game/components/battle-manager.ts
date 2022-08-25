@@ -244,6 +244,10 @@ export default class BattleManager {
             if (change.value != 0) {
               pkm.brightPowderAnimation()
             }
+          } else if (change.field == 'mindBlownCount') {
+            if (change.value != 0) {
+              pkm.mindBlownAnimation()
+            }
           } else if (change.field == 'staticCount') {
             if (change.value != 0) {
               pkm.staticAnimation()

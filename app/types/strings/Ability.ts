@@ -553,6 +553,12 @@ export const AbilityName: {[key in Ability]: Langage} = {
         esp: '',
         prt: '',
         fra: ''
+    },
+    MIND_BLOWN: {
+        eng: 'Mind Blown',
+        esp: '',
+        prt: '',
+        fra: ''
     }
 }
 
@@ -1105,6 +1111,12 @@ export const AbilityDescription: {[key in Ability]: Langage} = {
     },
     PSYCHIC_SURGE: {
         eng: 'Passive: Psychic-type damage are boosted by 30%',
+        esp: '',
+        prt: '',
+        fra: ''
+    },
+    MIND_BLOWN: {
+        eng: 'Deals 50% of target life as true damage',
         esp: '',
         prt: '',
         fra: ''

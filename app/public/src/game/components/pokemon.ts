@@ -324,6 +324,17 @@ export default class Pokemon extends Button {
     })
   }
 
+  mindBlownAnimation(){
+    const coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+    const specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], Ability.MIND_BLOWN, '000')
+    specialProjectile.setDepth(7)
+    specialProjectile.setScale(3, 3)
+    specialProjectile.anims.play(Ability.MIND_BLOWN)
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      specialProjectile.destroy()
+    })
+  }
+
   deathAnimation() {
     this.life = 0
     if(this.lifebar){
@@ -1200,6 +1211,17 @@ export default class Pokemon extends Button {
             additionalProjectile.setDepth(7)
             additionalProjectile.setScale(2, 2)
             additionalProjectile.anims.play(Ability.CONFUSING_MIND)
+            additionalProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+              additionalProjectile.destroy()
+            })
+            break
+
+          case Ability.MIND_BLOWN:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            additionalProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'MIND_BLOWN_SELF', '000')
+            additionalProjectile.setDepth(7)
+            additionalProjectile.setScale(2, 2)
+            additionalProjectile.anims.play('MIND_BLOWN_SELF')
             additionalProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               additionalProjectile.destroy()
             })

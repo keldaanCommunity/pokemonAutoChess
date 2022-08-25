@@ -1,4 +1,4 @@
-import { AttackStrategy, SoftBoiledStrategy, BiteStrategy, BlastBurnStrategy, BlazeKickStrategy, BonemerangStrategy, BugBuzzStrategy, BurnStrategy, CalmMindStrategy, ChargeStrategy, ClangorousSoulStrategy, ConfusingMindStrategy, ConfusionStrategy, CorruptedNatureStrategy, CrabHammerStrategy, DarkPulseStrategy, DiamondStormStrategy, DisarmingVoiceStrategy, DischargeStrategy, DracoEnergyStrategy, DracoMeteorStrategy, DragonBreathStrategy, DragonTailStrategy, DynamaxCannonStrategy, DynamicPunchStrategy, EarthquakeStrategy, EchoStrategy, ElectroBoostStrategy, ElectroWebStrategy, ExplosionStrategy, FireBlastStrategy, FireTrickStrategy, FlameChargeStrategy, FreezeStrategy, GrassWhistleStrategy, GrowlStrategy, GuillotineStrategy, HappyHourStrategy, HeadSmashStrategy, HealBlockStrategy, HeatWaveStrategy, HighJumpKickStrategy, HurricaneStrategy, HydroPumpStrategy, HyperVoiceStrategy, IcicleCrashStrategy, IronDefenseStrategy, IronTailStrategy, KingShieldStrategy, KnowledgeThiefStrategy, LeechLifeStrategy, LeechSeedStrategy, LockOnStrategy, MeteorMashStrategy, MetronomeStrategy, NastyPlotStrategy, NightmareStrategy, NightSlashStrategy, OriginPulseStrategy, PetalDanceStrategy, PoisonStingStrategy, PoisonStrategy, ProtectStrategy, PsychUpStrategy, RazorWindStrategy, RelicSongStrategy, RoarOfTimeStrategy, RockSlideStrategy, RockSmashStrategy, RockTombStrategy, RootStrategy, SeedFlareStrategy, SeismicTossStrategy, ShadowCloneStrategy, SilenceStrategy, SleepStrategy, SoakStrategy, SongOfDesireStrategy, StompStrategy, StunSporeStrategy, TeleportStrategy, ThiefStrategy, ThunderStrategy, TormentStrategy, TriAttackStrategy, TwistingNeitherStrategy, VoltSwitchStrategy, WheelOfFireStrategy, WishStrategy, WonderGuardStrategy, ElectricSurgeStrategy, PsychicSurgeStrategy } from '../../core/attack-strategy'
+import { AttackStrategy, SoftBoiledStrategy, BiteStrategy, BlastBurnStrategy, BlazeKickStrategy, BonemerangStrategy, BugBuzzStrategy, BurnStrategy, CalmMindStrategy, ChargeStrategy, ClangorousSoulStrategy, ConfusingMindStrategy, ConfusionStrategy, CorruptedNatureStrategy, CrabHammerStrategy, DarkPulseStrategy, DiamondStormStrategy, DisarmingVoiceStrategy, DischargeStrategy, DracoEnergyStrategy, DracoMeteorStrategy, DragonBreathStrategy, DragonTailStrategy, DynamaxCannonStrategy, DynamicPunchStrategy, EarthquakeStrategy, EchoStrategy, ElectroBoostStrategy, ElectroWebStrategy, ExplosionStrategy, FireBlastStrategy, FireTrickStrategy, FlameChargeStrategy, FreezeStrategy, GrassWhistleStrategy, GrowlStrategy, GuillotineStrategy, HappyHourStrategy, HeadSmashStrategy, HealBlockStrategy, HeatWaveStrategy, HighJumpKickStrategy, HurricaneStrategy, HydroPumpStrategy, HyperVoiceStrategy, IcicleCrashStrategy, IronDefenseStrategy, IronTailStrategy, KingShieldStrategy, KnowledgeThiefStrategy, LeechLifeStrategy, LeechSeedStrategy, LockOnStrategy, MeteorMashStrategy, MetronomeStrategy, NastyPlotStrategy, NightmareStrategy, NightSlashStrategy, OriginPulseStrategy, PetalDanceStrategy, PoisonStingStrategy, PoisonStrategy, ProtectStrategy, PsychUpStrategy, RazorWindStrategy, RelicSongStrategy, RoarOfTimeStrategy, RockSlideStrategy, RockSmashStrategy, RockTombStrategy, RootStrategy, SeedFlareStrategy, SeismicTossStrategy, ShadowCloneStrategy, SilenceStrategy, SleepStrategy, SoakStrategy, SongOfDesireStrategy, StompStrategy, StunSporeStrategy, TeleportStrategy, ThiefStrategy, ThunderStrategy, TormentStrategy, TriAttackStrategy, TwistingNeitherStrategy, VoltSwitchStrategy, WheelOfFireStrategy, WishStrategy, WonderGuardStrategy, ElectricSurgeStrategy, PsychicSurgeStrategy, MindBlownStrategy } from '../../core/attack-strategy'
 
 export enum Ability {
     DEFAULT = 'DEFAULT',
@@ -92,7 +92,8 @@ export enum Ability {
     EARTHQUAKE = 'EARTHQUAKE',
     SOFT_BOILED = 'SOFT_BOILED',
     ELECTRIC_SURGE = 'ELECTRIC_SURGE',
-    PSYCHIC_SURGE = 'PSYCHIC_SURGE'
+    PSYCHIC_SURGE = 'PSYCHIC_SURGE',
+    MIND_BLOWN = 'MIND_BLOWN'
 }
 
 export const AbilityStrategy: {[key in Ability]: AttackStrategy} = {
@@ -187,5 +188,7 @@ export const AbilityStrategy: {[key in Ability]: AttackStrategy} = {
     EARTHQUAKE: new EarthquakeStrategy(),
     SOFT_BOILED: new SoftBoiledStrategy(),
     [Ability.ELECTRIC_SURGE]: new ElectricSurgeStrategy(),
-    [Ability.PSYCHIC_SURGE]: new PsychicSurgeStrategy()
+    [Ability.PSYCHIC_SURGE]: new PsychicSurgeStrategy(),
+    [Ability.MIND_BLOWN]: new MindBlownStrategy()
+    
 }

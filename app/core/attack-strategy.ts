@@ -42,6 +42,14 @@ export class AttackStrategy {
   }
 }
 
+export class MindBlownStrategy extends AttackStrategy{
+  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+    super.process(pokemon, state, board, target)
+    target.count.mindBlownCount ++ 
+    target.handleSpellDamage(pokemon.life/2, board, AttackType.TRUE, pokemon)
+  }
+}
+
 export class SoftBoiledStrategy extends AttackStrategy{
   process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
     super.process(pokemon, state, board, target)
@@ -2341,7 +2349,8 @@ export class MetronomeStrategy extends AttackStrategy {
       CrabHammerStrategy,
       DiamondStormStrategy,
       ConfusingMindStrategy,
-      SongOfDesireStrategy
+      SongOfDesireStrategy,
+      MindBlownStrategy
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)
