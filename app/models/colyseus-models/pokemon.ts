@@ -2394,7 +2394,7 @@ export class Stakataka extends Pokemon {
 
 export class Blacephalon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.BLACEPHALON, [Synergy.FIRE, Synergy.GHOST], Rarity.MYTHICAL, PkmIndex[Pkm.BLACEPHALON], Pkm.DEFAULT, 200, 18, 3, 3, 3, AttackSprite.GHOST_RANGE, AttackType.SPECIAL, 2, 70, Ability.MIND_BLOWN,shiny, emotion, true)
+    super(Pkm.BLACEPHALON, [Synergy.FIRE, Synergy.GHOST], Rarity.MYTHICAL, PkmIndex[Pkm.BLACEPHALON], Pkm.DEFAULT, 200, 18, 3, 3, 3, AttackSprite.GHOST_RANGE, AttackType.SPECIAL, 2, 80, Ability.MIND_BLOWN,shiny, emotion, true)
   }
 }
   
