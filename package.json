@@ -59,7 +59,7 @@
     "firebaseui": "^6.0.1",
     "immer": "^9.0.12",
     "jimp": "^0.16.1",
-    "mongoose": "^6.2.4",
+    "mongoose": "^6.4.6",
     "multi-range-slider-react": "^1.0.7",
     "nes.css": "^2.3.0",
     "pastebin-ts": "^1.2.0",
