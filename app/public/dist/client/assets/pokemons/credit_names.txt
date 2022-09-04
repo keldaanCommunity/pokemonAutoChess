@@ -76,7 +76,7 @@ Meganai	<@!336650663293616140>
 Jarleypeño	JARLEYPENO	https://www.deviantart.com/applecone413
 <@!755070698753359913>	<@!755070698753359913>	
 Tainted#3886	<@!283571466891427841>	
-	<@!149282718578901001>	
+Leafia_Barrett	<@!149282718578901001>	Leafia_Barrett#1703
 	<@!469728607636422656>	
 	<@!199989579682414592>	
 XxWindpawxX	<@!192118698859954178>	<@!192118698859954178>
@@ -173,3 +173,4 @@ ZacianSword	<@!382540582746324993>
 Pink_no_tori	<@!872983950732165181>	https://twitter.com/pink_avian_poke
 Grimlin	<@!217653022094786560>	https://twitter.com/Griimlin
 cosmosully	<@!411407718839222272>	https://twitter.com/cosmosully
+	<@!413387711152390145>	
