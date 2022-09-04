@@ -580,7 +580,7 @@ export default class AnimationManager {
 
     this.game.anims.create({
       key: Ability.PAYDAY,
-      frames: this.game.anims.generateFrameNames(Ability.PAYDAY, {start: 0, end: 80}),
+      frames: this.game.anims.generateFrameNames(Ability.PAYDAY, {start: 0, end: 80, zeroPad: 3}),
       duration: 1000,
       repeat: 0
     })
