@@ -140,6 +140,7 @@ export default class GameScene extends Scene {
     this.load.multiatlas('ROCK_TOMB', '/assets/attacks/ROCK_TOMB.json', '/assets/attacks')
     this.load.multiatlas('ROCK_SMASH', '/assets/attacks/ROCK_SMASH.json', '/assets/attacks')
     this.load.multiatlas('VOLT_SWITCH', '/assets/attacks/VOLT_SWITCH.json', '/assets/attacks')
+    this.load.multiatlas('PAYDAY', '/assets/attacks/PAYDAY.json', '/assets/attacks')
     this.load.multiatlas('HYPER_VOICE', '/assets/attacks/HYPER_VOICE.json', '/assets/attacks')
     this.load.multiatlas('SHADOW_CLONE', '/assets/attacks/SHADOW_CLONE.json', '/assets/attacks')
     this.load.multiatlas('PETAL_DANCE', '/assets/attacks/PETAL_DANCE.json', '/assets/attacks')

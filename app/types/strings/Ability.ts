@@ -559,6 +559,12 @@ export const AbilityName: {[key in Ability]: Langage} = {
         esp: '',
         prt: '',
         fra: ''
+    },
+    PAYDAY:{
+        eng: 'Pay Day',
+        esp: '',
+        prt: '',
+        fra: ''
     }
 }
 
@@ -1117,6 +1123,12 @@ export const AbilityDescription: {[key in Ability]: Langage} = {
     },
     MIND_BLOWN: {
         eng: 'Deals 50% of target life as true damage',
+        esp: '',
+        prt: '',
+        fra: ''
+    },
+    PAYDAY:{
+        eng: 'Deals 20/40/80 physical damage. If the target is killed, the player receive 1/2/3 gold',
         esp: '',
         prt: '',
         fra: ''

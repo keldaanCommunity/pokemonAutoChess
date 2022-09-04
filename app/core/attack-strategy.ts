@@ -1,4 +1,4 @@
-import {Item} from '../types/enum/Item'
+import { Item } from '../types/enum/Item'
 import { Effect } from '../types/enum/Effect'
 import { AttackType } from '../types/enum/Game'
 import Board from './board'
@@ -8,7 +8,12 @@ import { Synergy } from '../types/enum/Synergy'
 import { AbilityStrategy } from '../types/enum/Ability'
 
 export class AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     pokemon.setMana(0)
     pokemon.count.ult += 1
 
@@ -22,18 +27,31 @@ export class AttackStrategy {
         atk += 7
       }
       if (atk > 0) {
-        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
-          if (tg && pokemon.team == tg.team && tg.types.includes(Synergy.SOUND)) {
-            tg.count.soundCount ++
+        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+          if (
+            tg &&
+            pokemon.team == tg.team &&
+            tg.types.includes(Synergy.SOUND)
+          ) {
+            tg.count.soundCount++
             tg.atk += atk
           }
         })
       }
     }
-    board.forEach((r: number, c: number, value: PokemonEntity | undefined) =>{
-      if (value !== undefined && value.team != pokemon.team && value.items.has(Item.WATER_INCENSE)) {
-        pokemon.count.incenseCount ++
-        pokemon.handleSpellDamage(Math.ceil(value.maxMana * 0.2), board, AttackType.SPECIAL, value)
+    board.forEach((r: number, c: number, value: PokemonEntity | undefined) => {
+      if (
+        value !== undefined &&
+        value.team != pokemon.team &&
+        value.items.has(Item.WATER_INCENSE)
+      ) {
+        pokemon.count.incenseCount++
+        pokemon.handleSpellDamage(
+          Math.ceil(value.maxMana * 0.2),
+          board,
+          AttackType.SPECIAL,
+          value
+        )
       }
     })
     if (pokemon.items.has(Item.AQUA_EGG)) {
@@ -42,364 +60,557 @@ export class AttackStrategy {
   }
 }
 
-export class MindBlownStrategy extends AttackStrategy{
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+export class PaydayStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
-    target.count.mindBlownCount ++ 
-    target.handleSpellDamage(pokemon.life/2, board, AttackType.TRUE, pokemon)
+    const damage = pokemon.stars === 2 ? 40 : pokemon.stars === 3 ? 80 : 20
+
+    const victim = target.handleSpellDamage(
+      damage,
+      board,
+      AttackType.PHYSICAL,
+      pokemon
+    )
+    if (victim) {
+      pokemon.simulation.generatedMoney += pokemon.stars
+    }
+  }
+}
+export class MindBlownStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    target.count.mindBlownCount++
+    target.handleSpellDamage(pokemon.life / 2, board, AttackType.TRUE, pokemon)
   }
 }
 
-export class SoftBoiledStrategy extends AttackStrategy{
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+export class SoftBoiledStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let shield = 30
-    if(pokemon.stars == 2){
+    if (pokemon.stars == 2) {
       shield = 60
-    }
-    else if(pokemon.stars == 3){
+    } else if (pokemon.stars == 3) {
       shield = 120
     }
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
-        if (tg && pokemon.team == tg.team) {
-          tg.handleShield(shield, pokemon)
-          tg.status.clearNegativeStatus()
-        }
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team == tg.team) {
+        tg.handleShield(shield, pokemon)
+        tg.status.clearNegativeStatus()
+      }
     })
   }
 }
 
-export class EarthquakeStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        let damage = 50
-        if(pokemon.stars == 2){
-          damage = 100
-        }
-        else if(pokemon.stars == 3){
-          damage = 200
-        }
-        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
-            if ((tg && pokemon.team != tg.team && target.positionY == y) || (tg && pokemon.team != tg.team && target.positionX == x)) {
-              tg.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-              tg.count.earthquakeCount ++
-            }
-        })
+export class EarthquakeStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 50
+    if (pokemon.stars == 2) {
+      damage = 100
+    } else if (pokemon.stars == 3) {
+      damage = 200
     }
-}
-
-export class SongOfDesireStrategy extends AttackStrategy{
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-      super.process(pokemon, state, board, target)
-      let duration = 3000
-      if(pokemon.stars == 2){
-        duration = 6000
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (
+        (tg && pokemon.team != tg.team && target.positionY == y) ||
+        (tg && pokemon.team != tg.team && target.positionX == x)
+      ) {
+        tg.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
+        tg.count.earthquakeCount++
       }
-      else if(pokemon.stars == 3){
-        duration = 9000
-      }
-      target.status.triggerConfusion(duration, target)
+    })
   }
 }
 
+export class SongOfDesireStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let duration = 3000
+    if (pokemon.stars == 2) {
+      duration = 6000
+    } else if (pokemon.stars == 3) {
+      duration = 9000
+    }
+    target.status.triggerConfusion(duration, target)
+  }
+}
 
-export class ConfusingMindStrategy extends AttackStrategy{
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-      super.process(pokemon, state, board, target)
-      const cells = board.getAdjacentCells(target.positionX, target.positionY)
-      let damage = 10
-      let confusion = 0.5
-      if(pokemon.stars == 2){
-        damage = 20
-        confusion = 1
+export class ConfusingMindStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    let damage = 10
+    let confusion = 0.5
+    if (pokemon.stars == 2) {
+      damage = 20
+      confusion = 1
+    } else if (pokemon.stars == 3) {
+      damage = 40
+      confusion = 2
+    }
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpellDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
+        cell.value.status.triggerConfusion(confusion * 1000, cell.value)
       }
-      else if(pokemon.stars == 3){
-        damage = 40
-        confusion = 2
+    })
+  }
+}
+
+export class KnowledgeThiefStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    AbilityStrategy[target.skill].process(pokemon, state, board, target)
+  }
+}
+
+export class WonderGuardStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+  }
+}
+
+export class ElectricSurgeStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+  }
+}
+
+export class PsychicSurgeStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+  }
+}
+
+export class CorruptedNatureStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 10
+    if (pokemon.stars == 2) {
+      damage = 20
+    } else if (pokemon.stars == 3) {
+      damage = 40
+    }
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.status.triggerWound(4000)
+        cell.value.handleSpellDamage(
+          damage,
+          board,
+          AttackType.PHYSICAL,
+          pokemon
+        )
       }
-      cells.forEach(cell => {
-        if(cell.value && cell.value.team !== pokemon.team){
-          cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-          cell.value.status.triggerConfusion(confusion * 1000, cell.value)
+    })
+  }
+}
+
+export class CrabHammerStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 30
+    if (pokemon.stars == 2) {
+      damage = 60
+    } else if (pokemon.stars == 3) {
+      damage = 120
+    }
+    if (target.life / target.hp < 0.3) {
+      damage = target.life
+    }
+    target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
+  }
+}
+
+export class DiamondStormStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    pokemon.def += 5
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team === pokemon.team) {
+        cell.value.def += 5
+      }
+    })
+  }
+}
+
+export class DracoEnergyStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    target.handleSpellDamage(pokemon.life, board, AttackType.SPECIAL, pokemon)
+  }
+}
+
+export class DynamaxCannonStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team && x == target.positionX) {
+        tg.handleSpellDamage(
+          Math.ceil(tg.life * 0.8),
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
+      }
+    })
+  }
+}
+
+export class DynamicPunchStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let duration = 1500
+    let damage = 20
+    if (pokemon.stars == 2) {
+      damage = 40
+      duration = 3000
+    } else if (pokemon.stars == 3) {
+      damage = 80
+      duration = 6000
+    }
+    target.status.triggerConfusion(duration, target)
+    target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
+  }
+}
+
+export class ElectroBoostStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    board.forEach((x, y, tg) => {
+      if (
+        tg &&
+        pokemon.team == tg.team &&
+        tg.types.includes(Synergy.ELECTRIC)
+      ) {
+        tg.status.triggerRuneProtect()
+      }
+    })
+  }
+}
+
+export class ElectroWebStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let steal = 15
+    if (pokemon.stars == 2) {
+      steal = 30
+    } else if (pokemon.stars == 3) {
+      steal = 60
+    }
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleAttackSpeed(-steal)
+          pokemon.handleAttackSpeed(steal)
         }
       })
   }
 }
 
-export class KnowledgeThiefStrategy extends AttackStrategy{
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-      super.process(pokemon, state, board, target)
-      AbilityStrategy[target.skill].process(pokemon, state, board, target)
+export class FireTrickStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 20
+    if (pokemon.stars == 2) {
+      damage = 40
+    } else if (pokemon.stars == 3) {
+      damage = 80
+    }
+    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+    const teleportationCell = board.getTeleportationCell(
+      target.positionX,
+      target.positionY
+    )
+    if (teleportationCell) {
+      board.swapValue(
+        target.positionX,
+        target.positionY,
+        teleportationCell.row,
+        teleportationCell.column
+      )
+      target.positionX = teleportationCell.row
+      target.positionY = teleportationCell.column
+    }
   }
 }
 
-export class WonderGuardStrategy extends AttackStrategy{
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-      super.process(pokemon, state, board, target)
+export class FlameChargeStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 20
+    if (pokemon.stars == 2) {
+      damage = 40
+    } else if (pokemon.stars == 3) {
+      damage = 80
+    }
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value != pokemon) {
+          cell.value.handleSpellDamage(
+            damage,
+            board,
+            AttackType.PHYSICAL,
+            pokemon
+          )
+        }
+      })
+
+      board.swapValue(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      pokemon.positionX = farthestCoordinate.x
+      pokemon.positionY = farthestCoordinate.y
+    }
   }
 }
 
-export class ElectricSurgeStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
+export class LeechSeedStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let duration = 3000
+    let heal = 10
+    if (pokemon.stars == 2) {
+      duration = 6000
+      heal = 20
+    } else if (pokemon.stars == 3) {
+      duration = 6000
+      heal = 40
     }
+    pokemon.handleHeal(heal, pokemon)
+    target.status.triggerPoison(duration, target, pokemon)
+  }
 }
 
-export class PsychicSurgeStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-    }
+export class LockOnStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    target.status.triggerArmorReduction(8000)
+  }
 }
 
-
-export class CorruptedNatureStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        let damage = 10
-        if(pokemon.stars == 2){
-          damage = 20
-        }
-        else if(pokemon.stars == 3){
-          damage = 40
-        }
-        const cells = board.getAdjacentCells(target.positionX, target.positionY)
-        cells.forEach(cell => {
-          if(cell.value && cell.value.team !== pokemon.team){
-            cell.value.status.triggerWound(4000)
-            cell.value.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-          }
-        })
+export class PsychUpStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 10
+    let duration = 2000
+    if (pokemon.stars == 2) {
+      damage = 20
+      duration = 4000
+    } else if (pokemon.stars == 3) {
+      damage = 80
+      duration = 8000
     }
+    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+    target.status.triggerSilence(duration)
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    cells.forEach((cell) => {
+      if (cell && cell.value && cell.value.team !== pokemon.team) {
+        cell.value.status.triggerSilence(duration)
+      }
+    })
+  }
 }
 
-export class CrabHammerStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        let damage = 30
-        if(pokemon.stars == 2){
-          damage = 60
-        }
-        else if(pokemon.stars == 3){
-          damage = 120
-        }
-        if(target.life / target.hp < 0.3){
-          damage = target.life
-        }
-        target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-    }
+export class RazorWindStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    cells.forEach((cell) => {
+      if (cell && cell.value && cell.value.team !== pokemon.team) {
+        cell.value.status.triggerSmoke(7000, cell.value)
+      }
+    })
+  }
 }
 
-export class DiamondStormStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-        pokemon.def += 5
-        cells.forEach(cell => {
-          if(cell.value && cell.value.team === pokemon.team){
-            cell.value.def += 5
-          }
-        })
-    }
-}
-
-export class DracoEnergyStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        target.handleSpellDamage(pokemon.life, board, AttackType.SPECIAL, pokemon)
-    }
-}
-
-export class DynamaxCannonStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-
-        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
-          if (tg && pokemon.team != tg.team && x == target.positionX) {
-            tg.handleSpellDamage(Math.ceil(tg.life * 0.8), board, AttackType.SPECIAL, pokemon)
-          }
-        })
-    }
-}
-
-export class DynamicPunchStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        let duration = 1500
-        let damage = 20
-        if(pokemon.stars == 2){
-          damage = 40
-          duration = 3000
+export class TwistingNeitherStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const cells = board.getCellsInRadius(
+      pokemon.positionX,
+      pokemon.positionY,
+      2
+    )
+    cells.forEach((cell) => {
+      if (cell && cell.value) {
+        if (cell.value.team !== pokemon.team) {
+          cell.value.handleSpellDamage(80, board, AttackType.SPECIAL, pokemon)
         }
-        else if(pokemon.stars == 3){
-          damage = 80
-          duration = 6000
+        const teleportationCell = board.getTeleportationCell(
+          cell.value.positionX,
+          cell.value.positionY
+        )
+        if (teleportationCell) {
+          board.swapValue(
+            cell.value.positionX,
+            cell.value.positionY,
+            teleportationCell.row,
+            teleportationCell.column
+          )
+          cell.value.positionX = teleportationCell.row
+          cell.value.positionY = teleportationCell.column
+        } else {
+          console.log('ERROR: unable to teleport pokemon')
         }
-        target.status.triggerConfusion(duration, target)
-        target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-    }
-}
-
-export class ElectroBoostStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        board.forEach((x,y,tg)=>{
-          if(tg && pokemon.team == tg.team && tg.types.includes(Synergy.ELECTRIC)){
-            tg.status.triggerRuneProtect()
-          }
-        })
-    }
-}
-
-export class ElectroWebStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        let steal = 15
-        if(pokemon.stars == 2){
-          steal = 30
-        }
-        else if(pokemon.stars == 3){
-          steal = 60
-        }
-        board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach(cell => {
-          if(cell.value && cell.value.team !== pokemon.team){
-            cell.value.handleAttackSpeed(-steal)
-            pokemon.handleAttackSpeed(steal)
-          }
-        })
-    }
-}
-
-export class FireTrickStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        let damage = 20
-        if(pokemon.stars == 2){
-          damage = 40
-        }
-        else if(pokemon.stars == 3){
-          damage = 80
-        }
-        target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-        const teleportationCell = board.getTeleportationCell(target.positionX, target.positionY)
-        if(teleportationCell){
-          board.swapValue(target.positionX, target.positionY, teleportationCell.row, teleportationCell.column)
-          target.positionX = teleportationCell.row
-          target.positionY = teleportationCell.column
-        }
-    }
-}
-
-export class FlameChargeStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        let damage = 20
-        if(pokemon.stars == 2){
-          damage = 40
-        }
-        else if (pokemon.stars == 3){
-          damage = 80
-        }
-        const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board)
-        if(farthestCoordinate){
-          const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y)
-          cells.forEach((cell)=>{
-            if (cell.value && cell.value != pokemon) {
-              cell.value.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-            }
-          })
-      
-          board.swapValue(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y)
-          pokemon.positionX = farthestCoordinate.x
-          pokemon.positionY = farthestCoordinate.y
-        }
-    }
-}
-
-export class LeechSeedStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        let duration = 3000
-        let heal = 10
-        if(pokemon.stars == 2){
-          duration = 6000
-          heal = 20
-        }
-        else if (pokemon.stars == 3){
-          duration = 6000
-          heal = 40
-        }
-        pokemon.handleHeal(heal, pokemon)
-        target.status.triggerPoison(duration, target, pokemon)
-    }
-}
-
-export class LockOnStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        target.status.triggerArmorReduction(8000)
-    }
-}
-
-export class PsychUpStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        let damage = 10
-        let duration = 2000
-        if(pokemon.stars == 2){
-          damage = 20
-          duration = 4000
-        }
-        else if(pokemon.stars == 3){
-          damage = 80
-          duration = 8000
-        }
-        target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-        target.status.triggerSilence(duration)
-        const cells = board.getAdjacentCells(target.positionX, target.positionY)
-        cells.forEach(cell=>{
-          if(cell && cell.value && cell.value.team !== pokemon.team){
-            cell.value.status.triggerSilence(duration)
-          }
-        })
-    }
-}
-
-export class RazorWindStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        const cells = board.getAdjacentCells(target.positionX, target.positionY)
-        cells.forEach(cell=>{
-          if(cell && cell.value && cell.value.team !== pokemon.team){
-            cell.value.status.triggerSmoke(7000, cell.value)
-          }
-        })
-    }
-}
-
-export class TwistingNeitherStrategy extends AttackStrategy{
-    process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
-        super.process(pokemon, state, board, target)
-        const cells = board.getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
-        cells.forEach(cell=>{
-          if(cell && cell.value){
-            if(cell.value.team !== pokemon.team){
-              cell.value.handleSpellDamage(80, board, AttackType.SPECIAL, pokemon)
-            }
-            const teleportationCell = board.getTeleportationCell(cell.value.positionX, cell.value.positionY)
-            if(teleportationCell){
-              board.swapValue(cell.value.positionX, cell.value.positionY, teleportationCell.row, teleportationCell.column)
-              cell.value.positionX = teleportationCell.row
-              cell.value.positionY = teleportationCell.column
-            }
-            else{
-              console.log('ERROR: unable to teleport pokemon')
-            }
-          }
-        })
-    }
+      }
+    })
+  }
 }
 export class KingShieldStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let timer = 0
     switch (pokemon.stars) {
@@ -417,14 +628,14 @@ export class KingShieldStrategy extends AttackStrategy {
     }
     pokemon.status.triggerProtect(timer)
     const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board)
-    if(farthestTarget){
+    if (farthestTarget) {
       const x = farthestTarget.x
       const y = farthestTarget.y
       const oldX = pokemon.positionX
       const oldY = pokemon.positionY
-  
+
       const tg = board.getValue(x, y)
-  
+
       if (tg) {
         tg.positionX = oldX
         tg.positionY = oldY
@@ -437,7 +648,12 @@ export class KingShieldStrategy extends AttackStrategy {
 }
 
 export class ExplosionStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -458,7 +674,12 @@ export class ExplosionStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
+        cell.value.handleSpellDamage(
+          damage,
+          board,
+          AttackType.PHYSICAL,
+          pokemon
+        )
       }
     })
 
@@ -467,7 +688,12 @@ export class ExplosionStrategy extends AttackStrategy {
 }
 
 export class ClangorousSoulStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let buffAtk = 0
     let buffDef = 0
@@ -501,7 +727,12 @@ export class ClangorousSoulStrategy extends AttackStrategy {
 }
 
 export class BonemerangStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -518,7 +749,7 @@ export class BonemerangStrategy extends AttackStrategy {
         break
     }
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && x == target.positionX) {
         tg.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
       }
@@ -527,7 +758,12 @@ export class BonemerangStrategy extends AttackStrategy {
 }
 
 export class GrowlStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let d = 0
     switch (pokemon.stars) {
@@ -543,7 +779,7 @@ export class GrowlStrategy extends AttackStrategy {
       default:
         break
     }
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.status.triggerWound(d)
       }
@@ -552,7 +788,12 @@ export class GrowlStrategy extends AttackStrategy {
 }
 
 export class RelicSongStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let d = 0
     switch (pokemon.stars) {
@@ -568,7 +809,7 @@ export class RelicSongStrategy extends AttackStrategy {
       default:
         break
     }
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.status.triggerSleep(d, tg)
       }
@@ -577,7 +818,12 @@ export class RelicSongStrategy extends AttackStrategy {
 }
 
 export class DisarmingVoiceStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let heal = 0
     switch (pokemon.stars) {
@@ -593,7 +839,7 @@ export class DisarmingVoiceStrategy extends AttackStrategy {
       default:
         break
     }
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team == tg.team) {
         tg.setMana(tg.mana + heal)
       }
@@ -601,7 +847,12 @@ export class DisarmingVoiceStrategy extends AttackStrategy {
   }
 }
 export class HighJumpKickStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -624,7 +875,12 @@ export class HighJumpKickStrategy extends AttackStrategy {
 }
 
 export class GrassWhistleStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let n = 0
     switch (pokemon.stars) {
@@ -640,7 +896,7 @@ export class GrassWhistleStrategy extends AttackStrategy {
       default:
         break
     }
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && n > 0) {
         tg.status.triggerSleep(2000, tg)
         n--
@@ -649,9 +905,13 @@ export class GrassWhistleStrategy extends AttackStrategy {
   }
 }
 
-
 export class TriAttackStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let duration = 0
     switch (pokemon.stars) {
@@ -674,7 +934,12 @@ export class TriAttackStrategy extends AttackStrategy {
 }
 
 export class EchoStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
 
     let damage = 0
@@ -697,18 +962,28 @@ export class EchoStrategy extends AttackStrategy {
         break
     }
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        tg.handleSpellDamage(damage + pokemon.echo * additional, board, AttackType.SPECIAL, pokemon)
+        tg.handleSpellDamage(
+          damage + pokemon.echo * additional,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
 
-    pokemon.echo ++
+    pokemon.echo++
   }
 }
 
 export class PetalDanceStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
 
     let damage = 0
@@ -731,18 +1006,23 @@ export class PetalDanceStrategy extends AttackStrategy {
         break
     }
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && count > 0) {
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-        count --
-        tg.count.petalDanceCount ++
+        count--
+        tg.count.petalDanceCount++
       }
     })
   }
 }
 
 export class HyperVoiceStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
 
     let damage = 0
@@ -765,7 +1045,7 @@ export class HyperVoiceStrategy extends AttackStrategy {
         break
     }
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
         tg.status.triggerConfusion(confusion * 1000, tg)
@@ -774,19 +1054,37 @@ export class HyperVoiceStrategy extends AttackStrategy {
   }
 }
 export class ShadowCloneStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board)
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
 
     if (farthestCoordinate) {
-      const clone = pokemon.simulation.addPokemonEntity(pokemon, farthestCoordinate.x, farthestCoordinate.y, pokemon.team)
+      const clone = pokemon.simulation.addPokemonEntity(
+        pokemon,
+        farthestCoordinate.x,
+        farthestCoordinate.y,
+        pokemon.team
+      )
       clone.life = pokemon.life
     }
   }
 }
 
 export class VoltSwitchStrategy extends AttackStrategy {
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
 
     let damage = 0
@@ -804,17 +1102,35 @@ export class VoltSwitchStrategy extends AttackStrategy {
         break
     }
 
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(pokemon, board)
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
 
-    if(farthestCoordinate){
-      const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y)
-      cells.forEach((cell)=>{
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
         if (cell.value && cell.value != pokemon) {
-          cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+          cell.value.handleSpellDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon
+          )
         }
       })
-  
-      board.swapValue(pokemon.positionX, pokemon.positionY, farthestCoordinate.x, farthestCoordinate.y)
+
+      board.swapValue(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
       pokemon.positionX = farthestCoordinate.x
       pokemon.positionY = farthestCoordinate.y
     }
@@ -826,7 +1142,12 @@ export class HeadSmashStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
 
     let d = 0
@@ -861,7 +1182,12 @@ export class RockSmashStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
 
     let d = 0
@@ -877,7 +1203,7 @@ export class RockSmashStrategy extends AttackStrategy {
         break
       case 3:
         d = 60
-        s= 9000
+        s = 9000
         break
       default:
         break
@@ -893,10 +1219,15 @@ export class RockTombStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
 
-    let factor=0
+    let factor = 0
     switch (pokemon.stars) {
       case 1:
         factor = 30
@@ -921,12 +1252,22 @@ export class RoarOfTimeStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
 
     let candidate = pokemon
-    board.forEach((x: number, y: number, pkm: PokemonEntity | undefined) =>{
-      if (pkm && pokemon.team == pkm.team && pkm.items.size > candidate.items.size && !pkm.status.resurection) {
+    board.forEach((x: number, y: number, pkm: PokemonEntity | undefined) => {
+      if (
+        pkm &&
+        pokemon.team == pkm.team &&
+        pkm.items.size > candidate.items.size &&
+        !pkm.status.resurection
+      ) {
         candidate = pkm
       }
     })
@@ -940,10 +1281,15 @@ export class HealBlockStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
 
-    let timer=0
+    let timer = 0
     switch (pokemon.stars) {
       case 1:
         timer = 5000
@@ -967,17 +1313,21 @@ export class HealBlockStrategy extends AttackStrategy {
   }
 }
 
-
 export class OriginPulseStrategy extends AttackStrategy {
   constructor() {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     const damage = 60
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
@@ -990,11 +1340,16 @@ export class SeedFlareStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     const damage = 30
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.speDef = Math.max(0, tg.speDef - 2)
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
@@ -1008,7 +1363,12 @@ export class NightmareStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let timer = 0
     switch (pokemon.stars) {
@@ -1024,7 +1384,7 @@ export class NightmareStrategy extends AttackStrategy {
       default:
         break
     }
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerPoison(timer, value, pokemon)
       }
@@ -1037,7 +1397,12 @@ export class BurnStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let timer = 0
     switch (pokemon.stars) {
@@ -1053,7 +1418,7 @@ export class BurnStrategy extends AttackStrategy {
       default:
         break
     }
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerBurn(timer, value, pokemon)
         value.status.triggerWound(timer)
@@ -1067,7 +1432,12 @@ export class SilenceStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let timer = 0
     switch (pokemon.stars) {
@@ -1083,7 +1453,7 @@ export class SilenceStrategy extends AttackStrategy {
       default:
         break
     }
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerSilence(timer)
       }
@@ -1096,7 +1466,12 @@ export class PoisonStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let timer = 0
     switch (pokemon.stars) {
@@ -1121,7 +1496,12 @@ export class FreezeStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let timer = 0
     switch (pokemon.stars) {
@@ -1137,7 +1517,7 @@ export class FreezeStrategy extends AttackStrategy {
       default:
         break
     }
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerFreeze(timer, value)
       }
@@ -1145,13 +1525,17 @@ export class FreezeStrategy extends AttackStrategy {
   }
 }
 
-
 export class ProtectStrategy extends AttackStrategy {
   constructor() {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let timer = 0
     switch (pokemon.stars) {
@@ -1176,7 +1560,12 @@ export class SleepStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let timer = 0
     switch (pokemon.stars) {
@@ -1201,7 +1590,12 @@ export class ConfusionStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let timer = 0
     switch (pokemon.stars) {
@@ -1227,7 +1621,12 @@ export class FireBlastStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1252,10 +1651,15 @@ export class SeismicTossStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team == value.team) {
         damage += pokemon.stars
       }
@@ -1270,10 +1674,20 @@ export class GuillotineStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     const damage = pokemon.atk * pokemon.stars
-    const victim = target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
+    const victim = target.handleSpellDamage(
+      damage,
+      board,
+      AttackType.PHYSICAL,
+      pokemon
+    )
     if (victim) {
       pokemon.setMana(pokemon.maxMana)
     }
@@ -1285,7 +1699,12 @@ export class RockSlideStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1313,7 +1732,12 @@ export class WheelOfFireStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1329,10 +1753,20 @@ export class WheelOfFireStrategy extends AttackStrategy {
       default:
         break
     }
-    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
-    cells.forEach((cell)=>{
+    const cells = board.getCellsBetween(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY
+    )
+    cells.forEach((cell) => {
       if (cell.value && cell.value != pokemon) {
-        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpellDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -1343,7 +1777,12 @@ export class HeatWaveStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1363,10 +1802,20 @@ export class HeatWaveStrategy extends AttackStrategy {
     const secondTarget = board.getValue(target.positionX, target.positionY + 1)
     const thirdTarget = board.getValue(target.positionX, target.positionY + 2)
     if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
+      secondTarget.handleSpellDamage(
+        damage,
+        board,
+        AttackType.PHYSICAL,
+        pokemon
+      )
     }
     if (thirdTarget && thirdTarget != pokemon) {
-      thirdTarget.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
+      thirdTarget.handleSpellDamage(
+        damage,
+        board,
+        AttackType.PHYSICAL,
+        pokemon
+      )
     }
   }
 }
@@ -1376,7 +1825,12 @@ export class HydroPumpStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1395,7 +1849,12 @@ export class HydroPumpStrategy extends AttackStrategy {
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
     const secondTarget = board.getValue(target.positionX, target.positionY + 1)
     if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+      secondTarget.handleSpellDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon
+      )
     }
   }
 }
@@ -1405,7 +1864,12 @@ export class ThunderStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1430,7 +1894,12 @@ export class DracoMeteorStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1446,7 +1915,7 @@ export class DracoMeteorStrategy extends AttackStrategy {
       default:
         break
     }
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
@@ -1459,7 +1928,12 @@ export class BlazeKickStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     const damage = 30 * pokemon.stars
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
@@ -1471,13 +1945,23 @@ export class WishStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     const heal = 50
     let count = pokemon.stars
 
-    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) =>{
-      if (ally && pokemon.team == ally.team && count > 0 && ally.life < ally.hp) {
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (
+        ally &&
+        pokemon.team == ally.team &&
+        count > 0 &&
+        ally.life < ally.hp
+      ) {
         ally.handleHeal(heal, pokemon)
         count -= 1
       }
@@ -1490,7 +1974,12 @@ export class CalmMindStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let buff = 0
     switch (pokemon.stars) {
@@ -1516,7 +2005,12 @@ export class IronDefenseStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let buff = 0
     switch (pokemon.stars) {
@@ -1542,7 +2036,12 @@ export class SoakStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1559,7 +2058,7 @@ export class SoakStrategy extends AttackStrategy {
         break
     }
 
-    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
         ally.setMana(ally.mana + 10)
       }
@@ -1574,7 +2073,12 @@ export class IronTailStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     let buff = 0
@@ -1604,7 +2108,12 @@ export class BlastBurnStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
 
@@ -1626,7 +2135,12 @@ export class BlastBurnStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpellDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -1637,7 +2151,12 @@ export class ChargeStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let buff = 0
     switch (pokemon.stars) {
@@ -1654,8 +2173,12 @@ export class ChargeStrategy extends AttackStrategy {
         break
     }
 
-    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) =>{
-      if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.ELECTRIC)) {
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (
+        ally &&
+        pokemon.team == ally.team &&
+        ally.types.includes(Synergy.ELECTRIC)
+      ) {
         ally.atk += Math.ceil(pokemon.baseAtk * buff)
       }
     })
@@ -1667,7 +2190,12 @@ export class DischargeStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
 
@@ -1689,7 +2217,12 @@ export class DischargeStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpellDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -1700,7 +2233,12 @@ export class BiteStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1717,7 +2255,7 @@ export class BiteStrategy extends AttackStrategy {
         break
     }
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-    pokemon.handleHeal(Math.floor(damage/2), pokemon)
+    pokemon.handleHeal(Math.floor(damage / 2), pokemon)
   }
 }
 
@@ -1726,7 +2264,12 @@ export class DragonTailStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1753,7 +2296,12 @@ export class DragonBreathStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1782,7 +2330,12 @@ export class IcicleCrashStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
 
@@ -1804,7 +2357,12 @@ export class IcicleCrashStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpellDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -1815,7 +2373,12 @@ export class RootStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let heal = 0
 
@@ -1849,7 +2412,12 @@ export class TormentStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let boost = 1
 
@@ -1875,7 +2443,12 @@ export class StompStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     const damage = pokemon.atk * pokemon.stars * 2
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
@@ -1887,7 +2460,12 @@ export class DarkPulseStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -1913,7 +2491,12 @@ export class NightSlashStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
 
@@ -1933,7 +2516,7 @@ export class NightSlashStrategy extends AttackStrategy {
 
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
 
-    board.forEach((x: number, y: number, v: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, v: PokemonEntity | undefined) => {
       if (v && pokemon.team != v.team) {
         v.def = Math.max(0, v.def - 1)
       }
@@ -1946,7 +2529,12 @@ export class BugBuzzStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
 
@@ -1973,7 +2561,12 @@ export class PoisonStingStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
 
@@ -2003,7 +2596,12 @@ export class LeechLifeStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
 
@@ -2025,7 +2623,12 @@ export class LeechLifeStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpellDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
         pokemon.handleHeal(damage, pokemon)
       }
     })
@@ -2037,7 +2640,12 @@ export class HappyHourStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let buff = 0
     switch (pokemon.stars) {
@@ -2053,7 +2661,7 @@ export class HappyHourStrategy extends AttackStrategy {
       default:
         break
     }
-    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) =>{
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
         ally.atk += buff
       }
@@ -2066,16 +2674,31 @@ export class TeleportStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
 
-    const potentialCells = [[0, 0], [0, 5], [7, 5], [7, 0]]
+    const potentialCells = [
+      [0, 0],
+      [0, 5],
+      [7, 5],
+      [7, 0],
+    ]
     this.shuffleArray(potentialCells)
 
     for (let i = 0; i < potentialCells.length; i++) {
       const entity = board.getValue(potentialCells[i][0], potentialCells[i][1])
       if (entity === undefined) {
-        board.swapValue(pokemon.positionX, pokemon.positionY, potentialCells[i][0], potentialCells[i][1])
+        board.swapValue(
+          pokemon.positionX,
+          pokemon.positionY,
+          potentialCells[i][0],
+          potentialCells[i][1]
+        )
         pokemon.positionX = potentialCells[i][0]
         pokemon.positionY = potentialCells[i][1]
         break
@@ -2096,7 +2719,12 @@ export class NastyPlotStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let buff = 0
     switch (pokemon.stars) {
@@ -2121,7 +2749,12 @@ export class ThiefStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -2138,8 +2771,8 @@ export class ThiefStrategy extends AttackStrategy {
         break
     }
     const l = target.items.size
-    target.items.forEach( (item) => {
-      if (pokemon.items.size <3) {
+    target.items.forEach((item) => {
+      if (pokemon.items.size < 3) {
         pokemon.items.add(item)
       }
       target.items.delete(item)
@@ -2171,7 +2804,12 @@ export class StunSporeStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let debuff = 0
     let damage = 0
@@ -2201,7 +2839,12 @@ export class MeteorMashStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
 
@@ -2224,7 +2867,12 @@ export class MeteorMashStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpellDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -2235,7 +2883,12 @@ export class HurricaneStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     let damage = 0
     switch (pokemon.stars) {
@@ -2254,7 +2907,12 @@ export class HurricaneStrategy extends AttackStrategy {
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
     const secondTarget = board.getValue(target.positionX, target.positionY + 1)
     if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+      secondTarget.handleSpellDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon
+      )
     }
   }
 }
@@ -2264,7 +2922,12 @@ export class MetronomeStrategy extends AttackStrategy {
     super()
   }
 
-  process(pokemon: PokemonEntity, state: PokemonState, board: Board, target: PokemonEntity) {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
     super.process(pokemon, state, board, target)
     const skills = [
       FireBlastStrategy,
@@ -2350,7 +3013,8 @@ export class MetronomeStrategy extends AttackStrategy {
       DiamondStormStrategy,
       ConfusingMindStrategy,
       SongOfDesireStrategy,
-      MindBlownStrategy
+      MindBlownStrategy,
+      PaydayStrategy,
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)
