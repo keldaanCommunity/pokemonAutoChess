@@ -579,6 +579,13 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.PAYDAY,
+      frames: this.game.anims.generateFrameNames(Ability.PAYDAY, {start: 0, end: 80, zeroPad: 3}),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.SHADOW_CLONE,
       frames: this.game.anims.generateFrameNames(Ability.SHADOW_CLONE, {start: 0, end: 3}),
       duration: 1000,

@@ -27,8 +27,6 @@ kyurem,0646/AnimData.xml
 kyurem,0646/0000/0001/AnimData.xml
 reshiram,0643/AnimData.xml
 reshiram,0643/0000/0001/AnimData.xml
-zekrom,0644/AnimData.xml
-zekrom,0644/0000/0001/AnimData.xml
 primal-Kyogre,0382/0001/AnimData.xml
 primal-Kyogre,0382/0001/0001/AnimData.xml
 primal-Groudon,0383/0001/AnimData.xml

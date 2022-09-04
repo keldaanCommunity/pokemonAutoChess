@@ -2040,13 +2040,13 @@ export class MegaRayquaza extends Pokemon {
 
 export class Meowth extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.MEOWTH, [], Rarity.NEUTRAL, '0052', Pkm.DEFAULT, 100, 10, 2, 2, 1, AttackSprite.NORMAL_MELEE, AttackType.PHYSICAL, 1, 100, Ability.DEFAULT,shiny, emotion, false)
+    super(Pkm.MEOWTH, [Synergy.NORMAL, Synergy.FIELD], Rarity.RARE, '0052', Pkm.PERSIAN, 80, 6, 3, 3, 1, AttackSprite.NORMAL_MELEE, AttackType.PHYSICAL, 1, 90, Ability.PAYDAY,shiny, emotion, false)
   }
 }
 
 export class Persian extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.PERSIAN, [], Rarity.NEUTRAL, '0053', Pkm.DEFAULT, 100, 10, 2, 2, 1, AttackSprite.NORMAL_MELEE, AttackType.PHYSICAL, 2, 100, Ability.DEFAULT,shiny, emotion, true)
+    super(Pkm.PERSIAN, [Synergy.NORMAL, Synergy.FIELD], Rarity.RARE, '0053', Pkm.DEFAULT, 120, 10, 3, 3, 1, AttackSprite.NORMAL_MELEE, AttackType.PHYSICAL, 2, 90, Ability.PAYDAY,shiny, emotion, true)
   }
 }
 

@@ -583,6 +583,10 @@ export class OnUpdateCommand extends Command<GameRoom, {
               everySimulationFinished = false
             }
             player.simulation.update(deltaTime)
+            if(player.simulation.generatedMoney > 0 ){
+              player.money += player.simulation.generatedMoney
+              player.simulation.generatedMoney = 0
+            }
           }
         })
 

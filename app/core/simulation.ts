@@ -25,7 +25,8 @@ export default class Simulation extends Schema implements ISimulation{
   redEffects = new Array<Effect>()
   board: Board = new Board(8,6)
   finished = false
-  flowerSpawn: boolean[]= [false, false]
+  flowerSpawn: boolean[] = [false, false]
+  generatedMoney = 0
 
   initialize(blueTeam: MapSchema<Pokemon>, redTeam: MapSchema<Pokemon>, blueEffects: Effect[], redEffects: Effect[]) {
     this.blueDpsMeter.forEach((dps, key) => {
