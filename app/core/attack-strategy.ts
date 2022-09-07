@@ -831,10 +831,10 @@ export class DisarmingVoiceStrategy extends AttackStrategy {
         heal = 10
         break
       case 2:
-        heal = 20
+        heal = 15
         break
       case 3:
-        heal = 40
+        heal = 30
         break
       default:
         break

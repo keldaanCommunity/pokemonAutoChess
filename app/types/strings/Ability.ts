@@ -642,7 +642,7 @@ export const AbilityDescription: {[key in Ability]: Langage} = {
         prt: ''
     },
     [Ability.DISARMING_VOICE]: {
-        eng: 'Heals and restore 10/20/40 points of mana to all allies',
+        eng: ': Gives 10/15/30 points of mana to all allies',
         esp: '',
         fra: '',
         prt: ''
