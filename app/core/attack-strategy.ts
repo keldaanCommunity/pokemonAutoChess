@@ -68,7 +68,7 @@ export class PaydayStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    const damage = pokemon.stars === 2 ? 40 : pokemon.stars === 3 ? 80 : 20
+    const damage = pokemon.stars === 2 ? 60 : pokemon.stars === 3 ? 120 : 30
 
     const victim = target.handleSpellDamage(
       damage,
