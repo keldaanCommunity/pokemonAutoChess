@@ -931,19 +931,19 @@ export class Flygon extends Pokemon {
 
 export class Pichu extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.PICHU, [Synergy.ELECTRIC, Synergy.FAIRY], Rarity.RARE, '0172', Pkm.PIKACHU, 80, 5, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.THUNDER,shiny, emotion, false)
+    super(Pkm.PICHU, [Synergy.ELECTRIC, Synergy.FAIRY], Rarity.COMMON, '0172', Pkm.PIKACHU, 80, 5, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.THUNDER,shiny, emotion, false)
   }
 }
 
 export class Pikachu extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.PIKACHU, [Synergy.ELECTRIC, Synergy.FAIRY], Rarity.RARE, '0025', Pkm.RAICHU, 120, 9, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.THUNDER,shiny, emotion, false)
+    super(Pkm.PIKACHU, [Synergy.ELECTRIC, Synergy.FAIRY], Rarity.COMMON, '0025', Pkm.RAICHU, 120, 9, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.THUNDER,shiny, emotion, false)
   }
 }
 
 export class Raichu extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.RAICHU, [Synergy.ELECTRIC, Synergy.FAIRY], Rarity.RARE, '0026', Pkm.DEFAULT, 220, 18, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 3, 100, Ability.THUNDER,shiny, emotion, true)
+    super(Pkm.RAICHU, [Synergy.ELECTRIC, Synergy.FAIRY], Rarity.COMMON, '0026', Pkm.DEFAULT, 220, 18, 1, 1, 2, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 3, 100, Ability.THUNDER,shiny, emotion, true)
   }
 }
 
@@ -2251,19 +2251,19 @@ export class Relicanth extends Pokemon {
 }
 export class Hatenna extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.HATENNA, [Synergy.FAIRY, Synergy.PSYCHIC], Rarity.COMMON, PkmIndex[Pkm.HATENNA], Pkm.HATTREM, 60, 5, 1, 2, 1, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.PSYCH_UP,shiny, emotion, false)
+    super(Pkm.HATENNA, [Synergy.FAIRY, Synergy.PSYCHIC], Rarity.UNCOMMON, PkmIndex[Pkm.HATENNA], Pkm.HATTREM, 50, 5, 1, 2, 1, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.PSYCH_UP,shiny, emotion, false)
   }
 }
 
 export class Hattrem extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.HATTREM, [Synergy.FAIRY, Synergy.PSYCHIC], Rarity.COMMON, PkmIndex[Pkm.HATTREM], Pkm.HATTERENE, 150, 11, 4, 6, 1, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.PSYCH_UP,shiny, emotion, false)
+    super(Pkm.HATTREM, [Synergy.FAIRY, Synergy.PSYCHIC], Rarity.UNCOMMON, PkmIndex[Pkm.HATTREM], Pkm.HATTERENE, 130, 11, 4, 6, 1, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.PSYCH_UP,shiny, emotion, false)
   }
 }
 
 export class Hatterene extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.HATTERENE, [Synergy.FAIRY, Synergy.PSYCHIC], Rarity.COMMON, PkmIndex[Pkm.HATTERENE], Pkm.DEFAULT, 270, 17, 5, 8, 1, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 3, 100, Ability.PSYCH_UP,shiny, emotion, true)
+    super(Pkm.HATTERENE, [Synergy.FAIRY, Synergy.PSYCHIC], Rarity.UNCOMMON, PkmIndex[Pkm.HATTERENE], Pkm.DEFAULT, 240, 17, 5, 8, 1, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 3, 100, Ability.PSYCH_UP,shiny, emotion, true)
   }
 }
 export class Fennekin extends Pokemon {

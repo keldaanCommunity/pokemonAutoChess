@@ -68,7 +68,7 @@ export class PaydayStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    const damage = pokemon.stars === 2 ? 40 : pokemon.stars === 3 ? 80 : 20
+    const damage = pokemon.stars === 2 ? 60 : pokemon.stars === 3 ? 120 : 30
 
     const victim = target.handleSpellDamage(
       damage,
@@ -831,10 +831,10 @@ export class DisarmingVoiceStrategy extends AttackStrategy {
         heal = 10
         break
       case 2:
-        heal = 20
+        heal = 15
         break
       case 3:
-        heal = 40
+        heal = 30
         break
       default:
         break
