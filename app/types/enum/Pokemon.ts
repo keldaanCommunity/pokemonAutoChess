@@ -1041,7 +1041,6 @@ export const PkmFamily : {[key in Pkm]: Pkm} = {
     [Pkm.RATICATE]: Pkm.RATTATA,
     [Pkm.LUGIA]: Pkm.LUGIA,
     [Pkm.CARVANHA]: Pkm.CARVANHA,
-    [Pkm.HOUNDOUR]: Pkm.HOUNDOUR,
     [Pkm.SWABLU]: Pkm.SWABLU,
     [Pkm.PRIMAL_GROUDON]: Pkm.GROUDON,
     [Pkm.PRIMAL_KYOGRE]: Pkm.KYOGRE,

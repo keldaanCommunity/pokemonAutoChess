@@ -723,8 +723,6 @@ export default class PokemonFactory {
         return new Rotom(s,e)
       case Pkm.AERODACTYL:
         return new Aerodactyl(s,e)
-      case Pkm.HOUNDOUR:
-        return new Houndour(s,e)
       case Pkm.SWABLU:
         return new Swablu(s,e)
       case Pkm.CARVANHA:
