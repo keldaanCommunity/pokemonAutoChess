@@ -93,6 +93,7 @@ import {
   PsychicSurgeStrategy,
   MindBlownStrategy,
   PaydayStrategy,
+  BeatUpStrategy,
 } from '../../core/attack-strategy'
 
 export enum Ability {
@@ -189,7 +190,8 @@ export enum Ability {
   ELECTRIC_SURGE = 'ELECTRIC_SURGE',
   PSYCHIC_SURGE = 'PSYCHIC_SURGE',
   MIND_BLOWN = 'MIND_BLOWN',
-  PAYDAY = 'PAYDAY'
+  PAYDAY = 'PAYDAY',
+  BEAT_UP = 'BEAT_UP'
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -287,4 +289,5 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.PSYCHIC_SURGE]: new PsychicSurgeStrategy(),
   [Ability.MIND_BLOWN]: new MindBlownStrategy(),
   [Ability.PAYDAY]: new PaydayStrategy(),
+  [Ability.BEAT_UP]: new BeatUpStrategy()
 }
