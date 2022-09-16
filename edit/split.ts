@@ -1,10 +1,12 @@
 import Jimp from 'jimp'
 import {XMLParser} from 'fast-xml-parser'
 import fs from 'fs'
+import gracefulFs from 'graceful-fs'
 import {Pkm} from '../app/types/enum/Pokemon'
 import PokemonFactory from '../app/models/pokemon-factory'
 import { PokemonActionState, PokemonTint, SpriteType } from '../app/types/enum/Game'
 
+gracefulFs.gracefulify(fs)
 const args = process.argv.slice(2)
 const path = args[0]
 
@@ -128,6 +130,7 @@ async function split(){
 
                         }
                         catch(error){
+                            console.log(error)
                             console.log('action', action, 'is missing for index', index, mapName.get(index))
                         }
                     }))
