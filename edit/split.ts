@@ -63,78 +63,86 @@ async function split(){
                 // credits[`${index}_${shiny}`]['author'] = splitted[1].split(`\n`)[0].split(`\r`)[0];
                 //console.log('add', creditFile, 'to the credits for', mapName.get(index));
                 
-                const xmlFile = fs.readFileSync(`${path}/sprite/${pad}/AnimData.xml`)
-                const parser = new XMLParser()
-                const xmlData = <IPMDCollab> parser.parse(xmlFile)
-                await Promise.all(Object.values(SpriteType).map(async anim => {
-                    await Promise.all(Object.values(PokemonActionState).map(async action => {
-                        try{
-                            let img
-                            let metadata = xmlData.AnimData.Anims.Anim.find(m=>m.Name==action)
-                            if(metadata){
-                                if(metadata.CopyOf){
-                                    img = await Jimp.read(`${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`)
-                                    metadata = xmlData.AnimData.Anims.Anim.find(m=>m.Name==metadata?.CopyOf)
-                                }
-                                else{
-                                    img = await Jimp.read(`${path}/sprite/${pad}/${action}-${anim}.png`)
-                                }
-    
-    
-                                // eslint-disable-next-line no-unsafe-optional-chaining
-                                durations[`${index}/${shiny}/${action}/${anim}`] = metadata?.Durations.Duration.length !== undefined ?[...metadata?.Durations.Duration]: [metadata?.Durations.Duration]
-                                // console.log(durations);
-                                const frameHeight = metadata?.FrameHeight
-                                const frameWidth = metadata?.FrameWidth
-
-                                if(frameWidth && frameHeight){
-                                    const width = img.getWidth() / frameWidth
-                                    const height = img.getHeight() / frameHeight
-                                // console.log('img', index, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
-                                    for (let x = 0; x < width; x++) {
-                                        for (let y = 0; y < height; y++) {
-                                            const cropImg = img.clone()
-                                        
-                                            if(anim == SpriteType.SHADOW){
-                                                const shadow = xmlData.AnimData.ShadowSize
-                                                if(shadow == 0){
-                                                    removeRed(cropImg)
-                                                    removeBlue(cropImg)
-                                                }
-                                                else if(shadow == 1){
-                                                    removeBlue(cropImg)
-                                                }
-                                                // transform to black
-                                                cropImg.scan(0,0,cropImg.bitmap.width,cropImg.bitmap.height, (x,y,idx)=> {
-                                                    if (cropImg.bitmap.data[idx + 3] != 0) {
-                                                        cropImg.bitmap.data[idx] = 0
-                                                        cropImg.bitmap.data[idx + 1] = 0
-                                                        cropImg.bitmap.data[idx + 2] = 0
+                fs.readFile(`${path}/sprite/${pad}/AnimData.xml`, async (err, xmlFile)=>{
+                    if(err){
+                        console.log('pokemon with index', index, 'not found', mapName.get(index), 'path: ', `${path}/sprite/${pad}/AnimData.xml`)
+                        missing += `${mapName.get(index)},${pad}/AnimData.xml\n`
+                    }
+                    else{
+                        const parser = new XMLParser()
+                        const xmlData = <IPMDCollab> parser.parse(xmlFile)
+                        await Promise.all(Object.values(SpriteType).map(async anim => {
+                            await Promise.all(Object.values(PokemonActionState).map(async action => {
+                                try{
+                                    let img
+                                    let metadata = xmlData.AnimData.Anims.Anim.find(m=>m.Name==action)
+                                    if(metadata){
+                                        if(metadata.CopyOf){
+                                            img = await Jimp.read(`${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`)
+                                            metadata = xmlData.AnimData.Anims.Anim.find(m=>m.Name==metadata?.CopyOf)
+                                        }
+                                        else{
+                                            img = await Jimp.read(`${path}/sprite/${pad}/${action}-${anim}.png`)
+                                        }
+            
+            
+                                        // eslint-disable-next-line no-unsafe-optional-chaining
+                                        durations[`${index}/${shiny}/${action}/${anim}`] = metadata?.Durations.Duration.length !== undefined ?[...metadata?.Durations.Duration]: [metadata?.Durations.Duration]
+                                        // console.log(durations);
+                                        const frameHeight = metadata?.FrameHeight
+                                        const frameWidth = metadata?.FrameWidth
+        
+                                        if(frameWidth && frameHeight){
+                                            const width = img.getWidth() / frameWidth
+                                            const height = img.getHeight() / frameHeight
+                                        // console.log('img', index, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
+                                            for (let x = 0; x < width; x++) {
+                                                for (let y = 0; y < height; y++) {
+                                                    const cropImg = img.clone()
+                                                
+                                                    if(anim == SpriteType.SHADOW){
+                                                        const shadow = xmlData.AnimData.ShadowSize
+                                                        if(shadow == 0){
+                                                            removeRed(cropImg)
+                                                            removeBlue(cropImg)
+                                                        }
+                                                        else if(shadow == 1){
+                                                            removeBlue(cropImg)
+                                                        }
+                                                        // transform to black
+                                                        cropImg.scan(0,0,cropImg.bitmap.width,cropImg.bitmap.height, (x,y,idx)=> {
+                                                            if (cropImg.bitmap.data[idx + 3] != 0) {
+                                                                cropImg.bitmap.data[idx] = 0
+                                                                cropImg.bitmap.data[idx + 1] = 0
+                                                                cropImg.bitmap.data[idx + 2] = 0
+                                                            }
+                                                        })
                                                     }
-                                                })
+                                                    
+                                                    cropImg.crop(
+                                                        x * frameWidth,
+                                                        y * frameHeight,
+                                                        frameWidth,
+                                                        frameHeight)
+                                                    
+                                                    const writePath = `split/${index}/${shiny}/${action}/${anim}/${y}/${zeroPad(x)}.png`
+                                                    console.log(writePath)
+                                                    await cropImg.writeAsync(writePath)
+                                                }
                                             }
-                                            
-                                            cropImg.crop(
-                                                x * frameWidth,
-                                                y * frameHeight,
-                                                frameWidth,
-                                                frameHeight)
-                                            
-                                            const writePath = `split/${index}/${shiny}/${action}/${anim}/${y}/${zeroPad(x)}.png`
-                                            console.log(writePath)
-                                            await cropImg.writeAsync(writePath)
                                         }
                                     }
+        
                                 }
-                            }
+                                catch(error){
+                                    console.log(error)
+                                    console.log('action', action, 'is missing for index', index, mapName.get(index))
+                                }
+                            }))
+                        }))
+                    }
+                })
 
-                        }
-                        catch(error){
-                            console.log(error)
-                            console.log('action', action, 'is missing for index', index, mapName.get(index))
-                        }
-                    }))
-                }))
             }
             catch(error){
                 console.log('pokemon with index', index, 'not found', mapName.get(index), 'path: ', `${path}/sprite/${pad}/AnimData.xml`)
