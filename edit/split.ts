@@ -50,7 +50,7 @@ async function split(){
         }
     })
 
-    await Promise.all(['0229-0001'].map(async index =>{
+    await Promise.all(pkmaIndexes.map(async index =>{
         const pathIndex = index.replace('-','/')
         const shinyPad = pathIndex.length == 4 ? `${pathIndex}/0000/0001`:  `${pathIndex}/0001`
         await Promise.all([pathIndex, shinyPad].map(async pad => {
