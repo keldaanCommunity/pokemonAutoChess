@@ -1601,12 +1601,6 @@ export class Carvanha extends Pokemon {
   }
 }
 
-export class Houndour extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.HOUNDOUR, [Synergy.FIRE, Synergy.DARK], Rarity.SUMMON, '0228', Pkm.DEFAULT, 40, 4, 1, 1, 1, AttackSprite.FIRE_MELEE, AttackType.PHYSICAL, 1, 100, Ability.BLAZE_KICK,shiny, emotion, false)
-  }
-}
-
 export class Magikarp extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(Pkm.MAGIKARP, [Synergy.WATER], Rarity.NEUTRAL, '0129', Pkm.GYARADOS, 30, 1, 1, 1, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 1, 100, Ability.DEFAULT,shiny, emotion, false)
@@ -2397,4 +2391,21 @@ export class Blacephalon extends Pokemon {
     super(Pkm.BLACEPHALON, [Synergy.FIRE, Synergy.GHOST], Rarity.MYTHICAL, PkmIndex[Pkm.BLACEPHALON], Pkm.DEFAULT, 200, 18, 3, 3, 3, AttackSprite.GHOST_RANGE, AttackType.SPECIAL, 2, 80, Ability.MIND_BLOWN,shiny, emotion, true)
   }
 }
-  
+
+export class Houndour extends Pokemon {
+    constructor(shiny: boolean, emotion: Emotion) {
+      super(Pkm.HOUNDOUR, [Synergy.FIRE, Synergy.DARK], Rarity.EPIC, PkmIndex[Pkm.HOUNDOUR], Pkm.HOUNDOOM, 90, 8, 4, 4, 1, AttackSprite.FIRE_MELEE, AttackType.PHYSICAL, 1, 120, Ability.BEAT_UP,shiny, emotion, false)
+    }
+}
+
+export class Houndoom extends Pokemon {
+    constructor(shiny: boolean, emotion: Emotion) {
+      super(Pkm.HOUNDOOM, [Synergy.FIRE, Synergy.DARK], Rarity.EPIC, PkmIndex[Pkm.HOUNDOOM], Pkm.MEGA_HOUNDOOM, 130, 9, 6, 6, 1, AttackSprite.FIRE_MELEE, AttackType.PHYSICAL, 2, 120, Ability.BEAT_UP,shiny, emotion, false)
+    }
+}
+
+export class MegaHoundoom extends Pokemon {
+    constructor(shiny: boolean, emotion: Emotion) {
+      super(Pkm.MEGA_HOUNDOOM, [Synergy.FIRE, Synergy.DARK], Rarity.EPIC, PkmIndex[Pkm.MEGA_HOUNDOOM], Pkm.DEFAULT, 230, 20, 8, 8, 1, AttackSprite.FIRE_MELEE, AttackType.PHYSICAL, 3, 120, Ability.BEAT_UP,shiny, emotion, true)
+    }
+}

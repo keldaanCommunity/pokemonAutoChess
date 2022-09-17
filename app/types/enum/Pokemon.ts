@@ -343,7 +343,6 @@ export enum Pkm {
     MELOETTA = 'meloetta',
     ALTARIA = 'altaria',
     MEGA_ALTARIA = 'mega-altaria',
-    HOUNDOUR = 'houndour',
     CASTFORM = 'castform',
     CASTFORM_SUN = 'castform-sun',
     CASTFORM_RAIN = 'castform-rain',
@@ -386,7 +385,10 @@ export enum Pkm {
     TAPU_KOKO = 'tapu-koko',
     TAPU_LELE = 'tapu-lele',
     STAKATAKA = 'stakataka',
-    BLACEPHALON = 'blacephalon'
+    BLACEPHALON = 'blacephalon',
+    HOUNDOUR = 'houndour',
+    HOUNDOOM = 'houndoom',
+    MEGA_HOUNDOOM ='mega-houndoom'
 }
 
 export const PkmIndex: {[key in Pkm] : string} = {
@@ -767,7 +769,6 @@ export const PkmIndex: {[key in Pkm] : string} = {
     [Pkm.SHEDNINJA]: '0292',
     [Pkm.PONYTA]: '0077',
     [Pkm.RAPIDASH]: '0078',
-    houndour: '0228',
     cacnea: '0331',
     cacturne: '0332',
     tauros: '0128',
@@ -777,7 +778,10 @@ export const PkmIndex: {[key in Pkm] : string} = {
     [Pkm.TAPU_KOKO]: '0785',
     [Pkm.TAPU_LELE]: '0786',
     [Pkm.STAKATAKA]: '0805',
-    [Pkm.BLACEPHALON]: '0806'
+    [Pkm.BLACEPHALON]: '0806',
+    [Pkm.HOUNDOUR]:'0228',
+    [Pkm.HOUNDOOM]:'0229',
+    [Pkm.MEGA_HOUNDOOM]:'0229-0001'
 }
 
 export const PkmFamily : {[key in Pkm]: Pkm} = {
@@ -1037,7 +1041,6 @@ export const PkmFamily : {[key in Pkm]: Pkm} = {
     [Pkm.RATICATE]: Pkm.RATTATA,
     [Pkm.LUGIA]: Pkm.LUGIA,
     [Pkm.CARVANHA]: Pkm.CARVANHA,
-    [Pkm.HOUNDOUR]: Pkm.HOUNDOUR,
     [Pkm.SWABLU]: Pkm.SWABLU,
     [Pkm.PRIMAL_GROUDON]: Pkm.GROUDON,
     [Pkm.PRIMAL_KYOGRE]: Pkm.KYOGRE,
@@ -1168,5 +1171,8 @@ export const PkmFamily : {[key in Pkm]: Pkm} = {
     [Pkm.TAPU_KOKO]: Pkm.TAPU_KOKO,
     [Pkm.TAPU_LELE]: Pkm.TAPU_LELE,
     [Pkm.STAKATAKA]: Pkm.STAKATAKA,
-    [Pkm.BLACEPHALON]: Pkm.BLACEPHALON
+    [Pkm.BLACEPHALON]: Pkm.BLACEPHALON,
+    [Pkm.HOUNDOUR]: Pkm.HOUNDOUR,
+    [Pkm.HOUNDOOM]: Pkm.HOUNDOUR,
+    [Pkm.MEGA_HOUNDOOM]: Pkm.HOUNDOUR
 }

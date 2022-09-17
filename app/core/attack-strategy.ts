@@ -6,6 +6,8 @@ import PokemonEntity from './pokemon-entity'
 import PokemonState from './pokemon-state'
 import { Synergy } from '../types/enum/Synergy'
 import { AbilityStrategy } from '../types/enum/Ability'
+import PokemonFactory from '../models/pokemon-factory'
+import {Pkm} from '../types/enum/Pokemon'
 
 export class AttackStrategy {
   process(
@@ -59,6 +61,23 @@ export class AttackStrategy {
     }
   }
 }
+
+export class BeatUpStrategy extends AttackStrategy {
+    process(
+      pokemon: PokemonEntity,
+      state: PokemonState,
+      board: Board,
+      target: PokemonEntity
+    ) {
+      super.process(pokemon, state, board, target)
+        for (let i=0; i<pokemon.stars; i++){
+            const houndour = PokemonFactory.createPokemonFromName(Pkm.HOUNDOUR)
+            const coord = pokemon.simulation.getFirstAvailablePlaceOnBoard(true)
+            pokemon.simulation.addPokemon(houndour, coord.x, coord.y, pokemon.team)
+        }
+    }
+  }
+
 
 export class PaydayStrategy extends AttackStrategy {
   process(

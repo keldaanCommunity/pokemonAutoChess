@@ -1,10 +1,12 @@
 import Jimp from 'jimp'
 import {XMLParser} from 'fast-xml-parser'
 import fs from 'fs'
+import gracefulFs from 'graceful-fs'
 import {Pkm} from '../app/types/enum/Pokemon'
 import PokemonFactory from '../app/models/pokemon-factory'
 import { PokemonActionState, PokemonTint, SpriteType } from '../app/types/enum/Game'
 
+gracefulFs.gracefulify(fs)
 const args = process.argv.slice(2)
 const path = args[0]
 
@@ -61,7 +63,8 @@ async function split(){
                 // credits[`${index}_${shiny}`]['author'] = splitted[1].split(`\n`)[0].split(`\r`)[0];
                 //console.log('add', creditFile, 'to the credits for', mapName.get(index));
                 
-                const xmlFile = fs.readFileSync(`${path}/sprite/${pad}/AnimData.xml`)
+                const xmlFile = await fs.promises.readFile(`${path}/sprite/${pad}/AnimData.xml`)
+                
                 const parser = new XMLParser()
                 const xmlData = <IPMDCollab> parser.parse(xmlFile)
                 await Promise.all(Object.values(SpriteType).map(async anim => {
@@ -78,10 +81,9 @@ async function split(){
                                     img = await Jimp.read(`${path}/sprite/${pad}/${action}-${anim}.png`)
                                 }
     
-    
+                                
                                 // eslint-disable-next-line no-unsafe-optional-chaining
                                 durations[`${index}/${shiny}/${action}/${anim}`] = metadata?.Durations.Duration.length !== undefined ?[...metadata?.Durations.Duration]: [metadata?.Durations.Duration]
-                                // console.log(durations);
                                 const frameHeight = metadata?.FrameHeight
                                 const frameWidth = metadata?.FrameWidth
 
@@ -128,10 +130,12 @@ async function split(){
 
                         }
                         catch(error){
+                            console.log(error)
                             console.log('action', action, 'is missing for index', index, mapName.get(index))
                         }
                     }))
                 }))
+
             }
             catch(error){
                 console.log('pokemon with index', index, 'not found', mapName.get(index), 'path: ', `${path}/sprite/${pad}/AnimData.xml`)
@@ -146,7 +150,7 @@ async function split(){
     // });
     // file.write(JSON.stringify(credits));
     // file.end();
-
+    console.log(durations)
     const fileA = fs.createWriteStream('sheets/durations.json')
     fileA.on('error', function(err) {
       console.log(err)

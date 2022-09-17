@@ -565,6 +565,12 @@ export const AbilityName: {[key in Ability]: Langage} = {
         esp: '',
         prt: '',
         fra: ''
+    },
+    BEAT_UP:{
+        eng: 'Beat up',
+        esp: '',
+        prt: '',
+        fra: ''
     }
 }
 
@@ -1129,6 +1135,12 @@ export const AbilityDescription: {[key in Ability]: Langage} = {
     },
     PAYDAY:{
         eng: 'Deals 30/60/120 physical damage. If the target is killed, the player receive 1/2/3 gold',
+        esp: '',
+        prt: '',
+        fra: ''
+    },
+    BEAT_UP:{
+        eng: 'Summon 1/2/3 Houndour (no items)',
         esp: '',
         prt: '',
         fra: ''
