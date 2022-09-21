@@ -301,25 +301,41 @@ export default class Simulation extends Schema implements ISimulation{
   }
 
   applyPostEffects() {
-    let blueImperialCount = 1
-    let blueVoidCount = 1
+
+    const blueIronDefense = Array.from(this.blueTeam.values()).filter(p=>p.effects.includes(Effect.IRON_DEFENSE))
+    if(blueIronDefense.length > 0){
+      blueIronDefense.forEach(pokemon=>{pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.IRON_DEFENSE), 1)})
+      const blueIronDefensePkm = blueIronDefense[Math.floor(Math.random()*blueIronDefense.length)]
+      blueIronDefensePkm.atk = blueIronDefensePkm.atk * 2
+      blueIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
+    }
+
+    const redIronDefense = Array.from(this.redTeam.values()).filter(p=>p.effects.includes(Effect.IRON_DEFENSE))
+    if(redIronDefense.length > 0){
+      redIronDefense.forEach(pokemon=>{pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.IRON_DEFENSE), 1)})
+      const redIronDefensePkm = redIronDefense[Math.floor(Math.random()*redIronDefense.length)]
+      redIronDefensePkm.atk = redIronDefensePkm.atk * 2
+      redIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
+    }
+
+    const bluePhantomForce = Array.from(this.blueTeam.values()).filter(p=>p.effects.includes(Effect.PHANTOM_FORCE))
+    if(bluePhantomForce.length > 0){
+      bluePhantomForce.forEach(pokemon=>{pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.PHANTOM_FORCE), 1)})
+      const bluePhantomForcePkm = bluePhantomForce[Math.floor(Math.random()*bluePhantomForce.length)]
+      bluePhantomForcePkm.attackType = AttackType.TRUE
+      bluePhantomForcePkm.effects.push(Effect.PHANTOM_FORCE)
+    }
+
+    const redPhantomForce = Array.from(this.redTeam.values()).filter(p=>p.effects.includes(Effect.PHANTOM_FORCE))
+    if(redPhantomForce.length > 0){
+      redPhantomForce.forEach(pokemon=>{pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.PHANTOM_FORCE), 1)})
+      const redPhantomForcePkm = redPhantomForce[Math.floor(Math.random()*redPhantomForce.length)]
+      redPhantomForcePkm.attackType = AttackType.TRUE
+      redPhantomForcePkm.effects.push(Effect.PHANTOM_FORCE)
+    }
+
+
     this.blueTeam.forEach((pokemon) =>{
-      if (pokemon.effects.includes(Effect.IRON_DEFENSE)) {
-        if (blueImperialCount > 0) {
-          pokemon.atk = pokemon.atk * 2
-          blueImperialCount --
-        } else {
-          pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.IRON_DEFENSE), 1)
-        }
-      }
-      if (pokemon.effects.includes(Effect.PHANTOM_FORCE)) {
-        if (blueVoidCount > 0) {
-          pokemon.attackType = AttackType.TRUE
-          blueVoidCount --
-        } else {
-          pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.PHANTOM_FORCE), 1)
-        }
-      }
       if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
         pokemon.atk = pokemon.atk * 2
       }
@@ -385,16 +401,7 @@ export default class Simulation extends Schema implements ISimulation{
       }
     })
 
-    let redImperialCount = 1
     this.redTeam.forEach((pokemon) =>{
-      if (pokemon.effects.includes(Effect.IRON_DEFENSE)) {
-        if (redImperialCount > 0) {
-          pokemon.atk = pokemon.atk * 2
-          redImperialCount --
-        } else {
-          pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.IRON_DEFENSE), 1)
-        }
-      }
       if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
         pokemon.atk = pokemon.atk * 2
       }
