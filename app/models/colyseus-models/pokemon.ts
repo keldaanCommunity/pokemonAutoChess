@@ -392,19 +392,19 @@ export class Salamence extends Pokemon {
 
 export class Ralts extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.RALTS, [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN], Rarity.EPIC, '0280', Pkm.KIRLIA, 90, 5, 1, 1, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.CALM_MIND,shiny, emotion, false)
+    super(Pkm.RALTS, [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN], Rarity.EPIC, '0280', Pkm.KIRLIA, 90, 5, 2, 4, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.CALM_MIND,shiny, emotion, false)
   }
 }
 
 export class Kirlia extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.KIRLIA, [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN], Rarity.EPIC, '0281', Pkm.GARDEVOIR, 130, 9, 1, 1, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.CALM_MIND,shiny, emotion, false)
+    super(Pkm.KIRLIA, [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN], Rarity.EPIC, '0281', Pkm.GARDEVOIR, 130, 9, 3, 5, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.CALM_MIND,shiny, emotion, false)
   }
 }
 
 export class Gardevoir extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.GARDEVOIR, [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN], Rarity.EPIC, '0282', Pkm.DEFAULT, 230, 18, 1, 1, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 3, 100, Ability.CALM_MIND,shiny, emotion, true)
+    super(Pkm.GARDEVOIR, [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN], Rarity.EPIC, '0282', Pkm.DEFAULT, 230, 18, 4, 8, 3, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 3, 100, Ability.CALM_MIND,shiny, emotion, true)
   }
 }
 
@@ -518,19 +518,19 @@ export class Gengar extends Pokemon {
 
 export class Abra extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.ABRA, [Synergy.PSYCHIC, Synergy.HUMAN], Rarity.EPIC, '0063', Pkm.KADABRA, 90, 5, 1, 1, 4, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 1, 50, Ability.TELEPORT,shiny, emotion, false)
+    super(Pkm.ABRA, [Synergy.PSYCHIC, Synergy.HUMAN], Rarity.EPIC, '0063', Pkm.KADABRA, 90, 5, 2, 4, 4, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 1, 50, Ability.TELEPORT,shiny, emotion, false)
   }
 }
 
 export class Kadabra extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.KADABRA, [Synergy.PSYCHIC, Synergy.HUMAN], Rarity.EPIC, '0064', Pkm.ALAKAZAM, 130, 9, 1, 1, 4, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 50, Ability.TELEPORT,shiny, emotion, false)
+    super(Pkm.KADABRA, [Synergy.PSYCHIC, Synergy.HUMAN], Rarity.EPIC, '0064', Pkm.ALAKAZAM, 130, 9, 3, 5, 4, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 2, 50, Ability.TELEPORT,shiny, emotion, false)
   }
 }
 
 export class Alakazam extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.ALAKAZAM, [Synergy.PSYCHIC, Synergy.HUMAN], Rarity.EPIC, '0065', Pkm.DEFAULT, 230, 18, 1, 1, 4, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 3, 50, Ability.TELEPORT,shiny, emotion, true)
+    super(Pkm.ALAKAZAM, [Synergy.PSYCHIC, Synergy.HUMAN], Rarity.EPIC, '0065', Pkm.DEFAULT, 230, 18, 4, 8, 4, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 3, 50, Ability.TELEPORT,shiny, emotion, true)
   }
 }
 
