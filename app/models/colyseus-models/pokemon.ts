@@ -2040,7 +2040,7 @@ export class Meowth extends Pokemon {
 
 export class Persian extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.PERSIAN, [Synergy.NORMAL, Synergy.FIELD], Rarity.RARE, '0053', Pkm.DEFAULT, 120, 10, 3, 3, 1, AttackSprite.NORMAL_MELEE, AttackType.PHYSICAL, 1, 90, Ability.PAYDAY,shiny, emotion, true)
+    super(Pkm.PERSIAN, [Synergy.NORMAL, Synergy.FIELD], Rarity.RARE, '0053', Pkm.DEFAULT, 120, 10, 3, 3, 1, AttackSprite.NORMAL_MELEE, AttackType.PHYSICAL, 2, 90, Ability.PAYDAY,shiny, emotion, true)
   }
 }
 
