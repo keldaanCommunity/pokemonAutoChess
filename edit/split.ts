@@ -38,6 +38,7 @@ async function split(){
 
     const pkmaIndexes = ['0000']
     const mapName = new Map<string, string>()
+    mapName.set('0000','missingno')
     // const credits = {};
     const durations = {}
     let missing = ''
@@ -50,25 +51,25 @@ async function split(){
         }
     })
 
-    await Promise.all(pkmaIndexes.map(async index =>{
+    
+    for(let i = 0; i < pkmaIndexes.length; i++){
+        const index = pkmaIndexes[i]
+        const progression = `${i}/${pkmaIndexes.length -1} (${(i * 100/(pkmaIndexes.length -1)).toFixed(2)}%) #${index} ${mapName.get(index)}`
         const pathIndex = index.replace('-','/')
         const shinyPad = pathIndex.length == 4 ? `${pathIndex}/0000/0001`:  `${pathIndex}/0001`
-        await Promise.all([pathIndex, shinyPad].map(async pad => {
+        const allPads = [pathIndex, shinyPad]
+
+        for (let j = 0; j<allPads.length; j++){
+            const pad = allPads[j]
             try{
                 const shiny = pathIndex == pad ? PokemonTint.NORMAL : PokemonTint.SHINY
-                // const creditFile = fs.readFileSync(`${path}/sprite/${pad}/credits.txt`);
-                // const splitted = creditFile.toString().split('\t');
-                // credits[`${index}_${shiny}`] = {date:'', author: ''};
-                // credits[`${index}_${shiny}`]['date'] = splitted[0].slice(0,10);
-                // credits[`${index}_${shiny}`]['author'] = splitted[1].split(`\n`)[0].split(`\r`)[0];
-                //console.log('add', creditFile, 'to the credits for', mapName.get(index));
-                
-                const xmlFile = await fs.promises.readFile(`${path}/sprite/${pad}/AnimData.xml`)
-                
+                const xmlFile = fs.readFileSync(`${path}/sprite/${pad}/AnimData.xml`)
                 const parser = new XMLParser()
                 const xmlData = <IPMDCollab> parser.parse(xmlFile)
-                await Promise.all(Object.values(SpriteType).map(async anim => {
-                    await Promise.all(Object.values(PokemonActionState).map(async action => {
+                for(let k = 0; k<Object.values(SpriteType).length; k++){
+                    const anim = Object.values(SpriteType)[k]
+                    for(let l = 0; l<Object.values(PokemonActionState).length; l++){
+                        const action = Object.values(PokemonActionState)[l]
                         try{
                             let img
                             let metadata = xmlData.AnimData.Anims.Anim.find(m=>m.Name==action)
@@ -121,7 +122,6 @@ async function split(){
                                                 frameHeight)
                                             
                                             const writePath = `split/${index}/${shiny}/${action}/${anim}/${y}/${zeroPad(x)}.png`
-                                            console.log(writePath)
                                             await cropImg.writeAsync(writePath)
                                         }
                                     }
@@ -133,23 +133,17 @@ async function split(){
                             console.log(error)
                             console.log('action', action, 'is missing for index', index, mapName.get(index))
                         }
-                    }))
-                }))
-
+                        console.log(progression, shiny, anim, action)
+                    }
+                }
             }
             catch(error){
                 console.log('pokemon with index', index, 'not found', mapName.get(index), 'path: ', `${path}/sprite/${pad}/AnimData.xml`)
                 missing += `${mapName.get(index)},${pad}/AnimData.xml\n`
             }
-        }))
-    }))
+        }
+    }
 
-    // const file = fs.createWriteStream(`sheets/credits.json`);
-    // file.on('error', function(err) {
-    //   console.log(err);
-    // });
-    // file.write(JSON.stringify(credits));
-    // file.end();
     console.log(durations)
     const fileA = fs.createWriteStream('sheets/durations.json')
     fileA.on('error', function(err) {

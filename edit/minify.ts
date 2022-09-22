@@ -1,32 +1,32 @@
-import {Pkm} from '../app/types/enum/Pokemon';
-import fs from 'fs';
-import PokemonFactory from '../app/models/pokemon-factory';
+import {Pkm} from '../app/types/enum/Pokemon'
+import fs from 'fs'
+import PokemonFactory from '../app/models/pokemon-factory'
 
-const pkmaIndexes = new Array<string>();
-const indexes = ["0000"];
+const pkmaIndexes = new Array<string>()
+const indexes = ['0000']
 
 Object.values(Pkm).forEach(pkm => {
-    const pokemon = PokemonFactory.createPokemonFromName(pkm);
+    const pokemon = PokemonFactory.createPokemonFromName(pkm)
     if(!pkmaIndexes.includes(pokemon.index)){
-        pkmaIndexes.push(pokemon.index);
+        pkmaIndexes.push(pokemon.index)
     }
-});
+})
 
 pkmaIndexes.forEach(id=>{
     try{
-        const buffer = fs.readFileSync(`sheets/${id}.json`);
-        const json = JSON.parse(buffer.toString());
-        fs.writeFileSync(`sheets/${id}.json`, JSON.stringify(json, null, 0));
-        indexes.push(id);
+        const buffer = fs.readFileSync(`sheets/${id}.json`)
+        const json = JSON.parse(buffer.toString())
+        fs.writeFileSync(`sheets/${id}.json`, JSON.stringify(json, null, 0))
+        indexes.push(id)
     }
     catch(error){
-        console.log('error id#', id);
+        console.log('error id#', id)
     }
-});
+})
 
-const file = fs.createWriteStream(`sheets/indexList.json`);
+const file = fs.createWriteStream('sheets/indexList.json')
 file.on('error', function(err) {
-  console.log(err);
-});
-file.write(JSON.stringify(indexes));
-file.end();
+  console.log(err)
+})
+file.write(JSON.stringify(indexes))
+file.end()
