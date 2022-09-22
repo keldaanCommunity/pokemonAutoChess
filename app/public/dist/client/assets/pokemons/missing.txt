@@ -25,8 +25,6 @@ virizion,0640/AnimData.xml
 virizion,0640/0000/0001/AnimData.xml
 kyurem,0646/AnimData.xml
 kyurem,0646/0000/0001/AnimData.xml
-reshiram,0643/AnimData.xml
-reshiram,0643/0000/0001/AnimData.xml
 primal-Kyogre,0382/0001/AnimData.xml
 primal-Kyogre,0382/0001/0001/AnimData.xml
 primal-Groudon,0383/0001/AnimData.xml
@@ -35,7 +33,6 @@ zweilous,0634/AnimData.xml
 zweilous,0634/0000/0001/AnimData.xml
 hydreigon,0635/AnimData.xml
 hydreigon,0635/0000/0001/AnimData.xml
-sandile,0551/0000/0001/AnimData.xml
 krokorok,0552/AnimData.xml
 krokorok,0552/0000/0001/AnimData.xml
 krookodile,0553/AnimData.xml
