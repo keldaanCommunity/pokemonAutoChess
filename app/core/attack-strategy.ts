@@ -2698,7 +2698,8 @@ export class TeleportStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-
+    pokemon.atk += pokemon.stars
+    
     const potentialCells = [
       [0, 0],
       [0, 5],
