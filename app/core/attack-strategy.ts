@@ -599,10 +599,8 @@ export class TwistingNeitherStrategy extends AttackStrategy {
       2
     )
     cells.forEach((cell) => {
-      if (cell && cell.value) {
-        if (cell.value.team !== pokemon.team) {
-          cell.value.handleSpellDamage(80, board, AttackType.SPECIAL, pokemon)
-        }
+      if (cell && cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpellDamage(80, board, AttackType.SPECIAL, pokemon)
         const teleportationCell = board.getTeleportationCell(
           cell.value.positionX,
           cell.value.positionY
