@@ -7,7 +7,7 @@
 
  --> Play: [https://pokemon-auto-chess.com](https://pokemon-auto-chess.com/)
 
---> Support: [https://pokemon-auto-chess.com](https://en.tipeee.com/pokemon-auto-chess)
+--> Support: [https://en.tipeee.com/pokemon-auto-chess](https://en.tipeee.com/pokemon-auto-chess)
 
 --> Discord: [https://discord.com/invite/6JMS7tr](https://discord.com/invite/6JMS7tr)
 
