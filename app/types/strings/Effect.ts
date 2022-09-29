@@ -236,7 +236,7 @@
          'fra': '-30% ATK pour l\'équipe ennemie'
      },
      [Effect.DRAGON_DANCE]: {
-         'eng': 'Your Dragon pokemon gain +8% attack Speed after every hit.',
+         'eng': 'Your Dragon pokemon gain +10% attack Speed after every hit.',
          'esp': '+5% velocidad de ataque para dragones pkm en cada ataque',
          'fra': '+5% vitesse d\'attaque pour les pkm dragons à chaque attaque'
      },
