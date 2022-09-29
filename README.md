@@ -5,10 +5,10 @@
   
   ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
- --> Play: [https://pokemon-auto-chess.com](https://pokemon-auto-chess.com/)
+Play: [https://pokemon-auto-chess.com](https://pokemon-auto-chess.com/)
 
---> Support: [https://en.tipeee.com/pokemon-auto-chess](https://en.tipeee.com/pokemon-auto-chess)
+Support: [https://en.tipeee.com/pokemon-auto-chess](https://en.tipeee.com/pokemon-auto-chess)
 
---> Discord: [https://discord.com/invite/6JMS7tr](https://discord.com/invite/6JMS7tr)
+Discord: [https://discord.com/invite/6JMS7tr](https://discord.com/invite/6JMS7tr)
 
---> Source: [https://github.com/keldaanInteractive/pokemonAutoChess](https://github.com/keldaanInteractive/pokemonAutoChess)
+Source: [https://github.com/keldaanInteractive/pokemonAutoChess](https://github.com/keldaanInteractive/pokemonAutoChess)
