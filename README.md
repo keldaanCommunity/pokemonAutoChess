@@ -5,8 +5,10 @@
   
   ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
- --> [Play !](https://pokemon-auto-chess.herokuapp.com/)
+ --> [Play: https://pokemon-auto-chess.com](https://pokemon-auto-chess.com/)
 
-## Credits
+--> [Support: https://pokemon-auto-chess.com](https://en.tipeee.com/pokemon-auto-chess)
 
-Sprites: RedBlueYellow, Juenca, Kustem R, SilverDeoxys563, Naokohiro, academico95, PowerCrystal, FakeZShayner, NeroIntruder, Emmufin, PMDCollab
+--> [Discord: https://discord.com/invite/6JMS7tr](https://discord.com/invite/6JMS7tr)
+
+--> [Source: https://github.com/keldaanInteractive/pokemonAutoChess](https://github.com/keldaanInteractive/pokemonAutoChess)
