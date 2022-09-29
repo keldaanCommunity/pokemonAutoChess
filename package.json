@@ -1,19 +1,19 @@
 {
   "name": "pokemon-autochess",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "",
   "keywords": [],
   "license": "MIT",
   "engines": {
     "node": "17.8"
   },
-  "homepage": "https://github.com/arnaudgregoire/pokemonAutoChess#readme",
+  "homepage": "https://github.com/keldaanInteractive/pokemonAutoChess#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arnaudgregoire/pokemonAutoChess.git"
+    "url": "git+https://github.com/keldaanInteractive/pokemonAutoChess.git"
   },
   "bugs": {
-    "url": "https://github.com/arnaudgregoire/pokemonAutoChess/issues"
+    "url": "https://github.com/keldaanInteractive/pokemonAutoChess/issues"
   },
   "author": "arnaudgregoire",
   "contributors": [
