@@ -5,7 +5,7 @@ import Board from './board'
 import PokemonEntity from './pokemon-entity'
 import PokemonState from './pokemon-state'
 import { Synergy } from '../types/enum/Synergy'
-import { AbilityStrategy } from '../types/enum/Ability'
+import { Ability, AbilityStrategy } from '../types/enum/Ability'
 import PokemonFactory from '../models/pokemon-factory'
 import {Pkm} from '../types/enum/Pokemon'
 
@@ -220,7 +220,9 @@ export class KnowledgeThiefStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    AbilityStrategy[target.skill].process(pokemon, state, board, target)
+    if(target.skill !== Ability.KNOWLEDGE_THIEF){
+        AbilityStrategy[target.skill].process(pokemon, state, board, target)
+    }
   }
 }
 
