@@ -62,6 +62,81 @@ export class AttackStrategy {
   }
 }
 
+export class BlueFlareStrategy extends AttackStrategy {
+    process(
+      pokemon: PokemonEntity,
+      state: PokemonState,
+      board: Board,
+      target: PokemonEntity
+    ) {
+      super.process(pokemon, state, board, target)
+        let damage = 50
+        let multiplier = 0
+        if(pokemon.effects.includes(Effect.BLAZE)){
+            multiplier = 1
+        }
+        else if(pokemon.effects.includes(Effect.VICTORY_STAR)){
+            multiplier = 2
+        }
+        else if(pokemon.effects.includes(Effect.DROUGHT)){
+            multiplier = 3
+        }
+        else if(pokemon.effects.includes(Effect.DESOLATE_LAND)){
+            multiplier = 4
+        }
+        damage += multiplier * 50
+
+        const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+        cells.forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpellDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon
+            )
+          }
+        })
+    }
+  }
+
+  export class FusionBoltStrategy extends AttackStrategy {
+    process(
+      pokemon: PokemonEntity,
+      state: PokemonState,
+      board: Board,
+      target: PokemonEntity
+    ) {
+        super.process(pokemon, state, board, target)
+        let damage = 50
+        let multiplier = 0
+        if(pokemon.effects.includes(Effect.EERIE_IMPULSE)){
+            multiplier = 1
+        }
+        else if(pokemon.effects.includes(Effect.RISING_VOLTAGE)){
+            multiplier = 2
+        }
+        else if(pokemon.effects.includes(Effect.OVERDRIVE)){
+            multiplier = 3
+        }
+        damage += multiplier * 60
+
+        const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+        cells.forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpellDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon
+            )
+          }
+        })
+    }
+  }
+
 export class BeatUpStrategy extends AttackStrategy {
     process(
       pokemon: PokemonEntity,

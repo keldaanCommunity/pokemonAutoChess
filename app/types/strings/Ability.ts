@@ -571,6 +571,18 @@ export const AbilityName: {[key in Ability]: Langage} = {
         esp: '',
         prt: '',
         fra: ''
+    },
+    [Ability.BLUE_FLARE]:{
+        eng: 'Blue Flare',
+        esp: '',
+        prt: '',
+        fra: ''
+    },
+    [Ability.FUSION_BOLT]:{
+        eng: 'Fusion Bolt',
+        esp: '',
+        prt: '',
+        fra: ''
     }
 }
 
@@ -1141,6 +1153,18 @@ export const AbilityDescription: {[key in Ability]: Langage} = {
     },
     BEAT_UP:{
         eng: 'Summon 1/2/3 Houndour (no items)',
+        esp: '',
+        prt: '',
+        fra: ''
+    },
+    [Ability.BLUE_FLARE]:{
+        eng: 'Inflicts 50 points of magic damage + 50 additional points per stage of active fire synergies',
+        esp: '',
+        prt: '',
+        fra: ''
+    },
+    [Ability.FUSION_BOLT]:{
+        eng: 'Inflicts 50 points of magic damage + 60 additional points per stage of active electric synergies',
         esp: '',
         prt: '',
         fra: ''

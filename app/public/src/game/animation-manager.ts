@@ -663,6 +663,20 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+        key: Ability.BLUE_FLARE,
+        frames: this.game.anims.generateFrameNames(Ability.BLUE_FLARE, {start: 0, end: 14, zeroPad: 3}),
+        duration: 1000,
+        repeat: 0
+      })
+
+      this.game.anims.create({
+        key: Ability.FUSION_BOLT,
+        frames: this.game.anims.generateFrameNames(Ability.FUSION_BOLT, {start: 0, end: 17, zeroPad: 3}),
+        duration: 1000,
+        repeat: 0
+      })
+
+    this.game.anims.create({
       key: Ability.DISARMING_VOICE,
       frames: this.game.anims.generateFrameNames(Ability.DISARMING_VOICE, {start: 0, end: 43, zeroPad: 3}),
       duration: 1000,
