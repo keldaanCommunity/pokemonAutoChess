@@ -164,6 +164,8 @@ export default class GameScene extends Scene {
     this.load.multiatlas('SONG_OF_DESIRE', '/assets/attacks/SONG_OF_DESIRE.json', '/assets/attacks')
     this.load.multiatlas('FIELD_DEATH', '/assets/attacks/FIELD_DEATH.json', '/assets/attacks')
     this.load.multiatlas('FAIRY_CRIT', '/assets/attacks/FAIRY_CRIT.json', '/assets/attacks')
+    this.load.multiatlas('BLUE_FLARE', '/assets/attacks/BLUE_FLARE.json', '/assets/attacks')
+    this.load.multiatlas('FUSION_BOLT', '/assets/attacks/FUSION_BOLT.json', '/assets/attacks')
     this.load.multiatlas('pmd-replace','/assets/attacks/pmd-replace.json', '/assets/attacks')
     this.load.image('transition', '/assets/ui/transition.png')
     this.load.image('money', '/assets/ui/money.png')

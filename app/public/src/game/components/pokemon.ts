@@ -555,6 +555,47 @@ export default class Pokemon extends Button {
             })
             break
 
+        case Ability.BLUE_FLARE:
+            coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY)
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'BLUE_FLARE', '000')
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.BLUE_FLARE)
+            this.scene.tweens.add({
+                targets: specialProjectile,
+                x: coordinatesTarget[0],
+                y: coordinatesTarget[1],
+                ease: 'linear',
+                yoyo: false,
+                duration: 1000,
+                onComplete: () => {
+                specialProjectile.destroy()
+                }
+            })
+            break
+
+        case Ability.FUSION_BOLT:
+            coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY)
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            specialProjectile = this.scene.add.sprite(coordinates[0], coordinates[1], 'FUSION_BOLT', '000')
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.FUSION_BOLT)
+            this.scene.tweens.add({
+                targets: specialProjectile,
+                x: coordinatesTarget[0],
+                y: coordinatesTarget[1],
+                ease: 'linear',
+                yoyo: false,
+                duration: 1000,
+                onComplete: () => {
+                specialProjectile.destroy()
+                }
+            })
+            break
+    
+
           case Ability.ORIGIN_PULSE:
             coordinatesTarget = transformAttackCoordinate(0, this.targetY)
             coordinates = transformAttackCoordinate(8, this.targetY)

@@ -1950,13 +1950,13 @@ export class Kyurem extends Pokemon {
 
 export class Reshiram extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.RESHIRAM, [Synergy.DRAGON, Synergy.FIRE], Rarity.MYTHICAL, '0643', Pkm.DEFAULT, 300, 30, 5, 5, 3, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 1, 100, Ability.BURN,shiny, emotion, true)
+    super(Pkm.RESHIRAM, [Synergy.DRAGON, Synergy.FIRE], Rarity.MYTHICAL, '0643', Pkm.DEFAULT, 300, 30, 4, 6, 3, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 1, 90, Ability.BLUE_FLARE,shiny, emotion, true)
   }
 }
 
 export class Zekrom extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.ZEKROM, [Synergy.DRAGON, Synergy.ELECTRIC], Rarity.MYTHICAL, '0644', Pkm.DEFAULT, 300, 30, 5, 5, 3, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 100, Ability.THUNDER,shiny, emotion, true)
+    super(Pkm.ZEKROM, [Synergy.DRAGON, Synergy.ELECTRIC], Rarity.MYTHICAL, '0644', Pkm.DEFAULT, 300, 30, 4, 6, 3, AttackSprite.ELECTRIC_RANGE, AttackType.SPECIAL, 2, 90, Ability.FUSION_BOLT,shiny, emotion, true)
   }
 }
 
