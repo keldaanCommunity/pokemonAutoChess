@@ -137,7 +137,9 @@ const data = {
   })
 
   pokemonCandidates.sort(function(a, b) {
-    return RarityHpCost[a.rarity] - RarityHpCost[b.rarity]
+    const aIndex = Object.keys(Rarity).findIndex(r=>r===a.rarity)
+    const bIndex = Object.keys(Rarity).findIndex(r=>r===b.rarity)
+    return aIndex - bIndex
   })
 
   pokemonCandidates.forEach((p)=>{
