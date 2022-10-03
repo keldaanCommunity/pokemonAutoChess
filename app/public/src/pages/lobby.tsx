@@ -16,8 +16,8 @@ import TeamBuilder from './component/bot-builder/team-builder'
 import MetaReport from './component/meta-report/meta-report'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { joinLobby, logIn, logOut, requestMeta, requestBotList } from '../stores/NetworkStore'
-import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent, setBotMonitor, setMetaPokemons } from '../stores/LobbyStore'
-import { ICustomLobbyState, Transfer } from '../../../types'
+import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent, setBotMonitor, setMetaPokemons, setSuggestions } from '../stores/LobbyStore'
+import { ICustomLobbyState, ISuggestionUser, Transfer } from '../../../types'
 import LobbyUser from '../../../models/colyseus-models/lobby-user'
 import { IBot } from '../../../models/mongo-models/bot-v2'
 import { IMeta } from '../../../models/mongo-models/meta'
@@ -123,6 +123,8 @@ export default function Lobby(){
                         room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => { dispatch(setBotData(data))})
     
                         room.onMessage(Transfer.BOOSTER_CONTENT, (boosterContent: string[]) => {dispatch(setBoosterContent(boosterContent))})
+
+                        room.onMessage(Transfer.SUGGESTIONS, (suggestions: ISuggestionUser[]) => {dispatch(setSuggestions(suggestions))})
     
                         dispatch(joinLobby(room))
                     } catch (error) {

@@ -83,7 +83,9 @@ export enum Transfer {
     DRAG_DROP_FAILED = 'DRAG_DROP_FAILED',
     BROADCAST_EMOTE = 'BROADCAST_EMOTE',
     BROADCAST_INFO = 'BROADCAST_INFO',
-    REQUEST_META_POKEMONS = 'REQUEST_META_POKEMONS'
+    REQUEST_META_POKEMONS = 'REQUEST_META_POKEMONS',
+    SEARCH_BY_ID = 'SEARCH_BY_ID',
+    SUGGESTIONS = 'SUGGESTIONS'
 }
 
 export enum AttackSprite {
@@ -410,4 +412,12 @@ export const EmotionCost: {[key in Emotion] : number} = {
     [Emotion.STUNNED] : 260,
     [Emotion.SPECIAL2] : 270,
     [Emotion.SPECIAL3] : 280
+}
+
+export interface ISuggestionUser{
+    name: string
+    elo: number
+    level: number
+    id: string
+    avatar: string
 }

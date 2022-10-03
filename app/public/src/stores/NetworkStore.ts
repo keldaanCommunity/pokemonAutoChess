@@ -145,6 +145,9 @@ export const networkSlice = createSlice({
         },
         broadcastEmote:(state, action: PayloadAction<string>) => {
             state.game?.send(Transfer.BROADCAST_EMOTE, action.payload)
+        },
+        searchById: (state, action: PayloadAction<string>) => {
+            state.lobby?.send(Transfer.SEARCH_BY_ID, action.payload)
         }
     }
 })
@@ -178,7 +181,8 @@ export const {
     shopClick,
     levelClick,
     lockClick,
-    refreshClick
+    refreshClick,
+    searchById
 } = networkSlice.actions
 
 export default networkSlice.reducer
