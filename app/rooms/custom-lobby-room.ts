@@ -15,7 +15,7 @@ import Meta, { IMeta } from '../models/mongo-models/meta'
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic'
 import PokemonsStatistic, {IPokemonsStatistic} from '../models/mongo-models/pokemons-statistic'
 import { PastebinAPI } from 'pastebin-ts/dist/api'
-import { Emotion, EmotionCost, Transfer, CDN_PORTRAIT_URL } from '../types'
+import { Emotion, EmotionCost, Transfer, CDN_PORTRAIT_URL, ISuggestionUser } from '../types'
 import {Pkm} from '../types/enum/Pokemon'
 import PokemonFactory from '../models/pokemon-factory'
 import PokemonConfig from '../models/colyseus-models/pokemon-config'
@@ -184,13 +184,15 @@ export default class CustomLobbyRoom extends LobbyRoom{
     })
 
     this.onMessage(Transfer.CHANGE_NAME, (client, message)=>{
-      this.state.users.get(client.auth.uid).name = message.name
-      UserMetadata.findOne({'uid': client.auth.uid}, (err, user)=>{
-        if (user) {
-          user.displayName = message.name
-          user.save()
+        if(message.name.length > 4){
+            this.state.users.get(client.auth.uid).name = message.name
+            UserMetadata.findOne({'uid': client.auth.uid}, (err, user)=>{
+              if (user) {
+                user.displayName = message.name
+                user.save()
+              }
+            })
         }
-      })
     })
 
     this.onMessage(Transfer.CHANGE_SELECTED_EMOTION, (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
@@ -240,33 +242,51 @@ export default class CustomLobbyRoom extends LobbyRoom{
         }
     })
 
+    this.onMessage(Transfer.SEARCH_BY_ID, (client, message)=>{
+        UserMetadata.findOne({'uid': message}, (err, user) => {
+            if (user) {
+                DetailledStatistic.find({'playerId': user.uid}, ['pokemons', 'time', 'rank', 'elo'], {limit: 10, sort: {'time': -1}}, (err, stats)=>{
+                  if (err) {
+                    console.log(err)
+                  } else {
+                    client.send(Transfer.USER, new LobbyUser(
+                        user.uid,
+                        user.displayName,
+                        user.elo,
+                        user.avatar,
+                        user.langage,
+                        user.wins,
+                        user.exp,
+                        user.level,
+                        user.donor,
+                        stats.map(r=>{return new GameRecord(r.time, r.rank, r.elo, r.pokemons)}),
+                        user.honors,
+                        user.pokemonCollection,
+                        user.booster))
+                  }
+                })
+              } else {
+                client.send(Transfer.USER, {})
+              }
+        })
+    })
+
     this.onMessage(Transfer.SEARCH, (client, message)=>{
-      UserMetadata.findOne({'displayName': message.name}, (err, user)=>{
-        if (user) {
-          DetailledStatistic.find({'playerId': user.uid}, ['pokemons', 'time', 'rank', 'elo'], {limit: 10, sort: {'time': -1}}, (err, stats)=>{
-            if (err) {
-              console.log(err)
-            } else {
-              client.send(Transfer.USER, new LobbyUser(
-                  user.uid,
-                  user.displayName,
-                  user.elo,
-                  user.avatar,
-                  user.langage,
-                  user.wins,
-                  user.exp,
-                  user.level,
-                  user.donor,
-                  stats.map(r=>{return new GameRecord(r.time, r.rank, r.elo, r.pokemons)}),
-                  user.honors,
-                  user.pokemonCollection,
-                  user.booster))
-            }
-          })
-        } else {
-          client.send(Transfer.USER, {})
+        if(message.name?.length >= 4){
+            const regExp = new RegExp(`${message.name}`)
+            UserMetadata.find({'displayName': { $regex: regExp, $options: 'i' } }, ['uid', 'elo', 'displayName', 'level', 'avatar'], {limit: 10, sort: {'level': -1}}, (err, users)=>{
+                if(users){
+                    const suggestions: Array<ISuggestionUser> = users.map(u=>{ return {
+                        id: u.uid,
+                        elo: u.elo,
+                        name: u.displayName,
+                        level: u.level,
+                        avatar: u.avatar
+                    }})
+                    client.send(Transfer.SUGGESTIONS, suggestions)
+                }
+            })
         }
-      })
     })
 
     this.onMessage(Transfer.CHANGE_AVATAR, (client, message: {index: string, emotion: Emotion, shiny: boolean}) => {
