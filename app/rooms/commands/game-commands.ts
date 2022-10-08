@@ -759,7 +759,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.state.phase = GamePhaseState.PICK
     const isPVE = this.checkForPVE()
 
-    this.state.time = 30000
+    this.state.time = this.state.stageLevel === 10 || this.state.stageLevel === 20 ? 50000: 30000
 
     this.state.players.forEach((player: Player, key: string) => {
       player.simulation.stop()
