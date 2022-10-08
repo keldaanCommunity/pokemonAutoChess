@@ -2262,7 +2262,7 @@ export class Hatterene extends Pokemon {
 }
 export class Fennekin extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.FENNEKIN, [Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN], Rarity.COMMON, PkmIndex[Pkm.FENNEKIN], Pkm.BRAIXEN, 70, 8, 1, 1, 2, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 1, 90, Ability.FIRE_TRICK,shiny, emotion, false)
+    super(Pkm.FENNEKIN, [Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN], Rarity.COMMON, PkmIndex[Pkm.FENNEKIN], Pkm.BRAIXEN, 70, 6, 1, 1, 2, AttackSprite.FIRE_RANGE, AttackType.SPECIAL, 1, 90, Ability.FIRE_TRICK,shiny, emotion, false)
   }
 }
 export class Braixen extends Pokemon {
