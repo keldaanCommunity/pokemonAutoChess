@@ -1,7 +1,7 @@
 import React, {ReactElement} from 'react'
 import CSS from 'csstype'
 import { useAppSelector } from '../../../hooks'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
+import { CDN_PORTRAIT_URL, TitleName } from '../../../../../types'
 import GameMoney from './game-money'
 import GameLife from './game-life'
 
@@ -24,6 +24,7 @@ export default function GamePlayerInformations(){
     const experienceManager = useAppSelector(state=>state.game.currentPlayerExperienceManager)
     const boardSize = useAppSelector(state=>state.game.currentPlayerBoardSize)
     const name = useAppSelector(state=>state.game.currentPlayerName)
+    const title = useAppSelector(state=>state.game.currentPlayerTitle)
     const avatar = useAppSelector(state=>state.game.currentPlayerAvatar)
     const life = useAppSelector(state=>state.game.currentPlayerLife)
     const money = useAppSelector(state=>state.game.currentPlayerMoney)
@@ -48,8 +49,9 @@ export default function GamePlayerInformations(){
 
     <GameMoney money={money}/>
     <GameLife life={life}/>
-    <div className='nes-container' style={{backgroundColor:'#54596b', padding:'5px', display:'flex', minWidth:'15%', height:'100%'}}>
+    <div className='nes-container' style={{backgroundColor:'#54596b', padding:'5px', display:'flex', minWidth:'15%', height:'100%', gap:'5px'}}>
         <img src={`${CDN_PORTRAIT_URL}${avatar}.png`}/>
+        <p style={{margin:'0px', color: '#ffc107'}}>{TitleName[title]}</p>
         <p style={{marginLeft:'5px', color:'white', textAlign:'center'}}>{name}</p>
     </div>
     {vs}

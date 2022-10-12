@@ -148,6 +148,9 @@ export const networkSlice = createSlice({
         },
         searchById: (state, action: PayloadAction<string>) => {
             state.lobby?.send(Transfer.SEARCH_BY_ID, action.payload)
+        },
+        setTitle: (state, action: PayloadAction<string>) => {
+            state.lobby?.send(Transfer.SET_TITLE, action.payload)
         }
     }
 })
@@ -182,7 +185,8 @@ export const {
     levelClick,
     lockClick,
     refreshClick,
-    searchById
+    searchById,
+    setTitle
 } = networkSlice.actions
 
 export default networkSlice.reducer

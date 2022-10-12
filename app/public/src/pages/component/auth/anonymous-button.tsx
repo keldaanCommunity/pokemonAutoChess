@@ -1,4 +1,5 @@
 import { getAuth, signInAnonymously, updateProfile } from 'firebase/auth'
+import React from 'react'
 import { uniqueNamesGenerator, adjectives, colors, animals, Config } from 'unique-names-generator'
 
 
@@ -15,7 +16,7 @@ export default function AnonymousButton(){
         try {
             await signInAnonymously(auth)
             if(auth.currentUser){
-                const randomName = uniqueNamesGenerator(customConfig) 
+                const randomName = uniqueNamesGenerator(customConfig)
                 await updateProfile(auth.currentUser,{displayName:randomName})
                 window.location.href = window.location.href + 'lobby'
             }

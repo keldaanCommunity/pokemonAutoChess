@@ -20,10 +20,12 @@ import { Pokemon } from '../models/colyseus-models/pokemon'
 import { IGameUser } from '../models/colyseus-models/game-user'
 import History from '../models/mongo-models/history'
 import { components } from '../api-v1/openapi'
+import { Title } from '../types'
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
   eloEngine: EloRank
+  
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
@@ -40,7 +42,7 @@ export default class GameRoom extends Room<GameState> {
       const user = options.users[id]
       // console.log(user);
       if (user.isBot) {
-        const player = new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1, new Map<string,PokemonConfig>())
+        const player = new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1, new Map<string,PokemonConfig>(),'')
         this.state.players.set(user.id, player)
         this.state.botManager.addBot(player)
         this.state.shop.assignShop(player)
@@ -283,8 +285,28 @@ export default class GameRoom extends Room<GameState> {
               if (usr.elo) {
                 const elo = Math.max(0, this.computeElo(player, rank, usr.elo))
                 if (elo) {
+                  if(elo > 1100){
+                    player.titles.add(Title.GYM_TRAINER)
+                  }
+                  if(elo > 1200){
+                    player.titles.add(Title.GYM_CHALLENGER)
+                  }
+                  if(elo > 1400){
+                    player.titles.add(Title.GYM_LEADER)
+                  }
                   usr.elo = elo
                 }
+
+                if (usr.titles === undefined){
+                  usr.titles = []
+                }
+
+                player.titles.forEach(t=>{
+                  if(!usr.titles.includes(t)){
+                    console.log('title added ', t)
+                    usr.titles.push(t)
+                  }
+                })
                 //console.log(usr);
                 // usr.markModified('metadata';
                 usr.save()
@@ -314,7 +336,8 @@ export default class GameRoom extends Room<GameState> {
       rank: player.rank,
       avatar: player.avatar,
       pokemons: new Array<{name: string, avatar: string, items: Item[], inventory: Item[]}>(),
-      elo: player.elo
+      elo: player.elo,
+      title: player.title
     }
 
     player.board.forEach((pokemon: IPokemon) => {

@@ -85,7 +85,8 @@ export enum Transfer {
     BROADCAST_INFO = 'BROADCAST_INFO',
     REQUEST_META_POKEMONS = 'REQUEST_META_POKEMONS',
     SEARCH_BY_ID = 'SEARCH_BY_ID',
-    SUGGESTIONS = 'SUGGESTIONS'
+    SUGGESTIONS = 'SUGGESTIONS',
+    SET_TITLE = 'SET_TITLE'
 }
 
 export enum AttackSprite {
@@ -209,7 +210,8 @@ export interface IPlayer {
     elo: number
     alive: boolean
     history: ArraySchema<HistoryItem>
-    pokemonCollection: PokemonCollection
+    pokemonCollection: PokemonCollection,
+    title: Title | ''
 }
 export interface IPokemon {
     id: string
@@ -431,7 +433,7 @@ export enum Title {
     DELINQUENT = 'DELINQUENT',
     DRAGON_TAMER = 'DRAGON_TAMER',
     FIREFIGHTER = 'FIREFIGHTER',
-    BIKER = 'BIKER',
+    TEAM_ROCKET_GRUNT = 'TEAM_ROCKET_GRUNT',
     HIKER = 'HIKER',
     LONE_WOLF = 'LONE_WOLF',
     KINDLER = 'KINDLER',
@@ -444,6 +446,8 @@ export enum Title {
     MYTH_TRAINER = 'MYTH_TRAINER',
     DIVER = 'DIVER',
     POKEMON_RANGER = 'POKEMON_RANGER',
+    CAMPER = 'CAMPER',
+    RIVAL = 'RIVAL',
     SKIER = 'SKIER',
     POKEFAN = 'POKEFAN',
     HEX_MANIAC = 'HEX_MANIAC',
@@ -460,8 +464,49 @@ export enum Title {
     GYM_CHALLENGER = 'GYM_CHALLENGER',
     GYM_TRAINER = 'GYM_TRAINER',
     ACE_TRAINER = 'ACE_TRAINER'
-
 }
+
+export const TitleName: {[key in Title]: string} = {
+    [Title.NOVICE]: 'Novice',
+    [Title.BIRD_KEEPER]: 'Bird Keeper',
+    [Title.BLACK_BELT]: 'Black Belt',
+    [Title.BUG_MANIAC]: 'Bug Maniac',
+    [Title.CUTE_MANIAC]: 'Cute Maniac',
+    [Title.DELINQUENT]: 'Delinquent',
+    [Title.DRAGON_TAMER]: 'Dragon Tamer',
+    [Title.FIREFIGHTER]: 'Firefighter',
+    [Title.TEAM_ROCKET_GRUNT]: 'Team Rocket Grunt',
+    [Title.HIKER]: 'Hiker',
+    [Title.LONE_WOLF]: 'Lone Wolf',
+    [Title.KINDLER]: 'Kindler',
+    [Title.GARDENER]: 'Gardener',
+    [Title.MUSEUM_DIRECTOR]: 'Museum Director',
+    [Title.ENGINEER]: 'Engineer',
+    [Title.TELEKINESIST]: 'Telekinesist',
+    [Title.ELECTRICIAN]: 'Electrician',
+    [Title.GEOLOGIST]: 'Geologist',
+    [Title.MYTH_TRAINER]: 'Myth Trainer',
+    [Title.DIVER]: 'Diver',
+    [Title.POKEMON_RANGER]: 'Pokemon Ranger',
+    [Title.SKIER]: 'Skier',
+    [Title.POKEFAN]: 'Pokefan',
+    [Title.HEX_MANIAC]: 'Hex Maniac',
+    [Title.MUSICIAN]: 'Musician',
+    [Title.HARLEQUIN]: 'Harlequin',
+    [Title.GLITCH_TRAINER]: 'Glitch Trainer',
+    [Title.NURSE]: 'Nurse',
+    [Title.GARDIAN]: 'Gardian',
+    [Title.DUKE]: 'Duke',
+    [Title.DUCHESS]: 'Duchess',
+    [Title.CHAMPION]: 'Champion',
+    [Title.ELITE_FOUR_MEMBER]: 'Elite Four Member',
+    [Title.ACE_TRAINER]: 'Ace Trainer',
+    [Title.GYM_LEADER]: 'Gym Leader',
+    [Title.GYM_CHALLENGER]: 'Gym Challenger',
+    [Title.GYM_TRAINER]: 'Gym Trainer',
+    [Title.CAMPER]: 'Camper',
+    [Title.RIVAL]: 'Rival'
+} 
 
 export const TitleDescription: {[key in Title]: string} = {
     [Title.NOVICE]: 'Play your first game',
@@ -472,8 +517,8 @@ export const TitleDescription: {[key in Title]: string} = {
     [Title.DELINQUENT]: 'Max Synergy With Dark Type in a game',
     [Title.DRAGON_TAMER]: 'Max Synergy With Dragon Type in a game',
     [Title.FIREFIGHTER]: 'Max Synergy With Water Type in a game',
-    [Title.BIKER]: 'Max Synergy With Posion Type in a game',
-    [Title.HIKER]: 'Max Synergy With Rock Type in a game',
+    [Title.TEAM_ROCKET_GRUNT]: 'Max Synergy With Posion Type in a game',
+    [Title.HIKER]: 'Max Synergy With Mineral Type in a game',
     [Title.LONE_WOLF]: 'Win in a lobby against only bots',
     [Title.KINDLER]: 'Max Synergy With Fire Type in a game',
     [Title.GARDENER]: 'Max Synergy With Flora Type in a game',
@@ -495,11 +540,12 @@ export const TitleDescription: {[key in Title]: string} = {
     [Title.GARDIAN]: 'Shield 1000 or more in a single fight',
     [Title.DUKE]: 'Own 30 different avatars',
     [Title.DUCHESS]: 'Own all the emotion of a single pokemon',
-    [Title.CHAMPION]: 'Reach number one on the leaderboard',
-    [Title.ELITE_FOUR_MEMBER]: 'Reach spots 2-5 on the leaderboard',
-    [Title.ACE_TRAINER]: 'Reach spots 6-30 on the leaderboard',
+    [Title.CHAMPION]: 'Win a Tournament',
+    [Title.ELITE_FOUR_MEMBER]: 'Reach first 4 places of a tournament',
+    [Title.ACE_TRAINER]: 'Reach the final of a tournament',
     [Title.GYM_LEADER]: 'Reach 1400 Elo',
     [Title.GYM_CHALLENGER]: 'Reach 1200 Elo',
     [Title.GYM_TRAINER]: 'Reach 1100 Elo',
-
+    [Title.CAMPER]: 'Max Synergy with Field Type in a game',
+    [Title.RIVAL]: 'Max Synergy with Human Type in a game'
 } 

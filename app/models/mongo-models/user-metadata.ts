@@ -1,5 +1,5 @@
 import {Schema, model} from 'mongoose'
-import { Emotion } from '../../types'
+import { Emotion, Title } from '../../types'
 import MapTileset from '../colyseus-models/map-tileset'
 import WinTileset from '../colyseus-models/win-tileset'
 
@@ -18,6 +18,8 @@ export interface IUserMetadata {
   honors: string[];
   pokemonCollection: Map<string, IPokemonConfig>;
   booster: number;
+  titles: Title[];
+  title: '' | Title
 }
 
 export interface IPokemonConfig {
@@ -121,9 +123,18 @@ const userMetadataSchema = new Schema(
           default: 'WATER0'
         }
       },
+      title:{
+        type:String
+      },
       honors: [
         {
           type: String
+        }
+      ],
+      titles: [
+        {
+          type: String,
+          enum: Title
         }
       ],
       pokemonCollection: {

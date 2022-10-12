@@ -8,6 +8,8 @@ import ItemFactory from '../../models/item-factory'
 import UserMetadata from '../../models/mongo-models/user-metadata'
 import GameRoom from '../game-room'
 import { Client } from 'colyseus'
+import {Effect} from '../../types/enum/Effect'
+import { Title } from '../../types'
 import {MapSchema} from '@colyseus/schema'
 import { GamePhaseState, Rarity } from '../../types/enum/Game'
 import {IDragDropMessage, IDragDropItemMessage, IDragDropCombineMessage, IClient, IPokemonEntity, Transfer} from '../../types'
@@ -544,9 +546,11 @@ export class OnJoinCommand extends Command<GameRoom, {
           user.avatar,
           false,
           this.state.players.size + 1,
-          user.pokemonCollection)
+          user.pokemonCollection,
+          user.title)
 
         this.state.players.set(client.auth.uid, player)
+
         if (client && client.auth && client.auth.displayName) {
           console.log(`${client.auth.displayName} ${client.id} join game room`)
         }
@@ -610,6 +614,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       }
       this.initializeFightingPhase()
     } else if (this.state.phase == GamePhaseState.FIGHT) {
+      this.computeAchievments()
       this.computeStreak()
       this.computeLife()
       this.rankPlayers()
@@ -620,6 +625,112 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       }
       this.computeIncome()
       this.initializePickingPhase()
+    }
+  }
+
+  computeAchievments(){
+    this.state.players.forEach((player, key) => {
+      this.checkSuccess(player)
+    })
+  }
+
+  checkSuccess(player: Player){
+    player.titles.add(Title.NOVICE)
+    player.simulation.blueEffects.forEach(effect=>{
+      switch (effect) {
+        case Effect.PURE_POWER:
+          player.titles.add(Title.POKEFAN)
+          break
+        case Effect.SPORE:
+          player.titles.add(Title.POKEMON_RANGER)
+          break
+        case Effect.DESOLATE_LAND:
+          player.titles.add(Title.KINDLER)
+          break
+        case Effect.PRIMORDIAL_SEA:
+          player.titles.add(Title.FIREFIGHTER)
+          break
+        case Effect.OVERDRIVE:
+          player.titles.add(Title.ELECTRICIAN)
+          break
+        case Effect.PUNISHMENT:
+          player.titles.add(Title.BLACK_BELT)
+          break
+        case Effect.EERIE_SPELL:
+          player.titles.add(Title.TELEKINESIST)
+          break
+        case Effect.BEAT_UP:
+          player.titles.add(Title.DELINQUENT)
+          break
+        case Effect.AUTOTOMIZE:
+          player.titles.add(Title.ENGINEER)
+          break
+        case Effect.SANDSTORM:
+          player.titles.add(Title.GEOLOGIST)
+          break
+        case Effect.TOXIC:
+          player.titles.add(Title.TEAM_ROCKET_GRUNT)
+          break
+        case Effect.DRAGON_DANCE:
+          player.titles.add(Title.DRAGON_TAMER)
+          break
+        case Effect.ANGER_POINT:
+          player.titles.add(Title.CAMPER)
+          break
+        case Effect.POWER_TRIP:
+          player.titles.add(Title.MYTH_TRAINER)
+          break
+        case Effect.CALM_MIND:
+          player.titles.add(Title.RIVAL)
+          break
+        case Effect.HYDRO_CANNON:
+          player.titles.add(Title.DIVER)
+          break
+        case Effect.HEART_OF_THE_SWARM:
+          player.titles.add(Title.BUG_MANIAC)
+          break
+        case Effect.MAX_GUARD:
+          player.titles.add(Title.BIRD_KEEPER)
+          break
+        case Effect.SUN_FLOWER:
+          player.titles.add(Title.GARDENER)
+          break
+        case Effect.DIAMOND_STORM:
+          player.titles.add(Title.HIKER)
+          break
+        case Effect.CURSE:
+          player.titles.add(Title.HEX_MANIAC)
+          break
+        case Effect.STRANGE_STEAM:
+          player.titles.add(Title.CUTE_MANIAC)
+          break          
+        case Effect.SHEER_COLD:
+        player.titles.add(Title.SKIER)
+        break
+        case Effect.UNOWN_GATHERINGS:
+          player.titles.add(Title.MUSEUM_DIRECTOR)
+          break
+        case Effect.PRESTO:
+          player.titles.add(Title.MUSICIAN)
+          break
+        default:
+          break
+      }
+    })
+    if(player.simulation.blueEffects.length >= 5){
+      player.titles.add(Title.HARLEQUIN)
+    }
+    let shield = 0
+    let heal = 0
+    player.simulation.blueHealDpsMeter.forEach(v=>{
+      shield += v.shield
+      heal += v.heal
+    })
+    if(shield > 1000){
+      player.titles.add(Title.GARDIAN)
+    }
+    if(heal > 1000){
+      player.titles.add(Title.NURSE)
     }
   }
 

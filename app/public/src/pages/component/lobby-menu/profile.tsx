@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
+import { CDN_PORTRAIT_URL, Title, TitleDescription, TitleName } from '../../../../../types'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import Elo from '../elo'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
-import { changeAvatar, changeName } from '../../../stores/NetworkStore'
+import { changeAvatar, changeName, setTitle } from '../../../stores/NetworkStore'
 
 const cursorStyle = {
     cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer'
@@ -29,21 +29,25 @@ export default function Profile() {
         return(
             <div>
                 <div className='playerBox' style={{marginBottom:'20px'}}>
-                    <div style={{display:'flex', alignItems: 'center'}}>
-                        <img src={CDN_PORTRAIT_URL + user.avatar + '.png'}/>
-                        <h3>{user.name}</h3>
+                    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                        <div style={{display:'flex', alignItems: 'center', gap:'5px'}}>
+                            <img src={CDN_PORTRAIT_URL + user.avatar + '.png'}/>
+                            <p style={{color: '#ffc107'}}>{TitleName[user.title]}</p>
+                            <p>{user.name}</p>
+                        </div>
+                        <p>Level {user.level} ({user.exp} / 1000)</p>
                     </div>
-                    <p>Level {user.level} ({user.exp} / 1000)</p>
-                    <p>Langage: {user.langage}</p>
-                    <div style={{display:'flex', alignItems:'center'}}>Elo: <Elo elo={user.elo}/></div>
-                    <p>Wins: {user.wins}</p>
-                    <p>Tipee contributor: {user.donor ? 'Yes': 'No'}</p>
+                    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                        <div style={{display:'flex', alignItems:'center'}}><Elo elo={user.elo}/></div>
+                        <p>Wins: {user.wins}</p>
+                    </div>
                 </div>
     
             <Tabs>
                 <TabList>
                 <Tab style={tabStyle}>Name</Tab>
                 <Tab style={tabStyle}>Avatar</Tab>
+                <Tab style={tabStyle}>Title</Tab>
                 </TabList>
     
                 <TabPanel>
@@ -78,6 +82,19 @@ export default function Profile() {
                                 }
                             )}
                         
+                        </div>
+                    </div>
+                </TabPanel>
+                <TabPanel>
+                    <div className='playerBox'>
+                        <div style={{display:'flex', flexWrap:'wrap'}}>
+                            {Object.keys(Title).map(k=><div key={k}><h5 
+                            onClick={()=>{
+                                if(user.titles.includes(k as Title)){
+                                    dispatch(setTitle(k))
+                                }
+                            }}
+                            style={{color:user.titles.includes(k as Title) ? '#28a745': '#db5e6a'}} className='my-cursor'>{TitleName[k]}</h5><p>{TitleDescription[k]}</p></div>)}
                         </div>
                     </div>
                 </TabPanel>

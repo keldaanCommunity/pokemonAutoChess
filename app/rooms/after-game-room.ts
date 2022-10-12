@@ -19,7 +19,7 @@ export default class AfterGameRoom extends Room {
     // console.log('before', this.state.players);
     if (options.players) {
       options.players.forEach((plyr: SimplePlayer) => {
-        const player = new SimplePlayer(plyr.id, plyr.name, plyr.avatar, plyr.rank, plyr.pokemons, plyr.exp)
+        const player = new SimplePlayer(plyr.id, plyr.name, plyr.avatar, plyr.rank, plyr.pokemons, plyr.exp, plyr.title)
         this.state.players.set(player.id, player)
       })
     }

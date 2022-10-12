@@ -3,7 +3,7 @@ import firebase from 'firebase/compat/app'
 import React, { useEffect, useRef, useState } from 'react'
 import GameState from '../../../rooms/states/game-state'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { setPokemonCollection, setSynergies, addPlayer, changePlayer, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter, leaveGame, displayEmote} from '../stores/GameStore'
+import { setPokemonCollection, setSynergies, addPlayer, changePlayer, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter, leaveGame, displayEmote, setCurrentPlayerTitle} from '../stores/GameStore'
 import { logIn, joinGame, requestTilemap } from '../stores/NetworkStore'
 import { FIREBASE_CONFIG } from './utils/utils'
 import GameContainer from '../game/game-container'
@@ -216,6 +216,9 @@ export default function Game() {
               }
               else if (change.field == 'name'){
                 dispatch(setCurrentPlayerName(change.value))
+              }
+              else if (change.field == 'title'){
+                dispatch(setCurrentPlayerTitle(change.value))
               }
             }
             dispatch(changePlayer({id: player.id, change: change}))

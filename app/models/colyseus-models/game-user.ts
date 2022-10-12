@@ -8,6 +8,7 @@ export interface IGameUser {
   ready: boolean;
   isBot: boolean;
   elo: number;
+  title: string;
 }
 export class GameUser extends Schema implements IGameUser{
   @type('string') id: string
@@ -17,8 +18,9 @@ export class GameUser extends Schema implements IGameUser{
   @type('boolean') isBot: boolean
   @type('uint16') elo: number
   @type(MapTileset) map = new MapTileset()
+  @type('string') title: string
   
-  constructor(id: string, name: string, elo: number, avatar: string, isBot: boolean, ready: boolean) {
+  constructor(id: string, name: string, elo: number, avatar: string, isBot: boolean, ready: boolean, title: string) {
     super()
     this.id = id
     this.name = name
@@ -26,5 +28,6 @@ export class GameUser extends Schema implements IGameUser{
     this.ready = ready
     this.isBot = isBot
     this.elo = elo
+    this.title = title
   }
 }

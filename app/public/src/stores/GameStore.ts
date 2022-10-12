@@ -35,7 +35,8 @@ interface GameStateStore {
     currentPlayerMoney: number
     currentPlayerExperienceManager: ExperienceManager
     currentPlayerName: string
-    currentPlayerAvatar: string,
+    currentPlayerAvatar: string
+    currentPlayerTitle: string
     blueDpsMeter: IDps[],
     redDpsMeter: IDps[],
     blueHealDpsMeter: IDpsHeal[],
@@ -66,6 +67,7 @@ const initialState: GameStateStore = {
     currentPlayerMoney: 5,
     currentPlayerExperienceManager: new ExperienceManager(),
     currentPlayerName: '',
+    currentPlayerTitle:'',
     currentPlayerAvatar: '0019/Normal',
     blueDpsMeter: new Array<IDps>(),
     redDpsMeter: new Array<IDps>(),
@@ -155,6 +157,9 @@ export const gameSlice = createSlice({
         setCurrentPlayerName: (state, action: PayloadAction<string>) => {
             state.currentPlayerName = action.payload
         },
+        setCurrentPlayerTitle: (state, action: PayloadAction<string>) => {
+            state.currentPlayerTitle = action.payload
+        },
         setCurrentPlayerAvatar: (state, action: PayloadAction<string>) => {
             state.currentPlayerAvatar = action.payload
         },
@@ -168,6 +173,7 @@ export const gameSlice = createSlice({
             state.currentPlayerSynergies = Array.from(action.payload.synergies)
             state.currentPlayerAvatar = action.payload.avatar
             state.currentPlayerName = action.payload.name
+            state.currentPlayerTitle = action.payload.title
             state.currentPlayerBoardSize = action.payload.boardSize
             state.blueDpsMeter = new Array<IDps>()
             state.redDpsMeter = new Array<IDps>()
@@ -258,6 +264,7 @@ export const {
     addRedHealDpsMeter,
     addBlueHealDpsMeter,
     setCurrentPlayerName,
+    setCurrentPlayerTitle,
     setPlayer,
     setCurrentPlayerAvatar,
     setCurrentPlayerExperienceManager,

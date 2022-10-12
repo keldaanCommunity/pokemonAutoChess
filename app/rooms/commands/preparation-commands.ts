@@ -18,7 +18,7 @@ export class OnJoinCommand extends Command<PreparationRoom, {
     }
     UserMetadata.findOne({'uid': auth.uid}, (err: any, user: IUserMetadata)=>{
       if (user) {
-        this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false))
+        this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.title))
 
         if (user.uid == this.state.ownerId) {
           // console.log(user.displayName);
@@ -133,7 +133,8 @@ export class InitializeBotsCommand extends Command<PreparationRoom, {
                     bot.elo,
                     bot.avatar,
                     true,
-                    true
+                    true,
+                    ''
                   ))
                 })
               }
@@ -202,7 +203,8 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
           bot.elo,
           bot.avatar,
           true,
-          true
+          true,
+          ''
       ))
 
       this.room.broadcast(Transfer.MESSAGES, {

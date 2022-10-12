@@ -6,7 +6,7 @@ import Synergies from './synergies'
 import {Effects} from '../effects'
 import ExperienceManager from './experience-manager'
 import { BattleResult } from '../../types/enum/Game'
-import { IPlayer, IPokemon } from '../../types'
+import { IPlayer, IPokemon, Title } from '../../types'
 import PokemonConfig from './pokemon-config'
 import { IPokemonConfig } from '../mongo-models/user-metadata'
 import PokemonCollection from './pokemon-collection'
@@ -38,12 +38,14 @@ export default class Player extends Schema implements IPlayer{
   @type('boolean') alive = true
   @type([HistoryItem]) history = new ArraySchema<HistoryItem>()
   @type({map: PokemonConfig}) pokemonCollection
+  @type('string') title: Title | ''
   effects: Effects = new Effects()
   isBot: boolean
   opponents: string[] = []
+  titles: Set<Title> = new Set<Title>()
 
 
-  constructor(id: string, name: string, elo: number, avatar: string, isBot: boolean, rank: number, pokemonCollection: Map<string,IPokemonConfig>) {
+  constructor(id: string, name: string, elo: number, avatar: string, isBot: boolean, rank: number, pokemonCollection: Map<string,IPokemonConfig>, title: Title | '') {
     super()
     this.id = id
     this.name = name
@@ -51,6 +53,7 @@ export default class Player extends Schema implements IPlayer{
     this.avatar = avatar
     this.isBot = isBot
     this.rank = rank
+    this.title = title
     this.pokemonCollection = new PokemonCollection(pokemonCollection)
   }
 

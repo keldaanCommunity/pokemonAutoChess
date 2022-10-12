@@ -15,7 +15,7 @@ import Meta, { IMeta } from '../models/mongo-models/meta'
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic'
 import PokemonsStatistic, {IPokemonsStatistic} from '../models/mongo-models/pokemons-statistic'
 import { PastebinAPI } from 'pastebin-ts/dist/api'
-import { Emotion, EmotionCost, Transfer, CDN_PORTRAIT_URL, ISuggestionUser } from '../types'
+import { Emotion, EmotionCost, Transfer, CDN_PORTRAIT_URL, ISuggestionUser, Title } from '../types'
 import {Pkm} from '../types/enum/Pokemon'
 import PokemonFactory from '../models/pokemon-factory'
 import PokemonConfig from '../models/colyseus-models/pokemon-config'
@@ -195,6 +195,24 @@ export default class CustomLobbyRoom extends LobbyRoom{
         }
     })
 
+    
+    this.onMessage(Transfer.SET_TITLE, (client, message :Title | '')=>{
+      let m = message
+      const user = this.state.users.get(client.auth.uid)
+      if(user){
+        if(user.title === message){
+          m = ''
+        }
+        user.title = m
+        UserMetadata.findOne({'uid': client.auth.uid}, (err, user)=>{
+          if (user) {
+            user.title = m
+            user.save()
+          }
+        })
+      }
+    })
+
     this.onMessage(Transfer.CHANGE_SELECTED_EMOTION, (client, message: {index: string, emotion:Emotion, shiny: boolean})=>{
         const user: LobbyUser = this.state.users.get(client.auth.uid)
         const pokemonConfig = user.pokemonCollection.get(message.index)
@@ -262,7 +280,9 @@ export default class CustomLobbyRoom extends LobbyRoom{
                         stats.map(r=>{return new GameRecord(r.time, r.rank, r.elo, r.pokemons)}),
                         user.honors,
                         user.pokemonCollection,
-                        user.booster))
+                        user.booster,
+                        user.titles,
+                        user.title))
                   }
                 })
               } else {
@@ -410,7 +430,9 @@ export default class CustomLobbyRoom extends LobbyRoom{
                 records,
                 user.honors,
                 user.pokemonCollection,
-                user.booster))
+                user.booster,
+                user.titles,
+                user.title))
           }
         })
       } else {
@@ -434,7 +456,9 @@ export default class CustomLobbyRoom extends LobbyRoom{
             [],
             [],
             new Map<string,IPokemonConfig>(),
-            numberOfBoosters
+            numberOfBoosters,
+            [],
+            ''
         ))
       }
     })
