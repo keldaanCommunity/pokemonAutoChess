@@ -247,8 +247,17 @@ export default class CustomLobbyRoom extends LobbyRoom{
                 pokemonConfig.selectedShiny = message.shiny
                 UserMetadata.findOne({'uid': client.auth.uid}, (err, u)=>{
                     if (u) {
+                        if(u.pokemonCollection.size >= 30 && !u.titles.includes(Title.DUKE)){
+                          console.log('duke')
+                          u.titles.push(Title.DUKE)
+                        }
                         if(u.pokemonCollection.get(message.index)){
-                            message.shiny ? u.pokemonCollection.get(message.index).shinyEmotions.push(message.emotion) : u.pokemonCollection.get(message.index).emotions.push(message.emotion)
+                          if(u.pokemonCollection.get(message.index).shinyEmotions.length >= Object.keys(Emotion).length && 
+                          u.pokemonCollection.get(message.index).emotions.length >= Object.keys(Emotion).length && 
+                          !u.titles.includes(Title.DUCHESS)){
+                            u.titles.push(Title.DUCHESS)
+                          }
+                          message.shiny ? u.pokemonCollection.get(message.index).shinyEmotions.push(message.emotion) : u.pokemonCollection.get(message.index).emotions.push(message.emotion)
                             u.pokemonCollection.get(message.index).dust -= cost
                             u.pokemonCollection.get(message.index).selectedEmotion = message.emotion
                             u.pokemonCollection.get(message.index).selectedShiny = message.shiny
