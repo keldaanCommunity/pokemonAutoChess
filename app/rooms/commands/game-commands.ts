@@ -291,32 +291,34 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
             // SPECIAL CASES: create a new pokemon on item equip
             let newItemPokemon: Pokemon | undefined = undefined
             let equipAfterTransform = true
+            const fossil = PokemonFactory.getRandomFossil(player.board)
+
             switch (pokemon.name) {
                 case Pkm.EEVEE:
                 switch (item) {
                     case Item.WATER_STONE:
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.VAPOREON)
+                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.VAPOREON, player.pokemonCollection.get(PkmIndex[Pkm.VAPOREON]))
                     break
                     case Item.FIRE_STONE:
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.FLAREON)
+                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.FLAREON, player.pokemonCollection.get(PkmIndex[Pkm.FLAREON]))
                     break
                     case Item.THUNDER_STONE:
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.JOLTEON)
+                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.JOLTEON, player.pokemonCollection.get(PkmIndex[Pkm.JOLTEON]))
                     break
                     case Item.DUSK_STONE:
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.UMBREON)
+                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.UMBREON, player.pokemonCollection.get(PkmIndex[Pkm.UMBREON]))
                     break
                     case Item.MOON_STONE:
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.SYLVEON)
+                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.SYLVEON, player.pokemonCollection.get(PkmIndex[Pkm.SYLVEON]))
                     break
                     case Item.LEAF_STONE:
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.LEAFEON)
+                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.LEAFEON, player.pokemonCollection.get(PkmIndex[Pkm.LEAFEON]))
                     break
                     case Item.DAWN_STONE:
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.ESPEON)
+                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.ESPEON, player.pokemonCollection.get(PkmIndex[Pkm.ESPEON]))
                     break
                     case Item.ICY_ROCK:
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.GLACEON)
+                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.GLACEON, player.pokemonCollection.get(PkmIndex[Pkm.GLACEON]))
                     break
                 }
                 break
@@ -324,26 +326,29 @@ export class OnDragDropItemCommand extends Command<GameRoom, {
                 equipAfterTransform = false
                 switch (item) {
                     case Item.FOSSIL_STONE:
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, PokemonFactory.getRandomFossil(player.board))
-                    break
+                      if(fossil){
+                        newItemPokemon = PokemonFactory.transformPokemon(pokemon, fossil, player.pokemonCollection.get(PkmIndex[fossil]))
+                      }
+                      
+                      break
                     default:
-                    client.send(Transfer.DRAG_DROP_FAILED, message)
-                    break
+                      client.send(Transfer.DRAG_DROP_FAILED, message)
+                      break
                 }
                 break
                 case Pkm.GROUDON:
                 if (item == Item.RED_ORB) {
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.PRIMAL_GROUDON)
+                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.PRIMAL_GROUDON, player.pokemonCollection.get(PkmIndex[Pkm.PRIMAL_GROUDON]))
                 }
                 break
                 case Pkm.KYOGRE:
                 if (item == Item.BLUE_ORB) {
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.PRIMAL_KYOGRE)
+                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.PRIMAL_KYOGRE, player.pokemonCollection.get(PkmIndex[Pkm.PRIMAL_KYOGRE]))
                 }
                 break
                 case Pkm.RAYQUAZA:
                 if (item == Item.DELTA_ORB) {
-                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.MEGA_RAYQUAZA)
+                    newItemPokemon = PokemonFactory.transformPokemon(pokemon, Pkm.MEGA_RAYQUAZA, player.pokemonCollection.get(PkmIndex[Pkm.MEGA_RAYQUAZA]))
                 }
                 break
             }

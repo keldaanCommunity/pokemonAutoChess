@@ -174,8 +174,8 @@ export default class PokemonFactory {
   // transforms a pokemon into another pokemon,
   // transferring its items and position to
   // the new pokemon
-  static transformPokemon(before: Pokemon, afterName: Pkm) {
-    const transformation = this.createPokemonFromName(afterName)
+  static transformPokemon(before: Pokemon, afterName: Pkm, afterConfig?: IPokemonConfig) {
+    const transformation = this.createPokemonFromName(afterName, afterConfig)
     transformation.positionX = before.positionX
     transformation.positionY = before.positionY
     transformation.items = before.items
