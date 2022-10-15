@@ -388,7 +388,10 @@ export enum Pkm {
     BLACEPHALON = 'blacephalon',
     HOUNDOUR = 'houndour',
     HOUNDOOM = 'houndoom',
-    MEGA_HOUNDOOM ='mega-houndoom'
+    MEGA_HOUNDOOM ='mega-houndoom',
+    CLAMPERL = 'clamperl',
+    HUNTAIL = 'huntail',
+    GOREBYSS = 'gorebyss'
 }
 
 export const PkmIndex: {[key in Pkm] : string} = {
@@ -781,7 +784,10 @@ export const PkmIndex: {[key in Pkm] : string} = {
     [Pkm.BLACEPHALON]: '0806',
     [Pkm.HOUNDOUR]:'0228',
     [Pkm.HOUNDOOM]:'0229',
-    [Pkm.MEGA_HOUNDOOM]:'0229-0001'
+    [Pkm.MEGA_HOUNDOOM]:'0229-0001',
+    [Pkm.CLAMPERL]: '0366',
+    [Pkm.HUNTAIL]: '0367',
+    [Pkm.GOREBYSS]: '0368'
 }
 
 export const PkmFamily : {[key in Pkm]: Pkm} = {
@@ -1174,5 +1180,8 @@ export const PkmFamily : {[key in Pkm]: Pkm} = {
     [Pkm.BLACEPHALON]: Pkm.BLACEPHALON,
     [Pkm.HOUNDOUR]: Pkm.HOUNDOUR,
     [Pkm.HOUNDOOM]: Pkm.HOUNDOUR,
-    [Pkm.MEGA_HOUNDOOM]: Pkm.HOUNDOUR
+    [Pkm.MEGA_HOUNDOOM]: Pkm.HOUNDOUR,
+    [Pkm.CLAMPERL]: Pkm.CLAMPERL,
+    [Pkm.HUNTAIL]: Pkm.CLAMPERL,
+    [Pkm.GOREBYSS]: Pkm.CLAMPERL
 }
