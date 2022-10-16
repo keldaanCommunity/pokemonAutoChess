@@ -6,7 +6,7 @@ const style: CSS.Properties = {
     display:'flex',
     alignItems:'center',
     width:'auto',
-    gap: '1em'
+    gap: '5px'
 }
 
 const imgStyle: CSS.Properties = {

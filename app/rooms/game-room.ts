@@ -20,7 +20,7 @@ import { Pokemon } from '../models/colyseus-models/pokemon'
 import { IGameUser } from '../models/colyseus-models/game-user'
 import History from '../models/mongo-models/history'
 import { components } from '../api-v1/openapi'
-import { Title } from '../types'
+import { Title, Role } from '../types'
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -42,7 +42,7 @@ export default class GameRoom extends Room<GameState> {
       const user = options.users[id]
       // console.log(user);
       if (user.isBot) {
-        const player = new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1, new Map<string,PokemonConfig>(),'')
+        const player = new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1, new Map<string,PokemonConfig>(),'', Role.BOT)
         this.state.players.set(user.id, player)
         this.state.botManager.addBot(player)
         this.state.shop.assignShop(player)
@@ -337,7 +337,8 @@ export default class GameRoom extends Room<GameState> {
       avatar: player.avatar,
       pokemons: new Array<{name: string, avatar: string, items: Item[], inventory: Item[]}>(),
       elo: player.elo,
-      title: player.title
+      title: player.title,
+      role: player.role
     }
 
     player.board.forEach((pokemon: IPokemon) => {

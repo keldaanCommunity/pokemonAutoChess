@@ -20,11 +20,9 @@ export default function PreparationMenuUser(props: {key: string, user: IGameUser
         null
 
     return <div className='nes-container playerBox' style={{ width:'40%', display:'flex', padding:'5px', margin:'5px', borderColor:readyColor, justifyContent:'space-between'}}>
-    <div style={{display:'flex'}}>
-        <div style={{width:'140px'}}>
-            <Elo elo={props.user.elo}/>
-        </div>
-        <InlineAvatar avatar={props.user.avatar} name={props.user.name} title={props.user.title}/>
+    <div style={{display:'flex', gap:'5px'}}>
+        <Elo elo={props.user.elo}/>
+        <InlineAvatar avatar={props.user.avatar} name={props.user.name} title={props.user.title} role={props.user.role}/>
     </div>
     {removeButton}
     </div>

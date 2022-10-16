@@ -15,7 +15,7 @@ import Meta, { IMeta } from '../models/mongo-models/meta'
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic'
 import PokemonsStatistic, {IPokemonsStatistic} from '../models/mongo-models/pokemons-statistic'
 import { PastebinAPI } from 'pastebin-ts/dist/api'
-import { Emotion, EmotionCost, Transfer, CDN_PORTRAIT_URL, ISuggestionUser, Title } from '../types'
+import { Emotion, EmotionCost, Transfer, CDN_PORTRAIT_URL, ISuggestionUser, Title, Role } from '../types'
 import {Pkm} from '../types/enum/Pokemon'
 import PokemonFactory from '../models/pokemon-factory'
 import PokemonConfig from '../models/colyseus-models/pokemon-config'
@@ -248,7 +248,6 @@ export default class CustomLobbyRoom extends LobbyRoom{
                 UserMetadata.findOne({'uid': client.auth.uid}, (err, u)=>{
                     if (u) {
                         if(u.pokemonCollection.size >= 30 && !u.titles.includes(Title.DUKE)){
-                          console.log('duke')
                           u.titles.push(Title.DUKE)
                         }
                         if(u.pokemonCollection.get(message.index)){
@@ -291,7 +290,8 @@ export default class CustomLobbyRoom extends LobbyRoom{
                         user.pokemonCollection,
                         user.booster,
                         user.titles,
-                        user.title))
+                        user.title,
+                        user.role))
                   }
                 })
               } else {
@@ -441,7 +441,8 @@ export default class CustomLobbyRoom extends LobbyRoom{
                 user.pokemonCollection,
                 user.booster,
                 user.titles,
-                user.title))
+                user.title,
+                user.role))
           }
         })
       } else {
@@ -467,7 +468,8 @@ export default class CustomLobbyRoom extends LobbyRoom{
             new Map<string,IPokemonConfig>(),
             numberOfBoosters,
             [],
-            ''
+            '',
+            Role.BASIC
         ))
       }
     })

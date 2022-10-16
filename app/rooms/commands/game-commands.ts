@@ -552,7 +552,8 @@ export class OnJoinCommand extends Command<GameRoom, {
           false,
           this.state.players.size + 1,
           user.pokemonCollection,
-          user.title)
+          user.title,
+          user.role)
 
         this.state.players.set(client.auth.uid, player)
 

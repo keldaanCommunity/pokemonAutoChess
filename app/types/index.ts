@@ -46,6 +46,19 @@ export type Langage = {
     fra: string
 }
 
+export enum Role {
+    ADMIN='ADMIN',
+    MODERATOR='MODERATOR',
+    BASIC='BASIC',
+    BOT='BOT'
+}
+
+export const RoleName: {[key in Role]: string} = {
+    [Role.ADMIN]: 'Admin',
+    [Role.MODERATOR]: 'Mod',
+    [Role.BASIC]: '',
+    [Role.BOT]: 'Bot'
+}
 
 export enum Transfer {
     DRAG_DROP = 'DRAG_DROP',
@@ -211,7 +224,8 @@ export interface IPlayer {
     alive: boolean
     history: ArraySchema<HistoryItem>
     pokemonCollection: PokemonCollection,
-    title: Title | ''
+    title: Title | '',
+    role: Role
 }
 export interface IPokemon {
     id: string

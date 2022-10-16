@@ -44,6 +44,6 @@ function User(props:{key: number, v: ILobbyUser}) {
             dispatch(searchName(props.v.name))
             dispatch(setTabIndex(3))
         }}>
-        <Avatar avatar={props.v.avatar} name={props.v.name} elo={props.v.elo} title={props.v.title}/>
+        <Avatar avatar={props.v.avatar} name={props.v.name} elo={props.v.elo} title={props.v.title} role={props.v.role}/>
     </li>
 }

@@ -5,7 +5,7 @@ import WinTileset from './win-tileset'
 import PokemonCollection from './pokemon-collection'
 import PokemonConfig from './pokemon-config'
 import { IPokemonConfig } from '../mongo-models/user-metadata'
-import { Title } from '../../types'
+import { Role, Title } from '../../types'
 
 export interface ILobbyUser {
   id: string;
@@ -23,6 +23,7 @@ export interface ILobbyUser {
   booster: number;
   titles: Title[];
   title: '' | Title;
+  role: Role
 }
 export default class LobbyUser extends Schema implements ILobbyUser{
   @type('string') id: string
@@ -42,7 +43,7 @@ export default class LobbyUser extends Schema implements ILobbyUser{
   @type('uint16') booster: number
   @type(['string']) titles = new ArraySchema<Title>()
   @type('string') title: '' | Title
-
+  @type('string') role: Role
 
   constructor(id:string,
     name: string,
@@ -58,7 +59,8 @@ export default class LobbyUser extends Schema implements ILobbyUser{
     pokemonCollection: Map<string,IPokemonConfig>,
     booster: number,
     titles: Title[],
-    title: '' | Title) {
+    title: '' | Title,
+    role: Role) {
 
     super()
     this.id = id
@@ -72,6 +74,7 @@ export default class LobbyUser extends Schema implements ILobbyUser{
     this.donor = donor
     this.booster = booster
     this.title = title
+    this.role = role
 
     if(history && history.length && history.length != 0) {
       history.forEach((h)=>{
