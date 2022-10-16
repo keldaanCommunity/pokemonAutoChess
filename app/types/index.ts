@@ -56,8 +56,15 @@ export enum Role {
 export const RoleName: {[key in Role]: string} = {
     [Role.ADMIN]: 'Admin',
     [Role.MODERATOR]: 'Mod',
-    [Role.BASIC]: '',
+    [Role.BASIC]: 'Basic',
     [Role.BOT]: 'Bot'
+}
+
+export const RoleColor: {[key in Role]: string} = {
+    [Role.ADMIN]: 'success',
+    [Role.MODERATOR]: 'primary',
+    [Role.BASIC]: '',
+    [Role.BOT]: 'secondary'
 }
 
 export enum Transfer {
