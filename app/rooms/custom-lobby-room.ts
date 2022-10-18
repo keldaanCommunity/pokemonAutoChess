@@ -60,6 +60,50 @@ export default class CustomLobbyRoom extends LobbyRoom{
       }
     })
 
+    this.onMessage(Transfer.REMOVE_MESSAGE, (client, message: {author: string, payload: string}) => {
+      const user = this.state.users.get(client.auth.uid)
+      if(user && user.role && (user.role === Role.ADMIN || user.role === Role.MODERATOR)){
+        this.state.removeMessage(message.author, message.payload)
+      }
+    })
+
+    this.onMessage(Transfer.GIVE_BOOSTER, (client, message: {uid: string, numberOfBoosters: number}) => {
+      const u = this.state.users.get(client.auth.uid)
+      const targetUser = this.state.users.get(message.uid)
+
+      if(u && u.role && u.role === Role.ADMIN){
+        UserMetadata.findOne({uid: message.uid}, (err, user)=>{
+          if(user){
+            user.booster += 1
+            user.save()
+
+            if(targetUser){
+              targetUser.booster = user.booster
+            }
+          }
+        })
+      }
+    })
+
+    this.onMessage(Transfer.SET_MODERATOR, (client, message) => {
+      const u = this.state.users.get(client.auth.uid)
+      const targetUser = this.state.users.get(message.uid)
+
+      if(u && u.role === Role.ADMIN){
+        UserMetadata.findOne({uid: message.uid}, (err, user)=>{
+          if(user){
+            user.role = Role.MODERATOR
+            user.save()
+
+            if(targetUser){
+              targetUser.role = user.role
+            }
+          }
+        })
+      }
+    })
+
+
     this.onMessage(Transfer.BOT_CREATION, (client, message)=>{
       try {
         const bot = message.bot

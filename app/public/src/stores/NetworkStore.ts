@@ -151,11 +151,23 @@ export const networkSlice = createSlice({
         },
         setTitle: (state, action: PayloadAction<string>) => {
             state.lobby?.send(Transfer.SET_TITLE, action.payload)
+        },
+        removeMessage:(state, action: PayloadAction<{author: string, payload: string}>) =>{
+            state.lobby?.send(Transfer.REMOVE_MESSAGE, action.payload)
+        },
+        giveBooster: (state, action:PayloadAction<{uid: string, numberOfBoosters: number}>) => {
+            state.lobby?.send(Transfer.GIVE_BOOSTER, action.payload)
+        },
+        setModerator: (state, action: PayloadAction<string>) => {
+            state.lobby?.send(Transfer.SET_MODERATOR, action.payload)
         }
     }
 })
 
 export const {
+    removeMessage,
+    giveBooster,
+    setModerator,
     broadcastEmote,
     openBooster,
     changeSelectedEmotion,
