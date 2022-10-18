@@ -19,4 +19,11 @@ export default class LobbyState extends Schema {
       chat.create({'name': message.name, 'avatar': message.avatar, 'payload': message.payload, 'time': message.time})
     }
   }
+  removeMessage(name:string, payload: string){
+    const messageIndex = this.messages.findIndex(m=>m.name === name && m.payload === payload)
+    if(messageIndex !== -1){
+      this.messages.splice(messageIndex, 1)
+    }
+    chat.deleteMany({name: name, payload: payload})
+  }
 }

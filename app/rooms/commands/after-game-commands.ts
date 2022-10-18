@@ -13,7 +13,8 @@ export class OnJoinCommand extends Command {
             user.avatar,
             false,
             false,
-            user.title))
+            user.title,
+            user.role))
 
         this.room.broadcast(Transfer.MESSAGES, {
           'name': 'Server',

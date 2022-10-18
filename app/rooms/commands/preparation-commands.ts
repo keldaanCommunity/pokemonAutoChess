@@ -4,7 +4,7 @@ import UserMetadata, { IUserMetadata } from '../../models/mongo-models/user-meta
 import BotV2 from '../../models/mongo-models/bot-v2'
 import { Client } from 'colyseus'
 import PreparationRoom from '../preparation-room'
-import { Emotion, IMessage, Transfer } from '../../types'
+import { Emotion, IMessage, Role, Transfer } from '../../types'
 import { BotDifficulty } from '../../types/enum/Game'
 
 export class OnJoinCommand extends Command<PreparationRoom, {
@@ -18,7 +18,7 @@ export class OnJoinCommand extends Command<PreparationRoom, {
     }
     UserMetadata.findOne({'uid': auth.uid}, (err: any, user: IUserMetadata)=>{
       if (user) {
-        this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.title))
+        this.state.users.set(client.auth.uid, new GameUser(user.uid, user.displayName, user.elo, user.avatar, false, false, user.title, user.role))
 
         if (user.uid == this.state.ownerId) {
           // console.log(user.displayName);
@@ -134,7 +134,8 @@ export class InitializeBotsCommand extends Command<PreparationRoom, {
                     bot.avatar,
                     true,
                     true,
-                    ''
+                    '',
+                    Role.BOT
                   ))
                 })
               }
@@ -204,7 +205,8 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
           bot.avatar,
           true,
           true,
-          ''
+          '',
+          Role.BOT
       ))
 
       this.room.broadcast(Transfer.MESSAGES, {

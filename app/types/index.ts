@@ -46,6 +46,26 @@ export type Langage = {
     fra: string
 }
 
+export enum Role {
+    ADMIN='ADMIN',
+    MODERATOR='MODERATOR',
+    BASIC='BASIC',
+    BOT='BOT'
+}
+
+export const RoleName: {[key in Role]: string} = {
+    [Role.ADMIN]: 'Admin',
+    [Role.MODERATOR]: 'Mod',
+    [Role.BASIC]: 'Basic',
+    [Role.BOT]: 'Bot'
+}
+
+export const RoleColor: {[key in Role]: string} = {
+    [Role.ADMIN]: 'success',
+    [Role.MODERATOR]: 'primary',
+    [Role.BASIC]: '',
+    [Role.BOT]: 'secondary'
+}
 
 export enum Transfer {
     DRAG_DROP = 'DRAG_DROP',
@@ -86,7 +106,11 @@ export enum Transfer {
     REQUEST_META_POKEMONS = 'REQUEST_META_POKEMONS',
     SEARCH_BY_ID = 'SEARCH_BY_ID',
     SUGGESTIONS = 'SUGGESTIONS',
-    SET_TITLE = 'SET_TITLE'
+    SET_TITLE = 'SET_TITLE',
+    REMOVE_MESSAGE = 'REMOVE_MESSAGE',
+    GIVE_BOOSTER = 'GIVE_BOOSTER',
+    SET_MODERATOR = 'SET_MODERATOR',
+    GIVE_TITLE = 'GIVE_TITLE'
 }
 
 export enum AttackSprite {
@@ -211,7 +235,8 @@ export interface IPlayer {
     alive: boolean
     history: ArraySchema<HistoryItem>
     pokemonCollection: PokemonCollection,
-    title: Title | ''
+    title: Title | '',
+    role: Role
 }
 export interface IPokemon {
     id: string

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Room, Client } from 'colyseus.js'
 import {User} from '@firebase/auth-types'
-import {Emotion, ICustomLobbyState, Transfer} from '../../../types'
+import {Emotion, ICustomLobbyState, Title, Transfer} from '../../../types'
 import {IBot} from '../../../models/mongo-models/bot-v2'
 import PreparationState from '../../../rooms/states/preparation-state'
 import GameState from '../../../rooms/states/game-state'
@@ -151,11 +151,27 @@ export const networkSlice = createSlice({
         },
         setTitle: (state, action: PayloadAction<string>) => {
             state.lobby?.send(Transfer.SET_TITLE, action.payload)
+        },
+        removeMessage:(state, action: PayloadAction<{author: string, payload: string}>) =>{
+            state.lobby?.send(Transfer.REMOVE_MESSAGE, action.payload)
+        },
+        giveBooster: (state, action:PayloadAction<{uid: string, numberOfBoosters: number}>) => {
+            state.lobby?.send(Transfer.GIVE_BOOSTER, action.payload)
+        },
+        setModerator: (state, action: PayloadAction<string>) => {
+            state.lobby?.send(Transfer.SET_MODERATOR, action.payload)
+        },
+        giveTitle: (state, action:PayloadAction<{uid: string, title: Title}>) => {
+            state.lobby?.send(Transfer.GIVE_TITLE, action.payload)
         }
     }
 })
 
 export const {
+    giveTitle,
+    removeMessage,
+    giveBooster,
+    setModerator,
     broadcastEmote,
     openBooster,
     changeSelectedEmotion,

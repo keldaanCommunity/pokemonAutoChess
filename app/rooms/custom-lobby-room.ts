@@ -15,7 +15,7 @@ import Meta, { IMeta } from '../models/mongo-models/meta'
 import ItemsStatistic, { IItemsStatistic } from '../models/mongo-models/items-statistic'
 import PokemonsStatistic, {IPokemonsStatistic} from '../models/mongo-models/pokemons-statistic'
 import { PastebinAPI } from 'pastebin-ts/dist/api'
-import { Emotion, EmotionCost, Transfer, CDN_PORTRAIT_URL, ISuggestionUser, Title } from '../types'
+import { Emotion, EmotionCost, Transfer, CDN_PORTRAIT_URL, ISuggestionUser, Title, Role } from '../types'
 import {Pkm} from '../types/enum/Pokemon'
 import PokemonFactory from '../models/pokemon-factory'
 import PokemonConfig from '../models/colyseus-models/pokemon-config'
@@ -59,6 +59,68 @@ export default class CustomLobbyRoom extends LobbyRoom{
         this.state.addMessage(this.state.users.get(client.auth.uid).name, message.payload, this.state.users.get(client.auth.uid).avatar, Date.now(), true)
       }
     })
+
+    this.onMessage(Transfer.REMOVE_MESSAGE, (client, message: {author: string, payload: string}) => {
+      const user = this.state.users.get(client.auth.uid)
+      if(user && user.role && (user.role === Role.ADMIN || user.role === Role.MODERATOR)){
+        this.state.removeMessage(message.author, message.payload)
+      }
+    })
+
+    this.onMessage(Transfer.GIVE_BOOSTER, (client, message: {uid: string, numberOfBoosters: number}) => {
+      const u = this.state.users.get(client.auth.uid)
+      const targetUser = this.state.users.get(message.uid)
+
+      if(u && u.role && u.role === Role.ADMIN){
+        UserMetadata.findOne({uid: message.uid}, (err, user)=>{
+          if(user){
+            user.booster += 1
+            user.save()
+
+            if(targetUser){
+              targetUser.booster = user.booster
+            }
+          }
+        })
+      }
+    })
+
+    this.onMessage(Transfer.GIVE_TITLE, (client, message: {uid: string, title: Title}) => {
+      const u = this.state.users.get(client.auth.uid)
+      const targetUser = this.state.users.get(message.uid)
+
+      if(u && u.role && u.role === Role.ADMIN){
+        UserMetadata.findOne({uid: message.uid}, (err, user)=>{
+          if(user && user.titles && !user.titles.includes(message.title)){
+            user.titles.push(message.title)
+            user.save()
+
+            if(targetUser){
+              targetUser.titles.push(message.title)
+            }
+          }
+        })
+      }
+    })
+
+    this.onMessage(Transfer.SET_MODERATOR, (client, uid:string) => {
+      const u = this.state.users.get(client.auth.uid)
+      const targetUser = this.state.users.get(uid)
+      // console.log(u.role, uid)
+      if(u && u.role === Role.ADMIN){
+        UserMetadata.findOne({uid: uid}, (err, user)=>{
+          if(user){
+            user.role = Role.MODERATOR
+            user.save()
+
+            if(targetUser){
+              targetUser.role = user.role
+            }
+          }
+        })
+      }
+    })
+
 
     this.onMessage(Transfer.BOT_CREATION, (client, message)=>{
       try {
@@ -248,7 +310,6 @@ export default class CustomLobbyRoom extends LobbyRoom{
                 UserMetadata.findOne({'uid': client.auth.uid}, (err, u)=>{
                     if (u) {
                         if(u.pokemonCollection.size >= 30 && !u.titles.includes(Title.DUKE)){
-                          console.log('duke')
                           u.titles.push(Title.DUKE)
                         }
                         if(u.pokemonCollection.get(message.index)){
@@ -291,7 +352,8 @@ export default class CustomLobbyRoom extends LobbyRoom{
                         user.pokemonCollection,
                         user.booster,
                         user.titles,
-                        user.title))
+                        user.title,
+                        user.role))
                   }
                 })
               } else {
@@ -441,7 +503,8 @@ export default class CustomLobbyRoom extends LobbyRoom{
                 user.pokemonCollection,
                 user.booster,
                 user.titles,
-                user.title))
+                user.title,
+                user.role))
           }
         })
       } else {
@@ -467,7 +530,8 @@ export default class CustomLobbyRoom extends LobbyRoom{
             new Map<string,IPokemonConfig>(),
             numberOfBoosters,
             [],
-            ''
+            '',
+            Role.BASIC
         ))
       }
     })

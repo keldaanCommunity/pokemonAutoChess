@@ -16,7 +16,7 @@ import TeamBuilder from './component/bot-builder/team-builder'
 import MetaReport from './component/meta-report/meta-report'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { joinLobby, logIn, logOut, requestMeta, requestBotList } from '../stores/NetworkStore'
-import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent, setBotMonitor, setMetaPokemons, setSuggestions } from '../stores/LobbyStore'
+import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent, setBotMonitor, setMetaPokemons, setSuggestions, removeMessage } from '../stores/LobbyStore'
 import { ICustomLobbyState, ISuggestionUser, Transfer } from '../../../types'
 import LobbyUser from '../../../models/colyseus-models/lobby-user'
 import { IBot } from '../../../models/mongo-models/bot-v2'
@@ -67,7 +67,8 @@ export default function Lobby(){
                         const token = await user.getIdToken()
                         const room: Room<ICustomLobbyState> = await client.joinOrCreate('lobby', {idToken: token})
                         room.state.messages.onAdd = (m) => {dispatch(pushMessage(m))}
-        
+                        room.state.messages.onRemove = (m, k) => {dispatch(removeMessage(m))}
+
                         room.state.users.onAdd = (u) => {
                             dispatch(addUser(u))
     

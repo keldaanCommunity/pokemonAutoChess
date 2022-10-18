@@ -427,6 +427,7 @@ class GameContainer {
       rank: player.rank,
       avatar: player.avatar,
       title: player.title,
+      role: player.role,
       pokemons: new Array<string>()
     }
 

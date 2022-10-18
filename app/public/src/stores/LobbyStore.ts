@@ -192,6 +192,9 @@ export const lobbySlice = createSlice({
             const m: IMessage = JSON.parse(JSON.stringify(action.payload))
             state.messages.push(m)
         },
+        removeMessage: (state, action: PayloadAction<Message>) => {
+          state.messages = state.messages.filter((m) => m.payload !== action.payload.payload)
+        },
         pushLeaderboard: (state, action: PayloadAction<LeaderboardInfo>) => {
             const l: ILeaderboardInfo = JSON.parse(JSON.stringify(action.payload))
             state.leaderboard.push(l)
@@ -287,6 +290,7 @@ export const lobbySlice = createSlice({
 })
 
 export const {
+    removeMessage,
     setBotMonitor,
     setBoosterContent,
     addPokemonConfig,
