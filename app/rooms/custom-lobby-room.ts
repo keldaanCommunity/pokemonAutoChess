@@ -85,12 +85,30 @@ export default class CustomLobbyRoom extends LobbyRoom{
       }
     })
 
-    this.onMessage(Transfer.SET_MODERATOR, (client, message) => {
+    this.onMessage(Transfer.GIVE_TITLE, (client, message: {uid: string, title: Title}) => {
       const u = this.state.users.get(client.auth.uid)
       const targetUser = this.state.users.get(message.uid)
 
-      if(u && u.role === Role.ADMIN){
+      if(u && u.role && u.role === Role.ADMIN){
         UserMetadata.findOne({uid: message.uid}, (err, user)=>{
+          if(user && user.titles && !user.titles.includes(message.title)){
+            user.titles.push(message.title)
+            user.save()
+
+            if(targetUser){
+              targetUser.titles.push(message.title)
+            }
+          }
+        })
+      }
+    })
+
+    this.onMessage(Transfer.SET_MODERATOR, (client, uid:string) => {
+      const u = this.state.users.get(client.auth.uid)
+      const targetUser = this.state.users.get(uid)
+      // console.log(u.role, uid)
+      if(u && u.role === Role.ADMIN){
+        UserMetadata.findOne({uid: uid}, (err, user)=>{
           if(user){
             user.role = Role.MODERATOR
             user.save()

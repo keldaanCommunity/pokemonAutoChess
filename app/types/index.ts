@@ -109,7 +109,8 @@ export enum Transfer {
     SET_TITLE = 'SET_TITLE',
     REMOVE_MESSAGE = 'REMOVE_MESSAGE',
     GIVE_BOOSTER = 'GIVE_BOOSTER',
-    SET_MODERATOR = 'SET_MODERATOR'
+    SET_MODERATOR = 'SET_MODERATOR',
+    GIVE_TITLE = 'GIVE_TITLE'
 }
 
 export enum AttackSprite {
