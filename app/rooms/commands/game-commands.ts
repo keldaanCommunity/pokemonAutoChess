@@ -1087,10 +1087,22 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         player.board.forEach((pokemon, key) => {
           if (pokemon.fossilTimer !== undefined) {
             if (pokemon.fossilTimer == 0) {
-              const pokemonEvolved = PokemonFactory.createPokemonFromName(
-                pokemon.evolution,
-                player.pokemonCollection.get(pokemon.index)
-              )
+              let pokemonEvolved
+              if(pokemon.name === Pkm.CLAMPERL){
+                  if(pokemon.positionX >= 4){
+                    pokemonEvolved = PokemonFactory.createPokemonFromName(Pkm.HUNTAIL, player.pokemonCollection.get(PkmIndex[Pkm.HUNTAIL]))
+                  }
+                  else{
+                    pokemonEvolved = PokemonFactory.createPokemonFromName(Pkm.GOREBYSS, player.pokemonCollection.get(PkmIndex[Pkm.GOREBYSS]))
+                  }
+              }
+              else{
+                pokemonEvolved = PokemonFactory.createPokemonFromName(
+                  pokemon.evolution,
+                  player.pokemonCollection.get(pokemon.index)
+                )
+              }
+
               pokemon.items.forEach((i) => {
                 pokemonEvolved.items.add(i)
                 switch (i) {
@@ -1127,6 +1139,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               pokemonEvolved.positionY = pokemon.positionY
               player.board.delete(key)
               player.board.set(pokemonEvolved.id, pokemonEvolved)
+              player.synergies.update(player.board)
+              player.effects.update(player.synergies)
             } else {
               pokemon.fossilTimer -= 1
             }

@@ -82,22 +82,7 @@ export class Pokemon extends Schema implements IPokemon{
     })
 
     if (this.types.includes(Synergy.FOSSIL) && this.evolution != Pkm.DEFAULT) {
-      switch (this.rarity) {
-        case Rarity.EPIC:
-          this.fossilTimer = 8
-          break
-
-        case Rarity.RARE:
-          this.fossilTimer = 6
-          break
-
-        case Rarity.UNCOMMON:
-          this.fossilTimer = 4
-          break
-
-        default:
-          break
-      }
+      this.fossilTimer = 4
     }
   }
 }
@@ -2177,7 +2162,7 @@ export class Omastar extends Pokemon {
 }
 export class Clamperl extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.CLAMPERL, [Synergy.FOSSIL, Synergy.WATER], Rarity.EPIC, PkmIndex[Pkm.CLAMPERL], Pkm.DEFAULT, 90, 7, 6, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 1, 80, Ability.HYDRO_PUMP,shiny, emotion, true)
+    super(Pkm.CLAMPERL, [Synergy.FOSSIL, Synergy.WATER], Rarity.EPIC, PkmIndex[Pkm.CLAMPERL], Pkm.HUNTAIL, 90, 7, 6, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 1, 80, Ability.HYDRO_PUMP,shiny, emotion, true)
   }
 }
 
