@@ -82,22 +82,7 @@ export class Pokemon extends Schema implements IPokemon{
     })
 
     if (this.types.includes(Synergy.FOSSIL) && this.evolution != Pkm.DEFAULT) {
-      switch (this.rarity) {
-        case Rarity.EPIC:
-          this.fossilTimer = 8
-          break
-
-        case Rarity.RARE:
-          this.fossilTimer = 6
-          break
-
-        case Rarity.UNCOMMON:
-          this.fossilTimer = 4
-          break
-
-        default:
-          break
-      }
+      this.fossilTimer = 4
     }
   }
 }
@@ -2154,25 +2139,46 @@ export class Rampardos extends Pokemon {
 
 export class Kabuto extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.KABUTO, [Synergy.FOSSIL, Synergy.WATER], Rarity.UNCOMMON, '0140', Pkm.KABUTOPS, 70, 10, 3, 1, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 1, 100, Ability.HEAL_BLOCK,shiny, emotion, false)
+    super(Pkm.KABUTO, [Synergy.FOSSIL, Synergy.WATER], Rarity.UNCOMMON, '0140', Pkm.KABUTOPS, 80, 10, 3, 1, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 1, 90, Ability.HEAL_BLOCK,shiny, emotion, false)
   }
 }
 
 export class Kabutops extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.KABUTOPS, [Synergy.FOSSIL, Synergy.WATER], Rarity.UNCOMMON, '0141', Pkm.DEFAULT, 160, 16, 4, 2, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 2, 100, Ability.HEAL_BLOCK,shiny, emotion, true)
+    super(Pkm.KABUTOPS, [Synergy.FOSSIL, Synergy.WATER], Rarity.UNCOMMON, '0141', Pkm.DEFAULT, 160, 16, 4, 2, 1, AttackSprite.ROCK_MELEE, AttackType.PHYSICAL, 2, 90, Ability.HEAL_BLOCK,shiny, emotion, true)
   }
 }
 
 export class Omanyte extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.OMANYTE, [Synergy.FOSSIL, Synergy.WATER], Rarity.UNCOMMON, '0138', Pkm.OMASTAR, 60, 8, 1, 3, 2, AttackSprite.ROCK_MELEE, AttackType.SPECIAL, 1, 100, Ability.ROCK_TOMB,shiny, emotion, false)
+    super(Pkm.OMANYTE, [Synergy.FOSSIL, Synergy.WATER], Rarity.UNCOMMON, '0138', Pkm.OMASTAR, 80, 8, 1, 3, 2, AttackSprite.ROCK_MELEE, AttackType.SPECIAL, 1, 90, Ability.ROCK_TOMB,shiny, emotion, false)
   }
 }
 
 export class Omastar extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.OMASTAR, [Synergy.FOSSIL, Synergy.WATER], Rarity.UNCOMMON, '0139', Pkm.DEFAULT, 140, 14, 2, 4, 2, AttackSprite.ROCK_MELEE, AttackType.SPECIAL, 2, 100, Ability.ROCK_TOMB,shiny, emotion, true)
+    super(Pkm.OMASTAR, [Synergy.FOSSIL, Synergy.WATER], Rarity.UNCOMMON, '0139', Pkm.DEFAULT, 150, 16, 2, 4, 2, AttackSprite.ROCK_MELEE, AttackType.SPECIAL, 2, 90, Ability.ROCK_TOMB,shiny, emotion, true)
+  }
+}
+export class Clamperl extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(Pkm.CLAMPERL, [Synergy.FOSSIL, Synergy.WATER], Rarity.EPIC, PkmIndex[Pkm.CLAMPERL], Pkm.HUNTAIL, 90, 7, 6, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 1, 80, Ability.HYDRO_PUMP,shiny, emotion, true)
+  }
+}
+
+export class Gorebyss extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(Pkm.GOREBYSS, [Synergy.FOSSIL, Synergy.WATER, Synergy.PSYCHIC], Rarity.EPIC, PkmIndex[Pkm.GOREBYSS], Pkm.DEFAULT, 220, 14, 3, 3, 2, AttackSprite.WATER_RANGE, AttackType.SPECIAL, 2, 80, Ability.HYDRO_PUMP,shiny, emotion, true)
+  }
+}
+export class Huntail extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(Pkm.HUNTAIL, [Synergy.FOSSIL, Synergy.WATER, Synergy.AQUATIC], Rarity.EPIC, PkmIndex[Pkm.HUNTAIL], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 80, Ability.ROCK_TOMB,shiny, emotion, true)
+  }
+}
+export class Relicanth extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(Pkm.RELICANTH, [Synergy.FOSSIL, Synergy.WATER], Rarity.EPIC, PkmIndex[Pkm.RELICANTH], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 70, Ability.DEFAULT,shiny, emotion, true)
   }
 }
 
@@ -2238,11 +2244,7 @@ export class Diancie extends Pokemon {
     super(Pkm.DIANCIE, [Synergy.FOSSIL, Synergy.FAIRY], Rarity.EPIC, PkmIndex[Pkm.DIANCIE], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.FAIRY_MELEE, AttackType.PHYSICAL, 2, 100, Ability.DIAMOND_STORM,shiny, emotion, true)
   }
 }
-export class Relicanth extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(Pkm.RELICANTH, [Synergy.FOSSIL, Synergy.WATER], Rarity.EPIC, PkmIndex[Pkm.RELICANTH], Pkm.DEFAULT, 270, 17, 6, 3, 1, AttackSprite.WATER_MELEE, AttackType.PHYSICAL, 2, 70, Ability.ROCK_TOMB,shiny, emotion, true)
-  }
-}
+
 export class Hatenna extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(Pkm.HATENNA, [Synergy.FAIRY, Synergy.PSYCHIC], Rarity.UNCOMMON, PkmIndex[Pkm.HATENNA], Pkm.HATTREM, 50, 5, 1, 2, 1, AttackSprite.PSYCHIC_RANGE, AttackType.SPECIAL, 1, 100, Ability.PSYCH_UP,shiny, emotion, false)

@@ -12,7 +12,6 @@ lampent,0608/AnimData.xml
 lampent,0608/0000/0001/AnimData.xml
 mega-abomasnow,0460/0001/AnimData.xml
 mega-abomasnow,0460/0001/0001/AnimData.xml
-vanillish,0583/0000/0001/AnimData.xml
 vanilluxe,0584/AnimData.xml
 vanilluxe,0584/0000/0001/AnimData.xml
 landorus,0645/AnimData.xml
@@ -88,5 +87,4 @@ kommo-o,0784/0000/0001/AnimData.xml
 mega-altaria,0334/0001/AnimData.xml
 mega-altaria,0334/0001/0001/AnimData.xml
 hatterene,0858/0000/0001/AnimData.xml
-gourgeist,0711/0000/0001/AnimData.xml
 tapu-koko,0785/0000/0001/AnimData.xml
