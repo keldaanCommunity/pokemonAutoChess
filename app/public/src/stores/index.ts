@@ -1,27 +1,27 @@
-import {configureStore} from '@reduxjs/toolkit'
-import lobbyReducer from './LobbyStore'
-import networkReducer from './NetworkStore'
-import preparationReducer from './PreparationStore'
-import gameReducer from './GameStore'
-import afterReducer from './AfterGameStore'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { enableMapSet } from 'immer'
+import { configureStore } from "@reduxjs/toolkit"
+import lobbyReducer from "./LobbyStore"
+import networkReducer from "./NetworkStore"
+import preparationReducer from "./PreparationStore"
+import gameReducer from "./GameStore"
+import afterReducer from "./AfterGameStore"
+import { composeWithDevTools } from "redux-devtools-extension"
+import { enableMapSet } from "immer"
 
 enableMapSet()
 
 const store = configureStore({
-    reducer: {
-        lobby: lobbyReducer,
-        network: networkReducer,
-        preparation: preparationReducer,
-        game: gameReducer,
-        after: afterReducer
-    },
-    middleware: (getDefaultMiddleware) =>
+  reducer: {
+    lobby: lobbyReducer,
+    network: networkReducer,
+    preparation: preparationReducer,
+    game: gameReducer,
+    after: afterReducer
+  },
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false
     }),
-    enhancers: composeWithDevTools({})
+  enhancers: composeWithDevTools({})
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

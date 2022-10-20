@@ -1,4 +1,4 @@
-import Phaser from 'phaser'
+import Phaser from "phaser"
 
 export default class WeatherManager {
   scene: Phaser.Scene
@@ -9,7 +9,7 @@ export default class WeatherManager {
   rectangle: Phaser.GameObjects.Rectangle | undefined
   particles: Phaser.GameObjects.Particles.ParticleEmitterManager | undefined
   image: Phaser.GameObjects.Image | undefined
-  
+
   constructor(scene: Phaser.Scene) {
     this.scene = scene
     this.offscreen = new Phaser.Geom.Rectangle(0, 0, 2000, 100)
@@ -19,101 +19,145 @@ export default class WeatherManager {
   }
 
   addRain() {
-    this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene, 1000, 500, 2000, 1000, 0x296383, 0.3).setDepth(8))
-    this.particles = this.scene.add.particles('rain', [
+    this.rectangle = this.scene.add.existing(
+      new Phaser.GameObjects.Rectangle(
+        this.scene,
+        1000,
+        500,
+        2000,
+        1000,
+        0x296383,
+        0.3
+      ).setDepth(8)
+    )
+    this.particles = this.scene.add.particles("rain", [
       {
-        emitZone: {source: this.offscreen},
-        deathZone: {source: this.screen, type: 'onLeave'},
+        emitZone: { source: this.offscreen },
+        deathZone: { source: this.screen, type: "onLeave" },
         frequency: 50,
-        speedY: {min: 260, max: 280},
+        speedY: { min: 260, max: 280 },
         lifespan: 5000,
         scale: 0.5
       },
       {
-        emitZone: {source: this.offscreen},
-        deathZone: {source: this.screen, type: 'onLeave'},
+        emitZone: { source: this.offscreen },
+        deathZone: { source: this.screen, type: "onLeave" },
         frequency: 100,
-        speedY: {min: 360, max: 380},
+        speedY: { min: 360, max: 380 },
         lifespan: 5000,
         scale: 0.8
       },
       {
-        emitZone: {source: this.offscreen},
-        deathZone: {source: this.screen, type: 'onLeave'},
+        emitZone: { source: this.offscreen },
+        deathZone: { source: this.screen, type: "onLeave" },
         frequency: 200,
         quantity: 4,
-        speedY: {min: 460, max: 480},
+        speedY: { min: 460, max: 480 },
         lifespan: 5000
       }
     ])
   }
 
   addSnow() {
-    this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene, 1000, 500, 2000, 1000, 0xa7cade, 0.3).setDepth(8))
-    this.particles = this.scene.add.particles('snowflakes', [
+    this.rectangle = this.scene.add.existing(
+      new Phaser.GameObjects.Rectangle(
+        this.scene,
+        1000,
+        500,
+        2000,
+        1000,
+        0xa7cade,
+        0.3
+      ).setDepth(8)
+    )
+    this.particles = this.scene.add.particles("snowflakes", [
       {
-        emitZone: {source: this.offscreen},
-        deathZone: {source: this.screen, type: 'onLeave'},
+        emitZone: { source: this.offscreen },
+        deathZone: { source: this.screen, type: "onLeave" },
         frequency: 10,
-        speedY: {min: 70, max: 80},
+        speedY: { min: 70, max: 80 },
         lifespan: 5000,
         scale: 0.5
       },
       {
-        emitZone: {source: this.offscreen},
-        deathZone: {source: this.screen, type: 'onLeave'},
+        emitZone: { source: this.offscreen },
+        deathZone: { source: this.screen, type: "onLeave" },
         frequency: 20,
-        speedY: {min: 100, max: 110},
+        speedY: { min: 100, max: 110 },
         lifespan: 5000,
         scale: 0.8
       },
       {
-        emitZone: {source: this.offscreen},
-        deathZone: {source: this.screen, type: 'onLeave'},
+        emitZone: { source: this.offscreen },
+        deathZone: { source: this.screen, type: "onLeave" },
         frequency: 40,
-        speedY: {min: 200, max: 210},
+        speedY: { min: 200, max: 210 },
         lifespan: 5000
       }
     ])
   }
 
   addSun() {
-    this.image = this.scene.add.existing(new Phaser.GameObjects.Image(this.scene, 550, 250, 'sun').setScale(4, 4).setDepth(8))
-    this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene, 1000, 500, 2000, 1000, 0xffe800, 0.15).setDepth(8))
+    this.image = this.scene.add.existing(
+      new Phaser.GameObjects.Image(this.scene, 550, 250, "sun")
+        .setScale(4, 4)
+        .setDepth(8)
+    )
+    this.rectangle = this.scene.add.existing(
+      new Phaser.GameObjects.Rectangle(
+        this.scene,
+        1000,
+        500,
+        2000,
+        1000,
+        0xffe800,
+        0.15
+      ).setDepth(8)
+    )
   }
 
   addSandstorm() {
-    this.particles = this.scene.add.particles('sand', [
+    this.particles = this.scene.add.particles("sand", [
       {
-        emitZone: {source: this.leftscreen},
-        deathZone: {source: this.rightscreen, type: 'onLeave'},
+        emitZone: { source: this.leftscreen },
+        deathZone: { source: this.rightscreen, type: "onLeave" },
         frequency: 50,
-        speedX: {min: 260, max: 280},
-        speedY: {min: -260, max: -280},
+        speedX: { min: 260, max: 280 },
+        speedY: { min: -260, max: -280 },
         lifespan: 5000,
         scale: 0.8
       },
       {
-        emitZone: {source: this.leftscreen},
-        deathZone: {source: this.rightscreen, type: 'onLeave'},
+        emitZone: { source: this.leftscreen },
+        deathZone: { source: this.rightscreen, type: "onLeave" },
         frequency: 100,
-        speedX: {min: 360, max: 380},
-        speedY: {min: -260, max: -280},
+        speedX: { min: 360, max: 380 },
+        speedY: { min: -260, max: -280 },
         lifespan: 5000,
         scale: 1.2
       },
       {
-        emitZone: {source: this.offscreen},
-        deathZone: {source: this.rightscreen, type: 'onLeave'},
+        emitZone: { source: this.offscreen },
+        deathZone: { source: this.rightscreen, type: "onLeave" },
         frequency: 200,
         quantity: 4,
         scale: 1.5,
-        speedX: {min: 460, max: 480},
-        speedY: {min: -260, max: -280},
+        speedX: { min: 460, max: 480 },
+        speedY: { min: -260, max: -280 },
         lifespan: 5000
       }
     ])
-    this.rectangle = this.scene.add.existing(new Phaser.GameObjects.Rectangle(this.scene, 1000, 500, 2000, 1000, 0x9a791a, 0.2).setDepth(8))
+    this.rectangle = this.scene.add.existing(
+      new Phaser.GameObjects.Rectangle(
+        this.scene,
+        1000,
+        500,
+        2000,
+        1000,
+        0x9a791a,
+        0.2
+      ).setDepth(8)
+    )
   }
 
   clearWeather() {

@@ -1,4 +1,4 @@
-import {Item, BasicItems} from '../types/enum/Item'
+import { Item, BasicItems } from "../types/enum/Item"
 
 export default class ItemFactory {
   static createRandomItem() {
@@ -16,7 +16,7 @@ export default class ItemFactory {
     const items = new Array<Item>()
     for (let i = 0; i < 3; i++) {
       const p = b.pop()
-      if(p){
+      if (p) {
         items.push(p)
       }
     }
@@ -29,8 +29,8 @@ export default class ItemFactory {
 
   static shuffleArray(array: Item[]) {
     for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]]
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[array[i], array[j]] = [array[j], array[i]]
     }
   }
 }

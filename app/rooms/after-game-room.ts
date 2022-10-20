@@ -1,8 +1,8 @@
-import {Client, Room} from 'colyseus'
-import SimplePlayer from '../models/colyseus-models/simple-player'
-import {Dispatcher} from '@colyseus/command'
-import AfterGameState from './states/after-game-state'
-import admin from'firebase-admin'
+import { Client, Room } from "colyseus"
+import SimplePlayer from "../models/colyseus-models/simple-player"
+import { Dispatcher } from "@colyseus/command"
+import AfterGameState from "./states/after-game-state"
+import admin from "firebase-admin"
 
 export default class AfterGameRoom extends Room {
   dispatcher: Dispatcher<this>
@@ -12,14 +12,23 @@ export default class AfterGameRoom extends Room {
   }
 
   onCreate(options: any) {
-    console.log('create after game', this.roomId)
-    
+    console.log("create after game", this.roomId)
+
     this.setState(new AfterGameState())
     this.maxClients = 8
     // console.log('before', this.state.players);
     if (options.players) {
       options.players.forEach((plyr: SimplePlayer) => {
-        const player = new SimplePlayer(plyr.id, plyr.name, plyr.avatar, plyr.rank, plyr.pokemons, plyr.exp, plyr.title, plyr.role)
+        const player = new SimplePlayer(
+          plyr.id,
+          plyr.name,
+          plyr.avatar,
+          plyr.rank,
+          plyr.pokemons,
+          plyr.exp,
+          plyr.title,
+          plyr.role
+        )
         this.state.players.set(player.id, player)
       })
     }
@@ -38,7 +47,7 @@ export default class AfterGameRoom extends Room {
   async onLeave(client: Client, consented: boolean) {
     try {
       if (consented) {
-        throw new Error('consented leave')
+        throw new Error("consented leave")
       }
 
       // allow disconnected client to reconnect into this room until 20 seconds
@@ -51,7 +60,7 @@ export default class AfterGameRoom extends Room {
   }
 
   onDispose() {
-    console.log('dispose after game')
+    console.log("dispose after game")
     this.dispatcher.stop()
   }
 }

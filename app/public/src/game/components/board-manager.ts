@@ -1,14 +1,13 @@
-import Pokemon from './pokemon'
-import {transformCoordinate} from '../../pages/utils/utils'
-import { IPlayer, IPokemon } from '../../../../types'
-import { DataChange } from '@colyseus/schema'
-import AnimationManager from '../animation-manager'
-import GameScene from '../scenes/game-scene'
-import { PokemonActionState } from '../../../../types/enum/Game'
-import { Item } from '../../../../types/enum/Item'
+import Pokemon from "./pokemon"
+import { transformCoordinate } from "../../pages/utils/utils"
+import { IPlayer, IPokemon } from "../../../../types"
+import { DataChange } from "@colyseus/schema"
+import AnimationManager from "../animation-manager"
+import GameScene from "../scenes/game-scene"
+import { PokemonActionState } from "../../../../types/enum/Game"
+import { Item } from "../../../../types/enum/Item"
 
 export default class BoardManager {
-
   pokemons: Map<string, Pokemon>
   uid: string
   scene: GameScene
@@ -16,32 +15,53 @@ export default class BoardManager {
   mode: string
   animationManager: AnimationManager
 
-  constructor(scene: GameScene, player: IPlayer, animationManager: AnimationManager, uid: string) {
+  constructor(
+    scene: GameScene,
+    player: IPlayer,
+    animationManager: AnimationManager,
+    uid: string
+  ) {
     this.pokemons = new Map<string, Pokemon>()
     this.uid = uid
     this.scene = scene
     this.player = player
-    this.mode = 'pick'
+    this.mode = "pick"
     this.animationManager = animationManager
     this.buildPokemons()
   }
 
   addPokemon(pokemon: IPokemon) {
-    const coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY)
+    const coordinates = transformCoordinate(
+      pokemon.positionX,
+      pokemon.positionY
+    )
     let pokemonUI
 
     if (this.uid == this.player.id) {
-      pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, true, true)
+      pokemonUI = new Pokemon(
+        this.scene,
+        coordinates[0],
+        coordinates[1],
+        pokemon,
+        true,
+        true
+      )
     } else {
-      pokemonUI = new Pokemon(this.scene, coordinates[0], coordinates[1], pokemon, false, true)
+      pokemonUI = new Pokemon(
+        this.scene,
+        coordinates[0],
+        coordinates[1],
+        pokemon,
+        false,
+        true
+      )
     }
     this.animationManager.animatePokemon(pokemonUI, PokemonActionState.IDLE)
     this.pokemons.set(pokemonUI.id, pokemonUI)
-    if (pokemon.positionY != 0 && this.mode == 'battle') {
+    if (pokemon.positionY != 0 && this.mode == "battle") {
       pokemonUI.setVisible(false)
     }
   }
-
 
   removePokemon(pokemonToRemove: IPokemon) {
     const pokemonUI = this.pokemons.get(pokemonToRemove.id)
@@ -58,11 +78,11 @@ export default class BoardManager {
 
   battleMode() {
     // console.log('battleMode');
-    this.mode = 'battle'
+    this.mode = "battle"
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
         pokemon.setVisible(false)
-        if(pokemon.detail){
+        if (pokemon.detail) {
           pokemon.closeDetail()
         }
       }
@@ -71,14 +91,14 @@ export default class BoardManager {
 
   pickMode() {
     // console.log('pickMode');
-    this.mode = 'pick'
+    this.mode = "pick"
     this.pokemons.forEach((pokemon) => {
       pokemon.setVisible(true)
     })
   }
 
   setPlayer(player: IPlayer) {
-    if(this.mode == 'battle'){
+    if (this.mode == "battle") {
       return
     }
 
@@ -116,27 +136,33 @@ export default class BoardManager {
     // console.log('change', change.field, pokemon.name);
     const pokemonUI = this.pokemons.get(pokemon.id)
     let coordinates: number[]
-    if(pokemonUI){
+    if (pokemonUI) {
       switch (change.field) {
-        case 'positionX':
+        case "positionX":
           pokemonUI.positionX = change.value
           pokemonUI.positionY = pokemon.positionY
-          coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY)
+          coordinates = transformCoordinate(
+            pokemon.positionX,
+            pokemon.positionY
+          )
           pokemonUI.x = coordinates[0]
           pokemonUI.y = coordinates[1]
           break
-  
-        case 'positionY':
+
+        case "positionY":
           pokemonUI.positionY = change.value
           pokemonUI.positionX = pokemon.positionX
-          coordinates = transformCoordinate(pokemon.positionX, pokemon.positionY)
+          coordinates = transformCoordinate(
+            pokemon.positionX,
+            pokemon.positionY
+          )
           pokemonUI.x = coordinates[0]
           pokemonUI.y = coordinates[1]
-          if (pokemonUI.positionY != 0 && this.mode == 'battle') {
+          if (pokemonUI.positionY != 0 && this.mode == "battle") {
             pokemonUI.setVisible(false)
           }
           break
-  
+
         default:
           pokemonUI[change.field] = change.value
           break

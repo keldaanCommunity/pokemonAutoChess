@@ -1,17 +1,24 @@
-import Jimp from 'jimp'
-import {Dungeon, DungeonData, Header, MaskCoordinate, Mask, TerrainType} from '../types/Config'
+import Jimp from "jimp"
+import {
+  Dungeon,
+  DungeonData,
+  Header,
+  MaskCoordinate,
+  Mask,
+  TerrainType
+} from "../types/Config"
 
 export type TilesetTiled = {
-  columns: number,
-  firstgid: number,
-  image: string,
-  imageheight: number,
-  imagewidth: number,
-  margin: number,
-  name: string,
-  spacing: number,
-  tilecount: number,
-  tileheight: number,
+  columns: number
+  firstgid: number
+  image: string
+  imageheight: number
+  imagewidth: number
+  margin: number
+  name: string
+  spacing: number
+  tilecount: number
+  tileheight: number
   tilewidth: number
 }
 
@@ -31,16 +38,23 @@ export default class Tileset {
   }
 
   async initialize() {
-    this.img = await Jimp.read(`app/public/dist/client/assets/tilesets/${this.id}.png`)
+    this.img = await Jimp.read(
+      `app/public/dist/client/assets/tilesets/${this.id}.png`
+    )
     this.computeMapping()
   }
 
   computeMapping() {
-    (Object.values(Mask) as Mask[]).forEach((v)=>{
+    ;(Object.values(Mask) as Mask[]).forEach((v) => {
       this.ground.set(v, [this.getId(v, Header.GROUND)])
       this.water.set(v, [this.getId(v, Header.WATER)])
-      this.wall.set(v, [this.getId(v, Header.WALL)]);
-      [Header.GROUND_ALT_1, Header.GROUND_ALT_2, Header.GROUND_ALT_3, Header.GROUND_ALT_4].forEach((h)=>{
+      this.wall.set(v, [this.getId(v, Header.WALL)])
+      ;[
+        Header.GROUND_ALT_1,
+        Header.GROUND_ALT_2,
+        Header.GROUND_ALT_3,
+        Header.GROUND_ALT_4
+      ].forEach((h) => {
         if (this.headers.includes(h) && this.isPixelValue(v, h)) {
           const t = this.groundAlt.get(v)
           if (t) {
@@ -49,18 +63,20 @@ export default class Tileset {
             this.groundAlt.set(v, [this.getId(v, h)])
           }
         }
-      });
+      })
 
-      [Header.WALL_ALT_1, Header.WALL_ALT_2, Header.WALL_ALT_3].forEach((h)=>{
-        if (this.headers.includes(h) && this.isPixelValue(v, h)) {
-          const t = this.wallAlt.get(v)
-          if (t) {
-            this.wallAlt.set(v, t.concat([this.getId(v, h)]))
-          } else {
-            this.wallAlt.set(v, [this.getId(v, h)])
+      ;[Header.WALL_ALT_1, Header.WALL_ALT_2, Header.WALL_ALT_3].forEach(
+        (h) => {
+          if (this.headers.includes(h) && this.isPixelValue(v, h)) {
+            const t = this.wallAlt.get(v)
+            if (t) {
+              this.wallAlt.set(v, t.concat([this.getId(v, h)]))
+            } else {
+              this.wallAlt.set(v, [this.getId(v, h)])
+            }
           }
         }
-      })
+      )
     })
   }
 
@@ -80,7 +96,10 @@ export default class Tileset {
     const maskCoordinate = MaskCoordinate[maskId]
     const pixelX = maskCoordinate.x + headerIndex * 3
     const pixelY = maskCoordinate.y
-    return (Jimp.intToRGBA(this.img.getPixelColor(pixelX * 25 + 12, pixelY * 25 + 12)).a != 0)
+    return (
+      Jimp.intToRGBA(this.img.getPixelColor(pixelX * 25 + 12, pixelY * 25 + 12))
+        .a != 0
+    )
   }
 
   getTilemapId(terrain: TerrainType, maskId: Mask): number {
@@ -91,7 +110,7 @@ export default class Tileset {
         items = this.groundAlt.get(maskId)
         // console.log(items);
         if (items && items.length > 0) {
-          if (Math.random() > 0.80) {
+          if (Math.random() > 0.8) {
             return items[Math.floor(Math.random() * items.length)]
           } else {
             return this.ground.get(maskId)![0]
@@ -106,7 +125,7 @@ export default class Tileset {
         items = this.wallAlt.get(maskId)
         // console.log(items);
         if (items && items.length > 0) {
-          if (Math.random() > 0.80) {
+          if (Math.random() > 0.8) {
             return items[Math.floor(Math.random() * items.length)]
           } else {
             return this.wall.get(maskId)![0]

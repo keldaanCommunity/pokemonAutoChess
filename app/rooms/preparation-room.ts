@@ -1,7 +1,7 @@
-import {Client, Room, updateLobby} from 'colyseus'
-import {Dispatcher} from '@colyseus/command'
-import PreparationState from './states/preparation-state'
-import admin from 'firebase-admin'
+import { Client, Room, updateLobby } from "colyseus"
+import { Dispatcher } from "@colyseus/command"
+import PreparationState from "./states/preparation-state"
+import admin from "firebase-admin"
 import {
   OnGameStartCommand,
   OnJoinCommand,
@@ -12,11 +12,11 @@ import {
   OnRemoveBotCommand,
   InitializeBotsCommand,
   OnRoomNameCommand
-} from './commands/preparation-commands'
-import { BotDifficulty } from '../types/enum/Game'
-import { IPreparationMetadata, Transfer } from '../types'
-import { components, operations } from '../api-v1/openapi'
-import { GameUser } from '../models/colyseus-models/game-user'
+} from "./commands/preparation-commands"
+import { BotDifficulty } from "../types/enum/Game"
+import { IPreparationMetadata, Transfer } from "../types"
+import { components, operations } from "../api-v1/openapi"
+import { GameUser } from "../models/colyseus-models/game-user"
 
 export default class PreparationRoom extends Room {
   dispatcher: Dispatcher<this>
@@ -28,38 +28,43 @@ export default class PreparationRoom extends Room {
     this.elos = new Map()
   }
 
-  async setName(name: string){
-    await this.setMetadata(<IPreparationMetadata> {name: name.slice(0,30), type: 'preparation'})
+  async setName(name: string) {
+    await this.setMetadata(<IPreparationMetadata>{
+      name: name.slice(0, 30),
+      type: "preparation"
+    })
     updateLobby(this)
     console.log(this.metadata)
   }
 
-  onCreate(options: {ownerId?: string, idToken: string, name?: string}) {
-    console.log('create preparation room')
+  onCreate(options: { ownerId?: string; idToken: string; name?: string }) {
+    console.log("create preparation room")
     // console.log(options);
-    const n = options.name ? options.name : 'Default title id ' + this.roomId
+    const n = options.name ? options.name : "Default title id " + this.roomId
     // console.log(defaultRoomName);
     this.setState(new PreparationState(options.ownerId, n))
     this.maxClients = 8
-    if(options.ownerId){
-      this.dispatcher.dispatch(new InitializeBotsCommand(), {ownerId: options.ownerId})
+    if (options.ownerId) {
+      this.dispatcher.dispatch(new InitializeBotsCommand(), {
+        ownerId: options.ownerId
+      })
     }
     this.setName(n)
 
     this.onMessage(Transfer.CHANGE_ROOM_NAME, (client, message) => {
-      this.dispatcher.dispatch(new OnRoomNameCommand(), {client, message})
+      this.dispatcher.dispatch(new OnRoomNameCommand(), { client, message })
     })
 
     this.onMessage(Transfer.GAME_START, (client, message) => {
       try {
-        this.dispatcher.dispatch(new OnGameStartCommand(), {client, message})
+        this.dispatcher.dispatch(new OnGameStartCommand(), { client, message })
       } catch (error) {
         console.log(error)
       }
     })
     this.onMessage(Transfer.TOGGLE_READY, (c, message) => {
       try {
-        this.dispatcher.dispatch(new OnToggleReadyCommand(), {client: c})
+        this.dispatcher.dispatch(new OnToggleReadyCommand(), { client: c })
       } catch (error) {
         console.log(error)
       }
@@ -67,27 +72,31 @@ export default class PreparationRoom extends Room {
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       try {
         this.dispatcher.dispatch(new OnMessageCommand(), {
-          client: client, 
+          client: client,
           message: {
-          name: this.state.users.get(client.auth.uid).name,
-          avatar: this.state.users.get(client.auth.uid).avatar,
-          payload: message.payload,
-          time: Date.now()
-        }})
+            name: this.state.users.get(client.auth.uid).name,
+            avatar: this.state.users.get(client.auth.uid).avatar,
+            payload: message.payload,
+            time: Date.now()
+          }
+        })
       } catch (error) {
         console.log(error)
       }
     })
-    this.onMessage(Transfer.ADD_BOT, (client: Client, difficulty: BotDifficulty) => {
-      try {
-        this.dispatcher.dispatch(new OnAddBotCommand(), { difficulty })
-      } catch (error) {
-        console.log(error)
+    this.onMessage(
+      Transfer.ADD_BOT,
+      (client: Client, difficulty: BotDifficulty) => {
+        try {
+          this.dispatcher.dispatch(new OnAddBotCommand(), { difficulty })
+        } catch (error) {
+          console.log(error)
+        }
       }
-    })
+    )
     this.onMessage(Transfer.REMOVE_BOT, (client: Client, t: string) => {
       try {
-        this.dispatcher.dispatch(new OnRemoveBotCommand(), {target: t})
+        this.dispatcher.dispatch(new OnRemoveBotCommand(), { target: t })
       } catch (error) {
         console.log(error)
       }
@@ -102,39 +111,45 @@ export default class PreparationRoom extends Room {
 
   onJoin(client: Client, options: any, auth: any) {
     if (client && client.auth && client.auth.displayName) {
-      console.log(`${client.auth.displayName} ${client.id} join preparation room`)
-      this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth})
+      console.log(
+        `${client.auth.displayName} ${client.id} join preparation room`
+      )
+      this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
     }
   }
 
   async onLeave(client: Client, consented: boolean) {
     if (client && client.auth && client.auth.displayName) {
-      console.log(`${client.auth.displayName} ${client.id} is leaving preparation room`)
+      console.log(
+        `${client.auth.displayName} ${client.id} is leaving preparation room`
+      )
     }
     try {
       if (consented) {
-        throw new Error('consented leave')
+        throw new Error("consented leave")
       }
 
       // allow disconnected client to reconnect into this room until 20 seconds
       await this.allowReconnection(client, 2)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        console.log(`${client.auth.displayName} ${client.id} leave preparation room`)
+        console.log(
+          `${client.auth.displayName} ${client.id} leave preparation room`
+        )
       }
-      this.dispatcher.dispatch(new OnLeaveCommand(), {client, consented})
+      this.dispatcher.dispatch(new OnLeaveCommand(), { client, consented })
     }
   }
 
   onDispose() {
-    console.log('Dispose preparation room')
+    console.log("Dispose preparation room")
     this.dispatcher.stop()
   }
 
-  status(){
-    const players = new Array<components['schemas']['Player']>()
-    this.state.users.forEach((user: GameUser)=>{
-      if(!user.isBot){
+  status() {
+    const players = new Array<components["schemas"]["Player"]>()
+    this.state.users.forEach((user: GameUser) => {
+      if (!user.isBot) {
         players.push({
           id: user.id,
           avatar: user.avatar,

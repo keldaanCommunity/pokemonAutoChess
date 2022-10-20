@@ -353,7 +353,6 @@ export interface IPokemonEntity {
 }
 
 export interface IStatus {
-    triggerRuneProtect()
     burn: boolean
     silence: boolean
     poison: boolean

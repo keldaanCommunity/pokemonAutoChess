@@ -1,24 +1,24 @@
-import {Schema, type} from '@colyseus/schema'
-import Board, { Cell } from '../../core/board'
-import PokemonEntity from '../../core/pokemon-entity'
-import { IStatus } from '../../types'
-import { Item } from '../../types/enum/Item'
+import { Schema, type } from "@colyseus/schema"
+import Board, { Cell } from "../../core/board"
+import PokemonEntity from "../../core/pokemon-entity"
+import { IStatus } from "../../types"
+import { Item } from "../../types/enum/Item"
 
-export default class Status extends Schema implements IStatus{
-  @type('boolean') burn = false
-  @type('boolean') silence = false
-  @type('boolean') poison = false
-  @type('boolean') freeze = false
-  @type('boolean') protect = false
-  @type('boolean') sleep = false
-  @type('boolean') confusion = false
-  @type('boolean') wound = false
-  @type('boolean') resurection = false
-  @type('boolean') smoke = false
-  @type('boolean') armorReduction = false
-  @type('boolean') runeProtect = false
-  @type('boolean') electricField = false
-  @type('boolean') psychicField = false
+export default class Status extends Schema implements IStatus {
+  @type("boolean") burn = false
+  @type("boolean") silence = false
+  @type("boolean") poison = false
+  @type("boolean") freeze = false
+  @type("boolean") protect = false
+  @type("boolean") sleep = false
+  @type("boolean") confusion = false
+  @type("boolean") wound = false
+  @type("boolean") resurection = false
+  @type("boolean") smoke = false
+  @type("boolean") armorReduction = false
+  @type("boolean") runeProtect = false
+  @type("boolean") electricField = false
+  @type("boolean") psychicField = false
   temporaryShield = false
   soulDew = false
   brightPowder = false
@@ -41,8 +41,9 @@ export default class Status extends Schema implements IStatus{
   armorReductionCooldown = 0
   flameOrbCooldown = 0
   changeTeamCooldown = 0
+  runeProtectCooldown = 0
 
-  clearNegativeStatus(){
+  clearNegativeStatus() {
     this.burnCooldown = 0
     this.silenceCooldown = 0
     this.poisonCooldown = 0
@@ -66,10 +67,10 @@ export default class Status extends Schema implements IStatus{
       this.flameOrb = false
       const cells = board.getAdjacentCells(pkm.positionX, pkm.positionY)
       let flameCount = 1
-      cells.forEach((cell:Cell) => {
+      cells.forEach((cell: Cell) => {
         if (cell.value && pkm.team != cell.value.team && flameCount > 0) {
           cell.value.status.triggerBurn(8000, cell.value, pkm)
-          flameCount --
+          flameCount--
         }
       })
       if (pkm.items.has(Item.FLAME_ORB)) {
@@ -115,7 +116,11 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  triggerBurn(timer: number, pkm: PokemonEntity, origin: PokemonEntity | undefined) {
+  triggerBurn(
+    timer: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | undefined
+  ) {
     if (!this.burn && !pkm.items.has(Item.WIDE_LENS)) {
       this.burn = true
       this.burnCooldown = timer
@@ -149,7 +154,11 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  triggerPoison(timer: number, pkm: PokemonEntity, origin: PokemonEntity | undefined) {
+  triggerPoison(
+    timer: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | undefined
+  ) {
     if (!this.poison && !pkm.items.has(Item.WIDE_LENS)) {
       this.poison = true
       this.poisonCooldown = timer
@@ -274,14 +283,14 @@ export default class Status extends Schema implements IStatus{
       cells.forEach((cell) => {
         if (cell.value && pokemon.team == cell.value.team) {
           cell.value.handleHeal(0.18 * cell.value.hp, pokemon)
-          cell.value.count.brightPowderCount ++
+          cell.value.count.brightPowderCount++
         }
       })
       pokemon.handleHeal(0.18 * pokemon.hp, pokemon)
 
       if (pokemon.items.has(Item.BRIGHT_POWDER)) {
         pokemon.status.triggerBrightPowder(5000)
-        pokemon.count.brightPowderCount ++
+        pokemon.count.brightPowderCount++
       }
     } else {
       this.brightPowderCooldown = this.brightPowderCooldown - dt
@@ -305,11 +314,18 @@ export default class Status extends Schema implements IStatus{
     }
   }
 
-  triggerRuneProtect() {
-    this.runeProtect = true
+  triggerRuneProtect(timer: number) {
+    if (!this.runeProtect) {
+      this.runeProtect = true
+      this.runeProtectCooldown = timer
+    }
   }
 
-  disableRuneProtect() {
-    this.runeProtect = false
+  updateRuneProtect(dt: number) {
+    if (this.runeProtectCooldown - dt <= 0) {
+      this.runeProtect = false
+    } else {
+      this.runeProtectCooldown = this.runeProtectCooldown - dt
+    }
   }
 }

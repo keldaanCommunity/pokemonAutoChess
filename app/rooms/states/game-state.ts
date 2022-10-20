@@ -1,19 +1,18 @@
-import Player from '../../models/colyseus-models/player'
-import Shop from '../../models/shop'
-import Design, { DesignTiled } from '../../core/design'
-import BotManager from '../../core/bot-manager'
-import {DungeonData, Dungeon} from '../../types/Config'
-import { GamePhaseState } from '../../types/enum/Game'
-import {Schema, MapSchema, type} from '@colyseus/schema'
+import Player from "../../models/colyseus-models/player"
+import Shop from "../../models/shop"
+import Design, { DesignTiled } from "../../core/design"
+import BotManager from "../../core/bot-manager"
+import { DungeonData, Dungeon } from "../../types/Config"
+import { GamePhaseState } from "../../types/enum/Game"
+import { Schema, MapSchema, type } from "@colyseus/schema"
 
 export default class GameState extends Schema {
-
-  @type('string') afterGameId = ''
-  @type('uint8') roundTime = 30
-  @type('uint8') phase = GamePhaseState.PICK
-  @type({map: Player}) players = new MapSchema<Player>()
-  @type('uint8') stageLevel = 0
-  @type('string') mapName: string
+  @type("string") afterGameId = ""
+  @type("uint8") roundTime = 30
+  @type("uint8") phase = GamePhaseState.PICK
+  @type({ map: Player }) players = new MapSchema<Player>()
+  @type("uint8") stageLevel = 0
+  @type("string") mapName: string
   time = 50000
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()
@@ -36,7 +35,7 @@ export default class GameState extends Schema {
     this.id = keys[Math.floor(Math.random() * keys.length)]
     this.mapName = DungeonData[this.id].name
     this.design = new Design(this.id, 5, 0.1)
-    this.design.create().then(()=>{
+    this.design.create().then(() => {
       this.tilemap = this.design.exportToTiled()
     })
   }
