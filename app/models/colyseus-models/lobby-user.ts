@@ -1,67 +1,68 @@
-import {Schema, type, ArraySchema} from '@colyseus/schema'
-import {GameRecord, IGameRecord} from './game-record'
-import MapTileset from './map-tileset'
-import WinTileset from './win-tileset'
-import PokemonCollection from './pokemon-collection'
-import PokemonConfig from './pokemon-config'
-import { IPokemonConfig } from '../mongo-models/user-metadata'
-import { Role, Title } from '../../types'
+import { Schema, type, ArraySchema } from "@colyseus/schema"
+import { GameRecord, IGameRecord } from "./game-record"
+import MapTileset from "./map-tileset"
+import WinTileset from "./win-tileset"
+import PokemonCollection from "./pokemon-collection"
+import PokemonConfig from "./pokemon-config"
+import { IPokemonConfig } from "../mongo-models/user-metadata"
+import { Role, Title } from "../../types"
 
 export interface ILobbyUser {
-  id: string;
-  name: string;
-  avatar: string;
-  elo: number;
-  langage: string;
-  wins: number;
-  exp: number;
-  level: number;
-  donor: boolean;
-  honors: string[];
-  history: IGameRecord[];
-  pokemonCollection: Map<string, IPokemonConfig>;
-  booster: number;
-  titles: Title[];
-  title: '' | Title;
+  id: string
+  name: string
+  avatar: string
+  elo: number
+  langage: string
+  wins: number
+  exp: number
+  level: number
+  donor: boolean
+  honors: string[]
+  history: IGameRecord[]
+  pokemonCollection: Map<string, IPokemonConfig>
+  booster: number
+  titles: Title[]
+  title: "" | Title
   role: Role
 }
-export default class LobbyUser extends Schema implements ILobbyUser{
-  @type('string') id: string
-  @type('string') name: string
-  @type('string') avatar: string
-  @type('uint16') elo: number
+export default class LobbyUser extends Schema implements ILobbyUser {
+  @type("string") id: string
+  @type("string") name: string
+  @type("string") avatar: string
+  @type("uint16") elo: number
   @type(MapTileset) map = new MapTileset()
-  @type('string') langage: string
-  @type('uint16') wins: number
-  @type('uint16') exp: number
-  @type('uint16') level: number
-  @type('boolean') donor: boolean
+  @type("string") langage: string
+  @type("uint16") wins: number
+  @type("uint16") exp: number
+  @type("uint16") level: number
+  @type("boolean") donor: boolean
   @type(WinTileset) mapWin = new WinTileset()
-  @type(['string']) honors = new ArraySchema<string>()
+  @type(["string"]) honors = new ArraySchema<string>()
   @type([GameRecord]) history = new ArraySchema<IGameRecord>()
-  @type({map: PokemonConfig}) pokemonCollection = new PokemonCollection()
-  @type('uint16') booster: number
-  @type(['string']) titles = new ArraySchema<Title>()
-  @type('string') title: '' | Title
-  @type('string') role: Role
+  @type({ map: PokemonConfig }) pokemonCollection = new PokemonCollection()
+  @type("uint16") booster: number
+  @type(["string"]) titles = new ArraySchema<Title>()
+  @type("string") title: "" | Title
+  @type("string") role: Role
 
-  constructor(id:string,
+  constructor(
+    id: string,
     name: string,
     elo: number,
     avatar: string,
-    langage:string,
-    wins:number,
+    langage: string,
+    wins: number,
     exp: number,
     level: number,
     donor: boolean,
     history: GameRecord[],
     honors: string[],
-    pokemonCollection: Map<string,IPokemonConfig>,
+    pokemonCollection: Map<string, IPokemonConfig>,
     booster: number,
     titles: Title[],
-    title: '' | Title,
-    role: Role) {
-
+    title: "" | Title,
+    role: Role
+  ) {
     super()
     this.id = id
     this.name = name
@@ -76,8 +77,8 @@ export default class LobbyUser extends Schema implements ILobbyUser{
     this.title = title
     this.role = role
 
-    if(history && history.length && history.length != 0) {
-      history.forEach((h)=>{
+    if (history && history.length && history.length != 0) {
+      history.forEach((h) => {
         this.history.push(h)
       })
     }
@@ -88,13 +89,13 @@ export default class LobbyUser extends Schema implements ILobbyUser{
       })
     }
 
-    if(pokemonCollection && pokemonCollection.size) {
+    if (pokemonCollection && pokemonCollection.size) {
       pokemonCollection.forEach((value, key) => {
-          this.pokemonCollection.set(key, new PokemonConfig(value.id, value))
+        this.pokemonCollection.set(key, new PokemonConfig(value.id, value))
       })
     }
 
-    if(titles && titles.length && titles.length != 0){
+    if (titles && titles.length && titles.length != 0) {
       titles.forEach((value) => {
         this.titles.push(value)
       })

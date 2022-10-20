@@ -1,14 +1,20 @@
-import { SetSchema } from '@colyseus/schema'
-import {GameObjects} from 'phaser'
-import ItemContainer from './item-container'
-import { Item } from '../../../../types/enum/Item'
+import { SetSchema } from "@colyseus/schema"
+import { GameObjects } from "phaser"
+import ItemContainer from "./item-container"
+import { Item } from "../../../../types/enum/Item"
 
 export default class ItemsContainer extends GameObjects.Container {
   itemSize: number
   dragable: boolean
-  constructor(scene: Phaser.Scene, inventory: SetSchema<Item>, x: number, y: number, dragable: boolean) {
+  constructor(
+    scene: Phaser.Scene,
+    inventory: SetSchema<Item>,
+    x: number,
+    y: number,
+    dragable: boolean
+  ) {
     super(scene, x, y)
-    this.itemSize = dragable ? 80: 25
+    this.itemSize = dragable ? 80 : 25
     this.dragable = dragable
     scene.add.existing(this)
 
@@ -28,13 +34,13 @@ export default class ItemsContainer extends GameObjects.Container {
       this.remove(target, true)
       this.updateItems()
     } else {
-      console.warn('no item found looking for', item)
+      console.warn("no item found looking for", item)
     }
   }
 
   updateItems() {
     for (let i = 0; i < this.list.length; i++) {
-      const it = <ItemContainer> this.list[i]
+      const it = <ItemContainer>this.list[i]
       it.closeDetail()
       it.x = 0
       it.y = i * this.itemSize
@@ -42,6 +48,6 @@ export default class ItemsContainer extends GameObjects.Container {
   }
 
   findItem(item: string) {
-    return this.getFirst('name', item)
+    return this.getFirst("name", item)
   }
 }

@@ -1,36 +1,36 @@
-import {Dungeon, TerrainType, Mask} from '../types/Config'
-import Tileset, { TilesetTiled } from './tileset'
-import Terrain from './terrain'
-import Masker from './masker'
+import { Dungeon, TerrainType, Mask } from "../types/Config"
+import Tileset, { TilesetTiled } from "./tileset"
+import Terrain from "./terrain"
+import Masker from "./masker"
 
 export type LayerTiled = {
-  data: number[],
-  height: number,
-  id: number,
-  name: string,
-  opacity: number,
-  type: string,
-  visible: boolean,
-  width: number,
-  x: number,
+  data: number[]
+  height: number
+  id: number
+  name: string
+  opacity: number
+  type: string
+  visible: boolean
+  width: number
+  x: number
   y: number
 }
 
 export type DesignTiled = {
-  compressionlevel: number,
-  height: number,
-  infinite: boolean,
-  layers: LayerTiled[],
-  nextlayerid: number,
-  nextobjectid: number,
-  orientation: string,
-  renderorder: string,
-  tiledversion: string,
-  tileheight: number,
-  tilesets: TilesetTiled[],
-  tilewidth: number,
-  type: string,
-  version: string,
+  compressionlevel: number
+  height: number
+  infinite: boolean
+  layers: LayerTiled[]
+  nextlayerid: number
+  nextobjectid: number
+  orientation: string
+  renderorder: string
+  tiledversion: string
+  tileheight: number
+  tilesets: TilesetTiled[]
+  tilewidth: number
+  type: string
+  version: string
   width: number
 }
 
@@ -49,7 +49,15 @@ export default class Design {
   leftBorder: number[] = [14, 15]
   rightBorder: number[] = [28, 15]
 
-  constructor(id: Dungeon, frequency: number, persistance: number, width?: number, height?: number, minArena?: number[], maxArena?: number[]) {
+  constructor(
+    id: Dungeon,
+    frequency: number,
+    persistance: number,
+    width?: number,
+    height?: number,
+    minArena?: number[],
+    maxArena?: number[]
+  ) {
     this.id = id
     this.frequency = frequency
     this.persistance = persistance
@@ -61,8 +69,8 @@ export default class Design {
   }
 
   async create() {
-    return new Promise<void>((resolve, reject)=>{
-      this.tileset.initialize().then(()=>{
+    return new Promise<void>((resolve, reject) => {
+      this.tileset.initialize().then(() => {
         this.generateTerrain()
         this.generateMask()
         this.generateTilemap()
@@ -72,7 +80,12 @@ export default class Design {
   }
 
   generateTerrain() {
-    const t = new Terrain(this.width, this.height, this.frequency, this.persistance)
+    const t = new Terrain(
+      this.width,
+      this.height,
+      this.frequency,
+      this.persistance
+    )
     const generation = t.terrain
 
     for (let i = 0; i < this.height; i++) {
@@ -81,7 +94,7 @@ export default class Design {
         const v = generation[i][j]
         if (v > 0.66) {
           row.push(TerrainType.WALL)
-        } else if (v>0.33) {
+        } else if (v > 0.33) {
           row.push(TerrainType.GROUND)
         } else {
           row.push(TerrainType.WATER)
@@ -97,7 +110,7 @@ export default class Design {
     }
 
     for (let i = this.leftBorder[0]; i < this.rightBorder[0]; i++) {
-      if(this.terrain[this.leftBorder[1]]){
+      if (this.terrain[this.leftBorder[1]]) {
         this.terrain[this.leftBorder[1]][i] = TerrainType.WALL
       }
     }
@@ -117,7 +130,10 @@ export default class Design {
   generateTilemap() {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
-        const tileID = this.tileset.getTilemapId(this.terrain[i][j], this.bitmask[i][j])
+        const tileID = this.tileset.getTilemapId(
+          this.terrain[i][j],
+          this.bitmask[i][j]
+        )
         this.tilemap.push(tileID)
       }
     }
@@ -133,25 +149,26 @@ export default class Design {
           data: this.tilemap,
           height: this.height,
           id: 1,
-          name: 'World',
+          name: "World",
           opacity: 1,
-          type: 'tilelayer',
+          type: "tilelayer",
           visible: true,
           width: this.width,
           x: 0,
-          y: 0
-        }],
+          y: 0,
+        },
+      ],
       nextlayerid: 6,
       nextobjectid: 1,
-      orientation: 'orthogonal',
-      renderorder: 'right-down',
-      tiledversion: '1.7.2',
+      orientation: "orthogonal",
+      renderorder: "right-down",
+      tiledversion: "1.7.2",
       tileheight: 24,
       tilesets: [this.tileset.exportToTiled()],
       tilewidth: 24,
-      type: 'map',
-      version: '1.6',
-      width: this.width
+      type: "map",
+      version: "1.6",
+      width: this.width,
     }
   }
 }

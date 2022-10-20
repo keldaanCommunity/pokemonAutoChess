@@ -1,11 +1,11 @@
-import { Ability } from '../app/types/enum/Ability'
-import { Rarity } from '../app/types/enum/Game'
-import {Pkm, PkmFamily} from '../app/types/enum/Pokemon'
-import PokemonFactory from '../app/models/pokemon-factory'
-import fs from 'fs'
-import { Synergy } from '../app/types/enum/Synergy'
-import { RarityHpCost } from '../app/types/Config'
-import { Pokemon } from '../app/models/colyseus-models/pokemon'
+import { Ability } from "../app/types/enum/Ability"
+import { Rarity } from "../app/types/enum/Game"
+import { Pkm, PkmFamily } from "../app/types/enum/Pokemon"
+import PokemonFactory from "../app/models/pokemon-factory"
+import fs from "fs"
+import { Synergy } from "../app/types/enum/Synergy"
+import { RarityHpCost } from "../app/types/Config"
+import { Pokemon } from "../app/models/colyseus-models/pokemon"
 
 const data = {
   NORMAL: {
@@ -108,9 +108,9 @@ const data = {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>()
   }
-};
+}
 
-(Object.keys(Synergy) as Synergy[]).forEach((type)=>{
+;(Object.keys(Synergy) as Synergy[]).forEach((type) => {
   const pokemonCandidates = new Array<Pokemon>()
   const mythicalPokemonCandidates = new Array<Pokemon>()
 
@@ -123,7 +123,7 @@ const data = {
           mythicalPokemonCandidates.push(pokemon)
         } else {
           let included = false
-          pokemonCandidates.forEach((candidate) =>{
+          pokemonCandidates.forEach((candidate) => {
             if (PkmFamily[candidate.name] == family) {
               included = true
             }
@@ -136,20 +136,23 @@ const data = {
     }
   })
 
-  pokemonCandidates.sort(function(a, b) {
-    const aIndex = Object.keys(Rarity).findIndex(r=>r===a.rarity)
-    const bIndex = Object.keys(Rarity).findIndex(r=>r===b.rarity)
+  pokemonCandidates.sort(function (a, b) {
+    const aIndex = Object.keys(Rarity).findIndex((r) => r === a.rarity)
+    const bIndex = Object.keys(Rarity).findIndex((r) => r === b.rarity)
     return aIndex - bIndex
   })
 
-  pokemonCandidates.forEach((p)=>{
+  pokemonCandidates.forEach((p) => {
     data[type].pokemons.push(p.name)
   })
-  mythicalPokemonCandidates.forEach((p)=>{
+  mythicalPokemonCandidates.forEach((p) => {
     data[type].mythicalPokemons.push(p.name)
   })
 })
 
 console.log(data)
 
-fs.writeFileSync('../app/models/precomputed/type-pokemons.json', JSON.stringify(data))
+fs.writeFileSync(
+  "../app/models/precomputed/type-pokemons.json",
+  JSON.stringify(data)
+)

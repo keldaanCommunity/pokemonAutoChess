@@ -1,31 +1,50 @@
-import { Client, Room } from 'colyseus'
-import {Dispatcher} from '@colyseus/command'
-import GameState from './states/game-state'
-import Player from '../models/colyseus-models/player'
-import {MapSchema} from '@colyseus/schema'
-import UserMetadata from '../models/mongo-models/user-metadata'
-import BOT from '../models/mongo-models/bot-v2'
-import {OnShopCommand, OnItemCommand, OnSellDropCommand, OnRefreshCommand, OnLockCommand, OnLevelUpCommand, OnUpdateCommand, OnDragDropCommand, OnJoinCommand, OnDragDropItemCommand, OnDragDropCombineCommand} from './commands/game-commands'
-import { ExpPlace } from '../types/Config'
-import { Item, BasicItems } from '../types/enum/Item'
-import PokemonFactory from '../models/pokemon-factory'
-import EloRank from 'elo-rank'
-import admin from 'firebase-admin'
-import DetailledStatistic from '../models/mongo-models/detailled-statistic-v2'
-import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, IPlayer, IPokemon, Transfer } from '../types'
-import {Pkm, PkmIndex} from '../types/enum/Pokemon'
-import PokemonConfig from '../models/colyseus-models/pokemon-config'
-import { Synergy } from '../types/enum/Synergy'
-import { Pokemon } from '../models/colyseus-models/pokemon'
-import { IGameUser } from '../models/colyseus-models/game-user'
-import History from '../models/mongo-models/history'
-import { components } from '../api-v1/openapi'
-import { Title, Role } from '../types'
+import { Client, Room } from "colyseus"
+import { Dispatcher } from "@colyseus/command"
+import GameState from "./states/game-state"
+import Player from "../models/colyseus-models/player"
+import { MapSchema } from "@colyseus/schema"
+import UserMetadata from "../models/mongo-models/user-metadata"
+import BOT from "../models/mongo-models/bot-v2"
+import {
+  OnShopCommand,
+  OnItemCommand,
+  OnSellDropCommand,
+  OnRefreshCommand,
+  OnLockCommand,
+  OnLevelUpCommand,
+  OnUpdateCommand,
+  OnDragDropCommand,
+  OnJoinCommand,
+  OnDragDropItemCommand,
+  OnDragDropCombineCommand
+} from "./commands/game-commands"
+import { ExpPlace } from "../types/Config"
+import { Item, BasicItems } from "../types/enum/Item"
+import PokemonFactory from "../models/pokemon-factory"
+import EloRank from "elo-rank"
+import admin from "firebase-admin"
+import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
+import {
+  IDragDropCombineMessage,
+  IDragDropItemMessage,
+  IDragDropMessage,
+  IPlayer,
+  IPokemon,
+  Transfer
+} from "../types"
+import { Pkm, PkmIndex } from "../types/enum/Pokemon"
+import PokemonConfig from "../models/colyseus-models/pokemon-config"
+import { Synergy } from "../types/enum/Synergy"
+import { Pokemon } from "../models/colyseus-models/pokemon"
+import { IGameUser } from "../models/colyseus-models/game-user"
+import History from "../models/mongo-models/history"
+import { components } from "../api-v1/openapi"
+import { Title, Role } from "../types"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
   eloEngine: EloRank
-  
+
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
@@ -33,8 +52,13 @@ export default class GameRoom extends Room<GameState> {
   }
 
   // When room is initialized
-  onCreate(options: {users: {[key: string]: IGameUser}, preparationId: string, name: string, idToken: string}) {
-    console.log('create game room')
+  onCreate(options: {
+    users: { [key: string]: IGameUser }
+    preparationId: string
+    name: string
+    idToken: string
+  }) {
+    console.log("create game room")
     // console.log(options);
     this.setState(new GameState(options.preparationId, options.name))
     this.maxClients = 8
@@ -42,7 +66,17 @@ export default class GameRoom extends Room<GameState> {
       const user = options.users[id]
       // console.log(user);
       if (user.isBot) {
-        const player = new Player(user.id, user.name, user.elo, user.avatar, true, this.state.players.size + 1, new Map<string,PokemonConfig>(),'', Role.BOT)
+        const player = new Player(
+          user.id,
+          user.name,
+          user.elo,
+          user.avatar,
+          true,
+          this.state.players.size + 1,
+          new Map<string, PokemonConfig>(),
+          "",
+          Role.BOT
+        )
         this.state.players.set(user.id, player)
         this.state.botManager.addBot(player)
         this.state.shop.assignShop(player)
@@ -57,7 +91,7 @@ export default class GameRoom extends Room<GameState> {
             index: message.id
           })
         } catch (error) {
-          console.log('shop error', message, error)
+          console.log("shop error", message, error)
         }
       }
     })
@@ -84,16 +118,18 @@ export default class GameRoom extends Room<GameState> {
           })
         } catch (error) {
           const errorInformation = {
-            'updateBoard': true,
-            'updateItems': true
+            updateBoard: true,
+            updateItems: true
           }
           client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
-          console.log('drag drop error', error)
+          console.log("drag drop error", error)
         }
       }
     })
 
-    this.onMessage(Transfer.DRAG_DROP_ITEM, (client, message: IDragDropItemMessage) => {
+    this.onMessage(
+      Transfer.DRAG_DROP_ITEM,
+      (client, message: IDragDropItemMessage) => {
         if (!this.state.gameFinished) {
           try {
             this.dispatcher.dispatch(new OnDragDropItemCommand(), {
@@ -102,16 +138,19 @@ export default class GameRoom extends Room<GameState> {
             })
           } catch (error) {
             const errorInformation = {
-              'updateBoard': true,
-              'updateItems': true
+              updateBoard: true,
+              updateItems: true
             }
             client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
-            console.log('drag drop error', error)
+            console.log("drag drop error", error)
           }
         }
-      })
+      }
+    )
 
-      this.onMessage(Transfer.DRAG_DROP_COMBINE, (client, message: IDragDropCombineMessage) => {
+    this.onMessage(
+      Transfer.DRAG_DROP_COMBINE,
+      (client, message: IDragDropCombineMessage) => {
         if (!this.state.gameFinished) {
           try {
             this.dispatcher.dispatch(new OnDragDropCombineCommand(), {
@@ -120,29 +159,33 @@ export default class GameRoom extends Room<GameState> {
             })
           } catch (error) {
             const errorInformation = {
-              'updateBoard': true,
-              'updateItems': true
+              updateBoard: true,
+              updateItems: true
             }
             client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
-            console.log('drag drop error', error)
+            console.log("drag drop error", error)
           }
         }
-      })
+      }
+    )
 
-    this.onMessage(Transfer.SELL_DROP, (client, message: {pokemonId: string}) => {
-      if (!this.state.gameFinished) {
-        try {
-          this.dispatcher.dispatch(new OnSellDropCommand(), {
-            client,
-            detail: message
-          })
-        } catch (error) {
-          console.log('sell drop error', message)
+    this.onMessage(
+      Transfer.SELL_DROP,
+      (client, message: { pokemonId: string }) => {
+        if (!this.state.gameFinished) {
+          try {
+            this.dispatcher.dispatch(new OnSellDropCommand(), {
+              client,
+              detail: message
+            })
+          } catch (error) {
+            console.log("sell drop error", message)
+          }
         }
       }
-    })
+    )
 
-    this.onMessage(Transfer.REQUEST_TILEMAP, (client, message)=>{
+    this.onMessage(Transfer.REQUEST_TILEMAP, (client, message) => {
       client.send(Transfer.REQUEST_TILEMAP, this.state.tilemap)
     })
 
@@ -151,7 +194,7 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.dispatcher.dispatch(new OnRefreshCommand(), client.auth.uid)
         } catch (error) {
-          console.log('refresh error', message)
+          console.log("refresh error", message)
         }
       }
     })
@@ -161,7 +204,7 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.dispatcher.dispatch(new OnLockCommand(), client.auth.uid)
         } catch (error) {
-          console.log('lock error', message)
+          console.log("lock error", message)
         }
       }
     })
@@ -171,23 +214,29 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.dispatcher.dispatch(new OnLevelUpCommand(), client.auth.uid)
         } catch (error) {
-          console.log('level up error', message)
+          console.log("level up error", message)
         }
       }
     })
 
-    this.onMessage(Transfer.BROADCAST_EMOTE, (client: Client, message: string) => {
-      if(client.auth){
-        this.broadcast(Transfer.BROADCAST_EMOTE, {id: client.auth.uid, emote: message})
+    this.onMessage(
+      Transfer.BROADCAST_EMOTE,
+      (client: Client, message: string) => {
+        if (client.auth) {
+          this.broadcast(Transfer.BROADCAST_EMOTE, {
+            id: client.auth.uid,
+            emote: message
+          })
+        }
       }
-    })
+    )
 
-    this.setSimulationInterval((deltaTime: number) =>{
+    this.setSimulationInterval((deltaTime: number) => {
       if (!this.state.gameFinished) {
         try {
-          this.dispatcher.dispatch(new OnUpdateCommand(), {deltaTime})
+          this.dispatcher.dispatch(new OnUpdateCommand(), { deltaTime })
         } catch (error) {
-          console.log('update error', error)
+          console.log("update error", error)
         }
       }
     })
@@ -200,7 +249,7 @@ export default class GameRoom extends Room<GameState> {
   }
 
   onJoin(client: Client, options: any, auth: any) {
-    this.dispatcher.dispatch(new OnJoinCommand(), {client, options, auth})
+    this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
   }
 
   async onLeave(client: Client, consented: boolean) {
@@ -209,7 +258,7 @@ export default class GameRoom extends Room<GameState> {
         console.log(`${client.auth.displayName} is leaving`)
       }
       if (consented) {
-        throw new Error('consented leave')
+        throw new Error("consented leave")
       }
 
       // allow disconnected client to reconnect into this room until 20 seconds
@@ -223,13 +272,12 @@ export default class GameRoom extends Room<GameState> {
 
   onDispose() {
     // console.log(`dispose game room`);
-    const requiredStageLevel = process.env.MODE == 'dev' ? 0: 10
+    const requiredStageLevel = process.env.MODE == "dev" ? 0 : 10
     this.state.endTime = Date.now()
-    const ps = new Array<components['schemas']['GameHistory']>()
-    this.state.players.forEach(p=> {
-      if(!p.isBot){
-        ps.push(this.transformToSimplePlayer(p)
-        )
+    const ps = new Array<components["schemas"]["GameHistory"]>()
+    this.state.players.forEach((p) => {
+      if (!p.isBot) {
+        ps.push(this.transformToSimplePlayer(p))
       }
     })
     History.create({
@@ -240,13 +288,19 @@ export default class GameRoom extends Room<GameState> {
       players: ps
     })
 
-    if (this.state.stageLevel >= requiredStageLevel && this.state.elligibleToXP) {
-      this.state.players.forEach((player) =>{
+    if (
+      this.state.stageLevel >= requiredStageLevel &&
+      this.state.elligibleToXP
+    ) {
+      this.state.players.forEach((player) => {
         if (player.isBot) {
-          BOT.find({'avatar': player.id}, (err, bots)=>{
+          BOT.find({ avatar: player.id }, (err, bots) => {
             if (bots) {
-              bots.forEach((bot) =>{
-                bot.elo = Math.max(0, this.computeElo(player, player.rank, player.elo))
+              bots.forEach((bot) => {
+                bot.elo = Math.max(
+                  0,
+                  this.computeElo(player, player.rank, player.elo)
+                )
                 bot.save()
               })
             }
@@ -258,15 +312,18 @@ export default class GameRoom extends Room<GameState> {
 
           if (!this.state.gameFinished && player.life != 0) {
             let rankOfLastPlayerAlive = this.state.players.size
-            this.state.players.forEach((plyr) =>{
+            this.state.players.forEach((plyr) => {
               if (plyr.life <= 0) {
-                rankOfLastPlayerAlive = Math.min(rankOfLastPlayerAlive, plyr.rank)
+                rankOfLastPlayerAlive = Math.min(
+                  rankOfLastPlayerAlive,
+                  plyr.rank
+                )
               }
             })
             rank = rankOfLastPlayerAlive
           }
 
-          UserMetadata.findOne({uid: player.id}, (err: any, usr: any)=> {
+          UserMetadata.findOne({ uid: player.id }, (err: any, usr: any) => {
             if (err) {
               console.log(err)
             } else {
@@ -285,25 +342,25 @@ export default class GameRoom extends Room<GameState> {
               if (usr.elo) {
                 const elo = Math.max(0, this.computeElo(player, rank, usr.elo))
                 if (elo) {
-                  if(elo > 1100){
+                  if (elo > 1100) {
                     player.titles.add(Title.GYM_TRAINER)
                   }
-                  if(elo > 1200){
+                  if (elo > 1200) {
                     player.titles.add(Title.GYM_CHALLENGER)
                   }
-                  if(elo > 1400){
+                  if (elo > 1400) {
                     player.titles.add(Title.GYM_LEADER)
                   }
                   usr.elo = elo
                 }
 
-                if (usr.titles === undefined){
+                if (usr.titles === undefined) {
                   usr.titles = []
                 }
 
-                player.titles.forEach(t=>{
-                  if(!usr.titles.includes(t)){
-                    console.log('title added ', t)
+                player.titles.forEach((t) => {
+                  if (!usr.titles.includes(t)) {
+                    console.log("title added ", t)
                     usr.titles.push(t)
                   }
                 })
@@ -335,7 +392,12 @@ export default class GameRoom extends Room<GameState> {
       id: player.id,
       rank: player.rank,
       avatar: player.avatar,
-      pokemons: new Array<{name: string, avatar: string, items: Item[], inventory: Item[]}>(),
+      pokemons: new Array<{
+        name: string
+        avatar: string
+        items: Item[]
+        inventory: Item[]
+      }>(),
       elo: player.elo,
       title: player.title,
       role: player.role
@@ -343,7 +405,7 @@ export default class GameRoom extends Room<GameState> {
 
     player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.positionY != 0) {
-        const shinyPad = pokemon.shiny ? '/0000/0001' : '' 
+        const shinyPad = pokemon.shiny ? "/0000/0001" : ""
         const avatar = `${pokemon.index}${shinyPad}/${pokemon.emotion}`
         const s = {
           name: pokemon.name,
@@ -351,7 +413,7 @@ export default class GameRoom extends Room<GameState> {
           items: new Array<Item>(),
           inventory: new Array<Item>()
         }
-        pokemon.items.forEach((i)=>{
+        pokemon.items.forEach((i) => {
           s.items.push(i)
           s.inventory.push(i)
         })
@@ -364,13 +426,17 @@ export default class GameRoom extends Room<GameState> {
   computeElo(player: Player, rank: number, elo: number) {
     const eloGains = new Array<number>()
     let meanGain = 0
-    this.state.players.forEach((plyr) =>{
+    this.state.players.forEach((plyr) => {
       if (player.name != plyr.name) {
         const expectedScoreA = this.eloEngine.getExpected(elo, plyr.elo)
         if (rank < plyr.rank) {
-          eloGains.push(this.eloEngine.updateRating(expectedScoreA, 1, player.elo))
+          eloGains.push(
+            this.eloEngine.updateRating(expectedScoreA, 1, player.elo)
+          )
         } else {
-          eloGains.push(this.eloEngine.updateRating(expectedScoreA, 0, player.elo))
+          eloGains.push(
+            this.eloEngine.updateRating(expectedScoreA, 0, player.elo)
+          )
         }
       }
     })
@@ -378,27 +444,29 @@ export default class GameRoom extends Room<GameState> {
     eloGains.forEach((gain) => {
       meanGain += gain
     })
-    meanGain = Math.max(0,Math.floor(meanGain / eloGains.length))
+    meanGain = Math.max(0, Math.floor(meanGain / eloGains.length))
     if (rank <= 4 && meanGain < elo) {
       meanGain = elo
     }
     // console.log(eloGains);
-    console.log(`${player.name} (was ${player.elo}) will be ${meanGain} (${rank})`)
+    console.log(
+      `${player.name} (was ${player.elo}) will be ${meanGain} (${rank})`
+    )
     return meanGain
   }
 
   computeRandomOpponent(playerId: string) {
     const player = this.state.players.get(playerId)
-    if(player){
+    if (player) {
       this.checkOpponents(playerId)
       if (player.opponents.length == 0) {
         this.fillOpponents(playerId)
       }
       if (player.opponents.length > 0) {
         const id = player.opponents.pop()
-        if(id){
+        if (id) {
           const opponent = this.state.players.get(id)
-          if(opponent){
+          if (opponent) {
             player.opponentName = opponent.name
             player.opponentAvatar = opponent.avatar
             return id
@@ -411,14 +479,14 @@ export default class GameRoom extends Room<GameState> {
   checkOpponents(playerId: string) {
     const player = this.state.players.get(playerId)
     const indexToDelete = new Array<number>()
-    if(player){
-      player.opponents.forEach((p: string, i: number) =>{
+    if (player) {
+      player.opponents.forEach((p: string, i: number) => {
         const opponent = this.state.players.get(p)
         if (opponent && !opponent.alive) {
           indexToDelete.push(i)
         }
       })
-      indexToDelete.forEach((index) =>{
+      indexToDelete.forEach((index) => {
         player.opponents.splice(index, 1)
       })
     }
@@ -426,8 +494,8 @@ export default class GameRoom extends Room<GameState> {
 
   fillOpponents(playerId: string) {
     const player = this.state.players.get(playerId)
-    if(player){
-      this.state.players.forEach((plyr: Player, key: string) =>{
+    if (player) {
+      this.state.players.forEach((plyr: Player, key: string) => {
         if (plyr.alive && player.id != plyr.id) {
           player.opponents.push(key)
         }
@@ -438,7 +506,7 @@ export default class GameRoom extends Room<GameState> {
 
   swap(playerId: string, pokemon: IPokemon, x: number, y: number) {
     const pokemonToSwap = this.getPokemonByPosition(playerId, x, y)
-    if(pokemonToSwap){
+    if (pokemonToSwap) {
       pokemonToSwap.positionX = pokemon.positionX
       pokemonToSwap.positionY = pokemon.positionY
     }
@@ -446,11 +514,10 @@ export default class GameRoom extends Room<GameState> {
     pokemon.positionY = y
   }
 
-
   getPokemonByPosition(playerId: string, x: number, y: number) {
     let pkm: IPokemon | undefined
     const player = this.state.players.get(playerId)
-    if(player){
+    if (player) {
       player.board.forEach((pokemon, key) => {
         if (pokemon.positionX == x && pokemon.positionY == y) {
           pkm = pokemon
@@ -463,7 +530,7 @@ export default class GameRoom extends Room<GameState> {
   isPositionEmpty(playerId: string, x: number, y: number) {
     let empty = true
     const player = this.state.players.get(playerId)
-    if(player){
+    if (player) {
       player.board.forEach((pokemon, key) => {
         if (pokemon.positionX == x && pokemon.positionY == y) {
           empty = false
@@ -496,40 +563,42 @@ export default class GameRoom extends Room<GameState> {
     const itemsToAdd = new Array<Item>()
     const basicItemsToAdd = new Array<Item>()
     const player = this.state.players.get(id)
-    if(player){
+    if (player) {
       player.board.forEach((pokemon, key) => {
         let count = 0
         const pokemonEvolutionName = pokemon.evolution
-  
-        if (pokemonEvolutionName !== Pkm.DEFAULT && pokemon.name !== Pkm.DITTO) {
+
+        if (
+          pokemonEvolutionName !== Pkm.DEFAULT &&
+          pokemon.name !== Pkm.DITTO
+        ) {
           player.board.forEach((pkm, id) => {
-            if ( pkm.index == pokemon.index) {
+            if (pkm.index == pokemon.index) {
               count += 1
             }
           })
-  
+
           if (count == 3) {
-            let coord: {x: number, y: number} | undefined
-  
+            let coord: { x: number; y: number } | undefined
+
             player.board.forEach((pkm, id) => {
               if (pkm.index == pokemon.index) {
                 // console.log(pkm.name, pokemon.name)
                 if (coord) {
-                    if(pkm.positionY > coord.y){
-                        coord.x = pkm.positionX
-                        coord.y = pkm.positionY
-                        // console.log('better coord', coord)
-                    }
-                }
-                else {
-                    if(pkm.positionX !== -1){
-                        coord = {x: pkm.positionX, y: pkm.positionY}
-                    }
+                  if (pkm.positionY > coord.y) {
+                    coord.x = pkm.positionX
+                    coord.y = pkm.positionY
+                    // console.log('better coord', coord)
+                  }
+                } else {
+                  if (pkm.positionX !== -1) {
+                    coord = { x: pkm.positionX, y: pkm.positionY }
+                  }
 
-                    // console.log('first coord', coord)
+                  // console.log('first coord', coord)
                 }
-  
-                pkm.items.forEach((el)=>{
+
+                pkm.items.forEach((el) => {
                   if (BasicItems.includes(el)) {
                     basicItemsToAdd.push(el)
                   } else {
@@ -539,7 +608,10 @@ export default class GameRoom extends Room<GameState> {
                 player.board.delete(id)
               }
             })
-            const pokemonEvolved = PokemonFactory.createPokemonFromName(pokemonEvolutionName, player.pokemonCollection.get(PkmIndex[pokemonEvolutionName]))
+            const pokemonEvolved = PokemonFactory.createPokemonFromName(
+              pokemonEvolutionName,
+              player.pokemonCollection.get(PkmIndex[pokemonEvolutionName])
+            )
             for (let i = 0; i < 3; i++) {
               const itemToAdd = itemsToAdd.pop()
               if (itemToAdd) {
@@ -579,26 +651,25 @@ export default class GameRoom extends Room<GameState> {
                 }
               }
             }
-            itemsToAdd.forEach( (item) =>{
+            itemsToAdd.forEach((item) => {
               player.items.add(item)
             })
-            basicItemsToAdd.forEach( (item)=>{
+            basicItemsToAdd.forEach((item) => {
               player.items.add(item)
             })
-            if(coord){
-                // console.log(coord, pokemonEvolved.name)
-                pokemonEvolved.positionX = coord.x
-                pokemonEvolved.positionY = coord.y
-                player.board.set(pokemonEvolved.id, pokemonEvolved)
-                evolve = true
-            }
-            else{
-                console.log('error, no coordinate found for new evolution')
+            if (coord) {
+              // console.log(coord, pokemonEvolved.name)
+              pokemonEvolved.positionX = coord.x
+              pokemonEvolved.positionY = coord.y
+              player.board.set(pokemonEvolved.id, pokemonEvolved)
+              evolve = true
+            } else {
+              console.log("error, no coordinate found for new evolution")
             }
           }
         }
       })
-  
+
       if (evolve) {
         player.synergies.update(player.board)
         player.effects.update(player.synergies)
@@ -609,11 +680,11 @@ export default class GameRoom extends Room<GameState> {
     return evolve
   }
 
-  getNumberOfPlayersAlive(players :MapSchema<Player>) {
+  getNumberOfPlayersAlive(players: MapSchema<Player>) {
     let numberOfPlayersAlive = 0
     players.forEach((player, key) => {
       if (player.alive) {
-        numberOfPlayersAlive ++
+        numberOfPlayersAlive++
       }
     })
     return numberOfPlayersAlive
@@ -624,7 +695,7 @@ export default class GameRoom extends Room<GameState> {
 
     board.forEach((pokemon, key) => {
       if (pokemon.positionY == 0) {
-        boardSize ++
+        boardSize++
       }
     })
 
@@ -636,7 +707,7 @@ export default class GameRoom extends Room<GameState> {
 
     board.forEach((pokemon, key) => {
       if (pokemon.positionY == 0 && pokemon.name != Pkm.DITTO) {
-        boardSize ++
+        boardSize++
       }
     })
 
@@ -648,13 +719,13 @@ export default class GameRoom extends Room<GameState> {
 
     board.forEach((pokemon, key) => {
       if (pokemon.name == name && pokemon.evolution != Pkm.DEFAULT) {
-        count ++
+        count++
       }
     })
-    return (count >= 2)
+    return count >= 2
   }
 
-  getFirstPokemonOnBench(board: MapSchema<Pokemon>): Pokemon|undefined  {
+  getFirstPokemonOnBench(board: MapSchema<Pokemon>): Pokemon | undefined {
     let pkm: Pokemon | undefined = undefined
     let found = false
     board.forEach((pokemon, key) => {
@@ -671,7 +742,7 @@ export default class GameRoom extends Room<GameState> {
 
     board.forEach((pokemon, key) => {
       if (pokemon.positionY != 0) {
-        size ++
+        size++
       }
     })
 

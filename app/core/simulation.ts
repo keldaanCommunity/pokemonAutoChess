@@ -1,34 +1,39 @@
-import Board from './board'
-import {Schema, MapSchema, type} from '@colyseus/schema'
-import PokemonEntity from './pokemon-entity'
-import PokemonFactory from '../models/pokemon-factory'
-import {Pokemon} from '../models/colyseus-models/pokemon'
-import { Item } from '../types/enum/Item'
-import { Effect } from '../types/enum/Effect'
-import { AttackType, Climate, PokemonActionState } from '../types/enum/Game'
-import Dps from'./dps'
-import DpsHeal from './dps-heal'
-import ItemFactory from '../models/item-factory'
-import { ISimulation, IPokemonEntity, IPokemon } from '../types'
-import { Synergy } from '../types/enum/Synergy'
-import { Pkm } from '../types/enum/Pokemon'
+import Board from "./board"
+import { Schema, MapSchema, type } from "@colyseus/schema"
+import PokemonEntity from "./pokemon-entity"
+import PokemonFactory from "../models/pokemon-factory"
+import { Pokemon } from "../models/colyseus-models/pokemon"
+import { Item } from "../types/enum/Item"
+import { Effect } from "../types/enum/Effect"
+import { AttackType, Climate, PokemonActionState } from "../types/enum/Game"
+import Dps from "./dps"
+import DpsHeal from "./dps-heal"
+import ItemFactory from "../models/item-factory"
+import { ISimulation, IPokemonEntity, IPokemon } from "../types"
+import { Synergy } from "../types/enum/Synergy"
+import { Pkm } from "../types/enum/Pokemon"
 
-export default class Simulation extends Schema implements ISimulation{
-  @type('string') climate: Climate = Climate.NEUTRAL
-  @type({map: PokemonEntity}) blueTeam = new MapSchema<IPokemonEntity>()
-  @type({map: PokemonEntity}) redTeam = new MapSchema<IPokemonEntity>()
-  @type({map: Dps}) blueDpsMeter = new MapSchema<Dps>()
-  @type({map: Dps}) redDpsMeter = new MapSchema<Dps>()
-  @type({map: DpsHeal}) blueHealDpsMeter = new MapSchema<DpsHeal>()
-  @type({map: DpsHeal}) redHealDpsMeter = new MapSchema<DpsHeal>()
+export default class Simulation extends Schema implements ISimulation {
+  @type("string") climate: Climate = Climate.NEUTRAL
+  @type({ map: PokemonEntity }) blueTeam = new MapSchema<IPokemonEntity>()
+  @type({ map: PokemonEntity }) redTeam = new MapSchema<IPokemonEntity>()
+  @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
+  @type({ map: Dps }) redDpsMeter = new MapSchema<Dps>()
+  @type({ map: DpsHeal }) blueHealDpsMeter = new MapSchema<DpsHeal>()
+  @type({ map: DpsHeal }) redHealDpsMeter = new MapSchema<DpsHeal>()
   blueEffects = new Array<Effect>()
   redEffects = new Array<Effect>()
-  board: Board = new Board(8,6)
+  board: Board = new Board(8, 6)
   finished = false
   flowerSpawn: boolean[] = [false, false]
   generatedMoney = 0
 
-  initialize(blueTeam: MapSchema<Pokemon>, redTeam: MapSchema<Pokemon>, blueEffects: Effect[], redEffects: Effect[]) {
+  initialize(
+    blueTeam: MapSchema<Pokemon>,
+    redTeam: MapSchema<Pokemon>,
+    blueEffects: Effect[],
+    redEffects: Effect[]
+  ) {
     this.blueDpsMeter.forEach((dps, key) => {
       this.blueDpsMeter.delete(key)
     })
@@ -69,35 +74,41 @@ export default class Simulation extends Schema implements ISimulation{
     if (redTeam) {
       redTeam.forEach((pokemon) => {
         if (pokemon.positionY != 0) {
-          this.addPokemon(pokemon, pokemon.positionX, 5 - (pokemon.positionY - 1), 1)
+          this.addPokemon(
+            pokemon,
+            pokemon.positionX,
+            5 - (pokemon.positionY - 1),
+            1
+          )
         }
       })
     }
 
-    if (blueEffects && (blueEffects.includes(Effect.INFESTATION) || blueEffects.includes(Effect.HORDE) || blueEffects.includes(Effect.HEART_OF_THE_SWARM))) {
+    if (
+      blueEffects &&
+      (blueEffects.includes(Effect.INFESTATION) ||
+        blueEffects.includes(Effect.HORDE) ||
+        blueEffects.includes(Effect.HEART_OF_THE_SWARM))
+    ) {
       const bugTeam = new Array<IPokemon>()
-      blueTeam.forEach((pkm)=>{
+      blueTeam.forEach((pkm) => {
         if (pkm.types.includes(Synergy.BUG) && pkm.positionY != 0) {
           bugTeam.push(pkm)
         }
       })
-      bugTeam.sort((a,b)=>b.hp - a.hp)
+      bugTeam.sort((a, b) => b.hp - a.hp)
 
-      if(blueEffects.includes(Effect.INFESTATION)){
+      if (blueEffects.includes(Effect.INFESTATION)) {
         const bug = PokemonFactory.createPokemonFromName(bugTeam[0].name)
         const coord = this.getFirstAvailablePlaceOnBoard(true)
         this.addPokemon(bug, coord.x, coord.y, 0)
-      }
-
-      else if(blueEffects.includes(Effect.HORDE)){
+      } else if (blueEffects.includes(Effect.HORDE)) {
         for (let i = 0; i < 2; i++) {
           const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
           const coord = this.getFirstAvailablePlaceOnBoard(true)
           this.addPokemon(bug, coord.x, coord.y, 0)
         }
-      }
-
-      else if(blueEffects.includes(Effect.HEART_OF_THE_SWARM)){
+      } else if (blueEffects.includes(Effect.HEART_OF_THE_SWARM)) {
         for (let i = 0; i < 4; i++) {
           const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
           const coord = this.getFirstAvailablePlaceOnBoard(true)
@@ -106,30 +117,31 @@ export default class Simulation extends Schema implements ISimulation{
       }
     }
 
-    if (redEffects && (redEffects.includes(Effect.INFESTATION) || redEffects.includes(Effect.HORDE) || redEffects.includes(Effect.HEART_OF_THE_SWARM))) {
+    if (
+      redEffects &&
+      (redEffects.includes(Effect.INFESTATION) ||
+        redEffects.includes(Effect.HORDE) ||
+        redEffects.includes(Effect.HEART_OF_THE_SWARM))
+    ) {
       const bugTeam = new Array<IPokemon>()
-      redTeam.forEach((pkm)=>{
+      redTeam.forEach((pkm) => {
         if (pkm.types.includes(Synergy.BUG) && pkm.positionY != 0) {
           bugTeam.push(pkm)
         }
       })
-      bugTeam.sort((a,b)=>b.hp - a.hp)
+      bugTeam.sort((a, b) => b.hp - a.hp)
 
-      if(redEffects.includes(Effect.INFESTATION)){
+      if (redEffects.includes(Effect.INFESTATION)) {
         const bug = PokemonFactory.createPokemonFromName(bugTeam[0].name)
         const coord = this.getFirstAvailablePlaceOnBoard(false)
         this.addPokemon(bug, coord.x, coord.y, 1)
-      }
-
-      else if(redEffects.includes(Effect.HORDE)){
+      } else if (redEffects.includes(Effect.HORDE)) {
         for (let i = 0; i < 2; i++) {
           const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
           const coord = this.getFirstAvailablePlaceOnBoard(false)
           this.addPokemon(bug, coord.x, coord.y, 1)
         }
-      }
-
-      else if(redEffects.includes(Effect.HEART_OF_THE_SWARM)){
+      } else if (redEffects.includes(Effect.HEART_OF_THE_SWARM)) {
         for (let i = 0; i < 4; i++) {
           const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
           const coord = this.getFirstAvailablePlaceOnBoard(false)
@@ -145,7 +157,11 @@ export default class Simulation extends Schema implements ISimulation{
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
     // pokemonEntity.triggerSleep(5000);
     this.applyItemsEffects(pokemonEntity)
-    this.board.setValue(pokemonEntity.positionX, pokemonEntity.positionY, pokemonEntity)
+    this.board.setValue(
+      pokemonEntity.positionX,
+      pokemonEntity.positionY,
+      pokemonEntity
+    )
 
     if (team == 0) {
       this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects)
@@ -167,21 +183,20 @@ export default class Simulation extends Schema implements ISimulation{
   }
 
   getPath(pokemon: IPokemonEntity) {
-    let pokemonPath = ''
+    let pokemonPath = ""
     const index = pokemon.index
-    pokemonPath += index + '/'
+    pokemonPath += index + "/"
 
-    if(pokemon.shiny){
-        pokemonPath += '0000/0001/'
+    if (pokemon.shiny) {
+      pokemonPath += "0000/0001/"
     }
     pokemonPath += pokemon.emotion
     return pokemonPath
-}
+  }
 
-
-  addPokemonEntity(p: PokemonEntity, x: number, y:number, team: number) {
+  addPokemonEntity(p: PokemonEntity, x: number, y: number, team: number) {
     const pokemon = PokemonFactory.createPokemonFromName(p.name)
-    p.items.forEach(i=>{
+    p.items.forEach((i) => {
       pokemon.items.add(i)
     })
     return this.addPokemon(pokemon, x, y, team)
@@ -191,8 +206,7 @@ export default class Simulation extends Schema implements ISimulation{
     let row = 0
     let column = 0
     if (ascending) {
-      outerloop:
-      for (let x = 0; x < this.board.rows; x++) {
+      outerloop: for (let x = 0; x < this.board.rows; x++) {
         for (let y = 0; y < this.board.columns; y++) {
           if (this.board.getValue(x, y) === undefined) {
             row = x
@@ -202,8 +216,7 @@ export default class Simulation extends Schema implements ISimulation{
         }
       }
     } else {
-      outerloop:
-      for (let x = 0; x < this.board.rows; x++) {
+      outerloop: for (let x = 0; x < this.board.rows; x++) {
         for (let y = this.board.columns - 1; y >= 0; y--) {
           if (this.board.getValue(x, y) === undefined) {
             row = x
@@ -213,7 +226,7 @@ export default class Simulation extends Schema implements ISimulation{
         }
       }
     }
-    return {x: row, y: column}
+    return { x: row, y: column }
   }
 
   applyItemsEffects(pokemon: PokemonEntity) {
@@ -249,7 +262,7 @@ export default class Simulation extends Schema implements ISimulation{
     }
     if (pokemon.items.has(Item.WONDER_BOX)) {
       pokemon.items.delete(Item.WONDER_BOX)
-      for (let i = 0; i <2; i++) {
+      for (let i = 0; i < 2; i++) {
         if (pokemon.items.size < 3) {
           pokemon.items.add(ItemFactory.createRandomItem())
         }
@@ -301,41 +314,71 @@ export default class Simulation extends Schema implements ISimulation{
   }
 
   applyPostEffects() {
-
-    const blueIronDefense = Array.from(this.blueTeam.values()).filter(p=>p.effects.includes(Effect.IRON_DEFENSE))
-    if(blueIronDefense.length > 0){
-      blueIronDefense.forEach(pokemon=>{pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.IRON_DEFENSE), 1)})
-      const blueIronDefensePkm = blueIronDefense[Math.floor(Math.random()*blueIronDefense.length)]
+    const blueIronDefense = Array.from(this.blueTeam.values()).filter((p) =>
+      p.effects.includes(Effect.IRON_DEFENSE)
+    )
+    if (blueIronDefense.length > 0) {
+      blueIronDefense.forEach((pokemon) => {
+        pokemon.effects.splice(
+          pokemon.effects.findIndex((e) => e === Effect.IRON_DEFENSE),
+          1
+        )
+      })
+      const blueIronDefensePkm =
+        blueIronDefense[Math.floor(Math.random() * blueIronDefense.length)]
       blueIronDefensePkm.atk = blueIronDefensePkm.atk * 2
       blueIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
     }
 
-    const redIronDefense = Array.from(this.redTeam.values()).filter(p=>p.effects.includes(Effect.IRON_DEFENSE))
-    if(redIronDefense.length > 0){
-      redIronDefense.forEach(pokemon=>{pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.IRON_DEFENSE), 1)})
-      const redIronDefensePkm = redIronDefense[Math.floor(Math.random()*redIronDefense.length)]
+    const redIronDefense = Array.from(this.redTeam.values()).filter((p) =>
+      p.effects.includes(Effect.IRON_DEFENSE)
+    )
+    if (redIronDefense.length > 0) {
+      redIronDefense.forEach((pokemon) => {
+        pokemon.effects.splice(
+          pokemon.effects.findIndex((e) => e === Effect.IRON_DEFENSE),
+          1
+        )
+      })
+      const redIronDefensePkm =
+        redIronDefense[Math.floor(Math.random() * redIronDefense.length)]
       redIronDefensePkm.atk = redIronDefensePkm.atk * 2
       redIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
     }
 
-    const bluePhantomForce = Array.from(this.blueTeam.values()).filter(p=>p.effects.includes(Effect.PHANTOM_FORCE))
-    if(bluePhantomForce.length > 0){
-      bluePhantomForce.forEach(pokemon=>{pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.PHANTOM_FORCE), 1)})
-      const bluePhantomForcePkm = bluePhantomForce[Math.floor(Math.random()*bluePhantomForce.length)]
+    const bluePhantomForce = Array.from(this.blueTeam.values()).filter((p) =>
+      p.effects.includes(Effect.PHANTOM_FORCE)
+    )
+    if (bluePhantomForce.length > 0) {
+      bluePhantomForce.forEach((pokemon) => {
+        pokemon.effects.splice(
+          pokemon.effects.findIndex((e) => e === Effect.PHANTOM_FORCE),
+          1
+        )
+      })
+      const bluePhantomForcePkm =
+        bluePhantomForce[Math.floor(Math.random() * bluePhantomForce.length)]
       bluePhantomForcePkm.attackType = AttackType.TRUE
       bluePhantomForcePkm.effects.push(Effect.PHANTOM_FORCE)
     }
 
-    const redPhantomForce = Array.from(this.redTeam.values()).filter(p=>p.effects.includes(Effect.PHANTOM_FORCE))
-    if(redPhantomForce.length > 0){
-      redPhantomForce.forEach(pokemon=>{pokemon.effects.splice(pokemon.effects.findIndex((e) => e === Effect.PHANTOM_FORCE), 1)})
-      const redPhantomForcePkm = redPhantomForce[Math.floor(Math.random()*redPhantomForce.length)]
+    const redPhantomForce = Array.from(this.redTeam.values()).filter((p) =>
+      p.effects.includes(Effect.PHANTOM_FORCE)
+    )
+    if (redPhantomForce.length > 0) {
+      redPhantomForce.forEach((pokemon) => {
+        pokemon.effects.splice(
+          pokemon.effects.findIndex((e) => e === Effect.PHANTOM_FORCE),
+          1
+        )
+      })
+      const redPhantomForcePkm =
+        redPhantomForce[Math.floor(Math.random() * redPhantomForce.length)]
       redPhantomForcePkm.attackType = AttackType.TRUE
       redPhantomForcePkm.effects.push(Effect.PHANTOM_FORCE)
     }
 
-
-    this.blueTeam.forEach((pokemon) =>{
+    this.blueTeam.forEach((pokemon) => {
       if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
         pokemon.atk = pokemon.atk * 2
       }
@@ -351,7 +394,10 @@ export default class Simulation extends Schema implements ISimulation{
       }
       if (shieldBonus >= 0) {
         pokemon.handleShield(shieldBonus, pokemon)
-        const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+        const cells = this.board.getAdjacentCells(
+          pokemon.positionX,
+          pokemon.positionY
+        )
 
         cells.forEach((cell) => {
           if (cell.value && pokemon.team == cell.value.team) {
@@ -360,40 +406,58 @@ export default class Simulation extends Schema implements ISimulation{
         })
       }
       if (pokemon.items.has(Item.LUCKY_EGG)) {
-        [-2, -1, 0, 1, 2].forEach( (offset)=>{
-          const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY)
+        [-2, -1, 0, 1, 2].forEach((offset) => {
+          const value = this.board.getValue(
+            pokemon.positionX + offset,
+            pokemon.positionY
+          )
           if (value) {
             value.handleShield(30, value)
           }
         })
       }
       if (pokemon.items.has(Item.DELTA_ORB)) {
-        [-1, 0, 1].forEach( (offset)=>{
-          const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY)
+        [-1, 0, 1].forEach((offset) => {
+          const value = this.board.getValue(
+            pokemon.positionX + offset,
+            pokemon.positionY
+          )
           if (value) {
             value.addSpellDamage(30)
           }
         })
       }
       if (pokemon.items.has(Item.RUNE_PROTECT)) {
-        const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-        pokemon.status.triggerRuneProtect()
+        const cells = this.board.getAdjacentCells(
+          pokemon.positionX,
+          pokemon.positionY
+        )
+        pokemon.status.triggerRuneProtect(8000)
         cells.forEach((cell) => {
           if (cell.value && pokemon.team == cell.value.team) {
-            cell.value.status.triggerRuneProtect()
+            cell.value.status.triggerRuneProtect(8000)
           }
         })
       }
       if (pokemon.items.has(Item.SHINY_CHARM)) {
-        this.board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-          if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
-            value.status.triggerSleep(3000, value)
+        this.board.forEach(
+          (x: number, y: number, value: PokemonEntity | undefined) => {
+            if (
+              value &&
+              pokemon.team != value.team &&
+              value.positionX == pokemon.positionX
+            ) {
+              value.status.triggerSleep(3000, value)
+            }
           }
-        })
+        )
       }
       if (pokemon.items.has(Item.FOCUS_BAND)) {
-        [-1, 0, 1].forEach( (offset)=>{
-          const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY)
+        [-1, 0, 1].forEach((offset) => {
+          const value = this.board.getValue(
+            pokemon.positionX + offset,
+            pokemon.positionY
+          )
           if (value) {
             value.handleAttackSpeed(30)
           }
@@ -401,7 +465,7 @@ export default class Simulation extends Schema implements ISimulation{
       }
     })
 
-    this.redTeam.forEach((pokemon) =>{
+    this.redTeam.forEach((pokemon) => {
       if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
         pokemon.atk = pokemon.atk * 2
       }
@@ -417,7 +481,10 @@ export default class Simulation extends Schema implements ISimulation{
       }
       if (shieldBonus >= 0) {
         pokemon.handleShield(shieldBonus, pokemon)
-        const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+        const cells = this.board.getAdjacentCells(
+          pokemon.positionX,
+          pokemon.positionY
+        )
 
         cells.forEach((cell) => {
           if (cell.value && pokemon.team == cell.value.team) {
@@ -426,40 +493,58 @@ export default class Simulation extends Schema implements ISimulation{
         })
       }
       if (pokemon.items.has(Item.LUCKY_EGG)) {
-        [-2, -1, 0, 1, 2].forEach( (offset)=>{
-          const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY)
+        [-2, -1, 0, 1, 2].forEach((offset) => {
+          const value = this.board.getValue(
+            pokemon.positionX + offset,
+            pokemon.positionY
+          )
           if (value) {
             value.handleShield(30, value)
           }
         })
       }
       if (pokemon.items.has(Item.DELTA_ORB)) {
-        [-2, -1, 0, 1, 2].forEach( (offset)=>{
-          const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY)
+        [-2, -1, 0, 1, 2].forEach((offset) => {
+          const value = this.board.getValue(
+            pokemon.positionX + offset,
+            pokemon.positionY
+          )
           if (value) {
             value.addSpellDamage(30)
           }
         })
       }
       if (pokemon.items.has(Item.RUNE_PROTECT)) {
-        const cells = this.board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-        pokemon.status.triggerRuneProtect()
+        const cells = this.board.getAdjacentCells(
+          pokemon.positionX,
+          pokemon.positionY
+        )
+        pokemon.status.triggerRuneProtect(8000)
         cells.forEach((cell) => {
           if (cell.value && pokemon.team == cell.value.team) {
-            cell.value.status.triggerRuneProtect()
+            cell.value.status.triggerRuneProtect(8000)
           }
         })
       }
       if (pokemon.items.has(Item.SHINY_CHARM)) {
-        this.board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-          if (value && pokemon.team != value.team && value.positionX == pokemon.positionX) {
-            value.status.triggerSleep(3000, value)
+        this.board.forEach(
+          (x: number, y: number, value: PokemonEntity | undefined) => {
+            if (
+              value &&
+              pokemon.team != value.team &&
+              value.positionX == pokemon.positionX
+            ) {
+              value.status.triggerSleep(3000, value)
+            }
           }
-        })
+        )
       }
       if (pokemon.items.has(Item.FOCUS_BAND)) {
-        [-1, 0, 1].forEach( (offset)=>{
-          const value = this.board.getValue(pokemon.positionX + offset, pokemon.positionY)
+        [-1, 0, 1].forEach((offset) => {
+          const value = this.board.getValue(
+            pokemon.positionX + offset,
+            pokemon.positionY
+          )
           if (value) {
             value.handleAttackSpeed(30)
           }
@@ -470,39 +555,39 @@ export default class Simulation extends Schema implements ISimulation{
     let isTapuKoko = false
     let isTapuLele = false
 
-    this.blueTeam.forEach((pokemon)=>{
-        if(pokemon.name == Pkm.TAPU_KOKO){
-            isTapuKoko = true
-        }
-        if(pokemon.name == Pkm.TAPU_LELE){
-            isTapuLele = true
-        }
+    this.blueTeam.forEach((pokemon) => {
+      if (pokemon.name == Pkm.TAPU_KOKO) {
+        isTapuKoko = true
+      }
+      if (pokemon.name == Pkm.TAPU_LELE) {
+        isTapuLele = true
+      }
     })
-    this.redTeam.forEach((pokemon)=>{
-        if(pokemon.name == Pkm.TAPU_KOKO){
-            isTapuKoko = true
-        }
-        if(pokemon.name == Pkm.TAPU_LELE){
-            isTapuLele = true
-        }
-    })
-
-    this.blueTeam.forEach((pokemon)=>{
-        if(isTapuKoko && pokemon.types.includes(Synergy.ELECTRIC)){
-            pokemon.status.electricField = true
-        }
-        if(isTapuLele && pokemon.types.includes(Synergy.PSYCHIC)){
-            pokemon.status.psychicField = true
-        }
+    this.redTeam.forEach((pokemon) => {
+      if (pokemon.name == Pkm.TAPU_KOKO) {
+        isTapuKoko = true
+      }
+      if (pokemon.name == Pkm.TAPU_LELE) {
+        isTapuLele = true
+      }
     })
 
-    this.redTeam.forEach((pokemon)=>{
-        if(isTapuKoko && pokemon.types.includes(Synergy.ELECTRIC)){
-            pokemon.status.electricField = true
-        }
-        if(isTapuLele && pokemon.types.includes(Synergy.PSYCHIC)){
-            pokemon.status.psychicField = true
-        }
+    this.blueTeam.forEach((pokemon) => {
+      if (isTapuKoko && pokemon.types.includes(Synergy.ELECTRIC)) {
+        pokemon.status.electricField = true
+      }
+      if (isTapuLele && pokemon.types.includes(Synergy.PSYCHIC)) {
+        pokemon.status.psychicField = true
+      }
+    })
+
+    this.redTeam.forEach((pokemon) => {
+      if (isTapuKoko && pokemon.types.includes(Synergy.ELECTRIC)) {
+        pokemon.status.electricField = true
+      }
+      if (isTapuLele && pokemon.types.includes(Synergy.PSYCHIC)) {
+        pokemon.status.psychicField = true
+      }
     })
   }
 
@@ -615,7 +700,7 @@ export default class Simulation extends Schema implements ISimulation{
 
         case Effect.PRIMORDIAL_SEA:
           if (types.includes(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.70)
+            pokemon.addDodgeChance(0.7)
             pokemon.effects.push(Effect.PRIMORDIAL_SEA)
           }
           break
@@ -949,25 +1034,46 @@ export default class Simulation extends Schema implements ISimulation{
 
   getClimate() {
     let climate = Climate.NEUTRAL
-    if (this.blueEffects.includes(Effect.SNOW) || this.redEffects.includes(Effect.SNOW)) {
+    if (
+      this.blueEffects.includes(Effect.SNOW) ||
+      this.redEffects.includes(Effect.SNOW)
+    ) {
       climate = Climate.SNOW
     }
-    if (this.blueEffects.includes(Effect.DRIZZLE) || this.redEffects.includes(Effect.DRIZZLE)) {
+    if (
+      this.blueEffects.includes(Effect.DRIZZLE) ||
+      this.redEffects.includes(Effect.DRIZZLE)
+    ) {
       climate = Climate.RAIN
     }
-    if (this.blueEffects.includes(Effect.SHEER_COLD) || this.redEffects.includes(Effect.SHEER_COLD)) {
+    if (
+      this.blueEffects.includes(Effect.SHEER_COLD) ||
+      this.redEffects.includes(Effect.SHEER_COLD)
+    ) {
       climate = Climate.SNOW
     }
-    if (this.blueEffects.includes(Effect.RAIN_DANCE) || this.redEffects.includes(Effect.RAIN_DANCE)) {
+    if (
+      this.blueEffects.includes(Effect.RAIN_DANCE) ||
+      this.redEffects.includes(Effect.RAIN_DANCE)
+    ) {
       climate = Climate.RAIN
     }
-    if (this.blueEffects.includes(Effect.SANDSTORM) || this.redEffects.includes(Effect.SANDSTORM)) {
+    if (
+      this.blueEffects.includes(Effect.SANDSTORM) ||
+      this.redEffects.includes(Effect.SANDSTORM)
+    ) {
       climate = Climate.SANDSTORM
     }
-    if (this.blueEffects.includes(Effect.DROUGHT) || this.redEffects.includes(Effect.DROUGHT)) {
+    if (
+      this.blueEffects.includes(Effect.DROUGHT) ||
+      this.redEffects.includes(Effect.DROUGHT)
+    ) {
       climate = Climate.SUN
     }
-    if (this.blueEffects.includes(Effect.PRIMORDIAL_SEA) || this.redEffects.includes(Effect.PRIMORDIAL_SEA)) {
+    if (
+      this.blueEffects.includes(Effect.PRIMORDIAL_SEA) ||
+      this.redEffects.includes(Effect.PRIMORDIAL_SEA)
+    ) {
       climate = Climate.RAIN
     }
     return climate
@@ -976,13 +1082,12 @@ export default class Simulation extends Schema implements ISimulation{
   update(dt: number) {
     if (this.blueTeam.size == 0 || this.redTeam.size == 0) {
       this.finished = true
-      if(this.blueTeam.size == 0){
-        this.redTeam.forEach(p=>{
+      if (this.blueTeam.size == 0) {
+        this.redTeam.forEach((p) => {
           p.action = PokemonActionState.HOP
         })
-      }
-      else{
-        this.blueTeam.forEach(p=>{
+      } else {
+        this.blueTeam.forEach((p) => {
           p.action = PokemonActionState.HOP
         })
       }
@@ -996,11 +1101,12 @@ export default class Simulation extends Schema implements ISimulation{
         this.blueTeam.delete(key)
       } else {
         pkm.update(dt, this.board, this.climate)
-        this.blueDpsMeter.get(key)?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
+        this.blueDpsMeter
+          .get(key)
+          ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
         this.blueHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
       }
     })
-
 
     this.redTeam.forEach((pkm, key) => {
       if (!pkm.life) {
@@ -1010,7 +1116,9 @@ export default class Simulation extends Schema implements ISimulation{
         this.redTeam.delete(key)
       } else {
         pkm.update(dt, this.board, this.climate)
-        this.redDpsMeter.get(key)?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
+        this.redDpsMeter
+          .get(key)
+          ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
         this.redHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
       }
     })

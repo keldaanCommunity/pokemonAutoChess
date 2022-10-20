@@ -1,61 +1,60 @@
-import { Item } from '../types/enum/Item'
-import { Orientation, PokemonActionState } from '../types/enum/Game'
-import MovingState from './moving-state'
-import AttackingState from './attacking-state'
-import uniqid from 'uniqid'
-import Status from '../models/colyseus-models/status'
-import Count from '../models/colyseus-models/count'
-import Simulation from './simulation'
-import {Schema, type, ArraySchema, SetSchema} from '@colyseus/schema'
-import {AttackStrategy} from './attack-strategy'
-import Board from './board'
-import PokemonState from './pokemon-state'
-import { IPokemonEntity, IPokemon, Emotion, AttackSprite } from '../types'
-import { AttackType, Rarity } from '../types/enum/Game'
-import { Effect } from '../types/enum/Effect'
-import { Ability, AbilityStrategy } from '../types/enum/Ability'
-import { Synergy } from '../types/enum/Synergy'
-import { Pkm } from '../types/enum/Pokemon'
+import { Item } from "../types/enum/Item"
+import { Orientation, PokemonActionState } from "../types/enum/Game"
+import MovingState from "./moving-state"
+import AttackingState from "./attacking-state"
+import uniqid from "uniqid"
+import Status from "../models/colyseus-models/status"
+import Count from "../models/colyseus-models/count"
+import Simulation from "./simulation"
+import { Schema, type, ArraySchema, SetSchema } from "@colyseus/schema"
+import { AttackStrategy } from "./attack-strategy"
+import Board from "./board"
+import PokemonState from "./pokemon-state"
+import { IPokemonEntity, IPokemon, Emotion, AttackSprite } from "../types"
+import { AttackType, Rarity } from "../types/enum/Game"
+import { Effect } from "../types/enum/Effect"
+import { Ability, AbilityStrategy } from "../types/enum/Ability"
+import { Synergy } from "../types/enum/Synergy"
+import { Pkm } from "../types/enum/Pokemon"
 
-export default class PokemonEntity extends Schema implements IPokemonEntity{
-
-  @type('boolean') shiny: boolean
-  @type('uint8') positionX: number
-  @type('uint8') positionY: number
-  @type('string') action = PokemonActionState.WALK
-  @type('string') index: string
-  @type('string') id: string
-  @type('string') orientation = Orientation.DOWNLEFT
-  @type('uint8') critChance = 10
-  @type('uint16') hp: number
-  @type('uint8') mana = 0
-  @type('uint8') maxMana: number
-  @type('uint16') atk: number
-  @type('uint16') def: number
-  @type('uint16') speDef: number
-  @type('uint8') attackType: AttackType
-  @type('uint16') life: number
-  @type('uint16') shield = 0
-  @type('uint8') team: number
-  @type('uint8') range: number
-  @type('float32') atkSpeed: number
-  @type('uint8') atkSpeedBonus = 0
-  @type('int8') targetX = -1
-  @type('int8') targetY = -1
-  @type('string') attackSprite: AttackSprite
-  @type('string') rarity: Rarity
-  @type('string') name: Pkm
-  @type(['uint8']) effects = new ArraySchema<Effect>()
-  @type({set: 'string'}) items = new SetSchema<Item>()
-  @type(['string']) types = new ArraySchema<Synergy>()
-  @type('uint8') stars: number
-  @type('string')  skill: Ability
+export default class PokemonEntity extends Schema implements IPokemonEntity {
+  @type("boolean") shiny: boolean
+  @type("uint8") positionX: number
+  @type("uint8") positionY: number
+  @type("string") action = PokemonActionState.WALK
+  @type("string") index: string
+  @type("string") id: string
+  @type("string") orientation = Orientation.DOWNLEFT
+  @type("uint8") critChance = 10
+  @type("uint16") hp: number
+  @type("uint8") mana = 0
+  @type("uint8") maxMana: number
+  @type("uint16") atk: number
+  @type("uint16") def: number
+  @type("uint16") speDef: number
+  @type("uint8") attackType: AttackType
+  @type("uint16") life: number
+  @type("uint16") shield = 0
+  @type("uint8") team: number
+  @type("uint8") range: number
+  @type("float32") atkSpeed: number
+  @type("uint8") atkSpeedBonus = 0
+  @type("int8") targetX = -1
+  @type("int8") targetY = -1
+  @type("string") attackSprite: AttackSprite
+  @type("string") rarity: Rarity
+  @type("string") name: Pkm
+  @type(["uint8"]) effects = new ArraySchema<Effect>()
+  @type({ set: "string" }) items = new SetSchema<Item>()
+  @type(["string"]) types = new ArraySchema<Synergy>()
+  @type("uint8") stars: number
+  @type("string") skill: Ability
   @type(Status) status: Status
   @type(Count) count: Count
-  @type('float32') critDamage = 2
-  @type('uint8') spellDamage = 0
-  @type('uint16') healDone: number
-  @type('string') emotion: Emotion
+  @type("float32") critDamage = 2
+  @type("uint8") spellDamage = 0
+  @type("uint16") healDone: number
+  @type("string") emotion: Emotion
   cooldown = 500
   manaCooldown = 1000
   state: MovingState
@@ -73,7 +72,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
   growGroundTimer = 0
   echo = 0
 
-  constructor(pokemon: IPokemon, positionX: number, positionY: number, team: number, simulation: Simulation) {
+  constructor(
+    pokemon: IPokemon,
+    positionX: number,
+    positionY: number,
+    team: number,
+    simulation: Simulation
+  ) {
     super()
 
     this.state = new MovingState()
@@ -87,7 +92,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
     this.simulation = simulation
     this.strategy = AbilityStrategy[pokemon.skill]
 
-    this.id= uniqid()
+    this.id = uniqid()
     this.rarity = pokemon.rarity
     this.positionX = positionX
     this.positionY = positionY
@@ -139,33 +144,60 @@ export default class PokemonEntity extends Schema implements IPokemonEntity{
 
   handleAttackSpeed(buff: number) {
     this.atkSpeedBonus = this.atkSpeedBonus + buff
-    this.atkSpeed = Number(Math.min(2.5, Math.max(0.2, 0.75 * (1 + this.atkSpeedBonus / 100))).toFixed(2))
+    this.atkSpeed = Number(
+      Math.min(
+        2.5,
+        Math.max(0.2, 0.75 * (1 + this.atkSpeedBonus / 100))
+      ).toFixed(2)
+    )
   }
 
-  handleDamage(damage: number, board: Board, attackType: AttackType, attacker: PokemonEntity) {
+  handleDamage(
+    damage: number,
+    board: Board,
+    attackType: AttackType,
+    attacker: PokemonEntity
+  ) {
     return this.state.handleDamage(this, damage, board, attackType, attacker)
   }
 
-  handleSpellDamage(damage: number, board: Board, attackType: AttackType, attacker: PokemonEntity) {
-    let spellDamage = damage + damage * attacker.spellDamage / 100
-    if (attacker && attacker.items.has(Item.REAPER_CLOTH) &&  Math.random() > 0.8) {
-      spellDamage *= 2
-      this.count.crit ++
-    }
-    if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
-      this.status.triggerBurn(2000, this, attacker)
-      this.status.triggerWound(2000)
-    }
-    if (attacker && attacker.items.has(Item.SHELL_BELL)) {
-      attacker.handleHeal(0.4 * damage, attacker)
-    }
+  handleSpellDamage(
+    damage: number,
+    board: Board,
+    attackType: AttackType,
+    attacker: PokemonEntity
+  ) {
     if (this.status.runeProtect) {
-      this.status.disableRuneProtect()
       return
-    } else {
-      return this.state.handleDamage(this, spellDamage, board, attackType, attacker)
     }
-  }
+    else{
+        let spellDamage = damage + (damage * attacker.spellDamage) / 100
+        if (
+          attacker &&
+          attacker.items.has(Item.REAPER_CLOTH) &&
+          Math.random() > 0.8
+        ) {
+          spellDamage *= 2
+          this.count.crit++
+        }
+        if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
+          this.status.triggerBurn(2000, this, attacker)
+          this.status.triggerWound(2000)
+        }
+        if (attacker && attacker.items.has(Item.SHELL_BELL)) {
+          attacker.handleHeal(0.4 * damage, attacker)
+        } else {
+          return this.state.handleDamage(
+            this,
+            spellDamage,
+            board,
+            attackType,
+            attacker
+          )
+        }
+      }
+    }
+
 
   handleHeal(heal: number, caster: IPokemonEntity) {
     return this.state.handleHeal(this, heal, caster)

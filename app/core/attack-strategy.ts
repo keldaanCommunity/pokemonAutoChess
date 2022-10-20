@@ -1,13 +1,13 @@
-import { Item } from '../types/enum/Item'
-import { Effect } from '../types/enum/Effect'
-import { AttackType } from '../types/enum/Game'
-import Board from './board'
-import PokemonEntity from './pokemon-entity'
-import PokemonState from './pokemon-state'
-import { Synergy } from '../types/enum/Synergy'
-import { Ability, AbilityStrategy } from '../types/enum/Ability'
-import PokemonFactory from '../models/pokemon-factory'
-import {Pkm} from '../types/enum/Pokemon'
+import { Item } from "../types/enum/Item"
+import { Effect } from "../types/enum/Effect"
+import { AttackType } from "../types/enum/Game"
+import Board from "./board"
+import PokemonEntity from "./pokemon-entity"
+import PokemonState from "./pokemon-state"
+import { Synergy } from "../types/enum/Synergy"
+import { Ability, AbilityStrategy } from "../types/enum/Ability"
+import PokemonFactory from "../models/pokemon-factory"
+import { Pkm } from "../types/enum/Pokemon"
 
 export class AttackStrategy {
   process(
@@ -63,96 +63,80 @@ export class AttackStrategy {
 }
 
 export class BlueFlareStrategy extends AttackStrategy {
-    process(
-      pokemon: PokemonEntity,
-      state: PokemonState,
-      board: Board,
-      target: PokemonEntity
-    ) {
-      super.process(pokemon, state, board, target)
-        let damage = 50
-        let multiplier = 0
-        if(pokemon.effects.includes(Effect.BLAZE)){
-            multiplier = 1
-        }
-        else if(pokemon.effects.includes(Effect.VICTORY_STAR)){
-            multiplier = 2
-        }
-        else if(pokemon.effects.includes(Effect.DROUGHT)){
-            multiplier = 3
-        }
-        else if(pokemon.effects.includes(Effect.DESOLATE_LAND)){
-            multiplier = 4
-        }
-        damage += multiplier * 50
-
-        const cells = board.getAdjacentCells(target.positionX, target.positionY)
-
-        cells.forEach((cell) => {
-          if (cell.value && cell.value.team !== pokemon.team) {
-            cell.value.handleSpellDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon
-            )
-          }
-        })
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 50
+    let multiplier = 0
+    if (pokemon.effects.includes(Effect.BLAZE)) {
+      multiplier = 1
+    } else if (pokemon.effects.includes(Effect.VICTORY_STAR)) {
+      multiplier = 2
+    } else if (pokemon.effects.includes(Effect.DROUGHT)) {
+      multiplier = 3
+    } else if (pokemon.effects.includes(Effect.DESOLATE_LAND)) {
+      multiplier = 4
     }
+    damage += multiplier * 50
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+      }
+    })
   }
+}
 
-  export class FusionBoltStrategy extends AttackStrategy {
-    process(
-      pokemon: PokemonEntity,
-      state: PokemonState,
-      board: Board,
-      target: PokemonEntity
-    ) {
-        super.process(pokemon, state, board, target)
-        let damage = 50
-        let multiplier = 0
-        if(pokemon.effects.includes(Effect.EERIE_IMPULSE)){
-            multiplier = 1
-        }
-        else if(pokemon.effects.includes(Effect.RISING_VOLTAGE)){
-            multiplier = 2
-        }
-        else if(pokemon.effects.includes(Effect.OVERDRIVE)){
-            multiplier = 3
-        }
-        damage += multiplier * 60
-
-        const cells = board.getAdjacentCells(target.positionX, target.positionY)
-
-        cells.forEach((cell) => {
-          if (cell.value && cell.value.team !== pokemon.team) {
-            cell.value.handleSpellDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon
-            )
-          }
-        })
+export class FusionBoltStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 50
+    let multiplier = 0
+    if (pokemon.effects.includes(Effect.EERIE_IMPULSE)) {
+      multiplier = 1
+    } else if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
+      multiplier = 2
+    } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
+      multiplier = 3
     }
+    damage += multiplier * 60
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+      }
+    })
   }
+}
 
 export class BeatUpStrategy extends AttackStrategy {
-    process(
-      pokemon: PokemonEntity,
-      state: PokemonState,
-      board: Board,
-      target: PokemonEntity
-    ) {
-      super.process(pokemon, state, board, target)
-        for (let i=0; i<pokemon.stars; i++){
-            const houndour = PokemonFactory.createPokemonFromName(Pkm.HOUNDOUR)
-            const coord = pokemon.simulation.getFirstAvailablePlaceOnBoard(true)
-            pokemon.simulation.addPokemon(houndour, coord.x, coord.y, pokemon.team)
-        }
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    for (let i = 0; i < pokemon.stars; i++) {
+      const houndour = PokemonFactory.createPokemonFromName(Pkm.HOUNDOUR)
+      const coord = pokemon.simulation.getFirstAvailablePlaceOnBoard(true)
+      pokemon.simulation.addPokemon(houndour, coord.x, coord.y, pokemon.team)
     }
   }
-
+}
 
 export class PaydayStrategy extends AttackStrategy {
   process(
@@ -275,12 +259,7 @@ export class ConfusingMindStrategy extends AttackStrategy {
     }
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpellDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon
-        )
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
         cell.value.status.triggerConfusion(confusion * 1000, cell.value)
       }
     })
@@ -295,8 +274,8 @@ export class KnowledgeThiefStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    if(target.skill !== Ability.KNOWLEDGE_THIEF){
-        AbilityStrategy[target.skill].process(pokemon, state, board, target)
+    if (target.skill !== Ability.KNOWLEDGE_THIEF) {
+      AbilityStrategy[target.skill].process(pokemon, state, board, target)
     }
   }
 }
@@ -472,7 +451,23 @@ export class ElectroBoostStrategy extends AttackStrategy {
         pokemon.team == tg.team &&
         tg.types.includes(Synergy.ELECTRIC)
       ) {
-        tg.status.triggerRuneProtect()
+        tg.status.triggerRuneProtect(5000)
+      }
+    })
+  }
+}
+
+export class NaturalBlessingStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    board.forEach((x, y, tg) => {
+      if (tg && pokemon.team == tg.team) {
+        tg.status.triggerRuneProtect(7000)
       }
     })
   }
@@ -692,7 +687,7 @@ export class TwistingNeitherStrategy extends AttackStrategy {
           cell.value.positionX = teleportationCell.row
           cell.value.positionY = teleportationCell.column
         } else {
-          console.log('ERROR: unable to teleport pokemon')
+          console.log("ERROR: unable to teleport pokemon")
         }
       }
     })
@@ -1855,12 +1850,7 @@ export class WheelOfFireStrategy extends AttackStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && cell.value != pokemon) {
-        cell.value.handleSpellDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon
-        )
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
     })
   }
@@ -1904,12 +1894,7 @@ export class HeatWaveStrategy extends AttackStrategy {
       )
     }
     if (thirdTarget && thirdTarget != pokemon) {
-      thirdTarget.handleSpellDamage(
-        damage,
-        board,
-        AttackType.PHYSICAL,
-        pokemon
-      )
+      thirdTarget.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
     }
   }
 }
@@ -1943,12 +1928,7 @@ export class HydroPumpStrategy extends AttackStrategy {
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
     const secondTarget = board.getValue(target.positionX, target.positionY + 1)
     if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleSpellDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon
-      )
+      secondTarget.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
     }
   }
 }
@@ -2229,12 +2209,7 @@ export class BlastBurnStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpellDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon
-        )
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
     })
   }
@@ -2311,12 +2286,7 @@ export class DischargeStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpellDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon
-        )
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
     })
   }
@@ -2451,12 +2421,7 @@ export class IcicleCrashStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpellDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon
-        )
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
     })
   }
@@ -2717,12 +2682,7 @@ export class LeechLifeStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpellDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon
-        )
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
         pokemon.handleHeal(damage, pokemon)
       }
     })
@@ -2776,12 +2736,12 @@ export class TeleportStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     pokemon.atk += pokemon.stars
-    
+
     const potentialCells = [
       [0, 0],
       [0, 5],
       [7, 5],
-      [7, 0],
+      [7, 0]
     ]
     this.shuffleArray(potentialCells)
 
@@ -2803,8 +2763,8 @@ export class TeleportStrategy extends AttackStrategy {
 
   shuffleArray(array: any[]) {
     for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]]
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[array[i], array[j]] = [array[j], array[i]]
     }
   }
 }
@@ -2962,12 +2922,7 @@ export class MeteorMashStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpellDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon
-        )
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
     })
   }
@@ -3002,12 +2957,7 @@ export class HurricaneStrategy extends AttackStrategy {
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
     const secondTarget = board.getValue(target.positionX, target.positionY + 1)
     if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleSpellDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon
-      )
+      secondTarget.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
     }
   }
 }
@@ -3110,6 +3060,7 @@ export class MetronomeStrategy extends AttackStrategy {
       SongOfDesireStrategy,
       MindBlownStrategy,
       PaydayStrategy,
+      NaturalBlessingStrategy
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)

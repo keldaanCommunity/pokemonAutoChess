@@ -1,10 +1,10 @@
-import {Pkm} from '../app/types/enum/Pokemon'
-import PokemonFactory from '../app/models/pokemon-factory'
-import fs from 'fs'
-import { Ability } from '../app/types/enum/Ability'
-import {Synergy} from '../app/types/enum/Synergy'
-import { Rarity } from '../app/types/enum/Game'
-import { Pokemon } from '../app/models/colyseus-models/pokemon'
+import { Pkm } from "../app/types/enum/Pokemon"
+import PokemonFactory from "../app/models/pokemon-factory"
+import fs from "fs"
+import { Ability } from "../app/types/enum/Ability"
+import { Synergy } from "../app/types/enum/Synergy"
+import { Rarity } from "../app/types/enum/Game"
+import { Pokemon } from "../app/models/colyseus-models/pokemon"
 
 const data = {
   [Rarity.COMMON]: [],
@@ -28,7 +28,7 @@ const colyseusData = {
   [Rarity.SUMMON]: []
 }
 
-Object.keys(Rarity).forEach((rarity)=>{
+Object.keys(Rarity).forEach((rarity) => {
   const pokemonCandidates = new Array<Pokemon>()
   const names = new Array<string>()
 
@@ -43,7 +43,9 @@ Object.keys(Rarity).forEach((rarity)=>{
   data[rarity] = names
 })
 
-
 console.log(data)
 
-fs.writeFileSync('../app/models/precomputed/type-rarity-all.json', JSON.stringify(data))
+fs.writeFileSync(
+  "../app/models/precomputed/type-rarity-all.json",
+  JSON.stringify(data)
+)
