@@ -227,7 +227,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
           this.room.broadcast(Transfer.MESSAGES, {
             name: "Server",
             payload: "Error: No bots found",
-            avatar: "magnemite",
+            avatar: `0081/${Emotion.NORMAL}`,
             time: Date.now()
           })
           return

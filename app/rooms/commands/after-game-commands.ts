@@ -1,7 +1,7 @@
 import { Command } from "@colyseus/command"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import UserMetadata from "../../models/mongo-models/user-metadata"
-import { Transfer } from "../../types"
+import { Emotion, Transfer } from "../../types"
 
 export class OnJoinCommand extends Command {
   execute({ client, options, auth }) {
@@ -42,8 +42,8 @@ export class OnLeaveCommand extends Command {
   execute({ client, consented }) {
     this.room.broadcast(Transfer.MESSAGES, {
       name: "Server",
-      payload: `${this.state.users.get(client.auth.uid).name} left.`,
-      avatar: "magnemite",
+      payload: `${client.auth.displayName} left.`,
+      avatar: `0081/${Emotion.NORMAL}`,
       time: Date.now()
     })
     this.state.users.delete(client.auth.uid)
