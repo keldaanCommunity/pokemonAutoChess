@@ -53,7 +53,7 @@ export default class MovingState extends PokemonState {
         pokemon,
         board
       )
-      console.log(farthestCoordinate)
+      //console.log(farthestCoordinate)
       if (farthestCoordinate) {
         x = farthestCoordinate.x
         y = farthestCoordinate.y

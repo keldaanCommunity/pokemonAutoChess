@@ -705,6 +705,19 @@ export class OnJoinCommand extends Command<
         if (this.state.players.size >= 8) {
           // console.log('game elligible to xp');
           this.state.elligibleToXP = true
+          let c = 0
+          this.state.players.forEach(p=>{
+            if(!p.isBot){
+              c+=1
+            }
+          })
+          if(c === 1){
+            this.state.players.forEach(p=>{
+              if(!p.isBot){
+                p.titles.add(Title.LONE_WOLF)
+              }
+            })
+          }
         }
       }
     })
