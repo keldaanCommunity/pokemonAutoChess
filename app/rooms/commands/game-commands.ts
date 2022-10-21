@@ -539,7 +539,7 @@ export class OnDragDropItemCommand extends Command<
           }
         })
         if (itemToCombine) {
-          ;(Object.keys(ItemRecipe) as Item[]).forEach((name) => {
+          (Object.keys(ItemRecipe) as Item[]).forEach((name) => {
             const recipe = ItemRecipe[name]
             if (
               recipe &&

@@ -107,7 +107,7 @@ export default class Status extends Schema implements IStatus {
   updateSoulDew(dt: number, pkm: PokemonEntity) {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false
-      pkm.addSpellDamage(25)
+      pkm.addSpellDamage(30)
       if (pkm.items.has(Item.SOUL_DEW)) {
         this.triggerSoulDew(5000)
       }
