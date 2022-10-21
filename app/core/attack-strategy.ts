@@ -81,7 +81,7 @@ export class BlueFlareStrategy extends AttackStrategy {
     } else if (pokemon.effects.includes(Effect.DESOLATE_LAND)) {
       multiplier = 4
     }
-    damage += multiplier * 50
+    damage += multiplier * 25
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 
@@ -110,7 +110,7 @@ export class FusionBoltStrategy extends AttackStrategy {
     } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
       multiplier = 3
     }
-    damage += multiplier * 60
+    damage += multiplier * 30
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 

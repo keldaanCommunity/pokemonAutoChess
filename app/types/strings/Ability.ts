@@ -1164,13 +1164,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.BLUE_FLARE]: {
-    eng: "Inflicts 50 points of magic damage + 50 additional points per stage of active fire synergies",
+    eng: "Inflicts 50 points of magic damage + 20 additional points per stage of active fire synergies",
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.FUSION_BOLT]: {
-    eng: "Inflicts 50 points of magic damage + 60 additional points per stage of active electric synergies",
+    eng: "Inflicts 50 points of magic damage + 25 additional points per stage of active electric synergies",
     esp: "",
     prt: "",
     fra: ""
