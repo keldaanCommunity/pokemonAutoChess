@@ -487,7 +487,8 @@ export enum Title {
     GYM_LEADER = 'GYM_LEADER',
     GYM_CHALLENGER = 'GYM_CHALLENGER',
     GYM_TRAINER = 'GYM_TRAINER',
-    ACE_TRAINER = 'ACE_TRAINER'
+    ACE_TRAINER = 'ACE_TRAINER',
+    BACKER = 'BACKER'
 }
 
 export const TitleName: {[key in Title]: string} = {
@@ -529,7 +530,8 @@ export const TitleName: {[key in Title]: string} = {
     [Title.GYM_CHALLENGER]: 'Gym Challenger',
     [Title.GYM_TRAINER]: 'Gym Trainer',
     [Title.CAMPER]: 'Camper',
-    [Title.RIVAL]: 'Rival'
+    [Title.RIVAL]: 'Rival',
+    [Title.BACKER] : 'Backer'
 } 
 
 export const TitleDescription: {[key in Title]: string} = {
@@ -571,5 +573,6 @@ export const TitleDescription: {[key in Title]: string} = {
     [Title.GYM_CHALLENGER]: 'Reach 1200 Elo',
     [Title.GYM_TRAINER]: 'Reach 1100 Elo',
     [Title.CAMPER]: 'Max Synergy with Field Type in a game',
-    [Title.RIVAL]: 'Max Synergy with Human Type in a game'
+    [Title.RIVAL]: 'Max Synergy with Human Type in a game',
+    [Title.BACKER]: 'Support the game financially'
 } 
