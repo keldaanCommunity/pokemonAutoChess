@@ -7676,7 +7676,7 @@ export class Uxie extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       AttackType.SPECIAL,
       2,
-      55,
+      65,
       Ability.KNOWLEDGE_THIEF,
       shiny,
       emotion,
