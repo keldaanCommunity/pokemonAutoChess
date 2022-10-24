@@ -543,7 +543,7 @@ export const TitleDescription: {[key in Title]: string} = {
     [Title.DELINQUENT]: 'Max Synergy With Dark Type in a game',
     [Title.DRAGON_TAMER]: 'Max Synergy With Dragon Type in a game',
     [Title.FIREFIGHTER]: 'Max Synergy With Water Type in a game',
-    [Title.TEAM_ROCKET_GRUNT]: 'Max Synergy With Posion Type in a game',
+    [Title.TEAM_ROCKET_GRUNT]: 'Max Synergy With Poison Type in a game',
     [Title.HIKER]: 'Max Synergy With Mineral Type in a game',
     [Title.LONE_WOLF]: 'Win in a lobby against only bots',
     [Title.KINDLER]: 'Max Synergy With Fire Type in a game',
