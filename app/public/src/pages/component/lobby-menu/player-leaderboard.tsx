@@ -5,5 +5,5 @@ import Leaderboard from './leaderboard'
 
 export default function PlayerLeaderboard() {
     const infos: ILeaderboardInfo[] = useAppSelector(state=>state.lobby.leaderboard)
-    return <Leaderboard isBot={false} infos={infos}/>
+    return <Leaderboard isBot={false} infos={infos} noElo={false}/>
 }

@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { setTabIndex } from '../../../stores/LobbyStore'
 import BotLeaderboard from './bot-leaderboard'
 import PlayerLeaderboard from './player-leaderboard'
+import LevelLeaderboard from './level-leaderboard'
 
 export default function TabMenu() {
     const dispatch = useAppDispatch()
@@ -37,13 +38,17 @@ export default function TabMenu() {
     <Tabs className="nes-container hidden-scrollable" style={tabStyle}
         selectedIndex={tabIndex} onSelect={(i: number) => dispatch(setTabIndex(i))}>
             <TabList>
-                <Tab style={cursorStyle}>Players</Tab>
+                <Tab style={cursorStyle}>Elo</Tab>
+                <Tab style={cursorStyle}>Level</Tab>
                 <Tab style={cursorStyle}>Bots</Tab>
                 <Tab style={cursorStyle}>Profile</Tab>
                 <Tab style={cursorStyle}>Search</Tab>
             </TabList>
             <TabPanel>
                 <PlayerLeaderboard/>
+            </TabPanel>
+            <TabPanel>
+                <LevelLeaderboard/>
             </TabPanel>
             <TabPanel>
                 <BotLeaderboard/>

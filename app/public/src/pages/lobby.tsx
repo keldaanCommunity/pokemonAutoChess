@@ -15,8 +15,8 @@ import Wiki from './component/wiki/wiki'
 import TeamBuilder from './component/bot-builder/team-builder'
 import MetaReport from './component/meta-report/meta-report'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { joinLobby, logIn, logOut, requestMeta, requestBotList } from '../stores/NetworkStore'
-import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushBotLeaderboard, pushLeaderboard, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent, setBotMonitor, setMetaPokemons, setSuggestions, removeMessage } from '../stores/LobbyStore'
+import { joinLobby, logIn, logOut, requestMeta, requestBotList, requestLeaderboard, requestBotLeaderboard, requestLevelLeaderboard } from '../stores/NetworkStore'
+import { setBotData, setBotList, setPastebinUrl, setMetaItems, setMeta, addRoom, addUser, changeUser, pushMessage, removeRoom, removeUser, setSearchedUser, setUser, leaveLobby, changePokemonConfig, addPokemonConfig, setBoosterContent, setBotMonitor, setMetaPokemons, setSuggestions, removeMessage, setLevelLeaderboard, setBotLeaderboard, setLeaderboard } from '../stores/LobbyStore'
 import { ICustomLobbyState, ISuggestionUser, Transfer } from '../../../types'
 import LobbyUser from '../../../models/colyseus-models/lobby-user'
 import { IBot } from '../../../models/mongo-models/bot-v2'
@@ -96,10 +96,12 @@ export default function Lobby(){
                         }
     
                         room.state.users.onRemove = (u) => {dispatch(removeUser(u.id))}
-    
-                        room.state.leaderboard.onAdd = (l) => {dispatch(pushLeaderboard(l))}
-                        
-                        room.state.botLeaderboard.onAdd = (l) => {dispatch(pushBotLeaderboard(l))}
+
+                        room.onMessage(Transfer.REQUEST_LEADERBOARD, (l) =>{dispatch(setLeaderboard(l))})
+
+                        room.onMessage(Transfer.REQUEST_BOT_LEADERBOARD, (l) =>{dispatch(setBotLeaderboard(l))})
+
+                        room.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (l) =>{dispatch(setLevelLeaderboard(l))})
     
                         room.onMessage(Transfer.PASTEBIN_URL, (json: { url: string; }) => {dispatch(setPastebinUrl(json.url))})
     
@@ -126,8 +128,12 @@ export default function Lobby(){
                         room.onMessage(Transfer.BOOSTER_CONTENT, (boosterContent: string[]) => {dispatch(setBoosterContent(boosterContent))})
 
                         room.onMessage(Transfer.SUGGESTIONS, (suggestions: ISuggestionUser[]) => {dispatch(setSuggestions(suggestions))})
+
     
                         dispatch(joinLobby(room))
+                        dispatch(requestLeaderboard())
+                        dispatch(requestBotLeaderboard())
+                        dispatch(requestLevelLeaderboard())
                     } catch (error) {
                         setToAuth(true)
                     }

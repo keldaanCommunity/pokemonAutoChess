@@ -6,7 +6,7 @@ import UserMetadata, {
   IPokemonConfig,
   IUserMetadata
 } from "../models/mongo-models/user-metadata"
-import LeaderboardInfo from "../models/colyseus-models/leaderboard-info"
+import LeaderboardInfo, { ILeaderboardInfo } from "../models/colyseus-models/leaderboard-info"
 import { ArraySchema } from "@colyseus/schema"
 import LobbyUser from "../models/colyseus-models/lobby-user"
 import admin from "firebase-admin"
@@ -54,6 +54,9 @@ export default class CustomLobbyRoom extends LobbyRoom {
   metaItems: IItemsStatistic[]
   metaPokemons: IPokemonsStatistic[]
   botMonitor: IBotMonitoring[]
+  leaderboard: ILeaderboardInfo[]
+  botLeaderboard: ILeaderboardInfo[]
+  levelLeaderboard: ILeaderboardInfo[]
 
   constructor() {
     super()
@@ -67,6 +70,9 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.metaItems = new Array<IItemsStatistic>()
     this.metaPokemons = new Array<IPokemonsStatistic>()
     this.botMonitor = new Array<IBotMonitoring>()
+    this.leaderboard = new Array<ILeaderboardInfo>()
+    this.botLeaderboard = new Array<ILeaderboardInfo>()
+    this.levelLeaderboard = new Array<ILeaderboardInfo>()
   }
 
   onCreate(): Promise<void> {
@@ -74,6 +80,18 @@ export default class CustomLobbyRoom extends LobbyRoom {
     super.onCreate({})
     this.setState(new LobbyState())
     this.autoDispose = false
+
+    this.onMessage(Transfer.REQUEST_LEADERBOARD, (client, message) =>{
+      client.send(Transfer.REQUEST_LEADERBOARD, this.leaderboard)
+    })
+
+    this.onMessage(Transfer.REQUEST_BOT_LEADERBOARD, (client, message) =>{
+      client.send(Transfer.REQUEST_BOT_LEADERBOARD, this.botLeaderboard)
+    })
+
+    this.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (client, message) =>{
+      client.send(Transfer.REQUEST_LEVEL_LEADERBOARD, this.levelLeaderboard)
+    })
 
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       if (message.payload != "") {
@@ -546,21 +564,29 @@ export default class CustomLobbyRoom extends LobbyRoom {
           UserMetadata.find(
             {},
             ["displayName", "avatar", "elo"],
-            { limit: 30, sort: { elo: -1 } },
+            { limit: 100, sort: { elo: -1 } },
             (err, users) => {
               if (err) {
                 console.log(err)
               } else {
                 for (let i = 0; i < users.length; i++) {
                   const user = users[i]
-                  this.state.leaderboard.push(
-                    new LeaderboardInfo(
-                      user.displayName,
-                      user.avatar,
-                      i + 1,
-                      user.elo
-                    )
-                  )
+                  this.leaderboard.push({name: user.displayName, rank: i + 1, avatar: user.avatar, value: user.elo})
+                }
+              }
+            }
+          )
+          UserMetadata.find(
+            {},
+            ["displayName", "avatar", "level"],
+            { limit: 100, sort: { level: -1 } },
+            (err, users) => {
+              if (err) {
+                console.log(err)
+              } else {
+                for (let i = 0; i < users.length; i++) {
+                  const user = users[i]
+                  this.levelLeaderboard.push({name: user.displayName, rank: i + 1, avatar: user.avatar, value: user.level})
                 }
               }
             }
@@ -569,14 +595,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             bots.forEach((bot, i) => {
               this.bots.set(bot.avatar, bot)
               // console.log(bot.avatar, bot.elo);
-              this.state.botLeaderboard.push(
-                new LeaderboardInfo(
-                  `${bot.name} by @${bot.author}`,
-                  bot.avatar,
-                  i + 1,
-                  bot.elo
-                )
-              )
+              this.botLeaderboard.push({name: `${bot.name} by @${bot.author}`, avatar: bot.avatar, rank: i + 1, value: bot.elo})
             })
           })
           Meta.find({}, (err, docs) => {

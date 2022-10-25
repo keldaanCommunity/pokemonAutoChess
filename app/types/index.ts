@@ -5,7 +5,7 @@ import DpsHeal from '../core/dps-heal'
 import Count from '../models/colyseus-models/count'
 import Status from '../models/colyseus-models/status'
 import ExperienceManager from '../models/colyseus-models/experience-manager'
-import LeaderboardInfo from '../models/colyseus-models/leaderboard-info'
+import LeaderboardInfo, { ILeaderboardInfo } from '../models/colyseus-models/leaderboard-info'
 import LobbyUser from '../models/colyseus-models/lobby-user'
 import Message from '../models/colyseus-models/message'
 import Synergies from '../models/colyseus-models/synergies'
@@ -110,7 +110,10 @@ export enum Transfer {
     REMOVE_MESSAGE = 'REMOVE_MESSAGE',
     GIVE_BOOSTER = 'GIVE_BOOSTER',
     SET_MODERATOR = 'SET_MODERATOR',
-    GIVE_TITLE = 'GIVE_TITLE'
+    GIVE_TITLE = 'GIVE_TITLE',
+    REQUEST_LEADERBOARD = 'REQUEST_LEADERBOARD',
+    REQUEST_LEVEL_LEADERBOARD = 'REQUEST_LEVEL_LEADERBOARD',
+    REQUEST_BOT_LEADERBOARD = 'REQUEST_BOT_LEADERBOARD'
 }
 
 export enum AttackSprite {
@@ -190,8 +193,9 @@ export interface IDragDropCombineMessage{
 export interface ICustomLobbyState {
     messages : ArraySchema<Message>
     users : MapSchema<LobbyUser>
-    leaderboard : ArraySchema<LeaderboardInfo>
-    botLeaderboard : ArraySchema<LeaderboardInfo>
+    leaderboard : ILeaderboardInfo[]
+    botLeaderboard : ILeaderboardInfo[]
+    levelLeaderboard: ILeaderboardInfo[]
 }
 
 export interface IGameState {

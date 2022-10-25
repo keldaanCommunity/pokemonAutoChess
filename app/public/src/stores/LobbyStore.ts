@@ -22,6 +22,7 @@ interface IUserLobbyState {
   users: ILobbyUser[]
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
+  levelLeaderboard: ILeaderboardInfo[]
   user: ILobbyUser | undefined
   searchedUser: ILobbyUser | undefined
   tabIndex: number
@@ -48,6 +49,7 @@ const initialState: IUserLobbyState = {
   users: [],
   leaderboard: [],
   botLeaderboard: [],
+  levelLeaderboard: [],
   user: undefined,
   tabIndex: 0,
   allRooms: [],
@@ -161,13 +163,14 @@ export const lobbySlice = createSlice({
         (m) => m.payload !== action.payload.payload
       )
     },
-    pushLeaderboard: (state, action: PayloadAction<LeaderboardInfo>) => {
-      const l: ILeaderboardInfo = JSON.parse(JSON.stringify(action.payload))
-      state.leaderboard.push(l)
+    setLeaderboard: (state, action: PayloadAction<LeaderboardInfo[]>) => {
+      state.leaderboard = action.payload
     },
-    pushBotLeaderboard: (state, action: PayloadAction<LeaderboardInfo>) => {
-      const l: ILeaderboardInfo = JSON.parse(JSON.stringify(action.payload))
-      state.botLeaderboard.push(l)
+    setBotLeaderboard: (state, action: PayloadAction<LeaderboardInfo[]>) => {
+      state.botLeaderboard = action.payload
+    },
+    setLevelLeaderboard: (state, action: PayloadAction<LeaderboardInfo[]>) => {
+      state.levelLeaderboard = action.payload
     },
     addPokemonConfig: (state, action: PayloadAction<PokemonConfig>) => {
       state.pokemonCollection.push(JSON.parse(JSON.stringify(action.payload)))
@@ -283,8 +286,9 @@ export const {
   addPokemonConfig,
   changePokemonConfig,
   pushMessage,
-  pushLeaderboard,
-  pushBotLeaderboard,
+  setLeaderboard,
+  setBotLeaderboard,
+  setLevelLeaderboard,
   addUser,
   changeUser,
   removeUser,

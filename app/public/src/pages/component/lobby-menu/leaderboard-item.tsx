@@ -7,12 +7,12 @@ import Elo from '../elo'
 import { CDN_PORTRAIT_URL } from '../../../../../types'
 
 
-export default function LeaderboardItem(props: {item: ILeaderboardInfo, isBot: boolean}){
+export default function LeaderboardItem(props: {item: ILeaderboardInfo, isBot: boolean, noElo: boolean | undefined}){
     const dispatch = useAppDispatch()
     return <div className='playerBox my-cursor' style={{ display: 'flex', justifyContent:'space-between', alignItems:'center'}} onClick={()=>{
         if(!props.isBot) {
             dispatch(searchName(props.item.name))
-            dispatch(setTabIndex(3))
+            dispatch(setTabIndex(4))
         }
     }}>
         <div style={{display:'flex', gap:'5px'}}>
@@ -23,7 +23,7 @@ export default function LeaderboardItem(props: {item: ILeaderboardInfo, isBot: b
             {props.item.name}
         </div>
         <div> 
-            <Elo elo={props.item.value}/>
+            {props.noElo ? props.item.value :<Elo elo={props.item.value}/>}
         </div>
     </div>
 }
