@@ -2,9 +2,8 @@ import { Pkm } from "../app/types/enum/Pokemon"
 import PokemonFactory from "../app/models/pokemon-factory"
 
 Object.values(Pkm).forEach((p) => {
-  const n1 = p
-  const n2 = PokemonFactory.createPokemonFromName(p).name
-  if (n1 != n2) {
-    console.log(n1, n2)
+  const pkm = PokemonFactory.createPokemonFromName(p)
+  if(pkm.stars === 2 && pkm.final){
+    console.log(pkm.name)
   }
 })
