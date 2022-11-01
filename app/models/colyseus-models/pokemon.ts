@@ -37,6 +37,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("string") emotion: Emotion
   fossilTimer: number | undefined
   final: boolean
+  additional = false
 
   constructor(
     name: Pkm,
@@ -56,7 +57,8 @@ export class Pokemon extends Schema implements IPokemon {
     skill: Ability,
     shiny: boolean,
     emotion: Emotion,
-    final: boolean
+    final: boolean,
+    additional?: boolean
   ) {
     super()
     this.id = uniqid()
@@ -78,6 +80,7 @@ export class Pokemon extends Schema implements IPokemon {
     this.shiny = shiny
     this.emotion = emotion
     this.final = final
+    this.additional = !!additional
     types.forEach((type) => {
       this.types.push(type)
     })
@@ -638,56 +641,6 @@ export class MegaSteelix extends Pokemon {
   }
 }
 
-export class Growlithe extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.GROWLITHE,
-      [],
-      Rarity.LEGENDARY,
-      "0058",
-      Pkm.ARCANINE,
-      90,
-      9,
-      5,
-      5,
-      1,
-      AttackSprite.FIRE_MELEE,
-      AttackType.PHYSICAL,
-      1,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-
-export class Arcanine extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.ARCANINE,
-      [],
-      Rarity.LEGENDARY,
-      "0059",
-      Pkm.DEFAULT,
-      130,
-      20,
-      5,
-      5,
-      1,
-      AttackSprite.FIRE_MELEE,
-      AttackType.PHYSICAL,
-      2,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
-
 export class Numel extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -756,56 +709,6 @@ export class MegaCamerupt extends Pokemon {
       3,
       100,
       Ability.BURN,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
-
-export class Munchlax extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.MUNCHLAX,
-      [],
-      Rarity.LEGENDARY,
-      "0446",
-      Pkm.SNORLAX,
-      90,
-      9,
-      5,
-      5,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      AttackType.PHYSICAL,
-      1,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-
-export class Snorlax extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.SNORLAX,
-      [],
-      Rarity.LEGENDARY,
-      "0143",
-      Pkm.DEFAULT,
-      130,
-      20,
-      5,
-      5,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      AttackType.PHYSICAL,
-      2,
-      100,
-      Ability.DEFAULT,
       shiny,
       emotion,
       true
@@ -8135,56 +8038,6 @@ export class MegaRayquaza extends Pokemon {
   }
 }
 
-export class Meowth extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.MEOWTH,
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.RARE,
-      "0052",
-      Pkm.PERSIAN,
-      80,
-      6,
-      3,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      AttackType.PHYSICAL,
-      1,
-      90,
-      Ability.PAYDAY,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-
-export class Persian extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.PERSIAN,
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.RARE,
-      "0053",
-      Pkm.DEFAULT,
-      120,
-      10,
-      3,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      AttackType.PHYSICAL,
-      2,
-      90,
-      Ability.PAYDAY,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
-
 export class Oddish extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -8907,155 +8760,6 @@ export class Aerodactyl extends Pokemon {
   }
 }
 
-export class Corphish extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.CORPHISH,
-      [Synergy.WATER, Synergy.DARK],
-      Rarity.UNCOMMON,
-      PkmIndex[Pkm.CORPHISH],
-      Pkm.CRAWDAUNT,
-      100,
-      8,
-      3,
-      2,
-      1,
-      AttackSprite.WATER_MELEE,
-      AttackType.PHYSICAL,
-      1,
-      110,
-      Ability.CRABHAMMER,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-
-export class Crawdaunt extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.CRAWDAUNT,
-      [Synergy.WATER, Synergy.DARK],
-      Rarity.UNCOMMON,
-      PkmIndex[Pkm.CRAWDAUNT],
-      Pkm.DEFAULT,
-      170,
-      16,
-      5,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      AttackType.PHYSICAL,
-      2,
-      110,
-      Ability.CRABHAMMER,
-      shiny,
-      emotion,
-      true
-    )
-  }
-  true
-}
-
-export class Cacnea extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.CACNEA,
-      [Synergy.GRASS, Synergy.DARK],
-      Rarity.RARE,
-      PkmIndex[Pkm.CACNEA],
-      Pkm.CACTURNE,
-      100,
-      8,
-      4,
-      3,
-      1,
-      AttackSprite.GRASS_MELEE,
-      AttackType.PHYSICAL,
-      1,
-      70,
-      Ability.LEECH_SEED,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-
-export class Cacturne extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.CACTURNE,
-      [Synergy.GRASS, Synergy.DARK],
-      Rarity.RARE,
-      PkmIndex[Pkm.CACTURNE],
-      Pkm.DEFAULT,
-      170,
-      16,
-      6,
-      5,
-      1,
-      AttackSprite.GRASS_MELEE,
-      AttackType.PHYSICAL,
-      2,
-      70,
-      Ability.LEECH_SEED,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
-
-export class Joltik extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.JOLTIK,
-      [Synergy.BUG, Synergy.ELECTRIC],
-      Rarity.RARE,
-      PkmIndex[Pkm.JOLTIK],
-      Pkm.GALVANTULA,
-      100,
-      8,
-      3,
-      2,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      AttackType.PHYSICAL,
-      1,
-      100,
-      Ability.ELECTRO_WEB,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-export class Galvantula extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.GALVANTULA,
-      [Synergy.BUG, Synergy.ELECTRIC],
-      Rarity.RARE,
-      PkmIndex[Pkm.GALVANTULA],
-      Pkm.DEFAULT,
-      170,
-      16,
-      5,
-      3,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      AttackType.PHYSICAL,
-      2,
-      100,
-      Ability.ELECTRO_WEB,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
 export class Genesect extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -9251,54 +8955,7 @@ export class Delphox extends Pokemon {
     )
   }
 }
-export class Makuhita extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.MAKUHITA,
-      [Synergy.FIGHTING, Synergy.MONSTER],
-      Rarity.RARE,
-      PkmIndex[Pkm.MAKUHITA],
-      Pkm.HARIYAMA,
-      70,
-      8,
-      3,
-      3,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      AttackType.PHYSICAL,
-      1,
-      100,
-      Ability.DYNAMIC_PUNCH,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-export class Hariyama extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.HARIYAMA,
-      [Synergy.FIGHTING, Synergy.MONSTER],
-      Rarity.RARE,
-      PkmIndex[Pkm.HARIYAMA],
-      Pkm.DEFAULT,
-      150,
-      11,
-      5,
-      5,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      AttackType.PHYSICAL,
-      2,
-      80,
-      Ability.DYNAMIC_PUNCH,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
+
 export class Regieleki extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -9395,54 +9052,7 @@ export class Eternatus extends Pokemon {
     )
   }
 }
-export class Ponyta extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.PONYTA,
-      [Synergy.FIRE, Synergy.FIELD],
-      Rarity.EPIC,
-      PkmIndex[Pkm.PONYTA],
-      Pkm.RAPIDASH,
-      90,
-      9,
-      3,
-      3,
-      1,
-      AttackSprite.FIRE_MELEE,
-      AttackType.PHYSICAL,
-      1,
-      55,
-      Ability.FLAME_CHARGE,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-export class Rapidash extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.RAPIDASH,
-      [Synergy.FIRE, Synergy.FIELD],
-      Rarity.EPIC,
-      PkmIndex[Pkm.RAPIDASH],
-      Pkm.DEFAULT,
-      180,
-      17,
-      5,
-      5,
-      1,
-      AttackSprite.FIRE_MELEE,
-      AttackType.PHYSICAL,
-      2,
-      55,
-      Ability.FLAME_CHARGE,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
+
 export class Nincada extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -9515,102 +9125,7 @@ export class Shedninja extends Pokemon {
     )
   }
 }
-export class Noibat extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.NOIBAT,
-      [Synergy.DRAGON, Synergy.SOUND, Synergy.FLYING],
-      Rarity.COMMON,
-      PkmIndex[Pkm.NOIBAT],
-      Pkm.NOIVERN,
-      60,
-      5,
-      2,
-      2,
-      2,
-      AttackSprite.FLYING_RANGE,
-      AttackType.SPECIAL,
-      1,
-      90,
-      Ability.RAZOR_WIND,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-export class Noivern extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.NOIVERN,
-      [Synergy.DRAGON, Synergy.SOUND, Synergy.FLYING],
-      Rarity.COMMON,
-      PkmIndex[Pkm.NOIVERN],
-      Pkm.DEFAULT,
-      110,
-      9,
-      2,
-      2,
-      2,
-      AttackSprite.FLYING_RANGE,
-      AttackType.SPECIAL,
-      2,
-      90,
-      Ability.RAZOR_WIND,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
-export class Pumpkaboo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.PUMPKABOO,
-      [Synergy.GHOST, Synergy.GRASS],
-      Rarity.RARE,
-      PkmIndex[Pkm.PUMPKABOO],
-      Pkm.GOURGEIST,
-      80,
-      6,
-      4,
-      4,
-      1,
-      AttackSprite.GRASS_MELEE,
-      AttackType.PHYSICAL,
-      1,
-      80,
-      Ability.CORRUPTED_NATURE,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-export class Gourgeist extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.GOURGEIST,
-      [Synergy.GHOST, Synergy.GRASS],
-      Rarity.RARE,
-      PkmIndex[Pkm.GOURGEIST],
-      Pkm.DEFAULT,
-      130,
-      10,
-      4,
-      4,
-      1,
-      AttackSprite.GRASS_MELEE,
-      AttackType.PHYSICAL,
-      2,
-      80,
-      Ability.CORRUPTED_NATURE,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
+
 export class Happiny extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -9856,6 +9371,566 @@ export class MegaHoundoom extends Pokemon {
       Ability.BEAT_UP,
       shiny,
       emotion,
+      true
+    )
+  }
+}
+
+export class Cacnea extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CACNEA,
+      [Synergy.GRASS, Synergy.DARK],
+      Rarity.RARE,
+      PkmIndex[Pkm.CACNEA],
+      Pkm.CACTURNE,
+      100,
+      8,
+      4,
+      3,
+      1,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      70,
+      Ability.LEECH_SEED,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Cacturne extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CACTURNE,
+      [Synergy.GRASS, Synergy.DARK],
+      Rarity.RARE,
+      PkmIndex[Pkm.CACTURNE],
+      Pkm.DEFAULT,
+      170,
+      16,
+      6,
+      5,
+      1,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      70,
+      Ability.LEECH_SEED,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Pumpkaboo extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PUMPKABOO,
+      [Synergy.GHOST, Synergy.GRASS],
+      Rarity.RARE,
+      PkmIndex[Pkm.PUMPKABOO],
+      Pkm.GOURGEIST,
+      80,
+      6,
+      4,
+      4,
+      1,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      80,
+      Ability.CORRUPTED_NATURE,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+export class Gourgeist extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.GOURGEIST,
+      [Synergy.GHOST, Synergy.GRASS],
+      Rarity.RARE,
+      PkmIndex[Pkm.GOURGEIST],
+      Pkm.DEFAULT,
+      130,
+      10,
+      4,
+      4,
+      1,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      80,
+      Ability.CORRUPTED_NATURE,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Noibat extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.NOIBAT,
+      [Synergy.DRAGON, Synergy.SOUND, Synergy.FLYING],
+      Rarity.COMMON,
+      PkmIndex[Pkm.NOIBAT],
+      Pkm.NOIVERN,
+      60,
+      5,
+      2,
+      2,
+      2,
+      AttackSprite.FLYING_RANGE,
+      AttackType.SPECIAL,
+      1,
+      90,
+      Ability.RAZOR_WIND,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+export class Noivern extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.NOIVERN,
+      [Synergy.DRAGON, Synergy.SOUND, Synergy.FLYING],
+      Rarity.COMMON,
+      PkmIndex[Pkm.NOIVERN],
+      Pkm.DEFAULT,
+      110,
+      9,
+      2,
+      2,
+      2,
+      AttackSprite.FLYING_RANGE,
+      AttackType.SPECIAL,
+      2,
+      90,
+      Ability.RAZOR_WIND,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+export class Ponyta extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PONYTA,
+      [Synergy.FIRE, Synergy.FIELD],
+      Rarity.EPIC,
+      PkmIndex[Pkm.PONYTA],
+      Pkm.RAPIDASH,
+      90,
+      9,
+      3,
+      3,
+      1,
+      AttackSprite.FIRE_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      55,
+      Ability.FLAME_CHARGE,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+export class Rapidash extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.RAPIDASH,
+      [Synergy.FIRE, Synergy.FIELD],
+      Rarity.EPIC,
+      PkmIndex[Pkm.RAPIDASH],
+      Pkm.DEFAULT,
+      180,
+      17,
+      5,
+      5,
+      1,
+      AttackSprite.FIRE_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      55,
+      Ability.FLAME_CHARGE,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+export class Makuhita extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MAKUHITA,
+      [Synergy.FIGHTING, Synergy.MONSTER],
+      Rarity.RARE,
+      PkmIndex[Pkm.MAKUHITA],
+      Pkm.HARIYAMA,
+      70,
+      8,
+      3,
+      3,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DYNAMIC_PUNCH,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+export class Hariyama extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HARIYAMA,
+      [Synergy.FIGHTING, Synergy.MONSTER],
+      Rarity.RARE,
+      PkmIndex[Pkm.HARIYAMA],
+      Pkm.DEFAULT,
+      150,
+      11,
+      5,
+      5,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      80,
+      Ability.DYNAMIC_PUNCH,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+export class Joltik extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.JOLTIK,
+      [Synergy.BUG, Synergy.ELECTRIC],
+      Rarity.RARE,
+      PkmIndex[Pkm.JOLTIK],
+      Pkm.GALVANTULA,
+      100,
+      8,
+      3,
+      2,
+      1,
+      AttackSprite.ELECTRIC_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.ELECTRO_WEB,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+export class Galvantula extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.GALVANTULA,
+      [Synergy.BUG, Synergy.ELECTRIC],
+      Rarity.RARE,
+      PkmIndex[Pkm.GALVANTULA],
+      Pkm.DEFAULT,
+      170,
+      16,
+      5,
+      3,
+      1,
+      AttackSprite.ELECTRIC_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.ELECTRO_WEB,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+export class Corphish extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CORPHISH,
+      [Synergy.WATER, Synergy.DARK],
+      Rarity.UNCOMMON,
+      PkmIndex[Pkm.CORPHISH],
+      Pkm.CRAWDAUNT,
+      100,
+      8,
+      3,
+      2,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      110,
+      Ability.CRABHAMMER,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Crawdaunt extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CRAWDAUNT,
+      [Synergy.WATER, Synergy.DARK],
+      Rarity.UNCOMMON,
+      PkmIndex[Pkm.CRAWDAUNT],
+      Pkm.DEFAULT,
+      170,
+      16,
+      5,
+      3,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      110,
+      Ability.CRABHAMMER,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+export class Meowth extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MEOWTH,
+      [Synergy.NORMAL, Synergy.FIELD],
+      Rarity.RARE,
+      "0052",
+      Pkm.PERSIAN,
+      80,
+      6,
+      3,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      90,
+      Ability.PAYDAY,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Persian extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PERSIAN,
+      [Synergy.NORMAL, Synergy.FIELD],
+      Rarity.RARE,
+      "0053",
+      Pkm.DEFAULT,
+      120,
+      10,
+      3,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      90,
+      Ability.PAYDAY,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+export class Munchlax extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MUNCHLAX,
+      [Synergy.NORMAL, Synergy.FIELD],
+      Rarity.LEGENDARY,
+      "0446",
+      Pkm.SNORLAX,
+      160,
+      15,
+      3,
+      5,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DYNAMIC_PUNCH,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Snorlax extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SNORLAX,
+      [Synergy.NORMAL, Synergy.FIELD],
+      Rarity.LEGENDARY,
+      "0143",
+      Pkm.DEFAULT,
+      350,
+      25,
+      5,
+      7,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.DYNAMIC_PUNCH,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+export class Growlithe extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.GROWLITHE,
+      [Synergy.FIRE, Synergy.FIELD],
+      Rarity.UNCOMMON,
+      "0058",
+      Pkm.ARCANINE,
+      60,
+      5,
+      2,
+      2,
+      1,
+      AttackSprite.FIRE_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.BLAST_BURN,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Arcanine extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ARCANINE,
+      [Synergy.FIRE, Synergy.FIELD],
+      Rarity.UNCOMMON,
+      "0059",
+      Pkm.DEFAULT,
+      110,
+      11,
+      5,
+      5,
+      1,
+      AttackSprite.FIRE_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.BLAST_BURN,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Smoochum extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SMOOCHUM,
+      [Synergy.ICE, Synergy.PSYCHIC],
+      Rarity.COMMON,
+      PkmIndex[Pkm.SMOOCHUM],
+      Pkm.JYNX,
+      60,
+      5,
+      2,
+      2,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.SPECIAL,
+      1,
+      90,
+      Ability.NIGHTMARE,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Jynx extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.JYNX,
+      [Synergy.ICE, Synergy.PSYCHIC],
+      Rarity.COMMON,
+      PkmIndex[Pkm.JYNX],
+      Pkm.DEFAULT,
+      110,
+      11,
+      5,
+      5,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.SPECIAL,
+      2,
+      90,
+      Ability.NIGHTMARE,
+      shiny,
+      emotion,
+      true,
       true
     )
   }
