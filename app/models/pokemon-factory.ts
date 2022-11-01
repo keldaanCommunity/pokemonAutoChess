@@ -36,6 +36,9 @@ import {
   Blaziken,
   Blissey,
   Braixen,
+  Breloom,
+  Bronzong,
+  Bronzor,
   Budew,
   Bulbasaur,
   Buneary,
@@ -58,6 +61,7 @@ import {
   Charmeleon,
   Chikorita,
   Chimchar,
+  Chinchou,
   Clamperl,
   Clefable,
   Clefairy,
@@ -69,6 +73,7 @@ import {
   Cranidos,
   Crawdaunt,
   Cresselia,
+  Croagunk,
   Crobat,
   Croconaw,
   Cubone,
@@ -84,6 +89,8 @@ import {
   Dragonair,
   Dragonite,
   Dratini,
+  Drifblim,
+  Drifloon,
   Duosion,
   Dusclops,
   Dusknoir,
@@ -92,6 +99,7 @@ import {
   Electabuzz,
   Electivire,
   Electrike,
+  Electrode,
   Elekid,
   Empoleon,
   Entei,
@@ -126,6 +134,7 @@ import {
   Golem,
   Gorebyss,
   Gourgeist,
+  Granbull,
   Graveler,
   Grotle,
   Groudon,
@@ -159,6 +168,7 @@ import {
   Jolteon,
   Joltik,
   Jumpluff,
+  Jynx,
   Kabuto,
   Kabutops,
   Kadabra,
@@ -174,6 +184,7 @@ import {
   Lairon,
   Lampent,
   Landorus,
+  Lanturn,
   Lapras,
   Larvitar,
   Latias,
@@ -195,6 +206,7 @@ import {
   Machoke,
   Machop,
   Magby,
+  Magcargo,
   Magikarp,
   Magmar,
   Magmortar,
@@ -267,6 +279,7 @@ import {
   Poliwag,
   Poliwhirl,
   Ponyta,
+  Poochyena,
   Porygon,
   Porygon2,
   PorygonZ,
@@ -301,6 +314,8 @@ import {
   Roserade,
   Rotom,
   Salamence,
+  Salandit,
+  Salazzle,
   Sandile,
   Sceptile,
   Scizor,
@@ -317,6 +332,7 @@ import {
   Shieldon,
   Shiftry,
   Shinx,
+  Shroomish,
   Shuppet,
   Skiploom,
   Slaking,
@@ -324,9 +340,13 @@ import {
   Slowbro,
   Slowking,
   Slowpoke,
+  Slugma,
+  Smoochum,
+  Sneasel,
   Snorlax,
   Snorunt,
   Snover,
+  Snubull,
   Solosis,
   Spearow,
   Spheal,
@@ -346,6 +366,8 @@ import {
   TapuKoko,
   TapuLele,
   Tauros,
+  Tentacool,
+  Tentacruel,
   Terrakion,
   Thundurus,
   Tirtouga,
@@ -357,6 +379,7 @@ import {
   Torterra,
   Totodile,
   Toucannon,
+  Toxicroak,
   Trapinch,
   Treecko,
   Trumbeak,
@@ -373,6 +396,8 @@ import {
   Vanilluxe,
   Vaporeon,
   Venipede,
+  Venomoth,
+  Venonat,
   Venusaur,
   Vibrava,
   Victini,
@@ -381,8 +406,10 @@ import {
   Vileplume,
   Virizion,
   Volcarona,
+  Voltorb,
   Walrein,
   Wartortle,
+  Weavile,
   Weedle,
   Weepinbell,
   Whirlipede,
@@ -391,7 +418,7 @@ import {
   Zapdos,
   Zekrom,
   Zubat,
-  Zweilous
+  Zweilous,
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1386,6 +1413,60 @@ export default class PokemonFactory {
         return new Huntail(s, e)
       case Pkm.GOREBYSS:
         return new Gorebyss(s, e)
+      case Pkm.SMOOCHUM:
+        return new Smoochum(s, e)
+      case Pkm.JYNX:
+        return new Jynx(s, e)
+      case Pkm.SALANDIT:
+        return new Salandit(s, e)
+      case Pkm.SALAZZLE:
+        return new Salazzle(s, e)
+      case Pkm.VENONAT:
+        return new Venonat(s, e)
+      case Pkm.VENOMOTH:
+        return new Venomoth(s, e)
+      case Pkm.VOLTORB:
+        return new Voltorb(s, e)
+      case Pkm.ELECTRODE:
+        return new Electrode(s, e)
+      case Pkm.SLUGMA:
+        return new Slugma(s, e)
+      case Pkm.MAGCARGO:
+        return new Magcargo(s, e)
+      case Pkm.SNEASEL:
+        return new Sneasel(s, e)
+      case Pkm.WEAVILE:
+        return new Weavile(s, e)
+      case Pkm.CROAGUNK:
+        return new Croagunk(s, e)
+      case Pkm.TOXICROAK:
+        return new Toxicroak(s, e)
+      case Pkm.CHINCHOU:
+        return new Chinchou(s, e)
+      case Pkm.LANTURN:
+        return new Lanturn(s, e)
+      case Pkm.POOCHYENA:
+        return new Poochyena(s, e)
+      case Pkm.BRONZOR:
+        return new Bronzor(s, e)
+      case Pkm.BRONZONG:
+        return new Bronzong(s, e)
+      case Pkm.DRIFLOON:
+        return new Drifloon(s, e)
+      case Pkm.DRIFBLIM:
+        return new Drifblim(s, e)
+      case Pkm.SHROOMISH:
+        return new Shroomish(s, e)
+      case Pkm.BRELOOM:
+        return new Breloom(s, e)
+      case Pkm.TENTACOOL:
+        return new Tentacool(s, e)
+      case Pkm.TENTACRUEL:
+        return new Tentacruel(s, e)
+      case Pkm.SNUBULL:
+        return new Snubull(s, e)
+      case Pkm.GRANBULL:
+        return new Granbull(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

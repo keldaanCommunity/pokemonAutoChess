@@ -857,13 +857,13 @@ export class GrowlStrategy extends AttackStrategy {
     let d = 0
     switch (pokemon.stars) {
       case 1:
-        d = 1000
+        d = 3000
         break
       case 2:
-        d = 2000
+        d = 6000
         break
       case 3:
-        d = 3000
+        d = 9000
         break
       default:
         break
@@ -2741,7 +2741,7 @@ export class TeleportStrategy extends AttackStrategy {
       [0, 0],
       [0, 5],
       [7, 5],
-      [7, 0]
+      [7, 0],
     ]
     this.shuffleArray(potentialCells)
 
@@ -3060,7 +3060,7 @@ export class MetronomeStrategy extends AttackStrategy {
       SongOfDesireStrategy,
       MindBlownStrategy,
       PaydayStrategy,
-      NaturalBlessingStrategy
+      NaturalBlessingStrategy,
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)
