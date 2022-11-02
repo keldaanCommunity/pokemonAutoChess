@@ -243,6 +243,7 @@ import {
   Metang,
   Metapod,
   Mewtwo,
+  Mightyena,
   Moltres,
   Monferno,
   Mudkip,
@@ -1447,6 +1448,8 @@ export default class PokemonFactory {
         return new Lanturn(s, e)
       case Pkm.POOCHYENA:
         return new Poochyena(s, e)
+      case Pkm.MIGHTYENA:
+        return new Mightyena(s, e)
       case Pkm.BRONZOR:
         return new Bronzor(s, e)
       case Pkm.BRONZONG:
