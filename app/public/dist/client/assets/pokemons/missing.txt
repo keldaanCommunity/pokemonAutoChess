@@ -36,14 +36,10 @@ krokorok,0552/AnimData.xml
 krokorok,0552/0000/0001/AnimData.xml
 krookodile,0553/AnimData.xml
 krookodile,0553/0000/0001/AnimData.xml
-solosis,0577/AnimData.xml
-solosis,0577/0000/0001/AnimData.xml
 reuniclus,0579/AnimData.xml
 reuniclus,0579/0000/0001/AnimData.xml
 mega-Rayquaza,0384/0001/AnimData.xml
 mega-Rayquaza,0384/0001/0001/AnimData.xml
-archeops,0567/AnimData.xml
-archeops,0567/0000/0001/AnimData.xml
 tirtouga,0564/AnimData.xml
 tirtouga,0564/0000/0001/AnimData.xml
 carracosta,0565/AnimData.xml
@@ -64,7 +60,6 @@ scolipede,0545/AnimData.xml
 scolipede,0545/0000/0001/AnimData.xml
 mega-manectric,0310/0001/AnimData.xml
 mega-manectric,0310/0001/0001/AnimData.xml
-mega-banette,0354/0001/AnimData.xml
 mega-banette,0354/0001/0001/AnimData.xml
 doublade,0680/AnimData.xml
 doublade,0680/0000/0001/AnimData.xml
@@ -86,5 +81,3 @@ kommo-o,0784/AnimData.xml
 kommo-o,0784/0000/0001/AnimData.xml
 mega-altaria,0334/0001/AnimData.xml
 mega-altaria,0334/0001/0001/AnimData.xml
-hatterene,0858/0000/0001/AnimData.xml
-tapu-koko,0785/0000/0001/AnimData.xml

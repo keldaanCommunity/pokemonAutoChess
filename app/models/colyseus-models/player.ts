@@ -4,7 +4,7 @@ import {
   type,
   MapSchema,
   ArraySchema,
-  CollectionSchema
+  CollectionSchema,
 } from "@colyseus/schema"
 import { Pokemon } from "./pokemon"
 import Simulation from "../../core/simulation"
@@ -46,6 +46,7 @@ export default class Player extends Schema implements IPlayer {
   @type({ map: PokemonConfig }) pokemonCollection
   @type("string") title: Title | ""
   @type("string") role: Role
+  @type(["string"]) pokemonsProposition = new ArraySchema<Pkm>()
   effects: Effects = new Effects()
   isBot: boolean
   opponents: string[] = []

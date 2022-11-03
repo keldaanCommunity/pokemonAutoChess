@@ -1,10 +1,16 @@
 import { Pkm } from "../app/types/enum/Pokemon"
 import PokemonFactory from "../app/models/pokemon-factory"
+import { Synergy } from "../app/types/enum/Synergy"
+import { Rarity } from "../app/types/enum/Game"
 
 Object.values(Pkm).forEach((p) => {
-  const n1 = p
-  const n2 = PokemonFactory.createPokemonFromName(p).name
-  if (n1 != n2) {
-    console.log(n1, n2)
+  const pkm = PokemonFactory.createPokemonFromName(p)
+  if (
+    pkm.stars === 2 &&
+    pkm.final &&
+    !pkm.types.includes(Synergy.FOSSIL) &&
+    pkm.rarity !== Rarity.MYTHICAL
+  ) {
+    console.log(pkm.name)
   }
 })

@@ -7,6 +7,7 @@ import PreparationState from "../../../rooms/states/preparation-state"
 import GameState from "../../../rooms/states/game-state"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import { BotDifficulty } from "../../../types/enum/Game"
+import { Pkm } from "../../../types/enum/Pokemon"
 
 interface INetwork {
   client: Client
@@ -29,7 +30,7 @@ const initalState: INetwork = {
   game: undefined,
   after: undefined,
   uid: "",
-  displayName: ""
+  displayName: "",
 }
 
 export const networkSlice = createSlice({
@@ -82,7 +83,7 @@ export const networkSlice = createSlice({
       }
       if (state.preparation) {
         state.preparation.send(Transfer.NEW_MESSAGE, {
-          payload: action.payload
+          payload: action.payload,
         })
       }
     },
@@ -143,6 +144,9 @@ export const networkSlice = createSlice({
     shopClick: (state, action: PayloadAction<number>) => {
       state.game?.send(Transfer.SHOP, { id: action.payload })
     },
+    pokemonPropositionClick: (state, action: PayloadAction<Pkm>) => {
+      state.game?.send(Transfer.POKEMON_PROPOSITION, action.payload)
+    },
     itemClick: (state, action: PayloadAction<string>) => {
       state.game?.send(Transfer.ITEM, { id: action.payload })
     },
@@ -196,11 +200,12 @@ export const networkSlice = createSlice({
       action: PayloadAction<{ uid: string; title: Title }>
     ) => {
       state.lobby?.send(Transfer.GIVE_TITLE, action.payload)
-    }
-  }
+    },
+  },
 })
 
 export const {
+  pokemonPropositionClick,
   requestLeaderboard,
   requestBotLeaderboard,
   requestLevelLeaderboard,
@@ -238,7 +243,7 @@ export const {
   lockClick,
   refreshClick,
   searchById,
-  setTitle
+  setTitle,
 } = networkSlice.actions
 
 export default networkSlice.reducer

@@ -4,13 +4,15 @@ import Design, { DesignTiled } from "../../core/design"
 import BotManager from "../../core/bot-manager"
 import { DungeonData, Dungeon } from "../../types/Config"
 import { GamePhaseState } from "../../types/enum/Game"
-import { Schema, MapSchema, type } from "@colyseus/schema"
+import { Schema, MapSchema, ArraySchema, type } from "@colyseus/schema"
+import { Pkm } from "../../types/enum/Pokemon"
 
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
   @type("uint8") roundTime = 30
   @type("uint8") phase = GamePhaseState.PICK
   @type({ map: Player }) players = new MapSchema<Player>()
+  @type(["string"]) additionalPokemons = new ArraySchema<Pkm>()
   @type("uint8") stageLevel = 0
   @type("string") mapName: string
   time = 50000

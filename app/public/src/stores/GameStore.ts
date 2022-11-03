@@ -27,6 +27,7 @@ interface GameStateStore {
   experienceManager: ExperienceManager
   shop: Pkm[]
   itemsProposition: string[]
+  pokemonsProposition: Pkm[]
   currentPlayerSynergies: [string, number][]
   currentPlayerOpponentName: string
   currentPlayerOpponentAvatar: string
@@ -42,6 +43,7 @@ interface GameStateStore {
   blueHealDpsMeter: IDpsHeal[]
   redHealDpsMeter: IDpsHeal[]
   pokemonCollection: MapSchema<IPokemonConfig>
+  additionalPokemons: Pkm[]
 }
 
 const initialState: GameStateStore = {
@@ -59,6 +61,7 @@ const initialState: GameStateStore = {
   experienceManager: new ExperienceManager(),
   shop: new Array<Pkm>(),
   itemsProposition: new Array<Item>(),
+  pokemonsProposition: new Array<Pkm>(),
   currentPlayerSynergies: new Array<[Synergy, number]>(),
   currentPlayerOpponentName: "",
   currentPlayerOpponentAvatar: "0019/Normal",
@@ -73,7 +76,8 @@ const initialState: GameStateStore = {
   redDpsMeter: new Array<IDps>(),
   blueHealDpsMeter: new Array<IDpsHeal>(),
   redHealDpsMeter: new Array<IDpsHeal>(),
-  pokemonCollection: new MapSchema<IPokemonConfig>()
+  pokemonCollection: new MapSchema<IPokemonConfig>(),
+  additionalPokemons: new Array<Pkm>(),
 }
 
 export const gameSlice = createSlice({
@@ -92,7 +96,7 @@ export const gameSlice = createSlice({
       )
       toast(i, {
         containerId: state.players[index].rank.toString(),
-        className: "toast-no-border"
+        className: "toast-no-border",
       })
     },
     setRoundTime: (state, action: PayloadAction<number>) => {
@@ -150,6 +154,12 @@ export const gameSlice = createSlice({
     },
     setItemsProposition: (state, action: PayloadAction<ArraySchema<Item>>) => {
       state.itemsProposition = JSON.parse(JSON.stringify(action.payload))
+    },
+    setPokemonProposition: (state, action: PayloadAction<Pkm[]>) => {
+      state.pokemonsProposition = JSON.parse(JSON.stringify(action.payload))
+    },
+    setAdditionalPokemons: (state, action: PayloadAction<Pkm[]>) => {
+      state.additionalPokemons = JSON.parse(JSON.stringify(action.payload))
     },
     setSynergies: (state, action: PayloadAction<Synergies>) => {
       state.currentPlayerSynergies = Array.from(action.payload)
@@ -309,11 +319,13 @@ export const gameSlice = createSlice({
     setPokemonCollection: (state, action: PayloadAction<PokemonCollection>) => {
       state.pokemonCollection = action.payload
     },
-    leaveGame: () => initialState
-  }
+    leaveGame: () => initialState,
+  },
 })
 
 export const {
+  setAdditionalPokemons,
+  setPokemonProposition,
   displayEmote,
   setPokemonCollection,
   leaveGame,
@@ -354,7 +366,7 @@ export const {
   setShopLocked,
   changePlayer,
   setShop,
-  setItemsProposition
+  setItemsProposition,
 } = gameSlice.actions
 
 export default gameSlice.reducer

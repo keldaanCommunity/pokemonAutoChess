@@ -1,0 +1,43 @@
+import React, { useState } from 'react'
+import CSS from 'csstype'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import GamePokemonPortrait from './game-pokemon-portrait'
+import PokemonFactory from '../../../../../models/pokemon-factory'
+import { pokemonPropositionClick } from '../../../stores/NetworkStore'
+
+const style: CSS.Properties = {
+    position:'absolute',
+    top:'30%',
+    left:'20.5%',
+    width:'60%'
+}
+
+export default function GamePokemonsPropositions(){
+    const dispatch = useAppDispatch()
+    const pokemonsProposition = useAppSelector(state=>state.game.pokemonsProposition)
+    const pokemonCollection = useAppSelector(state=>state.game.pokemonCollection)
+    const [visible, setVisible] = useState(true)
+    if(pokemonsProposition.length >0){
+        return <div style={style}>
+            {visible ? <div style={{    
+                    display: 'flex',
+                    padding: '10px',
+                    height: '17vh',
+                    justifyContent: 'center'
+                }}>
+    {pokemonsProposition.map((pokemon,index)=>{
+    const p = PokemonFactory.createPokemonFromName(pokemon)
+    return <GamePokemonPortrait key={index} index={index} pokemon={p} pokemonConfig={pokemonCollection.get(p.index)} click={(e)=>{dispatch(pokemonPropositionClick(p.name))}}/>
+        })}
+            </div>: null}
+
+            <div style={{display:'flex', justifyContent:'center'}}>
+                <button className='bubbly-warning' onClick={()=>{setVisible(!visible)}}>{visible ? 'Hide' : 'Show'}</button>
+            </div>
+        </div>
+
+    }
+    else{
+        return null
+    }
+}
