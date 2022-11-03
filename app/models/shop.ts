@@ -30,7 +30,6 @@ export default class Shop {
       Pkm.STARLY,
       Pkm.TOTODILE,
       Pkm.SWINUB,
-      Pkm.NOIBAT,
       Pkm.FENNEKIN,
       Pkm.PICHU,
     ]
@@ -54,12 +53,10 @@ export default class Shop {
       Pkm.FLABEBE,
       Pkm.BELLSPROUT,
       Pkm.SLOWPOKE,
-      Pkm.CORPHISH,
       Pkm.HATENNA,
     ]
 
     this.RARE = [
-      Pkm.MEOWTH,
       Pkm.BULBASAUR,
       Pkm.TURTWIG,
       Pkm.NIDORANF,
@@ -73,10 +70,6 @@ export default class Shop {
       Pkm.DRATINI,
       Pkm.MAGBY,
       Pkm.WHISMUR,
-      Pkm.PUMPKABOO,
-      Pkm.MAKUHITA,
-      Pkm.JOLTIK,
-      Pkm.CACNEA,
     ]
 
     this.EPIC = [
@@ -92,7 +85,6 @@ export default class Shop {
       Pkm.BUDEW,
       Pkm.PORYGON,
       Pkm.CUBONE,
-      Pkm.PONYTA,
       Pkm.TAUROS,
       Pkm.HOUNDOUR,
     ]
