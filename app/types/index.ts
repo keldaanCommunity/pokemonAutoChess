@@ -41,6 +41,7 @@ export type PrecomputedTypePokemon = {
   [key in Synergy]: {
     pokemons: Pkm[]
     mythicalPokemons: Pkm[]
+    additionalPokemons: Pkm[]
   }
 }
 
@@ -127,6 +128,7 @@ export enum Transfer {
   REQUEST_LEADERBOARD = "REQUEST_LEADERBOARD",
   REQUEST_LEVEL_LEADERBOARD = "REQUEST_LEVEL_LEADERBOARD",
   REQUEST_BOT_LEADERBOARD = "REQUEST_BOT_LEADERBOARD",
+  POKEMON_PROPOSITION = "POKEMON_PROPOSITION",
 }
 
 export enum AttackSprite {

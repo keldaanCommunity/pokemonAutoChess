@@ -174,29 +174,27 @@ export default class Shop {
     ]
   }
 
-  addAdditionalPokemons(pokemons: Pkm[]) {
-    pokemons.forEach((pkm) => {
-      const p = PokemonFactory.createPokemonFromName(pkm)
-      switch (p.rarity) {
-        case Rarity.COMMON:
-          this.COMMON.push(pkm)
-          break
-        case Rarity.UNCOMMON:
-          this.UNCOMMON.push(pkm)
-          break
-        case Rarity.RARE:
-          this.RARE.push(pkm)
-          break
-        case Rarity.EPIC:
-          this.EPIC.push(pkm)
-          break
-        case Rarity.LEGENDARY:
-          this.LEGENDARY.push(pkm)
-          break
-        default:
-          break
-      }
-    })
+  addAdditionalPokemon(pkm: Pkm) {
+    const p = PokemonFactory.createPokemonFromName(pkm)
+    switch (p.rarity) {
+      case Rarity.COMMON:
+        this.COMMON.push(pkm)
+        break
+      case Rarity.UNCOMMON:
+        this.UNCOMMON.push(pkm)
+        break
+      case Rarity.RARE:
+        this.RARE.push(pkm)
+        break
+      case Rarity.EPIC:
+        this.EPIC.push(pkm)
+        break
+      case Rarity.LEGENDARY:
+        this.LEGENDARY.push(pkm)
+        break
+      default:
+        break
+    }
   }
 
   assignShop(player: Player) {

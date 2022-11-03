@@ -3,7 +3,7 @@ import firebase from 'firebase/compat/app'
 import React, { useEffect, useRef, useState } from 'react'
 import GameState from '../../../rooms/states/game-state'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { setPokemonCollection, setSynergies, addPlayer, changePlayer, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter, leaveGame, displayEmote, setCurrentPlayerTitle} from '../stores/GameStore'
+import { setPokemonCollection, setSynergies, addPlayer, changePlayer, setCurrentPlayerId, setExperienceManager, setInterest, setItemsProposition, setMapName, setMoney, setPhase, setRoundTime, setShop, setShopLocked, setStageLevel, setStreak, setOpponentName, setOpponentAvatar, setLife, setPlayer, setBoardSize, setCurrentPlayerMoney, setCurrentPlayerExperienceManager, setCurrentPlayerAvatar, setCurrentPlayerName, addBlueDpsMeter, changeBlueDpsMeter, addRedDpsMeter, changeRedDpsMeter, addBlueHealDpsMeter, changeBlueHealDpsMeter, addRedHealDpsMeter, changeRedHealDpsMeter, removeRedDpsMeter, removeBlueDpsMeter, removeRedHealDpsMeter, removeBlueHealDpsMeter, leaveGame, displayEmote, setCurrentPlayerTitle, setPokemonProposition, setAdditionalPokemons} from '../stores/GameStore'
 import { logIn, joinGame, requestTilemap } from '../stores/NetworkStore'
 import { FIREBASE_CONFIG } from './utils/utils'
 import GameContainer from '../game/game-container'
@@ -17,8 +17,12 @@ import GameShop from './component/game/game-shop'
 import GameSynergies from './component/game/game-synergies'
 import GameModal from './component/game/game-modal'
 import AfterGameState from '../../../rooms/states/after-game-state'
-import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer, ISimplePlayer } from '../../../types'
+import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer, ISimplePlayer, CDN_PORTRAIT_URL, Emotion } from '../../../types'
 import GameToasts from './component/game/game-toasts'
+import GamePokemonsProposition from './component/game/game-pokemons-proposition'
+import PokemonFactory from '../../../models/pokemon-factory'
+import { Pkm, PkmIndex } from '../../../types/enum/Pokemon'
+import { toast } from 'react-toastify'
 let gameContainer: GameContainer
 
 function playerClick(id: string){
@@ -148,6 +152,22 @@ export default function Game() {
         })
       }
 
+      room.state.additionalPokemons.onAdd = (pkm) => {
+        dispatch(setAdditionalPokemons(room.state.additionalPokemons))
+        if(pkm !== Pkm.DEFAULT){
+          const i = React.createElement(
+            "img",
+            {
+              src: `${CDN_PORTRAIT_URL}${PkmIndex[pkm].replace('-','/')}/${Emotion.NORMAL}.png`
+            },
+            null
+          )
+          room.state.players.forEach(player=>{
+            toast(i, { containerId: player.rank.toString() })
+          })
+        }
+      }
+
       room.state.players.onAdd = player => {
         gameContainer.initializePlayer(player)
         dispatch(addPlayer(player))
@@ -243,6 +263,18 @@ export default function Game() {
             dispatch(setItemsProposition(player.itemsProposition))
           }
         })
+
+        player.pokemonsProposition.onAdd = ((changes)=>{
+          if(player.id == uid){
+            dispatch(setPokemonProposition(player.pokemonsProposition))
+          }
+        })
+        player.pokemonsProposition.onRemove = ((changes)=>{
+          if(player.id == uid){
+            dispatch(setPokemonProposition(player.pokemonsProposition))
+          }
+        })
+
         player.simulation.blueDpsMeter.onAdd = ((dps, key)=>{
           if(player.id == currentPlayerId){
             dispatch(addBlueDpsMeter(dps))
@@ -334,6 +366,7 @@ export default function Game() {
     <GamePlayers click={(id: string) => playerClick(id)}/>
     <GameSynergies/>
     <GameItemsProposition/>
+    <GamePokemonsProposition/>
     <GameDpsMeter/>
     <GameToasts/>
     <div id='game' ref={container}>

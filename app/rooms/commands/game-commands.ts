@@ -150,6 +150,7 @@ export class OnPokemonPropositionCommand extends Command<
     if (player) {
       if (player.pokemonsProposition.includes(pkm)) {
         this.state.additionalPokemons.push(pkm)
+        this.state.shop.addAdditionalPokemon(pkm)
       }
       while (player.pokemonsProposition.length > 0) {
         player.pokemonsProposition.pop()
@@ -560,7 +561,8 @@ export class OnDragDropItemCommand extends Command<
           }
         })
         if (itemToCombine) {
-          ;(Object.keys(ItemRecipe) as Item[]).forEach((name) => {
+          Object.keys(ItemRecipe).forEach((n) => {
+            const name = n as Item
             const recipe = ItemRecipe[name]
             if (
               recipe &&
@@ -1194,7 +1196,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         })
       }
     })
-    if (this.state.stageLevel === 1) {
+    if (this.state.stageLevel === 5) {
       const additionalPokemons = new Array<Pkm>()
       Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
         PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
@@ -1207,6 +1209,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           const p = additionalPokemons.pop()
           if (p) {
             this.state.additionalPokemons.push(p)
+            this.state.shop.addAdditionalPokemon(p)
           }
         } else {
           for (let i = 0; i < 3; i++) {
@@ -1217,10 +1220,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           }
         }
       })
-    }
-
-    if (this.state.stageLevel === 2) {
-      this.state.shop.addAdditionalPokemons(this.state.additionalPokemons)
     }
   }
 
@@ -1302,6 +1301,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             const i = player.pokemonsProposition.pop()
             if (i) {
               this.state.additionalPokemons.push(i)
+              this.state.shop.addAdditionalPokemon(i)
             }
           }
           while (player.pokemonsProposition.length > 0) {
