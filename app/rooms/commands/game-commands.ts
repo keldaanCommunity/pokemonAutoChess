@@ -151,6 +151,16 @@ export class OnPokemonPropositionCommand extends Command<
       if (player.pokemonsProposition.includes(pkm)) {
         this.state.additionalPokemons.push(pkm)
         this.state.shop.addAdditionalPokemon(pkm)
+        if (this.room.getBoardSize(player.board) < 8) {
+          const pokemon = PokemonFactory.createPokemonFromName(
+            pkm,
+            player.pokemonCollection.get(PkmIndex[pkm])
+          )
+          const x = this.room.getFirstAvailablePositionInBoard(player.id)
+          pokemon.positionX = x !== undefined ? x : -1
+          pokemon.positionY = 0
+          player.board.set(pokemon.id, pokemon)
+        }
       }
       while (player.pokemonsProposition.length > 0) {
         player.pokemonsProposition.pop()
