@@ -424,6 +424,10 @@ export default class PokemonState {
       }
     }
 
+    if (pokemon.status.runeProtect) {
+      pokemon.status.updateRuneProtect(dt)
+    }
+
     if (pokemon.status.burn) {
       pokemon.status.updateBurn(dt)
     }
