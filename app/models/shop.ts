@@ -106,6 +106,7 @@ export default class Shop {
     ]
 
     this.MYTHICAL_1 = [
+      Pkm.AERODACTYL,
       Pkm.BLACEPHALON,
       Pkm.REGIDRAGO,
       Pkm.REGIELEKI,

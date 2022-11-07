@@ -23,7 +23,7 @@ import {
 import { Synergy } from "../../types/enum/Synergy"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
-import PRECOMPUTED_TYPE_POKEMONS from "../../models/precomputed/type-pokemons.json"
+
 export class OnShopCommand extends Command<
   GameRoom,
   {

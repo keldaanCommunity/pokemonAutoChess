@@ -8254,8 +8254,8 @@ export class Archen extends Pokemon {
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
       1,
-      100,
-      Ability.DEFAULT,
+      90,
+      Ability.ROCK_SMASH,
       shiny,
       emotion,
       false
@@ -8279,8 +8279,8 @@ export class Archeops extends Pokemon {
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
       2,
-      100,
-      Ability.DEFAULT,
+      90,
+      Ability.ROCK_SMASH,
       shiny,
       emotion,
       true
@@ -8739,8 +8739,8 @@ export class Aerodactyl extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.AERODACTYL,
-      [Synergy.FOSSIL, Synergy.FLYING],
-      Rarity.EPIC,
+      [Synergy.MINERAL, Synergy.FLYING],
+      Rarity.MYTHICAL,
       PkmIndex[Pkm.AERODACTYL],
       Pkm.DEFAULT,
       270,
@@ -8751,7 +8751,7 @@ export class Aerodactyl extends Pokemon {
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
       2,
-      100,
+      80,
       Ability.ROCK_SLIDE,
       shiny,
       emotion,
