@@ -9,7 +9,7 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
     
     if(!props.pokemon){
         return <div style={{
-            width:'15.5%',
+            width:'15%',
             marginRight:'1%',
             padding:'0px'
         }}/>
@@ -18,7 +18,7 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
         const rarityColor = RarityColor[props.pokemon.rarity]
         return <div className="nes-container" style={{
             imageRendering:'pixelated',
-            width:'15.5%',
+            width:'15%',
             backgroundColor: rarityColor,
             backgroundImage:`url("${getPath(props.pokemon, props.pokemonConfig)}")`,
             marginRight:'1%',
@@ -44,11 +44,11 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
             padding:'0px',
             display:'flex',
             position: 'absolute',
-            justifyContent:'center',
+            justifyContent:'space-evenly',
             right: '0px',
             flexFlow: 'column',
             top: '0px',
-            backgroundColor:rarityColor
+            height:'100%'
             }}>
             {props.pokemon.types.map(type=>{
                 return <li key={type}><img src={'assets/types/'+ type +'.png'}/></li>

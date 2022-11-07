@@ -227,7 +227,7 @@ input[type=range]:focus::-ms-fill-upper {
 .bubbly-success {
   margin: 10px;
   display: block;
-  padding: 8px 30px;
+  padding: 5px 30px;
   border-radius: 12px;
   font-size: 1.5vw;
   background: #92cc41;
@@ -251,7 +251,7 @@ input[type=range]:focus::-ms-fill-upper {
 .bubbly-warning {
   margin: 10px;
   display: block;
-  padding: 8px 30px;
+  padding: 5px 30px;
   border-radius: 12px;
   font-size: 1.5vw;
   background: #f7d51d;
@@ -274,7 +274,7 @@ input[type=range]:focus::-ms-fill-upper {
 .bubbly-error {
   margin: 10px;
   display: block;
-  padding: 8px 30px;
+  padding: 5px 30px;
   border-radius: 12px;
   font-size: 1.5vw;
   background: #e76e55;
@@ -321,7 +321,7 @@ input[type=range]:focus::-ms-fill-upper {
 .bubbly-primary {
   margin: 10px;
   display: block;
-  padding: 8px 30px;
+  padding: 5px 30px;
   border-radius: 12px;
   font-size: 1.5vw;
   background: #109fff;
@@ -345,7 +345,7 @@ input[type=range]:focus::-ms-fill-upper {
 .bubbly {
   display: block;
   text-align: center;
-  padding: 8px 30px;
+  padding: 5px 30px;
   border-radius: 12px;
   font-size: 1.5vw;
   background: #ffffff;
@@ -395,7 +395,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .firebaseui-idp-button {
   border: solid !important;
-  padding: 8px 30px !important;
+  padding: 5px 30px !important;
   border-radius: 12px !important;
   border-color: black !important;
   border-width: 4px !important;
