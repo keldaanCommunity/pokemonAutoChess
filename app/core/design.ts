@@ -48,6 +48,7 @@ export default class Design {
   maxArena: number[] = [29, 18]
   leftBorder: number[] = [14, 15]
   rightBorder: number[] = [28, 15]
+  preview: boolean
 
   constructor(
     id: Dungeon,
@@ -56,16 +57,18 @@ export default class Design {
     width?: number,
     height?: number,
     minArena?: number[],
-    maxArena?: number[]
+    maxArena?: number[],
+    preview?: boolean
   ) {
     this.id = id
     this.frequency = frequency
     this.persistance = persistance
-    this.width = width ? width : this.width
-    this.height = height ? height : this.height
+    this.width = preview ? 6 : width ? width : this.width
+    this.height = preview ? 6 : height ? height : this.height
     this.minArena = minArena ? minArena : this.minArena
     this.maxArena = maxArena ? maxArena : this.maxArena
     this.tileset = new Tileset(this.id)
+    this.preview = preview ? preview : false
   }
 
   async create() {
@@ -92,12 +95,25 @@ export default class Design {
       const row: number[] = []
       for (let j = 0; j < this.width; j++) {
         const v = generation[i][j]
-        if (v > 0.66) {
-          row.push(TerrainType.WALL)
-        } else if (v > 0.33) {
-          row.push(TerrainType.GROUND)
-        } else {
-          row.push(TerrainType.WATER)
+        if(this.preview){
+            if(i===0 || i === 1){
+                row.push(TerrainType.WALL)
+            }
+            else if(i === 2 || i === 3){
+                row.push(TerrainType.GROUND)
+            }
+            else{
+                row.push(TerrainType.WATER)
+            }
+        }
+        else{
+            if (v > 0.66) {
+                row.push(TerrainType.WALL)
+              } else if (v > 0.33) {
+                row.push(TerrainType.GROUND)
+              } else {
+                row.push(TerrainType.WATER)
+              }
         }
       }
       this.terrain.push(row)
