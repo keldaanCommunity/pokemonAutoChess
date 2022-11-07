@@ -3,7 +3,7 @@ import Design from "../app/core/design"
 import fs from "fs"
 
 ;(Object.keys(Dungeon) as Dungeon[]).forEach((m) => {
-  const d = new Design(m, 5, 0.1, 5, 5, [1, 1], [4, 4])
+  const d = new Design(m, 5, 0.1, 5, 5, [0, 0], [0, 0], true)
   d.create().then(() => {
     const file = fs.createWriteStream(`tests/samples/${d.id}.json`)
     file.on("error", function (err) {
