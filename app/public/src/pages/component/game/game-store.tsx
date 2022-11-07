@@ -9,9 +9,11 @@ import { shopClick } from '../../../stores/NetworkStore'
 const style: CSS.Properties = {
     display: 'flex',
     listStyleType: 'none',
-    padding: '0px',
-    margin:'5px',
-    width:'50vw'
+    gap: '5px',
+    width:'47vw',
+    margin:'0px',
+    padding:'0px',
+    justifyContent:'space-between'
 }
 
 export default function GameStore() {

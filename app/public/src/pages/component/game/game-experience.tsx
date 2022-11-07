@@ -10,10 +10,10 @@ const style: CSS.Properties = {
 const styleProgress: CSS.Properties = {
     position: 'absolute',
     color: 'white',
-    left: '35%',
-    bottom: '7%',
+    left: '40%',
+    bottom: '13%',
     fontSize:'1.2vw',
-    margin: '0px'
+    margin:'0px'
 }
 
 export default function GameExperience() {

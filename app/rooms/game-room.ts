@@ -41,15 +41,24 @@ import { IGameUser } from "../models/colyseus-models/game-user"
 import History from "../models/mongo-models/history"
 import { components } from "../api-v1/openapi"
 import { Title, Role } from "../types"
+import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
   eloEngine: EloRank
-
+  additionalPokemonsPool: Array<Pkm>
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
     this.eloEngine = new EloRank()
+    this.additionalPokemonsPool = new Array<Pkm>()
+  }
+
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[array[i], array[j]] = [array[j], array[i]]
+    }
   }
 
   // When room is initialized
@@ -62,6 +71,15 @@ export default class GameRoom extends Room<GameState> {
     console.log("create game room")
     // console.log(options);
     this.setState(new GameState(options.preparationId, options.name))
+    Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
+      PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
+        if(!this.additionalPokemonsPool.includes(p)){
+            this.additionalPokemonsPool.push(p)
+        }
+      })
+    })
+    this.shuffleArray(this.additionalPokemonsPool)
+
     this.maxClients = 8
     for (const id in options.users) {
       const user = options.users[id]

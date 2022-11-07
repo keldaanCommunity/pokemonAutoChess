@@ -1085,13 +1085,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     })
   }
 
-  shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[array[i], array[j]] = [array[j], array[i]]
-    }
-  }
-
   initializePickingPhase() {
     this.state.phase = GamePhaseState.PICK
     const isPVE = this.checkForPVE()
@@ -1207,23 +1200,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       }
     })
     if (this.state.stageLevel === 5) {
-      const additionalPokemons = new Array<Pkm>()
-      Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
-        PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
-          additionalPokemons.push(p)
-        })
-      })
-      this.shuffleArray(additionalPokemons)
       this.state.players.forEach((player: Player) => {
         if (player.isBot) {
-          const p = additionalPokemons.pop()
+          const p = this.room.additionalPokemonsPool.pop()
           if (p) {
             this.state.additionalPokemons.push(p)
             this.state.shop.addAdditionalPokemon(p)
           }
         } else {
           for (let i = 0; i < 3; i++) {
-            const p = additionalPokemons.pop()
+            const p = this.room.additionalPokemonsPool.pop()
             if (p) {
               player.pokemonsProposition.push(p)
             }

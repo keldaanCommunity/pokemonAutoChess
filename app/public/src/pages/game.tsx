@@ -23,6 +23,7 @@ import GamePokemonsProposition from './component/game/game-pokemons-proposition'
 import PokemonFactory from '../../../models/pokemon-factory'
 import { Pkm, PkmIndex } from '../../../types/enum/Pokemon'
 import { toast } from 'react-toastify'
+import { GameAdditionalPokemons } from './component/game/game-additional-pokemons'
 let gameContainer: GameContainer
 
 function playerClick(id: string){
