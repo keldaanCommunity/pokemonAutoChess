@@ -1,10 +1,9 @@
 import { ApexOptions } from 'apexcharts'
 import React, { useState } from 'react'
 import Chart from 'react-apexcharts'
-import {CDN_PORTRAIT_URL} from '../../../../../types'
 import { IMeta } from '../../../../../models/mongo-models/meta'
-import { Emotion } from '../../../../../types'
 import { PkmIndex } from '../../../../../types/enum/Pokemon'
+import { getPortraitSrc } from '../../../utils'
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
@@ -52,7 +51,7 @@ export default function Discover(props:{meta: IMeta[]}){
                     <p>Rank: ${props.meta[seriesIndex].teams[dataPointIndex].rank}</p>
                     <p>Cluster Size: ${props.meta[seriesIndex].count}</p>
                     <div style='display:flex'><p>Cluster</p> ${Object.keys(props.meta[seriesIndex].types).reduce((prev, curr)=>{return prev + '<div style=' + typeStyle + '><img src="assets/types/'+ curr.toUpperCase() +'.png"/><p>'+ props.meta[seriesIndex].types[curr] +'</p></div>'},'')}</div>
-                    ${Object.keys(props.meta[seriesIndex].teams[dataPointIndex].pokemons).reduce((prev, curr)=>{return prev + '<img src=' + `"${CDN_PORTRAIT_URL}${PkmIndex[curr].replace('-','/')}/${Emotion.NORMAL}.png"` + '/>'},'')}
+                    ${Object.keys(props.meta[seriesIndex].teams[dataPointIndex].pokemons).reduce((prev, curr)=>{return prev + '<img src=' + getPortraitSrc(PkmIndex[curr]) + '/>'},'')}
                     </div>
                 </div>`)
             }

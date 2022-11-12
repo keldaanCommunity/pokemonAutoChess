@@ -3,8 +3,7 @@ import CSS from 'csstype'
 import ReactCardFlip from 'react-card-flip'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { openBooster } from '../../../stores/NetworkStore'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
-import { Emotion } from '../../../../../types'
+import { getPortraitSrc } from '../../../utils'
 
 const buttonStyle: CSS.Properties = {
     marginLeft:'10px',
@@ -36,7 +35,7 @@ export default function Booster(props: {toggle :()=>void}){
 
                 <div className='nes-container' onClick={()=>{handleClick(flipArray, setFlipArray, index)}} style={{width:'188px', height:'188px', padding:'10px', backgroundColor:'rgba(255,255,255,1)', cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer'}}>
                     <h2 style={{position:'absolute', bottom:'0px', backgroundColor:'#fff'}}>40x</h2>
-                    <img style={{width:'160px',height:'160px', imageRendering:'pixelated'}} src={`${CDN_PORTRAIT_URL}${i.replace('-','/')}/${Emotion.NORMAL}.png`}/>
+                    <img style={{width:'160px',height:'160px', imageRendering:'pixelated'}} src={getPortraitSrc(i)}/>
                 </div>    
               </ReactCardFlip>
             })}

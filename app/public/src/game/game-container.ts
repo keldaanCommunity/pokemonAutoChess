@@ -8,8 +8,6 @@ import GameState from "../../../rooms/states/game-state"
 import { Pokemon } from "../../../models/colyseus-models/pokemon"
 import { DataChange } from "@colyseus/schema"
 import {
-  CDN_PORTRAIT_URL,
-  Emotion,
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
@@ -25,6 +23,7 @@ import { Pkm } from "../../../types/enum/Pokemon"
 import { toast } from "react-toastify"
 import React from "react"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
+import { getPortraitSrc } from "../utils"
 
 class GameContainer {
   room: Room<GameState>
@@ -104,19 +103,10 @@ class GameContainer {
         const config: IPokemonConfig | undefined = player.pokemonCollection.get(
           pokemon.index
         )
-        let emotion: Emotion = Emotion.NORMAL
-        let shinyPad = ""
-        if (config && config.selectedEmotion) {
-          emotion = config.selectedEmotion
-          shinyPad = config.selectedShiny ? "/0000/0001" : ""
-        }
         const i = React.createElement(
           "img",
           {
-            src: `${CDN_PORTRAIT_URL}${pokemon.index.replace(
-              "-",
-              "/"
-            )}${shinyPad}/${emotion}.png`
+            src: getPortraitSrc(pokemon.index, config?.selectedShiny, config?.selectedEmotion)
           },
           null
         )

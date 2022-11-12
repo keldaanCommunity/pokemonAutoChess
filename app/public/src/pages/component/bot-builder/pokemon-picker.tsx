@@ -1,11 +1,10 @@
 import React from 'react'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import { Emotion } from '../../../../../types'
 import { Pkm, PkmIndex } from '../../../../../types/enum/Pokemon'
 import CSS from 'csstype'
 import PRECOMPUTED_TYPE_POKEMONS_ALL from '../../../../../models/precomputed/type-pokemons-all.json'
 import { Item } from '../../../../../types/enum/Item'
+import { getPortraitSrc } from '../../../utils'
 
 const pokemonPoolStyle: CSS.Properties = {
     display:'flex',
@@ -37,7 +36,7 @@ export default function PokemonPicker(props:{selectEntity: React.Dispatch<React.
   {Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL).map((key)=>{
     return <TabPanel key={key} style={{display:'flex', flexWrap:'wrap'}}>
           {PRECOMPUTED_TYPE_POKEMONS_ALL[key].map((pkm)=>{
-            return <div onClick={()=>{props.selectEntity(pkm)}} key={pkm}><img style={imgStyle} src={`${CDN_PORTRAIT_URL}${PkmIndex[pkm].replace('-','/')}/${Emotion.NORMAL}.png`}/></div>
+            return <div onClick={()=>{props.selectEntity(pkm)}} key={pkm}><img style={imgStyle} src={getPortraitSrc(PkmIndex[pkm])}/></div>
           })}
       </TabPanel>
   })}

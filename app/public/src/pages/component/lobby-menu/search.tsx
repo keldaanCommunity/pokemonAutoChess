@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import History from './history'
-import { CDN_PORTRAIT_URL, Role, Title } from '../../../../../types'
+import { Role, Title } from '../../../../../types'
 import Elo from '../elo'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { searchName, searchById, giveBooster, setModerator, giveTitle } from '../../../stores/NetworkStore'
 import { RoleBadge } from '../RoleBadge'
+import { getAvatarSrc } from '../../../utils'
 
 export default function Search() {
     const dispatch = useAppDispatch()
@@ -33,7 +34,7 @@ export default function Search() {
         <div style={{display:'flex', gap:'10px',flexWrap:'wrap', marginTop:'10px', justifyContent:'space-around'}}>
             {suggestions.map(suggestion => <div style={{display:'flex', flexFlow:'column', padding:'5px'}} className='playerBox my-cursor' key={suggestion.id} onClick={(e)=>{dispatch(searchById(suggestion.id))}}>
                 <div style={{display:'flex', justifyContent:'center'}}>
-                    <img style={{width:'40px',height:'40px'}} src={`${CDN_PORTRAIT_URL}${suggestion.avatar}.png`}/>
+                    <img style={{width:'40px',height:'40px'}} src={getAvatarSrc(suggestion.avatar)}/>
                 </div>
                 <div style={{display:'flex', flexFlow:'column'}}>
                     <p style={{margin:'0px', padding:'0px'}}>{suggestion.name} </p>
@@ -43,7 +44,7 @@ export default function Search() {
         {user ? 
         <div>
             <div style={{display:'flex', alignItems: 'center', marginTop: '30px'}}>
-                <img src={CDN_PORTRAIT_URL + user.avatar + '.png'}/>
+                <img src={getAvatarSrc(user.avatar)}/>
                 <h5>{user.name}</h5>
                 <RoleBadge role={user.role}/>
                 <Elo elo={user.elo}/>

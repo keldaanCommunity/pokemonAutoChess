@@ -1,10 +1,9 @@
 import React from 'react'
-import {CDN_PORTRAIT_URL} from '../../../../../types'
 import { ItemName } from '../../../../../types/strings/Item'
-import { Emotion } from '../../../../../types'
 import { PkmIndex } from '../../../../../types/enum/Pokemon'
 import CSS from 'csstype'
 import { IItemsStatistic } from '../../../../../models/mongo-models/items-statistic'
+import { getPortraitSrc } from '../../../utils'
 
 const pStyle={
     fontSize:'1.1vw'
@@ -22,7 +21,7 @@ export default function ItemStatistic(props: {item: IItemsStatistic}){
             <div style={{display:'flex'}}>
                 {props.item.pokemons.map(pokemon=>{
                     return <div style={{display:'flex', flexFlow:'column', alignItems: 'center'}} key={pokemon}>
-                    <img style={imgStyle} src={`${CDN_PORTRAIT_URL}${PkmIndex[pokemon].replace('-','/')}/${Emotion.NORMAL}.png`}/>
+                    <img style={imgStyle} src={getPortraitSrc(PkmIndex[pokemon])}/>
                 </div> 
                 })}
             </div>

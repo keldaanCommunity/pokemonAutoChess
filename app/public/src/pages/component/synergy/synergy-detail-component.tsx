@@ -1,7 +1,6 @@
 import React from 'react'
-import {CDN_PORTRAIT_URL} from '../../../../../types'
 import PokemonFactory  from '../../../../../models/pokemon-factory'
-import { Emotion, PrecomputedTypePokemon } from '../../../../../types'
+import {  PrecomputedTypePokemon } from '../../../../../types'
 import { Synergy } from '../../../../../types/enum/Synergy'
 import { SynergyName, SynergyDetail } from '../../../../../types/strings/Synergy'
 import PRECOMPUTED_TYPE_POKEMONS from '../../../../../models/precomputed/type-pokemons.json'
@@ -9,6 +8,7 @@ import { Pkm } from '../../../../../types/enum/Pokemon'
 import { EffectDescription, EffectName } from '../../../../../types/strings/Effect'
 import { TypeTrigger, RarityColor } from '../../../../../types/Config'
 import {useAppSelector} from '../../../hooks'
+import { getPortraitSrc } from '../../../utils'
 
 const precomputed = PRECOMPUTED_TYPE_POKEMONS as PrecomputedTypePokemon
 
@@ -36,14 +36,14 @@ export default function SynergyDetailComponent(props:{type: Synergy, value: numb
    {precomputed[props.type].pokemons.map(p=>{
        const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
        const s = {border : '3px solid ' + RarityColor[pokemon.rarity]}
-       return <img key={p} style={s} src={`${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>    
+       return <img key={p} style={s} src={getPortraitSrc(pokemon.index)}/>    
    })}
    </div>
    <div style={{display:'flex', marginTop:'10px'}}>
    {precomputed[props.type].mythicalPokemons.map(p=>{
        const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
        const s = {border : '3px solid ' + RarityColor[pokemon.rarity]}
-       return <img key={p} style={s} src={`${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>   
+       return <img key={p} style={s} src={getPortraitSrc(pokemon.index)}/>   
    })}
    </div>
    <div style={{display:'flex', marginTop:'10px'}}>
@@ -51,7 +51,7 @@ export default function SynergyDetailComponent(props:{type: Synergy, value: numb
     if(additionalPokemons.includes(p)){
         const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
         const s = {border : '3px solid ' + RarityColor[pokemon.rarity]}
-        return <img key={p} style={s} src={`${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>   
+        return <img key={p} style={s} src={getPortraitSrc(pokemon.index)}/>   
     }
     else{
         return null

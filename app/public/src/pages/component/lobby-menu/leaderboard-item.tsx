@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../hooks'
 import { setTabIndex } from '../../../stores/LobbyStore'
 import { searchName } from '../../../stores/NetworkStore'
 import Elo from '../elo'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
+import { getAvatarSrc } from '../../../utils'
 
 
 export default function LeaderboardItem(props: {item: ILeaderboardInfo, isBot: boolean, noElo: boolean | undefined}){
@@ -17,7 +17,7 @@ export default function LeaderboardItem(props: {item: ILeaderboardInfo, isBot: b
     }}>
         <div style={{display:'flex', gap:'5px'}}>
             {props.item.rank}
-            <img src={CDN_PORTRAIT_URL + props.item.avatar + '.png'}/> 
+            <img src={getAvatarSrc(props.item.avatar)}/> 
         </div>
         <div style={{overflow:'hidden', whiteSpace:'nowrap', maxWidth:'300px'}}>
             {props.item.name}

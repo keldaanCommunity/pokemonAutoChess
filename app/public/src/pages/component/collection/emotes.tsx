@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { CDN_PORTRAIT_URL, Emotion } from '../../../../../types'
+import { Emotion } from '../../../../../types'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { broadcastEmote } from '../../../stores/NetworkStore'
+import { getPortraitSrc } from '../../../utils'
 
 export default function Emotes(){
     const [collectionVisible, setCollectionVisible] = useState<boolean>(false)
@@ -31,7 +32,6 @@ export function EmoteCollection(props: {visible: boolean}){
 }
 
 export function Emote(props:{id: string, shiny: boolean, emotion: Emotion}){
-    const shinyPad = props.shiny ? '/0000/0001' : ''
     const dispatch = useAppDispatch()
-    return <img onClick={()=>{dispatch(broadcastEmote(`${props.id.replace('-','/')}/${shinyPad}/${props.emotion}`))}} className='nes-pointer' src={`${CDN_PORTRAIT_URL}${props.id.replace('-','/')}/${shinyPad}/${props.emotion}.png`}/>
+    return <img onClick={()=>{dispatch(broadcastEmote(getPortraitSrc(props.id, props.shiny, props.emotion)))}}/>
 }

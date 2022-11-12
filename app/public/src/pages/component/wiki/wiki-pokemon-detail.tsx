@@ -1,13 +1,14 @@
 import React, {useState} from 'react'
 import PokemonFactory from '../../../../../models/pokemon-factory'
-import {CDN_PORTRAIT_URL, CDN_URL} from '../../../../../types'
-import { Emotion, ICreditNames } from '../../../../../types'
+import {CDN_URL} from '../../../../../types'
+import { ICreditNames } from '../../../../../types'
 import { AbilityName, AbilityDescription } from '../../../../../types/strings/Ability'
 import {ITracker} from '../../../../../types/ITracker'
 import DataFrame from 'dataframe-js'
 import Credits from './Credits'
 import {RarityColor} from '../../../../../types/Config'
 import { Pkm } from '../../../../../types/enum/Pokemon'
+import { getPortraitSrc } from '../../../utils'
 
 export default function WikiPokemonDetail(props:{pokemon: Pkm, m: ITracker | undefined}) {
     const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
@@ -34,7 +35,7 @@ export default function WikiPokemonDetail(props:{pokemon: Pkm, m: ITracker | und
                             return <img key={'img'+type} src={'assets/types/'+type+'.png'}/>
                         })}
                     </div>
-                    <div>evolution: {pokemon.evolution == Pkm.DEFAULT ? 'No evolution': <img src={`${CDN_PORTRAIT_URL}${PokemonFactory.createPokemonFromName(pokemon.evolution as Pkm).index.replace('-','/')}/${Emotion.NORMAL}.png`}/>}</div>
+                    <div>evolution: {pokemon.evolution == Pkm.DEFAULT ? 'No evolution': <img src={getPortraitSrc(PokemonFactory.createPokemonFromName(pokemon.evolution as Pkm).index)}/>}</div>
                 </div>
                 <div style={{width: '30%'}}>
                     <p>Health: {pokemon.hp}</p>

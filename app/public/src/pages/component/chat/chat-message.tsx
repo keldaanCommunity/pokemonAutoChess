@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { removeMessage, searchName } from '../../../stores/NetworkStore'
 import { setTabIndex } from '../../../stores/LobbyStore'
 import { IMessage, Role } from '../../../../../types'
-import {CDN_PORTRAIT_URL} from '../../../../../types'
+import { getAvatarSrc } from '../../../utils'
 
 export default function ChatMessage(props: {message: IMessage}) {
     const dispatch = useAppDispatch()
@@ -23,11 +23,11 @@ export default function ChatMessage(props: {message: IMessage}) {
                     justifyContent: 'space-between'
                 }}
                 >
-                    <img style={{marginRight: '10px'}} src={`${CDN_PORTRAIT_URL}${props.message.avatar}.png`} />
+                    <img style={{marginRight: '10px'}} src={getAvatarSrc(props.message.avatar)} />
                     <span style={{fontSize:'1vw'}}
                         onClick={()=>{
                             dispatch(searchName(props.message.name))
-                            dispatch(setTabIndex(3))
+                            dispatch(setTabIndex(4))
                         }}
                     >{props.message.name}</span>
                     <span style={{fontSize:'1vw'}}>{formatDate(props.message.time)}</span>

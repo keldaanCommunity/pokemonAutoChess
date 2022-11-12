@@ -1,7 +1,7 @@
 import React from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import { IDpsHeal } from '../../../../../types'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
+import { getAvatarSrc } from '../../../utils'
 
 const imgStyle = {
     width:'40px',
@@ -22,7 +22,7 @@ const style = {
 
 export default function GameDpsHeal(props:{maxHeal: number, dpsHeal: IDpsHeal}) {
     return  <div style={style}>
-    <img style={imgStyle} src={`${CDN_PORTRAIT_URL}${props.dpsHeal.name.replace('-','/')}.png`}/>
+    <img style={imgStyle} src={getAvatarSrc(props.dpsHeal.name)}/>
     <div style={{display:'flex', flexFlow:'column', justifyContent:'space-around', marginLeft:'5px', width:'100%'}}>
         <p style={{marginBottom:'-5px', marginLeft:'3px'}}>{props.dpsHeal.heal + props.dpsHeal.shield}</p>
         <ProgressBar className="nes-progress is-primary" style={progressStyle}>

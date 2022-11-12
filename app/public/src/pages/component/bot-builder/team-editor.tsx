@@ -1,11 +1,10 @@
 import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import {CDN_PORTRAIT_URL} from '../../../../../types'
 import {Pkm, PkmIndex} from '../../../../../types/enum/Pokemon'
-import {Emotion} from '../../../../../types'
 import ReactTooltip from 'react-tooltip'
 import CSS from 'csstype'
 import { IStep } from '../../../../../models/mongo-models/bot-v2'
+import { getPortraitSrc } from '../../../utils'
 
 const tabStyle: CSS.Properties = {
     backgroundColor: 'rgba(255, 255, 255, .7)',
@@ -153,7 +152,7 @@ export default function TeamEditor(props:{
                                             if(p.x == x && p.y == y){
                                                 r = <td style={tdStyle} onClick={()=>{props.handleEditorClick(x,y)}} key={x}>
                                                 <div style={divTdStyle}>
-                                                    <img style={bigImgStyle} src={`${CDN_PORTRAIT_URL}${PkmIndex[p.name].replace('-','/')}/${Emotion.NORMAL}.png`}></img>
+                                                    <img style={bigImgStyle} src={getPortraitSrc(PkmIndex[p.name])}></img>
                                                     {p.items ? <div style={{display:'flex', justifyContent:'space-evenly'}}>{p.items.map((it,j)=>{
                                                         return <img key={j} style={itemImgStyle} src={'assets/item/' + it + '.png'}/>
                                                     })}</div>: null}

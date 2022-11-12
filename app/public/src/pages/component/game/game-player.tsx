@@ -5,9 +5,9 @@ import CSS from 'csstype'
 import { IPlayer } from '../../../../../types'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { setPlayer } from '../../../stores/GameStore'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
 import { CircularProgressbarWithChildren } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
+import { getAvatarSrc } from '../../../utils'
 
 export default function GamePlayer(props:{player: IPlayer, click: (id: string)=>void, index: number}) {
     const style: CSS.Properties = {
@@ -18,7 +18,7 @@ export default function GamePlayer(props:{player: IPlayer, click: (id: string)=>
         borderRadius:'100px',
         right:'0.5%',
         top:`${0.5 + props.index*12.5}%`,
-        backgroundImage:`url('${CDN_PORTRAIT_URL}${props.player.avatar}.png')`,
+        backgroundImage:`url('${getAvatarSrc(props.player.avatar)}')`,
         backgroundSize: 'cover',
         imageRendering:'pixelated'
     }

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { CDN_PORTRAIT_URL, Title, TitleDescription, TitleName } from '../../../../../types'
+import { Title, TitleDescription, TitleName } from '../../../../../types'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import Elo from '../elo'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { changeAvatar, changeName, setTitle } from '../../../stores/NetworkStore'
 import { RoleBadge } from '../RoleBadge'
+import { getAvatarSrc, getPortraitSrc } from '../../../utils'
 
 const cursorStyle = {
     cursor:'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer'
@@ -32,7 +33,7 @@ export default function Profile() {
                 <div className='playerBox' style={{marginBottom:'20px'}}>
                     <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
                         <div style={{display:'flex', alignItems: 'center', gap:'5px'}}>
-                            <img src={CDN_PORTRAIT_URL + user.avatar + '.png'}/>
+                            <img src={getAvatarSrc(user.avatar)}/>
                             <p style={{color: '#ffc107'}}>{TitleName[user.title]}</p>
                             <RoleBadge role={user.role}/>
                             <p>{user.name}</p>
@@ -69,7 +70,7 @@ export default function Profile() {
                                 (pokemonConfig)=>{
                                     return pokemonConfig.emotions.map(
                                         (emotion) => {
-                                            return <img key={`normal-${pokemonConfig.id}${emotion}`} style={cursorStyle} onClick={()=>{dispatch(changeAvatar({index: pokemonConfig.id, emotion: emotion, shiny: false}))}} src={`${CDN_PORTRAIT_URL}${pokemonConfig.id.replace('-','/')}/${emotion}.png`}></img>
+                                            return <img key={`normal-${pokemonConfig.id}${emotion}`} style={cursorStyle} onClick={()=>{dispatch(changeAvatar({index: pokemonConfig.id, emotion: emotion, shiny: false}))}} src={getPortraitSrc(pokemonConfig.id, false, emotion)}></img>
                                         }
                                     )
                                 }
@@ -78,7 +79,7 @@ export default function Profile() {
                                 (pokemonConfig)=>{
                                     return pokemonConfig.shinyEmotions.map(
                                         (emotion) => {
-                                            return <img key={`shiny-${pokemonConfig.id}${emotion}`} style={cursorStyle} onClick={()=>{dispatch(changeAvatar({index: pokemonConfig.id, emotion: emotion, shiny: true}))}} src={`${CDN_PORTRAIT_URL}${pokemonConfig.id.replace('-','/')}/0000/0001/${emotion}.png`}></img>
+                                            return <img key={`shiny-${pokemonConfig.id}${emotion}`} style={cursorStyle} onClick={()=>{dispatch(changeAvatar({index: pokemonConfig.id, emotion: emotion, shiny: true}))}} src={getPortraitSrc(pokemonConfig.id, true, emotion)}></img>
                                         }
                                     )
                                 }

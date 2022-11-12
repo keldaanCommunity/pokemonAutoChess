@@ -1,8 +1,8 @@
-import React from "react";
-import { CDN_PORTRAIT_URL, Emotion } from "../../../../../types";
-import { PkmIndex } from "../../../../../types/enum/Pokemon";
+import React from "react"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import {useAppSelector} from "../../../hooks"
 import CSS from 'csstype'
+import { getPortraitSrc } from "../../../utils"
 
 const style: CSS.Properties = {
     display: "flex",
@@ -23,7 +23,7 @@ export function GameAdditionalPokemons(){
     }
     else{
         return <div className="nes-container" style={style}>
-            {additionalPokemons.map(p=><img style={{width:'40px', height:'40px'}} key={p} src={`${CDN_PORTRAIT_URL}${PkmIndex[p].replace('-','/')}/${Emotion.NORMAL}.png`}/>)}
+            {additionalPokemons.map(p=><img style={{width:'40px', height:'40px'}} key={p} src={getPortraitSrc(PkmIndex[p])}/>)}
         </div>
     }
 }

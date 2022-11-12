@@ -1,5 +1,5 @@
 import React from 'react'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
+import { getAvatarSrc } from '../../../utils'
 
 const ulStyle = {
     listStyle: 'none',
@@ -11,7 +11,7 @@ export default function Team(props:{team: string[]}){
     return <ul style={ulStyle}>
         {props.team.map((v, index)=>{        
             return <li key={index}>
-            <img src={CDN_PORTRAIT_URL + v + '.png'}/>
+            <img src={getAvatarSrc(v)}/>
         </li>})}
     </ul>
 }

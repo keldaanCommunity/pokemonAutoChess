@@ -1,6 +1,5 @@
 import CSS from 'csstype'
 import React, { useState, ReactElement } from 'react'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import PokemonCarousel from './pokemon-carousel'
 import Modal from 'react-bootstrap/esm/Modal'
@@ -14,6 +13,7 @@ import {Synergy} from '../../../../../types/enum/Synergy'
 import {ITracker} from '../../../../../types/ITracker'
 import PokemonEmotion from './pokemon-emotion'
 import { Pkm } from '../../../../../types/enum/Pokemon'
+import { getPortraitSrc } from '../../../utils'
 
 const buttonStyle: CSS.Properties = {
     marginLeft:'10px',
@@ -27,9 +27,8 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
     const pokemonCollection = useAppSelector(state=>state.lobby.pokemonCollection)
     let p: Pokemon
     let pConfig: IPokemonConfig | undefined
-    let pShinyPad = ''
     let pMetadata: ITracker | undefined = undefined
-    let emotion: Emotion
+
     const availableEmotions: Emotion[] = []
     let modalElement: ReactElement | null = null
     if(pokemon){
@@ -43,13 +42,6 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
             pMetadata = metadata[pathIndex[0]].subgroups[pathIndex[1]]
         }
         
-        if(pConfig && pConfig.selectedEmotion){
-            emotion = pConfig.selectedEmotion
-            pShinyPad = pConfig.selectedShiny ? '/0000/0001': '' 
-        }
-        else{
-            emotion = Emotion.NORMAL
-        }
         if(pMetadata){
             Object.keys(pMetadata.portrait_files).forEach(k=>{
                 const possibleEmotion = k as Emotion
@@ -66,11 +58,11 @@ export default function PokemonCollection(props: {toggleCollection :()=>void}){
             </Modal.Title>
             <Modal.Title>
                 <div style={{display:'flex', marginTop:'5px', marginBottom:'-10px', justifyContent:'center'}}><h3>{pConfig ? pConfig.dust: 0}</h3><img style={{width:'80px',height:'80px',imageRendering:'pixelated'}} 
-                src={`${CDN_PORTRAIT_URL}${p.index.replace('-','/')}/Normal.png`}/></div>
+                src={getPortraitSrc(p.index)}/></div>
             </Modal.Title>
             <Modal.Title>
             <img 
-            src={`${CDN_PORTRAIT_URL}${p.index.replace('-','/')}${pShinyPad}/${emotion}.png`}
+            src={getPortraitSrc(p.index, pConfig?.selectedShiny, pConfig?.selectedEmotion)}
             style={{filter: pConfig ? 'grayscale(0)':'grayscale(1)', width:'80px', height:'80px', imageRendering:'pixelated'}}/>
             </Modal.Title>
         </Modal.Header>
