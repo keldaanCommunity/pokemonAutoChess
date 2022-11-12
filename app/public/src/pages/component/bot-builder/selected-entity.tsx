@@ -1,12 +1,11 @@
 import React from 'react'
-import {CDN_PORTRAIT_URL } from '../../../../../types'
 import { Item } from '../../../../../types/enum/Item'
 import {ItemDescription, ItemName} from '../../../../../types/strings/Item'
-import {Emotion} from '../../../../../types'
 import {Pkm} from '../../../../../types/enum/Pokemon'
 import PokemonFactory from '../../../../../models/pokemon-factory'
 import {RarityColor} from '../../../../../types/Config'
 import CSS from 'csstype'
+import { getPortraitSrc } from '../../../utils'
 
 const entityStyle: CSS.Properties = {
     display: 'flex',
@@ -39,7 +38,7 @@ export default function SelectedEntity(props: {entity: Item | Pkm}) {
         const pokemon = PokemonFactory.createPokemonFromName(props.entity as Pkm)
         return <div className='nes-container' style={entityStyle}>
             <div style={{display:'flex'}}>
-                <img style={imgStyle} src={`${CDN_PORTRAIT_URL}${pokemon.index.replace('-','/')}/${Emotion.NORMAL}.png`}/>
+                <img style={imgStyle} src={getPortraitSrc(pokemon.index)}/>
                 <h3>{pokemon.name}</h3>
             </div>
             <p style={{color:RarityColor[pokemon.rarity]}}>rarity:{pokemon.rarity}</p>

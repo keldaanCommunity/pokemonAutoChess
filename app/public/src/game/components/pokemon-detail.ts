@@ -1,11 +1,12 @@
 import { GameObjects } from "phaser"
 import { AttackType } from "../../../../types/enum/Game"
-import { Emotion, CDN_PORTRAIT_URL } from "../../../../types"
+import { Emotion } from "../../../../types"
 import {
   AbilityName,
   AbilityDescription
 } from "../../../../types/strings/Ability"
 import { Ability } from "../../../../types/enum/Ability"
+import { getPortraitSrc } from "../../utils"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -91,11 +92,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     pokemonName.innerHTML = capitalizeFirstLetter(name)
 
     const avatar = document.createElement("img")
-    const shinyPad = shiny ? "/0000/0001/" : ""
-    avatar.src = `${CDN_PORTRAIT_URL}${index.replace(
-      "-",
-      "/"
-    )}${shinyPad}/${emotion}.png`
+    avatar.src = getPortraitSrc(index, shiny, emotion)
 
     const profile = document.createElement("div")
     profile.style.display = "flex"

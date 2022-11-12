@@ -17,13 +17,14 @@ import GameShop from './component/game/game-shop'
 import GameSynergies from './component/game/game-synergies'
 import GameModal from './component/game/game-modal'
 import AfterGameState from '../../../rooms/states/after-game-state'
-import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer, ISimplePlayer, CDN_PORTRAIT_URL, Emotion } from '../../../types'
+import { IDragDropCombineMessage, IDragDropItemMessage, IDragDropMessage, Transfer, ISimplePlayer } from '../../../types'
 import GameToasts from './component/game/game-toasts'
 import GamePokemonsProposition from './component/game/game-pokemons-proposition'
 import PokemonFactory from '../../../models/pokemon-factory'
 import { Pkm, PkmIndex } from '../../../types/enum/Pokemon'
 import { toast } from 'react-toastify'
 import { GameAdditionalPokemons } from './component/game/game-additional-pokemons'
+import { getPortraitSrc } from '../utils'
 let gameContainer: GameContainer
 
 function playerClick(id: string){
@@ -159,7 +160,7 @@ export default function Game() {
           const i = React.createElement(
             "img",
             {
-              src: `${CDN_PORTRAIT_URL}${PkmIndex[pkm].replace('-','/')}/${Emotion.NORMAL}.png`
+              src: getPortraitSrc(PkmIndex[pkm])
             },
             null
           )

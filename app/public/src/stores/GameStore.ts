@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { GamePhaseState } from "../../../types/enum/Game"
-import { CDN_PORTRAIT_URL, IDps, IDpsHeal, IPlayer } from "../../../types"
+import { IDps, IDpsHeal, IPlayer } from "../../../types"
 import { ArraySchema, DataChange, MapSchema } from "@colyseus/schema"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
 import Synergies from "../../../models/colyseus-models/synergies"
@@ -11,6 +11,7 @@ import { Pkm } from "../../../types/enum/Pokemon"
 import { Item } from "../../../types/enum/Item"
 import { toast } from "react-toastify"
 import React from "react"
+import { getAvatarSrc } from "../utils"
 
 interface GameStateStore {
   afterGameId: string
@@ -91,7 +92,7 @@ export const gameSlice = createSlice({
       const index = state.players.findIndex((e) => action.payload.id == e.id)
       const i = React.createElement(
         "img",
-        { src: `${CDN_PORTRAIT_URL}${action.payload.emote}.png` },
+        { src: getAvatarSrc(action.payload.emote) },
         null
       )
       toast(i, {

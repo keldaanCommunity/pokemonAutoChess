@@ -22,11 +22,11 @@ import PokemonsStatistic, {
   IPokemonsStatistic
 } from "../models/mongo-models/pokemons-statistic"
 import { PastebinAPI } from "pastebin-ts/dist/api"
+import {getAvatarSrc} from "../public/src/utils"
 import {
   Emotion,
   EmotionCost,
   Transfer,
-  CDN_PORTRAIT_URL,
   ISuggestionUser,
   Title,
   Role
@@ -193,11 +193,11 @@ export default class CustomLobbyRoom extends LobbyRoom {
             const dsEmbed = new MessageEmbed()
               .setTitle(`BOT ${bot.name} created by ${bot.author}`)
               .setURL(data as string)
-              .setAuthor(user.name, `${CDN_PORTRAIT_URL}${user.avatar}.png`)
+              .setAuthor(user.name, getAvatarSrc(user.avatar))
               .setDescription(
                 `A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`
               )
-              .setThumbnail(`${CDN_PORTRAIT_URL}${bot.avatar}.png`)
+              .setThumbnail(getAvatarSrc(bot.avatar))
             client.send(Transfer.PASTEBIN_URL, { url: data as string })
             try {
               this.discordWebhook.send({

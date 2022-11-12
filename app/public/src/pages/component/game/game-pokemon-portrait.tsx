@@ -1,9 +1,8 @@
 import React from 'react'
 import {Pokemon} from '../../../../../models/colyseus-models/pokemon'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
 import { IPokemonConfig } from '../../../../../models/mongo-models/user-metadata'
-import { Emotion } from '../../../../../types'
 import {PkmCost, RarityColor} from '../../../../../types/Config'
+import { getPortraitSrc } from '../../../utils'
 
 export default function GamePokemonPortrait(props: {index: number, pokemon: Pokemon | undefined, pokemonConfig: IPokemonConfig | undefined, click: React.MouseEventHandler<HTMLDivElement>}) {
     
@@ -20,7 +19,7 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
             imageRendering:'pixelated',
             width:'15%',
             backgroundColor: rarityColor,
-            backgroundImage:`url("${getPath(props.pokemon, props.pokemonConfig)}")`,
+            backgroundImage:`url("${getPortraitSrc(props.pokemon.index, props.pokemonConfig?.selectedShiny, props.pokemonConfig?.selectedEmotion)}")`,
             marginRight:'1%',
             padding:'0px',
             backgroundRepeat: 'no-repeat',
@@ -56,26 +55,6 @@ export default function GamePokemonPortrait(props: {index: number, pokemon: Poke
         </ul>
         </div>
     }
-}
-
-function getPath(pokemon: Pokemon, config: IPokemonConfig | undefined) {
-    const index = pokemon.index
-    
-    let pokemonPath = CDN_PORTRAIT_URL
-    pokemonPath += index + '/'
-
-    if(config && config.selectedShiny){
-        pokemonPath += '0000/0001/'
-    }
-
-    if( config && config.selectedEmotion){
-        pokemonPath += config.selectedEmotion
-    }
-    else{
-        pokemonPath += Emotion.NORMAL
-    }
-    pokemonPath += '.png'
-    return pokemonPath
 }
 
 function capitalizeFirstLetter(s: string) {

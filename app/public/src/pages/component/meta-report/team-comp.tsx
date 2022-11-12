@@ -1,9 +1,8 @@
 import React from 'react'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
 import { IMeta } from '../../../../../models/mongo-models/meta'
-import { Emotion } from '../../../../../types'
 import { Pkm, PkmIndex } from '../../../../../types/enum/Pokemon'
 import { Synergy } from '../../../../../types/enum/Synergy'
+import { getPortraitSrc } from '../../../utils'
 
 
 function capitalizeFirstLetter(string: string) {
@@ -49,7 +48,7 @@ export default function TeamComp(props:{team:IMeta}){
             <div style={{display:'flex'}}>
                 {sortedPokemons.map(pokemon=>{
                     return <div style={{display:'flex', flexFlow:'column', alignItems: 'center'}} key={pokemon}>
-                    <img style={{width:'60px', height:'60px', imageRendering:'pixelated'}} src={`${CDN_PORTRAIT_URL}${PkmIndex[pokemon].replace('-','/')}/${Emotion.NORMAL}.png`}/>
+                    <img style={{width:'60px', height:'60px', imageRendering:'pixelated'}} src={getPortraitSrc(PkmIndex[pokemon])}/>
                     <p>{props.team.pokemons[pokemon]?.toFixed(1)}</p>
                 </div> 
                 })}

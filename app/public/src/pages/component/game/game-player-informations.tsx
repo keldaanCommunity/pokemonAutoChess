@@ -1,9 +1,10 @@
 import React, {ReactElement} from 'react'
 import CSS from 'csstype'
 import { useAppSelector } from '../../../hooks'
-import { CDN_PORTRAIT_URL, TitleName } from '../../../../../types'
+import { TitleName } from '../../../../../types'
 import GameMoney from './game-money'
 import GameLife from './game-life'
+import { getAvatarSrc } from '../../../utils'
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -34,7 +35,7 @@ export default function GamePlayerInformations(){
     if(opponentName != '' && opponentAvatar !=''){
         opponent = 
         <div className='nes-container' style={{backgroundColor:'#54596b', padding:'5px', display:'flex', height:'100%'}}>
-            <img src={`${CDN_PORTRAIT_URL}${opponentAvatar}.png`}/>
+            <img src={getAvatarSrc(opponentAvatar)}/>
             <p style={{marginLeft:'5px', color:'white'}}>{opponentName}</p>      
         </div>
     }
@@ -50,7 +51,7 @@ export default function GamePlayerInformations(){
     <GameMoney money={money}/>
     <GameLife life={life}/>
     <div className='nes-container' style={{backgroundColor:'#54596b', padding:'5px', display:'flex', minWidth:'15%', height:'100%', gap:'5px'}}>
-        <img src={`${CDN_PORTRAIT_URL}${avatar}.png`}/>
+        <img src={getAvatarSrc(avatar)}/>
         <p style={{margin:'0px', color: '#ffc107'}}>{TitleName[title]}</p>
         <p style={{marginLeft:'5px', color:'white', textAlign:'center'}}>{name}</p>
     </div>

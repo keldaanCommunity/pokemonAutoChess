@@ -1,10 +1,10 @@
 import React from 'react'
 import HistoryItem from '../../../../../models/colyseus-models/history-item'
 import { BattleResult } from '../../../../../types/enum/Game'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
 import { ArraySchema } from '@colyseus/schema'
 import GameLife from './game-life'
 import GameMoney from './game-money'
+import { getAvatarSrc } from '../../../utils'
 
 export default function GamePlayerDetail(props:{name: string, life: number, money: number, history: ArraySchema<HistoryItem>}) {
     return <div>
@@ -24,7 +24,7 @@ export default function GamePlayerDetail(props:{name: string, life: number, mone
                     border:record.result == BattleResult.WIN ? '4px solid #4aa52e' : '4px solid #8c2022',
                     marginLeft:'6px',
                     borderRadius:'12px'
-                }} src={`${CDN_PORTRAIT_URL}${record.avatar}.png`}/>
+                }} src={getAvatarSrc(record.avatar)}/>
             <p style={{
             }}>{record.name.slice(0,4)}</p>
             </div>

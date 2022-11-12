@@ -2,8 +2,8 @@ import { ApexOptions } from 'apexcharts'
 import Chart from 'react-apexcharts'
 import { useAppSelector } from '../../../hooks'
 import React, { useState } from 'react'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
 import MultiRangeSlider from 'multi-range-slider-react'
+import { getPortraitSrc } from '../../../utils'
 
 const maxEloValue = 1700
 
@@ -98,7 +98,7 @@ export default function BotReport(){
             baseClassName='multi-range-slider multi-range'
 		/>
         <div style={{height: '30px'}}>
-            {botMonitor.map(b=><div style={{position: 'absolute', left:`${b.data[b.data.length -1].elo * 100 / maxEloValue}%`}} key={b.avatar}><img style={{width:'40px',height:'40px'}} src={`${CDN_PORTRAIT_URL}${b.avatar}.png`}/></div>)}
+            {botMonitor.map(b=><div style={{position: 'absolute', left:`${b.data[b.data.length -1].elo * 100 / maxEloValue}%`}} key={b.avatar}><img style={{width:'40px',height:'40px'}} src={getPortraitSrc(b.avatar)}/></div>)}
         </div>
         <Chart options={options} series={botSeries} height={600} />
     </div>

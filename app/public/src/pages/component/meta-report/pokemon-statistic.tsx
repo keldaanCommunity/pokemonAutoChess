@@ -1,9 +1,8 @@
 import React from 'react'
-import {CDN_PORTRAIT_URL} from '../../../../../types'
-import { Emotion } from '../../../../../types'
 import { PkmIndex } from '../../../../../types/enum/Pokemon'
 import CSS from 'csstype'
 import { IPokemonsStatistic } from '../../../../../models/mongo-models/pokemons-statistic'
+import { getPortraitSrc } from '../../../utils'
 
 const pStyle={
     fontSize:'1.1vw'
@@ -14,7 +13,7 @@ export default function PokemonStatistic(props: {pokemon: IPokemonsStatistic}){
 
     return <div style={{backgroundColor:'rgb(84, 89, 107)', margin:'10px'}} className='nes-container'>
         <div style={{display:'flex', justifyContent:'space-between'}}>
-        <img style={imgStyle} src={`${CDN_PORTRAIT_URL}${PkmIndex[props.pokemon.name].replace('-','/')}/${Emotion.NORMAL}.png`}></img>
+        <img style={imgStyle} src={getPortraitSrc(PkmIndex[props.pokemon.name])}></img>
             <p style={pStyle}>{props.pokemon.name}</p>
             <p style={pStyle}>Average Place: {props.pokemon.rank}</p>
             <p style={pStyle}>Count: {props.pokemon.count}</p>

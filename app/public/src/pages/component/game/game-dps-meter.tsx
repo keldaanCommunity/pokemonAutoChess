@@ -6,7 +6,7 @@ import GameRedDpsMeter from './game-red-dps-meter'
 import GameBlueHealDpsMeter from './game-blue-heal-dps-meter'
 import GameRedHealDpsMeter from './game-red-heal-dps-meter'
 import { useAppSelector } from '../../../hooks'
-import { CDN_PORTRAIT_URL } from '../../../../../types'
+import { getAvatarSrc } from '../../../utils'
 
 const style: CSS.Properties = {
     position:'absolute',
@@ -36,9 +36,9 @@ export default function GameDpsMeter() {
     else{
         return <div className='nes-container hidden-scrollable' style={style}>
         <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
-            <img style={imgStyle} src={CDN_PORTRAIT_URL + avatar + '.png'}></img>
+            <img style={imgStyle} src={getAvatarSrc(avatar)}></img>
             <h2>Vs</h2>
-            <img style={imgStyle} src={CDN_PORTRAIT_URL + opponentAvatar + '.png'}></img>
+            <img style={imgStyle} src={getAvatarSrc(opponentAvatar)}></img>
         </div>
         <Tabs>
             <TabList style={{display:'flex', justifyContent:'space-evenly'}}>
