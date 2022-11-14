@@ -2634,10 +2634,10 @@ export class PoisonStingStrategy extends AttackStrategy {
         damage = 30
         break
       case 2:
-        damage = 40
+        damage = 60
         break
       case 3:
-        damage = 50
+        damage = 120
         break
       default:
         break
@@ -2741,7 +2741,7 @@ export class TeleportStrategy extends AttackStrategy {
       [0, 0],
       [0, 5],
       [7, 5],
-      [7, 0],
+      [7, 0]
     ]
     this.shuffleArray(potentialCells)
 
@@ -3060,7 +3060,7 @@ export class MetronomeStrategy extends AttackStrategy {
       SongOfDesireStrategy,
       MindBlownStrategy,
       PaydayStrategy,
-      NaturalBlessingStrategy,
+      NaturalBlessingStrategy
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)

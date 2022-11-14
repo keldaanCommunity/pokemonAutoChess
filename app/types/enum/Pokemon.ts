@@ -420,6 +420,7 @@ export enum Pkm {
   TENTACRUEL = "tentacruel",
   SNUBULL = "snubull",
   GRANBULL = "granbull",
+  SEVIPER = "seviper"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -844,6 +845,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   tentacruel: "0073",
   snubull: "0209",
   granbull: "0210",
+  [Pkm.SEVIPER]: "0336"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1268,4 +1270,5 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TENTACRUEL]: Pkm.TENTACOOL,
   [Pkm.SNUBULL]: Pkm.SNUBULL,
   [Pkm.GRANBULL]: Pkm.SNUBULL,
+  [Pkm.SEVIPER]: Pkm.SEVIPER
 }

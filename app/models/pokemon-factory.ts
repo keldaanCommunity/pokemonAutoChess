@@ -326,6 +326,7 @@ import {
   Sealeo,
   Seedot,
   Seismitoad,
+  Seviper,
   Sewaddle,
   Shaymin,
   Shedninja,
@@ -419,7 +420,7 @@ import {
   Zapdos,
   Zekrom,
   Zubat,
-  Zweilous,
+  Zweilous
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1470,6 +1471,8 @@ export default class PokemonFactory {
         return new Snubull(s, e)
       case Pkm.GRANBULL:
         return new Granbull(s, e)
+      case Pkm.SEVIPER:
+        return new Seviper(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

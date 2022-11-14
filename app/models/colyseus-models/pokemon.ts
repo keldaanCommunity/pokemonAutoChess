@@ -6689,6 +6689,31 @@ export class Regice extends Pokemon {
   }
 }
 
+export class Seviper extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SEVIPER,
+      [Synergy.POISON, Synergy.MONSTER],
+      Rarity.MYTHICAL,
+      PkmIndex[Pkm.SEVIPER],
+      Pkm.DEFAULT,
+      180,
+      18,
+      4,
+      2,
+      1,
+      AttackSprite.POISON_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      75,
+      Ability.POISON_STING,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Regirock extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
