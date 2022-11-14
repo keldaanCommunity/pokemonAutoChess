@@ -106,7 +106,11 @@ class GameContainer {
         const i = React.createElement(
           "img",
           {
-            src: getPortraitSrc(pokemon.index, config?.selectedShiny, config?.selectedEmotion)
+            src: getPortraitSrc(
+              pokemon.index,
+              config?.selectedShiny,
+              config?.selectedEmotion
+            )
           },
           null
         )

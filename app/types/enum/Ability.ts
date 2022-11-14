@@ -96,7 +96,7 @@ import {
   BeatUpStrategy,
   BlueFlareStrategy,
   FusionBoltStrategy,
-  NaturalBlessingStrategy
+  AuroraVeilStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -197,7 +197,7 @@ export enum Ability {
   BEAT_UP = "BEAT_UP",
   BLUE_FLARE = "BLUE_FLARE",
   FUSION_BOLT = "FUSION_BOLT",
-  NATURAL_BLESSING = "NATURAL_BLESSING"
+  AURORA_VEIL = "AURORA_VEIL"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -298,5 +298,5 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.BEAT_UP]: new BeatUpStrategy(),
   [Ability.BLUE_FLARE]: new BlueFlareStrategy(),
   [Ability.FUSION_BOLT]: new FusionBoltStrategy(),
-  [Ability.NATURAL_BLESSING]: new NaturalBlessingStrategy()
+  [Ability.AURORA_VEIL]: new AuroraVeilStrategy()
 }

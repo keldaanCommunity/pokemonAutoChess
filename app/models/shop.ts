@@ -70,6 +70,7 @@ export default class Shop {
       Pkm.DRATINI,
       Pkm.MAGBY,
       Pkm.WHISMUR,
+      Pkm.VANILLITE,
     ]
 
     this.EPIC = [
@@ -133,6 +134,7 @@ export default class Shop {
       Pkm.VOLCARONA,
       Pkm.TAPU_KOKO,
       Pkm.TAPU_LELE,
+      Pkm.SEVIPER,
     ]
     this.MYTHICAL_2 = [
       Pkm.RESHIRAM,

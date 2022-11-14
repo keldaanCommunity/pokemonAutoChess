@@ -457,7 +457,7 @@ export class ElectroBoostStrategy extends AttackStrategy {
   }
 }
 
-export class NaturalBlessingStrategy extends AttackStrategy {
+export class AuroraVeilStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -465,9 +465,15 @@ export class NaturalBlessingStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
+    let duration = 1250
+    if (pokemon.stars === 2) {
+      duration = 2500
+    } else if (pokemon.stars === 3) {
+      duration = 3500
+    }
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team == tg.team) {
-        tg.status.triggerRuneProtect(7000)
+        tg.status.triggerRuneProtect(duration)
       }
     })
   }
@@ -2634,10 +2640,10 @@ export class PoisonStingStrategy extends AttackStrategy {
         damage = 30
         break
       case 2:
-        damage = 40
+        damage = 60
         break
       case 3:
-        damage = 50
+        damage = 120
         break
       default:
         break
@@ -2741,7 +2747,7 @@ export class TeleportStrategy extends AttackStrategy {
       [0, 0],
       [0, 5],
       [7, 5],
-      [7, 0],
+      [7, 0]
     ]
     this.shuffleArray(potentialCells)
 
@@ -3060,7 +3066,7 @@ export class MetronomeStrategy extends AttackStrategy {
       SongOfDesireStrategy,
       MindBlownStrategy,
       PaydayStrategy,
-      NaturalBlessingStrategy,
+      AuroraVeilStrategy
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)
