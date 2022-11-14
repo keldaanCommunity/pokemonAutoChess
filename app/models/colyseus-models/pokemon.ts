@@ -6606,7 +6606,7 @@ export class Suicune extends Pokemon {
       AttackType.PHYSICAL,
       3,
       100,
-      Ability.NATURAL_BLESSING,
+      Ability.AURORA_VEIL,
       shiny,
       emotion,
       true
@@ -7780,7 +7780,7 @@ export class Celebi extends Pokemon {
       AttackType.SPECIAL,
       2,
       100,
-      Ability.NATURAL_BLESSING,
+      Ability.AURORA_VEIL,
       shiny,
       emotion,
       true
@@ -10621,6 +10621,110 @@ export class Granbull extends Pokemon {
       2,
       85,
       Ability.EARTHQUAKE,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Vulpix extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.VULPIX,
+      [Synergy.FIRE, Synergy.FIELD],
+      Rarity.RARE,
+      PkmIndex[Pkm.VULPIX],
+      Pkm.NINETALES,
+      65,
+      6,
+      2,
+      2,
+      2,
+      AttackSprite.FIRE_RANGE,
+      AttackType.SPECIAL,
+      1,
+      85,
+      Ability.AURORA_VEIL,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Ninetales extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.NINETALES,
+      [Synergy.FIRE, Synergy.FIELD],
+      Rarity.RARE,
+      PkmIndex[Pkm.NINETALES],
+      Pkm.DEFAULT,
+      130,
+      12,
+      3,
+      3,
+      2,
+      AttackSprite.FIRE_RANGE,
+      AttackType.SPECIAL,
+      2,
+      85,
+      Ability.AURORA_VEIL,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class AlolanVulpix extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ALOLAN_VULPIX,
+      [Synergy.ICE, Synergy.FAIRY],
+      Rarity.RARE,
+      PkmIndex[Pkm.ALOLAN_VULPIX],
+      Pkm.ALOLAN_NINETALES,
+      65,
+      6,
+      2,
+      2,
+      2,
+      AttackSprite.ICE_MELEE,
+      AttackType.SPECIAL,
+      1,
+      85,
+      Ability.AURORA_VEIL,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class AlolanNinetales extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ALOLAN_NINETALES,
+      [Synergy.ICE, Synergy.FAIRY],
+      Rarity.RARE,
+      PkmIndex[Pkm.ALOLAN_NINETALES],
+      Pkm.DEFAULT,
+      130,
+      12,
+      3,
+      3,
+      2,
+      AttackSprite.ICE_MELEE,
+      AttackType.SPECIAL,
+      2,
+      85,
+      Ability.AURORA_VEIL,
       shiny,
       emotion,
       true,

@@ -584,8 +584,8 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: "",
     fra: ""
   },
-  [Ability.NATURAL_BLESSING]: {
-    eng: "Natural Blessing",
+  [Ability.AURORA_VEIL]: {
+    eng: "Aurora Veil",
     esp: "",
     prt: "",
     fra: ""
@@ -1175,8 +1175,8 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: "",
     fra: ""
   },
-  [Ability.NATURAL_BLESSING]: {
-    eng: "All allies are immune to spells for 7 seconds",
+  [Ability.AURORA_VEIL]: {
+    eng: "All allies are immune to spells for 1.5/2.5/3.5s",
     esp: "",
     prt: "",
     fra: ""

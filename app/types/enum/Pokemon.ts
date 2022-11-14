@@ -420,7 +420,11 @@ export enum Pkm {
   TENTACRUEL = "tentacruel",
   SNUBULL = "snubull",
   GRANBULL = "granbull",
-  SEVIPER = "seviper"
+  SEVIPER = "seviper",
+  VULPIX = "vulpix",
+  NINETALES = "ninetales",
+  ALOLAN_VULPIX = "alolan-vulpix",
+  ALOLAN_NINETALES = "alolan-ninetales"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -845,7 +849,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   tentacruel: "0073",
   snubull: "0209",
   granbull: "0210",
-  [Pkm.SEVIPER]: "0336"
+  [Pkm.SEVIPER]: "0336",
+  [Pkm.VULPIX]: "0037",
+  [Pkm.NINETALES]: "0038",
+  [Pkm.ALOLAN_VULPIX]: "0037-0001",
+  [Pkm.ALOLAN_NINETALES]: "0038-0001"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1270,5 +1278,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TENTACRUEL]: Pkm.TENTACOOL,
   [Pkm.SNUBULL]: Pkm.SNUBULL,
   [Pkm.GRANBULL]: Pkm.SNUBULL,
-  [Pkm.SEVIPER]: Pkm.SEVIPER
+  [Pkm.SEVIPER]: Pkm.SEVIPER,
+  [Pkm.VULPIX]: Pkm.VULPIX,
+  [Pkm.NINETALES]: Pkm.VULPIX,
+  [Pkm.ALOLAN_VULPIX]: Pkm.ALOLAN_VULPIX,
+  [Pkm.ALOLAN_NINETALES]: Pkm.ALOLAN_VULPIX
 }

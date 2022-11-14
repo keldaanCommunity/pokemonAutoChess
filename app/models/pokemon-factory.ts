@@ -7,6 +7,8 @@ import {
   Aggron,
   Alakazam,
   AlolanMarowak,
+  AlolanNinetales,
+  AlolanVulpix,
   Altaria,
   Amaura,
   Ampharos,
@@ -255,6 +257,7 @@ import {
   Nidorina,
   Nidorino,
   Nincada,
+  Ninetales,
   Ninjask,
   Noibat,
   Noivern,
@@ -409,6 +412,7 @@ import {
   Virizion,
   Volcarona,
   Voltorb,
+  Vulpix,
   Walrein,
   Wartortle,
   Weavile,
@@ -1473,6 +1477,14 @@ export default class PokemonFactory {
         return new Granbull(s, e)
       case Pkm.SEVIPER:
         return new Seviper(s, e)
+      case Pkm.VULPIX:
+        return new Vulpix(s, e)
+      case Pkm.NINETALES:
+        return new Ninetales(s, e)
+      case Pkm.ALOLAN_VULPIX:
+        return new AlolanVulpix(s, e)
+      case Pkm.ALOLAN_NINETALES:
+        return new AlolanNinetales(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
