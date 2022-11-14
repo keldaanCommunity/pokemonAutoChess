@@ -9040,7 +9040,7 @@ export class Eternatus extends Pokemon {
       22,
       3,
       3,
-      2,
+      3,
       AttackSprite.POISON_RANGE,
       AttackType.SPECIAL,
       3,

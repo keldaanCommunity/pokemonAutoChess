@@ -409,6 +409,16 @@ export default class CustomLobbyRoom extends LobbyRoom {
             pokemonConfig.selectedShiny = message.shiny
             UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
               if (u) {
+                let numberOfShinies = 0
+                u.pokemonCollection.forEach((c) => {
+                  numberOfShinies += c.shinyEmotions.length
+                })
+                if (
+                  numberOfShinies > 30 &&
+                  !u.titles.includes(Title.SHINY_SEEKER)
+                ) {
+                  u.titles.push(Title.SHINY_SEEKER)
+                }
                 if (
                   u.pokemonCollection.size >= 30 &&
                   !u.titles.includes(Title.DUKE)
