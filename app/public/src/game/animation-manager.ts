@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-extra-semi */
 /* eslint-disable max-len */
 import {
   Orientation,

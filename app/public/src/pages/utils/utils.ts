@@ -1,22 +1,21 @@
-import { Orientation } from '../../../../types/enum/Game'
-import { AttackSprite } from '../../../../types'
+import { Orientation } from "../../../../types/enum/Game"
+import { AttackSprite } from "../../../../types"
 
 export const FIREBASE_CONFIG = {
-  apiKey: 'AIzaSyCjMpYJycJTjOsXPM1CJn8olntPQhpysOI',
-  authDomain: 'pokemonautochess-b18fb.firebaseapp.com',
-  projectId: 'pokemonautochess-b18fb',
-  storageBucket: 'pokemonautochess-b18fb.appspot.com',
-  messagingSenderId: '448759785030',
-  appId: '1:448759785030:web:bc2f21a25ab9e43a894c47'
+  apiKey: "AIzaSyCjMpYJycJTjOsXPM1CJn8olntPQhpysOI",
+  authDomain: "pokemonautochess-b18fb.firebaseapp.com",
+  projectId: "pokemonautochess-b18fb",
+  storageBucket: "pokemonautochess-b18fb.appspot.com",
+  messagingSenderId: "448759785030",
+  appId: "1:448759785030:web:bc2f21a25ab9e43a894c47"
 }
 
 export function transformCoordinate(x: number, y: number) {
-    if(y === 0){
-        return [28 * 24 + 96 * x, 808]
-    }
-    else{
-        return [28 * 24 + 96 * x, 760 - 96 * y]
-    }
+  if (y === 0) {
+    return [28 * 24 + 96 * x, 808]
+  } else {
+    return [28 * 24 + 96 * x, 760 - 96 * y]
+  }
 }
 
 export function transformAttackCoordinate(x: number, y: number) {
@@ -84,10 +83,10 @@ export function getAttackScale(attackSprite: AttackSprite) {
       return [1.5, 1.5]
 
     case AttackSprite.ROCK_MELEE:
-    return [1.5, 1.5]
+      return [1.5, 1.5]
 
     case AttackSprite.ELECTRIC_MELEE:
-    return [1.5, 1.5]
+      return [1.5, 1.5]
 
     case AttackSprite.PSYCHIC_RANGE:
       return [2, 2]

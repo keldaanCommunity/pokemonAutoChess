@@ -78,7 +78,7 @@ const initialState: GameStateStore = {
   blueHealDpsMeter: new Array<IDpsHeal>(),
   redHealDpsMeter: new Array<IDpsHeal>(),
   pokemonCollection: new MapSchema<IPokemonConfig>(),
-  additionalPokemons: new Array<Pkm>(),
+  additionalPokemons: new Array<Pkm>()
 }
 
 export const gameSlice = createSlice({
@@ -97,7 +97,7 @@ export const gameSlice = createSlice({
       )
       toast(i, {
         containerId: state.players[index].rank.toString(),
-        className: "toast-no-border",
+        className: "toast-no-border"
       })
     },
     setRoundTime: (state, action: PayloadAction<number>) => {
@@ -320,8 +320,8 @@ export const gameSlice = createSlice({
     setPokemonCollection: (state, action: PayloadAction<PokemonCollection>) => {
       state.pokemonCollection = action.payload
     },
-    leaveGame: () => initialState,
-  },
+    leaveGame: () => initialState
+  }
 })
 
 export const {
@@ -367,7 +367,7 @@ export const {
   setShopLocked,
   changePlayer,
   setShop,
-  setItemsProposition,
+  setItemsProposition
 } = gameSlice.actions
 
 export default gameSlice.reducer
