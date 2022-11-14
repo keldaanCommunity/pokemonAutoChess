@@ -4,7 +4,7 @@ import {
   type,
   MapSchema,
   ArraySchema,
-  CollectionSchema,
+  CollectionSchema
 } from "@colyseus/schema"
 import { Pokemon } from "./pokemon"
 import Simulation from "../../core/simulation"
@@ -51,6 +51,7 @@ export default class Player extends Schema implements IPlayer {
   isBot: boolean
   opponents: string[] = []
   titles: Set<Title> = new Set<Title>()
+  rerollCount: number = 0
 
   constructor(
     id: string,
