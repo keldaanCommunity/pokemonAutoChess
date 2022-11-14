@@ -6,7 +6,9 @@ import UserMetadata, {
   IPokemonConfig,
   IUserMetadata
 } from "../models/mongo-models/user-metadata"
-import LeaderboardInfo, { ILeaderboardInfo } from "../models/colyseus-models/leaderboard-info"
+import LeaderboardInfo, {
+  ILeaderboardInfo
+} from "../models/colyseus-models/leaderboard-info"
 import { ArraySchema } from "@colyseus/schema"
 import LobbyUser from "../models/colyseus-models/lobby-user"
 import admin from "firebase-admin"
@@ -22,14 +24,15 @@ import PokemonsStatistic, {
   IPokemonsStatistic
 } from "../models/mongo-models/pokemons-statistic"
 import { PastebinAPI } from "pastebin-ts/dist/api"
-import {getAvatarSrc} from "../public/src/utils"
+import { getAvatarSrc, getPortraitSrc } from "../public/src/utils"
 import {
   Emotion,
   EmotionCost,
   Transfer,
   ISuggestionUser,
   Title,
-  Role
+  Role,
+  CDN_PORTRAIT_URL
 } from "../types"
 import { Pkm } from "../types/enum/Pokemon"
 import PokemonFactory from "../models/pokemon-factory"
@@ -81,15 +84,15 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.setState(new LobbyState())
     this.autoDispose = false
 
-    this.onMessage(Transfer.REQUEST_LEADERBOARD, (client, message) =>{
+    this.onMessage(Transfer.REQUEST_LEADERBOARD, (client, message) => {
       client.send(Transfer.REQUEST_LEADERBOARD, this.leaderboard)
     })
 
-    this.onMessage(Transfer.REQUEST_BOT_LEADERBOARD, (client, message) =>{
+    this.onMessage(Transfer.REQUEST_BOT_LEADERBOARD, (client, message) => {
       client.send(Transfer.REQUEST_BOT_LEADERBOARD, this.botLeaderboard)
     })
 
-    this.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (client, message) =>{
+    this.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (client, message) => {
       client.send(Transfer.REQUEST_LEVEL_LEADERBOARD, this.levelLeaderboard)
     })
 
@@ -524,12 +527,18 @@ export default class CustomLobbyRoom extends LobbyRoom {
             ? config.shinyEmotions
             : config.emotions
           if (emotionsToCheck.includes(message.emotion)) {
-            const shinyPad = message.shiny ? "0000/0001" : ""
-            user.avatar = `${message.index}/${shinyPad}/${message.emotion}`
+            const portrait = getPortraitSrc(
+              message.index,
+              message.shiny,
+              message.emotion
+            )
+              .replace(CDN_PORTRAIT_URL, "")
+              .replace(".png", "")
+            user.avatar = portrait
             UserMetadata.findOne(
               { uid: client.auth.uid },
               (err: CallbackError, u: FilterQuery<IUserMetadata>) => {
-                u.avatar = `${message.index}/${shinyPad}/${message.emotion}`
+                u.avatar = portrait
                 u.save()
               }
             )
@@ -571,7 +580,12 @@ export default class CustomLobbyRoom extends LobbyRoom {
               } else {
                 for (let i = 0; i < users.length; i++) {
                   const user = users[i]
-                  this.leaderboard.push({name: user.displayName, rank: i + 1, avatar: user.avatar, value: user.elo})
+                  this.leaderboard.push({
+                    name: user.displayName,
+                    rank: i + 1,
+                    avatar: user.avatar,
+                    value: user.elo
+                  })
                 }
               }
             }
@@ -586,7 +600,12 @@ export default class CustomLobbyRoom extends LobbyRoom {
               } else {
                 for (let i = 0; i < users.length; i++) {
                   const user = users[i]
-                  this.levelLeaderboard.push({name: user.displayName, rank: i + 1, avatar: user.avatar, value: user.level})
+                  this.levelLeaderboard.push({
+                    name: user.displayName,
+                    rank: i + 1,
+                    avatar: user.avatar,
+                    value: user.level
+                  })
                 }
               }
             }
@@ -595,7 +614,12 @@ export default class CustomLobbyRoom extends LobbyRoom {
             bots.forEach((bot, i) => {
               this.bots.set(bot.avatar, bot)
               // console.log(bot.avatar, bot.elo);
-              this.botLeaderboard.push({name: `${bot.name} by @${bot.author}`, avatar: bot.avatar, rank: i + 1, value: bot.elo})
+              this.botLeaderboard.push({
+                name: `${bot.name} by @${bot.author}`,
+                avatar: bot.avatar,
+                rank: i + 1,
+                value: bot.elo
+              })
             })
           })
           Meta.find({}, (err, docs) => {
