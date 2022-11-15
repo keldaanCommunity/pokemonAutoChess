@@ -20,4 +20,5 @@ export default class Count extends Schema implements ICount {
   @type("uint8") monsterExecutionCount = 0
   @type("uint8") earthquakeCount = 0
   @type("uint8") mindBlownCount = 0
+  @type("uint8") spellBlockedCount = 0
 }

@@ -168,36 +168,35 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     attacker: PokemonEntity
   ) {
     if (this.status.runeProtect) {
+      this.count.spellBlockedCount++
       return
-    }
-    else{
-        let spellDamage = damage + (damage * attacker.spellDamage) / 100
-        if (
-          attacker &&
-          attacker.items.has(Item.REAPER_CLOTH) &&
-          Math.random() > 0.8
-        ) {
-          spellDamage *= 2
-          this.count.crit++
-        }
-        if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
-          this.status.triggerBurn(2000, this, attacker)
-          this.status.triggerWound(2000)
-        }
-        if (attacker && attacker.items.has(Item.SHELL_BELL)) {
-          attacker.handleHeal(0.4 * damage, attacker)
-        } else {
-          return this.state.handleDamage(
-            this,
-            spellDamage,
-            board,
-            attackType,
-            attacker
-          )
-        }
+    } else {
+      let spellDamage = damage + (damage * attacker.spellDamage) / 100
+      if (
+        attacker &&
+        attacker.items.has(Item.REAPER_CLOTH) &&
+        Math.random() > 0.8
+      ) {
+        spellDamage *= 2
+        this.count.crit++
+      }
+      if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
+        this.status.triggerBurn(2000, this, attacker)
+        this.status.triggerWound(2000)
+      }
+      if (attacker && attacker.items.has(Item.SHELL_BELL)) {
+        attacker.handleHeal(0.4 * damage, attacker)
+      } else {
+        return this.state.handleDamage(
+          this,
+          spellDamage,
+          board,
+          attackType,
+          attacker
+        )
       }
     }
-
+  }
 
   handleHeal(heal: number, caster: IPokemonEntity) {
     return this.state.handleHeal(this, heal, caster)

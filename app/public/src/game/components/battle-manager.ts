@@ -40,7 +40,7 @@ export default class BattleManager {
       align: "center",
       stroke: "#000",
       strokeThickness: 2,
-      wordWrap: { width: 200, useAdvancedWrap: true }
+      wordWrap: { width: 200, useAdvancedWrap: true },
     }
     this.animationManager = animationManager
   }
@@ -279,6 +279,10 @@ export default class BattleManager {
             if (change.value != 0) {
               pkm.mindBlownAnimation()
             }
+          } else if (change.field == "spellBlockedCount") {
+            if (change.value != 0) {
+              this.displayBlockedSpell(pkm.x, pkm.y)
+            }
           } else if (change.field == "staticCount") {
             if (change.value != 0) {
               pkm.staticAnimation()
@@ -475,7 +479,7 @@ export default class BattleManager {
       color: "#FFFFFF",
       align: "center",
       strokeThickness: 2,
-      stroke: "#000"
+      stroke: "#000",
     }
     const crit = this.scene.add.existing(
       new GameObjects.Text(this.scene, x - 40, y - 50, "DODGE !", textStyle)
@@ -488,15 +492,15 @@ export default class BattleManager {
       delay: 0,
       alpha: {
         getStart: () => 1,
-        getEnd: () => 0
+        getEnd: () => 0,
       },
       y: {
         getStart: () => y - 50,
-        getEnd: () => y - 110
+        getEnd: () => y - 110,
       },
       onComplete: () => {
         crit.destroy(true)
-      }
+      },
     })
   }
 
@@ -507,7 +511,7 @@ export default class BattleManager {
       color: "#FF0000",
       align: "center",
       strokeThickness: 2,
-      stroke: "#000"
+      stroke: "#000",
     }
     const crit = this.scene.add.existing(
       new GameObjects.Text(this.scene, x - 25, y - 50, "CRIT !", textStyle)
@@ -520,15 +524,47 @@ export default class BattleManager {
       delay: 0,
       alpha: {
         getStart: () => 1,
-        getEnd: () => 0
+        getEnd: () => 0,
       },
       y: {
         getStart: () => y - 50,
-        getEnd: () => y - 110
+        getEnd: () => y - 110,
       },
       onComplete: () => {
         crit.destroy(true)
-      }
+      },
+    })
+  }
+
+  displayBlockedSpell(x: number, y: number) {
+    const textStyle = {
+      fontSize: "25px",
+      fontFamily: "Verdana",
+      color: "#007BA7",
+      align: "center",
+      strokeThickness: 2,
+      stroke: "#000",
+    }
+    const blockedSpell = this.scene.add.existing(
+      new GameObjects.Text(this.scene, x - 30, y - 50, "Block!", textStyle)
+    )
+    blockedSpell.setDepth(9)
+    this.scene.add.tween({
+      targets: [blockedSpell],
+      ease: "Linear",
+      duration: 1000,
+      delay: 0,
+      alpha: {
+        getStart: () => 1,
+        getEnd: () => 0,
+      },
+      y: {
+        getStart: () => y - 50,
+        getEnd: () => y - 110,
+      },
+      onComplete: () => {
+        blockedSpell.destroy(true)
+      },
     })
   }
 
@@ -539,7 +575,7 @@ export default class BattleManager {
       color: "#FFFF00",
       align: "center",
       strokeThickness: 2,
-      stroke: "#000"
+      stroke: "#000",
     }
     const doubleAttack = this.scene.add.existing(
       new GameObjects.Text(this.scene, x - 30, y - 50, "ZAP!", textStyle)
@@ -552,15 +588,15 @@ export default class BattleManager {
       delay: 0,
       alpha: {
         getStart: () => 1,
-        getEnd: () => 0
+        getEnd: () => 0,
       },
       y: {
         getStart: () => y - 50,
-        getEnd: () => y - 110
+        getEnd: () => y - 110,
       },
       onComplete: () => {
         doubleAttack.destroy(true)
-      }
+      },
     })
   }
 
@@ -580,7 +616,7 @@ export default class BattleManager {
       color: color,
       align: "center",
       strokeThickness: 2,
-      stroke: "#000"
+      stroke: "#000",
     }
     const text = this.scene.add.existing(
       new GameObjects.Text(this.scene, x - 25, y - 30, damageText, textStyle)
@@ -594,15 +630,15 @@ export default class BattleManager {
       delay: 0,
       alpha: {
         getStart: () => 1,
-        getEnd: () => 0
+        getEnd: () => 0,
       },
       y: {
         getStart: () => y - 30,
-        getEnd: () => y - 90
+        getEnd: () => y - 90,
       },
       onComplete: () => {
         text.destroy(true)
-      }
+      },
     })
   }
 
