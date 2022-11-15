@@ -82,6 +82,7 @@ export default class Pokemon extends Button {
   runeProtect: GameObjects.Sprite | undefined
   electricField: GameObjects.Sprite | undefined
   psychicField: GameObjects.Sprite | undefined
+  voidBoost: GameObjects.Sprite | undefined
 
   constructor(
     scene: Phaser.Scene,
@@ -188,6 +189,13 @@ export default class Pokemon extends Button {
           p.effects.includes(Effect.AUTOTOMIZE))
       ) {
         this.sprite.setScale(3, 3)
+      }
+      if (
+        p.effects &&
+        (p.effects.includes(Effect.PHANTOM_FORCE) ||
+          p.effects.includes(Effect.CURSE))
+      ) {
+        this.addVoidBoost()
       }
       this.setLifeBar(p, scene)
       this.setManaBar(p, scene)
@@ -2536,6 +2544,30 @@ export default class Pokemon extends Button {
     if (this.electricField) {
       this.remove(this.electricField, true)
       this.electricField = undefined
+    }
+  }
+
+  addVoidBoost() {
+    if (!this.voidBoost) {
+      this.voidBoost = new GameObjects.Sprite(
+        this.scene,
+        0,
+        10,
+        "VOID_BOOST",
+        "000"
+      )
+      this.voidBoost.setDepth(0)
+      this.voidBoost.setScale(3, 3)
+      this.scene.add.existing(this.voidBoost)
+      this.voidBoost.anims.play("VOID_BOOST")
+      this.add(this.voidBoost)
+    }
+  }
+
+  removeVoidBoost() {
+    if (this.voidBoost) {
+      this.remove(this.voidBoost, true)
+      this.voidBoost = undefined
     }
   }
 
