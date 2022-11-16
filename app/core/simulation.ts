@@ -3,7 +3,7 @@ import { Schema, MapSchema, type } from "@colyseus/schema"
 import PokemonEntity from "./pokemon-entity"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { Item } from "../types/enum/Item"
+import { BasicItems, Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
 import { AttackType, Climate, PokemonActionState } from "../types/enum/Game"
 import Dps from "./dps"
@@ -12,6 +12,7 @@ import ItemFactory from "../models/item-factory"
 import { ISimulation, IPokemonEntity, IPokemon } from "../types"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
+import { ItemRecipe } from "../types/Config"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") climate: Climate = Climate.NEUTRAL
@@ -229,31 +230,40 @@ export default class Simulation extends Schema implements ISimulation {
     return { x: row, y: column }
   }
 
-  applyItemsEffects(pokemon: PokemonEntity) {
-    if (pokemon.items.has(Item.TWISTED_SPOON)) {
+  applyBasicItemStat(pokemon: PokemonEntity, item: Item) {
+    if (item === Item.TWISTED_SPOON) {
       pokemon.addSpellDamage(10)
-    }
-    if (pokemon.items.has(Item.MYSTIC_WATER)) {
+    } else if (item === Item.MYSTIC_WATER) {
       pokemon.mana += 15
-    }
-    if (pokemon.items.has(Item.MAGNET)) {
+    } else if (item === Item.MAGNET) {
       pokemon.handleAttackSpeed(15)
-    }
-    if (pokemon.items.has(Item.BLACK_GLASSES)) {
+    } else if (item === Item.BLACK_GLASSES) {
       pokemon.addCritChance(5)
-    }
-    if (pokemon.items.has(Item.MIRACLE_SEED)) {
+    } else if (item === Item.MIRACLE_SEED) {
       pokemon.handleShield(15, pokemon)
-    }
-    if (pokemon.items.has(Item.NEVER_MELT_ICE)) {
+    } else if (item === Item.NEVER_MELT_ICE) {
       pokemon.speDef += 2
-    }
-    if (pokemon.items.has(Item.CHARCOAL)) {
+    } else if (item === Item.CHARCOAL) {
       pokemon.atk += 1
-    }
-    if (pokemon.items.has(Item.HEART_SCALE)) {
+    } else if (item === Item.HEART_SCALE) {
       pokemon.def += 1
     }
+  }
+
+  applyItemsEffects(pokemon: PokemonEntity) {
+    pokemon.items.forEach((item) => {
+      if (BasicItems.includes(item)) {
+        this.applyBasicItemStat(pokemon, item)
+      } else {
+        const recipe = ItemRecipe[item]
+        if (recipe && recipe.length === 2) {
+          recipe.forEach((i) => {
+            this.applyBasicItemStat(pokemon, i)
+          })
+        }
+      }
+    })
+
     if (pokemon.items.has(Item.CHOICE_SPECS)) {
       pokemon.addSpellDamage(75)
     }
@@ -406,7 +416,7 @@ export default class Simulation extends Schema implements ISimulation {
         })
       }
       if (pokemon.items.has(Item.LUCKY_EGG)) {
-        [-2, -1, 0, 1, 2].forEach((offset) => {
+        ;[-2, -1, 0, 1, 2].forEach((offset) => {
           const value = this.board.getValue(
             pokemon.positionX + offset,
             pokemon.positionY
@@ -417,7 +427,7 @@ export default class Simulation extends Schema implements ISimulation {
         })
       }
       if (pokemon.items.has(Item.DELTA_ORB)) {
-        [-1, 0, 1].forEach((offset) => {
+        ;[-1, 0, 1].forEach((offset) => {
           const value = this.board.getValue(
             pokemon.positionX + offset,
             pokemon.positionY
@@ -453,7 +463,7 @@ export default class Simulation extends Schema implements ISimulation {
         )
       }
       if (pokemon.items.has(Item.FOCUS_BAND)) {
-        [-1, 0, 1].forEach((offset) => {
+        ;[-1, 0, 1].forEach((offset) => {
           const value = this.board.getValue(
             pokemon.positionX + offset,
             pokemon.positionY
@@ -493,7 +503,7 @@ export default class Simulation extends Schema implements ISimulation {
         })
       }
       if (pokemon.items.has(Item.LUCKY_EGG)) {
-        [-2, -1, 0, 1, 2].forEach((offset) => {
+        ;[-2, -1, 0, 1, 2].forEach((offset) => {
           const value = this.board.getValue(
             pokemon.positionX + offset,
             pokemon.positionY
@@ -504,7 +514,7 @@ export default class Simulation extends Schema implements ISimulation {
         })
       }
       if (pokemon.items.has(Item.DELTA_ORB)) {
-        [-2, -1, 0, 1, 2].forEach((offset) => {
+        ;[-2, -1, 0, 1, 2].forEach((offset) => {
           const value = this.board.getValue(
             pokemon.positionX + offset,
             pokemon.positionY
@@ -540,7 +550,7 @@ export default class Simulation extends Schema implements ISimulation {
         )
       }
       if (pokemon.items.has(Item.FOCUS_BAND)) {
-        [-1, 0, 1].forEach((offset) => {
+        ;[-1, 0, 1].forEach((offset) => {
           const value = this.board.getValue(
             pokemon.positionX + offset,
             pokemon.positionY
