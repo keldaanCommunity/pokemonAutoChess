@@ -3,6 +3,8 @@ import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { PkmCost, RarityColor } from "../../../../../types/Config"
 import { getPortraitSrc } from "../../../utils"
+import { GamePokemonDetail } from "./game-pokemon-detail"
+import ReactTooltip from "react-tooltip"
 
 export default function GamePokemonPortrait(props: {
   index: number
@@ -16,7 +18,7 @@ export default function GamePokemonPortrait(props: {
         style={{
           width: "15%",
           marginRight: "1%",
-          padding: "0px"
+          padding: "0px",
         }}
       />
     )
@@ -39,17 +41,27 @@ export default function GamePokemonPortrait(props: {
           backgroundRepeat: "no-repeat",
           backgroundSize: "contain",
           cursor:
-            "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer"
+            "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer",
         }}
         onClick={props.click}
+        data-tip
+        data-for={"shop-" + props.index}
       >
+        <ReactTooltip
+          id={"shop-" + props.index}
+          className="customeTheme"
+          effect="solid"
+          place="bottom"
+        >
+          <GamePokemonDetail pokemon={props.pokemon} />
+        </ReactTooltip>
         <div
           style={{
             position: "absolute",
             left: "5px",
             bottom: "5px",
             display: "flex",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <p
@@ -60,7 +72,7 @@ export default function GamePokemonPortrait(props: {
                1px -1px 0 #fff,
                -1px 1px 0 #fff,
                 1px 1px 0 #fff`,
-              margin: "0px"
+              margin: "0px",
             }}
           >
             {PkmCost[props.pokemon.rarity]}
@@ -80,7 +92,7 @@ export default function GamePokemonPortrait(props: {
             right: "0px",
             flexFlow: "column",
             top: "0px",
-            height: "100%"
+            height: "100%",
           }}
         >
           {props.pokemon.types.map((type) => {
