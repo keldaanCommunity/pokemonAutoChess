@@ -8,7 +8,7 @@ import CSS from "csstype"
 
 const ulStyle = {
   listStyle: "none",
-  padding: "0px"
+  padding: "0px",
 }
 
 const style: CSS.Properties = {
@@ -20,7 +20,7 @@ const style: CSS.Properties = {
   backgroundImage: 'url("assets/ui/back2.png")',
   backgroundSize: "cover",
   backgroundPositionX: "right",
-  color: "white"
+  color: "white",
 }
 
 export default function CurrentUsers() {
@@ -41,14 +41,14 @@ export default function CurrentUsers() {
 function User(props: { key: number; v: ILobbyUser }) {
   const dispatch = useAppDispatch()
   const cursorStyle = {
-    marginBottom: "10px"
+    marginBottom: "10px",
   }
   return (
     <li
       style={cursorStyle}
       onClick={() => {
         dispatch(searchName(props.v.name))
-        dispatch(setTabIndex(3))
+        dispatch(setTabIndex(4))
       }}
     >
       <Avatar
