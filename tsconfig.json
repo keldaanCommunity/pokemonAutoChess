@@ -17,7 +17,8 @@
       "exactOptionalPropertyTypes": true,
       "noFallthroughCasesInSwitch": true,
       "resolveJsonModule": true,
-      "jsx": "react-jsx"
+      "jsx": "react-jsx",
+      "skipLibCheck": true
     },
     "include": ["./app/*","./scheduled/*","./edit/*"]
   }
