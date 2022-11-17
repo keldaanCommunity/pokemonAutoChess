@@ -23,6 +23,7 @@ import {
 import { Synergy } from "../../types/enum/Synergy"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
+import { Ability } from "../../types/enum/Ability"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -48,6 +49,25 @@ export class OnShopCommand extends Command<
               this.room.getBoardSize(player.board) == 8))
         ) {
           player.money -= pokemon.cost
+          if (pokemon.skill === Ability.PROTEAN) {
+            const rankArray = new Array<{ s: Synergy; v: number }>()
+            player.synergies.forEach((value, key) => {
+              if (!pokemon.types.includes(key as Synergy)) {
+                rankArray.push({ s: key as Synergy, v: value })
+              }
+            })
+            rankArray.sort((a, b) => {
+              return b.v - a.v
+            })
+            for (let i = 0; i < 2; i++) {
+              const kv = rankArray.shift()
+              if (kv) {
+                pokemon.types.push(kv.s)
+              }
+            }
+            player.synergies.update(player.board)
+            player.effects.update(player.synergies)
+          }
           if (pokemon.name == Pkm.CASTFORM) {
             if (
               player.synergies.get(Synergy.FIRE) ||

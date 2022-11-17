@@ -589,6 +589,18 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.AQUA_JET]: {
+    eng: "Aqua Jet",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.PROTEAN]: {
+    eng: "Protean",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1177,6 +1189,18 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.AURORA_VEIL]: {
     eng: "All allies are immune to spells for 1.5/2.5/3.5s",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.AQUA_JET]: {
+    eng: "Dash into the ennemy backline, dealing 30/60/120 special damage",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.PROTEAN]: {
+    eng: "In addition to Normal/Monster, Kecleon acquires the typing of the two highest synergies on the team. If one or both of the highest synergies are Normal or Monster, then it adopts the next one or two highest synergies",
     esp: "",
     prt: "",
     fra: ""

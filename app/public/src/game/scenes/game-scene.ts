@@ -269,6 +269,11 @@ export default class GameScene extends Scene {
       "/assets/attacks"
     )
     this.load.multiatlas(
+      "AQUA_JET",
+      "/assets/attacks/AQUA_JET.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
       "MIND_BLOWN",
       "/assets/attacks/MIND_BLOWN.json",
       "/assets/attacks"

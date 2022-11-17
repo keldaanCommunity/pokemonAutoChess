@@ -291,6 +291,17 @@ export class WonderGuardStrategy extends AttackStrategy {
   }
 }
 
+export class ProteanStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+  }
+}
+
 export class ElectricSurgeStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -476,6 +487,54 @@ export class AuroraVeilStrategy extends AttackStrategy {
         tg.status.triggerRuneProtect(duration)
       }
     })
+  }
+}
+
+export class AquaJetStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 20
+    if (pokemon.stars == 2) {
+      damage = 40
+    } else if (pokemon.stars == 3) {
+      damage = 80
+    }
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value != pokemon) {
+          cell.value.handleSpellDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon
+          )
+        }
+      })
+
+      board.swapValue(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      pokemon.positionX = farthestCoordinate.x
+      pokemon.positionY = farthestCoordinate.y
+    }
   }
 }
 

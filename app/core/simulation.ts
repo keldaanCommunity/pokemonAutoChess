@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-extra-semi */
 import Board from "./board"
 import { Schema, MapSchema, type } from "@colyseus/schema"
 import PokemonEntity from "./pokemon-entity"
@@ -314,9 +315,6 @@ export default class Simulation extends Schema implements ISimulation {
     if (pokemon.items.has(Item.POKE_DOLL)) {
       pokemon.def += 5
       pokemon.speDef += 5
-    }
-    if (pokemon.items.has(Item.RED_ORB)) {
-      pokemon.atk += 8
     }
     if (pokemon.items.has(Item.ROCKY_HELMET)) {
       pokemon.def += 10

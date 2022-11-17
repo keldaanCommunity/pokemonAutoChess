@@ -135,6 +135,7 @@ export default class Shop {
       Pkm.TAPU_KOKO,
       Pkm.TAPU_LELE,
       Pkm.SEVIPER,
+      Pkm.KECLEON
     ]
     this.MYTHICAL_2 = [
       Pkm.RESHIRAM,
