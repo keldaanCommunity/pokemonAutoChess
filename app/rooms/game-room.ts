@@ -17,7 +17,7 @@ import {
   OnJoinCommand,
   OnDragDropItemCommand,
   OnDragDropCombineCommand,
-  OnPokemonPropositionCommand
+  OnPokemonPropositionCommand,
 } from "./commands/game-commands"
 import { ExpPlace } from "../types/Config"
 import { Item, BasicItems } from "../types/enum/Item"
@@ -31,7 +31,7 @@ import {
   IDragDropMessage,
   IPlayer,
   IPokemon,
-  Transfer
+  Transfer,
 } from "../types"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import PokemonConfig from "../models/colyseus-models/pokemon-config"
@@ -107,7 +107,7 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.dispatcher.dispatch(new OnShopCommand(), {
             id: client.auth.uid,
-            index: message.id
+            index: message.id,
           })
         } catch (error) {
           console.log("shop error", message, error)
@@ -120,7 +120,7 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.dispatcher.dispatch(new OnItemCommand(), {
             playerId: client.auth.uid,
-            id: message.id
+            id: message.id,
           })
         } catch (error) {
           console.log(error)
@@ -133,7 +133,7 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.dispatcher.dispatch(new OnPokemonPropositionCommand(), {
             playerId: client.auth.uid,
-            pkm: message
+            pkm: message,
           })
         } catch (error) {
           console.log(error)
@@ -146,12 +146,12 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.dispatcher.dispatch(new OnDragDropCommand(), {
             client: client,
-            detail: message
+            detail: message,
           })
         } catch (error) {
           const errorInformation = {
             updateBoard: true,
-            updateItems: true
+            updateItems: true,
           }
           client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
           console.log("drag drop error", error)
@@ -166,12 +166,12 @@ export default class GameRoom extends Room<GameState> {
           try {
             this.dispatcher.dispatch(new OnDragDropItemCommand(), {
               client: client,
-              detail: message
+              detail: message,
             })
           } catch (error) {
             const errorInformation = {
               updateBoard: true,
-              updateItems: true
+              updateItems: true,
             }
             client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
             console.log("drag drop error", error)
@@ -187,12 +187,12 @@ export default class GameRoom extends Room<GameState> {
           try {
             this.dispatcher.dispatch(new OnDragDropCombineCommand(), {
               client: client,
-              detail: message
+              detail: message,
             })
           } catch (error) {
             const errorInformation = {
               updateBoard: true,
-              updateItems: true
+              updateItems: true,
             }
             client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
             console.log("drag drop error", error)
@@ -208,7 +208,7 @@ export default class GameRoom extends Room<GameState> {
           try {
             this.dispatcher.dispatch(new OnSellDropCommand(), {
               client,
-              detail: message
+              detail: message,
             })
           } catch (error) {
             console.log("sell drop error", message)
@@ -257,7 +257,7 @@ export default class GameRoom extends Room<GameState> {
         if (client.auth) {
           this.broadcast(Transfer.BROADCAST_EMOTE, {
             id: client.auth.uid,
-            emote: message
+            emote: message,
           })
         }
       }
@@ -317,7 +317,7 @@ export default class GameRoom extends Room<GameState> {
       name: this.state.name,
       startTime: this.state.startTime,
       endTime: this.state.endTime,
-      players: ps
+      players: ps,
     })
 
     if (
@@ -415,7 +415,7 @@ export default class GameRoom extends Room<GameState> {
                   rank: dbrecord.rank,
                   avatar: dbrecord.avatar,
                   playerId: dbrecord.id,
-                  elo: elo
+                  elo: elo,
                 })
               }
             }
@@ -440,7 +440,7 @@ export default class GameRoom extends Room<GameState> {
       }>(),
       elo: player.elo,
       title: player.title,
-      role: player.role
+      role: player.role,
     }
 
     player.board.forEach((pokemon: IPokemon) => {
@@ -451,7 +451,7 @@ export default class GameRoom extends Room<GameState> {
           name: pokemon.name,
           avatar: avatar,
           items: new Array<Item>(),
-          inventory: new Array<Item>()
+          inventory: new Array<Item>(),
         }
         pokemon.items.forEach((i) => {
           s.items.push(i)
@@ -596,6 +596,29 @@ export default class GameRoom extends Room<GameState> {
         }
       }
     }
+  }
+
+  checkProtean(player: Player, pokemon: Pokemon) {
+    const rankArray = new Array<{ s: Synergy; v: number }>()
+    player.synergies.forEach((value, key) => {
+      if (value > 0) {
+        rankArray.push({ s: key as Synergy, v: value })
+      }
+    })
+    rankArray.sort((a, b) => {
+      return b.v - a.v
+    })
+    while (pokemon.types.length > 0) {
+      pokemon.types.pop()
+    }
+    for (let i = 0; i < 3; i++) {
+      const kv = rankArray.shift()
+      if (kv) {
+        pokemon.types.push(kv.s)
+      }
+    }
+    player.synergies.update(player.board)
+    player.effects.update(player.synergies)
   }
 
   updateEvolution(id: string) {

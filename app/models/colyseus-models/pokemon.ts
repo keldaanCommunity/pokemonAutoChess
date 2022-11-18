@@ -7142,7 +7142,7 @@ export class Kecleon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.KECLEON,
-      [Synergy.NORMAL, Synergy.MONSTER],
+      [],
       Rarity.MYTHICAL,
       PkmIndex[Pkm.KECLEON],
       Pkm.DEFAULT,
