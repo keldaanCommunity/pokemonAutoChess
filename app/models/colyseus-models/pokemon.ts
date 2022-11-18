@@ -7155,7 +7155,7 @@ export class Kecleon extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.NASTY_PLOT,
+      Ability.PROTEAN,
       shiny,
       emotion,
       false
