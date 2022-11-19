@@ -19,7 +19,7 @@ export default class AttackingState extends PokemonState {
       const target = board.getValue(pokemon.targetX, pokemon.targetY)
       let targetCoordinate: { x: number; y: number } | undefined = {
         x: pokemon.targetX,
-        y: pokemon.targetY
+        y: pokemon.targetY,
       }
 
       if (
@@ -220,7 +220,12 @@ export default class AttackingState extends PokemonState {
 
       if (pokemon.items.has(Item.RED_ORB)) {
         if (target) {
-          target.handleDamage(5, board, AttackType.TRUE, pokemon)
+          target.handleDamage(
+            Math.ceil(pokemon.atk * 0.2),
+            board,
+            AttackType.TRUE,
+            pokemon
+          )
         }
       }
       if (target && target.items.has(Item.SMOKE_BALL)) {
