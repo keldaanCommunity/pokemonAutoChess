@@ -32,7 +32,6 @@ export default class Shop {
       Pkm.SWINUB,
       Pkm.FENNEKIN,
       Pkm.PICHU,
-      Pkm.KECLEON,
     ]
 
     this.UNCOMMON = [
