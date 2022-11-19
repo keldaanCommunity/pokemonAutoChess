@@ -1,7 +1,7 @@
 import { Command } from "@colyseus/command"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import UserMetadata, {
-  IUserMetadata
+  IUserMetadata,
 } from "../../models/mongo-models/user-metadata"
 import BotV2 from "../../models/mongo-models/bot-v2"
 import { Client } from "colyseus"
@@ -45,7 +45,7 @@ export class OnJoinCommand extends Command<
           name: "Server",
           payload: `${user.displayName} joined.`,
           avatar: user.avatar,
-          time: Date.now()
+          time: Date.now(),
         })
       }
     })
@@ -120,7 +120,7 @@ export class OnLeaveCommand extends Command<
         name: "Server",
         payload: `${client.auth.displayName} left.`,
         avatar: this.state.users.get(client.auth.uid)?.avatar,
-        time: Date.now()
+        time: Date.now(),
       })
       this.state.users.delete(client.auth.uid)
     }
@@ -211,7 +211,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         d = { $gte: 800, $lt: 1100 }
         break
       case BotDifficulty.HARD:
-        d = { $gte: 1100, $lt: 14000 }
+        d = { $gte: 1100, $lt: 1400 }
         break
       case BotDifficulty.EXTREME:
         d = { $gte: 1400 }
@@ -228,7 +228,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
             name: "Server",
             payload: "Error: No bots found",
             avatar: `0081/${Emotion.NORMAL}`,
-            time: Date.now()
+            time: Date.now(),
           })
           return
         }
@@ -256,7 +256,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
             name: "Server",
             payload: `Bot ${bot.name} added.`,
             avatar: `0081/${Emotion.NORMAL}`,
-            time: Date.now()
+            time: Date.now(),
           })
         }
       }
@@ -283,7 +283,7 @@ export class OnRemoveBotCommand extends Command<
             name: "Server",
             payload: `Bot ${key} removed to make room for new player.`,
             avatar: `0081/${Emotion.NORMAL}`,
-            time: Date.now()
+            time: Date.now(),
           })
           this.state.users.delete(key)
           // botDeleted = true;
@@ -300,7 +300,7 @@ export class OnRemoveBotCommand extends Command<
         name: "Server",
         payload: `Bot ${name} removed.`,
         avatar: `0081/${Emotion.NORMAL}`,
-        time: Date.now()
+        time: Date.now(),
       })
     }
   }
