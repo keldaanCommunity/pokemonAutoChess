@@ -218,6 +218,16 @@ export default class AttackingState extends PokemonState {
         }
       }
 
+      if (pokemon.items.has(Item.RED_ORB)) {
+        if (target) {
+          target.handleDamage(
+            Math.ceil(pokemon.atk * 0.2),
+            board,
+            AttackType.TRUE,
+            pokemon
+          )
+        }
+      }
       if (target && target.items.has(Item.SMOKE_BALL)) {
         pokemon.status.triggerSmoke(5000, pokemon)
       }

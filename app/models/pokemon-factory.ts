@@ -42,6 +42,7 @@ import {
   Bronzong,
   Bronzor,
   Budew,
+  Buizel,
   Bulbasaur,
   Buneary,
   Butterfree,
@@ -114,6 +115,7 @@ import {
   Flabebe,
   Flaffy,
   Flareon,
+  Floatzel,
   Floette,
   Florges,
   Flygon,
@@ -175,6 +177,7 @@ import {
   Kabutops,
   Kadabra,
   Kakuna,
+  Kecleon,
   Keldeo,
   Kingdra,
   Kirlia,
@@ -223,6 +226,7 @@ import {
   Marill,
   Marowak,
   Marshtomp,
+  Mawile,
   Medicham,
   Meditite,
   MegaAbomasnow,
@@ -1485,6 +1489,14 @@ export default class PokemonFactory {
         return new AlolanVulpix(s, e)
       case Pkm.ALOLAN_NINETALES:
         return new AlolanNinetales(s, e)
+      case Pkm.MAWILE:
+        return new Mawile(s, e)
+      case Pkm.BUIZEL:
+        return new Buizel(s, e)
+      case Pkm.FLOATZEL:
+        return new Floatzel(s, e)
+      case Pkm.KECLEON:
+        return new Kecleon(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

@@ -2558,7 +2558,7 @@ export class Axew extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.HEAD_SMASH,
+      Ability.DEFAULT,
       shiny,
       emotion,
       false
@@ -4280,7 +4280,7 @@ export class NidoranF extends Pokemon {
       AttackSprite.POISON_MELEE,
       AttackType.PHYSICAL,
       1,
-      100,
+      89,
       Ability.POISON_STING,
       shiny,
       emotion,
@@ -4305,7 +4305,7 @@ export class Nidorina extends Pokemon {
       AttackSprite.POISON_MELEE,
       AttackType.PHYSICAL,
       2,
-      100,
+      89,
       Ability.POISON_STING,
       shiny,
       emotion,
@@ -4330,7 +4330,7 @@ export class Nidoqueen extends Pokemon {
       AttackSprite.POISON_MELEE,
       AttackType.PHYSICAL,
       3,
-      100,
+      89,
       Ability.POISON_STING,
       shiny,
       emotion,
@@ -4355,7 +4355,7 @@ export class NidoranM extends Pokemon {
       AttackSprite.POISON_MELEE,
       AttackType.PHYSICAL,
       1,
-      100,
+      90,
       Ability.POISON,
       shiny,
       emotion,
@@ -4380,7 +4380,7 @@ export class Nidorino extends Pokemon {
       AttackSprite.POISON_MELEE,
       AttackType.PHYSICAL,
       2,
-      100,
+      90,
       Ability.POISON,
       shiny,
       emotion,
@@ -4405,7 +4405,7 @@ export class Nidoking extends Pokemon {
       AttackSprite.POISON_MELEE,
       AttackType.PHYSICAL,
       3,
-      100,
+      90,
       Ability.POISON,
       shiny,
       emotion,
@@ -7138,6 +7138,31 @@ export class Volcarona extends Pokemon {
   }
 }
 
+export class Kecleon extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.KECLEON,
+      [],
+      Rarity.MYTHICAL,
+      PkmIndex[Pkm.KECLEON],
+      Pkm.DEFAULT,
+      200,
+      20,
+      3,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      80,
+      Ability.PROTEAN,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
 export class Castform extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -7205,7 +7230,7 @@ export class CastformRain extends Pokemon {
       AttackType.SPECIAL,
       2,
       80,
-      Ability.SOAK,
+      Ability.AQUA_JET,
       shiny,
       emotion,
       true
@@ -7305,7 +7330,7 @@ export class Tornadus extends Pokemon {
       AttackType.SPECIAL,
       2,
       100,
-      Ability.HURRICANE,
+      Ability.DEFAULT,
       shiny,
       emotion,
       true
@@ -7330,7 +7355,7 @@ export class Keldeo extends Pokemon {
       AttackType.SPECIAL,
       2,
       100,
-      Ability.GUILLOTINE,
+      Ability.AQUA_JET,
       shiny,
       emotion,
       true
@@ -7355,7 +7380,7 @@ export class Terrakion extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.ROCK_SLIDE,
+      Ability.DEFAULT,
       shiny,
       emotion,
       true
@@ -7406,6 +7431,31 @@ export class Cobalion extends Pokemon {
       2,
       100,
       Ability.SEISMIC_TOSS,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Mawile extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MAWILE,
+      [Synergy.METAL, Synergy.FAIRY, Synergy.MONSTER],
+      Rarity.MYTHICAL,
+      PkmIndex[Pkm.MAWILE],
+      Pkm.DEFAULT,
+      200,
+      20,
+      6,
+      6,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      80,
+      Ability.IRON_TAIL,
       shiny,
       emotion,
       true
@@ -9554,6 +9604,57 @@ export class Noivern extends Pokemon {
     )
   }
 }
+export class Buizel extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.BUIZEL,
+      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIELD],
+      Rarity.EPIC,
+      PkmIndex[Pkm.BUIZEL],
+      Pkm.FLOATZEL,
+      90,
+      9,
+      3,
+      3,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      55,
+      Ability.AQUA_JET,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+export class Floatzel extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.FLOATZEL,
+      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIELD],
+      Rarity.EPIC,
+      PkmIndex[Pkm.FLOATZEL],
+      Pkm.DEFAULT,
+      180,
+      17,
+      5,
+      5,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      55,
+      Ability.AQUA_JET,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Ponyta extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

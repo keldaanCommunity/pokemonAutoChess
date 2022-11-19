@@ -424,7 +424,11 @@ export enum Pkm {
   VULPIX = "vulpix",
   NINETALES = "ninetales",
   ALOLAN_VULPIX = "alolan-vulpix",
-  ALOLAN_NINETALES = "alolan-ninetales"
+  ALOLAN_NINETALES = "alolan-ninetales",
+  BUIZEL = "buizel",
+  FLOATZEL = "floatzel",
+  MAWILE = "mawile",
+  KECLEON = "kecleon"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -853,7 +857,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.VULPIX]: "0037",
   [Pkm.NINETALES]: "0038",
   [Pkm.ALOLAN_VULPIX]: "0037-0001",
-  [Pkm.ALOLAN_NINETALES]: "0038-0001"
+  [Pkm.ALOLAN_NINETALES]: "0038-0001",
+  [Pkm.BUIZEL]: "0418",
+  [Pkm.FLOATZEL]: "0419",
+  [Pkm.KECLEON]: "0352",
+  [Pkm.MAWILE]: "0303"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1282,5 +1290,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.VULPIX]: Pkm.VULPIX,
   [Pkm.NINETALES]: Pkm.VULPIX,
   [Pkm.ALOLAN_VULPIX]: Pkm.ALOLAN_VULPIX,
-  [Pkm.ALOLAN_NINETALES]: Pkm.ALOLAN_VULPIX
+  [Pkm.ALOLAN_NINETALES]: Pkm.ALOLAN_VULPIX,
+  [Pkm.BUIZEL]: Pkm.BUIZEL,
+  [Pkm.FLOATZEL]: Pkm.BUIZEL,
+  [Pkm.KECLEON]: Pkm.KECLEON,
+  [Pkm.MAWILE]: Pkm.MAWILE
 }

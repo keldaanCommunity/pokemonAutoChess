@@ -32,6 +32,7 @@ export default class Shop {
       Pkm.SWINUB,
       Pkm.FENNEKIN,
       Pkm.PICHU,
+      Pkm.KECLEON,
     ]
 
     this.UNCOMMON = [
@@ -135,6 +136,8 @@ export default class Shop {
       Pkm.TAPU_KOKO,
       Pkm.TAPU_LELE,
       Pkm.SEVIPER,
+      Pkm.KECLEON,
+      Pkm.MAWILE,
     ]
     this.MYTHICAL_2 = [
       Pkm.RESHIRAM,

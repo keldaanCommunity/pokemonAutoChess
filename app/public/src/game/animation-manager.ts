@@ -1161,6 +1161,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.AQUA_JET,
+      frames: this.game.anims.generateFrameNames(Ability.AQUA_JET, {
+        start: 0,
+        end: 19,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.MIND_BLOWN,
       frames: this.game.anims.generateFrameNames(Ability.MIND_BLOWN, {
         start: 0,

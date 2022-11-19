@@ -96,7 +96,9 @@ import {
   BeatUpStrategy,
   BlueFlareStrategy,
   FusionBoltStrategy,
-  AuroraVeilStrategy
+  AuroraVeilStrategy,
+  AquaJetStrategy,
+  ProteanStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -197,7 +199,9 @@ export enum Ability {
   BEAT_UP = "BEAT_UP",
   BLUE_FLARE = "BLUE_FLARE",
   FUSION_BOLT = "FUSION_BOLT",
-  AURORA_VEIL = "AURORA_VEIL"
+  AURORA_VEIL = "AURORA_VEIL",
+  AQUA_JET = "AQUA_JET",
+  PROTEAN = "PROTEAN"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -298,5 +302,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.BEAT_UP]: new BeatUpStrategy(),
   [Ability.BLUE_FLARE]: new BlueFlareStrategy(),
   [Ability.FUSION_BOLT]: new FusionBoltStrategy(),
-  [Ability.AURORA_VEIL]: new AuroraVeilStrategy()
+  [Ability.AURORA_VEIL]: new AuroraVeilStrategy(),
+  [Ability.AQUA_JET]: new AquaJetStrategy(),
+  [Ability.PROTEAN]: new ProteanStrategy()
 }

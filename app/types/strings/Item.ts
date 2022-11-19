@@ -132,7 +132,8 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.KINGS_ROCK]:
     "Physical damage heals the holder for 50% of the damage dealt",
   [Item.POKE_DOLL]: "The holder gains 5 Armor and 5 Magic Resist",
-  [Item.RED_ORB]: "The holder gains 8 bonus Attack Damage",
+  [Item.RED_ORB]:
+    "Each attack of the holder deals an additional 20% true damage",
   [Item.MAX_REVIVE]: "Prevents the holder first death",
   [Item.ROCKY_HELMET]:
     "Grants 10 bonus armor. Negates bonus damage from incoming critical hits."

@@ -18,11 +18,12 @@ import {
   IDragDropCombineMessage,
   IClient,
   IPokemonEntity,
-  Transfer
+  Transfer,
 } from "../../types"
 import { Synergy } from "../../types/enum/Synergy"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
+import { Ability } from "../../types/enum/Ability"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -48,6 +49,9 @@ export class OnShopCommand extends Command<
               this.room.getBoardSize(player.board) == 8))
         ) {
           player.money -= pokemon.cost
+          if (pokemon.skill === Ability.PROTEAN) {
+            this.room.checkProtean(player, pokemon)
+          }
           if (pokemon.name == Pkm.CASTFORM) {
             if (
               player.synergies.get(Synergy.FIRE) ||
@@ -59,20 +63,20 @@ export class OnShopCommand extends Command<
                   s: Synergy.FIRE,
                   v: player.synergies.get(Synergy.FIRE)
                     ? player.synergies.get(Synergy.FIRE)
-                    : 0
+                    : 0,
                 },
                 {
                   s: Synergy.WATER,
                   v: player.synergies.get(Synergy.WATER)
                     ? player.synergies.get(Synergy.WATER)
-                    : 0
+                    : 0,
                 },
                 {
                   s: Synergy.ICE,
                   v: player.synergies.get(Synergy.ICE)
                     ? player.synergies.get(Synergy.ICE)
-                    : 0
-                }
+                    : 0,
+                },
               ]
               rankArray.sort((a, b) => {
                 const va = a.v ? a.v : 0
@@ -182,7 +186,7 @@ export class OnDragDropCommand extends Command<
     let dittoReplaced = false
     const message = {
       updateBoard: true,
-      updateItems: true
+      updateItems: true,
     }
     const playerId = client.auth.uid
     const player = this.state.players.get(playerId)
@@ -191,6 +195,9 @@ export class OnDragDropCommand extends Command<
       message.updateItems = false
       const pokemon = player.board.get(detail.id)
       if (pokemon) {
+        if (pokemon.skill === Ability.PROTEAN) {
+          this.room.checkProtean(player, pokemon)
+        }
         const x = parseInt(detail.x)
         const y = parseInt(detail.y)
         if (pokemon.name == Pkm.DITTO) {
@@ -273,7 +280,7 @@ export class OnDragDropCombineCommand extends Command<
     const playerId = client.auth.uid
     const message = {
       updateBoard: true,
-      updateItems: true
+      updateItems: true,
     }
     const player = this.state.players.get(playerId)
 
@@ -345,7 +352,7 @@ export class OnDragDropItemCommand extends Command<
     const playerId = client.auth.uid
     const message = {
       updateBoard: true,
-      updateItems: true
+      updateItems: true,
     }
     const player = this.state.players.get(playerId)
     if (player) {
@@ -589,12 +596,12 @@ export class OnDragDropItemCommand extends Command<
                   id: name,
                   x: pokemon.positionX,
                   y: pokemon.positionY,
-                  bypass: true
+                  bypass: true,
                 }
                 commands.push(
                   new OnDragDropItemCommand().setPayload({
                     client: client,
-                    detail: detail
+                    detail: detail,
                   })
                 )
               }
@@ -938,7 +945,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       this.state.gameFinished = true
       this.room.broadcast(Transfer.BROADCAST_INFO, {
         title: "End of the game",
-        info: "We have a winner !"
+        info: "We have a winner !",
       })
       // commands.push(new OnKickPlayerCommand());
     }
@@ -985,7 +992,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       rankArray.push({
         id: player.id,
         life: player.life,
-        level: player.experienceManager.level
+        level: player.experienceManager.level,
       })
     })
 
@@ -1237,17 +1244,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               const detail: { id: string; x: number; y: number } = {
                 id: p.id,
                 x: coordinate[0],
-                y: coordinate[1]
+                y: coordinate[1],
               }
               const client: IClient = {
                 auth: {
-                  uid: key
-                }
+                  uid: key,
+                },
               }
               commands.push(
                 new OnDragDropCommand().setPayload({
                   client: client,
-                  detail: detail
+                  detail: detail,
                 })
               )
             }
