@@ -86,7 +86,6 @@ export default class Shop {
       Pkm.BUDEW,
       Pkm.PORYGON,
       Pkm.CUBONE,
-      Pkm.TAUROS,
       Pkm.HOUNDOUR,
     ]
 
@@ -137,6 +136,7 @@ export default class Shop {
       Pkm.SEVIPER,
       Pkm.KECLEON,
       Pkm.MAWILE,
+      Pkm.TAUROS,
     ]
     this.MYTHICAL_2 = [
       Pkm.RESHIRAM,

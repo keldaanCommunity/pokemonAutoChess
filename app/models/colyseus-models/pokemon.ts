@@ -1016,31 +1016,6 @@ export class Metagross extends Pokemon {
   }
 }
 
-export class Tauros extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.TAUROS,
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.EPIC,
-      "0128",
-      Pkm.DEFAULT,
-      145,
-      10,
-      5,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      AttackType.PHYSICAL,
-      1,
-      125,
-      Ability.EARTHQUAKE,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
-
 export class Tympole extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -6732,6 +6707,31 @@ export class Regirock extends Pokemon {
       2,
       100,
       Ability.ROCK_SLIDE,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Tauros extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.TAUROS,
+      [Synergy.NORMAL, Synergy.FIELD],
+      Rarity.MYTHICAL,
+      PkmIndex[Pkm.TAUROS],
+      Pkm.DEFAULT,
+      200,
+      20,
+      7,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      105,
+      Ability.EARTHQUAKE,
       shiny,
       emotion,
       true
