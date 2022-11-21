@@ -382,11 +382,17 @@ export class DiamondStormStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
+    let buff = 3
+    if (pokemon.stars === 2) {
+      buff = 6
+    } else if (pokemon.stars === 3) {
+      buff = 9
+    }
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    pokemon.def += 5
+    pokemon.def += buff
     cells.forEach((cell) => {
       if (cell.value && cell.value.team === pokemon.team) {
-        cell.value.def += 5
+        cell.value.def += buff
       }
     })
   }
@@ -2806,7 +2812,7 @@ export class TeleportStrategy extends AttackStrategy {
       [0, 0],
       [0, 5],
       [7, 5],
-      [7, 0]
+      [7, 0],
     ]
     this.shuffleArray(potentialCells)
 
@@ -3125,7 +3131,7 @@ export class MetronomeStrategy extends AttackStrategy {
       SongOfDesireStrategy,
       MindBlownStrategy,
       PaydayStrategy,
-      AuroraVeilStrategy
+      AuroraVeilStrategy,
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)
