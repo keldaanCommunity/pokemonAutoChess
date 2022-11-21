@@ -49,6 +49,7 @@ import {
   Cacnea,
   Cacturne,
   Camerupt,
+  Carbink,
   Carracosta,
   Carvanha,
   Castform,
@@ -428,7 +429,7 @@ import {
   Zapdos,
   Zekrom,
   Zubat,
-  Zweilous
+  Zweilous,
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1497,6 +1498,8 @@ export default class PokemonFactory {
         return new Floatzel(s, e)
       case Pkm.KECLEON:
         return new Kecleon(s, e)
+      case Pkm.CARBINK:
+        return new Carbink(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
