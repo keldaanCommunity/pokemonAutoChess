@@ -428,7 +428,8 @@ export enum Pkm {
   BUIZEL = "buizel",
   FLOATZEL = "floatzel",
   MAWILE = "mawile",
-  KECLEON = "kecleon"
+  KECLEON = "kecleon",
+  CARBINK = "carbink",
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -861,7 +862,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BUIZEL]: "0418",
   [Pkm.FLOATZEL]: "0419",
   [Pkm.KECLEON]: "0352",
-  [Pkm.MAWILE]: "0303"
+  [Pkm.MAWILE]: "0303",
+  [Pkm.CARBINK]: "0703",
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1294,5 +1296,6 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.BUIZEL]: Pkm.BUIZEL,
   [Pkm.FLOATZEL]: Pkm.BUIZEL,
   [Pkm.KECLEON]: Pkm.KECLEON,
-  [Pkm.MAWILE]: Pkm.MAWILE
+  [Pkm.MAWILE]: Pkm.MAWILE,
+  [Pkm.CARBINK]: Pkm.CARBINK,
 }

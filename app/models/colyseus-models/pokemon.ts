@@ -8263,6 +8263,56 @@ export class Aurorus extends Pokemon {
   }
 }
 
+export class Carbink extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CARBINK,
+      [Synergy.FOSSIL, Synergy.FAIRY],
+      Rarity.EPIC,
+      PkmIndex[Pkm.CARBINK],
+      Pkm.DIANCIE,
+      130,
+      9,
+      4,
+      4,
+      1,
+      AttackSprite.FAIRY_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DIAMOND_STORM,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Diancie extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DIANCIE,
+      [Synergy.FOSSIL, Synergy.FAIRY],
+      Rarity.EPIC,
+      PkmIndex[Pkm.DIANCIE],
+      Pkm.DEFAULT,
+      270,
+      17,
+      7,
+      7,
+      1,
+      AttackSprite.FAIRY_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.DIAMOND_STORM,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Anorith extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -8853,30 +8903,6 @@ export class Genesect extends Pokemon {
       3,
       100,
       Ability.LOCK_ON,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
-export class Diancie extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.DIANCIE,
-      [Synergy.FOSSIL, Synergy.FAIRY],
-      Rarity.EPIC,
-      PkmIndex[Pkm.DIANCIE],
-      Pkm.DEFAULT,
-      270,
-      17,
-      6,
-      3,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      AttackType.PHYSICAL,
-      2,
-      100,
-      Ability.DIAMOND_STORM,
       shiny,
       emotion,
       true
