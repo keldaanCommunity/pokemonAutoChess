@@ -1096,7 +1096,7 @@ export class Bagon extends Pokemon {
     super(
       Pkm.BAGON,
       [Synergy.DRAGON, Synergy.MONSTER],
-      Rarity.EPIC,
+      Rarity.RARE,
       "0371",
       Pkm.SHELGON,
       90,
@@ -1121,7 +1121,7 @@ export class Shelgon extends Pokemon {
     super(
       Pkm.SHELGON,
       [Synergy.DRAGON, Synergy.MONSTER],
-      Rarity.EPIC,
+      Rarity.RARE,
       "0372",
       Pkm.SALAMENCE,
       130,
@@ -1146,7 +1146,7 @@ export class Salamence extends Pokemon {
     super(
       Pkm.SALAMENCE,
       [Synergy.DRAGON, Synergy.MONSTER, Synergy.FLYING],
-      Rarity.EPIC,
+      Rarity.RARE,
       "0373",
       Pkm.DEFAULT,
       230,
@@ -10709,7 +10709,7 @@ export class Snubull extends Pokemon {
     super(
       Pkm.SNUBULL,
       [Synergy.NORMAL, Synergy.FAIRY, Synergy.FIELD],
-      Rarity.RARE,
+      Rarity.EPIC,
       PkmIndex[Pkm.SNUBULL],
       Pkm.GRANBULL,
       65,
@@ -10735,7 +10735,7 @@ export class Granbull extends Pokemon {
     super(
       Pkm.GRANBULL,
       [Synergy.NORMAL, Synergy.FAIRY, Synergy.FIELD],
-      Rarity.RARE,
+      Rarity.EPIC,
       PkmIndex[Pkm.GRANBULL],
       Pkm.DEFAULT,
       130,
