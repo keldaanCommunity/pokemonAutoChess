@@ -96,9 +96,9 @@ export default function Discover(props: { meta: IMeta[] }) {
                     ).reduce((prev, curr) => {
                       return (
                         prev +
-                        "<img src=" +
+                        "<img src='" +
                         getPortraitSrc(PkmIndex[curr]) +
-                        "/>"
+                        "'/>"
                       )
                     }, "")}
                     </div>

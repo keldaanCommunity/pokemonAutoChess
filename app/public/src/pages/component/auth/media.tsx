@@ -1,5 +1,4 @@
 import React from "react"
-import CreditsButton from "../buttons/credits-button"
 import DiscordButton from "../buttons/discord-button"
 import DonateButton from "../buttons/donate-button"
 import PolicyButton from "../buttons/policy-button"
@@ -10,7 +9,6 @@ export default function Media() {
       <DiscordButton />
       <DonateButton />
       <PolicyButton />
-      <CreditsButton />
       <p>V2.4</p>
     </div>
   )

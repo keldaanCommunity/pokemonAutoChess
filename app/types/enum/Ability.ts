@@ -98,7 +98,8 @@ import {
   FusionBoltStrategy,
   AuroraVeilStrategy,
   AquaJetStrategy,
-  ProteanStrategy
+  ProteanStrategy,
+  ChatterStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -201,7 +202,8 @@ export enum Ability {
   FUSION_BOLT = "FUSION_BOLT",
   AURORA_VEIL = "AURORA_VEIL",
   AQUA_JET = "AQUA_JET",
-  PROTEAN = "PROTEAN"
+  PROTEAN = "PROTEAN",
+  CHATTER = "CHATTER"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -304,5 +306,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.FUSION_BOLT]: new FusionBoltStrategy(),
   [Ability.AURORA_VEIL]: new AuroraVeilStrategy(),
   [Ability.AQUA_JET]: new AquaJetStrategy(),
-  [Ability.PROTEAN]: new ProteanStrategy()
+  [Ability.PROTEAN]: new ProteanStrategy(),
+  [Ability.CHATTER]: new ChatterStrategy()
 }
