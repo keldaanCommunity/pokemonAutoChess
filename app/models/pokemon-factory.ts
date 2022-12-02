@@ -63,6 +63,7 @@ import {
   Charizard,
   Charmander,
   Charmeleon,
+  Chatot,
   Chikorita,
   Chimchar,
   Chinchou,
@@ -1500,6 +1501,8 @@ export default class PokemonFactory {
         return new Kecleon(s, e)
       case Pkm.CARBINK:
         return new Carbink(s, e)
+      case Pkm.CHATOT:
+        return new Chatot(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
@@ -1536,7 +1539,7 @@ export default class PokemonFactory {
     if (possibleFossils.length > 0) {
       return possibleFossils[Math.floor(Math.random() * possibleFossils.length)]
     } else {
-      return Pkm.AERODACTYL
+      return Pkm.CARBINK
     }
   }
 }

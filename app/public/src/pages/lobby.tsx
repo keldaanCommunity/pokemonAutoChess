@@ -10,7 +10,6 @@ import { Client, Room, RoomAvailable } from "colyseus.js"
 import DiscordButton from "./component/buttons/discord-button"
 import DonateButton from "./component/buttons/donate-button"
 import PolicyButton from "./component/buttons/policy-button"
-import CreditsButton from "./component/buttons/credits-button"
 import Wiki from "./component/wiki/wiki"
 import TeamBuilder from "./component/bot-builder/team-builder"
 import MetaReport from "./component/meta-report/meta-report"
@@ -372,7 +371,6 @@ export default function Lobby() {
           <DiscordButton />
           <DonateButton />
           <PolicyButton />
-          <CreditsButton />
         </div>
 
         <div style={lobbyStyle}>

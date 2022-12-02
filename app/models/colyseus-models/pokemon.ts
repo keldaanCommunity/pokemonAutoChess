@@ -7138,6 +7138,31 @@ export class Volcarona extends Pokemon {
   }
 }
 
+export class Chatot extends Pokemon {
+    constructor(shiny: boolean, emotion: Emotion) {
+      super(
+        Pkm.CHATOT,
+        [Synergy.FLYING, Synergy.SOUND],
+        Rarity.MYTHICAL,
+        PkmIndex[Pkm.CHATOT],
+        Pkm.DEFAULT,
+        200,
+        20,
+        2,
+        2,
+        3,
+        AttackSprite.PSYCHIC_RANGE,
+        AttackType.SPECIAL,
+        2,
+        120,
+        Ability.CHATTER,
+        shiny,
+        emotion,
+        true
+      )
+    }
+  }
+
 export class Kecleon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

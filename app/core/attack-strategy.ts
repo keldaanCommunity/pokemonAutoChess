@@ -324,6 +324,36 @@ export class PsychicSurgeStrategy extends AttackStrategy {
   }
 }
 
+export class ChatterStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 5
+    let chance = 0.2
+
+    if (pokemon.stars === 2) {
+      damage = 10
+      chance = 0.3
+    } else if (pokemon.stars === 3) {
+      damage = 15
+      chance = 0.4
+    }
+
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team) {
+        tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        if (Math.random() < chance) {
+          tg.status.triggerConfusion(1000, tg)
+        }
+      }
+    })
+  }
+}
+
 export class CorruptedNatureStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,

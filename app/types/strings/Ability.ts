@@ -602,6 +602,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: "",
     fra: "",
   },
+  [Ability.CHATTER]: {
+    eng: "Chatter",
+    esp: "",
+    prt: "",
+    fra: "",
+  }
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1205,4 +1211,10 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: "",
     fra: "",
   },
+  [Ability.CHATTER]: {
+    eng: "Deal 5/10/15 special damage to all enemies with each target hit having a 20/30/40% chance to be confused 1s",
+    esp: "",
+    prt: "",
+    fra: "",
+  }
 }

@@ -18,10 +18,10 @@ export default class AnimationManager {
     this.game = game
 
     indexList.forEach((index) => {
-      ;(Object.values(PokemonTint) as PokemonTint[]).forEach((shiny) => {
-        ;(Object.values(PokemonActionState) as PokemonActionState[]).forEach(
+      (Object.values(PokemonTint) as PokemonTint[]).forEach((shiny) => {
+        (Object.values(PokemonActionState) as PokemonActionState[]).forEach(
           (action) => {
-            ;(Object.values(SpriteType) as SpriteType[]).forEach((mode) => {
+            (Object.values(SpriteType) as SpriteType[]).forEach((mode) => {
               const directionArray =
                 action == PokemonActionState.SLEEP
                   ? [Orientation.DOWN]
@@ -60,12 +60,12 @@ export default class AnimationManager {
                 } else {
                   console.log(
                     "duration array missing for ",
-                    `${index}/${shiny}/${action}/${mode}`
+                    `${index}/${shiny}/${action}/${mode}`,
                   )
                 }
               })
             })
-          }
+          },
         )
       })
     })
@@ -1117,6 +1117,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.CHATTER,
+      frames: this.game.anims.generateFrameNames(Ability.CHATTER, {
+        start: 0,
+        end: 25,
+        zeroPad: 3,
+      }),
+      duration: 1000,
+      repeat: 0,
+    })
+
+    this.game.anims.create({
       key: Ability.DISARMING_VOICE,
       frames: this.game.anims.generateFrameNames(Ability.DISARMING_VOICE, {
         start: 0,
@@ -1165,10 +1176,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.AQUA_JET, {
         start: 0,
         end: 19,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({

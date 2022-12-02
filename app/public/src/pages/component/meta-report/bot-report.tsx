@@ -3,7 +3,7 @@ import Chart from "react-apexcharts"
 import { useAppSelector } from "../../../hooks"
 import React, { useState } from "react"
 import MultiRangeSlider from "multi-range-slider-react"
-import { getPortraitSrc } from "../../../utils"
+import { getAvatarSrc } from "../../../utils"
 
 const maxEloValue = 1700
 
@@ -135,7 +135,7 @@ export default function BotReport() {
           >
             <img
               style={{ width: "40px", height: "40px" }}
-              src={getPortraitSrc(b.avatar)}
+              src={getAvatarSrc(b.avatar)}
             />
           </div>
         ))}
