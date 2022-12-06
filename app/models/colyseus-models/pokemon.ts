@@ -7139,29 +7139,29 @@ export class Volcarona extends Pokemon {
 }
 
 export class Chatot extends Pokemon {
-    constructor(shiny: boolean, emotion: Emotion) {
-      super(
-        Pkm.CHATOT,
-        [Synergy.FLYING, Synergy.SOUND],
-        Rarity.MYTHICAL,
-        PkmIndex[Pkm.CHATOT],
-        Pkm.DEFAULT,
-        200,
-        20,
-        2,
-        2,
-        3,
-        AttackSprite.PSYCHIC_RANGE,
-        AttackType.SPECIAL,
-        2,
-        120,
-        Ability.CHATTER,
-        shiny,
-        emotion,
-        true
-      )
-    }
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CHATOT,
+      [Synergy.FLYING, Synergy.SOUND],
+      Rarity.MYTHICAL,
+      PkmIndex[Pkm.CHATOT],
+      Pkm.DEFAULT,
+      200,
+      20,
+      2,
+      2,
+      3,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.SPECIAL,
+      2,
+      120,
+      Ability.CHATTER,
+      shiny,
+      emotion,
+      true
+    )
   }
+}
 
 export class Kecleon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
@@ -7342,20 +7342,20 @@ export class Tornadus extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.TORNADUS,
-      [Synergy.FLYING],
+      [Synergy.FLYING, Synergy.HUMAN],
       Rarity.MYTHICAL,
-      "0641",
+      PkmIndex[Pkm.TORNADUS],
       Pkm.DEFAULT,
       200,
       20,
       3,
       3,
       3,
-      AttackSprite.ELECTRIC_RANGE,
+      AttackSprite.FLYING_RANGE,
       AttackType.SPECIAL,
       2,
       100,
-      Ability.DEFAULT,
+      Ability.TRI_ATTACK,
       shiny,
       emotion,
       true
@@ -8814,8 +8814,8 @@ export class Relicanth extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.RELICANTH,
-      [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.EPIC,
+      [Synergy.MINERAL, Synergy.WATER],
+      Rarity.MYTHICAL,
       PkmIndex[Pkm.RELICANTH],
       Pkm.DEFAULT,
       270,
@@ -8827,7 +8827,7 @@ export class Relicanth extends Pokemon {
       AttackType.PHYSICAL,
       2,
       70,
-      Ability.DEFAULT,
+      Ability.ROCK_TOMB,
       shiny,
       emotion,
       true
@@ -9962,19 +9962,19 @@ export class Munchlax extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MUNCHLAX,
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.LEGENDARY,
-      "0446",
+      [Synergy.NORMAL, Synergy.HUMAN],
+      Rarity.EPIC,
+      PkmIndex[Pkm.MUNCHLAX],
       Pkm.SNORLAX,
       160,
-      15,
-      3,
-      5,
+      13,
+      2,
+      4,
       1,
       AttackSprite.NORMAL_MELEE,
       AttackType.PHYSICAL,
       1,
-      100,
+      130,
       Ability.DYNAMIC_PUNCH,
       shiny,
       emotion,
@@ -9988,19 +9988,19 @@ export class Snorlax extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SNORLAX,
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.LEGENDARY,
-      "0143",
+      [Synergy.NORMAL, Synergy.HUMAN],
+      Rarity.EPIC,
+      PkmIndex[Pkm.SNORLAX],
       Pkm.DEFAULT,
       350,
-      25,
+      19,
+      3,
       5,
-      7,
       1,
       AttackSprite.NORMAL_MELEE,
       AttackType.PHYSICAL,
       2,
-      100,
+      130,
       Ability.DYNAMIC_PUNCH,
       shiny,
       emotion,
