@@ -10,13 +10,13 @@ import { GameAdditionalPokemons } from "./game-additional-pokemons"
 
 const style: CSS.Properties = {
   position: "absolute",
-  left: "0.5%",
+  left: "9%",
   bottom: "0.5%",
   height: "15%",
   background: "#54596b",
   display: "flex",
   justifyContent: "space-between",
-  gap: "5px",
+  gap: "5px"
 }
 
 export default function GameShop() {
@@ -31,7 +31,7 @@ export default function GameShop() {
           flexFlow: "column",
           padding: "5px",
           background: "#61738a",
-          justifyContent: "space-between",
+          justifyContent: "space-between"
         }}
       >
         <GameRarityPercentage />

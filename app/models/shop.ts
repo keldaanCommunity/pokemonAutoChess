@@ -197,7 +197,7 @@ export default class Shop {
   }
 
   assignShop(player: Player) {
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
       let pokemon = this.pickPokemon(player)
       const seed = Math.random()
       if (seed > 0.994) {
@@ -210,7 +210,7 @@ export default class Shop {
   assignDittoShop(player: Player) {
     player.shop[0] = Pkm.DITTO
 
-    for (let i = 1; i < 7; i++) {
+    for (let i = 1; i < 6; i++) {
       const pokemon = this.pickPokemon(player)
       player.shop[i] = pokemon
     }
@@ -218,7 +218,7 @@ export default class Shop {
 
   assignFirstMythicalShop(player: Player) {
     const mythicalCopy = JSON.parse(JSON.stringify(this.MYTHICAL_1))
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
       const pkm = PokemonFactory.createPokemonFromName(
         mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]
       ).name
@@ -229,7 +229,7 @@ export default class Shop {
 
   assignSecondMythicalShop(player: Player) {
     const mythicalCopy = JSON.parse(JSON.stringify(this.MYTHICAL_2))
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
       const pkm = PokemonFactory.createPokemonFromName(
         mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]
       ).name
