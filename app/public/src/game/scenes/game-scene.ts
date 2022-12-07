@@ -354,10 +354,10 @@ export default class GameScene extends Scene {
       "/assets/attacks"
     )
     this.load.multiatlas(
-        "CHATTER",
-        "/assets/attacks/CHATTER.json",
-        "/assets/attacks"
-      )
+      "CHATTER",
+      "/assets/attacks/CHATTER.json",
+      "/assets/attacks"
+    )
     this.load.multiatlas(
       "pmd-replace",
       "/assets/attacks/pmd-replace.json",
@@ -372,14 +372,14 @@ export default class GameScene extends Scene {
     if (this.uid && this.tilemap && this.room) {
       this.textStyle = {
         fontSize: "35px",
-        fontFamily: "'Press Start 2P'",
+        fontFamily: "brandonGrotesque",
         color: "black",
         align: "center",
       }
 
       this.bigTextStyle = {
         fontSize: "80px",
-        fontFamily: "'Press Start 2P'",
+        fontFamily: "brandonGrotesque",
         color: "white",
         align: "center",
         stroke: "#000",
@@ -505,10 +505,10 @@ export default class GameScene extends Scene {
         this.zones.push(zone)
         const graphic = this.add
           .graphics()
-          .fillStyle(0xffffff, 0.4)
-          .fillCircle(zone.x, zone.y, zone.input.hitArea.width / 2)
-          .lineStyle(2, 0x000000, 0.4)
-          .strokeCircle(zone.x, zone.y, zone.input.hitArea.width / 2)
+          .fillStyle(0x61738a, 1)
+          .fillCircle(zone.x, zone.y, zone.input.hitArea.width / 4)
+          .lineStyle(2, 0x000000, 1)
+          .strokeCircle(zone.x, zone.y, zone.input.hitArea.width / 4)
         graphic.setVisible(false)
         this.graphics.push(graphic)
       }
@@ -526,14 +526,14 @@ export default class GameScene extends Scene {
 
     const graphic = this.add
       .graphics()
-      .fillStyle(0xffffff, 0.6)
+      .fillStyle(0x61738a, 1)
       .fillRect(
         sellZone.x - sellZone.input.hitArea.width / 2,
         sellZone.y - sellZone.input.hitArea.height / 2,
         sellZone.input.hitArea.width,
         sellZone.input.hitArea.height
       )
-      .lineStyle(2, 0x000000, 0.6)
+      .lineStyle(2, 0x000000, 1)
       .strokeRect(
         sellZone.x - sellZone.input.hitArea.width / 2,
         sellZone.y - sellZone.input.hitArea.height / 2,
@@ -545,7 +545,7 @@ export default class GameScene extends Scene {
     this.sellZoneGraphic = graphic
 
     this.dragDropText = this.add.text(
-      sellZoneCoord[0] - 4 * 96 + 24,
+      sellZoneCoord[0] - 2 * 96 + 24,
       sellZoneCoord[1],
       "Drop here to sell",
       this.textStyle

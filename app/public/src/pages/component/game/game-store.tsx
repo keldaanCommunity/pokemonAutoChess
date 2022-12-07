@@ -10,10 +10,10 @@ const style: CSS.Properties = {
   display: "flex",
   listStyleType: "none",
   gap: "5px",
-  width: "47vw",
+  width: "56vw",
   margin: "0px",
   padding: "0px",
-  justifyContent: "space-between"
+  justifyContent: "space-between",
 }
 
 export default function GameStore() {

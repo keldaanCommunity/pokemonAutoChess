@@ -30,12 +30,12 @@ export default class ItemContainer extends Button {
           0,
           70,
           70,
-          0xffffff,
-          0.7
+          0x61738a,
+          1
         ).setStrokeStyle(3, 0x000000, 1)
       )
     } else {
-      this.add(new GameObjects.Ellipse(scene, 0, 0, 25, 25, 0xffffff, 0.7))
+      this.add(new GameObjects.Ellipse(scene, 0, 0, 25, 25, 0x61738a, 1))
     }
     this.sprite = new GameObjects.Image(scene, 0, 0, "item", item).setScale(
       this.dragable ? 2 : 1,
