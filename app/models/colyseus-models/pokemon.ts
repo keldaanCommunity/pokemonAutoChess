@@ -8814,7 +8814,7 @@ export class Relicanth extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.RELICANTH,
-      [Synergy.MINERAL, Synergy.WATER],
+      [Synergy.MINERAL, Synergy.WATER, Synergy.FOSSIL],
       Rarity.MYTHICAL,
       PkmIndex[Pkm.RELICANTH],
       Pkm.DEFAULT,
@@ -8889,7 +8889,7 @@ export class Aerodactyl extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.AERODACTYL,
-      [Synergy.MINERAL, Synergy.FLYING],
+      [Synergy.MINERAL, Synergy.FLYING, Synergy.FOSSIL],
       Rarity.MYTHICAL,
       PkmIndex[Pkm.AERODACTYL],
       Pkm.DEFAULT,

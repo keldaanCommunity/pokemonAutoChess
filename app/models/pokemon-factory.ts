@@ -434,6 +434,7 @@ import {
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
+import { Rarity } from "../types/enum/Game"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { Synergy } from "../types/enum/Synergy"
@@ -1531,7 +1532,8 @@ export default class PokemonFactory {
     const possibleFossils = new Array<Pkm>()
     ;(PRECOMPUTED_TYPE_POKEMONS[Synergy.FOSSIL].pokemons as Pkm[]).forEach(
       (p) => {
-        if (!currentFossils.includes(p)) {
+        const pkm = PokemonFactory.createPokemonFromName(p)
+        if (!currentFossils.includes(p) && pkm.rarity !== Rarity.MYTHICAL) {
           possibleFossils.push(p)
         }
       }
