@@ -7342,7 +7342,7 @@ export class Tornadus extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.TORNADUS,
-      [Synergy.FLYING, Synergy.HUMAN],
+      [Synergy.FLYING, Synergy.HUMAN, Synergy.MONSTER],
       Rarity.MYTHICAL,
       PkmIndex[Pkm.TORNADUS],
       Pkm.DEFAULT,
