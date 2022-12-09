@@ -13,7 +13,7 @@ export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.LEGENDARY]: 3,
   [Rarity.MYTHICAL]: 4,
   [Rarity.NEUTRAL]: 2,
-  [Rarity.SUMMON]: 1
+  [Rarity.SUMMON]: 1,
 })
 
 export const PkmCost: { [key in Rarity]: number } = Object.freeze({
@@ -24,7 +24,7 @@ export const PkmCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.MYTHICAL]: 6,
   [Rarity.LEGENDARY]: 5,
   [Rarity.SUMMON]: 1,
-  [Rarity.NEUTRAL]: 1
+  [Rarity.NEUTRAL]: 1,
 })
 
 export const ExpTable: { [key: number]: number } = Object.freeze({
@@ -36,11 +36,11 @@ export const ExpTable: { [key: number]: number } = Object.freeze({
   6: 32,
   7: 50,
   8: 70,
-  9: -1
+  9: -1,
 })
 
 export const TypeTrigger: { [key in Synergy]: number[] } = {
-  [Synergy.NORMAL]: [3, 6, 9],
+  [Synergy.NORMAL]: [3, 5, 7, 9],
   [Synergy.GRASS]: [3, 5, 7],
   [Synergy.FIRE]: [2, 4, 6, 8],
   [Synergy.WATER]: [3, 6, 9],
@@ -64,7 +64,7 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.FAIRY]: [2, 4, 6],
   [Synergy.ICE]: [2, 4],
   [Synergy.FOSSIL]: [2, 4, 6],
-  [Synergy.SOUND]: [2, 4, 6]
+  [Synergy.SOUND]: [2, 4, 6],
 }
 
 export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
@@ -77,7 +77,7 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.EPIC]: "#ca6cee",
   [Rarity.LEGENDARY]: "#e6cb49",
   [Rarity.MYTHICAL]: "#ffc0cb",
-  [Rarity.SUMMON]: "#991f1f"
+  [Rarity.SUMMON]: "#991f1f",
 }
 export const Probability: { [key: number]: number[] } = {
   1: [1, 0, 0, 0, 0],
@@ -88,62 +88,62 @@ export const Probability: { [key: number]: number[] } = {
   6: [0.29, 0.295, 0.31, 0.1, 0.005],
   7: [0.24, 0.28, 0.31, 0.15, 0.02],
   8: [0.2, 0.24, 0.31, 0.2, 0.05],
-  9: [0.1, 0.19, 0.31, 0.3, 0.1]
+  9: [0.1, 0.19, 0.31, 0.3, 0.1],
 }
 
 export const NeutralStage: { turn: number; avatar: string }[] = [
   {
     turn: 1,
-    avatar: `${PkmIndex[Pkm.MAGIKARP].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.MAGIKARP].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 2,
-    avatar: `${PkmIndex[Pkm.RATICATE].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.RATICATE].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 3,
-    avatar: `${PkmIndex[Pkm.FEAROW].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.FEAROW].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 10,
-    avatar: `${PkmIndex[Pkm.GYARADOS].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.GYARADOS].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 15,
-    avatar: `${PkmIndex[Pkm.LUGIA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.LUGIA].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 20,
-    avatar: `${PkmIndex[Pkm.GIRATINA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.GIRATINA].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 25,
-    avatar: `${PkmIndex[Pkm.ZAPDOS].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.ZAPDOS].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 30,
-    avatar: `${PkmIndex[Pkm.DIALGA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.DIALGA].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 35,
-    avatar: `${PkmIndex[Pkm.SUICUNE].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.SUICUNE].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 40,
-    avatar: `${PkmIndex[Pkm.REGICE].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.REGICE].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 45,
-    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 50,
-    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`,
   },
   {
     turn: 55,
-    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`
-  }
+    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`,
+  },
 ]
 
 type ThresholdDuration = {
@@ -154,20 +154,20 @@ type ThresholdDuration = {
 export const FlyingProtectThreshold: { [key in Effect]?: ThresholdDuration } = {
   [Effect.TAILWIND]: {
     duration: 1000,
-    threshold: 0.2
+    threshold: 0.2,
   },
   [Effect.FEATHER_DANCE]: {
     duration: 2000,
-    threshold: 0.4
+    threshold: 0.4,
   },
   [Effect.MAX_AIRSTREAM]: {
     duration: 3000,
-    threshold: 0.5
+    threshold: 0.5,
   },
   [Effect.MAX_GUARD]: {
     duration: 4000,
-    threshold: 0.5
-  }
+    threshold: 0.5,
+  },
 }
 
 export enum EloRank {
@@ -175,7 +175,7 @@ export enum EloRank {
   PLATINUM = "PLATINUM",
   GOLD = "GOLD",
   SILVER = "SILVER",
-  BRONZE = "BRONZE"
+  BRONZE = "BRONZE",
 }
 
 export const EloRankThreshold: { [key in EloRank]: number } = {
@@ -183,7 +183,7 @@ export const EloRankThreshold: { [key in EloRank]: number } = {
   [EloRank.SILVER]: 900,
   [EloRank.GOLD]: 1100,
   [EloRank.PLATINUM]: 1250,
-  [EloRank.DIAMOND]: 1400
+  [EloRank.DIAMOND]: 1400,
 }
 
 export enum Header {
@@ -199,7 +199,7 @@ export enum Header {
   WATER = "WATER",
   ABYSS = "ABYSS",
   ABYSS_ALT_1 = "ABYSS_ALT_1",
-  ABYSS_ALT_2 = "ABYSS_ALT_2"
+  ABYSS_ALT_2 = "ABYSS_ALT_2",
 }
 
 export const MaskCoordinate: { [key in Mask]: { x: number; y: number } } =
@@ -250,7 +250,7 @@ export const MaskCoordinate: { [key in Mask]: { x: number; y: number } } =
     A1B2CD4: { x: 1, y: 15 },
     A1BC3D: { x: 0, y: 23 },
     AB2CD4: { x: 1, y: 23 },
-    A1B2C3D4: { x: 1, y: 1 }
+    A1B2C3D4: { x: 1, y: 1 },
   })
 
 export enum Mask {
@@ -300,13 +300,13 @@ export enum Mask {
   A1B2CD4 = "A1B2CD4",
   A1BC3D = "A1BC3D",
   AB2CD4 = "AB2CD4",
-  A1B2C3D4 = "A1B2C3D4"
+  A1B2C3D4 = "A1B2C3D4",
 }
 
 export enum TerrainType {
   GROUND,
   WALL,
-  WATER
+  WATER,
 }
 
 export const IdTable: { [key: number]: Mask } = {
@@ -356,7 +356,7 @@ export const IdTable: { [key: number]: Mask } = {
   191: Mask.A1B2CD4,
   95: Mask.A1BC3D,
   175: Mask.AB2CD4,
-  255: Mask.A1B2C3D4
+  255: Mask.A1B2C3D4,
 }
 
 export const ItemRecipe: { [key in Item]?: Item[] } = {
@@ -404,7 +404,7 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.POKE_DOLL]: [Item.NEVER_MELT_ICE, Item.HEART_SCALE],
   [Item.RED_ORB]: [Item.CHARCOAL, Item.CHARCOAL],
   [Item.MAX_REVIVE]: [Item.CHARCOAL, Item.HEART_SCALE],
-  [Item.ROCKY_HELMET]: [Item.HEART_SCALE, Item.HEART_SCALE]
+  [Item.ROCKY_HELMET]: [Item.HEART_SCALE, Item.HEART_SCALE],
 }
 
 export type DungeonInfo = {
@@ -541,7 +541,7 @@ export enum Dungeon {
   WESTERN_CAVE_B28F_B39F = "WESTERN_CAVE_B28F_B39F",
   WISH_CAVE_01F_13F = "WISH_CAVE_01F_13F",
   WISH_CAVE_90F_99F = "WISH_CAVE_90F_99F",
-  WYVERN_HILL = "WYVERN_HILL"
+  WYVERN_HILL = "WYVERN_HILL",
 }
 
 export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
@@ -556,9 +556,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   SEVEN_STATION_PATH: {
     id: "SEVEN_STATION_PATH",
@@ -571,9 +571,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.FIGHTING
+    type: Synergy.FIGHTING,
   },
   BARREN_VALLEY: {
     id: "BARREN_VALLEY",
@@ -587,9 +587,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.DARK
+    type: Synergy.DARK,
   },
   DARK_ICE_MOUNTAIN_PEAK: {
     id: "DARK_ICE_MOUNTAIN_PEAK",
@@ -603,9 +603,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GHOST
+    type: Synergy.GHOST,
   },
   DARK_ICE_MOUNTAIN: {
     id: "DARK_ICE_MOUNTAIN",
@@ -619,9 +619,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GHOST
+    type: Synergy.GHOST,
   },
   DARK_WASTELAND: {
     id: "DARK_WASTELAND",
@@ -635,9 +635,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GHOST
+    type: Synergy.GHOST,
   },
   DEEP_BOULDER_QUARRY: {
     id: "DEEP_BOULDER_QUARRY",
@@ -650,9 +650,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   LIMESTONE_CAVERN: {
     id: "LIMESTONE_CAVERN",
@@ -665,9 +665,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   DEEP_LIMESTONE_CAVERN: {
     id: "DEEP_LIMESTONE_CAVERN",
@@ -680,9 +680,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   ICICLE_FOREST: {
     id: "ICICLE_FOREST",
@@ -696,9 +696,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ICE
+    type: Synergy.ICE,
   },
   MURKY_FOREST: {
     id: "MURKY_FOREST",
@@ -712,9 +712,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.BUG
+    type: Synergy.BUG,
   },
   SPACIAL_CLIFFS: {
     id: "SPACIAL_CLIFFS",
@@ -728,9 +728,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GHOST
+    type: Synergy.GHOST,
   },
   TEMPORAL_SPIRE_FUTURE: {
     id: "TEMPORAL_SPIRE_FUTURE",
@@ -741,7 +741,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MAGNETON,
       Pkm.GASTLY,
       Pkm.PORYGON_2,
-      Pkm.CROBAT
+      Pkm.CROBAT,
     ],
     tileset: [
       Header.WALL,
@@ -751,9 +751,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   TEMPORAL_TOWER_FUTURE: {
     id: "TEMPORAL_TOWER_FUTURE",
@@ -767,9 +767,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   VAST_ICE_MOUNTAIN_PEAK: {
     id: "VAST_ICE_MOUNTAIN_PEAK",
@@ -780,7 +780,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.DUSCLOPS,
       Pkm.ABSOL,
       Pkm.METAGROSS,
-      Pkm.MAGNEZONE
+      Pkm.MAGNEZONE,
     ],
     tileset: [
       Header.WALL,
@@ -790,9 +790,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GHOST
+    type: Synergy.GHOST,
   },
   VAST_ICE_MOUNTAIN: {
     id: "VAST_ICE_MOUNTAIN",
@@ -803,7 +803,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.DUSCLOPS,
       Pkm.ABSOL,
       Pkm.METAGROSS,
-      Pkm.MAGNEZONE
+      Pkm.MAGNEZONE,
     ],
     tileset: [
       Header.WALL,
@@ -813,9 +813,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GHOST
+    type: Synergy.GHOST,
   },
   AMP_PLAINS: {
     id: "AMP_PLAINS",
@@ -828,7 +828,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.FLAFFY,
       Pkm.PIKACHU,
       Pkm.PICHU,
-      Pkm.ELECTABUZZ
+      Pkm.ELECTABUZZ,
     ],
     tileset: [
       Header.WALL,
@@ -838,9 +838,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ELECTRIC
+    type: Synergy.ELECTRIC,
   },
   FAR_AMP_PLAINS: {
     id: "FAR_AMP_PLAINS",
@@ -854,7 +854,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.ELECTRIKE,
       Pkm.LUXIO,
       Pkm.LUXRAY,
-      Pkm.AMPHAROS
+      Pkm.AMPHAROS,
     ],
     tileset: [
       Header.WALL,
@@ -864,9 +864,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ELECTRIC
+    type: Synergy.ELECTRIC,
   },
   FINAL_MAZE_B23F: {
     id: "FINAL_MAZE_B23F",
@@ -885,7 +885,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.STARAVIA,
       Pkm.JIRACHI,
       Pkm.MOLTRES,
-      Pkm.SUICUNE
+      Pkm.SUICUNE,
     ],
     tileset: [
       Header.WALL,
@@ -894,9 +894,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   FOGGY_FOREST: {
     id: "FOGGY_FOREST",
@@ -910,9 +910,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   FOREST_PATH: {
     id: "FOREST_PATH",
@@ -926,9 +926,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   GOLD_CHAMBER: {
     id: "GOLD_CHAMBER",
@@ -947,7 +947,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.STARAVIA,
       Pkm.JIRACHI,
       Pkm.MOLTRES,
-      Pkm.SUICUNE
+      Pkm.SUICUNE,
     ],
     tileset: [
       Header.WALL,
@@ -957,9 +957,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   HIDDEN_HIGHLAND: {
     id: "HIDDEN_HIGHLAND",
@@ -971,7 +971,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.BASTIODON,
       Pkm.GARCHOMP,
       Pkm.ABOMASNOW,
-      Pkm.MAGMORTAR
+      Pkm.MAGMORTAR,
     ],
     tileset: [
       Header.WALL,
@@ -981,9 +981,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   MYSTERY_JUNGLE_01F_15F: {
     id: "MYSTERY_JUNGLE_01F_15F",
@@ -1016,7 +1016,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MUNCHLAX,
       Pkm.TURTWIG,
       Pkm.GROTLE,
-      Pkm.TORTERRA
+      Pkm.TORTERRA,
     ],
     tileset: [
       Header.WALL,
@@ -1027,9 +1027,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   MYSTERY_JUNGLE_16F_30F: {
     id: "MYSTERY_JUNGLE_16F_30F",
@@ -1062,7 +1062,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MUNCHLAX,
       Pkm.TURTWIG,
       Pkm.GROTLE,
-      Pkm.TORTERRA
+      Pkm.TORTERRA,
     ],
     tileset: [
       Header.WALL,
@@ -1072,9 +1072,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   MYSTIFYING_FOREST: {
     id: "MYSTIFYING_FOREST",
@@ -1109,7 +1109,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MUNCHLAX,
       Pkm.TURTWIG,
       Pkm.GROTLE,
-      Pkm.TORTERRA
+      Pkm.TORTERRA,
     ],
     tileset: [
       Header.WALL,
@@ -1119,9 +1119,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   BEACH_CAVE: {
     id: "BEACH_CAVE",
@@ -1136,9 +1136,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
       Header.GROUND_ALT_4,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   BOTTOMLESS_SEA: {
     id: "BOTTOMLESS_SEA",
@@ -1151,16 +1151,16 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.HORSEA,
       Pkm.SEADRA,
       Pkm.SLOWKING,
-      Pkm.LAPRAS
+      Pkm.LAPRAS,
     ],
     tileset: [
       Header.WALL,
       Header.WALL_ALT_1,
       Header.WALL_ALT_2,
       Header.GROUND,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   BRINE_CAVE: {
     id: "BRINE_CAVE",
@@ -1174,9 +1174,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   CONCEALED_RUINS: {
     id: "CONCEALED_RUINS",
@@ -1187,7 +1187,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.NIDOQUEEN,
       Pkm.SHUPPET,
       Pkm.RAIKOU,
-      Pkm.PIDGEOT
+      Pkm.PIDGEOT,
     ],
     tileset: [
       Header.WALL,
@@ -1197,9 +1197,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   CRAGGY_COAST: {
     id: "CRAGGY_COAST",
@@ -1213,9 +1213,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   CRYSTAL_CAVE_01F_05F: {
     id: "CRYSTAL_CAVE_01F_05F",
@@ -1229,9 +1229,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   CRYSTAL_CAVE_06F_11F: {
     id: "CRYSTAL_CAVE_06F_11F",
@@ -1245,9 +1245,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   CRYSTAL_CROSSING: {
     id: "CRYSTAL_CROSSING",
@@ -1261,9 +1261,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   DARK_CRATER: {
     id: "DARK_CRATER",
@@ -1280,7 +1280,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.RAPIDASH,
       Pkm.MEWTWO,
       Pkm.ARCANINE,
-      Pkm.QUILAVA
+      Pkm.QUILAVA,
     ],
     tileset: [
       Header.WALL,
@@ -1290,9 +1290,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.FIRE
+    type: Synergy.FIRE,
   },
   DEEP_DARK_CRATER: {
     id: "DEEP_DARK_CRATER",
@@ -1313,7 +1313,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.INFERNAPE,
       Pkm.BLAZIKEN,
       Pkm.AGGRON,
-      Pkm.ENTEI
+      Pkm.ENTEI,
     ],
     tileset: [
       Header.WALL,
@@ -1323,9 +1323,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.FIRE
+    type: Synergy.FIRE,
   },
   DARK_HILL_01F_06F: {
     id: "DARK_HILL_01F_06F",
@@ -1339,9 +1339,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GHOST
+    type: Synergy.GHOST,
   },
   DARK_HILL_07F_15F: {
     id: "DARK_HILL_07F_15F",
@@ -1355,9 +1355,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GHOST
+    type: Synergy.GHOST,
   },
   DEEP_DUSK_FOREST_01F_06F: {
     id: "DEEP_DUSK_FOREST_01F_06F",
@@ -1371,9 +1371,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   DEEP_DUSK_FOREST_07F_12F: {
     id: "DEEP_DUSK_FOREST_07F_12F",
@@ -1387,9 +1387,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   DEEP_SEALED_RUIN: {
     id: "DEEP_SEALED_RUIN",
@@ -1403,9 +1403,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.METAL
+    type: Synergy.METAL,
   },
   DRENCHED_BLUFF: {
     id: "DRENCHED_BLUFF",
@@ -1419,9 +1419,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   DUSK_FOREST_01F_04F: {
     id: "DUSK_FOREST_01F_04F",
@@ -1431,7 +1431,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.GABITE,
       Pkm.HAUNTER,
       Pkm.SALAMENCE,
-      Pkm.RHYPERIOR
+      Pkm.RHYPERIOR,
     ],
     tileset: [
       Header.WALL,
@@ -1441,9 +1441,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GHOST
+    type: Synergy.GHOST,
   },
   DUSK_FOREST_05F_08F: {
     id: "DUSK_FOREST_05F_08F",
@@ -1453,7 +1453,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.GABITE,
       Pkm.HAUNTER,
       Pkm.SALAMENCE,
-      Pkm.RHYPERIOR
+      Pkm.RHYPERIOR,
     ],
     tileset: [
       Header.WALL,
@@ -1463,9 +1463,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GHOST
+    type: Synergy.GHOST,
   },
   NORTHERN_DESERT_01F_07F: {
     id: "NORTHERN_DESERT_01F_07F",
@@ -1478,7 +1478,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.TRAPINCH,
       Pkm.RHYHORN,
       Pkm.LAIRON,
-      Pkm.CACTURNE
+      Pkm.CACTURNE,
     ],
     tileset: [
       Header.WALL,
@@ -1488,9 +1488,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   QUICKSAND_CAVE: {
     id: "QUICKSAND_CAVE",
@@ -1504,9 +1504,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   QUICKSAND_PIT: {
     id: "QUICKSAND_PIT",
@@ -1520,9 +1520,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   ROCK_AEGIS_CAVE: {
     id: "ROCK_AEGIS_CAVE",
@@ -1536,9 +1536,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.MINERAL
+    type: Synergy.MINERAL,
   },
   SURROUNDED_SEA: {
     id: "SURROUNDED_SEA",
@@ -1551,16 +1551,16 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.SLOWKING,
       Pkm.KINGDRA,
       Pkm.LAPRAS,
-      Pkm.LUGIA
+      Pkm.LUGIA,
     ],
     tileset: [
       Header.WALL,
       Header.WALL_ALT_1,
       Header.WALL_ALT_2,
       Header.GROUND,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   TEMPORAL_SPIRE: {
     id: "TEMPORAL_SPIRE",
@@ -1571,7 +1571,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.PORYGON,
       Pkm.SALAMENCE,
       Pkm.PORYGON_Z,
-      Pkm.METAGROSS
+      Pkm.METAGROSS,
     ],
     tileset: [
       Header.WALL,
@@ -1581,9 +1581,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.METAL
+    type: Synergy.METAL,
   },
   TEMPORAL_TOWER: {
     id: "TEMPORAL_TOWER",
@@ -1597,16 +1597,16 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   TEST_DUNGEON: {
     id: "TEST_DUNGEON",
     name: "Test Dungeon",
     pokemons: [Pkm.PORYGON],
     tileset: [Header.WALL, Header.WALL_ALT_1, Header.GROUND, Header.WATER],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   THE_NIGHTMARE: {
     id: "THE_NIGHTMARE",
@@ -1620,7 +1620,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.PERSIAN,
       Pkm.IGGLYBUFF,
       Pkm.CLEFABLE,
-      Pkm.WIGGLYTUFF
+      Pkm.WIGGLYTUFF,
     ],
     tileset: [
       Header.WALL,
@@ -1630,9 +1630,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   TINY_MEADOW: {
     id: "TINY_MEADOW",
@@ -1646,9 +1646,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   TREESHROUD_FOREST_01F_08F: {
     id: "TREESHROUD_FOREST_01F_08F",
@@ -1662,9 +1662,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   TREESHROUD_FOREST_09F_21F: {
     id: "TREESHROUD_FOREST_09F_21F",
@@ -1678,9 +1678,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   STEAM_CAVE: {
     id: "STEAM_CAVE",
@@ -1694,9 +1694,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.FIRE
+    type: Synergy.FIRE,
   },
   QUICKSAND_PIT_2: {
     id: "QUICKSAND_PIT_2",
@@ -1710,9 +1710,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   LOWER_BRINE_CAVE: {
     id: "LOWER_BRINE_CAVE",
@@ -1726,9 +1726,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   HIDDEN_LAND: {
     id: "HIDDEN_LAND",
@@ -1740,7 +1740,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.BASTIODON,
       Pkm.GARCHOMP,
       Pkm.ABOMASNOW,
-      Pkm.MAGMORTAR
+      Pkm.MAGMORTAR,
     ],
     tileset: [
       Header.WALL,
@@ -1750,9 +1750,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   TEMPORAL_TOWER_2: {
     id: "TEMPORAL_TOWER_2",
@@ -1766,9 +1766,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   CRYSTAL_CAVE_2: {
     id: "CRYSTAL_CAVE_2",
@@ -1781,9 +1781,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   WATERFALL_CAVE: {
     id: "WATERFALL_CAVE",
@@ -1797,9 +1797,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   WORLD_ABYSS: {
     id: "WORLD_ABYSS",
@@ -1810,7 +1810,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.LOUDRED,
       Pkm.NIDOQUEEN,
       Pkm.UMBREON,
-      Pkm.PIDGEOT
+      Pkm.PIDGEOT,
     ],
     tileset: [
       Header.WALL,
@@ -1820,9 +1820,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   ZERO_ISLE_EAST_15F_25F: {
     id: "ZERO_ISLE_EAST_15F_25F",
@@ -1838,7 +1838,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MAGNETON,
       Pkm.BEEDRILL,
       Pkm.FERALIGATR,
-      Pkm.MAGMAR
+      Pkm.MAGMAR,
     ],
     tileset: [
       Header.WALL,
@@ -1848,9 +1848,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   ZERO_ISLE_EAST_26F_40F: {
     id: "ZERO_ISLE_EAST_26F_40F",
@@ -1866,7 +1866,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MAGNETON,
       Pkm.BEEDRILL,
       Pkm.FERALIGATR,
-      Pkm.MAGMAR
+      Pkm.MAGMAR,
     ],
     tileset: [
       Header.WALL,
@@ -1876,9 +1876,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   ZERO_ISLE_SOUTH_01F_03F: {
     id: "ZERO_ISLE_SOUTH_01F_03F",
@@ -1894,7 +1894,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.RATTATA,
       Pkm.TOGEPI,
       Pkm.EEVEE,
-      Pkm.RALTS
+      Pkm.RALTS,
     ],
     tileset: [
       Header.WALL,
@@ -1904,9 +1904,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   ZERO_ISLE_SOUTH_04F_08F: {
     id: "ZERO_ISLE_SOUTH_04F_08F",
@@ -1922,7 +1922,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.RATTATA,
       Pkm.TOGEPI,
       Pkm.EEVEE,
-      Pkm.RALTS
+      Pkm.RALTS,
     ],
     tileset: [
       Header.WALL,
@@ -1932,9 +1932,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   BURIED_RELIC_1F_20F: {
     id: "BURIED_RELIC_1F_20F",
@@ -1955,7 +1955,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.SHEDNINJA,
       Pkm.GRAVELER,
       Pkm.HAUNTER,
-      Pkm.GOLEM
+      Pkm.GOLEM,
     ],
     tileset: [
       Header.WALL,
@@ -1964,9 +1964,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   BURIED_RELIC_21F_50F: {
     id: "BURIED_RELIC_21F_50F",
@@ -1987,7 +1987,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.SHEDNINJA,
       Pkm.GRAVELER,
       Pkm.HAUNTER,
-      Pkm.GOLEM
+      Pkm.GOLEM,
     ],
     tileset: [
       Header.WALL,
@@ -1997,9 +1997,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   BURIED_RELIC_51F_99F: {
     id: "BURIED_RELIC_51F_99F",
@@ -2020,7 +2020,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.SHEDNINJA,
       Pkm.GRAVELER,
       Pkm.HAUNTER,
-      Pkm.GOLEM
+      Pkm.GOLEM,
     ],
     tileset: [
       Header.WALL,
@@ -2030,9 +2030,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   DARKNIGHT_RELIC: {
     id: "DARKNIGHT_RELIC",
@@ -2044,7 +2044,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.BANETTE,
       Pkm.HAUNTER,
       Pkm.DUSKULL,
-      Pkm.GENGAR
+      Pkm.GENGAR,
     ],
     tileset: [
       Header.WALL,
@@ -2053,9 +2053,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GHOST
+    type: Synergy.GHOST,
   },
   SHIMMER_DESERT: {
     id: "SHIMMER_DESERT",
@@ -2069,9 +2069,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   UNOWN_RELIC: {
     id: "UNOWN_RELIC",
@@ -2084,9 +2084,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   FROSTY_FOREST: {
     id: "FROSTY_FOREST",
@@ -2096,7 +2096,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.PILOSWINE,
       Pkm.LAIRON,
       Pkm.SNORUNT,
-      Pkm.ARTICUNO
+      Pkm.ARTICUNO,
     ],
     tileset: [
       Header.WALL,
@@ -2104,9 +2104,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ICE
+    type: Synergy.ICE,
   },
   GREAT_CANYON: {
     id: "GREAT_CANYON",
@@ -2119,9 +2119,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   HOWLING_FOREST_01F_06F: {
     id: "HOWLING_FOREST_01F_06F",
@@ -2132,7 +2132,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.WHISMUR,
       Pkm.PIDGEY,
       Pkm.LOUDRED,
-      Pkm.SNORLAX
+      Pkm.SNORLAX,
     ],
     tileset: [
       Header.WALL,
@@ -2141,9 +2141,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   HOWLING_FOREST_07F_15F: {
     id: "HOWLING_FOREST_07F_15F",
@@ -2154,7 +2154,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.WHISMUR,
       Pkm.PIDGEY,
       Pkm.LOUDRED,
-      Pkm.SNORLAX
+      Pkm.SNORLAX,
     ],
     tileset: [
       Header.WALL,
@@ -2163,9 +2163,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   MT_FARAWAY: {
     id: "MT_FARAWAY",
@@ -2177,7 +2177,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MARSHTOMP,
       Pkm.VIGOROTH,
       Pkm.GLALIE,
-      Pkm.HO_OH
+      Pkm.HO_OH,
     ],
     tileset: [
       Header.WALL,
@@ -2186,9 +2186,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ICE
+    type: Synergy.ICE,
   },
   MT_FARAWAY_10F_20F: {
     id: "MT_FARAWAY_10F_20F",
@@ -2200,7 +2200,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MARSHTOMP,
       Pkm.VIGOROTH,
       Pkm.GLALIE,
-      Pkm.HO_OH
+      Pkm.HO_OH,
     ],
     tileset: [
       Header.WALL,
@@ -2209,9 +2209,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ICE
+    type: Synergy.ICE,
   },
   MT_FARAWAY_30F_39F: {
     id: "MT_FARAWAY_30F_39F",
@@ -2223,7 +2223,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MARSHTOMP,
       Pkm.VIGOROTH,
       Pkm.GLALIE,
-      Pkm.HO_OH
+      Pkm.HO_OH,
     ],
     tileset: [
       Header.WALL,
@@ -2233,9 +2233,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ICE
+    type: Synergy.ICE,
   },
   JOYOUS_TOWER: {
     id: "JOYOUS_TOWER",
@@ -2259,7 +2259,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.CLEFABLE,
       Pkm.HOUNDOUR,
       Pkm.GARDEVOIR,
-      Pkm.BELLOSSOM
+      Pkm.BELLOSSOM,
     ],
     tileset: [
       Header.WALL,
@@ -2268,9 +2268,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   LAPIS_CAVE: {
     id: "LAPIS_CAVE",
@@ -2281,7 +2281,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.NIDORINA,
       Pkm.NIDORINO,
       Pkm.BAGON,
-      Pkm.GOLBAT
+      Pkm.GOLBAT,
     ],
     tileset: [
       Header.WALL,
@@ -2290,9 +2290,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.POISON
+    type: Synergy.POISON,
   },
   LIGHTNING_FIELD: {
     id: "LIGHTNING_FIELD",
@@ -2310,7 +2310,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.AMPHAROS,
       Pkm.MANECTRIC,
       Pkm.RAICHU,
-      Pkm.RAIKOU
+      Pkm.RAIKOU,
     ],
     tileset: [
       Header.WALL,
@@ -2318,9 +2318,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ELECTRIC
+    type: Synergy.ELECTRIC,
   },
   MAGMA_CAVERN_08F_17F: {
     id: "MAGMA_CAVERN_08F_17F",
@@ -2332,7 +2332,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.GRAVELER,
       Pkm.MAGMAR,
       Pkm.GOLEM,
-      Pkm.ONIX
+      Pkm.ONIX,
     ],
     tileset: [
       Header.WALL,
@@ -2340,9 +2340,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.FIRE
+    type: Synergy.FIRE,
   },
   MAGMA_CAVERN_18F_23F: {
     id: "MAGMA_CAVERN_18F_23F",
@@ -2355,7 +2355,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.GRAVELER,
       Pkm.MAGMAR,
       Pkm.GOLEM,
-      Pkm.ONIX
+      Pkm.ONIX,
     ],
     tileset: [
       Header.WALL,
@@ -2364,9 +2364,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.FIRE
+    type: Synergy.FIRE,
   },
   METEOR_CAVE: {
     id: "METEOR_CAVE",
@@ -2378,9 +2378,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   MT_BLAZE: {
     id: "MT_BLAZE",
@@ -2392,7 +2392,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.RAPIDASH,
       Pkm.FEAROW,
       Pkm.ARCANINE,
-      Pkm.MOLTRES
+      Pkm.MOLTRES,
     ],
     tileset: [
       Header.WALL,
@@ -2400,9 +2400,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.FIRE
+    type: Synergy.FIRE,
   },
   MT_STEEL_01F_05F: {
     id: "MT_STEEL_01F_05F",
@@ -2415,9 +2415,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.METAL
+    type: Synergy.METAL,
   },
   MT_STEEL_06F_08F: {
     id: "MT_STEEL_06F_08F",
@@ -2430,9 +2430,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.METAL
+    type: Synergy.METAL,
   },
   MT_FREEZE: {
     id: "MT_FREEZE",
@@ -2445,9 +2445,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ICE
+    type: Synergy.ICE,
   },
   MT_THUNDER_PEAK: {
     id: "MT_THUNDER_PEAK",
@@ -2462,7 +2462,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.AMPHAROS,
       Pkm.MANECTRIC,
       Pkm.GROWLITHE,
-      Pkm.ZAPDOS
+      Pkm.ZAPDOS,
     ],
     tileset: [
       Header.WALL,
@@ -2471,9 +2471,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ELECTRIC
+    type: Synergy.ELECTRIC,
   },
   MT_THUNDER: {
     id: "MT_THUNDER",
@@ -2488,7 +2488,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.AMPHAROS,
       Pkm.MANECTRIC,
       Pkm.GROWLITHE,
-      Pkm.ZAPDOS
+      Pkm.ZAPDOS,
     ],
     tileset: [
       Header.WALL,
@@ -2496,9 +2496,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ELECTRIC
+    type: Synergy.ELECTRIC,
   },
   MURKY_CAVE: {
     id: "MURKY_CAVE",
@@ -2511,9 +2511,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.POISON
+    type: Synergy.POISON,
   },
   NORMAL_MAZE: {
     id: "NORMAL_MAZE",
@@ -2525,9 +2525,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   NORTHERN_RANGE_01F_07F: {
     id: "NORTHERN_RANGE_01F_07F",
@@ -2540,9 +2540,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.FLYING
+    type: Synergy.FLYING,
   },
   NORTHERN_RANGE_08F_16F: {
     id: "NORTHERN_RANGE_08F_16F",
@@ -2554,9 +2554,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.FLYING
+    type: Synergy.FLYING,
   },
   NORTHWIND_FIELD: {
     id: "NORTHWIND_FIELD",
@@ -2569,7 +2569,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.ABSOL,
       Pkm.CROCONAW,
       Pkm.WARTORTLE,
-      Pkm.SUICUNE
+      Pkm.SUICUNE,
     ],
     tileset: [
       Header.WALL,
@@ -2578,9 +2578,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   PITFALL_VALLEY: {
     id: "PITFALL_VALLEY",
@@ -2592,7 +2592,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.RATICATE,
       Pkm.SWABLU,
       Pkm.SKIPLOOM,
-      Pkm.AERODACTYL
+      Pkm.AERODACTYL,
     ],
     tileset: [
       Header.WALL,
@@ -2601,9 +2601,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.FLYING
+    type: Synergy.FLYING,
   },
   POISON_MAZE: {
     id: "POISON_MAZE",
@@ -2616,9 +2616,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.POISON
+    type: Synergy.POISON,
   },
   PURITY_FOREST_04F_07F: {
     id: "PURITY_FOREST_04F_07F",
@@ -2653,7 +2653,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MUNCHLAX,
       Pkm.TURTWIG,
       Pkm.GROTLE,
-      Pkm.TORTERRA
+      Pkm.TORTERRA,
     ],
     tileset: [
       Header.WALL,
@@ -2662,9 +2662,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   PURITY_FOREST_13F_20F: {
     id: "PURITY_FOREST_13F_20F",
@@ -2699,7 +2699,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MUNCHLAX,
       Pkm.TURTWIG,
       Pkm.GROTLE,
-      Pkm.TORTERRA
+      Pkm.TORTERRA,
     ],
     tileset: [
       Header.WALL,
@@ -2708,9 +2708,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   PURITY_FOREST_30F_43F: {
     id: "PURITY_FOREST_30F_43F",
@@ -2745,7 +2745,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MUNCHLAX,
       Pkm.TURTWIG,
       Pkm.GROTLE,
-      Pkm.TORTERRA
+      Pkm.TORTERRA,
     ],
     tileset: [
       Header.WALL,
@@ -2754,9 +2754,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   PURITY_FOREST_44F_60F: {
     id: "PURITY_FOREST_44F_60F",
@@ -2791,7 +2791,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MUNCHLAX,
       Pkm.TURTWIG,
       Pkm.GROTLE,
-      Pkm.TORTERRA
+      Pkm.TORTERRA,
     ],
     tileset: [
       Header.WALL,
@@ -2800,9 +2800,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   PURITY_FOREST_61F_79F: {
     id: "PURITY_FOREST_61F_79F",
@@ -2837,7 +2837,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MUNCHLAX,
       Pkm.TURTWIG,
       Pkm.GROTLE,
-      Pkm.TORTERRA
+      Pkm.TORTERRA,
     ],
     tileset: [
       Header.WALL,
@@ -2846,9 +2846,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   PURITY_FOREST_80F_99F: {
     id: "PURITY_FOREST_80F_99F",
@@ -2883,7 +2883,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MUNCHLAX,
       Pkm.TURTWIG,
       Pkm.GROTLE,
-      Pkm.TORTERRA
+      Pkm.TORTERRA,
     ],
     tileset: [
       Header.WALL,
@@ -2893,9 +2893,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   RESCUE_TEAM_MAZE: {
     id: "RESCUE_TEAM_MAZE",
@@ -2908,9 +2908,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   ROCK_PATH: {
     id: "ROCK_PATH",
@@ -2923,9 +2923,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.POISON
+    type: Synergy.POISON,
   },
   SILENT_CHASM: {
     id: "SILENT_CHASM",
@@ -2936,7 +2936,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.HOUNDOUR,
       Pkm.POLIWAG,
       Pkm.TRAPINCH,
-      Pkm.BEEDRILL
+      Pkm.BEEDRILL,
     ],
     tileset: [
       Header.WALL,
@@ -2946,9 +2946,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.BUG
+    type: Synergy.BUG,
   },
   SILVER_TRENCH: {
     id: "SILVER_TRENCH",
@@ -2965,16 +2965,16 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MAGNETON,
       Pkm.BEEDRILL,
       Pkm.FERALIGATR,
-      Pkm.MAGMAR
+      Pkm.MAGMAR,
     ],
     tileset: [
       Header.WALL,
       Header.WALL_ALT_1,
       Header.WALL_ALT_2,
       Header.GROUND,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   SINISTER_WOODS: {
     id: "SINISTER_WOODS",
@@ -2985,7 +2985,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.SCYTHER,
       Pkm.SLAKOTH,
       Pkm.GENGAR,
-      Pkm.MEDICHAM
+      Pkm.MEDICHAM,
     ],
     tileset: [
       Header.WALL,
@@ -2993,9 +2993,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.BUG
+    type: Synergy.BUG,
   },
   SKY_TOWER: {
     id: "SKY_TOWER",
@@ -3008,7 +3008,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.ALTARIA,
       Pkm.SCIZOR,
       Pkm.DUSCLOPS,
-      Pkm.FLYGON
+      Pkm.FLYGON,
     ],
     tileset: [
       Header.WALL,
@@ -3016,9 +3016,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.FLYING
+    type: Synergy.FLYING,
   },
   SNOW_PATH: {
     id: "SNOW_PATH",
@@ -3030,9 +3030,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ICE
+    type: Synergy.ICE,
   },
   SOLAR_CAVE: {
     id: "SOLAR_CAVE",
@@ -3044,7 +3044,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.METANG,
       Pkm.KIRLIA,
       Pkm.KADABRA,
-      Pkm.MEDICHAM
+      Pkm.MEDICHAM,
     ],
     tileset: [
       Header.WALL,
@@ -3054,9 +3054,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   SOUTHERN_CAVERN_01F_23F: {
     id: "SOUTHERN_CAVERN_01F_23F",
@@ -3074,7 +3074,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.FLYGON,
       Pkm.GOLEM,
       Pkm.ONIX,
-      Pkm.RHYDON
+      Pkm.RHYDON,
     ],
     tileset: [
       Header.WALL,
@@ -3084,9 +3084,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   SOUTHERN_CAVERN_24F_50F: {
     id: "SOUTHERN_CAVERN_24F_50F",
@@ -3104,7 +3104,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.FLYGON,
       Pkm.GOLEM,
       Pkm.ONIX,
-      Pkm.RHYDON
+      Pkm.RHYDON,
     ],
     tileset: [
       Header.WALL,
@@ -3113,9 +3113,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GROUND
+    type: Synergy.GROUND,
   },
   STORMY_SEA_01F_16F: {
     id: "STORMY_SEA_01F_16F",
@@ -3131,16 +3131,16 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.SEADRA,
       Pkm.SEALEO,
       Pkm.KYOGRE,
-      Pkm.CARVANHA
+      Pkm.CARVANHA,
     ],
     tileset: [
       Header.WALL,
       Header.WALL_ALT_1,
       Header.WALL_ALT_2,
       Header.GROUND,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   STORMY_SEA_16F_39F: {
     id: "STORMY_SEA_16F_39F",
@@ -3156,16 +3156,16 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.SEADRA,
       Pkm.SEALEO,
       Pkm.KYOGRE,
-      Pkm.CARVANHA
+      Pkm.CARVANHA,
     ],
     tileset: [
       Header.WALL,
       Header.WALL_ALT_1,
       Header.WALL_ALT_2,
       Header.GROUND,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   THUNDERWAVE_CAVE: {
     id: "THUNDERWAVE_CAVE",
@@ -3179,9 +3179,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.ELECTRIC
+    type: Synergy.ELECTRIC,
   },
   TINY_WOODS: {
     id: "TINY_WOODS",
@@ -3193,9 +3193,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.NORMAL
+    type: Synergy.NORMAL,
   },
   UPROAR_FOREST: {
     id: "UPROAR_FOREST",
@@ -3207,9 +3207,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.WALL_ALT_2,
       Header.GROUND,
       Header.GROUND_ALT_1,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.GRASS
+    type: Synergy.GRASS,
   },
   SERENITY_RIVER: {
     id: "SERENITY_RIVER",
@@ -3222,9 +3222,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   WATERFALL_POND: {
     id: "WATERFALL_POND",
@@ -3237,7 +3237,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.MAGIKARP,
       Pkm.SQUIRTLE,
       Pkm.LOMBRE,
-      Pkm.MARSHTOMP
+      Pkm.MARSHTOMP,
     ],
     tileset: [
       Header.WALL,
@@ -3246,9 +3246,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.WATER
+    type: Synergy.WATER,
   },
   WESTERN_CAVE_B01F_B27F: {
     id: "WESTERN_CAVE_B01F_B27F",
@@ -3272,7 +3272,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.STEELIX,
       Pkm.CHARIZARD,
       Pkm.BLASTOISE,
-      Pkm.MEWTWO
+      Pkm.MEWTWO,
     ],
     tileset: [
       Header.WALL,
@@ -3282,9 +3282,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   WESTERN_CAVE_B28F_B39F: {
     id: "WESTERN_CAVE_B28F_B39F",
@@ -3308,7 +3308,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.STEELIX,
       Pkm.CHARIZARD,
       Pkm.BLASTOISE,
-      Pkm.MEWTWO
+      Pkm.MEWTWO,
     ],
     tileset: [
       Header.WALL,
@@ -3318,9 +3318,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   WISH_CAVE_01F_13F: {
     id: "WISH_CAVE_01F_13F",
@@ -3344,7 +3344,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.STEELIX,
       Pkm.CHARIZARD,
       Pkm.BLASTOISE,
-      Pkm.JIRACHI
+      Pkm.JIRACHI,
     ],
     tileset: [
       Header.WALL,
@@ -3354,9 +3354,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
       Header.GROUND_ALT_3,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   WISH_CAVE_90F_99F: {
     id: "WISH_CAVE_90F_99F",
@@ -3380,7 +3380,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.STEELIX,
       Pkm.CHARIZARD,
       Pkm.BLASTOISE,
-      Pkm.JIRACHI
+      Pkm.JIRACHI,
     ],
     tileset: [
       Header.WALL,
@@ -3389,9 +3389,9 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.PSYCHIC
+    type: Synergy.PSYCHIC,
   },
   WYVERN_HILL: {
     id: "WYVERN_HILL",
@@ -3407,7 +3407,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Pkm.DRAGONAIR,
       Pkm.SALAMENCE,
       Pkm.FLYGON,
-      Pkm.DRAGONITE
+      Pkm.DRAGONITE,
     ],
     tileset: [
       Header.WALL,
@@ -3416,8 +3416,8 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND,
       Header.GROUND_ALT_1,
       Header.GROUND_ALT_2,
-      Header.WATER
+      Header.WATER,
     ],
-    type: Synergy.DRAGON
-  }
+    type: Synergy.DRAGON,
+  },
 })
