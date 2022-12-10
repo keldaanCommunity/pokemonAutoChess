@@ -395,10 +395,13 @@ export default class Simulation extends Schema implements ISimulation {
         shieldBonus = 20
       }
       if (pokemon.effects.includes(Effect.STRENGTH)) {
+        shieldBonus += 30
+      }
+      if (pokemon.effects.includes(Effect.ROCK_SMASH)) {
         shieldBonus += 40
       }
       if (pokemon.effects.includes(Effect.PURE_POWER)) {
-        shieldBonus += 80
+        shieldBonus += 50
       }
       if (shieldBonus >= 0) {
         pokemon.handleShield(shieldBonus, pokemon)
@@ -483,6 +486,9 @@ export default class Simulation extends Schema implements ISimulation {
       }
       if (pokemon.effects.includes(Effect.STRENGTH)) {
         shieldBonus += 30
+      }
+      if (pokemon.effects.includes(Effect.ROCK_SMASH)) {
+        shieldBonus += 40
       }
       if (pokemon.effects.includes(Effect.PURE_POWER)) {
         shieldBonus += 50
@@ -722,6 +728,12 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.STRENGTH:
           if (types.includes(Synergy.NORMAL)) {
             pokemon.effects.push(Effect.STRENGTH)
+          }
+          break
+
+        case Effect.ROCK_SMASH:
+          if (types.includes(Synergy.NORMAL)) {
+            pokemon.effects.push(Effect.ROCK_SMASH)
           }
           break
 

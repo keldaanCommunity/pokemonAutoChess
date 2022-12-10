@@ -17,7 +17,7 @@ import {
   setGameStarted,
   setName,
   setOwnerId,
-  setOwnerName
+  setOwnerName,
 } from "../stores/PreparationStore"
 import GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
@@ -25,12 +25,12 @@ import { Transfer } from "../../../types"
 const preparationStyle = {
   display: "flex",
   justifyContent: "space-between",
-  marginTop: "-10px"
+  marginTop: "-10px",
 }
 
 const buttonStyle = {
   marginLeft: "10px",
-  marginTop: "10px"
+  marginTop: "10px",
 }
 
 export default function Preparation() {
@@ -96,7 +96,6 @@ export default function Preparation() {
         dispatch(addUser(u))
 
         if (!u.isBot) {
-          console.log("audio")
           audio.current?.play()
         }
 
@@ -118,7 +117,7 @@ export default function Preparation() {
         const token = await firebase.auth().currentUser?.getIdToken()
         if (token) {
           const game: Room<GameState> = await client.joinById(message.id, {
-            idToken: token
+            idToken: token,
           })
           localStorage.setItem("lastRoomId", game.id)
           localStorage.setItem("lastSessionId", game.sessionId)

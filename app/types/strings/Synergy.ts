@@ -7,144 +7,149 @@ export const SynergyName: {
   [Synergy.NORMAL]: {
     eng: "Normal",
     esp: "Normal",
-    fra: "Normal"
+    fra: "Normal",
   },
   [Synergy.GRASS]: {
     eng: "Grass",
     esp: "Planta",
-    fra: "Feuille"
+    fra: "Feuille",
   },
   [Synergy.FIRE]: {
     eng: "Fire",
     esp: "Fuego",
-    fra: "Feu"
+    fra: "Feu",
   },
   [Synergy.WATER]: {
     eng: "Water",
     esp: "Agua",
-    fra: "Eau"
+    fra: "Eau",
   },
   [Synergy.ELECTRIC]: {
     eng: "Elec",
     esp: "Elec",
-    fra: "Elec"
+    fra: "Elec",
   },
   [Synergy.FIGHTING]: {
     eng: "Fighting",
     esp: "Lucha",
-    fra: "Combat"
+    fra: "Combat",
   },
   [Synergy.PSYCHIC]: {
     eng: "Psychic",
     esp: "Psiquico",
-    fra: "Psy"
+    fra: "Psy",
   },
   [Synergy.DARK]: {
     eng: "Dark",
     esp: "Siniestro",
-    fra: "Ténèbres"
+    fra: "Ténèbres",
   },
   [Synergy.METAL]: {
     eng: "Steel",
     esp: "Acero",
-    fra: "Acier"
+    fra: "Acier",
   },
   [Synergy.GROUND]: {
     eng: "Ground",
     esp: "Tierra",
-    fra: "Sol"
+    fra: "Sol",
   },
   [Synergy.POISON]: {
     eng: "Poison",
     esp: "Veneno",
-    fra: "Poison"
+    fra: "Poison",
   },
   [Synergy.DRAGON]: {
     eng: "Dragon",
     esp: "Dragón",
-    fra: "Dragon"
+    fra: "Dragon",
   },
   [Synergy.FIELD]: {
     eng: "Field",
     esp: "Campo",
-    fra: "Terrestre"
+    fra: "Terrestre",
   },
   [Synergy.MONSTER]: {
     eng: "Monster",
     esp: "Monstruo",
-    fra: "Monstre"
+    fra: "Monstre",
   },
   [Synergy.HUMAN]: {
     eng: "Human",
     esp: "Humanoide",
-    fra: "Humain"
+    fra: "Humain",
   },
   [Synergy.AQUATIC]: {
     eng: "Aquatic",
     esp: "Acuático",
-    fra: "Aquatique"
+    fra: "Aquatique",
   },
   [Synergy.BUG]: {
     eng: "Bug",
     esp: "Bicho",
-    fra: "Insecte"
+    fra: "Insecte",
   },
   [Synergy.FLYING]: {
     eng: "Flying",
     esp: "Volador",
-    fra: "Vol"
+    fra: "Vol",
   },
   [Synergy.FLORA]: {
     eng: "Flora",
     esp: "Flor",
-    fra: "Fleur"
+    fra: "Fleur",
   },
   [Synergy.MINERAL]: {
     eng: "Rock",
     esp: "Roca",
-    fra: "Minéral"
+    fra: "Minéral",
   },
   [Synergy.GHOST]: {
     eng: "Ghost",
     esp: "Fantasma",
-    fra: "Fantome"
+    fra: "Fantome",
   },
   [Synergy.FAIRY]: {
     eng: "Fairy",
     esp: "Hada",
-    fra: "Fée"
+    fra: "Fée",
   },
   [Synergy.ICE]: {
     eng: "Ice",
     esp: "Hielo",
-    fra: "Glace"
+    fra: "Glace",
   },
   [Synergy.FOSSIL]: {
     eng: "Fossil",
     esp: "Fossil",
-    fra: "Fossile"
+    fra: "Fossile",
   },
   [Synergy.SOUND]: {
     eng: "Sound",
     esp: "Sound",
-    fra: "Sound"
-  }
+    fra: "Sound",
+  },
 }
 
 export const SynergyDetail: { [key in Synergy]: Effect[] } = Object.freeze({
-  [Synergy.NORMAL]: [Effect.STAMINA, Effect.STRENGTH, Effect.PURE_POWER],
+  [Synergy.NORMAL]: [
+    Effect.STAMINA,
+    Effect.STRENGTH,
+    Effect.ROCK_SMASH,
+    Effect.PURE_POWER,
+  ],
   [Synergy.GRASS]: [Effect.INGRAIN, Effect.GROWTH, Effect.SPORE],
   [Synergy.FIRE]: [
     Effect.BLAZE,
     Effect.VICTORY_STAR,
     Effect.DROUGHT,
-    Effect.DESOLATE_LAND
+    Effect.DESOLATE_LAND,
   ],
   [Synergy.WATER]: [Effect.RAIN_DANCE, Effect.DRIZZLE, Effect.PRIMORDIAL_SEA],
   [Synergy.ELECTRIC]: [
     Effect.EERIE_IMPULSE,
     Effect.RISING_VOLTAGE,
-    Effect.OVERDRIVE
+    Effect.OVERDRIVE,
   ],
   [Synergy.FIGHTING]: [Effect.REVENGE, Effect.PUNISHMENT],
   [Synergy.PSYCHIC]: [Effect.AMNESIA, Effect.LIGHT_SCREEN, Effect.EERIE_SPELL],
@@ -162,30 +167,30 @@ export const SynergyDetail: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.TAILWIND,
     Effect.FEATHER_DANCE,
     Effect.MAX_AIRSTREAM,
-    Effect.MAX_GUARD
+    Effect.MAX_GUARD,
   ],
   [Synergy.FLORA]: [
     Effect.ODD_FLOWER,
     Effect.GLOOM_FLOWER,
     Effect.VILE_FLOWER,
-    Effect.SUN_FLOWER
+    Effect.SUN_FLOWER,
   ],
   [Synergy.MINERAL]: [
     Effect.BATTLE_ARMOR,
     Effect.MOUTAIN_RESISTANCE,
-    Effect.DIAMOND_STORM
+    Effect.DIAMOND_STORM,
   ],
   [Synergy.GHOST]: [Effect.PHANTOM_FORCE, Effect.CURSE],
   [Synergy.FAIRY]: [
     Effect.AROMATIC_MIST,
     Effect.FAIRY_WIND,
-    Effect.STRANGE_STEAM
+    Effect.STRANGE_STEAM,
   ],
   [Synergy.ICE]: [Effect.SNOW, Effect.SHEER_COLD],
   [Synergy.FOSSIL]: [
     Effect.ANCIENT_POWER,
     Effect.ELDER_POWER,
-    Effect.UNOWN_GATHERINGS
+    Effect.UNOWN_GATHERINGS,
   ],
-  [Synergy.SOUND]: [Effect.LARGO, Effect.ALLEGRO, Effect.PRESTO]
+  [Synergy.SOUND]: [Effect.LARGO, Effect.ALLEGRO, Effect.PRESTO],
 })

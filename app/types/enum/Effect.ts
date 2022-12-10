@@ -11,6 +11,7 @@ export enum Effect {
   PRIMORDIAL_SEA,
   STAMINA,
   STRENGTH,
+  ROCK_SMASH,
   PURE_POWER,
   EERIE_IMPULSE,
   RISING_VOLTAGE,
@@ -69,5 +70,5 @@ export enum Effect {
   UNOWN_GATHERINGS,
   LARGO,
   ALLEGRO,
-  PRESTO
+  PRESTO,
 }

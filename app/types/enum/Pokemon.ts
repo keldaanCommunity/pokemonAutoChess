@@ -430,7 +430,7 @@ export enum Pkm {
   MAWILE = "mawile",
   KECLEON = "kecleon",
   CARBINK = "carbink",
-  CHATOT = "chatot"
+  CHATOT = "chatot",
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -865,7 +865,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.KECLEON]: "0352",
   [Pkm.MAWILE]: "0303",
   [Pkm.CARBINK]: "0703",
-  [Pkm.CHATOT]: "0441"
+  [Pkm.CHATOT]: "0441",
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1229,7 +1229,6 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.RAPIDASH]: Pkm.PONYTA,
   [Pkm.GENESECT]: Pkm.GENESECT,
   [Pkm.RELICANTH]: Pkm.RELICANTH,
-  [Pkm.DIANCIE]: Pkm.DIANCIE,
   [Pkm.HATENNA]: Pkm.HATENNA,
   [Pkm.HATTREM]: Pkm.HATENNA,
   [Pkm.HATTERENE]: Pkm.HATENNA,
@@ -1300,5 +1299,6 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.KECLEON]: Pkm.KECLEON,
   [Pkm.MAWILE]: Pkm.MAWILE,
   [Pkm.CARBINK]: Pkm.CARBINK,
-  [Pkm.CHATOT]: Pkm.CHATOT
+  [Pkm.DIANCIE]: Pkm.CARBINK,
+  [Pkm.CHATOT]: Pkm.CHATOT,
 }
