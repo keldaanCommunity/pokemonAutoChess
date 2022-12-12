@@ -916,6 +916,38 @@ export class ClangorousSoulStrategy extends AttackStrategy {
   }
 }
 
+export class LiquidationStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 0
+    let reduce = 0
+    switch (pokemon.stars) {
+      case 1:
+        damage = 20
+        reduce = 1
+        break
+      case 2:
+        damage = 40
+        reduce = 2
+        break
+      case 3:
+        damage = 80
+        reduce = 4
+        break
+      default:
+        break
+    }
+
+    target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
+    target.def = Math.max(0, target.def - reduce)
+  }
+}
+
 export class BonemerangStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -2842,7 +2874,7 @@ export class TeleportStrategy extends AttackStrategy {
       [0, 0],
       [0, 5],
       [7, 5],
-      [7, 0],
+      [7, 0]
     ]
     this.shuffleArray(potentialCells)
 
@@ -3161,7 +3193,7 @@ export class MetronomeStrategy extends AttackStrategy {
       SongOfDesireStrategy,
       MindBlownStrategy,
       PaydayStrategy,
-      AuroraVeilStrategy,
+      AuroraVeilStrategy
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)

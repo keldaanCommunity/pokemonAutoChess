@@ -58,7 +58,7 @@ export class Pokemon extends Schema implements IPokemon {
     shiny: boolean,
     emotion: Emotion,
     final: boolean,
-    additional?: boolean,
+    additional?: boolean
   ) {
     super()
     this.id = uniqid()
@@ -111,7 +111,7 @@ export class Ditto extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -136,7 +136,7 @@ export class Electrike extends Pokemon {
       Ability.VOLT_SWITCH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -161,7 +161,7 @@ export class Manectric extends Pokemon {
       Ability.VOLT_SWITCH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -186,7 +186,7 @@ export class MegaManectric extends Pokemon {
       Ability.VOLT_SWITCH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -211,7 +211,7 @@ export class Shuppet extends Pokemon {
       Ability.SHADOW_CLONE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -236,7 +236,7 @@ export class Banette extends Pokemon {
       Ability.SHADOW_CLONE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -261,7 +261,7 @@ export class MegaBanette extends Pokemon {
       Ability.SHADOW_CLONE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -286,7 +286,7 @@ export class Riolu extends Pokemon {
       Ability.SILENCE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -311,7 +311,7 @@ export class Lucario extends Pokemon {
       Ability.SILENCE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -336,7 +336,7 @@ export class MegaLucario extends Pokemon {
       Ability.SILENCE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -361,7 +361,7 @@ export class Swablu extends Pokemon {
       Ability.HYPER_VOICE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -386,7 +386,7 @@ export class Altaria extends Pokemon {
       Ability.HYPER_VOICE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -411,7 +411,7 @@ export class MegaAltaria extends Pokemon {
       Ability.HYPER_VOICE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -436,7 +436,7 @@ export class Scyther extends Pokemon {
       Ability.KING_SHIELD,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -461,7 +461,7 @@ export class Scizor extends Pokemon {
       Ability.KING_SHIELD,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -486,7 +486,7 @@ export class MegaScizor extends Pokemon {
       Ability.KING_SHIELD,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -511,7 +511,7 @@ export class Buneary extends Pokemon {
       Ability.HIGH_JUMP_KICK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -536,7 +536,7 @@ export class Lopunny extends Pokemon {
       Ability.HIGH_JUMP_KICK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -561,7 +561,7 @@ export class MegaLopunny extends Pokemon {
       Ability.HIGH_JUMP_KICK,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -586,7 +586,7 @@ export class Onix extends Pokemon {
       Ability.IRON_DEFENSE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -611,7 +611,7 @@ export class Steelix extends Pokemon {
       Ability.IRON_DEFENSE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -636,7 +636,7 @@ export class MegaSteelix extends Pokemon {
       Ability.IRON_DEFENSE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -661,7 +661,7 @@ export class Numel extends Pokemon {
       Ability.BURN,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -686,7 +686,7 @@ export class Camerupt extends Pokemon {
       Ability.BURN,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -711,7 +711,7 @@ export class MegaCamerupt extends Pokemon {
       Ability.BURN,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -736,7 +736,7 @@ export class Meditite extends Pokemon {
       Ability.CONFUSION,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -761,7 +761,7 @@ export class Medicham extends Pokemon {
       Ability.CONFUSION,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -786,7 +786,7 @@ export class MegaMedicham extends Pokemon {
       Ability.CONFUSION,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -811,7 +811,7 @@ export class Elekid extends Pokemon {
       Ability.DISCHARGE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -836,7 +836,7 @@ export class Electabuzz extends Pokemon {
       Ability.DISCHARGE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -861,7 +861,7 @@ export class Electivire extends Pokemon {
       Ability.DISCHARGE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -886,7 +886,7 @@ export class Gible extends Pokemon {
       Ability.DRAGON_TAIL,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -911,7 +911,7 @@ export class Gabite extends Pokemon {
       Ability.DRAGON_TAIL,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -936,7 +936,7 @@ export class Garchomp extends Pokemon {
       Ability.DRAGON_TAIL,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -961,7 +961,7 @@ export class Beldum extends Pokemon {
       Ability.METEOR_MASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -986,7 +986,7 @@ export class Metang extends Pokemon {
       Ability.METEOR_MASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1011,7 +1011,7 @@ export class Metagross extends Pokemon {
       Ability.METEOR_MASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1036,7 +1036,7 @@ export class Tympole extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1061,7 +1061,7 @@ export class Palpitoad extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1086,7 +1086,7 @@ export class Seismitoad extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1111,7 +1111,7 @@ export class Bagon extends Pokemon {
       Ability.DRACO_METEOR,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1136,7 +1136,7 @@ export class Shelgon extends Pokemon {
       Ability.DRACO_METEOR,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1161,7 +1161,7 @@ export class Salamence extends Pokemon {
       Ability.DRACO_METEOR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1186,7 +1186,7 @@ export class Ralts extends Pokemon {
       Ability.CALM_MIND,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1211,7 +1211,7 @@ export class Kirlia extends Pokemon {
       Ability.CALM_MIND,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1236,7 +1236,7 @@ export class Gardevoir extends Pokemon {
       Ability.CALM_MIND,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1261,7 +1261,7 @@ export class Budew extends Pokemon {
       Ability.PETAL_DANCE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1286,7 +1286,7 @@ export class Roselia extends Pokemon {
       Ability.PETAL_DANCE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1311,7 +1311,7 @@ export class Roserade extends Pokemon {
       Ability.PETAL_DANCE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1336,7 +1336,7 @@ export class Slakoth extends Pokemon {
       Ability.SEISMIC_TOSS,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1361,7 +1361,7 @@ export class Vigoroth extends Pokemon {
       Ability.SEISMIC_TOSS,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1386,7 +1386,7 @@ export class Slaking extends Pokemon {
       Ability.SEISMIC_TOSS,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1411,7 +1411,7 @@ export class Honedge extends Pokemon {
       Ability.KING_SHIELD,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1436,7 +1436,7 @@ export class Doublade extends Pokemon {
       Ability.KING_SHIELD,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1461,7 +1461,7 @@ export class Aegislash extends Pokemon {
       Ability.KING_SHIELD,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1486,7 +1486,7 @@ export class Larvitar extends Pokemon {
       Ability.BITE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1511,7 +1511,7 @@ export class Pupitar extends Pokemon {
       Ability.BITE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1536,7 +1536,7 @@ export class Tyranitar extends Pokemon {
       Ability.BITE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1561,7 +1561,7 @@ export class JangmoO extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1586,7 +1586,7 @@ export class HakamoO extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1611,7 +1611,7 @@ export class KommoO extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1636,7 +1636,7 @@ export class Gastly extends Pokemon {
       Ability.NIGHTMARE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1661,7 +1661,7 @@ export class Haunter extends Pokemon {
       Ability.NIGHTMARE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1686,7 +1686,7 @@ export class Gengar extends Pokemon {
       Ability.NIGHTMARE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1711,7 +1711,7 @@ export class Abra extends Pokemon {
       Ability.TELEPORT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1736,7 +1736,7 @@ export class Kadabra extends Pokemon {
       Ability.TELEPORT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1761,7 +1761,7 @@ export class Alakazam extends Pokemon {
       Ability.TELEPORT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1786,7 +1786,7 @@ export class Litwick extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1811,7 +1811,7 @@ export class Lampent extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1836,7 +1836,7 @@ export class Chandelure extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1861,7 +1861,7 @@ export class Porygon extends Pokemon {
       Ability.TRI_ATTACK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1886,7 +1886,7 @@ export class Porygon2 extends Pokemon {
       Ability.TRI_ATTACK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1911,7 +1911,7 @@ export class PorygonZ extends Pokemon {
       Ability.TRI_ATTACK,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -1936,7 +1936,7 @@ export class Sewaddle extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1961,7 +1961,7 @@ export class Swadloon extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -1986,7 +1986,7 @@ export class Leavanny extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2011,7 +2011,7 @@ export class Turtwig extends Pokemon {
       Ability.STOMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2036,7 +2036,7 @@ export class Grotle extends Pokemon {
       Ability.STOMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2061,7 +2061,7 @@ export class Torterra extends Pokemon {
       Ability.STOMP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2086,7 +2086,7 @@ export class Deino extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2111,7 +2111,7 @@ export class Zweilous extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2136,7 +2136,7 @@ export class Hydreigon extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2161,7 +2161,7 @@ export class Poliwag extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2186,7 +2186,7 @@ export class Poliwhirl extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2211,7 +2211,7 @@ export class Politoed extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2236,7 +2236,7 @@ export class Magby extends Pokemon {
       Ability.HEAT_WAVE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2261,7 +2261,7 @@ export class Magmar extends Pokemon {
       Ability.HEAT_WAVE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2286,7 +2286,7 @@ export class Magmortar extends Pokemon {
       Ability.HEAT_WAVE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2311,7 +2311,7 @@ export class Solosis extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2336,7 +2336,7 @@ export class Duosion extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2361,7 +2361,7 @@ export class Reuniclus extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2386,7 +2386,7 @@ export class Shinx extends Pokemon {
       Ability.DISCHARGE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2411,7 +2411,7 @@ export class Luxio extends Pokemon {
       Ability.DISCHARGE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2436,7 +2436,7 @@ export class Luxray extends Pokemon {
       Ability.DISCHARGE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2461,7 +2461,7 @@ export class Cubone extends Pokemon {
       Ability.BONEMERANG,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2486,7 +2486,7 @@ export class Marowak extends Pokemon {
       Ability.BONEMERANG,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2511,7 +2511,7 @@ export class AlolanMarowak extends Pokemon {
       Ability.BONEMERANG,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2536,7 +2536,7 @@ export class Axew extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2561,7 +2561,7 @@ export class Fraxure extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2586,7 +2586,7 @@ export class Haxorus extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2611,7 +2611,7 @@ export class Dratini extends Pokemon {
       Ability.DRAGON_BREATH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2636,7 +2636,7 @@ export class Dragonair extends Pokemon {
       Ability.DRAGON_BREATH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2661,7 +2661,7 @@ export class Dragonite extends Pokemon {
       Ability.DRAGON_BREATH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2683,10 +2683,10 @@ export class Goomy extends Pokemon {
       AttackType.PHYSICAL,
       1,
       80,
-      Ability.SOAK,
+      Ability.LIQUIDATION,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2708,10 +2708,10 @@ export class Sligoo extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.SOAK,
+      Ability.LIQUIDATION,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2733,10 +2733,10 @@ export class Goodra extends Pokemon {
       AttackType.PHYSICAL,
       3,
       80,
-      Ability.SOAK,
+      Ability.LIQUIDATION,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2761,7 +2761,7 @@ export class Lotad extends Pokemon {
       Ability.TORMENT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2786,7 +2786,7 @@ export class Lombre extends Pokemon {
       Ability.TORMENT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2811,7 +2811,7 @@ export class Ludicolo extends Pokemon {
       Ability.TORMENT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2836,7 +2836,7 @@ export class Togepi extends Pokemon {
       Ability.WISH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2861,7 +2861,7 @@ export class Togetic extends Pokemon {
       Ability.WISH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2886,7 +2886,7 @@ export class Togekiss extends Pokemon {
       Ability.WISH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2911,7 +2911,7 @@ export class Rhyhorn extends Pokemon {
       Ability.STOMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2936,7 +2936,7 @@ export class Rhydon extends Pokemon {
       Ability.STOMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -2961,7 +2961,7 @@ export class Rhyperior extends Pokemon {
       Ability.STOMP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -2986,7 +2986,7 @@ export class Aron extends Pokemon {
       Ability.STOMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3011,7 +3011,7 @@ export class Lairon extends Pokemon {
       Ability.STOMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3036,7 +3036,7 @@ export class Aggron extends Pokemon {
       Ability.STOMP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3061,7 +3061,7 @@ export class Whismur extends Pokemon {
       Ability.ECHO,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3085,7 +3085,7 @@ export class Loudred extends Pokemon {
       Ability.ECHO,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3110,7 +3110,7 @@ export class Exploud extends Pokemon {
       Ability.ECHO,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3135,7 +3135,7 @@ export class Swinub extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3160,7 +3160,7 @@ export class Piloswine extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3185,7 +3185,7 @@ export class Mamoswine extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3210,7 +3210,7 @@ export class Snover extends Pokemon {
       Ability.FREEZE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3235,7 +3235,7 @@ export class Abomasnow extends Pokemon {
       Ability.FREEZE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3260,7 +3260,7 @@ export class MegaAbomasnow extends Pokemon {
       Ability.FREEZE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3285,7 +3285,7 @@ export class Snorunt extends Pokemon {
       Ability.DARK_PULSE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3310,7 +3310,7 @@ export class Glalie extends Pokemon {
       Ability.DARK_PULSE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3335,7 +3335,7 @@ export class Froslass extends Pokemon {
       Ability.DARK_PULSE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3360,7 +3360,7 @@ export class Vanillite extends Pokemon {
       Ability.SLEEP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3385,7 +3385,7 @@ export class Vanillish extends Pokemon {
       Ability.SLEEP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3410,7 +3410,7 @@ export class Vanilluxe extends Pokemon {
       Ability.SLEEP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3435,7 +3435,7 @@ export class Trapinch extends Pokemon {
       Ability.DRAGON_TAIL,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3460,7 +3460,7 @@ export class Vibrava extends Pokemon {
       Ability.DRAGON_TAIL,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3485,7 +3485,7 @@ export class Flygon extends Pokemon {
       Ability.DRAGON_TAIL,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3510,7 +3510,7 @@ export class Pichu extends Pokemon {
       Ability.VOLT_SWITCH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3535,7 +3535,7 @@ export class Pikachu extends Pokemon {
       Ability.VOLT_SWITCH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3560,7 +3560,7 @@ export class Raichu extends Pokemon {
       Ability.VOLT_SWITCH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3585,7 +3585,7 @@ export class Bulbasaur extends Pokemon {
       Ability.ROOT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3610,7 +3610,7 @@ export class Ivysaur extends Pokemon {
       Ability.ROOT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3635,7 +3635,7 @@ export class Venusaur extends Pokemon {
       Ability.ROOT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3660,7 +3660,7 @@ export class Igglybuff extends Pokemon {
       Ability.SLEEP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3685,7 +3685,7 @@ export class Jigglypuff extends Pokemon {
       Ability.SLEEP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3710,7 +3710,7 @@ export class Wigglytuff extends Pokemon {
       Ability.SLEEP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3735,7 +3735,7 @@ export class Duskull extends Pokemon {
       Ability.NIGHT_SLASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3760,7 +3760,7 @@ export class Dusclops extends Pokemon {
       Ability.NIGHT_SLASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3785,7 +3785,7 @@ export class Dusknoir extends Pokemon {
       Ability.NIGHT_SLASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3810,7 +3810,7 @@ export class Magnemite extends Pokemon {
       Ability.TORMENT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3835,7 +3835,7 @@ export class Magneton extends Pokemon {
       Ability.TORMENT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3860,7 +3860,7 @@ export class Magnezone extends Pokemon {
       Ability.TORMENT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3885,7 +3885,7 @@ export class Horsea extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3910,7 +3910,7 @@ export class Seadra extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3935,7 +3935,7 @@ export class Kingdra extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -3960,7 +3960,7 @@ export class Flabebe extends Pokemon {
       Ability.DISARMING_VOICE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -3985,7 +3985,7 @@ export class Floette extends Pokemon {
       Ability.DISARMING_VOICE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4009,7 +4009,7 @@ export class Florges extends Pokemon {
       Ability.DISARMING_VOICE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4034,7 +4034,7 @@ export class Chikorita extends Pokemon {
       Ability.STUN_SPORE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4059,7 +4059,7 @@ export class Bayleef extends Pokemon {
       Ability.STUN_SPORE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4084,7 +4084,7 @@ export class Meganium extends Pokemon {
       Ability.STUN_SPORE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4109,7 +4109,7 @@ export class Sandile extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4134,7 +4134,7 @@ export class Krookorok extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4159,7 +4159,7 @@ export class Krookodile extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4184,7 +4184,7 @@ export class Venipede extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4209,7 +4209,7 @@ export class Whirlipede extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4234,7 +4234,7 @@ export class Scolipede extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4259,7 +4259,7 @@ export class Spheal extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4284,7 +4284,7 @@ export class Sealeo extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4309,7 +4309,7 @@ export class Walrein extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4334,7 +4334,7 @@ export class NidoranF extends Pokemon {
       Ability.POISON_STING,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4359,7 +4359,7 @@ export class Nidorina extends Pokemon {
       Ability.POISON_STING,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4384,7 +4384,7 @@ export class Nidoqueen extends Pokemon {
       Ability.POISON_STING,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4409,7 +4409,7 @@ export class NidoranM extends Pokemon {
       Ability.POISON,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4434,7 +4434,7 @@ export class Nidorino extends Pokemon {
       Ability.POISON,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4459,7 +4459,7 @@ export class Nidoking extends Pokemon {
       Ability.POISON,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4484,7 +4484,7 @@ export class Machop extends Pokemon {
       Ability.GUILLOTINE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4509,7 +4509,7 @@ export class Machoke extends Pokemon {
       Ability.GUILLOTINE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4534,7 +4534,7 @@ export class Machamp extends Pokemon {
       Ability.GUILLOTINE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4559,7 +4559,7 @@ export class Piplup extends Pokemon {
       Ability.IRON_TAIL,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4584,7 +4584,7 @@ export class Prinplup extends Pokemon {
       Ability.IRON_TAIL,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4609,7 +4609,7 @@ export class Empoleon extends Pokemon {
       Ability.IRON_TAIL,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4634,7 +4634,7 @@ export class Chimchar extends Pokemon {
       Ability.TORMENT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4659,7 +4659,7 @@ export class Monferno extends Pokemon {
       Ability.TORMENT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4684,7 +4684,7 @@ export class Infernape extends Pokemon {
       Ability.TORMENT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4709,7 +4709,7 @@ export class Mudkip extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4734,7 +4734,7 @@ export class Marshtomp extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4759,7 +4759,7 @@ export class Swampert extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4784,7 +4784,7 @@ export class Torchic extends Pokemon {
       Ability.BLAZE_KICK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4809,7 +4809,7 @@ export class Combusken extends Pokemon {
       Ability.BLAZE_KICK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4834,7 +4834,7 @@ export class Blaziken extends Pokemon {
       Ability.BLAZE_KICK,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4859,7 +4859,7 @@ export class Treecko extends Pokemon {
       Ability.THIEF,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4884,7 +4884,7 @@ export class Grovyle extends Pokemon {
       Ability.THIEF,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4909,7 +4909,7 @@ export class Sceptile extends Pokemon {
       Ability.THIEF,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -4934,7 +4934,7 @@ export class Cyndaquil extends Pokemon {
       Ability.WHEEL_OF_FIRE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4959,7 +4959,7 @@ export class Quilava extends Pokemon {
       Ability.WHEEL_OF_FIRE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -4984,7 +4984,7 @@ export class Typhlosion extends Pokemon {
       Ability.WHEEL_OF_FIRE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5009,7 +5009,7 @@ export class Slowpoke extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5034,7 +5034,7 @@ export class Slowbro extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5059,7 +5059,7 @@ export class Slowking extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5084,7 +5084,7 @@ export class Squirtle extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5109,7 +5109,7 @@ export class Wartortle extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5134,7 +5134,7 @@ export class Blastoise extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5159,7 +5159,7 @@ export class Bellsprout extends Pokemon {
       Ability.ROOT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5184,7 +5184,7 @@ export class Weepinbell extends Pokemon {
       Ability.ROOT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5209,7 +5209,7 @@ export class Victreebel extends Pokemon {
       Ability.ROOT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5234,7 +5234,7 @@ export class Pikipek extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5259,7 +5259,7 @@ export class Trumbeak extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5284,7 +5284,7 @@ export class Toucannon extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5309,7 +5309,7 @@ export class Geodude extends Pokemon {
       Ability.ROCK_SLIDE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5334,7 +5334,7 @@ export class Graveler extends Pokemon {
       Ability.ROCK_SLIDE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5359,7 +5359,7 @@ export class Golem extends Pokemon {
       Ability.ROCK_SLIDE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5384,7 +5384,7 @@ export class Totodile extends Pokemon {
       Ability.BITE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5409,7 +5409,7 @@ export class Croconaw extends Pokemon {
       Ability.BITE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5434,7 +5434,7 @@ export class Feraligatr extends Pokemon {
       Ability.BITE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5459,7 +5459,7 @@ export class Azurill extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5484,7 +5484,7 @@ export class Marill extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5509,7 +5509,7 @@ export class Azumarill extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5534,7 +5534,7 @@ export class Zubat extends Pokemon {
       Ability.LEECH_LIFE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5559,7 +5559,7 @@ export class Golbat extends Pokemon {
       Ability.LEECH_LIFE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5584,7 +5584,7 @@ export class Crobat extends Pokemon {
       Ability.LEECH_LIFE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5609,7 +5609,7 @@ export class Mareep extends Pokemon {
       Ability.THUNDER,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5634,7 +5634,7 @@ export class Flaffy extends Pokemon {
       Ability.THUNDER,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5659,7 +5659,7 @@ export class Ampharos extends Pokemon {
       Ability.THUNDER,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5684,7 +5684,7 @@ export class Cleffa extends Pokemon {
       Ability.METRONOME,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5709,7 +5709,7 @@ export class Clefairy extends Pokemon {
       Ability.METRONOME,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5734,7 +5734,7 @@ export class Clefable extends Pokemon {
       Ability.METRONOME,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5759,7 +5759,7 @@ export class Caterpie extends Pokemon {
       Ability.BUG_BUZZ,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5784,7 +5784,7 @@ export class Metapod extends Pokemon {
       Ability.BUG_BUZZ,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5809,7 +5809,7 @@ export class Butterfree extends Pokemon {
       Ability.BUG_BUZZ,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5834,7 +5834,7 @@ export class Weedle extends Pokemon {
       Ability.BUG_BUZZ,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5859,7 +5859,7 @@ export class Kakuna extends Pokemon {
       Ability.BUG_BUZZ,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5884,7 +5884,7 @@ export class Beedrill extends Pokemon {
       Ability.BUG_BUZZ,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5909,7 +5909,7 @@ export class Pidgey extends Pokemon {
       Ability.HURRICANE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5934,7 +5934,7 @@ export class Pidgeotto extends Pokemon {
       Ability.HURRICANE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -5959,7 +5959,7 @@ export class Pidgeot extends Pokemon {
       Ability.HURRICANE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -5984,7 +5984,7 @@ export class Hoppip extends Pokemon {
       Ability.STUN_SPORE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6009,7 +6009,7 @@ export class Skiploom extends Pokemon {
       Ability.STUN_SPORE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6034,7 +6034,7 @@ export class Jumpluff extends Pokemon {
       Ability.STUN_SPORE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6059,7 +6059,7 @@ export class Seedot extends Pokemon {
       Ability.THIEF,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6084,7 +6084,7 @@ export class Nuzleaf extends Pokemon {
       Ability.THIEF,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6109,7 +6109,7 @@ export class Shiftry extends Pokemon {
       Ability.THIEF,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6134,7 +6134,7 @@ export class Starly extends Pokemon {
       Ability.HURRICANE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6159,7 +6159,7 @@ export class Staravia extends Pokemon {
       Ability.HURRICANE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6184,7 +6184,7 @@ export class Staraptor extends Pokemon {
       Ability.HURRICANE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6209,7 +6209,7 @@ export class Charmander extends Pokemon {
       Ability.BLAST_BURN,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6234,7 +6234,7 @@ export class Charmeleon extends Pokemon {
       Ability.BLAST_BURN,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6259,7 +6259,7 @@ export class Charizard extends Pokemon {
       Ability.BLAST_BURN,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6284,7 +6284,7 @@ export class Carvanha extends Pokemon {
       Ability.BITE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6309,7 +6309,7 @@ export class Magikarp extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6334,7 +6334,7 @@ export class Gyarados extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6359,7 +6359,7 @@ export class Rattata extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6384,7 +6384,7 @@ export class Raticate extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6409,7 +6409,7 @@ export class Spearow extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6434,7 +6434,7 @@ export class Fearow extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6459,7 +6459,7 @@ export class Meloetta extends Pokemon {
       Ability.RELIC_SONG,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6484,7 +6484,7 @@ export class Lugia extends Pokemon {
       Ability.SILENCE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6509,7 +6509,7 @@ export class Giratina extends Pokemon {
       Ability.NIGHT_SLASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6534,7 +6534,7 @@ export class Zapdos extends Pokemon {
       Ability.CHARGE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6559,7 +6559,7 @@ export class Moltres extends Pokemon {
       Ability.WHEEL_OF_FIRE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6584,7 +6584,7 @@ export class Articuno extends Pokemon {
       Ability.FREEZE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6609,7 +6609,7 @@ export class Dialga extends Pokemon {
       Ability.ROAR_OF_TIME,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6634,7 +6634,7 @@ export class Palkia extends Pokemon {
       Ability.ROAR_OF_TIME,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6659,7 +6659,7 @@ export class Suicune extends Pokemon {
       Ability.AURORA_VEIL,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6684,7 +6684,7 @@ export class Raikou extends Pokemon {
       Ability.THUNDER,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6709,7 +6709,7 @@ export class Entei extends Pokemon {
       Ability.FIRE_BLAST,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6734,7 +6734,7 @@ export class Regice extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6759,7 +6759,7 @@ export class Seviper extends Pokemon {
       Ability.POISON_STING,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6784,7 +6784,7 @@ export class Regirock extends Pokemon {
       Ability.ROCK_SLIDE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6809,7 +6809,7 @@ export class Tauros extends Pokemon {
       Ability.EARTHQUAKE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6834,7 +6834,7 @@ export class Registeel extends Pokemon {
       Ability.IRON_DEFENSE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6859,7 +6859,7 @@ export class Regigigas extends Pokemon {
       Ability.IRON_TAIL,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6884,7 +6884,7 @@ export class Kyogre extends Pokemon {
       Ability.ORIGIN_PULSE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6909,7 +6909,7 @@ export class Groudon extends Pokemon {
       Ability.HEAT_WAVE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6934,7 +6934,7 @@ export class Rayquaza extends Pokemon {
       Ability.DRACO_METEOR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -6959,7 +6959,7 @@ export class Eevee extends Pokemon {
       Ability.HAPPY_HOUR,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -6984,7 +6984,7 @@ export class Vaporeon extends Pokemon {
       Ability.HAPPY_HOUR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7009,7 +7009,7 @@ export class Jolteon extends Pokemon {
       Ability.HAPPY_HOUR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7034,7 +7034,7 @@ export class Flareon extends Pokemon {
       Ability.HAPPY_HOUR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7059,7 +7059,7 @@ export class Espeon extends Pokemon {
       Ability.HAPPY_HOUR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7084,7 +7084,7 @@ export class Umbreon extends Pokemon {
       Ability.HAPPY_HOUR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7109,7 +7109,7 @@ export class Leafeon extends Pokemon {
       Ability.HAPPY_HOUR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7134,7 +7134,7 @@ export class Sylveon extends Pokemon {
       Ability.HAPPY_HOUR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7159,7 +7159,7 @@ export class Glaceon extends Pokemon {
       Ability.HAPPY_HOUR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7183,7 +7183,7 @@ export class Darkrai extends Pokemon {
       Ability.TWISTING_NEITHER,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7208,7 +7208,7 @@ export class Volcarona extends Pokemon {
       Ability.FIRE_BLAST,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7233,7 +7233,7 @@ export class Chatot extends Pokemon {
       Ability.CHATTER,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7258,7 +7258,7 @@ export class Kecleon extends Pokemon {
       Ability.PROTEAN,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -7283,7 +7283,7 @@ export class Castform extends Pokemon {
       Ability.NASTY_PLOT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -7308,7 +7308,7 @@ export class CastformSun extends Pokemon {
       Ability.FIRE_BLAST,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7333,7 +7333,7 @@ export class CastformRain extends Pokemon {
       Ability.AQUA_JET,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7358,7 +7358,7 @@ export class CastformHail extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7383,7 +7383,7 @@ export class Landorus extends Pokemon {
       Ability.ROCK_SLIDE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7408,7 +7408,7 @@ export class Thundurus extends Pokemon {
       Ability.THUNDER,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7433,7 +7433,7 @@ export class Tornadus extends Pokemon {
       Ability.TRI_ATTACK,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7458,7 +7458,7 @@ export class Keldeo extends Pokemon {
       Ability.AQUA_JET,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7483,7 +7483,7 @@ export class Terrakion extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7508,7 +7508,7 @@ export class Virizion extends Pokemon {
       Ability.SEISMIC_TOSS,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7533,7 +7533,7 @@ export class Cobalion extends Pokemon {
       Ability.SEISMIC_TOSS,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7558,7 +7558,7 @@ export class Mawile extends Pokemon {
       Ability.IRON_TAIL,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7583,7 +7583,7 @@ export class Manaphy extends Pokemon {
       Ability.NASTY_PLOT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7608,7 +7608,7 @@ export class Rotom extends Pokemon {
       Ability.CALM_MIND,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7633,7 +7633,7 @@ export class Spiritomb extends Pokemon {
       Ability.NIGHT_SLASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7658,7 +7658,7 @@ export class Absol extends Pokemon {
       Ability.THIEF,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7683,7 +7683,7 @@ export class Lapras extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7708,7 +7708,7 @@ export class Latias extends Pokemon {
       Ability.DRACO_METEOR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7733,7 +7733,7 @@ export class Latios extends Pokemon {
       Ability.DRACO_METEOR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7758,7 +7758,7 @@ export class Uxie extends Pokemon {
       Ability.KNOWLEDGE_THIEF,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7783,7 +7783,7 @@ export class Mesprit extends Pokemon {
       Ability.CONFUSING_MIND,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7808,7 +7808,7 @@ export class Azelf extends Pokemon {
       Ability.SONG_OF_DESIRE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7833,7 +7833,7 @@ export class Mewtwo extends Pokemon {
       Ability.DYNAMAX_CANNON,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7858,7 +7858,7 @@ export class Kyurem extends Pokemon {
       Ability.FREEZE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7883,7 +7883,7 @@ export class Reshiram extends Pokemon {
       Ability.BLUE_FLARE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7908,7 +7908,7 @@ export class Zekrom extends Pokemon {
       Ability.FUSION_BOLT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7933,7 +7933,7 @@ export class Celebi extends Pokemon {
       Ability.AURORA_VEIL,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7958,7 +7958,7 @@ export class Victini extends Pokemon {
       Ability.BURN,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -7983,7 +7983,7 @@ export class Jirachi extends Pokemon {
       Ability.WISH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8008,7 +8008,7 @@ export class Arceus extends Pokemon {
       Ability.HAPPY_HOUR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8033,7 +8033,7 @@ export class Deoxys extends Pokemon {
       Ability.PROTECT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8058,7 +8058,7 @@ export class Shaymin extends Pokemon {
       Ability.SEED_FLARE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8083,7 +8083,7 @@ export class Cresselia extends Pokemon {
       Ability.WISH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8108,7 +8108,7 @@ export class Heatran extends Pokemon {
       Ability.BURN,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8133,7 +8133,7 @@ export class HooH extends Pokemon {
       Ability.BURN,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8158,7 +8158,7 @@ export class PrimalGroudon extends Pokemon {
       Ability.BURN,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8183,7 +8183,7 @@ export class PrimalKyogre extends Pokemon {
       Ability.THUNDER,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8208,7 +8208,7 @@ export class MegaRayquaza extends Pokemon {
       Ability.DRACO_METEOR,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8233,7 +8233,7 @@ export class Oddish extends Pokemon {
       Ability.STUN_SPORE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8258,7 +8258,7 @@ export class Gloom extends Pokemon {
       Ability.STUN_SPORE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8283,7 +8283,7 @@ export class Vileplume extends Pokemon {
       Ability.STUN_SPORE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8308,7 +8308,7 @@ export class Bellossom extends Pokemon {
       Ability.STUN_SPORE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8333,7 +8333,7 @@ export class Amaura extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8358,7 +8358,7 @@ export class Aurorus extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8383,7 +8383,7 @@ export class Carbink extends Pokemon {
       Ability.DIAMOND_STORM,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8408,7 +8408,7 @@ export class Diancie extends Pokemon {
       Ability.DIAMOND_STORM,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8433,7 +8433,7 @@ export class Anorith extends Pokemon {
       Ability.ROCK_SMASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8458,7 +8458,7 @@ export class Armaldo extends Pokemon {
       Ability.ROCK_SMASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8483,7 +8483,7 @@ export class Archen extends Pokemon {
       Ability.ROCK_SMASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8508,7 +8508,7 @@ export class Archeops extends Pokemon {
       Ability.ROCK_SMASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8533,7 +8533,7 @@ export class Shieldon extends Pokemon {
       Ability.IRON_DEFENSE,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8558,7 +8558,7 @@ export class Bastiodon extends Pokemon {
       Ability.IRON_DEFENSE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8583,7 +8583,7 @@ export class Tirtouga extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8608,7 +8608,7 @@ export class Carracosta extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8633,7 +8633,7 @@ export class Lileep extends Pokemon {
       Ability.HEAL_BLOCK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8658,7 +8658,7 @@ export class Cradily extends Pokemon {
       Ability.HEAL_BLOCK,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8683,7 +8683,7 @@ export class Cranidos extends Pokemon {
       Ability.HEAD_SMASH,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8708,7 +8708,7 @@ export class Rampardos extends Pokemon {
       Ability.HEAD_SMASH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8733,7 +8733,7 @@ export class Kabuto extends Pokemon {
       Ability.HEAL_BLOCK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8758,7 +8758,7 @@ export class Kabutops extends Pokemon {
       Ability.HEAL_BLOCK,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8783,7 +8783,7 @@ export class Omanyte extends Pokemon {
       Ability.ROCK_TOMB,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8808,7 +8808,7 @@ export class Omastar extends Pokemon {
       Ability.ROCK_TOMB,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8832,7 +8832,7 @@ export class Clamperl extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8857,7 +8857,7 @@ export class Gorebyss extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8881,7 +8881,7 @@ export class Huntail extends Pokemon {
       Ability.ROCK_TOMB,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8905,7 +8905,7 @@ export class Relicanth extends Pokemon {
       Ability.ROCK_TOMB,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8930,7 +8930,7 @@ export class Tyrunt extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -8955,7 +8955,7 @@ export class Tyrantrum extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -8980,7 +8980,7 @@ export class Aerodactyl extends Pokemon {
       Ability.ROCK_SLIDE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9005,7 +9005,7 @@ export class Genesect extends Pokemon {
       Ability.LOCK_ON,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9030,7 +9030,7 @@ export class Hatenna extends Pokemon {
       Ability.PSYCH_UP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -9055,7 +9055,7 @@ export class Hattrem extends Pokemon {
       Ability.PSYCH_UP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -9080,7 +9080,7 @@ export class Hatterene extends Pokemon {
       Ability.PSYCH_UP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9104,7 +9104,7 @@ export class Fennekin extends Pokemon {
       Ability.FIRE_TRICK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -9128,7 +9128,7 @@ export class Braixen extends Pokemon {
       Ability.FIRE_TRICK,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -9152,7 +9152,7 @@ export class Delphox extends Pokemon {
       Ability.FIRE_TRICK,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9177,7 +9177,7 @@ export class Regieleki extends Pokemon {
       Ability.VOLT_SWITCH,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9201,7 +9201,7 @@ export class Regidrago extends Pokemon {
       Ability.DRACO_ENERGY,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9225,7 +9225,7 @@ export class Guzzlord extends Pokemon {
       Ability.TWISTING_NEITHER,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9249,7 +9249,7 @@ export class Eternatus extends Pokemon {
       Ability.DYNAMAX_CANNON,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9274,7 +9274,7 @@ export class Nincada extends Pokemon {
       Ability.WONDER_GUARD,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -9298,7 +9298,7 @@ export class Ninjask extends Pokemon {
       Ability.WONDER_GUARD,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -9322,7 +9322,7 @@ export class Shedninja extends Pokemon {
       Ability.WONDER_GUARD,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9347,7 +9347,7 @@ export class Happiny extends Pokemon {
       Ability.SOFT_BOILED,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -9372,7 +9372,7 @@ export class Chansey extends Pokemon {
       Ability.SOFT_BOILED,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -9397,7 +9397,7 @@ export class Blissey extends Pokemon {
       Ability.SOFT_BOILED,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9422,7 +9422,7 @@ export class TapuKoko extends Pokemon {
       Ability.ELECTRIC_SURGE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9447,7 +9447,7 @@ export class TapuLele extends Pokemon {
       Ability.PSYCHIC_SURGE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9472,7 +9472,7 @@ export class Stakataka extends Pokemon {
       Ability.IRON_DEFENSE,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9497,7 +9497,7 @@ export class Blacephalon extends Pokemon {
       Ability.MIND_BLOWN,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9522,7 +9522,7 @@ export class Houndour extends Pokemon {
       Ability.BEAT_UP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -9547,7 +9547,7 @@ export class Houndoom extends Pokemon {
       Ability.BEAT_UP,
       shiny,
       emotion,
-      false,
+      false
     )
   }
 }
@@ -9572,7 +9572,7 @@ export class MegaHoundoom extends Pokemon {
       Ability.BEAT_UP,
       shiny,
       emotion,
-      true,
+      true
     )
   }
 }
@@ -9598,7 +9598,7 @@ export class Cacnea extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -9624,7 +9624,7 @@ export class Cacturne extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -9650,7 +9650,7 @@ export class Pumpkaboo extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -9675,7 +9675,7 @@ export class Gourgeist extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -9701,7 +9701,7 @@ export class Noibat extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -9726,7 +9726,7 @@ export class Noivern extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -9751,7 +9751,7 @@ export class Buizel extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -9776,7 +9776,7 @@ export class Floatzel extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -9802,7 +9802,7 @@ export class Ponyta extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -9827,7 +9827,7 @@ export class Rapidash extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -9852,7 +9852,7 @@ export class Makuhita extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -9877,7 +9877,7 @@ export class Hariyama extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -9902,7 +9902,7 @@ export class Joltik extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -9927,7 +9927,7 @@ export class Galvantula extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -9952,7 +9952,7 @@ export class Corphish extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -9978,7 +9978,7 @@ export class Crawdaunt extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10003,7 +10003,7 @@ export class Meowth extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10029,7 +10029,7 @@ export class Persian extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10054,7 +10054,7 @@ export class Munchlax extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10080,7 +10080,7 @@ export class Snorlax extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10105,7 +10105,7 @@ export class Growlithe extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10131,7 +10131,7 @@ export class Arcanine extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10157,7 +10157,7 @@ export class Smoochum extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10183,7 +10183,7 @@ export class Jynx extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10209,7 +10209,7 @@ export class Salandit extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10235,7 +10235,7 @@ export class Salazzle extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10261,7 +10261,7 @@ export class Venonat extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10287,7 +10287,7 @@ export class Venomoth extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10313,7 +10313,7 @@ export class Voltorb extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10339,7 +10339,7 @@ export class Electrode extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10365,7 +10365,7 @@ export class Slugma extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10391,7 +10391,7 @@ export class Magcargo extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10417,7 +10417,7 @@ export class Sneasel extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10443,7 +10443,7 @@ export class Weavile extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10468,7 +10468,7 @@ export class Croagunk extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10494,7 +10494,7 @@ export class Toxicroak extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10519,7 +10519,7 @@ export class Chinchou extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10545,7 +10545,7 @@ export class Lanturn extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10570,7 +10570,7 @@ export class Poochyena extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10596,7 +10596,7 @@ export class Mightyena extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10621,7 +10621,7 @@ export class Bronzor extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10647,7 +10647,7 @@ export class Bronzong extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10672,7 +10672,7 @@ export class Drifloon extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10698,7 +10698,7 @@ export class Drifblim extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10723,7 +10723,7 @@ export class Shroomish extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10749,7 +10749,7 @@ export class Breloom extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10774,7 +10774,7 @@ export class Tentacool extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10800,7 +10800,7 @@ export class Tentacruel extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10825,7 +10825,7 @@ export class Snubull extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10851,7 +10851,7 @@ export class Granbull extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10877,7 +10877,7 @@ export class Vulpix extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10903,7 +10903,7 @@ export class Ninetales extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
@@ -10929,7 +10929,7 @@ export class AlolanVulpix extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      true
     )
   }
 }
@@ -10955,7 +10955,7 @@ export class AlolanNinetales extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
+      true
     )
   }
 }
