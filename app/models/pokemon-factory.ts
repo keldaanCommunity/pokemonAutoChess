@@ -138,6 +138,8 @@ import {
   Gloom,
   Golbat,
   Golem,
+  Goodra,
+  Goomy,
   Gorebyss,
   Gourgeist,
   Granbull,
@@ -348,6 +350,7 @@ import {
   Skiploom,
   Slaking,
   Slakoth,
+  Sligoo,
   Slowbro,
   Slowking,
   Slowpoke,
@@ -605,7 +608,7 @@ export default class PokemonFactory {
   static transformPokemon(
     before: Pokemon,
     afterName: Pkm,
-    afterConfig?: IPokemonConfig
+    afterConfig?: IPokemonConfig,
   ) {
     const transformation = this.createPokemonFromName(afterName, afterConfig)
     transformation.positionX = before.positionX
@@ -1504,6 +1507,12 @@ export default class PokemonFactory {
         return new Carbink(s, e)
       case Pkm.CHATOT:
         return new Chatot(s, e)
+      case Pkm.GOOMY:
+        return new Goomy(s, e)
+      case Pkm.SLIGOO:
+        return new Sligoo(s, e)
+      case Pkm.GOODRA:
+        return new Goodra(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
@@ -1536,7 +1545,7 @@ export default class PokemonFactory {
         if (!currentFossils.includes(p) && pkm.rarity !== Rarity.MYTHICAL) {
           possibleFossils.push(p)
         }
-      }
+      },
     )
     if (possibleFossils.length > 0) {
       return possibleFossils[Math.floor(Math.random() * possibleFossils.length)]

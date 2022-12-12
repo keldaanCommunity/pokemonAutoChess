@@ -87,6 +87,7 @@ export default class Shop {
       Pkm.PORYGON,
       Pkm.CUBONE,
       Pkm.HOUNDOUR,
+      Pkm.GOOMY,
     ]
 
     this.LEGENDARY = [
@@ -220,7 +221,7 @@ export default class Shop {
     const mythicalCopy = JSON.parse(JSON.stringify(this.MYTHICAL_1))
     for (let i = 0; i < 6; i++) {
       const pkm = PokemonFactory.createPokemonFromName(
-        mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]
+        mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)],
       ).name
       mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1)
       player.shop[i] = pkm
@@ -231,7 +232,7 @@ export default class Shop {
     const mythicalCopy = JSON.parse(JSON.stringify(this.MYTHICAL_2))
     for (let i = 0; i < 6; i++) {
       const pkm = PokemonFactory.createPokemonFromName(
-        mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]
+        mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)],
       ).name
       mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1)
       player.shop[i] = pkm
@@ -302,7 +303,7 @@ export default class Shop {
             break
           default:
             console.log(
-              `error in shop while picking seed = ${seed}, threshold = ${threshold}, index = ${i}`
+              `error in shop while picking seed = ${seed}, threshold = ${threshold}, index = ${i}`,
             )
             break
         }
