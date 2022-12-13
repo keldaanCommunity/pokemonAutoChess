@@ -31,7 +31,7 @@ export default class Shop {
       Pkm.TOTODILE,
       Pkm.SWINUB,
       Pkm.FENNEKIN,
-      Pkm.PICHU,
+      Pkm.PICHU
     ]
 
     this.UNCOMMON = [
@@ -53,7 +53,7 @@ export default class Shop {
       Pkm.FLABEBE,
       Pkm.BELLSPROUT,
       Pkm.SLOWPOKE,
-      Pkm.HATENNA,
+      Pkm.HATENNA
     ]
 
     this.RARE = [
@@ -71,7 +71,7 @@ export default class Shop {
       Pkm.MAGBY,
       Pkm.WHISMUR,
       Pkm.VANILLITE,
-      Pkm.BAGON,
+      Pkm.BAGON
     ]
 
     this.EPIC = [
@@ -87,7 +87,7 @@ export default class Shop {
       Pkm.PORYGON,
       Pkm.CUBONE,
       Pkm.HOUNDOUR,
-      Pkm.GOOMY,
+      Pkm.GOOMY
     ]
 
     this.LEGENDARY = [
@@ -103,7 +103,7 @@ export default class Shop {
       Pkm.ELECTRIKE,
       Pkm.SHUPPET,
       Pkm.NINCADA,
-      Pkm.HAPPINY,
+      Pkm.HAPPINY
     ]
 
     this.MYTHICAL_1 = [
@@ -139,7 +139,7 @@ export default class Shop {
       Pkm.MAWILE,
       Pkm.TAUROS,
       Pkm.TORNADUS,
-      Pkm.RELICANTH,
+      Pkm.RELICANTH
     ]
     this.MYTHICAL_2 = [
       Pkm.RESHIRAM,
@@ -149,6 +149,7 @@ export default class Shop {
       Pkm.GUZZLORD,
       Pkm.ETERNATUS,
       Pkm.MELOETTA,
+      Pkm.MEW,
       Pkm.MEWTWO,
       Pkm.ENTEI,
       Pkm.SUICUNE,
@@ -170,7 +171,7 @@ export default class Shop {
       Pkm.DIALGA,
       Pkm.RAYQUAZA,
       Pkm.KYOGRE,
-      Pkm.GROUDON,
+      Pkm.GROUDON
     ]
   }
 
@@ -221,7 +222,7 @@ export default class Shop {
     const mythicalCopy = JSON.parse(JSON.stringify(this.MYTHICAL_1))
     for (let i = 0; i < 6; i++) {
       const pkm = PokemonFactory.createPokemonFromName(
-        mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)],
+        mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]
       ).name
       mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1)
       player.shop[i] = pkm
@@ -232,7 +233,7 @@ export default class Shop {
     const mythicalCopy = JSON.parse(JSON.stringify(this.MYTHICAL_2))
     for (let i = 0; i < 6; i++) {
       const pkm = PokemonFactory.createPokemonFromName(
-        mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)],
+        mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]
       ).name
       mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1)
       player.shop[i] = pkm
@@ -303,7 +304,7 @@ export default class Shop {
             break
           default:
             console.log(
-              `error in shop while picking seed = ${seed}, threshold = ${threshold}, index = ${i}`,
+              `error in shop while picking seed = ${seed}, threshold = ${threshold}, index = ${i}`
             )
             break
         }

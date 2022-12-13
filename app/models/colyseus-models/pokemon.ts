@@ -7813,6 +7813,31 @@ export class Azelf extends Pokemon {
   }
 }
 
+export class Mew extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MEW,
+      [Synergy.PSYCHIC, Synergy.FIELD],
+      Rarity.MYTHICAL,
+      PkmIndex[Pkm.MEW],
+      Pkm.DEFAULT,
+      300,
+      30,
+      5,
+      5,
+      3,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.SPECIAL,
+      2,
+      65,
+      Ability.METRONOME,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Mewtwo extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

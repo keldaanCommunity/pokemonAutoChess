@@ -252,6 +252,7 @@ import {
   Metagross,
   Metang,
   Metapod,
+  Mew,
   Mewtwo,
   Mightyena,
   Moltres,
@@ -433,7 +434,7 @@ import {
   Zapdos,
   Zekrom,
   Zubat,
-  Zweilous,
+  Zweilous
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -608,7 +609,7 @@ export default class PokemonFactory {
   static transformPokemon(
     before: Pokemon,
     afterName: Pkm,
-    afterConfig?: IPokemonConfig,
+    afterConfig?: IPokemonConfig
   ) {
     const transformation = this.createPokemonFromName(afterName, afterConfig)
     transformation.positionX = before.positionX
@@ -1513,6 +1514,8 @@ export default class PokemonFactory {
         return new Sligoo(s, e)
       case Pkm.GOODRA:
         return new Goodra(s, e)
+      case Pkm.MEW:
+        return new Mew(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
@@ -1545,7 +1548,7 @@ export default class PokemonFactory {
         if (!currentFossils.includes(p) && pkm.rarity !== Rarity.MYTHICAL) {
           possibleFossils.push(p)
         }
-      },
+      }
     )
     if (possibleFossils.length > 0) {
       return possibleFossils[Math.floor(Math.random() * possibleFossils.length)]

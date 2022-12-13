@@ -159,6 +159,7 @@ export class PaydayStrategy extends AttackStrategy {
     }
   }
 }
+
 export class MindBlownStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -3193,7 +3194,12 @@ export class MetronomeStrategy extends AttackStrategy {
       SongOfDesireStrategy,
       MindBlownStrategy,
       PaydayStrategy,
-      AuroraVeilStrategy
+      AuroraVeilStrategy,
+      FusionBoltStrategy,
+      BlueFlareStrategy,
+      SoftBoiledStrategy,
+      BeatUpStrategy,
+      EarthquakeStrategy
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)
