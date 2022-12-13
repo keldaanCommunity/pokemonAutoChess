@@ -968,7 +968,8 @@ export default class AnimationManager {
       key: Ability.LIQUIDATION,
       frames: this.game.anims.generateFrameNames(Ability.LIQUIDATION, {
         start: 0,
-        end: 17
+        end: 17,
+        zeroPad: 3
       }),
       duration: 1000,
       repeat: 0
