@@ -31,7 +31,8 @@ export default class Shop {
       Pkm.TOTODILE,
       Pkm.SWINUB,
       Pkm.FENNEKIN,
-      Pkm.PICHU
+      Pkm.PICHU,
+      Pkm.MEW
     ]
 
     this.UNCOMMON = [
@@ -139,7 +140,8 @@ export default class Shop {
       Pkm.MAWILE,
       Pkm.TAUROS,
       Pkm.TORNADUS,
-      Pkm.RELICANTH
+      Pkm.RELICANTH,
+      Pkm.MEW
     ]
     this.MYTHICAL_2 = [
       Pkm.RESHIRAM,
@@ -149,7 +151,6 @@ export default class Shop {
       Pkm.GUZZLORD,
       Pkm.ETERNATUS,
       Pkm.MELOETTA,
-      Pkm.MEW,
       Pkm.MEWTWO,
       Pkm.ENTEI,
       Pkm.SUICUNE,

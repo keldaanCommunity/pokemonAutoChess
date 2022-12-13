@@ -613,6 +613,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.SYNCHRO]: {
+    eng: "Synchro",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1225,6 +1231,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.CHATTER]: {
     eng: "Deal 5/10/15 special damage to all enemies with each target hit having a 20/30/40% chance to be confused 1s",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SYNCHRO]: {
+    eng: "If the pokemon is affected by poison/burn/wound/silence, the ennemy team will suffer the same negative status",
     esp: "",
     prt: "",
     fra: ""

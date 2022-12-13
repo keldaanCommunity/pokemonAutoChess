@@ -292,6 +292,17 @@ export class WonderGuardStrategy extends AttackStrategy {
   }
 }
 
+export class SynchroStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+  }
+}
+
 export class ProteanStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -372,7 +383,7 @@ export class CorruptedNatureStrategy extends AttackStrategy {
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerWound(4000)
+        cell.value.status.triggerWound(4000, cell.value, board)
         cell.value.handleSpellDamage(
           damage,
           board,
@@ -698,7 +709,7 @@ export class LeechSeedStrategy extends AttackStrategy {
       heal = 40
     }
     pokemon.handleHeal(heal, pokemon)
-    target.status.triggerPoison(duration, target, pokemon)
+    target.status.triggerPoison(duration, target, pokemon, board)
   }
 }
 
@@ -732,11 +743,11 @@ export class PsychUpStrategy extends AttackStrategy {
       duration = 8000
     }
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    target.status.triggerSilence(duration)
+    target.status.triggerSilence(duration, target, board)
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerSilence(duration)
+        cell.value.status.triggerSilence(duration, cell.value, board)
       }
     })
   }
@@ -1004,7 +1015,7 @@ export class GrowlStrategy extends AttackStrategy {
     }
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        tg.status.triggerWound(d)
+        tg.status.triggerWound(d, tg, board)
       }
     })
   }
@@ -1151,8 +1162,8 @@ export class TriAttackStrategy extends AttackStrategy {
         break
     }
     target.status.triggerFreeze(duration, target)
-    target.status.triggerWound(duration)
-    target.status.triggerBurn(duration, target, pokemon)
+    target.status.triggerWound(duration, target, board)
+    target.status.triggerBurn(duration, target, pokemon, board)
   }
 }
 
@@ -1433,7 +1444,7 @@ export class RockSmashStrategy extends AttackStrategy {
     }
 
     target.handleSpellDamage(d, board, AttackType.PHYSICAL, pokemon)
-    target.status.triggerSilence(s)
+    target.status.triggerSilence(s, target, board)
   }
 }
 
@@ -1530,7 +1541,7 @@ export class HealBlockStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.status.triggerWound(timer)
+        cell.value.status.triggerWound(timer, cell.value, board)
       }
     })
   }
@@ -1609,7 +1620,7 @@ export class NightmareStrategy extends AttackStrategy {
     }
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
-        value.status.triggerPoison(timer, value, pokemon)
+        value.status.triggerPoison(timer, value, pokemon, board)
       }
     })
   }
@@ -1643,8 +1654,8 @@ export class BurnStrategy extends AttackStrategy {
     }
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
-        value.status.triggerBurn(timer, value, pokemon)
-        value.status.triggerWound(timer)
+        value.status.triggerBurn(timer, value, pokemon, board)
+        value.status.triggerWound(timer, value, board)
       }
     })
   }
@@ -1678,7 +1689,7 @@ export class SilenceStrategy extends AttackStrategy {
     }
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
-        value.status.triggerSilence(timer)
+        value.status.triggerSilence(timer, value, board)
       }
     })
   }
@@ -1710,7 +1721,7 @@ export class PoisonStrategy extends AttackStrategy {
       default:
         break
     }
-    target.status.triggerPoison(timer, target, pokemon)
+    target.status.triggerPoison(timer, target, pokemon, board)
   }
 }
 

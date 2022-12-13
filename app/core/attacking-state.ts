@@ -19,7 +19,7 @@ export default class AttackingState extends PokemonState {
       const target = board.getValue(pokemon.targetX, pokemon.targetY)
       let targetCoordinate: { x: number; y: number } | undefined = {
         x: pokemon.targetX,
-        y: pokemon.targetY,
+        y: pokemon.targetY
       }
 
       if (
@@ -114,14 +114,14 @@ export default class AttackingState extends PokemonState {
       }
       if (poisonChance != 0) {
         if (Math.random() > 1 - poisonChance) {
-          target.status.triggerPoison(2000, target, pokemon)
+          target.status.triggerPoison(2000, target, pokemon, board)
         }
       }
       if (
         pokemon.effects.includes(Effect.CURSE) ||
         pokemon.effects.includes(Effect.PHANTOM_FORCE)
       ) {
-        target.status.triggerSilence(3000)
+        target.status.triggerSilence(3000, target, board)
       }
       if (pokemon.effects.includes(Effect.REVENGE)) {
         pokemon.setMana(pokemon.mana + 5)

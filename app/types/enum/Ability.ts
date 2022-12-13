@@ -100,7 +100,8 @@ import {
   AquaJetStrategy,
   ProteanStrategy,
   ChatterStrategy,
-  LiquidationStrategy
+  LiquidationStrategy,
+  SynchroStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -205,7 +206,8 @@ export enum Ability {
   AQUA_JET = "AQUA_JET",
   PROTEAN = "PROTEAN",
   CHATTER = "CHATTER",
-  LIQUIDATION = "LIQUIDATION"
+  LIQUIDATION = "LIQUIDATION",
+  SYNCHRO = "SYNCHRO"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -310,5 +312,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.AQUA_JET]: new AquaJetStrategy(),
   [Ability.PROTEAN]: new ProteanStrategy(),
   [Ability.CHATTER]: new ChatterStrategy(),
-  [Ability.LIQUIDATION]: new LiquidationStrategy()
+  [Ability.LIQUIDATION]: new LiquidationStrategy(),
+  [Ability.SYNCHRO]: new SynchroStrategy()
 }
