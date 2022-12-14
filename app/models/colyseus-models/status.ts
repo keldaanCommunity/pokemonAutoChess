@@ -2,6 +2,7 @@ import { Schema, type } from "@colyseus/schema"
 import Board, { Cell } from "../../core/board"
 import PokemonEntity from "../../core/pokemon-entity"
 import { IStatus } from "../../types"
+import { Ability } from "../../types/enum/Ability"
 import { Item } from "../../types/enum/Item"
 
 export default class Status extends Schema implements IStatus {
@@ -69,7 +70,7 @@ export default class Status extends Schema implements IStatus {
       let flameCount = 1
       cells.forEach((cell: Cell) => {
         if (cell.value && pkm.team != cell.value.team && flameCount > 0) {
-          cell.value.status.triggerBurn(8000, cell.value, pkm)
+          cell.value.status.triggerBurn(8000, cell.value, pkm, board)
           flameCount--
         }
       })
@@ -119,13 +120,21 @@ export default class Status extends Schema implements IStatus {
   triggerBurn(
     timer: number,
     pkm: PokemonEntity,
-    origin: PokemonEntity | undefined
+    origin: PokemonEntity | undefined,
+    board: Board
   ) {
     if (!this.burn && !pkm.items.has(Item.WIDE_LENS)) {
       this.burn = true
       this.burnCooldown = timer
       if (origin) {
         this.burnOrigin = origin
+      }
+      if (pkm.skill === Ability.SYNCHRO) {
+        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+          if (tg && tg.team !== pkm.team) {
+            tg.status.triggerBurn(timer, tg, pkm, board)
+          }
+        })
       }
     }
   }
@@ -139,10 +148,17 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerSilence(timer: number) {
+  triggerSilence(timer: number, pkm: PokemonEntity, board: Board) {
     if (!this.silence) {
       this.silence = true
       this.silenceCooldown = timer
+      if (pkm.skill === Ability.SYNCHRO) {
+        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+          if (tg && tg.team !== pkm.team) {
+            tg.status.triggerSilence(timer, tg, board)
+          }
+        })
+      }
     }
   }
 
@@ -157,13 +173,21 @@ export default class Status extends Schema implements IStatus {
   triggerPoison(
     timer: number,
     pkm: PokemonEntity,
-    origin: PokemonEntity | undefined
+    origin: PokemonEntity | undefined,
+    board: Board
   ) {
     if (!this.poison && !pkm.items.has(Item.WIDE_LENS)) {
       this.poison = true
       this.poisonCooldown = timer
       if (origin) {
         this.poisonOrigin = origin
+      }
+      if (pkm.skill === Ability.SYNCHRO) {
+        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+          if (tg && tg.team !== pkm.team) {
+            tg.status.triggerPoison(timer, tg, pkm, board)
+          }
+        })
       }
     }
   }
@@ -237,10 +261,17 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerWound(timer: number) {
+  triggerWound(timer: number, pkm: PokemonEntity, board: Board) {
     if (!this.wound) {
       this.wound = true
       this.woundCooldown = timer
+      if (pkm.skill === Ability.SYNCHRO) {
+        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+          if (tg && tg.team !== pkm.team) {
+            tg.status.triggerWound(timer, tg, board)
+          }
+        })
+      }
     }
   }
 
@@ -308,7 +339,7 @@ export default class Status extends Schema implements IStatus {
   updateSmoke(dt: number, pkm: PokemonEntity) {
     if (this.smokeCooldown - dt <= 0) {
       this.smoke = false
-      pkm.handleAttackSpeed(30)
+      pkm.handleAttackSpeed(40)
     } else {
       this.smokeCooldown = this.smokeCooldown - dt
     }

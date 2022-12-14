@@ -138,6 +138,8 @@ import {
   Gloom,
   Golbat,
   Golem,
+  Goodra,
+  Goomy,
   Gorebyss,
   Gourgeist,
   Granbull,
@@ -250,6 +252,7 @@ import {
   Metagross,
   Metang,
   Metapod,
+  Mew,
   Mewtwo,
   Mightyena,
   Moltres,
@@ -348,6 +351,7 @@ import {
   Skiploom,
   Slaking,
   Slakoth,
+  Sligoo,
   Slowbro,
   Slowking,
   Slowpoke,
@@ -430,7 +434,7 @@ import {
   Zapdos,
   Zekrom,
   Zubat,
-  Zweilous,
+  Zweilous
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1504,6 +1508,14 @@ export default class PokemonFactory {
         return new Carbink(s, e)
       case Pkm.CHATOT:
         return new Chatot(s, e)
+      case Pkm.GOOMY:
+        return new Goomy(s, e)
+      case Pkm.SLIGOO:
+        return new Sligoo(s, e)
+      case Pkm.GOODRA:
+        return new Goodra(s, e)
+      case Pkm.MEW:
+        return new Mew(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

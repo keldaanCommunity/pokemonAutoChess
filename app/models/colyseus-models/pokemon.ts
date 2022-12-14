@@ -2595,7 +2595,7 @@ export class Dratini extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DRATINI,
-      [Synergy.DRAGON, Synergy.AQUATIC],
+      [Synergy.DRAGON, Synergy.AQUATIC, Synergy.FLYING],
       Rarity.RARE,
       "0147",
       Pkm.DRAGONAIR,
@@ -2620,7 +2620,7 @@ export class Dragonair extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DRAGONAIR,
-      [Synergy.DRAGON, Synergy.AQUATIC],
+      [Synergy.DRAGON, Synergy.AQUATIC, Synergy.FLYING],
       Rarity.RARE,
       "0148",
       Pkm.DRAGONITE,
@@ -2659,6 +2659,81 @@ export class Dragonite extends Pokemon {
       3,
       100,
       Ability.DRAGON_BREATH,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Goomy extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.GOOMY,
+      [Synergy.DRAGON, Synergy.AQUATIC, Synergy.MONSTER],
+      Rarity.EPIC,
+      PkmIndex[Pkm.GOOMY],
+      Pkm.SLIGOO,
+      90,
+      5,
+      4,
+      6,
+      1,
+      AttackSprite.DRAGON_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      80,
+      Ability.LIQUIDATION,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Sligoo extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SLIGOO,
+      [Synergy.DRAGON, Synergy.AQUATIC, Synergy.MONSTER],
+      Rarity.EPIC,
+      PkmIndex[Pkm.SLIGOO],
+      Pkm.GOODRA,
+      140,
+      9,
+      5,
+      7,
+      1,
+      AttackSprite.DRAGON_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      80,
+      Ability.LIQUIDATION,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Goodra extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.GOODRA,
+      [Synergy.DRAGON, Synergy.AQUATIC, Synergy.MONSTER],
+      Rarity.EPIC,
+      PkmIndex[Pkm.GOODRA],
+      Pkm.DEFAULT,
+      280,
+      20,
+      6,
+      10,
+      1,
+      AttackSprite.DRAGON_MELEE,
+      AttackType.PHYSICAL,
+      3,
+      80,
+      Ability.LIQUIDATION,
       shiny,
       emotion,
       true
@@ -7731,6 +7806,31 @@ export class Azelf extends Pokemon {
       2,
       110,
       Ability.SONG_OF_DESIRE,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Mew extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MEW,
+      [Synergy.PSYCHIC, Synergy.FIELD],
+      Rarity.MYTHICAL,
+      PkmIndex[Pkm.MEW],
+      Pkm.DEFAULT,
+      200,
+      20,
+      2,
+      2,
+      3,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.SPECIAL,
+      2,
+      200,
+      Ability.SYNCHRO,
       shiny,
       emotion,
       true

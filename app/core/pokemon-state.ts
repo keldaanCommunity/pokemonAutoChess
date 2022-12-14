@@ -232,7 +232,7 @@ export default class PokemonState {
               burnChance = 0.4
             }
             if (Math.random() < burnChance) {
-              pokemon.status.triggerBurn(2000, pokemon, attacker)
+              pokemon.status.triggerBurn(2000, pokemon, attacker, board)
             }
           }
         }
