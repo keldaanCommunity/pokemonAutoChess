@@ -294,7 +294,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
     if (pokemon.items.has(Item.XRAY_VISION)) {
       pokemon.range += 1
-      pokemon.handleAttackSpeed(55)
+      pokemon.handleAttackSpeed(30)
     }
     if (pokemon.items.has(Item.WIDE_LENS)) {
       pokemon.handleAttackSpeed(20)

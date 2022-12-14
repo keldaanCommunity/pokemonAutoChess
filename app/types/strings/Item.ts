@@ -54,7 +54,7 @@ export const ItemName: { [key in Item]: string } = {
   [Item.POKE_DOLL]: "Poke Doll",
   [Item.RED_ORB]: "Red Orb",
   [Item.MAX_REVIVE]: "Max Revive",
-  [Item.ROCKY_HELMET]: "Rocky Helmet"
+  [Item.ROCKY_HELMET]: "Rocky Helmet",
 }
 
 export const ItemDescription: { [key in Item]: string } = Object.freeze({
@@ -102,7 +102,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.SMOKE_BALL]:
     "Reduce the attack speed of ennemy attackers by 40% for 5 seconds",
   [Item.XRAY_VISION]:
-    "Increase the holders attack range by 1 hex and grants 55% bonus attack speed. The holder attacks can no longer miss.",
+    "Increase the holders attack range by 1 hex and grants 30% bonus attack speed. The holder attacks can no longer miss.",
   [Item.RAZOR_FANG]:
     "When the holder inflicts a critical hit, the targets Armor is reduced by 70% for 5 seconds. This effect does not stack.",
   [Item.LEFTOVERS]:
@@ -136,5 +136,5 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     "Each attack of the holder deals an additional 20% true damage",
   [Item.MAX_REVIVE]: "Prevents the holder first death",
   [Item.ROCKY_HELMET]:
-    "Grants 10 bonus armor. Negates bonus damage from incoming critical hits."
+    "Grants 10 bonus armor. Negates bonus damage from incoming critical hits.",
 })
