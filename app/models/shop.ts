@@ -32,7 +32,6 @@ export default class Shop {
       Pkm.SWINUB,
       Pkm.FENNEKIN,
       Pkm.PICHU,
-      Pkm.MEW
     ]
 
     this.UNCOMMON = [
@@ -54,7 +53,7 @@ export default class Shop {
       Pkm.FLABEBE,
       Pkm.BELLSPROUT,
       Pkm.SLOWPOKE,
-      Pkm.HATENNA
+      Pkm.HATENNA,
     ]
 
     this.RARE = [
@@ -72,7 +71,7 @@ export default class Shop {
       Pkm.MAGBY,
       Pkm.WHISMUR,
       Pkm.VANILLITE,
-      Pkm.BAGON
+      Pkm.BAGON,
     ]
 
     this.EPIC = [
@@ -88,7 +87,7 @@ export default class Shop {
       Pkm.PORYGON,
       Pkm.CUBONE,
       Pkm.HOUNDOUR,
-      Pkm.GOOMY
+      Pkm.GOOMY,
     ]
 
     this.LEGENDARY = [
@@ -104,7 +103,7 @@ export default class Shop {
       Pkm.ELECTRIKE,
       Pkm.SHUPPET,
       Pkm.NINCADA,
-      Pkm.HAPPINY
+      Pkm.HAPPINY,
     ]
 
     this.MYTHICAL_1 = [
@@ -141,7 +140,7 @@ export default class Shop {
       Pkm.TAUROS,
       Pkm.TORNADUS,
       Pkm.RELICANTH,
-      Pkm.MEW
+      Pkm.MEW,
     ]
     this.MYTHICAL_2 = [
       Pkm.RESHIRAM,
@@ -172,7 +171,7 @@ export default class Shop {
       Pkm.DIALGA,
       Pkm.RAYQUAZA,
       Pkm.KYOGRE,
-      Pkm.GROUDON
+      Pkm.GROUDON,
     ]
   }
 
