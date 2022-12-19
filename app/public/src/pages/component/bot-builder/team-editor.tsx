@@ -7,18 +7,17 @@ import { IStep } from "../../../../../models/mongo-models/bot-v2"
 import { getPortraitSrc } from "../../../utils"
 
 const tabStyle: CSS.Properties = {
-  backgroundColor: "rgba(255, 255, 255, .7)",
   margin: "10px",
   marginTop: "0px",
   width: "60%",
   position: "absolute",
   top: "8.5%",
-  left: "13%"
+  left: "13%",
 }
 
 const cursorStyle: CSS.Properties = {
   cursor:
-    "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer"
+    "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer",
 }
 
 const tdStyle: CSS.Properties = {
@@ -26,7 +25,7 @@ const tdStyle: CSS.Properties = {
   height: "80px",
   cursor:
     "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer",
-  padding: "0px"
+  padding: "0px",
 }
 
 const divTdStyle: CSS.Properties = {
@@ -34,7 +33,7 @@ const divTdStyle: CSS.Properties = {
   justifyContent: "space-between",
   flexFlow: "column",
   width: "80px",
-  height: "80px"
+  height: "80px",
 }
 
 const bigImgStyle: CSS.Properties = {
@@ -42,16 +41,16 @@ const bigImgStyle: CSS.Properties = {
   height: "80px",
   imageRendering: "pixelated",
   cursor:
-    "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer"
+    "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer",
 }
 
 const tabPaneStyle: CSS.Properties = {
   display: "flex",
-  justifyContent: "center"
+  justifyContent: "center",
 }
 
 const labelStyle: CSS.Properties = {
-  marginLeft: "10px"
+  marginLeft: "10px",
 }
 
 const itemImgStyle: CSS.Properties = {
@@ -61,7 +60,7 @@ const itemImgStyle: CSS.Properties = {
   bottom: "20px",
   borderRadius: "10px",
   border: "1px solid white",
-  backgroundColor: "white"
+  backgroundColor: "white",
 }
 
 export default function TeamEditor(props: {
@@ -166,7 +165,7 @@ export default function TeamEditor(props: {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-evenly",
-                    marginBottom: "10px"
+                    marginBottom: "10px",
                   }}
                 >
                   <label
@@ -220,7 +219,7 @@ export default function TeamEditor(props: {
                   style={{
                     marginBottom: "10px",
                     display: "flex",
-                    justifyContent: "center"
+                    justifyContent: "center",
                   }}
                 >
                   <table className="nes-table is-bordered is-centered">
@@ -251,13 +250,17 @@ export default function TeamEditor(props: {
                                       <div style={divTdStyle}>
                                         <img
                                           style={bigImgStyle}
-                                          src={getPortraitSrc(PkmIndex[p.name])}
+                                          src={getPortraitSrc(
+                                            PkmIndex[p.name],
+                                            p.shiny,
+                                            p.emotion
+                                          )}
                                         ></img>
                                         {p.items ? (
                                           <div
                                             style={{
                                               display: "flex",
-                                              justifyContent: "space-evenly"
+                                              justifyContent: "space-evenly",
                                             }}
                                           >
                                             {p.items.map((it, j) => {

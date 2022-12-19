@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose"
+import { Emotion } from "../../types"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 export interface IDetailledPokemon {
@@ -6,6 +7,8 @@ export interface IDetailledPokemon {
   x: number
   y: number
   items: Item[]
+  emotion: Emotion,
+  shiny: boolean
 }
 
 export interface IStep {

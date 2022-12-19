@@ -16,19 +16,24 @@ import { createBot } from "../../../stores/NetworkStore"
 import { setBotCreatorSynergies } from "../../../stores/LobbyStore"
 import BuilderSynergies from "./builder-synergies"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { Emotion, ModalMode, ReadWriteMode } from "../../../../../types"
+import {
+  DetailledPkm,
+  Emotion,
+  ModalMode,
+  ReadWriteMode,
+} from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 
 const buttonsStyle: CSS.Properties = {
   left: "10px",
   position: "absolute",
-  display: "flex"
+  display: "flex",
 }
 
 const buttonStyle: CSS.Properties = {
   marginLeft: "10px",
   marginTop: "10px",
-  marginRight: "10px"
+  marginRight: "10px",
 }
 
 const bottomContainerStyle: CSS.Properties = {
@@ -36,7 +41,7 @@ const bottomContainerStyle: CSS.Properties = {
   width: "87%",
   position: "absolute",
   bottom: "0px",
-  right: "0px"
+  right: "0px",
 }
 
 export default function TeamBuilder(props: { toggleBuilder: () => void }) {
@@ -47,91 +52,95 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
     steps: [
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
+        board: [],
       },
       {
         roundsRequired: 2,
-        board: []
-      }
+        board: [],
+      },
     ],
     avatar: PkmIndex[Pkm.DITTO],
     author: "",
     elo: 1200,
-    name: Pkm.DITTO
+    name: Pkm.DITTO,
   })
-  const [entity, setEntity] = useState<Item | Pkm>(Pkm.DEFAULT)
+  const [entity, setEntity] = useState<Item | DetailledPkm>({
+    pkm: Pkm.DEFAULT,
+    shiny: false,
+    emotion: Emotion.NORMAL,
+  })
   const [mode, setMode] = useState<ReadWriteMode>(ReadWriteMode.WRITE)
   const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
   const [modalBoolean, setModalBoolean] = useState<boolean>(false)
@@ -164,10 +173,10 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
   }
 
   function write(x: number, y: number) {
-    if (Object.values(Pkm).includes(entity as Pkm)) {
+    if (Object.values(Pkm).includes((entity as DetailledPkm).pkm)) {
       writePokemon(x, y)
     }
-    if (Object.keys(Item).includes(entity)) {
+    if (Object.keys(Item).includes(entity as Item)) {
       writeItem(x, y)
     }
   }
@@ -198,17 +207,26 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
     const potential = bot.steps[step].board.findIndex(
       (p) => p.x == x && p.y == y
     )
-    const e = entity as Pkm
+    const e = entity as DetailledPkm
     if (potential >= 0) {
       setBot(
         produce((draft) => {
-          draft.steps[step].board[potential].name = e
+          draft.steps[step].board[potential].name = e.pkm
+          draft.steps[step].board[potential].shiny = e.shiny
+          draft.steps[step].board[potential].emotion = e.emotion
         })
       )
     } else {
       setBot(
         produce((draft) => {
-          draft.steps[step].board.push({ name: e, x: x, y: y, items: [] })
+          draft.steps[step].board.push({
+            name: e.pkm,
+            emotion: e.emotion,
+            shiny: e.shiny,
+            x: x,
+            y: y,
+            items: [],
+          })
         })
       )
     }
@@ -392,7 +410,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
           )
         }
       />
-      <SelectedEntity entity={entity} />
+      <SelectedEntity entity={entity} selectEntity={setEntity} />
 
       <div style={bottomContainerStyle}>
         <ItemPicker selectEntity={setEntity} />

@@ -37,6 +37,8 @@ export const CDN_PORTRAIT_URL =
 export const CDN_URL =
   "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master"
 
+export type DetailledPkm = { pkm: Pkm; shiny: boolean; emotion: Emotion }
+
 export type PrecomputedTypePokemon = {
   [key in Synergy]: {
     pokemons: Pkm[]
