@@ -141,6 +141,7 @@ export default class Shop {
       Pkm.TORNADUS,
       Pkm.RELICANTH,
       Pkm.MEW,
+      Pkm.CHATOT
     ]
     this.MYTHICAL_2 = [
       Pkm.RESHIRAM,
