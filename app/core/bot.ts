@@ -56,7 +56,8 @@ export default class Bot {
     if (this.scenario) {
       const stepTeam = this.scenario.steps[this.step]
       for (let i = 0; i < stepTeam.board.length; i++) {
-        const  emotion = stepTeam.board[i].emotion? stepTeam.board[i].emotion: Emotion.NORMAL
+        const  potentialEmotion = stepTeam.board[i].emotion
+        const emotion = potentialEmotion? potentialEmotion: Emotion.NORMAL
         const pkm = PokemonFactory.createPokemonFromName(stepTeam.board[i].name,
           {
             dust:0,
