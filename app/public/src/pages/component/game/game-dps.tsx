@@ -6,19 +6,19 @@ import { getAvatarSrc } from "../../../utils"
 
 const imgStyle: CSS.Properties = {
   width: "40px",
-  height: "40px"
+  height: "40px",
 }
 
 const progressStyle: CSS.Properties = {
   height: "18px",
-  borderImageOutset: "1.5"
+  borderImageOutset: "1.5",
 }
 
 const style: CSS.Properties = {
   display: "flex",
   alignItems: "center",
   marginBottom: "10px",
-  width: "90%"
+  width: "90%",
 }
 
 export default function GameDps(props: { maxDamage: number; dps: IDps }) {
@@ -31,7 +31,7 @@ export default function GameDps(props: { maxDamage: number; dps: IDps }) {
           flexFlow: "column",
           justifyContent: "space-around",
           marginLeft: "5px",
-          width: "100%"
+          width: "100%",
         }}
       >
         <p style={{ marginBottom: "-5px", marginLeft: "3px" }}>

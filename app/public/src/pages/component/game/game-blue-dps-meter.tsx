@@ -13,6 +13,7 @@ export default function GameBluedDpsMeter() {
         (a.physicalDamage + a.specialDamage + a.trueDamage)
       )
     })
+
     const blueMaxDamage =
       blueSortedArray[0].physicalDamage +
       blueSortedArray[0].specialDamage +
