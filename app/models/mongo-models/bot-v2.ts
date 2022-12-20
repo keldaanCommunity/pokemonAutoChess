@@ -7,8 +7,8 @@ export interface IDetailledPokemon {
   x: number
   y: number
   items: Item[]
-  emotion: Emotion,
-  shiny: boolean
+  emotion?: Emotion,
+  shiny?: boolean
 }
 
 export interface IStep {
@@ -47,7 +47,16 @@ const pkm = new Schema({
       type: String,
       enum: Item
     }
-  ]
+  ],
+  emotion:{
+    type: String,
+    required: false,
+    enum: Emotion
+  },
+  shiny:{
+    type: Boolean,
+    required: false
+  }
 })
 
 const step = new Schema({

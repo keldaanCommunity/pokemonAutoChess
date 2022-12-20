@@ -12,7 +12,6 @@ const ulStyle = {
 }
 
 const style: CSS.Properties = {
-  backgroundColor: "rgba(255, 255, 255, .6)",
   margin: "10px",
   flexBasis: "15%",
   height: "90vh",

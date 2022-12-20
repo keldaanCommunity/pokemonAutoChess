@@ -4,6 +4,7 @@ import BOT, { IBot } from "../models/mongo-models/bot-v2"
 import Player from "../models/colyseus-models/player"
 import { BattleResult } from "../types/enum/Game"
 import { Synergy } from "../types/enum/Synergy"
+import { Emotion } from "../types"
 
 export default class Bot {
   player: Player
@@ -55,7 +56,16 @@ export default class Bot {
     if (this.scenario) {
       const stepTeam = this.scenario.steps[this.step]
       for (let i = 0; i < stepTeam.board.length; i++) {
-        const pkm = PokemonFactory.createPokemonFromName(stepTeam.board[i].name)
+        const  emotion = stepTeam.board[i].emotion? stepTeam.board[i].emotion: Emotion.NORMAL
+        const pkm = PokemonFactory.createPokemonFromName(stepTeam.board[i].name,
+          {
+            dust:0,
+            emotions:new Array<Emotion>(),
+            shinyEmotions:new Array<Emotion>(),
+            id: "",
+            selectedEmotion:emotion,
+            selectedShiny: !!stepTeam.board[i].shiny
+          })
         pkm.positionX = stepTeam.board[i].x
         pkm.positionY = stepTeam.board[i].y
         if (stepTeam.board[i].items) {
