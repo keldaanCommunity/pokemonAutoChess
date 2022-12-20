@@ -162,38 +162,59 @@ export const gameSlice = createSlice({
     setAdditionalPokemons: (state, action: PayloadAction<Pkm[]>) => {
       state.additionalPokemons = JSON.parse(JSON.stringify(action.payload))
     },
-    setSynergies: (state, action: PayloadAction<Synergies>) => {
-      state.currentPlayerSynergies = Array.from(action.payload)
+    setSynergies: (state, action: PayloadAction<{value: Synergies, id: string}>) => {
+      if(state.currentPlayerId === action.payload.id){
+        state.currentPlayerSynergies = Array.from(action.payload.value)
+      }
+      
     },
-    setOpponentName: (state, action: PayloadAction<string>) => {
-      state.currentPlayerOpponentName = action.payload
+    setOpponentName: (state, action: PayloadAction<{value: string, id: string}>) => {
+      if(state.currentPlayerId === action.payload.id){
+        state.currentPlayerOpponentName = action.payload.value
+      }
     },
-    setOpponentAvatar: (state, action: PayloadAction<string>) => {
-      state.currentPlayerOpponentAvatar = action.payload
+    setOpponentAvatar: (state, action: PayloadAction<{value: string, id: string}>) => {
+      if(state.currentPlayerId === action.payload.id){
+        state.currentPlayerOpponentAvatar = action.payload.value
+      }
     },
-    setBoardSize: (state, action: PayloadAction<number>) => {
-      state.currentPlayerBoardSize = action.payload
+    setBoardSize: (state, action: PayloadAction<{value: number, id: string}>) => {
+      if(state.currentPlayerId === action.payload.id){
+        state.currentPlayerBoardSize = action.payload.value
+      }
     },
-    setLife: (state, action: PayloadAction<number>) => {
-      state.currentPlayerLife = action.payload
+    setLife: (state, action: PayloadAction<{value: number, id: string}>) => {
+      if(state.currentPlayerId === action.payload.id){
+        state.currentPlayerLife = action.payload.value
+      }
     },
     setCurrentPlayerExperienceManager: (
       state,
-      action: PayloadAction<ExperienceManager>
+      action: PayloadAction<{value: ExperienceManager, id: string}>
     ) => {
-      state.currentPlayerExperienceManager = action.payload
+      if(state.currentPlayerId === action.payload.id){
+        state.currentPlayerExperienceManager = action.payload.value
+      }
     },
-    setCurrentPlayerMoney: (state, action: PayloadAction<number>) => {
-      state.currentPlayerMoney = action.payload
+    setCurrentPlayerMoney: (state, action: PayloadAction<{value: number, id: string}>) => {
+      if(state.currentPlayerId === action.payload.id){
+        state.currentPlayerMoney = action.payload.value
+      }
     },
-    setCurrentPlayerName: (state, action: PayloadAction<string>) => {
-      state.currentPlayerName = action.payload
+    setCurrentPlayerName: (state, action: PayloadAction<{value: string, id: string}>) => {
+      if(state.currentPlayerId === action.payload.id){
+        state.currentPlayerName = action.payload.value
+      }
     },
-    setCurrentPlayerTitle: (state, action: PayloadAction<string>) => {
-      state.currentPlayerTitle = action.payload
+    setCurrentPlayerTitle: (state, action: PayloadAction<{value: string, id: string}>) => {
+      if(state.currentPlayerId === action.payload.id){
+        state.currentPlayerTitle = action.payload.value
+      }
     },
-    setCurrentPlayerAvatar: (state, action: PayloadAction<string>) => {
-      state.currentPlayerAvatar = action.payload
+    setCurrentPlayerAvatar: (state, action: PayloadAction<{value: string, id: string}>) => {
+      if(state.currentPlayerId === action.payload.id){
+        state.currentPlayerAvatar = action.payload.value
+      }
     },
     setPlayer: (state, action: PayloadAction<IPlayer>) => {
       state.currentPlayerId = action.payload.id
@@ -224,98 +245,114 @@ export const gameSlice = createSlice({
         state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))
       })
     },
-    addRedDpsMeter: (state, action: PayloadAction<IDps>) => {
+    addRedDpsMeter: (state, action: PayloadAction<{value: IDps, id: string}>) => {
       if (
-        state.redDpsMeter.find((d) => d.id == action.payload.id) === undefined
+        state.currentPlayerId === action.payload.id && state.redDpsMeter.find((d) => d.id == action.payload.value.id) === undefined
       ) {
-        state.redDpsMeter.push(JSON.parse(JSON.stringify(action.payload)))
+        state.redDpsMeter.push(JSON.parse(JSON.stringify(action.payload.value)))
       }
     },
-    addBlueDpsMeter: (state, action: PayloadAction<IDps>) => {
+    addBlueDpsMeter: (state, action: PayloadAction<{value: IDps, id: string}>) => {
       if (
-        state.blueDpsMeter.find((d) => d.id == action.payload.id) === undefined
+        state.currentPlayerId === action.payload.id && state.blueDpsMeter.find((d) => d.id == action.payload.value.id) === undefined
       ) {
-        state.blueDpsMeter.push(JSON.parse(JSON.stringify(action.payload)))
+        state.blueDpsMeter.push(JSON.parse(JSON.stringify(action.payload.value)))
       }
     },
-    addRedHealDpsMeter: (state, action: PayloadAction<IDpsHeal>) => {
+    addRedHealDpsMeter: (state, action: PayloadAction<{value: IDpsHeal, id: string}>) => {
       if (
-        state.redHealDpsMeter.find((d) => d.id == action.payload.id) ===
+        state.currentPlayerId === action.payload.id && state.redHealDpsMeter.find((d) => d.id == action.payload.value.id) ===
         undefined
       ) {
-        state.redHealDpsMeter.push(JSON.parse(JSON.stringify(action.payload)))
+        state.redHealDpsMeter.push(JSON.parse(JSON.stringify(action.payload.value)))
       }
     },
-    addBlueHealDpsMeter: (state, action: PayloadAction<IDpsHeal>) => {
+    addBlueHealDpsMeter: (state, action: PayloadAction<{value: IDpsHeal, id: string}>) => {
       if (
-        state.blueHealDpsMeter.find((d) => d.id == action.payload.id) ===
+        state.currentPlayerId === action.payload.id && state.blueHealDpsMeter.find((d) => d.id == action.payload.value.id) ===
         undefined
       ) {
-        state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(action.payload)))
+        state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(action.payload.value)))
       }
     },
     changeRedDpsMeter: (
       state,
-      action: PayloadAction<{ id: string; change: DataChange<any> }>
+      action: PayloadAction<{ id: string; change: DataChange<any>, playerId: string}>
     ) => {
-      const index = state.redDpsMeter.findIndex(
-        (e) => action.payload.id == e.id
-      )
-      if (index >= 0) {
-        state.redDpsMeter[index][action.payload.change.field] =
-          action.payload.change.value
+      if(state.currentPlayerId === action.payload.playerId){
+        const index = state.redDpsMeter.findIndex(
+          (e) => action.payload.id == e.id
+        )
+        if (index >= 0) {
+          state.redDpsMeter[index][action.payload.change.field] =
+            action.payload.change.value
+        }
       }
     },
     changeBlueDpsMeter: (
       state,
-      action: PayloadAction<{ id: string; change: DataChange<any> }>
+      action: PayloadAction<{ id: string; change: DataChange<any>, playerId: string }>
     ) => {
-      const index = state.blueDpsMeter.findIndex(
-        (e) => action.payload.id == e.id
-      )
-      if (index >= 0) {
-        state.blueDpsMeter[
-          state.blueDpsMeter.findIndex((e) => action.payload.id == e.id)
-        ][action.payload.change.field] = action.payload.change.value
+      if(state.currentPlayerId === action.payload.playerId){
+        const index = state.blueDpsMeter.findIndex(
+          (e) => action.payload.id == e.id
+        )
+        if (index >= 0) {
+          state.blueDpsMeter[
+            state.blueDpsMeter.findIndex((e) => action.payload.id == e.id)
+          ][action.payload.change.field] = action.payload.change.value
+        }
       }
     },
     changeRedHealDpsMeter: (
       state,
-      action: PayloadAction<{ id: string; change: DataChange<any> }>
+      action: PayloadAction<{ id: string; change: DataChange<any>, playerId: string }>
     ) => {
-      const index = state.redHealDpsMeter.findIndex(
-        (e) => action.payload.id == e.id
-      )
-      if (index >= 0) {
-        state.redHealDpsMeter[
-          state.redHealDpsMeter.findIndex((e) => action.payload.id == e.id)
-        ][action.payload.change.field] = action.payload.change.value
+      if(state.currentPlayerId === action.payload.playerId){
+        const index = state.redHealDpsMeter.findIndex(
+          (e) => action.payload.id == e.id
+        )
+        if (index >= 0) {
+          state.redHealDpsMeter[
+            state.redHealDpsMeter.findIndex((e) => action.payload.id == e.id)
+          ][action.payload.change.field] = action.payload.change.value
+        }
       }
     },
     changeBlueHealDpsMeter: (
       state,
-      action: PayloadAction<{ id: string; change: DataChange<any> }>
+      action: PayloadAction<{ id: string; change: DataChange<any>, playerId: string }>
     ) => {
-      const index = state.blueHealDpsMeter.findIndex(
-        (e) => action.payload.id == e.id
-      )
-      if (index >= 0) {
-        state.blueHealDpsMeter[
-          state.blueHealDpsMeter.findIndex((e) => action.payload.id == e.id)
-        ][action.payload.change.field] = action.payload.change.value
+      if(state.currentPlayerId === action.payload.playerId){
+        const index = state.blueHealDpsMeter.findIndex(
+          (e) => action.payload.id == e.id
+        )
+        if (index >= 0) {
+          state.blueHealDpsMeter[
+            state.blueHealDpsMeter.findIndex((e) => action.payload.id == e.id)
+          ][action.payload.change.field] = action.payload.change.value
+        }
       }
     },
     removeRedDpsMeter: (state, action: PayloadAction<string>) => {
-      state.redDpsMeter = new Array<IDps>()
+      if(state.currentPlayerId === action.payload){
+        state.redDpsMeter = new Array<IDps>()
+      }
     },
     removeBlueDpsMeter: (state, action: PayloadAction<string>) => {
-      state.blueDpsMeter = new Array<IDps>()
+      if(state.currentPlayerId === action.payload){
+        state.blueDpsMeter = new Array<IDps>()
+      }
     },
     removeRedHealDpsMeter: (state, action: PayloadAction<string>) => {
-      state.redHealDpsMeter = new Array<IDpsHeal>()
+      if(state.currentPlayerId === action.payload){
+        state.redHealDpsMeter = new Array<IDpsHeal>()
+      }
     },
     removeBlueHealDpsMeter: (state, action: PayloadAction<string>) => {
-      state.blueHealDpsMeter = new Array<IDpsHeal>()
+      if(state.currentPlayerId === action.payload){
+        state.blueHealDpsMeter = new Array<IDpsHeal>()
+      }
     },
     setPokemonCollection: (state, action: PayloadAction<PokemonCollection>) => {
       state.pokemonCollection = action.payload

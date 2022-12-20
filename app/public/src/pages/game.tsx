@@ -45,7 +45,7 @@ import {
   displayEmote,
   setCurrentPlayerTitle,
   setPokemonProposition,
-  setAdditionalPokemons
+  setAdditionalPokemons,
 } from "../stores/GameStore"
 import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "./utils/utils"
@@ -65,7 +65,7 @@ import {
   IDragDropItemMessage,
   IDragDropMessage,
   Transfer,
-  ISimplePlayer
+  ISimplePlayer,
 } from "../../../types"
 import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
@@ -145,7 +145,7 @@ export default function Game() {
 
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: savePlayers,
-      idToken: token
+      idToken: token,
     })
     localStorage.setItem("lastRoomId", r.id)
     localStorage.setItem("lastSessionId", r.sessionId)
@@ -268,7 +268,7 @@ export default function Game() {
           const i = React.createElement(
             "img",
             {
-              src: getPortraitSrc(PkmIndex[pkm])
+              src: getPortraitSrc(PkmIndex[pkm]),
             },
             null
           )
@@ -315,35 +315,46 @@ export default function Game() {
                 dispatch(setStreak(player.streak))
               }
             }
-            if (player.id == currentPlayerId) {
-              if (change.field == "opponentName") {
-                dispatch(setOpponentName(change.value))
-              } else if (change.field == "opponentAvatar") {
-                dispatch(setOpponentAvatar(change.value))
-              } else if (change.field == "boardSize") {
-                dispatch(setBoardSize(change.value))
-              } else if (change.field == "life") {
-                dispatch(setLife(change.value))
-              } else if (change.field == "money") {
-                dispatch(setCurrentPlayerMoney(change.value))
-              } else if (change.field == "experienceManager") {
-                dispatch(setCurrentPlayerExperienceManager(change.value))
-              } else if (change.field == "avatar") {
-                dispatch(setCurrentPlayerAvatar(change.value))
-              } else if (change.field == "name") {
-                dispatch(setCurrentPlayerName(change.value))
-              } else if (change.field == "title") {
-                dispatch(setCurrentPlayerTitle(change.value))
-              }
+            if (change.field == "opponentName") {
+              dispatch(setOpponentName({ id: player.id, value: change.value }))
+            } else if (change.field == "opponentAvatar") {
+              dispatch(
+                setOpponentAvatar({ id: player.id, value: change.value })
+              )
+            } else if (change.field == "boardSize") {
+              dispatch(setBoardSize({ id: player.id, value: change.value }))
+            } else if (change.field == "life") {
+              dispatch(setLife({ id: player.id, value: change.value }))
+            } else if (change.field == "money") {
+              dispatch(
+                setCurrentPlayerMoney({ id: player.id, value: change.value })
+              )
+            } else if (change.field == "experienceManager") {
+              dispatch(
+                setCurrentPlayerExperienceManager({
+                  id: player.id,
+                  value: change.value,
+                })
+              )
+            } else if (change.field == "avatar") {
+              dispatch(
+                setCurrentPlayerAvatar({ id: player.id, value: change.value })
+              )
+            } else if (change.field == "name") {
+              dispatch(
+                setCurrentPlayerName({ id: player.id, value: change.value })
+              )
+            } else if (change.field == "title") {
+              dispatch(
+                setCurrentPlayerTitle({ id: player.id, value: change.value })
+              )
             }
             dispatch(changePlayer({ id: player.id, change: change }))
           })
         }
 
         player.synergies.onChange = (value, key) => {
-          if (player.id == currentPlayerId) {
-            dispatch(setSynergies(player.synergies))
-          }
+          dispatch(setSynergies({ id: player.id, value: player.synergies }))
         }
 
         player.itemsProposition.onAdd = (changes) => {
@@ -369,75 +380,75 @@ export default function Game() {
         }
 
         player.simulation.blueDpsMeter.onAdd = (dps, key) => {
-          if (player.id == currentPlayerId) {
-            dispatch(addBlueDpsMeter(dps))
-          }
+          dispatch(addBlueDpsMeter({ value: dps, id: player.id }))
           dps.onChange = function (changes) {
-            if (player.id == currentPlayerId) {
-              changes.forEach((change) => {
-                dispatch(changeBlueDpsMeter({ id: dps.id, change: change }))
-              })
-            }
+            changes.forEach((change) => {
+              dispatch(
+                changeBlueDpsMeter({
+                  id: dps.id,
+                  change: change,
+                  playerId: player.id,
+                })
+              )
+            })
           }
         }
         player.simulation.blueDpsMeter.onRemove = (dps, key) => {
-          if (player.id == currentPlayerId) {
-            dispatch(removeBlueDpsMeter(key))
-          }
+          dispatch(removeBlueDpsMeter(key))
         }
 
         player.simulation.redDpsMeter.onAdd = (dps, key) => {
-          if (player.id == currentPlayerId) {
-            dispatch(addRedDpsMeter(dps))
-          }
+          dispatch(addRedDpsMeter({ value: dps, id: player.id }))
           dps.onChange = function (changes) {
-            if (player.id == currentPlayerId) {
-              changes.forEach((change) => {
-                dispatch(changeRedDpsMeter({ id: dps.id, change: change }))
-              })
-            }
+            changes.forEach((change) => {
+              dispatch(
+                changeRedDpsMeter({
+                  id: dps.id,
+                  change: change,
+                  playerId: player.id,
+                })
+              )
+            })
           }
         }
         player.simulation.redDpsMeter.onRemove = (dps, key) => {
-          if (player.id == currentPlayerId) {
-            dispatch(removeRedDpsMeter(key))
-          }
+          dispatch(removeRedDpsMeter(player.id))
         }
 
         player.simulation.blueHealDpsMeter.onAdd = (dps, key) => {
-          if (player.id == currentPlayerId) {
-            dispatch(addBlueHealDpsMeter(dps))
-          }
+          dispatch(addBlueHealDpsMeter({ value: dps, id: player.id }))
           dps.onChange = function (changes) {
-            if (player.id == currentPlayerId) {
-              changes.forEach((change) => {
-                dispatch(changeBlueHealDpsMeter({ id: dps.id, change: change }))
-              })
-            }
+            changes.forEach((change) => {
+              dispatch(
+                changeBlueHealDpsMeter({
+                  id: dps.id,
+                  change: change,
+                  playerId: player.id,
+                })
+              )
+            })
           }
         }
         player.simulation.blueHealDpsMeter.onRemove = (dps, key) => {
-          if (player.id == currentPlayerId) {
-            dispatch(removeBlueHealDpsMeter(key))
-          }
+          dispatch(removeBlueHealDpsMeter(player.id))
         }
 
         player.simulation.redHealDpsMeter.onAdd = (dps, key) => {
-          if (player.id == currentPlayerId) {
-            dispatch(addRedHealDpsMeter(dps))
-          }
+          dispatch(addRedHealDpsMeter({ value: dps, id: player.id }))
           dps.onChange = function (changes) {
-            if (player.id == currentPlayerId) {
-              changes.forEach((change) => {
-                dispatch(changeRedHealDpsMeter({ id: dps.id, change: change }))
-              })
-            }
+            changes.forEach((change) => {
+              dispatch(
+                changeRedHealDpsMeter({
+                  id: dps.id,
+                  change: change,
+                  playerId: player.id,
+                })
+              )
+            })
           }
         }
         player.simulation.redHealDpsMeter.onRemove = (dps, key) => {
-          if (player.id == currentPlayerId) {
-            dispatch(removeRedHealDpsMeter(key))
-          }
+          dispatch(removeRedHealDpsMeter(player.id))
         }
       }
     }
