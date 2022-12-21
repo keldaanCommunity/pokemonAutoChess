@@ -394,7 +394,7 @@ export default function Game() {
           }
         }
         player.simulation.blueDpsMeter.onRemove = (dps, key) => {
-          dispatch(removeBlueDpsMeter(key))
+          dispatch(removeBlueDpsMeter(player.id))
         }
 
         player.simulation.redDpsMeter.onAdd = (dps, key) => {
