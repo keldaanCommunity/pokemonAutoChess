@@ -114,7 +114,7 @@ Mr_L	<@!177522243985866754>
 Murpi	<@!593113130213572610>	Murpi#5964
 "motherhenna(Helen)"	MOTHERHENNA	<@!543717476421074945>
 Fearless-Quit	<@!801938240562397194>	
-PhillipsYoung	<@!772726854188400641>	https://twitter.com/PhilliYoung196?t=M0y-t-mDOR2ONRx0L9EmNQ&s=09
+PhillipsYoung	<@!772726854188400641>	https://twitter.com/PhilliYoung196
 	<@!182636701460594688>	
 	<@!173876028593274880>	
 Pokenoice	<@!724070439051329616>	https://www.deviantart.com/adam1258
@@ -160,7 +160,7 @@ AlexGroeger	<@!141718238336778241>
 VGStar	<@!229363481852379136>	VGStar#7739
 3Monika4	<@!270755102178934785>	Monika#7381
 Pepper	<@!304391035209908244>	https://twitter.com/thesaltypepper8
-	<@!861005464682889266>	
+ScytherGust	<@!861005464682889266>	
 Keldaan	<@!153547941401853952>	https://github.com/keldaan-ag
 	<@!970782000363474944>	
 Axcel	<@!662304890143375391>	

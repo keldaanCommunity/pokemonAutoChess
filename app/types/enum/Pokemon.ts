@@ -434,7 +434,10 @@ export enum Pkm {
   GOOMY = "goomy",
   SLIGOO = "sligoo",
   GOODRA = "goodra",
-  MEW = "mew"
+  MEW = "mew",
+  BOUNSWEET = "bounsweet",
+  STEENEE = "steenee",
+  TSAREENA = "tsnareena"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -873,7 +876,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GOOMY]: "0704",
   [Pkm.SLIGOO]: "0705",
   [Pkm.GOODRA]: "0706",
-  [Pkm.MEW]: "0151"
+  [Pkm.MEW]: "0151",
+  [Pkm.BOUNSWEET]: "0761",
+  [Pkm.STEENEE]: "0762",
+  [Pkm.TSAREENA]: "0763"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1312,5 +1318,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GOOMY]: Pkm.GOOMY,
   [Pkm.SLIGOO]: Pkm.GOOMY,
   [Pkm.GOODRA]: Pkm.GOOMY,
-  [Pkm.MEW]: Pkm.MEW
+  [Pkm.MEW]: Pkm.MEW,
+  [Pkm.BOUNSWEET]: Pkm.BOUNSWEET,
+  [Pkm.STEENEE]: Pkm.BOUNSWEET,
+  [Pkm.TSAREENA]: Pkm.BOUNSWEET
 }

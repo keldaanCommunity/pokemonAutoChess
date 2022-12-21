@@ -491,6 +491,81 @@ export class MegaScizor extends Pokemon {
   }
 }
 
+export class Bounsweet extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.BOUNSWEET,
+      [Synergy.GRASS, Synergy.FIGHTING],
+      Rarity.EPIC,
+      PkmIndex[Pkm.BOUNSWEET],
+      Pkm.STEENEE,
+      110,
+      5,
+      4,
+      4,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      90,
+      Ability.HIGH_JUMP_KICK,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Steenee extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.STEENEE,
+      [Synergy.GRASS, Synergy.FIGHTING],
+      Rarity.EPIC,
+      PkmIndex[Pkm.STEENEE],
+      Pkm.TSAREENA,
+      150,
+      8,
+      5,
+      5,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      90,
+      Ability.HIGH_JUMP_KICK,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Tsareena extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.TSAREENA,
+      [Synergy.GRASS, Synergy.FIGHTING],
+      Rarity.EPIC,
+      PkmIndex[Pkm.TSAREENA],
+      Pkm.DEFAULT,
+      240,
+      22,
+      6,
+      6,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      AttackType.PHYSICAL,
+      3,
+      90,
+      Ability.HIGH_JUMP_KICK,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Buneary extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
