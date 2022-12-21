@@ -37,6 +37,7 @@ import {
   Blastoise,
   Blaziken,
   Blissey,
+  Bounsweet,
   Braixen,
   Breloom,
   Bronzong,
@@ -372,6 +373,7 @@ import {
   Staravia,
   Starly,
   Steelix,
+  Steenee,
   Suicune,
   Swablu,
   Swadloon,
@@ -398,6 +400,7 @@ import {
   Trapinch,
   Treecko,
   Trumbeak,
+  Tsareena,
   Turtwig,
   Tympole,
   Typhlosion,
@@ -1516,6 +1519,12 @@ export default class PokemonFactory {
         return new Goodra(s, e)
       case Pkm.MEW:
         return new Mew(s, e)
+      case Pkm.BOUNSWEET:
+        return new Bounsweet(s, e)
+      case Pkm.STEENEE:
+        return new Steenee(s, e)
+      case Pkm.TSAREENA:
+        return new Tsareena(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

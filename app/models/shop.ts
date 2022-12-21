@@ -88,6 +88,7 @@ export default class Shop {
       Pkm.CUBONE,
       Pkm.HOUNDOUR,
       Pkm.GOOMY,
+      Pkm.BOUNSWEET
     ]
 
     this.LEGENDARY = [
