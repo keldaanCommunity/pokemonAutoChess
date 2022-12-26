@@ -19,6 +19,7 @@ export default function WikiPokemon(props: { rarity: Rarity }) {
     <Tabs>
       <TabList>
         {precomputed[props.rarity].map((pkm) => {
+          console.log(pkm, PkmIndex[pkm])
           return (
             <Tab key={"title-" + pkm}>
               <img src={getPortraitSrc(PkmIndex[pkm])}></img>
