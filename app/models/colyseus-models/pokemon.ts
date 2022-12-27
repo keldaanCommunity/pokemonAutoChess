@@ -7238,6 +7238,32 @@ export class Glaceon extends Pokemon {
     )
   }
 }
+
+export class Volcanion extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.VOLCANION,
+      [Synergy.FIRE, Synergy.WATER],
+      Rarity.MYTHICAL,
+      PkmIndex[Pkm.VOLCANION],
+      Pkm.DEFAULT,
+      300,
+      30,
+      2,
+      2,
+      2,
+      AttackSprite.FIRE_RANGE,
+      AttackType.SPECIAL,
+      3,
+      90,
+      Ability.STEAM_ERUPTION,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Darkrai extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

@@ -423,6 +423,7 @@ import {
   Vigoroth,
   Vileplume,
   Virizion,
+  Volcanion,
   Volcarona,
   Voltorb,
   Vulpix,
@@ -437,7 +438,7 @@ import {
   Zapdos,
   Zekrom,
   Zubat,
-  Zweilous
+  Zweilous,
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1525,6 +1526,8 @@ export default class PokemonFactory {
         return new Steenee(s, e)
       case Pkm.TSAREENA:
         return new Tsareena(s, e)
+      case Pkm.VOLCANION:
+        return new Volcanion(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

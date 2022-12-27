@@ -2572,6 +2572,45 @@ export class IcicleCrashStrategy extends AttackStrategy {
   }
 }
 
+export class SteamEruptionStrategy extends AttackStrategy {
+  constructor() {
+    super()
+  }
+
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 0
+
+    switch (pokemon.stars) {
+      case 1:
+        damage = 20
+        break
+      case 2:
+        damage = 40
+        break
+      case 3:
+        damage = 80
+        break
+      default:
+        break
+    }
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.status.triggerBurn(3000, cell.value, pokemon, board)
+      }
+    })
+  }
+}
+
 export class RootStrategy extends AttackStrategy {
   constructor() {
     super()
@@ -2886,7 +2925,7 @@ export class TeleportStrategy extends AttackStrategy {
       [0, 0],
       [0, 5],
       [7, 5],
-      [7, 0]
+      [7, 0],
     ]
     this.shuffleArray(potentialCells)
 
@@ -3210,7 +3249,8 @@ export class MetronomeStrategy extends AttackStrategy {
       BlueFlareStrategy,
       SoftBoiledStrategy,
       BeatUpStrategy,
-      EarthquakeStrategy
+      EarthquakeStrategy,
+      SteamEruptionStrategy,
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)

@@ -438,6 +438,7 @@ export enum Pkm {
   BOUNSWEET = "bounsweet",
   STEENEE = "steenee",
   TSAREENA = "tsareena",
+  VOLCANION = "volcanion",
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -880,6 +881,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BOUNSWEET]: "0761",
   [Pkm.STEENEE]: "0762",
   [Pkm.TSAREENA]: "0763",
+  [Pkm.VOLCANION]: "0721",
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1322,4 +1324,5 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.BOUNSWEET]: Pkm.BOUNSWEET,
   [Pkm.STEENEE]: Pkm.BOUNSWEET,
   [Pkm.TSAREENA]: Pkm.BOUNSWEET,
+  [Pkm.VOLCANION]: Pkm.VOLCANION,
 }

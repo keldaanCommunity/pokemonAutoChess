@@ -6,14 +6,14 @@ import ItemsContainer from "./items-container"
 import { Effect } from "../../../../types/enum/Effect"
 import {
   transformAttackCoordinate,
-  getAttackScale
+  getAttackScale,
 } from "../../pages/utils/utils"
 import {
   IPokemon,
   IPokemonEntity,
   instanceofPokemonEntity,
   Emotion,
-  AttackSprite
+  AttackSprite,
 } from "../../../../types"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import MoveTo from "phaser3-rex-plugins/plugins/moveto"
@@ -23,7 +23,7 @@ import {
   Orientation,
   PokemonActionState,
   SpriteType,
-  PokemonTint
+  PokemonTint,
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import ManaBar from "./mana-bar"
@@ -128,7 +128,7 @@ export default class Pokemon extends Button {
     const m = <MoveToPlugin>scene.plugins.get("rexMoveTo")
     this.moveManager = m.add(this, {
       speed: 300,
-      rotateToTarget: false
+      rotateToTarget: false,
     })
     const p = <IPokemonEntity>pokemon
     if (p.orientation) {
@@ -535,11 +535,11 @@ export default class Pokemon extends Button {
       delay: 0,
       alpha: {
         getStart: () => 1,
-        getEnd: () => 0
+        getEnd: () => 0,
       },
       onComplete: () => {
         this.destroy(true)
-      }
+      },
     })
   }
 
@@ -903,7 +903,7 @@ export default class Pokemon extends Button {
               duration: 500,
               onComplete: () => {
                 specialProjectile.destroy()
-              }
+              },
             })
             break
 
@@ -934,7 +934,7 @@ export default class Pokemon extends Button {
               duration: 1000,
               onComplete: () => {
                 specialProjectile.destroy()
-              }
+              },
             })
             break
 
@@ -965,7 +965,7 @@ export default class Pokemon extends Button {
               duration: 1000,
               onComplete: () => {
                 specialProjectile.destroy()
-              }
+              },
             })
             break
 
@@ -988,7 +988,7 @@ export default class Pokemon extends Button {
               duration: 2000,
               onComplete: () => {
                 specialProjectile.destroy()
-              }
+              },
             })
             break
 
@@ -1876,6 +1876,25 @@ export default class Pokemon extends Button {
             )
             break
 
+          case Ability.STEAM_ERUPTION:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.STEAM_ERUPTION,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.STEAM_ERUPTION)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.HYPER_VOICE:
             coordinatesTarget = transformAttackCoordinate(8, this.targetY)
             coordinates = transformAttackCoordinate(0, this.targetY)
@@ -1895,7 +1914,7 @@ export default class Pokemon extends Button {
               duration: 1000,
               onComplete: () => {
                 specialProjectile.destroy()
-              }
+              },
             })
             break
 
@@ -2100,7 +2119,7 @@ export default class Pokemon extends Button {
               duration: 500,
               onComplete: () => {
                 specialProjectile.destroy()
-              }
+              },
             })
             break
 
@@ -2125,7 +2144,7 @@ export default class Pokemon extends Button {
               duration: 1000,
               onComplete: () => {
                 specialProjectile.destroy()
-              }
+              },
             })
             break
 
@@ -2279,7 +2298,7 @@ export default class Pokemon extends Button {
             if (this.projectile) {
               this.projectile.destroy()
             }
-          }
+          },
         })
       } else {
         if (this.projectile) {
