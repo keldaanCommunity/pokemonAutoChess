@@ -101,7 +101,8 @@ import {
   ProteanStrategy,
   ChatterStrategy,
   LiquidationStrategy,
-  SynchroStrategy
+  SynchroStrategy,
+  SteamEruptionStrategy,
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -207,7 +208,8 @@ export enum Ability {
   PROTEAN = "PROTEAN",
   CHATTER = "CHATTER",
   LIQUIDATION = "LIQUIDATION",
-  SYNCHRO = "SYNCHRO"
+  SYNCHRO = "SYNCHRO",
+  STEAM_ERUPTION = "STEAM_ERUPTION",
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -313,5 +315,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.PROTEAN]: new ProteanStrategy(),
   [Ability.CHATTER]: new ChatterStrategy(),
   [Ability.LIQUIDATION]: new LiquidationStrategy(),
-  [Ability.SYNCHRO]: new SynchroStrategy()
+  [Ability.SYNCHRO]: new SynchroStrategy(),
+  [Ability.STEAM_ERUPTION]: new SteamEruptionStrategy(),
 }

@@ -1,0 +1,251 @@
+{
+	"textures": [
+		{
+			"image": "STEAM_ERUPTION.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 97,
+				"h": 432
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "010",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 12,
+						"w": 93,
+						"h": 25
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 93,
+						"h": 25
+					}
+				},
+				{
+					"filename": "007",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 8,
+						"w": 95,
+						"h": 30
+					},
+					"frame": {
+						"x": 1,
+						"y": 28,
+						"w": 95,
+						"h": 30
+					}
+				},
+				{
+					"filename": "009",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 12,
+						"w": 95,
+						"h": 30
+					},
+					"frame": {
+						"x": 1,
+						"y": 60,
+						"w": 95,
+						"h": 30
+					}
+				},
+				{
+					"filename": "000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 32,
+						"y": 33,
+						"w": 32,
+						"h": 31
+					},
+					"frame": {
+						"x": 1,
+						"y": 92,
+						"w": 32,
+						"h": 31
+					}
+				},
+				{
+					"filename": "001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 23,
+						"y": 7,
+						"w": 50,
+						"h": 49
+					},
+					"frame": {
+						"x": 35,
+						"y": 92,
+						"w": 50,
+						"h": 49
+					}
+				},
+				{
+					"filename": "008",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 8,
+						"w": 95,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 143,
+						"w": 95,
+						"h": 32
+					}
+				},
+				{
+					"filename": "006",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 4,
+						"w": 93,
+						"h": 39
+					},
+					"frame": {
+						"x": 1,
+						"y": 177,
+						"w": 93,
+						"h": 39
+					}
+				},
+				{
+					"filename": "005",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 92,
+						"h": 49
+					},
+					"frame": {
+						"x": 1,
+						"y": 218,
+						"w": 92,
+						"h": 49
+					}
+				},
+				{
+					"filename": "004",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 89,
+						"h": 50
+					},
+					"frame": {
+						"x": 1,
+						"y": 269,
+						"w": 89,
+						"h": 50
+					}
+				},
+				{
+					"filename": "002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 19,
+						"y": 3,
+						"w": 60,
+						"h": 53
+					},
+					"frame": {
+						"x": 1,
+						"y": 321,
+						"w": 60,
+						"h": 53
+					}
+				},
+				{
+					"filename": "003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 0,
+						"w": 70,
+						"h": 55
+					},
+					"frame": {
+						"x": 1,
+						"y": 376,
+						"w": 70,
+						"h": 55
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:36341b936b7393900d0c87e1dce69f18:e3d4039478571fdda9ebca04edd2f418:8e69462b9f788128a7b073bf2186951b$"
+	}
+}

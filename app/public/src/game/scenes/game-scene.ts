@@ -17,7 +17,7 @@ import {
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
-  Transfer
+  Transfer,
 } from "../../../../types"
 import { DesignTiled } from "../../../../core/design"
 
@@ -57,7 +57,7 @@ export default class GameScene extends Scene {
   constructor() {
     super({
       key: "gameScene",
-      active: false
+      active: false,
     })
   }
 
@@ -80,8 +80,8 @@ export default class GameScene extends Scene {
       y: height / 2 - 100,
       text: "Loading...",
       style: {
-        font: "30px monospace"
-      }
+        font: "30px monospace",
+      },
     })
     loadingText.setOrigin(0.5, 0.5)
 
@@ -90,8 +90,8 @@ export default class GameScene extends Scene {
       y: height / 2 - 50,
       text: "0%",
       style: {
-        font: "28px monospace"
-      }
+        font: "28px monospace",
+      },
     })
     percentText.setOrigin(0.5, 0.5)
 
@@ -100,8 +100,8 @@ export default class GameScene extends Scene {
       y: height / 2 + 70,
       text: "",
       style: {
-        font: "28px monospace"
-      }
+        font: "28px monospace",
+      },
     })
 
     assetText.setOrigin(0.5, 0.5)
@@ -135,7 +135,7 @@ export default class GameScene extends Scene {
 
     if (this.tilemap) {
       this.load.audio("sound", [
-        `https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChessMusic/main/music/${this.tilemap.tilesets[0].name}.mp3`
+        `https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChessMusic/main/music/${this.tilemap.tilesets[0].name}.mp3`,
       ])
       this.load.image(
         "tiles",
@@ -220,6 +220,11 @@ export default class GameScene extends Scene {
     this.load.multiatlas(
       "VOLT_SWITCH",
       "/assets/attacks/VOLT_SWITCH.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
+      "STEAM_ERUPTION",
+      "/assets/attacks/STEAM_ERUPTION.json",
       "/assets/attacks"
     )
     this.load.multiatlas(
@@ -379,7 +384,7 @@ export default class GameScene extends Scene {
         fontSize: "35px",
         fontFamily: "brandonGrotesque",
         color: "black",
-        align: "center"
+        align: "center",
       }
 
       this.bigTextStyle = {
@@ -388,7 +393,7 @@ export default class GameScene extends Scene {
         color: "white",
         align: "center",
         stroke: "#000",
-        strokeThickness: 3
+        strokeThickness: 3,
       }
       this.input.mouse.disableContextMenu()
 
@@ -464,8 +469,8 @@ export default class GameScene extends Scene {
       d.dispatchEvent(
         new CustomEvent(Transfer.SELL_DROP, {
           detail: {
-            pokemonId: this.targetPokemon.id
-          }
+            pokemonId: this.targetPokemon.id,
+          },
         })
       )
     }
@@ -611,8 +616,8 @@ export default class GameScene extends Scene {
                 detail: {
                   x: dropZone.getData("x"),
                   y: dropZone.getData("y"),
-                  id: gameObject.id
-                }
+                  id: gameObject.id,
+                },
               })
             )
             this.lastDragDropPokemon = gameObject
@@ -622,8 +627,8 @@ export default class GameScene extends Scene {
             document.getElementById("game")?.dispatchEvent(
               new CustomEvent(Transfer.SELL_DROP, {
                 detail: {
-                  pokemonId: gameObject.id
-                }
+                  pokemonId: gameObject.id,
+                },
               })
             )
           }
@@ -641,8 +646,8 @@ export default class GameScene extends Scene {
                 {
                   detail: {
                     itemA: dropZone.name,
-                    itemB: gameObject.name
-                  }
+                    itemB: gameObject.name,
+                  },
                 }
               )
             )
@@ -660,8 +665,8 @@ export default class GameScene extends Scene {
                 detail: {
                   x: dropZone.getData("x"),
                   y: dropZone.getData("y"),
-                  id: gameObject.name
-                }
+                  id: gameObject.name,
+                },
               })
             )
           }

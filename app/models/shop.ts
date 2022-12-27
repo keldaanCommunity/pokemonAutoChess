@@ -88,7 +88,7 @@ export default class Shop {
       Pkm.CUBONE,
       Pkm.HOUNDOUR,
       Pkm.GOOMY,
-      Pkm.BOUNSWEET
+      Pkm.BOUNSWEET,
     ]
 
     this.LEGENDARY = [
@@ -142,7 +142,7 @@ export default class Shop {
       Pkm.TORNADUS,
       Pkm.RELICANTH,
       Pkm.MEW,
-      Pkm.CHATOT
+      Pkm.CHATOT,
     ]
     this.MYTHICAL_2 = [
       Pkm.RESHIRAM,
@@ -174,6 +174,7 @@ export default class Shop {
       Pkm.RAYQUAZA,
       Pkm.KYOGRE,
       Pkm.GROUDON,
+      Pkm.VOLCANION,
     ]
   }
 

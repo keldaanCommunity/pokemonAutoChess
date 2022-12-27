@@ -4,7 +4,7 @@ import {
   Orientation,
   PokemonActionState,
   SpriteType,
-  PokemonTint
+  PokemonTint,
 } from "../../../types/enum/Game"
 import { Ability } from "../../../types/enum/Ability"
 import Pokemon from "./components/pokemon"
@@ -34,7 +34,7 @@ export default class AnimationManager {
                     start: 0,
                     end: durationArray.length - 1,
                     zeroPad: 4,
-                    prefix: `${shiny}/${action}/${mode}/${direction}/`
+                    prefix: `${shiny}/${action}/${mode}/${direction}/`,
                   })
                   for (let i = 0; i < durationArray.length; i++) {
                     if (frameArray[i]) {
@@ -48,13 +48,13 @@ export default class AnimationManager {
                     this.game.anims.create({
                       key: `${index}/${shiny}/${action}/${mode}/${direction}`,
                       frames: frameArray,
-                      repeat: 0
+                      repeat: 0,
                     })
                   } else {
                     this.game.anims.create({
                       key: `${index}/${shiny}/${action}/${mode}/${direction}`,
                       frames: frameArray,
-                      repeat: -1
+                      repeat: -1,
                     })
                   }
                 } else {
@@ -81,10 +81,10 @@ export default class AnimationManager {
         start: 0,
         end: 14,
         zeroPad: 3,
-        prefix: "status/poison/"
+        prefix: "status/poison/",
       }),
       frameRate: 15,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -93,10 +93,10 @@ export default class AnimationManager {
         start: 0,
         end: 9,
         zeroPad: 3,
-        prefix: "status/sleep/"
+        prefix: "status/sleep/",
       }),
       frameRate: 15,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -105,10 +105,10 @@ export default class AnimationManager {
         start: 0,
         end: 8,
         zeroPad: 3,
-        prefix: "status/silence/"
+        prefix: "status/silence/",
       }),
       frameRate: 15,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -117,10 +117,10 @@ export default class AnimationManager {
         start: 0,
         end: 9,
         zeroPad: 3,
-        prefix: "status/protect/"
+        prefix: "status/protect/",
       }),
       frameRate: 15,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -129,10 +129,10 @@ export default class AnimationManager {
         start: 0,
         end: 5,
         zeroPad: 3,
-        prefix: "status/freeze/"
+        prefix: "status/freeze/",
       }),
       frameRate: 15,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -141,10 +141,10 @@ export default class AnimationManager {
         start: 0,
         end: 3,
         zeroPad: 3,
-        prefix: "status/confusion/"
+        prefix: "status/confusion/",
       }),
       frameRate: 4,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -153,10 +153,10 @@ export default class AnimationManager {
         start: 0,
         end: 7,
         zeroPad: 3,
-        prefix: "status/burn/"
+        prefix: "status/burn/",
       }),
       frameRate: 15,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -164,10 +164,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("wound", {
         start: 0,
         end: 3,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       frameRate: 3,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -175,10 +175,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("resurection", {
         start: 0,
         end: 3,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       frameRate: 3,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -186,10 +186,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("smoke", {
         start: 0,
         end: 9,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       frameRate: 3,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -197,10 +197,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("armorReduction", {
         start: 0,
         end: 1,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       frameRate: 3,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -208,10 +208,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("VOID_BOOST", {
         start: 0,
         end: 7,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       frameRate: 9,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -219,10 +219,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("ELECTRIC_SURGE", {
         start: 0,
         end: 6,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       frameRate: 9,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -230,11 +230,11 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("PSYCHIC_SURGE", {
         start: 0,
         end: 3,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       frameRate: 6,
       repeat: -1,
-      yoyo: true
+      yoyo: true,
     })
 
     this.game.anims.create({
@@ -242,11 +242,11 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("rune_protect", {
         start: 0,
         end: 9,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       frameRate: 6,
       repeat: -1,
-      yoyo: true
+      yoyo: true,
     })
   }
 
@@ -256,10 +256,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("SOFT_BOILED", {
         start: 0,
         end: 32,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -268,10 +268,10 @@ export default class AnimationManager {
         start: 0,
         end: 12,
         zeroPad: 3,
-        prefix: `${Ability.DYNAMIC_PUNCH}/`
+        prefix: `${Ability.DYNAMIC_PUNCH}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -280,10 +280,10 @@ export default class AnimationManager {
         start: 0,
         end: 48,
         zeroPad: 3,
-        prefix: `${Ability.CORRUPTED_NATURE}/`
+        prefix: `${Ability.CORRUPTED_NATURE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -292,10 +292,10 @@ export default class AnimationManager {
         start: 0,
         end: 5,
         zeroPad: 3,
-        prefix: `${Ability.CRABHAMMER}/`
+        prefix: `${Ability.CRABHAMMER}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -304,10 +304,10 @@ export default class AnimationManager {
         start: 0,
         end: 16,
         zeroPad: 3,
-        prefix: `${Ability.DIAMOND_STORM}/`
+        prefix: `${Ability.DIAMOND_STORM}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -316,10 +316,10 @@ export default class AnimationManager {
         start: 0,
         end: 14,
         zeroPad: 3,
-        prefix: `${Ability.DRACO_ENERGY}/`
+        prefix: `${Ability.DRACO_ENERGY}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -328,10 +328,10 @@ export default class AnimationManager {
         start: 0,
         end: 38,
         zeroPad: 3,
-        prefix: `${Ability.DYNAMAX_CANNON}/`
+        prefix: `${Ability.DYNAMAX_CANNON}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -340,10 +340,10 @@ export default class AnimationManager {
         start: 0,
         end: 12,
         zeroPad: 3,
-        prefix: `${Ability.ELECTRO_BOOST}/`
+        prefix: `${Ability.ELECTRO_BOOST}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -352,10 +352,10 @@ export default class AnimationManager {
         start: 0,
         end: 10,
         zeroPad: 3,
-        prefix: `${Ability.ELECTRO_WEB}/`
+        prefix: `${Ability.ELECTRO_WEB}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -364,10 +364,10 @@ export default class AnimationManager {
         start: 0,
         end: 11,
         zeroPad: 3,
-        prefix: `${Ability.FIRE_TRICK}/`
+        prefix: `${Ability.FIRE_TRICK}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -376,10 +376,10 @@ export default class AnimationManager {
         start: 0,
         end: 40,
         zeroPad: 3,
-        prefix: `${Ability.FLAME_CHARGE}/`
+        prefix: `${Ability.FLAME_CHARGE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -388,10 +388,10 @@ export default class AnimationManager {
         start: 0,
         end: 10,
         zeroPad: 3,
-        prefix: `${Ability.LEECH_SEED}/`
+        prefix: `${Ability.LEECH_SEED}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -400,10 +400,10 @@ export default class AnimationManager {
         start: 0,
         end: 26,
         zeroPad: 3,
-        prefix: `${Ability.LOCK_ON}/`
+        prefix: `${Ability.LOCK_ON}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -412,10 +412,10 @@ export default class AnimationManager {
         start: 0,
         end: 26,
         zeroPad: 3,
-        prefix: `${Ability.PSYCH_UP}/`
+        prefix: `${Ability.PSYCH_UP}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -424,10 +424,10 @@ export default class AnimationManager {
         start: 0,
         end: 7,
         zeroPad: 3,
-        prefix: `${Ability.RAZOR_WIND}/`
+        prefix: `${Ability.RAZOR_WIND}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -436,10 +436,10 @@ export default class AnimationManager {
         start: 0,
         end: 59,
         zeroPad: 3,
-        prefix: `${Ability.TWISTING_NEITHER}/`
+        prefix: `${Ability.TWISTING_NEITHER}/`,
       }),
       duration: 2000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -448,10 +448,10 @@ export default class AnimationManager {
         start: 0,
         end: 16,
         zeroPad: 3,
-        prefix: `${Ability.FIRE_BLAST}/`
+        prefix: `${Ability.FIRE_BLAST}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -460,10 +460,10 @@ export default class AnimationManager {
         start: 0,
         end: 5,
         zeroPad: 3,
-        prefix: `${Ability.WHEEL_OF_FIRE}/`
+        prefix: `${Ability.WHEEL_OF_FIRE}/`,
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -472,10 +472,10 @@ export default class AnimationManager {
         start: 0,
         end: 5,
         zeroPad: 3,
-        prefix: `${Ability.SEISMIC_TOSS}/`
+        prefix: `${Ability.SEISMIC_TOSS}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -484,10 +484,10 @@ export default class AnimationManager {
         start: 0,
         end: 5,
         zeroPad: 3,
-        prefix: `${Ability.GUILLOTINE}/`
+        prefix: `${Ability.GUILLOTINE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -496,10 +496,10 @@ export default class AnimationManager {
         start: 0,
         end: 79,
         zeroPad: 3,
-        prefix: `${Ability.ROCK_SLIDE}/`
+        prefix: `${Ability.ROCK_SLIDE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -508,10 +508,10 @@ export default class AnimationManager {
         start: 0,
         end: 49,
         zeroPad: 3,
-        prefix: `${Ability.HEAT_WAVE}/`
+        prefix: `${Ability.HEAT_WAVE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -520,10 +520,10 @@ export default class AnimationManager {
         start: 0,
         end: 12,
         zeroPad: 3,
-        prefix: `${Ability.THUNDER}/`
+        prefix: `${Ability.THUNDER}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -532,10 +532,10 @@ export default class AnimationManager {
         start: 0,
         end: 19,
         zeroPad: 3,
-        prefix: `${Ability.HYDRO_PUMP}/`
+        prefix: `${Ability.HYDRO_PUMP}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -544,10 +544,10 @@ export default class AnimationManager {
         start: 0,
         end: 34,
         zeroPad: 3,
-        prefix: `${Ability.DRACO_METEOR}/`
+        prefix: `${Ability.DRACO_METEOR}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -556,10 +556,10 @@ export default class AnimationManager {
         start: 0,
         end: 15,
         zeroPad: 3,
-        prefix: `${Ability.BLAZE_KICK}/`
+        prefix: `${Ability.BLAZE_KICK}/`,
       }),
       duration: 1000,
-      repeat: 2
+      repeat: 2,
     })
 
     this.game.anims.create({
@@ -568,10 +568,10 @@ export default class AnimationManager {
         start: 0,
         end: 14,
         zeroPad: 3,
-        prefix: `${Ability.WISH}/`
+        prefix: `${Ability.WISH}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -580,10 +580,10 @@ export default class AnimationManager {
         start: 0,
         end: 45,
         zeroPad: 3,
-        prefix: `${Ability.CALM_MIND}/`
+        prefix: `${Ability.CALM_MIND}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -592,10 +592,10 @@ export default class AnimationManager {
         start: 0,
         end: 17,
         zeroPad: 3,
-        prefix: `${Ability.IRON_DEFENSE}/`
+        prefix: `${Ability.IRON_DEFENSE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -604,10 +604,10 @@ export default class AnimationManager {
         start: 0,
         end: 36,
         zeroPad: 3,
-        prefix: `${Ability.METRONOME}/`
+        prefix: `${Ability.METRONOME}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -616,10 +616,10 @@ export default class AnimationManager {
         start: 0,
         end: 45,
         zeroPad: 3,
-        prefix: `${Ability.SOAK}/`
+        prefix: `${Ability.SOAK}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -628,10 +628,10 @@ export default class AnimationManager {
         start: 0,
         end: 16,
         zeroPad: 3,
-        prefix: `${Ability.BLAST_BURN}/`
+        prefix: `${Ability.BLAST_BURN}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -640,10 +640,10 @@ export default class AnimationManager {
         start: 0,
         end: 7,
         zeroPad: 3,
-        prefix: `${Ability.CHARGE}/`
+        prefix: `${Ability.CHARGE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -652,10 +652,10 @@ export default class AnimationManager {
         start: 0,
         end: 3,
         zeroPad: 3,
-        prefix: `${Ability.DISCHARGE}/`
+        prefix: `${Ability.DISCHARGE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -664,10 +664,10 @@ export default class AnimationManager {
         start: 0,
         end: 11,
         zeroPad: 3,
-        prefix: `${Ability.BITE}/`
+        prefix: `${Ability.BITE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -676,10 +676,10 @@ export default class AnimationManager {
         start: 0,
         end: 25,
         zeroPad: 3,
-        prefix: `${Ability.DRAGON_TAIL}/`
+        prefix: `${Ability.DRAGON_TAIL}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -688,10 +688,10 @@ export default class AnimationManager {
         start: 0,
         end: 9,
         zeroPad: 3,
-        prefix: `${Ability.DRAGON_BREATH}/`
+        prefix: `${Ability.DRAGON_BREATH}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -700,10 +700,10 @@ export default class AnimationManager {
         start: 0,
         end: 26,
         zeroPad: 3,
-        prefix: `${Ability.ICICLE_CRASH}/`
+        prefix: `${Ability.ICICLE_CRASH}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -712,10 +712,10 @@ export default class AnimationManager {
         start: 0,
         end: 48,
         zeroPad: 3,
-        prefix: `${Ability.ROOT}/`
+        prefix: `${Ability.ROOT}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -724,10 +724,10 @@ export default class AnimationManager {
         start: 0,
         end: 19,
         zeroPad: 3,
-        prefix: `${Ability.TORMENT}/`
+        prefix: `${Ability.TORMENT}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -736,10 +736,10 @@ export default class AnimationManager {
         start: 0,
         end: 12,
         zeroPad: 3,
-        prefix: `${Ability.STOMP}/`
+        prefix: `${Ability.STOMP}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -748,10 +748,10 @@ export default class AnimationManager {
         start: 0,
         end: 31,
         zeroPad: 3,
-        prefix: `${Ability.DARK_PULSE}/`
+        prefix: `${Ability.DARK_PULSE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -760,10 +760,10 @@ export default class AnimationManager {
         start: 0,
         end: 6,
         zeroPad: 3,
-        prefix: `${Ability.NIGHT_SLASH}/`
+        prefix: `${Ability.NIGHT_SLASH}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -772,10 +772,10 @@ export default class AnimationManager {
         start: 0,
         end: 28,
         zeroPad: 3,
-        prefix: `${Ability.BUG_BUZZ}/`
+        prefix: `${Ability.BUG_BUZZ}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -784,10 +784,10 @@ export default class AnimationManager {
         start: 0,
         end: 12,
         zeroPad: 3,
-        prefix: `${Ability.POISON_STING}/`
+        prefix: `${Ability.POISON_STING}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -796,10 +796,10 @@ export default class AnimationManager {
         start: 0,
         end: 19,
         zeroPad: 3,
-        prefix: `${Ability.LEECH_LIFE}/`
+        prefix: `${Ability.LEECH_LIFE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -808,10 +808,10 @@ export default class AnimationManager {
         start: 0,
         end: 20,
         zeroPad: 3,
-        prefix: `${Ability.HAPPY_HOUR}/`
+        prefix: `${Ability.HAPPY_HOUR}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -820,10 +820,10 @@ export default class AnimationManager {
         start: 0,
         end: 5,
         zeroPad: 3,
-        prefix: `${Ability.TELEPORT}/`
+        prefix: `${Ability.TELEPORT}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -832,10 +832,10 @@ export default class AnimationManager {
         start: 0,
         end: 5,
         zeroPad: 3,
-        prefix: `${Ability.NASTY_PLOT}/`
+        prefix: `${Ability.NASTY_PLOT}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -844,10 +844,10 @@ export default class AnimationManager {
         start: 0,
         end: 7,
         zeroPad: 3,
-        prefix: `${Ability.THIEF}/`
+        prefix: `${Ability.THIEF}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -856,10 +856,10 @@ export default class AnimationManager {
         start: 0,
         end: 21,
         zeroPad: 3,
-        prefix: `${Ability.STUN_SPORE}/`
+        prefix: `${Ability.STUN_SPORE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -868,10 +868,10 @@ export default class AnimationManager {
         start: 0,
         end: 45,
         zeroPad: 3,
-        prefix: `${Ability.METEOR_MASH}/`
+        prefix: `${Ability.METEOR_MASH}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -880,10 +880,10 @@ export default class AnimationManager {
         start: 0,
         end: 51,
         zeroPad: 3,
-        prefix: `${Ability.HURRICANE}/`
+        prefix: `${Ability.HURRICANE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -892,10 +892,10 @@ export default class AnimationManager {
         start: 0,
         end: 6,
         zeroPad: 3,
-        prefix: `${Ability.IRON_TAIL}/`
+        prefix: `${Ability.IRON_TAIL}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -903,11 +903,11 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("june", {
         start: 0,
         end: 6,
-        prefix: `${Ability.ORIGIN_PULSE}/`
+        prefix: `${Ability.ORIGIN_PULSE}/`,
       }),
       duration: 1000,
       repeat: -1,
-      yoyo: true
+      yoyo: true,
     })
 
     this.game.anims.create({
@@ -915,10 +915,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("june", {
         start: 0,
         end: 9,
-        prefix: `${Ability.SEED_FLARE}/`
+        prefix: `${Ability.SEED_FLARE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -926,10 +926,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("ROAR_OF_TIME", {
         start: 0,
         end: 28,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -937,10 +937,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("ROCK_TOMB", {
         start: 0,
         end: 21,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -948,20 +948,31 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("ROCK_SMASH", {
         start: 0,
         end: 8,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
       key: Ability.VOLT_SWITCH,
       frames: this.game.anims.generateFrameNames(Ability.VOLT_SWITCH, {
         start: 0,
-        end: 6
+        end: 6,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
+    })
+
+    this.game.anims.create({
+      key: Ability.STEAM_ERUPTION,
+      frames: this.game.anims.generateFrameNames(Ability.STEAM_ERUPTION, {
+        start: 0,
+        end: 10,
+        zeroPad: 3,
+      }),
+      duration: 1000,
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -969,10 +980,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.LIQUIDATION, {
         start: 0,
         end: 17,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -980,30 +991,30 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.PAYDAY, {
         start: 0,
         end: 80,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
       key: Ability.SHADOW_CLONE,
       frames: this.game.anims.generateFrameNames(Ability.SHADOW_CLONE, {
         start: 0,
-        end: 3
+        end: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
       key: Ability.HYPER_VOICE,
       frames: this.game.anims.generateFrameNames(Ability.HYPER_VOICE, {
         start: 0,
-        end: 3
+        end: 3,
       }),
       duration: 300,
-      repeat: 3
+      repeat: 3,
     })
 
     this.game.anims.create({
@@ -1011,10 +1022,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.PETAL_DANCE, {
         start: 0,
         end: 53,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1022,10 +1033,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.ECHO, {
         start: 0,
         end: 36,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1033,10 +1044,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.EXPLOSION, {
         start: 0,
         end: 22,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1044,10 +1055,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.SONG_OF_DESIRE, {
         start: 0,
         end: 43,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1055,10 +1066,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.CONFUSING_MIND, {
         start: 0,
         end: 36,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1066,10 +1077,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.BONEMERANG, {
         start: 0,
         end: 7,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 3
+      repeat: 3,
     })
 
     this.game.anims.create({
@@ -1077,10 +1088,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.GROWL, {
         start: 0,
         end: 19,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1088,10 +1099,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.HIGH_JUMP_KICK, {
         start: 0,
         end: 21,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1099,10 +1110,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.TRI_ATTACK, {
         start: 0,
         end: 20,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1110,10 +1121,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.BLUE_FLARE, {
         start: 0,
         end: 14,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1121,10 +1132,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.FUSION_BOLT, {
         start: 0,
         end: 17,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1132,10 +1143,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.CHATTER, {
         start: 0,
         end: 25,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1143,10 +1154,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.DISARMING_VOICE, {
         start: 0,
         end: 43,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1154,10 +1165,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.RELIC_SONG, {
         start: 0,
         end: 34,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1165,10 +1176,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.CLANGOROUS_SOUL, {
         start: 0,
         end: 18,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1176,10 +1187,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.EARTHQUAKE, {
         start: 0,
         end: 10,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1187,10 +1198,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.AQUA_JET, {
         start: 0,
         end: 19,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1198,10 +1209,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames(Ability.MIND_BLOWN, {
         start: 0,
         end: 12,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1209,10 +1220,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("MIND_BLOWN_SELF", {
         start: 0,
         end: 11,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1220,10 +1231,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("FIELD_DEATH", {
         start: 0,
         end: 8,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1231,10 +1242,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("FAIRY_CRIT", {
         start: 0,
         end: 19,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1243,10 +1254,10 @@ export default class AnimationManager {
         start: 0,
         end: 79,
         zeroPad: 3,
-        prefix: `${Ability.ROCK_SLIDE}/`
+        prefix: `${Ability.ROCK_SLIDE}/`,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1255,10 +1266,10 @@ export default class AnimationManager {
         start: 0,
         end: 56,
         zeroPad: 3,
-        prefix: "GROUND/cell/"
+        prefix: "GROUND/cell/",
       }),
       duration: 800,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1266,10 +1277,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("INCENSE_DAMAGE", {
         start: 0,
         end: 6,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 500,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1277,10 +1288,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("STATIC", {
         start: 0,
         end: 13,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 500,
-      repeat: 0
+      repeat: 0,
     })
 
     this.game.anims.create({
@@ -1288,10 +1299,10 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("BRIGHT_POWDER", {
         start: 0,
         end: 18,
-        zeroPad: 3
+        zeroPad: 3,
       }),
       duration: 1000,
-      repeat: 0
+      repeat: 0,
     })
   }
 
@@ -1302,10 +1313,10 @@ export default class AnimationManager {
         start: 0,
         end: 10,
         zeroPad: 3,
-        prefix: "GRASS/range/"
+        prefix: "GRASS/range/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1314,10 +1325,10 @@ export default class AnimationManager {
         start: 0,
         end: 25,
         zeroPad: 3,
-        prefix: "GRASS/melee/"
+        prefix: "GRASS/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1326,10 +1337,10 @@ export default class AnimationManager {
         start: 0,
         end: 18,
         zeroPad: 3,
-        prefix: "WATER/range/"
+        prefix: "WATER/range/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1338,10 +1349,10 @@ export default class AnimationManager {
         start: 0,
         end: 7,
         zeroPad: 3,
-        prefix: "WATER/melee/"
+        prefix: "WATER/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1350,10 +1361,10 @@ export default class AnimationManager {
         start: 0,
         end: 8,
         zeroPad: 3,
-        prefix: "FIRE/melee/"
+        prefix: "FIRE/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1362,10 +1373,10 @@ export default class AnimationManager {
         start: 0,
         end: 30,
         zeroPad: 3,
-        prefix: "FIRE/range/"
+        prefix: "FIRE/range/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1374,10 +1385,10 @@ export default class AnimationManager {
         start: 0,
         end: 10,
         zeroPad: 3,
-        prefix: "ROCK/melee/"
+        prefix: "ROCK/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1386,10 +1397,10 @@ export default class AnimationManager {
         start: 0,
         end: 12,
         zeroPad: 3,
-        prefix: "FIGHTING/melee/"
+        prefix: "FIGHTING/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1398,10 +1409,10 @@ export default class AnimationManager {
         start: 9,
         end: 39,
         zeroPad: 3,
-        prefix: "FIGHTING/range/"
+        prefix: "FIGHTING/range/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1410,10 +1421,10 @@ export default class AnimationManager {
         start: 0,
         end: 10,
         zeroPad: 3,
-        prefix: "DRAGON/melee/"
+        prefix: "DRAGON/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1422,10 +1433,10 @@ export default class AnimationManager {
         start: 0,
         end: 7,
         zeroPad: 3,
-        prefix: "NORMAL/melee/"
+        prefix: "NORMAL/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1434,10 +1445,10 @@ export default class AnimationManager {
         start: 0,
         end: 45,
         zeroPad: 3,
-        prefix: "DRAGON/range/"
+        prefix: "DRAGON/range/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1446,10 +1457,10 @@ export default class AnimationManager {
         start: 0,
         end: 27,
         zeroPad: 3,
-        prefix: "POISON/range/"
+        prefix: "POISON/range/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1458,10 +1469,10 @@ export default class AnimationManager {
         start: 0,
         end: 12,
         zeroPad: 3,
-        prefix: "POISON/melee/"
+        prefix: "POISON/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1470,10 +1481,10 @@ export default class AnimationManager {
         start: 0,
         end: 3,
         zeroPad: 3,
-        prefix: "ELECTRIC/melee/"
+        prefix: "ELECTRIC/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1482,10 +1493,10 @@ export default class AnimationManager {
         start: 0,
         end: 23,
         zeroPad: 3,
-        prefix: "GHOST/range/"
+        prefix: "GHOST/range/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1494,10 +1505,10 @@ export default class AnimationManager {
         start: 0,
         end: 38,
         zeroPad: 3,
-        prefix: "PSYCHIC/range/"
+        prefix: "PSYCHIC/range/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1506,10 +1517,10 @@ export default class AnimationManager {
         start: 0,
         end: 5,
         zeroPad: 3,
-        prefix: "ELECTRIC/range/"
+        prefix: "ELECTRIC/range/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1518,10 +1529,10 @@ export default class AnimationManager {
         start: 0,
         end: 25,
         zeroPad: 3,
-        prefix: "FAIRY/melee/"
+        prefix: "FAIRY/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1530,10 +1541,10 @@ export default class AnimationManager {
         start: 0,
         end: 13,
         zeroPad: 3,
-        prefix: "FAIRY/range/"
+        prefix: "FAIRY/range/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1542,10 +1553,10 @@ export default class AnimationManager {
         start: 0,
         end: 24,
         zeroPad: 3,
-        prefix: "FLYING/melee/"
+        prefix: "FLYING/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1554,10 +1565,10 @@ export default class AnimationManager {
         start: 0,
         end: 7,
         zeroPad: 3,
-        prefix: "FLYING/range/"
+        prefix: "FLYING/range/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1566,10 +1577,10 @@ export default class AnimationManager {
         start: 0,
         end: 15,
         zeroPad: 3,
-        prefix: "BUG/melee/"
+        prefix: "BUG/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
 
     this.game.anims.create({
@@ -1578,10 +1589,10 @@ export default class AnimationManager {
         start: 0,
         end: 8,
         zeroPad: 3,
-        prefix: "ICE/melee/"
+        prefix: "ICE/melee/",
       }),
       duration: 1000,
-      repeat: -1
+      repeat: -1,
     })
   }
 
