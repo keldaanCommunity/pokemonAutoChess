@@ -1877,10 +1877,7 @@ export default class Pokemon extends Button {
             break
 
           case Ability.STEAM_ERUPTION:
-            coordinates = transformAttackCoordinate(
-              this.positionX,
-              this.positionY
-            )
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
