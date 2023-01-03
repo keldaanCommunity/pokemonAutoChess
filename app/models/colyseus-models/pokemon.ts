@@ -6956,7 +6956,7 @@ export class Volcanion extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.VOLCANION,
-      [Synergy.FIRE, Synergy.WATER],
+      [Synergy.FIRE, Synergy.WATER, Synergy.AQUATIC],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
@@ -10157,7 +10157,7 @@ export class Croagunk extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CROAGUNK,
-      [Synergy.POISON, Synergy.FIGHTING],
+      [Synergy.POISON, Synergy.FIGHTING, Synergy.AQUATIC],
       Rarity.RARE,
       Pkm.TOXICROAK,
       60,
@@ -10182,7 +10182,7 @@ export class Toxicroak extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.TOXICROAK,
-      [Synergy.POISON, Synergy.FIGHTING],
+      [Synergy.POISON, Synergy.FIGHTING, Synergy.AQUATIC],
       Rarity.RARE,
       Pkm.DEFAULT,
       115,
@@ -10496,6 +10496,7 @@ export class Tentacruel extends Pokemon {
     )
   }
 }
+
 export class Snubull extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -10538,6 +10539,56 @@ export class Granbull extends Pokemon {
       2,
       85,
       Ability.EARTHQUAKE,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Applin extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.APPLIN,
+      [Synergy.GRASS, Synergy.DRAGON],
+      Rarity.EPIC,
+      Pkm.APPLETUN,
+      65,
+      6,
+      5,
+      2,
+      1,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      85,
+      Ability.APPLE_ACID,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Appletun extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.APPLETUN,
+      [Synergy.GRASS, Synergy.DRAGON],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      130,
+      11,
+      8,
+      6,
+      1,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      85,
+      Ability.APPLE_ACID,
       shiny,
       emotion,
       true,
