@@ -103,6 +103,7 @@ import {
   LiquidationStrategy,
   SynchroStrategy,
   SteamEruptionStrategy,
+  AppleAcidStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -210,6 +211,7 @@ export enum Ability {
   LIQUIDATION = "LIQUIDATION",
   SYNCHRO = "SYNCHRO",
   STEAM_ERUPTION = "STEAM_ERUPTION",
+  APPLE_ACID = "APPLE_ACID"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -317,4 +319,5 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.LIQUIDATION]: new LiquidationStrategy(),
   [Ability.SYNCHRO]: new SynchroStrategy(),
   [Ability.STEAM_ERUPTION]: new SteamEruptionStrategy(),
+  [Ability.APPLE_ACID]: new AppleAcidStrategy()
 }

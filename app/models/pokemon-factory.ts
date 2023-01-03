@@ -13,6 +13,8 @@ import {
   Amaura,
   Ampharos,
   Anorith,
+  Appletun,
+  Applin,
   Arcanine,
   Arceus,
   Archen,
@@ -438,7 +440,7 @@ import {
   Zapdos,
   Zekrom,
   Zubat,
-  Zweilous,
+  Zweilous
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1528,6 +1530,10 @@ export default class PokemonFactory {
         return new Tsareena(s, e)
       case Pkm.VOLCANION:
         return new Volcanion(s, e)
+      case Pkm.APPLIN:
+        return new Applin(s, e)
+      case Pkm.APPLETUN:
+        return new Appletun(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
