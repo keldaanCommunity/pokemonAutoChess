@@ -1,7 +1,7 @@
 import dotenv from "dotenv"
 import path from "path"
 import http from "http"
-import express, { ErrorRequestHandler, Request, Response } from "express"
+import express, { ErrorRequestHandler } from "express"
 import cors from "cors"
 import { Server } from "colyseus"
 import { monitor } from "@colyseus/monitor"
@@ -9,9 +9,7 @@ import basicAuth from "express-basic-auth"
 import { WebSocketTransport } from "@colyseus/ws-transport"
 import * as bodyParser from "body-parser"
 import admin from "firebase-admin"
-import { initialize } from "express-openapi"
-import fs from "fs"
-import OperationHandler from "./api-v1/operationHandler"
+import PRECOMPUTED_TYPE_POKEMONS_ALL from "./models/precomputed/type-pokemons-all.json"
 
 dotenv.config()
 
@@ -48,6 +46,7 @@ const apiSrc = __dirname.includes("server")
   ? path.resolve(__dirname, "..", "..", "..", "..", "api-v1", "api-doc.yaml")
   : path.resolve(__dirname, "api-v1", "api-doc.yaml")
 
+/*
 initialize({
   apiDoc: fs.readFileSync(apiSrc).toString(),
   app,
@@ -79,6 +78,7 @@ initialize({
     ]
   }
 })
+*/
 
 app.use(((err, req, res, next) => {
   res.status(err.status).json(err)
@@ -125,6 +125,14 @@ app.get("/after", (req, res) => {
   res.sendFile(viewsSrc)
 })
 
+app.get("/pokemons", (req, res) => {
+  res.send(Pkm)
+})
+
+app.get("/types", (req, res) => {
+  res.send(PRECOMPUTED_TYPE_POKEMONS_ALL)
+})
+
 const basicAuthMiddleware = basicAuth({
   // list of users and passwords
   users: {
@@ -142,6 +150,7 @@ import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
 import PreprationRoom from "./rooms/preparation-room"
 import GameRoom from "./rooms/game-room"
+import { Pkm } from "./types/enum/Pokemon"
 
 gameServer.define("after-game", AfterGameRoom)
 gameServer.define("lobby", CustomLobbyRoom)
