@@ -7796,7 +7796,7 @@ export class Arceus extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ARCEUS,
-      [Synergy.NORMAL, Synergy.FIELD],
+      [],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
@@ -7808,7 +7808,7 @@ export class Arceus extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.HAPPY_HOUR,
+      Ability.PROTEAN,
       shiny,
       emotion,
       true
