@@ -135,9 +135,11 @@ export class OnToggleReadyCommand extends Command<
 > {
   execute({ client }) {
     // console.log(this.state.users.get(client.auth.uid).ready);
-    this.state.users.get(client.auth.uid).ready = !this.state.users.get(
-      client.auth.uid
-    ).ready
+    if (client.auth.uid && this.state.users.has(client.auth.uid)) {
+      this.state.users.get(client.auth.uid).ready = !this.state.users.get(
+        client.auth.uid
+      ).ready
+    }
   }
 }
 

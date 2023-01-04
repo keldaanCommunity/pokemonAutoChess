@@ -35,9 +35,13 @@ export default class AfterGameRoom extends Room {
   }
 
   async onAuth(client: Client, options: any, request: any) {
-    const token = await admin.auth().verifyIdToken(options.idToken)
-    const user = await admin.auth().getUser(token.uid)
-    return user
+    try {
+      const token = await admin.auth().verifyIdToken(options.idToken)
+      const user = await admin.auth().getUser(token.uid)
+      return user
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   onJoin(client: Client, options: any, auth: any) {
