@@ -204,11 +204,11 @@ export class EarthquakeStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    let damage = 50
+    let damage = 40
     if (pokemon.stars == 2) {
-      damage = 100
+      damage = 80
     } else if (pokemon.stars == 3) {
-      damage = 200
+      damage = 160
     }
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (
@@ -2956,7 +2956,7 @@ export class TeleportStrategy extends AttackStrategy {
       [0, 0],
       [0, 5],
       [7, 5],
-      [7, 0]
+      [7, 0],
     ]
     this.shuffleArray(potentialCells)
 
@@ -3281,7 +3281,7 @@ export class MetronomeStrategy extends AttackStrategy {
       SoftBoiledStrategy,
       BeatUpStrategy,
       EarthquakeStrategy,
-      SteamEruptionStrategy
+      SteamEruptionStrategy,
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)
