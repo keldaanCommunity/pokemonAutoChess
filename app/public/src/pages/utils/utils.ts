@@ -7,7 +7,7 @@ export const FIREBASE_CONFIG = {
   projectId: "pokemonautochess-b18fb",
   storageBucket: "pokemonautochess-b18fb.appspot.com",
   messagingSenderId: "448759785030",
-  appId: "1:448759785030:web:bc2f21a25ab9e43a894c47"
+  appId: "1:448759785030:web:bc2f21a25ab9e43a894c47",
 }
 
 export function transformCoordinate(x: number, y: number) {

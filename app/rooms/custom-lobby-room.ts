@@ -41,17 +41,8 @@ import BotMonitoring, {
   IBotMonitoring,
 } from "../models/mongo-models/bot-monitoring"
 
-const pastebin = new PastebinAPI({
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  api_dev_key: process.env.PASTEBIN_API_DEV_KEY!,
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  api_user_name: process.env.PASTEBIN_API_USERNAME!,
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  api_user_password: process.env.PASTEBIN_API_PASSWORD!,
-})
-
 export default class CustomLobbyRoom extends LobbyRoom {
-  discordWebhook: WebhookClient
+  discordWebhook: WebhookClient | undefined
   bots: Map<string, IBot>
   meta: IMeta[]
   metaItems: IItemsStatistic[]
@@ -60,14 +51,29 @@ export default class CustomLobbyRoom extends LobbyRoom {
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
   levelLeaderboard: ILeaderboardInfo[]
+  pastebin: PastebinAPI | undefined = undefined
 
   constructor() {
     super()
-    this.discordWebhook = new WebhookClient({
-      url: process.env.WEBHOOK_URL
-        ? process.env.WEBHOOK_URL
-        : "Default Webhook URL",
-    })
+
+    if (
+      process.env.PASTEBIN_API_DEV_KEY &&
+      process.env.PASTEBIN_API_USERNAME &&
+      process.env.PASTEBIN_API_DEV_KEY
+    ) {
+      this.pastebin = new PastebinAPI({
+        api_dev_key: process.env.PASTEBIN_API_DEV_KEY!,
+        api_user_name: process.env.PASTEBIN_API_USERNAME!,
+        api_user_password: process.env.PASTEBIN_API_PASSWORD!,
+      })
+    }
+
+    if (process.env.WEBHOOK_URL) {
+      this.discordWebhook = new WebhookClient({
+        url: process.env.WEBHOOK_URL,
+      })
+    }
+
     this.bots = new Map<string, IBot>()
     this.meta = new Array<IMeta>()
     this.metaItems = new Array<IItemsStatistic>()
@@ -186,8 +192,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
       try {
         const bot = message.bot
         const user = this.state.users.get(client.auth.uid)
-        pastebin
-          .createPaste({
+        this.pastebin
+          ?.createPaste({
             text: JSON.stringify(bot),
             title: `${user.name} has uploaded BOT ${bot.name}`,
             format: "json",
@@ -203,7 +209,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
               .setThumbnail(getAvatarSrc(bot.avatar))
             client.send(Transfer.PASTEBIN_URL, { url: data as string })
             try {
-              this.discordWebhook.send({
+              this.discordWebhook?.send({
                 embeds: [dsEmbed],
               })
             } catch (error) {
