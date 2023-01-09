@@ -58,7 +58,7 @@ export default function GamePlayer(props: {
         textColor="#000000"
         effect="solid"
         place="left"
-        offset={{ left: 30 }}
+        offset={{ left: 30, bottom: props.index === 0 ? 50 : 0 }}
       >
         <GamePlayerDetail
           name={props.player.name}
