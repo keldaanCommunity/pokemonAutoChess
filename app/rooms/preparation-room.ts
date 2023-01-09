@@ -12,6 +12,7 @@ import {
   OnRemoveBotCommand,
   InitializeBotsCommand,
   OnRoomNameCommand,
+  OnKickPlayerCommand
 } from "./commands/preparation-commands"
 import { BotDifficulty } from "../types/enum/Game"
 import { IPreparationMetadata, Transfer } from "../types"
@@ -31,7 +32,7 @@ export default class PreparationRoom extends Room {
   async setName(name: string) {
     await this.setMetadata(<IPreparationMetadata>{
       name: name.slice(0, 30),
-      type: "preparation",
+      type: "preparation"
     })
     updateLobby(this)
     console.log(this.metadata)
@@ -46,10 +47,14 @@ export default class PreparationRoom extends Room {
     this.maxClients = 8
     if (options.ownerId) {
       this.dispatcher.dispatch(new InitializeBotsCommand(), {
-        ownerId: options.ownerId,
+        ownerId: options.ownerId
       })
     }
     this.setName(n)
+
+    this.onMessage(Transfer.KICK, (client, message) => {
+      this.dispatcher.dispatch(new OnKickPlayerCommand(), { client, message })
+    })
 
     this.onMessage(Transfer.CHANGE_ROOM_NAME, (client, message) => {
       this.dispatcher.dispatch(new OnRoomNameCommand(), { client, message })
@@ -77,8 +82,8 @@ export default class PreparationRoom extends Room {
             name: this.state.users.get(client.auth.uid).name,
             avatar: this.state.users.get(client.auth.uid).avatar,
             payload: message.payload,
-            time: Date.now(),
-          },
+            time: Date.now()
+          }
         })
       } catch (error) {
         console.log(error)
@@ -158,14 +163,14 @@ export default class PreparationRoom extends Room {
           id: user.id,
           avatar: user.avatar,
           name: user.name,
-          elo: user.elo,
+          elo: user.elo
         })
       }
     })
     return {
       players: players,
       name: this.state.name,
-      id: this.roomId,
+      id: this.roomId
     }
   }
 }

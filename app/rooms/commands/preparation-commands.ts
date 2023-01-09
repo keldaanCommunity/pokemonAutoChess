@@ -1,13 +1,14 @@
 import { Command } from "@colyseus/command"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import UserMetadata, {
-  IUserMetadata,
+  IUserMetadata
 } from "../../models/mongo-models/user-metadata"
 import BotV2 from "../../models/mongo-models/bot-v2"
 import { Client } from "colyseus"
 import PreparationRoom from "../preparation-room"
 import { Emotion, IMessage, Role, Transfer } from "../../types"
 import { BotDifficulty } from "../../types/enum/Game"
+import PreparationState from "../states/preparation-state"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -45,7 +46,7 @@ export class OnJoinCommand extends Command<
           name: "Server",
           payload: `${user.displayName} joined.`,
           avatar: user.avatar,
-          time: Date.now(),
+          time: Date.now()
         })
       }
     })
@@ -107,6 +108,33 @@ export class OnRoomNameCommand extends Command<
   }
 }
 
+export class OnKickPlayerCommand extends Command<
+  PreparationRoom,
+  {
+    client: Client
+    message: string
+  }
+> {
+  execute({ client, message }) {
+    if (client.auth.uid === this.state.ownerId) {
+      this.room.clients.forEach((cli) => {
+        if (cli.auth.uid === message) {
+          this.room.broadcast(Transfer.MESSAGES, {
+            name: "Server",
+            payload: `${this.state.users.get(message).name} was kicked by ${
+              this.state.ownerName
+            }.`,
+            avatar: this.state.users.get(client.auth.uid)?.avatar,
+            time: Date.now()
+          })
+          cli.send(Transfer.KICK)
+          cli.leave()
+        }
+      })
+    }
+  }
+}
+
 export class OnLeaveCommand extends Command<
   PreparationRoom,
   {
@@ -120,7 +148,7 @@ export class OnLeaveCommand extends Command<
         name: "Server",
         payload: `${client.auth.displayName} left.`,
         avatar: this.state.users.get(client.auth.uid)?.avatar,
-        time: Date.now(),
+        time: Date.now()
       })
       this.state.users.delete(client.auth.uid)
     }
@@ -230,7 +258,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
             name: "Server",
             payload: "Error: No bots found",
             avatar: `0081/${Emotion.NORMAL}`,
-            time: Date.now(),
+            time: Date.now()
           })
           return
         }
@@ -258,7 +286,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
             name: "Server",
             payload: `Bot ${bot.name} added.`,
             avatar: `0081/${Emotion.NORMAL}`,
-            time: Date.now(),
+            time: Date.now()
           })
         }
       }
@@ -285,7 +313,7 @@ export class OnRemoveBotCommand extends Command<
             name: "Server",
             payload: `Bot ${key} removed to make room for new player.`,
             avatar: `0081/${Emotion.NORMAL}`,
-            time: Date.now(),
+            time: Date.now()
           })
           this.state.users.delete(key)
           // botDeleted = true;
@@ -302,7 +330,7 @@ export class OnRemoveBotCommand extends Command<
         name: "Server",
         payload: `Bot ${name} removed.`,
         avatar: `0081/${Emotion.NORMAL}`,
-        time: Date.now(),
+        time: Date.now()
       })
     }
   }

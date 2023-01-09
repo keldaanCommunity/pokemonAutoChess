@@ -1,7 +1,8 @@
 import React from "react"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
+import userMetadata from "../../../../../models/mongo-models/user-metadata"
 import { useAppDispatch } from "../../../hooks"
-import { removeBot } from "../../../stores/NetworkStore"
+import { kick, removeBot } from "../../../stores/NetworkStore"
 import Elo from "../elo"
 import InlineAvatar from "../inline-avatar"
 
@@ -13,6 +14,8 @@ const buttonStyle = {
 export default function PreparationMenuUser(props: {
   key: string
   user: IGameUser
+  isOwner: boolean
+  ownerId: string
 }) {
   const dispatch = useAppDispatch()
   const readyColor = props.user.ready ? "#76c442" : "#ce372b"
@@ -23,6 +26,16 @@ export default function PreparationMenuUser(props: {
       className="bubbly-close"
       onClick={() => {
         dispatch(removeBot(props.user.id))
+      }}
+    >
+      <p style={{ fontSize: "0.5em", margin: "0px" }}>X</p>
+    </button>
+  ) : props.isOwner && props.user.id !== props.ownerId ? (
+    <button
+      style={buttonStyle}
+      className="bubbly-close"
+      onClick={() => {
+        dispatch(kick(props.user.id))
       }}
     >
       <p style={{ fontSize: "0.5em", margin: "0px" }}>X</p>
@@ -42,12 +55,12 @@ export default function PreparationMenuUser(props: {
       }}
     >
       <div style={{ display: "flex", gap: "5px" }}>
-        <Elo elo={props.user.elo} />
+        <Elo elo={props.user?.elo} />
         <InlineAvatar
-          avatar={props.user.avatar}
-          name={props.user.name}
-          title={props.user.title}
-          role={props.user.role}
+          avatar={props.user?.avatar}
+          name={props.user?.name}
+          title={props.user?.title}
+          role={props.user?.role}
         />
       </div>
       {removeButton}

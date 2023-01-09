@@ -2,7 +2,7 @@ import {
   ArraySchema,
   MapSchema,
   SetSchema,
-  CollectionSchema,
+  CollectionSchema
 } from "@colyseus/schema"
 import board from "../core/board"
 import Dps from "../core/dps"
@@ -11,7 +11,7 @@ import Count from "../models/colyseus-models/count"
 import Status from "../models/colyseus-models/status"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
 import LeaderboardInfo, {
-  ILeaderboardInfo,
+  ILeaderboardInfo
 } from "../models/colyseus-models/leaderboard-info"
 import LobbyUser from "../models/colyseus-models/lobby-user"
 import Message from "../models/colyseus-models/message"
@@ -21,7 +21,7 @@ import {
   AttackType,
   Orientation,
   PokemonActionState,
-  Rarity,
+  Rarity
 } from "./enum/Game"
 import { Effect } from "./enum/Effect"
 import { Ability } from "./enum/Ability"
@@ -66,21 +66,21 @@ export enum Role {
   ADMIN = "ADMIN",
   MODERATOR = "MODERATOR",
   BASIC = "BASIC",
-  BOT = "BOT",
+  BOT = "BOT"
 }
 
 export const RoleName: { [key in Role]: string } = {
   [Role.ADMIN]: "Admin",
   [Role.MODERATOR]: "Mod",
   [Role.BASIC]: "Basic",
-  [Role.BOT]: "Bot",
+  [Role.BOT]: "Bot"
 }
 
 export const RoleColor: { [key in Role]: string } = {
   [Role.ADMIN]: "success",
   [Role.MODERATOR]: "primary",
   [Role.BASIC]: "",
-  [Role.BOT]: "secondary",
+  [Role.BOT]: "secondary"
 }
 
 export enum Transfer {
@@ -131,6 +131,7 @@ export enum Transfer {
   REQUEST_LEVEL_LEADERBOARD = "REQUEST_LEVEL_LEADERBOARD",
   REQUEST_BOT_LEADERBOARD = "REQUEST_BOT_LEADERBOARD",
   POKEMON_PROPOSITION = "POKEMON_PROPOSITION",
+  KICK = "KICK"
 }
 
 export enum AttackSprite {
@@ -157,17 +158,17 @@ export enum AttackSprite {
   FAIRY_MELEE = "FAIRY/melee",
   POISON_RANGE = "POISON/range",
   BUG_MELEE = "BUG/melee",
-  FLYING_MELEE = "FLYING/melee",
+  FLYING_MELEE = "FLYING/melee"
 }
 
 export enum ModalMode {
   EXPORT = "EXPORT",
-  IMPORT = "IMPORT",
+  IMPORT = "IMPORT"
 }
 
 export enum ReadWriteMode {
   WRITE = "WRITE",
-  ERASE = "ERASE",
+  ERASE = "ERASE"
 }
 
 export interface ICreditNames {
@@ -442,7 +443,7 @@ export enum Emotion {
   SIGH = "Sigh",
   STUNNED = "Stunned",
   SPECIAL2 = "Special2",
-  SPECIAL3 = "Special3",
+  SPECIAL3 = "Special3"
 }
 
 export const EmotionCost: { [key in Emotion]: number } = {
@@ -465,7 +466,7 @@ export const EmotionCost: { [key in Emotion]: number } = {
   [Emotion.SIGH]: 250,
   [Emotion.STUNNED]: 260,
   [Emotion.SPECIAL2]: 270,
-  [Emotion.SPECIAL3]: 280,
+  [Emotion.SPECIAL3]: 280
 }
 
 export interface ISuggestionUser {
@@ -519,7 +520,7 @@ export enum Title {
   BACKER = "BACKER",
   TYRANT = "TYRANT",
   GAMBLER = "GAMBLER",
-  SHINY_SEEKER = "SHINY_SEEKER",
+  SHINY_SEEKER = "SHINY_SEEKER"
 }
 
 export const TitleName: { [key in Title]: string } = {
@@ -565,7 +566,7 @@ export const TitleName: { [key in Title]: string } = {
   [Title.BACKER]: "Backer",
   [Title.TYRANT]: "Tyrant",
   [Title.GAMBLER]: "Gambler",
-  [Title.SHINY_SEEKER]: "Shiny Seeker",
+  [Title.SHINY_SEEKER]: "Shiny Seeker"
 }
 
 export const TitleDescription: { [key in Title]: string } = {
@@ -611,5 +612,5 @@ export const TitleDescription: { [key in Title]: string } = {
   [Title.BACKER]: "Support the game financially",
   [Title.TYRANT]: "Win a game at 100 Hp",
   [Title.GAMBLER]: "Reroll over 60 times in a single match",
-  [Title.SHINY_SEEKER]: "Have over 30 shiny pokemon avatars",
+  [Title.SHINY_SEEKER]: "Have over 30 shiny pokemon avatars"
 }

@@ -33,6 +33,9 @@ export default function PreparationMenu(props: {
   const name: string = useAppSelector((state) => state.preparation.name)
   const ownerId: string = useAppSelector((state) => state.preparation.ownerId)
   const uid: string = useAppSelector((state) => state.network.uid)
+  const isOwner: boolean = useAppSelector(
+    (state) => state.preparation.ownerId === state.network.uid
+  )
   const client: Client = useAppSelector((state) => state.network.client)
   const room: Room<PreparationState> | undefined = useAppSelector(
     (state) => state.network.preparation
@@ -118,7 +121,14 @@ export default function PreparationMenu(props: {
         }}
       >
         {users.map((u) => {
-          return <PreparationMenuUser key={u.id} user={u} />
+          return (
+            <PreparationMenuUser
+              key={u.id}
+              user={u}
+              isOwner={isOwner}
+              ownerId={ownerId}
+            />
+          )
         })}
       </div>
 
