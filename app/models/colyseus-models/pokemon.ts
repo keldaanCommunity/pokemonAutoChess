@@ -9858,7 +9858,7 @@ export class Smoochum extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SMOOCHUM,
-      [Synergy.ICE, Synergy.PSYCHIC],
+      [Synergy.ICE, Synergy.PSYCHIC, Synergy.HUMAN],
       Rarity.COMMON,
       Pkm.JYNX,
       60,
@@ -9883,7 +9883,7 @@ export class Jynx extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.JYNX,
-      [Synergy.ICE, Synergy.PSYCHIC],
+      [Synergy.ICE, Synergy.PSYCHIC, Synergy.HUMAN],
       Rarity.COMMON,
       Pkm.DEFAULT,
       110,
