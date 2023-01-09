@@ -241,6 +241,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   addSpellDamage(value: number) {
-    this.spellDamage = Math.min(100, this.spellDamage + value)
+    this.spellDamage = Math.round(this.spellDamage + value)
   }
 }

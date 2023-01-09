@@ -1482,6 +1482,78 @@ export class Aegislash extends Pokemon {
   }
 }
 
+export class Oshawott extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.OSHAWOTT,
+      [Synergy.WATER, Synergy.MONSTER, Synergy.FIGHTING],
+      Rarity.EPIC,
+      Pkm.DEWOTT,
+      90,
+      8,
+      4,
+      4,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      120,
+      Ability.CRABHAMMER,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Dewott extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DEWOTT,
+      [Synergy.WATER, Synergy.MONSTER, Synergy.FIGHTING],
+      Rarity.EPIC,
+      Pkm.SAMUROTT,
+      130,
+      9,
+      6,
+      6,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      120,
+      Ability.CRABHAMMER,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Samurott extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SAMUROTT,
+      [Synergy.WATER, Synergy.MONSTER, Synergy.FIGHTING],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      230,
+      20,
+      8,
+      8,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      3,
+      120,
+      Ability.CRABHAMMER,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Larvitar extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

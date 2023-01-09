@@ -90,6 +90,7 @@ import {
   Deino,
   Delphox,
   Deoxys,
+  Dewott,
   Dialga,
   Diancie,
   Ditto,
@@ -279,6 +280,7 @@ import {
   Omanyte,
   Omastar,
   Onix,
+  Oshawott,
   Palkia,
   Palpitoad,
   Persian,
@@ -332,6 +334,7 @@ import {
   Salamence,
   Salandit,
   Salazzle,
+  Samurott,
   Sandile,
   Sceptile,
   Scizor,
@@ -1534,6 +1537,12 @@ export default class PokemonFactory {
         return new Applin(s, e)
       case Pkm.APPLETUN:
         return new Appletun(s, e)
+      case Pkm.OSHAWOTT:
+        return new Oshawott(s, e)
+      case Pkm.DEWOTT:
+        return new Dewott(s, e)
+      case Pkm.SAMUROTT:
+        return new Samurott(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
