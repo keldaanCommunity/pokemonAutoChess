@@ -148,25 +148,27 @@ export default function Profile() {
           </TabPanel>
           <TabPanel>
             <div className="playerBox">
-              <div style={{ display: "flex", flexWrap: "wrap" }}>
-                {Object.keys(Title).map((k) => (
-                  <div key={k}>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {Object.keys(Title).map((k,i) => (
+                  <div key={k} style={{ 
+                    padding: "0.5em", 
+                    backgroundColor: i%2 ? '#54596b' : '#61738a'
+                  }}>
                     <h5
                       onClick={() => {
                         if (user.titles.includes(k as Title)) {
                           dispatch(setTitle(k))
                         }
                       }}
-                      style={{
-                        color: user.titles.includes(k as Title)
-                          ? "#28a745"
-                          : "#db5e6a"
-                      }}
+                      style={{ color: user.title === k ? '#ffc107' : user.titles.includes(k as Title) ? "#92cc41" : "#db5e6a" }}
                       className="my-cursor"
                     >
                       {TitleName[k]}
                     </h5>
-                    <p>{TitleDescription[k]}</p>
+                    <p style={{ 
+                      margin: 0, 
+                      color: user.titles.includes(k as Title) ? '#ffffff' : '#a0a0a0'
+                    }}>{TitleDescription[k]}</p>
                   </div>
                 ))}
               </div>
