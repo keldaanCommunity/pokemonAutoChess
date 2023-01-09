@@ -31,6 +31,7 @@ export default function GamePokemonPortrait(props: {
           imageRendering: "pixelated",
           width: "15%",
           backgroundColor: rarityColor,
+          borderColor: rarityColor,
           backgroundImage: `url("${getPortraitSrc(
             props.pokemon.index,
             props.pokemonConfig?.selectedShiny,
