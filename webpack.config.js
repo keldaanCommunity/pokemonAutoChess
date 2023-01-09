@@ -1,10 +1,10 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
 
 const configDev = {
   mode: 'development',
-
   entry: path.resolve(__dirname, 'app', 'public', 'src', 'index.tsx'),
   watchOptions: {
     aggregateTimeout: 1500,
@@ -28,12 +28,12 @@ const configDev = {
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-      {test: /\.tsx?$/, loader: 'ts-loader'},
+      {test: /\.tsx?$/, loader: 'ts-loader',exclude: /node_modules/,},
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      {test: /\.js$/, loader: 'source-map-loader'}
+      {test: /\.js$/, loader: 'source-map-loader',exclude: /node_modules/,}
     ]
   },
   resolve: {
@@ -43,7 +43,8 @@ const configDev = {
   plugins: [
     new webpack.ProvidePlugin({
       process: 'process/browser'
-    })
+    }),
+    //new BundleAnalyzerPlugin()
   ]
 };
 
