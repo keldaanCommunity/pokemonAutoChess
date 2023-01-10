@@ -12,6 +12,7 @@ import Credits from "./Credits"
 import { RarityColor } from "../../../../../types/Config"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
+import SynergyIcon from "../icons/synergy-icon"
 
 export default function WikiPokemonDetail(props: {
   pokemon: Pkm
@@ -49,11 +50,7 @@ export default function WikiPokemonDetail(props: {
           </p>
           <div>
             types:
-            {pokemon.types.map((type) => {
-              return (
-                <img key={"img" + type} src={"assets/types/" + type + ".png"} />
-              )
-            })}
+            {pokemon.types.map((type) => <SynergyIcon key={"img" + type} type={type} />)}
           </div>
           <div>
             evolution:{" "}

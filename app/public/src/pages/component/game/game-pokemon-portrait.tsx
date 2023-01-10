@@ -4,6 +4,7 @@ import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata
 import { PkmCost, RarityColor } from "../../../../../types/Config"
 import { getPortraitSrc } from "../../../utils"
 import { GamePokemonDetail } from "./game-pokemon-detail"
+import SynergyIcon from "../icons/synergy-icon"
 import ReactTooltip from "react-tooltip"
 
 export default function GamePokemonPortrait(props: {
@@ -98,7 +99,7 @@ export default function GamePokemonPortrait(props: {
           {props.pokemon.types.map((type) => {
             return (
               <li key={type}>
-                <img src={"assets/types/" + type + ".png"} />
+                <SynergyIcon type={type} />
               </li>
             )
           })}

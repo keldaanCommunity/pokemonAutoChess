@@ -12,12 +12,13 @@ import { TypeTrigger } from "../../../../../types/Config"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
+import SynergyIcon from "../icons/synergy-icon"
 
 export default function WikiType(props: { type: Synergy }) {
   return (
     <div>
       <div style={{ display: "flex" }}>
-        <img src={"assets/types/" + props.type + ".png"}></img>
+        <SynergyIcon type={props.type} />
         <p>{SynergyName[props.type].eng}</p>
       </div>
       {SynergyDetail[props.type].map((effect, i) => {

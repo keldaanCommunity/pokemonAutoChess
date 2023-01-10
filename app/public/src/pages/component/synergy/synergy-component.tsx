@@ -2,6 +2,7 @@ import React from "react"
 import { TypeTrigger } from "../../../../../types/Config"
 import ReactTooltip from "react-tooltip"
 import SynergyDetailComponent from "./synergy-detail-component"
+import SynergyIcon from "../icons/synergy-icon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { SynergyName } from "../../../../../types/strings/Synergy"
 
@@ -43,13 +44,7 @@ export default function SynergyComponent(props: {
         <SynergyDetailComponent type={props.type} value={props.value} />
       </ReactTooltip>
 
-      <img
-        style={{
-          height: "40px",
-          width: "40px"
-        }}
-        src={"assets/types/" + props.type + ".png"}
-      />
+      <SynergyIcon type={props.type} size="40px" />
       <h4>{props.value}</h4>
       <div
         style={{

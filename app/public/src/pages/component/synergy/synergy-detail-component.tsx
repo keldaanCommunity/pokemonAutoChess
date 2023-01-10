@@ -15,6 +15,7 @@ import {
 import { TypeTrigger, RarityColor } from "../../../../../types/Config"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
+import SynergyIcon from "../icons/synergy-icon"
 
 const precomputed = PRECOMPUTED_TYPE_POKEMONS as PrecomputedTypePokemon
 
@@ -28,10 +29,7 @@ export default function SynergyDetailComponent(props: {
   return (
     <div>
       <div style={{ display: "flex" }}>
-        <img
-          style={{ width: "40px", height: "40px", marginRight: "1%" }}
-          src={"assets/types/" + props.type + ".png"}
-        />
+        <SynergyIcon type={props.type} size="40px" />
         <h3>{SynergyName[props.type].eng}</h3>
       </div>
 

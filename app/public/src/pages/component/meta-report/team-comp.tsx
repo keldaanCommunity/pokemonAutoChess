@@ -3,6 +3,7 @@ import { IMeta } from "../../../../../models/mongo-models/meta"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../utils"
+import SynergyIcon from "../icons/synergy-icon"
 
 function capitalizeFirstLetter(string: string) {
   if (string) {
@@ -71,15 +72,7 @@ export default function TeamComp(props: { team: IMeta }) {
                 }}
                 key={type}
               >
-                <img
-                  style={{
-                    width: "51px",
-                    height: "51px",
-                    imageRendering: "pixelated",
-                    marginRight: "4px"
-                  }}
-                  src={"assets/types/" + type.toUpperCase() + ".png"}
-                />
+                <SynergyIcon type={type.toUpperCase() as Synergy} size="51px" />
                 <p>{props.team.types[type]}</p>
               </div>
             )

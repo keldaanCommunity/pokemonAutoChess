@@ -14,6 +14,7 @@ import { ITracker } from "../../../../../types/ITracker"
 import PokemonEmotion from "./pokemon-emotion"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
+import SynergyIcon from "../icons/synergy-icon"
 
 const buttonStyle: CSS.Properties = {
   marginLeft: "10px",
@@ -180,11 +181,10 @@ export default function PokemonCollection(props: {
       <div style={{ margin: "10px" }} className="nes-container">
         <Tabs>
           <TabList>
-            {(Object.keys(Synergy) as Synergy[]).map((r) => {
+            {(Object.keys(Synergy) as Synergy[]).map((type) => {
               return (
-                <Tab key={"title-" + r}>
-                  {" "}
-                  <img src={"assets/types/" + r + ".png"}></img>
+                <Tab key={"title-" + type}>
+                  <SynergyIcon type={type} />                  
                 </Tab>
               )
             })}

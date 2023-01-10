@@ -6,6 +6,7 @@ import {
   AbilityDescription,
 } from "../../../../../types/strings/Ability"
 import { getPortraitSrc } from "../../../utils"
+import SynergyIcon from "../icons/synergy-icon"
 
 const pStyle = {
   margin: "0px",
@@ -36,11 +37,7 @@ export function GamePokemonDetail(props: { pokemon: Pokemon }) {
           )}
         />
         <div>
-          {props.pokemon.types.map((type) => {
-            return (
-              <img key={"img" + type} src={"assets/types/" + type + ".png"} />
-            )
-          })}
+          {props.pokemon.types.map((type) => <SynergyIcon type={type} />)}
         </div>
         <p style={{ color: RarityColor[props.pokemon.rarity] }}>
           {props.pokemon.rarity}
