@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 import { Schema, type, ArraySchema, SetSchema } from "@colyseus/schema"
-import uniqid from "uniqid"
+import { nanoid } from 'nanoid'
 import { Emotion, IPokemon, AttackSprite } from "../../types"
 import { PkmCost } from "../../types/Config"
 import { Item } from "../../types/enum/Item"
@@ -60,7 +60,7 @@ export class Pokemon extends Schema implements IPokemon {
     additional?: boolean
   ) {
     super()
-    this.id = uniqid()
+    this.id = nanoid()
     this.name = name
     this.rarity = rarity
     this.index = PkmIndex[name]

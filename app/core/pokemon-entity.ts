@@ -2,7 +2,7 @@ import { Item } from "../types/enum/Item"
 import { Orientation, PokemonActionState } from "../types/enum/Game"
 import MovingState from "./moving-state"
 import AttackingState from "./attacking-state"
-import uniqid from "uniqid"
+import { nanoid } from 'nanoid'
 import Status from "../models/colyseus-models/status"
 import Count from "../models/colyseus-models/count"
 import Simulation from "./simulation"
@@ -92,7 +92,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.simulation = simulation
     this.strategy = AbilityStrategy[pokemon.skill]
 
-    this.id = uniqid()
+    this.id = nanoid()
     this.rarity = pokemon.rarity
     this.positionX = positionX
     this.positionY = positionY
