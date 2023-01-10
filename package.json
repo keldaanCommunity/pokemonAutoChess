@@ -22,11 +22,11 @@
   "main": "dist/server/index.js",
   "scripts": {
     "reset": "rm -rf node_modules/ && rm -f app/public/js/*",
-    "dev-client": "webpack --mode development --watch",
+    "dev-client": "esbuild app/public/src/index.tsx  --outfile=app/public/dist/client/index.js --bundle --watch",
     "dev-server": "ts-node-dev --watch \"src/**/*\" --respawn --transpile-only ./app/index.ts",
     "dev": "npm-run-all --parallel dev-*",
     "lint": "npx eslint app/",
-    "build-client": "webpack --mode production",
+    "build-client": "esbuild app/public/src/index.tsx  --outfile=app/public/dist/client/index.js --bundle --minify --sourcemap --target=es2016",
     "build-server": "tsc",
     "build": "npm run build-client && npm run build-server",
     "start": "node ./app/public/dist/server/app/index.js",
@@ -45,7 +45,6 @@
     "colyseus": "^0.14.23",
     "colyseus.js": "^0.14.13",
     "cors": "^2.8.5",
-    "dataframe-js": "^1.4.4",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "elo-rank": "^1.0.4",
@@ -62,6 +61,7 @@
     "jimp": "^0.16.1",
     "mongoose": "^6.4.6",
     "multi-range-slider-react": "^1.0.7",
+    "nanoid": "^3.0.0",
     "nes.css": "^2.3.0",
     "pastebin-ts": "^1.2.0",
     "phaser": "^3.55.2",
@@ -78,9 +78,6 @@
     "react-tabs": "^4.0.1",
     "react-toastify": "^9.0.1",
     "react-tooltip": "^4.2.21",
-    "source-map-loader": "^3.0.1",
-    "ts-loader": "^9.2.8",
-    "uniqid": "^5.0.3",
     "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {
@@ -90,11 +87,9 @@
     "@types/elo-rank": "^1.0.1",
     "@types/fs-extra": "^9.0.13",
     "@types/react-dom": "^17.0.13",
-    "@types/uniqid": "^5.3.2",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
-    "babel-loader": "^8.3.0",
-    "css-loader": "^6.7.1",
+    "esbuild": "^0.16.16",
     "eslint": "^8.10.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react-hooks": "^4.3.0",
@@ -102,11 +97,7 @@
     "npm-run-all": "^4.1.5",
     "openapi-typescript": "^5.3.0",
     "redux-devtools-extension": "^2.13.9",
-    "style-loader": "^3.3.1",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.6.4",
-    "webpack": "^5.70.0",
-    "webpack-bundle-analyzer": "^4.7.0",
-    "webpack-cli": "^4.9.2"
+    "typescript": "^4.6.4"
   }
 }

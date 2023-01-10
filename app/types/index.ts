@@ -171,10 +171,10 @@ export enum ReadWriteMode {
   ERASE = "ERASE"
 }
 
-export interface ICreditNames {
-  Contact: string[]
-  Discord: string[]
-  Name: string[]
+export interface ICreditName {
+  Contact: string
+  Discord: string
+  Name: string
 }
 
 export interface IMessage {
