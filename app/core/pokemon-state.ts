@@ -6,10 +6,11 @@ import { AttackType } from "../types/enum/Game"
 import PokemonFactory from "../models/pokemon-factory"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
-import { IPokemonEntity } from "../types"
+import { IPokemonEntity, Transfer } from "../types"
 import { Synergy } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
 import { FlyingProtectThreshold } from "../types/Config"
+import { getPortraitSrc } from "../public/src/utils"
 
 export default class PokemonState {
   handleHeal(
@@ -67,7 +68,7 @@ export default class PokemonState {
 
         if (pokemon.items.has(Item.POKE_DOLL)) {
           reducedDamage = Math.ceil(reducedDamage * 0.7)
-        }
+          }
 
         if (attacker && attacker.status.electricField) {
           reducedDamage = Math.ceil(reducedDamage * 1.3)
@@ -155,7 +156,22 @@ export default class PokemonState {
           }
         }
 
+        pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {
+          index: attacker?.index,
+          type: attackType,
+          amount: residualDamage,
+          x: pokemon.positionX,
+          y: pokemon.positionY,
+          id: pokemon.simulation.id
+        })
+
+        if (pokemon.shield > 0) {
+          residualDamage = Math.max(0, reducedDamage - pokemon.shield)
+          pokemon.shield = Math.max(0, pokemon.shield - reducedDamage)
+        }
+
         pokemon.life = Math.max(0, pokemon.life - residualDamage)
+
         // console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
 
         if (pokemon) {
@@ -373,37 +389,37 @@ export default class PokemonState {
           const nearestAvailableCoordinate =
             this.getFarthestTargetCoordinateAvailablePlace(pokemon, board)
           if (nearestAvailableCoordinate) {
-            if (pokemon.effects.includes(Effect.ODD_FLOWER)) {
-              pokemon.simulation.addPokemon(
-                PokemonFactory.createPokemonFromName(Pkm.ODDISH),
+          if (pokemon.effects.includes(Effect.ODD_FLOWER)) {
+            pokemon.simulation.addPokemon(
+              PokemonFactory.createPokemonFromName(Pkm.ODDISH),
                 nearestAvailableCoordinate.x,
                 nearestAvailableCoordinate.y,
-                pokemon.team
-              )
-            } else if (pokemon.effects.includes(Effect.GLOOM_FLOWER)) {
-              pokemon.simulation.addPokemon(
-                PokemonFactory.createPokemonFromName(Pkm.GLOOM),
+              pokemon.team
+            )
+          } else if (pokemon.effects.includes(Effect.GLOOM_FLOWER)) {
+            pokemon.simulation.addPokemon(
+              PokemonFactory.createPokemonFromName(Pkm.GLOOM),
                 nearestAvailableCoordinate.x,
                 nearestAvailableCoordinate.y,
-                pokemon.team
-              )
-            } else if (pokemon.effects.includes(Effect.VILE_FLOWER)) {
-              pokemon.simulation.addPokemon(
-                PokemonFactory.createPokemonFromName(Pkm.VILEPLUME),
+              pokemon.team
+            )
+          } else if (pokemon.effects.includes(Effect.VILE_FLOWER)) {
+            pokemon.simulation.addPokemon(
+              PokemonFactory.createPokemonFromName(Pkm.VILEPLUME),
                 nearestAvailableCoordinate.x,
                 nearestAvailableCoordinate.y,
-                pokemon.team
-              )
-            } else if (pokemon.effects.includes(Effect.SUN_FLOWER)) {
-              pokemon.simulation.addPokemon(
-                PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM),
+              pokemon.team
+            )
+          } else if (pokemon.effects.includes(Effect.SUN_FLOWER)) {
+            pokemon.simulation.addPokemon(
+              PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM),
                 nearestAvailableCoordinate.x,
                 nearestAvailableCoordinate.y,
-                pokemon.team
-              )
-            }
+              pokemon.team
+            )
           }
         }
+      }
       }
 
       if (pokemon.name === Pkm.TAPU_KOKO) {

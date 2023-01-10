@@ -682,7 +682,8 @@ export class OnJoinCommand extends Command<
           this.state.players.size + 1,
           user.pokemonCollection,
           user.title,
-          user.role
+          user.role,
+          this.room
         )
 
         this.state.players.set(client.auth.uid, player)

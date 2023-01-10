@@ -2,12 +2,13 @@ import { GameObjects } from "phaser"
 import Pokemon from "./pokemon"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import GameScene from "../scenes/game-scene"
-import { IPlayer, IPokemonEntity } from "../../../../types"
+import { Emotion, IPlayer, IPokemonEntity } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import { DataChange } from "@colyseus/schema"
-import { PokemonActionState } from "../../../../types/enum/Game"
+import { AttackType, PokemonActionState } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
+import { getAvatarSrc, getPortraitSrc } from "../../utils"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -382,26 +383,12 @@ export default class BattleManager {
               pkm.detail.atkSpeed.textContent = pokemon.atkSpeed.toFixed(2)
             }
           } else if (change.field == "life") {
-            if (change.value && change.previousValue) {
-              this.displayDamage(
-                pkm.x,
-                pkm.y,
-                change.value - change.previousValue
-              )
-            }
             pkm.life = pokemon.life
             pkm.lifebar?.setAmount(pkm.life)
             if (pkm.detail) {
               pkm.detail.hp.textContent = pokemon.life.toString()
             }
           } else if (change.field == "shield") {
-            if (change.value && change.previousValue) {
-              this.displayDamage(
-                pkm.x,
-                pkm.y,
-                change.value - change.previousValue
-              )
-            }
             if (change.value > 0) {
               pkm.shield = pokemon.shield
               pkm.lifebar?.setShieldAmount(pkm.shield)
@@ -636,46 +623,77 @@ export default class BattleManager {
     })
   }
 
-  displayDamage(x: number, y: number, damage: number) {
-    let color
-    let damageText
-    if (damage >= 0) {
-      color = "#00FF00"
-      damageText = `+${damage}`
-    } else {
-      color = "#FF0000"
-      damageText = damage
-    }
-    const textStyle = {
-      fontSize: "25px",
-      fontFamily: "Verdana",
-      color: color,
-      align: "center",
-      strokeThickness: 2,
+  displayDamage(
+    positionX: number,
+    positionY: number,
+    damage: number,
+    type: AttackType,
+    index: string,
+    id: string
+  ) {
+    if (this.player.id === id) {
+      const coordinates = transformAttackCoordinate(positionX, positionY)
+      const color =
+        type === AttackType.PHYSICAL
+          ? "#e76e55"
+          : AttackType.SPECIAL
+          ? "#209cee"
+          : "#f7d51d"
+      const textStyle = {
+        fontSize: "20px",
+        fontFamily: "Verdana",
+        color: color,
+        align: "center",
+        strokeThickness: 2,
       stroke: "#000"
-    }
-    const text = this.scene.add.existing(
-      new GameObjects.Text(this.scene, x - 25, y - 30, damageText, textStyle)
-    )
-    text.setDepth(9)
+      }
+      const dx = Math.round(50 * (Math.random() - 0.5))
 
-    this.scene.add.tween({
-      targets: [text],
-      ease: "Linear",
-      duration: 1000,
-      delay: 0,
-      alpha: {
-        getStart: () => 1,
+      const image = this.scene.add.existing(
+        new GameObjects.Image(
+          this.scene,
+          coordinates[0] + dx,
+          coordinates[1] - 60,
+          `portrait-${index}`
+        )
+          .setScale(0.5, 0.5)
+          .setOrigin(0, 0)
+      )
+      const text = this.scene.add.existing(
+        new GameObjects.Text(
+          this.scene,
+          coordinates[0] + dx + 25,
+          coordinates[1] - 60,
+          damage.toString(),
+          textStyle
+        )
+      )
+      image.setDepth(9)
+      text.setDepth(10)
+
+      this.scene.add.tween({
+        targets: [text, image],
+        ease: "linear",
+        duration: 1000,
+        delay: 500,
+        y: {
+          getStart: () => coordinates[1] - 60,
+          getEnd: () => coordinates[1] - 120
+        },
+        alpha: {
+          getStart: () => 1,
         getEnd: () => 0
-      },
+        },
       y: {
         getStart: () => y - 30,
         getEnd: () => y - 90
       },
-      onComplete: () => {
-        text.destroy(true)
+        onComplete: () => {
+          image.destroy(true)
+          text.destroy(true)
       }
-    })
+      })
+    }
   }
 
   setPlayer(player: IPlayer) {
