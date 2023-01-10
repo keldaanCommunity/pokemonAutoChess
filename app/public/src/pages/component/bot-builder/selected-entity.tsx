@@ -13,6 +13,7 @@ import {
   AbilityName,
   AbilityDescription,
 } from "../../../../../types/strings/Ability"
+import SynergyIcon from "../icons/synergy-icon"
 
 const entityStyle: CSS.Properties = {
   position: "absolute",
@@ -132,9 +133,7 @@ export default function SelectedEntity(props: {
           <p style={{ color: RarityColor[pokemon.rarity] }}>{pokemon.rarity}</p>
           <div>
             {pokemon.types.map((type) => {
-              return (
-                <img key={"img" + type} src={"assets/types/" + type + ".png"} />
-              )
+              return (<SynergyIcon type={type} key={"img" + type} />)
             })}
           </div>
           <p>Health: {pokemon.hp}</p>

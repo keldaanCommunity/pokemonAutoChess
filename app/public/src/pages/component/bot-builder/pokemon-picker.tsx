@@ -6,6 +6,8 @@ import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/typ
 import { Item } from "../../../../../types/enum/Item"
 import { getPortraitSrc } from "../../../utils"
 import { DetailledPkm, Emotion } from "../../../../../types"
+import SynergyIcon from "../icons/synergy-icon"
+import { Synergy } from "../../../../../types/enum/Synergy"
 
 const pokemonPoolStyle: CSS.Properties = {
   display: "flex",
@@ -36,7 +38,7 @@ export default function PokemonPicker(props: {
         {Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL).map((t) => {
           return (
             <Tab style={cursorStyle} key={t}>
-              <img src={"assets/types/" + t + ".png"}></img>
+              <SynergyIcon type={t as Synergy} />
             </Tab>
           )
         })}
