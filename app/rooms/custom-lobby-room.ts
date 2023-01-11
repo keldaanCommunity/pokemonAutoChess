@@ -686,7 +686,11 @@ export default class CustomLobbyRoom extends LobbyRoom {
       super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
-      return user
+      if (user.displayName) {
+        return user
+      } else {
+        throw "no display name"
+      }
     } catch (error) {
       console.log(error)
     }

@@ -30,7 +30,7 @@ const initalState: INetwork = {
   game: undefined,
   after: undefined,
   uid: "",
-  displayName: ""
+  displayName: "",
 }
 
 export const networkSlice = createSlice({
@@ -46,6 +46,7 @@ export const networkSlice = createSlice({
       }
     },
     logOut: (state) => {
+      state.client = new Client(endpoint)
       state.uid = ""
       state.displayName = ""
       state.preparation = undefined
@@ -83,7 +84,7 @@ export const networkSlice = createSlice({
       }
       if (state.preparation) {
         state.preparation.send(Transfer.NEW_MESSAGE, {
-          payload: action.payload
+          payload: action.payload,
         })
       }
     },
@@ -203,8 +204,8 @@ export const networkSlice = createSlice({
     },
     kick: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.KICK, action.payload)
-    }
-  }
+    },
+  },
 })
 
 export const {
@@ -247,7 +248,7 @@ export const {
   refreshClick,
   searchById,
   setTitle,
-  kick
+  kick,
 } = networkSlice.actions
 
 export default networkSlice.reducer
