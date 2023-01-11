@@ -12,7 +12,7 @@ const pStyle = {
   margin: "0px",
 }
 
-const imgStyle = { width: "20px", height: "20px" }
+const imgStyle = { width: "32px", height: "32px" }
 
 const divStyle = { display: "flex", justifyContent: "center", gap: "5px" }
 
@@ -37,7 +37,9 @@ export function GamePokemonDetail(props: { pokemon: Pokemon }) {
           )}
         />
         <div>
-          {props.pokemon.types.map((type) => <SynergyIcon type={type} key={type} />)}
+          {props.pokemon.types.map((type) => (
+            <SynergyIcon type={type} key={type} />
+          ))}
         </div>
         <p style={{ color: RarityColor[props.pokemon.rarity] }}>
           {props.pokemon.rarity}

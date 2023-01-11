@@ -2,10 +2,10 @@ import React from "react"
 import CSS from "csstype"
 
 const imgStyle: CSS.Properties = {
-  width: "60px",
-  height: "60px",
+  width: "64px",
+  height: "64px",
   imageRendering: "pixelated",
-  marginRight: "10px"
+  marginRight: "10px",
 }
 
 export default function WikiStatistic() {
@@ -15,7 +15,7 @@ export default function WikiStatistic() {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          flexFlow: "column"
+          flexFlow: "column",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", margin: "10px" }}>
@@ -43,7 +43,7 @@ export default function WikiStatistic() {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          flexFlow: "column"
+          flexFlow: "column",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", margin: "10px" }}>
