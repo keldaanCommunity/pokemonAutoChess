@@ -26,3 +26,7 @@ ReactDOM.render(
 
   document.getElementById("root")
 )
+
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('sw.js')
+}
