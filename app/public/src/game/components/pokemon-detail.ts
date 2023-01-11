@@ -3,7 +3,7 @@ import { AttackType } from "../../../../types/enum/Game"
 import { Emotion } from "../../../../types"
 import {
   AbilityName,
-  AbilityDescription
+  AbilityDescription,
 } from "../../../../types/strings/Ability"
 import { Ability } from "../../../../types/enum/Ability"
 import { getPortraitSrc } from "../../utils"
@@ -143,8 +143,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     const af1 = document.createElement("div")
     af1.style.display = "flex"
     const hpImg = document.createElement("img")
-    hpImg.style.width = "20px"
-    hpImg.style.height = "20px"
+    hpImg.style.width = "32px"
+    hpImg.style.height = "32px"
     hpImg.src = "assets/icons/hp.png"
     af1.appendChild(hpImg)
     af1.appendChild(this.hp)
@@ -153,8 +153,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     bf1.style.display = "flex"
     bf1.appendChild(this.atk)
     const atkImg = document.createElement("img")
-    atkImg.style.width = "20px"
-    atkImg.style.height = "20px"
+    atkImg.style.width = "32px"
+    atkImg.style.height = "32px"
     atkImg.src = "assets/icons/atk.png"
     bf1.appendChild(atkImg)
 
@@ -168,8 +168,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     const af2 = document.createElement("div")
     af2.style.display = "flex"
     const defImg = document.createElement("img")
-    defImg.style.width = "20px"
-    defImg.style.height = "20px"
+    defImg.style.width = "32px"
+    defImg.style.height = "32px"
     defImg.src = "assets/icons/def.png"
     af2.appendChild(defImg)
     af2.appendChild(this.def)
@@ -178,8 +178,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     bf2.style.display = "flex"
     bf2.appendChild(this.range)
     const rangeImg = document.createElement("img")
-    rangeImg.style.width = "20px"
-    rangeImg.style.height = "20px"
+    rangeImg.style.width = "32px"
+    rangeImg.style.height = "32px"
     rangeImg.src = "assets/icons/range.png"
     bf2.appendChild(rangeImg)
 
@@ -193,8 +193,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     const af3 = document.createElement("div")
     af3.style.display = "flex"
     const speDefImg = document.createElement("img")
-    speDefImg.style.width = "20px"
-    speDefImg.style.height = "20px"
+    speDefImg.style.width = "32px"
+    speDefImg.style.height = "32px"
     speDefImg.src = "assets/icons/speDef.png"
     af3.appendChild(speDefImg)
     af3.appendChild(this.speDef)
@@ -203,8 +203,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     bf3.style.display = "flex"
     bf3.appendChild(this.atkSpeed)
     const atkSpeedImg = document.createElement("img")
-    atkSpeedImg.style.width = "20px"
-    atkSpeedImg.style.height = "20px"
+    atkSpeedImg.style.width = "32px"
+    atkSpeedImg.style.height = "32px"
     atkSpeedImg.src = "assets/icons/atkSpeed.png"
     bf3.appendChild(atkSpeedImg)
 
@@ -218,8 +218,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     const af4 = document.createElement("div")
     af4.style.display = "flex"
     const manaImg = document.createElement("img")
-    manaImg.style.width = "20px"
-    manaImg.style.height = "20px"
+    manaImg.style.width = "32px"
+    manaImg.style.height = "32px"
     manaImg.src = "assets/icons/mana.png"
     af4.appendChild(manaImg)
     af4.appendChild(this.mana)
@@ -228,8 +228,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     bf4.style.display = "flex"
     bf4.appendChild(this.critChance)
     const critChangeImg = document.createElement("img")
-    critChangeImg.style.width = "20px"
-    critChangeImg.style.height = "20px"
+    critChangeImg.style.width = "32px"
+    critChangeImg.style.height = "32px"
     critChangeImg.src = "assets/icons/critChance.png"
     bf4.appendChild(critChangeImg)
 
@@ -243,8 +243,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     const af5 = document.createElement("div")
     af5.style.display = "flex"
     const spellDamageImg = document.createElement("img")
-    spellDamageImg.style.width = "20px"
-    spellDamageImg.style.height = "20px"
+    spellDamageImg.style.width = "32px"
+    spellDamageImg.style.height = "32px"
     spellDamageImg.src = "assets/icons/spellDamage.png"
     af5.appendChild(spellDamageImg)
     af5.appendChild(this.spellDamage)
@@ -253,19 +253,19 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     bf5.style.display = "flex"
     bf5.appendChild(this.critDamage)
     const critDamageImg = document.createElement("img")
-    critDamageImg.style.width = "20px"
-    critDamageImg.style.height = "20px"
+    critDamageImg.style.width = "32px"
+    critDamageImg.style.height = "32px"
     critDamageImg.src = "assets/icons/critDamage.png"
     bf5.appendChild(critDamageImg)
 
     f5.appendChild(af5)
     f5.appendChild(bf5)
 
-    f1.style.height = "25px"
-    f2.style.height = "25px"
-    f3.style.height = "25px"
-    f4.style.height = "25px"
-    f5.style.height = "25px"
+    f1.style.height = "35px"
+    f2.style.height = "35px"
+    f3.style.height = "35px"
+    f4.style.height = "35px"
+    f5.style.height = "35px"
 
     profile.appendChild(avatar)
     profile.appendChild(pokemonName)
