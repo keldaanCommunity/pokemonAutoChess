@@ -133,6 +133,11 @@ const data = {
     mythicalPokemons: new Array<string>(),
     additionalPokemons: new Array<string>(),
   },
+  ARTIFICIAL: {
+    pokemons: new Array<string>(),
+    mythicalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>(),
+  },
 }
 
 ;(Object.keys(Synergy) as Synergy[]).forEach((type) => {

@@ -1,6 +1,6 @@
 {
   "name": "pokemon-autochess",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "",
   "keywords": [],
   "license": "MIT",
@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/keldaanInteractive/pokemonAutoChess/issues"
   },
-  "author": "arnaudgregoire",
+  "author": "keldaan-ag",
   "contributors": [
     "ogus"
   ],

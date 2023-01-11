@@ -71,4 +71,7 @@ export enum Effect {
   LARGO,
   ALLEGRO,
   PRESTO,
+  DUBIOUS_DISC,
+  LINK_CABLE,
+  GOOGLE_SPECS
 }

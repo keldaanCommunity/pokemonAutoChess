@@ -1046,6 +1046,24 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
+        case Effect.DUBIOUS_DISC:
+          if (types.includes(Synergy.ARTIFICIAL)) {
+            pokemon.effects.push(Effect.DUBIOUS_DISC)
+          }
+          break
+
+        case Effect.LINK_CABLE:
+          if (types.includes(Synergy.ARTIFICIAL)) {
+            pokemon.effects.push(Effect.LINK_CABLE)
+          }
+          break
+
+        case Effect.GOOGLE_SPECS:
+          if (types.includes(Synergy.ARTIFICIAL)) {
+            pokemon.effects.push(Effect.GOOGLE_SPECS)
+          }
+          break
+
         default:
           break
       }

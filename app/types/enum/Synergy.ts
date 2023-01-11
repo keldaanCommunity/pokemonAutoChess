@@ -23,5 +23,6 @@ export enum Synergy {
   FAIRY = "FAIRY",
   ICE = "ICE",
   FOSSIL = "FOSSIL",
-  SOUND = "SOUND"
+  SOUND = "SOUND",
+  ARTIFICIAL = "ARTIFICIAL",
 }
