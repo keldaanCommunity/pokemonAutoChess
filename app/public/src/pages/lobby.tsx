@@ -22,7 +22,7 @@ import {
   requestBotList,
   requestLeaderboard,
   requestBotLeaderboard,
-  requestLevelLeaderboard
+  requestLevelLeaderboard,
 } from "../stores/NetworkStore"
 import {
   setBotData,
@@ -48,7 +48,7 @@ import {
   removeMessage,
   setLevelLeaderboard,
   setBotLeaderboard,
-  setLeaderboard
+  setLeaderboard,
 } from "../stores/LobbyStore"
 import { ICustomLobbyState, ISuggestionUser, Transfer } from "../../../types"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
@@ -65,6 +65,9 @@ export default function Lobby() {
   const dispatch = useAppDispatch()
 
   const client: Client = useAppSelector((state) => state.network.client)
+  const room: Room<ICustomLobbyState> | undefined = useAppSelector(
+    (state) => state.network.lobby
+  )
   const uid: string = useAppSelector((state) => state.network.uid)
   const meta: IMeta[] = useAppSelector((state) => state.lobby.meta)
   const metaItems: IItemsStatistic[] = useAppSelector(
@@ -90,12 +93,12 @@ export default function Lobby() {
   const lobbyStyle = {
     display: "flex",
     justifyContent: "space-between",
-    marginTop: "-10px"
+    marginTop: "-10px",
   }
   const buttonStyle = {
     marginLeft: "10px",
     marginTop: "10px",
-    marginRight: "10px"
+    marginRight: "10px",
   }
 
   useEffect(() => {
@@ -133,7 +136,7 @@ export default function Lobby() {
                         changePokemonConfig({
                           id: key,
                           field: change.field,
-                          value: change.value
+                          value: change.value,
                         })
                       )
                     })
@@ -150,7 +153,7 @@ export default function Lobby() {
                     changeUser({
                       id: u.id,
                       field: change.field,
-                      value: change.value
+                      value: change.value,
                     })
                   )
                 })
@@ -308,8 +311,9 @@ export default function Lobby() {
             <button
               className="bubbly-error"
               style={buttonStyle}
-              onClick={() => {
-                firebase.auth().signOut()
+              onClick={async () => {
+                await room?.leave()
+                await firebase.auth().signOut()
                 dispatch(leaveLobby())
                 dispatch(logOut())
               }}
