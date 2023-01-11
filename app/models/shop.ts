@@ -71,7 +71,8 @@ export default class Shop {
       Pkm.MAGBY,
       Pkm.WHISMUR,
       Pkm.VANILLITE,
-      Pkm.BAGON
+      Pkm.BAGON,
+      Pkm.HONEDGE
     ]
 
     this.EPIC = [
@@ -114,7 +115,6 @@ export default class Shop {
       Pkm.REGIDRAGO,
       Pkm.REGIELEKI,
       Pkm.CASTFORM,
-      Pkm.VIRIZION,
       Pkm.REGICE,
       Pkm.REGISTEEL,
       Pkm.REGIROCK,

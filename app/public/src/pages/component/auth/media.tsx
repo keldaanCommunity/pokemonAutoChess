@@ -9,7 +9,7 @@ export default function Media() {
       <DiscordButton />
       <DonateButton />
       <PolicyButton />
-      <p>V2.4</p>
+      <p>V2.5</p>
     </div>
   )
 }

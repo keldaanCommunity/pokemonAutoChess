@@ -2,7 +2,7 @@ import { Item } from "../types/enum/Item"
 import { Orientation, PokemonActionState } from "../types/enum/Game"
 import MovingState from "./moving-state"
 import AttackingState from "./attacking-state"
-import { nanoid } from 'nanoid'
+import { nanoid } from "nanoid"
 import Status from "../models/colyseus-models/status"
 import Count from "../models/colyseus-models/count"
 import Simulation from "./simulation"
@@ -222,7 +222,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
   setMana(mana: number) {
     if (!this.status.silence && !this.status.protect) {
-      this.mana = Math.min(mana, this.maxMana)
+      this.mana = Math.max(0, Math.min(mana, this.maxMana))
     }
   }
 

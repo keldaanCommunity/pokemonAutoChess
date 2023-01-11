@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 import { Schema, type, ArraySchema, SetSchema } from "@colyseus/schema"
-import { nanoid } from 'nanoid'
+import { nanoid } from "nanoid"
 import { Emotion, IPokemon, AttackSprite } from "../../types"
 import { PkmCost } from "../../types/Config"
 import { Item } from "../../types/enum/Item"
@@ -190,7 +190,7 @@ export class Shuppet extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SHUPPET,
-      [Synergy.DARK, Synergy.GHOST],
+      [Synergy.DARK, Synergy.GHOST, Synergy.ARTIFICIAL],
       Rarity.LEGENDARY,
       Pkm.BANETTE,
       100,
@@ -214,7 +214,7 @@ export class Banette extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.BANETTE,
-      [Synergy.DARK, Synergy.GHOST],
+      [Synergy.DARK, Synergy.GHOST, Synergy.ARTIFICIAL],
       Rarity.LEGENDARY,
       Pkm.MEGA_BANETTE,
       140,
@@ -238,7 +238,7 @@ export class MegaBanette extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MEGA_BANETTE,
-      [Synergy.DARK, Synergy.GHOST],
+      [Synergy.DARK, Synergy.GHOST, Synergy.ARTIFICIAL],
       Rarity.LEGENDARY,
       Pkm.DEFAULT,
       240,
@@ -982,7 +982,7 @@ export class Beldum extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.BELDUM,
-      [Synergy.PSYCHIC, Synergy.METAL, Synergy.MINERAL],
+      [Synergy.PSYCHIC, Synergy.METAL, Synergy.ARTIFICIAL],
       Rarity.EPIC,
       Pkm.METANG,
       90,
@@ -1006,7 +1006,7 @@ export class Metang extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.METANG,
-      [Synergy.PSYCHIC, Synergy.METAL, Synergy.MINERAL],
+      [Synergy.PSYCHIC, Synergy.METAL, Synergy.ARTIFICIAL],
       Rarity.EPIC,
       Pkm.METAGROSS,
       130,
@@ -1030,7 +1030,7 @@ export class Metagross extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.METAGROSS,
-      [Synergy.PSYCHIC, Synergy.METAL, Synergy.MINERAL],
+      [Synergy.PSYCHIC, Synergy.METAL, Synergy.ARTIFICIAL],
       Rarity.EPIC,
       Pkm.DEFAULT,
       230,
@@ -1414,13 +1414,13 @@ export class Honedge extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.HONEDGE,
-      [Synergy.GHOST, Synergy.METAL],
-      Rarity.EPIC,
+      [Synergy.GHOST, Synergy.METAL, Synergy.ARTIFICIAL],
+      Rarity.RARE,
       Pkm.DOUBLADE,
       90,
       8,
-      4,
-      4,
+      3,
+      3,
       1,
       AttackSprite.DRAGON_MELEE,
       AttackType.PHYSICAL,
@@ -1438,13 +1438,13 @@ export class Doublade extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DOUBLADE,
-      [Synergy.GHOST, Synergy.METAL],
-      Rarity.EPIC,
+      [Synergy.GHOST, Synergy.METAL, Synergy.ARTIFICIAL],
+      Rarity.RARE,
       Pkm.AEGISLASH,
       130,
-      9,
-      6,
-      6,
+      8,
+      5,
+      5,
       1,
       AttackSprite.DRAGON_MELEE,
       AttackType.PHYSICAL,
@@ -1462,13 +1462,13 @@ export class Aegislash extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.AEGISLASH,
-      [Synergy.GHOST, Synergy.METAL],
-      Rarity.EPIC,
+      [Synergy.GHOST, Synergy.METAL, Synergy.ARTIFICIAL],
+      Rarity.RARE,
       Pkm.DEFAULT,
       230,
-      20,
-      8,
-      8,
+      18,
+      7,
+      7,
       1,
       AttackSprite.DRAGON_MELEE,
       AttackType.PHYSICAL,
@@ -1918,7 +1918,7 @@ export class Porygon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.PORYGON,
-      [Synergy.NORMAL, Synergy.PSYCHIC],
+      [Synergy.NORMAL, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
       Rarity.EPIC,
       Pkm.PORYGON_2,
       90,
@@ -1942,7 +1942,7 @@ export class Porygon2 extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.PORYGON_2,
-      [Synergy.NORMAL, Synergy.PSYCHIC],
+      [Synergy.NORMAL, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
       Rarity.EPIC,
       Pkm.PORYGON_Z,
       130,
@@ -1966,7 +1966,7 @@ export class PorygonZ extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.PORYGON_Z,
-      [Synergy.NORMAL, Synergy.PSYCHIC],
+      [Synergy.NORMAL, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
       Rarity.EPIC,
       Pkm.DEFAULT,
       230,
@@ -3357,7 +3357,7 @@ export class Vanillite extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.VANILLITE,
-      [Synergy.FAIRY, Synergy.ICE],
+      [Synergy.FAIRY, Synergy.ICE, Synergy.ARTIFICIAL],
       Rarity.RARE,
       Pkm.VANILLISH,
       80,
@@ -3381,7 +3381,7 @@ export class Vanillish extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.VANILLISH,
-      [Synergy.FAIRY, Synergy.ICE],
+      [Synergy.FAIRY, Synergy.ICE, Synergy.ARTIFICIAL],
       Rarity.RARE,
       Pkm.VANILLUXE,
       120,
@@ -3405,7 +3405,7 @@ export class Vanilluxe extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.VANILLUXE,
-      [Synergy.FAIRY, Synergy.ICE],
+      [Synergy.FAIRY, Synergy.ICE, Synergy.ARTIFICIAL],
       Rarity.RARE,
       Pkm.DEFAULT,
       220,
@@ -7148,7 +7148,7 @@ export class Castform extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CASTFORM,
-      [Synergy.NORMAL, Synergy.GHOST],
+      [Synergy.NORMAL, Synergy.ARTIFICIAL],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
@@ -7172,7 +7172,7 @@ export class CastformSun extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CASTFORM_SUN,
-      [Synergy.NORMAL, Synergy.GHOST, Synergy.FIRE],
+      [Synergy.NORMAL, Synergy.ARTIFICIAL, Synergy.FIRE],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
@@ -7196,7 +7196,7 @@ export class CastformRain extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CASTFORM_RAIN,
-      [Synergy.NORMAL, Synergy.GHOST, Synergy.WATER],
+      [Synergy.NORMAL, Synergy.ARTIFICIAL, Synergy.WATER],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
@@ -7220,7 +7220,7 @@ export class CastformHail extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CASTFORM_HAIL,
-      [Synergy.NORMAL, Synergy.GHOST, Synergy.ICE],
+      [Synergy.NORMAL, Synergy.ARTIFICIAL, Synergy.ICE],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
@@ -7460,7 +7460,7 @@ export class Rotom extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ROTOM,
-      [Synergy.ELECTRIC, Synergy.GHOST],
+      [Synergy.ELECTRIC, Synergy.GHOST, Synergy.ARTIFICIAL],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
@@ -7700,7 +7700,7 @@ export class Mewtwo extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MEWTWO,
-      [Synergy.PSYCHIC, Synergy.MONSTER],
+      [Synergy.PSYCHIC, Synergy.MONSTER, Synergy.ARTIFICIAL],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
@@ -7892,7 +7892,7 @@ export class Deoxys extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DEOXYS,
-      [Synergy.PSYCHIC, Synergy.HUMAN],
+      [Synergy.PSYCHIC, Synergy.HUMAN, Synergy.ARTIFICIAL],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
@@ -10080,7 +10080,7 @@ export class Voltorb extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.VOLTORB,
-      [Synergy.ELECTRIC, Synergy.METAL],
+      [Synergy.ELECTRIC, Synergy.ARTIFICIAL],
       Rarity.COMMON,
       Pkm.ELECTRODE,
       60,
@@ -10105,7 +10105,7 @@ export class Electrode extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ELECTRODE,
-      [Synergy.ELECTRIC, Synergy.METAL],
+      [Synergy.ELECTRIC, Synergy.ARTIFICIAL],
       Rarity.COMMON,
       Pkm.DEFAULT,
       120,

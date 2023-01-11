@@ -129,6 +129,23 @@ export default class AttackingState extends PokemonState {
       if (pokemon.effects.includes(Effect.PUNISHMENT)) {
         pokemon.setMana(pokemon.mana + 10)
       }
+
+      if (
+        pokemon.effects.includes(Effect.DUBIOUS_DISC) ||
+        pokemon.effects.includes(Effect.LINK_CABLE) ||
+        pokemon.effects.includes(Effect.GOOGLE_SPECS)
+      ) {
+        const manaGain = pokemon.effects.includes(Effect.DUBIOUS_DISC)
+          ? 15
+          : pokemon.effects.includes(Effect.LINK_CABLE)
+          ? 30
+          : 45
+        if (Math.random() > 0.6) {
+          target.setMana(target.mana - 20)
+          target.count.manaBurnCount++
+          pokemon.setMana(pokemon.mana + manaGain)
+        }
+      }
       pokemon.orientation = board.orientation(
         pokemon.positionX,
         pokemon.positionY,

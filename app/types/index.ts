@@ -416,6 +416,7 @@ export interface ICount {
   earthquakeCount: number
   mindBlownCount: number
   spellBlockedCount: number
+  manaBurnCount: number
 }
 
 export interface IPreparationMetadata {
