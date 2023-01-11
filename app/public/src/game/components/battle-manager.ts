@@ -582,7 +582,7 @@ export default class BattleManager {
       stroke: "#000"
     }
     const manaBurn = this.scene.add.existing(
-      new GameObjects.Text(this.scene, x - 30, y - 50, "Mana Burn!", textStyle)
+      new GameObjects.Text(this.scene, x - 30, y - 50, "Burn!", textStyle)
     )
     manaBurn.setDepth(9)
     this.scene.add.tween({
