@@ -37,7 +37,7 @@ export function GamePokemonDetail(props: { pokemon: Pokemon }) {
           )}
         />
         <div>
-          {props.pokemon.types.map((type) => <SynergyIcon type={type} />)}
+          {props.pokemon.types.map((type) => <SynergyIcon type={type} key={type} />)}
         </div>
         <p style={{ color: RarityColor[props.pokemon.rarity] }}>
           {props.pokemon.rarity}
