@@ -156,7 +156,7 @@ export const SynergyDetail: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.RISING_VOLTAGE,
     Effect.OVERDRIVE
   ],
-  [Synergy.FIGHTING]: [Effect.REVENGE, Effect.PUNISHMENT],
+  [Synergy.FIGHTING]: [Effect.GUTS, Effect.DEFIANT, Effect.JUSTIFIED],
   [Synergy.PSYCHIC]: [Effect.AMNESIA, Effect.LIGHT_SCREEN, Effect.EERIE_SPELL],
   [Synergy.DARK]: [Effect.HONE_CLAWS, Effect.ASSURANCE, Effect.BEAT_UP],
   [Synergy.METAL]: [Effect.IRON_DEFENSE, Effect.AUTOTOMIZE],

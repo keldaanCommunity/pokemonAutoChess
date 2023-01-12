@@ -18,8 +18,9 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.EERIE_IMPULSE]: "Eerie Impulse",
   [Effect.RISING_VOLTAGE]: "Rising Voltage",
   [Effect.OVERDRIVE]: "Overdrive",
-  [Effect.REVENGE]: "Revenge",
-  [Effect.PUNISHMENT]: "Punishment",
+  [Effect.GUTS]: "Guts",
+  [Effect.DEFIANT]: "Defiant",
+  [Effect.JUSTIFIED]: "Justified",
   [Effect.AMNESIA]: "Amnesia",
   [Effect.LIGHT_SCREEN]: "Light Screen",
   [Effect.EERIE_SPELL]: "Eerie Spell",
@@ -166,13 +167,18 @@ export const EffectDescription: {
     esp: "?NONE?",
     fra: "?NONE?"
   },
-  [Effect.REVENGE]: {
-    eng: "+5 Mana per hit.",
+  [Effect.GUTS]: {
+    eng: "All allies block 2 damage",
     esp: "+5 maná/ataque para todos los pkm",
     fra: "+5 mana / attaque pour tous les pkm"
   },
-  [Effect.PUNISHMENT]: {
-    eng: "+10 extra Mana per hit.",
+  [Effect.DEFIANT]: {
+    eng: "All allies block 4 damage",
+    esp: "+10 maná/ataque para todos los pkm",
+    fra: "+10 mana / attaque pour tous les pkm"
+  },
+  [Effect.JUSTIFIED]: {
+    eng: "All allies block 6 damage",
     esp: "+10 maná/ataque para todos los pkm",
     fra: "+10 mana / attaque pour tous les pkm"
   },

@@ -123,13 +123,6 @@ export default class AttackingState extends PokemonState {
       ) {
         target.status.triggerSilence(3000, target, board)
       }
-      if (pokemon.effects.includes(Effect.REVENGE)) {
-        pokemon.setMana(pokemon.mana + 5)
-      }
-      if (pokemon.effects.includes(Effect.PUNISHMENT)) {
-        pokemon.setMana(pokemon.mana + 10)
-      }
-
       if (
         pokemon.effects.includes(Effect.DUBIOUS_DISC) ||
         pokemon.effects.includes(Effect.LINK_CABLE) ||

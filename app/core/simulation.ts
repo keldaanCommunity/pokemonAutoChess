@@ -761,12 +761,16 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.REVENGE:
-          pokemon.effects.push(Effect.REVENGE)
+        case Effect.GUTS:
+          pokemon.effects.push(Effect.GUTS)
           break
 
-        case Effect.PUNISHMENT:
-          pokemon.effects.push(Effect.PUNISHMENT)
+        case Effect.DEFIANT:
+          pokemon.effects.push(Effect.DEFIANT)
+          break
+
+        case Effect.JUSTIFIED:
+          pokemon.effects.push(Effect.JUSTIFIED)
           break
 
         case Effect.IRON_DEFENSE:
@@ -818,18 +822,24 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.AMNESIA:
-          pokemon.effects.push(Effect.AMNESIA)
-          pokemon.addSpellDamage(50)
+          if (types.includes(Synergy.PSYCHIC)) {
+            pokemon.effects.push(Effect.AMNESIA)
+            pokemon.addSpellDamage(50)
+          }
           break
 
         case Effect.LIGHT_SCREEN:
-          pokemon.effects.push(Effect.LIGHT_SCREEN)
-          pokemon.addSpellDamage(100)
+          if (types.includes(Synergy.PSYCHIC)) {
+            pokemon.effects.push(Effect.LIGHT_SCREEN)
+            pokemon.addSpellDamage(100)
+          }
           break
 
         case Effect.EERIE_SPELL:
-          pokemon.effects.push(Effect.EERIE_SPELL)
-          pokemon.addSpellDamage(150)
+          if (types.includes(Synergy.PSYCHIC)) {
+            pokemon.effects.push(Effect.EERIE_SPELL)
+            pokemon.addSpellDamage(150)
+          }
           break
 
         case Effect.MEDITATE:
