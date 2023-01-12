@@ -4,10 +4,10 @@ import { connect, FilterQuery, CallbackError } from "mongoose"
 import Chat from "../models/mongo-models/chat"
 import UserMetadata, {
   IPokemonConfig,
-  IUserMetadata,
+  IUserMetadata
 } from "../models/mongo-models/user-metadata"
 import LeaderboardInfo, {
-  ILeaderboardInfo,
+  ILeaderboardInfo
 } from "../models/colyseus-models/leaderboard-info"
 import { ArraySchema } from "@colyseus/schema"
 import LobbyUser from "../models/colyseus-models/lobby-user"
@@ -18,10 +18,10 @@ import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import BotV2, { IBot } from "../models/mongo-models/bot-v2"
 import Meta, { IMeta } from "../models/mongo-models/meta"
 import ItemsStatistic, {
-  IItemsStatistic,
+  IItemsStatistic
 } from "../models/mongo-models/items-statistic"
 import PokemonsStatistic, {
-  IPokemonsStatistic,
+  IPokemonsStatistic
 } from "../models/mongo-models/pokemons-statistic"
 import { PastebinAPI } from "pastebin-ts/dist/api"
 import { getAvatarSrc, getPortraitSrc } from "../public/src/utils"
@@ -32,13 +32,13 @@ import {
   ISuggestionUser,
   Title,
   Role,
-  CDN_PORTRAIT_URL,
+  CDN_PORTRAIT_URL
 } from "../types"
 import { Pkm } from "../types/enum/Pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import PokemonConfig from "../models/colyseus-models/pokemon-config"
 import BotMonitoring, {
-  IBotMonitoring,
+  IBotMonitoring
 } from "../models/mongo-models/bot-monitoring"
 
 export default class CustomLobbyRoom extends LobbyRoom {
@@ -64,13 +64,13 @@ export default class CustomLobbyRoom extends LobbyRoom {
       this.pastebin = new PastebinAPI({
         api_dev_key: process.env.PASTEBIN_API_DEV_KEY!,
         api_user_name: process.env.PASTEBIN_API_USERNAME!,
-        api_user_password: process.env.PASTEBIN_API_PASSWORD!,
+        api_user_password: process.env.PASTEBIN_API_PASSWORD!
       })
     }
 
     if (process.env.WEBHOOK_URL) {
       this.discordWebhook = new WebhookClient({
-        url: process.env.WEBHOOK_URL,
+        url: process.env.WEBHOOK_URL
       })
     }
 
@@ -103,11 +103,12 @@ export default class CustomLobbyRoom extends LobbyRoom {
     })
 
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
-      if (message.payload != "") {
+      const user = this.state.users.get(client.auth.uid)
+      if (user && !user.anonymous && message.payload != "") {
         this.state.addMessage(
-          this.state.users.get(client.auth.uid).name,
+          user.name,
           message.payload,
-          this.state.users.get(client.auth.uid).avatar,
+          user.avatar,
           Date.now(),
           true
         )
@@ -196,7 +197,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           ?.createPaste({
             text: JSON.stringify(bot),
             title: `${user.name} has uploaded BOT ${bot.name}`,
-            format: "json",
+            format: "json"
           })
           .then((data: unknown) => {
             const dsEmbed = new MessageEmbed()
@@ -210,7 +211,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             client.send(Transfer.PASTEBIN_URL, { url: data as string })
             try {
               this.discordWebhook?.send({
-                embeds: [dsEmbed],
+                embeds: [dsEmbed]
               })
             } catch (error) {
               console.log(error)
@@ -288,7 +289,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
                   shinyEmotions: [],
                   dust: 40,
                   selectedEmotion: Emotion.NORMAL,
-                  selectedShiny: false,
+                  selectedShiny: false
                 })
               }
             })
@@ -493,7 +494,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
                     user.booster,
                     user.titles,
                     user.title,
-                    user.role
+                    user.role,
+                    false
                   )
                 )
               }
@@ -520,7 +522,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
                   elo: u.elo,
                   name: u.displayName,
                   level: u.level,
-                  avatar: u.avatar,
+                  avatar: u.avatar
                 }
               })
               client.send(Transfer.SUGGESTIONS, suggestions)
@@ -600,7 +602,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
                     name: user.displayName,
                     rank: i + 1,
                     avatar: user.avatar,
-                    value: user.elo,
+                    value: user.elo
                   })
                 }
               }
@@ -620,7 +622,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
                     name: user.displayName,
                     rank: i + 1,
                     avatar: user.avatar,
-                    value: user.level,
+                    value: user.level
                   })
                 }
               }
@@ -634,7 +636,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
                 name: `${bot.name} by @${bot.author}`,
                 avatar: bot.avatar,
                 rank: i + 1,
-                value: bot.elo,
+                value: bot.elo
               })
             })
           })
@@ -742,7 +744,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
                     user.booster,
                     user.titles,
                     user.title,
-                    user.role
+                    user.role,
+                    client.auth.email === undefined
                   )
                 )
               }
@@ -754,7 +757,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             uid: client.auth.uid,
             displayName: client.auth.displayName,
             booster: numberOfBoosters,
-            pokemonCollection: new Map<string, IPokemonConfig>(),
+            pokemonCollection: new Map<string, IPokemonConfig>()
           })
           this.state.users.set(
             client.auth.uid,
@@ -774,7 +777,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
               numberOfBoosters,
               [],
               "",
-              Role.BASIC
+              Role.BASIC,
+              client.auth.email === undefined
             )
           )
         }

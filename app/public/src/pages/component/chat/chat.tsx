@@ -1,12 +1,13 @@
 import React, { useState } from "react"
 import "nes.css/css/nes.min.css"
-import { useAppDispatch } from "../../../hooks"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { sendMessage } from "../../../stores/NetworkStore"
 import ChatHistory from "./chat-history"
 
 export default function Chat(props: { source: string }) {
   const dispatch = useAppDispatch()
   const [currentText, setCurrentText] = useState<string>("")
+  const user = useAppSelector((state) => state[props.source].user)
 
   return (
     <div
@@ -24,13 +25,17 @@ export default function Chat(props: { source: string }) {
         flexBasis: "30%"
       }}
     >
-      <h1 className="my-h1">Chat</h1>
+      <h1 className="my-h1">
+        {user?.anonymous ? "Chat disabled for anonymous" : "Chat"}
+      </h1>
       <ChatHistory source={props.source} />
       <form
         onSubmit={(e) => {
-          e.preventDefault()
-          dispatch(sendMessage(currentText))
-          setCurrentText("")
+          if (!user?.anonymous) {
+            e.preventDefault()
+            dispatch(sendMessage(currentText))
+            setCurrentText("")
+          }
         }}
         style={{
           display: "flex",
@@ -42,9 +47,19 @@ export default function Chat(props: { source: string }) {
       >
         <div className="nes-field" style={{ width: "80%" }}>
           <input
-            placeholder="Type here ..."
+            placeholder={
+              user?.anonymous
+                ? "Chat disabled for anonymous users"
+                : "Type here ..."
+            }
+            disabled={user?.anonymous}
             id="name_field"
             type="text"
+            title={
+              user?.anonymous
+                ? "Chat disabled for anonymous users"
+                : "Type here ..."
+            }
             onChange={(e) => {
               setCurrentText(e.target.value)
             }}
@@ -52,7 +67,16 @@ export default function Chat(props: { source: string }) {
             className="my-input"
           />
         </div>
-        <button style={{ height: "7vh" }} className="bubbly-primary">
+        <button
+          style={{ height: "7vh" }}
+          className={user?.anonymous ? "bubbly-disabled" : "bubbly-primary"}
+          disabled={user?.anonymous}
+          title={
+            user?.anonymous
+              ? "Chat disabled for anonymous users"
+              : "Send message"
+          }
+        >
           Send
         </button>
       </form>

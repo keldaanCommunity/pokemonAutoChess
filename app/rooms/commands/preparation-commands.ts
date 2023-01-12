@@ -34,7 +34,8 @@ export class OnJoinCommand extends Command<
             false,
             false,
             user.title,
-            user.role
+            user.role,
+            auth.email === undefined
           )
         )
 
@@ -202,7 +203,8 @@ export class InitializeBotsCommand extends Command<
                 true,
                 true,
                 "",
-                Role.BOT
+                Role.BOT,
+                false
               )
             )
           })
@@ -278,7 +280,8 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
               true,
               true,
               "",
-              Role.BOT
+              Role.BOT,
+              false
             )
           )
 

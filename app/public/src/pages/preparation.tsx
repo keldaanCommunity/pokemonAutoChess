@@ -17,7 +17,8 @@ import {
   setGameStarted,
   setName,
   setOwnerId,
-  setOwnerName
+  setOwnerName,
+  setUser
 } from "../stores/PreparationStore"
 import GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
@@ -63,7 +64,7 @@ export default function Preparation() {
                 lastRoomId,
                 lastSessionId
               )
-              await initialize(r)
+              await initialize(r, user.uid)
               dispatch(joinPreparation(r))
             }
           } catch (error) {
@@ -76,7 +77,7 @@ export default function Preparation() {
       })
     }
 
-    const initialize = async (r: Room<PreparationState>) => {
+    const initialize = async (r: Room<PreparationState>, uid: string) => {
       r.state.users.forEach((u) => {
         dispatch(addUser(u))
       })
@@ -95,6 +96,10 @@ export default function Preparation() {
       }
       r.state.users.onAdd = (u) => {
         dispatch(addUser(u))
+
+        if (u.id === uid) {
+          dispatch(setUser(u))
+        }
 
         if (!u.isBot) {
           audio.current?.play()

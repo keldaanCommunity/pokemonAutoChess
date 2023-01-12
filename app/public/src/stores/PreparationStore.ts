@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IGameUser } from "../../../models/colyseus-models/game-user"
+import { GameUser, IGameUser } from "../../../models/colyseus-models/game-user"
 import { IMessage } from "../../../types"
 
 interface IUserPreparationState {
@@ -9,6 +9,7 @@ interface IUserPreparationState {
   ownerName: string
   messages: IMessage[]
   name: string
+  user: GameUser | undefined
 }
 
 const initialState: IUserPreparationState = {
@@ -17,13 +18,18 @@ const initialState: IUserPreparationState = {
   ownerId: "",
   ownerName: "",
   messages: [],
-  name: ""
+  name: "",
+  user: undefined
 }
 
 export const preparationSlice = createSlice({
   name: "preparation",
   initialState: initialState,
   reducers: {
+    setUser: (state, action: PayloadAction<GameUser>) => {
+      const u: GameUser = JSON.parse(JSON.stringify(action.payload))
+      state.user = u
+    },
     pushMessage: (state, action: PayloadAction<IMessage>) => {
       const m: IMessage = JSON.parse(JSON.stringify(action.payload))
       state.messages.push(m)
@@ -63,6 +69,7 @@ export const preparationSlice = createSlice({
 })
 
 export const {
+  setUser,
   setName,
   pushMessage,
   addUser,

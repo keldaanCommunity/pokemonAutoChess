@@ -76,15 +76,18 @@ export default class PreparationRoom extends Room {
     })
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       try {
-        this.dispatcher.dispatch(new OnMessageCommand(), {
-          client: client,
-          message: {
-            name: this.state.users.get(client.auth.uid).name,
-            avatar: this.state.users.get(client.auth.uid).avatar,
-            payload: message.payload,
-            time: Date.now()
-          }
-        })
+        const user = this.state.users.get(client.auth.uid)
+        if (user && !user.anonymous && message.payload != "") {
+          this.dispatcher.dispatch(new OnMessageCommand(), {
+            client: client,
+            message: {
+              name: user.name,
+              avatar: user.avatar,
+              payload: message.payload,
+              time: Date.now()
+            }
+          })
+        }
       } catch (error) {
         console.log(error)
       }

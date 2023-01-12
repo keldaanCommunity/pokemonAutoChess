@@ -11,6 +11,7 @@ export interface IGameUser {
   elo: number
   title: string
   role: Role
+  anonymous: boolean
 }
 export class GameUser extends Schema implements IGameUser {
   @type("string") id: string
@@ -22,6 +23,7 @@ export class GameUser extends Schema implements IGameUser {
   @type(MapTileset) map = new MapTileset()
   @type("string") title: string
   @type("string") role: Role
+  @type("boolean") anonymous: boolean
 
   constructor(
     id: string,
@@ -31,7 +33,8 @@ export class GameUser extends Schema implements IGameUser {
     isBot: boolean,
     ready: boolean,
     title: string,
-    role: Role
+    role: Role,
+    anonymous: boolean
   ) {
     super()
     this.id = id
@@ -42,5 +45,6 @@ export class GameUser extends Schema implements IGameUser {
     this.elo = elo
     this.title = title
     this.role = role
+    this.anonymous = anonymous
   }
 }
