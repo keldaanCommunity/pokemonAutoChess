@@ -107,10 +107,6 @@ export default class PokemonState {
           // console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
         }
 
-        if (pokemon.skill == Ability.WONDER_GUARD && pokemon.shield == 0) {
-          reducedDamage = 1
-        }
-
         if (pokemon.dodge > Math.random()) {
           if (!(attacker && attacker.items.has(Item.XRAY_VISION))) {
             reducedDamage = 0
@@ -141,6 +137,10 @@ export default class PokemonState {
         if (pokemon.shield > 0) {
           residualDamage = Math.max(0, reducedDamage - pokemon.shield)
           pokemon.shield = Math.max(0, pokemon.shield - reducedDamage)
+        }
+
+        if (pokemon.skill == Ability.WONDER_GUARD) {
+          residualDamage = 1
         }
 
         pokemon.life = Math.max(0, pokemon.life - residualDamage)
