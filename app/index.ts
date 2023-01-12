@@ -133,6 +133,14 @@ app.get("/types", (req, res) => {
   res.send(PRECOMPUTED_TYPE_POKEMONS_ALL)
 })
 
+app.get("/items", (req, res) => {
+  res.send(Item)
+})
+
+app.get("/types-trigger", (req, res) => {
+  res.send(TypeTrigger)
+})
+
 const basicAuthMiddleware = basicAuth({
   // list of users and passwords
   users: {
@@ -151,6 +159,8 @@ import CustomLobbyRoom from "./rooms/custom-lobby-room"
 import PreprationRoom from "./rooms/preparation-room"
 import GameRoom from "./rooms/game-room"
 import { Pkm } from "./types/enum/Pokemon"
+import { Item } from "./types/enum/Item"
+import { TypeTrigger } from "./types/Config"
 
 gameServer.define("after-game", AfterGameRoom)
 gameServer.define("lobby", CustomLobbyRoom)
