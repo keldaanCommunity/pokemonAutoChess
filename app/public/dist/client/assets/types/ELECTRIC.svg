@@ -1,11 +1,17 @@
-<?xml version="1.0"?>
-<svg width="34" height="34" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
- <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
- <g class="layer">
-  <title>Layer 1</title>
-  <ellipse cx="17.1" cy="16.95" fill="#fdff4a" id="svg_4" rx="17" ry="17" stroke="#b79a00" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" transform="matrix(1, 0, 0, 1, 0, 0)"/>
-  <path d="m18.16,2.55c6.52,-4.16 -9.6,7.82 -9.48,11.48c0.12,3.66 23.09,-0.02 19.99,1.42l-12.89,15.55c-4.96,3.93 12.24,-14.1 4.16,-13.76l-16.17,1.01c-2.54,0.92 7.88,-11.54 14.4,-15.7z" fill="#000000" fill-opacity="null" id="svg_6" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-opacity="null"/>
-  <ellipse cx="18.04" cy="28" fill="#000000" fill-opacity="null" id="svg_7" rx="0" ry="0.05" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-opacity="null"/>
-  <ellipse cx="18.18" cy="28.14" fill="#000000" fill-opacity="null" id="svg_8" rx="0" ry="0.05" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-opacity="null" transform="matrix(1, 0, 0, 1, 0, 0)"/>
- </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <g transform="matrix(1,0,0,1,3,3)">
+        <g id="ELECTRIC" transform="matrix(0.949174,0,0,0.949174,1.76912,1.9115)">
+            <g>
+                <circle id="svg_4" cx="17.1" cy="16.95" r="17" style="fill:rgb(253,255,74);stroke:rgb(183,154,0);stroke-width:2.11px;"/>
+                <g transform="matrix(1.05355,0,0,1.05355,-1.86385,-2.01385)">
+                    <path d="M19.126,6.25C19.218,6.003 19.103,5.728 18.862,5.62C18.622,5.512 18.339,5.609 18.216,5.842L8.728,23.723C8.634,23.9 8.655,24.116 8.781,24.272C8.907,24.428 9.114,24.493 9.307,24.438L19.402,21.555C19.402,21.555 16.906,30.862 16.906,30.862C16.842,31.103 16.965,31.356 17.195,31.452C17.426,31.549 17.692,31.461 17.82,31.247L27.26,15.315C27.365,15.137 27.351,14.914 27.224,14.752C27.098,14.59 26.884,14.522 26.687,14.581L14.697,18.165C14.697,18.165 19.126,6.25 19.126,6.25Z" style="fill:rgb(48,44,50);fill-opacity:0.2;"/>
+                </g>
+                <g transform="matrix(1.05355,0,0,1.05355,-1.86385,-2.01385)">
+                    <path d="M19.126,5.233C19.218,4.987 19.103,4.711 18.862,4.603C18.622,4.495 18.339,4.592 18.216,4.825L8.728,22.706C8.634,22.883 8.655,23.099 8.781,23.255C8.907,23.411 9.114,23.476 9.307,23.421L19.402,20.538C19.402,20.538 16.906,29.845 16.906,29.845C16.842,30.087 16.965,30.339 17.195,30.436C17.426,30.532 17.692,30.445 17.82,30.23L27.26,14.298C27.365,14.121 27.351,13.897 27.224,13.735C27.098,13.573 26.884,13.505 26.687,13.564L14.697,17.148C14.697,17.148 19.126,5.233 19.126,5.233Z" style="fill:rgb(48,44,50);"/>
+                </g>
+            </g>
+        </g>
+    </g>
 </svg>
