@@ -2,7 +2,7 @@ import { Synergy } from "./enum/Synergy"
 import { Pkm, PkmIndex } from "./enum/Pokemon"
 import { Item } from "./enum/Item"
 import { Effect } from "./enum/Effect"
-import { Rarity } from "./enum/Game"
+import { AttackType, Rarity } from "./enum/Game"
 import { Emotion } from "."
 
 export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
@@ -80,6 +80,13 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.MYTHICAL]: "#ffc0cb",
   [Rarity.SUMMON]: "#991f1f"
 }
+
+export const AttackTypeColor: { [key in AttackType] } = {
+  [AttackType.PHYSICAL]: "#FF6E55",
+  [AttackType.SPECIAL]: "#7FC9FF",
+  [AttackType.TRUE]: "#FFD800"
+}
+
 export const Probability: { [key: number]: number[] } = {
   1: [1, 0, 0, 0, 0],
   2: [1, 0, 0, 0, 0],

@@ -8,7 +8,8 @@ export default function SynergyIcon(props: {
 }) {
   return (
     <img src={"assets/types/" + props.type + ".png"} 
-         alt={props.type} 
+         alt={props.type}
+         title={props.type}
          className="synergy-icon"
          style={{ width: props.size ?? '34px', height: props.size ?? '34px', imageRendering: "pixelated" }}
     />
