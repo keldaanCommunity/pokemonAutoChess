@@ -36,7 +36,7 @@ export class AttackStrategy {
             tg.types.includes(Synergy.SOUND)
           ) {
             tg.count.soundCount++
-            tg.atk += atk
+            tg.addAttack(atk)
           }
         })
       }
@@ -431,10 +431,10 @@ export class DiamondStormStrategy extends AttackStrategy {
       buff = 9
     }
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    pokemon.def += buff
+    pokemon.addDefense(buff)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team === pokemon.team) {
-        cell.value.def += buff
+        cell.value.addDefense(buff)
       }
     })
   }
@@ -920,9 +920,9 @@ export class ClangorousSoulStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
-        cell.value.atk += buffAtk
-        cell.value.def += buffDef
-        cell.value.speDef += buffDef
+        cell.value.addAttack(buffAtk)
+        cell.value.addDefense(buffDef)
+        cell.value.addSpecialDefense(buffDef)
       }
     })
   }
@@ -956,7 +956,7 @@ export class LiquidationStrategy extends AttackStrategy {
     }
 
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-    target.def = Math.max(0, target.def - reduce)
+    target.addDefense(-reduce)
   }
 }
 
@@ -1585,7 +1585,7 @@ export class SeedFlareStrategy extends AttackStrategy {
 
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        tg.speDef = Math.max(0, tg.speDef - 2)
+        tg.addSpecialDefense(-2)
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
     })
@@ -2215,7 +2215,7 @@ export class CalmMindStrategy extends AttackStrategy {
         break
     }
 
-    pokemon.atk += Math.ceil(pokemon.baseAtk * buff)
+    pokemon.addAttack(buff)
   }
 }
 
@@ -2245,8 +2245,8 @@ export class IronDefenseStrategy extends AttackStrategy {
       default:
         break
     }
-    pokemon.def += buff
-    pokemon.speDef += buff
+    pokemon.addDefense(buff)
+    pokemon.addSpecialDefense(buff)
   }
 }
 
@@ -2317,7 +2317,7 @@ export class IronTailStrategy extends AttackStrategy {
       default:
         break
     }
-    pokemon.def += buff
+    pokemon.addDefense(buff)
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
   }
 }
@@ -2393,7 +2393,7 @@ export class ChargeStrategy extends AttackStrategy {
         pokemon.team == ally.team &&
         ally.types.includes(Synergy.ELECTRIC)
       ) {
-        ally.atk += Math.ceil(pokemon.baseAtk * buff)
+        ally.addAttack(pokemon.baseAtk * buff)
       }
     })
   }
@@ -2526,8 +2526,8 @@ export class DragonTailStrategy extends AttackStrategy {
         break
     }
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-    pokemon.def += pokemon.stars
-    pokemon.speDef += pokemon.stars
+    pokemon.addDefense(pokemon.stars)
+    pokemon.addSpecialDefense(pokemon.stars)
   }
 }
 
@@ -2797,7 +2797,7 @@ export class NightSlashStrategy extends AttackStrategy {
 
     board.forEach((x: number, y: number, v: PokemonEntity | undefined) => {
       if (v && pokemon.team != v.team) {
-        v.def = Math.max(0, v.def - 1)
+        v.addDefense(-1)
       }
     })
   }
@@ -2937,7 +2937,7 @@ export class HappyHourStrategy extends AttackStrategy {
     }
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
-        ally.atk += buff
+        ally.addAttack(buff)
       }
     })
   }
@@ -2955,13 +2955,13 @@ export class TeleportStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    pokemon.atk += pokemon.stars
+    pokemon.addAttack(pokemon.stars)
 
     const potentialCells = [
       [0, 0],
       [0, 5],
       [7, 5],
-      [7, 0],
+      [7, 0]
     ]
     this.shuffleArray(potentialCells)
 
@@ -3015,7 +3015,7 @@ export class NastyPlotStrategy extends AttackStrategy {
       default:
         break
     }
-    pokemon.atk += buff
+    pokemon.addAttack(buff)
   }
 }
 
@@ -3054,17 +3054,17 @@ export class ThiefStrategy extends AttackStrategy {
     })
 
     if (pokemon.effects.includes(Effect.HONE_CLAWS)) {
-      pokemon.atk += 4 * l
+      pokemon.addAttack(4 * l)
       pokemon.handleShield(20 * l, pokemon)
     }
 
     if (pokemon.effects.includes(Effect.ASSURANCE)) {
-      pokemon.atk += 7 * l
+      pokemon.addAttack(7 * l)
       pokemon.handleShield(30 * l, pokemon)
     }
 
     if (pokemon.effects.includes(Effect.BEAT_UP)) {
-      pokemon.atk += 10 * l
+      pokemon.addAttack(10 * l)
       pokemon.handleShield(50 * l, pokemon)
     }
 
@@ -3137,7 +3137,7 @@ export class MeteorMashStrategy extends AttackStrategy {
         break
     }
 
-    pokemon.atk += 5
+    pokemon.addAttack(5)
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
@@ -3286,7 +3286,7 @@ export class MetronomeStrategy extends AttackStrategy {
       SoftBoiledStrategy,
       BeatUpStrategy,
       EarthquakeStrategy,
-      SteamEruptionStrategy,
+      SteamEruptionStrategy
     ]
     const strategy = new skills[Math.floor(Math.random() * skills.length)]()
     strategy.process(pokemon, state, board, target)

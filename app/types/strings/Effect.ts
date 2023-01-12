@@ -177,17 +177,17 @@ export const EffectDescription: {
     fra: "+10 mana / attaque pour tous les pkm"
   },
   [Effect.AMNESIA]: {
-    eng: "All your pokemon have +4 Special Defense.",
+    eng: "Psychic pokemons gains +50% spell damage",
     esp: "Ally gana +5 SPEDEF",
     fra: "Les alliés gagnent +5 SPEDEF"
   },
   [Effect.LIGHT_SCREEN]: {
-    eng: "All your pokemon have +8 Special Defense.",
+    eng: "Psychic pokemons gains +100% spell damage",
     esp: "Ally gana +10 SPEDEF adicionales",
     fra: "Les alliés gagnent un additionel +10 SPEDEF"
   },
   [Effect.EERIE_SPELL]: {
-    eng: "All your pokemon have +16 Special Defense.",
+    eng: "Psychic pokemons gains +150% spell damage",
     esp: "Ally gana +20 SPEDEF adicionales",
     fra: "Les alliés gagnent un additionel +20 SPEDEF"
   },
@@ -442,17 +442,17 @@ export const EffectDescription: {
     fra: "?NONE?"
   },
   [Effect.DUBIOUS_DISC]: {
-    eng: "Artificial pokemons have a 40% chance to burn 20 mana from their target and return 15 mana to the attacker",
+    eng: "Artificial pokemons have a 35% chance to burn 20 mana from their target and return 15 mana to the attacker",
     esp: "?NONE?",
     fra: "?NONE?"
   },
   [Effect.LINK_CABLE]: {
-    eng: "Artificial pokemons have a 40% chance to burn 20 mana from their target and return 30 mana to the attacker",
+    eng: "Artificial pokemons have a 45% chance to burn 20 mana from their target and return 30 mana to the attacker",
     esp: "?NONE?",
     fra: "?NONE?"
   },
   [Effect.GOOGLE_SPECS]: {
-    eng: "Artificial pokemons have a 40% chance to burn 20 mana from their target and return 45 mana to the attacker",
+    eng: "Artificial pokemons have a 55% chance to burn 20 mana from their target and return 45 mana to the attacker",
     esp: "?NONE?",
     fra: "?NONE?"
   }

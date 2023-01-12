@@ -135,12 +135,17 @@ export default class AttackingState extends PokemonState {
         pokemon.effects.includes(Effect.LINK_CABLE) ||
         pokemon.effects.includes(Effect.GOOGLE_SPECS)
       ) {
+        const chance = pokemon.effects.includes(Effect.DUBIOUS_DISC)
+          ? 0.35
+          : pokemon.effects.includes(Effect.LINK_CABLE)
+          ? 0.45
+          : 0.55
         const manaGain = pokemon.effects.includes(Effect.DUBIOUS_DISC)
           ? 15
           : pokemon.effects.includes(Effect.LINK_CABLE)
           ? 30
           : 45
-        if (Math.random() > 0.6) {
+        if (Math.random() > 1 - chance) {
           target.setMana(target.mana - 20)
           target.count.manaBurnCount++
           pokemon.setMana(pokemon.mana + manaGain)
