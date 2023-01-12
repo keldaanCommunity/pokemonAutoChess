@@ -114,7 +114,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     typesList.className = "game-pokemon-detail-types"
     types.forEach((type) => {
       const ty = document.createElement("img")
-      ty.src = "assets/types/" + type + ".png"
+      ty.src = "assets/types/" + type + ".svg"
       ty.alt = type
       ty.title = type
       ty.className = "synergy-icon"

@@ -1,6 +1,6 @@
 .synergy-icon {
-    width: 34px;
-    height: 34px;
-    filter: drop-shadow(2px 2px 1px black);
-    margin: 4px;
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(2px 2px 1px black);
+  margin: 1px;
 }
