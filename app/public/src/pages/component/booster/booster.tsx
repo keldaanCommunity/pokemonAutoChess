@@ -61,9 +61,7 @@ export default function Booster(props: { toggle: () => void }) {
               dispatch(openBooster())
             }}
             className={
-              numberOfBooster > 0
-                ? "bubbly-primary"
-                : "bubbly-success is-disabled"
+              numberOfBooster > 0 ? "bubbly-primary" : "bubbly-disabled"
             }
           >
             Open Booster !

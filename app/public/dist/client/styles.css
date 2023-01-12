@@ -353,6 +353,24 @@ input[type="range"]:focus::-ms-fill-upper {
   box-shadow: inset 6px 6px 0px 0px #108de0;
 }
 
+.bubbly-disabled {
+  display: block;
+  text-align: center;
+  padding: 5px 30px;
+  border-radius: 12px;
+  font-size: 1.5vw;
+  background: #d3d3d3;
+  box-shadow: inset -6px -6px 0px 0px #adafbc;
+  color: #757575;
+  border: solid;
+  border-color: black;
+  border-width: 4px;
+  margin: 10px;
+  max-height: 65px;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .bubbly {
   display: block;
   text-align: center;

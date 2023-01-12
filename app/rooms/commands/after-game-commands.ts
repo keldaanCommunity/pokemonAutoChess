@@ -17,7 +17,8 @@ export class OnJoinCommand extends Command {
             false,
             false,
             user.title,
-            user.role
+            user.role,
+            false
           )
         )
 
