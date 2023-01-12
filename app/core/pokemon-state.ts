@@ -139,6 +139,19 @@ export default class PokemonState {
           pokemon.shield = Math.max(0, pokemon.shield - reducedDamage)
         }
 
+        if (
+          pokemon.effects.includes(Effect.GUTS) ||
+          pokemon.effects.includes(Effect.DEFIANT) ||
+          pokemon.effects.includes(Effect.JUSTIFIED)
+        ) {
+          const damageReduction = pokemon.effects.includes(Effect.GUTS)
+            ? 2
+            : pokemon.effects.includes(Effect.DEFIANT)
+            ? 4
+            : 6
+          residualDamage = Math.max(1, residualDamage - damageReduction)
+        }
+
         if (pokemon.skill == Ability.WONDER_GUARD) {
           residualDamage = 1
         }
