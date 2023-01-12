@@ -153,9 +153,9 @@ export default class PokemonState {
             pokemon.items.has(Item.DEFENSIVE_RIBBON) &&
             pokemon.count.defensiveRibbonCount < 5
           ) {
-            pokemon.atk++
-            pokemon.def++
-            pokemon.speDef++
+            pokemon.addAttack(1)
+            pokemon.addDefense(1)
+            pokemon.addSpecialDefense(1)
             pokemon.count.defensiveRibbonCount++
           }
 
@@ -244,7 +244,7 @@ export default class PokemonState {
           } else if (pokemon.effects.includes(Effect.SWIFT_SWIM)) {
             pokemon.status.triggerProtect(1000)
             pokemon.life = pokemon.hp * 0.4
-            pokemon.atk += pokemon.baseAtk * 0.3
+            pokemon.addAttack(pokemon.baseAtk * 0.3)
             pokemon.effects.splice(
               pokemon.effects.findIndex((e) => e === Effect.SWIFT_SWIM),
               1
@@ -252,7 +252,7 @@ export default class PokemonState {
           } else if (pokemon.effects.includes(Effect.HYDRO_CANNON)) {
             pokemon.status.triggerProtect(1000)
             pokemon.life = pokemon.hp * 0.8
-            pokemon.atk += pokemon.baseAtk * 0.6
+            pokemon.addAttack(pokemon.baseAtk * 0.6)
             pokemon.effects.splice(
               pokemon.effects.findIndex((e) => e === Effect.HYDRO_CANNON),
               1
@@ -326,10 +326,10 @@ export default class PokemonState {
             shieldBoost = 120
             attackBoost = 12
           }
-          attacker.speDef += defBoost
-          attacker.def += defBoost
+          attacker.addSpecialDefense(defBoost)
+          attacker.addDefense(defBoost)
           attacker.handleShield(shieldBoost, attacker)
-          attacker.atk += attackBoost
+          attacker.addAttack(attackBoost)
           attacker.count.monsterExecutionCount++
         }
       }
@@ -406,17 +406,17 @@ export default class PokemonState {
           pokemon.growGroundTimer = 3000
           pokemon.count.growGroundCount += 1
           if (pokemon.effects.includes(Effect.SHORE_UP)) {
-            pokemon.def += 1
-            pokemon.speDef += 1
-            pokemon.atk += 1
+            pokemon.addDefense(1)
+            pokemon.addSpecialDefense(1)
+            pokemon.addAttack(1)
           } else if (pokemon.effects.includes(Effect.ROTOTILLER)) {
-            pokemon.def += 2
-            pokemon.speDef += 2
-            pokemon.atk += 2
+            pokemon.addDefense(2)
+            pokemon.addSpecialDefense(2)
+            pokemon.addAttack(2)
           } else if (pokemon.effects.includes(Effect.SANDSTORM)) {
-            pokemon.def += 3
-            pokemon.speDef += 3
-            pokemon.atk += 3
+            pokemon.addDefense(3)
+            pokemon.addSpecialDefense(3)
+            pokemon.addAttack(3)
           }
         }
       } else {
@@ -531,15 +531,15 @@ export default class PokemonState {
       }
 
       if (pokemon.effects.includes(Effect.VICTORY_STAR)) {
-        pokemon.atk += 1
+        pokemon.addAttack(1)
       }
 
       if (pokemon.effects.includes(Effect.DROUGHT)) {
-        pokemon.atk += 2
+        pokemon.addAttack(2)
       }
 
       if (pokemon.effects.includes(Effect.DESOLATE_LAND)) {
-        pokemon.atk += 3
+        pokemon.addAttack(3)
       }
 
       if (

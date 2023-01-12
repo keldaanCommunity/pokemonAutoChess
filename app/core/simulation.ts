@@ -235,7 +235,7 @@ export default class Simulation extends Schema implements ISimulation {
     if (item === Item.TWISTED_SPOON) {
       pokemon.addSpellDamage(10)
     } else if (item === Item.MYSTIC_WATER) {
-      pokemon.mana += 15
+      pokemon.setMana(pokemon.mana + 15)
     } else if (item === Item.MAGNET) {
       pokemon.handleAttackSpeed(15)
     } else if (item === Item.BLACK_GLASSES) {
@@ -243,11 +243,11 @@ export default class Simulation extends Schema implements ISimulation {
     } else if (item === Item.MIRACLE_SEED) {
       pokemon.handleShield(15, pokemon)
     } else if (item === Item.NEVER_MELT_ICE) {
-      pokemon.speDef += 2
+      pokemon.addSpecialDefense(1)
     } else if (item === Item.CHARCOAL) {
-      pokemon.atk += 1
+      pokemon.addAttack(1)
     } else if (item === Item.HEART_SCALE) {
-      pokemon.def += 1
+      pokemon.addDefense(1)
     }
   }
 
@@ -286,7 +286,7 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.handleAttackSpeed(10)
     }
     if (pokemon.items.has(Item.ZOOM_LENS)) {
-      pokemon.atk += 4
+      pokemon.addAttack(4)
       pokemon.addSpellDamage(40)
     }
     if (pokemon.items.has(Item.BRIGHT_POWDER)) {
@@ -300,7 +300,7 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.handleAttackSpeed(20)
     }
     if (pokemon.items.has(Item.RAZOR_CLAW)) {
-      pokemon.critDamage += 0.1
+      pokemon.addCritDamage(10)
       pokemon.addCritChance(75)
     }
     if (pokemon.items.has(Item.ORAN_BERRY)) {
@@ -310,14 +310,14 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.status.triggerFlameOrb(2000)
     }
     if (pokemon.items.has(Item.ASSAULT_VEST)) {
-      pokemon.speDef += 30
+      pokemon.addSpecialDefense(30)
     }
     if (pokemon.items.has(Item.POKE_DOLL)) {
-      pokemon.def += 5
-      pokemon.speDef += 5
+      pokemon.addDefense(5)
+      pokemon.addSpecialDefense(5)
     }
     if (pokemon.items.has(Item.ROCKY_HELMET)) {
-      pokemon.def += 10
+      pokemon.addDefense(10)
     }
   }
 
@@ -334,7 +334,7 @@ export default class Simulation extends Schema implements ISimulation {
       })
       const blueIronDefensePkm =
         blueIronDefense[Math.floor(Math.random() * blueIronDefense.length)]
-      blueIronDefensePkm.atk = blueIronDefensePkm.atk * 2
+      blueIronDefensePkm.addAttack(blueIronDefensePkm.atk)
       blueIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
     }
 
@@ -350,7 +350,7 @@ export default class Simulation extends Schema implements ISimulation {
       })
       const redIronDefensePkm =
         redIronDefense[Math.floor(Math.random() * redIronDefense.length)]
-      redIronDefensePkm.atk = redIronDefensePkm.atk * 2
+      redIronDefensePkm.addAttack(redIronDefensePkm.atk)
       redIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
     }
 
@@ -388,7 +388,7 @@ export default class Simulation extends Schema implements ISimulation {
 
     this.blueTeam.forEach((pokemon) => {
       if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
-        pokemon.atk = pokemon.atk * 2
+        pokemon.addAttack(pokemon.atk)
       }
       let shieldBonus = 0
       if (pokemon.effects.includes(Effect.STAMINA)) {
@@ -478,7 +478,7 @@ export default class Simulation extends Schema implements ISimulation {
 
     this.redTeam.forEach((pokemon) => {
       if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
-        pokemon.atk = pokemon.atk * 2
+        pokemon.addAttack(pokemon.atk)
       }
       let shieldBonus = 0
       if (pokemon.effects.includes(Effect.STAMINA)) {
@@ -610,7 +610,7 @@ export default class Simulation extends Schema implements ISimulation {
       switch (effect) {
         case Effect.HONE_CLAWS:
           if (types.includes(Synergy.DARK) && pokemon.items.size != 0) {
-            pokemon.atk += 4 * pokemon.items.size
+            pokemon.addAttack(4 * pokemon.items.size)
             pokemon.handleShield(20 * pokemon.items.size, pokemon)
             pokemon.effects.push(Effect.HONE_CLAWS)
           }
@@ -618,7 +618,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.ASSURANCE:
           if (types.includes(Synergy.DARK) && pokemon.items.size != 0) {
-            pokemon.atk += 7 * pokemon.items.size
+            pokemon.addAttack(7 * pokemon.items.size)
             pokemon.handleShield(30 * pokemon.items.size, pokemon)
             pokemon.effects.push(Effect.ASSURANCE)
           }
@@ -626,7 +626,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.BEAT_UP:
           if (types.includes(Synergy.DARK) && pokemon.items.size != 0) {
-            pokemon.atk += 10 * pokemon.items.size
+            pokemon.addAttack(10 * pokemon.items.size)
             pokemon.handleShield(50 * pokemon.items.size, pokemon)
             pokemon.effects.push(Effect.BEAT_UP)
           }
@@ -819,17 +819,17 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.AMNESIA:
           pokemon.effects.push(Effect.AMNESIA)
-          pokemon.speDef += 4
+          pokemon.addSpellDamage(50)
           break
 
         case Effect.LIGHT_SCREEN:
           pokemon.effects.push(Effect.LIGHT_SCREEN)
-          pokemon.speDef += 8
+          pokemon.addSpellDamage(100)
           break
 
         case Effect.EERIE_SPELL:
           pokemon.effects.push(Effect.EERIE_SPELL)
-          pokemon.speDef += 16
+          pokemon.addSpellDamage(150)
           break
 
         case Effect.MEDITATE:

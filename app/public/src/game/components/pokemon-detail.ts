@@ -3,7 +3,7 @@ import { AttackType, Rarity } from "../../../../types/enum/Game"
 import { Emotion } from "../../../../types"
 import {
   AbilityName,
-  AbilityDescription,
+  AbilityDescription
 } from "../../../../types/strings/Ability"
 import { Ability } from "../../../../types/enum/Ability"
 import { getPortraitSrc } from "../../utils"
@@ -115,8 +115,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     types.forEach((type) => {
       const ty = document.createElement("img")
       ty.src = "assets/types/" + type + ".png"
-      ty.alt = type;
-      ty.title = type;
+      ty.alt = type
+      ty.title = type
       ty.className = "synergy-icon"
       ty.style.width = "34px"
       ty.style.height = "34px"
@@ -128,18 +128,42 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       { title: "Health points", img: "assets/icons/hp.png", value: this.hp },
       { title: "Defense", img: "assets/icons/def.png", value: this.def },
       { title: "Attack", img: "assets/icons/atk.png", value: this.atk },
-      { title: "Attack Speed", img: "assets/icons/atkSpeed.png", value: this.atkSpeed },
-      { title: "Critical Damage", img: "assets/icons/critDamage.png", value: this.critDamage },
+      {
+        title: "Attack Speed",
+        img: "assets/icons/atkSpeed.png",
+        value: this.atkSpeed
+      },
+      {
+        title: "Critical Damage",
+        img: "assets/icons/critDamage.png",
+        value: this.critDamage
+      },
       { title: "Mana", img: "assets/icons/mana.png", value: this.mana },
-      { title: "Special Defense", img: "assets/icons/speDef.png", value: this.speDef },
-      { title: "Spell Damage", img: "assets/icons/spellDamage.png", value: this.spellDamage },
-      { title: "Attack Range", img: "assets/icons/range.png", value: this.range },
-      { title: "Critical Chance", img: "assets/icons/critChance.png", value: this.critChance },
+      {
+        title: "Special Defense",
+        img: "assets/icons/speDef.png",
+        value: this.speDef
+      },
+      {
+        title: "Spell Damage",
+        img: "assets/icons/spellDamage.png",
+        value: this.spellDamage
+      },
+      {
+        title: "Attack Range",
+        img: "assets/icons/range.png",
+        value: this.range
+      },
+      {
+        title: "Critical Chance",
+        img: "assets/icons/critChance.png",
+        value: this.critChance
+      }
     ]
 
     const statsElm = document.createElement("div")
     statsElm.className = "game-pokemon-detail-stats"
-    for(let stat of stats){
+    for (const stat of stats) {
       const statElm = document.createElement("div")
       const statImg = document.createElement("img")
       statImg.src = stat.img

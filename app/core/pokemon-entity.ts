@@ -231,7 +231,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.critChance += value
 
     if (this.critChance > 100) {
-      this.critDamage += Math.round((this.critChance - 100) * 10) / 500
+      this.addCritDamage(Math.round((this.critChance - 100) * 10) / 500)
       this.critChance = 100
     }
   }
@@ -242,5 +242,41 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
   addSpellDamage(value: number) {
     this.spellDamage = Math.round(this.spellDamage + value)
+  }
+
+  addDefense(value: number) {
+    this.def = Math.max(
+      0,
+      this.def +
+        Math.round(value) +
+        (Math.round(value) * this.spellDamage) / 100
+    )
+  }
+
+  addSpecialDefense(value: number) {
+    this.speDef = Math.max(
+      0,
+      this.speDef +
+        Math.round(value) +
+        (Math.round(value) * this.spellDamage) / 100
+    )
+  }
+
+  addAttack(value: number) {
+    this.atk = Math.max(
+      0,
+      this.atk +
+        Math.round(value) +
+        (Math.round(value) * this.spellDamage) / 100
+    )
+  }
+
+  addCritDamage(value: number) {
+    this.critDamage = Math.max(
+      0,
+      this.critDamage +
+        Math.round(value) +
+        (Math.round(value) * this.spellDamage) / 100
+    )
   }
 }
