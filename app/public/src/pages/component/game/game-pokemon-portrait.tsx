@@ -51,7 +51,7 @@ export default function GamePokemonPortrait(props: {
       >
         <ReactTooltip
           id={"shop-" + props.index}
-          className="customeTheme"
+          className="customeTheme game-pokemon-detail-tooltip"
           effect="solid"
           place="bottom"
         >

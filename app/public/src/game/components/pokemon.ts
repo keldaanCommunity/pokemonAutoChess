@@ -23,13 +23,15 @@ import {
   Orientation,
   PokemonActionState,
   SpriteType,
-  PokemonTint
+  PokemonTint,
+  Rarity
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import ManaBar from "./mana-bar"
 import { Synergy } from "../../../../types/enum/Synergy"
 
 export default class Pokemon extends Button {
+  rarity: Rarity
   emotion: Emotion
   shiny: boolean
   isPopup: boolean
@@ -103,6 +105,7 @@ export default class Pokemon extends Button {
       this.index = "0000"
     }
     this.name = pokemon.name
+    this.rarity = pokemon.rarity
     this.id = pokemon.id
     this.hp = pokemon.hp
     this.range = pokemon.range
@@ -246,6 +249,7 @@ export default class Pokemon extends Button {
             0,
             0,
             this.name,
+            this.rarity,
             this.life,
             this.atk,
             this.def,
@@ -269,6 +273,7 @@ export default class Pokemon extends Button {
             0,
             0,
             this.name,
+            this.rarity,
             this.hp,
             this.atk,
             this.def,

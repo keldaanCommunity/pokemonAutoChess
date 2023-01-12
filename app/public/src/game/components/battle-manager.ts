@@ -364,22 +364,22 @@ export default class BattleManager {
           } else if (change.field == "critChance") {
             pkm.critChance = pokemon.critChance
             if (pkm.detail) {
-              pkm.detail.critChance.innerHTML = pokemon.critChance.toString()
+              pkm.detail.critChance.textContent = pokemon.critChance.toString()+"%"
             }
           } else if (change.field == "critDamage") {
             pkm.critDamage = parseFloat(pokemon.critDamage.toFixed(2))
             if (pkm.detail) {
-              pkm.detail.critDamage.innerHTML = pokemon.critDamage.toFixed(2)
+              pkm.detail.critDamage.textContent = pokemon.critDamage.toFixed(2)
             }
           } else if (change.field == "spellDamage") {
             pkm.spellDamage = pokemon.spellDamage
             if (pkm.detail) {
-              pkm.detail.spellDamage.innerHTML = pokemon.spellDamage.toString()
+              pkm.detail.spellDamage.textContent = pokemon.spellDamage.toString()
             }
           } else if (change.field == "atkSpeed") {
             pkm.atkSpeed = pokemon.atkSpeed
             if (pkm.detail) {
-              pkm.detail.atkSpeed.innerHTML = pokemon.atkSpeed.toFixed(2)
+              pkm.detail.atkSpeed.textContent = pokemon.atkSpeed.toFixed(2)
             }
           } else if (change.field == "life") {
             if (change.value && change.previousValue) {
@@ -392,7 +392,7 @@ export default class BattleManager {
             pkm.life = pokemon.life
             pkm.lifebar?.setAmount(pkm.life)
             if (pkm.detail) {
-              pkm.detail.hp.innerHTML = pokemon.life.toString()
+              pkm.detail.hp.textContent = pokemon.life.toString()
             }
           } else if (change.field == "shield") {
             if (change.value && change.previousValue) {
