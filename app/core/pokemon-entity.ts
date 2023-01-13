@@ -244,39 +244,23 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.spellDamage = Math.round(this.spellDamage + value)
   }
 
-  addDefense(value: number) {
-    this.def = Math.max(
-      0,
-      this.def +
-        Math.round(value) +
-        (Math.round(value) * this.spellDamage) / 100
-    )
+  addDefense(value: number, spellDamageBoost?: boolean) {
+    const boost = spellDamageBoost ? (value * this.spellDamage) / 100 : 0
+    this.def = Math.max(0, this.def + Math.round(value + boost))
   }
 
-  addSpecialDefense(value: number) {
-    this.speDef = Math.max(
-      0,
-      this.speDef +
-        Math.round(value) +
-        (Math.round(value) * this.spellDamage) / 100
-    )
+  addSpecialDefense(value: number, spellDamageBoost?: boolean) {
+    const boost = spellDamageBoost ? (value * this.spellDamage) / 100 : 0
+    this.speDef = Math.max(0, this.speDef + Math.round(value + boost))
   }
 
-  addAttack(value: number) {
-    this.atk = Math.max(
-      0,
-      this.atk +
-        Math.round(value) +
-        (Math.round(value) * this.spellDamage) / 100
-    )
+  addAttack(value: number, spellDamageBoost?: boolean) {
+    const boost = spellDamageBoost ? (value * this.spellDamage) / 100 : 0
+    this.atk = Math.max(0, this.atk + Math.round(value + boost))
   }
 
-  addCritDamage(value: number) {
-    this.critDamage = Math.max(
-      0,
-      this.critDamage +
-        Math.round(value) +
-        (Math.round(value) * this.spellDamage) / 100
-    )
+  addCritDamage(value: number, spellDamageBoost?: boolean) {
+    const boost = spellDamageBoost ? (value * this.spellDamage) / 100 : 0
+    this.critDamage = Math.max(0, this.critDamage + Math.round(value + boost))
   }
 }
