@@ -29,8 +29,10 @@ import {
 import { Ability } from "../../../../types/enum/Ability"
 import ManaBar from "./mana-bar"
 import { Synergy } from "../../../../types/enum/Synergy"
+import { Pkm } from "../../../../types/enum/Pokemon"
 
 export default class Pokemon extends Button {
+  evolution: Pkm
   rarity: Rarity
   emotion: Emotion
   shiny: boolean
@@ -95,6 +97,7 @@ export default class Pokemon extends Button {
     isPopup: boolean
   ) {
     super(scene, x, y, 75, 75)
+    this.evolution = pokemon.evolution
     this.emotion = pokemon.emotion
     this.shiny = pokemon.shiny
     this.isPopup = isPopup

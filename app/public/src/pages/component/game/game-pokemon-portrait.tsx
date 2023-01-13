@@ -6,6 +6,8 @@ import { getPortraitSrc } from "../../../utils"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 import ReactTooltip from "react-tooltip"
+import { getGameScene } from "../../game"
+import "./game-pokemon-portrait.css";
 
 export default function GamePokemonPortrait(props: {
   index: number
@@ -25,24 +27,20 @@ export default function GamePokemonPortrait(props: {
     )
   } else {
     const rarityColor = RarityColor[props.pokemon.rarity]
+    const boardManager = getGameScene()?.board
+    const willEvolve = boardManager && boardManager.getPossibleEvolution(props.pokemon.index)
+    
     return (
       <div
-        className="nes-container"
+        className={`nes-container game-pokemon-portrait ${willEvolve? "is-evolution": ""}`}
         style={{
-          imageRendering: "pixelated",
-          width: "15%",
           backgroundColor: rarityColor,
           borderColor: rarityColor,
           backgroundImage: `url("${getPortraitSrc(
             props.pokemon.index,
             props.pokemonConfig?.selectedShiny,
             props.pokemonConfig?.selectedEmotion
-          )}")`,
-          marginRight: "1%",
-          padding: "0px",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "contain",
-          cursor: "var(--cursor-hover)",
+          )}")`
         }}
         onClick={props.click}
         data-tip
@@ -56,46 +54,11 @@ export default function GamePokemonPortrait(props: {
         >
           <GamePokemonDetail pokemon={props.pokemon} />
         </ReactTooltip>
-        <div
-          style={{
-            position: "absolute",
-            left: "5px",
-            bottom: "5px",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <p
-            style={{
-              fontSize: "1.2vw",
-              textShadow: `
-               -1px -1px 0 #fff,  
-               1px -1px 0 #fff,
-               -1px 1px 0 #fff,
-                1px 1px 0 #fff`,
-              margin: "0px",
-            }}
-          >
-            {PkmCost[props.pokemon.rarity]}
-          </p>
-          <img
-            style={{ width: "20px", height: "20px" }}
-            src="/assets/ui/money.png"
-          />
+        <div className="game-pokemon-portrait-cost">
+          <p>{PkmCost[props.pokemon.rarity]}</p>
+          <img src="/assets/ui/money.png" alt="$" />
         </div>
-        <ul
-          style={{
-            listStyleType: "none",
-            padding: "0px",
-            display: "flex",
-            position: "absolute",
-            justifyContent: "space-evenly",
-            right: "0px",
-            flexFlow: "column",
-            top: "0px",
-            height: "100%",
-          }}
-        >
+        <ul className="game-pokemon-portrait-types">
           {props.pokemon.types.map((type) => {
             return (
               <li key={type}>
@@ -107,8 +70,4 @@ export default function GamePokemonPortrait(props: {
       </div>
     )
   }
-}
-
-function capitalizeFirstLetter(s: string) {
-  return s.charAt(0).toUpperCase() + s.slice(1)
 }

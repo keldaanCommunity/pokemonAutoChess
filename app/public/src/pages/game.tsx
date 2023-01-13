@@ -72,10 +72,19 @@ import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
 import { Pkm, PkmIndex } from "../../../types/enum/Pokemon"
 import { toast } from "react-toastify"
 import { getPortraitSrc } from "../utils"
+import GameScene from "../game/scenes/game-scene"
 let gameContainer: GameContainer
 
 function playerClick(id: string) {
   gameContainer.onPlayerClick(id)
+}
+
+export function getGameContainer(): GameContainer {
+  return gameContainer
+}
+
+export function getGameScene(): GameScene | undefined {
+  return gameContainer.game?.scene?.getScene("gameScene") as GameScene | undefined
 }
 
 export default function Game() {
