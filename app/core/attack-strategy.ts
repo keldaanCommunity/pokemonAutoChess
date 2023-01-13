@@ -1181,16 +1181,16 @@ export class EchoStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        damage = 5
-        additional = 3
+        damage = 3
+        additional = 1
         break
       case 2:
-        damage = 10
-        additional = 6
+        damage = 6
+        additional = 2
         break
       case 3:
-        damage = 20
-        additional = 9
+        damage = 9
+        additional = 4
         break
       default:
         break

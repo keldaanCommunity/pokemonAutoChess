@@ -732,7 +732,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ""
   },
   [Ability.ECHO]: {
-    eng: "Deals 5/10/20 special damage, +3/+6/+9 damage each time the pokemon uses its ability",
+    eng: "Deals 3/6/9 special damage, +1/+2/+4 damage each time the pokemon uses its ability",
     esp: "",
     fra: "",
     prt: ""
