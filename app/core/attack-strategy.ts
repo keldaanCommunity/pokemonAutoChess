@@ -36,7 +36,7 @@ export class AttackStrategy {
             tg.types.includes(Synergy.SOUND)
           ) {
             tg.count.soundCount++
-            tg.addAttack(atk)
+            tg.addAttack(atk, true)
           }
         })
       }
@@ -431,10 +431,10 @@ export class DiamondStormStrategy extends AttackStrategy {
       buff = 9
     }
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    pokemon.addDefense(buff)
+    pokemon.addDefense(buff, true)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team === pokemon.team) {
-        cell.value.addDefense(buff)
+        cell.value.addDefense(buff, true)
       }
     })
   }
@@ -920,9 +920,9 @@ export class ClangorousSoulStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
-        cell.value.addAttack(buffAtk)
-        cell.value.addDefense(buffDef)
-        cell.value.addSpecialDefense(buffDef)
+        cell.value.addAttack(buffAtk, true)
+        cell.value.addDefense(buffDef, true)
+        cell.value.addSpecialDefense(buffDef, true)
       }
     })
   }
@@ -956,7 +956,7 @@ export class LiquidationStrategy extends AttackStrategy {
     }
 
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-    target.addDefense(-reduce)
+    target.addDefense(-reduce, true)
   }
 }
 
@@ -1585,7 +1585,7 @@ export class SeedFlareStrategy extends AttackStrategy {
 
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        tg.addSpecialDefense(-2)
+        tg.addSpecialDefense(-2, true)
         tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
     })
@@ -2215,7 +2215,7 @@ export class CalmMindStrategy extends AttackStrategy {
         break
     }
 
-    pokemon.addAttack(buff)
+    pokemon.addAttack(buff, true)
   }
 }
 
@@ -2245,8 +2245,8 @@ export class IronDefenseStrategy extends AttackStrategy {
       default:
         break
     }
-    pokemon.addDefense(buff)
-    pokemon.addSpecialDefense(buff)
+    pokemon.addDefense(buff, true)
+    pokemon.addSpecialDefense(buff, true)
   }
 }
 
@@ -2317,7 +2317,7 @@ export class IronTailStrategy extends AttackStrategy {
       default:
         break
     }
-    pokemon.addDefense(buff)
+    pokemon.addDefense(buff, true)
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
   }
 }
@@ -2393,7 +2393,7 @@ export class ChargeStrategy extends AttackStrategy {
         pokemon.team == ally.team &&
         ally.types.includes(Synergy.ELECTRIC)
       ) {
-        ally.addAttack(pokemon.baseAtk * buff)
+        ally.addAttack(pokemon.baseAtk * buff, true)
       }
     })
   }
@@ -2526,8 +2526,8 @@ export class DragonTailStrategy extends AttackStrategy {
         break
     }
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-    pokemon.addDefense(pokemon.stars)
-    pokemon.addSpecialDefense(pokemon.stars)
+    pokemon.addDefense(pokemon.stars, true)
+    pokemon.addSpecialDefense(pokemon.stars, true)
   }
 }
 
@@ -2797,7 +2797,7 @@ export class NightSlashStrategy extends AttackStrategy {
 
     board.forEach((x: number, y: number, v: PokemonEntity | undefined) => {
       if (v && pokemon.team != v.team) {
-        v.addDefense(-1)
+        v.addDefense(-1, true)
       }
     })
   }
@@ -2937,7 +2937,7 @@ export class HappyHourStrategy extends AttackStrategy {
     }
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
-        ally.addAttack(buff)
+        ally.addAttack(buff, true)
       }
     })
   }
@@ -2955,7 +2955,7 @@ export class TeleportStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    pokemon.addAttack(pokemon.stars)
+    pokemon.addAttack(pokemon.stars, true)
 
     const potentialCells = [
       [0, 0],
@@ -3015,7 +3015,7 @@ export class NastyPlotStrategy extends AttackStrategy {
       default:
         break
     }
-    pokemon.addAttack(buff)
+    pokemon.addAttack(buff, true)
   }
 }
 
@@ -3054,17 +3054,17 @@ export class ThiefStrategy extends AttackStrategy {
     })
 
     if (pokemon.effects.includes(Effect.HONE_CLAWS)) {
-      pokemon.addAttack(4 * l)
+      pokemon.addAttack(4 * l, true)
       pokemon.handleShield(20 * l, pokemon)
     }
 
     if (pokemon.effects.includes(Effect.ASSURANCE)) {
-      pokemon.addAttack(7 * l)
+      pokemon.addAttack(7 * l, true)
       pokemon.handleShield(30 * l, pokemon)
     }
 
     if (pokemon.effects.includes(Effect.BEAT_UP)) {
-      pokemon.addAttack(10 * l)
+      pokemon.addAttack(10 * l, true)
       pokemon.handleShield(50 * l, pokemon)
     }
 
@@ -3137,7 +3137,7 @@ export class MeteorMashStrategy extends AttackStrategy {
         break
     }
 
-    pokemon.addAttack(5)
+    pokemon.addAttack(5, true)
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
