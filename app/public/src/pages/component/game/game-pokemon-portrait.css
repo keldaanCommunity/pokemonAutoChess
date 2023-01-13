@@ -1,5 +1,5 @@
 .game-pokemon-portrait {
-    imageRendering: pixelated;
+    image-rendering: pixelated;
     width: 15%;
     margin-right: 1%;
     padding: 0;
