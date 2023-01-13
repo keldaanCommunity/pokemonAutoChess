@@ -1,0 +1,73 @@
+.game-pokemon-portrait {
+    image-rendering: pixelated;
+    width: 15%;
+    margin-right: 1%;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: var(--cursor-hover);
+    position: relative;
+}
+
+.game-pokemon-portrait.is-evolution {
+    box-shadow: 0 0 4px #ffffff80;
+}
+
+.game-pokemon-portrait.is-evolution::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; 
+    left:0;
+    right: 0;
+    bottom: 0;
+    animation: shimmer 2s infinite;
+    background: linear-gradient(135deg, transparent 0%,#ffffff20 25%,#ffffe080 50%,#ffffff20 75%, transparent 100%); 
+    background-size: 400% 400%;
+    background-repeat: no-repeat;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.game-pokemon-portrait-cost {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.game-pokemon-portrait-cost > p {
+    fontSize: 1.2vw;
+    textShadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff`;
+    margin: 0;
+}
+
+.game-pokemon-portrait-cost > img {
+    width: 20px;
+    height: 20px;
+}
+
+.game-pokemon-portrait-types {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    position: absolute;
+    justify-content: space-evenly;
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    height: 100%;
+}

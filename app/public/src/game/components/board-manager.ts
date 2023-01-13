@@ -6,6 +6,7 @@ import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { PokemonActionState } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
+import { Pkm } from "../../../../types/enum/Pokemon"
 
 export default class BoardManager {
   pokemons: Map<string, Pokemon>
@@ -68,6 +69,7 @@ export default class BoardManager {
     if (pokemonUI) {
       pokemonUI.destroy(true)
     }
+    this.pokemons.delete(pokemonToRemove.id)
   }
 
   buildPokemons() {
@@ -106,6 +108,7 @@ export default class BoardManager {
       this.pokemons.forEach((pokemon, key) => {
         pokemon.destroy(true)
       })
+      this.pokemons.clear()
       this.player = player
       this.buildPokemons()
     }
@@ -168,5 +171,16 @@ export default class BoardManager {
           break
       }
     }
+  }
+
+  getPossibleEvolution(pokemonIndex: string) {
+    let count = 0
+
+    this.pokemons.forEach((p) => {
+      if (p.index == pokemonIndex && p.evolution != Pkm.DEFAULT) {
+        count++
+      }
+    })
+    return count === 2 || count === 5 || count === 8
   }
 }
