@@ -8,6 +8,7 @@ import SynergyIcon from "../icons/synergy-icon"
 import ReactTooltip from "react-tooltip"
 import { getGameScene } from "../../game"
 import "./game-pokemon-portrait.css";
+import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 
 export default function GamePokemonPortrait(props: {
   index: number
@@ -28,11 +29,31 @@ export default function GamePokemonPortrait(props: {
   } else {
     const rarityColor = RarityColor[props.pokemon.rarity]
     const boardManager = getGameScene()?.board
-    const willEvolve = boardManager && boardManager.getPossibleEvolution(props.pokemon.index)
+
+    let count = 0
+    let countEvol = 0;
+    let pokemonEvolution = props.pokemon.evolution
+    let pokemonEvolution2: Pkm | null = null;
+
+    if(boardManager){
+      boardManager.pokemons.forEach((p) => {
+        if (p.index == props.pokemon!.index && p.evolution != Pkm.DEFAULT) {
+          count++
+        }
+        if (p.index == PkmIndex[pokemonEvolution] && p.evolution != Pkm.DEFAULT) {
+          pokemonEvolution2 = p.evolution
+          countEvol++
+        }
+      })
+    }
+  
+    const willEvolve = count === 2
+    const shouldShimmer = count > 0 || countEvol > 0
+    if(count === 2 && countEvol === 2 && pokemonEvolution2 != null) pokemonEvolution = pokemonEvolution2
     
     return (
       <div
-        className={`nes-container game-pokemon-portrait ${willEvolve? "is-evolution": ""}`}
+        className={`nes-container game-pokemon-portrait ${shouldShimmer? "shimmer": ""}`}
         style={{
           backgroundColor: rarityColor,
           borderColor: rarityColor,
@@ -54,6 +75,14 @@ export default function GamePokemonPortrait(props: {
         >
           <GamePokemonDetail pokemon={props.pokemon} />
         </ReactTooltip>
+        {willEvolve && pokemonEvolution && <div className="game-pokemon-portrait-evolution">
+          <img src={getPortraitSrc(
+            PkmIndex[pokemonEvolution],
+            props.pokemonConfig?.selectedShiny,
+            props.pokemonConfig?.selectedEmotion
+          )} className="game-pokemon-portrait-evolution-portrait" />
+          <img src="/assets/ui/evolution.png" alt="" className="game-pokemon-portrait-evolution-icon" />
+        </div>}
         <div className="game-pokemon-portrait-cost">
           <p>{PkmCost[props.pokemon.rarity]}</p>
           <img src="/assets/ui/money.png" alt="$" />
