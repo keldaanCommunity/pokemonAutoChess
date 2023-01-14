@@ -19,7 +19,6 @@ import {
 import PokemonEntity from "../../../core/pokemon-entity"
 import { Item } from "../../../types/enum/Item"
 import { DesignTiled } from "../../../core/design"
-import { Pkm } from "../../../types/enum/Pokemon"
 import { toast } from "react-toastify"
 import React from "react"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
