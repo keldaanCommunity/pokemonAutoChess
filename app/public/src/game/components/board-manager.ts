@@ -172,15 +172,4 @@ export default class BoardManager {
       }
     }
   }
-
-  getPossibleEvolution(pokemonIndex: string) {
-    let count = 0
-
-    this.pokemons.forEach((p) => {
-      if (p.index == pokemonIndex && p.evolution != Pkm.DEFAULT) {
-        count++
-      }
-    })
-    return count === 2 || count === 5 || count === 8
-  }
 }
