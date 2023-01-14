@@ -29,6 +29,7 @@ export default function GamePokemonPortrait(props: {
   } else {
     const rarityColor = RarityColor[props.pokemon.rarity]
     const boardManager = getGameScene()?.board
+
     let count = 0
     let countEvol = 0;
     let pokemonEvolution = props.pokemon.evolution
