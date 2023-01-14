@@ -30,18 +30,25 @@ export default function GamePokemonPortrait(props: {
     const rarityColor = RarityColor[props.pokemon.rarity]
     const boardManager = getGameScene()?.board
     let count = 0
+    let countEvol = 0;
+    let pokemonEvolution = props.pokemon.evolution
+    let pokemonEvolution2: Pkm | null = null;
 
     if(boardManager){
       boardManager.pokemons.forEach((p) => {
         if (p.index == props.pokemon!.index && p.evolution != Pkm.DEFAULT) {
           count++
         }
+        if (p.index == PkmIndex[pokemonEvolution] && p.evolution != Pkm.DEFAULT) {
+          pokemonEvolution2 = p.evolution
+          countEvol++
+        }
       })
     }
   
-    const willEvolve = count === 2 || count === 5 || count === 8
-    const pokemonEvolution = willEvolve && props.pokemon.evolution
-    const shouldShimmer = props.pokemon.evolution !== Pkm.DEFAULT && count > 0 && count < 9
+    const willEvolve = count === 2
+    const shouldShimmer = count > 0 || countEvol > 0
+    if(count === 2 && countEvol === 2 && pokemonEvolution2 != null) pokemonEvolution = pokemonEvolution2
     
     return (
       <div
@@ -67,7 +74,7 @@ export default function GamePokemonPortrait(props: {
         >
           <GamePokemonDetail pokemon={props.pokemon} />
         </ReactTooltip>
-        {pokemonEvolution && <div className="game-pokemon-portrait-evolution">
+        {willEvolve && pokemonEvolution && <div className="game-pokemon-portrait-evolution">
           <img src={getPortraitSrc(
             PkmIndex[pokemonEvolution],
             props.pokemonConfig?.selectedShiny,
