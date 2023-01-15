@@ -105,11 +105,9 @@ export default function AfterGame() {
             setToLobby(true)
           }}
         >
-          Lobby
+         Back to Lobby
         </button>
-        <div className="nes-container with-title is-centered" style={style}>
-          <AfterMenu />
-        </div>
+        <AfterMenu />
       </div>
     )
   }

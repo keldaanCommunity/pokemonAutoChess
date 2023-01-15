@@ -70,6 +70,7 @@ import {
 import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
 import { Pkm, PkmIndex } from "../../../types/enum/Pokemon"
+import { getRankLabel } from "../../../types/strings/Strings"
 import { toast } from "react-toastify"
 import { getPortraitSrc } from "../utils"
 import GameScene from "../game/scenes/game-scene"
@@ -303,8 +304,8 @@ export default function Game() {
           changes.forEach((change) => {
             if (player.id == uid) {
               if (change.field == "alive") {
-                const rankPhrase = `Place no ${player.rank}`
-                const titlePhrase = "Rank"
+                const rankPhrase = getRankLabel(player.rank)!
+                const titlePhrase = "Game Over"
                 if (!change.value) {
                   setModalTitle(titlePhrase)
                   setModalInfo(rankPhrase)
