@@ -1,0 +1,11 @@
+.player-team {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+    margin: 0;
+    padding-left: 40px;
+}
+
+.player-team img {
+    box-shadow: #2d334b 2px 2px 4px;
+}

@@ -9,11 +9,11 @@
     position: relative;
 }
 
-.game-pokemon-portrait.is-evolution {
+.game-pokemon-portrait.shimmer {
     box-shadow: 0 0 4px #ffffff80;
 }
 
-.game-pokemon-portrait.is-evolution::after {
+.game-pokemon-portrait.shimmer::after {
     content: "";
     display: block;
     position: absolute;
@@ -50,9 +50,9 @@
 }
 
 .game-pokemon-portrait-cost > p {
-    fontSize: 1.2vw;
-    textShadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff`;
-    margin: 0;
+    font-size: 1.2vw;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    margin: 0 2px 0 0;
 }
 
 .game-pokemon-portrait-cost > img {
@@ -70,4 +70,27 @@
     top: 0;
     right: 0;
     height: 100%;
+}
+
+.game-pokemon-portrait-evolution {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+.game-pokemon-portrait-evolution-icon {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  image-rendering: pixelated;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.game-pokemon-portrait-evolution-portrait {
+  width: 40px;
+  height: 40px;
+  border: 1px solid white;
+  border-radius: 4px;
+  image-rendering: pixelated;
 }
