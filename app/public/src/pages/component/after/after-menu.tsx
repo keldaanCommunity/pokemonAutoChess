@@ -2,46 +2,55 @@ import React from "react"
 import { useAppSelector } from "../../../hooks"
 import Avatar from "../avatar"
 import Team from "./team"
+import { getRankLabel } from "../../../../../../app/types/strings/Strings"
+import "./after-menu.css";
 
 export default function AfterMenu() {
-  const players = useAppSelector((state) => state.after.players)
+  const players = useAppSelector((state) => state.after.players).slice().sort((a,b) => a.rank - b.rank)
+  
+  const currentPlayerId: string = useAppSelector( (state) => state.network.uid )
+  const currentPlayer = players.find(p => p.id === currentPlayerId)
+  console.log({ players, currentPlayerId })
+  if(!currentPlayer) return null;
+  const playerRank = currentPlayer!.rank;
+
   return (
-    <div style={{ display: "flex", flexFlow: "column", gap: "10px" }}>
-      <div
-        style={{
-          color: "#fff",
-          fontSize: "1.3em",
-          display: "flex",
-          justifyContent: "space-between"
-        }}
-      >
-        <p>Rank</p>
-        <p>Player</p>
-        <p>Team</p>
+    <div className="after-menu nes-container with-title is-centered">
+      <div className="player-rank">
+        {playerRank <= 3 && <img src={`/assets/ui/rank${playerRank}.png`} alt="" />}
+        <span>{getRankLabel(playerRank)}</span>
       </div>
-      {players.map((v) => {
-        return (
-          <div
-            key={v.id}
-            style={{
-              color: "#fff",
-              display: "flex",
-              fontSize: "1.3em",
-              justifyContent: "space-between"
-            }}
-          >
-            <p>{v.rank}</p>
-            <Avatar
-              avatar={v.avatar}
-              name={v.name}
-              elo={undefined}
-              title={v.title}
-              role={v.role}
-            />
-            <Team team={v.pokemons} />
-          </div>
-        )
-      })}
+      <hr />
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Team</th>
+          </tr>
+        </thead>
+        <tbody>
+        {players.map((v) => {
+          return (
+            <tr key={v.id}>
+              <td className="player-rank">{v.rank}</td>
+              <td>                
+                <Avatar
+                  avatar={v.avatar}
+                  name={v.name}
+                  elo={undefined}
+                  title={v.title}
+                  role={v.role}
+                />
+              </td>
+              <td>
+                <Team team={v.pokemons} />
+              </td>
+            </tr>
+          )
+        })}
+        </tbody>
+      </table>
     </div>
   )
 }

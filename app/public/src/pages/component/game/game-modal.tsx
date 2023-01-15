@@ -35,14 +35,14 @@ export default function GameModal(props: {
             props.hideModal(false)
           }}
         >
-          Cancel
+          Close
         </button>
         <button
           style={buttonStyle}
           className="bubbly-error"
           onClick={props.leave}
         >
-          Leave
+          Leave game
         </button>
       </Modal.Footer>
     </Modal>
