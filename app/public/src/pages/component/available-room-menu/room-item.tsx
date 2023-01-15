@@ -8,7 +8,7 @@ export default function RoomItem(props: {
 }) {
   return (
     <div
-      className="playerBox"
+      className="player-box"
       style={{
         display: "flex",
         padding: "10px",

@@ -22,11 +22,11 @@
   "main": "dist/server/index.js",
   "scripts": {
     "reset": "rm -rf node_modules/ && rm -f app/public/js/*",
-    "dev-client": "esbuild app/public/src/index.tsx  --outfile=app/public/dist/client/index.js --bundle --watch",
+    "dev-client": "node esbuild.js --dev",
     "dev-server": "ts-node-dev --watch \"src/**/*\" --respawn --transpile-only ./app/index.ts",
     "dev": "npm-run-all --parallel dev-*",
     "lint": "npx eslint app/",
-    "build-client": "esbuild app/public/src/index.tsx  --outfile=app/public/dist/client/index.js --bundle --minify --sourcemap --target=es2016",
+    "build-client": "node esbuild.js --build",
     "build-server": "tsc",
     "build": "npm run build-client && npm run build-server",
     "start": "node ./app/public/dist/server/app/index.js",

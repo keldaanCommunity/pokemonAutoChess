@@ -6,18 +6,16 @@ export default function DonateButton() {
   }
   return (
     <button
-      className="bubblyTip"
+      className="bubbly pink"
       onClick={() => {
         handleTipeeClick()
       }}
     >
       <span className="btn-txt">Donate</span>
-      <div>
-        <img
+      <img
           src="assets/ui/tipeee.svg"
-          style={{ width: "auto", height: "40px", display: "flex" }}
+          style={{ width: "4vw", height: "auto", marginLeft:"1vw", display: "inline-block" }}
         />
-      </div>
     </button>
   )
 }

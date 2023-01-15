@@ -1,0 +1,29 @@
+.room-menu {
+    display: flex;
+    flex-direction: column;
+    background-image: url("assets/ui/back1.png");
+    background-size: cover;
+}
+
+.room-menu .subtitle {
+    text-align: center;
+    color: white;
+    font-size: 1.5vw;
+}
+
+.room-menu ul {
+    list-style: none;
+    padding: 0;
+    flex: 1;
+}
+
+.room-menu button {
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media(max-width: 640px){
+    .room-menu .subtitle {        
+        font-size: 3vw;
+    }
+}

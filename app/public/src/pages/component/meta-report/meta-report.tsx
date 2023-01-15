@@ -82,31 +82,11 @@ export default function MetaReport(props: {
       >
         <Tabs>
           <TabList>
-            <Tab key="team-comps">
-              <p className="my-cursor" style={tabStyle}>
-                Meta Report
-              </p>
-            </Tab>
-            <Tab key="items">
-              <p className="my-cursor" style={tabStyle}>
-                Item Report
-              </p>
-            </Tab>
-            <Tab key="pokemons">
-              <p className="my-cursor" style={tabStyle}>
-                Pokemon Report
-              </p>
-            </Tab>
-            <Tab key="bots">
-              <p className="my-cursor" style={tabStyle}>
-                Bot Report
-              </p>
-            </Tab>
-            <Tab key="discover">
-              <p className="my-cursor" style={tabStyle}>
-                Discover
-              </p>
-            </Tab>
+            <Tab key="team-comps">Meta Report</Tab>
+            <Tab key="items">Item Report</Tab>
+            <Tab key="pokemons">Pokemon Report</Tab>
+            <Tab key="bots">Bot Report</Tab>
+            <Tab key="discover">Discover</Tab>
           </TabList>
 
           <TabPanel key="team-comps-panel">
@@ -132,7 +112,6 @@ export default function MetaReport(props: {
               >
                 <p style={{ margin: "0px" }}>Rank</p>
                 <select
-                  className="my-cursor"
                   value={rankingBy}
                   onChange={(e) => {
                     setRanking(e.target.value)
@@ -181,7 +160,6 @@ export default function MetaReport(props: {
               >
                 <p style={{ margin: "0px" }}>Rank</p>
                 <select
-                  className="my-cursor"
                   value={itemRankingBy}
                   onChange={(e) => {
                     setItemRanking(e.target.value)
@@ -226,7 +204,6 @@ export default function MetaReport(props: {
               >
                 <p style={{ margin: "0px" }}>Rank</p>
                 <select
-                  className="my-cursor"
                   value={pokemonRankingBy}
                   onChange={(e) => {
                     setPokemonRanking(e.target.value)

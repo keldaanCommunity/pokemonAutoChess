@@ -8,6 +8,7 @@ import { useAppSelector, useAppDispatch } from "../../../hooks"
 import { logIn, logOut } from "../../../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "../../utils/utils"
 import AnonymousButton from "./anonymous-button"
+import "./login.css";
 
 export default function Login() {
   const dispatch = useAppDispatch()
@@ -60,42 +61,25 @@ export default function Login() {
   } else {
     return (
       <div id="play-panel">
-        <p
-          style={{
-            fontSize: "4vw",
-            textShadow: "2px 4px 3px rgba(0,0,0,0.3)",
-            color: "white"
-          }}
-        >
-          Welcome {displayName}
-        </p>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            flexFlow: "column",
-            alignItems: "start"
-          }}
-        >
-          <Link to={"/lobby"} style={{ textDecoration: "none" }}>
+        <p className="welcome-text">Welcome {displayName}</p>
+        <ul className="actions">
+          <li>
+            <Link className="bubbly green" to={"/lobby"}>
+                Join Lobby
+            </Link>
+          </li>
+          <li>
             <button
-              className="bubbly green"
-              style={{ width: "11vw" }}
+              className="bubbly red"
+              onClick={() => {
+                firebase.auth().signOut()
+                dispatch(logOut())
+              }}
             >
-              Join Lobby
+              Sign-out
             </button>
-          </Link>
-          <button
-            className="bubbly red"
-            style={{ width: "11vw" }}
-            onClick={() => {
-              firebase.auth().signOut()
-              dispatch(logOut())
-            }}
-          >
-            Sign-out
-          </button>
-        </div>
+          </li>
+        </ul>
       </div>
     )
   }

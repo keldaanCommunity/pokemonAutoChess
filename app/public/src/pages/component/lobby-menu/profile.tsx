@@ -11,20 +11,6 @@ import {
 import { RoleBadge } from "../RoleBadge"
 import { getAvatarSrc, getPortraitSrc } from "../../../utils"
 
-const cursorStyle = {
-  cursor: "var(--cursor-hover)"
-}
-
-const tabStyle = {
-  cursor: "var(--cursor-hover)",
-  backgroundColor: "rgba(255, 255, 255, 0.3)",
-  borderTopLeftRadius: "12px",
-  borderTopRightRadius: "12px",
-  outline: "none",
-  color: "white",
-  fontSize: "1.5vw"
-}
-
 export default function Profile() {
   const dispatch = useAppDispatch()
   const [inputValue, setInputValue] = useState<string>("")
@@ -36,7 +22,7 @@ export default function Profile() {
   if (user) {
     return (
       <div>
-        <div className="playerBox" style={{ marginBottom: "20px" }}>
+        <div className="player-box" style={{ marginBottom: "20px" }}>
           <div
             style={{
               display: "flex",
@@ -70,13 +56,13 @@ export default function Profile() {
 
         <Tabs>
           <TabList>
-            <Tab style={tabStyle}>Name</Tab>
-            <Tab style={tabStyle}>Avatar</Tab>
-            <Tab style={tabStyle}>Title</Tab>
+            <Tab>Name</Tab>
+            <Tab>Avatar</Tab>
+            <Tab>Title</Tab>
           </TabList>
 
           <TabPanel>
-            <div>
+            <div className="nes-container">
               <h3>Change Name</h3>
               <div className="nes-field is-inline">
                 <input
@@ -98,15 +84,16 @@ export default function Profile() {
             </div>
           </TabPanel>
           <TabPanel>
-            <div>
+            <div className="nes-container">
               <h3>Change Avatar</h3>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
+                {pokemonCollection.length === 0 && <p>Play more games to earn boosters and unlock new avatars !</p>}
                 {pokemonCollection.map((pokemonConfig) => {
                   return pokemonConfig.emotions.map((emotion) => {
                     return (
                       <img
                         key={`normal-${pokemonConfig.id}${emotion}`}
-                        style={cursorStyle}
+                        className="clickable"
                         onClick={() => {
                           dispatch(
                             changeAvatar({
@@ -126,7 +113,7 @@ export default function Profile() {
                     return (
                       <img
                         key={`shiny-${pokemonConfig.id}${emotion}`}
-                        style={cursorStyle}
+                        className="clickable"
                         onClick={() => {
                           dispatch(
                             changeAvatar({
@@ -145,7 +132,7 @@ export default function Profile() {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="playerBox">
+            <div className="player-box">
               <div style={{ display: "flex", flexDirection: "column" }}>
                 {Object.keys(Title).map((k,i) => (
                   <div key={k} style={{ 
@@ -159,7 +146,7 @@ export default function Profile() {
                         }
                       }}
                       style={{ color: user.title === k ? '#ffc107' : user.titles.includes(k as Title) ? "#92cc41" : "#db5e6a" }}
-                      className="my-cursor"
+                      className="clickable"
                     >
                       {TitleName[k]}
                     </h5>

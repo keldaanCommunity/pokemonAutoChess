@@ -1,0 +1,61 @@
+.lobby {
+    padding: 1vw;
+    display: grid;
+    grid-template:
+    "nav nav nav nav" min-content
+    "user rooms online chat" 1fr / 30vw 25vw 15vw 1fr;
+    gap: 1vw;
+}
+
+.lobby nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1vw;
+    grid-area: nav;
+}
+
+.lobby .user-menu {
+    grid-area: user;
+    height: 100%;
+}
+
+.lobby .room-menu {
+    grid-area: rooms;
+    height: 100%;
+}
+
+.lobby .current-users-menu {
+    grid-area: online;
+    height: 100%;
+}
+
+.lobby user-chat {
+    grid-area: chat;
+    height: 100%;
+}
+
+.lobby h1 {    
+    text-align: center;
+    color: white;
+    font-size: 2vw;
+}
+
+@media(max-width: 640px){
+    .lobby {
+        overflow-y: auto;
+        display: block;
+    }
+
+    .lobby nav {
+        flex-wrap: wrap;
+    }
+
+    .lobby h1 {
+        font-size: 4vw;
+    }
+
+    .lobby > .nes-container {
+        margin-top: 1em;
+        max-height: 80vh;
+    }
+}

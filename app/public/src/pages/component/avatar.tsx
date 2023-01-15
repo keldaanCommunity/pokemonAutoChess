@@ -15,7 +15,7 @@ export default function Avatar(props: {
 
   return (
     <div
-      className="playerBox my-cursor"
+      className="player-box"
       style={{
         display: "flex",
         justifyContent: "space-around",

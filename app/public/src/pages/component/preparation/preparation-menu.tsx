@@ -111,7 +111,7 @@ export default function PreparationMenu(props: {
         flexBasis: "50%"
       }}
     >
-      <h3 className="my-h1">{name}</h3>
+      <h3 style={{ textAlign: 'center', color: 'white', fontSize: '2vw'}}>{name}</h3>
       <div
         style={{
           display: "flex",

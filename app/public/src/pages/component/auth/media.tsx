@@ -5,11 +5,11 @@ import PolicyButton from "../buttons/policy-button"
 
 export default function Media() {
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", gap: "1em", alignItems: "center" }}>
       <DiscordButton />
       <DonateButton />
       <PolicyButton />
-      <p>V2.5</p>
+      <span style={{ color: "white", textShadow: "2px 2px 0 black" }}>V2.5</span>
     </div>
   )
 }

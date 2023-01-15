@@ -14,7 +14,7 @@ export default function LeaderboardItem(props: {
   const dispatch = useAppDispatch()
   return (
     <div
-      className="playerBox my-cursor"
+      className="player-box clickable"
       style={{
         display: "flex",
         justifyContent: "space-between",

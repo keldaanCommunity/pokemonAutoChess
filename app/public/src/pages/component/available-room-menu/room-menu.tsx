@@ -7,11 +7,7 @@ import { ICustomLobbyState } from "../../../../../types"
 import RoomItem from "./room-item"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { leaveLobby } from "../../../stores/LobbyStore"
-
-const ulStyle = {
-  listStyle: "none",
-  padding: "0px"
-}
+import "./room-menu.css";
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -66,39 +62,19 @@ export default function RoomMenu(props: {
   }
 
   return (
-    <div
-      className="nes-container"
-      style={{
-        margin: "10px",
-        display: "flex",
-        flexFlow: "column",
-        flexBasis: "25%",
-        height: "90vh",
-        background: 'url("assets/ui/back1.png")',
-        backgroundSize: "cover"
-      }}
-    >
-      <h1 className="my-h1">Available Rooms</h1>
-      <p style={{ textAlign: "center", color: "white", fontSize: "1.5vw" }}>
+    <div className="nes-container room-menu">
+      <h1>Available Rooms</h1>
+      <p className="subtitle">
         Click Create Room to play!
       </p>
-      <ul style={ulStyle} className="hidden-scrollable">
+      <ul className="hidden-scrollable">
         {allRooms.map((r) => (
           <li key={r.roomId}>
             <RoomItem room={r} click={join} />
           </li>
         ))}
       </ul>
-      <button
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          left: "8%",
-          width: "80%"
-        }}
-        onClick={create}
-        className="bubbly green"
-      >
+      <button onClick={create} className="bubbly green">
         Create Room
       </button>
     </div>

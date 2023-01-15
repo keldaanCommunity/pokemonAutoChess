@@ -44,7 +44,7 @@ export default function PreparationMenuUser(props: {
 
   return (
     <div
-      className="nes-container playerBox"
+      className="nes-container player-box"
       style={{
         width: "40%",
         display: "flex",

@@ -95,7 +95,7 @@ export default function Search() {
         {suggestions.map((suggestion) => (
           <div
             style={{ display: "flex", flexFlow: "column", padding: "5px" }}
-            className="playerBox my-cursor"
+            className="player-box clickable"
             key={suggestion.id}
             onClick={(e) => {
               dispatch(searchById(suggestion.id))
@@ -116,7 +116,7 @@ export default function Search() {
         ))}
       </div>
       {user ? (
-        <div>
+        <div className="nes-container">
           <div
             style={{ display: "flex", alignItems: "center", marginTop: "30px" }}
           >
