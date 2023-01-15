@@ -30,7 +30,7 @@ export default function Booster(props: { toggle: () => void }) {
         onClick={() => {
           props.toggle()
         }}
-        className="bubbly-primary"
+        className="bubbly blue"
       >
         Lobby
       </button>
@@ -61,7 +61,7 @@ export default function Booster(props: { toggle: () => void }) {
               dispatch(openBooster())
             }}
             className={
-              numberOfBooster > 0 ? "bubbly-primary" : "bubbly-disabled"
+              numberOfBooster > 0 ? "bubbly blue" : "bubbly disabled"
             }
           >
             Open Booster !

@@ -89,7 +89,7 @@ export default function PreparationMenu(props: {
         />
         <button
           style={{ marginLeft: "10px" }}
-          className="bubbly-primary"
+          className="bubbly blue"
           onClick={() => dispatch(changeRoomName(inputValue))}
         >
           Change
@@ -139,7 +139,7 @@ export default function PreparationMenu(props: {
             data-tip
             data-for={"difficulty-select"}
             style={buttonStyle}
-            className="bubbly-primary"
+            className="bubbly blue"
             onClick={() => {
               dispatch(addBot(botDifficulty))
             }}
@@ -172,7 +172,7 @@ export default function PreparationMenu(props: {
           </select>
           <button
             style={buttonStyle}
-            className="bubbly-warning"
+            className="bubbly orange"
             onClick={() => {
               dispatch(toggleReady())
             }}
@@ -183,8 +183,8 @@ export default function PreparationMenu(props: {
             style={buttonStyle}
             className={
               ownerId == uid
-                ? "bubbly-success is-success"
-                : "bubbly-success is-disabled"
+                ? "bubbly green"
+                : "bubbly green is-disabled"
             }
             onClick={ownerId == uid ? startGame : undefined}
             data-tip

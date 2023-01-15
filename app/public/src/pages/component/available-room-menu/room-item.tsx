@@ -25,7 +25,7 @@ export default function RoomItem(props: {
           {props.room.clients}/{props.room.maxClients}
         </h5>
         <button
-          className="bubbly-success is-success"
+          className="bubbly green is-success"
           onClick={() => {
             props.click(props.room.roomId)
           }}

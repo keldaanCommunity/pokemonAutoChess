@@ -12,7 +12,7 @@ export default function ChatMessage(props: { message: IMessage }) {
   const removeButton =
     role && (role === Role.MODERATOR || role === Role.ADMIN) ? (
       <button
-        className="bubbly-close"
+        className="bubbly red"
         onClick={() => {
           dispatch(
             removeMessage({

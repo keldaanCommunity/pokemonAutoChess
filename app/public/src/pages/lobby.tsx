@@ -309,7 +309,7 @@ export default function Lobby() {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Link to="/">
             <button
-              className="bubbly-error"
+              className="bubbly red"
               style={buttonStyle}
               onClick={async () => {
                 await room?.leave()
@@ -322,7 +322,7 @@ export default function Lobby() {
             </button>
           </Link>
           <button
-            className="bubbly-primary"
+            className="bubbly blue"
             style={buttonStyle}
             onClick={() => {
               toggleCollection(!showCollection)
@@ -331,7 +331,7 @@ export default function Lobby() {
             Collection
           </button>
           <button
-            className="bubbly-primary"
+            className="bubbly blue"
             style={buttonStyle}
             onClick={() => {
               toggleBooster(!showBooster)
@@ -340,7 +340,7 @@ export default function Lobby() {
             Booster
           </button>
           <button
-            className="bubbly-success is-success"
+            className="bubbly green"
             style={buttonStyle}
             onClick={() => {
               toggleWiki(!showWiki)
@@ -349,7 +349,7 @@ export default function Lobby() {
             Wiki
           </button>
           <button
-            className="bubbly-success is-success"
+            className="bubbly green"
             style={buttonStyle}
             onClick={() => {
               if (botList.length == 0) {
@@ -361,7 +361,7 @@ export default function Lobby() {
             BOT Builder
           </button>
           <button
-            className="bubbly-success is-success"
+            className="bubbly green"
             style={buttonStyle}
             onClick={() => {
               if (meta.length == 0 || metaItems.length == 0) {

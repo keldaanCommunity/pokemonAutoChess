@@ -95,7 +95,7 @@ export default function AfterGame() {
     return (
       <div className="App">
         <button
-          className="bubbly-primary"
+          className="bubbly blue"
           style={buttonStyle}
           onClick={() => {
             if (room) {

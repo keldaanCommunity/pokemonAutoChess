@@ -79,14 +79,14 @@ export default function Login() {
         >
           <Link to={"/lobby"} style={{ textDecoration: "none" }}>
             <button
-              className="bubbly-success is-success"
+              className="bubbly green"
               style={{ width: "11vw" }}
             >
               Join Lobby
             </button>
           </Link>
           <button
-            className="bubbly-error"
+            className="bubbly red"
             style={{ width: "11vw" }}
             onClick={() => {
               firebase.auth().signOut()

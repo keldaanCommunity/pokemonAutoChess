@@ -23,7 +23,7 @@ export default function Search() {
   const giveButton =
     user && role && role === Role.ADMIN ? (
       <button
-        className="bubbly-success"
+        className="bubbly green"
         onClick={() => {
           dispatch(giveBooster({ numberOfBoosters: 1, uid: user.id }))
         }}
@@ -34,7 +34,7 @@ export default function Search() {
   const modButton =
     user && role && role === Role.ADMIN ? (
       <button
-        className="bubbly-warning"
+        className="bubbly orange"
         onClick={() => {
           dispatch(setModerator(user.id))
         }}
@@ -58,7 +58,7 @@ export default function Search() {
           ))}
         </select>
         <button
-          className="bubbly-primary"
+          className="bubbly blue"
           onClick={() => {
             dispatch(giveTitle({ uid: user.id, title: t }))
           }}

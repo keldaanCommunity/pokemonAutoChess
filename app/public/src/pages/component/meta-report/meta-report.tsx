@@ -70,7 +70,7 @@ export default function MetaReport(props: {
   return (
     <div>
       <button
-        className="bubbly-success is-success"
+        className="bubbly green"
         style={buttonStyle}
         onClick={props.toggleMeta}
       >

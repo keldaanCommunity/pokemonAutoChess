@@ -14,7 +14,7 @@ export default function GameLevel() {
   const dispatch = useAppDispatch()
   return (
     <button
-      className="bubbly-warning"
+      className="bubbly orange"
       onClick={() => {
         dispatch(levelClick())
       }}

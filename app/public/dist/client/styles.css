@@ -228,142 +228,6 @@ input[type="range"]:focus::-ms-fill-upper {
   image-rendering: pixelated;
 }
 
-.bubbly-success {
-  margin: 10px;
-  display: block;
-  padding: 5px 30px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #92cc41;
-  color: white;
-  box-shadow: inset -6px -6px 0px 0px #65a013;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-  max-height: 65px;
-}
-
-.bubbly-success:hover {
-  background: #76c442;
-}
-
-.bubbly-success:active {
-  background: #92cc41;
-  box-shadow: inset 6px 6px 0px 0px #65a013;
-}
-
-.bubbly-warning {
-  margin: 10px;
-  display: block;
-  padding: 5px 30px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #f7d51d;
-  box-shadow: inset -6px -6px 0px 0px #c9ae17;
-  color: black;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-}
-
-.bubbly-warning:hover {
-  background: #e7c819;
-}
-
-.bubbly-warning:active {
-  background: #f7d51d;
-  box-shadow: inset 6px 6px 0px 0px #c9ae17;
-}
-
-.bubbly-error {
-  margin: 10px;
-  display: block;
-  padding: 5px 30px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #e76e55;
-  box-shadow: inset -6px -6px 0px 0px #8c2022;
-  color: white;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-  max-height: 65px;
-}
-
-.bubbly-error:hover {
-  background: #c25c48;
-}
-
-.bubbly-error:active {
-  background: #761c1e;
-  box-shadow: inset 6px 6px 0px 0px #8c2022;
-}
-
-.bubbly-close {
-  display: block;
-  padding: 0px 10px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #e76e55;
-  box-shadow: inset -6px -6px 0px 0px #8c2022;
-  color: white;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-  max-height: 65px;
-}
-
-.bubbly-close:hover {
-  background: #c25c48;
-}
-
-.bubbly-close:active {
-  background: #761c1e;
-  box-shadow: inset 6px 6px 0px 0px #8c2022;
-}
-
-.bubbly-primary {
-  margin: 10px;
-  display: block;
-  padding: 5px 30px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #109fff;
-  box-shadow: inset -6px -6px 0px 0px #006bb3;
-  color: white;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-  max-height: 65px;
-}
-
-.bubbly-primary:hover {
-  background: #1195ec;
-}
-
-.bubbly-primary:active {
-  background: #109fff;
-  box-shadow: inset 6px 6px 0px 0px #108de0;
-}
-
-.bubbly-disabled {
-  display: block;
-  text-align: center;
-  padding: 5px 30px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #d3d3d3;
-  box-shadow: inset -6px -6px 0px 0px #adafbc;
-  color: #757575;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-  margin: 10px;
-  max-height: 65px;
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
 .bubbly {
   display: block;
   text-align: center;
@@ -387,6 +251,85 @@ input[type="range"]:focus::-ms-fill-upper {
 .bubbly:active {
   background: #cfcfcf;
   box-shadow: inset 6px 6px 0px 0px #e7e7e7;
+}
+
+.bubbly {
+  display: block;
+  padding: 5px 30px;
+  border-radius: 12px;
+  font-size: 1.5vw;
+  border: solid;
+  border-color: black;
+  border-width: 4px;
+  max-height: 65px;
+}
+
+.bubbly.green {
+  box-shadow: inset -6px -6px 0px 0px #65a013;
+  background: #92cc41;
+  color: white;
+}
+
+.bubbly.green:hover {
+  background: #76c442;
+}
+
+.bubbly.green:active {
+  background: #92cc41;
+  box-shadow: inset 6px 6px 0px 0px #65a013;
+}
+
+.bubbly.orange {  
+  background: #f7d51d;
+  box-shadow: inset -6px -6px 0px 0px #c9ae17;
+  color: black;
+}
+
+.bubbly.orange:hover {
+  background: #e7c819;
+}
+
+.bubbly.orange:active {
+  background: #f7d51d;
+  box-shadow: inset 6px 6px 0px 0px #c9ae17;
+}
+
+.bubbly.red {
+  background: #e76e55;
+  box-shadow: inset -6px -6px 0px 0px #8c2022;
+  color: white;
+}
+
+.bubbly.red:hover {
+  background: #c25c48;
+}
+
+.bubbly.red:active {
+  background: #761c1e;
+  box-shadow: inset 6px 6px 0px 0px #8c2022;
+}
+
+.bubbly.blue {
+  background: #109fff;
+  box-shadow: inset -6px -6px 0px 0px #006bb3;
+  color: white;
+}
+
+.bubbly.blue:hover {
+  background: #1195ec;
+}
+
+.bubbly.blue:active {
+  background: #109fff;
+  box-shadow: inset 6px 6px 0px 0px #108de0;
+}
+
+.bubbly.disabled {
+  background: #d3d3d3;
+  box-shadow: inset -6px -6px 0px 0px #adafbc;
+  color: #757575;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .bubblyTip {

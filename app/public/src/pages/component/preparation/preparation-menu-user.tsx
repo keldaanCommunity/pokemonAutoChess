@@ -23,7 +23,7 @@ export default function PreparationMenuUser(props: {
   const removeButton = props.user.isBot ? (
     <button
       style={buttonStyle}
-      className="bubbly-close"
+      className="bubbly red"
       onClick={() => {
         dispatch(removeBot(props.user.id))
       }}
@@ -33,7 +33,7 @@ export default function PreparationMenuUser(props: {
   ) : props.isOwner && props.user.id !== props.ownerId ? (
     <button
       style={buttonStyle}
-      className="bubbly-close"
+      className="bubbly red"
       onClick={() => {
         dispatch(kick(props.user.id))
       }}

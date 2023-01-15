@@ -160,7 +160,7 @@ export default function Preparation() {
       <div className="App">
         <Link to="/lobby">
           <button
-            className="bubbly-primary"
+            className="bubbly blue"
             style={buttonStyle}
             onClick={async () => {
               dispatch(leavePreparation())

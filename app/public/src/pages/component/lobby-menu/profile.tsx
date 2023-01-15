@@ -89,7 +89,7 @@ export default function Profile() {
                   }}
                 />
                 <button
-                  className="bubbly-primary"
+                  className="bubbly blue"
                   onClick={() => dispatch(changeName(inputValue))}
                 >
                   Change

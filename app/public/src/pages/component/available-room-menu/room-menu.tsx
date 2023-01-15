@@ -97,7 +97,7 @@ export default function RoomMenu(props: {
           width: "80%"
         }}
         onClick={create}
-        className="bubbly-success is-success"
+        className="bubbly green"
       >
         Create Room
       </button>

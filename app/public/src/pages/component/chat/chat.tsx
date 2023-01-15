@@ -69,7 +69,7 @@ export default function Chat(props: { source: string }) {
         </div>
         <button
           style={{ height: "7vh" }}
-          className={user?.anonymous ? "bubbly-disabled" : "bubbly-primary"}
+          className={user?.anonymous ? "bubbly disabled" : "bubbly blue"}
           disabled={user?.anonymous}
           title={
             user?.anonymous
