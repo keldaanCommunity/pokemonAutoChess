@@ -1,0 +1,32 @@
+.after-menu {
+    max-width: 960px;
+    margin: auto;
+    color: white;
+    padding: 16px;
+}
+
+.after-menu .player-rank {
+    font-size: 4rem;
+    color: white;
+    text-shadow: 4px 4px 0 black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.after-menu .player-rank img {
+    height: 48px;
+}
+
+.after-menu table td {
+    padding: 8px;
+}
+
+.after-menu table td:first-child {
+    width: 80px;
+}
+
+.after-menu table .player-rank {
+    font-size: 2rem;
+}
