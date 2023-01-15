@@ -261,6 +261,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
   addCritDamage(value: number, spellDamageBoost?: boolean) {
     const boost = spellDamageBoost ? (value * this.spellDamage) / 100 : 0
-    this.critDamage = Math.max(0, this.critDamage + Math.round(value + boost))
+    this.critDamage = Math.max(
+      0,
+      this.roundTo2Digits(this.critDamage + Math.round(value + boost) / 100)
+    )
+  }
+
+  roundTo2Digits(value: number) {
+    return parseFloat(value.toFixed(2))
   }
 }
