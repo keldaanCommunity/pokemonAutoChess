@@ -1,8 +1,10 @@
 .after-menu {
     max-width: 960px;
+    max-height: calc(100vh - 8vw);
     margin: auto;
     color: white;
     padding: 16px;
+    overflow: auto;
 }
 
 .after-menu .player-rank {

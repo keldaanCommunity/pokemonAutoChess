@@ -20,7 +20,6 @@ export default function AfterMenu() {
         {playerRank <= 3 && <img src={`/assets/ui/rank${playerRank}.png`} alt="" />}
         <span>{getRankLabel(playerRank)}</span>
       </div>
-      <hr />
       <table>
         <thead>
           <tr>
