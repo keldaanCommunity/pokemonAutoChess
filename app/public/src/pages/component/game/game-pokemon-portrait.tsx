@@ -48,7 +48,7 @@ export default function GamePokemonPortrait(props: {
     }
   
     const willEvolve = count === 2
-    const shouldShimmer = count > 0 || countEvol > 0
+    const shouldShimmer = (count > 0 && pokemonEvolution != null) || (countEvol > 0 && pokemonEvolution2 != null)
     if(count === 2 && countEvol === 2 && pokemonEvolution2 != null) pokemonEvolution = pokemonEvolution2
     
     return (
