@@ -379,7 +379,6 @@ export interface IPokemonEntity {
   healDone: number
   shiny: boolean
   emotion: Emotion
-  evolution: Pkm
 }
 
 export interface IStatus {
