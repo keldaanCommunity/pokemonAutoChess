@@ -76,7 +76,7 @@ export default function RoomMenu(props: {
           </li>
         ))}
       </ul>
-      <button onClick={create} className="bubbly green">
+      <button onClick={create} className="bubbly green create-room-button">
         Create Room
       </button>
     </div>
