@@ -686,35 +686,6 @@ export default class GameRoom extends Room<GameState> {
                   player.items.add(itemToAdd)
                 } else {
                   pokemonEvolved.items.add(itemToAdd)
-                  switch (itemToAdd) {
-                    case Item.WATER_STONE:
-                      pokemonEvolved.types.push(Synergy.WATER)
-                      break
-                    case Item.FIRE_STONE:
-                      pokemonEvolved.types.push(Synergy.FIRE)
-                      break
-                    case Item.THUNDER_STONE:
-                      pokemonEvolved.types.push(Synergy.ELECTRIC)
-                      break
-                    case Item.DUSK_STONE:
-                      pokemonEvolved.types.push(Synergy.DARK)
-                      break
-                    case Item.MOON_STONE:
-                      pokemonEvolved.types.push(Synergy.FAIRY)
-                      break
-                    case Item.LEAF_STONE:
-                      pokemonEvolved.types.push(Synergy.GRASS)
-                      break
-                    case Item.DAWN_STONE:
-                      pokemonEvolved.types.push(Synergy.PSYCHIC)
-                      break
-                    case Item.ICY_ROCK:
-                      pokemonEvolved.types.push(Synergy.ICE)
-                      break
-                    case Item.OLD_AMBER:
-                      pokemonEvolved.types.push(Synergy.FOSSIL)
-                      break
-                  }
                 }
               }
             }
