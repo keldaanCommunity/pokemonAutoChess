@@ -1,9 +1,7 @@
-import { Item } from "../types/enum/Item"
 import PokemonFactory from "../models/pokemon-factory"
 import BOT, { IBot } from "../models/mongo-models/bot-v2"
 import Player from "../models/colyseus-models/player"
 import { BattleResult } from "../types/enum/Game"
-import { Synergy } from "../types/enum/Synergy"
 import { Emotion } from "../types"
 
 export default class Bot {
