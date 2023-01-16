@@ -97,7 +97,9 @@ export default class Pokemon extends Button {
     isPopup: boolean
   ) {
     super(scene, x, y, 75, 75)
-    this.evolution = pokemon.evolution
+    this.evolution = instanceofPokemonEntity(pokemon)
+      ? Pkm.DEFAULT
+      : (pokemon as IPokemon).evolution
     this.emotion = pokemon.emotion
     this.shiny = pokemon.shiny
     this.isPopup = isPopup
