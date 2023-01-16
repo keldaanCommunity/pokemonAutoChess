@@ -64,7 +64,7 @@ export default function Profile() {
           <TabPanel>
             <div className="nes-container">
               <h3>Change Name</h3>
-              <div className="nes-field is-inline">
+              <div className="nes-field is-inline" style={{gap: "0.5em"}}>
                 <input
                   type="text"
                   id="inline_field"

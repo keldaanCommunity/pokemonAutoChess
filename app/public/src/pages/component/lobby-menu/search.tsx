@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import History from "./history"
 import { Role, Title } from "../../../../../types"
-import Elo from "../elo"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   searchName,
@@ -10,8 +9,8 @@ import {
   setModerator,
   giveTitle
 } from "../../../stores/NetworkStore"
-import { RoleBadge } from "../RoleBadge"
 import { getAvatarSrc } from "../../../utils"
+import Avatar from "../avatar"
 
 export default function Search() {
   const dispatch = useAppDispatch()
@@ -117,23 +116,24 @@ export default function Search() {
       </div>
       {user ? (
         <div className="nes-container">
-          <div
-            style={{ display: "flex", alignItems: "center", marginTop: "30px" }}
-          >
-            <img src={getAvatarSrc(user.avatar)} />
-            <h5>{user.name}</h5>
-            <RoleBadge role={user.role} />
-            <Elo elo={user.elo} />
-          </div>
-          <p>
-            Level {user.level} ({user.exp} / 1000)
-          </p>
-          <p>Wins: {user.wins}</p>
+          <Avatar
+            avatar={user.avatar}
+            name={user.name}
+            elo={user.elo}
+            title={user.title}
+            role={user.role}
+          />
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <p>Level {user.level} ({user.exp} / 1000)</p>
+            <p>Wins: {user.wins}</p>
           {modButton}
           {giveButton}
           {titleButton}
-          <h5>Game History</h5>
-          <History history={user.history} />
+          </div>
+          <article>
+            <p>Game History</p>
+            <History history={user.history} />
+          </article>
         </div>
       ) : null}
     </div>

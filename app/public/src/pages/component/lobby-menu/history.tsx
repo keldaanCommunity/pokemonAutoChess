@@ -1,38 +1,40 @@
 import React from "react"
 import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
-import { Record } from "./record"
-
-const ulStyle = {
-  listStyle: "none",
-  padding: "0px",
-  display: "flex",
-  flexFlow: "column"
-}
+import Elo from "../elo"
+import "./history.css"
+import Team from "../after/team"
+import { formatDate } from "../../utils/date"
 
 export default function History(props: { history: IGameRecord[] }) {
   if (props.history) {
     return (
-      <ul style={ulStyle}>
-        <li key="index-history-title">
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <p>Rank</p>
-            <p>Team</p>
-            <p>Date</p>
-            <p>Elo</p>
-          </div>
-        </li>
-        {props.history.map((r) => createGameRecord(r))}
-      </ul>
+      <table className="game-history">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Team</th>
+            <th>Date</th>
+            <th>Elo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.history.map((r) => (
+          <tr key={r.time}>
+            <Record record={r} />
+          </tr>))}
+        </tbody>        
+      </table>
     )
   } else {
     return null
   }
 }
 
-function createGameRecord(r: IGameRecord) {
-  return (
-    <li key={r.time}>
-      <Record record={r} />
-    </li>
-  )
+export function Record(props: { record: IGameRecord }) {
+  return (<>
+    <td>Top {props.record.rank}</td>
+    <td><Team team={props.record.pokemons}></Team></td>
+    <td>{formatDate(props.record.time)}</td>
+    <td><Elo elo={props.record.elo} /></td>
+  </>)
 }
