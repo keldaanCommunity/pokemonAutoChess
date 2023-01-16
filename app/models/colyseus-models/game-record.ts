@@ -1,15 +1,16 @@
 import { Schema, ArraySchema, type } from "@colyseus/schema"
 import { Emotion } from "../../types"
+import { Item } from "../../types/enum/Item"
 import { PkmIndex } from "../../types/enum/Pokemon"
 export interface IPokemonRecord {
   name: string
-  items: string[]
+  items: Item[]
   avatar: string
 }
 export class PokemonRecord extends Schema implements IPokemonRecord {
   @type("string") name: string
   @type("string") avatar: string
-  @type(["string"]) items = new ArraySchema<string>()
+  @type(["string"]) items = new ArraySchema<Item>()
 
   constructor(mongoPokemon: any) {
     super()
@@ -18,7 +19,7 @@ export class PokemonRecord extends Schema implements IPokemonRecord {
       ? mongoPokemon.avatar
       : `${PkmIndex[this.name]}/${Emotion.NORMAL}`
 
-    mongoPokemon.items.forEach((it: string) => {
+    mongoPokemon.items.forEach((it: Item) => {
       this.items.push(it)
     })
   }
