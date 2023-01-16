@@ -115,7 +115,7 @@ export default function Search() {
         ))}
       </div>
       {user ? (
-        <div className="nes-container">
+        <div className="nes-container" style={{marginTop: "1em"}}>
           <Avatar
             avatar={user.avatar}
             name={user.name}
@@ -130,10 +130,7 @@ export default function Search() {
           {giveButton}
           {titleButton}
           </div>
-          <article>
-            <p>Game History</p>
-            <History history={user.history} />
-          </article>
+          <History history={user.history} />
         </div>
       ) : null}
     </div>

@@ -28,12 +28,10 @@ export default function LeaderboardItem(props: {
       }}
     >
       <div style={{ display: "flex", gap: "5px" }}>
-        {props.item.rank}
+        <span style={{lineHeight: "40px"}}>{props.item.rank}</span>
         <img src={getAvatarSrc(props.item.avatar)} />
       </div>
-      <div
-        style={{ overflow: "hidden", whiteSpace: "nowrap", maxWidth: "300px" }}
-      >
+      <div style={{ overflow: "hidden", whiteSpace: "nowrap", maxWidth: "300px" }}>
         {props.item.name}
       </div>
       <div>
