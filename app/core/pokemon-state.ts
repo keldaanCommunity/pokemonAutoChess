@@ -161,7 +161,7 @@ export default class PokemonState {
         // console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
 
         if (pokemon) {
-          pokemon.setMana(pokemon.mana + Math.ceil(reducedDamage / 10))
+          pokemon.setMana(pokemon.mana + Math.ceil(residualDamage / 10))
 
           if (
             pokemon.items.has(Item.DEFENSIVE_RIBBON) &&
