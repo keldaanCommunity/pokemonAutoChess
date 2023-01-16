@@ -114,24 +114,6 @@ export default class PokemonState {
           }
         }
 
-        if (attacker && reducedDamage > 0) {
-          switch (attackType) {
-            case AttackType.PHYSICAL:
-              attacker.physicalDamage += reducedDamage
-              break
-
-            case AttackType.SPECIAL:
-              attacker.specialDamage += reducedDamage
-              break
-
-            case AttackType.TRUE:
-              attacker.trueDamage += reducedDamage
-              break
-
-            default:
-              break
-          }
-        }
         let residualDamage = reducedDamage
 
         if (pokemon.shield > 0) {
@@ -154,6 +136,25 @@ export default class PokemonState {
 
         if (pokemon.skill == Ability.WONDER_GUARD) {
           residualDamage = 1
+        }
+
+        if (attacker && residualDamage > 0) {
+          switch (attackType) {
+            case AttackType.PHYSICAL:
+              attacker.physicalDamage += Math.min(residualDamage, pokemon.life)
+              break
+
+            case AttackType.SPECIAL:
+              attacker.specialDamage += Math.min(residualDamage, pokemon.life)
+              break
+
+            case AttackType.TRUE:
+              attacker.trueDamage += Math.min(residualDamage, pokemon.life)
+              break
+
+            default:
+              break
+          }
         }
 
         pokemon.life = Math.max(0, pokemon.life - residualDamage)
