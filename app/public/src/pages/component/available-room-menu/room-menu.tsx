@@ -31,11 +31,13 @@ export default function RoomMenu(props: {
   async function create() {
     if (lobby && !props.toPreparation && !isJoining) {
       setJoining(true)
-      const token = await firebase.auth().currentUser?.getIdToken()
+      const user = firebase.auth().currentUser
+      const token = await user?.getIdToken()
       if (token) {
         const room: Room<PreparationState> = await client.create("room", {
           idToken: token,
-          ownerId: uid
+          ownerId: uid,
+          ownerName: user?.displayName ? user.displayName : uid
         })
         localStorage.setItem("lastRoomId", room.id)
         localStorage.setItem("lastSessionId", room.sessionId)
