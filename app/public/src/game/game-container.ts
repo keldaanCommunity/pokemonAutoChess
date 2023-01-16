@@ -519,7 +519,7 @@ class GameContainer {
 
     allSynergies.sort((a, b) => b.value - a.value)
 
-    simplePlayer.synergies = allSynergies.slice(0, 2)
+    simplePlayer.synergies = allSynergies.slice(0, 5)
 
     if (player.board && player.board.size > 0) {
       player.board.forEach((pokemon) => {

@@ -1,4 +1,4 @@
-.player-team {
+.player-team-pokemons {
     display: flex;
     list-style: none;
     gap: 8px;
@@ -6,6 +6,27 @@
     padding-left: 40px;
 }
 
-.player-team img {
+.player-team-pokemons li {
+    position: relative;
+}
+
+.player-team-pokemons .pokemon-portrait {
     box-shadow: #2d334b 2px 2px 4px;
+    image-rendering: pixelated;
+    width: 60px;
+    height: 60px;
+    margin: 10px 0;
+}
+
+.player-team-pokemons .pokemon-items {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    display: flex;    
+}
+
+.player-team-pokemons .pokemon-items img {
+    width: 20px;
+    height: 20px;
+    image-rendering: pixelated;
 }

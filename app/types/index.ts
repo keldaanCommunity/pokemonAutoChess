@@ -232,7 +232,7 @@ export interface ISimplePlayer {
   rank: number
   avatar: string
   pokemons: IPokemonRecord[]
-  synergies: Array<{ name: string; value: number }>
+  synergies: Array<{ name: Synergy; value: number }>
 }
 
 export interface IPlayer {
