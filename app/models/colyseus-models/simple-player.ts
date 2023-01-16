@@ -1,25 +1,43 @@
 import { Schema, type, ArraySchema } from "@colyseus/schema"
-import { Role } from "../../types"
+import { ISimplePlayer, Role } from "../../types"
+import { Synergy } from "../../types/enum/Synergy"
+import { IPokemonRecord, PokemonRecord } from "./game-record"
 
-export default class SimplePlayer extends Schema {
+export class SampleSynergy extends Schema {
+  @type("string") name: Synergy
+  @type("number") value: number
+
+  constructor(name: Synergy, value: number) {
+    super()
+    this.name = name
+    this.value = value
+  }
+}
+
+export default class SimplePlayer extends Schema implements ISimplePlayer {
   @type("string") id: string
   @type("string") name: string
   @type("string") avatar: string
   @type("uint8") rank: number
-  @type(["string"]) pokemons = new ArraySchema<string>()
+  @type([PokemonRecord]) pokemons = new ArraySchema<IPokemonRecord>()
   @type("uint16") exp: number
   @type("string") title: string
   @type("string") role: Role
+  @type([SampleSynergy]) synergies = new ArraySchema<{
+    name: Synergy
+    value: number
+  }>()
 
   constructor(
     id: string,
     name: string,
     avatar: string,
     rank: number,
-    pokemons: string[],
+    pokemons: IPokemonRecord[],
     exp: number,
     title: string,
-    role: Role
+    role: Role,
+    synergies: Array<{ name: string; value: number }>
   ) {
     super()
     this.id = id
@@ -30,7 +48,10 @@ export default class SimplePlayer extends Schema {
     this.title = title
     this.role = role
     pokemons.forEach((pkm) => {
-      this.pokemons.push(pkm)
+      this.pokemons.push(new PokemonRecord(pkm))
+    })
+    synergies.forEach((s) => {
+      this.synergies.push(new SampleSynergy(s.name, s.value))
     })
   }
 }

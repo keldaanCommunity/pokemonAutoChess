@@ -84,7 +84,9 @@ export default class MovingState extends PokemonState {
         pokemon.positionX,
         pokemon.positionY,
         x,
-        y
+        y,
+        pokemon,
+        undefined
       )
       // console.log(`pokemon moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates[0]}, ${coordinates[1]})), orientation: ${pokemon.orientation}`);
       board.swapValue(pokemon.positionX, pokemon.positionY, x, y)

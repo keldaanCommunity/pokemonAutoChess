@@ -114,24 +114,6 @@ export default class PokemonState {
           }
         }
 
-        if (attacker && reducedDamage > 0) {
-          switch (attackType) {
-            case AttackType.PHYSICAL:
-              attacker.physicalDamage += reducedDamage
-              break
-
-            case AttackType.SPECIAL:
-              attacker.specialDamage += reducedDamage
-              break
-
-            case AttackType.TRUE:
-              attacker.trueDamage += reducedDamage
-              break
-
-            default:
-              break
-          }
-        }
         let residualDamage = reducedDamage
 
         if (pokemon.shield > 0) {
@@ -156,11 +138,30 @@ export default class PokemonState {
           residualDamage = 1
         }
 
+        if (attacker && residualDamage > 0) {
+          switch (attackType) {
+            case AttackType.PHYSICAL:
+              attacker.physicalDamage += Math.min(residualDamage, pokemon.life)
+              break
+
+            case AttackType.SPECIAL:
+              attacker.specialDamage += Math.min(residualDamage, pokemon.life)
+              break
+
+            case AttackType.TRUE:
+              attacker.trueDamage += Math.min(residualDamage, pokemon.life)
+              break
+
+            default:
+              break
+          }
+        }
+
         pokemon.life = Math.max(0, pokemon.life - residualDamage)
         // console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
 
         if (pokemon) {
-          pokemon.setMana(pokemon.mana + Math.ceil(reducedDamage / 10))
+          pokemon.setMana(pokemon.mana + Math.ceil(residualDamage / 10))
 
           if (
             pokemon.items.has(Item.DEFENSIVE_RIBBON) &&

@@ -521,55 +521,6 @@ export class OnDragDropItemCommand extends Command<
         return
       }
 
-      // regular equip
-      switch (item) {
-        case Item.WATER_STONE:
-          if (!pokemon.types.includes(Synergy.WATER)) {
-            pokemon.types.push(Synergy.WATER)
-          }
-          break
-        case Item.FIRE_STONE:
-          if (!pokemon.types.includes(Synergy.FIRE)) {
-            pokemon.types.push(Synergy.FIRE)
-          }
-          break
-        case Item.THUNDER_STONE:
-          if (!pokemon.types.includes(Synergy.ELECTRIC)) {
-            pokemon.types.push(Synergy.ELECTRIC)
-          }
-          break
-        case Item.DUSK_STONE:
-          if (!pokemon.types.includes(Synergy.DARK)) {
-            pokemon.types.push(Synergy.DARK)
-          }
-          break
-        case Item.MOON_STONE:
-          if (!pokemon.types.includes(Synergy.FAIRY)) {
-            pokemon.types.push(Synergy.FAIRY)
-          }
-          break
-        case Item.LEAF_STONE:
-          if (!pokemon.types.includes(Synergy.GRASS)) {
-            pokemon.types.push(Synergy.GRASS)
-          }
-          break
-        case Item.DAWN_STONE:
-          if (!pokemon.types.includes(Synergy.PSYCHIC)) {
-            pokemon.types.push(Synergy.PSYCHIC)
-          }
-          break
-        case Item.ICY_ROCK:
-          if (!pokemon.types.includes(Synergy.ICE)) {
-            pokemon.types.push(Synergy.ICE)
-          }
-          break
-        case Item.OLD_AMBER:
-          if (!pokemon.types.includes(Synergy.FOSSIL)) {
-            pokemon.types.push(Synergy.FOSSIL)
-          }
-          break
-      }
-
       if (BasicItems.includes(item)) {
         let itemToCombine
         pokemon.items.forEach((i) => {
@@ -1163,35 +1114,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
               pokemon.items.forEach((i) => {
                 pokemonEvolved.items.add(i)
-                switch (i) {
-                  case Item.WATER_STONE:
-                    pokemonEvolved.types.push(Synergy.WATER)
-                    break
-                  case Item.FIRE_STONE:
-                    pokemonEvolved.types.push(Synergy.FIRE)
-                    break
-                  case Item.THUNDER_STONE:
-                    pokemonEvolved.types.push(Synergy.ELECTRIC)
-                    break
-                  case Item.DUSK_STONE:
-                    pokemonEvolved.types.push(Synergy.DARK)
-                    break
-                  case Item.MOON_STONE:
-                    pokemonEvolved.types.push(Synergy.FAIRY)
-                    break
-                  case Item.LEAF_STONE:
-                    pokemonEvolved.types.push(Synergy.GRASS)
-                    break
-                  case Item.DAWN_STONE:
-                    pokemonEvolved.types.push(Synergy.PSYCHIC)
-                    break
-                  case Item.ICY_ROCK:
-                    pokemonEvolved.types.push(Synergy.ICE)
-                    break
-                  case Item.OLD_AMBER:
-                    pokemonEvolved.types.push(Synergy.FOSSIL)
-                    break
-                }
               })
               pokemonEvolved.positionX = pokemon.positionX
               pokemonEvolved.positionY = pokemon.positionY

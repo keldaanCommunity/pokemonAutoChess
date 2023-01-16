@@ -148,7 +148,9 @@ export default class AttackingState extends PokemonState {
         pokemon.positionX,
         pokemon.positionY,
         target.positionX,
-        target.positionY
+        target.positionY,
+        pokemon,
+        target
       )
 
       let damage

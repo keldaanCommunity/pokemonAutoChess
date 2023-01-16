@@ -1,6 +1,6 @@
 import GameScene from "./scenes/game-scene"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
-import { transformCoordinate } from "../pages/utils/utils"
+import { getPath, transformCoordinate } from "../pages/utils/utils"
 import Phaser from "phaser"
 import Player from "../../../models/colyseus-models/player"
 import { Room } from "colyseus.js"
@@ -23,6 +23,7 @@ import { toast } from "react-toastify"
 import React from "react"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { getPortraitSrc } from "../utils"
+import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 
 class GameContainer {
   room: Room<GameState>
@@ -507,16 +508,27 @@ class GameContainer {
       avatar: player.avatar,
       title: player.title,
       role: player.role,
-      pokemons: new Array<string>()
+      pokemons: new Array<IPokemonRecord>(),
+      synergies: new Array<{ name: string; value: number }>()
     }
+
+    const allSynergies = new Array<{ name: string; value: number }>()
+    player.synergies.forEach((v, k) => {
+      allSynergies.push({ name: k, value: v })
+    })
+
+    allSynergies.sort((a, b) => b.value - a.value)
+
+    simplePlayer.synergies = allSynergies.slice(0, 5)
 
     if (player.board && player.board.size > 0) {
       player.board.forEach((pokemon) => {
         if (pokemon.positionY != 0) {
-          const shinyPad = pokemon.shiny ? "/0000/0001" : ""
-          simplePlayer.pokemons.push(
-            `${pokemon.index}${shinyPad}/${pokemon.emotion}`
-          )
+          simplePlayer.pokemons.push({
+            avatar: getPath(pokemon),
+            items: pokemon.items.toArray(),
+            name: pokemon.name
+          })
         }
       })
     }

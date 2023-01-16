@@ -30,6 +30,7 @@ import HistoryItem from "../models/colyseus-models/history-item"
 import { Item } from "./enum/Item"
 import { Pkm } from "./enum/Pokemon"
 import { Pokemon } from "../models/colyseus-models/pokemon"
+import { IPokemonRecord } from "../models/colyseus-models/game-record"
 
 export const CDN_PORTRAIT_URL =
   "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/"
@@ -230,7 +231,8 @@ export interface ISimplePlayer {
   id: string
   rank: number
   avatar: string
-  pokemons: string[]
+  pokemons: IPokemonRecord[]
+  synergies: Array<{ name: Synergy; value: number }>
 }
 
 export interface IPlayer {
@@ -379,7 +381,6 @@ export interface IPokemonEntity {
   healDone: number
   shiny: boolean
   emotion: Emotion
-  evolution: Pkm
 }
 
 export interface IStatus {

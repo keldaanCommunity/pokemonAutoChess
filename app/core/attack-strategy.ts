@@ -2215,7 +2215,7 @@ export class CalmMindStrategy extends AttackStrategy {
         break
     }
 
-    pokemon.addAttack(buff, true)
+    pokemon.addAttack(buff * pokemon.baseAtk, true)
   }
 }
 

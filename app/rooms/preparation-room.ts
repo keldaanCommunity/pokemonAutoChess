@@ -38,10 +38,10 @@ export default class PreparationRoom extends Room {
     console.log(this.metadata)
   }
 
-  onCreate(options: { ownerId?: string; idToken: string; name?: string }) {
-    console.log("create preparation room")
+  onCreate(options: { ownerId?: string; idToken: string; ownerName: string }) {
     // console.log(options);
-    const n = options.name ? options.name : "Default title id " + this.roomId
+    const n = `${options.ownerName}'s room`
+    console.log(`create ${n} room`)
     // console.log(defaultRoomName);
     this.setState(new PreparationState(options.ownerId, n))
     this.maxClients = 8
