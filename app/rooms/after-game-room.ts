@@ -27,7 +27,8 @@ export default class AfterGameRoom extends Room {
           plyr.pokemons,
           plyr.exp,
           plyr.title,
-          plyr.role
+          plyr.role,
+          plyr.synergies
         )
         this.state.players.set(player.id, player)
       })
