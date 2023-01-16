@@ -1,3 +1,4 @@
+import { IPokemonEntity } from "../types"
 import { Orientation } from "../types/enum/Game"
 import PokemonEntity from "./pokemon-entity"
 
@@ -62,7 +63,14 @@ export default class Board {
     return Math.abs(r1 - r0) + Math.abs(c1 - c0)
   }
 
-  orientation(r0: number, c0: number, r1: number, c1: number) {
+  orientation(
+    r0: number,
+    c0: number,
+    r1: number,
+    c1: number,
+    pokemon: IPokemonEntity,
+    target: IPokemonEntity | undefined
+  ) {
     const vx = r1 - r0
     const vy = c1 - c0
     if (vx > 0) {
@@ -76,6 +84,18 @@ export default class Board {
     } else if (vx == 0) {
       if (vy == 0) {
         console.log("error orientation", r0, c0, r1, c1)
+        console.log(
+          "error pokemon",
+          pokemon.positionX,
+          pokemon.positionY,
+          pokemon.name
+        )
+        console.log(
+          "error target",
+          target?.positionX,
+          target?.positionY,
+          target?.name
+        )
         return Orientation.DOWNRIGHT
       } else if (vy < 0) {
         return Orientation.DOWN
@@ -102,7 +122,7 @@ export default class Board {
           cells.push({
             row: r,
             column: c,
-            value: this.cell[this.columns * r + c],
+            value: this.cell[this.columns * r + c]
           })
         }
       }
@@ -121,7 +141,7 @@ export default class Board {
           cells.push({
             row: r,
             column: c,
-            value: this.cell[this.columns * r + c],
+            value: this.cell[this.columns * r + c]
           })
         }
       }
@@ -143,7 +163,7 @@ export default class Board {
           cells.push({
             row: r,
             column: c,
-            value: this.cell[this.columns * r + c],
+            value: this.cell[this.columns * r + c]
           })
         }
       }
@@ -165,7 +185,7 @@ export default class Board {
       cells.push({
         row: r,
         column: c,
-        value: this.cell[this.columns * r + c],
+        value: this.cell[this.columns * r + c]
       })
     }
     return cells
@@ -177,7 +197,7 @@ export default class Board {
       { r: 0, c: 0 },
       { r: this.rows - 1, c: 0 },
       { r: this.rows - 1, c: this.columns - 1 },
-      { r: 0, c: this.columns - 1 },
+      { r: 0, c: this.columns - 1 }
     ].forEach((coord) => {
       const cells = this.getCellsBetween(r, c, coord.r, coord.c)
       cells.forEach((cell) => {
