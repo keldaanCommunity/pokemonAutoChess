@@ -66,9 +66,9 @@ export default function RoomMenu(props: {
   return (
     <div className="nes-container room-menu">
       <h1>Available Rooms</h1>
-      <p className="subtitle">
-        Click Create Room to play!
-      </p>
+      {allRooms.length === 0 && (<p className="subtitle">
+        Click on Create Room to play!
+      </p>)}
       <ul className="hidden-scrollable">
         {allRooms.map((r) => (
           <li key={r.roomId}>
