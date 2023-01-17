@@ -72,7 +72,6 @@ export default function Search() {
       <div className="nes-field is-inline">
         <input
           type="text"
-          id="inline_field"
           className="my-input"
           placeholder="Player Name..."
           value={currentText}

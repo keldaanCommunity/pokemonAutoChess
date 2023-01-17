@@ -348,18 +348,19 @@ export default function Lobby() {
           <DonateButton />
           <PolicyButton />
 
-          <button
-            className="bubbly red"
-            onClick={async () => {
-              await room?.leave()
-              await firebase.auth().signOut()
-              dispatch(leaveLobby())
-              dispatch(logOut())
-              window.location.href="/"
-            }}
-          >
-            Sign Out
-          </button>
+          <Link to="/" style={{textDecoration: "none"}}>
+            <button
+              className="bubbly red"
+              onClick={async () => {
+                await room?.leave()
+                await firebase.auth().signOut()
+                dispatch(leaveLobby())
+                dispatch(logOut())
+              }}
+            >
+              Sign Out
+            </button>
+          </Link>
         </nav>
 
         <TabMenu />

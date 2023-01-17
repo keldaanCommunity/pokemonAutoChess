@@ -67,7 +67,6 @@ export default function Profile() {
               <div className="nes-field is-inline" style={{gap: "0.5em"}}>
                 <input
                   type="text"
-                  id="inline_field"
                   className="my-input"
                   placeholder={user.name}
                   onChange={(e) => {

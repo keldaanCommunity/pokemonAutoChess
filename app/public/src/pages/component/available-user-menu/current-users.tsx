@@ -11,7 +11,7 @@ export default function CurrentUsers() {
 
   return (
     <div className="nes-container hidden-scrollable current-users-menu">
-      <h1>Online</h1>
+      <h1>Online: {users.length}</h1>
       <ul>
         {users.map((v, i) => (
           <User key={i} v={v} />
@@ -25,6 +25,7 @@ function User(props: { key: number; v: ILobbyUser }) {
   const dispatch = useAppDispatch()
   return (
     <li
+      className="clickable"
       onClick={() => {
         dispatch(searchName(props.v.name))
         dispatch(setTabIndex(4))

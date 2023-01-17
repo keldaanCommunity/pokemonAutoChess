@@ -1,0 +1,15 @@
+.preparation-page {
+    padding: 1vw;
+}
+
+.preparation-page nav {
+    margin-bottom: 0.5em;
+    display: flex;
+    gap: 0.5em
+}
+
+.preparation-page main {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}

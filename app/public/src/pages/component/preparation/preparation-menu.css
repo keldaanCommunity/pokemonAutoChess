@@ -1,0 +1,25 @@
+.preparation-menu {
+    background-image: url("assets/ui/back1.png");
+    background-size: cover;
+    background-position-x: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: calc(100vh - 8vw);
+}
+
+.preparation-menu-users {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.preparation-menu .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.5em;
+}

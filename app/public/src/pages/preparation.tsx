@@ -22,17 +22,7 @@ import {
 } from "../stores/PreparationStore"
 import GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
-
-const preparationStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-  marginTop: "-10px"
-}
-
-const buttonStyle = {
-  marginLeft: "10px",
-  marginTop: "10px"
-}
+import "./preparation.css";
 
 export default function Preparation() {
   const dispatch = useAppDispatch()
@@ -157,23 +147,24 @@ export default function Preparation() {
     return <Navigate to="/lobby" />
   } else {
     return (
-      <div className="App">
-        <Link to="/lobby">
+      <div className="App preparation-page">
+        <nav>
+          <Link to="/lobby" style={{textDecoration: "none"}}>
           <button
             className="bubbly blue"
-            style={buttonStyle}
             onClick={async () => {
               dispatch(leavePreparation())
               room?.connection.close()
             }}
           >
-            Lobby
+            Return to Lobby
           </button>
         </Link>
-        <div style={preparationStyle}>
+        </nav>
+        <main>
           <PreparationMenu setToGame={setToGame} />
           <Chat source="preparation" />
-        </div>
+        </main>
       </div>
     )
   }
