@@ -127,6 +127,7 @@ import {
   Flygon,
   Fraxure,
   Froslass,
+  Frosmoth,
   Gabite,
   Galvantula,
   Garchomp,
@@ -364,6 +365,7 @@ import {
   Slugma,
   Smoochum,
   Sneasel,
+  Snom,
   Snorlax,
   Snorunt,
   Snover,
@@ -1543,6 +1545,10 @@ export default class PokemonFactory {
         return new Dewott(s, e)
       case Pkm.SAMUROTT:
         return new Samurott(s, e)
+      case Pkm.SNOM:
+        return new Snom(s, e)
+      case Pkm.FROSMOTH:
+        return new Frosmoth(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
