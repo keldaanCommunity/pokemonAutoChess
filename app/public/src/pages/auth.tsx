@@ -16,7 +16,7 @@ export default function Auth() {
         style={{
           display: "flex",
           justifyContent: "space-around",
-          height: "100vh"
+          height: "90vh"
         }}
       >
         <div
@@ -51,9 +51,9 @@ export default function Auth() {
             src="assets/ui/pokemon_autochess_final.svg"
             style={{ height: "70vh" }}
           />
-          <Media />
         </div>
       </div>
+      <Media />
     </div>
   )
 }
