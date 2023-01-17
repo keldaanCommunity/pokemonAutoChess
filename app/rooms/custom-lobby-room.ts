@@ -115,7 +115,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           }
         })
         this.clients.forEach((c) => {
-          if (c.id === message) {
+          if (c.auth.uid === message) {
             c.send(Transfer.BAN)
             c.leave()
           }
