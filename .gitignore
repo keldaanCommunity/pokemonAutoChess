@@ -8,6 +8,7 @@ app/public/dist/client/index.js
 app/public/dist/client/index.js.map
 app/public/dist/client/index.css
 app/public/dist/client/index.css.map
+app/public/dist/index.js
 *.code-workspace
 /app/public/dist/assets/tiles/newBackground.tmx
 /app/public/dist/assets/tiles/sleepBackground.json

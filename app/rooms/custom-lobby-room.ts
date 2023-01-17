@@ -6,6 +6,7 @@ import UserMetadata, {
   IPokemonConfig,
   IUserMetadata
 } from "../models/mongo-models/user-metadata"
+import BannedUser from "../models/mongo-models/banned-user"
 import LeaderboardInfo, {
   ILeaderboardInfo
 } from "../models/colyseus-models/leaderboard-info"
@@ -100,6 +101,26 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (client, message) => {
       client.send(Transfer.REQUEST_LEVEL_LEADERBOARD, this.levelLeaderboard)
+    })
+
+    this.onMessage(Transfer.BAN, (client, message) => {
+      const user = this.state.users.get(client.auth.uid)
+      if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
+        BannedUser.findOne({ uid: message }, (err, banned) => {
+          if (err) {
+            console.log(err)
+          }
+          if (!banned) {
+            BannedUser.create({ uid: message })
+          }
+        })
+        this.clients.forEach((c) => {
+          if (c.id === message) {
+            c.send(Transfer.BAN)
+            c.leave()
+          }
+        })
+      }
     })
 
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
@@ -688,10 +709,14 @@ export default class CustomLobbyRoom extends LobbyRoom {
       super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
-      if (user.displayName) {
-        return user
+      const isBanned = await BannedUser.findOne({ uid: user.uid })
+
+      if (!user.displayName) {
+        throw "No display name"
+      } else if (isBanned) {
+        throw "User banned"
       } else {
-        throw "no display name"
+        return user
       }
     } catch (error) {
       console.log(error)
