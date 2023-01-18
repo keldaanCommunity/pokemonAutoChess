@@ -1,5 +1,6 @@
 import React from "react"
 import { useAppSelector } from "../../../hooks"
+import { Money } from "../icons/money"
 
 export default function GameMoneyDetail() {
   const streak = useAppSelector((state) => state.game.streak)
@@ -11,20 +12,14 @@ export default function GameMoneyDetail() {
           <p>Streak: </p>
           <div>
             {streak}
-            <img
-              style={{ width: "20px", height: "20px", marginBottom: "5px" }}
-              src="/assets/ui/money.png"
-            />
+            <Money />
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p>Interest: </p>
           <div>
             {interest}
-            <img
-              style={{ width: "20px", height: "20px", marginBottom: "5px" }}
-              src="/assets/ui/money.png"
-            />
+            <Money />
           </div>
         </div>
       </div>
