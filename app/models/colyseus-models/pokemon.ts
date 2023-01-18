@@ -7012,8 +7012,8 @@ export class Glaceon extends Pokemon {
       1,
       1,
       2,
-      AttackSprite.ICE_MELEE,
-      AttackType.PHYSICAL,
+      AttackSprite.ICE_RANGE,
+      AttackType.SPECIAL,
       2,
       100,
       Ability.HAPPY_HOUR,
@@ -7228,7 +7228,7 @@ export class CastformHail extends Pokemon {
       3,
       3,
       2,
-      AttackSprite.ICE_MELEE,
+      AttackSprite.ICE_RANGE,
       AttackType.SPECIAL,
       2,
       80,
@@ -10421,6 +10421,7 @@ export class Bronzong extends Pokemon {
     )
   }
 }
+
 export class Drifloon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -10470,6 +10471,7 @@ export class Drifblim extends Pokemon {
     )
   }
 }
+
 export class Shroomish extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -10731,7 +10733,7 @@ export class AlolanVulpix extends Pokemon {
       2,
       2,
       2,
-      AttackSprite.ICE_MELEE,
+      AttackSprite.ICE_RANGE,
       AttackType.SPECIAL,
       1,
       85,
@@ -10756,11 +10758,61 @@ export class AlolanNinetales extends Pokemon {
       3,
       3,
       2,
-      AttackSprite.ICE_MELEE,
+      AttackSprite.ICE_RANGE,
       AttackType.SPECIAL,
       2,
       85,
       Ability.AURORA_VEIL,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Snom extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SNOM,
+      [Synergy.BUG, Synergy.ICE],
+      Rarity.RARE,
+      Pkm.FROSMOTH,
+      70,
+      5,
+      2,
+      2,
+      2,
+      AttackSprite.ICE_RANGE,
+      AttackType.SPECIAL,
+      1,
+      80,
+      Ability.BUG_BUZZ,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Frosmoth extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.FROSMOTH,
+      [Synergy.BUG, Synergy.ICE],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      140,
+      11,
+      3,
+      3,
+      2,
+      AttackSprite.ICE_RANGE,
+      AttackType.SPECIAL,
+      2,
+      80,
+      Ability.BUG_BUZZ,
       shiny,
       emotion,
       true,

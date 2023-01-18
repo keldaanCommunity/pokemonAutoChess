@@ -1605,6 +1605,17 @@ export default class AnimationManager {
       duration: 1000,
       repeat: -1
     })
+
+    this.game.anims.create({
+      key: "ICE/range",
+      frames: this.game.anims.generateFrameNames("ICE_RANGE", {
+        start: 0,
+        end: 13,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: -1
+    })
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {

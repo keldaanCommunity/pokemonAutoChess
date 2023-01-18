@@ -77,3 +77,4 @@ kommo-o,0784/AnimData.xml
 kommo-o,0784/0000/0001/AnimData.xml
 mega-altaria,0334/0001/AnimData.xml
 mega-altaria,0334/0001/0001/AnimData.xml
+frosmoth,0873/0000/0001/AnimData.xml
