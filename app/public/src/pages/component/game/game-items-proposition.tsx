@@ -34,7 +34,7 @@ export default function GameItemsProposition() {
 
         <div style={{ display: "flex", justifyContent: "center" }}>
           <button
-            className="bubbly-warning"
+            className="bubbly orange"
             onClick={() => {
               setVisible(!visible)
             }}

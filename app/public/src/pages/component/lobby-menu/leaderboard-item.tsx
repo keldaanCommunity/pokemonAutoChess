@@ -14,7 +14,7 @@ export default function LeaderboardItem(props: {
   const dispatch = useAppDispatch()
   return (
     <div
-      className="playerBox my-cursor"
+      className="player-box clickable"
       style={{
         display: "flex",
         justifyContent: "space-between",
@@ -28,14 +28,12 @@ export default function LeaderboardItem(props: {
       }}
     >
       <div style={{ display: "flex", gap: "5px" }}>
-        {props.item.rank}
+        <span style={{lineHeight: "40px"}}>{props.item.rank}</span>
         <img src={getAvatarSrc(props.item.avatar)} />
       </div>
-      <div
-        style={{ overflow: "hidden", whiteSpace: "nowrap", maxWidth: "300px" }}
-      >
+      <span style={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", padding: "0 0.5em" }}>
         {props.item.name}
-      </div>
+      </span>
       <div>
         {props.noElo ? props.item.value : <Elo elo={props.item.value} />}
       </div>

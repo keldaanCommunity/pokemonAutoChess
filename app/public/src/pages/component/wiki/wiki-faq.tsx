@@ -150,7 +150,7 @@ class WikiFaq extends Component {
         </p>
         <h4 className="nes-text is-success">How do you get shinys</h4>
         <p>
-          So we you play games with 8 players/bots you get exp. When you get
+          So when you play games with 8 players/bots you get exp. When you get
           1000 exp you get a booster pack, each booster pack gives 4 40x tokens
           for random pokemon. Then if you purchase the shiny emotes of a pokemon
           (the normal one is 150) you get that one pokemon as a shiny.

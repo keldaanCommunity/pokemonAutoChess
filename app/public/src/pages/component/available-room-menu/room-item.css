@@ -1,0 +1,18 @@
+.room-item {
+    background: #54596b;
+    border-radius: 12px;
+    border: solid;
+    border-color: black;
+    padding: 0.5em;
+    color: white;
+    box-shadow: #2d334b 4px 4px 0px;
+    display: flex;    
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+    margin-top: 0.5em;
+}
+
+.room-item .room-name {
+    flex: 1;
+}

@@ -15,7 +15,7 @@ export default function Avatar(props: {
 
   return (
     <div
-      className="playerBox my-cursor"
+      className="player-box"
       style={{
         display: "flex",
         justifyContent: "space-around",
@@ -28,7 +28,8 @@ export default function Avatar(props: {
           display: "flex",
           gap: "5px",
           justifyContent: "space-between",
-          alignItems: "center"
+          alignItems: "center",
+          maxWidth: "100%"
         }}
       >
         <img
@@ -36,11 +37,9 @@ export default function Avatar(props: {
           src={getAvatarSrc(props.avatar)}
         />
 
-        <p style={{ margin: "0px", textAlign: "center" }}>
-          {props.name?.length > 10
-            ? props.name.slice(0, 10).concat("..")
-            : props.name}
-        </p>
+        <span style={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", padding: "0 0.5em" }}>
+          {props.name}
+        </span>
         <RoleBadge role={props.role} />
       </div>
       <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>

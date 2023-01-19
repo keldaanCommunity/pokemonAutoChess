@@ -93,9 +93,9 @@ export default function AfterGame() {
     return <Navigate to="/auth" />
   } else {
     return (
-      <div className="App">
+      <div className="after-game">
         <button
-          className="bubbly-primary"
+          className="bubbly blue"
           style={buttonStyle}
           onClick={() => {
             if (room) {

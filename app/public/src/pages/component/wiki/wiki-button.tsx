@@ -11,7 +11,7 @@ export default function WikiButton(props: { toggleWiki: () => void }) {
     <button
       type="button"
       style={buttonStyle}
-      className="bubbly-success is-success"
+      className="bubbly green"
       onClick={props.toggleWiki}
     >
       Lobby

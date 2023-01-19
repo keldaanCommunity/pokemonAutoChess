@@ -49,7 +49,7 @@ export default function AfterMenu() {
                     />
                   </td>
                   <td>
-                    <Team team={v.pokemons} synergies={v.synergies} />
+                    <Team team={v.pokemons} />
                   </td>
                   <td>
                     <ul className="player-team-synergies">

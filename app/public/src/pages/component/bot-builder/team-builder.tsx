@@ -269,7 +269,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
           onClick={() => {
             props.toggleBuilder()
           }}
-          className="bubbly-primary"
+          className="bubbly blue"
         >
           Lobby
         </button>
@@ -279,7 +279,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
             setModalMode(ModalMode.IMPORT)
             setModalBoolean(true)
           }}
-          className="bubbly-warning"
+          className="bubbly orange"
         >
           Import/Load
         </button>
@@ -289,7 +289,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
             setModalMode(ModalMode.EXPORT)
             setModalBoolean(true)
           }}
-          className="bubbly-warning"
+          className="bubbly orange"
         >
           Export
         </button>
@@ -302,7 +302,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
                 : ReadWriteMode.WRITE
             )
           }
-          className="bubbly-success"
+          className="bubbly green"
           data-tip
           data-for={"mode"}
         >
@@ -326,7 +326,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
           onClick={() => {
             setCopyStep(JSON.parse(JSON.stringify(bot.steps[step])))
           }}
-          className="bubbly-success"
+          className="bubbly green"
           data-tip
           data-for={"copy"}
         >
@@ -352,7 +352,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
               )
             }
           }}
-          className="bubbly-success"
+          className="bubbly green"
           data-tip
           data-for={"paste"}
         >

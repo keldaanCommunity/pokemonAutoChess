@@ -13,7 +13,7 @@ export default function GameRefresh() {
   const dispatch = useAppDispatch()
   return (
     <button
-      className="bubbly-primary"
+      className="bubbly blue"
       onClick={() => {
         dispatch(refreshClick())
       }}

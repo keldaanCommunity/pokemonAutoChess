@@ -15,11 +15,7 @@ import GameState from "../../../../../rooms/states/game-state"
 import { BotDifficulty } from "../../../../../types/enum/Game"
 import { leavePreparation } from "../../../stores/PreparationStore"
 import PreparationState from "../../../../../rooms/states/preparation-state"
-
-const buttonStyle = {
-  marginLeft: "10px",
-  marginRight: "10px"
-}
+import "./preparation-menu.css";
 
 export default function PreparationMenu(props: {
   setToGame: Dispatch<SetStateAction<boolean>>
@@ -73,53 +69,10 @@ export default function PreparationMenu(props: {
     }
   }
 
-  let input: ReactElement | null = null
-  if (uid == ownerId) {
-    input = (
-      <div className="nes-field is-inline" style={{ margin: "5px" }}>
-        <input
-          maxLength={30}
-          type="text"
-          id="inline_field"
-          className="my-input"
-          placeholder={name}
-          onChange={(e) => {
-            setInputValue(e.target.value)
-          }}
-        />
-        <button
-          style={{ marginLeft: "10px" }}
-          className="bubbly-primary"
-          onClick={() => dispatch(changeRoomName(inputValue))}
-        >
-          Change
-        </button>
-      </div>
-    )
-  }
   return (
-    <div
-      className="nes-container with-title is-centered"
-      style={{
-        backgroundImage: 'url("assets/ui/back1.png")',
-        backgroundSize: "cover",
-        backgroundPositionX: "left",
-        margin: "10px",
-        display: "flex",
-        flexFlow: "column",
-        justifyContent: "space-between",
-        flexBasis: "50%"
-      }}
-    >
-      <h3 className="my-h1">{name}</h3>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between"
-        }}
-      >
+    <div className="preparation-menu nes-container is-centered">
+      <h1>{name}: {users.length}/8</h1>
+      <div className="preparation-menu-users">
         {users.map((u) => {
           return (
             <PreparationMenuUser
@@ -132,75 +85,95 @@ export default function PreparationMenu(props: {
         })}
       </div>
 
-      <div>
-        {input}
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <button
-            data-tip
-            data-for={"difficulty-select"}
-            style={buttonStyle}
-            className="bubbly-primary"
-            onClick={() => {
-              dispatch(addBot(botDifficulty))
-            }}
-          >
-            <ReactTooltip
-              id={"difficulty-select"}
-              className="customeTheme"
-              effect="solid"
-              place="top"
-            >
-              <p>Easy: &lt;800</p>
-              <p>Normal: 800-1099</p>
-              <p>Hard: 1100-1400</p>
-              <p>Extreme: &gt;1400</p>
-            </ReactTooltip>
-            Add Bot
-          </button>
-
-          <select
-            className="my-select"
-            defaultValue={botDifficulty}
+      {(uid == ownerId) && (
+        <div className="actions">
+          <input
+            maxLength={30}
+            type="text"
+            className="my-input"
+            placeholder={name}
+            style={{flex:1}}
             onChange={(e) => {
-              setBotDifficulty(parseInt(e.target.value))
+              setInputValue(e.target.value)
             }}
-          >
-            <option value={BotDifficulty.EASY}>Easy</option>
-            <option value={BotDifficulty.MEDIUM}>Normal</option>
-            <option value={BotDifficulty.HARD}>Hard</option>
-            <option value={BotDifficulty.EXTREME}>Extreme</option>
-          </select>
+          />
           <button
-            style={buttonStyle}
-            className="bubbly-warning"
-            onClick={() => {
-              dispatch(toggleReady())
-            }}
+            style={{ marginLeft: "10px" }}
+            className="bubbly blue"
+            onClick={() => dispatch(changeRoomName(inputValue))}
           >
-            Ready
-          </button>
-          <button
-            style={buttonStyle}
-            className={
-              ownerId == uid
-                ? "bubbly-success is-success"
-                : "bubbly-success is-disabled"
-            }
-            onClick={ownerId == uid ? startGame : undefined}
-            data-tip
-            data-for={"start-game"}
-          >
-            Start Game
-            <ReactTooltip
-              id={"start-game"}
-              className="customeTheme"
-              effect="solid"
-              place="top"
-            >
-              <p>Owner: ({ownerName})</p>
-            </ReactTooltip>
+            Change room name
           </button>
         </div>
+      )}
+
+      <div className="actions">
+        <button
+          data-tip
+          data-for={"difficulty-select"}
+          className="bubbly blue"
+          onClick={() => {
+            dispatch(addBot(botDifficulty))
+          }}
+        >
+          <ReactTooltip
+            id={"difficulty-select"}
+            className="customeTheme"
+            effect="solid"
+            place="top"
+          >
+            <p>Easy: &lt;800</p>
+            <p>Normal: 800-1099</p>
+            <p>Hard: 1100-1400</p>
+            <p>Extreme: &gt;1400</p>
+          </ReactTooltip>
+          Add Bot
+        </button>
+
+        <select
+          className="my-select"
+          defaultValue={botDifficulty}
+          onChange={(e) => {
+            setBotDifficulty(parseInt(e.target.value))
+          }}
+        >
+          <option value={BotDifficulty.EASY}>Easy</option>
+          <option value={BotDifficulty.MEDIUM}>Normal</option>
+          <option value={BotDifficulty.HARD}>Hard</option>
+          <option value={BotDifficulty.EXTREME}>Extreme</option>
+        </select>
+
+        <div className="spacer" />
+
+        <button
+          className="bubbly orange"
+          style={{ marginLeft: "4em" }}
+          onClick={() => {
+            dispatch(toggleReady())
+          }}
+        >
+          Ready
+        </button>
+        <button
+          className={
+            ownerId == uid
+              ? "bubbly green"
+              : "bubbly green is-disabled"
+          }
+          onClick={ownerId == uid ? startGame : undefined}
+          data-tip
+          data-for={"start-game"}
+        >
+          Start Game
+          <ReactTooltip
+            id={"start-game"}
+            className="customeTheme"
+            effect="solid"
+            place="top"
+          >
+            Owner: ({ownerName})
+          </ReactTooltip>
+        </button>
       </div>
     </div>
   )
