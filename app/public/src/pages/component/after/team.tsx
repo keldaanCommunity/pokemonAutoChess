@@ -1,10 +1,9 @@
 import React from "react"
 import { IPokemonRecord } from "../../../../../models/colyseus-models/game-record"
-import { Synergy } from "../../../../../types/enum/Synergy"
 import { getAvatarSrc } from "../../../utils"
 import "./team.css"
 
-export default function Team(props: { team: IPokemonRecord[], synergies: { name: Synergy, value: number }[] }) {
+export default function Team(props: { team: IPokemonRecord[] }) {
   return (
     <div className="player-team">
     <ul className="player-team-pokemons">

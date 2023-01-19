@@ -42,7 +42,6 @@ import {
   changePokemonConfig,
   addPokemonConfig,
   setBoosterContent,
-  setBotMonitor,
   setMetaPokemons,
   setSuggestions,
   removeMessage,
@@ -58,8 +57,9 @@ import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
 import PokemonCollection from "./component/collection/pokemon-collection"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import Booster from "./component/booster/booster"
-import { IBotMonitoring } from "../../../models/mongo-models/bot-monitoring"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
+
+import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -89,17 +89,6 @@ export default function Lobby() {
   const [showBooster, toggleBooster] = useState<boolean>(false)
   const [toPreparation, setToPreparation] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
-
-  const lobbyStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    marginTop: "-10px"
-  }
-  const buttonStyle = {
-    marginLeft: "10px",
-    marginTop: "10px",
-    marginRight: "10px"
-  }
 
   useEffect(() => {
     const join = async () => {
@@ -227,13 +216,6 @@ export default function Lobby() {
               }
             )
 
-            room.onMessage(
-              Transfer.REQUEST_BOT_MONITOR,
-              (botMonitor: IBotMonitoring[]) => {
-                dispatch(setBotMonitor(botMonitor))
-              }
-            )
-
             room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => {
               dispatch(setBotData(data))
             })
@@ -309,25 +291,10 @@ export default function Lobby() {
     return <TeamBuilder toggleBuilder={() => toggleBuilder(!showBuilder)} />
   } else {
     return (
-      <div className="App">
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Link to="/">
-            <button
-              className="bubbly-error"
-              style={buttonStyle}
-              onClick={async () => {
-                await room?.leave()
-                await firebase.auth().signOut()
-                dispatch(leaveLobby())
-                dispatch(logOut())
-              }}
-            >
-              Sign Out
-            </button>
-          </Link>
+      <main className="lobby">
+        <nav>
           <button
-            className="bubbly-primary"
-            style={buttonStyle}
+            className="bubbly blue"
             onClick={() => {
               toggleCollection(!showCollection)
             }}
@@ -335,17 +302,15 @@ export default function Lobby() {
             Collection
           </button>
           <button
-            className="bubbly-primary"
-            style={buttonStyle}
+            className="bubbly blue"
             onClick={() => {
               toggleBooster(!showBooster)
             }}
           >
-            Booster
+            Boosters
           </button>
           <button
-            className="bubbly-success is-success"
-            style={buttonStyle}
+            className="bubbly green"
             onClick={() => {
               toggleWiki(!showWiki)
             }}
@@ -353,8 +318,7 @@ export default function Lobby() {
             Wiki
           </button>
           <button
-            className="bubbly-success is-success"
-            style={buttonStyle}
+            className="bubbly green"
             onClick={() => {
               if (botList.length == 0) {
                 dispatch(requestBotList())
@@ -365,8 +329,7 @@ export default function Lobby() {
             BOT Builder
           </button>
           <button
-            className="bubbly-success is-success"
-            style={buttonStyle}
+            className="bubbly green"
             onClick={() => {
               if (meta.length == 0 || metaItems.length == 0) {
                 dispatch(requestMeta())
@@ -379,18 +342,30 @@ export default function Lobby() {
           <DiscordButton />
           <DonateButton />
           <PolicyButton />
-        </div>
 
-        <div style={lobbyStyle}>
-          <TabMenu />
-          <RoomMenu
-            toPreparation={toPreparation}
-            setToPreparation={setToPreparation}
-          />
-          <CurrentUsers />
-          <Chat source="lobby" />
-        </div>
-      </div>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <button
+              className="bubbly red"
+              onClick={async () => {
+                await room?.leave()
+                await firebase.auth().signOut()
+                dispatch(leaveLobby())
+                dispatch(logOut())
+              }}
+            >
+              Sign Out
+            </button>
+          </Link>
+        </nav>
+
+        <TabMenu />
+        <RoomMenu
+          toPreparation={toPreparation}
+          setToPreparation={setToPreparation}
+        />
+        <CurrentUsers />
+        <Chat source="lobby" />
+      </main>
     )
   }
 }

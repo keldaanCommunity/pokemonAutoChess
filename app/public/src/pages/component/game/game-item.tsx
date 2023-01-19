@@ -28,7 +28,7 @@ export default function GameItem(props: { item: string }) {
           dispatch(itemClick(props.item))
         }}
         type="button"
-        className="bubbly-primary"
+        className="bubbly blue"
       >
         Pick
       </button>

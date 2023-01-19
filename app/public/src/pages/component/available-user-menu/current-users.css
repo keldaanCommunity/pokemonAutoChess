@@ -1,0 +1,16 @@
+.current-users-menu {
+    overflow-y: scroll;
+    background-image: url("assets/ui/back2.png");
+    background-size: cover;
+    background-position-x: right;
+    color: white;
+}
+
+.current-users-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.current-users-menu li {
+    margin-bottom: 10px;
+}

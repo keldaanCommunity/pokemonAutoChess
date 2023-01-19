@@ -17,6 +17,7 @@
 
 *::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 *::-webkit-scrollbar-track {
@@ -40,14 +41,10 @@ body {
   background-position: top right;
   background-color: #68829e;
   font-family: brandonGrotesque !important;
+  font-size: 1vw;
 }
 
 #root {
-  width: 100vw;
-  height: 100vh;
-}
-
-.App {
   width: 100vw;
   height: 100vh;
 }
@@ -175,6 +172,10 @@ input[type="range"]:focus::-ms-fill-upper {
   background: #ffffff;
 }
 
+select {
+  cursor: var(--cursor-hover);
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hidden-scrollable::-webkit-scrollbar {
   display: none;
@@ -249,156 +250,16 @@ input[type="range"]:focus::-ms-fill-upper {
   image-rendering: pixelated;
 }
 
-.bubbly-success {
-  margin: 10px;
-  display: block;
-  padding: 5px 30px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #92cc41;
-  color: white;
-  box-shadow: inset -6px -6px 0px 0px #65a013;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-  max-height: 65px;
-}
-
-.bubbly-success:hover {
-  background: #76c442;
-}
-
-.bubbly-success:active {
-  background: #92cc41;
-  box-shadow: inset 6px 6px 0px 0px #65a013;
-}
-
-.bubbly-warning {
-  margin: 10px;
-  display: block;
-  padding: 5px 30px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #f7d51d;
-  box-shadow: inset -6px -6px 0px 0px #c9ae17;
-  color: black;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-}
-
-.bubbly-warning:hover {
-  background: #e7c819;
-}
-
-.bubbly-warning:active {
-  background: #f7d51d;
-  box-shadow: inset 6px 6px 0px 0px #c9ae17;
-}
-
-.bubbly-error {
-  margin: 10px;
-  display: block;
-  padding: 5px 30px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #e76e55;
-  box-shadow: inset -6px -6px 0px 0px #8c2022;
-  color: white;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-  max-height: 65px;
-}
-
-.bubbly-error:hover {
-  background: #c25c48;
-}
-
-.bubbly-error:active {
-  background: #761c1e;
-  box-shadow: inset 6px 6px 0px 0px #8c2022;
-}
-
-.bubbly-close {
-  display: block;
-  padding: 0px 10px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #e76e55;
-  box-shadow: inset -6px -6px 0px 0px #8c2022;
-  color: white;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-  max-height: 65px;
-}
-
-.bubbly-close:hover {
-  background: #c25c48;
-}
-
-.bubbly-close:active {
-  background: #761c1e;
-  box-shadow: inset 6px 6px 0px 0px #8c2022;
-}
-
-.bubbly-primary {
-  margin: 10px;
-  display: block;
-  padding: 5px 30px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #109fff;
-  box-shadow: inset -6px -6px 0px 0px #006bb3;
-  color: white;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-  max-height: 65px;
-}
-
-.bubbly-primary:hover {
-  background: #1195ec;
-}
-
-.bubbly-primary:active {
-  background: #109fff;
-  box-shadow: inset 6px 6px 0px 0px #108de0;
-}
-
-.bubbly-disabled {
-  display: block;
-  text-align: center;
-  padding: 5px 30px;
-  border-radius: 12px;
-  font-size: 1.5vw;
-  background: #d3d3d3;
-  box-shadow: inset -6px -6px 0px 0px #adafbc;
-  color: #757575;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-  margin: 10px;
-  max-height: 65px;
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
 .bubbly {
   display: block;
   text-align: center;
-  padding: 5px 30px;
+  padding: 0.25em 1em;
   border-radius: 12px;
-  font-size: 1.5vw;
-  background: #ffffff;
-  box-shadow: inset -6px -6px 0px 0px #adafbc;
-  color: #757575;
+  font-size: 140%;
   border: solid;
   border-color: black;
   border-width: 4px;
-  margin: 10px;
-  max-height: 65px;
+  text-shadow: 2px 2px 2px #00000040;
 }
 
 .bubbly:hover {
@@ -410,30 +271,83 @@ input[type="range"]:focus::-ms-fill-upper {
   box-shadow: inset 6px 6px 0px 0px #e7e7e7;
 }
 
-.bubblyTip {
-  display: flex;
-  padding: 0px 0px 0px 21px;
-  border-radius: 12px;
-  font-size: 1.25rem;
+.bubbly.green {
+  box-shadow: inset -6px -6px 0px 0px #65a013;
+  background: #92cc41;
+  color: white;
+}
+
+.bubbly.green:hover {
+  background: #76c442;
+}
+
+.bubbly.green:active {
+  background: #92cc41;
+  box-shadow: inset 6px 6px 0px 0px #65a013;
+}
+
+.bubbly.orange {  
+  background: #f7d51d;
+  box-shadow: inset -6px -6px 0px 0px #c9ae17;
+  color: black;
+}
+
+.bubbly.orange:hover {
+  background: #e7c819;
+}
+
+.bubbly.orange:active {
+  background: #f7d51d;
+  box-shadow: inset 6px 6px 0px 0px #c9ae17;
+}
+
+.bubbly.red {
+  background: #e76e55;
+  box-shadow: inset -6px -6px 0px 0px #8c2022;
+  color: white;
+}
+
+.bubbly.red:hover {
+  background: #c25c48;
+}
+
+.bubbly.red:active {
+  background: #761c1e;
+  box-shadow: inset 6px 6px 0px 0px #8c2022;
+}
+
+.bubbly.blue {
+  background: #109fff;
+  box-shadow: inset -6px -6px 0px 0px #006bb3;
+  color: white;
+}
+
+.bubbly.blue:hover {
+  background: #1195ec;
+}
+
+.bubbly.blue:active {
+  background: #109fff;
+  box-shadow: inset 6px 6px 0px 0px #108de0;
+}
+
+.bubbly.disabled {
+  background: #d3d3d3;
+  box-shadow: inset -6px -6px 0px 0px #adafbc;
+  color: #757575;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bubbly.pink {  
   background: #ee2097;
   color: white;
-  box-shadow: inset -6px -6px 0px 0px #902c74;
-  max-height: 65px;
-  border: solid;
-  border-color: black;
-  border-width: 4px;
-  align-items: center;
-  margin: 10px;
+  box-shadow: inset -6px -6px 0px 0px #902c74;  
 }
 
-.bubblyTip:active {
+.bubbly.pink:active {
   background: #ee2097;
-  box-shadow: inset 6px 6px 0px 0px #902c74;
-  transform: translateY(-1px);
-}
-
-.btn-txt {
-  transform: translateY(-2px);
+  box-shadow: inset 6px 6px 0px 0px #902c74;  
 }
 
 .firebaseui-idp-button {
@@ -448,7 +362,7 @@ input[type="range"]:focus::-ms-fill-upper {
 }
 
 .firebaseui-idp-text {
-  font-size: 1.5vw !important;
+  font-size: 150% !important;
 }
 
 .firebaseui-container {
@@ -475,10 +389,10 @@ input[type="range"]:focus::-ms-fill-upper {
   box-shadow: inset -6px -6px 0px 0px #4181b3 !important;
 }
 
-.nes-container {
+#root .nes-container {
   border-radius: 12px;
-  background: #61738a;
-  padding: 5px !important;
+  background-color: #61738a;
+  padding: 5px;
 }
 
 .chatbg {
@@ -504,32 +418,22 @@ input[type="range"]:focus::-ms-fill-upper {
   transform: translateY(-8px) translateX(-8px);
 }
 
-.my-h1 {
-  text-align: center;
-  color: white;
-  font-size: 2vw;
-}
-
-.playerBox {
+.player-box {
   background: #54596b;
   border-radius: 12px;
   border: solid;
   border-color: black;
-  padding: 5px 5px;
-  border-radius: 12px;
-  font-size: 1.25rem;
-  border-width: 4px;
+  padding: 5px;  
   color: white;
   box-shadow: #2d334b 4px 4px 0px;
 }
 
 .my-input {
-  max-height: 65px;
   border-radius: 12px;
   width: 100%;
   border: 4px solid black;
-  height: 7vh;
-  padding-left: 1vw;
+  min-height: 3em;
+  padding-left: 1em;
 }
 
 .my-tab {
@@ -539,16 +443,14 @@ input[type="range"]:focus::-ms-fill-upper {
   border-top-right-radius: 12px;
   outline: none;
   color: white;
-  font-size: 1.5vw;
+  font-size: 140%;
 }
 
 .my-select {
-  margin: 10px;
   border-radius: 12px;
   border: 4px solid black;
-  height: 7vh;
-  font-size: 1.5vw;
-  padding: 12px 42px;
+  font-size: 140%;
+  padding: 8px 42px;
 }
 
 .nes-progress {
@@ -585,11 +487,7 @@ input[type="range"]:focus::-ms-fill-upper {
   fill: green;
 }
 
-.react-tabs__tab--selected {
-  border-radius: 12px 12px 0px 0px !important;
-  color: #fff !important;
-  background-color: rgb(84, 89, 107) !important;
-}
+
 
 .anonymous {
   min-height: 40px;
@@ -597,10 +495,55 @@ input[type="range"]:focus::-ms-fill-upper {
   box-shadow: inset -6px -6px 0px 0px #0e9b61 !important;
 }
 
-.my-cursor {
+.clickable {
   cursor: var(--cursor-hover) !important;
 }
 
 .badge {
   font-weight: normal;
+}
+
+.react-tabs__tab {
+  cursor: var(--cursor-hover);
+  background-color: #40404080;
+  margin: 0 2px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  outline: none;
+  color: white;
+  text-shadow: 2px 2px 2px #00000040;
+  font-size: 140%;
+}
+
+.react-tabs__tab--selected {
+  border-radius: 12px 12px 0px 0px !important;
+  color: #fff !important;
+  background-color: rgb(84, 89, 107) !important;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+@media(max-width: 1024px){
+  body {
+    font-size: 1.5vw;
+  }
+}
+
+@media(max-width: 640px){
+  body {
+    font-size: 2vw;
+  }
+
+  #root .nes-container,
+  .player-box,
+  .my-input,
+  .bubbly {
+    border-width: 2px;
+  }
+
+  .bubbly {
+    padding: 0.5em 1em;
+  }
 }

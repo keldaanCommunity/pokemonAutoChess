@@ -38,9 +38,6 @@ import {
 import { Pkm } from "../types/enum/Pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import PokemonConfig from "../models/colyseus-models/pokemon-config"
-import BotMonitoring, {
-  IBotMonitoring
-} from "../models/mongo-models/bot-monitoring"
 
 export default class CustomLobbyRoom extends LobbyRoom {
   discordWebhook: WebhookClient | undefined
@@ -48,7 +45,6 @@ export default class CustomLobbyRoom extends LobbyRoom {
   meta: IMeta[]
   metaItems: IItemsStatistic[]
   metaPokemons: IPokemonsStatistic[]
-  botMonitor: IBotMonitoring[]
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
   levelLeaderboard: ILeaderboardInfo[]
@@ -79,7 +75,6 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.meta = new Array<IMeta>()
     this.metaItems = new Array<IItemsStatistic>()
     this.metaPokemons = new Array<IPokemonsStatistic>()
-    this.botMonitor = new Array<IBotMonitoring>()
     this.leaderboard = new Array<ILeaderboardInfo>()
     this.botLeaderboard = new Array<ILeaderboardInfo>()
     this.levelLeaderboard = new Array<ILeaderboardInfo>()
@@ -265,7 +260,6 @@ export default class CustomLobbyRoom extends LobbyRoom {
       client.send(Transfer.REQUEST_META, this.meta)
       client.send(Transfer.REQUEST_META_ITEMS, this.metaItems)
       client.send(Transfer.REQUEST_META_POKEMONS, this.metaPokemons)
-      client.send(Transfer.REQUEST_BOT_MONITOR, this.botMonitor)
     })
 
     this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
@@ -661,15 +655,27 @@ export default class CustomLobbyRoom extends LobbyRoom {
               })
             })
           })
-          Meta.find({}, (err, docs) => {
-            if (err) {
-              console.log(err)
-            } else {
-              docs.forEach((doc) => {
-                this.meta.push(doc)
-              })
+          Meta.find(
+            {},
+            [
+              "cluster_id",
+              "count",
+              "ratio",
+              "winrate",
+              "mean_rank",
+              "types",
+              "pokemons"
+            ],
+            (err, docs) => {
+              if (err) {
+                console.log(err)
+              } else {
+                docs.forEach((doc) => {
+                  this.meta.push(doc)
+                })
+              }
             }
-          })
+          )
           ItemsStatistic.find({}, (err, docs) => {
             if (err) {
               console.log(err)
@@ -685,16 +691,6 @@ export default class CustomLobbyRoom extends LobbyRoom {
             } else {
               docs.forEach((doc) => {
                 this.metaPokemons.push(doc)
-              })
-            }
-          })
-
-          BotMonitoring.find({}, (err, docs) => {
-            if (err) {
-              console.log(err)
-            } else {
-              docs.forEach((doc) => {
-                this.botMonitor.push(doc)
               })
             }
           })

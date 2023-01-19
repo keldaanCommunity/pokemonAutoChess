@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import History from "./history"
 import { Role, Title } from "../../../../../types"
-import Elo from "../elo"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   searchName,
@@ -11,8 +10,8 @@ import {
   giveTitle,
   ban
 } from "../../../stores/NetworkStore"
-import { RoleBadge } from "../RoleBadge"
 import { getAvatarSrc } from "../../../utils"
+import Avatar from "../avatar"
 
 export default function Search() {
   const dispatch = useAppDispatch()
@@ -24,7 +23,7 @@ export default function Search() {
   const giveButton =
     user && role && role === Role.ADMIN ? (
       <button
-        className="bubbly-success"
+        className="bubbly green"
         onClick={() => {
           dispatch(giveBooster({ numberOfBoosters: 1, uid: user.id }))
         }}
@@ -36,7 +35,7 @@ export default function Search() {
   const banButton =
     user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
       <button
-        className="bubbly-error"
+        className="bubbly red"
         onClick={() => {
           dispatch(ban(user.id))
         }}
@@ -47,7 +46,7 @@ export default function Search() {
   const modButton =
     user && role && role === Role.ADMIN ? (
       <button
-        className="bubbly-warning"
+        className="bubbly orange"
         onClick={() => {
           dispatch(setModerator(user.id))
         }}
@@ -71,7 +70,7 @@ export default function Search() {
           ))}
         </select>
         <button
-          className="bubbly-primary"
+          className="bubbly blue"
           onClick={() => {
             dispatch(giveTitle({ uid: user.id, title: t }))
           }}
@@ -86,7 +85,6 @@ export default function Search() {
       <div className="nes-field is-inline">
         <input
           type="text"
-          id="inline_field"
           className="my-input"
           placeholder="Player Name..."
           value={currentText}
@@ -108,7 +106,7 @@ export default function Search() {
         {suggestions.map((suggestion) => (
           <div
             style={{ display: "flex", flexFlow: "column", padding: "5px" }}
-            className="playerBox my-cursor"
+            className="player-box clickable"
             key={suggestion.id}
             onClick={(e) => {
               dispatch(searchById(suggestion.id))
@@ -129,24 +127,22 @@ export default function Search() {
         ))}
       </div>
       {user ? (
-        <div>
-          <div
-            style={{ display: "flex", alignItems: "center", marginTop: "30px" }}
-          >
-            <img src={getAvatarSrc(user.avatar)} />
-            <h5>{user.name}</h5>
-            <RoleBadge role={user.role} />
-            <Elo elo={user.elo} />
-          </div>
-          <p>
-            Level {user.level} ({user.exp} / 1000)
-          </p>
-          <p>Wins: {user.wins}</p>
+        <div className="nes-container" style={{marginTop: "1em"}}>
+          <Avatar
+            avatar={user.avatar}
+            name={user.name}
+            elo={user.elo}
+            title={user.title}
+            role={user.role}
+          />
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <p>Level {user.level} ({user.exp} / 1000)</p>
+            <p>Wins: {user.wins}</p>
           {modButton}
           {giveButton}
           {titleButton}
           {banButton}
-          <h5>Game History</h5>
+          </div>
           <History history={user.history} />
         </div>
       ) : null}

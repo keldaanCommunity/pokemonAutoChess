@@ -30,7 +30,7 @@ export default function GameModal(props: {
       <Modal.Footer>
         <button
           style={buttonStyle}
-          className="bubbly-primary"
+          className="bubbly blue"
           onClick={() => {
             props.hideModal(false)
           }}
@@ -39,7 +39,7 @@ export default function GameModal(props: {
         </button>
         <button
           style={buttonStyle}
-          className="bubbly-error"
+          className="bubbly red"
           onClick={props.leave}
         >
           Leave game

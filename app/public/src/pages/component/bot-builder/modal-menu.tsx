@@ -68,14 +68,14 @@ export default function ModalMenu(props: {
         <Modal.Footer>
           <button
             style={buttonStyle}
-            className="bubbly-error"
+            className="bubbly red"
             onClick={props.hideModal}
           >
             Cancel
           </button>
           <button
             style={buttonStyle}
-            className="bubbly-success is-success"
+            className="bubbly green"
             onClick={() => {
               props.createBot()
             }}
@@ -129,14 +129,14 @@ export default function ModalMenu(props: {
         <Modal.Footer>
           <button
             style={buttonStyle}
-            className="bubbly-error"
+            className="bubbly red"
             onClick={props.hideModal}
           >
             Cancel
           </button>
           <button
             style={buttonStyle}
-            className="bubbly-success is-success"
+            className="bubbly green"
             onClick={() => {
               props.importBot(textArea)
             }}

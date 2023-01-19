@@ -5,7 +5,7 @@ export default function GameLeave(props: { leave: () => void }) {
     <button
       style={{ fontSize: "0.9vw" }}
       type="button"
-      className="bubbly-close"
+      className="bubbly red"
       onClick={() => {
         props.leave()
       }}

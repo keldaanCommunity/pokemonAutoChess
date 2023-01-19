@@ -141,6 +141,24 @@ class WikiFaq extends Component {
           physical. Spells/abilities can however be true/special/or physical.
         </p>
         <h4 className="nes-text is-success">
+          Can you also tell me how defense works? Is it flat dmg reduction?
+        </h4>
+        <p>
+          Same system as league of legends: damage = atk * (hp / hp *
+          (1+(0.1*def))). Defense work on physical attack, special defense on
+          special attack
+        </p>
+        <h4 className="nes-text is-success">how much mana does a hit grant?</h4>
+        <p>
+          Damage after reduction / 10 for the pokemon being attacked 5 mana for
+          the attacker
+        </p>
+        <h4 className="nes-text is-success">
+          Why do legendaries have scaled skill descriptions like 10/20/30 damage
+          or sth when they cant evolve? which one is the right value?
+        </h4>
+        <p>Turn 10 mythical is second value, Turn 20 mythical is third value</p>
+        <h4 className="nes-text is-success">
           Where do primal groudon and primal kyogre come in are they something
           you can get or are they just pve ?
         </h4>
@@ -150,7 +168,7 @@ class WikiFaq extends Component {
         </p>
         <h4 className="nes-text is-success">How do you get shinys</h4>
         <p>
-          So we you play games with 8 players/bots you get exp. When you get
+          So when you play games with 8 players/bots you get exp. When you get
           1000 exp you get a booster pack, each booster pack gives 4 40x tokens
           for random pokemon. Then if you purchase the shiny emotes of a pokemon
           (the normal one is 150) you get that one pokemon as a shiny.

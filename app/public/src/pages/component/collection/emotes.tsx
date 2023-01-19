@@ -17,7 +17,7 @@ export default function Emotes() {
     >
       <EmoteCollection visible={collectionVisible} />
       <button
-        className="bubbly-success"
+        className="bubbly green"
         style={{ height: "30px", padding: "0px" }}
         onClick={() => {
           setCollectionVisible(!collectionVisible)

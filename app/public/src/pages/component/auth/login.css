@@ -1,0 +1,23 @@
+.welcome-text {
+    font-size: 400%;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    color: white;
+}
+
+#play-panel .actions {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: column;
+    gap: 0.5em;
+    align-items: start;
+    list-style: none;
+    padding: 0;
+}
+
+#play-panel .actions a {
+    text-decoration: none;
+}
+
+#play-panel .actions .bubbly {
+    min-width: 8em;
+}

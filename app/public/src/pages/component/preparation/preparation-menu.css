@@ -1,0 +1,31 @@
+.preparation-menu {
+    background-image: url("assets/ui/back1.png");
+    background-size: cover;
+    background-position-x: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 1280px;
+}
+
+.preparation-menu h1 {
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+}
+
+.preparation-menu-users {
+    display: grid;    
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-content: start;
+    gap: 1em;
+    flex: 1;
+}
+
+.preparation-menu .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.5em;
+}

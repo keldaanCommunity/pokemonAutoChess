@@ -9,6 +9,9 @@ import AfterGame from "./pages/after-game"
 import { Provider } from "react-redux"
 import store from "./stores/index"
 
+import "nes.css/css/nes.min.css"
+import "./styles.css"
+
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
@@ -28,5 +31,5 @@ ReactDOM.render(
 )
 
 if (navigator.serviceWorker) {
-  navigator.serviceWorker.register('sw.js')
+  navigator.serviceWorker.register("sw.js")
 }

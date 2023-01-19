@@ -11,7 +11,7 @@ const h1Style = {
 
 export default function Auth() {
   return (
-    <div className="App">
+    <div className="auth-page">
       <div
         style={{
           display: "flex",

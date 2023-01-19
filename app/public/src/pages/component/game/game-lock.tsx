@@ -13,7 +13,7 @@ export default function GameLock() {
 
   return (
     <button
-      className={shopLocked ? "bubbly-error" : "bubbly-success is-success"}
+      className={shopLocked ? "bubbly red" : "bubbly green"}
       onClick={() => {
         dispatch(lockClick())
       }}

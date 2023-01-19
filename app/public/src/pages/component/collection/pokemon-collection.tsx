@@ -156,7 +156,7 @@ export default function PokemonCollection(props: {
         <Modal.Footer>
           <button
             style={buttonStyle}
-            className="bubbly-error"
+            className="bubbly red"
             onClick={() => {
               setPokemon(undefined)
             }}
@@ -174,7 +174,7 @@ export default function PokemonCollection(props: {
         onClick={() => {
           props.toggleCollection()
         }}
-        className="bubbly-primary"
+        className="bubbly blue"
       >
         Lobby
       </button>
