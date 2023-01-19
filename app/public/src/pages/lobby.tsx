@@ -42,7 +42,6 @@ import {
   changePokemonConfig,
   addPokemonConfig,
   setBoosterContent,
-  setBotMonitor,
   setMetaPokemons,
   setSuggestions,
   removeMessage,
@@ -58,10 +57,9 @@ import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
 import PokemonCollection from "./component/collection/pokemon-collection"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import Booster from "./component/booster/booster"
-import { IBotMonitoring } from "../../../models/mongo-models/bot-monitoring"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
 
-import "./lobby.css";
+import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -218,13 +216,6 @@ export default function Lobby() {
               }
             )
 
-            room.onMessage(
-              Transfer.REQUEST_BOT_MONITOR,
-              (botMonitor: IBotMonitoring[]) => {
-                dispatch(setBotMonitor(botMonitor))
-              }
-            )
-
             room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => {
               dispatch(setBotData(data))
             })
@@ -352,7 +343,7 @@ export default function Lobby() {
           <DonateButton />
           <PolicyButton />
 
-          <Link to="/" style={{textDecoration: "none"}}>
+          <Link to="/" style={{ textDecoration: "none" }}>
             <button
               className="bubbly red"
               onClick={async () => {
