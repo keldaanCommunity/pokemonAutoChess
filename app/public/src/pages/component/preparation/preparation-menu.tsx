@@ -71,7 +71,7 @@ export default function PreparationMenu(props: {
 
   return (
     <div className="preparation-menu nes-container is-centered">
-      <h3 style={{ textAlign: 'center', color: 'white', fontSize: '2vw'}}>{name}</h3>
+      <h1>{name}: {users.length}/8</h1>
       <div className="preparation-menu-users">
         {users.map((u) => {
           return (
@@ -143,9 +143,11 @@ export default function PreparationMenu(props: {
           <option value={BotDifficulty.EXTREME}>Extreme</option>
         </select>
 
+        <div className="spacer" />
+
         <button
           className="bubbly orange"
-          style={{ marginLeft: "1em" }}
+          style={{ marginLeft: "4em" }}
           onClick={() => {
             dispatch(toggleReady())
           }}

@@ -147,7 +147,7 @@ export default function Preparation() {
     return <Navigate to="/lobby" />
   } else {
     return (
-      <div className="App preparation-page">
+      <div className="preparation-page">
         <nav>
           <Link to="/lobby" style={{textDecoration: "none"}}>
           <button

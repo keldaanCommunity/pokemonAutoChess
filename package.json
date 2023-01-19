@@ -37,6 +37,7 @@
     "@colyseus/command": "^0.2.1",
     "@colyseus/core": "^0.14.28",
     "@colyseus/monitor": "^0.14.22",
+    "@colyseus/schema": "^1.0.45",
     "@colyseus/ws-transport": "^0.14.21",
     "@reduxjs/toolkit": "^1.8.0",
     "@types/bootstrap": "^5.1.10",

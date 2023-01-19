@@ -10,26 +10,21 @@ export default function InlineAvatar(props: {
   role: Role
 }) {
   return (
-    <div
+    <div className="inline-avatar"
       style={{
         display: "flex",
         alignItems: "center",
-        gap: "5px",
-        justifyContent: "space-between"
+        justifyContent: "start"
       }}
     >
       <img
         style={{ width: "40px", height: "40px" }}
         src={getAvatarSrc(props.avatar)}
       />
-      <p style={{ margin: "0px", color: "#ffc107" }}>
-        {TitleName[props.title]}
-      </p>
-      <p style={{ margin: "0px" }}>
-        {props.name.length > 10
-          ? props.name.slice(0, 10).concat("..")
-          : props.name}
-      </p>
+      <span style={{ color: "#ffc107" }}>{TitleName[props.title]}</span>
+      <span style={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", padding: "0 0.5em" }}>
+        {props.name}
+      </span>
       <RoleBadge role={props.role} />
     </div>
   )

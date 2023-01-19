@@ -1,4 +1,5 @@
 .lobby {
+    height: 100vh;
     padding: 1vw;
     display: grid;
     grid-template:

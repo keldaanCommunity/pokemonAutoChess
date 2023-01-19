@@ -47,11 +47,6 @@ body {
   height: 100vh;
 }
 
-.App {
-  width: 100vw;
-  height: 100vh;
-}
-
 .invisibleButton {
   background: none;
   color: inherit;
@@ -393,7 +388,7 @@ select {
   box-shadow: inset -6px -6px 0px 0px #4181b3 !important;
 }
 
-.App .nes-container {
+#root .nes-container {
   border-radius: 12px;
   background-color: #61738a;
   padding: 5px;
@@ -525,12 +520,22 @@ select {
   background-color: rgb(84, 89, 107) !important;
 }
 
+.spacer {
+  flex-grow: 1;
+}
+
+@media(max-width: 1024px){
+  body {
+    font-size: 1.5vw;
+  }
+}
+
 @media(max-width: 640px){
   body {
     font-size: 2vw;
   }
 
-  .App .nes-container,
+  #root .nes-container,
   .player-box,
   .my-input,
   .bubbly {

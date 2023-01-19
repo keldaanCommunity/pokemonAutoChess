@@ -5,7 +5,8 @@ import CSS from "csstype"
 const style: CSS.Properties = {
   display: "flex",
   alignItems: "center",
-  width: "auto",
+  width: "calc(48px + 3em)",
+  flex: "0 0 calc(48px + 3em)",
   gap: "5px"
 }
 

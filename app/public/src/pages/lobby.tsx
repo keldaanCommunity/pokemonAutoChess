@@ -296,7 +296,7 @@ export default function Lobby() {
     return <TeamBuilder toggleBuilder={() => toggleBuilder(!showBuilder)} />
   } else {
     return (
-      <main className="App lobby">
+      <main className="lobby">
         <nav>
           <button
             className="bubbly blue"

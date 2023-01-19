@@ -13,3 +13,22 @@
     justify-content: center;
     gap: 1em;
 }
+
+.preparation-page .preparation-menu,
+.preparation-page .user-chat {
+    height: calc(100vh - 8vw);
+}
+
+@media(max-width: 640px){
+    .preparation-page main {
+        display: block;
+    }
+
+    .preparation-page .preparation-menu,
+    .preparation-page .user-chat {
+        min-height: initial;
+        height: calc(50vh - 4em);
+        overflow: auto;
+        margin-bottom: 1em;
+    }
+}

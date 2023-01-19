@@ -5,14 +5,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: calc(100vh - 8vw);
+    max-width: 1280px;
+}
+
+.preparation-menu h1 {
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 2px black;
 }
 
 .preparation-menu-users {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: start;
-    justify-content: space-between;
+    display: grid;    
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-content: start;
+    gap: 1em;
     flex: 1;
 }
 

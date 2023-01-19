@@ -8,6 +8,10 @@
     background-position-x: right;
 }
 
+.user-chat h1 {
+    color: white;
+}
+
 .user-chat form {
     display: flex;
     flex-flow: row nowrap;
