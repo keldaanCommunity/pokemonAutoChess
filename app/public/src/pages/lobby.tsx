@@ -22,7 +22,7 @@ import {
   requestBotList,
   requestLeaderboard,
   requestBotLeaderboard,
-  requestLevelLeaderboard,
+  requestLevelLeaderboard
 } from "../stores/NetworkStore"
 import {
   setBotData,
@@ -48,7 +48,7 @@ import {
   removeMessage,
   setLevelLeaderboard,
   setBotLeaderboard,
-  setLeaderboard,
+  setLeaderboard
 } from "../stores/LobbyStore"
 import { ICustomLobbyState, ISuggestionUser, Transfer } from "../../../types"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
@@ -127,7 +127,7 @@ export default function Lobby() {
                         changePokemonConfig({
                           id: key,
                           field: change.field,
-                          value: change.value,
+                          value: change.value
                         })
                       )
                     })
@@ -144,7 +144,7 @@ export default function Lobby() {
                     changeUser({
                       id: u.id,
                       field: change.field,
-                      value: change.value,
+                      value: change.value
                     })
                   )
                 })
@@ -165,6 +165,10 @@ export default function Lobby() {
 
             room.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (l) => {
               dispatch(setLevelLeaderboard(l))
+            })
+
+            room.onMessage(Transfer.BAN, () => {
+              setToAuth(true)
             })
 
             room.onMessage(Transfer.PASTEBIN_URL, (json: { url: string }) => {

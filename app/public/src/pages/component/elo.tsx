@@ -11,19 +11,16 @@ const style: CSS.Properties = {
 }
 
 const imgStyle: CSS.Properties = {
-  width: "48px",
-  height: "48px",
-  imageRendering: "pixelated"
+  width: "50px",
+  height: "50px"
 }
 
 export default function Elo(props: { elo: number }) {
   const rank = getRank(props.elo)
   return (
     <div style={style}>
-      <img style={imgStyle} src={"assets/ranks/" + rank + ".png"} />
-      <div>
-        <p style={{ margin: "0px", fontSize: "1vw" }}>{props.elo}</p>
-      </div>
+      <img style={imgStyle} src={"assets/ranks/" + rank + ".svg"} />
+      <p style={{ margin: "0px", fontSize: "1vw" }}>{props.elo}</p>
     </div>
   )
 }

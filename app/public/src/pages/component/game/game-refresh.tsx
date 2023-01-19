@@ -2,6 +2,7 @@ import React from "react"
 import CSS from "csstype"
 import { useAppDispatch } from "../../../hooks"
 import { refreshClick } from "../../../stores/NetworkStore"
+import { Money } from "../icons/money"
 
 const style: CSS.Properties = {
   margin: "5px",
@@ -19,10 +20,7 @@ export default function GameRefresh() {
       style={style}
     >
       Refresh 1
-      <img
-        style={{ width: "20px", marginBottom: "5px" }}
-        src="/assets/ui/money.png"
-      />
+      <Money />
     </button>
   )
 }

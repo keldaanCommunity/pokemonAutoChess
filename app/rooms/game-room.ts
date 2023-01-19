@@ -42,6 +42,7 @@ import History from "../models/mongo-models/history"
 import { components } from "../api-v1/openapi"
 import { Title, Role } from "../types"
 import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
+import BannedUser from "../models/mongo-models/banned-user"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -276,9 +277,18 @@ export default class GameRoom extends Room<GameState> {
 
   async onAuth(client: Client, options: any, request: any) {
     try {
+      super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
-      return user
+      const isBanned = await BannedUser.findOne({ uid: user.uid })
+
+      if (!user.displayName) {
+        throw "No display name"
+      } else if (isBanned) {
+        throw "User banned"
+      } else {
+        return user
+      }
     } catch (error) {
       console.log(error)
     }
@@ -371,6 +381,7 @@ export default class GameRoom extends Room<GameState> {
               } else {
                 usr.exp = usr.exp + exp
               }
+              usr.exp = isNaN(usr.exp) ? usr.exp : 0
               if (rank == 1) {
                 usr.wins += 1
               }

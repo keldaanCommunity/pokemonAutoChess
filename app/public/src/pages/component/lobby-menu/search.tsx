@@ -7,7 +7,8 @@ import {
   searchById,
   giveBooster,
   setModerator,
-  giveTitle
+  giveTitle,
+  ban
 } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
 import Avatar from "../avatar"
@@ -28,6 +29,18 @@ export default function Search() {
         }}
       >
         <p style={{ margin: "0px" }}>Give 1 booster</p>
+      </button>
+    ) : null
+
+  const banButton =
+    user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
+      <button
+        className="bubbly-error"
+        onClick={() => {
+          dispatch(ban(user.id))
+        }}
+      >
+        <p style={{ margin: "0px" }}>Ban User</p>
       </button>
     ) : null
   const modButton =
@@ -128,6 +141,7 @@ export default function Search() {
           {modButton}
           {giveButton}
           {titleButton}
+          {banButton}
           </div>
           <History history={user.history} />
         </div>

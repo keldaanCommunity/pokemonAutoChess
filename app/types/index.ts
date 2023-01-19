@@ -132,7 +132,8 @@ export enum Transfer {
   REQUEST_LEVEL_LEADERBOARD = "REQUEST_LEVEL_LEADERBOARD",
   REQUEST_BOT_LEADERBOARD = "REQUEST_BOT_LEADERBOARD",
   POKEMON_PROPOSITION = "POKEMON_PROPOSITION",
-  KICK = "KICK"
+  KICK = "KICK",
+  BAN = "BAN"
 }
 
 export enum AttackSprite {
@@ -159,7 +160,8 @@ export enum AttackSprite {
   FAIRY_MELEE = "FAIRY/melee",
   POISON_RANGE = "POISON/range",
   BUG_MELEE = "BUG/melee",
-  FLYING_MELEE = "FLYING/melee"
+  FLYING_MELEE = "FLYING/melee",
+  ICE_RANGE = "ICE/range"
 }
 
 export enum ModalMode {

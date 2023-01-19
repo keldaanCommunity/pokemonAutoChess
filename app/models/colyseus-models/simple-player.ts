@@ -37,7 +37,7 @@ export default class SimplePlayer extends Schema implements ISimplePlayer {
     exp: number,
     title: string,
     role: Role,
-    synergies: Array<{ name: string; value: number }>
+    synergies: Array<{ name: Synergy; value: number }>
   ) {
     super()
     this.id = id
