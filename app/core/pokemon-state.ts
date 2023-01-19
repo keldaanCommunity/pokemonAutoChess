@@ -325,24 +325,24 @@ export default class PokemonState {
 
         if (isPursuit || isBrutalSwing || isPowerTrip) {
           let defBoost = 0
-          let shieldBoost = 0
+          let healBoost = 0
           let attackBoost = 0
           if (isPursuit) {
             defBoost = 2
-            shieldBoost = 30
+            healBoost = 30
             attackBoost = 3
           } else if (isBrutalSwing) {
             defBoost = 4
-            shieldBoost = 60
+            healBoost = 60
             attackBoost = 6
           } else if (isPowerTrip) {
             defBoost = 6
-            shieldBoost = 120
+            healBoost = 120
             attackBoost = 12
           }
           attacker.addSpecialDefense(defBoost)
           attacker.addDefense(defBoost)
-          attacker.handleShield(shieldBoost, attacker)
+          attacker.handleHeal(healBoost, attacker)
           attacker.addAttack(attackBoost)
           attacker.count.monsterExecutionCount++
         }
