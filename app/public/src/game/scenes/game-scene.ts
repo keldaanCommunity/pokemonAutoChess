@@ -20,6 +20,7 @@ import {
   Transfer
 } from "../../../../types"
 import { DesignTiled } from "../../../../core/design"
+import { loadPreferences } from "../../preferences"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -45,7 +46,7 @@ export default class GameScene extends Scene {
   board: BoardManager | undefined
   battle: BattleManager | undefined
   weatherManager: WeatherManager | undefined
-  music: Phaser.Sound.BaseSound | undefined
+  music: Phaser.Sound.WebAudioSound | undefined
   targetPokemon: Pokemon | undefined
   graphics: Phaser.GameObjects.Graphics[] = []
   dragDropText: Phaser.GameObjects.Text | undefined
@@ -440,8 +441,9 @@ export default class GameScene extends Scene {
         this.animationManager
       )
       this.weatherManager = new WeatherManager(this)
-      this.music = this.sound.add("sound", { loop: true })
-      this.music.play("", { volume: 0.3, loop: true })
+      this.music = this.sound.add("sound", { loop: true }) as Phaser.Sound.WebAudioSound	
+      const musicVolume = loadPreferences().musicVolume / 100
+      this.music.play({ volume: musicVolume, loop: true })
     }
   }
 
