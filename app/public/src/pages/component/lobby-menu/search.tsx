@@ -8,7 +8,8 @@ import {
   searchById,
   giveBooster,
   setModerator,
-  giveTitle
+  giveTitle,
+  ban
 } from "../../../stores/NetworkStore"
 import { RoleBadge } from "../RoleBadge"
 import { getAvatarSrc } from "../../../utils"
@@ -29,6 +30,18 @@ export default function Search() {
         }}
       >
         <p style={{ margin: "0px" }}>Give 1 booster</p>
+      </button>
+    ) : null
+
+  const banButton =
+    user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
+      <button
+        className="bubbly-error"
+        onClick={() => {
+          dispatch(ban(user.id))
+        }}
+      >
+        <p style={{ margin: "0px" }}>Ban User</p>
       </button>
     ) : null
   const modButton =
@@ -132,6 +145,7 @@ export default function Search() {
           {modButton}
           {giveButton}
           {titleButton}
+          {banButton}
           <h5>Game History</h5>
           <History history={user.history} />
         </div>

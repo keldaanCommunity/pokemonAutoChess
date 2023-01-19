@@ -1,12 +1,13 @@
 import { Schema, type, ArraySchema } from "@colyseus/schema"
 import { ISimplePlayer, Role } from "../../types"
+import { Synergy } from "../../types/enum/Synergy"
 import { IPokemonRecord, PokemonRecord } from "./game-record"
 
 export class SampleSynergy extends Schema {
-  @type("string") name: string
+  @type("string") name: Synergy
   @type("number") value: number
 
-  constructor(name: string, value: number) {
+  constructor(name: Synergy, value: number) {
     super()
     this.name = name
     this.value = value
@@ -23,7 +24,7 @@ export default class SimplePlayer extends Schema implements ISimplePlayer {
   @type("string") title: string
   @type("string") role: Role
   @type([SampleSynergy]) synergies = new ArraySchema<{
-    name: string
+    name: Synergy
     value: number
   }>()
 
@@ -36,7 +37,7 @@ export default class SimplePlayer extends Schema implements ISimplePlayer {
     exp: number,
     title: string,
     role: Role,
-    synergies: Array<{ name: string; value: number }>
+    synergies: Array<{ name: Synergy; value: number }>
   ) {
     super()
     this.id = id

@@ -1,9 +1,14 @@
 .after-menu {
-    max-width: 960px;
+    text-align: center;
+}
+
+.after-menu .nes-container {
+    display: inline-block;
+    max-width: 98vw;
     max-height: calc(100vh - 8vw);
     margin: auto;
     color: white;
-    padding: 16px;
+    padding: 0.5em 1em;
     overflow: auto;
 }
 
@@ -26,9 +31,17 @@
 }
 
 .after-menu table td:first-child {
+    font-size: 2rem;
+    color: white;
+    text-shadow: 4px 4px 0 black;
     width: 80px;
 }
 
-.after-menu table .player-rank {
-    font-size: 2rem;
+.after-menu .player-team-synergies {
+    display: flex;
+    align-items: center;
+}
+
+.after-menu .player-team-synergies img:not(:first-of-type) {
+    margin-left: 0.5em;
 }

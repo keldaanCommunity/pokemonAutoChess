@@ -1,5 +1,6 @@
 import React from "react"
 import ReactTooltip from "react-tooltip"
+import { Money } from "../icons/money"
 import GameMoneyDetail from "./game-money-detail"
 
 export default function GameMoney(props: { money: number }) {
@@ -36,10 +37,7 @@ export default function GameMoney(props: { money: number }) {
           <GameMoneyDetail />
         </ReactTooltip>
         <h4 style={{ color: "white" }}>{props.money}</h4>
-        <img
-          style={{ width: "25px", height: "25px", marginBottom: "5px" }}
-          src="assets/ui/money.png"
-        />
+        <Money />
       </div>
     </div>
   )

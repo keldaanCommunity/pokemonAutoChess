@@ -2,6 +2,7 @@ import React from "react"
 import CSS from "csstype"
 import { useAppDispatch } from "../../../hooks"
 import { levelClick } from "../../../stores/NetworkStore"
+import { Money } from "../icons/money"
 
 const style: CSS.Properties = {
   margin: "5px",
@@ -22,10 +23,7 @@ export default function GameLevel() {
     >
       <div>
         Buy XP 4
-        <img
-          style={{ width: "20px", marginBottom: "5px" }}
-          src="/assets/ui/money.png"
-        />
+        <Money />
       </div>
     </button>
   )

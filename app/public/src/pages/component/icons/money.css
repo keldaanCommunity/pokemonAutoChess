@@ -1,0 +1,7 @@
+.money {
+  image-rendering: auto;
+  width: 25px;
+  height: 25px;
+  margin-bottom: 5px;
+  filter: drop-shadow(1px 1px 1px black);
+}

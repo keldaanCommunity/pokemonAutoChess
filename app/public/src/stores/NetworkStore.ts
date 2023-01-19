@@ -30,7 +30,7 @@ const initalState: INetwork = {
   game: undefined,
   after: undefined,
   uid: "",
-  displayName: "",
+  displayName: ""
 }
 
 export const networkSlice = createSlice({
@@ -84,7 +84,7 @@ export const networkSlice = createSlice({
       }
       if (state.preparation) {
         state.preparation.send(Transfer.NEW_MESSAGE, {
-          payload: action.payload,
+          payload: action.payload
         })
       }
     },
@@ -205,10 +205,14 @@ export const networkSlice = createSlice({
     kick: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.KICK, action.payload)
     },
-  },
+    ban: (state, action: PayloadAction<string>) => {
+      state.lobby?.send(Transfer.BAN, action.payload)
+    }
+  }
 })
 
 export const {
+  ban,
   pokemonPropositionClick,
   requestLeaderboard,
   requestBotLeaderboard,
@@ -248,7 +252,7 @@ export const {
   refreshClick,
   searchById,
   setTitle,
-  kick,
+  kick
 } = networkSlice.actions
 
 export default networkSlice.reducer

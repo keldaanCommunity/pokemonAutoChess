@@ -24,6 +24,7 @@ import React from "react"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { getPortraitSrc } from "../utils"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
+import { Synergy } from "../../../types/enum/Synergy"
 
 class GameContainer {
   room: Room<GameState>
@@ -509,17 +510,17 @@ class GameContainer {
       title: player.title,
       role: player.role,
       pokemons: new Array<IPokemonRecord>(),
-      synergies: new Array<{ name: string; value: number }>()
+      synergies: new Array<{ name: Synergy; value: number }>()
     }
 
-    const allSynergies = new Array<{ name: string; value: number }>()
+    const allSynergies = new Array<{ name: Synergy; value: number }>()
     player.synergies.forEach((v, k) => {
-      allSynergies.push({ name: k, value: v })
+      allSynergies.push({ name: k as Synergy, value: v })
     })
 
     allSynergies.sort((a, b) => b.value - a.value)
 
-    simplePlayer.synergies = allSynergies.slice(0, 2)
+    simplePlayer.synergies = allSynergies.slice(0, 5)
 
     if (player.board && player.board.size > 0) {
       player.board.forEach((pokemon) => {
