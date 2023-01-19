@@ -10612,7 +10612,7 @@ export class Granbull extends Pokemon {
       AttackType.PHYSICAL,
       2,
       85,
-      Ability.EARTHQUAKE,
+      Ability.BITE,
       shiny,
       emotion,
       true,
