@@ -52,13 +52,13 @@ import { FIREBASE_CONFIG } from "./utils/utils"
 import GameContainer from "../game/game-container"
 import { Navigate } from "react-router-dom"
 import GameDpsMeter from "./component/game/game-dps-meter"
-import GameInformations from "./component/game/game-informations"
 import GameItemsProposition from "./component/game/game-items-proposition"
 import GamePlayerInformations from "./component/game/game-player-informations"
 import GamePlayers from "./component/game/game-players"
 import GameShop from "./component/game/game-shop"
 import GameSynergies from "./component/game/game-synergies"
 import GameModal from "./component/game/game-modal"
+import GameOptionsIcon from "./component/game/game-options-icon"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import {
   IDragDropCombineMessage,
@@ -480,8 +480,7 @@ export default function Game() {
           hideModal={setModalBoolean}
           leave={leave}
         />
-        <GameShop />
-        <GameInformations leave={leave} />
+        <GameShop />        
         <GamePlayerInformations />
         <GamePlayers click={(id: string) => playerClick(id)} />
         <GameSynergies />
@@ -489,6 +488,7 @@ export default function Game() {
         <GamePokemonsProposition />
         <GameDpsMeter />
         <GameToasts />
+        <GameOptionsIcon leave={leave} />
         <div id="game" ref={container}></div>
       </div>
     )

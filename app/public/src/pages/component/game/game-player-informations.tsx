@@ -11,7 +11,7 @@ const style: CSS.Properties = {
   top: ".5%",
   left: "30%",
   display: "flex",
-  justifyContent: "space-evenly",
+  justifyContent: "space-between",
   padding: "5px",
   minWidth: "40%",
   height: "8%",
@@ -35,6 +35,8 @@ export default function GamePlayerInformations() {
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const life = useAppSelector((state) => state.game.currentPlayerLife)
   const money = useAppSelector((state) => state.game.currentPlayerMoney)
+  const stageLevel = useAppSelector((state) => state.game.stageLevel)
+  const roundTime = useAppSelector((state) => state.game.roundTime)
 
   let opponent: null | ReactElement = null
   const vs =
@@ -60,6 +62,10 @@ export default function GamePlayerInformations() {
 
   return (
     <div style={style} className="nes-container">
+      <div style={{ width: "4vw", textAlign: "center" }}>
+        <p style={{ margin: 0 }}>Stage {stageLevel}</p>
+        <p style={{ margin: 0 }}>{roundTime}s</p>
+      </div>
       <div
         className="nes-container"
         style={{
