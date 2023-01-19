@@ -1,11 +1,10 @@
 import React, { useState } from "react"
 import TeamComp from "./team-comp"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import Discover from "./discover"
+
 import ItemStatistic from "./item-statistic"
 import { IMeta } from "../../../../../models/mongo-models/meta"
 import { IItemsStatistic } from "../../../../../models/mongo-models/items-statistic"
-import BotReport from "./bot-report"
 import PokemonStatistic from "./pokemon-statistic"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 
@@ -85,8 +84,6 @@ export default function MetaReport(props: {
             <Tab key="team-comps">Meta Report</Tab>
             <Tab key="items">Item Report</Tab>
             <Tab key="pokemons">Pokemon Report</Tab>
-            <Tab key="bots">Bot Report</Tab>
-            <Tab key="discover">Discover</Tab>
           </TabList>
 
           <TabPanel key="team-comps-panel">
@@ -224,12 +221,6 @@ export default function MetaReport(props: {
                 return <PokemonStatistic pokemon={pokemon} key={pokemon.name} />
               })}
             </div>
-          </TabPanel>
-          <TabPanel key="bot-report-panel">
-            <BotReport />
-          </TabPanel>
-          <TabPanel key="discover-panel">
-            <Discover meta={sortedMeta} />
           </TabPanel>
         </Tabs>
       </div>
