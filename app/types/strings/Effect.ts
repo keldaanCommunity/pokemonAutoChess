@@ -273,17 +273,17 @@ export const EffectDescription: {
     fra: "?NONE?"
   },
   [Effect.PURSUIT]: {
-    eng: "Upon kill, grants 2 armor, 2 magic resistance, 30 shield and 3 attack damage",
+    eng: "Upon kill, grants 2 armor, 2 magic resistance, heal 30 and 3 attack damage",
     esp: "?NONE?",
     fra: "?NONE?"
   },
   [Effect.BRUTAL_SWING]: {
-    eng: "Upon kill, grants 4 armor, 4 magic resistance, 60 shield and 6 attack damage",
+    eng: "Upon kill, grants 4 armor, 4 magic resistance, heal 60 and 6 attack damage",
     esp: "?NONE?",
     fra: "?NONE?"
   },
   [Effect.POWER_TRIP]: {
-    eng: "Upon kill, grants 6 armor, 6 magic resistance, 120 shield and 12 attack damage",
+    eng: "Upon kill, grants 6 armor, 6 magic resistance, heal 120 and 12 attack damage",
     esp: "?NONE?",
     fra: "?NONE?"
   },
