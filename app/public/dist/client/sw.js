@@ -9,7 +9,12 @@ const cacheFirst = (event) => {
             return cacheResponse || fetch(event.request).then((networkResponse) => {
                 if(networkResponse.ok && networkResponse.status !== 206){ // do not cache errors or partial content
                     return caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(event.request, networkResponse.clone());
+                        try {
+                            cache.put(event.request, networkResponse.clone());
+                        } catch(err){
+                            console.error(err)
+                            // ignore if could not be cached
+                        }                        
                         return networkResponse
                     })
                 }
