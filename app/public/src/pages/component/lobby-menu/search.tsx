@@ -35,7 +35,7 @@ export default function Search() {
   const banButton =
     user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
       <button
-        className="bubbly-error"
+        className="bubbly red"
         onClick={() => {
           dispatch(ban(user.id))
         }}
