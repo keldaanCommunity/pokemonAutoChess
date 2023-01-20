@@ -9,6 +9,10 @@
   position: relative;
 }
 
+.game-pokemon-portrait.empty {
+  border-color: transparent;
+}
+
 .game-pokemon-portrait:not(.empty):hover {
   filter: brightness(1.05) contrast(1.05);
 }
