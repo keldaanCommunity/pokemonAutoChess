@@ -127,10 +127,10 @@ export default class PokemonState {
           pokemon.effects.includes(Effect.JUSTIFIED)
         ) {
           const damageReduction = pokemon.effects.includes(Effect.GUTS)
-            ? 2
+            ? 3
             : pokemon.effects.includes(Effect.DEFIANT)
-            ? 4
-            : 6
+            ? 6
+            : 9
           residualDamage = Math.max(1, residualDamage - damageReduction)
         }
 
