@@ -1,12 +1,16 @@
 .game-pokemon-portrait {
   image-rendering: pixelated;
-  width: 15%;
-  margin-right: 1%;
+  width: 7.5vw;
+  height: 6vw;
   padding: 0;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: var(--cursor-hover);
   position: relative;
+}
+
+.game-pokemon-portrait:not(.empty):hover {
+  filter: brightness(1.05) contrast(1.05);
 }
 
 .game-pokemon-portrait.shimmer {
@@ -51,12 +55,13 @@
 .game-pokemon-portrait-cost {
   position: absolute;
   left: 5px;
-  bottom: 5px;
+  bottom: 0;
+  line-height: 1.2vw;
   display: flex;
   align-items: center;
 }
 
-.game-pokemon-portrait-cost > p {
+.game-pokemon-portrait-cost > span {
   font-size: 1.2vw;
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
     1px 1px 0 #fff;
@@ -68,7 +73,7 @@
   padding: 0;
   display: flex;
   position: absolute;
-  justify-content: space-evenly;
+  justify-content: start;
   flex-direction: column;
   top: 0;
   right: 0;

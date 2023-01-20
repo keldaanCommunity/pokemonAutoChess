@@ -1,11 +1,6 @@
 import React from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import CSS from "csstype"
 import { lockClick } from "../../../stores/NetworkStore"
-
-const style: CSS.Properties = {
-  margin: "5px"
-}
 
 export default function GameLock() {
   const dispatch = useAppDispatch()
@@ -13,19 +8,12 @@ export default function GameLock() {
 
   return (
     <button
-      className={shopLocked ? "bubbly red" : "bubbly green"}
-      onClick={() => {
-        dispatch(lockClick())
-      }}
-      style={style}
+      className={`bubbly lock-icon ${shopLocked ? "red" : "green"}`}
+      onClick={() => { dispatch(lockClick()) }}
     >
       <img
-        style={{
-          width: "25px",
-          marginLeft: "-4px",
-          marginTop: "-10px"
-        }}
-        src="/assets/ui/lock.png"
+        style={{ width: "2vw" }}
+        src="/assets/ui/lock.svg"
       />
     </button>
   )

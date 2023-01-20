@@ -1,22 +1,13 @@
 import React from "react"
 import CSS from "csstype"
 import { useAppSelector } from "../../../hooks"
-import GameLevel from "./game-level"
-
-const style: CSS.Properties = {
-  padding: "5px"
-}
-
-const styleProgress: CSS.Properties = {
-  position: "absolute",
-  color: "white",
-  left: "40%",
-  bottom: "13%",
-  fontSize: "1.2vw",
-  margin: "0px"
-}
+import { useAppDispatch } from "../../../hooks"
+import { levelClick } from "../../../stores/NetworkStore"
+import { Money } from "../icons/money"
 
 export default function GameExperience() {
+  const dispatch = useAppDispatch()
+  
   const experienceManager = useAppSelector(
     (state) => state.game.experienceManager
   )
@@ -25,25 +16,25 @@ export default function GameExperience() {
   if (Number(experienceManager.expNeeded) == -1) {
     progressString = "Max Level"
   } else {
-    progressString =
-      experienceManager.experience + "/" + experienceManager.expNeeded
+    progressString = experienceManager.experience + "/" + experienceManager.expNeeded
   }
 
   return (
-    <div className="nes-container" style={style}>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <h1 style={{ fontSize: "1.3vw", color: "white" }}>
-          Lvl {experienceManager.level}
-        </h1>
-        <GameLevel />
-      </div>
-      <div>
+    <div className="nes-container game-experience">
+      <span>Lvl {experienceManager.level}</span>
+      <button
+        className="bubbly orange buy-xp-button"
+        onClick={() => { dispatch(levelClick()) }}
+      >
+        <Money value="Buy XP 4" />
+      </button>
+      <div className="progress-bar">
         <progress
           className="nes-progress"
           value={experienceManager.experience}
           max={experienceManager.expNeeded}
         ></progress>
-        <p style={styleProgress}>{progressString}</p>
+        <span>{progressString}</span>
       </div>
     </div>
   )

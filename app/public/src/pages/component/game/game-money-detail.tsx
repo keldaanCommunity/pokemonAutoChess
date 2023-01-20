@@ -7,22 +7,8 @@ export default function GameMoneyDetail() {
   const interest = useAppSelector((state) => state.game.interest)
   return (
     <div>
-      <div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p>Streak: </p>
-          <div>
-            {streak}
-            <Money />
-          </div>
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p>Interest: </p>
-          <div>
-            {interest}
-            <Money />
-          </div>
-        </div>
-      </div>
+      <p><Money value={`Streak: ${streak}`}/></p>
+      <p><Money value={`Interest: ${interest}`}/></p>
     </div>
   )
 }

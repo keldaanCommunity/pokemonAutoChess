@@ -36,8 +36,7 @@ export default function GameMoney(props: { money: number }) {
         >
           <GameMoneyDetail />
         </ReactTooltip>
-        <h4 style={{ color: "white" }}>{props.money}</h4>
-        <Money />
+        <Money value={props.money} />
       </div>
     </div>
   )

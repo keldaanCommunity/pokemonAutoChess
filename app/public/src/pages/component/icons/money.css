@@ -1,7 +1,8 @@
 .money {
+  display: inline-block;
+  vertical-align: middle;
   image-rendering: auto;
-  width: 25px;
-  height: 25px;
-  margin-bottom: 5px;
+  width: 1vw;
+  height: 1vw;  
   filter: drop-shadow(1px 1px 0px 505261);
 }
