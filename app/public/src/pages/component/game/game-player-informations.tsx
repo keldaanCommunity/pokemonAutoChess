@@ -62,66 +62,67 @@ export default function GamePlayerInformations() {
     )
   }
 
-  return (<>
-    <div style={style} className="nes-container">
-      <div style={{ width: "4vw", textAlign: "center" }}>
-        <p style={{ margin: 0 }}>Stage {stageLevel}</p>
-        <p style={{ margin: 0 }}>{roundTime}s</p>
-      </div>
-      <div
-        className="nes-container"
-        style={{
-          backgroundColor: "#54596b",
-          padding: ".001px",
-          display: "flex",
-          width: "15%",
-          height: "100%",
-          backgroundImage: 'url("assets/ui/pokeball-bg.png"',
-          backgroundSize: "cover"
-        }}
-      >
+  return (
+    <>
+      <div style={style} className="nes-container">
+        <div style={{ width: "4vw", textAlign: "center" }}>
+          <p style={{ margin: 0 }}>Stage {stageLevel}</p>
+          <p style={{ margin: 0 }}>{roundTime}s</p>
+        </div>
         <div
+          className="nes-container"
           style={{
-            background: "#54596b",
+            backgroundColor: "#54596b",
+            padding: ".001px",
             display: "flex",
-            alignItems: "center",
-            borderRadius: "7px",
-            height: "100%"
+            width: "15%",
+            height: "100%",
+            backgroundImage: 'url("assets/ui/pokeball-bg.png"',
+            backgroundSize: "cover"
           }}
         >
-          <h4 style={{ color: "white" }}>
-            {boardSize}/{experienceManager.level}
-          </h4>
-          <img
-            style={{ width: "25px", height: "25px", marginBottom: "5px" }}
-            src="assets/ui/pokeball.png"
-          />
+          <div
+            style={{
+              background: "#54596b",
+              display: "flex",
+              alignItems: "center",
+              borderRadius: "7px",
+              height: "100%"
+            }}
+          >
+            <h4 style={{ color: "white" }}>
+              {boardSize}/{experienceManager.level}
+            </h4>
+            <img
+              style={{ width: "25px", height: "25px", marginBottom: "5px" }}
+              src="assets/ui/pokeball.svg"
+            />
+          </div>
         </div>
-      </div>
 
-      <GameMoney money={money} />
-      <GameLife life={life} />
-      <div
-        className="nes-container"
-        style={{
-          backgroundColor: "#54596b",
-          padding: "5px",
-          display: "flex",
-          minWidth: "15%",
-          height: "100%",
-          gap: "5px"
-        }}
-      >
-        <img src={getAvatarSrc(avatar)} />
-        <p style={{ margin: "0px", color: "#ffc107" }}>{TitleName[title]}</p>
-        <p style={{ marginLeft: "5px", color: "white", textAlign: "center" }}>
-          {name}
-        </p>
+        <GameMoney money={money} />
+        <GameLife life={life} />
+        <div
+          className="nes-container"
+          style={{
+            backgroundColor: "#54596b",
+            padding: "5px",
+            display: "flex",
+            minWidth: "15%",
+            height: "100%",
+            gap: "5px"
+          }}
+        >
+          <img src={getAvatarSrc(avatar)} />
+          <p style={{ margin: "0px", color: "#ffc107" }}>{TitleName[title]}</p>
+          <p style={{ marginLeft: "5px", color: "white", textAlign: "center" }}>
+            {name}
+          </p>
+        </div>
+        {vs}
+        {opponent}
       </div>
-      {vs}
-      {opponent}
-    </div>
-    <TimerBar />
-    
-  </>)
+      <TimerBar />
+    </>
+  )
 }
