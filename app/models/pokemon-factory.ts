@@ -434,6 +434,8 @@ import {
   Volcarona,
   Voltorb,
   Vulpix,
+  Wailmer,
+  Wailord,
   Walrein,
   Wartortle,
   Weavile,
@@ -1550,6 +1552,10 @@ export default class PokemonFactory {
         return new Snom(s, e)
       case Pkm.FROSMOTH:
         return new Frosmoth(s, e)
+      case Pkm.WAILMER:
+        return new Wailmer(s, e)
+      case Pkm.WAILORD:
+        return new Wailord(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

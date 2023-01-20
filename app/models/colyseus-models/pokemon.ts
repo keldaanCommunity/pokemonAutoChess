@@ -10820,3 +10820,53 @@ export class Frosmoth extends Pokemon {
     )
   }
 }
+
+export class Wailmer extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WAILMER,
+      [Synergy.WATER, Synergy.SOUND],
+      Rarity.EPIC,
+      Pkm.WAILORD,
+      180,
+      6,
+      2,
+      2,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      110,
+      Ability.ORIGIN_PULSE,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Wailord extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WAILORD,
+      [Synergy.WATER, Synergy.SOUND],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      360,
+      11,
+      3,
+      3,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      110,
+      Ability.ORIGIN_PULSE,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
