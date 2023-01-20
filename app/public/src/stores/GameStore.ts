@@ -15,6 +15,7 @@ import { getAvatarSrc } from "../utils"
 
 interface GameStateStore {
   afterGameId: string
+  phaseDuration: number
   roundTime: number
   phase: GamePhaseState
   players: IPlayer[]
@@ -49,7 +50,8 @@ interface GameStateStore {
 
 const initialState: GameStateStore = {
   afterGameId: "",
-  roundTime: 30,
+  phaseDuration: 50,
+  roundTime: 50,
   phase: GamePhaseState.PICK,
   players: new Array<IPlayer>(),
   stageLevel: 0,
@@ -101,6 +103,7 @@ export const gameSlice = createSlice({
       })
     },
     setRoundTime: (state, action: PayloadAction<number>) => {
+      if(action.payload > state.roundTime) state.phaseDuration = action.payload;
       state.roundTime = action.payload
     },
     setAfterGameId: (state, action: PayloadAction<string>) => {

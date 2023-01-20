@@ -5,6 +5,7 @@ import { TitleName } from "../../../../../types"
 import GameMoney from "./game-money"
 import GameLife from "./game-life"
 import { getAvatarSrc } from "../../../utils"
+import TimerBar from "./game-timer-bar"
 
 const style: CSS.Properties = {
   position: "absolute",
@@ -16,7 +17,8 @@ const style: CSS.Properties = {
   minWidth: "40%",
   height: "8%",
   alignItems: "center",
-  color: "white"
+  color: "white",
+  borderRadius: "12px 12px 0 0"
 }
 
 export default function GamePlayerInformations() {
@@ -60,7 +62,7 @@ export default function GamePlayerInformations() {
     )
   }
 
-  return (
+  return (<>
     <div style={style} className="nes-container">
       <div style={{ width: "4vw", textAlign: "center" }}>
         <p style={{ margin: 0 }}>Stage {stageLevel}</p>
@@ -119,5 +121,7 @@ export default function GamePlayerInformations() {
       {vs}
       {opponent}
     </div>
-  )
+    <TimerBar />
+    
+  </>)
 }
