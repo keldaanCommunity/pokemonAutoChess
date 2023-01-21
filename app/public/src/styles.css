@@ -389,9 +389,12 @@ select {
   box-shadow: inset -6px -6px 0px 0px #4181b3 !important;
 }
 
-#root .nes-container {
+.nes-container {
   border-radius: 12px;
   background-color: #61738a;
+}
+
+#root .nes-container {
   padding: 5px;
 }
 

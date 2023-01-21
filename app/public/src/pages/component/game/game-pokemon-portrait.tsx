@@ -18,15 +18,7 @@ export default function GamePokemonPortrait(props: {
   click: React.MouseEventHandler<HTMLDivElement>
 }) {
   if (!props.pokemon) {
-    return (
-      <div
-        style={{
-          width: "15%",
-          marginRight: "1%",
-          padding: "0px"
-        }}
-      />
-    )
+    return (<div className="game-pokemon-portrait nes-container empty" />)
   } else {
     const rarityColor = RarityColor[props.pokemon.rarity]
     const boardManager = getGameScene()?.board
@@ -102,14 +94,13 @@ export default function GamePokemonPortrait(props: {
           </div>
         )}
         <div className="game-pokemon-portrait-cost">
-          <p>{PkmCost[props.pokemon.rarity]}</p>
-          <Money />
+          <Money value={PkmCost[props.pokemon.rarity]} />
         </div>
         <ul className="game-pokemon-portrait-types">
           {props.pokemon.types.map((type) => {
             return (
               <li key={type}>
-                <SynergyIcon type={type} />
+                <SynergyIcon type={type} size="1.4vw" />
               </li>
             )
           })}

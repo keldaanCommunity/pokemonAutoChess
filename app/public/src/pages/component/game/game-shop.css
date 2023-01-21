@@ -1,0 +1,130 @@
+.game-shop.nes-container {
+    position: absolute;
+    left: 10vw;
+    right: 10vw;
+    bottom: 5px;
+    background: #54596b;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.game-shop-actions {
+    width: 12vw;
+    height: 6vw;
+    display: grid;
+    grid-template: 1fr 1fr / 3vw 1fr;
+    padding: 5px;
+    gap: 5px;
+    background: #61738a;  
+    align-items: center;  
+}
+
+.game-rarity-percentage {
+    grid-column: 1/3;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    padding: 0!important;
+    border-radius: 8px;
+}
+
+.game-rarity-percentage > div {
+    display: grid;
+    place-content: center;
+    font-size: 0.8vw;
+    border: 1px solid rgba(0,0,0,0.5)
+}
+
+.game-rarity-percentage > div:first-of-type {
+    border-radius: 8px 0 0 8px;
+}
+
+.game-rarity-percentage > div:last-of-type {
+    border-radius: 0 8px 8px 0;
+}
+
+.game-shop-actions .refresh-button {
+    font-size: 1vw;
+    white-space: nowrap;
+}
+
+.game-shop-actions .lock-icon {
+    padding: 0;
+    display: grid;
+    place-content: center;
+}
+
+.game-additional-pokemons {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr 1fr 1fr;
+    padding: 0!important;
+    color: white;
+    background-color: rgb(97, 115, 138);
+    width: 8vw;
+    height: 6vw;
+    overflow: hidden;
+}
+
+.game-additional-pokemons img {
+    image-rendering: pixelated;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #333;
+}
+
+.game-pokemons-store {
+    display: flex;
+    list-style: none;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    justify-content: space-between;
+}
+
+.game-experience {
+    width: 12vw;
+    height: 6vw;
+    display: grid;
+    grid-template: 1fr 1fr / 3vw 1fr;
+    padding: 5px;
+    gap: 5px;
+    background: #61738a;  
+    align-items: center;
+    text-align: center;
+}
+
+.game-experience > span {
+    color: white;
+}
+
+.buy-xp-button.bubbly {
+    font-size: 1vw;
+    white-space: nowrap;
+}
+
+.game-experience .progress-bar {
+    grid-column: 1/3;
+    position: relative;
+    background: transparent;
+    height: 100%;
+}
+
+.game-experience .progress-bar > span {
+    position: absolute;
+    font-size: 1.2vw;
+    margin: 0px;
+    color: white;
+    top: 0;
+    bottom: 0;    
+    left: 0;
+    right: 0;
+    display: grid;
+    place-content: center;
+}
+
+.game-experience .progress-bar > .nes-progress {
+    overflow: hidden;
+    height: 100%;
+}
