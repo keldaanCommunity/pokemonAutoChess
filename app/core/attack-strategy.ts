@@ -1834,13 +1834,13 @@ export class ConfusionStrategy extends AttackStrategy {
     let timer = 0
     switch (pokemon.stars) {
       case 1:
-        timer = 500
+        timer = 3000
         break
       case 2:
-        timer = 1500
+        timer = 6000
         break
       case 3:
-        timer = 3000
+        timer = 12000
         break
       default:
         break

@@ -810,7 +810,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ""
   },
   [Ability.CONFUSION]: {
-    eng: "Makes the target confused for .5/1.5/3 seconds",
+    eng: "Makes the target confused for 3/6/12 seconds",
     esp: "Hace que todo el equipo se confunda durante 1/2/4 segundos",
     fra: "Rend toute la team ennemie confus pendant 1/ 2 4 secondes",
     prt: ""
