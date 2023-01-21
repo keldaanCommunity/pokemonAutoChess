@@ -13,10 +13,6 @@
   border-color: transparent;
 }
 
-.game-pokemon-portrait:not(.empty):hover {
-  filter: brightness(1.05) contrast(1.05);
-}
-
 .game-pokemon-portrait.shimmer {
   box-shadow: 0 0 4px #ffffff80;
 }
