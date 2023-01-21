@@ -378,7 +378,7 @@ export default class GameScene extends Scene {
       "/assets/attacks/pmd-replace.json",
       "/assets/attacks"
     )
-    this.load.image("money", "/assets/ui/money.png")
+    this.load.image("money", "/assets/ui/money.svg")
     this.load.multiatlas(
       "ICE_RANGE",
       "/assets/attacks/ICE_RANGE.json",

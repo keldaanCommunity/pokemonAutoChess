@@ -4,16 +4,10 @@ import CSS from "csstype"
 import { useAppSelector } from "../../../hooks"
 import { Probability, RarityColor } from "../../../../../types/Config"
 
-const style: CSS.Properties = {
-  display: "flex",
-  padding: "0px",
-  borderRadius: "5px"
-}
-
 export default function GameRarityPercentage() {
   const level = useAppSelector((state) => state.game.experienceManager.level)
   return (
-    <div style={style} className="nes-container">
+    <div className="nes-container game-rarity-percentage">
       {[
         Rarity.COMMON,
         Rarity.UNCOMMON,
@@ -22,15 +16,7 @@ export default function GameRarityPercentage() {
         Rarity.LEGENDARY
       ].map((rarity, index) => {
         return (
-          <div
-            key={rarity}
-            style={{
-              backgroundColor: RarityColor[rarity],
-              width: "20%",
-              display: "flex",
-              justifyContent: "center"
-            }}
-          >
+          <div key={rarity} style={{ backgroundColor: RarityColor[rarity] }}>
             {Math.ceil(Probability[level][index] * 100)}%
           </div>
         )

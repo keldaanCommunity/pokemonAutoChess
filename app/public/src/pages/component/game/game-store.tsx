@@ -1,20 +1,9 @@
 import React from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import GamePokemonPortrait from "./game-pokemon-portrait"
-import CSS from "csstype"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { shopClick } from "../../../stores/NetworkStore"
-
-const style: CSS.Properties = {
-  display: "flex",
-  listStyleType: "none",
-  gap: "5px",
-  width: "47vw",
-  margin: "0px",
-  padding: "0px",
-  justifyContent: "space-between"
-}
 
 export default function GameStore() {
   const dispatch = useAppDispatch()
@@ -24,7 +13,7 @@ export default function GameStore() {
   )
   // console.log(pokemonCollection);
   return (
-    <ul style={style}>
+    <ul className="game-pokemons-store">
       {shop.map((pokemon, index) => {
         if (pokemon != Pkm.DEFAULT) {
           const p = PokemonFactory.createPokemonFromName(pokemon)
@@ -46,9 +35,7 @@ export default function GameStore() {
               index={index}
               pokemon={undefined}
               pokemonConfig={undefined}
-              click={(e) => {
-                dispatch(shopClick(index))
-              }}
+              click={() => {}}
             />
           )
         }
