@@ -7052,7 +7052,7 @@ export class Darkrai extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DARKRAI,
-      [Synergy.DARK, Synergy.MONSTER, Synergy.GHOST],
+      [Synergy.DARK, Synergy.GHOST],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
