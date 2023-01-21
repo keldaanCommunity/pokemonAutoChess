@@ -7,7 +7,8 @@ import { ICustomLobbyState } from "../../../../../types"
 import RoomItem from "./room-item"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { leaveLobby } from "../../../stores/LobbyStore"
-import "./room-menu.css";
+import "./room-menu.css"
+import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -22,6 +23,7 @@ export default function RoomMenu(props: {
     (state) => state.network.lobby
   )
   const uid: string = useAppSelector((state) => state.network.uid)
+  const lobbyUsers: ILobbyUser[] = useAppSelector((state) => state.lobby.users)
   const [isJoining, setJoining] = useState<boolean>(false)
 
   async function create() {
@@ -29,11 +31,12 @@ export default function RoomMenu(props: {
       setJoining(true)
       const user = firebase.auth().currentUser
       const token = await user?.getIdToken()
-      if (token) {
+      const lobbyUser = lobbyUsers.find((u) => u.id === uid)
+      if (token && lobbyUser) {
         const room: Room<PreparationState> = await client.create("room", {
           idToken: token,
           ownerId: uid,
-          ownerName: user?.displayName ? user.displayName : uid
+          ownerName: lobbyUser?.name ? lobbyUser.name : uid
         })
         localStorage.setItem("lastRoomId", room.id)
         localStorage.setItem("lastSessionId", room.sessionId)
@@ -66,9 +69,9 @@ export default function RoomMenu(props: {
   return (
     <div className="nes-container room-menu">
       <h1>Available Rooms</h1>
-      {allRooms.length === 0 && (<p className="subtitle">
-        Click on Create Room to play!
-      </p>)}
+      {allRooms.length === 0 && (
+        <p className="subtitle">Click on Create Room to play!</p>
+      )}
       <ul className="hidden-scrollable">
         {allRooms.map((r) => (
           <li key={r.roomId}>

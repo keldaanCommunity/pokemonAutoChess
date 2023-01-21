@@ -7,9 +7,9 @@ export default function GameLife(props: { life: number }) {
         backgroundColor: "#54596b",
         padding: ".001px",
         display: "flex",
-        width: "100px",
+        width: "5vw",
         height: "100%",
-        backgroundImage: 'url("assets/ui/heart-bg.png"',
+        backgroundImage: 'url("assets/ui/heart-bg.png")',
         backgroundSize: "cover"
       }}
     >
@@ -19,12 +19,13 @@ export default function GameLife(props: { life: number }) {
           display: "flex",
           alignItems: "center",
           borderRadius: "7px",
-          height: "100%"
+          height: "100%",
+          padding: "0 0.5em"
         }}
       >
-        <h4 style={{ marginLeft: "5px" }}>{props.life}</h4>
+        <span style={{verticalAlign: "middle"}}>{props.life}</span>
         <img
-          style={{ width: "25px", height: "25px", marginBottom: "5px" }}
+          style={{ width: "1vw", height: "1vw" }}
           src={"assets/ui/heart.png"}
         />
       </div>
