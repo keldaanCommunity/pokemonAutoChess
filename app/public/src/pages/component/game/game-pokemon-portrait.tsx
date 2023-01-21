@@ -10,6 +10,7 @@ import { getGameScene } from "../../game"
 import "./game-pokemon-portrait.css"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Money } from "../icons/money"
+import { useAppSelector } from "../../../hooks"
 
 export default function GamePokemonPortrait(props: {
   index: number
@@ -22,13 +23,19 @@ export default function GamePokemonPortrait(props: {
   } else {
     const rarityColor = RarityColor[props.pokemon.rarity]
     const boardManager = getGameScene()?.board
+    
+    const uid: string = useAppSelector((state) => state.network.uid)
+    const currentPlayerId: string = useAppSelector(
+      (state) => state.game.currentPlayerId
+    )
+    const isOnAnotherBoard = currentPlayerId !== uid
 
     let count = 0
     let countEvol = 0
     let pokemonEvolution = props.pokemon.evolution
     let pokemonEvolution2: Pkm | null = null
 
-    if (boardManager) {
+    if (boardManager && !isOnAnotherBoard) {
       boardManager.pokemons.forEach((p) => {
         if (p.index == props.pokemon!.index && p.evolution != Pkm.DEFAULT) {
           count++
