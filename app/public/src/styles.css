@@ -403,7 +403,7 @@ select {
   border-radius: 8px;
   border: none;
   padding: 0;
-  cursor: pointer;
+  cursor: var(--cursor-hover);
   outline-offset: 4px;
   border: solid;
   border-color: black;
