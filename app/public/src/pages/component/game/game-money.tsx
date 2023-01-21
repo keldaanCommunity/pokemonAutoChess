@@ -11,7 +11,7 @@ export default function GameMoney(props: { money: number }) {
         backgroundColor: "#54596b",
         padding: ".001px",
         display: "flex",
-        width: "100px",
+        width: "5vw",
         height: "100%",
         backgroundImage: 'url("assets/ui/money-bg.png"',
         backgroundSize: "cover"
@@ -23,7 +23,8 @@ export default function GameMoney(props: { money: number }) {
           display: "flex",
           alignItems: "center",
           borderRadius: "7px",
-          height: "100%"
+          height: "100%",
+          padding: "0 0.5em"
         }}
         data-tip
         data-for={"detail-money"}

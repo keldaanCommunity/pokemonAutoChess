@@ -75,9 +75,9 @@ export default function GamePlayerInformations() {
             backgroundColor: "#54596b",
             padding: ".001px",
             display: "flex",
-            width: "15%",
+            width: "5vw",
             height: "100%",
-            backgroundImage: 'url("assets/ui/pokeball-bg.png"',
+            backgroundImage: 'url("assets/ui/pokeball-bg.png")',
             backgroundSize: "cover"
           }}
         >
@@ -87,14 +87,15 @@ export default function GamePlayerInformations() {
               display: "flex",
               alignItems: "center",
               borderRadius: "7px",
-              height: "100%"
+              height: "100%",
+              padding: "0 0.5em"
             }}
           >
-            <h4 style={{ color: "white" }}>
-              {boardSize}/{experienceManager.level}
-            </h4>
+            <span style={{ color: "white" }}>
+                {boardSize}/{experienceManager.level}
+            </span>
             <img
-              style={{ width: "25px", height: "25px", marginBottom: "5px" }}
+              style={{ width: "1vw", height: "1vw" }}
               src="assets/ui/pokeball.svg"
             />
           </div>

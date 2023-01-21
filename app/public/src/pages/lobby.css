@@ -30,7 +30,7 @@
     height: 100%;
 }
 
-.lobby user-chat {
+.lobby .user-chat {
     grid-area: chat;
     height: 100%;
 }
