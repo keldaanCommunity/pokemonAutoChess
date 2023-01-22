@@ -381,7 +381,7 @@ export default class GameRoom extends Room<GameState> {
               } else {
                 usr.exp = usr.exp + exp
               }
-              usr.exp = isNaN(usr.exp) ? usr.exp : 0
+              usr.exp = !isNaN(usr.exp) ? usr.exp : 0
               if (rank == 1) {
                 usr.wins += 1
               }
