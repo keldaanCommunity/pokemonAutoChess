@@ -121,7 +121,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.FLUFFY_TAIL]: "Holder is immune to all status",
   [Item.ORAN_BERRY]: "Grants 100 bonus hp",
   [Item.SHINY_CHARM]:
-    "When combat begins, every ennemy in the same column falls asleep for 3 seconds",
+    "Upon attack, 25% chance to trigger protect status for 1s",
   [Item.FOCUS_BAND]:
     "When combat begins, the holder and all allies within 1 hexes in the same row gain +30% Attack Speed for the rest of combat",
   [Item.FLAME_ORB]: "Holder is burned but increase attack by 100%",

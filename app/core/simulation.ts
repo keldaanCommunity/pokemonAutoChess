@@ -447,19 +447,7 @@ export default class Simulation extends Schema implements ISimulation {
           }
         })
       }
-      if (pokemon.items.has(Item.SHINY_CHARM)) {
-        this.board.forEach(
-          (x: number, y: number, value: PokemonEntity | undefined) => {
-            if (
-              value &&
-              pokemon.team != value.team &&
-              value.positionX == pokemon.positionX
-            ) {
-              value.status.triggerSleep(3000, value)
-            }
-          }
-        )
-      }
+
       if (pokemon.items.has(Item.FOCUS_BAND)) {
         ;[-1, 0, 1].forEach((offset) => {
           const value = this.board.getValue(
@@ -549,19 +537,7 @@ export default class Simulation extends Schema implements ISimulation {
           }
         })
       }
-      if (pokemon.items.has(Item.SHINY_CHARM)) {
-        this.board.forEach(
-          (x: number, y: number, value: PokemonEntity | undefined) => {
-            if (
-              value &&
-              pokemon.team != value.team &&
-              value.positionX == pokemon.positionX
-            ) {
-              value.status.triggerSleep(3000, value)
-            }
-          }
-        )
-      }
+
       if (pokemon.items.has(Item.FOCUS_BAND)) {
         ;[-1, 0, 1].forEach((offset) => {
           const value = this.board.getValue(
