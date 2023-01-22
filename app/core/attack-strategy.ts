@@ -708,7 +708,7 @@ export class LeechSeedStrategy extends AttackStrategy {
       duration = 6000
       heal = 40
     }
-    pokemon.handleHeal(heal, pokemon)
+    pokemon.handleHeal(heal, pokemon, true)
     target.status.triggerPoison(duration, target, pokemon, board)
   }
 }
@@ -2181,7 +2181,7 @@ export class WishStrategy extends AttackStrategy {
         count > 0 &&
         ally.life < ally.hp
       ) {
-        ally.handleHeal(heal, pokemon)
+        ally.handleHeal(heal, pokemon, true)
         count -= 1
       }
     })
@@ -2464,7 +2464,7 @@ export class BiteStrategy extends AttackStrategy {
         break
     }
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-    pokemon.handleHeal(Math.floor(damage / 2), pokemon)
+    pokemon.handleHeal(Math.floor(damage / 2), pokemon, true)
   }
 }
 
@@ -2676,11 +2676,11 @@ export class RootStrategy extends AttackStrategy {
     }
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    pokemon.handleHeal(heal, pokemon)
+    pokemon.handleHeal(heal, pokemon, true)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
-        cell.value.handleHeal(heal, pokemon)
+        cell.value.handleHeal(heal, pokemon, true)
       }
     })
   }
@@ -2761,7 +2761,7 @@ export class DarkPulseStrategy extends AttackStrategy {
         break
     }
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    pokemon.handleHeal(damage, pokemon)
+    pokemon.handleHeal(damage, pokemon, true)
   }
 }
 
@@ -2903,7 +2903,7 @@ export class LeechLifeStrategy extends AttackStrategy {
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-        pokemon.handleHeal(damage, pokemon)
+        pokemon.handleHeal(damage, pokemon, true)
       }
     })
   }
