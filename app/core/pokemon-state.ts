@@ -15,14 +15,19 @@ export default class PokemonState {
   handleHeal(
     pokemon: IPokemonEntity,
     heal: number,
-    caster: IPokemonEntity
+    caster: IPokemonEntity,
+    spellDamageBoost?: boolean
   ): void {
     if (
       pokemon.life > 0 &&
       pokemon.life < pokemon.hp &&
       !pokemon.status.wound
     ) {
-      pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.round(heal))
+      const boost = spellDamageBoost ? (heal * pokemon.spellDamage) / 100 : 0
+      pokemon.life = Math.min(
+        pokemon.hp,
+        pokemon.life + Math.round(heal + boost)
+      )
       if (caster) {
         caster.healDone += heal
       }
@@ -32,10 +37,12 @@ export default class PokemonState {
   handleShield(
     pokemon: IPokemonEntity,
     shield: number,
-    caster: IPokemonEntity
+    caster: IPokemonEntity,
+    spellDamageBoost?: boolean
   ) {
     if (pokemon.life > 0) {
-      pokemon.shield += Math.round(shield)
+      const boost = spellDamageBoost ? (shield * pokemon.spellDamage) / 100 : 0
+      pokemon.shield += Math.round(shield + boost)
       if (caster) {
         caster.shieldDone += shield
       }
