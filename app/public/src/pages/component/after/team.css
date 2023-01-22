@@ -1,9 +1,9 @@
 .player-team-pokemons {
     display: flex;
+    flex-wrap: wrap;
     list-style: none;
     gap: 8px;
-    margin: 0;
-    padding-left: 40px;
+    margin: 0 0 0.5em 0;
 }
 
 .player-team-pokemons li {
