@@ -574,6 +574,8 @@ export class AquaJetStrategy extends AttackStrategy {
         }
       })
 
+      target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+
       board.swapValue(
         pokemon.positionX,
         pokemon.positionY,
@@ -678,6 +680,8 @@ export class FlameChargeStrategy extends AttackStrategy {
           )
         }
       })
+
+      target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
 
       board.swapValue(
         pokemon.positionX,
@@ -1358,6 +1362,8 @@ export class VoltSwitchStrategy extends AttackStrategy {
           )
         }
       })
+
+      target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
 
       board.swapValue(
         pokemon.positionX,
