@@ -172,29 +172,32 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       return
     } else {
       let spellDamage = damage + (damage * attacker.spellDamage) / 100
+      if (attacker.items.has(Item.WATER_INCENSE)) {
+        if (this.life > 200) {
+          spellDamage = spellDamage + 0.75 * damage
+        } else {
+          spellDamage = spellDamage + 0.3 * damage
+        }
+      }
       if (
         attacker &&
         attacker.items.has(Item.REAPER_CLOTH) &&
-        Math.random() > 0.8
+        Math.random() * 100 < attacker.critChance
       ) {
-        spellDamage *= 2
+        spellDamage = Math.round(spellDamage * attacker.critDamage)
         this.count.crit++
       }
       if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
         this.status.triggerBurn(2000, this, attacker, board)
         this.status.triggerWound(2000, this, board)
       }
-      if (attacker && attacker.items.has(Item.SHELL_BELL)) {
-        attacker.handleHeal(0.4 * damage, attacker)
-      } else {
-        return this.state.handleDamage(
-          this,
-          spellDamage,
-          board,
-          attackType,
-          attacker
-        )
-      }
+      return this.state.handleDamage(
+        this,
+        spellDamage,
+        board,
+        attackType,
+        attacker
+      )
     }
   }
 

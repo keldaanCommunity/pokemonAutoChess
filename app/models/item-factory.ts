@@ -3,6 +3,7 @@ import { Item, BasicItems } from "../types/enum/Item"
 export default class ItemFactory {
   static createRandomItem() {
     const keys = Object.keys(Item) as Item[]
+    keys.filter((i) => !BasicItems.includes(i))
     return keys[Math.floor(Math.random() * keys.length)]
   }
 

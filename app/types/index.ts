@@ -339,6 +339,7 @@ export function instanceofPokemonEntity(obj: IPokemon | IPokemonEntity) {
 }
 
 export interface IPokemonEntity {
+  addSpellDamage(value: number): void
   addAttack(atk: number): void
   handleShield(shieldBonus: number, pokemon: IPokemonEntity)
   update(dt: number, board: board, climate: string)
