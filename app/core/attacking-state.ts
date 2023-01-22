@@ -233,6 +233,7 @@ export default class AttackingState extends PokemonState {
             if (tg && pokemon.team != tg.team && c > 0) {
               tg.count.staticCount++
               tg.setMana(tg.mana - 30)
+              tg.count.manaBurnCount++
               c--
             }
           })

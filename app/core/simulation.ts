@@ -282,9 +282,6 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.addAttack(atkBoost)
       pokemon.addSpellDamage(spellPowerBoost)
     }
-    if (pokemon.items.has(Item.BLUE_ORB)) {
-      pokemon.handleAttackSpeed(10)
-    }
     if (pokemon.items.has(Item.FLAME_ORB)) {
       pokemon.addAttack(pokemon.baseAtk)
       pokemon.status.triggerBurn(60000, pokemon, pokemon, this.board)
