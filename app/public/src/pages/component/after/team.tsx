@@ -5,7 +5,6 @@ import "./team.css"
 
 export default function Team(props: { team: IPokemonRecord[] }) {
   return (
-    <div className="player-team">
     <ul className="player-team-pokemons">
       {props.team.map((p, index) => {
         return (
@@ -17,7 +16,6 @@ export default function Team(props: { team: IPokemonRecord[] }) {
           </li>
         )
       })}
-    </ul>    
-    </div>
+    </ul>
   )
 }
