@@ -126,8 +126,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     "When combat begins, the holder and all allies within 1 hexes in the same row gain +30% Attack Speed for the rest of combat",
   [Item.FLAME_ORB]: "Holder is burned but increase attack by 100%",
   [Item.ASSAULT_VEST]: "Grants 16 bonus special defense",
-  [Item.KINGS_ROCK]:
-    "Physical damage heals the holder for 50% of the damage dealt",
+  [Item.KINGS_ROCK]: "+1 money each time the holder kill an ennemy",
   [Item.POKE_DOLL]: "Reduce all incoming damage by 30%",
   [Item.RED_ORB]:
     "+8 attack damage. Each attack of the holder deals an additional 20% true damage",
