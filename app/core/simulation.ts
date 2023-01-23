@@ -348,38 +348,6 @@ export default class Simulation extends Schema implements ISimulation {
       redIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
     }
 
-    const bluePhantomForce = Array.from(this.blueTeam.values()).filter((p) =>
-      p.effects.includes(Effect.PHANTOM_FORCE)
-    )
-    if (bluePhantomForce.length > 0) {
-      bluePhantomForce.forEach((pokemon) => {
-        pokemon.effects.splice(
-          pokemon.effects.findIndex((e) => e === Effect.PHANTOM_FORCE),
-          1
-        )
-      })
-      const bluePhantomForcePkm =
-        bluePhantomForce[Math.floor(Math.random() * bluePhantomForce.length)]
-      bluePhantomForcePkm.attackType = AttackType.TRUE
-      bluePhantomForcePkm.effects.push(Effect.PHANTOM_FORCE)
-    }
-
-    const redPhantomForce = Array.from(this.redTeam.values()).filter((p) =>
-      p.effects.includes(Effect.PHANTOM_FORCE)
-    )
-    if (redPhantomForce.length > 0) {
-      redPhantomForce.forEach((pokemon) => {
-        pokemon.effects.splice(
-          pokemon.effects.findIndex((e) => e === Effect.PHANTOM_FORCE),
-          1
-        )
-      })
-      const redPhantomForcePkm =
-        redPhantomForce[Math.floor(Math.random() * redPhantomForce.length)]
-      redPhantomForcePkm.attackType = AttackType.TRUE
-      redPhantomForcePkm.effects.push(Effect.PHANTOM_FORCE)
-    }
-
     this.blueTeam.forEach((pokemon) => {
       if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
         pokemon.addAttack(pokemon.atk)
@@ -940,8 +908,19 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.CURSE:
           if (types.includes(Synergy.GHOST)) {
-            pokemon.attackType = AttackType.TRUE
             pokemon.effects.push(Effect.CURSE)
+          }
+          break
+
+        case Effect.SHADOW_TAG:
+          if (types.includes(Synergy.GHOST)) {
+            pokemon.effects.push(Effect.SHADOW_TAG)
+          }
+          break
+
+        case Effect.WANDERING_SPIRIT:
+          if (types.includes(Synergy.GHOST)) {
+            pokemon.effects.push(Effect.WANDERING_SPIRIT)
           }
           break
 

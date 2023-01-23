@@ -63,6 +63,8 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.DIAMOND_STORM]: "Diamond Storm",
   [Effect.PHANTOM_FORCE]: "Phantom Force",
   [Effect.CURSE]: "Curse",
+  [Effect.SHADOW_TAG]: "Shadow Tag",
+  [Effect.WANDERING_SPIRIT]: "Wandering Spirit",
   [Effect.AROMATIC_MIST]: "Aromatic Mist",
   [Effect.FAIRY_WIND]: "Fairy Wind",
   [Effect.STRANGE_STEAM]: "Strange Steam",
@@ -383,12 +385,22 @@ export const EffectDescription: {
     fra: "?NONE?"
   },
   [Effect.PHANTOM_FORCE]: {
-    eng: "One of your ghost pokemons deals true damage and silence his target",
+    eng: "Yours ghost deals 20% of damage as true damages + 50% chance silence on hit",
     esp: "Los fantasmas ganan un 15% de velocidad ATK y hacen daño verdadero",
     fra: "Les fantômes gagnent 15% d'ATK speed et font des dégats bruts"
   },
   [Effect.CURSE]: {
-    eng: "All of your ghost pokemons deals true damage and silence his target",
+    eng: "Yours ghost deals 40% of damage as true damages + 50% chance silence on hit",
+    esp: "Los ataques fantasma silencian sus objetivos",
+    fra: "Les attaques des fantomes réduisent aux silences leurs cibles"
+  },
+  [Effect.SHADOW_TAG]: {
+    eng: "Yours ghost deals 70% of damage as true damages + 50% chance silence on hit",
+    esp: "Los ataques fantasma silencian sus objetivos",
+    fra: "Les attaques des fantomes réduisent aux silences leurs cibles"
+  },
+  [Effect.WANDERING_SPIRIT]: {
+    eng: "Yours ghost deals 100% of damage as true damages + 50% chance silence on hit",
     esp: "Los ataques fantasma silencian sus objetivos",
     fra: "Les attaques des fantomes réduisent aux silences leurs cibles"
   },
