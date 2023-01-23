@@ -739,10 +739,6 @@ export class OnUpdateCommand extends Command<
               everySimulationFinished = false
             }
             player.simulation.update(deltaTime)
-            if (player.simulation.generatedMoney > 0) {
-              player.money += player.simulation.generatedMoney
-              player.simulation.generatedMoney = 0
-            }
           }
         })
 
@@ -1243,7 +1239,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               this.state.stageLevel
             ),
             player.effects.list,
-            []
+            [],
+            this.state.stageLevel,
+            player
           )
         } else {
           const opponentId = this.room.computeRandomOpponent(key)
@@ -1254,7 +1252,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
                 player.board,
                 opponent.board,
                 player.effects.list,
-                opponent.effects.list
+                opponent.effects.list,
+                this.state.stageLevel,
+                player
               )
             }
           }

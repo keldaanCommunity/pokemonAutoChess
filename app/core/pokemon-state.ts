@@ -64,12 +64,9 @@ export default class PokemonState {
       death = false
       if (!pokemon.status.protect) {
         let reducedDamage = damage
-        if (attacker && attacker.items.has(Item.FIRE_GEM)) {
-          if (pokemon.life > 200) {
-            reducedDamage = Math.ceil(reducedDamage * 1.6)
-          } else {
-            reducedDamage = Math.ceil(reducedDamage * 1.2)
-          }
+
+        if (pokemon.items.has(Item.POKE_DOLL)) {
+          reducedDamage = Math.ceil(reducedDamage * 0.7)
         }
 
         if (attacker && attacker.status.electricField) {
@@ -88,14 +85,8 @@ export default class PokemonState {
           reducedDamage *= 3
         }
         const armorFactor = 0.1
-        const def =
-          attacker && attacker.items.has(Item.RAZOR_FANG)
-            ? Math.round(0.7 * pokemon.def)
-            : pokemon.def
-        const speDef =
-          attacker && attacker.items.has(Item.RAZOR_FANG)
-            ? Math.round(0.7 * pokemon.speDef)
-            : pokemon.speDef
+        const def = pokemon.def
+        const speDef = pokemon.speDef
         if (attackType == AttackType.PHYSICAL) {
           const ritodamage =
             damage * (pokemon.life / (pokemon.life * (1 + armorFactor * def)))
@@ -170,13 +161,11 @@ export default class PokemonState {
         if (pokemon) {
           pokemon.setMana(pokemon.mana + Math.ceil(residualDamage / 10))
 
-          if (
-            pokemon.items.has(Item.DEFENSIVE_RIBBON) &&
-            pokemon.count.defensiveRibbonCount < 5
-          ) {
+          if (pokemon.items.has(Item.DEFENSIVE_RIBBON)) {
             pokemon.addAttack(1)
             pokemon.addDefense(1)
             pokemon.addSpecialDefense(1)
+            pokemon.handleAttackSpeed(5)
             pokemon.count.defensiveRibbonCount++
           }
 
@@ -232,7 +221,7 @@ export default class PokemonState {
               attacker
             )
           }
-          if (attacker.items.has(Item.KINGS_ROCK)) {
+          if (attacker.items.has(Item.SHELL_BELL)) {
             attacker.handleHeal(Math.floor(0.5 * residualDamage), attacker)
           }
 
@@ -320,6 +309,24 @@ export default class PokemonState {
     }
 
     if (death && pokemon) {
+      if (
+        attacker &&
+        attacker.items.has(Item.KINGS_ROCK) &&
+        attacker.team === 0 &&
+        attacker.simulation.player
+      ) {
+        attacker.simulation.player.money += 1
+      }
+
+      if (attacker && attacker.items.has(Item.FIRE_GEM)) {
+        const boost =
+          attacker.simulation.stageLevel < 10
+            ? 5
+            : attacker.simulation.stageLevel < 20
+            ? 10
+            : 15
+        attacker.addAttack(boost)
+      }
       if (
         attacker &&
         (attacker.effects.includes(Effect.PURSUIT) ||
@@ -481,10 +488,6 @@ export default class PokemonState {
       pokemon.status.updateWound(dt)
     }
 
-    if (pokemon.status.temporaryShield) {
-      pokemon.status.updateShield(dt, pokemon)
-    }
-
     if (pokemon.status.soulDew) {
       pokemon.status.updateSoulDew(dt, pokemon)
     }
@@ -499,10 +502,6 @@ export default class PokemonState {
 
     if (pokemon.status.armorReduction) {
       pokemon.status.updateArmorReduction(dt)
-    }
-
-    if (pokemon.status.flameOrb) {
-      pokemon.status.updateFlameOrb(dt, pokemon, board)
     }
 
     if (pokemon.manaCooldown <= 0) {

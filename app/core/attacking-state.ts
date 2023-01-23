@@ -90,8 +90,12 @@ export default class AttackingState extends PokemonState {
     pokemon.targetY = coordinates.y
     const target = board.getValue(coordinates.x, coordinates.y)
     if (target && !pokemon.status.sleep && !pokemon.status.freeze) {
+      if (pokemon.items.has(Item.SHINY_CHARM) && Math.random() < 0.25) {
+        pokemon.status.triggerProtect(1000)
+      }
+
       if (pokemon.items.has(Item.UPGRADE)) {
-        pokemon.handleAttackSpeed(6)
+        pokemon.handleAttackSpeed(5)
       }
 
       let freezeChance = 0
@@ -221,14 +225,15 @@ export default class AttackingState extends PokemonState {
 
       if (pokemon.items.has(Item.BLUE_ORB)) {
         pokemon.count.staticHolderCount++
-        if (pokemon.count.staticHolderCount > 3) {
+        if (pokemon.count.staticHolderCount > 2) {
           pokemon.count.staticHolderCount = 0
           // eslint-disable-next-line no-unused-vars
-          let c = 4
+          let c = 3
           board.forEach((x, y, tg) => {
-            if (tg && pokemon.team != tg.team) {
+            if (tg && pokemon.team != tg.team && c > 0) {
               tg.count.staticCount++
-              tg.handleDamage(8, board, AttackType.SPECIAL, pokemon)
+              tg.setMana(tg.mana - 30)
+              tg.count.manaBurnCount++
               c--
             }
           })
@@ -247,10 +252,6 @@ export default class AttackingState extends PokemonState {
       }
       if (target && target.items.has(Item.SMOKE_BALL)) {
         pokemon.status.triggerSmoke(5000, pokemon)
-      }
-
-      if (target && pokemon.items.has(Item.RAZOR_FANG)) {
-        target.status.triggerArmorReduction(5000)
       }
 
       if (pokemon.items.has(Item.CHOICE_SCARF)) {
@@ -274,20 +275,23 @@ export default class AttackingState extends PokemonState {
       }
 
       if (pokemon.items.has(Item.LEFTOVERS)) {
-        const cells = board.getAdjacentCells(
-          pokemon.positionX,
-          pokemon.positionY
-        )
-        pokemon.handleHeal(3, pokemon)
-        cells.forEach((cell) => {
-          if (cell.value && pokemon.team == cell.value.team) {
-            cell.value.handleHeal(3, pokemon)
+        pokemon.handleHeal(pokemon.hp * 0.05, pokemon)
+        ;[-1, 0, 1].forEach((offset) => {
+          const value = board.getValue(
+            pokemon.positionX + offset,
+            pokemon.positionY
+          )
+          if (value && value.team === pokemon.team) {
+            value.handleHeal(value.hp * 0.05, pokemon)
           }
         })
       }
 
       if (pokemon.items.has(Item.MANA_SCARF)) {
         pokemon.setMana(pokemon.mana + 8)
+      }
+      if (pokemon.status.deltaOrb) {
+        pokemon.setMana(pokemon.mana + 3)
       }
     }
   }

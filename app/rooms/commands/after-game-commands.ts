@@ -41,12 +41,16 @@ export class OnMessageCommand extends Command {
 
 export class OnLeaveCommand extends Command {
   execute({ client, consented }) {
-    this.room.broadcast(Transfer.MESSAGES, {
-      name: "Server",
-      payload: `${client.auth.displayName} left.`,
-      avatar: `0081/${Emotion.NORMAL}`,
-      time: Date.now()
-    })
-    this.state.users.delete(client.auth.uid)
+    try {
+      this.room.broadcast(Transfer.MESSAGES, {
+        name: "Server",
+        payload: `${client.auth.displayName} left.`,
+        avatar: `0081/${Emotion.NORMAL}`,
+        time: Date.now()
+      })
+      this.state.users.delete(client.auth.uid)
+    } catch (e) {
+      console.error(e)
+    }
   }
 }

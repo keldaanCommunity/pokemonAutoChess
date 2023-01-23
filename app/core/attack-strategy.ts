@@ -41,21 +41,7 @@ export class AttackStrategy {
         })
       }
     }
-    board.forEach((r: number, c: number, value: PokemonEntity | undefined) => {
-      if (
-        value !== undefined &&
-        value.team != pokemon.team &&
-        value.items.has(Item.WATER_INCENSE)
-      ) {
-        pokemon.count.incenseCount++
-        pokemon.handleSpellDamage(
-          Math.ceil(value.maxMana * 0.2),
-          board,
-          AttackType.SPECIAL,
-          value
-        )
-      }
-    })
+
     if (pokemon.items.has(Item.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + 20)
     }
@@ -154,8 +140,8 @@ export class PaydayStrategy extends AttackStrategy {
       AttackType.PHYSICAL,
       pokemon
     )
-    if (victim) {
-      pokemon.simulation.generatedMoney += pokemon.stars
+    if (victim && pokemon.team === 0 && pokemon.simulation.player) {
+      pokemon.simulation.player.money += pokemon.stars
     }
   }
 }
