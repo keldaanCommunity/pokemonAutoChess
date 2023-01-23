@@ -964,7 +964,7 @@ export default class Pokemon extends Button {
               "000"
             )
             specialProjectile.setDepth(7)
-            specialProjectile.setScale(2, 2)
+            specialProjectile.setScale(4, 4)
             specialProjectile.anims.play(Ability.SHADOW_BALL)
             this.scene.tweens.add({
               targets: specialProjectile,

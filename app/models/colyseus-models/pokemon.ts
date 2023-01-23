@@ -2350,8 +2350,8 @@ export class Solosis extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SOLOSIS,
-      [Synergy.PSYCHIC, Synergy.GHOST],
-      Rarity.RARE,
+      [Synergy.PSYCHIC],
+      Rarity.LEGENDARY,
       Pkm.DUOSION,
       80,
       5,
@@ -2361,7 +2361,7 @@ export class Solosis extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       AttackType.SPECIAL,
       1,
-      100,
+      65,
       Ability.SHADOW_BALL,
       shiny,
       emotion,
@@ -2374,8 +2374,8 @@ export class Duosion extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DUOSION,
-      [Synergy.PSYCHIC, Synergy.GHOST],
-      Rarity.RARE,
+      [Synergy.PSYCHIC],
+      Rarity.LEGENDARY,
       Pkm.REUNICLUS,
       120,
       9,
@@ -2385,7 +2385,7 @@ export class Duosion extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       AttackType.SPECIAL,
       2,
-      100,
+      65,
       Ability.SHADOW_BALL,
       shiny,
       emotion,
@@ -2398,8 +2398,8 @@ export class Reuniclus extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.REUNICLUS,
-      [Synergy.PSYCHIC, Synergy.GHOST],
-      Rarity.RARE,
+      [Synergy.PSYCHIC],
+      Rarity.LEGENDARY,
       Pkm.DEFAULT,
       220,
       18,
@@ -2409,7 +2409,7 @@ export class Reuniclus extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       AttackType.SPECIAL,
       3,
-      100,
+      65,
       Ability.SHADOW_BALL,
       shiny,
       emotion,
