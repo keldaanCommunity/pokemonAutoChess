@@ -122,8 +122,11 @@ export default class AttackingState extends PokemonState {
         }
       }
       if (
-        pokemon.effects.includes(Effect.CURSE) ||
-        pokemon.effects.includes(Effect.PHANTOM_FORCE)
+        (pokemon.effects.includes(Effect.CURSE) ||
+          pokemon.effects.includes(Effect.PHANTOM_FORCE) ||
+          pokemon.effects.includes(Effect.SHADOW_TAG) ||
+          pokemon.effects.includes(Effect.WANDERING_SPIRIT)) &&
+        Math.random() > 0.5
       ) {
         target.status.triggerSilence(3000, target, board)
       }
@@ -221,7 +224,33 @@ export default class AttackingState extends PokemonState {
         damage = pokemon.atk
       }
 
-      target.handleDamage(damage, board, attackType, pokemon)
+      if (pokemon.effects.includes(Effect.PHANTOM_FORCE)) {
+        const trueDamage = 0.2 * damage
+        damage = 0.8 * damage
+        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon)
+      }
+
+      if (pokemon.effects.includes(Effect.CURSE)) {
+        const trueDamage = 0.4 * damage
+        damage = 0.6 * damage
+        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon)
+      }
+
+      if (pokemon.effects.includes(Effect.SHADOW_TAG)) {
+        const trueDamage = 0.7 * damage
+        damage = 0.3 * damage
+        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon)
+      }
+
+      if (pokemon.effects.includes(Effect.WANDERING_SPIRIT)) {
+        const trueDamage = damage
+        damage = 0
+        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon)
+      }
+
+      if (damage > 0) {
+        target.handleDamage(damage, board, attackType, pokemon)
+      }
 
       if (pokemon.items.has(Item.BLUE_ORB)) {
         pokemon.count.staticHolderCount++
