@@ -370,10 +370,8 @@ export default class PokemonState {
       ) {
         if (!pokemon.simulation.flowerSpawn[pokemon.team]) {
           pokemon.simulation.flowerSpawn[pokemon.team] = true
-          const nearestAvailableCoordinate = this.getNearestTargetCoordinate(
-            pokemon,
-            board
-          )
+          const nearestAvailableCoordinate =
+            this.getFarthestTargetCoordinateAvailablePlace(pokemon, board)
           if (nearestAvailableCoordinate) {
             if (pokemon.effects.includes(Effect.ODD_FLOWER)) {
               pokemon.simulation.addPokemon(
