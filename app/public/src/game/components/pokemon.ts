@@ -948,6 +948,37 @@ export default class Pokemon extends Button {
             })
             break
 
+          case Ability.SHADOW_BALL:
+            coordinatesTarget = transformAttackCoordinate(
+              this.targetX,
+              this.targetY
+            )
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "SHADOW_BALL",
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.SHADOW_BALL)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "linear",
+              yoyo: false,
+              duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.FUSION_BOLT:
             coordinatesTarget = transformAttackCoordinate(
               this.targetX,

@@ -322,6 +322,28 @@ export class PsychicSurgeStrategy extends AttackStrategy {
   }
 }
 
+export class ShadowBallStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const damage = pokemon.stars === 3 ? 300 : pokemon.stars === 2 ? 100 : 50
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.setMana(cell.value.mana - 30)
+        cell.value.count.manaBurnCount++
+      }
+    })
+  }
+}
+
 export class ChatterStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -1094,6 +1116,7 @@ export class HighJumpKickStrategy extends AttackStrategy {
     }
     pokemon.setMana(target.mana)
     target.setMana(0)
+    target.count.manaBurnCount++
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
   }
 }

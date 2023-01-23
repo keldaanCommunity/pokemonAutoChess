@@ -631,6 +631,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.SHADOW_BALL]: {
+    eng: "Shadow Ball",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1261,6 +1267,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.APPLE_ACID]: {
     eng: "Deals 30/60/120 special damage to the target, and lower its special defense by 3 points",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SHADOW_BALL]: {
+    eng: "Deals 50/100/300 special damage and burn 30 mana to the target and adjacent ennemies",
     esp: "",
     prt: "",
     fra: ""

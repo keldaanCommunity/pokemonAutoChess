@@ -279,6 +279,11 @@ export default class GameScene extends Scene {
       "/assets/attacks"
     )
     this.load.multiatlas(
+      "SHADOW_BALL",
+      "/assets/attacks/SHADOW_BALL.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
       "EARTHQUAKE",
       "/assets/attacks/EARTHQUAKE.json",
       "/assets/attacks"
@@ -441,7 +446,9 @@ export default class GameScene extends Scene {
         this.animationManager
       )
       this.weatherManager = new WeatherManager(this)
-      this.music = this.sound.add("sound", { loop: true }) as Phaser.Sound.WebAudioSound	
+      this.music = this.sound.add("sound", {
+        loop: true
+      }) as Phaser.Sound.WebAudioSound
       const musicVolume = loadPreferences().musicVolume / 100
       this.music.play({ volume: musicVolume, loop: true })
     }

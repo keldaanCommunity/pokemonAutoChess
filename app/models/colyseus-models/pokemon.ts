@@ -2362,7 +2362,7 @@ export class Solosis extends Pokemon {
       AttackType.SPECIAL,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.SHADOW_BALL,
       shiny,
       emotion,
       false
@@ -2386,7 +2386,7 @@ export class Duosion extends Pokemon {
       AttackType.SPECIAL,
       2,
       100,
-      Ability.DEFAULT,
+      Ability.SHADOW_BALL,
       shiny,
       emotion,
       false
@@ -2410,7 +2410,7 @@ export class Reuniclus extends Pokemon {
       AttackType.SPECIAL,
       3,
       100,
-      Ability.DEFAULT,
+      Ability.SHADOW_BALL,
       shiny,
       emotion,
       true
