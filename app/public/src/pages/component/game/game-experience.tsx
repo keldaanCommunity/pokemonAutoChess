@@ -24,6 +24,7 @@ export default function GameExperience() {
       <span>Lvl {experienceManager.level}</span>
       <button
         className="bubbly orange buy-xp-button"
+        title="Buy 4 XP for 4 gold"
         onClick={() => { dispatch(levelClick()) }}
       >
         <Money value="Buy XP 4" />

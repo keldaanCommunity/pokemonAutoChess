@@ -176,6 +176,10 @@ select {
   cursor: var(--cursor-hover);
 }
 
+p:last-child {
+  margin-bottom: 0;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hidden-scrollable::-webkit-scrollbar {
   display: none;
@@ -506,6 +510,8 @@ select {
   font-weight: normal;
 }
 
+/* react-tabs */
+
 .react-tabs__tab {
   cursor: var(--cursor-hover);
   background-color: #40404080;
@@ -522,6 +528,22 @@ select {
   border-radius: 12px 12px 0px 0px !important;
   color: #fff !important;
   background-color: rgb(84, 89, 107) !important;
+}
+
+/* react-tooltip */
+
+#root .__react_component_tooltip {
+  font-size: 1vw;   
+}
+
+.__react_component_tooltip output {
+  color: white;
+}
+
+.__react_component_tooltip .help {
+  font-size: 80%;
+  font-style: italic;
+  color: #d0d0d0;
 }
 
 .spacer {
