@@ -190,7 +190,7 @@ export class Shuppet extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SHUPPET,
-      [Synergy.DARK, Synergy.GHOST, Synergy.ARTIFICIAL],
+      [Synergy.DARK, Synergy.GHOST],
       Rarity.LEGENDARY,
       Pkm.BANETTE,
       100,
@@ -214,7 +214,7 @@ export class Banette extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.BANETTE,
-      [Synergy.DARK, Synergy.GHOST, Synergy.ARTIFICIAL],
+      [Synergy.DARK, Synergy.GHOST],
       Rarity.LEGENDARY,
       Pkm.MEGA_BANETTE,
       140,
@@ -238,7 +238,7 @@ export class MegaBanette extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MEGA_BANETTE,
-      [Synergy.DARK, Synergy.GHOST, Synergy.ARTIFICIAL],
+      [Synergy.DARK, Synergy.GHOST],
       Rarity.LEGENDARY,
       Pkm.DEFAULT,
       240,
