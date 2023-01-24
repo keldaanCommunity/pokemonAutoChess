@@ -9,7 +9,7 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
 import { Client } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
-import { Title } from "../../types"
+import { Title, FIGHTING_PHASE_DURATION } from "../../types"
 import { MapSchema } from "@colyseus/schema"
 import { GamePhaseState, Rarity } from "../../types/enum/Game"
 import {
@@ -1198,7 +1198,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   initializeFightingPhase() {
     this.state.phase = GamePhaseState.FIGHT
-    this.state.time = 40000
+    this.state.time = FIGHTING_PHASE_DURATION
     this.state.stageLevel += 1
     this.state.botManager.updateBots()
 

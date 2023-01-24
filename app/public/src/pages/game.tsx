@@ -85,7 +85,9 @@ export function getGameContainer(): GameContainer {
 }
 
 export function getGameScene(): GameScene | undefined {
-  return gameContainer.game?.scene?.getScene("gameScene") as GameScene | undefined
+  return gameContainer.game?.scene?.getScene("gameScene") as
+    | GameScene
+    | undefined
 }
 
 export default function Game() {
@@ -256,6 +258,10 @@ export default function Game() {
 
       room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {
         gameContainer.handleDisplayDamage(message)
+      })
+
+      room.onMessage(Transfer.POKEMON_HEAL, (message) => {
+        gameContainer.handleDisplayHeal(message)
       })
 
       room.state.onChange = (changes) => {
@@ -484,7 +490,7 @@ export default function Game() {
           hideModal={setModalBoolean}
           leave={leave}
         />
-        <GameShop />        
+        <GameShop />
         <GamePlayerInformations />
         <GamePlayers click={(id: string) => playerClick(id)} />
         <GameSynergies />

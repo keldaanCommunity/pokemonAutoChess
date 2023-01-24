@@ -5,7 +5,11 @@ import GameScene from "../scenes/game-scene"
 import { Emotion, IPlayer, IPokemonEntity } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import { DataChange } from "@colyseus/schema"
-import { AttackType, PokemonActionState } from "../../../../types/enum/Game"
+import {
+  AttackType,
+  PokemonActionState,
+  HealType
+} from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
 import { getAvatarSrc, getPortraitSrc } from "../../utils"
@@ -365,7 +369,8 @@ export default class BattleManager {
           } else if (change.field == "critChance") {
             pkm.critChance = pokemon.critChance
             if (pkm.detail) {
-              pkm.detail.critChance.textContent = pokemon.critChance.toString()+"%"
+              pkm.detail.critChance.textContent =
+                pokemon.critChance.toString() + "%"
             }
           } else if (change.field == "critDamage") {
             pkm.critDamage = parseFloat(pokemon.critDamage.toFixed(2))
@@ -375,7 +380,8 @@ export default class BattleManager {
           } else if (change.field == "spellDamage") {
             pkm.spellDamage = pokemon.spellDamage
             if (pkm.detail) {
-              pkm.detail.spellDamage.textContent = pokemon.spellDamage.toString()
+              pkm.detail.spellDamage.textContent =
+                pokemon.spellDamage.toString()
             }
           } else if (change.field == "atkSpeed") {
             pkm.atkSpeed = pokemon.atkSpeed
@@ -636,64 +642,95 @@ export default class BattleManager {
       const color =
         type === AttackType.PHYSICAL
           ? "#e76e55"
-          : AttackType.SPECIAL
+          : type === AttackType.SPECIAL
           ? "#209cee"
           : "#f7d51d"
-      const textStyle = {
-        fontSize: "20px",
-        fontFamily: "Verdana",
-        color: color,
-        align: "center",
-        strokeThickness: 2,
-      stroke: "#000"
-      }
-      const dx = Math.round(50 * (Math.random() - 0.5))
-
-      const image = this.scene.add.existing(
-        new GameObjects.Image(
-          this.scene,
-          coordinates[0] + dx,
-          coordinates[1] - 60,
-          `portrait-${index}`
-        )
-          .setScale(0.5, 0.5)
-          .setOrigin(0, 0)
-      )
-      const text = this.scene.add.existing(
-        new GameObjects.Text(
-          this.scene,
-          coordinates[0] + dx + 25,
-          coordinates[1] - 60,
-          damage.toString(),
-          textStyle
-        )
-      )
-      image.setDepth(9)
-      text.setDepth(10)
-
-      this.scene.add.tween({
-        targets: [text, image],
-        ease: "linear",
-        duration: 1000,
-        delay: 500,
-        y: {
-          getStart: () => coordinates[1] - 60,
-          getEnd: () => coordinates[1] - 120
-        },
-        alpha: {
-          getStart: () => 1,
-        getEnd: () => 0
-        },
-      y: {
-        getStart: () => y - 30,
-        getEnd: () => y - 90
-      },
-        onComplete: () => {
-          image.destroy(true)
-          text.destroy(true)
-      }
-      })
+      this.displayTween(color, coordinates, index, damage)
     }
+  }
+
+  displayHeal(
+    positionX: number,
+    positionY: number,
+    amount: number,
+    type: HealType,
+    index: string,
+    id: string
+  ) {
+    if (this.player.id === id) {
+      const coordinates = transformAttackCoordinate(positionX, positionY)
+      const color = type === HealType.HEAL ? "#92cc41" : "#8d8d8d"
+      this.displayTween(color, coordinates, index, amount)
+    }
+  }
+
+  displayTween(
+    color: string,
+    coordinates: number[],
+    index: string,
+    amount: number
+  ) {
+    const fontSize =
+      amount < 10
+        ? "20px"
+        : amount < 20
+        ? "25px"
+        : amount < 30
+        ? "30px"
+        : amount < 50
+        ? "35px"
+        : "40px"
+    const textStyle = {
+      fontSize: fontSize,
+      fontFamily: "Verdana",
+      color: color,
+      align: "center",
+      strokeThickness: 2,
+      stroke: "#000"
+    }
+    const dy = Math.round(50 * (Math.random() - 0.5))
+
+    const image = this.scene.add.existing(
+      new GameObjects.Image(this.scene, 0, 0, `portrait-${index}`)
+        .setScale(0.5, 0.5)
+        .setOrigin(0, 0)
+    )
+    const text = this.scene.add.existing(
+      new GameObjects.Text(this.scene, 25, 0, amount.toString(), textStyle)
+    )
+    image.setDepth(9)
+    text.setDepth(10)
+
+    const container = this.scene.add.existing(
+      new GameObjects.Container(
+        this.scene,
+        coordinates[0] + 30,
+        coordinates[1] + dy,
+        [text, image]
+      )
+    )
+
+    this.scene.add.tween({
+      targets: [container],
+      ease: "linear",
+      duration: 1500,
+      delay: 0,
+      x: {
+        getStart: () => container.x,
+        getEnd: () => container.x + Math.random() * 50
+      },
+      y: {
+        getStart: () => container.y,
+        getEnd: () => container.y + Math.random() * 50
+      },
+      scale: {
+        getStart: () => 1,
+        getEnd: () => 0
+      },
+      onComplete: () => {
+        container.destroy(true)
+      }
+    })
   }
 
   setPlayer(player: IPlayer) {
