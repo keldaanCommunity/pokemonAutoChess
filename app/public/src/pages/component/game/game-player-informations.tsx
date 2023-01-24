@@ -1,11 +1,12 @@
 import React, { ReactElement } from "react"
 import { useAppSelector } from "../../../hooks"
 import { TitleName } from "../../../../../types"
-import GameMoney from "./game-money"
-import GameLife from "./game-life"
 import { getAvatarSrc } from "../../../utils"
 import TimerBar from "./game-timer-bar"
 import ReactTooltip from "react-tooltip"
+import { Life } from "../icons/life"
+import { Money } from "../icons/money"
+import GameMoneyDetail from "./game-money-detail"
 import "./game-player-informations.css";
 
 export default function GamePlayerInformations() {
@@ -64,8 +65,22 @@ export default function GamePlayerInformations() {
           </div>
         </div>
 
-        <GameMoney money={money} />
-        <GameLife life={life} />
+        <div className="nes-container money information">
+          <div data-tip data-for="detail-money">
+            <ReactTooltip
+              id="detail-money"
+              className="customeTheme"
+              effect="solid"
+              place="bottom"
+            >
+              <GameMoneyDetail />
+            </ReactTooltip>
+            <Money value={money} />
+          </div>
+        </div>
+        <div className="nes-container life information">
+          <div><Life value={life} /></div>
+        </div>
         <div className="nes-container player-information">
           <img src={getAvatarSrc(avatar)} />
           <p style={{ margin: "0px", color: "#ffc107" }}>{TitleName[title]}</p>
