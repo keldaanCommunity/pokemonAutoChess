@@ -333,7 +333,9 @@ export class ShadowBallStrategy extends AttackStrategy {
     const damage = pokemon.stars === 3 ? 300 : pokemon.stars === 2 ? 100 : 50
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
-
+    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+    target.setMana(target.mana - 30)
+    target.count.manaBurnCount++
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
