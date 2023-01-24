@@ -2612,6 +2612,7 @@ export class IcicleCrashStrategy extends AttackStrategy {
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 
+    target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpellDamage(
