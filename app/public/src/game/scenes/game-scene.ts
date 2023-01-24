@@ -21,6 +21,7 @@ import {
 } from "../../../../types"
 import { DesignTiled } from "../../../../core/design"
 import { loadPreferences } from "../../preferences"
+import { getPortraitSrc } from "../../utils"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -127,6 +128,7 @@ export default class GameScene extends Scene {
     })
 
     indexList.forEach((id) => {
+      this.load.image(`portrait-${id}`, getPortraitSrc(id))
       this.load.multiatlas(
         id,
         `/assets/pokemons/${id}.json`,

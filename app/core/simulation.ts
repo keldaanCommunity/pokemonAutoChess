@@ -15,6 +15,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { ItemRecipe } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
+import GameRoom from "../rooms/game-room"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") climate: Climate = Climate.NEUTRAL
@@ -24,6 +25,7 @@ export default class Simulation extends Schema implements ISimulation {
   @type({ map: Dps }) redDpsMeter = new MapSchema<Dps>()
   @type({ map: DpsHeal }) blueHealDpsMeter = new MapSchema<DpsHeal>()
   @type({ map: DpsHeal }) redHealDpsMeter = new MapSchema<DpsHeal>()
+  room: GameRoom
   blueEffects = new Array<Effect>()
   redEffects = new Array<Effect>()
   board: Board = new Board(8, 6)
@@ -31,6 +33,13 @@ export default class Simulation extends Schema implements ISimulation {
   flowerSpawn: boolean[] = [false, false]
   stageLevel: number = 0
   player: IPlayer | undefined
+  id: string
+
+  constructor(id: string, room: GameRoom) {
+    super()
+    this.id = id
+    this.room = room
+  }
 
   initialize(
     blueTeam: MapSchema<Pokemon>,

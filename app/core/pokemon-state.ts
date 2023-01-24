@@ -2,11 +2,11 @@
 import { Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Effect } from "../types/enum/Effect"
-import { AttackType } from "../types/enum/Game"
+import { AttackType, HealType } from "../types/enum/Game"
 import PokemonFactory from "../models/pokemon-factory"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
-import { IPokemonEntity } from "../types"
+import { IPokemonEntity, Transfer, FIGHTING_PHASE_DURATION } from "../types"
 import { Synergy } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
 import { FlyingProtectThreshold } from "../types/Config"
@@ -24,12 +24,24 @@ export default class PokemonState {
       !pokemon.status.wound
     ) {
       const boost = spellDamageBoost ? (heal * pokemon.spellDamage) / 100 : 0
-      pokemon.life = Math.min(
-        pokemon.hp,
-        pokemon.life + Math.round(heal + boost)
+      const healBoosted = Math.round(heal + boost)
+      const healTaken = Math.round(
+        Math.min(pokemon.hp - pokemon.life, healBoosted)
       )
-      if (caster) {
-        caster.healDone += heal
+      pokemon.life = Math.min(pokemon.hp, pokemon.life + healBoosted)
+
+      if (caster && healTaken > 0) {
+        if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
+          pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
+            index: caster.index,
+            type: HealType.HEAL,
+            amount: healTaken,
+            x: pokemon.positionX,
+            y: pokemon.positionY,
+            id: pokemon.simulation.id
+          })
+        }
+        caster.healDone += healTaken
       }
     }
   }
@@ -42,9 +54,20 @@ export default class PokemonState {
   ) {
     if (pokemon.life > 0) {
       const boost = spellDamageBoost ? (shield * pokemon.spellDamage) / 100 : 0
-      pokemon.shield += Math.round(shield + boost)
-      if (caster) {
-        caster.shieldDone += shield
+      const shieldBoosted = Math.round(shield + boost)
+      pokemon.shield += shieldBoosted
+      if (caster && shieldBoosted > 0) {
+        if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
+          pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
+            index: caster.index,
+            type: HealType.SHIELD,
+            amount: shieldBoosted,
+            x: pokemon.positionX,
+            y: pokemon.positionY,
+            id: pokemon.simulation.id
+          })
+        }
+        caster.shieldDone += shieldBoosted
       }
     }
   }
@@ -129,25 +152,30 @@ export default class PokemonState {
             : pokemon.effects.includes(Effect.DEFIANT)
             ? 6
             : 9
-          residualDamage = Math.max(1, residualDamage - damageReduction)
+          residualDamage = residualDamage - damageReduction
         }
 
         if (pokemon.skill == Ability.WONDER_GUARD) {
           residualDamage = 1
         }
 
+        const takenDamage = Math.max(
+          1,
+          Math.round(Math.min(residualDamage, pokemon.life))
+        )
+
         if (attacker && residualDamage > 0) {
           switch (attackType) {
             case AttackType.PHYSICAL:
-              attacker.physicalDamage += Math.min(residualDamage, pokemon.life)
+              attacker.physicalDamage += takenDamage
               break
 
             case AttackType.SPECIAL:
-              attacker.specialDamage += Math.min(residualDamage, pokemon.life)
+              attacker.specialDamage += takenDamage
               break
 
             case AttackType.TRUE:
-              attacker.trueDamage += Math.min(residualDamage, pokemon.life)
+              attacker.trueDamage += takenDamage
               break
 
             default:
@@ -155,7 +183,24 @@ export default class PokemonState {
           }
         }
 
+        if (attacker && takenDamage > 0) {
+          pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {
+            index: attacker.index,
+            type: attackType,
+            amount: takenDamage,
+            x: pokemon.positionX,
+            y: pokemon.positionY,
+            id: pokemon.simulation.id
+          })
+        }
+
+        if (pokemon.shield > 0) {
+          residualDamage = Math.max(0, reducedDamage - pokemon.shield)
+          pokemon.shield = Math.max(0, pokemon.shield - reducedDamage)
+        }
+
         pokemon.life = Math.max(0, pokemon.life - residualDamage)
+
         // console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
 
         if (pokemon) {

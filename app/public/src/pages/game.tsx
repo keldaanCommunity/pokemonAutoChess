@@ -45,7 +45,7 @@ import {
   displayEmote,
   setCurrentPlayerTitle,
   setPokemonProposition,
-  setAdditionalPokemons,
+  setAdditionalPokemons
 } from "../stores/GameStore"
 import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "./utils/utils"
@@ -65,7 +65,7 @@ import {
   IDragDropItemMessage,
   IDragDropMessage,
   Transfer,
-  ISimplePlayer,
+  ISimplePlayer
 } from "../../../types"
 import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
@@ -85,7 +85,9 @@ export function getGameContainer(): GameContainer {
 }
 
 export function getGameScene(): GameScene | undefined {
-  return gameContainer.game?.scene?.getScene("gameScene") as GameScene | undefined
+  return gameContainer.game?.scene?.getScene("gameScene") as
+    | GameScene
+    | undefined
 }
 
 export default function Game() {
@@ -155,7 +157,7 @@ export default function Game() {
 
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: savePlayers,
-      idToken: token,
+      idToken: token
     })
     localStorage.setItem("lastRoomId", r.id)
     localStorage.setItem("lastSessionId", r.sessionId)
@@ -254,6 +256,14 @@ export default function Game() {
         dispatch(displayEmote({ id: message.id, emote: message.emote }))
       })
 
+      room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {
+        gameContainer.handleDisplayDamage(message)
+      })
+
+      room.onMessage(Transfer.POKEMON_HEAL, (message) => {
+        gameContainer.handleDisplayHeal(message)
+      })
+
       room.state.onChange = (changes) => {
         changes.forEach((change) => {
           if (change.field == "roundTime") {
@@ -278,7 +288,7 @@ export default function Game() {
           const i = React.createElement(
             "img",
             {
-              src: getPortraitSrc(PkmIndex[pkm]),
+              src: getPortraitSrc(PkmIndex[pkm])
             },
             null
           )
@@ -343,7 +353,7 @@ export default function Game() {
               dispatch(
                 setCurrentPlayerExperienceManager({
                   id: player.id,
-                  value: change.value,
+                  value: change.value
                 })
               )
             } else if (change.field == "avatar") {
@@ -397,7 +407,7 @@ export default function Game() {
                 changeBlueDpsMeter({
                   id: dps.id,
                   change: change,
-                  playerId: player.id,
+                  playerId: player.id
                 })
               )
             })
@@ -415,7 +425,7 @@ export default function Game() {
                 changeRedDpsMeter({
                   id: dps.id,
                   change: change,
-                  playerId: player.id,
+                  playerId: player.id
                 })
               )
             })
@@ -433,7 +443,7 @@ export default function Game() {
                 changeBlueHealDpsMeter({
                   id: dps.id,
                   change: change,
-                  playerId: player.id,
+                  playerId: player.id
                 })
               )
             })
@@ -451,7 +461,7 @@ export default function Game() {
                 changeRedHealDpsMeter({
                   id: dps.id,
                   change: change,
-                  playerId: player.id,
+                  playerId: player.id
                 })
               )
             })
@@ -480,7 +490,7 @@ export default function Game() {
           hideModal={setModalBoolean}
           leave={leave}
         />
-        <GameShop />        
+        <GameShop />
         <GamePlayerInformations />
         <GamePlayers click={(id: string) => playerClick(id)} />
         <GameSynergies />

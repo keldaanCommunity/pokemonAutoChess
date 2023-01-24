@@ -95,7 +95,8 @@ export default class GameRoom extends Room<GameState> {
           this.state.players.size + 1,
           new Map<string, PokemonConfig>(),
           "",
-          Role.BOT
+          Role.BOT,
+          this
         )
         this.state.players.set(user.id, player)
         this.state.botManager.addBot(player)
