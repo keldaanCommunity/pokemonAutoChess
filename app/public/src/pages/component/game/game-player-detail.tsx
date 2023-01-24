@@ -2,8 +2,8 @@ import React from "react"
 import HistoryItem from "../../../../../models/colyseus-models/history-item"
 import { BattleResult } from "../../../../../types/enum/Game"
 import { ArraySchema } from "@colyseus/schema"
-import GameLife from "./game-life"
-import GameMoney from "./game-money"
+import { Life } from "../icons/life"
+import { Money } from "../icons/money"
 import { getAvatarSrc } from "../../../utils"
 
 export default function GamePlayerDetail(props: {
@@ -14,10 +14,14 @@ export default function GamePlayerDetail(props: {
 }) {
   return (
     <div>
-      <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+      <div style={{ display: "flex", gap: "10px", marginBottom: "10px", alignItems: "center" }}>
         <h4>{props.name}</h4>
-        <GameLife life={props.life} />
-        <GameMoney money={props.money} />
+        <div className="nes-container">
+          <Life value={props.life} />
+        </div>
+        <div className="nes-container">
+          <Money value={props.money} />
+        </div>        
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         {props.history.map((record, i) => {
