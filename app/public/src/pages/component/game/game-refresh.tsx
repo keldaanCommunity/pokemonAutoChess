@@ -1,5 +1,4 @@
 import React from "react"
-import CSS from "csstype"
 import { useAppDispatch } from "../../../hooks"
 import { refreshClick } from "../../../stores/NetworkStore"
 import { Money } from "../icons/money"
@@ -9,6 +8,7 @@ export default function GameRefresh() {
   return (
     <button
       className="bubbly blue refresh-button"
+      title="Refresh shop for 1 gold"
       onClick={() => {
         dispatch(refreshClick())
       }}

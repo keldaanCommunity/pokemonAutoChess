@@ -5,32 +5,10 @@ import GameMoneyDetail from "./game-money-detail"
 
 export default function GameMoney(props: { money: number }) {
   return (
-    <div
-      className="nes-container"
-      style={{
-        backgroundColor: "#54596b",
-        padding: ".001px",
-        display: "flex",
-        width: "5vw",
-        height: "100%",
-        backgroundImage: 'url("assets/ui/money-bg.png"',
-        backgroundSize: "cover"
-      }}
-    >
-      <div
-        style={{
-          background: "#54596b",
-          display: "flex",
-          alignItems: "center",
-          borderRadius: "7px",
-          height: "100%",
-          padding: "0 0.5em"
-        }}
-        data-tip
-        data-for={"detail-money"}
-      >
+    <div className="nes-container money information">
+      <div data-tip data-for="detail-money">
         <ReactTooltip
-          id={"detail-money"}
+          id="detail-money"
           className="customeTheme"
           effect="solid"
           place="bottom"
