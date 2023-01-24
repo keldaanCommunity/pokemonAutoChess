@@ -8825,7 +8825,7 @@ export class Genesect extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.GENESECT,
-      [Synergy.BUG, Synergy.METAL],
+      [Synergy.BUG, Synergy.METAL, Synergy.ARTIFICIAL],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       270,
