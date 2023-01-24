@@ -443,7 +443,7 @@ export default class Simulation extends Schema implements ISimulation {
           if (value) {
             value.status.deltaOrb = true
           }
-    })
+        })
       }
     })
 
@@ -532,7 +532,7 @@ export default class Simulation extends Schema implements ISimulation {
           if (value) {
             value.status.deltaOrb = true
           }
-    })
+        })
       }
     })
 
@@ -793,21 +793,21 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.AMNESIA:
           if (types.includes(Synergy.PSYCHIC)) {
-          pokemon.effects.push(Effect.AMNESIA)
+            pokemon.effects.push(Effect.AMNESIA)
             pokemon.addSpellDamage(50)
           }
           break
 
         case Effect.LIGHT_SCREEN:
           if (types.includes(Synergy.PSYCHIC)) {
-          pokemon.effects.push(Effect.LIGHT_SCREEN)
+            pokemon.effects.push(Effect.LIGHT_SCREEN)
             pokemon.addSpellDamage(100)
           }
           break
 
         case Effect.EERIE_SPELL:
           if (types.includes(Synergy.PSYCHIC)) {
-          pokemon.effects.push(Effect.EERIE_SPELL)
+            pokemon.effects.push(Effect.EERIE_SPELL)
             pokemon.addSpellDamage(150)
           }
           break
