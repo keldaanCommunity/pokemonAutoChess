@@ -838,7 +838,7 @@ export class Elekid extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ELEKID,
-      [Synergy.ELECTRIC, Synergy.HUMAN],
+      [Synergy.ELECTRIC, Synergy.ARTIFICIAL],
       Rarity.EPIC,
       Pkm.ELECTABUZZ,
       90,
@@ -862,7 +862,7 @@ export class Electabuzz extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ELECTABUZZ,
-      [Synergy.ELECTRIC, Synergy.HUMAN],
+      [Synergy.ELECTRIC, Synergy.ARTIFICIAL],
       Rarity.EPIC,
       Pkm.ELECTIVIRE,
       130,
@@ -886,7 +886,7 @@ export class Electivire extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ELECTIVIRE,
-      [Synergy.ELECTRIC, Synergy.HUMAN],
+      [Synergy.ELECTRIC, Synergy.ARTIFICIAL],
       Rarity.EPIC,
       Pkm.DEFAULT,
       230,
