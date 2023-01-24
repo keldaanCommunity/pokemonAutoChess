@@ -370,34 +370,38 @@ export default class PokemonState {
       ) {
         if (!pokemon.simulation.flowerSpawn[pokemon.team]) {
           pokemon.simulation.flowerSpawn[pokemon.team] = true
-          if (pokemon.effects.includes(Effect.ODD_FLOWER)) {
-            pokemon.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.ODDISH),
-              pokemon.positionX,
-              pokemon.positionY,
-              pokemon.team
-            )
-          } else if (pokemon.effects.includes(Effect.GLOOM_FLOWER)) {
-            pokemon.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.GLOOM),
-              pokemon.positionX,
-              pokemon.positionY,
-              pokemon.team
-            )
-          } else if (pokemon.effects.includes(Effect.VILE_FLOWER)) {
-            pokemon.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.VILEPLUME),
-              pokemon.positionX,
-              pokemon.positionY,
-              pokemon.team
-            )
-          } else if (pokemon.effects.includes(Effect.SUN_FLOWER)) {
-            pokemon.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM),
-              pokemon.positionX,
-              pokemon.positionY,
-              pokemon.team
-            )
+          const nearestAvailableCoordinate =
+            this.getFarthestTargetCoordinateAvailablePlace(pokemon, board)
+          if (nearestAvailableCoordinate) {
+            if (pokemon.effects.includes(Effect.ODD_FLOWER)) {
+              pokemon.simulation.addPokemon(
+                PokemonFactory.createPokemonFromName(Pkm.ODDISH),
+                nearestAvailableCoordinate.x,
+                nearestAvailableCoordinate.y,
+                pokemon.team
+              )
+            } else if (pokemon.effects.includes(Effect.GLOOM_FLOWER)) {
+              pokemon.simulation.addPokemon(
+                PokemonFactory.createPokemonFromName(Pkm.GLOOM),
+                nearestAvailableCoordinate.x,
+                nearestAvailableCoordinate.y,
+                pokemon.team
+              )
+            } else if (pokemon.effects.includes(Effect.VILE_FLOWER)) {
+              pokemon.simulation.addPokemon(
+                PokemonFactory.createPokemonFromName(Pkm.VILEPLUME),
+                nearestAvailableCoordinate.x,
+                nearestAvailableCoordinate.y,
+                pokemon.team
+              )
+            } else if (pokemon.effects.includes(Effect.SUN_FLOWER)) {
+              pokemon.simulation.addPokemon(
+                PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM),
+                nearestAvailableCoordinate.x,
+                nearestAvailableCoordinate.y,
+                pokemon.team
+              )
+            }
           }
         }
       }
