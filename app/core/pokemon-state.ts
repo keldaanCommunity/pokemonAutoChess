@@ -557,7 +557,7 @@ export default class PokemonState {
       pokemon.setMana(pokemon.mana + 10)
 
       pokemon.manaCooldown = 1000
-      if (pokemon.mana >= pokemon.maxMana) {
+      if (pokemon.mana >= pokemon.maxMana && !pokemon.status.silence) {
         if (pokemon.targetX == -1 || pokemon.targetY == -1) {
           const targetCoordinate = this.getNearestTargetCoordinate(
             pokemon,
