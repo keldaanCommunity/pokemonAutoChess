@@ -31,6 +31,9 @@ import { Item } from "./enum/Item"
 import { Pkm } from "./enum/Pokemon"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
+import GameRoom from "../rooms/game-room"
+
+export const FIGHTING_PHASE_DURATION = 40000
 
 export const CDN_PORTRAIT_URL =
   "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/"
@@ -133,7 +136,9 @@ export enum Transfer {
   REQUEST_BOT_LEADERBOARD = "REQUEST_BOT_LEADERBOARD",
   POKEMON_PROPOSITION = "POKEMON_PROPOSITION",
   KICK = "KICK",
-  BAN = "BAN"
+  BAN = "BAN",
+  POKEMON_DAMAGE = "POKEMON_DAMAGE",
+  POKEMON_HEAL = "POKEMON_HEAL"
 }
 
 export enum AttackSprite {
@@ -302,6 +307,8 @@ export interface IExperienceManager {
 }
 
 export interface ISimulation {
+  room: GameRoom
+  id: string
   climate: string
   blueEffects: Effect[]
   redEffects: Effect[]
@@ -339,6 +346,8 @@ export function instanceofPokemonEntity(obj: IPokemon | IPokemonEntity) {
 }
 
 export interface IPokemonEntity {
+  simulation: ISimulation
+  addSpellDamage(value: number): void
   addAttack(atk: number): void
   handleShield(shieldBonus: number, pokemon: IPokemonEntity)
   update(dt: number, board: board, climate: string)

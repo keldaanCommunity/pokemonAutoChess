@@ -33,6 +33,9 @@
 .lobby .user-chat {
     grid-area: chat;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .lobby h1 {    

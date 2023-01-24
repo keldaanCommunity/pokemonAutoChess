@@ -8,6 +8,7 @@ import GameState from "../../../rooms/states/game-state"
 import { Pokemon } from "../../../models/colyseus-models/pokemon"
 import { DataChange } from "@colyseus/schema"
 import {
+  Emotion,
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
@@ -25,6 +26,7 @@ import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { getPortraitSrc } from "../utils"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Synergy } from "../../../types/enum/Synergy"
+import { AttackType, HealType } from "../../../types/enum/Game"
 
 class GameContainer {
   room: Room<GameState>
@@ -396,6 +398,52 @@ class GameContainer {
           default:
             break
         }
+      }
+    }
+  }
+
+  handleDisplayHeal(message: {
+    type: HealType
+    id: string
+    x: number
+    y: number
+    index: string
+    amount: number
+  }) {
+    if (this.game && this.game.scene && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.battle) {
+        g.battle.displayHeal(
+          message.x,
+          message.y,
+          message.amount,
+          message.type,
+          message.index,
+          message.id
+        )
+      }
+    }
+  }
+
+  handleDisplayDamage(message: {
+    type: AttackType
+    id: string
+    x: number
+    y: number
+    index: string
+    amount: number
+  }) {
+    if (this.game && this.game.scene && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.battle) {
+        g.battle.displayDamage(
+          message.x,
+          message.y,
+          message.amount,
+          message.type,
+          message.index,
+          message.id
+        )
       }
     }
   }

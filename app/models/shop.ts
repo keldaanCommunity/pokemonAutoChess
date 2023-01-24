@@ -106,7 +106,8 @@ export default class Shop {
       Pkm.ELECTRIKE,
       Pkm.SHUPPET,
       Pkm.NINCADA,
-      Pkm.HAPPINY
+      Pkm.HAPPINY,
+      Pkm.SOLOSIS
     ]
 
     this.MYTHICAL_1 = [

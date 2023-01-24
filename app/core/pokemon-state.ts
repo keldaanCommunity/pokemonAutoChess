@@ -2,11 +2,11 @@
 import { Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Effect } from "../types/enum/Effect"
-import { AttackType } from "../types/enum/Game"
+import { AttackType, HealType } from "../types/enum/Game"
 import PokemonFactory from "../models/pokemon-factory"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
-import { IPokemonEntity } from "../types"
+import { IPokemonEntity, Transfer, FIGHTING_PHASE_DURATION } from "../types"
 import { Synergy } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
 import { FlyingProtectThreshold } from "../types/Config"
@@ -15,16 +15,33 @@ export default class PokemonState {
   handleHeal(
     pokemon: IPokemonEntity,
     heal: number,
-    caster: IPokemonEntity
+    caster: IPokemonEntity,
+    spellDamageBoost?: boolean
   ): void {
     if (
       pokemon.life > 0 &&
       pokemon.life < pokemon.hp &&
       !pokemon.status.wound
     ) {
-      pokemon.life = Math.min(pokemon.hp, pokemon.life + Math.round(heal))
-      if (caster) {
-        caster.healDone += heal
+      const boost = spellDamageBoost ? (heal * pokemon.spellDamage) / 100 : 0
+      const healBoosted = Math.round(heal + boost)
+      const healTaken = Math.round(
+        Math.min(pokemon.hp - pokemon.life, healBoosted)
+      )
+      pokemon.life = Math.min(pokemon.hp, pokemon.life + healBoosted)
+
+      if (caster && healTaken > 0) {
+        if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
+          pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
+            index: caster.index,
+            type: HealType.HEAL,
+            amount: healTaken,
+            x: pokemon.positionX,
+            y: pokemon.positionY,
+            id: pokemon.simulation.id
+          })
+        }
+        caster.healDone += healTaken
       }
     }
   }
@@ -32,12 +49,25 @@ export default class PokemonState {
   handleShield(
     pokemon: IPokemonEntity,
     shield: number,
-    caster: IPokemonEntity
+    caster: IPokemonEntity,
+    spellDamageBoost?: boolean
   ) {
     if (pokemon.life > 0) {
-      pokemon.shield += Math.round(shield)
-      if (caster) {
-        caster.shieldDone += shield
+      const boost = spellDamageBoost ? (shield * pokemon.spellDamage) / 100 : 0
+      const shieldBoosted = Math.round(shield + boost)
+      pokemon.shield += shieldBoosted
+      if (caster && shieldBoosted > 0) {
+        if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
+          pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
+            index: caster.index,
+            type: HealType.SHIELD,
+            amount: shieldBoosted,
+            x: pokemon.positionX,
+            y: pokemon.positionY,
+            id: pokemon.simulation.id
+          })
+        }
+        caster.shieldDone += shieldBoosted
       }
     }
   }
@@ -57,12 +87,9 @@ export default class PokemonState {
       death = false
       if (!pokemon.status.protect) {
         let reducedDamage = damage
-        if (attacker && attacker.items.has(Item.FIRE_GEM)) {
-          if (pokemon.life > 200) {
-            reducedDamage = Math.ceil(reducedDamage * 1.6)
-          } else {
-            reducedDamage = Math.ceil(reducedDamage * 1.2)
-          }
+
+        if (pokemon.items.has(Item.POKE_DOLL)) {
+          reducedDamage = Math.ceil(reducedDamage * 0.7)
         }
 
         if (attacker && attacker.status.electricField) {
@@ -81,14 +108,8 @@ export default class PokemonState {
           reducedDamage *= 3
         }
         const armorFactor = 0.1
-        const def =
-          attacker && attacker.items.has(Item.RAZOR_FANG)
-            ? Math.round(0.7 * pokemon.def)
-            : pokemon.def
-        const speDef =
-          attacker && attacker.items.has(Item.RAZOR_FANG)
-            ? Math.round(0.7 * pokemon.speDef)
-            : pokemon.speDef
+        const def = pokemon.def
+        const speDef = pokemon.speDef
         if (attackType == AttackType.PHYSICAL) {
           const ritodamage =
             damage * (pokemon.life / (pokemon.life * (1 + armorFactor * def)))
@@ -131,25 +152,30 @@ export default class PokemonState {
             : pokemon.effects.includes(Effect.DEFIANT)
             ? 6
             : 9
-          residualDamage = Math.max(1, residualDamage - damageReduction)
+          residualDamage = residualDamage - damageReduction
         }
 
         if (pokemon.skill == Ability.WONDER_GUARD) {
           residualDamage = 1
         }
 
+        const takenDamage = Math.max(
+          1,
+          Math.round(Math.min(residualDamage, pokemon.life))
+        )
+
         if (attacker && residualDamage > 0) {
           switch (attackType) {
             case AttackType.PHYSICAL:
-              attacker.physicalDamage += Math.min(residualDamage, pokemon.life)
+              attacker.physicalDamage += takenDamage
               break
 
             case AttackType.SPECIAL:
-              attacker.specialDamage += Math.min(residualDamage, pokemon.life)
+              attacker.specialDamage += takenDamage
               break
 
             case AttackType.TRUE:
-              attacker.trueDamage += Math.min(residualDamage, pokemon.life)
+              attacker.trueDamage += takenDamage
               break
 
             default:
@@ -157,19 +183,34 @@ export default class PokemonState {
           }
         }
 
+        if (attacker && takenDamage > 0) {
+          pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {
+            index: attacker.index,
+            type: attackType,
+            amount: takenDamage,
+            x: pokemon.positionX,
+            y: pokemon.positionY,
+            id: pokemon.simulation.id
+          })
+        }
+
+        if (pokemon.shield > 0) {
+          residualDamage = Math.max(0, reducedDamage - pokemon.shield)
+          pokemon.shield = Math.max(0, pokemon.shield - reducedDamage)
+        }
+
         pokemon.life = Math.max(0, pokemon.life - residualDamage)
+
         // console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
 
         if (pokemon) {
           pokemon.setMana(pokemon.mana + Math.ceil(residualDamage / 10))
 
-          if (
-            pokemon.items.has(Item.DEFENSIVE_RIBBON) &&
-            pokemon.count.defensiveRibbonCount < 5
-          ) {
+          if (pokemon.items.has(Item.DEFENSIVE_RIBBON)) {
             pokemon.addAttack(1)
             pokemon.addDefense(1)
             pokemon.addSpecialDefense(1)
+            pokemon.handleAttackSpeed(5)
             pokemon.count.defensiveRibbonCount++
           }
 
@@ -225,7 +266,7 @@ export default class PokemonState {
               attacker
             )
           }
-          if (attacker.items.has(Item.KINGS_ROCK)) {
+          if (attacker.items.has(Item.SHELL_BELL)) {
             attacker.handleHeal(Math.floor(0.5 * residualDamage), attacker)
           }
 
@@ -315,6 +356,24 @@ export default class PokemonState {
     if (death && pokemon) {
       if (
         attacker &&
+        attacker.items.has(Item.KINGS_ROCK) &&
+        attacker.team === 0 &&
+        attacker.simulation.player
+      ) {
+        attacker.simulation.player.money += 1
+      }
+
+      if (attacker && attacker.items.has(Item.FIRE_GEM)) {
+        const boost =
+          attacker.simulation.stageLevel < 10
+            ? 5
+            : attacker.simulation.stageLevel < 20
+            ? 10
+            : 15
+        attacker.addAttack(boost)
+      }
+      if (
+        attacker &&
         (attacker.effects.includes(Effect.PURSUIT) ||
           attacker.effects.includes(Effect.BRUTAL_SWING) ||
           attacker.effects.includes(Effect.POWER_TRIP))
@@ -356,34 +415,38 @@ export default class PokemonState {
       ) {
         if (!pokemon.simulation.flowerSpawn[pokemon.team]) {
           pokemon.simulation.flowerSpawn[pokemon.team] = true
-          if (pokemon.effects.includes(Effect.ODD_FLOWER)) {
-            pokemon.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.ODDISH),
-              pokemon.positionX,
-              pokemon.positionY,
-              pokemon.team
-            )
-          } else if (pokemon.effects.includes(Effect.GLOOM_FLOWER)) {
-            pokemon.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.GLOOM),
-              pokemon.positionX,
-              pokemon.positionY,
-              pokemon.team
-            )
-          } else if (pokemon.effects.includes(Effect.VILE_FLOWER)) {
-            pokemon.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.VILEPLUME),
-              pokemon.positionX,
-              pokemon.positionY,
-              pokemon.team
-            )
-          } else if (pokemon.effects.includes(Effect.SUN_FLOWER)) {
-            pokemon.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM),
-              pokemon.positionX,
-              pokemon.positionY,
-              pokemon.team
-            )
+          const nearestAvailableCoordinate =
+            this.getFarthestTargetCoordinateAvailablePlace(pokemon, board)
+          if (nearestAvailableCoordinate) {
+            if (pokemon.effects.includes(Effect.ODD_FLOWER)) {
+              pokemon.simulation.addPokemon(
+                PokemonFactory.createPokemonFromName(Pkm.ODDISH),
+                nearestAvailableCoordinate.x,
+                nearestAvailableCoordinate.y,
+                pokemon.team
+              )
+            } else if (pokemon.effects.includes(Effect.GLOOM_FLOWER)) {
+              pokemon.simulation.addPokemon(
+                PokemonFactory.createPokemonFromName(Pkm.GLOOM),
+                nearestAvailableCoordinate.x,
+                nearestAvailableCoordinate.y,
+                pokemon.team
+              )
+            } else if (pokemon.effects.includes(Effect.VILE_FLOWER)) {
+              pokemon.simulation.addPokemon(
+                PokemonFactory.createPokemonFromName(Pkm.VILEPLUME),
+                nearestAvailableCoordinate.x,
+                nearestAvailableCoordinate.y,
+                pokemon.team
+              )
+            } else if (pokemon.effects.includes(Effect.SUN_FLOWER)) {
+              pokemon.simulation.addPokemon(
+                PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM),
+                nearestAvailableCoordinate.x,
+                nearestAvailableCoordinate.y,
+                pokemon.team
+              )
+            }
           }
         }
       }
@@ -474,10 +537,6 @@ export default class PokemonState {
       pokemon.status.updateWound(dt)
     }
 
-    if (pokemon.status.temporaryShield) {
-      pokemon.status.updateShield(dt, pokemon)
-    }
-
     if (pokemon.status.soulDew) {
       pokemon.status.updateSoulDew(dt, pokemon)
     }
@@ -494,15 +553,11 @@ export default class PokemonState {
       pokemon.status.updateArmorReduction(dt)
     }
 
-    if (pokemon.status.flameOrb) {
-      pokemon.status.updateFlameOrb(dt, pokemon, board)
-    }
-
     if (pokemon.manaCooldown <= 0) {
       pokemon.setMana(pokemon.mana + 10)
 
       pokemon.manaCooldown = 1000
-      if (pokemon.mana >= pokemon.maxMana) {
+      if (pokemon.mana >= pokemon.maxMana && !pokemon.status.silence) {
         if (pokemon.targetX == -1 || pokemon.targetY == -1) {
           const targetCoordinate = this.getNearestTargetCoordinate(
             pokemon,

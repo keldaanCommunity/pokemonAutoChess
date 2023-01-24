@@ -21,6 +21,7 @@ import {
 } from "../../../../types"
 import { DesignTiled } from "../../../../core/design"
 import { loadPreferences } from "../../preferences"
+import { getPortraitSrc } from "../../utils"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -127,6 +128,7 @@ export default class GameScene extends Scene {
     })
 
     indexList.forEach((id) => {
+      this.load.image(`portrait-${id}`, getPortraitSrc(id))
       this.load.multiatlas(
         id,
         `/assets/pokemons/${id}.json`,
@@ -276,6 +278,11 @@ export default class GameScene extends Scene {
     this.load.multiatlas(
       "EXPLOSION",
       "/assets/attacks/EXPLOSION.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
+      "SHADOW_BALL",
+      "/assets/attacks/SHADOW_BALL.json",
       "/assets/attacks"
     )
     this.load.multiatlas(
@@ -441,7 +448,9 @@ export default class GameScene extends Scene {
         this.animationManager
       )
       this.weatherManager = new WeatherManager(this)
-      this.music = this.sound.add("sound", { loop: true }) as Phaser.Sound.WebAudioSound	
+      this.music = this.sound.add("sound", {
+        loop: true
+      }) as Phaser.Sound.WebAudioSound
       const musicVolume = loadPreferences().musicVolume / 100
       this.music.play({ volume: musicVolume, loop: true })
     }

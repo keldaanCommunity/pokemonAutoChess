@@ -95,7 +95,8 @@ export default class GameRoom extends Room<GameState> {
           this.state.players.size + 1,
           new Map<string, PokemonConfig>(),
           "",
-          Role.BOT
+          Role.BOT,
+          this
         )
         this.state.players.set(user.id, player)
         this.state.botManager.addBot(player)
@@ -381,7 +382,7 @@ export default class GameRoom extends Room<GameState> {
               } else {
                 usr.exp = usr.exp + exp
               }
-              usr.exp = isNaN(usr.exp) ? usr.exp : 0
+              usr.exp = !isNaN(usr.exp) ? usr.exp : 0
               if (rank == 1) {
                 usr.wins += 1
               }

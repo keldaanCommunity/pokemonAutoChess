@@ -36,8 +36,6 @@ krokorok,0552/AnimData.xml
 krokorok,0552/0000/0001/AnimData.xml
 krookodile,0553/AnimData.xml
 krookodile,0553/0000/0001/AnimData.xml
-reuniclus,0579/AnimData.xml
-reuniclus,0579/0000/0001/AnimData.xml
 tirtouga,0564/AnimData.xml
 tirtouga,0564/0000/0001/AnimData.xml
 carracosta,0565/AnimData.xml
