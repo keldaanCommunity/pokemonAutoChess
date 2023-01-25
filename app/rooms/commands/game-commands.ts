@@ -594,14 +594,7 @@ export class OnSellDropCommand extends Command<
     if (player) {
       const pokemon = player.board.get(detail.pokemonId)
       if (pokemon) {
-        if (PokemonFactory.getPokemonBaseEvolution(pokemon.name) == Pkm.EEVEE) {
-          player.money += PkmCost[pokemon.rarity]
-        } else if (pokemon.types.includes(Synergy.FOSSIL)) {
-          player.money += 5 + PkmCost[pokemon.rarity] * pokemon.stars
-        } else {
-          player.money += PkmCost[pokemon.rarity] * pokemon.stars
-        }
-
+        player.money += PokemonFactory.getSellPrice(pokemon.name)
         pokemon.items.forEach((it) => {
           player.items.add(it)
         })
