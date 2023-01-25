@@ -1,33 +1,14 @@
 import React, { ReactElement } from "react"
-import CSS from "csstype"
 import { useAppSelector } from "../../../hooks"
 import { TitleName } from "../../../../../types"
 import GameMoney from "./game-money"
 import GameLife from "./game-life"
 import { getAvatarSrc } from "../../../utils"
 import TimerBar from "./game-timer-bar"
-
-const style: CSS.Properties = {
-  position: "absolute",
-  top: ".5%",
-  left: "30%",
-  display: "flex",
-  justifyContent: "space-between",
-  padding: "5px",
-  minWidth: "40%",
-  height: "8%",
-  alignItems: "center",
-  color: "white",
-  borderRadius: "12px 12px 0 0"
-}
+import ReactTooltip from "react-tooltip"
+import "./game-player-informations.css"
 
 export default function GamePlayerInformations() {
-  const opponentName = useAppSelector(
-    (state) => state.game.currentPlayerOpponentName
-  )
-  const opponentAvatar = useAppSelector(
-    (state) => state.game.currentPlayerOpponentAvatar
-  )
   const experienceManager = useAppSelector(
     (state) => state.game.currentPlayerExperienceManager
   )
@@ -40,88 +21,43 @@ export default function GamePlayerInformations() {
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
   const roundTime = useAppSelector((state) => state.game.roundTime)
 
-  let opponent: null | ReactElement = null
-  const vs =
-    opponentAvatar != "" && opponentName != "" ? (
-      <p style={{ color: "white", fontSize: "1.3vw" }}>Vs</p>
-    ) : null
-  if (opponentName != "" && opponentAvatar != "") {
-    opponent = (
-      <div
-        className="nes-container"
-        style={{
-          backgroundColor: "#54596b",
-          padding: "5px",
-          display: "flex",
-          height: "100%"
-        }}
-      >
-        <img src={getAvatarSrc(opponentAvatar)} />
-        <p style={{ marginLeft: "5px", color: "white" }}>{opponentName}</p>
-      </div>
-    )
-  }
-
   return (
     <>
-      <div style={style} className="nes-container">
-        <div style={{ width: "4vw", textAlign: "center" }}>
-          <p style={{ margin: 0 }}>Stage {stageLevel}</p>
-          <p style={{ margin: 0 }}>{roundTime}s</p>
+      <div id="game-player-informations" className="nes-container">
+        <div className="stage-information">
+          <p>Stage {stageLevel}</p>
+          <p>{roundTime}s</p>
         </div>
-        <div
-          className="nes-container"
-          style={{
-            backgroundColor: "#54596b",
-            padding: ".001px",
-            display: "flex",
-            width: "5vw",
-            height: "100%",
-            backgroundImage: 'url("assets/ui/pokeball-bg.png")',
-            backgroundSize: "cover"
-          }}
-        >
-          <div
-            style={{
-              background: "#54596b",
-              display: "flex",
-              alignItems: "center",
-              borderRadius: "7px",
-              height: "100%",
-              padding: "0 0.5em"
-            }}
-          >
-            <span style={{ color: "white" }}>
-                {boardSize}/{experienceManager.level}
+        <div className="nes-container team-size information">
+          <div data-tip data-for="detail-team-size">
+            <ReactTooltip
+              id="detail-team-size"
+              className="customeTheme"
+              effect="solid"
+              place="bottom"
+            >
+              <p className="help">
+                Place up to <output>{experienceManager.level}</output> pokemons
+                on your board.
+              </p>
+              <p className="help">Increase your team size by leveling up</p>
+            </ReactTooltip>
+            <span>
+              {boardSize}/{experienceManager.level}
             </span>
-            <img
-              style={{ width: "1vw", height: "1vw" }}
-              src="assets/ui/pokeball.svg"
-            />
+            <img className="icon" src="assets/ui/pokeball.svg" />
           </div>
         </div>
 
         <GameMoney money={money} />
         <GameLife life={life} />
-        <div
-          className="nes-container"
-          style={{
-            backgroundColor: "#54596b",
-            padding: "5px",
-            display: "flex",
-            minWidth: "15%",
-            height: "100%",
-            gap: "5px"
-          }}
-        >
+        <div className="nes-container player-information">
           <img src={getAvatarSrc(avatar)} />
           <p style={{ margin: "0px", color: "#ffc107" }}>{TitleName[title]}</p>
           <p style={{ marginLeft: "5px", color: "white", textAlign: "center" }}>
             {name}
           </p>
         </div>
-        {vs}
-        {opponent}
       </div>
       <TimerBar />
     </>

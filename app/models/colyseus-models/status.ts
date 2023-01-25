@@ -20,11 +20,9 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") runeProtect = false
   @type("boolean") electricField = false
   @type("boolean") psychicField = false
-  temporaryShield = false
   soulDew = false
   brightPowder = false
-  flameOrb = false
-  changeTeam = false
+  deltaOrb = false
   burnOrigin: PokemonEntity | undefined = undefined
   poisonOrigin: PokemonEntity | undefined = undefined
   burnCooldown = 0
@@ -35,13 +33,10 @@ export default class Status extends Schema implements IStatus {
   sleepCooldown = 0
   confusionCooldown = 0
   woundCooldown = 0
-  temporaryShieldCooldown = 0
   soulDewCooldown = 0
   brightPowderCooldown = 0
   smokeCooldown = 0
   armorReductionCooldown = 0
-  flameOrbCooldown = 0
-  changeTeamCooldown = 0
   runeProtectCooldown = 0
 
   clearNegativeStatus() {
@@ -53,33 +48,6 @@ export default class Status extends Schema implements IStatus {
     this.confusionCooldown = 0
     this.woundCooldown = 0
     this.smokeCooldown = 0
-    this.changeTeamCooldown = 0
-  }
-
-  triggerFlameOrb(timer: number) {
-    if (!this.flameOrb) {
-      this.flameOrb = true
-      this.flameOrbCooldown = timer
-    }
-  }
-
-  updateFlameOrb(dt: number, pkm: PokemonEntity, board: Board) {
-    if (this.flameOrbCooldown - dt <= 0) {
-      this.flameOrb = false
-      const cells = board.getAdjacentCells(pkm.positionX, pkm.positionY)
-      let flameCount = 1
-      cells.forEach((cell: Cell) => {
-        if (cell.value && pkm.team != cell.value.team && flameCount > 0) {
-          cell.value.status.triggerBurn(8000, cell.value, pkm, board)
-          flameCount--
-        }
-      })
-      if (pkm.items.has(Item.FLAME_ORB)) {
-        pkm.status.triggerFlameOrb(2000)
-      }
-    } else {
-      this.flameOrbCooldown = this.flameOrbCooldown - dt
-    }
   }
 
   triggerArmorReduction(timer: number) {
@@ -108,9 +76,9 @@ export default class Status extends Schema implements IStatus {
   updateSoulDew(dt: number, pkm: PokemonEntity) {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false
-      pkm.addSpellDamage(30)
+      pkm.addSpellDamage(10)
       if (pkm.items.has(Item.SOUL_DEW)) {
-        this.triggerSoulDew(5000)
+        this.triggerSoulDew(2000)
       }
     } else {
       this.soulDewCooldown = this.soulDewCooldown - dt
@@ -123,7 +91,7 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined,
     board: Board
   ) {
-    if (!this.burn && !pkm.items.has(Item.WIDE_LENS)) {
+    if (!this.burn && !pkm.items.has(Item.FLUFFY_TAIL)) {
       this.burn = true
       this.burnCooldown = timer
       if (origin) {
@@ -149,7 +117,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerSilence(timer: number, pkm: PokemonEntity, board: Board) {
-    if (!this.silence) {
+    if (!this.silence && !pkm.items.has(Item.FLUFFY_TAIL)) {
       this.silence = true
       this.silenceCooldown = timer
       if (pkm.skill === Ability.SYNCHRO) {
@@ -176,7 +144,7 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined,
     board: Board
   ) {
-    if (!this.poison && !pkm.items.has(Item.WIDE_LENS)) {
+    if (!this.poison && !pkm.items.has(Item.FLUFFY_TAIL)) {
       this.poison = true
       this.poisonCooldown = timer
       if (origin) {
@@ -262,7 +230,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerWound(timer: number, pkm: PokemonEntity, board: Board) {
-    if (!this.wound) {
+    if (!this.wound && !pkm.items.has(Item.FLUFFY_TAIL)) {
       this.wound = true
       this.woundCooldown = timer
       if (pkm.skill === Ability.SYNCHRO) {
@@ -283,22 +251,6 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerShield(timer: number) {
-    if (!this.temporaryShield) {
-      this.temporaryShield = true
-      this.temporaryShieldCooldown = timer
-    }
-  }
-
-  updateShield(dt: number, pkm: PokemonEntity) {
-    if (this.temporaryShieldCooldown - dt <= 0) {
-      this.temporaryShield = false
-      pkm.shield = 0
-    } else {
-      this.temporaryShieldCooldown = this.temporaryShieldCooldown - dt
-    }
-  }
-
   triggerBrightPowder(timer: number) {
     if (!this.brightPowder) {
       this.brightPowder = true
@@ -311,16 +263,17 @@ export default class Status extends Schema implements IStatus {
       this.brightPowder = false
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
+      let c = 1
       cells.forEach((cell) => {
-        if (cell.value && pokemon.team == cell.value.team) {
-          cell.value.handleHeal(0.18 * cell.value.hp, pokemon)
+        if (cell.value && pokemon.team !== cell.value.team && c > 0) {
+          cell.value.handleAttackSpeed(-30)
           cell.value.count.brightPowderCount++
+          c--
         }
       })
-      pokemon.handleHeal(0.18 * pokemon.hp, pokemon)
 
       if (pokemon.items.has(Item.BRIGHT_POWDER)) {
-        pokemon.status.triggerBrightPowder(5000)
+        pokemon.status.triggerBrightPowder(4000)
         pokemon.count.brightPowderCount++
       }
     } else {
@@ -329,7 +282,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerSmoke(timer: number, pkm: PokemonEntity) {
-    if (!this.smoke) {
+    if (!this.smoke && !pkm.items.has(Item.FLUFFY_TAIL)) {
       this.smoke = true
       pkm.handleAttackSpeed(-40)
       this.smokeCooldown = timer

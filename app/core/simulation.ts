@@ -10,11 +10,12 @@ import { AttackType, Climate, PokemonActionState } from "../types/enum/Game"
 import Dps from "./dps"
 import DpsHeal from "./dps-heal"
 import ItemFactory from "../models/item-factory"
-import { ISimulation, IPokemonEntity, IPokemon } from "../types"
+import { ISimulation, IPokemonEntity, IPokemon, IPlayer } from "../types"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { ItemRecipe } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
+import GameRoom from "../rooms/game-room"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") climate: Climate = Climate.NEUTRAL
@@ -24,19 +25,32 @@ export default class Simulation extends Schema implements ISimulation {
   @type({ map: Dps }) redDpsMeter = new MapSchema<Dps>()
   @type({ map: DpsHeal }) blueHealDpsMeter = new MapSchema<DpsHeal>()
   @type({ map: DpsHeal }) redHealDpsMeter = new MapSchema<DpsHeal>()
+  room: GameRoom
   blueEffects = new Array<Effect>()
   redEffects = new Array<Effect>()
   board: Board = new Board(8, 6)
   finished = false
   flowerSpawn: boolean[] = [false, false]
-  generatedMoney = 0
+  stageLevel: number = 0
+  player: IPlayer | undefined
+  id: string
+
+  constructor(id: string, room: GameRoom) {
+    super()
+    this.id = id
+    this.room = room
+  }
 
   initialize(
     blueTeam: MapSchema<Pokemon>,
     redTeam: MapSchema<Pokemon>,
     blueEffects: Effect[],
-    redEffects: Effect[]
+    redEffects: Effect[],
+    stageLevel: number,
+    player: IPlayer
   ) {
+    this.player = player
+    this.stageLevel = stageLevel
     this.blueDpsMeter.forEach((dps, key) => {
       this.blueDpsMeter.delete(key)
     })
@@ -255,10 +269,10 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     if (pokemon.items.has(Item.CHOICE_SPECS)) {
-      pokemon.addSpellDamage(75)
+      pokemon.addSpellDamage(80)
     }
     if (pokemon.items.has(Item.SOUL_DEW)) {
-      pokemon.status.triggerSoulDew(5000)
+      pokemon.status.triggerSoulDew(2000)
     }
     if (pokemon.items.has(Item.WONDER_BOX)) {
       pokemon.items.delete(Item.WONDER_BOX)
@@ -269,41 +283,41 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
     if (pokemon.items.has(Item.AQUA_EGG)) {
-      pokemon.setMana(pokemon.mana + 50)
-    }
-    if (pokemon.items.has(Item.BLUE_ORB)) {
-      pokemon.handleAttackSpeed(10)
+      pokemon.setMana(pokemon.mana / 2)
     }
     if (pokemon.items.has(Item.ZOOM_LENS)) {
-      pokemon.addAttack(4)
-      pokemon.addSpellDamage(40)
+      const spellPowerBoost = 5 * pokemon.baseAtk
+      const atkBoost = 0.05 * pokemon.spellDamage
+      pokemon.addAttack(atkBoost)
+      pokemon.addSpellDamage(spellPowerBoost)
+    }
+    if (pokemon.items.has(Item.FLAME_ORB)) {
+      pokemon.addAttack(pokemon.baseAtk)
+      pokemon.status.triggerBurn(60000, pokemon, pokemon, this.board)
+    }
+    if (pokemon.items.has(Item.RED_ORB)) {
+      pokemon.addAttack(8)
     }
     if (pokemon.items.has(Item.BRIGHT_POWDER)) {
-      pokemon.status.triggerBrightPowder(5000)
+      pokemon.status.triggerBrightPowder(4000)
     }
     if (pokemon.items.has(Item.XRAY_VISION)) {
-      pokemon.range += 1
       pokemon.handleAttackSpeed(30)
     }
     if (pokemon.items.has(Item.WIDE_LENS)) {
-      pokemon.handleAttackSpeed(20)
+      pokemon.range += 2
+    }
+    if (pokemon.items.has(Item.RAZOR_FANG)) {
+      pokemon.addCritDamage(100)
     }
     if (pokemon.items.has(Item.RAZOR_CLAW)) {
-      pokemon.addCritDamage(10)
-      pokemon.addCritChance(75)
+      pokemon.addCritChance(50)
     }
     if (pokemon.items.has(Item.ORAN_BERRY)) {
       pokemon.handleShield(100, pokemon)
     }
-    if (pokemon.items.has(Item.FLAME_ORB)) {
-      pokemon.status.triggerFlameOrb(2000)
-    }
     if (pokemon.items.has(Item.ASSAULT_VEST)) {
-      pokemon.addSpecialDefense(30)
-    }
-    if (pokemon.items.has(Item.POKE_DOLL)) {
-      pokemon.addDefense(5)
-      pokemon.addSpecialDefense(5)
+      pokemon.addSpecialDefense(16)
     }
     if (pokemon.items.has(Item.ROCKY_HELMET)) {
       pokemon.addDefense(10)
@@ -343,38 +357,6 @@ export default class Simulation extends Schema implements ISimulation {
       redIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
     }
 
-    const bluePhantomForce = Array.from(this.blueTeam.values()).filter((p) =>
-      p.effects.includes(Effect.PHANTOM_FORCE)
-    )
-    if (bluePhantomForce.length > 0) {
-      bluePhantomForce.forEach((pokemon) => {
-        pokemon.effects.splice(
-          pokemon.effects.findIndex((e) => e === Effect.PHANTOM_FORCE),
-          1
-        )
-      })
-      const bluePhantomForcePkm =
-        bluePhantomForce[Math.floor(Math.random() * bluePhantomForce.length)]
-      bluePhantomForcePkm.attackType = AttackType.TRUE
-      bluePhantomForcePkm.effects.push(Effect.PHANTOM_FORCE)
-    }
-
-    const redPhantomForce = Array.from(this.redTeam.values()).filter((p) =>
-      p.effects.includes(Effect.PHANTOM_FORCE)
-    )
-    if (redPhantomForce.length > 0) {
-      redPhantomForce.forEach((pokemon) => {
-        pokemon.effects.splice(
-          pokemon.effects.findIndex((e) => e === Effect.PHANTOM_FORCE),
-          1
-        )
-      })
-      const redPhantomForcePkm =
-        redPhantomForce[Math.floor(Math.random() * redPhantomForce.length)]
-      redPhantomForcePkm.attackType = AttackType.TRUE
-      redPhantomForcePkm.effects.push(Effect.PHANTOM_FORCE)
-    }
-
     this.blueTeam.forEach((pokemon) => {
       if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
         pokemon.addAttack(pokemon.atk)
@@ -406,13 +388,13 @@ export default class Simulation extends Schema implements ISimulation {
         })
       }
       if (pokemon.items.has(Item.LUCKY_EGG)) {
-        ;[-2, -1, 0, 1, 2].forEach((offset) => {
+        ;[-1, 0, 1].forEach((offset) => {
           const value = this.board.getValue(
             pokemon.positionX + offset,
             pokemon.positionY
           )
           if (value) {
-            value.handleShield(30, value)
+            value.addSpellDamage(30)
           }
         })
       }
@@ -439,19 +421,7 @@ export default class Simulation extends Schema implements ISimulation {
           }
         })
       }
-      if (pokemon.items.has(Item.SHINY_CHARM)) {
-        this.board.forEach(
-          (x: number, y: number, value: PokemonEntity | undefined) => {
-            if (
-              value &&
-              pokemon.team != value.team &&
-              value.positionX == pokemon.positionX
-            ) {
-              value.status.triggerSleep(3000, value)
-            }
-          }
-        )
-      }
+
       if (pokemon.items.has(Item.FOCUS_BAND)) {
         ;[-1, 0, 1].forEach((offset) => {
           const value = this.board.getValue(
@@ -460,6 +430,18 @@ export default class Simulation extends Schema implements ISimulation {
           )
           if (value) {
             value.handleAttackSpeed(30)
+          }
+        })
+      }
+
+      if (pokemon.items.has(Item.DELTA_ORB)) {
+        ;[-1, 0, 1].forEach((offset) => {
+          const value = this.board.getValue(
+            pokemon.positionX + offset,
+            pokemon.positionY
+          )
+          if (value) {
+            value.status.deltaOrb = true
           }
         })
       }
@@ -496,13 +478,13 @@ export default class Simulation extends Schema implements ISimulation {
         })
       }
       if (pokemon.items.has(Item.LUCKY_EGG)) {
-        ;[-2, -1, 0, 1, 2].forEach((offset) => {
+        ;[-1, 0, 1].forEach((offset) => {
           const value = this.board.getValue(
             pokemon.positionX + offset,
             pokemon.positionY
           )
           if (value) {
-            value.handleShield(30, value)
+            value.addSpellDamage(30)
           }
         })
       }
@@ -522,26 +504,14 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.positionX,
           pokemon.positionY
         )
-        pokemon.status.triggerRuneProtect(8000)
+        pokemon.status.triggerRuneProtect(6000)
         cells.forEach((cell) => {
           if (cell.value && pokemon.team == cell.value.team) {
-            cell.value.status.triggerRuneProtect(8000)
+            cell.value.status.triggerRuneProtect(6000)
           }
         })
       }
-      if (pokemon.items.has(Item.SHINY_CHARM)) {
-        this.board.forEach(
-          (x: number, y: number, value: PokemonEntity | undefined) => {
-            if (
-              value &&
-              pokemon.team != value.team &&
-              value.positionX == pokemon.positionX
-            ) {
-              value.status.triggerSleep(3000, value)
-            }
-          }
-        )
-      }
+
       if (pokemon.items.has(Item.FOCUS_BAND)) {
         ;[-1, 0, 1].forEach((offset) => {
           const value = this.board.getValue(
@@ -550,6 +520,17 @@ export default class Simulation extends Schema implements ISimulation {
           )
           if (value) {
             value.handleAttackSpeed(30)
+          }
+        })
+      }
+      if (pokemon.items.has(Item.DELTA_ORB)) {
+        ;[-1, 0, 1].forEach((offset) => {
+          const value = this.board.getValue(
+            pokemon.positionX + offset,
+            pokemon.positionY
+          )
+          if (value) {
+            value.status.deltaOrb = true
           }
         })
       }
@@ -936,8 +917,19 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.CURSE:
           if (types.includes(Synergy.GHOST)) {
-            pokemon.attackType = AttackType.TRUE
             pokemon.effects.push(Effect.CURSE)
+          }
+          break
+
+        case Effect.SHADOW_TAG:
+          if (types.includes(Synergy.GHOST)) {
+            pokemon.effects.push(Effect.SHADOW_TAG)
+          }
+          break
+
+        case Effect.WANDERING_SPIRIT:
+          if (types.includes(Synergy.GHOST)) {
+            pokemon.effects.push(Effect.WANDERING_SPIRIT)
           }
           break
 

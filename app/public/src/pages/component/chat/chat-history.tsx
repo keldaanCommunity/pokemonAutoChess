@@ -10,8 +10,7 @@ export default function ChatHistory(props: { source: string }) {
     width: "100%",
     overflowX: "hidden",
     overflowY: "auto",
-    maxWidth: "inherit",
-    maxHeight: "inherit"
+    maxHeight: "calc(100vh - 14vw)"
   }
   const messages = useAppSelector((state) => state[props.source].messages)
   const domRef = useRef<HTMLDivElement>(null)

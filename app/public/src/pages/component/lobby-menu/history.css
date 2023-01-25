@@ -7,15 +7,15 @@
   font-size: 140%;
 }
 
+.game-history tr {
+  border-bottom: 4px solid white;
+}
+
 .game-history th {
   text-align: center;
 }
 
 .game-history td {
   padding: 0 0.25em;
-}
-
-.game-history table .player-team-pokemons {
-  padding-left: 0;
 }
 

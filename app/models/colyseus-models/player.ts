@@ -19,6 +19,7 @@ import PokemonCollection from "./pokemon-collection"
 import HistoryItem from "./history-item"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
+import GameRoom from "../../rooms/game-room"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -26,7 +27,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") avatar: string
   @type({ map: Pokemon }) board = new MapSchema<Pokemon>()
   @type(["string"]) shop = new ArraySchema<Pkm>()
-  @type(Simulation) simulation = new Simulation()
+  @type(Simulation) simulation
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
   @type(["string"]) itemsProposition = new ArraySchema<Item>()
@@ -62,7 +63,8 @@ export default class Player extends Schema implements IPlayer {
     rank: number,
     pokemonCollection: Map<string, IPokemonConfig>,
     title: Title | "",
-    role: Role
+    role: Role,
+    room: GameRoom
   ) {
     super()
     this.id = id
@@ -74,6 +76,7 @@ export default class Player extends Schema implements IPlayer {
     this.title = title
     this.role = role
     this.pokemonCollection = new PokemonCollection(pokemonCollection)
+    this.simulation = new Simulation(id, room)
   }
 
   getCurrentBattleResult() {

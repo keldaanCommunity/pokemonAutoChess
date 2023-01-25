@@ -2,12 +2,17 @@ import { GameObjects } from "phaser"
 import Pokemon from "./pokemon"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import GameScene from "../scenes/game-scene"
-import { IPlayer, IPokemonEntity } from "../../../../types"
+import { Emotion, IPlayer, IPokemonEntity } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import { DataChange } from "@colyseus/schema"
-import { PokemonActionState } from "../../../../types/enum/Game"
+import {
+  AttackType,
+  PokemonActionState,
+  HealType
+} from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
+import { getAvatarSrc, getPortraitSrc } from "../../utils"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -364,7 +369,8 @@ export default class BattleManager {
           } else if (change.field == "critChance") {
             pkm.critChance = pokemon.critChance
             if (pkm.detail) {
-              pkm.detail.critChance.textContent = pokemon.critChance.toString()+"%"
+              pkm.detail.critChance.textContent =
+                pokemon.critChance.toString() + "%"
             }
           } else if (change.field == "critDamage") {
             pkm.critDamage = parseFloat(pokemon.critDamage.toFixed(2))
@@ -374,7 +380,8 @@ export default class BattleManager {
           } else if (change.field == "spellDamage") {
             pkm.spellDamage = pokemon.spellDamage
             if (pkm.detail) {
-              pkm.detail.spellDamage.textContent = pokemon.spellDamage.toString()
+              pkm.detail.spellDamage.textContent =
+                pokemon.spellDamage.toString()
             }
           } else if (change.field == "atkSpeed") {
             pkm.atkSpeed = pokemon.atkSpeed
@@ -382,26 +389,12 @@ export default class BattleManager {
               pkm.detail.atkSpeed.textContent = pokemon.atkSpeed.toFixed(2)
             }
           } else if (change.field == "life") {
-            if (change.value && change.previousValue) {
-              this.displayDamage(
-                pkm.x,
-                pkm.y,
-                change.value - change.previousValue
-              )
-            }
             pkm.life = pokemon.life
             pkm.lifebar?.setAmount(pkm.life)
             if (pkm.detail) {
               pkm.detail.hp.textContent = pokemon.life.toString()
             }
           } else if (change.field == "shield") {
-            if (change.value && change.previousValue) {
-              this.displayDamage(
-                pkm.x,
-                pkm.y,
-                change.value - change.previousValue
-              )
-            }
             if (change.value > 0) {
               pkm.shield = pokemon.shield
               pkm.lifebar?.setShieldAmount(pkm.shield)
@@ -636,44 +629,106 @@ export default class BattleManager {
     })
   }
 
-  displayDamage(x: number, y: number, damage: number) {
-    let color
-    let damageText
-    if (damage >= 0) {
-      color = "#00FF00"
-      damageText = `+${damage}`
-    } else {
-      color = "#FF0000"
-      damageText = damage
+  displayDamage(
+    positionX: number,
+    positionY: number,
+    damage: number,
+    type: AttackType,
+    index: string,
+    id: string
+  ) {
+    if (this.player.id === id) {
+      const coordinates = transformAttackCoordinate(positionX, positionY)
+      const color =
+        type === AttackType.PHYSICAL
+          ? "#e76e55"
+          : type === AttackType.SPECIAL
+          ? "#209cee"
+          : "#f7d51d"
+      this.displayTween(color, coordinates, index, damage)
     }
+  }
+
+  displayHeal(
+    positionX: number,
+    positionY: number,
+    amount: number,
+    type: HealType,
+    index: string,
+    id: string
+  ) {
+    if (this.player.id === id) {
+      const coordinates = transformAttackCoordinate(positionX, positionY)
+      const color = type === HealType.HEAL ? "#92cc41" : "#8d8d8d"
+      this.displayTween(color, coordinates, index, amount)
+    }
+  }
+
+  displayTween(
+    color: string,
+    coordinates: number[],
+    index: string,
+    amount: number
+  ) {
+    const fontSize =
+      amount < 10
+        ? "20px"
+        : amount < 20
+        ? "25px"
+        : amount < 30
+        ? "30px"
+        : amount < 50
+        ? "35px"
+        : "40px"
     const textStyle = {
-      fontSize: "25px",
+      fontSize: fontSize,
       fontFamily: "Verdana",
       color: color,
       align: "center",
       strokeThickness: 2,
       stroke: "#000"
     }
-    const text = this.scene.add.existing(
-      new GameObjects.Text(this.scene, x - 25, y - 30, damageText, textStyle)
+    const dy = Math.round(50 * (Math.random() - 0.5))
+
+    const image = this.scene.add.existing(
+      new GameObjects.Image(this.scene, 0, 0, `portrait-${index}`)
+        .setScale(0.5, 0.5)
+        .setOrigin(0, 0)
     )
-    text.setDepth(9)
+    const text = this.scene.add.existing(
+      new GameObjects.Text(this.scene, 25, 0, amount.toString(), textStyle)
+    )
+    image.setDepth(9)
+    text.setDepth(10)
+
+    const container = this.scene.add.existing(
+      new GameObjects.Container(
+        this.scene,
+        coordinates[0] + 30,
+        coordinates[1] + dy,
+        [text, image]
+      )
+    )
 
     this.scene.add.tween({
-      targets: [text],
-      ease: "Linear",
-      duration: 1000,
+      targets: [container],
+      ease: "linear",
+      duration: 1500,
       delay: 0,
-      alpha: {
+      x: {
+        getStart: () => container.x,
+        getEnd: () => container.x + Math.random() * 50
+      },
+      y: {
+        getStart: () => container.y,
+        getEnd: () => container.y + Math.random() * 50
+      },
+      scale: {
         getStart: () => 1,
         getEnd: () => 0
       },
-      y: {
-        getStart: () => y - 30,
-        getEnd: () => y - 90
-      },
       onComplete: () => {
-        text.destroy(true)
+        container.destroy(true)
       }
     })
   }

@@ -41,21 +41,7 @@ export class AttackStrategy {
         })
       }
     }
-    board.forEach((r: number, c: number, value: PokemonEntity | undefined) => {
-      if (
-        value !== undefined &&
-        value.team != pokemon.team &&
-        value.items.has(Item.WATER_INCENSE)
-      ) {
-        pokemon.count.incenseCount++
-        pokemon.handleSpellDamage(
-          Math.ceil(value.maxMana * 0.2),
-          board,
-          AttackType.SPECIAL,
-          value
-        )
-      }
-    })
+
     if (pokemon.items.has(Item.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + 20)
     }
@@ -154,8 +140,8 @@ export class PaydayStrategy extends AttackStrategy {
       AttackType.PHYSICAL,
       pokemon
     )
-    if (victim) {
-      pokemon.simulation.generatedMoney += pokemon.stars
+    if (victim && pokemon.team === 0 && pokemon.simulation.player) {
+      pokemon.simulation.player.money += pokemon.stars
     }
   }
 }
@@ -333,6 +319,30 @@ export class PsychicSurgeStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
+  }
+}
+
+export class ShadowBallStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const damage = pokemon.stars === 3 ? 300 : pokemon.stars === 2 ? 100 : 50
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+    target.setMana(target.mana - 30)
+    target.count.manaBurnCount++
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.setMana(cell.value.mana - 30)
+        cell.value.count.manaBurnCount++
+      }
+    })
   }
 }
 
@@ -574,6 +584,8 @@ export class AquaJetStrategy extends AttackStrategy {
         }
       })
 
+      target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+
       board.swapValue(
         pokemon.positionX,
         pokemon.positionY,
@@ -679,6 +691,8 @@ export class FlameChargeStrategy extends AttackStrategy {
         }
       })
 
+      target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
+
       board.swapValue(
         pokemon.positionX,
         pokemon.positionY,
@@ -708,7 +722,7 @@ export class LeechSeedStrategy extends AttackStrategy {
       duration = 6000
       heal = 40
     }
-    pokemon.handleHeal(heal, pokemon)
+    pokemon.handleHeal(heal, pokemon, true)
     target.status.triggerPoison(duration, target, pokemon, board)
   }
 }
@@ -1104,6 +1118,7 @@ export class HighJumpKickStrategy extends AttackStrategy {
     }
     pokemon.setMana(target.mana)
     target.setMana(0)
+    target.count.manaBurnCount++
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
   }
 }
@@ -1358,6 +1373,8 @@ export class VoltSwitchStrategy extends AttackStrategy {
           )
         }
       })
+
+      target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
 
       board.swapValue(
         pokemon.positionX,
@@ -2181,7 +2198,7 @@ export class WishStrategy extends AttackStrategy {
         count > 0 &&
         ally.life < ally.hp
       ) {
-        ally.handleHeal(heal, pokemon)
+        ally.handleHeal(heal, pokemon, true)
         count -= 1
       }
     })
@@ -2464,7 +2481,7 @@ export class BiteStrategy extends AttackStrategy {
         break
     }
     target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
-    pokemon.handleHeal(Math.floor(damage / 2), pokemon)
+    pokemon.handleHeal(Math.floor(damage / 2), pokemon, true)
   }
 }
 
@@ -2595,6 +2612,7 @@ export class IcicleCrashStrategy extends AttackStrategy {
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 
+    target.handleSpellDamage(damage, board, AttackType.PHYSICAL, pokemon)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpellDamage(
@@ -2676,11 +2694,11 @@ export class RootStrategy extends AttackStrategy {
     }
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    pokemon.handleHeal(heal, pokemon)
+    pokemon.handleHeal(heal, pokemon, true)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
-        cell.value.handleHeal(heal, pokemon)
+        cell.value.handleHeal(heal, pokemon, true)
       }
     })
   }
@@ -2761,7 +2779,7 @@ export class DarkPulseStrategy extends AttackStrategy {
         break
     }
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    pokemon.handleHeal(damage, pokemon)
+    pokemon.handleHeal(damage, pokemon, true)
   }
 }
 
@@ -2903,7 +2921,7 @@ export class LeechLifeStrategy extends AttackStrategy {
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-        pokemon.handleHeal(damage, pokemon)
+        pokemon.handleHeal(damage, pokemon, true)
       }
     })
   }

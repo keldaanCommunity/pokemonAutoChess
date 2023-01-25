@@ -40,6 +40,11 @@ export enum AttackType {
   TRUE
 }
 
+export enum HealType {
+  SHIELD,
+  HEAL
+}
+
 export enum BattleResult {
   WIN,
   DEFEAT,

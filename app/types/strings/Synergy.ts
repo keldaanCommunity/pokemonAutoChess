@@ -185,7 +185,12 @@ export const SynergyDetail: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.MOUTAIN_RESISTANCE,
     Effect.DIAMOND_STORM
   ],
-  [Synergy.GHOST]: [Effect.PHANTOM_FORCE, Effect.CURSE],
+  [Synergy.GHOST]: [
+    Effect.PHANTOM_FORCE,
+    Effect.CURSE,
+    Effect.SHADOW_TAG,
+    Effect.WANDERING_SPIRIT
+  ],
   [Synergy.FAIRY]: [
     Effect.AROMATIC_MIST,
     Effect.FAIRY_WIND,
