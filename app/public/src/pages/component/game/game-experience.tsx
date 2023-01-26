@@ -1,5 +1,4 @@
 import React from "react"
-import CSS from "csstype"
 import { useAppSelector } from "../../../hooks"
 import { useAppDispatch } from "../../../hooks"
 import { levelClick } from "../../../stores/NetworkStore"
@@ -11,13 +10,7 @@ export default function GameExperience() {
   const experienceManager = useAppSelector(
     (state) => state.game.experienceManager
   )
-
-  let progressString = ""
-  if (Number(experienceManager.expNeeded) == -1) {
-    progressString = "Max Level"
-  } else {
-    progressString = experienceManager.experience + "/" + experienceManager.expNeeded
-  }
+  const isLevelMax = experienceManager.level >= 9
 
   return (
     <div className="nes-container game-experience">
@@ -32,10 +25,10 @@ export default function GameExperience() {
       <div className="progress-bar">
         <progress
           className="nes-progress"
-          value={experienceManager.experience}
+          value={isLevelMax ? 0 : experienceManager.experience}
           max={experienceManager.expNeeded}
         ></progress>
-        <span>{progressString}</span>
+        <span>{isLevelMax ? "Max Level" : experienceManager.experience + "/" + experienceManager.expNeeded}</span>
       </div>
     </div>
   )
