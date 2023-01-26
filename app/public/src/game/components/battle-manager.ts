@@ -13,6 +13,8 @@ import {
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
 import { getAvatarSrc, getPortraitSrc } from "../../utils"
+import { number } from "@colyseus/schema/lib/encoding/decode"
+import { Pkm } from "../../../../types/enum/Pokemon"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -81,7 +83,7 @@ export default class BattleManager {
   }
 
   clear() {
-    this.group.clear(false, true)
+    this.group.clear(true, true)
   }
 
   removePokemon(playerId: string, pokemon: IPokemonEntity) {
@@ -736,6 +738,12 @@ export default class BattleManager {
   setPlayer(player: IPlayer) {
     if (player.id != this.player.id) {
       this.player = player
+      this.group.getChildren().forEach((p) => {
+        const pkm = p as Pokemon
+        if (pkm.projectile) {
+          pkm.projectile.destroy(true)
+        }
+      })
       this.group.clear(true, true)
       this.buildPokemons()
     }
