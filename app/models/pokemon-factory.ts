@@ -1596,8 +1596,6 @@ export default class PokemonFactory {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
     if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
       return PkmCost[pokemon.rarity]
-    } else if (pokemon.types.includes(Synergy.FOSSIL)) {
-      return 5 + PkmCost[pokemon.rarity] * pokemon.stars
     } else {
       return PkmCost[pokemon.rarity] * pokemon.stars
     }
