@@ -454,6 +454,8 @@ import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
+import { PkmCost } from "../types/Config"
+import { Item } from "../types/enum/Item"
 
 export default class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level: number): MapSchema<Pokemon> {
@@ -1587,6 +1589,17 @@ export default class PokemonFactory {
       return possibleFossils[Math.floor(Math.random() * possibleFossils.length)]
     } else {
       return Pkm.CARBINK
+    }
+  }
+
+  static getSellPrice(name: Pkm): number {
+    const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
+    if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
+      return PkmCost[pokemon.rarity]
+    } else if (pokemon.types.includes(Synergy.FOSSIL)) {
+      return 5 + PkmCost[pokemon.rarity] * pokemon.stars
+    } else {
+      return PkmCost[pokemon.rarity] * pokemon.stars
     }
   }
 }

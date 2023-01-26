@@ -12,6 +12,8 @@ import { Room } from "colyseus.js"
 import GameState from "../../../../rooms/states/game-state"
 import ItemContainer from "../components/item-container"
 import { GamePhaseState } from "../../../../types/enum/Game"
+import { Pkm } from "../../../../types/enum/Pokemon"
+import PokemonFactory from "../../../../models/pokemon-factory"
 import indexList from "../../../dist/client/assets/pokemons/indexList.json"
 import {
   IDragDropCombineMessage,
@@ -573,12 +575,13 @@ export default class GameScene extends Scene {
     this.sellZoneGraphic = graphic
 
     this.dragDropText = this.add.text(
-      sellZoneCoord[0] - 2 * 96 + 24,
-      sellZoneCoord[1],
+      sellZone.x,
+      sellZone.y,
       "Drop here to sell",
       this.textStyle
     )
     this.dragDropText.setVisible(false)
+    this.dragDropText.setOrigin(0.5)
 
     this.input.mouse.disableContextMenu()
 
@@ -596,9 +599,12 @@ export default class GameScene extends Scene {
     this.input.on(
       "dragstart",
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
-        gameObject instanceof Pokemon
-          ? this.drawRectangles(true)
-          : this.drawRectangles(false)
+        if(gameObject instanceof Pokemon){
+          this.dragDropText?.setText(`Drop here to sell for ${PokemonFactory.getSellPrice(gameObject.name as Pkm)} gold`)
+          this.drawRectangles(true)
+        } else {
+          this.drawRectangles(false)
+        }
         // this.children.bringToTop(gameObject);
       }
     )
