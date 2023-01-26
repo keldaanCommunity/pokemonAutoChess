@@ -61,6 +61,11 @@
     grid-template: 32px 32px / repeat(3, 1fr)
 }
 
+.game-pokemon-detail-stats > div {
+    white-space: nowrap;
+    overflow: visible;
+}
+
 .game-pokemon-detail-stats img {
     width: 32px;
     height: 32px;

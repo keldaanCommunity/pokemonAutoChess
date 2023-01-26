@@ -35,7 +35,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     speDef: number,
     attackType: AttackType,
     range: number,
-    atkSpeed: string,
+    atkSpeed: number,
     critChance: number,
     critDamage: number,
     spellDamage: number,
@@ -69,7 +69,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     this.range.textContent = range.toString()
 
     this.atkSpeed = document.createElement("p")
-    this.atkSpeed.textContent = atkSpeed.toString()
+    this.atkSpeed.textContent = atkSpeed.toFixed(2)
 
     this.critChance = document.createElement("p")
     this.critChance.textContent = critChance.toString() + "%"
