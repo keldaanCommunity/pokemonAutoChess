@@ -478,24 +478,6 @@ p:last-child {
   background-color: #61738a !important;
 }
 
-.CircularProgressbar-path {
-  stroke: #92cc41 !important;
-}
-
-.CircularProgressbar-trail {
-  stroke: #2d334b !important;
-}
-
-.CircularProgressbar-text {
-  fill: yellow;
-}
-
-.CircularProgressbar-background {
-  fill: green;
-}
-
-
-
 .anonymous {
   min-height: 40px;
   background-color: #18f299;
