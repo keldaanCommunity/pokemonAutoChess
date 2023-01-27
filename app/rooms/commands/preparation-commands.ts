@@ -220,6 +220,7 @@ export class InitializeBotsCommand extends Command<
 
 type OnAddBotPayload = {
   difficulty: BotDifficulty
+  user: IUserMetadata
 }
 
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
@@ -236,7 +237,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
       }
     })
 
-    const { difficulty } = data
+    const { difficulty, user } = data
 
     let d
 
@@ -256,15 +257,15 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
     }
 
     BotV2.find(
-      { avatar: { $nin: userArray }, elo: d },
-      ["avatar", "elo", "name"],
+      { id: { $nin: userArray }, elo: d },
+      ["avatar", "elo", "name", "id"],
       null,
       (err, bots) => {
         if (bots.length <= 0) {
           this.room.broadcast(Transfer.MESSAGES, {
-            name: "Server",
+            name: user.displayName,
             payload: "Error: No bots found",
-            avatar: `0081/${Emotion.NORMAL}`,
+            avatar: user.avatar,
             time: Date.now()
           })
           return
@@ -276,9 +277,9 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
           return
         } else {
           this.state.users.set(
-            bot.avatar,
+            bot.id,
             new GameUser(
-              bot.avatar,
+              bot.id,
               bot.name,
               bot.elo,
               bot.avatar,
@@ -291,9 +292,9 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
           )
 
           this.room.broadcast(Transfer.MESSAGES, {
-            name: "Server",
+            name: user.displayName,
             payload: `Bot ${bot.name} added.`,
-            avatar: `0081/${Emotion.NORMAL}`,
+            avatar: user.avatar,
             time: Date.now()
           })
         }
@@ -305,10 +306,11 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
 export class OnRemoveBotCommand extends Command<
   PreparationRoom,
   {
-    target: string | undefined
+    target?: string | undefined
+    user?: IUserMetadata | undefined
   }
 > {
-  execute({ target }) {
+  execute({ target, user }) {
     console.log(target)
     // if no message, delete a random bot
     if (!target) {
@@ -318,9 +320,9 @@ export class OnRemoveBotCommand extends Command<
         const key = keys.next().value
         if (this.state.users.get(key).isBot) {
           this.room.broadcast(Transfer.MESSAGES, {
-            name: "Server",
+            name: user?.displayName ? user.displayName : "Server",
             payload: `Bot ${key} removed to make room for new player.`,
-            avatar: `0081/${Emotion.NORMAL}`,
+            avatar: user?.avatar ? user.avatar : `0081/${Emotion.NORMAL}`,
             time: Date.now()
           })
           this.state.users.delete(key)
@@ -335,9 +337,9 @@ export class OnRemoveBotCommand extends Command<
     const name = this.state.users.get(target).name
     if (this.state.users.delete(target)) {
       this.room.broadcast(Transfer.MESSAGES, {
-        name: "Server",
+        name: user?.displayName ? user.displayName : "Server",
         payload: `Bot ${name} removed.`,
-        avatar: `0081/${Emotion.NORMAL}`,
+        avatar: user?.avatar ? user.avatar : `0081/${Emotion.NORMAL}`,
         time: Date.now()
       })
     }

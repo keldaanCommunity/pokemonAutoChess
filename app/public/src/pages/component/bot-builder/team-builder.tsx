@@ -20,20 +20,20 @@ import {
   DetailledPkm,
   Emotion,
   ModalMode,
-  ReadWriteMode,
+  ReadWriteMode
 } from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 
 const buttonsStyle: CSS.Properties = {
   left: "10px",
   position: "absolute",
-  display: "flex",
+  display: "flex"
 }
 
 const buttonStyle: CSS.Properties = {
   marginLeft: "10px",
   marginTop: "10px",
-  marginRight: "10px",
+  marginRight: "10px"
 }
 
 const bottomContainerStyle: CSS.Properties = {
@@ -41,7 +41,7 @@ const bottomContainerStyle: CSS.Properties = {
   width: "87%",
   position: "absolute",
   bottom: "0px",
-  right: "0px",
+  right: "0px"
 }
 
 export default function TeamBuilder(props: { toggleBuilder: () => void }) {
@@ -52,94 +52,95 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
     steps: [
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
+        board: []
       },
       {
         roundsRequired: 2,
-        board: [],
-      },
+        board: []
+      }
     ],
     avatar: PkmIndex[Pkm.DITTO],
     author: "",
     elo: 1200,
     name: Pkm.DITTO,
+    id: ""
   })
   const [entity, setEntity] = useState<Item | DetailledPkm>({
     pkm: Pkm.DEFAULT,
     shiny: false,
-    emotion: Emotion.NORMAL,
+    emotion: Emotion.NORMAL
   })
   const [mode, setMode] = useState<ReadWriteMode>(ReadWriteMode.WRITE)
   const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
@@ -225,7 +226,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
             shiny: e.shiny,
             x: x,
             y: y,
-            items: [],
+            items: []
           })
         })
       )
@@ -379,6 +380,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
         avatar={bot.avatar}
         author={bot.author}
         name={bot.name}
+        elo={bot.elo}
         handleTabClick={(i: number) => {
           updateSynergies(i)
           setStep(i)
@@ -386,8 +388,16 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
         handleEditorClick={(x, y) => {
           mode == ReadWriteMode.WRITE ? write(x, y) : erase(x, y)
         }}
+        handleEloChange={(e) => {
+          if (!isNaN(e.target.value)) {
+            setBot(
+              produce((draft) => {
+                draft.elo = e.target.value
+              })
+            )
+          }
+        }}
         handleAuthorChange={(e) => {
-          e.preventDefault
           setBot(
             produce((draft) => {
               draft.author = e.target.value

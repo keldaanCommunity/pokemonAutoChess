@@ -2,6 +2,7 @@ import dotenv from "dotenv"
 import { connect } from "mongoose"
 import BotV2 from "../app/models/mongo-models/bot-v2"
 import { PastebinAPI } from "pastebin-ts/dist/api"
+import { nanoid } from "nanoid"
 const args = process.argv.slice(2)
 dotenv.config()
 
@@ -23,30 +24,34 @@ pastebin.getPaste(id, false).then((data) => {
     console.log("connect to db ...")
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     connect(process.env.MONGO_URI!, (err) => {
-      BotV2.deleteMany({ avatar: json.avatar }, (err, result) => {
-        if (err) {
-          console.log(err)
-        } else {
-          console.log(result)
-        }
-        console.log(`creating BotV2 ${json.avatar}...`)
-        BotV2.create(
-          {
-            name: json.name,
-            avatar: json.avatar,
-            elo: 1200,
-            author: json.author,
-            steps: json.steps
-          },
-          (err, result) => {
-            if (err) {
-              console.log(err)
-            } else {
-              // console.log(result);
-            }
+      BotV2.deleteMany(
+        { avatar: json.avatar, author: json.author },
+        (err, result) => {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log(result)
           }
-        )
-      })
+          console.log(`creating BotV2 ${json.avatar}...`)
+          BotV2.create(
+            {
+              name: json.name,
+              avatar: json.avatar,
+              elo: json.elo ? json.elo : 1200,
+              author: json.author,
+              steps: json.steps,
+              id: nanoid()
+            },
+            (err, result) => {
+              if (err) {
+                console.log(err)
+              } else {
+                // console.log(result);
+              }
+            }
+          )
+        }
+      )
     })
   } catch (e) {
     console.error("Parsing error:", e)

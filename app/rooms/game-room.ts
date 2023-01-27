@@ -341,7 +341,7 @@ export default class GameRoom extends Room<GameState> {
     ) {
       this.state.players.forEach((player) => {
         if (player.isBot) {
-          BOT.find({ avatar: player.id }, (err, bots) => {
+          BOT.find({ id: player.id }, (err, bots) => {
             if (bots) {
               bots.forEach((bot) => {
                 bot.elo = Math.max(

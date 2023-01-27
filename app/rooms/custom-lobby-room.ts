@@ -38,6 +38,7 @@ import {
 import { Pkm } from "../types/enum/Pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import PokemonConfig from "../models/colyseus-models/pokemon-config"
+import { nanoid } from "nanoid"
 
 export default class CustomLobbyRoom extends LobbyRoom {
   discordWebhook: WebhookClient | undefined
@@ -643,10 +644,16 @@ export default class CustomLobbyRoom extends LobbyRoom {
               }
             }
           )
-          BotV2.find({}, { _id: 0 }, { sort: { elo: -1 } }, (_err, bots) => {
+          BotV2.find({}, {}, { sort: { elo: -1 } }, (_err, bots) => {
+            const ids = new Array<string>()
             bots.forEach((bot, i) => {
-              this.bots.set(bot.avatar, bot)
-              // console.log(bot.avatar, bot.elo);
+              if (ids.includes(bot.id)) {
+                const id = nanoid()
+                bot.id = id
+                bot.save()
+              }
+              ids.push(bot.id)
+              this.bots.set(bot.id, bot)
               this.botLeaderboard.push({
                 name: `${bot.name} by @${bot.author}`,
                 avatar: bot.avatar,

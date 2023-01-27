@@ -97,7 +97,11 @@ export default class PreparationRoom extends Room {
       Transfer.ADD_BOT,
       (client: Client, difficulty: BotDifficulty) => {
         try {
-          this.dispatcher.dispatch(new OnAddBotCommand(), { difficulty })
+          const user = this.state.users.get(client.auth.uid)
+          this.dispatcher.dispatch(new OnAddBotCommand(), {
+            difficulty: difficulty,
+            user: user
+          })
         } catch (error) {
           console.log(error)
         }
@@ -105,7 +109,11 @@ export default class PreparationRoom extends Room {
     )
     this.onMessage(Transfer.REMOVE_BOT, (client: Client, t: string) => {
       try {
-        this.dispatcher.dispatch(new OnRemoveBotCommand(), { target: t })
+        const user = this.state.users.get(client.auth.uid)
+        this.dispatcher.dispatch(new OnRemoveBotCommand(), {
+          target: t,
+          user: user
+        })
       } catch (error) {
         console.log(error)
       }
