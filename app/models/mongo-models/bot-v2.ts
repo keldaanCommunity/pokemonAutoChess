@@ -2,12 +2,14 @@ import { Schema, model } from "mongoose"
 import { Emotion } from "../../types"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
+import { nanoid } from "nanoid"
+
 export interface IDetailledPokemon {
   name: Pkm
   x: number
   y: number
   items: Item[]
-  emotion?: Emotion,
+  emotion?: Emotion
   shiny?: boolean
 }
 
@@ -22,6 +24,7 @@ export interface IBot {
   elo: number
   steps: IStep[]
   name: string
+  id: string
 }
 
 const pkm = new Schema({
@@ -48,12 +51,12 @@ const pkm = new Schema({
       enum: Item
     }
   ],
-  emotion:{
+  emotion: {
     type: String,
     required: false,
     enum: Emotion
   },
-  shiny:{
+  shiny: {
     type: Boolean,
     required: false
   }
@@ -69,6 +72,11 @@ const step = new Schema({
 
 const bot = new Schema(
   {
+    id: {
+      type: String,
+      required: true,
+      default: nanoid()
+    },
     name: {
       type: String
     },

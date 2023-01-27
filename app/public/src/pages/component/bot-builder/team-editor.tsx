@@ -12,18 +12,18 @@ const tabStyle: CSS.Properties = {
   width: "60%",
   position: "absolute",
   top: "8.5%",
-  left: "13%",
+  left: "13%"
 }
 
 const cursorStyle: CSS.Properties = {
-  cursor: "var(--cursor-hover)",
+  cursor: "var(--cursor-hover)"
 }
 
 const tdStyle: CSS.Properties = {
   width: "80px",
   height: "80px",
   cursor: "var(--cursor-hover)",
-  padding: "0px",
+  padding: "0px"
 }
 
 const divTdStyle: CSS.Properties = {
@@ -31,23 +31,23 @@ const divTdStyle: CSS.Properties = {
   justifyContent: "space-between",
   flexFlow: "column",
   width: "80px",
-  height: "80px",
+  height: "80px"
 }
 
 const bigImgStyle: CSS.Properties = {
   width: "80px",
   height: "80px",
   imageRendering: "pixelated",
-  cursor: "var(--cursor-hover)",
+  cursor: "var(--cursor-hover)"
 }
 
 const tabPaneStyle: CSS.Properties = {
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "center"
 }
 
 const labelStyle: CSS.Properties = {
-  marginLeft: "10px",
+  marginLeft: "10px"
 }
 
 const itemImgStyle: CSS.Properties = {
@@ -57,7 +57,7 @@ const itemImgStyle: CSS.Properties = {
   bottom: "20px",
   borderRadius: "10px",
   border: "1px solid white",
-  backgroundColor: "white",
+  backgroundColor: "white"
 }
 
 export default function TeamEditor(props: {
@@ -66,11 +66,13 @@ export default function TeamEditor(props: {
   avatar: string
   author: string
   name: string
+  elo: number
   handleTabClick: (i: number) => void
   handleEditorClick: (x: number, y: number) => void
   handleAuthorChange: (e: any) => void
   handleAvatarChange: (e: any) => void
   handleRoundsRequiredChange: (e: any) => void
+  handleEloChange: (e: any) => void
 }) {
   return (
     <div className="nes-container" style={tabStyle}>
@@ -135,6 +137,18 @@ export default function TeamEditor(props: {
             value={props.author}
           />
         </div>
+        <div className="nes-field is-inline">
+          <label style={labelStyle} htmlFor="inline_field">
+            Elo
+          </label>
+          <input
+            onChange={props.handleEloChange}
+            type="number"
+            className="nes-input"
+            placeholder="Elo"
+            value={props.elo}
+          />
+        </div>
       </div>
 
       <Tabs
@@ -162,7 +176,7 @@ export default function TeamEditor(props: {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-evenly",
-                    marginBottom: "10px",
+                    marginBottom: "10px"
                   }}
                 >
                   <label
@@ -216,7 +230,7 @@ export default function TeamEditor(props: {
                   style={{
                     marginBottom: "10px",
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: "center"
                   }}
                 >
                   <table className="nes-table is-bordered is-centered">
@@ -257,7 +271,7 @@ export default function TeamEditor(props: {
                                           <div
                                             style={{
                                               display: "flex",
-                                              justifyContent: "space-evenly",
+                                              justifyContent: "space-evenly"
                                             }}
                                           >
                                             {p.items.map((it, j) => {
