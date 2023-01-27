@@ -1,33 +1,24 @@
 import React from "react"
 import ReactTooltip from "react-tooltip"
 import GamePlayerDetail from "./game-player-detail"
-import CSS from "csstype"
 import { IPlayer } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setPlayer } from "../../../stores/GameStore"
 import { CircularProgressbarWithChildren } from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
 import { getAvatarSrc } from "../../../utils"
+import "./game-player.css"
+import { cc } from "../../utils/jsx"
 
 export default function GamePlayer(props: {
   player: IPlayer
   click: (id: string) => void
   index: number
 }) {
-  const style: CSS.Properties = {
-    cursor: "var(--cursor-hover)",
-    height: "70px",
-    width: "70px",
-    position: "absolute",
-    borderRadius: "100px",
-    right: "0.5%",
-    top: `${0.5 + props.index * 12.5}%`,
-    backgroundImage: `url('${getAvatarSrc(props.player.avatar)}')`,
-    backgroundSize: "cover",
-    imageRendering: "pixelated"
-  }
   const dispatch = useAppDispatch()
   const game = useAppSelector((state) => state.network.game)
+  const spectatedPlayerId: string = useAppSelector((state) => state.game.currentPlayerId)
+  const selfPlayerId = useAppSelector((state) => state.network.uid)
 
   function playerClick() {
     props.click(props.player.id)
@@ -41,16 +32,17 @@ export default function GamePlayer(props: {
 
   return (
     <div
-      style={style}
-      onClick={() => {
-        playerClick()
-      }}
+      style={{top: `${1 + props.index * 12.5}%`, backgroundImage: `url('${getAvatarSrc(props.player.avatar)}')`}}
+      className={cc('game-player', { 
+        spectated: spectatedPlayerId === props.player.id,
+        self: selfPlayerId === props.player.id,
+        dead: props.player.life <= 0
+      })}
+      onClick={playerClick}
       data-tip
       data-for={"detail-" + props.player.id}
     >
-      <CircularProgressbarWithChildren
-        value={props.player.life}
-      ></CircularProgressbarWithChildren>
+      <CircularProgressbarWithChildren value={props.player.life} />
       <ReactTooltip
         id={"detail-" + props.player.id}
         className="customeTheme"
