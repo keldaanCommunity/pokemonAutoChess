@@ -817,7 +817,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
   onLeave(client: Client) {
     try {
       super.onLeave(client)
-      if (client && client.auth && client.auth.displayName) {
+      if (client && client.auth && client.auth.displayName && client.auth.uid) {
         console.log(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)
       }

@@ -145,15 +145,17 @@ export class OnLeaveCommand extends Command<
 > {
   execute({ client, consented }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
-      if (user) {
-        this.room.broadcast(Transfer.MESSAGES, {
-          name: "Server",
-          payload: `${user.name} left.`,
-          avatar: user.avatar,
-          time: Date.now()
-        })
-        this.state.users.delete(client.auth.uid)
+      if (client.auth.uid) {
+        const user = this.state.users.get(client.auth.uid)
+        if (user) {
+          this.room.broadcast(Transfer.MESSAGES, {
+            name: "Server",
+            payload: `${user.name} left.`,
+            avatar: user.avatar,
+            time: Date.now()
+          })
+          this.state.users.delete(client.auth.uid)
+        }
       }
     } catch (error) {
       console.error(error)
