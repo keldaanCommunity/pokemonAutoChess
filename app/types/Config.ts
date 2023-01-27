@@ -36,7 +36,7 @@ export const ExpTable: { [key: number]: number } = Object.freeze({
   6: 32,
   7: 50,
   8: 70,
-  9: -1
+  9: 255
 })
 
 export const TypeTrigger: { [key in Synergy]: number[] } = {
