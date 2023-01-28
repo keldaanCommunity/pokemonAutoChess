@@ -283,7 +283,7 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
     if (pokemon.items.has(Item.AQUA_EGG)) {
-      pokemon.setMana(pokemon.mana / 2)
+      pokemon.setMana(pokemon.maxMana / 2)
     }
     if (pokemon.items.has(Item.ZOOM_LENS)) {
       const spellPowerBoost = 5 * pokemon.baseAtk
