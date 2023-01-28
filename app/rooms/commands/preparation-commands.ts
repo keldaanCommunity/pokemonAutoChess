@@ -19,41 +19,48 @@ export class OnJoinCommand extends Command<
   }
 > {
   execute({ client, options, auth }) {
-    if (this.state.ownerId == "") {
-      this.state.ownerId = auth.uid
-    }
-    UserMetadata.findOne({ uid: auth.uid }, (err: any, user: IUserMetadata) => {
-      if (user) {
-        this.state.users.set(
-          client.auth.uid,
-          new GameUser(
-            user.uid,
-            user.displayName,
-            user.elo,
-            user.avatar,
-            false,
-            false,
-            user.title,
-            user.role,
-            auth.email === undefined
-          )
-        )
-
-        if (user.uid == this.state.ownerId) {
-          // console.log(user.displayName);
-          this.state.ownerName = user.displayName
-        }
-        this.room.broadcast(Transfer.MESSAGES, {
-          name: "Server",
-          payload: `${user.displayName} joined.`,
-          avatar: user.avatar,
-          time: Date.now()
-        })
+    try {
+      if (this.state.ownerId == "") {
+        this.state.ownerId = auth.uid
       }
-    })
+      UserMetadata.findOne(
+        { uid: auth.uid },
+        (err: any, user: IUserMetadata) => {
+          if (user) {
+            this.state.users.set(
+              client.auth.uid,
+              new GameUser(
+                user.uid,
+                user.displayName,
+                user.elo,
+                user.avatar,
+                false,
+                false,
+                user.title,
+                user.role,
+                auth.email === undefined
+              )
+            )
 
-    if (this.state.users.size >= 8) {
-      return [new OnRemoveBotCommand().setPayload({ target: undefined })]
+            if (user.uid == this.state.ownerId) {
+              // console.log(user.displayName);
+              this.state.ownerName = user.displayName
+            }
+            this.room.broadcast(Transfer.MESSAGES, {
+              name: "Server",
+              payload: `${user.displayName} joined.`,
+              avatar: user.avatar,
+              time: Date.now()
+            })
+          }
+        }
+      )
+
+      if (this.state.users.size >= 8) {
+        return [new OnRemoveBotCommand().setPayload({ target: undefined })]
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 }
@@ -66,17 +73,21 @@ export class OnGameStartCommand extends Command<
   }
 > {
   execute({ client, message }) {
-    let allUsersReady = true
+    try {
+      let allUsersReady = true
 
-    this.state.users.forEach((user: GameUser, key: string) => {
-      if (!user.ready) {
-        allUsersReady = false
+      this.state.users.forEach((user: GameUser, key: string) => {
+        if (!user.ready) {
+          allUsersReady = false
+        }
+      })
+
+      if (allUsersReady && !this.state.gameStarted) {
+        this.state.gameStarted = true
+        this.room.broadcast(Transfer.GAME_START, message, { except: client })
       }
-    })
-
-    if (allUsersReady && !this.state.gameStarted) {
-      this.state.gameStarted = true
-      this.room.broadcast(Transfer.GAME_START, message, { except: client })
+    } catch (error) {
+      console.log(error)
     }
   }
 }
@@ -89,7 +100,11 @@ export class OnMessageCommand extends Command<
   }
 > {
   execute({ client, message }) {
-    this.room.broadcast(Transfer.MESSAGES, { ...message, time: Date.now() })
+    try {
+      this.room.broadcast(Transfer.MESSAGES, { ...message, time: Date.now() })
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
@@ -101,10 +116,13 @@ export class OnRoomNameCommand extends Command<
   }
 > {
   execute({ client, message }) {
-    // console.log(client.auth.uid, this.state.ownerId);
-    if (client.auth.uid == this.state.ownerId && this.state.name != message) {
-      this.room.setName(message)
-      this.state.name = message
+    try {
+      if (client.auth.uid == this.state.ownerId && this.state.name != message) {
+        this.room.setName(message)
+        this.state.name = message
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 }
@@ -117,21 +135,25 @@ export class OnKickPlayerCommand extends Command<
   }
 > {
   execute({ client, message }) {
-    if (client.auth.uid === this.state.ownerId) {
-      this.room.clients.forEach((cli) => {
-        if (cli.auth.uid === message) {
-          this.room.broadcast(Transfer.MESSAGES, {
-            name: "Server",
-            payload: `${this.state.users.get(message).name} was kicked by ${
-              this.state.ownerName
-            }.`,
-            avatar: this.state.users.get(client.auth.uid)?.avatar,
-            time: Date.now()
-          })
-          cli.send(Transfer.KICK)
-          cli.leave()
-        }
-      })
+    try {
+      if (client.auth.uid === this.state.ownerId) {
+        this.room.clients.forEach((cli) => {
+          if (cli.auth.uid === message) {
+            this.room.broadcast(Transfer.MESSAGES, {
+              name: "Server",
+              payload: `${this.state.users.get(message).name} was kicked by ${
+                this.state.ownerName
+              }.`,
+              avatar: this.state.users.get(client.auth.uid)?.avatar,
+              time: Date.now()
+            })
+            cli.send(Transfer.KICK)
+            cli.leave()
+          }
+        })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 }
@@ -170,11 +192,15 @@ export class OnToggleReadyCommand extends Command<
   }
 > {
   execute({ client }) {
-    // console.log(this.state.users.get(client.auth.uid).ready);
-    if (client.auth.uid && this.state.users.has(client.auth.uid)) {
-      this.state.users.get(client.auth.uid).ready = !this.state.users.get(
-        client.auth.uid
-      ).ready
+    try {
+      // console.log(this.state.users.get(client.auth.uid).ready);
+      if (client.auth.uid && this.state.users.has(client.auth.uid)) {
+        this.state.users.get(client.auth.uid).ready = !this.state.users.get(
+          client.auth.uid
+        ).ready
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 }
@@ -186,37 +212,44 @@ export class InitializeBotsCommand extends Command<
   }
 > {
   execute(ownerId) {
-    UserMetadata.findOne({ uid: ownerId }, (err: any, user: IUserMetadata) => {
-      if (!user) {
-        return
-      }
-
-      const difficulty = { $gt: user.elo - 100, $lt: user.elo + 100 }
-
-      BotV2.find({ elo: difficulty }, ["avatar", "elo", "name"], null)
-        .limit(7)
-        .exec((err, bots) => {
-          if (!bots) {
+    try {
+      UserMetadata.findOne(
+        { uid: ownerId },
+        (err: any, user: IUserMetadata) => {
+          if (!user) {
             return
           }
-          bots.forEach((bot) => {
-            this.state.users.set(
-              bot.avatar,
-              new GameUser(
-                bot.avatar,
-                bot.name,
-                bot.elo,
-                bot.avatar,
-                true,
-                true,
-                "",
-                Role.BOT,
-                false
-              )
-            )
-          })
-        })
-    })
+
+          const difficulty = { $gt: user.elo - 100, $lt: user.elo + 100 }
+
+          BotV2.find({ elo: difficulty }, ["avatar", "elo", "name"], null)
+            .limit(7)
+            .exec((err, bots) => {
+              if (!bots) {
+                return
+              }
+              bots.forEach((bot) => {
+                this.state.users.set(
+                  bot.avatar,
+                  new GameUser(
+                    bot.avatar,
+                    bot.name,
+                    bot.elo,
+                    bot.avatar,
+                    true,
+                    true,
+                    "",
+                    Role.BOT,
+                    false
+                  )
+                )
+              })
+            })
+        }
+      )
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
@@ -227,81 +260,85 @@ type OnAddBotPayload = {
 
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
   execute(data: OnAddBotPayload) {
-    if (this.state.users.size >= 8) {
-      return
-    }
-
-    const userArray = new Array<string>()
-
-    this.state.users.forEach((value: GameUser, key: string) => {
-      if (value.isBot) {
-        userArray.push(key)
+    try {
+      if (this.state.users.size >= 8) {
+        return
       }
-    })
 
-    const { difficulty, user } = data
+      const userArray = new Array<string>()
 
-    let d
-
-    switch (difficulty) {
-      case BotDifficulty.EASY:
-        d = { $lt: 800 }
-        break
-      case BotDifficulty.MEDIUM:
-        d = { $gte: 800, $lt: 1100 }
-        break
-      case BotDifficulty.HARD:
-        d = { $gte: 1100, $lt: 1400 }
-        break
-      case BotDifficulty.EXTREME:
-        d = { $gte: 1400 }
-        break
-    }
-
-    BotV2.find(
-      { id: { $nin: userArray }, elo: d },
-      ["avatar", "elo", "name", "id"],
-      null,
-      (err, bots) => {
-        if (bots.length <= 0) {
-          this.room.broadcast(Transfer.MESSAGES, {
-            name: user.displayName,
-            payload: "Error: No bots found",
-            avatar: user.avatar,
-            time: Date.now()
-          })
-          return
+      this.state.users.forEach((value: GameUser, key: string) => {
+        if (value.isBot) {
+          userArray.push(key)
         }
+      })
 
-        const bot = bots[Math.floor(Math.random() * bots.length)]
+      const { difficulty, user } = data
 
-        if (this.state.users.size >= 8) {
-          return
-        } else {
-          this.state.users.set(
-            bot.id,
-            new GameUser(
+      let d
+
+      switch (difficulty) {
+        case BotDifficulty.EASY:
+          d = { $lt: 800 }
+          break
+        case BotDifficulty.MEDIUM:
+          d = { $gte: 800, $lt: 1100 }
+          break
+        case BotDifficulty.HARD:
+          d = { $gte: 1100, $lt: 1400 }
+          break
+        case BotDifficulty.EXTREME:
+          d = { $gte: 1400 }
+          break
+      }
+
+      BotV2.find(
+        { id: { $nin: userArray }, elo: d },
+        ["avatar", "elo", "name", "id"],
+        null,
+        (err, bots) => {
+          if (bots.length <= 0) {
+            this.room.broadcast(Transfer.MESSAGES, {
+              name: user.displayName,
+              payload: "Error: No bots found",
+              avatar: user.avatar,
+              time: Date.now()
+            })
+            return
+          }
+
+          const bot = bots[Math.floor(Math.random() * bots.length)]
+
+          if (this.state.users.size >= 8) {
+            return
+          } else {
+            this.state.users.set(
               bot.id,
-              bot.name,
-              bot.elo,
-              bot.avatar,
-              true,
-              true,
-              "",
-              Role.BOT,
-              false
+              new GameUser(
+                bot.id,
+                bot.name,
+                bot.elo,
+                bot.avatar,
+                true,
+                true,
+                "",
+                Role.BOT,
+                false
+              )
             )
-          )
 
-          this.room.broadcast(Transfer.MESSAGES, {
-            name: user.displayName,
-            payload: `Bot ${bot.name} added.`,
-            avatar: user.avatar,
-            time: Date.now()
-          })
+            this.room.broadcast(Transfer.MESSAGES, {
+              name: user.displayName,
+              payload: `Bot ${bot.name} added.`,
+              avatar: user.avatar,
+              time: Date.now()
+            })
+          }
         }
-      }
-    )
+      )
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
@@ -313,37 +350,41 @@ export class OnRemoveBotCommand extends Command<
   }
 > {
   execute({ target, user }) {
-    console.log(target)
-    // if no message, delete a random bot
-    if (!target) {
-      // let botDeleted = false;
-      const keys = this.state.users.keys()
-      while (!keys.done) {
-        const key = keys.next().value
-        if (this.state.users.get(key).isBot) {
-          this.room.broadcast(Transfer.MESSAGES, {
-            name: user?.displayName ? user.displayName : "Server",
-            payload: `Bot ${key} removed to make room for new player.`,
-            avatar: user?.avatar ? user.avatar : `0081/${Emotion.NORMAL}`,
-            time: Date.now()
-          })
-          this.state.users.delete(key)
-          // botDeleted = true;
-          return
+    try {
+      console.log(target)
+      // if no message, delete a random bot
+      if (!target) {
+        // let botDeleted = false;
+        const keys = this.state.users.keys()
+        while (!keys.done) {
+          const key = keys.next().value
+          if (this.state.users.get(key).isBot) {
+            this.room.broadcast(Transfer.MESSAGES, {
+              name: user?.displayName ? user.displayName : "Server",
+              payload: `Bot ${key} removed to make room for new player.`,
+              avatar: user?.avatar ? user.avatar : `0081/${Emotion.NORMAL}`,
+              time: Date.now()
+            })
+            this.state.users.delete(key)
+            // botDeleted = true;
+            return
+          }
         }
+        console.log("error, no bots in lobby")
+        return
       }
-      console.log("error, no bots in lobby")
-      return
-    }
 
-    const name = this.state.users.get(target).name
-    if (this.state.users.delete(target)) {
-      this.room.broadcast(Transfer.MESSAGES, {
-        name: user?.displayName ? user.displayName : "Server",
-        payload: `Bot ${name} removed.`,
-        avatar: user?.avatar ? user.avatar : `0081/${Emotion.NORMAL}`,
-        time: Date.now()
-      })
+      const name = this.state.users.get(target).name
+      if (this.state.users.delete(target)) {
+        this.room.broadcast(Transfer.MESSAGES, {
+          name: user?.displayName ? user.displayName : "Server",
+          payload: `Bot ${name} removed.`,
+          avatar: user?.avatar ? user.avatar : `0081/${Emotion.NORMAL}`,
+          time: Date.now()
+        })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 }
