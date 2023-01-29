@@ -143,7 +143,8 @@ const initialState: IUserLobbyState = {
     avatar: "ditto",
     author: "",
     elo: 1200,
-    name: "ditto"
+    name: "ditto",
+    id: ""
   }
 }
 
@@ -187,6 +188,7 @@ export const lobbySlice = createSlice({
     addUser: (state, action: PayloadAction<LobbyUser>) => {
       const u: ILobbyUser = JSON.parse(JSON.stringify(action.payload))
       state.users.push(u)
+      state.users.sort((a, b) => b.elo - a.elo)
     },
     changeUser: (
       state,
