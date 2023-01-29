@@ -54,11 +54,19 @@ export default class PreparationRoom extends Room {
     this.setName(n)
 
     this.onMessage(Transfer.KICK, (client, message) => {
-      this.dispatcher.dispatch(new OnKickPlayerCommand(), { client, message })
+      try {
+        this.dispatcher.dispatch(new OnKickPlayerCommand(), { client, message })
+      } catch (error) {
+        console.log(error)
+      }
     })
 
     this.onMessage(Transfer.CHANGE_ROOM_NAME, (client, message) => {
-      this.dispatcher.dispatch(new OnRoomNameCommand(), { client, message })
+      try {
+        this.dispatcher.dispatch(new OnRoomNameCommand(), { client, message })
+      } catch (error) {
+        console.log(error)
+      }
     })
 
     this.onMessage(Transfer.GAME_START, (client, message) => {

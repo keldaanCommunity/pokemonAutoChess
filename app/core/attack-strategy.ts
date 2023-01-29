@@ -142,6 +142,7 @@ export class PaydayStrategy extends AttackStrategy {
     )
     if (victim && pokemon.team === 0 && pokemon.simulation.player) {
       pokemon.simulation.player.money += pokemon.stars
+      pokemon.count.moneyCount++
     }
   }
 }

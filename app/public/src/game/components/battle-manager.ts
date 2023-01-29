@@ -298,6 +298,10 @@ export default class BattleManager {
             if (change.value != 0) {
               pkm.staticAnimation()
             }
+          } else if (change.field == "moneyCount") {
+            if (change.value != 0) {
+              this.moneyAnimation(pkm.x, pkm.y)
+            }
           } else if (change.field == "attackCount") {
             if (change.value != 0) {
               // console.log(change.value, pkm.action, pkm.targetX, pkm.targetY);
@@ -469,6 +473,38 @@ export default class BattleManager {
         }
       }
     }
+  }
+
+  moneyAnimation(x: number, y: number) {
+    const textStyle = {
+      fontSize: "25px",
+      fontFamily: "Verdana",
+      color: "#FFFF00",
+      align: "center",
+      strokeThickness: 2,
+      stroke: "#000"
+    }
+    const crit = this.scene.add.existing(
+      new GameObjects.Text(this.scene, x - 40, y - 50, "+ 1 GOLD", textStyle)
+    )
+    crit.setDepth(9)
+    this.scene.add.tween({
+      targets: [crit],
+      ease: "Linear",
+      duration: 1000,
+      delay: 0,
+      alpha: {
+        getStart: () => 1,
+        getEnd: () => 0
+      },
+      y: {
+        getStart: () => y - 50,
+        getEnd: () => y - 110
+      },
+      onComplete: () => {
+        crit.destroy(true)
+      }
+    })
   }
 
   displayDodge(x: number, y: number) {
