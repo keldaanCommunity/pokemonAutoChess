@@ -83,7 +83,7 @@
     height: 20px; 
 }
 
-.game-item-detail .item-detail-tooltip {
+.__react_component_tooltip.item-detail-tooltip {
     padding: 5px;
     font-size: 1vw;
 }
