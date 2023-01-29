@@ -206,7 +206,10 @@ export default class PokemonState {
         if (pokemon) {
           pokemon.setMana(pokemon.mana + Math.ceil(residualDamage / 10))
 
-          if (pokemon.items.has(Item.DEFENSIVE_RIBBON)) {
+          if (
+            pokemon.items.has(Item.DEFENSIVE_RIBBON) &&
+            pokemon.count.defensiveRibbonCount < 10
+          ) {
             pokemon.addAttack(1)
             pokemon.addDefense(1)
             pokemon.addSpecialDefense(1)
@@ -358,9 +361,11 @@ export default class PokemonState {
         attacker &&
         attacker.items.has(Item.KINGS_ROCK) &&
         attacker.team === 0 &&
-        attacker.simulation.player
+        attacker.simulation.player &&
+        attacker.count.moneyCount < 5
       ) {
         attacker.simulation.player.money += 1
+        attacker.count.moneyCount++
       }
 
       if (attacker && attacker.items.has(Item.FIRE_GEM)) {

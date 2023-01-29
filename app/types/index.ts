@@ -431,6 +431,7 @@ export interface ICount {
   mindBlownCount: number
   spellBlockedCount: number
   manaBurnCount: number
+  moneyCount: number
 }
 
 export interface IPreparationMetadata {
@@ -567,7 +568,7 @@ export const TitleName: { [key in Title]: string } = {
   [Title.HARLEQUIN]: "Harlequin",
   [Title.GLITCH_TRAINER]: "Glitch Trainer",
   [Title.NURSE]: "Nurse",
-  [Title.GARDIAN]: "Gardian",
+  [Title.GARDIAN]: "Guardian",
   [Title.DUKE]: "Duke",
   [Title.DUCHESS]: "Duchess",
   [Title.CHAMPION]: "Champion",

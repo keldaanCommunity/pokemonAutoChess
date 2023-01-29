@@ -111,7 +111,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.FIRE_GEM]:
     "On kill holder gain 5/10/15 attack damage depending on stage (0/10/20)",
   [Item.DEFENSIVE_RIBBON]:
-    "When the holder takes damage, they gain attack damage, 1 defense, 1 special defense and 5% attack speed.",
+    "When the holder takes damage, they gain attack damage, 1 defense, 1 special defense and 5% attack speed. (stacks 10 times)",
   [Item.WONDER_BOX]:
     "At the beginning of each battle phase, the holder equips 2 temporary items",
   [Item.RUNE_PROTECT]:
@@ -126,7 +126,8 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     "When combat begins, the holder and all allies within 1 hexes in the same row gain +30% Attack Speed for the rest of combat",
   [Item.FLAME_ORB]: "Holder is burned but increase attack by 100%",
   [Item.ASSAULT_VEST]: "Grants 16 bonus special defense",
-  [Item.KINGS_ROCK]: "+1 money each time the holder kill an ennemy",
+  [Item.KINGS_ROCK]:
+    "+1 money each time the holder kill an ennemy (max 5 golds)",
   [Item.POKE_DOLL]: "Reduce all incoming damage by 30%",
   [Item.RED_ORB]:
     "+8 attack damage. Each attack of the holder deals an additional 20% true damage",

@@ -294,6 +294,7 @@ export default class Simulation extends Schema implements ISimulation {
     if (pokemon.items.has(Item.FLAME_ORB)) {
       pokemon.addAttack(pokemon.baseAtk)
       pokemon.status.triggerBurn(60000, pokemon, pokemon, this.board)
+      pokemon.status.triggerWound(60000, pokemon, this.board)
     }
     if (pokemon.items.has(Item.RED_ORB)) {
       pokemon.addAttack(8)
