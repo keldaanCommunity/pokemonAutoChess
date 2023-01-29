@@ -243,7 +243,8 @@ export default class Simulation extends Schema implements ISimulation {
       case Stat.MANA: pokemon.setMana(pokemon.mana + value); break;
       case Stat.ATK_SPEED: pokemon.handleAttackSpeed(value); break;
       case Stat.CRIT_CHANCE: pokemon.addCritChance(value); break;
-      case Stat.HP: pokemon.handleShield(value, pokemon); break;      
+      case Stat.SHIELD: pokemon.handleShield(value, pokemon); break;
+      case Stat.HP: pokemon.handleHeal(value, pokemon); break;
     }
   }
 
@@ -282,7 +283,7 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
     if (pokemon.items.has(Item.AQUA_EGG)) {
-      pokemon.setMana(pokemon.mana / 2)
+      pokemon.setMana(pokemon.mana + pokemon.maxMana / 2)
     }
     if (pokemon.items.has(Item.ZOOM_LENS)) {
       const spellPowerBoost = 5 * pokemon.baseAtk

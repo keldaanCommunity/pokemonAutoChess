@@ -768,7 +768,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ""
   },
   [Ability.LIQUIDATION]: {
-    eng: "Deals 20/40/80 damage and remove 1/2/4 armor from the target",
+    eng: "Deals 20/40/80 damage and remove 1/2/4 defense from the target",
     esp: "",
     fra: "",
     prt: ""

@@ -62,4 +62,10 @@ export const StatLabel: { [key in Stat]: Langage } = {
     fra: "Puissance",
     prt: "Poder"
   },
+  [Stat.SHIELD]: {
+    eng: "Shield",
+    esp: "Escudo",
+    fra: "Bouclier",
+    prt: "Escudo"
+  },
 }

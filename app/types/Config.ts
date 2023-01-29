@@ -419,7 +419,7 @@ export const ItemStats: Partial<Record<Item, { [stat in Stat]?: number }>> = {
   [Item.TWISTED_SPOON]: { [Stat.SPELL_POWER]: 10 },
   [Item.MAGNET]: { [Stat.ATK_SPEED]: 10 },
   [Item.BLACK_GLASSES]: { [Stat.CRIT_CHANCE]: 5},
-  [Item.MIRACLE_SEED]: { [Stat.HP]: 15 },
+  [Item.MIRACLE_SEED]: { [Stat.SHIELD]: 15 },
   [Item.CHARCOAL]: { [Stat.ATK]: 1 },
   [Item.NEVER_MELT_ICE]: { [Stat.SPE_DEF]: 1 },
   [Item.HEART_SCALE]: { [Stat.DEF]: 1 },
