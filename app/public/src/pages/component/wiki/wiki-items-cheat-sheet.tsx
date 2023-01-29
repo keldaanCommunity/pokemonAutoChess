@@ -1,9 +1,9 @@
 import React from "react"
 import { ItemRecipe } from "../../../../../types/Config"
-import { ItemDescription, ItemName } from "../../../../../types/strings/Item"
-import { BasicItems } from "../../../../../types/enum/Item"
+import { BasicItems, Item } from "../../../../../types/enum/Item"
 import ReactTooltip from "react-tooltip"
 import CSS from "csstype"
+import { ItemDetailTooltip } from "../../../game/components/item-detail.tsx"
 
 const imgStyle: CSS.Properties = {
   imageRendering: "pixelated",
@@ -52,17 +52,16 @@ export default function WikiItemsCheatSheet() {
                       data-tip
                       data-for={"detail-" + i + "-" + j}
                     >
-                      <img
+                      <img                      
                         style={imgStyle}
                         src={"assets/item/" + tier2Item + ".png"}
                       ></img>
                       <ReactTooltip
                         id={"detail-" + i + "-" + j}
-                        className="customeTheme"
+                        className="customeTheme item-detail-tooltip"
                         effect="solid"
                       >
-                        <p>{ItemName[tier2Item]}</p>
-                        <p>{ItemDescription[tier2Item]}</p>
+                        <ItemDetailTooltip item={tier2Item as Item} depth={1} />
                       </ReactTooltip>
                     </td>
                   )

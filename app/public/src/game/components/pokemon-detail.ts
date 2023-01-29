@@ -1,5 +1,5 @@
 import { GameObjects } from "phaser"
-import { AttackType, Rarity } from "../../../../types/enum/Game"
+import { AttackType, Rarity, Stat } from "../../../../types/enum/Game"
 import { Emotion } from "../../../../types"
 import {
   AbilityName,
@@ -9,6 +9,7 @@ import { Ability } from "../../../../types/enum/Ability"
 import { getPortraitSrc } from "../../utils"
 import { AttackTypeColor, RarityColor } from "../../../../types/Config"
 import { AttackTypeLabel } from "../../../../types/strings/AttackType"
+import { StatLabel } from "../../../../types/strings/Stat"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -125,52 +126,28 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     wrap.appendChild(typesList)
 
     const stats = [
-      { title: "Health points", img: "assets/icons/hp.png", value: this.hp },
-      { title: "Defense", img: "assets/icons/def.png", value: this.def },
-      { title: "Attack", img: "assets/icons/atk.png", value: this.atk },
-      {
-        title: "Attack Speed",
-        img: "assets/icons/atkSpeed.png",
-        value: this.atkSpeed
-      },
-      {
-        title: "Critical Damage",
-        img: "assets/icons/critDamage.png",
-        value: this.critDamage
-      },
-      { title: "Mana", img: "assets/icons/mana.png", value: this.mana },
-      {
-        title: "Special Defense",
-        img: "assets/icons/speDef.png",
-        value: this.speDef
-      },
-      {
-        title: "Spell Damage",
-        img: "assets/icons/spellDamage.png",
-        value: this.spellDamage
-      },
-      {
-        title: "Attack Range",
-        img: "assets/icons/range.png",
-        value: this.range
-      },
-      {
-        title: "Critical Chance",
-        img: "assets/icons/critChance.png",
-        value: this.critChance
-      }
+      { stat: Stat.HP, elm: this.hp },
+      { stat: Stat.DEF, elm: this.def },
+      { stat: Stat.ATK, elm: this.atk },
+      { stat: Stat.ATK_SPEED, elm: this.atkSpeed },
+      { stat: Stat.CRIT_DAMAGE, elm: this.critDamage },
+      { stat: Stat.MANA, elm: this.mana },
+      { stat: Stat.SPE_DEF, elm: this.speDef },
+      { stat: Stat.SPELL_POWER, elm: this.spellDamage },
+      { stat: Stat.RANGE, elm: this.range },
+      { stat: Stat.CRIT_CHANCE, elm: this.critChance }
     ]
 
     const statsElm = document.createElement("div")
     statsElm.className = "game-pokemon-detail-stats"
-    for (const stat of stats) {
+    for (const { stat, elm } of stats) {
       const statElm = document.createElement("div")
       const statImg = document.createElement("img")
-      statImg.src = stat.img
-      statImg.alt = stat.title
-      statImg.title = stat.title
+      statImg.src = `assets/icons/${stat}.png`
+      statImg.alt = stat
+      statImg.title = StatLabel[stat]["eng"]
       statElm.appendChild(statImg)
-      statElm.appendChild(stat.value)
+      statElm.appendChild(elm)
       statsElm.appendChild(statElm)
     }
     wrap.appendChild(statsElm)
@@ -178,10 +155,10 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     const ult = document.createElement("div")
     ult.className = "game-pokemon-detail-ult"
     const ultName = document.createElement("p")
-    ultName.textContent = AbilityName[skill].eng
+    ultName.textContent = AbilityName[skill]["eng"]
 
     const description = document.createElement("p")
-    description.textContent = AbilityDescription[skill].eng
+    description.textContent = AbilityDescription[skill]["eng"]
 
     ult.appendChild(ultName)
     ult.appendChild(description)

@@ -24,6 +24,7 @@ import {
 import { DesignTiled } from "../../../../core/design"
 import { loadPreferences } from "../../preferences"
 import { getPortraitSrc } from "../../utils"
+import { Item } from "../../../../types/enum/Item"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -727,7 +728,7 @@ export default class GameScene extends Scene {
               (value[0] == dropZone.name && value[1] == gameObject.name)
             ) {
               this.itemsContainer?.sendToBack(dropZone)
-              gameObject.showTempDetail(key)
+              gameObject.showTempDetail(key as Item)
               break
             }
           }

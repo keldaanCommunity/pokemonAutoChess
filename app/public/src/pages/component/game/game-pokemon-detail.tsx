@@ -2,13 +2,25 @@ import React from "react"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { AttackTypeColor, RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
+import { Stat } from "../../../../../types/enum/Game"
 import { AbilityName, AbilityDescription } from "../../../../../types/strings/Ability"
 import { AttackTypeLabel } from "../../../../../types/strings/AttackType"
+import { StatLabel } from "../../../../../types/strings/Stat"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: { pokemon: Pokemon }) {
+
+  const pokemonStats = [
+    { stat: Stat.HP, value: props.pokemon.hp },
+    { stat: Stat.DEF, value: props.pokemon.def },
+    { stat: Stat.ATK, value: props.pokemon.atk },
+    { stat: Stat.MANA, value: props.pokemon.maxMana },
+    { stat: Stat.SPE_DEF, value: props.pokemon.speDef },
+    { stat: Stat.RANGE, value: props.pokemon.range },
+  ]
+
   return (
     <div className="game-pokemon-detail in-shop">
       <img
@@ -33,30 +45,12 @@ export function GamePokemonDetail(props: { pokemon: Pokemon }) {
       </div>
                
       <div className="game-pokemon-detail-stats">
-        <div>
-          <img src="assets/icons/hp.png" />
-          <p>{props.pokemon.hp}</p>
+        {pokemonStats.map(({ stat, value }) => (
+          <div>
+          <img src={`assets/icons/${stat}.png`} alt={stat} title={StatLabel[stat]["eng"]} />
+          <p>{value}</p>
         </div>
-        <div>
-          <img src="assets/icons/def.png" />
-          <p>{props.pokemon.def}</p>
-        </div>
-        <div>
-          <img src="assets/icons/atk.png" />
-          <p>{props.pokemon.atk}</p>
-        </div>
-        <div>
-          <img src="assets/icons/mana.png" />
-          <p>{props.pokemon.maxMana}</p>
-        </div>        
-        <div>
-          <img src="assets/icons/speDef.png" />
-          <p>{props.pokemon.speDef}</p>
-        </div>        
-        <div>
-          <img src="assets/icons/range.png" />
-          <p>{props.pokemon.range}</p>
-        </div>
+        ))}
       </div>
 
       {props.pokemon.skill !== Ability.DEFAULT && <div className="game-pokemon-detail-ult">

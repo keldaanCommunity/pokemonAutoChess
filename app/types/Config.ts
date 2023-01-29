@@ -2,7 +2,7 @@ import { Synergy } from "./enum/Synergy"
 import { Pkm, PkmIndex } from "./enum/Pokemon"
 import { Item } from "./enum/Item"
 import { Effect } from "./enum/Effect"
-import { AttackType, Rarity } from "./enum/Game"
+import { AttackType, Rarity, Stat } from "./enum/Game"
 import { Emotion } from "."
 
 export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
@@ -413,6 +413,17 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.RED_ORB]: [Item.CHARCOAL, Item.CHARCOAL],
   [Item.MAX_REVIVE]: [Item.CHARCOAL, Item.HEART_SCALE],
   [Item.ROCKY_HELMET]: [Item.HEART_SCALE, Item.HEART_SCALE]
+}
+
+export const ItemStats: Partial<Record<Item, { [stat in Stat]?: number }>> = {  
+  [Item.TWISTED_SPOON]: { [Stat.SPELL_POWER]: 10 },
+  [Item.MAGNET]: { [Stat.ATK_SPEED]: 10 },
+  [Item.BLACK_GLASSES]: { [Stat.CRIT_CHANCE]: 5},
+  [Item.MIRACLE_SEED]: { [Stat.SHIELD]: 15 },
+  [Item.CHARCOAL]: { [Stat.ATK]: 1 },
+  [Item.NEVER_MELT_ICE]: { [Stat.SPE_DEF]: 1 },
+  [Item.HEART_SCALE]: { [Stat.DEF]: 1 },
+  [Item.MYSTIC_WATER]: { [Stat.MANA]: 15 }
 }
 
 export type DungeonInfo = {

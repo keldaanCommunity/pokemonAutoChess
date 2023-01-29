@@ -2,6 +2,7 @@ import Button from "./button"
 import { GameObjects } from "phaser"
 import ItemDetail from "./item-detail"
 import { Item } from "../../../../types/enum/Item"
+import ItemsContainer from "./items-container"
 
 export default class ItemContainer extends Button {
   detail: ItemDetail
@@ -9,9 +10,10 @@ export default class ItemContainer extends Button {
   tempDetail: ItemDetail | undefined
   tempSprite: GameObjects.Image | undefined
   name: Item
-
+  parentContainer: ItemsContainer
   scene: Phaser.Scene
   dragable: boolean
+  
   constructor(
     scene: Phaser.Scene,
     x: number,
@@ -42,6 +44,7 @@ export default class ItemContainer extends Button {
       this.dragable ? 2 : 1
     )
     this.detail = new ItemDetail(scene, 0, 0, item)
+    this.detail.setDepth(100)
     this.detail.setPosition(
       this.detail.width * 0.5 + 40,
       this.detail.height * 0.5 + 40
@@ -83,7 +86,8 @@ export default class ItemContainer extends Button {
 
   openDetail() {
     if (this.parentContainer.visible) {
-      this.detail.setVisible(true)
+      this.parentContainer.closeDetails(); // close other open item tooltips
+      this.detail.setVisible(true)      
     }
   }
 
@@ -100,7 +104,7 @@ export default class ItemContainer extends Button {
     this.detail.setVisible(false)
   }
 
-  showTempDetail(item: string) {
+  showTempDetail(item: Item) {
     this.detail.setVisible(false)
     this.sprite.setVisible(false)
     this.tempSprite = new GameObjects.Image(
@@ -111,6 +115,7 @@ export default class ItemContainer extends Button {
       item
     ).setScale(this.dragable ? 2 : 1, this.dragable ? 2 : 1)
     this.tempDetail = new ItemDetail(this.scene, 0, 0, item)
+    this.tempDetail.setDepth(100)    
     this.tempDetail.setPosition(
       this.tempDetail.width * 0.5 + 40,
       this.tempDetail.height * 0.5 + 40

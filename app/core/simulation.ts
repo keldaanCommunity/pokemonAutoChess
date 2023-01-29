@@ -6,14 +6,14 @@ import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { BasicItems, Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, Climate, PokemonActionState } from "../types/enum/Game"
+import { Climate, PokemonActionState, Stat } from "../types/enum/Game"
 import Dps from "./dps"
 import DpsHeal from "./dps-heal"
 import ItemFactory from "../models/item-factory"
 import { ISimulation, IPokemonEntity, IPokemon, IPlayer } from "../types"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
-import { ItemRecipe } from "../types/Config"
+import { ItemRecipe, ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 
@@ -234,23 +234,23 @@ export default class Simulation extends Schema implements ISimulation {
     return { x: row, y: column }
   }
 
+  applyStat(pokemon: PokemonEntity, stat: Stat, value: number){
+    switch(stat){
+      case Stat.ATK: pokemon.addAttack(value); break;
+      case Stat.DEF: pokemon.addDefense(value); break;
+      case Stat.SPE_DEF: pokemon.addSpecialDefense(value); break;
+      case Stat.SPELL_POWER: pokemon.addSpellDamage(value); break;
+      case Stat.MANA: pokemon.setMana(pokemon.mana + value); break;
+      case Stat.ATK_SPEED: pokemon.handleAttackSpeed(value); break;
+      case Stat.CRIT_CHANCE: pokemon.addCritChance(value); break;
+      case Stat.SHIELD: pokemon.handleShield(value, pokemon); break;
+      case Stat.HP: pokemon.handleHeal(value, pokemon); break;
+    }
+  }
+
   applyBasicItemStat(pokemon: PokemonEntity, item: Item) {
-    if (item === Item.TWISTED_SPOON) {
-      pokemon.addSpellDamage(10)
-    } else if (item === Item.MYSTIC_WATER) {
-      pokemon.setMana(pokemon.mana + 15)
-    } else if (item === Item.MAGNET) {
-      pokemon.handleAttackSpeed(15)
-    } else if (item === Item.BLACK_GLASSES) {
-      pokemon.addCritChance(5)
-    } else if (item === Item.MIRACLE_SEED) {
-      pokemon.handleShield(15, pokemon)
-    } else if (item === Item.NEVER_MELT_ICE) {
-      pokemon.addSpecialDefense(1)
-    } else if (item === Item.CHARCOAL) {
-      pokemon.addAttack(1)
-    } else if (item === Item.HEART_SCALE) {
-      pokemon.addDefense(1)
+    if(item in ItemStats){
+      Object.entries(ItemStats[item]!).forEach(([stat, value]) => this.applyStat(pokemon, stat as Stat, value))
     }
   }
 
@@ -283,7 +283,7 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
     if (pokemon.items.has(Item.AQUA_EGG)) {
-      pokemon.setMana(pokemon.maxMana / 2)
+      pokemon.setMana(pokemon.mana + pokemon.maxMana / 2)
     }
     if (pokemon.items.has(Item.ZOOM_LENS)) {
       const spellPowerBoost = 5 * pokemon.baseAtk
