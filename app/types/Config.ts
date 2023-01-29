@@ -417,7 +417,7 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
 
 export const ItemStats: Partial<Record<Item, { [stat in Stat]?: number }>> = {  
   [Item.TWISTED_SPOON]: { [Stat.SPELL_POWER]: 10 },
-  [Item.MAGNET]: { [Stat.ATK_SPEED]: 15 },
+  [Item.MAGNET]: { [Stat.ATK_SPEED]: 10 },
   [Item.BLACK_GLASSES]: { [Stat.CRIT_CHANCE]: 5},
   [Item.MIRACLE_SEED]: { [Stat.HP]: 15 },
   [Item.CHARCOAL]: { [Stat.ATK]: 1 },
