@@ -50,4 +50,11 @@ export default class ItemsContainer extends GameObjects.Container {
   findItem(item: string) {
     return this.getFirst("name", item)
   }
+
+  closeDetails(){
+    for (let i = 0; i < this.list.length; i++) {
+      const it = <ItemContainer>this.list[i]
+      it.closeDetail()
+    }
+  }
 }

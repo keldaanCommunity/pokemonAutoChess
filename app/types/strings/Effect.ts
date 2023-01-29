@@ -185,17 +185,17 @@ export const EffectDescription: {
     fra: "+10 mana / attaque pour tous les pkm"
   },
   [Effect.AMNESIA]: {
-    eng: "Psychic pokemons gains +50% spell damage",
+    eng: "Psychic pokemons gains +50% spell power",
     esp: "Ally gana +5 SPEDEF",
     fra: "Les alliés gagnent +5 SPEDEF"
   },
   [Effect.LIGHT_SCREEN]: {
-    eng: "Psychic pokemons gains +100% spell damage",
+    eng: "Psychic pokemons gains +100% spell power",
     esp: "Ally gana +10 SPEDEF adicionales",
     fra: "Les alliés gagnent un additionel +10 SPEDEF"
   },
   [Effect.EERIE_SPELL]: {
-    eng: "Psychic pokemons gains +150% spell damage",
+    eng: "Psychic pokemons gains +150% spell power",
     esp: "Ally gana +20 SPEDEF adicionales",
     fra: "Les alliés gagnent un additionel +20 SPEDEF"
   },

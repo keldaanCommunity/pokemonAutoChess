@@ -75,3 +75,16 @@ export enum Climate {
   SANDSTORM = "SANDSTORM",
   SNOW = "SNOW"
 }
+
+export enum Stat {
+  ATK = "atk",
+  ATK_SPEED = "atkSpeed",
+  DEF = "def",
+  SPE_DEF = "speDef",
+  HP = "hp",
+  RANGE = "range",
+  MANA = "mana",
+  CRIT_CHANCE = "critChance",
+  CRIT_DAMAGE = "critDamage",
+  SPELL_POWER = "spellDamage"
+}

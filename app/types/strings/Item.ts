@@ -59,12 +59,12 @@ export const ItemName: { [key in Item]: string } = {
 
 export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.FOSSIL_STONE]: "Give it to a Ditto to obtain a random fossil",
-  [Item.TWISTED_SPOON]: "+10% spell damage",
+  [Item.TWISTED_SPOON]: "+10% spell power",
   [Item.MYSTIC_WATER]: "+15 mana",
   [Item.MAGNET]: "+10% attack speed",
   [Item.BLACK_GLASSES]: "+5% critical hit",
   [Item.MIRACLE_SEED]: "+15 health",
-  [Item.NEVER_MELT_ICE]: "+2 special defense",
+  [Item.NEVER_MELT_ICE]: "+1 special defense",
   [Item.CHARCOAL]: "+1 attack",
   [Item.HEART_SCALE]: "+1 defense",
   [Item.OLD_AMBER]: "The holder gains the fossil type",
@@ -76,9 +76,9 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.DUSK_STONE]: "The holder gains the dark type",
   [Item.LEAF_STONE]: "The holder gains the grass type",
   [Item.ICY_ROCK]: "The holder gains the ice type",
-  [Item.CHOICE_SPECS]: "The holder gains 80% spell damage",
+  [Item.CHOICE_SPECS]: "The holder gains 80% spell power",
   [Item.SOUL_DEW]:
-    "During combat, the holder gains 10% spell damage every 2 seconds",
+    "During combat, the holder gains 10% spell power every 2 seconds",
   [Item.UPGRADE]: "Attacks grant +5% bonus Attack Speed for the rest of combat",
   [Item.REAPER_CLOTH]: "The holder spells can critically strike",
   [Item.POKEMONOMICON]:
@@ -87,7 +87,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     "30% bonus damage on spells up to 75% if target as more than 200hp",
   [Item.SHELL_BELL]: "Holder heals for 50% of all damages",
   [Item.LUCKY_EGG]:
-    "30% spelldamage for holder and adjacent allies in the same row",
+    "30% spell power for holder and adjacent allies in the same row",
   [Item.AQUA_EGG]:
     "The holder gains 50% mana at start. After casting its ability the holder gains 20 mana",
   [Item.BLUE_ORB]:

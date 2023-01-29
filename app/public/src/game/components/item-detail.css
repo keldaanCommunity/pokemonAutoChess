@@ -1,0 +1,89 @@
+.game-item-detail {
+    min-width: 200px;
+    max-width: 400px;
+    color: white;
+    font-size: 1vw;
+    display:grid;
+    grid-template-columns: 50px 1fr;
+    grid-template-areas:
+    "icon name"
+    "icon stats"
+    "description description"
+    "combinations combinations";
+}
+
+.game-item-detail-icon {
+    width:40px; 
+    height:40px;
+    image-rendering: pixelated;
+    grid-area: icon;
+}
+
+.game-item-detail-name {
+    grid-area: name;
+    margin: 0;
+}
+
+.game-item-detail-stats {
+    grid-area: stats;
+    display:flex;
+    gap: 1em;
+    font-size: 80%;
+    margin: 0 0 0.5em 0;
+    align-items: center;
+    line-height: 1;
+}
+
+.game-item-detail-stats > div {
+    display:flex;
+    align-items: center;
+}
+
+.game-item-detail-stats img {
+    width: 20px;
+    height: 20px;
+}
+
+.game-item-detail-description {
+    grid-area: description;
+    background-color: #4F5160;
+    box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+    padding: 0.25em 0.5em;
+    margin: 0 -5px 4px -5px;
+    font-size: 80%;
+}
+
+.game-item-detail-description:last-child {
+    margin-bottom: -5px;
+}
+
+.game-item-detail-combinations {
+    display:flex; 
+    justify-content:space-between;
+    grid-area: combinations;
+    gap: 0.5em;
+    min-width: 320px;
+}
+
+.game-item-detail-combination {
+    display:flex;
+    flex-flow: column;
+    justify-content:space-between;
+}
+
+.game-item-detail-combination > p {
+    margin: 0;
+    font-size: 60%;
+    text-shadow: 0 0 2px black;
+    text-align: center;
+}
+
+.game-item-detail-combination > img {
+    width: 20px;
+    height: 20px; 
+}
+
+.game-item-detail .item-detail-tooltip {
+    padding: 5px;
+    font-size: 1vw;
+}
