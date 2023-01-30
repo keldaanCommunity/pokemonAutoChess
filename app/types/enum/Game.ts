@@ -89,3 +89,9 @@ export enum Stat {
   SPELL_POWER = "spellDamage",
   SHIELD = "shield"
 }
+
+export enum Damage {
+  PHYSICAL = "PHYSICAL",
+  SPECIAL = "SPECIAL",
+  TRUE = "TRUE"
+}
