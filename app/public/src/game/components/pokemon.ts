@@ -87,6 +87,7 @@ export default class Pokemon extends Button {
   electricField: GameObjects.Sprite | undefined
   psychicField: GameObjects.Sprite | undefined
   voidBoost: GameObjects.Sprite | undefined
+  stars: number
 
   constructor(
     scene: Phaser.Scene,
@@ -97,6 +98,7 @@ export default class Pokemon extends Button {
     isPopup: boolean
   ) {
     super(scene, x, y, 75, 75)
+    this.stars = pokemon.stars
     this.evolution = instanceofPokemonEntity(pokemon)
       ? Pkm.DEFAULT
       : (pokemon as IPokemon).evolution
@@ -270,7 +272,8 @@ export default class Pokemon extends Button {
             this.skill,
             this.emotion,
             this.shiny,
-            this.index
+            this.index,
+            this.stars
           )
         } else {
           this.detail = new PokemonDetail(
@@ -294,7 +297,8 @@ export default class Pokemon extends Button {
             this.skill,
             this.emotion,
             this.shiny,
-            this.index
+            this.index,
+            this.stars
           )
         }
         this.detail.setPosition(

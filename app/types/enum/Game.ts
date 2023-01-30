@@ -78,7 +78,7 @@ export enum Climate {
 
 export enum Stat {
   ATK = "atk",
-  ATK_SPEED = "atkSpeed",
+  ATK_SPEED = "speed",
   DEF = "def",
   SPE_DEF = "speDef",
   HP = "hp",
@@ -88,4 +88,10 @@ export enum Stat {
   CRIT_DAMAGE = "critDamage",
   SPELL_POWER = "spellDamage",
   SHIELD = "shield"
+}
+
+export enum Damage {
+  PHYSICAL = "PHYSICAL",
+  SPECIAL = "SPECIAL",
+  TRUE = "TRUE"
 }

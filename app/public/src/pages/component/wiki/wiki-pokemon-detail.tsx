@@ -12,6 +12,7 @@ import { RarityColor } from "../../../../../types/Config"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
+import { AbilityTooltip } from "../ability/ability-tooltip"
 
 export default function WikiPokemonDetail(props: {
   pokemon: Pkm
@@ -23,13 +24,15 @@ export default function WikiPokemonDetail(props: {
   if (!initialized) {
     setInitialized(true)
     fetch(`${CDN_URL}/credit_names.txt`)
-      .then(res => res.text())
-      .then(text => text.split('\n'))
-      .then((lines: string[]) => lines.slice(1).map(line => {
-        const [Name, Discord, Contact] = line.split('\t')
-        const credit: ICreditName = { Name, Discord, Contact }
-        return credit
-      }))
+      .then((res) => res.text())
+      .then((text) => text.split("\n"))
+      .then((lines: string[]) =>
+        lines.slice(1).map((line) => {
+          const [Name, Discord, Contact] = line.split("\t")
+          const credit: ICreditName = { Name, Discord, Contact }
+          return credit
+        })
+      )
       .then((credits: ICreditName[]) => setCredits(credits))
   }
 
@@ -39,23 +42,31 @@ export default function WikiPokemonDetail(props: {
         <div style={{ width: "30%" }}>
           <p>name:{pokemon.name}</p>
           <p>Portrait Credit:</p>
-          <Credits
-            credits={credits}
-            primary={props.m.sprite_credit.primary}
-            secondary={props.m.sprite_credit.secondary}
-          />
+          {credits ? (
+            <Credits
+              credits={credits}
+              primary={props.m.sprite_credit.primary}
+              secondary={props.m.sprite_credit.secondary}
+            />
+          ) : null}
+
           <p>Sprite Credit:</p>
-          <Credits
-            credits={credits}
-            primary={props.m.portrait_credit.primary}
-            secondary={props.m.portrait_credit.secondary}
-          />
+          {credits ? (
+            <Credits
+              credits={credits}
+              primary={props.m.portrait_credit.primary}
+              secondary={props.m.portrait_credit.secondary}
+            />
+          ) : null}
+
           <p style={{ color: RarityColor[pokemon.rarity] }}>
             rarity:{pokemon.rarity}
           </p>
           <div>
             types:
-            {pokemon.types.map((type) => <SynergyIcon key={"img" + type} type={type} />)}
+            {pokemon.types.map((type) => (
+              <SynergyIcon key={"img" + type} type={type} />
+            ))}
           </div>
           <div>
             evolution:{" "}
@@ -81,7 +92,7 @@ export default function WikiPokemonDetail(props: {
         </div>
         <div style={{ width: "30%" }}>
           <p>Ability: {AbilityName[pokemon.skill].eng}</p>
-          <p>Description:{AbilityDescription[pokemon.skill].eng}</p>
+          <AbilityTooltip ability={pokemon.skill} stars={pokemon.stars} />
         </div>
       </div>
     )

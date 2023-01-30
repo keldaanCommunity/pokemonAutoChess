@@ -10,6 +10,9 @@ import { getPortraitSrc } from "../../utils"
 import { AttackTypeColor, RarityColor } from "../../../../types/Config"
 import { AttackTypeLabel } from "../../../../types/strings/AttackType"
 import { StatLabel } from "../../../../types/strings/Stat"
+import React from "react"
+import ReactDOM from "react-dom"
+import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -45,7 +48,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     skill: Ability,
     emotion: Emotion,
     shiny: boolean,
-    index: string
+    index: string,
+    stars: number
   ) {
     super(scene, x, y)
 
@@ -154,13 +158,15 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
     const ult = document.createElement("div")
     ult.className = "game-pokemon-detail-ult"
+
+    const ultNameWrap = document.createElement("div")
     const ultName = document.createElement("p")
     ultName.textContent = AbilityName[skill]["eng"]
 
-    const description = document.createElement("p")
-    description.textContent = AbilityDescription[skill]["eng"]
-
-    ult.appendChild(ultName)
+    const description = document.createElement("div")
+    ReactDOM.render(<AbilityTooltip ability={skill} />, description)
+    ultNameWrap.appendChild(ultName)
+    ult.appendChild(ultNameWrap)
     ult.appendChild(description)
     wrap.appendChild(ult)
 

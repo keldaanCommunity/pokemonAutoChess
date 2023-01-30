@@ -11,9 +11,10 @@ import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { ITracker } from "../../../../../types/ITracker"
 import {
   AbilityName,
-  AbilityDescription,
+  AbilityDescription
 } from "../../../../../types/strings/Ability"
 import SynergyIcon from "../icons/synergy-icon"
+import { AbilityTooltip } from "../ability/ability-tooltip"
 
 const entityStyle: CSS.Properties = {
   position: "absolute",
@@ -21,13 +22,13 @@ const entityStyle: CSS.Properties = {
   top: "8.5%",
   margin: "10px",
   marginTop: "0px",
-  width: "20%",
+  width: "20%"
 }
 
 const imgStyle: CSS.Properties = {
   height: "80px",
   width: "80px",
-  imageRendering: "pixelated",
+  imageRendering: "pixelated"
 }
 
 export default function SelectedEntity(props: {
@@ -55,7 +56,7 @@ export default function SelectedEntity(props: {
       id: "",
       selectedEmotion: detailledPkm.emotion,
       selectedShiny: detailledPkm.shiny,
-      shinyEmotions: [],
+      shinyEmotions: []
     })
     let pMetadata: ITracker | undefined = undefined
 
@@ -87,7 +88,7 @@ export default function SelectedEntity(props: {
                 props.selectEntity({
                   pkm: detailledPkm.pkm,
                   shiny: !detailledPkm.shiny,
-                  emotion: detailledPkm.emotion,
+                  emotion: detailledPkm.emotion
                 })
               }}
             />
@@ -101,7 +102,7 @@ export default function SelectedEntity(props: {
                 props.selectEntity({
                   pkm: detailledPkm.pkm,
                   shiny: detailledPkm.shiny,
-                  emotion: e.target.value as Emotion,
+                  emotion: e.target.value as Emotion
                 })
               }}
             >
@@ -116,7 +117,7 @@ export default function SelectedEntity(props: {
             display: "flex",
             flexWrap: "wrap",
             gap: "10px",
-            alignItems: "start",
+            alignItems: "start"
           }}
         >
           <div style={{ display: "flex" }}>
@@ -133,7 +134,7 @@ export default function SelectedEntity(props: {
           <p style={{ color: RarityColor[pokemon.rarity] }}>{pokemon.rarity}</p>
           <div>
             {pokemon.types.map((type) => {
-              return (<SynergyIcon type={type} key={"img" + type} />)
+              return <SynergyIcon type={type} key={"img" + type} />
             })}
           </div>
           <p>Health: {pokemon.hp}</p>
@@ -143,7 +144,7 @@ export default function SelectedEntity(props: {
           <p>Range: {pokemon.range}</p>
           <p>Mana: {pokemon.maxMana}</p>
           <p>Abilty: {AbilityName[pokemon.skill].eng}</p>
-          <p>{AbilityDescription[pokemon.skill].eng}</p>
+          <AbilityTooltip ability={pokemon.skill} />
         </div>
       </div>
     )

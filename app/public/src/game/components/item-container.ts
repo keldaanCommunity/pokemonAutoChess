@@ -13,7 +13,7 @@ export default class ItemContainer extends Button {
   parentContainer: ItemsContainer
   scene: Phaser.Scene
   dragable: boolean
-  
+
   constructor(
     scene: Phaser.Scene,
     x: number,
@@ -86,8 +86,8 @@ export default class ItemContainer extends Button {
 
   openDetail() {
     if (this.parentContainer.visible) {
-      this.parentContainer.closeDetails(); // close other open item tooltips
-      this.detail.setVisible(true)      
+      this.parentContainer.closeDetails() // close other open item tooltips
+      this.detail.setVisible(true)
     }
   }
 
@@ -115,7 +115,7 @@ export default class ItemContainer extends Button {
       item
     ).setScale(this.dragable ? 2 : 1, this.dragable ? 2 : 1)
     this.tempDetail = new ItemDetail(this.scene, 0, 0, item)
-    this.tempDetail.setDepth(100)    
+    this.tempDetail.setDepth(100)
     this.tempDetail.setPosition(
       this.tempDetail.width * 0.5 + 40,
       this.tempDetail.height * 0.5 + 40
