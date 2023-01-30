@@ -889,7 +889,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.CALM_MIND]: {
-    eng: `Buff pokemon attack by [50,100,150]%`,
+    eng: `Buff pokemon ${Stat.ATK} by [50,100,150]%`,
     esp: `Ataque de pokemón de la Buff en un 50,100,150%.`,
     fra: `Augmente l attaque du pokémon de 50,100,150%.`,
     prt: ``

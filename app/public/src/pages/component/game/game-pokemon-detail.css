@@ -1,91 +1,91 @@
 .__react_component_tooltip.game-pokemon-detail-tooltip {
-    padding: 5px;
+  padding: 5px;
 }
 
 .game-pokemon-detail {
-    color: #fff;
-    font-size: 16px;
-    display: grid;
-    max-width: 320px;
-    gap: 5px;
-    grid-template-columns: 88px 1fr auto;
-    grid-template-areas:
+  color: #fff;
+  font-size: 16px;
+  display: grid;
+  max-width: 320px;
+  gap: 5px;
+  grid-template-columns: 88px 1fr auto;
+  grid-template-areas:
     "portrait entry types"
     "stats stats stats"
     "ult ult ult";
 }
 
 .game-pokemon-detail p {
-    margin: 0;
+  margin: 0;
 }
 
 .game-pokemon-detail-entry {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: space-between;
-    grid-area: entry;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  grid-area: entry;
 }
 
 .game-pokemon-detail-entry-name {
-    text-transform: capitalize;
-    font-size: 1.2em;
+  text-transform: capitalize;
+  font-size: 1.2em;
 }
 
 .game-pokemon-detail-entry-rarity {
-    font-size: 85%;
+  font-size: 85%;
 }
 
 .game-pokemon-detail-portrait {
-    width: 80px;
-    height: 80px;
-    grid-area: portrait;
-    border-style: solid;
-    border-width: 4px;
-    border-radius: 8px;
-    image-rendering: pixelated;
-    box-sizing: content-box;
+  width: 80px;
+  height: 80px;
+  grid-area: portrait;
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 8px;
+  image-rendering: pixelated;
+  box-sizing: content-box;
 }
 
 .game-pokemon-detail-types {
-    display: flex;
+  display: flex;
 }
 
 .game-pokemon-detail-stats {
-    grid-area: stats;
-    display: grid;
-    grid-template: 32px 32px / repeat(5, 1fr)
+  grid-area: stats;
+  display: grid;
+  grid-template: 32px 32px / repeat(5, 1fr);
 }
 
 .in-shop .game-pokemon-detail-stats {
-    grid-template: 32px 32px / repeat(3, 1fr)
+  grid-template: 32px 32px / repeat(3, 1fr);
 }
 
 .game-pokemon-detail-stats > div {
-    white-space: nowrap;
-    overflow: visible;
+  white-space: nowrap;
+  overflow: visible;
 }
 
 .game-pokemon-detail-stats img {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 .game-pokemon-detail-stats img + p {
-    display: inline-block;
-    vertical-align: middle;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .game-pokemon-detail-ult {
-    grid-area: ult;
+  grid-area: ult;
 }
 
-.game-pokemon-detail-ult p:first-of-type {
-    background-color: #4F5160;
-    text-transform: capitalize;
-    font-variant: small-caps;
-    padding: 0.25em 0.5em;
-    margin: 0 -5px 4px -5px;
-    font-size: 1.2em;
-    box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+.game-pokemon-detail-ult div:first-of-type {
+  background-color: #4f5160;
+  text-transform: capitalize;
+  font-variant: small-caps;
+  padding: 0.25em 0.5em;
+  margin: 0 -5px 4px -5px;
+  font-size: 1.2em;
+  box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
 }

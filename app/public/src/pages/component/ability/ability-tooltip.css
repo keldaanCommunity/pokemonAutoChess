@@ -1,15 +1,15 @@
-.damage-physical{
-    color: #e76e55;
+.damage-physical {
+  color: #ff6e55;
 }
 
-.damage-special{
-    color: #209cee;
+.damage-special {
+  color: #7fc9ff;
 }
 
-.damage-true{
-    color: #f7d51d
+.damage-true {
+  color: #ffd800;
 }
 
-.stat-label{
-    color: rgb(171, 171, 171)
+.stat-label {
+  color: rgb(171, 171, 171);
 }

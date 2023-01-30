@@ -92,7 +92,7 @@ export default function WikiPokemonDetail(props: {
         </div>
         <div style={{ width: "30%" }}>
           <p>Ability: {AbilityName[pokemon.skill].eng}</p>
-          <AbilityTooltip ability={pokemon.skill} />
+          <AbilityTooltip ability={pokemon.skill} stars={pokemon.stars} />
         </div>
       </div>
     )

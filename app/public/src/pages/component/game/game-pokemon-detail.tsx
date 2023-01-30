@@ -59,7 +59,7 @@ export function GamePokemonDetail(props: { pokemon: Pokemon }) {
 
       <div className="game-pokemon-detail-stats">
         {pokemonStats.map(({ stat, value }) => (
-          <div>
+          <div key={stat}>
             <img
               src={`assets/icons/${stat}.png`}
               alt={stat}
@@ -72,8 +72,12 @@ export function GamePokemonDetail(props: { pokemon: Pokemon }) {
 
       {props.pokemon.skill !== Ability.DEFAULT && (
         <div className="game-pokemon-detail-ult">
-          <p>{AbilityName[props.pokemon.skill].eng}</p>
-          <AbilityTooltip ability={props.pokemon.skill} />
+          <div>
+            <p>{AbilityName[props.pokemon.skill].eng}</p>
+          </div>
+          <div>
+            <AbilityTooltip ability={props.pokemon.skill} />
+          </div>
         </div>
       )}
     </div>

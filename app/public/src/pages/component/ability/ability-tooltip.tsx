@@ -1,33 +1,18 @@
 import React, { ReactElement } from "react"
 import { Ability } from "../../../../../types/enum/Ability"
-import { Damage } from "../../../../../types/enum/Game"
+import { Damage, Stat } from "../../../../../types/enum/Game"
 import { AbilityDescription } from "../../../../../types/strings/Ability"
 import { StatLabel } from "../../../../../types/strings/Stat"
 import "./ability-tooltip.css"
 
+export const iconRegExp =
+  /PHYSICAL|SPECIAL|TRUE|atk|speed|critChance|critDamage|def|hp|mana|range|shield|speDef|spellDamage|\[[^\]]*\]/
+
 export function AbilityTooltip(props: { ability: Ability; stars?: number }) {
-  let description = AbilityDescription[props.ability].eng
-  if (props.stars) {
-    const match = [...description.matchAll(/\[[^\]]*\]/g)]
-    match.forEach((v) => {
-      const array = JSON.parse(v[0])
-      if (Array.isArray(array) && array[props.stars! - 1] !== undefined) {
-        description = description.replace(v[0], array[props.stars! - 1])
-      }
-    })
-  } else {
-    description = description.replace(/,/g, "/")
-    description = description.replace(/\[/g, "")
-    description = description.replace(/\]/g, "")
-  }
-  const matchDamage = [
-    ...description.matchAll(
-      /PHYSICAL|SPECIAL|TRUE|atk|atkSpeed|critChance|critDamage|def|hp|mana|range|shield|speDef|spellDamage/g
-    )
-  ]
-  let descriptionWithDamage = description.split(
-    /PHYSICAL|SPECIAL|TRUE|atk|atkSpeed|critChance|critDamage|def|hp|mana|range|shield|speDef|spellDamage/
-  )
+  const stars = props.stars ? props.stars : 1
+  const description = AbilityDescription[props.ability].eng
+  const matchDamage = [...description.matchAll(new RegExp(iconRegExp, "g"))]
+  let descriptionWithDamage = description.split(iconRegExp)
   return (
     <p>
       {descriptionWithDamage.map((f, i) => {
@@ -49,13 +34,31 @@ export function AbilityTooltip(props: { ability: Ability; stars?: number }) {
                 {token[0].toLowerCase()} damage
               </span>
             )
-          } else {
+          } else if (Object.values(Stat).includes(token[0] as Stat)) {
             d = (
               <span key={i}>
                 <img src={`assets/icons/${token[0]}.png`} />
                 <span className="stat-label"> {StatLabel[token[0]].eng}</span>
               </span>
             )
+          } else {
+            const array = JSON.parse(token[0])
+            if (Array.isArray(array) && array[stars - 1] !== undefined) {
+              d = (
+                <span>
+                  {array.map((v, j) => {
+                    const separator = j < array.length - 1 ? "/" : ""
+                    const name = j !== stars - 1 ? "stat-label" : ""
+                    return (
+                      <span key={j}>
+                        <span className={name}>{v}</span>
+                        {separator}
+                      </span>
+                    )
+                  })}
+                </span>
+              )
+            }
           }
         }
 
