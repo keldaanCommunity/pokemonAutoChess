@@ -16,6 +16,7 @@
     width:40px; 
     height:40px;
     image-rendering: pixelated;
+    object-fit: contain;
     grid-area: icon;
 }
 
