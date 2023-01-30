@@ -179,7 +179,14 @@ export default function Lobby() {
 
             room.onMessage(
               Transfer.REQUEST_BOT_LIST,
-              (bots: { name: string; avatar: string }[]) => {
+              (
+                bots: {
+                  name: string
+                  avatar: string
+                  id: string
+                  author: string
+                }[]
+              ) => {
                 dispatch(setBotList(bots))
               }
             )

@@ -32,9 +32,12 @@ export default function ModalMenu(props: {
     }
   }, [props.botData])
   const dispatch = useAppDispatch()
-  const botList: { name: string; avatar: string }[] = useAppSelector(
-    (state) => state.lobby.botList
-  )
+  const botList: {
+    name: string
+    avatar: string
+    id: string
+    author: string
+  }[] = useAppSelector((state) => state.lobby.botList)
   const url =
     props.pasteBinUrl.length == 0 ? null : (
       <h5>
@@ -109,8 +112,8 @@ export default function ModalMenu(props: {
                   Select...
                 </option>
                 {botList.map((bot) => (
-                  <option key={bot.avatar} value={bot.avatar}>
-                    {bot.name}
+                  <option key={bot.id} value={bot.id}>
+                    {bot.name} by {bot.author}
                   </option>
                 ))}
               </select>
