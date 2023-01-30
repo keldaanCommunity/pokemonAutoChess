@@ -26,7 +26,7 @@ interface IUserLobbyState {
   searchedUser: ILobbyUser | undefined
   tabIndex: number
   allRooms: RoomAvailable[]
-  botList: { name: string; avatar: string }[]
+  botList: { name: string; avatar: string; id: string; author: string }[]
   meta: IMeta[]
   metaItems: IItemsStatistic[]
   metaPokemons: IPokemonsStatistic[]
@@ -249,7 +249,9 @@ export const lobbySlice = createSlice({
     },
     setBotList: (
       state,
-      action: PayloadAction<{ name: string; avatar: string }[]>
+      action: PayloadAction<
+        { name: string; avatar: string; author: string; id: string }[]
+      >
     ) => {
       state.botList = action.payload
     },

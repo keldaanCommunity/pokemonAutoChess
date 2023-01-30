@@ -243,10 +243,20 @@ export default class CustomLobbyRoom extends LobbyRoom {
     })
 
     this.onMessage(Transfer.REQUEST_BOT_LIST, (client) => {
-      const botList = new Array<{ name: string; avatar: string }>()
+      const botList = new Array<{
+        name: string
+        avatar: string
+        author: string
+        id: string
+      }>()
 
       this.bots.forEach((b) => {
-        botList.push({ name: b.name, avatar: b.avatar })
+        botList.push({
+          name: b.name,
+          avatar: b.avatar,
+          id: b.id,
+          author: b.author
+        })
       })
 
       client.send(Transfer.REQUEST_BOT_LIST, botList)
