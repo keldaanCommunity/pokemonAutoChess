@@ -13,7 +13,7 @@ import ItemFactory from "../models/item-factory"
 import { ISimulation, IPokemonEntity, IPokemon, IPlayer } from "../types"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
-import { ItemRecipe, ItemStats } from "../types/Config"
+import { ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 
@@ -243,34 +243,17 @@ export default class Simulation extends Schema implements ISimulation {
       case Stat.MANA: pokemon.setMana(pokemon.mana + value); break;
       case Stat.ATK_SPEED: pokemon.handleAttackSpeed(value); break;
       case Stat.CRIT_CHANCE: pokemon.addCritChance(value); break;
+      case Stat.CRIT_DAMAGE: pokemon.addCritDamage(value); break;
       case Stat.SHIELD: pokemon.handleShield(value, pokemon); break;
       case Stat.HP: pokemon.handleHeal(value, pokemon); break;
     }
   }
 
-  applyBasicItemStat(pokemon: PokemonEntity, item: Item) {
-    if(item in ItemStats){
-      Object.entries(ItemStats[item]!).forEach(([stat, value]) => this.applyStat(pokemon, stat as Stat, value))
-    }
-  }
-
   applyItemsEffects(pokemon: PokemonEntity) {
     pokemon.items.forEach((item) => {
-      if (BasicItems.includes(item)) {
-        this.applyBasicItemStat(pokemon, item)
-      } else {
-        const recipe = ItemRecipe[item]
-        if (recipe && recipe.length === 2) {
-          recipe.forEach((i) => {
-            this.applyBasicItemStat(pokemon, i)
-          })
-        }
-      }
+      Object.entries(ItemStats[item]!).forEach(([stat, value]) => this.applyStat(pokemon, stat as Stat, value))    
     })
 
-    if (pokemon.items.has(Item.CHOICE_SPECS)) {
-      pokemon.addSpellDamage(80)
-    }
     if (pokemon.items.has(Item.SOUL_DEW)) {
       pokemon.status.triggerSoulDew(2000)
     }
@@ -296,32 +279,11 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.status.triggerBurn(60000, pokemon, pokemon, this.board)
       pokemon.status.triggerWound(60000, pokemon, this.board)
     }
-    if (pokemon.items.has(Item.RED_ORB)) {
-      pokemon.addAttack(8)
-    }
     if (pokemon.items.has(Item.BRIGHT_POWDER)) {
       pokemon.status.triggerBrightPowder(4000)
     }
-    if (pokemon.items.has(Item.XRAY_VISION)) {
-      pokemon.handleAttackSpeed(30)
-    }
     if (pokemon.items.has(Item.WIDE_LENS)) {
       pokemon.range += 2
-    }
-    if (pokemon.items.has(Item.RAZOR_FANG)) {
-      pokemon.addCritDamage(100)
-    }
-    if (pokemon.items.has(Item.RAZOR_CLAW)) {
-      pokemon.addCritChance(50)
-    }
-    if (pokemon.items.has(Item.ORAN_BERRY)) {
-      pokemon.handleShield(100, pokemon)
-    }
-    if (pokemon.items.has(Item.ASSAULT_VEST)) {
-      pokemon.addSpecialDefense(16)
-    }
-    if (pokemon.items.has(Item.ROCKY_HELMET)) {
-      pokemon.addDefense(10)
     }
   }
 

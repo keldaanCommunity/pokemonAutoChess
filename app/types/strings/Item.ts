@@ -76,7 +76,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.DUSK_STONE]: "The holder gains the dark type",
   [Item.LEAF_STONE]: "The holder gains the grass type",
   [Item.ICY_ROCK]: "The holder gains the ice type",
-  [Item.CHOICE_SPECS]: "The holder gains 80% bonus spell power, for a total of +100% spell power",
+  [Item.CHOICE_SPECS]: "The holder gains 100% bonus spell power",
   [Item.SOUL_DEW]:
     "During combat, the holder gains 10% spell power every 2 seconds",
   [Item.UPGRADE]: "Attacks grant +5% bonus Attack Speed for the rest of combat",
@@ -89,11 +89,11 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.LUCKY_EGG]:
     "30% spell power for holder and adjacent allies in the same row",
   [Item.AQUA_EGG]:
-    "The holder gains 50% of its max mana + 20 mana when combat begins. After casting its ability the holder gains 20 mana",
+    "The holder gains 50% of its max mana + 30 mana when combat begins. After casting its ability the holder gains 20 mana",
   [Item.BLUE_ORB]:
     "Every third attack from the holder unleashes a chain lightning that bounces to 3 enemies, burning 30 mana",
   [Item.ZOOM_LENS]:
-    "The holder convert 5% of spell power as attack and 5 x attack as spell power",
+    "The holder converts 5% of its spell power as attack and 5 x its attack as spell power",
   [Item.BRIGHT_POWDER]:
     "Every 4 sec, the holder throw sand, dropping a random adjacent ennemy speed by 30%",
   [Item.DELTA_ORB]:
@@ -102,7 +102,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.SMOKE_BALL]:
     "Reduce the attack speed of ennemy attackers by 40% for 5 seconds",
   [Item.XRAY_VISION]:
-    "Grants 30% bonus attack speed, for a total of +50% attack speed. The holder attacks can no longer miss.",
+    "+50% attack speed. The holder attacks can no longer miss.",
   [Item.RAZOR_FANG]: "+100% Critical hit damage",
   [Item.LEFTOVERS]:
     "During the combat, the holder attack heals adjacent allies on the same row for 5% of their max health",
@@ -117,21 +117,21 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.RUNE_PROTECT]:
     "When combat begins, the holder and all adjacent allies are immune to spells for the first 6 seconds",
   [Item.WIDE_LENS]: "The holder gains +2 range",
-  [Item.RAZOR_CLAW]: "The holder gains 50% Critical hit Chance",
+  [Item.RAZOR_CLAW]: "The holder gains 55% Critical hit Chance",
   [Item.FLUFFY_TAIL]: "Holder is immune to all status",
-  [Item.ORAN_BERRY]: "Grants 100 bonus shield, for a total of 130 shield when combat begins",
+  [Item.ORAN_BERRY]: "+130 shield when combat begins",
   [Item.SHINY_CHARM]:
-    "Upon attack, 25% chance to trigger protect status for 1s",
+    "Upon attack, 25% chance to trigger protect status for 1 second",
   [Item.FOCUS_BAND]:
     "When combat begins, the holder and all allies within 1 hexes in the same row gain +30% Attack Speed for the rest of combat",
   [Item.FLAME_ORB]: "Holder is burned but increase attack by 100%",
-  [Item.ASSAULT_VEST]: "Grants 16 bonus special defense, for a total of +18 special defense",
+  [Item.ASSAULT_VEST]: "+18 special defense",
   [Item.KINGS_ROCK]:
     "+1 money each time the holder kill an ennemy (max 5 golds)",
   [Item.POKE_DOLL]: "Reduce all incoming damage by 30%",
   [Item.RED_ORB]:
-    "Grants 8 bonus attack, for a total of +10 attack. Each attack of the holder deals an additional 20% true damage",
+    "+10 attack. Each attack of the holder deals an additional 20% true damage",
   [Item.MAX_REVIVE]: "Prevents the holder first death",
   [Item.ROCKY_HELMET]:
-    "Grants 10 bonus defense, for a total of +12 defense. Negates critical bonus damage from incoming critical hits."
+    "+12 defense. Negates critical bonus damage from incoming critical hits."
 })

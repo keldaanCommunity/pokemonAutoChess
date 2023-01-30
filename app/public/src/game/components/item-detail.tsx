@@ -5,28 +5,17 @@ import ReactTooltip from "react-tooltip";
 import { ItemDescription, ItemName } from "../../../../types/strings/Item"
 import { ItemRecipe, ItemStats } from "../../../../types/Config"
 import { Item } from "../../../../types/enum/Item";
-import { Stat } from "../../../../types/enum/Game";
 import "./item-detail.css";
 import { StatLabel } from "../../../../types/strings/Stat";
 
 export function ItemDetailTooltip({ item, depth }: { item: Item, depth: number }){
-  const recipes = Object.entries(ItemRecipe).filter(([result, recipe]) => recipe.includes(item))
-  let stats: { [stat in Stat]?: number } = {}
-  if(item in ItemRecipe){
-    ItemRecipe[item]!.forEach(component => {
-      for(let stat in ItemStats[component]){
-        stats[stat] = (stats[stat] ?? 0) + ItemStats[component]![stat]
-      }
-    })
-  } else {
-    stats = { ...ItemStats[item] }
-  }
+  const recipes = Object.entries(ItemRecipe).filter(([result, recipe]) => recipe.includes(item))  
 
   return <div className="game-item-detail">
   <img className="game-item-detail-icon" src={`assets/item/${item}.png`}/>
   <p className="game-item-detail-name">{ItemName[item]}</p>
   <div className="game-item-detail-stats">
-    {Object.entries(stats).map(([stat, value]) => (<div key={stat}>
+    {Object.entries(ItemStats[item]).map(([stat, value]) => (<div key={stat}>
       <img src={`assets/icons/${stat}.png`} alt={stat} title={StatLabel[stat]["eng"]} />
       <span>+{value}</span>
     </div>))}
