@@ -100,6 +100,10 @@ export default class PokemonState {
           reducedDamage = Math.ceil(reducedDamage * 1.3)
         }
 
+        if (attacker && attacker.items.has(Item.FIRE_GEM)) {
+          reducedDamage = Math.ceil(reducedDamage + pokemon.hp * 0.08)
+        }
+
         if (
           attacker &&
           attacker.name == Pkm.GENESECT &&
@@ -366,16 +370,6 @@ export default class PokemonState {
       ) {
         attacker.simulation.player.money += 1
         attacker.count.moneyCount++
-      }
-
-      if (attacker && attacker.items.has(Item.FIRE_GEM)) {
-        const boost =
-          attacker.simulation.stageLevel < 10
-            ? 5
-            : attacker.simulation.stageLevel < 20
-            ? 10
-            : 15
-        attacker.addAttack(boost)
       }
       if (
         attacker &&
