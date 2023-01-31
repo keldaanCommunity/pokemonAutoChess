@@ -649,7 +649,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.EARTHQUAKE]: {
-    eng: `Deals damage [40,80,160] ${Damage.PHYSICAL} to all ennemy units in the same column/line`,
+    eng: `Deals damage [40,80,160] ${Damage.SPECIAL} to all ennemy units in the same column/line`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -679,7 +679,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.EXPLOSION]: {
-    eng: `Deals [40,80,160] ${Damage.PHYSICAL}. Damage also the user.`,
+    eng: `Deals [40,80,160] ${Damage.SPECIAL}. Damage also the user.`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -697,7 +697,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BONEMERANG]: {
-    eng: `Throw a boomerang bone through the enemy team, dealing [30,60,120] ${Damage.PHYSICAL} on its way`,
+    eng: `Throw a boomerang bone through the enemy team, dealing [30,60,120] ${Damage.SPECIAL} on its way`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -721,7 +721,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HIGH_JUMP_KICK]: {
-    eng: `Deals [50,100,200] ${Damage.PHYSICAL} and steal ${Stat.MANA} from its target`,
+    eng: `Deals [50,100,200] ${Damage.SPECIAL} and steal ${Stat.MANA} from its target`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -769,7 +769,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.LIQUIDATION]: {
-    eng: `Deals [20,40,80] ${Damage.PHYSICAL} and remove [1,2,4] ${Stat.DEF} from the target`,
+    eng: `Deals [20,40,80] ${Damage.SPECIAL} and remove [1,2,4] ${Stat.DEF} from the target`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -841,13 +841,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.GUILLOTINE]: {
-    eng: `Mono target attack that deals stars x ${Stat.ATK} ${Damage.PHYSICAL}. Restores half ${Stat.MANA} if target killed`,
+    eng: `Mono target attack that deals stars x ${Stat.ATK} ${Damage.SPECIAL}. Restores half ${Stat.MANA} if target killed`,
     esp: `Ataque de objetivo mono que causa daño físico. Restaura la mitad de maná si el objetivo muere`,
     fra: `Attaque mono cible qui fait des dégats physiques. Restaure la moitié du mana si la cible est tué.`,
     prt: ``
   },
   [Ability.ROCK_SLIDE]: {
-    eng: `Mono target attack that deals [40,50,60] ${Damage.PHYSICAL}. Doubles damage if target is type flying.`,
+    eng: `Mono target attack that deals [40,50,60] ${Damage.SPECIAL}. Doubles damage if target is type flying.`,
     esp: `Ataque de objetivo mono que causa daño físico. Duplica el daño si el objetivo es de tipo volador.`,
     fra: `Attaque mono cible qui fait des dégats physiques. Double les dégats si type vol.`,
     prt: ``
@@ -877,7 +877,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BLAZE_KICK]: {
-    eng: `Mono target that deals [30,60,90] ${Damage.PHYSICAL}.`,
+    eng: `Mono target that deals [30,60,90] ${Damage.SPECIAL}.`,
     esp: `Objetivo mono que causa 30,60,90 de daño físico`,
     fra: `Attaque monocinle faisant 30,60,90 dégats physiques`,
     prt: ``
@@ -925,7 +925,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.IRON_TAIL]: {
-    eng: `Mono target damage attack that deals [20,30,40] ${Damage.PHYSICAL}. Buff ${Stat.DEF} by [1,3,5] points.`,
+    eng: `Mono target damage attack that deals [20,30,40] ${Damage.SPECIAL}. Buff ${Stat.DEF} by [1,3,5] points.`,
     esp: `Ataque de daño al objetivo mono que reparte 20,30,40. Pulveriza la defensa por 1,3,5 puntos.`,
     fra: `Attaque monocible faisant 20,30,40 dégats physique. Booste la défense de 1,3,5 points.`,
     prt: ``
@@ -949,13 +949,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BITE]: {
-    eng: `50% Life steal mono target physical attack that deals [30,50,70] ${Damage.PHYSICAL}.`,
+    eng: `50% Life steal mono target physical attack that deals [30,50,70] ${Damage.SPECIAL}.`,
     esp: `50% Vida robar mono objetivo de ataque físico que inflige 30,50,70 de daño.`,
     fra: `Attaque monocible avec 50% de vol de vie faisant 30,50,70 dégats spéciaux.`,
     prt: ``
   },
   [Ability.DRAGON_TAIL]: {
-    eng: `Mono target attack that deals [30,40,50] ${Damage.PHYSICAL} and buff ${Stat.DEF},${Stat.SPE_DEF} by [1,2,3] points`,
+    eng: `Mono target attack that deals [30,40,50] ${Damage.SPECIAL} and buff ${Stat.DEF},${Stat.SPE_DEF} by [1,2,3] points`,
     esp: `El ataque físico de un monoobjetivo que inflige 30,40,50 de daño y mejora las defensas en 1,2,3 puntos`,
     fra: `Attaque mono-cible faisant 30,40,50 dégats physique et boostant les défenses de 1,2,3 points.`,
     prt: ``
@@ -967,7 +967,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ICICLE_CRASH]: {
-    eng: `Area of effect attack that deals [30,40,50] ${Damage.PHYSICAL} around the target`,
+    eng: `Area of effect attack that deals [30,40,50] ${Damage.SPECIAL} around the target`,
     esp: `Ataque de área de efecto que causa 30,40,50 de daño físico alrededor del objetivo`,
     fra: `Attaque AoE en cercle faisant 30,40,50 dégats physiques`,
     prt: ``
@@ -985,7 +985,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.STOMP]: {
-    eng: `Mono target that deals (2 x atk x stars) ${Damage.PHYSICAL}`,
+    eng: `Mono target that deals (2 x atk x stars) ${Damage.SPECIAL}`,
     esp: `Daño físico del objetivo mono (2*atk*stars)`,
     fra: `Attaque mono cible faisant 2*atk*stars dégats physiques`,
     prt: ``
@@ -1009,7 +1009,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.POISON_STING]: {
-    eng: `Mono target damage that deals [30,60,120] ${Damage.PHYSICAL}. Doubles damage if target is poisoned.`,
+    eng: `Mono target damage that deals [30,60,120] ${Damage.SPECIAL}. Doubles damage if target is poisoned.`,
     esp: `Daño físico de un solo objetivo que reparte 30,40,50. Duplica el daño si el objetivo está envenenado.`,
     fra: `Attaque physique mono cible faisant 30,40,50 dégats. Double les dégats si la cible est empoisonné.`,
     prt: ``
@@ -1039,13 +1039,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.THIEF]: {
-    eng: `Steal ennemy target item and deals [5,10,20] ${Damage.PHYSICAL}`,
+    eng: `Steal ennemy target item and deals [5,10,20] ${Damage.SPECIAL}`,
     esp: `Roba el objeto del enemigo e inflige 5,10,20 de daño físico`,
     fra: `Vole l item du pokémon ennemi et inflige 5,10,20 dégats physiques`,
     prt: ``
   },
   [Ability.STUN_SPORE]: {
-    eng: `Decrease target ${Stat.ATK_SPEED} by [50,100,200]% and deals [5,10,20] ${Damage.PHYSICAL}`,
+    eng: `Decrease target ${Stat.ATK_SPEED} by [50,100,200]% and deals [5,10,20] ${Damage.SPECIAL}`,
     esp: `Disminuir la velocidad de ataque del objetivo en un 50,100,200% e inflige 5,10,20 de daño físico`,
     fra: `Diminue la vitesse d attaque du pokémon de 50,100,200% et inflige 5,10,20 dégats physiques`,
     prt: ``
@@ -1075,31 +1075,31 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ROCK_TOMB]: {
-    eng: `Mono target attack that deals [30,60,90] ${Damage.PHYSICAL} and decrease target ${Stat.ATK_SPEED} by [20,40,60]%`,
+    eng: `Mono target attack that deals [30,60,90] ${Damage.SPECIAL} and decrease target ${Stat.ATK_SPEED} by [20,40,60]%`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.ROCK_SMASH]: {
-    eng: `Mono target attack that deals [20,40,60] ${Damage.PHYSICAL} and silence target for [3,6,9]s.`,
+    eng: `Mono target attack that deals [20,40,60] ${Damage.SPECIAL} and silence target for [3,6,9]s.`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
   },
   [Ability.HEAD_SMASH]: {
-    eng: `The pokemon hurt itself for [5,10,15] ${Stat.HP}, and deals [40,80,150] ${Damage.PHYSICAL}. Execute if the target is asleep,frozen.`,
+    eng: `The pokemon hurt itself for [5,10,15] ${Stat.HP}, and deals [40,80,150] ${Damage.SPECIAL}. Execute if the target is asleep,frozen.`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
   },
   CORRUPTED_NATURE: {
-    eng: `Wound adjacent ennemies for 4 seconds and deals [10,20,40] life steal ${Damage.PHYSICAL}`,
+    eng: `Wound adjacent ennemies for 4 seconds and deals [10,20,40] life steal ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   CRABHAMMER: {
-    eng: `Deals [30,60,120] ${Damage.PHYSICAL}. Execute the target if below 30%`,
+    eng: `Deals [30,60,120] ${Damage.SPECIAL}. Execute the target if below 30%`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1123,7 +1123,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   DYNAMIC_PUNCH: {
-    eng: `Deals [20,40,80] ${Damage.PHYSICAL} and confuse the target for [1.5,3,6]s`,
+    eng: `Deals [20,40,80] ${Damage.SPECIAL} and confuse the target for [1.5,3,6]s`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1207,7 +1207,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   PAYDAY: {
-    eng: `Deals 30,60,120 ${Damage.PHYSICAL}. If the target is killed, the player receive [1,2,3] gold`,
+    eng: `Deals 30,60,120 ${Damage.SPECIAL}. If the target is killed, the player receive [1,2,3] gold`,
     esp: ``,
     prt: ``,
     fra: ``

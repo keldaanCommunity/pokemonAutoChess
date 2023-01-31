@@ -164,7 +164,10 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     ultName.textContent = AbilityName[skill]["eng"]
 
     const description = document.createElement("div")
-    ReactDOM.render(<AbilityTooltip ability={skill} />, description)
+    ReactDOM.render(
+      <AbilityTooltip ability={skill} stars={stars} />,
+      description
+    )
     ultNameWrap.appendChild(ultName)
     ult.appendChild(ultNameWrap)
     ult.appendChild(description)
