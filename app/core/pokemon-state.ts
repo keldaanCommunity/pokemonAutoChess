@@ -101,7 +101,7 @@ export default class PokemonState {
         }
 
         if (attacker && attacker.items.has(Item.FIRE_GEM)) {
-          reducedDamage = Math.ceil(reducedDamage + pokemon.hp * 0.06)
+          reducedDamage = Math.ceil(reducedDamage + pokemon.hp * 0.08)
         }
 
         if (
