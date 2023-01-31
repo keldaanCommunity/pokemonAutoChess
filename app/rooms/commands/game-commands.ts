@@ -620,6 +620,7 @@ export class OnRefreshCommand extends Command<
     if (player && player.money >= 1) {
       this.state.shop.assignShop(player)
       player.money -= 1
+      player.rerollCount++
     }
   }
 }
