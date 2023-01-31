@@ -2,7 +2,7 @@ import { GameObjects } from "phaser"
 import Pokemon from "./pokemon"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import GameScene from "../scenes/game-scene"
-import { Emotion, IPlayer, IPokemonEntity } from "../../../../types"
+import { IPlayer, IPokemonEntity } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import { DataChange } from "@colyseus/schema"
 import {
@@ -12,9 +12,6 @@ import {
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
-import { getAvatarSrc, getPortraitSrc } from "../../utils"
-import { number } from "@colyseus/schema/lib/encoding/decode"
-import { Pkm } from "../../../../types/enum/Pokemon"
 
 export default class BattleManager {
   group: GameObjects.Group
