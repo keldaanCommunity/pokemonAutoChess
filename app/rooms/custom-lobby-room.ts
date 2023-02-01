@@ -7,9 +7,7 @@ import UserMetadata, {
   IUserMetadata
 } from "../models/mongo-models/user-metadata"
 import BannedUser from "../models/mongo-models/banned-user"
-import LeaderboardInfo, {
-  ILeaderboardInfo
-} from "../models/colyseus-models/leaderboard-info"
+import { ILeaderboardInfo } from "../models/colyseus-models/leaderboard-info"
 import { ArraySchema } from "@colyseus/schema"
 import LobbyUser from "../models/colyseus-models/lobby-user"
 import admin from "firebase-admin"
@@ -28,13 +26,13 @@ import { PastebinAPI } from "pastebin-ts/dist/api"
 import { getAvatarSrc, getPortraitSrc } from "../public/src/utils"
 import {
   Emotion,
-  EmotionCost,
   Transfer,
   ISuggestionUser,
   Title,
   Role,
   CDN_PORTRAIT_URL
 } from "../types"
+import { getEmotionCost } from "../types/Config"
 import { Pkm } from "../types/enum/Pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import PokemonConfig from "../models/colyseus-models/pokemon-config"
@@ -429,9 +427,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           const emotionsToCheck = message.shiny
             ? pokemonConfig.shinyEmotions
             : pokemonConfig.emotions
-          const cost = message.shiny
-            ? EmotionCost[message.emotion] * 3
-            : EmotionCost[message.emotion]
+          const cost = getEmotionCost(message.emotion, message.shiny)
           if (
             !emotionsToCheck.includes(message.emotion) &&
             pokemonConfig.dust >= cost

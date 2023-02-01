@@ -2,20 +2,18 @@ import React, { Dispatch, SetStateAction } from "react"
 import { ITracker } from "../../../../../types/ITracker"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Emotion } from "../../../../../types/enum/Emotion"
 import { getPortraitSrc } from "../../../utils"
-
-const cursorStyle = {
-  cursor: "var(--cursor-hover)",
-  padding: "10px",
-  backgroundColor: "#54596b",
-  margin: "10px"
-}
+import { cc } from "../../utils/jsx"
+import { getEmotionCost } from "../../../../../types/Config"
+import "./pokemon-collection-item.css";
 
 export default function PokemonCollectionItem(props: {
   name: Pkm
   index: string
   metadata: ITracker
   config: IPokemonConfig | undefined
+  filter: string
   setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
 }) {
   if (
@@ -25,46 +23,39 @@ export default function PokemonCollectionItem(props: {
     return null
   }
 
+  const { dust, emotions, shinyEmotions } = props.config ?? { dust: 0, emotions: [] as Emotion[], shinyEmotions: [] as Emotion[] }
+  const isUnlocked = (emotions?.length > 0 || shinyEmotions?.length > 0)
+  const canUnlock = Object.values(Emotion).some(e => (
+    (emotions.includes(e) === false && dust >= getEmotionCost(e, false)) || 
+    (shinyEmotions.includes(e) === false && dust >= getEmotionCost(e, true))
+  ))
+
+  if(props.filter === "unlocked" && !isUnlocked) return null
+  if(props.filter === "unlockable" && !canUnlock) return null
+  if(props.filter === "locked" && isUnlocked) return null
+
   return (
     <div
-      style={cursorStyle}
-      className="nes-container"
+      className={cc("nes-container", "pokemon-collection-item", {
+        unlocked: isUnlocked,
+        unlockable: canUnlock,
+        shimmer: canUnlock,
+      })}
       onClick={() => {
         props.setPokemon(props.name)
       }}
     >
       <img
-        style={{
-          filter:
-            props.config &&
-            (props.config.emotions.length != 0 ||
-              props.config.shinyEmotions.length != 0)
-              ? "grayscale(0)"
-              : "grayscale(1)",
-          width: "80px",
-          height: "80px",
-          imageRendering: "pixelated"
-        }}
         src={getPortraitSrc(
           props.index,
           props.config?.selectedShiny,
           props.config?.selectedEmotion
         )}
       />
-      <div
-        style={{
-          display: "flex",
-          marginTop: "5px",
-          marginBottom: "-10px",
-          justifyContent: "center"
-        }}
-      >
-        {props.config ? props.config.dust : 0}
-        <img
-          style={{ width: "20px", height: "20px", imageRendering: "pixelated" }}
-          src={getPortraitSrc(props.index)}
-        />
-      </div>
+      <p>
+        <span>{props.config ? props.config.dust : 0}</span>
+        <img src={getPortraitSrc(props.index)} />
+      </p>
     </div>
   )
 }

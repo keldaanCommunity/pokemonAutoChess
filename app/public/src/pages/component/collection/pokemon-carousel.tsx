@@ -1,6 +1,6 @@
 import PokemonCollectionItem from "./pokemon-collection-item"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import React, { Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useAppSelector } from "../../../hooks"
 import { ITracker } from "../../../../../types/ITracker"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -9,26 +9,32 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 
 export default function PokemonCarousel(props: {
-  type: Synergy
+  type: Synergy | "all"
   setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
-  metadata: { [key: string]: ITracker }
+  metadata: { [key: string]: ITracker },
+  filter: string
 }) {
   const pokemonCollection = useAppSelector(
     (state) => state.lobby.pokemonCollection
   )
-  const elligiblePokemons = new Array<Pokemon>()
-  ;(Object.values(Pkm) as Pkm[]).forEach((v) => {
-    const pkm = PokemonFactory.createPokemonFromName(v)
-    if (
-      pkm.skill !== Ability.DEFAULT &&
-      pkm.types.includes(Synergy[props.type])
-    ) {
-      elligiblePokemons.push(pkm)
-    }
-  })
+  const [elligiblePokemons, setElligiblePokemons] = useState<Pokemon[]>([])
+
+  useEffect(() => {
+    const filteredCollection: Pokemon[] = []
+    ;(Object.values(Pkm) as Pkm[]).forEach((v) => {
+      const pkm = PokemonFactory.createPokemonFromName(v)
+      if (
+        pkm.skill !== Ability.DEFAULT &&
+        (props.type === "all" || pkm.types.includes(Synergy[props.type]))
+      ) {
+        filteredCollection.push(pkm)
+      }
+    })
+    setElligiblePokemons(filteredCollection)
+  }, [props.filter]);
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div className="pokemon-carousel">
       {elligiblePokemons.map((pkm) => {
         const pathIndex = pkm.index.split("-")
         let m: ITracker | undefined = undefined
@@ -45,6 +51,7 @@ export default function PokemonCarousel(props: {
               index={pkm.index}
               metadata={m}
               config={pokemonCollection.find((p) => p.id == pkm.index)}
+              filter={props.filter}
               setPokemon={props.setPokemon}
             />
           )

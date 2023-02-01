@@ -10,9 +10,7 @@ import DpsHeal from "../core/dps-heal"
 import Count from "../models/colyseus-models/count"
 import Status from "../models/colyseus-models/status"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
-import LeaderboardInfo, {
-  ILeaderboardInfo
-} from "../models/colyseus-models/leaderboard-info"
+import { ILeaderboardInfo } from "../models/colyseus-models/leaderboard-info"
 import LobbyUser from "../models/colyseus-models/lobby-user"
 import Message from "../models/colyseus-models/message"
 import Synergies from "../models/colyseus-models/synergies"
@@ -23,6 +21,7 @@ import {
   PokemonActionState,
   Rarity
 } from "./enum/Game"
+import { Emotion } from "./enum/Emotion"
 import { Effect } from "./enum/Effect"
 import { Ability } from "./enum/Ability"
 import { Synergy } from "./enum/Synergy"
@@ -32,6 +31,8 @@ import { Pkm } from "./enum/Pokemon"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import GameRoom from "../rooms/game-room"
+
+export * from "./enum/Emotion"
 
 export const FIGHTING_PHASE_DURATION = 40000
 
@@ -437,52 +438,6 @@ export interface ICount {
 export interface IPreparationMetadata {
   name: string
   type: string
-}
-
-export enum Emotion {
-  NORMAL = "Normal",
-  HAPPY = "Happy",
-  PAIN = "Pain",
-  ANGRY = "Angry",
-  WORRIED = "Worried",
-  SAD = "Sad",
-  CRYING = "Crying",
-  SHOUTING = "Shouting",
-  TEARY_EYED = "Teary-Eyed",
-  DETERMINED = "Determined",
-  JOYOUS = "Joyous",
-  INSPIRED = "Inspired",
-  SURPRISED = "Surprised",
-  DIZZY = "Dizzy",
-  SPECIAL0 = "Special0",
-  SPECIAL1 = "Special1",
-  SIGH = "Sigh",
-  STUNNED = "Stunned",
-  SPECIAL2 = "Special2",
-  SPECIAL3 = "Special3"
-}
-
-export const EmotionCost: { [key in Emotion]: number } = {
-  [Emotion.NORMAL]: 50,
-  [Emotion.HAPPY]: 100,
-  [Emotion.PAIN]: 110,
-  [Emotion.ANGRY]: 120,
-  [Emotion.WORRIED]: 130,
-  [Emotion.SAD]: 140,
-  [Emotion.CRYING]: 150,
-  [Emotion.SHOUTING]: 160,
-  [Emotion.TEARY_EYED]: 170,
-  [Emotion.DETERMINED]: 180,
-  [Emotion.JOYOUS]: 190,
-  [Emotion.INSPIRED]: 200,
-  [Emotion.SURPRISED]: 210,
-  [Emotion.DIZZY]: 220,
-  [Emotion.SPECIAL0]: 230,
-  [Emotion.SPECIAL1]: 240,
-  [Emotion.SIGH]: 250,
-  [Emotion.STUNNED]: 260,
-  [Emotion.SPECIAL2]: 270,
-  [Emotion.SPECIAL3]: 280
 }
 
 export interface ISuggestionUser {

@@ -1,0 +1,61 @@
+.pokemon-emotions-modal .modal-header {
+    padding: 0;
+}
+
+.pokemon-emotions-modal .modal-title {
+    color: white;
+    font-size: 140%;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; 
+}
+
+.pokemon-emotions-modal .modal-title > img {
+    width: 80px;
+    height: 80px;
+    margin-right: 0.5em;
+    image-rendering: pixelated;
+}
+
+.pokemon-emotions-modal .modal-title img.unlocked {
+    filter: grayscale(0);
+}
+
+
+.pokemon-emotions-modal .modal-title > h1 {
+    margin: 0;
+}
+
+.pokemon-emotions-modal .modal-title .dust {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 120%;
+}
+
+.pokemon-emotions-modal .modal-title .dust img {
+    width: 40px;
+    height: 40px;
+    margin: 0 0.5em;
+    image-rendering: pixelated;
+}
+
+.pokemon-emotions-modal .modal-body {
+    display: flex;
+    justify-content: space-around;
+}
+
+.pokemon-emotions-modal section p {
+    text-align: center;
+    margin: 0;
+}
+
+.pokemon-emotions-modal section > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1vw;
+    margin: 0 1vw;
+}

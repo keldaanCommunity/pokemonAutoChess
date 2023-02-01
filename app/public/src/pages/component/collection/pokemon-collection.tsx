@@ -1,186 +1,51 @@
-import CSS from "csstype"
-import React, { useState, ReactElement } from "react"
+import React, { useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import PokemonCarousel from "./pokemon-carousel"
-import Modal from "react-bootstrap/esm/Modal"
-import { useAppSelector } from "../../../hooks"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import PokemonFactory from "../../../../../models/pokemon-factory"
-import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
-import { Emotion } from "../../../../../types"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { ITracker } from "../../../../../types/ITracker"
-import PokemonEmotion from "./pokemon-emotion"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
-
-const buttonStyle: CSS.Properties = {
-  marginLeft: "10px",
-  marginTop: "10px",
-  marginRight: "10px"
-}
+import PokemonEmotionsModal from "./pokemon-emotions-modal"
+import "./pokemon-collection.css"
 
 export default function PokemonCollection(props: {
   toggleCollection: () => void
 }) {
   const metadata = tracker as unknown as { [key: string]: ITracker }
-  const [pokemon, setPokemon] = useState<Pkm | undefined>(undefined)
-  const pokemonCollection = useAppSelector(
-    (state) => state.lobby.pokemonCollection
-  )
-  let p: Pokemon
-  let pConfig: IPokemonConfig | undefined
-  let pMetadata: ITracker | undefined = undefined
+  const [selectedPokemon, setSelectedPokemon] = useState<Pkm | undefined>(undefined)
 
-  const availableEmotions: Emotion[] = []
-  let modalElement: ReactElement | null = null
-  if (pokemon) {
-    p = PokemonFactory.createPokemonFromName(pokemon)
-    pConfig = pokemonCollection.find((c) => c.id == p.index)
-    const pathIndex = p.index.split("-")
-    if (pathIndex.length == 1) {
-      pMetadata = metadata[p.index]
-    } else if (pathIndex.length == 2) {
-      pMetadata = metadata[pathIndex[0]].subgroups[pathIndex[1]]
-    }
-
-    if (pMetadata) {
-      Object.keys(pMetadata.portrait_files).forEach((k) => {
-        const possibleEmotion = k as Emotion
-        if (Object.values(Emotion).includes(possibleEmotion)) {
-          availableEmotions.push(possibleEmotion)
-        }
-      })
-    }
-
-    modalElement = (
-      <Modal
-        show={pokemon !== undefined}
-        onHide={() => {
-          setPokemon(undefined)
-        }}
-        dialogClassName="modalClass"
-      >
-        <Modal.Header>
-          <Modal.Title>
-            <h3>{pokemon}</h3>
-          </Modal.Title>
-          <Modal.Title>
-            <div
-              style={{
-                display: "flex",
-                marginTop: "5px",
-                marginBottom: "-10px",
-                justifyContent: "center"
-              }}
-            >
-              <h3>{pConfig ? pConfig.dust : 0}</h3>
-              <img
-                style={{
-                  width: "80px",
-                  height: "80px",
-                  imageRendering: "pixelated"
-                }}
-                src={getPortraitSrc(p.index)}
-              />
-            </div>
-          </Modal.Title>
-          <Modal.Title>
-            <img
-              src={getPortraitSrc(
-                p.index,
-                pConfig?.selectedShiny,
-                pConfig?.selectedEmotion
-              )}
-              style={{
-                filter: pConfig ? "grayscale(0)" : "grayscale(1)",
-                width: "80px",
-                height: "80px",
-                imageRendering: "pixelated"
-              }}
-            />
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <div>
-              <p style={{ textAlign: "center" }}>Normal Emotions</p>
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "center"
-                }}
-              >
-                {availableEmotions.map((e) => {
-                  return (
-                    <PokemonEmotion
-                      key={e}
-                      index={p.index}
-                      shiny={false}
-                      unlocked={pConfig && pConfig.emotions.includes(e)}
-                      path={p.index.replace("-", "/")}
-                      emotion={e}
-                    />
-                  )
-                })}
-              </div>
-            </div>
-            <div>
-              <p style={{ textAlign: "center" }}>Shiny Emotions</p>
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "center"
-                }}
-              >
-                {availableEmotions.map((e) => {
-                  return (
-                    <PokemonEmotion
-                      key={e}
-                      index={p.index}
-                      shiny={true}
-                      unlocked={pConfig && pConfig.shinyEmotions.includes(e)}
-                      path={`${p.index.replace("-", "/")}/0000/0001`}
-                      emotion={e}
-                    />
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <button
-            style={buttonStyle}
-            className="bubbly red"
-            onClick={() => {
-              setPokemon(undefined)
-            }}
-          >
-            Close
-          </button>
-        </Modal.Footer>
-      </Modal>
-    )
-  }
+  const [filter, setFilter] = useState<string>("all")
+  
   return (
-    <div>
-      <button
-        style={buttonStyle}
-        onClick={() => {
-          props.toggleCollection()
-        }}
-        className="bubbly blue"
-      >
-        Lobby
-      </button>
-      <div style={{ margin: "10px" }} className="nes-container">
+    <div id="pokemon-collection">
+      <header>
+        <button
+          onClick={() => {
+            props.toggleCollection()
+          }}
+          className="bubbly blue"
+        >
+          Back to Lobby
+        </button>
+        <div className="spacer"></div>
+        <button onClick={() => { setFilter("all") }} className="bubbly pink">
+          <input type="checkbox" className="nes-checkbox is-dark" readOnly checked={filter === "all"}/><span>Show all</span>
+        </button>
+        <button onClick={() => { setFilter("locked") }} className="bubbly red">
+          <input type="checkbox" className="nes-checkbox is-dark" readOnly checked={filter === "locked"}/><span>Show locked</span>
+        </button>
+        <button onClick={() => { setFilter("unlockable") }} className="bubbly orange">
+          <input type="checkbox" className="nes-checkbox" readOnly checked={filter === "unlockable"}/><span>Show unlockable</span>
+        </button>
+        <button onClick={() => { setFilter("unlocked") }} className="bubbly green">
+          <input type="checkbox" className="nes-checkbox is-dark" readOnly checked={filter === "unlocked"}/><span>Show unlocked</span>
+        </button>
+      </header>
+      <div className="nes-container">
         <Tabs>
           <TabList>
+            <Tab key="title-all">ALL</Tab>
             {(Object.keys(Synergy) as Synergy[]).map((type) => {
               return (
                 <Tab key={"title-" + type}>
@@ -190,22 +55,23 @@ export default function PokemonCollection(props: {
             })}
           </TabList>
 
-          {(Object.keys(Synergy) as Synergy[]).map((r) => {
+          {(["all"].concat(Object.keys(Synergy)) as (Synergy | "all")[]).map(type => {
             return (
-              <TabPanel key={r}>
-                <div style={{ display: "flex", flexWrap: "wrap" }}>
-                  <PokemonCarousel
-                    type={r}
-                    setPokemon={setPokemon}
-                    metadata={metadata}
-                  />
-                </div>
+              <TabPanel key={type}>                
+                <PokemonCarousel
+                  type={type}
+                  setPokemon={setSelectedPokemon}
+                  metadata={metadata}
+                  filter={filter}
+                />
               </TabPanel>
             )
           })}
         </Tabs>
       </div>
-      {modalElement}
+      {selectedPokemon && <PokemonEmotionsModal pokemon={selectedPokemon} onHide={() => {
+          setSelectedPokemon(undefined)
+      }}/>}
     </div>
   )
 }

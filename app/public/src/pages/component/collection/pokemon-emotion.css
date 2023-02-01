@@ -1,0 +1,43 @@
+.pokemon-emotion.nes-container {
+    display: flex;
+    flex-flow: column;
+    cursor: var(--cursor-hover);
+    padding: 5px;
+    background-color: #54596b;
+}
+
+.pokemon-emotion > img {
+    width: 80px;
+    height: 80px;
+    image-rendering: pixelated;
+    border-radius: 8px 8px 0 0;
+}
+
+.pokemon-emotion:not(.unlocked,.unlockable){
+    filter: grayscale(1) contrast(0.5);
+}
+
+.pokemon-emotion.unlocked {
+    filter: grayscale(0) contrast(1);
+}
+.pokemon-emotion.unlockable:not(.unlocked) {
+    filter: grayscale(1) contrast(1);
+}
+
+.pokemon-emotion > p {
+    line-height: 1em;
+    max-width: 80px;
+    word-break: break-word;
+}
+
+.pokemon-emotion p > * {
+    vertical-align: middle;
+    color: white;
+}
+
+.pokemon-emotion p > img {
+    width: 20px;
+    height: 20px;
+    image-rendering: pixelated;
+    margin-left: 0.5em;
+}
