@@ -20,5 +20,5 @@
       "jsx": "react-jsx",
       "skipLibCheck": true
     },
-    "include": ["./app/*","./scheduled/*","./edit/*"]
+    "include": ["./app/*","./scheduled/*","./edit/*","./db-commands/*"]
   }
