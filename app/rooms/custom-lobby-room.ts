@@ -595,7 +595,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
       connect(
         process.env.MONGO_URI ? process.env.MONGO_URI : "Default Mongo URI",
         {},
-        () => {
+        (err) => {
+          console.log(err)
           Chat.find(
             { time: { $gt: Date.now() - 86400000 } },
             (err, messages) => {

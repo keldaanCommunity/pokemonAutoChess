@@ -16,6 +16,7 @@ import { createBot } from "../../../stores/NetworkStore"
 import { setBotCreatorSynergies } from "../../../stores/LobbyStore"
 import BuilderSynergies from "./builder-synergies"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { BotGuideButton } from "../buttons/bot-guide-button"
 import {
   DetailledPkm,
   Emotion,
@@ -294,6 +295,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
         >
           Export
         </button>
+        <BotGuideButton />
         <button
           style={buttonStyle}
           onClick={() =>
