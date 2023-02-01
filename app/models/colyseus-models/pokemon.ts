@@ -5013,7 +5013,7 @@ export class Squirtle extends Pokemon {
     super(
       Pkm.SQUIRTLE,
       [Synergy.WATER, Synergy.FIELD],
-      Rarity.UNCOMMON,
+      Rarity.COMMON,
       Pkm.WARTORTLE,
       70,
       5,
@@ -5037,7 +5037,7 @@ export class Wartortle extends Pokemon {
     super(
       Pkm.WARTORTLE,
       [Synergy.WATER, Synergy.FIELD],
-      Rarity.UNCOMMON,
+      Rarity.COMMON,
       Pkm.BLASTOISE,
       120,
       9,
@@ -5061,7 +5061,7 @@ export class Blastoise extends Pokemon {
     super(
       Pkm.BLASTOISE,
       [Synergy.WATER, Synergy.FIELD],
-      Rarity.UNCOMMON,
+      Rarity.COMMON,
       Pkm.DEFAULT,
       210,
       20,
@@ -5301,7 +5301,7 @@ export class Totodile extends Pokemon {
     super(
       Pkm.TOTODILE,
       [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC],
-      Rarity.COMMON,
+      Rarity.UNCOMMON,
       Pkm.CROCONAW,
       60,
       5,
@@ -5325,7 +5325,7 @@ export class Croconaw extends Pokemon {
     super(
       Pkm.CROCONAW,
       [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC],
-      Rarity.COMMON,
+      Rarity.UNCOMMON,
       Pkm.FERALIGATR,
       110,
       9,
@@ -5349,7 +5349,7 @@ export class Feraligatr extends Pokemon {
     super(
       Pkm.FERALIGATR,
       [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC],
-      Rarity.COMMON,
+      Rarity.UNCOMMON,
       Pkm.DEFAULT,
       200,
       20,

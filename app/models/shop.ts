@@ -28,14 +28,14 @@ export default class Shop {
       Pkm.HOPPIP,
       Pkm.SEEDOT,
       Pkm.STARLY,
-      Pkm.TOTODILE,
       Pkm.SWINUB,
       Pkm.FENNEKIN,
-      Pkm.PICHU
+      Pkm.PICHU,
+      Pkm.SQUIRTLE
     ]
 
     this.UNCOMMON = [
-      Pkm.SQUIRTLE,
+      Pkm.TOTODILE,
       Pkm.IGGLYBUFF,
       Pkm.CHIKORITA,
       Pkm.CYNDAQUIL,
