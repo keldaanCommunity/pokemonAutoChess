@@ -17,41 +17,6 @@
   box-shadow: 0 0 4px #ffffff80;
 }
 
-.game-pokemon-portrait.shimmer::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  animation: shimmer 2s infinite;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    #ffffff20 25%,
-    #ffffe080 50%,
-    #ffffff20 75%,
-    transparent 100%
-  );
-  background-size: 400% 400%;
-  background-repeat: no-repeat;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 0 0;
-  }
-
-  50% {
-    background-position: 100% 100%;
-  }
-
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
 .game-pokemon-portrait-cost {
   position: absolute;
   left: 5px;

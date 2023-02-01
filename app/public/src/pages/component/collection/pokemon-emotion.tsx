@@ -1,53 +1,31 @@
 import React from "react"
-import { Emotion, EmotionCost } from "../../../../../types"
-import ReactTooltip from "react-tooltip"
+import { Emotion } from "../../../../../types"
 import { useAppDispatch } from "../../../hooks"
 import { buyEmotion, changeSelectedEmotion } from "../../../stores/NetworkStore"
 import { getPortraitSrc } from "../../../utils"
-
-const cursorStyle = {
-  padding: "10px",
-  display: "flex",
-  flexFlow: "column",
-  margin: "10px",
-  cursor: "var(--cursor-hover)"
-}
+import { getEmotionCost } from "../../../../../types/Config"
+import { cc } from "../../utils/jsx"
+import "./pokemon-emotion.css";
 
 export default function PokemonEmotion(props: {
   index: string
   shiny: boolean
   unlocked: boolean | undefined
   path: string
-  emotion: Emotion
+  emotion: Emotion,
+  dust: number
 }) {
   const dispatch = useAppDispatch()
-  const cost = props.shiny
-    ? EmotionCost[props.emotion] * 3
-    : EmotionCost[props.emotion]
-  const price = props.unlocked ? null : (
-    <div
-      style={{
-        display: "flex",
-        marginTop: "5px",
-        marginBottom: "-10px",
-        justifyContent: "center",
-        height: "25px"
-      }}
-    >
-      <p>{cost}</p>
-      <img
-        style={{ width: "20px", height: "20px", imageRendering: "pixelated" }}
-        src={getPortraitSrc(props.index)}
-      />
-    </div>
-  )
+  const cost = getEmotionCost(props.emotion, props.shiny)
+  const canUnlock = !props.unlocked && cost <= props.dust
 
   return (
     <div
-      className="nes-container"
-      style={cursorStyle}
-      data-tip
-      data-for={`${props.path}-${props.emotion}`}
+      className={cc("nes-container", "pokemon-emotion", { 
+        unlocked: !!props.unlocked,
+        unlockable: canUnlock,
+        shimmer: canUnlock,
+      })}
       onClick={() => {
         if (props.unlocked) {
           dispatch(
@@ -68,38 +46,11 @@ export default function PokemonEmotion(props: {
         }
       }}
     >
-      <img
-        src={getPortraitSrc(props.index, props.shiny, props.emotion)}
-        style={{
-          filter: props.unlocked ? "grayscale(0)" : "grayscale(1)",
-          width: "80px",
-          height: "80px",
-          imageRendering: "pixelated"
-        }}
-      />
-      {price}
-      <ReactTooltip
-        id={`${props.path}-${props.emotion}`}
-        textColor="#000000"
-        className="customeTheme"
-        effect="solid"
-      >
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <img
-            style={{
-              width: "80px",
-              height: "80px",
-              imageRendering: "pixelated"
-            }}
-            src={getPortraitSrc(props.index, props.shiny, props.emotion)}
-          ></img>
-          <p>
-            {props.unlocked
-              ? `Click to select the ${props.emotion} emotion for you pokemon`
-              : `Click to unlock the ${props.emotion} emotion for you pokemon`}
-          </p>
-        </div>
-      </ReactTooltip>
+      <img src={getPortraitSrc(props.index, props.shiny, props.emotion)} />
+      {props.unlocked ? (<p>{props.emotion}</p>) : (<p>
+          <span>{cost}</span>
+          <img src={getPortraitSrc(props.index)} />
+      </p>)}
     </div>
   )
 }
