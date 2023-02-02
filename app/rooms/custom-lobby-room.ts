@@ -30,13 +30,16 @@ import {
   ISuggestionUser,
   Title,
   Role,
-  CDN_PORTRAIT_URL
+  CDN_PORTRAIT_URL,
+  PrecomputedRaritPokemonyAll
 } from "../types"
-import { getEmotionCost } from "../types/Config"
-import { Pkm } from "../types/enum/Pokemon"
+import { getEmotionCost, RarityProbability } from "../types/Config"
+import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import PokemonConfig from "../models/colyseus-models/pokemon-config"
 import { nanoid } from "nanoid"
+import PRECOMPUTED_RARITY_POKEMONS from "../models/precomputed/type-rarity-all.json"
+import { Rarity } from "../types/enum/Game"
 
 export default class CustomLobbyRoom extends LobbyRoom {
   discordWebhook: WebhookClient | undefined
@@ -48,10 +51,12 @@ export default class CustomLobbyRoom extends LobbyRoom {
   botLeaderboard: ILeaderboardInfo[]
   levelLeaderboard: ILeaderboardInfo[]
   pastebin: PastebinAPI | undefined = undefined
+  precomputedRarityPokemons: PrecomputedRaritPokemonyAll
 
   constructor() {
     super()
-
+    this.precomputedRarityPokemons =
+      PRECOMPUTED_RARITY_POKEMONS as PrecomputedRaritPokemonyAll
     if (
       process.env.PASTEBIN_API_DEV_KEY &&
       process.env.PASTEBIN_API_USERNAME &&
@@ -77,6 +82,32 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.leaderboard = new Array<ILeaderboardInfo>()
     this.botLeaderboard = new Array<ILeaderboardInfo>()
     this.levelLeaderboard = new Array<ILeaderboardInfo>()
+  }
+
+  pickPokemon(): Pkm {
+    let pkm = Pkm.MAGIKARP
+    const rarities = Object.keys(Rarity) as Rarity[]
+    const seed = Math.random()
+    let threshold = 0
+    for (let i = 0; i < rarities.length; i++) {
+      const rarity = rarities[i]
+      const rarityProbability = RarityProbability[rarity]
+      threshold += rarityProbability
+      if (
+        seed < threshold &&
+        this.precomputedRarityPokemons[rarity] &&
+        this.precomputedRarityPokemons[rarity].length > 0
+      ) {
+        pkm =
+          this.precomputedRarityPokemons[rarity][
+            Math.floor(
+              Math.random() * this.precomputedRarityPokemons[rarity].length
+            )
+          ]
+        break
+      }
+    }
+    return pkm
   }
 
   onCreate(): Promise<void> {
@@ -275,16 +306,11 @@ export default class CustomLobbyRoom extends LobbyRoom {
       const user: LobbyUser = this.state.users.get(client.auth.uid)
       if (user && user.booster && user.booster > 0) {
         user.booster -= 1
-        const keys = Object.keys(Pkm)
         const boosterIndex: string[] = []
-        let i = 5
-        while (i > 0) {
-          const k = keys[Math.floor(Math.random() * keys.length)]
-          const p = PokemonFactory.createPokemonFromName(Pkm[k])
-          if (p.name != Pkm.MAGIKARP) {
-            boosterIndex.push(p.index)
-            i--
-          }
+
+        for (let i = 0; i < 5; i++) {
+          const pkm = this.pickPokemon()
+          boosterIndex.push(PkmIndex[pkm])
         }
 
         boosterIndex.forEach((i) => {
