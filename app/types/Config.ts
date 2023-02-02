@@ -108,6 +108,17 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.SUMMON]: "#991f1f"
 }
 
+export const RarityProbability: { [key in Rarity]: number } = {
+  [Rarity.COMMON]: 0.3,
+  [Rarity.NEUTRAL]: 0,
+  [Rarity.UNCOMMON]: 0.25,
+  [Rarity.RARE]: 0.2,
+  [Rarity.EPIC]: 0.15,
+  [Rarity.LEGENDARY]: 0.05,
+  [Rarity.MYTHICAL]: 0.05,
+  [Rarity.SUMMON]: 0
+}
+
 export const AttackTypeColor: { [key in AttackType] } = {
   [AttackType.PHYSICAL]: "#FF6E55",
   [AttackType.SPECIAL]: "#7FC9FF",
@@ -442,8 +453,8 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.ROCKY_HELMET]: [Item.HEART_SCALE, Item.HEART_SCALE]
 }
 
-export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {  
-  [Item.FOSSIL_STONE]: { },
+export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
+  [Item.FOSSIL_STONE]: {},
   [Item.TWISTED_SPOON]: { [Stat.SPELL_POWER]: 10 },
   [Item.MAGNET]: { [Stat.ATK_SPEED]: 10 },
   [Item.BLACK_GLASSES]: { [Stat.CRIT_CHANCE]: 5 },
@@ -458,7 +469,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.THUNDER_STONE]: { [Stat.ATK_SPEED]: 10 },
   [Item.FIRE_STONE]: { [Stat.ATK]: 1 },
   [Item.MOON_STONE]: { [Stat.DEF]: 1 },
-  [Item.DUSK_STONE]: { [Stat.CRIT_CHANCE]: 5},
+  [Item.DUSK_STONE]: { [Stat.CRIT_CHANCE]: 5 },
   [Item.LEAF_STONE]: { [Stat.SHIELD]: 15 },
   [Item.ICY_ROCK]: { [Stat.SPE_DEF]: 1 },
   [Item.CHOICE_SPECS]: { [Stat.SPELL_POWER]: 100 },
@@ -477,7 +488,11 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.MANA_SCARF]: { [Stat.MANA]: 15, [Stat.ATK]: 1 },
   [Item.SMOKE_BALL]: { [Stat.MANA]: 15, [Stat.DEF]: 1 },
   [Item.XRAY_VISION]: { [Stat.ATK_SPEED]: 50 },
-  [Item.RAZOR_FANG]: { [Stat.ATK_SPEED]: 10, [Stat.CRIT_CHANCE]: 5, [Stat.CRIT_DAMAGE]: 100 },
+  [Item.RAZOR_FANG]: {
+    [Stat.ATK_SPEED]: 10,
+    [Stat.CRIT_CHANCE]: 5,
+    [Stat.CRIT_DAMAGE]: 100
+  },
   [Item.LEFTOVERS]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
   [Item.CHOICE_SCARF]: { [Stat.ATK_SPEED]: 10, [Stat.SPE_DEF]: 1 },
   [Item.FIRE_GEM]: { [Stat.ATK_SPEED]: 10, [Stat.ATK]: 1 },
@@ -496,7 +511,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.POKE_DOLL]: { [Stat.SPE_DEF]: 1, [Stat.DEF]: 1 },
   [Item.RED_ORB]: { [Stat.ATK]: 10 },
   [Item.MAX_REVIVE]: { [Stat.ATK]: 1, [Stat.DEF]: 1 },
-  [Item.ROCKY_HELMET]: { [Stat.DEF]: 12 },
+  [Item.ROCKY_HELMET]: { [Stat.DEF]: 12 }
 }
 
 export type DungeonInfo = {
