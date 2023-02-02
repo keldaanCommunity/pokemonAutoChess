@@ -105,7 +105,8 @@ export function getPath(pokemon: IPokemonEntity | IPokemon) {
   pokemonPath += index + "/"
 
   if (pokemon.shiny) {
-    pokemonPath += "0000/0001/"
+    const shinyPad = pokemon.index.length == 4 ? `0000/0001/` : `0001/`
+    pokemonPath += shinyPad
   }
   pokemonPath += pokemon.emotion
   return pokemonPath
