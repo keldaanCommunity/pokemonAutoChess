@@ -293,7 +293,7 @@ export default class AttackingState extends PokemonState {
             targetCount > 0
           ) {
             cell.value.handleDamage(
-              Math.ceil(0.75 * damage),
+              Math.ceil(0.5 * damage),
               board,
               attackType,
               pokemon
