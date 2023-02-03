@@ -21,8 +21,8 @@ export default function Profile() {
 
   if (user) {
     return (
-      <div>
-        <div className="player-box" style={{ marginBottom: "20px" }}>
+      <>
+        <div className="player-box" style={{ marginBottom: "1em" }}>
           <div
             style={{
               display: "flex",
@@ -30,7 +30,7 @@ export default function Profile() {
               justifyContent: "space-between"
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
               <img src={getAvatarSrc(user.avatar)} />
               <p style={{ color: "#ffc107" }}>{TitleName[user.title]}</p>
               <RoleBadge role={user.role} />
@@ -131,35 +131,34 @@ export default function Profile() {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="player-box">
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                {Object.keys(Title).map((k,i) => (
-                  <div key={k} style={{ 
-                    padding: "0.5em", 
-                    backgroundColor: i%2 ? '#54596b' : '#61738a'
-                  }}>
-                    <h5
-                      onClick={() => {
-                        if (user.titles.includes(k as Title)) {
-                          dispatch(setTitle(k))
-                        }
-                      }}
-                      style={{ color: user.title === k ? '#ffc107' : user.titles.includes(k as Title) ? "#92cc41" : "#db5e6a" }}
-                      className="clickable"
-                    >
-                      {TitleName[k]}
-                    </h5>
-                    <p style={{ 
-                      margin: 0, 
-                      color: user.titles.includes(k as Title) ? '#ffffff' : '#a0a0a0'
-                    }}>{TitleDescription[k]}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <ul className="titles" style={{ display: "flex", flexDirection: "column", padding: 0 }}>
+              {Object.keys(Title).map((k,i) => (
+                <li key={k} style={{ 
+                  padding: "0.5em",
+                  listStyle: "none",
+                  backgroundColor: i%2 ? '#54596b' : '#61738a'
+                }}>
+                  <h5
+                    onClick={() => {
+                      if (user.titles.includes(k as Title)) {
+                        dispatch(setTitle(k))
+                      }
+                    }}
+                    style={{ color: user.title === k ? '#ffc107' : user.titles.includes(k as Title) ? "#92cc41" : "#db5e6a" }}
+                    className="clickable"
+                  >
+                    {TitleName[k]}
+                  </h5>
+                  <p style={{ 
+                    margin: 0, 
+                    color: user.titles.includes(k as Title) ? '#ffffff' : '#a0a0a0'
+                  }}>{TitleDescription[k]}</p>
+                </li>
+              ))}
+            </ul>
           </TabPanel>
         </Tabs>
-      </div>
+      </>
     )
   } else {
     return null

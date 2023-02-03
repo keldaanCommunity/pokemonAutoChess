@@ -54,8 +54,8 @@ export default function AfterMenu() {
                   <td>
                     <ul className="player-team-synergies">
                       {v.synergies.map(s => (<>
-                        <SynergyIcon type={s.name} />
-                        <span>{s.value}</span>
+                        <SynergyIcon type={s.name} key={s.name} />
+                        <span key={s.name+"-value"}>{s.value}</span>
                       </>))}
                     </ul>
                   </td>

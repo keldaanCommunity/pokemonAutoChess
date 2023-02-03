@@ -448,6 +448,10 @@ p:last-child {
   box-shadow: #2d334b 4px 4px 0px;
 }
 
+.player-box p {
+  margin: 0;
+}
+
 .my-input {
   border-radius: 12px;
   width: 100%;
