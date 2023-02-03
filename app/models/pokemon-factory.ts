@@ -455,7 +455,6 @@ import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
 import { PkmCost } from "../types/Config"
-import { Item } from "../types/enum/Item"
 
 export default class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level: number): MapSchema<Pokemon> {
