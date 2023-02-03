@@ -58,7 +58,7 @@ import PokemonCollection from "./component/collection/pokemon-collection"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import Booster from "./component/booster/booster"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
-
+import { cc } from "./utils/jsx"
 import "./lobby.css"
 
 export default function Lobby() {
@@ -79,6 +79,10 @@ export default function Lobby() {
   const botList: { name: string; avatar: string }[] = useAppSelector(
     (state) => state.lobby.botList
   )
+
+  const user = useAppSelector((state) => state.lobby.user)
+  const numberOfBooster = user?.booster ?? 0
+  
   const audio = useRef(new Audio("assets/sounds/notification.mp3"))
 
   const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
@@ -309,7 +313,7 @@ export default function Lobby() {
             Collection
           </button>
           <button
-            className="bubbly blue"
+            className={cc("bubbly", "blue", { shimmer: numberOfBooster > 0 })}
             onClick={() => {
               toggleBooster(!showBooster)
             }}

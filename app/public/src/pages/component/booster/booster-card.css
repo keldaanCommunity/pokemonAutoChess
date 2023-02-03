@@ -1,0 +1,118 @@
+.booster-card {
+    position: absolute;
+    transition: all 1s ease-out;
+    top: 20vh;
+    width: 10vw;
+    height: 15vw;
+    animation: 1s ease-in-out distribute;
+    animation-fill-mode: forwards;
+    transform-style: preserve-3d;
+}
+
+.booster-card .back,
+.booster-card .front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backface-visibility: hidden;
+    transition: all 100ms ease-out;
+}
+
+.booster-card .back {
+    transform: rotateY(0);
+    border-radius: 1.5vw;
+}
+
+.booster-card .front {
+    width: 100%;
+    height: 100%;
+    transform: rotateY(180deg);
+    background-color: #61738a;
+    border: 0.37vw solid var(--rarity-color, #161616);
+    border-radius: 1.5vw;
+    overflow: hidden;
+}
+
+.booster-card:hover .back {
+    box-shadow: 0 0 4vw var(--rarity-color, white);
+}
+
+.booster-card:not(.flipped){
+    cursor: var(--cursor-hover);
+}
+
+.booster-card.flipped {
+    animation: 500ms ease-in-out flipCard;
+    animation-fill-mode: forwards;
+}
+
+.booster-card.flipped .front {
+    box-shadow: 0 0 4vw var(--rarity-color, white);
+}
+
+@keyframes flipCard {
+    0% {
+        transform: rotateY(0) scale(1);
+    }
+
+    50% {
+        transform: rotateY(90deg) rotateZ(-10deg) scale(1.25);
+    }
+
+    100% {
+        transform: rotateY(180deg) scale(1);
+    }
+}
+
+@keyframes distribute {
+    0% {
+        position: absolute;
+        top: 100vh;
+        left: 50vw;
+        transform: translateX(-50%);
+    }
+}
+
+.booster-card:nth-child(1) {
+    left: 15vw;
+}
+
+.booster-card:nth-child(2) {
+    left: 30vw;
+}
+
+.booster-card:nth-child(3) {
+    left: 45vw;
+}
+
+.booster-card:nth-child(4) {
+    left: 60vw;
+}
+
+.booster-card:nth-child(5) {
+    left: 75vw;
+}
+
+.booster-card .back img {
+    width: 10vw;
+    height: 15vw;
+}
+
+.booster-card .front img {
+    width: 10vw;
+    height: 10vw;
+    image-rendering: pixelated;
+}
+
+.booster-card .name {
+    text-align: center;
+    background-color: #4f5160;
+    text-transform: capitalize;
+    font-variant: small-caps;
+    padding: 0.25em 0.5em;
+    margin: 0 -5px 4px -5px;
+    font-size: 1.2em;
+    box-shadow: 0 0.1em 0.25em rgb(0 0 0 / 50%);
+}

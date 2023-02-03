@@ -1,0 +1,43 @@
+#boosters-page {
+    height: 100vh;
+    padding: 1vw;
+}
+
+#boosters-page > .nes-container {
+    position: relative;
+    margin: 1vw 0 0 0;
+    height: calc(100vh - 6vw);
+    overflow-y: auto;
+    background-image: url("assets/ui/back1.png");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+#boosters-page p.help {
+    font-size: 200%;
+    text-shadow: 2px 2px 0 black;
+}
+
+#boosters-page .actions {
+    position: absolute;
+    text-align: center;
+    bottom: 10%;
+}
+
+#boosters-page .actions button {
+    margin: auto;
+}
+
+#boosters-page .actions p {
+    font-size: 200%;
+    color: white;
+}
+
+#boosters-page .actions img {
+    height: 128px;
+    width: 128px;
+}

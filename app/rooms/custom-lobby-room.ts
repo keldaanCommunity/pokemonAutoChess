@@ -35,7 +35,6 @@ import {
 } from "../types"
 import { getEmotionCost, RarityProbability } from "../types/Config"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
-import PokemonFactory from "../models/pokemon-factory"
 import PokemonConfig from "../models/colyseus-models/pokemon-config"
 import { nanoid } from "nanoid"
 import PRECOMPUTED_RARITY_POKEMONS from "../models/precomputed/type-rarity-all.json"
@@ -304,6 +303,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
       const user: LobbyUser = this.state.users.get(client.auth.uid)
+      const DUST_PER_BOOSTER = 50
       if (user && user.booster && user.booster > 0) {
         user.booster -= 1
         const boosterIndex: string[] = []
@@ -316,10 +316,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
         boosterIndex.forEach((i) => {
           const c = user.pokemonCollection.get(i)
           if (c) {
-            c.dust += 40
+            c.dust += DUST_PER_BOOSTER
           } else {
             const newConfig = new PokemonConfig(i)
-            newConfig.dust += 40
+            newConfig.dust += DUST_PER_BOOSTER
             user.pokemonCollection.set(i, newConfig)
           }
         })
@@ -331,13 +331,13 @@ export default class CustomLobbyRoom extends LobbyRoom {
             boosterIndex.forEach((i) => {
               const c = u.pokemonCollection.get(i)
               if (c) {
-                c.dust += 40
+                c.dust += DUST_PER_BOOSTER
               } else {
                 u.pokemonCollection.set(i, {
                   id: i,
                   emotions: [],
                   shinyEmotions: [],
-                  dust: 40,
+                  dust: DUST_PER_BOOSTER,
                   selectedEmotion: Emotion.NORMAL,
                   selectedShiny: false
                 })

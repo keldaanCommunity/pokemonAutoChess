@@ -1,159 +1,56 @@
-import React, { useState } from "react"
-import CSS from "csstype"
-import ReactCardFlip from "react-card-flip"
+import React from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { setBoosterContent } from "../../../stores/LobbyStore"
 import { openBooster } from "../../../stores/NetworkStore"
-import { getPortraitSrc } from "../../../utils"
-
-const buttonStyle: CSS.Properties = {
-  marginLeft: "10px",
-  marginTop: "10px",
-  marginRight: "10px"
-}
+import { cc } from "../../utils/jsx"
+import { BoosterCard } from "./booster-card"
+import "./booster.css"
 
 export default function Booster(props: { toggle: () => void }) {
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.lobby.user)
   const numberOfBooster = user ? user.booster : 0
   const boosterContent = useAppSelector((state) => state.lobby.boosterContent)
-  const [flipArray, setFlipArray] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-    false
-  ])
+
   return (
-    <div>
+    <div id="boosters-page">
       <button
-        style={buttonStyle}
-        onClick={() => {
-          props.toggle()
+        onClick={() => { 
+          dispatch(setBoosterContent([]))
+          props.toggle() 
         }}
         className="bubbly blue"
       >
-        Lobby
+        Back to Lobby
       </button>
-      <div
-        className="nes-container"
-        style={{
-          margin: "10px",
-          display: "flex",
-          justifyContent: "center",
-          flexFlow: "column",
-          alignItems: "center",
-          height: "90vh"
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-            width: "30%"
-          }}
-        >
-          <h1>{numberOfBooster}</h1>
-          <i className="nes-pokeball"></i>
+      <div className="nes-container">
+        <p className="help">{numberOfBooster === 0 
+          ? "Play more games to level up and earn new boosters." 
+          : "Open boosters to unlock new avatars and complete your collection !"
+          }</p>
+        <div className="actions">
+          <p>
+            <span>{numberOfBooster}</span>
+            <img src="/assets/ui/booster.png" alt="booster" />
+          </p>
           <button
             onClick={() => {
-              setFlipArray([false, false, false, false, false])
-              dispatch(openBooster())
+              if(numberOfBooster > 0){
+                dispatch(setBoosterContent([]))
+                dispatch(openBooster())
+              }
             }}
-            className={
-              numberOfBooster > 0 ? "bubbly blue" : "bubbly disabled"
-            }
+            className={cc("bubbly", { blue: numberOfBooster > 0, disabled: numberOfBooster <= 0 })}
           >
-            Open Booster !
+            Open a Booster
           </button>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            width: "100%",
-            flexGrow: "8",
-            alignItems: "center"
-          }}
-        >
-          {boosterContent.map((i, index) => {
-            return (
-              <ReactCardFlip
-                key={index}
-                isFlipped={flipArray[index]}
-                flipDirection="horizontal"
-              >
-                <div
-                  className="nes-container"
-                  onClick={() => {
-                    handleClick(flipArray, setFlipArray, index)
-                  }}
-                  style={{
-                    width: "188px",
-                    height: "188px",
-                    padding: "10px",
-                    backgroundColor: "rgba(255,255,255,1)",
-                    cursor: "var(--cursor-hover)"
-                  }}
-                >
-                  <h1
-                    style={{
-                      fontSize: "100px",
-                      position: "absolute",
-                      left: "40px",
-                      top: "30px"
-                    }}
-                  >
-                    ?
-                  </h1>
-                </div>
-
-                <div
-                  className="nes-container"
-                  onClick={() => {
-                    handleClick(flipArray, setFlipArray, index)
-                  }}
-                  style={{
-                    width: "188px",
-                    height: "188px",
-                    padding: "10px",
-                    backgroundColor: "rgba(255,255,255,1)",
-                    cursor: "var(--cursor-hover)"
-                  }}
-                >
-                  <h2
-                    style={{
-                      position: "absolute",
-                      bottom: "0px",
-                      backgroundColor: "#fff"
-                    }}
-                  >
-                    40x
-                  </h2>
-                  <img
-                    style={{
-                      width: "160px",
-                      height: "160px",
-                      imageRendering: "pixelated"
-                    }}
-                    src={getPortraitSrc(i)}
-                  />
-                </div>
-              </ReactCardFlip>
-            )
-          })}
+        <div className="boosters-content">
+          {boosterContent.map((pkm,i) => (
+            <BoosterCard key={"booster"+i} pkm={pkm} shards={50} />
+          ))}
         </div>
       </div>
     </div>
   )
-}
-
-function handleClick(
-  flipArray: boolean[],
-  setFlipArray: React.Dispatch<React.SetStateAction<boolean[]>>,
-  index: number
-) {
-  const actualFlipArray = [...flipArray]
-  actualFlipArray[index] = !actualFlipArray[index]
-  setFlipArray(actualFlipArray)
 }

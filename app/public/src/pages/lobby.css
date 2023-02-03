@@ -15,6 +15,10 @@
     grid-area: nav;
 }
 
+.lobby nav .bubbly {
+    position: relative;
+}
+
 .lobby .user-menu {
     grid-area: user;
     height: 100%;
