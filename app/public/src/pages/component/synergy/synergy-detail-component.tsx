@@ -8,14 +8,12 @@ import {
 } from "../../../../../types/strings/Synergy"
 import PRECOMPUTED_TYPE_POKEMONS from "../../../../../models/precomputed/type-pokemons.json"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import {
-  EffectDescription,
-  EffectName
-} from "../../../../../types/strings/Effect"
+import { EffectName } from "../../../../../types/strings/Effect"
 import { TypeTrigger, RarityColor } from "../../../../../types/Config"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
+import { SynergyDescription } from "./synergy-description"
 
 const precomputed = PRECOMPUTED_TYPE_POKEMONS as PrecomputedTypePokemon
 
@@ -55,7 +53,7 @@ export default function SynergyDetailComponent(props: {
             <h5 style={{ fontSize: "1.3vw" }}>
               ({TypeTrigger[props.type][i]}) {EffectName[d]}
             </h5>
-            <p style={{ fontSize: "1vw" }}>{EffectDescription[d].eng}</p>
+            <SynergyDescription effect={d} />
           </div>
         )
       })}

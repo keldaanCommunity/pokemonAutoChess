@@ -4,15 +4,13 @@ import {
   SynergyName,
   SynergyDetail
 } from "../../../../../types/strings/Synergy"
-import {
-  EffectDescription,
-  EffectName
-} from "../../../../../types/strings/Effect"
+import { EffectName } from "../../../../../types/strings/Effect"
 import { TypeTrigger } from "../../../../../types/Config"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
+import { SynergyDescription } from "../synergy/synergy-description"
 
 export default function WikiType(props: { type: Synergy }) {
   return (
@@ -27,7 +25,7 @@ export default function WikiType(props: { type: Synergy }) {
             <p>
               ({TypeTrigger[props.type][i]}) {EffectName[effect]}:
             </p>
-            <p>{EffectDescription[effect].eng}</p>
+            <SynergyDescription effect={effect} />
           </div>
         )
       })}
