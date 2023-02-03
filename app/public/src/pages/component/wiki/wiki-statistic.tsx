@@ -5,7 +5,7 @@ const imgStyle: CSS.Properties = {
   width: "64px",
   height: "64px",
   imageRendering: "pixelated",
-  marginRight: "10px",
+  marginRight: "10px"
 }
 
 export default function WikiStatistic() {
@@ -15,7 +15,7 @@ export default function WikiStatistic() {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          flexFlow: "column",
+          flexFlow: "column"
         }}
       >
         <div style={{ display: "flex", alignItems: "center", margin: "10px" }}>
@@ -43,7 +43,7 @@ export default function WikiStatistic() {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          flexFlow: "column",
+          flexFlow: "column"
         }}
       >
         <div style={{ display: "flex", alignItems: "center", margin: "10px" }}>
@@ -55,7 +55,7 @@ export default function WikiStatistic() {
           <p>Range, 1-range pokemon are melee.</p>
         </div>
         <div style={{ display: "flex", alignItems: "center", margin: "10px" }}>
-          <img style={imgStyle} src="assets/icons/atkSpeed.png"></img>
+          <img style={imgStyle} src="assets/icons/speed.png"></img>
           <p>Attack speed (Attack/second)</p>
         </div>
         <div style={{ display: "flex", alignItems: "center", margin: "10px" }}>
