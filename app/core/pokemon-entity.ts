@@ -52,7 +52,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type(Status) status: Status
   @type(Count) count: Count
   @type("float32") critDamage = 2
-  @type("uint8") spellDamage = 0
+  @type("uint16") spellDamage = 0
   @type("uint16") healDone: number
   @type("string") emotion: Emotion
   cooldown = 500
