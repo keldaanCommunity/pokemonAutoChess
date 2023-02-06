@@ -100,10 +100,6 @@ export default class BoardManager {
   }
 
   setPlayer(player: IPlayer) {
-    if (this.mode == "battle") {
-      return
-    }
-
     if (player.id != this.player.id) {
       this.pokemons.forEach((pokemon, key) => {
         pokemon.destroy(true)
