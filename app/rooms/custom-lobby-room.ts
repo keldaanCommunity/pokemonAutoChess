@@ -31,7 +31,8 @@ import {
   Title,
   Role,
   CDN_PORTRAIT_URL,
-  PrecomputedRaritPokemonyAll
+  PrecomputedRaritPokemonyAll,
+  USERNAME_REGEXP
 } from "../types"
 import { getEmotionCost, RarityProbability } from "../types/Config"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
@@ -116,60 +117,87 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.autoDispose = false
 
     this.onMessage(Transfer.REQUEST_LEADERBOARD, (client, message) => {
-      client.send(Transfer.REQUEST_LEADERBOARD, this.leaderboard)
+      try {
+        client.send(Transfer.REQUEST_LEADERBOARD, this.leaderboard)
+      } catch (error) {
+        console.log(error)
+      }
     })
 
     this.onMessage(Transfer.REQUEST_BOT_LEADERBOARD, (client, message) => {
-      client.send(Transfer.REQUEST_BOT_LEADERBOARD, this.botLeaderboard)
+      try {
+        client.send(Transfer.REQUEST_BOT_LEADERBOARD, this.botLeaderboard)
+      } catch (error) {
+        console.log(error)
+      }
     })
 
     this.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (client, message) => {
-      client.send(Transfer.REQUEST_LEVEL_LEADERBOARD, this.levelLeaderboard)
+      try {
+        client.send(Transfer.REQUEST_LEVEL_LEADERBOARD, this.levelLeaderboard)
+      } catch (error) {
+        console.log(error)
+      }
     })
 
     this.onMessage(Transfer.BAN, (client, message) => {
-      const user = this.state.users.get(client.auth.uid)
-      if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
-        BannedUser.findOne({ uid: message }, (err, banned) => {
-          if (err) {
-            console.log(err)
-          }
-          if (!banned) {
-            BannedUser.create({ uid: message })
-          }
-        })
-        this.clients.forEach((c) => {
-          if (c.auth.uid === message) {
-            c.send(Transfer.BAN)
-            c.leave()
-          }
-        })
+      try {
+        const user = this.state.users.get(client.auth.uid)
+        if (
+          user &&
+          (user.role === Role.ADMIN || user.role === Role.MODERATOR)
+        ) {
+          BannedUser.findOne({ uid: message }, (err, banned) => {
+            if (err) {
+              console.log(err)
+            }
+            if (!banned) {
+              BannedUser.create({ uid: message })
+            }
+          })
+          this.clients.forEach((c) => {
+            if (c.auth.uid === message) {
+              c.send(Transfer.BAN)
+              c.leave()
+            }
+          })
+        }
+      } catch (error) {
+        console.log(error)
       }
     })
 
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
-      const user = this.state.users.get(client.auth.uid)
-      if (user && !user.anonymous && message.payload != "") {
-        this.state.addMessage(
-          user.name,
-          message.payload,
-          user.avatar,
-          Date.now(),
-          true
-        )
+      try {
+        const user = this.state.users.get(client.auth.uid)
+        if (user && !user.anonymous && message.payload != "") {
+          this.state.addMessage(
+            user.name,
+            message.payload,
+            user.avatar,
+            Date.now(),
+            true
+          )
+        }
+      } catch (error) {
+        console.log(error)
       }
     })
 
     this.onMessage(
       Transfer.REMOVE_MESSAGE,
       (client, message: { author: string; payload: string }) => {
-        const user = this.state.users.get(client.auth.uid)
-        if (
-          user &&
-          user.role &&
-          (user.role === Role.ADMIN || user.role === Role.MODERATOR)
-        ) {
-          this.state.removeMessage(message.author, message.payload)
+        try {
+          const user = this.state.users.get(client.auth.uid)
+          if (
+            user &&
+            user.role &&
+            (user.role === Role.ADMIN || user.role === Role.MODERATOR)
+          ) {
+            this.state.removeMessage(message.author, message.payload)
+          }
+        } catch (error) {
+          console.log(error)
         }
       }
     )
@@ -177,20 +205,24 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.onMessage(
       Transfer.GIVE_BOOSTER,
       (client, message: { uid: string; numberOfBoosters: number }) => {
-        const u = this.state.users.get(client.auth.uid)
-        const targetUser = this.state.users.get(message.uid)
+        try {
+          const u = this.state.users.get(client.auth.uid)
+          const targetUser = this.state.users.get(message.uid)
 
-        if (u && u.role && u.role === Role.ADMIN) {
-          UserMetadata.findOne({ uid: message.uid }, (err, user) => {
-            if (user) {
-              user.booster += 1
-              user.save()
+          if (u && u.role && u.role === Role.ADMIN) {
+            UserMetadata.findOne({ uid: message.uid }, (err, user) => {
+              if (user) {
+                user.booster += 1
+                user.save()
 
-              if (targetUser) {
-                targetUser.booster = user.booster
+                if (targetUser) {
+                  targetUser.booster = user.booster
+                }
               }
-            }
-          })
+            })
+          }
+        } catch (error) {
+          console.log(error)
         }
       }
     )
@@ -198,39 +230,47 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.onMessage(
       Transfer.GIVE_TITLE,
       (client, message: { uid: string; title: Title }) => {
-        const u = this.state.users.get(client.auth.uid)
-        const targetUser = this.state.users.get(message.uid)
+        try {
+          const u = this.state.users.get(client.auth.uid)
+          const targetUser = this.state.users.get(message.uid)
 
-        if (u && u.role && u.role === Role.ADMIN) {
-          UserMetadata.findOne({ uid: message.uid }, (err, user) => {
-            if (user && user.titles && !user.titles.includes(message.title)) {
-              user.titles.push(message.title)
-              user.save()
+          if (u && u.role && u.role === Role.ADMIN) {
+            UserMetadata.findOne({ uid: message.uid }, (err, user) => {
+              if (user && user.titles && !user.titles.includes(message.title)) {
+                user.titles.push(message.title)
+                user.save()
 
-              if (targetUser) {
-                targetUser.titles.push(message.title)
+                if (targetUser) {
+                  targetUser.titles.push(message.title)
+                }
               }
-            }
-          })
+            })
+          }
+        } catch (error) {
+          console.log(error)
         }
       }
     )
 
     this.onMessage(Transfer.SET_MODERATOR, (client, uid: string) => {
-      const u = this.state.users.get(client.auth.uid)
-      const targetUser = this.state.users.get(uid)
-      // console.log(u.role, uid)
-      if (u && u.role === Role.ADMIN) {
-        UserMetadata.findOne({ uid: uid }, (err, user) => {
-          if (user) {
-            user.role = Role.MODERATOR
-            user.save()
+      try {
+        const u = this.state.users.get(client.auth.uid)
+        const targetUser = this.state.users.get(uid)
+        // console.log(u.role, uid)
+        if (u && u.role === Role.ADMIN) {
+          UserMetadata.findOne({ uid: uid }, (err, user) => {
+            if (user) {
+              user.role = Role.MODERATOR
+              user.save()
 
-            if (targetUser) {
-              targetUser.role = user.role
+              if (targetUser) {
+                targetUser.role = user.role
+              }
             }
-          }
-        })
+          })
+        }
+      } catch (error) {
+        console.log(error)
       }
     })
 
@@ -271,138 +311,135 @@ export default class CustomLobbyRoom extends LobbyRoom {
     })
 
     this.onMessage(Transfer.REQUEST_BOT_LIST, (client) => {
-      const botList = new Array<{
-        name: string
-        avatar: string
-        author: string
-        id: string
-      }>()
+      try {
+        const botList = new Array<{
+          name: string
+          avatar: string
+          author: string
+          id: string
+        }>()
 
-      this.bots.forEach((b) => {
-        botList.push({
-          name: b.name,
-          avatar: b.avatar,
-          id: b.id,
-          author: b.author
-        })
-      })
-
-      client.send(Transfer.REQUEST_BOT_LIST, botList)
-    })
-
-    this.onMessage(Transfer.REQUEST_BOT_DATA, (client, bot) => {
-      const botData = this.bots.get(bot)
-      client.send(Transfer.REQUEST_BOT_DATA, botData)
-    })
-
-    this.onMessage(Transfer.REQUEST_META, (client) => {
-      client.send(Transfer.REQUEST_META, this.meta)
-      client.send(Transfer.REQUEST_META_ITEMS, this.metaItems)
-      client.send(Transfer.REQUEST_META_POKEMONS, this.metaPokemons)
-    })
-
-    this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
-      const user: LobbyUser = this.state.users.get(client.auth.uid)
-      const DUST_PER_BOOSTER = 50
-      if (user && user.booster && user.booster > 0) {
-        user.booster -= 1
-        const boosterIndex: string[] = []
-
-        for (let i = 0; i < 5; i++) {
-          const pkm = this.pickPokemon()
-          boosterIndex.push(PkmIndex[pkm])
-        }
-
-        boosterIndex.forEach((i) => {
-          const c = user.pokemonCollection.get(i)
-          if (c) {
-            c.dust += DUST_PER_BOOSTER
-          } else {
-            const newConfig = new PokemonConfig(i)
-            newConfig.dust += DUST_PER_BOOSTER
-            user.pokemonCollection.set(i, newConfig)
-          }
+        this.bots.forEach((b) => {
+          botList.push({
+            name: b.name,
+            avatar: b.avatar,
+            id: b.id,
+            author: b.author
+          })
         })
 
-        UserMetadata.findOne(
-          { uid: client.auth.uid },
-          (err, u: FilterQuery<IUserMetadata>) => {
-            u.booster = user.booster
-            boosterIndex.forEach((i) => {
-              const c = u.pokemonCollection.get(i)
-              if (c) {
-                c.dust += DUST_PER_BOOSTER
-              } else {
-                u.pokemonCollection.set(i, {
-                  id: i,
-                  emotions: [],
-                  shinyEmotions: [],
-                  dust: DUST_PER_BOOSTER,
-                  selectedEmotion: Emotion.NORMAL,
-                  selectedShiny: false
-                })
-              }
-            })
-            u.save()
-          }
-        )
-        client.send(Transfer.BOOSTER_CONTENT, boosterIndex)
+        client.send(Transfer.REQUEST_BOT_LIST, botList)
+      } catch (error) {
+        console.log(error)
       }
     })
 
-    this.onMessage("map", (client, message) => {
-      UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
-        if (user) {
-          const mapName = `${message.map}${message.index}`
-          const map = message.map
-          const index = message.index
-          const mapWin = user.mapWin[map]
-          let changeNeeded = false
-          if (index == 0) {
-            changeNeeded = true
-          } else if (index == 1 && mapWin >= 5) {
-            changeNeeded = true
-          } else if (index == 2 && mapWin >= 10) {
-            changeNeeded = true
-          } else if (index == 3 && mapWin >= 20) {
-            changeNeeded = true
-          } else if (index == 4 && mapWin >= 40) {
-            changeNeeded = true
+    this.onMessage(Transfer.REQUEST_BOT_DATA, (client, bot) => {
+      try {
+        const botData = this.bots.get(bot)
+        client.send(Transfer.REQUEST_BOT_DATA, botData)
+      } catch (error) {
+        console.log(error)
+      }
+    })
+
+    this.onMessage(Transfer.REQUEST_META, (client) => {
+      try {
+        client.send(Transfer.REQUEST_META, this.meta)
+        client.send(Transfer.REQUEST_META_ITEMS, this.metaItems)
+        client.send(Transfer.REQUEST_META_POKEMONS, this.metaPokemons)
+      } catch (error) {
+        console.log(error)
+      }
+    })
+
+    this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
+      try {
+        const user: LobbyUser = this.state.users.get(client.auth.uid)
+        const DUST_PER_BOOSTER = 50
+        if (user && user.booster && user.booster > 0) {
+          user.booster -= 1
+          const boosterIndex: string[] = []
+
+          for (let i = 0; i < 5; i++) {
+            const pkm = this.pickPokemon()
+            boosterIndex.push(PkmIndex[pkm])
           }
-          if (changeNeeded && mapName != user.map[map]) {
-            user.map[map] = mapName
-            user.save()
-          }
+
+          boosterIndex.forEach((i) => {
+            const c = user.pokemonCollection.get(i)
+            if (c) {
+              c.dust += DUST_PER_BOOSTER
+            } else {
+              const newConfig = new PokemonConfig(i)
+              newConfig.dust += DUST_PER_BOOSTER
+              user.pokemonCollection.set(i, newConfig)
+            }
+          })
+
+          UserMetadata.findOne(
+            { uid: client.auth.uid },
+            (err, u: FilterQuery<IUserMetadata>) => {
+              u.booster = user.booster
+              boosterIndex.forEach((i) => {
+                const c = u.pokemonCollection.get(i)
+                if (c) {
+                  c.dust += DUST_PER_BOOSTER
+                } else {
+                  u.pokemonCollection.set(i, {
+                    id: i,
+                    emotions: [],
+                    shinyEmotions: [],
+                    dust: DUST_PER_BOOSTER,
+                    selectedEmotion: Emotion.NORMAL,
+                    selectedShiny: false
+                  })
+                }
+              })
+              u.save()
+            }
+          )
+          client.send(Transfer.BOOSTER_CONTENT, boosterIndex)
         }
-      })
+      } catch (error) {
+        console.log(error)
+      }
     })
 
     this.onMessage(Transfer.CHANGE_NAME, (client, message) => {
-      if (message.name.length > 4) {
-        this.state.users.get(client.auth.uid).name = message.name
-        UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
-          if (user) {
-            user.displayName = message.name
-            user.save()
-          }
-        })
+      try {
+        if (USERNAME_REGEXP.test(message.name)) {
+          this.state.users.get(client.auth.uid).name = message.name
+          UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
+            if (user) {
+              user.displayName = message.name
+              user.save()
+            }
+          })
+        }
+      } catch (error) {
+        console.log(error)
       }
     })
 
     this.onMessage(Transfer.SET_TITLE, (client, message: Title | "") => {
-      let m = message
-      const user = this.state.users.get(client.auth.uid)
-      if (user) {
-        if (user.title === message) {
-          m = ""
-        }
-        user.title = m
-        UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
-          if (user) {
-            user.title = m
-            user.save()
+      try {
+        let m = message
+        const user = this.state.users.get(client.auth.uid)
+        if (user) {
+          if (user.title === message) {
+            m = ""
           }
-        })
+          user.title = m
+          UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
+            if (user) {
+              user.title = m
+              user.save()
+            }
+          })
+        }
+      } catch (error) {
+        console.log(error)
       }
     })
 
@@ -412,31 +449,35 @@ export default class CustomLobbyRoom extends LobbyRoom {
         client,
         message: { index: string; emotion: Emotion; shiny: boolean }
       ) => {
-        const user: LobbyUser = this.state.users.get(client.auth.uid)
-        const pokemonConfig = user.pokemonCollection.get(message.index)
-        if (pokemonConfig) {
-          const emotionsToCheck = message.shiny
-            ? pokemonConfig.shinyEmotions
-            : pokemonConfig.emotions
-          if (
-            emotionsToCheck.includes(message.emotion) &&
-            (message.emotion != pokemonConfig.selectedEmotion ||
-              message.shiny != pokemonConfig.selectedShiny)
-          ) {
-            pokemonConfig.selectedEmotion = message.emotion
-            pokemonConfig.selectedShiny = message.shiny
-            UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
-              if (u) {
-                if (u.pokemonCollection.get(message.index)) {
-                  u.pokemonCollection.get(message.index).selectedEmotion =
-                    message.emotion
-                  u.pokemonCollection.get(message.index).selectedShiny =
-                    message.shiny
-                  u.save()
+        try {
+          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const pokemonConfig = user.pokemonCollection.get(message.index)
+          if (pokemonConfig) {
+            const emotionsToCheck = message.shiny
+              ? pokemonConfig.shinyEmotions
+              : pokemonConfig.emotions
+            if (
+              emotionsToCheck.includes(message.emotion) &&
+              (message.emotion != pokemonConfig.selectedEmotion ||
+                message.shiny != pokemonConfig.selectedShiny)
+            ) {
+              pokemonConfig.selectedEmotion = message.emotion
+              pokemonConfig.selectedShiny = message.shiny
+              UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
+                if (u) {
+                  if (u.pokemonCollection.get(message.index)) {
+                    u.pokemonCollection.get(message.index).selectedEmotion =
+                      message.emotion
+                    u.pokemonCollection.get(message.index).selectedShiny =
+                      message.shiny
+                    u.save()
+                  }
                 }
-              }
-            })
+              })
+            }
           }
+        } catch (error) {
+          console.log(error)
         }
       }
     )
@@ -447,136 +488,148 @@ export default class CustomLobbyRoom extends LobbyRoom {
         client,
         message: { index: string; emotion: Emotion; shiny: boolean }
       ) => {
-        const user: LobbyUser = this.state.users.get(client.auth.uid)
-        const pokemonConfig = user.pokemonCollection.get(message.index)
-        if (pokemonConfig) {
-          const emotionsToCheck = message.shiny
-            ? pokemonConfig.shinyEmotions
-            : pokemonConfig.emotions
-          const cost = getEmotionCost(message.emotion, message.shiny)
-          if (
-            !emotionsToCheck.includes(message.emotion) &&
-            pokemonConfig.dust >= cost
-          ) {
-            emotionsToCheck.push(message.emotion)
-            pokemonConfig.dust -= cost
-            pokemonConfig.selectedEmotion = message.emotion
-            pokemonConfig.selectedShiny = message.shiny
-            UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
-              if (u) {
-                let numberOfShinies = 0
-                u.pokemonCollection.forEach((c) => {
-                  numberOfShinies += c.shinyEmotions.length
-                })
-                if (
-                  numberOfShinies > 30 &&
-                  !u.titles.includes(Title.SHINY_SEEKER)
-                ) {
-                  u.titles.push(Title.SHINY_SEEKER)
-                }
-                if (
-                  u.pokemonCollection.size >= 30 &&
-                  !u.titles.includes(Title.DUKE)
-                ) {
-                  u.titles.push(Title.DUKE)
-                }
-                if (u.pokemonCollection.get(message.index)) {
+        try {
+          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const pokemonConfig = user.pokemonCollection.get(message.index)
+          if (pokemonConfig) {
+            const emotionsToCheck = message.shiny
+              ? pokemonConfig.shinyEmotions
+              : pokemonConfig.emotions
+            const cost = getEmotionCost(message.emotion, message.shiny)
+            if (
+              !emotionsToCheck.includes(message.emotion) &&
+              pokemonConfig.dust >= cost
+            ) {
+              emotionsToCheck.push(message.emotion)
+              pokemonConfig.dust -= cost
+              pokemonConfig.selectedEmotion = message.emotion
+              pokemonConfig.selectedShiny = message.shiny
+              UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
+                if (u) {
+                  let numberOfShinies = 0
+                  u.pokemonCollection.forEach((c) => {
+                    numberOfShinies += c.shinyEmotions.length
+                  })
                   if (
-                    u.pokemonCollection.get(message.index).shinyEmotions
-                      .length >= Object.keys(Emotion).length &&
-                    u.pokemonCollection.get(message.index).emotions.length >=
-                      Object.keys(Emotion).length &&
-                    !u.titles.includes(Title.DUCHESS)
+                    numberOfShinies > 30 &&
+                    !u.titles.includes(Title.SHINY_SEEKER)
                   ) {
-                    u.titles.push(Title.DUCHESS)
+                    u.titles.push(Title.SHINY_SEEKER)
                   }
-                  message.shiny
-                    ? u.pokemonCollection
-                        .get(message.index)
-                        .shinyEmotions.push(message.emotion)
-                    : u.pokemonCollection
-                        .get(message.index)
-                        .emotions.push(message.emotion)
-                  u.pokemonCollection.get(message.index).dust -= cost
-                  u.pokemonCollection.get(message.index).selectedEmotion =
-                    message.emotion
-                  u.pokemonCollection.get(message.index).selectedShiny =
+                  if (
+                    u.pokemonCollection.size >= 30 &&
+                    !u.titles.includes(Title.DUKE)
+                  ) {
+                    u.titles.push(Title.DUKE)
+                  }
+                  if (u.pokemonCollection.get(message.index)) {
+                    if (
+                      u.pokemonCollection.get(message.index).shinyEmotions
+                        .length >= Object.keys(Emotion).length &&
+                      u.pokemonCollection.get(message.index).emotions.length >=
+                        Object.keys(Emotion).length &&
+                      !u.titles.includes(Title.DUCHESS)
+                    ) {
+                      u.titles.push(Title.DUCHESS)
+                    }
                     message.shiny
-                  u.save()
+                      ? u.pokemonCollection
+                          .get(message.index)
+                          .shinyEmotions.push(message.emotion)
+                      : u.pokemonCollection
+                          .get(message.index)
+                          .emotions.push(message.emotion)
+                    u.pokemonCollection.get(message.index).dust -= cost
+                    u.pokemonCollection.get(message.index).selectedEmotion =
+                      message.emotion
+                    u.pokemonCollection.get(message.index).selectedShiny =
+                      message.shiny
+                    u.save()
+                  }
                 }
-              }
-            })
+              })
+            }
           }
+        } catch (error) {
+          console.log(error)
         }
       }
     )
 
     this.onMessage(Transfer.SEARCH_BY_ID, (client, message) => {
-      UserMetadata.findOne({ uid: message }, (err, user) => {
-        if (user) {
-          DetailledStatistic.find(
-            { playerId: user.uid },
-            ["pokemons", "time", "rank", "elo"],
-            { limit: 10, sort: { time: -1 } },
-            (err, stats) => {
-              if (err) {
-                console.log(err)
-              } else {
-                client.send(
-                  Transfer.USER,
-                  new LobbyUser(
-                    user.uid,
-                    user.displayName,
-                    user.elo,
-                    user.avatar,
-                    user.langage,
-                    user.wins,
-                    user.exp,
-                    user.level,
-                    user.donor,
-                    stats.map((r) => {
-                      return new GameRecord(r.time, r.rank, r.elo, r.pokemons)
-                    }),
-                    user.honors,
-                    user.pokemonCollection,
-                    user.booster,
-                    user.titles,
-                    user.title,
-                    user.role,
-                    false
+      try {
+        UserMetadata.findOne({ uid: message }, (err, user) => {
+          if (user) {
+            DetailledStatistic.find(
+              { playerId: user.uid },
+              ["pokemons", "time", "rank", "elo"],
+              { limit: 10, sort: { time: -1 } },
+              (err, stats) => {
+                if (err) {
+                  console.log(err)
+                } else {
+                  client.send(
+                    Transfer.USER,
+                    new LobbyUser(
+                      user.uid,
+                      user.displayName,
+                      user.elo,
+                      user.avatar,
+                      user.langage,
+                      user.wins,
+                      user.exp,
+                      user.level,
+                      user.donor,
+                      stats.map((r) => {
+                        return new GameRecord(r.time, r.rank, r.elo, r.pokemons)
+                      }),
+                      user.honors,
+                      user.pokemonCollection,
+                      user.booster,
+                      user.titles,
+                      user.title,
+                      user.role,
+                      false
+                    )
                   )
-                )
+                }
               }
-            }
-          )
-        } else {
-          client.send(Transfer.USER, {})
-        }
-      })
+            )
+          } else {
+            client.send(Transfer.USER, {})
+          }
+        })
+      } catch (error) {
+        console.log(error)
+      }
     })
 
     this.onMessage(Transfer.SEARCH, (client, message) => {
-      if (message.name?.length >= 4) {
-        const regExp = new RegExp(`${message.name}`)
-        UserMetadata.find(
-          { displayName: { $regex: regExp, $options: "i" } },
-          ["uid", "elo", "displayName", "level", "avatar"],
-          { limit: 10, sort: { level: -1 } },
-          (err, users) => {
-            if (users) {
-              const suggestions: Array<ISuggestionUser> = users.map((u) => {
-                return {
-                  id: u.uid,
-                  elo: u.elo,
-                  name: u.displayName,
-                  level: u.level,
-                  avatar: u.avatar
-                }
-              })
-              client.send(Transfer.SUGGESTIONS, suggestions)
+      try {
+        if (USERNAME_REGEXP.test(message.name)) {
+          const regExp = new RegExp(message.name)
+          UserMetadata.find(
+            { displayName: { $regex: regExp, $options: "i" } },
+            ["uid", "elo", "displayName", "level", "avatar"],
+            { limit: 10, sort: { level: -1 } },
+            (err, users) => {
+              if (users) {
+                const suggestions: Array<ISuggestionUser> = users.map((u) => {
+                  return {
+                    id: u.uid,
+                    elo: u.elo,
+                    name: u.displayName,
+                    level: u.level,
+                    avatar: u.avatar
+                  }
+                })
+                client.send(Transfer.SUGGESTIONS, suggestions)
+              }
             }
-          }
-        )
+          )
+        }
+      } catch (error) {
+        console.log(error)
       }
     })
 
@@ -586,29 +639,33 @@ export default class CustomLobbyRoom extends LobbyRoom {
         client,
         message: { index: string; emotion: Emotion; shiny: boolean }
       ) => {
-        const user: LobbyUser = this.state.users.get(client.auth.uid)
-        const config = user.pokemonCollection.get(message.index)
-        if (config) {
-          const emotionsToCheck = message.shiny
-            ? config.shinyEmotions
-            : config.emotions
-          if (emotionsToCheck.includes(message.emotion)) {
-            const portrait = getPortraitSrc(
-              message.index,
-              message.shiny,
-              message.emotion
-            )
-              .replace(CDN_PORTRAIT_URL, "")
-              .replace(".png", "")
-            user.avatar = portrait
-            UserMetadata.findOne(
-              { uid: client.auth.uid },
-              (err: CallbackError, u: FilterQuery<IUserMetadata>) => {
-                u.avatar = portrait
-                u.save()
-              }
-            )
+        try {
+          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const config = user.pokemonCollection.get(message.index)
+          if (config) {
+            const emotionsToCheck = message.shiny
+              ? config.shinyEmotions
+              : config.emotions
+            if (emotionsToCheck.includes(message.emotion)) {
+              const portrait = getPortraitSrc(
+                message.index,
+                message.shiny,
+                message.emotion
+              )
+                .replace(CDN_PORTRAIT_URL, "")
+                .replace(".png", "")
+              user.avatar = portrait
+              UserMetadata.findOne(
+                { uid: client.auth.uid },
+                (err: CallbackError, u: FilterQuery<IUserMetadata>) => {
+                  u.avatar = portrait
+                  u.save()
+                }
+              )
+            }
           }
+        } catch (error) {
+          console.log(error)
         }
       }
     )
@@ -761,90 +818,94 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
   onJoin(client: Client, options: any) {
     super.onJoin(client, options)
-    console.log(`${client.auth.displayName} ${client.id} join lobby room`)
-    // client.send(Transfer.REQUEST_BOT_DATA, this.bots);
-    UserMetadata.findOne(
-      { uid: client.auth.uid },
-      (err: any, user: IUserMetadata) => {
-        if (user) {
-          DetailledStatistic.find(
-            { playerId: client.auth.uid },
-            ["pokemons", "time", "rank", "elo"],
-            { limit: 10, sort: { time: -1 } },
-            (err, stats) => {
-              if (err) {
-                console.log(err)
-              } else {
-                const records = new ArraySchema<GameRecord>()
-                stats.forEach((record) => {
-                  records.push(
-                    new GameRecord(
-                      record.time,
-                      record.rank,
-                      record.elo,
-                      record.pokemons
+    try {
+      console.log(`${client.auth.displayName} ${client.id} join lobby room`)
+      // client.send(Transfer.REQUEST_BOT_DATA, this.bots);
+      UserMetadata.findOne(
+        { uid: client.auth.uid },
+        (err: any, user: IUserMetadata) => {
+          if (user) {
+            DetailledStatistic.find(
+              { playerId: client.auth.uid },
+              ["pokemons", "time", "rank", "elo"],
+              { limit: 10, sort: { time: -1 } },
+              (err, stats) => {
+                if (err) {
+                  console.log(err)
+                } else {
+                  const records = new ArraySchema<GameRecord>()
+                  stats.forEach((record) => {
+                    records.push(
+                      new GameRecord(
+                        record.time,
+                        record.rank,
+                        record.elo,
+                        record.pokemons
+                      )
+                    )
+                  })
+
+                  this.state.users.set(
+                    client.auth.uid,
+                    new LobbyUser(
+                      user.uid,
+                      user.displayName,
+                      user.elo,
+                      user.avatar,
+                      user.langage,
+                      user.wins,
+                      user.exp,
+                      user.level,
+                      user.donor,
+                      records,
+                      user.honors,
+                      user.pokemonCollection,
+                      user.booster,
+                      user.titles,
+                      user.title,
+                      user.role,
+                      client.auth.email === undefined
                     )
                   )
-                })
-
-                this.state.users.set(
-                  client.auth.uid,
-                  new LobbyUser(
-                    user.uid,
-                    user.displayName,
-                    user.elo,
-                    user.avatar,
-                    user.langage,
-                    user.wins,
-                    user.exp,
-                    user.level,
-                    user.donor,
-                    records,
-                    user.honors,
-                    user.pokemonCollection,
-                    user.booster,
-                    user.titles,
-                    user.title,
-                    user.role,
-                    client.auth.email === undefined
-                  )
-                )
+                }
               }
-            }
-          )
-        } else {
-          const numberOfBoosters = 3
-          UserMetadata.create({
-            uid: client.auth.uid,
-            displayName: client.auth.displayName,
-            booster: numberOfBoosters,
-            pokemonCollection: new Map<string, IPokemonConfig>()
-          })
-          this.state.users.set(
-            client.auth.uid,
-            new LobbyUser(
-              client.auth.uid,
-              client.auth.displayName,
-              1000,
-              "0019/Normal",
-              "eng",
-              0,
-              0,
-              0,
-              false,
-              [],
-              [],
-              new Map<string, IPokemonConfig>(),
-              numberOfBoosters,
-              [],
-              "",
-              Role.BASIC,
-              client.auth.email === undefined
             )
-          )
+          } else {
+            const numberOfBoosters = 3
+            UserMetadata.create({
+              uid: client.auth.uid,
+              displayName: client.auth.displayName,
+              booster: numberOfBoosters,
+              pokemonCollection: new Map<string, IPokemonConfig>()
+            })
+            this.state.users.set(
+              client.auth.uid,
+              new LobbyUser(
+                client.auth.uid,
+                client.auth.displayName,
+                1000,
+                "0019/Normal",
+                "eng",
+                0,
+                0,
+                0,
+                false,
+                [],
+                [],
+                new Map<string, IPokemonConfig>(),
+                numberOfBoosters,
+                [],
+                "",
+                Role.BASIC,
+                client.auth.email === undefined
+              )
+            )
+          }
         }
-      }
-    )
+      )
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   onLeave(client: Client) {
