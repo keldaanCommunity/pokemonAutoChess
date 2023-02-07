@@ -31,7 +31,8 @@ import {
   Title,
   Role,
   CDN_PORTRAIT_URL,
-  PrecomputedRaritPokemonyAll
+  PrecomputedRaritPokemonyAll,
+  USERNAME_REGEXP
 } from "../types"
 import { getEmotionCost, RarityProbability } from "../types/Config"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
@@ -407,7 +408,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(Transfer.CHANGE_NAME, (client, message) => {
       try {
-        if (message.name.length > 4) {
+        if (USERNAME_REGEXP.test(message.name)) {
           this.state.users.get(client.auth.uid).name = message.name
           UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
             if (user) {
@@ -605,8 +606,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(Transfer.SEARCH, (client, message) => {
       try {
-        if (message.name?.length >= 4) {
-          const regExp = new RegExp(`${message.name}`)
+        if (USERNAME_REGEXP.test(message.name)) {
+          const regExp = new RegExp(message.name)
           UserMetadata.find(
             { displayName: { $regex: regExp, $options: "i" } },
             ["uid", "elo", "displayName", "level", "avatar"],
