@@ -77,7 +77,9 @@ export default class PokemonState {
     damage: number,
     board: Board,
     attackType: AttackType,
-    attacker: PokemonEntity
+    attacker: PokemonEntity,
+    dodgeable: boolean,
+    reduceable: boolean
   ): boolean {
     let death: boolean
 
@@ -132,7 +134,7 @@ export default class PokemonState {
           // console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
         }
 
-        if (pokemon.dodge > Math.random()) {
+        if (dodgeable && pokemon.dodge > Math.random()) {
           if (!(attacker && attacker.items.has(Item.XRAY_VISION))) {
             reducedDamage = 0
             pokemon.count.dodgeCount += 1
@@ -147,7 +149,7 @@ export default class PokemonState {
         }
 
         if (
-          pokemon.effects.includes(Effect.GUTS) ||
+          (reduceable && pokemon.effects.includes(Effect.GUTS)) ||
           pokemon.effects.includes(Effect.DEFIANT) ||
           pokemon.effects.includes(Effect.JUSTIFIED)
         ) {
@@ -584,17 +586,21 @@ export default class PokemonState {
           Math.ceil(pokemon.hp * 0.05),
           board,
           AttackType.TRUE,
-          pokemon.status.burnOrigin
+          pokemon.status.burnOrigin,
+          false,
+          false
         )
       }
 
       if (pokemon.status.poison && pokemon.status.poisonOrigin) {
         this.handleDamage(
           pokemon,
-          Math.ceil(pokemon.hp * 0.15),
+          Math.ceil(pokemon.hp * 0.13),
           board,
           AttackType.TRUE,
-          pokemon.status.poisonOrigin
+          pokemon.status.poisonOrigin,
+          false,
+          false
         )
       }
 

@@ -141,17 +141,17 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.RAIN_DANCE]: {
-    eng: `Water pokemons gain 20% chance to dodge enemy attacks & spells`,
+    eng: `Water pokemons gain 25% chance to dodge enemy attacks`,
     esp: `Cae la lluvia, 30% de ATK para los aliados del agua`,
     fra: `La pluie tombe, 30% d'ATK pour les alliés eau`
   },
   [Effect.DRIZZLE]: {
-    eng: `Water pokemons gain 45% chance to dodge enemy attacks & spells`,
+    eng: `Water pokemons gain 50% chance to dodge enemy attacks`,
     esp: `La lluvia es cada vez más intensa, un 30% más de ATK.`,
     fra: `La pluie s'intensifie, 30% d'ATK en plus`
   },
   [Effect.PRIMORDIAL_SEA]: {
-    eng: `Water pokemons gain 70% chance to dodge enemy attacks & spells`,
+    eng: `Water pokemons gain 75% chance to dodge enemy attacks`,
     esp: `Invoca a Kyogre, el rey de los océanos`,
     fra: `Invoque Kyogre, le roi des océans`
   },
@@ -241,12 +241,12 @@ export const EffectDescription: {
     fra: `Une tempête de sable fait rage, faisant 10% HP/s aux pkm non sol/acier/mineral`
   },
   [Effect.POISON_GAS]: {
-    eng: `Your Poison pokemon have a 30% chance to poison the target for 4 seconds. (15% HP per second)`,
+    eng: `Your Poison pokemon have a 30% chance to poison the target for 4 seconds. (13% ${Stat.HP} per second as ${Damage.TRUE})`,
     esp: `+20% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo`,
     fra: `+20% de chances d'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes`
   },
   [Effect.TOXIC]: {
-    eng: `Your Poison pokemon have 70% chance to poison the target for 4 seconds. (15% HP per second)`,
+    eng: `Your Poison pokemon have 70% chance to poison the target for 4 seconds. (13% ${Stat.HP} per second as ${Damage.TRUE})`,
     esp: `+30% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo`,
     fra: `+30% de chances d'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes`
   },

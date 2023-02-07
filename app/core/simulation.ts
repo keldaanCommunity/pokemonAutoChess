@@ -234,24 +234,46 @@ export default class Simulation extends Schema implements ISimulation {
     return { x: row, y: column }
   }
 
-  applyStat(pokemon: PokemonEntity, stat: Stat, value: number){
-    switch(stat){
-      case Stat.ATK: pokemon.addAttack(value); break;
-      case Stat.DEF: pokemon.addDefense(value); break;
-      case Stat.SPE_DEF: pokemon.addSpecialDefense(value); break;
-      case Stat.SPELL_POWER: pokemon.addSpellDamage(value); break;
-      case Stat.MANA: pokemon.setMana(pokemon.mana + value); break;
-      case Stat.ATK_SPEED: pokemon.handleAttackSpeed(value); break;
-      case Stat.CRIT_CHANCE: pokemon.addCritChance(value); break;
-      case Stat.CRIT_DAMAGE: pokemon.addCritDamage(value); break;
-      case Stat.SHIELD: pokemon.handleShield(value, pokemon); break;
-      case Stat.HP: pokemon.handleHeal(value, pokemon); break;
+  applyStat(pokemon: PokemonEntity, stat: Stat, value: number) {
+    switch (stat) {
+      case Stat.ATK:
+        pokemon.addAttack(value)
+        break
+      case Stat.DEF:
+        pokemon.addDefense(value)
+        break
+      case Stat.SPE_DEF:
+        pokemon.addSpecialDefense(value)
+        break
+      case Stat.SPELL_POWER:
+        pokemon.addSpellDamage(value)
+        break
+      case Stat.MANA:
+        pokemon.setMana(pokemon.mana + value)
+        break
+      case Stat.ATK_SPEED:
+        pokemon.handleAttackSpeed(value)
+        break
+      case Stat.CRIT_CHANCE:
+        pokemon.addCritChance(value)
+        break
+      case Stat.CRIT_DAMAGE:
+        pokemon.addCritDamage(value)
+        break
+      case Stat.SHIELD:
+        pokemon.handleShield(value, pokemon)
+        break
+      case Stat.HP:
+        pokemon.handleHeal(value, pokemon)
+        break
     }
   }
 
   applyItemsEffects(pokemon: PokemonEntity) {
     pokemon.items.forEach((item) => {
-      Object.entries(ItemStats[item]!).forEach(([stat, value]) => this.applyStat(pokemon, stat as Stat, value))    
+      Object.entries(ItemStats[item]!).forEach(([stat, value]) =>
+        this.applyStat(pokemon, stat as Stat, value)
+      )
     })
 
     if (pokemon.items.has(Item.SOUL_DEW)) {
@@ -633,21 +655,21 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.RAIN_DANCE:
           if (types.includes(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.2)
+            pokemon.addDodgeChance(0.25)
             pokemon.effects.push(Effect.RAIN_DANCE)
           }
           break
 
         case Effect.DRIZZLE:
           if (types.includes(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.45)
+            pokemon.addDodgeChance(0.5)
             pokemon.effects.push(Effect.DRIZZLE)
           }
           break
 
         case Effect.PRIMORDIAL_SEA:
           if (types.includes(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.7)
+            pokemon.addDodgeChance(0.75)
             pokemon.effects.push(Effect.PRIMORDIAL_SEA)
           }
           break
