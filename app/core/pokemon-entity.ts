@@ -16,6 +16,7 @@ import { Effect } from "../types/enum/Effect"
 import { Ability, AbilityStrategy } from "../types/enum/Ability"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
+import { IdleState } from "./idle-state"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -237,6 +238,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
   toAttackingState() {
     this.changeState(new AttackingState())
+  }
+
+  toIdleState() {
+    this.changeState(new IdleState())
   }
 
   setMana(mana: number) {

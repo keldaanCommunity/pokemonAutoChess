@@ -1630,9 +1630,13 @@ export default class AnimationManager {
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {
+    const orientation =
+      action === PokemonActionState.SLEEP
+        ? Orientation.DOWN
+        : entity.orientation
     const tint = entity.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
-    const animKey = `${entity.index}/${tint}/${action}/${SpriteType.ANIM}/${entity.orientation}`
-    const shadowKey = `${entity.index}/${tint}/${action}/${SpriteType.SHADOW}/${entity.orientation}`
+    const animKey = `${entity.index}/${tint}/${action}/${SpriteType.ANIM}/${orientation}`
+    const shadowKey = `${entity.index}/${tint}/${action}/${SpriteType.SHADOW}/${orientation}`
 
     entity.sprite.anims.play(animKey)
     entity.shadow.anims.play(shadowKey)

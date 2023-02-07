@@ -3,6 +3,8 @@ import Board, { Cell } from "../../core/board"
 import PokemonEntity from "../../core/pokemon-entity"
 import { IStatus } from "../../types"
 import { Ability } from "../../types/enum/Ability"
+import { Effect } from "../../types/enum/Effect"
+import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 
 export default class Status extends Schema implements IStatus {
@@ -26,8 +28,10 @@ export default class Status extends Schema implements IStatus {
   burnOrigin: PokemonEntity | undefined = undefined
   poisonOrigin: PokemonEntity | undefined = undefined
   burnCooldown = 0
+  burnDamageCooldown = 1000
   silenceCooldown = 0
   poisonCooldown = 0
+  poisonDamageCooldown = 1000
   freezeCooldown = 0
   protectCooldown = 0
   sleepCooldown = 0
@@ -38,6 +42,7 @@ export default class Status extends Schema implements IStatus {
   smokeCooldown = 0
   armorReductionCooldown = 0
   runeProtectCooldown = 0
+  grassCooldown = 1000
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -62,6 +67,19 @@ export default class Status extends Schema implements IStatus {
       this.armorReduction = false
     } else {
       this.armorReductionCooldown = this.armorReductionCooldown - dt
+    }
+  }
+
+  updateGrassHeal(dt: number, pkm: PokemonEntity) {
+    if (this.grassCooldown - dt <= 0) {
+      const heal = pkm.effects.includes(Effect.SPORE)
+        ? 18
+        : pkm.effects.includes(Effect.GROWTH)
+        ? 10
+        : 5
+      pkm.handleHeal(heal, pkm, false)
+    } else {
+      this.grassCooldown = this.grassCooldown - dt
     }
   }
 
@@ -107,10 +125,27 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  updateBurn(dt: number) {
+  updateBurn(dt: number, pkm: PokemonEntity, board: Board) {
+    if (this.burnDamageCooldown - dt <= 0) {
+      if (this.burnOrigin) {
+        pkm.handleDamage(
+          Math.ceil(pkm.hp * 0.05),
+          board,
+          AttackType.TRUE,
+          this.burnOrigin,
+          false,
+          false
+        )
+        this.burnDamageCooldown = 1000
+      }
+    } else {
+      this.burnDamageCooldown = this.burnDamageCooldown - dt
+    }
+
     if (this.burnCooldown - dt <= 0) {
       this.burn = false
       this.burnOrigin = undefined
+      this.burnDamageCooldown = 1000
     } else {
       this.burnCooldown = this.burnCooldown - dt
     }
@@ -160,10 +195,27 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  updatePoison(dt: number) {
+  updatePoison(dt: number, pkm: PokemonEntity, board: Board) {
+    if (this.poisonDamageCooldown - dt <= 0) {
+      if (this.poisonOrigin) {
+        pkm.handleDamage(
+          Math.ceil(pkm.hp * 0.13),
+          board,
+          AttackType.TRUE,
+          this.poisonOrigin,
+          false,
+          false
+        )
+        this.poisonDamageCooldown = 1000
+      }
+    } else {
+      this.poisonDamageCooldown = this.poisonDamageCooldown - dt
+    }
+
     if (this.poisonCooldown - dt <= 0) {
       this.poison = false
       this.poisonOrigin = undefined
+      this.poisonDamageCooldown = 1000
     } else {
       this.poisonCooldown = this.poisonCooldown - dt
     }

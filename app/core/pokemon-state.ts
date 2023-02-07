@@ -2,7 +2,7 @@
 import { Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, HealType } from "../types/enum/Game"
+import { AttackType, HealType, PokemonActionState } from "../types/enum/Game"
 import PokemonFactory from "../models/pokemon-factory"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
@@ -474,6 +474,12 @@ export default class PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
     let updateEffects = false
     if (
+      (pokemon.status.freeze || pokemon.status.sleep) &&
+      pokemon.action !== PokemonActionState.SLEEP
+    ) {
+      pokemon.toIdleState()
+    }
+    if (
       pokemon.effects.includes(Effect.SHORE_UP) ||
       pokemon.effects.includes(Effect.ROTOTILLER) ||
       pokemon.effects.includes(Effect.SANDSTORM)
@@ -502,16 +508,24 @@ export default class PokemonState {
       }
     }
 
+    if (
+      pokemon.effects.includes(Effect.INGRAIN) ||
+      pokemon.effects.includes(Effect.GROWTH) ||
+      pokemon.effects.includes(Effect.SPORE)
+    ) {
+      pokemon.status.updateGrassHeal(dt, pokemon)
+    }
+
     if (pokemon.status.runeProtect) {
       pokemon.status.updateRuneProtect(dt)
     }
 
     if (pokemon.status.burn) {
-      pokemon.status.updateBurn(dt)
+      pokemon.status.updateBurn(dt, pokemon, board)
     }
 
     if (pokemon.status.poison) {
-      pokemon.status.updatePoison(dt)
+      pokemon.status.updatePoison(dt, pokemon, board)
     }
 
     if (pokemon.status.sleep) {
@@ -580,30 +594,6 @@ export default class PokemonState {
     }
 
     if (pokemon.cooldown <= 0) {
-      if (pokemon.status.burn && pokemon.status.burnOrigin) {
-        this.handleDamage(
-          pokemon,
-          Math.ceil(pokemon.hp * 0.05),
-          board,
-          AttackType.TRUE,
-          pokemon.status.burnOrigin,
-          false,
-          false
-        )
-      }
-
-      if (pokemon.status.poison && pokemon.status.poisonOrigin) {
-        this.handleDamage(
-          pokemon,
-          Math.ceil(pokemon.hp * 0.13),
-          board,
-          AttackType.TRUE,
-          pokemon.status.poisonOrigin,
-          false,
-          false
-        )
-      }
-
       if (pokemon.effects.includes(Effect.VICTORY_STAR)) {
         pokemon.addAttack(1)
       }
@@ -628,18 +618,6 @@ export default class PokemonState {
         pokemon.types.includes(Synergy.DRAGON)
       ) {
         pokemon.handleAttackSpeed(10)
-      }
-
-      if (pokemon.effects.includes(Effect.INGRAIN)) {
-        pokemon.handleHeal(5, pokemon)
-      }
-
-      if (pokemon.effects.includes(Effect.GROWTH)) {
-        pokemon.handleHeal(10, pokemon)
-      }
-
-      if (pokemon.effects.includes(Effect.SPORE)) {
-        pokemon.handleHeal(18, pokemon)
       }
     }
     return updateEffects
