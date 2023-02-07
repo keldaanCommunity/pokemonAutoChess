@@ -3,46 +3,41 @@ import { GameObjects } from "phaser"
 import ItemDetail from "./item-detail"
 import { Item } from "../../../../types/enum/Item"
 import ItemsContainer from "./items-container"
+import { getGameScene } from "../../pages/game"
 
 export default class ItemContainer extends Button {
   detail: ItemDetail
   sprite: GameObjects.Image
   tempDetail: ItemDetail | undefined
   tempSprite: GameObjects.Image | undefined
+  circle?: GameObjects.Ellipse
   name: Item
   parentContainer: ItemsContainer
   scene: Phaser.Scene
-  dragable: boolean
+  pokemonId: string | null
+  playerId: string
 
   constructor(
     scene: Phaser.Scene,
     x: number,
     y: number,
     item: Item,
-    dragable: boolean
+    pokemonId: string | null,
+    playerId: string
   ) {
-    super(scene, x, y, dragable ? 70 : 25, dragable ? 70 : 25)
+    const currentPlayerUid = getGameScene()?.uid
+    const itemSize = (pokemonId === null ? 70 : 25)
+    super(scene, x, y, itemSize, itemSize, playerId !== currentPlayerUid)
     this.scene = scene
-    this.dragable = dragable
-    if (this.dragable) {
-      this.add(
-        new GameObjects.Ellipse(
-          scene,
-          0,
-          0,
-          70,
-          70,
-          0x61738a,
-          1
-        ).setStrokeStyle(3, 0x000000, 1)
-      )
-    } else {
-      this.add(new GameObjects.Ellipse(scene, 0, 0, 25, 25, 0x61738a, 1))
+    this.pokemonId = pokemonId
+    this.playerId = playerId
+    this.circle = new GameObjects.Ellipse(scene, 0, 0, itemSize, itemSize, 0x61738a, 1)
+    if(pokemonId === null){    
+      this.circle.setStrokeStyle(3, playerId === currentPlayerUid ? 0x000000 : 0x666666, 1)
+      this.circle.setAlpha(playerId === currentPlayerUid ? 1 : 0.7)
     }
-    this.sprite = new GameObjects.Image(scene, 0, 0, "item", item).setScale(
-      this.dragable ? 2 : 1,
-      this.dragable ? 2 : 1
-    )
+    this.add(this.circle)
+    this.sprite = new GameObjects.Image(scene, 0, 0, "item", item).setScale(pokemonId === null ? 2 : 1)
     this.detail = new ItemDetail(scene, 0, 0, item)
     this.detail.setDepth(100)
     this.detail.setPosition(
@@ -57,18 +52,27 @@ export default class ItemContainer extends Button {
     this.setInteractive()
     this.input.dropZone = true
 
-    if (this.dragable) {
-      scene.input.setDraggable(this)
-    }
+    scene.input.setDraggable(this, this.isDraggable)
+  }
+
+  get isDraggable(){
+    const currentPlayerUid = getGameScene()?.uid
+    return (this.playerId === currentPlayerUid && this.pokemonId === null)
   }
 
   enterButtonHoverState() {
     //this.openDetail()
     this.input.dropZone = false
+    if (this.isDraggable) {
+      this.circle?.setFillStyle(0x68829e)
+    }
   }
 
   enterButtonRestState() {
     this.input.dropZone = true
+    if (this.isDraggable) {
+      this.circle?.setFillStyle(0x61738a)
+    }
   }
 
   enterButtonActiveState(pointer: Phaser.Input.Pointer) {
@@ -113,7 +117,7 @@ export default class ItemContainer extends Button {
       0,
       "item",
       item
-    ).setScale(this.dragable ? 2 : 1, this.dragable ? 2 : 1)
+    ).setScale(this.pokemonId === null ? 2 : 1)
     this.tempDetail = new ItemDetail(this.scene, 0, 0, item)
     this.tempDetail.setDepth(100)
     this.tempDetail.setPosition(
