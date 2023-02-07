@@ -11,7 +11,10 @@ export class IdleState extends PokemonState {
     climate: string
   ): boolean {
     super.update(pokemon, dt, board, climate)
-    return true
+    if (!pokemon.status.freeze && !pokemon.status.sleep) {
+      pokemon.toMovingState()
+    }
+    return false
   }
 
   onEnter(pokemon: PokemonEntity) {

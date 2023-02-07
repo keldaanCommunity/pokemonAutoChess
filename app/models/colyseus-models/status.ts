@@ -3,6 +3,7 @@ import Board, { Cell } from "../../core/board"
 import PokemonEntity from "../../core/pokemon-entity"
 import { IStatus } from "../../types"
 import { Ability } from "../../types/enum/Ability"
+import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 
@@ -41,6 +42,7 @@ export default class Status extends Schema implements IStatus {
   smokeCooldown = 0
   armorReductionCooldown = 0
   runeProtectCooldown = 0
+  grassCooldown = 1000
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -65,6 +67,19 @@ export default class Status extends Schema implements IStatus {
       this.armorReduction = false
     } else {
       this.armorReductionCooldown = this.armorReductionCooldown - dt
+    }
+  }
+
+  updateGrassHeal(dt: number, pkm: PokemonEntity) {
+    if (this.grassCooldown - dt <= 0) {
+      const heal = pkm.effects.includes(Effect.SPORE)
+        ? 18
+        : pkm.effects.includes(Effect.GROWTH)
+        ? 10
+        : 5
+      pkm.handleHeal(heal, pkm, false)
+    } else {
+      this.grassCooldown = this.grassCooldown - dt
     }
   }
 
@@ -117,7 +132,9 @@ export default class Status extends Schema implements IStatus {
           Math.ceil(pkm.hp * 0.05),
           board,
           AttackType.TRUE,
-          this.burnOrigin
+          this.burnOrigin,
+          false,
+          false
         )
         this.burnDamageCooldown = 1000
       }
@@ -185,7 +202,9 @@ export default class Status extends Schema implements IStatus {
           Math.ceil(pkm.hp * 0.13),
           board,
           AttackType.TRUE,
-          this.poisonOrigin
+          this.poisonOrigin,
+          false,
+          false
         )
         this.poisonDamageCooldown = 1000
       }

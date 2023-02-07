@@ -29,9 +29,7 @@ export default class MovingState extends PokemonState {
       ) {
         pokemon.toAttackingState()
       } else {
-        if (!pokemon.status.sleep && !pokemon.status.freeze) {
-          this.move(pokemon, board, targetCoordinate)
-        }
+        this.move(pokemon, board, targetCoordinate)
       }
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)

@@ -2457,8 +2457,6 @@ export default class Pokemon extends Button {
       this.sleep.anims.play("sleep")
       this.add(this.sleep)
     }
-    const s = <GameScene>this.scene
-    s.animationManager?.animatePokemon(this, PokemonActionState.SLEEP)
   }
 
   removeSleep() {

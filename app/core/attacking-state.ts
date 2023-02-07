@@ -88,7 +88,7 @@ export default class AttackingState extends PokemonState {
     pokemon.targetX = coordinates.x
     pokemon.targetY = coordinates.y
     const target = board.getValue(coordinates.x, coordinates.y)
-    if (target && !pokemon.status.sleep && !pokemon.status.freeze) {
+    if (target) {
       if (pokemon.items.has(Item.SHINY_CHARM) && Math.random() < 0.25) {
         pokemon.status.triggerProtect(1000)
       }
