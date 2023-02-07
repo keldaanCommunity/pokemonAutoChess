@@ -14,6 +14,7 @@ export default class AttackingState extends PokemonState {
     climate: string
   ): boolean {
     super.update(pokemon, dt, board, climate)
+
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = pokemon.getAttackDelay()
       const target = board.getValue(pokemon.targetX, pokemon.targetY)
@@ -48,8 +49,6 @@ export default class AttackingState extends PokemonState {
           targetCoordinate.y
         ) > pokemon.range
       ) {
-        pokemon.toMovingState()
-      } else if (pokemon.status.confusion) {
         pokemon.toMovingState()
       } else {
         this.attack(pokemon, board, targetCoordinate, climate)
@@ -89,7 +88,7 @@ export default class AttackingState extends PokemonState {
     pokemon.targetX = coordinates.x
     pokemon.targetY = coordinates.y
     const target = board.getValue(coordinates.x, coordinates.y)
-    if (target && !pokemon.status.sleep && !pokemon.status.freeze) {
+    if (target) {
       if (pokemon.items.has(Item.SHINY_CHARM) && Math.random() < 0.25) {
         pokemon.status.triggerProtect(1000)
       }
@@ -189,7 +188,14 @@ export default class AttackingState extends PokemonState {
           cells.forEach((cell) => {
             if (cell.value && pokemon.team != cell.value.team) {
               cell.value.count.fairyCritCount++
-              cell.value.handleDamage(d, board, AttackType.SPECIAL, pokemon)
+              cell.value.handleDamage(
+                d,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                false,
+                true
+              )
             }
           })
         }
@@ -214,7 +220,14 @@ export default class AttackingState extends PokemonState {
           cells.forEach((cell) => {
             if (cell.value && target.team != cell.value.team) {
               cell.value.count.fairyCritCount++
-              cell.value.handleDamage(d, board, AttackType.SPECIAL, pokemon)
+              cell.value.handleDamage(
+                d,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                false,
+                true
+              )
             }
           })
         }
@@ -227,29 +240,57 @@ export default class AttackingState extends PokemonState {
       if (pokemon.effects.includes(Effect.PHANTOM_FORCE)) {
         const trueDamage = 0.2 * damage
         damage = 0.8 * damage
-        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon)
+        target.handleDamage(
+          trueDamage,
+          board,
+          AttackType.TRUE,
+          pokemon,
+          true,
+          true
+        )
       }
 
       if (pokemon.effects.includes(Effect.CURSE)) {
         const trueDamage = 0.4 * damage
         damage = 0.6 * damage
-        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon)
+        target.handleDamage(
+          trueDamage,
+          board,
+          AttackType.TRUE,
+          pokemon,
+          true,
+          true
+        )
       }
 
       if (pokemon.effects.includes(Effect.SHADOW_TAG)) {
         const trueDamage = 0.7 * damage
         damage = 0.3 * damage
-        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon)
+        target.handleDamage(
+          trueDamage,
+          board,
+          AttackType.TRUE,
+          pokemon,
+          true,
+          true
+        )
       }
 
       if (pokemon.effects.includes(Effect.WANDERING_SPIRIT)) {
         const trueDamage = damage
         damage = 0
-        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon)
+        target.handleDamage(
+          trueDamage,
+          board,
+          AttackType.TRUE,
+          pokemon,
+          true,
+          true
+        )
       }
 
       if (damage > 0) {
-        target.handleDamage(damage, board, attackType, pokemon)
+        target.handleDamage(damage, board, attackType, pokemon, true, true)
       }
 
       if (pokemon.items.has(Item.BLUE_ORB)) {
@@ -275,7 +316,9 @@ export default class AttackingState extends PokemonState {
             Math.ceil(pokemon.atk * 0.2),
             board,
             AttackType.TRUE,
-            pokemon
+            pokemon,
+            true,
+            true
           )
         }
       }
@@ -296,7 +339,9 @@ export default class AttackingState extends PokemonState {
               Math.ceil(0.5 * damage),
               board,
               attackType,
-              pokemon
+              pokemon,
+              true,
+              true
             )
             targetCount--
           }
@@ -332,9 +377,9 @@ export default class AttackingState extends PokemonState {
   }
 
   onExit(pokemon) {
+    super.onExit(pokemon)
     pokemon.targetX = -1
     pokemon.targetY = -1
-    super.onExit(pokemon)
   }
 }
 

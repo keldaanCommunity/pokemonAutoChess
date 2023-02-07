@@ -1,6 +1,6 @@
 import { GameObjects } from "phaser"
 import Lifebar from "./life-bar"
-import Button from "./button"
+import DraggableObject from "./draggable-object"
 import PokemonDetail from "./pokemon-detail"
 import ItemsContainer from "./items-container"
 import { Effect } from "../../../../types/enum/Effect"
@@ -31,7 +31,7 @@ import ManaBar from "./mana-bar"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Pkm } from "../../../../types/enum/Pokemon"
 
-export default class Pokemon extends Button {
+export default class Pokemon extends DraggableObject {
   evolution: Pkm
   rarity: Rarity
   emotion: Emotion
@@ -239,7 +239,8 @@ export default class Pokemon extends Button {
     }
   }
 
-  enterButtonActiveState(pointer: Phaser.Input.Pointer) {
+  onPointerDown(pointer: Phaser.Input.Pointer) {
+    super.onPointerDown(pointer)
     if (pointer.rightButtonDown()) {
       const s = <GameScene>this.scene
       if (s.lastPokemonDetail && s.lastPokemonDetail != this) {
@@ -2456,8 +2457,6 @@ export default class Pokemon extends Button {
       this.sleep.anims.play("sleep")
       this.add(this.sleep)
     }
-    const s = <GameScene>this.scene
-    s.animationManager?.animatePokemon(this, PokemonActionState.SLEEP)
   }
 
   removeSleep() {

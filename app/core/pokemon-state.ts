@@ -2,7 +2,7 @@
 import { Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, HealType } from "../types/enum/Game"
+import { AttackType, HealType, PokemonActionState } from "../types/enum/Game"
 import PokemonFactory from "../models/pokemon-factory"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
@@ -77,7 +77,9 @@ export default class PokemonState {
     damage: number,
     board: Board,
     attackType: AttackType,
-    attacker: PokemonEntity
+    attacker: PokemonEntity,
+    dodgeable: boolean,
+    reduceable: boolean
   ): boolean {
     let death: boolean
 
@@ -132,7 +134,7 @@ export default class PokemonState {
           // console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
         }
 
-        if (pokemon.dodge > Math.random()) {
+        if (dodgeable && pokemon.dodge > Math.random()) {
           if (!(attacker && attacker.items.has(Item.XRAY_VISION))) {
             reducedDamage = 0
             pokemon.count.dodgeCount += 1
@@ -147,7 +149,7 @@ export default class PokemonState {
         }
 
         if (
-          pokemon.effects.includes(Effect.GUTS) ||
+          (reduceable && pokemon.effects.includes(Effect.GUTS)) ||
           pokemon.effects.includes(Effect.DEFIANT) ||
           pokemon.effects.includes(Effect.JUSTIFIED)
         ) {
@@ -472,6 +474,12 @@ export default class PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
     let updateEffects = false
     if (
+      (pokemon.status.freeze || pokemon.status.sleep) &&
+      pokemon.action !== PokemonActionState.SLEEP
+    ) {
+      pokemon.toIdleState()
+    }
+    if (
       pokemon.effects.includes(Effect.SHORE_UP) ||
       pokemon.effects.includes(Effect.ROTOTILLER) ||
       pokemon.effects.includes(Effect.SANDSTORM)
@@ -500,16 +508,24 @@ export default class PokemonState {
       }
     }
 
+    if (
+      pokemon.effects.includes(Effect.INGRAIN) ||
+      pokemon.effects.includes(Effect.GROWTH) ||
+      pokemon.effects.includes(Effect.SPORE)
+    ) {
+      pokemon.status.updateGrassHeal(dt, pokemon)
+    }
+
     if (pokemon.status.runeProtect) {
       pokemon.status.updateRuneProtect(dt)
     }
 
     if (pokemon.status.burn) {
-      pokemon.status.updateBurn(dt)
+      pokemon.status.updateBurn(dt, pokemon, board)
     }
 
     if (pokemon.status.poison) {
-      pokemon.status.updatePoison(dt)
+      pokemon.status.updatePoison(dt, pokemon, board)
     }
 
     if (pokemon.status.sleep) {
@@ -578,26 +594,6 @@ export default class PokemonState {
     }
 
     if (pokemon.cooldown <= 0) {
-      if (pokemon.status.burn && pokemon.status.burnOrigin) {
-        this.handleDamage(
-          pokemon,
-          Math.ceil(pokemon.hp * 0.05),
-          board,
-          AttackType.TRUE,
-          pokemon.status.burnOrigin
-        )
-      }
-
-      if (pokemon.status.poison && pokemon.status.poisonOrigin) {
-        this.handleDamage(
-          pokemon,
-          Math.ceil(pokemon.hp * 0.15),
-          board,
-          AttackType.TRUE,
-          pokemon.status.poisonOrigin
-        )
-      }
-
       if (pokemon.effects.includes(Effect.VICTORY_STAR)) {
         pokemon.addAttack(1)
       }
@@ -622,18 +618,6 @@ export default class PokemonState {
         pokemon.types.includes(Synergy.DRAGON)
       ) {
         pokemon.handleAttackSpeed(10)
-      }
-
-      if (pokemon.effects.includes(Effect.INGRAIN)) {
-        pokemon.handleHeal(5, pokemon)
-      }
-
-      if (pokemon.effects.includes(Effect.GROWTH)) {
-        pokemon.handleHeal(10, pokemon)
-      }
-
-      if (pokemon.effects.includes(Effect.SPORE)) {
-        pokemon.handleHeal(18, pokemon)
       }
     }
     return updateEffects

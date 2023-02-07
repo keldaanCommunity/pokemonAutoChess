@@ -1,11 +1,11 @@
-import Button from "./button"
+import DraggableObject from "./draggable-object"
 import { GameObjects } from "phaser"
 import ItemDetail from "./item-detail"
 import { Item } from "../../../../types/enum/Item"
 import ItemsContainer from "./items-container"
 import { getGameScene } from "../../pages/game"
 
-export default class ItemContainer extends Button {
+export default class ItemContainer extends DraggableObject {
   detail: ItemDetail
   sprite: GameObjects.Image
   tempDetail: ItemDetail | undefined
@@ -56,26 +56,30 @@ export default class ItemContainer extends Button {
   }
 
   get isDraggable(){
-    const currentPlayerUid = getGameScene()?.uid
-    return (this.playerId === currentPlayerUid && this.pokemonId === null)
+    return (!this.isDisabled && this.pokemonId === null)
   }
 
-  enterButtonHoverState() {
+  onPointerOver() {
     //this.openDetail()
+    super.onPointerOver()
     this.input.dropZone = false
     if (this.isDraggable) {
       this.circle?.setFillStyle(0x68829e)
     }
   }
 
-  enterButtonRestState() {
-    this.input.dropZone = true
+  onPointerOut() {
+    super.onPointerOut()
+    if(!this.isDisabled){
+      this.input.dropZone = true
+    }
     if (this.isDraggable) {
       this.circle?.setFillStyle(0x61738a)
     }
   }
 
-  enterButtonActiveState(pointer: Phaser.Input.Pointer) {
+  onPointerDown(pointer: Phaser.Input.Pointer) {
+    super.onPointerDown(pointer)
     this.parentContainer.bringToTop(this)
     if (pointer.rightButtonDown()) {
       if (!this.detail.visible) {
@@ -86,6 +90,11 @@ export default class ItemContainer extends Button {
         this.input.dropZone = true
       }
     }
+  }
+
+  onPointerUp() {
+    super.onPointerUp()
+    this.input.dropZone = false
   }
 
   openDetail() {

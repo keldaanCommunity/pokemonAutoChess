@@ -142,6 +142,10 @@ export default class BattleManager {
           } else if (change.field == "sleep") {
             if (pokemon.status.sleep) {
               pkm.addSleep()
+              this.animationManager.animatePokemon(
+                pkm,
+                PokemonActionState.SLEEP
+              )
             } else {
               pkm.removeSleep()
             }
@@ -365,7 +369,9 @@ export default class BattleManager {
             }
           } else if (change.field == "orientation") {
             pkm.orientation = pokemon.orientation
-            this.animationManager.animatePokemon(pkm, PokemonActionState.WALK)
+            if (pokemon.action !== PokemonActionState.SLEEP) {
+              this.animationManager.animatePokemon(pkm, PokemonActionState.WALK)
+            }
           } else if (change.field == "action") {
             pkm.action = pokemon.action
             this.animationManager.animatePokemon(pkm, change.value)

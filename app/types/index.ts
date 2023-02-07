@@ -42,6 +42,9 @@ export const CDN_PORTRAIT_URL =
 export const CDN_URL =
   "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master"
 
+export const USERNAME_REGEXP =
+  /^(?=.{4,20}$)(?:[a-zA-Z\d]+(?:(?:\.|-|_)[a-zA-Z\d])*)+$/
+
 export type DetailledPkm = { pkm: Pkm; shiny: boolean; emotion: Emotion }
 
 export type PrecomputedTypePokemon = {
