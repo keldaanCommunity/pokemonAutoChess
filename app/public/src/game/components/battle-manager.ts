@@ -71,7 +71,7 @@ export default class BattleManager {
         coordinates[0],
         coordinates[1],
         p,
-        false,
+        playerId,
         true
       )
       this.animationManager.animatePokemon(pokemonUI, PokemonActionState.WALK)
@@ -97,7 +97,7 @@ export default class BattleManager {
 
   addPokemonItem(playerId: string, value: Item, pokemon: IPokemonEntity) {
     // console.log(change);
-    if (this.player.id == playerId) {
+    if (this.player.id === playerId) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
         const pkm = <Pokemon>children[i]

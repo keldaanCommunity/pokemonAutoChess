@@ -35,8 +35,7 @@ export default class Pokemon extends DraggableObject {
   evolution: Pkm
   rarity: Rarity
   emotion: Emotion
-  shiny: boolean
-  isPopup: boolean
+  shiny: boolean  
   index: string
   id: string
   hp: number
@@ -90,21 +89,20 @@ export default class Pokemon extends DraggableObject {
   stars: number
 
   constructor(
-    scene: Phaser.Scene,
+    scene: GameScene,
     x: number,
     y: number,
     pokemon: IPokemonEntity | IPokemon,
-    dragable: boolean,
-    isPopup: boolean
+    playerId: string,
+    inBattle: boolean
   ) {
-    super(scene, x, y, 75, 75)
+    super(scene, x, y, 75, 75, playerId !== scene.uid)
     this.stars = pokemon.stars
     this.evolution = instanceofPokemonEntity(pokemon)
       ? Pkm.DEFAULT
       : (pokemon as IPokemon).evolution
     this.emotion = pokemon.emotion
     this.shiny = pokemon.shiny
-    this.isPopup = isPopup
     this.height = 0
     this.width = 0
     this.index = pokemon.index
@@ -174,7 +172,8 @@ export default class Pokemon extends DraggableObject {
       p.items,
       this.width / 2 + 25,
       -35,
-      false
+      this.id,
+      playerId
     )
     this.shadow = new GameObjects.Sprite(scene, 0, 5, this.index)
     //this.shadow.setOrigin(0,0);
@@ -212,7 +211,7 @@ export default class Pokemon extends DraggableObject {
       //this.setEffects(p, scene);
     }
     this.add(this.sprite)
-    if (dragable) {
+    if (playerId === scene.uid && !inBattle) {
       scene.input.setDraggable(this)
     }
     if (instanceofPokemonEntity(pokemon)) {

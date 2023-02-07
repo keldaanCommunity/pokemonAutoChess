@@ -36,27 +36,15 @@ export default class BoardManager {
       pokemon.positionX,
       pokemon.positionY
     )
-    let pokemonUI
+    const pokemonUI = new Pokemon(
+      this.scene,
+      coordinates[0],
+      coordinates[1],
+      pokemon,
+      this.player.id,
+      false
+    )
 
-    if (this.uid == this.player.id) {
-      pokemonUI = new Pokemon(
-        this.scene,
-        coordinates[0],
-        coordinates[1],
-        pokemon,
-        true,
-        true
-      )
-    } else {
-      pokemonUI = new Pokemon(
-        this.scene,
-        coordinates[0],
-        coordinates[1],
-        pokemon,
-        false,
-        true
-      )
-    }
     this.animationManager.animatePokemon(pokemonUI, PokemonActionState.IDLE)
     this.pokemons.set(pokemonUI.id, pokemonUI)
     if (pokemon.positionY != 0 && this.mode == "battle") {
@@ -112,7 +100,7 @@ export default class BoardManager {
 
   addPokemonItem(playerId: string, value: Item, pokemon: IPokemon) {
     // console.log(change);
-    if (this.player.id == playerId) {
+    if (this.player.id === playerId) {
       const pkm = this.pokemons.get(pokemon.id)
       if (pkm && !pkm.itemsContainer.findItem(value)) {
         pkm.itemsContainer.addItem(value)

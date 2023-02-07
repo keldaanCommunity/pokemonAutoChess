@@ -27,6 +27,7 @@ import { getPortraitSrc } from "../utils"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Synergy } from "../../../types/enum/Synergy"
 import { AttackType, HealType } from "../../../types/enum/Game"
+import store from "../stores"
 
 class GameContainer {
   room: Room<GameState>
@@ -268,11 +269,12 @@ class GameContainer {
   handleItemAdd(player: Player, value: Item) {
     if (
       this.game != null &&
-      player.id == this.uid &&
+      player.id === this.uid &&
       this.game.scene.getScene("gameScene")
     ) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
-      if (g.itemsContainer) {
+      const spectatedPlayerId = store.getState().game.currentPlayerId
+      if (g.itemsContainer && player.id === spectatedPlayerId) {
         g.itemsContainer.addItem(value)
       }
     }
@@ -527,8 +529,7 @@ class GameContainer {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       const player = this.room.state.players.get(id)
       if (player) {
-        g.board?.setPlayer(player)
-        g.battle?.setPlayer(player)
+        g.setPlayer(player)
       }
     }
   }

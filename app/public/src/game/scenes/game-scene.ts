@@ -25,6 +25,7 @@ import { DesignTiled } from "../../../../core/design"
 import { loadPreferences } from "../../preferences"
 import { getPortraitSrc } from "../../utils"
 import { Item } from "../../../../types/enum/Item"
+import Player from "../../../../models/colyseus-models/player"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -434,9 +435,10 @@ export default class GameScene extends Scene {
       this.itemsContainer = new ItemsContainer(
         this,
         this.room.state.players[this.uid].items,
-        24 * 24 + 10,
+        22 * 24 + 10,
         5 * 24 + 10,
-        true
+        null,
+        this.uid
       )
       this.board = new BoardManager(
         this,
@@ -471,6 +473,12 @@ export default class GameScene extends Scene {
     this.input.keyboard.on("keyup-E", () => {
       this.sellPokemon()
     })
+  }
+
+  setPlayer(player: Player){
+    this.board?.setPlayer(player)
+    this.battle?.setPlayer(player)
+    this.itemsContainer?.setPlayer(player);
   }
 
   refreshShop() {
