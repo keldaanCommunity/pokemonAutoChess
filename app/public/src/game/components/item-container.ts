@@ -1,10 +1,10 @@
-import Button from "./button"
+import DraggableObject from "./draggable-object"
 import { GameObjects } from "phaser"
 import ItemDetail from "./item-detail"
 import { Item } from "../../../../types/enum/Item"
 import ItemsContainer from "./items-container"
 
-export default class ItemContainer extends Button {
+export default class ItemContainer extends DraggableObject {
   detail: ItemDetail
   sprite: GameObjects.Image
   tempDetail: ItemDetail | undefined
@@ -62,16 +62,19 @@ export default class ItemContainer extends Button {
     }
   }
 
-  enterButtonHoverState() {
+  onPointerOver() {
     //this.openDetail()
+    super.onPointerOver()
     this.input.dropZone = false
   }
 
-  enterButtonRestState() {
+  onPointerOut() {
+    super.onPointerOut()
     this.input.dropZone = true
   }
 
-  enterButtonActiveState(pointer: Phaser.Input.Pointer) {
+  onPointerDown(pointer: Phaser.Input.Pointer) {
+    super.onPointerDown(pointer)
     this.parentContainer.bringToTop(this)
     if (pointer.rightButtonDown()) {
       if (!this.detail.visible) {
@@ -82,6 +85,11 @@ export default class ItemContainer extends Button {
         this.input.dropZone = true
       }
     }
+  }
+
+  onPointerUp() {
+    super.onPointerUp()
+    this.input.dropZone = false
   }
 
   openDetail() {
