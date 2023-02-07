@@ -14,6 +14,7 @@ export default class AttackingState extends PokemonState {
     climate: string
   ): boolean {
     super.update(pokemon, dt, board, climate)
+
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = pokemon.getAttackDelay()
       const target = board.getValue(pokemon.targetX, pokemon.targetY)
@@ -48,8 +49,6 @@ export default class AttackingState extends PokemonState {
           targetCoordinate.y
         ) > pokemon.range
       ) {
-        pokemon.toMovingState()
-      } else if (pokemon.status.confusion) {
         pokemon.toMovingState()
       } else {
         this.attack(pokemon, board, targetCoordinate, climate)
@@ -378,9 +377,9 @@ export default class AttackingState extends PokemonState {
   }
 
   onExit(pokemon) {
+    super.onExit(pokemon)
     pokemon.targetX = -1
     pokemon.targetY = -1
-    super.onExit(pokemon)
   }
 }
 

@@ -507,11 +507,11 @@ export default class PokemonState {
     }
 
     if (pokemon.status.burn) {
-      pokemon.status.updateBurn(dt)
+      pokemon.status.updateBurn(dt, pokemon, board)
     }
 
     if (pokemon.status.poison) {
-      pokemon.status.updatePoison(dt)
+      pokemon.status.updatePoison(dt, pokemon, board)
     }
 
     if (pokemon.status.sleep) {
@@ -580,18 +580,6 @@ export default class PokemonState {
     }
 
     if (pokemon.cooldown <= 0) {
-      if (pokemon.status.burn && pokemon.status.burnOrigin) {
-        this.handleDamage(
-          pokemon,
-          Math.ceil(pokemon.hp * 0.05),
-          board,
-          AttackType.TRUE,
-          pokemon.status.burnOrigin,
-          false,
-          false
-        )
-      }
-
       if (pokemon.status.poison && pokemon.status.poisonOrigin) {
         this.handleDamage(
           pokemon,
