@@ -85,7 +85,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     "When the holder deals damage with their Ability, they burn and wound the target for 2 seconds",
   [Item.WATER_INCENSE]:
     "30% bonus damage on spells up to 75% if target as more than 200hp",
-  [Item.SHELL_BELL]: "Holder heals for 50% of all damages",
+  [Item.SHELL_BELL]: "Holder heals for 30% of all damages",
   [Item.LUCKY_EGG]:
     "30% spell power for holder and adjacent allies in the same row",
   [Item.AQUA_EGG]:

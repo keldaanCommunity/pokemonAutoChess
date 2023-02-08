@@ -276,7 +276,7 @@ export default class PokemonState {
             )
           }
           if (attacker.items.has(Item.SHELL_BELL)) {
-            attacker.handleHeal(Math.floor(0.5 * residualDamage), attacker)
+            attacker.handleHeal(Math.floor(0.3 * residualDamage), attacker)
           }
 
           if (
