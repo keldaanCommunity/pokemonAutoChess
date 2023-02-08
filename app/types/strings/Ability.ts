@@ -1279,7 +1279,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.SHADOW_BALL]: {
-    eng: `Deals [50,100,300] ${Damage.SPECIAL} and burn 30 ${Stat.MANA} to the target and adjacent ennemies`,
+    eng: `Deals [45,90,180] ${Damage.SPECIAL} and burn 15 ${Stat.MANA} to the target and adjacent ennemies`,
     esp: ``,
     prt: ``,
     fra: ``

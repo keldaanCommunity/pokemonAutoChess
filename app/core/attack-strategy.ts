@@ -331,16 +331,16 @@ export class ShadowBallStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    const damage = pokemon.stars === 3 ? 300 : pokemon.stars === 2 ? 100 : 50
+    const damage = pokemon.stars === 3 ? 180 : pokemon.stars === 2 ? 90 : 45
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    target.setMana(target.mana - 30)
+    target.setMana(target.mana - 15)
     target.count.manaBurnCount++
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-        cell.value.setMana(cell.value.mana - 30)
+        cell.value.setMana(cell.value.mana - 15)
         cell.value.count.manaBurnCount++
       }
     })
