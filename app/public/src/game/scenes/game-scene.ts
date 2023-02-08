@@ -238,6 +238,7 @@ export default class GameScene extends Scene {
       "/assets/attacks/APPLE_ACID.json",
       "/assets/attacks"
     )
+    this.load.multiatlas("DIVE", "/assets/attacks/DIVE.json", "/assets/attacks")
     this.load.multiatlas(
       "LIQUIDATION",
       "/assets/attacks/LIQUIDATION.json",
@@ -475,10 +476,10 @@ export default class GameScene extends Scene {
     })
   }
 
-  setPlayer(player: Player){
+  setPlayer(player: Player) {
     this.board?.setPlayer(player)
     this.battle?.setPlayer(player)
-    this.itemsContainer?.setPlayer(player);
+    this.itemsContainer?.setPlayer(player)
   }
 
   refreshShop() {
@@ -608,8 +609,12 @@ export default class GameScene extends Scene {
     this.input.on(
       "dragstart",
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
-        if(gameObject instanceof Pokemon){
-          this.dragDropText?.setText(`Drop here to sell for ${PokemonFactory.getSellPrice(gameObject.name as Pkm)} gold`)
+        if (gameObject instanceof Pokemon) {
+          this.dragDropText?.setText(
+            `Drop here to sell for ${PokemonFactory.getSellPrice(
+              gameObject.name as Pkm
+            )} gold`
+          )
           this.drawRectangles(true)
         } else {
           this.drawRectangles(false)

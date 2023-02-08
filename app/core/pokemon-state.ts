@@ -696,6 +696,43 @@ export default class PokemonState {
     }
   }
 
+  getMostSurroundedCoordianteAvailablePlace(
+    pokemon: PokemonEntity,
+    board: Board
+  ): { x: number; y: number } | undefined {
+    let x: number | undefined = undefined
+    let y: number | undefined = undefined
+    const team = pokemon.team
+    const emptyPlaces = new Array<{ x: number; y: number; neighbour: number }>()
+    board.forEach((r: number, c: number, value: PokemonEntity | undefined) => {
+      if (value === undefined) {
+        const cells = board.getAdjacentCells(r, c)
+        let n = 0
+        cells.forEach((cell) => {
+          if (cell.value && cell.value.team !== team) {
+            n++
+          }
+        })
+        emptyPlaces.push({ x: r, y: c, neighbour: n })
+      }
+    })
+
+    emptyPlaces.sort((a, b) => {
+      return b.neighbour - a.neighbour
+    })
+
+    if (emptyPlaces.length > 0) {
+      x = emptyPlaces[0].x
+      y = emptyPlaces[0].y
+    }
+
+    if (x !== undefined && y !== undefined) {
+      return { x: x, y: y }
+    } else {
+      return undefined
+    }
+  }
+
   getFarthestTargetCoordinateAvailablePlace(
     pokemon: PokemonEntity,
     board: Board

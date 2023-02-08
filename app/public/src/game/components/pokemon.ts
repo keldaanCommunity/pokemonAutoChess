@@ -35,7 +35,7 @@ export default class Pokemon extends DraggableObject {
   evolution: Pkm
   rarity: Rarity
   emotion: Emotion
-  shiny: boolean  
+  shiny: boolean
   index: string
   id: string
   hp: number
@@ -1951,6 +1951,28 @@ export default class Pokemon extends DraggableObject {
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
             specialProjectile.anims.play(Ability.APPLE_ACID)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
+          case Ability.DIVE:
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.DIVE,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(3, 3)
+            specialProjectile.anims.play(Ability.DIVE)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {

@@ -2453,6 +2453,51 @@ export class DischargeStrategy extends AttackStrategy {
   }
 }
 
+export class DiveStrategy extends AttackStrategy {
+  constructor() {
+    super()
+  }
+
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+    const duration =
+      pokemon.stars === 3 ? 6000 : pokemon.stars === 2 ? 3000 : 1500
+    const mostSurroundedCoordinate =
+      state.getMostSurroundedCoordianteAvailablePlace(pokemon, board)
+
+    if (mostSurroundedCoordinate) {
+      board.swapValue(
+        pokemon.positionX,
+        pokemon.positionY,
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y
+      )
+      pokemon.positionX = mostSurroundedCoordinate.x
+      pokemon.positionY = mostSurroundedCoordinate.y
+
+      const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpellDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon
+          )
+          cell.value.status.triggerFreeze(duration, cell.value)
+        }
+      })
+    }
+  }
+}
+
 export class BiteStrategy extends AttackStrategy {
   constructor() {
     super()
