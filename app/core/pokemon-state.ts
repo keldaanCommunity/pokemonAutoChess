@@ -76,13 +76,13 @@ export default class PokemonState {
     pokemon: PokemonEntity,
     damage: number,
     board: Board,
-    attackType: AttackType,
+    attackType_: AttackType,
     attacker: PokemonEntity,
     dodgeable: boolean,
     reduceable: boolean
   ): boolean {
     let death: boolean
-
+    let attackType = attackType_
     if (pokemon.life == 0) {
       death = true
     } else {
@@ -108,10 +108,10 @@ export default class PokemonState {
 
         if (
           attacker &&
-          attacker.name == Pkm.GENESECT &&
+          attacker.skill == Ability.LOCK_ON &&
           pokemon.status.armorReduction
         ) {
-          reducedDamage *= 3
+          attackType = AttackType.TRUE
         }
         const armorFactor = 0.1
         const def = pokemon.def

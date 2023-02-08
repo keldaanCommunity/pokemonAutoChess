@@ -1165,7 +1165,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   LOCK_ON: {
-    eng: `Lock the target and shred its ${Stat.DEF}/${Stat.SPE_DEF} for 8s. Genesect deals 3x more damage to it`,
+    eng: `Lock the target and shred its ${Stat.DEF}/${Stat.SPE_DEF} for 8s. Genesect deals ${Damage.TRUE} to it`,
     esp: ``,
     prt: ``,
     fra: ``
