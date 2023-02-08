@@ -638,6 +638,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: ``,
     prt: ``,
     fra: ``
+  },
+  [Ability.DIVE]: {
+    eng: `Dive`,
+    esp: ``,
+    prt: ``,
+    fra: ``
   }
 }
 
@@ -1273,7 +1279,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.SHADOW_BALL]: {
-    eng: `Deals [50,100,300] ${Damage.SPECIAL} and burn 30 mana to the target and adjacent ennemies`,
+    eng: `Deals [50,100,300] ${Damage.SPECIAL} and burn 30 ${Stat.MANA} to the target and adjacent ennemies`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
+  [Ability.DIVE]: {
+    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40] ${Damage.SPECIAL} and freezing all adjacent units for [1.5,3,6] seconds`,
     esp: ``,
     prt: ``,
     fra: ``

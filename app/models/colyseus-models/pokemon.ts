@@ -7544,7 +7544,7 @@ export class Lapras extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.SOAK,
+      Ability.DIVE,
       shiny,
       emotion,
       true
@@ -10813,6 +10813,56 @@ export class Frosmoth extends Pokemon {
       2,
       80,
       Ability.BUG_BUZZ,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Wailmer extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WAILMER,
+      [Synergy.WATER, Synergy.SOUND],
+      Rarity.EPIC,
+      Pkm.WAILORD,
+      180,
+      6,
+      2,
+      2,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      110,
+      Ability.DIVE,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Wailord extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WAILORD,
+      [Synergy.WATER, Synergy.SOUND],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      360,
+      11,
+      3,
+      3,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      110,
+      Ability.DIVE,
       shiny,
       emotion,
       true,

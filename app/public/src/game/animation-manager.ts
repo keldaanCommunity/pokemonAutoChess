@@ -987,6 +987,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.DIVE,
+      frames: this.game.anims.generateFrameNames(Ability.DIVE, {
+        start: 0,
+        end: 6,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.LIQUIDATION,
       frames: this.game.anims.generateFrameNames(Ability.LIQUIDATION, {
         start: 0,
