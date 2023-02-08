@@ -6536,7 +6536,7 @@ export class Suicune extends Pokemon {
       AttackType.PHYSICAL,
       3,
       100,
-      Ability.AURORA_VEIL,
+      Ability.AQUA_JET,
       shiny,
       emotion,
       true
@@ -6560,7 +6560,7 @@ export class Raikou extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.THUNDER,
+      Ability.VOLT_SWITCH,
       shiny,
       emotion,
       true
@@ -6584,7 +6584,7 @@ export class Entei extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.FIRE_BLAST,
+      Ability.FLAME_CHARGE,
       shiny,
       emotion,
       false
@@ -7184,7 +7184,7 @@ export class CastformSun extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.FIRE_BLAST,
+      Ability.AURORA_VEIL,
       shiny,
       emotion,
       true
@@ -7208,7 +7208,7 @@ export class CastformRain extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.AQUA_JET,
+      Ability.AURORA_VEIL,
       shiny,
       emotion,
       true
@@ -7232,7 +7232,7 @@ export class CastformHail extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.ICICLE_CRASH,
+      Ability.AURORA_VEIL,
       shiny,
       emotion,
       true
