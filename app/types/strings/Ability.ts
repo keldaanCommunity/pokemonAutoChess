@@ -919,7 +919,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ORIGIN_PULSE]: {
-    eng: `A wave travels horizontally across the battlefield doing 60 ${Damage.SPECIAL}`,
+    eng: `A wave travels horizontally across the battlefield doing [30,60,120] ${Damage.SPECIAL}`,
     esp: `Una ola viaja horizontalmente por el campo de batalla haciendo 60 de daño mágico.`,
     fra: `Une vague parcourt horizontalement le champ de bataille faisant 60 dégats magiques`,
     prt: ``

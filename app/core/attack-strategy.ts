@@ -1567,7 +1567,7 @@ export class OriginPulseStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    const damage = 60
+    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
 
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
