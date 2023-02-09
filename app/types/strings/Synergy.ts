@@ -200,7 +200,8 @@ export const SynergyDetail: { [key in Synergy]: Effect[] } = Object.freeze({
   [Synergy.FOSSIL]: [
     Effect.ANCIENT_POWER,
     Effect.ELDER_POWER,
-    Effect.UNOWN_GATHERINGS
+    Effect.UNOWN_GATHERINGS,
+    Effect.SCIENCE_MUSEUM
   ],
   [Synergy.SOUND]: [Effect.LARGO, Effect.ALLEGRO, Effect.PRESTO],
   [Synergy.ARTIFICIAL]: [

@@ -589,25 +589,33 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.ANCIENT_POWER:
           if (types.includes(Synergy.FOSSIL)) {
-            pokemon.addCritChance(40)
-            pokemon.critDamage += 0.8
+            pokemon.addCritChance(20)
+            pokemon.addCritDamage(40)
             pokemon.effects.push(Effect.ANCIENT_POWER)
           }
           break
 
         case Effect.ELDER_POWER:
           if (types.includes(Synergy.FOSSIL)) {
-            pokemon.addCritChance(70)
-            pokemon.critDamage += 1.4
+            pokemon.addCritChance(35)
+            pokemon.addCritDamage(70)
             pokemon.effects.push(Effect.ELDER_POWER)
           }
           break
 
         case Effect.UNOWN_GATHERINGS:
           if (types.includes(Synergy.FOSSIL)) {
-            pokemon.addCritChance(100)
-            pokemon.critDamage += 2.5
+            pokemon.addCritChance(50)
+            pokemon.addCritDamage(100)
             pokemon.effects.push(Effect.UNOWN_GATHERINGS)
+          }
+          break
+
+        case Effect.SCIENCE_MUSEUM:
+          if (types.includes(Synergy.FOSSIL)) {
+            pokemon.addCritChance(75)
+            pokemon.addCritDamage(150)
+            pokemon.effects.push(Effect.SCIENCE_MUSEUM)
           }
           break
 

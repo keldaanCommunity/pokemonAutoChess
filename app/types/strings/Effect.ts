@@ -72,6 +72,7 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.SNOW]: `Snow`,
   [Effect.SHEER_COLD]: `Sheer Cold`,
   [Effect.ANCIENT_POWER]: `Ancient Power`,
+  [Effect.SCIENCE_MUSEUM]: "Science Museum",
   [Effect.ELDER_POWER]: `Elder Power`,
   [Effect.UNOWN_GATHERINGS]: `Unown Gatherings`,
   [Effect.LARGO]: `Largo`,
@@ -431,17 +432,22 @@ export const EffectDescription: {
     fra: `+30% de chance de geler l'ennemi lors d'une attaque`
   },
   [Effect.ANCIENT_POWER]: {
-    eng: `+40% ${Stat.CRIT_CHANCE} and +80% ${Stat.CRIT_DAMAGE}`,
+    eng: `+20% ${Stat.CRIT_CHANCE} and +40% ${Stat.CRIT_DAMAGE}`,
     esp: `+10% Crit Chance and +20% Crit Damage.`,
     fra: `+10% Crit Chance and +20% Crit Damage.`
   },
   [Effect.ELDER_POWER]: {
-    eng: `+70% C${Stat.CRIT_CHANCE} and +140% ${Stat.CRIT_DAMAGE}`,
+    eng: `+35% C${Stat.CRIT_CHANCE} and +70% ${Stat.CRIT_DAMAGE}`,
     esp: `+30% Crit Chance and +40% Crit Damage`,
     fra: `+30% Crit Chance and +40% Crit Damage`
   },
   [Effect.UNOWN_GATHERINGS]: {
-    eng: `+100% ${Stat.CRIT_CHANCE} and +250% ${Stat.CRIT_DAMAGE}`,
+    eng: `+50% ${Stat.CRIT_CHANCE} and +100% ${Stat.CRIT_DAMAGE}`,
+    esp: `+50% Crit Chance and +60% Crit Damage`,
+    fra: `+50% Crit Chance and +60% Crit Damage`
+  },
+  [Effect.SCIENCE_MUSEUM]: {
+    eng: `+75% ${Stat.CRIT_CHANCE} and +150% ${Stat.CRIT_DAMAGE}`,
     esp: `+50% Crit Chance and +60% Crit Damage`,
     fra: `+50% Crit Chance and +60% Crit Damage`
   },
