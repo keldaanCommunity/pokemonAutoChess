@@ -78,6 +78,7 @@ export default class Status extends Schema implements IStatus {
         ? 10
         : 5
       pkm.handleHeal(heal, pkm, false)
+      this.grassCooldown = 1000
     } else {
       this.grassCooldown = this.grassCooldown - dt
     }
