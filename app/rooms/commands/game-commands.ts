@@ -111,7 +111,7 @@ export class OnShopCommand extends Command<
           player.board.set(pokemon.id, pokemon)
 
           if (pokemon.rarity == Rarity.MYTHICAL) {
-            this.state.shop.assignShop(player)
+            this.state.shop.assignShop(player, this.state.stageLevel)
           } else {
             player.shop[index] = Pkm.DEFAULT
           }
@@ -202,11 +202,7 @@ export class OnDragDropCommand extends Command<
         const y = parseInt(detail.y)
         if (pokemon.name == Pkm.DITTO) {
           const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y)
-          if (
-            pokemonToClone &&
-            pokemonToClone.rarity != Rarity.MYTHICAL &&
-            !pokemonToClone.types.includes(Synergy.FOSSIL)
-          ) {
+          if (pokemonToClone && pokemonToClone.rarity != Rarity.MYTHICAL) {
             dittoReplaced = true
             const replaceDitto = PokemonFactory.createPokemonFromName(
               PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name),
@@ -397,7 +393,6 @@ export class OnDragDropItemCommand extends Command<
       // SPECIAL CASES: create a new pokemon on item equip
       let newItemPokemon: Pokemon | undefined = undefined
       let equipAfterTransform = true
-      const fossil = PokemonFactory.getRandomFossil(player.board)
 
       switch (pokemon.name) {
         case Pkm.EEVEE:
@@ -462,21 +457,7 @@ export class OnDragDropItemCommand extends Command<
           break
         case Pkm.DITTO:
           equipAfterTransform = false
-          switch (item) {
-            case Item.FOSSIL_STONE:
-              if (fossil) {
-                newItemPokemon = PokemonFactory.transformPokemon(
-                  pokemon,
-                  fossil,
-                  player.pokemonCollection.get(PkmIndex[fossil])
-                )
-              }
-
-              break
-            default:
-              client.send(Transfer.DRAG_DROP_FAILED, message)
-              break
-          }
+          client.send(Transfer.DRAG_DROP_FAILED, message)
           break
         case Pkm.GROUDON:
           if (item == Item.RED_ORB) {
@@ -618,7 +599,7 @@ export class OnRefreshCommand extends Command<
   execute(id) {
     const player = this.state.players.get(id)
     if (player && player.money >= 1) {
-      this.state.shop.assignShop(player)
+      this.state.shop.assignShop(player, this.state.stageLevel)
       player.money -= 1
       player.rerollCount++
     }
@@ -687,7 +668,7 @@ export class OnJoinCommand extends Command<
         }
 
         // console.log(this.state.players.get(client.auth.uid).tileset);
-        this.state.shop.assignShop(player)
+        this.state.shop.assignShop(player, this.state.stageLevel)
         if (this.state.players.size >= 8) {
           // console.log('game elligible to xp');
           this.state.elligibleToXP = true
@@ -1070,53 +1051,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             this.state.shop.assignFirstMythicalShop(player)
           } else if (this.state.stageLevel == 20) {
             this.state.shop.assignSecondMythicalShop(player)
-          } else if (this.state.stageLevel == 2) {
-            this.state.shop.assignDittoShop(player)
-          } else if (this.state.stageLevel == 3) {
-            this.state.shop.assignDittoShop(player)
           } else {
-            this.state.shop.assignShop(player)
+            this.state.shop.assignShop(player, this.state.stageLevel)
           }
         } else {
           player.shopLocked = false
         }
-        player.board.forEach((pokemon, key) => {
-          if (pokemon.fossilTimer !== undefined) {
-            if (pokemon.fossilTimer == 0) {
-              let pokemonEvolved
-              if (pokemon.name === Pkm.CLAMPERL) {
-                if (pokemon.positionX >= 4) {
-                  pokemonEvolved = PokemonFactory.createPokemonFromName(
-                    Pkm.HUNTAIL,
-                    player.pokemonCollection.get(PkmIndex[Pkm.HUNTAIL])
-                  )
-                } else {
-                  pokemonEvolved = PokemonFactory.createPokemonFromName(
-                    Pkm.GOREBYSS,
-                    player.pokemonCollection.get(PkmIndex[Pkm.GOREBYSS])
-                  )
-                }
-              } else {
-                pokemonEvolved = PokemonFactory.createPokemonFromName(
-                  pokemon.evolution,
-                  player.pokemonCollection.get(pokemon.index)
-                )
-              }
-
-              pokemon.items.forEach((i) => {
-                pokemonEvolved.items.add(i)
-              })
-              pokemonEvolved.positionX = pokemon.positionX
-              pokemonEvolved.positionY = pokemon.positionY
-              player.board.delete(key)
-              player.board.set(pokemonEvolved.id, pokemonEvolved)
-              player.synergies.update(player.board)
-              player.effects.update(player.synergies)
-            } else {
-              pokemon.fossilTimer -= 1
-            }
-          }
-        })
       }
     })
     if (this.state.stageLevel === 5) {

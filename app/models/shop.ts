@@ -31,7 +31,8 @@ export default class Shop {
       Pkm.SWINUB,
       Pkm.FENNEKIN,
       Pkm.PICHU,
-      Pkm.SQUIRTLE
+      Pkm.SQUIRTLE,
+      Pkm.OMANYTE
     ]
 
     this.UNCOMMON = [
@@ -53,7 +54,9 @@ export default class Shop {
       Pkm.FLABEBE,
       Pkm.BELLSPROUT,
       Pkm.SLOWPOKE,
-      Pkm.HATENNA
+      Pkm.HATENNA,
+      Pkm.LILEEP,
+      Pkm.ANORITH
     ]
 
     this.RARE = [
@@ -72,7 +75,10 @@ export default class Shop {
       Pkm.WHISMUR,
       Pkm.VANILLITE,
       Pkm.BAGON,
-      Pkm.HONEDGE
+      Pkm.HONEDGE,
+      Pkm.SHIELDON,
+      Pkm.ARCHEN,
+      Pkm.CLAMPERL
     ]
 
     this.EPIC = [
@@ -90,7 +96,10 @@ export default class Shop {
       Pkm.HOUNDOUR,
       Pkm.GOOMY,
       Pkm.BOUNSWEET,
-      Pkm.OSHAWOTT
+      Pkm.OSHAWOTT,
+      Pkm.CARBINK,
+      Pkm.CRANIDOS,
+      Pkm.AMAURA
     ]
 
     this.LEGENDARY = [
@@ -203,22 +212,13 @@ export default class Shop {
     }
   }
 
-  assignShop(player: Player) {
+  assignShop(player: Player, stageLevel: number) {
     for (let i = 0; i < 6; i++) {
       let pokemon = this.pickPokemon(player)
       const seed = Math.random()
-      if (seed > 0.994) {
+      if (stageLevel > 5 && seed > 0.994) {
         pokemon = Pkm.DITTO
       }
-      player.shop[i] = pokemon
-    }
-  }
-
-  assignDittoShop(player: Player) {
-    player.shop[0] = Pkm.DITTO
-
-    for (let i = 1; i < 6; i++) {
-      const pokemon = this.pickPokemon(player)
       player.shop[i] = pokemon
     }
   }

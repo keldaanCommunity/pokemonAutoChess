@@ -297,7 +297,6 @@ export interface IPokemon {
   maxMana: number
   skill: Ability
   items: SetSchema<Item>
-  fossilTimer: number | undefined
   shiny: boolean
   emotion: Emotion
   final: boolean

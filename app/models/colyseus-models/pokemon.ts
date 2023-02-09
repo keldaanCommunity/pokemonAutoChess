@@ -35,7 +35,6 @@ export class Pokemon extends Schema implements IPokemon {
   @type({ set: "string" }) items = new SetSchema<Item>()
   @type("boolean") shiny: boolean
   @type("string") emotion: Emotion
-  fossilTimer: number | undefined
   final: boolean
   additional = false
 
@@ -83,10 +82,6 @@ export class Pokemon extends Schema implements IPokemon {
     types.forEach((type) => {
       this.types.push(type)
     })
-
-    if (this.types.includes(Synergy.FOSSIL) && this.evolution != Pkm.DEFAULT) {
-      this.fossilTimer = 4
-    }
   }
 }
 
@@ -8183,8 +8178,8 @@ export class Amaura extends Pokemon {
       [Synergy.FOSSIL, Synergy.ICE],
       Rarity.EPIC,
       Pkm.AURORUS,
-      150,
-      10,
+      130,
+      8,
       4,
       5,
       1,
@@ -8207,8 +8202,8 @@ export class Aurorus extends Pokemon {
       [Synergy.FOSSIL, Synergy.ICE],
       Rarity.EPIC,
       Pkm.DEFAULT,
-      330,
-      16,
+      300,
+      14,
       8,
       10,
       1,
@@ -8231,8 +8226,8 @@ export class Carbink extends Pokemon {
       [Synergy.FOSSIL, Synergy.FAIRY],
       Rarity.EPIC,
       Pkm.DIANCIE,
-      130,
-      9,
+      110,
+      7,
       4,
       4,
       1,
@@ -8255,8 +8250,8 @@ export class Diancie extends Pokemon {
       [Synergy.FOSSIL, Synergy.FAIRY],
       Rarity.EPIC,
       Pkm.DEFAULT,
-      270,
-      17,
+      250,
+      15,
       7,
       7,
       1,
@@ -8279,8 +8274,8 @@ export class Anorith extends Pokemon {
       [Synergy.FOSSIL, Synergy.BUG],
       Rarity.UNCOMMON,
       Pkm.ARMALDO,
-      70,
-      10,
+      60,
+      8,
       3,
       1,
       1,
@@ -8303,8 +8298,8 @@ export class Armaldo extends Pokemon {
       [Synergy.FOSSIL, Synergy.BUG],
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
-      160,
-      16,
+      140,
+      14,
       4,
       2,
       1,
@@ -8327,8 +8322,8 @@ export class Archen extends Pokemon {
       [Synergy.FOSSIL, Synergy.FLYING],
       Rarity.RARE,
       Pkm.ARCHEOPS,
-      100,
-      12,
+      90,
+      11,
       2,
       1,
       1,
@@ -8351,8 +8346,8 @@ export class Archeops extends Pokemon {
       [Synergy.FOSSIL, Synergy.FLYING],
       Rarity.RARE,
       Pkm.DEFAULT,
-      180,
-      20,
+      160,
+      18,
       3,
       2,
       2,
@@ -8375,8 +8370,8 @@ export class Shieldon extends Pokemon {
       [Synergy.FOSSIL, Synergy.METAL],
       Rarity.RARE,
       Pkm.BASTIODON,
-      120,
-      7,
+      110,
+      6,
       3,
       5,
       1,
@@ -8399,8 +8394,8 @@ export class Bastiodon extends Pokemon {
       [Synergy.FOSSIL, Synergy.METAL],
       Rarity.RARE,
       Pkm.DEFAULT,
-      240,
-      14,
+      220,
+      12,
       7,
       4,
       1,
@@ -8472,7 +8467,7 @@ export class Lileep extends Pokemon {
       Rarity.UNCOMMON,
       Pkm.CRADILY,
       60,
-      8,
+      6,
       2,
       2,
       2,
@@ -8496,7 +8491,7 @@ export class Cradily extends Pokemon {
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
       140,
-      14,
+      12,
       4,
       4,
       2,
@@ -8517,10 +8512,10 @@ export class Cranidos extends Pokemon {
     super(
       Pkm.CRANIDOS,
       [Synergy.FOSSIL, Synergy.MONSTER],
-      Rarity.RARE,
+      Rarity.EPIC,
       Pkm.RAMPARDOS,
       100,
-      10,
+      9,
       4,
       2,
       1,
@@ -8541,10 +8536,10 @@ export class Rampardos extends Pokemon {
     super(
       Pkm.RAMPARDOS,
       [Synergy.FOSSIL, Synergy.MONSTER],
-      Rarity.RARE,
+      Rarity.EPIC,
       Pkm.DEFAULT,
       200,
-      19,
+      17,
       6,
       3,
       1,
@@ -8567,8 +8562,8 @@ export class Kabuto extends Pokemon {
       [Synergy.FOSSIL, Synergy.WATER],
       Rarity.UNCOMMON,
       Pkm.KABUTOPS,
-      80,
-      10,
+      70,
+      8,
       3,
       1,
       1,
@@ -8591,8 +8586,8 @@ export class Kabutops extends Pokemon {
       [Synergy.FOSSIL, Synergy.WATER],
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
-      160,
-      16,
+      140,
+      14,
       4,
       2,
       1,
@@ -8612,14 +8607,14 @@ export class Omanyte extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.OMANYTE,
-      [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.UNCOMMON,
+      [Synergy.FOSSIL, Synergy.AQUATIC],
+      Rarity.COMMON,
       Pkm.OMASTAR,
-      80,
-      8,
+      70,
+      6,
       1,
       3,
-      2,
+      1,
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
       1,
@@ -8636,14 +8631,14 @@ export class Omastar extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.OMASTAR,
-      [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.UNCOMMON,
+      [Synergy.FOSSIL, Synergy.AQUATIC],
+      Rarity.COMMON,
       Pkm.DEFAULT,
-      150,
-      16,
+      140,
+      12,
       2,
       4,
-      2,
+      1,
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
       2,
@@ -8655,12 +8650,61 @@ export class Omastar extends Pokemon {
     )
   }
 }
+
+export class ClamperlG extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CLAMPERL_G,
+      [Synergy.FOSSIL, Synergy.WATER],
+      Rarity.RARE,
+      Pkm.GOREBYSS,
+      90,
+      7,
+      6,
+      3,
+      1,
+      AttackSprite.WATER_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      80,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Gorebyss extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.GOREBYSS,
+      [Synergy.FOSSIL, Synergy.WATER, Synergy.PSYCHIC],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      220,
+      14,
+      3,
+      3,
+      2,
+      AttackSprite.WATER_RANGE,
+      AttackType.PHYSICAL,
+      2,
+      80,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Clamperl extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CLAMPERL,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.EPIC,
+      Rarity.RARE,
       Pkm.HUNTAIL,
       90,
       7,
@@ -8674,40 +8718,17 @@ export class Clamperl extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      true
+      false
     )
   }
 }
 
-export class Gorebyss extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.GOREBYSS,
-      [Synergy.FOSSIL, Synergy.WATER, Synergy.PSYCHIC],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      220,
-      14,
-      3,
-      3,
-      2,
-      AttackSprite.WATER_RANGE,
-      AttackType.PHYSICAL,
-      2,
-      80,
-      Ability.HYDRO_PUMP,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
 export class Huntail extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.HUNTAIL,
       [Synergy.FOSSIL, Synergy.WATER, Synergy.AQUATIC],
-      Rarity.EPIC,
+      Rarity.RARE,
       Pkm.DEFAULT,
       270,
       17,
@@ -8741,7 +8762,7 @@ export class Relicanth extends Pokemon {
       AttackType.PHYSICAL,
       2,
       70,
-      Ability.ROCK_TOMB,
+      Ability.DIVE,
       shiny,
       emotion,
       true

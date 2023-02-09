@@ -71,6 +71,7 @@ import {
   Chimchar,
   Chinchou,
   Clamperl,
+  ClamperlG,
   Clefable,
   Clefairy,
   Cleffa,
@@ -1442,6 +1443,8 @@ export default class PokemonFactory {
         return new Clamperl(s, e)
       case Pkm.HUNTAIL:
         return new Huntail(s, e)
+      case Pkm.CLAMPERL_G:
+        return new ClamperlG(s, e)
       case Pkm.GOREBYSS:
         return new Gorebyss(s, e)
       case Pkm.SMOOCHUM:
@@ -1572,29 +1575,6 @@ export default class PokemonFactory {
   static getPkmIndexFromName(name: Pkm) {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
     return pokemon.index
-  }
-
-  static getRandomFossil(board: MapSchema<Pokemon>) {
-    const currentFossils = new Array<Pkm>()
-    board.forEach((p) => {
-      if (p.types.includes(Synergy.FOSSIL)) {
-        currentFossils.push(PkmFamily[p.name])
-      }
-    })
-    const possibleFossils = new Array<Pkm>()
-    ;(PRECOMPUTED_TYPE_POKEMONS[Synergy.FOSSIL].pokemons as Pkm[]).forEach(
-      (p) => {
-        const pkm = PokemonFactory.createPokemonFromName(p)
-        if (!currentFossils.includes(p) && pkm.rarity !== Rarity.MYTHICAL) {
-          possibleFossils.push(p)
-        }
-      }
-    )
-    if (possibleFossils.length > 0) {
-      return possibleFossils[Math.floor(Math.random() * possibleFossils.length)]
-    } else {
-      return Pkm.CARBINK
-    }
   }
 
   static getSellPrice(name: Pkm): number {

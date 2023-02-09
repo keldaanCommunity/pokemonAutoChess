@@ -87,7 +87,7 @@ class WikiFaq extends Component {
         <p>
           Ditto creates a plain copy of the unit you hover and drop it over.
           Ditto can't fight. Each pokemon in shop has a 0.6% chance to be a
-          ditto at every roll. You can't copy fossils/mythical pokemon.
+          ditto at every roll. You can't copy mythical pokemon.
         </p>
         <h4 className="nes-text is-success">How do the items works ?</h4>
         <p>
@@ -96,12 +96,6 @@ class WikiFaq extends Component {
           you. You can combine two basic items to create a powerfull tier 2
           items. The crafting list of all items is available in the wiki, in the
           items section.
-        </p>
-        <h4 className="nes-text is-success">How do the fossils works ?</h4>
-        <p>
-          Fossils are special pokemons. Give the basic item "fossil stone" to a
-          ditto and it will create a random fossil. Fossils evolve with time. It
-          takes 4 turns to evolve to the final stage.
         </p>
         <h4 className="nes-text is-success">How do bots works ?</h4>
         <p>
