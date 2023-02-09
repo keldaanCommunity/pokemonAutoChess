@@ -298,11 +298,11 @@ export default class AttackingState extends PokemonState {
         if (pokemon.count.staticHolderCount > 2) {
           pokemon.count.staticHolderCount = 0
           // eslint-disable-next-line no-unused-vars
-          let c = 3
+          let c = 2
           board.forEach((x, y, tg) => {
             if (tg && pokemon.team != tg.team && c > 0) {
               tg.count.staticCount++
-              tg.setMana(tg.mana - 30)
+              tg.setMana(tg.mana - 20)
               tg.count.manaBurnCount++
               c--
             }
