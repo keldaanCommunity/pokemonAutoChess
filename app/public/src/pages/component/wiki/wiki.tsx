@@ -1,28 +1,24 @@
 import React from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import WikiButton from "./wiki-button"
 import WikiContent from "./wiki-content"
 import WikiStatistic from "./wiki-statistic"
 import WikiTypes from "./wiki-types"
 import WikiFaq from "./wiki-faq"
 import WikiItemsCheatSheet from "./wiki-items-cheat-sheet"
+import "./wiki.css"
 
 export default function Wiki(props: { toggleWiki: () => void }) {
   return (
-    <div>
-      <WikiButton toggleWiki={props.toggleWiki} />
-      <div
-        className="nes-container"
-        style={{
-          color: "white",
-          margin: "10px",
-          marginBottom: "30px",
-          backgroundColor: "#54596b"
-        }}
-      >
+    <div id="wiki-page">
+      <button
+        onClick={props.toggleWiki}
+        className="bubbly blue"
+      >Back to Lobby</button>
+
+      <div className="nes-container">
         <Tabs>
           <TabList>
-            <Tab key="title-faq">FAQ</Tab>
+            <Tab key="title-faq">F.A.Q.</Tab>
             <Tab key="title-pokemon">POKEMONS</Tab>
             <Tab key="title-items">ITEMS</Tab>
             <Tab key="title-types">SYNERGIES</Tab>

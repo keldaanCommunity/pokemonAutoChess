@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { ItemRecipe } from "../../../../../types/Config"
 import { BasicItems, Item } from "../../../../../types/enum/Item"
 import ReactTooltip from "react-tooltip"
@@ -13,15 +13,16 @@ const imgStyle: CSS.Properties = {
 }
 
 export default function WikiItemsCheatSheet() {
+  const [itemHovered, setItemHovered] = useState<Item>(null)
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <table>
         <tbody>
           <tr>
-            <td></td>
+            <td style={{fontSize: "300%", verticalAlign: "middle", lineHeight: 0, paddingBottom: "30px" }}>+</td>
             {BasicItems.map((i) => {
               return (
-                <th key={i} style={{ paddingBottom: "30px" }}>
+                <th key={i} style={{ paddingBottom: "30px" }} data-tip data-for="detail-item" onMouseOver={() => setItemHovered(i)}>
                   <img style={imgStyle} src={"assets/item/" + i + ".png"}></img>
                 </th>
               )
@@ -30,7 +31,7 @@ export default function WikiItemsCheatSheet() {
           {BasicItems.map((i) => {
             return (
               <tr key={"tr-" + i}>
-                <th style={{ paddingRight: "30px" }}>
+                <th style={{ paddingRight: "30px" }} data-tip data-for="detail-item" onMouseOver={() => setItemHovered(i)}>
                   <img style={imgStyle} src={"assets/item/" + i + ".png"}></img>
                 </th>
                 {BasicItems.map((j) => {
@@ -50,19 +51,13 @@ export default function WikiItemsCheatSheet() {
                       style={{ paddingRight: "5px" }}
                       key={"td-" + i + "-" + j}
                       data-tip
-                      data-for={"detail-" + i + "-" + j}
+                      data-for="detail-item"
+                      onMouseOver={() => setItemHovered(tier2Item)}
                     >
                       <img                      
                         style={imgStyle}
                         src={"assets/item/" + tier2Item + ".png"}
                       ></img>
-                      <ReactTooltip
-                        id={"detail-" + i + "-" + j}
-                        className="customeTheme item-detail-tooltip"
-                        effect="solid"
-                      >
-                        <ItemDetailTooltip item={tier2Item as Item} depth={1} />
-                      </ReactTooltip>
                     </td>
                   )
                 })}
@@ -71,6 +66,13 @@ export default function WikiItemsCheatSheet() {
           })}
         </tbody>
       </table>
+      {itemHovered && (<ReactTooltip
+        id="detail-item"
+        className="customeTheme item-detail-tooltip"
+        effect="solid"
+      >
+        <ItemDetailTooltip item={itemHovered} depth={1} />
+      </ReactTooltip>)}
     </div>
   )
 }

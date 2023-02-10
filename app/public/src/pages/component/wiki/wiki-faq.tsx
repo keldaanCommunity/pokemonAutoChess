@@ -1,15 +1,15 @@
 import React, { Component } from "react"
 
-class WikiFaq extends Component {
+export default class WikiFaq extends Component {
   render() {
     return (
-      <div style={{ overflowY: "scroll", height: "80vh" }}>
+      <div style={{padding: "1em"}}>
         <h4 className="nes-text is-success">Is this an official game ?</h4>
         <p>
           No, this is a fan game; made by fans, for fans. All rights/credits to
           Pokemon Company.
         </p>
-        <h4 className="nes-text is-success">How do pokemon evolves ?</h4>
+        <h4 className="nes-text is-success">How do pokemon evolve ?</h4>
         <p>
           You need 3 copies of the same pokemon to get the evolution. The 3
           pokemons will merge to give the evolved pokemon.
@@ -22,13 +22,13 @@ class WikiFaq extends Component {
           Field/Flora/Human/Aquatic are not pokemon types, but egg groups.
           Moreover, Fairy and Amorph/Ghost are both egg groups and synergies.
         </p>
-        <h4 className="nes-text is-success">How does the income works ?</h4>
+        <h4 className="nes-text is-success">How does the income work ?</h4>
         <p>
           You get 5 gold per round whether you draw, win or lose. You get 1
           bonus income per 10 gold saved. A maximum of 5 bonus income accrued at
           50 saved gold. You get 1 bonus gold if you win. If you win multiple
           times, you will also gain extra gold; one bonus gold for every
-          victory/defeat, up to 5 bonus gold for 5 streak wins/ 5 streak defeat.
+          victory/defeat, up to 5 bonus gold for 5 streak wins / 5 streak defeat.
           Wins/Defeats against PVE are not taken into account.
         </p>
         <h4 className="nes-text is-success">
@@ -38,22 +38,21 @@ class WikiFaq extends Component {
           When opening boosters, you get pokemon shards. Those shards are
           specific to every pokemon. In the collection tab, you can buy pokemon
           emotions with those shards. You can see pokemon emotions as a
-          detailled customization. When selecting an emotion pokemon portrait,
+          detailed customization. When selecting an emotion pokemon portrait,
           the pokemon will appear everywhere with the same emotion portrait that
           you have selected. Eveyone will see the emotion that you picked for
           this pokemon. Moreover, if you have selected a shiny emotion, the
           pokemon will appear shiny to everyone else.
         </p>
         <h4 className="nes-text is-success">
-          How do i get more profile icons ?
+          How do I get new avatars ?
         </h4>
         <p>
-          When buying a pokemon emotion, it'll be available in the profile icon
-          list.
+          When buying a pokemon emotion, it will be available in your profile avatar list.
         </p>
-        <h4 className="nes-text is-success">How do i gain boosters ?</h4>
+        <h4 className="nes-text is-success">How do I gain boosters ?</h4>
         <p>You gain boosters each time you level up.</p>
-        <h4 className="nes-text is-success">How do i level up ?</h4>
+        <h4 className="nes-text is-success">How do I level up ?</h4>
         <p>
           You gain experience each time you finish a game. If you finish first,
           you'll get 900 xp, if you finish last, you'll get 100 xp.
@@ -62,7 +61,7 @@ class WikiFaq extends Component {
           It seems some sprites are missing ?
         </h4>
         <p>
-          Sprites of pokemon auto chess are based on the collaborative project:{" "}
+          Sprites of pokemon auto chess are based on this collaborative project: 
           <a href="https://github.com/PMDCollab/SpriteCollab">
             https://github.com/PMDCollab/SpriteCollab
           </a>
@@ -73,7 +72,7 @@ class WikiFaq extends Component {
         <h4 className="nes-text is-success">What/When is PVE ?</h4>
         <p>
           PVE are predefined waves of enemies. If you win against PVE, you'll
-          get one Tier 1 item and you will have to choose one of the 3 item
+          get one Tier 1 item and you will have to choose one of 3 items
           propositions. PVE occurs at turn 1,2,3,10,15,20,25,30,35,40.
         </p>
         <h4 className="nes-text is-success">
@@ -89,21 +88,21 @@ class WikiFaq extends Component {
           Ditto can't fight. Each pokemon in shop has a 0.6% chance to be a
           ditto at every roll. You can't copy fossils/mythical pokemon.
         </p>
-        <h4 className="nes-text is-success">How do the items works ?</h4>
+        <h4 className="nes-text is-success">How do the items work ?</h4>
         <p>
           After winning a PVE round, you will get a random basic item and you
           will be able to choose from 3 choices another basic item that suits
-          you. You can combine two basic items to create a powerfull tier 2
-          items. The crafting list of all items is available in the wiki, in the
+          you. You can combine two basic items to create a powerful tier 2
+          item. The crafting list of all items is available in the wiki, in the
           items section.
         </p>
-        <h4 className="nes-text is-success">How do the fossils works ?</h4>
+        <h4 className="nes-text is-success">How do the fossils work ?</h4>
         <p>
           Fossils are special pokemons. Give the basic item "fossil stone" to a
           ditto and it will create a random fossil. Fossils evolve with time. It
           takes 4 turns to evolve to the final stage.
         </p>
-        <h4 className="nes-text is-success">How do bots works ?</h4>
+        <h4 className="nes-text is-success">How do bots work ?</h4>
         <p>
           Bots are created by other players. Bots are theme-based, a mewtwo bot
           will always have an mewtwo in its team at a certain time in the game.
@@ -137,41 +136,40 @@ class WikiFaq extends Component {
           What are the special damages and physical damages ?
         </h4>
         <p>
-          ranged units are usually special on their basics. 1 range are
-          physical. Spells/abilities can however be true/special/or physical.
+        Auto attacks are mainly be Physical attack type, whild Spells are mainly
+        Special attack type. Some spells/abilities can however be true damage or physical.
         </p>
         <h4 className="nes-text is-success">
-          Can you also tell me how defense works? Is it flat dmg reduction?
+          Can you also tell me how defense works? Is it flat damage reduction?
         </h4>
         <p>
-          Same system as league of legends: damage = atk * (hp / hp *
-          (1+(0.1*def))). Defense work on physical attack, special defense on
-          special attack
+          Same system as League of Legends: damage = atk * (hp / hp *
+          (1+(0.1*def))). Defense works for physical damage, special defense for
+          special damage
         </p>
-        <h4 className="nes-text is-success">how much mana does a hit grant?</h4>
+        <h4 className="nes-text is-success">How much mana does a hit grant?</h4>
         <p>
-          Damage after reduction / 10 for the pokemon being attacked 5 mana for
+          10% of the damage after reduction for the pokemon being attacked, 5 mana for
           the attacker
         </p>
         <h4 className="nes-text is-success">
-          Why do legendaries have scaled skill descriptions like 10/20/30 damage
-          or sth when they cant evolve? which one is the right value?
+          Why do legendaries have scaled skill descriptions like 10/20/30 damage ?
+          Which one is the right value?
         </h4>
-        <p>Turn 10 mythical is second value, Turn 20 mythical is third value</p>
+        <p>After Stage 10, it's the second value, after Turn 20, it's the third value</p>
         <h4 className="nes-text is-success">
-          Where do primal groudon and primal kyogre come in are they something
-          you can get or are they just pve ?
+          How do I get primal Groudon / Kyogre / Rayquaza ?
         </h4>
         <p>
-          Give a delta orb to Rayaquaza, a red orb to Groudon or a blue orb to
-          Kyogre.
+          Give a delta orb to Rayquaza, a red orb to Groudon or a blue orb to Kyogre
+          to turn them into their primal form.
         </p>
-        <h4 className="nes-text is-success">How do you get shinys</h4>
+        <h4 className="nes-text is-success">How do you get shiny ?</h4>
         <p>
-          So when you play games with 8 players/bots you get exp. When you get
-          1000 exp you get a booster pack, each booster pack gives 4 40x tokens
-          for random pokemon. Then if you purchase the shiny emotes of a pokemon
-          (the normal one is 150) you get that one pokemon as a shiny.
+          So when you play games with 8 players/bots, you get experience. With enough
+          experience, you level up and get a booster pack. Each booster pack gives 
+          shards for random pokemon. Use these shards to purchase the shiny emotes of a pokemon
+          in the Collection page, then you will get that one pokemon as a shiny ingame.
         </p>
         <h4 className="nes-text is-success">How can i support the game ?</h4>
         <p>
@@ -193,5 +191,3 @@ class WikiFaq extends Component {
     )
   }
 }
-
-export default WikiFaq

@@ -14,8 +14,8 @@ import { SynergyDescription } from "../synergy/synergy-description"
 
 export default function WikiType(props: { type: Synergy }) {
   return (
-    <div>
-      <div style={{ display: "flex" }}>
+    <div style={{padding: "1em"}}>
+      <div style={{ display: "flex", marginBottom: "0.5em" }}>
         <SynergyIcon type={props.type} />
         <p>{SynergyName[props.type].eng}</p>
       </div>
@@ -29,9 +29,9 @@ export default function WikiType(props: { type: Synergy }) {
           </div>
         )
       })}
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5em" }}>
         {(PRECOMPUTED_TYPE_POKEMONS_ALL[props.type] as Pkm[]).map((p) => {
-          return <img key={p} src={getPortraitSrc(PkmIndex[p])}></img>
+          return <img key={p} src={getPortraitSrc(PkmIndex[p])} alt={p} title={p}></img>
         })}
       </div>
     </div>
