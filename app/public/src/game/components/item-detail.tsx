@@ -50,4 +50,11 @@ export default class ItemDetail extends GameObjects.DOMElement {
     this.setElement(this.dom)
     ReactDOM.render(<ItemDetailTooltip item={name} depth={1} />, this.dom)    
   }
+
+  setVisible(bool: boolean){
+    // TEMPFIX for https://github.com/photonstorm/phaser/issues/5816
+    super.setVisible(bool)
+    this.dom.style.visibility = bool ? "visible" : "hidden";
+    return this   
+  }
 }
