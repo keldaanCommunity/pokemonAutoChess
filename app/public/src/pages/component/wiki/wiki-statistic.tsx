@@ -10,7 +10,7 @@ const imgStyle: CSS.Properties = {
 
 export default function WikiStatistic() {
   return (
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", maxWidth: "960px" }}>
       <div
         style={{
           display: "flex",

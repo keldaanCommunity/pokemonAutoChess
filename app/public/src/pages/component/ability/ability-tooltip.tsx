@@ -3,13 +3,13 @@ import { Ability } from "../../../../../types/enum/Ability"
 import { Damage, Stat } from "../../../../../types/enum/Game"
 import { AbilityDescription } from "../../../../../types/strings/Ability"
 import { StatLabel } from "../../../../../types/strings/Stat"
+import { cc } from "../../utils/jsx"
 import "./ability-tooltip.css"
 
 export const iconRegExp =
   /PHYSICAL|SPECIAL|TRUE|atk|speed|critChance|critDamage|def|hp|mana|range|shield|speDef|spellDamage|\[[^\]]*\]/
 
 export function AbilityTooltip(props: { ability: Ability; stars?: number }) {
-  const stars = props.stars ? props.stars : 1
   const description = AbilityDescription[props.ability].eng
   const matchDamage = [...description.matchAll(new RegExp(iconRegExp, "g"))]
   let descriptionWithDamage = description.split(iconRegExp)
@@ -43,15 +43,14 @@ export function AbilityTooltip(props: { ability: Ability; stars?: number }) {
             )
           } else {
             const array = JSON.parse(token[0])
-            if (Array.isArray(array) && array[stars - 1] !== undefined) {
+            if (Array.isArray(array)) {
               d = (
                 <span>
                   {array.map((v, j) => {
-                    const separator = j < array.length - 1 ? "/" : ""
-                    const name = j !== stars - 1 ? "stat-label" : ""
+                    const separator = j < array.length - 1 ? "/" : "";
                     return (
                       <span key={j}>
-                        <span className={name}>{v}</span>
+                        <span className={cc({ "stat-label": props.stars !== undefined && j !== props.stars - 1 })}>{v}</span>
                         {separator}
                       </span>
                     )
