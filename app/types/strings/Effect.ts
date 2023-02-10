@@ -436,7 +436,7 @@ export const EffectDescription: {
     fra: `+10% Crit Chance and +20% Crit Damage.`
   },
   [Effect.ELDER_POWER]: {
-    eng: `+70% C${Stat.CRIT_CHANCE} and +140% ${Stat.CRIT_DAMAGE}`,
+    eng: `+70% ${Stat.CRIT_CHANCE} and +140% ${Stat.CRIT_DAMAGE}`,
     esp: `+30% Crit Chance and +40% Crit Damage`,
     fra: `+30% Crit Chance and +40% Crit Damage`
   },
