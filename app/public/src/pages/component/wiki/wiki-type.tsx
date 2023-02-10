@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useState } from "react"
+import ReactTooltip from "react-tooltip";
 import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
 import {
   SynergyName,
@@ -11,8 +12,11 @@ import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { SynergyDescription } from "../synergy/synergy-description"
+import { GamePokemonDetail } from "../game/game-pokemon-detail"
+import PokemonFactory from "../../../../../models/pokemon-factory";
 
 export default function WikiType(props: { type: Synergy }) {
+  const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>();
   return (
     <div style={{padding: "1em"}}>
       <div style={{ display: "flex", marginBottom: "0.5em" }}>
@@ -29,11 +33,24 @@ export default function WikiType(props: { type: Synergy }) {
           </div>
         )
       })}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5em" }}>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
         {(PRECOMPUTED_TYPE_POKEMONS_ALL[props.type] as Pkm[]).map((p) => {
-          return <img key={p} src={getPortraitSrc(PkmIndex[p])} alt={p} title={p}></img>
+          return <img key={p} src={getPortraitSrc(PkmIndex[p])} alt={p} title={p}
+          data-tip data-for="pokemon-detail"
+          onMouseOver={() => { 
+            setHoveredPokemon(PokemonFactory.createPokemonFromName(p)) 
+          }} />
         })}
       </div>
+      {hoveredPokemon && <ReactTooltip
+        id="pokemon-detail"
+        className="customeTheme game-pokemon-detail-tooltip"
+        effect="float"
+        place="bottom"
+        offset={{ bottom: 20 }}
+      >
+        <GamePokemonDetail pokemon={hoveredPokemon} />
+      </ReactTooltip>}
     </div>
   )
 }
