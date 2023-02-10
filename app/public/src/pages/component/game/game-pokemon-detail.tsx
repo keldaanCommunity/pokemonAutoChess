@@ -3,10 +3,7 @@ import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { AttackTypeColor, RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
-import {
-  AbilityName,
-  AbilityDescription
-} from "../../../../../types/strings/Ability"
+import { AbilityName } from "../../../../../types/strings/Ability"
 import { AttackTypeLabel } from "../../../../../types/strings/AttackType"
 import { StatLabel } from "../../../../../types/strings/Stat"
 import { getPortraitSrc } from "../../../utils"
@@ -14,7 +11,10 @@ import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import "./game-pokemon-detail.css"
 
-export function GamePokemonDetail(props: { pokemon: Pokemon }) {
+export function GamePokemonDetail(props: { 
+  pokemon: Pokemon,
+  pokemonConfig: IPokemonConfig | undefined
+}) {
   const pokemonStats = [
     { stat: Stat.HP, value: props.pokemon.hp },
     { stat: Stat.DEF, value: props.pokemon.def },
@@ -31,8 +31,8 @@ export function GamePokemonDetail(props: { pokemon: Pokemon }) {
         style={{ borderColor: RarityColor[props.pokemon.rarity] }}
         src={getPortraitSrc(
           props.pokemon.index,
-          props.pokemon.shiny,
-          props.pokemon.emotion
+          props.pokemonConfig?.selectedShiny ?? props.pokemon.shiny,
+          props.pokemonConfig?.selectedEmotion ?? props.pokemon.emotion
         )}
       />
       <div className="game-pokemon-detail-entry">
