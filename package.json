@@ -5,7 +5,7 @@
   "keywords": [],
   "license": "MIT",
   "engines": {
-    "node": "18.12"
+    "node": "18.14"
   },
   "homepage": "https://github.com/keldaanInteractive/pokemonAutoChess#readme",
   "repository": {

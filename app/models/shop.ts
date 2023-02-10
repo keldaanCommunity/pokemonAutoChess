@@ -14,7 +14,7 @@ export const PoolSizeRarity: { [key in Rarity]: number } = {
   [Rarity.LEGENDARY]: 10,
   [Rarity.MYTHICAL]: 29,
   [Rarity.NEUTRAL]: 29,
-  [Rarity.SUMMON]: 29
+  [Rarity.SUMMON]: 29,
 }
 
 export const CommonShop = new Array<Pkm>(
@@ -238,31 +238,26 @@ export default class Shop {
           const value = this.commonPool.get(pkm)
           if (value !== undefined) {
             this.commonPool.set(pkm, value + 1)
-            console.log("adding back a ", pkm, value + 1)
           }
         } else if (pokemon.rarity === Rarity.UNCOMMON) {
           const value = this.uncommonPool.get(pkm)
           if (value !== undefined) {
             this.uncommonPool.set(pkm, value + 1)
-            console.log("adding back a ", pkm, value + 1)
           }
         } else if (pokemon.rarity === Rarity.RARE) {
           const value = this.rarePool.get(pkm)
           if (value !== undefined) {
             this.rarePool.set(pkm, value + 1)
-            console.log("adding back a ", pkm, value + 1)
           }
         } else if (pokemon.rarity === Rarity.EPIC) {
           const value = this.epicPool.get(pkm)
           if (value !== undefined) {
             this.epicPool.set(pkm, value + 1)
-            console.log("adding back a ", pkm, value + 1)
           }
         } else if (pokemon.rarity === Rarity.LEGENDARY) {
           const value = this.legendaryPool.get(pkm)
           if (value !== undefined) {
             this.legendaryPool.set(pkm, value + 1)
-            console.log("adding back a ", pkm, value + 1)
           }
         }
       }
@@ -322,7 +317,7 @@ export default class Shop {
     if (val !== undefined) {
       pool.set(pkm, Math.max(0, val - 1))
     }
-    console.log("taking a ", pkm, "from the shop", val)
+    //console.log("taking a ", pkm, "from the shop", val)
     return pkm
   }
 
