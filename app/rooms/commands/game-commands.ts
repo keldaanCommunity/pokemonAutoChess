@@ -1071,9 +1071,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           } else if (this.state.stageLevel == 20) {
             this.state.shop.assignSecondMythicalShop(player)
           } else if (this.state.stageLevel == 2) {
-            this.state.shop.assignDittoShop(player)
+            this.state.shop.assignShop(player, true)
           } else if (this.state.stageLevel == 3) {
-            this.state.shop.assignDittoShop(player)
+            this.state.shop.assignShop(player, true)
           } else {
             this.state.shop.assignShop(player)
           }

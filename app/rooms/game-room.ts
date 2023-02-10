@@ -93,7 +93,7 @@ export default class GameRoom extends Room<GameState> {
         )
         this.state.players.set(user.id, player)
         this.state.botManager.addBot(player)
-        this.state.shop.assignShop(player)
+        //this.state.shop.assignShop(player)
       }
     }
 
