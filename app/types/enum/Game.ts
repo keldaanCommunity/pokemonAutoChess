@@ -84,6 +84,7 @@ export enum Stat {
   HP = "hp",
   RANGE = "range",
   MANA = "mana",
+  MAX_MANA = "maxMana",
   CRIT_CHANCE = "critChance",
   CRIT_DAMAGE = "critDamage",
   SPELL_POWER = "spellDamage",

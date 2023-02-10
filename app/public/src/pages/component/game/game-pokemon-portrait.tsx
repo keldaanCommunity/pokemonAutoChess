@@ -81,7 +81,7 @@ export default function GamePokemonPortrait(props: {
           effect="solid"
           place="bottom"
         >
-          <GamePokemonDetail pokemon={props.pokemon} />
+          <GamePokemonDetail pokemon={props.pokemon} pokemonConfig={props.pokemonConfig} />
         </ReactTooltip>
         {willEvolve && pokemonEvolution && (
           <div className="game-pokemon-portrait-evolution">
