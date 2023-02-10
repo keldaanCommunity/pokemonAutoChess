@@ -19,7 +19,7 @@ export default function Credits(props: {
     return (
       <a
         className="nes-text is-primary"
-        style={{ marginRight: "20px" }}
+        style={{ marginRight: "0.5em" }}
         key={id}
         href={contact}
       >
@@ -29,27 +29,14 @@ export default function Credits(props: {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexGrow: ".3",
-        justifyContent: "space-around"
-      }}
-    >
-      {props.primary.length !== 0 ? (
-        <div>
-          <p>{findCredits(props.primary)}</p>
-        </div>
-      ) : null}
-
-      {props.secondary.length !== 0 ? (
-        <div>
-          <p>Others</p>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            {props.secondary.map((s) => findCredits(s))}
-          </div>
-        </div>
-      ) : null}
-    </div>
+    <>
+      <dd>{props.primary.length > 0 && findCredits(props.primary)}</dd>
+      {props.secondary.length > 0 && (<>
+        <dt>Others</dt>
+        <dd><ul style={{paddingLeft: "12ch"}}>
+          {props.secondary.map((s) => (<li key={s}>{findCredits(s)}</li>))}
+        </ul></dd>
+      </>)}
+    </>
   )
 }

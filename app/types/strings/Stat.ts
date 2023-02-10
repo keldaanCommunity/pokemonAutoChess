@@ -56,6 +56,12 @@ export const StatLabel: { [key in Stat]: Langage } = {
     fra: "Mana",
     prt: "Mana"
   },
+  [Stat.MAX_MANA]: {
+    eng: "Max Mana",
+    esp: "Max Maná",
+    fra: "Mana Max",
+    prt: "Max Mana"
+  },
   [Stat.SPELL_POWER]: {
     eng: "Spell Power",
     esp: "Poder",

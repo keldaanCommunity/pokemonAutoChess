@@ -2,10 +2,7 @@ import React, { useState } from "react"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { CDN_URL } from "../../../../../types"
 import { ICreditName } from "../../../../../types"
-import {
-  AbilityName,
-  AbilityDescription
-} from "../../../../../types/strings/Ability"
+import { AbilityName, AbilityDescription } from "../../../../../types/strings/Ability"
 import { ITracker } from "../../../../../types/ITracker"
 import Credits from "./Credits"
 import { RarityColor } from "../../../../../types/Config"
@@ -13,6 +10,9 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { AbilityTooltip } from "../ability/ability-tooltip"
+import { Stat } from "../../../../../types/enum/Game"
+import { StatLabel } from "../../../../../types/strings/Stat"
+import "./wiki-pokemon-detail.css"
 
 export default function WikiPokemonDetail(props: {
   pokemon: Pkm
@@ -36,67 +36,57 @@ export default function WikiPokemonDetail(props: {
       .then((credits: ICreditName[]) => setCredits(credits))
   }
 
-  if (props.m) {
-    return (
-      <div style={{ display: "flex" }}>
-        <div style={{ width: "30%" }}>
-          <p>name:{pokemon.name}</p>
-          <p>Portrait Credit:</p>
-          {credits ? (
-            <Credits
-              credits={credits}
-              primary={props.m.sprite_credit.primary}
-              secondary={props.m.sprite_credit.secondary}
-            />
-          ) : null}
+  const evolution = pokemon.evolution === Pkm.DEFAULT ? null : PokemonFactory.createPokemonFromName(pokemon.evolution as Pkm)
 
-          <p>Sprite Credit:</p>
-          {credits ? (
-            <Credits
-              credits={credits}
-              primary={props.m.portrait_credit.primary}
-              secondary={props.m.portrait_credit.secondary}
-            />
-          ) : null}
+  if (!props.m) return null;
 
-          <p style={{ color: RarityColor[pokemon.rarity] }}>
-            rarity:{pokemon.rarity}
-          </p>
-          <div>
-            types:
-            {pokemon.types.map((type) => (
-              <SynergyIcon key={"img" + type} type={type} />
-            ))}
-          </div>
-          <div>
-            evolution:{" "}
-            {pokemon.evolution == Pkm.DEFAULT ? (
-              "No evolution"
-            ) : (
-              <img
-                src={getPortraitSrc(
-                  PokemonFactory.createPokemonFromName(pokemon.evolution as Pkm)
-                    .index
-                )}
-              />
-            )}
-          </div>
-        </div>
-        <div style={{ width: "30%" }}>
-          <p>Health: {pokemon.hp}</p>
-          <p>Attack: {pokemon.atk}</p>
-          <p>Defense: {pokemon.def}</p>
-          <p>Special Defense: {pokemon.speDef}</p>
-          <p>Range: {pokemon.range}</p>
-          <p>Mana: {pokemon.maxMana}</p>
-        </div>
-        <div style={{ width: "30%" }}>
-          <p>Ability: {AbilityName[pokemon.skill].eng}</p>
+  return (
+    <div className="wiki-pokemon-detail">
+      <dl>
+        <dt>Name</dt><dd className="pokemon-name">{pokemon.name}</dd>
+        <dt>Rarity</dt><dd style={{ color: RarityColor[pokemon.rarity] }}>{pokemon.rarity}</dd>
+        <dt>Types</dt>
+        <dd>{pokemon.types.map((type) => (
+            <SynergyIcon key={"img" + type} type={type} />
+          ))}</dd>
+        <dt>Evolution</dt>
+        <dd>{!evolution ? "No evolution" : (<>
+            <img src={getPortraitSrc(evolution.index)} style={{marginRight: "0.5em"}} />
+            <span className="pokemon-name">{evolution.name}</span>
+          </>)}</dd>
+
+        <dt>Portrait Credit</dt>
+        {credits && (
+          <Credits
+            credits={credits}
+            primary={props.m.sprite_credit.primary}
+            secondary={props.m.sprite_credit.secondary}
+          />
+        )}
+
+        <dt>Sprite Credit</dt>
+        {credits && (
+          <Credits
+            credits={credits}
+            primary={props.m.portrait_credit.primary}
+            secondary={props.m.portrait_credit.secondary}
+          />
+        )}
+      </dl>
+      <dl>
+        {[Stat.HP, Stat.ATK, Stat.DEF, Stat.SPE_DEF, Stat.RANGE].map(stat => (<React.Fragment key={stat}>
+          <dt><img src={`assets/icons/${stat}.png`} alt="" /> {StatLabel[stat]["eng"]}</dt>
+          <dd>{pokemon[stat]}</dd>
+        </React.Fragment>))}
+        <dt><img src={`assets/icons/mana.png`} alt="" /> {StatLabel[Stat.MAX_MANA]["eng"]}</dt>
+        <dd>{pokemon.maxMana}</dd>
+      </dl>
+      <dl>
+        <dt>Ability</dt>
+        <dd>{AbilityName[pokemon.skill].eng}
           <AbilityTooltip ability={pokemon.skill} stars={pokemon.stars} />
-        </div>
-      </div>
-    )
-  } else {
-    return null
-  }
+        </dd>
+      </dl>
+    </div>
+  )
 }
