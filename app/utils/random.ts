@@ -4,7 +4,7 @@ export function pickRandomIn<T>(list: T[] | Record<any, T>): T {
 }
 
 export function pickNRandomIn<T>(array: T[], number=1): T[] {
-    const selection = [], options = [...array]
+    const selection: T[] = [], options = [...array]
     shuffleArray(options)
     while(selection.length < number && options.length > 0){
         selection.push(options.pop()!)
