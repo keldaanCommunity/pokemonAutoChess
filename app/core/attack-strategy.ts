@@ -8,6 +8,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { Ability, AbilityStrategy } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
+import{ pickRandomIn, shuffleArray } from "../utils/random"
 
 export class AttackStrategy {
   process(
@@ -3020,7 +3021,7 @@ export class TeleportStrategy extends AttackStrategy {
       [7, 5],
       [7, 0]
     ]
-    this.shuffleArray(potentialCells)
+    shuffleArray(potentialCells)
 
     for (let i = 0; i < potentialCells.length; i++) {
       const entity = board.getValue(potentialCells[i][0], potentialCells[i][1])
@@ -3035,13 +3036,6 @@ export class TeleportStrategy extends AttackStrategy {
         pokemon.positionY = potentialCells[i][1]
         break
       }
-    }
-  }
-
-  shuffleArray(array: any[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[array[i], array[j]] = [array[j], array[i]]
     }
   }
 }
@@ -3345,7 +3339,7 @@ export class MetronomeStrategy extends AttackStrategy {
       EarthquakeStrategy,
       SteamEruptionStrategy
     ]
-    const strategy = new skills[Math.floor(Math.random() * skills.length)]()
+    const strategy = new pickRandomIn(skills)
     strategy.process(pokemon, state, board, target)
   }
 }

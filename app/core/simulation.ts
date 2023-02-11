@@ -4,7 +4,7 @@ import { Schema, MapSchema, type } from "@colyseus/schema"
 import PokemonEntity from "./pokemon-entity"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { BasicItems, Item } from "../types/enum/Item"
+import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
 import { Climate, PokemonActionState, Stat } from "../types/enum/Game"
 import Dps from "./dps"
@@ -16,6 +16,7 @@ import { Pkm } from "../types/enum/Pokemon"
 import { ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
+import { pickRandomIn } from "../utils/random"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") climate: Climate = Climate.NEUTRAL
@@ -270,6 +271,17 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applyItemsEffects(pokemon: PokemonEntity) {
+    // wonderbox should be applied first so that wonderbox items effects can be applied after
+    if (pokemon.items.has(Item.WONDER_BOX)) {
+      pokemon.items.delete(Item.WONDER_BOX)
+      const randomItems = ItemFactory.createWonderboxItems(pokemon.items)
+      randomItems.forEach(item => {
+         if (pokemon.items.size < 3) {
+          pokemon.items.add(item)
+        }
+      })
+    }
+
     pokemon.items.forEach((item) => {
       Object.entries(ItemStats[item]!).forEach(([stat, value]) =>
         this.applyStat(pokemon, stat as Stat, value)
@@ -279,14 +291,7 @@ export default class Simulation extends Schema implements ISimulation {
     if (pokemon.items.has(Item.SOUL_DEW)) {
       pokemon.status.triggerSoulDew(2000)
     }
-    if (pokemon.items.has(Item.WONDER_BOX)) {
-      pokemon.items.delete(Item.WONDER_BOX)
-      for (let i = 0; i < 2; i++) {
-        if (pokemon.items.size < 3) {
-          pokemon.items.add(ItemFactory.createRandomItem())
-        }
-      }
-    }
+    
     if (pokemon.items.has(Item.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + pokemon.maxMana / 2)
     }
@@ -320,8 +325,7 @@ export default class Simulation extends Schema implements ISimulation {
           1
         )
       })
-      const blueIronDefensePkm =
-        blueIronDefense[Math.floor(Math.random() * blueIronDefense.length)]
+      const blueIronDefensePkm = pickRandomIn(blueIronDefense)
       blueIronDefensePkm.addAttack(blueIronDefensePkm.atk)
       blueIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
     }
@@ -336,8 +340,7 @@ export default class Simulation extends Schema implements ISimulation {
           1
         )
       })
-      const redIronDefensePkm =
-        redIronDefense[Math.floor(Math.random() * redIronDefense.length)]
+      const redIronDefensePkm = pickRandomIn(redIronDefense)
       redIronDefensePkm.addAttack(redIronDefensePkm.atk)
       redIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
     }

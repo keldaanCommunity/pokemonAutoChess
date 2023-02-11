@@ -4,6 +4,7 @@ import Player from "./colyseus-models/player"
 import { IPokemon } from "../types"
 import { Probability } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
+import { pickRandomIn } from "../utils/random"
 
 export default class Shop {
   COMMON: Pkm[]
@@ -226,9 +227,7 @@ export default class Shop {
   assignFirstMythicalShop(player: Player) {
     const mythicalCopy = JSON.parse(JSON.stringify(this.MYTHICAL_1))
     for (let i = 0; i < 6; i++) {
-      const pkm = PokemonFactory.createPokemonFromName(
-        mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]
-      ).name
+      const pkm = PokemonFactory.createPokemonFromName(pickRandomIn(mythicalCopy)).name
       mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1)
       player.shop[i] = pkm
     }
@@ -237,9 +236,7 @@ export default class Shop {
   assignSecondMythicalShop(player: Player) {
     const mythicalCopy = JSON.parse(JSON.stringify(this.MYTHICAL_2))
     for (let i = 0; i < 6; i++) {
-      const pkm = PokemonFactory.createPokemonFromName(
-        mythicalCopy[Math.floor(Math.random() * mythicalCopy.length)]
-      ).name
+      const pkm = PokemonFactory.createPokemonFromName(pickRandomIn(mythicalCopy)).name
       mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1)
       player.shop[i] = pkm
     }
@@ -250,11 +247,6 @@ export default class Shop {
     const seed = Math.random()
     let pokemon = Pkm.MAGIKARP
     let threshold = 0
-    const common = new Array<Pkm>()
-    const uncommon = new Array<Pkm>()
-    const rare = new Array<Pkm>()
-    const epic = new Array<Pkm>()
-    const legendary = new Array<Pkm>()
     const finals = new Array<Pkm>()
 
     player.board.forEach((pokemon: IPokemon) => {
@@ -263,49 +255,30 @@ export default class Shop {
       }
     })
 
-    this.COMMON.forEach((name: Pkm) => {
-      if (!finals.includes(name)) {
-        common.push(name)
-      }
-    })
-    this.UNCOMMON.forEach((name: Pkm) => {
-      if (!finals.includes(name)) {
-        uncommon.push(name)
-      }
-    })
-    this.RARE.forEach((name: Pkm) => {
-      if (!finals.includes(name)) {
-        rare.push(name)
-      }
-    })
-    this.EPIC.forEach((name: Pkm) => {
-      if (!finals.includes(name)) {
-        epic.push(name)
-      }
-    })
-    this.LEGENDARY.forEach((name: Pkm) => {
-      if (!finals.includes(name)) {
-        legendary.push(name)
-      }
-    })
+    const common = this.COMMON.filter((name: Pkm) => !finals.includes(name))
+    const uncommon = this.UNCOMMON.filter((name: Pkm) => !finals.includes(name))
+    const rare = this.RARE.filter((name: Pkm) => !finals.includes(name))
+    const epic = this.EPIC.filter((name: Pkm) => !finals.includes(name))
+    const legendary = this.LEGENDARY.filter((name: Pkm) => !finals.includes(name))
+
     for (let i = 0; i < playerProbality.length; i++) {
       threshold += playerProbality[i]
       if (seed < threshold) {
         switch (i) {
           case 0:
-            pokemon = common[Math.floor(Math.random() * common.length)]
+            pokemon = pickRandomIn(common)
             break
           case 1:
-            pokemon = uncommon[Math.floor(Math.random() * uncommon.length)]
+            pokemon = pickRandomIn(uncommon)
             break
           case 2:
-            pokemon = rare[Math.floor(Math.random() * rare.length)]
+            pokemon = pickRandomIn(rare)
             break
           case 3:
-            pokemon = epic[Math.floor(Math.random() * epic.length)]
+            pokemon = pickRandomIn(epic)
             break
           case 4:
-            pokemon = legendary[Math.floor(Math.random() * legendary.length)]
+            pokemon = pickRandomIn(legendary)
             break
           default:
             console.log(

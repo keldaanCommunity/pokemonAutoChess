@@ -29,7 +29,6 @@ import {
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
-  IPlayer,
   IPokemon,
   Transfer
 } from "../types"
@@ -43,6 +42,7 @@ import { components } from "../api-v1/openapi"
 import { Title, Role } from "../types"
 import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 import BannedUser from "../models/mongo-models/banned-user"
+import { shuffleArray } from "../utils/random"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -53,13 +53,6 @@ export default class GameRoom extends Room<GameState> {
     this.dispatcher = new Dispatcher(this)
     this.eloEngine = new EloRank()
     this.additionalPokemonsPool = new Array<Pkm>()
-  }
-
-  shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[array[i], array[j]] = [array[j], array[i]]
-    }
   }
 
   // When room is initialized
@@ -79,7 +72,7 @@ export default class GameRoom extends Room<GameState> {
         }
       })
     })
-    this.shuffleArray(this.additionalPokemonsPool)
+    shuffleArray(this.additionalPokemonsPool)
 
     this.maxClients = 8
     for (const id in options.users) {

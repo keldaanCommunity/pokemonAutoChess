@@ -7,6 +7,7 @@ import {
   Mask,
   TerrainType
 } from "../types/Config"
+import { pickRandomIn } from "../utils/random"
 
 export type TilesetTiled = {
   columns: number
@@ -111,7 +112,7 @@ export default class Tileset {
         // console.log(items);
         if (items && items.length > 0) {
           if (Math.random() > 0.8) {
-            return items[Math.floor(Math.random() * items.length)]
+            return pickRandomIn(items)
           } else {
             return this.ground.get(maskId)![0]
           }
@@ -126,7 +127,7 @@ export default class Tileset {
         // console.log(items);
         if (items && items.length > 0) {
           if (Math.random() > 0.8) {
-            return items[Math.floor(Math.random() * items.length)]
+            return pickRandomIn(items)
           } else {
             return this.wall.get(maskId)![0]
           }

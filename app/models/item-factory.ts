@@ -1,38 +1,32 @@
-import { Item, BasicItems } from "../types/enum/Item"
+import { Item, BasicItems, SynergyStones } from "../types/enum/Item"
+import { SetSchema } from "@colyseus/schema"
+import { pickRandomIn, pickNRandomIn } from "../utils/random"
 
 export default class ItemFactory {
-  static createRandomItem() {
-    const keys = (Object.keys(Item) as Item[]).filter(
-      (i) => !BasicItems.includes(i)
-    )
-    return keys[Math.floor(Math.random() * keys.length)]
+  static createWonderboxItems(existingItems: SetSchema<Item>): Item[] {
+    const wonderboxItems: Item[] = [];
+    for(let n=0; n<2; n++){
+      const elligibleItems = (Object.keys(Item) as Item[]).filter(
+        (i) => !BasicItems.includes(i) 
+            && !SynergyStones.includes(i) 
+            && !wonderboxItems.includes(i)
+            && !existingItems.has(i)
+            && i !== Item.WONDER_BOX 
+      )
+      wonderboxItems.push(pickRandomIn(elligibleItems))
+    }
+    return wonderboxItems
   }
 
   static createBasicRandomItem() {
-    return BasicItems[Math.floor(Math.random() * BasicItems.length)]
+    return pickRandomIn(BasicItems)
   }
 
   static createRandomItems() {
-    const b = BasicItems.slice()
-    ItemFactory.shuffleArray(b)
-    const items = new Array<Item>()
-    for (let i = 0; i < 3; i++) {
-      const p = b.pop()
-      if (p) {
-        items.push(p)
-      }
-    }
-    return items
+    return pickNRandomIn(BasicItems, 3)
   }
 
   static createSpecificItems(array: Item[]) {
-    return array[Math.floor(Math.random() * array.length)]
-  }
-
-  static shuffleArray(array: Item[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[array[i], array[j]] = [array[j], array[i]]
-    }
+    return pickRandomIn(array)
   }
 }

@@ -10,6 +10,7 @@ import { IPokemonEntity, Transfer, FIGHTING_PHASE_DURATION } from "../types"
 import { Synergy } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
 import { FlyingProtectThreshold } from "../types/Config"
+import { pickRandomIn } from "../utils/random"
 
 export default class PokemonState {
   handleHeal(
@@ -664,9 +665,7 @@ export default class PokemonState {
       }
     })
     if (candidatesCoordinates.length > 0) {
-      return candidatesCoordinates[
-        Math.floor(Math.random() * candidatesCoordinates.length)
-      ]
+      return pickRandomIn(candidatesCoordinates)
     } else {
       return undefined
     }
