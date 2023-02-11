@@ -3339,7 +3339,7 @@ export class MetronomeStrategy extends AttackStrategy {
       EarthquakeStrategy,
       SteamEruptionStrategy
     ]
-    const strategy = new pickRandomIn(skills)
+    const strategy = new (pickRandomIn(skills))
     strategy.process(pokemon, state, board, target)
   }
 }
