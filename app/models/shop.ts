@@ -14,7 +14,7 @@ export const PoolSizeRarity: { [key in Rarity]: number } = {
   [Rarity.LEGENDARY]: 10,
   [Rarity.MYTHICAL]: 29,
   [Rarity.NEUTRAL]: 29,
-  [Rarity.SUMMON]: 29,
+  [Rarity.SUMMON]: 29
 }
 
 export const CommonShop = new Array<Pkm>(
@@ -230,38 +230,42 @@ export default class Shop {
     }
   }
 
-  assignShop(player: Player, addDitto?: boolean) {
-    player.shop.forEach((pkm) => {
-      const pokemon = PokemonFactory.createPokemonFromName(pkm)
-      if (pokemon.name !== Pkm.MAGIKARP) {
-        if (pokemon.rarity === Rarity.COMMON) {
-          const value = this.commonPool.get(pkm)
-          if (value !== undefined) {
-            this.commonPool.set(pkm, value + 1)
-          }
-        } else if (pokemon.rarity === Rarity.UNCOMMON) {
-          const value = this.uncommonPool.get(pkm)
-          if (value !== undefined) {
-            this.uncommonPool.set(pkm, value + 1)
-          }
-        } else if (pokemon.rarity === Rarity.RARE) {
-          const value = this.rarePool.get(pkm)
-          if (value !== undefined) {
-            this.rarePool.set(pkm, value + 1)
-          }
-        } else if (pokemon.rarity === Rarity.EPIC) {
-          const value = this.epicPool.get(pkm)
-          if (value !== undefined) {
-            this.epicPool.set(pkm, value + 1)
-          }
-        } else if (pokemon.rarity === Rarity.LEGENDARY) {
-          const value = this.legendaryPool.get(pkm)
-          if (value !== undefined) {
-            this.legendaryPool.set(pkm, value + 1)
-          }
+  releasePokemon(pkm: Pkm) {
+    const pokemon = PokemonFactory.createPokemonFromName(pkm)
+    if (pokemon.name !== Pkm.MAGIKARP) {
+      const family = PkmFamily[pokemon.name]
+      const entityNumber = pokemon.stars === 3 ? 9 : pokemon.stars === 2 ? 3 : 1
+      if (pokemon.rarity === Rarity.COMMON) {
+        const value = this.commonPool.get(family)
+        if (value !== undefined) {
+          this.commonPool.set(family, value + entityNumber)
+        }
+      } else if (pokemon.rarity === Rarity.UNCOMMON) {
+        const value = this.uncommonPool.get(family)
+        if (value !== undefined) {
+          this.uncommonPool.set(family, value + entityNumber)
+        }
+      } else if (pokemon.rarity === Rarity.RARE) {
+        const value = this.rarePool.get(family)
+        if (value !== undefined) {
+          this.rarePool.set(family, value + entityNumber)
+        }
+      } else if (pokemon.rarity === Rarity.EPIC) {
+        const value = this.epicPool.get(family)
+        if (value !== undefined) {
+          this.epicPool.set(family, value + entityNumber)
+        }
+      } else if (pokemon.rarity === Rarity.LEGENDARY) {
+        const value = this.legendaryPool.get(family)
+        if (value !== undefined) {
+          this.legendaryPool.set(family, value + entityNumber)
         }
       }
-    })
+    }
+  }
+
+  assignShop(player: Player, addDitto?: boolean) {
+    player.shop.forEach((pkm) => this.releasePokemon(pkm))
 
     if (addDitto) {
       player.shop[0] = Pkm.DITTO
