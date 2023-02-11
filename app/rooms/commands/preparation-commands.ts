@@ -8,7 +8,7 @@ import { Client } from "colyseus"
 import PreparationRoom from "../preparation-room"
 import { Emotion, IMessage, Role, Transfer } from "../../types"
 import { BotDifficulty } from "../../types/enum/Game"
-import PreparationState from "../states/preparation-state"
+import { pickRandomIn } from "../../utils/random"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -307,7 +307,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
             return
           }
 
-          const bot = bots[Math.floor(Math.random() * bots.length)]
+          const bot = pickRandomIn(bots)
 
           if (this.state.users.size >= 8) {
             return

@@ -66,3 +66,14 @@ export const BasicItems: Item[] = [
   Item.HEART_SCALE,
   Item.MYSTIC_WATER
 ]
+
+export const SynergyStones: Item[] = [
+  Item.OLD_AMBER,
+  Item.DAWN_STONE,
+  Item.WATER_STONE,
+  Item.THUNDER_STONE,
+  Item.FIRE_STONE,
+  Item.MOON_STONE,
+  Item.DUSK_STONE,
+  Item.LEAF_STONE,
+]

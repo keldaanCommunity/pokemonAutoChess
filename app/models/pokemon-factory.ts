@@ -457,6 +457,7 @@ import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
 import { PkmCost } from "../types/Config"
+import { pickRandomIn } from "../utils/random"
 
 export default class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level: number): MapSchema<Pokemon> {
@@ -1591,7 +1592,7 @@ export default class PokemonFactory {
       }
     )
     if (possibleFossils.length > 0) {
-      return possibleFossils[Math.floor(Math.random() * possibleFossils.length)]
+      return pickRandomIn(possibleFossils)
     } else {
       return Pkm.CARBINK
     }

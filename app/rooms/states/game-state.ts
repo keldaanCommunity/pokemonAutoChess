@@ -6,6 +6,7 @@ import { DungeonData, Dungeon } from "../../types/Config"
 import { GamePhaseState } from "../../types/enum/Game"
 import { Schema, MapSchema, ArraySchema, type } from "@colyseus/schema"
 import { Pkm } from "../../types/enum/Pokemon"
+import { pickRandomIn } from "../../utils/random"
 
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
@@ -33,8 +34,7 @@ export default class GameState extends Schema {
     this.preparationId = preparationId
     this.startTime = Date.now()
     this.name = name
-    const keys = Object.values(Dungeon) as Dungeon[]
-    this.id = keys[Math.floor(Math.random() * keys.length)]
+    this.id = pickRandomIn(Dungeon)
     this.mapName = DungeonData[this.id].name
     this.design = new Design(this.id, 5, 0.1)
     this.design.create().then(() => {
