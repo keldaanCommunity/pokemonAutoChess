@@ -1,11 +1,11 @@
 {
   "name": "pokemon-autochess",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "",
   "keywords": [],
   "license": "MIT",
   "engines": {
-    "node": "18.12"
+    "node": "18.14"
   },
   "homepage": "https://github.com/keldaanInteractive/pokemonAutoChess#readme",
   "repository": {

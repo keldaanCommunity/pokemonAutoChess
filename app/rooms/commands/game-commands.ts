@@ -594,6 +594,7 @@ export class OnSellDropCommand extends Command<
     if (player) {
       const pokemon = player.board.get(detail.pokemonId)
       if (pokemon) {
+        this.state.shop.releasePokemon(pokemon.name)
         player.money += PokemonFactory.getSellPrice(pokemon.name)
         pokemon.items.forEach((it) => {
           player.items.add(it)
@@ -617,7 +618,7 @@ export class OnRefreshCommand extends Command<
 > {
   execute(id) {
     const player = this.state.players.get(id)
-    if (player && player.money >= 1) {
+    if (player && player.money >= 1 && player.alive) {
       this.state.shop.assignShop(player)
       player.money -= 1
       player.rerollCount++
@@ -1028,6 +1029,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   checkDeath() {
     this.state.players.forEach((player: Player, key: string) => {
       if (player.life <= 0) {
+        if (!player.isBot) {
+          player.shop.forEach((pkm) => {
+            this.state.shop.releasePokemon(pkm)
+          })
+          player.board.forEach((pokemon) => {
+            this.state.shop.releasePokemon(pokemon.name)
+          })
+        }
         player.life = 0
         player.alive = false
       }
@@ -1071,9 +1080,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           } else if (this.state.stageLevel == 20) {
             this.state.shop.assignSecondMythicalShop(player)
           } else if (this.state.stageLevel == 2) {
-            this.state.shop.assignDittoShop(player)
+            this.state.shop.assignShop(player, true)
           } else if (this.state.stageLevel == 3) {
-            this.state.shop.assignDittoShop(player)
+            this.state.shop.assignShop(player, true)
           } else {
             this.state.shop.assignShop(player)
           }
