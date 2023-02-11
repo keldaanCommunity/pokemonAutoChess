@@ -315,7 +315,7 @@ export default class Shop {
       }
     })
     if (potential.length > 0) {
-      pkm = potential[Math.floor(Math.random() * potential.length)]
+      pkm = pickRandomIn(potential)
     }
     const val = pool.get(pkm)
     if (val !== undefined) {
