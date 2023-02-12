@@ -76,4 +76,5 @@ export const SynergyStones: Item[] = [
   Item.MOON_STONE,
   Item.DUSK_STONE,
   Item.LEAF_STONE,
+  Item.ICY_ROCK
 ]
