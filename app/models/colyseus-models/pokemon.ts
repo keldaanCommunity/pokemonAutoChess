@@ -1775,7 +1775,7 @@ export class Abra extends Pokemon {
     super(
       Pkm.ABRA,
       [Synergy.PSYCHIC, Synergy.HUMAN],
-      Rarity.EPIC,
+      Rarity.RARE,
       Pkm.KADABRA,
       90,
       5,
@@ -1799,7 +1799,7 @@ export class Kadabra extends Pokemon {
     super(
       Pkm.KADABRA,
       [Synergy.PSYCHIC, Synergy.HUMAN],
-      Rarity.EPIC,
+      Rarity.RARE,
       Pkm.ALAKAZAM,
       130,
       9,
@@ -1823,7 +1823,7 @@ export class Alakazam extends Pokemon {
     super(
       Pkm.ALAKAZAM,
       [Synergy.PSYCHIC, Synergy.HUMAN],
-      Rarity.EPIC,
+      Rarity.RARE,
       Pkm.DEFAULT,
       230,
       18,
