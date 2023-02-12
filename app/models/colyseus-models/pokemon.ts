@@ -8181,7 +8181,7 @@ export class Amaura extends Pokemon {
     super(
       Pkm.AMAURA,
       [Synergy.FOSSIL, Synergy.ICE],
-      Rarity.EPIC,
+      Rarity.HATCH,
       Pkm.AURORUS,
       150,
       10,
@@ -8205,7 +8205,7 @@ export class Aurorus extends Pokemon {
     super(
       Pkm.AURORUS,
       [Synergy.FOSSIL, Synergy.ICE],
-      Rarity.EPIC,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       330,
       16,
@@ -8229,7 +8229,7 @@ export class Carbink extends Pokemon {
     super(
       Pkm.CARBINK,
       [Synergy.FOSSIL, Synergy.FAIRY],
-      Rarity.EPIC,
+      Rarity.HATCH,
       Pkm.DIANCIE,
       130,
       9,
@@ -8253,7 +8253,7 @@ export class Diancie extends Pokemon {
     super(
       Pkm.DIANCIE,
       [Synergy.FOSSIL, Synergy.FAIRY],
-      Rarity.EPIC,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       270,
       17,
@@ -8277,7 +8277,7 @@ export class Anorith extends Pokemon {
     super(
       Pkm.ANORITH,
       [Synergy.FOSSIL, Synergy.BUG],
-      Rarity.UNCOMMON,
+      Rarity.HATCH,
       Pkm.ARMALDO,
       70,
       10,
@@ -8301,7 +8301,7 @@ export class Armaldo extends Pokemon {
     super(
       Pkm.ARMALDO,
       [Synergy.FOSSIL, Synergy.BUG],
-      Rarity.UNCOMMON,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       160,
       16,
@@ -8325,7 +8325,7 @@ export class Archen extends Pokemon {
     super(
       Pkm.ARCHEN,
       [Synergy.FOSSIL, Synergy.FLYING],
-      Rarity.RARE,
+      Rarity.HATCH,
       Pkm.ARCHEOPS,
       100,
       12,
@@ -8349,7 +8349,7 @@ export class Archeops extends Pokemon {
     super(
       Pkm.ARCHEOPS,
       [Synergy.FOSSIL, Synergy.FLYING],
-      Rarity.RARE,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       180,
       20,
@@ -8373,7 +8373,7 @@ export class Shieldon extends Pokemon {
     super(
       Pkm.SHIELDON,
       [Synergy.FOSSIL, Synergy.METAL],
-      Rarity.RARE,
+      Rarity.HATCH,
       Pkm.BASTIODON,
       120,
       7,
@@ -8397,7 +8397,7 @@ export class Bastiodon extends Pokemon {
     super(
       Pkm.BASTIODON,
       [Synergy.FOSSIL, Synergy.METAL],
-      Rarity.RARE,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       240,
       14,
@@ -8421,7 +8421,7 @@ export class Tirtouga extends Pokemon {
     super(
       Pkm.TIRTOUGA,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.RARE,
+      Rarity.HATCH,
       Pkm.CARRACOSTA,
       120,
       7,
@@ -8445,7 +8445,7 @@ export class Carracosta extends Pokemon {
     super(
       Pkm.CARRACOSTA,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.RARE,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       240,
       14,
@@ -8469,7 +8469,7 @@ export class Lileep extends Pokemon {
     super(
       Pkm.LILEEP,
       [Synergy.FOSSIL, Synergy.GRASS],
-      Rarity.UNCOMMON,
+      Rarity.HATCH,
       Pkm.CRADILY,
       60,
       8,
@@ -8493,7 +8493,7 @@ export class Cradily extends Pokemon {
     super(
       Pkm.CRADILY,
       [Synergy.FOSSIL, Synergy.GRASS],
-      Rarity.UNCOMMON,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       140,
       14,
@@ -8517,7 +8517,7 @@ export class Cranidos extends Pokemon {
     super(
       Pkm.CRANIDOS,
       [Synergy.FOSSIL, Synergy.MONSTER],
-      Rarity.RARE,
+      Rarity.HATCH,
       Pkm.RAMPARDOS,
       100,
       10,
@@ -8541,7 +8541,7 @@ export class Rampardos extends Pokemon {
     super(
       Pkm.RAMPARDOS,
       [Synergy.FOSSIL, Synergy.MONSTER],
-      Rarity.RARE,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       200,
       19,
@@ -8565,7 +8565,7 @@ export class Kabuto extends Pokemon {
     super(
       Pkm.KABUTO,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.UNCOMMON,
+      Rarity.HATCH,
       Pkm.KABUTOPS,
       80,
       10,
@@ -8589,7 +8589,7 @@ export class Kabutops extends Pokemon {
     super(
       Pkm.KABUTOPS,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.UNCOMMON,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       160,
       16,
@@ -8613,7 +8613,7 @@ export class Omanyte extends Pokemon {
     super(
       Pkm.OMANYTE,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.UNCOMMON,
+      Rarity.HATCH,
       Pkm.OMASTAR,
       80,
       8,
@@ -8637,7 +8637,7 @@ export class Omastar extends Pokemon {
     super(
       Pkm.OMASTAR,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.UNCOMMON,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       150,
       16,
@@ -8660,7 +8660,7 @@ export class Clamperl extends Pokemon {
     super(
       Pkm.CLAMPERL,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.EPIC,
+      Rarity.HATCH,
       Pkm.HUNTAIL,
       90,
       7,
@@ -8684,7 +8684,7 @@ export class Gorebyss extends Pokemon {
     super(
       Pkm.GOREBYSS,
       [Synergy.FOSSIL, Synergy.WATER, Synergy.PSYCHIC],
-      Rarity.EPIC,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       220,
       14,
@@ -8707,7 +8707,7 @@ export class Huntail extends Pokemon {
     super(
       Pkm.HUNTAIL,
       [Synergy.FOSSIL, Synergy.WATER, Synergy.AQUATIC],
-      Rarity.EPIC,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       270,
       17,
@@ -8754,7 +8754,7 @@ export class Tyrunt extends Pokemon {
     super(
       Pkm.TYRUNT,
       [Synergy.FOSSIL, Synergy.DRAGON],
-      Rarity.EPIC,
+      Rarity.HATCH,
       Pkm.TYRANTRUM,
       135,
       10,
@@ -8778,7 +8778,7 @@ export class Tyrantrum extends Pokemon {
     super(
       Pkm.TYRANTRUM,
       [Synergy.FOSSIL, Synergy.DRAGON],
-      Rarity.EPIC,
+      Rarity.HATCH,
       Pkm.DEFAULT,
       290,
       22,

@@ -6,7 +6,8 @@ export enum Rarity {
   LEGENDARY = "LEGENDARY",
   MYTHICAL = "MYTHICAL",
   NEUTRAL = "NEUTRAL",
-  SUMMON = "SUMMON"
+  SUMMON = "SUMMON",
+  HATCH = "HATCH"
 }
 
 export enum GamePhaseState {

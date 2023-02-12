@@ -14,7 +14,8 @@ export const PoolSizeRarity: { [key in Rarity]: number } = {
   [Rarity.LEGENDARY]: 10,
   [Rarity.MYTHICAL]: 29,
   [Rarity.NEUTRAL]: 29,
-  [Rarity.SUMMON]: 29
+  [Rarity.SUMMON]: 29,
+  [Rarity.HATCH]: 29
 }
 
 export const CommonShop = new Array<Pkm>(
