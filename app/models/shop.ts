@@ -75,11 +75,11 @@ export const RareShop = new Array<Pkm>(
   Pkm.WHISMUR,
   Pkm.VANILLITE,
   Pkm.BAGON,
-  Pkm.HONEDGE
+  Pkm.HONEDGE,
+  Pkm.ABRA
 )
 
 export const EpicShop = new Array<Pkm>(
-  Pkm.ABRA,
   Pkm.LARVITAR,
   Pkm.SLAKOTH,
   Pkm.RALTS,
