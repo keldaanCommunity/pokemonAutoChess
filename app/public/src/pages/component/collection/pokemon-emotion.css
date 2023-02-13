@@ -23,6 +23,9 @@
 .pokemon-emotion.unlockable:not(.unlocked) {
     filter: grayscale(1) contrast(1);
 }
+.pokemon-emotion.unlockable:not(.unlocked):hover {
+    filter: grayscale(0) contrast(0.8);
+}
 
 .pokemon-emotion > p {
     line-height: 1em;
