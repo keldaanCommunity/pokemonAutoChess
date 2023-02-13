@@ -841,13 +841,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.SEISMIC_TOSS]: {
-    eng: `Mono target attack that deals 5 x stars ${Damage.TRUE} per pokemon`,
+    eng: `Mono target attack that deals [5,10,15] ${Damage.TRUE} multiplied by the number of Pokemon in your team`,
     esp: `Ataque de objetivo mono que inflige daño real en función de lo grande que sea tu equipo.`,
     fra: `Attaque mono cible dont les dégats varient en fonction de la taille de l équipe.`,
     prt: ``
   },
   [Ability.GUILLOTINE]: {
-    eng: `Mono target attack that deals stars x ${Stat.ATK} ${Damage.SPECIAL}. Restores half ${Stat.MANA} if target killed`,
+    eng: `Mono target attack that deals [1,2,3] x ${Stat.ATK} ${Damage.SPECIAL}. Restores half ${Stat.MANA} if target killed`,
     esp: `Ataque de objetivo mono que causa daño físico. Restaura la mitad de maná si el objetivo muere`,
     fra: `Attaque mono cible qui fait des dégats physiques. Restaure la moitié du mana si la cible est tué.`,
     prt: ``
@@ -991,9 +991,9 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.STOMP]: {
-    eng: `Mono target that deals (2 x atk x stars) ${Damage.SPECIAL}`,
-    esp: `Daño físico del objetivo mono (2*atk*stars)`,
-    fra: `Attaque mono cible faisant 2*atk*stars dégats physiques`,
+    eng: `Mono target that deals [2,4,6] x ${Stat.ATK} ${Damage.SPECIAL}`,
+    esp: `Daño físico del objetivo mono [2,4,6] x ${Stat.ATK} ${Damage.SPECIAL}`,
+    fra: `Attaque mono cible faisant [2,4,6] x ${Stat.ATK} ${Damage.SPECIAL} dégats physiques`,
     prt: ``
   },
   [Ability.DARK_PULSE]: {
