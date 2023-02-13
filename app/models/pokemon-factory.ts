@@ -105,6 +105,7 @@ import {
   Dusknoir,
   Duskull,
   Eevee,
+  Egg,
   Electabuzz,
   Electivire,
   Electrike,
@@ -1557,6 +1558,8 @@ export default class PokemonFactory {
         return new Wailmer(s, e)
       case Pkm.WAILORD:
         return new Wailord(s, e)
+      case Pkm.EGG:
+        return new Egg(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

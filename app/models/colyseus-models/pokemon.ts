@@ -95,7 +95,31 @@ export class Ditto extends Pokemon {
     super(
       Pkm.DITTO,
       [Synergy.NORMAL],
-      Rarity.LEGENDARY,
+      Rarity.NEUTRAL,
+      Pkm.DEFAULT,
+      30,
+      1,
+      1,
+      1,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Egg extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.EGG,
+      [],
+      Rarity.HATCH,
       Pkm.DEFAULT,
       30,
       1,

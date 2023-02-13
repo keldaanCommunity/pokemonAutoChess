@@ -17,7 +17,7 @@ const dataAll = {}
   })
 
   pokemons.sort(indexSort)
-  dataAll[type] = pokemons.map(p=>p.name)
+  dataAll[type] = pokemons.map((p) => p.name)
 })
 
 fs.writeFileSync(
@@ -25,8 +25,8 @@ fs.writeFileSync(
   JSON.stringify(dataAll)
 )
 
-export function indexSort(a: Pokemon, b: Pokemon){
-    const aIndex = parseFloat(a.index.replace('-','.'))
-    const bIndex = parseFloat(b.index.replace('-','.'))
-    return aIndex - bIndex
+export function indexSort(a: Pokemon, b: Pokemon) {
+  const aIndex = parseFloat(a.index.replace("-", "."))
+  const bIndex = parseFloat(b.index.replace("-", "."))
+  return aIndex - bIndex
 }

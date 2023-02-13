@@ -1,4 +1,5 @@
 export enum Pkm {
+  EGG = "Egg",
   DITTO = "ditto",
   BULBASAUR = "bulbasaur",
   IVYSAUR = "ivysaur",
@@ -451,6 +452,7 @@ export enum Pkm {
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
+  [Pkm.EGG]: "0000-0004",
   [Pkm.DEFAULT]: "0000",
   [Pkm.DITTO]: "0132",
   [Pkm.BULBASAUR]: "0001",
@@ -903,6 +905,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
+  [Pkm.EGG]: Pkm.EGG,
   [Pkm.BULBASAUR]: Pkm.BULBASAUR,
   [Pkm.IVYSAUR]: Pkm.BULBASAUR,
   [Pkm.VENUSAUR]: Pkm.BULBASAUR,
