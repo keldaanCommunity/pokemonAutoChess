@@ -25,7 +25,9 @@ export default function PokemonCollectionItem(props: {
 
   const { dust, emotions, shinyEmotions } = props.config ?? { dust: 0, emotions: [] as Emotion[], shinyEmotions: [] as Emotion[] }
   const isUnlocked = (emotions?.length > 0 || shinyEmotions?.length > 0)
-  const canUnlock = Object.values(Emotion).some(e => (
+  const availableEmotions = Object.values(Emotion).filter(emotion => emotion in props.metadata.portrait_files)
+
+  const canUnlock = availableEmotions.some(e => (
     (emotions.includes(e) === false && dust >= getEmotionCost(e, false)) || 
     (shinyEmotions.includes(e) === false && dust >= getEmotionCost(e, true))
   ))
