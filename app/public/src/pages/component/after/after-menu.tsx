@@ -53,10 +53,10 @@ export default function AfterMenu() {
                   </td>
                   <td>
                     <ul className="player-team-synergies">
-                      {v.synergies.map(s => (<>
-                        <SynergyIcon type={s.name} key={s.name} />
-                        <span key={s.name+"-value"}>{s.value}</span>
-                      </>))}
+                      {v.synergies.map(s => (<React.Fragment key={s.name}>
+                        <SynergyIcon type={s.name} />
+                        <span>{s.value}</span>
+                      </React.Fragment>))}
                     </ul>
                   </td>
                 </tr>
