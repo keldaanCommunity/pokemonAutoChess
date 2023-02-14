@@ -79,7 +79,10 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.PRESTO]: `Presto`,
   [Effect.DUBIOUS_DISC]: `Dubious Disc`,
   [Effect.LINK_CABLE]: `Link Cable`,
-  [Effect.GOOGLE_SPECS]: `Google Specs`
+  [Effect.GOOGLE_SPECS]: `Google Specs`,
+  [Effect.HATCHER]: "Hatcher",
+  [Effect.BREEDER]: "Breeder",
+  [Effect.FARMER]: "Farmer"
 }
 
 export const EffectDescription: {
@@ -472,6 +475,21 @@ export const EffectDescription: {
   },
   [Effect.GOOGLE_SPECS]: {
     eng: `Artificial pokemons have a 55% chance to burn 20 ${Stat.MANA} from their target and return 45 ${Stat.MANA} to the attacker`,
+    esp: `?NONE?`,
+    fra: `?NONE?`
+  },
+  [Effect.HATCHER]: {
+    eng: `30% chance to find a pokemon Egg after each stage`,
+    esp: `?NONE?`,
+    fra: `?NONE?`
+  },
+  [Effect.BREEDER]: {
+    eng: `50% chance to find a pokemon Egg after each stage`,
+    esp: `?NONE?`,
+    fra: `?NONE?`
+  },
+  [Effect.FARMER]: {
+    eng: `70% chance to find a pokemon Egg after each stage`,
     esp: `?NONE?`,
     fra: `?NONE?`
   }

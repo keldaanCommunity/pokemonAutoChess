@@ -11,7 +11,11 @@ import { Client } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
 import { Title, FIGHTING_PHASE_DURATION } from "../../types"
 import { MapSchema } from "@colyseus/schema"
-import { GamePhaseState, Rarity } from "../../types/enum/Game"
+import {
+  GamePhaseState,
+  Rarity,
+  PokemonActionState
+} from "../../types/enum/Game"
 import {
   IDragDropMessage,
   IDragDropItemMessage,
@@ -44,9 +48,9 @@ export class OnShopCommand extends Command<
         if (
           pokemon.name !== Pkm.MAGIKARP &&
           player.money >= pokemon.cost &&
-          (this.room.getBoardSize(player.board) < 8 ||
+          (this.room.getBenchSize(player.board) < 8 ||
             (this.room.getPossibleEvolution(player.board, pokemon.name) &&
-              this.room.getBoardSize(player.board) == 8))
+              this.room.getBenchSize(player.board) == 8))
         ) {
           player.money -= pokemon.cost
           if (pokemon.skill === Ability.PROTEAN) {
@@ -105,7 +109,7 @@ export class OnShopCommand extends Command<
               }
             }
           }
-          const x = this.room.getFirstAvailablePositionInBoard(player.id)
+          const x = this.room.getFirstAvailablePositionInBench(player.id)
           pokemon.positionX = x !== undefined ? x : -1
           pokemon.positionY = 0
           player.board.set(pokemon.id, pokemon)
@@ -155,12 +159,12 @@ export class OnPokemonPropositionCommand extends Command<
       if (player.pokemonsProposition.includes(pkm)) {
         this.state.additionalPokemons.push(pkm)
         this.state.shop.addAdditionalPokemon(pkm)
-        if (this.room.getBoardSize(player.board) < 8) {
+        if (this.room.getBenchSize(player.board) < 8) {
           const pokemon = PokemonFactory.createPokemonFromName(
             pkm,
             player.pokemonCollection.get(PkmIndex[pkm])
           )
-          const x = this.room.getFirstAvailablePositionInBoard(player.id)
+          const x = this.room.getFirstAvailablePositionInBench(player.id)
           pokemon.positionX = x !== undefined ? x : -1
           pokemon.positionY = 0
           player.board.set(pokemon.id, pokemon)
@@ -204,7 +208,8 @@ export class OnDragDropCommand extends Command<
           const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y)
           if (
             pokemonToClone &&
-            pokemonToClone.rarity != Rarity.MYTHICAL &&
+            pokemonToClone.rarity !== Rarity.MYTHICAL &&
+            pokemonToClone.rarity !== Rarity.NEUTRAL &&
             !pokemonToClone.types.includes(Synergy.FOSSIL)
           ) {
             dittoReplaced = true
@@ -214,7 +219,7 @@ export class OnDragDropCommand extends Command<
             )
             player.board.delete(detail.id)
             const position =
-              this.room.getFirstAvailablePositionInBoard(playerId)
+              this.room.getFirstAvailablePositionInBench(playerId)
             if (position !== undefined) {
               replaceDitto.positionX = position
               replaceDitto.positionY = 0
@@ -963,6 +968,26 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   computeLife() {
     const isPVE = this.checkForPVE()
     this.state.players.forEach((player, key) => {
+      if (
+        this.room.getBenchSize(player.board) < 8 &&
+        (player.effects.list.includes(Effect.HATCHER) ||
+          player.effects.list.includes(Effect.BREEDER) ||
+          player.effects.list.includes(Effect.FARMER))
+      ) {
+        const chance = player.effects.list.includes(Effect.FARMER)
+          ? 0.7
+          : player.effects.list.includes(Effect.BREEDER)
+          ? 0.5
+          : 0.3
+        if (Math.random() < chance) {
+          const egg = PokemonFactory.createRandomEgg()
+          const x = this.room.getFirstAvailablePositionInBench(player.id)
+          egg.positionX = x !== undefined ? x : -1
+          egg.positionY = 0
+          player.board.set(egg.id, egg)
+        }
+      }
+
       if (player.alive) {
         const currentResult = player.getCurrentBattleResult()
 
@@ -1079,10 +1104,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             this.state.shop.assignFirstMythicalShop(player)
           } else if (this.state.stageLevel == 20) {
             this.state.shop.assignSecondMythicalShop(player)
-          } else if (this.state.stageLevel == 2) {
-            this.state.shop.assignShop(player, true)
-          } else if (this.state.stageLevel == 3) {
-            this.state.shop.assignShop(player, true)
           } else {
             this.state.shop.assignShop(player)
           }
@@ -1090,8 +1111,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           player.shopLocked = false
         }
         player.board.forEach((pokemon, key) => {
-          if (pokemon.fossilTimer !== undefined) {
-            if (pokemon.fossilTimer == 0) {
+          if (pokemon.evolutionTimer !== undefined) {
+            if (pokemon.evolutionTimer === 0) {
               let pokemonEvolved
               if (pokemon.name === Pkm.CLAMPERL) {
                 if (pokemon.positionX >= 4) {
@@ -1122,7 +1143,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               player.synergies.update(player.board)
               player.effects.update(player.synergies)
             } else {
-              pokemon.fossilTimer -= 1
+              pokemon.evolutionTimer -= 1
+              if (pokemon.name === Pkm.EGG) {
+                if (pokemon.evolutionTimer === 2) {
+                  pokemon.action = PokemonActionState.IDLE
+                } else if (pokemon.evolutionTimer === 1) {
+                  pokemon.action = PokemonActionState.IDLE
+                } else if (pokemon.evolutionTimer === 0) {
+                  pokemon.action = PokemonActionState.HOP
+                }
+              }
             }
           }
         })
@@ -1156,7 +1186,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       if (teamSize < player.experienceManager.level) {
         const numberOfPokemonsToMove = player.experienceManager.level - teamSize
         for (let i = 0; i < numberOfPokemonsToMove; i++) {
-          const boardSize = this.room.getBoardSizeWithoutDitto(player.board)
+          const boardSize = this.room.getBenchSizeWithoutNeutral(player.board)
           if (boardSize > 0) {
             const coordinate = this.room.getFirstAvailablePositionInTeam(
               player.id

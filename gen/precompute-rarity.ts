@@ -14,9 +14,9 @@ const data = {
   [Rarity.LEGENDARY]: [],
   [Rarity.MYTHICAL]: [],
   [Rarity.NEUTRAL]: [],
-  [Rarity.SUMMON]: []
+  [Rarity.SUMMON]: [],
+  [Rarity.HATCH]: []
 }
-
 
 Object.keys(Rarity).forEach((rarity) => {
   const pokemonCandidates = new Array<Pokemon>()
@@ -27,7 +27,7 @@ Object.keys(Rarity).forEach((rarity) => {
     }
   })
   pokemonCandidates.sort(indexSort)
-  data[rarity] = pokemonCandidates.map(p=>p.name)
+  data[rarity] = pokemonCandidates.map((p) => p.name)
 })
 
 console.log(data)

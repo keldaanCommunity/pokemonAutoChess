@@ -42,6 +42,7 @@ import {
   Bounsweet,
   Braixen,
   Breloom,
+  Brionne,
   Bronzong,
   Bronzor,
   Budew,
@@ -70,6 +71,7 @@ import {
   Chikorita,
   Chimchar,
   Chinchou,
+  Cinderace,
   Clamperl,
   Clefable,
   Clefairy,
@@ -95,9 +97,12 @@ import {
   Diancie,
   Ditto,
   Doublade,
+  Dragapult,
   Dragonair,
   Dragonite,
+  Drakloak,
   Dratini,
+  Dreepy,
   Drifblim,
   Drifloon,
   Duosion,
@@ -105,6 +110,7 @@ import {
   Dusknoir,
   Duskull,
   Eevee,
+  Egg,
   Electabuzz,
   Electivire,
   Electrike,
@@ -146,6 +152,9 @@ import {
   Goodra,
   Goomy,
   Gorebyss,
+  Gothita,
+  Gothitelle,
+  Gothorita,
   Gourgeist,
   Granbull,
   Graveler,
@@ -299,15 +308,18 @@ import {
   Poliwhirl,
   Ponyta,
   Poochyena,
+  Popplio,
   Porygon,
   Porygon2,
   PorygonZ,
   PrimalGroudon,
   PrimalKyogre,
+  Primarina,
   Prinplup,
   Pumpkaboo,
   Pupitar,
   Quilava,
+  Raboot,
   Raichu,
   Raikou,
   Ralts,
@@ -340,11 +352,14 @@ import {
   Sceptile,
   Scizor,
   Scolipede,
+  Scorbunny,
   Scyther,
   Seadra,
   Sealeo,
   Seedot,
   Seismitoad,
+  Serperior,
+  Servine,
   Seviper,
   Sewaddle,
   Shaymin,
@@ -365,6 +380,7 @@ import {
   Slugma,
   Smoochum,
   Sneasel,
+  Snivy,
   Snom,
   Snorlax,
   Snorunt,
@@ -450,14 +466,22 @@ import {
   Zweilous
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
-import { Emotion } from "../types"
-import { Rarity } from "../types/enum/Game"
+import { Emotion, NUMBER_OF_TURNS_TO_EVOLVE } from "../types"
+import { PokemonActionState, Rarity } from "../types/enum/Game"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
 import { PkmCost } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
+
+export const ObtainableEgg = new Array<Pkm>(
+  Pkm.GOTHITA,
+  Pkm.DREEPY,
+  Pkm.SNIVY,
+  Pkm.SCORBUNNY,
+  Pkm.POPPLIO
+)
 
 export default class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level: number): MapSchema<Pokemon> {
@@ -1557,6 +1581,38 @@ export default class PokemonFactory {
         return new Wailmer(s, e)
       case Pkm.WAILORD:
         return new Wailord(s, e)
+      case Pkm.DREEPY:
+        return new Dreepy(s, e)
+      case Pkm.DRAKLOAK:
+        return new Drakloak(s, e)
+      case Pkm.DRAGAPULT:
+        return new Dragapult(s, e)
+      case Pkm.SNIVY:
+        return new Snivy(s, e)
+      case Pkm.SERVINE:
+        return new Servine(s, e)
+      case Pkm.SERPERIOR:
+        return new Serperior(s, e)
+      case Pkm.POPPLIO:
+        return new Popplio(s, e)
+      case Pkm.BRIONNE:
+        return new Brionne(s, e)
+      case Pkm.PRIMARINA:
+        return new Primarina(s, e)
+      case Pkm.GOTHITA:
+        return new Gothita(s, e)
+      case Pkm.GOTHORITA:
+        return new Gothorita(s, e)
+      case Pkm.GOTHITELLE:
+        return new Gothitelle(s, e)
+      case Pkm.SCORBUNNY:
+        return new Scorbunny(s, e)
+      case Pkm.RABOOT:
+        return new Raboot(s, e)
+      case Pkm.CINDERACE:
+        return new Cinderace(s, e)
+      case Pkm.EGG:
+        return new Egg(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
@@ -1573,6 +1629,14 @@ export default class PokemonFactory {
   static getPkmIndexFromName(name: Pkm) {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
     return pokemon.index
+  }
+
+  static createRandomEgg() {
+    const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
+    egg.action = PokemonActionState.SLEEP
+    egg.evolution = pickRandomIn(ObtainableEgg)
+    egg.evolutionTimer = NUMBER_OF_TURNS_TO_EVOLVE
+    return egg
   }
 
   static getRandomFossil(board: MapSchema<Pokemon>) {

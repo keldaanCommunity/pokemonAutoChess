@@ -1,3 +1,4 @@
+Egg,0000/0004/0001/AnimData.xml
 mega-steelix,0208/0001/AnimData.xml
 mega-steelix,0208/0001/0001/AnimData.xml
 mega-scizor,0212/0001/AnimData.xml
@@ -75,3 +76,6 @@ kommo-o,0784/0000/0001/AnimData.xml
 mega-altaria,0334/0001/AnimData.xml
 mega-altaria,0334/0001/0001/AnimData.xml
 frosmoth,0873/0000/0001/AnimData.xml
+dragapult,0887/AnimData.xml
+dragapult,0887/0000/0001/AnimData.xml
+gothitelle,0576/0000/0001/AnimData.xml

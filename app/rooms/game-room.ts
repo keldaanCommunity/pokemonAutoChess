@@ -43,6 +43,7 @@ import { Title, Role } from "../types"
 import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 import BannedUser from "../models/mongo-models/banned-user"
 import { shuffleArray } from "../utils/random"
+import { Rarity } from "../types/enum/Game"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -589,7 +590,7 @@ export default class GameRoom extends Room<GameState> {
     return empty
   }
 
-  getFirstAvailablePositionInBoard(playerId: string) {
+  getFirstAvailablePositionInBench(playerId: string) {
     for (let i = 0; i < 8; i++) {
       if (this.isPositionEmpty(playerId, i, 0)) {
         return i
@@ -642,7 +643,7 @@ export default class GameRoom extends Room<GameState> {
 
         if (
           pokemonEvolutionName !== Pkm.DEFAULT &&
-          pokemon.name !== Pkm.DITTO
+          pokemon.rarity !== Rarity.NEUTRAL
         ) {
           player.board.forEach((pkm, id) => {
             if (pkm.index == pokemon.index) {
@@ -733,7 +734,7 @@ export default class GameRoom extends Room<GameState> {
     return numberOfPlayersAlive
   }
 
-  getBoardSize(board: MapSchema<Pokemon>) {
+  getBenchSize(board: MapSchema<Pokemon>) {
     let boardSize = 0
 
     board.forEach((pokemon, key) => {
@@ -745,11 +746,11 @@ export default class GameRoom extends Room<GameState> {
     return boardSize
   }
 
-  getBoardSizeWithoutDitto(board: MapSchema<Pokemon>) {
+  getBenchSizeWithoutNeutral(board: MapSchema<Pokemon>) {
     let boardSize = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.name != Pkm.DITTO) {
+      if (pokemon.positionY == 0 && pokemon.rarity !== Rarity.NEUTRAL) {
         boardSize++
       }
     })

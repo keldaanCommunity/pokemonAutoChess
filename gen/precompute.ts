@@ -11,133 +11,138 @@ const data = {
   NORMAL: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   GRASS: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   FIRE: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   WATER: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   ELECTRIC: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   FIGHTING: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   PSYCHIC: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   DARK: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   METAL: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   GROUND: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   POISON: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   DRAGON: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   FIELD: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   MONSTER: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   HUMAN: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   AQUATIC: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   BUG: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   FLYING: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   FLORA: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   MINERAL: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   GHOST: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   FAIRY: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   ICE: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   FOSSIL: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   SOUND: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
   ARTIFICIAL: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
-    additionalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   },
+  BABY: {
+    pokemons: new Array<string>(),
+    mythicalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
+  }
 }
 
 ;(Object.keys(Synergy) as Synergy[]).forEach((type) => {

@@ -14,7 +14,8 @@ export const PoolSizeRarity: { [key in Rarity]: number } = {
   [Rarity.LEGENDARY]: 10,
   [Rarity.MYTHICAL]: 29,
   [Rarity.NEUTRAL]: 29,
-  [Rarity.SUMMON]: 29
+  [Rarity.SUMMON]: 29,
+  [Rarity.HATCH]: 29
 }
 
 export const CommonShop = new Array<Pkm>(
@@ -264,25 +265,16 @@ export default class Shop {
     }
   }
 
-  assignShop(player: Player, addDitto?: boolean) {
+  assignShop(player: Player) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm))
 
-    if (addDitto) {
-      player.shop[0] = Pkm.DITTO
-
-      for (let i = 1; i < 6; i++) {
-        const pokemon = this.pickPokemon(player)
-        player.shop[i] = pokemon
+    for (let i = 0; i < 6; i++) {
+      let pokemon = this.pickPokemon(player)
+      const seed = Math.random()
+      if (seed > 0.994) {
+        pokemon = Pkm.DITTO
       }
-    } else {
-      for (let i = 0; i < 6; i++) {
-        let pokemon = this.pickPokemon(player)
-        const seed = Math.random()
-        if (seed > 0.994) {
-          pokemon = Pkm.DITTO
-        }
-        player.shop[i] = pokemon
-      }
+      player.shop[i] = pokemon
     }
   }
 

@@ -275,8 +275,8 @@ export default class Simulation extends Schema implements ISimulation {
     if (pokemon.items.has(Item.WONDER_BOX)) {
       pokemon.items.delete(Item.WONDER_BOX)
       const randomItems = ItemFactory.createWonderboxItems(pokemon.items)
-      randomItems.forEach(item => {
-         if (pokemon.items.size < 3) {
+      randomItems.forEach((item) => {
+        if (pokemon.items.size < 3) {
           pokemon.items.add(item)
         }
       })
@@ -291,7 +291,7 @@ export default class Simulation extends Schema implements ISimulation {
     if (pokemon.items.has(Item.SOUL_DEW)) {
       pokemon.status.triggerSoulDew(2000)
     }
-    
+
     if (pokemon.items.has(Item.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + pokemon.maxMana / 2)
     }
@@ -1040,6 +1040,24 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.GOOGLE_SPECS:
           if (types.includes(Synergy.ARTIFICIAL)) {
             pokemon.effects.push(Effect.GOOGLE_SPECS)
+          }
+          break
+
+        case Effect.HATCHER:
+          if (types.includes(Synergy.BABY)) {
+            pokemon.effects.push(Effect.HATCHER)
+          }
+          break
+
+        case Effect.BREEDER:
+          if (types.includes(Synergy.BABY)) {
+            pokemon.effects.push(Effect.BREEDER)
+          }
+          break
+
+        case Effect.FARMER:
+          if (types.includes(Synergy.BABY)) {
+            pokemon.effects.push(Effect.FARMER)
           }
           break
 
