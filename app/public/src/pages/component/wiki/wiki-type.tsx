@@ -6,17 +6,24 @@ import {
   SynergyDetail
 } from "../../../../../types/strings/Synergy"
 import { EffectName } from "../../../../../types/strings/Effect"
-import { TypeTrigger } from "../../../../../types/Config"
+import { TypeTrigger, RarityColor } from "../../../../../types/Config"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { SynergyDescription } from "../synergy/synergy-description"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import PokemonFactory from "../../../../../models/pokemon-factory";
+import { groupBy } from "../../../../../utils/array";
+import { Pokemon } from "../../../../../models/colyseus-models/pokemon";
+import { Rarity } from "../../../../../types/enum/Game";
 
 export default function WikiType(props: { type: Synergy }) {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>();
+  const firstStagePokemons = (PRECOMPUTED_TYPE_POKEMONS_ALL[props.type] as Pkm[])
+    .map(p => PokemonFactory.createPokemonFromName(p))
+    .filter(p => p.stars === 1 || p.rarity === Rarity.MYTHICAL)
+  const pokemonsPerRarity = groupBy(firstStagePokemons, p => p.rarity)
   return (
     <div style={{padding: "1em"}}>
       <div style={{ display: "flex", marginBottom: "0.5em" }}>
@@ -33,15 +40,20 @@ export default function WikiType(props: { type: Synergy }) {
           </div>
         )
       })}
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {(PRECOMPUTED_TYPE_POKEMONS_ALL[props.type] as Pkm[]).map((p) => {
-          return <img key={p} src={getPortraitSrc(PkmIndex[p])} alt={p} title={p}
-          data-tip data-for="pokemon-detail"
-          onMouseOver={() => { 
-            setHoveredPokemon(PokemonFactory.createPokemonFromName(p)) 
-          }} />
+      <table>
+        {(Object.values(Rarity) as Rarity[]).map(rarity => {
+          return <tr>
+            <td style={{ color: RarityColor[rarity] }}>{rarity}</td>
+            <td>{(pokemonsPerRarity[rarity] ?? []).map(p => {
+              return <img key={p.name} src={getPortraitSrc(p.index)} alt={p.name} title={p.name}
+                data-tip data-for="pokemon-detail"
+                onMouseOver={() => {
+                  setHoveredPokemon(p)
+                }} />})}
+            </td>
+          </tr>
         })}
-      </div>
+      </table>
       {hoveredPokemon && <ReactTooltip
         id="pokemon-detail"
         className="customeTheme game-pokemon-detail-tooltip"
