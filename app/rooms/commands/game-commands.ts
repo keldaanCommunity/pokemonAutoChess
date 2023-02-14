@@ -1148,9 +1148,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
                 if (pokemon.evolutionTimer === 2) {
                   pokemon.action = PokemonActionState.IDLE
                 } else if (pokemon.evolutionTimer === 1) {
-                  pokemon.action = PokemonActionState.HOP
+                  pokemon.action = PokemonActionState.IDLE
                 } else if (pokemon.evolutionTimer === 0) {
-                  pokemon.action = PokemonActionState.HURT
+                  pokemon.action = PokemonActionState.HOP
                 }
               }
             }

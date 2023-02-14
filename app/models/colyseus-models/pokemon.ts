@@ -7860,7 +7860,7 @@ export class Victini extends Pokemon {
       3,
       AttackSprite.FIRE_MELEE,
       AttackType.PHYSICAL,
-      1,
+      2,
       100,
       Ability.BURN,
       shiny,

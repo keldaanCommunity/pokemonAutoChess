@@ -45,7 +45,7 @@ export default class BoardManager {
       false
     )
 
-    this.animationManager.animatePokemon(pokemonUI, PokemonActionState.IDLE)
+    this.animationManager.animatePokemon(pokemonUI, pokemon.action)
     this.pokemons.set(pokemonUI.id, pokemonUI)
     if (pokemon.positionY != 0 && this.mode == "battle") {
       pokemonUI.setVisible(false)
