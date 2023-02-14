@@ -1045,7 +1045,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.THIEF]: {
-    eng: `Steal ennemy target item and deals [5,10,20] ${Damage.SPECIAL}`,
+    eng: `Steals all the target's items the holder can carry and deals [5,10,20] ${Damage.SPECIAL}`,
     esp: `Roba el objeto del enemigo e inflige 5,10,20 de daño físico`,
     fra: `Vole l item du pokémon ennemi et inflige 5,10,20 dégats physiques`,
     prt: ``
