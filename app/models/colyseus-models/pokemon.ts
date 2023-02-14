@@ -12,7 +12,7 @@ import {
 import { PkmCost } from "../../types/Config"
 import { Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
-import { Rarity, AttackType } from "../../types/enum/Game"
+import { Rarity, AttackType, PokemonActionState } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
 import { Synergy } from "../../types/enum/Synergy"
 
@@ -40,6 +40,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type({ set: "string" }) items = new SetSchema<Item>()
   @type("boolean") shiny: boolean
   @type("string") emotion: Emotion
+  @type("string") action: PokemonActionState = PokemonActionState.IDLE
   evolutionTimer: number | undefined
   final: boolean
   additional = false

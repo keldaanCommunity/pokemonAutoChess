@@ -150,6 +150,10 @@ export default class BoardManager {
           }
           break
 
+        case "action":
+          this.animationManager.animatePokemon(pokemonUI, change.value)
+          break
+
         default:
           pokemonUI[change.field] = change.value
           break

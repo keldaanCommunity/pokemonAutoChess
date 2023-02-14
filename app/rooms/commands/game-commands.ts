@@ -11,7 +11,11 @@ import { Client } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
 import { Title, FIGHTING_PHASE_DURATION } from "../../types"
 import { MapSchema } from "@colyseus/schema"
-import { GamePhaseState, Rarity } from "../../types/enum/Game"
+import {
+  GamePhaseState,
+  Rarity,
+  PokemonActionState
+} from "../../types/enum/Game"
 import {
   IDragDropMessage,
   IDragDropItemMessage,
@@ -1108,7 +1112,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         }
         player.board.forEach((pokemon, key) => {
           if (pokemon.evolutionTimer !== undefined) {
-            if (pokemon.evolutionTimer == 0) {
+            if (pokemon.evolutionTimer === 0) {
               let pokemonEvolved
               if (pokemon.name === Pkm.CLAMPERL) {
                 if (pokemon.positionX >= 4) {
@@ -1140,6 +1144,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               player.effects.update(player.synergies)
             } else {
               pokemon.evolutionTimer -= 1
+              if (pokemon.name === Pkm.EGG) {
+                if (pokemon.evolutionTimer === 2) {
+                  pokemon.action = PokemonActionState.IDLE
+                } else if (pokemon.evolutionTimer === 1) {
+                  pokemon.action = PokemonActionState.HOP
+                } else if (pokemon.evolutionTimer === 0) {
+                  pokemon.action = PokemonActionState.HURT
+                }
+              }
             }
           }
         })

@@ -173,7 +173,7 @@ export enum AttackSprite {
   ICE_RANGE = "ICE/range"
 }
 
-export const NUMBER_OF_TURNS_TO_EVOLVE = 4
+export const NUMBER_OF_TURNS_TO_EVOLVE = 3
 
 export enum ModalMode {
   EXPORT = "EXPORT",
@@ -303,6 +303,7 @@ export interface IPokemon {
   shiny: boolean
   emotion: Emotion
   final: boolean
+  action: PokemonActionState
 }
 
 export interface IExperienceManager {

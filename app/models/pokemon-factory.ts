@@ -467,7 +467,7 @@ import {
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, NUMBER_OF_TURNS_TO_EVOLVE } from "../types"
-import { Rarity } from "../types/enum/Game"
+import { PokemonActionState, Rarity } from "../types/enum/Game"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { Synergy } from "../types/enum/Synergy"
@@ -1633,6 +1633,7 @@ export default class PokemonFactory {
 
   static createRandomEgg() {
     const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
+    egg.action = PokemonActionState.SLEEP
     egg.evolution = pickRandomIn(ObtainableEgg)
     egg.evolutionTimer = NUMBER_OF_TURNS_TO_EVOLVE
     return egg
