@@ -14,6 +14,7 @@ import SynergyIcon from "../icons/synergy-icon"
 import { SynergyDescription } from "../synergy/synergy-description"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import PokemonFactory from "../../../../../models/pokemon-factory";
+import { Pokemon } from "../../../../../models/colyseus-models/pokemon";
 
 export default function WikiType(props: { type: Synergy }) {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>();
