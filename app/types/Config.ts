@@ -94,7 +94,8 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.ICE]: [2, 4],
   [Synergy.FOSSIL]: [2, 4, 6],
   [Synergy.SOUND]: [2, 4, 6],
-  [Synergy.ARTIFICIAL]: [2, 4, 6]
+  [Synergy.ARTIFICIAL]: [2, 4, 6],
+  [Synergy.BABY]: [3, 5, 7]
 }
 
 export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]

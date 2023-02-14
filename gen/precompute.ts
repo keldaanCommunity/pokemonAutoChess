@@ -137,6 +137,11 @@ const data = {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
     additionalPokemons: new Array<string>()
+  },
+  BABY: {
+    pokemons: new Array<string>(),
+    mythicalPokemons: new Array<string>(),
+    additionalPokemons: new Array<string>()
   }
 }
 

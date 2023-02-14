@@ -173,6 +173,8 @@ export enum AttackSprite {
   ICE_RANGE = "ICE/range"
 }
 
+export const NUMBER_OF_TURNS_TO_EVOLVE = 4
+
 export enum ModalMode {
   EXPORT = "EXPORT",
   IMPORT = "IMPORT"
@@ -297,7 +299,7 @@ export interface IPokemon {
   maxMana: number
   skill: Ability
   items: SetSchema<Item>
-  fossilTimer: number | undefined
+  evolutionTimer: number | undefined
   shiny: boolean
   emotion: Emotion
   final: boolean

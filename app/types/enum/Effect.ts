@@ -76,5 +76,8 @@ export enum Effect {
   PRESTO,
   DUBIOUS_DISC,
   LINK_CABLE,
-  GOOGLE_SPECS
+  GOOGLE_SPECS,
+  HATCHER,
+  BREEDER,
+  FARMER
 }

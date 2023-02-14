@@ -448,7 +448,22 @@ export enum Pkm {
   SNOM = "snom",
   FROSMOTH = "frosmoth",
   WAILMER = "wailmer",
-  WAILORD = "wailord"
+  WAILORD = "wailord",
+  DREEPY = "dreepy",
+  DRAKLOAK = "drakloak",
+  DRAGAPULT = "dragapult",
+  SNIVY = "snivy",
+  SERVINE = "servine",
+  SERPERIOR = "serperior",
+  SCORBUNNY = "scorbunny",
+  RABOOT = "raboot",
+  CINDERACE = "cinderace",
+  POPPLIO = "popplio",
+  BRIONNE = "brionne",
+  PRIMARINA = "primarina",
+  GOTHITA = "gothita",
+  GOTHORITA = "gothorita",
+  GOTHITELLE = "gothitelle"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -901,7 +916,22 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SNOM]: "0872",
   [Pkm.FROSMOTH]: "0873",
   [Pkm.WAILMER]: "0320",
-  [Pkm.WAILORD]: "0321"
+  [Pkm.WAILORD]: "0321",
+  [Pkm.DREEPY]: "0885",
+  [Pkm.DRAKLOAK]: "0886",
+  [Pkm.DRAGAPULT]: "0887",
+  [Pkm.SNIVY]: "0495",
+  [Pkm.SERVINE]: "0496",
+  [Pkm.SERPERIOR]: "0497",
+  [Pkm.SCORBUNNY]: "0813",
+  [Pkm.RABOOT]: "0814",
+  [Pkm.CINDERACE]: "0815",
+  [Pkm.POPPLIO]: "0728",
+  [Pkm.BRIONNE]: "0729",
+  [Pkm.PRIMARINA]: "0730",
+  [Pkm.GOTHITA]: "0574",
+  [Pkm.GOTHORITA]: "0575",
+  [Pkm.GOTHITELLE]: "0576"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1354,5 +1384,20 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SNOM]: Pkm.SNOM,
   [Pkm.FROSMOTH]: Pkm.SNOM,
   [Pkm.WAILMER]: Pkm.WAILMER,
-  [Pkm.WAILORD]: Pkm.WAILMER
+  [Pkm.WAILORD]: Pkm.WAILMER,
+  [Pkm.DREEPY]: Pkm.DREEPY,
+  [Pkm.DRAKLOAK]: Pkm.DREEPY,
+  [Pkm.DRAGAPULT]: Pkm.DREEPY,
+  [Pkm.SNIVY]: Pkm.SNIVY,
+  [Pkm.SERVINE]: Pkm.SNIVY,
+  [Pkm.SERPERIOR]: Pkm.SNIVY,
+  [Pkm.SCORBUNNY]: Pkm.SCORBUNNY,
+  [Pkm.RABOOT]: Pkm.SCORBUNNY,
+  [Pkm.CINDERACE]: Pkm.SCORBUNNY,
+  [Pkm.POPPLIO]: Pkm.POPPLIO,
+  [Pkm.BRIONNE]: Pkm.POPPLIO,
+  [Pkm.PRIMARINA]: Pkm.POPPLIO,
+  [Pkm.GOTHITA]: Pkm.GOTHITA,
+  [Pkm.GOTHORITA]: Pkm.GOTHITA,
+  [Pkm.GOTHITELLE]: Pkm.GOTHITA
 }
