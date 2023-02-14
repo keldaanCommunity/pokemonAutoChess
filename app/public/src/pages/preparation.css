@@ -19,6 +19,14 @@
     height: calc(100vh - 8vw);
 }
 
+.preparation-page .preparation-menu {
+    flex: 0 1 50em;
+}
+
+.preparation-page .user-chat {
+    flex: 0 1 30em;
+}
+
 @media(max-width: 640px){
     .preparation-page main {
         display: block;

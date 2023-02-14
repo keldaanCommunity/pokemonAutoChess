@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactElement, SetStateAction, useState } from "react"
+import React, { Dispatch, SetStateAction, useState } from "react"
 import ReactTooltip from "react-tooltip"
 import PreparationMenuUser from "./preparation-menu-user"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   addBot,
   changeRoomName,
+  changeRoomPassword,
   gameStart,
   toggleReady
 } from "../../../stores/NetworkStore"
@@ -16,6 +17,7 @@ import { BotDifficulty } from "../../../../../types/enum/Game"
 import { leavePreparation } from "../../../stores/PreparationStore"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import "./preparation-menu.css";
+import { cc } from "../../utils/jsx"
 
 export default function PreparationMenu(props: {
   setToGame: Dispatch<SetStateAction<boolean>>
@@ -28,6 +30,7 @@ export default function PreparationMenu(props: {
   )
   const name: string = useAppSelector((state) => state.preparation.name)
   const ownerId: string = useAppSelector((state) => state.preparation.ownerId)
+  const password: string | null = useAppSelector((state) => state.preparation.password)
   const uid: string = useAppSelector((state) => state.network.uid)
   const isOwner: boolean = useAppSelector(
     (state) => state.preparation.ownerId === state.network.uid
@@ -40,31 +43,35 @@ export default function PreparationMenu(props: {
     BotDifficulty.MEDIUM
   )
 
+  const isReady = users.find(user => user.id === uid)?.ready
+  const allUsersReady = users.every(user => user.ready)
+
+  function makePrivate(){
+    if(password === null){
+      const newPassword = prompt(`Enter a password for the room`)
+      dispatch(changeRoomPassword(newPassword))
+    } else {
+      dispatch(changeRoomPassword(null))
+    }
+  }
+
   async function startGame() {
-    if (room) {
-      let allUsersReady = true
-      users.forEach((user) => {
-        if (!user.ready) {
-          allUsersReady = false
-        }
-      })
-      if (allUsersReady) {
-        const token = await firebase.auth().currentUser?.getIdToken()
-        if (token) {
-          const r: Room<GameState> = await client.create("game", {
-            users: users,
-            idToken: token,
-            name: name,
-            preparationId: room.id
-          })
-          dispatch(gameStart(r.id))
-          localStorage.setItem("lastRoomId", r.id)
-          localStorage.setItem("lastSessionId", r.sessionId)
-          await room.leave()
-          r.connection.close()
-          dispatch(leavePreparation())
-          props.setToGame(true)
-        }
+    if (room && allUsersReady) {
+      const token = await firebase.auth().currentUser?.getIdToken()
+      if (token) {
+        const r: Room<GameState> = await client.create("game", {
+          users: users,
+          idToken: token,
+          name: name,
+          preparationId: room.id
+        })
+        dispatch(gameStart(r.id))
+        localStorage.setItem("lastRoomId", r.id)
+        localStorage.setItem("lastSessionId", r.sessionId)
+        await room.leave()
+        r.connection.close()
+        dispatch(leavePreparation())
+        props.setToGame(true)
       }
     }
   }
@@ -85,7 +92,13 @@ export default function PreparationMenu(props: {
         })}
       </div>
 
-      {(uid == ownerId) && (
+      {isOwner && <>
+        <div className="actions">
+          <label>
+            <input type="checkbox" className="nes-checkbox is-dark" checked={password != null} onChange={() => makePrivate()} />
+            <span>Private lobby {password && ` (Password: ${password})`}</span>
+          </label>
+        </div>
         <div className="actions">
           <input
             maxLength={30}
@@ -105,75 +118,72 @@ export default function PreparationMenu(props: {
             Change room name
           </button>
         </div>
-      )}
+        </>
+      }
 
       <div className="actions">
-        <button
-          data-tip
-          data-for={"difficulty-select"}
-          className="bubbly blue"
-          onClick={() => {
-            dispatch(addBot(botDifficulty))
-          }}
-        >
-          <ReactTooltip
-            id={"difficulty-select"}
-            className="customeTheme"
-            effect="solid"
-            place="top"
+        {isOwner ? <>
+          <button
+            data-tip
+            data-for={"difficulty-select"}
+            className="bubbly blue"
+            onClick={() => {
+              dispatch(addBot(botDifficulty))
+            }}
           >
-            <p>Easy: &lt;800</p>
-            <p>Normal: 800-1099</p>
-            <p>Hard: 1100-1400</p>
-            <p>Extreme: &gt;1400</p>
-          </ReactTooltip>
-          Add Bot
-        </button>
+            <ReactTooltip
+              id={"difficulty-select"}
+              className="customeTheme"
+              effect="solid"
+              place="top"
+            >
+              <p>Easy: &lt;800</p>
+              <p>Normal: 800-1099</p>
+              <p>Hard: 1100-1400</p>
+              <p>Extreme: &gt;1400</p>
+            </ReactTooltip>
+            Add Bot
+          </button>
 
-        <select
-          className="my-select"
-          defaultValue={botDifficulty}
-          onChange={(e) => {
-            setBotDifficulty(parseInt(e.target.value))
-          }}
-        >
-          <option value={BotDifficulty.EASY}>Easy</option>
-          <option value={BotDifficulty.MEDIUM}>Normal</option>
-          <option value={BotDifficulty.HARD}>Hard</option>
-          <option value={BotDifficulty.EXTREME}>Extreme</option>
-        </select>
+          <select
+            className="my-select"
+            defaultValue={botDifficulty}
+            onChange={(e) => {
+              setBotDifficulty(parseInt(e.target.value))
+            }}
+          >
+            <option value={BotDifficulty.EASY}>Easy</option>
+            <option value={BotDifficulty.MEDIUM}>Normal</option>
+            <option value={BotDifficulty.HARD}>Hard</option>
+            <option value={BotDifficulty.EXTREME}>Extreme</option>
+          </select>
+        </> : <p className="room-leader">Room leader: {ownerName} {password && <><br/>Room password: {password}</>}</p>}
 
         <div className="spacer" />
 
         <button
-          className="bubbly orange"
+          className={cc('bubbly','ready-button', isReady ? 'green' : 'orange')}
           style={{ marginLeft: "4em" }}
           onClick={() => {
             dispatch(toggleReady())
           }}
         >
-          Ready
+          Ready {isReady ? '✔' : '?'}
         </button>
-        <button
-          className={
-            ownerId == uid
-              ? "bubbly green"
-              : "bubbly green is-disabled"
-          }
-          onClick={ownerId == uid ? startGame : undefined}
-          data-tip
-          data-for={"start-game"}
-        >
-          Start Game
-          <ReactTooltip
-            id={"start-game"}
-            className="customeTheme"
-            effect="solid"
-            place="top"
+
+        { isOwner && <button
+            className={
+              ownerId == uid
+                ? "bubbly green"
+                : "bubbly green is-disabled"
+            }
+            onClick={ownerId == uid ? startGame : undefined}
+            data-tip
+            data-for={"start-game"}
           >
-            Owner: ({ownerName})
-          </ReactTooltip>
-        </button>
+            Start Game
+          </button>
+        }
       </div>
     </div>
   )

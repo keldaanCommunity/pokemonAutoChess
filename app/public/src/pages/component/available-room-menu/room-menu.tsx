@@ -3,7 +3,7 @@ import { RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { Dispatch, SetStateAction, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { ICustomLobbyState } from "../../../../../types"
+import { ICustomLobbyState, IPreparationMetadata } from "../../../../../types"
 import RoomItem from "./room-item"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { leaveLobby } from "../../../stores/LobbyStore"
@@ -48,12 +48,16 @@ export default function RoomMenu(props: {
     }
   }
 
-  async function join(id: string) {
+  async function join(selectedRoom: RoomAvailable<IPreparationMetadata>) {
     if (lobby && !props.toPreparation && !isJoining) {
+      if(selectedRoom.metadata?.password){
+        const password = prompt(`This room is private. Enter password`)
+        if(selectedRoom.metadata?.password != password) return alert(`Wrong password !`)
+      }
       setJoining(true)
       const token = await firebase.auth().currentUser?.getIdToken()
       if (token) {
-        const room: Room<PreparationState> = await client.joinById(id, {
+        const room: Room<PreparationState> = await client.joinById(selectedRoom.roomId, {
           idToken: token
         })
         localStorage.setItem("lastRoomId", room.id)

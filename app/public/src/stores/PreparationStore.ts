@@ -9,6 +9,7 @@ interface IUserPreparationState {
   ownerName: string
   messages: IMessage[]
   name: string
+  password: string | null
   user: GameUser | undefined
 }
 
@@ -19,7 +20,8 @@ const initialState: IUserPreparationState = {
   ownerName: "",
   messages: [],
   name: "",
-  user: undefined
+  user: undefined,
+  password: null
 }
 
 export const preparationSlice = createSlice({
@@ -64,6 +66,9 @@ export const preparationSlice = createSlice({
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload
     },
+    setPassword: (state, action: PayloadAction<string | null>) => {
+      state.password = action.payload
+    },
     leavePreparation: () => initialState
   }
 })
@@ -78,6 +83,7 @@ export const {
   setGameStarted,
   setOwnerId,
   setOwnerName,
+  setPassword,
   leavePreparation
 } = preparationSlice.actions
 

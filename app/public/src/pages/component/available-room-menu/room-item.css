@@ -16,3 +16,8 @@
 .room-item .room-name {
     flex: 1;
 }
+
+.room-item .lock-icon {
+    width: 2em;
+    height: 2em;
+}

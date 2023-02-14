@@ -29,3 +29,15 @@
     gap: 0.5em;
     margin-bottom: 0.5em;
 }
+
+.preparation-menu .actions .nes-checkbox + span::before {
+    top: calc(0.65em - 8px);
+}
+
+.preparation-menu .room-leader {
+    color: white;
+    font-size: 140%;
+    text-shadow: 2px 2px 2px black;
+    margin: 0 0.5em;
+    text-align: left;
+}

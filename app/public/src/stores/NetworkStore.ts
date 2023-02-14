@@ -157,6 +157,9 @@ export const networkSlice = createSlice({
     changeRoomName: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.CHANGE_ROOM_NAME, action.payload)
     },
+    changeRoomPassword: (state, action: PayloadAction<string | null>) => {
+      state.preparation?.send(Transfer.CHANGE_ROOM_PASSWORD, action.payload)
+    },
     changeSelectedEmotion: (
       state,
       action: PayloadAction<{ index: string; emotion: Emotion; shiny: boolean }>
@@ -226,6 +229,7 @@ export const {
   changeSelectedEmotion,
   buyEmotion,
   changeRoomName,
+  changeRoomPassword,
   gameStart,
   logIn,
   logOut,
