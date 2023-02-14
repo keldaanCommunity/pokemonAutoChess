@@ -133,6 +133,11 @@ export const SynergyName: {
     eng: "Artificial",
     esp: "Artificial",
     fra: "Artificial"
+  },
+  [Synergy.BABY]: {
+    eng: "Baby",
+    esp: "",
+    fra: ""
   }
 }
 
@@ -207,5 +212,6 @@ export const SynergyDetail: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.DUBIOUS_DISC,
     Effect.LINK_CABLE,
     Effect.GOOGLE_SPECS
-  ]
+  ],
+  [Synergy.BABY]: [Effect.HATCHER, Effect.BREEDER, Effect.FARMER]
 })

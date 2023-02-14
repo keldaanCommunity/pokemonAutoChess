@@ -45,7 +45,7 @@ export default class BoardManager {
       false
     )
 
-    this.animationManager.animatePokemon(pokemonUI, PokemonActionState.IDLE)
+    this.animationManager.animatePokemon(pokemonUI, pokemon.action)
     this.pokemons.set(pokemonUI.id, pokemonUI)
     if (pokemon.positionY != 0 && this.mode == "battle") {
       pokemonUI.setVisible(false)
@@ -148,6 +148,10 @@ export default class BoardManager {
           if (pokemonUI.positionY != 0 && this.mode == "battle") {
             pokemonUI.setVisible(false)
           }
+          break
+
+        case "action":
+          this.animationManager.animatePokemon(pokemonUI, change.value)
           break
 
         default:

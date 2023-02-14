@@ -13,7 +13,8 @@ export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.LEGENDARY]: 3,
   [Rarity.MYTHICAL]: 4,
   [Rarity.NEUTRAL]: 2,
-  [Rarity.SUMMON]: 1
+  [Rarity.SUMMON]: 1,
+  [Rarity.HATCH]: 4
 })
 
 export const PkmCost: { [key in Rarity]: number } = Object.freeze({
@@ -24,7 +25,8 @@ export const PkmCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.MYTHICAL]: 6,
   [Rarity.LEGENDARY]: 5,
   [Rarity.SUMMON]: 1,
-  [Rarity.NEUTRAL]: 1
+  [Rarity.NEUTRAL]: 1,
+  [Rarity.HATCH]: 4
 })
 
 export const EmotionCost: { [key in Emotion]: number } = {
@@ -92,7 +94,8 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.ICE]: [2, 4],
   [Synergy.FOSSIL]: [2, 4, 6],
   [Synergy.SOUND]: [2, 4, 6],
-  [Synergy.ARTIFICIAL]: [2, 4, 6]
+  [Synergy.ARTIFICIAL]: [2, 4, 6],
+  [Synergy.BABY]: [3, 5, 7]
 }
 
 export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
@@ -105,7 +108,8 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.EPIC]: "#ca6cee",
   [Rarity.LEGENDARY]: "#e6cb49",
   [Rarity.MYTHICAL]: "#ffc0cb",
-  [Rarity.SUMMON]: "#991f1f"
+  [Rarity.SUMMON]: "#991f1f",
+  [Rarity.HATCH]: "#b9915a"
 }
 
 export const RarityProbability: { [key in Rarity]: number } = {
@@ -115,8 +119,9 @@ export const RarityProbability: { [key in Rarity]: number } = {
   [Rarity.RARE]: 0.2,
   [Rarity.EPIC]: 0.15,
   [Rarity.LEGENDARY]: 0.05,
-  [Rarity.MYTHICAL]: 0.15,
-  [Rarity.SUMMON]: 0
+  [Rarity.MYTHICAL]: 0,
+  [Rarity.SUMMON]: 0,
+  [Rarity.HATCH]: 0
 }
 
 export const AttackTypeColor: { [key in AttackType] } = {
