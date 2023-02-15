@@ -1,5 +1,6 @@
 import React from "react"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
+import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { AttackTypeColor, RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
@@ -13,7 +14,7 @@ import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: { 
   pokemon: Pokemon,
-  pokemonConfig: IPokemonConfig | undefined
+  pokemonConfig?: IPokemonConfig
 }) {
   const pokemonStats = [
     { stat: Stat.HP, value: props.pokemon.hp },

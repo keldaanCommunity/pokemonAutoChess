@@ -12,11 +12,12 @@ import {
   OnRemoveBotCommand,
   InitializeBotsCommand,
   OnRoomNameCommand,
+  OnRoomPasswordCommand,
   OnKickPlayerCommand
 } from "./commands/preparation-commands"
 import { BotDifficulty } from "../types/enum/Game"
 import { IPreparationMetadata, Transfer } from "../types"
-import { components, operations } from "../api-v1/openapi"
+import { components } from "../api-v1/openapi"
 import { GameUser } from "../models/colyseus-models/game-user"
 import BannedUser from "../models/mongo-models/banned-user"
 
@@ -36,7 +37,14 @@ export default class PreparationRoom extends Room {
       type: "preparation"
     })
     updateLobby(this)
-    console.log(this.metadata)
+  }
+
+  async setPassword(password: string){
+    await this.setMetadata(<IPreparationMetadata>{
+      password: password,
+      type: "preparation"
+    })
+    updateLobby(this)
   }
 
   onCreate(options: { ownerId?: string; idToken: string; ownerName: string }) {
@@ -64,6 +72,14 @@ export default class PreparationRoom extends Room {
     this.onMessage(Transfer.CHANGE_ROOM_NAME, (client, message) => {
       try {
         this.dispatcher.dispatch(new OnRoomNameCommand(), { client, message })
+      } catch (error) {
+        console.log(error)
+      }
+    })
+
+    this.onMessage(Transfer.CHANGE_ROOM_PASSWORD, (client, message) => {
+      try {
+        this.dispatcher.dispatch(new OnRoomPasswordCommand(), { client, message })
       } catch (error) {
         console.log(error)
       }

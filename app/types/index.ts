@@ -119,6 +119,7 @@ export enum Transfer {
   ITEM = "ITEM",
   GAME_START = "GAME_START",
   CHANGE_ROOM_NAME = "CHANGE_ROOM_NAME",
+  CHANGE_ROOM_PASSWORD = "CHANGE_ROOM_PASSWORD",
   BUY_EMOTION = "BUY_EMOTION",
   BOOSTER_CONTENT = "BOOSTER_CONTENT",
   PASTEBIN_URL = "PASTEBIN_URL",
@@ -443,6 +444,7 @@ export interface ICount {
 
 export interface IPreparationMetadata {
   name: string
+  password: string | null
   type: string
 }
 

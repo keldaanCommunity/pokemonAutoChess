@@ -18,6 +18,7 @@ import {
   setName,
   setOwnerId,
   setOwnerName,
+  setPassword,
   setUser
 } from "../stores/PreparationStore"
 import GameState from "../../../rooms/states/game-state"
@@ -81,6 +82,8 @@ export default function Preparation() {
             dispatch(setOwnerName(change.value))
           } else if (change.field == "name") {
             dispatch(setName(change.value))
+          } else if (change.field == "password") {
+            dispatch(setPassword(change.value))
           }
         })
       }

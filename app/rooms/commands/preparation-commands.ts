@@ -127,6 +127,25 @@ export class OnRoomNameCommand extends Command<
   }
 }
 
+export class OnRoomPasswordCommand extends Command<
+  PreparationRoom,
+  {
+    client: Client
+    message: string
+  }
+  > {
+  execute({ client, message }) {
+    try {
+      if (client.auth.uid == this.state.ownerId && this.state.password != message) {
+        this.room.setPassword(message)
+        this.state.password = message
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 export class OnKickPlayerCommand extends Command<
   PreparationRoom,
   {

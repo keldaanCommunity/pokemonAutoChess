@@ -18,6 +18,7 @@ export default class PreparationState
   @type("string") ownerId: string
   @type("string") ownerName: string
   @type("string") name: string
+  @type("string") password: string | null
 
   constructor(ownerId: string | undefined, name: string) {
     super()
@@ -25,5 +26,6 @@ export default class PreparationState
     this.name = name
     this.gameStarted = false
     this.ownerName = ""
+    this.password = null
   }
 }

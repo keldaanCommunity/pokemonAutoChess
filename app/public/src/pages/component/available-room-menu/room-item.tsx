@@ -1,20 +1,22 @@
 import { RoomAvailable } from "colyseus.js"
 import React from "react"
 import { IPreparationMetadata } from "../../../../../types"
+import { cc } from "../../utils/jsx";
 import "./room-item.css";
 
 export default function RoomItem(props: {
   room: RoomAvailable<IPreparationMetadata>
-  click: (id: string) => Promise<void>
+  click: (room: RoomAvailable<IPreparationMetadata>) => Promise<void>
 }) {
   return (
     <div className="room-item">
       <span className="room-name">{props.room.metadata?.name}</span>
+      {props.room.metadata?.password && <img alt="Private" className="lock-icon" src="/assets/ui/lock.svg" />}
       <span>{props.room.clients}/{props.room.maxClients}</span>
       <button
-        className="bubbly green is-success"
+        className={cc("bubbly", props.room.metadata?.password ? 'orange' : 'green')}
         onClick={() => {
-          props.click(props.room.roomId)
+          props.click(props.room)
         }}
       >
         Join
