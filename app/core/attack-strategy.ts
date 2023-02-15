@@ -8,7 +8,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { Ability, AbilityStrategy } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
-import{ pickRandomIn, shuffleArray } from "../utils/random"
+import { pickRandomIn, shuffleArray } from "../utils/random"
 
 export class AttackStrategy {
   process(
@@ -386,16 +386,16 @@ export class CorruptedNatureStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    let damage = 10
+    let damage = 25
     if (pokemon.stars == 2) {
-      damage = 20
+      damage = 50
     } else if (pokemon.stars == 3) {
-      damage = 40
+      damage = 100
     }
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerWound(6000, cell.value, board)
+        cell.value.status.triggerWound(4000, cell.value, board)
         cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
     })
@@ -711,13 +711,13 @@ export class LeechSeedStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let duration = 3000
-    let heal = 10
+    let heal = 20
     if (pokemon.stars == 2) {
       duration = 6000
-      heal = 20
+      heal = 40
     } else if (pokemon.stars == 3) {
       duration = 6000
-      heal = 40
+      heal = 80
     }
     pokemon.handleHeal(heal, pokemon, true)
     target.status.triggerPoison(duration, target, pokemon, board)
@@ -871,13 +871,13 @@ export class ExplosionStrategy extends AttackStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        damage = 40
+        damage = 50
         break
       case 2:
-        damage = 80
+        damage = 100
         break
       case 3:
-        damage = 160
+        damage = 200
         break
       default:
         break
@@ -977,13 +977,13 @@ export class BonemerangStrategy extends AttackStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        damage = 30
+        damage = 40
         break
       case 2:
-        damage = 60
+        damage = 80
         break
       case 3:
-        damage = 120
+        damage = 160
         break
       default:
         break
@@ -1008,13 +1008,13 @@ export class GrowlStrategy extends AttackStrategy {
     let d = 0
     switch (pokemon.stars) {
       case 1:
-        d = 4000
+        d = 3000
         break
       case 2:
-        d = 8000
+        d = 6000
         break
       case 3:
-        d = 16000
+        d = 9000
         break
       default:
         break
@@ -1079,6 +1079,7 @@ export class DisarmingVoiceStrategy extends AttackStrategy {
       default:
         break
     }
+    heal = Math.round(heal + (heal * pokemon.spellDamage) / 200)
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team == tg.team) {
         tg.setMana(tg.mana + heal)
@@ -1232,16 +1233,16 @@ export class PetalDanceStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        damage = 30
+        damage = 25
         count = 2
         break
       case 2:
-        damage = 60
-        count = 3
+        damage = 50
+        count = 4
         break
       case 3:
-        damage = 120
-        count = 4
+        damage = 100
+        count = 6
         break
       default:
         break
@@ -1717,20 +1718,31 @@ export class PoisonStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let timer = 0
+    let count = 1
+
     switch (pokemon.stars) {
       case 1:
-        timer = 4000
+        timer = 3000
+        count = 1
         break
       case 2:
-        timer = 8000
+        timer = 6000
+        count = 2
         break
       case 3:
-        timer = 16000
+        timer = 9000
+        count = 3
         break
       default:
         break
     }
-    target.status.triggerPoison(timer, target, pokemon, board)
+
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team && count > 0) {
+        tg.status.triggerPoison(timer, tg, pokemon, board)
+        count--
+      }
+    })
   }
 }
 
@@ -1813,18 +1825,36 @@ export class SleepStrategy extends AttackStrategy {
     let timer = 0
     switch (pokemon.stars) {
       case 1:
-        timer = 3000
+        timer = 1500
         break
       case 2:
-        timer = 5000
+        timer = 3000
         break
       case 3:
-        timer = 10000
+        timer = 4500
         break
       default:
         break
     }
-    target.status.triggerSleep(timer, target)
+
+    let count = 2
+    const rank = new Array<PokemonEntity>()
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team) {
+        rank.push(tg)
+      }
+    })
+    rank.sort((a, b) => {
+      if (a.team === 0) {
+        return a.positionY - b.positionY
+      } else {
+        return b.positionY - a.positionY
+      }
+    })
+    for (let i = 0; i < count; i++) {
+      const tg = rank[i]
+      tg.status.triggerSleep(timer, tg)
+    }
   }
 }
 
@@ -1907,7 +1937,7 @@ export class SeismicTossStrategy extends AttackStrategy {
         damage += pokemon.stars
       }
     })
-    damage = damage * 5
+    damage = damage * 7
     target.handleSpellDamage(damage, board, AttackType.TRUE, pokemon)
   }
 }
@@ -2435,10 +2465,10 @@ export class DischargeStrategy extends AttackStrategy {
         damage = 40
         break
       case 2:
-        damage = 60
+        damage = 80
         break
       case 3:
-        damage = 80
+        damage = 160
         break
       default:
         break
@@ -2526,7 +2556,7 @@ export class BiteStrategy extends AttackStrategy {
         break
     }
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    pokemon.handleHeal(Math.floor(damage / 2), pokemon, true)
+    pokemon.handleHeal(Math.floor(0.33 * damage), pokemon, true)
   }
 }
 
@@ -2763,7 +2793,7 @@ export class TormentStrategy extends AttackStrategy {
         boost = 20
         break
       case 2:
-        boost = 30
+        boost = 40
         break
       case 3:
         boost = 60
@@ -2810,10 +2840,10 @@ export class DarkPulseStrategy extends AttackStrategy {
         damage = 30
         break
       case 2:
-        damage = 50
+        damage = 60
         break
       case 3:
-        damage = 90
+        damage = 120
         break
       default:
         break
@@ -2944,13 +2974,13 @@ export class LeechLifeStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        damage = 10
+        damage = 15
         break
       case 2:
-        damage = 20
+        damage = 30
         break
       case 3:
-        damage = 40
+        damage = 60
         break
       default:
         break
@@ -3085,13 +3115,13 @@ export class ThiefStrategy extends AttackStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        damage = 5
+        damage = 15
         break
       case 2:
-        damage = 10
+        damage = 30
         break
       case 3:
-        damage = 20
+        damage = 60
         break
       default:
         break
@@ -3339,7 +3369,7 @@ export class MetronomeStrategy extends AttackStrategy {
       EarthquakeStrategy,
       SteamEruptionStrategy
     ]
-    const strategy = new (pickRandomIn(skills))
+    const strategy = new (pickRandomIn(skills))()
     strategy.process(pokemon, state, board, target)
   }
 }

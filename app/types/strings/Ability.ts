@@ -685,7 +685,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.EXPLOSION]: {
-    eng: `Deals [40,80,160] ${Damage.SPECIAL}. Damage also the user.`,
+    eng: `Deals [50,100,200] ${Damage.SPECIAL}. Damage also the user.`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -709,7 +709,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.GROWL]: {
-    eng: `Apply wound status on the ennemy team for [4,8,16]s`,
+    eng: `Apply wound status on the ennemy team for [3,6,9]s`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -721,7 +721,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISARMING_VOICE]: {
-    eng: `Gives [10,20,40] ${Stat.MANA} to all allies`,
+    eng: `Gives [10,20,40] ${Stat.MANA} (affected by ${Stat.SPELL_POWER}) to all allies`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -751,7 +751,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.PETAL_DANCE]: {
-    eng: `Deals [30,60,120] ${Damage.SPECIAL} to [2,3,4] ennemies`,
+    eng: `Deals [25,50,100] ${Damage.SPECIAL} to [2,4,6] ennemies`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -799,7 +799,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.SLEEP]: {
-    eng: `Sleeps the target for [3,5,10] seconds`,
+    eng: `Sleeps 2 back lines for [1.5,3,4.5] seconds`,
     esp: `Duerme el objetivo durante 3,5,7 segundos`,
     fra: `Endors la cible durant 3,5,7 secondes`,
     prt: ``
@@ -841,7 +841,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.SEISMIC_TOSS]: {
-    eng: `Mono target attack that deals [5,10,15] ${Damage.TRUE} multiplied by the number of Pokemon in your team`,
+    eng: `Mono target attack that deals [7,14,28] ${Damage.TRUE} multiplied by the number of Pokemon in your team`,
     esp: `Ataque de objetivo mono que inflige daño real en función de lo grande que sea tu equipo.`,
     fra: `Attaque mono cible dont les dégats varient en fonction de la taille de l équipe.`,
     prt: ``
@@ -949,13 +949,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISCHARGE]: {
-    eng: `Area of effect attack that deals [20,40,80] ${Damage.SPECIAL}`,
+    eng: `Area of effect attack that deals [40,80,160] ${Damage.SPECIAL}`,
     esp: `Ataque en el área de efecto que causa 40,60,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 40,60,80 dégats spéciaux.`,
     prt: ``
   },
   [Ability.BITE]: {
-    eng: `50% Life steal mono target physical attack that deals [30,60,120] ${Damage.SPECIAL}.`,
+    eng: `30% Life steal mono target ${Damage.PHYSICAL} that deals [30,60,120] ${Damage.SPECIAL}.`,
     esp: `50% Vida robar mono objetivo de ataque físico que inflige 30,50,70 de daño.`,
     fra: `Attaque monocible avec 50% de vol de vie faisant 30,50,70 dégats spéciaux.`,
     prt: ``
@@ -985,7 +985,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.TORMENT]: {
-    eng: `Increase ${Stat.ATK_SPEED} by [20,30,60]%`,
+    eng: `Increase ${Stat.ATK_SPEED} by [20,40,60]%`,
     esp: `Aumenta la velocidad de ataque en un 20,30,40 %.`,
     fra: `Augmente la vitesse d attaque de 20,30,40%`,
     prt: ``
@@ -997,7 +997,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DARK_PULSE]: {
-    eng: `Life drain target attack that deals [30,50,90] ${Damage.SPECIAL}`,
+    eng: `Life drain target attack that deals [30,60,120] ${Damage.SPECIAL}`,
     esp: `Ataque al objetivo de drenaje de vida que causa 30,50,70 de daño especial`,
     fra: `Attaque vol de vie faisant 30,50,70 dégats spéciaux.`,
     prt: ``
@@ -1009,7 +1009,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BUG_BUZZ]: {
-    eng: `Mono target attack that does [20,40,80] ${Damage.SPECIAL}.`,
+    eng: `Mono target attack that does [15,30,60] ${Damage.TRUE}.`,
     esp: `Ataque de daño especial de un mono objetivo que hace 20,30,40.`,
     fra: `Attaque mono cible faisant 20,30,40 dégats spéciaux`,
     prt: ``
@@ -1021,7 +1021,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.LEECH_LIFE]: {
-    eng: `Area of effect life steal attack that deals [10,20,40] ${Damage.SPECIAL} around the target`,
+    eng: `Area of effect life steal attack that deals [15,30,60] ${Damage.SPECIAL} around the target`,
     esp: `Área de efecto robo de vida daño especial ataque 10,20,30 alrededor del objetivo`,
     fra: `Attaque vol de vie en AoE faisant 10,20,30 points de dégats.`,
     prt: ``
@@ -1045,7 +1045,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.THIEF]: {
-    eng: `Steals all the target's items the holder can carry and deals [5,10,20] ${Damage.SPECIAL}`,
+    eng: `Steals all the target's items the holder can carry and deals [15,30,60] ${Damage.SPECIAL}`,
     esp: `Roba el objeto del enemigo e inflige 5,10,20 de daño físico`,
     fra: `Vole l item du pokémon ennemi et inflige 5,10,20 dégats physiques`,
     prt: ``
@@ -1099,7 +1099,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   CORRUPTED_NATURE: {
-    eng: `Wound adjacent ennemies for 6 seconds and deals [10,20,40] life steal ${Damage.SPECIAL}`,
+    eng: `Wound adjacent ennemies for 4 seconds and deals [25,50,100] life steal ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1159,7 +1159,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   LEECH_SEED: {
-    eng: `Poison the target for [3,6,12]s, healing for [10,20,40] ${Stat.HP}`,
+    eng: `Poison the target for [3,6,12]s, healing for [20,40,80] ${Stat.HP}`,
     esp: ``,
     prt: ``,
     fra: ``
