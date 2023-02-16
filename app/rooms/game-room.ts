@@ -621,7 +621,7 @@ export default class GameRoom extends Room<GameState> {
     while (pokemon.types.length > 0) {
       pokemon.types.pop()
     }
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < pokemon.stars; i++) {
       const kv = rankArray.shift()
       if (kv) {
         pokemon.types.push(kv.s)

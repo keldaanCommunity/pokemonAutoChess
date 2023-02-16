@@ -1249,7 +1249,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.PROTEAN]: {
-    eng: `The pokemon acquires the typing of the three highest synergies on the team.`,
+    eng: `The pokemon acquires the typing of the [1,2,3] highest synergies on the team.`,
     esp: ``,
     prt: ``,
     fra: ``
