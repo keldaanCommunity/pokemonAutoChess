@@ -400,6 +400,7 @@ export interface IPokemonEntity {
   healDone: number
   shiny: boolean
   emotion: Emotion
+  baseAtk: number
 }
 
 export interface IStatus {
