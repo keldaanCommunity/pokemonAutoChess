@@ -899,29 +899,6 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
-      key: Ability.ORIGIN_PULSE,
-      frames: this.game.anims.generateFrameNames("june", {
-        start: 0,
-        end: 6,
-        prefix: `${Ability.ORIGIN_PULSE}/`
-      }),
-      duration: 1000,
-      repeat: -1,
-      yoyo: true
-    })
-
-    this.game.anims.create({
-      key: Ability.SEED_FLARE,
-      frames: this.game.anims.generateFrameNames("june", {
-        start: 0,
-        end: 9,
-        prefix: `${Ability.SEED_FLARE}/`
-      }),
-      duration: 1000,
-      repeat: 0
-    })
-
-    this.game.anims.create({
       key: Ability.ROAR_OF_TIME,
       frames: this.game.anims.generateFrameNames("ROAR_OF_TIME", {
         start: 0,
@@ -1081,6 +1058,29 @@ export default class AnimationManager {
       }),
       duration: 1000,
       repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.SEED_FLARE,
+      frames: this.game.anims.generateFrameNames(Ability.SEED_FLARE, {
+        start: 0,
+        end: 30,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.ORIGIN_PULSE,
+      frames: this.game.anims.generateFrameNames(Ability.ORIGIN_PULSE, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: -1,
+      yoyo: true
     })
 
     this.game.anims.create({

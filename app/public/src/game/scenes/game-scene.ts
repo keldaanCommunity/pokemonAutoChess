@@ -207,7 +207,6 @@ export default class GameScene extends Scene {
       "/assets/attacks/specials.json",
       "/assets/attacks"
     )
-    this.load.multiatlas("june", "/assets/attacks/june.json", "/assets/attacks")
     this.load.multiatlas(
       "ROAR_OF_TIME",
       "/assets/attacks/ROAR_OF_TIME.json",
@@ -288,6 +287,16 @@ export default class GameScene extends Scene {
     this.load.multiatlas(
       "SHADOW_BALL",
       "/assets/attacks/SHADOW_BALL.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
+      "SEED_FLARE",
+      "/assets/attacks/SEED_FLARE.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
+      "ORIGIN_PULSE",
+      "/assets/attacks/ORIGIN_PULSE.json",
       "/assets/attacks"
     )
     this.load.multiatlas(

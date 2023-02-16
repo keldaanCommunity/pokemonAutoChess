@@ -1020,17 +1020,17 @@ export default class Pokemon extends DraggableObject {
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
-              "specials",
-              `${Ability.ORIGIN_PULSE}/0`
+              Ability.ORIGIN_PULSE,
+              "000"
             )
             specialProjectile.setDepth(7)
-            specialProjectile.setScale(2, 2)
+            specialProjectile.setScale(4, 4)
             specialProjectile.anims.play(Ability.ORIGIN_PULSE)
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],
               y: coordinatesTarget[1],
-              duration: 2000,
+              duration: 1000,
               onComplete: () => {
                 specialProjectile.destroy()
               }
@@ -1045,11 +1045,11 @@ export default class Pokemon extends DraggableObject {
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
-              "specials",
-              `${Ability.SEED_FLARE}/000`
+              Ability.SEED_FLARE,
+              "000"
             )
             specialProjectile.setDepth(7)
-            specialProjectile.setScale(5, 5)
+            specialProjectile.setScale(3, 3)
             specialProjectile.anims.play(Ability.SEED_FLARE)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
