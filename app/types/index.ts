@@ -43,7 +43,7 @@ export const CDN_URL =
   "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master"
 
 export const USERNAME_REGEXP =
-  /^(?=.{4,20}$)(?:[a-zA-Z\d]+(?:(?:\.|-|_)[a-zA-Z\d])*)+$/
+  /^(?=.{4,20}$)(?:[\u0021-\uFFFF]+(?:(?:\.|-|_)[\u0021-\uFFFF])*)+$/
 
 export type DetailledPkm = { pkm: Pkm; shiny: boolean; emotion: Emotion }
 
