@@ -5402,7 +5402,7 @@ export class Azurill extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.AZURILL,
-      [Synergy.WATER, Synergy.FAIRY],
+      [Synergy.WATER, Synergy.FAIRY, Synergy.BABY],
       Rarity.COMMON,
       Pkm.MARILL,
       60,
