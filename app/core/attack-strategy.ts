@@ -1853,7 +1853,9 @@ export class SleepStrategy extends AttackStrategy {
     })
     for (let i = 0; i < count; i++) {
       const tg = rank[i]
-      tg.status.triggerSleep(timer, tg)
+      if (tg) {
+        tg.status.triggerSleep(timer, tg)
+      }
     }
   }
 }

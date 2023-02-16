@@ -301,11 +301,7 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.addAttack(atkBoost)
       pokemon.addSpellDamage(spellPowerBoost)
     }
-    if (pokemon.items.has(Item.FLAME_ORB)) {
-      pokemon.addAttack(pokemon.baseAtk)
-      pokemon.status.triggerBurn(60000, pokemon, pokemon, this.board)
-      pokemon.status.triggerWound(60000, pokemon, this.board)
-    }
+
     if (pokemon.items.has(Item.BRIGHT_POWDER)) {
       pokemon.status.triggerBrightPowder(4000)
     }
@@ -559,6 +555,23 @@ export default class Simulation extends Schema implements ISimulation {
       }
       if (isTapuLele && pokemon.types.includes(Synergy.PSYCHIC)) {
         pokemon.status.psychicField = true
+      }
+    })
+    this.blueTeam.forEach((p) => {
+      const pokemon = p as PokemonEntity
+      if (pokemon.items.has(Item.FLAME_ORB)) {
+        pokemon.addAttack(pokemon.baseAtk)
+        pokemon.status.triggerBurn(60000, pokemon, pokemon, this.board)
+        pokemon.status.triggerWound(60000, pokemon, this.board)
+      }
+    })
+
+    this.redTeam.forEach((p) => {
+      const pokemon = p as PokemonEntity
+      if (pokemon.items.has(Item.FLAME_ORB)) {
+        pokemon.addAttack(pokemon.baseAtk)
+        pokemon.status.triggerBurn(60000, pokemon, pokemon, this.board)
+        pokemon.status.triggerWound(60000, pokemon, this.board)
       }
     })
   }
