@@ -1664,7 +1664,11 @@ export default class PokemonFactory {
 
   static getSellPrice(name: Pkm): number {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
-    if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
+    if(name === Pkm.EGG){
+      return 2      
+    } else if(pokemon.rarity === Rarity.HATCH){
+      return [3,4,5][pokemon.stars-1]
+    } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
       return PkmCost[pokemon.rarity]
     } else {
       return PkmCost[pokemon.rarity] * pokemon.stars
