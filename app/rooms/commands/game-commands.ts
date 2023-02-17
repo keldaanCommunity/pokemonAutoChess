@@ -1142,9 +1142,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               player.effects.update(player.synergies)
             } else {
               if (pokemon.name === Pkm.EGG) {
-                if (pokemon.evolutionTimer >= 1) {
+                if (pokemon.evolutionTimer >= 2) {
                   pokemon.action = PokemonActionState.IDLE
-                } else if (pokemon.evolutionTimer === 0) {
+                } else if (pokemon.evolutionTimer === 1) {
                   pokemon.action = PokemonActionState.HOP
                 }
               }
