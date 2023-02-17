@@ -3,11 +3,7 @@
 
 import { Schema, type, ArraySchema, SetSchema } from "@colyseus/schema"
 import { nanoid } from "nanoid"
-import {
-  Emotion,
-  IPokemon,
-  AttackSprite
-} from "../../types"
+import { Emotion, IPokemon, AttackSprite } from "../../types"
 import { EvolutionTime, PkmCost } from "../../types/Config"
 import { Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
@@ -1238,8 +1234,8 @@ export class Ralts extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       AttackType.PHYSICAL,
       1,
-      100,
-      Ability.CALM_MIND,
+      110,
+      Ability.FUTURE_SIGHT,
       shiny,
       emotion,
       false
@@ -1262,8 +1258,8 @@ export class Kirlia extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       AttackType.PHYSICAL,
       2,
-      100,
-      Ability.CALM_MIND,
+      110,
+      Ability.FUTURE_SIGHT,
       shiny,
       emotion,
       false
@@ -1286,8 +1282,8 @@ export class Gardevoir extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       AttackType.PHYSICAL,
       3,
-      100,
-      Ability.CALM_MIND,
+      110,
+      Ability.FUTURE_SIGHT,
       shiny,
       emotion,
       true
@@ -11203,8 +11199,8 @@ export class Gothita extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       AttackType.PHYSICAL,
       1,
-      90,
-      Ability.CALM_MIND,
+      110,
+      Ability.FUTURE_SIGHT,
       shiny,
       emotion,
       false
@@ -11227,8 +11223,8 @@ export class Gothorita extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       AttackType.PHYSICAL,
       2,
-      90,
-      Ability.CALM_MIND,
+      110,
+      Ability.FUTURE_SIGHT,
       shiny,
       emotion,
       false
@@ -11251,8 +11247,8 @@ export class Gothitelle extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       AttackType.PHYSICAL,
       3,
-      90,
-      Ability.CALM_MIND,
+      110,
+      Ability.FUTURE_SIGHT,
       shiny,
       emotion,
       true

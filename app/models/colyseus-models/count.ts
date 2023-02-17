@@ -23,4 +23,5 @@ export default class Count extends Schema implements ICount {
   @type("uint8") spellBlockedCount = 0
   @type("uint8") manaBurnCount = 0
   @type("uint8") moneyCount = 0
+  @type("uint8") futureSightCount = 0
 }

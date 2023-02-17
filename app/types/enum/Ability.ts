@@ -106,7 +106,8 @@ import {
   AppleAcidStrategy,
   ShadowBallStrategy,
   DiveStrategy,
-  SpikeArmorStrategy
+  SpikeArmorStrategy,
+  FutureSightStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -217,7 +218,8 @@ export enum Ability {
   APPLE_ACID = "APPLE_ACID",
   SHADOW_BALL = "SHADOW_BALL",
   DIVE = "DIVE",
-  SPIKE_ARMOR = "SPIKE_ARMOR"
+  SPIKE_ARMOR = "SPIKE_ARMOR",
+  FUTURE_SIGHT = "FUTURE_SIGHT"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -328,5 +330,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.APPLE_ACID]: new AppleAcidStrategy(),
   [Ability.SHADOW_BALL]: new ShadowBallStrategy(),
   [Ability.DIVE]: new DiveStrategy(),
-  [Ability.SPIKE_ARMOR]: new SpikeArmorStrategy()
+  [Ability.SPIKE_ARMOR]: new SpikeArmorStrategy(),
+  [Ability.FUTURE_SIGHT]: new FutureSightStrategy()
 }

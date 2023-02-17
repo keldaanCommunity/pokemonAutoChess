@@ -338,17 +338,17 @@ export const EffectDescription: {
     fra: `Give a protection effect for 1sec when the pokemon fell under 20% ${Stat.HP}`
   },
   [Effect.FEATHER_DANCE]: {
-    eng: `Give a protection effect for 2sec when the pokemon fell under 40% ${Stat.HP}`,
+    eng: `Give a protection effect for 1.5sec when the pokemon fell under 40% ${Stat.HP}`,
     esp: `Give a protection effect for 1sec when the pokemon fell under 40% ${Stat.HP}`,
     fra: `Give a protection effect for 1sec when the pokemon fell under 40% ${Stat.HP}`
   },
   [Effect.MAX_AIRSTREAM]: {
-    eng: `Give a protection effect for 3sec when the pokemon fell under 50% ${Stat.HP}`,
+    eng: `Give a protection effect for 2sec when the pokemon fell under 50% ${Stat.HP}`,
     esp: `Give a protection effect for 2sec when the pokemon fell under 50% ${Stat.HP}`,
     fra: `Give a protection effect for 2sec when the pokemon fell under 50% ${Stat.HP}`
   },
   [Effect.MAX_GUARD]: {
-    eng: `Give a protection effect for 4sec when the pokemon fell under 50% ${Stat.HP}`,
+    eng: `Give a protection effect for 2.5sec when the pokemon fell under 50% ${Stat.HP}`,
     esp: `Add a second protection effect at 30%`,
     fra: `Add a second protection effect at 30%`
   },

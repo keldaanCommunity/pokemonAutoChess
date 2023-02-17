@@ -650,6 +650,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: ``,
     prt: ``,
     fra: ``
+  },
+  [Ability.FUTURE_SIGHT]: {
+    eng: `Dive`,
+    esp: ``,
+    prt: ``,
+    fra: ``
   }
 }
 
@@ -1298,6 +1304,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.SPIKE_ARMOR]: {
     eng: `For 5 seconds, targets that melee attack this Pokémon are wounded and take damage equal to current defense.`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
+  [Ability.FUTURE_SIGHT]: {
+    eng: `Deals [15,30,60] ${Damage.SPECIAL} to 5 ennemies`,
     esp: ``,
     prt: ``,
     fra: ``

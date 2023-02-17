@@ -363,6 +363,25 @@ export default class Pokemon extends DraggableObject {
     })
   }
 
+  futureSightAnimation() {
+    const coordinates = transformAttackCoordinate(
+      this.positionX,
+      this.positionY
+    )
+    const specialProjectile = this.scene.add.sprite(
+      coordinates[0],
+      coordinates[1],
+      Ability.FUTURE_SIGHT,
+      "000"
+    )
+    specialProjectile.setDepth(7)
+    specialProjectile.setScale(2, 2)
+    specialProjectile.anims.play(Ability.FUTURE_SIGHT)
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      specialProjectile.destroy()
+    })
+  }
+
   fieldDeathAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
