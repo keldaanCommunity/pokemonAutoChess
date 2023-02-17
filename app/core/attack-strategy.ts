@@ -1597,6 +1597,22 @@ export class HealBlockStrategy extends AttackStrategy {
   }
 }
 
+export class SpikeArmorStrategy extends AttackStrategy {
+  constructor() {
+    super()
+  }
+
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    pokemon.status.triggerAbilityStatus(5000, Ability.SPIKE_ARMOR)
+  }
+}
+
 export class OriginPulseStrategy extends AttackStrategy {
   constructor() {
     super()

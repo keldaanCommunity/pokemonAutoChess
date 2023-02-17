@@ -645,6 +645,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
+  [Ability.SPIKE_ARMOR]: {
+    eng: `Spike Armor`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
   [Ability.FUTURE_SIGHT]: {
     eng: `Dive`,
     esp: ``,
@@ -1292,6 +1298,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.DIVE]: {
     eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40] ${Damage.SPECIAL} and freezing all adjacent units for [1.5,3,6] seconds`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
+  [Ability.SPIKE_ARMOR]: {
+    eng: `For 5 seconds, targets that melee attack this Pokémon are wounded and take damage equal to current defense.`,
     esp: ``,
     prt: ``,
     fra: ``

@@ -349,6 +349,8 @@ import {
   Salazzle,
   Samurott,
   Sandile,
+  Sandshrew,
+  Sandslash,
   Sceptile,
   Scizor,
   Scolipede,
@@ -1611,6 +1613,10 @@ export default class PokemonFactory {
         return new Raboot(s, e)
       case Pkm.CINDERACE:
         return new Cinderace(s, e)
+      case Pkm.SANDSHREW:
+        return new Sandshrew(s, e)
+      case Pkm.SANDSLASH:
+        return new Sandslash(s, e)
       case Pkm.EGG:
         return new Egg(s, e)
       case Pkm.DEFAULT:

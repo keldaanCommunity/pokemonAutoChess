@@ -463,7 +463,9 @@ export enum Pkm {
   PRIMARINA = "primarina",
   GOTHITA = "gothita",
   GOTHORITA = "gothorita",
-  GOTHITELLE = "gothitelle"
+  GOTHITELLE = "gothitelle",
+  SANDSHREW = "sandshrew",
+  SANDSLASH = "sandslash"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -551,6 +553,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PICHU]: "0172",
   [Pkm.PIKACHU]: "0025",
   [Pkm.RAICHU]: "0026",
+  [Pkm.SANDSHREW]: "0027",
+  [Pkm.SANDSLASH]: "0028",
   [Pkm.MACHOP]: "0066",
   [Pkm.MACHOKE]: "0067",
   [Pkm.MACHAMP]: "0068",
@@ -1399,5 +1403,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PRIMARINA]: Pkm.POPPLIO,
   [Pkm.GOTHITA]: Pkm.GOTHITA,
   [Pkm.GOTHORITA]: Pkm.GOTHITA,
-  [Pkm.GOTHITELLE]: Pkm.GOTHITA
+  [Pkm.GOTHITELLE]: Pkm.GOTHITA,
+  [Pkm.SANDSHREW]: Pkm.SANDSHREW,
+  [Pkm.SANDSLASH]: Pkm.SANDSLASH
 }
