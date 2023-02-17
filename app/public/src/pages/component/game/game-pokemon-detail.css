@@ -80,7 +80,7 @@
   grid-area: ult;
 }
 
-.game-pokemon-detail-ult div:first-of-type {
+.game-pokemon-detail-ult .ability-name {
   background-color: #4f5160;
   text-transform: capitalize;
   font-variant: small-caps;
@@ -88,4 +88,10 @@
   margin: 0 -5px 4px -5px;
   font-size: 1.2em;
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+}
+
+.game-pokemon-detail-ult .custom-description {
+  background-color: #4f5160;
+  padding: 0.25em 0.5em;
+  margin: 0 -5px -5px -5px;
 }

@@ -13,6 +13,7 @@ import { StatLabel } from "../../../../types/strings/Stat"
 import React from "react"
 import ReactDOM from "react-dom"
 import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
+import { CustomPokemonDescription } from "../../../../types/strings/Pokemon"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -156,22 +157,37 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     }
     wrap.appendChild(statsElm)
 
-    const ult = document.createElement("div")
-    ult.className = "game-pokemon-detail-ult"
+    if(skill !== Ability.DEFAULT){
+      const ult = document.createElement("div")
+      ult.className = "game-pokemon-detail-ult"
+  
+      const ultNameWrap = document.createElement("div")
+      ultNameWrap.className = "ability-name"
+      const ultName = document.createElement("p")
+      ultName.textContent = AbilityName[skill]["eng"]
+  
+      const description = document.createElement("div")
+      ReactDOM.render(
+        <AbilityTooltip ability={skill} stars={stars} />,
+        description
+      )
+      ultNameWrap.appendChild(ultName)
+      ult.appendChild(ultNameWrap)
+      ult.appendChild(description)
+      wrap.appendChild(ult)
+    }
 
-    const ultNameWrap = document.createElement("div")
-    const ultName = document.createElement("p")
-    ultName.textContent = AbilityName[skill]["eng"]
-
-    const description = document.createElement("div")
-    ReactDOM.render(
-      <AbilityTooltip ability={skill} stars={stars} />,
-      description
-    )
-    ultNameWrap.appendChild(ultName)
-    ult.appendChild(ultNameWrap)
-    ult.appendChild(description)
-    wrap.appendChild(ult)
+    if(name in CustomPokemonDescription){
+      const ult = document.createElement("div")
+      ult.className = "game-pokemon-detail-ult"
+      const descriptionWrap = document.createElement("div")
+      descriptionWrap.className = "custom-description"
+      const description = document.createElement("p")
+      description.textContent = CustomPokemonDescription[name]["eng"]
+      descriptionWrap.appendChild(description)
+      ult.appendChild(descriptionWrap)
+      wrap.appendChild(ult)
+    }
 
     this.dom.appendChild(wrap)
     this.setElement(this.dom)
