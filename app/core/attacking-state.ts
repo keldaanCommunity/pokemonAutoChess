@@ -4,7 +4,8 @@ import { Effect } from "../types/enum/Effect"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
-import { PokemonActionState, Climate } from "../types/enum/Game"
+import { PokemonActionState } from "../types/enum/Game"
+import { Ability } from "../types/enum/Ability"
 
 export default class AttackingState extends PokemonState {
   update(
@@ -287,6 +288,11 @@ export default class AttackingState extends PokemonState {
           true,
           true
         )
+      }
+      
+      if(target.status.abilityStatus === Ability.SPIKE_ARMOR && pokemon.range === 1){
+        pokemon.status.triggerWound(5000, pokemon, board)
+        pokemon.handleDamage(target.def, board, AttackType.PHYSICAL, pokemon, false, true)
       }
 
       if (damage > 0) {

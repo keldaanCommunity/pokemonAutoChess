@@ -11280,3 +11280,51 @@ export class Gothitelle extends Pokemon {
     )
   }
 }
+
+export class Sandshrew extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SANDSHREW,
+      [Synergy.GROUND, Synergy.NORMAL],
+      Rarity.HATCH,
+      Pkm.SANDSLASH,
+      80,
+      5,
+      5,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      80,
+      Ability.SPIKE_ARMOR,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Sandslash extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SANDSLASH,
+      [Synergy.GROUND, Synergy.NORMAL],
+      Rarity.HATCH,
+      Pkm.DEFAULT,
+      150,
+      9,
+      10,
+      5,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      80,
+      Ability.SPIKE_ARMOR,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
