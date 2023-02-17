@@ -142,6 +142,11 @@ export const Probability: { [key: number]: number[] } = {
   9: [0.1, 0.19, 0.31, 0.3, 0.1]
 }
 
+export const EvolutionTime = {
+  EGG_HATCH: 3,
+  EVOLVE_HATCH: 4
+}
+
 export const NeutralStage: { turn: number; avatar: string }[] = [
   {
     turn: 1,

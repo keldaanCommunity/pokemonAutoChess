@@ -1108,6 +1108,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         }
         player.board.forEach((pokemon, key) => {
           if (pokemon.evolutionTimer !== undefined) {
+            pokemon.evolutionTimer -= 1
+
             if (pokemon.evolutionTimer === 0) {
               let pokemonEvolved
               if (pokemon.name === Pkm.CLAMPERL) {
@@ -1139,11 +1141,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               player.synergies.update(player.board)
               player.effects.update(player.synergies)
             } else {
-              pokemon.evolutionTimer -= 1
               if (pokemon.name === Pkm.EGG) {
-                if (pokemon.evolutionTimer === 2) {
-                  pokemon.action = PokemonActionState.IDLE
-                } else if (pokemon.evolutionTimer === 1) {
+                if (pokemon.evolutionTimer >= 1) {
                   pokemon.action = PokemonActionState.IDLE
                 } else if (pokemon.evolutionTimer === 0) {
                   pokemon.action = PokemonActionState.HOP

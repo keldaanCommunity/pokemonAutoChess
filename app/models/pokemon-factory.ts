@@ -466,13 +466,13 @@ import {
   Zweilous
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
-import { Emotion, NUMBER_OF_TURNS_TO_EVOLVE } from "../types"
+import { Emotion } from "../types"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
-import { PkmCost } from "../types/Config"
+import { PkmCost, EvolutionTime } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
 
 export const ObtainableEgg = new Array<Pkm>(
@@ -1635,7 +1635,7 @@ export default class PokemonFactory {
     const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
     egg.action = PokemonActionState.SLEEP
     egg.evolution = pickRandomIn(ObtainableEgg)
-    egg.evolutionTimer = NUMBER_OF_TURNS_TO_EVOLVE
+    egg.evolutionTimer = EvolutionTime.EGG_HATCH
     return egg
   }
 

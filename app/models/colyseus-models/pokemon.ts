@@ -6,10 +6,9 @@ import { nanoid } from "nanoid"
 import {
   Emotion,
   IPokemon,
-  AttackSprite,
-  NUMBER_OF_TURNS_TO_EVOLVE
+  AttackSprite
 } from "../../types"
-import { PkmCost } from "../../types/Config"
+import { EvolutionTime, PkmCost } from "../../types/Config"
 import { Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Rarity, AttackType, PokemonActionState } from "../../types/enum/Game"
@@ -91,7 +90,7 @@ export class Pokemon extends Schema implements IPokemon {
     })
 
     if (this.rarity === Rarity.HATCH && this.evolution != Pkm.DEFAULT) {
-      this.evolutionTimer = NUMBER_OF_TURNS_TO_EVOLVE
+      this.evolutionTimer = EvolutionTime.EVOLVE_HATCH
     }
   }
 }
