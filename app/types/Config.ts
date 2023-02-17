@@ -25,7 +25,7 @@ export const PkmCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.MYTHICAL]: 6,
   [Rarity.LEGENDARY]: 5,
   [Rarity.SUMMON]: 1,
-  [Rarity.NEUTRAL]: 1,
+  [Rarity.NEUTRAL]: 5,
   [Rarity.HATCH]: 4
 })
 
