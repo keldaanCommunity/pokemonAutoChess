@@ -439,6 +439,7 @@ export interface ICount {
   spellBlockedCount: number
   manaBurnCount: number
   moneyCount: number
+  futureSightCount: number
 }
 
 export interface IPreparationMetadata {
