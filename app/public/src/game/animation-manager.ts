@@ -1249,6 +1249,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.FUTURE_SIGHT,
+      frames: this.game.anims.generateFrameNames(Ability.FUTURE_SIGHT, {
+        start: 0,
+        end: 10,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: "MIND_BLOWN_SELF",
       frames: this.game.anims.generateFrameNames("MIND_BLOWN_SELF", {
         start: 0,

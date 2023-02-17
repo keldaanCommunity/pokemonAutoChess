@@ -255,6 +255,10 @@ export default class BattleManager {
             if (change.value != 0) {
               pkm.petalDanceAnimation()
             }
+          } else if (change.field == "futureSightCount") {
+            if (change.value != 0) {
+              pkm.futureSightAnimation()
+            }
           } else if (change.field == "earthquakeCount") {
             if (change.value != 0) {
               pkm.earthquakeAnimation()

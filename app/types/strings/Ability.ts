@@ -644,6 +644,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: ``,
     prt: ``,
     fra: ``
+  },
+  [Ability.FUTURE_SIGHT]: {
+    eng: `Dive`,
+    esp: ``,
+    prt: ``,
+    fra: ``
   }
 }
 
@@ -1286,6 +1292,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.DIVE]: {
     eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40] ${Damage.SPECIAL} and freezing all adjacent units for [1.5,3,6] seconds`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
+  [Ability.FUTURE_SIGHT]: {
+    eng: `Deals [15,30,60] ${Damage.SPECIAL} to 5 ennemies`,
     esp: ``,
     prt: ``,
     fra: ``

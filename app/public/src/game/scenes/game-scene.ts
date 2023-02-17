@@ -395,6 +395,11 @@ export default class GameScene extends Scene {
       "/assets/attacks"
     )
     this.load.multiatlas(
+      "FUTURE_SIGHT",
+      "/assets/attacks/FUTURE_SIGHT.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
       "pmd-replace",
       "/assets/attacks/pmd-replace.json",
       "/assets/attacks"

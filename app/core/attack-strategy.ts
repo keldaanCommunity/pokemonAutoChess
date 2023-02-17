@@ -1219,6 +1219,46 @@ export class EchoStrategy extends AttackStrategy {
   }
 }
 
+export class FutureSightStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+
+    let damage = 0
+    let count = 0
+
+    switch (pokemon.stars) {
+      case 1:
+        damage = 15
+        count = 5
+        break
+      case 2:
+        damage = 30
+        count = 5
+        break
+      case 3:
+        damage = 60
+        count = 5
+        break
+      default:
+        break
+    }
+
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team && count > 0) {
+        const cells = board.getAdjacentCells(tg.positionX, tg.positionY)
+        tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        count--
+        tg.count.futureSightCount++
+      }
+    })
+  }
+}
+
 export class PetalDanceStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
