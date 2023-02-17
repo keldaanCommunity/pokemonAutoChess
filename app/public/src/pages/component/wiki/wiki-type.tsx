@@ -41,8 +41,9 @@ export default function WikiType(props: { type: Synergy }) {
         )
       })}
       <table>
+        <tbody>
         {(Object.values(Rarity) as Rarity[]).map(rarity => {
-          return <tr>
+          return <tr key={rarity}>
             <td style={{ color: RarityColor[rarity] }}>{rarity}</td>
             <td>{(pokemonsPerRarity[rarity] ?? []).map(p => {
               return <img key={p.name} src={getPortraitSrc(p.index)} alt={p.name} title={p.name}
@@ -53,6 +54,7 @@ export default function WikiType(props: { type: Synergy }) {
             </td>
           </tr>
         })}
+        </tbody>
       </table>
       {hoveredPokemon && <ReactTooltip
         id="pokemon-detail"

@@ -1068,12 +1068,6 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.FARMER:
-          if (types.includes(Synergy.BABY)) {
-            pokemon.effects.push(Effect.FARMER)
-          }
-          break
-
         default:
           break
       }

@@ -968,26 +968,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   computeLife() {
     const isPVE = this.checkForPVE()
     this.state.players.forEach((player, key) => {
-      if (
-        this.room.getBenchSize(player.board) < 8 &&
-        (player.effects.list.includes(Effect.HATCHER) ||
-          player.effects.list.includes(Effect.BREEDER) ||
-          player.effects.list.includes(Effect.FARMER))
-      ) {
-        const chance = player.effects.list.includes(Effect.FARMER)
-          ? 0.7
-          : player.effects.list.includes(Effect.BREEDER)
-          ? 0.5
-          : 0.3
-        if (Math.random() < chance) {
-          const egg = PokemonFactory.createRandomEgg()
-          const x = this.room.getFirstAvailablePositionInBench(player.id)
-          egg.positionX = x !== undefined ? x : -1
-          egg.positionY = 0
-          player.board.set(egg.id, egg)
-        }
-      }
-
       if (player.alive) {
         const currentResult = player.getCurrentBattleResult()
 
@@ -1097,6 +1077,22 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           player.items.add(ItemFactory.createBasicRandomItem())
         }
 
+        if (
+          this.room.getBenchSize(player.board) < 8 &&
+          player.getLastBattleResult() == BattleResult.DEFEAT &&
+          (player.effects.list.includes(Effect.HATCHER) ||
+            player.effects.list.includes(Effect.BREEDER))
+        ) {
+          const chance = player.effects.list.includes(Effect.BREEDER) ? 1 : 0.2 * player.streak
+          if (Math.random() < chance) {
+            const egg = PokemonFactory.createRandomEgg()
+            const x = this.room.getFirstAvailablePositionInBench(player.id)
+            egg.positionX = x !== undefined ? x : -1
+            egg.positionY = 0
+            player.board.set(egg.id, egg)
+          }
+        }
+
         player.opponentName = ""
 
         if (!player.shopLocked) {
@@ -1112,6 +1108,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         }
         player.board.forEach((pokemon, key) => {
           if (pokemon.evolutionTimer !== undefined) {
+            pokemon.evolutionTimer -= 1
+
             if (pokemon.evolutionTimer === 0) {
               let pokemonEvolved
               if (pokemon.name === Pkm.CLAMPERL) {
@@ -1143,13 +1141,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               player.synergies.update(player.board)
               player.effects.update(player.synergies)
             } else {
-              pokemon.evolutionTimer -= 1
               if (pokemon.name === Pkm.EGG) {
-                if (pokemon.evolutionTimer === 2) {
+                if (pokemon.evolutionTimer >= 2) {
                   pokemon.action = PokemonActionState.IDLE
                 } else if (pokemon.evolutionTimer === 1) {
-                  pokemon.action = PokemonActionState.IDLE
-                } else if (pokemon.evolutionTimer === 0) {
                   pokemon.action = PokemonActionState.HOP
                 }
               }

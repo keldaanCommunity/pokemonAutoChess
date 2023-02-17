@@ -6,6 +6,7 @@ import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
 import { AbilityName } from "../../../../../types/strings/Ability"
 import { AttackTypeLabel } from "../../../../../types/strings/AttackType"
+import { CustomPokemonDescription } from "../../../../../types/strings/Pokemon"
 import { StatLabel } from "../../../../../types/strings/Stat"
 import { getPortraitSrc } from "../../../utils"
 import { AbilityTooltip } from "../ability/ability-tooltip"
@@ -72,12 +73,20 @@ export function GamePokemonDetail(props: {
       </div>
 
       {props.pokemon.skill !== Ability.DEFAULT && (
+      <div className="game-pokemon-detail-ult">
+        <div className="ability-name">
+          <p>{AbilityName[props.pokemon.skill].eng}</p>
+        </div>
+        <div>
+          <AbilityTooltip ability={props.pokemon.skill} />
+        </div>
+      </div>
+      )}
+
+      {props.pokemon.name in CustomPokemonDescription && (
         <div className="game-pokemon-detail-ult">
-          <div>
-            <p>{AbilityName[props.pokemon.skill].eng}</p>
-          </div>
-          <div>
-            <AbilityTooltip ability={props.pokemon.skill} />
+          <div className="custom-description">
+            <p>{CustomPokemonDescription[props.pokemon.name].eng}</p>
           </div>
         </div>
       )}

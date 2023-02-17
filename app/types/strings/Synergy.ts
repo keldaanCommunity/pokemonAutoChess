@@ -213,5 +213,5 @@ export const SynergyDetail: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.LINK_CABLE,
     Effect.GOOGLE_SPECS
   ],
-  [Synergy.BABY]: [Effect.HATCHER, Effect.BREEDER, Effect.FARMER]
+  [Synergy.BABY]: [Effect.HATCHER, Effect.BREEDER]
 })

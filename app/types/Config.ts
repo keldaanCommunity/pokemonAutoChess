@@ -25,7 +25,7 @@ export const PkmCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.MYTHICAL]: 6,
   [Rarity.LEGENDARY]: 5,
   [Rarity.SUMMON]: 1,
-  [Rarity.NEUTRAL]: 1,
+  [Rarity.NEUTRAL]: 5,
   [Rarity.HATCH]: 4
 })
 
@@ -95,14 +95,14 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.FOSSIL]: [2, 4, 6],
   [Synergy.SOUND]: [2, 4, 6],
   [Synergy.ARTIFICIAL]: [2, 4, 6],
-  [Synergy.BABY]: [3, 5, 7]
+  [Synergy.BABY]: [3, 5]
 }
 
 export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
 
 export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.COMMON]: "#9f9f9f",
-  [Rarity.NEUTRAL]: "#686d7d",
+  [Rarity.NEUTRAL]: "#888d9d",
   [Rarity.UNCOMMON]: "#3bc95e",
   [Rarity.RARE]: "#41bfcc",
   [Rarity.EPIC]: "#ca6cee",
@@ -140,6 +140,11 @@ export const Probability: { [key: number]: number[] } = {
   7: [0.24, 0.28, 0.31, 0.15, 0.02],
   8: [0.2, 0.24, 0.31, 0.2, 0.05],
   9: [0.1, 0.19, 0.31, 0.3, 0.1]
+}
+
+export const EvolutionTime = {
+  EGG_HATCH: 3,
+  EVOLVE_HATCH: 4
 }
 
 export const NeutralStage: { turn: number; avatar: string }[] = [

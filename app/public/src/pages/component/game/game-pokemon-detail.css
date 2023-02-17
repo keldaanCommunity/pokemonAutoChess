@@ -6,6 +6,7 @@
   color: #fff;
   font-size: 16px;
   display: grid;
+  position: relative;
   max-width: 320px;
   gap: 5px;
   grid-template-columns: 88px 1fr auto;
@@ -47,6 +48,17 @@
   box-sizing: content-box;
 }
 
+.game-pokemon-detail-portrait-hint {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 23px;
+  left: 7px;
+  border-radius: 50%;
+  image-rendering: pixelated;
+  filter: grayscale(1) contrast(0.2) brightness(1.8);
+}
+
 .game-pokemon-detail-types {
   display: flex;
 }
@@ -80,7 +92,7 @@
   grid-area: ult;
 }
 
-.game-pokemon-detail-ult div:first-of-type {
+.game-pokemon-detail-ult .ability-name {
   background-color: #4f5160;
   text-transform: capitalize;
   font-variant: small-caps;
@@ -88,4 +100,10 @@
   margin: 0 -5px 4px -5px;
   font-size: 1.2em;
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+}
+
+.game-pokemon-detail-ult .custom-description {
+  background-color: #4f5160;
+  padding: 0.25em 0.5em;
+  margin: 0 -5px -5px -5px;
 }

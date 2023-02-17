@@ -78,6 +78,5 @@ export enum Effect {
   LINK_CABLE,
   GOOGLE_SPECS,
   HATCHER,
-  BREEDER,
-  FARMER
+  BREEDER
 }
