@@ -57,7 +57,7 @@ export default class Status extends Schema implements IStatus {
     this.smokeCooldown = 0
   }
 
-  updateAllStatus(dt: number, pkm: PokemonEntity, board: Board){
+  updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board){
     if (
       pokemon.effects.includes(Effect.INGRAIN) ||
       pokemon.effects.includes(Effect.GROWTH) ||
