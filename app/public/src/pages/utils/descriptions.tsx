@@ -8,7 +8,6 @@ export const iconRegExp =
 
 export function addIconsToDescription(description: string, stars: number = 0){
   const matchIcon = description.match(iconRegExp)
-  console.log({ matchIcon })
   if(matchIcon === null) return description;
   const descriptionParts = description.split(iconRegExp)
   return descriptionParts.map((f, i) => {
@@ -37,7 +36,6 @@ export function addIconsToDescription(description: string, stars: number = 0){
             )
           } else if(/\[[^\]]+\]/.test(token)){
             const array = token.slice(1,-1).split(",")
-            console.log({ array })
             d = (
             <span>
                 {array.map((v, j) => {
