@@ -6,6 +6,7 @@
   color: #fff;
   font-size: 16px;
   display: grid;
+  position: relative;
   max-width: 320px;
   gap: 5px;
   grid-template-columns: 88px 1fr auto;
@@ -45,6 +46,17 @@
   border-radius: 8px;
   image-rendering: pixelated;
   box-sizing: content-box;
+}
+
+.game-pokemon-detail-portrait-hint {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 23px;
+  left: 7px;
+  border-radius: 50%;
+  image-rendering: pixelated;
+  filter: grayscale(1) contrast(0.2) brightness(1.8);
 }
 
 .game-pokemon-detail-types {

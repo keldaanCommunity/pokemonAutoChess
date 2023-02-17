@@ -273,7 +273,8 @@ export default class Pokemon extends DraggableObject {
             this.emotion,
             this.shiny,
             this.index,
-            this.stars
+            this.stars,
+            this.evolution
           )
         } else {
           this.detail = new PokemonDetail(
@@ -298,7 +299,8 @@ export default class Pokemon extends DraggableObject {
             this.emotion,
             this.shiny,
             this.index,
-            this.stars
+            this.stars,
+            this.evolution
           )
         }
         this.detail.setPosition(

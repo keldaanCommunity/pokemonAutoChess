@@ -1,10 +1,7 @@
 import { GameObjects } from "phaser"
 import { AttackType, Rarity, Stat } from "../../../../types/enum/Game"
 import { Emotion } from "../../../../types"
-import {
-  AbilityName,
-  AbilityDescription
-} from "../../../../types/strings/Ability"
+import { AbilityName } from "../../../../types/strings/Ability"
 import { Ability } from "../../../../types/enum/Ability"
 import { getPortraitSrc } from "../../utils"
 import { AttackTypeColor, RarityColor } from "../../../../types/Config"
@@ -14,6 +11,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
 import { CustomPokemonDescription } from "../../../../types/strings/Pokemon"
+import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -50,7 +48,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     emotion: Emotion,
     shiny: boolean,
     index: string,
-    stars: number
+    stars: number,
+    evolution: Pkm
   ) {
     super(scene, x, y)
 
@@ -94,6 +93,13 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     avatar.src = getPortraitSrc(index, shiny, emotion)
     avatar.style.borderColor = RarityColor[rarity]
     wrap.appendChild(avatar)
+
+    if(index === PkmIndex[Pkm.EGG]){
+      const eggHint = document.createElement("img")
+      eggHint.className = "game-pokemon-detail-portrait-hint"
+      eggHint.src = getPortraitSrc(PkmIndex[evolution])
+      wrap.appendChild(eggHint)
+    }
 
     const entry = document.createElement("div")
     entry.className = "game-pokemon-detail-entry"
