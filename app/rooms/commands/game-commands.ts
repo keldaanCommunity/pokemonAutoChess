@@ -968,26 +968,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   computeLife() {
     const isPVE = this.checkForPVE()
     this.state.players.forEach((player, key) => {
-      if (
-        this.room.getBenchSize(player.board) < 8 &&
-        (player.effects.list.includes(Effect.HATCHER) ||
-          player.effects.list.includes(Effect.BREEDER) ||
-          player.effects.list.includes(Effect.FARMER))
-      ) {
-        const chance = player.effects.list.includes(Effect.FARMER)
-          ? 0.7
-          : player.effects.list.includes(Effect.BREEDER)
-          ? 0.5
-          : 0.3
-        if (Math.random() < chance) {
-          const egg = PokemonFactory.createRandomEgg()
-          const x = this.room.getFirstAvailablePositionInBench(player.id)
-          egg.positionX = x !== undefined ? x : -1
-          egg.positionY = 0
-          player.board.set(egg.id, egg)
-        }
-      }
-
       if (player.alive) {
         const currentResult = player.getCurrentBattleResult()
 
@@ -1095,6 +1075,22 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           // const item = ItemFactory.createRandomItem();
           // const item = ItemFactory.createSpecificItems([ItemS.BLUE_ORB]);
           player.items.add(ItemFactory.createBasicRandomItem())
+        }
+
+        if (
+          this.room.getBenchSize(player.board) < 8 &&
+          player.getLastBattleResult() == BattleResult.DEFEAT &&
+          (player.effects.list.includes(Effect.HATCHER) ||
+            player.effects.list.includes(Effect.BREEDER))
+        ) {
+          const chance = player.effects.list.includes(Effect.BREEDER) ? 1 : 0.2 * player.streak
+          if (Math.random() < chance) {
+            const egg = PokemonFactory.createRandomEgg()
+            const x = this.room.getFirstAvailablePositionInBench(player.id)
+            egg.positionX = x !== undefined ? x : -1
+            egg.positionY = 0
+            player.board.set(egg.id, egg)
+          }
         }
 
         player.opponentName = ""

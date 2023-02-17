@@ -80,9 +80,8 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.DUBIOUS_DISC]: `Dubious Disc`,
   [Effect.LINK_CABLE]: `Link Cable`,
   [Effect.GOOGLE_SPECS]: `Google Specs`,
-  [Effect.HATCHER]: "Hatcher",
-  [Effect.BREEDER]: "Breeder",
-  [Effect.FARMER]: "Farmer"
+  [Effect.HATCHER]: `Hatcher`,
+  [Effect.BREEDER]: `Breeder`
 }
 
 export const EffectDescription: {
@@ -479,17 +478,12 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.HATCHER]: {
-    eng: `30% chance to find a pokemon Egg after each stage`,
+    eng: `20% chance per consecutive defeat to find a Pokemon Egg after each stage`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.BREEDER]: {
-    eng: `50% chance to find a pokemon Egg after each stage`,
-    esp: `?NONE?`,
-    fra: `?NONE?`
-  },
-  [Effect.FARMER]: {
-    eng: `70% chance to find a pokemon Egg after each stage`,
+    eng: `Get a Pokemon Egg after each defeat against a player`,
     esp: `?NONE?`,
     fra: `?NONE?`
   }
