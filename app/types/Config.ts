@@ -213,15 +213,15 @@ export const FlyingProtectThreshold: { [key in Effect]?: ThresholdDuration } = {
     threshold: 0.2
   },
   [Effect.FEATHER_DANCE]: {
-    duration: 2000,
+    duration: 1500,
     threshold: 0.4
   },
   [Effect.MAX_AIRSTREAM]: {
-    duration: 3000,
+    duration: 2000,
     threshold: 0.5
   },
   [Effect.MAX_GUARD]: {
-    duration: 4000,
+    duration: 2500,
     threshold: 0.5
   }
 }
