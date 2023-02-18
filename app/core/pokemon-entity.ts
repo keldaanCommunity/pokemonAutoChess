@@ -280,7 +280,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
   addAttack(value: number, spellDamageBoost?: boolean) {
     const boost = spellDamageBoost ? (value * this.spellDamage) / 100 : 0
-    this.atk = Math.min(50, Math.max(0, this.atk + Math.round(value + boost)))
+    this.atk = Math.max(0, this.atk + Math.round(value + boost))
   }
 
   addCritDamage(value: number, spellDamageBoost?: boolean) {

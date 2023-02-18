@@ -7903,7 +7903,7 @@ export class Arceus extends Pokemon {
       1,
       AttackSprite.DRAGON_MELEE,
       AttackType.PHYSICAL,
-      2,
+      3,
       100,
       Ability.PROTEAN,
       shiny,
