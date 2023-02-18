@@ -773,7 +773,7 @@ export default class GameRoom extends Room<GameState> {
     let pkm: Pokemon | undefined = undefined
     let found = false
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.name != Pkm.DITTO && !found) {
+      if (pokemon.positionY == 0 && pokemon.rarity != Rarity.NEUTRAL && !found) {
         found = true
         pkm = pokemon
       }
