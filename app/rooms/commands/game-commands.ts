@@ -210,7 +210,7 @@ export class OnDragDropCommand extends Command<
             pokemonToClone &&
             pokemonToClone.rarity !== Rarity.MYTHICAL &&
             pokemonToClone.rarity !== Rarity.NEUTRAL &&
-            !pokemonToClone.types.includes(Synergy.FOSSIL)
+            pokemonToClone.rarity !== Rarity.HATCH
           ) {
             dittoReplaced = true
             const replaceDitto = PokemonFactory.createPokemonFromName(
