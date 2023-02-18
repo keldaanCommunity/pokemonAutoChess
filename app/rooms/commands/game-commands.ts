@@ -923,7 +923,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     damage = damage * multiplier
     if (redTeam.size > 0) {
       redTeam.forEach((pokemon, key) => {
-        damage += pokemon.stars
+        if(!pokemon.isClone){
+          damage += pokemon.stars
+        }        
       })
     }
     damage = Math.max(Math.round(damage), 0)
