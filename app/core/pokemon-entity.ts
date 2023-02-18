@@ -72,6 +72,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   flyingProtection = false
   growGroundTimer = 0
   echo = 0
+  isClone = false
 
   constructor(
     pokemon: IPokemon,

@@ -425,28 +425,32 @@ export default class PokemonState {
                 PokemonFactory.createPokemonFromName(Pkm.ODDISH),
                 nearestAvailableCoordinate.x,
                 nearestAvailableCoordinate.y,
-                pokemon.team
+                pokemon.team,
+                true
               )
             } else if (pokemon.effects.includes(Effect.GLOOM_FLOWER)) {
               pokemon.simulation.addPokemon(
                 PokemonFactory.createPokemonFromName(Pkm.GLOOM),
                 nearestAvailableCoordinate.x,
                 nearestAvailableCoordinate.y,
-                pokemon.team
+                pokemon.team,
+                true
               )
             } else if (pokemon.effects.includes(Effect.VILE_FLOWER)) {
               pokemon.simulation.addPokemon(
                 PokemonFactory.createPokemonFromName(Pkm.VILEPLUME),
                 nearestAvailableCoordinate.x,
                 nearestAvailableCoordinate.y,
-                pokemon.team
+                pokemon.team,
+                true
               )
             } else if (pokemon.effects.includes(Effect.SUN_FLOWER)) {
               pokemon.simulation.addPokemon(
                 PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM),
                 nearestAvailableCoordinate.x,
                 nearestAvailableCoordinate.y,
-                pokemon.team
+                pokemon.team,
+                true
               )
             }
           }

@@ -119,18 +119,18 @@ export default class Simulation extends Schema implements ISimulation {
       if (blueEffects.includes(Effect.INFESTATION)) {
         const bug = PokemonFactory.createPokemonFromName(bugTeam[0].name)
         const coord = this.getFirstAvailablePlaceOnBoard(true)
-        this.addPokemon(bug, coord.x, coord.y, 0)
+        this.addPokemon(bug, coord.x, coord.y, 0, true)
       } else if (blueEffects.includes(Effect.HORDE)) {
         for (let i = 0; i < 2; i++) {
           const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
           const coord = this.getFirstAvailablePlaceOnBoard(true)
-          this.addPokemon(bug, coord.x, coord.y, 0)
+          this.addPokemon(bug, coord.x, coord.y, 0, true)
         }
       } else if (blueEffects.includes(Effect.HEART_OF_THE_SWARM)) {
         for (let i = 0; i < 4; i++) {
           const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
           const coord = this.getFirstAvailablePlaceOnBoard(true)
-          this.addPokemon(bug, coord.x, coord.y, 0)
+          this.addPokemon(bug, coord.x, coord.y, 0, true)
         }
       }
     }
@@ -152,18 +152,18 @@ export default class Simulation extends Schema implements ISimulation {
       if (redEffects.includes(Effect.INFESTATION)) {
         const bug = PokemonFactory.createPokemonFromName(bugTeam[0].name)
         const coord = this.getFirstAvailablePlaceOnBoard(false)
-        this.addPokemon(bug, coord.x, coord.y, 1)
+        this.addPokemon(bug, coord.x, coord.y, 1, true)
       } else if (redEffects.includes(Effect.HORDE)) {
         for (let i = 0; i < 2; i++) {
           const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
           const coord = this.getFirstAvailablePlaceOnBoard(false)
-          this.addPokemon(bug, coord.x, coord.y, 1)
+          this.addPokemon(bug, coord.x, coord.y, 1, true)
         }
       } else if (redEffects.includes(Effect.HEART_OF_THE_SWARM)) {
         for (let i = 0; i < 4; i++) {
           const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
           const coord = this.getFirstAvailablePlaceOnBoard(false)
-          this.addPokemon(bug, coord.x, coord.y, 1)
+          this.addPokemon(bug, coord.x, coord.y, 1, true)
         }
       }
     }
@@ -171,9 +171,9 @@ export default class Simulation extends Schema implements ISimulation {
     this.applyPostEffects()
   }
 
-  addPokemon(pokemon: IPokemon, x: number, y: number, team: number) {
+  addPokemon(pokemon: IPokemon, x: number, y: number, team: number, isClone = false) {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
-    // pokemonEntity.triggerSleep(5000);
+    pokemonEntity.isClone = isClone
     this.applyItemsEffects(pokemonEntity)
     this.board.setValue(
       pokemonEntity.positionX,

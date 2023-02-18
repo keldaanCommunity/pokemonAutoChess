@@ -120,7 +120,7 @@ export class BeatUpStrategy extends AttackStrategy {
     for (let i = 0; i < pokemon.stars; i++) {
       const houndour = PokemonFactory.createPokemonFromName(Pkm.HOUNDOUR)
       const coord = pokemon.simulation.getFirstAvailablePlaceOnBoard(true)
-      pokemon.simulation.addPokemon(houndour, coord.x, coord.y, pokemon.team)
+      pokemon.simulation.addPokemon(houndour, coord.x, coord.y, pokemon.team, true)
     }
   }
 }
@@ -1316,6 +1316,7 @@ export class ShadowCloneStrategy extends AttackStrategy {
         pokemon.team
       )
       clone.life = pokemon.life
+      clone.isClone = true
     }
   }
 }

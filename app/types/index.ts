@@ -399,6 +399,7 @@ export interface IPokemonEntity {
   shiny: boolean
   emotion: Emotion
   baseAtk: number
+  isClone: boolean
 }
 
 export interface IStatus {
