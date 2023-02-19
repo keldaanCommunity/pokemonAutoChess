@@ -7,7 +7,7 @@ import LeaderboardInfo, {
   ILeaderboardInfo
 } from "../../../models/colyseus-models/leaderboard-info"
 import { RoomAvailable } from "colyseus.js"
-import { IMessage, IPreparationMetadata, ISuggestionUser } from "../../../types"
+import { IGameMetadata, IMessage, IPreparationMetadata, ISuggestionUser } from "../../../types"
 import { IMeta } from "../../../models/mongo-models/meta"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
@@ -25,7 +25,8 @@ interface IUserLobbyState {
   user: ILobbyUser | undefined
   searchedUser: ILobbyUser | undefined
   tabIndex: number
-  allRooms: RoomAvailable[]
+  preparationRooms: RoomAvailable[]
+  gameRooms: RoomAvailable[]
   botList: { name: string; avatar: string; id: string; author: string }[]
   meta: IMeta[]
   metaItems: IItemsStatistic[]
@@ -49,7 +50,8 @@ const initialState: IUserLobbyState = {
   levelLeaderboard: [],
   user: undefined,
   tabIndex: 0,
-  allRooms: [],
+  preparationRooms: [],
+  gameRooms: [],
   searchedUser: undefined,
   botList: [],
   meta: [],
@@ -217,20 +219,24 @@ export const lobbySlice = createSlice({
       state.tabIndex = action.payload
     },
     addRoom: (state, action: PayloadAction<RoomAvailable>) => {
-      const metadata: IPreparationMetadata = action.payload.metadata
+      const metadata: IPreparationMetadata | IGameMetadata = action.payload.metadata
+      const rooms = metadata.type === "preparation" ? state.preparationRooms : state.gameRooms
       if (metadata && metadata.name) {
-        const roomIndex = state.allRooms.findIndex(
+        const roomIndex = rooms.findIndex(
           (room) => room.roomId === action.payload.roomId
         )
         if (roomIndex !== -1) {
-          state.allRooms[roomIndex] = action.payload
+          rooms[roomIndex] = action.payload
         } else {
-          state.allRooms.push(action.payload)
+          rooms.push(action.payload)
         }
       }
     },
     removeRoom: (state, action: PayloadAction<string>) => {
-      state.allRooms = state.allRooms.filter(
+      state.preparationRooms = state.preparationRooms.filter(
+        (room) => room.roomId !== action.payload
+      )
+      state.gameRooms = state.gameRooms.filter(
         (room) => room.roomId !== action.payload
       )
     },

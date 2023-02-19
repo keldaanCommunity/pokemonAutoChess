@@ -165,7 +165,7 @@ import { TypeTrigger } from "./types/Config"
 gameServer.define("after-game", AfterGameRoom)
 gameServer.define("lobby", CustomLobbyRoom)
 gameServer.define("room", PreprationRoom).enableRealtimeListing()
-gameServer.define("game", GameRoom)
+gameServer.define("game", GameRoom).enableRealtimeListing()
 
 // Start
 gameServer.listen(port)

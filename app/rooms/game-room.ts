@@ -29,6 +29,7 @@ import {
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
+  IGameMetadata,
   IPokemon,
   Transfer
 } from "../types"
@@ -64,6 +65,12 @@ export default class GameRoom extends Room<GameState> {
     idToken: string
   }) {
     console.log("create game room")
+    this.setMetadata(<IGameMetadata>{
+      name: options.name,
+      nbPlayers: Object.values(options.users).length,
+      stageLevel: 0,
+      type: "game"
+    })
     // console.log(options);
     this.setState(new GameState(options.preparationId, options.name))
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {

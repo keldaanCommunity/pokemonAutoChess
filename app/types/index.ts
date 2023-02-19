@@ -446,7 +446,14 @@ export interface ICount {
 export interface IPreparationMetadata {
   name: string
   password: string | null
-  type: string
+  type: "preparation"
+}
+
+export interface IGameMetadata {
+  name: string
+  nbPlayers: number
+  stageLevel: number
+  type: "game"
 }
 
 export interface ISuggestionUser {
