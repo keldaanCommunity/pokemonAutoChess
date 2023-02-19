@@ -196,7 +196,7 @@ export default function Lobby() {
             )
 
             room.onMessage("+", ([roomId, room]) => {
-              if (room.name == "room") {
+              if (room.name === "room" || room.name === "game") {
                 dispatch(addRoom(room))
               }
             })

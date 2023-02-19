@@ -2,21 +2,26 @@ import { Client, Room } from "colyseus.js"
 import { RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { Dispatch, SetStateAction, useState } from "react"
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { ICustomLobbyState, IPreparationMetadata } from "../../../../../types"
 import RoomItem from "./room-item"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { leaveLobby } from "../../../stores/LobbyStore"
-import "./room-menu.css"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
+import GameRoomItem from "./game-room-item"
+import "./room-menu.css"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
   setToPreparation: Dispatch<SetStateAction<boolean>>
 }) {
   const dispatch = useAppDispatch()
-  const allRooms: RoomAvailable[] = useAppSelector(
-    (state) => state.lobby.allRooms
+  const preparationRooms: RoomAvailable[] = useAppSelector(
+    (state) => state.lobby.preparationRooms
+  )
+  const gameRooms: RoomAvailable[] = useAppSelector(
+    (state) => state.lobby.gameRooms
   )
   const client: Client = useAppSelector((state) => state.network.client)
   const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
@@ -71,21 +76,36 @@ export default function RoomMenu(props: {
   }
 
   return (
-    <div className="nes-container room-menu">
-      <h1>Available Rooms</h1>
-      {allRooms.length === 0 && (
-        <p className="subtitle">Click on Create Room to play!</p>
-      )}
-      <ul className="hidden-scrollable">
-        {allRooms.map((r) => (
-          <li key={r.roomId}>
-            <RoomItem room={r} click={join} />
-          </li>
-        ))}
-      </ul>
-      <button onClick={create} className="bubbly green create-room-button">
-        Create Room
-      </button>
-    </div>
+    <Tabs className="nes-container room-menu">
+      <TabList>
+        <Tab>Available Rooms</Tab>
+        <Tab>In Game ({gameRooms.length})</Tab>
+      </TabList>
+
+      <TabPanel>
+        {preparationRooms.length === 0 && (
+          <p className="subtitle">Click on Create Room to play!</p>
+        )}
+        <ul className="hidden-scrollable">
+          {preparationRooms.map((r) => (
+            <li key={r.roomId}>
+              <RoomItem room={r} click={join} />
+            </li>
+          ))}
+        </ul>
+        <button onClick={create} className="bubbly green create-room-button">
+          Create Room
+        </button>
+      </TabPanel>
+      <TabPanel>
+        <ul className="hidden-scrollable">
+          {gameRooms.map((r) => (
+            <li key={r.roomId}>
+              <GameRoomItem room={r} />
+            </li>
+          ))}
+        </ul>
+      </TabPanel>
+    </Tabs>
   )
 }

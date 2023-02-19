@@ -7,7 +7,7 @@ import PokemonFactory from "../../models/pokemon-factory"
 import ItemFactory from "../../models/item-factory"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
-import { Client } from "colyseus"
+import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
 import { Title, FIGHTING_PHASE_DURATION } from "../../types"
 import { MapSchema } from "@colyseus/schema"
@@ -1224,6 +1224,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.state.phase = GamePhaseState.FIGHT
     this.state.time = FIGHTING_PHASE_DURATION
     this.state.stageLevel += 1
+    this.room.setMetadata({ stageLevel: this.state.stageLevel })
+    updateLobby(this.room)
     this.state.botManager.updateBots()
 
     const stageIndex = this.getPVEIndex(this.state.stageLevel)
