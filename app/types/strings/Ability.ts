@@ -1015,7 +1015,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BUG_BUZZ]: {
-    eng: `Mono target attack that does [15,30,60] ${Damage.TRUE}.`,
+    eng: `Mono target attack that does [15,30,60] ${Damage.SPECIAL}.`,
     esp: `Ataque de daño especial de un mono objetivo que hace 20,30,40.`,
     fra: `Attaque mono cible faisant 20,30,40 dégats spéciaux`,
     prt: ``
