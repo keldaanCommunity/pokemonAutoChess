@@ -157,21 +157,27 @@ export class OnPokemonPropositionCommand extends Command<
     const player = this.state.players.get(playerId)
     if (player) {
       if (player.pokemonsProposition.includes(pkm)) {
-        this.state.additionalPokemons.push(pkm)
-        this.state.shop.addAdditionalPokemon(pkm)
-        if (this.room.getBenchSize(player.board) < 8) {
-          const pokemon = PokemonFactory.createPokemonFromName(
-            pkm,
-            player.pokemonCollection.get(PkmIndex[pkm])
-          )
-          const x = this.room.getFirstAvailablePositionInBench(player.id)
-          pokemon.positionX = x !== undefined ? x : -1
-          pokemon.positionY = 0
-          player.board.set(pokemon.id, pokemon)
+        const index = player.pokemonsProposition.findIndex((p) => p === pkm)
+        if (index) {
+          player.pokemonsProposition.splice(index, 1)
+          this.state.additionalPokemons.push(pkm)
+          this.state.shop.addAdditionalPokemon(pkm)
+          if (this.room.getBenchSize(player.board) < 8) {
+            const pokemon = PokemonFactory.createPokemonFromName(
+              pkm,
+              player.pokemonCollection.get(PkmIndex[pkm])
+            )
+            const x = this.room.getFirstAvailablePositionInBench(player.id)
+            pokemon.positionX = x !== undefined ? x : -1
+            pokemon.positionY = 0
+            player.board.set(pokemon.id, pokemon)
+          }
         }
       }
-      while (player.pokemonsProposition.length > 0) {
-        player.pokemonsProposition.pop()
+      if (player.pokemonsProposition.length === 2) {
+        while (player.pokemonsProposition.length > 0) {
+          player.pokemonsProposition.pop()
+        }
       }
     }
   }
@@ -402,7 +408,6 @@ export class OnDragDropItemCommand extends Command<
       // SPECIAL CASES: create a new pokemon on item equip
       let newItemPokemon: Pokemon | undefined = undefined
       let equipAfterTransform = true
-      const fossil = PokemonFactory.getRandomFossil(player.board)
 
       switch (pokemon.name) {
         case Pkm.EEVEE:
@@ -466,22 +471,7 @@ export class OnDragDropItemCommand extends Command<
           }
           break
         case Pkm.DITTO:
-          equipAfterTransform = false
-          switch (item) {
-            case Item.FOSSIL_STONE:
-              if (fossil) {
-                newItemPokemon = PokemonFactory.transformPokemon(
-                  pokemon,
-                  fossil,
-                  player.pokemonCollection.get(PkmIndex[fossil])
-                )
-              }
-
-              break
-            default:
-              client.send(Transfer.DRAG_DROP_FAILED, message)
-              break
-          }
+          client.send(Transfer.DRAG_DROP_FAILED, message)
           break
         case Pkm.GROUDON:
           if (item == Item.RED_ORB) {
@@ -923,9 +913,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     damage = damage * multiplier
     if (redTeam.size > 0) {
       redTeam.forEach((pokemon, key) => {
-        if(!pokemon.isClone){
+        if (!pokemon.isClone) {
           damage += pokemon.stars
-        }        
+        }
       })
     }
     damage = Math.max(Math.round(damage), 0)
@@ -1085,7 +1075,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           (player.effects.list.includes(Effect.HATCHER) ||
             player.effects.list.includes(Effect.BREEDER))
         ) {
-          const chance = player.effects.list.includes(Effect.BREEDER) ? 1 : 0.2 * player.streak
+          const chance = player.effects.list.includes(Effect.BREEDER)
+            ? 1
+            : 0.2 * player.streak
           if (Math.random() < chance) {
             const egg = PokemonFactory.createRandomEgg()
             const x = this.room.getFirstAvailablePositionInBench(player.id)
@@ -1158,13 +1150,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     if (this.state.stageLevel === 5) {
       this.state.players.forEach((player: Player) => {
         if (player.isBot) {
-          const p = this.room.additionalPokemonsPool.pop()
-          if (p) {
-            this.state.additionalPokemons.push(p)
-            this.state.shop.addAdditionalPokemon(p)
+          for (let i = 0; i < 2; i++) {
+            const p = this.room.additionalPokemonsPool.pop()
+            if (p) {
+              this.state.additionalPokemons.push(p)
+              this.state.shop.addAdditionalPokemon(p)
+            }
           }
         } else {
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < 4; i++) {
             const p = this.room.additionalPokemonsPool.pop()
             if (p) {
               player.pokemonsProposition.push(p)
@@ -1249,11 +1243,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         }
 
         if (player.pokemonsProposition.length != 0) {
-          if (player.pokemonsProposition.length == 3) {
-            const i = player.pokemonsProposition.pop()
-            if (i) {
-              this.state.additionalPokemons.push(i)
-              this.state.shop.addAdditionalPokemon(i)
+          if (player.pokemonsProposition.length == 4) {
+            for (let i = 0; i < 2; i++) {
+              const pkm = player.pokemonsProposition.pop()
+              if (pkm) {
+                this.state.additionalPokemons.push(pkm)
+                this.state.shop.addAdditionalPokemon(pkm)
+              }
             }
           }
           while (player.pokemonsProposition.length > 0) {

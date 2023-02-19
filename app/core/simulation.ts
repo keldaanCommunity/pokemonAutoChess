@@ -171,7 +171,13 @@ export default class Simulation extends Schema implements ISimulation {
     this.applyPostEffects()
   }
 
-  addPokemon(pokemon: IPokemon, x: number, y: number, team: number, isClone = false) {
+  addPokemon(
+    pokemon: IPokemon,
+    x: number,
+    y: number,
+    team: number,
+    isClone = false
+  ) {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
     pokemonEntity.isClone = isClone
     this.applyItemsEffects(pokemonEntity)
@@ -605,24 +611,24 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.ANCIENT_POWER:
           if (types.includes(Synergy.FOSSIL)) {
-            pokemon.addCritChance(40)
-            pokemon.critDamage += 0.8
+            pokemon.addCritChance(20)
+            pokemon.addCritDamage(0.4)
             pokemon.effects.push(Effect.ANCIENT_POWER)
           }
           break
 
         case Effect.ELDER_POWER:
           if (types.includes(Synergy.FOSSIL)) {
-            pokemon.addCritChance(70)
-            pokemon.critDamage += 1.4
+            pokemon.addCritChance(35)
+            pokemon.addCritDamage(0.7)
             pokemon.effects.push(Effect.ELDER_POWER)
           }
           break
 
         case Effect.UNOWN_GATHERINGS:
           if (types.includes(Synergy.FOSSIL)) {
-            pokemon.addCritChance(100)
-            pokemon.critDamage += 2.5
+            pokemon.addCritChance(50)
+            pokemon.addCritDamage(1)
             pokemon.effects.push(Effect.UNOWN_GATHERINGS)
           }
           break
