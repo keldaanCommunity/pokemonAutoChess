@@ -284,18 +284,6 @@ export default function Game() {
 
       room.state.additionalPokemons.onAdd = (pkm) => {
         dispatch(setAdditionalPokemons(room.state.additionalPokemons))
-        if (pkm !== Pkm.DEFAULT) {
-          const i = React.createElement(
-            "img",
-            {
-              src: getPortraitSrc(PkmIndex[pkm])
-            },
-            null
-          )
-          room.state.players.forEach((player) => {
-            toast(i, { containerId: player.rank.toString() })
-          })
-        }
       }
 
       room.state.players.onAdd = (player) => {

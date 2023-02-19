@@ -3,7 +3,7 @@ import React, { Component } from "react"
 export default class WikiFaq extends Component {
   render() {
     return (
-      <div style={{padding: "1em"}}>
+      <div style={{ padding: "1em" }}>
         <h4 className="nes-text is-success">Is this an official game ?</h4>
         <p>
           No, this is a fan game; made by fans, for fans. All rights/credits to
@@ -28,8 +28,8 @@ export default class WikiFaq extends Component {
           bonus income per 10 gold saved. A maximum of 5 bonus income accrued at
           50 saved gold. You get 1 bonus gold if you win. If you win multiple
           times, you will also gain extra gold; one bonus gold for every
-          victory/defeat, up to 5 bonus gold for 5 streak wins / 5 streak defeat.
-          Wins/Defeats against PVE are not taken into account.
+          victory/defeat, up to 5 bonus gold for 5 streak wins / 5 streak
+          defeat. Wins/Defeats against PVE are not taken into account.
         </p>
         <h4 className="nes-text is-success">
           What is the purpose of the collection/booster ?
@@ -37,18 +37,17 @@ export default class WikiFaq extends Component {
         <p>
           When opening boosters, you get pokemon shards. Those shards are
           specific to every pokemon. In the collection tab, you can buy pokemon
-          emotions with those shards. You can see pokemon emotions as a
-          detailed customization. When selecting an emotion pokemon portrait,
-          the pokemon will appear everywhere with the same emotion portrait that
-          you have selected. Eveyone will see the emotion that you picked for
-          this pokemon. Moreover, if you have selected a shiny emotion, the
-          pokemon will appear shiny to everyone else.
+          emotions with those shards. You can see pokemon emotions as a detailed
+          customization. When selecting an emotion pokemon portrait, the pokemon
+          will appear everywhere with the same emotion portrait that you have
+          selected. Eveyone will see the emotion that you picked for this
+          pokemon. Moreover, if you have selected a shiny emotion, the pokemon
+          will appear shiny to everyone else.
         </p>
-        <h4 className="nes-text is-success">
-          How do I get new avatars ?
-        </h4>
+        <h4 className="nes-text is-success">How do I get new avatars ?</h4>
         <p>
-          When buying a pokemon emotion, it will be available in your profile avatar list.
+          When buying a pokemon emotion, it will be available in your profile
+          avatar list.
         </p>
         <h4 className="nes-text is-success">How do I gain boosters ?</h4>
         <p>You gain boosters each time you level up.</p>
@@ -61,7 +60,7 @@ export default class WikiFaq extends Component {
           It seems some sprites are missing ?
         </h4>
         <p>
-          Sprites of pokemon auto chess are based on this collaborative project: 
+          Sprites of pokemon auto chess are based on this collaborative project:
           <a href="https://github.com/PMDCollab/SpriteCollab">
             https://github.com/PMDCollab/SpriteCollab
           </a>
@@ -86,21 +85,15 @@ export default class WikiFaq extends Component {
         <p>
           Ditto creates a plain copy of the unit you hover and drop it over.
           Ditto can't fight. Each pokemon in shop has a 0.6% chance to be a
-          ditto at every roll. You can't copy fossils/mythical pokemon.
+          ditto at every roll. You can't copy mythical pokemon.
         </p>
         <h4 className="nes-text is-success">How do the items work ?</h4>
         <p>
           After winning a PVE round, you will get a random basic item and you
           will be able to choose from 3 choices another basic item that suits
-          you. You can combine two basic items to create a powerful tier 2
-          item. The crafting list of all items is available in the wiki, in the
-          items section.
-        </p>
-        <h4 className="nes-text is-success">How do the fossils work ?</h4>
-        <p>
-          Fossils are special pokemons. Give the basic item "fossil stone" to a
-          ditto and it will create a random fossil. Fossils evolve with time. It
-          takes 4 turns to evolve to the final stage.
+          you. You can combine two basic items to create a powerful tier 2 item.
+          The crafting list of all items is available in the wiki, in the items
+          section.
         </p>
         <h4 className="nes-text is-success">How do bots work ?</h4>
         <p>
@@ -136,8 +129,9 @@ export default class WikiFaq extends Component {
           What are the special damages and physical damages ?
         </h4>
         <p>
-        Auto attacks are mainly be Physical attack type, whild Spells are mainly
-        Special attack type. Some spells/abilities can however be true damage or physical.
+          Auto attacks are mainly be Physical attack type, whild Spells are
+          mainly Special attack type. Some spells/abilities can however be true
+          damage or physical.
         </p>
         <h4 className="nes-text is-success">
           Can you also tell me how defense works? Is it flat damage reduction?
@@ -149,27 +143,31 @@ export default class WikiFaq extends Component {
         </p>
         <h4 className="nes-text is-success">How much mana does a hit grant?</h4>
         <p>
-          10% of the damage after reduction for the pokemon being attacked, 5 mana for
-          the attacker
+          10% of the damage after reduction for the pokemon being attacked, 5
+          mana for the attacker
         </p>
         <h4 className="nes-text is-success">
-          Why do legendaries have scaled skill descriptions like 10/20/30 damage ?
-          Which one is the right value?
+          Why do legendaries have scaled skill descriptions like 10/20/30 damage
+          ? Which one is the right value?
         </h4>
-        <p>After Stage 10, it's the second value, after Turn 20, it's the third value</p>
+        <p>
+          After Stage 10, it's the second value, after Turn 20, it's the third
+          value
+        </p>
         <h4 className="nes-text is-success">
           How do I get primal Groudon / Kyogre / Rayquaza ?
         </h4>
         <p>
-          Give a delta orb to Rayquaza, a red orb to Groudon or a blue orb to Kyogre
-          to turn them into their primal form.
+          Give a delta orb to Rayquaza, a red orb to Groudon or a blue orb to
+          Kyogre to turn them into their primal form.
         </p>
         <h4 className="nes-text is-success">How do you get shiny ?</h4>
         <p>
-          So when you play games with 8 players/bots, you get experience. With enough
-          experience, you level up and get a booster pack. Each booster pack gives 
-          shards for random pokemon. Use these shards to purchase the shiny emotes of a pokemon
-          in the Collection page, then you will get that one pokemon as a shiny ingame.
+          So when you play games with 8 players/bots, you get experience. With
+          enough experience, you level up and get a booster pack. Each booster
+          pack gives shards for random pokemon. Use these shards to purchase the
+          shiny emotes of a pokemon in the Collection page, then you will get
+          that one pokemon as a shiny ingame.
         </p>
         <h4 className="nes-text is-success">How can i support the game ?</h4>
         <p>

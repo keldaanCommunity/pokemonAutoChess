@@ -8206,12 +8206,12 @@ export class Amaura extends Pokemon {
     super(
       Pkm.AMAURA,
       [Synergy.FOSSIL, Synergy.ICE],
-      Rarity.HATCH,
+      Rarity.EPIC,
       Pkm.AURORUS,
-      150,
-      10,
-      4,
-      5,
+      100,
+      7,
+      2,
+      3,
       1,
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
@@ -8220,7 +8220,8 @@ export class Amaura extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
-      false
+      false,
+      true
     )
   }
 }
@@ -8230,12 +8231,12 @@ export class Aurorus extends Pokemon {
     super(
       Pkm.AURORUS,
       [Synergy.FOSSIL, Synergy.ICE],
-      Rarity.HATCH,
+      Rarity.EPIC,
       Pkm.DEFAULT,
-      330,
-      16,
-      8,
-      10,
+      170,
+      12,
+      4,
+      5,
       1,
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
@@ -8244,6 +8245,7 @@ export class Aurorus extends Pokemon {
       Ability.ICICLE_CRASH,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8254,12 +8256,12 @@ export class Carbink extends Pokemon {
     super(
       Pkm.CARBINK,
       [Synergy.FOSSIL, Synergy.FAIRY],
-      Rarity.HATCH,
+      Rarity.EPIC,
       Pkm.DIANCIE,
-      130,
-      9,
-      4,
-      4,
+      90,
+      6,
+      2,
+      2,
       1,
       AttackSprite.FAIRY_MELEE,
       AttackType.PHYSICAL,
@@ -8268,7 +8270,8 @@ export class Carbink extends Pokemon {
       Ability.DIAMOND_STORM,
       shiny,
       emotion,
-      false
+      false,
+      true
     )
   }
 }
@@ -8278,12 +8281,12 @@ export class Diancie extends Pokemon {
     super(
       Pkm.DIANCIE,
       [Synergy.FOSSIL, Synergy.FAIRY],
-      Rarity.HATCH,
+      Rarity.EPIC,
       Pkm.DEFAULT,
-      270,
-      17,
-      7,
-      7,
+      170,
+      13,
+      3,
+      3,
       1,
       AttackSprite.FAIRY_MELEE,
       AttackType.PHYSICAL,
@@ -8292,6 +8295,7 @@ export class Diancie extends Pokemon {
       Ability.DIAMOND_STORM,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8302,11 +8306,11 @@ export class Anorith extends Pokemon {
     super(
       Pkm.ANORITH,
       [Synergy.FOSSIL, Synergy.BUG],
-      Rarity.HATCH,
+      Rarity.COMMON,
       Pkm.ARMALDO,
-      70,
-      10,
-      3,
+      60,
+      5,
+      2,
       1,
       1,
       AttackSprite.ROCK_MELEE,
@@ -8316,7 +8320,8 @@ export class Anorith extends Pokemon {
       Ability.ROCK_SMASH,
       shiny,
       emotion,
-      false
+      false,
+      true
     )
   }
 }
@@ -8326,12 +8331,12 @@ export class Armaldo extends Pokemon {
     super(
       Pkm.ARMALDO,
       [Synergy.FOSSIL, Synergy.BUG],
-      Rarity.HATCH,
+      Rarity.COMMON,
       Pkm.DEFAULT,
-      160,
-      16,
-      4,
+      110,
+      8,
       2,
+      1,
       1,
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
@@ -8340,6 +8345,7 @@ export class Armaldo extends Pokemon {
       Ability.ROCK_SMASH,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8350,10 +8356,10 @@ export class Archen extends Pokemon {
     super(
       Pkm.ARCHEN,
       [Synergy.FOSSIL, Synergy.FLYING],
-      Rarity.HATCH,
+      Rarity.RARE,
       Pkm.ARCHEOPS,
-      100,
-      12,
+      60,
+      6,
       2,
       1,
       1,
@@ -8364,7 +8370,8 @@ export class Archen extends Pokemon {
       Ability.ROCK_SMASH,
       shiny,
       emotion,
-      false
+      false,
+      true
     )
   }
 }
@@ -8374,10 +8381,10 @@ export class Archeops extends Pokemon {
     super(
       Pkm.ARCHEOPS,
       [Synergy.FOSSIL, Synergy.FLYING],
-      Rarity.HATCH,
+      Rarity.RARE,
       Pkm.DEFAULT,
-      180,
-      20,
+      120,
+      10,
       3,
       2,
       2,
@@ -8388,6 +8395,7 @@ export class Archeops extends Pokemon {
       Ability.ROCK_SMASH,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8398,10 +8406,10 @@ export class Shieldon extends Pokemon {
     super(
       Pkm.SHIELDON,
       [Synergy.FOSSIL, Synergy.METAL],
-      Rarity.HATCH,
+      Rarity.RARE,
       Pkm.BASTIODON,
-      120,
-      7,
+      90,
+      5,
       3,
       5,
       1,
@@ -8412,7 +8420,8 @@ export class Shieldon extends Pokemon {
       Ability.IRON_DEFENSE,
       shiny,
       emotion,
-      false
+      false,
+      true
     )
   }
 }
@@ -8422,11 +8431,11 @@ export class Bastiodon extends Pokemon {
     super(
       Pkm.BASTIODON,
       [Synergy.FOSSIL, Synergy.METAL],
-      Rarity.HATCH,
+      Rarity.RARE,
       Pkm.DEFAULT,
-      240,
-      14,
-      7,
+      180,
+      8,
+      6,
       4,
       1,
       AttackSprite.ROCK_MELEE,
@@ -8436,6 +8445,7 @@ export class Bastiodon extends Pokemon {
       Ability.IRON_DEFENSE,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8446,7 +8456,7 @@ export class Tirtouga extends Pokemon {
     super(
       Pkm.TIRTOUGA,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.HATCH,
+      Rarity.UNCOMMON,
       Pkm.CARRACOSTA,
       120,
       7,
@@ -8460,7 +8470,8 @@ export class Tirtouga extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false
+      false,
+      true
     )
   }
 }
@@ -8470,7 +8481,7 @@ export class Carracosta extends Pokemon {
     super(
       Pkm.CARRACOSTA,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.HATCH,
+      Rarity.RARE,
       Pkm.DEFAULT,
       240,
       14,
@@ -8484,6 +8495,7 @@ export class Carracosta extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8494,10 +8506,10 @@ export class Lileep extends Pokemon {
     super(
       Pkm.LILEEP,
       [Synergy.FOSSIL, Synergy.GRASS],
-      Rarity.HATCH,
+      Rarity.RARE,
       Pkm.CRADILY,
       60,
-      8,
+      7,
       2,
       2,
       2,
@@ -8508,7 +8520,8 @@ export class Lileep extends Pokemon {
       Ability.HEAL_BLOCK,
       shiny,
       emotion,
-      false
+      false,
+      true
     )
   }
 }
@@ -8518,12 +8531,12 @@ export class Cradily extends Pokemon {
     super(
       Pkm.CRADILY,
       [Synergy.FOSSIL, Synergy.GRASS],
-      Rarity.HATCH,
+      Rarity.RARE,
       Pkm.DEFAULT,
-      140,
-      14,
-      4,
-      4,
+      120,
+      11,
+      3,
+      3,
       2,
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
@@ -8532,6 +8545,7 @@ export class Cradily extends Pokemon {
       Ability.HEAL_BLOCK,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8542,12 +8556,12 @@ export class Cranidos extends Pokemon {
     super(
       Pkm.CRANIDOS,
       [Synergy.FOSSIL, Synergy.MONSTER],
-      Rarity.HATCH,
+      Rarity.UNCOMMON,
       Pkm.RAMPARDOS,
-      100,
-      10,
-      4,
+      50,
+      7,
       2,
+      1,
       1,
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
@@ -8556,7 +8570,8 @@ export class Cranidos extends Pokemon {
       Ability.HEAD_SMASH,
       shiny,
       emotion,
-      false
+      false,
+      true
     )
   }
 }
@@ -8566,12 +8581,12 @@ export class Rampardos extends Pokemon {
     super(
       Pkm.RAMPARDOS,
       [Synergy.FOSSIL, Synergy.MONSTER],
-      Rarity.HATCH,
+      Rarity.UNCOMMON,
       Pkm.DEFAULT,
-      200,
-      19,
-      6,
+      110,
+      12,
       3,
+      1,
       1,
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
@@ -8580,6 +8595,7 @@ export class Rampardos extends Pokemon {
       Ability.HEAD_SMASH,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8590,10 +8606,10 @@ export class Kabuto extends Pokemon {
     super(
       Pkm.KABUTO,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.HATCH,
+      Rarity.RARE,
       Pkm.KABUTOPS,
-      80,
-      10,
+      60,
+      5,
       3,
       1,
       1,
@@ -8604,7 +8620,8 @@ export class Kabuto extends Pokemon {
       Ability.HEAL_BLOCK,
       shiny,
       emotion,
-      false
+      false,
+      true
     )
   }
 }
@@ -8614,11 +8631,11 @@ export class Kabutops extends Pokemon {
     super(
       Pkm.KABUTOPS,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.HATCH,
+      Rarity.RARE,
       Pkm.DEFAULT,
-      160,
-      16,
-      4,
+      110,
+      8,
+      3,
       2,
       1,
       AttackSprite.ROCK_MELEE,
@@ -8628,6 +8645,7 @@ export class Kabutops extends Pokemon {
       Ability.HEAL_BLOCK,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8638,10 +8656,10 @@ export class Omanyte extends Pokemon {
     super(
       Pkm.OMANYTE,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.HATCH,
+      Rarity.COMMON,
       Pkm.OMASTAR,
-      80,
-      8,
+      60,
+      6,
       1,
       3,
       2,
@@ -8652,7 +8670,8 @@ export class Omanyte extends Pokemon {
       Ability.ROCK_TOMB,
       shiny,
       emotion,
-      false
+      false,
+      true
     )
   }
 }
@@ -8662,10 +8681,10 @@ export class Omastar extends Pokemon {
     super(
       Pkm.OMASTAR,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.HATCH,
+      Rarity.COMMON,
       Pkm.DEFAULT,
-      150,
-      16,
+      110,
+      8,
       2,
       4,
       2,
@@ -8676,6 +8695,7 @@ export class Omastar extends Pokemon {
       Ability.ROCK_TOMB,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8685,12 +8705,12 @@ export class Clamperl extends Pokemon {
     super(
       Pkm.CLAMPERL,
       [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.HATCH,
+      Rarity.EPIC,
       Pkm.HUNTAIL,
-      90,
-      7,
-      6,
-      3,
+      70,
+      5,
+      4,
+      2,
       1,
       AttackSprite.WATER_MELEE,
       AttackType.PHYSICAL,
@@ -8699,6 +8719,7 @@ export class Clamperl extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8709,12 +8730,12 @@ export class Gorebyss extends Pokemon {
     super(
       Pkm.GOREBYSS,
       [Synergy.FOSSIL, Synergy.WATER, Synergy.PSYCHIC],
-      Rarity.HATCH,
+      Rarity.EPIC,
       Pkm.DEFAULT,
-      220,
-      14,
-      3,
-      3,
+      120,
+      11,
+      2,
+      2,
       2,
       AttackSprite.WATER_RANGE,
       AttackType.PHYSICAL,
@@ -8723,6 +8744,7 @@ export class Gorebyss extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8732,11 +8754,11 @@ export class Huntail extends Pokemon {
     super(
       Pkm.HUNTAIL,
       [Synergy.FOSSIL, Synergy.WATER, Synergy.AQUATIC],
-      Rarity.HATCH,
+      Rarity.EPIC,
       Pkm.DEFAULT,
-      270,
-      17,
-      6,
+      140,
+      9,
+      5,
       3,
       1,
       AttackSprite.WATER_MELEE,
@@ -8746,6 +8768,7 @@ export class Huntail extends Pokemon {
       Ability.ROCK_TOMB,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8779,7 +8802,7 @@ export class Tyrunt extends Pokemon {
     super(
       Pkm.TYRUNT,
       [Synergy.FOSSIL, Synergy.DRAGON],
-      Rarity.HATCH,
+      Rarity.UNCOMMON,
       Pkm.TYRANTRUM,
       135,
       10,
@@ -8793,7 +8816,8 @@ export class Tyrunt extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      false
+      false,
+      true
     )
   }
 }
@@ -8803,7 +8827,7 @@ export class Tyrantrum extends Pokemon {
     super(
       Pkm.TYRANTRUM,
       [Synergy.FOSSIL, Synergy.DRAGON],
-      Rarity.HATCH,
+      Rarity.UNCOMMON,
       Pkm.DEFAULT,
       290,
       22,
@@ -8817,6 +8841,7 @@ export class Tyrantrum extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
+      true,
       true
     )
   }
