@@ -40,6 +40,8 @@ import PokemonConfig from "../models/colyseus-models/pokemon-config"
 import { nanoid } from "nanoid"
 import PRECOMPUTED_RARITY_POKEMONS from "../models/precomputed/type-rarity-all.json"
 import { Rarity } from "../types/enum/Game"
+import { pickRandomIn } from "../utils/random"
+import { sum } from "../utils/array"
 
 export default class CustomLobbyRoom extends LobbyRoom {
   discordWebhook: WebhookClient | undefined
@@ -87,7 +89,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
   pickPokemon(): Pkm {
     let pkm = Pkm.MAGIKARP
     const rarities = Object.keys(Rarity) as Rarity[]
-    const seed = Math.random()
+    const seed = Math.random() * sum(Object.values(RarityProbability))
     let threshold = 0
     for (let i = 0; i < rarities.length; i++) {
       const rarity = rarities[i]
@@ -98,13 +100,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
         this.precomputedRarityPokemons[rarity] &&
         this.precomputedRarityPokemons[rarity].length > 0
       ) {
-        pkm =
-          this.precomputedRarityPokemons[rarity][
-            Math.floor(
-              Math.random() * this.precomputedRarityPokemons[rarity].length
-            )
-          ]
-        break
+        pkm = pickRandomIn(this.precomputedRarityPokemons[rarity])
+        break;
       }
     }
     return pkm
