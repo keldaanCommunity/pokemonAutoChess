@@ -113,15 +113,15 @@ export const RarityColor: { [key in Rarity]: string } = {
 }
 
 export const RarityProbability: { [key in Rarity]: number } = {
-  [Rarity.COMMON]: 0.25,
+  [Rarity.COMMON]: 0.15,
   [Rarity.NEUTRAL]: 0,
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
   [Rarity.EPIC]: 0.15,
   [Rarity.LEGENDARY]: 0.05,
-  [Rarity.MYTHICAL]: 0,
+  [Rarity.MYTHICAL]: 0.15,
   [Rarity.SUMMON]: 0,
-  [Rarity.HATCH]: 0
+  [Rarity.HATCH]: 0.1
 }
 
 export const AttackTypeColor: { [key in AttackType] } = {
