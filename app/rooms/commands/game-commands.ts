@@ -158,7 +158,7 @@ export class OnPokemonPropositionCommand extends Command<
     if (player) {
       if (player.pokemonsProposition.includes(pkm)) {
         const index = player.pokemonsProposition.findIndex((p) => p === pkm)
-        if (index) {
+        if (index !== -1) {
           player.pokemonsProposition.splice(index, 1)
           this.state.additionalPokemons.push(pkm)
           this.state.shop.addAdditionalPokemon(pkm)
