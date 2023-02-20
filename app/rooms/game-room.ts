@@ -75,7 +75,8 @@ export default class GameRoom extends Room<GameState> {
     this.setState(new GameState(options.preparationId, options.name))
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
-        if (!this.additionalPokemonsPool.includes(p)) {
+        const pokemon = PokemonFactory.createPokemonFromName(p)
+        if (!this.additionalPokemonsPool.includes(p) && pokemon.stars === 1) {
           this.additionalPokemonsPool.push(p)
         }
       })
@@ -780,7 +781,11 @@ export default class GameRoom extends Room<GameState> {
     let pkm: Pokemon | undefined = undefined
     let found = false
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.rarity != Rarity.NEUTRAL && !found) {
+      if (
+        pokemon.positionY == 0 &&
+        pokemon.rarity != Rarity.NEUTRAL &&
+        !found
+      ) {
         found = true
         pkm = pokemon
       }

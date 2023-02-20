@@ -8704,7 +8704,7 @@ export class Clamperl extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CLAMPERL,
-      [Synergy.FOSSIL, Synergy.WATER],
+      [Synergy.FOSSIL, Synergy.WATER, Synergy.AQUATIC],
       Rarity.EPIC,
       Pkm.HUNTAIL,
       70,
@@ -8716,7 +8716,7 @@ export class Clamperl extends Pokemon {
       AttackType.PHYSICAL,
       1,
       80,
-      Ability.HYDRO_PUMP,
+      Ability.ROCK_TOMB,
       shiny,
       emotion,
       false,
