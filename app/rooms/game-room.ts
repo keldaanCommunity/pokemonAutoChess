@@ -643,90 +643,84 @@ export default class GameRoom extends Room<GameState> {
     const itemsToAdd = new Array<Item>()
     const basicItemsToAdd = new Array<Item>()
     const player = this.state.players.get(id)
-    if (player) {
-      player.board.forEach((pokemon, key) => {
-        let count = 0
-        const pokemonEvolutionName = pokemon.evolution
+    if (!player) return false;
 
-        if (
-          pokemonEvolutionName !== Pkm.DEFAULT &&
-          pokemon.rarity !== Rarity.NEUTRAL
-        ) {
-          player.board.forEach((pkm, id) => {
-            if (pkm.index == pokemon.index) {
-              count += 1
-            }
-          })
+    player.board.forEach((pokemon, key) => {
+      const count = [...player.board.values()].filter(pkm => pkm.index === pokemon.index).length
 
-          if (count == 3) {
-            let coord: { x: number; y: number } | undefined
+      const pokemonEvolutionName = pokemon.evolution
 
-            player.board.forEach((pkm, id) => {
-              if (pkm.index == pokemon.index) {
-                // console.log(pkm.name, pokemon.name)
-                if (coord) {
-                  if (pkm.positionY > coord.y) {
-                    coord.x = pkm.positionX
-                    coord.y = pkm.positionY
-                    // console.log('better coord', coord)
-                  }
-                } else {
-                  if (pkm.positionX !== -1) {
-                    coord = { x: pkm.positionX, y: pkm.positionY }
-                  }
+      if (
+        pokemonEvolutionName !== Pkm.DEFAULT &&
+        ![Rarity.NEUTRAL, Rarity.HATCH].includes(pokemon.rarity) &&
+        count >= 3
+      ) {
+        let coord: { x: number; y: number } | undefined
 
-                  // console.log('first coord', coord)
-                }
-
-                pkm.items.forEach((el) => {
-                  if (BasicItems.includes(el)) {
-                    basicItemsToAdd.push(el)
-                  } else {
-                    itemsToAdd.push(el)
-                  }
-                })
-                player.board.delete(id)
-              }
-            })
-            const pokemonEvolved = PokemonFactory.createPokemonFromName(
-              pokemonEvolutionName,
-              player.pokemonCollection.get(PkmIndex[pokemonEvolutionName])
-            )
-            for (let i = 0; i < 3; i++) {
-              const itemToAdd = itemsToAdd.pop()
-              if (itemToAdd) {
-                if (pokemonEvolved.items.has(itemToAdd)) {
-                  player.items.add(itemToAdd)
-                } else {
-                  pokemonEvolved.items.add(itemToAdd)
-                }
-              }
-            }
-            itemsToAdd.forEach((item) => {
-              player.items.add(item)
-            })
-            basicItemsToAdd.forEach((item) => {
-              player.items.add(item)
-            })
+        player.board.forEach((pkm, id) => {
+          if (pkm.index == pokemon.index) {
+            // console.log(pkm.name, pokemon.name)
             if (coord) {
-              // console.log(coord, pokemonEvolved.name)
-              pokemonEvolved.positionX = coord.x
-              pokemonEvolved.positionY = coord.y
-              player.board.set(pokemonEvolved.id, pokemonEvolved)
-              evolve = true
+              if (pkm.positionY > coord.y) {
+                coord.x = pkm.positionX
+                coord.y = pkm.positionY
+                // console.log('better coord', coord)
+              }
             } else {
-              console.log("error, no coordinate found for new evolution")
+              if (pkm.positionX !== -1) {
+                coord = { x: pkm.positionX, y: pkm.positionY }
+              }
+
+              // console.log('first coord', coord)
+            }
+
+            pkm.items.forEach((el) => {
+              if (BasicItems.includes(el)) {
+                basicItemsToAdd.push(el)
+              } else {
+                itemsToAdd.push(el)
+              }
+            })
+            player.board.delete(id)
+          }
+        })
+        const pokemonEvolved = PokemonFactory.createPokemonFromName(
+          pokemonEvolutionName,
+          player.pokemonCollection.get(PkmIndex[pokemonEvolutionName])
+        )
+        for (let i = 0; i < 3; i++) {
+          const itemToAdd = itemsToAdd.pop()
+          if (itemToAdd) {
+            if (pokemonEvolved.items.has(itemToAdd)) {
+              player.items.add(itemToAdd)
+            } else {
+              pokemonEvolved.items.add(itemToAdd)
             }
           }
         }
-      })
-
-      if (evolve) {
-        player.synergies.update(player.board)
-        player.effects.update(player.synergies)
+        itemsToAdd.forEach((item) => {
+          player.items.add(item)
+        })
+        basicItemsToAdd.forEach((item) => {
+          player.items.add(item)
+        })
+        if (coord) {
+          // console.log(coord, pokemonEvolved.name)
+          pokemonEvolved.positionX = coord.x
+          pokemonEvolved.positionY = coord.y
+          player.board.set(pokemonEvolved.id, pokemonEvolved)
+          evolve = true
+        } else {
+          console.log("error, no coordinate found for new evolution")
+        }
       }
-      player.boardSize = this.getTeamSize(player.board)
+    })
+
+    if (evolve) {
+      player.synergies.update(player.board)
+      player.effects.update(player.synergies)
     }
+    player.boardSize = this.getTeamSize(player.board)
 
     return evolve
   }

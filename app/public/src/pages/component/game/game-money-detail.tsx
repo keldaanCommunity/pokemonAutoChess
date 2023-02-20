@@ -6,9 +6,8 @@ import { Money } from "../icons/money"
 export default function GameMoneyDetail() {
   const streak = useAppSelector((state) => state.game.streak)
   const currentPlayer = useAppSelector(state => state.game.players.find(p => p.id === state.game.currentPlayerId))  
-  const lastPlayerBattle = currentPlayer && currentPlayer.history.length > 0 ? currentPlayer.history.filter(r => !r.isPVE).at(-1) : null
+  const lastPlayerBattle = currentPlayer && currentPlayer.history && currentPlayer.history.length > 0 ? currentPlayer.history.filter(r => !r.isPVE).at(-1) : null
   const lastBattleResult = lastPlayerBattle ? lastPlayerBattle.result : null
-  console.log({ lastBattleResult, lastPlayerBattle })
   const interest = useAppSelector((state) => state.game.interest)
   return (
     <div className="game-money-detail">
