@@ -1106,24 +1106,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
             if (pokemon.evolutionTimer === 0) {
               let pokemonEvolved
-              if (pokemon.name === Pkm.CLAMPERL) {
-                if (pokemon.positionX >= 4) {
-                  pokemonEvolved = PokemonFactory.createPokemonFromName(
-                    Pkm.HUNTAIL,
-                    player.pokemonCollection.get(PkmIndex[Pkm.HUNTAIL])
-                  )
-                } else {
-                  pokemonEvolved = PokemonFactory.createPokemonFromName(
-                    Pkm.GOREBYSS,
-                    player.pokemonCollection.get(PkmIndex[Pkm.GOREBYSS])
-                  )
-                }
-              } else {
-                pokemonEvolved = PokemonFactory.createPokemonFromName(
-                  pokemon.evolution,
-                  player.pokemonCollection.get(pokemon.index)
-                )
-              }
+              pokemonEvolved = PokemonFactory.createPokemonFromName(
+                pokemon.evolution,
+                player.pokemonCollection.get(pokemon.index)
+              )
 
               pokemon.items.forEach((i) => {
                 pokemonEvolved.items.add(i)

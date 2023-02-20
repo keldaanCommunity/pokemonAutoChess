@@ -58,7 +58,7 @@ export const ItemName: { [key in Item]: string } = {
 }
 
 export const ItemDescription: { [key in Item]: string } = Object.freeze({
-  [Item.FOSSIL_STONE]: "Give it to a Ditto to obtain a random fossil",
+  [Item.FOSSIL_STONE]: "A fossil of a Pokémon that lived in prehistoric times",
   [Item.TWISTED_SPOON]: "+10% spell power",
   [Item.MYSTIC_WATER]: "+15 mana",
   [Item.MAGNET]: "+10% attack speed",

@@ -501,7 +501,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.RAZOR_FANG]: {
     [Stat.ATK_SPEED]: 10,
     [Stat.CRIT_CHANCE]: 5,
-    [Stat.CRIT_DAMAGE]: 100
+    [Stat.CRIT_DAMAGE]: 1
   },
   [Item.LEFTOVERS]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
   [Item.CHOICE_SCARF]: { [Stat.ATK_SPEED]: 10, [Stat.SPE_DEF]: 1 },

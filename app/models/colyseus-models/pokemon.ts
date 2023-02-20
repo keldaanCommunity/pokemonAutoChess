@@ -8719,7 +8719,7 @@ export class Clamperl extends Pokemon {
       Ability.HYDRO_PUMP,
       shiny,
       emotion,
-      true,
+      false,
       true
     )
   }
@@ -8741,7 +8741,7 @@ export class Gorebyss extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.HYDRO_PUMP,
+      Ability.DEFAULT,
       shiny,
       emotion,
       true,
