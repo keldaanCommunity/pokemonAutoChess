@@ -854,6 +854,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           break
         case Effect.BREEDER:
           player.titles.add(Title.BABYSITTER)
+          break
         default:
           break
       }
