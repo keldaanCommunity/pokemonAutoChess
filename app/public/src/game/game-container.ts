@@ -552,6 +552,7 @@ class GameContainer {
 
   transformToSimplePlayer(player: IPlayer) {
     const simplePlayer = {
+      elo: player.elo,
       name: player.name,
       id: player.id,
       rank: player.rank,
