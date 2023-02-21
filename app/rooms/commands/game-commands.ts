@@ -852,6 +852,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         case Effect.PRESTO:
           player.titles.add(Title.MUSICIAN)
           break
+        case Effect.BREEDER:
+          player.titles.add(Title.BABYSITTER)
         default:
           break
       }
