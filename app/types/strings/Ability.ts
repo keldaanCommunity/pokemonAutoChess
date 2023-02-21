@@ -685,7 +685,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.KING_SHIELD]: {
-    eng: `Protect the user for [1,2,4]s and swap his position with the farthest enemy`,
+    eng: `Protect the user for [1,2,4] s and swap his position with the farthest enemy`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -697,7 +697,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.NIGHTMARE]: {
-    eng: `Poison the ennemy team for [2,4,8]s`,
+    eng: `Poison the ennemy team for [2,4,8] s`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -721,7 +721,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.RELIC_SONG]: {
-    eng: `Put asleep the ennemy team for [1,2,4]s`,
+    eng: `Put asleep the ennemy team for [1,2,4] s`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -745,13 +745,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.TRI_ATTACK]: {
-    eng: `Burn, freeze and wound the target for [2,4,8]s`,
+    eng: `Burn, freeze and wound the target for [2,4,8] s`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.ECHO]: {
-    eng: `Deals [3,6,9] ${Damage.SPECIAL}, +[1,2,4] each time the pokemon uses its ability`,
+    eng: `Deals [3,6,9] ${Damage.SPECIAL}, + [1,2,4] each time the pokemon uses its ability`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -949,7 +949,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.CHARGE]: {
-    eng: `Buff all electric ally pokemons ${Stat.ATK} by [10,20,40]%`,
+    eng: `Buff all electric ally pokemons ${Stat.ATK} by [10,20,40] %`,
     esp: `Pulir todos los pokemones aliados eléctricos atacan en un 10,20,30 %.`,
     fra: `Augmente l attaque des alliés electrique de 10,20,30%`,
     prt: ``
@@ -991,7 +991,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.TORMENT]: {
-    eng: `Increase ${Stat.ATK_SPEED} by [20,40,60]%`,
+    eng: `Increase ${Stat.ATK_SPEED} by [20,40,60] %`,
     esp: `Aumenta la velocidad de ataque en un 20,30,40 %.`,
     fra: `Augmente la vitesse d attaque de 20,30,40%`,
     prt: ``
@@ -1057,7 +1057,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.STUN_SPORE]: {
-    eng: `Decrease target ${Stat.ATK_SPEED} by [50,100,200]% and deals [5,10,20] ${Damage.SPECIAL}`,
+    eng: `Decrease target ${Stat.ATK_SPEED} by [50,100,200] % and deals [5,10,20] ${Damage.SPECIAL}`,
     esp: `Disminuir la velocidad de ataque del objetivo en un 50,100,200% e inflige 5,10,20 de daño físico`,
     fra: `Diminue la vitesse d attaque du pokémon de 50,100,200% et inflige 5,10,20 dégats physiques`,
     prt: ``
@@ -1087,13 +1087,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ROCK_TOMB]: {
-    eng: `Mono target attack that deals [30,60,120] ${Damage.SPECIAL} and decrease target ${Stat.ATK_SPEED} by [20,40,60]%`,
+    eng: `Mono target attack that deals [30,60,120] ${Damage.SPECIAL} and decrease target ${Stat.ATK_SPEED} by [20,40,60] %`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.ROCK_SMASH]: {
-    eng: `Mono target attack that deals [20,40,80] ${Damage.SPECIAL} and silence target for [3,6,9]s.`,
+    eng: `Mono target attack that deals [20,40,80] ${Damage.SPECIAL} and silence target for [3,6,9] s.`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
@@ -1135,7 +1135,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   DYNAMIC_PUNCH: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} and confuse the target for [1.5,3,6]s`,
+    eng: `Deals [20,40,80] ${Damage.SPECIAL} and confuse the target for [1.5,3,6] s`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1147,7 +1147,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   ELECTRO_WEB: {
-    eng: `Steal [15,30,60]% ${Stat.ATK_SPEED} to adjacent ennemies`,
+    eng: `Steal [15,30,60] % ${Stat.ATK_SPEED} to adjacent ennemies`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1165,7 +1165,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   LEECH_SEED: {
-    eng: `Poison the target for [3,6,12]s, healing for [20,40,80] ${Stat.HP}`,
+    eng: `Poison the target for [3,6,12] s, healing for [20,40,80] ${Stat.HP}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1177,7 +1177,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   PSYCH_UP: {
-    eng: `Silence the target and every ennemies around for [2,4,8]s, dealing [10,20,40] ${Damage.SPECIAL}`,
+    eng: `Silence the target and every ennemies around for [2,4,8] s, dealing [10,20,40] ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1243,7 +1243,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.AURORA_VEIL]: {
-    eng: `All allies are immune to spells for [1.5,2.5,3.5]s`,
+    eng: `All allies are immune to spells for [1.5,2.5,3.5] s`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1261,7 +1261,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.CHATTER]: {
-    eng: `Deal [5,10,15] ${Damage.SPECIAL} to all enemies with each target hit having a [20,30,40]% chance to be confused 1s`,
+    eng: `Deal [5,10,15] ${Damage.SPECIAL} to all enemies with each target hit having a [20,30,40] % chance to be confused 1s`,
     esp: ``,
     prt: ``,
     fra: ``
