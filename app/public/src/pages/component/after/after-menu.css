@@ -22,6 +22,16 @@
     gap: 16px;
 }
 
+.after-menu .player-elo{
+    font-size: 2rem;
+    color: white;
+    text-shadow: 2px 2px 0 black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
 .after-menu .player-rank img {
     height: 48px;
 }

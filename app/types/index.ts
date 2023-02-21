@@ -239,6 +239,7 @@ export interface IGameState {
 }
 
 export interface ISimplePlayer {
+  elo: number
   name: string
   id: string
   rank: number

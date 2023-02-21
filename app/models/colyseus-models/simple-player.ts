@@ -20,6 +20,7 @@ export default class SimplePlayer extends Schema implements ISimplePlayer {
   @type("string") avatar: string
   @type("uint8") rank: number
   @type([PokemonRecord]) pokemons = new ArraySchema<IPokemonRecord>()
+  @type("uint16") elo: number
   @type("uint16") exp: number
   @type("string") title: string
   @type("string") role: Role
@@ -37,7 +38,8 @@ export default class SimplePlayer extends Schema implements ISimplePlayer {
     exp: number,
     title: string,
     role: Role,
-    synergies: Array<{ name: Synergy; value: number }>
+    synergies: Array<{ name: Synergy; value: number }>,
+    elo: number
   ) {
     super()
     this.id = id
@@ -47,6 +49,7 @@ export default class SimplePlayer extends Schema implements ISimplePlayer {
     this.exp = exp
     this.title = title
     this.role = role
+    this.elo = elo
     pokemons.forEach((pkm) => {
       this.pokemons.push(new PokemonRecord(pkm))
     })
