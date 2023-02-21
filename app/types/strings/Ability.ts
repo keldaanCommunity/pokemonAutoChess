@@ -646,7 +646,7 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.FUTURE_SIGHT]: {
-    eng: `Dive`,
+    eng: `Future Sight`,
     esp: ``,
     prt: ``,
     fra: ``
