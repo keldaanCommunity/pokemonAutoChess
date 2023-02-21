@@ -50,7 +50,7 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) pokemonsProposition = new ArraySchema<Pkm>()
   effects: Effects = new Effects()
   isBot: boolean
-  opponents: string[] = []
+  opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   rerollCount: number = 0
 

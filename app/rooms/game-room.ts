@@ -43,7 +43,7 @@ import { components } from "../api-v1/openapi"
 import { Title, Role } from "../types"
 import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 import BannedUser from "../models/mongo-models/banned-user"
-import { shuffleArray } from "../utils/random"
+import { pickRandomIn, shuffleArray } from "../utils/random"
 import { Rarity } from "../types/enum/Game"
 
 export default class GameRoom extends Room<GameState> {
@@ -516,49 +516,34 @@ export default class GameRoom extends Room<GameState> {
   computeRandomOpponent(playerId: string) {
     const player = this.state.players.get(playerId)
     if (player) {
-      this.checkOpponents(playerId)
-      if (player.opponents.length == 0) {
-        this.fillOpponents(playerId)
-      }
-      if (player.opponents.length > 0) {
-        const id = player.opponents.pop()
-        if (id) {
-          const opponent = this.state.players.get(id)
-          if (opponent) {
-            player.opponentName = opponent.name
-            player.opponentAvatar = opponent.avatar
-            return id
+      this.state.players.forEach((p) => {
+        if (player.id !== p.id) {
+          if (!player.opponents.has(p.id) && p.alive) {
+            player.opponents.set(p.id, 0)
+          }
+          if (player.opponents.has(p.id) && !p.alive) {
+            player.opponents.delete(p.id)
           }
         }
+      })
+      const sortArray = Array.from(player.opponents)
+      sortArray.sort((a, b) => {
+        return a[1] - b[1]
+      })
+
+      if (sortArray.length > 0) {
+        const min = sortArray[0][1]
+        const potentials = sortArray.filter((o) => o[1] === min)
+        const potential = pickRandomIn(potentials)
+        const id = potential[0]
+        const opponent = this.state.players.get(id)
+        if (opponent) {
+          player.opponents.set(id, this.state.stageLevel)
+          player.opponentName = opponent.name
+          player.opponentAvatar = opponent.avatar
+          return id
+        }
       }
-    }
-  }
-
-  checkOpponents(playerId: string) {
-    const player = this.state.players.get(playerId)
-    const indexToDelete = new Array<number>()
-    if (player) {
-      player.opponents.forEach((p: string, i: number) => {
-        const opponent = this.state.players.get(p)
-        if (opponent && !opponent.alive) {
-          indexToDelete.push(i)
-        }
-      })
-      indexToDelete.forEach((index) => {
-        player.opponents.splice(index, 1)
-      })
-    }
-  }
-
-  fillOpponents(playerId: string) {
-    const player = this.state.players.get(playerId)
-    if (player) {
-      this.state.players.forEach((plyr: Player, key: string) => {
-        if (plyr.alive && player.id != plyr.id) {
-          player.opponents.push(key)
-        }
-      })
-      player.opponents.sort(() => Math.random() - 0.5)
     }
   }
 
@@ -644,10 +629,12 @@ export default class GameRoom extends Room<GameState> {
     const itemsToAdd = new Array<Item>()
     const basicItemsToAdd = new Array<Item>()
     const player = this.state.players.get(id)
-    if (!player) return false;
+    if (!player) return false
 
     player.board.forEach((pokemon, key) => {
-      const count = [...player.board.values()].filter(pkm => pkm.index === pokemon.index).length
+      const count = [...player.board.values()].filter(
+        (pkm) => pkm.index === pokemon.index
+      ).length
 
       const pokemonEvolutionName = pokemon.evolution
 
