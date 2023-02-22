@@ -149,7 +149,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.atkSpeed = Number(
       Math.min(
         2.5,
-        Math.max(0.2, 0.75 * (1 + this.atkSpeedBonus / 100))
+        Math.max(0.4, 0.75 * (1 + this.atkSpeedBonus / 100))
       ).toFixed(2)
     )
   }
