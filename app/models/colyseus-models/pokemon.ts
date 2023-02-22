@@ -659,7 +659,7 @@ export class Onix extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.IRON_DEFENSE,
+      Ability.SPIKE_ARMOR,
       shiny,
       emotion,
       false
@@ -683,7 +683,7 @@ export class Steelix extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.IRON_DEFENSE,
+      Ability.SPIKE_ARMOR,
       shiny,
       emotion,
       false
@@ -707,7 +707,7 @@ export class MegaSteelix extends Pokemon {
       AttackType.PHYSICAL,
       3,
       100,
-      Ability.IRON_DEFENSE,
+      Ability.SPIKE_ARMOR,
       shiny,
       emotion,
       true

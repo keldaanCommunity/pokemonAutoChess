@@ -22,7 +22,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") runeProtect = false
   @type("boolean") electricField = false
   @type("boolean") psychicField = false
-  @type("string") abilityStatus = "";
+  @type("boolean") spikeArmor = false
   soulDew = false
   brightPowder = false
   deltaOrb = false
@@ -44,7 +44,7 @@ export default class Status extends Schema implements IStatus {
   armorReductionCooldown = 0
   runeProtectCooldown = 0
   grassCooldown = 1000
-  abilityCooldown = 0
+  spikeArmorCooldown = 0
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -57,7 +57,7 @@ export default class Status extends Schema implements IStatus {
     this.smokeCooldown = 0
   }
 
-  updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board){
+  updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
     if (
       pokemon.effects.includes(Effect.INGRAIN) ||
       pokemon.effects.includes(Effect.GROWTH) ||
@@ -118,8 +118,8 @@ export default class Status extends Schema implements IStatus {
       this.updateArmorReduction(dt)
     }
 
-    if(this.abilityStatus){
-      this.updateAbilityStatus(dt)
+    if (this.spikeArmor) {
+      this.updateSpikeArmor(dt)
     }
   }
 
@@ -434,16 +434,16 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerAbilityStatus(timer: number, ability: Ability){
-    this.abilityStatus = ability;
-    this.abilityCooldown = timer;
+  triggerSpikeArmor(timer: number) {
+    this.spikeArmor = true
+    this.spikeArmorCooldown = timer
   }
-  
-  updateAbilityStatus(dt: number){
-    if (this.abilityCooldown - dt <= 0) {
-      this.abilityStatus = ""
+
+  updateSpikeArmor(dt: number) {
+    if (this.spikeArmorCooldown - dt <= 0) {
+      this.spikeArmor = false
     } else {
-      this.abilityCooldown = this.abilityCooldown - dt
+      this.spikeArmorCooldown = this.spikeArmorCooldown - dt
     }
   }
 }

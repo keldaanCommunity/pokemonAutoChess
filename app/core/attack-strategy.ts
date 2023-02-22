@@ -120,7 +120,13 @@ export class BeatUpStrategy extends AttackStrategy {
     for (let i = 0; i < pokemon.stars; i++) {
       const houndour = PokemonFactory.createPokemonFromName(Pkm.HOUNDOUR)
       const coord = pokemon.simulation.getFirstAvailablePlaceOnBoard(true)
-      pokemon.simulation.addPokemon(houndour, coord.x, coord.y, pokemon.team, true)
+      pokemon.simulation.addPokemon(
+        houndour,
+        coord.x,
+        coord.y,
+        pokemon.team,
+        true
+      )
     }
   }
 }
@@ -1610,7 +1616,7 @@ export class SpikeArmorStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    pokemon.status.triggerAbilityStatus(5000, Ability.SPIKE_ARMOR)
+    pokemon.status.triggerSpikeArmor(5000)
   }
 }
 

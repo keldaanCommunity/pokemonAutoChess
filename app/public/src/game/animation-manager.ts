@@ -1061,6 +1061,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.SPIKE_ARMOR,
+      frames: this.game.anims.generateFrameNames(Ability.SPIKE_ARMOR, {
+        start: 0,
+        end: 14,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: -1
+    })
+
+    this.game.anims.create({
       key: Ability.SEED_FLARE,
       frames: this.game.anims.generateFrameNames(Ability.SEED_FLARE, {
         start: 0,

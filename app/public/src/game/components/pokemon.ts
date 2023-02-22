@@ -83,6 +83,7 @@ export default class Pokemon extends DraggableObject {
   protect: GameObjects.Sprite | undefined
   resurection: GameObjects.Sprite | undefined
   runeProtect: GameObjects.Sprite | undefined
+  spikeArmor: GameObjects.Sprite | undefined
   electricField: GameObjects.Sprite | undefined
   psychicField: GameObjects.Sprite | undefined
   voidBoost: GameObjects.Sprite | undefined
@@ -2707,6 +2708,29 @@ export default class Pokemon extends DraggableObject {
     if (this.runeProtect) {
       this.remove(this.runeProtect, true)
       this.runeProtect = undefined
+    }
+  }
+
+  addSpikeArmor() {
+    if (!this.spikeArmor) {
+      this.spikeArmor = new GameObjects.Sprite(
+        this.scene,
+        0,
+        0,
+        Ability.SPIKE_ARMOR,
+        "000"
+      )
+      this.spikeArmor.setScale(2, 2)
+      this.scene.add.existing(this.spikeArmor)
+      this.spikeArmor.anims.play(Ability.SPIKE_ARMOR)
+      this.add(this.spikeArmor)
+    }
+  }
+
+  removeSpikeArmor() {
+    if (this.spikeArmor) {
+      this.remove(this.spikeArmor, true)
+      this.spikeArmor = undefined
     }
   }
 

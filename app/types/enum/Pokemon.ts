@@ -1405,5 +1405,5 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GOTHORITA]: Pkm.GOTHITA,
   [Pkm.GOTHITELLE]: Pkm.GOTHITA,
   [Pkm.SANDSHREW]: Pkm.SANDSHREW,
-  [Pkm.SANDSLASH]: Pkm.SANDSLASH
+  [Pkm.SANDSLASH]: Pkm.SANDSHREW
 }
