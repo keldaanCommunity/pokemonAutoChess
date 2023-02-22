@@ -1105,7 +1105,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   CORRUPTED_NATURE: {
-    eng: `Wound adjacent ennemies for 4 seconds and deals [25,50,100] life steal ${Damage.SPECIAL}`,
+    eng: `Wound adjacent ennemies for 5 seconds and deals [20,40] life steal ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``

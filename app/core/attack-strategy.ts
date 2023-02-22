@@ -386,16 +386,16 @@ export class CorruptedNatureStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    let damage = 25
+    let damage = 20
     if (pokemon.stars == 2) {
-      damage = 50
+      damage = 40
     } else if (pokemon.stars == 3) {
-      damage = 100
+      damage = 80
     }
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerWound(4000, cell.value, board)
+        cell.value.status.triggerWound(5000, cell.value, board)
         cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
     })
