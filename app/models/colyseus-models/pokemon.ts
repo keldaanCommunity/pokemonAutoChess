@@ -7145,6 +7145,30 @@ export class Chatot extends Pokemon {
   }
 }
 
+export class Farfetchd extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.FARFETCH_D,
+      [Synergy.FLYING, Synergy.SOUND],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      200,
+      20,
+      4,
+      4,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      60,
+      Ability.RAZOR_WIND,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Kecleon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

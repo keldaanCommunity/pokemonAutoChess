@@ -121,6 +121,7 @@ import {
   Espeon,
   Eternatus,
   Exploud,
+  Farfetchd,
   Fearow,
   Fennekin,
   Feraligatr,
@@ -1618,6 +1619,8 @@ export default class PokemonFactory {
         return new Sandshrew(s, e)
       case Pkm.SANDSLASH:
         return new Sandslash(s, e)
+      case Pkm.FARFETCH_D:
+        return new Farfetchd(s, e)
       case Pkm.EGG:
         return new Egg(s, e)
       case Pkm.DEFAULT:
@@ -1671,10 +1674,10 @@ export default class PokemonFactory {
 
   static getSellPrice(name: Pkm): number {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
-    if(name === Pkm.EGG){
-      return 2      
-    } else if(pokemon.rarity === Rarity.HATCH){
-      return [3,4,5][pokemon.stars-1]
+    if (name === Pkm.EGG) {
+      return 2
+    } else if (pokemon.rarity === Rarity.HATCH) {
+      return [3, 4, 5][pokemon.stars - 1]
     } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
       return PkmCost[pokemon.rarity]
     } else {

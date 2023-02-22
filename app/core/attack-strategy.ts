@@ -778,6 +778,9 @@ export class RazorWindStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
+    const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
+    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+    target.status.triggerSmoke(7000, target)
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {

@@ -1207,7 +1207,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   RAZOR_WIND: {
-    eng: `Apply Smoke effect (-50% ${Stat.ATK_SPEED}) on the target and around it`,
+    eng: `Deals [20,40,80] ${Damage.SPECIAL} to the target and apply Smoke effect (-50% ${Stat.ATK_SPEED}) around it`,
     esp: ``,
     prt: ``,
     fra: ``
