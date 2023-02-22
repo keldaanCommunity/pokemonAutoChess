@@ -80,7 +80,7 @@ export function getAttackScale(attackSprite: AttackSprite) {
       return [3, 3]
 
     case AttackSprite.FIRE_MELEE:
-      return [1.5, 1.5]
+      return [1, 1]
 
     case AttackSprite.ROCK_MELEE:
       return [1.5, 1.5]

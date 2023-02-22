@@ -656,6 +656,24 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: ``,
     prt: ``,
     fra: ``
+  },
+  [Ability.FAKE_TEARS]: {
+    eng: `Fake Tears`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
+  [Ability.SPARKLING_ARIA]: {
+    eng: `Sparkling Aria`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
+  [Ability.DRAGON_DARTS]: {
+    eng: `Dragon Darts`,
+    esp: ``,
+    prt: ``,
+    fra: ``
   }
 }
 
@@ -799,7 +817,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BURN]: {
-    eng: `Burn the whole team for [5,10,20] seconds`,
+    eng: `Burn the whole enemy team for [5,10,20] seconds`,
     esp: `Quemar todo el equipo durante 2,4,8 segundos, repartiendo el 5% de hp,segundos`,
     fra: `Brule la cible pour 2,4,8 secondes, lui faisant perdre 5% hp,secondes`,
     prt: ``
@@ -817,7 +835,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.SILENCE]: {
-    eng: `Silence the whole team for [2,4,8] seconds`,
+    eng: `Silence the whole enemy team for [2,4,8] seconds`,
     esp: `Silenciar todo el equipo durante 2,4,8 segundos`,
     fra: `Silence toute l équipe ennemie durant 2,4,8 secondes`,
     prt: ``
@@ -829,7 +847,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.FREEZE]: {
-    eng: `Freeze the whole ennemy team for [1,2,4] seconds`,
+    eng: `Freeze the whole enemy team for [1,2,4] seconds`,
     esp: `Congela todo el equipo durante 1,2,4 segundos`,
     fra: `Gèle la cible durant 1,2,4 secondes`,
     prt: ``
@@ -1313,5 +1331,23 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     esp: ``,
     prt: ``,
     fra: ``
-  }
+  },
+  [Ability.FAKE_TEARS]: {
+    eng: `Deals [5,10,20] ${Damage.SPECIAL} to the whole enemy team and reduce their ${Stat.SPE_DEF} by [1,2,3]`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
+  [Ability.SPARKLING_ARIA]: {
+    eng: `Deals [15,30,60] ${Damage.SPECIAL} to the target and adjacent enemies. If adjacent allies are burned, the burn is healed.`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
+  [Ability.DRAGON_DARTS]: {
+    eng: `Throws 3 darts that deals [10,25,50] ${Damage.SPECIAL} each to the target. If the target dies, regain 40 Mana.`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
 }

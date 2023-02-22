@@ -3329,6 +3329,106 @@ export class HurricaneStrategy extends AttackStrategy {
   }
 }
 
+export class FakeTearsStrategy extends AttackStrategy {
+  constructor() {
+    super()
+  }
+
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 0
+    let reduce = 0
+    switch (pokemon.stars) {
+      case 1:
+        damage = 5
+        reduce = 1
+        break
+      case 2:
+        damage = 10
+        reduce = 2
+        break
+      case 3:
+        damage = 20
+        reduce = 3
+        break
+      default:
+        break
+    }
+
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value && pokemon.team != value.team) {
+        value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        value.addSpecialDefense(-reduce, true)
+      }
+    })
+  }
+}
+
+export class SparklingAriaStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)        
+      } else if(cell.value && cell.value.team === pokemon.team && cell.value.status.burn){
+        cell.value.status.healBurn()
+      }
+    })
+  }
+}
+
+export class DragonDartsStrategy extends AttackStrategy {
+  constructor() {
+    super()
+  }
+
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 0
+
+    switch (pokemon.stars) {
+      case 1:
+        damage = 10
+        break
+      case 2:
+        damage = 25
+        break
+      case 3:
+        damage = 50
+        break
+      default:
+        break
+    }
+    
+    for(let n=0; n<3; n++){
+      target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+    }
+    if(target.life <= 0){
+      pokemon.setMana(pokemon.mana + 40)
+    }
+    
+  }
+}
+
 export class MetronomeStrategy extends AttackStrategy {
   constructor() {
     super()
@@ -3341,101 +3441,8 @@ export class MetronomeStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    const skills = [
-      FireBlastStrategy,
-      WheelOfFireStrategy,
-      SeismicTossStrategy,
-      GuillotineStrategy,
-      RockSlideStrategy,
-      HeatWaveStrategy,
-      ThunderStrategy,
-      HydroPumpStrategy,
-      DracoMeteorStrategy,
-      BlazeKickStrategy,
-      WishStrategy,
-      CalmMindStrategy,
-      IronDefenseStrategy,
-      SoakStrategy,
-      IronTailStrategy,
-      BlastBurnStrategy,
-      ChargeStrategy,
-      DischargeStrategy,
-      BiteStrategy,
-      DragonTailStrategy,
-      DragonBreathStrategy,
-      IcicleCrashStrategy,
-      RootStrategy,
-      TormentStrategy,
-      StompStrategy,
-      DarkPulseStrategy,
-      NightSlashStrategy,
-      BugBuzzStrategy,
-      PoisonStingStrategy,
-      LeechLifeStrategy,
-      HappyHourStrategy,
-      TeleportStrategy,
-      NastyPlotStrategy,
-      ThiefStrategy,
-      StunSporeStrategy,
-      MeteorMashStrategy,
-      HurricaneStrategy,
-      BurnStrategy,
-      SleepStrategy,
-      FreezeStrategy,
-      ConfusionStrategy,
-      ProtectStrategy,
-      PoisonStrategy,
-      SilenceStrategy,
-      OriginPulseStrategy,
-      SeedFlareStrategy,
-      HealBlockStrategy,
-      RoarOfTimeStrategy,
-      RockTombStrategy,
-      RockSmashStrategy,
-      HeadSmashStrategy,
-      VoltSwitchStrategy,
-      ShadowCloneStrategy,
-      HyperVoiceStrategy,
-      PetalDanceStrategy,
-      EchoStrategy,
-      TriAttackStrategy,
-      GrassWhistleStrategy,
-      HighJumpKickStrategy,
-      DisarmingVoiceStrategy,
-      RelicSongStrategy,
-      GrowlStrategy,
-      BonemerangStrategy,
-      ClangorousSoulStrategy,
-      NightmareStrategy,
-      ExplosionStrategy,
-      KingShieldStrategy,
-      CorruptedNatureStrategy,
-      TwistingNeitherStrategy,
-      PsychUpStrategy,
-      RazorWindStrategy,
-      LeechSeedStrategy,
-      FlameChargeStrategy,
-      FireTrickStrategy,
-      ElectroWebStrategy,
-      ElectroBoostStrategy,
-      DynamaxCannonStrategy,
-      DynamicPunchStrategy,
-      DracoEnergyStrategy,
-      CrabHammerStrategy,
-      DiamondStormStrategy,
-      ConfusingMindStrategy,
-      SongOfDesireStrategy,
-      MindBlownStrategy,
-      PaydayStrategy,
-      AuroraVeilStrategy,
-      FusionBoltStrategy,
-      BlueFlareStrategy,
-      SoftBoiledStrategy,
-      BeatUpStrategy,
-      EarthquakeStrategy,
-      SteamEruptionStrategy
-    ]
-    const strategy = new (pickRandomIn(skills))()
+
+    const strategy = pickRandomIn(Object.values(AbilityStrategy))
     strategy.process(pokemon, state, board, target)
   }
 }

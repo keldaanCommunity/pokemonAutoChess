@@ -24,7 +24,7 @@ export function GameAdditionalPokemons() {
         effect="solid"
         place="top"
       >
-        <p className="help">Each player picked one additional Pokemon to be available in all players shop for this game.</p>
+        <p className="help">Each player picked two additional Pokemon to be available in all players shop for this game.</p>
       </ReactTooltip>
       <div className="nes-container game-additional-pokemons" data-tip data-for="detail-additional-pokemons">
         {additionalPokemons.map((p, index) => {

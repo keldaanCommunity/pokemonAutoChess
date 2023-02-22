@@ -559,7 +559,7 @@ export default class AnimationManager {
         prefix: `${Ability.BLAZE_KICK}/`
       }),
       duration: 1000,
-      repeat: 2
+      repeat: 0
     })
 
     this.game.anims.create({
@@ -1659,6 +1659,18 @@ export default class AnimationManager {
       }),
       duration: 1000,
       repeat: -1
+    })
+
+    this.game.anims.create({
+      key: Ability.FAKE_TEARS,
+      frames: this.game.anims.generateFrameNames("attacks", {
+        start: 14,
+        end: 0,
+        zeroPad: 3,
+        prefix: "ICE/cell/"
+      }),
+      duration: 1000,      
+      repeat: 0
     })
   }
 

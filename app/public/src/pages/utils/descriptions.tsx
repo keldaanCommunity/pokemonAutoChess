@@ -4,7 +4,7 @@ import { StatLabel } from "../../../../types/strings/Stat"
 import { cc } from "./jsx"
 
 export const iconRegExp =
-  /(?<=\W)(?:PHYSICAL|SPECIAL|TRUE|atk|speed|critChance|critDamage|def|hp|mana|range|shield|speDef|spellDamage|\[[^\]]+\])(?=\W)/g
+  /(?<=\W|^)(?:PHYSICAL|SPECIAL|TRUE|atk|speed|critChance|critDamage|def|hp|mana|range|shield|speDef|spellDamage|\[[^\]]+\])(?=\W|$)/g
 
 export function addIconsToDescription(description: string, stars: number = 0){
   const matchIcon = description.match(iconRegExp)
