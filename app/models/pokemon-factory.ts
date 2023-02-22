@@ -349,6 +349,8 @@ import {
   Salazzle,
   Samurott,
   Sandile,
+  Sandshrew,
+  Sandslash,
   Sceptile,
   Scizor,
   Scolipede,
@@ -480,7 +482,8 @@ export const ObtainableEgg = new Array<Pkm>(
   Pkm.DREEPY,
   Pkm.SNIVY,
   Pkm.SCORBUNNY,
-  Pkm.POPPLIO
+  Pkm.POPPLIO,
+  Pkm.SANDSHREW
 )
 
 export default class PokemonFactory {
@@ -1611,6 +1614,10 @@ export default class PokemonFactory {
         return new Raboot(s, e)
       case Pkm.CINDERACE:
         return new Cinderace(s, e)
+      case Pkm.SANDSHREW:
+        return new Sandshrew(s, e)
+      case Pkm.SANDSLASH:
+        return new Sandslash(s, e)
       case Pkm.EGG:
         return new Egg(s, e)
       case Pkm.DEFAULT:

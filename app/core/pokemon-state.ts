@@ -147,9 +147,11 @@ export default class PokemonState {
         }
 
         if (
-          (reduceable && pokemon.effects.includes(Effect.GUTS)) ||
-          pokemon.effects.includes(Effect.DEFIANT) ||
-          pokemon.effects.includes(Effect.JUSTIFIED)
+          reduceable && (
+            pokemon.effects.includes(Effect.GUTS) ||
+            pokemon.effects.includes(Effect.DEFIANT) ||
+            pokemon.effects.includes(Effect.JUSTIFIED)
+          )
         ) {
           const damageReduction = pokemon.effects.includes(Effect.GUTS)
             ? 3
@@ -510,65 +512,7 @@ export default class PokemonState {
       }
     }
 
-    if (
-      pokemon.effects.includes(Effect.INGRAIN) ||
-      pokemon.effects.includes(Effect.GROWTH) ||
-      pokemon.effects.includes(Effect.SPORE)
-    ) {
-      pokemon.status.updateGrassHeal(dt, pokemon)
-    }
-
-    if (pokemon.status.runeProtect) {
-      pokemon.status.updateRuneProtect(dt)
-    }
-
-    if (pokemon.status.burn) {
-      pokemon.status.updateBurn(dt, pokemon, board)
-    }
-
-    if (pokemon.status.poison) {
-      pokemon.status.updatePoison(dt, pokemon, board)
-    }
-
-    if (pokemon.status.sleep) {
-      pokemon.status.updateSleep(dt)
-    }
-
-    if (pokemon.status.silence) {
-      pokemon.status.updateSilence(dt)
-    }
-
-    if (pokemon.status.protect) {
-      pokemon.status.updateProtect(dt)
-    }
-
-    if (pokemon.status.freeze) {
-      pokemon.status.updateFreeze(dt)
-    }
-
-    if (pokemon.status.confusion) {
-      pokemon.status.updateConfusion(dt)
-    }
-
-    if (pokemon.status.wound) {
-      pokemon.status.updateWound(dt)
-    }
-
-    if (pokemon.status.soulDew) {
-      pokemon.status.updateSoulDew(dt, pokemon)
-    }
-
-    if (pokemon.status.brightPowder) {
-      pokemon.status.updateBrightPowder(dt, pokemon, board)
-    }
-
-    if (pokemon.status.smoke) {
-      pokemon.status.updateSmoke(dt, pokemon)
-    }
-
-    if (pokemon.status.armorReduction) {
-      pokemon.status.updateArmorReduction(dt)
-    }
+    pokemon.status.updateAllStatus(dt, pokemon, board)
 
     if (pokemon.manaCooldown <= 0) {
       pokemon.setMana(pokemon.mana + 10)

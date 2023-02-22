@@ -22,6 +22,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") runeProtect = false
   @type("boolean") electricField = false
   @type("boolean") psychicField = false
+  @type("boolean") spikeArmor = false
   soulDew = false
   brightPowder = false
   deltaOrb = false
@@ -43,6 +44,7 @@ export default class Status extends Schema implements IStatus {
   armorReductionCooldown = 0
   runeProtectCooldown = 0
   grassCooldown = 1000
+  spikeArmorCooldown = 0
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -53,6 +55,72 @@ export default class Status extends Schema implements IStatus {
     this.confusionCooldown = 0
     this.woundCooldown = 0
     this.smokeCooldown = 0
+  }
+
+  updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
+    if (
+      pokemon.effects.includes(Effect.INGRAIN) ||
+      pokemon.effects.includes(Effect.GROWTH) ||
+      pokemon.effects.includes(Effect.SPORE)
+    ) {
+      this.updateGrassHeal(dt, pokemon)
+    }
+
+    if (pokemon.status.runeProtect) {
+      this.updateRuneProtect(dt)
+    }
+
+    if (this.burn) {
+      this.updateBurn(dt, pokemon, board)
+    }
+
+    if (this.poison) {
+      this.updatePoison(dt, pokemon, board)
+    }
+
+    if (this.sleep) {
+      this.updateSleep(dt)
+    }
+
+    if (this.silence) {
+      this.updateSilence(dt)
+    }
+
+    if (this.protect) {
+      this.updateProtect(dt)
+    }
+
+    if (this.freeze) {
+      this.updateFreeze(dt)
+    }
+
+    if (this.confusion) {
+      this.updateConfusion(dt)
+    }
+
+    if (this.wound) {
+      this.updateWound(dt)
+    }
+
+    if (this.soulDew) {
+      this.updateSoulDew(dt, pokemon)
+    }
+
+    if (this.brightPowder) {
+      this.updateBrightPowder(dt, pokemon, board)
+    }
+
+    if (this.smoke) {
+      this.updateSmoke(dt, pokemon)
+    }
+
+    if (this.armorReduction) {
+      this.updateArmorReduction(dt)
+    }
+
+    if (this.spikeArmor) {
+      this.updateSpikeArmor(dt)
+    }
   }
 
   triggerArmorReduction(timer: number) {
@@ -363,6 +431,19 @@ export default class Status extends Schema implements IStatus {
       this.runeProtect = false
     } else {
       this.runeProtectCooldown = this.runeProtectCooldown - dt
+    }
+  }
+
+  triggerSpikeArmor(timer: number) {
+    this.spikeArmor = true
+    this.spikeArmorCooldown = timer
+  }
+
+  updateSpikeArmor(dt: number) {
+    if (this.spikeArmorCooldown - dt <= 0) {
+      this.spikeArmor = false
+    } else {
+      this.spikeArmorCooldown = this.spikeArmorCooldown - dt
     }
   }
 }

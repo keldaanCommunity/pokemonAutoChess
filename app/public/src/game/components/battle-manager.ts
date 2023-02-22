@@ -209,6 +209,12 @@ export default class BattleManager {
             } else {
               pkm.removeRuneProtect()
             }
+          } else if (change.field == "spikeArmor") {
+            if (pokemon.status.spikeArmor) {
+              pkm.addSpikeArmor()
+            } else {
+              pkm.removeSpikeArmor()
+            }
           } else if (change.field == "electricField") {
             if (pokemon.status.electricField) {
               pkm.addElectricField()

@@ -400,6 +400,11 @@ export default class GameScene extends Scene {
       "/assets/attacks"
     )
     this.load.multiatlas(
+      "SPIKE_ARMOR",
+      "/assets/attacks/SPIKE_ARMOR.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
       "pmd-replace",
       "/assets/attacks/pmd-replace.json",
       "/assets/attacks"

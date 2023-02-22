@@ -645,8 +645,14 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
+  [Ability.SPIKE_ARMOR]: {
+    eng: `Spike Armor`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
   [Ability.FUTURE_SIGHT]: {
-    eng: `Dive`,
+    eng: `Future Sight`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -925,25 +931,25 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ORIGIN_PULSE]: {
-    eng: `A wave travels horizontally across the battlefield doing [30,60,120] ${Damage.SPECIAL}`,
+    eng: `A wave travels horizontally across the battlefield doing [30,60,120] ${Damage.SPECIAL} `,
     esp: `Una ola viaja horizontalmente por el campo de batalla haciendo 60 de daño mágico.`,
     fra: `Une vague parcourt horizontalement le champ de bataille faisant 60 dégats magiques`,
     prt: ``
   },
   [Ability.SEED_FLARE]: {
-    eng: `Shaymins body emits a shock wave, dealing 30 ${Damage.SPECIAL} to all ennemies, and decreasing their ${Stat.SPE_DEF} by 2.`,
+    eng: `Shaymins body emits a shock wave, dealing 30 ${Damage.SPECIAL} to all ennemies, and decreasing their ${Stat.SPE_DEF} by 2`,
     esp: `El cuerpo de Shaymin emite una onda de choque que inflige 30 de daño mágico a todos los enemigos y reduce su velocidad en 2.`,
     fra: `Le corps de Shaymin émet une onde de choc, infligeant 30 dégâts magiques à tous les ennemis et réduisant leur vitesse de 2.`,
     prt: ``
   },
   [Ability.IRON_TAIL]: {
-    eng: `Mono target damage attack that deals [20,40,80] ${Damage.SPECIAL}. Buff ${Stat.DEF} by [1,3,5] points.`,
+    eng: `Mono target damage attack that deals [20,40,80] ${Damage.SPECIAL}. Buff ${Stat.DEF} by [1,3,5] points`,
     esp: `Ataque de daño al objetivo mono que reparte 20,30,40. Pulveriza la defensa por 1,3,5 puntos.`,
     fra: `Attaque monocible faisant 20,30,40 dégats physique. Booste la défense de 1,3,5 points.`,
     prt: ``
   },
   [Ability.BLAST_BURN]: {
-    eng: `Area of effect attack that deals [30,60,120] ${Damage.SPECIAL}.`,
+    eng: `Area of effect attack that deals [30,60,120] ${Damage.SPECIAL}`,
     esp: `Ataque en el área de efecto que causa 30,50,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 30,50,80 dégats spéciaux.`,
     prt: ``
@@ -961,7 +967,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BITE]: {
-    eng: `30% Life steal mono target ${Damage.PHYSICAL} that deals [30,60,120] ${Damage.SPECIAL}.`,
+    eng: `30% Life steal mono target that deals [30,60,120] ${Damage.SPECIAL}`,
     esp: `50% Vida robar mono objetivo de ataque físico que inflige 30,50,70 de daño.`,
     fra: `Attaque monocible avec 50% de vol de vie faisant 30,50,70 dégats spéciaux.`,
     prt: ``
@@ -985,7 +991,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ROOT]: {
-    eng: `Heal all nearby ally pokemons by [20,40,80] ${Stat.HP}.`,
+    eng: `Heal all nearby ally pokemons by [20,40,80] ${Stat.HP}`,
     esp: `Curar a todos los pokemons aliados cercanos con 20,30,40 hp.`,
     fra: `Soigne les alliés autour de 20,30,40 hp.`,
     prt: ``
@@ -1015,13 +1021,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BUG_BUZZ]: {
-    eng: `Mono target attack that does [15,30,60] ${Damage.SPECIAL}.`,
+    eng: `Mono target attack that does [15,30,60] ${Damage.SPECIAL}`,
     esp: `Ataque de daño especial de un mono objetivo que hace 20,30,40.`,
     fra: `Attaque mono cible faisant 20,30,40 dégats spéciaux`,
     prt: ``
   },
   [Ability.POISON_STING]: {
-    eng: `Mono target damage that deals [30,60,120] ${Damage.SPECIAL}. Doubles damage if target is poisoned.`,
+    eng: `Mono target damage that deals [30,60,120] ${Damage.SPECIAL}. Doubles damage if target is poisoned`,
     esp: `Daño físico de un solo objetivo que reparte 30,40,50. Duplica el daño si el objetivo está envenenado.`,
     fra: `Attaque physique mono cible faisant 30,40,50 dégats. Double les dégats si la cible est empoisonné.`,
     prt: ``
@@ -1033,7 +1039,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HAPPY_HOUR]: {
-    eng: `Buff all ally ${Stat.ATK} by [3,6,9] points.`,
+    eng: `Buff all ally ${Stat.ATK} by [3,6,9] points`,
     esp: `Pulir todos los ataques de los aliados por 3,6,9 puntos.`,
     fra: `Augmente l attaque de toute l équipe de 3,6,9 points.`,
     prt: ``
@@ -1075,7 +1081,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HEAL_BLOCK]: {
-    eng: `Apply wound status (target cannot heal) to all adjacent ennemies for [5,10,15]s.`,
+    eng: `Apply wound status (target cannot heal) to all adjacent ennemies for [5,10,15]s`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
@@ -1093,13 +1099,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ROCK_SMASH]: {
-    eng: `Mono target attack that deals [20,40,80] ${Damage.SPECIAL} and silence target for [3,6,9] s.`,
+    eng: `Mono target attack that deals [20,40,80] ${Damage.SPECIAL} and silence target for [3,6,9] s`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
   },
   [Ability.HEAD_SMASH]: {
-    eng: `The pokemon hurt itself for [5,10,15] ${Stat.HP}, and deals [40,80,150] ${Damage.SPECIAL}. Execute if the target is asleep,frozen.`,
+    eng: `The pokemon hurt itself for [5,10,15] ${Stat.HP}, and deals [40,80,150] ${Damage.SPECIAL}. Execute if the target is asleep,frozen`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
@@ -1195,7 +1201,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   WONDER_GUARD: {
-    eng: `Passive: Reduce received damage to 1.`,
+    eng: `Passive: Reduce received damage to 1`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1255,7 +1261,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.PROTEAN]: {
-    eng: `The pokemon acquires the typing of the [1,2,3] highest synergies on the team.`,
+    eng: `The pokemon acquires the typing of the [1,2,3] highest synergies on the team`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1292,6 +1298,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.DIVE]: {
     eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40] ${Damage.SPECIAL} and freezing all adjacent units for [1.5,3,6] seconds`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
+  [Ability.SPIKE_ARMOR]: {
+    eng: `For [3,5,10] seconds, targets that melee attack this Pokémon are wounded and take ${Damage.SPECIAL} equal to current defense`,
     esp: ``,
     prt: ``,
     fra: ``
