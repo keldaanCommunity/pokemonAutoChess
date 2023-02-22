@@ -38,7 +38,8 @@ export default function GamePokemonsPropositions() {
             const p = PokemonFactory.createPokemonFromName(pokemon)
             return (
               <GamePokemonPortrait
-                key={index}
+                key={'proposition'+index}
+                origin="proposition"
                 index={index}
                 pokemon={p}
                 pokemonConfig={pokemonCollection.get(p.index)}

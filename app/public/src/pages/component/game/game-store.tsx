@@ -19,7 +19,8 @@ export default function GameStore() {
           const p = PokemonFactory.createPokemonFromName(pokemon)
           return (
             <GamePokemonPortrait
-              key={index}
+              key={'shop'+index}
+              origin="shop"
               index={index}
               pokemon={p}
               pokemonConfig={pokemonCollection.get(p.index)}
@@ -31,7 +32,8 @@ export default function GameStore() {
         } else {
           return (
             <GamePokemonPortrait
-              key={index}
+              key={'shop'+index}
+              origin="shop"
               index={index}
               pokemon={undefined}
               pokemonConfig={undefined}
