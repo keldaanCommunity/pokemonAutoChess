@@ -118,13 +118,10 @@ export default class PokemonState {
         const def = pokemon.def
         const speDef = pokemon.speDef
         if (attackType == AttackType.PHYSICAL) {
-          const ritodamage =
-            damage * (pokemon.life / (pokemon.life * (1 + armorFactor * def)))
+          const ritodamage = damage / (1 + armorFactor * def)
           reducedDamage = Math.max(0, Math.round(ritodamage))
         } else if (attackType == AttackType.SPECIAL) {
-          const ritodamage =
-            damage *
-            (pokemon.life / (pokemon.life * (1 + armorFactor * speDef)))
+          const ritodamage = damage / (1 + armorFactor * speDef)
           reducedDamage = Math.max(0, Math.round(ritodamage))
         } else if (attackType == AttackType.TRUE) {
           reducedDamage = damage
