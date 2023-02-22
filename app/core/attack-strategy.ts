@@ -1616,7 +1616,8 @@ export class SpikeArmorStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    pokemon.status.triggerSpikeArmor(5000)
+    const duration = pokemon.stars === 3 ? 10 : pokemon.stars === 2 ? 5 : 3
+    pokemon.status.triggerSpikeArmor(duration)
   }
 }
 

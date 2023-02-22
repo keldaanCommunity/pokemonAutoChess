@@ -291,8 +291,7 @@ export default class AttackingState extends PokemonState {
       }
 
       if (target.status.spikeArmor && pokemon.range === 1) {
-        const duration = target.stars === 3 ? 10 : target.stars === 2 ? 5 : 3
-        pokemon.status.triggerWound(duration, pokemon, board)
+        pokemon.status.triggerWound(2000, pokemon, board)
         pokemon.handleDamage(
           target.def,
           board,
