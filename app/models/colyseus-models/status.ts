@@ -220,6 +220,12 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
+  healBurn(){
+    this.burn = false
+    this.burnOrigin = undefined
+    this.burnDamageCooldown = 1000
+  }
+
   triggerSilence(timer: number, pkm: PokemonEntity, board: Board) {
     if (!this.silence && !pkm.items.has(Item.FLUFFY_TAIL)) {
       this.silence = true

@@ -1902,6 +1902,26 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
+          case Ability.SPARKLING_ARIA:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.LIQUIDATION,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2.5, 2.5)
+            specialProjectile.setAlpha(0.5)
+            specialProjectile.anims.play(Ability.LIQUIDATION)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.PAYDAY:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
@@ -2374,6 +2394,56 @@ export default class Pokemon extends DraggableObject {
                 s.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
                   s.destroy()
                 })
+              }
+            })
+            break
+
+            case Ability.FAKE_TEARS:
+              coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+              specialProjectile = this.scene.add.sprite(
+                coordinates[0],
+                coordinates[1],
+                "specials",
+                `${Ability.FAKE_TEARS}/000`
+              )
+              specialProjectile.setDepth(7)
+              specialProjectile.setScale(2, 2)
+              specialProjectile.anims.play(Ability.FAKE_TEARS)
+              specialProjectile.once(
+                Phaser.Animations.Events.ANIMATION_COMPLETE,
+                () => {
+                  specialProjectile.destroy()
+                }
+              )
+              break
+
+          case Ability.DRAGON_DARTS:
+            coordinatesTarget = transformAttackCoordinate(
+              this.targetX,
+              this.targetY
+            )
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "specials",
+              `${Ability.POISON_STING}/002`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(1, 1)
+            specialProjectile.setRotation(Math.atan2(coordinatesTarget[1]-coordinates[1], coordinatesTarget[0]-coordinates[0]) - Math.PI/2)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "linear",
+              yoyo: false,
+              duration: 500,
+              onComplete: () => {
+                specialProjectile.destroy()
               }
             })
             break

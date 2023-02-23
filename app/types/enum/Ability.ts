@@ -107,7 +107,10 @@ import {
   ShadowBallStrategy,
   DiveStrategy,
   SpikeArmorStrategy,
-  FutureSightStrategy
+  FutureSightStrategy,
+  FakeTearsStrategy,
+  SparklingAriaStrategy,
+  DragonDartsStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -219,7 +222,10 @@ export enum Ability {
   SHADOW_BALL = "SHADOW_BALL",
   DIVE = "DIVE",
   SPIKE_ARMOR = "SPIKE_ARMOR",
-  FUTURE_SIGHT = "FUTURE_SIGHT"
+  FUTURE_SIGHT = "FUTURE_SIGHT",
+  FAKE_TEARS = "FAKE_TEARS",
+  SPARKLING_ARIA = "SPARKLING_ARIA",
+  DRAGON_DARTS = "DRAGON_DARTS"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -331,5 +337,8 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SHADOW_BALL]: new ShadowBallStrategy(),
   [Ability.DIVE]: new DiveStrategy(),
   [Ability.SPIKE_ARMOR]: new SpikeArmorStrategy(),
-  [Ability.FUTURE_SIGHT]: new FutureSightStrategy()
+  [Ability.FUTURE_SIGHT]: new FutureSightStrategy(),
+  [Ability.FAKE_TEARS]: new FakeTearsStrategy(),
+  [Ability.SPARKLING_ARIA]: new SparklingAriaStrategy(),
+  [Ability.DRAGON_DARTS]: new DragonDartsStrategy()
 }
