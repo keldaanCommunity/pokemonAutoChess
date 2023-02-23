@@ -3361,8 +3361,8 @@ export class FakeTearsStrategy extends AttackStrategy {
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
-        value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
         value.status.triggerArmorReduction(3000)
+        value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
       }
     })
   }
