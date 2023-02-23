@@ -23,7 +23,7 @@ import {
 } from "../stores/PreparationStore"
 import GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
-import "./preparation.css";
+import "./preparation.css"
 
 export default function Preparation() {
   const dispatch = useAppDispatch()
@@ -36,6 +36,7 @@ export default function Preparation() {
   const [toAuth, setToAuth] = useState<boolean>(false)
   const [toLobby, setToLobby] = useState<boolean>(false)
   const audio = useRef(new Audio("assets/sounds/notification.mp3"))
+  const connectingToGame = useRef<boolean>(false)
 
   useEffect(() => {
     const reconnect = async () => {
@@ -121,7 +122,8 @@ export default function Preparation() {
 
       r.onMessage(Transfer.GAME_START, async (message) => {
         const token = await firebase.auth().currentUser?.getIdToken()
-        if (token) {
+        if (token && !connectingToGame.current) {
+          connectingToGame.current = true
           const game: Room<GameState> = await client.joinById(message.id, {
             idToken: token
           })
@@ -152,17 +154,17 @@ export default function Preparation() {
     return (
       <div className="preparation-page">
         <nav>
-          <Link to="/lobby" style={{textDecoration: "none"}}>
-          <button
-            className="bubbly blue"
-            onClick={async () => {
-              dispatch(leavePreparation())
-              room?.connection.close()
-            }}
-          >
-            Return to Lobby
-          </button>
-        </Link>
+          <Link to="/lobby" style={{ textDecoration: "none" }}>
+            <button
+              className="bubbly blue"
+              onClick={async () => {
+                dispatch(leavePreparation())
+                room?.connection.close()
+              }}
+            >
+              Return to Lobby
+            </button>
+          </Link>
         </nav>
         <main>
           <PreparationMenu setToGame={setToGame} />
