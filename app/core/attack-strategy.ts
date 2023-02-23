@@ -3345,19 +3345,15 @@ export class FakeTearsStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 0
-    let reduce = 0
     switch (pokemon.stars) {
       case 1:
-        damage = 5
-        reduce = 1
+        damage = 3
         break
       case 2:
-        damage = 10
-        reduce = 2
+        damage = 6
         break
       case 3:
-        damage = 20
-        reduce = 3
+        damage = 9
         break
       default:
         break
@@ -3366,7 +3362,7 @@ export class FakeTearsStrategy extends AttackStrategy {
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
         value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-        value.addSpecialDefense(-reduce, true)
+        value.status.triggerArmorReduction(3000)
       }
     })
   }
@@ -3386,8 +3382,12 @@ export class SparklingAriaStrategy extends AttackStrategy {
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)        
-      } else if(cell.value && cell.value.team === pokemon.team && cell.value.status.burn){
+        cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+      } else if (
+        cell.value &&
+        cell.value.team === pokemon.team &&
+        cell.value.status.burn
+      ) {
         cell.value.status.healBurn()
       }
     })
@@ -3421,14 +3421,13 @@ export class DragonDartsStrategy extends AttackStrategy {
       default:
         break
     }
-    
-    for(let n=0; n<3; n++){
+
+    for (let n = 0; n < 3; n++) {
       target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
     }
-    if(target.life <= 0){
+    if (target.life <= 0) {
       pokemon.setMana(pokemon.mana + 40)
     }
-    
   }
 }
 

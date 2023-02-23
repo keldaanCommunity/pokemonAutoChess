@@ -1663,13 +1663,23 @@ export default class AnimationManager {
 
     this.game.anims.create({
       key: Ability.FAKE_TEARS,
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 14,
-        end: 0,
-        zeroPad: 3,
-        prefix: "ICE/cell/"
+      frames: this.game.anims.generateFrameNames(Ability.FAKE_TEARS, {
+        start: 0,
+        end: 17,
+        zeroPad: 3
       }),
-      duration: 1000,      
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.SPARKLING_ARIA,
+      frames: this.game.anims.generateFrameNames(Ability.SPARKLING_ARIA, {
+        start: 0,
+        end: 52,
+        zeroPad: 3
+      }),
+      duration: 1000,
       repeat: 0
     })
   }

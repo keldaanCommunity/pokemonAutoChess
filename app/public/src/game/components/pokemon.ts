@@ -771,6 +771,10 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.FLAME_CHARGE:
+            coordinatesTarget = transformAttackCoordinate(
+              this.targetX,
+              this.targetY
+            )
             coordinates = transformAttackCoordinate(
               this.positionX,
               this.positionY
@@ -783,6 +787,13 @@ export default class Pokemon extends DraggableObject {
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
+            specialProjectile.setRotation(
+              Math.atan2(
+                coordinatesTarget[1] - coordinates[1],
+                coordinatesTarget[0] - coordinates[0]
+              ) -
+                Math.PI / 2
+            )
             specialProjectile.anims.play(Ability.FLAME_CHARGE)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
@@ -793,6 +804,10 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.AQUA_JET:
+            coordinatesTarget = transformAttackCoordinate(
+              this.targetX,
+              this.targetY
+            )
             coordinates = transformAttackCoordinate(
               this.positionX,
               this.positionY
@@ -805,6 +820,13 @@ export default class Pokemon extends DraggableObject {
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
+            specialProjectile.setRotation(
+              Math.atan2(
+                coordinatesTarget[1] - coordinates[1],
+                coordinatesTarget[0] - coordinates[0]
+              ) -
+                Math.PI / 2
+            )
             specialProjectile.anims.play(Ability.AQUA_JET)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
@@ -1903,23 +1925,34 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.SPARKLING_ARIA:
-            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            coordinatesTarget = transformAttackCoordinate(
+              this.targetX,
+              this.targetY
+            )
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
-              Ability.LIQUIDATION,
+              Ability.SPARKLING_ARIA,
               "000"
             )
             specialProjectile.setDepth(7)
-            specialProjectile.setScale(2.5, 2.5)
-            specialProjectile.setAlpha(0.5)
-            specialProjectile.anims.play(Ability.LIQUIDATION)
-            specialProjectile.once(
-              Phaser.Animations.Events.ANIMATION_COMPLETE,
-              () => {
+            specialProjectile.setScale(3, 3)
+            specialProjectile.anims.play(Ability.SPARKLING_ARIA)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "linear",
+              yoyo: false,
+              duration: 1000,
+              onComplete: () => {
                 specialProjectile.destroy()
               }
-            )
+            })
             break
 
           case Ability.PAYDAY:
@@ -1942,6 +1975,10 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.VOLT_SWITCH:
+            coordinatesTarget = transformAttackCoordinate(
+              this.targetX,
+              this.targetY
+            )
             coordinates = transformAttackCoordinate(
               this.positionX,
               this.positionY
@@ -1954,6 +1991,13 @@ export default class Pokemon extends DraggableObject {
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
+            specialProjectile.setRotation(
+              Math.atan2(
+                coordinatesTarget[1] - coordinates[1],
+                coordinatesTarget[0] - coordinates[0]
+              ) -
+                Math.PI / 2
+            )
             specialProjectile.anims.play(Ability.VOLT_SWITCH)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
@@ -2398,24 +2442,29 @@ export default class Pokemon extends DraggableObject {
             })
             break
 
-            case Ability.FAKE_TEARS:
-              coordinates = transformAttackCoordinate(this.positionX, this.positionY)
-              specialProjectile = this.scene.add.sprite(
-                coordinates[0],
-                coordinates[1],
-                "specials",
-                `${Ability.FAKE_TEARS}/000`
-              )
-              specialProjectile.setDepth(7)
-              specialProjectile.setScale(2, 2)
-              specialProjectile.anims.play(Ability.FAKE_TEARS)
-              specialProjectile.once(
-                Phaser.Animations.Events.ANIMATION_COMPLETE,
-                () => {
-                  specialProjectile.destroy()
-                }
-              )
-              break
+          case Ability.FAKE_TEARS:
+            group.getChildren().forEach((p) => {
+              const pokemon = <Pokemon>p
+              if (this.team != pokemon.team) {
+                const coordinates = transformAttackCoordinate(
+                  pokemon.positionX,
+                  pokemon.positionY
+                )
+                const s = this.scene.add.sprite(
+                  coordinates[0],
+                  coordinates[1],
+                  Ability.FAKE_TEARS,
+                  "000"
+                )
+                s.setDepth(7)
+                s.setScale(2, 2)
+                s.anims.play(Ability.FAKE_TEARS)
+                s.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                  s.destroy()
+                })
+              }
+            })
+            break
 
           case Ability.DRAGON_DARTS:
             coordinatesTarget = transformAttackCoordinate(
@@ -2434,7 +2483,13 @@ export default class Pokemon extends DraggableObject {
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(1, 1)
-            specialProjectile.setRotation(Math.atan2(coordinatesTarget[1]-coordinates[1], coordinatesTarget[0]-coordinates[0]) - Math.PI/2)
+            specialProjectile.setRotation(
+              Math.atan2(
+                coordinatesTarget[1] - coordinates[1],
+                coordinatesTarget[0] - coordinates[0]
+              ) -
+                Math.PI / 2
+            )
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],

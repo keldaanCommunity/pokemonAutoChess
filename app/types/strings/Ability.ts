@@ -1333,7 +1333,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.FAKE_TEARS]: {
-    eng: `Deals [5,10,20] ${Damage.SPECIAL} to the whole enemy team and reduce their ${Stat.SPE_DEF} by [1,2,3]`,
+    eng: `Deals [3,6,9] ${Damage.SPECIAL} to the whole enemy team and trigger armor reduction for 3s`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1349,5 +1349,5 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     esp: ``,
     prt: ``,
     fra: ``
-  },
+  }
 }

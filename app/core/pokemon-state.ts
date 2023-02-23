@@ -115,8 +115,12 @@ export default class PokemonState {
           attackType = AttackType.TRUE
         }
         const armorFactor = 0.1
-        const def = pokemon.def
-        const speDef = pokemon.speDef
+        const def = pokemon.status.armorReduction
+          ? Math.round(pokemon.def / 2)
+          : pokemon.def
+        const speDef = pokemon.status.armorReduction
+          ? Math.round(pokemon.speDef / 2)
+          : pokemon.speDef
         if (attackType == AttackType.PHYSICAL) {
           const ritodamage = damage / (1 + armorFactor * def)
           reducedDamage = Math.max(0, Math.round(ritodamage))
@@ -147,11 +151,10 @@ export default class PokemonState {
         }
 
         if (
-          reduceable && (
-            pokemon.effects.includes(Effect.GUTS) ||
+          reduceable &&
+          (pokemon.effects.includes(Effect.GUTS) ||
             pokemon.effects.includes(Effect.DEFIANT) ||
-            pokemon.effects.includes(Effect.JUSTIFIED)
-          )
+            pokemon.effects.includes(Effect.JUSTIFIED))
         ) {
           const damageReduction = pokemon.effects.includes(Effect.GUTS)
             ? 3

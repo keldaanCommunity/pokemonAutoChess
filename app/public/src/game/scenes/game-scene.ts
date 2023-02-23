@@ -405,6 +405,16 @@ export default class GameScene extends Scene {
       "/assets/attacks"
     )
     this.load.multiatlas(
+      "FAKE_TEARS",
+      "/assets/attacks/FAKE_TEARS.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
+      "SPARKLING_ARIA",
+      "/assets/attacks/SPARKLING_ARIA.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
       "pmd-replace",
       "/assets/attacks/pmd-replace.json",
       "/assets/attacks"
