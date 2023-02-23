@@ -2,7 +2,7 @@ import React, { ReactElement } from "react"
 import { Damage, Stat } from "../../../../types/enum/Game"
 import { Status } from "../../../../types/enum/Status"
 import { StatLabel } from "../../../../types/strings/Stat"
-import { StatusLabel } from "../../../../types/strings/Status"
+import { StatusDescription, StatusLabel } from "../../../../types/strings/Status"
 import { cc } from "./jsx"
 
 export const iconRegExp =
@@ -38,7 +38,7 @@ export function addIconsToDescription(description: string, stars: number = 0){
             )
           } else if (Object.values(Status).includes(token as Status)) {
             d = (
-              <span key={i} className="description-icon">
+              <span key={i} className="description-icon" title={StatusDescription[token].eng}>
                 <img src={`assets/icons/${token}.png`} />
                 <span className="status-label">{StatusLabel[token].eng}</span>
               </span>

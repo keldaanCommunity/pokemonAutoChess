@@ -1,6 +1,7 @@
 import { Langage } from ".."
 import { Ability } from "../enum/Ability"
 import { Damage, Stat } from "../enum/Game"
+import { Status } from "../enum/Status"
 
 export const AbilityName: { [key in Ability]: Langage } = {
   [Ability.SOFT_BOILED]: {
@@ -685,19 +686,19 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.EARTHQUAKE]: {
-    eng: `Deals damage [30,60,120] ${Damage.SPECIAL} to all ennemy units in the same column/line`,
+    eng: `Deals damage [30,60,120] ${Damage.SPECIAL} to all enemy units in the same column/line`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.SONG_OF_DESIRE]: {
-    eng: `The target is confused for [3,6,12]s`,
+    eng: `The target is ${Status.CONFUSION} for [3,6,12] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.CONFUSING_MIND]: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} to the target and confuse adjcacent pokemons for [1.5,3,6]s`,
+    eng: `Deals [20,40,80] ${Damage.SPECIAL} to the target and make adjacent pokemons ${Status.CONFUSION} for [1.5,3,6] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -709,7 +710,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.KING_SHIELD]: {
-    eng: `Protect the user for [1,2,4] s and swap his position with the farthest enemy`,
+    eng: `${Status.PROTECT} the user for [1,2,4] seconds and swap his position with the farthest enemy`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -721,7 +722,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.NIGHTMARE]: {
-    eng: `Poison the ennemy team for [2,4,8] s`,
+    eng: `${Status.POISON} the whole enemy team for [2,4,8] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -739,13 +740,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.GROWL]: {
-    eng: `Apply wound status on the ennemy team for [3,6,9]s`,
+    eng: `Apply ${Status.WOUND} status on the entire enemy team for [3,6,9] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.RELIC_SONG]: {
-    eng: `Put asleep the ennemy team for [1,2,4] s`,
+    eng: `Put ${Status.SLEEP} the whole enemy team for [1,2,4] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -763,13 +764,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.GRASS_WHISTLE]: {
-    eng: `Put asleep [1,2,4] ennemies for 2 seconds`,
+    eng: `Put ${Status.SLEEP} [1,2,4] ennemies for 2 seconds`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.TRI_ATTACK]: {
-    eng: `Burn, freeze and wound the target for [2,4,8] s`,
+    eng: `${Status.BURN}, ${Status.FREEZE} and ${Status.WOUND} the target for [2,4,8] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -787,7 +788,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HYPER_VOICE]: {
-    eng: `Deals [50,100,200] ${Damage.SPECIAL} on a row, confuse for [1,2,3] seconds`,
+    eng: `Deals [50,100,200] ${Damage.SPECIAL} on a row and make all targets hit ${Status.CONFUSION} for [1,2,3] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -799,7 +800,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.VOLT_SWITCH]: {
-    eng: `Dash into the ennemy backline, dealing [30,60,120] ${Damage.SPECIAL}`,
+    eng: `Dash into the enemy backline, dealing [30,60,120] ${Damage.SPECIAL}`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -817,43 +818,43 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BURN]: {
-    eng: `Burn the whole enemy team for [5,10,20] seconds`,
+    eng: `${Status.BURN} the whole enemy team for [5,10,20] seconds`,
     esp: `Quemar todo el equipo durante 2,4,8 segundos, repartiendo el 5% de hp,segundos`,
     fra: `Brule la cible pour 2,4,8 secondes, lui faisant perdre 5% hp,secondes`,
     prt: ``
   },
   [Ability.POISON]: {
-    eng: `Poison the target for [4,8,16] seconds`,
+    eng: `${Status.POISON} the target for [4,8,16] seconds`,
     esp: `Envenenar el objetivo durante 5,10,20 segundos, repartiendo 15% hp,segundos`,
     fra: `Empoisonne la cible durant 5,10,20 secondes, faisant 15% hp,secondes`,
     prt: ``
   },
   [Ability.SLEEP]: {
-    eng: `Sleeps 2 back lines for [1.5,3,4.5] seconds`,
+    eng: `Put ${Status.SLEEP} 2 enemies in the back lines for [1.5,3,4.5] seconds`,
     esp: `Duerme el objetivo durante 3,5,7 segundos`,
     fra: `Endors la cible durant 3,5,7 secondes`,
     prt: ``
   },
   [Ability.SILENCE]: {
-    eng: `Silence the whole enemy team for [2,4,8] seconds`,
+    eng: `${Status.SILENCE} the whole enemy team for [2,4,8] seconds`,
     esp: `Silenciar todo el equipo durante 2,4,8 segundos`,
     fra: `Silence toute l équipe ennemie durant 2,4,8 secondes`,
     prt: ``
   },
   [Ability.PROTECT]: {
-    eng: `Makes the pokemon invulnerable for [3,5,7] seconds.`,
+    eng: `${Status.PROTECT} the user, becoming invulnerable for [3,5,7] seconds.`,
     esp: `Hace que el pokemon sea invulnerable durante 3,5,7 segundos.`,
     fra: `Rend le pokémon invulnérable durant 3,5,7 secondes`,
     prt: ``
   },
   [Ability.FREEZE]: {
-    eng: `Freeze the whole enemy team for [1,2,4] seconds`,
+    eng: `${Status.FREEZE} the whole enemy team for [1,2,4] seconds`,
     esp: `Congela todo el equipo durante 1,2,4 segundos`,
     fra: `Gèle la cible durant 1,2,4 secondes`,
     prt: ``
   },
   [Ability.CONFUSION]: {
-    eng: `Makes the target confused for [3,6,12] seconds`,
+    eng: `Makes the target ${Status.CONFUSION} for [3,6,12] seconds`,
     esp: `Hace que todo el equipo se confunda durante 1,2,4 segundos`,
     fra: `Rend toute la team ennemie confus pendant 1, 2 4 secondes`,
     prt: ``
@@ -1045,7 +1046,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.POISON_STING]: {
-    eng: `Mono target damage that deals [30,60,120] ${Damage.SPECIAL}. Doubles damage if target is poisoned`,
+    eng: `Mono target damage that deals [30,60,120] ${Damage.SPECIAL}. Doubles damage if target is ${Status.POISON}`,
     esp: `Daño físico de un solo objetivo que reparte 30,40,50. Duplica el daño si el objetivo está envenenado.`,
     fra: `Attaque physique mono cible faisant 30,40,50 dégats. Double les dégats si la cible est empoisonné.`,
     prt: ``
@@ -1099,13 +1100,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HEAL_BLOCK]: {
-    eng: `Apply wound status (target cannot heal) to all adjacent ennemies for [5,10,15]s`,
+    eng: `Apply ${Status.WOUND} to all adjacent ennemies for [5,10,15] seconds`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
   },
   [Ability.ROAR_OF_TIME]: {
-    eng: `Add a second life to the pokemon that has the most items.`,
+    eng: `Give ${Status.RESURECTION} to the pokemon that has the most items in your team.`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
@@ -1117,19 +1118,19 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ROCK_SMASH]: {
-    eng: `Mono target attack that deals [20,40,80] ${Damage.SPECIAL} and silence target for [3,6,9] s`,
+    eng: `Mono target attack that deals [20,40,80] ${Damage.SPECIAL} and ${Status.SILENCE} target for [3,6,9] seconds`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
   },
   [Ability.HEAD_SMASH]: {
-    eng: `The pokemon hurt itself for [5,10,15] ${Stat.HP}, and deals [40,80,150] ${Damage.SPECIAL}. Execute if the target is asleep,frozen`,
+    eng: `The pokemon hurt itself for [5,10,15] ${Stat.HP}, and deals [40,80,150] ${Damage.SPECIAL}. Execute if the target is ${Status.SLEEP} or ${Status.FREEZE}`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
   },
   CORRUPTED_NATURE: {
-    eng: `Wound adjacent ennemies for 5 seconds and deals [20,40] life steal ${Damage.SPECIAL}`,
+    eng: `${Status.WOUND} adjacent ennemies for 5 seconds and deals [20,40] life steal ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1159,13 +1160,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   DYNAMIC_PUNCH: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} and confuse the target for [1.5,3,6] s`,
+    eng: `Deals [20,40,80] ${Damage.SPECIAL} and make the target ${Status.CONFUSION} for [1.5,3,6] seconds`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   ELECTRO_BOOST: {
-    eng: `All electric allies are immune to spells for 5s`,
+    eng: `All electric allies receive ${Status.RUNE_PROTECT} and are immune to spells for 5s`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1183,31 +1184,31 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   FLAME_CHARGE: {
-    eng: `Dash into the ennemy backline, dealing [30,60,120] ${Damage.SPECIAL}`,
+    eng: `Dash into the enemy backline, dealing [30,60,120] ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   LEECH_SEED: {
-    eng: `Poison the target for [3,6,12] s, healing for [20,40,80] ${Stat.HP}`,
+    eng: `${Status.POISON} the target for [3,6,12] seconds, healing for [20,40,80] ${Stat.HP}`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   LOCK_ON: {
-    eng: `Lock the target and shred its ${Stat.DEF}/${Stat.SPE_DEF} for 8s. Genesect deals ${Damage.TRUE} to it`,
+    eng: `Lock the target and give ${Status.ARMOR_REDUCTION} for 8s. Genesect deals ${Damage.TRUE} to it`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   PSYCH_UP: {
-    eng: `Silence the target and every ennemies around for [2,4,8] s, dealing [10,20,40] ${Damage.SPECIAL}`,
+    eng: `Deal [10,20,40] ${Damage.SPECIAL} and ${Status.SILENCE} the target and its adjacent enemies`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   RAZOR_WIND: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} to the target and apply Smoke effect (-50% ${Stat.ATK_SPEED}) around it`,
+    eng: `Deals [20,40,80] ${Damage.SPECIAL} to the target and apply ${Status.SMOKE} around it`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1225,13 +1226,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   ELECTRIC_SURGE: {
-    eng: `Passive: Electric-type damage are boosted by 30%`,
+    eng: `Passive: Give ${Status.ELECTRIC_FIELD} to your Electric Pokemon, boosting their damage by 30%`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   PSYCHIC_SURGE: {
-    eng: `Passive: Psychic-type damage are boosted by 30%`,
+    eng: `Passive: Give ${Status.PSYCHIC_FIELD} to your Psychic Pokemon, boosting their damage by 30%`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1267,13 +1268,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.AURORA_VEIL]: {
-    eng: `All allies are immune to spells for [1.5,2.5,3.5] s`,
+    eng: `All allies receive ${Status.RUNE_PROTECT} and are immune to spells for [1.5,2.5,3.5] seconds`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.AQUA_JET]: {
-    eng: `Dash into the ennemy backline, dealing [30,60,120] ${Damage.SPECIAL}`,
+    eng: `Dash into the enemy backline, dealing [30,60,120] ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1285,19 +1286,19 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.CHATTER]: {
-    eng: `Deal [5,10,15] ${Damage.SPECIAL} to all enemies with each target hit having a [20,30,40] % chance to be confused 1s`,
+    eng: `Deal [5,10,15] ${Damage.SPECIAL} to all enemies. Every enemy has a [20,30,40] % chance to be ${Status.CONFUSION} for 1s`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.SYNCHRO]: {
-    eng: `If the pokemon is affected by poison,burn/wound/silence, the ennemy team will suffer the same negative status`,
+    eng: `If the pokemon is affected by ${Status.POISON}, ${Status.BURN}, ${Status.WOUND} or ${Status.SILENCE}, the enemy team will suffer the same negative status`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.STEAM_ERUPTION]: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} around the target, and burning everything for 3s`,
+    eng: `Deals [20,40,80] ${Damage.SPECIAL} to all enemies adjacent to the target, and ${Status.BURN} them for 3s`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1315,13 +1316,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.DIVE]: {
-    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40] ${Damage.SPECIAL} and freezing all adjacent units for [1.5,3,6] seconds`,
+    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1.5,3,6] seconds`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.SPIKE_ARMOR]: {
-    eng: `For [3,5,10] seconds, targets that melee attack this Pokémon are wounded and take ${Damage.SPECIAL} equal to current defense`,
+    eng: `For [3,5,10] seconds, targets that melee attack this Pokémon receive ${Status.WOUND} and take ${Damage.SPECIAL} equal to his current defense`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1333,13 +1334,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.FAKE_TEARS]: {
-    eng: `Deals [3,6,9] ${Damage.SPECIAL} to the whole enemy team and trigger armor reduction for 3s`,
+    eng: `Deals [3,6,9] ${Damage.SPECIAL} to the whole enemy team and trigger ${Status.ARMOR_REDUCTION} for 3s`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.SPARKLING_ARIA]: {
-    eng: `Deals [15,30,60] ${Damage.SPECIAL} to the target and adjacent enemies. If adjacent allies are burned, the burn is healed.`,
+    eng: `Deals [15,30,60] ${Damage.SPECIAL} to the target and adjacent enemies. If adjacent allies are ${Status.BURN}, the burn is healed.`,
     esp: ``,
     prt: ``,
     fra: ``

@@ -34,13 +34,13 @@ export const StatusLabel: { [key in Status]: Langage } = {
     prt: ""
   },
   [Status.SLEEP]: {
-    eng: "Sleep",
+    eng: "Asleep",
     esp: "",
     fra: "Sommeil",
     prt: ""
   },
   [Status.CONFUSION]: {
-    eng: "Confusion",
+    eng: "Confused",
     esp: "",
     fra: "Confus",
     prt: ""

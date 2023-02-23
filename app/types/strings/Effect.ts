@@ -1,5 +1,6 @@
 import { Effect } from "../enum/Effect"
 import { Damage, Stat } from "../enum/Game"
+import { Status } from "../enum/Status";
 
 export const EffectName: { [key in Effect]: string } = {
   [Effect.INGRAIN]: `Ingrain`,
@@ -123,22 +124,22 @@ export const EffectDescription: {
     fra: `-30% ATK speed pour tous les ennemis`
   },
   [Effect.BLAZE]: {
-    eng: `Your Fire pokemon have 20% chance to burn ennemy for 2s`,
+    eng: `Your Fire pokemon have 20% chance to ${Status.BURN} ennemy for 2s`,
     esp: `Fire pkm gana un 5% de dano en cada ataque`,
     fra: `Les pkm feu gagnent 5% d'ATK à chaque attaque`
   },
   [Effect.VICTORY_STAR]: {
-    eng: `Your Fire pokemon have 20% chance to burn ennemy for 2s and gain +1 ${Stat.ATK} after every hit (Sunlight)`,
+    eng: `Your Fire pokemon have 20% chance to ${Status.BURN} ennemy for 2s and gain +1 ${Stat.ATK} after every hit (Sunlight)`,
     esp: `Fire pkm gana un 5% de dano en cada ataque`,
     fra: `Les pkm feu gagnent 5% d'ATK à chaque attaque`
   },
   [Effect.DROUGHT]: {
-    eng: `Your Fire pokemon have 30% chance to burn ennemy for 2s and gain +2 ${Stat.ATK} after every hit (Sunlight)`,
+    eng: `Your Fire pokemon have 30% chance to ${Status.BURN} ennemy for 2s and gain +2 ${Stat.ATK} after every hit (Sunlight)`,
     esp: `El so se intensifica, los pkm de fuego gana +50% ATK`,
     fra: `Le soleil s'intensifie, augmentant l'ATK des pkm feu de 50%`
   },
   [Effect.DESOLATE_LAND]: {
-    eng: `Your Fire pokemon have 40% chance to burn ennemy for 2s and gain +3 ${Stat.ATK} after every hit (Sunlight)`,
+    eng: `Your Fire pokemon have 40% chance to ${Status.BURN} ennemy for 2s and gain +3 ${Stat.ATK} after every hit (Sunlight)`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
@@ -243,12 +244,12 @@ export const EffectDescription: {
     fra: `Une tempête de sable fait rage, faisant 10% HP/s aux pkm non sol/acier/mineral`
   },
   [Effect.POISON_GAS]: {
-    eng: `Your Poison pokemon have a 30% chance to poison the target for 4 seconds. (13% ${Stat.HP} per second as ${Damage.TRUE})`,
+    eng: `Your Poison pokemon have a 30% chance to ${Status.POISON} the target for 4 seconds.`,
     esp: `+20% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo`,
     fra: `+20% de chances d'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes`
   },
   [Effect.TOXIC]: {
-    eng: `Your Poison pokemon have 70% chance to poison the target for 4 seconds. (13% ${Stat.HP} per second as ${Damage.TRUE})`,
+    eng: `Your Poison pokemon have 70% chance to ${Status.POISON} the target for 4 seconds.`,
     esp: `+30% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo`,
     fra: `+30% de chances d'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes`
   },
@@ -278,17 +279,17 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.PURSUIT]: {
-    eng: `Upon kill, grants 2 ${Stat.DEF}, 2 ${Stat.SPE_DEF}, heal 30 ${Stat.HP} and 3 ${Stat.ATK}`,
+    eng: `Upon kill, grants 2 ${Stat.DEF}, 2 ${Stat.SPE_DEF}, 3 ${Stat.ATK} and heal 30 ${Stat.HP}`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.BRUTAL_SWING]: {
-    eng: `Upon kill, grants 4 ${Stat.DEF}, 4 ${Stat.SPE_DEF}, heal 60 ${Stat.HP} and 6 ${Stat.ATK}`,
+    eng: `Upon kill, grants 4 ${Stat.DEF}, 4 ${Stat.SPE_DEF}, 6 ${Stat.ATK} and heal 60 ${Stat.HP}`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.POWER_TRIP]: {
-    eng: `Upon kill, grants 6 ${Stat.DEF}, 6 s${Stat.SPE_DEF}, heal 120 ${Stat.HP} and 12 ${Stat.ATK}`,
+    eng: `Upon kill, grants 6 ${Stat.DEF}, 6 ${Stat.SPE_DEF}, 12 ${Stat.ATK} and heal 120 ${Stat.HP}`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
@@ -333,24 +334,24 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.TAILWIND]: {
-    eng: `Give a protection effect for 1sec when the pokemon fell under 20% ${Stat.HP}`,
-    esp: `Give a protection effect for 1sec when the pokemon fell under 20% ${Stat.HP}`,
-    fra: `Give a protection effect for 1sec when the pokemon fell under 20% ${Stat.HP}`
+    eng: `Give ${Status.PROTECT} for 1 sec when the pokemon fell under 20% ${Stat.HP}`,
+    esp: ``,
+    fra: ``
   },
   [Effect.FEATHER_DANCE]: {
-    eng: `Give a protection effect for 1.5sec when the pokemon fell under 40% ${Stat.HP}`,
-    esp: `Give a protection effect for 1sec when the pokemon fell under 40% ${Stat.HP}`,
-    fra: `Give a protection effect for 1sec when the pokemon fell under 40% ${Stat.HP}`
+    eng: `Give ${Status.PROTECT} for 1.5 sec when the pokemon fell under 40% ${Stat.HP}`,
+    esp: ``,
+    fra: ``
   },
   [Effect.MAX_AIRSTREAM]: {
-    eng: `Give a protection effect for 2sec when the pokemon fell under 50% ${Stat.HP}`,
-    esp: `Give a protection effect for 2sec when the pokemon fell under 50% ${Stat.HP}`,
-    fra: `Give a protection effect for 2sec when the pokemon fell under 50% ${Stat.HP}`
+    eng: `Give ${Status.PROTECT} for 2 sec when the pokemon fell under 50% ${Stat.HP}`,
+    esp: ``,
+    fra: ``
   },
   [Effect.MAX_GUARD]: {
-    eng: `Give a protection effect for 2.5sec when the pokemon fell under 50% ${Stat.HP}`,
-    esp: `Add a second protection effect at 30%`,
-    fra: `Add a second protection effect at 30%`
+    eng: `Give ${Status.PROTECT} for 2.5sec when the pokemon fell under 50% ${Stat.HP}`,
+    esp: ``,
+    fra: ``
   },
   [Effect.ODD_FLOWER]: {
     eng: `When the first flora pokemon is dead, the odd flower will rise from its grave..`,
@@ -388,22 +389,22 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.PHANTOM_FORCE]: {
-    eng: `Yours ghost deals 20% of ${Stat.ATK} as ${Damage.TRUE} + 50% chance silence on hit`,
+    eng: `Your ghosts deal 20% of ${Stat.ATK} as ${Damage.TRUE} + 50% chance to ${Status.SILENCE} on hit`,
     esp: `Los fantasmas ganan un 15% de velocidad ATK y hacen daño verdadero`,
     fra: `Les fantômes gagnent 15% d'ATK speed et font des dégats bruts`
   },
   [Effect.CURSE]: {
-    eng: `Yours ghost deals 40% of ${Stat.ATK} as ${Damage.TRUE} + 50% chance silence on hit`,
+    eng: `Your ghosts deal 40% of ${Stat.ATK} as ${Damage.TRUE} + 50% chance to ${Status.SILENCE} on hit`,
     esp: `Los ataques fantasma silencian sus objetivos`,
     fra: `Les attaques des fantomes réduisent aux silences leurs cibles`
   },
   [Effect.SHADOW_TAG]: {
-    eng: `Yours ghost deals 70% of ${Stat.ATK} as ${Damage.TRUE} + 50% chance silence on hit`,
+    eng: `Your ghosts deal 70% of ${Stat.ATK} as ${Damage.TRUE} + 50% chance to ${Status.SILENCE} on hit`,
     esp: `Los ataques fantasma silencian sus objetivos`,
     fra: `Les attaques des fantomes réduisent aux silences leurs cibles`
   },
   [Effect.WANDERING_SPIRIT]: {
-    eng: `Yours ghost deals 100% of ${Stat.ATK} as ${Damage.TRUE} + 50% chance silence on hit`,
+    eng: `Yours ghost deals 100% of ${Stat.ATK} as ${Damage.TRUE} + 50% chance to ${Status.SILENCE} on hit`,
     esp: `Los ataques fantasma silencian sus objetivos`,
     fra: `Les attaques des fantomes réduisent aux silences leurs cibles`
   },
@@ -423,12 +424,12 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.SNOW]: {
-    eng: `All allies have a 10% chance to freeze an enemy for 2 seconds after a hit.`,
+    eng: `All allies have a 10% chance to ${Status.FREEZE} an enemy for 2 seconds after a hit.`,
     esp: `+10% de probabilidad de congelar al enemigo durante un ataque`,
     fra: `+10% de chance de geler l'ennemi lors d'une attaque`
   },
   [Effect.SHEER_COLD]: {
-    eng: `All allies pokemon have a 30% chance to freeze an enemy for 2 seconds after a hit.`,
+    eng: `All allies pokemon have a 30% chance to ${Status.FREEZE} an enemy for 2 seconds after a hit.`,
     esp: `+30% de probabilidad de congelar al enemigo durante un ataque`,
     fra: `+30% de chance de geler l'ennemi lors d'une attaque`
   },
