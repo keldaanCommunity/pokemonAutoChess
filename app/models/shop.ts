@@ -59,7 +59,7 @@ export const UncommonShop = new Array<Pkm>(
   Pkm.SLOWPOKE,
   Pkm.HATENNA,
   Pkm.NIDORANF,
-  Pkm.NIDORANM,
+  Pkm.NIDORANM
 )
 
 export const RareShop = new Array<Pkm>(
