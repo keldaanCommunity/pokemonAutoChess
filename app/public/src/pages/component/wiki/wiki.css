@@ -17,3 +17,20 @@
 #wiki-page .pokemon-name {
     text-transform: capitalize;
 }
+
+#wiki-page .wiki-status {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(20em, 1fr) );
+    gap: 1em;
+    padding: 0;
+}
+
+#wiki-page .wiki-status li {
+    list-style: none;
+    display: grid;
+    grid-template: auto 1fr / 150px 1fr;
+}
+
+#wiki-page .wiki-status .test-anim-wrapper {
+    grid-row: 1/3;
+}

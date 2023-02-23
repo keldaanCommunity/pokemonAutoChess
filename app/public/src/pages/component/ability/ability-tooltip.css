@@ -10,6 +10,21 @@
   color: #ffd800;
 }
 
+.description-icon {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: text-bottom;
+}
+
+.description-icon > img {
+  height: 24px;
+  margin-right: 4px;
+}
+
 .stat-label {
   color: rgb(171, 171, 171);
+}
+
+.status-label {
+  color: rgb(210, 190, 150);
 }

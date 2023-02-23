@@ -226,6 +226,10 @@ export default class PokemonState {
             pokemon.count.defensiveRibbonCount++
           }
 
+          if(pokemon.status.sleep){
+            pokemon.status.updateSleep(100)
+          }
+
           if (pokemon.life && pokemon.life > 0) {
             if (pokemon.flyingProtection) {
               const t = FlyingProtectThreshold[Effect.TAILWIND]

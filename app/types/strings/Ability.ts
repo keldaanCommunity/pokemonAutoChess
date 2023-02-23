@@ -787,7 +787,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HYPER_VOICE]: {
-    eng: `Deals [50,100,200] special damage on a row, confuse for [1,2,3] seconds`,
+    eng: `Deals [50,100,200] ${Damage.SPECIAL} on a row, confuse for [1,2,3] seconds`,
     esp: ``,
     fra: ``,
     prt: ``

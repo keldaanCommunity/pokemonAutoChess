@@ -158,43 +158,9 @@ export default class GameScene extends Scene {
       "/assets/ui/snowflakes.json",
       "/assets/ui/"
     )
-    this.load.multiatlas(
-      "status",
-      "/assets/status/status.json",
-      "/assets/status/"
-    )
-    this.load.multiatlas("wound", "/assets/status/wound.json", "/assets/status")
-    this.load.multiatlas(
-      "resurection",
-      "/assets/status/resurection.json",
-      "/assets/status"
-    )
-    this.load.multiatlas("smoke", "/assets/status/SMOKE.json", "/assets/status")
-    this.load.multiatlas(
-      "rune_protect",
-      "/assets/status/RUNE_PROTECT.json",
-      "/assets/status"
-    )
-    this.load.multiatlas(
-      "armorReduction",
-      "/assets/status/ARMOR_REDUCTION.json",
-      "/assets/status"
-    )
-    this.load.multiatlas(
-      "ELECTRIC_SURGE",
-      "/assets/status/ELECTRIC_SURGE.json",
-      "/assets/status"
-    )
-    this.load.multiatlas(
-      "VOID_BOOST",
-      "/assets/status/VOID_BOOST.json",
-      "/assets/status"
-    )
-    this.load.multiatlas(
-      "PSYCHIC_SURGE",
-      "/assets/status/PSYCHIC_SURGE.json",
-      "/assets/status"
-    )
+   
+    loadStatusMultiAtlas(this)
+    
     this.load.multiatlas("item", "/assets/item/item.json", "/assets/item/")
     this.load.multiatlas("lock", "/assets/lock/lock.json", "/assets/lock/")
     this.load.multiatlas(
@@ -808,3 +774,44 @@ export default class GameScene extends Scene {
 //     }
 //   });
 // }
+
+
+export function loadStatusMultiAtlas(scene: Scene){
+  scene.load.multiatlas(
+    "status",
+    "/assets/status/status.json",
+    "/assets/status/"
+  )
+  scene.load.multiatlas("wound", "/assets/status/wound.json", "/assets/status")
+  scene.load.multiatlas(
+    "resurection",
+    "/assets/status/resurection.json",
+    "/assets/status"
+  )
+  scene.load.multiatlas("smoke", "/assets/status/SMOKE.json", "/assets/status")
+  scene.load.multiatlas(
+    "rune_protect",
+    "/assets/status/RUNE_PROTECT.json",
+    "/assets/status"
+  )
+  scene.load.multiatlas(
+    "armorReduction",
+    "/assets/status/ARMOR_REDUCTION.json",
+    "/assets/status"
+  )
+  scene.load.multiatlas(
+    "ELECTRIC_SURGE",
+    "/assets/status/ELECTRIC_SURGE.json",
+    "/assets/status"
+  )
+  scene.load.multiatlas(
+    "VOID_BOOST",
+    "/assets/status/VOID_BOOST.json",
+    "/assets/status"
+  )
+  scene.load.multiatlas(
+    "PSYCHIC_SURGE",
+    "/assets/status/PSYCHIC_SURGE.json",
+    "/assets/status"
+  )
+}
