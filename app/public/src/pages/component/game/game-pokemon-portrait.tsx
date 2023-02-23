@@ -13,7 +13,8 @@ import { Money } from "../icons/money"
 import { useAppSelector } from "../../../hooks"
 
 export default function GamePokemonPortrait(props: {
-  index: number
+  index: number,
+  origin: string,
   pokemon: Pokemon | undefined
   pokemonConfig: IPokemonConfig | undefined
   click: React.MouseEventHandler<HTMLDivElement>
@@ -73,10 +74,10 @@ export default function GamePokemonPortrait(props: {
         }}
         onClick={props.click}
         data-tip
-        data-for={"shop-" + props.index}
+        data-for={`tooltip-${props.origin}-${props.index}`}
       >
         <ReactTooltip
-          id={"shop-" + props.index}
+          id={`tooltip-${props.origin}-${props.index}`}
           className="customeTheme game-pokemon-detail-tooltip"
           effect="solid"
           place="bottom"
