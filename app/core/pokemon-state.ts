@@ -226,7 +226,7 @@ export default class PokemonState {
             pokemon.count.defensiveRibbonCount++
           }
 
-          if(pokemon.status.sleep){
+          if (pokemon.status.sleep) {
             pokemon.status.updateSleep(100)
           }
 

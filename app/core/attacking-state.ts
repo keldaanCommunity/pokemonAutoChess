@@ -225,7 +225,7 @@ export default class AttackingState extends PokemonState {
                 d,
                 board,
                 AttackType.SPECIAL,
-                pokemon,
+                target,
                 false,
                 true
               )
