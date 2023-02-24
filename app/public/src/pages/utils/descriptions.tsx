@@ -1,10 +1,12 @@
 import React, { ReactElement } from "react"
 import { Damage, Stat } from "../../../../types/enum/Game"
+import { Status } from "../../../../types/enum/Status"
 import { StatLabel } from "../../../../types/strings/Stat"
+import { StatusDescription, StatusLabel } from "../../../../types/strings/Status"
 import { cc } from "./jsx"
 
 export const iconRegExp =
-  /(?<=\W|^)(?:PHYSICAL|SPECIAL|TRUE|atk|speed|critChance|critDamage|def|hp|mana|range|shield|speDef|spellDamage|\[[^\]]+\])(?=\W|$)/g
+  /(?<=\W|^)(?:PHYSICAL|SPECIAL|TRUE|atk|speed|critChance|critDamage|def|hp|mana|range|shield|speDef|spellDamage|BURN|SILENCE|POISON|FREEZE|PROTECT|SLEEP|CONFUSION|WOUND|RESURECTION|SMOKE|ARMOR_REDUCTION|RUNE_PROTECT|ELECTRIC_FIELD|PSYCHIC_FIELD|\[[^\]]+\])(?=\W|$)/g
 
 export function addIconsToDescription(description: string, stars: number = 0){
   const matchIcon = description.match(iconRegExp)
@@ -29,9 +31,16 @@ export function addIconsToDescription(description: string, stars: number = 0){
             )
           } else if (Object.values(Stat).includes(token as Stat)) {
             d = (
-              <span key={i}>
-                <img src={`assets/icons/${token}.png`} style={{verticalAlign: "sub"}} />
-                <span className="stat-label"> {StatLabel[token].eng}</span>
+              <span key={i} className="description-icon">
+                <img src={`assets/icons/${token}.png`} />
+                <span className="stat-label">{StatLabel[token].eng}</span>
+              </span>
+            )
+          } else if (Object.values(Status).includes(token as Status)) {
+            d = (
+              <span key={i} className="description-icon" title={StatusDescription[token].eng}>
+                <img src={`assets/icons/${token}.png`} />
+                <span className="status-label">{StatusLabel[token].eng}</span>
               </span>
             )
           } else if(/\[[^\]]+\]/.test(token)){

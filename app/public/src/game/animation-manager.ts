@@ -11,6 +11,7 @@ import Pokemon from "./components/pokemon"
 import GameScene from "./scenes/game-scene"
 import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
+
 export default class AnimationManager {
   game: GameScene
 
@@ -71,184 +72,8 @@ export default class AnimationManager {
     })
     this.createAttacksAnimations()
     this.createSpecialAttacksAnimations()
-    this.createStatusAnimations()
-  }
-
-  createStatusAnimations() {
-    this.game.anims.create({
-      key: "poison",
-      frames: this.game.anims.generateFrameNames("status", {
-        start: 0,
-        end: 14,
-        zeroPad: 3,
-        prefix: "status/poison/"
-      }),
-      frameRate: 15,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "sleep",
-      frames: this.game.anims.generateFrameNames("status", {
-        start: 0,
-        end: 9,
-        zeroPad: 3,
-        prefix: "status/sleep/"
-      }),
-      frameRate: 15,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "silence",
-      frames: this.game.anims.generateFrameNames("status", {
-        start: 0,
-        end: 8,
-        zeroPad: 3,
-        prefix: "status/silence/"
-      }),
-      frameRate: 15,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "protect",
-      frames: this.game.anims.generateFrameNames("status", {
-        start: 0,
-        end: 9,
-        zeroPad: 3,
-        prefix: "status/protect/"
-      }),
-      frameRate: 15,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "freeze",
-      frames: this.game.anims.generateFrameNames("status", {
-        start: 0,
-        end: 5,
-        zeroPad: 3,
-        prefix: "status/freeze/"
-      }),
-      frameRate: 15,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "confusion",
-      frames: this.game.anims.generateFrameNames("status", {
-        start: 0,
-        end: 3,
-        zeroPad: 3,
-        prefix: "status/confusion/"
-      }),
-      frameRate: 4,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "burn",
-      frames: this.game.anims.generateFrameNames("status", {
-        start: 0,
-        end: 7,
-        zeroPad: 3,
-        prefix: "status/burn/"
-      }),
-      frameRate: 15,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "wound",
-      frames: this.game.anims.generateFrameNames("wound", {
-        start: 0,
-        end: 3,
-        zeroPad: 3
-      }),
-      frameRate: 3,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "resurection",
-      frames: this.game.anims.generateFrameNames("resurection", {
-        start: 0,
-        end: 3,
-        zeroPad: 3
-      }),
-      frameRate: 3,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "smoke",
-      frames: this.game.anims.generateFrameNames("smoke", {
-        start: 0,
-        end: 9,
-        zeroPad: 3
-      }),
-      frameRate: 3,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "armorReduction",
-      frames: this.game.anims.generateFrameNames("armorReduction", {
-        start: 0,
-        end: 1,
-        zeroPad: 3
-      }),
-      frameRate: 3,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "VOID_BOOST",
-      frames: this.game.anims.generateFrameNames("VOID_BOOST", {
-        start: 0,
-        end: 7,
-        zeroPad: 3
-      }),
-      frameRate: 9,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "ELECTRIC_SURGE",
-      frames: this.game.anims.generateFrameNames("ELECTRIC_SURGE", {
-        start: 0,
-        end: 6,
-        zeroPad: 3
-      }),
-      frameRate: 9,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "PSYCHIC_SURGE",
-      frames: this.game.anims.generateFrameNames("PSYCHIC_SURGE", {
-        start: 0,
-        end: 3,
-        zeroPad: 3
-      }),
-      frameRate: 6,
-      repeat: -1,
-      yoyo: true
-    })
-
-    this.game.anims.create({
-      key: "rune_protect",
-      frames: this.game.anims.generateFrameNames("rune_protect", {
-        start: 0,
-        end: 9,
-        zeroPad: 3
-      }),
-      frameRate: 6,
-      repeat: -1,
-      yoyo: true
-    })
-  }
+    createStatusAnimations(this.game)
+  }  
 
   createSpecialAttacksAnimations() {
     this.game.anims.create({
@@ -1696,4 +1521,180 @@ export default class AnimationManager {
     entity.sprite.anims.play(animKey)
     entity.shadow.anims.play(shadowKey)
   }
+}
+
+export function createStatusAnimations(game: Phaser.Scene) {
+  game.anims.create({
+    key: "poison",
+    frames: game.anims.generateFrameNames("status", {
+      start: 0,
+      end: 14,
+      zeroPad: 3,
+      prefix: "status/poison/"
+    }),
+    frameRate: 15,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "sleep",
+    frames: game.anims.generateFrameNames("status", {
+      start: 0,
+      end: 9,
+      zeroPad: 3,
+      prefix: "status/sleep/"
+    }),
+    frameRate: 15,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "silence",
+    frames: game.anims.generateFrameNames("status", {
+      start: 0,
+      end: 8,
+      zeroPad: 3,
+      prefix: "status/silence/"
+    }),
+    frameRate: 15,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "protect",
+    frames: game.anims.generateFrameNames("status", {
+      start: 0,
+      end: 9,
+      zeroPad: 3,
+      prefix: "status/protect/"
+    }),
+    frameRate: 15,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "freeze",
+    frames: game.anims.generateFrameNames("status", {
+      start: 0,
+      end: 5,
+      zeroPad: 3,
+      prefix: "status/freeze/"
+    }),
+    frameRate: 15,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "confusion",
+    frames: game.anims.generateFrameNames("status", {
+      start: 0,
+      end: 3,
+      zeroPad: 3,
+      prefix: "status/confusion/"
+    }),
+    frameRate: 4,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "burn",
+    frames: game.anims.generateFrameNames("status", {
+      start: 0,
+      end: 6,
+      zeroPad: 3,
+      prefix: "status/burn/"
+    }),
+    frameRate: 15,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "wound",
+    frames: game.anims.generateFrameNames("wound", {
+      start: 0,
+      end: 3,
+      zeroPad: 3
+    }),
+    frameRate: 3,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "resurection",
+    frames: game.anims.generateFrameNames("resurection", {
+      start: 0,
+      end: 3,
+      zeroPad: 3
+    }),
+    frameRate: 3,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "smoke",
+    frames: game.anims.generateFrameNames("smoke", {
+      start: 0,
+      end: 9,
+      zeroPad: 3
+    }),
+    frameRate: 3,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "armorReduction",
+    frames: game.anims.generateFrameNames("armorReduction", {
+      start: 0,
+      end: 1,
+      zeroPad: 3
+    }),
+    frameRate: 3,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "VOID_BOOST",
+    frames: game.anims.generateFrameNames("VOID_BOOST", {
+      start: 0,
+      end: 7,
+      zeroPad: 3
+    }),
+    frameRate: 9,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "ELECTRIC_SURGE",
+    frames: game.anims.generateFrameNames("ELECTRIC_SURGE", {
+      start: 0,
+      end: 6,
+      zeroPad: 3
+    }),
+    frameRate: 9,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "PSYCHIC_SURGE",
+    frames: game.anims.generateFrameNames("PSYCHIC_SURGE", {
+      start: 0,
+      end: 3,
+      zeroPad: 3
+    }),
+    frameRate: 6,
+    repeat: -1,
+    yoyo: true
+  })
+
+  game.anims.create({
+    key: "rune_protect",
+    frames: game.anims.generateFrameNames("rune_protect", {
+      start: 0,
+      end: 9,
+      zeroPad: 3
+    }),
+    frameRate: 6,
+    repeat: -1,
+    yoyo: true
+  })
 }

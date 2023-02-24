@@ -84,7 +84,7 @@ export default class WikiFaq extends Component {
         <h4 className="nes-text is-success">How does Ditto work ?</h4>
         <p>
           Ditto creates a plain copy of the unit you hover and drop it over.
-          Ditto can't fight. Each pokemon in shop has a 0.6% chance to be a
+          Ditto can't fight. Each pokemon in shop has a 1% chance to be a
           ditto at every roll. You can't copy mythical pokemon.
         </p>
         <h4 className="nes-text is-success">How do the items work ?</h4>
