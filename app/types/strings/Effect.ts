@@ -1,6 +1,6 @@
 import { Effect } from "../enum/Effect"
 import { Damage, Stat } from "../enum/Game"
-import { Status } from "../enum/Status";
+import { Status } from "../enum/Status"
 
 export const EffectName: { [key in Effect]: string } = {
   [Effect.INGRAIN]: `Ingrain`,
@@ -174,17 +174,17 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.GUTS]: {
-    eng: `All allies block 3 damage`,
+    eng: `Fighting pokemons blocks 3 damage`,
     esp: `+5 maná/ataque para todos los pkm`,
     fra: `+5 mana / attaque pour tous les pkm`
   },
   [Effect.DEFIANT]: {
-    eng: `All allies block 6 damage`,
+    eng: `Fighting pokemons blocks 6 damage`,
     esp: `+10 maná/ataque para todos los pkm`,
     fra: `+10 mana / attaque pour tous les pkm`
   },
   [Effect.JUSTIFIED]: {
-    eng: `All allies block 9 damage`,
+    eng: `Fighting pokemons blocks 9 damage`,
     esp: `+10 maná/ataque para todos los pkm`,
     fra: `+10 mana / attaque pour tous les pkm`
   },
