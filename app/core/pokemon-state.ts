@@ -157,9 +157,9 @@ export default class PokemonState {
             pokemon.effects.includes(Effect.JUSTIFIED))
         ) {
           const damageReduction = pokemon.effects.includes(Effect.GUTS)
-            ? 3
+            ? 5
             : pokemon.effects.includes(Effect.DEFIANT)
-            ? 6
+            ? 7
             : 9
           residualDamage = residualDamage - damageReduction
         }

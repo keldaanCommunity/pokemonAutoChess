@@ -174,12 +174,12 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.GUTS]: {
-    eng: `Fighting pokemons blocks 3 damage`,
+    eng: `Fighting pokemons blocks 5 damage`,
     esp: `+5 maná/ataque para todos los pkm`,
     fra: `+5 mana / attaque pour tous les pkm`
   },
   [Effect.DEFIANT]: {
-    eng: `Fighting pokemons blocks 6 damage`,
+    eng: `Fighting pokemons blocks 7 damage`,
     esp: `+10 maná/ataque para todos los pkm`,
     fra: `+10 mana / attaque pour tous les pkm`
   },
