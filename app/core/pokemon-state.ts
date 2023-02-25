@@ -25,10 +25,13 @@ export default class PokemonState {
       !pokemon.status.wound
     ) {
       const boost = spellDamageBoost ? (heal * pokemon.spellDamage) / 100 : 0
-      const healBoosted = Math.round(heal + boost)
-      const healTaken = Math.round(
-        Math.min(pokemon.hp - pokemon.life, healBoosted)
-      )
+      let healBoosted = Math.round(heal + boost)
+      if(pokemon.skill === Ability.WONDER_GUARD){
+        healBoosted = 1
+      }
+
+      const healTaken = Math.min(pokemon.hp - pokemon.life, healBoosted)
+
       pokemon.life = Math.min(pokemon.hp, pokemon.life + healBoosted)
 
       if (caster && healTaken > 0) {
@@ -79,8 +82,7 @@ export default class PokemonState {
     board: Board,
     attackType_: AttackType,
     attacker: PokemonEntity,
-    dodgeable: boolean,
-    reduceable: boolean
+    dodgeable: boolean
   ): boolean {
     let death: boolean
     let attackType = attackType_
@@ -151,7 +153,7 @@ export default class PokemonState {
         }
 
         if (
-          reduceable &&
+          attackType !== AttackType.TRUE &&
           (pokemon.effects.includes(Effect.GUTS) ||
             pokemon.effects.includes(Effect.DEFIANT) ||
             pokemon.effects.includes(Effect.JUSTIFIED))

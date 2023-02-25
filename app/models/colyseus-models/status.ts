@@ -202,7 +202,6 @@ export default class Status extends Schema implements IStatus {
           board,
           AttackType.TRUE,
           this.burnOrigin,
-          false,
           false
         )
         this.burnDamageCooldown = 1000
@@ -278,7 +277,6 @@ export default class Status extends Schema implements IStatus {
           board,
           AttackType.TRUE,
           this.poisonOrigin,
-          false,
           false
         )
         this.poisonDamageCooldown = 1000

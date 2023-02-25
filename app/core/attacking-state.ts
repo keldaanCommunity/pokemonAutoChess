@@ -194,8 +194,7 @@ export default class AttackingState extends PokemonState {
                 board,
                 AttackType.SPECIAL,
                 pokemon,
-                false,
-                true
+                false
               )
             }
           })
@@ -226,8 +225,7 @@ export default class AttackingState extends PokemonState {
                 board,
                 AttackType.SPECIAL,
                 target,
-                false,
-                true
+                false
               )
             }
           })
@@ -246,7 +244,6 @@ export default class AttackingState extends PokemonState {
           board,
           AttackType.TRUE,
           pokemon,
-          true,
           true
         )
       }
@@ -259,7 +256,6 @@ export default class AttackingState extends PokemonState {
           board,
           AttackType.TRUE,
           pokemon,
-          true,
           true
         )
       }
@@ -272,7 +268,6 @@ export default class AttackingState extends PokemonState {
           board,
           AttackType.TRUE,
           pokemon,
-          true,
           true
         )
       }
@@ -285,7 +280,6 @@ export default class AttackingState extends PokemonState {
           board,
           AttackType.TRUE,
           pokemon,
-          true,
           true
         )
       }
@@ -297,13 +291,12 @@ export default class AttackingState extends PokemonState {
           board,
           AttackType.SPECIAL,
           target,
-          false,
-          true
+          false
         )
       }
 
       if (damage > 0) {
-        target.handleDamage(damage, board, attackType, pokemon, true, true)
+        target.handleDamage(damage, board, attackType, pokemon, true)
       }
 
       if (pokemon.items.has(Item.BLUE_ORB)) {
@@ -330,7 +323,6 @@ export default class AttackingState extends PokemonState {
             board,
             AttackType.TRUE,
             pokemon,
-            true,
             true
           )
         }
@@ -353,7 +345,6 @@ export default class AttackingState extends PokemonState {
               board,
               attackType,
               pokemon,
-              true,
               true
             )
             targetCount--
