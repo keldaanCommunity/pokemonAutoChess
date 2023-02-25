@@ -34,3 +34,8 @@
 #wiki-page .wiki-status .test-anim-wrapper {
     grid-row: 1/3;
 }
+
+#wiki-page .section-label {
+    font-size: 120%;
+    margin: 0.5em;
+}

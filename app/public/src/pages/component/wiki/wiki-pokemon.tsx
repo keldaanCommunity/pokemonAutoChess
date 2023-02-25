@@ -9,25 +9,48 @@ import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { Rarity } from "../../../../../types/enum/Game"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
+import { Mythical1Shop, Mythical2Shop } from "../../../../../models/shop"
 
 const metadata = tracker as unknown as { [key: string]: ITracker }
 const precomputed =
   PRECOMPUTED_RARITY_POKEMONS_ALL as PrecomputedRaritPokemonyAll
 
+interface Section {
+  label?: string;
+  pokemons: Pkm[]
+}
+
 export default function WikiPokemon(props: { rarity: Rarity }) {
+  let sections:Section[] = [ { pokemons: precomputed[props.rarity] } ]
+  if(props.rarity === Rarity.MYTHICAL){
+    sections = [
+      {
+        label: "Stage 10",
+        pokemons: precomputed[props.rarity].filter(p => Mythical1Shop.includes(p))
+      },
+      {
+        label: "Stage 20",
+        pokemons: precomputed[props.rarity].filter(p => Mythical2Shop.includes(p))
+      },
+    ]
+  }
+  
   return (
     <Tabs>
       <TabList>
-        {precomputed[props.rarity].map((pkm) => {
+      {sections.map((section,i) => <React.Fragment key={"section"+i}>
+        {section.label && <p className='section-label'>{section.label}</p>}
+        {section.pokemons.map((pkm) => {
           return (
             <Tab key={"title-" + pkm}>
               <img src={getPortraitSrc(PkmIndex[pkm])}></img>
             </Tab>
           )
         })}
+      </React.Fragment>)}
       </TabList>
 
-      {precomputed[props.rarity].map((pkm) => {
+      {sections.map(section => section.pokemons.map(pkm => {
         let m: ITracker | undefined = undefined
         const pokemon = PokemonFactory.createPokemonFromName(pkm)
         const pathIndex = pokemon.index.split("-")
@@ -41,7 +64,7 @@ export default function WikiPokemon(props: { rarity: Rarity }) {
             <WikiPokemonDetail pokemon={pkm} m={m} />
           </TabPanel>
         )
-      })}
+      }))}
     </Tabs>
   )
 }
