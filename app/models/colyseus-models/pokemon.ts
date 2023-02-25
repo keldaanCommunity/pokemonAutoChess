@@ -11352,3 +11352,674 @@ export class Sandslash extends Pokemon {
     )
   }
 }
+
+export class ZarbiA extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_A,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+export class ZarbiB extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_B,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiC extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_C,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiD extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_D,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiE extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_E,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiF extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_F,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiG extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_G,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiH extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_H,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiI extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_I,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiJ extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_J,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiK extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_K,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiL extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_L,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiM extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_M,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiN extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_N,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiO extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_O,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiP extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_P,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiQ extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_Q,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiR extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_R,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiS extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_S,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiT extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_T,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiU extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_U,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiV extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_V,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiW extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_W,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiX extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_X,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiY extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_Y,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiZ extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_Z,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiQuestion extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_QUESTION,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class ZarbiExclamation extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZARBI_EXCLAMATION,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
