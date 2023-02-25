@@ -7,6 +7,7 @@ import { ITracker } from "../../../../../types/ITracker"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonEmotionsModal from "./pokemon-emotions-modal"
+import UnownPanel from "./unown-panel"
 import "./pokemon-collection.css"
 
 export default function PokemonCollection(props: {
@@ -53,6 +54,7 @@ export default function PokemonCollection(props: {
                 </Tab>
               )
             })}
+            <Tab key="?">?</Tab>
           </TabList>
 
           {(["all"].concat(Object.keys(Synergy)) as (Synergy | "all")[]).map(type => {
@@ -67,6 +69,9 @@ export default function PokemonCollection(props: {
               </TabPanel>
             )
           })}
+          <TabPanel>
+            <UnownPanel setPokemon={setSelectedPokemon} metadata={metadata} />
+          </TabPanel>
         </Tabs>
       </div>
       {selectedPokemon && <PokemonEmotionsModal pokemon={selectedPokemon} onHide={() => {
