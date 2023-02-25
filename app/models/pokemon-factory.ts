@@ -464,6 +464,34 @@ import {
   Whismur,
   Wigglytuff,
   Zapdos,
+  ZarbiA,
+  ZarbiB,
+  ZarbiC,
+  ZarbiD,
+  ZarbiE,
+  ZarbiExclamation,
+  ZarbiF,
+  ZarbiG,
+  ZarbiH,
+  ZarbiI,
+  ZarbiJ,
+  ZarbiK,
+  ZarbiL,
+  ZarbiM,
+  ZarbiN,
+  ZarbiO,
+  ZarbiP,
+  ZarbiQ,
+  ZarbiQuestion,
+  ZarbiR,
+  ZarbiS,
+  ZarbiT,
+  ZarbiU,
+  ZarbiV,
+  ZarbiW,
+  ZarbiX,
+  ZarbiY,
+  ZarbiZ,
   Zekrom,
   Zubat,
   Zweilous
@@ -1621,6 +1649,62 @@ export default class PokemonFactory {
         return new Sandslash(s, e)
       case Pkm.FARFETCH_D:
         return new Farfetchd(s, e)
+      case Pkm.ZARBI_A:
+        return new ZarbiA(s, e)
+      case Pkm.ZARBI_B:
+        return new ZarbiB(s, e)
+      case Pkm.ZARBI_C:
+        return new ZarbiC(s, e)
+      case Pkm.ZARBI_D:
+        return new ZarbiD(s, e)
+      case Pkm.ZARBI_E:
+        return new ZarbiE(s, e)
+      case Pkm.ZARBI_F:
+        return new ZarbiF(s, e)
+      case Pkm.ZARBI_G:
+        return new ZarbiG(s, e)
+      case Pkm.ZARBI_H:
+        return new ZarbiH(s, e)
+      case Pkm.ZARBI_I:
+        return new ZarbiI(s, e)
+      case Pkm.ZARBI_J:
+        return new ZarbiJ(s, e)
+      case Pkm.ZARBI_K:
+        return new ZarbiK(s, e)
+      case Pkm.ZARBI_L:
+        return new ZarbiL(s, e)
+      case Pkm.ZARBI_M:
+        return new ZarbiM(s, e)
+      case Pkm.ZARBI_N:
+        return new ZarbiN(s, e)
+      case Pkm.ZARBI_O:
+        return new ZarbiO(s, e)
+      case Pkm.ZARBI_P:
+        return new ZarbiP(s, e)
+      case Pkm.ZARBI_Q:
+        return new ZarbiQ(s, e)
+      case Pkm.ZARBI_R:
+        return new ZarbiR(s, e)
+      case Pkm.ZARBI_S:
+        return new ZarbiS(s, e)
+      case Pkm.ZARBI_T:
+        return new ZarbiT(s, e)
+      case Pkm.ZARBI_U:
+        return new ZarbiU(s, e)
+      case Pkm.ZARBI_V:
+        return new ZarbiV(s, e)
+      case Pkm.ZARBI_W:
+        return new ZarbiW(s, e)
+      case Pkm.ZARBI_X:
+        return new ZarbiX(s, e)
+      case Pkm.ZARBI_Y:
+        return new ZarbiY(s, e)
+      case Pkm.ZARBI_Z:
+        return new ZarbiZ(s, e)
+      case Pkm.ZARBI_QUESTION:
+        return new ZarbiQuestion(s, e)
+      case Pkm.ZARBI_EXCLAMATION:
+        return new ZarbiExclamation(s, e)
       case Pkm.EGG:
         return new Egg(s, e)
       case Pkm.DEFAULT:
