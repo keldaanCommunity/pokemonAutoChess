@@ -24,24 +24,37 @@ export default function UnownPanel(props: {
             {secretMessage.map((char, i) => renderChar(char, i))}
         </div>
         <div className="pokemon-carousel">
-            {unownFamily.map(pkm => (<PokemonCollectionItem
-                key={PkmIndex[pkm]}
-                name={pkm}
-                index={PkmIndex[pkm]}
-                metadata={props.metadata[PkmIndex[pkm]]}
-                config={pokemonCollection.find((p) => p.id == pkm)}
-                setPokemon={props.setPokemon}
-                filter={props.filter}
-            />))}
+            {unownFamily.map(pkm => {
+                const pathIndex = PkmIndex[pkm].split("-")
+                let metadata: ITracker | undefined = undefined
+                if (pathIndex.length == 1) {
+                    metadata = props.metadata[PkmIndex[pkm]]
+                } else if (pathIndex.length == 2) {
+                    metadata = props.metadata[pathIndex[0]].subgroups[pathIndex[1]]
+                }
+                if (metadata) {
+                    return (<PokemonCollectionItem
+                        key={PkmIndex[pkm]}
+                        name={pkm}
+                        index={PkmIndex[pkm]}
+                        metadata={metadata}
+                        config={pokemonCollection.find((p) => p.id === PkmIndex[pkm])}
+                        setPokemon={props.setPokemon}
+                        filter={props.filter}
+                    />)
+                } else {
+                    return null
+                }
+            })}
         </div>
     </div>)
 }
 
-function renderChar(c: string, index:number){
-    switch(c){
-        case '\n': return <br key={"char"+index} />
-        case ' ': return <span key={"char"+index} className="char space"></span>
-        default: return <span key={"char"+index} className="char" style={{
+function renderChar(c: string, index: number) {
+    switch (c) {
+        case '\n': return <br key={"char" + index} />
+        case ' ': return <span key={"char" + index} className="char space"></span>
+        default: return <span key={"char" + index} className="char" style={{
             backgroundImage: `url(assets/unown/unown-${c.toLowerCase()}.png)`
         }}></span>
     }
