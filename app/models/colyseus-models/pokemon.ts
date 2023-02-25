@@ -11353,10 +11353,10 @@ export class Sandslash extends Pokemon {
   }
 }
 
-export class ZarbiA extends Pokemon {
+export class UnownA extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_A,
+      Pkm.UNOWN_A,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11376,34 +11376,10 @@ export class ZarbiA extends Pokemon {
     )
   }
 }
-export class ZarbiB extends Pokemon {
+export class UnownB extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_B,
-      [Synergy.PSYCHIC],
-      Rarity.SUMMON,
-      Pkm.DEFAULT,
-      40,
-      4,
-      1,
-      1,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      AttackType.PHYSICAL,
-      1,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-
-export class ZarbiC extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.ZARBI_C,
+      Pkm.UNOWN_B,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11424,10 +11400,10 @@ export class ZarbiC extends Pokemon {
   }
 }
 
-export class ZarbiD extends Pokemon {
+export class UnownC extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_D,
+      Pkm.UNOWN_C,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11448,10 +11424,10 @@ export class ZarbiD extends Pokemon {
   }
 }
 
-export class ZarbiE extends Pokemon {
+export class UnownD extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_E,
+      Pkm.UNOWN_D,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11472,10 +11448,10 @@ export class ZarbiE extends Pokemon {
   }
 }
 
-export class ZarbiF extends Pokemon {
+export class UnownE extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_F,
+      Pkm.UNOWN_E,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11496,10 +11472,10 @@ export class ZarbiF extends Pokemon {
   }
 }
 
-export class ZarbiG extends Pokemon {
+export class UnownF extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_G,
+      Pkm.UNOWN_F,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11520,10 +11496,10 @@ export class ZarbiG extends Pokemon {
   }
 }
 
-export class ZarbiH extends Pokemon {
+export class UnownG extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_H,
+      Pkm.UNOWN_G,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11544,10 +11520,10 @@ export class ZarbiH extends Pokemon {
   }
 }
 
-export class ZarbiI extends Pokemon {
+export class UnownH extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_I,
+      Pkm.UNOWN_H,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11568,10 +11544,10 @@ export class ZarbiI extends Pokemon {
   }
 }
 
-export class ZarbiJ extends Pokemon {
+export class UnownI extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_J,
+      Pkm.UNOWN_I,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11592,10 +11568,10 @@ export class ZarbiJ extends Pokemon {
   }
 }
 
-export class ZarbiK extends Pokemon {
+export class UnownJ extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_K,
+      Pkm.UNOWN_J,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11616,10 +11592,10 @@ export class ZarbiK extends Pokemon {
   }
 }
 
-export class ZarbiL extends Pokemon {
+export class UnownK extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_L,
+      Pkm.UNOWN_K,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11640,10 +11616,10 @@ export class ZarbiL extends Pokemon {
   }
 }
 
-export class ZarbiM extends Pokemon {
+export class UnownL extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_M,
+      Pkm.UNOWN_L,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11664,10 +11640,10 @@ export class ZarbiM extends Pokemon {
   }
 }
 
-export class ZarbiN extends Pokemon {
+export class UnownM extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_N,
+      Pkm.UNOWN_M,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11688,10 +11664,10 @@ export class ZarbiN extends Pokemon {
   }
 }
 
-export class ZarbiO extends Pokemon {
+export class UnownN extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_O,
+      Pkm.UNOWN_N,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11712,10 +11688,10 @@ export class ZarbiO extends Pokemon {
   }
 }
 
-export class ZarbiP extends Pokemon {
+export class UnownO extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_P,
+      Pkm.UNOWN_O,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11736,10 +11712,10 @@ export class ZarbiP extends Pokemon {
   }
 }
 
-export class ZarbiQ extends Pokemon {
+export class UnownP extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_Q,
+      Pkm.UNOWN_P,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11760,10 +11736,10 @@ export class ZarbiQ extends Pokemon {
   }
 }
 
-export class ZarbiR extends Pokemon {
+export class UnownQ extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_R,
+      Pkm.UNOWN_Q,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11784,10 +11760,10 @@ export class ZarbiR extends Pokemon {
   }
 }
 
-export class ZarbiS extends Pokemon {
+export class UnownR extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_S,
+      Pkm.UNOWN_R,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11808,10 +11784,10 @@ export class ZarbiS extends Pokemon {
   }
 }
 
-export class ZarbiT extends Pokemon {
+export class UnownS extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_T,
+      Pkm.UNOWN_S,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11832,10 +11808,10 @@ export class ZarbiT extends Pokemon {
   }
 }
 
-export class ZarbiU extends Pokemon {
+export class UnownT extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_U,
+      Pkm.UNOWN_T,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11856,10 +11832,10 @@ export class ZarbiU extends Pokemon {
   }
 }
 
-export class ZarbiV extends Pokemon {
+export class UnownU extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_V,
+      Pkm.UNOWN_U,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11880,10 +11856,10 @@ export class ZarbiV extends Pokemon {
   }
 }
 
-export class ZarbiW extends Pokemon {
+export class UnownV extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_W,
+      Pkm.UNOWN_V,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11904,10 +11880,10 @@ export class ZarbiW extends Pokemon {
   }
 }
 
-export class ZarbiX extends Pokemon {
+export class UnownW extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_X,
+      Pkm.UNOWN_W,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11928,10 +11904,10 @@ export class ZarbiX extends Pokemon {
   }
 }
 
-export class ZarbiY extends Pokemon {
+export class UnownX extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_Y,
+      Pkm.UNOWN_X,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11952,10 +11928,10 @@ export class ZarbiY extends Pokemon {
   }
 }
 
-export class ZarbiZ extends Pokemon {
+export class UnownY extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_Z,
+      Pkm.UNOWN_Y,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -11976,10 +11952,10 @@ export class ZarbiZ extends Pokemon {
   }
 }
 
-export class ZarbiQuestion extends Pokemon {
+export class UnownZ extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_QUESTION,
+      Pkm.UNOWN_Z,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,
@@ -12000,10 +11976,34 @@ export class ZarbiQuestion extends Pokemon {
   }
 }
 
-export class ZarbiExclamation extends Pokemon {
+export class UnownQuestion extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
-      Pkm.ZARBI_EXCLAMATION,
+      Pkm.UNOWN_QUESTION,
+      [Synergy.PSYCHIC],
+      Rarity.SUMMON,
+      Pkm.DEFAULT,
+      40,
+      4,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class UnownExclamation extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.UNOWN_EXCLAMATION,
       [Synergy.PSYCHIC],
       Rarity.SUMMON,
       Pkm.DEFAULT,

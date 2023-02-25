@@ -70,7 +70,7 @@ export default function PokemonCollection(props: {
             )
           })}
           <TabPanel>
-            <UnownPanel setPokemon={setSelectedPokemon} metadata={metadata} />
+            <UnownPanel setPokemon={setSelectedPokemon} metadata={metadata} filter={filter} />
           </TabPanel>
         </Tabs>
       </div>
