@@ -281,11 +281,12 @@ export default class PokemonState {
             }
             attacker.handleHeal(
               Math.floor(lifesteal * residualDamage),
-              attacker
+              attacker,
+              false
             )
           }
           if (attacker.items.has(Item.SHELL_BELL)) {
-            attacker.handleHeal(Math.floor(0.3 * residualDamage), attacker)
+            attacker.handleHeal(Math.floor(0.3 * residualDamage), attacker, false)
           }
 
           if (
@@ -358,7 +359,7 @@ export default class PokemonState {
                   value.types.includes(Synergy.FIELD)
                 ) {
                   value.count.fieldCount++
-                  value.handleHeal((boost / 100) * value.hp, pokemon)
+                  value.handleHeal((boost / 100) * value.hp, pokemon, false)
                   value.handleAttackSpeed(speedBoost)
                 }
               })
@@ -411,7 +412,7 @@ export default class PokemonState {
           }
           attacker.addSpecialDefense(defBoost)
           attacker.addDefense(defBoost)
-          attacker.handleHeal(healBoost, attacker)
+          attacker.handleHeal(healBoost, attacker, false)
           attacker.addAttack(attackBoost)
           attacker.count.monsterExecutionCount++
         }

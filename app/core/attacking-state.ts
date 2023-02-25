@@ -353,14 +353,14 @@ export default class AttackingState extends PokemonState {
       }
 
       if (pokemon.items.has(Item.LEFTOVERS)) {
-        pokemon.handleHeal(pokemon.hp * 0.05, pokemon)
+        pokemon.handleHeal(pokemon.hp * 0.05, pokemon, false)
         ;[-1, 0, 1].forEach((offset) => {
           const value = board.getValue(
             pokemon.positionX + offset,
             pokemon.positionY
           )
           if (value && value.team === pokemon.team) {
-            value.handleHeal(value.hp * 0.05, pokemon)
+            value.handleHeal(value.hp * 0.05, pokemon, false)
           }
         })
       }

@@ -2655,8 +2655,8 @@ export class AppleAcidStrategy extends AttackStrategy {
       default:
         break
     }
-    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
     pokemon.addSpecialDefense(-3, true)
+    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)    
   }
 }
 
