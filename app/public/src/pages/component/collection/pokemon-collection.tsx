@@ -54,7 +54,9 @@ export default function PokemonCollection(props: {
                 </Tab>
               )
             })}
-            <Tab key="?">?</Tab>
+            <Tab key="?">
+              <img src="assets/unown/unown-qm.png" alt="?" className="unown-icon" />
+            </Tab>
           </TabList>
 
           {(["all"].concat(Object.keys(Synergy)) as (Synergy | "all")[]).map(type => {
