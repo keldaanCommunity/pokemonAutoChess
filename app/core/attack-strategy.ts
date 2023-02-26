@@ -1282,15 +1282,15 @@ export class PetalDanceStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        damage = 20
+        damage = 25
         count = 2
         break
       case 2:
-        damage = 40
+        damage = 50
         count = 4
         break
       case 3:
-        damage = 60
+        damage = 100
         count = 6
         break
       default:
