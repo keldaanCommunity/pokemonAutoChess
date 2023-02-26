@@ -1295,7 +1295,7 @@ export class Budew extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.BUDEW,
-      [Synergy.BABY, Synergy.POISON, Synergy.FLORA],
+      [Synergy.GRASS, Synergy.POISON, Synergy.BABY],
       Rarity.EPIC,
       Pkm.ROSELIA,
       90,
@@ -1319,7 +1319,7 @@ export class Roselia extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ROSELIA,
-      [Synergy.POISON, Synergy.FLORA],
+      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
       Rarity.EPIC,
       Pkm.ROSERADE,
       130,
@@ -1343,7 +1343,7 @@ export class Roserade extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ROSERADE,
-      [Synergy.POISON, Synergy.FLORA],
+      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
       Rarity.EPIC,
       Pkm.DEFAULT,
       230,
@@ -3024,12 +3024,12 @@ export class Aron extends Pokemon {
     super(
       Pkm.ARON,
       [Synergy.METAL, Synergy.MONSTER, Synergy.MINERAL],
-      Rarity.RARE,
+      Rarity.COMMON,
       Pkm.LAIRON,
-      80,
+      60,
       5,
-      4,
-      4,
+      2,
+      2,
       1,
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
@@ -3048,12 +3048,12 @@ export class Lairon extends Pokemon {
     super(
       Pkm.LAIRON,
       [Synergy.METAL, Synergy.MONSTER, Synergy.MINERAL],
-      Rarity.RARE,
+      Rarity.COMMON,
       Pkm.AGGRON,
       120,
       9,
-      6,
-      6,
+      4,
+      4,
       1,
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
@@ -3072,7 +3072,7 @@ export class Aggron extends Pokemon {
     super(
       Pkm.AGGRON,
       [Synergy.METAL, Synergy.MONSTER, Synergy.MINERAL],
-      Rarity.RARE,
+      Rarity.COMMON,
       Pkm.DEFAULT,
       220,
       20,
@@ -5281,7 +5281,7 @@ export class Graveler extends Pokemon {
       Rarity.COMMON,
       Pkm.GOLEM,
       110,
-      9,
+      10,
       4,
       4,
       1,

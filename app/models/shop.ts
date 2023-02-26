@@ -35,7 +35,8 @@ export const CommonShop = new Array<Pkm>(
   Pkm.SWINUB,
   Pkm.FENNEKIN,
   Pkm.PICHU,
-  Pkm.SQUIRTLE
+  Pkm.SQUIRTLE,
+  Pkm.ARON
 )
 
 export const UncommonShop = new Array<Pkm>(
@@ -66,7 +67,6 @@ export const RareShop = new Array<Pkm>(
   Pkm.BULBASAUR,
   Pkm.TURTWIG,
   Pkm.TRAPINCH,
-  Pkm.ARON,
   Pkm.RHYHORN,
   Pkm.TOGEPI,
   Pkm.LOTAD,

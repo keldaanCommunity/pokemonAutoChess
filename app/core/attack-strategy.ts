@@ -1282,15 +1282,15 @@ export class PetalDanceStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        damage = 20
+        damage = 25
         count = 2
         break
       case 2:
-        damage = 40
+        damage = 50
         count = 4
         break
       case 3:
-        damage = 60
+        damage = 100
         count = 6
         break
       default:
@@ -2655,8 +2655,8 @@ export class AppleAcidStrategy extends AttackStrategy {
       default:
         break
     }
-    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    pokemon.handleHeal(Math.floor(damage / 2), pokemon)
+    pokemon.addSpecialDefense(-3, true)
+    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)    
   }
 }
 
