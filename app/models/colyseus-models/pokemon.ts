@@ -1295,7 +1295,7 @@ export class Budew extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.BUDEW,
-      [Synergy.BABY, Synergy.POISON, Synergy.FLORA],
+      [Synergy.GRASS, Synergy.POISON, Synergy.BABY],
       Rarity.EPIC,
       Pkm.ROSELIA,
       90,
@@ -1319,7 +1319,7 @@ export class Roselia extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ROSELIA,
-      [Synergy.POISON, Synergy.FLORA],
+      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
       Rarity.EPIC,
       Pkm.ROSERADE,
       130,
@@ -1343,7 +1343,7 @@ export class Roserade extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ROSERADE,
-      [Synergy.POISON, Synergy.FLORA],
+      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
       Rarity.EPIC,
       Pkm.DEFAULT,
       230,
