@@ -7149,7 +7149,7 @@ export class Farfetchd extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.FARFETCH_D,
-      [Synergy.FLYING, Synergy.SOUND],
+      [Synergy.FLYING, Synergy.NORMAL],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
