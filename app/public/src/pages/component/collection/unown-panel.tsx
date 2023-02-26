@@ -4,6 +4,7 @@ import { ITracker } from "../../../../../types/ITracker"
 import { Pkm, PkmIndex, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
 import "./unown-panel.css";
+import { Emotion } from "../../../../../types/enum/Emotion"
 
 export default function UnownPanel(props: {
     setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
@@ -20,51 +21,67 @@ export default function UnownPanel(props: {
     And blue Jewel for Kyogre!
     `.replace(/^\s+/gm, '').replace(/\s+$/gm, '').split('')
 
+    const unowns = (Object.keys(PkmFamily) as Pkm[])
+        .filter(pkm => PkmFamily[pkm] === Pkm.UNOWN_A)
+        .flatMap((pkm: Pkm) => {
+            const pathIndex = PkmIndex[pkm].split("-")
+            let metadata: ITracker | undefined = undefined
+            if (pathIndex.length == 1) {
+                metadata = props.metadata[PkmIndex[pkm]]
+            } else if (pathIndex.length == 2) {
+                metadata = props.metadata[pathIndex[0]].subgroups[pathIndex[1]]
+            }
+            if (metadata) {
+                const config = pokemonCollection.find((p) => p.id === PkmIndex[pkm])
+                const { emotions, shinyEmotions } = config ?? { dust: 0, emotions: [] as Emotion[], shinyEmotions: [] as Emotion[] }
+                const isUnlocked = (emotions?.length > 0 || shinyEmotions?.length > 0)
+                return [{ pkm, metadata, config, isUnlocked }]
+            } else {
+                return []
+            }
+        })
+
     return (<div>
         <div id="unown-panel">
-            {secretMessage.map((char, i) => renderChar(char, i))}
+            {secretMessage.map((char, i) => renderChar(char, i, unowns))}
         </div>
         <div className="pokemon-carousel">
-            {unownFamily.map(pkm => {
-                const pathIndex = PkmIndex[pkm].split("-")
-                let metadata: ITracker | undefined = undefined
-                if (pathIndex.length == 1) {
-                    metadata = props.metadata[PkmIndex[pkm]]
-                } else if (pathIndex.length == 2) {
-                    metadata = props.metadata[pathIndex[0]].subgroups[pathIndex[1]]
-                }
-                if (metadata) {
-                    return (<PokemonCollectionItem
-                        key={PkmIndex[pkm]}
-                        name={pkm}
-                        index={PkmIndex[pkm]}
-                        metadata={metadata}
-                        config={pokemonCollection.find((p) => p.id === PkmIndex[pkm])}
-                        setPokemon={props.setPokemon}
-                        filter={props.filter}
-                    />)
-                } else {
-                    return null
-                }
+            {unowns.map(unown => {
+                if(!unown) return null;
+                return (<PokemonCollectionItem
+                    key={PkmIndex[unown.pkm]}
+                    name={unown.pkm}
+                    index={PkmIndex[unown.pkm]}
+                    metadata={unown.metadata}
+                    config={unown.config}
+                    setPokemon={props.setPokemon}
+                    filter={props.filter}
+                />)
             })}
         </div>
     </div>)
 }
 
-function renderChar(c: string, index: number) {
+function renderChar(c: string, index: number, unowns: ({ pkm: Pkm, isUnlocked: boolean })[]) {
+    let unown;
     switch (c) {
         case '\n': return <br key={"char" + index} />
         case ' ': return <span key={"char" + index} className="char space"></span>
-        case '!': return <span key={"char" + index} className="char" style={{
-            backgroundImage: `url(assets/unown/unown-em.png)`
-        }}></span>
-        case '?': return <span key={"char" + index} className="char" style={{
-            backgroundImage: `url(assets/unown/unown-qm.png)`
-        }}></span>
-        default: return <span key={"char" + index} className="char" style={{
-            backgroundImage: `url(assets/unown/unown-${c.toLowerCase()}.png)`
-        }}></span>
+        case '!': 
+            unown = unowns.find(u => u.pkm === Pkm.UNOWN_EXCLAMATION)
+            return <span key={"char" + index} className="char" style={{
+                backgroundImage: unown?.isUnlocked ? `url(assets/unown/unown-em.png)` : ''
+            }}></span>        
+        
+        case '?': 
+            unown = unowns.find(u => u.pkm === Pkm.UNOWN_QUESTION)
+            return <span key={"char" + index} className="char" style={{
+                backgroundImage: unown?.isUnlocked ? `url(assets/unown/unown-qm.png)` : ''
+            }}></span>
+        default: 
+            unown = unowns.find(u => u.pkm === "unown-"+c.toLowerCase())
+            return <span key={"char" + index} className="char" style={{
+                backgroundImage: unown?.isUnlocked ?  `url(assets/unown/unown-${c.toLowerCase()}.png)` : ''
+            }}></span>
     }
 }
-
-const unownFamily = Object.keys(PkmFamily).filter(pkm => PkmFamily[pkm] === Pkm.UNOWN_A)
