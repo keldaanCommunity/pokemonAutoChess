@@ -159,8 +159,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     board: Board,
     attackType: AttackType,
     attacker: PokemonEntity,
-    dodgeable: boolean,
-    reduceable: boolean
+    dodgeable: boolean
   ) {
     return this.state.handleDamage(
       this,
@@ -168,8 +167,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       board,
       attackType,
       attacker,
-      dodgeable,
-      reduceable
+      dodgeable
     )
   }
 
@@ -209,13 +207,12 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         board,
         attackType,
         attacker,
-        false,
-        true
+        false
       )
     }
   }
 
-  handleHeal(heal: number, caster: IPokemonEntity, spellDamageBoost?: boolean) {
+  handleHeal(heal: number, caster: IPokemonEntity, spellDamageBoost: boolean) {
     return this.state.handleHeal(this, heal, caster, spellDamageBoost)
   }
 
