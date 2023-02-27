@@ -12,118 +12,117 @@ import Pokemon from "./pokemon"
 const SHARDS_PER_ENCOUNTER = 50
 
 export default class UnownManager {
+  uid: string
+  scene: GameScene
+  animationManager: AnimationManager
+
+  constructor(
+    scene: GameScene,
+    animationManager: AnimationManager,
     uid: string
-    scene: GameScene
-    animationManager: AnimationManager
-  
-    constructor(
-      scene: GameScene,
-      animationManager: AnimationManager,
-      uid: string
-    ) {
-        this.uid = uid
-        this.scene = scene
-        this.animationManager = animationManager
-    }
+  ) {
+    this.uid = uid
+    this.scene = scene
+    this.animationManager = animationManager
+  }
 
-    onNewPickPhase(){
-      /* with 28 characters to unlock, expected number of encounters to
-      complete the collection are 28*sum(i=1..28, 1/i) = 110
-      We aim for 120 games to complete the collection, with an average duration
-      of 25 stages per game, hence a prob of random unown encounter of 
-      110 / (120*25) ~= 0,037 */
-      if(Math.random() < 0.037){
-        setTimeout(() => this.addWanderingUnown(), Math.round((5+15*Math.random())*1000))
+  addWanderingUnown() {
+    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(
+      (pkm) => PkmFamily[pkm] === Pkm.UNOWN_A
+    )
+    const [startX, endX] = coinflip()
+      ? [-100, +window.innerWidth + 100]
+      : [+window.innerWidth + 100, -100]
+    const [startY, endY] = [
+      100 + Math.round(Math.random() * 400),
+      100 + Math.round(Math.random() * 400)
+    ]
+
+    const unown = new Pokemon(
+      this.scene,
+      startX,
+      startY,
+      PokemonFactory.createPokemonFromName(pickRandomIn(unowns)),
+      "unown",
+      false
+    )
+    this.animationManager.animatePokemon(unown, PokemonActionState.IDLE)
+
+    const tween = this.scene.tweens.add({
+      targets: unown,
+      x: endX,
+      y: endY,
+      ease: "Linear",
+      duration: 5000,
+      onComplete: () => {
+        if (unown) {
+          unown.destroy()
+        }
       }
+    })
+
+    unown.isDisabled = true
+    unown.sprite.setInteractive()
+    unown.sprite.on("pointerdown", (pointer) => {
+      getGameContainer().room.send(Transfer.UNOWN_ENCOUNTER, unown.index)
+      this.displayShardGain([pointer.x, pointer.y], unown.index)
+      tween.stop()
+      unown.destroy()
+    })
+  }
+
+  displayShardGain(coordinates: number[], index: string) {
+    const textStyle = {
+      fontSize: "25px",
+      fontFamily: "Verdana",
+      color: "#fff",
+      align: "center",
+      strokeThickness: 2,
+      stroke: "#000"
     }
 
-    addWanderingUnown(){
-      const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(pkm => PkmFamily[pkm] === Pkm.UNOWN_A)
-      const [startX, endX] = coinflip() ? [-100,+window.innerWidth+100] : [+window.innerWidth+100,-100]
-      const [startY, endY] = [100+Math.round(Math.random()*400), 100+Math.round(Math.random()*400)]
-
-      const unown = new Pokemon(
+    const image = this.scene.add.existing(
+      new GameObjects.Image(this.scene, 0, 0, `portrait-${index}`)
+        .setScale(0.5, 0.5)
+        .setOrigin(0, 0)
+    )
+    const text = this.scene.add.existing(
+      new GameObjects.Text(
         this.scene,
-        startX,
-        startY,
-        PokemonFactory.createPokemonFromName(pickRandomIn(unowns)),
-        "unown",
-        false
-      )      
-      this.animationManager.animatePokemon(unown, PokemonActionState.IDLE)
+        25,
+        0,
+        SHARDS_PER_ENCOUNTER.toString(),
+        textStyle
+      )
+    )
+    image.setDepth(9)
+    text.setDepth(10)
 
-      const tween = this.scene.tweens.add({
-        targets: unown,
-        x: endX,
-        y: endY,
-        ease: "Linear",
-        duration: 5000,
-        onComplete: () => {
-          if (unown) {
-            unown.destroy()
-          }
-        }
-      })
+    const container = this.scene.add.existing(
+      new GameObjects.Container(
+        this.scene,
+        coordinates[0],
+        coordinates[1] - 50,
+        [text, image]
+      )
+    )
 
-      unown.isDisabled = true
-      unown.sprite.setInteractive()
-      unown.sprite.on('pointerdown', (pointer) => {
-        getGameContainer().room.send(Transfer.UNOWN_ENCOUNTER, unown.index)
-        this.displayShardGain([pointer.x, pointer.y], unown.index)
-        tween.stop()
-        unown.destroy()        
-      })
-    }
-
-    displayShardGain(
-      coordinates: number[],
-      index: string
-    ) {      
-      const textStyle = {
-        fontSize: "25px",
-        fontFamily: "Verdana",
-        color: "#fff",
-        align: "center",
-        strokeThickness: 2,
-        stroke: "#000"
+    this.scene.add.tween({
+      targets: [container],
+      ease: "linear",
+      duration: 1500,
+      delay: 0,
+      alpha: {
+        getStart: () => 1,
+        getEnd: () => 0
+      },
+      y: {
+        getStart: () => coordinates[1] - 50,
+        getEnd: () => coordinates[1] - 110
+      },
+      onComplete: () => {
+        container.destroy(true)
       }
-  
-      const image = this.scene.add.existing(
-        new GameObjects.Image(this.scene, 0, 0, `portrait-${index}`)
-          .setScale(0.5, 0.5)
-          .setOrigin(0, 0)
-      )
-      const text = this.scene.add.existing(
-        new GameObjects.Text(this.scene, 25, 0, SHARDS_PER_ENCOUNTER.toString(), textStyle)
-      )
-      image.setDepth(9)
-      text.setDepth(10)
-  
-      const container = this.scene.add.existing(
-        new GameObjects.Container(
-          this.scene,
-          coordinates[0],
-          coordinates[1] - 50,
-          [text, image]
-        )
-      )
-  
-      this.scene.add.tween({
-        targets: [container],
-        ease: "linear",
-        duration: 1500,
-        delay: 0,
-        alpha: {
-          getStart: () => 1,
-          getEnd: () => 0
-        },
-        y: {
-          getStart: () => coordinates[1] - 50,
-          getEnd: () => coordinates[1] - 110
-        },
-        onComplete: () => {
-          container.destroy(true)
-        }
-      })
-    }
+    })
+  }
 }

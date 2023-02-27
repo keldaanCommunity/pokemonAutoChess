@@ -261,6 +261,15 @@ export default function Game() {
         gameContainer.handleDisplayHeal(message)
       })
 
+      room.onMessage(Transfer.UNOWN_WANDERING, () => {
+        if (gameContainer.game) {
+          const g: any = gameContainer.game.scene.getScene("gameScene")
+          if (g && g.unownManager) {
+            g.unownManager.addWanderingUnown()
+          }
+        }
+      })
+
       room.state.onChange = (changes) => {
         changes.forEach((change) => {
           if (change.field == "roundTime") {
