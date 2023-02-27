@@ -4,7 +4,6 @@ import { IPlayer, IPokemon } from "../../../../types"
 import { DataChange } from "@colyseus/schema"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
-import { PokemonActionState } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
 

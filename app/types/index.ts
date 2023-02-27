@@ -143,7 +143,8 @@ export enum Transfer {
   KICK = "KICK",
   BAN = "BAN",
   POKEMON_DAMAGE = "POKEMON_DAMAGE",
-  POKEMON_HEAL = "POKEMON_HEAL"
+  POKEMON_HEAL = "POKEMON_HEAL",
+  UNOWN_ENCOUNTER = "UNOWN_ENCOUNTER"
 }
 
 export enum AttackSprite {
