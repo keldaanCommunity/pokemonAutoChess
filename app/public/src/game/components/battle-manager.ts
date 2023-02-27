@@ -747,7 +747,7 @@ export default class BattleManager {
         .setOrigin(0, 0)
     )
     const text = this.scene.add.existing(
-      new GameObjects.Text(this.scene, 25, 0, amount.toString(), textStyle)
+      new GameObjects.Text(this.scene, 25, 0, amount.toFixed(0), textStyle)
     )
     image.setDepth(9)
     text.setDepth(10)
