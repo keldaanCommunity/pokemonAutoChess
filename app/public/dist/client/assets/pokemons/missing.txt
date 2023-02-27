@@ -9,7 +9,6 @@ mega-medicham,0308/0001/AnimData.xml
 mega-medicham,0308/0001/0001/AnimData.xml
 mega-camerupt,0323/0001/AnimData.xml
 mega-camerupt,0323/0001/0001/AnimData.xml
-lampent,0608/AnimData.xml
 lampent,0608/0000/0001/AnimData.xml
 mega-abomasnow,0460/0001/AnimData.xml
 mega-abomasnow,0460/0001/0001/AnimData.xml

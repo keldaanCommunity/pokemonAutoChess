@@ -3,7 +3,7 @@ import { Dispatcher } from "@colyseus/command"
 import GameState from "./states/game-state"
 import Player from "../models/colyseus-models/player"
 import { MapSchema } from "@colyseus/schema"
-import UserMetadata from "../models/mongo-models/user-metadata"
+import UserMetadata, { IUserMetadata } from "../models/mongo-models/user-metadata"
 import BOT from "../models/mongo-models/bot-v2"
 import {
   OnShopCommand,
@@ -26,6 +26,7 @@ import EloRank from "elo-rank"
 import admin from "firebase-admin"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import {
+  Emotion,
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
@@ -45,6 +46,7 @@ import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 import BannedUser from "../models/mongo-models/banned-user"
 import { pickRandomIn, shuffleArray } from "../utils/random"
 import { Rarity } from "../types/enum/Game"
+import { FilterQuery } from "mongoose"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -266,6 +268,32 @@ export default class GameRoom extends Room<GameState> {
         }
       }
     )
+
+    this.onMessage(Transfer.UNOWN_ENCOUNTER, (client, unownIndex) => {
+      try {
+        const DUST_PER_ENCOUNTER = 50
+        UserMetadata.findOne(
+          { uid: client.auth.uid },
+          (err, u: FilterQuery<IUserMetadata>) => {
+            const c = u.pokemonCollection.get(unownIndex)
+            if (c) {
+              c.dust += DUST_PER_ENCOUNTER
+            } else {
+              u.pokemonCollection.set(unownIndex, {
+                id: unownIndex,
+                emotions: [],
+                shinyEmotions: [],
+                dust: DUST_PER_ENCOUNTER,
+                selectedEmotion: Emotion.NORMAL,
+                selectedShiny: false
+              })
+            }
+            u.save()
+          })
+      } catch (error) {
+        console.log(error)
+      }
+    })
 
     this.setSimulationInterval((deltaTime: number) => {
       if (!this.state.gameFinished) {

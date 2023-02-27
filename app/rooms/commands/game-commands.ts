@@ -1060,6 +1060,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             9,
             Math.round(this.state.stageLevel / 2)
           )
+        } else {
+          if (Math.random() < 0.037) {
+            const client = this.room.clients.find(
+              (cli) => cli.auth.uid === player.id
+            )
+            if (client) {
+              setTimeout(() => {
+                client.send(Transfer.UNOWN_WANDERING)
+              }, Math.round((5 + 15 * Math.random()) * 1000))
+            }
+          }
         }
         if (isPVE && player.getLastBattleResult() == BattleResult.WIN) {
           const items = ItemFactory.createRandomItems()

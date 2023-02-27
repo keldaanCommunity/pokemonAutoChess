@@ -464,6 +464,34 @@ import {
   Whismur,
   Wigglytuff,
   Zapdos,
+  UnownA,
+  UnownB,
+  UnownC,
+  UnownD,
+  UnownE,
+  UnownExclamation,
+  UnownF,
+  UnownG,
+  UnownH,
+  UnownI,
+  UnownJ,
+  UnownK,
+  UnownL,
+  UnownM,
+  UnownN,
+  UnownO,
+  UnownP,
+  UnownQ,
+  UnownQuestion,
+  UnownR,
+  UnownS,
+  UnownT,
+  UnownU,
+  UnownV,
+  UnownW,
+  UnownX,
+  UnownY,
+  UnownZ,
   Zekrom,
   Zubat,
   Zweilous
@@ -1621,6 +1649,62 @@ export default class PokemonFactory {
         return new Sandslash(s, e)
       case Pkm.FARFETCH_D:
         return new Farfetchd(s, e)
+      case Pkm.UNOWN_A:
+        return new UnownA(s, e)
+      case Pkm.UNOWN_B:
+        return new UnownB(s, e)
+      case Pkm.UNOWN_C:
+        return new UnownC(s, e)
+      case Pkm.UNOWN_D:
+        return new UnownD(s, e)
+      case Pkm.UNOWN_E:
+        return new UnownE(s, e)
+      case Pkm.UNOWN_F:
+        return new UnownF(s, e)
+      case Pkm.UNOWN_G:
+        return new UnownG(s, e)
+      case Pkm.UNOWN_H:
+        return new UnownH(s, e)
+      case Pkm.UNOWN_I:
+        return new UnownI(s, e)
+      case Pkm.UNOWN_J:
+        return new UnownJ(s, e)
+      case Pkm.UNOWN_K:
+        return new UnownK(s, e)
+      case Pkm.UNOWN_L:
+        return new UnownL(s, e)
+      case Pkm.UNOWN_M:
+        return new UnownM(s, e)
+      case Pkm.UNOWN_N:
+        return new UnownN(s, e)
+      case Pkm.UNOWN_O:
+        return new UnownO(s, e)
+      case Pkm.UNOWN_P:
+        return new UnownP(s, e)
+      case Pkm.UNOWN_Q:
+        return new UnownQ(s, e)
+      case Pkm.UNOWN_R:
+        return new UnownR(s, e)
+      case Pkm.UNOWN_S:
+        return new UnownS(s, e)
+      case Pkm.UNOWN_T:
+        return new UnownT(s, e)
+      case Pkm.UNOWN_U:
+        return new UnownU(s, e)
+      case Pkm.UNOWN_V:
+        return new UnownV(s, e)
+      case Pkm.UNOWN_W:
+        return new UnownW(s, e)
+      case Pkm.UNOWN_X:
+        return new UnownX(s, e)
+      case Pkm.UNOWN_Y:
+        return new UnownY(s, e)
+      case Pkm.UNOWN_Z:
+        return new UnownZ(s, e)
+      case Pkm.UNOWN_QUESTION:
+        return new UnownQuestion(s, e)
+      case Pkm.UNOWN_EXCLAMATION:
+        return new UnownExclamation(s, e)
       case Pkm.EGG:
         return new Egg(s, e)
       case Pkm.DEFAULT:
@@ -1634,11 +1718,6 @@ export default class PokemonFactory {
   static getPokemonRarityFromName(name: Pkm) {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
     return pokemon.rarity
-  }
-
-  static getPkmIndexFromName(name: Pkm) {
-    const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
-    return pokemon.index
   }
 
   static createRandomEgg() {

@@ -69,10 +69,7 @@ import {
 } from "../../../types"
 import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
-import { Pkm, PkmIndex } from "../../../types/enum/Pokemon"
 import { getRankLabel } from "../../../types/strings/Strings"
-import { toast } from "react-toastify"
-import { getPortraitSrc } from "../utils"
 import GameScene from "../game/scenes/game-scene"
 let gameContainer: GameContainer
 
@@ -262,6 +259,15 @@ export default function Game() {
 
       room.onMessage(Transfer.POKEMON_HEAL, (message) => {
         gameContainer.handleDisplayHeal(message)
+      })
+
+      room.onMessage(Transfer.UNOWN_WANDERING, () => {
+        if (gameContainer.game) {
+          const g: any = gameContainer.game.scene.getScene("gameScene")
+          if (g && g.unownManager) {
+            g.unownManager.addWanderingUnown()
+          }
+        }
       })
 
       room.state.onChange = (changes) => {
