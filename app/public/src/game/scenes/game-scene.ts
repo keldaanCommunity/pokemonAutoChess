@@ -2,6 +2,7 @@ import { Scene, GameObjects } from "phaser"
 import AnimationManager from "../animation-manager"
 import BoardManager from "../components/board-manager"
 import BattleManager from "../components/battle-manager"
+import UnownManager from "../components/unown-manager"
 import WeatherManager from "../components/weather-manager"
 import ItemsContainer from "../components/items-container"
 import Pokemon from "../components/pokemon"
@@ -51,6 +52,7 @@ export default class GameScene extends Scene {
   board: BoardManager | undefined
   battle: BattleManager | undefined
   weatherManager: WeatherManager | undefined
+  unownManager?: UnownManager
   music: Phaser.Sound.WebAudioSound | undefined
   targetPokemon: Pokemon | undefined
   graphics: Phaser.GameObjects.Graphics[] = []
@@ -449,6 +451,7 @@ export default class GameScene extends Scene {
         this.animationManager
       )
       this.weatherManager = new WeatherManager(this)
+      this.unownManager = new UnownManager(this, this.animationManager, this.uid)
       this.music = this.sound.add("sound", {
         loop: true
       }) as Phaser.Sound.WebAudioSound
@@ -507,6 +510,7 @@ export default class GameScene extends Scene {
       this.board?.battleMode()
     } else {
       this.board?.pickMode()
+      this.unownManager?.onNewPickPhase()
     }
   }
 

@@ -69,10 +69,7 @@ import {
 } from "../../../types"
 import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
-import { Pkm, PkmIndex } from "../../../types/enum/Pokemon"
 import { getRankLabel } from "../../../types/strings/Strings"
-import { toast } from "react-toastify"
-import { getPortraitSrc } from "../utils"
 import GameScene from "../game/scenes/game-scene"
 let gameContainer: GameContainer
 

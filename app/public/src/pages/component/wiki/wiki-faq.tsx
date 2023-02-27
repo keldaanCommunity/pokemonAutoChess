@@ -154,13 +154,6 @@ export default class WikiFaq extends Component {
           After Stage 10, it's the second value, after Turn 20, it's the third
           value
         </p>
-        <h4 className="nes-text is-success">
-          How do I get primal Groudon / Kyogre / Rayquaza ?
-        </h4>
-        <p>
-          Give a delta orb to Rayquaza, a red orb to Groudon or a blue orb to
-          Kyogre to turn them into their primal form.
-        </p>
         <h4 className="nes-text is-success">How do you get shiny ?</h4>
         <p>
           So when you play games with 8 players/bots, you get experience. With

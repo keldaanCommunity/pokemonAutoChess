@@ -35,7 +35,7 @@ import {
   USERNAME_REGEXP
 } from "../types"
 import { getEmotionCost, RarityProbability } from "../types/Config"
-import { Pkm, PkmIndex } from "../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import PokemonConfig from "../models/colyseus-models/pokemon-config"
 import { nanoid } from "nanoid"
 import PRECOMPUTED_RARITY_POKEMONS from "../models/precomputed/type-rarity-all.json"
@@ -529,6 +529,17 @@ export default class CustomLobbyRoom extends LobbyRoom {
                     ) {
                       u.titles.push(Title.DUCHESS)
                     }
+
+                    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(pkm => PkmFamily[pkm] === Pkm.UNOWN_A)
+                    if(!u.titles.includes(Title.ARCHEOLOGIST) && unowns.every(name => {
+                      const index = PkmIndex[name]
+                      const collection = u.pokemonCollection.get(index)
+                      const isUnlocked = collection && (collection.emotions.length > 0 || collection.shinyEmotions.length > 0)
+                      return (isUnlocked || index === message.index)
+                    })){
+                      u.titles.push(Title.ARCHEOLOGIST)
+                    }
+
                     message.shiny
                       ? u.pokemonCollection
                           .get(message.index)

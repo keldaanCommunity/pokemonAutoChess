@@ -143,7 +143,8 @@ export enum Transfer {
   KICK = "KICK",
   BAN = "BAN",
   POKEMON_DAMAGE = "POKEMON_DAMAGE",
-  POKEMON_HEAL = "POKEMON_HEAL"
+  POKEMON_HEAL = "POKEMON_HEAL",
+  UNOWN_ENCOUNTER = "UNOWN_ENCOUNTER"
 }
 
 export enum AttackSprite {
@@ -509,7 +510,8 @@ export enum Title {
   BACKER = "BACKER",
   TYRANT = "TYRANT",
   GAMBLER = "GAMBLER",
-  SHINY_SEEKER = "SHINY_SEEKER"
+  SHINY_SEEKER = "SHINY_SEEKER",
+  ARCHEOLOGIST = "ARCHEOLOGIST"
 }
 
 export const TitleName: { [key in Title]: string } = {
@@ -556,7 +558,8 @@ export const TitleName: { [key in Title]: string } = {
   [Title.BACKER]: "Backer",
   [Title.TYRANT]: "Tyrant",
   [Title.GAMBLER]: "Gambler",
-  [Title.SHINY_SEEKER]: "Shiny Seeker"
+  [Title.SHINY_SEEKER]: "Shiny Seeker",
+  [Title.ARCHEOLOGIST]: "Archeologist"
 }
 
 export const TitleDescription: { [key in Title]: string } = {
@@ -603,5 +606,6 @@ export const TitleDescription: { [key in Title]: string } = {
   [Title.BACKER]: "Support the game financially",
   [Title.TYRANT]: "Win a game at 100 Hp",
   [Title.GAMBLER]: "Reroll over 60 times in a single match",
-  [Title.SHINY_SEEKER]: "Have over 30 shiny pokemon avatars"
+  [Title.SHINY_SEEKER]: "Have over 30 shiny pokemon avatars",
+  [Title.ARCHEOLOGIST]: "Decipher the secret message of the Unowns"
 }
