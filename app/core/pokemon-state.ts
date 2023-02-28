@@ -735,6 +735,42 @@ export default class PokemonState {
     }
   }
 
+  getTargetCoordinateWhenConfused(
+    pokemon: PokemonEntity,
+    board: Board
+  ): { x: number; y: number } | undefined {
+    let distance = 999
+    let candidatesCoordinates: { x: number; y: number }[] = new Array<{
+      x: number
+      y: number
+    }>()
+
+    board.forEach((r: number, c: number, value: PokemonEntity | undefined) => {
+      if (value !== undefined && value.id != pokemon.id) {
+        const candidateDistance = board.distance(
+          pokemon.positionX,
+          pokemon.positionY,
+          r,
+          c
+        )
+        if (candidateDistance < distance) {
+          distance = candidateDistance
+          candidatesCoordinates = [{ x: r, y: c }]
+        } else if (candidateDistance == distance) {
+          candidatesCoordinates.push({ x: r, y: c })
+        }
+      }
+    })
+
+    candidatesCoordinates.push({ x: pokemon.positionX, y: pokemon.positionY }) // sometimes attack itself when confused
+
+    if (candidatesCoordinates.length > 0) {
+      return pickRandomIn(candidatesCoordinates)
+    } else {
+      return undefined
+    }
+  }
+
   move(
     pokemon: PokemonEntity,
     board: Board,

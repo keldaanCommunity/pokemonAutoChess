@@ -103,7 +103,7 @@ export const StatusDescription: { [key in Status]: Langage } = {
       prt: ""
     },
     [Status.POISON]: {
-      eng: `Deals 13% of max HP as ${Damage.TRUE} every second`,
+      eng: `Deals 5% of max HP per stack as ${Damage.TRUE} every second. Can stack up to 3 times.`,
       esp: "",
       fra: "",
       prt: ""
@@ -127,7 +127,7 @@ export const StatusDescription: { [key in Status]: Langage } = {
       prt: ""
     },
     [Status.CONFUSION]: {
-      eng: "Prevents attacking",
+      eng: "Force to change target all the time and sometimes deal damage to itself",
       esp: "",
       fra: "",
       prt: ""
