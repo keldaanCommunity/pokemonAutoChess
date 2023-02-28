@@ -10,7 +10,7 @@ import { Item } from "../../types/enum/Item"
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
   @type("boolean") silence = false
-  @type("boolean") poison = false
+  @type("number") poisonStacks = 0
   @type("boolean") freeze = false
   @type("boolean") protect = false
   @type("boolean") sleep = false
@@ -76,7 +76,7 @@ export default class Status extends Schema implements IStatus {
       this.updateBurn(dt, pokemon, board)
     }
 
-    if (this.poison) {
+    if (this.poisonStacks > 0) {
       this.updatePoison(dt, pokemon, board)
     }
 
@@ -255,9 +255,9 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined,
     board: Board
   ) {
-    if (!this.poison && !pkm.items.has(Item.FLUFFY_TAIL)) {
-      this.poison = true
-      this.poisonCooldown = timer
+    if (pkm.items.has(Item.FLUFFY_TAIL) === false) {
+      this.poisonStacks = Math.min(3, this.poisonStacks + 1)
+      this.poisonCooldown = Math.max(timer, this.poisonCooldown)
       if (origin) {
         this.poisonOrigin = origin
       }
@@ -275,7 +275,7 @@ export default class Status extends Schema implements IStatus {
     if (this.poisonDamageCooldown - dt <= 0) {
       if (this.poisonOrigin) {
         pkm.handleDamage(
-          Math.ceil(pkm.hp * 0.13),
+          Math.ceil(pkm.hp * 0.05 * this.poisonStacks),
           board,
           AttackType.TRUE,
           this.poisonOrigin,
@@ -288,7 +288,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (this.poisonCooldown - dt <= 0) {
-      this.poison = false
+      this.poisonStacks = 0
       this.poisonOrigin = undefined
       this.poisonDamageCooldown = 1000
     } else {

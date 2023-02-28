@@ -133,8 +133,8 @@ export default class BattleManager {
         const pkm = <Pokemon>children[i]
 
         if (pkm.id == pokemon.id) {
-          if (change.field == "poison") {
-            if (pokemon.status.poison) {
+          if (change.field == "poisonStacks") {
+            if (pokemon.status.poisonStacks > 0) {
               pkm.addPoison()
             } else {
               pkm.removePoison()
