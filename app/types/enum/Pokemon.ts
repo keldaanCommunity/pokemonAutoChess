@@ -494,7 +494,9 @@ export enum Pkm {
   UNOWN_Y = "unown-y",
   UNOWN_Z = "unown-z",
   UNOWN_QUESTION = "unown-question",
-  UNOWN_EXCLAMATION = "unown-exclamation"
+  UNOWN_EXCLAMATION = "unown-exclamation",
+  TAPU_FINI = "tapu-fini",
+  TAPU_BULU = "tapu-bulu"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -993,7 +995,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.UNOWN_Y]: "0201-0024",
   [Pkm.UNOWN_Z]: "0201-0025",
   [Pkm.UNOWN_QUESTION]: "0201-0027",
-  [Pkm.UNOWN_EXCLAMATION]: "0201-0026"
+  [Pkm.UNOWN_EXCLAMATION]: "0201-0026",
+  [Pkm.TAPU_FINI]: "0788",
+  [Pkm.TAPU_BULU]: "0787"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1492,5 +1496,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.UNOWN_Y]: Pkm.UNOWN_A,
   [Pkm.UNOWN_Z]: Pkm.UNOWN_A,
   [Pkm.UNOWN_QUESTION]: Pkm.UNOWN_A,
-  [Pkm.UNOWN_EXCLAMATION]: Pkm.UNOWN_A
+  [Pkm.UNOWN_EXCLAMATION]: Pkm.UNOWN_A,
+  [Pkm.TAPU_FINI]: Pkm.TAPU_FINI,
+  [Pkm.TAPU_BULU]: Pkm.TAPU_BULU
 }

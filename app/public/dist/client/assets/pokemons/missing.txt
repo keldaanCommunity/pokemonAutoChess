@@ -77,4 +77,3 @@ mega-altaria,0334/0001/0001/AnimData.xml
 frosmoth,0873/0000/0001/AnimData.xml
 dragapult,0887/AnimData.xml
 dragapult,0887/0000/0001/AnimData.xml
-gothitelle,0576/0000/0001/AnimData.xml

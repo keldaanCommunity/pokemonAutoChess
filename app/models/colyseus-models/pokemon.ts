@@ -9343,6 +9343,54 @@ export class TapuLele extends Pokemon {
   }
 }
 
+export class TapuFini extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.TAPU_FINI,
+      [Synergy.WATER, Synergy.FAIRY],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      270,
+      17,
+      3,
+      3,
+      3,
+      AttackSprite.WATER_RANGE,
+      AttackType.PHYSICAL,
+      2,
+      200,
+      Ability.PSYCHIC_SURGE,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class TapuBulu extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.TAPU_BULU,
+      [Synergy.GRASS, Synergy.FAIRY],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      270,
+      17,
+      6,
+      6,
+      1,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      200,
+      Ability.PSYCHIC_SURGE,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Stakataka extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

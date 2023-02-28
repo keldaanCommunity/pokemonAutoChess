@@ -494,7 +494,9 @@ import {
   UnownZ,
   Zekrom,
   Zubat,
-  Zweilous
+  Zweilous,
+  TapuBulu,
+  TapuFini
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1707,6 +1709,10 @@ export default class PokemonFactory {
         return new UnownExclamation(s, e)
       case Pkm.EGG:
         return new Egg(s, e)
+      case Pkm.TAPU_FINI:
+        return new TapuFini(s, e)
+      case Pkm.TAPU_BULU:
+        return new TapuBulu(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
