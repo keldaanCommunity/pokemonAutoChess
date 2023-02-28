@@ -5,7 +5,6 @@ import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { PokemonActionState } from "../types/enum/Game"
-import { Ability } from "../types/enum/Ability"
 
 export default class AttackingState extends PokemonState {
   update(
@@ -24,7 +23,9 @@ export default class AttackingState extends PokemonState {
         y: pokemon.targetY
       }
 
-      if (
+      if(pokemon.status.confusion){
+        targetCoordinate = this.getTargetCoordinateWhenConfused(pokemon, board)
+      } else if (
         !(
           target &&
           target.team !== pokemon.team &&
