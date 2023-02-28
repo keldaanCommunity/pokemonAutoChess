@@ -1,4 +1,4 @@
-import { GameObjects } from "phaser"
+import { Game, GameObjects } from "phaser"
 import Lifebar from "./life-bar"
 import DraggableObject from "./draggable-object"
 import PokemonDetail from "./pokemon-detail"
@@ -86,6 +86,8 @@ export default class Pokemon extends DraggableObject {
   spikeArmor: GameObjects.Sprite | undefined
   electricField: GameObjects.Sprite | undefined
   psychicField: GameObjects.Sprite | undefined
+  grassField: GameObjects.Sprite | undefined
+  fairyField: GameObjects.Sprite | undefined
   voidBoost: GameObjects.Sprite | undefined
   stars: number
 
@@ -187,6 +189,12 @@ export default class Pokemon extends DraggableObject {
       }
       if (p.status.psychicField) {
         this.addPsychicField()
+      }
+      if (p.status.grassField) {
+        this.addGrassField()
+      }
+      if (p.status.fairyField) {
+        this.addFairyField()
       }
     }
     scene.add.existing(this.sprite)
@@ -2880,6 +2888,54 @@ export default class Pokemon extends DraggableObject {
     if (this.electricField) {
       this.remove(this.electricField, true)
       this.electricField = undefined
+    }
+  }
+
+  addGrassField() {
+    if (!this.grassField) {
+      this.grassField = new GameObjects.Sprite(
+        this.scene,
+        0,
+        10,
+        Ability.GRASSY_SURGE,
+        "000"
+      )
+      this.grassField.setDepth(0)
+      this.grassField.setScale(2, 2)
+      this.scene.add.existing(this.grassField)
+      this.grassField.anims.play(Ability.GRASSY_SURGE)
+      this.add(this.grassField)
+    }
+  }
+
+  removeGrassField() {
+    if (this.grassField) {
+      this.remove(this.grassField, true)
+      this.grassField = undefined
+    }
+  }
+
+  addFairyField() {
+    if (!this.fairyField) {
+      this.fairyField = new GameObjects.Sprite(
+        this.scene,
+        0,
+        10,
+        Ability.MISTY_SURGE,
+        "000"
+      )
+      this.fairyField.setDepth(0)
+      this.fairyField.setScale(1, 1)
+      this.scene.add.existing(this.fairyField)
+      this.fairyField.anims.play(Ability.MISTY_SURGE)
+      this.add(this.fairyField)
+    }
+  }
+
+  removeFairyField() {
+    if (this.fairyField) {
+      this.remove(this.fairyField, true)
+      this.fairyField = undefined
     }
   }
 

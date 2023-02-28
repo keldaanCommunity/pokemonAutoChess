@@ -73,7 +73,7 @@ export default class AnimationManager {
     this.createAttacksAnimations()
     this.createSpecialAttacksAnimations()
     createStatusAnimations(this.game)
-  }  
+  }
 
   createSpecialAttacksAnimations() {
     this.game.anims.create({
@@ -1684,6 +1684,29 @@ export function createStatusAnimations(game: Phaser.Scene) {
     frameRate: 6,
     repeat: -1,
     yoyo: true
+  })
+
+  game.anims.create({
+    key: Ability.MISTY_SURGE,
+    frames: game.anims.generateFrameNames(Ability.MISTY_SURGE, {
+      start: 0,
+      end: 2,
+      zeroPad: 3
+    }),
+    duration: 1000,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: Ability.GRASSY_SURGE,
+    frames: game.anims.generateFrameNames(Ability.GRASSY_SURGE, {
+      start: 0,
+      end: 7,
+      zeroPad: 3
+    }),
+    duration: 1000,
+    repeat: -1,
+    yoyo: false
   })
 
   game.anims.create({

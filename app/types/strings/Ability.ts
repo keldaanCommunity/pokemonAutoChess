@@ -675,6 +675,18 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: ``,
     prt: ``,
     fra: ``
+  },
+  [Ability.GRASSY_SURGE]: {
+    eng: "Grassy Surge",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MISTY_SURGE]: {
+    eng: "Misty Surge",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1350,5 +1362,17 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     esp: ``,
     prt: ``,
     fra: ``
+  },
+  [Ability.GRASSY_SURGE]: {
+    eng: `Passive: Give ${Status.GRASS_FIELD} to your Psychic Pokemon, boosting their damage by 30%`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MISTY_SURGE]: {
+    eng: `Passive: Give ${Status.FAIRY_FIELD} to your Fairy Pokemon, boosting their damage by 30%`,
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }

@@ -22,6 +22,8 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") runeProtect = false
   @type("boolean") electricField = false
   @type("boolean") psychicField = false
+  @type("boolean") grassField = false
+  @type("boolean") fairyField = false
   @type("boolean") spikeArmor = false
   soulDew = false
   brightPowder = false
@@ -219,7 +221,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  healBurn(){
+  healBurn() {
     this.burn = false
     this.burnOrigin = undefined
     this.burnDamageCooldown = 1000
