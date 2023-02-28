@@ -420,6 +420,8 @@ export interface IStatus {
   runeProtect: boolean
   electricField: boolean
   psychicField: boolean
+  grassField: boolean
+  fairyField: boolean
 }
 
 export interface ICount {

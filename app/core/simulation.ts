@@ -17,6 +17,7 @@ import { ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 import { pickRandomIn } from "../utils/random"
+import { Ability } from "../types/enum/Ability"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") climate: Climate = Climate.NEUTRAL
@@ -317,6 +318,48 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applyPostEffects() {
+    ;[this.blueTeam, this.redTeam].forEach((team) => {
+      let grassySurge = false
+      let mistySurge = false
+      let electricSurge = false
+      let psychicSurge = false
+      team.forEach((p) => {
+        if (p.skill === Ability.GRASSY_SURGE) {
+          grassySurge = true
+        }
+      })
+      team.forEach((p) => {
+        if (p.skill === Ability.MISTY_SURGE) {
+          mistySurge = true
+        }
+      })
+      team.forEach((p) => {
+        if (p.skill === Ability.ELECTRIC_SURGE) {
+          electricSurge = true
+        }
+      })
+      team.forEach((p) => {
+        if (p.skill === Ability.PSYCHIC_SURGE) {
+          psychicSurge = true
+        }
+      })
+
+      team.forEach((p) => {
+        if (grassySurge && p.types.includes(Synergy.GRASS)) {
+          p.status.grassField = true
+        }
+        if (psychicSurge && p.types.includes(Synergy.PSYCHIC)) {
+          p.status.psychicField = true
+        }
+        if (electricSurge && p.types.includes(Synergy.ELECTRIC)) {
+          p.status.electricField = true
+        }
+        if (mistySurge && p.types.includes(Synergy.FAIRY)) {
+          p.status.fairyField = true
+        }
+      })
+    })
+
     const blueIronDefense = Array.from(this.blueTeam.values()).filter((p) =>
       p.effects.includes(Effect.IRON_DEFENSE)
     )
@@ -526,43 +569,6 @@ export default class Simulation extends Schema implements ISimulation {
       }
     })
 
-    let isTapuKoko = false
-    let isTapuLele = false
-
-    this.blueTeam.forEach((pokemon) => {
-      if (pokemon.name == Pkm.TAPU_KOKO) {
-        isTapuKoko = true
-      }
-      if (pokemon.name == Pkm.TAPU_LELE) {
-        isTapuLele = true
-      }
-    })
-    this.redTeam.forEach((pokemon) => {
-      if (pokemon.name == Pkm.TAPU_KOKO) {
-        isTapuKoko = true
-      }
-      if (pokemon.name == Pkm.TAPU_LELE) {
-        isTapuLele = true
-      }
-    })
-
-    this.blueTeam.forEach((pokemon) => {
-      if (isTapuKoko && pokemon.types.includes(Synergy.ELECTRIC)) {
-        pokemon.status.electricField = true
-      }
-      if (isTapuLele && pokemon.types.includes(Synergy.PSYCHIC)) {
-        pokemon.status.psychicField = true
-      }
-    })
-
-    this.redTeam.forEach((pokemon) => {
-      if (isTapuKoko && pokemon.types.includes(Synergy.ELECTRIC)) {
-        pokemon.status.electricField = true
-      }
-      if (isTapuLele && pokemon.types.includes(Synergy.PSYCHIC)) {
-        pokemon.status.psychicField = true
-      }
-    })
     this.blueTeam.forEach((p) => {
       const pokemon = p as PokemonEntity
       if (pokemon.items.has(Item.FLAME_ORB)) {

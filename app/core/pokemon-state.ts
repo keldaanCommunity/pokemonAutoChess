@@ -26,7 +26,7 @@ export default class PokemonState {
     ) {
       const boost = spellDamageBoost ? (heal * pokemon.spellDamage) / 100 : 0
       let healBoosted = Math.round(heal + boost)
-      if(pokemon.skill === Ability.WONDER_GUARD){
+      if (pokemon.skill === Ability.WONDER_GUARD) {
         healBoosted = 1
       }
 
@@ -102,6 +102,14 @@ export default class PokemonState {
         }
 
         if (attacker && attacker.status.psychicField) {
+          reducedDamage = Math.ceil(reducedDamage * 1.3)
+        }
+
+        if (attacker && attacker.status.grassField) {
+          reducedDamage = Math.ceil(reducedDamage * 1.3)
+        }
+
+        if (attacker && attacker.status.fairyField) {
           reducedDamage = Math.ceil(reducedDamage * 1.3)
         }
 
@@ -286,7 +294,11 @@ export default class PokemonState {
             )
           }
           if (attacker.items.has(Item.SHELL_BELL)) {
-            attacker.handleHeal(Math.floor(0.3 * residualDamage), attacker, false)
+            attacker.handleHeal(
+              Math.floor(0.3 * residualDamage),
+              attacker,
+              false
+            )
           }
 
           if (
@@ -466,18 +478,28 @@ export default class PokemonState {
         }
       }
 
-      if (pokemon.name === Pkm.TAPU_KOKO) {
+      if (pokemon.skill === Ability.ELECTRIC_SURGE) {
         board.forEach((x, y, v) => {
           if (v && v.status.electricField) {
             v.status.electricField = false
           }
         })
-      }
-
-      if (pokemon.name === Pkm.TAPU_LELE) {
+      } else if (pokemon.skill === Ability.PSYCHIC_SURGE) {
         board.forEach((x, y, v) => {
           if (v && v.status.psychicField) {
             v.status.psychicField = false
+          }
+        })
+      } else if (pokemon.skill === Ability.GRASSY_SURGE) {
+        board.forEach((x, y, v) => {
+          if (v && v.status.grassField) {
+            v.status.grassField = false
+          }
+        })
+      } else if (pokemon.skill === Ability.MISTY_SURGE) {
+        board.forEach((x, y, v) => {
+          if (v && v.status.fairyField) {
+            v.status.fairyField = false
           }
         })
       }

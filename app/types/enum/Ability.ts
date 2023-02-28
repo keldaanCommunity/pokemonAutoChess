@@ -110,7 +110,9 @@ import {
   FutureSightStrategy,
   FakeTearsStrategy,
   SparklingAriaStrategy,
-  DragonDartsStrategy
+  DragonDartsStrategy,
+  MistsySurgeStrategy,
+  GrassySurgeStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -225,7 +227,9 @@ export enum Ability {
   FUTURE_SIGHT = "FUTURE_SIGHT",
   FAKE_TEARS = "FAKE_TEARS",
   SPARKLING_ARIA = "SPARKLING_ARIA",
-  DRAGON_DARTS = "DRAGON_DARTS"
+  DRAGON_DARTS = "DRAGON_DARTS",
+  GRASSY_SURGE = "GRASSY_SURGE",
+  MISTY_SURGE = "MISTY_SURGE"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -340,5 +344,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.FUTURE_SIGHT]: new FutureSightStrategy(),
   [Ability.FAKE_TEARS]: new FakeTearsStrategy(),
   [Ability.SPARKLING_ARIA]: new SparklingAriaStrategy(),
-  [Ability.DRAGON_DARTS]: new DragonDartsStrategy()
+  [Ability.DRAGON_DARTS]: new DragonDartsStrategy(),
+  [Ability.GRASSY_SURGE]: new GrassySurgeStrategy(),
+  [Ability.MISTY_SURGE]: new MistsySurgeStrategy()
 }

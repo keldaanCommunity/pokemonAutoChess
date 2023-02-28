@@ -330,6 +330,28 @@ export class PsychicSurgeStrategy extends AttackStrategy {
   }
 }
 
+export class MistsySurgeStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+  }
+}
+
+export class GrassySurgeStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+  }
+}
+
 export class ShadowBallStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -2656,7 +2678,7 @@ export class AppleAcidStrategy extends AttackStrategy {
         break
     }
     pokemon.addSpecialDefense(-3, true)
-    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)    
+    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
   }
 }
 

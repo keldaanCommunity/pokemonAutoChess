@@ -820,4 +820,14 @@ export function loadStatusMultiAtlas(scene: Scene) {
     "/assets/status/PSYCHIC_SURGE.json",
     "/assets/status"
   )
+  scene.load.multiatlas(
+    "GRASSY_SURGE",
+    "/assets/status/GRASSY_SURGE.json",
+    "/assets/status"
+  )
+  scene.load.multiatlas(
+    "MISTY_SURGE",
+    "/assets/status/MISTY_SURGE.json",
+    "/assets/status"
+  )
 }

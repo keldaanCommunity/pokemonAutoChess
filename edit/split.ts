@@ -55,6 +55,8 @@ async function split() {
     }
   })
 
+  console.log(mapName)
+
   for (let i = 0; i < pkmaIndexes.length; i++) {
     const index = pkmaIndexes[i]
     const progression = `${i}/${pkmaIndexes.length - 1} (${(

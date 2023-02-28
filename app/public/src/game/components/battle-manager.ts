@@ -227,6 +227,18 @@ export default class BattleManager {
             } else {
               pkm.removePsychicField()
             }
+          } else if (change.field == "grassField") {
+            if (pokemon.status.grassField) {
+              pkm.addGrassField()
+            } else {
+              pkm.removeGrassField()
+            }
+          } else if (change.field == "fairyField") {
+            if (pokemon.status.fairyField) {
+              pkm.addFairyField()
+            } else {
+              pkm.removeFairyField()
+            }
           }
         }
       }
