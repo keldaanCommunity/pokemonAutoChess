@@ -1454,10 +1454,6 @@ export class VoltSwitchStrategy extends AttackStrategy {
 }
 
 export class HeadSmashStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1494,10 +1490,6 @@ export class HeadSmashStrategy extends AttackStrategy {
 }
 
 export class RockSmashStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1531,10 +1523,6 @@ export class RockSmashStrategy extends AttackStrategy {
 }
 
 export class RockTombStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1564,10 +1552,6 @@ export class RockTombStrategy extends AttackStrategy {
 }
 
 export class RoarOfTimeStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1593,10 +1577,6 @@ export class RoarOfTimeStrategy extends AttackStrategy {
 }
 
 export class HealBlockStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1630,10 +1610,6 @@ export class HealBlockStrategy extends AttackStrategy {
 }
 
 export class SpikeArmorStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1647,10 +1623,6 @@ export class SpikeArmorStrategy extends AttackStrategy {
 }
 
 export class OriginPulseStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1669,10 +1641,6 @@ export class OriginPulseStrategy extends AttackStrategy {
 }
 
 export class SeedFlareStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1692,10 +1660,6 @@ export class SeedFlareStrategy extends AttackStrategy {
 }
 
 export class NightmareStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1726,10 +1690,6 @@ export class NightmareStrategy extends AttackStrategy {
 }
 
 export class BurnStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1761,10 +1721,6 @@ export class BurnStrategy extends AttackStrategy {
 }
 
 export class SilenceStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1795,10 +1751,6 @@ export class SilenceStrategy extends AttackStrategy {
 }
 
 export class PoisonStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1836,10 +1788,6 @@ export class PoisonStrategy extends AttackStrategy {
 }
 
 export class FreezeStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1870,10 +1818,6 @@ export class FreezeStrategy extends AttackStrategy {
 }
 
 export class ProtectStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1900,10 +1844,6 @@ export class ProtectStrategy extends AttackStrategy {
 }
 
 export class SleepStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1950,10 +1890,6 @@ export class SleepStrategy extends AttackStrategy {
 }
 
 export class ConfusionStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1981,10 +1917,6 @@ export class ConfusionStrategy extends AttackStrategy {
 }
 
 export class FireBlastStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2011,10 +1943,6 @@ export class FireBlastStrategy extends AttackStrategy {
 }
 
 export class SeismicTossStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2034,10 +1962,6 @@ export class SeismicTossStrategy extends AttackStrategy {
 }
 
 export class GuillotineStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2059,10 +1983,6 @@ export class GuillotineStrategy extends AttackStrategy {
 }
 
 export class RockSlideStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2092,10 +2012,6 @@ export class RockSlideStrategy extends AttackStrategy {
 }
 
 export class WheelOfFireStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2132,10 +2048,6 @@ export class WheelOfFireStrategy extends AttackStrategy {
 }
 
 export class HeatWaveStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2170,10 +2082,6 @@ export class HeatWaveStrategy extends AttackStrategy {
 }
 
 export class HydroPumpStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2204,10 +2112,6 @@ export class HydroPumpStrategy extends AttackStrategy {
 }
 
 export class ThunderStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2234,10 +2138,6 @@ export class ThunderStrategy extends AttackStrategy {
 }
 
 export class DracoMeteorStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2268,10 +2168,6 @@ export class DracoMeteorStrategy extends AttackStrategy {
 }
 
 export class BlazeKickStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2298,10 +2194,6 @@ export class BlazeKickStrategy extends AttackStrategy {
 }
 
 export class WishStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2327,10 +2219,6 @@ export class WishStrategy extends AttackStrategy {
 }
 
 export class CalmMindStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2358,10 +2246,6 @@ export class CalmMindStrategy extends AttackStrategy {
 }
 
 export class IronDefenseStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2389,10 +2273,6 @@ export class IronDefenseStrategy extends AttackStrategy {
 }
 
 export class SoakStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2426,10 +2306,6 @@ export class SoakStrategy extends AttackStrategy {
 }
 
 export class IronTailStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2461,10 +2337,6 @@ export class IronTailStrategy extends AttackStrategy {
 }
 
 export class BlastBurnStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2499,10 +2371,6 @@ export class BlastBurnStrategy extends AttackStrategy {
 }
 
 export class ChargeStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2538,10 +2406,6 @@ export class ChargeStrategy extends AttackStrategy {
 }
 
 export class DischargeStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2576,10 +2440,6 @@ export class DischargeStrategy extends AttackStrategy {
 }
 
 export class DiveStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2621,10 +2481,6 @@ export class DiveStrategy extends AttackStrategy {
 }
 
 export class BiteStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2652,10 +2508,6 @@ export class BiteStrategy extends AttackStrategy {
 }
 
 export class AppleAcidStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2683,10 +2535,6 @@ export class AppleAcidStrategy extends AttackStrategy {
 }
 
 export class DragonTailStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2715,10 +2563,6 @@ export class DragonTailStrategy extends AttackStrategy {
 }
 
 export class DragonBreathStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2749,10 +2593,6 @@ export class DragonBreathStrategy extends AttackStrategy {
 }
 
 export class IcicleCrashStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2788,10 +2628,6 @@ export class IcicleCrashStrategy extends AttackStrategy {
 }
 
 export class SteamEruptionStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2827,10 +2663,6 @@ export class SteamEruptionStrategy extends AttackStrategy {
 }
 
 export class RootStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2866,10 +2698,6 @@ export class RootStrategy extends AttackStrategy {
 }
 
 export class TormentStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2897,10 +2725,6 @@ export class TormentStrategy extends AttackStrategy {
 }
 
 export class StompStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2914,10 +2738,6 @@ export class StompStrategy extends AttackStrategy {
 }
 
 export class DarkPulseStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2945,10 +2765,6 @@ export class DarkPulseStrategy extends AttackStrategy {
 }
 
 export class NightSlashStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2983,10 +2799,6 @@ export class NightSlashStrategy extends AttackStrategy {
 }
 
 export class BugBuzzStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3015,10 +2827,6 @@ export class BugBuzzStrategy extends AttackStrategy {
 }
 
 export class PoisonStingStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3050,10 +2858,6 @@ export class PoisonStingStrategy extends AttackStrategy {
 }
 
 export class LeechLifeStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3089,10 +2893,6 @@ export class LeechLifeStrategy extends AttackStrategy {
 }
 
 export class HappyHourStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3123,10 +2923,6 @@ export class HappyHourStrategy extends AttackStrategy {
 }
 
 export class TeleportStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3162,10 +2958,6 @@ export class TeleportStrategy extends AttackStrategy {
 }
 
 export class NastyPlotStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3192,10 +2984,6 @@ export class NastyPlotStrategy extends AttackStrategy {
 }
 
 export class ThiefStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3247,10 +3035,6 @@ export class ThiefStrategy extends AttackStrategy {
 }
 
 export class StunSporeStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3282,10 +3066,6 @@ export class StunSporeStrategy extends AttackStrategy {
 }
 
 export class MeteorMashStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3321,10 +3101,6 @@ export class MeteorMashStrategy extends AttackStrategy {
 }
 
 export class HurricaneStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3355,10 +3131,6 @@ export class HurricaneStrategy extends AttackStrategy {
 }
 
 export class FakeTearsStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3417,10 +3189,6 @@ export class SparklingAriaStrategy extends AttackStrategy {
 }
 
 export class DragonDartsStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3454,10 +3222,6 @@ export class DragonDartsStrategy extends AttackStrategy {
 }
 
 export class MetronomeStrategy extends AttackStrategy {
-  constructor() {
-    super()
-  }
-
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3468,5 +3232,34 @@ export class MetronomeStrategy extends AttackStrategy {
 
     const strategy = pickRandomIn(Object.values(AbilityStrategy))
     strategy.process(pokemon, state, board, target)
+  }
+}
+
+export class SkyAttackStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+    const damage = pokemon.stars === 3 ? 200 : pokemon.stars === 2 ? 100 : 50
+    if (farthestCoordinate) {
+      target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+
+      board.swapValue(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      pokemon.positionX = farthestCoordinate.x
+      pokemon.positionY = farthestCoordinate.y
+      pokemon.status.triggerProtect(1000)
+    }
   }
 }

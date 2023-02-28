@@ -383,6 +383,11 @@ export default class GameScene extends Scene {
       "/assets/attacks"
     )
     this.load.multiatlas(
+      "SKY_ATTACK",
+      "/assets/attacks/SKY_ATTACK.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
       "pmd-replace",
       "/assets/attacks/pmd-replace.json",
       "/assets/attacks"
