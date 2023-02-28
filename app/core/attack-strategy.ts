@@ -3019,7 +3019,7 @@ export class PoisonStingStrategy extends AttackStrategy {
       default:
         break
     }
-    if (pokemon.status.poison) {
+    if (pokemon.status.poisonStacks > 0) {
       damage = damage * 2
     }
 

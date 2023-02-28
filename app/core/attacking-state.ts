@@ -111,13 +111,13 @@ export default class AttackingState extends PokemonState {
 
       let poisonChance = 0
       if (pokemon.effects.includes(Effect.POISON_GAS)) {
-        poisonChance += 0.3
+        poisonChance = 0.3
       }
       if (pokemon.effects.includes(Effect.TOXIC)) {
-        poisonChance += 0.4
+        poisonChance = 0.7
       }
-      if (poisonChance != 0) {
-        if (Math.random() > 1 - poisonChance) {
+      if (poisonChance > 0) {
+        if (Math.random() < poisonChance) {
           target.status.triggerPoison(4000, target, pokemon, board)
         }
       }
