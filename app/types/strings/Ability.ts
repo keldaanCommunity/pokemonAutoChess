@@ -687,6 +687,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.SKY_ATTACK]: {
+    eng: "Sky Attack",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1371,6 +1377,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.MISTY_SURGE]: {
     eng: `Passive: Give ${Status.FAIRY_FIELD} to your Fairy Pokemon, boosting their damage by 30%`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SKY_ATTACK]: {
+    eng: `The pokémon rises in the air and falls on the farthest target, ${Status.PROTECT} the pokemon for 1 second, and deals [50,100,200] ${Damage.SPECIAL}`,
     esp: "",
     prt: "",
     fra: ""

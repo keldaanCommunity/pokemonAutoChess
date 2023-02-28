@@ -1507,6 +1507,17 @@ export default class AnimationManager {
       duration: 1000,
       repeat: 0
     })
+
+    this.game.anims.create({
+      key: Ability.SKY_ATTACK,
+      frames: this.game.anims.generateFrameNames(Ability.SKY_ATTACK, {
+        start: 0,
+        end: 5,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 2
+    })
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {

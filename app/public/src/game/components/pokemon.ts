@@ -1963,6 +1963,33 @@ export default class Pokemon extends DraggableObject {
             })
             break
 
+          case Ability.SKY_ATTACK:
+            coordinatesTarget = transformAttackCoordinate(
+              this.targetX,
+              this.targetY
+            )
+            coordinates = transformAttackCoordinate(this.targetX, 9)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SKY_ATTACK,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(1.5, 1.5)
+            specialProjectile.anims.play(Ability.SKY_ATTACK)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "linear",
+              duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.PAYDAY:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
