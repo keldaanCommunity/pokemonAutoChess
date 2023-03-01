@@ -507,6 +507,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
 import { PkmCost, EvolutionTime } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
+import { Mythical1Shop } from "./shop"
 
 export const ObtainableEgg = new Array<Pkm>(
   Pkm.GOTHITA,
@@ -1763,6 +1764,8 @@ export default class PokemonFactory {
       return 2
     } else if (pokemon.rarity === Rarity.HATCH) {
       return [3, 4, 5][pokemon.stars - 1]
+    } else if (pokemon.rarity === Rarity.MYTHICAL) {
+      return Mythical1Shop.includes(name) ? 15 : 20
     } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
       return PkmCost[pokemon.rarity]
     } else {
