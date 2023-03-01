@@ -253,7 +253,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.critChance += value
 
     if (this.critChance > 100) {
-      this.addCritDamage(Math.round((this.critChance - 100) * 10) / 500)
+      const overCritChance = Math.round(this.critChance - 100)
+      this.addCritDamage(overCritChance / 50)
       this.critChance = 100
     }
   }
