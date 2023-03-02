@@ -45,7 +45,9 @@ import {
   displayEmote,
   setCurrentPlayerTitle,
   setPokemonProposition,
-  setAdditionalPokemons
+  setAdditionalPokemons,
+  setPoolItem,
+  deletePoolItem
 } from "../stores/GameStore"
 import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "./utils/utils"
@@ -71,6 +73,8 @@ import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
 import { getRankLabel } from "../../../types/strings/Strings"
 import GameScene from "../game/scenes/game-scene"
+import { Pkm } from "../../../types/enum/Pokemon"
+import { GamePoolIcon } from "./component/game/game-pool-icon"
 let gameContainer: GameContainer
 
 function playerClick(id: string) {
@@ -292,6 +296,44 @@ export default function Game() {
         dispatch(setAdditionalPokemons(room.state.additionalPokemons))
       }
 
+      room.state.shop.onChange = (changes) => {
+        const sections = [
+          "commonPool",
+          "uncommonPool",
+          "rarePool",
+          "epicPool",
+          "legendaryPool"
+        ]
+        sections.forEach((section) => {
+          room.state.shop[section].onAdd = (value, key) => {
+            dispatch(
+              setPoolItem({
+                section: section,
+                key: key as Pkm,
+                value: value
+              })
+            )
+          }
+          room.state.shop[section].onChange = (value, key) => {
+            dispatch(
+              setPoolItem({
+                section: section,
+                key: key as Pkm,
+                value: value
+              })
+            )
+          }
+          room.state.shop[section].onRemove = (value, key) => {
+            dispatch(
+              deletePoolItem({
+                section: section,
+                key: key as Pkm
+              })
+            )
+          }
+        })
+      }
+
       room.state.players.onAdd = (player) => {
         gameContainer.initializePlayer(player)
         dispatch(addPlayer(player))
@@ -492,6 +534,7 @@ export default function Game() {
         <GamePokemonsProposition />
         <GameDpsMeter />
         <GameToasts />
+        <GamePoolIcon />
         <GameOptionsIcon leave={leave} />
         <div id="game" ref={container}></div>
       </div>

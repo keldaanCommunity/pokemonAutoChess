@@ -1,0 +1,14 @@
+#game-pool-icon {
+  position: absolute;
+  left: 4.5%;
+  top: 0.5%;
+}
+
+#root #game-pool-icon:hover {
+  filter: brightness(1.25);
+}
+
+#game-pool-icon img {
+  height: 48px;
+  width: 48px;
+}

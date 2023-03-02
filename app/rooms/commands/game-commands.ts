@@ -114,7 +114,7 @@ export class OnShopCommand extends Command<
           pokemon.positionY = 0
           player.board.set(pokemon.id, pokemon)
 
-          if (pokemon.rarity == Rarity.MYTHICAL) {
+          if (pokemon.rarity == Rarity.MYTHICAL && !player.isBot) {
             this.state.shop.assignShop(player)
           } else {
             player.shop[index] = Pkm.DEFAULT
@@ -1028,7 +1028,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   checkDeath() {
     this.state.players.forEach((player: Player, key: string) => {
-      if (player.life <= 0) {
+      if (player.life <= 0 && player.alive) {
         if (!player.isBot) {
           player.shop.forEach((pkm) => {
             this.state.shop.releasePokemon(pkm)
@@ -1102,18 +1102,20 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         }
 
         player.opponentName = ""
-
-        if (!player.shopLocked) {
-          if (this.state.stageLevel == 10) {
-            this.state.shop.assignFirstMythicalShop(player)
-          } else if (this.state.stageLevel == 20) {
-            this.state.shop.assignSecondMythicalShop(player)
+        if (!player.isBot) {
+          if (!player.shopLocked) {
+            if (this.state.stageLevel == 10) {
+              this.state.shop.assignFirstMythicalShop(player)
+            } else if (this.state.stageLevel == 20) {
+              this.state.shop.assignSecondMythicalShop(player)
+            } else {
+              this.state.shop.assignShop(player)
+            }
           } else {
-            this.state.shop.assignShop(player)
+            player.shopLocked = false
           }
-        } else {
-          player.shopLocked = false
         }
+
         player.board.forEach((pokemon, key) => {
           if (pokemon.evolutionTimer !== undefined) {
             pokemon.evolutionTimer -= 1

@@ -5,6 +5,7 @@ import { IPokemon } from "../types"
 import { Probability } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
 import { pickRandomIn } from "../utils/random"
+import { Schema, type, MapSchema } from "@colyseus/schema"
 
 export const PoolSizeRarity: { [key in Rarity]: number } = {
   [Rarity.COMMON]: 29,
@@ -187,13 +188,14 @@ export const Mythical2Shop = new Array<Pkm>(
   Pkm.VOLCANION
 )
 
-export default class Shop {
-  commonPool: Map<Pkm, number> = new Map<Pkm, number>()
-  uncommonPool: Map<Pkm, number> = new Map<Pkm, number>()
-  rarePool: Map<Pkm, number> = new Map<Pkm, number>()
-  epicPool: Map<Pkm, number> = new Map<Pkm, number>()
-  legendaryPool: Map<Pkm, number> = new Map<Pkm, number>()
+export default class Shop extends Schema {
+  @type({ map: "uint8" }) commonPool = new MapSchema<number>()
+  @type({ map: "uint8" }) uncommonPool = new MapSchema<number>()
+  @type({ map: "uint8" }) rarePool = new MapSchema<number>()
+  @type({ map: "uint8" }) epicPool = new MapSchema<number>()
+  @type({ map: "uint8" }) legendaryPool = new MapSchema<number>()
   constructor() {
+    super()
     CommonShop.forEach((pkm) => {
       this.commonPool.set(pkm, PoolSizeRarity[Rarity.COMMON])
     })
@@ -299,7 +301,7 @@ export default class Shop {
     }
   }
 
-  getRandomPokemonFromPool(pool: Map<Pkm, number>, finals: Array<Pkm>): Pkm {
+  getRandomPokemonFromPool(pool, finals: Array<Pkm>): Pkm {
     let pkm = Pkm.MAGIKARP
     const potential = new Array<Pkm>()
     pool.forEach((value, pkm) => {

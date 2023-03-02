@@ -46,6 +46,11 @@ interface GameStateStore {
   redHealDpsMeter: IDpsHeal[]
   pokemonCollection: MapSchema<IPokemonConfig>
   additionalPokemons: Pkm[]
+  commonPool: Map<Pkm, number>
+  uncommonPool: Map<Pkm, number>
+  rarePool: Map<Pkm, number>
+  epicPool: Map<Pkm, number>
+  legendaryPool: Map<Pkm, number>
 }
 
 const initialState: GameStateStore = {
@@ -80,7 +85,12 @@ const initialState: GameStateStore = {
   blueHealDpsMeter: new Array<IDpsHeal>(),
   redHealDpsMeter: new Array<IDpsHeal>(),
   pokemonCollection: new MapSchema<IPokemonConfig>(),
-  additionalPokemons: new Array<Pkm>()
+  additionalPokemons: new Array<Pkm>(),
+  commonPool: new Map<Pkm, number>(),
+  uncommonPool: new Map<Pkm, number>(),
+  rarePool: new Map<Pkm, number>(),
+  epicPool: new Map<Pkm, number>(),
+  legendaryPool: new Map<Pkm, number>()
 }
 
 export const gameSlice = createSlice({
@@ -103,7 +113,7 @@ export const gameSlice = createSlice({
       })
     },
     setRoundTime: (state, action: PayloadAction<number>) => {
-      if(action.payload > state.roundTime) state.phaseDuration = action.payload;
+      if (action.payload > state.roundTime) state.phaseDuration = action.payload
       state.roundTime = action.payload
     },
     setAfterGameId: (state, action: PayloadAction<string>) => {
@@ -423,11 +433,28 @@ export const gameSlice = createSlice({
     setPokemonCollection: (state, action: PayloadAction<PokemonCollection>) => {
       state.pokemonCollection = action.payload
     },
+    setPoolItem: (
+      state,
+      action: PayloadAction<{ section: string; key: Pkm; value: number }>
+    ) => {
+      state[action.payload.section].set(
+        action.payload.key,
+        action.payload.value
+      )
+    },
+    deletePoolItem: (
+      state,
+      action: PayloadAction<{ section: string; key: Pkm }>
+    ) => {
+      state[action.payload.section].delete(action.payload.key)
+    },
     leaveGame: () => initialState
   }
 })
 
 export const {
+  setPoolItem,
+  deletePoolItem,
   setAdditionalPokemons,
   setPokemonProposition,
   displayEmote,

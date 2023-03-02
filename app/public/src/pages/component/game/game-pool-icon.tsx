@@ -1,14 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react"
 import "./game-options-icon.css"
-import GameOptionsModal from "./game-options-modal"
+import { GamePool } from "./game-pool"
+import "./game-pool-icon.css"
 
-export default function GameOptionsIcon(props: { leave: () => void }) {
+export function GamePoolIcon() {
   let [isOpen, setOpen] = useState<boolean>(false)
 
   const handleKeyPress = useCallback(
     (event) => {
       if (event.key === "Escape") {
         setOpen(false)
+      } else if (event.key === "p") {
+        setOpen(!isOpen)
       }
     },
     [isOpen]
@@ -24,21 +27,15 @@ export default function GameOptionsIcon(props: { leave: () => void }) {
   return (
     <>
       <div
-        id="game-options-icon"
+        id="game-pool-icon"
         className="nes-container clickable"
         onClick={() => {
-          setOpen(true)
-        }}
-      >
-        <img src="/assets/ui/options.svg" />
-      </div>
-      <GameOptionsModal
-        show={isOpen}
-        hideModal={() => {
           setOpen(!isOpen)
         }}
-        leave={props.leave}
-      />
+      >
+        <img src="/assets/ui/swimming-pool.png" />
+      </div>
+      <GamePool visible={isOpen} setVisible={setOpen} />
     </>
   )
 }

@@ -16,9 +16,9 @@ export default class GameState extends Schema {
   @type(["string"]) additionalPokemons = new ArraySchema<Pkm>()
   @type("uint8") stageLevel = 0
   @type("string") mapName: string
+  @type(Shop) shop = new Shop()
   time = 50000
   botManager: BotManager = new BotManager()
-  shop: Shop = new Shop()
   elligibleToXP = false
   id: Dungeon
   design: Design
