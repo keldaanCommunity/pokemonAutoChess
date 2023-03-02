@@ -327,20 +327,20 @@ export default class PokemonState {
           if (pokemon.items.has(Item.MAX_REVIVE)) {
             pokemon.life = pokemon.hp
             pokemon.items.delete(Item.MAX_REVIVE)
-          } else if (pokemon.effects.includes(Effect.SWIFT_SWIM)) {
+          } else if (pokemon.effects.includes(Effect.ANCIENT_POWER)) {
             pokemon.status.triggerProtect(1000)
             pokemon.life = pokemon.hp * 0.4
             pokemon.addAttack(pokemon.baseAtk * 0.3)
             pokemon.effects.splice(
-              pokemon.effects.findIndex((e) => e === Effect.SWIFT_SWIM),
+              pokemon.effects.findIndex((e) => e === Effect.ANCIENT_POWER),
               1
             )
-          } else if (pokemon.effects.includes(Effect.HYDRO_CANNON)) {
+          } else if (pokemon.effects.includes(Effect.ELDER_POWER)) {
             pokemon.status.triggerProtect(1000)
             pokemon.life = pokemon.hp * 0.8
             pokemon.addAttack(pokemon.baseAtk * 0.6)
             pokemon.effects.splice(
-              pokemon.effects.findIndex((e) => e === Effect.HYDRO_CANNON),
+              pokemon.effects.findIndex((e) => e === Effect.ELDER_POWER),
               1
             )
           } else if (pokemon.status.resurection) {

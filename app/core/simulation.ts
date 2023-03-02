@@ -592,50 +592,38 @@ export default class Simulation extends Schema implements ISimulation {
     allyEffects.forEach((effect) => {
       switch (effect) {
         case Effect.HONE_CLAWS:
-          if (types.includes(Synergy.DARK) && pokemon.items.size != 0) {
-            pokemon.addAttack(4 * pokemon.items.size)
-            pokemon.handleShield(20 * pokemon.items.size, pokemon)
+          if (types.includes(Synergy.DARK)) {
+            pokemon.addCritChance(40)
+            pokemon.addCritDamage(0.25)
             pokemon.effects.push(Effect.HONE_CLAWS)
           }
           break
 
         case Effect.ASSURANCE:
-          if (types.includes(Synergy.DARK) && pokemon.items.size != 0) {
-            pokemon.addAttack(7 * pokemon.items.size)
-            pokemon.handleShield(30 * pokemon.items.size, pokemon)
+          if (types.includes(Synergy.DARK)) {
+            pokemon.addCritChance(60)
+            pokemon.addCritDamage(0.5)
             pokemon.effects.push(Effect.ASSURANCE)
           }
           break
 
         case Effect.BEAT_UP:
-          if (types.includes(Synergy.DARK) && pokemon.items.size != 0) {
-            pokemon.addAttack(10 * pokemon.items.size)
-            pokemon.handleShield(50 * pokemon.items.size, pokemon)
+          if (types.includes(Synergy.DARK)) {
+            pokemon.addCritChance(80)
+            pokemon.addCritDamage(0.75)
             pokemon.effects.push(Effect.BEAT_UP)
           }
           break
 
         case Effect.ANCIENT_POWER:
           if (types.includes(Synergy.FOSSIL)) {
-            pokemon.addCritChance(20)
-            pokemon.addCritDamage(0.4)
             pokemon.effects.push(Effect.ANCIENT_POWER)
           }
           break
 
         case Effect.ELDER_POWER:
           if (types.includes(Synergy.FOSSIL)) {
-            pokemon.addCritChance(35)
-            pokemon.addCritDamage(0.7)
             pokemon.effects.push(Effect.ELDER_POWER)
-          }
-          break
-
-        case Effect.UNOWN_GATHERINGS:
-          if (types.includes(Synergy.FOSSIL)) {
-            pokemon.addCritChance(50)
-            pokemon.addCritDamage(1)
-            pokemon.effects.push(Effect.UNOWN_GATHERINGS)
           }
           break
 
@@ -877,9 +865,15 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.HYDRO_CANNON:
+        case Effect.HYDRATION:
           if (types.includes(Synergy.AQUATIC)) {
-            pokemon.effects.push(Effect.HYDRO_CANNON)
+            pokemon.effects.push(Effect.HYDRATION)
+          }
+          break
+
+        case Effect.WATER_VEIL:
+          if (types.includes(Synergy.AQUATIC)) {
+            pokemon.effects.push(Effect.WATER_VEIL)
           }
           break
 
@@ -1057,19 +1051,25 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.DUBIOUS_DISC:
-          if (types.includes(Synergy.ARTIFICIAL)) {
+          if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size != 0) {
+            pokemon.addAttack(4 * pokemon.items.size)
+            pokemon.handleShield(20 * pokemon.items.size, pokemon)
             pokemon.effects.push(Effect.DUBIOUS_DISC)
           }
           break
 
         case Effect.LINK_CABLE:
-          if (types.includes(Synergy.ARTIFICIAL)) {
+          if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size != 0) {
+            pokemon.addAttack(7 * pokemon.items.size)
+            pokemon.handleShield(30 * pokemon.items.size, pokemon)
             pokemon.effects.push(Effect.LINK_CABLE)
           }
           break
 
         case Effect.GOOGLE_SPECS:
-          if (types.includes(Synergy.ARTIFICIAL)) {
+          if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size != 0) {
+            pokemon.addAttack(10 * pokemon.items.size)
+            pokemon.handleShield(50 * pokemon.items.size, pokemon)
             pokemon.effects.push(Effect.GOOGLE_SPECS)
           }
           break
