@@ -46,7 +46,7 @@ export default class MovingState extends PokemonState {
 
     let x: number | undefined = undefined
     let y: number | undefined = undefined
-    if (pokemon.types.includes(Synergy.FOSSIL)) {
+    if (pokemon.types.includes(Synergy.DARK)) {
       const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(
         pokemon,
         board

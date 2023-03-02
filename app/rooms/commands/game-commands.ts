@@ -822,7 +822,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         case Effect.CALM_MIND:
           player.titles.add(Title.RIVAL)
           break
-        case Effect.HYDRO_CANNON:
+        case Effect.WATER_VEIL:
           player.titles.add(Title.DIVER)
           break
         case Effect.HEART_OF_THE_SWARM:
@@ -846,7 +846,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         case Effect.SHEER_COLD:
           player.titles.add(Title.SKIER)
           break
-        case Effect.UNOWN_GATHERINGS:
+        case Effect.ELDER_POWER:
           player.titles.add(Title.MUSEUM_DIRECTOR)
           break
         case Effect.PRESTO:

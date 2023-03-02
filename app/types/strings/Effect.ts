@@ -51,7 +51,8 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.HORDE]: `Horde`,
   [Effect.HEART_OF_THE_SWARM]: `Heart Of The Swarm`,
   [Effect.SWIFT_SWIM]: `Swift Swim`,
-  [Effect.HYDRO_CANNON]: `Hydro Cannon`,
+  [Effect.HYDRATION]: `Hydration`,
+  [Effect.WATER_VEIL]: `Water Veil`,
   [Effect.TAILWIND]: `Tailwind`,
   [Effect.FEATHER_DANCE]: `Feather Dance`,
   [Effect.MAX_AIRSTREAM]: `Max Airstream`,
@@ -74,7 +75,6 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.SHEER_COLD]: `Sheer Cold`,
   [Effect.ANCIENT_POWER]: `Ancient Power`,
   [Effect.ELDER_POWER]: `Elder Power`,
-  [Effect.UNOWN_GATHERINGS]: `Unown Gatherings`,
   [Effect.LARGO]: `Largo`,
   [Effect.ALLEGRO]: `Allegro`,
   [Effect.PRESTO]: `Presto`,
@@ -203,17 +203,17 @@ export const EffectDescription: {
     esp: `Ally gana +20 SPEDEF adicionales`,
     fra: `Les alliés gagnent un additionel +20 SPEDEF`
   },
-  [Effect.HONE_CLAWS]: {
+  [Effect.DUBIOUS_DISC]: {
     eng: `Dark pokemons gains +4 ${Stat.ATK}/+20 ${Stat.SHIELD} for each held items`,
     esp: `Dark pokemons gains +4 ${Stat.ATK}/+20 ${Stat.SHIELD} for each held items`,
     fra: `Dark pokemons gains +4 ${Stat.ATK}/+20 ${Stat.SHIELD} for each held items`
   },
-  [Effect.ASSURANCE]: {
+  [Effect.LINK_CABLE]: {
     eng: `Dark pokemons gains +7 ${Stat.ATK}/+30 ${Stat.SHIELD} for each held items`,
     esp: `Dark pokemons gains +7 ${Stat.ATK}/+30 ${Stat.SHIELD} for each held items`,
     fra: `Dark pokemons gains +7 ${Stat.ATK}/+30 ${Stat.SHIELD} for each held items`
   },
-  [Effect.BEAT_UP]: {
+  [Effect.GOOGLE_SPECS]: {
     eng: `Dark pokemons gains +10 ${Stat.ATK}/+50 ${Stat.SHIELD} for each held items`,
     esp: `Dark pokemons gains +10 ${Stat.ATK}/+50 ${Stat.SHIELD} for each held items`,
     fra: `Dark pokemons gains +10 ${Stat.ATK}/+50 ${Stat.SHIELD} for each held items`
@@ -308,12 +308,12 @@ export const EffectDescription: {
     esp: `?NONE?`,
     fra: `?NONE?`
   },
-  [Effect.SWIFT_SWIM]: {
+  [Effect.ANCIENT_POWER]: {
     eng: `Revive aquatic pokemons at first death with 40% ${Stat.HP} and 30% increased ${Stat.ATK}`,
     esp: `+30% de velocidad ATK por pkm de agua`,
     fra: `+30% ATK speed pour les pkm aquatiques`
   },
-  [Effect.HYDRO_CANNON]: {
+  [Effect.ELDER_POWER]: {
     eng: `Revive aquatic pokemons at first death with 80% ${Stat.HP} and 60% increased ${Stat.ATK}.`,
     esp: `+30% ATK para pkm acuáticos`,
     fra: `+30% ATK pour les pkm aquatiques`
@@ -433,20 +433,20 @@ export const EffectDescription: {
     esp: `+30% de probabilidad de congelar al enemigo durante un ataque`,
     fra: `+30% de chance de geler l'ennemi lors d'une attaque`
   },
-  [Effect.ANCIENT_POWER]: {
-    eng: `+20% ${Stat.CRIT_CHANCE} and +40% ${Stat.CRIT_DAMAGE}`,
+  [Effect.HONE_CLAWS]: {
+    eng: `+40% ${Stat.CRIT_CHANCE} and +25% ${Stat.CRIT_DAMAGE}`,
     esp: `+10% Crit Chance and +20% Crit Damage.`,
     fra: `+10% Crit Chance and +20% Crit Damage.`
   },
-  [Effect.ELDER_POWER]: {
-    eng: `+35% ${Stat.CRIT_CHANCE} and +70% ${Stat.CRIT_DAMAGE}`,
+  [Effect.ASSURANCE]: {
+    eng: `+40% ${Stat.CRIT_CHANCE} and +50% ${Stat.CRIT_DAMAGE}`,
     esp: `+30% Crit Chance and +40% Crit Damage`,
     fra: `+30% Crit Chance and +40% Crit Damage`
   },
-  [Effect.UNOWN_GATHERINGS]: {
-    eng: `+50% ${Stat.CRIT_CHANCE} and +100% ${Stat.CRIT_DAMAGE}`,
-    esp: `+50% Crit Chance and +60% Crit Damage`,
-    fra: `+50% Crit Chance and +60% Crit Damage`
+  [Effect.BEAT_UP]: {
+    eng: `+80% ${Stat.CRIT_CHANCE} and +75% ${Stat.CRIT_DAMAGE}`,
+    esp: `+30% Crit Chance and +40% Crit Damage`,
+    fra: `+30% Crit Chance and +40% Crit Damage`
   },
   [Effect.LARGO]: {
     eng: `+3 ${Stat.ATK} each time a sound pokemon use its ability`,
@@ -463,17 +463,17 @@ export const EffectDescription: {
     esp: `?NONE?`,
     fra: `?NONE?`
   },
-  [Effect.DUBIOUS_DISC]: {
+  [Effect.SWIFT_SWIM]: {
     eng: `Artificial pokemons have a 35% chance to burn 20 ${Stat.MANA} from their target and return 15 ${Stat.MANA} to the attacker`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
-  [Effect.LINK_CABLE]: {
+  [Effect.HYDRATION]: {
     eng: `Artificial pokemons have a 45% chance to burn 20 ${Stat.MANA} from their target and return 30 ${Stat.MANA} to the attacker`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
-  [Effect.GOOGLE_SPECS]: {
+  [Effect.WATER_VEIL]: {
     eng: `Artificial pokemons have a 55% chance to burn 20 ${Stat.MANA} from their target and return 45 ${Stat.MANA} to the attacker`,
     esp: `?NONE?`,
     fra: `?NONE?`

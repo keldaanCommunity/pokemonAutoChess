@@ -84,7 +84,7 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.FIELD]: [3, 6, 9],
   [Synergy.MONSTER]: [2, 4, 6],
   [Synergy.HUMAN]: [2, 4, 6],
-  [Synergy.AQUATIC]: [2, 4],
+  [Synergy.AQUATIC]: [2, 4, 6],
   [Synergy.BUG]: [2, 4, 6],
   [Synergy.FLYING]: [2, 4, 6, 8],
   [Synergy.FLORA]: [2, 3, 4, 5],
@@ -92,7 +92,7 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.GHOST]: [2, 4, 6, 8],
   [Synergy.FAIRY]: [2, 4, 6],
   [Synergy.ICE]: [2, 4],
-  [Synergy.FOSSIL]: [2, 4, 6],
+  [Synergy.FOSSIL]: [2, 4],
   [Synergy.SOUND]: [2, 4, 6],
   [Synergy.ARTIFICIAL]: [2, 4, 6],
   [Synergy.BABY]: [3, 5]

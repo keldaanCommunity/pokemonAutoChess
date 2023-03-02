@@ -131,18 +131,18 @@ export default class AttackingState extends PokemonState {
         target.status.triggerSilence(3000, target, board)
       }
       if (
-        pokemon.effects.includes(Effect.DUBIOUS_DISC) ||
-        pokemon.effects.includes(Effect.LINK_CABLE) ||
-        pokemon.effects.includes(Effect.GOOGLE_SPECS)
+        pokemon.effects.includes(Effect.SWIFT_SWIM) ||
+        pokemon.effects.includes(Effect.HYDRATION) ||
+        pokemon.effects.includes(Effect.WATER_VEIL)
       ) {
-        const chance = pokemon.effects.includes(Effect.DUBIOUS_DISC)
+        const chance = pokemon.effects.includes(Effect.SWIFT_SWIM)
           ? 0.35
-          : pokemon.effects.includes(Effect.LINK_CABLE)
+          : pokemon.effects.includes(Effect.HYDRATION)
           ? 0.45
           : 0.55
-        const manaGain = pokemon.effects.includes(Effect.DUBIOUS_DISC)
+        const manaGain = pokemon.effects.includes(Effect.SWIFT_SWIM)
           ? 15
-          : pokemon.effects.includes(Effect.LINK_CABLE)
+          : pokemon.effects.includes(Effect.HYDRATION)
           ? 30
           : 45
         if (Math.random() > 1 - chance) {
@@ -239,49 +239,25 @@ export default class AttackingState extends PokemonState {
       if (pokemon.effects.includes(Effect.PHANTOM_FORCE)) {
         const trueDamage = 0.2 * damage
         damage = 0.8 * damage
-        target.handleDamage(
-          trueDamage,
-          board,
-          AttackType.TRUE,
-          pokemon,
-          true
-        )
+        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon, true)
       }
 
       if (pokemon.effects.includes(Effect.CURSE)) {
         const trueDamage = 0.4 * damage
         damage = 0.6 * damage
-        target.handleDamage(
-          trueDamage,
-          board,
-          AttackType.TRUE,
-          pokemon,
-          true
-        )
+        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon, true)
       }
 
       if (pokemon.effects.includes(Effect.SHADOW_TAG)) {
         const trueDamage = 0.7 * damage
         damage = 0.3 * damage
-        target.handleDamage(
-          trueDamage,
-          board,
-          AttackType.TRUE,
-          pokemon,
-          true
-        )
+        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon, true)
       }
 
       if (pokemon.effects.includes(Effect.WANDERING_SPIRIT)) {
         const trueDamage = damage
         damage = 0
-        target.handleDamage(
-          trueDamage,
-          board,
-          AttackType.TRUE,
-          pokemon,
-          true
-        )
+        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon, true)
       }
 
       if (target.status.spikeArmor && pokemon.range === 1) {

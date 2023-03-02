@@ -171,7 +171,7 @@ export const SynergyDetail: { [key in Synergy]: Effect[] } = Object.freeze({
   [Synergy.FIELD]: [Effect.BULK_UP, Effect.RAGE, Effect.ANGER_POINT],
   [Synergy.MONSTER]: [Effect.PURSUIT, Effect.BRUTAL_SWING, Effect.POWER_TRIP],
   [Synergy.HUMAN]: [Effect.MEDITATE, Effect.FOCUS_ENERGY, Effect.CALM_MIND],
-  [Synergy.AQUATIC]: [Effect.SWIFT_SWIM, Effect.HYDRO_CANNON],
+  [Synergy.AQUATIC]: [Effect.SWIFT_SWIM, Effect.HYDRATION, Effect.WATER_VEIL],
   [Synergy.BUG]: [Effect.INFESTATION, Effect.HORDE, Effect.HEART_OF_THE_SWARM],
   [Synergy.FLYING]: [
     Effect.TAILWIND,
@@ -202,11 +202,7 @@ export const SynergyDetail: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.STRANGE_STEAM
   ],
   [Synergy.ICE]: [Effect.SNOW, Effect.SHEER_COLD],
-  [Synergy.FOSSIL]: [
-    Effect.ANCIENT_POWER,
-    Effect.ELDER_POWER,
-    Effect.UNOWN_GATHERINGS
-  ],
+  [Synergy.FOSSIL]: [Effect.ANCIENT_POWER, Effect.ELDER_POWER],
   [Synergy.SOUND]: [Effect.LARGO, Effect.ALLEGRO, Effect.PRESTO],
   [Synergy.ARTIFICIAL]: [
     Effect.DUBIOUS_DISC,
