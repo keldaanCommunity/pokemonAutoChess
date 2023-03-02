@@ -1,5 +1,6 @@
 import { IPokemonEntity } from "../types"
 import { Orientation } from "../types/enum/Game"
+import { pickRandomIn } from "../utils/random"
 import PokemonEntity from "./pokemon-entity"
 
 export type Cell = {
@@ -83,6 +84,9 @@ export default class Board {
       }
     } else if (vx == 0) {
       if (vy == 0) {
+        if(pokemon.status.confusion){
+          return pickRandomIn(Orientation)
+        }
         console.log("error orientation", r0, c0, r1, c1)
         console.log(
           "error pokemon",

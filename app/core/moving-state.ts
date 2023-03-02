@@ -24,8 +24,7 @@ export default class MovingState extends PokemonState {
           pokemon.positionY,
           targetCoordinate.x,
           targetCoordinate.y
-        ) <= pokemon.range &&
-        !pokemon.status.confusion
+        ) <= pokemon.range
       ) {
         pokemon.toAttackingState()
       } else {

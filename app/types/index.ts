@@ -408,7 +408,7 @@ export interface IPokemonEntity {
 export interface IStatus {
   burn: boolean
   silence: boolean
-  poison: boolean
+  poisonStacks: number
   freeze: boolean
   protect: boolean
   sleep: boolean

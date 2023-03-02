@@ -5,7 +5,6 @@ import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { PokemonActionState } from "../types/enum/Game"
-import { Ability } from "../types/enum/Ability"
 
 export default class AttackingState extends PokemonState {
   update(
@@ -24,7 +23,9 @@ export default class AttackingState extends PokemonState {
         y: pokemon.targetY
       }
 
-      if (
+      if(pokemon.status.confusion){
+        targetCoordinate = this.getTargetCoordinateWhenConfused(pokemon, board)
+      } else if (
         !(
           target &&
           target.team !== pokemon.team &&
@@ -111,13 +112,13 @@ export default class AttackingState extends PokemonState {
 
       let poisonChance = 0
       if (pokemon.effects.includes(Effect.POISON_GAS)) {
-        poisonChance += 0.3
+        poisonChance = 0.3
       }
       if (pokemon.effects.includes(Effect.TOXIC)) {
-        poisonChance += 0.4
+        poisonChance = 0.7
       }
-      if (poisonChance != 0) {
-        if (Math.random() > 1 - poisonChance) {
+      if (poisonChance > 0) {
+        if (Math.random() < poisonChance) {
           target.status.triggerPoison(4000, target, pokemon, board)
         }
       }
