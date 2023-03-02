@@ -5,17 +5,22 @@ import { IPokemon } from "../types"
 import { Probability } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
 import { pickRandomIn } from "../utils/random"
+import { clamp } from "../utils/number"
 
-export const PoolSizeRarity: { [key in Rarity]: number } = {
-  [Rarity.COMMON]: 29,
-  [Rarity.UNCOMMON]: 22,
-  [Rarity.RARE]: 18,
-  [Rarity.EPIC]: 12,
-  [Rarity.LEGENDARY]: 10,
-  [Rarity.MYTHICAL]: 29,
-  [Rarity.NEUTRAL]: 29,
-  [Rarity.SUMMON]: 29,
-  [Rarity.HATCH]: 29
+export const PoolSize: { [key in Rarity]: [number, number, number] } = {
+  [Rarity.COMMON]: [1, 14, 29],
+  [Rarity.UNCOMMON]: [1, 11, 22],
+  [Rarity.RARE]: [1, 9, 18],
+  [Rarity.EPIC]: [1, 7, 14],
+  [Rarity.LEGENDARY]: [1, 5, 10],
+  [Rarity.MYTHICAL]: [1, 1, 1],
+  [Rarity.NEUTRAL]: [0, 0, 0],
+  [Rarity.SUMMON]: [0, 0, 0],
+  [Rarity.HATCH]: [0, 0, 0]
+}
+
+export function getPoolSize(rarity: Rarity, maxStars: number): number {
+    return PoolSize[rarity][clamp(maxStars,1,3)-1]
 }
 
 export const CommonShop = new Array<Pkm>(
@@ -195,19 +200,20 @@ export default class Shop {
   legendaryPool: Map<Pkm, number> = new Map<Pkm, number>()
   constructor() {
     CommonShop.forEach((pkm) => {
-      this.commonPool.set(pkm, PoolSizeRarity[Rarity.COMMON])
+      this.commonPool.set(pkm, getPoolSize(Rarity.COMMON, 3))
     })
     UncommonShop.forEach((pkm) => {
-      this.uncommonPool.set(pkm, PoolSizeRarity[Rarity.UNCOMMON])
+      const maxStars = pkm === Pkm.EEVEE ? 2 : 3
+      this.uncommonPool.set(pkm, getPoolSize(Rarity.UNCOMMON, maxStars))
     })
     RareShop.forEach((pkm) => {
-      this.rarePool.set(pkm, PoolSizeRarity[Rarity.RARE])
+      this.rarePool.set(pkm, getPoolSize(Rarity.RARE, 3))
     })
     EpicShop.forEach((pkm) => {
-      this.epicPool.set(pkm, PoolSizeRarity[Rarity.EPIC])
+      this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 3))
     })
     LegendaryShop.forEach((pkm) => {
-      this.legendaryPool.set(pkm, PoolSizeRarity[Rarity.LEGENDARY])
+      this.legendaryPool.set(pkm, getPoolSize(Rarity.LEGENDARY, 3))
     })
   }
 
@@ -215,19 +221,19 @@ export default class Shop {
     const p = PokemonFactory.createPokemonFromName(pkm)
     switch (p.rarity) {
       case Rarity.COMMON:
-        this.commonPool.set(pkm, PoolSizeRarity[Rarity.COMMON])
+        this.commonPool.set(pkm, getPoolSize(Rarity.COMMON, 2))
         break
       case Rarity.UNCOMMON:
-        this.uncommonPool.set(pkm, PoolSizeRarity[Rarity.UNCOMMON])
+        this.uncommonPool.set(pkm, getPoolSize(Rarity.UNCOMMON, 2))
         break
       case Rarity.RARE:
-        this.rarePool.set(pkm, PoolSizeRarity[Rarity.RARE])
+        this.rarePool.set(pkm, getPoolSize(Rarity.RARE, 2))
         break
       case Rarity.EPIC:
-        this.epicPool.set(pkm, PoolSizeRarity[Rarity.EPIC])
+        this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 2))
         break
       case Rarity.LEGENDARY:
-        this.legendaryPool.set(pkm, PoolSizeRarity[Rarity.LEGENDARY])
+        this.legendaryPool.set(pkm, getPoolSize(Rarity.LEGENDARY, 2))
         break
       default:
         break
