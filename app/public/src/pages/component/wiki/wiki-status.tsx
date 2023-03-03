@@ -1,7 +1,6 @@
 import React from "react"
 import { Status } from "../../../../../types/enum/Status"
 import {
-  StatusLabel,
   StatusDescription
 } from "../../../../../types/strings/Status"
 import { addIconsToDescription } from "../../utils/descriptions"
