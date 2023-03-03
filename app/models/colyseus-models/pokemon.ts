@@ -2879,7 +2879,7 @@ export class Togepi extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.TOGEPI,
-      [Synergy.FAIRY, Synergy.FLYING, Synergy.BABY],
+      [Synergy.FAIRY, Synergy.NORMAL, Synergy.BABY],
       Rarity.RARE,
       Pkm.TOGETIC,
       80,
@@ -2903,7 +2903,7 @@ export class Togetic extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.TOGETIC,
-      [Synergy.FAIRY, Synergy.FLYING],
+      [Synergy.FAIRY, Synergy.NORMAL, Synergy.FLYING],
       Rarity.RARE,
       Pkm.TOGEKISS,
       120,
@@ -2927,7 +2927,7 @@ export class Togekiss extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.TOGEKISS,
-      [Synergy.FAIRY, Synergy.FLYING],
+      [Synergy.FAIRY, Synergy.NORMAL, Synergy.FLYING],
       Rarity.RARE,
       Pkm.DEFAULT,
       220,
