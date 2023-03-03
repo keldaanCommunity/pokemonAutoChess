@@ -23,7 +23,14 @@ export default function TestAnim({
     scale: number,
     depth: number
 }) {
-    const PKM_INDEX = "0019"
+    let PKM_INDEX;
+    switch(animationKey){
+        case "ELECTRIC_SURGE": PKM_INDEX = "0025"; break;
+        case "PSYCHIC_SURGE": PKM_INDEX = "0063"; break;
+        case "GRASSY_SURGE": PKM_INDEX = "0069"; break;
+        case "MISTY_SURGE": PKM_INDEX = "0035"; break;
+        default: PKM_INDEX = "0019"; break;
+    }
     
     class TestAnimScene extends Phaser.Scene {
         preload() {
