@@ -3694,7 +3694,7 @@ export class Jigglypuff extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.JIGGLYPUFF,
-      [Synergy.FAIRY, Synergy.SOUND],
+      [Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL],
       Rarity.UNCOMMON,
       Pkm.WIGGLYTUFF,
       120,
@@ -3718,7 +3718,7 @@ export class Wigglytuff extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.WIGGLYTUFF,
-      [Synergy.FAIRY, Synergy.SOUND],
+      [Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL],
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
       210,
