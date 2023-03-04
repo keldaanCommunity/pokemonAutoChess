@@ -2,7 +2,7 @@ import PokemonFactory from "./pokemon-factory"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
 import Player from "./colyseus-models/player"
 import { IPokemon } from "../types"
-import { Probability } from "../types/Config"
+import { Probability, DITTO_RATE } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
 import { pickRandomIn } from "../utils/random"
 import { clamp } from "../utils/number"
@@ -280,7 +280,7 @@ export default class Shop {
     for (let i = 0; i < 6; i++) {
       let pokemon = this.pickPokemon(player)
       const seed = Math.random()
-      if (seed > 0.99) {
+      if (seed < DITTO_RATE) {
         pokemon = Pkm.DITTO
       }
       player.shop[i] = pokemon

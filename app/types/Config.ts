@@ -124,6 +124,8 @@ export const RarityProbability: { [key in Rarity]: number } = {
   [Rarity.HATCH]: 0.1
 }
 
+export const DITTO_RATE = 0.005
+
 export const AttackTypeColor: { [key in AttackType] } = {
   [AttackType.PHYSICAL]: "#FF6E55",
   [AttackType.SPECIAL]: "#7FC9FF",
