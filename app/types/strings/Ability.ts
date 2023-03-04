@@ -800,7 +800,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.PETAL_DANCE]: {
-    eng: `Deals [25,50,100] ${Damage.SPECIAL} to [2,4,6] ennemies`,
+    eng: `Deals [15,30,60] ${Damage.SPECIAL} to [2,4,6] ennemies`,
     esp: ``,
     fra: ``,
     prt: ``
