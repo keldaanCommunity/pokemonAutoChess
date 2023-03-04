@@ -18,7 +18,8 @@
     text-transform: capitalize;
 }
 
-#wiki-page .wiki-status {
+#wiki-page .wiki-status,
+#wiki-page .wiki-stat {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(20em, 1fr) );
     gap: 1em;
@@ -31,11 +32,23 @@
     grid-template: auto 1fr / 150px 1fr;
 }
 
-#wiki-page .wiki-status .test-anim-wrapper {
+#wiki-page .wiki-stat li {
+    list-style: none;
+    display: grid;
+    grid-template: auto 1fr / 80px 1fr;
+}
+
+#wiki-page .wiki-status .test-anim-wrapper,
+#wiki-page .wiki-stat li img {
     grid-row: 1/3;
 }
 
 #wiki-page .section-label {
     font-size: 120%;
     margin: 0.5em;
+}
+
+#wiki-page .wiki-stat p:first-of-type {
+    font-size: 120%;
+    margin: 0.25em 0;
 }
