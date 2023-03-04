@@ -52,10 +52,10 @@ export default function AfterMenu() {
             <img src={`/assets/ui/rank${playerRank}.png`} alt="" />
           )}
           <span>{getRankLabel(playerRank)}</span>
-          <span className="player-elo">
-            {newElo} ({newElo - currentPlayer.elo})
-          </span>
         </div>
+        <p className="player-elo">
+          ELO {newElo} ({ (newElo >= currentPlayer.elo ? '+' : '-') + (newElo - currentPlayer.elo)})
+        </p>
         <table>
           <thead>
             <tr>
