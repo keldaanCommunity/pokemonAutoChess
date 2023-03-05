@@ -9,12 +9,10 @@ import { getPortraitSrc } from "../../../utils"
 import { DetailledPkm, Emotion } from "../../../../../types"
 import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { ITracker } from "../../../../../types/ITracker"
-import {
-  AbilityName,
-  AbilityDescription
-} from "../../../../../types/strings/Ability"
+import { AbilityName } from "../../../../../types/strings/Ability"
 import SynergyIcon from "../icons/synergy-icon"
 import { AbilityTooltip } from "../ability/ability-tooltip"
+import { addIconsToDescription } from "../../utils/descriptions"
 
 const entityStyle: CSS.Properties = {
   position: "absolute",
@@ -45,7 +43,7 @@ export default function SelectedEntity(props: {
           <img style={imgStyle} src={"assets/item/" + props.entity + ".png"} />
           <h3>{ItemName[props.entity as Item]}</h3>
         </div>
-        <p>{ItemDescription[props.entity as Item]}</p>
+        <p>{addIconsToDescription(ItemDescription[props.entity as Item])}</p>
       </div>
     )
   } else if (Object.values(Pkm).includes((props.entity as DetailledPkm).pkm)) {
