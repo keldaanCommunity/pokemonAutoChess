@@ -204,19 +204,19 @@ export const EffectDescription: {
     fra: `Les alliés gagnent un additionel +20 SPEDEF`
   },
   [Effect.DUBIOUS_DISC]: {
-    eng: `Dark pokemons gains +4 ${Stat.ATK}/+20 ${Stat.SHIELD} for each held items`,
-    esp: `Dark pokemons gains +4 ${Stat.ATK}/+20 ${Stat.SHIELD} for each held items`,
-    fra: `Dark pokemons gains +4 ${Stat.ATK}/+20 ${Stat.SHIELD} for each held items`
+    eng: `Artificial pokemons gains +4 ${Stat.ATK}/+20 ${Stat.SHIELD} for each held items`,
+    esp: `Artificial pokemons gains +4 ${Stat.ATK}/+20 ${Stat.SHIELD} for each held items`,
+    fra: `Artificial pokemons gains +4 ${Stat.ATK}/+20 ${Stat.SHIELD} for each held items`
   },
   [Effect.LINK_CABLE]: {
-    eng: `Dark pokemons gains +7 ${Stat.ATK}/+30 ${Stat.SHIELD} for each held items`,
-    esp: `Dark pokemons gains +7 ${Stat.ATK}/+30 ${Stat.SHIELD} for each held items`,
-    fra: `Dark pokemons gains +7 ${Stat.ATK}/+30 ${Stat.SHIELD} for each held items`
+    eng: `Artificial pokemons gains +7 ${Stat.ATK}/+30 ${Stat.SHIELD} for each held items`,
+    esp: `Artificial pokemons gains +7 ${Stat.ATK}/+30 ${Stat.SHIELD} for each held items`,
+    fra: `Artificial pokemons gains +7 ${Stat.ATK}/+30 ${Stat.SHIELD} for each held items`
   },
   [Effect.GOOGLE_SPECS]: {
-    eng: `Dark pokemons gains +10 ${Stat.ATK}/+50 ${Stat.SHIELD} for each held items`,
-    esp: `Dark pokemons gains +10 ${Stat.ATK}/+50 ${Stat.SHIELD} for each held items`,
-    fra: `Dark pokemons gains +10 ${Stat.ATK}/+50 ${Stat.SHIELD} for each held items`
+    eng: `Artificial pokemons gains +10 ${Stat.ATK}/+50 ${Stat.SHIELD} for each held items`,
+    esp: `Artificial pokemons gains +10 ${Stat.ATK}/+50 ${Stat.SHIELD} for each held items`,
+    fra: `Artificial pokemons gains +10 ${Stat.ATK}/+50 ${Stat.SHIELD} for each held items`
   },
   [Effect.IRON_DEFENSE]: {
     eng: `One of your steel gains double ${Stat.ATK}`,
@@ -229,39 +229,39 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.SHORE_UP]: {
-    eng: `Every three seconds all ground pokemons gains 1 ${Stat.DEF}/${Stat.SPE_DEF} and 1 ${Stat.ATK} bonus stats. This effect stacks up to four times`,
-    esp: `-10% de HP para los enemigos al comienzo del combate`,
-    fra: `-10% HP pour les ennemis au début du combat`
+    eng: `Every 3 seconds, all ground pokemons gains 1 ${Stat.DEF}/${Stat.SPE_DEF} and 1 ${Stat.ATK} bonus stats (stacks up to 4 times)`,
+    esp: ``,
+    fra: ``
   },
   [Effect.ROTOTILLER]: {
-    eng: `Every three seconds all ground pokemons gains 2 ${Stat.DEF}/${Stat.SPE_DEF} and 2 ${Stat.ATK} bonus stats. This effect stacks up to four times`,
-    esp: `-10% de HP para los enemigos al comienzo del combate`,
-    fra: `-10% HP pour les ennemis au début du combat`
+    eng: `Every 3 seconds, all ground pokemons gains 2 ${Stat.DEF}/${Stat.SPE_DEF} and 2 ${Stat.ATK} bonus stats (stacks up to 4 times)`,
+    esp: ``,
+    fra: ``
   },
   [Effect.SANDSTORM]: {
-    eng: `Every three seconds all ground pokemons gains 3 ${Stat.DEF}/${Stat.SPE_DEF} and 3 ${Stat.ATK} bonus stats. This effect stacks up to four times`,
-    esp: `Se desata una tormenta de arena que produce un 10% de HP/s por pkm de tierra/acero/mineral`,
-    fra: `Une tempête de sable fait rage, faisant 10% HP/s aux pkm non sol/acier/mineral`
+    eng: `Every 3 seconds, all ground pokemons gains 3 ${Stat.DEF}/${Stat.SPE_DEF} and 3 ${Stat.ATK} bonus stats (stacks up to 4 times)`,
+    esp: ``,
+    fra: ``
   },
   [Effect.POISON_GAS]: {
     eng: `Your Poison pokemon have a 30% chance to ${Status.POISON} the target for 4 seconds.`,
-    esp: `+20% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo`,
-    fra: `+20% de chances d'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes`
+    esp: ``,
+    fra: ``
   },
   [Effect.TOXIC]: {
     eng: `Your Poison pokemon have 70% chance to ${Status.POISON} the target for 4 seconds.`,
-    esp: `+30% de probabilidad de envenenar al objetivo durante 2 segundos, infligiendo un 15% de CV/segundo`,
-    fra: `+30% de chances d'empoisonner la cible pendant 2 secondes, lui infligeant 15% PV/secondes`
+    esp: ``,
+    fra: ``
   },
   [Effect.DRAGON_ENERGY]: {
     eng: `Your Dragon pokemon gain +5% ${Stat.ATK_SPEED} after every hit.`,
-    esp: `-30% ATK para el equipo enemigo`,
-    fra: `-30% ATK pour l'équipe ennemie`
+    esp: ``,
+    fra: ``
   },
   [Effect.DRAGON_DANCE]: {
     eng: `Your Dragon pokemon gain +10%  ${Stat.ATK_SPEED} after every hit.`,
-    esp: `+5% velocidad de ataque para dragones pkm en cada ataque`,
-    fra: `+5% vitesse d'attaque pour les pkm dragons à chaque attaque`
+    esp: ``,
+    fra: ``
   },
   [Effect.BULK_UP]: {
     eng: `When a field pokemon dies, all other field pokemons gain 20% ${Stat.ATK_SPEED} and are healed for 30% ${Stat.HP} of their Maximum Health`,
@@ -309,14 +309,14 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.ANCIENT_POWER]: {
-    eng: `Revive aquatic pokemons at first death with 40% ${Stat.HP} and 30% increased ${Stat.ATK}`,
-    esp: `+30% de velocidad ATK por pkm de agua`,
-    fra: `+30% ATK speed pour les pkm aquatiques`
+    eng: `Revive Fossil pokemons at first death with 40% ${Stat.HP} and 30% increased ${Stat.ATK}`,
+    esp: ``,
+    fra: ``
   },
   [Effect.ELDER_POWER]: {
-    eng: `Revive aquatic pokemons at first death with 80% ${Stat.HP} and 60% increased ${Stat.ATK}.`,
-    esp: `+30% ATK para pkm acuáticos`,
-    fra: `+30% ATK pour les pkm aquatiques`
+    eng: `Revive Fossil pokemons at first death with 80% ${Stat.HP} and 60% increased ${Stat.ATK}.`,
+    esp: ``,
+    fra: ``
   },
   [Effect.INFESTATION]: {
     eng: `At the start of combat, creates a copy of a bug pokemon (ranked by ${Stat.HP})`,
@@ -374,17 +374,17 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.BATTLE_ARMOR]: {
-    eng: `Mineral pokemons gains 50 ${Stat.SHIELD}`,
+    eng: `Rock pokemons gains 50 ${Stat.SHIELD} at the start of the combat`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.MOUTAIN_RESISTANCE]: {
-    eng: `Mineral pokemons gains 100 ${Stat.SHIELD}`,
+    eng: `Rock pokemons gains 100 ${Stat.SHIELD} at the start of the combat`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.DIAMOND_STORM]: {
-    eng: `Mineral pokemons gains 200 ${Stat.SHIELD}`,
+    eng: `Rock pokemons gains 200 ${Stat.SHIELD} at the start of the combat`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
@@ -434,19 +434,19 @@ export const EffectDescription: {
     fra: `+30% de chance de geler l'ennemi lors d'une attaque`
   },
   [Effect.HONE_CLAWS]: {
-    eng: `+40% ${Stat.CRIT_CHANCE} and +25% ${Stat.CRIT_DAMAGE}`,
-    esp: `+10% Crit Chance and +20% Crit Damage.`,
-    fra: `+10% Crit Chance and +20% Crit Damage.`
+    eng: `Dark pokemons jump in the backline when combat starts and gain +40% ${Stat.CRIT_CHANCE} and +25% ${Stat.CRIT_DAMAGE}`,
+    esp: ``,
+    fra: ``
   },
   [Effect.ASSURANCE]: {
-    eng: `+40% ${Stat.CRIT_CHANCE} and +50% ${Stat.CRIT_DAMAGE}`,
-    esp: `+30% Crit Chance and +40% Crit Damage`,
-    fra: `+30% Crit Chance and +40% Crit Damage`
+    eng: `Dark pokemons jump in the backline when combat starts and gain +40% ${Stat.CRIT_CHANCE} and +50% ${Stat.CRIT_DAMAGE}`,
+    esp: ``,
+    fra: ``
   },
   [Effect.BEAT_UP]: {
-    eng: `+80% ${Stat.CRIT_CHANCE} and +75% ${Stat.CRIT_DAMAGE}`,
-    esp: `+30% Crit Chance and +40% Crit Damage`,
-    fra: `+30% Crit Chance and +40% Crit Damage`
+    eng: `Dark pokemons jump in the backline when combat starts and gain +80% ${Stat.CRIT_CHANCE} and +75% ${Stat.CRIT_DAMAGE}`,
+    esp: ``,
+    fra: ``
   },
   [Effect.LARGO]: {
     eng: `+3 ${Stat.ATK} each time a sound pokemon use its ability`,
@@ -464,17 +464,17 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.SWIFT_SWIM]: {
-    eng: `Artificial pokemons have a 35% chance to burn 20 ${Stat.MANA} from their target and return 15 ${Stat.MANA} to the attacker`,
+    eng: `Aquatic pokemons have a 35% chance to burn 20 ${Stat.MANA} from their target and return 15 ${Stat.MANA} to the attacker`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.HYDRATION]: {
-    eng: `Artificial pokemons have a 45% chance to burn 20 ${Stat.MANA} from their target and return 30 ${Stat.MANA} to the attacker`,
+    eng: `Aquatic pokemons have a 45% chance to burn 20 ${Stat.MANA} from their target and return 30 ${Stat.MANA} to the attacker`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.WATER_VEIL]: {
-    eng: `Artificial pokemons have a 55% chance to burn 20 ${Stat.MANA} from their target and return 45 ${Stat.MANA} to the attacker`,
+    eng: `Aquatic pokemons have a 55% chance to burn 20 ${Stat.MANA} from their target and return 45 ${Stat.MANA} to the attacker`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
