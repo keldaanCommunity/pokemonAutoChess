@@ -15,6 +15,7 @@ export default function WikiTypes() {
             </Tab>
           )
         })}
+        <Tab key="title-all">ALL</Tab>
       </TabList>
 
       {(Object.keys(Synergy) as Synergy[]).map((r) => {
@@ -24,6 +25,7 @@ export default function WikiTypes() {
           </TabPanel>
         )
       })}
+      <TabPanel key="all"><WikiType type="all" /></TabPanel>
     </Tabs>
   )
 }

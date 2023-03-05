@@ -18,28 +18,31 @@ import { groupBy } from "../../../../../utils/array";
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon";
 import { Rarity } from "../../../../../types/enum/Game";
 
-export default function WikiType(props: { type: Synergy }) {
+export default function WikiType(props: { type: Synergy | "all" }) {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>();
-  const firstStagePokemons = (PRECOMPUTED_TYPE_POKEMONS_ALL[props.type] as Pkm[])
+  const firstStagePokemons = (props.type === "all" ? Object.values(PRECOMPUTED_TYPE_POKEMONS_ALL).flat() : PRECOMPUTED_TYPE_POKEMONS_ALL[props.type])
     .map(p => PokemonFactory.createPokemonFromName(p))
     .filter(p => p.stars === 1 || p.rarity === Rarity.MYTHICAL)
   const pokemonsPerRarity = groupBy(firstStagePokemons, p => p.rarity)
   return (
     <div style={{padding: "1em"}}>
-      <div style={{ display: "flex", marginBottom: "0.5em" }}>
-        <SynergyIcon type={props.type} />
-        <p>{SynergyName[props.type].eng}</p>
-      </div>
-      {SynergyDetail[props.type].map((effect, i) => {
-        return (
-          <div key={EffectName[effect]} style={{ display: "flex" }}>
-            <p>
-              ({TypeTrigger[props.type][i]}) {EffectName[effect]}:
-            </p>
-            <SynergyDescription effect={effect} />
-          </div>
-        )
-      })}
+      {props.type !== "all" && <>
+        <div style={{ display: "flex", marginBottom: "0.5em" }}>
+          <SynergyIcon type={props.type} />
+          <p>{SynergyName[props.type].eng}</p>
+        </div>
+        {SynergyDetail[props.type].map((effect, i) => {
+          return (
+            <div key={EffectName[effect]} style={{ display: "flex" }}>
+              <p>
+                ({TypeTrigger[props.type][i]}) {EffectName[effect]}:
+              </p>
+              <SynergyDescription effect={effect} />
+            </div>
+          )
+        })}
+      </>
+      }
       <table>
         <tbody>
         {(Object.values(Rarity) as Rarity[]).map(rarity => {
