@@ -89,7 +89,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.LUCKY_EGG]:
     "30% spell power for holder and adjacent allies in the same row",
   [Item.AQUA_EGG]:
-    "The holder gains 50% of its max mana + 30 mana when combat begins. After casting its ability the holder gains 20 mana",
+    "The holder gains +50 starting mana and regains 20 mana after casting its ability",
   [Item.BLUE_ORB]:
     "Every third attack from the holder unleashes a chain lightning that bounces to 2 enemies, burning 20 mana",
   [Item.ZOOM_LENS]:
