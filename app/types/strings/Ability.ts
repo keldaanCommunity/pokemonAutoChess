@@ -1370,7 +1370,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.GRASSY_SURGE]: {
-    eng: `Passive: Give ${Status.GRASS_FIELD} to your Psychic Pokemon, boosting their damage by 30%`,
+    eng: `Passive: Give ${Status.GRASS_FIELD} to your Grass Pokemon, boosting their damage by 30%`,
     esp: "",
     prt: "",
     fra: ""

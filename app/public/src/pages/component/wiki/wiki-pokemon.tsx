@@ -7,7 +7,7 @@ import { ITracker } from "../../../../../types/ITracker"
 import PRECOMPUTED_RARITY_POKEMONS_ALL from "../../../../../models/precomputed/type-rarity-all.json"
 import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { Rarity } from "../../../../../types/enum/Game"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import { Mythical1Shop, Mythical2Shop } from "../../../../../models/shop"
 
