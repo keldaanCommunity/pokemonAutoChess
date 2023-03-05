@@ -439,7 +439,7 @@ export const EffectDescription: {
     fra: `+10% Crit Chance and +20% Crit Damage.`
   },
   [Effect.ASSURANCE]: {
-    eng: `+40% ${Stat.CRIT_CHANCE} and +50% ${Stat.CRIT_DAMAGE}`,
+    eng: `+60% ${Stat.CRIT_CHANCE} and +50% ${Stat.CRIT_DAMAGE}`,
     esp: `+30% Crit Chance and +40% Crit Damage`,
     fra: `+30% Crit Chance and +40% Crit Damage`
   },
