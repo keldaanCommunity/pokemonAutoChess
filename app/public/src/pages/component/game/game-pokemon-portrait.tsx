@@ -34,16 +34,17 @@ export default function GamePokemonPortrait(props: {
     let count = 0
     let countEvol = 0
     let pokemonEvolution = props.pokemon.evolution
-    let pokemonEvolution2: Pkm | null = null
+    let pokemonEvolution2 = Pkm.DEFAULT
 
     if (boardManager && !isOnAnotherBoard) {
       boardManager.pokemons.forEach((p) => {
-        if (p.index == props.pokemon!.index && p.evolution != Pkm.DEFAULT) {
+        if (p.index === props.pokemon!.index && p.evolution !== Pkm.DEFAULT) {
           count++
         }
         if (
-          p.index == PkmIndex[pokemonEvolution] &&
-          p.evolution != Pkm.DEFAULT
+          pokemonEvolution !== Pkm.DEFAULT &&
+          p.evolution !== Pkm.DEFAULT &&
+          p.index === PkmIndex[pokemonEvolution]
         ) {
           pokemonEvolution2 = p.evolution
           countEvol++
@@ -53,8 +54,8 @@ export default function GamePokemonPortrait(props: {
 
     const willEvolve = count === 2
     const shouldShimmer =
-      (count > 0 && pokemonEvolution != null) ||
-      (countEvol > 0 && pokemonEvolution2 != null)
+      (count > 0 && pokemonEvolution !== Pkm.DEFAULT) ||
+      (countEvol > 0 && pokemonEvolution2 !== Pkm.DEFAULT)
     if (count === 2 && countEvol === 2 && pokemonEvolution2 != null)
       pokemonEvolution = pokemonEvolution2
 
