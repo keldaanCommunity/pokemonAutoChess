@@ -13,7 +13,7 @@ import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { SynergyDescription } from "../synergy/synergy-description"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
-import PokemonFactory, { ObtainableEgg } from "../../../../../models/pokemon-factory";
+import PokemonFactory from "../../../../../models/pokemon-factory";
 import { groupBy, deduplicateArray } from "../../../../../utils/array";
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon";
 import { Rarity } from "../../../../../types/enum/Game";
@@ -24,9 +24,9 @@ export default function WikiType(props: { type: Synergy | "all" }) {
 
   let pokemons: Pkm[]
   if(props.type === "all"){
-    pokemons = deduplicateArray(Object.values(PRECOMPUTED_TYPE_POKEMONS_ALL).flat())
+    pokemons = deduplicateArray(Object.values(PRECOMPUTED_TYPE_POKEMONS_ALL).flat()) as Pkm[]
   } else {
-    pokemons = PRECOMPUTED_TYPE_POKEMONS_ALL[props.type]
+    pokemons = PRECOMPUTED_TYPE_POKEMONS_ALL[props.type] as Pkm[]
   }
 
   const firstStagePokemons = pokemons
