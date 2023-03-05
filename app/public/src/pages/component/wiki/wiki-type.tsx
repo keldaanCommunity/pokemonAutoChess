@@ -17,16 +17,17 @@ import PokemonFactory from "../../../../../models/pokemon-factory";
 import { groupBy } from "../../../../../utils/array";
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon";
 import { Rarity } from "../../../../../types/enum/Game";
+import { Mythical1Shop, Mythical2Shop } from "../../../../../models/shop";
 
 export default function WikiType(props: { type: Synergy | "all" }) {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>();
   const firstStagePokemons = (props.type === "all" ? Object.values(PRECOMPUTED_TYPE_POKEMONS_ALL).flat() : PRECOMPUTED_TYPE_POKEMONS_ALL[props.type])
     .map(p => PokemonFactory.createPokemonFromName(p))
-    .filter(p => p.stars === 1 || p.rarity === Rarity.MYTHICAL)
+    .filter(p => p.stars === 1 || (p.rarity === Rarity.MYTHICAL && (Mythical1Shop.includes(p.name) || Mythical2Shop.includes(p.name))))
   const pokemonsPerRarity = groupBy(firstStagePokemons, p => p.rarity)
   return (
     <div style={{padding: "1em"}}>
-      {props.type !== "all" && <>
+      {props.type !== "all" && (<>
         <div style={{ display: "flex", marginBottom: "0.5em" }}>
           <SynergyIcon type={props.type} />
           <p>{SynergyName[props.type].eng}</p>
@@ -35,14 +36,13 @@ export default function WikiType(props: { type: Synergy | "all" }) {
           return (
             <div key={EffectName[effect]} style={{ display: "flex" }}>
               <p>
-                ({TypeTrigger[props.type][i]}) {EffectName[effect]}:
+                ({TypeTrigger[props.type][i]}) {EffectName[effect]}:&nbsp;
               </p>
               <SynergyDescription effect={effect} />
             </div>
           )
         })}
-      </>
-      }
+      </>)}
       <table>
         <tbody>
         {(Object.values(Rarity) as Rarity[]).map(rarity => {

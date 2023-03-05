@@ -124,6 +124,8 @@ export const RarityProbability: { [key in Rarity]: number } = {
   [Rarity.HATCH]: 0.1
 }
 
+export const DITTO_RATE = 0.005
+
 export const AttackTypeColor: { [key in AttackType] } = {
   [AttackType.PHYSICAL]: "#FF6E55",
   [AttackType.SPECIAL]: "#7FC9FF",
@@ -490,7 +492,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.WATER_INCENSE]: { [Stat.SPELL_POWER]: 10, [Stat.SPE_DEF]: 1 },
   [Item.SHELL_BELL]: { [Stat.SPELL_POWER]: 10, [Stat.ATK]: 1 },
   [Item.LUCKY_EGG]: { [Stat.SPELL_POWER]: 10, [Stat.DEF]: 1 },
-  [Item.AQUA_EGG]: { [Stat.MANA]: 30 },
+  [Item.AQUA_EGG]: { [Stat.MANA]: 50 },
   [Item.BLUE_ORB]: { [Stat.MANA]: 15, [Stat.ATK_SPEED]: 10 },
   [Item.ZOOM_LENS]: { [Stat.MANA]: 15, [Stat.CRIT_CHANCE]: 5 },
   [Item.BRIGHT_POWDER]: { [Stat.MANA]: 15, [Stat.SHIELD]: 15 },
