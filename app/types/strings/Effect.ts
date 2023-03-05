@@ -439,7 +439,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.ASSURANCE]: {
-    eng: `Dark pokemons jump in the backline when combat starts and gain +40% ${Stat.CRIT_CHANCE} and +50% ${Stat.CRIT_DAMAGE}`,
+    eng: `Dark pokemons jump in the backline when combat starts and gain  +60% ${Stat.CRIT_CHANCE} and +50% ${Stat.CRIT_DAMAGE}`,
     esp: ``,
     fra: ``
   },

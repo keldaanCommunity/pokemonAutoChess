@@ -3013,17 +3013,17 @@ export class ThiefStrategy extends AttackStrategy {
       target.items.delete(item)
     })
 
-    if (pokemon.effects.includes(Effect.HONE_CLAWS)) {
+    if (pokemon.effects.includes(Effect.DUBIOUS_DISC)) {
       pokemon.addAttack(4 * l, true)
       pokemon.handleShield(20 * l, pokemon)
     }
 
-    if (pokemon.effects.includes(Effect.ASSURANCE)) {
+    if (pokemon.effects.includes(Effect.LINK_CABLE)) {
       pokemon.addAttack(7 * l, true)
       pokemon.handleShield(30 * l, pokemon)
     }
 
-    if (pokemon.effects.includes(Effect.BEAT_UP)) {
+    if (pokemon.effects.includes(Effect.GOOGLE_SPECS)) {
       pokemon.addAttack(10 * l, true)
       pokemon.handleShield(50 * l, pokemon)
     }
