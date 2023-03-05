@@ -5,8 +5,9 @@ import ReactTooltip from "react-tooltip";
 import { ItemDescription, ItemName } from "../../../../types/strings/Item"
 import { ItemRecipe, ItemStats } from "../../../../types/Config"
 import { Item } from "../../../../types/enum/Item";
-import "./item-detail.css";
 import { StatLabel } from "../../../../types/strings/Stat";
+import { addIconsToDescription } from "../../pages/utils/descriptions"
+import "./item-detail.css";
 
 export function ItemDetailTooltip({ item, depth }: { item: Item, depth: number }){
   const recipes = Object.entries(ItemRecipe).filter(([result, recipe]) => recipe.includes(item))  
@@ -20,7 +21,7 @@ export function ItemDetailTooltip({ item, depth }: { item: Item, depth: number }
       <span>+{value}</span>
     </div>))}
   </div>
-  <p className="game-item-detail-description">{ItemDescription[item]}</p>
+  <p className="game-item-detail-description">{addIconsToDescription(ItemDescription[item])}</p>
   {recipes.length > 0 && depth <= 1 && (<div className="game-item-detail-combinations">
     {recipes.map(([result, recipe]) => {
       const otherComponent = recipe[0] == item ? recipe[1] : recipe[0]
