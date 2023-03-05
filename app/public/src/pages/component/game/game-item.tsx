@@ -3,6 +3,7 @@ import { ItemName, ItemDescription } from "../../../../../types/strings/Item"
 import CSS from "csstype"
 import { useAppDispatch } from "../../../hooks"
 import { itemClick } from "../../../stores/NetworkStore"
+import { addIconsToDescription } from "../../utils/descriptions"
 
 const style: CSS.Properties = {
   width: "30%",
@@ -22,7 +23,7 @@ export default function GameItem(props: { item: string }) {
         src={"assets/item/" + props.item + ".png"}
       ></img>
       <h3>{ItemName[props.item]}</h3>
-      <p>{ItemDescription[props.item]}</p>
+      <p>{addIconsToDescription(ItemDescription[props.item])}</p>
       <button
         onClick={() => {
           dispatch(itemClick(props.item))

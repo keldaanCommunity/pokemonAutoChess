@@ -1,4 +1,6 @@
+import { Damage, Stat } from "../enum/Game"
 import { Item } from "../enum/Item"
+import { Status } from "../enum/Status"
 
 export const ItemName: { [key in Item]: string } = {
   [Item.FOSSIL_STONE]: "Fossil Stone",
@@ -59,14 +61,14 @@ export const ItemName: { [key in Item]: string } = {
 
 export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.FOSSIL_STONE]: "A fossil of a Pokémon that lived in prehistoric times",
-  [Item.TWISTED_SPOON]: "+10% spell power",
-  [Item.MYSTIC_WATER]: "+15 mana",
-  [Item.MAGNET]: "+10% attack speed",
-  [Item.BLACK_GLASSES]: "+5% critical hit",
-  [Item.MIRACLE_SEED]: "+15 shield when combat begins",
-  [Item.NEVER_MELT_ICE]: "+1 special defense",
-  [Item.CHARCOAL]: "+1 attack",
-  [Item.HEART_SCALE]: "+1 defense",
+  [Item.TWISTED_SPOON]: `+10% ${Stat.SPELL_POWER}`,
+  [Item.MYSTIC_WATER]: `+15 ${Stat.MANA}`,
+  [Item.MAGNET]: `+10% ${Stat.ATK_SPEED}`,
+  [Item.BLACK_GLASSES]: `+5% ${Stat.CRIT_CHANCE}`,
+  [Item.MIRACLE_SEED]: `+15 ${Stat.SHIELD} when combat begins`,
+  [Item.NEVER_MELT_ICE]: `+1 ${Stat.SPE_DEF}`,
+  [Item.CHARCOAL]: `+1 ${Stat.ATK}`,
+  [Item.HEART_SCALE]: `+1 ${Stat.DEF}`,
   [Item.OLD_AMBER]: "The holder gains the fossil type",
   [Item.DAWN_STONE]: "The holder gains the psychic type",
   [Item.WATER_STONE]: "The holder gains the water type",
@@ -76,61 +78,61 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.DUSK_STONE]: "The holder gains the dark type",
   [Item.LEAF_STONE]: "The holder gains the grass type",
   [Item.ICY_ROCK]: "The holder gains the ice type",
-  [Item.CHOICE_SPECS]: "The holder gains 100% bonus spell power",
+  [Item.CHOICE_SPECS]: `The holder gains 100% bonus ${Stat.SPELL_POWER}`,
   [Item.SOUL_DEW]:
-    "During combat, the holder gains 10% spell power every 2 seconds",
-  [Item.UPGRADE]: "Attacks grant +5% bonus Attack Speed for the rest of combat",
+    `During combat, the holder gains 10% ${Stat.SPELL_POWER} every 2 seconds`,
+  [Item.UPGRADE]: `Attacks grant +5% bonus ${Stat.ATK_SPEED} for the rest of combat`,
   [Item.REAPER_CLOTH]: "The holder spells can critically strike",
   [Item.POKEMONOMICON]:
     "When the holder deals damage with their Ability, they burn and wound the target for 2 seconds",
   [Item.WATER_INCENSE]:
-    "30% bonus damage on spells up to 75% if target as more than 200hp",
-  [Item.SHELL_BELL]: "Holder heals for 30% of all damages",
+    `+30% ${Damage.SPECIAL}, up to +75% if target has more than 200 ${Stat.HP}`,
+  [Item.SHELL_BELL]: "Holder heals for 30% of all damages inflicted",
   [Item.LUCKY_EGG]:
-    "30% spell power for holder and adjacent allies in the same row",
+    `+30% ${Stat.SPELL_POWER} for holder and adjacent allies in the same row`,
   [Item.AQUA_EGG]:
-    "The holder gains +50 starting mana and regains 20 mana after casting its ability",
+    `The holder gains +50 starting ${Stat.MANA} and regains 20 ${Stat.MANA} after casting its ability`,
   [Item.BLUE_ORB]:
-    "Every third attack from the holder unleashes a chain lightning that bounces to 2 enemies, burning 20 mana",
+    `Every third attack from the holder unleashes a chain lightning that bounces to 2 enemies, burning 20 ${Stat.MANA}`,
   [Item.ZOOM_LENS]:
-    "The holder converts 5% of its spell power as attack and 5 x its attack as spell power",
+    `The holder converts 5% of its ${Stat.SPELL_POWER} as ${Stat.ATK} and 5 x its ${Stat.ATK} as ${Stat.SPELL_POWER}`,
   [Item.BRIGHT_POWDER]:
-    "Every 4 sec, the holder throw sand, dropping a random adjacent ennemy speed by 30%",
+    `Every 4 sec, the holder throw sand, dropping a random adjacent ennemy ${Stat.ATK_SPEED} by 30%`,
   [Item.DELTA_ORB]:
-    "Holder and adjacent allies in the same row gain 3 bonus mana /hit",
-  [Item.MANA_SCARF]: "The holder attacks restore 8 additional mana",
+    `Holder and adjacent allies in the same row gain 3 bonus ${Stat.MANA} per hit`,
+  [Item.MANA_SCARF]: `The holder attacks restore 8 additional ${Stat.MANA}`,
   [Item.SMOKE_BALL]:
-    "Reduce the attack speed of ennemy attackers by 40% for 5 seconds",
+    `Reduce the ${Stat.ATK_SPEED} of ennemy attackers by 40% for 5 seconds`,
   [Item.XRAY_VISION]:
-    "+50% attack speed. The holder attacks can no longer miss.",
-  [Item.RAZOR_FANG]: "+100% Critical hit damage",
+    `+50% ${Stat.ATK_SPEED}. The holder attacks can no longer miss.`,
+  [Item.RAZOR_FANG]: `+100% ${Stat.CRIT_DAMAGE}`,
   [Item.LEFTOVERS]:
-    "During the combat, the holder attack heals adjacent allies on the same row for 5% of their max health",
+    `During the combat, the holder attack heals adjacent allies on the same row for 5% of their max ${Stat.HP}`,
   [Item.CHOICE_SCARF]:
-    "The holder basic attack hit a second adjacent ennemy for 50% of holder damage",
-  [Item.FIRE_GEM]: "Adds 8% of target hp to attack damage",
+    "The holder basic attacks hit a second adjacent ennemy for 50% of the damage",
+  [Item.FIRE_GEM]: `Adds 8% of target max ${Stat.HP} to attack damage`,
   [Item.DEFENSIVE_RIBBON]:
-    "When the holder takes damage, they gain attack damage, 1 defense, 1 special defense and 5% attack speed. (stacks 10 times)",
+    `When the holder takes damage, they gain +1 ${Stat.ATK}, +1 ${Stat.DEF}, +1 ${Stat.SPE_DEF} and +5% ${Stat.ATK_SPEED} (stacks up to 10 times)`,
   [Item.WONDER_BOX]:
     "At the beginning of each battle, wonder box is replaced by 2 temporary items (max 3 items held)",
   [Item.RUNE_PROTECT]:
     "When combat begins, the holder and all adjacent allies are immune to spells for the first 6 seconds",
-  [Item.WIDE_LENS]: "The holder gains +2 range",
-  [Item.RAZOR_CLAW]: "The holder gains 55% Critical hit Chance",
-  [Item.FLUFFY_TAIL]: "Holder is immune to all status",
-  [Item.ORAN_BERRY]: "+130 shield when combat begins",
+  [Item.WIDE_LENS]: `The holder gains +2 ${Stat.RANGE}`,
+  [Item.RAZOR_CLAW]: `The holder gains +55% ${Stat.CRIT_CHANCE}`,
+  [Item.FLUFFY_TAIL]: `Holder is immune to all status`,
+  [Item.ORAN_BERRY]: `+130 ${Stat.SHIELD} when combat begins`,
   [Item.SHINY_CHARM]:
-    "Upon attack, 25% chance to trigger protect status for 1 second",
+    `Upon attack, 25% chance to trigger ${Status.PROTECT} for 1 second`,
   [Item.FOCUS_BAND]:
-    "When combat begins, the holder and all allies within 1 hexes in the same row gain +30% Attack Speed for the rest of combat",
-  [Item.FLAME_ORB]: "Holder is burned but increase attack by 100%",
-  [Item.ASSAULT_VEST]: "+18 special defense",
+    `When combat begins, the holder and adjacent allies in the same row gain +30% ${Stat.ATK_SPEED}`,
+  [Item.FLAME_ORB]: `Holder is burned but increase its ${Stat.ATK} by 100%`,
+  [Item.ASSAULT_VEST]: `+18 ${Stat.SPE_DEF}`,
   [Item.KINGS_ROCK]:
-    "+1 money each time the holder kill an ennemy (max 5 golds)",
+    "+1 gold each time the holder kills an ennemy (max 5 gold per stage)",
   [Item.POKE_DOLL]: "Reduce all incoming damage by 30%",
   [Item.RED_ORB]:
-    "+10 attack. Each attack of the holder deals an additional 20% true damage",
-  [Item.MAX_REVIVE]: "Prevents the holder first death",
+    `+10 ${Stat.ATK}. Each attack of the holder deals 20% additional ${Damage.TRUE}`,
+  [Item.MAX_REVIVE]: `Prevents the holder first death, restoring to max ${Stat.HP}`,
   [Item.ROCKY_HELMET]:
-    "+12 defense. Negates critical bonus damage from incoming critical hits."
+    `+12 ${Stat.DEF}. Negates critical bonus damage from incoming critical hits.`
 })
