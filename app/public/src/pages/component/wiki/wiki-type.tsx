@@ -13,17 +13,29 @@ import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { SynergyDescription } from "../synergy/synergy-description"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
-import PokemonFactory from "../../../../../models/pokemon-factory";
-import { groupBy } from "../../../../../utils/array";
+import PokemonFactory, { ObtainableEgg } from "../../../../../models/pokemon-factory";
+import { groupBy, deduplicateArray } from "../../../../../utils/array";
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon";
 import { Rarity } from "../../../../../types/enum/Game";
 import { Mythical1Shop, Mythical2Shop } from "../../../../../models/shop";
 
 export default function WikiType(props: { type: Synergy | "all" }) {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>();
-  const firstStagePokemons = (props.type === "all" ? Object.values(PRECOMPUTED_TYPE_POKEMONS_ALL).flat() : PRECOMPUTED_TYPE_POKEMONS_ALL[props.type])
+
+  let pokemons: Pkm[]
+  if(props.type === "all"){
+    pokemons = deduplicateArray(Object.values(PRECOMPUTED_TYPE_POKEMONS_ALL).flat())
+  } else {
+    pokemons = PRECOMPUTED_TYPE_POKEMONS_ALL[props.type]
+  }
+
+  const firstStagePokemons = pokemons
     .map(p => PokemonFactory.createPokemonFromName(p))
-    .filter(p => p.stars === 1 || (p.rarity === Rarity.MYTHICAL && (Mythical1Shop.includes(p.name) || Mythical2Shop.includes(p.name))))
+    .filter(p => p.stars === 1 
+      || (p.rarity === Rarity.MYTHICAL && (Mythical1Shop.includes(p.name) || Mythical2Shop.includes(p.name)))
+      || p.rarity === Rarity.SUMMON
+      || p.rarity === Rarity.NEUTRAL
+    )
   const pokemonsPerRarity = groupBy(firstStagePokemons, p => p.rarity)
   return (
     <div style={{padding: "1em"}}>
