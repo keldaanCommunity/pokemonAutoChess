@@ -788,7 +788,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.GRASS_WHISTLE]: {
-    eng: `Put ${Status.SLEEP} [1,2,4] ennemies for 2 seconds`,
+    eng: `Put ${Status.SLEEP} [1,2,4] enemies for 2 seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -806,7 +806,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.PETAL_DANCE]: {
-    eng: `Deals [15,30,60] ${Damage.SPECIAL} to [2,4,6] ennemies`,
+    eng: `Deals [15,30,60] ${Damage.SPECIAL} to [2,4,6] enemies`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -914,7 +914,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HEAT_WAVE]: {
-    eng: `Area of effect attack that deals [20,40,80] ${Damage.SPECIAL} in all ennemies in a line behind the target.`,
+    eng: `Area of effect attack that deals [20,40,80] ${Damage.SPECIAL} in all enemies in a line behind the target.`,
     esp: `Ataque de área de efecto que inflige 30,40,50 de daño especial a todos los enemigos en una línea detrás del objetivo.`,
     fra: `Attaque AoE qui infique 30,40,50 dégats spéciaux dans une ligne derrière la cible.`,
     prt: ``
@@ -926,13 +926,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HYDRO_PUMP]: {
-    eng: `Area of effect attack that deals [25,50,100] ${Damage.SPECIAL} in all ennemies in a line behind the target.`,
+    eng: `Area of effect attack that deals [25,50,100] ${Damage.SPECIAL} in all enemies in a line behind the target.`,
     esp: `Ataque de área de efecto que inflige 30,40,50 de daño especial a todos los enemigos en una línea detrás del objetivo.`,
     fra: `Attaque AoE qui infique 30,40,50 dégats spéciaux dans une ligne derrière la cible.`,
     prt: ``
   },
   [Ability.DRACO_METEOR]: {
-    eng: `Area of effect attack that deals [10,20,40] ${Damage.SPECIAL} to all ennemies`,
+    eng: `Area of effect attack that deals [10,20,40] ${Damage.SPECIAL} to all enemies`,
     esp: `Ataque de área de efecto que causa 10,20,40 de daño especial a todos los enemigos`,
     fra: `Inflige 10,20,40 dégats spéciaux à tous les pokémons ennemis.`,
     prt: ``
@@ -980,7 +980,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.SEED_FLARE]: {
-    eng: `Shaymins body emits a shock wave, dealing 30 ${Damage.SPECIAL} to all ennemies, and decreasing their ${Stat.SPE_DEF} by 2`,
+    eng: `Shaymins body emits a shock wave, dealing 30 ${Damage.SPECIAL} to all enemies, and decreasing their ${Stat.SPE_DEF} by 2`,
     esp: `El cuerpo de Shaymin emite una onda de choque que inflige 30 de daño mágico a todos los enemigos y reduce su velocidad en 2.`,
     fra: `Le corps de Shaymin émet une onde de choc, infligeant 30 dégâts magiques à tous les ennemis et réduisant leur vitesse de 2.`,
     prt: ``
@@ -1124,7 +1124,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HEAL_BLOCK]: {
-    eng: `Apply ${Status.WOUND} to all adjacent ennemies for [5,10,15] seconds`,
+    eng: `Apply ${Status.WOUND} to all adjacent enemies for [5,10,15] seconds`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
@@ -1154,7 +1154,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   CORRUPTED_NATURE: {
-    eng: `${Status.WOUND} adjacent ennemies for 5 seconds and deals [20,40] life steal ${Damage.SPECIAL}`,
+    eng: `${Status.WOUND} adjacent enemies for 5 seconds and deals [20,40] life steal ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1196,7 +1196,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   ELECTRO_WEB: {
-    eng: `Steal [15,30,60] % ${Stat.ATK_SPEED} to adjacent ennemies`,
+    eng: `Steal [15,30,60] % ${Stat.ATK_SPEED} to adjacent enemies`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1238,7 +1238,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   TWISTING_NEITHER: {
-    eng: `Deals 80 ${Damage.SPECIAL} to around ennemies. Every affected pokemons is teleported somewhere`,
+    eng: `Deals 80 ${Damage.SPECIAL} to around enemies. Every affected pokemons is teleported somewhere`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1334,7 +1334,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.SHADOW_BALL]: {
-    eng: `Deals [45,90,180] ${Damage.SPECIAL} and burn 15 ${Stat.MANA} to the target and adjacent ennemies`,
+    eng: `Deals [45,90,180] ${Damage.SPECIAL} and burn 15 ${Stat.MANA} to the target and adjacent enemies`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1352,7 +1352,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.FUTURE_SIGHT]: {
-    eng: `Deals [15,30,60] ${Damage.SPECIAL} to 5 ennemies`,
+    eng: `Deals [15,30,60] ${Damage.SPECIAL} to 5 enemies`,
     esp: ``,
     prt: ``,
     fra: ``

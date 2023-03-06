@@ -97,19 +97,19 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.ZOOM_LENS]:
     `The holder converts 5% of its ${Stat.SPELL_POWER} as ${Stat.ATK} and 5 x its ${Stat.ATK} as ${Stat.SPELL_POWER}`,
   [Item.BRIGHT_POWDER]:
-    `Every 4 sec, the holder throw sand, dropping a random adjacent ennemy ${Stat.ATK_SPEED} by 30%`,
+    `Every 4 sec, the holder throw sand, dropping a random adjacent enemy ${Stat.ATK_SPEED} by 30%`,
   [Item.DELTA_ORB]:
     `Holder and adjacent allies in the same row gain 3 bonus ${Stat.MANA} per hit`,
   [Item.MANA_SCARF]: `The holder attacks restore 8 additional ${Stat.MANA}`,
   [Item.SMOKE_BALL]:
-    `Reduce the ${Stat.ATK_SPEED} of ennemy attackers by 40% for 5 seconds`,
+    `Reduce the ${Stat.ATK_SPEED} of enemy attackers by 40% for 5 seconds`,
   [Item.XRAY_VISION]:
     `+50% ${Stat.ATK_SPEED}. The holder attacks can no longer miss.`,
   [Item.RAZOR_FANG]: `+100% ${Stat.CRIT_DAMAGE}`,
   [Item.LEFTOVERS]:
     `During the combat, the holder attack heals adjacent allies on the same row for 5% of their max ${Stat.HP}`,
   [Item.CHOICE_SCARF]:
-    "The holder basic attacks hit a second adjacent ennemy for 50% of the damage",
+    "The holder basic attacks hit a second adjacent enemy for 50% of the damage",
   [Item.FIRE_GEM]: `Adds 8% of target max ${Stat.HP} to attack damage`,
   [Item.DEFENSIVE_RIBBON]:
     `When the holder takes damage, they gain +1 ${Stat.ATK}, +1 ${Stat.DEF}, +1 ${Stat.SPE_DEF} and +5% ${Stat.ATK_SPEED} (stacks up to 10 times)`,
@@ -128,7 +128,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.FLAME_ORB]: `Holder is burned but increase its ${Stat.ATK} by 100%`,
   [Item.ASSAULT_VEST]: `+18 ${Stat.SPE_DEF}`,
   [Item.KINGS_ROCK]:
-    "+1 gold each time the holder kills an ennemy (max 5 gold per stage)",
+    "+1 gold each time the holder kills an enemy (max 5 gold per stage)",
   [Item.POKE_DOLL]: "Reduce all incoming damage by 30%",
   [Item.RED_ORB]:
     `+10 ${Stat.ATK}. Each attack of the holder deals 20% additional ${Damage.TRUE}`,
