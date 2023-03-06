@@ -493,6 +493,9 @@ export default class BattleManager {
               pkm.lifebar.progress.style.backgroundColor =
                 change.value === 1 ? "#e76e55" : "#76c442"
             }
+          } else if (change.field === "index") {
+            pkm.index = change.value
+            this.animationManager.animatePokemon(pkm, pkm.action)
           }
           break
         }

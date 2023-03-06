@@ -20,7 +20,7 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
 }
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
-    return PoolSize[rarity][clamp(maxStars,1,3)-1]
+  return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
 }
 
 export const CommonShop = new Array<Pkm>(

@@ -6185,30 +6185,6 @@ export class Charizard extends Pokemon {
   }
 }
 
-export class Carvanha extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.CARVANHA,
-      [Synergy.WATER, Synergy.DARK],
-      Rarity.SUMMON,
-      Pkm.DEFAULT,
-      40,
-      4,
-      1,
-      1,
-      1,
-      AttackSprite.WATER_MELEE,
-      AttackType.PHYSICAL,
-      1,
-      100,
-      Ability.BITE,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-
 export class Magikarp extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -10494,6 +10470,7 @@ export class Mightyena extends Pokemon {
     )
   }
 }
+
 export class Bronzor extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -12068,6 +12045,574 @@ export class UnownExclamation extends Pokemon {
       shiny,
       emotion,
       false
+    )
+  }
+}
+
+export class Diglett extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DIGLETT,
+      [Synergy.GROUND, Synergy.MINERAL],
+      Rarity.RARE,
+      Pkm.DUGTRIO,
+      60,
+      6,
+      2,
+      2,
+      1,
+      AttackSprite.ROCK_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      140,
+      Ability.EARTHQUAKE,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Dugtrio extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DUGTRIO,
+      [Synergy.GROUND, Synergy.MINERAL],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      120,
+      11,
+      4,
+      4,
+      1,
+      AttackSprite.ROCK_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      140,
+      Ability.EARTHQUAKE,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Rowlet extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ROWLET,
+      [Synergy.GRASS, Synergy.FLYING, Synergy.GHOST],
+      Rarity.HATCH,
+      Pkm.DARTIX,
+      90,
+      5,
+      2,
+      2,
+      3,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Dartix extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DARTIX,
+      [Synergy.GRASS, Synergy.FLYING, Synergy.GHOST],
+      Rarity.HATCH,
+      Pkm.DECIDUEYE,
+      130,
+      9,
+      2,
+      3,
+      3,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Decidueye extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DECIDUEYE,
+      [Synergy.GRASS, Synergy.FLYING, Synergy.GHOST],
+      Rarity.HATCH,
+      Pkm.DEFAULT,
+      180,
+      18,
+      2,
+      4,
+      3,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      3,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Zorua extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZORUA,
+      [Synergy.DARK, Synergy.FIELD],
+      Rarity.EPIC,
+      Pkm.ZOROARK,
+      100,
+      7,
+      5,
+      5,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.ILLUSION,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Zoroark extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZOROARK,
+      [Synergy.DARK, Synergy.FIELD],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      190,
+      14,
+      7,
+      7,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.ILLUSION,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class HisuiZorua extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HISUI_ZORUA,
+      [Synergy.NORMAL, Synergy.GHOST],
+      Rarity.EPIC,
+      Pkm.HISUI_ZOROARK,
+      100,
+      7,
+      5,
+      5,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.ILLUSION,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class HisuiZoroark extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HISUI_ZOROARK,
+      [Synergy.NORMAL, Synergy.GHOST],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      190,
+      14,
+      7,
+      7,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.ILLUSION,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Grimer extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.GRIMER,
+      [Synergy.POISON],
+      Rarity.RARE,
+      Pkm.MUK,
+      60,
+      6,
+      2,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Muk extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MUK,
+      [Synergy.POISON],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      120,
+      11,
+      4,
+      4,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class AlolanGrimer extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ALOLAN_GRIMER,
+      [Synergy.POISON, Synergy.DARK],
+      Rarity.RARE,
+      Pkm.ALOLAN_MUK,
+      60,
+      6,
+      2,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class AlolanMuk extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ALOLAN_MUK,
+      [Synergy.POISON, Synergy.DARK],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      120,
+      11,
+      4,
+      4,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Carvanha extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CARVANHA,
+      [Synergy.WATER, Synergy.DARK],
+      Rarity.RARE,
+      Pkm.SHARPEDO,
+      60,
+      6,
+      2,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Sharpedo extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SHARPEDO,
+      [Synergy.WATER, Synergy.DARK],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      120,
+      11,
+      4,
+      4,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Froakie extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.FROAKIE,
+      [Synergy.WATER, Synergy.DARK],
+      Rarity.HATCH,
+      Pkm.FROGADIER,
+      90,
+      5,
+      2,
+      2,
+      3,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Frogadier extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.FROGADIER,
+      [Synergy.WATER, Synergy.DARK],
+      Rarity.HATCH,
+      Pkm.GRENINJA,
+      130,
+      9,
+      2,
+      3,
+      3,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Greninja extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.GRENINJA,
+      [Synergy.WATER, Synergy.DARK],
+      Rarity.HATCH,
+      Pkm.DEFAULT,
+      180,
+      18,
+      2,
+      4,
+      3,
+      AttackSprite.GRASS_MELEE,
+      AttackType.PHYSICAL,
+      3,
+      100,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Tyrogue extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.TYROGUE,
+      [Synergy.FIGHTING, Synergy.HUMAN],
+      Rarity.RARE,
+      Pkm.HITMONTOP,
+      60,
+      6,
+      2,
+      2,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Hitmontop extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HITMONTOP,
+      [Synergy.FIGHTING, Synergy.HUMAN],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      120,
+      11,
+      4,
+      4,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Hitmonlee extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HITMONLEE,
+      [Synergy.FIGHTING, Synergy.HUMAN],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      120,
+      11,
+      4,
+      4,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Hitmonchan extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HITMONCHAN,
+      [Synergy.FIGHTING, Synergy.HUMAN],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      120,
+      11,
+      4,
+      4,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Mimikyu extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MIMIKYU,
+      [Synergy.GHOST, Synergy.FAIRY],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      300,
+      30,
+      5,
+      5,
+      3,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      3,
+      60,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true
     )
   }
 }

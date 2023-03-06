@@ -496,7 +496,29 @@ import {
   Zubat,
   Zweilous,
   TapuBulu,
-  TapuFini
+  TapuFini,
+  Diglett,
+  Dugtrio,
+  Dartix,
+  Decidueye,
+  Zorua,
+  Zoroark,
+  HisuiZorua,
+  HisuiZoroark,
+  Froakie,
+  Frogadier,
+  Greninja,
+  Tyrogue,
+  Hitmonlee,
+  Hitmonchan,
+  Hitmontop,
+  Mimikyu,
+  Grimer,
+  Muk,
+  AlolanMuk,
+  AlolanGrimer,
+  Rowlet,
+  Sharpedo
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1714,6 +1736,50 @@ export default class PokemonFactory {
         return new TapuFini(s, e)
       case Pkm.TAPU_BULU:
         return new TapuBulu(s, e)
+      case Pkm.DIGLETT:
+        return new Diglett(s, e)
+      case Pkm.DUGTRIO:
+        return new Dugtrio(s, e)
+      case Pkm.ROWLET:
+        return new Rowlet(s, e)
+      case Pkm.DARTIX:
+        return new Dartix(s, e)
+      case Pkm.DECIDUEYE:
+        return new Decidueye(s, e)
+      case Pkm.ZORUA:
+        return new Zorua(s, e)
+      case Pkm.ZOROARK:
+        return new Zoroark(s, e)
+      case Pkm.HISUI_ZORUA:
+        return new HisuiZorua(s, e)
+      case Pkm.HISUI_ZOROARK:
+        return new HisuiZoroark(s, e)
+      case Pkm.FROAKIE:
+        return new Froakie(s, e)
+      case Pkm.FROGADIER:
+        return new Frogadier(s, e)
+      case Pkm.GRENINJA:
+        return new Greninja(s, e)
+      case Pkm.TYROGUE:
+        return new Tyrogue(s, e)
+      case Pkm.HITMONLEE:
+        return new Hitmonlee(s, e)
+      case Pkm.HITMONCHAN:
+        return new Hitmonchan(s, e)
+      case Pkm.HITMONTOP:
+        return new Hitmontop(s, e)
+      case Pkm.MIMIKYU:
+        return new Mimikyu(s, e)
+      case Pkm.GRIMER:
+        return new Grimer(s, e)
+      case Pkm.MUK:
+        return new Muk(s, e)
+      case Pkm.ALOLAN_GRIMER:
+        return new AlolanGrimer(s, e)
+      case Pkm.ALOLAN_MUK:
+        return new AlolanMuk(s, e)
+      case Pkm.SHARPEDO:
+        return new Sharpedo(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
