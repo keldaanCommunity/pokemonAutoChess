@@ -62,7 +62,7 @@ Spell damage was flat values. Now it is percentage
 
 **Smoke Ball Buff**
 
-Reduce the attack speed of ennemy attackers by ~~33%~~50% for 5 seconds
+Reduce the attack speed of enemy attackers by ~~33%~~50% for 5 seconds
 
 **Assault Vest Buff**
 

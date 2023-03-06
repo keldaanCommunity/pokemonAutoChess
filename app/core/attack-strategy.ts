@@ -163,7 +163,7 @@ export class MindBlownStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     target.count.mindBlownCount++
-    target.handleSpellDamage(pokemon.life / 2, board, AttackType.TRUE, pokemon)
+    target.handleSpellDamage(pokemon.life / 2, board, AttackType.SPECIAL, pokemon)
   }
 }
 

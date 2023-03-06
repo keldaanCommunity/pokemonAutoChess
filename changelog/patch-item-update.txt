@@ -37,7 +37,7 @@ Soul Dew: During combat, the holder gains 3 spell damage every 5 seconds
 Upgrade: Attacks grant +6% bonus Attack Speed for the rest of combat
 Reaper Cloth: The holder spells can critically strike (20% chance, 2x damage)
 Pokemonomicon: When the holder deals damage with their Ability, they burn and wound the target for 3 seconds
-Water Incense: When an ennemy cast an ability, they take incense damage equal to 20% of their max mana
+Water Incense: When an enemy cast an ability, they take incense damage equal to 20% of their max mana
 Shell Bell: The holder spells heal for 40% of the damage dealt
 Lucky Egg: When combat begins, the holder and all allies within 2 hexes in the same row gain 20 shield points
 Aqua Egg: The holder gains 50 mana. After casting their ability the holder gains 20 mana
@@ -46,22 +46,22 @@ Zoom Lens: The holder gains 4 attack damage and 4 spell damage
 Bright Powder: Every 5 seconds, the holder throws a bright powder within 1 hex, healing them for 18% of their missing health
 Delta Orb: When combat begins, the holder and all allies within 1 hex in the same row gain 3 Ability Power for the rest of combat
 Mana Scarf: The holder attacks restore 8 additional mana
-Smoke Ball: Reduce the attack speed of ennemy attackers by 30% for 5 seconds
+Smoke Ball: Reduce the attack speed of enemy attackers by 30% for 5 seconds
 XRay Vision: Increase the holders attack range by 1 hex and grants 55% bonus attack speed. The holder attacks can no longer miss.
 Razor Fang: When the holder inflicts a critical hit, the targets Armor is reduced by 70% for 5 seconds. This effect does not stack.
 Leftovers: During  the combat, the holder attack heals adjacent allies for 3 health point
-Choice Scarf: The holder basic attack hit a second adjacent ennemy for 75% of holder damage
+Choice Scarf: The holder basic attack hit a second adjacent enemy for 75% of holder damage
 Fire Gem: The holders Abilities and attacks do 20% bonus damage. If the target has more than 200 maximum Health, the bonus increases to 60%.
 Defensive Ribbon: When the holder takes damage, they gain attack damage, 1 defense and 1 special defense. Stacks up to 5 times
 Wonder Box: At the beginning of each battle phase, the holder equips 2 temporary items
-Rune Protect: When combat begins, the holder and all allies whithin 1 hex in the same row gain a shield that block the damage and effects of the first ennemy ability
+Rune Protect: When combat begins, the holder and all allies whithin 1 hex in the same row gain a shield that block the damage and effects of the first enemy ability
 Wide Lens: The holder gains 20% bonus attack speed. The holder is immune to poison/fire
 Razor Claw: The holder gains 75% Critical Strike Chance and 10% Critical Strike Damage
-Fluffy Tail: When combat begins, every ennemy in the same column have their max mana increased by 30%
+Fluffy Tail: When combat begins, every enemy in the same column have their max mana increased by 30%
 Oran Berry: Grants 100 bonus hp
-Shiny Charm: When combat begins, every ennemy in the same column falls asleep for 3 seconds
+Shiny Charm: When combat begins, every enemy in the same column falls asleep for 3 seconds
 Focus Band: When combat begins, the holder and all allies within 1 hexes in the same row gain +30% Attack Speed for the rest of combat
-Flame Orb: Every 2 seconds, a random ennemy is burned for 8 seconds
+Flame Orb: Every 2 seconds, a random enemy is burned for 8 seconds
 Assault Vest: Grants 15 bonus special defense
 Kings Rock: Physical damage heals the holder for 33% of the damage dealt
 Poke Doll: The holder gains 5 Armor and 5 Magic Resist

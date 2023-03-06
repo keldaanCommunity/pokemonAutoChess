@@ -10,21 +10,21 @@ corphish, crawdaunt, joltik, galvantula, genesect, relicanth, diancie, hatenna, 
 
 **New Abilities**
 
- - Corrupted Nature: Wound adjacent ennemies for 4 seconds and deals 10/20/40 physical life steal damage
+ - Corrupted Nature: Wound adjacent enemies for 4 seconds and deals 10/20/40 physical life steal damage
  - Crabhammer: Deals 30/60/120 physical damage. Execute the target if below 30%
  - Diamond Storm : +5 defense to adjacent allies
  - Draco Energy : Deals 100% regidraco hp as special damage
  - Dynaamx Cannon : Shoot a dynamax beam on a straight line, dealing 80% hp to every pokemon as special damage
  - Dynamic Punch : Deals 20/40/80 physical damage and confuse the target for 1.5/3/6s
  - Electro Boost : All electric allies gains a rune protect effect
- - Electro Web : Steal 15/30/60% attack speed to adjacent ennemies
+ - Electro Web : Steal 15/30/60% attack speed to adjacent enemies
  - Fire Trick : Deals 20/40/80 special damage and teleports the target to a corner of the map
- - Flame Charge : Dash into the ennemy backline, dealing 30/60/120 physical damage
+ - Flame Charge : Dash into the enemy backline, dealing 30/60/120 physical damage
  - Leech Seed : Poison the target for 3/6/12s, healing for 10/20/40 hp
  - Lock On : Lock the target and shred its defenses for 8s. Genesect deals 3x more damage to it
- - Psych Up : Silence the target and every ennemies around for 2/4/8s, dealing 10/20/40 special damage
+ - Psych Up : Silence the target and every enemies around for 2/4/8s, dealing 10/20/40 special damage
  - Razor Wind : Apply Smoke effect (-50% attack speed) on the target and around it
- - Twisting Neither : Deals 80 special damage to around ennemies. Every affected pokemons is teleported somewhere
+ - Twisting Neither : Deals 80 special damage to around enemies. Every affected pokemons is teleported somewhere
  - Wonder Guard : Passive: Reduce received damage to 1
 
  **UI Update**

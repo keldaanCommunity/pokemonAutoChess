@@ -83,7 +83,7 @@ A death animation for each pokemon, with a fade away animation
 
 **Dps Meter**
 
-Dps meter now show ennemy / ally pokemons. It will also stay for the next "pick" phase, in order to give you time to analyze your team damage
+Dps meter now show enemy / ally pokemons. It will also stay for the next "pick" phase, in order to give you time to analyze your team damage
 
 **Meloetta Icon**
 

@@ -14,10 +14,10 @@ New Anonymous Authentication system. You can also log in anonymously. You'll get
 
 I added a new threshold (8) and i nerfed the thresholds 2,4,6
 
-(2) Your Fire pokemon have 20% chance to burn ennemy on every hit
-(4) Your Fire pokemon have 20% chance to burn ennemy on every hit and gain +1 Attack after every hit (Sunlight)
-(6) Your Fire pokemon have 30% chance to burn ennemy on every hit and gain +2 Attack after every hit (Sunlight)
-(8) Your Fire pokemon have 40% chance to burn ennemy on every hit and gain +3 Attack after every hit (Sunlight)
+(2) Your Fire pokemon have 20% chance to burn enemy on every hit
+(4) Your Fire pokemon have 20% chance to burn enemy on every hit and gain +1 Attack after every hit (Sunlight)
+(6) Your Fire pokemon have 30% chance to burn enemy on every hit and gain +2 Attack after every hit (Sunlight)
+(8) Your Fire pokemon have 40% chance to burn enemy on every hit and gain +3 Attack after every hit (Sunlight)
 
 **Nerf Psychic**
 
