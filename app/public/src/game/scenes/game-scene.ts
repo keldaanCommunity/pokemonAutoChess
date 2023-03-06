@@ -388,6 +388,11 @@ export default class GameScene extends Scene {
       "/assets/attacks"
     )
     this.load.multiatlas(
+      "ILLUSION",
+      "/assets/attacks/ILLUSION.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
       "pmd-replace",
       "/assets/attacks/pmd-replace.json",
       "/assets/attacks"
