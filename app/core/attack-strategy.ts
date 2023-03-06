@@ -163,7 +163,12 @@ export class MindBlownStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     target.count.mindBlownCount++
-    target.handleSpellDamage(pokemon.life / 2, board, AttackType.SPECIAL, pokemon)
+    target.handleSpellDamage(
+      pokemon.life / 2,
+      board,
+      AttackType.SPECIAL,
+      pokemon
+    )
   }
 }
 
@@ -294,6 +299,26 @@ export class SynchroStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
+  }
+}
+
+export class IllusionStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const heal = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 40
+    pokemon.handleHeal(heal, pokemon, true)
+    if (target) {
+      pokemon.index = target.index
+      pokemon.atk = target.atk
+      pokemon.range = target.range
+      pokemon.def = target.def
+      pokemon.speDef = target.speDef
+    }
   }
 }
 

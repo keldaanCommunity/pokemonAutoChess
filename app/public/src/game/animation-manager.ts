@@ -1518,6 +1518,17 @@ export default class AnimationManager {
       duration: 500,
       repeat: 2
     })
+
+    this.game.anims.create({
+      key: Ability.ILLUSION,
+      frames: this.game.anims.generateFrameNames(Ability.ILLUSION, {
+        start: 0,
+        end: 14,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {

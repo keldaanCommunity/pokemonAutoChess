@@ -693,6 +693,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.ILLUSION]: {
+    eng: "Illusion",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1370,7 +1376,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.GRASSY_SURGE]: {
-    eng: `Passive: Give ${Status.GRASS_FIELD} to your Psychic Pokemon, boosting their damage by 30%`,
+    eng: `Passive: Give ${Status.GRASS_FIELD} to your Grass Pokemon, boosting their damage by 30%`,
     esp: "",
     prt: "",
     fra: ""
@@ -1383,6 +1389,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.SKY_ATTACK]: {
     eng: `The pokémon rises in the air and falls on the farthest target, ${Status.PROTECT} the pokemon for 1 second, and deals [50,100,200] ${Damage.SPECIAL}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ILLUSION]: {
+    eng: `User recovers [40,80,120] ${Stat.HP} points and copies the form as well as the ${Stat.ATK}, ${Stat.DEF}, ${Stat.SPE_DEF}, and ${Stat.RANGE} of the targeted Pokemon`,
     esp: "",
     prt: "",
     fra: ""

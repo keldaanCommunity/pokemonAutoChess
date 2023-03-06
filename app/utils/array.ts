@@ -9,3 +9,7 @@ export const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
 export function sum(arr: number[]): number {
   return arr.reduce((a,b) => a+b, 0)
 }
+
+export function deduplicateArray<T>(arr: T[]): T[] {
+  return arr.filter((item,index, array) => array.indexOf(item) === index)
+}
