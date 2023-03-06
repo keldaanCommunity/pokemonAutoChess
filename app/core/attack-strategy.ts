@@ -314,10 +314,10 @@ export class IllusionStrategy extends AttackStrategy {
     pokemon.handleHeal(heal, pokemon, true)
     if (target) {
       pokemon.index = target.index
-      pokemon.atk = target.atk
+      pokemon.atk = Math.max(pokemon.atk, target.atk)
       pokemon.range = target.range
-      pokemon.def = target.def
-      pokemon.speDef = target.speDef
+      pokemon.def = Math.max(pokemon.def, target.def)
+      pokemon.speDef = Math.max(pokemon.speDef, target.speDef)
     }
   }
 }
