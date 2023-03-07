@@ -805,7 +805,7 @@ export function loadStatusMultiAtlas(scene: Scene) {
     "/assets/status/resurection.json",
     "/assets/status"
   )
-  scene.load.multiatlas("smoke", "/assets/status/SMOKE.json", "/assets/status")
+  scene.load.multiatlas("paralysis", "/assets/status/PARALYSIS.json", "/assets/status")
   scene.load.multiatlas(
     "rune_protect",
     "/assets/status/RUNE_PROTECT.json",

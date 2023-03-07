@@ -191,11 +191,11 @@ export default class BattleManager {
             } else {
               pkm.removeResurection()
             }
-          } else if (change.field == "smoke") {
-            if (pokemon.status.smoke) {
-              pkm.addSmoke()
+          } else if (change.field == "paralysis") {
+            if (pokemon.status.paralysis) {
+              pkm.addParalysis()
             } else {
-              pkm.removeSmoke()
+              pkm.removeParalysis()
             }
           } else if (change.field == "armorReduction") {
             if (pokemon.status.armorReduction) {

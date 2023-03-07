@@ -1663,7 +1663,7 @@ export function createStatusAnimations(game: Phaser.Scene) {
     repeat: -1
   })
 
-  game.anims.create({
+  /*game.anims.create({
     key: "smoke",
     frames: game.anims.generateFrameNames("smoke", {
       start: 0,
@@ -1672,6 +1672,18 @@ export function createStatusAnimations(game: Phaser.Scene) {
     }),
     frameRate: 3,
     repeat: -1
+  })*/
+
+  game.anims.create({
+    key: "paralysis",
+    frames: game.anims.generateFrameNames("paralysis", {
+      start: 0,
+      end: 4,
+      zeroPad: 3
+    }),
+    frameRate: 8,
+    repeat: -1,
+    repeatDelay: 500
   })
 
   game.anims.create({

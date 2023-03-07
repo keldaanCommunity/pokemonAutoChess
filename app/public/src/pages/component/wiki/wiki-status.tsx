@@ -27,7 +27,7 @@ export const PARAMS_ANIM_BY_STATUS: {
     scale: 2,
     offset: [0, -45]
   },
-  [Status.SMOKE]: { animationKey: "smoke", scale: 2, offset: [0, -40] },
+  [Status.PARALYSIS]: { animationKey: "paralysis", scale: 2, offset: [0, -20] },
   [Status.ARMOR_REDUCTION]: {
     animationKey: "armorReduction",
     scale: 2,

@@ -77,7 +77,7 @@ export default class Pokemon extends DraggableObject {
   silence: GameObjects.Sprite | undefined
   freeze: GameObjects.Sprite | undefined
   confusion: GameObjects.Sprite | undefined
-  smoke: GameObjects.Sprite | undefined
+  paralysis: GameObjects.Sprite | undefined
   armorReduction: GameObjects.Sprite | undefined
   poison: GameObjects.Sprite | undefined
   protect: GameObjects.Sprite | undefined
@@ -2783,20 +2783,20 @@ export default class Pokemon extends DraggableObject {
     }
   }
 
-  addSmoke() {
-    if (!this.smoke) {
-      this.smoke = new GameObjects.Sprite(this.scene, 0, -40, "smoke", "000")
-      this.smoke.setScale(2, 2)
-      this.scene.add.existing(this.smoke)
-      this.smoke.anims.play("smoke")
-      this.add(this.smoke)
+  addParalysis() {
+    if (!this.paralysis) {
+      this.paralysis = new GameObjects.Sprite(this.scene, 0, -30, "paralysis", "000")
+      this.paralysis.setScale(2, 2)
+      this.scene.add.existing(this.paralysis)
+      this.paralysis.anims.play("paralysis")
+      this.add(this.paralysis)
     }
   }
 
-  removeSmoke() {
-    if (this.smoke) {
-      this.remove(this.smoke, true)
-      this.smoke = undefined
+  removeParalysis() {
+    if (this.paralysis) {
+      this.remove(this.paralysis, true)
+      this.paralysis = undefined
     }
   }
 

@@ -9,7 +9,7 @@ import {
 import { cc } from "./jsx"
 
 export const iconRegExp =
-  /(?<=\W|^)(?:PHYSICAL|SPECIAL|TRUE|atk|speed|critChance|critDamage|def|hp|mana|range|shield|speDef|spellDamage|BURN|SILENCE|POISON|FREEZE|PROTECT|SLEEP|CONFUSION|WOUND|RESURECTION|SMOKE|ARMOR_REDUCTION|GRASS_FIELD|FAIRY_FIELD|RUNE_PROTECT|ELECTRIC_FIELD|PSYCHIC_FIELD|\[[^\]]+\])(?=\W|$)/g
+  /(?<=\W|^)(?:PHYSICAL|SPECIAL|TRUE|atk|speed|critChance|critDamage|def|hp|mana|range|shield|speDef|spellDamage|BURN|SILENCE|POISON|FREEZE|PROTECT|SLEEP|CONFUSION|WOUND|RESURECTION|PARALYSIS|ARMOR_REDUCTION|GRASS_FIELD|FAIRY_FIELD|RUNE_PROTECT|ELECTRIC_FIELD|PSYCHIC_FIELD|\[[^\]]+\])(?=\W|$)/g
 
 export function addIconsToDescription(description: string, stars: number = 0) {
   const matchIcon = description.match(iconRegExp)
