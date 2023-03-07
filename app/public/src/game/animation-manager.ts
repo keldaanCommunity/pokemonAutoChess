@@ -1107,17 +1107,6 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
-      key: Ability.AURORA_BEAM,
-      frames: this.game.anims.generateFrameNames(Ability.AURORA_BEAM, {
-        start: 0,
-        end: 6,
-        zeroPad: 3
-      }),
-      duration: 1000,
-      repeat: 3
-    })
-
-    this.game.anims.create({
       key: "MIND_BLOWN_SELF",
       frames: this.game.anims.generateFrameNames("MIND_BLOWN_SELF", {
         start: 0,
@@ -1674,7 +1663,7 @@ export function createStatusAnimations(game: Phaser.Scene) {
     repeat: -1
   })
 
-  /*game.anims.create({
+  game.anims.create({
     key: "smoke",
     frames: game.anims.generateFrameNames("smoke", {
       start: 0,
@@ -1683,18 +1672,6 @@ export function createStatusAnimations(game: Phaser.Scene) {
     }),
     frameRate: 3,
     repeat: -1
-  })*/
-
-  game.anims.create({
-    key: "paralysis",
-    frames: game.anims.generateFrameNames("paralysis", {
-      start: 0,
-      end: 4,
-      zeroPad: 3
-    }),
-    frameRate: 8,
-    repeat: -1,
-    repeatDelay: 500
   })
 
   game.anims.create({

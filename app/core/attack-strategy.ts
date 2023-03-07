@@ -827,11 +827,11 @@ export class RazorWindStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target)
     const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    target.status.triggerParalysis(7000, target)
+    target.status.triggerSmoke(7000, target)
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerParalysis(7000, cell.value)
+        cell.value.status.triggerSmoke(7000, cell.value)
       }
     })
   }
@@ -1040,37 +1040,6 @@ export class BonemerangStrategy extends AttackStrategy {
         break
       case 3:
         damage = 160
-        break
-      default:
-        break
-    }
-
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team && x == target.positionX) {
-        tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-      }
-    })
-  }
-}
-
-export class AuroraBeamStrategy extends AttackStrategy {
-  process(
-    pokemon: PokemonEntity,
-    state: PokemonState,
-    board: Board,
-    target: PokemonEntity
-  ) {
-    super.process(pokemon, state, board, target)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 120
         break
       default:
         break
@@ -2511,7 +2480,7 @@ export class DischargeStrategy extends AttackStrategy {
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-        cell.value.status.triggerParalysis(5000, cell.value)
+        cell.value.status.triggerSmoke(5000, cell.value)
       }
     })
   }

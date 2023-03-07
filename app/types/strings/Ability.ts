@@ -705,12 +705,6 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
-  },
-  [Ability.AURORA_BEAM]: {
-    eng: "Aurora Beam",
-    esp: "",
-    prt: "",
-    fra: ""
   }
 }
 
@@ -1016,7 +1010,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISCHARGE]: {
-    eng: `Shock nearby enemies for [25/50/100] ${Damage.SPECIAL}, and give ${Status.PARALYSIS} for 5 seconds`,
+    eng: `Shock nearby enemies for [25/50/100] ${Damage.SPECIAL}, and give ${Status.SMOKE} for 5 seconds`,
     esp: `Ataque en el área de efecto que causa 40,60,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 40,60,80 dégats spéciaux.`,
     prt: ``
@@ -1244,7 +1238,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   RAZOR_WIND: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} to the target and apply ${Status.PARALYSIS} around it`,
+    eng: `Deals [20,40,80] ${Damage.SPECIAL} to the target and apply ${Status.SMOKE} around it`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1413,12 +1407,6 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.SMOG]: {
     eng: `Buff ${Stat.DEF} by [1,2,4] and poison adjacent enemies for 3s`,
-    esp: "",
-    prt: "",
-    fra: ""
-  },
-  [Ability.AURORA_BEAM]: {
-    eng: `Fires a beam in a line with target all Pokémon hit take [30,60,120] ${Damage.SPECIAL} and can be ${Status.FREEZE} (chance based on current ice synergy)`,
     esp: "",
     prt: "",
     fra: ""

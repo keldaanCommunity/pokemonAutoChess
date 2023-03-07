@@ -384,11 +384,6 @@ export default class GameScene extends Scene {
     )
     this.load.multiatlas("SMOG", "/assets/attacks/SMOG.json", "/assets/attacks")
     this.load.multiatlas(
-      "AURORA_BEAM",
-      "/assets/attacks/AURORA_BEAM.json",
-      "/assets/attacks"
-    )
-    this.load.multiatlas(
       "SKY_ATTACK",
       "/assets/attacks/SKY_ATTACK.json",
       "/assets/attacks"
@@ -810,7 +805,7 @@ export function loadStatusMultiAtlas(scene: Scene) {
     "/assets/status/resurection.json",
     "/assets/status"
   )
-  scene.load.multiatlas("paralysis", "/assets/status/PARALYSIS.json", "/assets/status")
+  scene.load.multiatlas("smoke", "/assets/status/SMOKE.json", "/assets/status")
   scene.load.multiatlas(
     "rune_protect",
     "/assets/status/RUNE_PROTECT.json",
