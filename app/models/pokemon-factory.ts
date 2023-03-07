@@ -518,7 +518,14 @@ import {
   AlolanMuk,
   AlolanGrimer,
   Rowlet,
-  Sharpedo
+  Sharpedo,
+  Seel,
+  Dewgong,
+  AlolanGeodude,
+  AlolanGraveler,
+  AlolanGolem,
+  Forretress,
+  Pineco
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1780,6 +1787,20 @@ export default class PokemonFactory {
         return new AlolanMuk(s, e)
       case Pkm.SHARPEDO:
         return new Sharpedo(s, e)
+      case Pkm.PINECO:
+        return new Pineco(s, e)
+      case Pkm.FORRETRESS:
+        return new Forretress(s, e)
+      case Pkm.SEEL:
+        return new Seel(s, e)
+      case Pkm.DEWGONG:
+        return new Dewgong(s, e)
+      case Pkm.ALOLAN_GEODUDE:
+        return new AlolanGeodude(s, e)
+      case Pkm.ALOLAN_GRAVELER:
+        return new AlolanGraveler(s, e)
+      case Pkm.ALOLAN_GOLEM:
+        return new AlolanGolem(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

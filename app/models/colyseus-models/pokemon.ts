@@ -10323,6 +10323,57 @@ export class Weavile extends Pokemon {
     )
   }
 }
+
+export class Seel extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SEEL,
+      [Synergy.ICE, Synergy.AQUATIC],
+      Rarity.EPIC,
+      Pkm.DEWGONG,
+      60,
+      9,
+      1,
+      3,
+      1,
+      AttackSprite.ICE_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      70,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Dewgong extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DEWGONG,
+      [Synergy.ICE, Synergy.AQUATIC],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      130,
+      18,
+      2,
+      3,
+      1,
+      AttackSprite.ICE_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      70,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Croagunk extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -11186,6 +11237,78 @@ export class Cinderace extends Pokemon {
   }
 }
 
+export class AlolanGeodude extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ALOLAN_GEODUDE,
+      [Synergy.ELECTRIC, Synergy.MINERAL],
+      Rarity.HATCH,
+      Pkm.ALOLAN_GRAVELER,
+      90,
+      8,
+      4,
+      4,
+      1,
+      AttackSprite.ROCK_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      70,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class AlolanGraveler extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ALOLAN_GRAVELER,
+      [Synergy.ELECTRIC, Synergy.MINERAL],
+      Rarity.HATCH,
+      Pkm.ALOLAN_GOLEM,
+      130,
+      9,
+      6,
+      6,
+      1,
+      AttackSprite.ROCK_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      70,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class AlolanGolem extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ALOLAN_GOLEM,
+      [Synergy.ELECTRIC, Synergy.MINERAL],
+      Rarity.HATCH,
+      Pkm.DEFAULT,
+      200,
+      18,
+      8,
+      8,
+      1,
+      AttackSprite.ROCK_MELEE,
+      AttackType.PHYSICAL,
+      3,
+      70,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Popplio extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -11371,6 +11494,54 @@ export class Sandslash extends Pokemon {
       1,
       80,
       Ability.SPIKE_ARMOR,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Pineco extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PINECO,
+      [Synergy.BUG, Synergy.METAL],
+      Rarity.HATCH,
+      Pkm.FORRETRESS,
+      80,
+      5,
+      5,
+      3,
+      1,
+      AttackSprite.BUG_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      80,
+      Ability.EXPLOSION,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Forretress extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.FORRETRESS,
+      [Synergy.BUG, Synergy.METAL],
+      Rarity.HATCH,
+      Pkm.DEFAULT,
+      150,
+      9,
+      10,
+      5,
+      1,
+      AttackSprite.BUG_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      80,
+      Ability.EXPLOSION,
       shiny,
       emotion,
       true
