@@ -76,7 +76,7 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.ELECTRIC]: [2, 4, 6],
   [Synergy.FIGHTING]: [2, 4, 6],
   [Synergy.PSYCHIC]: [2, 4, 6],
-  [Synergy.DARK]: [2, 4, 6],
+  [Synergy.DARK]: [3, 6, 9],
   [Synergy.METAL]: [2, 4],
   [Synergy.GROUND]: [2, 4, 6],
   [Synergy.POISON]: [3, 6],
