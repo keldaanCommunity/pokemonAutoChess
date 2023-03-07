@@ -518,7 +518,14 @@ export enum Pkm {
   ALOLAN_GRIMER = "alolan-grimer",
   ALOLAN_MUK = "alolan_muk",
   CARVANHA = "carvanha",
-  SHARPEDO = "sharpedo"
+  SHARPEDO = "sharpedo",
+  PINECO = "pineco",
+  FORRETRESS = "forretress",
+  SEEL = "seel",
+  DEWGONG = "dewgong",
+  ALOLAN_GEODUDE = "alolan-geodude",
+  ALOLAN_GRAVELER = "alolan-graveler",
+  ALOLAN_GOLEM = "alolan-golem"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1041,7 +1048,14 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HISUI_ZORUA]: "0570-0002",
   [Pkm.HISUI_ZOROARK]: "0571-0001",
   [Pkm.ALOLAN_GRIMER]: "0088-0001",
-  [Pkm.ALOLAN_MUK]: "0089-0001"
+  [Pkm.ALOLAN_MUK]: "0089-0001",
+  [Pkm.PINECO]: "0204",
+  [Pkm.FORRETRESS]: "0205",
+  [Pkm.SEEL]: "0086",
+  [Pkm.DEWGONG]: "0087",
+  [Pkm.ALOLAN_GEODUDE]: "0074-0001",
+  [Pkm.ALOLAN_GRAVELER]: "0075-0001",
+  [Pkm.ALOLAN_GOLEM]: "0076-0001"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1564,5 +1578,12 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.HISUI_ZORUA]: Pkm.HISUI_ZORUA,
   [Pkm.HISUI_ZOROARK]: Pkm.HISUI_ZORUA,
   [Pkm.ALOLAN_GRIMER]: Pkm.ALOLAN_GRIMER,
-  [Pkm.ALOLAN_MUK]: Pkm.ALOLAN_GRIMER
+  [Pkm.ALOLAN_MUK]: Pkm.ALOLAN_GRIMER,
+  [Pkm.PINECO]: Pkm.PINECO,
+  [Pkm.FORRETRESS]: Pkm.PINECO,
+  [Pkm.SEEL]: Pkm.SEEL,
+  [Pkm.DEWGONG]: Pkm.SEEL,
+  [Pkm.ALOLAN_GEODUDE]: Pkm.ALOLAN_GEODUDE,
+  [Pkm.ALOLAN_GRAVELER]: Pkm.ALOLAN_GEODUDE,
+  [Pkm.ALOLAN_GOLEM]: Pkm.ALOLAN_GEODUDE
 }
