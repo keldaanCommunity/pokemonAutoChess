@@ -129,9 +129,9 @@ export default class WikiFaq extends Component {
           What are the special damages and physical damages ?
         </h4>
         <p>
-          Auto attacks are mainly be Physical attack type, whild Spells are
-          mainly Special attack type. Some spells/abilities can however be true
-          damage or physical.
+          Auto attacks are mostly Physical attack type, while Spells are
+          mostly Special attack type. Some spells/abilities however can 
+          deal true damage or physical damage.
         </p>
         <h4 className="nes-text is-success">
           Can you also tell me how defense works? Is it flat damage reduction?

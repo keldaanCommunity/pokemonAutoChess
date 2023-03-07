@@ -169,7 +169,7 @@ export const StatusDescription: { [key in Status]: Langage } = {
       prt: ""
     },
     [Status.RUNE_PROTECT]: {
-      eng: `Protects from any source of ${Damage.SPECIAL}.`,
+      eng: `Protects from ${Damage.SPECIAL} and status alterations.`,
       esp: "",
       fra: "",
       prt: ""
