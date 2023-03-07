@@ -102,7 +102,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     `Holder and adjacent allies in the same row gain 3 bonus ${Stat.MANA} per hit`,
   [Item.MANA_SCARF]: `The holder attacks restore 8 additional ${Stat.MANA}`,
   [Item.SMOKE_BALL]:
-    `Reduce the ${Stat.ATK_SPEED} of enemy attackers by 40% for 5 seconds`,
+    `Trigger ${Status.PARALYSIS} on enemy attackers, reducing their ${Stat.ATK_SPEED} by 40% for 5 seconds`,
   [Item.XRAY_VISION]:
     `+50% ${Stat.ATK_SPEED}. The holder attacks can no longer miss.`,
   [Item.RAZOR_FANG]: `+100% ${Stat.CRIT_DAMAGE}`,
