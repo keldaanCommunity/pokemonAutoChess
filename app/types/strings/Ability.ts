@@ -1190,7 +1190,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   ELECTRO_BOOST: {
-    eng: `All electric allies receive ${Status.RUNE_PROTECT} and are immune to spells for 5s`,
+    eng: `All electric allies receive ${Status.RUNE_PROTECT} and are immune to special damage and status alterations for 5s`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1292,7 +1292,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.AURORA_VEIL]: {
-    eng: `All allies receive ${Status.RUNE_PROTECT} and are immune to spells for [1.5,2.5,3.5] seconds`,
+    eng: `All allies receive ${Status.RUNE_PROTECT} and are immune to special damage and status alterations for [1.5,2.5,3.5] seconds`,
     esp: ``,
     prt: ``,
     fra: ``

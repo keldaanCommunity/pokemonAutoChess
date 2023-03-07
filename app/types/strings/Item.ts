@@ -116,10 +116,10 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.WONDER_BOX]:
     "At the beginning of each battle, wonder box is replaced by 2 temporary items (max 3 items held)",
   [Item.RUNE_PROTECT]:
-    "When combat begins, the holder and all adjacent allies are immune to spells for the first 6 seconds",
+    `When combat begins, the holder and all adjacent allies receive ${Status.RUNE_PROTECT} for 6 seconds, making them immune to ${Damage.SPECIAL} and status alterations`,
   [Item.WIDE_LENS]: `The holder gains +2 ${Stat.RANGE}`,
   [Item.RAZOR_CLAW]: `The holder gains +55% ${Stat.CRIT_CHANCE}`,
-  [Item.FLUFFY_TAIL]: `Holder is immune to all status`,
+  [Item.FLUFFY_TAIL]: `Holder is immune to all status alterations`,
   [Item.ORAN_BERRY]: `+130 ${Stat.SHIELD} when combat begins`,
   [Item.SHINY_CHARM]:
     `Upon attack, 25% chance to trigger ${Status.PROTECT} for 1 second`,
