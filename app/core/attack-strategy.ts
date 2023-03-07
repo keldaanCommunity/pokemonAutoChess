@@ -2431,6 +2431,26 @@ export class ChargeStrategy extends AttackStrategy {
   }
 }
 
+export class SmogStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const buff = pokemon.stars === 3 ? 6 : pokemon.stars === 2 ? 4 : 2
+    pokemon.addDefense(buff, true)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.status.triggerPoison(3000, cell.value, pokemon, board)
+      }
+    })
+  }
+}
+
 export class DischargeStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -2443,13 +2463,13 @@ export class DischargeStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        damage = 40
+        damage = 25
         break
       case 2:
-        damage = 80
+        damage = 50
         break
       case 3:
-        damage = 160
+        damage = 100
         break
       default:
         break
@@ -2460,6 +2480,7 @@ export class DischargeStrategy extends AttackStrategy {
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.status.triggerSmoke(5000, cell.value)
       }
     })
   }

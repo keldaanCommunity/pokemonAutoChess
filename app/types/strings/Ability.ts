@@ -699,6 +699,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.SMOG]: {
+    eng: "Smog",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1004,7 +1010,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISCHARGE]: {
-    eng: `Area of effect attack that deals [40,80,160] ${Damage.SPECIAL}`,
+    eng: `Shock nearby enemies for [25/50/100] ${Damage.SPECIAL}, and give ${Status.SMOKE} for 5 seconds`,
     esp: `Ataque en el área de efecto que causa 40,60,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 40,60,80 dégats spéciaux.`,
     prt: ``
@@ -1395,6 +1401,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.ILLUSION]: {
     eng: `User recovers [40,80,120] ${Stat.HP} points and copies the form as well as the ${Stat.ATK}, ${Stat.DEF}, ${Stat.SPE_DEF}, and ${Stat.RANGE} of the targeted Pokemon`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SMOG]: {
+    eng: `Buff ${Stat.DEF} by [1,2,4] and poison adjacent enemies for 3s`,
     esp: "",
     prt: "",
     fra: ""

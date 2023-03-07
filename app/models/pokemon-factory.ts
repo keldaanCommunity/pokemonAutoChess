@@ -544,7 +544,7 @@ export const ObtainableEgg = new Array<Pkm>(
   Pkm.SNIVY,
   Pkm.SCORBUNNY,
   Pkm.POPPLIO,
-  Pkm.SANDSHREW
+  Pkm.ALOLAN_GEODUDE
 )
 
 export default class PokemonFactory {

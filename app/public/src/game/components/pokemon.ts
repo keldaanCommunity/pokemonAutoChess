@@ -1477,6 +1477,28 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
+          case Ability.SMOG:
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SMOG,
+              `000`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(3, 3)
+            specialProjectile.anims.play(Ability.SMOG)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.BITE:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
