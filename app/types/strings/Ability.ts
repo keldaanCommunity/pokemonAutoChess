@@ -1010,7 +1010,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISCHARGE]: {
-    eng: `Shock nearby enemies for [25/50/100] ${Damage.SPECIAL}, and give ${Status.SMOKE} for 5 seconds`,
+    eng: `Shock nearby enemies for [25/50/100] ${Damage.SPECIAL}, and give ${Status.PARALYSIS} for 5 seconds`,
     esp: `Ataque en el área de efecto que causa 40,60,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 40,60,80 dégats spéciaux.`,
     prt: ``
@@ -1238,7 +1238,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   RAZOR_WIND: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} to the target and apply ${Status.SMOKE} around it`,
+    eng: `Deals [20,40,80] ${Damage.SPECIAL} to the target and apply ${Status.PARALYSIS} around it`,
     esp: ``,
     prt: ``,
     fra: ``
