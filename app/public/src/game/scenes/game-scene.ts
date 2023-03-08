@@ -384,6 +384,11 @@ export default class GameScene extends Scene {
     )
     this.load.multiatlas("SMOG", "/assets/attacks/SMOG.json", "/assets/attacks")
     this.load.multiatlas(
+      "AURORA_BEAM",
+      "/assets/attacks/AURORA_BEAM.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
       "SKY_ATTACK",
       "/assets/attacks/SKY_ATTACK.json",
       "/assets/attacks"

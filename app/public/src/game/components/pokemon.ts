@@ -2399,6 +2399,31 @@ export default class Pokemon extends DraggableObject {
             })
             break
 
+          case Ability.AURORA_BEAM:
+            coordinatesTarget = transformAttackCoordinate(this.targetX, 0)
+            coordinates = transformAttackCoordinate(this.targetX, 7)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.AURORA_BEAM,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.AURORA_BEAM)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "Power2",
+              yoyo: false,
+              duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.SONG_OF_DESIRE:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(

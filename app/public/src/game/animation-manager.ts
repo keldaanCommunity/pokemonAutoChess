@@ -1107,6 +1107,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.AURORA_BEAM,
+      frames: this.game.anims.generateFrameNames(Ability.AURORA_BEAM, {
+        start: 0,
+        end: 6,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 3
+    })
+
+    this.game.anims.create({
       key: "MIND_BLOWN_SELF",
       frames: this.game.anims.generateFrameNames("MIND_BLOWN_SELF", {
         start: 0,

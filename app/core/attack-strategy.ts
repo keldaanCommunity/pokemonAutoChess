@@ -1053,6 +1053,37 @@ export class BonemerangStrategy extends AttackStrategy {
   }
 }
 
+export class AuroraBeamStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 0
+    switch (pokemon.stars) {
+      case 1:
+        damage = 30
+        break
+      case 2:
+        damage = 60
+        break
+      case 3:
+        damage = 120
+        break
+      default:
+        break
+    }
+
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team && x == target.positionX) {
+        tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+      }
+    })
+  }
+}
+
 export class GrowlStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
