@@ -415,7 +415,7 @@ export interface IStatus {
   confusion: boolean
   wound: boolean
   resurection: boolean
-  smoke: boolean
+  paralysis: boolean
   armorReduction: boolean
   runeProtect: boolean
   electricField: boolean

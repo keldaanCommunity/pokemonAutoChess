@@ -20,8 +20,8 @@ export default function TestAnim({
     atlasKey?: string,
     animationKey?: string,
     offset?: [number, number]
-    scale: number,
-    depth: number
+    scale?: number,
+    depth?: number
 }) {
     let PKM_INDEX;
     switch(animationKey){

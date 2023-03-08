@@ -57,10 +57,10 @@ export const StatusLabel: { [key in Status]: Langage } = {
     fra: "Résurrection",
     prt: ""
   },
-  [Status.SMOKE]: {
-    eng: "Smoke",
+  [Status.PARALYSIS]: {
+    eng: "Paralysis",
     esp: "",
-    fra: "Enfumé",
+    fra: "Paralysie",
     prt: ""
   },
   [Status.ARMOR_REDUCTION]: {
@@ -156,7 +156,7 @@ export const StatusDescription: { [key in Status]: Langage } = {
       fra: "",
       prt: ""
     },
-    [Status.SMOKE]: {
+    [Status.PARALYSIS]: {
       eng: `Reduce ${Stat.ATK_SPEED} by 40%`,
       esp: "",
       fra: "",

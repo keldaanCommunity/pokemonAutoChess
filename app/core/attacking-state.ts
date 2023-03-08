@@ -305,7 +305,7 @@ export default class AttackingState extends PokemonState {
         }
       }
       if (target && target.items.has(Item.SMOKE_BALL)) {
-        pokemon.status.triggerSmoke(5000, pokemon)
+        pokemon.status.triggerParalysis(5000, pokemon)
       }
 
       if (pokemon.items.has(Item.CHOICE_SCARF)) {

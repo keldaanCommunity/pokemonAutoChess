@@ -827,11 +827,11 @@ export class RazorWindStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target)
     const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
     target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    target.status.triggerSmoke(7000, target)
+    target.status.triggerParalysis(7000, target)
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerSmoke(7000, cell.value)
+        cell.value.status.triggerParalysis(7000, cell.value)
       }
     })
   }
@@ -2480,7 +2480,7 @@ export class DischargeStrategy extends AttackStrategy {
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-        cell.value.status.triggerSmoke(5000, cell.value)
+        cell.value.status.triggerParalysis(5000, cell.value)
       }
     })
   }

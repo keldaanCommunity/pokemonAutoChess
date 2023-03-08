@@ -17,7 +17,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") confusion = false
   @type("boolean") wound = false
   @type("boolean") resurection = false
-  @type("boolean") smoke = false
+  @type("boolean") paralysis = false
   @type("boolean") armorReduction = false
   @type("boolean") runeProtect = false
   @type("boolean") electricField = false
@@ -42,7 +42,7 @@ export default class Status extends Schema implements IStatus {
   woundCooldown = 0
   soulDewCooldown = 0
   brightPowderCooldown = 0
-  smokeCooldown = 0
+  paralysisCooldown = 0
   armorReductionCooldown = 0
   runeProtectCooldown = 0
   grassCooldown = 1000
@@ -56,7 +56,7 @@ export default class Status extends Schema implements IStatus {
     this.sleepCooldown = 0
     this.confusionCooldown = 0
     this.woundCooldown = 0
-    this.smokeCooldown = 0
+    this.paralysisCooldown = 0
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
@@ -112,8 +112,8 @@ export default class Status extends Schema implements IStatus {
       this.updateBrightPowder(dt, pokemon, board)
     }
 
-    if (this.smoke) {
-      this.updateSmoke(dt, pokemon)
+    if (this.paralysis) {
+      this.updateParalysis(dt, pokemon)
     }
 
     if (this.armorReduction) {
@@ -408,20 +408,20 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerSmoke(timer: number, pkm: PokemonEntity) {
-    if (!this.smoke && !pkm.items.has(Item.FLUFFY_TAIL) && !this.runeProtect) {
-      this.smoke = true
+  triggerParalysis(timer: number, pkm: PokemonEntity) {
+    if (!this.paralysis && !pkm.items.has(Item.FLUFFY_TAIL) && !this.runeProtect) {
+      this.paralysis = true
       pkm.handleAttackSpeed(-40)
-      this.smokeCooldown = timer
+      this.paralysisCooldown = timer
     }
   }
 
-  updateSmoke(dt: number, pkm: PokemonEntity) {
-    if (this.smokeCooldown - dt <= 0) {
-      this.smoke = false
+  updateParalysis(dt: number, pkm: PokemonEntity) {
+    if (this.paralysisCooldown - dt <= 0) {
+      this.paralysis = false
       pkm.handleAttackSpeed(40)
     } else {
-      this.smokeCooldown = this.smokeCooldown - dt
+      this.paralysisCooldown = this.paralysisCooldown - dt
     }
   }
 
