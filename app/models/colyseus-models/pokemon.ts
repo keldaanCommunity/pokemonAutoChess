@@ -10074,6 +10074,56 @@ export class Jynx extends Pokemon {
   }
 }
 
+export class MimeJr extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MIME_JR,
+      [Synergy.FAIRY, Synergy.PSYCHIC, Synergy.BABY],
+      Rarity.RARE,
+      Pkm.MR_MIME,
+      70,
+      6,
+      2,
+      2,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      90,
+      Ability.AURORA_VEIL,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class MrMime extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MR_MIME,
+      [Synergy.FAIRY, Synergy.PSYCHIC],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      120,
+      11,
+      3,
+      3,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      2,
+      90,
+      Ability.AURORA_VEIL,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Salandit extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -12538,6 +12588,56 @@ export class AlolanMuk extends Pokemon {
       2,
       100,
       Ability.SMOG,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Ekans extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.EKANS,
+      [Synergy.POISON, Synergy.DARK],
+      Rarity.UNCOMMON,
+      Pkm.ARBOK,
+      60,
+      6,
+      2,
+      2,
+      1,
+      AttackSprite.POISON_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      90,
+      Ability.POISON_STING,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Arbok extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ARBOK,
+      [Synergy.POISON, Synergy.DARK],
+      Rarity.UNCOMMON,
+      Pkm.DEFAULT,
+      120,
+      11,
+      4,
+      4,
+      1,
+      AttackSprite.POISON_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      90,
+      Ability.POISON_STING,
       shiny,
       emotion,
       true,

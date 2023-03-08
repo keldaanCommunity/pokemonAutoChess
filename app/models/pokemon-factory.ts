@@ -525,7 +525,11 @@ import {
   AlolanGraveler,
   AlolanGolem,
   Forretress,
-  Pineco
+  Pineco,
+  Arbok,
+  MimeJr,
+  MrMime,
+  Ekans
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1801,6 +1805,14 @@ export default class PokemonFactory {
         return new AlolanGraveler(s, e)
       case Pkm.ALOLAN_GOLEM:
         return new AlolanGolem(s, e)
+      case Pkm.EKANS:
+        return new Ekans(s, e)
+      case Pkm.ARBOK:
+        return new Arbok(s, e)
+      case Pkm.MIME_JR:
+        return new MimeJr(s, e)
+      case Pkm.MR_MIME:
+        return new MrMime(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

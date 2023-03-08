@@ -525,7 +525,11 @@ export enum Pkm {
   DEWGONG = "dewgong",
   ALOLAN_GEODUDE = "alolan-geodude",
   ALOLAN_GRAVELER = "alolan-graveler",
-  ALOLAN_GOLEM = "alolan-golem"
+  ALOLAN_GOLEM = "alolan-golem",
+  EKANS = "ekans",
+  ARBOK = "arbok",
+  MIME_JR = "mime-jr",
+  MR_MIME = "mr-mime"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1055,7 +1059,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.DEWGONG]: "0087",
   [Pkm.ALOLAN_GEODUDE]: "0074-0001",
   [Pkm.ALOLAN_GRAVELER]: "0075-0001",
-  [Pkm.ALOLAN_GOLEM]: "0076-0001"
+  [Pkm.ALOLAN_GOLEM]: "0076-0001",
+  [Pkm.EKANS]: "0023",
+  [Pkm.ARBOK]: "0024",
+  [Pkm.MIME_JR]: "0439",
+  [Pkm.MR_MIME]: "0122"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1585,5 +1593,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DEWGONG]: Pkm.SEEL,
   [Pkm.ALOLAN_GEODUDE]: Pkm.ALOLAN_GEODUDE,
   [Pkm.ALOLAN_GRAVELER]: Pkm.ALOLAN_GEODUDE,
-  [Pkm.ALOLAN_GOLEM]: Pkm.ALOLAN_GEODUDE
+  [Pkm.ALOLAN_GOLEM]: Pkm.ALOLAN_GEODUDE,
+  [Pkm.EKANS]: Pkm.EKANS,
+  [Pkm.ARBOK]: Pkm.EKANS,
+  [Pkm.MIME_JR]: Pkm.MIME_JR,
+  [Pkm.MR_MIME]: Pkm.MIME_JR
 }
