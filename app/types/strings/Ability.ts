@@ -705,6 +705,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.AURORA_BEAM]: {
+    eng: "Aurora Beam",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1407,6 +1413,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.SMOG]: {
     eng: `Buff ${Stat.DEF} by [1,2,4] and poison adjacent enemies for 3s`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.AURORA_BEAM]: {
+    eng: `Fires a beam in a line with target all Pokémon hit take [30,60,120] ${Damage.SPECIAL} and can be ${Status.FREEZE} (chance based on current ice synergy)`,
     esp: "",
     prt: "",
     fra: ""
