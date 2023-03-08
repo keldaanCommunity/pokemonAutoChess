@@ -10074,6 +10074,56 @@ export class Jynx extends Pokemon {
   }
 }
 
+export class MimeJr extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MIME_JR,
+      [Synergy.FAIRY, Synergy.PSYCHIC, Synergy.BABY],
+      Rarity.COMMON,
+      Pkm.MR_MIME,
+      60,
+      5,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      90,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class MrMime extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MR_MIME,
+      [Synergy.FAIRY, Synergy.PSYCHIC],
+      Rarity.COMMON,
+      Pkm.DEFAULT,
+      110,
+      10,
+      2,
+      2,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      2,
+      90,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Salandit extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -12521,6 +12571,56 @@ export class AlolanMuk extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ALOLAN_MUK,
+      [Synergy.POISON, Synergy.DARK],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      120,
+      11,
+      4,
+      4,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Ekans extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.EKANS,
+      [Synergy.POISON, Synergy.DARK],
+      Rarity.RARE,
+      Pkm.ARBOK,
+      60,
+      6,
+      2,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      140,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Arbok extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ARBOK,
       [Synergy.POISON, Synergy.DARK],
       Rarity.RARE,
       Pkm.DEFAULT,
