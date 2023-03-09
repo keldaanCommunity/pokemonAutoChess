@@ -2798,7 +2798,7 @@ export class TormentStrategy extends AttackStrategy {
       default:
         break
     }
-    pokemon.handleAttackSpeed(boost)
+    pokemon.handleAttackSpeed(boost, true)
   }
 }
 
@@ -3339,5 +3339,30 @@ export class SkyAttackStrategy extends AttackStrategy {
       pokemon.positionY = farthestCoordinate.y
       pokemon.status.triggerProtect(1000)
     }
+  }
+}
+
+export class AgilityStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let boost = 0
+
+    switch (pokemon.stars) {
+      case 1:
+        boost = 5
+        break
+      case 2:
+        boost = 10
+        break
+      case 3:
+        boost = 15
+        break
+    }
+    pokemon.handleAttackSpeed(boost, true)
   }
 }

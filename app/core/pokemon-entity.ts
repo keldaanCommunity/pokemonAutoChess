@@ -144,8 +144,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return 1000 / this.atkSpeed
   }
 
-  handleAttackSpeed(buff: number) {
-    this.atkSpeedBonus = this.atkSpeedBonus + buff
+  handleAttackSpeed(buff: number, spellPowerBoost: boolean = false) {
+    const boost = spellPowerBoost ? (buff * this.spellDamage) / 100 : 0
+    this.atkSpeedBonus = this.atkSpeedBonus + buff + boost
     this.atkSpeed = Number(
       Math.min(
         2.5,
@@ -212,16 +213,16 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  handleHeal(heal: number, caster: IPokemonEntity, spellDamageBoost: boolean) {
-    return this.state.handleHeal(this, heal, caster, spellDamageBoost)
+  handleHeal(heal: number, caster: IPokemonEntity, spellPowerBoost: boolean) {
+    return this.state.handleHeal(this, heal, caster, spellPowerBoost)
   }
 
   handleShield(
     shield: number,
     caster: IPokemonEntity,
-    spellDamageBoost?: boolean
+    spellPowerBoost?: boolean
   ) {
-    return this.state.handleShield(this, shield, caster, spellDamageBoost)
+    return this.state.handleShield(this, shield, caster, spellPowerBoost)
   }
 
   changeState(state: PokemonState) {
@@ -267,23 +268,23 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.spellDamage = Math.round(this.spellDamage + value)
   }
 
-  addDefense(value: number, spellDamageBoost?: boolean) {
-    const boost = spellDamageBoost ? (value * this.spellDamage) / 100 : 0
+  addDefense(value: number, spellPowerBoost?: boolean) {
+    const boost = spellPowerBoost ? (value * this.spellDamage) / 100 : 0
     this.def = Math.max(0, this.def + Math.round(value + boost))
   }
 
-  addSpecialDefense(value: number, spellDamageBoost?: boolean) {
-    const boost = spellDamageBoost ? (value * this.spellDamage) / 100 : 0
+  addSpecialDefense(value: number, spellPowerBoost?: boolean) {
+    const boost = spellPowerBoost ? (value * this.spellDamage) / 100 : 0
     this.speDef = Math.max(0, this.speDef + Math.round(value + boost))
   }
 
-  addAttack(value: number, spellDamageBoost?: boolean) {
-    const boost = spellDamageBoost ? (value * this.spellDamage) / 100 : 0
+  addAttack(value: number, spellPowerBoost?: boolean) {
+    const boost = spellPowerBoost ? (value * this.spellDamage) / 100 : 0
     this.atk = Math.max(0, this.atk + Math.round(value + boost))
   }
 
-  addCritDamage(value: number, spellDamageBoost?: boolean) {
-    const boost = spellDamageBoost ? (value * this.spellDamage) / 100 : 0
+  addCritDamage(value: number, spellPowerBoost?: boolean) {
+    const boost = spellPowerBoost ? (value * this.spellDamage) / 100 : 0
     this.critDamage = Math.max(
       0,
       this.roundTo2Digits(this.critDamage + value + boost)
