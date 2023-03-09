@@ -711,7 +711,13 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.AGILITY]: {
+    eng: "Agility",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1419,6 +1425,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.AURORA_BEAM]: {
     eng: `Fires a beam in a line with target all Pokémon hit take [30,60,120] ${Damage.SPECIAL} and can be ${Status.FREEZE} (chance based on current ice synergy)`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.AGILITY]: {
+    eng: `Increase ${Stat.ATK_SPEED} by [5,10,15] % (stacks)`,
     esp: "",
     prt: "",
     fra: ""
