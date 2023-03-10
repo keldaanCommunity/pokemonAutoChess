@@ -51,12 +51,14 @@ import { FilterQuery } from "mongoose"
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
   eloEngine: EloRank
-  additionalPokemonsPool: Array<Pkm>
+  additionalPokemonsPool1: Array<Pkm>
+  additionalPokemonsPool2: Array<Pkm>
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
     this.eloEngine = new EloRank()
-    this.additionalPokemonsPool = new Array<Pkm>()
+    this.additionalPokemonsPool1 = new Array<Pkm>()
+    this.additionalPokemonsPool2 = new Array<Pkm>()
   }
 
   // When room is initialized
@@ -78,12 +80,17 @@ export default class GameRoom extends Room<GameState> {
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
         const pokemon = PokemonFactory.createPokemonFromName(p)
-        if (!this.additionalPokemonsPool.includes(p) && pokemon.stars === 1) {
-          this.additionalPokemonsPool.push(p)
+        if (!this.additionalPokemonsPool1.includes(p) && !this.additionalPokemonsPool2.includes(p) && pokemon.stars === 1) {
+          if([Rarity.COMMON, Rarity.UNCOMMON].includes(pokemon.rarity)){
+            this.additionalPokemonsPool1.push(p)  
+          } else {
+            this.additionalPokemonsPool2.push(p)
+          }
         }
       })
     })
-    shuffleArray(this.additionalPokemonsPool)
+    shuffleArray(this.additionalPokemonsPool1)
+    shuffleArray(this.additionalPokemonsPool2)
 
     this.maxClients = 8
     for (const id in options.users) {
