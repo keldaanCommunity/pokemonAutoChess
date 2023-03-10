@@ -12340,7 +12340,7 @@ export class Rowlet extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.SPIRIT_SHACKLE,
       shiny,
       emotion,
       false
@@ -12364,7 +12364,7 @@ export class Dartix extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.DEFAULT,
+      Ability.SPIRIT_SHACKLE,
       shiny,
       emotion,
       false
@@ -12388,7 +12388,7 @@ export class Decidueye extends Pokemon {
       AttackType.PHYSICAL,
       3,
       100,
-      Ability.DEFAULT,
+      Ability.SPIRIT_SHACKLE,
       shiny,
       emotion,
       true
