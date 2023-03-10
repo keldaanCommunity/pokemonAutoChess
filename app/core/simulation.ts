@@ -295,6 +295,10 @@ export default class Simulation extends Schema implements ISimulation {
       )
     })
 
+    if (pokemon.skill === Ability.SYNCHRO) {
+      pokemon.status.triggerSynchro()
+    }
+
     if (pokemon.items.has(Item.SOUL_DEW)) {
       pokemon.status.triggerSoulDew(2000)
     }
@@ -387,7 +391,7 @@ export default class Simulation extends Schema implements ISimulation {
       redIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
     }
 
-    ;[this.blueTeam, this.redTeam].forEach(team => {
+    ;[this.blueTeam, this.redTeam].forEach((team) => {
       team.forEach((pokemon) => {
         if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
           pokemon.addAttack(pokemon.atk)
@@ -411,7 +415,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.positionX,
             pokemon.positionY
           )
-  
+
           cells.forEach((cell) => {
             if (cell.value && pokemon.team == cell.value.team) {
               cell.value.handleShield(shieldBonus, pokemon)
@@ -452,7 +456,7 @@ export default class Simulation extends Schema implements ISimulation {
             }
           })
         }
-  
+
         if (pokemon.items.has(Item.FOCUS_BAND)) {
           ;[-1, 0, 1].forEach((offset) => {
             const value = this.board.getValue(
@@ -464,7 +468,7 @@ export default class Simulation extends Schema implements ISimulation {
             }
           })
         }
-  
+
         if (pokemon.items.has(Item.DELTA_ORB)) {
           ;[-1, 0, 1].forEach((offset) => {
             const value = this.board.getValue(
@@ -479,7 +483,12 @@ export default class Simulation extends Schema implements ISimulation {
 
         if (pokemon.items.has(Item.FLAME_ORB)) {
           pokemon.addAttack(pokemon.baseAtk)
-          pokemon.status.triggerBurn(60000, pokemon as PokemonEntity, pokemon as PokemonEntity, this.board)
+          pokemon.status.triggerBurn(
+            60000,
+            pokemon as PokemonEntity,
+            pokemon as PokemonEntity,
+            this.board
+          )
           pokemon.status.wound = true
         }
       })
