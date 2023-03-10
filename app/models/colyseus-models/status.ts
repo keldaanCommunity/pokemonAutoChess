@@ -47,6 +47,8 @@ export default class Status extends Schema implements IStatus {
   runeProtectCooldown = 0
   grassCooldown = 1000
   spikeArmorCooldown = 0
+  synchroCooldown = 1000
+  synchro = false
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -123,6 +125,10 @@ export default class Status extends Schema implements IStatus {
     if (this.spikeArmor) {
       this.updateSpikeArmor(dt)
     }
+
+    if (this.synchro) {
+      this.updateSynchro(dt, board, pokemon)
+    }
   }
 
   triggerArmorReduction(timer: number) {
@@ -154,6 +160,46 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
+  triggerSynchro() {
+    if (!this.synchro) {
+      this.synchro = true
+      this.synchroCooldown = 1000
+    }
+  }
+
+  updateSynchro(dt: number, board: Board, pkm: PokemonEntity) {
+    if (this.synchroCooldown - dt <= 0) {
+      this.synchro = false
+      this.triggerSynchro()
+      if (
+        this.burn ||
+        this.poisonStacks ||
+        this.paralysis ||
+        this.wound ||
+        this.silence
+      ) {
+        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+          if (tg && tg.team !== pkm.team) {
+            if (this.silence) {
+              tg.status.triggerSilence(1000, tg, board)
+            }
+            if (this.burn) {
+              tg.status.triggerBurn(1000, tg, pkm, board)
+            }
+            if (this.poisonStacks) {
+              tg.status.triggerPoison(1000, tg, pkm, board)
+            }
+            if (this.wound) {
+              tg.status.triggerWound(1000, tg, board)
+            }
+          }
+        })
+      }
+    } else {
+      this.synchroCooldown = this.synchroCooldown - dt
+    }
+  }
+
   triggerSoulDew(timer: number) {
     // console.log('sould dew');
     if (!this.soulDew) {
@@ -180,18 +226,15 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined,
     board: Board
   ) {
-    if (!this.burn && !pkm.items.has(Item.FLUFFY_TAIL) && (!this.runeProtect || pkm.items.has(Item.FLAME_ORB))) {
+    if (
+      !this.burn &&
+      !pkm.items.has(Item.FLUFFY_TAIL) &&
+      (!this.runeProtect || pkm.items.has(Item.FLAME_ORB))
+    ) {
       this.burn = true
       this.burnCooldown = timer
       if (origin) {
         this.burnOrigin = origin
-      }
-      if (pkm.skill === Ability.SYNCHRO) {
-        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-          if (tg && tg.team !== pkm.team) {
-            tg.status.triggerBurn(timer, tg, pkm, board)
-          }
-        })
       }
     }
   }
@@ -228,16 +271,13 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerSilence(timer: number, pkm: PokemonEntity, board: Board) {
-    if (!this.silence && !pkm.items.has(Item.FLUFFY_TAIL) && !this.runeProtect) {
+    if (
+      !this.silence &&
+      !pkm.items.has(Item.FLUFFY_TAIL) &&
+      !this.runeProtect
+    ) {
       this.silence = true
       this.silenceCooldown = timer
-      if (pkm.skill === Ability.SYNCHRO) {
-        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-          if (tg && tg.team !== pkm.team) {
-            tg.status.triggerSilence(timer, tg, board)
-          }
-        })
-      }
     }
   }
 
@@ -260,13 +300,6 @@ export default class Status extends Schema implements IStatus {
       this.poisonCooldown = Math.max(timer, this.poisonCooldown)
       if (origin) {
         this.poisonOrigin = origin
-      }
-      if (pkm.skill === Ability.SYNCHRO) {
-        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-          if (tg && tg.team !== pkm.team) {
-            tg.status.triggerPoison(timer, tg, pkm, board)
-          }
-        })
       }
     }
   }
@@ -342,7 +375,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerConfusion(timer: number, pkm: PokemonEntity) {
-    if (!this.confusion && !pkm.items.has(Item.FLUFFY_TAIL) && !this.runeProtect) {
+    if (
+      !this.confusion &&
+      !pkm.items.has(Item.FLUFFY_TAIL) &&
+      !this.runeProtect
+    ) {
       this.confusion = true
       this.confusionCooldown = timer
     }
@@ -360,13 +397,6 @@ export default class Status extends Schema implements IStatus {
     if (!this.wound && !pkm.items.has(Item.FLUFFY_TAIL) && !this.runeProtect) {
       this.wound = true
       this.woundCooldown = timer
-      if (pkm.skill === Ability.SYNCHRO) {
-        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-          if (tg && tg.team !== pkm.team) {
-            tg.status.triggerWound(timer, tg, board)
-          }
-        })
-      }
     }
   }
 
@@ -409,7 +439,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerParalysis(timer: number, pkm: PokemonEntity) {
-    if (!this.paralysis && !pkm.items.has(Item.FLUFFY_TAIL) && !this.runeProtect) {
+    if (
+      !this.paralysis &&
+      !pkm.items.has(Item.FLUFFY_TAIL) &&
+      !this.runeProtect
+    ) {
       this.paralysis = true
       pkm.handleAttackSpeed(-40)
       this.paralysisCooldown = timer
