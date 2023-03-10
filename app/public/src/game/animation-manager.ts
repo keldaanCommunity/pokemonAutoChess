@@ -1551,6 +1551,17 @@ export default class AnimationManager {
       duration: 1000,
       repeat: 0
     })
+
+    this.game.anims.create({
+      key: Ability.SPIRIT_SHACKLE,
+      frames: this.game.anims.generateFrameNames(Ability.SPIRIT_SHACKLE, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 160,
+      repeat: -1
+    })
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {

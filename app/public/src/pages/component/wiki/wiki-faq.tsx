@@ -141,11 +141,6 @@ export default class WikiFaq extends Component {
           (1+(0.1*def))). Defense works for physical damage, special defense for
           special damage
         </p>
-        <h4 className="nes-text is-success">How much mana does a hit grant?</h4>
-        <p>
-          10% of the damage after reduction for the pokemon being attacked, 5
-          mana for the attacker
-        </p>
         <h4 className="nes-text is-success">
           Why do legendaries have scaled skill descriptions like 10/20/30 damage
           ? Which one is the right value?

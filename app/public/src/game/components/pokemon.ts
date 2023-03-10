@@ -30,6 +30,7 @@ import { Ability } from "../../../../types/enum/Ability"
 import ManaBar from "./mana-bar"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Pkm } from "../../../../types/enum/Pokemon"
+import { OrientationVector } from "../../../../utils/orientation"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -1169,15 +1170,22 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.HEAT_WAVE:
-            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
-              coordinates[0],
-              coordinates[1],
+              coordinatesTarget[0],
+              coordinatesTarget[1],
               "specials",
               `${Ability.HEAT_WAVE}/000`
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
+            specialProjectile.setRotation(
+              Math.atan2(
+                coordinatesTarget[1] - coordinates[1],
+                coordinatesTarget[0] - coordinates[0]
+              )
+            )
             specialProjectile.anims.play(Ability.HEAT_WAVE)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
@@ -1856,8 +1864,10 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
-          case Ability.HURRICANE:
-            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+          case Ability.HURRICANE: {
+            const [dx,dy]= OrientationVector[this.orientation]
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            const finalCoordinates = transformAttackCoordinate(this.positionX+dx*8, this.positionY+dy*8)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1867,6 +1877,19 @@ export default class Pokemon extends DraggableObject {
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
             specialProjectile.anims.play(Ability.HURRICANE)
+
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: finalCoordinates[0],
+              y: finalCoordinates[1],
+              ease: "linear",
+              yoyo: false,
+              duration: 2000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {
@@ -1874,6 +1897,7 @@ export default class Pokemon extends DraggableObject {
               }
             )
             break
+          }
 
           case Ability.ROAR_OF_TIME:
             coordinates = transformAttackCoordinate(
@@ -2399,9 +2423,11 @@ export default class Pokemon extends DraggableObject {
             })
             break
 
-          case Ability.AURORA_BEAM:
-            coordinatesTarget = transformAttackCoordinate(this.targetX, 0)
-            coordinates = transformAttackCoordinate(this.targetX, 7)
+          case Ability.AURORA_BEAM: {
+            const [dx,dy]= OrientationVector[this.orientation]
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY)
+            const finalCoordinates = transformAttackCoordinate(this.positionX+dx*8, this.positionY+dy*8)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2410,19 +2436,27 @@ export default class Pokemon extends DraggableObject {
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
+            specialProjectile.setRotation(
+              Math.atan2(
+                coordinatesTarget[1] - coordinates[1],
+                coordinatesTarget[0] - coordinates[0]
+              ) -
+                Math.PI / 2
+            )
             specialProjectile.anims.play(Ability.AURORA_BEAM)
             this.scene.tweens.add({
               targets: specialProjectile,
-              x: coordinatesTarget[0],
-              y: coordinatesTarget[1],
-              ease: "Power2",
+              x: finalCoordinates[0],
+              y: finalCoordinates[1],
+              ease: "linear",
               yoyo: false,
-              duration: 1000,
+              duration: 2000,
               onComplete: () => {
                 specialProjectile.destroy()
               }
             })
             break
+          }
 
           case Ability.SONG_OF_DESIRE:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
@@ -2606,6 +2640,55 @@ export default class Pokemon extends DraggableObject {
               }
             })
             break
+
+
+          case Ability.SPIRIT_SHACKLE: {
+            const [dx,dy]= OrientationVector[this.orientation]
+            coordinatesTarget = transformAttackCoordinate(
+              this.targetX,
+              this.targetY
+            )
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            const finalCoordinates = transformAttackCoordinate(this.positionX+dx*8, this.positionY+dy*8)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "specials",
+              `${Ability.SPIRIT_SHACKLE}/000`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(1)
+            specialProjectile.anims.play(Ability.SPIRIT_SHACKLE)
+            specialProjectile.setRotation(
+              Math.atan2(
+                coordinatesTarget[1] - coordinates[1],
+                coordinatesTarget[0] - coordinates[0]
+              )
+            )
+
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: finalCoordinates[0],
+              y: finalCoordinates[1],
+              ease: "linear",
+              yoyo: false,
+              duration: 2000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+          }
 
           default:
             break
