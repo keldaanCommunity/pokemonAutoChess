@@ -24,12 +24,13 @@ export default function GamePokemonsPropositions() {
     return (
       <div style={style} className="nes-container">
         <h2 style={{ textAlign: "center" }}>
-          Pick two additional pokemons. They will be available to everyone
+          Pick an additional Pokemon. It will be available to everyone.
         </h2>
         <div
           style={{
             display: "flex",
             padding: "10px",
+            gap: "1vw",
             height: "17vh",
             justifyContent: "center"
           }}
