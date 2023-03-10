@@ -222,5 +222,3 @@ export default class Board {
     }
   }
 }
-
-module.exports = Board

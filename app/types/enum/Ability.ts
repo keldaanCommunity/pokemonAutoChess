@@ -118,7 +118,8 @@ import {
   SmogStrategy,
   AuroraBeamStrategy,
   AgilityStrategy,
-  SpiritShackleStrategy
+  SpiritShackleStrategy,
+  WaterShurikenStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -241,7 +242,8 @@ export enum Ability {
   SMOG = "SMOG",
   AURORA_BEAM = "AURORA_BEAM",
   AGILITY = "AGILITY",
-  SPIRIT_SHACKLE = "SPIRIT_SHACKLE"
+  SPIRIT_SHACKLE = "SPIRIT_SHACKLE",
+  WATER_SHURIKEN = "WATER_SHURIKEN"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -364,5 +366,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SMOG]: new SmogStrategy(),
   [Ability.AURORA_BEAM]: new AuroraBeamStrategy(),
   [Ability.AGILITY]: new AgilityStrategy(),
-  [Ability.SPIRIT_SHACKLE]: new SpiritShackleStrategy()
+  [Ability.SPIRIT_SHACKLE]: new SpiritShackleStrategy(),
+  [Ability.WATER_SHURIKEN]: new WaterShurikenStrategy()
 }

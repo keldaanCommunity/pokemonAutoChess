@@ -9,7 +9,7 @@ import { Ability, AbilityStrategy } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
 import { pickRandomIn, shuffleArray } from "../utils/random"
-import { effectInLine } from "../utils/orientation"
+import { effectInLine, OrientationArray } from "../utils/orientation"
 
 export class AttackStrategy {
   process(
@@ -3407,6 +3407,45 @@ export class SpiritShackleStrategy extends AttackStrategy {
       }
     })
     
+  }
+}
+
+export class WaterShurikenStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 0
+    switch (pokemon.stars) {
+      case 1:
+        damage = 20
+        break
+      case 2:
+        damage = 40
+        break
+      case 3:
+        damage = 60
+        break
+      default:
+        break
+    }
+
+    const orientations = [
+      pokemon.orientation, 
+      OrientationArray[(OrientationArray.indexOf(pokemon.orientation)+1) % 8],
+      OrientationArray[(OrientationArray.indexOf(pokemon.orientation)+7) % 8],
+    ]
+
+    orientations.forEach(orientation => {
+      effectInLine(board, pokemon, orientation, targetInLine => {
+        if (targetInLine.team !== pokemon.team) {
+          targetInLine.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        }
+      })
+    })
   }
 }
 

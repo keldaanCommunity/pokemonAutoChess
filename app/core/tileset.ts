@@ -153,5 +153,3 @@ export default class Tileset {
     } as TilesetTiled
   }
 }
-
-module.exports = Tileset

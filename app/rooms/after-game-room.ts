@@ -80,5 +80,3 @@ export default class AfterGameRoom extends Room {
     this.dispatcher.stop()
   }
 }
-
-module.exports = AfterGameRoom

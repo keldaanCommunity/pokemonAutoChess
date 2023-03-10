@@ -724,6 +724,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: "",
     fra: ""
   },
+  [Ability.WATER_SHURIKEN]: {
+    eng: "Water Shuriken",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1442,9 +1448,15 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.SPIRIT_SHACKLE]: {
-    eng: `Shoots a Piercing Arrow that deals 30/60/120 ${Damage.SPECIAL} in a line behind the target and applies ${Status.WOUND} for 4 seconds to everyone hit`,
+    eng: `Shoots a Piercing Arrow that deals [30/60/120] ${Damage.SPECIAL} in a line behind the target and applies ${Status.WOUND} for 4 seconds to everyone hit`,
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.WATER_SHURIKEN]: {
+    eng: `Throws 3 shuriken in 3 directions that pass through enemies and inflict [20/40/60] ${Damage.SPECIAL}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
 }
