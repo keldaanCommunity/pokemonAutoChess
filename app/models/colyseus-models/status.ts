@@ -171,7 +171,13 @@ export default class Status extends Schema implements IStatus {
     if (this.synchroCooldown - dt <= 0) {
       this.synchro = false
       this.triggerSynchro()
-      if (this.burn || this.poisonStacks || this.paralysis || this.silence) {
+      if (
+        this.burn ||
+        this.poisonStacks ||
+        this.paralysis ||
+        this.wound ||
+        this.silence
+      ) {
         board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
           if (tg && tg.team !== pkm.team) {
             if (this.silence) {
@@ -182,6 +188,9 @@ export default class Status extends Schema implements IStatus {
             }
             if (this.poisonStacks) {
               tg.status.triggerPoison(3000, tg, pkm, board)
+            }
+            if (this.wound) {
+              tg.status.triggerWound(3000, tg, board)
             }
           }
         })
