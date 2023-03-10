@@ -47,7 +47,7 @@ export default class Status extends Schema implements IStatus {
   runeProtectCooldown = 0
   grassCooldown = 1000
   spikeArmorCooldown = 0
-  synchroCooldown = 1000
+  synchroCooldown = 3000
   synchro = false
 
   clearNegativeStatus() {
@@ -163,7 +163,7 @@ export default class Status extends Schema implements IStatus {
   triggerSynchro() {
     if (!this.synchro) {
       this.synchro = true
-      this.synchroCooldown = 1000
+      this.synchroCooldown = 3000
     }
   }
 
@@ -171,26 +171,17 @@ export default class Status extends Schema implements IStatus {
     if (this.synchroCooldown - dt <= 0) {
       this.synchro = false
       this.triggerSynchro()
-      if (
-        this.burn ||
-        this.poisonStacks ||
-        this.paralysis ||
-        this.wound ||
-        this.silence
-      ) {
+      if (this.burn || this.poisonStacks || this.paralysis || this.silence) {
         board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
           if (tg && tg.team !== pkm.team) {
             if (this.silence) {
-              tg.status.triggerSilence(1000, tg, board)
+              tg.status.triggerSilence(3000, tg, board)
             }
             if (this.burn) {
-              tg.status.triggerBurn(1000, tg, pkm, board)
+              tg.status.triggerBurn(3000, tg, pkm, board)
             }
             if (this.poisonStacks) {
-              tg.status.triggerPoison(1000, tg, pkm, board)
-            }
-            if (this.wound) {
-              tg.status.triggerWound(1000, tg, board)
+              tg.status.triggerPoison(3000, tg, pkm, board)
             }
           }
         })
