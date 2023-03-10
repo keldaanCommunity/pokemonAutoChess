@@ -125,7 +125,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     `Upon attack, 25% chance to trigger ${Status.PROTECT} for 1 second`,
   [Item.FOCUS_BAND]:
     `When combat begins, the holder and adjacent allies in the same row gain +30% ${Stat.ATK_SPEED}`,
-  [Item.FLAME_ORB]: `Holder is burned but increase its ${Stat.ATK} by 100%`,
+  [Item.FLAME_ORB]: `Holder is burned and cannot heal during the fight, but increase its ${Stat.ATK} by 100%`,
   [Item.ASSAULT_VEST]: `+18 ${Stat.SPE_DEF}`,
   [Item.KINGS_ROCK]:
     "+1 gold each time the holder kills an enemy (max 5 gold per stage)",

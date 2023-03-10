@@ -387,202 +387,102 @@ export default class Simulation extends Schema implements ISimulation {
       redIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
     }
 
-    this.blueTeam.forEach((pokemon) => {
-      if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
-        pokemon.addAttack(pokemon.atk)
-      }
-      let shieldBonus = 0
-      if (pokemon.effects.includes(Effect.STAMINA)) {
-        shieldBonus = 20
-      }
-      if (pokemon.effects.includes(Effect.STRENGTH)) {
-        shieldBonus += 30
-      }
-      if (pokemon.effects.includes(Effect.ROCK_SMASH)) {
-        shieldBonus += 40
-      }
-      if (pokemon.effects.includes(Effect.PURE_POWER)) {
-        shieldBonus += 50
-      }
-      if (shieldBonus >= 0) {
-        pokemon.handleShield(shieldBonus, pokemon)
-        const cells = this.board.getAdjacentCells(
-          pokemon.positionX,
-          pokemon.positionY
-        )
-
-        cells.forEach((cell) => {
-          if (cell.value && pokemon.team == cell.value.team) {
-            cell.value.handleShield(shieldBonus, pokemon)
-          }
-        })
-      }
-      if (pokemon.items.has(Item.LUCKY_EGG)) {
-        ;[-1, 0, 1].forEach((offset) => {
-          const value = this.board.getValue(
-            pokemon.positionX + offset,
+    ;[this.blueTeam, this.redTeam].forEach(team => {
+      team.forEach((pokemon) => {
+        if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
+          pokemon.addAttack(pokemon.atk)
+        }
+        let shieldBonus = 0
+        if (pokemon.effects.includes(Effect.STAMINA)) {
+          shieldBonus = 20
+        }
+        if (pokemon.effects.includes(Effect.STRENGTH)) {
+          shieldBonus += 30
+        }
+        if (pokemon.effects.includes(Effect.ROCK_SMASH)) {
+          shieldBonus += 40
+        }
+        if (pokemon.effects.includes(Effect.PURE_POWER)) {
+          shieldBonus += 50
+        }
+        if (shieldBonus >= 0) {
+          pokemon.handleShield(shieldBonus, pokemon)
+          const cells = this.board.getAdjacentCells(
+            pokemon.positionX,
             pokemon.positionY
           )
-          if (value) {
-            value.addSpellDamage(30)
-          }
-        })
-      }
-      if (pokemon.items.has(Item.DELTA_ORB)) {
-        ;[-1, 0, 1].forEach((offset) => {
-          const value = this.board.getValue(
-            pokemon.positionX + offset,
+  
+          cells.forEach((cell) => {
+            if (cell.value && pokemon.team == cell.value.team) {
+              cell.value.handleShield(shieldBonus, pokemon)
+            }
+          })
+        }
+        if (pokemon.items.has(Item.LUCKY_EGG)) {
+          ;[-1, 0, 1].forEach((offset) => {
+            const value = this.board.getValue(
+              pokemon.positionX + offset,
+              pokemon.positionY
+            )
+            if (value) {
+              value.addSpellDamage(30)
+            }
+          })
+        }
+        if (pokemon.items.has(Item.DELTA_ORB)) {
+          ;[-1, 0, 1].forEach((offset) => {
+            const value = this.board.getValue(
+              pokemon.positionX + offset,
+              pokemon.positionY
+            )
+            if (value) {
+              value.addSpellDamage(30)
+            }
+          })
+        }
+        if (pokemon.items.has(Item.RUNE_PROTECT)) {
+          const cells = this.board.getAdjacentCells(
+            pokemon.positionX,
             pokemon.positionY
           )
-          if (value) {
-            value.addSpellDamage(30)
-          }
-        })
-      }
-      if (pokemon.items.has(Item.RUNE_PROTECT)) {
-        const cells = this.board.getAdjacentCells(
-          pokemon.positionX,
-          pokemon.positionY
-        )
-        pokemon.status.triggerRuneProtect(8000)
-        cells.forEach((cell) => {
-          if (cell.value && pokemon.team == cell.value.team) {
-            cell.value.status.triggerRuneProtect(8000)
-          }
-        })
-      }
+          pokemon.status.triggerRuneProtect(6000)
+          cells.forEach((cell) => {
+            if (cell.value && pokemon.team == cell.value.team) {
+              cell.value.status.triggerRuneProtect(6000)
+            }
+          })
+        }
+  
+        if (pokemon.items.has(Item.FOCUS_BAND)) {
+          ;[-1, 0, 1].forEach((offset) => {
+            const value = this.board.getValue(
+              pokemon.positionX + offset,
+              pokemon.positionY
+            )
+            if (value) {
+              value.handleAttackSpeed(30)
+            }
+          })
+        }
+  
+        if (pokemon.items.has(Item.DELTA_ORB)) {
+          ;[-1, 0, 1].forEach((offset) => {
+            const value = this.board.getValue(
+              pokemon.positionX + offset,
+              pokemon.positionY
+            )
+            if (value) {
+              value.status.deltaOrb = true
+            }
+          })
+        }
 
-      if (pokemon.items.has(Item.FOCUS_BAND)) {
-        ;[-1, 0, 1].forEach((offset) => {
-          const value = this.board.getValue(
-            pokemon.positionX + offset,
-            pokemon.positionY
-          )
-          if (value) {
-            value.handleAttackSpeed(30)
-          }
-        })
-      }
-
-      if (pokemon.items.has(Item.DELTA_ORB)) {
-        ;[-1, 0, 1].forEach((offset) => {
-          const value = this.board.getValue(
-            pokemon.positionX + offset,
-            pokemon.positionY
-          )
-          if (value) {
-            value.status.deltaOrb = true
-          }
-        })
-      }
-    })
-
-    this.redTeam.forEach((pokemon) => {
-      if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
-        pokemon.addAttack(pokemon.atk)
-      }
-      let shieldBonus = 0
-      if (pokemon.effects.includes(Effect.STAMINA)) {
-        shieldBonus = 20
-      }
-      if (pokemon.effects.includes(Effect.STRENGTH)) {
-        shieldBonus += 30
-      }
-      if (pokemon.effects.includes(Effect.ROCK_SMASH)) {
-        shieldBonus += 40
-      }
-      if (pokemon.effects.includes(Effect.PURE_POWER)) {
-        shieldBonus += 50
-      }
-      if (shieldBonus >= 0) {
-        pokemon.handleShield(shieldBonus, pokemon)
-        const cells = this.board.getAdjacentCells(
-          pokemon.positionX,
-          pokemon.positionY
-        )
-
-        cells.forEach((cell) => {
-          if (cell.value && pokemon.team == cell.value.team) {
-            cell.value.handleShield(shieldBonus, pokemon)
-          }
-        })
-      }
-      if (pokemon.items.has(Item.LUCKY_EGG)) {
-        ;[-1, 0, 1].forEach((offset) => {
-          const value = this.board.getValue(
-            pokemon.positionX + offset,
-            pokemon.positionY
-          )
-          if (value) {
-            value.addSpellDamage(30)
-          }
-        })
-      }
-      if (pokemon.items.has(Item.DELTA_ORB)) {
-        ;[-2, -1, 0, 1, 2].forEach((offset) => {
-          const value = this.board.getValue(
-            pokemon.positionX + offset,
-            pokemon.positionY
-          )
-          if (value) {
-            value.addSpellDamage(30)
-          }
-        })
-      }
-      if (pokemon.items.has(Item.RUNE_PROTECT)) {
-        const cells = this.board.getAdjacentCells(
-          pokemon.positionX,
-          pokemon.positionY
-        )
-        pokemon.status.triggerRuneProtect(6000)
-        cells.forEach((cell) => {
-          if (cell.value && pokemon.team == cell.value.team) {
-            cell.value.status.triggerRuneProtect(6000)
-          }
-        })
-      }
-
-      if (pokemon.items.has(Item.FOCUS_BAND)) {
-        ;[-1, 0, 1].forEach((offset) => {
-          const value = this.board.getValue(
-            pokemon.positionX + offset,
-            pokemon.positionY
-          )
-          if (value) {
-            value.handleAttackSpeed(30)
-          }
-        })
-      }
-
-      if (pokemon.items.has(Item.DELTA_ORB)) {
-        ;[-1, 0, 1].forEach((offset) => {
-          const value = this.board.getValue(
-            pokemon.positionX + offset,
-            pokemon.positionY
-          )
-          if (value) {
-            value.status.deltaOrb = true
-          }
-        })
-      }
-    })
-
-    this.blueTeam.forEach((p) => {
-      const pokemon = p as PokemonEntity
-      if (pokemon.items.has(Item.FLAME_ORB)) {
-        pokemon.addAttack(pokemon.baseAtk)
-        pokemon.status.triggerBurn(60000, pokemon, pokemon, this.board)
-        pokemon.status.triggerWound(60000, pokemon, this.board)
-      }
-    })
-
-    this.redTeam.forEach((p) => {
-      const pokemon = p as PokemonEntity
-      if (pokemon.items.has(Item.FLAME_ORB)) {
-        pokemon.addAttack(pokemon.baseAtk)
-        pokemon.status.triggerBurn(60000, pokemon, pokemon, this.board)
-        pokemon.status.triggerWound(60000, pokemon, this.board)
-      }
+        if (pokemon.items.has(Item.FLAME_ORB)) {
+          pokemon.addAttack(pokemon.baseAtk)
+          pokemon.status.triggerBurn(60000, pokemon as PokemonEntity, pokemon as PokemonEntity, this.board)
+          pokemon.status.wound = true
+        }
+      })
     })
   }
 
