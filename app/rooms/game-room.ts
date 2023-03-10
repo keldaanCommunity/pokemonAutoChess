@@ -91,8 +91,6 @@ export default class GameRoom extends Room<GameState> {
     })
     shuffleArray(this.additionalPokemonsPool1)
     shuffleArray(this.additionalPokemonsPool2)
-    console.log({ additionalPokemonsPool1 : this.additionalPokemonsPool1 })
-    console.log({ additionalPokemonsPool2 : this.additionalPokemonsPool2 })
 
     this.maxClients = 8
     for (const id in options.users) {
