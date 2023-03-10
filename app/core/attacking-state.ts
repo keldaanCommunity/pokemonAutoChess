@@ -363,5 +363,3 @@ export default class AttackingState extends PokemonState {
     pokemon.targetY = -1
   }
 }
-
-module.exports = AttackingState

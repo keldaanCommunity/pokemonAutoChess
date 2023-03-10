@@ -101,5 +101,3 @@ export default class MovingState extends PokemonState {
     super.onExit(pokemon)
   }
 }
-
-module.exports = MovingState

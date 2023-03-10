@@ -30,7 +30,7 @@ import { Ability } from "../../../../types/enum/Ability"
 import ManaBar from "./mana-bar"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { OrientationVector } from "../../../../utils/orientation"
+import { OrientationArray, OrientationVector } from "../../../../utils/orientation"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -2681,12 +2681,43 @@ export default class Pokemon extends DraggableObject {
               }
             })
 
-            specialProjectile.once(
-              Phaser.Animations.Events.ANIMATION_COMPLETE,
-              () => {
-                specialProjectile.destroy()
-              }
+            break
+          }
+
+          case Ability.WATER_SHURIKEN: {
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
             )
+            const orientations = [
+              this.orientation, 
+              OrientationArray[(OrientationArray.indexOf(this.orientation)+1) % 8],
+              OrientationArray[(OrientationArray.indexOf(this.orientation)+7) % 8],
+            ]
+            orientations.forEach(orientation => {
+              const [dx,dy]= OrientationVector[orientation]
+              const finalCoordinates = transformAttackCoordinate(this.positionX+dx*8, this.positionY+dy*8)
+              const projectile = this.scene.add.sprite(
+                coordinates[0],
+                coordinates[1],
+                "specials",
+                `${Ability.WATER_SHURIKEN}/000`
+              )
+              projectile.setDepth(7)
+              projectile.setScale(2)
+              projectile.anims.play(Ability.WATER_SHURIKEN)
+              this.scene.tweens.add({
+                targets: projectile,
+                x: finalCoordinates[0],
+                y: finalCoordinates[1],
+                ease: "linear",
+                yoyo: false,
+                duration: 2000,
+                onComplete: () => {
+                  projectile.destroy()
+                }
+              })
+            })
             break
           }
 
