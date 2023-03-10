@@ -117,7 +117,8 @@ import {
   IllusionStrategy,
   SmogStrategy,
   AuroraBeamStrategy,
-  AgilityStrategy
+  AgilityStrategy,
+  SpiritShackleStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -239,7 +240,8 @@ export enum Ability {
   ILLUSION = "ILLUSION",
   SMOG = "SMOG",
   AURORA_BEAM = "AURORA_BEAM",
-  AGILITY = "AGILITY"
+  AGILITY = "AGILITY",
+  SPIRIT_SHACKLE = "SPIRIT_SHACKLE"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -361,5 +363,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.ILLUSION]: new IllusionStrategy(),
   [Ability.SMOG]: new SmogStrategy(),
   [Ability.AURORA_BEAM]: new AuroraBeamStrategy(),
-  [Ability.AGILITY]: new AgilityStrategy()
+  [Ability.AGILITY]: new AgilityStrategy(),
+  [Ability.SPIRIT_SHACKLE]: new SpiritShackleStrategy()
 }

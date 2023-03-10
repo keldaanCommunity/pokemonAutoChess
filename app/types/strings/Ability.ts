@@ -718,6 +718,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: "",
     fra: ""
   },
+  [Ability.SPIRIT_SHACKLE]: {
+    eng: "Spirit Shackle",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -932,7 +938,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HEAT_WAVE]: {
-    eng: `Area of effect attack that deals [20,40,80] ${Damage.SPECIAL} in all enemies in a line behind the target.`,
+    eng: `Area of effect attack that deals [20,40,80] ${Damage.SPECIAL} to all enemies in a line behind the target.`,
     esp: `Ataque de área de efecto que inflige 30,40,50 de daño especial a todos los enemigos en una línea detrás del objetivo.`,
     fra: `Attaque AoE qui infique 30,40,50 dégats spéciaux dans une ligne derrière la cible.`,
     prt: ``
@@ -944,7 +950,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HYDRO_PUMP]: {
-    eng: `Area of effect attack that deals [25,50,100] ${Damage.SPECIAL} in all enemies in a line behind the target.`,
+    eng: `Area of effect attack that deals [25,50,100] ${Damage.SPECIAL} to all enemies in a line behind the target.`,
     esp: `Ataque de área de efecto que inflige 30,40,50 de daño especial a todos los enemigos en una línea detrás del objetivo.`,
     fra: `Attaque AoE qui infique 30,40,50 dégats spéciaux dans une ligne derrière la cible.`,
     prt: ``
@@ -1424,13 +1430,19 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.AURORA_BEAM]: {
-    eng: `Fires a beam in a line with target all Pokémon hit take [30,60,120] ${Damage.SPECIAL} and can be ${Status.FREEZE} (chance based on current ice synergy)`,
+    eng: `Fires a beam in a line. All targets hit take [30,60,120] ${Damage.SPECIAL} and can be ${Status.FREEZE} (chance based on current ice synergy)`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.AGILITY]: {
     eng: `Increase ${Stat.ATK_SPEED} by [5,10,15] % (stacks)`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SPIRIT_SHACKLE]: {
+    eng: `Shoots a Piercing Arrow that deals 30/60/120 ${Damage.SPECIAL} in a line behind the target and applies ${Status.WOUND} for 4 seconds to everyone hit`,
     esp: "",
     prt: "",
     fra: ""

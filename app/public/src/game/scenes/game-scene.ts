@@ -409,6 +409,11 @@ export default class GameScene extends Scene {
       "/assets/attacks/ICE_RANGE.json",
       "/assets/attacks"
     )
+    this.load.multiatlas(
+      "SPIRIT_SHACKLE",
+      "/assets/attacks/SPIRIT_SHACKLE.json",
+      "/assets/attacks"
+    )
   }
 
   create() {

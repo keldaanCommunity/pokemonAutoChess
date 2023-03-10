@@ -19,7 +19,7 @@ export default class Board {
     this.cell = new Array<PokemonEntity | undefined>(this.rows * this.columns)
   }
 
-  getValue(row: number, col: number) {
+  getValue(row: number, col: number): PokemonEntity | undefined {
     if (row >= 0 && row < this.rows && col >= 0 && col < this.columns) {
       return this.cell[this.columns * row + col]
     }

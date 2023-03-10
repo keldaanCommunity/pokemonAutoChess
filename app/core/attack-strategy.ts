@@ -9,6 +9,7 @@ import { Ability, AbilityStrategy } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
 import { pickRandomIn, shuffleArray } from "../utils/random"
+import { effectInLine } from "../utils/orientation"
 
 export class AttackStrategy {
   process(
@@ -1076,9 +1077,19 @@ export class AuroraBeamStrategy extends AttackStrategy {
         break
     }
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team && x == target.positionX) {
-        tg.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+    effectInLine(board, pokemon, target, targetInLine => {
+      if (targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        let freezeChance = 0
+        if (pokemon.effects.includes(Effect.SNOW)) {
+          freezeChance += 0.1
+        }
+        if (pokemon.effects.includes(Effect.SHEER_COLD)) {
+          freezeChance += 0.3
+        }
+        if (Math.random() < freezeChance) {
+          targetInLine.status.triggerFreeze(2000, target)
+        }
       }
     })
   }
@@ -2126,15 +2137,12 @@ export class HeatWaveStrategy extends AttackStrategy {
       default:
         break
     }
-    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    const secondTarget = board.getValue(target.positionX, target.positionY + 1)
-    const thirdTarget = board.getValue(target.positionX, target.positionY + 2)
-    if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    }
-    if (thirdTarget && thirdTarget != pokemon) {
-      thirdTarget.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    }
+
+    effectInLine(board, pokemon, target, targetInLine => {
+      if (targetInLine.team != pokemon.team) {
+        targetInLine.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+      }
+    })
   }
 }
 
@@ -2160,11 +2168,12 @@ export class HydroPumpStrategy extends AttackStrategy {
       default:
         break
     }
-    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    const secondTarget = board.getValue(target.positionX, target.positionY + 1)
-    if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    }
+
+    effectInLine(board, pokemon, target, targetInLine => {
+      if (targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+      }
+    })
   }
 }
 
@@ -3200,11 +3209,12 @@ export class HurricaneStrategy extends AttackStrategy {
       default:
         break
     }
-    target.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    const secondTarget = board.getValue(target.positionX, target.positionY + 1)
-    if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
-    }
+
+    effectInLine(board, pokemon, target, targetInLine => {
+      if (targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+      }
+    })
   }
 }
 
@@ -3366,3 +3376,37 @@ export class AgilityStrategy extends AttackStrategy {
     pokemon.handleAttackSpeed(boost, true)
   }
 }
+
+export class SpiritShackleStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 0
+    switch (pokemon.stars) {
+      case 1:
+        damage = 30
+        break
+      case 2:
+        damage = 60
+        break
+      case 3:
+        damage = 120
+        break
+      default:
+        break
+    }
+
+    effectInLine(board, pokemon, target, targetInLine => {
+      if (targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpellDamage(damage, board, AttackType.SPECIAL, pokemon)
+        targetInLine.status.triggerWound(4000, targetInLine, board)
+      }
+    })
+    
+  }
+}
+
