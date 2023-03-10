@@ -1562,6 +1562,17 @@ export default class AnimationManager {
       duration: 160,
       repeat: -1
     })
+
+    this.game.anims.create({
+      key: Ability.WATER_SHURIKEN,
+      frames: this.game.anims.generateFrameNames(Ability.WATER_SHURIKEN, {
+        start: 0,
+        end: 7,
+        zeroPad: 3
+      }),
+      duration: 333,
+      repeat: -1
+    })
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {

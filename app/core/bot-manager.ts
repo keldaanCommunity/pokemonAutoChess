@@ -18,5 +18,3 @@ export default class BotManager {
     })
   }
 }
-
-module.exports = BotManager

@@ -13,20 +13,31 @@ export const OrientationVector: Record<Orientation, [number, number]> = {
     [Orientation.UPLEFT]: [-1,1],
 }
 
+export const OrientationArray: Orientation[] = [
+    Orientation.UP,
+    Orientation.UPRIGHT,
+    Orientation.RIGHT,
+    Orientation.DOWNRIGHT,
+    Orientation.DOWN,
+    Orientation.DOWNLEFT,
+    Orientation.LEFT,
+    Orientation.UPLEFT
+]
+
 export function effectInLine(
     board: Board,
     pokemon: PokemonEntity,
-    target: PokemonEntity,
+    target: PokemonEntity | Orientation,
     effect: (target: PokemonEntity) => void
 ){
-    const orientation = board.orientation(
+    const orientation: Orientation = target instanceof PokemonEntity ? board.orientation(
         pokemon.positionX,
         pokemon.positionY,
         target.positionX,
         target.positionY,
         pokemon,
         target
-    )
+    ) : target
 
     const applyEffect = (x: number, y: number) => {
         const targetInLine = board.getValue(x, y)
