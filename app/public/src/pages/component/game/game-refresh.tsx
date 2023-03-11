@@ -8,7 +8,7 @@ export default function GameRefresh() {
   return (
     <button
       className="bubbly blue refresh-button"
-      title="Refresh shop for 1 gold"
+      title="Refresh shop for 1 gold (shortcut: D)"
       onClick={() => {
         dispatch(refreshClick())
       }}
