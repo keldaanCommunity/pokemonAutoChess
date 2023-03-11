@@ -226,6 +226,9 @@ export class OnDragDropCommand extends Command<
               success = true
               message.updateBoard = false
             }
+          } else if(y === 0) {
+            this.room.swap(playerId, pokemon, x, y)
+            success = true
           }
         } else {
           if (y == 0 && pokemon.positionY == 0) {
