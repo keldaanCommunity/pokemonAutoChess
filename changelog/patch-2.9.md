@@ -39,3 +39,7 @@ Abilities that were supposed to "deal damage in a line behind target" now work p
 Smoke status in renamed Paralysis, with a new visual effect
 Fixed Spike Armor ability
 Mindblown now does Special Damage and not True Damage
+Fix the bug that allows to sell a pokemon currently fighting
+Fix the position of pokemons dragged and dropped on the same spot
+Allow to move dittos on bench
+Add keyboard shortcut infos on tooltips
