@@ -1034,7 +1034,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISCHARGE]: {
-    eng: `Shock nearby enemies for [25/50/100] ${Damage.SPECIAL}, and give ${Status.PARALYSIS} for 5 seconds`,
+    eng: `Shock nearby enemies for [25,50,100] ${Damage.SPECIAL}, and give ${Status.PARALYSIS} for 5 seconds`,
     esp: `Ataque en el área de efecto que causa 40,60,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 40,60,80 dégats spéciaux.`,
     prt: ``
@@ -1448,13 +1448,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.SPIRIT_SHACKLE]: {
-    eng: `Shoots a Piercing Arrow that deals [30/60/120] ${Damage.SPECIAL} in a line behind the target and applies ${Status.WOUND} for 4 seconds to everyone hit`,
+    eng: `Shoots a Piercing Arrow that deals [30,60,120] ${Damage.SPECIAL} in a line behind the target and applies ${Status.WOUND} for 4 seconds to everyone hit`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.WATER_SHURIKEN]: {
-    eng: `Throws 3 shuriken in 3 directions that pass through enemies and inflict [20/40/60] ${Damage.SPECIAL}`,
+    eng: `Throws 3 shuriken in 3 directions that pass through enemies and inflict [20,40,60] ${Damage.SPECIAL}`,
     esp: "",
     prt: "",
     fra: ""
