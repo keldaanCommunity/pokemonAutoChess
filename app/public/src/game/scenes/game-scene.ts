@@ -55,6 +55,7 @@ export default class GameScene extends Scene {
   unownManager?: UnownManager
   music: Phaser.Sound.WebAudioSound | undefined
   pokemonHovered: Pokemon | undefined
+  pokemonDragged: Pokemon | undefined
   graphics: Phaser.GameObjects.Graphics[] = []
   dragDropText: Phaser.GameObjects.Text | undefined
   sellZoneGraphic: Phaser.GameObjects.Graphics | undefined
@@ -500,7 +501,9 @@ export default class GameScene extends Scene {
     })
 
     this.input.keyboard.on("keyup-E", () => {
-      this.sellPokemon()
+      if(this.pokemonHovered){
+        this.sellPokemon(this.pokemonHovered)
+      }
     })
   }
 
@@ -518,8 +521,8 @@ export default class GameScene extends Scene {
     this.room?.send(Transfer.LEVEL_UP)
   }
 
-  sellPokemon() {
-    if (!this.pokemonHovered) {
+  sellPokemon(pokemon: Pokemon) {
+    if (!pokemon) {
       return
     }
     const d = document.getElementById("game")
@@ -527,7 +530,7 @@ export default class GameScene extends Scene {
       d.dispatchEvent(
         new CustomEvent(Transfer.SELL_DROP, {
           detail: {
-            pokemonId: this.pokemonHovered.id
+            pokemonId: pokemon.id
           }
         })
       )
@@ -560,9 +563,9 @@ export default class GameScene extends Scene {
   }
 
   resetDragState(){
-    if(this.pokemonHovered){
-      this.input.emit("dragend", this.input.pointer1, this.pokemonHovered)
-      this.pokemonHovered = undefined
+    if(this.pokemonDragged){
+      this.input.emit("dragend", this.input.pointer1, this.pokemonDragged, false)
+      this.pokemonDragged = undefined
     }
   }
 
@@ -645,6 +648,7 @@ export default class GameScene extends Scene {
       "dragstart",
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof Pokemon) {
+          this.pokemonDragged = gameObject
           this.dragDropText?.setText(
             `Drop here to sell for ${PokemonFactory.getSellPrice(
               gameObject.name as Pkm
@@ -699,13 +703,16 @@ export default class GameScene extends Scene {
           }
           // POKEMON -> SELL-ZONE = SELL POKEMON
           else if (dropZone.name == "sell-zone") {
-            this.sellPokemon()
+            if(gameObject === this.pokemonDragged){
+              this.sellPokemon(this.pokemonDragged)
+            }
           }
           // RETURN TO ORIGINAL SPOT
           else {
             const [x,y] = transformCoordinate(gameObject.positionX, gameObject.positionY)
             gameObject.setPosition(x, y)
           }
+          this.pokemonDragged = undefined
         } else if (gameObject instanceof ItemContainer) {
           // Item -> Item = COMBINE
           if (dropZone instanceof ItemContainer) {
