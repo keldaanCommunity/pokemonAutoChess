@@ -54,7 +54,8 @@ export default class GameScene extends Scene {
   weatherManager: WeatherManager | undefined
   unownManager?: UnownManager
   music: Phaser.Sound.WebAudioSound | undefined
-  targetPokemon: Pokemon | undefined
+  pokemonHovered: Pokemon | undefined
+  pokemonDragged: Pokemon | undefined
   graphics: Phaser.GameObjects.Graphics[] = []
   dragDropText: Phaser.GameObjects.Text | undefined
   sellZoneGraphic: Phaser.GameObjects.Graphics | undefined
@@ -500,7 +501,9 @@ export default class GameScene extends Scene {
     })
 
     this.input.keyboard.on("keyup-E", () => {
-      this.sellPokemon()
+      if(this.pokemonHovered){
+        this.sellPokemon(this.pokemonHovered)
+      }
     })
   }
 
@@ -518,8 +521,8 @@ export default class GameScene extends Scene {
     this.room?.send(Transfer.LEVEL_UP)
   }
 
-  sellPokemon() {
-    if (!this.targetPokemon) {
+  sellPokemon(pokemon: Pokemon) {
+    if (!pokemon) {
       return
     }
     const d = document.getElementById("game")
@@ -527,7 +530,7 @@ export default class GameScene extends Scene {
       d.dispatchEvent(
         new CustomEvent(Transfer.SELL_DROP, {
           detail: {
-            pokemonId: this.targetPokemon.id
+            pokemonId: pokemon.id
           }
         })
       )
@@ -535,7 +538,7 @@ export default class GameScene extends Scene {
   }
 
   updatePhase() {
-    this.targetPokemon = undefined
+    this.resetDragState()
     if (this.room?.state.phase == GamePhaseState.FIGHT) {
       this.board?.battleMode()
     } else {
@@ -557,6 +560,13 @@ export default class GameScene extends Scene {
     })
     this.dragDropText?.setVisible(false)
     this.sellZoneGraphic?.setVisible(false)
+  }
+
+  resetDragState(){
+    if(this.pokemonDragged){
+      this.input.emit("dragend", this.input.pointer1, this.pokemonDragged, false)
+      this.pokemonDragged = undefined
+    }
   }
 
   initializeDragAndDrop() {
@@ -627,9 +637,9 @@ export default class GameScene extends Scene {
       "gameobjectover",
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof Pokemon) {
-          this.targetPokemon = gameObject
+          this.pokemonHovered = gameObject
         } else {
-          this.targetPokemon = undefined
+          this.pokemonHovered = undefined
         }
       }
     )
@@ -638,6 +648,7 @@ export default class GameScene extends Scene {
       "dragstart",
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof Pokemon) {
+          this.pokemonDragged = gameObject
           this.dragDropText?.setText(
             `Drop here to sell for ${PokemonFactory.getSellPrice(
               gameObject.name as Pkm
@@ -677,32 +688,31 @@ export default class GameScene extends Scene {
         if (gameObject instanceof Pokemon) {
           // POKEMON -> BOARD-ZONE = PLACE POKEMON
           if (dropZone.name == "board-zone") {
-            document.getElementById("game")?.dispatchEvent(
-              new CustomEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
-                detail: {
-                  x: dropZone.getData("x"),
-                  y: dropZone.getData("y"),
-                  id: gameObject.id
-                }
-              })
-            )
-            this.lastDragDropPokemon = gameObject
+            const [x, y] = [dropZone.getData("x"), dropZone.getData("y")]
+            if(gameObject.positionX !== x || gameObject.positionY !== y){
+              document.getElementById("game")?.dispatchEvent(
+                new CustomEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
+                  detail: { x, y, id: gameObject.id }
+                })
+              )
+              this.lastDragDropPokemon = gameObject
+            } else {
+              // RETURN TO ORIGINAL SPOT
+              gameObject.setPosition(...transformCoordinate(x,y))
+            }
           }
           // POKEMON -> SELL-ZONE = SELL POKEMON
           else if (dropZone.name == "sell-zone") {
-            document.getElementById("game")?.dispatchEvent(
-              new CustomEvent(Transfer.SELL_DROP, {
-                detail: {
-                  pokemonId: gameObject.id
-                }
-              })
-            )
+            if(gameObject === this.pokemonDragged){
+              this.sellPokemon(this.pokemonDragged)
+            }
           }
           // RETURN TO ORIGINAL SPOT
           else {
-            gameObject.x = gameObject.input.dragStartX
-            gameObject.y = gameObject.input.dragStartY
+            const [x,y] = transformCoordinate(gameObject.positionX, gameObject.positionY)
+            gameObject.setPosition(x, y)
           }
+          this.pokemonDragged = undefined
         } else if (gameObject instanceof ItemContainer) {
           // Item -> Item = COMBINE
           if (dropZone instanceof ItemContainer) {
@@ -750,8 +760,9 @@ export default class GameScene extends Scene {
     this.input.on("dragend", (pointer, gameObject, dropped) => {
       this.removeRectangles()
       if (!dropped) {
-        gameObject.x = gameObject.input.dragStartX
-        gameObject.y = gameObject.input.dragStartY
+        const [x,y] = transformCoordinate(gameObject.positionX, gameObject.positionY)
+        gameObject.x = x
+        gameObject.y = y
       }
     })
 
