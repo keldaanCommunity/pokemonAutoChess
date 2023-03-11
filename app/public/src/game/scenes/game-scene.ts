@@ -54,7 +54,7 @@ export default class GameScene extends Scene {
   weatherManager: WeatherManager | undefined
   unownManager?: UnownManager
   music: Phaser.Sound.WebAudioSound | undefined
-  pokemonHovered: Pokemon | undefined
+  targetPokemon: Pokemon | undefined
   graphics: Phaser.GameObjects.Graphics[] = []
   dragDropText: Phaser.GameObjects.Text | undefined
   sellZoneGraphic: Phaser.GameObjects.Graphics | undefined
@@ -519,7 +519,7 @@ export default class GameScene extends Scene {
   }
 
   sellPokemon() {
-    if (!this.pokemonHovered) {
+    if (!this.targetPokemon) {
       return
     }
     const d = document.getElementById("game")
@@ -527,7 +527,7 @@ export default class GameScene extends Scene {
       d.dispatchEvent(
         new CustomEvent(Transfer.SELL_DROP, {
           detail: {
-            pokemonId: this.pokemonHovered.id
+            pokemonId: this.targetPokemon.id
           }
         })
       )
@@ -535,7 +535,7 @@ export default class GameScene extends Scene {
   }
 
   updatePhase() {
-    this.resetDragState()
+    this.targetPokemon = undefined
     if (this.room?.state.phase == GamePhaseState.FIGHT) {
       this.board?.battleMode()
     } else {
@@ -557,13 +557,6 @@ export default class GameScene extends Scene {
     })
     this.dragDropText?.setVisible(false)
     this.sellZoneGraphic?.setVisible(false)
-  }
-
-  resetDragState(){
-    if(this.pokemonHovered){
-      this.input.emit("dragend", this.input.pointer1, this.pokemonHovered)
-      this.pokemonHovered = undefined
-    }
   }
 
   initializeDragAndDrop() {
@@ -634,9 +627,9 @@ export default class GameScene extends Scene {
       "gameobjectover",
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof Pokemon) {
-          this.pokemonHovered = gameObject
+          this.targetPokemon = gameObject
         } else {
-          this.pokemonHovered = undefined
+          this.targetPokemon = undefined
         }
       }
     )
@@ -684,27 +677,31 @@ export default class GameScene extends Scene {
         if (gameObject instanceof Pokemon) {
           // POKEMON -> BOARD-ZONE = PLACE POKEMON
           if (dropZone.name == "board-zone") {
-            const [x, y] = [dropZone.getData("x"), dropZone.getData("y")]
-            if(gameObject.positionX !== x || gameObject.positionY !== y){
-              document.getElementById("game")?.dispatchEvent(
-                new CustomEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
-                  detail: { x, y, id: gameObject.id }
-                })
-              )
-              this.lastDragDropPokemon = gameObject
-            } else {
-              // RETURN TO ORIGINAL SPOT
-              gameObject.setPosition(...transformCoordinate(x,y))
-            }
+            document.getElementById("game")?.dispatchEvent(
+              new CustomEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
+                detail: {
+                  x: dropZone.getData("x"),
+                  y: dropZone.getData("y"),
+                  id: gameObject.id
+                }
+              })
+            )
+            this.lastDragDropPokemon = gameObject
           }
           // POKEMON -> SELL-ZONE = SELL POKEMON
           else if (dropZone.name == "sell-zone") {
-            this.sellPokemon()
+            document.getElementById("game")?.dispatchEvent(
+              new CustomEvent(Transfer.SELL_DROP, {
+                detail: {
+                  pokemonId: gameObject.id
+                }
+              })
+            )
           }
           // RETURN TO ORIGINAL SPOT
           else {
-            const [x,y] = transformCoordinate(gameObject.positionX, gameObject.positionY)
-            gameObject.setPosition(x, y)
+            gameObject.x = gameObject.input.dragStartX
+            gameObject.y = gameObject.input.dragStartY
           }
         } else if (gameObject instanceof ItemContainer) {
           // Item -> Item = COMBINE
@@ -753,9 +750,8 @@ export default class GameScene extends Scene {
     this.input.on("dragend", (pointer, gameObject, dropped) => {
       this.removeRectangles()
       if (!dropped) {
-        const [x,y] = transformCoordinate(gameObject.positionX, gameObject.positionY)
-        gameObject.x = x
-        gameObject.y = y
+        gameObject.x = gameObject.input.dragStartX
+        gameObject.y = gameObject.input.dragStartY
       }
     })
 
